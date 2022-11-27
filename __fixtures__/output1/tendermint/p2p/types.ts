@@ -156,6 +156,22 @@ export const ProtocolVersion = {
     message.block !== undefined && (obj.block = message.block);
     message.app !== undefined && (obj.app = message.app);
     return obj;
+  },
+
+  fromAmino(object: ProtocolVersionSDKType): ProtocolVersion {
+    return {
+      p2p: isSet(object.p2p) ? object.p2p : undefined,
+      block: isSet(object.block) ? object.block : undefined,
+      app: isSet(object.app) ? object.app : undefined
+    };
+  },
+
+  toAmino(message: ProtocolVersion): ProtocolVersionSDKType {
+    const obj: any = {};
+    message.p2p !== undefined && (obj.p2p = message.p2p);
+    message.block !== undefined && (obj.block = message.block);
+    message.app !== undefined && (obj.app = message.app);
+    return obj;
   }
 
 };
@@ -323,6 +339,32 @@ export const NodeInfo = {
     message.moniker !== undefined && (obj.moniker = message.moniker);
     message.other !== undefined && (obj.other = message.other ? NodeInfoOther.toSDK(message.other) : undefined);
     return obj;
+  },
+
+  fromAmino(object: NodeInfoSDKType): NodeInfo {
+    return {
+      protocolVersion: isSet(object.protocol_version) ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
+      nodeId: isSet(object.node_id) ? object.node_id : undefined,
+      listenAddr: isSet(object.listen_addr) ? object.listen_addr : undefined,
+      network: isSet(object.network) ? object.network : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      channels: isSet(object.channels) ? object.channels : undefined,
+      moniker: isSet(object.moniker) ? object.moniker : undefined,
+      other: isSet(object.other) ? NodeInfoOther.fromAmino(object.other) : undefined
+    };
+  },
+
+  toAmino(message: NodeInfo): NodeInfoSDKType {
+    const obj: any = {};
+    message.protocolVersion !== undefined && (obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion) : undefined);
+    message.nodeId !== undefined && (obj.node_id = message.nodeId);
+    message.listenAddr !== undefined && (obj.listen_addr = message.listenAddr);
+    message.network !== undefined && (obj.network = message.network);
+    message.version !== undefined && (obj.version = message.version);
+    message.channels !== undefined && (obj.channels = message.channels);
+    message.moniker !== undefined && (obj.moniker = message.moniker);
+    message.other !== undefined && (obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined);
+    return obj;
   }
 
 };
@@ -402,6 +444,20 @@ export const NodeInfoOther = {
   },
 
   toSDK(message: NodeInfoOther): NodeInfoOtherSDKType {
+    const obj: any = {};
+    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
+    message.rpcAddress !== undefined && (obj.rpc_address = message.rpcAddress);
+    return obj;
+  },
+
+  fromAmino(object: NodeInfoOtherSDKType): NodeInfoOther {
+    return {
+      txIndex: isSet(object.tx_index) ? object.tx_index : undefined,
+      rpcAddress: isSet(object.rpc_address) ? object.rpc_address : undefined
+    };
+  },
+
+  toAmino(message: NodeInfoOther): NodeInfoOtherSDKType {
     const obj: any = {};
     message.txIndex !== undefined && (obj.tx_index = message.txIndex);
     message.rpcAddress !== undefined && (obj.rpc_address = message.rpcAddress);
@@ -515,6 +571,28 @@ export const PeerInfo = {
 
     message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ? Timestamp.toSDK(message.lastConnected) : undefined);
     return obj;
+  },
+
+  fromAmino(object: PeerInfoSDKType): PeerInfo {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
+      lastConnected: isSet(object.last_connected) ? Timestamp.fromAmino(object.last_connected) : undefined
+    };
+  },
+
+  toAmino(message: PeerInfo): PeerInfoSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.addressInfo) {
+      obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toAmino(e) : undefined);
+    } else {
+      obj.address_info = [];
+    }
+
+    message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ? Timestamp.toAmino(message.lastConnected) : undefined);
+    return obj;
   }
 
 };
@@ -624,6 +702,24 @@ export const PeerAddressInfo = {
     message.address !== undefined && (obj.address = message.address);
     message.lastDialSuccess !== undefined && (obj.last_dial_success = message.lastDialSuccess ? Timestamp.toSDK(message.lastDialSuccess) : undefined);
     message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ? Timestamp.toSDK(message.lastDialFailure) : undefined);
+    message.dialFailures !== undefined && (obj.dial_failures = message.dialFailures);
+    return obj;
+  },
+
+  fromAmino(object: PeerAddressInfoSDKType): PeerAddressInfo {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      lastDialSuccess: isSet(object.last_dial_success) ? Timestamp.fromAmino(object.last_dial_success) : undefined,
+      lastDialFailure: isSet(object.last_dial_failure) ? Timestamp.fromAmino(object.last_dial_failure) : undefined,
+      dialFailures: isSet(object.dial_failures) ? object.dial_failures : undefined
+    };
+  },
+
+  toAmino(message: PeerAddressInfo): PeerAddressInfoSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.lastDialSuccess !== undefined && (obj.last_dial_success = message.lastDialSuccess ? Timestamp.toAmino(message.lastDialSuccess) : undefined);
+    message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(message.lastDialFailure) : undefined);
     message.dialFailures !== undefined && (obj.dial_failures = message.dialFailures);
     return obj;
   }

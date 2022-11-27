@@ -201,6 +201,22 @@ export const InflationDistribution = {
     message.usageIncentives !== undefined && (obj.usage_incentives = message.usageIncentives);
     message.communityPool !== undefined && (obj.community_pool = message.communityPool);
     return obj;
+  },
+
+  fromAmino(object: InflationDistributionSDKType): InflationDistribution {
+    return {
+      stakingRewards: isSet(object.staking_rewards) ? object.staking_rewards : undefined,
+      usageIncentives: isSet(object.usage_incentives) ? object.usage_incentives : undefined,
+      communityPool: isSet(object.community_pool) ? object.community_pool : undefined
+    };
+  },
+
+  toAmino(message: InflationDistribution): InflationDistributionSDKType {
+    const obj: any = {};
+    message.stakingRewards !== undefined && (obj.staking_rewards = message.stakingRewards);
+    message.usageIncentives !== undefined && (obj.usage_incentives = message.usageIncentives);
+    message.communityPool !== undefined && (obj.community_pool = message.communityPool);
+    return obj;
   }
 
 };
@@ -319,6 +335,26 @@ export const ExponentialCalculation = {
   },
 
   toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
+    const obj: any = {};
+    message.a !== undefined && (obj.a = message.a);
+    message.r !== undefined && (obj.r = message.r);
+    message.c !== undefined && (obj.c = message.c);
+    message.bondingTarget !== undefined && (obj.bonding_target = message.bondingTarget);
+    message.maxVariance !== undefined && (obj.max_variance = message.maxVariance);
+    return obj;
+  },
+
+  fromAmino(object: ExponentialCalculationSDKType): ExponentialCalculation {
+    return {
+      a: isSet(object.a) ? object.a : undefined,
+      r: isSet(object.r) ? object.r : undefined,
+      c: isSet(object.c) ? object.c : undefined,
+      bondingTarget: isSet(object.bonding_target) ? object.bonding_target : undefined,
+      maxVariance: isSet(object.max_variance) ? object.max_variance : undefined
+    };
+  },
+
+  toAmino(message: ExponentialCalculation): ExponentialCalculationSDKType {
     const obj: any = {};
     message.a !== undefined && (obj.a = message.a);
     message.r !== undefined && (obj.r = message.r);

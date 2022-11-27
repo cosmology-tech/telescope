@@ -126,6 +126,18 @@ export const Endpoint = {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     return obj;
+  },
+
+  fromAmino(object: EndpointSDKType): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
+    };
+  },
+
+  toAmino(message: Endpoint): EndpointSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    return obj;
   }
 
 };

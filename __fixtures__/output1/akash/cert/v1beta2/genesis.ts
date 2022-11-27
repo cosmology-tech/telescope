@@ -104,6 +104,20 @@ export const GenesisCertificate = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisCertificateSDKType): GenesisCertificate {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      certificate: isSet(object.certificate) ? Certificate.fromAmino(object.certificate) : undefined
+    };
+  },
+
+  toAmino(message: GenesisCertificate): GenesisCertificateSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined);
+    return obj;
   }
 
 };
@@ -180,6 +194,24 @@ export const GenesisState = {
 
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toSDK(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e) : undefined);
     } else {
       obj.certificates = [];
     }

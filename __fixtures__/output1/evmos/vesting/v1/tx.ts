@@ -277,6 +277,39 @@ export const MsgCreateClawbackVestingAccount = {
 
     message.merge !== undefined && (obj.merge = message.merge);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateClawbackVestingAccountSDKType): MsgCreateClawbackVestingAccount {
+    return {
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
+      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
+      merge: isSet(object.merge) ? object.merge : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountSDKType {
+    const obj: any = {};
+    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
+    message.toAddress !== undefined && (obj.to_address = message.toAddress);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
+
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+
+    message.merge !== undefined && (obj.merge = message.merge);
+    return obj;
   }
 
 };
@@ -327,6 +360,15 @@ export const MsgCreateClawbackVestingAccountResponse = {
   },
 
   toSDK(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateClawbackVestingAccountResponseSDKType): MsgCreateClawbackVestingAccountResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -426,6 +468,22 @@ export const MsgClawback = {
     message.accountAddress !== undefined && (obj.account_address = message.accountAddress);
     message.destAddress !== undefined && (obj.dest_address = message.destAddress);
     return obj;
+  },
+
+  fromAmino(object: MsgClawbackSDKType): MsgClawback {
+    return {
+      funderAddress: isSet(object.funder_address) ? object.funder_address : undefined,
+      accountAddress: isSet(object.account_address) ? object.account_address : undefined,
+      destAddress: isSet(object.dest_address) ? object.dest_address : undefined
+    };
+  },
+
+  toAmino(message: MsgClawback): MsgClawbackSDKType {
+    const obj: any = {};
+    message.funderAddress !== undefined && (obj.funder_address = message.funderAddress);
+    message.accountAddress !== undefined && (obj.account_address = message.accountAddress);
+    message.destAddress !== undefined && (obj.dest_address = message.destAddress);
+    return obj;
   }
 
 };
@@ -476,6 +534,15 @@ export const MsgClawbackResponse = {
   },
 
   toSDK(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgClawbackResponseSDKType): MsgClawbackResponse {
+    return {};
+  },
+
+  toAmino(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
     const obj: any = {};
     return obj;
   }

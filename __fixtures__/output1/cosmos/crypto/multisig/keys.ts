@@ -114,6 +114,26 @@ export const LegacyAminoPubKey = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: LegacyAminoPubKeySDKType): LegacyAminoPubKey {
+    return {
+      threshold: isSet(object.threshold) ? object.threshold : undefined,
+      publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeySDKType {
+    const obj: any = {};
+    message.threshold !== undefined && (obj.threshold = message.threshold);
+
+    if (message.publicKeys) {
+      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.public_keys = [];
+    }
+
+    return obj;
   }
 
 };

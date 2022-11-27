@@ -131,6 +131,22 @@ export const Params = {
     message.initialInflation !== undefined && (obj.initial_inflation = message.initialInflation);
     message.variance !== undefined && (obj.variance = message.variance);
     return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      inflationDecayFactor: isSet(object.inflation_decay_factor) ? object.inflation_decay_factor : undefined,
+      initialInflation: isSet(object.initial_inflation) ? object.initial_inflation : undefined,
+      variance: isSet(object.variance) ? object.variance : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.inflationDecayFactor !== undefined && (obj.inflation_decay_factor = message.inflationDecayFactor);
+    message.initialInflation !== undefined && (obj.initial_inflation = message.initialInflation);
+    message.variance !== undefined && (obj.variance = message.variance);
+    return obj;
   }
 
 };

@@ -113,6 +113,15 @@ export const QueryFeeTokensRequest = {
   toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryFeeTokensRequestSDKType): QueryFeeTokensRequest {
+    return {};
+  },
+
+  toAmino(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -194,6 +203,24 @@ export const QueryFeeTokensResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryFeeTokensResponseSDKType): QueryFeeTokensResponse {
+    return {
+      feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryFeeTokensResponse): QueryFeeTokensResponseSDKType {
+    const obj: any = {};
+
+    if (message.feeTokens) {
+      obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toAmino(e) : undefined);
+    } else {
+      obj.fee_tokens = [];
+    }
+
+    return obj;
   }
 
 };
@@ -260,6 +287,18 @@ export const QueryDenomSpotPriceRequest = {
   },
 
   toSDK(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomSpotPriceRequestSDKType): QueryDenomSpotPriceRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestSDKType {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -346,6 +385,20 @@ export const QueryDenomSpotPriceResponse = {
     message.poolID !== undefined && (obj.poolID = message.poolID);
     message.spotPrice !== undefined && (obj.spot_price = message.spotPrice);
     return obj;
+  },
+
+  fromAmino(object: QueryDenomSpotPriceResponseSDKType): QueryDenomSpotPriceResponse {
+    return {
+      poolID: isSet(object.poolID) ? object.poolID : undefined,
+      spotPrice: isSet(object.spot_price) ? object.spot_price : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseSDKType {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = message.poolID);
+    message.spotPrice !== undefined && (obj.spot_price = message.spotPrice);
+    return obj;
   }
 
 };
@@ -412,6 +465,18 @@ export const QueryDenomPoolIdRequest = {
   },
 
   toSDK(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomPoolIdRequestSDKType): QueryDenomPoolIdRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -484,6 +549,18 @@ export const QueryDenomPoolIdResponse = {
     const obj: any = {};
     message.poolID !== undefined && (obj.poolID = message.poolID);
     return obj;
+  },
+
+  fromAmino(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {
+    return {
+      poolID: isSet(object.poolID) ? object.poolID : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseSDKType {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = message.poolID);
+    return obj;
   }
 
 };
@@ -534,6 +611,15 @@ export const QueryBaseDenomRequest = {
   },
 
   toSDK(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryBaseDenomRequestSDKType): QueryBaseDenomRequest {
+    return {};
+  },
+
+  toAmino(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -602,6 +688,18 @@ export const QueryBaseDenomResponse = {
   },
 
   toSDK(message: QueryBaseDenomResponse): QueryBaseDenomResponseSDKType {
+    const obj: any = {};
+    message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
+    return obj;
+  },
+
+  fromAmino(object: QueryBaseDenomResponseSDKType): QueryBaseDenomResponse {
+    return {
+      baseDenom: isSet(object.base_denom) ? object.base_denom : undefined
+    };
+  },
+
+  toAmino(message: QueryBaseDenomResponse): QueryBaseDenomResponseSDKType {
     const obj: any = {};
     message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
     return obj;

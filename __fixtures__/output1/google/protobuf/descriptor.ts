@@ -2152,6 +2152,24 @@ export const FileDescriptorSet = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: FileDescriptorSetSDKType): FileDescriptorSet {
+    return {
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: FileDescriptorSet): FileDescriptorSetSDKType {
+    const obj: any = {};
+
+    if (message.file) {
+      obj.file = message.file.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.file = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2472,6 +2490,76 @@ export const FileDescriptorProto = {
     message.sourceCodeInfo !== undefined && (obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toSDK(message.sourceCodeInfo) : undefined);
     message.syntax !== undefined && (obj.syntax = message.syntax);
     return obj;
+  },
+
+  fromAmino(object: FileDescriptorProtoSDKType): FileDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      package: isSet(object.package) ? object.package : undefined,
+      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => e) : [],
+      publicDependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => e) : [],
+      weakDependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => e) : [],
+      messageType: Array.isArray(object?.message_type) ? object.message_type.map((e: any) => DescriptorProto.fromAmino(e)) : [],
+      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromAmino(e)) : [],
+      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromAmino(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
+      options: isSet(object.options) ? FileOptions.fromAmino(object.options) : undefined,
+      sourceCodeInfo: isSet(object.source_code_info) ? SourceCodeInfo.fromAmino(object.source_code_info) : undefined,
+      syntax: isSet(object.syntax) ? object.syntax : undefined
+    };
+  },
+
+  toAmino(message: FileDescriptorProto): FileDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.package !== undefined && (obj.package = message.package);
+
+    if (message.dependency) {
+      obj.dependency = message.dependency.map(e => e);
+    } else {
+      obj.dependency = [];
+    }
+
+    if (message.publicDependency) {
+      obj.public_dependency = message.publicDependency.map(e => e);
+    } else {
+      obj.public_dependency = [];
+    }
+
+    if (message.weakDependency) {
+      obj.weak_dependency = message.weakDependency.map(e => e);
+    } else {
+      obj.weak_dependency = [];
+    }
+
+    if (message.messageType) {
+      obj.message_type = message.messageType.map(e => e ? DescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.message_type = [];
+    }
+
+    if (message.enumType) {
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.enum_type = [];
+    }
+
+    if (message.service) {
+      obj.service = message.service.map(e => e ? ServiceDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.service = [];
+    }
+
+    if (message.extension) {
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.extension = [];
+    }
+
+    message.options !== undefined && (obj.options = message.options ? FileOptions.toAmino(message.options) : undefined);
+    message.sourceCodeInfo !== undefined && (obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toAmino(message.sourceCodeInfo) : undefined);
+    message.syntax !== undefined && (obj.syntax = message.syntax);
+    return obj;
   }
 
 };
@@ -2751,6 +2839,78 @@ export const DescriptorProto = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: DescriptorProtoSDKType): DescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
+      nestedType: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromAmino(e)) : [],
+      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromAmino(e)) : [],
+      extensionRange: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromAmino(e)) : [],
+      oneofDecl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromAmino(e)) : [],
+      options: isSet(object.options) ? MessageOptions.fromAmino(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromAmino(e)) : [],
+      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: DescriptorProto): DescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.field) {
+      obj.field = message.field.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.field = [];
+    }
+
+    if (message.extension) {
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.extension = [];
+    }
+
+    if (message.nestedType) {
+      obj.nested_type = message.nestedType.map(e => e ? DescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.nested_type = [];
+    }
+
+    if (message.enumType) {
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.enum_type = [];
+    }
+
+    if (message.extensionRange) {
+      obj.extension_range = message.extensionRange.map(e => e ? DescriptorProto_ExtensionRange.toAmino(e) : undefined);
+    } else {
+      obj.extension_range = [];
+    }
+
+    if (message.oneofDecl) {
+      obj.oneof_decl = message.oneofDecl.map(e => e ? OneofDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.oneof_decl = [];
+    }
+
+    message.options !== undefined && (obj.options = message.options ? MessageOptions.toAmino(message.options) : undefined);
+
+    if (message.reservedRange) {
+      obj.reserved_range = message.reservedRange.map(e => e ? DescriptorProto_ReservedRange.toAmino(e) : undefined);
+    } else {
+      obj.reserved_range = [];
+    }
+
+    if (message.reservedName) {
+      obj.reserved_name = message.reservedName.map(e => e);
+    } else {
+      obj.reserved_name = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2848,6 +3008,22 @@ export const DescriptorProto_ExtensionRange = {
     message.end !== undefined && (obj.end = message.end);
     message.options !== undefined && (obj.options = message.options ? ExtensionRangeOptions.toSDK(message.options) : undefined);
     return obj;
+  },
+
+  fromAmino(object: DescriptorProto_ExtensionRangeSDKType): DescriptorProto_ExtensionRange {
+    return {
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined,
+      options: isSet(object.options) ? ExtensionRangeOptions.fromAmino(object.options) : undefined
+    };
+  },
+
+  toAmino(message: DescriptorProto_ExtensionRange): DescriptorProto_ExtensionRangeSDKType {
+    const obj: any = {};
+    message.start !== undefined && (obj.start = message.start);
+    message.end !== undefined && (obj.end = message.end);
+    message.options !== undefined && (obj.options = message.options ? ExtensionRangeOptions.toAmino(message.options) : undefined);
+    return obj;
   }
 
 };
@@ -2931,6 +3107,20 @@ export const DescriptorProto_ReservedRange = {
     message.start !== undefined && (obj.start = message.start);
     message.end !== undefined && (obj.end = message.end);
     return obj;
+  },
+
+  fromAmino(object: DescriptorProto_ReservedRangeSDKType): DescriptorProto_ReservedRange {
+    return {
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined
+    };
+  },
+
+  toAmino(message: DescriptorProto_ReservedRange): DescriptorProto_ReservedRangeSDKType {
+    const obj: any = {};
+    message.start !== undefined && (obj.start = message.start);
+    message.end !== undefined && (obj.end = message.end);
+    return obj;
   }
 
 };
@@ -3007,6 +3197,24 @@ export const ExtensionRangeOptions = {
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ExtensionRangeOptionsSDKType): ExtensionRangeOptions {
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ExtensionRangeOptions): ExtensionRangeOptionsSDKType {
+    const obj: any = {};
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
@@ -3207,6 +3415,36 @@ export const FieldDescriptorProto = {
     message.jsonName !== undefined && (obj.json_name = message.jsonName);
     message.options !== undefined && (obj.options = message.options ? FieldOptions.toSDK(message.options) : undefined);
     return obj;
+  },
+
+  fromAmino(object: FieldDescriptorProtoSDKType): FieldDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
+      typeName: isSet(object.type_name) ? object.type_name : undefined,
+      extendee: isSet(object.extendee) ? object.extendee : undefined,
+      defaultValue: isSet(object.default_value) ? object.default_value : undefined,
+      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
+      jsonName: isSet(object.json_name) ? object.json_name : undefined,
+      options: isSet(object.options) ? FieldOptions.fromAmino(object.options) : undefined
+    };
+  },
+
+  toAmino(message: FieldDescriptorProto): FieldDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.number !== undefined && (obj.number = message.number);
+    message.label !== undefined && (obj.label = fieldDescriptorProto_LabelToJSON(message.label));
+    message.type !== undefined && (obj.type = fieldDescriptorProto_TypeToJSON(message.type));
+    message.typeName !== undefined && (obj.type_name = message.typeName);
+    message.extendee !== undefined && (obj.extendee = message.extendee);
+    message.defaultValue !== undefined && (obj.default_value = message.defaultValue);
+    message.oneofIndex !== undefined && (obj.oneof_index = message.oneofIndex);
+    message.jsonName !== undefined && (obj.json_name = message.jsonName);
+    message.options !== undefined && (obj.options = message.options ? FieldOptions.toAmino(message.options) : undefined);
+    return obj;
   }
 
 };
@@ -3289,6 +3527,20 @@ export const OneofDescriptorProto = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.options !== undefined && (obj.options = message.options ? OneofOptions.toSDK(message.options) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: OneofDescriptorProtoSDKType): OneofDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      options: isSet(object.options) ? OneofOptions.fromAmino(object.options) : undefined
+    };
+  },
+
+  toAmino(message: OneofDescriptorProto): OneofDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.options !== undefined && (obj.options = message.options ? OneofOptions.toAmino(message.options) : undefined);
     return obj;
   }
 
@@ -3449,6 +3701,43 @@ export const EnumDescriptorProto = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: EnumDescriptorProtoSDKType): EnumDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromAmino(e)) : [],
+      options: isSet(object.options) ? EnumOptions.fromAmino(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromAmino(e)) : [],
+      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: EnumDescriptorProto): EnumDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.value) {
+      obj.value = message.value.map(e => e ? EnumValueDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.value = [];
+    }
+
+    message.options !== undefined && (obj.options = message.options ? EnumOptions.toAmino(message.options) : undefined);
+
+    if (message.reservedRange) {
+      obj.reserved_range = message.reservedRange.map(e => e ? EnumDescriptorProto_EnumReservedRange.toAmino(e) : undefined);
+    } else {
+      obj.reserved_range = [];
+    }
+
+    if (message.reservedName) {
+      obj.reserved_name = message.reservedName.map(e => e);
+    } else {
+      obj.reserved_name = [];
+    }
+
+    return obj;
   }
 
 };
@@ -3528,6 +3817,20 @@ export const EnumDescriptorProto_EnumReservedRange = {
   },
 
   toSDK(message: EnumDescriptorProto_EnumReservedRange): EnumDescriptorProto_EnumReservedRangeSDKType {
+    const obj: any = {};
+    message.start !== undefined && (obj.start = message.start);
+    message.end !== undefined && (obj.end = message.end);
+    return obj;
+  },
+
+  fromAmino(object: EnumDescriptorProto_EnumReservedRangeSDKType): EnumDescriptorProto_EnumReservedRange {
+    return {
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined
+    };
+  },
+
+  toAmino(message: EnumDescriptorProto_EnumReservedRange): EnumDescriptorProto_EnumReservedRangeSDKType {
     const obj: any = {};
     message.start !== undefined && (obj.start = message.start);
     message.end !== undefined && (obj.end = message.end);
@@ -3628,6 +3931,22 @@ export const EnumValueDescriptorProto = {
     message.name !== undefined && (obj.name = message.name);
     message.number !== undefined && (obj.number = message.number);
     message.options !== undefined && (obj.options = message.options ? EnumValueOptions.toSDK(message.options) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: EnumValueDescriptorProtoSDKType): EnumValueDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
+      options: isSet(object.options) ? EnumValueOptions.fromAmino(object.options) : undefined
+    };
+  },
+
+  toAmino(message: EnumValueDescriptorProto): EnumValueDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.number !== undefined && (obj.number = message.number);
+    message.options !== undefined && (obj.options = message.options ? EnumValueOptions.toAmino(message.options) : undefined);
     return obj;
   }
 
@@ -3737,6 +4056,28 @@ export const ServiceDescriptorProto = {
     }
 
     message.options !== undefined && (obj.options = message.options ? ServiceOptions.toSDK(message.options) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ServiceDescriptorProtoSDKType): ServiceDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromAmino(e)) : [],
+      options: isSet(object.options) ? ServiceOptions.fromAmino(object.options) : undefined
+    };
+  },
+
+  toAmino(message: ServiceDescriptorProto): ServiceDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.method) {
+      obj.method = message.method.map(e => e ? MethodDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.method = [];
+    }
+
+    message.options !== undefined && (obj.options = message.options ? ServiceOptions.toAmino(message.options) : undefined);
     return obj;
   }
 
@@ -3874,6 +4215,28 @@ export const MethodDescriptorProto = {
     message.inputType !== undefined && (obj.input_type = message.inputType);
     message.outputType !== undefined && (obj.output_type = message.outputType);
     message.options !== undefined && (obj.options = message.options ? MethodOptions.toSDK(message.options) : undefined);
+    message.clientStreaming !== undefined && (obj.client_streaming = message.clientStreaming);
+    message.serverStreaming !== undefined && (obj.server_streaming = message.serverStreaming);
+    return obj;
+  },
+
+  fromAmino(object: MethodDescriptorProtoSDKType): MethodDescriptorProto {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      inputType: isSet(object.input_type) ? object.input_type : undefined,
+      outputType: isSet(object.output_type) ? object.output_type : undefined,
+      options: isSet(object.options) ? MethodOptions.fromAmino(object.options) : undefined,
+      clientStreaming: isSet(object.client_streaming) ? object.client_streaming : undefined,
+      serverStreaming: isSet(object.server_streaming) ? object.server_streaming : undefined
+    };
+  },
+
+  toAmino(message: MethodDescriptorProto): MethodDescriptorProtoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.inputType !== undefined && (obj.input_type = message.inputType);
+    message.outputType !== undefined && (obj.output_type = message.outputType);
+    message.options !== undefined && (obj.options = message.options ? MethodOptions.toAmino(message.options) : undefined);
     message.clientStreaming !== undefined && (obj.client_streaming = message.clientStreaming);
     message.serverStreaming !== undefined && (obj.server_streaming = message.serverStreaming);
     return obj;
@@ -4238,6 +4601,64 @@ export const FileOptions = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: FileOptionsSDKType): FileOptions {
+    return {
+      javaPackage: isSet(object.java_package) ? object.java_package : undefined,
+      javaOuterClassname: isSet(object.java_outer_classname) ? object.java_outer_classname : undefined,
+      javaMultipleFiles: isSet(object.java_multiple_files) ? object.java_multiple_files : undefined,
+      javaGenerateEqualsAndHash: isSet(object.java_generate_equals_and_hash) ? object.java_generate_equals_and_hash : undefined,
+      javaStringCheckUtf8: isSet(object.java_string_check_utf8) ? object.java_string_check_utf8 : undefined,
+      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
+      goPackage: isSet(object.go_package) ? object.go_package : undefined,
+      ccGenericServices: isSet(object.cc_generic_services) ? object.cc_generic_services : undefined,
+      javaGenericServices: isSet(object.java_generic_services) ? object.java_generic_services : undefined,
+      pyGenericServices: isSet(object.py_generic_services) ? object.py_generic_services : undefined,
+      phpGenericServices: isSet(object.php_generic_services) ? object.php_generic_services : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      ccEnableArenas: isSet(object.cc_enable_arenas) ? object.cc_enable_arenas : undefined,
+      objcClassPrefix: isSet(object.objc_class_prefix) ? object.objc_class_prefix : undefined,
+      csharpNamespace: isSet(object.csharp_namespace) ? object.csharp_namespace : undefined,
+      swiftPrefix: isSet(object.swift_prefix) ? object.swift_prefix : undefined,
+      phpClassPrefix: isSet(object.php_class_prefix) ? object.php_class_prefix : undefined,
+      phpNamespace: isSet(object.php_namespace) ? object.php_namespace : undefined,
+      phpMetadataNamespace: isSet(object.php_metadata_namespace) ? object.php_metadata_namespace : undefined,
+      rubyPackage: isSet(object.ruby_package) ? object.ruby_package : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: FileOptions): FileOptionsSDKType {
+    const obj: any = {};
+    message.javaPackage !== undefined && (obj.java_package = message.javaPackage);
+    message.javaOuterClassname !== undefined && (obj.java_outer_classname = message.javaOuterClassname);
+    message.javaMultipleFiles !== undefined && (obj.java_multiple_files = message.javaMultipleFiles);
+    message.javaGenerateEqualsAndHash !== undefined && (obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash);
+    message.javaStringCheckUtf8 !== undefined && (obj.java_string_check_utf8 = message.javaStringCheckUtf8);
+    message.optimizeFor !== undefined && (obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimizeFor));
+    message.goPackage !== undefined && (obj.go_package = message.goPackage);
+    message.ccGenericServices !== undefined && (obj.cc_generic_services = message.ccGenericServices);
+    message.javaGenericServices !== undefined && (obj.java_generic_services = message.javaGenericServices);
+    message.pyGenericServices !== undefined && (obj.py_generic_services = message.pyGenericServices);
+    message.phpGenericServices !== undefined && (obj.php_generic_services = message.phpGenericServices);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    message.ccEnableArenas !== undefined && (obj.cc_enable_arenas = message.ccEnableArenas);
+    message.objcClassPrefix !== undefined && (obj.objc_class_prefix = message.objcClassPrefix);
+    message.csharpNamespace !== undefined && (obj.csharp_namespace = message.csharpNamespace);
+    message.swiftPrefix !== undefined && (obj.swift_prefix = message.swiftPrefix);
+    message.phpClassPrefix !== undefined && (obj.php_class_prefix = message.phpClassPrefix);
+    message.phpNamespace !== undefined && (obj.php_namespace = message.phpNamespace);
+    message.phpMetadataNamespace !== undefined && (obj.php_metadata_namespace = message.phpMetadataNamespace);
+    message.rubyPackage !== undefined && (obj.ruby_package = message.rubyPackage);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
   }
 
 };
@@ -4370,6 +4791,32 @@ export const MessageOptions = {
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MessageOptionsSDKType): MessageOptions {
+    return {
+      messageSetWireFormat: isSet(object.message_set_wire_format) ? object.message_set_wire_format : undefined,
+      noStandardDescriptorAccessor: isSet(object.no_standard_descriptor_accessor) ? object.no_standard_descriptor_accessor : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      mapEntry: isSet(object.map_entry) ? object.map_entry : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MessageOptions): MessageOptionsSDKType {
+    const obj: any = {};
+    message.messageSetWireFormat !== undefined && (obj.message_set_wire_format = message.messageSetWireFormat);
+    message.noStandardDescriptorAccessor !== undefined && (obj.no_standard_descriptor_accessor = message.noStandardDescriptorAccessor);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    message.mapEntry !== undefined && (obj.map_entry = message.mapEntry);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
@@ -4540,6 +4987,36 @@ export const FieldOptions = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: FieldOptionsSDKType): FieldOptions {
+    return {
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
+      packed: isSet(object.packed) ? object.packed : undefined,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
+      lazy: isSet(object.lazy) ? object.lazy : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      weak: isSet(object.weak) ? object.weak : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: FieldOptions): FieldOptionsSDKType {
+    const obj: any = {};
+    message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
+    message.packed !== undefined && (obj.packed = message.packed);
+    message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
+    message.lazy !== undefined && (obj.lazy = message.lazy);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    message.weak !== undefined && (obj.weak = message.weak);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
   }
 
 };
@@ -4616,6 +5093,24 @@ export const OneofOptions = {
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: OneofOptionsSDKType): OneofOptions {
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: OneofOptions): OneofOptionsSDKType {
+    const obj: any = {};
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
@@ -4730,6 +5225,28 @@ export const EnumOptions = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: EnumOptionsSDKType): EnumOptions {
+    return {
+      allowAlias: isSet(object.allow_alias) ? object.allow_alias : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: EnumOptions): EnumOptionsSDKType {
+    const obj: any = {};
+    message.allowAlias !== undefined && (obj.allow_alias = message.allowAlias);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
   }
 
 };
@@ -4825,6 +5342,26 @@ export const EnumValueOptions = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: EnumValueOptionsSDKType): EnumValueOptions {
+    return {
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: EnumValueOptions): EnumValueOptionsSDKType {
+    const obj: any = {};
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
   }
 
 };
@@ -4915,6 +5452,26 @@ export const ServiceOptions = {
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ServiceOptionsSDKType): ServiceOptions {
+    return {
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ServiceOptions): ServiceOptionsSDKType {
+    const obj: any = {};
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
@@ -5024,6 +5581,28 @@ export const MethodOptions = {
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MethodOptionsSDKType): MethodOptions {
+    return {
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MethodOptions): MethodOptionsSDKType {
+    const obj: any = {};
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    message.idempotencyLevel !== undefined && (obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
+
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
@@ -5194,6 +5773,36 @@ export const UninterpretedOption = {
     message.stringValue !== undefined && (obj.string_value = message.stringValue);
     message.aggregateValue !== undefined && (obj.aggregate_value = message.aggregateValue);
     return obj;
+  },
+
+  fromAmino(object: UninterpretedOptionSDKType): UninterpretedOption {
+    return {
+      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromAmino(e)) : [],
+      identifierValue: isSet(object.identifier_value) ? object.identifier_value : undefined,
+      positiveIntValue: isSet(object.positive_int_value) ? object.positive_int_value : undefined,
+      negativeIntValue: isSet(object.negative_int_value) ? object.negative_int_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      aggregateValue: isSet(object.aggregate_value) ? object.aggregate_value : undefined
+    };
+  },
+
+  toAmino(message: UninterpretedOption): UninterpretedOptionSDKType {
+    const obj: any = {};
+
+    if (message.name) {
+      obj.name = message.name.map(e => e ? UninterpretedOption_NamePart.toAmino(e) : undefined);
+    } else {
+      obj.name = [];
+    }
+
+    message.identifierValue !== undefined && (obj.identifier_value = message.identifierValue);
+    message.positiveIntValue !== undefined && (obj.positive_int_value = message.positiveIntValue);
+    message.negativeIntValue !== undefined && (obj.negative_int_value = message.negativeIntValue);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.aggregateValue !== undefined && (obj.aggregate_value = message.aggregateValue);
+    return obj;
   }
 
 };
@@ -5277,6 +5886,20 @@ export const UninterpretedOption_NamePart = {
     message.namePart !== undefined && (obj.name_part = message.namePart);
     message.isExtension !== undefined && (obj.is_extension = message.isExtension);
     return obj;
+  },
+
+  fromAmino(object: UninterpretedOption_NamePartSDKType): UninterpretedOption_NamePart {
+    return {
+      namePart: isSet(object.name_part) ? object.name_part : undefined,
+      isExtension: isSet(object.is_extension) ? object.is_extension : undefined
+    };
+  },
+
+  toAmino(message: UninterpretedOption_NamePart): UninterpretedOption_NamePartSDKType {
+    const obj: any = {};
+    message.namePart !== undefined && (obj.name_part = message.namePart);
+    message.isExtension !== undefined && (obj.is_extension = message.isExtension);
+    return obj;
   }
 
 };
@@ -5353,6 +5976,24 @@ export const SourceCodeInfo = {
 
     if (message.location) {
       obj.location = message.location.map(e => e ? SourceCodeInfo_Location.toSDK(e) : undefined);
+    } else {
+      obj.location = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SourceCodeInfoSDKType): SourceCodeInfo {
+    return {
+      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SourceCodeInfo): SourceCodeInfoSDKType {
+    const obj: any = {};
+
+    if (message.location) {
+      obj.location = message.location.map(e => e ? SourceCodeInfo_Location.toAmino(e) : undefined);
     } else {
       obj.location = [];
     }
@@ -5542,6 +6183,43 @@ export const SourceCodeInfo_Location = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: SourceCodeInfo_LocationSDKType): SourceCodeInfo_Location {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
+      span: Array.isArray(object?.span) ? object.span.map((e: any) => e) : [],
+      leadingComments: isSet(object.leading_comments) ? object.leading_comments : undefined,
+      trailingComments: isSet(object.trailing_comments) ? object.trailing_comments : undefined,
+      leadingDetachedComments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: SourceCodeInfo_Location): SourceCodeInfo_LocationSDKType {
+    const obj: any = {};
+
+    if (message.path) {
+      obj.path = message.path.map(e => e);
+    } else {
+      obj.path = [];
+    }
+
+    if (message.span) {
+      obj.span = message.span.map(e => e);
+    } else {
+      obj.span = [];
+    }
+
+    message.leadingComments !== undefined && (obj.leading_comments = message.leadingComments);
+    message.trailingComments !== undefined && (obj.trailing_comments = message.trailingComments);
+
+    if (message.leadingDetachedComments) {
+      obj.leading_detached_comments = message.leadingDetachedComments.map(e => e);
+    } else {
+      obj.leading_detached_comments = [];
+    }
+
+    return obj;
   }
 
 };
@@ -5618,6 +6296,24 @@ export const GeneratedCodeInfo = {
 
     if (message.annotation) {
       obj.annotation = message.annotation.map(e => e ? GeneratedCodeInfo_Annotation.toSDK(e) : undefined);
+    } else {
+      obj.annotation = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GeneratedCodeInfoSDKType): GeneratedCodeInfo {
+    return {
+      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GeneratedCodeInfo): GeneratedCodeInfoSDKType {
+    const obj: any = {};
+
+    if (message.annotation) {
+      obj.annotation = message.annotation.map(e => e ? GeneratedCodeInfo_Annotation.toAmino(e) : undefined);
     } else {
       obj.annotation = [];
     }
@@ -5747,6 +6443,30 @@ export const GeneratedCodeInfo_Annotation = {
   },
 
   toSDK(message: GeneratedCodeInfo_Annotation): GeneratedCodeInfo_AnnotationSDKType {
+    const obj: any = {};
+
+    if (message.path) {
+      obj.path = message.path.map(e => e);
+    } else {
+      obj.path = [];
+    }
+
+    message.sourceFile !== undefined && (obj.source_file = message.sourceFile);
+    message.begin !== undefined && (obj.begin = message.begin);
+    message.end !== undefined && (obj.end = message.end);
+    return obj;
+  },
+
+  fromAmino(object: GeneratedCodeInfo_AnnotationSDKType): GeneratedCodeInfo_Annotation {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
+      sourceFile: isSet(object.source_file) ? object.source_file : undefined,
+      begin: isSet(object.begin) ? object.begin : undefined,
+      end: isSet(object.end) ? object.end : undefined
+    };
+  },
+
+  toAmino(message: GeneratedCodeInfo_Annotation): GeneratedCodeInfo_AnnotationSDKType {
     const obj: any = {};
 
     if (message.path) {

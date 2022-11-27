@@ -69,6 +69,15 @@ export const QueryConfigRequest = {
   toSDK(_: QueryConfigRequest): QueryConfigRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryConfigRequestSDKType): QueryConfigRequest {
+    return {};
+  },
+
+  toAmino(_: QueryConfigRequest): QueryConfigRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -137,6 +146,18 @@ export const QueryConfigResponse = {
   toSDK(message: QueryConfigResponse): QueryConfigResponseSDKType {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? Config.toSDK(message.config) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryConfigResponseSDKType): QueryConfigResponse {
+    return {
+      config: isSet(object.config) ? Config.fromAmino(object.config) : undefined
+    };
+  },
+
+  toAmino(message: QueryConfigResponse): QueryConfigResponseSDKType {
+    const obj: any = {};
+    message.config !== undefined && (obj.config = message.config ? Config.toAmino(message.config) : undefined);
     return obj;
   }
 

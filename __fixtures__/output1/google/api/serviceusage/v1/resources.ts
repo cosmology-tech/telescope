@@ -377,6 +377,24 @@ export const Service = {
     message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     return obj;
+  },
+
+  fromAmino(object: ServiceSDKType): Service {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      parent: isSet(object.parent) ? object.parent : undefined,
+      config: isSet(object.config) ? ServiceConfig.fromAmino(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+    };
+  },
+
+  toAmino(message: Service): ServiceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined);
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    return obj;
   }
 
 };
@@ -606,6 +624,53 @@ export const ServiceConfig = {
 
     message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ServiceConfigSDKType): ServiceConfig {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromAmino(object.documentation) : undefined,
+      quota: isSet(object.quota) ? Quota.fromAmino(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromAmino(object.authentication) : undefined,
+      usage: isSet(object.usage) ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      monitoring: isSet(object.monitoring) ? Monitoring.fromAmino(object.monitoring) : undefined
+    };
+  },
+
+  toAmino(message: ServiceConfig): ServiceConfigSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.title !== undefined && (obj.title = message.title);
+
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+
+    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined);
+    message.quota !== undefined && (obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined);
+    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined);
+    message.usage !== undefined && (obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined);
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+
+    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined);
+    return obj;
   }
 
 };
@@ -678,6 +743,24 @@ export const OperationMetadata = {
   },
 
   toSDK(message: OperationMetadata): OperationMetadataSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: OperationMetadataSDKType): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: OperationMetadata): OperationMetadataSDKType {
     const obj: any = {};
 
     if (message.resourceNames) {

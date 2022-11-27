@@ -299,6 +299,44 @@ export const Gauge = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GaugeSDKType): Gauge {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : undefined,
+      distributeTo: isSet(object.distribute_to) ? QueryCondition.fromAmino(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
+      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
+      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : undefined,
+      filledEpochs: isSet(object.filled_epochs) ? object.filled_epochs : undefined,
+      distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Gauge): GaugeSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.isPerpetual !== undefined && (obj.is_perpetual = message.isPerpetual);
+    message.distributeTo !== undefined && (obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
+    message.numEpochsPaidOver !== undefined && (obj.num_epochs_paid_over = message.numEpochsPaidOver);
+    message.filledEpochs !== undefined && (obj.filled_epochs = message.filledEpochs);
+
+    if (message.distributedCoins) {
+      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.distributed_coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -375,6 +413,24 @@ export const LockableDurationsInfo = {
 
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
       obj.lockable_durations = [];
     }

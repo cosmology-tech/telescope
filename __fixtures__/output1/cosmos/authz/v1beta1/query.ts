@@ -221,6 +221,24 @@ export const QueryGrantsRequest = {
     message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGrantsRequestSDKType): QueryGrantsRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGrantsRequest): QueryGrantsRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -316,6 +334,26 @@ export const QueryGrantsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGrantsResponseSDKType): QueryGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGrantsResponse): QueryGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? Grant.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -398,6 +436,20 @@ export const QueryGranterGrantsRequest = {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGranterGrantsRequestSDKType): QueryGranterGrantsRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -494,6 +546,26 @@ export const QueryGranterGrantsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGranterGrantsResponseSDKType): QueryGranterGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -576,6 +648,20 @@ export const QueryGranteeGrantsRequest = {
     const obj: any = {};
     message.grantee !== undefined && (obj.grantee = message.grantee);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGranteeGrantsRequestSDKType): QueryGranteeGrantsRequest {
+    return {
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestSDKType {
+    const obj: any = {};
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -671,6 +757,26 @@ export const QueryGranteeGrantsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGranteeGrantsResponseSDKType): QueryGranteeGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

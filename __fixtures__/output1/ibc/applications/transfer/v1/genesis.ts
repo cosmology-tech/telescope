@@ -122,6 +122,28 @@ export const GenesisState = {
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromAmino(e)) : [],
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+
+    if (message.denomTraces) {
+      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
+    } else {
+      obj.denom_traces = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };

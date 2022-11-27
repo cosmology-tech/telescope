@@ -69,6 +69,15 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -137,6 +146,18 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

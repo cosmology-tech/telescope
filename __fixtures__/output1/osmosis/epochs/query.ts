@@ -71,6 +71,15 @@ export const QueryEpochsInfoRequest = {
   toSDK(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
+    return {};
+  },
+
+  toAmino(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -152,6 +161,24 @@ export const QueryEpochsInfoResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseSDKType {
+    const obj: any = {};
+
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -221,6 +248,18 @@ export const QueryCurrentEpochRequest = {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
+  },
+
+  fromAmino(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
+    return {
+      identifier: isSet(object.identifier) ? object.identifier : undefined
+    };
+  },
+
+  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
+    const obj: any = {};
+    message.identifier !== undefined && (obj.identifier = message.identifier);
+    return obj;
   }
 
 };
@@ -287,6 +326,18 @@ export const QueryCurrentEpochResponse = {
   },
 
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
+    const obj: any = {};
+    message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
+    return obj;
+  },
+
+  fromAmino(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined
+    };
+  },
+
+  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
     const obj: any = {};
     message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
     return obj;

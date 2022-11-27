@@ -158,6 +158,20 @@ export const QueryParamsRequest = {
     message.subspace !== undefined && (obj.subspace = message.subspace);
     message.key !== undefined && (obj.key = message.key);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      key: isSet(object.key) ? object.key : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.key !== undefined && (obj.key = message.key);
+    return obj;
   }
 
 };
@@ -227,6 +241,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.param !== undefined && (obj.param = message.param ? ParamChange.toSDK(message.param) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      param: isSet(object.param) ? ParamChange.fromAmino(object.param) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.param !== undefined && (obj.param = message.param ? ParamChange.toAmino(message.param) : undefined);
+    return obj;
   }
 
 };
@@ -277,6 +303,15 @@ export const QuerySubspacesRequest = {
   },
 
   toSDK(_: QuerySubspacesRequest): QuerySubspacesRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QuerySubspacesRequestSDKType): QuerySubspacesRequest {
+    return {};
+  },
+
+  toAmino(_: QuerySubspacesRequest): QuerySubspacesRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -355,6 +390,24 @@ export const QuerySubspacesResponse = {
 
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map(e => e ? Subspace.toSDK(e) : undefined);
+    } else {
+      obj.subspaces = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QuerySubspacesResponseSDKType): QuerySubspacesResponse {
+    return {
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QuerySubspacesResponse): QuerySubspacesResponseSDKType {
+    const obj: any = {};
+
+    if (message.subspaces) {
+      obj.subspaces = message.subspaces.map(e => e ? Subspace.toAmino(e) : undefined);
     } else {
       obj.subspaces = [];
     }
@@ -445,6 +498,26 @@ export const Subspace = {
   },
 
   toSDK(message: Subspace): SubspaceSDKType {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SubspaceSDKType): Subspace {
+    return {
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Subspace): SubspaceSDKType {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
 

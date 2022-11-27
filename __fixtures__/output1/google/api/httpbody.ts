@@ -226,6 +226,28 @@ export const HttpBody = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: HttpBodySDKType): HttpBody {
+    return {
+      contentType: isSet(object.content_type) ? object.content_type : undefined,
+      data: isSet(object.data) ? object.data : undefined,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: HttpBody): HttpBodySDKType {
+    const obj: any = {};
+    message.contentType !== undefined && (obj.content_type = message.contentType);
+    message.data !== undefined && (obj.data = message.data);
+
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** Params defines the claim module's parameters. */
@@ -129,6 +129,30 @@ export const Params = {
     message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
     message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
     message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
+    message.claimDenom !== undefined && (obj.claim_denom = message.claimDenom);
+    return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
+      durationUntilDecay: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      },
+      durationOfDecay: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      },
+      claimDenom: isSet(object.claim_denom) ? object.claim_denom : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(message.airdropStartTime) : undefined);
+    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined);
     message.claimDenom !== undefined && (obj.claim_denom = message.claimDenom);
     return obj;
   }

@@ -90,6 +90,24 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };

@@ -132,6 +132,24 @@ export const Equivocation = {
     message.power !== undefined && (obj.power = message.power);
     message.consensusAddress !== undefined && (obj.consensus_address = message.consensusAddress);
     return obj;
+  },
+
+  fromAmino(object: EquivocationSDKType): Equivocation {
+    return {
+      height: isSet(object.height) ? object.height : undefined,
+      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
+      power: isSet(object.power) ? object.power : undefined,
+      consensusAddress: isSet(object.consensus_address) ? object.consensus_address : undefined
+    };
+  },
+
+  toAmino(message: Equivocation): EquivocationSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
+    message.power !== undefined && (obj.power = message.power);
+    message.consensusAddress !== undefined && (obj.consensus_address = message.consensusAddress);
+    return obj;
   }
 
 };

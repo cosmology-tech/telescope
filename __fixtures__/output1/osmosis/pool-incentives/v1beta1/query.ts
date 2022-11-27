@@ -142,6 +142,18 @@ export const QueryGaugeIdsRequest = {
     const obj: any = {};
     message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
+  },
+
+  fromAmino(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -218,6 +230,24 @@ export const QueryGaugeIdsResponse = {
 
     if (message.gaugeIdsWithDuration) {
       obj.gauge_ids_with_duration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toSDK(e) : undefined);
+    } else {
+      obj.gauge_ids_with_duration = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryGaugeIdsResponseSDKType): QueryGaugeIdsResponse {
+    return {
+      gaugeIdsWithDuration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryGaugeIdsResponse): QueryGaugeIdsResponseSDKType {
+    const obj: any = {};
+
+    if (message.gaugeIdsWithDuration) {
+      obj.gauge_ids_with_duration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(e) : undefined);
     } else {
       obj.gauge_ids_with_duration = [];
     }
@@ -320,6 +350,25 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.gaugeIncentivePercentage !== undefined && (obj.gauge_incentive_percentage = message.gaugeIncentivePercentage);
     return obj;
+  },
+
+  fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType): QueryGaugeIdsResponse_GaugeIdWithDuration {
+    return {
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      duration: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      },
+      gaugeIncentivePercentage: isSet(object.gauge_incentive_percentage) ? object.gauge_incentive_percentage : undefined
+    };
+  },
+
+  toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
+    const obj: any = {};
+    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
+    message.gaugeIncentivePercentage !== undefined && (obj.gauge_incentive_percentage = message.gaugeIncentivePercentage);
+    return obj;
   }
 
 };
@@ -370,6 +419,15 @@ export const QueryDistrInfoRequest = {
   },
 
   toSDK(_: QueryDistrInfoRequest): QueryDistrInfoRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryDistrInfoRequestSDKType): QueryDistrInfoRequest {
+    return {};
+  },
+
+  toAmino(_: QueryDistrInfoRequest): QueryDistrInfoRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -441,6 +499,18 @@ export const QueryDistrInfoResponse = {
     const obj: any = {};
     message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDistrInfoResponseSDKType): QueryDistrInfoResponse {
+    return {
+      distrInfo: isSet(object.distr_info) ? DistrInfo.fromAmino(object.distr_info) : undefined
+    };
+  },
+
+  toAmino(message: QueryDistrInfoResponse): QueryDistrInfoResponseSDKType {
+    const obj: any = {};
+    message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined);
+    return obj;
   }
 
 };
@@ -491,6 +561,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -562,6 +641,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -612,6 +703,15 @@ export const QueryLockableDurationsRequest = {
   },
 
   toSDK(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryLockableDurationsRequestSDKType): QueryLockableDurationsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -695,6 +795,24 @@ export const QueryLockableDurationsResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryLockableDurationsResponseSDKType): QueryLockableDurationsResponse {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -745,6 +863,15 @@ export const QueryIncentivizedPoolsRequest = {
   },
 
   toSDK(_: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryIncentivizedPoolsRequestSDKType): QueryIncentivizedPoolsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -844,6 +971,25 @@ export const IncentivizedPool = {
     message.lockableDuration !== undefined && (obj.lockable_duration = message.lockableDuration ? Duration.toSDK(message.lockableDuration) : undefined);
     message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
     return obj;
+  },
+
+  fromAmino(object: IncentivizedPoolSDKType): IncentivizedPool {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      lockableDuration: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      },
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
+    };
+  },
+
+  toAmino(message: IncentivizedPool): IncentivizedPoolSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    message.lockableDuration !== undefined && (obj.lockable_duration = message.lockableDuration ? Duration.toAmino(message.lockableDuration) : undefined);
+    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    return obj;
   }
 
 };
@@ -925,6 +1071,24 @@ export const QueryIncentivizedPoolsResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryIncentivizedPoolsResponseSDKType): QueryIncentivizedPoolsResponse {
+    return {
+      incentivizedPools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseSDKType {
+    const obj: any = {};
+
+    if (message.incentivizedPools) {
+      obj.incentivized_pools = message.incentivizedPools.map(e => e ? IncentivizedPool.toAmino(e) : undefined);
+    } else {
+      obj.incentivized_pools = [];
+    }
+
+    return obj;
   }
 
 };
@@ -975,6 +1139,15 @@ export const QueryExternalIncentiveGaugesRequest = {
   },
 
   toSDK(_: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryExternalIncentiveGaugesRequestSDKType): QueryExternalIncentiveGaugesRequest {
+    return {};
+  },
+
+  toAmino(_: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1053,6 +1226,24 @@ export const QueryExternalIncentiveGaugesResponse = {
 
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryExternalIncentiveGaugesResponseSDKType): QueryExternalIncentiveGaugesResponse {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryExternalIncentiveGaugesResponse): QueryExternalIncentiveGaugesResponseSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.data = [];
     }

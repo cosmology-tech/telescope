@@ -138,6 +138,26 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -217,6 +237,20 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableErc20 !== undefined && (obj.enable_erc20 = message.enableErc20);
+    message.enableEvmHook !== undefined && (obj.enable_evm_hook = message.enableEvmHook);
+    return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      enableErc20: isSet(object.enable_erc20) ? object.enable_erc20 : undefined,
+      enableEvmHook: isSet(object.enable_evm_hook) ? object.enable_evm_hook : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
     const obj: any = {};
     message.enableErc20 !== undefined && (obj.enable_erc20 = message.enableErc20);
     message.enableEvmHook !== undefined && (obj.enable_evm_hook = message.enableEvmHook);

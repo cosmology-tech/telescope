@@ -154,6 +154,20 @@ export const QueryDeploymentsRequest = {
     message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDeploymentsRequestSDKType): QueryDeploymentsRequest {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromAmino(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -249,6 +263,26 @@ export const QueryDeploymentsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDeploymentsResponseSDKType): QueryDeploymentsResponse {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseSDKType {
+    const obj: any = {};
+
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -317,6 +351,18 @@ export const QueryDeploymentRequest = {
   toSDK(message: QueryDeploymentRequest): QueryDeploymentRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined);
     return obj;
   }
 
@@ -427,6 +473,28 @@ export const QueryDeploymentResponse = {
 
     message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDeploymentResponseSDKType): QueryDeploymentResponse {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromAmino(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
+      escrowAccount: isSet(object.escrow_account) ? Account.fromAmino(object.escrow_account) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined);
+    return obj;
   }
 
 };
@@ -496,6 +564,18 @@ export const QueryGroupRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGroupRequestSDKType): QueryGroupRequest {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryGroupRequest): QueryGroupRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -564,6 +644,18 @@ export const QueryGroupResponse = {
   toSDK(message: QueryGroupResponse): QueryGroupResponseSDKType {
     const obj: any = {};
     message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGroupResponseSDKType): QueryGroupResponse {
+    return {
+      group: isSet(object.group) ? Group.fromAmino(object.group) : undefined
+    };
+  },
+
+  toAmino(message: QueryGroupResponse): QueryGroupResponseSDKType {
+    const obj: any = {};
+    message.group !== undefined && (obj.group = message.group ? Group.toAmino(message.group) : undefined);
     return obj;
   }
 

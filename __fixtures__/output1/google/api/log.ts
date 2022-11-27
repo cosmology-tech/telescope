@@ -200,6 +200,30 @@ export const LogDescriptor = {
     message.description !== undefined && (obj.description = message.description);
     message.displayName !== undefined && (obj.display_name = message.displayName);
     return obj;
+  },
+
+  fromAmino(object: LogDescriptorSDKType): LogDescriptor {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
+      description: isSet(object.description) ? object.description : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined
+    };
+  },
+
+  toAmino(message: LogDescriptor): LogDescriptorSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+
+    message.description !== undefined && (obj.description = message.description);
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+    return obj;
   }
 
 };

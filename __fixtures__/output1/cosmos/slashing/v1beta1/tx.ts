@@ -83,6 +83,18 @@ export const MsgUnjail = {
     const obj: any = {};
     message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
     return obj;
+  },
+
+  fromAmino(object: MsgUnjailSDKType): MsgUnjail {
+    return {
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toAmino(message: MsgUnjail): MsgUnjailSDKType {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -133,6 +145,15 @@ export const MsgUnjailResponse = {
   },
 
   toSDK(_: MsgUnjailResponse): MsgUnjailResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUnjailResponseSDKType): MsgUnjailResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUnjailResponse): MsgUnjailResponseSDKType {
     const obj: any = {};
     return obj;
   }

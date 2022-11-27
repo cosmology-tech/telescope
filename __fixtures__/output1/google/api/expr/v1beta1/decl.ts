@@ -242,6 +242,26 @@ export const Decl = {
     message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toSDK(message.ident) : undefined);
     message.function !== undefined && (obj.function = message.function ? FunctionDecl.toSDK(message.function) : undefined);
     return obj;
+  },
+
+  fromAmino(object: DeclSDKType): Decl {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined,
+      ident: isSet(object.ident) ? IdentDecl.fromAmino(object.ident) : undefined,
+      function: isSet(object.function) ? FunctionDecl.fromAmino(object.function) : undefined
+    };
+  },
+
+  toAmino(message: Decl): DeclSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    message.doc !== undefined && (obj.doc = message.doc);
+    message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined);
+    message.function !== undefined && (obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined);
+    return obj;
   }
 
 };
@@ -351,6 +371,28 @@ export const DeclType = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: DeclTypeSDKType): DeclType {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      type: isSet(object.type) ? object.type : undefined,
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: DeclType): DeclTypeSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.type !== undefined && (obj.type = message.type);
+
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
+    } else {
+      obj.type_params = [];
+    }
+
+    return obj;
   }
 
 };
@@ -433,6 +475,20 @@ export const IdentDecl = {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? DeclType.toSDK(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: IdentDeclSDKType): IdentDecl {
+    return {
+      type: isSet(object.type) ? DeclType.fromAmino(object.type) : undefined,
+      value: isSet(object.value) ? Expr.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: IdentDecl): IdentDeclSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type ? DeclType.toAmino(message.type) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Expr.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -541,6 +597,28 @@ export const FunctionDecl = {
     }
 
     message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toSDK(message.returnType) : undefined);
+    message.receiverFunction !== undefined && (obj.receiver_function = message.receiverFunction);
+    return obj;
+  },
+
+  fromAmino(object: FunctionDeclSDKType): FunctionDecl {
+    return {
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
+      returnType: isSet(object.return_type) ? DeclType.fromAmino(object.return_type) : undefined,
+      receiverFunction: isSet(object.receiver_function) ? object.receiver_function : undefined
+    };
+  },
+
+  toAmino(message: FunctionDecl): FunctionDeclSDKType {
+    const obj: any = {};
+
+    if (message.args) {
+      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
+    } else {
+      obj.args = [];
+    }
+
+    message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined);
     message.receiverFunction !== undefined && (obj.receiver_function = message.receiverFunction);
     return obj;
   }

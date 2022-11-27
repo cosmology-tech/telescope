@@ -99,6 +99,24 @@ export const Node = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: NodeSDKType): Node {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Node): NodeSDKType {
+    const obj: any = {};
+
+    if (message.children) {
+      obj.children = message.children.map(e => e ? Child.toAmino(e) : undefined);
+    } else {
+      obj.children = [];
+    }
+
+    return obj;
   }
 
 };
@@ -182,6 +200,20 @@ export const Child = {
     message.index !== undefined && (obj.index = message.index);
     message.accumulation !== undefined && (obj.accumulation = message.accumulation);
     return obj;
+  },
+
+  fromAmino(object: ChildSDKType): Child {
+    return {
+      index: isSet(object.index) ? object.index : undefined,
+      accumulation: isSet(object.accumulation) ? object.accumulation : undefined
+    };
+  },
+
+  toAmino(message: Child): ChildSDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.accumulation !== undefined && (obj.accumulation = message.accumulation);
+    return obj;
   }
 
 };
@@ -250,6 +282,18 @@ export const Leaf = {
   toSDK(message: Leaf): LeafSDKType {
     const obj: any = {};
     message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toSDK(message.leaf) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: LeafSDKType): Leaf {
+    return {
+      leaf: isSet(object.leaf) ? Child.fromAmino(object.leaf) : undefined
+    };
+  },
+
+  toAmino(message: Leaf): LeafSDKType {
+    const obj: any = {};
+    message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined);
     return obj;
   }
 

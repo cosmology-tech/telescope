@@ -78,6 +78,18 @@ export const GenesisState = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };

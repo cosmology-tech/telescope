@@ -212,6 +212,18 @@ export const QueryDevFeeInfosRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -307,6 +319,26 @@ export const QueryDevFeeInfosResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseSDKType {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -373,6 +405,18 @@ export const QueryDevFeeInfoRequest = {
   },
 
   toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
     return obj;
@@ -445,6 +489,18 @@ export const QueryDevFeeInfoResponse = {
     const obj: any = {};
     message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toSDK(message.fee) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
+    return {
+      fee: isSet(object.fee) ? DevFeeInfo.fromAmino(object.fee) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined);
+    return obj;
   }
 
 };
@@ -495,6 +551,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -565,6 +630,18 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 
@@ -648,6 +725,20 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     const obj: any = {};
     message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
+    return {
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestSDKType {
+    const obj: any = {};
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -743,6 +834,26 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseSDKType {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

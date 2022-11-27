@@ -109,6 +109,22 @@ export const GroupID = {
     message.dseq !== undefined && (obj.dseq = message.dseq);
     message.gseq !== undefined && (obj.gseq = message.gseq);
     return obj;
+  },
+
+  fromAmino(object: GroupIDSDKType): GroupID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined
+    };
+  },
+
+  toAmino(message: GroupID): GroupIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    return obj;
   }
 
 };

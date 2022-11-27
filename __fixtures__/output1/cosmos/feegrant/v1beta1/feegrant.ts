@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /**
@@ -233,6 +233,26 @@ export const BasicAllowance = {
 
     message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
     return obj;
+  },
+
+  fromAmino(object: BasicAllowanceSDKType): BasicAllowance {
+    return {
+      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
+      expiration: isSet(object.expiration) ? Timestamp.fromAmino(object.expiration) : undefined
+    };
+  },
+
+  toAmino(message: BasicAllowance): BasicAllowanceSDKType {
+    const obj: any = {};
+
+    if (message.spendLimit) {
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.spend_limit = [];
+    }
+
+    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined);
+    return obj;
   }
 
 };
@@ -380,6 +400,40 @@ export const PeriodicAllowance = {
 
     message.periodReset !== undefined && (obj.period_reset = message.periodReset ? Timestamp.toSDK(message.periodReset) : undefined);
     return obj;
+  },
+
+  fromAmino(object: PeriodicAllowanceSDKType): PeriodicAllowance {
+    return {
+      basic: isSet(object.basic) ? BasicAllowance.fromAmino(object.basic) : undefined,
+      period: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      },
+      periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
+      periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
+      periodReset: isSet(object.period_reset) ? Timestamp.fromAmino(object.period_reset) : undefined
+    };
+  },
+
+  toAmino(message: PeriodicAllowance): PeriodicAllowanceSDKType {
+    const obj: any = {};
+    message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toAmino(message.basic) : undefined);
+    message.period !== undefined && (obj.period = message.period ? Duration.toAmino(message.period) : undefined);
+
+    if (message.periodSpendLimit) {
+      obj.period_spend_limit = message.periodSpendLimit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.period_spend_limit = [];
+    }
+
+    if (message.periodCanSpend) {
+      obj.period_can_spend = message.periodCanSpend.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.period_can_spend = [];
+    }
+
+    message.periodReset !== undefined && (obj.period_reset = message.periodReset ? Timestamp.toAmino(message.periodReset) : undefined);
+    return obj;
   }
 
 };
@@ -467,6 +521,26 @@ export const AllowedMsgAllowance = {
   toSDK(message: AllowedMsgAllowance): AllowedMsgAllowanceSDKType {
     const obj: any = {};
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+
+    if (message.allowedMessages) {
+      obj.allowed_messages = message.allowedMessages.map(e => e);
+    } else {
+      obj.allowed_messages = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: AllowedMsgAllowanceSDKType): AllowedMsgAllowance {
+    return {
+      allowance: isSet(object.allowance) ? Any.fromAmino(object.allowance) : undefined,
+      allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: AllowedMsgAllowance): AllowedMsgAllowanceSDKType {
+    const obj: any = {};
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toAmino(message.allowance) : undefined);
 
     if (message.allowedMessages) {
       obj.allowed_messages = message.allowedMessages.map(e => e);
@@ -571,6 +645,22 @@ export const Grant = {
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GrantSDKType): Grant {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      allowance: isSet(object.allowance) ? Any.fromAmino(object.allowance) : undefined
+    };
+  },
+
+  toAmino(message: Grant): GrantSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toAmino(message.allowance) : undefined);
     return obj;
   }
 

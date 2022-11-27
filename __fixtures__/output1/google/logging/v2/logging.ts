@@ -3,7 +3,7 @@ import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Status, StatusSDKType } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "../../../helpers";
+import { isSet, DeepPartial, isObject, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** An indicator of why entries were omitted. */
@@ -909,6 +909,18 @@ export const DeleteLogRequest = {
     const obj: any = {};
     message.logName !== undefined && (obj.log_name = message.logName);
     return obj;
+  },
+
+  fromAmino(object: DeleteLogRequestSDKType): DeleteLogRequest {
+    return {
+      logName: isSet(object.log_name) ? object.log_name : undefined
+    };
+  },
+
+  toAmino(message: DeleteLogRequest): DeleteLogRequestSDKType {
+    const obj: any = {};
+    message.logName !== undefined && (obj.log_name = message.logName);
+    return obj;
   }
 
 };
@@ -988,6 +1000,20 @@ export const WriteLogEntriesRequest_LabelsEntry = {
   },
 
   toSDK(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromAmino(object: WriteLogEntriesRequest_LabelsEntrySDKType): WriteLogEntriesRequest_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntrySDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1181,6 +1207,45 @@ export const WriteLogEntriesRequest = {
     message.partialSuccess !== undefined && (obj.partial_success = message.partialSuccess);
     message.dryRun !== undefined && (obj.dry_run = message.dryRun);
     return obj;
+  },
+
+  fromAmino(object: WriteLogEntriesRequestSDKType): WriteLogEntriesRequest {
+    return {
+      logName: isSet(object.log_name) ? object.log_name : undefined,
+      resource: isSet(object.resource) ? MonitoredResource.fromAmino(object.resource) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      partialSuccess: isSet(object.partial_success) ? object.partial_success : undefined,
+      dryRun: isSet(object.dry_run) ? object.dry_run : undefined
+    };
+  },
+
+  toAmino(message: WriteLogEntriesRequest): WriteLogEntriesRequestSDKType {
+    const obj: any = {};
+    message.logName !== undefined && (obj.log_name = message.logName);
+    message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    message.partialSuccess !== undefined && (obj.partial_success = message.partialSuccess);
+    message.dryRun !== undefined && (obj.dry_run = message.dryRun);
+    return obj;
   }
 
 };
@@ -1231,6 +1296,15 @@ export const WriteLogEntriesResponse = {
   },
 
   toSDK(_: WriteLogEntriesResponse): WriteLogEntriesResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: WriteLogEntriesResponseSDKType): WriteLogEntriesResponse {
+    return {};
+  },
+
+  toAmino(_: WriteLogEntriesResponse): WriteLogEntriesResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1315,6 +1389,20 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? google.rpc.Status.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -1420,6 +1508,30 @@ export const WriteLogEntriesPartialErrors = {
     if (message.logEntryErrors) {
       Object.entries(message.logEntryErrors).forEach(([k, v]) => {
         obj.log_entry_errors[k] = Status.toSDK(v);
+      });
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: WriteLogEntriesPartialErrorsSDKType): WriteLogEntriesPartialErrors {
+    return {
+      logEntryErrors: isObject(object.log_entry_errors) ? Object.entries(object.log_entry_errors).reduce<{
+        [key: number]: Status;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Status.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: WriteLogEntriesPartialErrors): WriteLogEntriesPartialErrorsSDKType {
+    const obj: any = {};
+    obj.log_entry_errors = {};
+
+    if (message.logEntryErrors) {
+      Object.entries(message.logEntryErrors).forEach(([k, v]) => {
+        obj.log_entry_errors[k] = Status.toAmino(v);
       });
     }
 
@@ -1561,6 +1673,32 @@ export const ListLogEntriesRequest = {
     message.pageSize !== undefined && (obj.page_size = message.pageSize);
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
     return obj;
+  },
+
+  fromAmino(object: ListLogEntriesRequestSDKType): ListLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: isSet(object.filter) ? object.filter : undefined,
+      orderBy: isSet(object.order_by) ? object.order_by : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
+    };
+  },
+
+  toAmino(message: ListLogEntriesRequest): ListLogEntriesRequestSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.orderBy !== undefined && (obj.order_by = message.orderBy);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
   }
 
 };
@@ -1656,6 +1794,26 @@ export const ListLogEntriesResponse = {
 
     message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
     return obj;
+  },
+
+  fromAmino(object: ListLogEntriesResponseSDKType): ListLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListLogEntriesResponse): ListLogEntriesResponseSDKType {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1735,6 +1893,20 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
 
   toSDK(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestSDKType {
+    const obj: any = {};
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
+  },
+
+  fromAmino(object: ListMonitoredResourceDescriptorsRequestSDKType): ListMonitoredResourceDescriptorsRequest {
+    return {
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
+    };
+  },
+
+  toAmino(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestSDKType {
     const obj: any = {};
     message.pageSize !== undefined && (obj.page_size = message.pageSize);
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
@@ -1828,6 +2000,26 @@ export const ListMonitoredResourceDescriptorsResponse = {
 
     if (message.resourceDescriptors) {
       obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.resource_descriptors = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
+  },
+
+  fromAmino(object: ListMonitoredResourceDescriptorsResponseSDKType): ListMonitoredResourceDescriptorsResponse {
+    return {
+      resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListMonitoredResourceDescriptorsResponse): ListMonitoredResourceDescriptorsResponseSDKType {
+    const obj: any = {};
+
+    if (message.resourceDescriptors) {
+      obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
     } else {
       obj.resource_descriptors = [];
     }
@@ -1957,6 +2149,30 @@ export const ListLogsRequest = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ListLogsRequestSDKType): ListLogsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ListLogsRequest): ListLogsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2042,6 +2258,26 @@ export const ListLogsResponse = {
   },
 
   toSDK(message: ListLogsResponse): ListLogsResponseSDKType {
+    const obj: any = {};
+
+    if (message.logNames) {
+      obj.log_names = message.logNames.map(e => e);
+    } else {
+      obj.log_names = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
+  },
+
+  fromAmino(object: ListLogsResponseSDKType): ListLogsResponse {
+    return {
+      logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListLogsResponse): ListLogsResponseSDKType {
     const obj: any = {};
 
     if (message.logNames) {
@@ -2161,6 +2397,31 @@ export const TailLogEntriesRequest = {
     message.filter !== undefined && (obj.filter = message.filter);
     message.bufferWindow !== undefined && (obj.buffer_window = message.bufferWindow ? Duration.toSDK(message.bufferWindow) : undefined);
     return obj;
+  },
+
+  fromAmino(object: TailLogEntriesRequestSDKType): TailLogEntriesRequest {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      filter: isSet(object.filter) ? object.filter : undefined,
+      bufferWindow: {
+        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
+        nanos: parseInt(objectObject) % 1_000_000_000
+      }
+    };
+  },
+
+  toAmino(message: TailLogEntriesRequest): TailLogEntriesRequestSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.bufferWindow !== undefined && (obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow) : undefined);
+    return obj;
   }
 
 };
@@ -2266,6 +2527,31 @@ export const TailLogEntriesResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: TailLogEntriesResponseSDKType): TailLogEntriesResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      suppressionInfo: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: TailLogEntriesResponse): TailLogEntriesResponseSDKType {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    if (message.suppressionInfo) {
+      obj.suppression_info = message.suppressionInfo.map(e => e ? TailLogEntriesResponse_SuppressionInfo.toAmino(e) : undefined);
+    } else {
+      obj.suppression_info = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2345,6 +2631,20 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
 
   toSDK(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoSDKType {
+    const obj: any = {};
+    message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
+    message.suppressedCount !== undefined && (obj.suppressed_count = message.suppressedCount);
+    return obj;
+  },
+
+  fromAmino(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
+    return {
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      suppressedCount: isSet(object.suppressed_count) ? object.suppressed_count : undefined
+    };
+  },
+
+  toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoSDKType {
     const obj: any = {};
     message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
     message.suppressedCount !== undefined && (obj.suppressed_count = message.suppressedCount);

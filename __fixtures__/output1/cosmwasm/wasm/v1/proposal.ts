@@ -455,6 +455,26 @@ export const StoreCodeProposal = {
     message.wasmByteCode !== undefined && (obj.wasm_byte_code = message.wasmByteCode);
     message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
     return obj;
+  },
+
+  fromAmino(object: StoreCodeProposalSDKType): StoreCodeProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      runAs: isSet(object.run_as) ? object.run_as : undefined,
+      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : undefined,
+      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
+    };
+  },
+
+  toAmino(message: StoreCodeProposal): StoreCodeProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.runAs !== undefined && (obj.run_as = message.runAs);
+    message.wasmByteCode !== undefined && (obj.wasm_byte_code = message.wasmByteCode);
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined);
+    return obj;
   }
 
 };
@@ -634,6 +654,38 @@ export const InstantiateContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: InstantiateContractProposalSDKType): InstantiateContractProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      runAs: isSet(object.run_as) ? object.run_as : undefined,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      label: isSet(object.label) ? object.label : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined,
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: InstantiateContractProposal): InstantiateContractProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.runAs !== undefined && (obj.run_as = message.runAs);
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.label !== undefined && (obj.label = message.label);
+    message.msg !== undefined && (obj.msg = message.msg);
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -759,6 +811,26 @@ export const MigrateContractProposal = {
     message.codeId !== undefined && (obj.code_id = message.codeId);
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
+  },
+
+  fromAmino(object: MigrateContractProposalSDKType): MigrateContractProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined
+    };
+  },
+
+  toAmino(message: MigrateContractProposal): MigrateContractProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.msg !== undefined && (obj.msg = message.msg);
+    return obj;
   }
 
 };
@@ -864,6 +936,24 @@ export const SudoContractProposal = {
   },
 
   toSDK(message: SudoContractProposal): SudoContractProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.msg !== undefined && (obj.msg = message.msg);
+    return obj;
+  },
+
+  fromAmino(object: SudoContractProposalSDKType): SudoContractProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined
+    };
+  },
+
+  toAmino(message: SudoContractProposal): SudoContractProposalSDKType {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1021,6 +1111,34 @@ export const ExecuteContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ExecuteContractProposalSDKType): ExecuteContractProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      runAs: isSet(object.run_as) ? object.run_as : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined,
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ExecuteContractProposal): ExecuteContractProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.runAs !== undefined && (obj.run_as = message.runAs);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.msg !== undefined && (obj.msg = message.msg);
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1132,6 +1250,24 @@ export const UpdateAdminProposal = {
     message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
+  },
+
+  fromAmino(object: UpdateAdminProposalSDKType): UpdateAdminProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
+    };
+  },
+
+  toAmino(message: UpdateAdminProposal): UpdateAdminProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
   }
 
 };
@@ -1224,6 +1360,22 @@ export const ClearAdminProposal = {
   },
 
   toSDK(message: ClearAdminProposal): ClearAdminProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
+  },
+
+  fromAmino(object: ClearAdminProposalSDKType): ClearAdminProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
+    };
+  },
+
+  toAmino(message: ClearAdminProposal): ClearAdminProposalSDKType {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1350,6 +1502,28 @@ export const PinCodesProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: PinCodesProposalSDKType): PinCodesProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: PinCodesProposal): PinCodesProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1460,6 +1634,28 @@ export const UnpinCodesProposal = {
   },
 
   toSDK(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

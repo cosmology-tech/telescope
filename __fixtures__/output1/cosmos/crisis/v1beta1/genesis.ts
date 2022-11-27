@@ -86,6 +86,18 @@ export const GenesisState = {
     const obj: any = {};
     message.constantFee !== undefined && (obj.constant_fee = message.constantFee ? Coin.toSDK(message.constantFee) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      constantFee: isSet(object.constant_fee) ? Coin.fromAmino(object.constant_fee) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.constantFee !== undefined && (obj.constant_fee = message.constantFee ? Coin.toAmino(message.constantFee) : undefined);
+    return obj;
   }
 
 };

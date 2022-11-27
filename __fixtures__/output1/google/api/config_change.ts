@@ -346,6 +346,32 @@ export const ConfigChange = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ConfigChangeSDKType): ConfigChange {
+    return {
+      element: isSet(object.element) ? object.element : undefined,
+      oldValue: isSet(object.old_value) ? object.old_value : undefined,
+      newValue: isSet(object.new_value) ? object.new_value : undefined,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
+      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ConfigChange): ConfigChangeSDKType {
+    const obj: any = {};
+    message.element !== undefined && (obj.element = message.element);
+    message.oldValue !== undefined && (obj.old_value = message.oldValue);
+    message.newValue !== undefined && (obj.new_value = message.newValue);
+    message.changeType !== undefined && (obj.change_type = changeTypeToJSON(message.changeType));
+
+    if (message.advices) {
+      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
+    } else {
+      obj.advices = [];
+    }
+
+    return obj;
   }
 
 };
@@ -412,6 +438,18 @@ export const Advice = {
   },
 
   toSDK(message: Advice): AdviceSDKType {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
+  },
+
+  fromAmino(object: AdviceSDKType): Advice {
+    return {
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toAmino(message: Advice): AdviceSDKType {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     return obj;

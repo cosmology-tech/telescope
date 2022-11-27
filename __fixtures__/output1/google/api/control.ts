@@ -93,6 +93,18 @@ export const Control = {
     const obj: any = {};
     message.environment !== undefined && (obj.environment = message.environment);
     return obj;
+  },
+
+  fromAmino(object: ControlSDKType): Control {
+    return {
+      environment: isSet(object.environment) ? object.environment : undefined
+    };
+  },
+
+  toAmino(message: Control): ControlSDKType {
+    const obj: any = {};
+    message.environment !== undefined && (obj.environment = message.environment);
+    return obj;
   }
 
 };
