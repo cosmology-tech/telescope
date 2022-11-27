@@ -76,7 +76,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return {
       publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      sequence: object?.sequence
     };
   },
 
@@ -84,7 +84,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -253,19 +253,19 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
 
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sig: isSet(object.sig) ? object.sig : undefined
+      sig: object?.sig
     };
   },
 
   toSDK(message: AuxSignerData): AuxSignerDataSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.signDoc !== undefined && (obj.sign_doc = message.signDoc ? SignDocDirectAux.toSDK(message.signDoc) : undefined);
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.sig !== undefined && (obj.sig = message.sig);
+    obj.sig = message.sig;
     return obj;
   }
 
@@ -442,16 +442,16 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
   fromSDK(object: PinCodesProposalSDKType): PinCodesProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
 
   toSDK(message: PinCodesProposal): PinCodesProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
 
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e);
@@ -557,16 +557,16 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
 
   fromSDK(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
 
   toSDK(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
 
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e);
@@ -643,15 +643,15 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
   fromSDK(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      queryData: isSet(object.query_data) ? object.query_data : undefined
+      address: object?.address,
+      queryData: object?.query_data
     };
   },
 
   toSDK(message: QueryRawContractStateRequest): QueryRawContractStateRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.queryData !== undefined && (obj.query_data = message.queryData);
+    obj.address = message.address;
+    obj.query_data = message.queryData;
     return obj;
   }
 
@@ -761,18 +761,18 @@ exports[`evmos/fees/v1/tx 1`] = `
 
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
     };
   },
 
   toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
 
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => e);
@@ -871,19 +871,19 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
 
   fromSDK(object: ParseRequestSDKType): ParseRequest {
     return {
-      celSource: isSet(object.cel_source) ? object.cel_source : undefined,
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
-      sourceLocation: isSet(object.source_location) ? object.source_location : undefined,
-      disableMacros: isSet(object.disable_macros) ? object.disable_macros : undefined
+      celSource: object?.cel_source,
+      syntaxVersion: object?.syntax_version,
+      sourceLocation: object?.source_location,
+      disableMacros: object?.disable_macros
     };
   },
 
   toSDK(message: ParseRequest): ParseRequestSDKType {
     const obj: any = {};
-    message.celSource !== undefined && (obj.cel_source = message.celSource);
-    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
-    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation);
-    message.disableMacros !== undefined && (obj.disable_macros = message.disableMacros);
+    obj.cel_source = message.celSource;
+    obj.syntax_version = message.syntaxVersion;
+    obj.source_location = message.sourceLocation;
+    obj.disable_macros = message.disableMacros;
     return obj;
   }
 
@@ -1008,18 +1008,18 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
 
   fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
     return {
-      overloadId: isSet(object.overload_id) ? object.overload_id : undefined,
+      overloadId: object?.overload_id,
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
       resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
-      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : undefined,
-      doc: isSet(object.doc) ? object.doc : undefined
+      isInstanceFunction: object?.is_instance_function,
+      doc: object?.doc
     };
   },
 
   toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
     const obj: any = {};
-    message.overloadId !== undefined && (obj.overload_id = message.overloadId);
+    obj.overload_id = message.overloadId;
 
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
@@ -1034,8 +1034,8 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     }
 
     message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
-    message.isInstanceFunction !== undefined && (obj.is_instance_function = message.isInstanceFunction);
-    message.doc !== undefined && (obj.doc = message.doc);
+    obj.is_instance_function = message.isInstanceFunction;
+    obj.doc = message.doc;
     return obj;
   }
 
@@ -1234,8 +1234,8 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       listType: isSet(object.list_type) ? Type_ListType.fromSDK(object.list_type) : undefined,
       mapType: isSet(object.map_type) ? Type_MapType.fromSDK(object.map_type) : undefined,
       function: isSet(object.function) ? Type_FunctionType.fromSDK(object.function) : undefined,
-      messageType: isSet(object.message_type) ? object.message_type : undefined,
-      typeParam: isSet(object.type_param) ? object.type_param : undefined,
+      messageType: object?.message_type,
+      typeParam: object?.type_param,
       type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
       error: isSet(object.error) ? Empty.fromSDK(object.error) : undefined,
       abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
@@ -1252,8 +1252,8 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.listType !== undefined && (obj.list_type = message.listType ? Type_ListType.toSDK(message.listType) : undefined);
     message.mapType !== undefined && (obj.map_type = message.mapType ? Type_MapType.toSDK(message.mapType) : undefined);
     message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toSDK(message.function) : undefined);
-    message.messageType !== undefined && (obj.message_type = message.messageType);
-    message.typeParam !== undefined && (obj.type_param = message.typeParam);
+    obj.message_type = message.messageType;
+    obj.type_param = message.typeParam;
     message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
     message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
     message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
@@ -1505,7 +1505,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
         return acc;
       }, {}) : {},
       sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
-      exprVersion: isSet(object.expr_version) ? object.expr_version : undefined,
+      exprVersion: object?.expr_version,
       expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
     };
   },
@@ -1529,7 +1529,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     }
 
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
-    message.exprVersion !== undefined && (obj.expr_version = message.exprVersion);
+    obj.expr_version = message.exprVersion;
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     return obj;
   }
@@ -1678,12 +1678,12 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
   fromSDK(object: ConstantSDKType): Constant {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      uint64Value: object?.uint64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
       durationValue: isSet(object.duration_value) ? Duration.fromSDK(object.duration_value) : undefined,
       timestampValue: isSet(object.timestamp_value) ? Timestamp.fromSDK(object.timestamp_value) : undefined
     };
@@ -1692,12 +1692,12 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
   toSDK(message: Constant): ConstantSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.uint64_value = message.uint64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
     message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
     return obj;
@@ -1984,7 +1984,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
-      location: isSet(object.location) ? object.location : undefined,
+      location: object?.location,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: number]: number;
@@ -1997,7 +1997,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 
   toSDK(message: SourceInfo): SourceInfoSDKType {
     const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
+    obj.location = message.location;
 
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
@@ -2109,7 +2109,7 @@ exports[`google/api/quota keyType 1`] = `
 
   fromSDK(object: MetricRuleSDKType): MetricRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
+      selector: object?.selector,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
@@ -2121,7 +2121,7 @@ exports[`google/api/quota keyType 1`] = `
 
   toSDK(message: MetricRule): MetricRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
+    obj.selector = message.selector;
     obj.metric_costs = {};
 
     if (message.metricCosts) {
@@ -2339,12 +2339,12 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
-      trace: isSet(object.trace) ? object.trace : undefined,
-      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
+      trace: object?.trace,
+      insertId: object?.insert_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2352,7 +2352,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
         return acc;
       }, {}) : {},
       protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
-      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      textPayload: object?.text_payload,
       structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
       operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
       sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
@@ -2361,12 +2361,12 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
     message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
-    message.trace !== undefined && (obj.trace = message.trace);
-    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.trace = message.trace;
+    obj.insert_id = message.insertId;
     obj.labels = {};
 
     if (message.labels) {
@@ -2376,7 +2376,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     }
 
     message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
-    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    obj.text_payload = message.textPayload;
     message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toSDK(message.structPayload) : undefined);
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
@@ -2573,21 +2573,21 @@ exports[`ibc/core/port/v1/query 1`] = `
 
   fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      portId: object?.port_id,
+      connectionId: object?.connection_id,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : undefined
+      proposedVersion: object?.proposed_version
     };
   },
 
   toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.port_id = message.portId;
+    obj.connection_id = message.connectionId;
     message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
-    message.proposedVersion !== undefined && (obj.proposed_version = message.proposedVersion);
+    obj.proposed_version = message.proposedVersion;
     return obj;
   }
 
@@ -3006,18 +3006,18 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 
   fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      shareOutAmount: isSet(object.share_out_amount) ? object.share_out_amount : undefined,
+      sender: object?.sender,
+      poolId: object?.pool_id,
+      shareOutAmount: object?.share_out_amount,
       tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgJoinPool): MsgJoinPoolSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.shareOutAmount !== undefined && (obj.share_out_amount = message.shareOutAmount);
+    obj.sender = message.sender;
+    obj.pool_id = message.poolId;
+    obj.share_out_amount = message.shareOutAmount;
 
     if (message.tokenInMaxs) {
       obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toSDK(e) : undefined);
@@ -3122,16 +3122,16 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
 
   fromSDK(object: MsgSwapExactAmountInSDKType): MsgSwapExactAmountIn {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
+      sender: object?.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
       tokenIn: isSet(object.token_in) ? Coin.fromSDK(object.token_in) : undefined,
-      tokenOutMinAmount: isSet(object.token_out_min_amount) ? object.token_out_min_amount : undefined
+      tokenOutMinAmount: object?.token_out_min_amount
     };
   },
 
   toSDK(message: MsgSwapExactAmountIn): MsgSwapExactAmountInSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
 
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toSDK(e) : undefined);
@@ -3140,7 +3140,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     }
 
     message.tokenIn !== undefined && (obj.token_in = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
-    message.tokenOutMinAmount !== undefined && (obj.token_out_min_amount = message.tokenOutMinAmount);
+    obj.token_out_min_amount = message.tokenOutMinAmount;
     return obj;
   }
 
@@ -3238,16 +3238,16 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
 
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
+      sender: object?.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenInMaxAmount: isSet(object.token_in_max_amount) ? object.token_in_max_amount : undefined,
+      tokenInMaxAmount: object?.token_in_max_amount,
       tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined
     };
   },
 
   toSDK(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
 
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toSDK(e) : undefined);
@@ -3255,7 +3255,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       obj.routes = [];
     }
 
-    message.tokenInMaxAmount !== undefined && (obj.token_in_max_amount = message.tokenInMaxAmount);
+    obj.token_in_max_amount = message.tokenInMaxAmount;
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
   }
