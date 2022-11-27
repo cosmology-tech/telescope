@@ -25,8 +25,8 @@ export const createObjectWithMethods = (
         context.pluginValue('prototypes.methods.fromPartial') && fromPartialMethod(context, name, proto),
         context.pluginValue('prototypes.methods.fromSDK') && fromSDKMethod(context, name, proto),
         context.pluginValue('prototypes.methods.toSDK') && toSDKMethod(context, name, proto),
-        context.pluginValue('prototypes.methods.fromAmino') && fromAminoJSONMethod(context, name, proto),
-        context.pluginValue('prototypes.methods.toAmino') && toAminoJSONMethod(context, name, proto),
+        context.options.aminoEncoding.useRecursiveV2encoding && context.pluginValue('prototypes.methods.fromAmino') && fromAminoJSONMethod(context, name, proto),
+        context.options.aminoEncoding.useRecursiveV2encoding && context.pluginValue('prototypes.methods.toAmino') && toAminoJSONMethod(context, name, proto),
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(

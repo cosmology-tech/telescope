@@ -19,7 +19,7 @@ export interface CreateProtoTypeOptions {
     typeNameSuffix?: string;
 };
 
-export const createProtoTypeOptionsDefaults = {
+export const createProtoTypeOptionsDefaults: CreateProtoTypeOptions = {
     useOriginalCase: false
 };
 
@@ -90,6 +90,34 @@ export const getTSType = (context: GenericParseContext, type: string) => {
         case 'fixed64':
         case 'sfixed64':
             return t.tsTypeReference(t.identifier('Long'))
+        case 'bytes':
+            return t.tsTypeReference(t.identifier('Uint8Array'));
+        case 'bool':
+            return t.tsBooleanKeyword();
+        default:
+            throw new Error('getTSType() type not found');
+    };
+};
+
+export const getTSAminoType = (context: GenericParseContext, type: string) => {
+    switch (type) {
+        case 'string':
+            return t.tsStringKeyword();
+        case 'double':
+        case 'float':
+        case 'int32':
+        case 'uint32':
+        case 'sint32':
+        case 'fixed32':
+        case 'sfixed32':
+            return t.tsNumberKeyword();
+        case 'int64':
+        case 'uint64':
+        case 'sint64':
+        case 'fixed64':
+        case 'sfixed64':
+            return t.tsStringKeyword();
+        // return t.tsTypeReference(t.identifier('Long'))
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
@@ -201,6 +229,7 @@ export const getDefaultTSTypeFromProtoType = (
         case 'sint64':
         case 'fixed64':
         case 'sfixed64':
+            context.addUtil('Long');
             return t.memberExpression(
                 t.identifier('Long'),
                 t.identifier('ZERO')

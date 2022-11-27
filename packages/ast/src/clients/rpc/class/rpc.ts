@@ -23,7 +23,6 @@ const returnReponseType = (ResponseType: string) => {
                 [
                     t.tsTypeReference(
                         t.identifier(ResponseType)
-                        // t.identifier(ResponseType + 'SDKType')
                     )
                 ]
             )
