@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField, ProtoEnum } from '@osmonauts/types';
 import { identifier, tsPropertySignature, makeCommentBlock } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 
@@ -144,3 +144,23 @@ export const createAminoType = (
 };
 
 
+
+export const createEnumAminoType = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoEnum
+) => {
+    return t.exportNamedDeclaration(
+        t.variableDeclaration('const', [
+            t.variableDeclarator(
+                t.identifier(name + 'Amino'),
+                t.identifier(name)
+            )
+        ])
+    );
+    // return createProtoEnum(
+    //     context,
+    //     name + 'Amino',
+    //     proto
+    // );
+};

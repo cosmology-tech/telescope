@@ -49,7 +49,7 @@ export const getFieldTypeReference = (
         typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
         const propName = getProtoFieldTypeName(context, field);
-        const MsgName = getMessageName(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -90,7 +90,8 @@ export const getFieldAminoTypeReference = (
         typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
         const propName = getProtoFieldTypeName(context, field);
-        const MsgName = getMessageName(propName, options);
+        // enums don't need suffixes, etc.
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
