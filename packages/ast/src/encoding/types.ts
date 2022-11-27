@@ -192,6 +192,7 @@ export const getDefaultTSTypeFromProtoType = (
         case 'sfixed32':
             return t.numericLiteral(0);
         case 'uint64':
+            context.addUtil('Long');
             return t.memberExpression(
                 t.identifier('Long'),
                 t.identifier('UZERO')
