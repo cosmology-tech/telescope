@@ -94,18 +94,15 @@ const traverseFields = (
         }
 
         if (field.options?.['(cosmos_proto.accepts_interface)']) {
-            // console.log('accepts', field.options?.['(cosmos_proto.accepts_interface)'])
             const value = field.options['(cosmos_proto.accepts_interface)'];
+            // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
-                const info = {
+                store.registerAcceptsInterface({
                     name,
                     ref: ref.filename,
                     field: field.name,
                     type: obj.name
-                }
-                store.registerAcceptsInterface(
-                    info
-                );
+                });
             });
         }
 
@@ -285,17 +282,11 @@ const traverseType = (
     traversed.keyTypes = keyTypes;
 
     if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
-
-        const info = {
+        store.registerImplementsInterface({
             name: traversed.options['(cosmos_proto.implements_interface)'],
             ref: ref.filename,
             type: obj.name
-        }
-        store.registerImplementsInterface(
-            info
-        )
-        // console.log('implements', traversed.options?.["(cosmos_proto.implements_interface)"])
-
+        });
     }
 
     return traversed as ProtoType;

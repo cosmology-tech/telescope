@@ -1,10 +1,21 @@
-import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
+import { ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
     preferTrailingComment?: boolean;
 }
 export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@pyramation/protobufjs").IParserResult;
+interface AcceptsInfo {
+    name: string;
+    ref: ProtoRef['filename'];
+    field: ProtoField['name'];
+    type: ProtoField['name'];
+}
+interface ImplementsInfo {
+    name: string;
+    ref: ProtoRef['filename'];
+    type: ProtoType['name'];
+}
 export declare class ProtoStore {
     files: string[];
     protoDirs: string[];
@@ -14,6 +25,8 @@ export declare class ProtoStore {
     options: TelescopeOptions;
     requests: Record<string, ProtoServiceMethod>;
     responses: Record<string, ProtoServiceMethod>;
+    acceptsInterface: Record<string, AcceptsInfo[]>;
+    implementsInterface: Record<string, ImplementsInfo[]>;
     _traversed: boolean;
     constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
@@ -21,6 +34,8 @@ export declare class ProtoStore {
     filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];
     findProtoObject(filename: any, name: any): any;
     registerRequest(svc: ProtoServiceMethod): void;
+    registerAcceptsInterface(info: AcceptsInfo): void;
+    registerImplementsInterface(info: ImplementsInfo): void;
     processProtos(contents: {
         absolute: string;
         filename: string;
