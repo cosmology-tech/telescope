@@ -80,7 +80,7 @@ export const decode = {
 
         switch (durationFormat) {
             case 'string':
-                return switchOnTag(num, prop, baseTypes.duration(args));
+                return switchOnTag(num, prop, baseTypes.durationString(args));
             case 'duration':
             default:
                 return switchOnTag(num, prop, baseTypes.type(args));
@@ -386,7 +386,7 @@ export const baseTypes = {
 
     // message.period = fromDuration(Duration.decode(reader, reader.uint32()));
 
-    duration(args: DecodeMethod) {
+    durationString(args: DecodeMethod) {
         args.context.addUtil('fromDuration');
 
         return t.callExpression(
