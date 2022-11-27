@@ -2,6 +2,8 @@ import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
 import { BILLION, callExpression, identifier } from '../../../utils';
 import { getFieldNames } from '../../types';
+import { ProtoParseContext } from '../../context';
+import { ProtoType } from '@osmonauts/types';
 
 export const fromAminoJSON = {
 
@@ -489,3 +491,63 @@ export const arrayTypes = {
     }
 };
 
+
+export const fromAminoMessages = {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('Long');
+        return [
+            t.variableDeclaration('const', [
+                t.variableDeclarator(
+                    t.identifier('value'),
+                    t.callExpression(
+                        t.identifier('parseInt'),
+                        [
+                            t.identifier('object')
+                        ]
+                    )
+                )
+            ]),
+            // return
+            t.returnStatement(
+                t.objectExpression([
+
+                    // seconds
+                    t.objectProperty(
+                        t.identifier('seconds'),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Long'),
+                                t.identifier('fromNumber')
+                            ),
+                            [
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Math'),
+                                        t.identifier('floor')
+                                    ),
+                                    [
+                                        t.binaryExpression(
+                                            '/',
+                                            t.identifier('value'),
+                                            BILLION
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+                    ),
+
+                    // nanos
+                    t.objectProperty(
+                        t.identifier('nanos'),
+                        t.binaryExpression(
+                            '%',
+                            t.identifier('value'),
+                            BILLION
+                        )
+                    )
+                ])
+            )
+        ];
+    }
+}
