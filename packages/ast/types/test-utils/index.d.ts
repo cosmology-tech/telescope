@@ -26,6 +26,8 @@ export declare const defaultTelescopeOptions: {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -42,6 +44,7 @@ export declare const defaultTelescopeOptions: {
             useExact?: boolean;
             timestamp?: "date" | "timestamp";
             duration?: "string" | "duration";
+            updatedDuration?: boolean;
         };
     };
     tsDisable: {
@@ -73,6 +76,7 @@ export declare const defaultTelescopeOptions: {
         casingFn?: Function;
         exceptions?: import("@osmonauts/types").AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string;
+        useRecursiveV2encoding?: boolean;
     };
     lcdClients: {
         enabled: boolean;

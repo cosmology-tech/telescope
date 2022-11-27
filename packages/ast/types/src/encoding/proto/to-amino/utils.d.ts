@@ -1,4 +1,6 @@
 import * as t from '@babel/types';
+import { ProtoType } from '@osmonauts/types';
+import { ProtoParseContext } from '../../context';
 import { ToAminoJSONMethod } from './index';
 export declare const toAminoJSON: {
     scalar(args: ToAminoJSONMethod): t.ExpressionStatement;
@@ -47,4 +49,7 @@ export declare const arrayTypes: {
     bytes(args: ToAminoJSONMethod): t.Identifier;
     enum(args: ToAminoJSONMethod): t.CallExpression;
     type(args: ToAminoJSONMethod): t.ConditionalExpression;
+};
+export declare const toAminoMessages: {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement;
 };
