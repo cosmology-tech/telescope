@@ -93,6 +93,22 @@ const traverseFields = (
             return field;
         }
 
+        if (field.options?.['(cosmos_proto.accepts_interface)']) {
+            // console.log('accepts', field.options?.['(cosmos_proto.accepts_interface)'])
+            const value = field.options['(cosmos_proto.accepts_interface)'];
+            value.split(',').map(a => a.trim()).forEach(name => {
+                const info = {
+                    name,
+                    ref: ref.filename,
+                    field: field.name,
+                    type: obj.name
+                }
+                store.registerAcceptsInterface(
+                    info
+                );
+            });
+        }
+
         let found: any = null;
 
         if (SCALAR_TYPES.includes(field.type)) {
@@ -267,7 +283,22 @@ const traverseType = (
     }
 
     traversed.keyTypes = keyTypes;
-    return traversed;
+
+    if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
+
+        const info = {
+            name: traversed.options['(cosmos_proto.implements_interface)'],
+            ref: ref.filename,
+            type: obj.name
+        }
+        store.registerImplementsInterface(
+            info
+        )
+        // console.log('implements', traversed.options?.["(cosmos_proto.implements_interface)"])
+
+    }
+
+    return traversed as ProtoType;
 };
 
 const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
