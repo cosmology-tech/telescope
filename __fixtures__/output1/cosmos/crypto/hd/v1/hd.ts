@@ -165,26 +165,6 @@ export const BIP44Params = {
     message.change !== undefined && (obj.change = message.change);
     message.addressIndex !== undefined && (obj.address_index = message.addressIndex);
     return obj;
-  },
-
-  fromAmino(object: BIP44ParamsSDKType): BIP44Params {
-    return {
-      purpose: isSet(object.purpose) ? object.purpose : undefined,
-      coinType: isSet(object.coin_type) ? object.coin_type : undefined,
-      account: isSet(object.account) ? object.account : undefined,
-      change: isSet(object.change) ? object.change : undefined,
-      addressIndex: isSet(object.address_index) ? object.address_index : undefined
-    };
-  },
-
-  toAmino(message: BIP44Params): BIP44ParamsSDKType {
-    const obj: any = {};
-    message.purpose !== undefined && (obj.purpose = message.purpose);
-    message.coinType !== undefined && (obj.coin_type = message.coinType);
-    message.account !== undefined && (obj.account = message.account);
-    message.change !== undefined && (obj.change = message.change);
-    message.addressIndex !== undefined && (obj.address_index = message.addressIndex);
-    return obj;
   }
 
 };

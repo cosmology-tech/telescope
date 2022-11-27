@@ -172,24 +172,6 @@ export const EventCreateSale = {
     message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
-  },
-
-  fromAmino(object: EventCreateSaleSDKType): EventCreateSale {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
-      tokenOut: isSet(object.token_out) ? Coin.fromAmino(object.token_out) : undefined
-    };
-  },
-
-  toAmino(message: EventCreateSale): EventCreateSaleSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
-    message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined);
-    return obj;
   }
 
 };
@@ -282,22 +264,6 @@ export const EventSubscribe = {
   },
 
   toSDK(message: EventSubscribe): EventSubscribeSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: EventSubscribeSDKType): EventSubscribe {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: EventSubscribe): EventSubscribeSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.saleId !== undefined && (obj.sale_id = message.saleId);
@@ -400,22 +366,6 @@ export const EventWithdraw = {
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
-  },
-
-  fromAmino(object: EventWithdrawSDKType): EventWithdraw {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: EventWithdraw): EventWithdrawSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
   }
 
 };
@@ -513,22 +463,6 @@ export const EventExit = {
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     message.purchased !== undefined && (obj.purchased = message.purchased);
     return obj;
-  },
-
-  fromAmino(object: EventExitSDKType): EventExit {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      purchased: isSet(object.purchased) ? object.purchased : undefined
-    };
-  },
-
-  toAmino(message: EventExit): EventExitSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.purchased !== undefined && (obj.purchased = message.purchased);
-    return obj;
   }
 
 };
@@ -608,20 +542,6 @@ export const EventFinalizeSale = {
   },
 
   toSDK(message: EventFinalizeSale): EventFinalizeSaleSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.income !== undefined && (obj.income = message.income);
-    return obj;
-  },
-
-  fromAmino(object: EventFinalizeSaleSDKType): EventFinalizeSale {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      income: isSet(object.income) ? object.income : undefined
-    };
-  },
-
-  toAmino(message: EventFinalizeSale): EventFinalizeSaleSDKType {
     const obj: any = {};
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     message.income !== undefined && (obj.income = message.income);

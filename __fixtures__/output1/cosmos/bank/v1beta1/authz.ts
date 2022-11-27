@@ -100,24 +100,6 @@ export const SendAuthorization = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: SendAuthorizationSDKType): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: SendAuthorization): SendAuthorizationSDKType {
-    const obj: any = {};
-
-    if (message.spendLimit) {
-      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.spend_limit = [];
-    }
-
-    return obj;
   }
 
 };

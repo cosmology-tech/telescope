@@ -237,20 +237,6 @@ export const MsgCreateDenom = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.subdenom !== undefined && (obj.subdenom = message.subdenom);
     return obj;
-  },
-
-  fromAmino(object: MsgCreateDenomSDKType): MsgCreateDenom {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      subdenom: isSet(object.subdenom) ? object.subdenom : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateDenom): MsgCreateDenomSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.subdenom !== undefined && (obj.subdenom = message.subdenom);
-    return obj;
   }
 
 };
@@ -317,18 +303,6 @@ export const MsgCreateDenomResponse = {
   },
 
   toSDK(message: MsgCreateDenomResponse): MsgCreateDenomResponseSDKType {
-    const obj: any = {};
-    message.newTokenDenom !== undefined && (obj.new_token_denom = message.newTokenDenom);
-    return obj;
-  },
-
-  fromAmino(object: MsgCreateDenomResponseSDKType): MsgCreateDenomResponse {
-    return {
-      newTokenDenom: isSet(object.new_token_denom) ? object.new_token_denom : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseSDKType {
     const obj: any = {};
     message.newTokenDenom !== undefined && (obj.new_token_denom = message.newTokenDenom);
     return obj;
@@ -415,20 +389,6 @@ export const MsgMint = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgMintSDKType): MsgMint {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      amount: isSet(object.amount) ? Coin.fromAmino(object.amount) : undefined
-    };
-  },
-
-  toAmino(message: MsgMint): MsgMintSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined);
-    return obj;
   }
 
 };
@@ -479,15 +439,6 @@ export const MsgMintResponse = {
   },
 
   toSDK(_: MsgMintResponse): MsgMintResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgMintResponseSDKType): MsgMintResponse {
-    return {};
-  },
-
-  toAmino(_: MsgMintResponse): MsgMintResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -573,20 +524,6 @@ export const MsgBurn = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgBurnSDKType): MsgBurn {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      amount: isSet(object.amount) ? Coin.fromAmino(object.amount) : undefined
-    };
-  },
-
-  toAmino(message: MsgBurn): MsgBurnSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined);
-    return obj;
   }
 
 };
@@ -637,15 +574,6 @@ export const MsgBurnResponse = {
   },
 
   toSDK(_: MsgBurnResponse): MsgBurnResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgBurnResponseSDKType): MsgBurnResponse {
-    return {};
-  },
-
-  toAmino(_: MsgBurnResponse): MsgBurnResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -745,22 +673,6 @@ export const MsgChangeAdmin = {
     message.denom !== undefined && (obj.denom = message.denom);
     message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
     return obj;
-  },
-
-  fromAmino(object: MsgChangeAdminSDKType): MsgChangeAdmin {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
-    };
-  },
-
-  toAmino(message: MsgChangeAdmin): MsgChangeAdminSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
-    return obj;
   }
 
 };
@@ -811,15 +723,6 @@ export const MsgChangeAdminResponse = {
   },
 
   toSDK(_: MsgChangeAdminResponse): MsgChangeAdminResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChangeAdminResponseSDKType): MsgChangeAdminResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -905,20 +808,6 @@ export const MsgSetDenomMetadata = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgSetDenomMetadataSDKType): MsgSetDenomMetadata {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      metadata: isSet(object.metadata) ? Metadata.fromAmino(object.metadata) : undefined
-    };
-  },
-
-  toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined);
-    return obj;
   }
 
 };
@@ -969,15 +858,6 @@ export const MsgSetDenomMetadataResponse = {
   },
 
   toSDK(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSetDenomMetadataResponseSDKType): MsgSetDenomMetadataResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseSDKType {
     const obj: any = {};
     return obj;
   }

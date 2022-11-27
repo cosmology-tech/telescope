@@ -80,15 +80,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -146,18 +137,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -201,15 +180,6 @@ export const QueryInflationRequest = {
   fromPartial(_: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
-  },
-
-  fromAmino(_: QueryInflationRequestSDKType): QueryInflationRequest {
-    return {};
-  },
-
-  toAmino(_: QueryInflationRequest): QueryInflationRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -267,18 +237,6 @@ export const QueryInflationResponse = {
     const message = createBaseQueryInflationResponse();
     message.inflation = object.inflation ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryInflationResponseSDKType): QueryInflationResponse {
-    return {
-      inflation: isSet(object.inflation) ? object.inflation : undefined
-    };
-  },
-
-  toAmino(message: QueryInflationResponse): QueryInflationResponseSDKType {
-    const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
-    return obj;
   }
 
 };
@@ -322,15 +280,6 @@ export const QueryAnnualProvisionsRequest = {
   fromPartial(_: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
-  },
-
-  fromAmino(_: QueryAnnualProvisionsRequestSDKType): QueryAnnualProvisionsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -388,18 +337,6 @@ export const QueryAnnualProvisionsResponse = {
     const message = createBaseQueryAnnualProvisionsResponse();
     message.annualProvisions = object.annualProvisions ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryAnnualProvisionsResponseSDKType): QueryAnnualProvisionsResponse {
-    return {
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
-    };
-  },
-
-  toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseSDKType {
-    const obj: any = {};
-    message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
-    return obj;
   }
 
 };

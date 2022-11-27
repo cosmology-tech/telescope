@@ -121,20 +121,6 @@ export const App = {
     message.protocol !== undefined && (obj.protocol = message.protocol);
     message.software !== undefined && (obj.software = message.software);
     return obj;
-  },
-
-  fromAmino(object: AppSDKType): App {
-    return {
-      protocol: isSet(object.protocol) ? object.protocol : undefined,
-      software: isSet(object.software) ? object.software : undefined
-    };
-  },
-
-  toAmino(message: App): AppSDKType {
-    const obj: any = {};
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.software !== undefined && (obj.software = message.software);
-    return obj;
   }
 
 };
@@ -214,20 +200,6 @@ export const Consensus = {
   },
 
   toSDK(message: Consensus): ConsensusSDKType {
-    const obj: any = {};
-    message.block !== undefined && (obj.block = message.block);
-    message.app !== undefined && (obj.app = message.app);
-    return obj;
-  },
-
-  fromAmino(object: ConsensusSDKType): Consensus {
-    return {
-      block: isSet(object.block) ? object.block : undefined,
-      app: isSet(object.app) ? object.app : undefined
-    };
-  },
-
-  toAmino(message: Consensus): ConsensusSDKType {
     const obj: any = {};
     message.block !== undefined && (obj.block = message.block);
     message.app !== undefined && (obj.app = message.app);

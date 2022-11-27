@@ -589,20 +589,6 @@ export const ManagedService = {
     message.serviceName = object.serviceName ?? "";
     message.producerProjectId = object.producerProjectId ?? "";
     return message;
-  },
-
-  fromAmino(object: ManagedServiceSDKType): ManagedService {
-    return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined
-    };
-  },
-
-  toAmino(message: ManagedService): ManagedServiceSDKType {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
-    return obj;
   }
 
 };
@@ -707,35 +693,6 @@ export const OperationMetadata = {
     message.progressPercentage = object.progressPercentage ?? 0;
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Timestamp.fromPartial(object.startTime) : undefined;
     return message;
-  },
-
-  fromAmino(object: OperationMetadataSDKType): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
-      progressPercentage: isSet(object.progress_percentage) ? object.progress_percentage : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined
-    };
-  },
-
-  toAmino(message: OperationMetadata): OperationMetadataSDKType {
-    const obj: any = {};
-
-    if (message.resourceNames) {
-      obj.resource_names = message.resourceNames.map(e => e);
-    } else {
-      obj.resource_names = [];
-    }
-
-    if (message.steps) {
-      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toAmino(e) : undefined);
-    } else {
-      obj.steps = [];
-    }
-
-    message.progressPercentage !== undefined && (obj.progress_percentage = message.progressPercentage);
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
-    return obj;
   }
 
 };
@@ -805,20 +762,6 @@ export const OperationMetadata_Step = {
     message.description = object.description ?? "";
     message.status = object.status ?? 0;
     return message;
-  },
-
-  fromAmino(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
-    return {
-      description: isSet(object.description) ? object.description : undefined,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
-    };
-  },
-
-  toAmino(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
-    return obj;
   }
 
 };
@@ -900,22 +843,6 @@ export const Diagnostic = {
     message.kind = object.kind ?? 0;
     message.message = object.message ?? "";
     return message;
-  },
-
-  fromAmino(object: DiagnosticSDKType): Diagnostic {
-    return {
-      location: isSet(object.location) ? object.location : undefined,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
-      message: isSet(object.message) ? object.message : undefined
-    };
-  },
-
-  toAmino(message: Diagnostic): DiagnosticSDKType {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
   }
 
 };
@@ -991,26 +918,6 @@ export const ConfigSource = {
     message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ConfigSourceSDKType): ConfigSource {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ConfigSource): ConfigSourceSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-
-    if (message.files) {
-      obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
-    } else {
-      obj.files = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1092,22 +999,6 @@ export const ConfigFile = {
     message.fileContents = object.fileContents ?? new Uint8Array();
     message.fileType = object.fileType ?? 0;
     return message;
-  },
-
-  fromAmino(object: ConfigFileSDKType): ConfigFile {
-    return {
-      filePath: isSet(object.file_path) ? object.file_path : undefined,
-      fileContents: isSet(object.file_contents) ? object.file_contents : undefined,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
-    };
-  },
-
-  toAmino(message: ConfigFile): ConfigFileSDKType {
-    const obj: any = {};
-    message.filePath !== undefined && (obj.file_path = message.filePath);
-    message.fileContents !== undefined && (obj.file_contents = message.fileContents);
-    message.fileType !== undefined && (obj.file_type = configFile_FileTypeToJSON(message.fileType));
-    return obj;
   }
 
 };
@@ -1165,18 +1056,6 @@ export const ConfigRef = {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
     return message;
-  },
-
-  fromAmino(object: ConfigRefSDKType): ConfigRef {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: ConfigRef): ConfigRefSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -1240,24 +1119,6 @@ export const ChangeReport = {
     const message = createBaseChangeReport();
     message.configChanges = object.configChanges?.map(e => ConfigChange.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ChangeReportSDKType): ChangeReport {
-    return {
-      configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ChangeReport): ChangeReportSDKType {
-    const obj: any = {};
-
-    if (message.configChanges) {
-      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toAmino(e) : undefined);
-    } else {
-      obj.config_changes = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1387,30 +1248,6 @@ export const Rollout = {
     message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";
     return message;
-  },
-
-  fromAmino(object: RolloutSDKType): Rollout {
-    return {
-      rolloutId: isSet(object.rollout_id) ? object.rollout_id : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromAmino(object.create_time) : undefined,
-      createdBy: isSet(object.created_by) ? object.created_by : undefined,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
-      trafficPercentStrategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
-      deleteServiceStrategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
-      serviceName: isSet(object.service_name) ? object.service_name : undefined
-    };
-  },
-
-  toAmino(message: Rollout): RolloutSDKType {
-    const obj: any = {};
-    message.rolloutId !== undefined && (obj.rollout_id = message.rolloutId);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined);
-    message.createdBy !== undefined && (obj.created_by = message.createdBy);
-    message.status !== undefined && (obj.status = rollout_RolloutStatusToJSON(message.status));
-    message.trafficPercentStrategy !== undefined && (obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined);
-    message.deleteServiceStrategy !== undefined && (obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined);
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    return obj;
   }
 
 };
@@ -1480,20 +1317,6 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromAmino(object: Rollout_TrafficPercentStrategy_PercentagesEntrySDKType): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -1578,30 +1401,6 @@ export const Rollout_TrafficPercentStrategy = {
       return acc;
     }, {});
     return message;
-  },
-
-  fromAmino(object: Rollout_TrafficPercentStrategySDKType): Rollout_TrafficPercentStrategy {
-    return {
-      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
-        [key: string]: double;
-      }>((acc, [key, value]) => {
-        acc[key] = double.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toAmino(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategySDKType {
-    const obj: any = {};
-    obj.percentages = {};
-
-    if (message.percentages) {
-      Object.entries(message.percentages).forEach(([k, v]) => {
-        obj.percentages[k] = double.toAmino(v);
-      });
-    }
-
-    return obj;
   }
 
 };
@@ -1645,15 +1444,6 @@ export const Rollout_DeleteServiceStrategy = {
   fromPartial(_: DeepPartial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
-  },
-
-  fromAmino(_: Rollout_DeleteServiceStrategySDKType): Rollout_DeleteServiceStrategy {
-    return {};
-  },
-
-  toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategySDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

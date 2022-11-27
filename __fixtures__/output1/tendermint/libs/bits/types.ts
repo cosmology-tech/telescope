@@ -113,26 +113,6 @@ export const BitArray = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: BitArraySDKType): BitArray {
-    return {
-      bits: isSet(object.bits) ? object.bits : undefined,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: BitArray): BitArraySDKType {
-    const obj: any = {};
-    message.bits !== undefined && (obj.bits = message.bits);
-
-    if (message.elems) {
-      obj.elems = message.elems.map(e => e);
-    } else {
-      obj.elems = [];
-    }
-
-    return obj;
   }
 
 };

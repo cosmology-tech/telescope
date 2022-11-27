@@ -607,24 +607,6 @@ export const ClientState = {
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? ConsensusState.toSDK(message.consensusState) : undefined);
     message.allowUpdateAfterProposal !== undefined && (obj.allow_update_after_proposal = message.allowUpdateAfterProposal);
     return obj;
-  },
-
-  fromAmino(object: ClientStateSDKType): ClientState {
-    return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      isFrozen: isSet(object.is_frozen) ? object.is_frozen : undefined,
-      consensusState: isSet(object.consensus_state) ? ConsensusState.fromAmino(object.consensus_state) : undefined,
-      allowUpdateAfterProposal: isSet(object.allow_update_after_proposal) ? object.allow_update_after_proposal : undefined
-    };
-  },
-
-  toAmino(message: ClientState): ClientStateSDKType {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.isFrozen !== undefined && (obj.is_frozen = message.isFrozen);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined);
-    message.allowUpdateAfterProposal !== undefined && (obj.allow_update_after_proposal = message.allowUpdateAfterProposal);
-    return obj;
   }
 
 };
@@ -719,22 +701,6 @@ export const ConsensusState = {
   toSDK(message: ConsensusState): ConsensusStateSDKType {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    return obj;
-  },
-
-  fromAmino(object: ConsensusStateSDKType): ConsensusState {
-    return {
-      publicKey: isSet(object.public_key) ? Any.fromAmino(object.public_key) : undefined,
-      diversifier: isSet(object.diversifier) ? object.diversifier : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
-    };
-  },
-
-  toAmino(message: ConsensusState): ConsensusStateSDKType {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined);
     message.diversifier !== undefined && (obj.diversifier = message.diversifier);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     return obj;
@@ -863,26 +829,6 @@ export const Header = {
     message.newPublicKey !== undefined && (obj.new_public_key = message.newPublicKey ? Any.toSDK(message.newPublicKey) : undefined);
     message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
     return obj;
-  },
-
-  fromAmino(object: HeaderSDKType): Header {
-    return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
-      signature: isSet(object.signature) ? object.signature : undefined,
-      newPublicKey: isSet(object.new_public_key) ? Any.fromAmino(object.new_public_key) : undefined,
-      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : undefined
-    };
-  },
-
-  toAmino(message: Header): HeaderSDKType {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    message.signature !== undefined && (obj.signature = message.signature);
-    message.newPublicKey !== undefined && (obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined);
-    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
-    return obj;
   }
 
 };
@@ -993,24 +939,6 @@ export const Misbehaviour = {
     message.sequence !== undefined && (obj.sequence = message.sequence);
     message.signatureOne !== undefined && (obj.signature_one = message.signatureOne ? SignatureAndData.toSDK(message.signatureOne) : undefined);
     message.signatureTwo !== undefined && (obj.signature_two = message.signatureTwo ? SignatureAndData.toSDK(message.signatureTwo) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MisbehaviourSDKType): Misbehaviour {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      signatureOne: isSet(object.signature_one) ? SignatureAndData.fromAmino(object.signature_one) : undefined,
-      signatureTwo: isSet(object.signature_two) ? SignatureAndData.fromAmino(object.signature_two) : undefined
-    };
-  },
-
-  toAmino(message: Misbehaviour): MisbehaviourSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.signatureOne !== undefined && (obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined);
-    message.signatureTwo !== undefined && (obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined);
     return obj;
   }
 
@@ -1123,24 +1051,6 @@ export const SignatureAndData = {
     message.data !== undefined && (obj.data = message.data);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     return obj;
-  },
-
-  fromAmino(object: SignatureAndDataSDKType): SignatureAndData {
-    return {
-      signature: isSet(object.signature) ? object.signature : undefined,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
-      data: isSet(object.data) ? object.data : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
-    };
-  },
-
-  toAmino(message: SignatureAndData): SignatureAndDataSDKType {
-    const obj: any = {};
-    message.signature !== undefined && (obj.signature = message.signature);
-    message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = message.data);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    return obj;
   }
 
 };
@@ -1220,20 +1130,6 @@ export const TimestampedSignatureData = {
   },
 
   toSDK(message: TimestampedSignatureData): TimestampedSignatureDataSDKType {
-    const obj: any = {};
-    message.signatureData !== undefined && (obj.signature_data = message.signatureData);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    return obj;
-  },
-
-  fromAmino(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
-    return {
-      signatureData: isSet(object.signature_data) ? object.signature_data : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
-    };
-  },
-
-  toAmino(message: TimestampedSignatureData): TimestampedSignatureDataSDKType {
     const obj: any = {};
     message.signatureData !== undefined && (obj.signature_data = message.signatureData);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
@@ -1363,26 +1259,6 @@ export const SignBytes = {
     message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
     message.data !== undefined && (obj.data = message.data);
     return obj;
-  },
-
-  fromAmino(object: SignBytesSDKType): SignBytes {
-    return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
-      diversifier: isSet(object.diversifier) ? object.diversifier : undefined,
-      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: SignBytes): SignBytesSDKType {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -1464,20 +1340,6 @@ export const HeaderData = {
   toSDK(message: HeaderData): HeaderDataSDKType {
     const obj: any = {};
     message.newPubKey !== undefined && (obj.new_pub_key = message.newPubKey ? Any.toSDK(message.newPubKey) : undefined);
-    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
-    return obj;
-  },
-
-  fromAmino(object: HeaderDataSDKType): HeaderData {
-    return {
-      newPubKey: isSet(object.new_pub_key) ? Any.fromAmino(object.new_pub_key) : undefined,
-      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : undefined
-    };
-  },
-
-  toAmino(message: HeaderData): HeaderDataSDKType {
-    const obj: any = {};
-    message.newPubKey !== undefined && (obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined);
     message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
     return obj;
   }
@@ -1563,20 +1425,6 @@ export const ClientStateData = {
     message.path !== undefined && (obj.path = message.path);
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ClientStateDataSDKType): ClientStateData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined
-    };
-  },
-
-  toAmino(message: ClientStateData): ClientStateDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
-    return obj;
   }
 
 };
@@ -1659,20 +1507,6 @@ export const ConsensusStateData = {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ConsensusStateDataSDKType): ConsensusStateData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined
-    };
-  },
-
-  toAmino(message: ConsensusStateData): ConsensusStateDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
     return obj;
   }
 
@@ -1757,20 +1591,6 @@ export const ConnectionStateData = {
     message.path !== undefined && (obj.path = message.path);
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ConnectionStateDataSDKType): ConnectionStateData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      connection: isSet(object.connection) ? ConnectionEnd.fromAmino(object.connection) : undefined
-    };
-  },
-
-  toAmino(message: ConnectionStateData): ConnectionStateDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined);
-    return obj;
   }
 
 };
@@ -1854,20 +1674,6 @@ export const ChannelStateData = {
     message.path !== undefined && (obj.path = message.path);
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ChannelStateDataSDKType): ChannelStateData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      channel: isSet(object.channel) ? Channel.fromAmino(object.channel) : undefined
-    };
-  },
-
-  toAmino(message: ChannelStateData): ChannelStateDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined);
-    return obj;
   }
 
 };
@@ -1947,20 +1753,6 @@ export const PacketCommitmentData = {
   },
 
   toSDK(message: PacketCommitmentData): PacketCommitmentDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.commitment !== undefined && (obj.commitment = message.commitment);
-    return obj;
-  },
-
-  fromAmino(object: PacketCommitmentDataSDKType): PacketCommitmentData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      commitment: isSet(object.commitment) ? object.commitment : undefined
-    };
-  },
-
-  toAmino(message: PacketCommitmentData): PacketCommitmentDataSDKType {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     message.commitment !== undefined && (obj.commitment = message.commitment);
@@ -2048,20 +1840,6 @@ export const PacketAcknowledgementData = {
     message.path !== undefined && (obj.path = message.path);
     message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
     return obj;
-  },
-
-  fromAmino(object: PacketAcknowledgementDataSDKType): PacketAcknowledgementData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined
-    };
-  },
-
-  toAmino(message: PacketAcknowledgementData): PacketAcknowledgementDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
-    return obj;
   }
 
 };
@@ -2128,18 +1906,6 @@ export const PacketReceiptAbsenceData = {
   },
 
   toSDK(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    return obj;
-  },
-
-  fromAmino(object: PacketReceiptAbsenceDataSDKType): PacketReceiptAbsenceData {
-    return {
-      path: isSet(object.path) ? object.path : undefined
-    };
-  },
-
-  toAmino(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataSDKType {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     return obj;
@@ -2222,20 +1988,6 @@ export const NextSequenceRecvData = {
   },
 
   toSDK(message: NextSequenceRecvData): NextSequenceRecvDataSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.nextSeqRecv !== undefined && (obj.next_seq_recv = message.nextSeqRecv);
-    return obj;
-  },
-
-  fromAmino(object: NextSequenceRecvDataSDKType): NextSequenceRecvData {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      nextSeqRecv: isSet(object.next_seq_recv) ? object.next_seq_recv : undefined
-    };
-  },
-
-  toAmino(message: NextSequenceRecvData): NextSequenceRecvDataSDKType {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path);
     message.nextSeqRecv !== undefined && (obj.next_seq_recv = message.nextSeqRecv);

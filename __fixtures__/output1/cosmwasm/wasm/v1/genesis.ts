@@ -251,47 +251,6 @@ export const GenesisState = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromAmino(e)) : [],
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromAmino(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromAmino(e)) : [],
-      genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-
-    if (message.codes) {
-      obj.codes = message.codes.map(e => e ? Code.toAmino(e) : undefined);
-    } else {
-      obj.codes = [];
-    }
-
-    if (message.contracts) {
-      obj.contracts = message.contracts.map(e => e ? Contract.toAmino(e) : undefined);
-    } else {
-      obj.contracts = [];
-    }
-
-    if (message.sequences) {
-      obj.sequences = message.sequences.map(e => e ? Sequence.toAmino(e) : undefined);
-    } else {
-      obj.sequences = [];
-    }
-
-    if (message.genMsgs) {
-      obj.gen_msgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toAmino(e) : undefined);
-    } else {
-      obj.gen_msgs = [];
-    }
-
-    return obj;
   }
 
 };
@@ -388,22 +347,6 @@ export const GenesisState_GenMsgs = {
     message.storeCode !== undefined && (obj.store_code = message.storeCode ? MsgStoreCode.toSDK(message.storeCode) : undefined);
     message.instantiateContract !== undefined && (obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toSDK(message.instantiateContract) : undefined);
     message.executeContract !== undefined && (obj.execute_contract = message.executeContract ? MsgExecuteContract.toSDK(message.executeContract) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
-    return {
-      storeCode: isSet(object.store_code) ? MsgStoreCode.fromAmino(object.store_code) : undefined,
-      instantiateContract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromAmino(object.instantiate_contract) : undefined,
-      executeContract: isSet(object.execute_contract) ? MsgExecuteContract.fromAmino(object.execute_contract) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState_GenMsgs): GenesisState_GenMsgsSDKType {
-    const obj: any = {};
-    message.storeCode !== undefined && (obj.store_code = message.storeCode ? MsgStoreCode.toAmino(message.storeCode) : undefined);
-    message.instantiateContract !== undefined && (obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract) : undefined);
-    message.executeContract !== undefined && (obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract) : undefined);
     return obj;
   }
 
@@ -516,24 +459,6 @@ export const Code = {
     message.codeBytes !== undefined && (obj.code_bytes = message.codeBytes);
     message.pinned !== undefined && (obj.pinned = message.pinned);
     return obj;
-  },
-
-  fromAmino(object: CodeSDKType): Code {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      codeInfo: isSet(object.code_info) ? CodeInfo.fromAmino(object.code_info) : undefined,
-      codeBytes: isSet(object.code_bytes) ? object.code_bytes : undefined,
-      pinned: isSet(object.pinned) ? object.pinned : undefined
-    };
-  },
-
-  toAmino(message: Code): CodeSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined);
-    message.codeBytes !== undefined && (obj.code_bytes = message.codeBytes);
-    message.pinned !== undefined && (obj.pinned = message.pinned);
-    return obj;
   }
 
 };
@@ -643,28 +568,6 @@ export const Contract = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ContractSDKType): Contract {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      contractInfo: isSet(object.contract_info) ? ContractInfo.fromAmino(object.contract_info) : undefined,
-      contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Contract): ContractSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined);
-
-    if (message.contractState) {
-      obj.contract_state = message.contractState.map(e => e ? Model.toAmino(e) : undefined);
-    } else {
-      obj.contract_state = [];
-    }
-
-    return obj;
   }
 
 };
@@ -744,20 +647,6 @@ export const Sequence = {
   },
 
   toSDK(message: Sequence): SequenceSDKType {
-    const obj: any = {};
-    message.idKey !== undefined && (obj.id_key = message.idKey);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: SequenceSDKType): Sequence {
-    return {
-      idKey: isSet(object.id_key) ? object.id_key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Sequence): SequenceSDKType {
     const obj: any = {};
     message.idKey !== undefined && (obj.id_key = message.idKey);
     message.value !== undefined && (obj.value = message.value);

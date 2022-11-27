@@ -147,26 +147,6 @@ export const CommitInfo = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: CommitInfoSDKType): CommitInfo {
-    return {
-      version: isSet(object.version) ? object.version : undefined,
-      storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: CommitInfo): CommitInfoSDKType {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-
-    if (message.storeInfos) {
-      obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e) : undefined);
-    } else {
-      obj.store_infos = [];
-    }
-
-    return obj;
   }
 
 };
@@ -250,20 +230,6 @@ export const StoreInfo = {
     message.name !== undefined && (obj.name = message.name);
     message.commitId !== undefined && (obj.commit_id = message.commitId ? CommitID.toSDK(message.commitId) : undefined);
     return obj;
-  },
-
-  fromAmino(object: StoreInfoSDKType): StoreInfo {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      commitId: isSet(object.commit_id) ? CommitID.fromAmino(object.commit_id) : undefined
-    };
-  },
-
-  toAmino(message: StoreInfo): StoreInfoSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.commitId !== undefined && (obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined);
-    return obj;
   }
 
 };
@@ -343,20 +309,6 @@ export const CommitID = {
   },
 
   toSDK(message: CommitID): CommitIDSDKType {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.hash !== undefined && (obj.hash = message.hash);
-    return obj;
-  },
-
-  fromAmino(object: CommitIDSDKType): CommitID {
-    return {
-      version: isSet(object.version) ? object.version : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined
-    };
-  },
-
-  toAmino(message: CommitID): CommitIDSDKType {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
     message.hash !== undefined && (obj.hash = message.hash);

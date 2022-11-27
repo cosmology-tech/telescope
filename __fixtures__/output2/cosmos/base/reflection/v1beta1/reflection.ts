@@ -69,15 +69,6 @@ export const ListAllInterfacesRequest = {
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
-  },
-
-  fromAmino(_: ListAllInterfacesRequestSDKType): ListAllInterfacesRequest {
-    return {};
-  },
-
-  toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -141,24 +132,6 @@ export const ListAllInterfacesResponse = {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: ListAllInterfacesResponseSDKType): ListAllInterfacesResponse {
-    return {
-      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseSDKType {
-    const obj: any = {};
-
-    if (message.interfaceNames) {
-      obj.interface_names = message.interfaceNames.map(e => e);
-    } else {
-      obj.interface_names = [];
-    }
-
-    return obj;
   }
 
 };
@@ -216,18 +189,6 @@ export const ListImplementationsRequest = {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
-  },
-
-  fromAmino(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
-    return {
-      interfaceName: isSet(object.interface_name) ? object.interface_name : undefined
-    };
-  },
-
-  toAmino(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
-    const obj: any = {};
-    message.interfaceName !== undefined && (obj.interface_name = message.interfaceName);
-    return obj;
   }
 
 };
@@ -291,24 +252,6 @@ export const ListImplementationsResponse = {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: ListImplementationsResponseSDKType): ListImplementationsResponse {
-    return {
-      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ListImplementationsResponse): ListImplementationsResponseSDKType {
-    const obj: any = {};
-
-    if (message.implementationMessageNames) {
-      obj.implementation_message_names = message.implementationMessageNames.map(e => e);
-    } else {
-      obj.implementation_message_names = [];
-    }
-
-    return obj;
   }
 
 };

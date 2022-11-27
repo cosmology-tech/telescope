@@ -97,22 +97,6 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.reductionStartedEpoch = object.reductionStartedEpoch !== undefined && object.reductionStartedEpoch !== null ? Long.fromValue(object.reductionStartedEpoch) : Long.ZERO;
     return message;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      minter: isSet(object.minter) ? Minter.fromAmino(object.minter) : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      reductionStartedEpoch: isSet(object.reduction_started_epoch) ? object.reduction_started_epoch : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.minter !== undefined && (obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    message.reductionStartedEpoch !== undefined && (obj.reduction_started_epoch = message.reductionStartedEpoch);
-    return obj;
   }
 
 };

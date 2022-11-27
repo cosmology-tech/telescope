@@ -103,20 +103,6 @@ export const FeeToken = {
     message.denom !== undefined && (obj.denom = message.denom);
     message.poolID !== undefined && (obj.poolID = message.poolID);
     return obj;
-  },
-
-  fromAmino(object: FeeTokenSDKType): FeeToken {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      poolID: isSet(object.poolID) ? object.poolID : undefined
-    };
-  },
-
-  toAmino(message: FeeToken): FeeTokenSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = message.poolID);
-    return obj;
   }
 
 };

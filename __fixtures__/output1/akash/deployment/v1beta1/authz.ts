@@ -92,18 +92,6 @@ export const DepositDeploymentAuthorization = {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);
     return obj;
-  },
-
-  fromAmino(object: DepositDeploymentAuthorizationSDKType): DepositDeploymentAuthorization {
-    return {
-      spendLimit: isSet(object.spend_limit) ? Coin.fromAmino(object.spend_limit) : undefined
-    };
-  },
-
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationSDKType {
-    const obj: any = {};
-    message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined);
-    return obj;
   }
 
 };

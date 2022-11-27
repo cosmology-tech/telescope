@@ -183,28 +183,6 @@ export const TableDescriptor = {
     message.index = object.index?.map(e => SecondaryIndexDescriptor.fromPartial(e)) || [];
     message.id = object.id ?? 0;
     return message;
-  },
-
-  fromAmino(object: TableDescriptorSDKType): TableDescriptor {
-    return {
-      primaryKey: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromAmino(e)) : [],
-      id: isSet(object.id) ? object.id : undefined
-    };
-  },
-
-  toAmino(message: TableDescriptor): TableDescriptorSDKType {
-    const obj: any = {};
-    message.primaryKey !== undefined && (obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toAmino(message.primaryKey) : undefined);
-
-    if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.index = [];
-    }
-
-    message.id !== undefined && (obj.id = message.id);
-    return obj;
   }
 
 };
@@ -274,20 +252,6 @@ export const PrimaryKeyDescriptor = {
     message.fields = object.fields ?? "";
     message.autoIncrement = object.autoIncrement ?? false;
     return message;
-  },
-
-  fromAmino(object: PrimaryKeyDescriptorSDKType): PrimaryKeyDescriptor {
-    return {
-      fields: isSet(object.fields) ? object.fields : undefined,
-      autoIncrement: isSet(object.auto_increment) ? object.auto_increment : undefined
-    };
-  },
-
-  toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorSDKType {
-    const obj: any = {};
-    message.fields !== undefined && (obj.fields = message.fields);
-    message.autoIncrement !== undefined && (obj.auto_increment = message.autoIncrement);
-    return obj;
   }
 
 };
@@ -369,22 +333,6 @@ export const SecondaryIndexDescriptor = {
     message.id = object.id ?? 0;
     message.unique = object.unique ?? false;
     return message;
-  },
-
-  fromAmino(object: SecondaryIndexDescriptorSDKType): SecondaryIndexDescriptor {
-    return {
-      fields: isSet(object.fields) ? object.fields : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      unique: isSet(object.unique) ? object.unique : undefined
-    };
-  },
-
-  toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorSDKType {
-    const obj: any = {};
-    message.fields !== undefined && (obj.fields = message.fields);
-    message.id !== undefined && (obj.id = message.id);
-    message.unique !== undefined && (obj.unique = message.unique);
-    return obj;
   }
 
 };
@@ -442,18 +390,6 @@ export const SingletonDescriptor = {
     const message = createBaseSingletonDescriptor();
     message.id = object.id ?? 0;
     return message;
-  },
-
-  fromAmino(object: SingletonDescriptorSDKType): SingletonDescriptor {
-    return {
-      id: isSet(object.id) ? object.id : undefined
-    };
-  },
-
-  toAmino(message: SingletonDescriptor): SingletonDescriptorSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    return obj;
   }
 
 };

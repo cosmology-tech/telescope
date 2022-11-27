@@ -53,15 +53,6 @@ export const QueryConfigRequest = {
   fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
-  },
-
-  fromAmino(_: QueryConfigRequestSDKType): QueryConfigRequest {
-    return {};
-  },
-
-  toAmino(_: QueryConfigRequest): QueryConfigRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -119,18 +110,6 @@ export const QueryConfigResponse = {
     const message = createBaseQueryConfigResponse();
     message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryConfigResponseSDKType): QueryConfigResponse {
-    return {
-      config: isSet(object.config) ? Config.fromAmino(object.config) : undefined
-    };
-  },
-
-  toAmino(message: QueryConfigResponse): QueryConfigResponseSDKType {
-    const obj: any = {};
-    message.config !== undefined && (obj.config = message.config ? Config.toAmino(message.config) : undefined);
-    return obj;
   }
 
 };

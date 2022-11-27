@@ -210,37 +210,6 @@ export const MsgCreateStableswapPool = {
 
     message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
     return obj;
-  },
-
-  fromAmino(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromAmino(object.pool_params) : undefined,
-      initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
-      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateStableswapPool): MsgCreateStableswapPoolSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined);
-
-    if (message.initialPoolLiquidity) {
-      obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_pool_liquidity = [];
-    }
-
-    if (message.scalingFactors) {
-      obj.scaling_factors = message.scalingFactors.map(e => e);
-    } else {
-      obj.scaling_factors = [];
-    }
-
-    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
-    return obj;
   }
 
 };
@@ -307,18 +276,6 @@ export const MsgCreateStableswapPoolResponse = {
   },
 
   toSDK(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseSDKType {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    return obj;
-  },
-
-  fromAmino(object: MsgCreateStableswapPoolResponseSDKType): MsgCreateStableswapPoolResponse {
-    return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseSDKType {
     const obj: any = {};
     message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
@@ -443,28 +400,6 @@ export const MsgStableSwapAdjustScalingFactors = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: MsgStableSwapAdjustScalingFactorsSDKType): MsgStableSwapAdjustScalingFactors {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-
-    if (message.scalingFactors) {
-      obj.scaling_factors = message.scalingFactors.map(e => e);
-    } else {
-      obj.scaling_factors = [];
-    }
-
-    return obj;
   }
 
 };
@@ -515,15 +450,6 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   },
 
   toSDK(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgStableSwapAdjustScalingFactorsResponseSDKType): MsgStableSwapAdjustScalingFactorsResponse {
-    return {};
-  },
-
-  toAmino(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseSDKType {
     const obj: any = {};
     return obj;
   }

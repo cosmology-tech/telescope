@@ -101,20 +101,6 @@ export const Coin = {
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
     return message;
-  },
-
-  fromAmino(object: CoinSDKType): Coin {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: Coin): CoinSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
   }
 
 };
@@ -184,20 +170,6 @@ export const DecCoin = {
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
     return message;
-  },
-
-  fromAmino(object: DecCoinSDKType): DecCoin {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: DecCoin): DecCoinSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
   }
 
 };
@@ -255,18 +227,6 @@ export const IntProto = {
     const message = createBaseIntProto();
     message.int = object.int ?? "";
     return message;
-  },
-
-  fromAmino(object: IntProtoSDKType): IntProto {
-    return {
-      int: isSet(object.int) ? object.int : undefined
-    };
-  },
-
-  toAmino(message: IntProto): IntProtoSDKType {
-    const obj: any = {};
-    message.int !== undefined && (obj.int = message.int);
-    return obj;
   }
 
 };
@@ -324,18 +284,6 @@ export const DecProto = {
     const message = createBaseDecProto();
     message.dec = object.dec ?? "";
     return message;
-  },
-
-  fromAmino(object: DecProtoSDKType): DecProto {
-    return {
-      dec: isSet(object.dec) ? object.dec : undefined
-    };
-  },
-
-  toAmino(message: DecProto): DecProtoSDKType {
-    const obj: any = {};
-    message.dec !== undefined && (obj.dec = message.dec);
-    return obj;
   }
 
 };

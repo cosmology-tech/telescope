@@ -2951,40 +2951,6 @@ export const LogBucket = {
 
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     return obj;
-  },
-
-  fromAmino(object: LogBucketSDKType): LogBucket {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromAmino(object.update_time) : undefined,
-      retentionDays: isSet(object.retention_days) ? object.retention_days : undefined,
-      locked: isSet(object.locked) ? object.locked : undefined,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
-      restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromAmino(object.cmek_settings) : undefined
-    };
-  },
-
-  toAmino(message: LogBucket): LogBucketSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined);
-    message.retentionDays !== undefined && (obj.retention_days = message.retentionDays);
-    message.locked !== undefined && (obj.locked = message.locked);
-    message.lifecycleState !== undefined && (obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState));
-
-    if (message.restrictedFields) {
-      obj.restricted_fields = message.restrictedFields.map(e => e);
-    } else {
-      obj.restricted_fields = [];
-    }
-
-    message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined);
-    return obj;
   }
 
 };
@@ -3108,26 +3074,6 @@ export const LogView = {
     message.description !== undefined && (obj.description = message.description);
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
-  },
-
-  fromAmino(object: LogViewSDKType): LogView {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromAmino(object.update_time) : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
-    };
-  },
-
-  toAmino(message: LogView): LogViewSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined);
     message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   }
@@ -3365,46 +3311,6 @@ export const LogSink = {
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
     return obj;
-  },
-
-  fromAmino(object: LogSinkSDKType): LogSink {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      destination: isSet(object.destination) ? object.destination : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      disabled: isSet(object.disabled) ? object.disabled : undefined,
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
-      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined,
-      includeChildren: isSet(object.include_children) ? object.include_children : undefined,
-      bigqueryOptions: isSet(object.bigquery_options) ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromAmino(object.update_time) : undefined
-    };
-  },
-
-  toAmino(message: LogSink): LogSinkSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.destination !== undefined && (obj.destination = message.destination);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.description !== undefined && (obj.description = message.description);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-
-    message.outputVersionFormat !== undefined && (obj.output_version_format = logSink_VersionFormatToJSON(message.outputVersionFormat));
-    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
-    message.includeChildren !== undefined && (obj.include_children = message.includeChildren);
-    message.bigqueryOptions !== undefined && (obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined);
-    return obj;
   }
 
 };
@@ -3484,20 +3390,6 @@ export const BigQueryOptions = {
   },
 
   toSDK(message: BigQueryOptions): BigQueryOptionsSDKType {
-    const obj: any = {};
-    message.usePartitionedTables !== undefined && (obj.use_partitioned_tables = message.usePartitionedTables);
-    message.usesTimestampColumnPartitioning !== undefined && (obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning);
-    return obj;
-  },
-
-  fromAmino(object: BigQueryOptionsSDKType): BigQueryOptions {
-    return {
-      usePartitionedTables: isSet(object.use_partitioned_tables) ? object.use_partitioned_tables : undefined,
-      usesTimestampColumnPartitioning: isSet(object.uses_timestamp_column_partitioning) ? object.uses_timestamp_column_partitioning : undefined
-    };
-  },
-
-  toAmino(message: BigQueryOptions): BigQueryOptionsSDKType {
     const obj: any = {};
     message.usePartitionedTables !== undefined && (obj.use_partitioned_tables = message.usePartitionedTables);
     message.usesTimestampColumnPartitioning !== undefined && (obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning);
@@ -3599,22 +3491,6 @@ export const ListBucketsRequest = {
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
     message.pageSize !== undefined && (obj.page_size = message.pageSize);
     return obj;
-  },
-
-  fromAmino(object: ListBucketsRequestSDKType): ListBucketsRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
-    };
-  },
-
-  toAmino(message: ListBucketsRequest): ListBucketsRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    return obj;
   }
 
 };
@@ -3704,26 +3580,6 @@ export const ListBucketsResponse = {
 
     if (message.buckets) {
       obj.buckets = message.buckets.map(e => e ? LogBucket.toSDK(e) : undefined);
-    } else {
-      obj.buckets = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListBucketsResponseSDKType): ListBucketsResponse {
-    return {
-      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListBucketsResponse): ListBucketsResponseSDKType {
-    const obj: any = {};
-
-    if (message.buckets) {
-      obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e) : undefined);
     } else {
       obj.buckets = [];
     }
@@ -3827,22 +3683,6 @@ export const CreateBucketRequest = {
     message.bucketId !== undefined && (obj.bucket_id = message.bucketId);
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     return obj;
-  },
-
-  fromAmino(object: CreateBucketRequestSDKType): CreateBucketRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      bucketId: isSet(object.bucket_id) ? object.bucket_id : undefined,
-      bucket: isSet(object.bucket) ? LogBucket.fromAmino(object.bucket) : undefined
-    };
-  },
-
-  toAmino(message: CreateBucketRequest): CreateBucketRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.bucketId !== undefined && (obj.bucket_id = message.bucketId);
-    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined);
-    return obj;
   }
 
 };
@@ -3940,22 +3780,6 @@ export const UpdateBucketRequest = {
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-
-  fromAmino(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      bucket: isSet(object.bucket) ? LogBucket.fromAmino(object.bucket) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateBucketRequest): UpdateBucketRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
-    return obj;
   }
 
 };
@@ -4022,18 +3846,6 @@ export const GetBucketRequest = {
   },
 
   toSDK(message: GetBucketRequest): GetBucketRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetBucketRequestSDKType): GetBucketRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetBucketRequest): GetBucketRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4106,18 +3918,6 @@ export const DeleteBucketRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
-  },
-
-  fromAmino(object: DeleteBucketRequestSDKType): DeleteBucketRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: DeleteBucketRequest): DeleteBucketRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -4184,18 +3984,6 @@ export const UndeleteBucketRequest = {
   },
 
   toSDK(message: UndeleteBucketRequest): UndeleteBucketRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: UndeleteBucketRequestSDKType): UndeleteBucketRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4296,22 +4084,6 @@ export const ListViewsRequest = {
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
     message.pageSize !== undefined && (obj.page_size = message.pageSize);
     return obj;
-  },
-
-  fromAmino(object: ListViewsRequestSDKType): ListViewsRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
-    };
-  },
-
-  toAmino(message: ListViewsRequest): ListViewsRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    return obj;
   }
 
 };
@@ -4401,26 +4173,6 @@ export const ListViewsResponse = {
 
     if (message.views) {
       obj.views = message.views.map(e => e ? LogView.toSDK(e) : undefined);
-    } else {
-      obj.views = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListViewsResponseSDKType): ListViewsResponse {
-    return {
-      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListViewsResponse): ListViewsResponseSDKType {
-    const obj: any = {};
-
-    if (message.views) {
-      obj.views = message.views.map(e => e ? LogView.toAmino(e) : undefined);
     } else {
       obj.views = [];
     }
@@ -4524,22 +4276,6 @@ export const CreateViewRequest = {
     message.viewId !== undefined && (obj.view_id = message.viewId);
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     return obj;
-  },
-
-  fromAmino(object: CreateViewRequestSDKType): CreateViewRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      viewId: isSet(object.view_id) ? object.view_id : undefined,
-      view: isSet(object.view) ? LogView.fromAmino(object.view) : undefined
-    };
-  },
-
-  toAmino(message: CreateViewRequest): CreateViewRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.viewId !== undefined && (obj.view_id = message.viewId);
-    message.view !== undefined && (obj.view = message.view ? LogView.toAmino(message.view) : undefined);
-    return obj;
   }
 
 };
@@ -4637,22 +4373,6 @@ export const UpdateViewRequest = {
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-
-  fromAmino(object: UpdateViewRequestSDKType): UpdateViewRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      view: isSet(object.view) ? LogView.fromAmino(object.view) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateViewRequest): UpdateViewRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = message.view ? LogView.toAmino(message.view) : undefined);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
-    return obj;
   }
 
 };
@@ -4722,18 +4442,6 @@ export const GetViewRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
-  },
-
-  fromAmino(object: GetViewRequestSDKType): GetViewRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetViewRequest): GetViewRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -4800,18 +4508,6 @@ export const DeleteViewRequest = {
   },
 
   toSDK(message: DeleteViewRequest): DeleteViewRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: DeleteViewRequestSDKType): DeleteViewRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: DeleteViewRequest): DeleteViewRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4912,22 +4608,6 @@ export const ListSinksRequest = {
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
     message.pageSize !== undefined && (obj.page_size = message.pageSize);
     return obj;
-  },
-
-  fromAmino(object: ListSinksRequestSDKType): ListSinksRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
-    };
-  },
-
-  toAmino(message: ListSinksRequest): ListSinksRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    return obj;
   }
 
 };
@@ -5023,26 +4703,6 @@ export const ListSinksResponse = {
 
     message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
     return obj;
-  },
-
-  fromAmino(object: ListSinksResponseSDKType): ListSinksResponse {
-    return {
-      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListSinksResponse): ListSinksResponseSDKType {
-    const obj: any = {};
-
-    if (message.sinks) {
-      obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e) : undefined);
-    } else {
-      obj.sinks = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
   }
 
 };
@@ -5109,18 +4769,6 @@ export const GetSinkRequest = {
   },
 
   toSDK(message: GetSinkRequest): GetSinkRequestSDKType {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
-    return obj;
-  },
-
-  fromAmino(object: GetSinkRequestSDKType): GetSinkRequest {
-    return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
-    };
-  },
-
-  toAmino(message: GetSinkRequest): GetSinkRequestSDKType {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sink_name = message.sinkName);
     return obj;
@@ -5219,22 +4867,6 @@ export const CreateSinkRequest = {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
-    return obj;
-  },
-
-  fromAmino(object: CreateSinkRequestSDKType): CreateSinkRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      sink: isSet(object.sink) ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined
-    };
-  },
-
-  toAmino(message: CreateSinkRequest): CreateSinkRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined);
     message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
     return obj;
   }
@@ -5348,24 +4980,6 @@ export const UpdateSinkRequest = {
     message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-
-  fromAmino(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
-    return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined,
-      sink: isSet(object.sink) ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateSinkRequest): UpdateSinkRequestSDKType {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
-    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
-    return obj;
   }
 
 };
@@ -5432,18 +5046,6 @@ export const DeleteSinkRequest = {
   },
 
   toSDK(message: DeleteSinkRequest): DeleteSinkRequestSDKType {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
-    return obj;
-  },
-
-  fromAmino(object: DeleteSinkRequestSDKType): DeleteSinkRequest {
-    return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
-    };
-  },
-
-  toAmino(message: DeleteSinkRequest): DeleteSinkRequestSDKType {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sink_name = message.sinkName);
     return obj;
@@ -5586,28 +5188,6 @@ export const LogExclusion = {
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
     return obj;
-  },
-
-  fromAmino(object: LogExclusionSDKType): LogExclusion {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      disabled: isSet(object.disabled) ? object.disabled : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromAmino(object.update_time) : undefined
-    };
-  },
-
-  toAmino(message: LogExclusion): LogExclusionSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined);
-    return obj;
   }
 
 };
@@ -5700,22 +5280,6 @@ export const ListExclusionsRequest = {
   },
 
   toSDK(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    return obj;
-  },
-
-  fromAmino(object: ListExclusionsRequestSDKType): ListExclusionsRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
-    };
-  },
-
-  toAmino(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
@@ -5816,26 +5380,6 @@ export const ListExclusionsResponse = {
 
     message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
     return obj;
-  },
-
-  fromAmino(object: ListExclusionsResponseSDKType): ListExclusionsResponse {
-    return {
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListExclusionsResponse): ListExclusionsResponseSDKType {
-    const obj: any = {};
-
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
   }
 
 };
@@ -5902,18 +5446,6 @@ export const GetExclusionRequest = {
   },
 
   toSDK(message: GetExclusionRequest): GetExclusionRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetExclusionRequestSDKType): GetExclusionRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetExclusionRequest): GetExclusionRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -5999,20 +5531,6 @@ export const CreateExclusionRequest = {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromAmino(object.exclusion) : undefined
-    };
-  },
-
-  toAmino(message: CreateExclusionRequest): CreateExclusionRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined);
     return obj;
   }
 
@@ -6111,22 +5629,6 @@ export const UpdateExclusionRequest = {
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-
-  fromAmino(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromAmino(object.exclusion) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
-    return obj;
   }
 
 };
@@ -6196,18 +5698,6 @@ export const DeleteExclusionRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
-  },
-
-  fromAmino(object: DeleteExclusionRequestSDKType): DeleteExclusionRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -6274,18 +5764,6 @@ export const GetCmekSettingsRequest = {
   },
 
   toSDK(message: GetCmekSettingsRequest): GetCmekSettingsRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetCmekSettingsRequestSDKType): GetCmekSettingsRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -6386,22 +5864,6 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
-  },
-
-  fromAmino(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromAmino(object.cmek_settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
-    return obj;
   }
 
 };
@@ -6499,22 +5961,6 @@ export const CmekSettings = {
     message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
     message.serviceAccountId !== undefined && (obj.service_account_id = message.serviceAccountId);
     return obj;
-  },
-
-  fromAmino(object: CmekSettingsSDKType): CmekSettings {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
-      serviceAccountId: isSet(object.service_account_id) ? object.service_account_id : undefined
-    };
-  },
-
-  toAmino(message: CmekSettings): CmekSettingsSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
-    message.serviceAccountId !== undefined && (obj.service_account_id = message.serviceAccountId);
-    return obj;
   }
 
 };
@@ -6581,18 +6027,6 @@ export const GetSettingsRequest = {
   },
 
   toSDK(message: GetSettingsRequest): GetSettingsRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetSettingsRequestSDKType): GetSettingsRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetSettingsRequest): GetSettingsRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -6692,22 +6126,6 @@ export const UpdateSettingsRequest = {
     message.name !== undefined && (obj.name = message.name);
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      settings: isSet(object.settings) ? Settings.fromAmino(object.settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
-  },
-
-  toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.settings !== undefined && (obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
     return obj;
   }
 
@@ -6834,26 +6252,6 @@ export const Settings = {
     message.storageLocation !== undefined && (obj.storage_location = message.storageLocation);
     message.disableDefaultSink !== undefined && (obj.disable_default_sink = message.disableDefaultSink);
     return obj;
-  },
-
-  fromAmino(object: SettingsSDKType): Settings {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
-      kmsServiceAccountId: isSet(object.kms_service_account_id) ? object.kms_service_account_id : undefined,
-      storageLocation: isSet(object.storage_location) ? object.storage_location : undefined,
-      disableDefaultSink: isSet(object.disable_default_sink) ? object.disable_default_sink : undefined
-    };
-  },
-
-  toAmino(message: Settings): SettingsSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
-    message.kmsServiceAccountId !== undefined && (obj.kms_service_account_id = message.kmsServiceAccountId);
-    message.storageLocation !== undefined && (obj.storage_location = message.storageLocation);
-    message.disableDefaultSink !== undefined && (obj.disable_default_sink = message.disableDefaultSink);
-    return obj;
   }
 
 };
@@ -6946,22 +6344,6 @@ export const CopyLogEntriesRequest = {
   },
 
   toSDK(message: CopyLogEntriesRequest): CopyLogEntriesRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.destination !== undefined && (obj.destination = message.destination);
-    return obj;
-  },
-
-  fromAmino(object: CopyLogEntriesRequestSDKType): CopyLogEntriesRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      destination: isSet(object.destination) ? object.destination : undefined
-    };
-  },
-
-  toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.filter !== undefined && (obj.filter = message.filter);
@@ -7120,30 +6502,6 @@ export const CopyLogEntriesMetadata = {
     message.progress !== undefined && (obj.progress = message.progress);
     message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
     return obj;
-  },
-
-  fromAmino(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
-    return {
-      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
-      cancellationRequested: isSet(object.cancellation_requested) ? object.cancellation_requested : undefined,
-      request: isSet(object.request) ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
-      progress: isSet(object.progress) ? object.progress : undefined,
-      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined
-    };
-  },
-
-  toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataSDKType {
-    const obj: any = {};
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-    message.state !== undefined && (obj.state = operationStateToJSON(message.state));
-    message.cancellationRequested !== undefined && (obj.cancellation_requested = message.cancellationRequested);
-    message.request !== undefined && (obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined);
-    message.progress !== undefined && (obj.progress = message.progress);
-    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
-    return obj;
   }
 
 };
@@ -7210,18 +6568,6 @@ export const CopyLogEntriesResponse = {
   },
 
   toSDK(message: CopyLogEntriesResponse): CopyLogEntriesResponseSDKType {
-    const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.log_entries_copied_count = message.logEntriesCopiedCount);
-    return obj;
-  },
-
-  fromAmino(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {
-    return {
-      logEntriesCopiedCount: isSet(object.log_entries_copied_count) ? object.log_entries_copied_count : undefined
-    };
-  },
-
-  toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseSDKType {
     const obj: any = {};
     message.logEntriesCopiedCount !== undefined && (obj.log_entries_copied_count = message.logEntriesCopiedCount);
     return obj;

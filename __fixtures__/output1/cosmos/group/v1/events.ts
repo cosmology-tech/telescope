@@ -188,18 +188,6 @@ export const EventCreateGroup = {
     const obj: any = {};
     message.groupId !== undefined && (obj.group_id = message.groupId);
     return obj;
-  },
-
-  fromAmino(object: EventCreateGroupSDKType): EventCreateGroup {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
-    };
-  },
-
-  toAmino(message: EventCreateGroup): EventCreateGroupSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    return obj;
   }
 
 };
@@ -266,18 +254,6 @@ export const EventUpdateGroup = {
   },
 
   toSDK(message: EventUpdateGroup): EventUpdateGroupSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    return obj;
-  },
-
-  fromAmino(object: EventUpdateGroupSDKType): EventUpdateGroup {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
-    };
-  },
-
-  toAmino(message: EventUpdateGroup): EventUpdateGroupSDKType {
     const obj: any = {};
     message.groupId !== undefined && (obj.group_id = message.groupId);
     return obj;
@@ -350,18 +326,6 @@ export const EventCreateGroupPolicy = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
-  },
-
-  fromAmino(object: EventCreateGroupPolicySDKType): EventCreateGroupPolicy {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: EventCreateGroupPolicy): EventCreateGroupPolicySDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -428,18 +392,6 @@ export const EventUpdateGroupPolicy = {
   },
 
   toSDK(message: EventUpdateGroupPolicy): EventUpdateGroupPolicySDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-
-  fromAmino(object: EventUpdateGroupPolicySDKType): EventUpdateGroupPolicy {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: EventUpdateGroupPolicy): EventUpdateGroupPolicySDKType {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -512,18 +464,6 @@ export const EventSubmitProposal = {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
     return obj;
-  },
-
-  fromAmino(object: EventSubmitProposalSDKType): EventSubmitProposal {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: EventSubmitProposal): EventSubmitProposalSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
   }
 
 };
@@ -593,18 +533,6 @@ export const EventWithdrawProposal = {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
     return obj;
-  },
-
-  fromAmino(object: EventWithdrawProposalSDKType): EventWithdrawProposal {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: EventWithdrawProposal): EventWithdrawProposalSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
   }
 
 };
@@ -671,18 +599,6 @@ export const EventVote = {
   },
 
   toSDK(message: EventVote): EventVoteSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
-  },
-
-  fromAmino(object: EventVoteSDKType): EventVote {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: EventVote): EventVoteSDKType {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
     return obj;
@@ -769,20 +685,6 @@ export const EventExec = {
     message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
-  },
-
-  fromAmino(object: EventExecSDKType): EventExec {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
-    };
-  },
-
-  toAmino(message: EventExec): EventExecSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
-    return obj;
   }
 
 };
@@ -862,20 +764,6 @@ export const EventLeaveGroup = {
   },
 
   toSDK(message: EventLeaveGroup): EventLeaveGroupSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-
-  fromAmino(object: EventLeaveGroupSDKType): EventLeaveGroup {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: EventLeaveGroup): EventLeaveGroupSDKType {
     const obj: any = {};
     message.groupId !== undefined && (obj.group_id = message.groupId);
     message.address !== undefined && (obj.address = message.address);

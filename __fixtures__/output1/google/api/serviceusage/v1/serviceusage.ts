@@ -542,18 +542,6 @@ export const EnableServiceRequest = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
-  },
-
-  fromAmino(object: EnableServiceRequestSDKType): EnableServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: EnableServiceRequest): EnableServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -622,18 +610,6 @@ export const EnableServiceResponse = {
   toSDK(message: EnableServiceResponse): EnableServiceResponseSDKType {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: EnableServiceResponseSDKType): EnableServiceResponse {
-    return {
-      service: isSet(object.service) ? Service.fromAmino(object.service) : undefined
-    };
-  },
-
-  toAmino(message: EnableServiceResponse): EnableServiceResponseSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toAmino(message.service) : undefined);
     return obj;
   }
 
@@ -732,22 +708,6 @@ export const DisableServiceRequest = {
     message.disableDependentServices !== undefined && (obj.disable_dependent_services = message.disableDependentServices);
     message.checkIfServiceHasUsage !== undefined && (obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
     return obj;
-  },
-
-  fromAmino(object: DisableServiceRequestSDKType): DisableServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      disableDependentServices: isSet(object.disable_dependent_services) ? object.disable_dependent_services : undefined,
-      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
-    };
-  },
-
-  toAmino(message: DisableServiceRequest): DisableServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.disableDependentServices !== undefined && (obj.disable_dependent_services = message.disableDependentServices);
-    message.checkIfServiceHasUsage !== undefined && (obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
-    return obj;
   }
 
 };
@@ -817,18 +777,6 @@ export const DisableServiceResponse = {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
     return obj;
-  },
-
-  fromAmino(object: DisableServiceResponseSDKType): DisableServiceResponse {
-    return {
-      service: isSet(object.service) ? Service.fromAmino(object.service) : undefined
-    };
-  },
-
-  toAmino(message: DisableServiceResponse): DisableServiceResponseSDKType {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toAmino(message.service) : undefined);
-    return obj;
   }
 
 };
@@ -895,18 +843,6 @@ export const GetServiceRequest = {
   },
 
   toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetServiceRequestSDKType): GetServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetServiceRequest): GetServiceRequestSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1021,24 +957,6 @@ export const ListServicesRequest = {
     message.pageToken !== undefined && (obj.page_token = message.pageToken);
     message.filter !== undefined && (obj.filter = message.filter);
     return obj;
-  },
-
-  fromAmino(object: ListServicesRequestSDKType): ListServicesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
-    };
-  },
-
-  toAmino(message: ListServicesRequest): ListServicesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
   }
 
 };
@@ -1134,26 +1052,6 @@ export const ListServicesResponse = {
 
     message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
     return obj;
-  },
-
-  fromAmino(object: ListServicesResponseSDKType): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListServicesResponse): ListServicesResponseSDKType {
-    const obj: any = {};
-
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
   }
 
 };
@@ -1239,26 +1137,6 @@ export const BatchEnableServicesRequest = {
   },
 
   toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-
-    if (message.serviceIds) {
-      obj.service_ids = message.serviceIds.map(e => e);
-    } else {
-      obj.service_ids = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
 
@@ -1374,31 +1252,6 @@ export const BatchEnableServicesResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: BatchEnableServicesResponseSDKType): BatchEnableServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BatchEnableServicesResponse): BatchEnableServicesResponseSDKType {
-    const obj: any = {};
-
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-
-    if (message.failures) {
-      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toAmino(e) : undefined);
-    } else {
-      obj.failures = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1478,20 +1331,6 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
 
   toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
-    const obj: any = {};
-    message.serviceId !== undefined && (obj.service_id = message.serviceId);
-    message.errorMessage !== undefined && (obj.error_message = message.errorMessage);
-    return obj;
-  },
-
-  fromAmino(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
-    return {
-      serviceId: isSet(object.service_id) ? object.service_id : undefined,
-      errorMessage: isSet(object.error_message) ? object.error_message : undefined
-    };
-  },
-
-  toAmino(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
     const obj: any = {};
     message.serviceId !== undefined && (obj.service_id = message.serviceId);
     message.errorMessage !== undefined && (obj.error_message = message.errorMessage);
@@ -1591,26 +1430,6 @@ export const BatchGetServicesRequest = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: BatchGetServicesRequestSDKType): BatchGetServicesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: BatchGetServicesRequest): BatchGetServicesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-
-    if (message.names) {
-      obj.names = message.names.map(e => e);
-    } else {
-      obj.names = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1687,24 +1506,6 @@ export const BatchGetServicesResponse = {
 
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchGetServicesResponseSDKType): BatchGetServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BatchGetServicesResponse): BatchGetServicesResponseSDKType {
-    const obj: any = {};
-
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
     } else {
       obj.services = [];
     }

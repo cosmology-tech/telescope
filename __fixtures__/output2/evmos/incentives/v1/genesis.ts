@@ -120,33 +120,6 @@ export const GenesisState = {
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-
-    if (message.incentives) {
-      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
-    } else {
-      obj.incentives = [];
-    }
-
-    if (message.gasMeters) {
-      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
-    } else {
-      obj.gas_meters = [];
-    }
-
-    return obj;
   }
 
 };
@@ -240,24 +213,6 @@ export const Params = {
     message.incentivesEpochIdentifier = object.incentivesEpochIdentifier ?? "";
     message.rewardScaler = object.rewardScaler ?? "";
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      enableIncentives: isSet(object.enable_incentives) ? object.enable_incentives : undefined,
-      allocationLimit: isSet(object.allocation_limit) ? object.allocation_limit : undefined,
-      incentivesEpochIdentifier: isSet(object.incentives_epoch_identifier) ? object.incentives_epoch_identifier : undefined,
-      rewardScaler: isSet(object.reward_scaler) ? object.reward_scaler : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.enableIncentives !== undefined && (obj.enable_incentives = message.enableIncentives);
-    message.allocationLimit !== undefined && (obj.allocation_limit = message.allocationLimit);
-    message.incentivesEpochIdentifier !== undefined && (obj.incentives_epoch_identifier = message.incentivesEpochIdentifier);
-    message.rewardScaler !== undefined && (obj.reward_scaler = message.rewardScaler);
-    return obj;
   }
 
 };

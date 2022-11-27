@@ -381,32 +381,6 @@ export const PeriodLock = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: PeriodLockSDKType): PeriodLock {
-    return {
-      ID: isSet(object.ID) ? object.ID : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PeriodLock): PeriodLockSDKType {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
   }
 
 };
@@ -518,24 +492,6 @@ export const QueryCondition = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryConditionSDKType): QueryCondition {
-    return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: QueryCondition): QueryConditionSDKType {
-    const obj: any = {};
-    message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    return obj;
   }
 
 };
@@ -646,24 +602,6 @@ export const SyntheticLock = {
     message.synthDenom !== undefined && (obj.synth_denom = message.synthDenom);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: SyntheticLockSDKType): SyntheticLock {
-    return {
-      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : undefined,
-      synthDenom: isSet(object.synth_denom) ? object.synth_denom : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: SyntheticLock): SyntheticLockSDKType {
-    const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlying_lock_id = message.underlyingLockId);
-    message.synthDenom !== undefined && (obj.synth_denom = message.synthDenom);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
     return obj;
   }
 

@@ -151,20 +151,6 @@ export const DenomTrace = {
     message.path !== undefined && (obj.path = message.path);
     message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
     return obj;
-  },
-
-  fromAmino(object: DenomTraceSDKType): DenomTrace {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      baseDenom: isSet(object.base_denom) ? object.base_denom : undefined
-    };
-  },
-
-  toAmino(message: DenomTrace): DenomTraceSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
-    return obj;
   }
 
 };
@@ -244,20 +230,6 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.sendEnabled !== undefined && (obj.send_enabled = message.sendEnabled);
-    message.receiveEnabled !== undefined && (obj.receive_enabled = message.receiveEnabled);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      sendEnabled: isSet(object.send_enabled) ? object.send_enabled : undefined,
-      receiveEnabled: isSet(object.receive_enabled) ? object.receive_enabled : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
     const obj: any = {};
     message.sendEnabled !== undefined && (obj.send_enabled = message.sendEnabled);
     message.receiveEnabled !== undefined && (obj.receive_enabled = message.receiveEnabled);

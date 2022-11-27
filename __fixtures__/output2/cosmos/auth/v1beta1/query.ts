@@ -104,18 +104,6 @@ export const QueryAccountsRequest = {
     const message = createBaseQueryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -191,26 +179,6 @@ export const QueryAccountsResponse = {
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
-    const obj: any = {};
-
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -268,18 +236,6 @@ export const QueryAccountRequest = {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryAccountRequestSDKType): QueryAccountRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountRequest): QueryAccountRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -337,18 +293,6 @@ export const QueryAccountResponse = {
     const message = createBaseQueryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? Any.fromPartial(object.account) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAccountResponseSDKType): QueryAccountResponse {
-    return {
-      account: isSet(object.account) ? Any.fromAmino(object.account) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountResponse): QueryAccountResponseSDKType {
-    const obj: any = {};
-    message.account !== undefined && (obj.account = message.account ? Any.toAmino(message.account) : undefined);
-    return obj;
   }
 
 };
@@ -392,15 +336,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -458,18 +393,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };

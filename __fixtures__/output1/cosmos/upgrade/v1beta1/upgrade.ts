@@ -293,26 +293,6 @@ export const Plan = {
     message.info !== undefined && (obj.info = message.info);
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
     return obj;
-  },
-
-  fromAmino(object: PlanSDKType): Plan {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
-  },
-
-  toAmino(message: Plan): PlanSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
-    message.height !== undefined && (obj.height = message.height);
-    message.info !== undefined && (obj.info = message.info);
-    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined);
-    return obj;
   }
 
 };
@@ -410,22 +390,6 @@ export const SoftwareUpgradeProposal = {
     message.description !== undefined && (obj.description = message.description);
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
-  },
-
-  fromAmino(object: SoftwareUpgradeProposalSDKType): SoftwareUpgradeProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-
-  toAmino(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    return obj;
   }
 
 };
@@ -509,20 +473,6 @@ export const CancelSoftwareUpgradeProposal = {
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
     return obj;
-  },
-
-  fromAmino(object: CancelSoftwareUpgradeProposalSDKType): CancelSoftwareUpgradeProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
   }
 
 };
@@ -602,20 +552,6 @@ export const ModuleVersion = {
   },
 
   toSDK(message: ModuleVersion): ModuleVersionSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
-
-  fromAmino(object: ModuleVersionSDKType): ModuleVersion {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      version: isSet(object.version) ? object.version : undefined
-    };
-  },
-
-  toAmino(message: ModuleVersion): ModuleVersionSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.version !== undefined && (obj.version = message.version);

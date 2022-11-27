@@ -151,18 +151,6 @@ export const GenericAuthorization = {
     const obj: any = {};
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
-  },
-
-  fromAmino(object: GenericAuthorizationSDKType): GenericAuthorization {
-    return {
-      msg: isSet(object.msg) ? object.msg : undefined
-    };
-  },
-
-  toAmino(message: GenericAuthorization): GenericAuthorizationSDKType {
-    const obj: any = {};
-    message.msg !== undefined && (obj.msg = message.msg);
-    return obj;
   }
 
 };
@@ -245,20 +233,6 @@ export const Grant = {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GrantSDKType): Grant {
-    return {
-      authorization: isSet(object.authorization) ? Any.fromAmino(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromAmino(object.expiration) : undefined
-    };
-  },
-
-  toAmino(message: Grant): GrantSDKType {
-    const obj: any = {};
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined);
     return obj;
   }
 
@@ -371,24 +345,6 @@ export const GrantAuthorization = {
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GrantAuthorizationSDKType): GrantAuthorization {
-    return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      authorization: isSet(object.authorization) ? Any.fromAmino(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromAmino(object.expiration) : undefined
-    };
-  },
-
-  toAmino(message: GrantAuthorization): GrantAuthorizationSDKType {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toAmino(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined);
-    return obj;
   }
 
 };
@@ -461,24 +417,6 @@ export const GrantQueueItem = {
   },
 
   toSDK(message: GrantQueueItem): GrantQueueItemSDKType {
-    const obj: any = {};
-
-    if (message.msgTypeUrls) {
-      obj.msg_type_urls = message.msgTypeUrls.map(e => e);
-    } else {
-      obj.msg_type_urls = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: GrantQueueItemSDKType): GrantQueueItem {
-    return {
-      msgTypeUrls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: GrantQueueItem): GrantQueueItemSDKType {
     const obj: any = {};
 
     if (message.msgTypeUrls) {

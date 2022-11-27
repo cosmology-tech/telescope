@@ -128,15 +128,6 @@ export const QueryCurrentPlanRequest = {
   fromPartial(_: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
-  },
-
-  fromAmino(_: QueryCurrentPlanRequestSDKType): QueryCurrentPlanRequest {
-    return {};
-  },
-
-  toAmino(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -194,18 +185,6 @@ export const QueryCurrentPlanResponse = {
     const message = createBaseQueryCurrentPlanResponse();
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
-    return {
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-
-  toAmino(message: QueryCurrentPlanResponse): QueryCurrentPlanResponseSDKType {
-    const obj: any = {};
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    return obj;
   }
 
 };
@@ -263,18 +242,6 @@ export const QueryAppliedPlanRequest = {
     const message = createBaseQueryAppliedPlanRequest();
     message.name = object.name ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
   }
 
 };
@@ -332,18 +299,6 @@ export const QueryAppliedPlanResponse = {
     const message = createBaseQueryAppliedPlanResponse();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
-  },
-
-  fromAmino(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
-    return {
-      height: isSet(object.height) ? object.height : undefined
-    };
-  },
-
-  toAmino(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    return obj;
   }
 
 };
@@ -401,18 +356,6 @@ export const QueryUpgradedConsensusStateRequest = {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
     return message;
-  },
-
-  fromAmino(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
-    return {
-      lastHeight: isSet(object.last_height) ? object.last_height : undefined
-    };
-  },
-
-  toAmino(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
-    const obj: any = {};
-    message.lastHeight !== undefined && (obj.last_height = message.lastHeight);
-    return obj;
   }
 
 };
@@ -470,18 +413,6 @@ export const QueryUpgradedConsensusStateResponse = {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
-    return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : undefined
-    };
-  },
-
-  toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
-    const obj: any = {};
-    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState);
-    return obj;
   }
 
 };
@@ -539,18 +470,6 @@ export const QueryModuleVersionsRequest = {
     const message = createBaseQueryModuleVersionsRequest();
     message.moduleName = object.moduleName ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
-    return {
-      moduleName: isSet(object.module_name) ? object.module_name : undefined
-    };
-  },
-
-  toAmino(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestSDKType {
-    const obj: any = {};
-    message.moduleName !== undefined && (obj.module_name = message.moduleName);
-    return obj;
   }
 
 };
@@ -614,24 +533,6 @@ export const QueryModuleVersionsResponse = {
     const message = createBaseQueryModuleVersionsResponse();
     message.moduleVersions = object.moduleVersions?.map(e => ModuleVersion.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: QueryModuleVersionsResponseSDKType): QueryModuleVersionsResponse {
-    return {
-      moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryModuleVersionsResponse): QueryModuleVersionsResponseSDKType {
-    const obj: any = {};
-
-    if (message.moduleVersions) {
-      obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e) : undefined);
-    } else {
-      obj.module_versions = [];
-    }
-
-    return obj;
   }
 
 };

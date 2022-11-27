@@ -123,15 +123,6 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -201,18 +192,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -263,15 +242,6 @@ export const QueryInflationRequest = {
   },
 
   toSDK(_: QueryInflationRequest): QueryInflationRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryInflationRequestSDKType): QueryInflationRequest {
-    return {};
-  },
-
-  toAmino(_: QueryInflationRequest): QueryInflationRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -343,18 +313,6 @@ export const QueryInflationResponse = {
     const obj: any = {};
     message.inflation !== undefined && (obj.inflation = message.inflation);
     return obj;
-  },
-
-  fromAmino(object: QueryInflationResponseSDKType): QueryInflationResponse {
-    return {
-      inflation: isSet(object.inflation) ? object.inflation : undefined
-    };
-  },
-
-  toAmino(message: QueryInflationResponse): QueryInflationResponseSDKType {
-    const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
-    return obj;
   }
 
 };
@@ -405,15 +363,6 @@ export const QueryAnnualProvisionsRequest = {
   },
 
   toSDK(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryAnnualProvisionsRequestSDKType): QueryAnnualProvisionsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -482,18 +431,6 @@ export const QueryAnnualProvisionsResponse = {
   },
 
   toSDK(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseSDKType {
-    const obj: any = {};
-    message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
-    return obj;
-  },
-
-  fromAmino(object: QueryAnnualProvisionsResponseSDKType): QueryAnnualProvisionsResponse {
-    return {
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
-    };
-  },
-
-  toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseSDKType {
     const obj: any = {};
     message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
     return obj;

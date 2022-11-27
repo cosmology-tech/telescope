@@ -69,18 +69,6 @@ export const SourceContext = {
     const message = createBaseSourceContext();
     message.fileName = object.fileName ?? "";
     return message;
-  },
-
-  fromAmino(object: SourceContextSDKType): SourceContext {
-    return {
-      fileName: isSet(object.file_name) ? object.file_name : undefined
-    };
-  },
-
-  toAmino(message: SourceContext): SourceContextSDKType {
-    const obj: any = {};
-    message.fileName !== undefined && (obj.file_name = message.fileName);
-    return obj;
   }
 
 };

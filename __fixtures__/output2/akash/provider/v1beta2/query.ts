@@ -80,18 +80,6 @@ export const QueryProvidersRequest = {
     const message = createBaseQueryProvidersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProvidersRequest): QueryProvidersRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -167,26 +155,6 @@ export const QueryProvidersResponse = {
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
-    const obj: any = {};
-
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -244,18 +212,6 @@ export const QueryProviderRequest = {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryProviderRequestSDKType): QueryProviderRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderRequest): QueryProviderRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
   }
 
 };
@@ -313,18 +269,6 @@ export const QueryProviderResponse = {
     const message = createBaseQueryProviderResponse();
     message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryProviderResponseSDKType): QueryProviderResponse {
-    return {
-      provider: isSet(object.provider) ? Provider.fromAmino(object.provider) : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderResponse): QueryProviderResponseSDKType {
-    const obj: any = {};
-    message.provider !== undefined && (obj.provider = message.provider ? Provider.toAmino(message.provider) : undefined);
-    return obj;
   }
 
 };

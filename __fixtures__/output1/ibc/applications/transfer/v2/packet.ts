@@ -147,24 +147,6 @@ export const FungibleTokenPacketData = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
-  },
-
-  fromAmino(object: FungibleTokenPacketDataSDKType): FungibleTokenPacketData {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined
-    };
-  },
-
-  toAmino(message: FungibleTokenPacketData): FungibleTokenPacketDataSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    return obj;
   }
 
 };

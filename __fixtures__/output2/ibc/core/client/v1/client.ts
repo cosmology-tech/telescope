@@ -176,20 +176,6 @@ export const IdentifiedClientState = {
     message.clientId = object.clientId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
-  },
-
-  fromAmino(object: IdentifiedClientStateSDKType): IdentifiedClientState {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined
-    };
-  },
-
-  toAmino(message: IdentifiedClientState): IdentifiedClientStateSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
-    return obj;
   }
 
 };
@@ -259,20 +245,6 @@ export const ConsensusStateWithHeight = {
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
-  },
-
-  fromAmino(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
-    return {
-      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined
-    };
-  },
-
-  toAmino(message: ConsensusStateWithHeight): ConsensusStateWithHeightSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
-    return obj;
   }
 
 };
@@ -348,26 +320,6 @@ export const ClientConsensusStates = {
     message.clientId = object.clientId ?? "";
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ClientConsensusStatesSDKType): ClientConsensusStates {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ClientConsensusStates): ClientConsensusStatesSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-
-    if (message.consensusStates) {
-      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
-    } else {
-      obj.consensus_states = [];
-    }
-
-    return obj;
   }
 
 };
@@ -461,24 +413,6 @@ export const ClientUpdateProposal = {
     message.subjectClientId = object.subjectClientId ?? "";
     message.substituteClientId = object.substituteClientId ?? "";
     return message;
-  },
-
-  fromAmino(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : undefined,
-      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : undefined
-    };
-  },
-
-  toAmino(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.subjectClientId !== undefined && (obj.subject_client_id = message.subjectClientId);
-    message.substituteClientId !== undefined && (obj.substitute_client_id = message.substituteClientId);
-    return obj;
   }
 
 };
@@ -572,24 +506,6 @@ export const UpgradeProposal = {
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
-  },
-
-  fromAmino(object: UpgradeProposalSDKType): UpgradeProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined,
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
-  },
-
-  toAmino(message: UpgradeProposal): UpgradeProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined);
-    return obj;
   }
 
 };
@@ -659,20 +575,6 @@ export const Height = {
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: HeightSDKType): Height {
-    return {
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
-    };
-  },
-
-  toAmino(message: Height): HeightSDKType {
-    const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
-    return obj;
   }
 
 };
@@ -736,24 +638,6 @@ export const Params = {
     const message = createBaseParams();
     message.allowedClients = object.allowedClients?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-
-    if (message.allowedClients) {
-      obj.allowed_clients = message.allowedClients.map(e => e);
-    } else {
-      obj.allowed_clients = [];
-    }
-
-    return obj;
   }
 
 };

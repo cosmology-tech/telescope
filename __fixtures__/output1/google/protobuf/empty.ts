@@ -76,15 +76,6 @@ export const Empty = {
   toSDK(_: Empty): EmptySDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: EmptySDKType): Empty {
-    return {};
-  },
-
-  toAmino(_: Empty): EmptySDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

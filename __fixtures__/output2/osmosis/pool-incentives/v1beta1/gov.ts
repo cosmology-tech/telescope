@@ -118,28 +118,6 @@ export const ReplacePoolIncentivesProposal = {
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-
-    return obj;
   }
 
 };
@@ -227,28 +205,6 @@ export const UpdatePoolIncentivesProposal = {
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-
-    return obj;
   }
 
 };

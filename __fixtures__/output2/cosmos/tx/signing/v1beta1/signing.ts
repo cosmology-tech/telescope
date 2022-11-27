@@ -210,24 +210,6 @@ export const SignatureDescriptors = {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: SignatureDescriptorsSDKType): SignatureDescriptors {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: SignatureDescriptors): SignatureDescriptorsSDKType {
-    const obj: any = {};
-
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-
-    return obj;
   }
 
 };
@@ -309,22 +291,6 @@ export const SignatureDescriptor = {
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: SignatureDescriptorSDKType): SignatureDescriptor {
-    return {
-      publicKey: isSet(object.public_key) ? Any.fromAmino(object.public_key) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromAmino(object.data) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
-    };
-  },
-
-  toAmino(message: SignatureDescriptor): SignatureDescriptorSDKType {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined);
-    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    return obj;
   }
 
 };
@@ -394,20 +360,6 @@ export const SignatureDescriptor_Data = {
     message.single = object.single !== undefined && object.single !== null ? SignatureDescriptor_Data_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? SignatureDescriptor_Data_Multi.fromPartial(object.multi) : undefined;
     return message;
-  },
-
-  fromAmino(object: SignatureDescriptor_DataSDKType): SignatureDescriptor_Data {
-    return {
-      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromAmino(object.single) : undefined,
-      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromAmino(object.multi) : undefined
-    };
-  },
-
-  toAmino(message: SignatureDescriptor_Data): SignatureDescriptor_DataSDKType {
-    const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toAmino(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toAmino(message.multi) : undefined);
-    return obj;
   }
 
 };
@@ -477,20 +429,6 @@ export const SignatureDescriptor_Data_Single = {
     message.mode = object.mode ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      signature: isSet(object.signature) ? object.signature : undefined
-    };
-  },
-
-  toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
-    const obj: any = {};
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.signature !== undefined && (obj.signature = message.signature);
-    return obj;
   }
 
 };
@@ -566,26 +504,6 @@ export const SignatureDescriptor_Data_Multi = {
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
     message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: SignatureDescriptor_Data_MultiSDKType): SignatureDescriptor_Data_Multi {
-    return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromAmino(object.bitarray) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiSDKType {
-    const obj: any = {};
-    message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toAmino(message.bitarray) : undefined);
-
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toAmino(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-
-    return obj;
   }
 
 };

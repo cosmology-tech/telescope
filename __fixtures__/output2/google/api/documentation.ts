@@ -289,39 +289,6 @@ export const Documentation = {
     message.serviceRootUrl = object.serviceRootUrl ?? "";
     message.overview = object.overview ?? "";
     return message;
-  },
-
-  fromAmino(object: DocumentationSDKType): Documentation {
-    return {
-      summary: isSet(object.summary) ? object.summary : undefined,
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
-      documentationRootUrl: isSet(object.documentation_root_url) ? object.documentation_root_url : undefined,
-      serviceRootUrl: isSet(object.service_root_url) ? object.service_root_url : undefined,
-      overview: isSet(object.overview) ? object.overview : undefined
-    };
-  },
-
-  toAmino(message: Documentation): DocumentationSDKType {
-    const obj: any = {};
-    message.summary !== undefined && (obj.summary = message.summary);
-
-    if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
-    } else {
-      obj.pages = [];
-    }
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    message.documentationRootUrl !== undefined && (obj.documentation_root_url = message.documentationRootUrl);
-    message.serviceRootUrl !== undefined && (obj.service_root_url = message.serviceRootUrl);
-    message.overview !== undefined && (obj.overview = message.overview);
-    return obj;
   }
 
 };
@@ -403,22 +370,6 @@ export const DocumentationRule = {
     message.description = object.description ?? "";
     message.deprecationDescription = object.deprecationDescription ?? "";
     return message;
-  },
-
-  fromAmino(object: DocumentationRuleSDKType): DocumentationRule {
-    return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      deprecationDescription: isSet(object.deprecation_description) ? object.deprecation_description : undefined
-    };
-  },
-
-  toAmino(message: DocumentationRule): DocumentationRuleSDKType {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.description !== undefined && (obj.description = message.description);
-    message.deprecationDescription !== undefined && (obj.deprecation_description = message.deprecationDescription);
-    return obj;
   }
 
 };
@@ -506,28 +457,6 @@ export const Page = {
     message.content = object.content ?? "";
     message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: PageSDKType): Page {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      content: isSet(object.content) ? object.content : undefined,
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Page): PageSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.content !== undefined && (obj.content = message.content);
-
-    if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
-    } else {
-      obj.subpages = [];
-    }
-
-    return obj;
   }
 
 };

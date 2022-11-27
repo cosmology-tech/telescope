@@ -169,22 +169,6 @@ export const MsgCreateClient = {
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgCreateClientSDKType): MsgCreateClient {
-    return {
-      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateClient): MsgCreateClientSDKType {
-    const obj: any = {};
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
   }
 
 };
@@ -228,15 +212,6 @@ export const MsgCreateClientResponse = {
   fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
-  },
-
-  fromAmino(_: MsgCreateClientResponseSDKType): MsgCreateClientResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -318,22 +293,6 @@ export const MsgUpdateClient = {
     message.header = object.header !== undefined && object.header !== null ? Any.fromPartial(object.header) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgUpdateClientSDKType): MsgUpdateClient {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      header: isSet(object.header) ? Any.fromAmino(object.header) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgUpdateClient): MsgUpdateClientSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.header !== undefined && (obj.header = message.header ? Any.toAmino(message.header) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
   }
 
 };
@@ -377,15 +336,6 @@ export const MsgUpdateClientResponse = {
   fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
-  },
-
-  fromAmino(_: MsgUpdateClientResponseSDKType): MsgUpdateClientResponse {
-    return {};
-  },
-
-  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -503,28 +453,6 @@ export const MsgUpgradeClient = {
     message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
-      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : undefined,
-      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
-    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = message.proofUpgradeClient);
-    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
   }
 
 };
@@ -568,15 +496,6 @@ export const MsgUpgradeClientResponse = {
   fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
-  },
-
-  fromAmino(_: MsgUpgradeClientResponseSDKType): MsgUpgradeClientResponse {
-    return {};
-  },
-
-  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -658,22 +577,6 @@ export const MsgSubmitMisbehaviour = {
     message.misbehaviour = object.misbehaviour !== undefined && object.misbehaviour !== null ? Any.fromPartial(object.misbehaviour) : undefined;
     message.signer = object.signer ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromAmino(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
   }
 
 };
@@ -717,15 +620,6 @@ export const MsgSubmitMisbehaviourResponse = {
   fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
-  },
-
-  fromAmino(_: MsgSubmitMisbehaviourResponseSDKType): MsgSubmitMisbehaviourResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

@@ -338,18 +338,6 @@ export const RetryInfo = {
     const message = createBaseRetryInfo();
     message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
-  },
-
-  fromAmino(object: RetryInfoSDKType): RetryInfo {
-    return {
-      retryDelay: isSet(object.retry_delay) ? Duration.fromAmino(object.retry_delay) : undefined
-    };
-  },
-
-  toAmino(message: RetryInfo): RetryInfoSDKType {
-    const obj: any = {};
-    message.retryDelay !== undefined && (obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined);
-    return obj;
   }
 
 };
@@ -425,26 +413,6 @@ export const DebugInfo = {
     message.stackEntries = object.stackEntries?.map(e => e) || [];
     message.detail = object.detail ?? "";
     return message;
-  },
-
-  fromAmino(object: DebugInfoSDKType): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: isSet(object.detail) ? object.detail : undefined
-    };
-  },
-
-  toAmino(message: DebugInfo): DebugInfoSDKType {
-    const obj: any = {};
-
-    if (message.stackEntries) {
-      obj.stack_entries = message.stackEntries.map(e => e);
-    } else {
-      obj.stack_entries = [];
-    }
-
-    message.detail !== undefined && (obj.detail = message.detail);
-    return obj;
   }
 
 };
@@ -508,24 +476,6 @@ export const QuotaFailure = {
     const message = createBaseQuotaFailure();
     message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: QuotaFailureSDKType): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QuotaFailure): QuotaFailureSDKType {
-    const obj: any = {};
-
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -595,20 +545,6 @@ export const QuotaFailure_Violation = {
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
-  },
-
-  fromAmino(object: QuotaFailure_ViolationSDKType): QuotaFailure_Violation {
-    return {
-      subject: isSet(object.subject) ? object.subject : undefined,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationSDKType {
-    const obj: any = {};
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
   }
 
 };
@@ -678,20 +614,6 @@ export const ErrorInfo_MetadataEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
-  },
-
-  fromAmino(object: ErrorInfo_MetadataEntrySDKType): ErrorInfo_MetadataEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -800,34 +722,6 @@ export const ErrorInfo = {
       return acc;
     }, {});
     return message;
-  },
-
-  fromAmino(object: ErrorInfoSDKType): ErrorInfo {
-    return {
-      reason: isSet(object.reason) ? object.reason : undefined,
-      domain: isSet(object.domain) ? object.domain : undefined,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toAmino(message: ErrorInfo): ErrorInfoSDKType {
-    const obj: any = {};
-    message.reason !== undefined && (obj.reason = message.reason);
-    message.domain !== undefined && (obj.domain = message.domain);
-    obj.metadata = {};
-
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = v;
-      });
-    }
-
-    return obj;
   }
 
 };
@@ -891,24 +785,6 @@ export const PreconditionFailure = {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: PreconditionFailureSDKType): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PreconditionFailure): PreconditionFailureSDKType {
-    const obj: any = {};
-
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -990,22 +866,6 @@ export const PreconditionFailure_Violation = {
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
-  },
-
-  fromAmino(object: PreconditionFailure_ViolationSDKType): PreconditionFailure_Violation {
-    return {
-      type: isSet(object.type) ? object.type : undefined,
-      subject: isSet(object.subject) ? object.subject : undefined,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
   }
 
 };
@@ -1069,24 +929,6 @@ export const BadRequest = {
     const message = createBaseBadRequest();
     message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: BadRequestSDKType): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BadRequest): BadRequestSDKType {
-    const obj: any = {};
-
-    if (message.fieldViolations) {
-      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
-    } else {
-      obj.field_violations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1156,20 +998,6 @@ export const BadRequest_FieldViolation = {
     message.field = object.field ?? "";
     message.description = object.description ?? "";
     return message;
-  },
-
-  fromAmino(object: BadRequest_FieldViolationSDKType): BadRequest_FieldViolation {
-    return {
-      field: isSet(object.field) ? object.field : undefined,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationSDKType {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
   }
 
 };
@@ -1239,20 +1067,6 @@ export const RequestInfo = {
     message.requestId = object.requestId ?? "";
     message.servingData = object.servingData ?? "";
     return message;
-  },
-
-  fromAmino(object: RequestInfoSDKType): RequestInfo {
-    return {
-      requestId: isSet(object.request_id) ? object.request_id : undefined,
-      servingData: isSet(object.serving_data) ? object.serving_data : undefined
-    };
-  },
-
-  toAmino(message: RequestInfo): RequestInfoSDKType {
-    const obj: any = {};
-    message.requestId !== undefined && (obj.request_id = message.requestId);
-    message.servingData !== undefined && (obj.serving_data = message.servingData);
-    return obj;
   }
 
 };
@@ -1346,24 +1160,6 @@ export const ResourceInfo = {
     message.owner = object.owner ?? "";
     message.description = object.description ?? "";
     return message;
-  },
-
-  fromAmino(object: ResourceInfoSDKType): ResourceInfo {
-    return {
-      resourceType: isSet(object.resource_type) ? object.resource_type : undefined,
-      resourceName: isSet(object.resource_name) ? object.resource_name : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: ResourceInfo): ResourceInfoSDKType {
-    const obj: any = {};
-    message.resourceType !== undefined && (obj.resource_type = message.resourceType);
-    message.resourceName !== undefined && (obj.resource_name = message.resourceName);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
   }
 
 };
@@ -1427,24 +1223,6 @@ export const Help = {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: HelpSDKType): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Help): HelpSDKType {
-    const obj: any = {};
-
-    if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
-    } else {
-      obj.links = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1514,20 +1292,6 @@ export const Help_Link = {
     message.description = object.description ?? "";
     message.url = object.url ?? "";
     return message;
-  },
-
-  fromAmino(object: Help_LinkSDKType): Help_Link {
-    return {
-      description: isSet(object.description) ? object.description : undefined,
-      url: isSet(object.url) ? object.url : undefined
-    };
-  },
-
-  toAmino(message: Help_Link): Help_LinkSDKType {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.url !== undefined && (obj.url = message.url);
-    return obj;
   }
 
 };
@@ -1597,20 +1361,6 @@ export const LocalizedMessage = {
     message.locale = object.locale ?? "";
     message.message = object.message ?? "";
     return message;
-  },
-
-  fromAmino(object: LocalizedMessageSDKType): LocalizedMessage {
-    return {
-      locale: isSet(object.locale) ? object.locale : undefined,
-      message: isSet(object.message) ? object.message : undefined
-    };
-  },
-
-  toAmino(message: LocalizedMessage): LocalizedMessageSDKType {
-    const obj: any = {};
-    message.locale !== undefined && (obj.locale = message.locale);
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
   }
 
 };

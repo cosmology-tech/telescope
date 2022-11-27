@@ -373,24 +373,6 @@ export const CheckError = {
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
-  },
-
-  fromAmino(object: CheckErrorSDKType): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? object.subject : undefined,
-      detail: isSet(object.detail) ? object.detail : undefined,
-      status: isSet(object.status) ? Status.fromAmino(object.status) : undefined
-    };
-  },
-
-  toAmino(message: CheckError): CheckErrorSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.detail !== undefined && (obj.detail = message.detail);
-    message.status !== undefined && (obj.status = message.status ? Status.toAmino(message.status) : undefined);
-    return obj;
   }
 
 };

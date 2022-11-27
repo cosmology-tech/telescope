@@ -436,20 +436,6 @@ export const QueryBalanceRequest = {
     message.address !== undefined && (obj.address = message.address);
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
-  },
-
-  fromAmino(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
-    };
-  },
-
-  toAmino(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
   }
 
 };
@@ -518,18 +504,6 @@ export const QueryBalanceResponse = {
   toSDK(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
     const obj: any = {};
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
-    return {
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined
-    };
-  },
-
-  toAmino(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
-    const obj: any = {};
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
     return obj;
   }
 
@@ -613,20 +587,6 @@ export const QueryAllBalancesRequest = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAllBalancesRequestSDKType): QueryAllBalancesRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllBalancesRequest): QueryAllBalancesRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -723,26 +683,6 @@ export const QueryAllBalancesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryAllBalancesResponseSDKType): QueryAllBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllBalancesResponse): QueryAllBalancesResponseSDKType {
-    const obj: any = {};
-
-    if (message.balances) {
-      obj.balances = message.balances.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.balances = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -825,20 +765,6 @@ export const QuerySpendableBalancesRequest = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QuerySpendableBalancesRequestSDKType): QuerySpendableBalancesRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySpendableBalancesRequest): QuerySpendableBalancesRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -935,26 +861,6 @@ export const QuerySpendableBalancesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QuerySpendableBalancesResponseSDKType): QuerySpendableBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseSDKType {
-    const obj: any = {};
-
-    if (message.balances) {
-      obj.balances = message.balances.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.balances = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1023,18 +929,6 @@ export const QueryTotalSupplyRequest = {
   toSDK(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryTotalSupplyRequestSDKType): QueryTotalSupplyRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1131,26 +1025,6 @@ export const QueryTotalSupplyResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryTotalSupplyResponseSDKType): QueryTotalSupplyResponse {
-    return {
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseSDKType {
-    const obj: any = {};
-
-    if (message.supply) {
-      obj.supply = message.supply.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.supply = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1217,18 +1091,6 @@ export const QuerySupplyOfRequest = {
   },
 
   toSDK(message: QuerySupplyOfRequest): QuerySupplyOfRequestSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-
-  fromAmino(object: QuerySupplyOfRequestSDKType): QuerySupplyOfRequest {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined
-    };
-  },
-
-  toAmino(message: QuerySupplyOfRequest): QuerySupplyOfRequestSDKType {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -1301,18 +1163,6 @@ export const QuerySupplyOfResponse = {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QuerySupplyOfResponseSDKType): QuerySupplyOfResponse {
-    return {
-      amount: isSet(object.amount) ? Coin.fromAmino(object.amount) : undefined
-    };
-  },
-
-  toAmino(message: QuerySupplyOfResponse): QuerySupplyOfResponseSDKType {
-    const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined);
-    return obj;
   }
 
 };
@@ -1363,15 +1213,6 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1443,18 +1284,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -1523,18 +1352,6 @@ export const QueryDenomsMetadataRequest = {
   toSDK(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomsMetadataRequestSDKType): QueryDenomsMetadataRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1631,26 +1448,6 @@ export const QueryDenomsMetadataResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryDenomsMetadataResponseSDKType): QueryDenomsMetadataResponse {
-    return {
-      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseSDKType {
-    const obj: any = {};
-
-    if (message.metadatas) {
-      obj.metadatas = message.metadatas.map(e => e ? Metadata.toAmino(e) : undefined);
-    } else {
-      obj.metadatas = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1717,18 +1514,6 @@ export const QueryDenomMetadataRequest = {
   },
 
   toSDK(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomMetadataRequestSDKType): QueryDenomMetadataRequest {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestSDKType {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -1800,18 +1585,6 @@ export const QueryDenomMetadataResponse = {
   toSDK(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseSDKType {
     const obj: any = {};
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomMetadataResponseSDKType): QueryDenomMetadataResponse {
-    return {
-      metadata: isSet(object.metadata) ? Metadata.fromAmino(object.metadata) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseSDKType {
-    const obj: any = {};
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined);
     return obj;
   }
 
@@ -1896,20 +1669,6 @@ export const QueryDenomOwnersRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryDenomOwnersRequestSDKType): QueryDenomOwnersRequest {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1992,20 +1751,6 @@ export const DenomOwner = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: DenomOwnerSDKType): DenomOwner {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined
-    };
-  },
-
-  toAmino(message: DenomOwner): DenomOwnerSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
     return obj;
   }
 
@@ -2101,26 +1846,6 @@ export const QueryDenomOwnersResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomOwnersResponseSDKType): QueryDenomOwnersResponse {
-    return {
-      denomOwners: Array.isArray(object?.denom_owners) ? object.denom_owners.map((e: any) => DenomOwner.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomOwnersResponse): QueryDenomOwnersResponseSDKType {
-    const obj: any = {};
-
-    if (message.denomOwners) {
-      obj.denom_owners = message.denomOwners.map(e => e ? DenomOwner.toAmino(e) : undefined);
-    } else {
-      obj.denom_owners = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

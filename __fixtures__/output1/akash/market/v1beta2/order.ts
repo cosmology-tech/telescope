@@ -235,24 +235,6 @@ export const OrderID = {
     message.gseq !== undefined && (obj.gseq = message.gseq);
     message.oseq !== undefined && (obj.oseq = message.oseq);
     return obj;
-  },
-
-  fromAmino(object: OrderIDSDKType): OrderID {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined,
-      oseq: isSet(object.oseq) ? object.oseq : undefined
-    };
-  },
-
-  toAmino(message: OrderID): OrderIDSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
-    message.oseq !== undefined && (obj.oseq = message.oseq);
-    return obj;
   }
 
 };
@@ -362,24 +344,6 @@ export const Order = {
     message.orderId !== undefined && (obj.order_id = message.orderId ? OrderID.toSDK(message.orderId) : undefined);
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
-    return obj;
-  },
-
-  fromAmino(object: OrderSDKType): Order {
-    return {
-      orderId: isSet(object.order_id) ? OrderID.fromAmino(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
-      spec: isSet(object.spec) ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
-    };
-  },
-
-  toAmino(message: Order): OrderSDKType {
-    const obj: any = {};
-    message.orderId !== undefined && (obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined);
-    message.state !== undefined && (obj.state = order_StateToJSON(message.state));
-    message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined);
     message.createdAt !== undefined && (obj.created_at = message.createdAt);
     return obj;
   }
@@ -500,26 +464,6 @@ export const OrderFilters = {
   },
 
   toSDK(message: OrderFilters): OrderFiltersSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
-    message.oseq !== undefined && (obj.oseq = message.oseq);
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-
-  fromAmino(object: OrderFiltersSDKType): OrderFilters {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined,
-      oseq: isSet(object.oseq) ? object.oseq : undefined,
-      state: isSet(object.state) ? object.state : undefined
-    };
-  },
-
-  toAmino(message: OrderFilters): OrderFiltersSDKType {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = message.dseq);

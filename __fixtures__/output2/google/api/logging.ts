@@ -149,31 +149,6 @@ export const Logging = {
     message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: LoggingSDKType): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Logging): LoggingSDKType {
-    const obj: any = {};
-
-    if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
-    } else {
-      obj.producer_destinations = [];
-    }
-
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -249,26 +224,6 @@ export const Logging_LoggingDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.logs = object.logs?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: Logging_LoggingDestinationSDKType): Logging_LoggingDestination {
-    return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationSDKType {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
-
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e);
-    } else {
-      obj.logs = [];
-    }
-
-    return obj;
   }
 
 };

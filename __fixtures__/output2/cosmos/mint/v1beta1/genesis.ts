@@ -79,20 +79,6 @@ export const GenesisState = {
     message.minter = object.minter !== undefined && object.minter !== null ? Minter.fromPartial(object.minter) : undefined;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      minter: isSet(object.minter) ? Minter.fromAmino(object.minter) : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.minter !== undefined && (obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };

@@ -371,32 +371,6 @@ export const Channel = {
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
-  },
-
-  fromAmino(object: ChannelSDKType): Channel {
-    return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
-      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : undefined
-    };
-  },
-
-  toAmino(message: Channel): ChannelSDKType {
-    const obj: any = {};
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
-
-    if (message.connectionHops) {
-      obj.connection_hops = message.connectionHops.map(e => e);
-    } else {
-      obj.connection_hops = [];
-    }
-
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
   }
 
 };
@@ -532,36 +506,6 @@ export const IdentifiedChannel = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
-  },
-
-  fromAmino(object: IdentifiedChannelSDKType): IdentifiedChannel {
-    return {
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
-      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
-    };
-  },
-
-  toAmino(message: IdentifiedChannel): IdentifiedChannelSDKType {
-    const obj: any = {};
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
-
-    if (message.connectionHops) {
-      obj.connection_hops = message.connectionHops.map(e => e);
-    } else {
-      obj.connection_hops = [];
-    }
-
-    message.version !== undefined && (obj.version = message.version);
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    return obj;
   }
 
 };
@@ -631,20 +575,6 @@ export const Counterparty = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
-  },
-
-  fromAmino(object: CounterpartySDKType): Counterparty {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
-    };
-  },
-
-  toAmino(message: Counterparty): CounterpartySDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    return obj;
   }
 
 };
@@ -786,32 +716,6 @@ export const Packet = {
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: PacketSDKType): Packet {
-    return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
-      destinationPort: isSet(object.destination_port) ? object.destination_port : undefined,
-      destinationChannel: isSet(object.destination_channel) ? object.destination_channel : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
-    };
-  },
-
-  toAmino(message: Packet): PacketSDKType {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
-    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
-    message.destinationPort !== undefined && (obj.destination_port = message.destinationPort);
-    message.destinationChannel !== undefined && (obj.destination_channel = message.destinationChannel);
-    message.data !== undefined && (obj.data = message.data);
-    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
-    return obj;
   }
 
 };
@@ -905,24 +809,6 @@ export const PacketState = {
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: PacketStateSDKType): PacketState {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: PacketState): PacketStateSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -992,20 +878,6 @@ export const Acknowledgement = {
     message.result = object.result ?? undefined;
     message.error = object.error ?? undefined;
     return message;
-  },
-
-  fromAmino(object: AcknowledgementSDKType): Acknowledgement {
-    return {
-      result: isSet(object.result) ? object.result : undefined,
-      error: isSet(object.error) ? object.error : undefined
-    };
-  },
-
-  toAmino(message: Acknowledgement): AcknowledgementSDKType {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = message.result);
-    message.error !== undefined && (obj.error = message.error);
-    return obj;
   }
 
 };

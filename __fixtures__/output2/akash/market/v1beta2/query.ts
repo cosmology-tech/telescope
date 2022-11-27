@@ -142,20 +142,6 @@ export const QueryOrdersRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryOrdersRequestSDKType): QueryOrdersRequest {
-    return {
-      filters: isSet(object.filters) ? OrderFilters.fromAmino(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryOrdersRequest): QueryOrdersRequestSDKType {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toAmino(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -231,26 +217,6 @@ export const QueryOrdersResponse = {
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryOrdersResponseSDKType): QueryOrdersResponse {
-    return {
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryOrdersResponse): QueryOrdersResponseSDKType {
-    const obj: any = {};
-
-    if (message.orders) {
-      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
-    } else {
-      obj.orders = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -308,18 +274,6 @@ export const QueryOrderRequest = {
     const message = createBaseQueryOrderRequest();
     message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryOrderRequestSDKType): QueryOrderRequest {
-    return {
-      id: isSet(object.id) ? OrderID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: QueryOrderRequest): QueryOrderRequestSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? OrderID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -377,18 +331,6 @@ export const QueryOrderResponse = {
     const message = createBaseQueryOrderResponse();
     message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryOrderResponseSDKType): QueryOrderResponse {
-    return {
-      order: isSet(object.order) ? Order.fromAmino(object.order) : undefined
-    };
-  },
-
-  toAmino(message: QueryOrderResponse): QueryOrderResponseSDKType {
-    const obj: any = {};
-    message.order !== undefined && (obj.order = message.order ? Order.toAmino(message.order) : undefined);
-    return obj;
   }
 
 };
@@ -458,20 +400,6 @@ export const QueryBidsRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryBidsRequestSDKType): QueryBidsRequest {
-    return {
-      filters: isSet(object.filters) ? BidFilters.fromAmino(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryBidsRequest): QueryBidsRequestSDKType {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toAmino(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -547,26 +475,6 @@ export const QueryBidsResponse = {
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryBidsResponseSDKType): QueryBidsResponse {
-    return {
-      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryBidsResponse): QueryBidsResponseSDKType {
-    const obj: any = {};
-
-    if (message.bids) {
-      obj.bids = message.bids.map(e => e ? QueryBidResponse.toAmino(e) : undefined);
-    } else {
-      obj.bids = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -624,18 +532,6 @@ export const QueryBidRequest = {
     const message = createBaseQueryBidRequest();
     message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryBidRequestSDKType): QueryBidRequest {
-    return {
-      id: isSet(object.id) ? BidID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: QueryBidRequest): QueryBidRequestSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? BidID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -705,20 +601,6 @@ export const QueryBidResponse = {
     message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryBidResponseSDKType): QueryBidResponse {
-    return {
-      bid: isSet(object.bid) ? Bid.fromAmino(object.bid) : undefined,
-      escrowAccount: isSet(object.escrow_account) ? Account.fromAmino(object.escrow_account) : undefined
-    };
-  },
-
-  toAmino(message: QueryBidResponse): QueryBidResponseSDKType {
-    const obj: any = {};
-    message.bid !== undefined && (obj.bid = message.bid ? Bid.toAmino(message.bid) : undefined);
-    message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined);
-    return obj;
   }
 
 };
@@ -788,20 +670,6 @@ export const QueryLeasesRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryLeasesRequestSDKType): QueryLeasesRequest {
-    return {
-      filters: isSet(object.filters) ? LeaseFilters.fromAmino(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryLeasesRequest): QueryLeasesRequestSDKType {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toAmino(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -877,26 +745,6 @@ export const QueryLeasesResponse = {
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryLeasesResponseSDKType): QueryLeasesResponse {
-    return {
-      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryLeasesResponse): QueryLeasesResponseSDKType {
-    const obj: any = {};
-
-    if (message.leases) {
-      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toAmino(e) : undefined);
-    } else {
-      obj.leases = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -954,18 +802,6 @@ export const QueryLeaseRequest = {
     const message = createBaseQueryLeaseRequest();
     message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryLeaseRequestSDKType): QueryLeaseRequest {
-    return {
-      id: isSet(object.id) ? LeaseID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: QueryLeaseRequest): QueryLeaseRequestSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? LeaseID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -1035,20 +871,6 @@ export const QueryLeaseResponse = {
     message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
     message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryLeaseResponseSDKType): QueryLeaseResponse {
-    return {
-      lease: isSet(object.lease) ? Lease.fromAmino(object.lease) : undefined,
-      escrowPayment: isSet(object.escrow_payment) ? FractionalPayment.fromAmino(object.escrow_payment) : undefined
-    };
-  },
-
-  toAmino(message: QueryLeaseResponse): QueryLeaseResponseSDKType {
-    const obj: any = {};
-    message.lease !== undefined && (obj.lease = message.lease ? Lease.toAmino(message.lease) : undefined);
-    message.escrowPayment !== undefined && (obj.escrow_payment = message.escrowPayment ? FractionalPayment.toAmino(message.escrowPayment) : undefined);
-    return obj;
   }
 
 };

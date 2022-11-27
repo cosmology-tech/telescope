@@ -289,33 +289,6 @@ export const Usage = {
 
     message.producerNotificationChannel !== undefined && (obj.producer_notification_channel = message.producerNotificationChannel);
     return obj;
-  },
-
-  fromAmino(object: UsageSDKType): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: isSet(object.producer_notification_channel) ? object.producer_notification_channel : undefined
-    };
-  },
-
-  toAmino(message: Usage): UsageSDKType {
-    const obj: any = {};
-
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e);
-    } else {
-      obj.requirements = [];
-    }
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    message.producerNotificationChannel !== undefined && (obj.producer_notification_channel = message.producerNotificationChannel);
-    return obj;
   }
 
 };
@@ -408,22 +381,6 @@ export const UsageRule = {
   },
 
   toSDK(message: UsageRule): UsageRuleSDKType {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.allowUnregisteredCalls !== undefined && (obj.allow_unregistered_calls = message.allowUnregisteredCalls);
-    message.skipServiceControl !== undefined && (obj.skip_service_control = message.skipServiceControl);
-    return obj;
-  },
-
-  fromAmino(object: UsageRuleSDKType): UsageRule {
-    return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      allowUnregisteredCalls: isSet(object.allow_unregistered_calls) ? object.allow_unregistered_calls : undefined,
-      skipServiceControl: isSet(object.skip_service_control) ? object.skip_service_control : undefined
-    };
-  },
-
-  toAmino(message: UsageRule): UsageRuleSDKType {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.allowUnregisteredCalls !== undefined && (obj.allow_unregistered_calls = message.allowUnregisteredCalls);

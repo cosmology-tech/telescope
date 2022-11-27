@@ -230,18 +230,6 @@ export const QueryAccountsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -337,26 +325,6 @@ export const QueryAccountsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
-    const obj: any = {};
-
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -426,18 +394,6 @@ export const QueryAccountRequest = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
-  },
-
-  fromAmino(object: QueryAccountRequestSDKType): QueryAccountRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountRequest): QueryAccountRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -488,15 +444,6 @@ export const QueryModuleAccountsRequest = {
   },
 
   toSDK(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryModuleAccountsRequestSDKType): QueryModuleAccountsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -568,18 +515,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -649,18 +584,6 @@ export const QueryAccountResponse = {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toSDK(message.account) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryAccountResponseSDKType): QueryAccountResponse {
-    return {
-      account: isSet(object.account) ? Any.fromAmino(object.account) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountResponse): QueryAccountResponseSDKType {
-    const obj: any = {};
-    message.account !== undefined && (obj.account = message.account ? Any.toAmino(message.account) : undefined);
-    return obj;
   }
 
 };
@@ -711,15 +634,6 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -803,24 +717,6 @@ export const QueryModuleAccountsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: QueryModuleAccountsResponseSDKType): QueryModuleAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseSDKType {
-    const obj: any = {};
-
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-
-    return obj;
   }
 
 };
@@ -871,15 +767,6 @@ export const Bech32PrefixRequest = {
   },
 
   toSDK(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: Bech32PrefixRequestSDKType): Bech32PrefixRequest {
-    return {};
-  },
-
-  toAmino(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -948,18 +835,6 @@ export const Bech32PrefixResponse = {
   },
 
   toSDK(message: Bech32PrefixResponse): Bech32PrefixResponseSDKType {
-    const obj: any = {};
-    message.bech32Prefix !== undefined && (obj.bech32_prefix = message.bech32Prefix);
-    return obj;
-  },
-
-  fromAmino(object: Bech32PrefixResponseSDKType): Bech32PrefixResponse {
-    return {
-      bech32Prefix: isSet(object.bech32_prefix) ? object.bech32_prefix : undefined
-    };
-  },
-
-  toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseSDKType {
     const obj: any = {};
     message.bech32Prefix !== undefined && (obj.bech32_prefix = message.bech32Prefix);
     return obj;
@@ -1032,18 +907,6 @@ export const AddressBytesToStringRequest = {
     const obj: any = {};
     message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
     return obj;
-  },
-
-  fromAmino(object: AddressBytesToStringRequestSDKType): AddressBytesToStringRequest {
-    return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
-    };
-  },
-
-  toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestSDKType {
-    const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
-    return obj;
   }
 
 };
@@ -1110,18 +973,6 @@ export const AddressBytesToStringResponse = {
   },
 
   toSDK(message: AddressBytesToStringResponse): AddressBytesToStringResponseSDKType {
-    const obj: any = {};
-    message.addressString !== undefined && (obj.address_string = message.addressString);
-    return obj;
-  },
-
-  fromAmino(object: AddressBytesToStringResponseSDKType): AddressBytesToStringResponse {
-    return {
-      addressString: isSet(object.address_string) ? object.address_string : undefined
-    };
-  },
-
-  toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseSDKType {
     const obj: any = {};
     message.addressString !== undefined && (obj.address_string = message.addressString);
     return obj;
@@ -1194,18 +1045,6 @@ export const AddressStringToBytesRequest = {
     const obj: any = {};
     message.addressString !== undefined && (obj.address_string = message.addressString);
     return obj;
-  },
-
-  fromAmino(object: AddressStringToBytesRequestSDKType): AddressStringToBytesRequest {
-    return {
-      addressString: isSet(object.address_string) ? object.address_string : undefined
-    };
-  },
-
-  toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestSDKType {
-    const obj: any = {};
-    message.addressString !== undefined && (obj.address_string = message.addressString);
-    return obj;
   }
 
 };
@@ -1272,18 +1111,6 @@ export const AddressStringToBytesResponse = {
   },
 
   toSDK(message: AddressStringToBytesResponse): AddressStringToBytesResponseSDKType {
-    const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
-    return obj;
-  },
-
-  fromAmino(object: AddressStringToBytesResponseSDKType): AddressStringToBytesResponse {
-    return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
-    };
-  },
-
-  toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseSDKType {
     const obj: any = {};
     message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
     return obj;

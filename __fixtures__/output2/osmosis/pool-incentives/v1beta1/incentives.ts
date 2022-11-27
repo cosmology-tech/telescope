@@ -86,18 +86,6 @@ export const Params = {
     const message = createBaseParams();
     message.mintedDenom = object.mintedDenom ?? "";
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.mintedDenom !== undefined && (obj.minted_denom = message.mintedDenom);
-    return obj;
   }
 
 };
@@ -161,24 +149,6 @@ export const LockableDurationsInfo = {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
-    const obj: any = {};
-
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -254,26 +224,6 @@ export const DistrInfo = {
     message.totalWeight = object.totalWeight ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: DistrInfoSDKType): DistrInfo {
-    return {
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: DistrInfo): DistrInfoSDKType {
-    const obj: any = {};
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
-
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-
-    return obj;
   }
 
 };
@@ -343,20 +293,6 @@ export const DistrRecord = {
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.weight = object.weight ?? "";
     return message;
-  },
-
-  fromAmino(object: DistrRecordSDKType): DistrRecord {
-    return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined
-    };
-  },
-
-  toAmino(message: DistrRecord): DistrRecordSDKType {
-    const obj: any = {};
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
   }
 
 };
@@ -438,22 +374,6 @@ export const PoolToGauge = {
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
-  },
-
-  fromAmino(object: PoolToGaugeSDKType): PoolToGauge {
-    return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: PoolToGauge): PoolToGaugeSDKType {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    return obj;
   }
 
 };
@@ -517,24 +437,6 @@ export const PoolToGauges = {
     const message = createBasePoolToGauges();
     message.poolToGauge = object.poolToGauge?.map(e => PoolToGauge.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: PoolToGaugesSDKType): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PoolToGauges): PoolToGaugesSDKType {
-    const obj: any = {};
-
-    if (message.poolToGauge) {
-      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e) : undefined);
-    } else {
-      obj.pool_to_gauge = [];
-    }
-
-    return obj;
   }
 
 };

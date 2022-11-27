@@ -270,18 +270,6 @@ export const AccessTypeParam = {
     const message = createBaseAccessTypeParam();
     message.value = object.value ?? 0;
     return message;
-  },
-
-  fromAmino(object: AccessTypeParamSDKType): AccessTypeParam {
-    return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
-    };
-  },
-
-  toAmino(message: AccessTypeParam): AccessTypeParamSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = accessTypeToJSON(message.value));
-    return obj;
   }
 
 };
@@ -351,20 +339,6 @@ export const AccessConfig = {
     message.permission = object.permission ?? 0;
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromAmino(object: AccessConfigSDKType): AccessConfig {
-    return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: AccessConfig): AccessConfigSDKType {
-    const obj: any = {};
-    message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -434,20 +408,6 @@ export const Params = {
     message.codeUploadAccess = object.codeUploadAccess !== undefined && object.codeUploadAccess !== null ? AccessConfig.fromPartial(object.codeUploadAccess) : undefined;
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      codeUploadAccess: isSet(object.code_upload_access) ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.codeUploadAccess !== undefined && (obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined);
-    message.instantiateDefaultPermission !== undefined && (obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission));
-    return obj;
   }
 
 };
@@ -529,22 +489,6 @@ export const CodeInfo = {
     message.creator = object.creator ?? "";
     message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : undefined;
     return message;
-  },
-
-  fromAmino(object: CodeInfoSDKType): CodeInfo {
-    return {
-      codeHash: isSet(object.code_hash) ? object.code_hash : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      instantiateConfig: isSet(object.instantiate_config) ? AccessConfig.fromAmino(object.instantiate_config) : undefined
-    };
-  },
-
-  toAmino(message: CodeInfo): CodeInfoSDKType {
-    const obj: any = {};
-    message.codeHash !== undefined && (obj.code_hash = message.codeHash);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.instantiateConfig !== undefined && (obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined);
-    return obj;
   }
 
 };
@@ -674,30 +618,6 @@ export const ContractInfo = {
     message.ibcPortId = object.ibcPortId ?? "";
     message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : undefined;
     return message;
-  },
-
-  fromAmino(object: ContractInfoSDKType): ContractInfo {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      label: isSet(object.label) ? object.label : undefined,
-      created: isSet(object.created) ? AbsoluteTxPosition.fromAmino(object.created) : undefined,
-      ibcPortId: isSet(object.ibc_port_id) ? object.ibc_port_id : undefined,
-      extension: isSet(object.extension) ? Any.fromAmino(object.extension) : undefined
-    };
-  },
-
-  toAmino(message: ContractInfo): ContractInfoSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.label !== undefined && (obj.label = message.label);
-    message.created !== undefined && (obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created) : undefined);
-    message.ibcPortId !== undefined && (obj.ibc_port_id = message.ibcPortId);
-    message.extension !== undefined && (obj.extension = message.extension ? Any.toAmino(message.extension) : undefined);
-    return obj;
   }
 
 };
@@ -791,24 +711,6 @@ export const ContractCodeHistoryEntry = {
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
-    return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      updated: isSet(object.updated) ? AbsoluteTxPosition.fromAmino(object.updated) : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined
-    };
-  },
-
-  toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntrySDKType {
-    const obj: any = {};
-    message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined);
-    message.msg !== undefined && (obj.msg = message.msg);
-    return obj;
   }
 
 };
@@ -878,20 +780,6 @@ export const AbsoluteTxPosition = {
     message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.UZERO;
     message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? Long.fromValue(object.txIndex) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
-    return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
-      txIndex: isSet(object.tx_index) ? object.tx_index : undefined
-    };
-  },
-
-  toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionSDKType {
-    const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
-    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
-    return obj;
   }
 
 };
@@ -961,20 +849,6 @@ export const Model = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: ModelSDKType): Model {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Model): ModelSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };

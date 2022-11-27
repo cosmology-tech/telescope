@@ -148,20 +148,6 @@ export const Duration = {
     message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
     message.nanos = object.nanos ?? 0;
     return message;
-  },
-
-  fromAmino(object: DurationSDKType): Duration {
-    return {
-      seconds: isSet(object.seconds) ? object.seconds : undefined,
-      nanos: isSet(object.nanos) ? object.nanos : undefined
-    };
-  },
-
-  toAmino(message: Duration): DurationSDKType {
-    const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
-    message.nanos !== undefined && (obj.nanos = message.nanos);
-    return obj;
   }
 
 };

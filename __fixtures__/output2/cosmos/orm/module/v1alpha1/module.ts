@@ -50,15 +50,6 @@ export const Module = {
   fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;
-  },
-
-  fromAmino(_: ModuleSDKType): Module {
-    return {};
-  },
-
-  toAmino(_: Module): ModuleSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

@@ -112,26 +112,6 @@ export const QueryProvidersResponse = {
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
-    const obj: any = {};
-
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -201,20 +181,6 @@ export const QueryProviderRequest = {
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryProviderRequestSDKType): QueryProviderRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderRequest): QueryProviderRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
   }
 
 };
@@ -272,18 +238,6 @@ export const QueryAllProvidersAttributesRequest = {
     const message = createBaseQueryAllProvidersAttributesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -353,20 +307,6 @@ export const QueryProviderAttributesRequest = {
     message.owner = object.owner ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -436,20 +376,6 @@ export const QueryProviderAuditorRequest = {
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryProviderAuditorRequestSDKType): QueryProviderAuditorRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
   }
 
 };
@@ -519,20 +445,6 @@ export const QueryAuditorAttributesRequest = {
     message.auditor = object.auditor ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };

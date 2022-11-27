@@ -172,31 +172,6 @@ export const Explain = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ExplainSDKType): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Explain): ExplainSDKType {
-    const obj: any = {};
-
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-
-    if (message.exprSteps) {
-      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
-    } else {
-      obj.expr_steps = [];
-    }
-
-    return obj;
   }
 
 };
@@ -276,20 +251,6 @@ export const Explain_ExprStep = {
   },
 
   toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.valueIndex !== undefined && (obj.value_index = message.valueIndex);
-    return obj;
-  },
-
-  fromAmino(object: Explain_ExprStepSDKType): Explain_ExprStep {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      valueIndex: isSet(object.value_index) ? object.value_index : undefined
-    };
-  },
-
-  toAmino(message: Explain_ExprStep): Explain_ExprStepSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.valueIndex !== undefined && (obj.value_index = message.valueIndex);

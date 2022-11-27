@@ -76,20 +76,6 @@ export const InterchainAccount = {
     message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
     message.accountOwner = object.accountOwner ?? "";
     return message;
-  },
-
-  fromAmino(object: InterchainAccountSDKType): InterchainAccount {
-    return {
-      baseAccount: isSet(object.base_account) ? BaseAccount.fromAmino(object.base_account) : undefined,
-      accountOwner: isSet(object.account_owner) ? object.account_owner : undefined
-    };
-  },
-
-  toAmino(message: InterchainAccount): InterchainAccountSDKType {
-    const obj: any = {};
-    message.baseAccount !== undefined && (obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined);
-    message.accountOwner !== undefined && (obj.account_owner = message.accountOwner);
-    return obj;
   }
 
 };

@@ -282,36 +282,6 @@ export const TwapRecord = {
     message.p1ArithmeticTwapAccumulator !== undefined && (obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator);
     message.lastErrorTime !== undefined && (obj.last_error_time = message.lastErrorTime ? Timestamp.toSDK(message.lastErrorTime) : undefined);
     return obj;
-  },
-
-  fromAmino(object: TwapRecordSDKType): TwapRecord {
-    return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      asset0Denom: isSet(object.asset0_denom) ? object.asset0_denom : undefined,
-      asset1Denom: isSet(object.asset1_denom) ? object.asset1_denom : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
-      p0LastSpotPrice: isSet(object.p0_last_spot_price) ? object.p0_last_spot_price : undefined,
-      p1LastSpotPrice: isSet(object.p1_last_spot_price) ? object.p1_last_spot_price : undefined,
-      p0ArithmeticTwapAccumulator: isSet(object.p0_arithmetic_twap_accumulator) ? object.p0_arithmetic_twap_accumulator : undefined,
-      p1ArithmeticTwapAccumulator: isSet(object.p1_arithmetic_twap_accumulator) ? object.p1_arithmetic_twap_accumulator : undefined,
-      lastErrorTime: isSet(object.last_error_time) ? Timestamp.fromAmino(object.last_error_time) : undefined
-    };
-  },
-
-  toAmino(message: TwapRecord): TwapRecordSDKType {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.asset0Denom !== undefined && (obj.asset0_denom = message.asset0Denom);
-    message.asset1Denom !== undefined && (obj.asset1_denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = message.height);
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
-    message.p0LastSpotPrice !== undefined && (obj.p0_last_spot_price = message.p0LastSpotPrice);
-    message.p1LastSpotPrice !== undefined && (obj.p1_last_spot_price = message.p1LastSpotPrice);
-    message.p0ArithmeticTwapAccumulator !== undefined && (obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator);
-    message.p1ArithmeticTwapAccumulator !== undefined && (obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator);
-    message.lastErrorTime !== undefined && (obj.last_error_time = message.lastErrorTime ? Timestamp.toAmino(message.lastErrorTime) : undefined);
-    return obj;
   }
 
 };

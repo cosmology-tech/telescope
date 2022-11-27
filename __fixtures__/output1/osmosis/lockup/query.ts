@@ -260,15 +260,6 @@ export const ModuleBalanceRequest = {
   toSDK(_: ModuleBalanceRequest): ModuleBalanceRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: ModuleBalanceRequestSDKType): ModuleBalanceRequest {
-    return {};
-  },
-
-  toAmino(_: ModuleBalanceRequest): ModuleBalanceRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -350,24 +341,6 @@ export const ModuleBalanceResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ModuleBalanceResponseSDKType): ModuleBalanceResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ModuleBalanceResponse): ModuleBalanceResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
   }
 
 };
@@ -418,15 +391,6 @@ export const ModuleLockedAmountRequest = {
   },
 
   toSDK(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ModuleLockedAmountRequestSDKType): ModuleLockedAmountRequest {
-    return {};
-  },
-
-  toAmino(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -510,24 +474,6 @@ export const ModuleLockedAmountResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ModuleLockedAmountResponseSDKType): ModuleLockedAmountResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ModuleLockedAmountResponse): ModuleLockedAmountResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
   }
 
 };
@@ -594,18 +540,6 @@ export const AccountUnlockableCoinsRequest = {
   },
 
   toSDK(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: AccountUnlockableCoinsRequestSDKType): AccountUnlockableCoinsRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestSDKType {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -690,24 +624,6 @@ export const AccountUnlockableCoinsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: AccountUnlockableCoinsResponseSDKType): AccountUnlockableCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountUnlockableCoinsResponse): AccountUnlockableCoinsResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
   }
 
 };
@@ -774,18 +690,6 @@ export const AccountUnlockingCoinsRequest = {
   },
 
   toSDK(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: AccountUnlockingCoinsRequestSDKType): AccountUnlockingCoinsRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestSDKType {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -870,24 +774,6 @@ export const AccountUnlockingCoinsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: AccountUnlockingCoinsResponseSDKType): AccountUnlockingCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountUnlockingCoinsResponse): AccountUnlockingCoinsResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
   }
 
 };
@@ -954,18 +840,6 @@ export const AccountLockedCoinsRequest = {
   },
 
   toSDK(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedCoinsRequestSDKType): AccountLockedCoinsRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestSDKType {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -1045,24 +919,6 @@ export const AccountLockedCoinsResponse = {
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedCoinsResponseSDKType): AccountLockedCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedCoinsResponse): AccountLockedCoinsResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -1151,20 +1007,6 @@ export const AccountLockedPastTimeRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    return obj;
   }
 
 };
@@ -1241,24 +1083,6 @@ export const AccountLockedPastTimeResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeResponseSDKType): AccountLockedPastTimeResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeResponse): AccountLockedPastTimeResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1347,20 +1171,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    return obj;
   }
 
 };
@@ -1437,24 +1247,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyResponseSDKType): AccountLockedPastTimeNotUnlockingOnlyResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyResponse): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1543,20 +1335,6 @@ export const AccountUnlockedBeforeTimeRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    return obj;
   }
 
 };
@@ -1633,24 +1411,6 @@ export const AccountUnlockedBeforeTimeResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountUnlockedBeforeTimeResponseSDKType): AccountUnlockedBeforeTimeResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountUnlockedBeforeTimeResponse): AccountUnlockedBeforeTimeResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1753,22 +1513,6 @@ export const AccountLockedPastTimeDenomRequest = {
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
   }
 
 };
@@ -1845,24 +1589,6 @@ export const AccountLockedPastTimeDenomResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedPastTimeDenomResponseSDKType): AccountLockedPastTimeDenomResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedPastTimeDenomResponse): AccountLockedPastTimeDenomResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1951,20 +1677,6 @@ export const LockedDenomRequest = {
     message.denom !== undefined && (obj.denom = message.denom);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
-  },
-
-  fromAmino(object: LockedDenomRequestSDKType): LockedDenomRequest {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: LockedDenomRequest): LockedDenomRequestSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    return obj;
   }
 
 };
@@ -2031,18 +1743,6 @@ export const LockedDenomResponse = {
   },
 
   toSDK(message: LockedDenomResponse): LockedDenomResponseSDKType {
-    const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: LockedDenomResponseSDKType): LockedDenomResponse {
-    return {
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: LockedDenomResponse): LockedDenomResponseSDKType {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
@@ -2115,18 +1815,6 @@ export const LockedRequest = {
     const obj: any = {};
     message.lockId !== undefined && (obj.lock_id = message.lockId);
     return obj;
-  },
-
-  fromAmino(object: LockedRequestSDKType): LockedRequest {
-    return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
-    };
-  },
-
-  toAmino(message: LockedRequest): LockedRequestSDKType {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    return obj;
   }
 
 };
@@ -2196,18 +1884,6 @@ export const LockedResponse = {
     const obj: any = {};
     message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toSDK(message.lock) : undefined);
     return obj;
-  },
-
-  fromAmino(object: LockedResponseSDKType): LockedResponse {
-    return {
-      lock: isSet(object.lock) ? PeriodLock.fromAmino(object.lock) : undefined
-    };
-  },
-
-  toAmino(message: LockedResponse): LockedResponseSDKType {
-    const obj: any = {};
-    message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toAmino(message.lock) : undefined);
-    return obj;
   }
 
 };
@@ -2274,18 +1950,6 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
 
   toSDK(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    return obj;
-  },
-
-  fromAmino(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
-    return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
-    };
-  },
-
-  toAmino(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {
     const obj: any = {};
     message.lockId !== undefined && (obj.lock_id = message.lockId);
     return obj;
@@ -2365,24 +2029,6 @@ export const SyntheticLockupsByLockupIDResponse = {
 
     if (message.syntheticLocks) {
       obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toSDK(e) : undefined);
-    } else {
-      obj.synthetic_locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: SyntheticLockupsByLockupIDResponseSDKType): SyntheticLockupsByLockupIDResponse {
-    return {
-      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: SyntheticLockupsByLockupIDResponse): SyntheticLockupsByLockupIDResponseSDKType {
-    const obj: any = {};
-
-    if (message.syntheticLocks) {
-      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
     } else {
       obj.synthetic_locks = [];
     }
@@ -2471,20 +2117,6 @@ export const AccountLockedLongerDurationRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    return obj;
   }
 
 };
@@ -2561,24 +2193,6 @@ export const AccountLockedLongerDurationResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationResponseSDKType): AccountLockedLongerDurationResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationResponse): AccountLockedLongerDurationResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -2667,20 +2281,6 @@ export const AccountLockedDurationRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedDurationRequest): AccountLockedDurationRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    return obj;
   }
 
 };
@@ -2757,24 +2357,6 @@ export const AccountLockedDurationResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedDurationResponseSDKType): AccountLockedDurationResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedDurationResponse): AccountLockedDurationResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -2863,20 +2445,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    return obj;
   }
 
 };
@@ -2953,24 +2521,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType): AccountLockedLongerDurationNotUnlockingOnlyResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -3073,22 +2623,6 @@ export const AccountLockedLongerDurationDenomRequest = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
   }
 
 };
@@ -3165,24 +2699,6 @@ export const AccountLockedLongerDurationDenomResponse = {
 
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AccountLockedLongerDurationDenomResponseSDKType): AccountLockedLongerDurationDenomResponse {
-    return {
-      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AccountLockedLongerDurationDenomResponse): AccountLockedLongerDurationDenomResponseSDKType {
-    const obj: any = {};
-
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }

@@ -583,24 +583,6 @@ export const Member = {
     message.metadata = object.metadata ?? "";
     message.addedAt = object.addedAt !== undefined && object.addedAt !== null ? Timestamp.fromPartial(object.addedAt) : undefined;
     return message;
-  },
-
-  fromAmino(object: MemberSDKType): Member {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined,
-      addedAt: isSet(object.added_at) ? Timestamp.fromAmino(object.added_at) : undefined
-    };
-  },
-
-  toAmino(message: Member): MemberSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.weight !== undefined && (obj.weight = message.weight);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.addedAt !== undefined && (obj.added_at = message.addedAt ? Timestamp.toAmino(message.addedAt) : undefined);
-    return obj;
   }
 
 };
@@ -664,24 +646,6 @@ export const Members = {
     const message = createBaseMembers();
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: MembersSDKType): Members {
-    return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Members): MembersSDKType {
-    const obj: any = {};
-
-    if (message.members) {
-      obj.members = message.members.map(e => e ? Member.toAmino(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-
-    return obj;
   }
 
 };
@@ -751,20 +715,6 @@ export const ThresholdDecisionPolicy = {
     message.threshold = object.threshold ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
-  },
-
-  fromAmino(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
-    return {
-      threshold: isSet(object.threshold) ? object.threshold : undefined,
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromAmino(object.windows) : undefined
-    };
-  },
-
-  toAmino(message: ThresholdDecisionPolicy): ThresholdDecisionPolicySDKType {
-    const obj: any = {};
-    message.threshold !== undefined && (obj.threshold = message.threshold);
-    message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined);
-    return obj;
   }
 
 };
@@ -834,20 +784,6 @@ export const PercentageDecisionPolicy = {
     message.percentage = object.percentage ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
-  },
-
-  fromAmino(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
-    return {
-      percentage: isSet(object.percentage) ? object.percentage : undefined,
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromAmino(object.windows) : undefined
-    };
-  },
-
-  toAmino(message: PercentageDecisionPolicy): PercentageDecisionPolicySDKType {
-    const obj: any = {};
-    message.percentage !== undefined && (obj.percentage = message.percentage);
-    message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined);
-    return obj;
   }
 
 };
@@ -917,20 +853,6 @@ export const DecisionPolicyWindows = {
     message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
     message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : undefined;
     return message;
-  },
-
-  fromAmino(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
-    return {
-      votingPeriod: isSet(object.voting_period) ? Duration.fromAmino(object.voting_period) : undefined,
-      minExecutionPeriod: isSet(object.min_execution_period) ? Duration.fromAmino(object.min_execution_period) : undefined
-    };
-  },
-
-  toAmino(message: DecisionPolicyWindows): DecisionPolicyWindowsSDKType {
-    const obj: any = {};
-    message.votingPeriod !== undefined && (obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined);
-    message.minExecutionPeriod !== undefined && (obj.min_execution_period = message.minExecutionPeriod ? Duration.toAmino(message.minExecutionPeriod) : undefined);
-    return obj;
   }
 
 };
@@ -1048,28 +970,6 @@ export const GroupInfo = {
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : undefined;
     return message;
-  },
-
-  fromAmino(object: GroupInfoSDKType): GroupInfo {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
-      createdAt: isSet(object.created_at) ? Timestamp.fromAmino(object.created_at) : undefined
-    };
-  },
-
-  toAmino(message: GroupInfo): GroupInfoSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = message.version);
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined);
-    return obj;
   }
 
 };
@@ -1139,20 +1039,6 @@ export const GroupMember = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
-  },
-
-  fromAmino(object: GroupMemberSDKType): GroupMember {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      member: isSet(object.member) ? Member.fromAmino(object.member) : undefined
-    };
-  },
-
-  toAmino(message: GroupMember): GroupMemberSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.member !== undefined && (obj.member = message.member ? Member.toAmino(message.member) : undefined);
-    return obj;
   }
 
 };
@@ -1282,30 +1168,6 @@ export const GroupPolicyInfo = {
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : undefined;
     return message;
-  },
-
-  fromAmino(object: GroupPolicyInfoSDKType): GroupPolicyInfo {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      decisionPolicy: isSet(object.decision_policy) ? Any.fromAmino(object.decision_policy) : undefined,
-      createdAt: isSet(object.created_at) ? Timestamp.fromAmino(object.created_at) : undefined
-    };
-  },
-
-  toAmino(message: GroupPolicyInfo): GroupPolicyInfoSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = message.version);
-    message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toAmino(message.decisionPolicy) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt ? Timestamp.toAmino(message.createdAt) : undefined);
-    return obj;
   }
 
 };
@@ -1519,54 +1381,6 @@ export const Proposal = {
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ProposalSDKType): Proposal {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      address: isSet(object.address) ? object.address : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined,
-      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: isSet(object.submit_time) ? Timestamp.fromAmino(object.submit_time) : undefined,
-      groupVersion: isSet(object.group_version) ? object.group_version : undefined,
-      groupPolicyVersion: isSet(object.group_policy_version) ? object.group_policy_version : undefined,
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
-      finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: isSet(object.voting_period_end) ? Timestamp.fromAmino(object.voting_period_end) : undefined,
-      executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Proposal): ProposalSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.address !== undefined && (obj.address = message.address);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-
-    if (message.proposers) {
-      obj.proposers = message.proposers.map(e => e);
-    } else {
-      obj.proposers = [];
-    }
-
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined);
-    message.groupVersion !== undefined && (obj.group_version = message.groupVersion);
-    message.groupPolicyVersion !== undefined && (obj.group_policy_version = message.groupPolicyVersion);
-    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
-    message.result !== undefined && (obj.result = proposalResultToJSON(message.result));
-    message.finalTallyResult !== undefined && (obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined);
-    message.votingPeriodEnd !== undefined && (obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toAmino(message.votingPeriodEnd) : undefined);
-    message.executorResult !== undefined && (obj.executor_result = proposalExecutorResultToJSON(message.executorResult));
-
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1660,24 +1474,6 @@ export const TallyResult = {
     message.noCount = object.noCount ?? "";
     message.noWithVetoCount = object.noWithVetoCount ?? "";
     return message;
-  },
-
-  fromAmino(object: TallyResultSDKType): TallyResult {
-    return {
-      yesCount: isSet(object.yes_count) ? object.yes_count : undefined,
-      abstainCount: isSet(object.abstain_count) ? object.abstain_count : undefined,
-      noCount: isSet(object.no_count) ? object.no_count : undefined,
-      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : undefined
-    };
-  },
-
-  toAmino(message: TallyResult): TallyResultSDKType {
-    const obj: any = {};
-    message.yesCount !== undefined && (obj.yes_count = message.yesCount);
-    message.abstainCount !== undefined && (obj.abstain_count = message.abstainCount);
-    message.noCount !== undefined && (obj.no_count = message.noCount);
-    message.noWithVetoCount !== undefined && (obj.no_with_veto_count = message.noWithVetoCount);
-    return obj;
   }
 
 };
@@ -1783,26 +1579,6 @@ export const Vote = {
     message.metadata = object.metadata ?? "";
     message.submitTime = object.submitTime !== undefined && object.submitTime !== null ? Timestamp.fromPartial(object.submitTime) : undefined;
     return message;
-  },
-
-  fromAmino(object: VoteSDKType): Vote {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? object.metadata : undefined,
-      submitTime: isSet(object.submit_time) ? Timestamp.fromAmino(object.submit_time) : undefined
-    };
-  },
-
-  toAmino(message: Vote): VoteSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined);
-    return obj;
   }
 
 };

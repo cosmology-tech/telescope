@@ -108,18 +108,6 @@ export const QueryTokenPairsRequest = {
     const message = createBaseQueryTokenPairsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairsRequest): QueryTokenPairsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -195,26 +183,6 @@ export const QueryTokenPairsResponse = {
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
-    return {
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairsResponse): QueryTokenPairsResponseSDKType {
-    const obj: any = {};
-
-    if (message.tokenPairs) {
-      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
-    } else {
-      obj.token_pairs = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -272,18 +240,6 @@ export const QueryTokenPairRequest = {
     const message = createBaseQueryTokenPairRequest();
     message.token = object.token ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
-    return {
-      token: isSet(object.token) ? object.token : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token);
-    return obj;
   }
 
 };
@@ -341,18 +297,6 @@ export const QueryTokenPairResponse = {
     const message = createBaseQueryTokenPairResponse();
     message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
-    return {
-      tokenPair: isSet(object.token_pair) ? TokenPair.fromAmino(object.token_pair) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseSDKType {
-    const obj: any = {};
-    message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toAmino(message.tokenPair) : undefined);
-    return obj;
   }
 
 };
@@ -396,15 +340,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -462,18 +397,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };

@@ -378,54 +378,6 @@ export const TxResponse = {
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: TxResponseSDKType): TxResponse {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      txhash: isSet(object.txhash) ? object.txhash : undefined,
-      codespace: isSet(object.codespace) ? object.codespace : undefined,
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      rawLog: isSet(object.raw_log) ? object.raw_log : undefined,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromAmino(e)) : [],
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
-      tx: isSet(object.tx) ? Any.fromAmino(object.tx) : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: TxResponse): TxResponseSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.txhash !== undefined && (obj.txhash = message.txhash);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.rawLog !== undefined && (obj.raw_log = message.rawLog);
-
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e ? ABCIMessageLog.toAmino(e) : undefined);
-    } else {
-      obj.logs = [];
-    }
-
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
-    message.tx !== undefined && (obj.tx = message.tx ? Any.toAmino(message.tx) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    return obj;
   }
 
 };
@@ -513,28 +465,6 @@ export const ABCIMessageLog = {
     message.log = object.log ?? "";
     message.events = object.events?.map(e => StringEvent.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ABCIMessageLogSDKType): ABCIMessageLog {
-    return {
-      msgIndex: isSet(object.msg_index) ? object.msg_index : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ABCIMessageLog): ABCIMessageLogSDKType {
-    const obj: any = {};
-    message.msgIndex !== undefined && (obj.msg_index = message.msgIndex);
-    message.log !== undefined && (obj.log = message.log);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? StringEvent.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    return obj;
   }
 
 };
@@ -610,26 +540,6 @@ export const StringEvent = {
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: StringEventSDKType): StringEvent {
-    return {
-      type: isSet(object.type) ? object.type : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: StringEvent): StringEventSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
   }
 
 };
@@ -699,20 +609,6 @@ export const Attribute = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
-  },
-
-  fromAmino(object: AttributeSDKType): Attribute {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Attribute): AttributeSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -782,20 +678,6 @@ export const GasInfo = {
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: GasInfoSDKType): GasInfo {
-    return {
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined
-    };
-  },
-
-  toAmino(message: GasInfo): GasInfoSDKType {
-    const obj: any = {};
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
-    return obj;
   }
 
 };
@@ -883,28 +765,6 @@ export const Result = {
     message.log = object.log ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: ResultSDKType): Result {
-    return {
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Result): ResultSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    return obj;
   }
 
 };
@@ -974,20 +834,6 @@ export const SimulationResponse = {
     message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
     return message;
-  },
-
-  fromAmino(object: SimulationResponseSDKType): SimulationResponse {
-    return {
-      gasInfo: isSet(object.gas_info) ? GasInfo.fromAmino(object.gas_info) : undefined,
-      result: isSet(object.result) ? Result.fromAmino(object.result) : undefined
-    };
-  },
-
-  toAmino(message: SimulationResponse): SimulationResponseSDKType {
-    const obj: any = {};
-    message.gasInfo !== undefined && (obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Result.toAmino(message.result) : undefined);
-    return obj;
   }
 
 };
@@ -1057,20 +903,6 @@ export const MsgData = {
     message.msgType = object.msgType ?? "";
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: MsgDataSDKType): MsgData {
-    return {
-      msgType: isSet(object.msg_type) ? object.msg_type : undefined,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: MsgData): MsgDataSDKType {
-    const obj: any = {};
-    message.msgType !== undefined && (obj.msg_type = message.msgType);
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -1134,24 +966,6 @@ export const TxMsgData = {
     const message = createBaseTxMsgData();
     message.data = object.data?.map(e => MsgData.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: TxMsgDataSDKType): TxMsgData {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => MsgData.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: TxMsgData): TxMsgDataSDKType {
-    const obj: any = {};
-
-    if (message.data) {
-      obj.data = message.data.map(e => e ? MsgData.toAmino(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1275,34 +1089,6 @@ export const SearchTxsResult = {
     message.limit = object.limit !== undefined && object.limit !== null ? Long.fromValue(object.limit) : Long.UZERO;
     message.txs = object.txs?.map(e => TxResponse.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: SearchTxsResultSDKType): SearchTxsResult {
-    return {
-      totalCount: isSet(object.total_count) ? object.total_count : undefined,
-      count: isSet(object.count) ? object.count : undefined,
-      pageNumber: isSet(object.page_number) ? object.page_number : undefined,
-      pageTotal: isSet(object.page_total) ? object.page_total : undefined,
-      limit: isSet(object.limit) ? object.limit : undefined,
-      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: SearchTxsResult): SearchTxsResultSDKType {
-    const obj: any = {};
-    message.totalCount !== undefined && (obj.total_count = message.totalCount);
-    message.count !== undefined && (obj.count = message.count);
-    message.pageNumber !== undefined && (obj.page_number = message.pageNumber);
-    message.pageTotal !== undefined && (obj.page_total = message.pageTotal);
-    message.limit !== undefined && (obj.limit = message.limit);
-
-    if (message.txs) {
-      obj.txs = message.txs.map(e => e ? TxResponse.toAmino(e) : undefined);
-    } else {
-      obj.txs = [];
-    }
-
-    return obj;
   }
 
 };

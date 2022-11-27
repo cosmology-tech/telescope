@@ -187,24 +187,6 @@ export const StakeAuthorization = {
     message.denyList = object.denyList !== undefined && object.denyList !== null ? StakeAuthorization_Validators.fromPartial(object.denyList) : undefined;
     message.authorizationType = object.authorizationType ?? 0;
     return message;
-  },
-
-  fromAmino(object: StakeAuthorizationSDKType): StakeAuthorization {
-    return {
-      maxTokens: isSet(object.max_tokens) ? Coin.fromAmino(object.max_tokens) : undefined,
-      allowList: isSet(object.allow_list) ? StakeAuthorization_Validators.fromAmino(object.allow_list) : undefined,
-      denyList: isSet(object.deny_list) ? StakeAuthorization_Validators.fromAmino(object.deny_list) : undefined,
-      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : 0
-    };
-  },
-
-  toAmino(message: StakeAuthorization): StakeAuthorizationSDKType {
-    const obj: any = {};
-    message.maxTokens !== undefined && (obj.max_tokens = message.maxTokens ? Coin.toAmino(message.maxTokens) : undefined);
-    message.allowList !== undefined && (obj.allow_list = message.allowList ? StakeAuthorization_Validators.toAmino(message.allowList) : undefined);
-    message.denyList !== undefined && (obj.deny_list = message.denyList ? StakeAuthorization_Validators.toAmino(message.denyList) : undefined);
-    message.authorizationType !== undefined && (obj.authorization_type = authorizationTypeToJSON(message.authorizationType));
-    return obj;
   }
 
 };
@@ -268,24 +250,6 @@ export const StakeAuthorization_Validators = {
     const message = createBaseStakeAuthorization_Validators();
     message.address = object.address?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: StakeAuthorization_ValidatorsSDKType): StakeAuthorization_Validators {
-    return {
-      address: Array.isArray(object?.address) ? object.address.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsSDKType {
-    const obj: any = {};
-
-    if (message.address) {
-      obj.address = message.address.map(e => e);
-    } else {
-      obj.address = [];
-    }
-
-    return obj;
   }
 
 };

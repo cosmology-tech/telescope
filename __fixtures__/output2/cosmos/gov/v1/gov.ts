@@ -331,20 +331,6 @@ export const WeightedVoteOption = {
     message.option = object.option ?? 0;
     message.weight = object.weight ?? "";
     return message;
-  },
-
-  fromAmino(object: WeightedVoteOptionSDKType): WeightedVoteOption {
-    return {
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? object.weight : undefined
-    };
-  },
-
-  toAmino(message: WeightedVoteOption): WeightedVoteOptionSDKType {
-    const obj: any = {};
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
   }
 
 };
@@ -432,28 +418,6 @@ export const Deposit = {
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: DepositSDKType): Deposit {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Deposit): DepositSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
   }
 
 };
@@ -631,48 +595,6 @@ export const Proposal = {
     message.votingEndTime = object.votingEndTime !== undefined && object.votingEndTime !== null ? Timestamp.fromPartial(object.votingEndTime) : undefined;
     message.metadata = object.metadata ?? "";
     return message;
-  },
-
-  fromAmino(object: ProposalSDKType): Proposal {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      submitTime: isSet(object.submit_time) ? Timestamp.fromAmino(object.submit_time) : undefined,
-      depositEndTime: isSet(object.deposit_end_time) ? Timestamp.fromAmino(object.deposit_end_time) : undefined,
-      totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      votingStartTime: isSet(object.voting_start_time) ? Timestamp.fromAmino(object.voting_start_time) : undefined,
-      votingEndTime: isSet(object.voting_end_time) ? Timestamp.fromAmino(object.voting_end_time) : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: Proposal): ProposalSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-
-    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
-    message.finalTallyResult !== undefined && (obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined);
-    message.submitTime !== undefined && (obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined);
-    message.depositEndTime !== undefined && (obj.deposit_end_time = message.depositEndTime ? Timestamp.toAmino(message.depositEndTime) : undefined);
-
-    if (message.totalDeposit) {
-      obj.total_deposit = message.totalDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.total_deposit = [];
-    }
-
-    message.votingStartTime !== undefined && (obj.voting_start_time = message.votingStartTime ? Timestamp.toAmino(message.votingStartTime) : undefined);
-    message.votingEndTime !== undefined && (obj.voting_end_time = message.votingEndTime ? Timestamp.toAmino(message.votingEndTime) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
   }
 
 };
@@ -766,24 +688,6 @@ export const TallyResult = {
     message.noCount = object.noCount ?? "";
     message.noWithVetoCount = object.noWithVetoCount ?? "";
     return message;
-  },
-
-  fromAmino(object: TallyResultSDKType): TallyResult {
-    return {
-      yesCount: isSet(object.yes_count) ? object.yes_count : undefined,
-      abstainCount: isSet(object.abstain_count) ? object.abstain_count : undefined,
-      noCount: isSet(object.no_count) ? object.no_count : undefined,
-      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : undefined
-    };
-  },
-
-  toAmino(message: TallyResult): TallyResultSDKType {
-    const obj: any = {};
-    message.yesCount !== undefined && (obj.yes_count = message.yesCount);
-    message.abstainCount !== undefined && (obj.abstain_count = message.abstainCount);
-    message.noCount !== undefined && (obj.no_count = message.noCount);
-    message.noWithVetoCount !== undefined && (obj.no_with_veto_count = message.noWithVetoCount);
-    return obj;
   }
 
 };
@@ -883,30 +787,6 @@ export const Vote = {
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
     return message;
-  },
-
-  fromAmino(object: VoteSDKType): Vote {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: Vote): VoteSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
-
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
   }
 
 };
@@ -982,26 +862,6 @@ export const DepositParams = {
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.maxDepositPeriod = object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null ? Duration.fromPartial(object.maxDepositPeriod) : undefined;
     return message;
-  },
-
-  fromAmino(object: DepositParamsSDKType): DepositParams {
-    return {
-      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: isSet(object.max_deposit_period) ? Duration.fromAmino(object.max_deposit_period) : undefined
-    };
-  },
-
-  toAmino(message: DepositParams): DepositParamsSDKType {
-    const obj: any = {};
-
-    if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.min_deposit = [];
-    }
-
-    message.maxDepositPeriod !== undefined && (obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined);
-    return obj;
   }
 
 };
@@ -1059,18 +919,6 @@ export const VotingParams = {
     const message = createBaseVotingParams();
     message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
     return message;
-  },
-
-  fromAmino(object: VotingParamsSDKType): VotingParams {
-    return {
-      votingPeriod: isSet(object.voting_period) ? Duration.fromAmino(object.voting_period) : undefined
-    };
-  },
-
-  toAmino(message: VotingParams): VotingParamsSDKType {
-    const obj: any = {};
-    message.votingPeriod !== undefined && (obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined);
-    return obj;
   }
 
 };
@@ -1152,22 +1000,6 @@ export const TallyParams = {
     message.threshold = object.threshold ?? "";
     message.vetoThreshold = object.vetoThreshold ?? "";
     return message;
-  },
-
-  fromAmino(object: TallyParamsSDKType): TallyParams {
-    return {
-      quorum: isSet(object.quorum) ? object.quorum : undefined,
-      threshold: isSet(object.threshold) ? object.threshold : undefined,
-      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : undefined
-    };
-  },
-
-  toAmino(message: TallyParams): TallyParamsSDKType {
-    const obj: any = {};
-    message.quorum !== undefined && (obj.quorum = message.quorum);
-    message.threshold !== undefined && (obj.threshold = message.threshold);
-    message.vetoThreshold !== undefined && (obj.veto_threshold = message.vetoThreshold);
-    return obj;
   }
 
 };

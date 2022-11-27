@@ -207,26 +207,6 @@ export const ModuleSchemaDescriptor = {
     message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
     message.prefix = object.prefix ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: ModuleSchemaDescriptorSDKType): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: isSet(object.prefix) ? object.prefix : undefined
-    };
-  },
-
-  toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorSDKType {
-    const obj: any = {};
-
-    if (message.schemaFile) {
-      obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e) : undefined);
-    } else {
-      obj.schema_file = [];
-    }
-
-    message.prefix !== undefined && (obj.prefix = message.prefix);
-    return obj;
   }
 
 };
@@ -308,22 +288,6 @@ export const ModuleSchemaDescriptor_FileEntry = {
     message.protoFileName = object.protoFileName ?? "";
     message.storageType = object.storageType ?? 0;
     return message;
-  },
-
-  fromAmino(object: ModuleSchemaDescriptor_FileEntrySDKType): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      protoFileName: isSet(object.proto_file_name) ? object.proto_file_name : undefined,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
-    };
-  },
-
-  toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntrySDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.protoFileName !== undefined && (obj.proto_file_name = message.protoFileName);
-    message.storageType !== undefined && (obj.storage_type = storageTypeToJSON(message.storageType));
-    return obj;
   }
 
 };

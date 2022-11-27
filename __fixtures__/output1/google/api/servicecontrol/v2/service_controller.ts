@@ -367,32 +367,6 @@ export const CheckRequest = {
 
     message.flags !== undefined && (obj.flags = message.flags);
     return obj;
-  },
-
-  fromAmino(object: CheckRequestSDKType): CheckRequest {
-    return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
-      attributes: isSet(object.attributes) ? AttributeContext.fromAmino(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
-      flags: isSet(object.flags) ? object.flags : undefined
-    };
-  },
-
-  toAmino(message: CheckRequest): CheckRequestSDKType {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
-    message.attributes !== undefined && (obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined);
-
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-
-    message.flags !== undefined && (obj.flags = message.flags);
-    return obj;
   }
 
 };
@@ -518,26 +492,6 @@ export const ResourceInfo = {
     message.container !== undefined && (obj.container = message.container);
     message.location !== undefined && (obj.location = message.location);
     return obj;
-  },
-
-  fromAmino(object: ResourceInfoSDKType): ResourceInfo {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      type: isSet(object.type) ? object.type : undefined,
-      permission: isSet(object.permission) ? object.permission : undefined,
-      container: isSet(object.container) ? object.container : undefined,
-      location: isSet(object.location) ? object.location : undefined
-    };
-  },
-
-  toAmino(message: ResourceInfo): ResourceInfoSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.permission !== undefined && (obj.permission = message.permission);
-    message.container !== undefined && (obj.container = message.container);
-    message.location !== undefined && (obj.location = message.location);
-    return obj;
   }
 
 };
@@ -617,20 +571,6 @@ export const CheckResponse_HeadersEntry = {
   },
 
   toSDK(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: CheckResponse_HeadersEntrySDKType): CheckResponse_HeadersEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntrySDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -757,32 +697,6 @@ export const CheckResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: CheckResponseSDKType): CheckResponse {
-    return {
-      status: isSet(object.status) ? Status.fromAmino(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toAmino(message: CheckResponse): CheckResponseSDKType {
-    const obj: any = {};
-    message.status !== undefined && (obj.status = message.status ? Status.toAmino(message.status) : undefined);
-    obj.headers = {};
-
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-
-    return obj;
   }
 
 };
@@ -892,28 +806,6 @@ export const ReportRequest = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ReportRequestSDKType): ReportRequest {
-    return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ReportRequest): ReportRequestSDKType {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
-
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -964,15 +856,6 @@ export const ReportResponse = {
   },
 
   toSDK(_: ReportResponse): ReportResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ReportResponseSDKType): ReportResponse {
-    return {};
-  },
-
-  toAmino(_: ReportResponse): ReportResponseSDKType {
     const obj: any = {};
     return obj;
   }

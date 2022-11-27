@@ -521,28 +521,6 @@ export const GetTxsEventRequest = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     message.orderBy !== undefined && (obj.order_by = orderByToJSON(message.orderBy));
     return obj;
-  },
-
-  fromAmino(object: GetTxsEventRequestSDKType): GetTxsEventRequest {
-    return {
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined,
-      orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : 0
-    };
-  },
-
-  toAmino(message: GetTxsEventRequest): GetTxsEventRequestSDKType {
-    const obj: any = {};
-
-    if (message.events) {
-      obj.events = message.events.map(e => e);
-    } else {
-      obj.events = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    message.orderBy !== undefined && (obj.order_by = orderByToJSON(message.orderBy));
-    return obj;
   }
 
 };
@@ -662,33 +640,6 @@ export const GetTxsEventResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GetTxsEventResponseSDKType): GetTxsEventResponse {
-    return {
-      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromAmino(e)) : [],
-      txResponses: Array.isArray(object?.tx_responses) ? object.tx_responses.map((e: any) => TxResponse.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetTxsEventResponse): GetTxsEventResponseSDKType {
-    const obj: any = {};
-
-    if (message.txs) {
-      obj.txs = message.txs.map(e => e ? Tx.toAmino(e) : undefined);
-    } else {
-      obj.txs = [];
-    }
-
-    if (message.txResponses) {
-      obj.tx_responses = message.txResponses.map(e => e ? TxResponse.toAmino(e) : undefined);
-    } else {
-      obj.tx_responses = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -772,20 +723,6 @@ export const BroadcastTxRequest = {
     message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
     message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
     return obj;
-  },
-
-  fromAmino(object: BroadcastTxRequestSDKType): BroadcastTxRequest {
-    return {
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined,
-      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
-    };
-  },
-
-  toAmino(message: BroadcastTxRequest): BroadcastTxRequestSDKType {
-    const obj: any = {};
-    message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
-    message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
-    return obj;
   }
 
 };
@@ -854,18 +791,6 @@ export const BroadcastTxResponse = {
   toSDK(message: BroadcastTxResponse): BroadcastTxResponseSDKType {
     const obj: any = {};
     message.txResponse !== undefined && (obj.tx_response = message.txResponse ? TxResponse.toSDK(message.txResponse) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: BroadcastTxResponseSDKType): BroadcastTxResponse {
-    return {
-      txResponse: isSet(object.tx_response) ? TxResponse.fromAmino(object.tx_response) : undefined
-    };
-  },
-
-  toAmino(message: BroadcastTxResponse): BroadcastTxResponseSDKType {
-    const obj: any = {};
-    message.txResponse !== undefined && (obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined);
     return obj;
   }
 
@@ -948,20 +873,6 @@ export const SimulateRequest = {
   toSDK(message: SimulateRequest): SimulateRequestSDKType {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toSDK(message.tx) : undefined);
-    message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
-    return obj;
-  },
-
-  fromAmino(object: SimulateRequestSDKType): SimulateRequest {
-    return {
-      tx: isSet(object.tx) ? Tx.fromAmino(object.tx) : undefined,
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined
-    };
-  },
-
-  toAmino(message: SimulateRequest): SimulateRequestSDKType {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined);
     message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
     return obj;
   }
@@ -1047,20 +958,6 @@ export const SimulateResponse = {
     message.gasInfo !== undefined && (obj.gas_info = message.gasInfo ? GasInfo.toSDK(message.gasInfo) : undefined);
     message.result !== undefined && (obj.result = message.result ? Result.toSDK(message.result) : undefined);
     return obj;
-  },
-
-  fromAmino(object: SimulateResponseSDKType): SimulateResponse {
-    return {
-      gasInfo: isSet(object.gas_info) ? GasInfo.fromAmino(object.gas_info) : undefined,
-      result: isSet(object.result) ? Result.fromAmino(object.result) : undefined
-    };
-  },
-
-  toAmino(message: SimulateResponse): SimulateResponseSDKType {
-    const obj: any = {};
-    message.gasInfo !== undefined && (obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Result.toAmino(message.result) : undefined);
-    return obj;
   }
 
 };
@@ -1127,18 +1024,6 @@ export const GetTxRequest = {
   },
 
   toSDK(message: GetTxRequest): GetTxRequestSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
-    return obj;
-  },
-
-  fromAmino(object: GetTxRequestSDKType): GetTxRequest {
-    return {
-      hash: isSet(object.hash) ? object.hash : undefined
-    };
-  },
-
-  toAmino(message: GetTxRequest): GetTxRequestSDKType {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = message.hash);
     return obj;
@@ -1225,20 +1110,6 @@ export const GetTxResponse = {
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toSDK(message.tx) : undefined);
     message.txResponse !== undefined && (obj.tx_response = message.txResponse ? TxResponse.toSDK(message.txResponse) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GetTxResponseSDKType): GetTxResponse {
-    return {
-      tx: isSet(object.tx) ? Tx.fromAmino(object.tx) : undefined,
-      txResponse: isSet(object.tx_response) ? TxResponse.fromAmino(object.tx_response) : undefined
-    };
-  },
-
-  toAmino(message: GetTxResponse): GetTxResponseSDKType {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined);
-    message.txResponse !== undefined && (obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined);
-    return obj;
   }
 
 };
@@ -1321,20 +1192,6 @@ export const GetBlockWithTxsRequest = {
     const obj: any = {};
     message.height !== undefined && (obj.height = message.height);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetBlockWithTxsRequestSDKType): GetBlockWithTxsRequest {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1458,30 +1315,6 @@ export const GetBlockWithTxsResponse = {
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetBlockWithTxsResponseSDKType): GetBlockWithTxsResponse {
-    return {
-      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromAmino(e)) : [],
-      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromAmino(object.block) : undefined,
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetBlockWithTxsResponse): GetBlockWithTxsResponseSDKType {
-    const obj: any = {};
-
-    if (message.txs) {
-      obj.txs = message.txs.map(e => e ? Tx.toAmino(e) : undefined);
-    } else {
-      obj.txs = [];
-    }
-
-    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
-    message.block !== undefined && (obj.block = message.block ? Block.toAmino(message.block) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

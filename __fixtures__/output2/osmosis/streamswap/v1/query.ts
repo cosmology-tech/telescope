@@ -88,18 +88,6 @@ export const QuerySales = {
     const message = createBaseQuerySales();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QuerySalesSDKType): QuerySales {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySales): QuerySalesSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -175,26 +163,6 @@ export const QuerySalesResponse = {
     message.sales = object.sales?.map(e => Sale.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QuerySalesResponseSDKType): QuerySalesResponse {
-    return {
-      sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySalesResponse): QuerySalesResponseSDKType {
-    const obj: any = {};
-
-    if (message.sales) {
-      obj.sales = message.sales.map(e => e ? Sale.toAmino(e) : undefined);
-    } else {
-      obj.sales = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -252,18 +220,6 @@ export const QuerySale = {
     const message = createBaseQuerySale();
     message.saleId = object.saleId !== undefined && object.saleId !== null ? Long.fromValue(object.saleId) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: QuerySaleSDKType): QuerySale {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined
-    };
-  },
-
-  toAmino(message: QuerySale): QuerySaleSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    return obj;
   }
 
 };
@@ -321,18 +277,6 @@ export const QuerySaleResponse = {
     const message = createBaseQuerySaleResponse();
     message.sale = object.sale !== undefined && object.sale !== null ? Sale.fromPartial(object.sale) : undefined;
     return message;
-  },
-
-  fromAmino(object: QuerySaleResponseSDKType): QuerySaleResponse {
-    return {
-      sale: isSet(object.sale) ? Sale.fromAmino(object.sale) : undefined
-    };
-  },
-
-  toAmino(message: QuerySaleResponse): QuerySaleResponseSDKType {
-    const obj: any = {};
-    message.sale !== undefined && (obj.sale = message.sale ? Sale.toAmino(message.sale) : undefined);
-    return obj;
   }
 
 };
@@ -402,20 +346,6 @@ export const QueryUserPosition = {
     message.saleId = object.saleId !== undefined && object.saleId !== null ? Long.fromValue(object.saleId) : Long.UZERO;
     message.user = object.user ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryUserPositionSDKType): QueryUserPosition {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      user: isSet(object.user) ? object.user : undefined
-    };
-  },
-
-  toAmino(message: QueryUserPosition): QueryUserPositionSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.user !== undefined && (obj.user = message.user);
-    return obj;
   }
 
 };
@@ -473,18 +403,6 @@ export const QueryUserPositionResponse = {
     const message = createBaseQueryUserPositionResponse();
     message.userPosition = object.userPosition !== undefined && object.userPosition !== null ? UserPosition.fromPartial(object.userPosition) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryUserPositionResponseSDKType): QueryUserPositionResponse {
-    return {
-      userPosition: isSet(object.user_position) ? UserPosition.fromAmino(object.user_position) : undefined
-    };
-  },
-
-  toAmino(message: QueryUserPositionResponse): QueryUserPositionResponseSDKType {
-    const obj: any = {};
-    message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toAmino(message.userPosition) : undefined);
-    return obj;
   }
 
 };

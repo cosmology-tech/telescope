@@ -124,20 +124,6 @@ export const GenesisOwners = {
     message.index !== undefined && (obj.index = message.index);
     message.indexOwners !== undefined && (obj.index_owners = message.indexOwners ? CapabilityOwners.toSDK(message.indexOwners) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GenesisOwnersSDKType): GenesisOwners {
-    return {
-      index: isSet(object.index) ? object.index : undefined,
-      indexOwners: isSet(object.index_owners) ? CapabilityOwners.fromAmino(object.index_owners) : undefined
-    };
-  },
-
-  toAmino(message: GenesisOwners): GenesisOwnersSDKType {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.indexOwners !== undefined && (obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined);
-    return obj;
   }
 
 };
@@ -228,26 +214,6 @@ export const GenesisState = {
 
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toSDK(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      index: isSet(object.index) ? object.index : undefined,
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e) : undefined);
     } else {
       obj.owners = [];
     }

@@ -122,24 +122,6 @@ export const MsgIBCSend = {
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: MsgIBCSendSDKType): MsgIBCSend {
-    return {
-      channel: isSet(object.channel) ? object.channel : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? object.timeout_height : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: MsgIBCSend): MsgIBCSendSDKType {
-    const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
-    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -197,18 +179,6 @@ export const MsgIBCCloseChannel = {
     const message = createBaseMsgIBCCloseChannel();
     message.channel = object.channel ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgIBCCloseChannelSDKType): MsgIBCCloseChannel {
-    return {
-      channel: isSet(object.channel) ? object.channel : undefined
-    };
-  },
-
-  toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelSDKType {
-    const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
-    return obj;
   }
 
 };

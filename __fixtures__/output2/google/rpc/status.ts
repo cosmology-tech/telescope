@@ -115,28 +115,6 @@ export const Status = {
     message.message = object.message ?? "";
     message.details = object.details?.map(e => Any.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: StatusSDKType): Status {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      message: isSet(object.message) ? object.message : undefined,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Status): StatusSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.message !== undefined && (obj.message = message.message);
-
-    if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.details = [];
-    }
-
-    return obj;
   }
 
 };

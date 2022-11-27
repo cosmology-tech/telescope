@@ -154,30 +154,6 @@ export const Endpoint = {
     message.target = object.target ?? "";
     message.allowCors = object.allowCors ?? false;
     return message;
-  },
-
-  fromAmino(object: EndpointSDKType): Endpoint {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: isSet(object.target) ? object.target : undefined,
-      allowCors: isSet(object.allow_cors) ? object.allow_cors : undefined
-    };
-  },
-
-  toAmino(message: Endpoint): EndpointSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-
-    message.target !== undefined && (obj.target = message.target);
-    message.allowCors !== undefined && (obj.allow_cors = message.allowCors);
-    return obj;
   }
 
 };

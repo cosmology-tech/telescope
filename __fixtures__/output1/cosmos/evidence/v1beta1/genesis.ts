@@ -92,24 +92,6 @@ export const GenesisState = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.evidence = [];
-    }
-
-    return obj;
   }
 
 };

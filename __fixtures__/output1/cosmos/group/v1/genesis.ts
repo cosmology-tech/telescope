@@ -294,60 +294,6 @@ export const GenesisState = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      groupSeq: isSet(object.group_seq) ? object.group_seq : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
-      groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromAmino(e)) : [],
-      groupPolicySeq: isSet(object.group_policy_seq) ? object.group_policy_seq : undefined,
-      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
-      proposalSeq: isSet(object.proposal_seq) ? object.proposal_seq : undefined,
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.groupSeq !== undefined && (obj.group_seq = message.groupSeq);
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    if (message.groupMembers) {
-      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e) : undefined);
-    } else {
-      obj.group_members = [];
-    }
-
-    message.groupPolicySeq !== undefined && (obj.group_policy_seq = message.groupPolicySeq);
-
-    if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
-    } else {
-      obj.group_policies = [];
-    }
-
-    message.proposalSeq !== undefined && (obj.proposal_seq = message.proposalSeq);
-
-    if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
-    } else {
-      obj.proposals = [];
-    }
-
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-
-    return obj;
   }
 
 };

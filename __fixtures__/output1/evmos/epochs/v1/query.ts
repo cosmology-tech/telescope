@@ -95,18 +95,6 @@ export const QueryEpochsInfoRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -202,26 +190,6 @@ export const QueryEpochsInfoResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseSDKType {
-    const obj: any = {};
-
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -291,18 +259,6 @@ export const QueryCurrentEpochRequest = {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
-  },
-
-  fromAmino(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
-    return {
-      identifier: isSet(object.identifier) ? object.identifier : undefined
-    };
-  },
-
-  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
-    const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
-    return obj;
   }
 
 };
@@ -369,18 +325,6 @@ export const QueryCurrentEpochResponse = {
   },
 
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
-    const obj: any = {};
-    message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
-    return obj;
-  },
-
-  fromAmino(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
-    return {
-      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined
-    };
-  },
-
-  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
     const obj: any = {};
     message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
     return obj;

@@ -174,22 +174,6 @@ export const MsgConvertCoin = {
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
-  },
-
-  fromAmino(object: MsgConvertCoinSDKType): MsgConvertCoin {
-    return {
-      coin: isSet(object.coin) ? Coin.fromAmino(object.coin) : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
-    };
-  },
-
-  toAmino(message: MsgConvertCoin): MsgConvertCoinSDKType {
-    const obj: any = {};
-    message.coin !== undefined && (obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
   }
 
 };
@@ -240,15 +224,6 @@ export const MsgConvertCoinResponse = {
   },
 
   toSDK(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgConvertCoinResponseSDKType): MsgConvertCoinResponse {
-    return {};
-  },
-
-  toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -362,24 +337,6 @@ export const MsgConvertERC20 = {
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
-  },
-
-  fromAmino(object: MsgConvertERC20SDKType): MsgConvertERC20 {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
-    };
-  },
-
-  toAmino(message: MsgConvertERC20): MsgConvertERC20SDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
   }
 
 };
@@ -430,15 +387,6 @@ export const MsgConvertERC20Response = {
   },
 
   toSDK(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgConvertERC20ResponseSDKType): MsgConvertERC20Response {
-    return {};
-  },
-
-  toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
     const obj: any = {};
     return obj;
   }

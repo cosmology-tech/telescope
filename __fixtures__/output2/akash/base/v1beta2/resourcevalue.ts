@@ -62,18 +62,6 @@ export const ResourceValue = {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: ResourceValueSDKType): ResourceValue {
-    return {
-      val: isSet(object.val) ? object.val : undefined
-    };
-  },
-
-  toAmino(message: ResourceValue): ResourceValueSDKType {
-    const obj: any = {};
-    message.val !== undefined && (obj.val = message.val);
-    return obj;
   }
 
 };

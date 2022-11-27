@@ -732,30 +732,6 @@ export const ExistenceProof = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ExistenceProofSDKType): ExistenceProof {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      leaf: isSet(object.leaf) ? LeafOp.fromAmino(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ExistenceProof): ExistenceProofSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf) : undefined);
-
-    if (message.path) {
-      obj.path = message.path.map(e => e ? InnerOp.toAmino(e) : undefined);
-    } else {
-      obj.path = [];
-    }
-
-    return obj;
   }
 
 };
@@ -852,22 +828,6 @@ export const NonExistenceProof = {
     message.key !== undefined && (obj.key = message.key);
     message.left !== undefined && (obj.left = message.left ? ExistenceProof.toSDK(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? ExistenceProof.toSDK(message.right) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: NonExistenceProofSDKType): NonExistenceProof {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      left: isSet(object.left) ? ExistenceProof.fromAmino(object.left) : undefined,
-      right: isSet(object.right) ? ExistenceProof.fromAmino(object.right) : undefined
-    };
-  },
-
-  toAmino(message: NonExistenceProof): NonExistenceProofSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.left !== undefined && (obj.left = message.left ? ExistenceProof.toAmino(message.left) : undefined);
-    message.right !== undefined && (obj.right = message.right ? ExistenceProof.toAmino(message.right) : undefined);
     return obj;
   }
 
@@ -979,24 +939,6 @@ export const CommitmentProof = {
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toSDK(message.nonexist) : undefined);
     message.batch !== undefined && (obj.batch = message.batch ? BatchProof.toSDK(message.batch) : undefined);
     message.compressed !== undefined && (obj.compressed = message.compressed ? CompressedBatchProof.toSDK(message.compressed) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CommitmentProofSDKType): CommitmentProof {
-    return {
-      exist: isSet(object.exist) ? ExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromAmino(object.nonexist) : undefined,
-      batch: isSet(object.batch) ? BatchProof.fromAmino(object.batch) : undefined,
-      compressed: isSet(object.compressed) ? CompressedBatchProof.fromAmino(object.compressed) : undefined
-    };
-  },
-
-  toAmino(message: CommitmentProof): CommitmentProofSDKType {
-    const obj: any = {};
-    message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toAmino(message.exist) : undefined);
-    message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toAmino(message.nonexist) : undefined);
-    message.batch !== undefined && (obj.batch = message.batch ? BatchProof.toAmino(message.batch) : undefined);
-    message.compressed !== undefined && (obj.compressed = message.compressed ? CompressedBatchProof.toAmino(message.compressed) : undefined);
     return obj;
   }
 
@@ -1123,26 +1065,6 @@ export const LeafOp = {
     message.length !== undefined && (obj.length = lengthOpToJSON(message.length));
     message.prefix !== undefined && (obj.prefix = message.prefix);
     return obj;
-  },
-
-  fromAmino(object: LeafOpSDKType): LeafOp {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
-      prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
-      length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
-      prefix: isSet(object.prefix) ? object.prefix : undefined
-    };
-  },
-
-  toAmino(message: LeafOp): LeafOpSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
-    message.prehashKey !== undefined && (obj.prehash_key = hashOpToJSON(message.prehashKey));
-    message.prehashValue !== undefined && (obj.prehash_value = hashOpToJSON(message.prehashValue));
-    message.length !== undefined && (obj.length = lengthOpToJSON(message.length));
-    message.prefix !== undefined && (obj.prefix = message.prefix);
-    return obj;
   }
 
 };
@@ -1235,22 +1157,6 @@ export const InnerOp = {
   },
 
   toSDK(message: InnerOp): InnerOpSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
-    message.prefix !== undefined && (obj.prefix = message.prefix);
-    message.suffix !== undefined && (obj.suffix = message.suffix);
-    return obj;
-  },
-
-  fromAmino(object: InnerOpSDKType): InnerOp {
-    return {
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prefix: isSet(object.prefix) ? object.prefix : undefined,
-      suffix: isSet(object.suffix) ? object.suffix : undefined
-    };
-  },
-
-  toAmino(message: InnerOp): InnerOpSDKType {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     message.prefix !== undefined && (obj.prefix = message.prefix);
@@ -1364,24 +1270,6 @@ export const ProofSpec = {
     const obj: any = {};
     message.leafSpec !== undefined && (obj.leaf_spec = message.leafSpec ? LeafOp.toSDK(message.leafSpec) : undefined);
     message.innerSpec !== undefined && (obj.inner_spec = message.innerSpec ? InnerSpec.toSDK(message.innerSpec) : undefined);
-    message.maxDepth !== undefined && (obj.max_depth = message.maxDepth);
-    message.minDepth !== undefined && (obj.min_depth = message.minDepth);
-    return obj;
-  },
-
-  fromAmino(object: ProofSpecSDKType): ProofSpec {
-    return {
-      leafSpec: isSet(object.leaf_spec) ? LeafOp.fromAmino(object.leaf_spec) : undefined,
-      innerSpec: isSet(object.inner_spec) ? InnerSpec.fromAmino(object.inner_spec) : undefined,
-      maxDepth: isSet(object.max_depth) ? object.max_depth : undefined,
-      minDepth: isSet(object.min_depth) ? object.min_depth : undefined
-    };
-  },
-
-  toAmino(message: ProofSpec): ProofSpecSDKType {
-    const obj: any = {};
-    message.leafSpec !== undefined && (obj.leaf_spec = message.leafSpec ? LeafOp.toAmino(message.leafSpec) : undefined);
-    message.innerSpec !== undefined && (obj.inner_spec = message.innerSpec ? InnerSpec.toAmino(message.innerSpec) : undefined);
     message.maxDepth !== undefined && (obj.max_depth = message.maxDepth);
     message.minDepth !== undefined && (obj.min_depth = message.minDepth);
     return obj;
@@ -1549,34 +1437,6 @@ export const InnerSpec = {
     message.emptyChild !== undefined && (obj.empty_child = message.emptyChild);
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     return obj;
-  },
-
-  fromAmino(object: InnerSpecSDKType): InnerSpec {
-    return {
-      childOrder: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => e) : [],
-      childSize: isSet(object.child_size) ? object.child_size : undefined,
-      minPrefixLength: isSet(object.min_prefix_length) ? object.min_prefix_length : undefined,
-      maxPrefixLength: isSet(object.max_prefix_length) ? object.max_prefix_length : undefined,
-      emptyChild: isSet(object.empty_child) ? object.empty_child : undefined,
-      hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
-    };
-  },
-
-  toAmino(message: InnerSpec): InnerSpecSDKType {
-    const obj: any = {};
-
-    if (message.childOrder) {
-      obj.child_order = message.childOrder.map(e => e);
-    } else {
-      obj.child_order = [];
-    }
-
-    message.childSize !== undefined && (obj.child_size = message.childSize);
-    message.minPrefixLength !== undefined && (obj.min_prefix_length = message.minPrefixLength);
-    message.maxPrefixLength !== undefined && (obj.max_prefix_length = message.maxPrefixLength);
-    message.emptyChild !== undefined && (obj.empty_child = message.emptyChild);
-    message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
-    return obj;
   }
 
 };
@@ -1653,24 +1513,6 @@ export const BatchProof = {
 
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? BatchEntry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchProofSDKType): BatchProof {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => BatchEntry.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BatchProof): BatchProofSDKType {
-    const obj: any = {};
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? BatchEntry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -1758,20 +1600,6 @@ export const BatchEntry = {
     const obj: any = {};
     message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toSDK(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toSDK(message.nonexist) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: BatchEntrySDKType): BatchEntry {
-    return {
-      exist: isSet(object.exist) ? ExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromAmino(object.nonexist) : undefined
-    };
-  },
-
-  toAmino(message: BatchEntry): BatchEntrySDKType {
-    const obj: any = {};
-    message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toAmino(message.exist) : undefined);
-    message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toAmino(message.nonexist) : undefined);
     return obj;
   }
 
@@ -1878,31 +1706,6 @@ export const CompressedBatchProof = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: CompressedBatchProofSDKType): CompressedBatchProof {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CompressedBatchEntry.fromAmino(e)) : [],
-      lookupInners: Array.isArray(object?.lookup_inners) ? object.lookup_inners.map((e: any) => InnerOp.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: CompressedBatchProof): CompressedBatchProofSDKType {
-    const obj: any = {};
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? CompressedBatchEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    if (message.lookupInners) {
-      obj.lookup_inners = message.lookupInners.map(e => e ? InnerOp.toAmino(e) : undefined);
-    } else {
-      obj.lookup_inners = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1985,20 +1788,6 @@ export const CompressedBatchEntry = {
     const obj: any = {};
     message.exist !== undefined && (obj.exist = message.exist ? CompressedExistenceProof.toSDK(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toSDK(message.nonexist) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CompressedBatchEntrySDKType): CompressedBatchEntry {
-    return {
-      exist: isSet(object.exist) ? CompressedExistenceProof.fromAmino(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? CompressedNonExistenceProof.fromAmino(object.nonexist) : undefined
-    };
-  },
-
-  toAmino(message: CompressedBatchEntry): CompressedBatchEntrySDKType {
-    const obj: any = {};
-    message.exist !== undefined && (obj.exist = message.exist ? CompressedExistenceProof.toAmino(message.exist) : undefined);
-    message.nonexist !== undefined && (obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toAmino(message.nonexist) : undefined);
     return obj;
   }
 
@@ -2135,30 +1924,6 @@ export const CompressedExistenceProof = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: CompressedExistenceProofSDKType): CompressedExistenceProof {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      leaf: isSet(object.leaf) ? LeafOp.fromAmino(object.leaf) : undefined,
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: CompressedExistenceProof): CompressedExistenceProofSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf) : undefined);
-
-    if (message.path) {
-      obj.path = message.path.map(e => e);
-    } else {
-      obj.path = [];
-    }
-
-    return obj;
   }
 
 };
@@ -2255,22 +2020,6 @@ export const CompressedNonExistenceProof = {
     message.key !== undefined && (obj.key = message.key);
     message.left !== undefined && (obj.left = message.left ? CompressedExistenceProof.toSDK(message.left) : undefined);
     message.right !== undefined && (obj.right = message.right ? CompressedExistenceProof.toSDK(message.right) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CompressedNonExistenceProofSDKType): CompressedNonExistenceProof {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      left: isSet(object.left) ? CompressedExistenceProof.fromAmino(object.left) : undefined,
-      right: isSet(object.right) ? CompressedExistenceProof.fromAmino(object.right) : undefined
-    };
-  },
-
-  toAmino(message: CompressedNonExistenceProof): CompressedNonExistenceProofSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.left !== undefined && (obj.left = message.left ? CompressedExistenceProof.toAmino(message.left) : undefined);
-    message.right !== undefined && (obj.right = message.right ? CompressedExistenceProof.toAmino(message.right) : undefined);
     return obj;
   }
 

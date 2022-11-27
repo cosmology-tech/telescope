@@ -99,22 +99,6 @@ export const DevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
-  },
-
-  fromAmino(object: DevFeeInfoSDKType): DevFeeInfo {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
-    };
-  },
-
-  toAmino(message: DevFeeInfo): DevFeeInfoSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-    return obj;
   }
 
 };

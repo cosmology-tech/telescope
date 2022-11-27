@@ -79,18 +79,6 @@ export const QueryBalancesRequest = {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -188,38 +176,6 @@ export const QueryBalancesResponse = {
     message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];
     message.vested = object.vested?.map(e => Coin.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: QueryBalancesResponseSDKType): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromAmino(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromAmino(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryBalancesResponse): QueryBalancesResponseSDKType {
-    const obj: any = {};
-
-    if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.locked = [];
-    }
-
-    if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.unvested = [];
-    }
-
-    if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.vested = [];
-    }
-
-    return obj;
   }
 
 };

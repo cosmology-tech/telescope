@@ -66,18 +66,6 @@ export const Params = {
     const message = createBaseParams();
     message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.distrEpochIdentifier !== undefined && (obj.distr_epoch_identifier = message.distrEpochIdentifier);
-    return obj;
   }
 
 };

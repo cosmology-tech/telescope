@@ -226,20 +226,6 @@ export const AccountID = {
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
-  },
-
-  fromAmino(object: AccountIDSDKType): AccountID {
-    return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined
-    };
-  },
-
-  toAmino(message: AccountID): AccountIDSDKType {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    return obj;
   }
 
 };
@@ -357,28 +343,6 @@ export const Account = {
     message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
     message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? Long.fromValue(object.settledAt) : Long.ZERO;
     return message;
-  },
-
-  fromAmino(object: AccountSDKType): Account {
-    return {
-      id: isSet(object.id) ? AccountID.fromAmino(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? Coin.fromAmino(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : undefined
-    };
-  },
-
-  toAmino(message: Account): AccountSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? AccountID.toAmino(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
-    message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
-    return obj;
   }
 
 };
@@ -508,30 +472,6 @@ export const Payment = {
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
-  },
-
-  fromAmino(object: PaymentSDKType): Payment {
-    return {
-      accountId: isSet(object.account_id) ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? Coin.fromAmino(object.rate) : undefined,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromAmino(object.withdrawn) : undefined
-    };
-  },
-
-  toAmino(message: Payment): PaymentSDKType {
-    const obj: any = {};
-    message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
-    message.rate !== undefined && (obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
-    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined);
-    return obj;
   }
 
 };

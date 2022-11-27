@@ -115,35 +115,6 @@ export const GenesisState = {
     message.nextConnectionSequence = object.nextConnectionSequence !== undefined && object.nextConnectionSequence !== null ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromAmino(e)) : [],
-      clientConnectionPaths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromAmino(e)) : [],
-      nextConnectionSequence: isSet(object.next_connection_sequence) ? object.next_connection_sequence : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
-    } else {
-      obj.connections = [];
-    }
-
-    if (message.clientConnectionPaths) {
-      obj.client_connection_paths = message.clientConnectionPaths.map(e => e ? ConnectionPaths.toAmino(e) : undefined);
-    } else {
-      obj.client_connection_paths = [];
-    }
-
-    message.nextConnectionSequence !== undefined && (obj.next_connection_sequence = message.nextConnectionSequence);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };

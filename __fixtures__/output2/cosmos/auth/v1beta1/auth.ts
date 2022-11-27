@@ -122,24 +122,6 @@ export const BaseAccount = {
     message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? Long.fromValue(object.accountNumber) : Long.UZERO;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: BaseAccountSDKType): BaseAccount {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pubKey: isSet(object.pub_key) ? Any.fromAmino(object.pub_key) : undefined,
-      accountNumber: isSet(object.account_number) ? object.account_number : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
-    };
-  },
-
-  toAmino(message: BaseAccount): BaseAccountSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined);
-    message.accountNumber !== undefined && (obj.account_number = message.accountNumber);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    return obj;
   }
 
 };
@@ -227,28 +209,6 @@ export const ModuleAccount = {
     message.name = object.name ?? "";
     message.permissions = object.permissions?.map(e => e) || [];
     return message;
-  },
-
-  fromAmino(object: ModuleAccountSDKType): ModuleAccount {
-    return {
-      baseAccount: isSet(object.base_account) ? BaseAccount.fromAmino(object.base_account) : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ModuleAccount): ModuleAccountSDKType {
-    const obj: any = {};
-    message.baseAccount !== undefined && (obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-
-    if (message.permissions) {
-      obj.permissions = message.permissions.map(e => e);
-    } else {
-      obj.permissions = [];
-    }
-
-    return obj;
   }
 
 };
@@ -354,26 +314,6 @@ export const Params = {
     message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO;
     message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      maxMemoCharacters: isSet(object.max_memo_characters) ? object.max_memo_characters : undefined,
-      txSigLimit: isSet(object.tx_sig_limit) ? object.tx_sig_limit : undefined,
-      txSizeCostPerByte: isSet(object.tx_size_cost_per_byte) ? object.tx_size_cost_per_byte : undefined,
-      sigVerifyCostEd25519: isSet(object.sig_verify_cost_ed25519) ? object.sig_verify_cost_ed25519 : undefined,
-      sigVerifyCostSecp256k1: isSet(object.sig_verify_cost_secp256k1) ? object.sig_verify_cost_secp256k1 : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.maxMemoCharacters !== undefined && (obj.max_memo_characters = message.maxMemoCharacters);
-    message.txSigLimit !== undefined && (obj.tx_sig_limit = message.txSigLimit);
-    message.txSizeCostPerByte !== undefined && (obj.tx_size_cost_per_byte = message.txSizeCostPerByte);
-    message.sigVerifyCostEd25519 !== undefined && (obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519);
-    message.sigVerifyCostSecp256k1 !== undefined && (obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1);
-    return obj;
   }
 
 };

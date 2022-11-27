@@ -171,35 +171,6 @@ export const GenesisState = {
     message.nextSaleId !== undefined && (obj.next_sale_id = message.nextSaleId);
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromAmino(e)) : [],
-      userPositions: Array.isArray(object?.user_positions) ? object.user_positions.map((e: any) => UserPositionKV.fromAmino(e)) : [],
-      nextSaleId: isSet(object.next_sale_id) ? object.next_sale_id : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.sales) {
-      obj.sales = message.sales.map(e => e ? Sale.toAmino(e) : undefined);
-    } else {
-      obj.sales = [];
-    }
-
-    if (message.userPositions) {
-      obj.user_positions = message.userPositions.map(e => e ? UserPositionKV.toAmino(e) : undefined);
-    } else {
-      obj.user_positions = [];
-    }
-
-    message.nextSaleId !== undefined && (obj.next_sale_id = message.nextSaleId);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -296,22 +267,6 @@ export const UserPositionKV = {
     message.accAddress !== undefined && (obj.acc_address = message.accAddress);
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toSDK(message.userPosition) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: UserPositionKVSDKType): UserPositionKV {
-    return {
-      accAddress: isSet(object.acc_address) ? object.acc_address : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      userPosition: isSet(object.user_position) ? UserPosition.fromAmino(object.user_position) : undefined
-    };
-  },
-
-  toAmino(message: UserPositionKV): UserPositionKVSDKType {
-    const obj: any = {};
-    message.accAddress !== undefined && (obj.acc_address = message.accAddress);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toAmino(message.userPosition) : undefined);
     return obj;
   }
 

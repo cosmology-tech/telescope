@@ -124,20 +124,6 @@ export const Endpoint = {
     message.kind = object.kind ?? 0;
     message.sequenceNumber = object.sequenceNumber ?? 0;
     return message;
-  },
-
-  fromAmino(object: EndpointSDKType): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
-      sequenceNumber: isSet(object.sequence_number) ? object.sequence_number : undefined
-    };
-  },
-
-  toAmino(message: Endpoint): EndpointSDKType {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
-    message.sequenceNumber !== undefined && (obj.sequence_number = message.sequenceNumber);
-    return obj;
   }
 
 };

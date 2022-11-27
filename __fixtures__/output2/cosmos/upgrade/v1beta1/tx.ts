@@ -107,20 +107,6 @@ export const MsgSoftwareUpgrade = {
     message.authority = object.authority ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
-  },
-
-  fromAmino(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
-    return {
-      authority: isSet(object.authority) ? object.authority : undefined,
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-
-  toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    return obj;
   }
 
 };
@@ -164,15 +150,6 @@ export const MsgSoftwareUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
-  },
-
-  fromAmino(_: MsgSoftwareUpgradeResponseSDKType): MsgSoftwareUpgradeResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -230,18 +207,6 @@ export const MsgCancelUpgrade = {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
-  },
-
-  fromAmino(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
-    return {
-      authority: isSet(object.authority) ? object.authority : undefined
-    };
-  },
-
-  toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    return obj;
   }
 
 };
@@ -285,15 +250,6 @@ export const MsgCancelUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
-  },
-
-  fromAmino(_: MsgCancelUpgradeResponseSDKType): MsgCancelUpgradeResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

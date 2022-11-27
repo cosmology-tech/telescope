@@ -67,18 +67,6 @@ export const DenomAuthorityMetadata = {
     const message = createBaseDenomAuthorityMetadata();
     message.admin = object.admin ?? "";
     return message;
-  },
-
-  fromAmino(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
-    return {
-      admin: isSet(object.admin) ? object.admin : undefined
-    };
-  },
-
-  toAmino(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    return obj;
   }
 
 };

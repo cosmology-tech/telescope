@@ -82,26 +82,6 @@ export const GenesisState = {
     message.basedenom = object.basedenom ?? "";
     message.feetokens = object.feetokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      basedenom: isSet(object.basedenom) ? object.basedenom : undefined,
-      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.basedenom !== undefined && (obj.basedenom = message.basedenom);
-
-    if (message.feetokens) {
-      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e) : undefined);
-    } else {
-      obj.feetokens = [];
-    }
-
-    return obj;
   }
 
 };

@@ -203,24 +203,6 @@ export const Billing = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: BillingSDKType): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Billing): BillingSDKType {
-    const obj: any = {};
-
-    if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
-    } else {
-      obj.consumer_destinations = [];
-    }
-
-    return obj;
   }
 
 };
@@ -306,26 +288,6 @@ export const Billing_BillingDestination = {
   },
 
   toSDK(message: Billing_BillingDestination): Billing_BillingDestinationSDKType {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
-
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: Billing_BillingDestinationSDKType): Billing_BillingDestination {
-    return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationSDKType {
     const obj: any = {};
     message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
 

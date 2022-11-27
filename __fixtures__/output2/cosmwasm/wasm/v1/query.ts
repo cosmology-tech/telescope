@@ -243,18 +243,6 @@ export const QueryContractInfoRequest = {
     const message = createBaseQueryContractInfoRequest();
     message.address = object.address ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryContractInfoRequestSDKType): QueryContractInfoRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryContractInfoRequest): QueryContractInfoRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
   }
 
 };
@@ -324,20 +312,6 @@ export const QueryContractInfoResponse = {
     message.address = object.address ?? "";
     message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryContractInfoResponseSDKType): QueryContractInfoResponse {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      contractInfo: isSet(object.contract_info) ? ContractInfo.fromAmino(object.contract_info) : undefined
-    };
-  },
-
-  toAmino(message: QueryContractInfoResponse): QueryContractInfoResponseSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined);
-    return obj;
   }
 
 };
@@ -407,20 +381,6 @@ export const QueryContractHistoryRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryContractHistoryRequestSDKType): QueryContractHistoryRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryContractHistoryRequest): QueryContractHistoryRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -496,26 +456,6 @@ export const QueryContractHistoryResponse = {
     message.entries = object.entries?.map(e => ContractCodeHistoryEntry.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryContractHistoryResponseSDKType): QueryContractHistoryResponse {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryContractHistoryResponse): QueryContractHistoryResponseSDKType {
-    const obj: any = {};
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? ContractCodeHistoryEntry.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -585,20 +525,6 @@ export const QueryContractsByCodeRequest = {
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryContractsByCodeRequestSDKType): QueryContractsByCodeRequest {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -674,26 +600,6 @@ export const QueryContractsByCodeResponse = {
     message.contracts = object.contracts?.map(e => e) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryContractsByCodeResponseSDKType): QueryContractsByCodeResponse {
-    return {
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseSDKType {
-    const obj: any = {};
-
-    if (message.contracts) {
-      obj.contracts = message.contracts.map(e => e);
-    } else {
-      obj.contracts = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -763,20 +669,6 @@ export const QueryAllContractStateRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAllContractStateRequestSDKType): QueryAllContractStateRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllContractStateRequest): QueryAllContractStateRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -852,26 +744,6 @@ export const QueryAllContractStateResponse = {
     message.models = object.models?.map(e => Model.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryAllContractStateResponseSDKType): QueryAllContractStateResponse {
-    return {
-      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllContractStateResponse): QueryAllContractStateResponseSDKType {
-    const obj: any = {};
-
-    if (message.models) {
-      obj.models = message.models.map(e => e ? Model.toAmino(e) : undefined);
-    } else {
-      obj.models = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -941,20 +813,6 @@ export const QueryRawContractStateRequest = {
     message.address = object.address ?? "";
     message.queryData = object.queryData ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      queryData: isSet(object.query_data) ? object.query_data : undefined
-    };
-  },
-
-  toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.queryData !== undefined && (obj.query_data = message.queryData);
-    return obj;
   }
 
 };
@@ -1012,18 +870,6 @@ export const QueryRawContractStateResponse = {
     const message = createBaseQueryRawContractStateResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryRawContractStateResponseSDKType): QueryRawContractStateResponse {
-    return {
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: QueryRawContractStateResponse): QueryRawContractStateResponseSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -1093,20 +939,6 @@ export const QuerySmartContractStateRequest = {
     message.address = object.address ?? "";
     message.queryData = object.queryData ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QuerySmartContractStateRequestSDKType): QuerySmartContractStateRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      queryData: isSet(object.query_data) ? object.query_data : undefined
-    };
-  },
-
-  toAmino(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.queryData !== undefined && (obj.query_data = message.queryData);
-    return obj;
   }
 
 };
@@ -1164,18 +996,6 @@ export const QuerySmartContractStateResponse = {
     const message = createBaseQuerySmartContractStateResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QuerySmartContractStateResponseSDKType): QuerySmartContractStateResponse {
-    return {
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -1233,18 +1053,6 @@ export const QueryCodeRequest = {
     const message = createBaseQueryCodeRequest();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     return message;
-  },
-
-  fromAmino(object: QueryCodeRequestSDKType): QueryCodeRequest {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined
-    };
-  },
-
-  toAmino(message: QueryCodeRequest): QueryCodeRequestSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    return obj;
   }
 
 };
@@ -1338,24 +1146,6 @@ export const CodeInfoResponse = {
     message.dataHash = object.dataHash ?? new Uint8Array();
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
-  },
-
-  fromAmino(object: CodeInfoResponseSDKType): CodeInfoResponse {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      dataHash: isSet(object.data_hash) ? object.data_hash : undefined,
-      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
-    };
-  },
-
-  toAmino(message: CodeInfoResponse): CodeInfoResponseSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.dataHash !== undefined && (obj.data_hash = message.dataHash);
-    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined);
-    return obj;
   }
 
 };
@@ -1425,20 +1215,6 @@ export const QueryCodeResponse = {
     message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfoResponse.fromPartial(object.codeInfo) : undefined;
     message.data = object.data ?? new Uint8Array();
     return message;
-  },
-
-  fromAmino(object: QueryCodeResponseSDKType): QueryCodeResponse {
-    return {
-      codeInfo: isSet(object.code_info) ? CodeInfoResponse.fromAmino(object.code_info) : undefined,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: QueryCodeResponse): QueryCodeResponseSDKType {
-    const obj: any = {};
-    message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined);
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
   }
 
 };
@@ -1496,18 +1272,6 @@ export const QueryCodesRequest = {
     const message = createBaseQueryCodesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryCodesRequestSDKType): QueryCodesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryCodesRequest): QueryCodesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1583,26 +1347,6 @@ export const QueryCodesResponse = {
     message.codeInfos = object.codeInfos?.map(e => CodeInfoResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryCodesResponseSDKType): QueryCodesResponse {
-    return {
-      codeInfos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryCodesResponse): QueryCodesResponseSDKType {
-    const obj: any = {};
-
-    if (message.codeInfos) {
-      obj.code_infos = message.codeInfos.map(e => e ? CodeInfoResponse.toAmino(e) : undefined);
-    } else {
-      obj.code_infos = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1660,18 +1404,6 @@ export const QueryPinnedCodesRequest = {
     const message = createBaseQueryPinnedCodesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryPinnedCodesRequestSDKType): QueryPinnedCodesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1760,26 +1492,6 @@ export const QueryPinnedCodesResponse = {
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryPinnedCodesResponseSDKType): QueryPinnedCodesResponse {
-    return {
-      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseSDKType {
-    const obj: any = {};
-
-    if (message.codeIds) {
-      obj.code_ids = message.codeIds.map(e => e);
-    } else {
-      obj.code_ids = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };

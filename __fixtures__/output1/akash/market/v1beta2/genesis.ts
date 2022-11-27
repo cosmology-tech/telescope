@@ -134,33 +134,6 @@ export const GenesisState = {
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
-      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromAmino(e)) : [],
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.orders) {
-      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
-    } else {
-      obj.orders = [];
-    }
-
-    if (message.leases) {
-      obj.leases = message.leases.map(e => e ? Lease.toAmino(e) : undefined);
-    } else {
-      obj.leases = [];
-    }
-
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };

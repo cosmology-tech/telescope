@@ -217,33 +217,6 @@ export const ClaimRecord = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ClaimRecordSDKType): ClaimRecord {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromAmino(e)) : [],
-      actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ClaimRecord): ClaimRecordSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-
-    if (message.initialClaimableAmount) {
-      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_claimable_amount = [];
-    }
-
-    if (message.actionCompleted) {
-      obj.action_completed = message.actionCompleted.map(e => e);
-    } else {
-      obj.action_completed = [];
-    }
-
-    return obj;
   }
 
 };

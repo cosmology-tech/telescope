@@ -166,18 +166,6 @@ export const QueryTokenPairsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairsRequest): QueryTokenPairsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -273,26 +261,6 @@ export const QueryTokenPairsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
-    return {
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairsResponse): QueryTokenPairsResponseSDKType {
-    const obj: any = {};
-
-    if (message.tokenPairs) {
-      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
-    } else {
-      obj.token_pairs = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -359,18 +327,6 @@ export const QueryTokenPairRequest = {
   },
 
   toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token);
-    return obj;
-  },
-
-  fromAmino(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
-    return {
-      token: isSet(object.token) ? object.token : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
     return obj;
@@ -443,18 +399,6 @@ export const QueryTokenPairResponse = {
     const obj: any = {};
     message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toSDK(message.tokenPair) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
-    return {
-      tokenPair: isSet(object.token_pair) ? TokenPair.fromAmino(object.token_pair) : undefined
-    };
-  },
-
-  toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseSDKType {
-    const obj: any = {};
-    message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toAmino(message.tokenPair) : undefined);
-    return obj;
   }
 
 };
@@ -505,15 +449,6 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -584,18 +519,6 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

@@ -127,32 +127,6 @@ export const MsgCreateVestingAccount = {
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     message.delayed = object.delayed ?? false;
     return message;
-  },
-
-  fromAmino(object: MsgCreateVestingAccountSDKType): MsgCreateVestingAccount {
-    return {
-      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
-      toAddress: isSet(object.to_address) ? object.to_address : undefined,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      endTime: isSet(object.end_time) ? object.end_time : undefined,
-      delayed: isSet(object.delayed) ? object.delayed : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateVestingAccount): MsgCreateVestingAccountSDKType {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
-    message.toAddress !== undefined && (obj.to_address = message.toAddress);
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    message.endTime !== undefined && (obj.end_time = message.endTime);
-    message.delayed !== undefined && (obj.delayed = message.delayed);
-    return obj;
   }
 
 };
@@ -196,15 +170,6 @@ export const MsgCreateVestingAccountResponse = {
   fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
-  },
-
-  fromAmino(_: MsgCreateVestingAccountResponseSDKType): MsgCreateVestingAccountResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCreateVestingAccountResponse): MsgCreateVestingAccountResponseSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

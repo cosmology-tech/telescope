@@ -209,24 +209,6 @@ export const Visibility = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: VisibilitySDKType): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Visibility): VisibilitySDKType {
-    const obj: any = {};
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    return obj;
   }
 
 };
@@ -306,20 +288,6 @@ export const VisibilityRule = {
   },
 
   toSDK(message: VisibilityRule): VisibilityRuleSDKType {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.restriction !== undefined && (obj.restriction = message.restriction);
-    return obj;
-  },
-
-  fromAmino(object: VisibilityRuleSDKType): VisibilityRule {
-    return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      restriction: isSet(object.restriction) ? object.restriction : undefined
-    };
-  },
-
-  toAmino(message: VisibilityRule): VisibilityRuleSDKType {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.restriction !== undefined && (obj.restriction = message.restriction);

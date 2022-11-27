@@ -144,28 +144,6 @@ export const Metadata = {
     message.encoding = object.encoding ?? "";
     message.txType = object.txType ?? "";
     return message;
-  },
-
-  fromAmino(object: MetadataSDKType): Metadata {
-    return {
-      version: isSet(object.version) ? object.version : undefined,
-      controllerConnectionId: isSet(object.controller_connection_id) ? object.controller_connection_id : undefined,
-      hostConnectionId: isSet(object.host_connection_id) ? object.host_connection_id : undefined,
-      address: isSet(object.address) ? object.address : undefined,
-      encoding: isSet(object.encoding) ? object.encoding : undefined,
-      txType: isSet(object.tx_type) ? object.tx_type : undefined
-    };
-  },
-
-  toAmino(message: Metadata): MetadataSDKType {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.controllerConnectionId !== undefined && (obj.controller_connection_id = message.controllerConnectionId);
-    message.hostConnectionId !== undefined && (obj.host_connection_id = message.hostConnectionId);
-    message.address !== undefined && (obj.address = message.address);
-    message.encoding !== undefined && (obj.encoding = message.encoding);
-    message.txType !== undefined && (obj.tx_type = message.txType);
-    return obj;
   }
 
 };

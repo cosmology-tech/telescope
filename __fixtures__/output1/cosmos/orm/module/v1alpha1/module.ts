@@ -64,15 +64,6 @@ export const Module = {
   toSDK(_: Module): ModuleSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: ModuleSDKType): Module {
-    return {};
-  },
-
-  toAmino(_: Module): ModuleSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };

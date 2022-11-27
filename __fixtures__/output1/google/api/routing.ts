@@ -953,24 +953,6 @@ export const RoutingRule = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: RoutingRuleSDKType): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: RoutingRule): RoutingRuleSDKType {
-    const obj: any = {};
-
-    if (message.routingParameters) {
-      obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e) : undefined);
-    } else {
-      obj.routing_parameters = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1050,20 +1032,6 @@ export const RoutingParameter = {
   },
 
   toSDK(message: RoutingParameter): RoutingParameterSDKType {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.pathTemplate !== undefined && (obj.path_template = message.pathTemplate);
-    return obj;
-  },
-
-  fromAmino(object: RoutingParameterSDKType): RoutingParameter {
-    return {
-      field: isSet(object.field) ? object.field : undefined,
-      pathTemplate: isSet(object.path_template) ? object.path_template : undefined
-    };
-  },
-
-  toAmino(message: RoutingParameter): RoutingParameterSDKType {
     const obj: any = {};
     message.field !== undefined && (obj.field = message.field);
     message.pathTemplate !== undefined && (obj.path_template = message.pathTemplate);

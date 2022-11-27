@@ -205,20 +205,6 @@ export const MetricValue_LabelsEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
-  },
-
-  fromAmino(object: MetricValue_LabelsEntrySDKType): MetricValue_LabelsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -426,44 +412,6 @@ export const MetricValue = {
     message.stringValue !== undefined && (obj.string_value = message.stringValue);
     message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toSDK(message.distributionValue) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MetricValueSDKType): MetricValue {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      distributionValue: isSet(object.distribution_value) ? Distribution.fromAmino(object.distribution_value) : undefined
-    };
-  },
-
-  toAmino(message: MetricValue): MetricValueSDKType {
-    const obj: any = {};
-    obj.labels = {};
-
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined);
-    return obj;
   }
 
 };
@@ -554,26 +502,6 @@ export const MetricValueSet = {
 
     if (message.metricValues) {
       obj.metric_values = message.metricValues.map(e => e ? MetricValue.toSDK(e) : undefined);
-    } else {
-      obj.metric_values = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MetricValueSetSDKType): MetricValueSet {
-    return {
-      metricName: isSet(object.metric_name) ? object.metric_name : undefined,
-      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MetricValueSet): MetricValueSetSDKType {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metric_name = message.metricName);
-
-    if (message.metricValues) {
-      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
     } else {
       obj.metric_values = [];
     }

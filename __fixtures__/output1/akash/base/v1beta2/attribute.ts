@@ -139,20 +139,6 @@ export const Attribute = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
-  },
-
-  fromAmino(object: AttributeSDKType): Attribute {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Attribute): AttributeSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -258,31 +244,6 @@ export const SignedBy = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: SignedBySDKType): SignedBy {
-    return {
-      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
-      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: SignedBy): SignedBySDKType {
-    const obj: any = {};
-
-    if (message.allOf) {
-      obj.all_of = message.allOf.map(e => e);
-    } else {
-      obj.all_of = [];
-    }
-
-    if (message.anyOf) {
-      obj.any_of = message.anyOf.map(e => e);
-    } else {
-      obj.any_of = [];
-    }
-
-    return obj;
   }
 
 };
@@ -373,26 +334,6 @@ export const PlacementRequirements = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: PlacementRequirementsSDKType): PlacementRequirements {
-    return {
-      signedBy: isSet(object.signed_by) ? SignedBy.fromAmino(object.signed_by) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PlacementRequirements): PlacementRequirementsSDKType {
-    const obj: any = {};
-    message.signedBy !== undefined && (obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : undefined);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }

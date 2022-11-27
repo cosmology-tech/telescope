@@ -131,18 +131,6 @@ export const QueryDevFeeInfosRequest = {
     const message = createBaseQueryDevFeeInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -218,26 +206,6 @@ export const QueryDevFeeInfosResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseSDKType {
-    const obj: any = {};
-
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -295,18 +263,6 @@ export const QueryDevFeeInfoRequest = {
     const message = createBaseQueryDevFeeInfoRequest();
     message.contractAddress = object.contractAddress ?? "";
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    return obj;
   }
 
 };
@@ -364,18 +320,6 @@ export const QueryDevFeeInfoResponse = {
     const message = createBaseQueryDevFeeInfoResponse();
     message.fee = object.fee !== undefined && object.fee !== null ? DevFeeInfo.fromPartial(object.fee) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
-    return {
-      fee: isSet(object.fee) ? DevFeeInfo.fromAmino(object.fee) : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined);
-    return obj;
   }
 
 };
@@ -419,15 +363,6 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -485,18 +420,6 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -566,20 +489,6 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
-    return {
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestSDKType {
-    const obj: any = {};
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -655,26 +564,6 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
-  },
-
-  fromAmino(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseSDKType {
-    const obj: any = {};
-
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };

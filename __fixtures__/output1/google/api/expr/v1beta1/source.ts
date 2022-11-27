@@ -189,20 +189,6 @@ export const SourceInfo_PositionsEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
-  },
-
-  fromAmino(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
   }
 
 };
@@ -363,40 +349,6 @@ export const SourceInfo = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: SourceInfoSDKType): SourceInfo {
-    return {
-      location: isSet(object.location) ? object.location : undefined,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toAmino(message: SourceInfo): SourceInfoSDKType {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-
-    if (message.lineOffsets) {
-      obj.line_offsets = message.lineOffsets.map(e => e);
-    } else {
-      obj.line_offsets = [];
-    }
-
-    obj.positions = {};
-
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
-
-    return obj;
   }
 
 };
@@ -502,24 +454,6 @@ export const SourcePosition = {
   },
 
   toSDK(message: SourcePosition): SourcePositionSDKType {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.line !== undefined && (obj.line = message.line);
-    message.column !== undefined && (obj.column = message.column);
-    return obj;
-  },
-
-  fromAmino(object: SourcePositionSDKType): SourcePosition {
-    return {
-      location: isSet(object.location) ? object.location : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      column: isSet(object.column) ? object.column : undefined
-    };
-  },
-
-  toAmino(message: SourcePosition): SourcePositionSDKType {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     message.offset !== undefined && (obj.offset = message.offset);
