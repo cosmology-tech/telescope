@@ -1,0 +1,559 @@
+import * as t from '@babel/types';
+import { FromAminoJSONMethod } from './index';
+import { BILLION, callExpression, identifier, memberExpressionOrIdentifierAminoCaseField } from '../../../utils';
+import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+
+// TODO remove this...
+import { camel } from 'case';
+
+export const fromAminoJSON = {
+
+    scalar(args: FromAminoJSONMethod) {
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+        args.context.addUtil('isSet');
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
+                ),
+                // getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+                t.identifier('undefined')
+            )
+        )
+    },
+
+    string(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    number(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    double(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    float(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    int32(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    sint32(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    uint32(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    fixed32(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    sfixed32(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    bool(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    long(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    int64(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    uint64(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    sint64(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    fixed64(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+    sfixed64(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+
+    type(args: FromAminoJSONMethod) {
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+        const name = args.context.getTypeName(args.field);
+        args.context.addUtil('isSet');
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier(name),
+                        t.identifier('fromAmino')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
+    },
+
+    enum(args: FromAminoJSONMethod) {
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+
+        args.context.addUtil('isSet');
+        const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isSet'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.identifier(fromAminoJSONFuncName),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                args.isOptional ? t.identifier('undefined') : t.numericLiteral(0)
+            )
+        );
+    },
+
+    bytes(args: FromAminoJSONMethod) {
+        return fromAminoJSON.scalar(args);
+    },
+
+    duration(args: FromAminoJSONMethod) {
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        switch (durationFormat) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return fromAminoJSON.durationString(args);
+        }
+    },
+
+    durationString(args: FromAminoJSONMethod) {
+        args.context.addUtil('Long');
+
+        const value = t.objectExpression(
+            [
+                t.objectProperty(t.identifier('seconds'), t.callExpression(
+                    t.memberExpression(t.identifier('Long'), t.identifier('fromNumber')), [
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Math'),
+                            t.identifier('floor')
+                        ),
+                        [
+                            t.binaryExpression('/',
+                                t.callExpression(
+                                    t.identifier('parseInt'),
+                                    [
+                                        memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                                    ]
+                                ),
+                                BILLION
+                            )
+                        ]
+                    )
+                ]
+                )),
+                t.objectProperty(
+                    t.identifier('nanos'),
+                    t.binaryExpression('%',
+                        t.callExpression(
+                            t.identifier('parseInt'),
+                            [
+                                memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                            ]
+                        ),
+                        BILLION
+                    )
+                )
+            ]
+        );
+        return t.objectProperty(t.identifier(args.field.name), value);
+    },
+    timestamp(args: FromAminoJSONMethod) {
+        return fromAminoJSON.type(args);
+    },
+
+    //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+    //     [key: string]: string;
+    //   }>((acc, [key, value]) => {
+    //     acc[key] = String(value);
+    //     return acc;
+    //   }, {}) : {},
+
+    //   referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
+    //     [key: Long]: Reference;
+    //   }>((acc, [key, value]) => {
+    //     acc[Number(key)] = Reference.fromAminoJSON(value);
+    //     return acc;
+    //   }, {}) : {},
+
+
+    keyHash(args: FromAminoJSONMethod) {
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+
+        const keyType = args.field.keyType;
+        const valueType = args.field.parsedType.name;
+
+        args.context.addUtil('isObject');
+
+        let fromAminoJSON = null;
+        // valueTypeType: string for identifier
+        let valueTypeType = valueType;
+        switch (valueType) {
+            case 'string':
+                fromAminoJSON = t.callExpression(
+                    t.identifier('String'),
+                    [
+                        t.identifier('value')
+                    ]
+                )
+
+                break;
+            case 'int32':
+            case 'uint32':
+                valueTypeType = 'number';
+                fromAminoJSON = t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        t.identifier('value')
+                    ]
+                );
+
+                break;
+            case 'int64':
+            case 'uint64':
+                valueTypeType = 'Long';
+                fromAminoJSON = t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromValue')
+                    ),
+                    [
+                        t.tsAsExpression(
+                            t.identifier('value'),
+                            t.tsUnionType(
+                                [
+                                    t.tsTypeReference(
+                                        t.identifier('Long')
+                                    ),
+                                    t.tsStringKeyword()
+                                ]
+                            )
+                        )
+                    ]
+                )
+                break;
+            default:
+                fromAminoJSON = t.callExpression(
+                    t.memberExpression(
+                        t.identifier(valueType),
+                        t.identifier('fromAmino')
+                    ),
+                    [
+                        t.identifier('value')
+                    ]
+                );
+        }
+
+        let wrapKey = null;
+        let keyTypeType = null;
+        switch (keyType) {
+            case 'string':
+                wrapKey = (a) => a;
+                keyTypeType = t.tsStringKeyword();
+                break;
+            case 'int64':
+            case 'uint64':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsTypeReference(t.identifier('Long'));
+                break;
+            case 'uint32':
+            case 'int32':
+                wrapKey = (a) => t.callExpression(
+                    t.identifier('Number'),
+                    [
+                        a
+                    ]
+                );
+                keyTypeType = t.tsTypeReference(t.identifier('number'));
+                break;
+            default:
+                throw new Error('keyHash requires new type. Ask maintainers.');
+        }
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.identifier('isObject'),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Object'),
+                                t.identifier('entries')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier(origName)
+                                )
+                            ]
+                        ),
+                        t.identifier('reduce')
+                    ),
+                    [
+                        t.arrowFunctionExpression(
+                            [
+                                t.identifier('acc'),
+                                t.arrayPattern(
+                                    [
+                                        t.identifier('key'),
+                                        t.identifier('value')
+                                    ]
+                                )
+                            ],
+                            t.blockStatement([
+                                t.expressionStatement(
+                                    t.assignmentExpression(
+                                        '=',
+                                        t.memberExpression(
+                                            t.identifier('acc'),
+                                            wrapKey(t.identifier('key')),
+                                            true
+                                        ),
+                                        fromAminoJSON
+                                    )
+                                ),
+                                t.returnStatement(
+                                    t.identifier('acc')
+                                )
+                            ])
+                        ),
+                        t.objectExpression(
+                            []
+                        )
+                    ],
+                    t.tsTypeParameterInstantiation(
+                        [
+                            t.tsTypeLiteral(
+                                [
+                                    t.tsIndexSignature(
+                                        [
+                                            identifier('key', t.tsTypeAnnotation(
+                                                keyTypeType
+                                            ))
+                                        ],
+                                        t.tsTypeAnnotation(
+                                            t.tsTypeReference(
+                                                t.identifier(valueTypeType)
+                                            )
+                                        )
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                ),
+                t.objectExpression([])
+            )
+        )
+    },
+
+    // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+    array(args: FromAminoJSONMethod, expr: t.Expression) {
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Array'),
+                        t.identifier('isArray')
+                    ),
+                    [
+                        t.optionalMemberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName),
+                            false,
+                            true
+                        )
+                    ]
+                ),
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        ),
+                        t.identifier('map')
+                    ),
+                    [
+                        t.arrowFunctionExpression(
+                            [
+                                identifier('e', t.tsTypeAnnotation(
+                                    t.tsAnyKeyword()
+                                ))
+                            ],
+                            expr,
+                            false
+                        )
+                    ]
+                ),
+                t.arrayExpression([])
+            )
+        )
+    }
+};
+
+export const arrayTypes = {
+    scalar() {
+        return t.identifier('e');
+    },
+
+    string() {
+        return arrayTypes.scalar();
+    },
+
+    bool() {
+        return arrayTypes.scalar();
+    },
+
+    bytes(args: FromAminoJSONMethod) {
+        return arrayTypes.scalar();
+    },
+
+    long() {
+        return arrayTypes.scalar();
+    },
+    uint64() {
+        return arrayTypes.scalar();
+    },
+    int64() {
+        return arrayTypes.scalar();
+    },
+    sint64() {
+        return arrayTypes.scalar();
+    },
+    fixed64() {
+        return arrayTypes.scalar();
+    },
+    sfixed64() {
+        return arrayTypes.scalar();
+    },
+    number() {
+        return arrayTypes.scalar();
+    },
+
+    uint32() {
+        return arrayTypes.scalar();
+    },
+    int32() {
+        return arrayTypes.scalar();
+    },
+    sint32() {
+        return arrayTypes.scalar();
+    },
+    fixed32() {
+        return arrayTypes.scalar();
+    },
+    sfixed32() {
+        return arrayTypes.scalar();
+    },
+    double() {
+        return arrayTypes.scalar();
+    },
+    float() {
+        return arrayTypes.scalar();
+    },
+
+    enum(args: FromAminoJSONMethod) {
+        const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
+        return t.callExpression(
+            t.identifier(fromAminoJSONFuncName),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+
+    // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromAminoJSON(e)) : []
+    type(args: FromAminoJSONMethod) {
+        const name = args.context.getTypeName(args.field);
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier(name),
+                t.identifier('fromAmino')
+            ),
+            [
+                t.identifier('e')
+            ]
+        );
+    }
+};
+

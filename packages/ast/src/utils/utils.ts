@@ -143,7 +143,10 @@ export const memberExpressionOrIdentifierAminoCasing = (names, aminoCasingFn: Fu
     )
 };
 
-export const memberExpressionOrIdentifierAminoCaseField = (fields: ProtoField[], aminoCaseFunc: Function) => {
+export const memberExpressionOrIdentifierAminoCaseField = (
+    fields: ProtoField[],
+    aminoCaseFunc: Function
+) => {
     if (fields.length === 1) {
         return t.identifier(aminoCaseFunc(fields[0]))
     }

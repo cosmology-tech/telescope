@@ -35,6 +35,8 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -52,7 +54,9 @@ interface TelescopeOpts {
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
-            duration?: 'duration' | 'string'
+            duration?: 'duration' | 'string',
+            // temporary field to avoid breaking changes
+            updatedDuration?: boolean
         };
     };
 
@@ -165,7 +169,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toJSON: false,
             fromPartial: true,
             toSDK: false,
-            fromSDK: false
+            fromSDK: false,
+            toAmino: false,
+            fromAmino: false
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
@@ -179,7 +185,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
-            duration: 'duration'
+            duration: 'duration',
+            updatedDuration: false
         },
     },
 

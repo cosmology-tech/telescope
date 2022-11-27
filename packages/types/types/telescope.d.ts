@@ -29,6 +29,8 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -45,6 +47,7 @@ interface TelescopeOpts {
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
+            updatedDuration?: boolean;
         };
     };
     tsDisable?: {

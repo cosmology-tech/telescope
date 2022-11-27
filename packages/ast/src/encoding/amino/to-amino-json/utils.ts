@@ -66,15 +66,19 @@ export const toAmino = {
 
     duration(args: ToAminoParseField) {
         const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        const updatedDuration = args.context.pluginValue('prototypes.typingsFormat.updatedDuration');
         switch (durationFormat) {
             case 'duration':
-            // TODO duration amino type
+                if (updatedDuration) {
+                    return toAmino.durationType(args);
+                }
             case 'string':
             default:
                 return toAmino.durationString(args);
         }
     },
 
+    // (duration * 1_000_000_000).toString(),
     durationString(args: ToAminoParseField) {
         const exp = t.binaryExpression(
             '*',
@@ -90,6 +94,39 @@ export const toAmino = {
             []
         )
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), value);
+    },
+
+    // (duration.seconds.toInt() * 1_000_000_000).toString(),
+    // what about nanos?
+    durationType(args: ToAminoParseField) {
+        const exp = t.binaryExpression(
+            '*',
+            t.callExpression(
+                t.memberExpression(
+                    t.memberExpression(
+                        memberExpressionOrIdentifier(args.scope),
+                        t.identifier('seconds')
+                    ),
+                    t.identifier('toInt')
+                ),
+                []
+            ),
+            BILLION
+        );
+        exp.extra = { parenthesized: true };
+        const value = t.callExpression(
+            t.memberExpression(
+                exp,
+                t.identifier('toString')
+            ),
+            []
+        )
+        return t.objectProperty(
+            t.identifier(
+                args.context.aminoCaseField(args.field)
+            ),
+            value
+        );
     },
 
     height(args: ToAminoParseField) {
