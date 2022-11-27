@@ -1,4 +1,7 @@
 import * as t from '@babel/types';
+import { ProtoType } from '@osmonauts/types';
+import { BILLION } from '../../../utils';
+import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
 import { ToAminoJSONMethod } from './index';
 
@@ -411,3 +414,37 @@ export const arrayTypes = {
     }
 }
 
+
+export const toAminoMessages = {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        return t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.binaryExpression(
+                        '+',
+                        t.binaryExpression(
+                            '*',
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('seconds')
+                                    ),
+                                    t.identifier('toInt')
+                                ),
+                                []
+                            ),
+                            BILLION
+                        ),
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('nanos')
+                        )
+                    ),
+                    t.identifier('toString')
+                ),
+                []
+            )
+        )
+    }
+}

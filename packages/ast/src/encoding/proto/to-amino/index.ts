@@ -3,7 +3,7 @@ import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '@osmonauts/types';
-import { arrayTypes, toAminoJSON } from './utils';
+import { arrayTypes, toAminoJSON, toAminoMessages } from './utils';
 import { pascal } from 'case';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -153,31 +153,35 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
         varName = '_';
     }
 
-    const SDKTypeName =
-        [name, 'SDKType']
+    const AminoTypeName =
+        [name, 'Amino']
             .filter(Boolean).join('')
 
+    const body: t.Statement[] = [];
 
-    return objectMethod('method',
-        t.identifier('toAmino'),
-        [
-            identifier(
-                varName,
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier(name)
-                    )
-                )
-            )
-        ],
-        t.blockStatement([
-            // t.variableDeclaration('const', [
-            //     t.variableDeclarator(
-            //         t.identifier('hoistedAsts'),
-            //         t.nullLiteral()
-            //     )
-            // ]),
+    // 1. some messages we parse specially
+    if (proto.type === 'Type') {
+        switch (proto.name) {
+            case 'Duration':
+            case 'google.protobuf.Duration': {
+                body.push(toAminoMessages.duration(context, name, proto));
+                break;
+            }
+            // case 'Timestamp':
+            // case 'google.protobuf.Timestamp':
+            //     body.push(t.returnStatement(
+            //         t.objectExpression([
+            //         ])
+            //     ))
+            //     break;
+            default:
+        }
+    }
 
+
+    if (!body.length) {
+        // 2. default to field-level parsing
+        [].push.apply(body, [
             t.variableDeclaration(
                 'const',
                 [
@@ -192,14 +196,29 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
 
             // RETURN 
             t.returnStatement(t.identifier('obj'))
+        ]);
+    }
 
-        ]),
+
+    return objectMethod('method',
+        t.identifier('toAmino'),
+        [
+            identifier(
+                varName,
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier(name)
+                    )
+                )
+            )
+        ],
+        t.blockStatement(body),
         false,
         false,
         false,
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(SDKTypeName)
+                t.identifier(AminoTypeName)
             )
         )
     );
