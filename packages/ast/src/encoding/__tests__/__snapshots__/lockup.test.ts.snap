@@ -139,7 +139,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
     }: MsgLockTokens): AminoMsgLockTokens["value"] => {
       return {
         owner,
-        duration: (duration.seconds.toInt() * 1_000_000_000).toString(),
+        duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

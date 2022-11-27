@@ -66,9 +66,12 @@ export const toAmino = {
 
     duration(args: ToAminoParseField) {
         const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        const updatedDuration = args.context.pluginValue('prototypes.typingsFormat.updatedDuration');
         switch (durationFormat) {
             case 'duration':
-                return toAmino.durationType(args);
+                if (updatedDuration) {
+                    return toAmino.durationType(args);
+                }
             case 'string':
             default:
                 return toAmino.durationString(args);

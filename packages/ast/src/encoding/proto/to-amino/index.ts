@@ -171,13 +171,12 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
             )
         ],
         t.blockStatement([
-            t.variableDeclaration('const', [
-                t.variableDeclarator(
-                    t.identifier('hoistedAsts'),
-                    t.nullLiteral()
-                )
-            ]),
-
+            // t.variableDeclaration('const', [
+            //     t.variableDeclarator(
+            //         t.identifier('hoistedAsts'),
+            //         t.nullLiteral()
+            //     )
+            // ]),
 
             t.variableDeclaration(
                 'const',

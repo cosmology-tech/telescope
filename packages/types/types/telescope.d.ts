@@ -47,6 +47,7 @@ interface TelescopeOpts {
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
+            updatedDuration?: boolean;
         };
     };
     tsDisable?: {

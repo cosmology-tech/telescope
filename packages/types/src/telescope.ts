@@ -54,7 +54,9 @@ interface TelescopeOpts {
             useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
-            duration?: 'duration' | 'string'
+            duration?: 'duration' | 'string',
+            // temporary field to avoid breaking changes
+            updatedDuration?: boolean
         };
     };
 
@@ -183,7 +185,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
-            duration: 'duration'
+            duration: 'duration',
+            updatedDuration: false
         },
     },
 
