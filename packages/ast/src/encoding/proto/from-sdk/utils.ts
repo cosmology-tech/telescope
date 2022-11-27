@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { FromSDKMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
-import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+import { getFieldNames } from '../../types';
 
 export const fromSDK = {
 
@@ -10,28 +10,16 @@ export const fromSDK = {
             propName,
             origName
         } = getFieldNames(args.field);
-        args.context.addUtil('isSet');
 
         return t.objectProperty(
             t.identifier(propName),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(origName)
-                        )
-                    ]
-                ),
-                t.memberExpression(
-                    t.identifier('object'),
-                    t.identifier(origName)
-                ),
-                // getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-                t.identifier('undefined')
+            t.optionalMemberExpression(
+                t.identifier('object'),
+                t.identifier(origName),
+                false,
+                true
             )
-        )
+        );
     },
 
     string(args: FromSDKMethod) {

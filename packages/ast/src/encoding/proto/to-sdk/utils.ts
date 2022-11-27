@@ -31,10 +31,19 @@ export const toSDK = {
     scalar(args: ToSDKMethod) {
         const { propName, origName } = getFieldNames(args.field);
 
-        return notUndefinedSetValue(origName, propName, t.memberExpression(
-            t.identifier('message'),
-            t.identifier(propName)
-        ));
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(propName)
+                )
+            )
+        );
     },
 
     string(args: ToSDKMethod) {

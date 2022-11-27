@@ -31,10 +31,19 @@ export const toAminoJSON = {
     scalar(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
 
-        return notUndefinedSetValue(origName, propName, t.memberExpression(
-            t.identifier('message'),
-            t.identifier(propName)
-        ));
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(propName)
+                )
+            )
+        );
     },
 
     string(args: ToAminoJSONMethod) {
@@ -94,27 +103,34 @@ export const toAminoJSON = {
         const { propName, origName } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
 
-        // TODO isn't the nested conditional a waste? (using ts-proto as reference)
-        // maybe null is OK?
-        return notUndefinedSetValue(origName, propName, t.conditionalExpression(
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(propName)
-            ),
-            t.callExpression(
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
                 t.memberExpression(
-                    t.identifier(name),
-                    t.identifier('toAmino')
+                    t.identifier('obj'),
+                    t.identifier(origName)
                 ),
-                [
+                t.conditionalExpression(
                     t.memberExpression(
                         t.identifier('message'),
                         t.identifier(propName)
-                    )
-                ]
-            ),
-            t.identifier('undefined')
-        ));
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier(name),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
     },
 
     enum(args: ToAminoJSONMethod) {
