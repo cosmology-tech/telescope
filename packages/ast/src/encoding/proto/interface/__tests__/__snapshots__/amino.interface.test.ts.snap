@@ -43,13 +43,13 @@ export interface PageRequestAmino {
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-  offset: Long;
+  offset: string;
 
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-  limit: Long;
+  limit: string;
 
   /**
    * count_total is set to true  to indicate that the result set should include
@@ -90,7 +90,7 @@ export interface PageResponseAmino {
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
    */
-  total: Long;
+  total: string;
 }"
 `;
 
@@ -133,8 +133,8 @@ exports[`cosmos/auth/v1beta1/auth.proto BaseAccount 1`] = `
 export interface BaseAccountAmino {
   address: string;
   pub_key?: AnyAmino;
-  account_number: Long;
-  sequence: Long;
+  account_number: string;
+  sequence: string;
 }"
 `;
 
@@ -179,5 +179,18 @@ export interface QueryGrantsRequestAmino {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
+}"
+`;
+
+exports[`osmosis/gamm/v1beta1/tx.proto MsgJoinPool 1`] = `
+"/**
+ * ===================== MsgJoinPool
+ * This is really MsgJoinPoolNoSwap
+ */
+export interface MsgJoinPoolAmino {
+  sender: string;
+  pool_id: string;
+  share_out_amount: string;
+  token_in_maxs: CoinAmino[];
 }"
 `;

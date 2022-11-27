@@ -92,3 +92,13 @@ describe('confio/proofs.proto', () => {
         ));
     });
 });
+
+describe('osmosis/gamm/v1beta1/tx.proto', () => {
+    const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('MsgJoinPool', () => {
+        expectCode(createAminoType(context, 'MsgJoinPool',
+            getNestedProto(ref.traversed).MsgJoinPool
+        ));
+    });
+});

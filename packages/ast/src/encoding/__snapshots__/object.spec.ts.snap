@@ -74,8 +74,8 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
 
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      data: object.data ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
       sequence: object?.sequence
     };
   },
@@ -254,7 +254,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
       address: object?.address,
-      signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
+      signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: object?.sig
     };
@@ -335,8 +335,8 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
 
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
     return {
-      single: isSet(object.single) ? ModeInfo_Single.fromSDK(object.single) : undefined,
-      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDK(object.multi) : undefined
+      single: object.single ? ModeInfo_Single.fromSDK(object.single) : undefined,
+      multi: object.multi ? ModeInfo_Multi.fromSDK(object.multi) : undefined
     };
   },
 
@@ -1011,7 +1011,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       overloadId: object?.overload_id,
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
-      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
       isInstanceFunction: object?.is_instance_function,
       doc: object?.doc
     };
@@ -1226,19 +1226,19 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
 
   fromSDK(object: TypeSDKType): Type {
     return {
-      dyn: isSet(object.dyn) ? Empty.fromSDK(object.dyn) : undefined,
+      dyn: object.dyn ? Empty.fromSDK(object.dyn) : undefined,
       null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
       primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
       wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
       wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      listType: isSet(object.list_type) ? Type_ListType.fromSDK(object.list_type) : undefined,
-      mapType: isSet(object.map_type) ? Type_MapType.fromSDK(object.map_type) : undefined,
-      function: isSet(object.function) ? Type_FunctionType.fromSDK(object.function) : undefined,
+      listType: object.list_type ? Type_ListType.fromSDK(object.list_type) : undefined,
+      mapType: object.map_type ? Type_MapType.fromSDK(object.map_type) : undefined,
+      function: object.function ? Type_FunctionType.fromSDK(object.function) : undefined,
       messageType: object?.message_type,
       typeParam: object?.type_param,
-      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
-      error: isSet(object.error) ? Empty.fromSDK(object.error) : undefined,
-      abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
+      type: object.type ? Type.fromSDK(object.type) : undefined,
+      error: object.error ? Empty.fromSDK(object.error) : undefined,
+      abstractType: object.abstract_type ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
     };
   },
 
@@ -1326,8 +1326,8 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
 
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
     return {
-      keyType: isSet(object.key_type) ? Type.fromSDK(object.key_type) : undefined,
-      valueType: isSet(object.value_type) ? Type.fromSDK(object.value_type) : undefined
+      keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
+      valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
     };
   },
 
@@ -1504,9 +1504,9 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
         acc[Number(key)] = Type.fromSDK(value);
         return acc;
       }, {}) : {},
-      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
       exprVersion: object?.expr_version,
-      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
+      expr: object.expr ? Expr.fromSDK(object.expr) : undefined
     };
   },
 
@@ -1684,8 +1684,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
-      durationValue: isSet(object.duration_value) ? Duration.fromSDK(object.duration_value) : undefined,
-      timestampValue: isSet(object.timestamp_value) ? Timestamp.fromSDK(object.timestamp_value) : undefined
+      durationValue: object.duration_value ? Duration.fromSDK(object.duration_value) : undefined,
+      timestampValue: object.timestamp_value ? Timestamp.fromSDK(object.timestamp_value) : undefined
     };
   },
 
@@ -1769,8 +1769,8 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
 
   fromSDK(object: EntrySDKType): Entry {
     return {
-      key: isSet(object.key) ? Value.fromSDK(object.key) : undefined,
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+      key: object.key ? Value.fromSDK(object.key) : undefined,
+      value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
 
@@ -2340,9 +2340,9 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
       name: object?.name,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -2351,11 +2351,11 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      protoPayload: object.proto_payload ? Any.fromSDK(object.proto_payload) : undefined,
       textPayload: object?.text_payload,
-      structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
-      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
+      structPayload: object.struct_payload ? Struct.fromSDK(object.struct_payload) : undefined,
+      operation: object.operation ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      sourceLocation: object.source_location ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
     };
   },
 
@@ -2576,7 +2576,7 @@ exports[`ibc/core/port/v1/query 1`] = `
       portId: object?.port_id,
       connectionId: object?.connection_id,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };
   },
@@ -2749,9 +2749,9 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      clientGenesis: isSet(object.client_genesis) ? GenesisState1.fromSDK(object.client_genesis) : undefined,
-      connectionGenesis: isSet(object.connection_genesis) ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
-      channelGenesis: isSet(object.channel_genesis) ? GenesisState3.fromSDK(object.channel_genesis) : undefined
+      clientGenesis: object.client_genesis ? GenesisState1.fromSDK(object.client_genesis) : undefined,
+      connectionGenesis: object.connection_genesis ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
+      channelGenesis: object.channel_genesis ? GenesisState3.fromSDK(object.channel_genesis) : undefined
     };
   },
 
@@ -3124,7 +3124,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return {
       sender: object?.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
-      tokenIn: isSet(object.token_in) ? Coin.fromSDK(object.token_in) : undefined,
+      tokenIn: object.token_in ? Coin.fromSDK(object.token_in) : undefined,
       tokenOutMinAmount: object?.token_out_min_amount
     };
   },
@@ -3241,7 +3241,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       sender: object?.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
       tokenInMaxAmount: object?.token_in_max_amount,
-      tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined
+      tokenOut: object.token_out ? Coin.fromSDK(object.token_out) : undefined
     };
   },
 
