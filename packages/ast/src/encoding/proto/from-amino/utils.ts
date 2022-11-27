@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
-import { BILLION, callExpression, identifier, memberExpressionOrIdentifierAminoCaseField } from '../../../utils';
+import { BILLION, callExpression, identifier } from '../../../utils';
 import { getFieldNames } from '../../types';
 
 export const fromAminoJSON = {
@@ -212,6 +212,7 @@ export const fromAminoJSON = {
         );
         return t.objectProperty(t.identifier(args.field.name), value);
     },
+
     timestamp(args: FromAminoJSONMethod) {
         return fromAminoJSON.type(args);
     },
