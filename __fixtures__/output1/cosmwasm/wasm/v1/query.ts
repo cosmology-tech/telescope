@@ -509,7 +509,7 @@ export const QueryContractInfoResponse = {
   fromSDK(object: QueryContractInfoResponseSDKType): QueryContractInfoResponse {
     return {
       address: object?.address,
-      contractInfo: isSet(object.contract_info) ? ContractInfo.fromSDK(object.contract_info) : undefined
+      contractInfo: object.contract_info ? ContractInfo.fromSDK(object.contract_info) : undefined
     };
   },
 
@@ -592,7 +592,7 @@ export const QueryContractHistoryRequest = {
   fromSDK(object: QueryContractHistoryRequestSDKType): QueryContractHistoryRequest {
     return {
       address: object?.address,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -681,7 +681,7 @@ export const QueryContractHistoryResponse = {
   fromSDK(object: QueryContractHistoryResponseSDKType): QueryContractHistoryResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -770,7 +770,7 @@ export const QueryContractsByCodeRequest = {
   fromSDK(object: QueryContractsByCodeRequestSDKType): QueryContractsByCodeRequest {
     return {
       codeId: object?.code_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -859,7 +859,7 @@ export const QueryContractsByCodeResponse = {
   fromSDK(object: QueryContractsByCodeResponseSDKType): QueryContractsByCodeResponse {
     return {
       contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -948,7 +948,7 @@ export const QueryAllContractStateRequest = {
   fromSDK(object: QueryAllContractStateRequestSDKType): QueryAllContractStateRequest {
     return {
       address: object?.address,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1037,7 +1037,7 @@ export const QueryAllContractStateResponse = {
   fromSDK(object: QueryAllContractStateResponseSDKType): QueryAllContractStateResponse {
     return {
       models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1595,7 +1595,7 @@ export const QueryCodeResponse = {
 
   fromSDK(object: QueryCodeResponseSDKType): QueryCodeResponse {
     return {
-      codeInfo: isSet(object.code_info) ? CodeInfoResponse.fromSDK(object.code_info) : undefined,
+      codeInfo: object.code_info ? CodeInfoResponse.fromSDK(object.code_info) : undefined,
       data: object?.data
     };
   },
@@ -1666,7 +1666,7 @@ export const QueryCodesRequest = {
 
   fromSDK(object: QueryCodesRequestSDKType): QueryCodesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1754,7 +1754,7 @@ export const QueryCodesResponse = {
   fromSDK(object: QueryCodesResponseSDKType): QueryCodesResponse {
     return {
       codeInfos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1830,7 +1830,7 @@ export const QueryPinnedCodesRequest = {
 
   fromSDK(object: QueryPinnedCodesRequestSDKType): QueryPinnedCodesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1931,7 +1931,7 @@ export const QueryPinnedCodesResponse = {
   fromSDK(object: QueryPinnedCodesResponseSDKType): QueryPinnedCodesResponse {
     return {
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

@@ -218,7 +218,7 @@ export const BasicAllowance = {
   fromSDK(object: BasicAllowanceSDKType): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 
@@ -353,11 +353,11 @@ export const PeriodicAllowance = {
 
   fromSDK(object: PeriodicAllowanceSDKType): PeriodicAllowance {
     return {
-      basic: isSet(object.basic) ? BasicAllowance.fromSDK(object.basic) : undefined,
-      period: isSet(object.period) ? Duration.fromSDK(object.period) : undefined,
+      basic: object.basic ? BasicAllowance.fromSDK(object.basic) : undefined,
+      period: object.period ? Duration.fromSDK(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromSDK(e)) : [],
-      periodReset: isSet(object.period_reset) ? Timestamp.fromSDK(object.period_reset) : undefined
+      periodReset: object.period_reset ? Timestamp.fromSDK(object.period_reset) : undefined
     };
   },
 
@@ -459,7 +459,7 @@ export const AllowedMsgAllowance = {
 
   fromSDK(object: AllowedMsgAllowanceSDKType): AllowedMsgAllowance {
     return {
-      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined,
+      allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined,
       allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
     };
   },
@@ -562,7 +562,7 @@ export const Grant = {
     return {
       granter: object?.granter,
       grantee: object?.grantee,
-      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
+      allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined
     };
   },
 

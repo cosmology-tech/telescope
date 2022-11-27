@@ -195,7 +195,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -333,7 +333,7 @@ export const QueryDenomAuthorityMetadataResponse = {
 
   fromSDK(object: QueryDenomAuthorityMetadataResponseSDKType): QueryDenomAuthorityMetadataResponse {
     return {
-      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
+      authorityMetadata: object.authority_metadata ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
     };
   },
 

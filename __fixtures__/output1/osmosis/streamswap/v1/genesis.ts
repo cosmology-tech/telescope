@@ -149,7 +149,7 @@ export const GenesisState = {
       sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromSDK(e)) : [],
       userPositions: Array.isArray(object?.user_positions) ? object.user_positions.map((e: any) => UserPositionKV.fromSDK(e)) : [],
       nextSaleId: object?.next_sale_id,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -258,7 +258,7 @@ export const UserPositionKV = {
     return {
       accAddress: object?.acc_address,
       saleId: object?.sale_id,
-      userPosition: isSet(object.user_position) ? UserPosition.fromSDK(object.user_position) : undefined
+      userPosition: object.user_position ? UserPosition.fromSDK(object.user_position) : undefined
     };
   },
 

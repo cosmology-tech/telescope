@@ -70,7 +70,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

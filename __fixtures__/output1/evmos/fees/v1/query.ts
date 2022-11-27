@@ -204,7 +204,7 @@ export const QueryDevFeeInfosRequest = {
 
   fromSDK(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -292,7 +292,7 @@ export const QueryDevFeeInfosResponse = {
   fromSDK(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
     return {
       fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -437,7 +437,7 @@ export const QueryDevFeeInfoResponse = {
 
   fromSDK(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
     return {
-      fee: isSet(object.fee) ? DevFeeInfo.fromSDK(object.fee) : undefined
+      fee: object.fee ? DevFeeInfo.fromSDK(object.fee) : undefined
     };
   },
 
@@ -558,7 +558,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -640,7 +640,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
     return {
       deployerAddress: object?.deployer_address,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -729,7 +729,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
   fromSDK(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
     return {
       fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

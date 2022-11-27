@@ -276,7 +276,7 @@ export const MsgCreateProvider = {
       owner: object?.owner,
       hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 
@@ -451,7 +451,7 @@ export const MsgUpdateProvider = {
       owner: object?.owner,
       hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 
@@ -747,7 +747,7 @@ export const Provider = {
       owner: object?.owner,
       hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 

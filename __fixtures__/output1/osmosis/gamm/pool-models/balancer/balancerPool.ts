@@ -311,8 +311,8 @@ export const SmoothWeightChangeParams = {
 
   fromSDK(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
     return {
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : [],
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
     };
@@ -423,7 +423,7 @@ export const PoolParams = {
     return {
       swapFee: object?.swap_fee,
       exitFee: object?.exit_fee,
-      smoothWeightChangeParams: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
+      smoothWeightChangeParams: object.smooth_weight_change_params ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
     };
   },
 
@@ -506,7 +506,7 @@ export const PoolAsset = {
 
   fromSDK(object: PoolAssetSDKType): PoolAsset {
     return {
-      token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
+      token: object.token ? Coin.fromSDK(object.token) : undefined,
       weight: object?.weight
     };
   },
@@ -657,9 +657,9 @@ export const Pool = {
     return {
       address: object?.address,
       id: object?.id,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
       futurePoolGovernor: object?.future_pool_governor,
-      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
+      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
       totalWeight: object?.total_weight
     };

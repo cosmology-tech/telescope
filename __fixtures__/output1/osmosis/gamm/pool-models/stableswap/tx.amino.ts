@@ -16,7 +16,7 @@ export interface AminoMsgCreateStableswapPool extends AminoMsg {
       denom: string;
       amount: string;
     }[];
-    scaling_factors: Long[];
+    scaling_factors: string[];
     future_pool_governor: string;
   };
 }
@@ -25,7 +25,7 @@ export interface AminoMsgStableSwapAdjustScalingFactors extends AminoMsg {
   value: {
     sender: string;
     pool_id: string;
-    scaling_factors: Long[];
+    scaling_factors: string[];
   };
 }
 export const AminoConverter = {

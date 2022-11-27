@@ -112,7 +112,7 @@ export const UpdateFeeTokenProposal = {
     return {
       title: object?.title,
       description: object?.description,
-      feetoken: isSet(object.feetoken) ? FeeToken.fromSDK(object.feetoken) : undefined
+      feetoken: object.feetoken ? FeeToken.fromSDK(object.feetoken) : undefined
     };
   },
 

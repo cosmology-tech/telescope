@@ -323,7 +323,7 @@ export const PlacementRequirements = {
 
   fromSDK(object: PlacementRequirementsSDKType): PlacementRequirements {
     return {
-      signedBy: isSet(object.signed_by) ? SignedBy.fromSDK(object.signed_by) : undefined,
+      signedBy: object.signed_by ? SignedBy.fromSDK(object.signed_by) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },

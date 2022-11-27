@@ -129,7 +129,7 @@ export const MsgCreateBalancerPool = {
   fromSDK(object: MsgCreateBalancerPoolSDKType): MsgCreateBalancerPool {
     return {
       sender: object?.sender,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
       futurePoolGovernor: object?.future_pool_governor
     };

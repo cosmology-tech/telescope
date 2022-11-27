@@ -571,12 +571,12 @@ export const AppDescriptor = {
 
   fromSDK(object: AppDescriptorSDKType): AppDescriptor {
     return {
-      authn: isSet(object.authn) ? AuthnDescriptor.fromSDK(object.authn) : undefined,
-      chain: isSet(object.chain) ? ChainDescriptor.fromSDK(object.chain) : undefined,
-      codec: isSet(object.codec) ? CodecDescriptor.fromSDK(object.codec) : undefined,
-      configuration: isSet(object.configuration) ? ConfigurationDescriptor.fromSDK(object.configuration) : undefined,
-      queryServices: isSet(object.query_services) ? QueryServicesDescriptor.fromSDK(object.query_services) : undefined,
-      tx: isSet(object.tx) ? TxDescriptor.fromSDK(object.tx) : undefined
+      authn: object.authn ? AuthnDescriptor.fromSDK(object.authn) : undefined,
+      chain: object.chain ? ChainDescriptor.fromSDK(object.chain) : undefined,
+      codec: object.codec ? CodecDescriptor.fromSDK(object.codec) : undefined,
+      configuration: object.configuration ? ConfigurationDescriptor.fromSDK(object.configuration) : undefined,
+      queryServices: object.query_services ? QueryServicesDescriptor.fromSDK(object.query_services) : undefined,
+      tx: object.tx ? TxDescriptor.fromSDK(object.tx) : undefined
     };
   },
 
@@ -1560,7 +1560,7 @@ export const GetAuthnDescriptorResponse = {
 
   fromSDK(object: GetAuthnDescriptorResponseSDKType): GetAuthnDescriptorResponse {
     return {
-      authn: isSet(object.authn) ? AuthnDescriptor.fromSDK(object.authn) : undefined
+      authn: object.authn ? AuthnDescriptor.fromSDK(object.authn) : undefined
     };
   },
 
@@ -1681,7 +1681,7 @@ export const GetChainDescriptorResponse = {
 
   fromSDK(object: GetChainDescriptorResponseSDKType): GetChainDescriptorResponse {
     return {
-      chain: isSet(object.chain) ? ChainDescriptor.fromSDK(object.chain) : undefined
+      chain: object.chain ? ChainDescriptor.fromSDK(object.chain) : undefined
     };
   },
 
@@ -1802,7 +1802,7 @@ export const GetCodecDescriptorResponse = {
 
   fromSDK(object: GetCodecDescriptorResponseSDKType): GetCodecDescriptorResponse {
     return {
-      codec: isSet(object.codec) ? CodecDescriptor.fromSDK(object.codec) : undefined
+      codec: object.codec ? CodecDescriptor.fromSDK(object.codec) : undefined
     };
   },
 
@@ -1923,7 +1923,7 @@ export const GetConfigurationDescriptorResponse = {
 
   fromSDK(object: GetConfigurationDescriptorResponseSDKType): GetConfigurationDescriptorResponse {
     return {
-      config: isSet(object.config) ? ConfigurationDescriptor.fromSDK(object.config) : undefined
+      config: object.config ? ConfigurationDescriptor.fromSDK(object.config) : undefined
     };
   },
 
@@ -2044,7 +2044,7 @@ export const GetQueryServicesDescriptorResponse = {
 
   fromSDK(object: GetQueryServicesDescriptorResponseSDKType): GetQueryServicesDescriptorResponse {
     return {
-      queries: isSet(object.queries) ? QueryServicesDescriptor.fromSDK(object.queries) : undefined
+      queries: object.queries ? QueryServicesDescriptor.fromSDK(object.queries) : undefined
     };
   },
 
@@ -2165,7 +2165,7 @@ export const GetTxDescriptorResponse = {
 
   fromSDK(object: GetTxDescriptorResponseSDKType): GetTxDescriptorResponse {
     return {
-      tx: isSet(object.tx) ? TxDescriptor.fromSDK(object.tx) : undefined
+      tx: object.tx ? TxDescriptor.fromSDK(object.tx) : undefined
     };
   },
 

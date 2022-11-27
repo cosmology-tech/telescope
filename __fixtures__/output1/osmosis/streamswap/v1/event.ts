@@ -161,7 +161,7 @@ export const EventCreateSale = {
       id: object?.id,
       creator: object?.creator,
       tokenIn: object?.token_in,
-      tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined
+      tokenOut: object.token_out ? Coin.fromSDK(object.token_out) : undefined
     };
   },
 

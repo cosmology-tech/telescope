@@ -209,10 +209,10 @@ export const MsgTransfer = {
     return {
       sourcePort: object?.source_port,
       sourceChannel: object?.source_channel,
-      token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
+      token: object.token ? Coin.fromSDK(object.token) : undefined,
       sender: object?.sender,
       receiver: object?.receiver,
-      timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
       timeoutTimestamp: object?.timeout_timestamp
     };
   },

@@ -162,7 +162,7 @@ export const MsgConvertCoin = {
 
   fromSDK(object: MsgConvertCoinSDKType): MsgConvertCoin {
     return {
-      coin: isSet(object.coin) ? Coin.fromSDK(object.coin) : undefined,
+      coin: object.coin ? Coin.fromSDK(object.coin) : undefined,
       receiver: object?.receiver,
       sender: object?.sender
     };

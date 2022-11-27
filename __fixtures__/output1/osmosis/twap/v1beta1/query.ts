@@ -158,8 +158,8 @@ export const ArithmeticTwapRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined
     };
   },
 
@@ -340,7 +340,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined
     };
   },
 
@@ -533,7 +533,7 @@ export const ParamsResponse = {
 
   fromSDK(object: ParamsResponseSDKType): ParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

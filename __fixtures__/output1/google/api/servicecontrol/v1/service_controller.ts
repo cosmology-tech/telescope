@@ -30,32 +30,7 @@ export enum CheckResponse_ConsumerInfo_ConsumerType {
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
-
-/**
- * The type of the consumer as defined in
- * [Google Resource Manager](https://cloud.google.com/resource-manager/).
- */
-export enum CheckResponse_ConsumerInfo_ConsumerTypeSDKType {
-  /** CONSUMER_TYPE_UNSPECIFIED - This is never used. */
-  CONSUMER_TYPE_UNSPECIFIED = 0,
-
-  /** PROJECT - The consumer is a Google Cloud Project. */
-  PROJECT = 1,
-
-  /** FOLDER - The consumer is a Google Cloud Folder. */
-  FOLDER = 2,
-
-  /** ORGANIZATION - The consumer is a Google Cloud Organization. */
-  ORGANIZATION = 3,
-
-  /**
-   * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
-   * producer to offer their users the ability to manage service control
-   * functionalities at a finer level of granularity than the PROJECT.
-   */
-  SERVICE_SPECIFIC = 4,
-  UNRECOGNIZED = -1,
-}
+export const CheckResponse_ConsumerInfo_ConsumerTypeSDKType = CheckResponse_ConsumerInfo_ConsumerType;
 export function checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object: any): CheckResponse_ConsumerInfo_ConsumerType {
   switch (object) {
     case 0:
@@ -279,7 +254,7 @@ export interface CheckResponse_ConsumerInfoSDKType {
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
    */
-  type: CheckResponse_ConsumerInfo_ConsumerTypeSDKType;
+  type: CheckResponse_ConsumerInfo_ConsumerType;
 
   /**
    * The consumer identity number, can be Google cloud project number, folder
@@ -537,7 +512,7 @@ export const CheckRequest = {
   fromSDK(object: CheckRequestSDKType): CheckRequest {
     return {
       serviceName: object?.service_name,
-      operation: isSet(object.operation) ? Operation.fromSDK(object.operation) : undefined,
+      operation: object.operation ? Operation.fromSDK(object.operation) : undefined,
       serviceConfigId: object?.service_config_id
     };
   },
@@ -667,7 +642,7 @@ export const CheckResponse = {
       checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDK(e)) : [],
       serviceConfigId: object?.service_config_id,
       serviceRolloutId: object?.service_rollout_id,
-      checkInfo: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
+      checkInfo: object.check_info ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
     };
   },
 
@@ -765,7 +740,7 @@ export const CheckResponse_CheckInfo = {
   fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
     return {
       unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
-      consumerInfo: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
+      consumerInfo: object.consumer_info ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
     };
   },
 
@@ -1169,7 +1144,7 @@ export const ReportResponse_ReportError = {
   fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {
     return {
       operationId: object?.operation_id,
-      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+      status: object.status ? Status.fromSDK(object.status) : undefined
     };
   },
 

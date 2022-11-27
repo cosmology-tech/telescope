@@ -184,7 +184,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

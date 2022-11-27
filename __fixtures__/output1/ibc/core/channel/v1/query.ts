@@ -906,9 +906,9 @@ export const QueryChannelResponse = {
 
   fromSDK(object: QueryChannelResponseSDKType): QueryChannelResponse {
     return {
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -979,7 +979,7 @@ export const QueryChannelsRequest = {
 
   fromSDK(object: QueryChannelsRequestSDKType): QueryChannelsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1079,8 +1079,8 @@ export const QueryChannelsResponse = {
   fromSDK(object: QueryChannelsResponseSDKType): QueryChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -1170,7 +1170,7 @@ export const QueryConnectionChannelsRequest = {
   fromSDK(object: QueryConnectionChannelsRequestSDKType): QueryConnectionChannelsRequest {
     return {
       connection: object?.connection,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1271,8 +1271,8 @@ export const QueryConnectionChannelsResponse = {
   fromSDK(object: QueryConnectionChannelsResponseSDKType): QueryConnectionChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -1456,9 +1456,9 @@ export const QueryChannelClientStateResponse = {
 
   fromSDK(object: QueryChannelClientStateResponseSDKType): QueryChannelClientStateResponse {
     return {
-      identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
+      identifiedClientState: object.identified_client_state ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -1676,10 +1676,10 @@ export const QueryChannelConsensusStateResponse = {
 
   fromSDK(object: QueryChannelConsensusStateResponseSDKType): QueryChannelConsensusStateResponse {
     return {
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
       clientId: object?.client_id,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -1874,7 +1874,7 @@ export const QueryPacketCommitmentResponse = {
     return {
       commitment: object?.commitment,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -1971,7 +1971,7 @@ export const QueryPacketCommitmentsRequest = {
     return {
       portId: object?.port_id,
       channelId: object?.channel_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2073,8 +2073,8 @@ export const QueryPacketCommitmentsResponse = {
   fromSDK(object: QueryPacketCommitmentsResponseSDKType): QueryPacketCommitmentsResponse {
     return {
       commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -2274,7 +2274,7 @@ export const QueryPacketReceiptResponse = {
     return {
       received: object?.received,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -2468,7 +2468,7 @@ export const QueryPacketAcknowledgementResponse = {
     return {
       acknowledgement: object?.acknowledgement,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -2595,7 +2595,7 @@ export const QueryPacketAcknowledgementsRequest = {
     return {
       portId: object?.port_id,
       channelId: object?.channel_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined,
       packetCommitmentSequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => e) : []
     };
   },
@@ -2705,8 +2705,8 @@ export const QueryPacketAcknowledgementsResponse = {
   fromSDK(object: QueryPacketAcknowledgementsResponseSDKType): QueryPacketAcknowledgementsResponse {
     return {
       acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -2936,7 +2936,7 @@ export const QueryUnreceivedPacketsResponse = {
   fromSDK(object: QueryUnreceivedPacketsResponseSDKType): QueryUnreceivedPacketsResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -3165,7 +3165,7 @@ export const QueryUnreceivedAcksResponse = {
   fromSDK(object: QueryUnreceivedAcksResponseSDKType): QueryUnreceivedAcksResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -3350,7 +3350,7 @@ export const QueryNextSequenceReceiveResponse = {
     return {
       nextSequenceReceive: object?.next_sequence_receive,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 

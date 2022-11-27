@@ -130,7 +130,7 @@ export const QueryConfigResponse = {
 
   fromSDK(object: QueryConfigResponseSDKType): QueryConfigResponse {
     return {
-      config: isSet(object.config) ? Config.fromSDK(object.config) : undefined
+      config: object.config ? Config.fromSDK(object.config) : undefined
     };
   },
 

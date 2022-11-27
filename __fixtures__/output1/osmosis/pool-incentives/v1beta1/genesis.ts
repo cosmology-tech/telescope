@@ -121,10 +121,10 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
-      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined,
-      poolToGauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromSDK(object.pool_to_gauges) : undefined
+      distrInfo: object.distr_info ? DistrInfo.fromSDK(object.distr_info) : undefined,
+      poolToGauges: object.pool_to_gauges ? PoolToGauges.fromSDK(object.pool_to_gauges) : undefined
     };
   },
 

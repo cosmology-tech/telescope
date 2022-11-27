@@ -12,16 +12,7 @@ export enum SuperfluidAssetType {
   SuperfluidAssetTypeLPShare = 1,
   UNRECOGNIZED = -1,
 }
-
-/**
- * SuperfluidAssetType indicates whether the superfluid asset is
- * a native token itself or the lp share of a pool.
- */
-export enum SuperfluidAssetTypeSDKType {
-  SuperfluidAssetTypeNative = 0,
-  SuperfluidAssetTypeLPShare = 1,
-  UNRECOGNIZED = -1,
-}
+export const SuperfluidAssetTypeSDKType = SuperfluidAssetType;
 export function superfluidAssetTypeFromJSON(object: any): SuperfluidAssetType {
   switch (object) {
     case 0:
@@ -71,7 +62,7 @@ export interface SuperfluidAssetSDKType {
    * AssetType indicates whether the superfluid asset is a native token or an lp
    * share
    */
-  asset_type: SuperfluidAssetTypeSDKType;
+  asset_type: SuperfluidAssetType;
 }
 
 /**
@@ -556,8 +547,8 @@ export const SuperfluidDelegationRecord = {
     return {
       delegatorAddress: object?.delegator_address,
       validatorAddress: object?.validator_address,
-      delegationAmount: isSet(object.delegation_amount) ? Coin.fromSDK(object.delegation_amount) : undefined,
-      equivalentStakedAmount: isSet(object.equivalent_staked_amount) ? Coin.fromSDK(object.equivalent_staked_amount) : undefined
+      delegationAmount: object.delegation_amount ? Coin.fromSDK(object.delegation_amount) : undefined,
+      equivalentStakedAmount: object.equivalent_staked_amount ? Coin.fromSDK(object.equivalent_staked_amount) : undefined
     };
   },
 

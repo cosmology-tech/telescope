@@ -150,7 +150,7 @@ export const QueryProvidersResponse = {
   fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
     return {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -309,7 +309,7 @@ export const QueryAllProvidersAttributesRequest = {
 
   fromSDK(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -391,7 +391,7 @@ export const QueryProviderAttributesRequest = {
   fromSDK(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
     return {
       owner: object?.owner,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -557,7 +557,7 @@ export const QueryAuditorAttributesRequest = {
   fromSDK(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
     return {
       auditor: object?.auditor,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 

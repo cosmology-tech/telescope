@@ -250,7 +250,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       lastTotalPower: object?.last_total_power,
       lastValidatorPowers: Array.isArray(object?.last_validator_powers) ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromSDK(e)) : [],
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],

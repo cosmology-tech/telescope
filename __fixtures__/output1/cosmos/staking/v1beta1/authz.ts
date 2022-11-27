@@ -22,26 +22,7 @@ export enum AuthorizationType {
   AUTHORIZATION_TYPE_REDELEGATE = 3,
   UNRECOGNIZED = -1,
 }
-
-/**
- * AuthorizationType defines the type of staking module authorization type
- * 
- * Since: cosmos-sdk 0.43
- */
-export enum AuthorizationTypeSDKType {
-  /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
-  AUTHORIZATION_TYPE_UNSPECIFIED = 0,
-
-  /** AUTHORIZATION_TYPE_DELEGATE - AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate */
-  AUTHORIZATION_TYPE_DELEGATE = 1,
-
-  /** AUTHORIZATION_TYPE_UNDELEGATE - AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate */
-  AUTHORIZATION_TYPE_UNDELEGATE = 2,
-
-  /** AUTHORIZATION_TYPE_REDELEGATE - AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate */
-  AUTHORIZATION_TYPE_REDELEGATE = 3,
-  UNRECOGNIZED = -1,
-}
+export const AuthorizationTypeSDKType = AuthorizationType;
 export function authorizationTypeFromJSON(object: any): AuthorizationType {
   switch (object) {
     case 0:
@@ -133,7 +114,7 @@ export interface StakeAuthorizationSDKType {
   deny_list?: StakeAuthorization_ValidatorsSDKType;
 
   /** authorization_type defines one of AuthorizationType. */
-  authorization_type: AuthorizationTypeSDKType;
+  authorization_type: AuthorizationType;
 }
 
 /** Validators defines list of validator addresses. */
@@ -239,9 +220,9 @@ export const StakeAuthorization = {
 
   fromSDK(object: StakeAuthorizationSDKType): StakeAuthorization {
     return {
-      maxTokens: isSet(object.max_tokens) ? Coin.fromSDK(object.max_tokens) : undefined,
-      allowList: isSet(object.allow_list) ? StakeAuthorization_Validators.fromSDK(object.allow_list) : undefined,
-      denyList: isSet(object.deny_list) ? StakeAuthorization_Validators.fromSDK(object.deny_list) : undefined,
+      maxTokens: object.max_tokens ? Coin.fromSDK(object.max_tokens) : undefined,
+      allowList: object.allow_list ? StakeAuthorization_Validators.fromSDK(object.allow_list) : undefined,
+      denyList: object.deny_list ? StakeAuthorization_Validators.fromSDK(object.deny_list) : undefined,
       authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : 0
     };
   },

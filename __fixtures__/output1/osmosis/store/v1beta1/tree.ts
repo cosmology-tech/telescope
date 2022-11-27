@@ -243,7 +243,7 @@ export const Leaf = {
 
   fromSDK(object: LeafSDKType): Leaf {
     return {
-      leaf: isSet(object.leaf) ? Child.fromSDK(object.leaf) : undefined
+      leaf: object.leaf ? Child.fromSDK(object.leaf) : undefined
     };
   },
 

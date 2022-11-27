@@ -202,10 +202,10 @@ export const MsgCreateDeployment = {
 
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
       version: object?.version,
-      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined,
+      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined,
       depositor: object?.depositor
     };
   },
@@ -361,8 +361,8 @@ export const MsgDepositDeployment = {
 
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined,
       depositor: object?.depositor
     };
   },
@@ -498,7 +498,7 @@ export const MsgUpdateDeployment = {
 
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
       version: object?.version
     };
   },
@@ -621,7 +621,7 @@ export const MsgCloseDeployment = {
 
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
     };
   },
 

@@ -599,7 +599,7 @@ export const TxResponse = {
       info: object?.info,
       gasWanted: object?.gas_wanted,
       gasUsed: object?.gas_used,
-      tx: isSet(object.tx) ? Any.fromSDK(object.tx) : undefined,
+      tx: object.tx ? Any.fromSDK(object.tx) : undefined,
       timestamp: object?.timestamp,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
     };
@@ -1209,8 +1209,8 @@ export const SimulationResponse = {
 
   fromSDK(object: SimulationResponseSDKType): SimulationResponse {
     return {
-      gasInfo: isSet(object.gas_info) ? GasInfo.fromSDK(object.gas_info) : undefined,
-      result: isSet(object.result) ? Result.fromSDK(object.result) : undefined
+      gasInfo: object.gas_info ? GasInfo.fromSDK(object.gas_info) : undefined,
+      result: object.result ? Result.fromSDK(object.result) : undefined
     };
   },
 

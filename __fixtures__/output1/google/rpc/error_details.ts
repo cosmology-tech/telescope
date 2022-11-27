@@ -620,7 +620,7 @@ export const RetryInfo = {
 
   fromSDK(object: RetryInfoSDKType): RetryInfo {
     return {
-      retryDelay: isSet(object.retry_delay) ? Duration.fromSDK(object.retry_delay) : undefined
+      retryDelay: object.retry_delay ? Duration.fromSDK(object.retry_delay) : undefined
     };
   },
 

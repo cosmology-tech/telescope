@@ -202,7 +202,7 @@ export const GenesisState = {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
       nextPoolNumber: object?.next_pool_number,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

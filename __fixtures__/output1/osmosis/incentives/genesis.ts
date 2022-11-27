@@ -157,7 +157,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDK(e)) : [],
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
       lastGaugeId: object?.last_gauge_id

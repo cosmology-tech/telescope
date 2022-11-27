@@ -224,8 +224,8 @@ export const Grant = {
 
   fromSDK(object: GrantSDKType): Grant {
     return {
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 
@@ -333,8 +333,8 @@ export const GrantAuthorization = {
     return {
       granter: object?.granter,
       grantee: object?.grantee,
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 

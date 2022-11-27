@@ -1015,13 +1015,13 @@ export const AttributeContext = {
 
   fromSDK(object: AttributeContextSDKType): AttributeContext {
     return {
-      origin: isSet(object.origin) ? AttributeContext_Peer.fromSDK(object.origin) : undefined,
-      source: isSet(object.source) ? AttributeContext_Peer.fromSDK(object.source) : undefined,
-      destination: isSet(object.destination) ? AttributeContext_Peer.fromSDK(object.destination) : undefined,
-      request: isSet(object.request) ? AttributeContext_Request.fromSDK(object.request) : undefined,
-      response: isSet(object.response) ? AttributeContext_Response.fromSDK(object.response) : undefined,
-      resource: isSet(object.resource) ? AttributeContext_Resource.fromSDK(object.resource) : undefined,
-      api: isSet(object.api) ? AttributeContext_Api.fromSDK(object.api) : undefined,
+      origin: object.origin ? AttributeContext_Peer.fromSDK(object.origin) : undefined,
+      source: object.source ? AttributeContext_Peer.fromSDK(object.source) : undefined,
+      destination: object.destination ? AttributeContext_Peer.fromSDK(object.destination) : undefined,
+      request: object.request ? AttributeContext_Request.fromSDK(object.request) : undefined,
+      response: object.response ? AttributeContext_Response.fromSDK(object.response) : undefined,
+      resource: object.resource ? AttributeContext_Resource.fromSDK(object.resource) : undefined,
+      api: object.api ? AttributeContext_Api.fromSDK(object.api) : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1526,7 +1526,7 @@ export const AttributeContext_Auth = {
       principal: object?.principal,
       audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
       presenter: object?.presenter,
-      claims: isSet(object.claims) ? Struct.fromSDK(object.claims) : undefined,
+      claims: object.claims ? Struct.fromSDK(object.claims) : undefined,
       accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
     };
   },
@@ -1867,11 +1867,11 @@ export const AttributeContext_Request = {
       host: object?.host,
       scheme: object?.scheme,
       query: object?.query,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       size: object?.size,
       protocol: object?.protocol,
       reason: object?.reason,
-      auth: isSet(object.auth) ? AttributeContext_Auth.fromSDK(object.auth) : undefined
+      auth: object.auth ? AttributeContext_Auth.fromSDK(object.auth) : undefined
     };
   },
 
@@ -2125,8 +2125,8 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      backendLatency: isSet(object.backend_latency) ? Duration.fromSDK(object.backend_latency) : undefined
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      backendLatency: object.backend_latency ? Duration.fromSDK(object.backend_latency) : undefined
     };
   },
 
@@ -2577,9 +2577,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: object?.display_name,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
-      deleteTime: isSet(object.delete_time) ? Timestamp.fromSDK(object.delete_time) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      deleteTime: object.delete_time ? Timestamp.fromSDK(object.delete_time) : undefined,
       etag: object?.etag,
       location: object?.location
     };

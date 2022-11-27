@@ -998,7 +998,7 @@ export const AccountLockedPastTimeRequest = {
   fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
     return {
       owner: object?.owner,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
@@ -1162,7 +1162,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object?.owner,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
@@ -1326,7 +1326,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object?.owner,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
@@ -1502,7 +1502,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
     return {
       owner: object?.owner,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       denom: object?.denom
     };
   },
@@ -1668,7 +1668,7 @@ export const LockedDenomRequest = {
   fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
     return {
       denom: object?.denom,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
@@ -1876,7 +1876,7 @@ export const LockedResponse = {
 
   fromSDK(object: LockedResponseSDKType): LockedResponse {
     return {
-      lock: isSet(object.lock) ? PeriodLock.fromSDK(object.lock) : undefined
+      lock: object.lock ? PeriodLock.fromSDK(object.lock) : undefined
     };
   },
 
@@ -2108,7 +2108,7 @@ export const AccountLockedLongerDurationRequest = {
   fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
     return {
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
@@ -2272,7 +2272,7 @@ export const AccountLockedDurationRequest = {
   fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
     return {
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
@@ -2436,7 +2436,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
@@ -2612,7 +2612,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromSDK(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
     return {
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       denom: object?.denom
     };
   },

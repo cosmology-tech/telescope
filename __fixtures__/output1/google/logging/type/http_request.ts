@@ -425,7 +425,7 @@ export const HttpRequest = {
       remoteIp: object?.remote_ip,
       serverIp: object?.server_ip,
       referer: object?.referer,
-      latency: isSet(object.latency) ? Duration.fromSDK(object.latency) : undefined,
+      latency: object.latency ? Duration.fromSDK(object.latency) : undefined,
       cacheLookup: object?.cache_lookup,
       cacheHit: object?.cache_hit,
       cacheValidatedWithOriginServer: object?.cache_validated_with_origin_server,

@@ -119,7 +119,7 @@ export const QuerySales = {
 
   fromSDK(object: QuerySalesSDKType): QuerySales {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -207,7 +207,7 @@ export const QuerySalesResponse = {
   fromSDK(object: QuerySalesResponseSDKType): QuerySalesResponse {
     return {
       sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -352,7 +352,7 @@ export const QuerySaleResponse = {
 
   fromSDK(object: QuerySaleResponseSDKType): QuerySaleResponse {
     return {
-      sale: isSet(object.sale) ? Sale.fromSDK(object.sale) : undefined
+      sale: object.sale ? Sale.fromSDK(object.sale) : undefined
     };
   },
 
@@ -504,7 +504,7 @@ export const QueryUserPositionResponse = {
 
   fromSDK(object: QueryUserPositionResponseSDKType): QueryUserPositionResponse {
     return {
-      userPosition: isSet(object.user_position) ? UserPosition.fromSDK(object.user_position) : undefined
+      userPosition: object.user_position ? UserPosition.fromSDK(object.user_position) : undefined
     };
   },
 

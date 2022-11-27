@@ -228,7 +228,7 @@ export const ModuleConfig = {
   fromSDK(object: ModuleConfigSDKType): ModuleConfig {
     return {
       name: object?.name,
-      config: isSet(object.config) ? Any.fromSDK(object.config) : undefined
+      config: object.config ? Any.fromSDK(object.config) : undefined
     };
   },
 

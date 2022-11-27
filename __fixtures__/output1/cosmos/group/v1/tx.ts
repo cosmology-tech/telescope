@@ -21,24 +21,7 @@ export enum Exec {
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
 }
-
-/** Exec defines modes of execution of a proposal on creation or on new vote. */
-export enum ExecSDKType {
-  /**
-   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
-   * MsgExec request for the proposal to execute.
-   */
-  EXEC_UNSPECIFIED = 0,
-
-  /**
-   * EXEC_TRY - Try to execute the proposal immediately.
-   * If the proposal is not allowed per the DecisionPolicy,
-   * the proposal will still be open and could
-   * be executed at a later point.
-   */
-  EXEC_TRY = 1,
-  UNRECOGNIZED = -1,
-}
+export const ExecSDKType = Exec;
 export function execFromJSON(object: any): Exec {
   switch (object) {
     case 0:
@@ -440,7 +423,7 @@ export interface MsgSubmitProposalSDKType {
    * whether it should be executed immediately on creation or not.
    * If so, proposers signatures are considered as Yes votes.
    */
-  exec: ExecSDKType;
+  exec: Exec;
 }
 
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
@@ -509,7 +492,7 @@ export interface MsgVoteSDKType {
   voter: string;
 
   /** option is the voter's choice on the proposal. */
-  option: VoteOptionSDKType;
+  option: VoteOption;
 
   /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
@@ -518,7 +501,7 @@ export interface MsgVoteSDKType {
    * exec defines whether the proposal should be executed
    * immediately after voting or not.
    */
-  exec: ExecSDKType;
+  exec: Exec;
 }
 
 /** MsgVoteResponse is the Msg/Vote response type. */
@@ -1308,7 +1291,7 @@ export const MsgCreateGroupPolicy = {
       admin: object?.admin,
       groupId: object?.group_id,
       metadata: object?.metadata,
-      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+      decisionPolicy: object.decision_policy ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
 
@@ -1617,7 +1600,7 @@ export const MsgCreateGroupWithPolicy = {
       groupMetadata: object?.group_metadata,
       groupPolicyMetadata: object?.group_policy_metadata,
       groupPolicyAsAdmin: object?.group_policy_as_admin,
-      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+      decisionPolicy: object.decision_policy ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
 
@@ -1858,7 +1841,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return {
       admin: object?.admin,
       address: object?.address,
-      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+      decisionPolicy: object.decision_policy ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
 

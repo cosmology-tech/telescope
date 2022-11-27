@@ -113,7 +113,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromSDK(e)) : []
     };
   },
@@ -203,7 +203,7 @@ export const GenesisDenom = {
   fromSDK(object: GenesisDenomSDKType): GenesisDenom {
     return {
       denom: object?.denom,
-      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
+      authorityMetadata: object.authority_metadata ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
     };
   },
 

@@ -117,9 +117,9 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
-      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
-      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
+      airdropStartTime: object.airdrop_start_time ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      durationUntilDecay: object.duration_until_decay ? Duration.fromSDK(object.duration_until_decay) : undefined,
+      durationOfDecay: object.duration_of_decay ? Duration.fromSDK(object.duration_of_decay) : undefined,
       claimDenom: object?.claim_denom
     };
   },

@@ -24,25 +24,7 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
-
-/** VoteOption enumerates the valid vote options for a given governance proposal. */
-export enum VoteOptionSDKType {
-  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
-  VOTE_OPTION_UNSPECIFIED = 0,
-
-  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
-  VOTE_OPTION_YES = 1,
-
-  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
-  VOTE_OPTION_ABSTAIN = 2,
-
-  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
-  VOTE_OPTION_NO = 3,
-
-  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
-  VOTE_OPTION_NO_WITH_VETO = 4,
-  UNRECOGNIZED = -1,
-}
+export const VoteOptionSDKType = VoteOption;
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -130,43 +112,7 @@ export enum ProposalStatus {
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
 }
-
-/** ProposalStatus enumerates the valid statuses of a proposal. */
-export enum ProposalStatusSDKType {
-  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
-  PROPOSAL_STATUS_UNSPECIFIED = 0,
-
-  /**
-   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-   * period.
-   */
-  PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
-
-  /**
-   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-   * period.
-   */
-  PROPOSAL_STATUS_VOTING_PERIOD = 2,
-
-  /**
-   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-   * passed.
-   */
-  PROPOSAL_STATUS_PASSED = 3,
-
-  /**
-   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-   * been rejected.
-   */
-  PROPOSAL_STATUS_REJECTED = 4,
-
-  /**
-   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-   * failed.
-   */
-  PROPOSAL_STATUS_FAILED = 5,
-  UNRECOGNIZED = -1,
-}
+export const ProposalStatusSDKType = ProposalStatus;
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
@@ -233,7 +179,7 @@ export interface WeightedVoteOption {
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionSDKType {
-  option: VoteOptionSDKType;
+  option: VoteOption;
   weight: string;
 }
 
@@ -283,7 +229,7 @@ export interface Proposal {
 export interface ProposalSDKType {
   id: Long;
   messages: AnySDKType[];
-  status: ProposalStatusSDKType;
+  status: ProposalStatus;
 
   /**
    * final_tally_result is the final tally result of the proposal. When
@@ -787,12 +733,12 @@ export const Proposal = {
       id: object?.id,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
-      submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined,
-      depositEndTime: isSet(object.deposit_end_time) ? Timestamp.fromSDK(object.deposit_end_time) : undefined,
+      finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
+      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined,
+      depositEndTime: object.deposit_end_time ? Timestamp.fromSDK(object.deposit_end_time) : undefined,
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      votingStartTime: isSet(object.voting_start_time) ? Timestamp.fromSDK(object.voting_start_time) : undefined,
-      votingEndTime: isSet(object.voting_end_time) ? Timestamp.fromSDK(object.voting_end_time) : undefined,
+      votingStartTime: object.voting_start_time ? Timestamp.fromSDK(object.voting_start_time) : undefined,
+      votingEndTime: object.voting_end_time ? Timestamp.fromSDK(object.voting_end_time) : undefined,
       metadata: object?.metadata
     };
   },
@@ -1136,7 +1082,7 @@ export const DepositParams = {
   fromSDK(object: DepositParamsSDKType): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      maxDepositPeriod: isSet(object.max_deposit_period) ? Duration.fromSDK(object.max_deposit_period) : undefined
+      maxDepositPeriod: object.max_deposit_period ? Duration.fromSDK(object.max_deposit_period) : undefined
     };
   },
 
@@ -1212,7 +1158,7 @@ export const VotingParams = {
 
   fromSDK(object: VotingParamsSDKType): VotingParams {
     return {
-      votingPeriod: isSet(object.voting_period) ? Duration.fromSDK(object.voting_period) : undefined
+      votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined
     };
   },
 

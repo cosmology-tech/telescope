@@ -612,7 +612,7 @@ export const QueryValidatorsRequest = {
   fromSDK(object: QueryValidatorsRequestSDKType): QueryValidatorsRequest {
     return {
       status: object?.status,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -701,7 +701,7 @@ export const QueryValidatorsResponse = {
   fromSDK(object: QueryValidatorsResponseSDKType): QueryValidatorsResponse {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -846,7 +846,7 @@ export const QueryValidatorResponse = {
 
   fromSDK(object: QueryValidatorResponseSDKType): QueryValidatorResponse {
     return {
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined
     };
   },
 
@@ -928,7 +928,7 @@ export const QueryValidatorDelegationsRequest = {
   fromSDK(object: QueryValidatorDelegationsRequestSDKType): QueryValidatorDelegationsRequest {
     return {
       validatorAddr: object?.validator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1017,7 +1017,7 @@ export const QueryValidatorDelegationsResponse = {
   fromSDK(object: QueryValidatorDelegationsResponseSDKType): QueryValidatorDelegationsResponse {
     return {
       delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1106,7 +1106,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   fromSDK(object: QueryValidatorUnbondingDelegationsRequestSDKType): QueryValidatorUnbondingDelegationsRequest {
     return {
       validatorAddr: object?.validator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1195,7 +1195,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   fromSDK(object: QueryValidatorUnbondingDelegationsResponseSDKType): QueryValidatorUnbondingDelegationsResponse {
     return {
       unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1354,7 +1354,7 @@ export const QueryDelegationResponse = {
 
   fromSDK(object: QueryDelegationResponseSDKType): QueryDelegationResponse {
     return {
-      delegationResponse: isSet(object.delegation_response) ? DelegationResponse.fromSDK(object.delegation_response) : undefined
+      delegationResponse: object.delegation_response ? DelegationResponse.fromSDK(object.delegation_response) : undefined
     };
   },
 
@@ -1506,7 +1506,7 @@ export const QueryUnbondingDelegationResponse = {
 
   fromSDK(object: QueryUnbondingDelegationResponseSDKType): QueryUnbondingDelegationResponse {
     return {
-      unbond: isSet(object.unbond) ? UnbondingDelegation.fromSDK(object.unbond) : undefined
+      unbond: object.unbond ? UnbondingDelegation.fromSDK(object.unbond) : undefined
     };
   },
 
@@ -1588,7 +1588,7 @@ export const QueryDelegatorDelegationsRequest = {
   fromSDK(object: QueryDelegatorDelegationsRequestSDKType): QueryDelegatorDelegationsRequest {
     return {
       delegatorAddr: object?.delegator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1677,7 +1677,7 @@ export const QueryDelegatorDelegationsResponse = {
   fromSDK(object: QueryDelegatorDelegationsResponseSDKType): QueryDelegatorDelegationsResponse {
     return {
       delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1766,7 +1766,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   fromSDK(object: QueryDelegatorUnbondingDelegationsRequestSDKType): QueryDelegatorUnbondingDelegationsRequest {
     return {
       delegatorAddr: object?.delegator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1855,7 +1855,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   fromSDK(object: QueryDelegatorUnbondingDelegationsResponseSDKType): QueryDelegatorUnbondingDelegationsResponse {
     return {
       unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1970,7 +1970,7 @@ export const QueryRedelegationsRequest = {
       delegatorAddr: object?.delegator_addr,
       srcValidatorAddr: object?.src_validator_addr,
       dstValidatorAddr: object?.dst_validator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2061,7 +2061,7 @@ export const QueryRedelegationsResponse = {
   fromSDK(object: QueryRedelegationsResponseSDKType): QueryRedelegationsResponse {
     return {
       redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2150,7 +2150,7 @@ export const QueryDelegatorValidatorsRequest = {
   fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
     return {
       delegatorAddr: object?.delegator_addr,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2239,7 +2239,7 @@ export const QueryDelegatorValidatorsResponse = {
   fromSDK(object: QueryDelegatorValidatorsResponseSDKType): QueryDelegatorValidatorsResponse {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2398,7 +2398,7 @@ export const QueryDelegatorValidatorResponse = {
 
   fromSDK(object: QueryDelegatorValidatorResponseSDKType): QueryDelegatorValidatorResponse {
     return {
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined
     };
   },
 
@@ -2536,7 +2536,7 @@ export const QueryHistoricalInfoResponse = {
 
   fromSDK(object: QueryHistoricalInfoResponseSDKType): QueryHistoricalInfoResponse {
     return {
-      hist: isSet(object.hist) ? HistoricalInfo.fromSDK(object.hist) : undefined
+      hist: object.hist ? HistoricalInfo.fromSDK(object.hist) : undefined
     };
   },
 
@@ -2657,7 +2657,7 @@ export const QueryPoolResponse = {
 
   fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
     return {
-      pool: isSet(object.pool) ? Pool.fromSDK(object.pool) : undefined
+      pool: object.pool ? Pool.fromSDK(object.pool) : undefined
     };
   },
 
@@ -2778,7 +2778,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

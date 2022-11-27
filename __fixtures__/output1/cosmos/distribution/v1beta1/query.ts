@@ -448,7 +448,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -586,7 +586,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
 
   fromSDK(object: QueryValidatorOutstandingRewardsResponseSDKType): QueryValidatorOutstandingRewardsResponse {
     return {
-      rewards: isSet(object.rewards) ? ValidatorOutstandingRewards.fromSDK(object.rewards) : undefined
+      rewards: object.rewards ? ValidatorOutstandingRewards.fromSDK(object.rewards) : undefined
     };
   },
 
@@ -724,7 +724,7 @@ export const QueryValidatorCommissionResponse = {
 
   fromSDK(object: QueryValidatorCommissionResponseSDKType): QueryValidatorCommissionResponse {
     return {
-      commission: isSet(object.commission) ? ValidatorAccumulatedCommission.fromSDK(object.commission) : undefined
+      commission: object.commission ? ValidatorAccumulatedCommission.fromSDK(object.commission) : undefined
     };
   },
 
@@ -832,7 +832,7 @@ export const QueryValidatorSlashesRequest = {
       validatorAddress: object?.validator_address,
       startingHeight: object?.starting_height,
       endingHeight: object?.ending_height,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -923,7 +923,7 @@ export const QueryValidatorSlashesResponse = {
   fromSDK(object: QueryValidatorSlashesResponseSDKType): QueryValidatorSlashesResponse {
     return {
       slashes: Array.isArray(object?.slashes) ? object.slashes.map((e: any) => ValidatorSlashEvent.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

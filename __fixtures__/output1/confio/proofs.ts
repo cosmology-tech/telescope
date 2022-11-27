@@ -13,18 +13,7 @@ export enum HashOp {
   BITCOIN = 5,
   UNRECOGNIZED = -1,
 }
-export enum HashOpSDKType {
-  /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
-  NO_HASH = 0,
-  SHA256 = 1,
-  SHA512 = 2,
-  KECCAK = 3,
-  RIPEMD160 = 4,
-
-  /** BITCOIN - ripemd160(sha256(x)) */
-  BITCOIN = 5,
-  UNRECOGNIZED = -1,
-}
+export const HashOpSDKType = HashOp;
 export function hashOpFromJSON(object: any): HashOp {
   switch (object) {
     case 0:
@@ -118,42 +107,7 @@ export enum LengthOp {
   REQUIRE_64_BYTES = 8,
   UNRECOGNIZED = -1,
 }
-
-/**
- * LengthOp defines how to process the key and value of the LeafOp
- * to include length information. After encoding the length with the given
- * algorithm, the length will be prepended to the key and value bytes.
- * (Each one with it's own encoded length)
- */
-export enum LengthOpSDKType {
-  /** NO_PREFIX - NO_PREFIX don't include any length info */
-  NO_PREFIX = 0,
-
-  /** VAR_PROTO - VAR_PROTO uses protobuf (and go-amino) varint encoding of the length */
-  VAR_PROTO = 1,
-
-  /** VAR_RLP - VAR_RLP uses rlp int encoding of the length */
-  VAR_RLP = 2,
-
-  /** FIXED32_BIG - FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer */
-  FIXED32_BIG = 3,
-
-  /** FIXED32_LITTLE - FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer */
-  FIXED32_LITTLE = 4,
-
-  /** FIXED64_BIG - FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer */
-  FIXED64_BIG = 5,
-
-  /** FIXED64_LITTLE - FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer */
-  FIXED64_LITTLE = 6,
-
-  /** REQUIRE_32_BYTES - REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output) */
-  REQUIRE_32_BYTES = 7,
-
-  /** REQUIRE_64_BYTES - REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output) */
-  REQUIRE_64_BYTES = 8,
-  UNRECOGNIZED = -1,
-}
+export const LengthOpSDKType = LengthOp;
 export function lengthOpFromJSON(object: any): LengthOp {
   switch (object) {
     case 0:
@@ -375,10 +329,10 @@ export interface LeafOp {
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
  */
 export interface LeafOpSDKType {
-  hash: HashOpSDKType;
-  prehash_key: HashOpSDKType;
-  prehash_value: HashOpSDKType;
-  length: LengthOpSDKType;
+  hash: HashOp;
+  prehash_key: HashOp;
+  prehash_value: HashOp;
+  length: LengthOp;
 
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
@@ -428,7 +382,7 @@ export interface InnerOp {
  * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOpSDKType {
-  hash: HashOpSDKType;
+  hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
 }
@@ -540,7 +494,7 @@ export interface InnerSpecSDKType {
   empty_child: Uint8Array;
 
   /** hash is the algorithm that must be used for each InnerOp */
-  hash: HashOpSDKType;
+  hash: HashOp;
 }
 
 /** BatchProof is a group of multiple proof types than can be compressed */
@@ -714,7 +668,7 @@ export const ExistenceProof = {
     return {
       key: object?.key,
       value: object?.value,
-      leaf: isSet(object.leaf) ? LeafOp.fromSDK(object.leaf) : undefined,
+      leaf: object.leaf ? LeafOp.fromSDK(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromSDK(e)) : []
     };
   },
@@ -818,8 +772,8 @@ export const NonExistenceProof = {
   fromSDK(object: NonExistenceProofSDKType): NonExistenceProof {
     return {
       key: object?.key,
-      left: isSet(object.left) ? ExistenceProof.fromSDK(object.left) : undefined,
-      right: isSet(object.right) ? ExistenceProof.fromSDK(object.right) : undefined
+      left: object.left ? ExistenceProof.fromSDK(object.left) : undefined,
+      right: object.right ? ExistenceProof.fromSDK(object.right) : undefined
     };
   },
 
@@ -926,10 +880,10 @@ export const CommitmentProof = {
 
   fromSDK(object: CommitmentProofSDKType): CommitmentProof {
     return {
-      exist: isSet(object.exist) ? ExistenceProof.fromSDK(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromSDK(object.nonexist) : undefined,
-      batch: isSet(object.batch) ? BatchProof.fromSDK(object.batch) : undefined,
-      compressed: isSet(object.compressed) ? CompressedBatchProof.fromSDK(object.compressed) : undefined
+      exist: object.exist ? ExistenceProof.fromSDK(object.exist) : undefined,
+      nonexist: object.nonexist ? NonExistenceProof.fromSDK(object.nonexist) : undefined,
+      batch: object.batch ? BatchProof.fromSDK(object.batch) : undefined,
+      compressed: object.compressed ? CompressedBatchProof.fromSDK(object.compressed) : undefined
     };
   },
 
@@ -1259,8 +1213,8 @@ export const ProofSpec = {
 
   fromSDK(object: ProofSpecSDKType): ProofSpec {
     return {
-      leafSpec: isSet(object.leaf_spec) ? LeafOp.fromSDK(object.leaf_spec) : undefined,
-      innerSpec: isSet(object.inner_spec) ? InnerSpec.fromSDK(object.inner_spec) : undefined,
+      leafSpec: object.leaf_spec ? LeafOp.fromSDK(object.leaf_spec) : undefined,
+      innerSpec: object.inner_spec ? InnerSpec.fromSDK(object.inner_spec) : undefined,
       maxDepth: object?.max_depth,
       minDepth: object?.min_depth
     };
@@ -1591,8 +1545,8 @@ export const BatchEntry = {
 
   fromSDK(object: BatchEntrySDKType): BatchEntry {
     return {
-      exist: isSet(object.exist) ? ExistenceProof.fromSDK(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? NonExistenceProof.fromSDK(object.nonexist) : undefined
+      exist: object.exist ? ExistenceProof.fromSDK(object.exist) : undefined,
+      nonexist: object.nonexist ? NonExistenceProof.fromSDK(object.nonexist) : undefined
     };
   },
 
@@ -1779,8 +1733,8 @@ export const CompressedBatchEntry = {
 
   fromSDK(object: CompressedBatchEntrySDKType): CompressedBatchEntry {
     return {
-      exist: isSet(object.exist) ? CompressedExistenceProof.fromSDK(object.exist) : undefined,
-      nonexist: isSet(object.nonexist) ? CompressedNonExistenceProof.fromSDK(object.nonexist) : undefined
+      exist: object.exist ? CompressedExistenceProof.fromSDK(object.exist) : undefined,
+      nonexist: object.nonexist ? CompressedNonExistenceProof.fromSDK(object.nonexist) : undefined
     };
   },
 
@@ -1906,7 +1860,7 @@ export const CompressedExistenceProof = {
     return {
       key: object?.key,
       value: object?.value,
-      leaf: isSet(object.leaf) ? LeafOp.fromSDK(object.leaf) : undefined,
+      leaf: object.leaf ? LeafOp.fromSDK(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : []
     };
   },
@@ -2010,8 +1964,8 @@ export const CompressedNonExistenceProof = {
   fromSDK(object: CompressedNonExistenceProofSDKType): CompressedNonExistenceProof {
     return {
       key: object?.key,
-      left: isSet(object.left) ? CompressedExistenceProof.fromSDK(object.left) : undefined,
-      right: isSet(object.right) ? CompressedExistenceProof.fromSDK(object.right) : undefined
+      left: object.left ? CompressedExistenceProof.fromSDK(object.left) : undefined,
+      right: object.right ? CompressedExistenceProof.fromSDK(object.right) : undefined
     };
   },
 

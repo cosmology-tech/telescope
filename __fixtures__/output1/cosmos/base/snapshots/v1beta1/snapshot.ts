@@ -239,7 +239,7 @@ export const Snapshot = {
       format: object?.format,
       chunks: object?.chunks,
       hash: object?.hash,
-      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+      metadata: object.metadata ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
 
@@ -453,12 +453,12 @@ export const SnapshotItem = {
 
   fromSDK(object: SnapshotItemSDKType): SnapshotItem {
     return {
-      store: isSet(object.store) ? SnapshotStoreItem.fromSDK(object.store) : undefined,
-      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromSDK(object.iavl) : undefined,
-      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromSDK(object.extension) : undefined,
-      extensionPayload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromSDK(object.extension_payload) : undefined,
-      kv: isSet(object.kv) ? SnapshotKVItem.fromSDK(object.kv) : undefined,
-      schema: isSet(object.schema) ? SnapshotSchema.fromSDK(object.schema) : undefined
+      store: object.store ? SnapshotStoreItem.fromSDK(object.store) : undefined,
+      iavl: object.iavl ? SnapshotIAVLItem.fromSDK(object.iavl) : undefined,
+      extension: object.extension ? SnapshotExtensionMeta.fromSDK(object.extension) : undefined,
+      extensionPayload: object.extension_payload ? SnapshotExtensionPayload.fromSDK(object.extension_payload) : undefined,
+      kv: object.kv ? SnapshotKVItem.fromSDK(object.kv) : undefined,
+      schema: object.schema ? SnapshotSchema.fromSDK(object.schema) : undefined
     };
   },
 

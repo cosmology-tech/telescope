@@ -99,9 +99,9 @@ export const Resource = {
 
   fromSDK(object: ResourceSDKType): Resource {
     return {
-      resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
+      resources: object.resources ? ResourceUnits.fromSDK(object.resources) : undefined,
       count: object?.count,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined
     };
   },
 

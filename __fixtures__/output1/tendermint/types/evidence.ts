@@ -124,8 +124,8 @@ export const Evidence = {
 
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
-      duplicateVoteEvidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromSDK(object.duplicate_vote_evidence) : undefined,
-      lightClientAttackEvidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromSDK(object.light_client_attack_evidence) : undefined
+      duplicateVoteEvidence: object.duplicate_vote_evidence ? DuplicateVoteEvidence.fromSDK(object.duplicate_vote_evidence) : undefined,
+      lightClientAttackEvidence: object.light_client_attack_evidence ? LightClientAttackEvidence.fromSDK(object.light_client_attack_evidence) : undefined
     };
   },
 
@@ -243,11 +243,11 @@ export const DuplicateVoteEvidence = {
 
   fromSDK(object: DuplicateVoteEvidenceSDKType): DuplicateVoteEvidence {
     return {
-      voteA: isSet(object.vote_a) ? Vote.fromSDK(object.vote_a) : undefined,
-      voteB: isSet(object.vote_b) ? Vote.fromSDK(object.vote_b) : undefined,
+      voteA: object.vote_a ? Vote.fromSDK(object.vote_a) : undefined,
+      voteB: object.vote_b ? Vote.fromSDK(object.vote_b) : undefined,
       totalVotingPower: object?.total_voting_power,
       validatorPower: object?.validator_power,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
@@ -374,11 +374,11 @@ export const LightClientAttackEvidence = {
 
   fromSDK(object: LightClientAttackEvidenceSDKType): LightClientAttackEvidence {
     return {
-      conflictingBlock: isSet(object.conflicting_block) ? LightBlock.fromSDK(object.conflicting_block) : undefined,
+      conflictingBlock: object.conflicting_block ? LightBlock.fromSDK(object.conflicting_block) : undefined,
       commonHeight: object?.common_height,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDK(e)) : [],
       totalVotingPower: object?.total_voting_power,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 

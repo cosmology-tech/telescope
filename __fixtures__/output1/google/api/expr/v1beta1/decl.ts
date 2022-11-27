@@ -229,8 +229,8 @@ export const Decl = {
       id: object?.id,
       name: object?.name,
       doc: object?.doc,
-      ident: isSet(object.ident) ? IdentDecl.fromSDK(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromSDK(object.function) : undefined
+      ident: object.ident ? IdentDecl.fromSDK(object.ident) : undefined,
+      function: object.function ? FunctionDecl.fromSDK(object.function) : undefined
     };
   },
 
@@ -424,8 +424,8 @@ export const IdentDecl = {
 
   fromSDK(object: IdentDeclSDKType): IdentDecl {
     return {
-      type: isSet(object.type) ? DeclType.fromSDK(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
+      type: object.type ? DeclType.fromSDK(object.type) : undefined,
+      value: object.value ? Expr.fromSDK(object.value) : undefined
     };
   },
 
@@ -526,7 +526,7 @@ export const FunctionDecl = {
   fromSDK(object: FunctionDeclSDKType): FunctionDecl {
     return {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDK(e)) : [],
-      returnType: isSet(object.return_type) ? DeclType.fromSDK(object.return_type) : undefined,
+      returnType: object.return_type ? DeclType.fromSDK(object.return_type) : undefined,
       receiverFunction: object?.receiver_function
     };
   },

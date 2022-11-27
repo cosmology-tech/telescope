@@ -287,13 +287,13 @@ export const MsgCreateValidator = {
 
   fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
     return {
-      description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
-      commission: isSet(object.commission) ? CommissionRates.fromSDK(object.commission) : undefined,
+      description: object.description ? Description.fromSDK(object.description) : undefined,
+      commission: object.commission ? CommissionRates.fromSDK(object.commission) : undefined,
       minSelfDelegation: object?.min_self_delegation,
       delegatorAddress: object?.delegator_address,
       validatorAddress: object?.validator_address,
-      pubkey: isSet(object.pubkey) ? Any.fromSDK(object.pubkey) : undefined,
-      value: isSet(object.value) ? Coin.fromSDK(object.value) : undefined
+      pubkey: object.pubkey ? Any.fromSDK(object.pubkey) : undefined,
+      value: object.value ? Coin.fromSDK(object.value) : undefined
     };
   },
 
@@ -456,7 +456,7 @@ export const MsgEditValidator = {
 
   fromSDK(object: MsgEditValidatorSDKType): MsgEditValidator {
     return {
-      description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
+      description: object.description ? Description.fromSDK(object.description) : undefined,
       validatorAddress: object?.validator_address,
       commissionRate: object?.commission_rate,
       minSelfDelegation: object?.min_self_delegation
@@ -609,7 +609,7 @@ export const MsgDelegate = {
     return {
       delegatorAddress: object?.delegator_address,
       validatorAddress: object?.validator_address,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -771,7 +771,7 @@ export const MsgBeginRedelegate = {
       delegatorAddress: object?.delegator_address,
       validatorSrcAddress: object?.validator_src_address,
       validatorDstAddress: object?.validator_dst_address,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -843,7 +843,7 @@ export const MsgBeginRedelegateResponse = {
 
   fromSDK(object: MsgBeginRedelegateResponseSDKType): MsgBeginRedelegateResponse {
     return {
-      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined
+      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined
     };
   },
 
@@ -938,7 +938,7 @@ export const MsgUndelegate = {
     return {
       delegatorAddress: object?.delegator_address,
       validatorAddress: object?.validator_address,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -1009,7 +1009,7 @@ export const MsgUndelegateResponse = {
 
   fromSDK(object: MsgUndelegateResponseSDKType): MsgUndelegateResponse {
     return {
-      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined
+      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined
     };
   },
 

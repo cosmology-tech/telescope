@@ -147,7 +147,7 @@ export const MsgSoftwareUpgrade = {
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
     return {
       authority: object?.authority,
-      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined
     };
   },
 

@@ -18,22 +18,7 @@ export enum Account_State {
   overdrawn = 3,
   UNRECOGNIZED = -1,
 }
-
-/** State stores state for an escrow account */
-export enum Account_StateSDKType {
-  /** invalid - AccountStateInvalid is an invalid state */
-  invalid = 0,
-
-  /** open - AccountOpen is the state when an account is open */
-  open = 1,
-
-  /** closed - AccountClosed is the state when an account is closed */
-  closed = 2,
-
-  /** overdrawn - AccountOverdrawn is the state when an account is overdrawn */
-  overdrawn = 3,
-  UNRECOGNIZED = -1,
-}
+export const Account_StateSDKType = Account_State;
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -93,22 +78,7 @@ export enum Payment_State {
   overdrawn = 3,
   UNRECOGNIZED = -1,
 }
-
-/** Payment State */
-export enum Payment_StateSDKType {
-  /** invalid - PaymentStateInvalid is the state when the payment is invalid */
-  invalid = 0,
-
-  /** open - PaymentStateOpen is the state when the payment is open */
-  open = 1,
-
-  /** closed - PaymentStateClosed is the state when the payment is closed */
-  closed = 2,
-
-  /** overdrawn - PaymentStateOverdrawn is the state when the payment is overdrawn */
-  overdrawn = 3,
-  UNRECOGNIZED = -1,
-}
+export const Payment_StateSDKType = Payment_State;
 export function payment_StateFromJSON(object: any): Payment_State {
   switch (object) {
     case 0:
@@ -195,7 +165,7 @@ export interface AccountSDKType {
   owner: string;
 
   /** current state of this escrow account */
-  state: Account_StateSDKType;
+  state: Account_State;
 
   /** unspent coins received from the owner's wallet */
   balance?: CoinSDKType;
@@ -223,7 +193,7 @@ export interface PaymentSDKType {
   account_id?: AccountIDSDKType;
   payment_id: string;
   owner: string;
-  state: Payment_StateSDKType;
+  state: Payment_State;
   rate?: CoinSDKType;
   balance?: CoinSDKType;
   withdrawn?: CoinSDKType;
@@ -429,11 +399,11 @@ export const Account = {
 
   fromSDK(object: AccountSDKType): Account {
     return {
-      id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
+      id: object.id ? AccountID.fromSDK(object.id) : undefined,
       owner: object?.owner,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? Coin.fromSDK(object.transferred) : undefined,
+      balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
+      transferred: object.transferred ? Coin.fromSDK(object.transferred) : undefined,
       settledAt: object?.settled_at
     };
   },
@@ -580,13 +550,13 @@ export const Payment = {
 
   fromSDK(object: PaymentSDKType): Payment {
     return {
-      accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
+      accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
       paymentId: object?.payment_id,
       owner: object?.owner,
       state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? Coin.fromSDK(object.rate) : undefined,
-      balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromSDK(object.withdrawn) : undefined
+      rate: object.rate ? Coin.fromSDK(object.rate) : undefined,
+      balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
+      withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
     };
   },
 

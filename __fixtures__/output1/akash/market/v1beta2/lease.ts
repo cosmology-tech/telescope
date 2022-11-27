@@ -19,22 +19,7 @@ export enum Lease_State {
   closed = 3,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of lease */
-export enum Lease_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** active - LeaseActive denotes state for lease active */
-  active = 1,
-
-  /** insufficient_funds - LeaseInsufficientFunds denotes state for lease insufficient_funds */
-  insufficient_funds = 2,
-
-  /** closed - LeaseClosed denotes state for lease closed */
-  closed = 3,
-  UNRECOGNIZED = -1,
-}
+export const Lease_StateSDKType = Lease_State;
 export function lease_StateFromJSON(object: any): Lease_State {
   switch (object) {
     case 0:
@@ -109,7 +94,7 @@ export interface Lease {
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
   lease_id?: LeaseIDSDKType;
-  state: Lease_StateSDKType;
+  state: Lease_State;
   price?: DecCoinSDKType;
   created_at: Long;
   closed_on: Long;
@@ -413,9 +398,9 @@ export const Lease = {
 
   fromSDK(object: LeaseSDKType): Lease {
     return {
-      leaseId: isSet(object.lease_id) ? LeaseID.fromSDK(object.lease_id) : undefined,
+      leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at,
       closedOn: object?.closed_on
     };
@@ -629,7 +614,7 @@ export const MsgCreateLease = {
 
   fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
     return {
-      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined
+      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined
     };
   },
 
@@ -750,7 +735,7 @@ export const MsgWithdrawLease = {
 
   fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
     return {
-      bidId: isSet(object.bid_id) ? LeaseID.fromSDK(object.bid_id) : undefined
+      bidId: object.bid_id ? LeaseID.fromSDK(object.bid_id) : undefined
     };
   },
 
@@ -871,7 +856,7 @@ export const MsgCloseLease = {
 
   fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {
     return {
-      leaseId: isSet(object.lease_id) ? LeaseID.fromSDK(object.lease_id) : undefined
+      leaseId: object.lease_id ? LeaseID.fromSDK(object.lease_id) : undefined
     };
   },
 

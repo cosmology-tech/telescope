@@ -24,29 +24,7 @@ export enum ResourceDescriptor_History {
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * A description of the historical or future-looking state of the
- * resource pattern.
- */
-export enum ResourceDescriptor_HistorySDKType {
-  /** HISTORY_UNSPECIFIED - The "unset" value. */
-  HISTORY_UNSPECIFIED = 0,
-
-  /**
-   * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
-   * additional patterns were added later.
-   */
-  ORIGINALLY_SINGLE_PATTERN = 1,
-
-  /**
-   * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
-   * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
-   * that from being necessary once there are multiple patterns.)
-   */
-  FUTURE_MULTI_PATTERN = 2,
-  UNRECOGNIZED = -1,
-}
+export const ResourceDescriptor_HistorySDKType = ResourceDescriptor_History;
 export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
   switch (object) {
     case 0:
@@ -102,25 +80,7 @@ export enum ResourceDescriptor_Style {
   DECLARATIVE_FRIENDLY = 1,
   UNRECOGNIZED = -1,
 }
-
-/** A flag representing a specific style that a resource claims to conform to. */
-export enum ResourceDescriptor_StyleSDKType {
-  /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
-  STYLE_UNSPECIFIED = 0,
-
-  /**
-   * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
-   * 
-   * Declarative-friendly resources must be more strictly consistent, and
-   * setting this to true communicates to tools that this resource should
-   * adhere to declarative-friendly expectations.
-   * 
-   * Note: This is used by the API linter (linter.aip.dev) to enable
-   * additional checks.
-   */
-  DECLARATIVE_FRIENDLY = 1,
-  UNRECOGNIZED = -1,
-}
+export const ResourceDescriptor_StyleSDKType = ResourceDescriptor_Style;
 export function resourceDescriptor_StyleFromJSON(object: any): ResourceDescriptor_Style {
   switch (object) {
     case 0:
@@ -400,7 +360,7 @@ export interface ResourceDescriptorSDKType {
    *       };
    *     }
    */
-  history: ResourceDescriptor_HistorySDKType;
+  history: ResourceDescriptor_History;
 
   /**
    * The plural name used in the resource name and permission names, such as
@@ -426,7 +386,7 @@ export interface ResourceDescriptorSDKType {
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
-  style: ResourceDescriptor_StyleSDKType[];
+  style: ResourceDescriptor_Style[];
 }
 
 /**

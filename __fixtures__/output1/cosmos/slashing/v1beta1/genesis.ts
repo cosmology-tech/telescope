@@ -191,7 +191,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDK(e)) : [],
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDK(e)) : []
     };
@@ -288,7 +288,7 @@ export const SigningInfo = {
   fromSDK(object: SigningInfoSDKType): SigningInfo {
     return {
       address: object?.address,
-      validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
+      validatorSigningInfo: object.validator_signing_info ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
     };
   },
 

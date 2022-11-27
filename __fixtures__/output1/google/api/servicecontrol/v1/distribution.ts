@@ -469,9 +469,9 @@ export const Distribution = {
       maximum: object?.maximum,
       sumOfSquaredDeviation: object?.sum_of_squared_deviation,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
-      linearBuckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
-      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
-      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDK(object.explicit_buckets) : undefined,
+      linearBuckets: object.linear_buckets ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
+      exponentialBuckets: object.exponential_buckets ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
+      explicitBuckets: object.explicit_buckets ? Distribution_ExplicitBuckets.fromSDK(object.explicit_buckets) : undefined,
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
     };
   },

@@ -14,19 +14,7 @@ export enum Certificate_State {
   revoked = 2,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of deployment */
-export enum Certificate_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** valid - CertificateValid denotes state for deployment active */
-  valid = 1,
-
-  /** revoked - CertificateRevoked denotes state for deployment closed */
-  revoked = 2,
-  UNRECOGNIZED = -1,
-}
+export const Certificate_StateSDKType = Certificate_State;
 export function certificate_StateFromJSON(object: any): Certificate_State {
   switch (object) {
     case 0:
@@ -85,7 +73,7 @@ export interface Certificate {
 
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
-  state: Certificate_StateSDKType;
+  state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
@@ -623,7 +611,7 @@ export const MsgRevokeCertificate = {
 
   fromSDK(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {
     return {
-      id: isSet(object.id) ? CertificateID.fromSDK(object.id) : undefined
+      id: object.id ? CertificateID.fromSDK(object.id) : undefined
     };
   },
 

@@ -108,7 +108,7 @@ export interface MonitoredResourceDescriptorSDKType {
   labels: LabelDescriptorSDKType[];
 
   /** Optional. The launch stage of the monitored resource definition. */
-  launch_stage: LaunchStageSDKType;
+  launch_stage: LaunchStage;
 }
 export interface MonitoredResource_LabelsEntry {
   key: string;
@@ -786,7 +786,7 @@ export const MonitoredResourceMetadata = {
 
   fromSDK(object: MonitoredResourceMetadataSDKType): MonitoredResourceMetadata {
     return {
-      systemLabels: isSet(object.system_labels) ? Struct.fromSDK(object.system_labels) : undefined,
+      systemLabels: object.system_labels ? Struct.fromSDK(object.system_labels) : undefined,
       userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

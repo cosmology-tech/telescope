@@ -221,7 +221,7 @@ export const StoreInfo = {
   fromSDK(object: StoreInfoSDKType): StoreInfo {
     return {
       name: object?.name,
-      commitId: isSet(object.commit_id) ? CommitID.fromSDK(object.commit_id) : undefined
+      commitId: object.commit_id ? CommitID.fromSDK(object.commit_id) : undefined
     };
   },
 

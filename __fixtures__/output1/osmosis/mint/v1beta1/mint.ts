@@ -601,7 +601,7 @@ export const Params = {
       epochIdentifier: object?.epoch_identifier,
       reductionPeriodInEpochs: object?.reduction_period_in_epochs,
       reductionFactor: object?.reduction_factor,
-      distributionProportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDK(object.distribution_proportions) : undefined,
+      distributionProportions: object.distribution_proportions ? DistributionProportions.fromSDK(object.distribution_proportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDK(e)) : [],
       mintingRewardsDistributionStartEpoch: object?.minting_rewards_distribution_start_epoch
     };

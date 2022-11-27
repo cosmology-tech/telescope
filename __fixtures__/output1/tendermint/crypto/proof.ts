@@ -263,7 +263,7 @@ export const ValueOp = {
   fromSDK(object: ValueOpSDKType): ValueOp {
     return {
       key: object?.key,
-      proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
+      proof: object.proof ? Proof.fromSDK(object.proof) : undefined
     };
   },
 

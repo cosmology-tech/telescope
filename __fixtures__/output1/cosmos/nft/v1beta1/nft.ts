@@ -222,7 +222,7 @@ export const Class = {
       description: object?.description,
       uri: object?.uri,
       uriHash: object?.uri_hash,
-      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+      data: object.data ? Any.fromSDK(object.data) : undefined
     };
   },
 
@@ -349,7 +349,7 @@ export const NFT = {
       id: object?.id,
       uri: object?.uri,
       uriHash: object?.uri_hash,
-      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+      data: object.data ? Any.fromSDK(object.data) : undefined
     };
   },
 

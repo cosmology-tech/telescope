@@ -222,7 +222,7 @@ export const QueryAccountsRequest = {
 
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -310,7 +310,7 @@ export const QueryAccountsResponse = {
   fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -507,7 +507,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -576,7 +576,7 @@ export const QueryAccountResponse = {
 
   fromSDK(object: QueryAccountResponseSDKType): QueryAccountResponse {
     return {
-      account: isSet(object.account) ? Any.fromSDK(object.account) : undefined
+      account: object.account ? Any.fromSDK(object.account) : undefined
     };
   },
 

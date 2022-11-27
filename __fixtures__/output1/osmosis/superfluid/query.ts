@@ -27,7 +27,7 @@ export interface AssetTypeResponse {
   assetType: SuperfluidAssetType;
 }
 export interface AssetTypeResponseSDKType {
-  asset_type: SuperfluidAssetTypeSDKType;
+  asset_type: SuperfluidAssetType;
 }
 export interface AllAssetsRequest {}
 export interface AllAssetsRequestSDKType {}
@@ -301,7 +301,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -710,7 +710,7 @@ export const AssetMultiplierResponse = {
 
   fromSDK(object: AssetMultiplierResponseSDKType): AssetMultiplierResponse {
     return {
-      osmoEquivalentMultiplier: isSet(object.osmo_equivalent_multiplier) ? OsmoEquivalentMultiplierRecord.fromSDK(object.osmo_equivalent_multiplier) : undefined
+      osmoEquivalentMultiplier: object.osmo_equivalent_multiplier ? OsmoEquivalentMultiplierRecord.fromSDK(object.osmo_equivalent_multiplier) : undefined
     };
   },
 
@@ -890,7 +890,7 @@ export const AllIntermediaryAccountsRequest = {
 
   fromSDK(object: AllIntermediaryAccountsRequestSDKType): AllIntermediaryAccountsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -978,7 +978,7 @@ export const AllIntermediaryAccountsResponse = {
   fromSDK(object: AllIntermediaryAccountsResponseSDKType): AllIntermediaryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1123,7 +1123,7 @@ export const ConnectedIntermediaryAccountResponse = {
 
   fromSDK(object: ConnectedIntermediaryAccountResponseSDKType): ConnectedIntermediaryAccountResponse {
     return {
-      account: isSet(object.account) ? SuperfluidIntermediaryAccountInfo.fromSDK(object.account) : undefined
+      account: object.account ? SuperfluidIntermediaryAccountInfo.fromSDK(object.account) : undefined
     };
   },
 
@@ -1597,7 +1597,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
+      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
     };
   },
 
@@ -2343,7 +2343,7 @@ export const QueryTotalDelegationByDelegatorResponse = {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
       delegationResponse: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDK(e)) : [],
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
+      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
     };
   },
 

@@ -153,7 +153,7 @@ export const BaseAccount = {
   fromSDK(object: BaseAccountSDKType): BaseAccount {
     return {
       address: object?.address,
-      pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
       accountNumber: object?.account_number,
       sequence: object?.sequence
     };
@@ -257,7 +257,7 @@ export const ModuleAccount = {
 
   fromSDK(object: ModuleAccountSDKType): ModuleAccount {
     return {
-      baseAccount: isSet(object.base_account) ? BaseAccount.fromSDK(object.base_account) : undefined,
+      baseAccount: object.base_account ? BaseAccount.fromSDK(object.base_account) : undefined,
       name: object?.name,
       permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
     };

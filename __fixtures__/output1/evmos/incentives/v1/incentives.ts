@@ -244,7 +244,7 @@ export const Incentive = {
       contract: object?.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
       epochs: object?.epochs,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       totalGas: object?.total_gas
     };
   },

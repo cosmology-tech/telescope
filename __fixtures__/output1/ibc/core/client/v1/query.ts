@@ -493,9 +493,9 @@ export const QueryClientStateResponse = {
 
   fromSDK(object: QueryClientStateResponseSDKType): QueryClientStateResponse {
     return {
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -566,7 +566,7 @@ export const QueryClientStatesRequest = {
 
   fromSDK(object: QueryClientStatesRequestSDKType): QueryClientStatesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -654,7 +654,7 @@ export const QueryClientStatesResponse = {
   fromSDK(object: QueryClientStatesResponseSDKType): QueryClientStatesResponse {
     return {
       clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -865,9 +865,9 @@ export const QueryConsensusStateResponse = {
 
   fromSDK(object: QueryConsensusStateResponseSDKType): QueryConsensusStateResponse {
     return {
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
       proof: object?.proof,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -951,7 +951,7 @@ export const QueryConsensusStatesRequest = {
   fromSDK(object: QueryConsensusStatesRequestSDKType): QueryConsensusStatesRequest {
     return {
       clientId: object?.client_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1040,7 +1040,7 @@ export const QueryConsensusStatesResponse = {
   fromSDK(object: QueryConsensusStatesResponseSDKType): QueryConsensusStatesResponse {
     return {
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1306,7 +1306,7 @@ export const QueryClientParamsResponse = {
 
   fromSDK(object: QueryClientParamsResponseSDKType): QueryClientParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -1427,7 +1427,7 @@ export const QueryUpgradedClientStateResponse = {
 
   fromSDK(object: QueryUpgradedClientStateResponseSDKType): QueryUpgradedClientStateResponse {
     return {
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
   },
 
@@ -1548,7 +1548,7 @@ export const QueryUpgradedConsensusStateResponse = {
 
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? Any.fromSDK(object.upgraded_consensus_state) : undefined
+      upgradedConsensusState: object.upgraded_consensus_state ? Any.fromSDK(object.upgraded_consensus_state) : undefined
     };
   },
 

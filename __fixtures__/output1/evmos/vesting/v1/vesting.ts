@@ -172,9 +172,9 @@ export const ClawbackVestingAccount = {
 
   fromSDK(object: ClawbackVestingAccountSDKType): ClawbackVestingAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
       funderAddress: object?.funder_address,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };

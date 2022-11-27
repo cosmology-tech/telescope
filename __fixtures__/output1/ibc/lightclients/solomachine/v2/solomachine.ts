@@ -41,43 +41,7 @@ export enum DataType {
   DATA_TYPE_HEADER = 9,
   UNRECOGNIZED = -1,
 }
-
-/**
- * DataType defines the type of solo machine proof being created. This is done
- * to preserve uniqueness of different data sign byte encodings.
- */
-export enum DataTypeSDKType {
-  /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
-  DATA_TYPE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** DATA_TYPE_CLIENT_STATE - Data type for client state verification */
-  DATA_TYPE_CLIENT_STATE = 1,
-
-  /** DATA_TYPE_CONSENSUS_STATE - Data type for consensus state verification */
-  DATA_TYPE_CONSENSUS_STATE = 2,
-
-  /** DATA_TYPE_CONNECTION_STATE - Data type for connection state verification */
-  DATA_TYPE_CONNECTION_STATE = 3,
-
-  /** DATA_TYPE_CHANNEL_STATE - Data type for channel state verification */
-  DATA_TYPE_CHANNEL_STATE = 4,
-
-  /** DATA_TYPE_PACKET_COMMITMENT - Data type for packet commitment verification */
-  DATA_TYPE_PACKET_COMMITMENT = 5,
-
-  /** DATA_TYPE_PACKET_ACKNOWLEDGEMENT - Data type for packet acknowledgement verification */
-  DATA_TYPE_PACKET_ACKNOWLEDGEMENT = 6,
-
-  /** DATA_TYPE_PACKET_RECEIPT_ABSENCE - Data type for packet receipt absence verification */
-  DATA_TYPE_PACKET_RECEIPT_ABSENCE = 7,
-
-  /** DATA_TYPE_NEXT_SEQUENCE_RECV - Data type for next sequence recv verification */
-  DATA_TYPE_NEXT_SEQUENCE_RECV = 8,
-
-  /** DATA_TYPE_HEADER - Data type for header verification */
-  DATA_TYPE_HEADER = 9,
-  UNRECOGNIZED = -1,
-}
+export const DataTypeSDKType = DataType;
 export function dataTypeFromJSON(object: any): DataType {
   switch (object) {
     case 0:
@@ -297,7 +261,7 @@ export interface SignatureAndData {
  */
 export interface SignatureAndDataSDKType {
   signature: Uint8Array;
-  data_type: DataTypeSDKType;
+  data_type: DataType;
   data: Uint8Array;
   timestamp: Long;
 }
@@ -340,7 +304,7 @@ export interface SignBytesSDKType {
   diversifier: string;
 
   /** type of the data used */
-  data_type: DataTypeSDKType;
+  data_type: DataType;
 
   /** marshaled data */
   data: Uint8Array;
@@ -595,7 +559,7 @@ export const ClientState = {
     return {
       sequence: object?.sequence,
       isFrozen: object?.is_frozen,
-      consensusState: isSet(object.consensus_state) ? ConsensusState.fromSDK(object.consensus_state) : undefined,
+      consensusState: object.consensus_state ? ConsensusState.fromSDK(object.consensus_state) : undefined,
       allowUpdateAfterProposal: object?.allow_update_after_proposal
     };
   },
@@ -692,7 +656,7 @@ export const ConsensusState = {
 
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
       diversifier: object?.diversifier,
       timestamp: object?.timestamp
     };
@@ -816,7 +780,7 @@ export const Header = {
       sequence: object?.sequence,
       timestamp: object?.timestamp,
       signature: object?.signature,
-      newPublicKey: isSet(object.new_public_key) ? Any.fromSDK(object.new_public_key) : undefined,
+      newPublicKey: object.new_public_key ? Any.fromSDK(object.new_public_key) : undefined,
       newDiversifier: object?.new_diversifier
     };
   },
@@ -928,8 +892,8 @@ export const Misbehaviour = {
     return {
       clientId: object?.client_id,
       sequence: object?.sequence,
-      signatureOne: isSet(object.signature_one) ? SignatureAndData.fromSDK(object.signature_one) : undefined,
-      signatureTwo: isSet(object.signature_two) ? SignatureAndData.fromSDK(object.signature_two) : undefined
+      signatureOne: object.signature_one ? SignatureAndData.fromSDK(object.signature_one) : undefined,
+      signatureTwo: object.signature_two ? SignatureAndData.fromSDK(object.signature_two) : undefined
     };
   },
 
@@ -1332,7 +1296,7 @@ export const HeaderData = {
 
   fromSDK(object: HeaderDataSDKType): HeaderData {
     return {
-      newPubKey: isSet(object.new_pub_key) ? Any.fromSDK(object.new_pub_key) : undefined,
+      newPubKey: object.new_pub_key ? Any.fromSDK(object.new_pub_key) : undefined,
       newDiversifier: object?.new_diversifier
     };
   },
@@ -1416,7 +1380,7 @@ export const ClientStateData = {
   fromSDK(object: ClientStateDataSDKType): ClientStateData {
     return {
       path: object?.path,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined
     };
   },
 
@@ -1499,7 +1463,7 @@ export const ConsensusStateData = {
   fromSDK(object: ConsensusStateDataSDKType): ConsensusStateData {
     return {
       path: object?.path,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
     };
   },
 
@@ -1582,7 +1546,7 @@ export const ConnectionStateData = {
   fromSDK(object: ConnectionStateDataSDKType): ConnectionStateData {
     return {
       path: object?.path,
-      connection: isSet(object.connection) ? ConnectionEnd.fromSDK(object.connection) : undefined
+      connection: object.connection ? ConnectionEnd.fromSDK(object.connection) : undefined
     };
   },
 
@@ -1665,7 +1629,7 @@ export const ChannelStateData = {
   fromSDK(object: ChannelStateDataSDKType): ChannelStateData {
     return {
       path: object?.path,
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined
     };
   },
 

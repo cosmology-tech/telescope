@@ -24,28 +24,7 @@ export enum State {
   STATE_OPEN = 3,
   UNRECOGNIZED = -1,
 }
-
-/**
- * State defines if a connection is in one of the following states:
- * INIT, TRYOPEN, OPEN or UNINITIALIZED.
- */
-export enum StateSDKType {
-  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
-  STATE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** STATE_INIT - A connection end has just started the opening handshake. */
-  STATE_INIT = 1,
-
-  /**
-   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   * chain.
-   */
-  STATE_TRYOPEN = 2,
-
-  /** STATE_OPEN - A connection end has completed the handshake. */
-  STATE_OPEN = 3,
-  UNRECOGNIZED = -1,
-}
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -137,7 +116,7 @@ export interface ConnectionEndSDKType {
   versions: VersionSDKType[];
 
   /** current state of the connection end. */
-  state: StateSDKType;
+  state: State;
 
   /** counterparty chain associated with this connection. */
   counterparty?: CounterpartySDKType;
@@ -195,7 +174,7 @@ export interface IdentifiedConnectionSDKType {
   versions: VersionSDKType[];
 
   /** current state of the connection end. */
-  state: StateSDKType;
+  state: State;
 
   /** counterparty chain associated with this connection. */
   counterparty?: CounterpartySDKType;
@@ -428,7 +407,7 @@ export const ConnectionEnd = {
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
   },
@@ -578,7 +557,7 @@ export const IdentifiedConnection = {
       clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period
     };
   },
@@ -685,7 +664,7 @@ export const Counterparty = {
     return {
       clientId: object?.client_id,
       connectionId: object?.connection_id,
-      prefix: isSet(object.prefix) ? MerklePrefix.fromSDK(object.prefix) : undefined
+      prefix: object.prefix ? MerklePrefix.fromSDK(object.prefix) : undefined
     };
   },
 

@@ -1006,7 +1006,7 @@ export const HttpRule = {
       post: object?.post,
       delete: object?.delete,
       patch: object?.patch,
-      custom: isSet(object.custom) ? CustomHttpPattern.fromSDK(object.custom) : undefined,
+      custom: object.custom ? CustomHttpPattern.fromSDK(object.custom) : undefined,
       body: object?.body,
       responseBody: object?.response_body,
       additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromSDK(e)) : []

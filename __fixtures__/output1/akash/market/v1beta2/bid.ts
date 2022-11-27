@@ -22,25 +22,7 @@ export enum Bid_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of bid */
-export enum Bid_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** open - BidOpen denotes state for bid open */
-  open = 1,
-
-  /** active - BidMatched denotes state for bid open */
-  active = 2,
-
-  /** lost - BidLost denotes state for bid lost */
-  lost = 3,
-
-  /** closed - BidClosed denotes state for bid closed */
-  closed = 4,
-  UNRECOGNIZED = -1,
-}
+export const Bid_StateSDKType = Bid_State;
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:
@@ -165,7 +147,7 @@ export interface Bid {
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id?: BidIDSDKType;
-  state: Bid_StateSDKType;
+  state: Bid_State;
   price?: DecCoinSDKType;
   created_at: Long;
 }
@@ -283,10 +265,10 @@ export const MsgCreateBid = {
 
   fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
     return {
-      order: isSet(object.order) ? OrderID.fromSDK(object.order) : undefined,
+      order: object.order ? OrderID.fromSDK(object.order) : undefined,
       provider: object?.provider,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
+      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined
     };
   },
 
@@ -410,7 +392,7 @@ export const MsgCloseBid = {
 
   fromSDK(object: MsgCloseBidSDKType): MsgCloseBid {
     return {
-      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined
+      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined
     };
   },
 
@@ -692,9 +674,9 @@ export const Bid = {
 
   fromSDK(object: BidSDKType): Bid {
     return {
-      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined,
+      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
       createdAt: object?.created_at
     };
   },

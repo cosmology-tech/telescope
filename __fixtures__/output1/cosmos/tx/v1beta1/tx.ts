@@ -449,7 +449,7 @@ export interface ModeInfo_Single {
  */
 export interface ModeInfo_SingleSDKType {
   /** mode is the signing mode of the single signer */
-  mode: SignModeSDKType;
+  mode: SignMode;
 }
 
 /** Multi is the mode info for a multisig public key */
@@ -616,7 +616,7 @@ export interface AuxSignerDataSDKType {
   sign_doc?: SignDocDirectAuxSDKType;
 
   /** mode is the signing mode of the single signer */
-  mode: SignModeSDKType;
+  mode: SignMode;
 
   /** sig is the signature of the sign doc. */
   sig: Uint8Array;
@@ -709,8 +709,8 @@ export const Tx = {
 
   fromSDK(object: TxSDKType): Tx {
     return {
-      body: isSet(object.body) ? TxBody.fromSDK(object.body) : undefined,
-      authInfo: isSet(object.auth_info) ? AuthInfo.fromSDK(object.auth_info) : undefined,
+      body: object.body ? TxBody.fromSDK(object.body) : undefined,
+      authInfo: object.auth_info ? AuthInfo.fromSDK(object.auth_info) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
@@ -1069,11 +1069,11 @@ export const SignDocDirectAux = {
   fromSDK(object: SignDocDirectAuxSDKType): SignDocDirectAux {
     return {
       bodyBytes: object?.body_bytes,
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
       chainId: object?.chain_id,
       accountNumber: object?.account_number,
       sequence: object?.sequence,
-      tip: isSet(object.tip) ? Tip.fromSDK(object.tip) : undefined
+      tip: object.tip ? Tip.fromSDK(object.tip) : undefined
     };
   },
 
@@ -1337,8 +1337,8 @@ export const AuthInfo = {
   fromSDK(object: AuthInfoSDKType): AuthInfo {
     return {
       signerInfos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromSDK(e)) : [],
-      fee: isSet(object.fee) ? Fee.fromSDK(object.fee) : undefined,
-      tip: isSet(object.tip) ? Tip.fromSDK(object.tip) : undefined
+      fee: object.fee ? Fee.fromSDK(object.fee) : undefined,
+      tip: object.tip ? Tip.fromSDK(object.tip) : undefined
     };
   },
 
@@ -1439,8 +1439,8 @@ export const SignerInfo = {
 
   fromSDK(object: SignerInfoSDKType): SignerInfo {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      modeInfo: isSet(object.mode_info) ? ModeInfo.fromSDK(object.mode_info) : undefined,
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      modeInfo: object.mode_info ? ModeInfo.fromSDK(object.mode_info) : undefined,
       sequence: object?.sequence
     };
   },
@@ -1524,8 +1524,8 @@ export const ModeInfo = {
 
   fromSDK(object: ModeInfoSDKType): ModeInfo {
     return {
-      single: isSet(object.single) ? ModeInfo_Single.fromSDK(object.single) : undefined,
-      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDK(object.multi) : undefined
+      single: object.single ? ModeInfo_Single.fromSDK(object.single) : undefined,
+      multi: object.multi ? ModeInfo_Multi.fromSDK(object.multi) : undefined
     };
   },
 
@@ -1682,7 +1682,7 @@ export const ModeInfo_Multi = {
 
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
     return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDK(object.bitarray) : undefined,
+      bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
       modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDK(e)) : []
     };
   },
@@ -2014,7 +2014,7 @@ export const AuxSignerData = {
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
       address: object?.address,
-      signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
+      signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       sig: object?.sig
     };

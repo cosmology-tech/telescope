@@ -64,67 +64,7 @@ export enum Field_Kind {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
-
-/** Basic field types. */
-export enum Field_KindSDKType {
-  /** TYPE_UNKNOWN - Field type unknown. */
-  TYPE_UNKNOWN = 0,
-
-  /** TYPE_DOUBLE - Field type double. */
-  TYPE_DOUBLE = 1,
-
-  /** TYPE_FLOAT - Field type float. */
-  TYPE_FLOAT = 2,
-
-  /** TYPE_INT64 - Field type int64. */
-  TYPE_INT64 = 3,
-
-  /** TYPE_UINT64 - Field type uint64. */
-  TYPE_UINT64 = 4,
-
-  /** TYPE_INT32 - Field type int32. */
-  TYPE_INT32 = 5,
-
-  /** TYPE_FIXED64 - Field type fixed64. */
-  TYPE_FIXED64 = 6,
-
-  /** TYPE_FIXED32 - Field type fixed32. */
-  TYPE_FIXED32 = 7,
-
-  /** TYPE_BOOL - Field type bool. */
-  TYPE_BOOL = 8,
-
-  /** TYPE_STRING - Field type string. */
-  TYPE_STRING = 9,
-
-  /** TYPE_GROUP - Field type group. Proto2 syntax only, and deprecated. */
-  TYPE_GROUP = 10,
-
-  /** TYPE_MESSAGE - Field type message. */
-  TYPE_MESSAGE = 11,
-
-  /** TYPE_BYTES - Field type bytes. */
-  TYPE_BYTES = 12,
-
-  /** TYPE_UINT32 - Field type uint32. */
-  TYPE_UINT32 = 13,
-
-  /** TYPE_ENUM - Field type enum. */
-  TYPE_ENUM = 14,
-
-  /** TYPE_SFIXED32 - Field type sfixed32. */
-  TYPE_SFIXED32 = 15,
-
-  /** TYPE_SFIXED64 - Field type sfixed64. */
-  TYPE_SFIXED64 = 16,
-
-  /** TYPE_SINT32 - Field type sint32. */
-  TYPE_SINT32 = 17,
-
-  /** TYPE_SINT64 - Field type sint64. */
-  TYPE_SINT64 = 18,
-  UNRECOGNIZED = -1,
-}
+export const Field_KindSDKType = Field_Kind;
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case 0:
@@ -289,22 +229,7 @@ export enum Field_Cardinality {
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
-
-/** Whether a field is optional, required, or repeated. */
-export enum Field_CardinalitySDKType {
-  /** CARDINALITY_UNKNOWN - For fields with unknown cardinality. */
-  CARDINALITY_UNKNOWN = 0,
-
-  /** CARDINALITY_OPTIONAL - For optional fields. */
-  CARDINALITY_OPTIONAL = 1,
-
-  /** CARDINALITY_REQUIRED - For required fields. Proto2 syntax only. */
-  CARDINALITY_REQUIRED = 2,
-
-  /** CARDINALITY_REPEATED - For repeated fields. */
-  CARDINALITY_REPEATED = 3,
-  UNRECOGNIZED = -1,
-}
+export const Field_CardinalitySDKType = Field_Cardinality;
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -358,16 +283,7 @@ export enum Syntax {
   SYNTAX_PROTO3 = 1,
   UNRECOGNIZED = -1,
 }
-
-/** The syntax in which a protocol buffer element is defined. */
-export enum SyntaxSDKType {
-  /** SYNTAX_PROTO2 - Syntax `proto2`. */
-  SYNTAX_PROTO2 = 0,
-
-  /** SYNTAX_PROTO3 - Syntax `proto3`. */
-  SYNTAX_PROTO3 = 1,
-  UNRECOGNIZED = -1,
-}
+export const SyntaxSDKType = Syntax;
 export function syntaxFromJSON(object: any): Syntax {
   switch (object) {
     case 0:
@@ -437,7 +353,7 @@ export interface TypeSDKType {
   source_context?: SourceContextSDKType;
 
   /** The source syntax. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /** A single field of a message type. */
@@ -482,10 +398,10 @@ export interface Field {
 /** A single field of a message type. */
 export interface FieldSDKType {
   /** The field type. */
-  kind: Field_KindSDKType;
+  kind: Field_Kind;
 
   /** The field cardinality. */
-  cardinality: Field_CardinalitySDKType;
+  cardinality: Field_Cardinality;
 
   /** The field number. */
   number: number;
@@ -551,7 +467,7 @@ export interface EnumSDKType {
   source_context?: SourceContextSDKType;
 
   /** The source syntax. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /** Enum value definition. */
@@ -759,7 +675,7 @@ export const Type = {
       fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDK(e)) : [],
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
@@ -1119,7 +1035,7 @@ export const Enum = {
       name: object?.name,
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
   },
@@ -1326,7 +1242,7 @@ export const Option = {
   fromSDK(object: OptionSDKType): Option {
     return {
       name: object?.name,
-      value: isSet(object.value) ? Any.fromSDK(object.value) : undefined
+      value: object.value ? Any.fromSDK(object.value) : undefined
     };
   },
 

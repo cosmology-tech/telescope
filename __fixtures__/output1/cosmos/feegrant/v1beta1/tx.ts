@@ -146,7 +146,7 @@ export const MsgGrantAllowance = {
     return {
       granter: object?.granter,
       grantee: object?.grantee,
-      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
+      allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined
     };
   },
 

@@ -315,7 +315,7 @@ export const QueryIncentivesRequest = {
 
   fromSDK(object: QueryIncentivesRequestSDKType): QueryIncentivesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -403,7 +403,7 @@ export const QueryIncentivesResponse = {
   fromSDK(object: QueryIncentivesResponseSDKType): QueryIncentivesResponse {
     return {
       incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -548,7 +548,7 @@ export const QueryIncentiveResponse = {
 
   fromSDK(object: QueryIncentiveResponseSDKType): QueryIncentiveResponse {
     return {
-      incentive: isSet(object.incentive) ? Incentive.fromSDK(object.incentive) : undefined
+      incentive: object.incentive ? Incentive.fromSDK(object.incentive) : undefined
     };
   },
 
@@ -630,7 +630,7 @@ export const QueryGasMetersRequest = {
   fromSDK(object: QueryGasMetersRequestSDKType): QueryGasMetersRequest {
     return {
       contract: object?.contract,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -719,7 +719,7 @@ export const QueryGasMetersResponse = {
   fromSDK(object: QueryGasMetersResponseSDKType): QueryGasMetersResponse {
     return {
       gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -947,7 +947,7 @@ export const QueryAllocationMetersRequest = {
 
   fromSDK(object: QueryAllocationMetersRequestSDKType): QueryAllocationMetersRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1035,7 +1035,7 @@ export const QueryAllocationMetersResponse = {
   fromSDK(object: QueryAllocationMetersResponseSDKType): QueryAllocationMetersResponse {
     return {
       allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1180,7 +1180,7 @@ export const QueryAllocationMeterResponse = {
 
   fromSDK(object: QueryAllocationMeterResponseSDKType): QueryAllocationMeterResponse {
     return {
-      allocationMeter: isSet(object.allocation_meter) ? DecCoin.fromSDK(object.allocation_meter) : undefined
+      allocationMeter: object.allocation_meter ? DecCoin.fromSDK(object.allocation_meter) : undefined
     };
   },
 
@@ -1301,7 +1301,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

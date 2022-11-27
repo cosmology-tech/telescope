@@ -14,16 +14,7 @@ export enum LockQueryType {
   ByTime = 1,
   UNRECOGNIZED = -1,
 }
-
-/**
- * LockQueryType defines the type of the lock query that can
- * either be by duration or start time of the lock.
- */
-export enum LockQueryTypeSDKType {
-  ByDuration = 0,
-  ByTime = 1,
-  UNRECOGNIZED = -1,
-}
+export const LockQueryTypeSDKType = LockQueryType;
 export function lockQueryTypeFromJSON(object: any): LockQueryType {
   switch (object) {
     case 0:
@@ -164,7 +155,7 @@ export interface QueryCondition {
  */
 export interface QueryConditionSDKType {
   /** LockQueryType is a type of lock query, ByLockDuration | ByLockTime */
-  lock_query_type: LockQueryTypeSDKType;
+  lock_query_type: LockQueryType;
 
   /** Denom represents the token denomination we are looking to lock up */
   denom: string;
@@ -361,8 +352,8 @@ export const PeriodLock = {
     return {
       ID: object?.ID,
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -480,8 +471,8 @@ export const QueryCondition = {
     return {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
       denom: object?.denom,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
@@ -591,8 +582,8 @@ export const SyntheticLock = {
     return {
       underlyingLockId: object?.underlying_lock_id,
       synthDenom: object?.synth_denom,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 

@@ -200,9 +200,9 @@ export const GenesisState = {
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDK(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
-      depositParams: isSet(object.deposit_params) ? DepositParams.fromSDK(object.deposit_params) : undefined,
-      votingParams: isSet(object.voting_params) ? VotingParams.fromSDK(object.voting_params) : undefined,
-      tallyParams: isSet(object.tally_params) ? TallyParams.fromSDK(object.tally_params) : undefined
+      depositParams: object.deposit_params ? DepositParams.fromSDK(object.deposit_params) : undefined,
+      votingParams: object.voting_params ? VotingParams.fromSDK(object.voting_params) : undefined,
+      tallyParams: object.tally_params ? TallyParams.fromSDK(object.tally_params) : undefined
     };
   },
 

@@ -210,7 +210,7 @@ export const QueryGrantsRequest = {
       granter: object?.granter,
       grantee: object?.grantee,
       msgTypeUrl: object?.msg_type_url,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -301,7 +301,7 @@ export const QueryGrantsResponse = {
   fromSDK(object: QueryGrantsResponseSDKType): QueryGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -390,7 +390,7 @@ export const QueryGranterGrantsRequest = {
   fromSDK(object: QueryGranterGrantsRequestSDKType): QueryGranterGrantsRequest {
     return {
       granter: object?.granter,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -479,7 +479,7 @@ export const QueryGranterGrantsResponse = {
   fromSDK(object: QueryGranterGrantsResponseSDKType): QueryGranterGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -568,7 +568,7 @@ export const QueryGranteeGrantsRequest = {
   fromSDK(object: QueryGranteeGrantsRequestSDKType): QueryGranteeGrantsRequest {
     return {
       grantee: object?.grantee,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -657,7 +657,7 @@ export const QueryGranteeGrantsResponse = {
   fromSDK(object: QueryGranteeGrantsResponseSDKType): QueryGranteeGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

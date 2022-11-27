@@ -260,12 +260,12 @@ export const TwapRecord = {
       asset0Denom: object?.asset0_denom,
       asset1Denom: object?.asset1_denom,
       height: object?.height,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       p0LastSpotPrice: object?.p0_last_spot_price,
       p1LastSpotPrice: object?.p1_last_spot_price,
       p0ArithmeticTwapAccumulator: object?.p0_arithmetic_twap_accumulator,
       p1ArithmeticTwapAccumulator: object?.p1_arithmetic_twap_accumulator,
-      lastErrorTime: isSet(object.last_error_time) ? Timestamp.fromSDK(object.last_error_time) : undefined
+      lastErrorTime: object.last_error_time ? Timestamp.fromSDK(object.last_error_time) : undefined
     };
   },
 

@@ -284,7 +284,7 @@ export const IdentifiedClientState = {
   fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
     return {
       clientId: object?.client_id,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined
     };
   },
 
@@ -366,8 +366,8 @@ export const ConsensusStateWithHeight = {
 
   fromSDK(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
     return {
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined
+      height: object.height ? Height.fromSDK(object.height) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
     };
   },
 
@@ -681,8 +681,8 @@ export const UpgradeProposal = {
     return {
       title: object?.title,
       description: object?.description,
-      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined,
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined,
+      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
   },
 

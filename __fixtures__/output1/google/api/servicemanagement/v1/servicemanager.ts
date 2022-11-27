@@ -17,19 +17,7 @@ export enum GetServiceConfigRequest_ConfigView {
   FULL = 1,
   UNRECOGNIZED = -1,
 }
-export enum GetServiceConfigRequest_ConfigViewSDKType {
-  /** BASIC - Server response includes all fields except SourceInfo. */
-  BASIC = 0,
-
-  /**
-   * FULL - Server response includes all fields including SourceInfo.
-   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-   * and are only available for configs created using the
-   * SubmitConfigSource method.
-   */
-  FULL = 1,
-  UNRECOGNIZED = -1,
-}
+export const GetServiceConfigRequest_ConfigViewSDKType = GetServiceConfigRequest_ConfigView;
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case 0:
@@ -257,7 +245,7 @@ export interface GetServiceConfigRequestSDKType {
    * Specifies which parts of the Service Config should be returned in the
    * response.
    */
-  view: GetServiceConfigRequest_ConfigViewSDKType;
+  view: GetServiceConfigRequest_ConfigView;
 }
 
 /** Request message for ListServiceConfigs method. */
@@ -932,7 +920,7 @@ export const CreateServiceRequest = {
 
   fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
     return {
-      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+      service: object.service ? ManagedService.fromSDK(object.service) : undefined
     };
   },
 
@@ -1139,7 +1127,7 @@ export const UndeleteServiceResponse = {
 
   fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
     return {
-      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+      service: object.service ? ManagedService.fromSDK(object.service) : undefined
     };
   },
 
@@ -1510,7 +1498,7 @@ export const CreateServiceConfigRequest = {
   fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
     return {
       serviceName: object?.service_name,
-      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
     };
   },
 
@@ -1605,7 +1593,7 @@ export const SubmitConfigSourceRequest = {
   fromSDK(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
     return {
       serviceName: object?.service_name,
-      configSource: isSet(object.config_source) ? ConfigSource.fromSDK(object.config_source) : undefined,
+      configSource: object.config_source ? ConfigSource.fromSDK(object.config_source) : undefined,
       validateOnly: object?.validate_only
     };
   },
@@ -1677,7 +1665,7 @@ export const SubmitConfigSourceResponse = {
 
   fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
     return {
-      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
     };
   },
 
@@ -1759,7 +1747,7 @@ export const CreateServiceRolloutRequest = {
   fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
     return {
       serviceName: object?.service_name,
-      rollout: isSet(object.rollout) ? Rollout.fromSDK(object.rollout) : undefined
+      rollout: object.rollout ? Rollout.fromSDK(object.rollout) : undefined
     };
   },
 
@@ -2130,8 +2118,8 @@ export const GenerateConfigReportRequest = {
 
   fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
     return {
-      newConfig: isSet(object.new_config) ? Any.fromSDK(object.new_config) : undefined,
-      oldConfig: isSet(object.old_config) ? Any.fromSDK(object.old_config) : undefined
+      newConfig: object.new_config ? Any.fromSDK(object.new_config) : undefined,
+      oldConfig: object.old_config ? Any.fromSDK(object.old_config) : undefined
     };
   },
 

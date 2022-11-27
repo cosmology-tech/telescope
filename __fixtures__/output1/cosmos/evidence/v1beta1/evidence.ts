@@ -119,7 +119,7 @@ export const Equivocation = {
   fromSDK(object: EquivocationSDKType): Equivocation {
     return {
       height: object?.height,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       power: object?.power,
       consensusAddress: object?.consensus_address
     };

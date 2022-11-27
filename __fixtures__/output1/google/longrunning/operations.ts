@@ -383,10 +383,10 @@ export const Operation = {
   fromSDK(object: OperationSDKType): Operation {
     return {
       name: object?.name,
-      metadata: isSet(object.metadata) ? Any.fromSDK(object.metadata) : undefined,
+      metadata: object.metadata ? Any.fromSDK(object.metadata) : undefined,
       done: object?.done,
-      error: isSet(object.error) ? Status.fromSDK(object.error) : undefined,
-      response: isSet(object.response) ? Any.fromSDK(object.response) : undefined
+      error: object.error ? Status.fromSDK(object.error) : undefined,
+      response: object.response ? Any.fromSDK(object.response) : undefined
     };
   },
 
@@ -885,7 +885,7 @@ export const WaitOperationRequest = {
   fromSDK(object: WaitOperationRequestSDKType): WaitOperationRequest {
     return {
       name: object?.name,
-      timeout: isSet(object.timeout) ? Duration.fromSDK(object.timeout) : undefined
+      timeout: object.timeout ? Duration.fromSDK(object.timeout) : undefined
     };
   },
 

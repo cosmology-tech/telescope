@@ -384,13 +384,13 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      distributionValue: isSet(object.distribution_value) ? Distribution.fromSDK(object.distribution_value) : undefined
+      distributionValue: object.distribution_value ? Distribution.fromSDK(object.distribution_value) : undefined
     };
   },
 

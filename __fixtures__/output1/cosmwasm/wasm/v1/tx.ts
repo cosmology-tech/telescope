@@ -339,7 +339,7 @@ export const MsgStoreCode = {
     return {
       sender: object?.sender,
       wasmByteCode: object?.wasm_byte_code,
-      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
     };
   },
 

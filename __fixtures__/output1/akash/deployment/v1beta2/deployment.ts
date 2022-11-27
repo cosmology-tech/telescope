@@ -14,19 +14,7 @@ export enum Deployment_State {
   closed = 2,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of deployment */
-export enum Deployment_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** active - DeploymentActive denotes state for deployment active */
-  active = 1,
-
-  /** closed - DeploymentClosed denotes state for deployment closed */
-  closed = 2,
-  UNRECOGNIZED = -1,
-}
+export const Deployment_StateSDKType = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -87,7 +75,7 @@ export interface Deployment {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType;
-  state: Deployment_StateSDKType;
+  state: Deployment_State;
   version: Uint8Array;
   created_at: Long;
 }
@@ -282,7 +270,7 @@ export const Deployment = {
 
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
-      deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
+      deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: object?.version,
       createdAt: object?.created_at

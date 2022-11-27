@@ -174,7 +174,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       period: object?.period,
       epochIdentifier: object?.epoch_identifier,
       epochsPerPeriod: object?.epochs_per_period,
@@ -288,8 +288,8 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       mintDenom: object?.mint_denom,
-      exponentialCalculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
-      inflationDistribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
+      exponentialCalculation: object.exponential_calculation ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
+      inflationDistribution: object.inflation_distribution ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
       enableInflation: object?.enable_inflation
     };
   },

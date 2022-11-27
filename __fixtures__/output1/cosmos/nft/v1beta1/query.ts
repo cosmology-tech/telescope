@@ -685,7 +685,7 @@ export const QueryNFTsRequest = {
     return {
       classId: object?.class_id,
       owner: object?.owner,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -775,7 +775,7 @@ export const QueryNFTsResponse = {
   fromSDK(object: QueryNFTsResponseSDKType): QueryNFTsResponse {
     return {
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -934,7 +934,7 @@ export const QueryNFTResponse = {
 
   fromSDK(object: QueryNFTResponseSDKType): QueryNFTResponse {
     return {
-      nft: isSet(object.nft) ? NFT.fromSDK(object.nft) : undefined
+      nft: object.nft ? NFT.fromSDK(object.nft) : undefined
     };
   },
 
@@ -1072,7 +1072,7 @@ export const QueryClassResponse = {
 
   fromSDK(object: QueryClassResponseSDKType): QueryClassResponse {
     return {
-      class: isSet(object.class) ? Class.fromSDK(object.class) : undefined
+      class: object.class ? Class.fromSDK(object.class) : undefined
     };
   },
 
@@ -1141,7 +1141,7 @@ export const QueryClassesRequest = {
 
   fromSDK(object: QueryClassesRequestSDKType): QueryClassesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1229,7 +1229,7 @@ export const QueryClassesResponse = {
   fromSDK(object: QueryClassesResponseSDKType): QueryClassesResponse {
     return {
       classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

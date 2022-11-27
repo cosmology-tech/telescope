@@ -337,9 +337,9 @@ export const Pool = {
     return {
       address: object?.address,
       id: object?.id,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
       futurePoolGovernor: object?.future_pool_governor,
-      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
+      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
       scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
       scalingFactorGovernor: object?.scaling_factor_governor

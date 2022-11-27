@@ -78,7 +78,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      constantFee: isSet(object.constant_fee) ? Coin.fromSDK(object.constant_fee) : undefined
+      constantFee: object.constant_fee ? Coin.fromSDK(object.constant_fee) : undefined
     };
   },
 

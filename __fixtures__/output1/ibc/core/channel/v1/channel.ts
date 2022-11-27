@@ -30,34 +30,7 @@ export enum State {
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
-
-/**
- * State defines if a channel is in one of the following states:
- * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
- */
-export enum StateSDKType {
-  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
-  STATE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** STATE_INIT - A channel has just started the opening handshake. */
-  STATE_INIT = 1,
-
-  /** STATE_TRYOPEN - A channel has acknowledged the handshake step on the counterparty chain. */
-  STATE_TRYOPEN = 2,
-
-  /**
-   * STATE_OPEN - A channel has completed the handshake. Open channels are
-   * ready to send and receive packets.
-   */
-  STATE_OPEN = 3,
-
-  /**
-   * STATE_CLOSED - A channel has been closed and can no longer be used to send or receive
-   * packets.
-   */
-  STATE_CLOSED = 4,
-  UNRECOGNIZED = -1,
-}
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -124,22 +97,7 @@ export enum Order {
   ORDER_ORDERED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Order defines if a channel is ORDERED or UNORDERED */
-export enum OrderSDKType {
-  /** ORDER_NONE_UNSPECIFIED - zero-value for channel ordering */
-  ORDER_NONE_UNSPECIFIED = 0,
-
-  /**
-   * ORDER_UNORDERED - packets can be delivered in any order, which may differ from the order in
-   * which they were sent.
-   */
-  ORDER_UNORDERED = 1,
-
-  /** ORDER_ORDERED - packets are delivered exactly in the order which they were sent */
-  ORDER_ORDERED = 2,
-  UNRECOGNIZED = -1,
-}
+export const OrderSDKType = Order;
 export function orderFromJSON(object: any): Order {
   switch (object) {
     case 0:
@@ -209,10 +167,10 @@ export interface Channel {
  */
 export interface ChannelSDKType {
   /** current state of the channel end */
-  state: StateSDKType;
+  state: State;
 
   /** whether the channel is ordered or unordered */
-  ordering: OrderSDKType;
+  ordering: Order;
 
   /** counterparty channel end */
   counterparty?: CounterpartySDKType;
@@ -263,10 +221,10 @@ export interface IdentifiedChannel {
  */
 export interface IdentifiedChannelSDKType {
   /** current state of the channel end */
-  state: StateSDKType;
+  state: State;
 
   /** whether the channel is ordered or unordered */
-  ordering: OrderSDKType;
+  ordering: Order;
 
   /** counterparty channel end */
   counterparty?: CounterpartySDKType;
@@ -548,7 +506,7 @@ export const Channel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version
     };
@@ -709,7 +667,7 @@ export const IdentifiedChannel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object?.version,
       portId: object?.port_id,
@@ -967,7 +925,7 @@ export const Packet = {
       destinationPort: object?.destination_port,
       destinationChannel: object?.destination_channel,
       data: object?.data,
-      timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
       timeoutTimestamp: object?.timeout_timestamp
     };
   },

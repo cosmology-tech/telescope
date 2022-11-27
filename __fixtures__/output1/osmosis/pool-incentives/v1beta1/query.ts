@@ -309,7 +309,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   fromSDK(object: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: object?.gauge_id,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       gaugeIncentivePercentage: object?.gauge_incentive_percentage
     };
   },
@@ -433,7 +433,7 @@ export const QueryDistrInfoResponse = {
 
   fromSDK(object: QueryDistrInfoResponseSDKType): QueryDistrInfoResponse {
     return {
-      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined
+      distrInfo: object.distr_info ? DistrInfo.fromSDK(object.distr_info) : undefined
     };
   },
 
@@ -554,7 +554,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -833,7 +833,7 @@ export const IncentivizedPool = {
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {
     return {
       poolId: object?.pool_id,
-      lockableDuration: isSet(object.lockable_duration) ? Duration.fromSDK(object.lockable_duration) : undefined,
+      lockableDuration: object.lockable_duration ? Duration.fromSDK(object.lockable_duration) : undefined,
       gaugeId: object?.gauge_id
     };
   },

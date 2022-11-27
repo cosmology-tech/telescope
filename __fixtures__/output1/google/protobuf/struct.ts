@@ -13,18 +13,7 @@ export enum NullValue {
   NULL_VALUE = 0,
   UNRECOGNIZED = -1,
 }
-
-/**
- * `NullValue` is a singleton enumeration to represent the null value for the
- * `Value` type union.
- * 
- *  The JSON representation for `NullValue` is JSON `null`.
- */
-export enum NullValueSDKType {
-  /** NULL_VALUE - Null value. */
-  NULL_VALUE = 0,
-  UNRECOGNIZED = -1,
-}
+export const NullValueSDKType = NullValue;
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
@@ -128,7 +117,7 @@ export interface Value {
  */
 export interface ValueSDKType {
   /** Represents a null value. */
-  null_value?: NullValueSDKType;
+  null_value?: NullValue;
 
   /** Represents a double value. */
   number_value?: number;
@@ -236,7 +225,7 @@ export const Struct_FieldsEntry = {
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
     return {
       key: object?.key,
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+      value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
 
@@ -478,8 +467,8 @@ export const Value = {
       numberValue: object?.number_value,
       stringValue: object?.string_value,
       boolValue: object?.bool_value,
-      structValue: isSet(object.struct_value) ? Struct.fromSDK(object.struct_value) : undefined,
-      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined
+      structValue: object.struct_value ? Struct.fromSDK(object.struct_value) : undefined,
+      listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined
     };
   },
 

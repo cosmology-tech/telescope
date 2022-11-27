@@ -58,7 +58,7 @@ export interface QueryClaimableForActionRequest {
 }
 export interface QueryClaimableForActionRequestSDKType {
   address: string;
-  action: ActionSDKType;
+  action: Action;
 }
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
@@ -321,7 +321,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -459,7 +459,7 @@ export const QueryClaimRecordResponse = {
 
   fromSDK(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
     return {
-      claimRecord: isSet(object.claim_record) ? ClaimRecord.fromSDK(object.claim_record) : undefined
+      claimRecord: object.claim_record ? ClaimRecord.fromSDK(object.claim_record) : undefined
     };
   },
 

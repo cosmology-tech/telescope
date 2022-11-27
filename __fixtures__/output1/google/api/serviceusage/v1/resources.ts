@@ -29,26 +29,7 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Whether or not a service has been enabled for use by a consumer. */
-export enum StateSDKType {
-  /**
-   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   * is unspecified or not meaningful. Currently, all consumers other than
-   * projects (such as folders and organizations) are always in this state.
-   */
-  STATE_UNSPECIFIED = 0,
-
-  /**
-   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   * disabled, or has never been enabled.
-   */
-  DISABLED = 1,
-
-  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
-  ENABLED = 2,
-  UNRECOGNIZED = -1,
-}
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -143,7 +124,7 @@ export interface ServiceSDKType {
   config?: ServiceConfigSDKType;
 
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: StateSDKType;
+  state: State;
 }
 
 /** The configuration of the service. */
@@ -365,7 +346,7 @@ export const Service = {
     return {
       name: object?.name,
       parent: object?.parent,
-      config: isSet(object.config) ? ServiceConfig.fromSDK(object.config) : undefined,
+      config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
       state: isSet(object.state) ? stateFromJSON(object.state) : 0
     };
   },
@@ -566,13 +547,13 @@ export const ServiceConfig = {
       name: object?.name,
       title: object?.title,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromSDK(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromSDK(object.usage) : undefined,
+      documentation: object.documentation ? Documentation.fromSDK(object.documentation) : undefined,
+      quota: object.quota ? Quota.fromSDK(object.quota) : undefined,
+      authentication: object.authentication ? Authentication.fromSDK(object.authentication) : undefined,
+      usage: object.usage ? Usage.fromSDK(object.usage) : undefined,
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
       monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromSDK(object.monitoring) : undefined
+      monitoring: object.monitoring ? Monitoring.fromSDK(object.monitoring) : undefined
     };
   },
 

@@ -281,7 +281,7 @@ export const TableDescriptor = {
 
   fromSDK(object: TableDescriptorSDKType): TableDescriptor {
     return {
-      primaryKey: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromSDK(object.primary_key) : undefined,
+      primaryKey: object.primary_key ? PrimaryKeyDescriptor.fromSDK(object.primary_key) : undefined,
       index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromSDK(e)) : [],
       id: object?.id
     };

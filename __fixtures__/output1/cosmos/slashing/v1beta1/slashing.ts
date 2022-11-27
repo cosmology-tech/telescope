@@ -208,7 +208,7 @@ export const ValidatorSigningInfo = {
       address: object?.address,
       startHeight: object?.start_height,
       indexOffset: object?.index_offset,
-      jailedUntil: isSet(object.jailed_until) ? Timestamp.fromSDK(object.jailed_until) : undefined,
+      jailedUntil: object.jailed_until ? Timestamp.fromSDK(object.jailed_until) : undefined,
       tombstoned: object?.tombstoned,
       missedBlocksCounter: object?.missed_blocks_counter
     };
@@ -334,7 +334,7 @@ export const Params = {
     return {
       signedBlocksWindow: object?.signed_blocks_window,
       minSignedPerWindow: object?.min_signed_per_window,
-      downtimeJailDuration: isSet(object.downtime_jail_duration) ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
+      downtimeJailDuration: object.downtime_jail_duration ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
       slashFractionDoubleSign: object?.slash_fraction_double_sign,
       slashFractionDowntime: object?.slash_fraction_downtime
     };

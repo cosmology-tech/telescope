@@ -204,11 +204,11 @@ export const Record = {
   fromSDK(object: RecordSDKType): Record {
     return {
       name: object?.name,
-      pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      local: isSet(object.local) ? Record_Local.fromSDK(object.local) : undefined,
-      ledger: isSet(object.ledger) ? Record_Ledger.fromSDK(object.ledger) : undefined,
-      multi: isSet(object.multi) ? Record_Multi.fromSDK(object.multi) : undefined,
-      offline: isSet(object.offline) ? Record_Offline.fromSDK(object.offline) : undefined
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
+      local: object.local ? Record_Local.fromSDK(object.local) : undefined,
+      ledger: object.ledger ? Record_Ledger.fromSDK(object.ledger) : undefined,
+      multi: object.multi ? Record_Multi.fromSDK(object.multi) : undefined,
+      offline: object.offline ? Record_Offline.fromSDK(object.offline) : undefined
     };
   },
 
@@ -294,7 +294,7 @@ export const Record_Local = {
 
   fromSDK(object: Record_LocalSDKType): Record_Local {
     return {
-      privKey: isSet(object.priv_key) ? Any.fromSDK(object.priv_key) : undefined,
+      privKey: object.priv_key ? Any.fromSDK(object.priv_key) : undefined,
       privKeyType: object?.priv_key_type
     };
   },
@@ -365,7 +365,7 @@ export const Record_Ledger = {
 
   fromSDK(object: Record_LedgerSDKType): Record_Ledger {
     return {
-      path: isSet(object.path) ? BIP44Params.fromSDK(object.path) : undefined
+      path: object.path ? BIP44Params.fromSDK(object.path) : undefined
     };
   },
 

@@ -475,9 +475,9 @@ export const ExprValue = {
 
   fromSDK(object: ExprValueSDKType): ExprValue {
     return {
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromSDK(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromSDK(object.unknown) : undefined
+      value: object.value ? Value.fromSDK(object.value) : undefined,
+      error: object.error ? ErrorSet.fromSDK(object.error) : undefined,
+      unknown: object.unknown ? UnknownSet.fromSDK(object.unknown) : undefined
     };
   },
 

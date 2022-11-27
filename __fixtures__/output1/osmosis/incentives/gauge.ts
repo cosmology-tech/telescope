@@ -267,9 +267,9 @@ export const Gauge = {
     return {
       id: object?.id,
       isPerpetual: object?.is_perpetual,
-      distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
+      distributeTo: object.distribute_to ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       numEpochsPaidOver: object?.num_epochs_paid_over,
       filledEpochs: object?.filled_epochs,
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDK(e)) : []

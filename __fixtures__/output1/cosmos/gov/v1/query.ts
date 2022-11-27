@@ -44,7 +44,7 @@ export interface QueryProposalsRequest {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
   /** proposal_status defines the status of the proposals. */
-  proposal_status: ProposalStatusSDKType;
+  proposal_status: ProposalStatus;
 
   /** voter defines the voter address for the proposals. */
   voter: string;
@@ -400,7 +400,7 @@ export const QueryProposalResponse = {
 
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
     return {
-      proposal: isSet(object.proposal) ? Proposal.fromSDK(object.proposal) : undefined
+      proposal: object.proposal ? Proposal.fromSDK(object.proposal) : undefined
     };
   },
 
@@ -508,7 +508,7 @@ export const QueryProposalsRequest = {
       proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
       voter: object?.voter,
       depositor: object?.depositor,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -599,7 +599,7 @@ export const QueryProposalsResponse = {
   fromSDK(object: QueryProposalsResponseSDKType): QueryProposalsResponse {
     return {
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -758,7 +758,7 @@ export const QueryVoteResponse = {
 
   fromSDK(object: QueryVoteResponseSDKType): QueryVoteResponse {
     return {
-      vote: isSet(object.vote) ? Vote.fromSDK(object.vote) : undefined
+      vote: object.vote ? Vote.fromSDK(object.vote) : undefined
     };
   },
 
@@ -840,7 +840,7 @@ export const QueryVotesRequest = {
   fromSDK(object: QueryVotesRequestSDKType): QueryVotesRequest {
     return {
       proposalId: object?.proposal_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -929,7 +929,7 @@ export const QueryVotesResponse = {
   fromSDK(object: QueryVotesResponseSDKType): QueryVotesResponse {
     return {
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1098,9 +1098,9 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      votingParams: isSet(object.voting_params) ? VotingParams.fromSDK(object.voting_params) : undefined,
-      depositParams: isSet(object.deposit_params) ? DepositParams.fromSDK(object.deposit_params) : undefined,
-      tallyParams: isSet(object.tally_params) ? TallyParams.fromSDK(object.tally_params) : undefined
+      votingParams: object.voting_params ? VotingParams.fromSDK(object.voting_params) : undefined,
+      depositParams: object.deposit_params ? DepositParams.fromSDK(object.deposit_params) : undefined,
+      tallyParams: object.tally_params ? TallyParams.fromSDK(object.tally_params) : undefined
     };
   },
 
@@ -1254,7 +1254,7 @@ export const QueryDepositResponse = {
 
   fromSDK(object: QueryDepositResponseSDKType): QueryDepositResponse {
     return {
-      deposit: isSet(object.deposit) ? Deposit.fromSDK(object.deposit) : undefined
+      deposit: object.deposit ? Deposit.fromSDK(object.deposit) : undefined
     };
   },
 
@@ -1336,7 +1336,7 @@ export const QueryDepositsRequest = {
   fromSDK(object: QueryDepositsRequestSDKType): QueryDepositsRequest {
     return {
       proposalId: object?.proposal_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1425,7 +1425,7 @@ export const QueryDepositsResponse = {
   fromSDK(object: QueryDepositsResponseSDKType): QueryDepositsResponse {
     return {
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1570,7 +1570,7 @@ export const QueryTallyResultResponse = {
 
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
     return {
-      tally: isSet(object.tally) ? TallyResult.fromSDK(object.tally) : undefined
+      tally: object.tally ? TallyResult.fromSDK(object.tally) : undefined
     };
   },
 

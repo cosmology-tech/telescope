@@ -278,10 +278,10 @@ export const Plan = {
   fromSDK(object: PlanSDKType): Plan {
     return {
       name: object?.name,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       height: object?.height,
       info: object?.info,
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
   },
 
@@ -380,7 +380,7 @@ export const SoftwareUpgradeProposal = {
     return {
       title: object?.title,
       description: object?.description,
-      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined
     };
   },
 

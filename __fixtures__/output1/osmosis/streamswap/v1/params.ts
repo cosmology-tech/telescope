@@ -147,8 +147,8 @@ export const Params = {
     return {
       saleCreationFee: Array.isArray(object?.sale_creation_fee) ? object.sale_creation_fee.map((e: any) => Coin.fromSDK(e)) : [],
       saleCreationFeeRecipient: object?.sale_creation_fee_recipient,
-      minDurationUntilStartTime: isSet(object.min_duration_until_start_time) ? Duration.fromSDK(object.min_duration_until_start_time) : undefined,
-      minSaleDuration: isSet(object.min_sale_duration) ? Duration.fromSDK(object.min_sale_duration) : undefined
+      minDurationUntilStartTime: object.min_duration_until_start_time ? Duration.fromSDK(object.min_duration_until_start_time) : undefined,
+      minSaleDuration: object.min_sale_duration ? Duration.fromSDK(object.min_sale_duration) : undefined
     };
   },
 

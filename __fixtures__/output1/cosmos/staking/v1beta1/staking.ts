@@ -22,22 +22,7 @@ export enum BondStatus {
   BOND_STATUS_BONDED = 3,
   UNRECOGNIZED = -1,
 }
-
-/** BondStatus is the status of a validator. */
-export enum BondStatusSDKType {
-  /** BOND_STATUS_UNSPECIFIED - UNSPECIFIED defines an invalid validator status. */
-  BOND_STATUS_UNSPECIFIED = 0,
-
-  /** BOND_STATUS_UNBONDED - UNBONDED defines a validator that is not bonded. */
-  BOND_STATUS_UNBONDED = 1,
-
-  /** BOND_STATUS_UNBONDING - UNBONDING defines a validator that is unbonding. */
-  BOND_STATUS_UNBONDING = 2,
-
-  /** BOND_STATUS_BONDED - BONDED defines a validator that is bonded. */
-  BOND_STATUS_BONDED = 3,
-  UNRECOGNIZED = -1,
-}
+export const BondStatusSDKType = BondStatus;
 export function bondStatusFromJSON(object: any): BondStatus {
   switch (object) {
     case 0:
@@ -254,7 +239,7 @@ export interface ValidatorSDKType {
   jailed: boolean;
 
   /** status is the validator status (bonded/unbonding/unbonded). */
-  status: BondStatusSDKType;
+  status: BondStatus;
 
   /** tokens define the delegated tokens (incl. self-delegation). */
   tokens: string;
@@ -703,7 +688,7 @@ export const HistoricalInfo = {
 
   fromSDK(object: HistoricalInfoSDKType): HistoricalInfo {
     return {
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
+      header: object.header ? Header.fromSDK(object.header) : undefined,
       valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromSDK(e)) : []
     };
   },
@@ -889,8 +874,8 @@ export const Commission = {
 
   fromSDK(object: CommissionSDKType): Commission {
     return {
-      commissionRates: isSet(object.commission_rates) ? CommissionRates.fromSDK(object.commission_rates) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+      commissionRates: object.commission_rates ? CommissionRates.fromSDK(object.commission_rates) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
     };
   },
 
@@ -1206,15 +1191,15 @@ export const Validator = {
   fromSDK(object: ValidatorSDKType): Validator {
     return {
       operatorAddress: object?.operator_address,
-      consensusPubkey: isSet(object.consensus_pubkey) ? Any.fromSDK(object.consensus_pubkey) : undefined,
+      consensusPubkey: object.consensus_pubkey ? Any.fromSDK(object.consensus_pubkey) : undefined,
       jailed: object?.jailed,
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
       tokens: object?.tokens,
       delegatorShares: object?.delegator_shares,
-      description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
+      description: object.description ? Description.fromSDK(object.description) : undefined,
       unbondingHeight: object?.unbonding_height,
-      unbondingTime: isSet(object.unbonding_time) ? Timestamp.fromSDK(object.unbonding_time) : undefined,
-      commission: isSet(object.commission) ? Commission.fromSDK(object.commission) : undefined,
+      unbondingTime: object.unbonding_time ? Timestamp.fromSDK(object.unbonding_time) : undefined,
+      commission: object.commission ? Commission.fromSDK(object.commission) : undefined,
       minSelfDelegation: object?.min_self_delegation
     };
   },
@@ -1960,7 +1945,7 @@ export const UnbondingDelegationEntry = {
   fromSDK(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
     return {
       creationHeight: object?.creation_height,
-      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
+      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined,
       initialBalance: object?.initial_balance,
       balance: object?.balance
     };
@@ -2071,7 +2056,7 @@ export const RedelegationEntry = {
   fromSDK(object: RedelegationEntrySDKType): RedelegationEntry {
     return {
       creationHeight: object?.creation_height,
-      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
+      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined,
       initialBalance: object?.initial_balance,
       sharesDst: object?.shares_dst
     };
@@ -2328,7 +2313,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      unbondingTime: isSet(object.unbonding_time) ? Duration.fromSDK(object.unbonding_time) : undefined,
+      unbondingTime: object.unbonding_time ? Duration.fromSDK(object.unbonding_time) : undefined,
       maxValidators: object?.max_validators,
       maxEntries: object?.max_entries,
       historicalEntries: object?.historical_entries,
@@ -2419,8 +2404,8 @@ export const DelegationResponse = {
 
   fromSDK(object: DelegationResponseSDKType): DelegationResponse {
     return {
-      delegation: isSet(object.delegation) ? Delegation.fromSDK(object.delegation) : undefined,
-      balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined
+      delegation: object.delegation ? Delegation.fromSDK(object.delegation) : undefined,
+      balance: object.balance ? Coin.fromSDK(object.balance) : undefined
     };
   },
 
@@ -2502,7 +2487,7 @@ export const RedelegationEntryResponse = {
 
   fromSDK(object: RedelegationEntryResponseSDKType): RedelegationEntryResponse {
     return {
-      redelegationEntry: isSet(object.redelegation_entry) ? RedelegationEntry.fromSDK(object.redelegation_entry) : undefined,
+      redelegationEntry: object.redelegation_entry ? RedelegationEntry.fromSDK(object.redelegation_entry) : undefined,
       balance: object?.balance
     };
   },
@@ -2591,7 +2576,7 @@ export const RedelegationResponse = {
 
   fromSDK(object: RedelegationResponseSDKType): RedelegationResponse {
     return {
-      redelegation: isSet(object.redelegation) ? Redelegation.fromSDK(object.redelegation) : undefined,
+      redelegation: object.redelegation ? Redelegation.fromSDK(object.redelegation) : undefined,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromSDK(e)) : []
     };
   },

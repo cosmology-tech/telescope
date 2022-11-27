@@ -103,7 +103,7 @@ export const QueryProvidersRequest = {
 
   fromSDK(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -191,7 +191,7 @@ export const QueryProvidersResponse = {
   fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
     return {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -336,7 +336,7 @@ export const QueryProviderResponse = {
 
   fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {
     return {
-      provider: isSet(object.provider) ? Provider.fromSDK(object.provider) : undefined
+      provider: object.provider ? Provider.fromSDK(object.provider) : undefined
     };
   },
 

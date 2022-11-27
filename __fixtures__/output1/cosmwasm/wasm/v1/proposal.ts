@@ -443,7 +443,7 @@ export const StoreCodeProposal = {
       description: object?.description,
       runAs: object?.run_as,
       wasmByteCode: object?.wasm_byte_code,
-      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
     };
   },
 

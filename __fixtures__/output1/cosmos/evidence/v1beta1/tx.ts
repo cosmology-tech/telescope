@@ -103,7 +103,7 @@ export const MsgSubmitEvidence = {
   fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
     return {
       submitter: object?.submitter,
-      evidence: isSet(object.evidence) ? Any.fromSDK(object.evidence) : undefined
+      evidence: object.evidence ? Any.fromSDK(object.evidence) : undefined
     };
   },
 

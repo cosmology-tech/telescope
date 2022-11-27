@@ -338,7 +338,7 @@ export const QueryPoolResponse = {
 
   fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
     return {
-      pool: isSet(object.pool) ? Any.fromSDK(object.pool) : undefined
+      pool: object.pool ? Any.fromSDK(object.pool) : undefined
     };
   },
 
@@ -407,7 +407,7 @@ export const QueryPoolsRequest = {
 
   fromSDK(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -495,7 +495,7 @@ export const QueryPoolsResponse = {
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -899,7 +899,7 @@ export const QueryPoolParamsResponse = {
 
   fromSDK(object: QueryPoolParamsResponseSDKType): QueryPoolParamsResponse {
     return {
-      params: isSet(object.params) ? Any.fromSDK(object.params) : undefined
+      params: object.params ? Any.fromSDK(object.params) : undefined
     };
   },
 
@@ -1187,7 +1187,7 @@ export const QueryTotalSharesResponse = {
 
   fromSDK(object: QueryTotalSharesResponseSDKType): QueryTotalSharesResponse {
     return {
-      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined
+      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined
     };
   },
 

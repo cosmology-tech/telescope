@@ -11,11 +11,7 @@ export enum CheckTxType {
   RECHECK = 1,
   UNRECOGNIZED = -1,
 }
-export enum CheckTxTypeSDKType {
-  NEW = 0,
-  RECHECK = 1,
-  UNRECOGNIZED = -1,
-}
+export const CheckTxTypeSDKType = CheckTxType;
 export function checkTxTypeFromJSON(object: any): CheckTxType {
   switch (object) {
     case 0:
@@ -65,26 +61,7 @@ export enum ResponseOfferSnapshot_Result {
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
-export enum ResponseOfferSnapshot_ResultSDKType {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Snapshot accepted, apply chunks */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** REJECT - Reject this specific snapshot, try others */
-  REJECT = 3,
-
-  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
-  REJECT_FORMAT = 4,
-
-  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
-  REJECT_SENDER = 5,
-  UNRECOGNIZED = -1,
-}
+export const ResponseOfferSnapshot_ResultSDKType = ResponseOfferSnapshot_Result;
 export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
   switch (object) {
     case 0:
@@ -162,26 +139,7 @@ export enum ResponseApplySnapshotChunk_Result {
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
-export enum ResponseApplySnapshotChunk_ResultSDKType {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Chunk successfully accepted */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** RETRY - Retry chunk (combine with refetch and reject) */
-  RETRY = 3,
-
-  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
-  RETRY_SNAPSHOT = 4,
-
-  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
-  REJECT_SNAPSHOT = 5,
-  UNRECOGNIZED = -1,
-}
+export const ResponseApplySnapshotChunk_ResultSDKType = ResponseApplySnapshotChunk_Result;
 export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
     case 0:
@@ -245,12 +203,7 @@ export enum EvidenceType {
   LIGHT_CLIENT_ATTACK = 2,
   UNRECOGNIZED = -1,
 }
-export enum EvidenceTypeSDKType {
-  UNKNOWN = 0,
-  DUPLICATE_VOTE = 1,
-  LIGHT_CLIENT_ATTACK = 2,
-  UNRECOGNIZED = -1,
-}
+export const EvidenceTypeSDKType = EvidenceType;
 export function evidenceTypeFromJSON(object: any): EvidenceType {
   switch (object) {
     case 0:
@@ -397,7 +350,7 @@ export interface RequestCheckTx {
 }
 export interface RequestCheckTxSDKType {
   tx: Uint8Array;
-  type: CheckTxTypeSDKType;
+  type: CheckTxType;
 }
 export interface RequestDeliverTx {
   tx: Uint8Array;
@@ -683,7 +636,7 @@ export interface ResponseOfferSnapshot {
   result: ResponseOfferSnapshot_Result;
 }
 export interface ResponseOfferSnapshotSDKType {
-  result: ResponseOfferSnapshot_ResultSDKType;
+  result: ResponseOfferSnapshot_Result;
 }
 export interface ResponseLoadSnapshotChunk {
   chunk: Uint8Array;
@@ -701,7 +654,7 @@ export interface ResponseApplySnapshotChunk {
   rejectSenders: string[];
 }
 export interface ResponseApplySnapshotChunkSDKType {
-  result: ResponseApplySnapshotChunk_ResultSDKType;
+  result: ResponseApplySnapshotChunk_Result;
 
   /** Chunks to refetch and reapply */
   refetch_chunks: number[];
@@ -887,7 +840,7 @@ export interface Evidence {
   totalVotingPower: Long;
 }
 export interface EvidenceSDKType {
-  type: EvidenceTypeSDKType;
+  type: EvidenceType;
 
   /** The offending validator */
   validator?: ValidatorSDKType;
@@ -1163,21 +1116,21 @@ export const Request = {
 
   fromSDK(object: RequestSDKType): Request {
     return {
-      echo: isSet(object.echo) ? RequestEcho.fromSDK(object.echo) : undefined,
-      flush: isSet(object.flush) ? RequestFlush.fromSDK(object.flush) : undefined,
-      info: isSet(object.info) ? RequestInfo.fromSDK(object.info) : undefined,
-      setOption: isSet(object.set_option) ? RequestSetOption.fromSDK(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? RequestInitChain.fromSDK(object.init_chain) : undefined,
-      query: isSet(object.query) ? RequestQuery.fromSDK(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? RequestBeginBlock.fromSDK(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? RequestCheckTx.fromSDK(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? RequestDeliverTx.fromSDK(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? RequestEndBlock.fromSDK(object.end_block) : undefined,
-      commit: isSet(object.commit) ? RequestCommit.fromSDK(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromSDK(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+      echo: object.echo ? RequestEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? RequestFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? RequestInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? RequestSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? RequestInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? RequestQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? RequestBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? RequestCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? RequestDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? RequestEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? RequestCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? RequestListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? RequestOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? RequestLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? RequestApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
     };
   },
 
@@ -1627,9 +1580,9 @@ export const RequestInitChain = {
 
   fromSDK(object: RequestInitChainSDKType): RequestInitChain {
     return {
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       chainId: object?.chain_id,
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
       appStateBytes: object?.app_state_bytes,
       initialHeight: object?.initial_height
@@ -1866,8 +1819,8 @@ export const RequestBeginBlock = {
   fromSDK(object: RequestBeginBlockSDKType): RequestBeginBlock {
     return {
       hash: object?.hash,
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      lastCommitInfo: isSet(object.last_commit_info) ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      lastCommitInfo: object.last_commit_info ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDK(e)) : []
     };
   },
@@ -2283,7 +2236,7 @@ export const RequestOfferSnapshot = {
 
   fromSDK(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
     return {
-      snapshot: isSet(object.snapshot) ? Snapshot.fromSDK(object.snapshot) : undefined,
+      snapshot: object.snapshot ? Snapshot.fromSDK(object.snapshot) : undefined,
       appHash: object?.app_hash
     };
   },
@@ -2728,22 +2681,22 @@ export const Response = {
 
   fromSDK(object: ResponseSDKType): Response {
     return {
-      exception: isSet(object.exception) ? ResponseException.fromSDK(object.exception) : undefined,
-      echo: isSet(object.echo) ? ResponseEcho.fromSDK(object.echo) : undefined,
-      flush: isSet(object.flush) ? ResponseFlush.fromSDK(object.flush) : undefined,
-      info: isSet(object.info) ? ResponseInfo.fromSDK(object.info) : undefined,
-      setOption: isSet(object.set_option) ? ResponseSetOption.fromSDK(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? ResponseInitChain.fromSDK(object.init_chain) : undefined,
-      query: isSet(object.query) ? ResponseQuery.fromSDK(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? ResponseBeginBlock.fromSDK(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? ResponseCheckTx.fromSDK(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromSDK(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? ResponseEndBlock.fromSDK(object.end_block) : undefined,
-      commit: isSet(object.commit) ? ResponseCommit.fromSDK(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromSDK(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+      exception: object.exception ? ResponseException.fromSDK(object.exception) : undefined,
+      echo: object.echo ? ResponseEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? ResponseFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? ResponseInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? ResponseSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? ResponseInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? ResponseQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? ResponseBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? ResponseCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? ResponseDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? ResponseEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? ResponseCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? ResponseListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? ResponseOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? ResponseLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? ResponseApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
     };
   },
 
@@ -3269,7 +3222,7 @@ export const ResponseInitChain = {
 
   fromSDK(object: ResponseInitChainSDKType): ResponseInitChain {
     return {
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
       appHash: object?.app_hash
     };
@@ -3450,7 +3403,7 @@ export const ResponseQuery = {
       index: object?.index,
       key: object?.key,
       value: object?.value,
-      proofOps: isSet(object.proof_ops) ? ProofOps.fromSDK(object.proof_ops) : undefined,
+      proofOps: object.proof_ops ? ProofOps.fromSDK(object.proof_ops) : undefined,
       height: object?.height,
       codespace: object?.codespace
     };
@@ -4005,7 +3958,7 @@ export const ResponseEndBlock = {
   fromSDK(object: ResponseEndBlockSDKType): ResponseEndBlock {
     return {
       validatorUpdates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      consensusParamUpdates: isSet(object.consensus_param_updates) ? ConsensusParams.fromSDK(object.consensus_param_updates) : undefined,
+      consensusParamUpdates: object.consensus_param_updates ? ConsensusParams.fromSDK(object.consensus_param_updates) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
     };
   },
@@ -4559,10 +4512,10 @@ export const ConsensusParams = {
 
   fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
     return {
-      block: isSet(object.block) ? BlockParams.fromSDK(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDK(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDK(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDK(object.version) : undefined
+      block: object.block ? BlockParams.fromSDK(object.block) : undefined,
+      evidence: object.evidence ? EvidenceParams.fromSDK(object.evidence) : undefined,
+      validator: object.validator ? ValidatorParams.fromSDK(object.validator) : undefined,
+      version: object.version ? VersionParams.fromSDK(object.version) : undefined
     };
   },
 
@@ -5043,7 +4996,7 @@ export const TxResult = {
       height: object?.height,
       index: object?.index,
       tx: object?.tx,
-      result: isSet(object.result) ? ResponseDeliverTx.fromSDK(object.result) : undefined
+      result: object.result ? ResponseDeliverTx.fromSDK(object.result) : undefined
     };
   },
 
@@ -5210,7 +5163,7 @@ export const ValidatorUpdate = {
 
   fromSDK(object: ValidatorUpdateSDKType): ValidatorUpdate {
     return {
-      pubKey: isSet(object.pub_key) ? PublicKey.fromSDK(object.pub_key) : undefined,
+      pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
       power: object?.power
     };
   },
@@ -5293,7 +5246,7 @@ export const VoteInfo = {
 
   fromSDK(object: VoteInfoSDKType): VoteInfo {
     return {
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
       signedLastBlock: object?.signed_last_block
     };
   },
@@ -5413,9 +5366,9 @@ export const Evidence = {
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
       height: object?.height,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
       totalVotingPower: object?.total_voting_power
     };
   },

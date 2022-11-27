@@ -239,7 +239,7 @@ export const BaseVestingAccount = {
 
   fromSDK(object: BaseVestingAccountSDKType): BaseVestingAccount {
     return {
-      baseAccount: isSet(object.base_account) ? BaseAccount.fromSDK(object.base_account) : undefined,
+      baseAccount: object.base_account ? BaseAccount.fromSDK(object.base_account) : undefined,
       originalVesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedFree: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedVesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDK(e)) : [],
@@ -344,7 +344,7 @@ export const ContinuousVestingAccount = {
 
   fromSDK(object: ContinuousVestingAccountSDKType): ContinuousVestingAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
       startTime: object?.start_time
     };
   },
@@ -415,7 +415,7 @@ export const DelayedVestingAccount = {
 
   fromSDK(object: DelayedVestingAccountSDKType): DelayedVestingAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined
     };
   },
 
@@ -609,7 +609,7 @@ export const PeriodicVestingAccount = {
 
   fromSDK(object: PeriodicVestingAccountSDKType): PeriodicVestingAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
       startTime: object?.start_time,
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };
@@ -688,7 +688,7 @@ export const PermanentLockedAccount = {
 
   fromSDK(object: PermanentLockedAccountSDKType): PermanentLockedAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined
     };
   },
 

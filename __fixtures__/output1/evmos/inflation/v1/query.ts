@@ -390,7 +390,7 @@ export const QueryEpochMintProvisionResponse = {
 
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
     return {
-      epochMintProvision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDK(object.epoch_mint_provision) : undefined
+      epochMintProvision: object.epoch_mint_provision ? DecCoin.fromSDK(object.epoch_mint_provision) : undefined
     };
   },
 
@@ -632,7 +632,7 @@ export const QueryCirculatingSupplyResponse = {
 
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
     return {
-      circulatingSupply: isSet(object.circulating_supply) ? DecCoin.fromSDK(object.circulating_supply) : undefined
+      circulatingSupply: object.circulating_supply ? DecCoin.fromSDK(object.circulating_supply) : undefined
     };
   },
 
@@ -874,7 +874,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

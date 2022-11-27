@@ -315,8 +315,8 @@ export const MsgConnectionOpenInit = {
   fromSDK(object: MsgConnectionOpenInitSDKType): MsgConnectionOpenInit {
     return {
       clientId: object?.client_id,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      version: isSet(object.version) ? Version.fromSDK(object.version) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
+      version: object.version ? Version.fromSDK(object.version) : undefined,
       delayPeriod: object?.delay_period,
       signer: object?.signer
     };
@@ -583,15 +583,15 @@ export const MsgConnectionOpenTry = {
     return {
       clientId: object?.client_id,
       previousConnectionId: object?.previous_connection_id,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       delayPeriod: object?.delay_period,
       counterpartyVersions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromSDK(e)) : [],
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       proofInit: object?.proof_init,
       proofClient: object?.proof_client,
       proofConsensus: object?.proof_consensus,
-      consensusHeight: isSet(object.consensus_height) ? Height.fromSDK(object.consensus_height) : undefined,
+      consensusHeight: object.consensus_height ? Height.fromSDK(object.consensus_height) : undefined,
       signer: object?.signer
     };
   },
@@ -840,13 +840,13 @@ export const MsgConnectionOpenAck = {
     return {
       connectionId: object?.connection_id,
       counterpartyConnectionId: object?.counterparty_connection_id,
-      version: isSet(object.version) ? Version.fromSDK(object.version) : undefined,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      version: object.version ? Version.fromSDK(object.version) : undefined,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       proofTry: object?.proof_try,
       proofClient: object?.proof_client,
       proofConsensus: object?.proof_consensus,
-      consensusHeight: isSet(object.consensus_height) ? Height.fromSDK(object.consensus_height) : undefined,
+      consensusHeight: object.consensus_height ? Height.fromSDK(object.consensus_height) : undefined,
       signer: object?.signer
     };
   },
@@ -1015,7 +1015,7 @@ export const MsgConnectionOpenConfirm = {
     return {
       connectionId: object?.connection_id,
       proofAck: object?.proof_ack,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },

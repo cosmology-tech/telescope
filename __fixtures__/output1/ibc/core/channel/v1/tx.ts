@@ -384,7 +384,7 @@ export const MsgChannelOpenInit = {
   fromSDK(object: MsgChannelOpenInitSDKType): MsgChannelOpenInit {
     return {
       portId: object?.port_id,
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined,
       signer: object?.signer
     };
   },
@@ -582,10 +582,10 @@ export const MsgChannelOpenTry = {
     return {
       portId: object?.port_id,
       previousChannelId: object?.previous_channel_id,
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined,
       counterpartyVersion: object?.counterparty_version,
       proofInit: object?.proof_init,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },
@@ -790,7 +790,7 @@ export const MsgChannelOpenAck = {
       counterpartyChannelId: object?.counterparty_channel_id,
       counterpartyVersion: object?.counterparty_version,
       proofTry: object?.proof_try,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },
@@ -969,7 +969,7 @@ export const MsgChannelOpenConfirm = {
       portId: object?.port_id,
       channelId: object?.channel_id,
       proofAck: object?.proof_ack,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },
@@ -1295,7 +1295,7 @@ export const MsgChannelCloseConfirm = {
       portId: object?.port_id,
       channelId: object?.channel_id,
       proofInit: object?.proof_init,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },
@@ -1457,9 +1457,9 @@ export const MsgRecvPacket = {
 
   fromSDK(object: MsgRecvPacketSDKType): MsgRecvPacket {
     return {
-      packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
+      packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
       proofCommitment: object?.proof_commitment,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },
@@ -1632,9 +1632,9 @@ export const MsgTimeout = {
 
   fromSDK(object: MsgTimeoutSDKType): MsgTimeout {
     return {
-      packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
+      packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
       proofUnreceived: object?.proof_unreceived,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       nextSequenceRecv: object?.next_sequence_recv,
       signer: object?.signer
     };
@@ -1821,10 +1821,10 @@ export const MsgTimeoutOnClose = {
 
   fromSDK(object: MsgTimeoutOnCloseSDKType): MsgTimeoutOnClose {
     return {
-      packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
+      packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
       proofUnreceived: object?.proof_unreceived,
       proofClose: object?.proof_close,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       nextSequenceRecv: object?.next_sequence_recv,
       signer: object?.signer
     };
@@ -2000,10 +2000,10 @@ export const MsgAcknowledgement = {
 
   fromSDK(object: MsgAcknowledgementSDKType): MsgAcknowledgement {
     return {
-      packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
+      packet: object.packet ? Packet.fromSDK(object.packet) : undefined,
       acknowledgement: object?.acknowledgement,
       proofAcked: object?.proof_acked,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined,
       signer: object?.signer
     };
   },

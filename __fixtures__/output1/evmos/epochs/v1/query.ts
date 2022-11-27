@@ -87,7 +87,7 @@ export const QueryEpochsInfoRequest = {
 
   fromSDK(object: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -175,7 +175,7 @@ export const QueryEpochsInfoResponse = {
   fromSDK(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
     return {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

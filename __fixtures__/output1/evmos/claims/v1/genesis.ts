@@ -152,7 +152,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : []
     };
   },
@@ -313,9 +313,9 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       enableClaims: object?.enable_claims,
-      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
-      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
-      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
+      airdropStartTime: object.airdrop_start_time ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      durationUntilDecay: object.duration_until_decay ? Duration.fromSDK(object.duration_until_decay) : undefined,
+      durationOfDecay: object.duration_of_decay ? Duration.fromSDK(object.duration_of_decay) : undefined,
       claimsDenom: object?.claims_denom,
       authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
       evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []

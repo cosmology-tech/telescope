@@ -472,7 +472,7 @@ export const CodeGeneratorRequest = {
       fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
       parameter: object?.parameter,
       protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDK(e)) : [],
-      compilerVersion: isSet(object.compiler_version) ? Version.fromSDK(object.compiler_version) : undefined
+      compilerVersion: object.compiler_version ? Version.fromSDK(object.compiler_version) : undefined
     };
   },
 

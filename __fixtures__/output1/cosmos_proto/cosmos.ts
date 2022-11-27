@@ -7,12 +7,7 @@ export enum ScalarType {
   SCALAR_TYPE_BYTES = 2,
   UNRECOGNIZED = -1,
 }
-export enum ScalarTypeSDKType {
-  SCALAR_TYPE_UNSPECIFIED = 0,
-  SCALAR_TYPE_STRING = 1,
-  SCALAR_TYPE_BYTES = 2,
-  UNRECOGNIZED = -1,
-}
+export const ScalarTypeSDKType = ScalarType;
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:
@@ -155,7 +150,7 @@ export interface ScalarDescriptorSDKType {
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
-  field_type: ScalarTypeSDKType[];
+  field_type: ScalarType[];
 }
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {

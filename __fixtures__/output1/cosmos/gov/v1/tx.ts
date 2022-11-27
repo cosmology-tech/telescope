@@ -83,7 +83,7 @@ export interface MsgVote {
 export interface MsgVoteSDKType {
   proposal_id: Long;
   voter: string;
-  option: VoteOptionSDKType;
+  option: VoteOption;
   metadata: string;
 }
 
@@ -406,7 +406,7 @@ export const MsgExecLegacyContent = {
 
   fromSDK(object: MsgExecLegacyContentSDKType): MsgExecLegacyContent {
     return {
-      content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
+      content: object.content ? Any.fromSDK(object.content) : undefined,
       authority: object?.authority
     };
   },

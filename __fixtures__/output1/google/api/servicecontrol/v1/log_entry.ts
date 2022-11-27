@@ -110,7 +110,7 @@ export interface LogEntrySDKType {
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeveritySDKType;
+  severity: LogSeverity;
 
   /**
    * Optional. Information about the HTTP request associated with this
@@ -576,9 +576,9 @@ export const LogEntry = {
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
       name: object?.name,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       trace: object?.trace,
       insertId: object?.insert_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -587,11 +587,11 @@ export const LogEntry = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      protoPayload: object.proto_payload ? Any.fromSDK(object.proto_payload) : undefined,
       textPayload: object?.text_payload,
-      structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
-      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
+      structPayload: object.struct_payload ? Struct.fromSDK(object.struct_payload) : undefined,
+      operation: object.operation ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      sourceLocation: object.source_location ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
     };
   },
 

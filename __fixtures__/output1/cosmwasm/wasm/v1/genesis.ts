@@ -214,7 +214,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDK(e)) : [],
       contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDK(e)) : [],
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDK(e)) : [],
@@ -336,9 +336,9 @@ export const GenesisState_GenMsgs = {
 
   fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
     return {
-      storeCode: isSet(object.store_code) ? MsgStoreCode.fromSDK(object.store_code) : undefined,
-      instantiateContract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromSDK(object.instantiate_contract) : undefined,
-      executeContract: isSet(object.execute_contract) ? MsgExecuteContract.fromSDK(object.execute_contract) : undefined
+      storeCode: object.store_code ? MsgStoreCode.fromSDK(object.store_code) : undefined,
+      instantiateContract: object.instantiate_contract ? MsgInstantiateContract.fromSDK(object.instantiate_contract) : undefined,
+      executeContract: object.execute_contract ? MsgExecuteContract.fromSDK(object.execute_contract) : undefined
     };
   },
 
@@ -446,7 +446,7 @@ export const Code = {
   fromSDK(object: CodeSDKType): Code {
     return {
       codeId: object?.code_id,
-      codeInfo: isSet(object.code_info) ? CodeInfo.fromSDK(object.code_info) : undefined,
+      codeInfo: object.code_info ? CodeInfo.fromSDK(object.code_info) : undefined,
       codeBytes: object?.code_bytes,
       pinned: object?.pinned
     };
@@ -551,7 +551,7 @@ export const Contract = {
   fromSDK(object: ContractSDKType): Contract {
     return {
       contractAddress: object?.contract_address,
-      contractInfo: isSet(object.contract_info) ? ContractInfo.fromSDK(object.contract_info) : undefined,
+      contractInfo: object.contract_info ? ContractInfo.fromSDK(object.contract_info) : undefined,
       contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDK(e)) : []
     };
   },

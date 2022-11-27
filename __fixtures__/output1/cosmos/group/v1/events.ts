@@ -102,7 +102,7 @@ export interface EventExecSDKType {
   proposal_id: Long;
 
   /** result is the proposal execution result. */
-  result: ProposalExecutorResultSDKType;
+  result: ProposalExecutorResult;
 }
 
 /** EventLeaveGroup is an event emitted when group member leaves the group. */

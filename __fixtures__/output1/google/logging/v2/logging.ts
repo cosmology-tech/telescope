@@ -26,27 +26,7 @@ export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** An indicator of why entries were omitted. */
-export enum TailLogEntriesResponse_SuppressionInfo_ReasonSDKType {
-  /** REASON_UNSPECIFIED - Unexpected default. */
-  REASON_UNSPECIFIED = 0,
-
-  /**
-   * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-   * received in excess of rate limits. For quotas and limits, see
-   * [Logging API quotas and
-   * limits](https://cloud.google.com/logging/quotas#api-limits).
-   */
-  RATE_LIMIT = 1,
-
-  /**
-   * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-   * responses quickly enough.
-   */
-  NOT_CONSUMED = 2,
-  UNRECOGNIZED = -1,
-}
+export const TailLogEntriesResponse_SuppressionInfo_ReasonSDKType = TailLogEntriesResponse_SuppressionInfo_Reason;
 export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
     case 0:
@@ -838,7 +818,7 @@ export interface TailLogEntriesResponse_SuppressionInfo {
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
   /** The reason that entries were omitted from the session. */
-  reason: TailLogEntriesResponse_SuppressionInfo_ReasonSDKType;
+  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
 
   /** A lower bound on the count of entries omitted due to `reason`. */
   suppressed_count: number;
@@ -1147,7 +1127,7 @@ export const WriteLogEntriesRequest = {
   fromSDK(object: WriteLogEntriesRequestSDKType): WriteLogEntriesRequest {
     return {
       logName: object?.log_name,
-      resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
+      resource: object.resource ? MonitoredResource.fromSDK(object.resource) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1307,7 +1287,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
       key: object?.key,
-      value: isSet(object.value) ? google.rpc.Status.fromSDK(object.value) : undefined
+      value: object.value ? google.rpc.Status.fromSDK(object.value) : undefined
     };
   },
 
@@ -2145,7 +2125,7 @@ export const TailLogEntriesRequest = {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       filter: object?.filter,
-      bufferWindow: isSet(object.buffer_window) ? Duration.fromSDK(object.buffer_window) : undefined
+      bufferWindow: object.buffer_window ? Duration.fromSDK(object.buffer_window) : undefined
     };
   },
 

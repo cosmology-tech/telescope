@@ -30,7 +30,7 @@ export interface QueryAppVersionRequestSDKType {
   connection_id: string;
 
   /** whether the channel is ordered or unordered */
-  ordering: OrderSDKType;
+  ordering: Order;
 
   /** counterparty channel end */
   counterparty?: CounterpartySDKType;
@@ -165,7 +165,7 @@ export const QueryAppVersionRequest = {
       portId: object?.port_id,
       connectionId: object?.connection_id,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       proposedVersion: object?.proposed_version
     };
   },

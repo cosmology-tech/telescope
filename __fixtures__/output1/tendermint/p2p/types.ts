@@ -301,14 +301,14 @@ export const NodeInfo = {
 
   fromSDK(object: NodeInfoSDKType): NodeInfo {
     return {
-      protocolVersion: isSet(object.protocol_version) ? ProtocolVersion.fromSDK(object.protocol_version) : undefined,
+      protocolVersion: object.protocol_version ? ProtocolVersion.fromSDK(object.protocol_version) : undefined,
       nodeId: object?.node_id,
       listenAddr: object?.listen_addr,
       network: object?.network,
       version: object?.version,
       channels: object?.channels,
       moniker: object?.moniker,
-      other: isSet(object.other) ? NodeInfoOther.fromSDK(object.other) : undefined
+      other: object.other ? NodeInfoOther.fromSDK(object.other) : undefined
     };
   },
 
@@ -499,7 +499,7 @@ export const PeerInfo = {
     return {
       id: object?.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDK(e)) : [],
-      lastConnected: isSet(object.last_connected) ? Timestamp.fromSDK(object.last_connected) : undefined
+      lastConnected: object.last_connected ? Timestamp.fromSDK(object.last_connected) : undefined
     };
   },
 
@@ -613,8 +613,8 @@ export const PeerAddressInfo = {
   fromSDK(object: PeerAddressInfoSDKType): PeerAddressInfo {
     return {
       address: object?.address,
-      lastDialSuccess: isSet(object.last_dial_success) ? Timestamp.fromSDK(object.last_dial_success) : undefined,
-      lastDialFailure: isSet(object.last_dial_failure) ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
+      lastDialSuccess: object.last_dial_success ? Timestamp.fromSDK(object.last_dial_success) : undefined,
+      lastDialFailure: object.last_dial_failure ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
       dialFailures: object?.dial_failures
     };
   },

@@ -274,10 +274,10 @@ export const EpochInfo = {
   fromSDK(object: EpochInfoSDKType): EpochInfo {
     return {
       identifier: object?.identifier,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       currentEpoch: object?.current_epoch,
-      currentEpochStartTime: isSet(object.current_epoch_start_time) ? Timestamp.fromSDK(object.current_epoch_start_time) : undefined,
+      currentEpochStartTime: object.current_epoch_start_time ? Timestamp.fromSDK(object.current_epoch_start_time) : undefined,
       epochCountingStarted: object?.epoch_counting_started,
       currentEpochStartHeight: object?.current_epoch_start_height
     };

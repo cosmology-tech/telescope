@@ -23,25 +23,7 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
-
-/** VoteOption enumerates the valid vote options for a given proposal. */
-export enum VoteOptionSDKType {
-  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
-  VOTE_OPTION_UNSPECIFIED = 0,
-
-  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
-  VOTE_OPTION_YES = 1,
-
-  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
-  VOTE_OPTION_ABSTAIN = 2,
-
-  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
-  VOTE_OPTION_NO = 3,
-
-  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
-  VOTE_OPTION_NO_WITH_VETO = 4,
-  UNRECOGNIZED = -1,
-}
+export const VoteOptionSDKType = VoteOption;
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -114,28 +96,7 @@ export enum ProposalStatus {
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
 }
-
-/** ProposalStatus defines proposal statuses. */
-export enum ProposalStatusSDKType {
-  /** PROPOSAL_STATUS_UNSPECIFIED - An empty value is invalid and not allowed. */
-  PROPOSAL_STATUS_UNSPECIFIED = 0,
-
-  /** PROPOSAL_STATUS_SUBMITTED - Initial status of a proposal when persisted. */
-  PROPOSAL_STATUS_SUBMITTED = 1,
-
-  /** PROPOSAL_STATUS_CLOSED - Final status of a proposal when the final tally was executed. */
-  PROPOSAL_STATUS_CLOSED = 2,
-
-  /** PROPOSAL_STATUS_ABORTED - Final status of a proposal when the group was modified before the final tally. */
-  PROPOSAL_STATUS_ABORTED = 3,
-
-  /**
-   * PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
-   * is Withdrawn.
-   */
-  PROPOSAL_STATUS_WITHDRAWN = 4,
-  UNRECOGNIZED = -1,
-}
+export const ProposalStatusSDKType = ProposalStatus;
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
@@ -202,22 +163,7 @@ export enum ProposalResult {
   PROPOSAL_RESULT_REJECTED = 3,
   UNRECOGNIZED = -1,
 }
-
-/** ProposalResult defines types of proposal results. */
-export enum ProposalResultSDKType {
-  /** PROPOSAL_RESULT_UNSPECIFIED - An empty value is invalid and not allowed */
-  PROPOSAL_RESULT_UNSPECIFIED = 0,
-
-  /** PROPOSAL_RESULT_UNFINALIZED - Until a final tally has happened the status is unfinalized */
-  PROPOSAL_RESULT_UNFINALIZED = 1,
-
-  /** PROPOSAL_RESULT_ACCEPTED - Final result of the tally */
-  PROPOSAL_RESULT_ACCEPTED = 2,
-
-  /** PROPOSAL_RESULT_REJECTED - Final result of the tally */
-  PROPOSAL_RESULT_REJECTED = 3,
-  UNRECOGNIZED = -1,
-}
+export const ProposalResultSDKType = ProposalResult;
 export function proposalResultFromJSON(object: any): ProposalResult {
   switch (object) {
     case 0:
@@ -277,22 +223,7 @@ export enum ProposalExecutorResult {
   PROPOSAL_EXECUTOR_RESULT_FAILURE = 3,
   UNRECOGNIZED = -1,
 }
-
-/** ProposalExecutorResult defines types of proposal executor results. */
-export enum ProposalExecutorResultSDKType {
-  /** PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED - An empty value is not allowed. */
-  PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
-
-  /** PROPOSAL_EXECUTOR_RESULT_NOT_RUN - We have not yet run the executor. */
-  PROPOSAL_EXECUTOR_RESULT_NOT_RUN = 1,
-
-  /** PROPOSAL_EXECUTOR_RESULT_SUCCESS - The executor was successful and proposed action updated state. */
-  PROPOSAL_EXECUTOR_RESULT_SUCCESS = 2,
-
-  /** PROPOSAL_EXECUTOR_RESULT_FAILURE - The executor returned an error and proposed action didn't update state. */
-  PROPOSAL_EXECUTOR_RESULT_FAILURE = 3,
-  UNRECOGNIZED = -1,
-}
+export const ProposalExecutorResultSDKType = ProposalExecutorResult;
 export function proposalExecutorResultFromJSON(object: any): ProposalExecutorResult {
   switch (object) {
     case 0:
@@ -695,13 +626,13 @@ export interface ProposalSDKType {
   group_policy_version: Long;
 
   /** status represents the high level position in the life cycle of the proposal. Initial value is Submitted. */
-  status: ProposalStatusSDKType;
+  status: ProposalStatus;
 
   /**
    * result is the final result based on the votes and election rule. Initial value is unfinalized.
    * The result is persisted so that clients can always rely on this state and not have to replicate the logic.
    */
-  result: ProposalResultSDKType;
+  result: ProposalResult;
 
   /**
    * final_tally_result contains the sums of all weighted votes for this
@@ -721,7 +652,7 @@ export interface ProposalSDKType {
   voting_period_end?: Date;
 
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
-  executor_result: ProposalExecutorResultSDKType;
+  executor_result: ProposalExecutorResult;
 
   /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: AnySDKType[];
@@ -784,7 +715,7 @@ export interface VoteSDKType {
   voter: string;
 
   /** option is the voter's choice on the proposal. */
-  option: VoteOptionSDKType;
+  option: VoteOption;
 
   /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
@@ -889,7 +820,7 @@ export const Member = {
       address: object?.address,
       weight: object?.weight,
       metadata: object?.metadata,
-      addedAt: isSet(object.added_at) ? Timestamp.fromSDK(object.added_at) : undefined
+      addedAt: object.added_at ? Timestamp.fromSDK(object.added_at) : undefined
     };
   },
 
@@ -1055,7 +986,7 @@ export const ThresholdDecisionPolicy = {
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
     return {
       threshold: object?.threshold,
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
+      windows: object.windows ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
     };
   },
 
@@ -1138,7 +1069,7 @@ export const PercentageDecisionPolicy = {
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
     return {
       percentage: object?.percentage,
-      windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
+      windows: object.windows ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
     };
   },
 
@@ -1220,8 +1151,8 @@ export const DecisionPolicyWindows = {
 
   fromSDK(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
     return {
-      votingPeriod: isSet(object.voting_period) ? Duration.fromSDK(object.voting_period) : undefined,
-      minExecutionPeriod: isSet(object.min_execution_period) ? Duration.fromSDK(object.min_execution_period) : undefined
+      votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined,
+      minExecutionPeriod: object.min_execution_period ? Duration.fromSDK(object.min_execution_period) : undefined
     };
   },
 
@@ -1356,7 +1287,7 @@ export const GroupInfo = {
       metadata: object?.metadata,
       version: object?.version,
       totalWeight: object?.total_weight,
-      createdAt: isSet(object.created_at) ? Timestamp.fromSDK(object.created_at) : undefined
+      createdAt: object.created_at ? Timestamp.fromSDK(object.created_at) : undefined
     };
   },
 
@@ -1443,7 +1374,7 @@ export const GroupMember = {
   fromSDK(object: GroupMemberSDKType): GroupMember {
     return {
       groupId: object?.group_id,
-      member: isSet(object.member) ? Member.fromSDK(object.member) : undefined
+      member: object.member ? Member.fromSDK(object.member) : undefined
     };
   },
 
@@ -1590,8 +1521,8 @@ export const GroupPolicyInfo = {
       admin: object?.admin,
       metadata: object?.metadata,
       version: object?.version,
-      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined,
-      createdAt: isSet(object.created_at) ? Timestamp.fromSDK(object.created_at) : undefined
+      decisionPolicy: object.decision_policy ? Any.fromSDK(object.decision_policy) : undefined,
+      createdAt: object.created_at ? Timestamp.fromSDK(object.created_at) : undefined
     };
   },
 
@@ -1826,13 +1757,13 @@ export const Proposal = {
       address: object?.address,
       metadata: object?.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined,
+      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined,
       groupVersion: object?.group_version,
       groupPolicyVersion: object?.group_policy_version,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
-      finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
-      votingPeriodEnd: isSet(object.voting_period_end) ? Timestamp.fromSDK(object.voting_period_end) : undefined,
+      finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
+      votingPeriodEnd: object.voting_period_end ? Timestamp.fromSDK(object.voting_period_end) : undefined,
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
     };
@@ -2090,7 +2021,7 @@ export const Vote = {
       voter: object?.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: object?.metadata,
-      submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined
+      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined
     };
   },
 

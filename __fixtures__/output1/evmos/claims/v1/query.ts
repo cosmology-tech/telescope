@@ -380,7 +380,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -449,7 +449,7 @@ export const QueryClaimsRecordsRequest = {
 
   fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -537,7 +537,7 @@ export const QueryClaimsRecordsResponse = {
   fromSDK(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
     return {
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

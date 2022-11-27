@@ -258,8 +258,8 @@ export const MsgCreateClient = {
 
   fromSDK(object: MsgCreateClientSDKType): MsgCreateClient {
     return {
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
       signer: object?.signer
     };
   },
@@ -408,7 +408,7 @@ export const MsgUpdateClient = {
   fromSDK(object: MsgUpdateClientSDKType): MsgUpdateClient {
     return {
       clientId: object?.client_id,
-      header: isSet(object.header) ? Any.fromSDK(object.header) : undefined,
+      header: object.header ? Any.fromSDK(object.header) : undefined,
       signer: object?.signer
     };
   },
@@ -593,8 +593,8 @@ export const MsgUpgradeClient = {
   fromSDK(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
     return {
       clientId: object?.client_id,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
       proofUpgradeClient: object?.proof_upgrade_client,
       proofUpgradeConsensusState: object?.proof_upgrade_consensus_state,
       signer: object?.signer
@@ -748,7 +748,7 @@ export const MsgSubmitMisbehaviour = {
   fromSDK(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
     return {
       clientId: object?.client_id,
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDK(object.misbehaviour) : undefined,
+      misbehaviour: object.misbehaviour ? Any.fromSDK(object.misbehaviour) : undefined,
       signer: object?.signer
     };
   },

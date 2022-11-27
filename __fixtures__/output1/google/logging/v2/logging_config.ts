@@ -16,19 +16,7 @@ export enum LogSink_VersionFormat {
   V1 = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Deprecated. This is unused. */
-export enum LogSink_VersionFormatSDKType {
-  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
-  VERSION_FORMAT_UNSPECIFIED = 0,
-
-  /** V2 - `LogEntry` version 2 format. */
-  V2 = 1,
-
-  /** V1 - `LogEntry` version 1 format. */
-  V1 = 2,
-  UNRECOGNIZED = -1,
-}
+export const LogSink_VersionFormatSDKType = LogSink_VersionFormat;
 export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
     case 0:
@@ -84,25 +72,7 @@ export enum LifecycleState {
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** LogBucket lifecycle states. */
-export enum LifecycleStateSDKType {
-  /**
-   * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
-   * values.
-   */
-  LIFECYCLE_STATE_UNSPECIFIED = 0,
-
-  /** ACTIVE - The normal and active state. */
-  ACTIVE = 1,
-
-  /**
-   * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
-   * (e.g. buckets), this can be reversed by an un-delete operation.
-   */
-  DELETE_REQUESTED = 2,
-  UNRECOGNIZED = -1,
-}
+export const LifecycleStateSDKType = LifecycleState;
 export function lifecycleStateFromJSON(object: any): LifecycleState {
   switch (object) {
     case 0:
@@ -170,37 +140,7 @@ export enum OperationState {
   OPERATION_STATE_CANCELLED = 6,
   UNRECOGNIZED = -1,
 }
-
-/**
- * List of different operation states.
- * High level state of the operation. This is used to report the job's
- * current state to the user. Once a long running operation is created,
- * the current state of the operation can be queried even before the
- * operation is finished and the final result is available.
- */
-export enum OperationStateSDKType {
-  /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
-  OPERATION_STATE_UNSPECIFIED = 0,
-
-  /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
-  OPERATION_STATE_SCHEDULED = 1,
-
-  /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
-  OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
-
-  /** OPERATION_STATE_RUNNING - The operation is running. */
-  OPERATION_STATE_RUNNING = 3,
-
-  /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
-  OPERATION_STATE_SUCCEEDED = 4,
-
-  /** OPERATION_STATE_FAILED - The operation failed. */
-  OPERATION_STATE_FAILED = 5,
-
-  /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
-  OPERATION_STATE_CANCELLED = 6,
-  UNRECOGNIZED = -1,
-}
+export const OperationStateSDKType = OperationState;
 export function operationStateFromJSON(object: any): OperationState {
   switch (object) {
     case 0:
@@ -385,7 +325,7 @@ export interface LogBucketSDKType {
   locked: boolean;
 
   /** Output only. The bucket lifecycle state. */
-  lifecycle_state: LifecycleStateSDKType;
+  lifecycle_state: LifecycleState;
 
   /**
    * Log entry field paths that are denied access in this bucket.
@@ -686,7 +626,7 @@ export interface LogSinkSDKType {
   /** Deprecated. This field is unused. */
 
   /** @deprecated */
-  output_version_format: LogSink_VersionFormatSDKType;
+  output_version_format: LogSink_VersionFormat;
 
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
@@ -2727,7 +2667,7 @@ export interface CopyLogEntriesMetadataSDKType {
   end_time?: Date;
 
   /** State of an operation. */
-  state: OperationStateSDKType;
+  state: OperationState;
 
   /** Identifies whether the user has requested cancellation of the operation. */
   cancellation_requested: boolean;
@@ -2923,13 +2863,13 @@ export const LogBucket = {
     return {
       name: object?.name,
       description: object?.description,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
       retentionDays: object?.retention_days,
       locked: object?.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined
+      cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined
     };
   },
 
@@ -3062,8 +3002,8 @@ export const LogView = {
     return {
       name: object?.name,
       description: object?.description,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
       filter: object?.filter
     };
   },
@@ -3284,9 +3224,9 @@ export const LogSink = {
       outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
       writerIdentity: object?.writer_identity,
       includeChildren: object?.include_children,
-      bigqueryOptions: isSet(object.bigquery_options) ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+      bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
     };
   },
 
@@ -3673,7 +3613,7 @@ export const CreateBucketRequest = {
     return {
       parent: object?.parent,
       bucketId: object?.bucket_id,
-      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined
+      bucket: object.bucket ? LogBucket.fromSDK(object.bucket) : undefined
     };
   },
 
@@ -3769,8 +3709,8 @@ export const UpdateBucketRequest = {
   fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
     return {
       name: object?.name,
-      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      bucket: object.bucket ? LogBucket.fromSDK(object.bucket) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -4266,7 +4206,7 @@ export const CreateViewRequest = {
     return {
       parent: object?.parent,
       viewId: object?.view_id,
-      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined
+      view: object.view ? LogView.fromSDK(object.view) : undefined
     };
   },
 
@@ -4362,8 +4302,8 @@ export const UpdateViewRequest = {
   fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
     return {
       name: object?.name,
-      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      view: object.view ? LogView.fromSDK(object.view) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -4858,7 +4798,7 @@ export const CreateSinkRequest = {
   fromSDK(object: CreateSinkRequestSDKType): CreateSinkRequest {
     return {
       parent: object?.parent,
-      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
+      sink: object.sink ? LogSink.fromSDK(object.sink) : undefined,
       uniqueWriterIdentity: object?.unique_writer_identity
     };
   },
@@ -4967,9 +4907,9 @@ export const UpdateSinkRequest = {
   fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
     return {
       sinkName: object?.sink_name,
-      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
+      sink: object.sink ? LogSink.fromSDK(object.sink) : undefined,
       uniqueWriterIdentity: object?.unique_writer_identity,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -5174,8 +5114,8 @@ export const LogExclusion = {
       description: object?.description,
       filter: object?.filter,
       disabled: object?.disabled,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
     };
   },
 
@@ -5523,7 +5463,7 @@ export const CreateExclusionRequest = {
   fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
     return {
       parent: object?.parent,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined
+      exclusion: object.exclusion ? LogExclusion.fromSDK(object.exclusion) : undefined
     };
   },
 
@@ -5618,8 +5558,8 @@ export const UpdateExclusionRequest = {
   fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
     return {
       name: object?.name,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      exclusion: object.exclusion ? LogExclusion.fromSDK(object.exclusion) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -5853,8 +5793,8 @@ export const UpdateCmekSettingsRequest = {
   fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
     return {
       name: object?.name,
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -6116,8 +6056,8 @@ export const UpdateSettingsRequest = {
   fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
     return {
       name: object?.name,
-      settings: isSet(object.settings) ? Settings.fromSDK(object.settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      settings: object.settings ? Settings.fromSDK(object.settings) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
@@ -6482,11 +6422,11 @@ export const CopyLogEntriesMetadata = {
 
   fromSDK(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
     return {
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellationRequested: object?.cancellation_requested,
-      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
+      request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
       progress: object?.progress,
       writerIdentity: object?.writer_identity
     };

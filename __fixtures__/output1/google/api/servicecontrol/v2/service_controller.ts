@@ -347,7 +347,7 @@ export const CheckRequest = {
     return {
       serviceName: object?.service_name,
       serviceConfigId: object?.service_config_id,
-      attributes: isSet(object.attributes) ? AttributeContext.fromSDK(object.attributes) : undefined,
+      attributes: object.attributes ? AttributeContext.fromSDK(object.attributes) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDK(e)) : [],
       flags: object?.flags
     };
@@ -675,7 +675,7 @@ export const CheckResponse = {
 
   fromSDK(object: CheckResponseSDKType): CheckResponse {
     return {
-      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined,
+      status: object.status ? Status.fromSDK(object.status) : undefined,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

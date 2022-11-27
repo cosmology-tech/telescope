@@ -18,22 +18,7 @@ export enum AccessType {
   ACCESS_TYPE_EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
-
-/** AccessType permission types */
-export enum AccessTypeSDKType {
-  /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
-  ACCESS_TYPE_UNSPECIFIED = 0,
-
-  /** ACCESS_TYPE_NOBODY - AccessTypeNobody forbidden */
-  ACCESS_TYPE_NOBODY = 1,
-
-  /** ACCESS_TYPE_ONLY_ADDRESS - AccessTypeOnlyAddress restricted to an address */
-  ACCESS_TYPE_ONLY_ADDRESS = 2,
-
-  /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
-  ACCESS_TYPE_EVERYBODY = 3,
-  UNRECOGNIZED = -1,
-}
+export const AccessTypeSDKType = AccessType;
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
     case 0:
@@ -93,22 +78,7 @@ export enum ContractCodeHistoryOperationType {
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
   UNRECOGNIZED = -1,
 }
-
-/** ContractCodeHistoryOperationType actions that caused a code change */
-export enum ContractCodeHistoryOperationTypeSDKType {
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
-  UNRECOGNIZED = -1,
-}
+export const ContractCodeHistoryOperationTypeSDKType = ContractCodeHistoryOperationType;
 export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
   switch (object) {
     case 0:
@@ -160,7 +130,7 @@ export interface AccessTypeParam {
 
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
-  value: AccessTypeSDKType;
+  value: AccessType;
 }
 
 /** AccessConfig access control type. */
@@ -171,7 +141,7 @@ export interface AccessConfig {
 
 /** AccessConfig access control type. */
 export interface AccessConfigSDKType {
-  permission: AccessTypeSDKType;
+  permission: AccessType;
   address: string;
 }
 
@@ -185,7 +155,7 @@ export interface Params {
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
   code_upload_access?: AccessConfigSDKType;
-  instantiate_default_permission: AccessTypeSDKType;
+  instantiate_default_permission: AccessType;
   max_wasm_code_size: Long;
 }
 
@@ -285,7 +255,7 @@ export interface ContractCodeHistoryEntry {
 
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
-  operation: ContractCodeHistoryOperationTypeSDKType;
+  operation: ContractCodeHistoryOperationType;
 
   /** CodeID is the reference to the stored WASM code */
   code_id: Long;
@@ -576,7 +546,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      codeUploadAccess: isSet(object.code_upload_access) ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
+      codeUploadAccess: object.code_upload_access ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
       instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
       maxWasmCodeSize: object?.max_wasm_code_size
     };
@@ -675,7 +645,7 @@ export const CodeInfo = {
     return {
       codeHash: object?.code_hash,
       creator: object?.creator,
-      instantiateConfig: isSet(object.instantiate_config) ? AccessConfig.fromSDK(object.instantiate_config) : undefined
+      instantiateConfig: object.instantiate_config ? AccessConfig.fromSDK(object.instantiate_config) : undefined
     };
   },
 
@@ -822,9 +792,9 @@ export const ContractInfo = {
       creator: object?.creator,
       admin: object?.admin,
       label: object?.label,
-      created: isSet(object.created) ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
+      created: object.created ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
       ibcPortId: object?.ibc_port_id,
-      extension: isSet(object.extension) ? Any.fromSDK(object.extension) : undefined
+      extension: object.extension ? Any.fromSDK(object.extension) : undefined
     };
   },
 
@@ -937,7 +907,7 @@ export const ContractCodeHistoryEntry = {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
       codeId: object?.code_id,
-      updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
+      updated: object.updated ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
       msg: object?.msg
     };
   },

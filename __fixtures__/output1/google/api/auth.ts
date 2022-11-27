@@ -693,7 +693,7 @@ export const AuthenticationRule = {
   fromSDK(object: AuthenticationRuleSDKType): AuthenticationRule {
     return {
       selector: object?.selector,
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDK(object.oauth) : undefined,
+      oauth: object.oauth ? OAuthRequirements.fromSDK(object.oauth) : undefined,
       allowWithoutCredential: object?.allow_without_credential,
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDK(e)) : []
     };

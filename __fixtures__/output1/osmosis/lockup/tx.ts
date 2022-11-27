@@ -177,7 +177,7 @@ export const MsgLockTokens = {
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
       owner: object?.owner,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -678,7 +678,7 @@ export const MsgExtendLockup = {
     return {
       owner: object?.owner,
       ID: object?.ID,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 

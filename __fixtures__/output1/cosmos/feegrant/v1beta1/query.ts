@@ -242,7 +242,7 @@ export const QueryAllowanceResponse = {
 
   fromSDK(object: QueryAllowanceResponseSDKType): QueryAllowanceResponse {
     return {
-      allowance: isSet(object.allowance) ? Grant.fromSDK(object.allowance) : undefined
+      allowance: object.allowance ? Grant.fromSDK(object.allowance) : undefined
     };
   },
 
@@ -324,7 +324,7 @@ export const QueryAllowancesRequest = {
   fromSDK(object: QueryAllowancesRequestSDKType): QueryAllowancesRequest {
     return {
       grantee: object?.grantee,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -413,7 +413,7 @@ export const QueryAllowancesResponse = {
   fromSDK(object: QueryAllowancesResponseSDKType): QueryAllowancesResponse {
     return {
       allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -502,7 +502,7 @@ export const QueryAllowancesByGranterRequest = {
   fromSDK(object: QueryAllowancesByGranterRequestSDKType): QueryAllowancesByGranterRequest {
     return {
       granter: object?.granter,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -591,7 +591,7 @@ export const QueryAllowancesByGranterResponse = {
   fromSDK(object: QueryAllowancesByGranterResponseSDKType): QueryAllowancesByGranterResponse {
     return {
       allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

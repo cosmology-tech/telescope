@@ -14,16 +14,7 @@ export enum LogMetric_ApiVersion {
   V1 = 1,
   UNRECOGNIZED = -1,
 }
-
-/** Logging API version. */
-export enum LogMetric_ApiVersionSDKType {
-  /** V2 - Logging API v2. */
-  V2 = 0,
-
-  /** V1 - Logging API v1. */
-  V1 = 1,
-  UNRECOGNIZED = -1,
-}
+export const LogMetric_ApiVersionSDKType = LogMetric_ApiVersion;
 export function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion {
   switch (object) {
     case 0:
@@ -355,7 +346,7 @@ export interface LogMetricSDKType {
    */
 
   /** @deprecated */
-  version: LogMetric_ApiVersionSDKType;
+  version: LogMetric_ApiVersion;
 }
 
 /** The parameters to ListLogMetrics. */
@@ -836,7 +827,7 @@ export const LogMetric = {
       description: object?.description,
       filter: object?.filter,
       disabled: object?.disabled,
-      metricDescriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDK(object.metric_descriptor) : undefined,
+      metricDescriptor: object.metric_descriptor ? MetricDescriptor.fromSDK(object.metric_descriptor) : undefined,
       valueExtractor: object?.value_extractor,
       labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
         [key: string]: string;
@@ -844,9 +835,9 @@ export const LogMetric = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
@@ -1207,7 +1198,7 @@ export const CreateLogMetricRequest = {
   fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
     return {
       parent: object?.parent,
-      metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
+      metric: object.metric ? LogMetric.fromSDK(object.metric) : undefined
     };
   },
 
@@ -1290,7 +1281,7 @@ export const UpdateLogMetricRequest = {
   fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
     return {
       metricName: object?.metric_name,
-      metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
+      metric: object.metric ? LogMetric.fromSDK(object.metric) : undefined
     };
   },
 

@@ -264,10 +264,10 @@ export const ConsensusParams = {
 
   fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
     return {
-      block: isSet(object.block) ? BlockParams.fromSDK(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDK(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDK(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDK(object.version) : undefined
+      block: object.block ? BlockParams.fromSDK(object.block) : undefined,
+      evidence: object.evidence ? EvidenceParams.fromSDK(object.evidence) : undefined,
+      validator: object.validator ? ValidatorParams.fromSDK(object.validator) : undefined,
+      version: object.version ? VersionParams.fromSDK(object.version) : undefined
     };
   },
 
@@ -461,7 +461,7 @@ export const EvidenceParams = {
   fromSDK(object: EvidenceParamsSDKType): EvidenceParams {
     return {
       maxAgeNumBlocks: object?.max_age_num_blocks,
-      maxAgeDuration: isSet(object.max_age_duration) ? Duration.fromSDK(object.max_age_duration) : undefined,
+      maxAgeDuration: object.max_age_duration ? Duration.fromSDK(object.max_age_duration) : undefined,
       maxBytes: object?.max_bytes
     };
   },

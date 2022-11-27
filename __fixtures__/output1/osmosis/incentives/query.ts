@@ -606,7 +606,7 @@ export const GaugeByIDResponse = {
 
   fromSDK(object: GaugeByIDResponseSDKType): GaugeByIDResponse {
     return {
-      gauge: isSet(object.gauge) ? Gauge.fromSDK(object.gauge) : undefined
+      gauge: object.gauge ? Gauge.fromSDK(object.gauge) : undefined
     };
   },
 
@@ -675,7 +675,7 @@ export const GaugesRequest = {
 
   fromSDK(object: GaugesRequestSDKType): GaugesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -763,7 +763,7 @@ export const GaugesResponse = {
   fromSDK(object: GaugesResponseSDKType): GaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -839,7 +839,7 @@ export const ActiveGaugesRequest = {
 
   fromSDK(object: ActiveGaugesRequestSDKType): ActiveGaugesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -927,7 +927,7 @@ export const ActiveGaugesResponse = {
   fromSDK(object: ActiveGaugesResponseSDKType): ActiveGaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1016,7 +1016,7 @@ export const ActiveGaugesPerDenomRequest = {
   fromSDK(object: ActiveGaugesPerDenomRequestSDKType): ActiveGaugesPerDenomRequest {
     return {
       denom: object?.denom,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1105,7 +1105,7 @@ export const ActiveGaugesPerDenomResponse = {
   fromSDK(object: ActiveGaugesPerDenomResponseSDKType): ActiveGaugesPerDenomResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1181,7 +1181,7 @@ export const UpcomingGaugesRequest = {
 
   fromSDK(object: UpcomingGaugesRequestSDKType): UpcomingGaugesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1269,7 +1269,7 @@ export const UpcomingGaugesResponse = {
   fromSDK(object: UpcomingGaugesResponseSDKType): UpcomingGaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1358,7 +1358,7 @@ export const UpcomingGaugesPerDenomRequest = {
   fromSDK(object: UpcomingGaugesPerDenomRequestSDKType): UpcomingGaugesPerDenomRequest {
     return {
       denom: object?.denom,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1447,7 +1447,7 @@ export const UpcomingGaugesPerDenomResponse = {
   fromSDK(object: UpcomingGaugesPerDenomResponseSDKType): UpcomingGaugesPerDenomResponse {
     return {
       upcomingGauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

@@ -121,7 +121,7 @@ export interface ApiSDKType {
   mixins: MixinSDKType[];
 
   /** The source syntax of the service. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /** Method represents a method of an API interface. */
@@ -169,7 +169,7 @@ export interface MethodSDKType {
   options: OptionSDKType[];
 
   /** The source syntax of this method. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /**
@@ -504,7 +504,7 @@ export const Api = {
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       version: object?.version,
-      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };

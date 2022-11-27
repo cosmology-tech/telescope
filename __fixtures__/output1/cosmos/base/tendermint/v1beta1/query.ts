@@ -283,7 +283,7 @@ export const GetValidatorSetByHeightRequest = {
   fromSDK(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
     return {
       height: object?.height,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -385,7 +385,7 @@ export const GetValidatorSetByHeightResponse = {
     return {
       blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -462,7 +462,7 @@ export const GetLatestValidatorSetRequest = {
 
   fromSDK(object: GetLatestValidatorSetRequestSDKType): GetLatestValidatorSetRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -563,7 +563,7 @@ export const GetLatestValidatorSetResponse = {
     return {
       blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -677,7 +677,7 @@ export const Validator = {
   fromSDK(object: ValidatorSDKType): Validator {
     return {
       address: object?.address,
-      pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
       votingPower: object?.voting_power,
       proposerPriority: object?.proposer_priority
     };
@@ -832,8 +832,8 @@ export const GetBlockByHeightResponse = {
 
   fromSDK(object: GetBlockByHeightResponseSDKType): GetBlockByHeightResponse {
     return {
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDK(object.block) : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      block: object.block ? Block.fromSDK(object.block) : undefined
     };
   },
 
@@ -967,8 +967,8 @@ export const GetLatestBlockResponse = {
 
   fromSDK(object: GetLatestBlockResponseSDKType): GetLatestBlockResponse {
     return {
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDK(object.block) : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      block: object.block ? Block.fromSDK(object.block) : undefined
     };
   },
 
@@ -1223,8 +1223,8 @@ export const GetNodeInfoResponse = {
 
   fromSDK(object: GetNodeInfoResponseSDKType): GetNodeInfoResponse {
     return {
-      nodeInfo: isSet(object.node_info) ? NodeInfo.fromSDK(object.node_info) : undefined,
-      applicationVersion: isSet(object.application_version) ? VersionInfo.fromSDK(object.application_version) : undefined
+      nodeInfo: object.node_info ? NodeInfo.fromSDK(object.node_info) : undefined,
+      applicationVersion: object.application_version ? VersionInfo.fromSDK(object.application_version) : undefined
     };
   },
 

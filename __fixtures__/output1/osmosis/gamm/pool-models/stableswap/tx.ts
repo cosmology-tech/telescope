@@ -184,7 +184,7 @@ export const MsgCreateStableswapPool = {
   fromSDK(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
     return {
       sender: object?.sender,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
       futurePoolGovernor: object?.future_pool_governor

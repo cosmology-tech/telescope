@@ -181,7 +181,7 @@ export const MsgGrant = {
     return {
       granter: object?.granter,
       grantee: object?.grantee,
-      grant: isSet(object.grant) ? Grant.fromSDK(object.grant) : undefined
+      grant: object.grant ? Grant.fromSDK(object.grant) : undefined
     };
   },
 

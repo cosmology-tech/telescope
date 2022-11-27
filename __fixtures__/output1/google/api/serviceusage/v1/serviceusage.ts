@@ -22,26 +22,7 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   CHECK = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Enum to determine if service usage should be checked when disabling a
- * service.
- */
-export enum DisableServiceRequest_CheckIfServiceHasUsageSDKType {
-  /** CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED - When unset, the default behavior is used, which is SKIP. */
-  CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0,
-
-  /** SKIP - If set, skip checking service usage when disabling a service. */
-  SKIP = 1,
-
-  /**
-   * CHECK - If set, service usage is checked when disabling the service. If a
-   * service, or its dependents, has usage in the last 30 days, the request
-   * returns a FAILED_PRECONDITION error.
-   */
-  CHECK = 2,
-  UNRECOGNIZED = -1,
-}
+export const DisableServiceRequest_CheckIfServiceHasUsageSDKType = DisableServiceRequest_CheckIfServiceHasUsage;
 export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
     case 0:
@@ -184,7 +165,7 @@ export interface DisableServiceRequestSDKType {
   disable_dependent_services: boolean;
 
   /** Defines the behavior for checking service usage when disabling a service. */
-  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsageSDKType;
+  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 
 /**
@@ -603,7 +584,7 @@ export const EnableServiceResponse = {
 
   fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
     return {
-      service: isSet(object.service) ? Service.fromSDK(object.service) : undefined
+      service: object.service ? Service.fromSDK(object.service) : undefined
     };
   },
 
@@ -769,7 +750,7 @@ export const DisableServiceResponse = {
 
   fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {
     return {
-      service: isSet(object.service) ? Service.fromSDK(object.service) : undefined
+      service: object.service ? Service.fromSDK(object.service) : undefined
     };
   },
 

@@ -470,7 +470,7 @@ export const PoolToGauge = {
     return {
       poolId: object?.pool_id,
       gaugeId: object?.gauge_id,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 

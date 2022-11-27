@@ -41,43 +41,7 @@ export enum Type_PrimitiveType {
   BYTES = 6,
   UNRECOGNIZED = -1,
 }
-
-/** CEL primitive types. */
-export enum Type_PrimitiveTypeSDKType {
-  /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
-  PRIMITIVE_TYPE_UNSPECIFIED = 0,
-
-  /** BOOL - Boolean type. */
-  BOOL = 1,
-
-  /**
-   * INT64 - Int64 type.
-   * 
-   * Proto-based integer values are widened to int64.
-   */
-  INT64 = 2,
-
-  /**
-   * UINT64 - Uint64 type.
-   * 
-   * Proto-based unsigned integer values are widened to uint64.
-   */
-  UINT64 = 3,
-
-  /**
-   * DOUBLE - Double type.
-   * 
-   * Proto-based float values are widened to double values.
-   */
-  DOUBLE = 4,
-
-  /** STRING - String type. */
-  STRING = 5,
-
-  /** BYTES - Bytes type. */
-  BYTES = 6,
-  UNRECOGNIZED = -1,
-}
+export const Type_PrimitiveTypeSDKType = Type_PrimitiveType;
 export function type_PrimitiveTypeFromJSON(object: any): Type_PrimitiveType {
   switch (object) {
     case 0:
@@ -164,28 +128,7 @@ export enum Type_WellKnownType {
   DURATION = 3,
   UNRECOGNIZED = -1,
 }
-
-/** Well-known protobuf types treated with first-class support in CEL. */
-export enum Type_WellKnownTypeSDKType {
-  /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
-  WELL_KNOWN_TYPE_UNSPECIFIED = 0,
-
-  /**
-   * ANY - Well-known protobuf.Any type.
-   * 
-   * Any types are a polymorphic message type. During type-checking they are
-   * treated like `DYN` types, but at runtime they are resolved to a specific
-   * message type specified at evaluation time.
-   */
-  ANY = 1,
-
-  /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */
-  TIMESTAMP = 2,
-
-  /** DURATION - Well-known protobuf.Duration type, internally referenced as `duration`. */
-  DURATION = 3,
-  UNRECOGNIZED = -1,
-}
+export const Type_WellKnownTypeSDKType = Type_WellKnownType;
 export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
   switch (object) {
     case 0:
@@ -432,16 +375,16 @@ export interface TypeSDKType {
   dyn?: EmptySDKType;
 
   /** Null value. */
-  null?: NullValueSDKType;
+  null?: NullValue;
 
   /** Primitive types: `true`, `1u`, `-2.0`, `'string'`, `b'bytes'`. */
-  primitive?: Type_PrimitiveTypeSDKType;
+  primitive?: Type_PrimitiveType;
 
   /** Wrapper of a primitive type, e.g. `google.protobuf.Int64Value`. */
-  wrapper?: Type_PrimitiveTypeSDKType;
+  wrapper?: Type_PrimitiveType;
 
   /** Well-known protobuf type such as `google.protobuf.Timestamp`. */
-  well_known?: Type_WellKnownTypeSDKType;
+  well_known?: Type_WellKnownType;
 
   /** Parameterized list with elements of `list_type`, e.g. `list<timestamp>`. */
   list_type?: Type_ListTypeSDKType;
@@ -920,7 +863,7 @@ export const CheckedExpr_ReferenceMapEntry = {
   fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
     return {
       key: object?.key,
-      value: isSet(object.value) ? Reference.fromSDK(object.value) : undefined
+      value: object.value ? Reference.fromSDK(object.value) : undefined
     };
   },
 
@@ -1003,7 +946,7 @@ export const CheckedExpr_TypeMapEntry = {
   fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
     return {
       key: object?.key,
-      value: isSet(object.value) ? Type.fromSDK(object.value) : undefined
+      value: object.value ? Type.fromSDK(object.value) : undefined
     };
   },
 
@@ -1188,9 +1131,9 @@ export const CheckedExpr = {
         acc[Number(key)] = Type.fromSDK(value);
         return acc;
       }, {}) : {},
-      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
       exprVersion: object?.expr_version,
-      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
+      expr: object.expr ? Expr.fromSDK(object.expr) : undefined
     };
   },
 
@@ -1421,19 +1364,19 @@ export const Type = {
 
   fromSDK(object: TypeSDKType): Type {
     return {
-      dyn: isSet(object.dyn) ? Empty.fromSDK(object.dyn) : undefined,
+      dyn: object.dyn ? Empty.fromSDK(object.dyn) : undefined,
       null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
       primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
       wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
       wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      listType: isSet(object.list_type) ? Type_ListType.fromSDK(object.list_type) : undefined,
-      mapType: isSet(object.map_type) ? Type_MapType.fromSDK(object.map_type) : undefined,
-      function: isSet(object.function) ? Type_FunctionType.fromSDK(object.function) : undefined,
+      listType: object.list_type ? Type_ListType.fromSDK(object.list_type) : undefined,
+      mapType: object.map_type ? Type_MapType.fromSDK(object.map_type) : undefined,
+      function: object.function ? Type_FunctionType.fromSDK(object.function) : undefined,
       messageType: object?.message_type,
       typeParam: object?.type_param,
-      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
-      error: isSet(object.error) ? Empty.fromSDK(object.error) : undefined,
-      abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
+      type: object.type ? Type.fromSDK(object.type) : undefined,
+      error: object.error ? Empty.fromSDK(object.error) : undefined,
+      abstractType: object.abstract_type ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
     };
   },
 
@@ -1514,7 +1457,7 @@ export const Type_ListType = {
 
   fromSDK(object: Type_ListTypeSDKType): Type_ListType {
     return {
-      elemType: isSet(object.elem_type) ? Type.fromSDK(object.elem_type) : undefined
+      elemType: object.elem_type ? Type.fromSDK(object.elem_type) : undefined
     };
   },
 
@@ -1595,8 +1538,8 @@ export const Type_MapType = {
 
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
     return {
-      keyType: isSet(object.key_type) ? Type.fromSDK(object.key_type) : undefined,
-      valueType: isSet(object.value_type) ? Type.fromSDK(object.value_type) : undefined
+      keyType: object.key_type ? Type.fromSDK(object.key_type) : undefined,
+      valueType: object.value_type ? Type.fromSDK(object.value_type) : undefined
     };
   },
 
@@ -1684,7 +1627,7 @@ export const Type_FunctionType = {
 
   fromSDK(object: Type_FunctionTypeSDKType): Type_FunctionType {
     return {
-      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
       argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDK(e)) : []
     };
   },
@@ -1881,8 +1824,8 @@ export const Decl = {
   fromSDK(object: DeclSDKType): Decl {
     return {
       name: object?.name,
-      ident: isSet(object.ident) ? Decl_IdentDecl.fromSDK(object.ident) : undefined,
-      function: isSet(object.function) ? Decl_FunctionDecl.fromSDK(object.function) : undefined
+      ident: object.ident ? Decl_IdentDecl.fromSDK(object.ident) : undefined,
+      function: object.function ? Decl_FunctionDecl.fromSDK(object.function) : undefined
     };
   },
 
@@ -1977,8 +1920,8 @@ export const Decl_IdentDecl = {
 
   fromSDK(object: Decl_IdentDeclSDKType): Decl_IdentDecl {
     return {
-      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
-      value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined,
+      type: object.type ? Type.fromSDK(object.type) : undefined,
+      value: object.value ? Constant.fromSDK(object.value) : undefined,
       doc: object?.doc
     };
   },
@@ -2205,7 +2148,7 @@ export const Decl_FunctionDecl_Overload = {
       overloadId: object?.overload_id,
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
-      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      resultType: object.result_type ? Type.fromSDK(object.result_type) : undefined,
       isInstanceFunction: object?.is_instance_function,
       doc: object?.doc
     };
@@ -2324,7 +2267,7 @@ export const Reference = {
     return {
       name: object?.name,
       overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
-      value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined
+      value: object.value ? Constant.fromSDK(object.value) : undefined
     };
   },
 

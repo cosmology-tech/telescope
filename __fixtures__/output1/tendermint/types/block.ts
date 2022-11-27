@@ -109,10 +109,10 @@ export const Block = {
 
   fromSDK(object: BlockSDKType): Block {
     return {
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      data: isSet(object.data) ? Data.fromSDK(object.data) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceList.fromSDK(object.evidence) : undefined,
-      lastCommit: isSet(object.last_commit) ? Commit.fromSDK(object.last_commit) : undefined
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      data: object.data ? Data.fromSDK(object.data) : undefined,
+      evidence: object.evidence ? EvidenceList.fromSDK(object.evidence) : undefined,
+      lastCommit: object.last_commit ? Commit.fromSDK(object.last_commit) : undefined
     };
   },
 

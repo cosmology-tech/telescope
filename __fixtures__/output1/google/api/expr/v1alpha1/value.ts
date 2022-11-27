@@ -56,7 +56,7 @@ export interface Value {
  */
 export interface ValueSDKType {
   /** Null value. */
-  null_value?: NullValueSDKType;
+  null_value?: NullValue;
 
   /** Boolean value. */
   bool_value?: boolean;
@@ -388,10 +388,10 @@ export const Value = {
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
-      enumValue: isSet(object.enum_value) ? EnumValue.fromSDK(object.enum_value) : undefined,
-      objectValue: isSet(object.object_value) ? Any.fromSDK(object.object_value) : undefined,
-      mapValue: isSet(object.map_value) ? MapValue.fromSDK(object.map_value) : undefined,
-      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined,
+      enumValue: object.enum_value ? EnumValue.fromSDK(object.enum_value) : undefined,
+      objectValue: object.object_value ? Any.fromSDK(object.object_value) : undefined,
+      mapValue: object.map_value ? MapValue.fromSDK(object.map_value) : undefined,
+      listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined,
       typeValue: object?.type_value
     };
   },
@@ -729,8 +729,8 @@ export const MapValue_Entry = {
 
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {
     return {
-      key: isSet(object.key) ? Value.fromSDK(object.key) : undefined,
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+      key: object.key ? Value.fromSDK(object.key) : undefined,
+      value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
 

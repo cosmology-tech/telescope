@@ -97,7 +97,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : []
     };
   },

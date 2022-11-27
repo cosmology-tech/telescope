@@ -580,8 +580,8 @@ export const Distribution = {
       count: object?.count,
       mean: object?.mean,
       sumOfSquaredDeviation: object?.sum_of_squared_deviation,
-      range: isSet(object.range) ? Distribution_Range.fromSDK(object.range) : undefined,
-      bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
+      range: object.range ? Distribution_Range.fromSDK(object.range) : undefined,
+      bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
     };
@@ -776,9 +776,9 @@ export const Distribution_BucketOptions = {
 
   fromSDK(object: Distribution_BucketOptionsSDKType): Distribution_BucketOptions {
     return {
-      linearBuckets: isSet(object.linear_buckets) ? Distribution_BucketOptions_Linear.fromSDK(object.linear_buckets) : undefined,
-      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_BucketOptions_Exponential.fromSDK(object.exponential_buckets) : undefined,
-      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_BucketOptions_Explicit.fromSDK(object.explicit_buckets) : undefined
+      linearBuckets: object.linear_buckets ? Distribution_BucketOptions_Linear.fromSDK(object.linear_buckets) : undefined,
+      exponentialBuckets: object.exponential_buckets ? Distribution_BucketOptions_Exponential.fromSDK(object.exponential_buckets) : undefined,
+      explicitBuckets: object.explicit_buckets ? Distribution_BucketOptions_Explicit.fromSDK(object.explicit_buckets) : undefined
     };
   },
 
@@ -1167,7 +1167,7 @@ export const Distribution_Exemplar = {
   fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
     return {
       value: object?.value,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
     };
   },

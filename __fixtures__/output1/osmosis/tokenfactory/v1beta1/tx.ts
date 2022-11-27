@@ -380,7 +380,7 @@ export const MsgMint = {
   fromSDK(object: MsgMintSDKType): MsgMint {
     return {
       sender: object?.sender,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -515,7 +515,7 @@ export const MsgBurn = {
   fromSDK(object: MsgBurnSDKType): MsgBurn {
     return {
       sender: object?.sender,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -799,7 +799,7 @@ export const MsgSetDenomMetadata = {
   fromSDK(object: MsgSetDenomMetadataSDKType): MsgSetDenomMetadata {
     return {
       sender: object?.sender,
-      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+      metadata: object.metadata ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
 

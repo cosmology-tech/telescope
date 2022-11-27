@@ -544,7 +544,7 @@ export const QueryGroupInfoResponse = {
 
   fromSDK(object: QueryGroupInfoResponseSDKType): QueryGroupInfoResponse {
     return {
-      info: isSet(object.info) ? GroupInfo.fromSDK(object.info) : undefined
+      info: object.info ? GroupInfo.fromSDK(object.info) : undefined
     };
   },
 
@@ -682,7 +682,7 @@ export const QueryGroupPolicyInfoResponse = {
 
   fromSDK(object: QueryGroupPolicyInfoResponseSDKType): QueryGroupPolicyInfoResponse {
     return {
-      info: isSet(object.info) ? GroupPolicyInfo.fromSDK(object.info) : undefined
+      info: object.info ? GroupPolicyInfo.fromSDK(object.info) : undefined
     };
   },
 
@@ -764,7 +764,7 @@ export const QueryGroupMembersRequest = {
   fromSDK(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
     return {
       groupId: object?.group_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -853,7 +853,7 @@ export const QueryGroupMembersResponse = {
   fromSDK(object: QueryGroupMembersResponseSDKType): QueryGroupMembersResponse {
     return {
       members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -942,7 +942,7 @@ export const QueryGroupsByAdminRequest = {
   fromSDK(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
     return {
       admin: object?.admin,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1031,7 +1031,7 @@ export const QueryGroupsByAdminResponse = {
   fromSDK(object: QueryGroupsByAdminResponseSDKType): QueryGroupsByAdminResponse {
     return {
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1120,7 +1120,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   fromSDK(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
     return {
       groupId: object?.group_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1209,7 +1209,7 @@ export const QueryGroupPoliciesByGroupResponse = {
   fromSDK(object: QueryGroupPoliciesByGroupResponseSDKType): QueryGroupPoliciesByGroupResponse {
     return {
       groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1298,7 +1298,7 @@ export const QueryGroupPoliciesByAdminRequest = {
   fromSDK(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
     return {
       admin: object?.admin,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1387,7 +1387,7 @@ export const QueryGroupPoliciesByAdminResponse = {
   fromSDK(object: QueryGroupPoliciesByAdminResponseSDKType): QueryGroupPoliciesByAdminResponse {
     return {
       groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1532,7 +1532,7 @@ export const QueryProposalResponse = {
 
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
     return {
-      proposal: isSet(object.proposal) ? Proposal.fromSDK(object.proposal) : undefined
+      proposal: object.proposal ? Proposal.fromSDK(object.proposal) : undefined
     };
   },
 
@@ -1614,7 +1614,7 @@ export const QueryProposalsByGroupPolicyRequest = {
   fromSDK(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
     return {
       address: object?.address,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1703,7 +1703,7 @@ export const QueryProposalsByGroupPolicyResponse = {
   fromSDK(object: QueryProposalsByGroupPolicyResponseSDKType): QueryProposalsByGroupPolicyResponse {
     return {
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1862,7 +1862,7 @@ export const QueryVoteByProposalVoterResponse = {
 
   fromSDK(object: QueryVoteByProposalVoterResponseSDKType): QueryVoteByProposalVoterResponse {
     return {
-      vote: isSet(object.vote) ? Vote.fromSDK(object.vote) : undefined
+      vote: object.vote ? Vote.fromSDK(object.vote) : undefined
     };
   },
 
@@ -1944,7 +1944,7 @@ export const QueryVotesByProposalRequest = {
   fromSDK(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
     return {
       proposalId: object?.proposal_id,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2033,7 +2033,7 @@ export const QueryVotesByProposalResponse = {
   fromSDK(object: QueryVotesByProposalResponseSDKType): QueryVotesByProposalResponse {
     return {
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2122,7 +2122,7 @@ export const QueryVotesByVoterRequest = {
   fromSDK(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
     return {
       voter: object?.voter,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2211,7 +2211,7 @@ export const QueryVotesByVoterResponse = {
   fromSDK(object: QueryVotesByVoterResponseSDKType): QueryVotesByVoterResponse {
     return {
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2300,7 +2300,7 @@ export const QueryGroupsByMemberRequest = {
   fromSDK(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
     return {
       address: object?.address,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2389,7 +2389,7 @@ export const QueryGroupsByMemberResponse = {
   fromSDK(object: QueryGroupsByMemberResponseSDKType): QueryGroupsByMemberResponse {
     return {
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -2534,7 +2534,7 @@ export const QueryTallyResultResponse = {
 
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
     return {
-      tally: isSet(object.tally) ? TallyResult.fromSDK(object.tally) : undefined
+      tally: object.tally ? TallyResult.fromSDK(object.tally) : undefined
     };
   },
 

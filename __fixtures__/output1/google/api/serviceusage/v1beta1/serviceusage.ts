@@ -16,19 +16,7 @@ export enum GetServiceIdentityResponse_IdentityState {
   ACTIVE = 1,
   UNRECOGNIZED = -1,
 }
-
-/** Enum for service identity state. */
-export enum GetServiceIdentityResponse_IdentityStateSDKType {
-  /**
-   * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
-   * omitted.
-   */
-  IDENTITY_STATE_UNSPECIFIED = 0,
-
-  /** ACTIVE - Service identity has been created and can be used. */
-  ACTIVE = 1,
-  UNRECOGNIZED = -1,
-}
+export const GetServiceIdentityResponse_IdentityStateSDKType = GetServiceIdentityResponse_IdentityState;
 export function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
   switch (object) {
     case 0:
@@ -344,7 +332,7 @@ export interface ListConsumerQuotaMetricsRequestSDKType {
   page_token: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaViewSDKType;
+  view: QuotaView;
 }
 
 /** Response message for ListConsumerQuotaMetrics */
@@ -396,7 +384,7 @@ export interface GetConsumerQuotaMetricRequestSDKType {
   name: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaViewSDKType;
+  view: QuotaView;
 }
 
 /** Request message for GetConsumerQuotaLimit */
@@ -424,7 +412,7 @@ export interface GetConsumerQuotaLimitRequestSDKType {
   name: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaViewSDKType;
+  view: QuotaView;
 }
 
 /** Request message for CreateAdminOverride. */
@@ -484,7 +472,7 @@ export interface CreateAdminOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for UpdateAdminOverride. */
@@ -560,7 +548,7 @@ export interface UpdateAdminOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for DeleteAdminOverride. */
@@ -612,7 +600,7 @@ export interface DeleteAdminOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for ListAdminOverrides */
@@ -748,7 +736,7 @@ export interface ImportAdminOverridesRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Response message for ImportAdminOverrides */
@@ -834,7 +822,7 @@ export interface CreateConsumerOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for UpdateConsumerOverride. */
@@ -910,7 +898,7 @@ export interface UpdateConsumerOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for DeleteConsumerOverride. */
@@ -962,7 +950,7 @@ export interface DeleteConsumerOverrideRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Request message for ListConsumerOverrides */
@@ -1098,7 +1086,7 @@ export interface ImportConsumerOverridesRequestSDKType {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheckSDKType[];
+  force_only: QuotaSafetyCheck[];
 }
 
 /** Response message for ImportConsumerOverrides */
@@ -1246,7 +1234,7 @@ export interface GetServiceIdentityResponseSDKType {
   identity?: ServiceIdentitySDKType;
 
   /** Service identity state. */
-  state: GetServiceIdentityResponse_IdentityStateSDKType;
+  state: GetServiceIdentityResponse_IdentityState;
 }
 
 /** Metadata for the `GetServiceIdentity` method. */
@@ -2247,7 +2235,7 @@ export const CreateAdminOverrideRequest = {
   fromSDK(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
     return {
       parent: object?.parent,
-      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -2394,9 +2382,9 @@ export const UpdateAdminOverrideRequest = {
   fromSDK(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
     return {
       name: object?.name,
-      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -2925,7 +2913,7 @@ export const ImportAdminOverridesRequest = {
   fromSDK(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
     return {
       parent: object?.parent,
-      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      inlineSource: object.inline_source ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -3193,7 +3181,7 @@ export const CreateConsumerOverrideRequest = {
   fromSDK(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
     return {
       parent: object?.parent,
-      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -3340,9 +3328,9 @@ export const UpdateConsumerOverrideRequest = {
   fromSDK(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
     return {
       name: object?.name,
-      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
       force: object?.force,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -3871,7 +3859,7 @@ export const ImportConsumerOverridesRequest = {
   fromSDK(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
     return {
       parent: object?.parent,
-      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      inlineSource: object.inline_source ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
       force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -4454,7 +4442,7 @@ export const GetServiceIdentityResponse = {
 
   fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
     return {
-      identity: isSet(object.identity) ? ServiceIdentity.fromSDK(object.identity) : undefined,
+      identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
       state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
     };
   },

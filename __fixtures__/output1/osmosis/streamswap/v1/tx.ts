@@ -364,10 +364,10 @@ export const MsgCreateSale = {
     return {
       creator: object?.creator,
       tokenIn: object?.token_in,
-      tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined,
+      tokenOut: object.token_out ? Coin.fromSDK(object.token_out) : undefined,
       maxFee: Array.isArray(object?.max_fee) ? object.max_fee.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       recipient: object?.recipient,
       name: object?.name,
       url: object?.url

@@ -46,7 +46,7 @@ export interface MsgVote {
 export interface MsgVoteSDKType {
   proposal_id: Long;
   voter: string;
-  option: VoteOptionSDKType;
+  option: VoteOption;
 }
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
@@ -198,7 +198,7 @@ export const MsgSubmitProposal = {
 
   fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
     return {
-      content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
+      content: object.content ? Any.fromSDK(object.content) : undefined,
       initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
       proposer: object?.proposer
     };

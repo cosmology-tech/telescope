@@ -175,7 +175,7 @@ export const QueryAccountsRequest = {
       xid: object?.xid,
       owner: object?.owner,
       state: object?.state,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -267,7 +267,7 @@ export const QueryAccountsResponse = {
   fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -408,7 +408,7 @@ export const QueryPaymentsRequest = {
       id: object?.id,
       owner: object?.owner,
       state: object?.state,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -501,7 +501,7 @@ export const QueryPaymentsResponse = {
   fromSDK(object: QueryPaymentsResponseSDKType): QueryPaymentsResponse {
     return {
       payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

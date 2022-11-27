@@ -104,7 +104,7 @@ export const GenesisDeployment = {
 
   fromSDK(object: GenesisDeploymentSDKType): GenesisDeployment {
     return {
-      deployment: isSet(object.deployment) ? Deployment.fromSDK(object.deployment) : undefined,
+      deployment: object.deployment ? Deployment.fromSDK(object.deployment) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : []
     };
   },
@@ -200,7 +200,7 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDK(e)) : [],
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

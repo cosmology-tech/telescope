@@ -90,7 +90,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -172,7 +172,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       enableRecovery: object?.enable_recovery,
-      packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromSDK(object.packet_timeout_duration) : undefined
+      packetTimeoutDuration: object.packet_timeout_duration ? Duration.fromSDK(object.packet_timeout_duration) : undefined
     };
   },
 

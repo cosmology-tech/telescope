@@ -104,7 +104,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       pruneEpochIdentifier: object?.prune_epoch_identifier,
-      recordHistoryKeepPeriod: isSet(object.record_history_keep_period) ? Duration.fromSDK(object.record_history_keep_period) : undefined
+      recordHistoryKeepPeriod: object.record_history_keep_period ? Duration.fromSDK(object.record_history_keep_period) : undefined
     };
   },
 
@@ -193,7 +193,7 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromSDK(e)) : [],
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

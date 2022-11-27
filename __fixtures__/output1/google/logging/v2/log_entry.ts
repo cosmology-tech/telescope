@@ -259,7 +259,7 @@ export interface LogEntrySDKType {
   receive_timestamp?: Date;
 
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
-  severity: LogSeveritySDKType;
+  severity: LogSeverity;
 
   /**
    * Optional. A unique identifier for the log entry. If you provide a value, then
@@ -861,27 +861,27 @@ export const LogEntry = {
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
       logName: object?.log_name,
-      resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
-      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      resource: object.resource ? MonitoredResource.fromSDK(object.resource) : undefined,
+      protoPayload: object.proto_payload ? Any.fromSDK(object.proto_payload) : undefined,
       textPayload: object?.text_payload,
-      jsonPayload: isSet(object.json_payload) ? Struct.fromSDK(object.json_payload) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      receiveTimestamp: isSet(object.receive_timestamp) ? Timestamp.fromSDK(object.receive_timestamp) : undefined,
+      jsonPayload: object.json_payload ? Struct.fromSDK(object.json_payload) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      receiveTimestamp: object.receive_timestamp ? Timestamp.fromSDK(object.receive_timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       insertId: object?.insert_id,
-      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      operation: object.operation ? LogEntryOperation.fromSDK(object.operation) : undefined,
       trace: object?.trace,
       spanId: object?.span_id,
       traceSampled: object?.trace_sampled,
-      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined,
-      split: isSet(object.split) ? LogSplit.fromSDK(object.split) : undefined
+      sourceLocation: object.source_location ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined,
+      split: object.split ? LogSplit.fromSDK(object.split) : undefined
     };
   },
 

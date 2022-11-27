@@ -509,7 +509,7 @@ export interface Literal {
  */
 export interface LiteralSDKType {
   /** null value. */
-  null_value?: NullValueSDKType;
+  null_value?: NullValue;
 
   /** boolean value. */
   bool_value?: boolean;
@@ -611,8 +611,8 @@ export const ParsedExpr = {
 
   fromSDK(object: ParsedExprSDKType): ParsedExpr {
     return {
-      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined,
-      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      expr: object.expr ? Expr.fromSDK(object.expr) : undefined,
+      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
       syntaxVersion: object?.syntax_version
     };
   },
@@ -769,13 +769,13 @@ export const Expr = {
   fromSDK(object: ExprSDKType): Expr {
     return {
       id: object?.id,
-      literalExpr: isSet(object.literal_expr) ? Literal.fromSDK(object.literal_expr) : undefined,
-      identExpr: isSet(object.ident_expr) ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
-      selectExpr: isSet(object.select_expr) ? Expr_Select.fromSDK(object.select_expr) : undefined,
-      callExpr: isSet(object.call_expr) ? Expr_Call.fromSDK(object.call_expr) : undefined,
-      listExpr: isSet(object.list_expr) ? Expr_CreateList.fromSDK(object.list_expr) : undefined,
-      structExpr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDK(object.struct_expr) : undefined,
-      comprehensionExpr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDK(object.comprehension_expr) : undefined
+      literalExpr: object.literal_expr ? Literal.fromSDK(object.literal_expr) : undefined,
+      identExpr: object.ident_expr ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
+      selectExpr: object.select_expr ? Expr_Select.fromSDK(object.select_expr) : undefined,
+      callExpr: object.call_expr ? Expr_Call.fromSDK(object.call_expr) : undefined,
+      listExpr: object.list_expr ? Expr_CreateList.fromSDK(object.list_expr) : undefined,
+      structExpr: object.struct_expr ? Expr_CreateStruct.fromSDK(object.struct_expr) : undefined,
+      comprehensionExpr: object.comprehension_expr ? Expr_Comprehension.fromSDK(object.comprehension_expr) : undefined
     };
   },
 
@@ -944,7 +944,7 @@ export const Expr_Select = {
 
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
     return {
-      operand: isSet(object.operand) ? Expr.fromSDK(object.operand) : undefined,
+      operand: object.operand ? Expr.fromSDK(object.operand) : undefined,
       field: object?.field,
       testOnly: object?.test_only
     };
@@ -1047,7 +1047,7 @@ export const Expr_Call = {
 
   fromSDK(object: Expr_CallSDKType): Expr_Call {
     return {
-      target: isSet(object.target) ? Expr.fromSDK(object.target) : undefined,
+      target: object.target ? Expr.fromSDK(object.target) : undefined,
       function: object?.function,
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
     };
@@ -1340,8 +1340,8 @@ export const Expr_CreateStruct_Entry = {
     return {
       id: object?.id,
       fieldKey: object?.field_key,
-      mapKey: isSet(object.map_key) ? Expr.fromSDK(object.map_key) : undefined,
-      value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
+      mapKey: object.map_key ? Expr.fromSDK(object.map_key) : undefined,
+      value: object.value ? Expr.fromSDK(object.value) : undefined
     };
   },
 
@@ -1486,12 +1486,12 @@ export const Expr_Comprehension = {
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
     return {
       iterVar: object?.iter_var,
-      iterRange: isSet(object.iter_range) ? Expr.fromSDK(object.iter_range) : undefined,
+      iterRange: object.iter_range ? Expr.fromSDK(object.iter_range) : undefined,
       accuVar: object?.accu_var,
-      accuInit: isSet(object.accu_init) ? Expr.fromSDK(object.accu_init) : undefined,
-      loopCondition: isSet(object.loop_condition) ? Expr.fromSDK(object.loop_condition) : undefined,
-      loopStep: isSet(object.loop_step) ? Expr.fromSDK(object.loop_step) : undefined,
-      result: isSet(object.result) ? Expr.fromSDK(object.result) : undefined
+      accuInit: object.accu_init ? Expr.fromSDK(object.accu_init) : undefined,
+      loopCondition: object.loop_condition ? Expr.fromSDK(object.loop_condition) : undefined,
+      loopStep: object.loop_step ? Expr.fromSDK(object.loop_step) : undefined,
+      result: object.result ? Expr.fromSDK(object.result) : undefined
     };
   },
 
