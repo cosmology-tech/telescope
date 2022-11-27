@@ -1,10 +1,7 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
 import { BILLION, callExpression, identifier, memberExpressionOrIdentifierAminoCaseField } from '../../../utils';
-import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
-
-// TODO remove this...
-import { camel } from 'case';
+import { getFieldNames } from '../../types';
 
 export const fromAminoJSON = {
 
@@ -190,7 +187,7 @@ export const fromAminoJSON = {
                                 t.callExpression(
                                     t.identifier('parseInt'),
                                     [
-                                        memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                                        t.identifier(args.field.options['(telescope:orig)'])
                                     ]
                                 ),
                                 BILLION
@@ -205,7 +202,7 @@ export const fromAminoJSON = {
                         t.callExpression(
                             t.identifier('parseInt'),
                             [
-                                memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                                t.identifier(args.field.options['(telescope:orig)'])
                             ]
                         ),
                         BILLION
