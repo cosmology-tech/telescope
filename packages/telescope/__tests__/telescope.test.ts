@@ -49,8 +49,8 @@ const options: TelescopeOptions = {
       fromPartial: true,
       toSDK: true,
       fromSDK: true,
-      toAmino: false,
-      fromAmino: false
+      toAmino: true,
+      fromAmino: true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
