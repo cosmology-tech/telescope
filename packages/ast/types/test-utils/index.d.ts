@@ -26,8 +26,6 @@ export declare const defaultTelescopeOptions: {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
-            toAmino?: boolean;
-            fromAmino?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
