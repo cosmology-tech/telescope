@@ -796,20 +796,6 @@ export const ParsedExpr = {
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ParsedExprSDKType): ParsedExpr {
-    return {
-      expr: isSet(object.expr) ? Expr.fromAmino(object.expr) : undefined,
-      sourceInfo: isSet(object.source_info) ? SourceInfo.fromAmino(object.source_info) : undefined
-    };
-  },
-
-  toAmino(message: ParsedExpr): ParsedExprSDKType {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined);
-    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined);
-    return obj;
   }
 
 };
@@ -955,7 +941,7 @@ export const Expr = {
 
   fromSDK(object: ExprSDKType): Expr {
     return {
-      id: isSet(object.id) ? object.id : undefined,
+      id: object?.id,
       constExpr: isSet(object.const_expr) ? Constant.fromSDK(object.const_expr) : undefined,
       identExpr: isSet(object.ident_expr) ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
       selectExpr: isSet(object.select_expr) ? Expr_Select.fromSDK(object.select_expr) : undefined,
@@ -968,7 +954,7 @@ export const Expr = {
 
   toSDK(message: Expr): ExprSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    obj.id = message.id;
     message.constExpr !== undefined && (obj.const_expr = message.constExpr ? Constant.toSDK(message.constExpr) : undefined);
     message.identExpr !== undefined && (obj.ident_expr = message.identExpr ? Expr_Ident.toSDK(message.identExpr) : undefined);
     message.selectExpr !== undefined && (obj.select_expr = message.selectExpr ? Expr_Select.toSDK(message.selectExpr) : undefined);
@@ -976,32 +962,6 @@ export const Expr = {
     message.listExpr !== undefined && (obj.list_expr = message.listExpr ? Expr_CreateList.toSDK(message.listExpr) : undefined);
     message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toSDK(message.structExpr) : undefined);
     message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ExprSDKType): Expr {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      constExpr: isSet(object.const_expr) ? Constant.fromAmino(object.const_expr) : undefined,
-      identExpr: isSet(object.ident_expr) ? Expr_Ident.fromAmino(object.ident_expr) : undefined,
-      selectExpr: isSet(object.select_expr) ? Expr_Select.fromAmino(object.select_expr) : undefined,
-      callExpr: isSet(object.call_expr) ? Expr_Call.fromAmino(object.call_expr) : undefined,
-      listExpr: isSet(object.list_expr) ? Expr_CreateList.fromAmino(object.list_expr) : undefined,
-      structExpr: isSet(object.struct_expr) ? Expr_CreateStruct.fromAmino(object.struct_expr) : undefined,
-      comprehensionExpr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromAmino(object.comprehension_expr) : undefined
-    };
-  },
-
-  toAmino(message: Expr): ExprSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.constExpr !== undefined && (obj.const_expr = message.constExpr ? Constant.toAmino(message.constExpr) : undefined);
-    message.identExpr !== undefined && (obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined);
-    message.selectExpr !== undefined && (obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined);
-    message.callExpr !== undefined && (obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr) : undefined);
-    message.listExpr !== undefined && (obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr) : undefined);
-    message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined);
-    message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined);
     return obj;
   }
 
@@ -1064,25 +1024,13 @@ export const Expr_Ident = {
 
   fromSDK(object: Expr_IdentSDKType): Expr_Ident {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: Expr_Ident): Expr_IdentSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: Expr_IdentSDKType): Expr_Ident {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: Expr_Ident): Expr_IdentSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -1170,32 +1118,16 @@ export const Expr_Select = {
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
     return {
       operand: isSet(object.operand) ? Expr.fromSDK(object.operand) : undefined,
-      field: isSet(object.field) ? object.field : undefined,
-      testOnly: isSet(object.test_only) ? object.test_only : undefined
+      field: object?.field,
+      testOnly: object?.test_only
     };
   },
 
   toSDK(message: Expr_Select): Expr_SelectSDKType {
     const obj: any = {};
     message.operand !== undefined && (obj.operand = message.operand ? Expr.toSDK(message.operand) : undefined);
-    message.field !== undefined && (obj.field = message.field);
-    message.testOnly !== undefined && (obj.test_only = message.testOnly);
-    return obj;
-  },
-
-  fromAmino(object: Expr_SelectSDKType): Expr_Select {
-    return {
-      operand: isSet(object.operand) ? Expr.fromAmino(object.operand) : undefined,
-      field: isSet(object.field) ? object.field : undefined,
-      testOnly: isSet(object.test_only) ? object.test_only : undefined
-    };
-  },
-
-  toAmino(message: Expr_Select): Expr_SelectSDKType {
-    const obj: any = {};
-    message.operand !== undefined && (obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined);
-    message.field !== undefined && (obj.field = message.field);
-    message.testOnly !== undefined && (obj.test_only = message.testOnly);
+    obj.field = message.field;
+    obj.test_only = message.testOnly;
     return obj;
   }
 
@@ -1289,7 +1221,7 @@ export const Expr_Call = {
   fromSDK(object: Expr_CallSDKType): Expr_Call {
     return {
       target: isSet(object.target) ? Expr.fromSDK(object.target) : undefined,
-      function: isSet(object.function) ? object.function : undefined,
+      function: object?.function,
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
     };
   },
@@ -1297,32 +1229,10 @@ export const Expr_Call = {
   toSDK(message: Expr_Call): Expr_CallSDKType {
     const obj: any = {};
     message.target !== undefined && (obj.target = message.target ? Expr.toSDK(message.target) : undefined);
-    message.function !== undefined && (obj.function = message.function);
+    obj.function = message.function;
 
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toSDK(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: Expr_CallSDKType): Expr_Call {
-    return {
-      target: isSet(object.target) ? Expr.fromAmino(object.target) : undefined,
-      function: isSet(object.function) ? object.function : undefined,
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Expr_Call): Expr_CallSDKType {
-    const obj: any = {};
-    message.target !== undefined && (obj.target = message.target ? Expr.toAmino(message.target) : undefined);
-    message.function !== undefined && (obj.function = message.function);
-
-    if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
       obj.args = [];
     }
@@ -1409,24 +1319,6 @@ export const Expr_CreateList = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: Expr_CreateListSDKType): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Expr_CreateList): Expr_CreateListSDKType {
-    const obj: any = {};
-
-    if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
-    } else {
-      obj.elements = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1506,37 +1398,17 @@ export const Expr_CreateStruct = {
 
   fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
     return {
-      messageName: isSet(object.message_name) ? object.message_name : undefined,
+      messageName: object?.message_name,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Expr_CreateStruct): Expr_CreateStructSDKType {
     const obj: any = {};
-    message.messageName !== undefined && (obj.message_name = message.messageName);
+    obj.message_name = message.messageName;
 
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: Expr_CreateStructSDKType): Expr_CreateStruct {
-    return {
-      messageName: isSet(object.message_name) ? object.message_name : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Expr_CreateStruct): Expr_CreateStructSDKType {
-    const obj: any = {};
-    message.messageName !== undefined && (obj.message_name = message.messageName);
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -1639,8 +1511,8 @@ export const Expr_CreateStruct_Entry = {
 
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      fieldKey: isSet(object.field_key) ? object.field_key : undefined,
+      id: object?.id,
+      fieldKey: object?.field_key,
       mapKey: isSet(object.map_key) ? Expr.fromSDK(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
     };
@@ -1648,28 +1520,10 @@ export const Expr_CreateStruct_Entry = {
 
   toSDK(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntrySDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.fieldKey !== undefined && (obj.field_key = message.fieldKey);
+    obj.id = message.id;
+    obj.field_key = message.fieldKey;
     message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      fieldKey: isSet(object.field_key) ? object.field_key : undefined,
-      mapKey: isSet(object.map_key) ? Expr.fromAmino(object.map_key) : undefined,
-      value: isSet(object.value) ? Expr.fromAmino(object.value) : undefined
-    };
-  },
-
-  toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntrySDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.fieldKey !== undefined && (obj.field_key = message.fieldKey);
-    message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -1804,9 +1658,9 @@ export const Expr_Comprehension = {
 
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
     return {
-      iterVar: isSet(object.iter_var) ? object.iter_var : undefined,
+      iterVar: object?.iter_var,
       iterRange: isSet(object.iter_range) ? Expr.fromSDK(object.iter_range) : undefined,
-      accuVar: isSet(object.accu_var) ? object.accu_var : undefined,
+      accuVar: object?.accu_var,
       accuInit: isSet(object.accu_init) ? Expr.fromSDK(object.accu_init) : undefined,
       loopCondition: isSet(object.loop_condition) ? Expr.fromSDK(object.loop_condition) : undefined,
       loopStep: isSet(object.loop_step) ? Expr.fromSDK(object.loop_step) : undefined,
@@ -1816,37 +1670,13 @@ export const Expr_Comprehension = {
 
   toSDK(message: Expr_Comprehension): Expr_ComprehensionSDKType {
     const obj: any = {};
-    message.iterVar !== undefined && (obj.iter_var = message.iterVar);
+    obj.iter_var = message.iterVar;
     message.iterRange !== undefined && (obj.iter_range = message.iterRange ? Expr.toSDK(message.iterRange) : undefined);
-    message.accuVar !== undefined && (obj.accu_var = message.accuVar);
+    obj.accu_var = message.accuVar;
     message.accuInit !== undefined && (obj.accu_init = message.accuInit ? Expr.toSDK(message.accuInit) : undefined);
     message.loopCondition !== undefined && (obj.loop_condition = message.loopCondition ? Expr.toSDK(message.loopCondition) : undefined);
     message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
     message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: Expr_ComprehensionSDKType): Expr_Comprehension {
-    return {
-      iterVar: isSet(object.iter_var) ? object.iter_var : undefined,
-      iterRange: isSet(object.iter_range) ? Expr.fromAmino(object.iter_range) : undefined,
-      accuVar: isSet(object.accu_var) ? object.accu_var : undefined,
-      accuInit: isSet(object.accu_init) ? Expr.fromAmino(object.accu_init) : undefined,
-      loopCondition: isSet(object.loop_condition) ? Expr.fromAmino(object.loop_condition) : undefined,
-      loopStep: isSet(object.loop_step) ? Expr.fromAmino(object.loop_step) : undefined,
-      result: isSet(object.result) ? Expr.fromAmino(object.result) : undefined
-    };
-  },
-
-  toAmino(message: Expr_Comprehension): Expr_ComprehensionSDKType {
-    const obj: any = {};
-    message.iterVar !== undefined && (obj.iter_var = message.iterVar);
-    message.iterRange !== undefined && (obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined);
-    message.accuVar !== undefined && (obj.accu_var = message.accuVar);
-    message.accuInit !== undefined && (obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined);
-    message.loopCondition !== undefined && (obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined);
-    message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Expr.toAmino(message.result) : undefined);
     return obj;
   }
 
@@ -2006,12 +1836,12 @@ export const Constant = {
   fromSDK(object: ConstantSDKType): Constant {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      uint64Value: object?.uint64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
       durationValue: isSet(object.duration_value) ? Duration.fromSDK(object.duration_value) : undefined,
       timestampValue: isSet(object.timestamp_value) ? Timestamp.fromSDK(object.timestamp_value) : undefined
     };
@@ -2020,45 +1850,14 @@ export const Constant = {
   toSDK(message: Constant): ConstantSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.uint64_value = message.uint64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
     message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ConstantSDKType): Constant {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
-      durationValue: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      },
-      timestampValue: isSet(object.timestamp_value) ? Timestamp.fromAmino(object.timestamp_value) : undefined
-    };
-  },
-
-  toAmino(message: Constant): ConstantSDKType {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
-    message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined);
-    message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(message.timestampValue) : undefined);
     return obj;
   }
 
@@ -2133,29 +1932,15 @@ export const SourceInfo_PositionsEntry = {
 
   fromSDK(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2230,29 +2015,15 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromSDK(object: SourceInfo_MacroCallsEntrySDKType): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
+      key: object?.key,
       value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
     };
   },
 
   toSDK(message: SourceInfo_MacroCallsEntry): SourceInfo_MacroCallsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: SourceInfo_MacroCallsEntrySDKType): SourceInfo_MacroCallsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? Expr.fromAmino(object.value) : undefined
-    };
-  },
-
-  toAmino(message: SourceInfo_MacroCallsEntry): SourceInfo_MacroCallsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? Expr.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -2435,8 +2206,8 @@ export const SourceInfo = {
 
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
-      location: isSet(object.location) ? object.location : undefined,
+      syntaxVersion: object?.syntax_version,
+      location: object?.location,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: Long]: number;
@@ -2455,8 +2226,8 @@ export const SourceInfo = {
 
   toSDK(message: SourceInfo): SourceInfoSDKType {
     const obj: any = {};
-    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
-    message.location !== undefined && (obj.location = message.location);
+    obj.syntax_version = message.syntaxVersion;
+    obj.location = message.location;
 
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
@@ -2477,56 +2248,6 @@ export const SourceInfo = {
     if (message.macroCalls) {
       Object.entries(message.macroCalls).forEach(([k, v]) => {
         obj.macro_calls[k] = Expr.toSDK(v);
-      });
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: SourceInfoSDKType): SourceInfo {
-    return {
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
-      location: isSet(object.location) ? object.location : undefined,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: Long]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {},
-      macroCalls: isObject(object.macro_calls) ? Object.entries(object.macro_calls).reduce<{
-        [key: Long]: Expr;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Expr.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
-  },
-
-  toAmino(message: SourceInfo): SourceInfoSDKType {
-    const obj: any = {};
-    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
-    message.location !== undefined && (obj.location = message.location);
-
-    if (message.lineOffsets) {
-      obj.line_offsets = message.lineOffsets.map(e => e);
-    } else {
-      obj.line_offsets = [];
-    }
-
-    obj.positions = {};
-
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
-
-    obj.macro_calls = {};
-
-    if (message.macroCalls) {
-      Object.entries(message.macroCalls).forEach(([k, v]) => {
-        obj.macro_calls[k] = Expr.toAmino(v);
       });
     }
 
@@ -2628,37 +2349,19 @@ export const SourcePosition = {
 
   fromSDK(object: SourcePositionSDKType): SourcePosition {
     return {
-      location: isSet(object.location) ? object.location : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      column: isSet(object.column) ? object.column : undefined
+      location: object?.location,
+      offset: object?.offset,
+      line: object?.line,
+      column: object?.column
     };
   },
 
   toSDK(message: SourcePosition): SourcePositionSDKType {
     const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.line !== undefined && (obj.line = message.line);
-    message.column !== undefined && (obj.column = message.column);
-    return obj;
-  },
-
-  fromAmino(object: SourcePositionSDKType): SourcePosition {
-    return {
-      location: isSet(object.location) ? object.location : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      column: isSet(object.column) ? object.column : undefined
-    };
-  },
-
-  toAmino(message: SourcePosition): SourcePositionSDKType {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.line !== undefined && (obj.line = message.line);
-    message.column !== undefined && (obj.column = message.column);
+    obj.location = message.location;
+    obj.offset = message.offset;
+    obj.line = message.line;
+    obj.column = message.column;
     return obj;
   }
 

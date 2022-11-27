@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";
 
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
@@ -475,25 +475,13 @@ export const QueryGroupInfoRequest = {
 
   fromSDK(object: QueryGroupInfoRequestSDKType): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
+      groupId: object?.group_id
     };
   },
 
   toSDK(message: QueryGroupInfoRequest): QueryGroupInfoRequestSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupInfoRequestSDKType): QueryGroupInfoRequest {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupInfoRequest): QueryGroupInfoRequestSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
+    obj.group_id = message.groupId;
     return obj;
   }
 
@@ -564,18 +552,6 @@ export const QueryGroupInfoResponse = {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupInfo.toSDK(message.info) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupInfoResponseSDKType): QueryGroupInfoResponse {
-    return {
-      info: isSet(object.info) ? GroupInfo.fromAmino(object.info) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupInfoResponse): QueryGroupInfoResponseSDKType {
-    const obj: any = {};
-    message.info !== undefined && (obj.info = message.info ? GroupInfo.toAmino(message.info) : undefined);
-    return obj;
   }
 
 };
@@ -637,25 +613,13 @@ export const QueryGroupPolicyInfoRequest = {
 
   fromSDK(object: QueryGroupPolicyInfoRequestSDKType): QueryGroupPolicyInfoRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupPolicyInfoRequestSDKType): QueryGroupPolicyInfoRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -725,18 +689,6 @@ export const QueryGroupPolicyInfoResponse = {
   toSDK(message: QueryGroupPolicyInfoResponse): QueryGroupPolicyInfoResponseSDKType {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toSDK(message.info) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupPolicyInfoResponseSDKType): QueryGroupPolicyInfoResponse {
-    return {
-      info: isSet(object.info) ? GroupPolicyInfo.fromAmino(object.info) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPolicyInfoResponse): QueryGroupPolicyInfoResponseSDKType {
-    const obj: any = {};
-    message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toAmino(message.info) : undefined);
     return obj;
   }
 
@@ -811,29 +763,15 @@ export const QueryGroupMembersRequest = {
 
   fromSDK(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      groupId: object?.group_id,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGroupMembersRequest): QueryGroupMembersRequestSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
+    obj.group_id = message.groupId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupMembersRequest): QueryGroupMembersRequestSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -930,26 +868,6 @@ export const QueryGroupMembersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupMembersResponseSDKType): QueryGroupMembersResponse {
-    return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupMembersResponse): QueryGroupMembersResponseSDKType {
-    const obj: any = {};
-
-    if (message.members) {
-      obj.members = message.members.map(e => e ? GroupMember.toAmino(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1023,29 +941,15 @@ export const QueryGroupsByAdminRequest = {
 
   fromSDK(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
     return {
-      admin: isSet(object.admin) ? object.admin : undefined,
+      admin: object?.admin,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestSDKType {
     const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
+    obj.admin = message.admin;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
-    return {
-      admin: isSet(object.admin) ? object.admin : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestSDKType {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1142,26 +1046,6 @@ export const QueryGroupsByAdminResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupsByAdminResponseSDKType): QueryGroupsByAdminResponse {
-    return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupsByAdminResponse): QueryGroupsByAdminResponseSDKType {
-    const obj: any = {};
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1235,29 +1119,15 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromSDK(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      groupId: object?.group_id,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
+    obj.group_id = message.groupId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
-    return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestSDKType {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1354,26 +1224,6 @@ export const QueryGroupPoliciesByGroupResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupPoliciesByGroupResponseSDKType): QueryGroupPoliciesByGroupResponse {
-    return {
-      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPoliciesByGroupResponse): QueryGroupPoliciesByGroupResponseSDKType {
-    const obj: any = {};
-
-    if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
-    } else {
-      obj.group_policies = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1447,29 +1297,15 @@ export const QueryGroupPoliciesByAdminRequest = {
 
   fromSDK(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
     return {
-      admin: isSet(object.admin) ? object.admin : undefined,
+      admin: object?.admin,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestSDKType {
     const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
+    obj.admin = message.admin;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
-    return {
-      admin: isSet(object.admin) ? object.admin : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestSDKType {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1566,26 +1402,6 @@ export const QueryGroupPoliciesByAdminResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupPoliciesByAdminResponseSDKType): QueryGroupPoliciesByAdminResponse {
-    return {
-      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupPoliciesByAdminResponse): QueryGroupPoliciesByAdminResponseSDKType {
-    const obj: any = {};
-
-    if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
-    } else {
-      obj.group_policies = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1647,25 +1463,13 @@ export const QueryProposalRequest = {
 
   fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
-  },
-
-  fromAmino(object: QueryProposalRequestSDKType): QueryProposalRequest {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: QueryProposalRequest): QueryProposalRequestSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -1735,18 +1539,6 @@ export const QueryProposalResponse = {
   toSDK(message: QueryProposalResponse): QueryProposalResponseSDKType {
     const obj: any = {};
     message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toSDK(message.proposal) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryProposalResponseSDKType): QueryProposalResponse {
-    return {
-      proposal: isSet(object.proposal) ? Proposal.fromAmino(object.proposal) : undefined
-    };
-  },
-
-  toAmino(message: QueryProposalResponse): QueryProposalResponseSDKType {
-    const obj: any = {};
-    message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toAmino(message.proposal) : undefined);
     return obj;
   }
 
@@ -1821,29 +1613,15 @@ export const QueryProposalsByGroupPolicyRequest = {
 
   fromSDK(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1940,26 +1718,6 @@ export const QueryProposalsByGroupPolicyResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryProposalsByGroupPolicyResponseSDKType): QueryProposalsByGroupPolicyResponse {
-    return {
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProposalsByGroupPolicyResponse): QueryProposalsByGroupPolicyResponseSDKType {
-    const obj: any = {};
-
-    if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
-    } else {
-      obj.proposals = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -2033,29 +1791,15 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromSDK(object: QueryVoteByProposalVoterRequestSDKType): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined
+      proposalId: object?.proposal_id,
+      voter: object?.voter
     };
   },
 
   toSDK(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
-    return obj;
-  },
-
-  fromAmino(object: QueryVoteByProposalVoterRequestSDKType): QueryVoteByProposalVoterRequest {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined
-    };
-  },
-
-  toAmino(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.proposal_id = message.proposalId;
+    obj.voter = message.voter;
     return obj;
   }
 
@@ -2125,18 +1869,6 @@ export const QueryVoteByProposalVoterResponse = {
   toSDK(message: QueryVoteByProposalVoterResponse): QueryVoteByProposalVoterResponseSDKType {
     const obj: any = {};
     message.vote !== undefined && (obj.vote = message.vote ? Vote.toSDK(message.vote) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryVoteByProposalVoterResponseSDKType): QueryVoteByProposalVoterResponse {
-    return {
-      vote: isSet(object.vote) ? Vote.fromAmino(object.vote) : undefined
-    };
-  },
-
-  toAmino(message: QueryVoteByProposalVoterResponse): QueryVoteByProposalVoterResponseSDKType {
-    const obj: any = {};
-    message.vote !== undefined && (obj.vote = message.vote ? Vote.toAmino(message.vote) : undefined);
     return obj;
   }
 
@@ -2211,29 +1943,15 @@ export const QueryVotesByProposalRequest = {
 
   fromSDK(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      proposalId: object?.proposal_id,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -2330,26 +2048,6 @@ export const QueryVotesByProposalResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryVotesByProposalResponseSDKType): QueryVotesByProposalResponse {
-    return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryVotesByProposalResponse): QueryVotesByProposalResponseSDKType {
-    const obj: any = {};
-
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -2423,29 +2121,15 @@ export const QueryVotesByVoterRequest = {
 
   fromSDK(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
     return {
-      voter: isSet(object.voter) ? object.voter : undefined,
+      voter: object?.voter,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestSDKType {
     const obj: any = {};
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.voter = message.voter;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
-    return {
-      voter: isSet(object.voter) ? object.voter : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestSDKType {
-    const obj: any = {};
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -2542,26 +2226,6 @@ export const QueryVotesByVoterResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryVotesByVoterResponseSDKType): QueryVotesByVoterResponse {
-    return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryVotesByVoterResponse): QueryVotesByVoterResponseSDKType {
-    const obj: any = {};
-
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -2635,29 +2299,15 @@ export const QueryGroupsByMemberRequest = {
 
   fromSDK(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -2754,26 +2404,6 @@ export const QueryGroupsByMemberResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryGroupsByMemberResponseSDKType): QueryGroupsByMemberResponse {
-    return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryGroupsByMemberResponse): QueryGroupsByMemberResponseSDKType {
-    const obj: any = {};
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -2835,25 +2465,13 @@ export const QueryTallyResultRequest = {
 
   fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
-  },
-
-  fromAmino(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -2923,18 +2541,6 @@ export const QueryTallyResultResponse = {
   toSDK(message: QueryTallyResultResponse): QueryTallyResultResponseSDKType {
     const obj: any = {};
     message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toSDK(message.tally) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
-    return {
-      tally: isSet(object.tally) ? TallyResult.fromAmino(object.tally) : undefined
-    };
-  },
-
-  toAmino(message: QueryTallyResultResponse): QueryTallyResultResponseSDKType {
-    const obj: any = {};
-    message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toAmino(message.tally) : undefined);
     return obj;
   }
 

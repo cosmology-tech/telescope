@@ -1,6 +1,6 @@
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";
 
 /**
@@ -425,17 +425,17 @@ export const ConnectionEnd = {
 
   fromSDK(object: ConnectionEndSDKType): ConnectionEnd {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+      delayPeriod: object?.delay_period
     };
   },
 
   toSDK(message: ConnectionEnd): ConnectionEndSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
 
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toSDK(e) : undefined);
@@ -445,33 +445,7 @@ export const ConnectionEnd = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
-    return obj;
-  },
-
-  fromAmino(object: ConnectionEndSDKType): ConnectionEnd {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
-    };
-  },
-
-  toAmino(message: ConnectionEnd): ConnectionEndSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-
-    if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
-    } else {
-      obj.versions = [];
-    }
-
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    obj.delay_period = message.delayPeriod;
     return obj;
   }
 
@@ -600,19 +574,19 @@ export const IdentifiedConnection = {
 
   fromSDK(object: IdentifiedConnectionSDKType): IdentifiedConnection {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      id: object?.id,
+      clientId: object?.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+      delayPeriod: object?.delay_period
     };
   },
 
   toSDK(message: IdentifiedConnection): IdentifiedConnectionSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.id = message.id;
+    obj.client_id = message.clientId;
 
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toSDK(e) : undefined);
@@ -622,35 +596,7 @@ export const IdentifiedConnection = {
 
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
-    return obj;
-  },
-
-  fromAmino(object: IdentifiedConnectionSDKType): IdentifiedConnection {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
-    };
-  },
-
-  toAmino(message: IdentifiedConnection): IdentifiedConnectionSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-
-    if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
-    } else {
-      obj.versions = [];
-    }
-
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    obj.delay_period = message.delayPeriod;
     return obj;
   }
 
@@ -737,33 +683,17 @@ export const Counterparty = {
 
   fromSDK(object: CounterpartySDKType): Counterparty {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      clientId: object?.client_id,
+      connectionId: object?.connection_id,
       prefix: isSet(object.prefix) ? MerklePrefix.fromSDK(object.prefix) : undefined
     };
   },
 
   toSDK(message: Counterparty): CounterpartySDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.client_id = message.clientId;
+    obj.connection_id = message.connectionId;
     message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toSDK(message.prefix) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CounterpartySDKType): Counterparty {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
-      prefix: isSet(object.prefix) ? MerklePrefix.fromAmino(object.prefix) : undefined
-    };
-  },
-
-  toAmino(message: Counterparty): CounterpartySDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined);
     return obj;
   }
 
@@ -837,24 +767,6 @@ export const ClientPaths = {
   },
 
   toSDK(message: ClientPaths): ClientPathsSDKType {
-    const obj: any = {};
-
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ClientPathsSDKType): ClientPaths {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ClientPaths): ClientPathsSDKType {
     const obj: any = {};
 
     if (message.paths) {
@@ -943,34 +855,14 @@ export const ConnectionPaths = {
 
   fromSDK(object: ConnectionPathsSDKType): ConnectionPaths {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      clientId: object?.client_id,
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
 
   toSDK(message: ConnectionPaths): ConnectionPathsSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ConnectionPathsSDKType): ConnectionPaths {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ConnectionPaths): ConnectionPathsSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
 
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
@@ -1058,34 +950,14 @@ export const Version = {
 
   fromSDK(object: VersionSDKType): Version {
     return {
-      identifier: isSet(object.identifier) ? object.identifier : undefined,
+      identifier: object?.identifier,
       features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
     };
   },
 
   toSDK(message: Version): VersionSDKType {
     const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
-
-    if (message.features) {
-      obj.features = message.features.map(e => e);
-    } else {
-      obj.features = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: VersionSDKType): Version {
-    return {
-      identifier: isSet(object.identifier) ? object.identifier : undefined,
-      features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Version): VersionSDKType {
-    const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
+    obj.identifier = message.identifier;
 
     if (message.features) {
       obj.features = message.features.map(e => e);
@@ -1155,25 +1027,13 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : undefined
+      maxExpectedTimePerBlock: object?.max_expected_time_per_block
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.max_expected_time_per_block = message.maxExpectedTimePerBlock);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.max_expected_time_per_block = message.maxExpectedTimePerBlock);
+    obj.max_expected_time_per_block = message.maxExpectedTimePerBlock;
     return obj;
   }
 

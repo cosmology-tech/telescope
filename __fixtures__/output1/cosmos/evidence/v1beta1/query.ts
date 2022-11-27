@@ -127,25 +127,13 @@ export const QueryEvidenceRequest = {
 
   fromSDK(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
     return {
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined
+      evidenceHash: object?.evidence_hash
     };
   },
 
   toSDK(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
     const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
-    return obj;
-  },
-
-  fromAmino(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
-    return {
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined
-    };
-  },
-
-  toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
-    const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
+    obj.evidence_hash = message.evidenceHash;
     return obj;
   }
 
@@ -216,18 +204,6 @@ export const QueryEvidenceResponse = {
     const obj: any = {};
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
-    return {
-      evidence: isSet(object.evidence) ? Any.fromAmino(object.evidence) : undefined
-    };
-  },
-
-  toAmino(message: QueryEvidenceResponse): QueryEvidenceResponseSDKType {
-    const obj: any = {};
-    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined);
-    return obj;
   }
 
 };
@@ -296,18 +272,6 @@ export const QueryAllEvidenceRequest = {
   toSDK(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -403,26 +367,6 @@ export const QueryAllEvidenceResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseSDKType {
-    const obj: any = {};
-
-    if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.evidence = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

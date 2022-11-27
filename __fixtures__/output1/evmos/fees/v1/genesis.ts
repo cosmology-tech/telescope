@@ -166,26 +166,6 @@ export const GenesisState = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      devFeeInfos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-
-    if (message.devFeeInfos) {
-      obj.dev_fee_infos = message.devFeeInfos.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
-    } else {
-      obj.dev_fee_infos = [];
-    }
-
-    return obj;
   }
 
 };
@@ -295,41 +275,21 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableFees: isSet(object.enable_fees) ? object.enable_fees : undefined,
-      developerShares: isSet(object.developer_shares) ? object.developer_shares : undefined,
-      validatorShares: isSet(object.validator_shares) ? object.validator_shares : undefined,
-      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : undefined,
-      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : undefined
+      enableFees: object?.enable_fees,
+      developerShares: object?.developer_shares,
+      validatorShares: object?.validator_shares,
+      addrDerivationCostCreate: object?.addr_derivation_cost_create,
+      minGasPrice: object?.min_gas_price
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.enableFees !== undefined && (obj.enable_fees = message.enableFees);
-    message.developerShares !== undefined && (obj.developer_shares = message.developerShares);
-    message.validatorShares !== undefined && (obj.validator_shares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addr_derivation_cost_create = message.addrDerivationCostCreate);
-    message.minGasPrice !== undefined && (obj.min_gas_price = message.minGasPrice);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      enableFees: isSet(object.enable_fees) ? object.enable_fees : undefined,
-      developerShares: isSet(object.developer_shares) ? object.developer_shares : undefined,
-      validatorShares: isSet(object.validator_shares) ? object.validator_shares : undefined,
-      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : undefined,
-      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.enableFees !== undefined && (obj.enable_fees = message.enableFees);
-    message.developerShares !== undefined && (obj.developer_shares = message.developerShares);
-    message.validatorShares !== undefined && (obj.validator_shares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addr_derivation_cost_create = message.addrDerivationCostCreate);
-    message.minGasPrice !== undefined && (obj.min_gas_price = message.minGasPrice);
+    obj.enable_fees = message.enableFees;
+    obj.developer_shares = message.developerShares;
+    obj.validator_shares = message.validatorShares;
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate;
+    obj.min_gas_price = message.minGasPrice;
     return obj;
   }
 

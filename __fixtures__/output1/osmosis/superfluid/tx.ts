@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -180,33 +180,17 @@ export const MsgSuperfluidDelegate = {
 
   fromSDK(object: MsgSuperfluidDelegateSDKType): MsgSuperfluidDelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
+      sender: object?.sender,
+      lockId: object?.lock_id,
+      valAddr: object?.val_addr
     };
   },
 
   toSDK(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
-    return obj;
-  },
-
-  fromAmino(object: MsgSuperfluidDelegateSDKType): MsgSuperfluidDelegate {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
-    };
-  },
-
-  toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
+    obj.sender = message.sender;
+    obj.lock_id = message.lockId;
+    obj.val_addr = message.valAddr;
     return obj;
   }
 
@@ -258,15 +242,6 @@ export const MsgSuperfluidDelegateResponse = {
   },
 
   toSDK(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSuperfluidDelegateResponseSDKType): MsgSuperfluidDelegateResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -342,29 +317,15 @@ export const MsgSuperfluidUndelegate = {
 
   fromSDK(object: MsgSuperfluidUndelegateSDKType): MsgSuperfluidUndelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+      sender: object?.sender,
+      lockId: object?.lock_id
     };
   },
 
   toSDK(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    return obj;
-  },
-
-  fromAmino(object: MsgSuperfluidUndelegateSDKType): MsgSuperfluidUndelegate {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
-    };
-  },
-
-  toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    obj.sender = message.sender;
+    obj.lock_id = message.lockId;
     return obj;
   }
 
@@ -416,15 +377,6 @@ export const MsgSuperfluidUndelegateResponse = {
   },
 
   toSDK(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSuperfluidUndelegateResponseSDKType): MsgSuperfluidUndelegateResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -500,29 +452,15 @@ export const MsgSuperfluidUnbondLock = {
 
   fromSDK(object: MsgSuperfluidUnbondLockSDKType): MsgSuperfluidUnbondLock {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+      sender: object?.sender,
+      lockId: object?.lock_id
     };
   },
 
   toSDK(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    return obj;
-  },
-
-  fromAmino(object: MsgSuperfluidUnbondLockSDKType): MsgSuperfluidUnbondLock {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
-    };
-  },
-
-  toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    obj.sender = message.sender;
+    obj.lock_id = message.lockId;
     return obj;
   }
 
@@ -574,15 +512,6 @@ export const MsgSuperfluidUnbondLockResponse = {
   },
 
   toSDK(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSuperfluidUnbondLockResponseSDKType): MsgSuperfluidUnbondLockResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -676,15 +605,15 @@ export const MsgLockAndSuperfluidDelegate = {
 
   fromSDK(object: MsgLockAndSuperfluidDelegateSDKType): MsgLockAndSuperfluidDelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
+      sender: object?.sender,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
+      valAddr: object?.val_addr
     };
   },
 
   toSDK(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
@@ -692,29 +621,7 @@ export const MsgLockAndSuperfluidDelegate = {
       obj.coins = [];
     }
 
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
-    return obj;
-  },
-
-  fromAmino(object: MsgLockAndSuperfluidDelegateSDKType): MsgLockAndSuperfluidDelegate {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
-    };
-  },
-
-  toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
+    obj.val_addr = message.valAddr;
     return obj;
   }
 
@@ -777,25 +684,13 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
   fromSDK(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? object.ID : undefined
+      ID: object?.ID
     };
   },
 
   toSDK(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
-    return obj;
-  },
-
-  fromAmino(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
-    return {
-      ID: isSet(object.ID) ? object.ID : undefined
-    };
-  },
-
-  toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
+    obj.ID = message.ID;
     return obj;
   }
 
@@ -870,29 +765,15 @@ export const MsgUnPoolWhitelistedPool = {
 
   fromSDK(object: MsgUnPoolWhitelistedPoolSDKType): MsgUnPoolWhitelistedPool {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+      sender: object?.sender,
+      poolId: object?.pool_id
     };
   },
 
   toSDK(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    return obj;
-  },
-
-  fromAmino(object: MsgUnPoolWhitelistedPoolSDKType): MsgUnPoolWhitelistedPool {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined
-    };
-  },
-
-  toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    obj.sender = message.sender;
+    obj.pool_id = message.poolId;
     return obj;
   }
 
@@ -978,24 +859,6 @@ export const MsgUnPoolWhitelistedPoolResponse = {
   },
 
   toSDK(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseSDKType {
-    const obj: any = {};
-
-    if (message.exitedLockIds) {
-      obj.exited_lock_ids = message.exitedLockIds.map(e => e);
-    } else {
-      obj.exited_lock_ids = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgUnPoolWhitelistedPoolResponseSDKType): MsgUnPoolWhitelistedPoolResponse {
-    return {
-      exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseSDKType {
     const obj: any = {};
 
     if (message.exitedLockIds) {

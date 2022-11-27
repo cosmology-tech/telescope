@@ -719,26 +719,6 @@ export const HistoricalInfo = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: HistoricalInfoSDKType): HistoricalInfo {
-    return {
-      header: isSet(object.header) ? Header.fromAmino(object.header) : undefined,
-      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: HistoricalInfo): HistoricalInfoSDKType {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? Header.toAmino(message.header) : undefined);
-
-    if (message.valset) {
-      obj.valset = message.valset.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.valset = [];
-    }
-
-    return obj;
   }
 
 };
@@ -824,33 +804,17 @@ export const CommissionRates = {
 
   fromSDK(object: CommissionRatesSDKType): CommissionRates {
     return {
-      rate: isSet(object.rate) ? object.rate : undefined,
-      maxRate: isSet(object.max_rate) ? object.max_rate : undefined,
-      maxChangeRate: isSet(object.max_change_rate) ? object.max_change_rate : undefined
+      rate: object?.rate,
+      maxRate: object?.max_rate,
+      maxChangeRate: object?.max_change_rate
     };
   },
 
   toSDK(message: CommissionRates): CommissionRatesSDKType {
     const obj: any = {};
-    message.rate !== undefined && (obj.rate = message.rate);
-    message.maxRate !== undefined && (obj.max_rate = message.maxRate);
-    message.maxChangeRate !== undefined && (obj.max_change_rate = message.maxChangeRate);
-    return obj;
-  },
-
-  fromAmino(object: CommissionRatesSDKType): CommissionRates {
-    return {
-      rate: isSet(object.rate) ? object.rate : undefined,
-      maxRate: isSet(object.max_rate) ? object.max_rate : undefined,
-      maxChangeRate: isSet(object.max_change_rate) ? object.max_change_rate : undefined
-    };
-  },
-
-  toAmino(message: CommissionRates): CommissionRatesSDKType {
-    const obj: any = {};
-    message.rate !== undefined && (obj.rate = message.rate);
-    message.maxRate !== undefined && (obj.max_rate = message.maxRate);
-    message.maxChangeRate !== undefined && (obj.max_change_rate = message.maxChangeRate);
+    obj.rate = message.rate;
+    obj.max_rate = message.maxRate;
+    obj.max_change_rate = message.maxChangeRate;
     return obj;
   }
 
@@ -934,20 +898,6 @@ export const Commission = {
     const obj: any = {};
     message.commissionRates !== undefined && (obj.commission_rates = message.commissionRates ? CommissionRates.toSDK(message.commissionRates) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: CommissionSDKType): Commission {
-    return {
-      commissionRates: isSet(object.commission_rates) ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromAmino(object.update_time) : undefined
-    };
-  },
-
-  toAmino(message: Commission): CommissionSDKType {
-    const obj: any = {};
-    message.commissionRates !== undefined && (obj.commission_rates = message.commissionRates ? CommissionRates.toAmino(message.commissionRates) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined);
     return obj;
   }
 
@@ -1058,41 +1008,21 @@ export const Description = {
 
   fromSDK(object: DescriptionSDKType): Description {
     return {
-      moniker: isSet(object.moniker) ? object.moniker : undefined,
-      identity: isSet(object.identity) ? object.identity : undefined,
-      website: isSet(object.website) ? object.website : undefined,
-      securityContact: isSet(object.security_contact) ? object.security_contact : undefined,
-      details: isSet(object.details) ? object.details : undefined
+      moniker: object?.moniker,
+      identity: object?.identity,
+      website: object?.website,
+      securityContact: object?.security_contact,
+      details: object?.details
     };
   },
 
   toSDK(message: Description): DescriptionSDKType {
     const obj: any = {};
-    message.moniker !== undefined && (obj.moniker = message.moniker);
-    message.identity !== undefined && (obj.identity = message.identity);
-    message.website !== undefined && (obj.website = message.website);
-    message.securityContact !== undefined && (obj.security_contact = message.securityContact);
-    message.details !== undefined && (obj.details = message.details);
-    return obj;
-  },
-
-  fromAmino(object: DescriptionSDKType): Description {
-    return {
-      moniker: isSet(object.moniker) ? object.moniker : undefined,
-      identity: isSet(object.identity) ? object.identity : undefined,
-      website: isSet(object.website) ? object.website : undefined,
-      securityContact: isSet(object.security_contact) ? object.security_contact : undefined,
-      details: isSet(object.details) ? object.details : undefined
-    };
-  },
-
-  toAmino(message: Description): DescriptionSDKType {
-    const obj: any = {};
-    message.moniker !== undefined && (obj.moniker = message.moniker);
-    message.identity !== undefined && (obj.identity = message.identity);
-    message.website !== undefined && (obj.website = message.website);
-    message.securityContact !== undefined && (obj.security_contact = message.securityContact);
-    message.details !== undefined && (obj.details = message.details);
+    obj.moniker = message.moniker;
+    obj.identity = message.identity;
+    obj.website = message.website;
+    obj.security_contact = message.securityContact;
+    obj.details = message.details;
     return obj;
   }
 
@@ -1275,65 +1205,33 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      operatorAddress: isSet(object.operator_address) ? object.operator_address : undefined,
+      operatorAddress: object?.operator_address,
       consensusPubkey: isSet(object.consensus_pubkey) ? Any.fromSDK(object.consensus_pubkey) : undefined,
-      jailed: isSet(object.jailed) ? object.jailed : undefined,
+      jailed: object?.jailed,
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
-      tokens: isSet(object.tokens) ? object.tokens : undefined,
-      delegatorShares: isSet(object.delegator_shares) ? object.delegator_shares : undefined,
+      tokens: object?.tokens,
+      delegatorShares: object?.delegator_shares,
       description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
-      unbondingHeight: isSet(object.unbonding_height) ? object.unbonding_height : undefined,
+      unbondingHeight: object?.unbonding_height,
       unbondingTime: isSet(object.unbonding_time) ? Timestamp.fromSDK(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromSDK(object.commission) : undefined,
-      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined
+      minSelfDelegation: object?.min_self_delegation
     };
   },
 
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
-    message.operatorAddress !== undefined && (obj.operator_address = message.operatorAddress);
+    obj.operator_address = message.operatorAddress;
     message.consensusPubkey !== undefined && (obj.consensus_pubkey = message.consensusPubkey ? Any.toSDK(message.consensusPubkey) : undefined);
-    message.jailed !== undefined && (obj.jailed = message.jailed);
+    obj.jailed = message.jailed;
     message.status !== undefined && (obj.status = bondStatusToJSON(message.status));
-    message.tokens !== undefined && (obj.tokens = message.tokens);
-    message.delegatorShares !== undefined && (obj.delegator_shares = message.delegatorShares);
+    obj.tokens = message.tokens;
+    obj.delegator_shares = message.delegatorShares;
     message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
-    message.unbondingHeight !== undefined && (obj.unbonding_height = message.unbondingHeight);
+    obj.unbonding_height = message.unbondingHeight;
     message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Timestamp.toSDK(message.unbondingTime) : undefined);
     message.commission !== undefined && (obj.commission = message.commission ? Commission.toSDK(message.commission) : undefined);
-    message.minSelfDelegation !== undefined && (obj.min_self_delegation = message.minSelfDelegation);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorSDKType): Validator {
-    return {
-      operatorAddress: isSet(object.operator_address) ? object.operator_address : undefined,
-      consensusPubkey: isSet(object.consensus_pubkey) ? Any.fromAmino(object.consensus_pubkey) : undefined,
-      jailed: isSet(object.jailed) ? object.jailed : undefined,
-      status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
-      tokens: isSet(object.tokens) ? object.tokens : undefined,
-      delegatorShares: isSet(object.delegator_shares) ? object.delegator_shares : undefined,
-      description: isSet(object.description) ? Description.fromAmino(object.description) : undefined,
-      unbondingHeight: isSet(object.unbonding_height) ? object.unbonding_height : undefined,
-      unbondingTime: isSet(object.unbonding_time) ? Timestamp.fromAmino(object.unbonding_time) : undefined,
-      commission: isSet(object.commission) ? Commission.fromAmino(object.commission) : undefined,
-      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined
-    };
-  },
-
-  toAmino(message: Validator): ValidatorSDKType {
-    const obj: any = {};
-    message.operatorAddress !== undefined && (obj.operator_address = message.operatorAddress);
-    message.consensusPubkey !== undefined && (obj.consensus_pubkey = message.consensusPubkey ? Any.toAmino(message.consensusPubkey) : undefined);
-    message.jailed !== undefined && (obj.jailed = message.jailed);
-    message.status !== undefined && (obj.status = bondStatusToJSON(message.status));
-    message.tokens !== undefined && (obj.tokens = message.tokens);
-    message.delegatorShares !== undefined && (obj.delegator_shares = message.delegatorShares);
-    message.description !== undefined && (obj.description = message.description ? Description.toAmino(message.description) : undefined);
-    message.unbondingHeight !== undefined && (obj.unbonding_height = message.unbondingHeight);
-    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Timestamp.toAmino(message.unbondingTime) : undefined);
-    message.commission !== undefined && (obj.commission = message.commission ? Commission.toAmino(message.commission) : undefined);
-    message.minSelfDelegation !== undefined && (obj.min_self_delegation = message.minSelfDelegation);
+    obj.min_self_delegation = message.minSelfDelegation;
     return obj;
   }
 
@@ -1416,24 +1314,6 @@ export const ValAddresses = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ValAddressesSDKType): ValAddresses {
-    return {
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ValAddresses): ValAddressesSDKType {
-    const obj: any = {};
-
-    if (message.addresses) {
-      obj.addresses = message.addresses.map(e => e);
-    } else {
-      obj.addresses = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1507,29 +1387,15 @@ export const DVPair = {
 
   fromSDK(object: DVPairSDKType): DVPair {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: DVPair): DVPairSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: DVPairSDKType): DVPair {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: DVPair): DVPairSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -1607,24 +1473,6 @@ export const DVPairs = {
 
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? DVPair.toSDK(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DVPairsSDKType): DVPairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: DVPairs): DVPairsSDKType {
-    const obj: any = {};
-
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? DVPair.toAmino(e) : undefined);
     } else {
       obj.pairs = [];
     }
@@ -1715,33 +1563,17 @@ export const DVVTriplet = {
 
   fromSDK(object: DVVTripletSDKType): DVVTriplet {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorSrcAddress: object?.validator_src_address,
+      validatorDstAddress: object?.validator_dst_address
     };
   },
 
   toSDK(message: DVVTriplet): DVVTripletSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validator_src_address = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validator_dst_address = message.validatorDstAddress);
-    return obj;
-  },
-
-  fromAmino(object: DVVTripletSDKType): DVVTriplet {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined
-    };
-  },
-
-  toAmino(message: DVVTriplet): DVVTripletSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validator_src_address = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validator_dst_address = message.validatorDstAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_src_address = message.validatorSrcAddress;
+    obj.validator_dst_address = message.validatorDstAddress;
     return obj;
   }
 
@@ -1819,24 +1651,6 @@ export const DVVTriplets = {
 
     if (message.triplets) {
       obj.triplets = message.triplets.map(e => e ? DVVTriplet.toSDK(e) : undefined);
-    } else {
-      obj.triplets = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DVVTripletsSDKType): DVVTriplets {
-    return {
-      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: DVVTriplets): DVVTripletsSDKType {
-    const obj: any = {};
-
-    if (message.triplets) {
-      obj.triplets = message.triplets.map(e => e ? DVVTriplet.toAmino(e) : undefined);
     } else {
       obj.triplets = [];
     }
@@ -1927,33 +1741,17 @@ export const Delegation = {
 
   fromSDK(object: DelegationSDKType): Delegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      shares: isSet(object.shares) ? object.shares : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
+      shares: object?.shares
     };
   },
 
   toSDK(message: Delegation): DelegationSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.shares !== undefined && (obj.shares = message.shares);
-    return obj;
-  },
-
-  fromAmino(object: DelegationSDKType): Delegation {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      shares: isSet(object.shares) ? object.shares : undefined
-    };
-  },
-
-  toAmino(message: Delegation): DelegationSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.shares !== undefined && (obj.shares = message.shares);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.shares = message.shares;
     return obj;
   }
 
@@ -2046,41 +1844,19 @@ export const UnbondingDelegation = {
 
   fromSDK(object: UnbondingDelegationSDKType): UnbondingDelegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDK(e)) : []
     };
   },
 
   toSDK(message: UnbondingDelegation): UnbondingDelegationSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
 
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: UnbondingDelegationSDKType): UnbondingDelegation {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: UnbondingDelegation): UnbondingDelegationSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -2183,37 +1959,19 @@ export const UnbondingDelegationEntry = {
 
   fromSDK(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
+      creationHeight: object?.creation_height,
       completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
-      balance: isSet(object.balance) ? object.balance : undefined
+      initialBalance: object?.initial_balance,
+      balance: object?.balance
     };
   },
 
   toSDK(message: UnbondingDelegationEntry): UnbondingDelegationEntrySDKType {
     const obj: any = {};
-    message.creationHeight !== undefined && (obj.creation_height = message.creationHeight);
+    obj.creation_height = message.creationHeight;
     message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
-    message.initialBalance !== undefined && (obj.initial_balance = message.initialBalance);
-    message.balance !== undefined && (obj.balance = message.balance);
-    return obj;
-  },
-
-  fromAmino(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
-    return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
-      completionTime: isSet(object.completion_time) ? Timestamp.fromAmino(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
-      balance: isSet(object.balance) ? object.balance : undefined
-    };
-  },
-
-  toAmino(message: UnbondingDelegationEntry): UnbondingDelegationEntrySDKType {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creation_height = message.creationHeight);
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toAmino(message.completionTime) : undefined);
-    message.initialBalance !== undefined && (obj.initial_balance = message.initialBalance);
-    message.balance !== undefined && (obj.balance = message.balance);
+    obj.initial_balance = message.initialBalance;
+    obj.balance = message.balance;
     return obj;
   }
 
@@ -2312,37 +2070,19 @@ export const RedelegationEntry = {
 
   fromSDK(object: RedelegationEntrySDKType): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
+      creationHeight: object?.creation_height,
       completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
-      sharesDst: isSet(object.shares_dst) ? object.shares_dst : undefined
+      initialBalance: object?.initial_balance,
+      sharesDst: object?.shares_dst
     };
   },
 
   toSDK(message: RedelegationEntry): RedelegationEntrySDKType {
     const obj: any = {};
-    message.creationHeight !== undefined && (obj.creation_height = message.creationHeight);
+    obj.creation_height = message.creationHeight;
     message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
-    message.initialBalance !== undefined && (obj.initial_balance = message.initialBalance);
-    message.sharesDst !== undefined && (obj.shares_dst = message.sharesDst);
-    return obj;
-  },
-
-  fromAmino(object: RedelegationEntrySDKType): RedelegationEntry {
-    return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
-      completionTime: isSet(object.completion_time) ? Timestamp.fromAmino(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
-      sharesDst: isSet(object.shares_dst) ? object.shares_dst : undefined
-    };
-  },
-
-  toAmino(message: RedelegationEntry): RedelegationEntrySDKType {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creation_height = message.creationHeight);
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toAmino(message.completionTime) : undefined);
-    message.initialBalance !== undefined && (obj.initial_balance = message.initialBalance);
-    message.sharesDst !== undefined && (obj.shares_dst = message.sharesDst);
+    obj.initial_balance = message.initialBalance;
+    obj.shares_dst = message.sharesDst;
     return obj;
   }
 
@@ -2447,45 +2187,21 @@ export const Redelegation = {
 
   fromSDK(object: RedelegationSDKType): Redelegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined,
+      delegatorAddress: object?.delegator_address,
+      validatorSrcAddress: object?.validator_src_address,
+      validatorDstAddress: object?.validator_dst_address,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Redelegation): RedelegationSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validator_src_address = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validator_dst_address = message.validatorDstAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_src_address = message.validatorSrcAddress;
+    obj.validator_dst_address = message.validatorDstAddress;
 
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? RedelegationEntry.toSDK(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: RedelegationSDKType): Redelegation {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Redelegation): RedelegationSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validator_src_address = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validator_dst_address = message.validatorDstAddress);
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -2613,47 +2329,22 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       unbondingTime: isSet(object.unbonding_time) ? Duration.fromSDK(object.unbonding_time) : undefined,
-      maxValidators: isSet(object.max_validators) ? object.max_validators : undefined,
-      maxEntries: isSet(object.max_entries) ? object.max_entries : undefined,
-      historicalEntries: isSet(object.historical_entries) ? object.historical_entries : undefined,
-      bondDenom: isSet(object.bond_denom) ? object.bond_denom : undefined,
-      minCommissionRate: isSet(object.min_commission_rate) ? object.min_commission_rate : undefined
+      maxValidators: object?.max_validators,
+      maxEntries: object?.max_entries,
+      historicalEntries: object?.historical_entries,
+      bondDenom: object?.bond_denom,
+      minCommissionRate: object?.min_commission_rate
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Duration.toSDK(message.unbondingTime) : undefined);
-    message.maxValidators !== undefined && (obj.max_validators = message.maxValidators);
-    message.maxEntries !== undefined && (obj.max_entries = message.maxEntries);
-    message.historicalEntries !== undefined && (obj.historical_entries = message.historicalEntries);
-    message.bondDenom !== undefined && (obj.bond_denom = message.bondDenom);
-    message.minCommissionRate !== undefined && (obj.min_commission_rate = message.minCommissionRate);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      unbondingTime: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      },
-      maxValidators: isSet(object.max_validators) ? object.max_validators : undefined,
-      maxEntries: isSet(object.max_entries) ? object.max_entries : undefined,
-      historicalEntries: isSet(object.historical_entries) ? object.historical_entries : undefined,
-      bondDenom: isSet(object.bond_denom) ? object.bond_denom : undefined,
-      minCommissionRate: isSet(object.min_commission_rate) ? object.min_commission_rate : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Duration.toAmino(message.unbondingTime) : undefined);
-    message.maxValidators !== undefined && (obj.max_validators = message.maxValidators);
-    message.maxEntries !== undefined && (obj.max_entries = message.maxEntries);
-    message.historicalEntries !== undefined && (obj.historical_entries = message.historicalEntries);
-    message.bondDenom !== undefined && (obj.bond_denom = message.bondDenom);
-    message.minCommissionRate !== undefined && (obj.min_commission_rate = message.minCommissionRate);
+    obj.max_validators = message.maxValidators;
+    obj.max_entries = message.maxEntries;
+    obj.historical_entries = message.historicalEntries;
+    obj.bond_denom = message.bondDenom;
+    obj.min_commission_rate = message.minCommissionRate;
     return obj;
   }
 
@@ -2738,20 +2429,6 @@ export const DelegationResponse = {
     message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toSDK(message.delegation) : undefined);
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
     return obj;
-  },
-
-  fromAmino(object: DelegationResponseSDKType): DelegationResponse {
-    return {
-      delegation: isSet(object.delegation) ? Delegation.fromAmino(object.delegation) : undefined,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined
-    };
-  },
-
-  toAmino(message: DelegationResponse): DelegationResponseSDKType {
-    const obj: any = {};
-    message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toAmino(message.delegation) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
-    return obj;
   }
 
 };
@@ -2826,28 +2503,14 @@ export const RedelegationEntryResponse = {
   fromSDK(object: RedelegationEntryResponseSDKType): RedelegationEntryResponse {
     return {
       redelegationEntry: isSet(object.redelegation_entry) ? RedelegationEntry.fromSDK(object.redelegation_entry) : undefined,
-      balance: isSet(object.balance) ? object.balance : undefined
+      balance: object?.balance
     };
   },
 
   toSDK(message: RedelegationEntryResponse): RedelegationEntryResponseSDKType {
     const obj: any = {};
     message.redelegationEntry !== undefined && (obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toSDK(message.redelegationEntry) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance);
-    return obj;
-  },
-
-  fromAmino(object: RedelegationEntryResponseSDKType): RedelegationEntryResponse {
-    return {
-      redelegationEntry: isSet(object.redelegation_entry) ? RedelegationEntry.fromAmino(object.redelegation_entry) : undefined,
-      balance: isSet(object.balance) ? object.balance : undefined
-    };
-  },
-
-  toAmino(message: RedelegationEntryResponse): RedelegationEntryResponseSDKType {
-    const obj: any = {};
-    message.redelegationEntry !== undefined && (obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toAmino(message.redelegationEntry) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance);
+    obj.balance = message.balance;
     return obj;
   }
 
@@ -2944,26 +2607,6 @@ export const RedelegationResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: RedelegationResponseSDKType): RedelegationResponse {
-    return {
-      redelegation: isSet(object.redelegation) ? Redelegation.fromAmino(object.redelegation) : undefined,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: RedelegationResponse): RedelegationResponseSDKType {
-    const obj: any = {};
-    message.redelegation !== undefined && (obj.redelegation = message.redelegation ? Redelegation.toAmino(message.redelegation) : undefined);
-
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toAmino(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-
-    return obj;
   }
 
 };
@@ -3037,29 +2680,15 @@ export const Pool = {
 
   fromSDK(object: PoolSDKType): Pool {
     return {
-      notBondedTokens: isSet(object.not_bonded_tokens) ? object.not_bonded_tokens : undefined,
-      bondedTokens: isSet(object.bonded_tokens) ? object.bonded_tokens : undefined
+      notBondedTokens: object?.not_bonded_tokens,
+      bondedTokens: object?.bonded_tokens
     };
   },
 
   toSDK(message: Pool): PoolSDKType {
     const obj: any = {};
-    message.notBondedTokens !== undefined && (obj.not_bonded_tokens = message.notBondedTokens);
-    message.bondedTokens !== undefined && (obj.bonded_tokens = message.bondedTokens);
-    return obj;
-  },
-
-  fromAmino(object: PoolSDKType): Pool {
-    return {
-      notBondedTokens: isSet(object.not_bonded_tokens) ? object.not_bonded_tokens : undefined,
-      bondedTokens: isSet(object.bonded_tokens) ? object.bonded_tokens : undefined
-    };
-  },
-
-  toAmino(message: Pool): PoolSDKType {
-    const obj: any = {};
-    message.notBondedTokens !== undefined && (obj.not_bonded_tokens = message.notBondedTokens);
-    message.bondedTokens !== undefined && (obj.bonded_tokens = message.bondedTokens);
+    obj.not_bonded_tokens = message.notBondedTokens;
+    obj.bonded_tokens = message.bondedTokens;
     return obj;
   }
 

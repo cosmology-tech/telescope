@@ -270,7 +270,7 @@ export const ModuleDescriptor = {
 
   fromSDK(object: ModuleDescriptorSDKType): ModuleDescriptor {
     return {
-      goImport: isSet(object.go_import) ? object.go_import : undefined,
+      goImport: object?.go_import,
       usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDK(e)) : [],
       canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDK(e)) : []
     };
@@ -278,7 +278,7 @@ export const ModuleDescriptor = {
 
   toSDK(message: ModuleDescriptor): ModuleDescriptorSDKType {
     const obj: any = {};
-    message.goImport !== undefined && (obj.go_import = message.goImport);
+    obj.go_import = message.goImport;
 
     if (message.usePackage) {
       obj.use_package = message.usePackage.map(e => e ? PackageReference.toSDK(e) : undefined);
@@ -288,33 +288,6 @@ export const ModuleDescriptor = {
 
     if (message.canMigrateFrom) {
       obj.can_migrate_from = message.canMigrateFrom.map(e => e ? MigrateFromInfo.toSDK(e) : undefined);
-    } else {
-      obj.can_migrate_from = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ModuleDescriptorSDKType): ModuleDescriptor {
-    return {
-      goImport: isSet(object.go_import) ? object.go_import : undefined,
-      usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromAmino(e)) : [],
-      canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ModuleDescriptor): ModuleDescriptorSDKType {
-    const obj: any = {};
-    message.goImport !== undefined && (obj.go_import = message.goImport);
-
-    if (message.usePackage) {
-      obj.use_package = message.usePackage.map(e => e ? PackageReference.toAmino(e) : undefined);
-    } else {
-      obj.use_package = [];
-    }
-
-    if (message.canMigrateFrom) {
-      obj.can_migrate_from = message.canMigrateFrom.map(e => e ? MigrateFromInfo.toAmino(e) : undefined);
     } else {
       obj.can_migrate_from = [];
     }
@@ -393,29 +366,15 @@ export const PackageReference = {
 
   fromSDK(object: PackageReferenceSDKType): PackageReference {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      revision: isSet(object.revision) ? object.revision : undefined
+      name: object?.name,
+      revision: object?.revision
     };
   },
 
   toSDK(message: PackageReference): PackageReferenceSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.revision !== undefined && (obj.revision = message.revision);
-    return obj;
-  },
-
-  fromAmino(object: PackageReferenceSDKType): PackageReference {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      revision: isSet(object.revision) ? object.revision : undefined
-    };
-  },
-
-  toAmino(message: PackageReference): PackageReferenceSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.revision !== undefined && (obj.revision = message.revision);
+    obj.name = message.name;
+    obj.revision = message.revision;
     return obj;
   }
 
@@ -478,25 +437,13 @@ export const MigrateFromInfo = {
 
   fromSDK(object: MigrateFromInfoSDKType): MigrateFromInfo {
     return {
-      module: isSet(object.module) ? object.module : undefined
+      module: object?.module
     };
   },
 
   toSDK(message: MigrateFromInfo): MigrateFromInfoSDKType {
     const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
-    return obj;
-  },
-
-  fromAmino(object: MigrateFromInfoSDKType): MigrateFromInfo {
-    return {
-      module: isSet(object.module) ? object.module : undefined
-    };
-  },
-
-  toAmino(message: MigrateFromInfo): MigrateFromInfoSDKType {
-    const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
+    obj.module = message.module;
     return obj;
   }
 

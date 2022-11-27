@@ -3,8 +3,8 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
@@ -282,29 +282,15 @@ export const GetValidatorSetByHeightRequest = {
 
   fromSDK(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : undefined,
+      height: object?.height,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -397,7 +383,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromSDK(object: GetValidatorSetByHeightResponseSDKType): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
+      blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
     };
@@ -405,7 +391,7 @@ export const GetValidatorSetByHeightResponse = {
 
   toSDK(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseSDKType {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
+    obj.block_height = message.blockHeight;
 
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
@@ -414,28 +400,6 @@ export const GetValidatorSetByHeightResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetValidatorSetByHeightResponseSDKType): GetValidatorSetByHeightResponse {
-    return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseSDKType {
-    const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
-
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -505,18 +469,6 @@ export const GetLatestValidatorSetRequest = {
   toSDK(message: GetLatestValidatorSetRequest): GetLatestValidatorSetRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetLatestValidatorSetRequestSDKType): GetLatestValidatorSetRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetLatestValidatorSetRequest): GetLatestValidatorSetRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -609,7 +561,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromSDK(object: GetLatestValidatorSetResponseSDKType): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
+      blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
     };
@@ -617,7 +569,7 @@ export const GetLatestValidatorSetResponse = {
 
   toSDK(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseSDKType {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
+    obj.block_height = message.blockHeight;
 
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
@@ -626,28 +578,6 @@ export const GetLatestValidatorSetResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetLatestValidatorSetResponseSDKType): GetLatestValidatorSetResponse {
-    return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseSDKType {
-    const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
-
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -746,37 +676,19 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : undefined,
-      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : undefined
+      votingPower: object?.voting_power,
+      proposerPriority: object?.proposer_priority
     };
   },
 
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toSDK(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.voting_power = message.votingPower);
-    message.proposerPriority !== undefined && (obj.proposer_priority = message.proposerPriority);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorSDKType): Validator {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      pubKey: isSet(object.pub_key) ? Any.fromAmino(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : undefined,
-      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : undefined
-    };
-  },
-
-  toAmino(message: Validator): ValidatorSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.voting_power = message.votingPower);
-    message.proposerPriority !== undefined && (obj.proposer_priority = message.proposerPriority);
+    obj.voting_power = message.votingPower;
+    obj.proposer_priority = message.proposerPriority;
     return obj;
   }
 
@@ -839,25 +751,13 @@ export const GetBlockByHeightRequest = {
 
   fromSDK(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: GetBlockByHeightRequest): GetBlockByHeightRequestSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    return obj;
-  },
-
-  fromAmino(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
-    return {
-      height: isSet(object.height) ? object.height : undefined
-    };
-  },
-
-  toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -942,20 +842,6 @@ export const GetBlockByHeightResponse = {
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GetBlockByHeightResponseSDKType): GetBlockByHeightResponse {
-    return {
-      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromAmino(object.block) : undefined
-    };
-  },
-
-  toAmino(message: GetBlockByHeightResponse): GetBlockByHeightResponseSDKType {
-    const obj: any = {};
-    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
-    message.block !== undefined && (obj.block = message.block ? Block.toAmino(message.block) : undefined);
-    return obj;
   }
 
 };
@@ -1006,15 +892,6 @@ export const GetLatestBlockRequest = {
   },
 
   toSDK(_: GetLatestBlockRequest): GetLatestBlockRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: GetLatestBlockRequestSDKType): GetLatestBlockRequest {
-    return {};
-  },
-
-  toAmino(_: GetLatestBlockRequest): GetLatestBlockRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1100,20 +977,6 @@ export const GetLatestBlockResponse = {
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GetLatestBlockResponseSDKType): GetLatestBlockResponse {
-    return {
-      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromAmino(object.block) : undefined
-    };
-  },
-
-  toAmino(message: GetLatestBlockResponse): GetLatestBlockResponseSDKType {
-    const obj: any = {};
-    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
-    message.block !== undefined && (obj.block = message.block ? Block.toAmino(message.block) : undefined);
-    return obj;
   }
 
 };
@@ -1164,15 +1027,6 @@ export const GetSyncingRequest = {
   },
 
   toSDK(_: GetSyncingRequest): GetSyncingRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: GetSyncingRequestSDKType): GetSyncingRequest {
-    return {};
-  },
-
-  toAmino(_: GetSyncingRequest): GetSyncingRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1236,25 +1090,13 @@ export const GetSyncingResponse = {
 
   fromSDK(object: GetSyncingResponseSDKType): GetSyncingResponse {
     return {
-      syncing: isSet(object.syncing) ? object.syncing : undefined
+      syncing: object?.syncing
     };
   },
 
   toSDK(message: GetSyncingResponse): GetSyncingResponseSDKType {
     const obj: any = {};
-    message.syncing !== undefined && (obj.syncing = message.syncing);
-    return obj;
-  },
-
-  fromAmino(object: GetSyncingResponseSDKType): GetSyncingResponse {
-    return {
-      syncing: isSet(object.syncing) ? object.syncing : undefined
-    };
-  },
-
-  toAmino(message: GetSyncingResponse): GetSyncingResponseSDKType {
-    const obj: any = {};
-    message.syncing !== undefined && (obj.syncing = message.syncing);
+    obj.syncing = message.syncing;
     return obj;
   }
 
@@ -1306,15 +1148,6 @@ export const GetNodeInfoRequest = {
   },
 
   toSDK(_: GetNodeInfoRequest): GetNodeInfoRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: GetNodeInfoRequestSDKType): GetNodeInfoRequest {
-    return {};
-  },
-
-  toAmino(_: GetNodeInfoRequest): GetNodeInfoRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1399,20 +1232,6 @@ export const GetNodeInfoResponse = {
     const obj: any = {};
     message.nodeInfo !== undefined && (obj.node_info = message.nodeInfo ? NodeInfo.toSDK(message.nodeInfo) : undefined);
     message.applicationVersion !== undefined && (obj.application_version = message.applicationVersion ? VersionInfo.toSDK(message.applicationVersion) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GetNodeInfoResponseSDKType): GetNodeInfoResponse {
-    return {
-      nodeInfo: isSet(object.node_info) ? NodeInfo.fromAmino(object.node_info) : undefined,
-      applicationVersion: isSet(object.application_version) ? VersionInfo.fromAmino(object.application_version) : undefined
-    };
-  },
-
-  toAmino(message: GetNodeInfoResponse): GetNodeInfoResponseSDKType {
-    const obj: any = {};
-    message.nodeInfo !== undefined && (obj.node_info = message.nodeInfo ? NodeInfo.toAmino(message.nodeInfo) : undefined);
-    message.applicationVersion !== undefined && (obj.application_version = message.applicationVersion ? VersionInfo.toAmino(message.applicationVersion) : undefined);
     return obj;
   }
 
@@ -1565,25 +1384,25 @@ export const VersionInfo = {
 
   fromSDK(object: VersionInfoSDKType): VersionInfo {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      appName: isSet(object.app_name) ? object.app_name : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      gitCommit: isSet(object.git_commit) ? object.git_commit : undefined,
-      buildTags: isSet(object.build_tags) ? object.build_tags : undefined,
-      goVersion: isSet(object.go_version) ? object.go_version : undefined,
+      name: object?.name,
+      appName: object?.app_name,
+      version: object?.version,
+      gitCommit: object?.git_commit,
+      buildTags: object?.build_tags,
+      goVersion: object?.go_version,
       buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromSDK(e)) : [],
-      cosmosSdkVersion: isSet(object.cosmos_sdk_version) ? object.cosmos_sdk_version : undefined
+      cosmosSdkVersion: object?.cosmos_sdk_version
     };
   },
 
   toSDK(message: VersionInfo): VersionInfoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.appName !== undefined && (obj.app_name = message.appName);
-    message.version !== undefined && (obj.version = message.version);
-    message.gitCommit !== undefined && (obj.git_commit = message.gitCommit);
-    message.buildTags !== undefined && (obj.build_tags = message.buildTags);
-    message.goVersion !== undefined && (obj.go_version = message.goVersion);
+    obj.name = message.name;
+    obj.app_name = message.appName;
+    obj.version = message.version;
+    obj.git_commit = message.gitCommit;
+    obj.build_tags = message.buildTags;
+    obj.go_version = message.goVersion;
 
     if (message.buildDeps) {
       obj.build_deps = message.buildDeps.map(e => e ? Module.toSDK(e) : undefined);
@@ -1591,39 +1410,7 @@ export const VersionInfo = {
       obj.build_deps = [];
     }
 
-    message.cosmosSdkVersion !== undefined && (obj.cosmos_sdk_version = message.cosmosSdkVersion);
-    return obj;
-  },
-
-  fromAmino(object: VersionInfoSDKType): VersionInfo {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      appName: isSet(object.app_name) ? object.app_name : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      gitCommit: isSet(object.git_commit) ? object.git_commit : undefined,
-      buildTags: isSet(object.build_tags) ? object.build_tags : undefined,
-      goVersion: isSet(object.go_version) ? object.go_version : undefined,
-      buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromAmino(e)) : [],
-      cosmosSdkVersion: isSet(object.cosmos_sdk_version) ? object.cosmos_sdk_version : undefined
-    };
-  },
-
-  toAmino(message: VersionInfo): VersionInfoSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.appName !== undefined && (obj.app_name = message.appName);
-    message.version !== undefined && (obj.version = message.version);
-    message.gitCommit !== undefined && (obj.git_commit = message.gitCommit);
-    message.buildTags !== undefined && (obj.build_tags = message.buildTags);
-    message.goVersion !== undefined && (obj.go_version = message.goVersion);
-
-    if (message.buildDeps) {
-      obj.build_deps = message.buildDeps.map(e => e ? Module.toAmino(e) : undefined);
-    } else {
-      obj.build_deps = [];
-    }
-
-    message.cosmosSdkVersion !== undefined && (obj.cosmos_sdk_version = message.cosmosSdkVersion);
+    obj.cosmos_sdk_version = message.cosmosSdkVersion;
     return obj;
   }
 
@@ -1710,33 +1497,17 @@ export const Module = {
 
   fromSDK(object: ModuleSDKType): Module {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      sum: isSet(object.sum) ? object.sum : undefined
+      path: object?.path,
+      version: object?.version,
+      sum: object?.sum
     };
   },
 
   toSDK(message: Module): ModuleSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.version !== undefined && (obj.version = message.version);
-    message.sum !== undefined && (obj.sum = message.sum);
-    return obj;
-  },
-
-  fromAmino(object: ModuleSDKType): Module {
-    return {
-      path: isSet(object.path) ? object.path : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      sum: isSet(object.sum) ? object.sum : undefined
-    };
-  },
-
-  toAmino(message: Module): ModuleSDKType {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.version !== undefined && (obj.version = message.version);
-    message.sum !== undefined && (obj.sum = message.sum);
+    obj.path = message.path;
+    obj.version = message.version;
+    obj.sum = message.sum;
     return obj;
   }
 

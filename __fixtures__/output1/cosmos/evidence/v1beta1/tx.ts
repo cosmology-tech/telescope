@@ -102,29 +102,15 @@ export const MsgSubmitEvidence = {
 
   fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
     return {
-      submitter: isSet(object.submitter) ? object.submitter : undefined,
+      submitter: object?.submitter,
       evidence: isSet(object.evidence) ? Any.fromSDK(object.evidence) : undefined
     };
   },
 
   toSDK(message: MsgSubmitEvidence): MsgSubmitEvidenceSDKType {
     const obj: any = {};
-    message.submitter !== undefined && (obj.submitter = message.submitter);
+    obj.submitter = message.submitter;
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
-    return {
-      submitter: isSet(object.submitter) ? object.submitter : undefined,
-      evidence: isSet(object.evidence) ? Any.fromAmino(object.evidence) : undefined
-    };
-  },
-
-  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceSDKType {
-    const obj: any = {};
-    message.submitter !== undefined && (obj.submitter = message.submitter);
-    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined);
     return obj;
   }
 
@@ -187,25 +173,13 @@ export const MsgSubmitEvidenceResponse = {
 
   fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined
+      hash: object?.hash
     };
   },
 
   toSDK(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
-    return obj;
-  },
-
-  fromAmino(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
-    return {
-      hash: isSet(object.hash) ? object.hash : undefined
-    };
-  },
-
-  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     return obj;
   }
 

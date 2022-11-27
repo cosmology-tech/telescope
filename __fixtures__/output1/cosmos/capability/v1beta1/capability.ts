@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.capability.v1beta1";
 
 /**
@@ -109,25 +109,13 @@ export const Capability = {
 
   fromSDK(object: CapabilitySDKType): Capability {
     return {
-      index: isSet(object.index) ? object.index : undefined
+      index: object?.index
     };
   },
 
   toSDK(message: Capability): CapabilitySDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    return obj;
-  },
-
-  fromAmino(object: CapabilitySDKType): Capability {
-    return {
-      index: isSet(object.index) ? object.index : undefined
-    };
-  },
-
-  toAmino(message: Capability): CapabilitySDKType {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    obj.index = message.index;
     return obj;
   }
 
@@ -202,29 +190,15 @@ export const Owner = {
 
   fromSDK(object: OwnerSDKType): Owner {
     return {
-      module: isSet(object.module) ? object.module : undefined,
-      name: isSet(object.name) ? object.name : undefined
+      module: object?.module,
+      name: object?.name
     };
   },
 
   toSDK(message: Owner): OwnerSDKType {
     const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: OwnerSDKType): Owner {
-    return {
-      module: isSet(object.module) ? object.module : undefined,
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: Owner): OwnerSDKType {
-    const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
-    message.name !== undefined && (obj.name = message.name);
+    obj.module = message.module;
+    obj.name = message.name;
     return obj;
   }
 
@@ -302,24 +276,6 @@ export const CapabilityOwners = {
 
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toSDK(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: CapabilityOwnersSDKType): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: CapabilityOwners): CapabilityOwnersSDKType {
-    const obj: any = {};
-
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
     } else {
       obj.owners = [];
     }

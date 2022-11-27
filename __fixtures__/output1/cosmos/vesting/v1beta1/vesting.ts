@@ -1,7 +1,7 @@
 import { BaseAccount, BaseAccountSDKType } from "../../auth/v1beta1/auth";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 
 /**
@@ -243,7 +243,7 @@ export const BaseVestingAccount = {
       originalVesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedFree: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedVesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDK(e)) : [],
-      endTime: isSet(object.end_time) ? object.end_time : undefined
+      endTime: object?.end_time
     };
   },
 
@@ -269,43 +269,7 @@ export const BaseVestingAccount = {
       obj.delegated_vesting = [];
     }
 
-    message.endTime !== undefined && (obj.end_time = message.endTime);
-    return obj;
-  },
-
-  fromAmino(object: BaseVestingAccountSDKType): BaseVestingAccount {
-    return {
-      baseAccount: isSet(object.base_account) ? BaseAccount.fromAmino(object.base_account) : undefined,
-      originalVesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromAmino(e)) : [],
-      delegatedFree: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromAmino(e)) : [],
-      delegatedVesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromAmino(e)) : [],
-      endTime: isSet(object.end_time) ? object.end_time : undefined
-    };
-  },
-
-  toAmino(message: BaseVestingAccount): BaseVestingAccountSDKType {
-    const obj: any = {};
-    message.baseAccount !== undefined && (obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined);
-
-    if (message.originalVesting) {
-      obj.original_vesting = message.originalVesting.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.original_vesting = [];
-    }
-
-    if (message.delegatedFree) {
-      obj.delegated_free = message.delegatedFree.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.delegated_free = [];
-    }
-
-    if (message.delegatedVesting) {
-      obj.delegated_vesting = message.delegatedVesting.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.delegated_vesting = [];
-    }
-
-    message.endTime !== undefined && (obj.end_time = message.endTime);
+    obj.end_time = message.endTime;
     return obj;
   }
 
@@ -381,28 +345,14 @@ export const ContinuousVestingAccount = {
   fromSDK(object: ContinuousVestingAccountSDKType): ContinuousVestingAccount {
     return {
       baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : undefined
+      startTime: object?.start_time
     };
   },
 
   toSDK(message: ContinuousVestingAccount): ContinuousVestingAccountSDKType {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    message.startTime !== undefined && (obj.start_time = message.startTime);
-    return obj;
-  },
-
-  fromAmino(object: ContinuousVestingAccountSDKType): ContinuousVestingAccount {
-    return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : undefined
-    };
-  },
-
-  toAmino(message: ContinuousVestingAccount): ContinuousVestingAccountSDKType {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined);
-    message.startTime !== undefined && (obj.start_time = message.startTime);
+    obj.start_time = message.startTime;
     return obj;
   }
 
@@ -472,18 +422,6 @@ export const DelayedVestingAccount = {
   toSDK(message: DelayedVestingAccount): DelayedVestingAccountSDKType {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: DelayedVestingAccountSDKType): DelayedVestingAccount {
-    return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined
-    };
-  },
-
-  toAmino(message: DelayedVestingAccount): DelayedVestingAccountSDKType {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined);
     return obj;
   }
 
@@ -564,37 +502,17 @@ export const Period = {
 
   fromSDK(object: PeriodSDKType): Period {
     return {
-      length: isSet(object.length) ? object.length : undefined,
+      length: object?.length,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Period): PeriodSDKType {
     const obj: any = {};
-    message.length !== undefined && (obj.length = message.length);
+    obj.length = message.length;
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: PeriodSDKType): Period {
-    return {
-      length: isSet(object.length) ? object.length : undefined,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Period): PeriodSDKType {
-    const obj: any = {};
-    message.length !== undefined && (obj.length = message.length);
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -692,7 +610,7 @@ export const PeriodicVestingAccount = {
   fromSDK(object: PeriodicVestingAccountSDKType): PeriodicVestingAccount {
     return {
       baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : undefined,
+      startTime: object?.start_time,
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };
   },
@@ -700,32 +618,10 @@ export const PeriodicVestingAccount = {
   toSDK(message: PeriodicVestingAccount): PeriodicVestingAccountSDKType {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    message.startTime !== undefined && (obj.start_time = message.startTime);
+    obj.start_time = message.startTime;
 
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
-    } else {
-      obj.vesting_periods = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: PeriodicVestingAccountSDKType): PeriodicVestingAccount {
-    return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : undefined,
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PeriodicVestingAccount): PeriodicVestingAccountSDKType {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined);
-    message.startTime !== undefined && (obj.start_time = message.startTime);
-
-    if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
       obj.vesting_periods = [];
     }
@@ -799,18 +695,6 @@ export const PermanentLockedAccount = {
   toSDK(message: PermanentLockedAccount): PermanentLockedAccountSDKType {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: PermanentLockedAccountSDKType): PermanentLockedAccount {
-    return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined
-    };
-  },
-
-  toAmino(message: PermanentLockedAccount): PermanentLockedAccountSDKType {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined);
     return obj;
   }
 

@@ -157,25 +157,13 @@ export const QueryDenomTraceRequest = {
 
   fromSDK(object: QueryDenomTraceRequestSDKType): QueryDenomTraceRequest {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined
+      hash: object?.hash
     };
   },
 
   toSDK(message: QueryDenomTraceRequest): QueryDenomTraceRequestSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomTraceRequestSDKType): QueryDenomTraceRequest {
-    return {
-      hash: isSet(object.hash) ? object.hash : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomTraceRequest): QueryDenomTraceRequestSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     return obj;
   }
 
@@ -246,18 +234,6 @@ export const QueryDenomTraceResponse = {
     const obj: any = {};
     message.denomTrace !== undefined && (obj.denom_trace = message.denomTrace ? DenomTrace.toSDK(message.denomTrace) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryDenomTraceResponseSDKType): QueryDenomTraceResponse {
-    return {
-      denomTrace: isSet(object.denom_trace) ? DenomTrace.fromAmino(object.denom_trace) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomTraceResponse): QueryDenomTraceResponseSDKType {
-    const obj: any = {};
-    message.denomTrace !== undefined && (obj.denom_trace = message.denomTrace ? DenomTrace.toAmino(message.denomTrace) : undefined);
-    return obj;
   }
 
 };
@@ -326,18 +302,6 @@ export const QueryDenomTracesRequest = {
   toSDK(message: QueryDenomTracesRequest): QueryDenomTracesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryDenomTracesRequestSDKType): QueryDenomTracesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomTracesRequest): QueryDenomTracesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -434,26 +398,6 @@ export const QueryDenomTracesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryDenomTracesResponseSDKType): QueryDenomTracesResponse {
-    return {
-      denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryDenomTracesResponse): QueryDenomTracesResponseSDKType {
-    const obj: any = {};
-
-    if (message.denomTraces) {
-      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
-    } else {
-      obj.denom_traces = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -504,15 +448,6 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -583,18 +518,6 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

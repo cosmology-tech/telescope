@@ -146,29 +146,15 @@ export const MsgSoftwareUpgrade = {
 
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : undefined,
+      authority: object?.authority,
       plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
     };
   },
 
   toSDK(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
     const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
+    obj.authority = message.authority;
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
-    return {
-      authority: isSet(object.authority) ? object.authority : undefined,
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-
-  toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
     return obj;
   }
 
@@ -220,15 +206,6 @@ export const MsgSoftwareUpgradeResponse = {
   },
 
   toSDK(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSoftwareUpgradeResponseSDKType): MsgSoftwareUpgradeResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -292,25 +269,13 @@ export const MsgCancelUpgrade = {
 
   fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : undefined
+      authority: object?.authority
     };
   },
 
   toSDK(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
     const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    return obj;
-  },
-
-  fromAmino(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
-    return {
-      authority: isSet(object.authority) ? object.authority : undefined
-    };
-  },
-
-  toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
+    obj.authority = message.authority;
     return obj;
   }
 
@@ -362,15 +327,6 @@ export const MsgCancelUpgradeResponse = {
   },
 
   toSDK(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgCancelUpgradeResponseSDKType): MsgCancelUpgradeResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
   }

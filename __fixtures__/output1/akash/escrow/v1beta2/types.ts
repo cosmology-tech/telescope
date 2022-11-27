@@ -324,29 +324,15 @@ export const AccountID = {
 
   fromSDK(object: AccountIDSDKType): AccountID {
     return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined
+      scope: object?.scope,
+      xid: object?.xid
     };
   },
 
   toSDK(message: AccountID): AccountIDSDKType {
     const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    return obj;
-  },
-
-  fromAmino(object: AccountIDSDKType): AccountID {
-    return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined
-    };
-  },
-
-  toAmino(message: AccountID): AccountIDSDKType {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
+    obj.scope = message.scope;
+    obj.xid = message.xid;
     return obj;
   }
 
@@ -494,12 +480,12 @@ export const Account = {
   fromSDK(object: AccountSDKType): Account {
     return {
       id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      owner: object?.owner,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDK(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
+      settledAt: object?.settled_at,
+      depositor: object?.depositor,
       funds: isSet(object.funds) ? DecCoin.fromSDK(object.funds) : undefined
     };
   },
@@ -507,39 +493,13 @@ export const Account = {
   toSDK(message: Account): AccountSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? AccountID.toSDK(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toSDK(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toSDK(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.settled_at = message.settledAt;
+    obj.depositor = message.depositor;
     message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toSDK(message.funds) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: AccountSDKType): Account {
-    return {
-      id: isSet(object.id) ? AccountID.fromAmino(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? DecCoin.fromAmino(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? DecCoin.fromAmino(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
-      funds: isSet(object.funds) ? DecCoin.fromAmino(object.funds) : undefined
-    };
-  },
-
-  toAmino(message: Account): AccountSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? AccountID.toAmino(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
-    message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined);
-    message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined);
     return obj;
   }
 
@@ -675,8 +635,8 @@ export const FractionalPayment = {
   fromSDK(object: FractionalPaymentSDKType): FractionalPayment {
     return {
       accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      paymentId: object?.payment_id,
+      owner: object?.owner,
       state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
       rate: isSet(object.rate) ? DecCoin.fromSDK(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,
@@ -687,36 +647,12 @@ export const FractionalPayment = {
   toSDK(message: FractionalPayment): FractionalPaymentSDKType {
     const obj: any = {};
     message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toSDK(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
     message.state !== undefined && (obj.state = fractionalPayment_StateToJSON(message.state));
     message.rate !== undefined && (obj.rate = message.rate ? DecCoin.toSDK(message.rate) : undefined);
     message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toSDK(message.balance) : undefined);
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: FractionalPaymentSDKType): FractionalPayment {
-    return {
-      accountId: isSet(object.account_id) ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? DecCoin.fromAmino(object.rate) : undefined,
-      balance: isSet(object.balance) ? DecCoin.fromAmino(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromAmino(object.withdrawn) : undefined
-    };
-  },
-
-  toAmino(message: FractionalPayment): FractionalPaymentSDKType {
-    const obj: any = {};
-    message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = fractionalPayment_StateToJSON(message.state));
-    message.rate !== undefined && (obj.rate = message.rate ? DecCoin.toAmino(message.rate) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined);
-    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined);
     return obj;
   }
 

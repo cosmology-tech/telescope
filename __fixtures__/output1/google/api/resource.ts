@@ -672,19 +672,19 @@ export const ResourceDescriptor = {
 
   fromSDK(object: ResourceDescriptorSDKType): ResourceDescriptor {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: isSet(object.name_field) ? object.name_field : undefined,
+      nameField: object?.name_field,
       history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
-      plural: isSet(object.plural) ? object.plural : undefined,
-      singular: isSet(object.singular) ? object.singular : undefined,
+      plural: object?.plural,
+      singular: object?.singular,
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
 
   toSDK(message: ResourceDescriptor): ResourceDescriptorSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
 
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
@@ -692,46 +692,10 @@ export const ResourceDescriptor = {
       obj.pattern = [];
     }
 
-    message.nameField !== undefined && (obj.name_field = message.nameField);
+    obj.name_field = message.nameField;
     message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
-    message.plural !== undefined && (obj.plural = message.plural);
-    message.singular !== undefined && (obj.singular = message.singular);
-
-    if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
-    } else {
-      obj.style = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ResourceDescriptorSDKType): ResourceDescriptor {
-    return {
-      type: isSet(object.type) ? object.type : undefined,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: isSet(object.name_field) ? object.name_field : undefined,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
-      plural: isSet(object.plural) ? object.plural : undefined,
-      singular: isSet(object.singular) ? object.singular : undefined,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: ResourceDescriptor): ResourceDescriptorSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-
-    if (message.pattern) {
-      obj.pattern = message.pattern.map(e => e);
-    } else {
-      obj.pattern = [];
-    }
-
-    message.nameField !== undefined && (obj.name_field = message.nameField);
-    message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
-    message.plural !== undefined && (obj.plural = message.plural);
-    message.singular !== undefined && (obj.singular = message.singular);
+    obj.plural = message.plural;
+    obj.singular = message.singular;
 
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
@@ -813,29 +777,15 @@ export const ResourceReference = {
 
   fromSDK(object: ResourceReferenceSDKType): ResourceReference {
     return {
-      type: isSet(object.type) ? object.type : undefined,
-      childType: isSet(object.child_type) ? object.child_type : undefined
+      type: object?.type,
+      childType: object?.child_type
     };
   },
 
   toSDK(message: ResourceReference): ResourceReferenceSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.childType !== undefined && (obj.child_type = message.childType);
-    return obj;
-  },
-
-  fromAmino(object: ResourceReferenceSDKType): ResourceReference {
-    return {
-      type: isSet(object.type) ? object.type : undefined,
-      childType: isSet(object.child_type) ? object.child_type : undefined
-    };
-  },
-
-  toAmino(message: ResourceReference): ResourceReferenceSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.childType !== undefined && (obj.child_type = message.childType);
+    obj.type = message.type;
+    obj.child_type = message.childType;
     return obj;
   }
 

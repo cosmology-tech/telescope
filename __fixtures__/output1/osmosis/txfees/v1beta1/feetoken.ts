@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 
 /**
@@ -93,29 +93,15 @@ export const FeeToken = {
 
   fromSDK(object: FeeTokenSDKType): FeeToken {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      poolID: isSet(object.poolID) ? object.poolID : undefined
+      denom: object?.denom,
+      poolID: object?.poolID
     };
   },
 
   toSDK(message: FeeToken): FeeTokenSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = message.poolID);
-    return obj;
-  },
-
-  fromAmino(object: FeeTokenSDKType): FeeToken {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      poolID: isSet(object.poolID) ? object.poolID : undefined
-    };
-  },
-
-  toAmino(message: FeeToken): FeeTokenSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = message.poolID);
+    obj.denom = message.denom;
+    obj.poolID = message.poolID;
     return obj;
   }
 

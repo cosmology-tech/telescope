@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Any } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.auth.v1beta1";
 
 /**

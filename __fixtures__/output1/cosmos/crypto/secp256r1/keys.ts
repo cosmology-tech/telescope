@@ -89,25 +89,13 @@ export const PubKey = {
 
   fromSDK(object: PubKeySDKType): PubKey {
     return {
-      key: isSet(object.key) ? object.key : undefined
+      key: object?.key
     };
   },
 
   toSDK(message: PubKey): PubKeySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    return obj;
-  },
-
-  fromAmino(object: PubKeySDKType): PubKey {
-    return {
-      key: isSet(object.key) ? object.key : undefined
-    };
-  },
-
-  toAmino(message: PubKey): PubKeySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     return obj;
   }
 
@@ -170,25 +158,13 @@ export const PrivKey = {
 
   fromSDK(object: PrivKeySDKType): PrivKey {
     return {
-      secret: isSet(object.secret) ? object.secret : undefined
+      secret: object?.secret
     };
   },
 
   toSDK(message: PrivKey): PrivKeySDKType {
     const obj: any = {};
-    message.secret !== undefined && (obj.secret = message.secret);
-    return obj;
-  },
-
-  fromAmino(object: PrivKeySDKType): PrivKey {
-    return {
-      secret: isSet(object.secret) ? object.secret : undefined
-    };
-  },
-
-  toAmino(message: PrivKey): PrivKeySDKType {
-    const obj: any = {};
-    message.secret !== undefined && (obj.secret = message.secret);
+    obj.secret = message.secret;
     return obj;
   }
 

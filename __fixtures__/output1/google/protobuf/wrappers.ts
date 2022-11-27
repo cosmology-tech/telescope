@@ -239,25 +239,13 @@ export const DoubleValue = {
 
   fromSDK(object: DoubleValueSDKType): DoubleValue {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: DoubleValue): DoubleValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: DoubleValueSDKType): DoubleValue {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: DoubleValue): DoubleValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -320,25 +308,13 @@ export const FloatValue = {
 
   fromSDK(object: FloatValueSDKType): FloatValue {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: FloatValue): FloatValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: FloatValueSDKType): FloatValue {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: FloatValue): FloatValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -401,25 +377,13 @@ export const Int64Value = {
 
   fromSDK(object: Int64ValueSDKType): Int64Value {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: Int64Value): Int64ValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: Int64ValueSDKType): Int64Value {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Int64Value): Int64ValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -482,25 +446,13 @@ export const UInt64Value = {
 
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: UInt64Value): UInt64ValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: UInt64ValueSDKType): UInt64Value {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: UInt64Value): UInt64ValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -563,25 +515,13 @@ export const Int32Value = {
 
   fromSDK(object: Int32ValueSDKType): Int32Value {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: Int32Value): Int32ValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: Int32ValueSDKType): Int32Value {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Int32Value): Int32ValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -644,25 +584,13 @@ export const UInt32Value = {
 
   fromSDK(object: UInt32ValueSDKType): UInt32Value {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: UInt32Value): UInt32ValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: UInt32ValueSDKType): UInt32Value {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: UInt32Value): UInt32ValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -725,25 +653,13 @@ export const BoolValue = {
 
   fromSDK(object: BoolValueSDKType): BoolValue {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: BoolValue): BoolValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: BoolValueSDKType): BoolValue {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: BoolValue): BoolValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -806,25 +722,13 @@ export const StringValue = {
 
   fromSDK(object: StringValueSDKType): StringValue {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: StringValue): StringValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: StringValueSDKType): StringValue {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: StringValue): StringValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -887,25 +791,13 @@ export const BytesValue = {
 
   fromSDK(object: BytesValueSDKType): BytesValue {
     return {
-      value: isSet(object.value) ? object.value : undefined
+      value: object?.value
     };
   },
 
   toSDK(message: BytesValue): BytesValueSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: BytesValueSDKType): BytesValue {
-    return {
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: BytesValue): BytesValueSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 

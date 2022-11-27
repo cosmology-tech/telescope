@@ -162,41 +162,21 @@ export const QueryAppVersionRequest = {
 
   fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      portId: object?.port_id,
+      connectionId: object?.connection_id,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : undefined
+      proposedVersion: object?.proposed_version
     };
   },
 
   toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.port_id = message.portId;
+    obj.connection_id = message.connectionId;
     message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
-    message.proposedVersion !== undefined && (obj.proposed_version = message.proposedVersion);
-    return obj;
-  },
-
-  fromAmino(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : undefined
-    };
-  },
-
-  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
-    message.proposedVersion !== undefined && (obj.proposed_version = message.proposedVersion);
+    obj.proposed_version = message.proposedVersion;
     return obj;
   }
 
@@ -271,29 +251,15 @@ export const QueryAppVersionResponse = {
 
   fromSDK(object: QueryAppVersionResponseSDKType): QueryAppVersionResponse {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      version: isSet(object.version) ? object.version : undefined
+      portId: object?.port_id,
+      version: object?.version
     };
   },
 
   toSDK(message: QueryAppVersionResponse): QueryAppVersionResponseSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
-
-  fromAmino(object: QueryAppVersionResponseSDKType): QueryAppVersionResponse {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      version: isSet(object.version) ? object.version : undefined
-    };
-  },
-
-  toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.version !== undefined && (obj.version = message.version);
+    obj.port_id = message.portId;
+    obj.version = message.version;
     return obj;
   }
 

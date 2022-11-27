@@ -383,33 +383,17 @@ export const MsgChannelOpenInit = {
 
   fromSDK(object: MsgChannelOpenInitSDKType): MsgChannelOpenInit {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
+      portId: object?.port_id,
       channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelOpenInit): MsgChannelOpenInitSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
+    obj.port_id = message.portId;
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelOpenInitSDKType): MsgChannelOpenInit {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channel: isSet(object.channel) ? Channel.fromAmino(object.channel) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelOpenInit): MsgChannelOpenInitSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -461,15 +445,6 @@ export const MsgChannelOpenInitResponse = {
   },
 
   toSDK(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelOpenInitResponseSDKType): MsgChannelOpenInitResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -605,49 +580,25 @@ export const MsgChannelOpenTry = {
 
   fromSDK(object: MsgChannelOpenTrySDKType): MsgChannelOpenTry {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      previousChannelId: isSet(object.previous_channel_id) ? object.previous_channel_id : undefined,
+      portId: object?.port_id,
+      previousChannelId: object?.previous_channel_id,
       channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
-      counterpartyVersion: isSet(object.counterparty_version) ? object.counterparty_version : undefined,
-      proofInit: isSet(object.proof_init) ? object.proof_init : undefined,
+      counterpartyVersion: object?.counterparty_version,
+      proofInit: object?.proof_init,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelOpenTry): MsgChannelOpenTrySDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.previousChannelId !== undefined && (obj.previous_channel_id = message.previousChannelId);
+    obj.port_id = message.portId;
+    obj.previous_channel_id = message.previousChannelId;
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
-    message.counterpartyVersion !== undefined && (obj.counterparty_version = message.counterpartyVersion);
-    message.proofInit !== undefined && (obj.proof_init = message.proofInit);
+    obj.counterparty_version = message.counterpartyVersion;
+    obj.proof_init = message.proofInit;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelOpenTrySDKType): MsgChannelOpenTry {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      previousChannelId: isSet(object.previous_channel_id) ? object.previous_channel_id : undefined,
-      channel: isSet(object.channel) ? Channel.fromAmino(object.channel) : undefined,
-      counterpartyVersion: isSet(object.counterparty_version) ? object.counterparty_version : undefined,
-      proofInit: isSet(object.proof_init) ? object.proof_init : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelOpenTry): MsgChannelOpenTrySDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.previousChannelId !== undefined && (obj.previous_channel_id = message.previousChannelId);
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined);
-    message.counterpartyVersion !== undefined && (obj.counterparty_version = message.counterpartyVersion);
-    message.proofInit !== undefined && (obj.proof_init = message.proofInit);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -699,15 +650,6 @@ export const MsgChannelOpenTryResponse = {
   },
 
   toSDK(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelOpenTryResponseSDKType): MsgChannelOpenTryResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -843,49 +785,25 @@ export const MsgChannelOpenAck = {
 
   fromSDK(object: MsgChannelOpenAckSDKType): MsgChannelOpenAck {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      counterpartyChannelId: isSet(object.counterparty_channel_id) ? object.counterparty_channel_id : undefined,
-      counterpartyVersion: isSet(object.counterparty_version) ? object.counterparty_version : undefined,
-      proofTry: isSet(object.proof_try) ? object.proof_try : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      counterpartyChannelId: object?.counterparty_channel_id,
+      counterpartyVersion: object?.counterparty_version,
+      proofTry: object?.proof_try,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelOpenAck): MsgChannelOpenAckSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.counterpartyChannelId !== undefined && (obj.counterparty_channel_id = message.counterpartyChannelId);
-    message.counterpartyVersion !== undefined && (obj.counterparty_version = message.counterpartyVersion);
-    message.proofTry !== undefined && (obj.proof_try = message.proofTry);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.counterparty_channel_id = message.counterpartyChannelId;
+    obj.counterparty_version = message.counterpartyVersion;
+    obj.proof_try = message.proofTry;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelOpenAckSDKType): MsgChannelOpenAck {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      counterpartyChannelId: isSet(object.counterparty_channel_id) ? object.counterparty_channel_id : undefined,
-      counterpartyVersion: isSet(object.counterparty_version) ? object.counterparty_version : undefined,
-      proofTry: isSet(object.proof_try) ? object.proof_try : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelOpenAck): MsgChannelOpenAckSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.counterpartyChannelId !== undefined && (obj.counterparty_channel_id = message.counterpartyChannelId);
-    message.counterpartyVersion !== undefined && (obj.counterparty_version = message.counterpartyVersion);
-    message.proofTry !== undefined && (obj.proof_try = message.proofTry);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -937,15 +855,6 @@ export const MsgChannelOpenAckResponse = {
   },
 
   toSDK(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelOpenAckResponseSDKType): MsgChannelOpenAckResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1057,41 +966,21 @@ export const MsgChannelOpenConfirm = {
 
   fromSDK(object: MsgChannelOpenConfirmSDKType): MsgChannelOpenConfirm {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      proofAck: isSet(object.proof_ack) ? object.proof_ack : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      proofAck: object?.proof_ack,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.proofAck !== undefined && (obj.proof_ack = message.proofAck);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.proof_ack = message.proofAck;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelOpenConfirmSDKType): MsgChannelOpenConfirm {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      proofAck: isSet(object.proof_ack) ? object.proof_ack : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.proofAck !== undefined && (obj.proof_ack = message.proofAck);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -1143,15 +1032,6 @@ export const MsgChannelOpenConfirmResponse = {
   },
 
   toSDK(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelOpenConfirmResponseSDKType): MsgChannelOpenConfirmResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1239,33 +1119,17 @@ export const MsgChannelCloseInit = {
 
   fromSDK(object: MsgChannelCloseInitSDKType): MsgChannelCloseInit {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelCloseInit): MsgChannelCloseInitSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelCloseInitSDKType): MsgChannelCloseInit {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelCloseInit): MsgChannelCloseInitSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -1317,15 +1181,6 @@ export const MsgChannelCloseInitResponse = {
   },
 
   toSDK(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelCloseInitResponseSDKType): MsgChannelCloseInitResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1437,41 +1292,21 @@ export const MsgChannelCloseConfirm = {
 
   fromSDK(object: MsgChannelCloseConfirmSDKType): MsgChannelCloseConfirm {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      proofInit: isSet(object.proof_init) ? object.proof_init : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      proofInit: object?.proof_init,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.proofInit !== undefined && (obj.proof_init = message.proofInit);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.proof_init = message.proofInit;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgChannelCloseConfirmSDKType): MsgChannelCloseConfirm {
-    return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      proofInit: isSet(object.proof_init) ? object.proof_init : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmSDKType {
-    const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.proofInit !== undefined && (obj.proof_init = message.proofInit);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -1523,15 +1358,6 @@ export const MsgChannelCloseConfirmResponse = {
   },
 
   toSDK(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgChannelCloseConfirmResponseSDKType): MsgChannelCloseConfirmResponse {
-    return {};
-  },
-
-  toAmino(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1632,36 +1458,18 @@ export const MsgRecvPacket = {
   fromSDK(object: MsgRecvPacketSDKType): MsgRecvPacket {
     return {
       packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
-      proofCommitment: isSet(object.proof_commitment) ? object.proof_commitment : undefined,
+      proofCommitment: object?.proof_commitment,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgRecvPacket): MsgRecvPacketSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
-    message.proofCommitment !== undefined && (obj.proof_commitment = message.proofCommitment);
+    obj.proof_commitment = message.proofCommitment;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgRecvPacketSDKType): MsgRecvPacket {
-    return {
-      packet: isSet(object.packet) ? Packet.fromAmino(object.packet) : undefined,
-      proofCommitment: isSet(object.proof_commitment) ? object.proof_commitment : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgRecvPacket): MsgRecvPacketSDKType {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined);
-    message.proofCommitment !== undefined && (obj.proof_commitment = message.proofCommitment);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -1713,15 +1521,6 @@ export const MsgRecvPacketResponse = {
   },
 
   toSDK(_: MsgRecvPacketResponse): MsgRecvPacketResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgRecvPacketResponseSDKType): MsgRecvPacketResponse {
-    return {};
-  },
-
-  toAmino(_: MsgRecvPacketResponse): MsgRecvPacketResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1834,40 +1633,20 @@ export const MsgTimeout = {
   fromSDK(object: MsgTimeoutSDKType): MsgTimeout {
     return {
       packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
-      proofUnreceived: isSet(object.proof_unreceived) ? object.proof_unreceived : undefined,
+      proofUnreceived: object?.proof_unreceived,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      nextSequenceRecv: isSet(object.next_sequence_recv) ? object.next_sequence_recv : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      nextSequenceRecv: object?.next_sequence_recv,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgTimeout): MsgTimeoutSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = message.proofUnreceived);
+    obj.proof_unreceived = message.proofUnreceived;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.next_sequence_recv = message.nextSequenceRecv);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgTimeoutSDKType): MsgTimeout {
-    return {
-      packet: isSet(object.packet) ? Packet.fromAmino(object.packet) : undefined,
-      proofUnreceived: isSet(object.proof_unreceived) ? object.proof_unreceived : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      nextSequenceRecv: isSet(object.next_sequence_recv) ? object.next_sequence_recv : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgTimeout): MsgTimeoutSDKType {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = message.proofUnreceived);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.next_sequence_recv = message.nextSequenceRecv);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.next_sequence_recv = message.nextSequenceRecv;
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -1919,15 +1698,6 @@ export const MsgTimeoutResponse = {
   },
 
   toSDK(_: MsgTimeoutResponse): MsgTimeoutResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgTimeoutResponseSDKType): MsgTimeoutResponse {
-    return {};
-  },
-
-  toAmino(_: MsgTimeoutResponse): MsgTimeoutResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -2052,44 +1822,22 @@ export const MsgTimeoutOnClose = {
   fromSDK(object: MsgTimeoutOnCloseSDKType): MsgTimeoutOnClose {
     return {
       packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
-      proofUnreceived: isSet(object.proof_unreceived) ? object.proof_unreceived : undefined,
-      proofClose: isSet(object.proof_close) ? object.proof_close : undefined,
+      proofUnreceived: object?.proof_unreceived,
+      proofClose: object?.proof_close,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      nextSequenceRecv: isSet(object.next_sequence_recv) ? object.next_sequence_recv : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      nextSequenceRecv: object?.next_sequence_recv,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgTimeoutOnClose): MsgTimeoutOnCloseSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = message.proofUnreceived);
-    message.proofClose !== undefined && (obj.proof_close = message.proofClose);
+    obj.proof_unreceived = message.proofUnreceived;
+    obj.proof_close = message.proofClose;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.next_sequence_recv = message.nextSequenceRecv);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgTimeoutOnCloseSDKType): MsgTimeoutOnClose {
-    return {
-      packet: isSet(object.packet) ? Packet.fromAmino(object.packet) : undefined,
-      proofUnreceived: isSet(object.proof_unreceived) ? object.proof_unreceived : undefined,
-      proofClose: isSet(object.proof_close) ? object.proof_close : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      nextSequenceRecv: isSet(object.next_sequence_recv) ? object.next_sequence_recv : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgTimeoutOnClose): MsgTimeoutOnCloseSDKType {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = message.proofUnreceived);
-    message.proofClose !== undefined && (obj.proof_close = message.proofClose);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.next_sequence_recv = message.nextSequenceRecv);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.next_sequence_recv = message.nextSequenceRecv;
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -2141,15 +1889,6 @@ export const MsgTimeoutOnCloseResponse = {
   },
 
   toSDK(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgTimeoutOnCloseResponseSDKType): MsgTimeoutOnCloseResponse {
-    return {};
-  },
-
-  toAmino(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -2262,40 +2001,20 @@ export const MsgAcknowledgement = {
   fromSDK(object: MsgAcknowledgementSDKType): MsgAcknowledgement {
     return {
       packet: isSet(object.packet) ? Packet.fromSDK(object.packet) : undefined,
-      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined,
-      proofAcked: isSet(object.proof_acked) ? object.proof_acked : undefined,
+      acknowledgement: object?.acknowledgement,
+      proofAcked: object?.proof_acked,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgAcknowledgement): MsgAcknowledgementSDKType {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toSDK(message.packet) : undefined);
-    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
-    message.proofAcked !== undefined && (obj.proof_acked = message.proofAcked);
+    obj.acknowledgement = message.acknowledgement;
+    obj.proof_acked = message.proofAcked;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
-
-  fromAmino(object: MsgAcknowledgementSDKType): MsgAcknowledgement {
-    return {
-      packet: isSet(object.packet) ? Packet.fromAmino(object.packet) : undefined,
-      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined,
-      proofAcked: isSet(object.proof_acked) ? object.proof_acked : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
-    };
-  },
-
-  toAmino(message: MsgAcknowledgement): MsgAcknowledgementSDKType {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined);
-    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
-    message.proofAcked !== undefined && (obj.proof_acked = message.proofAcked);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -2347,15 +2066,6 @@ export const MsgAcknowledgementResponse = {
   },
 
   toSDK(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgAcknowledgementResponseSDKType): MsgAcknowledgementResponse {
-    return {};
-  },
-
-  toAmino(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseSDKType {
     const obj: any = {};
     return obj;
   }

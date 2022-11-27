@@ -120,26 +120,6 @@ export const GenesisDeployment = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisDeploymentSDKType): GenesisDeployment {
-    return {
-      deployment: isSet(object.deployment) ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisDeployment): GenesisDeploymentSDKType {
-    const obj: any = {};
-    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined);
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    return obj;
   }
 
 };
@@ -234,26 +214,6 @@ export const GenesisState = {
     }
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

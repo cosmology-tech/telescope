@@ -131,29 +131,15 @@ export const Minter = {
 
   fromSDK(object: MinterSDKType): Minter {
     return {
-      inflation: isSet(object.inflation) ? object.inflation : undefined,
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
+      inflation: object?.inflation,
+      annualProvisions: object?.annual_provisions
     };
   },
 
   toSDK(message: Minter): MinterSDKType {
     const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
-    message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
-    return obj;
-  },
-
-  fromAmino(object: MinterSDKType): Minter {
-    return {
-      inflation: isSet(object.inflation) ? object.inflation : undefined,
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
-    };
-  },
-
-  toAmino(message: Minter): MinterSDKType {
-    const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
-    message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
+    obj.inflation = message.inflation;
+    obj.annual_provisions = message.annualProvisions;
     return obj;
   }
 
@@ -276,45 +262,23 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
-      inflationRateChange: isSet(object.inflation_rate_change) ? object.inflation_rate_change : undefined,
-      inflationMax: isSet(object.inflation_max) ? object.inflation_max : undefined,
-      inflationMin: isSet(object.inflation_min) ? object.inflation_min : undefined,
-      goalBonded: isSet(object.goal_bonded) ? object.goal_bonded : undefined,
-      blocksPerYear: isSet(object.blocks_per_year) ? object.blocks_per_year : undefined
+      mintDenom: object?.mint_denom,
+      inflationRateChange: object?.inflation_rate_change,
+      inflationMax: object?.inflation_max,
+      inflationMin: object?.inflation_min,
+      goalBonded: object?.goal_bonded,
+      blocksPerYear: object?.blocks_per_year
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.mintDenom !== undefined && (obj.mint_denom = message.mintDenom);
-    message.inflationRateChange !== undefined && (obj.inflation_rate_change = message.inflationRateChange);
-    message.inflationMax !== undefined && (obj.inflation_max = message.inflationMax);
-    message.inflationMin !== undefined && (obj.inflation_min = message.inflationMin);
-    message.goalBonded !== undefined && (obj.goal_bonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocks_per_year = message.blocksPerYear);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
-      inflationRateChange: isSet(object.inflation_rate_change) ? object.inflation_rate_change : undefined,
-      inflationMax: isSet(object.inflation_max) ? object.inflation_max : undefined,
-      inflationMin: isSet(object.inflation_min) ? object.inflation_min : undefined,
-      goalBonded: isSet(object.goal_bonded) ? object.goal_bonded : undefined,
-      blocksPerYear: isSet(object.blocks_per_year) ? object.blocks_per_year : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.mintDenom !== undefined && (obj.mint_denom = message.mintDenom);
-    message.inflationRateChange !== undefined && (obj.inflation_rate_change = message.inflationRateChange);
-    message.inflationMax !== undefined && (obj.inflation_max = message.inflationMax);
-    message.inflationMin !== undefined && (obj.inflation_min = message.inflationMin);
-    message.goalBonded !== undefined && (obj.goal_bonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocks_per_year = message.blocksPerYear);
+    obj.mint_denom = message.mintDenom;
+    obj.inflation_rate_change = message.inflationRateChange;
+    obj.inflation_max = message.inflationMax;
+    obj.inflation_min = message.inflationMin;
+    obj.goal_bonded = message.goalBonded;
+    obj.blocks_per_year = message.blocksPerYear;
     return obj;
   }
 

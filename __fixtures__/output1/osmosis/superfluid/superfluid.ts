@@ -253,28 +253,14 @@ export const SuperfluidAsset = {
 
   fromSDK(object: SuperfluidAssetSDKType): SuperfluidAsset {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
+      denom: object?.denom,
       assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
     };
   },
 
   toSDK(message: SuperfluidAsset): SuperfluidAssetSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.assetType !== undefined && (obj.asset_type = superfluidAssetTypeToJSON(message.assetType));
-    return obj;
-  },
-
-  fromAmino(object: SuperfluidAssetSDKType): SuperfluidAsset {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
-    };
-  },
-
-  toAmino(message: SuperfluidAsset): SuperfluidAssetSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     message.assetType !== undefined && (obj.asset_type = superfluidAssetTypeToJSON(message.assetType));
     return obj;
   }
@@ -362,33 +348,17 @@ export const SuperfluidIntermediaryAccount = {
 
   fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
+      denom: object?.denom,
+      valAddr: object?.val_addr,
+      gaugeId: object?.gauge_id
     };
   },
 
   toSDK(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    return obj;
-  },
-
-  fromAmino(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
-    };
-  },
-
-  toAmino(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.denom = message.denom;
+    obj.val_addr = message.valAddr;
+    obj.gauge_id = message.gaugeId;
     return obj;
   }
 
@@ -475,33 +445,17 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromSDK(object: OsmoEquivalentMultiplierRecordSDKType): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epoch_number) ? object.epoch_number : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      multiplier: isSet(object.multiplier) ? object.multiplier : undefined
+      epochNumber: object?.epoch_number,
+      denom: object?.denom,
+      multiplier: object?.multiplier
     };
   },
 
   toSDK(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordSDKType {
     const obj: any = {};
-    message.epochNumber !== undefined && (obj.epoch_number = message.epochNumber);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.multiplier !== undefined && (obj.multiplier = message.multiplier);
-    return obj;
-  },
-
-  fromAmino(object: OsmoEquivalentMultiplierRecordSDKType): OsmoEquivalentMultiplierRecord {
-    return {
-      epochNumber: isSet(object.epoch_number) ? object.epoch_number : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      multiplier: isSet(object.multiplier) ? object.multiplier : undefined
-    };
-  },
-
-  toAmino(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordSDKType {
-    const obj: any = {};
-    message.epochNumber !== undefined && (obj.epoch_number = message.epochNumber);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.multiplier !== undefined && (obj.multiplier = message.multiplier);
+    obj.epoch_number = message.epochNumber;
+    obj.denom = message.denom;
+    obj.multiplier = message.multiplier;
     return obj;
   }
 
@@ -600,8 +554,8 @@ export const SuperfluidDelegationRecord = {
 
   fromSDK(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
       delegationAmount: isSet(object.delegation_amount) ? Coin.fromSDK(object.delegation_amount) : undefined,
       equivalentStakedAmount: isSet(object.equivalent_staked_amount) ? Coin.fromSDK(object.equivalent_staked_amount) : undefined
     };
@@ -609,28 +563,10 @@ export const SuperfluidDelegationRecord = {
 
   toSDK(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     message.delegationAmount !== undefined && (obj.delegation_amount = message.delegationAmount ? Coin.toSDK(message.delegationAmount) : undefined);
     message.equivalentStakedAmount !== undefined && (obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toSDK(message.equivalentStakedAmount) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      delegationAmount: isSet(object.delegation_amount) ? Coin.fromAmino(object.delegation_amount) : undefined,
-      equivalentStakedAmount: isSet(object.equivalent_staked_amount) ? Coin.fromAmino(object.equivalent_staked_amount) : undefined
-    };
-  },
-
-  toAmino(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.delegationAmount !== undefined && (obj.delegation_amount = message.delegationAmount ? Coin.toAmino(message.delegationAmount) : undefined);
-    message.equivalentStakedAmount !== undefined && (obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount) : undefined);
     return obj;
   }
 
@@ -705,29 +641,15 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromSDK(object: LockIdIntermediaryAccountConnectionSDKType): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
-      intermediaryAccount: isSet(object.intermediary_account) ? object.intermediary_account : undefined
+      lockId: object?.lock_id,
+      intermediaryAccount: object?.intermediary_account
     };
   },
 
   toSDK(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionSDKType {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    message.intermediaryAccount !== undefined && (obj.intermediary_account = message.intermediaryAccount);
-    return obj;
-  },
-
-  fromAmino(object: LockIdIntermediaryAccountConnectionSDKType): LockIdIntermediaryAccountConnection {
-    return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
-      intermediaryAccount: isSet(object.intermediary_account) ? object.intermediary_account : undefined
-    };
-  },
-
-  toAmino(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionSDKType {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
-    message.intermediaryAccount !== undefined && (obj.intermediary_account = message.intermediaryAccount);
+    obj.lock_id = message.lockId;
+    obj.intermediary_account = message.intermediaryAccount;
     return obj;
   }
 
@@ -813,24 +735,6 @@ export const UnpoolWhitelistedPools = {
   },
 
   toSDK(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsSDKType {
-    const obj: any = {};
-
-    if (message.ids) {
-      obj.ids = message.ids.map(e => e);
-    } else {
-      obj.ids = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: UnpoolWhitelistedPoolsSDKType): UnpoolWhitelistedPools {
-    return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsSDKType {
     const obj: any = {};
 
     if (message.ids) {

@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.streamswap.v1";
 
 /** Params holds parameters for the streamswap module */
@@ -146,7 +146,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       saleCreationFee: Array.isArray(object?.sale_creation_fee) ? object.sale_creation_fee.map((e: any) => Coin.fromSDK(e)) : [],
-      saleCreationFeeRecipient: isSet(object.sale_creation_fee_recipient) ? object.sale_creation_fee_recipient : undefined,
+      saleCreationFeeRecipient: object?.sale_creation_fee_recipient,
       minDurationUntilStartTime: isSet(object.min_duration_until_start_time) ? Duration.fromSDK(object.min_duration_until_start_time) : undefined,
       minSaleDuration: isSet(object.min_sale_duration) ? Duration.fromSDK(object.min_sale_duration) : undefined
     };
@@ -161,39 +161,9 @@ export const Params = {
       obj.sale_creation_fee = [];
     }
 
-    message.saleCreationFeeRecipient !== undefined && (obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient);
+    obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient;
     message.minDurationUntilStartTime !== undefined && (obj.min_duration_until_start_time = message.minDurationUntilStartTime ? Duration.toSDK(message.minDurationUntilStartTime) : undefined);
     message.minSaleDuration !== undefined && (obj.min_sale_duration = message.minSaleDuration ? Duration.toSDK(message.minSaleDuration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      saleCreationFee: Array.isArray(object?.sale_creation_fee) ? object.sale_creation_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      saleCreationFeeRecipient: isSet(object.sale_creation_fee_recipient) ? object.sale_creation_fee_recipient : undefined,
-      minDurationUntilStartTime: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      },
-      minSaleDuration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      }
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-
-    if (message.saleCreationFee) {
-      obj.sale_creation_fee = message.saleCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.sale_creation_fee = [];
-    }
-
-    message.saleCreationFeeRecipient !== undefined && (obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient);
-    message.minDurationUntilStartTime !== undefined && (obj.min_duration_until_start_time = message.minDurationUntilStartTime ? Duration.toAmino(message.minDurationUntilStartTime) : undefined);
-    message.minSaleDuration !== undefined && (obj.min_sale_duration = message.minSaleDuration ? Duration.toAmino(message.minSaleDuration) : undefined);
     return obj;
   }
 

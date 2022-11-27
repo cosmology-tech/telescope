@@ -129,41 +129,19 @@ export const MsgSend = {
 
   fromSDK(object: MsgSendSDKType): MsgSend {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
-      toAddress: isSet(object.to_address) ? object.to_address : undefined,
+      fromAddress: object?.from_address,
+      toAddress: object?.to_address,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgSend): MsgSendSDKType {
     const obj: any = {};
-    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
-    message.toAddress !== undefined && (obj.to_address = message.toAddress);
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgSendSDKType): MsgSend {
-    return {
-      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
-      toAddress: isSet(object.to_address) ? object.to_address : undefined,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgSend): MsgSendSDKType {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
-    message.toAddress !== undefined && (obj.to_address = message.toAddress);
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -219,15 +197,6 @@ export const MsgSendResponse = {
   },
 
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSendResponseSDKType): MsgSendResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSendResponse): MsgSendResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -335,31 +304,6 @@ export const MsgMultiSend = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: MsgMultiSendSDKType): MsgMultiSend {
-    return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromAmino(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgMultiSend): MsgMultiSendSDKType {
-    const obj: any = {};
-
-    if (message.inputs) {
-      obj.inputs = message.inputs.map(e => e ? Input.toAmino(e) : undefined);
-    } else {
-      obj.inputs = [];
-    }
-
-    if (message.outputs) {
-      obj.outputs = message.outputs.map(e => e ? Output.toAmino(e) : undefined);
-    } else {
-      obj.outputs = [];
-    }
-
-    return obj;
   }
 
 };
@@ -410,15 +354,6 @@ export const MsgMultiSendResponse = {
   },
 
   toSDK(_: MsgMultiSendResponse): MsgMultiSendResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgMultiSendResponseSDKType): MsgMultiSendResponse {
-    return {};
-  },
-
-  toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseSDKType {
     const obj: any = {};
     return obj;
   }

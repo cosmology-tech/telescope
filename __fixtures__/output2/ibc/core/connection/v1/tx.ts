@@ -3,8 +3,8 @@
 import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";
 
 /**

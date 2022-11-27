@@ -810,7 +810,7 @@ export const Http = {
   fromSDK(object: HttpSDKType): Http {
     return {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromSDK(e)) : [],
-      fullyDecodeReservedExpansion: isSet(object.fully_decode_reserved_expansion) ? object.fully_decode_reserved_expansion : undefined
+      fullyDecodeReservedExpansion: object?.fully_decode_reserved_expansion
     };
   },
 
@@ -823,27 +823,7 @@ export const Http = {
       obj.rules = [];
     }
 
-    message.fullyDecodeReservedExpansion !== undefined && (obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion);
-    return obj;
-  },
-
-  fromAmino(object: HttpSDKType): Http {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromAmino(e)) : [],
-      fullyDecodeReservedExpansion: isSet(object.fully_decode_reserved_expansion) ? object.fully_decode_reserved_expansion : undefined
-    };
-  },
-
-  toAmino(message: Http): HttpSDKType {
-    const obj: any = {};
-
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-
-    message.fullyDecodeReservedExpansion !== undefined && (obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion);
+    obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion;
     return obj;
   }
 
@@ -1020,69 +1000,33 @@ export const HttpRule = {
 
   fromSDK(object: HttpRuleSDKType): HttpRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      get: isSet(object.get) ? object.get : undefined,
-      put: isSet(object.put) ? object.put : undefined,
-      post: isSet(object.post) ? object.post : undefined,
-      delete: isSet(object.delete) ? object.delete : undefined,
-      patch: isSet(object.patch) ? object.patch : undefined,
+      selector: object?.selector,
+      get: object?.get,
+      put: object?.put,
+      post: object?.post,
+      delete: object?.delete,
+      patch: object?.patch,
       custom: isSet(object.custom) ? CustomHttpPattern.fromSDK(object.custom) : undefined,
-      body: isSet(object.body) ? object.body : undefined,
-      responseBody: isSet(object.response_body) ? object.response_body : undefined,
+      body: object?.body,
+      responseBody: object?.response_body,
       additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromSDK(e)) : []
     };
   },
 
   toSDK(message: HttpRule): HttpRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.get !== undefined && (obj.get = message.get);
-    message.put !== undefined && (obj.put = message.put);
-    message.post !== undefined && (obj.post = message.post);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.patch !== undefined && (obj.patch = message.patch);
+    obj.selector = message.selector;
+    obj.get = message.get;
+    obj.put = message.put;
+    obj.post = message.post;
+    obj.delete = message.delete;
+    obj.patch = message.patch;
     message.custom !== undefined && (obj.custom = message.custom ? CustomHttpPattern.toSDK(message.custom) : undefined);
-    message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined && (obj.response_body = message.responseBody);
+    obj.body = message.body;
+    obj.response_body = message.responseBody;
 
     if (message.additionalBindings) {
       obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toSDK(e) : undefined);
-    } else {
-      obj.additional_bindings = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: HttpRuleSDKType): HttpRule {
-    return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      get: isSet(object.get) ? object.get : undefined,
-      put: isSet(object.put) ? object.put : undefined,
-      post: isSet(object.post) ? object.post : undefined,
-      delete: isSet(object.delete) ? object.delete : undefined,
-      patch: isSet(object.patch) ? object.patch : undefined,
-      custom: isSet(object.custom) ? CustomHttpPattern.fromAmino(object.custom) : undefined,
-      body: isSet(object.body) ? object.body : undefined,
-      responseBody: isSet(object.response_body) ? object.response_body : undefined,
-      additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: HttpRule): HttpRuleSDKType {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.get !== undefined && (obj.get = message.get);
-    message.put !== undefined && (obj.put = message.put);
-    message.post !== undefined && (obj.post = message.post);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.patch !== undefined && (obj.patch = message.patch);
-    message.custom !== undefined && (obj.custom = message.custom ? CustomHttpPattern.toAmino(message.custom) : undefined);
-    message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined && (obj.response_body = message.responseBody);
-
-    if (message.additionalBindings) {
-      obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toAmino(e) : undefined);
     } else {
       obj.additional_bindings = [];
     }
@@ -1161,29 +1105,15 @@ export const CustomHttpPattern = {
 
   fromSDK(object: CustomHttpPatternSDKType): CustomHttpPattern {
     return {
-      kind: isSet(object.kind) ? object.kind : undefined,
-      path: isSet(object.path) ? object.path : undefined
+      kind: object?.kind,
+      path: object?.path
     };
   },
 
   toSDK(message: CustomHttpPattern): CustomHttpPatternSDKType {
     const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.path !== undefined && (obj.path = message.path);
-    return obj;
-  },
-
-  fromAmino(object: CustomHttpPatternSDKType): CustomHttpPattern {
-    return {
-      kind: isSet(object.kind) ? object.kind : undefined,
-      path: isSet(object.path) ? object.path : undefined
-    };
-  },
-
-  toAmino(message: CustomHttpPattern): CustomHttpPatternSDKType {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.path !== undefined && (obj.path = message.path);
+    obj.kind = message.kind;
+    obj.path = message.path;
     return obj;
   }
 

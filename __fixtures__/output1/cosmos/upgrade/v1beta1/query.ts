@@ -251,15 +251,6 @@ export const QueryCurrentPlanRequest = {
   toSDK(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: QueryCurrentPlanRequestSDKType): QueryCurrentPlanRequest {
-    return {};
-  },
-
-  toAmino(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -329,18 +320,6 @@ export const QueryCurrentPlanResponse = {
     const obj: any = {};
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
-    return {
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined
-    };
-  },
-
-  toAmino(message: QueryCurrentPlanResponse): QueryCurrentPlanResponseSDKType {
-    const obj: any = {};
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    return obj;
   }
 
 };
@@ -402,25 +381,13 @@ export const QueryAppliedPlanRequest = {
 
   fromSDK(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -483,25 +450,13 @@ export const QueryAppliedPlanResponse = {
 
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    return obj;
-  },
-
-  fromAmino(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
-    return {
-      height: isSet(object.height) ? object.height : undefined
-    };
-  },
-
-  toAmino(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -564,25 +519,13 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.last_height) ? object.last_height : undefined
+      lastHeight: object?.last_height
     };
   },
 
   toSDK(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
     const obj: any = {};
-    message.lastHeight !== undefined && (obj.last_height = message.lastHeight);
-    return obj;
-  },
-
-  fromAmino(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
-    return {
-      lastHeight: isSet(object.last_height) ? object.last_height : undefined
-    };
-  },
-
-  toAmino(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
-    const obj: any = {};
-    message.lastHeight !== undefined && (obj.last_height = message.lastHeight);
+    obj.last_height = message.lastHeight;
     return obj;
   }
 
@@ -645,25 +588,13 @@ export const QueryUpgradedConsensusStateResponse = {
 
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : undefined
+      upgradedConsensusState: object?.upgraded_consensus_state
     };
   },
 
   toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
     const obj: any = {};
-    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState);
-    return obj;
-  },
-
-  fromAmino(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
-    return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : undefined
-    };
-  },
-
-  toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
-    const obj: any = {};
-    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState);
+    obj.upgraded_consensus_state = message.upgradedConsensusState;
     return obj;
   }
 
@@ -726,25 +657,13 @@ export const QueryModuleVersionsRequest = {
 
   fromSDK(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
     return {
-      moduleName: isSet(object.module_name) ? object.module_name : undefined
+      moduleName: object?.module_name
     };
   },
 
   toSDK(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestSDKType {
     const obj: any = {};
-    message.moduleName !== undefined && (obj.module_name = message.moduleName);
-    return obj;
-  },
-
-  fromAmino(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
-    return {
-      moduleName: isSet(object.module_name) ? object.module_name : undefined
-    };
-  },
-
-  toAmino(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestSDKType {
-    const obj: any = {};
-    message.moduleName !== undefined && (obj.module_name = message.moduleName);
+    obj.module_name = message.moduleName;
     return obj;
   }
 
@@ -827,24 +746,6 @@ export const QueryModuleVersionsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: QueryModuleVersionsResponseSDKType): QueryModuleVersionsResponse {
-    return {
-      moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryModuleVersionsResponse): QueryModuleVersionsResponseSDKType {
-    const obj: any = {};
-
-    if (message.moduleVersions) {
-      obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e) : undefined);
-    } else {
-      obj.module_versions = [];
-    }
-
-    return obj;
   }
 
 };
@@ -895,15 +796,6 @@ export const QueryAuthorityRequest = {
   },
 
   toSDK(_: QueryAuthorityRequest): QueryAuthorityRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryAuthorityRequestSDKType): QueryAuthorityRequest {
-    return {};
-  },
-
-  toAmino(_: QueryAuthorityRequest): QueryAuthorityRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -967,25 +859,13 @@ export const QueryAuthorityResponse = {
 
   fromSDK(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryAuthorityResponse): QueryAuthorityResponseSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
-
-  fromAmino(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
-    return {
-      address: isSet(object.address) ? object.address : undefined
-    };
-  },
-
-  toAmino(message: QueryAuthorityResponse): QueryAuthorityResponseSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 

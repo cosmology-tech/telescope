@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
 
 /** GenesisState defines the recovery module's genesis state. */
@@ -98,18 +98,6 @@ export const GenesisState = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -183,32 +171,15 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
+      enableRecovery: object?.enable_recovery,
       packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromSDK(object.packet_timeout_duration) : undefined
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
+    obj.enable_recovery = message.enableRecovery;
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
-      packetTimeoutDuration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      }
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
-    message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined);
     return obj;
   }
 

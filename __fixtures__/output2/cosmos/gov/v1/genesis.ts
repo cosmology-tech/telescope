@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from "./gov";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1";
 
 /** GenesisState defines the gov module's genesis state. */

@@ -83,29 +83,15 @@ export const PublicKey = {
 
   fromSDK(object: PublicKeySDKType): PublicKey {
     return {
-      ed25519: isSet(object.ed25519) ? object.ed25519 : undefined,
-      secp256k1: isSet(object.secp256k1) ? object.secp256k1 : undefined
+      ed25519: object?.ed25519,
+      secp256k1: object?.secp256k1
     };
   },
 
   toSDK(message: PublicKey): PublicKeySDKType {
     const obj: any = {};
-    message.ed25519 !== undefined && (obj.ed25519 = message.ed25519);
-    message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1);
-    return obj;
-  },
-
-  fromAmino(object: PublicKeySDKType): PublicKey {
-    return {
-      ed25519: isSet(object.ed25519) ? object.ed25519 : undefined,
-      secp256k1: isSet(object.secp256k1) ? object.secp256k1 : undefined
-    };
-  },
-
-  toAmino(message: PublicKey): PublicKeySDKType {
-    const obj: any = {};
-    message.ed25519 !== undefined && (obj.ed25519 = message.ed25519);
-    message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1);
+    obj.ed25519 = message.ed25519;
+    obj.secp256k1 = message.secp256k1;
     return obj;
   }
 

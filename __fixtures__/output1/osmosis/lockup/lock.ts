@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 
 /**
@@ -359,8 +359,8 @@ export const PeriodLock = {
 
   fromSDK(object: PeriodLockSDKType): PeriodLock {
     return {
-      ID: isSet(object.ID) ? object.ID : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      ID: object?.ID,
+      owner: object?.owner,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
@@ -369,42 +369,13 @@ export const PeriodLock = {
 
   toSDK(message: PeriodLock): PeriodLockSDKType {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.ID = message.ID;
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: PeriodLockSDKType): PeriodLock {
-    return {
-      ID: isSet(object.ID) ? object.ID : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      },
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PeriodLock): PeriodLockSDKType {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -508,7 +479,7 @@ export const QueryCondition = {
   fromSDK(object: QueryConditionSDKType): QueryCondition {
     return {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
-      denom: isSet(object.denom) ? object.denom : undefined,
+      denom: object?.denom,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
@@ -517,30 +488,9 @@ export const QueryCondition = {
   toSDK(message: QueryCondition): QueryConditionSDKType {
     const obj: any = {};
     message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryConditionSDKType): QueryCondition {
-    return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      duration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      },
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: QueryCondition): QueryConditionSDKType {
-    const obj: any = {};
-    message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
     return obj;
   }
 
@@ -639,8 +589,8 @@ export const SyntheticLock = {
 
   fromSDK(object: SyntheticLockSDKType): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : undefined,
-      synthDenom: isSet(object.synth_denom) ? object.synth_denom : undefined,
+      underlyingLockId: object?.underlying_lock_id,
+      synthDenom: object?.synth_denom,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
@@ -648,31 +598,10 @@ export const SyntheticLock = {
 
   toSDK(message: SyntheticLock): SyntheticLockSDKType {
     const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlying_lock_id = message.underlyingLockId);
-    message.synthDenom !== undefined && (obj.synth_denom = message.synthDenom);
+    obj.underlying_lock_id = message.underlyingLockId;
+    obj.synth_denom = message.synthDenom;
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: SyntheticLockSDKType): SyntheticLock {
-    return {
-      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : undefined,
-      synthDenom: isSet(object.synth_denom) ? object.synth_denom : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      duration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      }
-    };
-  },
-
-  toAmino(message: SyntheticLock): SyntheticLockSDKType {
-    const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlying_lock_id = message.underlyingLockId);
-    message.synthDenom !== undefined && (obj.synth_denom = message.synthDenom);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
     return obj;
   }
 

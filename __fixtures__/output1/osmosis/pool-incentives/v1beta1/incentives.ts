@@ -116,25 +116,13 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : undefined
+      mintedDenom: object?.minted_denom
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.mintedDenom !== undefined && (obj.minted_denom = message.mintedDenom);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.mintedDenom !== undefined && (obj.minted_denom = message.mintedDenom);
+    obj.minted_denom = message.mintedDenom;
     return obj;
   }
 
@@ -212,24 +200,6 @@ export const LockableDurationsInfo = {
 
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
-    const obj: any = {};
-
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
       obj.lockable_durations = [];
     }
@@ -314,37 +284,17 @@ export const DistrInfo = {
 
   fromSDK(object: DistrInfoSDKType): DistrInfo {
     return {
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
+      totalWeight: object?.total_weight,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
 
   toSDK(message: DistrInfo): DistrInfoSDKType {
     const obj: any = {};
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
+    obj.total_weight = message.totalWeight;
 
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DistrInfoSDKType): DistrInfo {
-    return {
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: DistrInfo): DistrInfoSDKType {
-    const obj: any = {};
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
-
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
       obj.records = [];
     }
@@ -423,29 +373,15 @@ export const DistrRecord = {
 
   fromSDK(object: DistrRecordSDKType): DistrRecord {
     return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined
+      gaugeId: object?.gauge_id,
+      weight: object?.weight
     };
   },
 
   toSDK(message: DistrRecord): DistrRecordSDKType {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.weight !== undefined && (obj.weight = message.weight);
-    return obj;
-  },
-
-  fromAmino(object: DistrRecordSDKType): DistrRecord {
-    return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined
-    };
-  },
-
-  toAmino(message: DistrRecord): DistrRecordSDKType {
-    const obj: any = {};
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.weight !== undefined && (obj.weight = message.weight);
+    obj.gauge_id = message.gaugeId;
+    obj.weight = message.weight;
     return obj;
   }
 
@@ -532,36 +468,17 @@ export const PoolToGauge = {
 
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      poolId: object?.pool_id,
+      gaugeId: object?.gauge_id,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: PoolToGauge): PoolToGaugeSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.pool_id = message.poolId;
+    obj.gauge_id = message.gaugeId;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: PoolToGaugeSDKType): PoolToGauge {
-    return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      duration: {
-        seconds: Long.fromNumber(Math.floor(parseInt(objectObject) / 1_000_000_000)),
-        nanos: parseInt(objectObject) % 1_000_000_000
-      }
-    };
-  },
-
-  toAmino(message: PoolToGauge): PoolToGaugeSDKType {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
     return obj;
   }
 
@@ -639,24 +556,6 @@ export const PoolToGauges = {
 
     if (message.poolToGauge) {
       obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toSDK(e) : undefined);
-    } else {
-      obj.pool_to_gauge = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: PoolToGaugesSDKType): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: PoolToGauges): PoolToGaugesSDKType {
-    const obj: any = {};
-
-    if (message.poolToGauge) {
-      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e) : undefined);
     } else {
       obj.pool_to_gauge = [];
     }

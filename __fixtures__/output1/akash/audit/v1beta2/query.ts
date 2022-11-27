@@ -165,26 +165,6 @@ export const QueryProvidersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
-    const obj: any = {};
-
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -258,29 +238,15 @@ export const QueryProviderRequest = {
 
   fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
+      auditor: object?.auditor,
+      owner: object?.owner
     };
   },
 
   toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
     const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: QueryProviderRequestSDKType): QueryProviderRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderRequest): QueryProviderRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -350,18 +316,6 @@ export const QueryAllProvidersAttributesRequest = {
   toSDK(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -436,29 +390,15 @@ export const QueryProviderAttributesRequest = {
 
   fromSDK(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
+      owner: object?.owner,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -533,29 +473,15 @@ export const QueryProviderAuditorRequest = {
 
   fromSDK(object: QueryProviderAuditorRequestSDKType): QueryProviderAuditorRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
+      auditor: object?.auditor,
+      owner: object?.owner
     };
   },
 
   toSDK(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
     const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: QueryProviderAuditorRequestSDKType): QueryProviderAuditorRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -630,29 +556,15 @@ export const QueryAuditorAttributesRequest = {
 
   fromSDK(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      auditor: object?.auditor,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestSDKType {
     const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.auditor = message.auditor;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
-    return {
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestSDKType {
-    const obj: any = {};
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 

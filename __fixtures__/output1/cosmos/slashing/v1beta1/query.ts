@@ -140,15 +140,6 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -218,18 +209,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -291,25 +270,13 @@ export const QuerySigningInfoRequest = {
 
   fromSDK(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
     return {
-      consAddress: isSet(object.cons_address) ? object.cons_address : undefined
+      consAddress: object?.cons_address
     };
   },
 
   toSDK(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
     const obj: any = {};
-    message.consAddress !== undefined && (obj.cons_address = message.consAddress);
-    return obj;
-  },
-
-  fromAmino(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
-    return {
-      consAddress: isSet(object.cons_address) ? object.cons_address : undefined
-    };
-  },
-
-  toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
-    const obj: any = {};
-    message.consAddress !== undefined && (obj.cons_address = message.consAddress);
+    obj.cons_address = message.consAddress;
     return obj;
   }
 
@@ -380,18 +347,6 @@ export const QuerySigningInfoResponse = {
     const obj: any = {};
     message.valSigningInfo !== undefined && (obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toSDK(message.valSigningInfo) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QuerySigningInfoResponseSDKType): QuerySigningInfoResponse {
-    return {
-      valSigningInfo: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
-    };
-  },
-
-  toAmino(message: QuerySigningInfoResponse): QuerySigningInfoResponseSDKType {
-    const obj: any = {};
-    message.valSigningInfo !== undefined && (obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo) : undefined);
-    return obj;
   }
 
 };
@@ -460,18 +415,6 @@ export const QuerySigningInfosRequest = {
   toSDK(message: QuerySigningInfosRequest): QuerySigningInfosRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QuerySigningInfosRequestSDKType): QuerySigningInfosRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySigningInfosRequest): QuerySigningInfosRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -567,26 +510,6 @@ export const QuerySigningInfosResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QuerySigningInfosResponseSDKType): QuerySigningInfosResponse {
-    return {
-      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySigningInfosResponse): QuerySigningInfosResponseSDKType {
-    const obj: any = {};
-
-    if (message.info) {
-      obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e) : undefined);
-    } else {
-      obj.info = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

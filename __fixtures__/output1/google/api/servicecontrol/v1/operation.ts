@@ -330,29 +330,15 @@ export const Operation_LabelsEntry = {
 
   fromSDK(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -567,9 +553,9 @@ export const Operation = {
 
   fromSDK(object: OperationSDKType): Operation {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
-      operationName: isSet(object.operation_name) ? object.operation_name : undefined,
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
+      operationId: object?.operation_id,
+      operationName: object?.operation_name,
+      consumerId: object?.consumer_id,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -587,9 +573,9 @@ export const Operation = {
 
   toSDK(message: Operation): OperationSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
-    message.operationName !== undefined && (obj.operation_name = message.operationName);
-    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.operation_id = message.operationId;
+    obj.operation_name = message.operationName;
+    obj.consumer_id = message.consumerId;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     obj.labels = {};
@@ -616,64 +602,6 @@ export const Operation = {
 
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: OperationSDKType): Operation {
-    return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
-      operationName: isSet(object.operation_name) ? object.operation_name : undefined,
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromAmino(object.end_time) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Operation): OperationSDKType {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
-    message.operationName !== undefined && (obj.operation_name = message.operationName);
-    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined);
-    obj.labels = {};
-
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-
-    if (message.metricValueSets) {
-      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
-    } else {
-      obj.metric_value_sets = [];
-    }
-
-    if (message.logEntries) {
-      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
-    } else {
-      obj.log_entries = [];
-    }
-
-    message.importance !== undefined && (obj.importance = operation_ImportanceToJSON(message.importance));
-
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.extensions = [];
     }

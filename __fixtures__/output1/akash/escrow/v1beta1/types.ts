@@ -298,29 +298,15 @@ export const AccountID = {
 
   fromSDK(object: AccountIDSDKType): AccountID {
     return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined
+      scope: object?.scope,
+      xid: object?.xid
     };
   },
 
   toSDK(message: AccountID): AccountIDSDKType {
     const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    return obj;
-  },
-
-  fromAmino(object: AccountIDSDKType): AccountID {
-    return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined
-    };
-  },
-
-  toAmino(message: AccountID): AccountIDSDKType {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
+    obj.scope = message.scope;
+    obj.xid = message.xid;
     return obj;
   }
 
@@ -444,44 +430,22 @@ export const Account = {
   fromSDK(object: AccountSDKType): Account {
     return {
       id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      owner: object?.owner,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDK(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : undefined
+      settledAt: object?.settled_at
     };
   },
 
   toSDK(message: Account): AccountSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? AccountID.toSDK(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.state !== undefined && (obj.state = account_StateToJSON(message.state));
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toSDK(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
-    return obj;
-  },
-
-  fromAmino(object: AccountSDKType): Account {
-    return {
-      id: isSet(object.id) ? AccountID.fromAmino(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined,
-      transferred: isSet(object.transferred) ? Coin.fromAmino(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : undefined
-    };
-  },
-
-  toAmino(message: Account): AccountSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? AccountID.toAmino(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
-    message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
+    obj.settled_at = message.settledAt;
     return obj;
   }
 
@@ -617,8 +581,8 @@ export const Payment = {
   fromSDK(object: PaymentSDKType): Payment {
     return {
       accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      paymentId: object?.payment_id,
+      owner: object?.owner,
       state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
       rate: isSet(object.rate) ? Coin.fromSDK(object.rate) : undefined,
       balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,
@@ -629,36 +593,12 @@ export const Payment = {
   toSDK(message: Payment): PaymentSDKType {
     const obj: any = {};
     message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toSDK(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
     message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
     message.rate !== undefined && (obj.rate = message.rate ? Coin.toSDK(message.rate) : undefined);
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: PaymentSDKType): Payment {
-    return {
-      accountId: isSet(object.account_id) ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
-      rate: isSet(object.rate) ? Coin.fromAmino(object.rate) : undefined,
-      balance: isSet(object.balance) ? Coin.fromAmino(object.balance) : undefined,
-      withdrawn: isSet(object.withdrawn) ? Coin.fromAmino(object.withdrawn) : undefined
-    };
-  },
-
-  toAmino(message: Payment): PaymentSDKType {
-    const obj: any = {};
-    message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
-    message.rate !== undefined && (obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined);
-    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined);
     return obj;
   }
 

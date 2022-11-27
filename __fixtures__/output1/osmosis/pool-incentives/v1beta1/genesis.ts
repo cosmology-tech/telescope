@@ -141,30 +141,6 @@ export const GenesisState = {
     message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
     message.poolToGauges !== undefined && (obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toSDK(message.poolToGauges) : undefined);
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      distrInfo: isSet(object.distr_info) ? DistrInfo.fromAmino(object.distr_info) : undefined,
-      poolToGauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromAmino(object.pool_to_gauges) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-
-    if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
-    } else {
-      obj.lockable_durations = [];
-    }
-
-    message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined);
-    message.poolToGauges !== undefined && (obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges) : undefined);
-    return obj;
   }
 
 };

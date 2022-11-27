@@ -283,29 +283,15 @@ export const IdentifiedClientState = {
 
   fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      clientId: object?.client_id,
       clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
     };
   },
 
   toSDK(message: IdentifiedClientState): IdentifiedClientStateSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: IdentifiedClientStateSDKType): IdentifiedClientState {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined
-    };
-  },
-
-  toAmino(message: IdentifiedClientState): IdentifiedClientStateSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
     return obj;
   }
 
@@ -390,20 +376,6 @@ export const ConsensusStateWithHeight = {
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
-    return {
-      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined
-    };
-  },
-
-  toAmino(message: ConsensusStateWithHeight): ConsensusStateWithHeightSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
-    return obj;
   }
 
 };
@@ -483,37 +455,17 @@ export const ClientConsensusStates = {
 
   fromSDK(object: ClientConsensusStatesSDKType): ClientConsensusStates {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      clientId: object?.client_id,
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ClientConsensusStates): ClientConsensusStatesSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
 
     if (message.consensusStates) {
       obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
-    } else {
-      obj.consensus_states = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ClientConsensusStatesSDKType): ClientConsensusStates {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ClientConsensusStates): ClientConsensusStatesSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-
-    if (message.consensusStates) {
-      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
     } else {
       obj.consensus_states = [];
     }
@@ -616,37 +568,19 @@ export const ClientUpdateProposal = {
 
   fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : undefined,
-      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : undefined
+      title: object?.title,
+      description: object?.description,
+      subjectClientId: object?.subject_client_id,
+      substituteClientId: object?.substitute_client_id
     };
   },
 
   toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.subjectClientId !== undefined && (obj.subject_client_id = message.subjectClientId);
-    message.substituteClientId !== undefined && (obj.substitute_client_id = message.substituteClientId);
-    return obj;
-  },
-
-  fromAmino(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : undefined,
-      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : undefined
-    };
-  },
-
-  toAmino(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.subjectClientId !== undefined && (obj.subject_client_id = message.subjectClientId);
-    message.substituteClientId !== undefined && (obj.substitute_client_id = message.substituteClientId);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.subject_client_id = message.subjectClientId;
+    obj.substitute_client_id = message.substituteClientId;
     return obj;
   }
 
@@ -745,8 +679,8 @@ export const UpgradeProposal = {
 
   fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined,
       upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
@@ -754,28 +688,10 @@ export const UpgradeProposal = {
 
   toSDK(message: UpgradeProposal): UpgradeProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: UpgradeProposalSDKType): UpgradeProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      plan: isSet(object.plan) ? Plan.fromAmino(object.plan) : undefined,
-      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
-  },
-
-  toAmino(message: UpgradeProposal): UpgradeProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined);
-    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined);
     return obj;
   }
 
@@ -850,29 +766,15 @@ export const Height = {
 
   fromSDK(object: HeightSDKType): Height {
     return {
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
     };
   },
 
   toSDK(message: Height): HeightSDKType {
     const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
-    return obj;
-  },
-
-  fromAmino(object: HeightSDKType): Height {
-    return {
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
-    };
-  },
-
-  toAmino(message: Height): HeightSDKType {
-    const obj: any = {};
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
     return obj;
   }
 
@@ -946,24 +848,6 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
-    const obj: any = {};
-
-    if (message.allowedClients) {
-      obj.allowed_clients = message.allowedClients.map(e => e);
-    } else {
-      obj.allowed_clients = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
     const obj: any = {};
 
     if (message.allowedClients) {

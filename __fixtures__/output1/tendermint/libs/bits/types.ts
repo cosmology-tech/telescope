@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: Long;
@@ -97,34 +97,14 @@ export const BitArray = {
 
   fromSDK(object: BitArraySDKType): BitArray {
     return {
-      bits: isSet(object.bits) ? object.bits : undefined,
+      bits: object?.bits,
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
     };
   },
 
   toSDK(message: BitArray): BitArraySDKType {
     const obj: any = {};
-    message.bits !== undefined && (obj.bits = message.bits);
-
-    if (message.elems) {
-      obj.elems = message.elems.map(e => e);
-    } else {
-      obj.elems = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BitArraySDKType): BitArray {
-    return {
-      bits: isSet(object.bits) ? object.bits : undefined,
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: BitArray): BitArraySDKType {
-    const obj: any = {};
-    message.bits !== undefined && (obj.bits = message.bits);
+    obj.bits = message.bits;
 
     if (message.elems) {
       obj.elems = message.elems.map(e => e);

@@ -179,33 +179,17 @@ export const MsgGrant = {
 
   fromSDK(object: MsgGrantSDKType): MsgGrant {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      granter: object?.granter,
+      grantee: object?.grantee,
       grant: isSet(object.grant) ? Grant.fromSDK(object.grant) : undefined
     };
   },
 
   toSDK(message: MsgGrant): MsgGrantSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
     message.grant !== undefined && (obj.grant = message.grant ? Grant.toSDK(message.grant) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MsgGrantSDKType): MsgGrant {
-    return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      grant: isSet(object.grant) ? Grant.fromAmino(object.grant) : undefined
-    };
-  },
-
-  toAmino(message: MsgGrant): MsgGrantSDKType {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.grant !== undefined && (obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined);
     return obj;
   }
 
@@ -279,24 +263,6 @@ export const MsgExecResponse = {
   },
 
   toSDK(message: MsgExecResponse): MsgExecResponseSDKType {
-    const obj: any = {};
-
-    if (message.results) {
-      obj.results = message.results.map(e => e);
-    } else {
-      obj.results = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgExecResponseSDKType): MsgExecResponse {
-    return {
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MsgExecResponse): MsgExecResponseSDKType {
     const obj: any = {};
 
     if (message.results) {
@@ -385,37 +351,17 @@ export const MsgExec = {
 
   fromSDK(object: MsgExecSDKType): MsgExec {
     return {
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      grantee: object?.grantee,
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgExec): MsgExecSDKType {
     const obj: any = {};
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.grantee = message.grantee;
 
     if (message.msgs) {
       obj.msgs = message.msgs.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.msgs = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgExecSDKType): MsgExec {
-    return {
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgExec): MsgExecSDKType {
-    const obj: any = {};
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-
-    if (message.msgs) {
-      obj.msgs = message.msgs.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.msgs = [];
     }
@@ -471,15 +417,6 @@ export const MsgGrantResponse = {
   },
 
   toSDK(_: MsgGrantResponse): MsgGrantResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgGrantResponseSDKType): MsgGrantResponse {
-    return {};
-  },
-
-  toAmino(_: MsgGrantResponse): MsgGrantResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -567,33 +504,17 @@ export const MsgRevoke = {
 
   fromSDK(object: MsgRevokeSDKType): MsgRevoke {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined
+      granter: object?.granter,
+      grantee: object?.grantee,
+      msgTypeUrl: object?.msg_type_url
     };
   },
 
   toSDK(message: MsgRevoke): MsgRevokeSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
-    return obj;
-  },
-
-  fromAmino(object: MsgRevokeSDKType): MsgRevoke {
-    return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined
-    };
-  },
-
-  toAmino(message: MsgRevoke): MsgRevokeSDKType {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
     return obj;
   }
 
@@ -645,15 +566,6 @@ export const MsgRevokeResponse = {
   },
 
   toSDK(_: MsgRevokeResponse): MsgRevokeResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgRevokeResponseSDKType): MsgRevokeResponse {
-    return {};
-  },
-
-  toAmino(_: MsgRevokeResponse): MsgRevokeResponseSDKType {
     const obj: any = {};
     return obj;
   }

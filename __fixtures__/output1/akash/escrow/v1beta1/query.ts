@@ -171,41 +171,21 @@ export const QueryAccountsRequest = {
 
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
     return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? object.state : undefined,
+      scope: object?.scope,
+      xid: object?.xid,
+      owner: object?.owner,
+      state: object?.state,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
     const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.owner = message.owner;
+    obj.state = message.state;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
-    return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? object.state : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -301,26 +281,6 @@ export const QueryAccountsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
-    const obj: any = {};
-
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -443,45 +403,23 @@ export const QueryPaymentsRequest = {
 
   fromSDK(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
     return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? object.state : undefined,
+      scope: object?.scope,
+      xid: object?.xid,
+      id: object?.id,
+      owner: object?.owner,
+      state: object?.state,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryPaymentsRequest): QueryPaymentsRequestSDKType {
     const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.id !== undefined && (obj.id = message.id);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    obj.state = message.state;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
-    return {
-      scope: isSet(object.scope) ? object.scope : undefined,
-      xid: isSet(object.xid) ? object.xid : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      state: isSet(object.state) ? object.state : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestSDKType {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.id !== undefined && (obj.id = message.id);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -577,26 +515,6 @@ export const QueryPaymentsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryPaymentsResponseSDKType): QueryPaymentsResponse {
-    return {
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryPaymentsResponse): QueryPaymentsResponseSDKType {
-    const obj: any = {};
-
-    if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toAmino(e) : undefined);
-    } else {
-      obj.payments = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

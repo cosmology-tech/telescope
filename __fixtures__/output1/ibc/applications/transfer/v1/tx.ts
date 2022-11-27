@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
@@ -207,49 +207,25 @@ export const MsgTransfer = {
 
   fromSDK(object: MsgTransferSDKType): MsgTransfer {
     return {
-      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
       token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
+      sender: object?.sender,
+      receiver: object?.receiver,
       timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
+      timeoutTimestamp: object?.timeout_timestamp
     };
   },
 
   toSDK(message: MsgTransfer): MsgTransferSDKType {
     const obj: any = {};
-    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
-    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
     message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
-    return obj;
-  },
-
-  fromAmino(object: MsgTransferSDKType): MsgTransfer {
-    return {
-      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
-      token: isSet(object.token) ? Coin.fromAmino(object.token) : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
-    };
-  },
-
-  toAmino(message: MsgTransfer): MsgTransferSDKType {
-    const obj: any = {};
-    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
-    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
-    message.token !== undefined && (obj.token = message.token ? Coin.toAmino(message.token) : undefined);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
   }
 
@@ -301,15 +277,6 @@ export const MsgTransferResponse = {
   },
 
   toSDK(_: MsgTransferResponse): MsgTransferResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgTransferResponseSDKType): MsgTransferResponse {
-    return {};
-  },
-
-  toAmino(_: MsgTransferResponse): MsgTransferResponseSDKType {
     const obj: any = {};
     return obj;
   }

@@ -297,7 +297,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromSDK(e)) : [],
-      defaultSendEnabled: isSet(object.default_send_enabled) ? object.default_send_enabled : undefined
+      defaultSendEnabled: object?.default_send_enabled
     };
   },
 
@@ -310,27 +310,7 @@ export const Params = {
       obj.send_enabled = [];
     }
 
-    message.defaultSendEnabled !== undefined && (obj.default_send_enabled = message.defaultSendEnabled);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
-      defaultSendEnabled: isSet(object.default_send_enabled) ? object.default_send_enabled : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-
-    if (message.sendEnabled) {
-      obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e) : undefined);
-    } else {
-      obj.send_enabled = [];
-    }
-
-    message.defaultSendEnabled !== undefined && (obj.default_send_enabled = message.defaultSendEnabled);
+    obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
   }
 
@@ -405,29 +385,15 @@ export const SendEnabled = {
 
   fromSDK(object: SendEnabledSDKType): SendEnabled {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      enabled: isSet(object.enabled) ? object.enabled : undefined
+      denom: object?.denom,
+      enabled: object?.enabled
     };
   },
 
   toSDK(message: SendEnabled): SendEnabledSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    return obj;
-  },
-
-  fromAmino(object: SendEnabledSDKType): SendEnabled {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      enabled: isSet(object.enabled) ? object.enabled : undefined
-    };
-  },
-
-  toAmino(message: SendEnabled): SendEnabledSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
     return obj;
   }
 
@@ -508,37 +474,17 @@ export const Input = {
 
   fromSDK(object: InputSDKType): Input {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Input): InputSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: InputSDKType): Input {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Input): InputSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -623,37 +569,17 @@ export const Output = {
 
   fromSDK(object: OutputSDKType): Output {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Output): OutputSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: OutputSDKType): Output {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Output): OutputSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -735,24 +661,6 @@ export const Supply = {
 
     if (message.total) {
       obj.total = message.total.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.total = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: SupplySDKType): Supply {
-    return {
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Supply): SupplySDKType {
-    const obj: any = {};
-
-    if (message.total) {
-      obj.total = message.total.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total = [];
     }
@@ -849,38 +757,16 @@ export const DenomUnit = {
 
   fromSDK(object: DenomUnitSDKType): DenomUnit {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      exponent: isSet(object.exponent) ? object.exponent : undefined,
+      denom: object?.denom,
+      exponent: object?.exponent,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
     };
   },
 
   toSDK(message: DenomUnit): DenomUnitSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.exponent !== undefined && (obj.exponent = message.exponent);
-
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DenomUnitSDKType): DenomUnit {
-    return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      exponent: isSet(object.exponent) ? object.exponent : undefined,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: DenomUnit): DenomUnitSDKType {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.exponent !== undefined && (obj.exponent = message.exponent);
+    obj.denom = message.denom;
+    obj.exponent = message.exponent;
 
     if (message.aliases) {
       obj.aliases = message.aliases.map(e => e);
@@ -1040,20 +926,20 @@ export const Metadata = {
 
   fromSDK(object: MetadataSDKType): Metadata {
     return {
-      description: isSet(object.description) ? object.description : undefined,
+      description: object?.description,
       denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromSDK(e)) : [],
-      base: isSet(object.base) ? object.base : undefined,
-      display: isSet(object.display) ? object.display : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      symbol: isSet(object.symbol) ? object.symbol : undefined,
-      uri: isSet(object.uri) ? object.uri : undefined,
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined
+      base: object?.base,
+      display: object?.display,
+      name: object?.name,
+      symbol: object?.symbol,
+      uri: object?.uri,
+      uriHash: object?.uri_hash
     };
   },
 
   toSDK(message: Metadata): MetadataSDKType {
     const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
+    obj.description = message.description;
 
     if (message.denomUnits) {
       obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toSDK(e) : undefined);
@@ -1061,44 +947,12 @@ export const Metadata = {
       obj.denom_units = [];
     }
 
-    message.base !== undefined && (obj.base = message.base);
-    message.display !== undefined && (obj.display = message.display);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
-    return obj;
-  },
-
-  fromAmino(object: MetadataSDKType): Metadata {
-    return {
-      description: isSet(object.description) ? object.description : undefined,
-      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
-      base: isSet(object.base) ? object.base : undefined,
-      display: isSet(object.display) ? object.display : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      symbol: isSet(object.symbol) ? object.symbol : undefined,
-      uri: isSet(object.uri) ? object.uri : undefined,
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined
-    };
-  },
-
-  toAmino(message: Metadata): MetadataSDKType {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-
-    if (message.denomUnits) {
-      obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
-    } else {
-      obj.denom_units = [];
-    }
-
-    message.base !== undefined && (obj.base = message.base);
-    message.display !== undefined && (obj.display = message.display);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    obj.base = message.base;
+    obj.display = message.display;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
     return obj;
   }
 

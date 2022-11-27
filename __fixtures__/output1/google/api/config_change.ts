@@ -324,9 +324,9 @@ export const ConfigChange = {
 
   fromSDK(object: ConfigChangeSDKType): ConfigChange {
     return {
-      element: isSet(object.element) ? object.element : undefined,
-      oldValue: isSet(object.old_value) ? object.old_value : undefined,
-      newValue: isSet(object.new_value) ? object.new_value : undefined,
+      element: object?.element,
+      oldValue: object?.old_value,
+      newValue: object?.new_value,
       changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDK(e)) : []
     };
@@ -334,39 +334,13 @@ export const ConfigChange = {
 
   toSDK(message: ConfigChange): ConfigChangeSDKType {
     const obj: any = {};
-    message.element !== undefined && (obj.element = message.element);
-    message.oldValue !== undefined && (obj.old_value = message.oldValue);
-    message.newValue !== undefined && (obj.new_value = message.newValue);
+    obj.element = message.element;
+    obj.old_value = message.oldValue;
+    obj.new_value = message.newValue;
     message.changeType !== undefined && (obj.change_type = changeTypeToJSON(message.changeType));
 
     if (message.advices) {
       obj.advices = message.advices.map(e => e ? Advice.toSDK(e) : undefined);
-    } else {
-      obj.advices = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ConfigChangeSDKType): ConfigChange {
-    return {
-      element: isSet(object.element) ? object.element : undefined,
-      oldValue: isSet(object.old_value) ? object.old_value : undefined,
-      newValue: isSet(object.new_value) ? object.new_value : undefined,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ConfigChange): ConfigChangeSDKType {
-    const obj: any = {};
-    message.element !== undefined && (obj.element = message.element);
-    message.oldValue !== undefined && (obj.old_value = message.oldValue);
-    message.newValue !== undefined && (obj.new_value = message.newValue);
-    message.changeType !== undefined && (obj.change_type = changeTypeToJSON(message.changeType));
-
-    if (message.advices) {
-      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
     } else {
       obj.advices = [];
     }
@@ -433,25 +407,13 @@ export const Advice = {
 
   fromSDK(object: AdviceSDKType): Advice {
     return {
-      description: isSet(object.description) ? object.description : undefined
+      description: object?.description
     };
   },
 
   toSDK(message: Advice): AdviceSDKType {
     const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-
-  fromAmino(object: AdviceSDKType): Advice {
-    return {
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: Advice): AdviceSDKType {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
+    obj.description = message.description;
     return obj;
   }
 

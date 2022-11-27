@@ -309,29 +309,15 @@ export const DelegatorWithdrawInfo = {
 
   fromSDK(object: DelegatorWithdrawInfoSDKType): DelegatorWithdrawInfo {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+      delegatorAddress: object?.delegator_address,
+      withdrawAddress: object?.withdraw_address
     };
   },
 
   toSDK(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-    return obj;
-  },
-
-  fromAmino(object: DelegatorWithdrawInfoSDKType): DelegatorWithdrawInfo {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
-    };
-  },
-
-  toAmino(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   }
 
@@ -412,37 +398,17 @@ export const ValidatorOutstandingRewardsRecord = {
 
   fromSDK(object: ValidatorOutstandingRewardsRecordSDKType): ValidatorOutstandingRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorAddress: object?.validator_address,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
 
     if (message.outstandingRewards) {
       obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toSDK(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ValidatorOutstandingRewardsRecordSDKType): ValidatorOutstandingRewardsRecord {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.outstanding_rewards = [];
     }
@@ -521,29 +487,15 @@ export const ValidatorAccumulatedCommissionRecord = {
 
   fromSDK(object: ValidatorAccumulatedCommissionRecordSDKType): ValidatorAccumulatedCommissionRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorAddress: object?.validator_address,
       accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromSDK(object.accumulated) : undefined
     };
   },
 
   toSDK(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toSDK(message.accumulated) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorAccumulatedCommissionRecordSDKType): ValidatorAccumulatedCommissionRecord {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
-    };
-  },
-
-  toAmino(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated) : undefined);
     return obj;
   }
 
@@ -630,33 +582,17 @@ export const ValidatorHistoricalRewardsRecord = {
 
   fromSDK(object: ValidatorHistoricalRewardsRecordSDKType): ValidatorHistoricalRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      period: isSet(object.period) ? object.period : undefined,
+      validatorAddress: object?.validator_address,
+      period: object?.period,
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDK(object.rewards) : undefined
     };
   },
 
   toSDK(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.period !== undefined && (obj.period = message.period);
+    obj.validator_address = message.validatorAddress;
+    obj.period = message.period;
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toSDK(message.rewards) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorHistoricalRewardsRecordSDKType): ValidatorHistoricalRewardsRecord {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      period: isSet(object.period) ? object.period : undefined,
-      rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
-    };
-  },
-
-  toAmino(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.period !== undefined && (obj.period = message.period);
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards) : undefined);
     return obj;
   }
 
@@ -731,29 +667,15 @@ export const ValidatorCurrentRewardsRecord = {
 
   fromSDK(object: ValidatorCurrentRewardsRecordSDKType): ValidatorCurrentRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorAddress: object?.validator_address,
       rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromSDK(object.rewards) : undefined
     };
   },
 
   toSDK(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toSDK(message.rewards) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorCurrentRewardsRecordSDKType): ValidatorCurrentRewardsRecord {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
-    };
-  },
-
-  toAmino(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards) : undefined);
     return obj;
   }
 
@@ -840,33 +762,17 @@ export const DelegatorStartingInfoRecord = {
 
   fromSDK(object: DelegatorStartingInfoRecordSDKType): DelegatorStartingInfoRecord {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
       startingInfo: isSet(object.starting_info) ? DelegatorStartingInfo.fromSDK(object.starting_info) : undefined
     };
   },
 
   toSDK(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     message.startingInfo !== undefined && (obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toSDK(message.startingInfo) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: DelegatorStartingInfoRecordSDKType): DelegatorStartingInfoRecord {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      startingInfo: isSet(object.starting_info) ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
-    };
-  },
-
-  toAmino(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.startingInfo !== undefined && (obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo) : undefined);
     return obj;
   }
 
@@ -965,37 +871,19 @@ export const ValidatorSlashEventRecord = {
 
   fromSDK(object: ValidatorSlashEventRecordSDKType): ValidatorSlashEventRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      period: isSet(object.period) ? object.period : undefined,
+      validatorAddress: object?.validator_address,
+      height: object?.height,
+      period: object?.period,
       validatorSlashEvent: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDK(object.validator_slash_event) : undefined
     };
   },
 
   toSDK(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.height !== undefined && (obj.height = message.height);
-    message.period !== undefined && (obj.period = message.period);
+    obj.validator_address = message.validatorAddress;
+    obj.height = message.height;
+    obj.period = message.period;
     message.validatorSlashEvent !== undefined && (obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toSDK(message.validatorSlashEvent) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorSlashEventRecordSDKType): ValidatorSlashEventRecord {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      period: isSet(object.period) ? object.period : undefined,
-      validatorSlashEvent: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
-    };
-  },
-
-  toAmino(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.height !== undefined && (obj.height = message.height);
-    message.period !== undefined && (obj.period = message.period);
-    message.validatorSlashEvent !== undefined && (obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent) : undefined);
     return obj;
   }
 
@@ -1206,7 +1094,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
       feePool: isSet(object.fee_pool) ? FeePool.fromSDK(object.fee_pool) : undefined,
       delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromSDK(e)) : [],
-      previousProposer: isSet(object.previous_proposer) ? object.previous_proposer : undefined,
+      previousProposer: object?.previous_proposer,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromSDK(e)) : [],
       validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromSDK(e)) : [],
       validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromSDK(e)) : [],
@@ -1227,7 +1115,7 @@ export const GenesisState = {
       obj.delegator_withdraw_infos = [];
     }
 
-    message.previousProposer !== undefined && (obj.previous_proposer = message.previousProposer);
+    obj.previous_proposer = message.previousProposer;
 
     if (message.outstandingRewards) {
       obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toSDK(e) : undefined);
@@ -1261,73 +1149,6 @@ export const GenesisState = {
 
     if (message.validatorSlashEvents) {
       obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toSDK(e) : undefined);
-    } else {
-      obj.validator_slash_events = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      feePool: isSet(object.fee_pool) ? FeePool.fromAmino(object.fee_pool) : undefined,
-      delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromAmino(e)) : [],
-      previousProposer: isSet(object.previous_proposer) ? object.previous_proposer : undefined,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromAmino(e)) : [],
-      validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromAmino(e)) : [],
-      validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromAmino(e)) : [],
-      validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromAmino(e)) : [],
-      delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromAmino(e)) : [],
-      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    message.feePool !== undefined && (obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool) : undefined);
-
-    if (message.delegatorWithdrawInfos) {
-      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e) : undefined);
-    } else {
-      obj.delegator_withdraw_infos = [];
-    }
-
-    message.previousProposer !== undefined && (obj.previous_proposer = message.previousProposer);
-
-    if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.outstanding_rewards = [];
-    }
-
-    if (message.validatorAccumulatedCommissions) {
-      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_accumulated_commissions = [];
-    }
-
-    if (message.validatorHistoricalRewards) {
-      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_historical_rewards = [];
-    }
-
-    if (message.validatorCurrentRewards) {
-      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e) : undefined);
-    } else {
-      obj.validator_current_rewards = [];
-    }
-
-    if (message.delegatorStartingInfos) {
-      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e) : undefined);
-    } else {
-      obj.delegator_starting_infos = [];
-    }
-
-    if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e) : undefined);
     } else {
       obj.validator_slash_events = [];
     }

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
 
 /**
@@ -577,9 +577,9 @@ export const Distribution = {
 
   fromSDK(object: DistributionSDKType): Distribution {
     return {
-      count: isSet(object.count) ? object.count : undefined,
-      mean: isSet(object.mean) ? object.mean : undefined,
-      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
+      count: object?.count,
+      mean: object?.mean,
+      sumOfSquaredDeviation: object?.sum_of_squared_deviation,
       range: isSet(object.range) ? Distribution_Range.fromSDK(object.range) : undefined,
       bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
@@ -589,9 +589,9 @@ export const Distribution = {
 
   toSDK(message: Distribution): DistributionSDKType {
     const obj: any = {};
-    message.count !== undefined && (obj.count = message.count);
-    message.mean !== undefined && (obj.mean = message.mean);
-    message.sumOfSquaredDeviation !== undefined && (obj.sum_of_squared_deviation = message.sumOfSquaredDeviation);
+    obj.count = message.count;
+    obj.mean = message.mean;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
     message.range !== undefined && (obj.range = message.range ? Distribution_Range.toSDK(message.range) : undefined);
     message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toSDK(message.bucketOptions) : undefined);
 
@@ -603,41 +603,6 @@ export const Distribution = {
 
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toSDK(e) : undefined);
-    } else {
-      obj.exemplars = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DistributionSDKType): Distribution {
-    return {
-      count: isSet(object.count) ? object.count : undefined,
-      mean: isSet(object.mean) ? object.mean : undefined,
-      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
-      range: isSet(object.range) ? Distribution_Range.fromAmino(object.range) : undefined,
-      bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Distribution): DistributionSDKType {
-    const obj: any = {};
-    message.count !== undefined && (obj.count = message.count);
-    message.mean !== undefined && (obj.mean = message.mean);
-    message.sumOfSquaredDeviation !== undefined && (obj.sum_of_squared_deviation = message.sumOfSquaredDeviation);
-    message.range !== undefined && (obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined);
-    message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined);
-
-    if (message.bucketCounts) {
-      obj.bucket_counts = message.bucketCounts.map(e => e);
-    } else {
-      obj.bucket_counts = [];
-    }
-
-    if (message.exemplars) {
-      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
     } else {
       obj.exemplars = [];
     }
@@ -716,29 +681,15 @@ export const Distribution_Range = {
 
   fromSDK(object: Distribution_RangeSDKType): Distribution_Range {
     return {
-      min: isSet(object.min) ? object.min : undefined,
-      max: isSet(object.max) ? object.max : undefined
+      min: object?.min,
+      max: object?.max
     };
   },
 
   toSDK(message: Distribution_Range): Distribution_RangeSDKType {
     const obj: any = {};
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
-    return obj;
-  },
-
-  fromAmino(object: Distribution_RangeSDKType): Distribution_Range {
-    return {
-      min: isSet(object.min) ? object.min : undefined,
-      max: isSet(object.max) ? object.max : undefined
-    };
-  },
-
-  toAmino(message: Distribution_Range): Distribution_RangeSDKType {
-    const obj: any = {};
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
+    obj.min = message.min;
+    obj.max = message.max;
     return obj;
   }
 
@@ -837,22 +788,6 @@ export const Distribution_BucketOptions = {
     message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toSDK(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toSDK(message.explicitBuckets) : undefined);
     return obj;
-  },
-
-  fromAmino(object: Distribution_BucketOptionsSDKType): Distribution_BucketOptions {
-    return {
-      linearBuckets: isSet(object.linear_buckets) ? Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets) : undefined
-    };
-  },
-
-  toAmino(message: Distribution_BucketOptions): Distribution_BucketOptionsSDKType {
-    const obj: any = {};
-    message.linearBuckets !== undefined && (obj.linear_buckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toAmino(message.linearBuckets) : undefined);
-    message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toAmino(message.exponentialBuckets) : undefined);
-    message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toAmino(message.explicitBuckets) : undefined);
-    return obj;
   }
 
 };
@@ -938,33 +873,17 @@ export const Distribution_BucketOptions_Linear = {
 
   fromSDK(object: Distribution_BucketOptions_LinearSDKType): Distribution_BucketOptions_Linear {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      width: isSet(object.width) ? object.width : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined
+      numFiniteBuckets: object?.num_finite_buckets,
+      width: object?.width,
+      offset: object?.offset
     };
   },
 
   toSDK(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearSDKType {
     const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.width !== undefined && (obj.width = message.width);
-    message.offset !== undefined && (obj.offset = message.offset);
-    return obj;
-  },
-
-  fromAmino(object: Distribution_BucketOptions_LinearSDKType): Distribution_BucketOptions_Linear {
-    return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      width: isSet(object.width) ? object.width : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined
-    };
-  },
-
-  toAmino(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearSDKType {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.width !== undefined && (obj.width = message.width);
-    message.offset !== undefined && (obj.offset = message.offset);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
     return obj;
   }
 
@@ -1051,33 +970,17 @@ export const Distribution_BucketOptions_Exponential = {
 
   fromSDK(object: Distribution_BucketOptions_ExponentialSDKType): Distribution_BucketOptions_Exponential {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
-      scale: isSet(object.scale) ? object.scale : undefined
+      numFiniteBuckets: object?.num_finite_buckets,
+      growthFactor: object?.growth_factor,
+      scale: object?.scale
     };
   },
 
   toSDK(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialSDKType {
     const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
-    message.scale !== undefined && (obj.scale = message.scale);
-    return obj;
-  },
-
-  fromAmino(object: Distribution_BucketOptions_ExponentialSDKType): Distribution_BucketOptions_Exponential {
-    return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
-      scale: isSet(object.scale) ? object.scale : undefined
-    };
-  },
-
-  toAmino(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialSDKType {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
-    message.scale !== undefined && (obj.scale = message.scale);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
     return obj;
   }
 
@@ -1163,24 +1066,6 @@ export const Distribution_BucketOptions_Explicit = {
   },
 
   toSDK(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitSDKType {
-    const obj: any = {};
-
-    if (message.bounds) {
-      obj.bounds = message.bounds.map(e => e);
-    } else {
-      obj.bounds = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: Distribution_BucketOptions_ExplicitSDKType): Distribution_BucketOptions_Explicit {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitSDKType {
     const obj: any = {};
 
     if (message.bounds) {
@@ -1281,7 +1166,7 @@ export const Distribution_Exemplar = {
 
   fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
     return {
-      value: isSet(object.value) ? object.value : undefined,
+      value: object?.value,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
     };
@@ -1289,33 +1174,11 @@ export const Distribution_Exemplar = {
 
   toSDK(message: Distribution_Exemplar): Distribution_ExemplarSDKType {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
 
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.attachments = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
-    return {
-      value: isSet(object.value) ? object.value : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Distribution_Exemplar): Distribution_ExemplarSDKType {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-
-    if (message.attachments) {
-      obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.attachments = [];
     }

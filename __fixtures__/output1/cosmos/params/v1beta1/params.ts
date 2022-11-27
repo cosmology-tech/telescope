@@ -123,41 +123,19 @@ export const ParameterChangeProposal = {
 
   fromSDK(object: ParameterChangeProposalSDKType): ParameterChangeProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ParameterChangeProposal): ParameterChangeProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
 
     if (message.changes) {
       obj.changes = message.changes.map(e => e ? ParamChange.toSDK(e) : undefined);
-    } else {
-      obj.changes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ParameterChangeProposalSDKType): ParameterChangeProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ParameterChangeProposal): ParameterChangeProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-
-    if (message.changes) {
-      obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e) : undefined);
     } else {
       obj.changes = [];
     }
@@ -248,33 +226,17 @@ export const ParamChange = {
 
   fromSDK(object: ParamChangeSDKType): ParamChange {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      subspace: object?.subspace,
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: ParamChange): ParamChangeSDKType {
     const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: ParamChangeSDKType): ParamChange {
-    return {
-      subspace: isSet(object.subspace) ? object.subspace : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: ParamChange): ParamChangeSDKType {
-    const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.subspace = message.subspace;
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 

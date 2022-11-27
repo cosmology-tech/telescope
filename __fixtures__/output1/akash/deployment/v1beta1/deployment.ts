@@ -287,7 +287,7 @@ export const MsgCreateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined,
+      version: object?.version,
       deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
     };
   },
@@ -302,32 +302,8 @@ export const MsgCreateDeployment = {
       obj.groups = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromAmino(object.deposit) : undefined
-    };
-  },
-
-  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined);
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    message.version !== undefined && (obj.version = message.version);
-    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined);
     return obj;
   }
 
@@ -379,15 +355,6 @@ export const MsgCreateDeploymentResponse = {
   },
 
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgCreateDeploymentResponseSDKType): MsgCreateDeploymentResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -473,20 +440,6 @@ export const MsgDepositDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromAmino(object.amount) : undefined
-    };
-  },
-
-  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined);
-    return obj;
   }
 
 };
@@ -537,15 +490,6 @@ export const MsgDepositDeploymentResponse = {
   },
 
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgDepositDeploymentResponseSDKType): MsgDepositDeploymentResponse {
-    return {};
-  },
-
-  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -641,7 +585,7 @@ export const MsgUpdateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined
+      version: object?.version
     };
   },
 
@@ -655,29 +599,7 @@ export const MsgUpdateDeployment = {
       obj.groups = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
-
-  fromAmino(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: isSet(object.version) ? object.version : undefined
-    };
-  },
-
-  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined);
-
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     return obj;
   }
 
@@ -729,15 +651,6 @@ export const MsgUpdateDeploymentResponse = {
   },
 
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgUpdateDeploymentResponseSDKType): MsgUpdateDeploymentResponse {
-    return {};
-  },
-
-  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -809,18 +722,6 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
-    return {
-      id: isSet(object.id) ? DeploymentID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -871,15 +772,6 @@ export const MsgCloseDeploymentResponse = {
   },
 
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgCloseDeploymentResponseSDKType): MsgCloseDeploymentResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -955,29 +847,15 @@ export const DeploymentID = {
 
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined
+      owner: object?.owner,
+      dseq: object?.dseq
     };
   },
 
   toSDK(message: DeploymentID): DeploymentIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    return obj;
-  },
-
-  fromAmino(object: DeploymentIDSDKType): DeploymentID {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined
-    };
-  },
-
-  toAmino(message: DeploymentID): DeploymentIDSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
     return obj;
   }
 
@@ -1078,8 +956,8 @@ export const Deployment = {
     return {
       deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? object.version : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
+      version: object?.version,
+      createdAt: object?.created_at
     };
   },
 
@@ -1087,26 +965,8 @@ export const Deployment = {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = message.version);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
-    return obj;
-  },
-
-  fromAmino(object: DeploymentSDKType): Deployment {
-    return {
-      deploymentId: isSet(object.deployment_id) ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? object.version : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
-    };
-  },
-
-  toAmino(message: Deployment): DeploymentSDKType {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = message.version);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    obj.version = message.version;
+    obj.created_at = message.createdAt;
     return obj;
   }
 
@@ -1193,33 +1053,17 @@ export const DeploymentFilters = {
 
   fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      state: isSet(object.state) ? object.state : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      state: object?.state
     };
   },
 
   toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.state !== undefined && (obj.state = message.state);
-    return obj;
-  },
-
-  fromAmino(object: DeploymentFiltersSDKType): DeploymentFilters {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      state: isSet(object.state) ? object.state : undefined
-    };
-  },
-
-  toAmino(message: DeploymentFilters): DeploymentFiltersSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.state !== undefined && (obj.state = message.state);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.state = message.state;
     return obj;
   }
 

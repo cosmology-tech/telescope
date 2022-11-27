@@ -387,15 +387,6 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -465,18 +456,6 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    return obj;
   }
 
 };
@@ -538,25 +517,13 @@ export const QueryValidatorOutstandingRewardsRequest = {
 
   fromSDK(object: QueryValidatorOutstandingRewardsRequestSDKType): QueryValidatorOutstandingRewardsRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryValidatorOutstandingRewardsRequest): QueryValidatorOutstandingRewardsRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryValidatorOutstandingRewardsRequestSDKType): QueryValidatorOutstandingRewardsRequest {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorOutstandingRewardsRequest): QueryValidatorOutstandingRewardsRequestSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -627,18 +594,6 @@ export const QueryValidatorOutstandingRewardsResponse = {
     const obj: any = {};
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorOutstandingRewards.toSDK(message.rewards) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryValidatorOutstandingRewardsResponseSDKType): QueryValidatorOutstandingRewardsResponse {
-    return {
-      rewards: isSet(object.rewards) ? ValidatorOutstandingRewards.fromAmino(object.rewards) : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorOutstandingRewardsResponse): QueryValidatorOutstandingRewardsResponseSDKType {
-    const obj: any = {};
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorOutstandingRewards.toAmino(message.rewards) : undefined);
-    return obj;
   }
 
 };
@@ -700,25 +655,13 @@ export const QueryValidatorCommissionRequest = {
 
   fromSDK(object: QueryValidatorCommissionRequestSDKType): QueryValidatorCommissionRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryValidatorCommissionRequest): QueryValidatorCommissionRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryValidatorCommissionRequestSDKType): QueryValidatorCommissionRequest {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorCommissionRequest): QueryValidatorCommissionRequestSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -788,18 +731,6 @@ export const QueryValidatorCommissionResponse = {
   toSDK(message: QueryValidatorCommissionResponse): QueryValidatorCommissionResponseSDKType {
     const obj: any = {};
     message.commission !== undefined && (obj.commission = message.commission ? ValidatorAccumulatedCommission.toSDK(message.commission) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryValidatorCommissionResponseSDKType): QueryValidatorCommissionResponse {
-    return {
-      commission: isSet(object.commission) ? ValidatorAccumulatedCommission.fromAmino(object.commission) : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorCommissionResponse): QueryValidatorCommissionResponseSDKType {
-    const obj: any = {};
-    message.commission !== undefined && (obj.commission = message.commission ? ValidatorAccumulatedCommission.toAmino(message.commission) : undefined);
     return obj;
   }
 
@@ -898,37 +829,19 @@ export const QueryValidatorSlashesRequest = {
 
   fromSDK(object: QueryValidatorSlashesRequestSDKType): QueryValidatorSlashesRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      startingHeight: isSet(object.starting_height) ? object.starting_height : undefined,
-      endingHeight: isSet(object.ending_height) ? object.ending_height : undefined,
+      validatorAddress: object?.validator_address,
+      startingHeight: object?.starting_height,
+      endingHeight: object?.ending_height,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryValidatorSlashesRequest): QueryValidatorSlashesRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.starting_height = message.startingHeight);
-    message.endingHeight !== undefined && (obj.ending_height = message.endingHeight);
+    obj.validator_address = message.validatorAddress;
+    obj.starting_height = message.startingHeight;
+    obj.ending_height = message.endingHeight;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryValidatorSlashesRequestSDKType): QueryValidatorSlashesRequest {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      startingHeight: isSet(object.starting_height) ? object.starting_height : undefined,
-      endingHeight: isSet(object.ending_height) ? object.ending_height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorSlashesRequest): QueryValidatorSlashesRequestSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.starting_height = message.startingHeight);
-    message.endingHeight !== undefined && (obj.ending_height = message.endingHeight);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1025,26 +938,6 @@ export const QueryValidatorSlashesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryValidatorSlashesResponseSDKType): QueryValidatorSlashesResponse {
-    return {
-      slashes: Array.isArray(object?.slashes) ? object.slashes.map((e: any) => ValidatorSlashEvent.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryValidatorSlashesResponse): QueryValidatorSlashesResponseSDKType {
-    const obj: any = {};
-
-    if (message.slashes) {
-      obj.slashes = message.slashes.map(e => e ? ValidatorSlashEvent.toAmino(e) : undefined);
-    } else {
-      obj.slashes = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -1118,29 +1011,15 @@ export const QueryDelegationRewardsRequest = {
 
   fromSDK(object: QueryDelegationRewardsRequestSDKType): QueryDelegationRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryDelegationRewardsRequest): QueryDelegationRewardsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryDelegationRewardsRequestSDKType): QueryDelegationRewardsRequest {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDelegationRewardsRequest): QueryDelegationRewardsRequestSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -1223,24 +1102,6 @@ export const QueryDelegationRewardsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: QueryDelegationRewardsResponseSDKType): QueryDelegationRewardsResponse {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryDelegationRewardsResponse): QueryDelegationRewardsResponseSDKType {
-    const obj: any = {};
-
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1302,25 +1163,13 @@ export const QueryDelegationTotalRewardsRequest = {
 
   fromSDK(object: QueryDelegationTotalRewardsRequestSDKType): QueryDelegationTotalRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegationTotalRewardsRequest): QueryDelegationTotalRewardsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryDelegationTotalRewardsRequestSDKType): QueryDelegationTotalRewardsRequest {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDelegationTotalRewardsRequest): QueryDelegationTotalRewardsRequestSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1427,31 +1276,6 @@ export const QueryDelegationTotalRewardsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: QueryDelegationTotalRewardsResponseSDKType): QueryDelegationTotalRewardsResponse {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DelegationDelegatorReward.fromAmino(e)) : [],
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryDelegationTotalRewardsResponse): QueryDelegationTotalRewardsResponseSDKType {
-    const obj: any = {};
-
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DelegationDelegatorReward.toAmino(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-
-    if (message.total) {
-      obj.total = message.total.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.total = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1513,25 +1337,13 @@ export const QueryDelegatorValidatorsRequest = {
 
   fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1614,24 +1426,6 @@ export const QueryDelegatorValidatorsResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: QueryDelegatorValidatorsResponseSDKType): QueryDelegatorValidatorsResponse {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseSDKType {
-    const obj: any = {};
-
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e);
-    } else {
-      obj.validators = [];
-    }
-
-    return obj;
   }
 
 };
@@ -1693,25 +1487,13 @@ export const QueryDelegatorWithdrawAddressRequest = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressRequestSDKType): QueryDelegatorWithdrawAddressRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegatorWithdrawAddressRequest): QueryDelegatorWithdrawAddressRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryDelegatorWithdrawAddressRequestSDKType): QueryDelegatorWithdrawAddressRequest {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDelegatorWithdrawAddressRequest): QueryDelegatorWithdrawAddressRequestSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1774,25 +1556,13 @@ export const QueryDelegatorWithdrawAddressResponse = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressResponseSDKType): QueryDelegatorWithdrawAddressResponse {
     return {
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+      withdrawAddress: object?.withdraw_address
     };
   },
 
   toSDK(message: QueryDelegatorWithdrawAddressResponse): QueryDelegatorWithdrawAddressResponseSDKType {
     const obj: any = {};
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-    return obj;
-  },
-
-  fromAmino(object: QueryDelegatorWithdrawAddressResponseSDKType): QueryDelegatorWithdrawAddressResponse {
-    return {
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
-    };
-  },
-
-  toAmino(message: QueryDelegatorWithdrawAddressResponse): QueryDelegatorWithdrawAddressResponseSDKType {
-    const obj: any = {};
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   }
 
@@ -1844,15 +1614,6 @@ export const QueryCommunityPoolRequest = {
   },
 
   toSDK(_: QueryCommunityPoolRequest): QueryCommunityPoolRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryCommunityPoolRequestSDKType): QueryCommunityPoolRequest {
-    return {};
-  },
-
-  toAmino(_: QueryCommunityPoolRequest): QueryCommunityPoolRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1931,24 +1692,6 @@ export const QueryCommunityPoolResponse = {
 
     if (message.pool) {
       obj.pool = message.pool.map(e => e ? DecCoin.toSDK(e) : undefined);
-    } else {
-      obj.pool = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: QueryCommunityPoolResponseSDKType): QueryCommunityPoolResponse {
-    return {
-      pool: Array.isArray(object?.pool) ? object.pool.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: QueryCommunityPoolResponse): QueryCommunityPoolResponseSDKType {
-    const obj: any = {};
-
-    if (message.pool) {
-      obj.pool = message.pool.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.pool = [];
     }

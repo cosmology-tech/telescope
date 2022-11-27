@@ -110,28 +110,14 @@ export const CertificateResponse = {
   fromSDK(object: CertificateResponseSDKType): CertificateResponse {
     return {
       certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined,
-      serial: isSet(object.serial) ? object.serial : undefined
+      serial: object?.serial
     };
   },
 
   toSDK(message: CertificateResponse): CertificateResponseSDKType {
     const obj: any = {};
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
-    message.serial !== undefined && (obj.serial = message.serial);
-    return obj;
-  },
-
-  fromAmino(object: CertificateResponseSDKType): CertificateResponse {
-    return {
-      certificate: isSet(object.certificate) ? Certificate.fromAmino(object.certificate) : undefined,
-      serial: isSet(object.serial) ? object.serial : undefined
-    };
-  },
-
-  toAmino(message: CertificateResponse): CertificateResponseSDKType {
-    const obj: any = {};
-    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined);
-    message.serial !== undefined && (obj.serial = message.serial);
+    obj.serial = message.serial;
     return obj;
   }
 
@@ -215,20 +201,6 @@ export const QueryCertificatesRequest = {
     const obj: any = {};
     message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toSDK(message.filter) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
-    return {
-      filter: isSet(object.filter) ? CertificateFilter.fromAmino(object.filter) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryCertificatesRequest): QueryCertificatesRequestSDKType {
-    const obj: any = {};
-    message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toAmino(message.filter) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -324,26 +296,6 @@ export const QueryCertificatesResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {
-    return {
-      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryCertificatesResponse): QueryCertificatesResponseSDKType {
-    const obj: any = {};
-
-    if (message.certificates) {
-      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e) : undefined);
-    } else {
-      obj.certificates = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

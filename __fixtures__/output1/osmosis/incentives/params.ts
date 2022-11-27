@@ -77,25 +77,13 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : undefined
+      distrEpochIdentifier: object?.distr_epoch_identifier
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.distrEpochIdentifier !== undefined && (obj.distr_epoch_identifier = message.distrEpochIdentifier);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.distrEpochIdentifier !== undefined && (obj.distr_epoch_identifier = message.distrEpochIdentifier);
+    obj.distr_epoch_identifier = message.distrEpochIdentifier;
     return obj;
   }
 

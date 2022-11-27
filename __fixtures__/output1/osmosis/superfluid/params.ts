@@ -81,25 +81,13 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : undefined
+      minimumRiskFactor: object?.minimum_risk_factor
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.minimumRiskFactor !== undefined && (obj.minimum_risk_factor = message.minimumRiskFactor);
-    return obj;
-  },
-
-  fromAmino(object: ParamsSDKType): Params {
-    return {
-      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : undefined
-    };
-  },
-
-  toAmino(message: Params): ParamsSDKType {
-    const obj: any = {};
-    message.minimumRiskFactor !== undefined && (obj.minimum_risk_factor = message.minimumRiskFactor);
+    obj.minimum_risk_factor = message.minimumRiskFactor;
     return obj;
   }
 

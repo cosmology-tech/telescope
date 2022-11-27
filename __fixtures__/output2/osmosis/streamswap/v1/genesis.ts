@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Sale, UserPosition } from "./state";
 import { Params } from "./params";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.streamswap.v1";
 
 /** GenesisState defines the streamswap module's genesis state. */

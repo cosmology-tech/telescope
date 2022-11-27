@@ -235,42 +235,18 @@ export const MsgRegisterDevFeeInfo = {
 
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
     };
   },
 
   toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-
-    if (message.nonces) {
-      obj.nonces = message.nonces.map(e => e);
-    } else {
-      obj.nonces = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
 
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => e);
@@ -329,15 +305,6 @@ export const MsgRegisterDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgRegisterDevFeeInfoResponseSDKType): MsgRegisterDevFeeInfoResponse {
-    return {};
-  },
-
-  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -413,29 +380,15 @@ export const MsgCancelDevFeeInfo = {
 
   fromSDK(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address
     };
   },
 
   toSDK(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    return obj;
-  },
-
-  fromAmino(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined
-    };
-  },
-
-  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
     return obj;
   }
 
@@ -487,15 +440,6 @@ export const MsgCancelDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgCancelDevFeeInfoResponseSDKType): MsgCancelDevFeeInfoResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -583,33 +527,17 @@ export const MsgUpdateDevFeeInfo = {
 
   fromSDK(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+      contractAddress: object?.contract_address,
+      deployerAddress: object?.deployer_address,
+      withdrawAddress: object?.withdraw_address
     };
   },
 
   toSDK(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-    return obj;
-  },
-
-  fromAmino(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
-    };
-  },
-
-  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   }
 
@@ -661,15 +589,6 @@ export const MsgUpdateDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgUpdateDevFeeInfoResponseSDKType): MsgUpdateDevFeeInfoResponse {
-    return {};
-  },
-
-  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
   }

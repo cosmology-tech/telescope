@@ -154,26 +154,6 @@ export const CPU = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: CPUSDKType): CPU {
-    return {
-      units: isSet(object.units) ? ResourceValue.fromAmino(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: CPU): CPUSDKType {
-    const obj: any = {};
-    message.units !== undefined && (obj.units = message.units ? ResourceValue.toAmino(message.units) : undefined);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
   }
 
 };
@@ -269,26 +249,6 @@ export const Memory = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: MemorySDKType): Memory {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Memory): MemorySDKType {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
   }
 
 };
@@ -379,26 +339,6 @@ export const Storage = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: StorageSDKType): Storage {
-    return {
-      quantity: isSet(object.quantity) ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Storage): StorageSDKType {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -522,30 +462,6 @@ export const ResourceUnits = {
 
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ResourceUnitsSDKType): ResourceUnits {
-    return {
-      cpu: isSet(object.cpu) ? CPU.fromAmino(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromAmino(object.memory) : undefined,
-      storage: isSet(object.storage) ? Storage.fromAmino(object.storage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ResourceUnits): ResourceUnitsSDKType {
-    const obj: any = {};
-    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined);
-    message.memory !== undefined && (obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined);
-    message.storage !== undefined && (obj.storage = message.storage ? Storage.toAmino(message.storage) : undefined);
-
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
       obj.endpoints = [];
     }

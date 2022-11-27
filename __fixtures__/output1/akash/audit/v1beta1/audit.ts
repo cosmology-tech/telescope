@@ -180,41 +180,19 @@ export const Provider = {
 
   fromSDK(object: ProviderSDKType): Provider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Provider): ProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ProviderSDKType): Provider {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Provider): ProviderSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -311,41 +289,19 @@ export const AuditedAttributes = {
 
   fromSDK(object: AuditedAttributesSDKType): AuditedAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: AuditedAttributes): AuditedAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AuditedAttributesSDKType): AuditedAttributes {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AuditedAttributes): AuditedAttributesSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -427,24 +383,6 @@ export const AttributesResponse = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: AttributesResponseSDKType): AttributesResponse {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: AttributesResponse): AttributesResponseSDKType {
-    const obj: any = {};
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -555,31 +493,6 @@ export const AttributesFilters = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: AttributesFiltersSDKType): AttributesFilters {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: AttributesFilters): AttributesFiltersSDKType {
-    const obj: any = {};
-
-    if (message.auditors) {
-      obj.auditors = message.auditors.map(e => e);
-    } else {
-      obj.auditors = [];
-    }
-
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e);
-    } else {
-      obj.owners = [];
-    }
-
-    return obj;
   }
 
 };
@@ -671,41 +584,19 @@ export const MsgSignProviderAttributes = {
 
   fromSDK(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -761,15 +652,6 @@ export const MsgSignProviderAttributesResponse = {
   },
 
   toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSignProviderAttributesResponseSDKType): MsgSignProviderAttributesResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -863,38 +745,16 @@ export const MsgDeleteProviderAttributes = {
 
   fromSDK(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },
 
   toSDK(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
@@ -953,15 +813,6 @@ export const MsgDeleteProviderAttributesResponse = {
   },
 
   toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgDeleteProviderAttributesResponseSDKType): MsgDeleteProviderAttributesResponse {
-    return {};
-  },
-
-  toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
   }

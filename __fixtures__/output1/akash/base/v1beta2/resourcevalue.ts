@@ -69,25 +69,13 @@ export const ResourceValue = {
 
   fromSDK(object: ResourceValueSDKType): ResourceValue {
     return {
-      val: isSet(object.val) ? object.val : undefined
+      val: object?.val
     };
   },
 
   toSDK(message: ResourceValue): ResourceValueSDKType {
     const obj: any = {};
-    message.val !== undefined && (obj.val = message.val);
-    return obj;
-  },
-
-  fromAmino(object: ResourceValueSDKType): ResourceValue {
-    return {
-      val: isSet(object.val) ? object.val : undefined
-    };
-  },
-
-  toAmino(message: ResourceValue): ResourceValueSDKType {
-    const obj: any = {};
-    message.val !== undefined && (obj.val = message.val);
+    obj.val = message.val;
     return obj;
   }
 

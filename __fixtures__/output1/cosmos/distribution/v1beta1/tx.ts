@@ -174,29 +174,15 @@ export const MsgSetWithdrawAddress = {
 
   fromSDK(object: MsgSetWithdrawAddressSDKType): MsgSetWithdrawAddress {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+      delegatorAddress: object?.delegator_address,
+      withdrawAddress: object?.withdraw_address
     };
   },
 
   toSDK(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
-    return obj;
-  },
-
-  fromAmino(object: MsgSetWithdrawAddressSDKType): MsgSetWithdrawAddress {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
-    };
-  },
-
-  toAmino(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   }
 
@@ -248,15 +234,6 @@ export const MsgSetWithdrawAddressResponse = {
   },
 
   toSDK(_: MsgSetWithdrawAddressResponse): MsgSetWithdrawAddressResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgSetWithdrawAddressResponseSDKType): MsgSetWithdrawAddressResponse {
-    return {};
-  },
-
-  toAmino(_: MsgSetWithdrawAddressResponse): MsgSetWithdrawAddressResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -332,29 +309,15 @@ export const MsgWithdrawDelegatorReward = {
 
   fromSDK(object: MsgWithdrawDelegatorRewardSDKType): MsgWithdrawDelegatorReward {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: MsgWithdrawDelegatorRewardSDKType): MsgWithdrawDelegatorReward {
-    return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardSDKType {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -437,24 +400,6 @@ export const MsgWithdrawDelegatorRewardResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: MsgWithdrawDelegatorRewardResponseSDKType): MsgWithdrawDelegatorRewardResponse {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgWithdrawDelegatorRewardResponse): MsgWithdrawDelegatorRewardResponseSDKType {
-    const obj: any = {};
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
   }
 
 };
@@ -516,25 +461,13 @@ export const MsgWithdrawValidatorCommission = {
 
   fromSDK(object: MsgWithdrawValidatorCommissionSDKType): MsgWithdrawValidatorCommission {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    return obj;
-  },
-
-  fromAmino(object: MsgWithdrawValidatorCommissionSDKType): MsgWithdrawValidatorCommission {
-    return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
-    };
-  },
-
-  toAmino(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionSDKType {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -612,24 +545,6 @@ export const MsgWithdrawValidatorCommissionResponse = {
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgWithdrawValidatorCommissionResponseSDKType): MsgWithdrawValidatorCommissionResponse {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgWithdrawValidatorCommissionResponse): MsgWithdrawValidatorCommissionResponseSDKType {
-    const obj: any = {};
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -715,7 +630,7 @@ export const MsgFundCommunityPool = {
   fromSDK(object: MsgFundCommunityPoolSDKType): MsgFundCommunityPool {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
-      depositor: isSet(object.depositor) ? object.depositor : undefined
+      depositor: object?.depositor
     };
   },
 
@@ -728,27 +643,7 @@ export const MsgFundCommunityPool = {
       obj.amount = [];
     }
 
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    return obj;
-  },
-
-  fromAmino(object: MsgFundCommunityPoolSDKType): MsgFundCommunityPool {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      depositor: isSet(object.depositor) ? object.depositor : undefined
-    };
-  },
-
-  toAmino(message: MsgFundCommunityPool): MsgFundCommunityPoolSDKType {
-    const obj: any = {};
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.depositor = message.depositor;
     return obj;
   }
 
@@ -800,15 +695,6 @@ export const MsgFundCommunityPoolResponse = {
   },
 
   toSDK(_: MsgFundCommunityPoolResponse): MsgFundCommunityPoolResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgFundCommunityPoolResponseSDKType): MsgFundCommunityPoolResponse {
-    return {};
-  },
-
-  toAmino(_: MsgFundCommunityPoolResponse): MsgFundCommunityPoolResponseSDKType {
     const obj: any = {};
     return obj;
   }

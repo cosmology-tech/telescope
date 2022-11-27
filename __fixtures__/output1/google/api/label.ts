@@ -169,33 +169,17 @@ export const LabelDescriptor = {
 
   fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
     return {
-      key: isSet(object.key) ? object.key : undefined,
+      key: object?.key,
       valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
-      description: isSet(object.description) ? object.description : undefined
+      description: object?.description
     };
   },
 
   toSDK(message: LabelDescriptor): LabelDescriptorSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
-
-  fromAmino(object: LabelDescriptorSDKType): LabelDescriptor {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
-      description: isSet(object.description) ? object.description : undefined
-    };
-  },
-
-  toAmino(message: LabelDescriptor): LabelDescriptorSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
-    message.description !== undefined && (obj.description = message.description);
+    obj.description = message.description;
     return obj;
   }
 

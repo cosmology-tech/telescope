@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.streamswap.v1";
 export interface EventCreateSale {
   id: Long;
@@ -158,37 +158,19 @@ export const EventCreateSale = {
 
   fromSDK(object: EventCreateSaleSDKType): EventCreateSale {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
+      id: object?.id,
+      creator: object?.creator,
+      tokenIn: object?.token_in,
       tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined
     };
   },
 
   toSDK(message: EventCreateSale): EventCreateSaleSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
+    obj.id = message.id;
+    obj.creator = message.creator;
+    obj.token_in = message.tokenIn;
     message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: EventCreateSaleSDKType): EventCreateSale {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
-      tokenOut: isSet(object.token_out) ? Coin.fromAmino(object.token_out) : undefined
-    };
-  },
-
-  toAmino(message: EventCreateSale): EventCreateSaleSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
-    message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined);
     return obj;
   }
 
@@ -275,33 +257,17 @@ export const EventSubscribe = {
 
   fromSDK(object: EventSubscribeSDKType): EventSubscribe {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
+      sender: object?.sender,
+      saleId: object?.sale_id,
+      amount: object?.amount
     };
   },
 
   toSDK(message: EventSubscribe): EventSubscribeSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: EventSubscribeSDKType): EventSubscribe {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: EventSubscribe): EventSubscribeSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.sender = message.sender;
+    obj.sale_id = message.saleId;
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -388,33 +354,17 @@ export const EventWithdraw = {
 
   fromSDK(object: EventWithdrawSDKType): EventWithdraw {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
+      sender: object?.sender,
+      saleId: object?.sale_id,
+      amount: object?.amount
     };
   },
 
   toSDK(message: EventWithdraw): EventWithdrawSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: EventWithdrawSDKType): EventWithdraw {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: EventWithdraw): EventWithdrawSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.sender = message.sender;
+    obj.sale_id = message.saleId;
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -501,33 +451,17 @@ export const EventExit = {
 
   fromSDK(object: EventExitSDKType): EventExit {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      purchased: isSet(object.purchased) ? object.purchased : undefined
+      sender: object?.sender,
+      saleId: object?.sale_id,
+      purchased: object?.purchased
     };
   },
 
   toSDK(message: EventExit): EventExitSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.purchased !== undefined && (obj.purchased = message.purchased);
-    return obj;
-  },
-
-  fromAmino(object: EventExitSDKType): EventExit {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      purchased: isSet(object.purchased) ? object.purchased : undefined
-    };
-  },
-
-  toAmino(message: EventExit): EventExitSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.purchased !== undefined && (obj.purchased = message.purchased);
+    obj.sender = message.sender;
+    obj.sale_id = message.saleId;
+    obj.purchased = message.purchased;
     return obj;
   }
 
@@ -602,29 +536,15 @@ export const EventFinalizeSale = {
 
   fromSDK(object: EventFinalizeSaleSDKType): EventFinalizeSale {
     return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      income: isSet(object.income) ? object.income : undefined
+      saleId: object?.sale_id,
+      income: object?.income
     };
   },
 
   toSDK(message: EventFinalizeSale): EventFinalizeSaleSDKType {
     const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.income !== undefined && (obj.income = message.income);
-    return obj;
-  },
-
-  fromAmino(object: EventFinalizeSaleSDKType): EventFinalizeSale {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      income: isSet(object.income) ? object.income : undefined
-    };
-  },
-
-  toAmino(message: EventFinalizeSale): EventFinalizeSaleSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.income !== undefined && (obj.income = message.income);
+    obj.sale_id = message.saleId;
+    obj.income = message.income;
     return obj;
   }
 

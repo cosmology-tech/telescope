@@ -110,33 +110,17 @@ export const UpdateFeeTokenProposal = {
 
   fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       feetoken: isSet(object.feetoken) ? FeeToken.fromSDK(object.feetoken) : undefined
     };
   },
 
   toSDK(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      feetoken: isSet(object.feetoken) ? FeeToken.fromAmino(object.feetoken) : undefined
-    };
-  },
-
-  toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined);
     return obj;
   }
 

@@ -1199,46 +1199,6 @@ export const Request = {
     message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? RequestLoadSnapshotChunk.toSDK(message.loadSnapshotChunk) : undefined);
     message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? RequestApplySnapshotChunk.toSDK(message.applySnapshotChunk) : undefined);
     return obj;
-  },
-
-  fromAmino(object: RequestSDKType): Request {
-    return {
-      echo: isSet(object.echo) ? RequestEcho.fromAmino(object.echo) : undefined,
-      flush: isSet(object.flush) ? RequestFlush.fromAmino(object.flush) : undefined,
-      info: isSet(object.info) ? RequestInfo.fromAmino(object.info) : undefined,
-      setOption: isSet(object.set_option) ? RequestSetOption.fromAmino(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? RequestInitChain.fromAmino(object.init_chain) : undefined,
-      query: isSet(object.query) ? RequestQuery.fromAmino(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? RequestBeginBlock.fromAmino(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? RequestCheckTx.fromAmino(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? RequestDeliverTx.fromAmino(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? RequestEndBlock.fromAmino(object.end_block) : undefined,
-      commit: isSet(object.commit) ? RequestCommit.fromAmino(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromAmino(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromAmino(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromAmino(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromAmino(object.apply_snapshot_chunk) : undefined
-    };
-  },
-
-  toAmino(message: Request): RequestSDKType {
-    const obj: any = {};
-    message.echo !== undefined && (obj.echo = message.echo ? RequestEcho.toAmino(message.echo) : undefined);
-    message.flush !== undefined && (obj.flush = message.flush ? RequestFlush.toAmino(message.flush) : undefined);
-    message.info !== undefined && (obj.info = message.info ? RequestInfo.toAmino(message.info) : undefined);
-    message.setOption !== undefined && (obj.set_option = message.setOption ? RequestSetOption.toAmino(message.setOption) : undefined);
-    message.initChain !== undefined && (obj.init_chain = message.initChain ? RequestInitChain.toAmino(message.initChain) : undefined);
-    message.query !== undefined && (obj.query = message.query ? RequestQuery.toAmino(message.query) : undefined);
-    message.beginBlock !== undefined && (obj.begin_block = message.beginBlock ? RequestBeginBlock.toAmino(message.beginBlock) : undefined);
-    message.checkTx !== undefined && (obj.check_tx = message.checkTx ? RequestCheckTx.toAmino(message.checkTx) : undefined);
-    message.deliverTx !== undefined && (obj.deliver_tx = message.deliverTx ? RequestDeliverTx.toAmino(message.deliverTx) : undefined);
-    message.endBlock !== undefined && (obj.end_block = message.endBlock ? RequestEndBlock.toAmino(message.endBlock) : undefined);
-    message.commit !== undefined && (obj.commit = message.commit ? RequestCommit.toAmino(message.commit) : undefined);
-    message.listSnapshots !== undefined && (obj.list_snapshots = message.listSnapshots ? RequestListSnapshots.toAmino(message.listSnapshots) : undefined);
-    message.offerSnapshot !== undefined && (obj.offer_snapshot = message.offerSnapshot ? RequestOfferSnapshot.toAmino(message.offerSnapshot) : undefined);
-    message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? RequestLoadSnapshotChunk.toAmino(message.loadSnapshotChunk) : undefined);
-    message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? RequestApplySnapshotChunk.toAmino(message.applySnapshotChunk) : undefined);
-    return obj;
   }
 
 };
@@ -1300,25 +1260,13 @@ export const RequestEcho = {
 
   fromSDK(object: RequestEchoSDKType): RequestEcho {
     return {
-      message: isSet(object.message) ? object.message : undefined
+      message: object?.message
     };
   },
 
   toSDK(message: RequestEcho): RequestEchoSDKType {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
-
-  fromAmino(object: RequestEchoSDKType): RequestEcho {
-    return {
-      message: isSet(object.message) ? object.message : undefined
-    };
-  },
-
-  toAmino(message: RequestEcho): RequestEchoSDKType {
-    const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
+    obj.message = message.message;
     return obj;
   }
 
@@ -1370,15 +1318,6 @@ export const RequestFlush = {
   },
 
   toSDK(_: RequestFlush): RequestFlushSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: RequestFlushSDKType): RequestFlush {
-    return {};
-  },
-
-  toAmino(_: RequestFlush): RequestFlushSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1466,33 +1405,17 @@ export const RequestInfo = {
 
   fromSDK(object: RequestInfoSDKType): RequestInfo {
     return {
-      version: isSet(object.version) ? object.version : undefined,
-      blockVersion: isSet(object.block_version) ? object.block_version : undefined,
-      p2pVersion: isSet(object.p2p_version) ? object.p2p_version : undefined
+      version: object?.version,
+      blockVersion: object?.block_version,
+      p2pVersion: object?.p2p_version
     };
   },
 
   toSDK(message: RequestInfo): RequestInfoSDKType {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.block_version = message.blockVersion);
-    message.p2pVersion !== undefined && (obj.p2p_version = message.p2pVersion);
-    return obj;
-  },
-
-  fromAmino(object: RequestInfoSDKType): RequestInfo {
-    return {
-      version: isSet(object.version) ? object.version : undefined,
-      blockVersion: isSet(object.block_version) ? object.block_version : undefined,
-      p2pVersion: isSet(object.p2p_version) ? object.p2p_version : undefined
-    };
-  },
-
-  toAmino(message: RequestInfo): RequestInfoSDKType {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.block_version = message.blockVersion);
-    message.p2pVersion !== undefined && (obj.p2p_version = message.p2pVersion);
+    obj.version = message.version;
+    obj.block_version = message.blockVersion;
+    obj.p2p_version = message.p2pVersion;
     return obj;
   }
 
@@ -1567,29 +1490,15 @@ export const RequestSetOption = {
 
   fromSDK(object: RequestSetOptionSDKType): RequestSetOption {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: RequestSetOption): RequestSetOptionSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: RequestSetOptionSDKType): RequestSetOption {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: RequestSetOption): RequestSetOptionSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1719,18 +1628,18 @@ export const RequestInitChain = {
   fromSDK(object: RequestInitChainSDKType): RequestInitChain {
     return {
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
+      chainId: object?.chain_id,
       consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      appStateBytes: isSet(object.app_state_bytes) ? object.app_state_bytes : undefined,
-      initialHeight: isSet(object.initial_height) ? object.initial_height : undefined
+      appStateBytes: object?.app_state_bytes,
+      initialHeight: object?.initial_height
     };
   },
 
   toSDK(message: RequestInitChain): RequestInitChainSDKType {
     const obj: any = {};
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    obj.chain_id = message.chainId;
     message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toSDK(message.consensusParams) : undefined);
 
     if (message.validators) {
@@ -1739,36 +1648,8 @@ export const RequestInitChain = {
       obj.validators = [];
     }
 
-    message.appStateBytes !== undefined && (obj.app_state_bytes = message.appStateBytes);
-    message.initialHeight !== undefined && (obj.initial_height = message.initialHeight);
-    return obj;
-  },
-
-  fromAmino(object: RequestInitChainSDKType): RequestInitChain {
-    return {
-      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
-      appStateBytes: isSet(object.app_state_bytes) ? object.app_state_bytes : undefined,
-      initialHeight: isSet(object.initial_height) ? object.initial_height : undefined
-    };
-  },
-
-  toAmino(message: RequestInitChain): RequestInitChainSDKType {
-    const obj: any = {};
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
-    message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toAmino(message.consensusParams) : undefined);
-
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-
-    message.appStateBytes !== undefined && (obj.app_state_bytes = message.appStateBytes);
-    message.initialHeight !== undefined && (obj.initial_height = message.initialHeight);
+    obj.app_state_bytes = message.appStateBytes;
+    obj.initial_height = message.initialHeight;
     return obj;
   }
 
@@ -1867,37 +1748,19 @@ export const RequestQuery = {
 
   fromSDK(object: RequestQuerySDKType): RequestQuery {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      path: isSet(object.path) ? object.path : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      prove: isSet(object.prove) ? object.prove : undefined
+      data: object?.data,
+      path: object?.path,
+      height: object?.height,
+      prove: object?.prove
     };
   },
 
   toSDK(message: RequestQuery): RequestQuerySDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = message.height);
-    message.prove !== undefined && (obj.prove = message.prove);
-    return obj;
-  },
-
-  fromAmino(object: RequestQuerySDKType): RequestQuery {
-    return {
-      data: isSet(object.data) ? object.data : undefined,
-      path: isSet(object.path) ? object.path : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      prove: isSet(object.prove) ? object.prove : undefined
-    };
-  },
-
-  toAmino(message: RequestQuery): RequestQuerySDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = message.height);
-    message.prove !== undefined && (obj.prove = message.prove);
+    obj.data = message.data;
+    obj.path = message.path;
+    obj.height = message.height;
+    obj.prove = message.prove;
     return obj;
   }
 
@@ -2002,7 +1865,7 @@ export const RequestBeginBlock = {
 
   fromSDK(object: RequestBeginBlockSDKType): RequestBeginBlock {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined,
+      hash: object?.hash,
       header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
       lastCommitInfo: isSet(object.last_commit_info) ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDK(e)) : []
@@ -2011,36 +1874,12 @@ export const RequestBeginBlock = {
 
   toSDK(message: RequestBeginBlock): RequestBeginBlockSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
     message.lastCommitInfo !== undefined && (obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toSDK(message.lastCommitInfo) : undefined);
 
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map(e => e ? Evidence.toSDK(e) : undefined);
-    } else {
-      obj.byzantine_validators = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: RequestBeginBlockSDKType): RequestBeginBlock {
-    return {
-      hash: isSet(object.hash) ? object.hash : undefined,
-      header: isSet(object.header) ? Header.fromAmino(object.header) : undefined,
-      lastCommitInfo: isSet(object.last_commit_info) ? LastCommitInfo.fromAmino(object.last_commit_info) : undefined,
-      byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: RequestBeginBlock): RequestBeginBlockSDKType {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
-    message.header !== undefined && (obj.header = message.header ? Header.toAmino(message.header) : undefined);
-    message.lastCommitInfo !== undefined && (obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toAmino(message.lastCommitInfo) : undefined);
-
-    if (message.byzantineValidators) {
-      obj.byzantine_validators = message.byzantineValidators.map(e => e ? Evidence.toAmino(e) : undefined);
     } else {
       obj.byzantine_validators = [];
     }
@@ -2119,28 +1958,14 @@ export const RequestCheckTx = {
 
   fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
     return {
-      tx: isSet(object.tx) ? object.tx : undefined,
+      tx: object?.tx,
       type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
     };
   },
 
   toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
-    message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
-    return obj;
-  },
-
-  fromAmino(object: RequestCheckTxSDKType): RequestCheckTx {
-    return {
-      tx: isSet(object.tx) ? object.tx : undefined,
-      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
-    };
-  },
-
-  toAmino(message: RequestCheckTx): RequestCheckTxSDKType {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.tx = message.tx;
     message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
     return obj;
   }
@@ -2204,25 +2029,13 @@ export const RequestDeliverTx = {
 
   fromSDK(object: RequestDeliverTxSDKType): RequestDeliverTx {
     return {
-      tx: isSet(object.tx) ? object.tx : undefined
+      tx: object?.tx
     };
   },
 
   toSDK(message: RequestDeliverTx): RequestDeliverTxSDKType {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
-    return obj;
-  },
-
-  fromAmino(object: RequestDeliverTxSDKType): RequestDeliverTx {
-    return {
-      tx: isSet(object.tx) ? object.tx : undefined
-    };
-  },
-
-  toAmino(message: RequestDeliverTx): RequestDeliverTxSDKType {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.tx = message.tx;
     return obj;
   }
 
@@ -2285,25 +2098,13 @@ export const RequestEndBlock = {
 
   fromSDK(object: RequestEndBlockSDKType): RequestEndBlock {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: RequestEndBlock): RequestEndBlockSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    return obj;
-  },
-
-  fromAmino(object: RequestEndBlockSDKType): RequestEndBlock {
-    return {
-      height: isSet(object.height) ? object.height : undefined
-    };
-  },
-
-  toAmino(message: RequestEndBlock): RequestEndBlockSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -2357,15 +2158,6 @@ export const RequestCommit = {
   toSDK(_: RequestCommit): RequestCommitSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: RequestCommitSDKType): RequestCommit {
-    return {};
-  },
-
-  toAmino(_: RequestCommit): RequestCommitSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -2416,15 +2208,6 @@ export const RequestListSnapshots = {
   },
 
   toSDK(_: RequestListSnapshots): RequestListSnapshotsSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: RequestListSnapshotsSDKType): RequestListSnapshots {
-    return {};
-  },
-
-  toAmino(_: RequestListSnapshots): RequestListSnapshotsSDKType {
     const obj: any = {};
     return obj;
   }
@@ -2501,28 +2284,14 @@ export const RequestOfferSnapshot = {
   fromSDK(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
     return {
       snapshot: isSet(object.snapshot) ? Snapshot.fromSDK(object.snapshot) : undefined,
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
+      appHash: object?.app_hash
     };
   },
 
   toSDK(message: RequestOfferSnapshot): RequestOfferSnapshotSDKType {
     const obj: any = {};
     message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toSDK(message.snapshot) : undefined);
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
-    return obj;
-  },
-
-  fromAmino(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
-    return {
-      snapshot: isSet(object.snapshot) ? Snapshot.fromAmino(object.snapshot) : undefined,
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
-    };
-  },
-
-  toAmino(message: RequestOfferSnapshot): RequestOfferSnapshotSDKType {
-    const obj: any = {};
-    message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toAmino(message.snapshot) : undefined);
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
+    obj.app_hash = message.appHash;
     return obj;
   }
 
@@ -2609,33 +2378,17 @@ export const RequestLoadSnapshotChunk = {
 
   fromSDK(object: RequestLoadSnapshotChunkSDKType): RequestLoadSnapshotChunk {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined
+      height: object?.height,
+      format: object?.format,
+      chunk: object?.chunk
     };
   },
 
   toSDK(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
-    return obj;
-  },
-
-  fromAmino(object: RequestLoadSnapshotChunkSDKType): RequestLoadSnapshotChunk {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined
-    };
-  },
-
-  toAmino(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunk = message.chunk;
     return obj;
   }
 
@@ -2722,33 +2475,17 @@ export const RequestApplySnapshotChunk = {
 
   fromSDK(object: RequestApplySnapshotChunkSDKType): RequestApplySnapshotChunk {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
+      index: object?.index,
+      chunk: object?.chunk,
+      sender: object?.sender
     };
   },
 
   toSDK(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
-  },
-
-  fromAmino(object: RequestApplySnapshotChunkSDKType): RequestApplySnapshotChunk {
-    return {
-      index: isSet(object.index) ? object.index : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
-    };
-  },
-
-  toAmino(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkSDKType {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.index = message.index;
+    obj.chunk = message.chunk;
+    obj.sender = message.sender;
     return obj;
   }
 
@@ -3029,48 +2766,6 @@ export const Response = {
     message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? ResponseLoadSnapshotChunk.toSDK(message.loadSnapshotChunk) : undefined);
     message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? ResponseApplySnapshotChunk.toSDK(message.applySnapshotChunk) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ResponseSDKType): Response {
-    return {
-      exception: isSet(object.exception) ? ResponseException.fromAmino(object.exception) : undefined,
-      echo: isSet(object.echo) ? ResponseEcho.fromAmino(object.echo) : undefined,
-      flush: isSet(object.flush) ? ResponseFlush.fromAmino(object.flush) : undefined,
-      info: isSet(object.info) ? ResponseInfo.fromAmino(object.info) : undefined,
-      setOption: isSet(object.set_option) ? ResponseSetOption.fromAmino(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? ResponseInitChain.fromAmino(object.init_chain) : undefined,
-      query: isSet(object.query) ? ResponseQuery.fromAmino(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? ResponseBeginBlock.fromAmino(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? ResponseCheckTx.fromAmino(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromAmino(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? ResponseEndBlock.fromAmino(object.end_block) : undefined,
-      commit: isSet(object.commit) ? ResponseCommit.fromAmino(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromAmino(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromAmino(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromAmino(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromAmino(object.apply_snapshot_chunk) : undefined
-    };
-  },
-
-  toAmino(message: Response): ResponseSDKType {
-    const obj: any = {};
-    message.exception !== undefined && (obj.exception = message.exception ? ResponseException.toAmino(message.exception) : undefined);
-    message.echo !== undefined && (obj.echo = message.echo ? ResponseEcho.toAmino(message.echo) : undefined);
-    message.flush !== undefined && (obj.flush = message.flush ? ResponseFlush.toAmino(message.flush) : undefined);
-    message.info !== undefined && (obj.info = message.info ? ResponseInfo.toAmino(message.info) : undefined);
-    message.setOption !== undefined && (obj.set_option = message.setOption ? ResponseSetOption.toAmino(message.setOption) : undefined);
-    message.initChain !== undefined && (obj.init_chain = message.initChain ? ResponseInitChain.toAmino(message.initChain) : undefined);
-    message.query !== undefined && (obj.query = message.query ? ResponseQuery.toAmino(message.query) : undefined);
-    message.beginBlock !== undefined && (obj.begin_block = message.beginBlock ? ResponseBeginBlock.toAmino(message.beginBlock) : undefined);
-    message.checkTx !== undefined && (obj.check_tx = message.checkTx ? ResponseCheckTx.toAmino(message.checkTx) : undefined);
-    message.deliverTx !== undefined && (obj.deliver_tx = message.deliverTx ? ResponseDeliverTx.toAmino(message.deliverTx) : undefined);
-    message.endBlock !== undefined && (obj.end_block = message.endBlock ? ResponseEndBlock.toAmino(message.endBlock) : undefined);
-    message.commit !== undefined && (obj.commit = message.commit ? ResponseCommit.toAmino(message.commit) : undefined);
-    message.listSnapshots !== undefined && (obj.list_snapshots = message.listSnapshots ? ResponseListSnapshots.toAmino(message.listSnapshots) : undefined);
-    message.offerSnapshot !== undefined && (obj.offer_snapshot = message.offerSnapshot ? ResponseOfferSnapshot.toAmino(message.offerSnapshot) : undefined);
-    message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? ResponseLoadSnapshotChunk.toAmino(message.loadSnapshotChunk) : undefined);
-    message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? ResponseApplySnapshotChunk.toAmino(message.applySnapshotChunk) : undefined);
-    return obj;
   }
 
 };
@@ -3132,25 +2827,13 @@ export const ResponseException = {
 
   fromSDK(object: ResponseExceptionSDKType): ResponseException {
     return {
-      error: isSet(object.error) ? object.error : undefined
+      error: object?.error
     };
   },
 
   toSDK(message: ResponseException): ResponseExceptionSDKType {
     const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
-    return obj;
-  },
-
-  fromAmino(object: ResponseExceptionSDKType): ResponseException {
-    return {
-      error: isSet(object.error) ? object.error : undefined
-    };
-  },
-
-  toAmino(message: ResponseException): ResponseExceptionSDKType {
-    const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
+    obj.error = message.error;
     return obj;
   }
 
@@ -3213,25 +2896,13 @@ export const ResponseEcho = {
 
   fromSDK(object: ResponseEchoSDKType): ResponseEcho {
     return {
-      message: isSet(object.message) ? object.message : undefined
+      message: object?.message
     };
   },
 
   toSDK(message: ResponseEcho): ResponseEchoSDKType {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
-
-  fromAmino(object: ResponseEchoSDKType): ResponseEcho {
-    return {
-      message: isSet(object.message) ? object.message : undefined
-    };
-  },
-
-  toAmino(message: ResponseEcho): ResponseEchoSDKType {
-    const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
+    obj.message = message.message;
     return obj;
   }
 
@@ -3283,15 +2954,6 @@ export const ResponseFlush = {
   },
 
   toSDK(_: ResponseFlush): ResponseFlushSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ResponseFlushSDKType): ResponseFlush {
-    return {};
-  },
-
-  toAmino(_: ResponseFlush): ResponseFlushSDKType {
     const obj: any = {};
     return obj;
   }
@@ -3403,41 +3065,21 @@ export const ResponseInfo = {
 
   fromSDK(object: ResponseInfoSDKType): ResponseInfo {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      appVersion: isSet(object.app_version) ? object.app_version : undefined,
-      lastBlockHeight: isSet(object.last_block_height) ? object.last_block_height : undefined,
-      lastBlockAppHash: isSet(object.last_block_app_hash) ? object.last_block_app_hash : undefined
+      data: object?.data,
+      version: object?.version,
+      appVersion: object?.app_version,
+      lastBlockHeight: object?.last_block_height,
+      lastBlockAppHash: object?.last_block_app_hash
     };
   },
 
   toSDK(message: ResponseInfo): ResponseInfoSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.app_version = message.appVersion);
-    message.lastBlockHeight !== undefined && (obj.last_block_height = message.lastBlockHeight);
-    message.lastBlockAppHash !== undefined && (obj.last_block_app_hash = message.lastBlockAppHash);
-    return obj;
-  },
-
-  fromAmino(object: ResponseInfoSDKType): ResponseInfo {
-    return {
-      data: isSet(object.data) ? object.data : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      appVersion: isSet(object.app_version) ? object.app_version : undefined,
-      lastBlockHeight: isSet(object.last_block_height) ? object.last_block_height : undefined,
-      lastBlockAppHash: isSet(object.last_block_app_hash) ? object.last_block_app_hash : undefined
-    };
-  },
-
-  toAmino(message: ResponseInfo): ResponseInfoSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.app_version = message.appVersion);
-    message.lastBlockHeight !== undefined && (obj.last_block_height = message.lastBlockHeight);
-    message.lastBlockAppHash !== undefined && (obj.last_block_app_hash = message.lastBlockAppHash);
+    obj.data = message.data;
+    obj.version = message.version;
+    obj.app_version = message.appVersion;
+    obj.last_block_height = message.lastBlockHeight;
+    obj.last_block_app_hash = message.lastBlockAppHash;
     return obj;
   }
 
@@ -3524,33 +3166,17 @@ export const ResponseSetOption = {
 
   fromSDK(object: ResponseSetOptionSDKType): ResponseSetOption {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined
+      code: object?.code,
+      log: object?.log,
+      info: object?.info
     };
   },
 
   toSDK(message: ResponseSetOption): ResponseSetOptionSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    return obj;
-  },
-
-  fromAmino(object: ResponseSetOptionSDKType): ResponseSetOption {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined
-    };
-  },
-
-  toAmino(message: ResponseSetOption): ResponseSetOptionSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
     return obj;
   }
 
@@ -3645,7 +3271,7 @@ export const ResponseInitChain = {
     return {
       consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
+      appHash: object?.app_hash
     };
   },
 
@@ -3659,29 +3285,7 @@ export const ResponseInitChain = {
       obj.validators = [];
     }
 
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
-    return obj;
-  },
-
-  fromAmino(object: ResponseInitChainSDKType): ResponseInitChain {
-    return {
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
-    };
-  },
-
-  toAmino(message: ResponseInitChain): ResponseInitChainSDKType {
-    const obj: any = {};
-    message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toAmino(message.consensusParams) : undefined);
-
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
+    obj.app_hash = message.appHash;
     return obj;
   }
 
@@ -3840,57 +3444,29 @@ export const ResponseQuery = {
 
   fromSDK(object: ResponseQuerySDKType): ResponseQuery {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
+      code: object?.code,
+      log: object?.log,
+      info: object?.info,
+      index: object?.index,
+      key: object?.key,
+      value: object?.value,
       proofOps: isSet(object.proof_ops) ? ProofOps.fromSDK(object.proof_ops) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      height: object?.height,
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseQuery): ResponseQuerySDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = message.index);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.index = message.index;
+    obj.key = message.key;
+    obj.value = message.value;
     message.proofOps !== undefined && (obj.proof_ops = message.proofOps ? ProofOps.toSDK(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = message.height);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    return obj;
-  },
-
-  fromAmino(object: ResponseQuerySDKType): ResponseQuery {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      proofOps: isSet(object.proof_ops) ? ProofOps.fromAmino(object.proof_ops) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      codespace: isSet(object.codespace) ? object.codespace : undefined
-    };
-  },
-
-  toAmino(message: ResponseQuery): ResponseQuerySDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = message.index);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.proofOps !== undefined && (obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = message.height);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.height = message.height;
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -3968,24 +3544,6 @@ export const ResponseBeginBlock = {
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ResponseBeginBlockSDKType): ResponseBeginBlock {
-    return {
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ResponseBeginBlock): ResponseBeginBlockSDKType {
-    const obj: any = {};
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
       obj.events = [];
     }
@@ -4142,25 +3700,25 @@ export const ResponseCheckTx = {
 
   fromSDK(object: ResponseCheckTxSDKType): ResponseCheckTx {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseCheckTx): ResponseCheckTxSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -4168,39 +3726,7 @@ export const ResponseCheckTx = {
       obj.events = [];
     }
 
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    return obj;
-  },
-
-  fromAmino(object: ResponseCheckTxSDKType): ResponseCheckTx {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
-    };
-  },
-
-  toAmino(message: ResponseCheckTx): ResponseCheckTxSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -4353,25 +3879,25 @@ export const ResponseDeliverTx = {
 
   fromSDK(object: ResponseDeliverTxSDKType): ResponseDeliverTx {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseDeliverTx): ResponseDeliverTxSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -4379,39 +3905,7 @@ export const ResponseDeliverTx = {
       obj.events = [];
     }
 
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    return obj;
-  },
-
-  fromAmino(object: ResponseDeliverTxSDKType): ResponseDeliverTx {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
-    };
-  },
-
-  toAmino(message: ResponseDeliverTx): ResponseDeliverTxSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -4534,34 +4028,6 @@ export const ResponseEndBlock = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ResponseEndBlockSDKType): ResponseEndBlock {
-    return {
-      validatorUpdates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
-      consensusParamUpdates: isSet(object.consensus_param_updates) ? ConsensusParams.fromAmino(object.consensus_param_updates) : undefined,
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ResponseEndBlock): ResponseEndBlockSDKType {
-    const obj: any = {};
-
-    if (message.validatorUpdates) {
-      obj.validator_updates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
-    } else {
-      obj.validator_updates = [];
-    }
-
-    message.consensusParamUpdates !== undefined && (obj.consensus_param_updates = message.consensusParamUpdates ? ConsensusParams.toAmino(message.consensusParamUpdates) : undefined);
-
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-
-    return obj;
   }
 
 };
@@ -4635,29 +4101,15 @@ export const ResponseCommit = {
 
   fromSDK(object: ResponseCommitSDKType): ResponseCommit {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      retainHeight: isSet(object.retain_height) ? object.retain_height : undefined
+      data: object?.data,
+      retainHeight: object?.retain_height
     };
   },
 
   toSDK(message: ResponseCommit): ResponseCommitSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.retainHeight !== undefined && (obj.retain_height = message.retainHeight);
-    return obj;
-  },
-
-  fromAmino(object: ResponseCommitSDKType): ResponseCommit {
-    return {
-      data: isSet(object.data) ? object.data : undefined,
-      retainHeight: isSet(object.retain_height) ? object.retain_height : undefined
-    };
-  },
-
-  toAmino(message: ResponseCommit): ResponseCommitSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.retainHeight !== undefined && (obj.retain_height = message.retainHeight);
+    obj.data = message.data;
+    obj.retain_height = message.retainHeight;
     return obj;
   }
 
@@ -4740,24 +4192,6 @@ export const ResponseListSnapshots = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ResponseListSnapshotsSDKType): ResponseListSnapshots {
-    return {
-      snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ResponseListSnapshots): ResponseListSnapshotsSDKType {
-    const obj: any = {};
-
-    if (message.snapshots) {
-      obj.snapshots = message.snapshots.map(e => e ? Snapshot.toAmino(e) : undefined);
-    } else {
-      obj.snapshots = [];
-    }
-
-    return obj;
   }
 
 };
@@ -4827,18 +4261,6 @@ export const ResponseOfferSnapshot = {
     const obj: any = {};
     message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
     return obj;
-  },
-
-  fromAmino(object: ResponseOfferSnapshotSDKType): ResponseOfferSnapshot {
-    return {
-      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
-    };
-  },
-
-  toAmino(message: ResponseOfferSnapshot): ResponseOfferSnapshotSDKType {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
-    return obj;
   }
 
 };
@@ -4900,25 +4322,13 @@ export const ResponseLoadSnapshotChunk = {
 
   fromSDK(object: ResponseLoadSnapshotChunkSDKType): ResponseLoadSnapshotChunk {
     return {
-      chunk: isSet(object.chunk) ? object.chunk : undefined
+      chunk: object?.chunk
     };
   },
 
   toSDK(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkSDKType {
     const obj: any = {};
-    message.chunk !== undefined && (obj.chunk = message.chunk);
-    return obj;
-  },
-
-  fromAmino(object: ResponseLoadSnapshotChunkSDKType): ResponseLoadSnapshotChunk {
-    return {
-      chunk: isSet(object.chunk) ? object.chunk : undefined
-    };
-  },
-
-  toAmino(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkSDKType {
-    const obj: any = {};
-    message.chunk !== undefined && (obj.chunk = message.chunk);
+    obj.chunk = message.chunk;
     return obj;
   }
 
@@ -5052,33 +4462,6 @@ export const ResponseApplySnapshotChunk = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ResponseApplySnapshotChunkSDKType): ResponseApplySnapshotChunk {
-    return {
-      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
-      refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
-      rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ResponseApplySnapshotChunk): ResponseApplySnapshotChunkSDKType {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
-
-    if (message.refetchChunks) {
-      obj.refetch_chunks = message.refetchChunks.map(e => e);
-    } else {
-      obj.refetch_chunks = [];
-    }
-
-    if (message.rejectSenders) {
-      obj.reject_senders = message.rejectSenders.map(e => e);
-    } else {
-      obj.reject_senders = [];
-    }
-
-    return obj;
   }
 
 };
@@ -5190,24 +4573,6 @@ export const ConsensusParams = {
     message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toSDK(message.validator) : undefined);
     message.version !== undefined && (obj.version = message.version ? VersionParams.toSDK(message.version) : undefined);
     return obj;
-  },
-
-  fromAmino(object: ConsensusParamsSDKType): ConsensusParams {
-    return {
-      block: isSet(object.block) ? BlockParams.fromAmino(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromAmino(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromAmino(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromAmino(object.version) : undefined
-    };
-  },
-
-  toAmino(message: ConsensusParams): ConsensusParamsSDKType {
-    const obj: any = {};
-    message.block !== undefined && (obj.block = message.block ? BlockParams.toAmino(message.block) : undefined);
-    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toAmino(message.evidence) : undefined);
-    message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toAmino(message.validator) : undefined);
-    message.version !== undefined && (obj.version = message.version ? VersionParams.toAmino(message.version) : undefined);
-    return obj;
   }
 
 };
@@ -5281,29 +4646,15 @@ export const BlockParams = {
 
   fromSDK(object: BlockParamsSDKType): BlockParams {
     return {
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
-      maxGas: isSet(object.max_gas) ? object.max_gas : undefined
+      maxBytes: object?.max_bytes,
+      maxGas: object?.max_gas
     };
   },
 
   toSDK(message: BlockParams): BlockParamsSDKType {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
-    message.maxGas !== undefined && (obj.max_gas = message.maxGas);
-    return obj;
-  },
-
-  fromAmino(object: BlockParamsSDKType): BlockParams {
-    return {
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
-      maxGas: isSet(object.max_gas) ? object.max_gas : undefined
-    };
-  },
-
-  toAmino(message: BlockParams): BlockParamsSDKType {
-    const obj: any = {};
-    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
-    message.maxGas !== undefined && (obj.max_gas = message.maxGas);
+    obj.max_bytes = message.maxBytes;
+    obj.max_gas = message.maxGas;
     return obj;
   }
 
@@ -5384,37 +4735,17 @@ export const LastCommitInfo = {
 
   fromSDK(object: LastCommitInfoSDKType): LastCommitInfo {
     return {
-      round: isSet(object.round) ? object.round : undefined,
+      round: object?.round,
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDK(e)) : []
     };
   },
 
   toSDK(message: LastCommitInfo): LastCommitInfoSDKType {
     const obj: any = {};
-    message.round !== undefined && (obj.round = message.round);
+    obj.round = message.round;
 
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? VoteInfo.toSDK(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: LastCommitInfoSDKType): LastCommitInfo {
-    return {
-      round: isSet(object.round) ? object.round : undefined,
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: LastCommitInfo): LastCommitInfoSDKType {
-    const obj: any = {};
-    message.round !== undefined && (obj.round = message.round);
-
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? VoteInfo.toAmino(e) : undefined);
     } else {
       obj.votes = [];
     }
@@ -5499,37 +4830,17 @@ export const Event = {
 
   fromSDK(object: EventSDKType): Event {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Event): EventSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? EventAttribute.toSDK(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: EventSDKType): Event {
-    return {
-      type: isSet(object.type) ? object.type : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Event): EventSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? EventAttribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -5620,33 +4931,17 @@ export const EventAttribute = {
 
   fromSDK(object: EventAttributeSDKType): EventAttribute {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      index: isSet(object.index) ? object.index : undefined
+      key: object?.key,
+      value: object?.value,
+      index: object?.index
     };
   },
 
   toSDK(message: EventAttribute): EventAttributeSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.index !== undefined && (obj.index = message.index);
-    return obj;
-  },
-
-  fromAmino(object: EventAttributeSDKType): EventAttribute {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      index: isSet(object.index) ? object.index : undefined
-    };
-  },
-
-  toAmino(message: EventAttribute): EventAttributeSDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.index !== undefined && (obj.index = message.index);
+    obj.key = message.key;
+    obj.value = message.value;
+    obj.index = message.index;
     return obj;
   }
 
@@ -5745,37 +5040,19 @@ export const TxResult = {
 
   fromSDK(object: TxResultSDKType): TxResult {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      tx: isSet(object.tx) ? object.tx : undefined,
+      height: object?.height,
+      index: object?.index,
+      tx: object?.tx,
       result: isSet(object.result) ? ResponseDeliverTx.fromSDK(object.result) : undefined
     };
   },
 
   toSDK(message: TxResult): TxResultSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.index !== undefined && (obj.index = message.index);
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.height = message.height;
+    obj.index = message.index;
+    obj.tx = message.tx;
     message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toSDK(message.result) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: TxResultSDKType): TxResult {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      tx: isSet(object.tx) ? object.tx : undefined,
-      result: isSet(object.result) ? ResponseDeliverTx.fromAmino(object.result) : undefined
-    };
-  },
-
-  toAmino(message: TxResult): TxResultSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.index !== undefined && (obj.index = message.index);
-    message.tx !== undefined && (obj.tx = message.tx);
-    message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toAmino(message.result) : undefined);
     return obj;
   }
 
@@ -5850,29 +5127,15 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      power: isSet(object.power) ? object.power : undefined
+      address: object?.address,
+      power: object?.power
     };
   },
 
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorSDKType): Validator {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      power: isSet(object.power) ? object.power : undefined
-    };
-  },
-
-  toAmino(message: Validator): ValidatorSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
+    obj.address = message.address;
+    obj.power = message.power;
     return obj;
   }
 
@@ -5948,28 +5211,14 @@ export const ValidatorUpdate = {
   fromSDK(object: ValidatorUpdateSDKType): ValidatorUpdate {
     return {
       pubKey: isSet(object.pub_key) ? PublicKey.fromSDK(object.pub_key) : undefined,
-      power: isSet(object.power) ? object.power : undefined
+      power: object?.power
     };
   },
 
   toSDK(message: ValidatorUpdate): ValidatorUpdateSDKType {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = message.power);
-    return obj;
-  },
-
-  fromAmino(object: ValidatorUpdateSDKType): ValidatorUpdate {
-    return {
-      pubKey: isSet(object.pub_key) ? PublicKey.fromAmino(object.pub_key) : undefined,
-      power: isSet(object.power) ? object.power : undefined
-    };
-  },
-
-  toAmino(message: ValidatorUpdate): ValidatorUpdateSDKType {
-    const obj: any = {};
-    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = message.power);
+    obj.power = message.power;
     return obj;
   }
 
@@ -6045,28 +5294,14 @@ export const VoteInfo = {
   fromSDK(object: VoteInfoSDKType): VoteInfo {
     return {
       validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
-      signedLastBlock: isSet(object.signed_last_block) ? object.signed_last_block : undefined
+      signedLastBlock: object?.signed_last_block
     };
   },
 
   toSDK(message: VoteInfo): VoteInfoSDKType {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    message.signedLastBlock !== undefined && (obj.signed_last_block = message.signedLastBlock);
-    return obj;
-  },
-
-  fromAmino(object: VoteInfoSDKType): VoteInfo {
-    return {
-      validator: isSet(object.validator) ? Validator.fromAmino(object.validator) : undefined,
-      signedLastBlock: isSet(object.signed_last_block) ? object.signed_last_block : undefined
-    };
-  },
-
-  toAmino(message: VoteInfo): VoteInfoSDKType {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined);
-    message.signedLastBlock !== undefined && (obj.signed_last_block = message.signedLastBlock);
+    obj.signed_last_block = message.signedLastBlock;
     return obj;
   }
 
@@ -6179,9 +5414,9 @@ export const Evidence = {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
+      height: object?.height,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined
+      totalVotingPower: object?.total_voting_power
     };
   },
 
@@ -6189,29 +5424,9 @@ export const Evidence = {
     const obj: any = {};
     message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
-    return obj;
-  },
-
-  fromAmino(object: EvidenceSDKType): Evidence {
-    return {
-      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
-      validator: isSet(object.validator) ? Validator.fromAmino(object.validator) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined
-    };
-  },
-
-  toAmino(message: Evidence): EvidenceSDKType {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined);
-    message.height !== undefined && (obj.height = message.height);
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
+    obj.total_voting_power = message.totalVotingPower;
     return obj;
   }
 
@@ -6322,41 +5537,21 @@ export const Snapshot = {
 
   fromSDK(object: SnapshotSDKType): Snapshot {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunks: isSet(object.chunks) ? object.chunks : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      height: object?.height,
+      format: object?.format,
+      chunks: object?.chunks,
+      hash: object?.hash,
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: Snapshot): SnapshotSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunks !== undefined && (obj.chunks = message.chunks);
-    message.hash !== undefined && (obj.hash = message.hash);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-
-  fromAmino(object: SnapshotSDKType): Snapshot {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunks: isSet(object.chunks) ? object.chunks : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: Snapshot): SnapshotSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunks !== undefined && (obj.chunks = message.chunks);
-    message.hash !== undefined && (obj.hash = message.hash);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunks = message.chunks;
+    obj.hash = message.hash;
+    obj.metadata = message.metadata;
     return obj;
   }
 

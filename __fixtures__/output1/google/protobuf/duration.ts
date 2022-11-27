@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -229,29 +229,15 @@ export const Duration = {
 
   fromSDK(object: DurationSDKType): Duration {
     return {
-      seconds: isSet(object.seconds) ? object.seconds : undefined,
-      nanos: isSet(object.nanos) ? object.nanos : undefined
+      seconds: object?.seconds,
+      nanos: object?.nanos
     };
   },
 
   toSDK(message: Duration): DurationSDKType {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
-    message.nanos !== undefined && (obj.nanos = message.nanos);
-    return obj;
-  },
-
-  fromAmino(object: DurationSDKType): Duration {
-    return {
-      seconds: isSet(object.seconds) ? object.seconds : undefined,
-      nanos: isSet(object.nanos) ? object.nanos : undefined
-    };
-  },
-
-  toAmino(message: Duration): DurationSDKType {
-    const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
-    message.nanos !== undefined && (obj.nanos = message.nanos);
+    obj.seconds = message.seconds;
+    obj.nanos = message.nanos;
     return obj;
   }
 

@@ -129,37 +129,19 @@ export const StoreKVPair = {
 
   fromSDK(object: StoreKVPairSDKType): StoreKVPair {
     return {
-      storeKey: isSet(object.store_key) ? object.store_key : undefined,
-      delete: isSet(object.delete) ? object.delete : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      storeKey: object?.store_key,
+      delete: object?.delete,
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: StoreKVPair): StoreKVPairSDKType {
     const obj: any = {};
-    message.storeKey !== undefined && (obj.store_key = message.storeKey);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: StoreKVPairSDKType): StoreKVPair {
-    return {
-      storeKey: isSet(object.store_key) ? object.store_key : undefined,
-      delete: isSet(object.delete) ? object.delete : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: StoreKVPair): StoreKVPairSDKType {
-    const obj: any = {};
-    message.storeKey !== undefined && (obj.store_key = message.storeKey);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.store_key = message.storeKey;
+    obj.delete = message.delete;
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 

@@ -100,7 +100,7 @@ export const Resource = {
   fromSDK(object: ResourceSDKType): Resource {
     return {
       resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
-      count: isSet(object.count) ? object.count : undefined,
+      count: object?.count,
       price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined
     };
   },
@@ -108,24 +108,8 @@ export const Resource = {
   toSDK(message: Resource): ResourceSDKType {
     const obj: any = {};
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
-    message.count !== undefined && (obj.count = message.count);
+    obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: ResourceSDKType): Resource {
-    return {
-      resources: isSet(object.resources) ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: isSet(object.count) ? object.count : undefined,
-      price: isSet(object.price) ? DecCoin.fromAmino(object.price) : undefined
-    };
-  },
-
-  toAmino(message: Resource): ResourceSDKType {
-    const obj: any = {};
-    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined);
-    message.count !== undefined && (obj.count = message.count);
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toAmino(message.price) : undefined);
     return obj;
   }
 

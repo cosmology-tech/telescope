@@ -1,7 +1,7 @@
 import { Sale, SaleSDKType, UserPosition, UserPositionSDKType } from "./state";
 import { Params, ParamsSDKType } from "./params";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.streamswap.v1";
 
 /** GenesisState defines the streamswap module's genesis state. */
@@ -148,7 +148,7 @@ export const GenesisState = {
     return {
       sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromSDK(e)) : [],
       userPositions: Array.isArray(object?.user_positions) ? object.user_positions.map((e: any) => UserPositionKV.fromSDK(e)) : [],
-      nextSaleId: isSet(object.next_sale_id) ? object.next_sale_id : undefined,
+      nextSaleId: object?.next_sale_id,
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
     };
   },
@@ -168,37 +168,8 @@ export const GenesisState = {
       obj.user_positions = [];
     }
 
-    message.nextSaleId !== undefined && (obj.next_sale_id = message.nextSaleId);
+    obj.next_sale_id = message.nextSaleId;
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromAmino(e)) : [],
-      userPositions: Array.isArray(object?.user_positions) ? object.user_positions.map((e: any) => UserPositionKV.fromAmino(e)) : [],
-      nextSaleId: isSet(object.next_sale_id) ? object.next_sale_id : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-
-    if (message.sales) {
-      obj.sales = message.sales.map(e => e ? Sale.toAmino(e) : undefined);
-    } else {
-      obj.sales = [];
-    }
-
-    if (message.userPositions) {
-      obj.user_positions = message.userPositions.map(e => e ? UserPositionKV.toAmino(e) : undefined);
-    } else {
-      obj.user_positions = [];
-    }
-
-    message.nextSaleId !== undefined && (obj.next_sale_id = message.nextSaleId);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 
@@ -285,33 +256,17 @@ export const UserPositionKV = {
 
   fromSDK(object: UserPositionKVSDKType): UserPositionKV {
     return {
-      accAddress: isSet(object.acc_address) ? object.acc_address : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
+      accAddress: object?.acc_address,
+      saleId: object?.sale_id,
       userPosition: isSet(object.user_position) ? UserPosition.fromSDK(object.user_position) : undefined
     };
   },
 
   toSDK(message: UserPositionKV): UserPositionKVSDKType {
     const obj: any = {};
-    message.accAddress !== undefined && (obj.acc_address = message.accAddress);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    obj.acc_address = message.accAddress;
+    obj.sale_id = message.saleId;
     message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toSDK(message.userPosition) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: UserPositionKVSDKType): UserPositionKV {
-    return {
-      accAddress: isSet(object.acc_address) ? object.acc_address : undefined,
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      userPosition: isSet(object.user_position) ? UserPosition.fromAmino(object.user_position) : undefined
-    };
-  },
-
-  toAmino(message: UserPositionKV): UserPositionKVSDKType {
-    const obj: any = {};
-    message.accAddress !== undefined && (obj.acc_address = message.accAddress);
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toAmino(message.userPosition) : undefined);
     return obj;
   }
 

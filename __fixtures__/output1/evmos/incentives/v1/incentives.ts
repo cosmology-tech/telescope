@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 
 /**
@@ -241,17 +241,17 @@ export const Incentive = {
 
   fromSDK(object: IncentiveSDKType): Incentive {
     return {
-      contract: isSet(object.contract) ? object.contract : undefined,
+      contract: object?.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : undefined,
+      epochs: object?.epochs,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      totalGas: isSet(object.total_gas) ? object.total_gas : undefined
+      totalGas: object?.total_gas
     };
   },
 
   toSDK(message: Incentive): IncentiveSDKType {
     const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.contract = message.contract;
 
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
@@ -259,35 +259,9 @@ export const Incentive = {
       obj.allocations = [];
     }
 
-    message.epochs !== undefined && (obj.epochs = message.epochs);
+    obj.epochs = message.epochs;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.totalGas !== undefined && (obj.total_gas = message.totalGas);
-    return obj;
-  },
-
-  fromAmino(object: IncentiveSDKType): Incentive {
-    return {
-      contract: isSet(object.contract) ? object.contract : undefined,
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
-      totalGas: isSet(object.total_gas) ? object.total_gas : undefined
-    };
-  },
-
-  toAmino(message: Incentive): IncentiveSDKType {
-    const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-
-    if (message.allocations) {
-      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.allocations = [];
-    }
-
-    message.epochs !== undefined && (obj.epochs = message.epochs);
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
-    message.totalGas !== undefined && (obj.total_gas = message.totalGas);
+    obj.total_gas = message.totalGas;
     return obj;
   }
 
@@ -374,33 +348,17 @@ export const GasMeter = {
 
   fromSDK(object: GasMeterSDKType): GasMeter {
     return {
-      contract: isSet(object.contract) ? object.contract : undefined,
-      participant: isSet(object.participant) ? object.participant : undefined,
-      cumulativeGas: isSet(object.cumulative_gas) ? object.cumulative_gas : undefined
+      contract: object?.contract,
+      participant: object?.participant,
+      cumulativeGas: object?.cumulative_gas
     };
   },
 
   toSDK(message: GasMeter): GasMeterSDKType {
     const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.participant !== undefined && (obj.participant = message.participant);
-    message.cumulativeGas !== undefined && (obj.cumulative_gas = message.cumulativeGas);
-    return obj;
-  },
-
-  fromAmino(object: GasMeterSDKType): GasMeter {
-    return {
-      contract: isSet(object.contract) ? object.contract : undefined,
-      participant: isSet(object.participant) ? object.participant : undefined,
-      cumulativeGas: isSet(object.cumulative_gas) ? object.cumulative_gas : undefined
-    };
-  },
-
-  toAmino(message: GasMeter): GasMeterSDKType {
-    const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.participant !== undefined && (obj.participant = message.participant);
-    message.cumulativeGas !== undefined && (obj.cumulative_gas = message.cumulativeGas);
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    obj.cumulative_gas = message.cumulativeGas;
     return obj;
   }
 
@@ -517,19 +475,19 @@ export const RegisterIncentiveProposal = {
 
   fromSDK(object: RegisterIncentiveProposalSDKType): RegisterIncentiveProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
+      title: object?.title,
+      description: object?.description,
+      contract: object?.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : undefined
+      epochs: object?.epochs
     };
   },
 
   toSDK(message: RegisterIncentiveProposal): RegisterIncentiveProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
 
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
@@ -537,33 +495,7 @@ export const RegisterIncentiveProposal = {
       obj.allocations = [];
     }
 
-    message.epochs !== undefined && (obj.epochs = message.epochs);
-    return obj;
-  },
-
-  fromAmino(object: RegisterIncentiveProposalSDKType): RegisterIncentiveProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : undefined
-    };
-  },
-
-  toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
-
-    if (message.allocations) {
-      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
-    } else {
-      obj.allocations = [];
-    }
-
-    message.epochs !== undefined && (obj.epochs = message.epochs);
+    obj.epochs = message.epochs;
     return obj;
   }
 
@@ -650,33 +582,17 @@ export const CancelIncentiveProposal = {
 
   fromSDK(object: CancelIncentiveProposalSDKType): CancelIncentiveProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
+      title: object?.title,
+      description: object?.description,
+      contract: object?.contract
     };
   },
 
   toSDK(message: CancelIncentiveProposal): CancelIncentiveProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
-
-  fromAmino(object: CancelIncentiveProposalSDKType): CancelIncentiveProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
-    };
-  },
-
-  toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
     return obj;
   }
 

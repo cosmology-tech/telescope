@@ -337,33 +337,17 @@ export const MsgStoreCode = {
 
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : undefined,
+      sender: object?.sender,
+      wasmByteCode: object?.wasm_byte_code,
       instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
     };
   },
 
   toSDK(message: MsgStoreCode): MsgStoreCodeSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.wasmByteCode !== undefined && (obj.wasm_byte_code = message.wasmByteCode);
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode;
     message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: MsgStoreCodeSDKType): MsgStoreCode {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : undefined,
-      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
-    };
-  },
-
-  toAmino(message: MsgStoreCode): MsgStoreCodeSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.wasmByteCode !== undefined && (obj.wasm_byte_code = message.wasmByteCode);
-    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined);
     return obj;
   }
 
@@ -426,25 +410,13 @@ export const MsgStoreCodeResponse = {
 
   fromSDK(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined
+      codeId: object?.code_id
     };
   },
 
   toSDK(message: MsgStoreCodeResponse): MsgStoreCodeResponseSDKType {
     const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    return obj;
-  },
-
-  fromAmino(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
-    return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined
-    };
-  },
-
-  toAmino(message: MsgStoreCodeResponse): MsgStoreCodeResponseSDKType {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
+    obj.code_id = message.codeId;
     return obj;
   }
 
@@ -573,53 +545,25 @@ export const MsgInstantiateContract = {
 
   fromSDK(object: MsgInstantiateContractSDKType): MsgInstantiateContract {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      label: isSet(object.label) ? object.label : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined,
+      sender: object?.sender,
+      admin: object?.admin,
+      codeId: object?.code_id,
+      label: object?.label,
+      msg: object?.msg,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgInstantiateContract): MsgInstantiateContractSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.label !== undefined && (obj.label = message.label);
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.sender = message.sender;
+    obj.admin = message.admin;
+    obj.code_id = message.codeId;
+    obj.label = message.label;
+    obj.msg = message.msg;
 
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgInstantiateContractSDKType): MsgInstantiateContract {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      label: isSet(object.label) ? object.label : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined,
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgInstantiateContract): MsgInstantiateContractSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.label !== undefined && (obj.label = message.label);
-    message.msg !== undefined && (obj.msg = message.msg);
-
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.funds = [];
     }
@@ -698,29 +642,15 @@ export const MsgInstantiateContractResponse = {
 
   fromSDK(object: MsgInstantiateContractResponseSDKType): MsgInstantiateContractResponse {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      data: isSet(object.data) ? object.data : undefined
+      address: object?.address,
+      data: object?.data
     };
   },
 
   toSDK(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
-  },
-
-  fromAmino(object: MsgInstantiateContractResponseSDKType): MsgInstantiateContractResponse {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.data !== undefined && (obj.data = message.data);
+    obj.address = message.address;
+    obj.data = message.data;
     return obj;
   }
 
@@ -825,45 +755,21 @@ export const MsgExecuteContract = {
 
   fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined,
+      sender: object?.sender,
+      contract: object?.contract,
+      msg: object?.msg,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgExecuteContract): MsgExecuteContractSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.msg = message.msg;
 
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgExecuteContractSDKType): MsgExecuteContract {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined,
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgExecuteContract): MsgExecuteContractSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = message.msg);
-
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.funds = [];
     }
@@ -930,25 +836,13 @@ export const MsgExecuteContractResponse = {
 
   fromSDK(object: MsgExecuteContractResponseSDKType): MsgExecuteContractResponse {
     return {
-      data: isSet(object.data) ? object.data : undefined
+      data: object?.data
     };
   },
 
   toSDK(message: MsgExecuteContractResponse): MsgExecuteContractResponseSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
-  },
-
-  fromAmino(object: MsgExecuteContractResponseSDKType): MsgExecuteContractResponse {
-    return {
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
+    obj.data = message.data;
     return obj;
   }
 
@@ -1047,37 +941,19 @@ export const MsgMigrateContract = {
 
   fromSDK(object: MsgMigrateContractSDKType): MsgMigrateContract {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined
+      sender: object?.sender,
+      contract: object?.contract,
+      codeId: object?.code_id,
+      msg: object?.msg
     };
   },
 
   toSDK(message: MsgMigrateContract): MsgMigrateContractSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.msg !== undefined && (obj.msg = message.msg);
-    return obj;
-  },
-
-  fromAmino(object: MsgMigrateContractSDKType): MsgMigrateContract {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined
-    };
-  },
-
-  toAmino(message: MsgMigrateContract): MsgMigrateContractSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.code_id = message.codeId;
+    obj.msg = message.msg;
     return obj;
   }
 
@@ -1140,25 +1016,13 @@ export const MsgMigrateContractResponse = {
 
   fromSDK(object: MsgMigrateContractResponseSDKType): MsgMigrateContractResponse {
     return {
-      data: isSet(object.data) ? object.data : undefined
+      data: object?.data
     };
   },
 
   toSDK(message: MsgMigrateContractResponse): MsgMigrateContractResponseSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    return obj;
-  },
-
-  fromAmino(object: MsgMigrateContractResponseSDKType): MsgMigrateContractResponse {
-    return {
-      data: isSet(object.data) ? object.data : undefined
-    };
-  },
-
-  toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseSDKType {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
+    obj.data = message.data;
     return obj;
   }
 
@@ -1245,33 +1109,17 @@ export const MsgUpdateAdmin = {
 
   fromSDK(object: MsgUpdateAdminSDKType): MsgUpdateAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
+      sender: object?.sender,
+      newAdmin: object?.new_admin,
+      contract: object?.contract
     };
   },
 
   toSDK(message: MsgUpdateAdmin): MsgUpdateAdminSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
-
-  fromAmino(object: MsgUpdateAdminSDKType): MsgUpdateAdmin {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
-    };
-  },
-
-  toAmino(message: MsgUpdateAdmin): MsgUpdateAdminSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.sender = message.sender;
+    obj.new_admin = message.newAdmin;
+    obj.contract = message.contract;
     return obj;
   }
 
@@ -1323,15 +1171,6 @@ export const MsgUpdateAdminResponse = {
   },
 
   toSDK(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgUpdateAdminResponseSDKType): MsgUpdateAdminResponse {
-    return {};
-  },
-
-  toAmino(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1407,29 +1246,15 @@ export const MsgClearAdmin = {
 
   fromSDK(object: MsgClearAdminSDKType): MsgClearAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
+      sender: object?.sender,
+      contract: object?.contract
     };
   },
 
   toSDK(message: MsgClearAdmin): MsgClearAdminSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
-
-  fromAmino(object: MsgClearAdminSDKType): MsgClearAdmin {
-    return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined
-    };
-  },
-
-  toAmino(message: MsgClearAdmin): MsgClearAdminSDKType {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
     return obj;
   }
 
@@ -1481,15 +1306,6 @@ export const MsgClearAdminResponse = {
   },
 
   toSDK(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgClearAdminResponseSDKType): MsgClearAdminResponse {
-    return {};
-  },
-
-  toAmino(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
     const obj: any = {};
     return obj;
   }

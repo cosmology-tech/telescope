@@ -208,15 +208,6 @@ export const QueryPeriodRequest = {
   toSDK(_: QueryPeriodRequest): QueryPeriodRequestSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: QueryPeriodRequestSDKType): QueryPeriodRequest {
-    return {};
-  },
-
-  toAmino(_: QueryPeriodRequest): QueryPeriodRequestSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -278,25 +269,13 @@ export const QueryPeriodResponse = {
 
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? object.period : undefined
+      period: object?.period
     };
   },
 
   toSDK(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
     const obj: any = {};
-    message.period !== undefined && (obj.period = message.period);
-    return obj;
-  },
-
-  fromAmino(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
-    return {
-      period: isSet(object.period) ? object.period : undefined
-    };
-  },
-
-  toAmino(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
-    const obj: any = {};
-    message.period !== undefined && (obj.period = message.period);
+    obj.period = message.period;
     return obj;
   }
 
@@ -348,15 +327,6 @@ export const QueryEpochMintProvisionRequest = {
   },
 
   toSDK(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryEpochMintProvisionRequestSDKType): QueryEpochMintProvisionRequest {
-    return {};
-  },
-
-  toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -428,18 +398,6 @@ export const QueryEpochMintProvisionResponse = {
     const obj: any = {};
     message.epochMintProvision !== undefined && (obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toSDK(message.epochMintProvision) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: isSet(object.epoch_mint_provision) ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
-    };
-  },
-
-  toAmino(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseSDKType {
-    const obj: any = {};
-    message.epochMintProvision !== undefined && (obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision) : undefined);
-    return obj;
   }
 
 };
@@ -490,15 +448,6 @@ export const QuerySkippedEpochsRequest = {
   },
 
   toSDK(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QuerySkippedEpochsRequestSDKType): QuerySkippedEpochsRequest {
-    return {};
-  },
-
-  toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -562,25 +511,13 @@ export const QuerySkippedEpochsResponse = {
 
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
+      skippedEpochs: object?.skipped_epochs
     };
   },
 
   toSDK(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
-    return obj;
-  },
-
-  fromAmino(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
-    };
-  },
-
-  toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
-    const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
+    obj.skipped_epochs = message.skippedEpochs;
     return obj;
   }
 
@@ -632,15 +569,6 @@ export const QueryCirculatingSupplyRequest = {
   },
 
   toSDK(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryCirculatingSupplyRequestSDKType): QueryCirculatingSupplyRequest {
-    return {};
-  },
-
-  toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -712,18 +640,6 @@ export const QueryCirculatingSupplyResponse = {
     const obj: any = {};
     message.circulatingSupply !== undefined && (obj.circulating_supply = message.circulatingSupply ? DecCoin.toSDK(message.circulatingSupply) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: isSet(object.circulating_supply) ? DecCoin.fromAmino(object.circulating_supply) : undefined
-    };
-  },
-
-  toAmino(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseSDKType {
-    const obj: any = {};
-    message.circulatingSupply !== undefined && (obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply) : undefined);
-    return obj;
   }
 
 };
@@ -774,15 +690,6 @@ export const QueryInflationRateRequest = {
   },
 
   toSDK(_: QueryInflationRateRequest): QueryInflationRateRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryInflationRateRequestSDKType): QueryInflationRateRequest {
-    return {};
-  },
-
-  toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -846,25 +753,13 @@ export const QueryInflationRateResponse = {
 
   fromSDK(object: QueryInflationRateResponseSDKType): QueryInflationRateResponse {
     return {
-      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : undefined
+      inflationRate: object?.inflation_rate
     };
   },
 
   toSDK(message: QueryInflationRateResponse): QueryInflationRateResponseSDKType {
     const obj: any = {};
-    message.inflationRate !== undefined && (obj.inflation_rate = message.inflationRate);
-    return obj;
-  },
-
-  fromAmino(object: QueryInflationRateResponseSDKType): QueryInflationRateResponse {
-    return {
-      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : undefined
-    };
-  },
-
-  toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseSDKType {
-    const obj: any = {};
-    message.inflationRate !== undefined && (obj.inflation_rate = message.inflationRate);
+    obj.inflation_rate = message.inflationRate;
     return obj;
   }
 
@@ -916,15 +811,6 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
-    return {};
-  },
-
-  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -995,18 +881,6 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
-    };
-  },
-
-  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

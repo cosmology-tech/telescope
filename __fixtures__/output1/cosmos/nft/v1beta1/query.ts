@@ -229,29 +229,15 @@ export const QueryBalanceRequest = {
 
   fromSDK(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
+      classId: object?.class_id,
+      owner: object?.owner
     };
   },
 
   toSDK(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.class_id = message.classId;
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -314,25 +300,13 @@ export const QueryBalanceResponse = {
 
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : undefined
+      amount: object?.amount
     };
   },
 
   toSDK(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
-    return {
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
-    const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -407,29 +381,15 @@ export const QueryOwnerRequest = {
 
   fromSDK(object: QueryOwnerRequestSDKType): QueryOwnerRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      id: isSet(object.id) ? object.id : undefined
+      classId: object?.class_id,
+      id: object?.id
     };
   },
 
   toSDK(message: QueryOwnerRequest): QueryOwnerRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    return obj;
-  },
-
-  fromAmino(object: QueryOwnerRequestSDKType): QueryOwnerRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      id: isSet(object.id) ? object.id : undefined
-    };
-  },
-
-  toAmino(message: QueryOwnerRequest): QueryOwnerRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.id !== undefined && (obj.id = message.id);
+    obj.class_id = message.classId;
+    obj.id = message.id;
     return obj;
   }
 
@@ -492,25 +452,13 @@ export const QueryOwnerResponse = {
 
   fromSDK(object: QueryOwnerResponseSDKType): QueryOwnerResponse {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: QueryOwnerResponse): QueryOwnerResponseSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
-
-  fromAmino(object: QueryOwnerResponseSDKType): QueryOwnerResponse {
-    return {
-      owner: isSet(object.owner) ? object.owner : undefined
-    };
-  },
-
-  toAmino(message: QueryOwnerResponse): QueryOwnerResponseSDKType {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -573,25 +521,13 @@ export const QuerySupplyRequest = {
 
   fromSDK(object: QuerySupplyRequestSDKType): QuerySupplyRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined
+      classId: object?.class_id
     };
   },
 
   toSDK(message: QuerySupplyRequest): QuerySupplyRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    return obj;
-  },
-
-  fromAmino(object: QuerySupplyRequestSDKType): QuerySupplyRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined
-    };
-  },
-
-  toAmino(message: QuerySupplyRequest): QuerySupplyRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
+    obj.class_id = message.classId;
     return obj;
   }
 
@@ -654,25 +590,13 @@ export const QuerySupplyResponse = {
 
   fromSDK(object: QuerySupplyResponseSDKType): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : undefined
+      amount: object?.amount
     };
   },
 
   toSDK(message: QuerySupplyResponse): QuerySupplyResponseSDKType {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-
-  fromAmino(object: QuerySupplyResponseSDKType): QuerySupplyResponse {
-    return {
-      amount: isSet(object.amount) ? object.amount : undefined
-    };
-  },
-
-  toAmino(message: QuerySupplyResponse): QuerySupplyResponseSDKType {
-    const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -759,33 +683,17 @@ export const QueryNFTsRequest = {
 
   fromSDK(object: QueryNFTsRequestSDKType): QueryNFTsRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
+      classId: object?.class_id,
+      owner: object?.owner,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryNFTsRequest): QueryNFTsRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.class_id = message.classId;
+    obj.owner = message.owner;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryNFTsRequestSDKType): QueryNFTsRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryNFTsRequest): QueryNFTsRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -882,26 +790,6 @@ export const QueryNFTsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryNFTsResponseSDKType): QueryNFTsResponse {
-    return {
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryNFTsResponse): QueryNFTsResponseSDKType {
-    const obj: any = {};
-
-    if (message.nfts) {
-      obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e) : undefined);
-    } else {
-      obj.nfts = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -975,29 +863,15 @@ export const QueryNFTRequest = {
 
   fromSDK(object: QueryNFTRequestSDKType): QueryNFTRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      id: isSet(object.id) ? object.id : undefined
+      classId: object?.class_id,
+      id: object?.id
     };
   },
 
   toSDK(message: QueryNFTRequest): QueryNFTRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    return obj;
-  },
-
-  fromAmino(object: QueryNFTRequestSDKType): QueryNFTRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      id: isSet(object.id) ? object.id : undefined
-    };
-  },
-
-  toAmino(message: QueryNFTRequest): QueryNFTRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.id !== undefined && (obj.id = message.id);
+    obj.class_id = message.classId;
+    obj.id = message.id;
     return obj;
   }
 
@@ -1068,18 +942,6 @@ export const QueryNFTResponse = {
     const obj: any = {};
     message.nft !== undefined && (obj.nft = message.nft ? NFT.toSDK(message.nft) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryNFTResponseSDKType): QueryNFTResponse {
-    return {
-      nft: isSet(object.nft) ? NFT.fromAmino(object.nft) : undefined
-    };
-  },
-
-  toAmino(message: QueryNFTResponse): QueryNFTResponseSDKType {
-    const obj: any = {};
-    message.nft !== undefined && (obj.nft = message.nft ? NFT.toAmino(message.nft) : undefined);
-    return obj;
   }
 
 };
@@ -1141,25 +1003,13 @@ export const QueryClassRequest = {
 
   fromSDK(object: QueryClassRequestSDKType): QueryClassRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined
+      classId: object?.class_id
     };
   },
 
   toSDK(message: QueryClassRequest): QueryClassRequestSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    return obj;
-  },
-
-  fromAmino(object: QueryClassRequestSDKType): QueryClassRequest {
-    return {
-      classId: isSet(object.class_id) ? object.class_id : undefined
-    };
-  },
-
-  toAmino(message: QueryClassRequest): QueryClassRequestSDKType {
-    const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
+    obj.class_id = message.classId;
     return obj;
   }
 
@@ -1230,18 +1080,6 @@ export const QueryClassResponse = {
     const obj: any = {};
     message.class !== undefined && (obj.class = message.class ? Class.toSDK(message.class) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryClassResponseSDKType): QueryClassResponse {
-    return {
-      class: isSet(object.class) ? Class.fromAmino(object.class) : undefined
-    };
-  },
-
-  toAmino(message: QueryClassResponse): QueryClassResponseSDKType {
-    const obj: any = {};
-    message.class !== undefined && (obj.class = message.class ? Class.toAmino(message.class) : undefined);
-    return obj;
   }
 
 };
@@ -1310,18 +1148,6 @@ export const QueryClassesRequest = {
   toSDK(message: QueryClassesRequest): QueryClassesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryClassesRequestSDKType): QueryClassesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryClassesRequest): QueryClassesRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -1417,26 +1243,6 @@ export const QueryClassesResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryClassesResponseSDKType): QueryClassesResponse {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryClassesResponse): QueryClassesResponseSDKType {
-    const obj: any = {};
-
-    if (message.classes) {
-      obj.classes = message.classes.map(e => e ? Class.toAmino(e) : undefined);
-    } else {
-      obj.classes = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

@@ -105,7 +105,7 @@ export const GroupSpec = {
 
   fromSDK(object: GroupSpecSDKType): GroupSpec {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       requirements: isSet(object.requirements) ? PlacementRequirements.fromSDK(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
     };
@@ -113,33 +113,11 @@ export const GroupSpec = {
 
   toSDK(message: GroupSpec): GroupSpecSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toSDK(message.requirements) : undefined);
 
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toSDK(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: GroupSpecSDKType): GroupSpec {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      requirements: isSet(object.requirements) ? PlacementRequirements.fromAmino(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GroupSpec): GroupSpecSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined);
-
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
       obj.resources = [];
     }

@@ -313,25 +313,13 @@ export const QueryConnectionRequest = {
 
   fromSDK(object: QueryConnectionRequestSDKType): QueryConnectionRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
+      connectionId: object?.connection_id
     };
   },
 
   toSDK(message: QueryConnectionRequest): QueryConnectionRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionRequestSDKType): QueryConnectionRequest {
-    return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionRequest): QueryConnectionRequestSDKType {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.connection_id = message.connectionId;
     return obj;
   }
 
@@ -419,7 +407,7 @@ export const QueryConnectionResponse = {
   fromSDK(object: QueryConnectionResponseSDKType): QueryConnectionResponse {
     return {
       connection: isSet(object.connection) ? ConnectionEnd.fromSDK(object.connection) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
+      proof: object?.proof,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -427,24 +415,8 @@ export const QueryConnectionResponse = {
   toSDK(message: QueryConnectionResponse): QueryConnectionResponseSDKType {
     const obj: any = {};
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionResponseSDKType): QueryConnectionResponse {
-    return {
-      connection: isSet(object.connection) ? ConnectionEnd.fromAmino(object.connection) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionResponse): QueryConnectionResponseSDKType {
-    const obj: any = {};
-    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
     return obj;
   }
 
@@ -514,18 +486,6 @@ export const QueryConnectionsRequest = {
   toSDK(message: QueryConnectionsRequest): QueryConnectionsRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionsRequestSDKType): QueryConnectionsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionsRequest): QueryConnectionsRequestSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -636,28 +596,6 @@ export const QueryConnectionsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QueryConnectionsResponseSDKType): QueryConnectionsResponse {
-    return {
-      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionsResponse): QueryConnectionsResponseSDKType {
-    const obj: any = {};
-
-    if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
-    } else {
-      obj.connections = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
-    return obj;
   }
 
 };
@@ -719,25 +657,13 @@ export const QueryClientConnectionsRequest = {
 
   fromSDK(object: QueryClientConnectionsRequestSDKType): QueryClientConnectionsRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined
+      clientId: object?.client_id
     };
   },
 
   toSDK(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    return obj;
-  },
-
-  fromAmino(object: QueryClientConnectionsRequestSDKType): QueryClientConnectionsRequest {
-    return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined
-    };
-  },
-
-  toAmino(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestSDKType {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     return obj;
   }
 
@@ -831,7 +757,7 @@ export const QueryClientConnectionsResponse = {
   fromSDK(object: QueryClientConnectionsResponseSDKType): QueryClientConnectionsResponse {
     return {
       connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: isSet(object.proof) ? object.proof : undefined,
+      proof: object?.proof,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -845,30 +771,8 @@ export const QueryClientConnectionsResponse = {
       obj.connection_paths = [];
     }
 
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryClientConnectionsResponseSDKType): QueryClientConnectionsResponse {
-    return {
-      connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-
-  toAmino(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseSDKType {
-    const obj: any = {};
-
-    if (message.connectionPaths) {
-      obj.connection_paths = message.connectionPaths.map(e => e);
-    } else {
-      obj.connection_paths = [];
-    }
-
-    message.proof !== undefined && (obj.proof = message.proof);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
     return obj;
   }
 
@@ -931,25 +835,13 @@ export const QueryConnectionClientStateRequest = {
 
   fromSDK(object: QueryConnectionClientStateRequestSDKType): QueryConnectionClientStateRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
+      connectionId: object?.connection_id
     };
   },
 
   toSDK(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionClientStateRequestSDKType): QueryConnectionClientStateRequest {
-    return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestSDKType {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.connection_id = message.connectionId;
     return obj;
   }
 
@@ -1037,7 +929,7 @@ export const QueryConnectionClientStateResponse = {
   fromSDK(object: QueryConnectionClientStateResponseSDKType): QueryConnectionClientStateResponse {
     return {
       identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
+      proof: object?.proof,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -1045,24 +937,8 @@ export const QueryConnectionClientStateResponse = {
   toSDK(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseSDKType {
     const obj: any = {};
     message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toSDK(message.identifiedClientState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionClientStateResponseSDKType): QueryConnectionClientStateResponse {
-    return {
-      identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseSDKType {
-    const obj: any = {};
-    message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
     return obj;
   }
 
@@ -1149,33 +1025,17 @@ export const QueryConnectionConsensusStateRequest = {
 
   fromSDK(object: QueryConnectionConsensusStateRequestSDKType): QueryConnectionConsensusStateRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
+      connectionId: object?.connection_id,
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
     };
   },
 
   toSDK(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionConsensusStateRequestSDKType): QueryConnectionConsensusStateRequest {
-    return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestSDKType {
-    const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    obj.connection_id = message.connectionId;
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
     return obj;
   }
 
@@ -1275,8 +1135,8 @@ export const QueryConnectionConsensusStateResponse = {
   fromSDK(object: QueryConnectionConsensusStateResponseSDKType): QueryConnectionConsensusStateResponse {
     return {
       consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
+      clientId: object?.client_id,
+      proof: object?.proof,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -1284,27 +1144,9 @@ export const QueryConnectionConsensusStateResponse = {
   toSDK(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseSDKType {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.client_id = message.clientId;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryConnectionConsensusStateResponseSDKType): QueryConnectionConsensusStateResponse {
-    return {
-      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
-    };
-  },
-
-  toAmino(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseSDKType {
-    const obj: any = {};
-    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.proof !== undefined && (obj.proof = message.proof);
-    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
     return obj;
   }
 

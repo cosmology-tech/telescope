@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
@@ -118,37 +118,19 @@ export const Equivocation = {
 
   fromSDK(object: EquivocationSDKType): Equivocation {
     return {
-      height: isSet(object.height) ? object.height : undefined,
+      height: object?.height,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      power: isSet(object.power) ? object.power : undefined,
-      consensusAddress: isSet(object.consensus_address) ? object.consensus_address : undefined
+      power: object?.power,
+      consensusAddress: object?.consensus_address
     };
   },
 
   toSDK(message: Equivocation): EquivocationSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.power !== undefined && (obj.power = message.power);
-    message.consensusAddress !== undefined && (obj.consensus_address = message.consensusAddress);
-    return obj;
-  },
-
-  fromAmino(object: EquivocationSDKType): Equivocation {
-    return {
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
-      power: isSet(object.power) ? object.power : undefined,
-      consensusAddress: isSet(object.consensus_address) ? object.consensus_address : undefined
-    };
-  },
-
-  toAmino(message: Equivocation): EquivocationSDKType {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
-    message.power !== undefined && (obj.power = message.power);
-    message.consensusAddress !== undefined && (obj.consensus_address = message.consensusAddress);
+    obj.power = message.power;
+    obj.consensus_address = message.consensusAddress;
     return obj;
   }
 

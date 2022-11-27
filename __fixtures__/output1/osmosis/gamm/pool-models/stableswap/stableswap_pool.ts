@@ -156,29 +156,15 @@ export const PoolParams = {
 
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
-      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
-      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined
+      swapFee: object?.swap_fee,
+      exitFee: object?.exit_fee
     };
   },
 
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
-    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
-    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
-    return obj;
-  },
-
-  fromAmino(object: PoolParamsSDKType): PoolParams {
-    return {
-      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
-      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined
-    };
-  },
-
-  toAmino(message: PoolParams): PoolParamsSDKType {
-    const obj: any = {};
-    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
-    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
+    obj.swap_fee = message.swapFee;
+    obj.exit_fee = message.exitFee;
     return obj;
   }
 
@@ -349,23 +335,23 @@ export const Pool = {
 
   fromSDK(object: PoolSDKType): Pool {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      id: isSet(object.id) ? object.id : undefined,
+      address: object?.address,
+      id: object?.id,
       poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
+      futurePoolGovernor: object?.future_pool_governor,
       totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
       scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
-      scalingFactorGovernor: isSet(object.scaling_factor_governor) ? object.scaling_factor_governor : undefined
+      scalingFactorGovernor: object?.scaling_factor_governor
     };
   },
 
   toSDK(message: Pool): PoolSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = message.id);
+    obj.address = message.address;
+    obj.id = message.id;
     message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor;
     message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
 
     if (message.poolLiquidity) {
@@ -380,44 +366,7 @@ export const Pool = {
       obj.scaling_factor = [];
     }
 
-    message.scalingFactorGovernor !== undefined && (obj.scaling_factor_governor = message.scalingFactorGovernor);
-    return obj;
-  },
-
-  fromAmino(object: PoolSDKType): Pool {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
-      totalShares: isSet(object.total_shares) ? Coin.fromAmino(object.total_shares) : undefined,
-      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
-      scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
-      scalingFactorGovernor: isSet(object.scaling_factor_governor) ? object.scaling_factor_governor : undefined
-    };
-  },
-
-  toAmino(message: Pool): PoolSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = message.id);
-    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined);
-
-    if (message.poolLiquidity) {
-      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.pool_liquidity = [];
-    }
-
-    if (message.scalingFactor) {
-      obj.scaling_factor = message.scalingFactor.map(e => e);
-    } else {
-      obj.scaling_factor = [];
-    }
-
-    message.scalingFactorGovernor !== undefined && (obj.scaling_factor_governor = message.scalingFactorGovernor);
+    obj.scaling_factor_governor = message.scalingFactorGovernor;
     return obj;
   }
 

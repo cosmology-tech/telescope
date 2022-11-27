@@ -119,24 +119,6 @@ export const MultiSignature = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: MultiSignatureSDKType): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: MultiSignature): MultiSignatureSDKType {
-    const obj: any = {};
-
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
-    } else {
-      obj.signatures = [];
-    }
-
-    return obj;
   }
 
 };
@@ -210,29 +192,15 @@ export const CompactBitArray = {
 
   fromSDK(object: CompactBitArraySDKType): CompactBitArray {
     return {
-      extraBitsStored: isSet(object.extra_bits_stored) ? object.extra_bits_stored : undefined,
-      elems: isSet(object.elems) ? object.elems : undefined
+      extraBitsStored: object?.extra_bits_stored,
+      elems: object?.elems
     };
   },
 
   toSDK(message: CompactBitArray): CompactBitArraySDKType {
     const obj: any = {};
-    message.extraBitsStored !== undefined && (obj.extra_bits_stored = message.extraBitsStored);
-    message.elems !== undefined && (obj.elems = message.elems);
-    return obj;
-  },
-
-  fromAmino(object: CompactBitArraySDKType): CompactBitArray {
-    return {
-      extraBitsStored: isSet(object.extra_bits_stored) ? object.extra_bits_stored : undefined,
-      elems: isSet(object.elems) ? object.elems : undefined
-    };
-  },
-
-  toAmino(message: CompactBitArray): CompactBitArraySDKType {
-    const obj: any = {};
-    message.extraBitsStored !== undefined && (obj.extra_bits_stored = message.extraBitsStored);
-    message.elems !== undefined && (obj.elems = message.elems);
+    obj.extra_bits_stored = message.extraBitsStored;
+    obj.elems = message.elems;
     return obj;
   }
 

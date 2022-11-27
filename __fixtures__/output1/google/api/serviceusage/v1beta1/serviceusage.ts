@@ -1312,25 +1312,13 @@ export const EnableServiceRequest = {
 
   fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: EnableServiceRequestSDKType): EnableServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: EnableServiceRequest): EnableServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -1393,25 +1381,13 @@ export const DisableServiceRequest = {
 
   fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: DisableServiceRequestSDKType): DisableServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: DisableServiceRequest): DisableServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -1474,25 +1450,13 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
-
-  fromAmino(object: GetServiceRequestSDKType): GetServiceRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined
-    };
-  },
-
-  toAmino(message: GetServiceRequest): GetServiceRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -1591,37 +1555,19 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      filter: object?.filter
     };
   },
 
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
-  },
-
-  fromAmino(object: ListServicesRequestSDKType): ListServicesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
-    };
-  },
-
-  toAmino(message: ListServicesRequest): ListServicesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.filter = message.filter;
     return obj;
   }
 
@@ -1703,7 +1649,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1716,27 +1662,7 @@ export const ListServicesResponse = {
       obj.services = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListServicesResponseSDKType): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListServicesResponse): ListServicesResponseSDKType {
-    const obj: any = {};
-
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -1817,34 +1743,14 @@ export const BatchEnableServicesRequest = {
 
   fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
 
   toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-
-    if (message.serviceIds) {
-      obj.service_ids = message.serviceIds.map(e => e);
-    } else {
-      obj.service_ids = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
 
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
@@ -1950,36 +1856,18 @@ export const ListConsumerQuotaMetricsRequest = {
 
   fromSDK(object: ListConsumerQuotaMetricsRequestSDKType): ListConsumerQuotaMetricsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
 
   toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
-    return obj;
-  },
-
-  fromAmino(object: ListConsumerQuotaMetricsRequestSDKType): ListConsumerQuotaMetricsRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
-    };
-  },
-
-  toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
   }
@@ -2062,7 +1950,7 @@ export const ListConsumerQuotaMetricsResponse = {
   fromSDK(object: ListConsumerQuotaMetricsResponseSDKType): ListConsumerQuotaMetricsResponse {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -2075,27 +1963,7 @@ export const ListConsumerQuotaMetricsResponse = {
       obj.metrics = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListConsumerQuotaMetricsResponseSDKType): ListConsumerQuotaMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseSDKType {
-    const obj: any = {};
-
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -2170,28 +2038,14 @@ export const GetConsumerQuotaMetricRequest = {
 
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
 
   toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
-    return obj;
-  },
-
-  fromAmino(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
-    };
-  },
-
-  toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
   }
@@ -2267,28 +2121,14 @@ export const GetConsumerQuotaLimitRequest = {
 
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
 
   toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
-    return obj;
-  },
-
-  fromAmino(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
-    };
-  },
-
-  toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
   }
@@ -2406,42 +2246,18 @@ export const CreateAdminOverrideRequest = {
 
   fromSDK(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      override: isSet(object.override) ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -2577,9 +2393,9 @@ export const UpdateAdminOverrideRequest = {
 
   fromSDK(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -2587,36 +2403,10 @@ export const UpdateAdminOverrideRequest = {
 
   toSDK(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      override: isSet(object.override) ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -2728,38 +2518,16 @@ export const DeleteAdminOverrideRequest = {
 
   fromSDK(object: DeleteAdminOverrideRequestSDKType): DeleteAdminOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      name: object?.name,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DeleteAdminOverrideRequestSDKType): DeleteAdminOverrideRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
+    obj.name = message.name;
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -2853,33 +2621,17 @@ export const ListAdminOverridesRequest = {
 
   fromSDK(object: ListAdminOverridesRequestSDKType): ListAdminOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
 
   toSDK(message: ListAdminOverridesRequest): ListAdminOverridesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListAdminOverridesRequestSDKType): ListAdminOverridesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
-    };
-  },
-
-  toAmino(message: ListAdminOverridesRequest): ListAdminOverridesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     return obj;
   }
 
@@ -2961,7 +2713,7 @@ export const ListAdminOverridesResponse = {
   fromSDK(object: ListAdminOverridesResponseSDKType): ListAdminOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -2974,27 +2726,7 @@ export const ListAdminOverridesResponse = {
       obj.overrides = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListAdminOverridesResponseSDKType): ListAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListAdminOverridesResponse): ListAdminOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -3072,24 +2804,6 @@ export const BatchCreateAdminOverridesResponse = {
 
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchCreateAdminOverridesResponseSDKType): BatchCreateAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
       obj.overrides = [];
     }
@@ -3210,42 +2924,18 @@ export const ImportAdminOverridesRequest = {
 
   fromSDK(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3335,24 +3025,6 @@ export const ImportAdminOverridesResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ImportAdminOverridesResponseSDKType): ImportAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    return obj;
   }
 
 };
@@ -3403,15 +3075,6 @@ export const ImportAdminOverridesMetadata = {
   },
 
   toSDK(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ImportAdminOverridesMetadataSDKType): ImportAdminOverridesMetadata {
-    return {};
-  },
-
-  toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataSDKType {
     const obj: any = {};
     return obj;
   }
@@ -3529,42 +3192,18 @@ export const CreateConsumerOverrideRequest = {
 
   fromSDK(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      override: isSet(object.override) ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3700,9 +3339,9 @@ export const UpdateConsumerOverrideRequest = {
 
   fromSDK(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -3710,36 +3349,10 @@ export const UpdateConsumerOverrideRequest = {
 
   toSDK(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      override: isSet(object.override) ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined);
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3851,38 +3464,16 @@ export const DeleteConsumerOverrideRequest = {
 
   fromSDK(object: DeleteConsumerOverrideRequestSDKType): DeleteConsumerOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      name: object?.name,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: DeleteConsumerOverrideRequestSDKType): DeleteConsumerOverrideRequest {
-    return {
-      name: isSet(object.name) ? object.name : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestSDKType {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
+    obj.name = message.name;
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3976,33 +3567,17 @@ export const ListConsumerOverridesRequest = {
 
   fromSDK(object: ListConsumerOverridesRequestSDKType): ListConsumerOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
 
   toSDK(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListConsumerOverridesRequestSDKType): ListConsumerOverridesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
-    };
-  },
-
-  toAmino(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     return obj;
   }
 
@@ -4084,7 +3659,7 @@ export const ListConsumerOverridesResponse = {
   fromSDK(object: ListConsumerOverridesResponseSDKType): ListConsumerOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -4097,27 +3672,7 @@ export const ListConsumerOverridesResponse = {
       obj.overrides = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
-    return obj;
-  },
-
-  fromAmino(object: ListConsumerOverridesResponseSDKType): ListConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
-    };
-  },
-
-  toAmino(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -4195,24 +3750,6 @@ export const BatchCreateConsumerOverridesResponse = {
 
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: BatchCreateConsumerOverridesResponseSDKType): BatchCreateConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
       obj.overrides = [];
     }
@@ -4333,42 +3870,18 @@ export const ImportConsumerOverridesRequest = {
 
   fromSDK(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
+      force: object?.force,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
 
   toSDK(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-
-    if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.force_only = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
-  },
-
-  toAmino(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
+    obj.force = message.force;
 
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -4458,24 +3971,6 @@ export const ImportConsumerOverridesResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ImportConsumerOverridesResponseSDKType): ImportConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseSDKType {
-    const obj: any = {};
-
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-
-    return obj;
   }
 
 };
@@ -4526,15 +4021,6 @@ export const ImportConsumerOverridesMetadata = {
   },
 
   toSDK(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ImportConsumerOverridesMetadataSDKType): ImportConsumerOverridesMetadata {
-    return {};
-  },
-
-  toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataSDKType {
     const obj: any = {};
     return obj;
   }
@@ -4618,24 +4104,6 @@ export const ImportAdminQuotaPoliciesResponse = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: ImportAdminQuotaPoliciesResponseSDKType): ImportAdminQuotaPoliciesResponse {
-    return {
-      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseSDKType {
-    const obj: any = {};
-
-    if (message.policies) {
-      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e) : undefined);
-    } else {
-      obj.policies = [];
-    }
-
-    return obj;
   }
 
 };
@@ -4686,15 +4154,6 @@ export const ImportAdminQuotaPoliciesMetadata = {
   },
 
   toSDK(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: ImportAdminQuotaPoliciesMetadataSDKType): ImportAdminQuotaPoliciesMetadata {
-    return {};
-  },
-
-  toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
     const obj: any = {};
     return obj;
   }
@@ -4749,15 +4208,6 @@ export const CreateAdminQuotaPolicyMetadata = {
   toSDK(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: CreateAdminQuotaPolicyMetadataSDKType): CreateAdminQuotaPolicyMetadata {
-    return {};
-  },
-
-  toAmino(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -4810,15 +4260,6 @@ export const UpdateAdminQuotaPolicyMetadata = {
   toSDK(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
-  },
-
-  fromAmino(_: UpdateAdminQuotaPolicyMetadataSDKType): UpdateAdminQuotaPolicyMetadata {
-    return {};
-  },
-
-  toAmino(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
-    const obj: any = {};
-    return obj;
   }
 
 };
@@ -4869,15 +4310,6 @@ export const DeleteAdminQuotaPolicyMetadata = {
   },
 
   toSDK(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: DeleteAdminQuotaPolicyMetadataSDKType): DeleteAdminQuotaPolicyMetadata {
-    return {};
-  },
-
-  toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataSDKType {
     const obj: any = {};
     return obj;
   }
@@ -4941,25 +4373,13 @@ export const GenerateServiceIdentityRequest = {
 
   fromSDK(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined
+      parent: object?.parent
     };
   },
 
   toSDK(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    return obj;
-  },
-
-  fromAmino(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
-    return {
-      parent: isSet(object.parent) ? object.parent : undefined
-    };
-  },
-
-  toAmino(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestSDKType {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     return obj;
   }
 
@@ -5044,20 +4464,6 @@ export const GetServiceIdentityResponse = {
     message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toSDK(message.identity) : undefined);
     message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
     return obj;
-  },
-
-  fromAmino(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
-    return {
-      identity: isSet(object.identity) ? ServiceIdentity.fromAmino(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
-    };
-  },
-
-  toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
-    const obj: any = {};
-    message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined);
-    message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
-    return obj;
   }
 
 };
@@ -5108,15 +4514,6 @@ export const GetServiceIdentityMetadata = {
   },
 
   toSDK(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: GetServiceIdentityMetadataSDKType): GetServiceIdentityMetadata {
-    return {};
-  },
-
-  toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataSDKType {
     const obj: any = {};
     return obj;
   }

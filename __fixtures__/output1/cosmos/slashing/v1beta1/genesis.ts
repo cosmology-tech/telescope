@@ -214,33 +214,6 @@ export const GenesisState = {
     }
 
     return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromAmino(e)) : [],
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-
-    if (message.signingInfos) {
-      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e) : undefined);
-    } else {
-      obj.signing_infos = [];
-    }
-
-    if (message.missedBlocks) {
-      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e) : undefined);
-    } else {
-      obj.missed_blocks = [];
-    }
-
-    return obj;
   }
 
 };
@@ -314,29 +287,15 @@ export const SigningInfo = {
 
   fromSDK(object: SigningInfoSDKType): SigningInfo {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
     };
   },
 
   toSDK(message: SigningInfo): SigningInfoSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toSDK(message.validatorSigningInfo) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: SigningInfoSDKType): SigningInfo {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
-    };
-  },
-
-  toAmino(message: SigningInfo): SigningInfoSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined);
     return obj;
   }
 
@@ -417,37 +376,17 @@ export const ValidatorMissedBlocks = {
 
   fromSDK(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
 
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toSDK(e) : undefined);
-    } else {
-      obj.missed_blocks = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-
-    if (message.missedBlocks) {
-      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e) : undefined);
     } else {
       obj.missed_blocks = [];
     }
@@ -526,29 +465,15 @@ export const MissedBlock = {
 
   fromSDK(object: MissedBlockSDKType): MissedBlock {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      missed: isSet(object.missed) ? object.missed : undefined
+      index: object?.index,
+      missed: object?.missed
     };
   },
 
   toSDK(message: MissedBlock): MissedBlockSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.missed !== undefined && (obj.missed = message.missed);
-    return obj;
-  },
-
-  fromAmino(object: MissedBlockSDKType): MissedBlock {
-    return {
-      index: isSet(object.index) ? object.index : undefined,
-      missed: isSet(object.missed) ? object.missed : undefined
-    };
-  },
-
-  toAmino(message: MissedBlock): MissedBlockSDKType {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.missed !== undefined && (obj.missed = message.missed);
+    obj.index = message.index;
+    obj.missed = message.missed;
     return obj;
   }
 

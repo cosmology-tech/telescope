@@ -1,6 +1,6 @@
 import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** GenesisState defines the mint module's genesis state. */
@@ -116,7 +116,7 @@ export const GenesisState = {
     return {
       minter: isSet(object.minter) ? Minter.fromSDK(object.minter) : undefined,
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
-      reductionStartedEpoch: isSet(object.reduction_started_epoch) ? object.reduction_started_epoch : undefined
+      reductionStartedEpoch: object?.reduction_started_epoch
     };
   },
 
@@ -124,23 +124,7 @@ export const GenesisState = {
     const obj: any = {};
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    message.reductionStartedEpoch !== undefined && (obj.reduction_started_epoch = message.reductionStartedEpoch);
-    return obj;
-  },
-
-  fromAmino(object: GenesisStateSDKType): GenesisState {
-    return {
-      minter: isSet(object.minter) ? Minter.fromAmino(object.minter) : undefined,
-      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
-      reductionStartedEpoch: isSet(object.reduction_started_epoch) ? object.reduction_started_epoch : undefined
-    };
-  },
-
-  toAmino(message: GenesisState): GenesisStateSDKType {
-    const obj: any = {};
-    message.minter !== undefined && (obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
-    message.reductionStartedEpoch !== undefined && (obj.reduction_started_epoch = message.reductionStartedEpoch);
+    obj.reduction_started_epoch = message.reductionStartedEpoch;
     return obj;
   }
 

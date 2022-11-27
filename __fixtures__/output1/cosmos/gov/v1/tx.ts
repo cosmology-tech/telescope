@@ -241,8 +241,8 @@ export const MsgSubmitProposal = {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
       initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      proposer: isSet(object.proposer) ? object.proposer : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      proposer: object?.proposer,
+      metadata: object?.metadata
     };
   },
 
@@ -261,37 +261,8 @@ export const MsgSubmitProposal = {
       obj.initial_deposit = [];
     }
 
-    message.proposer !== undefined && (obj.proposer = message.proposer);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-
-  fromAmino(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      proposer: isSet(object.proposer) ? object.proposer : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
-    const obj: any = {};
-
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-
-    if (message.initialDeposit) {
-      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
-    } else {
-      obj.initial_deposit = [];
-    }
-
-    message.proposer !== undefined && (obj.proposer = message.proposer);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.proposer = message.proposer;
+    obj.metadata = message.metadata;
     return obj;
   }
 
@@ -354,25 +325,13 @@ export const MsgSubmitProposalResponse = {
 
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    return obj;
-  },
-
-  fromAmino(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
-    };
-  },
-
-  toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -448,28 +407,14 @@ export const MsgExecLegacyContent = {
   fromSDK(object: MsgExecLegacyContentSDKType): MsgExecLegacyContent {
     return {
       content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
-      authority: isSet(object.authority) ? object.authority : undefined
+      authority: object?.authority
     };
   },
 
   toSDK(message: MsgExecLegacyContent): MsgExecLegacyContentSDKType {
     const obj: any = {};
     message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
-    message.authority !== undefined && (obj.authority = message.authority);
-    return obj;
-  },
-
-  fromAmino(object: MsgExecLegacyContentSDKType): MsgExecLegacyContent {
-    return {
-      content: isSet(object.content) ? Any.fromAmino(object.content) : undefined,
-      authority: isSet(object.authority) ? object.authority : undefined
-    };
-  },
-
-  toAmino(message: MsgExecLegacyContent): MsgExecLegacyContentSDKType {
-    const obj: any = {};
-    message.content !== undefined && (obj.content = message.content ? Any.toAmino(message.content) : undefined);
-    message.authority !== undefined && (obj.authority = message.authority);
+    obj.authority = message.authority;
     return obj;
   }
 
@@ -521,15 +466,6 @@ export const MsgExecLegacyContentResponse = {
   },
 
   toSDK(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgExecLegacyContentResponseSDKType): MsgExecLegacyContentResponse {
-    return {};
-  },
-
-  toAmino(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -629,37 +565,19 @@ export const MsgVote = {
 
   fromSDK(object: MsgVoteSDKType): MsgVote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
+      proposalId: object?.proposal_id,
+      voter: object?.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: MsgVote): MsgVoteSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.proposal_id = message.proposalId;
+    obj.voter = message.voter;
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-
-  fromAmino(object: MsgVoteSDKType): MsgVote {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: MsgVote): MsgVoteSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.metadata = message.metadata;
     return obj;
   }
 
@@ -711,15 +629,6 @@ export const MsgVoteResponse = {
   },
 
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgVoteResponseSDKType): MsgVoteResponse {
-    return {};
-  },
-
-  toAmino(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -825,17 +734,17 @@ export const MsgVoteWeighted = {
 
   fromSDK(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
+      proposalId: object?.proposal_id,
+      voter: object?.voter,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: MsgVoteWeighted): MsgVoteWeightedSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.proposal_id = message.proposalId;
+    obj.voter = message.voter;
 
     if (message.options) {
       obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
@@ -843,31 +752,7 @@ export const MsgVoteWeighted = {
       obj.options = [];
     }
 
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
-
-  fromAmino(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : undefined
-    };
-  },
-
-  toAmino(message: MsgVoteWeighted): MsgVoteWeightedSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
-
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.metadata = message.metadata;
     return obj;
   }
 
@@ -919,15 +804,6 @@ export const MsgVoteWeightedResponse = {
   },
 
   toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgVoteWeightedResponseSDKType): MsgVoteWeightedResponse {
-    return {};
-  },
-
-  toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -1021,41 +897,19 @@ export const MsgDeposit = {
 
   fromSDK(object: MsgDepositSDKType): MsgDeposit {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
+      proposalId: object?.proposal_id,
+      depositor: object?.depositor,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgDeposit): MsgDepositSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.proposal_id = message.proposalId;
+    obj.depositor = message.depositor;
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: MsgDepositSDKType): MsgDeposit {
-    return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: MsgDeposit): MsgDepositSDKType {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -1111,15 +965,6 @@ export const MsgDepositResponse = {
   },
 
   toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgDepositResponseSDKType): MsgDepositResponse {
-    return {};
-  },
-
-  toAmino(_: MsgDepositResponse): MsgDepositResponseSDKType {
     const obj: any = {};
     return obj;
   }

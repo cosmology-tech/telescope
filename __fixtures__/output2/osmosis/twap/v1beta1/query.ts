@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Params } from "./genesis";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
   poolId: Long;

@@ -290,36 +290,18 @@ export const TokenPair = {
 
   fromSDK(object: TokenPairSDKType): TokenPair {
     return {
-      erc20Address: isSet(object.erc20_address) ? object.erc20_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      enabled: isSet(object.enabled) ? object.enabled : undefined,
+      erc20Address: object?.erc20_address,
+      denom: object?.denom,
+      enabled: object?.enabled,
       contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
     };
   },
 
   toSDK(message: TokenPair): TokenPairSDKType {
     const obj: any = {};
-    message.erc20Address !== undefined && (obj.erc20_address = message.erc20Address);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
-    return obj;
-  },
-
-  fromAmino(object: TokenPairSDKType): TokenPair {
-    return {
-      erc20Address: isSet(object.erc20_address) ? object.erc20_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      enabled: isSet(object.enabled) ? object.enabled : undefined,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
-    };
-  },
-
-  toAmino(message: TokenPair): TokenPairSDKType {
-    const obj: any = {};
-    message.erc20Address !== undefined && (obj.erc20_address = message.erc20Address);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
+    obj.erc20_address = message.erc20Address;
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
     message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
     return obj;
   }
@@ -407,33 +389,17 @@ export const RegisterCoinProposal = {
 
   fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
 
   toSDK(message: RegisterCoinProposal): RegisterCoinProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      metadata: isSet(object.metadata) ? Metadata.fromAmino(object.metadata) : undefined
-    };
-  },
-
-  toAmino(message: RegisterCoinProposal): RegisterCoinProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined);
     return obj;
   }
 
@@ -520,33 +486,17 @@ export const RegisterERC20Proposal = {
 
   fromSDK(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      erc20address: isSet(object.erc20address) ? object.erc20address : undefined
+      title: object?.title,
+      description: object?.description,
+      erc20address: object?.erc20address
     };
   },
 
   toSDK(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.erc20address !== undefined && (obj.erc20address = message.erc20address);
-    return obj;
-  },
-
-  fromAmino(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      erc20address: isSet(object.erc20address) ? object.erc20address : undefined
-    };
-  },
-
-  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.erc20address !== undefined && (obj.erc20address = message.erc20address);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.erc20address = message.erc20address;
     return obj;
   }
 
@@ -633,33 +583,17 @@ export const ToggleTokenConversionProposal = {
 
   fromSDK(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      token: isSet(object.token) ? object.token : undefined
+      title: object?.title,
+      description: object?.description,
+      token: object?.token
     };
   },
 
   toSDK(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.token !== undefined && (obj.token = message.token);
-    return obj;
-  },
-
-  fromAmino(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
-    return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      token: isSet(object.token) ? object.token : undefined
-    };
-  },
-
-  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.token !== undefined && (obj.token = message.token);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.token = message.token;
     return obj;
   }
 

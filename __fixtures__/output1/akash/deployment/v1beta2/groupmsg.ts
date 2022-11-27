@@ -116,18 +116,6 @@ export const MsgCloseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgCloseGroupSDKType): MsgCloseGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: MsgCloseGroup): MsgCloseGroupSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -178,15 +166,6 @@ export const MsgCloseGroupResponse = {
   },
 
   toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
-    return {};
-  },
-
-  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -258,18 +237,6 @@ export const MsgPauseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgPauseGroupSDKType): MsgPauseGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: MsgPauseGroup): MsgPauseGroupSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -320,15 +287,6 @@ export const MsgPauseGroupResponse = {
   },
 
   toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
-    return {};
-  },
-
-  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -400,18 +358,6 @@ export const MsgStartGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
-  },
-
-  fromAmino(object: MsgStartGroupSDKType): MsgStartGroup {
-    return {
-      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
-    };
-  },
-
-  toAmino(message: MsgStartGroup): MsgStartGroupSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
-    return obj;
   }
 
 };
@@ -462,15 +408,6 @@ export const MsgStartGroupResponse = {
   },
 
   toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromAmino(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
-    return {};
-  },
-
-  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
     const obj: any = {};
     return obj;
   }

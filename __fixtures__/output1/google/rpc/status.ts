@@ -144,41 +144,19 @@ export const Status = {
 
   fromSDK(object: StatusSDKType): Status {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      message: isSet(object.message) ? object.message : undefined,
+      code: object?.code,
+      message: object?.message,
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Status): StatusSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.message !== undefined && (obj.message = message.message);
+    obj.code = message.code;
+    obj.message = message.message;
 
     if (message.details) {
       obj.details = message.details.map(e => e ? Any.toSDK(e) : undefined);
-    } else {
-      obj.details = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: StatusSDKType): Status {
-    return {
-      code: isSet(object.code) ? object.code : undefined,
-      message: isSet(object.message) ? object.message : undefined,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: Status): StatusSDKType {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.message !== undefined && (obj.message = message.message);
-
-    if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.details = [];
     }

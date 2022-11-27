@@ -127,18 +127,6 @@ export const QuerySales = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QuerySalesSDKType): QuerySales {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySales): QuerySalesSDKType {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -234,26 +222,6 @@ export const QuerySalesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
-  },
-
-  fromAmino(object: QuerySalesResponseSDKType): QuerySalesResponse {
-    return {
-      sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromAmino(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
-    };
-  },
-
-  toAmino(message: QuerySalesResponse): QuerySalesResponseSDKType {
-    const obj: any = {};
-
-    if (message.sales) {
-      obj.sales = message.sales.map(e => e ? Sale.toAmino(e) : undefined);
-    } else {
-      obj.sales = [];
-    }
-
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
-    return obj;
   }
 
 };
@@ -315,25 +283,13 @@ export const QuerySale = {
 
   fromSDK(object: QuerySaleSDKType): QuerySale {
     return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined
+      saleId: object?.sale_id
     };
   },
 
   toSDK(message: QuerySale): QuerySaleSDKType {
     const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    return obj;
-  },
-
-  fromAmino(object: QuerySaleSDKType): QuerySale {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined
-    };
-  },
-
-  toAmino(message: QuerySale): QuerySaleSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    obj.sale_id = message.saleId;
     return obj;
   }
 
@@ -403,18 +359,6 @@ export const QuerySaleResponse = {
   toSDK(message: QuerySaleResponse): QuerySaleResponseSDKType {
     const obj: any = {};
     message.sale !== undefined && (obj.sale = message.sale ? Sale.toSDK(message.sale) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QuerySaleResponseSDKType): QuerySaleResponse {
-    return {
-      sale: isSet(object.sale) ? Sale.fromAmino(object.sale) : undefined
-    };
-  },
-
-  toAmino(message: QuerySaleResponse): QuerySaleResponseSDKType {
-    const obj: any = {};
-    message.sale !== undefined && (obj.sale = message.sale ? Sale.toAmino(message.sale) : undefined);
     return obj;
   }
 
@@ -489,29 +433,15 @@ export const QueryUserPosition = {
 
   fromSDK(object: QueryUserPositionSDKType): QueryUserPosition {
     return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      user: isSet(object.user) ? object.user : undefined
+      saleId: object?.sale_id,
+      user: object?.user
     };
   },
 
   toSDK(message: QueryUserPosition): QueryUserPositionSDKType {
     const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.user !== undefined && (obj.user = message.user);
-    return obj;
-  },
-
-  fromAmino(object: QueryUserPositionSDKType): QueryUserPosition {
-    return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      user: isSet(object.user) ? object.user : undefined
-    };
-  },
-
-  toAmino(message: QueryUserPosition): QueryUserPositionSDKType {
-    const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.user !== undefined && (obj.user = message.user);
+    obj.sale_id = message.saleId;
+    obj.user = message.user;
     return obj;
   }
 
@@ -581,18 +511,6 @@ export const QueryUserPositionResponse = {
   toSDK(message: QueryUserPositionResponse): QueryUserPositionResponseSDKType {
     const obj: any = {};
     message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toSDK(message.userPosition) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: QueryUserPositionResponseSDKType): QueryUserPositionResponse {
-    return {
-      userPosition: isSet(object.user_position) ? UserPosition.fromAmino(object.user_position) : undefined
-    };
-  },
-
-  toAmino(message: QueryUserPositionResponse): QueryUserPositionResponseSDKType {
-    const obj: any = {};
-    message.userPosition !== undefined && (obj.user_position = message.userPosition ? UserPosition.toAmino(message.userPosition) : undefined);
     return obj;
   }
 

@@ -250,32 +250,16 @@ export const Claim = {
   fromSDK(object: ClaimSDKType): Claim {
     return {
       action: isSet(object.action) ? actionFromJSON(object.action) : 0,
-      completed: isSet(object.completed) ? object.completed : undefined,
-      claimableAmount: isSet(object.claimable_amount) ? object.claimable_amount : undefined
+      completed: object?.completed,
+      claimableAmount: object?.claimable_amount
     };
   },
 
   toSDK(message: Claim): ClaimSDKType {
     const obj: any = {};
     message.action !== undefined && (obj.action = actionToJSON(message.action));
-    message.completed !== undefined && (obj.completed = message.completed);
-    message.claimableAmount !== undefined && (obj.claimable_amount = message.claimableAmount);
-    return obj;
-  },
-
-  fromAmino(object: ClaimSDKType): Claim {
-    return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
-      completed: isSet(object.completed) ? object.completed : undefined,
-      claimableAmount: isSet(object.claimable_amount) ? object.claimable_amount : undefined
-    };
-  },
-
-  toAmino(message: Claim): ClaimSDKType {
-    const obj: any = {};
-    message.action !== undefined && (obj.action = actionToJSON(message.action));
-    message.completed !== undefined && (obj.completed = message.completed);
-    message.claimableAmount !== undefined && (obj.claimable_amount = message.claimableAmount);
+    obj.completed = message.completed;
+    obj.claimable_amount = message.claimableAmount;
     return obj;
   }
 
@@ -380,38 +364,16 @@ export const ClaimsRecordAddress = {
 
   fromSDK(object: ClaimsRecordAddressSDKType): ClaimsRecordAddress {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
+      address: object?.address,
+      initialClaimableAmount: object?.initial_claimable_amount,
       actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
     };
   },
 
   toSDK(message: ClaimsRecordAddress): ClaimsRecordAddressSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
-
-    if (message.actionsCompleted) {
-      obj.actions_completed = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actions_completed = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ClaimsRecordAddressSDKType): ClaimsRecordAddress {
-    return {
-      address: isSet(object.address) ? object.address : undefined,
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressSDKType {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
+    obj.address = message.address;
+    obj.initial_claimable_amount = message.initialClaimableAmount;
 
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);
@@ -511,34 +473,14 @@ export const ClaimsRecord = {
 
   fromSDK(object: ClaimsRecordSDKType): ClaimsRecord {
     return {
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
+      initialClaimableAmount: object?.initial_claimable_amount,
       actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
     };
   },
 
   toSDK(message: ClaimsRecord): ClaimsRecordSDKType {
     const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
-
-    if (message.actionsCompleted) {
-      obj.actions_completed = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actions_completed = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: ClaimsRecordSDKType): ClaimsRecord {
-    return {
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
-  },
-
-  toAmino(message: ClaimsRecord): ClaimsRecordSDKType {
-    const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
+    obj.initial_claimable_amount = message.initialClaimableAmount;
 
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);

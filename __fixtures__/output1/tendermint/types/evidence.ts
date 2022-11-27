@@ -2,7 +2,7 @@ import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -134,20 +134,6 @@ export const Evidence = {
     message.duplicateVoteEvidence !== undefined && (obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toSDK(message.duplicateVoteEvidence) : undefined);
     message.lightClientAttackEvidence !== undefined && (obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toSDK(message.lightClientAttackEvidence) : undefined);
     return obj;
-  },
-
-  fromAmino(object: EvidenceSDKType): Evidence {
-    return {
-      duplicateVoteEvidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromAmino(object.duplicate_vote_evidence) : undefined,
-      lightClientAttackEvidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromAmino(object.light_client_attack_evidence) : undefined
-    };
-  },
-
-  toAmino(message: Evidence): EvidenceSDKType {
-    const obj: any = {};
-    message.duplicateVoteEvidence !== undefined && (obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence) : undefined);
-    message.lightClientAttackEvidence !== undefined && (obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence) : undefined);
-    return obj;
   }
 
 };
@@ -259,8 +245,8 @@ export const DuplicateVoteEvidence = {
     return {
       voteA: isSet(object.vote_a) ? Vote.fromSDK(object.vote_a) : undefined,
       voteB: isSet(object.vote_b) ? Vote.fromSDK(object.vote_b) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
-      validatorPower: isSet(object.validator_power) ? object.validator_power : undefined,
+      totalVotingPower: object?.total_voting_power,
+      validatorPower: object?.validator_power,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -269,29 +255,9 @@ export const DuplicateVoteEvidence = {
     const obj: any = {};
     message.voteA !== undefined && (obj.vote_a = message.voteA ? Vote.toSDK(message.voteA) : undefined);
     message.voteB !== undefined && (obj.vote_b = message.voteB ? Vote.toSDK(message.voteB) : undefined);
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
-    message.validatorPower !== undefined && (obj.validator_power = message.validatorPower);
+    obj.total_voting_power = message.totalVotingPower;
+    obj.validator_power = message.validatorPower;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: DuplicateVoteEvidenceSDKType): DuplicateVoteEvidence {
-    return {
-      voteA: isSet(object.vote_a) ? Vote.fromAmino(object.vote_a) : undefined,
-      voteB: isSet(object.vote_b) ? Vote.fromAmino(object.vote_b) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
-      validatorPower: isSet(object.validator_power) ? object.validator_power : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceSDKType {
-    const obj: any = {};
-    message.voteA !== undefined && (obj.vote_a = message.voteA ? Vote.toAmino(message.voteA) : undefined);
-    message.voteB !== undefined && (obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined);
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
-    message.validatorPower !== undefined && (obj.validator_power = message.validatorPower);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
     return obj;
   }
 
@@ -409,9 +375,9 @@ export const LightClientAttackEvidence = {
   fromSDK(object: LightClientAttackEvidenceSDKType): LightClientAttackEvidence {
     return {
       conflictingBlock: isSet(object.conflicting_block) ? LightBlock.fromSDK(object.conflicting_block) : undefined,
-      commonHeight: isSet(object.common_height) ? object.common_height : undefined,
+      commonHeight: object?.common_height,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDK(e)) : [],
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
+      totalVotingPower: object?.total_voting_power,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -419,7 +385,7 @@ export const LightClientAttackEvidence = {
   toSDK(message: LightClientAttackEvidence): LightClientAttackEvidenceSDKType {
     const obj: any = {};
     message.conflictingBlock !== undefined && (obj.conflicting_block = message.conflictingBlock ? LightBlock.toSDK(message.conflictingBlock) : undefined);
-    message.commonHeight !== undefined && (obj.common_height = message.commonHeight);
+    obj.common_height = message.commonHeight;
 
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toSDK(e) : undefined);
@@ -427,34 +393,8 @@ export const LightClientAttackEvidence = {
       obj.byzantine_validators = [];
     }
 
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
+    obj.total_voting_power = message.totalVotingPower;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: LightClientAttackEvidenceSDKType): LightClientAttackEvidence {
-    return {
-      conflictingBlock: isSet(object.conflicting_block) ? LightBlock.fromAmino(object.conflicting_block) : undefined,
-      commonHeight: isSet(object.common_height) ? object.common_height : undefined,
-      byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
-  },
-
-  toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceSDKType {
-    const obj: any = {};
-    message.conflictingBlock !== undefined && (obj.conflicting_block = message.conflictingBlock ? LightBlock.toAmino(message.conflictingBlock) : undefined);
-    message.commonHeight !== undefined && (obj.common_height = message.commonHeight);
-
-    if (message.byzantineValidators) {
-      obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toAmino(e) : undefined);
-    } else {
-      obj.byzantine_validators = [];
-    }
-
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
     return obj;
   }
 
@@ -532,24 +472,6 @@ export const EvidenceList = {
 
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Evidence.toSDK(e) : undefined);
-    } else {
-      obj.evidence = [];
-    }
-
-    return obj;
-  },
-
-  fromAmino(object: EvidenceListSDKType): EvidenceList {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromAmino(e)) : []
-    };
-  },
-
-  toAmino(message: EvidenceList): EvidenceListSDKType {
-    const obj: any = {};
-
-    if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Evidence.toAmino(e) : undefined);
     } else {
       obj.evidence = [];
     }

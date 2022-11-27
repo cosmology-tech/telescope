@@ -569,29 +569,15 @@ export const LogEntry_LabelsEntry = {
 
   fromSDK(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
-
-  fromAmino(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
-    return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
-    };
-  },
-
-  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -874,15 +860,15 @@ export const LogEntry = {
 
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
-      logName: isSet(object.log_name) ? object.log_name : undefined,
+      logName: object?.log_name,
       resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
       protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
-      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      textPayload: object?.text_payload,
       jsonPayload: isSet(object.json_payload) ? Struct.fromSDK(object.json_payload) : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       receiveTimestamp: isSet(object.receive_timestamp) ? Timestamp.fromSDK(object.receive_timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
+      insertId: object?.insert_id,
       httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
@@ -891,9 +877,9 @@ export const LogEntry = {
         return acc;
       }, {}) : {},
       operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
-      trace: isSet(object.trace) ? object.trace : undefined,
-      spanId: isSet(object.span_id) ? object.span_id : undefined,
-      traceSampled: isSet(object.trace_sampled) ? object.trace_sampled : undefined,
+      trace: object?.trace,
+      spanId: object?.span_id,
+      traceSampled: object?.trace_sampled,
       sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined,
       split: isSet(object.split) ? LogSplit.fromSDK(object.split) : undefined
     };
@@ -901,15 +887,15 @@ export const LogEntry = {
 
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
-    message.logName !== undefined && (obj.log_name = message.logName);
+    obj.log_name = message.logName;
     message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toSDK(message.resource) : undefined);
     message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
-    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    obj.text_payload = message.textPayload;
     message.jsonPayload !== undefined && (obj.json_payload = message.jsonPayload ? Struct.toSDK(message.jsonPayload) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     message.receiveTimestamp !== undefined && (obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toSDK(message.receiveTimestamp) : undefined);
     message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
-    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.insert_id = message.insertId;
     message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
     obj.labels = {};
 
@@ -920,67 +906,11 @@ export const LogEntry = {
     }
 
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
-    message.trace !== undefined && (obj.trace = message.trace);
-    message.spanId !== undefined && (obj.span_id = message.spanId);
-    message.traceSampled !== undefined && (obj.trace_sampled = message.traceSampled);
+    obj.trace = message.trace;
+    obj.span_id = message.spanId;
+    obj.trace_sampled = message.traceSampled;
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     message.split !== undefined && (obj.split = message.split ? LogSplit.toSDK(message.split) : undefined);
-    return obj;
-  },
-
-  fromAmino(object: LogEntrySDKType): LogEntry {
-    return {
-      logName: isSet(object.log_name) ? object.log_name : undefined,
-      resource: isSet(object.resource) ? MonitoredResource.fromAmino(object.resource) : undefined,
-      protoPayload: isSet(object.proto_payload) ? Any.fromAmino(object.proto_payload) : undefined,
-      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
-      jsonPayload: isSet(object.json_payload) ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
-      receiveTimestamp: isSet(object.receive_timestamp) ? Timestamp.fromAmino(object.receive_timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
-      httpRequest: isSet(object.http_request) ? HttpRequest.fromAmino(object.http_request) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: isSet(object.operation) ? LogEntryOperation.fromAmino(object.operation) : undefined,
-      trace: isSet(object.trace) ? object.trace : undefined,
-      spanId: isSet(object.span_id) ? object.span_id : undefined,
-      traceSampled: isSet(object.trace_sampled) ? object.trace_sampled : undefined,
-      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined,
-      split: isSet(object.split) ? LogSplit.fromAmino(object.split) : undefined
-    };
-  },
-
-  toAmino(message: LogEntry): LogEntrySDKType {
-    const obj: any = {};
-    message.logName !== undefined && (obj.log_name = message.logName);
-    message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined);
-    message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined);
-    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
-    message.jsonPayload !== undefined && (obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
-    message.receiveTimestamp !== undefined && (obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(message.receiveTimestamp) : undefined);
-    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
-    message.insertId !== undefined && (obj.insert_id = message.insertId);
-    message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined);
-    obj.labels = {};
-
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-
-    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined);
-    message.trace !== undefined && (obj.trace = message.trace);
-    message.spanId !== undefined && (obj.span_id = message.spanId);
-    message.traceSampled !== undefined && (obj.trace_sampled = message.traceSampled);
-    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined);
-    message.split !== undefined && (obj.split = message.split ? LogSplit.toAmino(message.split) : undefined);
     return obj;
   }
 
@@ -1079,37 +1009,19 @@ export const LogEntryOperation = {
 
   fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      producer: isSet(object.producer) ? object.producer : undefined,
-      first: isSet(object.first) ? object.first : undefined,
-      last: isSet(object.last) ? object.last : undefined
+      id: object?.id,
+      producer: object?.producer,
+      first: object?.first,
+      last: object?.last
     };
   },
 
   toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.producer !== undefined && (obj.producer = message.producer);
-    message.first !== undefined && (obj.first = message.first);
-    message.last !== undefined && (obj.last = message.last);
-    return obj;
-  },
-
-  fromAmino(object: LogEntryOperationSDKType): LogEntryOperation {
-    return {
-      id: isSet(object.id) ? object.id : undefined,
-      producer: isSet(object.producer) ? object.producer : undefined,
-      first: isSet(object.first) ? object.first : undefined,
-      last: isSet(object.last) ? object.last : undefined
-    };
-  },
-
-  toAmino(message: LogEntryOperation): LogEntryOperationSDKType {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.producer !== undefined && (obj.producer = message.producer);
-    message.first !== undefined && (obj.first = message.first);
-    message.last !== undefined && (obj.last = message.last);
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
     return obj;
   }
 
@@ -1196,33 +1108,17 @@ export const LogEntrySourceLocation = {
 
   fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
     return {
-      file: isSet(object.file) ? object.file : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      function: isSet(object.function) ? object.function : undefined
+      file: object?.file,
+      line: object?.line,
+      function: object?.function
     };
   },
 
   toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
     const obj: any = {};
-    message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = message.line);
-    message.function !== undefined && (obj.function = message.function);
-    return obj;
-  },
-
-  fromAmino(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
-    return {
-      file: isSet(object.file) ? object.file : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      function: isSet(object.function) ? object.function : undefined
-    };
-  },
-
-  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
-    const obj: any = {};
-    message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = message.line);
-    message.function !== undefined && (obj.function = message.function);
+    obj.file = message.file;
+    obj.line = message.line;
+    obj.function = message.function;
     return obj;
   }
 
@@ -1309,33 +1205,17 @@ export const LogSplit = {
 
   fromSDK(object: LogSplitSDKType): LogSplit {
     return {
-      uid: isSet(object.uid) ? object.uid : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      totalSplits: isSet(object.total_splits) ? object.total_splits : undefined
+      uid: object?.uid,
+      index: object?.index,
+      totalSplits: object?.total_splits
     };
   },
 
   toSDK(message: LogSplit): LogSplitSDKType {
     const obj: any = {};
-    message.uid !== undefined && (obj.uid = message.uid);
-    message.index !== undefined && (obj.index = message.index);
-    message.totalSplits !== undefined && (obj.total_splits = message.totalSplits);
-    return obj;
-  },
-
-  fromAmino(object: LogSplitSDKType): LogSplit {
-    return {
-      uid: isSet(object.uid) ? object.uid : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      totalSplits: isSet(object.total_splits) ? object.total_splits : undefined
-    };
-  },
-
-  toAmino(message: LogSplit): LogSplitSDKType {
-    const obj: any = {};
-    message.uid !== undefined && (obj.uid = message.uid);
-    message.index !== undefined && (obj.index = message.index);
-    message.totalSplits !== undefined && (obj.total_splits = message.totalSplits);
+    obj.uid = message.uid;
+    obj.index = message.index;
+    obj.total_splits = message.totalSplits;
     return obj;
   }
 
