@@ -1,4 +1,4 @@
-export declare const clientMap: ({
+export declare const createClientMap: (QueryClientImpl: string) => ({
     type: string;
     declarations: {
         type: string;

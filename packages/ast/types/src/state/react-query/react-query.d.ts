@@ -3,7 +3,7 @@ import { ProtoService } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
 export declare const createRpcQueryHooks: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration;
 export declare const createRpcQueryHookInterfaces: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration[];
-export declare const createRpcQueryHookClientMap: () => ({
+export declare const createRpcQueryHookClientMap: (context: GenericParseContext, service: ProtoService) => ({
     type: string;
     declarations: {
         type: string;
