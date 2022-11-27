@@ -77,7 +77,6 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
-        args.context.addUtil('isSet');
 
         return t.objectProperty(
             t.identifier(propName),
