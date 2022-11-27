@@ -344,9 +344,9 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           numerator: trustLevel.numerator.toString(),
           denominator: trustLevel.denominator.toString()
         },
-        trusting_period: (trustingPeriod * 1_000_000_000).toString(),
-        unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
-        max_clock_drift: (maxClockDrift * 1_000_000_000).toString(),
+        trusting_period: (trustingPeriod.seconds.toInt() * 1_000_000_000).toString(),
+        unbonding_period: (unbondingPeriod.seconds.toInt() * 1_000_000_000).toString(),
+        max_clock_drift: (maxClockDrift.seconds.toInt() * 1_000_000_000).toString(),
         frozen_height: frozenHeight ? {
           revision_height: omitDefault(frozenHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(frozenHeight.revisionNumber)?.toString()
