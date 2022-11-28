@@ -242,7 +242,7 @@ export class ProtoStore {
                 proto: ref.proto,
                 traversed: traverse(this, ref)
             };
-        })
+        });
         this._traversed = true;
     }
 
