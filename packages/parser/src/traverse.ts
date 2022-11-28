@@ -16,10 +16,14 @@ interface TraverseContext {
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
     exports: TraverseExport;
+    store: ProtoStore;
+    ref: ProtoRef;
 }
 
 class TraverseContext implements TraverseContext {
-    constructor() {
+    constructor(store: ProtoStore, ref: ProtoRef) {
+        this.store = store;
+        this.ref = ref;
         this.acceptsInterface = {};
         this.implementsInterface = {};
         this.imports = {};
@@ -31,13 +35,61 @@ class TraverseContext implements TraverseContext {
         this.imports[filename] = [...new Set([...this.imports[filename], symbolName])];
     }
 
+    addImplements(filename: string, symbolName: string) {
+        this.implementsInterface[filename] = this.implementsInterface[filename] || [];
+        this.implementsInterface[filename] = [...new Set([...this.implementsInterface[filename], symbolName])];
+    }
+
+    addAccepts(filename: string, symbolName: string) {
+        this.acceptsInterface[filename] = this.acceptsInterface[filename] || [];
+        this.acceptsInterface[filename] = [...new Set([...this.acceptsInterface[filename], symbolName])];
+        this.addImport(filename, symbolName);
+    }
+
     addExport(symbolName: string) {
         this.exports[symbolName] = true;
+    }
+
+    getImportNames() {
+
+        const allImports = [
+            ...Object.entries(this.imports),
+        ]
+
+        let counter = 1;
+        const importNames = allImports.reduce((m, [path, names]) => {
+            m[path] = m[path] || {};
+            names.forEach(importName => {
+                const hasConflict = allImports.some(([otherPath, otherNames]) => {
+                    if (path === otherPath) return false;
+                    if (otherNames.includes(importName)) return true;
+                });
+                if (hasConflict || this.exports.hasOwnProperty(importName)) {
+                    m[path][importName] = importName + counter++;
+                } else {
+                    m[path][importName] = importName;
+                }
+            })
+            return m;
+        }, {});
+
+        if (Object.entries(this.acceptsInterface).length) {
+            console.log(this.ref.filename);
+            console.log(this.acceptsInterface);
+            console.log(importNames);
+        }
+
+        // just bc devs use proto syntax for types in the same file
+        // does not mean we need to import them
+        // delete any imports related to "this" file
+        delete importNames[this.ref.filename];
+        return importNames;
+
     }
 }
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
-    const context = new TraverseContext();
+    const context = new TraverseContext(store, ref);
     const obj: ProtoRoot & {
         parsedImports: TraverseImport;
         parsedExports: TraverseExport;
@@ -60,22 +112,8 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
 
     obj.parsedImports = context.imports;
     obj.parsedExports = context.exports;
-    let counter = 1;
-    obj.importNames = Object.entries(context.imports).reduce((m, [path, names]) => {
-        m[path] = m[path] || {};
-        names.forEach(importName => {
-            const hasConflict = Object.entries(context.imports).some(([otherPath, otherNames]) => {
-                if (path === otherPath) return false;
-                if (otherNames.includes(importName)) return true;
-            });
-            if (hasConflict || context.exports.hasOwnProperty(importName)) {
-                m[path][importName] = importName + counter++;
-            } else {
-                m[path][importName] = importName;
-            }
-        })
-        return m;
-    }, {});
+    obj.importNames = context.getImportNames();
+
     // just bc devs use proto syntax for types in the same file
     // does not mean we need to import them
     // delete any imports related to "this" file
@@ -127,7 +165,8 @@ const traverseFields = (
             // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
 
-                context.addImport(ref.filename, obj.name);
+                // context.addImport(ref.filename, obj.name);
+                context.addAccepts(ref.filename, obj.name);
 
                 store.registerAcceptsInterface({
                     name,
@@ -311,8 +350,10 @@ const traverseType = (
     traversed.keyTypes = keyTypes;
 
     if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
+        const name = traversed.options['(cosmos_proto.implements_interface)'];
+        context.addImplements(ref.filename, name);
         store.registerImplementsInterface({
-            name: traversed.options['(cosmos_proto.implements_interface)'],
+            name,
             ref: ref.filename,
             type: obj.name
         });
