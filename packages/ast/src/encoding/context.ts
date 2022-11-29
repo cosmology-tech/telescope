@@ -76,41 +76,7 @@ export class GenericParseContext implements ParseContext {
         return importedAs;
     }
 
-}
-
-export class AminoParseContext extends GenericParseContext implements ParseContext {
-
-    aminoCasingFn: Function;
-
-    constructor(
-        ref: ProtoRef,
-        store: ProtoStore,
-        options: TelescopeOptions
-    ) {
-        super(ref, store, options);
-        this.ref = ref;
-        this.store = store;
-        this.options = options;
-
-        this.setAminoCasingFn();
-
-        if (!this.aminoCasingFn) {
-            throw new Error('missing aminoCasingFn!')
-        }
-        this.aminoCaseField = this.aminoCaseField.bind(this);
-    }
-
-    private setAminoCasingFn() {
-        if (this.aminoCasingFn) return this.aminoCasingFn;
-        this.aminoCasingFn = this.pluginValue('aminoEncoding.casingFn');
-        return this.aminoCasingFn;
-    }
-
-    aminoCaseField(field: ProtoField) {
-        return field.options['(telescope:orig)'];
-    }
-
-    private lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
         const ref = this.store.findProto(currentProtoPath);
         let lookup = this.store.get(ref, field.parsedType.name);
         if (!lookup) {
@@ -159,6 +125,40 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         )
 
         return lookup.obj;
+    }
+
+}
+
+export class AminoParseContext extends GenericParseContext implements ParseContext {
+
+    aminoCasingFn: Function;
+
+    constructor(
+        ref: ProtoRef,
+        store: ProtoStore,
+        options: TelescopeOptions
+    ) {
+        super(ref, store, options);
+        this.ref = ref;
+        this.store = store;
+        this.options = options;
+
+        this.setAminoCasingFn();
+
+        if (!this.aminoCasingFn) {
+            throw new Error('missing aminoCasingFn!')
+        }
+        this.aminoCaseField = this.aminoCaseField.bind(this);
+    }
+
+    private setAminoCasingFn() {
+        if (this.aminoCasingFn) return this.aminoCasingFn;
+        this.aminoCasingFn = this.pluginValue('aminoEncoding.casingFn');
+        return this.aminoCasingFn;
+    }
+
+    aminoCaseField(field: ProtoField) {
+        return field.options['(telescope:orig)'];
     }
 
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string) {
