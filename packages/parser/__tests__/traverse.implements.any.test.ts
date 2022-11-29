@@ -12,10 +12,10 @@ const addRef = ({ filename, content }) => {
     };
     store.protos.push(ref);
 };
-const DogTxt = `
+const DogTxt = (pkg) => `
 syntax = "proto3";
 
-package cosmology.tech;
+package ${pkg};
 option go_package = "github.com/cosmology-tech/go";
 
 message Dog {
@@ -32,11 +32,15 @@ addRef({
 });
 addRef({
     filename: 'cosmology/example/dog1.proto',
-    content: DogTxt
+    content: DogTxt('cosmology.pkg.one')
 });
 addRef({
     filename: 'cosmology/example/dog2.proto',
-    content: DogTxt
+    content: DogTxt('cosmology.pkg.two')
+});
+addRef({
+    filename: 'cosmology/example/dog3.proto',
+    content: DogTxt('cosmology.pkg.three')
 });
 addRef({
     filename: 'cosmology/example/cat.proto',
@@ -61,6 +65,7 @@ syntax = "proto3";
 package cosmology.tech;
 import "google/protobuf/any.proto";
 import "cosmology/example/dog1.proto";
+import "cosmology/example/dog2.proto";
 
 option go_package = "github.com/cosmology-tech/go";
 
@@ -68,7 +73,14 @@ message QueryAnimalsRequest {
     google.protobuf.Any animal = 1 [ (cosmos_proto.accepts_interface) = "AnimalI" ];
 }
 message QueryDog1Request {
-    Dog doggy = 1;
+    cosmology.pkg.one.Dog doggy = 1;
+}
+message QueryDog2Request {
+    cosmology.pkg.two.Dog doggy = 1;
+}
+message Dog {
+    cosmology.pkg.two.Dog doggy1 = 1;
+    cosmology.pkg.one.Dog doggy2 = 2;
 }
 `});
 
@@ -110,19 +122,101 @@ store.traverseAll();
 
 type RefImportHash = Record<string, string[]>;
 
+
+interface Rec {
+    filename: string;
+    anyJoinName: string;
+    msgName: string;
+}
+interface LocalSymbol {
+    type: 'import' | 'export' | 'importFromImplements'
+    symbolName: string;
+    readAs: string;
+    path: string;
+    // msgName: string;
+}
 it('traverses', () => {
     const protos = store.getProtos();
+
+    const records: Rec[] = [];
+
+    // AGGREGATE ALL implements
     protos.forEach(ref => {
-        const exports = ref.traversed?.parsedExports;
-        const imports = ref.traversed?.parsedImports;
-        const acceptsInterface = ref.traversed?.acceptsInterface;
-        const implementsInterface = ref.traversed?.implementsInterface;
-        console.log(ref.filename);
-        console.log(JSON.stringify({
-            exports,
-            imports,
-            acceptsInterface,
-            implementsInterface
-        }, null, 2));
+        const implementsInterface = ref.traversed?.implementsInterface ?? {};
+        Object.keys(implementsInterface).forEach(key => {
+            Object.keys(implementsInterface[key]).forEach(anyJoinName => {
+                implementsInterface[key][anyJoinName].forEach(msgName => {
+                    records.push({
+                        filename: ref.filename,
+                        anyJoinName,
+                        msgName
+                    })
+                });
+            })
+        });
     });
+
+    // class SymbolStore {
+    //     symbols: LocalSymbol[] = [];
+    //     addSymbol (type: string, name: string) {
+
+    //     }
+    // }
+
+    protos.forEach(ref => {
+        const localSymbols: LocalSymbol[] = [];
+        const findAvailableName = (
+            symbolName: string
+        ) => {
+            let counter = 0;
+            while (true) {
+                let testName = !counter ? symbolName : symbolName + counter;
+                const found = localSymbols.find(a => a.readAs === testName);
+                if (found) {
+                    counter++;
+                } else {
+                    return testName;
+                }
+
+            }
+        };
+        Object.keys(ref.traversed?.parsedExports ?? {}).forEach(e => {
+            localSymbols.push({
+                type: 'export',
+                path: ref.filename,
+                symbolName: e,
+                readAs: e
+            })
+        })
+        Object.keys(ref.traversed?.parsedImports ?? {}).forEach(path => {
+            const imps = ref.traversed?.parsedImports?.[path] ?? [];
+            imps.forEach(im => {
+                localSymbols.push({
+                    type: 'import',
+                    path,
+                    symbolName: im,
+                    readAs: findAvailableName(im)
+                })
+            });
+        });
+
+        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
+            const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
+            const notYetInImports = recordsThatMatter.filter(r => {
+                return !localSymbols.find(l => l.path === r.filename && l.symbolName === r.msgName);
+            });
+            notYetInImports.forEach(imp => {
+                localSymbols.push({
+                    type: 'importFromImplements',
+                    path: imp.filename,
+                    readAs: findAvailableName(imp.msgName),
+                    symbolName: imp.msgName
+                })
+            })
+        });
+
+        console.log(localSymbols);
+
+    });
+
 });

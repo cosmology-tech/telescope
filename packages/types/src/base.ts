@@ -143,7 +143,7 @@ export interface ProtoRoot {
 // TODO (NOT DRY) traverse.ts
 type TraverseImportNames = Record<string, Record<string, string>>;
 type TraverseImport = Record<string, string[]>;
-type TraverseAccept = Record<string, Record<string, string[]>>;
+type TraverseAccept = Record<string, string[]>;
 type TraverseImplement = Record<string, Record<string, string[]>>;
 type TraverseExport = Record<string, boolean>;
 

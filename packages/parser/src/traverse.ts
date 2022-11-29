@@ -7,7 +7,7 @@ import { instanceType, lookupSymbolScopes, SCALAR_TYPES } from './utils';
 
 type TraverseImportNames = Record<string, Record<string, string>>;
 type TraverseImport = Record<string, string[]>;
-type TraverseAccept = Record<string, Record<string, string[]>>;
+type TraverseAccept = Record<string, string[]>;
 type TraverseImplement = Record<string, Record<string, string[]>>;
 type TraverseExport = Record<string, boolean>;
 
@@ -41,10 +41,9 @@ export class TraverseContext implements TraverseContext {
         this.implementsInterface[filename][symbolName] = [...new Set([...this.implementsInterface[filename][symbolName], msgName])];
     }
 
-    addAccepts(filename: string, symbolName: string, msgName: string) {
-        this.acceptsInterface[filename] = this.acceptsInterface[filename] || {};
-        this.acceptsInterface[filename][symbolName] = this.acceptsInterface[filename][symbolName] || [];
-        this.acceptsInterface[filename][symbolName] = [...new Set([...this.acceptsInterface[filename][symbolName], msgName])];
+    addAccepts(symbolName: string, msgName: string) {
+        this.acceptsInterface[symbolName] = this.acceptsInterface[symbolName] || [];
+        this.acceptsInterface[symbolName] = [...new Set([...this.acceptsInterface[symbolName], msgName])];
     }
 
     addExport(symbolName: string) {
@@ -77,7 +76,7 @@ export class TraverseContext implements TraverseContext {
         // if (Object.entries(this.acceptsInterface).length) {
         // console.log(this.ref.filename);
         // console.log(this.acceptsInterface);
-        console.log(importNames);
+        // console.log(importNames);
         // }
 
         // just bc devs use proto syntax for types in the same file
@@ -163,10 +162,10 @@ const traverseFields = (
             const value = field.options['(cosmos_proto.accepts_interface)'];
             // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
-                context.addAccepts(ref.filename, name, obj.name);
+                context.addAccepts(name, obj.name);
 
-                console.log('does accept need the same?');
-                console.log(name, obj.name)
+                // console.log('does accept need the same?');
+                // console.log(name, obj.name)
 
                 store.registerAcceptsInterface({
                     name,
