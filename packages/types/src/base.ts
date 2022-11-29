@@ -131,11 +131,27 @@ export interface ProtoRef {
     absolute: string;
     filename: string;
     proto: ProtoRoot;
-    traversed?: ProtoRoot;
+    traversed?: TraversedProtoRoot;
 }
 export interface ProtoRoot {
     package: string;
     imports: string[];
     importNames?: Record<string, Record<string, string>>;
     root: any;
+};
+
+// TODO (NOT DRY) traverse.ts
+type TraverseImportNames = Record<string, Record<string, string>>;
+type TraverseImport = Record<string, string[]>;
+type TraverseAccept = Record<string, Record<string, string[]>>;
+type TraverseImplement = Record<string, Record<string, string[]>>;
+type TraverseExport = Record<string, boolean>;
+
+
+export type TraversedProtoRoot = ProtoRoot & {
+    parsedImports: TraverseImport;
+    parsedExports: TraverseExport;
+    acceptsInterface: TraverseAccept;
+    implementsInterface: TraverseImplement;
+    importNames: TraverseImportNames;
 };

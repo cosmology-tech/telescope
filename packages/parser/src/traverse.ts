@@ -1,17 +1,17 @@
-import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
+import { TraversedProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
 import { ProtoStore } from './store';
 import { instanceType, lookupSymbolScopes, SCALAR_TYPES } from './utils';
 
-type TraverseImportNames = Record<string, any>;
+type TraverseImportNames = Record<string, Record<string, string>>;
 type TraverseImport = Record<string, string[]>;
-type TraverseAccept = Record<string, string[]>;
-type TraverseImplement = Record<string, string[]>;
+type TraverseAccept = Record<string, Record<string, string[]>>;
+type TraverseImplement = Record<string, Record<string, string[]>>;
 type TraverseExport = Record<string, boolean>;
 
-interface TraverseContext {
+export interface TraverseContext {
     imports: TraverseImport;
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
@@ -20,7 +20,7 @@ interface TraverseContext {
     ref: ProtoRef;
 }
 
-class TraverseContext implements TraverseContext {
+export class TraverseContext implements TraverseContext {
     constructor(store: ProtoStore, ref: ProtoRef) {
         this.store = store;
         this.ref = ref;
@@ -35,15 +35,16 @@ class TraverseContext implements TraverseContext {
         this.imports[filename] = [...new Set([...this.imports[filename], symbolName])];
     }
 
-    addImplements(filename: string, symbolName: string) {
-        this.implementsInterface[filename] = this.implementsInterface[filename] || [];
-        this.implementsInterface[filename] = [...new Set([...this.implementsInterface[filename], symbolName])];
+    addImplements(filename: string, symbolName: string, msgName: string) {
+        this.implementsInterface[filename] = this.implementsInterface[filename] || {};
+        this.implementsInterface[filename][symbolName] = this.implementsInterface[filename][symbolName] || [];
+        this.implementsInterface[filename][symbolName] = [...new Set([...this.implementsInterface[filename][symbolName], msgName])];
     }
 
-    addAccepts(filename: string, symbolName: string) {
-        this.acceptsInterface[filename] = this.acceptsInterface[filename] || [];
-        this.acceptsInterface[filename] = [...new Set([...this.acceptsInterface[filename], symbolName])];
-        this.addImport(filename, symbolName);
+    addAccepts(filename: string, symbolName: string, msgName: string) {
+        this.acceptsInterface[filename] = this.acceptsInterface[filename] || {};
+        this.acceptsInterface[filename][symbolName] = this.acceptsInterface[filename][symbolName] || [];
+        this.acceptsInterface[filename][symbolName] = [...new Set([...this.acceptsInterface[filename][symbolName], msgName])];
     }
 
     addExport(symbolName: string) {
@@ -73,28 +74,23 @@ class TraverseContext implements TraverseContext {
             return m;
         }, {});
 
-        if (Object.entries(this.acceptsInterface).length) {
-            console.log(this.ref.filename);
-            console.log(this.acceptsInterface);
-            console.log(importNames);
-        }
+        // if (Object.entries(this.acceptsInterface).length) {
+        // console.log(this.ref.filename);
+        // console.log(this.acceptsInterface);
+        console.log(importNames);
+        // }
 
         // just bc devs use proto syntax for types in the same file
         // does not mean we need to import them
         // delete any imports related to "this" file
         delete importNames[this.ref.filename];
         return importNames;
-
     }
 }
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const context = new TraverseContext(store, ref);
-    const obj: ProtoRoot & {
-        parsedImports: TraverseImport;
-        parsedExports: TraverseExport;
-        importNames: TraverseImportNames;
-    } = {
+    const obj: TraversedProtoRoot = {
         imports: ref.proto.imports,
         package: ref.proto.package,
         root: recursiveTraversal(
@@ -113,6 +109,9 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     obj.parsedImports = context.imports;
     obj.parsedExports = context.exports;
     obj.importNames = context.getImportNames();
+
+    obj.acceptsInterface = context.acceptsInterface;
+    obj.implementsInterface = context.implementsInterface;
 
     // just bc devs use proto syntax for types in the same file
     // does not mean we need to import them
@@ -164,9 +163,10 @@ const traverseFields = (
             const value = field.options['(cosmos_proto.accepts_interface)'];
             // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
+                context.addAccepts(ref.filename, name, obj.name);
 
-                // context.addImport(ref.filename, obj.name);
-                context.addAccepts(ref.filename, obj.name);
+                console.log('does accept need the same?');
+                console.log(name, obj.name)
 
                 store.registerAcceptsInterface({
                     name,
@@ -351,7 +351,7 @@ const traverseType = (
 
     if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
         const name = traversed.options['(cosmos_proto.implements_interface)'];
-        context.addImplements(ref.filename, name);
+        context.addImplements(ref.filename, name, obj.name);
         store.registerImplementsInterface({
             name,
             ref: ref.filename,

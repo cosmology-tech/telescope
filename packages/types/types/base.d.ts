@@ -106,7 +106,7 @@ export interface ProtoRef {
     absolute: string;
     filename: string;
     proto: ProtoRoot;
-    traversed?: ProtoRoot;
+    traversed?: TraversedProtoRoot;
 }
 export interface ProtoRoot {
     package: string;
@@ -114,3 +114,16 @@ export interface ProtoRoot {
     importNames?: Record<string, Record<string, string>>;
     root: any;
 }
+declare type TraverseImportNames = Record<string, Record<string, string>>;
+declare type TraverseImport = Record<string, string[]>;
+declare type TraverseAccept = Record<string, string[]>;
+declare type TraverseImplement = Record<string, Record<string, string[]>>;
+declare type TraverseExport = Record<string, boolean>;
+export declare type TraversedProtoRoot = ProtoRoot & {
+    parsedImports: TraverseImport;
+    parsedExports: TraverseExport;
+    acceptsInterface: TraverseAccept;
+    implementsInterface: TraverseImplement;
+    importNames: TraverseImportNames;
+};
+export {};
