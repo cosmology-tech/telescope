@@ -114,16 +114,26 @@ export interface ProtoRoot {
     importNames?: Record<string, Record<string, string>>;
     root: any;
 }
-declare type TraverseImportNames = Record<string, Record<string, string>>;
-declare type TraverseImport = Record<string, string[]>;
-declare type TraverseAccept = Record<string, string[]>;
-declare type TraverseImplement = Record<string, Record<string, string[]>>;
-declare type TraverseExport = Record<string, boolean>;
+export interface TraverseRecord {
+    filename: string;
+    anyJoinName: string;
+    msgName: string;
+}
+export interface TraverseLocalSymbol {
+    type: 'import' | 'export' | 'importFromImplements';
+    symbolName: string;
+    readAs: string;
+    source: string;
+}
+export declare type TraverseImportNames = Record<string, Record<string, string>>;
+export declare type TraverseImport = Record<string, string[]>;
+export declare type TraverseAccept = Record<string, string[]>;
+export declare type TraverseImplement = Record<string, Record<string, string[]>>;
+export declare type TraverseExport = Record<string, boolean>;
 export declare type TraversedProtoRoot = ProtoRoot & {
     parsedImports: TraverseImport;
     parsedExports: TraverseExport;
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
-    importNames: TraverseImportNames;
+    importNames: TraverseImportNames | null;
 };
-export {};

@@ -140,12 +140,26 @@ export interface ProtoRoot {
     root: any;
 };
 
-// TODO (NOT DRY) traverse.ts
-type TraverseImportNames = Record<string, Record<string, string>>;
-type TraverseImport = Record<string, string[]>;
-type TraverseAccept = Record<string, string[]>;
-type TraverseImplement = Record<string, Record<string, string[]>>;
-type TraverseExport = Record<string, boolean>;
+// TRAVERSAL
+
+export interface TraverseRecord {
+    filename: string;
+    anyJoinName: string;
+    msgName: string;
+}
+export interface TraverseLocalSymbol {
+    type: 'import' | 'export' | 'importFromImplements'
+    symbolName: string;
+    readAs: string;
+    source: string;
+    // msgName: string;
+}
+
+export type TraverseImportNames = Record<string, Record<string, string>>;
+export type TraverseImport = Record<string, string[]>;
+export type TraverseAccept = Record<string, string[]>;
+export type TraverseImplement = Record<string, Record<string, string[]>>;
+export type TraverseExport = Record<string, boolean>;
 
 
 export type TraversedProtoRoot = ProtoRoot & {
@@ -153,5 +167,5 @@ export type TraversedProtoRoot = ProtoRoot & {
     parsedExports: TraverseExport;
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
-    importNames: TraverseImportNames;
+    importNames: TraverseImportNames | null;
 };

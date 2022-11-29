@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`traverses 1`] = `
+[
+  {
+    "readAs": "Any",
+    "ref": "google/protobuf/any.proto",
+    "source": "google/protobuf/any.proto",
+    "symbolName": "Any",
+    "type": "export",
+  },
+  {
+    "readAs": "Dog",
+    "ref": "cosmology/example/dog1.proto",
+    "source": "cosmology/example/dog1.proto",
+    "symbolName": "Dog",
+    "type": "export",
+  },
+  {
+    "readAs": "Dog",
+    "ref": "cosmology/example/dog2.proto",
+    "source": "cosmology/example/dog2.proto",
+    "symbolName": "Dog",
+    "type": "export",
+  },
+  {
+    "readAs": "Dog",
+    "ref": "cosmology/example/dog3.proto",
+    "source": "cosmology/example/dog3.proto",
+    "symbolName": "Dog",
+    "type": "export",
+  },
+  {
+    "readAs": "Cat",
+    "ref": "cosmology/example/cat.proto",
+    "source": "cosmology/example/cat.proto",
+    "symbolName": "Cat",
+    "type": "export",
+  },
+  {
+    "readAs": "QueryAnimalsRequest",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/animal.proto",
+    "symbolName": "QueryAnimalsRequest",
+    "type": "export",
+  },
+  {
+    "readAs": "QueryDog1Request",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/animal.proto",
+    "symbolName": "QueryDog1Request",
+    "type": "export",
+  },
+  {
+    "readAs": "QueryDog2Request",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/animal.proto",
+    "symbolName": "QueryDog2Request",
+    "type": "export",
+  },
+  {
+    "readAs": "Dog",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/animal.proto",
+    "symbolName": "Dog",
+    "type": "export",
+  },
+  {
+    "readAs": "Any",
+    "ref": "cosmology/example/animal.proto",
+    "source": "google/protobuf/any.proto",
+    "symbolName": "Any",
+    "type": "import",
+  },
+  {
+    "readAs": "Dog1",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/dog1.proto",
+    "symbolName": "Dog",
+    "type": "import",
+  },
+  {
+    "readAs": "Dog2",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/dog2.proto",
+    "symbolName": "Dog",
+    "type": "import",
+  },
+  {
+    "readAs": "Dog3",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/dog3.proto",
+    "symbolName": "Dog",
+    "type": "importFromImplements",
+  },
+  {
+    "readAs": "Cat",
+    "ref": "cosmology/example/animal.proto",
+    "source": "cosmology/example/cat.proto",
+    "symbolName": "Cat",
+    "type": "importFromImplements",
+  },
+]
+`;
