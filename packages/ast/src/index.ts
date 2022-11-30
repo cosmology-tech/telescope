@@ -4,4 +4,5 @@ export * from './registry';
 export * from './utils';
 export * from './bundle';
 export * from './state';
+export * from './plugins';
 export * from './types';

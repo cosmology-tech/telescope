@@ -33,6 +33,7 @@ export declare const defaultTelescopeOptions: {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        implementsAcceptsAny?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -128,7 +129,7 @@ export declare const defaultTelescopeOptions: {
 export declare const getTestProtoStore: (options?: TelescopeOptions) => ProtoStore;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     context: AminoParseContext;
-    root: import("@osmonauts/types").ProtoRoot;
+    root: import("@osmonauts/types").TraversedProtoRoot;
     protos: ProtoType[];
 };
 export declare const getGenericParseContext: () => GenericParseContext;

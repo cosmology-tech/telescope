@@ -14,6 +14,10 @@ import {
     TraverseLocalSymbol,
     TraverseImportNames
 } from '@osmonauts/types';
+import {
+    getPluginValue
+} from '@osmonauts/ast';
+
 import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
@@ -59,6 +63,7 @@ export class TraverseContext implements TraverseContext {
         this.exports[symbolName] = true;
     }
 
+    // TODO deprecate this!
     getImportNames() {
 
         const allImports = [
@@ -123,22 +128,24 @@ export const parseFullyTraversedProtoImports = (
 
     // AGGREGATE ALL implements
 
-    if (store.options.prototypes.implementsAcceptsAny) {
-        protos.forEach(ref => {
-            const implementsInterface = ref.traversed?.implementsInterface ?? {};
-            Object.keys(implementsInterface).forEach(key => {
-                Object.keys(implementsInterface[key]).forEach(anyJoinName => {
-                    implementsInterface[key][anyJoinName].forEach(msgName => {
-                        records.push({
-                            filename: ref.filename,
-                            anyJoinName,
-                            msgName
-                        })
-                    });
-                })
-            });
+    protos.forEach(ref => {
+        const enabled = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+        if (!enabled) return;
+
+        //
+        const implementsInterface = ref.traversed?.implementsInterface ?? {};
+        Object.keys(implementsInterface).forEach(key => {
+            Object.keys(implementsInterface[key]).forEach(anyJoinName => {
+                implementsInterface[key][anyJoinName].forEach(msgName => {
+                    records.push({
+                        filename: ref.filename,
+                        anyJoinName,
+                        msgName
+                    })
+                });
+            })
         });
-    }
+    });
 
     protos.forEach(ref => {
         const localSymbols: TraverseLocalSymbol[] = [];
@@ -178,22 +185,23 @@ export const parseFullyTraversedProtoImports = (
             });
         });
 
-        if (store.options.prototypes.implementsAcceptsAny) {
-            Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
-                const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
-                const notYetInImports = recordsThatMatter.filter(r => {
-                    return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
-                });
-                notYetInImports.forEach(imp => {
-                    localSymbols.push({
-                        type: 'importFromImplements',
-                        source: imp.filename,
-                        readAs: findAvailableName(imp.msgName),
-                        symbolName: imp.msgName
-                    })
-                })
+        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
+            const enabled = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+            if (!enabled) return;
+
+            const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
+            const notYetInImports = recordsThatMatter.filter(r => {
+                return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
             });
-        }
+            notYetInImports.forEach(imp => {
+                localSymbols.push({
+                    type: 'importFromImplements',
+                    source: imp.filename,
+                    readAs: findAvailableName(imp.msgName),
+                    symbolName: imp.msgName
+                })
+            })
+        });
 
         localSymbols.forEach(sym => {
             symbols.push({
