@@ -54,6 +54,7 @@ const options: TelescopeOptions = {
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
     allowUndefinedTypes: false,
+    implementsAcceptsAny: false,
     excluded: {
       packages: [
         // 'cosmos.gov.v1',

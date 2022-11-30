@@ -1,11 +1,6 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { TraversedProtoRoot, ProtoRef, TraverseImport, TraverseAccept, TraverseImplement, TraverseExport, TraverseLocalSymbol, TraverseImportNames } from '@osmonauts/types';
 import { ProtoStore } from './store';
-declare type TraverseImportNames = Record<string, any>;
-declare type TraverseImport = Record<string, string[]>;
-declare type TraverseAccept = Record<string, string[]>;
-declare type TraverseImplement = Record<string, string[]>;
-declare type TraverseExport = Record<string, boolean>;
-interface TraverseContext {
+export interface TraverseContext {
     imports: TraverseImport;
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
@@ -13,18 +8,18 @@ interface TraverseContext {
     store: ProtoStore;
     ref: ProtoRef;
 }
-declare class TraverseContext implements TraverseContext {
+export declare class TraverseContext implements TraverseContext {
     constructor(store: ProtoStore, ref: ProtoRef);
     addImport(filename: string, symbolName: string): void;
-    addImplements(filename: string, symbolName: string): void;
-    addAccepts(filename: string, symbolName: string): void;
+    addImplements(filename: string, symbolName: string, msgName: string): void;
+    addAccepts(symbolName: string, msgName: string): void;
     addExport(symbolName: string): void;
     getImportNames(): {};
 }
-export declare const traverse: (store: ProtoStore, ref: ProtoRef) => ProtoRoot & {
-    parsedImports: TraverseImport;
-    parsedExports: TraverseExport;
-    importNames: TraverseImportNames;
+export declare type TraversalSymbols = TraverseLocalSymbol & {
+    ref: string;
 };
+export declare const symbolsToImportNames: (ref: ProtoRef, symbols: TraversalSymbols[]) => TraverseImportNames;
+export declare const parseFullyTraversedProtoImports: (store: ProtoStore) => TraversalSymbols[];
+export declare const traverse: (store: ProtoStore, ref: ProtoRef) => TraversedProtoRoot;
 export declare const recursiveTraversal: (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext, traversal: string[], isNested: boolean) => any;
-export {};

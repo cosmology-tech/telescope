@@ -11,7 +11,8 @@ import {
     TraverseAccept,
     TraverseImplement,
     TraverseExport,
-    TraverseLocalSymbol
+    TraverseLocalSymbol,
+    TraverseImportNames
 } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
@@ -99,6 +100,20 @@ export type TraversalSymbols = TraverseLocalSymbol & {
     ref: string;
 }
 
+export const symbolsToImportNames = (
+    ref: ProtoRef,
+    symbols: TraversalSymbols[]
+): TraverseImportNames => {
+    return symbols.reduce((m, v) => {
+        // imports to self... nope.
+        if (v.source === ref.filename) return m;
+
+        m[v.source] = m[v.source] || {};
+        m[v.source][v.symbolName] = v.readAs;
+        return m;
+    }, {});
+};
+
 export const parseFullyTraversedProtoImports = (
     store: ProtoStore
 ): TraversalSymbols[] => {
@@ -107,20 +122,23 @@ export const parseFullyTraversedProtoImports = (
     const symbols: TraversalSymbols[] = [];
 
     // AGGREGATE ALL implements
-    protos.forEach(ref => {
-        const implementsInterface = ref.traversed?.implementsInterface ?? {};
-        Object.keys(implementsInterface).forEach(key => {
-            Object.keys(implementsInterface[key]).forEach(anyJoinName => {
-                implementsInterface[key][anyJoinName].forEach(msgName => {
-                    records.push({
-                        filename: ref.filename,
-                        anyJoinName,
-                        msgName
-                    })
-                });
-            })
+
+    if (store.options.prototypes.implementsAcceptsAny) {
+        protos.forEach(ref => {
+            const implementsInterface = ref.traversed?.implementsInterface ?? {};
+            Object.keys(implementsInterface).forEach(key => {
+                Object.keys(implementsInterface[key]).forEach(anyJoinName => {
+                    implementsInterface[key][anyJoinName].forEach(msgName => {
+                        records.push({
+                            filename: ref.filename,
+                            anyJoinName,
+                            msgName
+                        })
+                    });
+                })
+            });
         });
-    });
+    }
 
     protos.forEach(ref => {
         const localSymbols: TraverseLocalSymbol[] = [];
@@ -160,20 +178,22 @@ export const parseFullyTraversedProtoImports = (
             });
         });
 
-        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
-            const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
-            const notYetInImports = recordsThatMatter.filter(r => {
-                return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
-            });
-            notYetInImports.forEach(imp => {
-                localSymbols.push({
-                    type: 'importFromImplements',
-                    source: imp.filename,
-                    readAs: findAvailableName(imp.msgName),
-                    symbolName: imp.msgName
+        if (store.options.prototypes.implementsAcceptsAny) {
+            Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
+                const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
+                const notYetInImports = recordsThatMatter.filter(r => {
+                    return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
+                });
+                notYetInImports.forEach(imp => {
+                    localSymbols.push({
+                        type: 'importFromImplements',
+                        source: imp.filename,
+                        readAs: findAvailableName(imp.msgName),
+                        symbolName: imp.msgName
+                    })
                 })
-            })
-        });
+            });
+        }
 
         localSymbols.forEach(sym => {
             symbols.push({
@@ -200,12 +220,11 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
         ),
         parsedImports: null,
         parsedExports: null,
-        importNames: null,
+        importNames: {},
     };
 
     obj.parsedImports = context.imports;
     obj.parsedExports = context.exports;
-    obj.importNames = context.getImportNames();
 
     obj.acceptsInterface = context.acceptsInterface;
     obj.implementsInterface = context.implementsInterface;
@@ -213,7 +232,7 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     // just bc devs use proto syntax for types in the same file
     // does not mean we need to import them
     // delete any imports related to "this" file
-    delete obj.importNames[ref.filename];
+    // delete obj.importNames[ref.filename];
     delete obj.parsedImports[ref.filename];
     return obj;
 };

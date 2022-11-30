@@ -44,6 +44,8 @@ interface TelescopeOpts {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
 
+        implementsAcceptsAny?: boolean;
+
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -177,6 +179,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
+
+        implementsAcceptsAny: false,
 
         optionalQueryParams: false,
         optionalPageRequests: false,

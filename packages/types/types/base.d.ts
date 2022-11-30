@@ -136,4 +136,5 @@ export declare type TraversedProtoRoot = ProtoRoot & {
     acceptsInterface: TraverseAccept;
     implementsInterface: TraverseImplement;
     importNames: TraverseImportNames | null;
+    symbols: TraverseLocalSymbol | null;
 };

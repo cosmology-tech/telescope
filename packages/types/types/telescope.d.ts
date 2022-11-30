@@ -36,6 +36,7 @@ interface TelescopeOpts {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        implementsAcceptsAny?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
