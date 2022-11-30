@@ -2,19 +2,9 @@
 
 exports[`google/api/expr/v1alpha1/checked 1`] = `
 {
-  "importNames": {
-    "google/api/expr/v1alpha1/syntax.proto": {
-      "Constant": "Constant",
-      "Expr": "Expr",
-      "SourceInfo": "SourceInfo",
-    },
-    "google/protobuf/empty.proto": {
-      "Empty": "Empty",
-    },
-    "google/protobuf/struct.proto": {
-      "NullValue": "NullValue",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "google/api/expr/v1alpha1/syntax.proto",
     "google/protobuf/empty.proto",

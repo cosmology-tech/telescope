@@ -2,14 +2,9 @@
 
 exports[`cosmos/authz/v1beta1/authz 1`] = `
 {
-  "importNames": {
-    "google/protobuf/any.proto": {
-      "Any": "Any",
-    },
-    "google/protobuf/timestamp.proto": {
-      "Timestamp": "Timestamp",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "cosmos_proto/cosmos.proto",
     "google/protobuf/timestamp.proto",
@@ -259,14 +254,9 @@ exports[`cosmos/authz/v1beta1/authz 1`] = `
 
 exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 {
-  "importNames": {
-    "cosmos/crypto/multisig/v1beta1/multisig.proto": {
-      "CompactBitArray": "CompactBitArray",
-    },
-    "google/protobuf/any.proto": {
-      "Any": "Any",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "cosmos/crypto/multisig/v1beta1/multisig.proto",
     "google/protobuf/any.proto",
@@ -601,20 +591,9 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
 
 exports[`cosmos/tx/v1beta1/tx 1`] = `
 {
-  "importNames": {
-    "cosmos/base/v1beta1/coin.proto": {
-      "Coin": "Coin",
-    },
-    "cosmos/crypto/multisig/v1beta1/multisig.proto": {
-      "CompactBitArray": "CompactBitArray",
-    },
-    "cosmos/tx/signing/v1beta1/signing.proto": {
-      "SignMode": "SignMode",
-    },
-    "google/protobuf/any.proto": {
-      "Any": "Any",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "gogoproto/gogo.proto",
     "cosmos/crypto/multisig/v1beta1/multisig.proto",
@@ -1640,14 +1619,9 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
 
 exports[`cosmwasm/wasm/v1/proposal 1`] = `
 {
-  "importNames": {
-    "cosmos/base/v1beta1/coin.proto": {
-      "Coin": "Coin",
-    },
-    "cosmwasm/wasm/v1/types.proto": {
-      "AccessConfig": "AccessConfig",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "gogoproto/gogo.proto",
     "cosmos/base/v1beta1/coin.proto",
@@ -2496,17 +2470,9 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
 exports[`cosmwasm/wasm/v1/query 1`] = `
 {
-  "importNames": {
-    "cosmos/base/query/v1beta1/pagination.proto": {
-      "PageRequest": "PageRequest",
-      "PageResponse": "PageResponse",
-    },
-    "cosmwasm/wasm/v1/types.proto": {
-      "ContractCodeHistoryEntry": "ContractCodeHistoryEntry",
-      "ContractInfo": "ContractInfo",
-      "Model": "Model",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "gogoproto/gogo.proto",
     "cosmwasm/wasm/v1/types.proto",
@@ -3915,19 +3881,9 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
 exports[`google/api/expr/v1alpha1/checked 1`] = `
 {
-  "importNames": {
-    "google/api/expr/v1alpha1/syntax.proto": {
-      "Constant": "Constant",
-      "Expr": "Expr",
-      "SourceInfo": "SourceInfo",
-    },
-    "google/protobuf/empty.proto": {
-      "Empty": "Empty",
-    },
-    "google/protobuf/struct.proto": {
-      "NullValue": "NullValue",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "google/api/expr/v1alpha1/syntax.proto",
     "google/protobuf/empty.proto",
@@ -5070,14 +5026,9 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
 
 exports[`osmosis/claim/v1beta1/params 1`] = `
 {
-  "importNames": {
-    "google/protobuf/duration.proto": {
-      "Duration": "Duration",
-    },
-    "google/protobuf/timestamp.proto": {
-      "Timestamp": "Timestamp",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "gogoproto/gogo.proto",
     "google/protobuf/duration.proto",
@@ -5218,11 +5169,9 @@ exports[`osmosis/claim/v1beta1/params 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx 1`] = `
 {
-  "importNames": {
-    "cosmos/base/v1beta1/coin.proto": {
-      "Coin": "Coin",
-    },
-  },
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
   "imports": [
     "gogoproto/gogo.proto",
     "cosmos/base/v1beta1/coin.proto",

@@ -14,7 +14,6 @@ export declare class TraverseContext implements TraverseContext {
     addImplements(filename: string, symbolName: string, msgName: string): void;
     addAccepts(symbolName: string, msgName: string): void;
     addExport(symbolName: string): void;
-    getImportNames(): {};
 }
 export declare type TraversalSymbols = TraverseLocalSymbol & {
     ref: string;

@@ -2,6 +2,8 @@
 
 exports[`cosmos/base/query/v1beta1/pagination 1`] = `
 {
+  "acceptsInterface": {},
+  "implementsInterface": {},
   "importNames": {},
   "imports": undefined,
   "package": "cosmos.base.query.v1beta1",
@@ -199,6 +201,8 @@ exports[`cosmos/base/query/v1beta1/pagination 1`] = `
 
 exports[`google/rpc/code 1`] = `
 {
+  "acceptsInterface": {},
+  "implementsInterface": {},
   "importNames": {},
   "imports": undefined,
   "package": "google.rpc",

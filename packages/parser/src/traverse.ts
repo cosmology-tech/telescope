@@ -62,43 +62,6 @@ export class TraverseContext implements TraverseContext {
     addExport(symbolName: string) {
         this.exports[symbolName] = true;
     }
-
-    // TODO deprecate this!
-    getImportNames() {
-
-        const allImports = [
-            ...Object.entries(this.imports),
-        ]
-
-        let counter = 1;
-        const importNames = allImports.reduce((m, [path, names]) => {
-            m[path] = m[path] || {};
-            names.forEach(importName => {
-                const hasConflict = allImports.some(([otherPath, otherNames]) => {
-                    if (path === otherPath) return false;
-                    if (otherNames.includes(importName)) return true;
-                });
-                if (hasConflict || this.exports.hasOwnProperty(importName)) {
-                    m[path][importName] = importName + counter++;
-                } else {
-                    m[path][importName] = importName;
-                }
-            })
-            return m;
-        }, {});
-
-        // if (Object.entries(this.acceptsInterface).length) {
-        // console.log(this.ref.filename);
-        // console.log(this.acceptsInterface);
-        // console.log(importNames);
-        // }
-
-        // just bc devs use proto syntax for types in the same file
-        // does not mean we need to import them
-        // delete any imports related to "this" file
-        delete importNames[this.ref.filename];
-        return importNames;
-    }
 }
 
 export type TraversalSymbols = TraverseLocalSymbol & {
@@ -283,7 +246,8 @@ const traverseFields = (
             return field;
         }
 
-        if (field.options?.['(cosmos_proto.accepts_interface)']) {
+        const implementsAcceptsAny = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+        if (implementsAcceptsAny && field.options?.['(cosmos_proto.accepts_interface)']) {
             const value = field.options['(cosmos_proto.accepts_interface)'];
             // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
@@ -463,7 +427,8 @@ const traverseType = (
 
     traversed.keyTypes = keyTypes;
 
-    if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
+    const implementsAcceptsAny = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+    if (implementsAcceptsAny && traversed.options?.["(cosmos_proto.implements_interface)"]) {
         const name = traversed.options['(cosmos_proto.implements_interface)'];
         context.addImplements(ref.filename, name, obj.name);
     }

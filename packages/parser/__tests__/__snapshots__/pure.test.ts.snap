@@ -2,6 +2,8 @@
 
 exports[`pure proto 1`] = `
 {
+  "acceptsInterface": {},
+  "implementsInterface": {},
   "importNames": {},
   "imports": undefined,
   "package": "cosmology.finance",
