@@ -84,6 +84,7 @@ message Dog {
 }
 `});
 
+store.options.prototypes!.implementsAcceptsAny = true;
 store.traverseAll();
 
 it('traverses', () => {

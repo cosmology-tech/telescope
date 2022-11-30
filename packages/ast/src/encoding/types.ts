@@ -53,51 +53,42 @@ export const getFieldTypeReference = (
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
+    // if (
+    //     field.parsedType?.type === 'Type' &&
+    //     field.parsedType?.name === 'Any' &&
+    //     field.rule !== 'repeated' &&
+    //     field.options?.['(cosmos_proto.accepts_interface)'] &&
+    //     context.store.options.prototypes.implementsAcceptsAny
+    // ) {
+    //     const lookupInterface = field.options['(cosmos_proto.accepts_interface)'];
+
+    //     // crude way of doing this (e.g. Thing vs. some.scope.Thing could be same!)
+    //     // const found = context.store.implementsInterface[lookupInterface];
+    //     const found = context.ref.traversed.symbols
+    //     if (found && found.length) {
+
+
+    //         // ast = t.tsUnionType(
+    //         //     [
+    //         //         ...found.map(a => {
+    //         //             // - [ ] insert import...
+    //         //             return t.tsTypeReference(t.identifier(a.type));
+    //         //         }),
+    //         //         t.tsUndefinedKeyword()
+    //         //     ]
+    //         // )
+    //     } else {
+    //         console.log('INTERFACE NOT FOUND: ', lookupInterface);
+    //         ast = t.tsUnionType(
+    //             [
+    //                 typ,
+    //                 t.tsUndefinedKeyword()
+    //             ]
+    //         );
+    //     }
+    // }
+
     if (
-        field.parsedType?.type === 'Type' &&
-        field.parsedType?.name === 'Any' &&
-        field.rule !== 'repeated' &&
-        field.options?.['(cosmos_proto.accepts_interface)']
-    ) {
-        const lookupInterface = field.options['(cosmos_proto.accepts_interface)'];
-
-        // crude way of doing this (e.g. Thing vs. some.scope.Thing could be same!)
-        const found = context.store.implementsInterface[lookupInterface];
-        if (found && found.length) {
-
-            found.forEach((f, i) => {
-                // perhaps this should be done sooner!
-                // maybe in parser!
-                context.addImport({
-                    import: f.ref,
-                    name: f.type,
-                    type: 'typeImport',
-                    importedAs: f.name + i
-                });
-
-                // TODO - [ ] write this method
-                // given a SymbolType + filepath + ref => SymbolName for that ref
-            })
-
-            ast = t.tsUnionType(
-                [
-                    ...found.map(a => {
-                        // - [ ] insert import...
-                        return t.tsTypeReference(t.identifier(a.type));
-                    }),
-                    t.tsUndefinedKeyword()
-                ]
-            )
-        } else {
-            console.log('INTERFACE NOT FOUND: ', lookupInterface);
-            ast = t.tsUnionType(
-                [
-                    typ,
-                    t.tsUndefinedKeyword()
-                ]
-            );
-        }
-    } else if (
         field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&
         context.pluginValue('prototypes.allowUndefinedTypes')

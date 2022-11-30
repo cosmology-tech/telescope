@@ -280,16 +280,6 @@ const traverseFields = (
             // some of these contain a comma ...
             value.split(',').map(a => a.trim()).forEach(name => {
                 context.addAccepts(name, obj.name);
-
-                // console.log('does accept need the same?');
-                // console.log(name, obj.name)
-
-                store.registerAcceptsInterface({
-                    name,
-                    ref: ref.filename,
-                    field: field.name,
-                    type: obj.name
-                });
             });
         }
 
@@ -468,11 +458,6 @@ const traverseType = (
     if (traversed.options?.["(cosmos_proto.implements_interface)"]) {
         const name = traversed.options['(cosmos_proto.implements_interface)'];
         context.addImplements(ref.filename, name, obj.name);
-        store.registerImplementsInterface({
-            name,
-            ref: ref.filename,
-            type: obj.name
-        });
     }
 
     return traversed as ProtoType;

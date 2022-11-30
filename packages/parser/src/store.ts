@@ -46,19 +46,6 @@ export const parseProto = (content, options?: ParseProtoOptions) => {
     }
     return parse(content, options);
 };
-
-interface AcceptsInfo {
-    name: string;
-    ref: ProtoRef['filename']
-    field: ProtoField['name'];
-    type: ProtoField['name'];
-}
-
-interface ImplementsInfo {
-    name: string;
-    ref: ProtoRef['filename'];
-    type: ProtoType['name'];
-}
 export class ProtoStore {
     files: string[];
     protoDirs: string[];
@@ -69,9 +56,6 @@ export class ProtoStore {
 
     requests: Record<string, ProtoServiceMethod> = {};
     responses: Record<string, ProtoServiceMethod> = {};
-
-    acceptsInterface: Record<string, AcceptsInfo[]> = {};
-    implementsInterface: Record<string, ImplementsInfo[]> = {};
 
     _traversed: boolean = false;
     _symbols: TraversalSymbols[] = [];
@@ -107,18 +91,6 @@ export class ProtoStore {
     registerRequest(svc: ProtoServiceMethod): void {
         this.requests[svc.requestType] = svc;
         this.responses[svc.responseType] = svc;
-    };
-
-    registerAcceptsInterface(info: AcceptsInfo): void {
-        const name = info.name;
-        this.acceptsInterface[name] = this.acceptsInterface[name] || [];
-        this.acceptsInterface[name].push(info);
-    };
-
-    registerImplementsInterface(info: ImplementsInfo): void {
-        const name = info.name;
-        this.implementsInterface[name] = this.implementsInterface[name] || [];
-        this.implementsInterface[name].push(info);
     };
 
     processProtos(contents: { absolute: string, filename: string, content: string }[]) {

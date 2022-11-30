@@ -91,14 +91,14 @@ exports[`traverses 1`] = `
     "ref": "cosmology/example/animal.proto",
     "source": "cosmology/example/dog3.proto",
     "symbolName": "Dog",
-    "type": "importFromImplements",
+    "type": "import",
   },
   {
     "readAs": "Cat",
     "ref": "cosmology/example/animal.proto",
     "source": "cosmology/example/cat.proto",
     "symbolName": "Cat",
-    "type": "importFromImplements",
+    "type": "import",
   },
 ]
 `;
