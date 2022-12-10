@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
@@ -74,6 +74,44 @@ export interface QueryPoolTypeResponseSDKType {
   pool_type: string;
 }
 
+/** =============================== CalcJoinPoolShares */
+export interface QueryCalcJoinPoolSharesRequest {
+  poolId: Long;
+  tokensIn: Coin[];
+}
+
+/** =============================== CalcJoinPoolShares */
+export interface QueryCalcJoinPoolSharesRequestSDKType {
+  pool_id: Long;
+  tokens_in: CoinSDKType[];
+}
+export interface QueryCalcJoinPoolSharesResponse {
+  shareOutAmount: string;
+  tokensOut: Coin[];
+}
+export interface QueryCalcJoinPoolSharesResponseSDKType {
+  share_out_amount: string;
+  tokens_out: CoinSDKType[];
+}
+
+/** =============================== CalcExitPoolCoinsFromShares */
+export interface QueryCalcExitPoolCoinsFromSharesRequest {
+  poolId: Long;
+  shareInAmount: string;
+}
+
+/** =============================== CalcExitPoolCoinsFromShares */
+export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
+  pool_id: Long;
+  share_in_amount: string;
+}
+export interface QueryCalcExitPoolCoinsFromSharesResponse {
+  tokensOut: Coin[];
+}
+export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
+  tokens_out: CoinSDKType[];
+}
+
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
   poolId: Long;
@@ -122,10 +160,32 @@ export interface QueryTotalSharesResponseSDKType {
   total_shares?: CoinSDKType;
 }
 
+/** =============================== CalcJoinPoolNoSwapShares */
+export interface QueryCalcJoinPoolNoSwapSharesRequest {
+  poolId: Long;
+  tokensIn: Coin[];
+}
+
+/** =============================== CalcJoinPoolNoSwapShares */
+export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
+  pool_id: Long;
+  tokens_in: CoinSDKType[];
+}
+export interface QueryCalcJoinPoolNoSwapSharesResponse {
+  tokensOut: Coin[];
+  sharesOut: string;
+}
+export interface QueryCalcJoinPoolNoSwapSharesResponseSDKType {
+  tokens_out: CoinSDKType[];
+  shares_out: string;
+}
+
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
+
+/** @deprecated */
 export interface QuerySpotPriceRequest {
   poolId: Long;
   baseAssetDenom: string;
@@ -136,16 +196,42 @@ export interface QuerySpotPriceRequest {
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
  */
+
+/** @deprecated */
 export interface QuerySpotPriceRequestSDKType {
   pool_id: Long;
   base_asset_denom: string;
   quote_asset_denom: string;
+}
+export interface QueryPoolsWithFilterRequest {
+  minLiquidity: Coin[];
+  poolType: string;
+  pagination?: PageRequest;
+}
+export interface QueryPoolsWithFilterRequestSDKType {
+  min_liquidity: CoinSDKType[];
+  pool_type: string;
+  pagination?: PageRequestSDKType;
+}
+export interface QueryPoolsWithFilterResponse {
+  pools: Any[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+export interface QueryPoolsWithFilterResponseSDKType {
+  pools: AnySDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
+
+/** @deprecated */
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
@@ -155,6 +241,8 @@ export interface QuerySpotPriceResponse {
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  * query.
  */
+
+/** @deprecated */
 export interface QuerySpotPriceResponseSDKType {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
@@ -162,6 +250,7 @@ export interface QuerySpotPriceResponseSDKType {
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   poolId: Long;
   tokenIn: string;
@@ -170,6 +259,7 @@ export interface QuerySwapExactAmountInRequest {
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   pool_id: Long;
   token_in: string;
@@ -184,6 +274,7 @@ export interface QuerySwapExactAmountInResponseSDKType {
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   poolId: Long;
   routes: SwapAmountOutRoute[];
@@ -192,6 +283,7 @@ export interface QuerySwapExactAmountOutRequest {
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   pool_id: Long;
   routes: SwapAmountOutRouteSDKType[];
@@ -773,6 +865,360 @@ export const QueryPoolTypeResponse = {
 
 };
 
+function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequest {
+  return {
+    poolId: Long.UZERO,
+    tokensIn: []
+  };
+}
+
+export const QueryCalcJoinPoolSharesRequest = {
+  encode(message: QueryCalcJoinPoolSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
+      writer.uint32(8).uint64(message.poolId);
+    }
+
+    for (const v of message.tokensIn) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcJoinPoolSharesRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.tokensIn.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryCalcJoinPoolSharesRequest): unknown {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.tokensIn) {
+      obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokensIn = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesRequest>): QueryCalcJoinPoolSharesRequest {
+    const message = createBaseQueryCalcJoinPoolSharesRequest();
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryCalcJoinPoolSharesRequestSDKType): QueryCalcJoinPoolSharesRequest {
+    return {
+      poolId: object?.pool_id,
+      tokensIn: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryCalcJoinPoolSharesRequest): QueryCalcJoinPoolSharesRequestSDKType {
+    const obj: any = {};
+    obj.pool_id = message.poolId;
+
+    if (message.tokensIn) {
+      obj.tokens_in = message.tokensIn.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokens_in = [];
+    }
+
+    return obj;
+  }
+
+};
+
+function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesResponse {
+  return {
+    shareOutAmount: "",
+    tokensOut: []
+  };
+}
+
+export const QueryCalcJoinPoolSharesResponse = {
+  encode(message: QueryCalcJoinPoolSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.shareOutAmount !== "") {
+      writer.uint32(10).string(message.shareOutAmount);
+    }
+
+    for (const v of message.tokensOut) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcJoinPoolSharesResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.shareOutAmount = reader.string();
+          break;
+
+        case 2:
+          message.tokensOut.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcJoinPoolSharesResponse {
+    return {
+      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
+      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryCalcJoinPoolSharesResponse): unknown {
+    const obj: any = {};
+    message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
+
+    if (message.tokensOut) {
+      obj.tokensOut = message.tokensOut.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokensOut = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesResponse>): QueryCalcJoinPoolSharesResponse {
+    const message = createBaseQueryCalcJoinPoolSharesResponse();
+    message.shareOutAmount = object.shareOutAmount ?? "";
+    message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryCalcJoinPoolSharesResponseSDKType): QueryCalcJoinPoolSharesResponse {
+    return {
+      shareOutAmount: object?.share_out_amount,
+      tokensOut: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryCalcJoinPoolSharesResponse): QueryCalcJoinPoolSharesResponseSDKType {
+    const obj: any = {};
+    obj.share_out_amount = message.shareOutAmount;
+
+    if (message.tokensOut) {
+      obj.tokens_out = message.tokensOut.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokens_out = [];
+    }
+
+    return obj;
+  }
+
+};
+
+function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolCoinsFromSharesRequest {
+  return {
+    poolId: Long.UZERO,
+    shareInAmount: ""
+  };
+}
+
+export const QueryCalcExitPoolCoinsFromSharesRequest = {
+  encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
+      writer.uint32(8).uint64(message.poolId);
+    }
+
+    if (message.shareInAmount !== "") {
+      writer.uint32(18).string(message.shareInAmount);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.shareInAmount = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequest {
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
+    };
+  },
+
+  toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): unknown {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    message.shareInAmount !== undefined && (obj.shareInAmount = message.shareInAmount);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesRequest>): QueryCalcExitPoolCoinsFromSharesRequest {
+    const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.shareInAmount = object.shareInAmount ?? "";
+    return message;
+  },
+
+  fromSDK(object: QueryCalcExitPoolCoinsFromSharesRequestSDKType): QueryCalcExitPoolCoinsFromSharesRequest {
+    return {
+      poolId: object?.pool_id,
+      shareInAmount: object?.share_in_amount
+    };
+  },
+
+  toSDK(message: QueryCalcExitPoolCoinsFromSharesRequest): QueryCalcExitPoolCoinsFromSharesRequestSDKType {
+    const obj: any = {};
+    obj.pool_id = message.poolId;
+    obj.share_in_amount = message.shareInAmount;
+    return obj;
+  }
+
+};
+
+function createBaseQueryCalcExitPoolCoinsFromSharesResponse(): QueryCalcExitPoolCoinsFromSharesResponse {
+  return {
+    tokensOut: []
+  };
+}
+
+export const QueryCalcExitPoolCoinsFromSharesResponse = {
+  encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.tokensOut) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcExitPoolCoinsFromSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.tokensOut.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesResponse {
+    return {
+      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryCalcExitPoolCoinsFromSharesResponse): unknown {
+    const obj: any = {};
+
+    if (message.tokensOut) {
+      obj.tokensOut = message.tokensOut.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokensOut = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesResponse>): QueryCalcExitPoolCoinsFromSharesResponse {
+    const message = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
+    message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryCalcExitPoolCoinsFromSharesResponseSDKType): QueryCalcExitPoolCoinsFromSharesResponse {
+    return {
+      tokensOut: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryCalcExitPoolCoinsFromSharesResponse): QueryCalcExitPoolCoinsFromSharesResponseSDKType {
+    const obj: any = {};
+
+    if (message.tokensOut) {
+      obj.tokens_out = message.tokensOut.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokens_out = [];
+    }
+
+    return obj;
+  }
+
+};
+
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
   return {
     poolId: Long.UZERO
@@ -1199,6 +1645,196 @@ export const QueryTotalSharesResponse = {
 
 };
 
+function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSwapSharesRequest {
+  return {
+    poolId: Long.UZERO,
+    tokensIn: []
+  };
+}
+
+export const QueryCalcJoinPoolNoSwapSharesRequest = {
+  encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
+      writer.uint32(8).uint64(message.poolId);
+    }
+
+    for (const v of message.tokensIn) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.tokensIn.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): unknown {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+
+    if (message.tokensIn) {
+      obj.tokensIn = message.tokensIn.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokensIn = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesRequest>): QueryCalcJoinPoolNoSwapSharesRequest {
+    const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryCalcJoinPoolNoSwapSharesRequestSDKType): QueryCalcJoinPoolNoSwapSharesRequest {
+    return {
+      poolId: object?.pool_id,
+      tokensIn: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryCalcJoinPoolNoSwapSharesRequest): QueryCalcJoinPoolNoSwapSharesRequestSDKType {
+    const obj: any = {};
+    obj.pool_id = message.poolId;
+
+    if (message.tokensIn) {
+      obj.tokens_in = message.tokensIn.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokens_in = [];
+    }
+
+    return obj;
+  }
+
+};
+
+function createBaseQueryCalcJoinPoolNoSwapSharesResponse(): QueryCalcJoinPoolNoSwapSharesResponse {
+  return {
+    tokensOut: [],
+    sharesOut: ""
+  };
+}
+
+export const QueryCalcJoinPoolNoSwapSharesResponse = {
+  encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.tokensOut) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.sharesOut !== "") {
+      writer.uint32(18).string(message.sharesOut);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCalcJoinPoolNoSwapSharesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.tokensOut.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.sharesOut = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesResponse {
+    return {
+      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : [],
+      sharesOut: isSet(object.sharesOut) ? String(object.sharesOut) : ""
+    };
+  },
+
+  toJSON(message: QueryCalcJoinPoolNoSwapSharesResponse): unknown {
+    const obj: any = {};
+
+    if (message.tokensOut) {
+      obj.tokensOut = message.tokensOut.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.tokensOut = [];
+    }
+
+    message.sharesOut !== undefined && (obj.sharesOut = message.sharesOut);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesResponse>): QueryCalcJoinPoolNoSwapSharesResponse {
+    const message = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
+    message.tokensOut = object.tokensOut?.map(e => Coin.fromPartial(e)) || [];
+    message.sharesOut = object.sharesOut ?? "";
+    return message;
+  },
+
+  fromSDK(object: QueryCalcJoinPoolNoSwapSharesResponseSDKType): QueryCalcJoinPoolNoSwapSharesResponse {
+    return {
+      tokensOut: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDK(e)) : [],
+      sharesOut: object?.shares_out
+    };
+  },
+
+  toSDK(message: QueryCalcJoinPoolNoSwapSharesResponse): QueryCalcJoinPoolNoSwapSharesResponseSDKType {
+    const obj: any = {};
+
+    if (message.tokensOut) {
+      obj.tokens_out = message.tokensOut.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokens_out = [];
+    }
+
+    obj.shares_out = message.sharesOut;
+    return obj;
+  }
+
+};
+
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
     poolId: Long.UZERO,
@@ -1291,6 +1927,210 @@ export const QuerySpotPriceRequest = {
     obj.pool_id = message.poolId;
     obj.base_asset_denom = message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom;
+    return obj;
+  }
+
+};
+
+function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
+  return {
+    minLiquidity: [],
+    poolType: "",
+    pagination: undefined
+  };
+}
+
+export const QueryPoolsWithFilterRequest = {
+  encode(message: QueryPoolsWithFilterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.minLiquidity) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.poolType !== "") {
+      writer.uint32(18).string(message.poolType);
+    }
+
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryPoolsWithFilterRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.minLiquidity.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.poolType = reader.string();
+          break;
+
+        case 3:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryPoolsWithFilterRequest {
+    return {
+      minLiquidity: Array.isArray(object?.minLiquidity) ? object.minLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
+      poolType: isSet(object.poolType) ? String(object.poolType) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
+  },
+
+  toJSON(message: QueryPoolsWithFilterRequest): unknown {
+    const obj: any = {};
+
+    if (message.minLiquidity) {
+      obj.minLiquidity = message.minLiquidity.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.minLiquidity = [];
+    }
+
+    message.poolType !== undefined && (obj.poolType = message.poolType);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryPoolsWithFilterRequest>): QueryPoolsWithFilterRequest {
+    const message = createBaseQueryPoolsWithFilterRequest();
+    message.minLiquidity = object.minLiquidity?.map(e => Coin.fromPartial(e)) || [];
+    message.poolType = object.poolType ?? "";
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+
+  fromSDK(object: QueryPoolsWithFilterRequestSDKType): QueryPoolsWithFilterRequest {
+    return {
+      minLiquidity: Array.isArray(object?.min_liquidity) ? object.min_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
+      poolType: object?.pool_type,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolsWithFilterRequest): QueryPoolsWithFilterRequestSDKType {
+    const obj: any = {};
+
+    if (message.minLiquidity) {
+      obj.min_liquidity = message.minLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.min_liquidity = [];
+    }
+
+    obj.pool_type = message.poolType;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  }
+
+};
+
+function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
+  return {
+    pools: [],
+    pagination: undefined
+  };
+}
+
+export const QueryPoolsWithFilterResponse = {
+  encode(message: QueryPoolsWithFilterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.pools) {
+      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsWithFilterResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryPoolsWithFilterResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.pools.push(Any.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryPoolsWithFilterResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
+  },
+
+  toJSON(message: QueryPoolsWithFilterResponse): unknown {
+    const obj: any = {};
+
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryPoolsWithFilterResponse>): QueryPoolsWithFilterResponse {
+    const message = createBaseQueryPoolsWithFilterResponse();
+    message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+
+  fromSDK(object: QueryPoolsWithFilterResponseSDKType): QueryPoolsWithFilterResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolsWithFilterResponse): QueryPoolsWithFilterResponseSDKType {
+    const obj: any = {};
+
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
   }
 

@@ -830,46 +830,44 @@ import * as _264 from "./gamm/v1beta1/tx";
 import * as _265 from "./gamm/pool-models/balancer/tx/tx";
 import * as _266 from "./gamm/pool-models/stableswap/stableswap_pool";
 import * as _267 from "./gamm/pool-models/stableswap/tx";
-import * as _268 from "./incentives/gauge";
-import * as _269 from "./incentives/genesis";
-import * as _270 from "./incentives/params";
-import * as _271 from "./incentives/query";
-import * as _272 from "./incentives/tx";
-import * as _273 from "./lockup/genesis";
-import * as _274 from "./lockup/lock";
-import * as _275 from "./lockup/query";
-import * as _276 from "./lockup/tx";
-import * as _277 from "./mint/v1beta1/genesis";
-import * as _278 from "./mint/v1beta1/mint";
-import * as _279 from "./mint/v1beta1/query";
-import * as _280 from "./pool-incentives/v1beta1/genesis";
-import * as _281 from "./pool-incentives/v1beta1/gov";
-import * as _282 from "./pool-incentives/v1beta1/incentives";
-import * as _283 from "./pool-incentives/v1beta1/query";
-import * as _284 from "./store/v1beta1/tree";
-import * as _285 from "./streamswap/v1/event";
-import * as _286 from "./streamswap/v1/genesis";
-import * as _287 from "./streamswap/v1/params";
-import * as _288 from "./streamswap/v1/query";
-import * as _289 from "./streamswap/v1/state";
-import * as _290 from "./streamswap/v1/tx";
-import * as _291 from "./superfluid/genesis";
-import * as _292 from "./superfluid/params";
-import * as _293 from "./superfluid/query";
-import * as _294 from "./superfluid/superfluid";
-import * as _295 from "./superfluid/tx";
-import * as _296 from "./tokenfactory/v1beta1/authorityMetadata";
-import * as _297 from "./tokenfactory/v1beta1/genesis";
-import * as _298 from "./tokenfactory/v1beta1/params";
-import * as _299 from "./tokenfactory/v1beta1/query";
-import * as _300 from "./tokenfactory/v1beta1/tx";
-import * as _301 from "./twap/v1beta1/genesis";
-import * as _302 from "./twap/v1beta1/query";
-import * as _303 from "./twap/v1beta1/twap_record";
-import * as _304 from "./txfees/v1beta1/feetoken";
-import * as _305 from "./txfees/v1beta1/genesis";
-import * as _306 from "./txfees/v1beta1/gov";
-import * as _307 from "./txfees/v1beta1/query";
+import * as _268 from "./gamm/v2/query";
+import * as _269 from "./ibc-rate-limit/v1beta1/params";
+import * as _270 from "./ibc-rate-limit/v1beta1/query";
+import * as _271 from "./incentives/gauge";
+import * as _272 from "./incentives/genesis";
+import * as _273 from "./incentives/params";
+import * as _274 from "./incentives/query";
+import * as _275 from "./incentives/tx";
+import * as _276 from "./lockup/genesis";
+import * as _277 from "./lockup/lock";
+import * as _278 from "./lockup/params";
+import * as _279 from "./lockup/query";
+import * as _280 from "./lockup/tx";
+import * as _281 from "./mint/v1beta1/genesis";
+import * as _282 from "./mint/v1beta1/mint";
+import * as _283 from "./mint/v1beta1/query";
+import * as _284 from "./pool-incentives/v1beta1/genesis";
+import * as _285 from "./pool-incentives/v1beta1/gov";
+import * as _286 from "./pool-incentives/v1beta1/incentives";
+import * as _287 from "./pool-incentives/v1beta1/query";
+import * as _288 from "./sumtree/v1beta1/tree";
+import * as _289 from "./superfluid/genesis";
+import * as _290 from "./superfluid/params";
+import * as _291 from "./superfluid/query";
+import * as _292 from "./superfluid/superfluid";
+import * as _293 from "./superfluid/tx";
+import * as _294 from "./tokenfactory/v1beta1/authorityMetadata";
+import * as _295 from "./tokenfactory/v1beta1/genesis";
+import * as _296 from "./tokenfactory/v1beta1/params";
+import * as _297 from "./tokenfactory/v1beta1/query";
+import * as _298 from "./tokenfactory/v1beta1/tx";
+import * as _299 from "./twap/v1beta1/genesis";
+import * as _300 from "./twap/v1beta1/query";
+import * as _301 from "./twap/v1beta1/twap_record";
+import * as _302 from "./txfees/v1beta1/feetoken";
+import * as _303 from "./txfees/v1beta1/genesis";
+import * as _304 from "./txfees/v1beta1/gov";
+import * as _305 from "./txfees/v1beta1/query";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._255,
@@ -900,69 +898,68 @@ export namespace osmosis {
         };
       }
     }
-  }
-  export const incentives = { ..._268,
-    ..._269,
-    ..._270,
-    ..._271,
-    ..._272
-  };
-  export const lockup = { ..._273,
-    ..._274,
-    ..._275,
-    ..._276
-  };
-  export namespace mint {
-    export const v1beta1 = { ..._277,
-      ..._278,
-      ..._279
+    export const v2 = { ..._268
     };
   }
-  export namespace poolincentives {
-    export const v1beta1 = { ..._280,
-      ..._281,
+  export namespace ibcratelimit {
+    export const v1beta1 = { ..._269,
+      ..._270
+    };
+  }
+  export const incentives = { ..._271,
+    ..._272,
+    ..._273,
+    ..._274,
+    ..._275
+  };
+  export const lockup = { ..._276,
+    ..._277,
+    ..._278,
+    ..._279,
+    ..._280
+  };
+  export namespace mint {
+    export const v1beta1 = { ..._281,
       ..._282,
       ..._283
     };
   }
-  export namespace store {
-    export const v1beta1 = { ..._284
-    };
-  }
-  export namespace streamswap {
-    export const v1 = { ..._285,
+  export namespace poolincentives {
+    export const v1beta1 = { ..._284,
+      ..._285,
       ..._286,
-      ..._287,
-      ..._288,
-      ..._289,
-      ..._290
+      ..._287
     };
   }
-  export const superfluid = { ..._291,
+  export namespace store {
+    export const v1beta1 = { ..._288
+    };
+  }
+  export const superfluid = { ..._289,
+    ..._290,
+    ..._291,
     ..._292,
-    ..._293,
-    ..._294,
-    ..._295
+    ..._293
   };
   export namespace tokenfactory {
-    export const v1beta1 = { ..._296,
+    export const v1beta1 = { ..._294,
+      ..._295,
+      ..._296,
       ..._297,
-      ..._298,
-      ..._299,
-      ..._300
+      ..._298
     };
   }
   export namespace twap {
-    export const v1beta1 = { ..._301,
-      ..._302,
-      ..._303
+    export const v1beta1 = { ..._299,
+      ..._300,
+      ..._301
     };
   }
   export namespace txfees {
-    export const v1beta1 = { ..._304,
-      ..._305,
-      ..._306,
-      ..._307
+    export const v1beta1 = { ..._302,
+      ..._303,
+      ..._304,
+      ..._305
     };
   }
 }",
@@ -970,36 +967,36 @@ export namespace osmosis {
   "tendermint": {
     "base": "tendermint",
     "bundle": "tendermint/bundle.ts",
-    "code": "import * as _308 from "./abci/types";
-import * as _309 from "./crypto/keys";
-import * as _310 from "./crypto/proof";
-import * as _311 from "./libs/bits/types";
-import * as _312 from "./p2p/types";
-import * as _313 from "./types/block";
-import * as _314 from "./types/evidence";
-import * as _315 from "./types/params";
-import * as _316 from "./types/types";
-import * as _317 from "./types/validator";
-import * as _318 from "./version/types";
+    "code": "import * as _306 from "./abci/types";
+import * as _307 from "./crypto/keys";
+import * as _308 from "./crypto/proof";
+import * as _309 from "./libs/bits/types";
+import * as _310 from "./p2p/types";
+import * as _311 from "./types/block";
+import * as _312 from "./types/evidence";
+import * as _313 from "./types/params";
+import * as _314 from "./types/types";
+import * as _315 from "./types/validator";
+import * as _316 from "./version/types";
 export namespace tendermint {
-  export const abci = { ..._308
+  export const abci = { ..._306
   };
-  export const crypto = { ..._309,
-    ..._310
+  export const crypto = { ..._307,
+    ..._308
   };
   export namespace libs {
-    export const bits = { ..._311
+    export const bits = { ..._309
     };
   }
-  export const p2p = { ..._312
+  export const p2p = { ..._310
   };
-  export const types = { ..._313,
+  export const types = { ..._311,
+    ..._312,
+    ..._313,
     ..._314,
-    ..._315,
-    ..._316,
-    ..._317
+    ..._315
   };
-  export const version = { ..._318
+  export const version = { ..._316
   };
 }",
   },

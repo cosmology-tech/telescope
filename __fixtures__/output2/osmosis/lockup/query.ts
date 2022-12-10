@@ -4,6 +4,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, SyntheticLock } from "./lock";
+import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, fromJsonTimestamp, fromTimestamp, Long, Rpc } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
@@ -109,6 +110,10 @@ export interface AccountLockedLongerDurationDenomRequest {
 }
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];
+}
+export interface QueryParamsRequest {}
+export interface QueryParamsResponse {
+  params?: Params;
 }
 
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
@@ -2123,6 +2128,106 @@ export const AccountLockedLongerDurationDenomResponse = {
 
 };
 
+function createBaseQueryParamsRequest(): QueryParamsRequest {
+  return {};
+}
+
+export const QueryParamsRequest = {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryParamsRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(_: any): QueryParamsRequest {
+    return {};
+  },
+
+  toJSON(_: QueryParamsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    const message = createBaseQueryParamsRequest();
+    return message;
+  }
+
+};
+
+function createBaseQueryParamsResponse(): QueryParamsResponse {
+  return {
+    params: undefined
+  };
+}
+
+export const QueryParamsResponse = {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.params !== undefined) {
+      Params.encode(message.params, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryParamsResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.params = Params.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
+  },
+
+  toJSON(message: QueryParamsResponse): unknown {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    const message = createBaseQueryParamsResponse();
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    return message;
+  }
+
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Return full balance of the module */
@@ -2178,6 +2283,9 @@ export interface Query {
 
   /** Returns account's locked records for a denom with longer duration */
   AccountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse>;
+
+  /** Params returns lockup params. */
+  Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -2200,6 +2308,7 @@ export class QueryClientImpl implements Query {
     this.AccountLockedDuration = this.AccountLockedDuration.bind(this);
     this.AccountLockedLongerDurationNotUnlockingOnly = this.AccountLockedLongerDurationNotUnlockingOnly.bind(this);
     this.AccountLockedLongerDurationDenom = this.AccountLockedLongerDurationDenom.bind(this);
+    this.Params = this.Params.bind(this);
   }
 
   ModuleBalance(request: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponse> {
@@ -2296,6 +2405,12 @@ export class QueryClientImpl implements Query {
     const data = AccountLockedLongerDurationDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDurationDenom", data);
     return promise.then(data => AccountLockedLongerDurationDenomResponse.decode(new _m0.Reader(data)));
+  }
+
+  Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+    const data = QueryParamsRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.lockup.Query", "Params", data);
+    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
 }

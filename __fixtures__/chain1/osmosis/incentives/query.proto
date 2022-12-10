@@ -9,7 +9,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "osmosis/incentives/gauge.proto";
 import "osmosis/lockup/lock.proto";
 
-option go_package = "github.com/osmosis-labs/osmosis/v12/x/incentives/types";
+option go_package = "github.com/osmosis-labs/osmosis/v13/x/incentives/types";
 
 // Query defines the gRPC querier service
 service Query {
@@ -18,13 +18,6 @@ service Query {
       returns (ModuleToDistributeCoinsResponse) {
     option (google.api.http).get =
         "/osmosis/incentives/v1beta1/module_to_distribute_coins";
-  }
-  // ModuleDistributedCoins returns coins that are distributed by the module so
-  // far
-  rpc ModuleDistributedCoins(ModuleDistributedCoinsRequest)
-      returns (ModuleDistributedCoinsResponse) {
-    option (google.api.http).get =
-        "/osmosis/incentives/v1beta1/module_distributed_coins";
   }
 
   // GaugeByID returns gauges by their respective ID
@@ -78,15 +71,6 @@ service Query {
 message ModuleToDistributeCoinsRequest {}
 message ModuleToDistributeCoinsResponse {
   // Coins that have yet to be distributed
-  repeated cosmos.base.v1beta1.Coin coins = 1 [
-    (gogoproto.nullable) = false,
-    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
-  ];
-}
-
-message ModuleDistributedCoinsRequest {}
-message ModuleDistributedCoinsResponse {
-  // Coins that have been distributed already
   repeated cosmos.base.v1beta1.Coin coins = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"

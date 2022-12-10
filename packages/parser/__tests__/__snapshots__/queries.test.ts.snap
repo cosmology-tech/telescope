@@ -5,6 +5,192 @@ exports[`queries 1`] = `
   "Query": {
     "comment": null,
     "methods": {
+      "CalcExitPoolCoinsFromShares": {
+        "comment": null,
+        "fields": {
+          "poolId": {
+            "comment": null,
+            "id": 1,
+            "isScalar": true,
+            "options": {
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "pool_id",
+            },
+            "parsedType": {
+              "name": "uint64",
+              "type": "native",
+            },
+            "type": "uint64",
+            "typeNum": 8,
+          },
+          "shareInAmount": {
+            "comment": null,
+            "id": 2,
+            "isScalar": true,
+            "options": {
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+              "(gogoproto.nullable)": false,
+              "(telescope:camel)": "shareInAmount",
+              "(telescope:name)": "shareInAmount",
+              "(telescope:orig)": "share_in_amount",
+            },
+            "parsedType": {
+              "name": "string",
+              "type": "native",
+            },
+            "type": "string",
+            "typeNum": 13,
+          },
+        },
+        "info": {
+          "casing": {
+            "pool_id": "poolId",
+            "share_in_amount": "shareInAmount",
+          },
+          "method": "get",
+          "paramMap": {
+            "pool_id": "poolId",
+            "share_in_amount": "shareInAmount",
+          },
+          "pathParams": [
+            "pool_id",
+          ],
+          "queryParams": [
+            "share_in_amount",
+          ],
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/exit_swap_share_amount_in",
+        },
+        "name": "CalcExitPoolCoinsFromShares",
+        "options": {
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/exit_swap_share_amount_in",
+        },
+        "requestType": "QueryCalcExitPoolCoinsFromSharesRequest",
+        "responseType": "QueryCalcExitPoolCoinsFromSharesResponse",
+        "type": "ServiceMethod",
+      },
+      "CalcJoinPoolNoSwapShares": {
+        "comment": "Simulates joining pool without a swap. Returns the amount of shares you'd
+ get and tokens needed to provide",
+        "fields": {
+          "poolId": {
+            "comment": null,
+            "id": 1,
+            "isScalar": true,
+            "options": {
+              "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "pool_id",
+            },
+            "parsedType": {
+              "name": "uint64",
+              "type": "native",
+            },
+            "type": "uint64",
+            "typeNum": 8,
+          },
+          "tokensIn": {
+            "comment": null,
+            "id": 2,
+            "import": "cosmos/base/v1beta1/coin.proto",
+            "importedName": "cosmos.base.v1beta1.Coin",
+            "options": {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.nullable)": false,
+              "(telescope:camel)": "tokensIn",
+              "(telescope:name)": "tokensIn",
+              "(telescope:orig)": "tokens_in",
+            },
+            "parsedType": {
+              "name": "Coin",
+              "type": "Type",
+            },
+            "rule": "repeated",
+            "scope": [
+              "cosmos.base.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+        },
+        "info": undefined,
+        "name": "CalcJoinPoolNoSwapShares",
+        "options": undefined,
+        "requestType": "QueryCalcJoinPoolNoSwapSharesRequest",
+        "responseType": "QueryCalcJoinPoolNoSwapSharesResponse",
+        "type": "ServiceMethod",
+      },
+      "CalcJoinPoolShares": {
+        "comment": null,
+        "fields": {
+          "poolId": {
+            "comment": null,
+            "id": 1,
+            "isScalar": true,
+            "options": {
+              "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "pool_id",
+            },
+            "parsedType": {
+              "name": "uint64",
+              "type": "native",
+            },
+            "type": "uint64",
+            "typeNum": 8,
+          },
+          "tokensIn": {
+            "comment": null,
+            "id": 2,
+            "import": "cosmos/base/v1beta1/coin.proto",
+            "importedName": "cosmos.base.v1beta1.Coin",
+            "options": {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.nullable)": false,
+              "(telescope:camel)": "tokensIn",
+              "(telescope:name)": "tokensIn",
+              "(telescope:orig)": "tokens_in",
+            },
+            "parsedType": {
+              "name": "Coin",
+              "type": "Type",
+            },
+            "rule": "repeated",
+            "scope": [
+              "cosmos.base.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+        },
+        "info": {
+          "casing": {
+            "pool_id": "poolId",
+            "tokens_in": "tokensIn",
+          },
+          "method": "get",
+          "paramMap": {
+            "pool_id": "poolId",
+            "tokens_in": "tokensIn",
+          },
+          "pathParams": [
+            "pool_id",
+          ],
+          "queryParams": [
+            "tokens_in",
+          ],
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/join_swap_exact_in",
+        },
+        "name": "CalcJoinPoolShares",
+        "options": {
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/join_swap_exact_in",
+        },
+        "requestType": "QueryCalcJoinPoolSharesRequest",
+        "responseType": "QueryCalcJoinPoolSharesResponse",
+        "type": "ServiceMethod",
+      },
       "EstimateSwapExactAmountIn": {
         "comment": "Estimate the swap.",
         "fields": {
@@ -51,7 +237,7 @@ exports[`queries 1`] = `
             "type": "SwapAmountInRoute",
           },
           "sender": {
-            "comment": null,
+            "comment": "TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE",
             "id": 1,
             "isScalar": true,
             "options": {
@@ -163,7 +349,7 @@ exports[`queries 1`] = `
             "type": "SwapAmountOutRoute",
           },
           "sender": {
-            "comment": null,
+            "comment": "TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE",
             "id": 1,
             "isScalar": true,
             "options": {
@@ -425,6 +611,99 @@ exports[`queries 1`] = `
         "responseType": "QueryPoolsResponse",
         "type": "ServiceMethod",
       },
+      "PoolsWithFilter": {
+        "comment": "PoolsWithFilter allows you to query specific pools with requested
+ parameters",
+        "fields": {
+          "minLiquidity": {
+            "comment": null,
+            "id": 1,
+            "import": "cosmos/base/v1beta1/coin.proto",
+            "importedName": "cosmos.base.v1beta1.Coin",
+            "options": {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.moretags)": "yaml:min_liquidity",
+              "(gogoproto.nullable)": false,
+              "(telescope:camel)": "minLiquidity",
+              "(telescope:name)": "minLiquidity",
+              "(telescope:orig)": "min_liquidity",
+            },
+            "parsedType": {
+              "name": "Coin",
+              "type": "Type",
+            },
+            "rule": "repeated",
+            "scope": [
+              "cosmos.base.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+          "pagination": {
+            "comment": null,
+            "id": 3,
+            "import": "cosmos/base/query/v1beta1/pagination.proto",
+            "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "options": {
+              "(telescope:camel)": "pagination",
+              "(telescope:name)": "pagination",
+              "(telescope:orig)": "pagination",
+            },
+            "parsedType": {
+              "name": "PageRequest",
+              "type": "Type",
+            },
+            "scope": [
+              "cosmos.base.query.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.query.v1beta1.PageRequest",
+          },
+          "poolType": {
+            "comment": null,
+            "id": 2,
+            "isScalar": true,
+            "options": {
+              "(telescope:camel)": "poolType",
+              "(telescope:name)": "poolType",
+              "(telescope:orig)": "pool_type",
+            },
+            "parsedType": {
+              "name": "string",
+              "type": "native",
+            },
+            "type": "string",
+            "typeNum": 13,
+          },
+        },
+        "info": {
+          "casing": {
+            "min_liquidity": "minLiquidity",
+            "pagination": "pagination",
+            "pool_type": "poolType",
+          },
+          "method": "get",
+          "paramMap": {
+            "min_liquidity": "minLiquidity",
+            "pagination": "pagination",
+            "pool_type": "poolType",
+          },
+          "pathParams": [],
+          "queryParams": [
+            "min_liquidity",
+            "pool_type",
+            "pagination",
+          ],
+          "url": "/osmosis/gamm/v1beta1/filtered_pools",
+        },
+        "name": "PoolsWithFilter",
+        "options": {
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/filtered_pools",
+        },
+        "requestType": "QueryPoolsWithFilterRequest",
+        "responseType": "QueryPoolsWithFilterResponse",
+        "type": "ServiceMethod",
+      },
       "SpotPrice": {
         "comment": "SpotPrice defines a gRPC query handler that returns the spot price given
  a base denomination and a quote denomination.",
@@ -505,6 +784,7 @@ exports[`queries 1`] = `
         "name": "SpotPrice",
         "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/prices",
+          "deprecated": true,
         },
         "requestType": "QuerySpotPriceRequest",
         "responseType": "QuerySpotPriceResponse",
@@ -618,6 +898,293 @@ exports[`queries 1`] = `
     },
     "name": "Query",
     "type": "Service",
+  },
+  "QueryCalcExitPoolCoinsFromSharesRequest": {
+    "comment": "=============================== CalcExitPoolCoinsFromShares",
+    "fields": {
+      "poolId": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "pool_id",
+        },
+        "parsedType": {
+          "name": "uint64",
+          "type": "native",
+        },
+        "type": "uint64",
+        "typeNum": 8,
+      },
+      "shareInAmount": {
+        "comment": null,
+        "id": 2,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "shareInAmount",
+          "(telescope:name)": "shareInAmount",
+          "(telescope:orig)": "share_in_amount",
+        },
+        "parsedType": {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcExitPoolCoinsFromSharesRequest",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryCalcExitPoolCoinsFromSharesResponse": {
+    "comment": null,
+    "fields": {
+      "tokensOut": {
+        "comment": null,
+        "id": 1,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokensOut",
+          "(telescope:name)": "tokensOut",
+          "(telescope:orig)": "tokens_out",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcExitPoolCoinsFromSharesResponse",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryCalcJoinPoolNoSwapSharesRequest": {
+    "comment": "=============================== CalcJoinPoolNoSwapShares",
+    "fields": {
+      "poolId": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "pool_id",
+        },
+        "parsedType": {
+          "name": "uint64",
+          "type": "native",
+        },
+        "type": "uint64",
+        "typeNum": 8,
+      },
+      "tokensIn": {
+        "comment": null,
+        "id": 2,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokensIn",
+          "(telescope:name)": "tokensIn",
+          "(telescope:orig)": "tokens_in",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcJoinPoolNoSwapSharesRequest",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryCalcJoinPoolNoSwapSharesResponse": {
+    "comment": null,
+    "fields": {
+      "sharesOut": {
+        "comment": null,
+        "id": 2,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "sharesOut",
+          "(telescope:name)": "sharesOut",
+          "(telescope:orig)": "shares_out",
+        },
+        "parsedType": {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
+      "tokensOut": {
+        "comment": null,
+        "id": 1,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.moretags)": "yaml:tokens_out",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokensOut",
+          "(telescope:name)": "tokensOut",
+          "(telescope:orig)": "tokens_out",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcJoinPoolNoSwapSharesResponse",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryCalcJoinPoolSharesRequest": {
+    "comment": "=============================== CalcJoinPoolShares",
+    "fields": {
+      "poolId": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "pool_id",
+        },
+        "parsedType": {
+          "name": "uint64",
+          "type": "native",
+        },
+        "type": "uint64",
+        "typeNum": 8,
+      },
+      "tokensIn": {
+        "comment": null,
+        "id": 2,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokensIn",
+          "(telescope:name)": "tokensIn",
+          "(telescope:orig)": "tokens_in",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcJoinPoolSharesRequest",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryCalcJoinPoolSharesResponse": {
+    "comment": null,
+    "fields": {
+      "shareOutAmount": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+          "(gogoproto.moretags)": "yaml:share_out_amount",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "shareOutAmount",
+          "(telescope:name)": "shareOutAmount",
+          "(telescope:orig)": "share_out_amount",
+        },
+        "parsedType": {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
+      "tokensOut": {
+        "comment": null,
+        "id": 2,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokensOut",
+          "(telescope:name)": "tokensOut",
+          "(telescope:orig)": "tokens_out",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryCalcJoinPoolSharesResponse",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
   },
   "QueryNumPoolsRequest": {
     "comment": "=============================== NumPools",
@@ -916,6 +1483,130 @@ exports[`queries 1`] = `
     "options": undefined,
     "type": "Type",
   },
+  "QueryPoolsWithFilterRequest": {
+    "comment": null,
+    "fields": {
+      "minLiquidity": {
+        "comment": null,
+        "id": 1,
+        "import": "cosmos/base/v1beta1/coin.proto",
+        "importedName": "cosmos.base.v1beta1.Coin",
+        "options": {
+          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+          "(gogoproto.moretags)": "yaml:min_liquidity",
+          "(gogoproto.nullable)": false,
+          "(telescope:camel)": "minLiquidity",
+          "(telescope:name)": "minLiquidity",
+          "(telescope:orig)": "min_liquidity",
+        },
+        "parsedType": {
+          "name": "Coin",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "cosmos.base.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.v1beta1.Coin",
+      },
+      "pagination": {
+        "comment": null,
+        "id": 3,
+        "import": "cosmos/base/query/v1beta1/pagination.proto",
+        "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "options": {
+          "(telescope:camel)": "pagination",
+          "(telescope:name)": "pagination",
+          "(telescope:orig)": "pagination",
+        },
+        "parsedType": {
+          "name": "PageRequest",
+          "type": "Type",
+        },
+        "scope": [
+          "cosmos.base.query.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.query.v1beta1.PageRequest",
+      },
+      "poolType": {
+        "comment": null,
+        "id": 2,
+        "isScalar": true,
+        "options": {
+          "(telescope:camel)": "poolType",
+          "(telescope:name)": "poolType",
+          "(telescope:orig)": "pool_type",
+        },
+        "parsedType": {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryPoolsWithFilterRequest",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryPoolsWithFilterResponse": {
+    "comment": null,
+    "fields": {
+      "pagination": {
+        "comment": "pagination defines the pagination in the response.",
+        "id": 2,
+        "import": "cosmos/base/query/v1beta1/pagination.proto",
+        "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "options": {
+          "(telescope:camel)": "pagination",
+          "(telescope:name)": "pagination",
+          "(telescope:orig)": "pagination",
+        },
+        "parsedType": {
+          "name": "PageResponse",
+          "type": "Type",
+        },
+        "scope": [
+          "cosmos.base.query.v1beta1",
+        ],
+        "scopeType": "protoImport",
+        "type": "cosmos.base.query.v1beta1.PageResponse",
+      },
+      "pools": {
+        "comment": null,
+        "id": 1,
+        "import": "google/protobuf/any.proto",
+        "importedName": "google.protobuf.Any",
+        "options": {
+          "(cosmos_proto.accepts_interface)": "PoolI",
+          "(telescope:camel)": "pools",
+          "(telescope:name)": "pools",
+          "(telescope:orig)": "pools",
+        },
+        "parsedType": {
+          "name": "Any",
+          "type": "Type",
+        },
+        "rule": "repeated",
+        "scope": [
+          "google.protobuf",
+        ],
+        "scopeType": "protoImport",
+        "type": "google.protobuf.Any",
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryPoolsWithFilterResponse",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
   "QuerySpotPriceRequest": {
     "comment": "QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  query.",
@@ -976,7 +1667,9 @@ exports[`queries 1`] = `
     "name": "QuerySpotPriceRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": undefined,
+    "options": {
+      "deprecated": true,
+    },
     "type": "Type",
   },
   "QuerySpotPriceResponse": {
@@ -1005,7 +1698,9 @@ exports[`queries 1`] = `
     "name": "QuerySpotPriceResponse",
     "nested": null,
     "oneofs": undefined,
-    "options": undefined,
+    "options": {
+      "deprecated": true,
+    },
     "type": "Type",
   },
   "QuerySwapExactAmountInRequest": {
@@ -1054,7 +1749,7 @@ exports[`queries 1`] = `
         "type": "SwapAmountInRoute",
       },
       "sender": {
-        "comment": null,
+        "comment": "TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE",
         "id": 1,
         "isScalar": true,
         "options": {
@@ -1171,7 +1866,7 @@ exports[`queries 1`] = `
         "type": "SwapAmountOutRoute",
       },
       "sender": {
-        "comment": null,
+        "comment": "TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE",
         "id": 1,
         "isScalar": true,
         "options": {

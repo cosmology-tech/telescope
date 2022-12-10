@@ -2,8 +2,8 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType } from "./tx";
-export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.lockup.MsgLockTokens", MsgLockTokens], ["/osmosis.lockup.MsgBeginUnlockingAll", MsgBeginUnlockingAll], ["/osmosis.lockup.MsgBeginUnlocking", MsgBeginUnlocking], ["/osmosis.lockup.MsgExtendLockup", MsgExtendLockup]];
+import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.lockup.MsgLockTokens", MsgLockTokens], ["/osmosis.lockup.MsgBeginUnlockingAll", MsgBeginUnlockingAll], ["/osmosis.lockup.MsgBeginUnlocking", MsgBeginUnlocking], ["/osmosis.lockup.MsgExtendLockup", MsgExtendLockup], ["/osmosis.lockup.MsgForceUnlock", MsgForceUnlock]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
     protoRegistry.register(typeUrl, mod);
@@ -37,6 +37,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.lockup.MsgExtendLockup",
         value: MsgExtendLockup.encode(value).finish()
       };
+    },
+
+    forceUnlock(value: MsgForceUnlock) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgForceUnlock",
+        value: MsgForceUnlock.encode(value).finish()
+      };
     }
 
   },
@@ -65,6 +72,13 @@ export const MessageComposer = {
     extendLockup(value: MsgExtendLockup) {
       return {
         typeUrl: "/osmosis.lockup.MsgExtendLockup",
+        value
+      };
+    },
+
+    forceUnlock(value: MsgForceUnlock) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgForceUnlock",
         value
       };
     }
@@ -97,6 +111,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.lockup.MsgExtendLockup",
         value: MsgExtendLockup.toJSON(value)
       };
+    },
+
+    forceUnlock(value: MsgForceUnlock) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgForceUnlock",
+        value: MsgForceUnlock.toJSON(value)
+      };
     }
 
   },
@@ -127,6 +148,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.lockup.MsgExtendLockup",
         value: MsgExtendLockup.fromJSON(value)
       };
+    },
+
+    forceUnlock(value: any) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgForceUnlock",
+        value: MsgForceUnlock.fromJSON(value)
+      };
     }
 
   },
@@ -156,6 +184,13 @@ export const MessageComposer = {
       return {
         typeUrl: "/osmosis.lockup.MsgExtendLockup",
         value: MsgExtendLockup.fromPartial(value)
+      };
+    },
+
+    forceUnlock(value: MsgForceUnlock) {
+      return {
+        typeUrl: "/osmosis.lockup.MsgForceUnlock",
+        value: MsgForceUnlock.fromPartial(value)
       };
     }
 
