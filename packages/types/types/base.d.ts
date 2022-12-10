@@ -131,6 +131,14 @@ export declare type TraverseImport = Record<string, string[]>;
 export declare type TraverseAccept = Record<string, string[]>;
 export declare type TraverseImplement = Record<string, string[]>;
 export declare type TraverseExport = Record<string, boolean>;
+export declare type TraverseTypeUrlRef = {
+    ref: string;
+    types: {
+        typeUrl: string;
+        type: string;
+        importAs: string;
+    }[];
+};
 export declare type TraversedProtoRoot = ProtoRoot & {
     parsedImports: TraverseImport;
     parsedExports: TraverseExport;
@@ -139,3 +147,4 @@ export declare type TraversedProtoRoot = ProtoRoot & {
     importNames: TraverseImportNames | null;
     symbols: TraverseLocalSymbol | null;
 };
+export declare type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>;

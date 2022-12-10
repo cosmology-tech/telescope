@@ -161,6 +161,14 @@ export type TraverseImport = Record<string, string[]>;
 export type TraverseAccept = Record<string, string[]>;
 export type TraverseImplement = Record<string, string[]>;
 export type TraverseExport = Record<string, boolean>;
+export type TraverseTypeUrlRef = {
+    ref: string;
+    types: {
+        typeUrl: string;
+        type: string;
+        importAs: string;
+    }[]
+};
 
 
 export type TraversedProtoRoot = ProtoRoot & {
@@ -171,3 +179,5 @@ export type TraversedProtoRoot = ProtoRoot & {
     importNames: TraverseImportNames | null;
     symbols: TraverseLocalSymbol | null;
 };
+
+export type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>

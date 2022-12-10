@@ -43,6 +43,7 @@ export declare class ProtoStore {
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
     getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
+    getTypeUrlMap(ref: ProtoRef): import("@osmonauts/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
 export {};

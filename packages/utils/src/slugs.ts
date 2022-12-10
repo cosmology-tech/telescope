@@ -15,3 +15,16 @@ export const variableSlug = (str) => {
 
     return camel(str);
 }
+
+export const slugify = (str) => {
+    str = String(str).toString();
+    str = str.replace(/\//g, '_');
+    str = str.replace('.', '_');
+    str = str.replace(/^\s+|\s+$/g, ""); // trim
+    str = str
+        .replace(/[^a-zA-Z0-9_ -]/g, "") // remove invalid chars
+        .replace(/\s+/g, "-") // collapse whitespace and replace by -
+        .replace(/-/g, "");
+
+    return str;
+};
