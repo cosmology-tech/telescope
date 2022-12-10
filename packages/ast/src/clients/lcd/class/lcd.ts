@@ -591,8 +591,12 @@ export const createAggregatedLCDClient = (
     const methods = services.reduce((m, service) => {
         const innerMethods = Object.keys(service.methods).map(key => {
             const method: ProtoServiceMethod = service.methods[key];
-            return buildRequestMethod(context, method);
-        });
+            if (method.info &&
+                (typeof method.options?.['(google.api.http).get'] !== 'undefined')
+            ) {
+                return buildRequestMethod(context, method);
+            }
+        }).filter(Boolean);
         return [...m, ...innerMethods];
     }, []);
     return createLCDClientClassBody(context, clientName, methods);
