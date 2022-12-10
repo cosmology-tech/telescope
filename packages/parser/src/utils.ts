@@ -1,6 +1,8 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
-import { ProtoRoot } from '@osmonauts/types';
+import { ProtoRef, ProtoRoot } from '@osmonauts/types';
+import { ProtoStore } from './store';
+import { GenericParseContext, getTypeUrl } from '@osmonauts/ast';
 
 export const getNestedProto = (root: ProtoRoot) => {
     const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
@@ -31,6 +33,45 @@ export const lookupSymbolScopes = (name: string, relativeTo: string, list?: stri
     if (newName === name) return [...list, name];
     return lookupSymbolScopes(name, relativeToParts.join('.'), [...list, newName]);
 };
+
+export const createTypeUrlTypeMap = (
+    store: ProtoStore,
+    fromRef: ProtoRef // ref to create HashMap for (includes proper import names)
+) => {
+    const ctx = new GenericParseContext(fromRef, store, store.options);
+    const result = {};
+    const interfaces = [];
+    Object.keys(fromRef.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
+        interfaces.push(implementsType);
+    });
+
+    store.getProtos().forEach(ref => {
+        if (
+            ref.traversed?.implementsInterface
+        ) {
+            Object.keys(ref.traversed.implementsInterface).forEach(implementsType => {
+                if (!interfaces.includes(implementsType)) return;
+                const types = ref.traversed?.implementsInterface[implementsType];
+                console.log(implementsType, ref.filename);
+                result[implementsType] = result[implementsType] || [];
+                result[implementsType].push({
+                    ref: ref.filename,
+                    types: types?.map(type => {
+                        return {
+                            typeUrl: getTypeUrl(ref.proto, getNestedProto(ref.proto)[type]),
+                            type,
+                            importAs: ctx.getTypeNameFromFieldName(
+                                type, ref.filename
+                            )
+                        }
+                    })
+                });
+            });
+        }
+    });
+    return result;
+};
+
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
     if (type.startsWith(pkg) && type.length > pkg.length) {

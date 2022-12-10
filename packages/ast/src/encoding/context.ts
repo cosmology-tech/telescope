@@ -56,24 +56,28 @@ export class GenericParseContext implements ParseContext {
         this.imports.push(imp)
     }
 
-    getTypeName(field: ProtoField) {
-        let name = getFieldsTypeName(field);
+    getTypeNameFromFieldName(name: string, importSrc: string) {
         let importedAs = name;
         const names = this.ref.traversed?.importNames;
         if (names
-            && names.hasOwnProperty(field.import)
-            && names[field.import].hasOwnProperty(name)
+            && names.hasOwnProperty(importSrc)
+            && names[importSrc].hasOwnProperty(name)
         ) {
 
-            importedAs = names[field.import][name];
+            importedAs = names[importSrc][name];
         }
         this.addImport({
             type: 'typeImport',
             name,
             importedAs,
-            import: field.import
+            import: importSrc
         })
         return importedAs;
+    }
+
+    getTypeName(field: ProtoField) {
+        let name = getFieldsTypeName(field);
+        return this.getTypeNameFromFieldName(name, field.import);
     }
 
     lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {

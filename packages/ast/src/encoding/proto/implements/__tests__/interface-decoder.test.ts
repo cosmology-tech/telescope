@@ -7,13 +7,17 @@ const store = getTestProtoStore();
 store.options.prototypes.implementsAcceptsAny = true;
 store.traverseAll();
 
-describe('osmosis/gamm/v1beta1/tx.proto', () => {
-    const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
-    const context = new ProtoParseContext(ref, store, store.options);
+describe('PoolI', () => {
+    const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
+    const balancerRef = store.findProto('osmosis/gamm/pool-models/balancer/balancerPool.proto');
+    const stableswapRef = store.findProto('osmosis/gamm/pool-models/stableswap/stableswap_pool.proto');
+    const queryContext = new ProtoParseContext(queryRef, store, store.options);
     it('PoolI', () => {
         // getNestedProto(ref.traversed).MsgJoinPool)
-        console.log(ref.traversed);
-        expect(ref.traversed.acceptsInterface).toEqual({
+        // console.log(queryRef.traversed);
+        // console.log(queryRef.traversed);
+        console.log(balancerRef.traversed);
+        expect(queryRef.traversed.acceptsInterface).toEqual({
             PoolI: [
                 'QueryPoolResponse',
                 'QueryPoolsResponse',
@@ -21,7 +25,7 @@ describe('osmosis/gamm/v1beta1/tx.proto', () => {
             ]
         })
         expectCode(createInterfaceDecoder(
-            context,
+            queryContext,
             'PoolI_InterfaceDecoder',
             {
                 Pool2: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',

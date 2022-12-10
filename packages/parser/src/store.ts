@@ -3,7 +3,7 @@ import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
-import { getNestedProto, getPackageAndNestedFromStr } from './utils';
+import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, TraversalSymbols, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions, TelescopeLogLevel } from '@osmonauts/types';
@@ -250,6 +250,10 @@ export class ProtoStore {
     getImportFromRef(ref: ProtoRef, name: string) {
         if (!this._traversed) throw new Error('getImportFromRef() requires traversal')
         return lookupAnyFromImports(this, ref, name);
+    }
+
+    getTypeUrlMap(ref: ProtoRef) {
+        return createTypeUrlTypeMap(this, ref);
     }
 
     // DOCUMENTATION

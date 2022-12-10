@@ -1,58 +1,65 @@
-import { ProtoRef, TraversedProtoRoot } from '@osmonauts/types';
-import { ProtoStore } from '../src';
+import { GenericParseContext, getTypeUrl } from '@osmonauts/ast';
+import { ProtoRef } from '@osmonauts/types';
+import { getNestedProto, ProtoStore } from '../src';
 import { getTestProtoStore } from '../test-utils';
 
-const createTypeUrlTypeMapForInterface = (store: ProtoStore, name: string) => {
-    return store.getProtos().reduce((m, ref) => {
-        if (
-            ref.traversed?.acceptsInterface
-        ) {
-            Object.keys(ref.traversed.acceptsInterface).forEach(key => {
-                // const msgs = ref.traversed?.acceptsInterface[key];
-
-            });
-        }
-        if (
-            ref.traversed?.implementsInterface
-        ) {
-            Object.keys(ref.traversed.implementsInterface).forEach(key => {
-                // const msgs = ref.traversed?.implementsInterface[key];
-                console.log(key, ref.filename);
-            });
-        }
-        return m;
-    }, {});
-};
-
 describe('PoolI', () => {
-    const store = getTestProtoStore();
-    // @ts-ignore
-    store.options.prototypes.implementsAcceptsAny = true;
-    store.traverseAll();
-    const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
-    const balancerRef = store.findProto('osmosis/gamm/pool-models/balancer/balancerPool.proto');
-    const stableswapRef = store.findProto('osmosis/gamm/pool-models/stableswap/stableswap_pool.proto');
+  const store = getTestProtoStore();
+  // @ts-ignore
+  store.options.prototypes.implementsAcceptsAny = true;
+  store.traverseAll();
+  const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
+  const balancerRef = store.findProto('osmosis/gamm/pool-models/balancer/balancerPool.proto');
+  const stableswapRef = store.findProto('osmosis/gamm/pool-models/stableswap/stableswap_pool.proto');
 
-    it('balancerRef', () => {
-        expect(balancerRef.traversed?.implementsInterface).toEqual({
-            PoolI: ['Pool']
-        })
-    });
-    it('stableswapRef', () => {
-        expect(stableswapRef.traversed?.implementsInterface).toEqual({
-            PoolI: ['Pool']
-        })
-    });
-    it('queryRef', () => {
-        expect(queryRef.traversed?.acceptsInterface).toEqual({
-            PoolI: [
-                'QueryPoolResponse',
-                'QueryPoolsResponse',
-                'QueryPoolsWithFilterResponse'
-            ]
-        })
-    });
-    it('createMap', () => {
-        createTypeUrlTypeMapForInterface(store, 'PoolI');
-    });
+  it('createMap', () => {
+    const result = store.getTypeUrlMap(
+      queryRef
+    );
+
+    expect(result).toEqual({
+      PoolI: [
+        {
+          ref: 'osmosis/gamm/pool-models/balancer/balancerPool.proto',
+          types: [
+            {
+              typeUrl: '/osmosis.gamm.v1beta1.Pool',
+              type: 'Pool',
+              importAs: 'Pool1'
+            }
+          ]
+        },
+        {
+          ref: 'osmosis/gamm/pool-models/stableswap/stableswap_pool.proto',
+          types: [
+            {
+              typeUrl: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',
+              type: 'Pool',
+              importAs: 'Pool2'
+            }
+          ]
+        }
+      ]
+    })
+  });
+
+  it('balancerRef', () => {
+    expect(balancerRef.traversed?.implementsInterface).toEqual({
+      PoolI: ['Pool']
+    })
+  });
+  it('stableswapRef', () => {
+    expect(stableswapRef.traversed?.implementsInterface).toEqual({
+      PoolI: ['Pool']
+    })
+  });
+  it('queryRef', () => {
+    expect(queryRef.traversed?.acceptsInterface).toEqual({
+      PoolI: [
+        'QueryPoolResponse',
+        'QueryPoolsResponse',
+        'QueryPoolsWithFilterResponse'
+      ]
+    })
+  });
 });
