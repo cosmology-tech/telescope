@@ -1,8 +1,38 @@
 import * as t from '@babel/types';
+import { InterfaceTypeUrlMap, ProtoRef } from '@osmonauts/types';
+import { slugify } from '@osmonauts/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
+const getMapFromTypeUrlMap = (urlMap: InterfaceTypeUrlMap, name: string) => {
+    return urlMap?.[name].reduce((m, v) => {
+        v.types.forEach(type => {
+            m[type.importAs] = type.typeUrl;
+        })
+        return m;
+    }, {}) ?? {}
+};
+
+const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
+
+const getInterfaceDecoderName = (str: string) => {
+    return firstUpper(slugify(str) + '_InterfaceDecoder');
+};
+
 export const createInterfaceDecoder = (
+    context: ProtoParseContext,
+    ref: ProtoRef,
+    interfaceName: string
+) => {
+    const map = context.store.getTypeUrlMap(ref);
+    return createInterfaceDecoderHelper(
+        context,
+        getInterfaceDecoderName(interfaceName),
+        getMapFromTypeUrlMap(map, interfaceName)
+    );
+}
+
+export const createInterfaceDecoderHelper = (
     context: ProtoParseContext,
     decoder: string,
     typeHash: Record<string, string>

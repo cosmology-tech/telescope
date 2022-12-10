@@ -1,6 +1,6 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
-import { ProtoRef, ProtoRoot } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@osmonauts/types';
 import { ProtoStore } from './store';
 import { GenericParseContext, getTypeUrl } from '@osmonauts/ast';
 
@@ -37,7 +37,7 @@ export const lookupSymbolScopes = (name: string, relativeTo: string, list?: stri
 export const createTypeUrlTypeMap = (
     store: ProtoStore,
     fromRef: ProtoRef // ref to create HashMap for (includes proper import names)
-) => {
+): InterfaceTypeUrlMap => {
     const ctx = new GenericParseContext(fromRef, store, store.options);
     const result = {};
     const interfaces = [];
@@ -52,7 +52,6 @@ export const createTypeUrlTypeMap = (
             Object.keys(ref.traversed.implementsInterface).forEach(implementsType => {
                 if (!interfaces.includes(implementsType)) return;
                 const types = ref.traversed?.implementsInterface[implementsType];
-                console.log(implementsType, ref.filename);
                 result[implementsType] = result[implementsType] || [];
                 result[implementsType].push({
                     ref: ref.filename,
