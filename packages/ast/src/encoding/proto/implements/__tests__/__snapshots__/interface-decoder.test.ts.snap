@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`osmosis/gamm/v1beta1/tx.proto MsgJoinPool 1`] = `
+"export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool2 | Pool1 | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
+      return Pool2.decode(data.value);
+
+    case "/osmosis.gamm.v1beta1.Pool":
+      return Pool1.decode(data.value);
+
+    default:
+      return data;
+  }
+};"
+`;
