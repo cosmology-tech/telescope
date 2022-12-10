@@ -53,40 +53,48 @@ export const getFieldTypeReference = (
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
-    // if (
-    //     field.parsedType?.type === 'Type' &&
-    //     field.parsedType?.name === 'Any' &&
-    //     field.rule !== 'repeated' &&
-    //     field.options?.['(cosmos_proto.accepts_interface)'] &&
-    //     context.store.options.prototypes.implementsAcceptsAny
-    // ) {
-    //     const lookupInterface = field.options['(cosmos_proto.accepts_interface)'];
-
-    //     // crude way of doing this (e.g. Thing vs. some.scope.Thing could be same!)
-    //     // const found = context.store.implementsInterface[lookupInterface];
-    //     const found = context.ref.traversed.symbols
-    //     if (found && found.length) {
 
 
-    //         // ast = t.tsUnionType(
-    //         //     [
-    //         //         ...found.map(a => {
-    //         //             // - [ ] insert import...
-    //         //             return t.tsTypeReference(t.identifier(a.type));
-    //         //         }),
-    //         //         t.tsUndefinedKeyword()
-    //         //     ]
-    //         // )
-    //     } else {
-    //         console.log('INTERFACE NOT FOUND: ', lookupInterface);
-    //         ast = t.tsUnionType(
-    //             [
-    //                 typ,
-    //                 t.tsUndefinedKeyword()
-    //             ]
-    //         );
-    //     }
-    // }
+    if (
+        field.parsedType?.type === 'Type' &&
+        field.parsedType?.name === 'Any' &&
+        field.rule !== 'repeated' &&
+        field.options?.['(cosmos_proto.accepts_interface)'] &&
+        context.pluginValue('prototypes.implementsAcceptsAny')
+    ) {
+        const lookupInterface = field.options['(cosmos_proto.accepts_interface)'];
+
+        // crude way of doing this (e.g. Thing vs. some.scope.Thing could be same!)
+        // const found = context.store.implementsInterface[lookupInterface];
+        // const found = context.ref.traversed.symbols
+
+        const symb = context.store._symbols.find(s => s.implementsType === lookupInterface);
+        if (!symb && context.pluginValue('prototypes.warningAcceptsNotImplemented')) {
+            console.warn(`[WARN] ${lookupInterface} is accepted but not implemented`);
+        }
+
+        // if (found && found.length) {
+
+
+        //     // ast = t.tsUnionType(
+        //     //     [
+        //     //         ...found.map(a => {
+        //     //             // - [ ] insert import...
+        //     //             return t.tsTypeReference(t.identifier(a.type));
+        //     //         }),
+        //     //         t.tsUndefinedKeyword()
+        //     //     ]
+        //     // )
+        // } else {
+        //     console.log('INTERFACE NOT FOUND: ', lookupInterface);
+        //     ast = t.tsUnionType(
+        //         [
+        //             typ,
+        //             t.tsUndefinedKeyword()
+        //         ]
+        //     );
+        // }
+    }
 
     if (
         field.parsedType?.type === 'Type' &&

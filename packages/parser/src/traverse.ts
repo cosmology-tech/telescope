@@ -98,11 +98,11 @@ export const parseFullyTraversedProtoImports = (
         //
         const implementsInterface = ref.traversed?.implementsInterface ?? {};
         Object.keys(implementsInterface).forEach(key => {
-            Object.keys(implementsInterface[key]).forEach(anyJoinName => {
-                implementsInterface[key][anyJoinName].forEach(msgName => {
+            Object.keys(implementsInterface[key]).forEach(implementsType => {
+                implementsInterface[key][implementsType].forEach(msgName => {
                     records.push({
                         filename: ref.filename,
-                        anyJoinName,
+                        implementsType,
                         msgName
                     })
                 });
@@ -112,12 +112,19 @@ export const parseFullyTraversedProtoImports = (
 
     protos.forEach(ref => {
         const localSymbols: TraverseLocalSymbol[] = [];
+
+        const hasConflict = (
+            symbolName: string
+        ) => {
+            return localSymbols.filter(a => a.symbolName === symbolName).length > 1
+        }
         const findAvailableName = (
             symbolName: string
         ) => {
-            let counter = 0;
+            let counter = 1;
+            if (!hasConflict(symbolName)) return symbolName;
             while (true) {
-                let testName = !counter ? symbolName : symbolName + counter;
+                const testName = symbolName + counter;
                 const found = localSymbols.find(a => a.readAs === testName);
                 if (found) {
                     counter++;
@@ -143,30 +150,49 @@ export const parseFullyTraversedProtoImports = (
                     type: 'import',
                     source,
                     symbolName: im,
-                    readAs: findAvailableName(im)
+                    readAs: im
                 })
             });
         });
 
-        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(anyJoinName => {
+        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
             const enabled = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
             if (!enabled) return;
 
-            const recordsThatMatter = records.filter(rec => rec.anyJoinName === anyJoinName);
+            const recordsThatMatter = records.filter(rec => rec.implementsType === implementsType);
             const notYetInImports = recordsThatMatter.filter(r => {
                 return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
             });
+            const alreadyInImports = recordsThatMatter.filter(r => {
+                return localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
+            });
             notYetInImports.forEach(imp => {
                 localSymbols.push({
-                    type: 'importFromImplements',
+                    type: 'import',
                     source: imp.filename,
-                    readAs: findAvailableName(imp.msgName),
-                    symbolName: imp.msgName
+                    readAs: imp.msgName,
+                    symbolName: imp.msgName,
+                    implementsType: imp.implementsType
                 })
-            })
+            });
+            // if already imported, addd implementsType
+            alreadyInImports.forEach(imp => {
+                const index = localSymbols.findIndex(l => l.source === imp.filename && l.symbolName === imp.msgName);
+                localSymbols[index].implementsType = imp.implementsType;
+            });
         });
 
+        // update localSymbols for any conflicts
         localSymbols.forEach(sym => {
+            // aside from exports, update readAs names...
+            if (
+                sym.readAs === sym.symbolName &&
+                hasConflict(sym.symbolName) &&
+                sym.type !== 'export'
+            ) {
+                sym.readAs = findAvailableName(sym.symbolName)
+            }
+            // add to symbols
             symbols.push({
                 ref: ref.filename,
                 ...sym

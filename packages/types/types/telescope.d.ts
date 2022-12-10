@@ -37,6 +37,7 @@ interface TelescopeOpts {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
         implementsAcceptsAny?: boolean;
+        warningAcceptsNotImplemented?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];

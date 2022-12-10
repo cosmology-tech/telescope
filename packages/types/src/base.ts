@@ -144,7 +144,7 @@ export interface ProtoRoot {
 
 export interface TraverseRecord {
     filename: string;
-    anyJoinName: string;
+    implementsType: string;
     msgName: string;
 }
 export interface TraverseLocalSymbol {
@@ -152,6 +152,7 @@ export interface TraverseLocalSymbol {
     symbolName: string;
     readAs: string;
     source: string;
+    implementsType?: string;
     // msgName: string;
 }
 

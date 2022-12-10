@@ -116,7 +116,7 @@ export interface ProtoRoot {
 }
 export interface TraverseRecord {
     filename: string;
-    anyJoinName: string;
+    implementsType: string;
     msgName: string;
 }
 export interface TraverseLocalSymbol {
@@ -124,6 +124,7 @@ export interface TraverseLocalSymbol {
     symbolName: string;
     readAs: string;
     source: string;
+    implementsType?: string;
 }
 export declare type TraverseImportNames = Record<string, Record<string, string>>;
 export declare type TraverseImport = Record<string, string[]>;

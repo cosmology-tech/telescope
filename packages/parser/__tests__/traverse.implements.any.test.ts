@@ -1,18 +1,19 @@
 import { ProtoRef, ProtoRoot } from '@osmonauts/types';
 import { parseFullyTraversedProtoImports, parseProto, ProtoStore, TraverseContext } from '../src';
 import google_any from '../src/native/any';
+const getStore = () => {
 
-const store = new ProtoStore();
-store.protos = [];
-const addRef = ({ filename, content }) => {
-    const ref: ProtoRef = {
-        absolute: filename,
-        filename,
-        proto: parseProto(content) as ProtoRoot
+    const store = new ProtoStore();
+    store.protos = [];
+    const addRef = ({ filename, content }) => {
+        const ref: ProtoRef = {
+            absolute: filename,
+            filename,
+            proto: parseProto(content) as ProtoRoot
+        };
+        store.protos.push(ref);
     };
-    store.protos.push(ref);
-};
-const DogTxt = (pkg) => `
+    const DogTxt = (pkg) => `
 syntax = "proto3";
 
 package ${pkg};
@@ -26,25 +27,25 @@ message Dog {
     uint64 id = 3;
 }
 `;
-addRef({
-    filename: 'google/protobuf/any.proto',
-    content: google_any
-});
-addRef({
-    filename: 'cosmology/example/dog1.proto',
-    content: DogTxt('cosmology.pkg.one')
-});
-addRef({
-    filename: 'cosmology/example/dog2.proto',
-    content: DogTxt('cosmology.pkg.two')
-});
-addRef({
-    filename: 'cosmology/example/dog3.proto',
-    content: DogTxt('cosmology.pkg.three')
-});
-addRef({
-    filename: 'cosmology/example/cat.proto',
-    content: `
+    addRef({
+        filename: 'google/protobuf/any.proto',
+        content: google_any
+    });
+    addRef({
+        filename: 'cosmology/example/dog1.proto',
+        content: DogTxt('cosmology.pkg.one')
+    });
+    addRef({
+        filename: 'cosmology/example/dog2.proto',
+        content: DogTxt('cosmology.pkg.two')
+    });
+    addRef({
+        filename: 'cosmology/example/dog3.proto',
+        content: DogTxt('cosmology.pkg.three')
+    });
+    addRef({
+        filename: 'cosmology/example/cat.proto',
+        content: `
 syntax = "proto3";
 package cosmology.tech;
 option go_package = "github.com/cosmology-tech/go";
@@ -58,9 +59,9 @@ message Cat {
 }
 `});
 
-addRef({
-    filename: 'cosmology/example/animal.proto',
-    content: `
+    addRef({
+        filename: 'cosmology/example/animal.proto',
+        content: `
 syntax = "proto3";
 package cosmology.tech;
 import "google/protobuf/any.proto";
@@ -84,10 +85,22 @@ message Dog {
 }
 `});
 
-store.options.prototypes!.implementsAcceptsAny = true;
-store.traverseAll();
+    return store;
+};
 
-it('traverses', () => {
+
+it('implementsAcceptsAny', () => {
+    const store = getStore();
+    store.options.prototypes!.implementsAcceptsAny = true;
+    store.traverseAll();
+    const symbols = parseFullyTraversedProtoImports(store);
+    expect(symbols).toMatchSnapshot();
+});
+
+it('implementsAcceptsAny=false', () => {
+    const store = getStore();
+    store.options.prototypes!.implementsAcceptsAny = false;
+    store.traverseAll();
     const symbols = parseFullyTraversedProtoImports(store);
     expect(symbols).toMatchSnapshot();
 });
