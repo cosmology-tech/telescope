@@ -48,10 +48,10 @@ export class TraverseContext implements TraverseContext {
         this.imports[filename] = [...new Set([...this.imports[filename], symbolName])];
     }
 
-    addImplements(filename: string, symbolName: string, msgName: string) {
-        this.implementsInterface[filename] = this.implementsInterface[filename] || {};
-        this.implementsInterface[filename][symbolName] = this.implementsInterface[filename][symbolName] || [];
-        this.implementsInterface[filename][symbolName] = [...new Set([...this.implementsInterface[filename][symbolName], msgName])];
+    addImplements(symbolName: string, msgName: string) {
+        this.implementsInterface = this.implementsInterface || {};
+        this.implementsInterface[symbolName] = this.implementsInterface[symbolName] || [];
+        this.implementsInterface[symbolName] = [...new Set([...this.implementsInterface[symbolName], msgName])];
     }
 
     addAccepts(symbolName: string, msgName: string) {
@@ -97,15 +97,13 @@ export const parseFullyTraversedProtoImports = (
 
         //
         const implementsInterface = ref.traversed?.implementsInterface ?? {};
-        Object.keys(implementsInterface).forEach(key => {
-            Object.keys(implementsInterface[key]).forEach(implementsType => {
-                implementsInterface[key][implementsType].forEach(msgName => {
-                    records.push({
-                        filename: ref.filename,
-                        implementsType,
-                        msgName
-                    })
-                });
+        Object.keys(implementsInterface).forEach(implementsType => {
+            implementsInterface[implementsType].forEach(msgName => {
+                records.push({
+                    filename: ref.filename,
+                    implementsType,
+                    msgName
+                })
             })
         });
     });
@@ -456,7 +454,7 @@ const traverseType = (
     const implementsAcceptsAny = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
     if (implementsAcceptsAny && traversed.options?.["(cosmos_proto.implements_interface)"]) {
         const name = traversed.options['(cosmos_proto.implements_interface)'];
-        context.addImplements(ref.filename, name, obj.name);
+        context.addImplements(name, obj.name);
     }
 
     return traversed as ProtoType;

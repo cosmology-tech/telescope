@@ -159,7 +159,7 @@ export interface TraverseLocalSymbol {
 export type TraverseImportNames = Record<string, Record<string, string>>;
 export type TraverseImport = Record<string, string[]>;
 export type TraverseAccept = Record<string, string[]>;
-export type TraverseImplement = Record<string, Record<string, string[]>>;
+export type TraverseImplement = Record<string, string[]>;
 export type TraverseExport = Record<string, boolean>;
 
 

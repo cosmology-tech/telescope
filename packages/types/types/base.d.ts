@@ -129,7 +129,7 @@ export interface TraverseLocalSymbol {
 export declare type TraverseImportNames = Record<string, Record<string, string>>;
 export declare type TraverseImport = Record<string, string[]>;
 export declare type TraverseAccept = Record<string, string[]>;
-export declare type TraverseImplement = Record<string, Record<string, string[]>>;
+export declare type TraverseImplement = Record<string, string[]>;
 export declare type TraverseExport = Record<string, boolean>;
 export declare type TraversedProtoRoot = ProtoRoot & {
     parsedImports: TraverseImport;
