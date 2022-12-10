@@ -148,15 +148,15 @@ export const QueryParamsRequest = {
 
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : undefined,
-      key: isSet(object.key) ? object.key : undefined
+      subspace: object?.subspace,
+      key: object?.key
     };
   },
 
   toSDK(message: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    message.key !== undefined && (obj.key = message.key);
+    obj.subspace = message.subspace;
+    obj.key = message.key;
     return obj;
   }
 
@@ -219,7 +219,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      param: isSet(object.param) ? ParamChange.fromSDK(object.param) : undefined
+      param: object.param ? ParamChange.fromSDK(object.param) : undefined
     };
   },
 
@@ -439,14 +439,14 @@ export const Subspace = {
 
   fromSDK(object: SubspaceSDKType): Subspace {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      subspace: object?.subspace,
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },
 
   toSDK(message: Subspace): SubspaceSDKType {
     const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    obj.subspace = message.subspace;
 
     if (message.keys) {
       obj.keys = message.keys.map(e => e);

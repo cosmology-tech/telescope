@@ -14,19 +14,7 @@ export enum Certificate_State {
   revoked = 2,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of deployment */
-export enum Certificate_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** valid - CertificateValid denotes state for deployment active */
-  valid = 1,
-
-  /** revoked - CertificateRevoked denotes state for deployment closed */
-  revoked = 2,
-  UNRECOGNIZED = -1,
-}
+export const Certificate_StateSDKType = Certificate_State;
 export function certificate_StateFromJSON(object: any): Certificate_State {
   switch (object) {
     case 0:
@@ -85,7 +73,7 @@ export interface Certificate {
 
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
-  state: Certificate_StateSDKType;
+  state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
@@ -209,15 +197,15 @@ export const CertificateID = {
 
   fromSDK(object: CertificateIDSDKType): CertificateID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      serial: isSet(object.serial) ? object.serial : undefined
+      owner: object?.owner,
+      serial: object?.serial
     };
   },
 
   toSDK(message: CertificateID): CertificateIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.serial !== undefined && (obj.serial = message.serial);
+    obj.owner = message.owner;
+    obj.serial = message.serial;
     return obj;
   }
 
@@ -305,16 +293,16 @@ export const Certificate = {
   fromSDK(object: CertificateSDKType): Certificate {
     return {
       state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
-      cert: isSet(object.cert) ? object.cert : undefined,
-      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+      cert: object?.cert,
+      pubkey: object?.pubkey
     };
   },
 
   toSDK(message: Certificate): CertificateSDKType {
     const obj: any = {};
     message.state !== undefined && (obj.state = certificate_StateToJSON(message.state));
-    message.cert !== undefined && (obj.cert = message.cert);
-    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
     return obj;
   }
 
@@ -401,17 +389,17 @@ export const CertificateFilter = {
 
   fromSDK(object: CertificateFilterSDKType): CertificateFilter {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      serial: isSet(object.serial) ? object.serial : undefined,
-      state: isSet(object.state) ? object.state : undefined
+      owner: object?.owner,
+      serial: object?.serial,
+      state: object?.state
     };
   },
 
   toSDK(message: CertificateFilter): CertificateFilterSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.serial !== undefined && (obj.serial = message.serial);
-    message.state !== undefined && (obj.state = message.state);
+    obj.owner = message.owner;
+    obj.serial = message.serial;
+    obj.state = message.state;
     return obj;
   }
 
@@ -498,17 +486,17 @@ export const MsgCreateCertificate = {
 
   fromSDK(object: MsgCreateCertificateSDKType): MsgCreateCertificate {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      cert: isSet(object.cert) ? object.cert : undefined,
-      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+      owner: object?.owner,
+      cert: object?.cert,
+      pubkey: object?.pubkey
     };
   },
 
   toSDK(message: MsgCreateCertificate): MsgCreateCertificateSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.cert !== undefined && (obj.cert = message.cert);
-    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    obj.owner = message.owner;
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
     return obj;
   }
 
@@ -623,7 +611,7 @@ export const MsgRevokeCertificate = {
 
   fromSDK(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {
     return {
-      id: isSet(object.id) ? CertificateID.fromSDK(object.id) : undefined
+      id: object.id ? CertificateID.fromSDK(object.id) : undefined
     };
   },
 

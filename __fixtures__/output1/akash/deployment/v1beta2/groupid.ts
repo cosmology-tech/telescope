@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -97,17 +97,17 @@ export const GroupID = {
 
   fromSDK(object: GroupIDSDKType): GroupID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      gseq: object?.gseq
     };
   },
 
   toSDK(message: GroupID): GroupIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
     return obj;
   }
 

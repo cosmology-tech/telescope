@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";
 
 /**
@@ -256,30 +256,30 @@ export const TwapRecord = {
 
   fromSDK(object: TwapRecordSDKType): TwapRecord {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      asset0Denom: isSet(object.asset0_denom) ? object.asset0_denom : undefined,
-      asset1Denom: isSet(object.asset1_denom) ? object.asset1_denom : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      p0LastSpotPrice: isSet(object.p0_last_spot_price) ? object.p0_last_spot_price : undefined,
-      p1LastSpotPrice: isSet(object.p1_last_spot_price) ? object.p1_last_spot_price : undefined,
-      p0ArithmeticTwapAccumulator: isSet(object.p0_arithmetic_twap_accumulator) ? object.p0_arithmetic_twap_accumulator : undefined,
-      p1ArithmeticTwapAccumulator: isSet(object.p1_arithmetic_twap_accumulator) ? object.p1_arithmetic_twap_accumulator : undefined,
-      lastErrorTime: isSet(object.last_error_time) ? Timestamp.fromSDK(object.last_error_time) : undefined
+      poolId: object?.pool_id,
+      asset0Denom: object?.asset0_denom,
+      asset1Denom: object?.asset1_denom,
+      height: object?.height,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      p0LastSpotPrice: object?.p0_last_spot_price,
+      p1LastSpotPrice: object?.p1_last_spot_price,
+      p0ArithmeticTwapAccumulator: object?.p0_arithmetic_twap_accumulator,
+      p1ArithmeticTwapAccumulator: object?.p1_arithmetic_twap_accumulator,
+      lastErrorTime: object.last_error_time ? Timestamp.fromSDK(object.last_error_time) : undefined
     };
   },
 
   toSDK(message: TwapRecord): TwapRecordSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.asset0Denom !== undefined && (obj.asset0_denom = message.asset0Denom);
-    message.asset1Denom !== undefined && (obj.asset1_denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = message.height);
+    obj.pool_id = message.poolId;
+    obj.asset0_denom = message.asset0Denom;
+    obj.asset1_denom = message.asset1Denom;
+    obj.height = message.height;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.p0LastSpotPrice !== undefined && (obj.p0_last_spot_price = message.p0LastSpotPrice);
-    message.p1LastSpotPrice !== undefined && (obj.p1_last_spot_price = message.p1LastSpotPrice);
-    message.p0ArithmeticTwapAccumulator !== undefined && (obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator);
-    message.p1ArithmeticTwapAccumulator !== undefined && (obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator);
+    obj.p0_last_spot_price = message.p0LastSpotPrice;
+    obj.p1_last_spot_price = message.p1LastSpotPrice;
+    obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator;
+    obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
     message.lastErrorTime !== undefined && (obj.last_error_time = message.lastErrorTime ? Timestamp.toSDK(message.lastErrorTime) : undefined);
     return obj;
   }

@@ -382,19 +382,19 @@ export const Operation = {
 
   fromSDK(object: OperationSDKType): Operation {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      metadata: isSet(object.metadata) ? Any.fromSDK(object.metadata) : undefined,
-      done: isSet(object.done) ? object.done : undefined,
-      error: isSet(object.error) ? Status.fromSDK(object.error) : undefined,
-      response: isSet(object.response) ? Any.fromSDK(object.response) : undefined
+      name: object?.name,
+      metadata: object.metadata ? Any.fromSDK(object.metadata) : undefined,
+      done: object?.done,
+      error: object.error ? Status.fromSDK(object.error) : undefined,
+      response: object.response ? Any.fromSDK(object.response) : undefined
     };
   },
 
   toSDK(message: Operation): OperationSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Any.toSDK(message.metadata) : undefined);
-    message.done !== undefined && (obj.done = message.done);
+    obj.done = message.done;
     message.error !== undefined && (obj.error = message.error ? Status.toSDK(message.error) : undefined);
     message.response !== undefined && (obj.response = message.response ? Any.toSDK(message.response) : undefined);
     return obj;
@@ -459,13 +459,13 @@ export const GetOperationRequest = {
 
   fromSDK(object: GetOperationRequestSDKType): GetOperationRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetOperationRequest): GetOperationRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -564,19 +564,19 @@ export const ListOperationsRequest = {
 
   fromSDK(object: ListOperationsRequestSDKType): ListOperationsRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
+      name: object?.name,
+      filter: object?.filter,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
 
   toSDK(message: ListOperationsRequest): ListOperationsRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.name = message.name;
+    obj.filter = message.filter;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     return obj;
   }
 
@@ -658,7 +658,7 @@ export const ListOperationsResponse = {
   fromSDK(object: ListOperationsResponseSDKType): ListOperationsResponse {
     return {
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -671,7 +671,7 @@ export const ListOperationsResponse = {
       obj.operations = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -734,13 +734,13 @@ export const CancelOperationRequest = {
 
   fromSDK(object: CancelOperationRequestSDKType): CancelOperationRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: CancelOperationRequest): CancelOperationRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -803,13 +803,13 @@ export const DeleteOperationRequest = {
 
   fromSDK(object: DeleteOperationRequestSDKType): DeleteOperationRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: DeleteOperationRequest): DeleteOperationRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -884,14 +884,14 @@ export const WaitOperationRequest = {
 
   fromSDK(object: WaitOperationRequestSDKType): WaitOperationRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      timeout: isSet(object.timeout) ? Duration.fromSDK(object.timeout) : undefined
+      name: object?.name,
+      timeout: object.timeout ? Duration.fromSDK(object.timeout) : undefined
     };
   },
 
   toSDK(message: WaitOperationRequest): WaitOperationRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toSDK(message.timeout) : undefined);
     return obj;
   }
@@ -967,15 +967,15 @@ export const OperationInfo = {
 
   fromSDK(object: OperationInfoSDKType): OperationInfo {
     return {
-      responseType: isSet(object.response_type) ? object.response_type : undefined,
-      metadataType: isSet(object.metadata_type) ? object.metadata_type : undefined
+      responseType: object?.response_type,
+      metadataType: object?.metadata_type
     };
   },
 
   toSDK(message: OperationInfo): OperationInfoSDKType {
     const obj: any = {};
-    message.responseType !== undefined && (obj.response_type = message.responseType);
-    message.metadataType !== undefined && (obj.metadata_type = message.metadataType);
+    obj.response_type = message.responseType;
+    obj.metadata_type = message.metadataType;
     return obj;
   }
 

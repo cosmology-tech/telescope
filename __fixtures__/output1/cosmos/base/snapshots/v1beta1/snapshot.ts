@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 
 /** Snapshot contains Tendermint state sync snapshot info. */
@@ -235,20 +235,20 @@ export const Snapshot = {
 
   fromSDK(object: SnapshotSDKType): Snapshot {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunks: isSet(object.chunks) ? object.chunks : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined,
-      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+      height: object?.height,
+      format: object?.format,
+      chunks: object?.chunks,
+      hash: object?.hash,
+      metadata: object.metadata ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
 
   toSDK(message: Snapshot): SnapshotSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunks !== undefined && (obj.chunks = message.chunks);
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunks = message.chunks;
+    obj.hash = message.hash;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
   }
@@ -453,12 +453,12 @@ export const SnapshotItem = {
 
   fromSDK(object: SnapshotItemSDKType): SnapshotItem {
     return {
-      store: isSet(object.store) ? SnapshotStoreItem.fromSDK(object.store) : undefined,
-      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromSDK(object.iavl) : undefined,
-      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromSDK(object.extension) : undefined,
-      extensionPayload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromSDK(object.extension_payload) : undefined,
-      kv: isSet(object.kv) ? SnapshotKVItem.fromSDK(object.kv) : undefined,
-      schema: isSet(object.schema) ? SnapshotSchema.fromSDK(object.schema) : undefined
+      store: object.store ? SnapshotStoreItem.fromSDK(object.store) : undefined,
+      iavl: object.iavl ? SnapshotIAVLItem.fromSDK(object.iavl) : undefined,
+      extension: object.extension ? SnapshotExtensionMeta.fromSDK(object.extension) : undefined,
+      extensionPayload: object.extension_payload ? SnapshotExtensionPayload.fromSDK(object.extension_payload) : undefined,
+      kv: object.kv ? SnapshotKVItem.fromSDK(object.kv) : undefined,
+      schema: object.schema ? SnapshotSchema.fromSDK(object.schema) : undefined
     };
   },
 
@@ -532,13 +532,13 @@ export const SnapshotStoreItem = {
 
   fromSDK(object: SnapshotStoreItemSDKType): SnapshotStoreItem {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: SnapshotStoreItem): SnapshotStoreItemSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -637,19 +637,19 @@ export const SnapshotIAVLItem = {
 
   fromSDK(object: SnapshotIAVLItemSDKType): SnapshotIAVLItem {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      height: isSet(object.height) ? object.height : undefined
+      key: object?.key,
+      value: object?.value,
+      version: object?.version,
+      height: object?.height
     };
   },
 
   toSDK(message: SnapshotIAVLItem): SnapshotIAVLItemSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.version !== undefined && (obj.version = message.version);
-    message.height !== undefined && (obj.height = message.height);
+    obj.key = message.key;
+    obj.value = message.value;
+    obj.version = message.version;
+    obj.height = message.height;
     return obj;
   }
 
@@ -724,15 +724,15 @@ export const SnapshotExtensionMeta = {
 
   fromSDK(object: SnapshotExtensionMetaSDKType): SnapshotExtensionMeta {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      format: isSet(object.format) ? object.format : undefined
+      name: object?.name,
+      format: object?.format
     };
   },
 
   toSDK(message: SnapshotExtensionMeta): SnapshotExtensionMetaSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.format !== undefined && (obj.format = message.format);
+    obj.name = message.name;
+    obj.format = message.format;
     return obj;
   }
 
@@ -795,13 +795,13 @@ export const SnapshotExtensionPayload = {
 
   fromSDK(object: SnapshotExtensionPayloadSDKType): SnapshotExtensionPayload {
     return {
-      payload: isSet(object.payload) ? object.payload : undefined
+      payload: object?.payload
     };
   },
 
   toSDK(message: SnapshotExtensionPayload): SnapshotExtensionPayloadSDKType {
     const obj: any = {};
-    message.payload !== undefined && (obj.payload = message.payload);
+    obj.payload = message.payload;
     return obj;
   }
 
@@ -876,15 +876,15 @@ export const SnapshotKVItem = {
 
   fromSDK(object: SnapshotKVItemSDKType): SnapshotKVItem {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: SnapshotKVItem): SnapshotKVItemSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 

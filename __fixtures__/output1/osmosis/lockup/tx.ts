@@ -176,15 +176,15 @@ export const MsgLockTokens = {
 
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
 
     if (message.coins) {
@@ -255,13 +255,13 @@ export const MsgLockTokensResponse = {
 
   fromSDK(object: MsgLockTokensResponseSDKType): MsgLockTokensResponse {
     return {
-      ID: isSet(object.ID) ? object.ID : undefined
+      ID: object?.ID
     };
   },
 
   toSDK(message: MsgLockTokensResponse): MsgLockTokensResponseSDKType {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = message.ID);
+    obj.ID = message.ID;
     return obj;
   }
 
@@ -324,13 +324,13 @@ export const MsgBeginUnlockingAll = {
 
   fromSDK(object: MsgBeginUnlockingAllSDKType): MsgBeginUnlockingAll {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -504,16 +504,16 @@ export const MsgBeginUnlocking = {
 
   fromSDK(object: MsgBeginUnlockingSDKType): MsgBeginUnlocking {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      ID: isSet(object.ID) ? object.ID : undefined,
+      owner: object?.owner,
+      ID: object?.ID,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgBeginUnlocking): MsgBeginUnlockingSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = message.ID);
+    obj.owner = message.owner;
+    obj.ID = message.ID;
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
@@ -583,13 +583,13 @@ export const MsgBeginUnlockingResponse = {
 
   fromSDK(object: MsgBeginUnlockingResponseSDKType): MsgBeginUnlockingResponse {
     return {
-      success: isSet(object.success) ? object.success : undefined
+      success: object?.success
     };
   },
 
   toSDK(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseSDKType {
     const obj: any = {};
-    message.success !== undefined && (obj.success = message.success);
+    obj.success = message.success;
     return obj;
   }
 
@@ -676,16 +676,16 @@ export const MsgExtendLockup = {
 
   fromSDK(object: MsgExtendLockupSDKType): MsgExtendLockup {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      ID: isSet(object.ID) ? object.ID : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      owner: object?.owner,
+      ID: object?.ID,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: MsgExtendLockup): MsgExtendLockupSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = message.ID);
+    obj.owner = message.owner;
+    obj.ID = message.ID;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }
@@ -749,13 +749,13 @@ export const MsgExtendLockupResponse = {
 
   fromSDK(object: MsgExtendLockupResponseSDKType): MsgExtendLockupResponse {
     return {
-      success: isSet(object.success) ? object.success : undefined
+      success: object?.success
     };
   },
 
   toSDK(message: MsgExtendLockupResponse): MsgExtendLockupResponseSDKType {
     const obj: any = {};
-    message.success !== undefined && (obj.success = message.success);
+    obj.success = message.success;
     return obj;
   }
 

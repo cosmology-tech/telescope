@@ -1015,13 +1015,13 @@ export const AttributeContext = {
 
   fromSDK(object: AttributeContextSDKType): AttributeContext {
     return {
-      origin: isSet(object.origin) ? AttributeContext_Peer.fromSDK(object.origin) : undefined,
-      source: isSet(object.source) ? AttributeContext_Peer.fromSDK(object.source) : undefined,
-      destination: isSet(object.destination) ? AttributeContext_Peer.fromSDK(object.destination) : undefined,
-      request: isSet(object.request) ? AttributeContext_Request.fromSDK(object.request) : undefined,
-      response: isSet(object.response) ? AttributeContext_Response.fromSDK(object.response) : undefined,
-      resource: isSet(object.resource) ? AttributeContext_Resource.fromSDK(object.resource) : undefined,
-      api: isSet(object.api) ? AttributeContext_Api.fromSDK(object.api) : undefined,
+      origin: object.origin ? AttributeContext_Peer.fromSDK(object.origin) : undefined,
+      source: object.source ? AttributeContext_Peer.fromSDK(object.source) : undefined,
+      destination: object.destination ? AttributeContext_Peer.fromSDK(object.destination) : undefined,
+      request: object.request ? AttributeContext_Request.fromSDK(object.request) : undefined,
+      response: object.response ? AttributeContext_Response.fromSDK(object.response) : undefined,
+      resource: object.resource ? AttributeContext_Resource.fromSDK(object.resource) : undefined,
+      api: object.api ? AttributeContext_Api.fromSDK(object.api) : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1116,15 +1116,15 @@ export const AttributeContext_Peer_LabelsEntry = {
 
   fromSDK(object: AttributeContext_Peer_LabelsEntrySDKType): AttributeContext_Peer_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1263,23 +1263,23 @@ export const AttributeContext_Peer = {
 
   fromSDK(object: AttributeContext_PeerSDKType): AttributeContext_Peer {
     return {
-      ip: isSet(object.ip) ? object.ip : undefined,
-      port: isSet(object.port) ? object.port : undefined,
+      ip: object?.ip,
+      port: object?.port,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      principal: isSet(object.principal) ? object.principal : undefined,
-      regionCode: isSet(object.region_code) ? object.region_code : undefined
+      principal: object?.principal,
+      regionCode: object?.region_code
     };
   },
 
   toSDK(message: AttributeContext_Peer): AttributeContext_PeerSDKType {
     const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = message.port);
+    obj.ip = message.ip;
+    obj.port = message.port;
     obj.labels = {};
 
     if (message.labels) {
@@ -1288,8 +1288,8 @@ export const AttributeContext_Peer = {
       });
     }
 
-    message.principal !== undefined && (obj.principal = message.principal);
-    message.regionCode !== undefined && (obj.region_code = message.regionCode);
+    obj.principal = message.principal;
+    obj.region_code = message.regionCode;
     return obj;
   }
 
@@ -1388,19 +1388,19 @@ export const AttributeContext_Api = {
 
   fromSDK(object: AttributeContext_ApiSDKType): AttributeContext_Api {
     return {
-      service: isSet(object.service) ? object.service : undefined,
-      operation: isSet(object.operation) ? object.operation : undefined,
-      protocol: isSet(object.protocol) ? object.protocol : undefined,
-      version: isSet(object.version) ? object.version : undefined
+      service: object?.service,
+      operation: object?.operation,
+      protocol: object?.protocol,
+      version: object?.version
     };
   },
 
   toSDK(message: AttributeContext_Api): AttributeContext_ApiSDKType {
     const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.operation !== undefined && (obj.operation = message.operation);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.version !== undefined && (obj.version = message.version);
+    obj.service = message.service;
+    obj.operation = message.operation;
+    obj.protocol = message.protocol;
+    obj.version = message.version;
     return obj;
   }
 
@@ -1523,17 +1523,17 @@ export const AttributeContext_Auth = {
 
   fromSDK(object: AttributeContext_AuthSDKType): AttributeContext_Auth {
     return {
-      principal: isSet(object.principal) ? object.principal : undefined,
+      principal: object?.principal,
       audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: isSet(object.presenter) ? object.presenter : undefined,
-      claims: isSet(object.claims) ? Struct.fromSDK(object.claims) : undefined,
+      presenter: object?.presenter,
+      claims: object.claims ? Struct.fromSDK(object.claims) : undefined,
       accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
     };
   },
 
   toSDK(message: AttributeContext_Auth): AttributeContext_AuthSDKType {
     const obj: any = {};
-    message.principal !== undefined && (obj.principal = message.principal);
+    obj.principal = message.principal;
 
     if (message.audiences) {
       obj.audiences = message.audiences.map(e => e);
@@ -1541,7 +1541,7 @@ export const AttributeContext_Auth = {
       obj.audiences = [];
     }
 
-    message.presenter !== undefined && (obj.presenter = message.presenter);
+    obj.presenter = message.presenter;
     message.claims !== undefined && (obj.claims = message.claims ? Struct.toSDK(message.claims) : undefined);
 
     if (message.accessLevels) {
@@ -1624,15 +1624,15 @@ export const AttributeContext_Request_HeadersEntry = {
 
   fromSDK(object: AttributeContext_Request_HeadersEntrySDKType): AttributeContext_Request_HeadersEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1855,30 +1855,30 @@ export const AttributeContext_Request = {
 
   fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      method: isSet(object.method) ? object.method : undefined,
+      id: object?.id,
+      method: object?.method,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      path: isSet(object.path) ? object.path : undefined,
-      host: isSet(object.host) ? object.host : undefined,
-      scheme: isSet(object.scheme) ? object.scheme : undefined,
-      query: isSet(object.query) ? object.query : undefined,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      size: isSet(object.size) ? object.size : undefined,
-      protocol: isSet(object.protocol) ? object.protocol : undefined,
-      reason: isSet(object.reason) ? object.reason : undefined,
-      auth: isSet(object.auth) ? AttributeContext_Auth.fromSDK(object.auth) : undefined
+      path: object?.path,
+      host: object?.host,
+      scheme: object?.scheme,
+      query: object?.query,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      size: object?.size,
+      protocol: object?.protocol,
+      reason: object?.reason,
+      auth: object.auth ? AttributeContext_Auth.fromSDK(object.auth) : undefined
     };
   },
 
   toSDK(message: AttributeContext_Request): AttributeContext_RequestSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.method !== undefined && (obj.method = message.method);
+    obj.id = message.id;
+    obj.method = message.method;
     obj.headers = {};
 
     if (message.headers) {
@@ -1887,14 +1887,14 @@ export const AttributeContext_Request = {
       });
     }
 
-    message.path !== undefined && (obj.path = message.path);
-    message.host !== undefined && (obj.host = message.host);
-    message.scheme !== undefined && (obj.scheme = message.scheme);
-    message.query !== undefined && (obj.query = message.query);
+    obj.path = message.path;
+    obj.host = message.host;
+    obj.scheme = message.scheme;
+    obj.query = message.query;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.size !== undefined && (obj.size = message.size);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.reason !== undefined && (obj.reason = message.reason);
+    obj.size = message.size;
+    obj.protocol = message.protocol;
+    obj.reason = message.reason;
     message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toSDK(message.auth) : undefined);
     return obj;
   }
@@ -1970,15 +1970,15 @@ export const AttributeContext_Response_HeadersEntry = {
 
   fromSDK(object: AttributeContext_Response_HeadersEntrySDKType): AttributeContext_Response_HeadersEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2117,23 +2117,23 @@ export const AttributeContext_Response = {
 
   fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      size: isSet(object.size) ? object.size : undefined,
+      code: object?.code,
+      size: object?.size,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      backendLatency: isSet(object.backend_latency) ? Duration.fromSDK(object.backend_latency) : undefined
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      backendLatency: object.backend_latency ? Duration.fromSDK(object.backend_latency) : undefined
     };
   },
 
   toSDK(message: AttributeContext_Response): AttributeContext_ResponseSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.size !== undefined && (obj.size = message.size);
+    obj.code = message.code;
+    obj.size = message.size;
     obj.headers = {};
 
     if (message.headers) {
@@ -2218,15 +2218,15 @@ export const AttributeContext_Resource_LabelsEntry = {
 
   fromSDK(object: AttributeContext_Resource_LabelsEntrySDKType): AttributeContext_Resource_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2301,15 +2301,15 @@ export const AttributeContext_Resource_AnnotationsEntry = {
 
   fromSDK(object: AttributeContext_Resource_AnnotationsEntrySDKType): AttributeContext_Resource_AnnotationsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2560,36 +2560,36 @@ export const AttributeContext_Resource = {
 
   fromSDK(object: AttributeContext_ResourceSDKType): AttributeContext_Resource {
     return {
-      service: isSet(object.service) ? object.service : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      type: isSet(object.type) ? object.type : undefined,
+      service: object?.service,
+      name: object?.name,
+      type: object?.type,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      uid: isSet(object.uid) ? object.uid : undefined,
+      uid: object?.uid,
       annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      displayName: isSet(object.display_name) ? object.display_name : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
-      deleteTime: isSet(object.delete_time) ? Timestamp.fromSDK(object.delete_time) : undefined,
-      etag: isSet(object.etag) ? object.etag : undefined,
-      location: isSet(object.location) ? object.location : undefined
+      displayName: object?.display_name,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      deleteTime: object.delete_time ? Timestamp.fromSDK(object.delete_time) : undefined,
+      etag: object?.etag,
+      location: object?.location
     };
   },
 
   toSDK(message: AttributeContext_Resource): AttributeContext_ResourceSDKType {
     const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
+    obj.service = message.service;
+    obj.name = message.name;
+    obj.type = message.type;
     obj.labels = {};
 
     if (message.labels) {
@@ -2598,7 +2598,7 @@ export const AttributeContext_Resource = {
       });
     }
 
-    message.uid !== undefined && (obj.uid = message.uid);
+    obj.uid = message.uid;
     obj.annotations = {};
 
     if (message.annotations) {
@@ -2607,12 +2607,12 @@ export const AttributeContext_Resource = {
       });
     }
 
-    message.displayName !== undefined && (obj.display_name = message.displayName);
+    obj.display_name = message.displayName;
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
     message.deleteTime !== undefined && (obj.delete_time = message.deleteTime ? Timestamp.toSDK(message.deleteTime) : undefined);
-    message.etag !== undefined && (obj.etag = message.etag);
-    message.location !== undefined && (obj.location = message.location);
+    obj.etag = message.etag;
+    obj.location = message.location;
     return obj;
   }
 

@@ -13,18 +13,7 @@ export enum NullValue {
   NULL_VALUE = 0,
   UNRECOGNIZED = -1,
 }
-
-/**
- * `NullValue` is a singleton enumeration to represent the null value for the
- * `Value` type union.
- * 
- *  The JSON representation for `NullValue` is JSON `null`.
- */
-export enum NullValueSDKType {
-  /** NULL_VALUE - Null value. */
-  NULL_VALUE = 0,
-  UNRECOGNIZED = -1,
-}
+export const NullValueSDKType = NullValue;
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
@@ -128,7 +117,7 @@ export interface Value {
  */
 export interface ValueSDKType {
   /** Represents a null value. */
-  null_value?: NullValueSDKType;
+  null_value?: NullValue;
 
   /** Represents a double value. */
   number_value?: number;
@@ -235,14 +224,14 @@ export const Struct_FieldsEntry = {
 
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+      key: object?.key,
+      value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
 
   toSDK(message: Struct_FieldsEntry): Struct_FieldsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
   }
@@ -475,20 +464,20 @@ export const Value = {
   fromSDK(object: ValueSDKType): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      numberValue: isSet(object.number_value) ? object.number_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      structValue: isSet(object.struct_value) ? Struct.fromSDK(object.struct_value) : undefined,
-      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined
+      numberValue: object?.number_value,
+      stringValue: object?.string_value,
+      boolValue: object?.bool_value,
+      structValue: object.struct_value ? Struct.fromSDK(object.struct_value) : undefined,
+      listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined
     };
   },
 
   toSDK(message: Value): ValueSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    message.numberValue !== undefined && (obj.number_value = message.numberValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
     message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toSDK(message.structValue) : undefined);
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     return obj;

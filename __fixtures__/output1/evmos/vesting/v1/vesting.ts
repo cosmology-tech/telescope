@@ -172,9 +172,9 @@ export const ClawbackVestingAccount = {
 
   fromSDK(object: ClawbackVestingAccountSDKType): ClawbackVestingAccount {
     return {
-      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      funderAddress: isSet(object.funder_address) ? object.funder_address : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      baseVestingAccount: object.base_vesting_account ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
+      funderAddress: object?.funder_address,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };
@@ -183,7 +183,7 @@ export const ClawbackVestingAccount = {
   toSDK(message: ClawbackVestingAccount): ClawbackVestingAccountSDKType {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
-    message.funderAddress !== undefined && (obj.funder_address = message.funderAddress);
+    obj.funder_address = message.funderAddress;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
 
     if (message.lockupPeriods) {

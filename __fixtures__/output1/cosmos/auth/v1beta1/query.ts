@@ -222,7 +222,7 @@ export const QueryAccountsRequest = {
 
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -310,7 +310,7 @@ export const QueryAccountsResponse = {
   fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -386,13 +386,13 @@ export const QueryAccountRequest = {
 
   fromSDK(object: QueryAccountRequestSDKType): QueryAccountRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryAccountRequest): QueryAccountRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -507,7 +507,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -576,7 +576,7 @@ export const QueryAccountResponse = {
 
   fromSDK(object: QueryAccountResponseSDKType): QueryAccountResponse {
     return {
-      account: isSet(object.account) ? Any.fromSDK(object.account) : undefined
+      account: object.account ? Any.fromSDK(object.account) : undefined
     };
   },
 
@@ -830,13 +830,13 @@ export const Bech32PrefixResponse = {
 
   fromSDK(object: Bech32PrefixResponseSDKType): Bech32PrefixResponse {
     return {
-      bech32Prefix: isSet(object.bech32_prefix) ? object.bech32_prefix : undefined
+      bech32Prefix: object?.bech32_prefix
     };
   },
 
   toSDK(message: Bech32PrefixResponse): Bech32PrefixResponseSDKType {
     const obj: any = {};
-    message.bech32Prefix !== undefined && (obj.bech32_prefix = message.bech32Prefix);
+    obj.bech32_prefix = message.bech32Prefix;
     return obj;
   }
 
@@ -899,13 +899,13 @@ export const AddressBytesToStringRequest = {
 
   fromSDK(object: AddressBytesToStringRequestSDKType): AddressBytesToStringRequest {
     return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
+      addressBytes: object?.address_bytes
     };
   },
 
   toSDK(message: AddressBytesToStringRequest): AddressBytesToStringRequestSDKType {
     const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
+    obj.address_bytes = message.addressBytes;
     return obj;
   }
 
@@ -968,13 +968,13 @@ export const AddressBytesToStringResponse = {
 
   fromSDK(object: AddressBytesToStringResponseSDKType): AddressBytesToStringResponse {
     return {
-      addressString: isSet(object.address_string) ? object.address_string : undefined
+      addressString: object?.address_string
     };
   },
 
   toSDK(message: AddressBytesToStringResponse): AddressBytesToStringResponseSDKType {
     const obj: any = {};
-    message.addressString !== undefined && (obj.address_string = message.addressString);
+    obj.address_string = message.addressString;
     return obj;
   }
 
@@ -1037,13 +1037,13 @@ export const AddressStringToBytesRequest = {
 
   fromSDK(object: AddressStringToBytesRequestSDKType): AddressStringToBytesRequest {
     return {
-      addressString: isSet(object.address_string) ? object.address_string : undefined
+      addressString: object?.address_string
     };
   },
 
   toSDK(message: AddressStringToBytesRequest): AddressStringToBytesRequestSDKType {
     const obj: any = {};
-    message.addressString !== undefined && (obj.address_string = message.addressString);
+    obj.address_string = message.addressString;
     return obj;
   }
 
@@ -1106,13 +1106,13 @@ export const AddressStringToBytesResponse = {
 
   fromSDK(object: AddressStringToBytesResponseSDKType): AddressStringToBytesResponse {
     return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
+      addressBytes: object?.address_bytes
     };
   },
 
   toSDK(message: AddressStringToBytesResponse): AddressStringToBytesResponseSDKType {
     const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
+    obj.address_bytes = message.addressBytes;
     return obj;
   }
 

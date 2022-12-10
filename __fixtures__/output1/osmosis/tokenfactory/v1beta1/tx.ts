@@ -227,15 +227,15 @@ export const MsgCreateDenom = {
 
   fromSDK(object: MsgCreateDenomSDKType): MsgCreateDenom {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      subdenom: isSet(object.subdenom) ? object.subdenom : undefined
+      sender: object?.sender,
+      subdenom: object?.subdenom
     };
   },
 
   toSDK(message: MsgCreateDenom): MsgCreateDenomSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.subdenom !== undefined && (obj.subdenom = message.subdenom);
+    obj.sender = message.sender;
+    obj.subdenom = message.subdenom;
     return obj;
   }
 
@@ -298,13 +298,13 @@ export const MsgCreateDenomResponse = {
 
   fromSDK(object: MsgCreateDenomResponseSDKType): MsgCreateDenomResponse {
     return {
-      newTokenDenom: isSet(object.new_token_denom) ? object.new_token_denom : undefined
+      newTokenDenom: object?.new_token_denom
     };
   },
 
   toSDK(message: MsgCreateDenomResponse): MsgCreateDenomResponseSDKType {
     const obj: any = {};
-    message.newTokenDenom !== undefined && (obj.new_token_denom = message.newTokenDenom);
+    obj.new_token_denom = message.newTokenDenom;
     return obj;
   }
 
@@ -379,14 +379,14 @@ export const MsgMint = {
 
   fromSDK(object: MsgMintSDKType): MsgMint {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      sender: object?.sender,
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
   toSDK(message: MsgMint): MsgMintSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
   }
@@ -514,14 +514,14 @@ export const MsgBurn = {
 
   fromSDK(object: MsgBurnSDKType): MsgBurn {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      sender: object?.sender,
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
   toSDK(message: MsgBurn): MsgBurnSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
   }
@@ -661,17 +661,17 @@ export const MsgChangeAdmin = {
 
   fromSDK(object: MsgChangeAdminSDKType): MsgChangeAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined,
-      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
+      sender: object?.sender,
+      denom: object?.denom,
+      newAdmin: object?.new_admin
     };
   },
 
   toSDK(message: MsgChangeAdmin): MsgChangeAdminSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
+    obj.sender = message.sender;
+    obj.denom = message.denom;
+    obj.new_admin = message.newAdmin;
     return obj;
   }
 
@@ -798,14 +798,14 @@ export const MsgSetDenomMetadata = {
 
   fromSDK(object: MsgSetDenomMetadataSDKType): MsgSetDenomMetadata {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+      sender: object?.sender,
+      metadata: object.metadata ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
 
   toSDK(message: MsgSetDenomMetadata): MsgSetDenomMetadataSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
   }

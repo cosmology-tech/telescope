@@ -180,16 +180,16 @@ export const LogDescriptor = {
 
   fromSDK(object: LogDescriptorSDKType): LogDescriptor {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      description: isSet(object.description) ? object.description : undefined,
-      displayName: isSet(object.display_name) ? object.display_name : undefined
+      description: object?.description,
+      displayName: object?.display_name
     };
   },
 
   toSDK(message: LogDescriptor): LogDescriptorSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
 
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
@@ -197,8 +197,8 @@ export const LogDescriptor = {
       obj.labels = [];
     }
 
-    message.description !== undefined && (obj.description = message.description);
-    message.displayName !== undefined && (obj.display_name = message.displayName);
+    obj.description = message.description;
+    obj.display_name = message.displayName;
     return obj;
   }
 

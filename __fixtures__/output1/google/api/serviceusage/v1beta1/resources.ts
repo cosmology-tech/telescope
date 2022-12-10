@@ -29,26 +29,7 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Whether or not a service has been enabled for use by a consumer. */
-export enum StateSDKType {
-  /**
-   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   * is unspecified or not meaningful. Currently, all consumers other than
-   * projects (such as folders and organizations) are always in this state.
-   */
-  STATE_UNSPECIFIED = 0,
-
-  /**
-   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   * disabled, or has never been enabled.
-   */
-  DISABLED = 1,
-
-  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
-  ENABLED = 2,
-  UNRECOGNIZED = -1,
-}
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -111,32 +92,7 @@ export enum QuotaView {
   FULL = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Selected view of quota. Can be used to request more detailed quota
- * information when retrieving quota metrics and limits.
- */
-export enum QuotaViewSDKType {
-  /**
-   * QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
-   * typically default to the BASIC view.
-   */
-  QUOTA_VIEW_UNSPECIFIED = 0,
-
-  /** BASIC - Only buckets with overrides are shown in the response. */
-  BASIC = 1,
-
-  /**
-   * FULL - Include per-location buckets even if they do not have overrides.
-   * When the view is FULL, and a limit has regional or zonal quota, the limit
-   * will include buckets for all regions or zones that could support
-   * overrides, even if none are currently present. In some cases this will
-   * cause the response to become very large; callers that do not need this
-   * extra information should use the BASIC view instead.
-   */
-  FULL = 2,
-  UNRECOGNIZED = -1,
-}
+export const QuotaViewSDKType = QuotaView;
 export function quotaViewFromJSON(object: any): QuotaView {
   switch (object) {
     case 0:
@@ -192,25 +148,7 @@ export enum QuotaSafetyCheck {
   LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Enumerations of quota safety checks. */
-export enum QuotaSafetyCheckSDKType {
-  /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
-  QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
-
-  /**
-   * LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
-   * limit to be lower than the consumer's quota usage.
-   */
-  LIMIT_DECREASE_BELOW_USAGE = 1,
-
-  /**
-   * LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
-   * limit to decrease by more than 10 percent.
-   */
-  LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
-  UNRECOGNIZED = -1,
-}
+export const QuotaSafetyCheckSDKType = QuotaSafetyCheck;
 export function quotaSafetyCheckFromJSON(object: any): QuotaSafetyCheck {
   switch (object) {
     case 0:
@@ -305,7 +243,7 @@ export interface ServiceSDKType {
   config?: ServiceConfigSDKType;
 
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: StateSDKType;
+  state: State;
 }
 
 /** The configuration of the service. */
@@ -1147,17 +1085,17 @@ export const Service = {
 
   fromSDK(object: ServiceSDKType): Service {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      parent: isSet(object.parent) ? object.parent : undefined,
-      config: isSet(object.config) ? ServiceConfig.fromSDK(object.config) : undefined,
+      name: object?.name,
+      parent: object?.parent,
+      config: object.config ? ServiceConfig.fromSDK(object.config) : undefined,
       state: isSet(object.state) ? stateFromJSON(object.state) : 0
     };
   },
 
   toSDK(message: Service): ServiceSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.name = message.name;
+    obj.parent = message.parent;
     message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     return obj;
@@ -1347,23 +1285,23 @@ export const ServiceConfig = {
 
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      title: isSet(object.title) ? object.title : undefined,
+      name: object?.name,
+      title: object?.title,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromSDK(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromSDK(object.usage) : undefined,
+      documentation: object.documentation ? Documentation.fromSDK(object.documentation) : undefined,
+      quota: object.quota ? Quota.fromSDK(object.quota) : undefined,
+      authentication: object.authentication ? Authentication.fromSDK(object.authentication) : undefined,
+      usage: object.usage ? Usage.fromSDK(object.usage) : undefined,
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
       monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromSDK(object.monitoring) : undefined
+      monitoring: object.monitoring ? Monitoring.fromSDK(object.monitoring) : undefined
     };
   },
 
   toSDK(message: ServiceConfig): ServiceConfigSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
+    obj.name = message.name;
+    obj.title = message.title;
 
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);
@@ -1603,20 +1541,20 @@ export const ConsumerQuotaMetric = {
 
   fromSDK(object: ConsumerQuotaMetricSDKType): ConsumerQuotaMetric {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      metric: isSet(object.metric) ? object.metric : undefined,
-      displayName: isSet(object.display_name) ? object.display_name : undefined,
+      name: object?.name,
+      metric: object?.metric,
+      displayName: object?.display_name,
       consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
       descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
-      unit: isSet(object.unit) ? object.unit : undefined
+      unit: object?.unit
     };
   },
 
   toSDK(message: ConsumerQuotaMetric): ConsumerQuotaMetricSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.displayName !== undefined && (obj.display_name = message.displayName);
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.display_name = message.displayName;
 
     if (message.consumerQuotaLimits) {
       obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toSDK(e) : undefined);
@@ -1630,7 +1568,7 @@ export const ConsumerQuotaMetric = {
       obj.descendant_consumer_quota_limits = [];
     }
 
-    message.unit !== undefined && (obj.unit = message.unit);
+    obj.unit = message.unit;
     return obj;
   }
 
@@ -1759,22 +1697,22 @@ export const ConsumerQuotaLimit = {
 
   fromSDK(object: ConsumerQuotaLimitSDKType): ConsumerQuotaLimit {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      metric: isSet(object.metric) ? object.metric : undefined,
-      unit: isSet(object.unit) ? object.unit : undefined,
-      isPrecise: isSet(object.is_precise) ? object.is_precise : undefined,
-      allowsAdminOverrides: isSet(object.allows_admin_overrides) ? object.allows_admin_overrides : undefined,
+      name: object?.name,
+      metric: object?.metric,
+      unit: object?.unit,
+      isPrecise: object?.is_precise,
+      allowsAdminOverrides: object?.allows_admin_overrides,
       quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ConsumerQuotaLimit): ConsumerQuotaLimitSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.isPrecise !== undefined && (obj.is_precise = message.isPrecise);
-    message.allowsAdminOverrides !== undefined && (obj.allows_admin_overrides = message.allowsAdminOverrides);
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.is_precise = message.isPrecise;
+    obj.allows_admin_overrides = message.allowsAdminOverrides;
 
     if (message.quotaBuckets) {
       obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toSDK(e) : undefined);
@@ -1856,15 +1794,15 @@ export const QuotaBucket_DimensionsEntry = {
 
   fromSDK(object: QuotaBucket_DimensionsEntrySDKType): QuotaBucket_DimensionsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2014,11 +1952,11 @@ export const QuotaBucket = {
 
   fromSDK(object: QuotaBucketSDKType): QuotaBucket {
     return {
-      effectiveLimit: isSet(object.effective_limit) ? object.effective_limit : undefined,
-      defaultLimit: isSet(object.default_limit) ? object.default_limit : undefined,
-      producerOverride: isSet(object.producer_override) ? QuotaOverride.fromSDK(object.producer_override) : undefined,
-      consumerOverride: isSet(object.consumer_override) ? QuotaOverride.fromSDK(object.consumer_override) : undefined,
-      adminOverride: isSet(object.admin_override) ? QuotaOverride.fromSDK(object.admin_override) : undefined,
+      effectiveLimit: object?.effective_limit,
+      defaultLimit: object?.default_limit,
+      producerOverride: object.producer_override ? QuotaOverride.fromSDK(object.producer_override) : undefined,
+      consumerOverride: object.consumer_override ? QuotaOverride.fromSDK(object.consumer_override) : undefined,
+      adminOverride: object.admin_override ? QuotaOverride.fromSDK(object.admin_override) : undefined,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2030,8 +1968,8 @@ export const QuotaBucket = {
 
   toSDK(message: QuotaBucket): QuotaBucketSDKType {
     const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effective_limit = message.effectiveLimit);
-    message.defaultLimit !== undefined && (obj.default_limit = message.defaultLimit);
+    obj.effective_limit = message.effectiveLimit;
+    obj.default_limit = message.defaultLimit;
     message.producerOverride !== undefined && (obj.producer_override = message.producerOverride ? QuotaOverride.toSDK(message.producerOverride) : undefined);
     message.consumerOverride !== undefined && (obj.consumer_override = message.consumerOverride ? QuotaOverride.toSDK(message.consumerOverride) : undefined);
     message.adminOverride !== undefined && (obj.admin_override = message.adminOverride ? QuotaOverride.toSDK(message.adminOverride) : undefined);
@@ -2117,15 +2055,15 @@ export const QuotaOverride_DimensionsEntry = {
 
   fromSDK(object: QuotaOverride_DimensionsEntrySDKType): QuotaOverride_DimensionsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2276,24 +2214,24 @@ export const QuotaOverride = {
 
   fromSDK(object: QuotaOverrideSDKType): QuotaOverride {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      overrideValue: isSet(object.override_value) ? object.override_value : undefined,
+      name: object?.name,
+      overrideValue: object?.override_value,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: isSet(object.metric) ? object.metric : undefined,
-      unit: isSet(object.unit) ? object.unit : undefined,
-      adminOverrideAncestor: isSet(object.admin_override_ancestor) ? object.admin_override_ancestor : undefined
+      metric: object?.metric,
+      unit: object?.unit,
+      adminOverrideAncestor: object?.admin_override_ancestor
     };
   },
 
   toSDK(message: QuotaOverride): QuotaOverrideSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.override_value = message.overrideValue);
+    obj.name = message.name;
+    obj.override_value = message.overrideValue;
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -2302,9 +2240,9 @@ export const QuotaOverride = {
       });
     }
 
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.adminOverrideAncestor !== undefined && (obj.admin_override_ancestor = message.adminOverrideAncestor);
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.admin_override_ancestor = message.adminOverrideAncestor;
     return obj;
   }
 
@@ -2460,15 +2398,15 @@ export const AdminQuotaPolicy_DimensionsEntry = {
 
   fromSDK(object: AdminQuotaPolicy_DimensionsEntrySDKType): AdminQuotaPolicy_DimensionsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -2619,24 +2557,24 @@ export const AdminQuotaPolicy = {
 
   fromSDK(object: AdminQuotaPolicySDKType): AdminQuotaPolicy {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      policyValue: isSet(object.policy_value) ? object.policy_value : undefined,
+      name: object?.name,
+      policyValue: object?.policy_value,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      metric: isSet(object.metric) ? object.metric : undefined,
-      unit: isSet(object.unit) ? object.unit : undefined,
-      container: isSet(object.container) ? object.container : undefined
+      metric: object?.metric,
+      unit: object?.unit,
+      container: object?.container
     };
   },
 
   toSDK(message: AdminQuotaPolicy): AdminQuotaPolicySDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policy_value = message.policyValue);
+    obj.name = message.name;
+    obj.policy_value = message.policyValue;
     obj.dimensions = {};
 
     if (message.dimensions) {
@@ -2645,9 +2583,9 @@ export const AdminQuotaPolicy = {
       });
     }
 
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.container !== undefined && (obj.container = message.container);
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.container = message.container;
     return obj;
   }
 
@@ -2722,15 +2660,15 @@ export const ServiceIdentity = {
 
   fromSDK(object: ServiceIdentitySDKType): ServiceIdentity {
     return {
-      email: isSet(object.email) ? object.email : undefined,
-      uniqueId: isSet(object.unique_id) ? object.unique_id : undefined
+      email: object?.email,
+      uniqueId: object?.unique_id
     };
   },
 
   toSDK(message: ServiceIdentity): ServiceIdentitySDKType {
     const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.uniqueId !== undefined && (obj.unique_id = message.uniqueId);
+    obj.email = message.email;
+    obj.unique_id = message.uniqueId;
     return obj;
   }
 

@@ -1,8 +1,8 @@
 import { Params, ParamsSDKType } from "./params";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
 
 /**
@@ -157,10 +157,10 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDK(e)) : [],
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
-      lastGaugeId: isSet(object.last_gauge_id) ? object.last_gauge_id : undefined
+      lastGaugeId: object?.last_gauge_id
     };
   },
 
@@ -180,7 +180,7 @@ export const GenesisState = {
       obj.lockable_durations = [];
     }
 
-    message.lastGaugeId !== undefined && (obj.last_gauge_id = message.lastGaugeId);
+    obj.last_gauge_id = message.lastGaugeId;
     return obj;
   }
 

@@ -3,6 +3,7 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createSDKType, createProtoType } from '..';
+import { createAminoType } from '../amino';
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -17,6 +18,11 @@ describe('MsgSend', () => {
     });
     it('api interface', () => {
         expectCode(createSDKType(context, 'MsgSend',
+            getNestedProto(ref.traversed).MsgSend
+        ));
+    });
+    it('amino interface', () => {
+        expectCode(createAminoType(context, 'MsgSend',
             getNestedProto(ref.traversed).MsgSend
         ));
     });

@@ -1,7 +1,7 @@
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** State is an enum which refers to state of group */
@@ -22,25 +22,7 @@ export enum Group_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of group */
-export enum Group_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** open - GroupOpen denotes state for group open */
-  open = 1,
-
-  /** paused - GroupOrdered denotes state for group ordered */
-  paused = 2,
-
-  /** insufficient_funds - GroupInsufficientFunds denotes state for group insufficient_funds */
-  insufficient_funds = 3,
-
-  /** closed - GroupClosed denotes state for group closed */
-  closed = 4,
-  UNRECOGNIZED = -1,
-}
+export const Group_StateSDKType = Group_State;
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:
@@ -103,7 +85,7 @@ export interface Group {
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id?: GroupIDSDKType;
-  state: Group_StateSDKType;
+  state: Group_State;
   group_spec?: GroupSpecSDKType;
   created_at: Long;
 }
@@ -201,10 +183,10 @@ export const Group = {
 
   fromSDK(object: GroupSDKType): Group {
     return {
-      groupId: isSet(object.group_id) ? GroupID.fromSDK(object.group_id) : undefined,
+      groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      groupSpec: isSet(object.group_spec) ? GroupSpec.fromSDK(object.group_spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
+      groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
+      createdAt: object?.created_at
     };
   },
 
@@ -213,7 +195,7 @@ export const Group = {
     message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toSDK(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    obj.created_at = message.createdAt;
     return obj;
   }
 

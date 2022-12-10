@@ -692,18 +692,18 @@ export const AuthenticationRule = {
 
   fromSDK(object: AuthenticationRuleSDKType): AuthenticationRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDK(object.oauth) : undefined,
-      allowWithoutCredential: isSet(object.allow_without_credential) ? object.allow_without_credential : undefined,
+      selector: object?.selector,
+      oauth: object.oauth ? OAuthRequirements.fromSDK(object.oauth) : undefined,
+      allowWithoutCredential: object?.allow_without_credential,
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDK(e)) : []
     };
   },
 
   toSDK(message: AuthenticationRule): AuthenticationRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
+    obj.selector = message.selector;
     message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toSDK(message.oauth) : undefined);
-    message.allowWithoutCredential !== undefined && (obj.allow_without_credential = message.allowWithoutCredential);
+    obj.allow_without_credential = message.allowWithoutCredential;
 
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e ? AuthRequirement.toSDK(e) : undefined);
@@ -797,17 +797,17 @@ export const JwtLocation = {
 
   fromSDK(object: JwtLocationSDKType): JwtLocation {
     return {
-      header: isSet(object.header) ? object.header : undefined,
-      query: isSet(object.query) ? object.query : undefined,
-      valuePrefix: isSet(object.value_prefix) ? object.value_prefix : undefined
+      header: object?.header,
+      query: object?.query,
+      valuePrefix: object?.value_prefix
     };
   },
 
   toSDK(message: JwtLocation): JwtLocationSDKType {
     const obj: any = {};
-    message.header !== undefined && (obj.header = message.header);
-    message.query !== undefined && (obj.query = message.query);
-    message.valuePrefix !== undefined && (obj.value_prefix = message.valuePrefix);
+    obj.header = message.header;
+    obj.query = message.query;
+    obj.value_prefix = message.valuePrefix;
     return obj;
   }
 
@@ -936,22 +936,22 @@ export const AuthProvider = {
 
   fromSDK(object: AuthProviderSDKType): AuthProvider {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      issuer: isSet(object.issuer) ? object.issuer : undefined,
-      jwksUri: isSet(object.jwks_uri) ? object.jwks_uri : undefined,
-      audiences: isSet(object.audiences) ? object.audiences : undefined,
-      authorizationUrl: isSet(object.authorization_url) ? object.authorization_url : undefined,
+      id: object?.id,
+      issuer: object?.issuer,
+      jwksUri: object?.jwks_uri,
+      audiences: object?.audiences,
+      authorizationUrl: object?.authorization_url,
       jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDK(e)) : []
     };
   },
 
   toSDK(message: AuthProvider): AuthProviderSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.issuer !== undefined && (obj.issuer = message.issuer);
-    message.jwksUri !== undefined && (obj.jwks_uri = message.jwksUri);
-    message.audiences !== undefined && (obj.audiences = message.audiences);
-    message.authorizationUrl !== undefined && (obj.authorization_url = message.authorizationUrl);
+    obj.id = message.id;
+    obj.issuer = message.issuer;
+    obj.jwks_uri = message.jwksUri;
+    obj.audiences = message.audiences;
+    obj.authorization_url = message.authorizationUrl;
 
     if (message.jwtLocations) {
       obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toSDK(e) : undefined);
@@ -1021,13 +1021,13 @@ export const OAuthRequirements = {
 
   fromSDK(object: OAuthRequirementsSDKType): OAuthRequirements {
     return {
-      canonicalScopes: isSet(object.canonical_scopes) ? object.canonical_scopes : undefined
+      canonicalScopes: object?.canonical_scopes
     };
   },
 
   toSDK(message: OAuthRequirements): OAuthRequirementsSDKType {
     const obj: any = {};
-    message.canonicalScopes !== undefined && (obj.canonical_scopes = message.canonicalScopes);
+    obj.canonical_scopes = message.canonicalScopes;
     return obj;
   }
 
@@ -1102,15 +1102,15 @@ export const AuthRequirement = {
 
   fromSDK(object: AuthRequirementSDKType): AuthRequirement {
     return {
-      providerId: isSet(object.provider_id) ? object.provider_id : undefined,
-      audiences: isSet(object.audiences) ? object.audiences : undefined
+      providerId: object?.provider_id,
+      audiences: object?.audiences
     };
   },
 
   toSDK(message: AuthRequirement): AuthRequirementSDKType {
     const obj: any = {};
-    message.providerId !== undefined && (obj.provider_id = message.providerId);
-    message.audiences !== undefined && (obj.audiences = message.audiences);
+    obj.provider_id = message.providerId;
+    obj.audiences = message.audiences;
     return obj;
   }
 

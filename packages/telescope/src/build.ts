@@ -10,11 +10,12 @@ import {
     createProtoEnumFromJSON,
     createProtoType,
     createSDKType,
+    createAminoType,
     createEnumSDKType,
+    createEnumAminoType,
     makeAminoTypeInterface,
     GenericParseContext,
     ProtoParseContext,
-    // registry 
     createTypeRegistry,
     createRegistryLoader,
     // helper
@@ -56,6 +57,9 @@ export const buildBaseTypeScriptInterface = (
     obj: any
 ) => {
     context.body.push(createProtoType(context.proto, name, obj));
+    if (context.options.aminoEncoding.useRecursiveV2encoding) {
+        context.body.push(createAminoType(context.proto, name, obj));
+    }
     if (context.options.useSDKTypes) {
         context.body.push(createSDKType(context.proto, name, obj));
     }
@@ -69,6 +73,9 @@ export const buildEnums = (
     context.body.push(createProtoEnum(context.proto, name, obj));
     if (context.options.useSDKTypes) {
         context.body.push(createEnumSDKType(context.proto, name, obj));
+    }
+    if (context.options.aminoEncoding.useRecursiveV2encoding) {
+        context.body.push(createEnumAminoType(context.proto, name, obj));
     }
     context.body.push(createProtoEnumFromJSON(context.proto, name, obj));
     context.body.push(createProtoEnumToJSON(context.proto, name, obj));
@@ -158,6 +165,8 @@ export class TelescopeParseContext implements TelescopeParseContext {
         this.body.push(createRegistryLoader(this.amino));
     }
     buildAminoInterfaces() {
+        if (this.options.aminoEncoding.useRecursiveV2encoding) return;
+        //
         const protos = getAminoProtos(this.mutations, this.store);
         protos.forEach(proto => {
             this.body.push(makeAminoTypeInterface({

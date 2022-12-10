@@ -248,19 +248,19 @@ export const MsgCreateClawbackVestingAccount = {
 
   fromSDK(object: MsgCreateClawbackVestingAccountSDKType): MsgCreateClawbackVestingAccount {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
-      toAddress: isSet(object.to_address) ? object.to_address : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      fromAddress: object?.from_address,
+      toAddress: object?.to_address,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : [],
-      merge: isSet(object.merge) ? object.merge : undefined
+      merge: object?.merge
     };
   },
 
   toSDK(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountSDKType {
     const obj: any = {};
-    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
-    message.toAddress !== undefined && (obj.to_address = message.toAddress);
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
 
     if (message.lockupPeriods) {
@@ -275,7 +275,7 @@ export const MsgCreateClawbackVestingAccount = {
       obj.vesting_periods = [];
     }
 
-    message.merge !== undefined && (obj.merge = message.merge);
+    obj.merge = message.merge;
     return obj;
   }
 
@@ -414,17 +414,17 @@ export const MsgClawback = {
 
   fromSDK(object: MsgClawbackSDKType): MsgClawback {
     return {
-      funderAddress: isSet(object.funder_address) ? object.funder_address : undefined,
-      accountAddress: isSet(object.account_address) ? object.account_address : undefined,
-      destAddress: isSet(object.dest_address) ? object.dest_address : undefined
+      funderAddress: object?.funder_address,
+      accountAddress: object?.account_address,
+      destAddress: object?.dest_address
     };
   },
 
   toSDK(message: MsgClawback): MsgClawbackSDKType {
     const obj: any = {};
-    message.funderAddress !== undefined && (obj.funder_address = message.funderAddress);
-    message.accountAddress !== undefined && (obj.account_address = message.accountAddress);
-    message.destAddress !== undefined && (obj.dest_address = message.destAddress);
+    obj.funder_address = message.funderAddress;
+    obj.account_address = message.accountAddress;
+    obj.dest_address = message.destAddress;
     return obj;
   }
 

@@ -184,7 +184,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -305,13 +305,13 @@ export const QueryInflationResponse = {
 
   fromSDK(object: QueryInflationResponseSDKType): QueryInflationResponse {
     return {
-      inflation: isSet(object.inflation) ? object.inflation : undefined
+      inflation: object?.inflation
     };
   },
 
   toSDK(message: QueryInflationResponse): QueryInflationResponseSDKType {
     const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
+    obj.inflation = message.inflation;
     return obj;
   }
 
@@ -426,13 +426,13 @@ export const QueryAnnualProvisionsResponse = {
 
   fromSDK(object: QueryAnnualProvisionsResponseSDKType): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
+      annualProvisions: object?.annual_provisions
     };
   },
 
   toSDK(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseSDKType {
     const obj: any = {};
-    message.annualProvisions !== undefined && (obj.annual_provisions = message.annualProvisions);
+    obj.annual_provisions = message.annualProvisions;
     return obj;
   }
 

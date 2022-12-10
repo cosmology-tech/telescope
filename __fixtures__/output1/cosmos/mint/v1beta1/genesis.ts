@@ -90,8 +90,8 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      minter: isSet(object.minter) ? Minter.fromSDK(object.minter) : undefined,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      minter: object.minter ? Minter.fromSDK(object.minter) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

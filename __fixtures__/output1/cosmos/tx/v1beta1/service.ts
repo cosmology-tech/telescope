@@ -19,19 +19,7 @@ export enum OrderBy {
   ORDER_BY_DESC = 2,
   UNRECOGNIZED = -1,
 }
-
-/** OrderBy defines the sorting order */
-export enum OrderBySDKType {
-  /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
-  ORDER_BY_UNSPECIFIED = 0,
-
-  /** ORDER_BY_ASC - ORDER_BY_ASC defines ascending order */
-  ORDER_BY_ASC = 1,
-
-  /** ORDER_BY_DESC - ORDER_BY_DESC defines descending order */
-  ORDER_BY_DESC = 2,
-  UNRECOGNIZED = -1,
-}
+export const OrderBySDKType = OrderBy;
 export function orderByFromJSON(object: any): OrderBy {
   switch (object) {
     case 0:
@@ -93,31 +81,7 @@ export enum BroadcastMode {
   BROADCAST_MODE_ASYNC = 3,
   UNRECOGNIZED = -1,
 }
-
-/** BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method. */
-export enum BroadcastModeSDKType {
-  /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
-  BROADCAST_MODE_UNSPECIFIED = 0,
-
-  /**
-   * BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
-   * the tx to be committed in a block.
-   */
-  BROADCAST_MODE_BLOCK = 1,
-
-  /**
-   * BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
-   * a CheckTx execution response only.
-   */
-  BROADCAST_MODE_SYNC = 2,
-
-  /**
-   * BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
-   * immediately.
-   */
-  BROADCAST_MODE_ASYNC = 3,
-  UNRECOGNIZED = -1,
-}
+export const BroadcastModeSDKType = BroadcastMode;
 export function broadcastModeFromJSON(object: any): BroadcastMode {
   switch (object) {
     case 0:
@@ -185,7 +149,7 @@ export interface GetTxsEventRequestSDKType {
 
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestSDKType;
-  order_by: OrderBySDKType;
+  order_by: OrderBy;
 }
 
 /**
@@ -235,7 +199,7 @@ export interface BroadcastTxRequest {
 export interface BroadcastTxRequestSDKType {
   /** tx_bytes is the raw transaction. */
   tx_bytes: Uint8Array;
-  mode: BroadcastModeSDKType;
+  mode: BroadcastMode;
 }
 
 /**
@@ -504,7 +468,7 @@ export const GetTxsEventRequest = {
   fromSDK(object: GetTxsEventRequestSDKType): GetTxsEventRequest {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined,
       orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : 0
     };
   },
@@ -619,7 +583,7 @@ export const GetTxsEventResponse = {
     return {
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDK(e)) : [],
       txResponses: Array.isArray(object?.tx_responses) ? object.tx_responses.map((e: any) => TxResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -713,14 +677,14 @@ export const BroadcastTxRequest = {
 
   fromSDK(object: BroadcastTxRequestSDKType): BroadcastTxRequest {
     return {
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined,
+      txBytes: object?.tx_bytes,
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
     };
   },
 
   toSDK(message: BroadcastTxRequest): BroadcastTxRequestSDKType {
     const obj: any = {};
-    message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
+    obj.tx_bytes = message.txBytes;
     message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
     return obj;
   }
@@ -784,7 +748,7 @@ export const BroadcastTxResponse = {
 
   fromSDK(object: BroadcastTxResponseSDKType): BroadcastTxResponse {
     return {
-      txResponse: isSet(object.tx_response) ? TxResponse.fromSDK(object.tx_response) : undefined
+      txResponse: object.tx_response ? TxResponse.fromSDK(object.tx_response) : undefined
     };
   },
 
@@ -865,15 +829,15 @@ export const SimulateRequest = {
 
   fromSDK(object: SimulateRequestSDKType): SimulateRequest {
     return {
-      tx: isSet(object.tx) ? Tx.fromSDK(object.tx) : undefined,
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined
+      tx: object.tx ? Tx.fromSDK(object.tx) : undefined,
+      txBytes: object?.tx_bytes
     };
   },
 
   toSDK(message: SimulateRequest): SimulateRequestSDKType {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toSDK(message.tx) : undefined);
-    message.txBytes !== undefined && (obj.tx_bytes = message.txBytes);
+    obj.tx_bytes = message.txBytes;
     return obj;
   }
 
@@ -948,8 +912,8 @@ export const SimulateResponse = {
 
   fromSDK(object: SimulateResponseSDKType): SimulateResponse {
     return {
-      gasInfo: isSet(object.gas_info) ? GasInfo.fromSDK(object.gas_info) : undefined,
-      result: isSet(object.result) ? Result.fromSDK(object.result) : undefined
+      gasInfo: object.gas_info ? GasInfo.fromSDK(object.gas_info) : undefined,
+      result: object.result ? Result.fromSDK(object.result) : undefined
     };
   },
 
@@ -1019,13 +983,13 @@ export const GetTxRequest = {
 
   fromSDK(object: GetTxRequestSDKType): GetTxRequest {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined
+      hash: object?.hash
     };
   },
 
   toSDK(message: GetTxRequest): GetTxRequestSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     return obj;
   }
 
@@ -1100,8 +1064,8 @@ export const GetTxResponse = {
 
   fromSDK(object: GetTxResponseSDKType): GetTxResponse {
     return {
-      tx: isSet(object.tx) ? Tx.fromSDK(object.tx) : undefined,
-      txResponse: isSet(object.tx_response) ? TxResponse.fromSDK(object.tx_response) : undefined
+      tx: object.tx ? Tx.fromSDK(object.tx) : undefined,
+      txResponse: object.tx_response ? TxResponse.fromSDK(object.tx_response) : undefined
     };
   },
 
@@ -1183,14 +1147,14 @@ export const GetBlockWithTxsRequest = {
 
   fromSDK(object: GetBlockWithTxsRequestSDKType): GetBlockWithTxsRequest {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      height: object?.height,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -1297,9 +1261,9 @@ export const GetBlockWithTxsResponse = {
   fromSDK(object: GetBlockWithTxsResponseSDKType): GetBlockWithTxsResponse {
     return {
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDK(e)) : [],
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDK(object.block) : undefined,
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      block: object.block ? Block.fromSDK(object.block) : undefined,
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

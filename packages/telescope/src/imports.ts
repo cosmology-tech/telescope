@@ -258,7 +258,7 @@ export const buildAllImportsFromGenericContext = (
     return importStmts;
 };
 
-const addSDKTypesToImports = (
+const addDerivativeTypesToImports = (
     context: TelescopeParseContext,
     imports: ImportObj[]
 ) => {
@@ -276,6 +276,11 @@ const addSDKTypesToImports = (
                 name: obj.name + 'SDKType',
                 importAs: (obj.importAs ?? obj.name) + 'SDKType',
             };
+            const AminoTypeObject = {
+                ...obj,
+                name: obj.name + 'Amino',
+                importAs: (obj.importAs ?? obj.name) + 'Amino',
+            };
 
             // MARKED AS NOT DRY [google.protobuf names]
             // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
@@ -284,12 +289,26 @@ const addSDKTypesToImports = (
                 SDKTypeObject.importAs = SDKTypeObject.importAs.split('.')[SDKTypeObject.importAs.split('.').length - 1];
             }
 
+            if (/\./.test(AminoTypeObject.name)) {
+                AminoTypeObject.name = AminoTypeObject.name.split('.')[AminoTypeObject.name.split('.').length - 1];
+                AminoTypeObject.importAs = AminoTypeObject.importAs.split('.')[AminoTypeObject.importAs.split('.').length - 1];
+            }
+
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
-                return [
+
+                const arr = [
                     ...m,
-                    obj,
-                    SDKTypeObject
+                    obj
                 ];
+
+                if (context.options.aminoEncoding.useRecursiveV2encoding) {
+                    arr.push(AminoTypeObject);
+                }
+                if (context.options.useSDKTypes) {
+                    arr.push(SDKTypeObject);
+                }
+
+                return arr;
 
             }
         }
@@ -322,8 +341,10 @@ export const aggregateImports = (
         .concat(genericImports)
         .concat(additionalImports);
 
-    if (context.options.useSDKTypes) {
-        return addSDKTypesToImports(context, list);
+    if (
+        context.options.useSDKTypes ||
+        context.options.aminoEncoding.useRecursiveV2encoding) {
+        return addDerivativeTypesToImports(context, list);
     } else {
         return list;
     }

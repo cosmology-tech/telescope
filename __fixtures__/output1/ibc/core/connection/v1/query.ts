@@ -313,13 +313,13 @@ export const QueryConnectionRequest = {
 
   fromSDK(object: QueryConnectionRequestSDKType): QueryConnectionRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
+      connectionId: object?.connection_id
     };
   },
 
   toSDK(message: QueryConnectionRequest): QueryConnectionRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.connection_id = message.connectionId;
     return obj;
   }
 
@@ -406,16 +406,16 @@ export const QueryConnectionResponse = {
 
   fromSDK(object: QueryConnectionResponseSDKType): QueryConnectionResponse {
     return {
-      connection: isSet(object.connection) ? ConnectionEnd.fromSDK(object.connection) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      connection: object.connection ? ConnectionEnd.fromSDK(object.connection) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryConnectionResponse): QueryConnectionResponseSDKType {
     const obj: any = {};
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -479,7 +479,7 @@ export const QueryConnectionsRequest = {
 
   fromSDK(object: QueryConnectionsRequestSDKType): QueryConnectionsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -579,8 +579,8 @@ export const QueryConnectionsResponse = {
   fromSDK(object: QueryConnectionsResponseSDKType): QueryConnectionsResponse {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -657,13 +657,13 @@ export const QueryClientConnectionsRequest = {
 
   fromSDK(object: QueryClientConnectionsRequestSDKType): QueryClientConnectionsRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined
+      clientId: object?.client_id
     };
   },
 
   toSDK(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     return obj;
   }
 
@@ -757,8 +757,8 @@ export const QueryClientConnectionsResponse = {
   fromSDK(object: QueryClientConnectionsResponseSDKType): QueryClientConnectionsResponse {
     return {
       connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
@@ -771,7 +771,7 @@ export const QueryClientConnectionsResponse = {
       obj.connection_paths = [];
     }
 
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -835,13 +835,13 @@ export const QueryConnectionClientStateRequest = {
 
   fromSDK(object: QueryConnectionClientStateRequestSDKType): QueryConnectionClientStateRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined
+      connectionId: object?.connection_id
     };
   },
 
   toSDK(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    obj.connection_id = message.connectionId;
     return obj;
   }
 
@@ -928,16 +928,16 @@ export const QueryConnectionClientStateResponse = {
 
   fromSDK(object: QueryConnectionClientStateResponseSDKType): QueryConnectionClientStateResponse {
     return {
-      identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      identifiedClientState: object.identified_client_state ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseSDKType {
     const obj: any = {};
     message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toSDK(message.identifiedClientState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -1025,17 +1025,17 @@ export const QueryConnectionConsensusStateRequest = {
 
   fromSDK(object: QueryConnectionConsensusStateRequestSDKType): QueryConnectionConsensusStateRequest {
     return {
-      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
+      connectionId: object?.connection_id,
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
     };
   },
 
   toSDK(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestSDKType {
     const obj: any = {};
-    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    obj.connection_id = message.connectionId;
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
     return obj;
   }
 
@@ -1134,18 +1134,18 @@ export const QueryConnectionConsensusStateResponse = {
 
   fromSDK(object: QueryConnectionConsensusStateResponseSDKType): QueryConnectionConsensusStateResponse {
     return {
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
+      clientId: object?.client_id,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseSDKType {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.client_id = message.clientId;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }

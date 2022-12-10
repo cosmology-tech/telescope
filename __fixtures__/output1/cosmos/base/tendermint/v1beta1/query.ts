@@ -3,8 +3,8 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
@@ -282,14 +282,14 @@ export const GetValidatorSetByHeightRequest = {
 
   fromSDK(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      height: object?.height,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -383,15 +383,15 @@ export const GetValidatorSetByHeightResponse = {
 
   fromSDK(object: GetValidatorSetByHeightResponseSDKType): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
+      blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseSDKType {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
+    obj.block_height = message.blockHeight;
 
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
@@ -462,7 +462,7 @@ export const GetLatestValidatorSetRequest = {
 
   fromSDK(object: GetLatestValidatorSetRequestSDKType): GetLatestValidatorSetRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -561,15 +561,15 @@ export const GetLatestValidatorSetResponse = {
 
   fromSDK(object: GetLatestValidatorSetResponseSDKType): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
+      blockHeight: object?.block_height,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseSDKType {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
+    obj.block_height = message.blockHeight;
 
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
@@ -676,19 +676,19 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : undefined,
-      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : undefined
+      address: object?.address,
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
+      votingPower: object?.voting_power,
+      proposerPriority: object?.proposer_priority
     };
   },
 
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toSDK(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.voting_power = message.votingPower);
-    message.proposerPriority !== undefined && (obj.proposer_priority = message.proposerPriority);
+    obj.voting_power = message.votingPower;
+    obj.proposer_priority = message.proposerPriority;
     return obj;
   }
 
@@ -751,13 +751,13 @@ export const GetBlockByHeightRequest = {
 
   fromSDK(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: GetBlockByHeightRequest): GetBlockByHeightRequestSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -832,8 +832,8 @@ export const GetBlockByHeightResponse = {
 
   fromSDK(object: GetBlockByHeightResponseSDKType): GetBlockByHeightResponse {
     return {
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDK(object.block) : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      block: object.block ? Block.fromSDK(object.block) : undefined
     };
   },
 
@@ -967,8 +967,8 @@ export const GetLatestBlockResponse = {
 
   fromSDK(object: GetLatestBlockResponseSDKType): GetLatestBlockResponse {
     return {
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      block: isSet(object.block) ? Block.fromSDK(object.block) : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      block: object.block ? Block.fromSDK(object.block) : undefined
     };
   },
 
@@ -1090,13 +1090,13 @@ export const GetSyncingResponse = {
 
   fromSDK(object: GetSyncingResponseSDKType): GetSyncingResponse {
     return {
-      syncing: isSet(object.syncing) ? object.syncing : undefined
+      syncing: object?.syncing
     };
   },
 
   toSDK(message: GetSyncingResponse): GetSyncingResponseSDKType {
     const obj: any = {};
-    message.syncing !== undefined && (obj.syncing = message.syncing);
+    obj.syncing = message.syncing;
     return obj;
   }
 
@@ -1223,8 +1223,8 @@ export const GetNodeInfoResponse = {
 
   fromSDK(object: GetNodeInfoResponseSDKType): GetNodeInfoResponse {
     return {
-      nodeInfo: isSet(object.node_info) ? NodeInfo.fromSDK(object.node_info) : undefined,
-      applicationVersion: isSet(object.application_version) ? VersionInfo.fromSDK(object.application_version) : undefined
+      nodeInfo: object.node_info ? NodeInfo.fromSDK(object.node_info) : undefined,
+      applicationVersion: object.application_version ? VersionInfo.fromSDK(object.application_version) : undefined
     };
   },
 
@@ -1384,25 +1384,25 @@ export const VersionInfo = {
 
   fromSDK(object: VersionInfoSDKType): VersionInfo {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      appName: isSet(object.app_name) ? object.app_name : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      gitCommit: isSet(object.git_commit) ? object.git_commit : undefined,
-      buildTags: isSet(object.build_tags) ? object.build_tags : undefined,
-      goVersion: isSet(object.go_version) ? object.go_version : undefined,
+      name: object?.name,
+      appName: object?.app_name,
+      version: object?.version,
+      gitCommit: object?.git_commit,
+      buildTags: object?.build_tags,
+      goVersion: object?.go_version,
       buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromSDK(e)) : [],
-      cosmosSdkVersion: isSet(object.cosmos_sdk_version) ? object.cosmos_sdk_version : undefined
+      cosmosSdkVersion: object?.cosmos_sdk_version
     };
   },
 
   toSDK(message: VersionInfo): VersionInfoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.appName !== undefined && (obj.app_name = message.appName);
-    message.version !== undefined && (obj.version = message.version);
-    message.gitCommit !== undefined && (obj.git_commit = message.gitCommit);
-    message.buildTags !== undefined && (obj.build_tags = message.buildTags);
-    message.goVersion !== undefined && (obj.go_version = message.goVersion);
+    obj.name = message.name;
+    obj.app_name = message.appName;
+    obj.version = message.version;
+    obj.git_commit = message.gitCommit;
+    obj.build_tags = message.buildTags;
+    obj.go_version = message.goVersion;
 
     if (message.buildDeps) {
       obj.build_deps = message.buildDeps.map(e => e ? Module.toSDK(e) : undefined);
@@ -1410,7 +1410,7 @@ export const VersionInfo = {
       obj.build_deps = [];
     }
 
-    message.cosmosSdkVersion !== undefined && (obj.cosmos_sdk_version = message.cosmosSdkVersion);
+    obj.cosmos_sdk_version = message.cosmosSdkVersion;
     return obj;
   }
 
@@ -1497,17 +1497,17 @@ export const Module = {
 
   fromSDK(object: ModuleSDKType): Module {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      sum: isSet(object.sum) ? object.sum : undefined
+      path: object?.path,
+      version: object?.version,
+      sum: object?.sum
     };
   },
 
   toSDK(message: Module): ModuleSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.version !== undefined && (obj.version = message.version);
-    message.sum !== undefined && (obj.sum = message.sum);
+    obj.path = message.path;
+    obj.version = message.version;
+    obj.sum = message.sum;
     return obj;
   }
 

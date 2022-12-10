@@ -14,19 +14,7 @@ export enum Endpoint_Kind {
   LEASED_IP = 2,
   UNRECOGNIZED = -1,
 }
-
-/** This describes how the endpoint is implemented when the lease is deployed */
-export enum Endpoint_KindSDKType {
-  /** SHARED_HTTP - Describes an endpoint that becomes a Kubernetes Ingress */
-  SHARED_HTTP = 0,
-
-  /** RANDOM_PORT - Describes an endpoint that becomes a Kubernetes NodePort */
-  RANDOM_PORT = 1,
-
-  /** LEASED_IP - Describes an endpoint that becomes a leased IP */
-  LEASED_IP = 2,
-  UNRECOGNIZED = -1,
-}
+export const Endpoint_KindSDKType = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -72,7 +60,7 @@ export interface Endpoint {
 
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
-  kind: Endpoint_KindSDKType;
+  kind: Endpoint_Kind;
   sequence_number: number;
 }
 
@@ -146,14 +134,14 @@ export const Endpoint = {
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
       kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
-      sequenceNumber: isSet(object.sequence_number) ? object.sequence_number : undefined
+      sequenceNumber: object?.sequence_number
     };
   },
 
   toSDK(message: Endpoint): EndpointSDKType {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
-    message.sequenceNumber !== undefined && (obj.sequence_number = message.sequenceNumber);
+    obj.sequence_number = message.sequenceNumber;
     return obj;
   }
 

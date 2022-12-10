@@ -150,16 +150,16 @@ export const ReplacePoolIncentivesProposal = {
 
   fromSDK(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
 
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
@@ -259,16 +259,16 @@ export const UpdatePoolIncentivesProposal = {
 
   fromSDK(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      title: object?.title,
+      description: object?.description,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
 
   toSDK(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
+    obj.title = message.title;
+    obj.description = message.description;
 
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);

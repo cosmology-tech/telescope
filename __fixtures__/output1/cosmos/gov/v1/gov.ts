@@ -24,25 +24,7 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
-
-/** VoteOption enumerates the valid vote options for a given governance proposal. */
-export enum VoteOptionSDKType {
-  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
-  VOTE_OPTION_UNSPECIFIED = 0,
-
-  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
-  VOTE_OPTION_YES = 1,
-
-  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
-  VOTE_OPTION_ABSTAIN = 2,
-
-  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
-  VOTE_OPTION_NO = 3,
-
-  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
-  VOTE_OPTION_NO_WITH_VETO = 4,
-  UNRECOGNIZED = -1,
-}
+export const VoteOptionSDKType = VoteOption;
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -130,43 +112,7 @@ export enum ProposalStatus {
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
 }
-
-/** ProposalStatus enumerates the valid statuses of a proposal. */
-export enum ProposalStatusSDKType {
-  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
-  PROPOSAL_STATUS_UNSPECIFIED = 0,
-
-  /**
-   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-   * period.
-   */
-  PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
-
-  /**
-   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-   * period.
-   */
-  PROPOSAL_STATUS_VOTING_PERIOD = 2,
-
-  /**
-   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-   * passed.
-   */
-  PROPOSAL_STATUS_PASSED = 3,
-
-  /**
-   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-   * been rejected.
-   */
-  PROPOSAL_STATUS_REJECTED = 4,
-
-  /**
-   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-   * failed.
-   */
-  PROPOSAL_STATUS_FAILED = 5,
-  UNRECOGNIZED = -1,
-}
+export const ProposalStatusSDKType = ProposalStatus;
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
@@ -233,7 +179,7 @@ export interface WeightedVoteOption {
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionSDKType {
-  option: VoteOptionSDKType;
+  option: VoteOption;
   weight: string;
 }
 
@@ -283,7 +229,7 @@ export interface Proposal {
 export interface ProposalSDKType {
   id: Long;
   messages: AnySDKType[];
-  status: ProposalStatusSDKType;
+  status: ProposalStatus;
 
   /**
    * final_tally_result is the final tally result of the proposal. When
@@ -485,14 +431,14 @@ export const WeightedVoteOption = {
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? object.weight : undefined
+      weight: object?.weight
     };
   },
 
   toSDK(message: WeightedVoteOption): WeightedVoteOptionSDKType {
     const obj: any = {};
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.weight !== undefined && (obj.weight = message.weight);
+    obj.weight = message.weight;
     return obj;
   }
 
@@ -585,16 +531,16 @@ export const Deposit = {
 
   fromSDK(object: DepositSDKType): Deposit {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
+      proposalId: object?.proposal_id,
+      depositor: object?.depositor,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Deposit): DepositSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.proposal_id = message.proposalId;
+    obj.depositor = message.depositor;
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
@@ -784,22 +730,22 @@ export const Proposal = {
 
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      id: isSet(object.id) ? object.id : undefined,
+      id: object?.id,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
-      submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined,
-      depositEndTime: isSet(object.deposit_end_time) ? Timestamp.fromSDK(object.deposit_end_time) : undefined,
+      finalTallyResult: object.final_tally_result ? TallyResult.fromSDK(object.final_tally_result) : undefined,
+      submitTime: object.submit_time ? Timestamp.fromSDK(object.submit_time) : undefined,
+      depositEndTime: object.deposit_end_time ? Timestamp.fromSDK(object.deposit_end_time) : undefined,
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      votingStartTime: isSet(object.voting_start_time) ? Timestamp.fromSDK(object.voting_start_time) : undefined,
-      votingEndTime: isSet(object.voting_end_time) ? Timestamp.fromSDK(object.voting_end_time) : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      votingStartTime: object.voting_start_time ? Timestamp.fromSDK(object.voting_start_time) : undefined,
+      votingEndTime: object.voting_end_time ? Timestamp.fromSDK(object.voting_end_time) : undefined,
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: Proposal): ProposalSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    obj.id = message.id;
 
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toSDK(e) : undefined);
@@ -820,7 +766,7 @@ export const Proposal = {
 
     message.votingStartTime !== undefined && (obj.voting_start_time = message.votingStartTime ? Timestamp.toSDK(message.votingStartTime) : undefined);
     message.votingEndTime !== undefined && (obj.voting_end_time = message.votingEndTime ? Timestamp.toSDK(message.votingEndTime) : undefined);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.metadata = message.metadata;
     return obj;
   }
 
@@ -919,19 +865,19 @@ export const TallyResult = {
 
   fromSDK(object: TallyResultSDKType): TallyResult {
     return {
-      yesCount: isSet(object.yes_count) ? object.yes_count : undefined,
-      abstainCount: isSet(object.abstain_count) ? object.abstain_count : undefined,
-      noCount: isSet(object.no_count) ? object.no_count : undefined,
-      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : undefined
+      yesCount: object?.yes_count,
+      abstainCount: object?.abstain_count,
+      noCount: object?.no_count,
+      noWithVetoCount: object?.no_with_veto_count
     };
   },
 
   toSDK(message: TallyResult): TallyResultSDKType {
     const obj: any = {};
-    message.yesCount !== undefined && (obj.yes_count = message.yesCount);
-    message.abstainCount !== undefined && (obj.abstain_count = message.abstainCount);
-    message.noCount !== undefined && (obj.no_count = message.noCount);
-    message.noWithVetoCount !== undefined && (obj.no_with_veto_count = message.noWithVetoCount);
+    obj.yes_count = message.yesCount;
+    obj.abstain_count = message.abstainCount;
+    obj.no_count = message.noCount;
+    obj.no_with_veto_count = message.noWithVetoCount;
     return obj;
   }
 
@@ -1036,17 +982,17 @@ export const Vote = {
 
   fromSDK(object: VoteSDKType): Vote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined,
+      proposalId: object?.proposal_id,
+      voter: object?.voter,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: Vote): VoteSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.proposal_id = message.proposalId;
+    obj.voter = message.voter;
 
     if (message.options) {
       obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
@@ -1054,7 +1000,7 @@ export const Vote = {
       obj.options = [];
     }
 
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.metadata = message.metadata;
     return obj;
   }
 
@@ -1136,7 +1082,7 @@ export const DepositParams = {
   fromSDK(object: DepositParamsSDKType): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      maxDepositPeriod: isSet(object.max_deposit_period) ? Duration.fromSDK(object.max_deposit_period) : undefined
+      maxDepositPeriod: object.max_deposit_period ? Duration.fromSDK(object.max_deposit_period) : undefined
     };
   },
 
@@ -1212,7 +1158,7 @@ export const VotingParams = {
 
   fromSDK(object: VotingParamsSDKType): VotingParams {
     return {
-      votingPeriod: isSet(object.voting_period) ? Duration.fromSDK(object.voting_period) : undefined
+      votingPeriod: object.voting_period ? Duration.fromSDK(object.voting_period) : undefined
     };
   },
 
@@ -1305,17 +1251,17 @@ export const TallyParams = {
 
   fromSDK(object: TallyParamsSDKType): TallyParams {
     return {
-      quorum: isSet(object.quorum) ? object.quorum : undefined,
-      threshold: isSet(object.threshold) ? object.threshold : undefined,
-      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : undefined
+      quorum: object?.quorum,
+      threshold: object?.threshold,
+      vetoThreshold: object?.veto_threshold
     };
   },
 
   toSDK(message: TallyParams): TallyParamsSDKType {
     const obj: any = {};
-    message.quorum !== undefined && (obj.quorum = message.quorum);
-    message.threshold !== undefined && (obj.threshold = message.threshold);
-    message.vetoThreshold !== undefined && (obj.veto_threshold = message.vetoThreshold);
+    obj.quorum = message.quorum;
+    obj.threshold = message.threshold;
+    obj.veto_threshold = message.vetoThreshold;
     return obj;
   }
 

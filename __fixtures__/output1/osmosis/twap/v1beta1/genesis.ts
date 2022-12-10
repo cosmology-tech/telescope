@@ -103,14 +103,14 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      pruneEpochIdentifier: isSet(object.prune_epoch_identifier) ? object.prune_epoch_identifier : undefined,
-      recordHistoryKeepPeriod: isSet(object.record_history_keep_period) ? Duration.fromSDK(object.record_history_keep_period) : undefined
+      pruneEpochIdentifier: object?.prune_epoch_identifier,
+      recordHistoryKeepPeriod: object.record_history_keep_period ? Duration.fromSDK(object.record_history_keep_period) : undefined
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.pruneEpochIdentifier !== undefined && (obj.prune_epoch_identifier = message.pruneEpochIdentifier);
+    obj.prune_epoch_identifier = message.pruneEpochIdentifier;
     message.recordHistoryKeepPeriod !== undefined && (obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toSDK(message.recordHistoryKeepPeriod) : undefined);
     return obj;
   }
@@ -193,7 +193,7 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromSDK(e)) : [],
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

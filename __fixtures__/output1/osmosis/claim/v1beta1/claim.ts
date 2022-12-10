@@ -9,13 +9,7 @@ export enum Action {
   ActionDelegateStake = 3,
   UNRECOGNIZED = -1,
 }
-export enum ActionSDKType {
-  ActionAddLiquidity = 0,
-  ActionSwap = 1,
-  ActionVote = 2,
-  ActionDelegateStake = 3,
-  UNRECOGNIZED = -1,
-}
+export const ActionSDKType = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -194,7 +188,7 @@ export const ClaimRecord = {
 
   fromSDK(object: ClaimRecordSDKType): ClaimRecord {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromSDK(e)) : [],
       actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
     };
@@ -202,7 +196,7 @@ export const ClaimRecord = {
 
   toSDK(message: ClaimRecord): ClaimRecordSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
 
     if (message.initialClaimableAmount) {
       obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toSDK(e) : undefined);

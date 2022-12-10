@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Rpc } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**

@@ -133,19 +133,19 @@ export const FungibleTokenPacketData = {
 
   fromSDK(object: FungibleTokenPacketDataSDKType): FungibleTokenPacketData {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined
+      denom: object?.denom,
+      amount: object?.amount,
+      sender: object?.sender,
+      receiver: object?.receiver
     };
   },
 
   toSDK(message: FungibleTokenPacketData): FungibleTokenPacketDataSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
     return obj;
   }
 

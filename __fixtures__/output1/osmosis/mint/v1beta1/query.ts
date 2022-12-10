@@ -160,7 +160,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -281,13 +281,13 @@ export const QueryEpochProvisionsResponse = {
 
   fromSDK(object: QueryEpochProvisionsResponseSDKType): QueryEpochProvisionsResponse {
     return {
-      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
+      epochProvisions: object?.epoch_provisions
     };
   },
 
   toSDK(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseSDKType {
     const obj: any = {};
-    message.epochProvisions !== undefined && (obj.epoch_provisions = message.epochProvisions);
+    obj.epoch_provisions = message.epochProvisions;
     return obj;
   }
 

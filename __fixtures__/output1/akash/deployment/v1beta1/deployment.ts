@@ -18,19 +18,7 @@ export enum Deployment_State {
   closed = 2,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of deployment */
-export enum Deployment_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** active - DeploymentActive denotes state for deployment active */
-  active = 1,
-
-  /** closed - DeploymentClosed denotes state for deployment closed */
-  closed = 2,
-  UNRECOGNIZED = -1,
-}
+export const Deployment_StateSDKType = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -167,7 +155,7 @@ export interface Deployment {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType | undefined;
-  state: Deployment_StateSDKType;
+  state: Deployment_State;
   version: Uint8Array;
   created_at: Long;
 }
@@ -285,10 +273,10 @@ export const MsgCreateDeployment = {
 
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
+      version: object?.version,
+      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined
     };
   },
 
@@ -302,7 +290,7 @@ export const MsgCreateDeployment = {
       obj.groups = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
   }
@@ -430,8 +418,8 @@ export const MsgDepositDeployment = {
 
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined
     };
   },
 
@@ -583,9 +571,9 @@ export const MsgUpdateDeployment = {
 
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined
+      version: object?.version
     };
   },
 
@@ -599,7 +587,7 @@ export const MsgUpdateDeployment = {
       obj.groups = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     return obj;
   }
 
@@ -714,7 +702,7 @@ export const MsgCloseDeployment = {
 
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
     };
   },
 
@@ -847,15 +835,15 @@ export const DeploymentID = {
 
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined
+      owner: object?.owner,
+      dseq: object?.dseq
     };
   },
 
   toSDK(message: DeploymentID): DeploymentIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
     return obj;
   }
 
@@ -954,10 +942,10 @@ export const Deployment = {
 
   fromSDK(object: DeploymentSDKType): Deployment {
     return {
-      deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
+      deploymentId: object.deployment_id ? DeploymentID.fromSDK(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? object.version : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
+      version: object?.version,
+      createdAt: object?.created_at
     };
   },
 
@@ -965,8 +953,8 @@ export const Deployment = {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = message.version);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    obj.version = message.version;
+    obj.created_at = message.createdAt;
     return obj;
   }
 
@@ -1053,17 +1041,17 @@ export const DeploymentFilters = {
 
   fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      state: isSet(object.state) ? object.state : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      state: object?.state
     };
   },
 
   toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.state !== undefined && (obj.state = message.state);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.state = message.state;
     return obj;
   }
 

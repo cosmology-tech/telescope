@@ -1026,15 +1026,15 @@ export const RoutingParameter = {
 
   fromSDK(object: RoutingParameterSDKType): RoutingParameter {
     return {
-      field: isSet(object.field) ? object.field : undefined,
-      pathTemplate: isSet(object.path_template) ? object.path_template : undefined
+      field: object?.field,
+      pathTemplate: object?.path_template
     };
   },
 
   toSDK(message: RoutingParameter): RoutingParameterSDKType {
     const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.pathTemplate !== undefined && (obj.path_template = message.pathTemplate);
+    obj.field = message.field;
+    obj.path_template = message.pathTemplate;
     return obj;
   }
 

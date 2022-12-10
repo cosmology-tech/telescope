@@ -1,8 +1,8 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 
 /** MsgCreateGauge creates a gague to distribute rewards to users */
@@ -222,19 +222,19 @@ export const MsgCreateGauge = {
 
   fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
     return {
-      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : undefined,
-      owner: isSet(object.owner) ? object.owner : undefined,
-      distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
+      isPerpetual: object?.is_perpetual,
+      owner: object?.owner,
+      distributeTo: object.distribute_to ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : undefined
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      numEpochsPaidOver: object?.num_epochs_paid_over
     };
   },
 
   toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
     const obj: any = {};
-    message.isPerpetual !== undefined && (obj.is_perpetual = message.isPerpetual);
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.is_perpetual = message.isPerpetual;
+    obj.owner = message.owner;
     message.distributeTo !== undefined && (obj.distribute_to = message.distributeTo ? QueryCondition.toSDK(message.distributeTo) : undefined);
 
     if (message.coins) {
@@ -244,7 +244,7 @@ export const MsgCreateGauge = {
     }
 
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.numEpochsPaidOver !== undefined && (obj.num_epochs_paid_over = message.numEpochsPaidOver);
+    obj.num_epochs_paid_over = message.numEpochsPaidOver;
     return obj;
   }
 
@@ -389,16 +389,16 @@ export const MsgAddToGauge = {
 
   fromSDK(object: MsgAddToGaugeSDKType): MsgAddToGauge {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      owner: object?.owner,
+      gaugeId: object?.gauge_id,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgAddToGauge): MsgAddToGaugeSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.owner = message.owner;
+    obj.gauge_id = message.gaugeId;
 
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toSDK(e) : undefined);

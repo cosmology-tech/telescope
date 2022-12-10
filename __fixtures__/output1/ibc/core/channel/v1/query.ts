@@ -811,15 +811,15 @@ export const QueryChannelRequest = {
 
   fromSDK(object: QueryChannelRequestSDKType): QueryChannelRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
 
   toSDK(message: QueryChannelRequest): QueryChannelRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     return obj;
   }
 
@@ -906,16 +906,16 @@ export const QueryChannelResponse = {
 
   fromSDK(object: QueryChannelResponseSDKType): QueryChannelResponse {
     return {
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryChannelResponse): QueryChannelResponseSDKType {
     const obj: any = {};
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -979,7 +979,7 @@ export const QueryChannelsRequest = {
 
   fromSDK(object: QueryChannelsRequestSDKType): QueryChannelsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1079,8 +1079,8 @@ export const QueryChannelsResponse = {
   fromSDK(object: QueryChannelsResponseSDKType): QueryChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -1169,14 +1169,14 @@ export const QueryConnectionChannelsRequest = {
 
   fromSDK(object: QueryConnectionChannelsRequestSDKType): QueryConnectionChannelsRequest {
     return {
-      connection: isSet(object.connection) ? object.connection : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      connection: object?.connection,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryConnectionChannelsRequest): QueryConnectionChannelsRequestSDKType {
     const obj: any = {};
-    message.connection !== undefined && (obj.connection = message.connection);
+    obj.connection = message.connection;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -1271,8 +1271,8 @@ export const QueryConnectionChannelsResponse = {
   fromSDK(object: QueryConnectionChannelsResponseSDKType): QueryConnectionChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -1361,15 +1361,15 @@ export const QueryChannelClientStateRequest = {
 
   fromSDK(object: QueryChannelClientStateRequestSDKType): QueryChannelClientStateRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
 
   toSDK(message: QueryChannelClientStateRequest): QueryChannelClientStateRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     return obj;
   }
 
@@ -1456,16 +1456,16 @@ export const QueryChannelClientStateResponse = {
 
   fromSDK(object: QueryChannelClientStateResponseSDKType): QueryChannelClientStateResponse {
     return {
-      identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      identifiedClientState: object.identified_client_state ? IdentifiedClientState.fromSDK(object.identified_client_state) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseSDKType {
     const obj: any = {};
     message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toSDK(message.identifiedClientState) : undefined);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -1565,19 +1565,19 @@ export const QueryChannelConsensusStateRequest = {
 
   fromSDK(object: QueryChannelConsensusStateRequestSDKType): QueryChannelConsensusStateRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
     };
   },
 
   toSDK(message: QueryChannelConsensusStateRequest): QueryChannelConsensusStateRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
-    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
     return obj;
   }
 
@@ -1676,18 +1676,18 @@ export const QueryChannelConsensusStateResponse = {
 
   fromSDK(object: QueryChannelConsensusStateResponseSDKType): QueryChannelConsensusStateResponse {
     return {
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
+      clientId: object?.client_id,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryChannelConsensusStateResponse): QueryChannelConsensusStateResponseSDKType {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.client_id = message.clientId;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -1775,17 +1775,17 @@ export const QueryPacketCommitmentRequest = {
 
   fromSDK(object: QueryPacketCommitmentRequestSDKType): QueryPacketCommitmentRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence
     };
   },
 
   toSDK(message: QueryPacketCommitmentRequest): QueryPacketCommitmentRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -1872,16 +1872,16 @@ export const QueryPacketCommitmentResponse = {
 
   fromSDK(object: QueryPacketCommitmentResponseSDKType): QueryPacketCommitmentResponse {
     return {
-      commitment: isSet(object.commitment) ? object.commitment : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      commitment: object?.commitment,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseSDKType {
     const obj: any = {};
-    message.commitment !== undefined && (obj.commitment = message.commitment);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.commitment = message.commitment;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -1969,16 +1969,16 @@ export const QueryPacketCommitmentsRequest = {
 
   fromSDK(object: QueryPacketCommitmentsRequestSDKType): QueryPacketCommitmentsRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryPacketCommitmentsRequest): QueryPacketCommitmentsRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -2073,8 +2073,8 @@ export const QueryPacketCommitmentsResponse = {
   fromSDK(object: QueryPacketCommitmentsResponseSDKType): QueryPacketCommitmentsResponse {
     return {
       commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -2175,17 +2175,17 @@ export const QueryPacketReceiptRequest = {
 
   fromSDK(object: QueryPacketReceiptRequestSDKType): QueryPacketReceiptRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence
     };
   },
 
   toSDK(message: QueryPacketReceiptRequest): QueryPacketReceiptRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -2272,16 +2272,16 @@ export const QueryPacketReceiptResponse = {
 
   fromSDK(object: QueryPacketReceiptResponseSDKType): QueryPacketReceiptResponse {
     return {
-      received: isSet(object.received) ? object.received : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      received: object?.received,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseSDKType {
     const obj: any = {};
-    message.received !== undefined && (obj.received = message.received);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.received = message.received;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -2369,17 +2369,17 @@ export const QueryPacketAcknowledgementRequest = {
 
   fromSDK(object: QueryPacketAcknowledgementRequestSDKType): QueryPacketAcknowledgementRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence
     };
   },
 
   toSDK(message: QueryPacketAcknowledgementRequest): QueryPacketAcknowledgementRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -2466,16 +2466,16 @@ export const QueryPacketAcknowledgementResponse = {
 
   fromSDK(object: QueryPacketAcknowledgementResponseSDKType): QueryPacketAcknowledgementResponse {
     return {
-      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      acknowledgement: object?.acknowledgement,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseSDKType {
     const obj: any = {};
-    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.acknowledgement = message.acknowledgement;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }
@@ -2593,17 +2593,17 @@ export const QueryPacketAcknowledgementsRequest = {
 
   fromSDK(object: QueryPacketAcknowledgementsRequestSDKType): QueryPacketAcknowledgementsRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined,
       packetCommitmentSequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => e) : []
     };
   },
 
   toSDK(message: QueryPacketAcknowledgementsRequest): QueryPacketAcknowledgementsRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
 
     if (message.packetCommitmentSequences) {
@@ -2705,8 +2705,8 @@ export const QueryPacketAcknowledgementsResponse = {
   fromSDK(object: QueryPacketAcknowledgementsResponseSDKType): QueryPacketAcknowledgementsResponse {
     return {
       acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined,
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined,
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -2825,16 +2825,16 @@ export const QueryUnreceivedPacketsRequest = {
 
   fromSDK(object: QueryUnreceivedPacketsRequestSDKType): QueryUnreceivedPacketsRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
       packetCommitmentSequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => e) : []
     };
   },
 
   toSDK(message: QueryUnreceivedPacketsRequest): QueryUnreceivedPacketsRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
 
     if (message.packetCommitmentSequences) {
       obj.packet_commitment_sequences = message.packetCommitmentSequences.map(e => e);
@@ -2936,7 +2936,7 @@ export const QueryUnreceivedPacketsResponse = {
   fromSDK(object: QueryUnreceivedPacketsResponseSDKType): QueryUnreceivedPacketsResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -3054,16 +3054,16 @@ export const QueryUnreceivedAcksRequest = {
 
   fromSDK(object: QueryUnreceivedAcksRequestSDKType): QueryUnreceivedAcksRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      portId: object?.port_id,
+      channelId: object?.channel_id,
       packetAckSequences: Array.isArray(object?.packet_ack_sequences) ? object.packet_ack_sequences.map((e: any) => e) : []
     };
   },
 
   toSDK(message: QueryUnreceivedAcksRequest): QueryUnreceivedAcksRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
 
     if (message.packetAckSequences) {
       obj.packet_ack_sequences = message.packetAckSequences.map(e => e);
@@ -3165,7 +3165,7 @@ export const QueryUnreceivedAcksResponse = {
   fromSDK(object: QueryUnreceivedAcksResponseSDKType): QueryUnreceivedAcksResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
-      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+      height: object.height ? Height.fromSDK(object.height) : undefined
     };
   },
 
@@ -3253,15 +3253,15 @@ export const QueryNextSequenceReceiveRequest = {
 
   fromSDK(object: QueryNextSequenceReceiveRequestSDKType): QueryNextSequenceReceiveRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
 
   toSDK(message: QueryNextSequenceReceiveRequest): QueryNextSequenceReceiveRequestSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     return obj;
   }
 
@@ -3348,16 +3348,16 @@ export const QueryNextSequenceReceiveResponse = {
 
   fromSDK(object: QueryNextSequenceReceiveResponseSDKType): QueryNextSequenceReceiveResponse {
     return {
-      nextSequenceReceive: isSet(object.next_sequence_receive) ? object.next_sequence_receive : undefined,
-      proof: isSet(object.proof) ? object.proof : undefined,
-      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+      nextSequenceReceive: object?.next_sequence_receive,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
     };
   },
 
   toSDK(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseSDKType {
     const obj: any = {};
-    message.nextSequenceReceive !== undefined && (obj.next_sequence_receive = message.nextSequenceReceive);
-    message.proof !== undefined && (obj.proof = message.proof);
+    obj.next_sequence_receive = message.nextSequenceReceive;
+    obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
   }

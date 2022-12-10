@@ -227,14 +227,14 @@ export const ModuleConfig = {
 
   fromSDK(object: ModuleConfigSDKType): ModuleConfig {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      config: isSet(object.config) ? Any.fromSDK(object.config) : undefined
+      name: object?.name,
+      config: object.config ? Any.fromSDK(object.config) : undefined
     };
   },
 
   toSDK(message: ModuleConfig): ModuleConfigSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.config !== undefined && (obj.config = message.config ? Any.toSDK(message.config) : undefined);
     return obj;
   }

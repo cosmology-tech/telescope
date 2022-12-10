@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 
 /**
@@ -247,21 +247,21 @@ export const PageRequest = {
 
   fromSDK(object: PageRequestSDKType): PageRequest {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined,
-      limit: isSet(object.limit) ? object.limit : undefined,
-      countTotal: isSet(object.count_total) ? object.count_total : undefined,
-      reverse: isSet(object.reverse) ? object.reverse : undefined
+      key: object?.key,
+      offset: object?.offset,
+      limit: object?.limit,
+      countTotal: object?.count_total,
+      reverse: object?.reverse
     };
   },
 
   toSDK(message: PageRequest): PageRequestSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.limit !== undefined && (obj.limit = message.limit);
-    message.countTotal !== undefined && (obj.count_total = message.countTotal);
-    message.reverse !== undefined && (obj.reverse = message.reverse);
+    obj.key = message.key;
+    obj.offset = message.offset;
+    obj.limit = message.limit;
+    obj.count_total = message.countTotal;
+    obj.reverse = message.reverse;
     return obj;
   }
 
@@ -336,15 +336,15 @@ export const PageResponse = {
 
   fromSDK(object: PageResponseSDKType): PageResponse {
     return {
-      nextKey: isSet(object.next_key) ? object.next_key : undefined,
-      total: isSet(object.total) ? object.total : undefined
+      nextKey: object?.next_key,
+      total: object?.total
     };
   },
 
   toSDK(message: PageResponse): PageResponseSDKType {
     const obj: any = {};
-    message.nextKey !== undefined && (obj.next_key = message.nextKey);
-    message.total !== undefined && (obj.total = message.total);
+    obj.next_key = message.nextKey;
+    obj.total = message.total;
     return obj;
   }
 

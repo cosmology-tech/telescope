@@ -449,7 +449,7 @@ export interface ModeInfo_Single {
  */
 export interface ModeInfo_SingleSDKType {
   /** mode is the signing mode of the single signer */
-  mode: SignModeSDKType;
+  mode: SignMode;
 }
 
 /** Multi is the mode info for a multisig public key */
@@ -616,7 +616,7 @@ export interface AuxSignerDataSDKType {
   sign_doc?: SignDocDirectAuxSDKType;
 
   /** mode is the signing mode of the single signer */
-  mode: SignModeSDKType;
+  mode: SignMode;
 
   /** sig is the signature of the sign doc. */
   sig: Uint8Array;
@@ -709,8 +709,8 @@ export const Tx = {
 
   fromSDK(object: TxSDKType): Tx {
     return {
-      body: isSet(object.body) ? TxBody.fromSDK(object.body) : undefined,
-      authInfo: isSet(object.auth_info) ? AuthInfo.fromSDK(object.auth_info) : undefined,
+      body: object.body ? TxBody.fromSDK(object.body) : undefined,
+      authInfo: object.auth_info ? AuthInfo.fromSDK(object.auth_info) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
@@ -818,16 +818,16 @@ export const TxRaw = {
 
   fromSDK(object: TxRawSDKType): TxRaw {
     return {
-      bodyBytes: isSet(object.body_bytes) ? object.body_bytes : undefined,
-      authInfoBytes: isSet(object.auth_info_bytes) ? object.auth_info_bytes : undefined,
+      bodyBytes: object?.body_bytes,
+      authInfoBytes: object?.auth_info_bytes,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
 
   toSDK(message: TxRaw): TxRawSDKType {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = message.bodyBytes);
-    message.authInfoBytes !== undefined && (obj.auth_info_bytes = message.authInfoBytes);
+    obj.body_bytes = message.bodyBytes;
+    obj.auth_info_bytes = message.authInfoBytes;
 
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e);
@@ -933,19 +933,19 @@ export const SignDoc = {
 
   fromSDK(object: SignDocSDKType): SignDoc {
     return {
-      bodyBytes: isSet(object.body_bytes) ? object.body_bytes : undefined,
-      authInfoBytes: isSet(object.auth_info_bytes) ? object.auth_info_bytes : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      accountNumber: isSet(object.account_number) ? object.account_number : undefined
+      bodyBytes: object?.body_bytes,
+      authInfoBytes: object?.auth_info_bytes,
+      chainId: object?.chain_id,
+      accountNumber: object?.account_number
     };
   },
 
   toSDK(message: SignDoc): SignDocSDKType {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = message.bodyBytes);
-    message.authInfoBytes !== undefined && (obj.auth_info_bytes = message.authInfoBytes);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
-    message.accountNumber !== undefined && (obj.account_number = message.accountNumber);
+    obj.body_bytes = message.bodyBytes;
+    obj.auth_info_bytes = message.authInfoBytes;
+    obj.chain_id = message.chainId;
+    obj.account_number = message.accountNumber;
     return obj;
   }
 
@@ -1068,22 +1068,22 @@ export const SignDocDirectAux = {
 
   fromSDK(object: SignDocDirectAuxSDKType): SignDocDirectAux {
     return {
-      bodyBytes: isSet(object.body_bytes) ? object.body_bytes : undefined,
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      accountNumber: isSet(object.account_number) ? object.account_number : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      tip: isSet(object.tip) ? Tip.fromSDK(object.tip) : undefined
+      bodyBytes: object?.body_bytes,
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      chainId: object?.chain_id,
+      accountNumber: object?.account_number,
+      sequence: object?.sequence,
+      tip: object.tip ? Tip.fromSDK(object.tip) : undefined
     };
   },
 
   toSDK(message: SignDocDirectAux): SignDocDirectAuxSDKType {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = message.bodyBytes);
+    obj.body_bytes = message.bodyBytes;
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
-    message.accountNumber !== undefined && (obj.account_number = message.accountNumber);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.chain_id = message.chainId;
+    obj.account_number = message.accountNumber;
+    obj.sequence = message.sequence;
     message.tip !== undefined && (obj.tip = message.tip ? Tip.toSDK(message.tip) : undefined);
     return obj;
   }
@@ -1213,8 +1213,8 @@ export const TxBody = {
   fromSDK(object: TxBodySDKType): TxBody {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
-      memo: isSet(object.memo) ? object.memo : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? object.timeout_height : undefined,
+      memo: object?.memo,
+      timeoutHeight: object?.timeout_height,
       extensionOptions: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromSDK(e)) : [],
       nonCriticalExtensionOptions: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromSDK(e)) : []
     };
@@ -1229,8 +1229,8 @@ export const TxBody = {
       obj.messages = [];
     }
 
-    message.memo !== undefined && (obj.memo = message.memo);
-    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight);
+    obj.memo = message.memo;
+    obj.timeout_height = message.timeoutHeight;
 
     if (message.extensionOptions) {
       obj.extension_options = message.extensionOptions.map(e => e ? Any.toSDK(e) : undefined);
@@ -1337,8 +1337,8 @@ export const AuthInfo = {
   fromSDK(object: AuthInfoSDKType): AuthInfo {
     return {
       signerInfos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromSDK(e)) : [],
-      fee: isSet(object.fee) ? Fee.fromSDK(object.fee) : undefined,
-      tip: isSet(object.tip) ? Tip.fromSDK(object.tip) : undefined
+      fee: object.fee ? Fee.fromSDK(object.fee) : undefined,
+      tip: object.tip ? Tip.fromSDK(object.tip) : undefined
     };
   },
 
@@ -1439,9 +1439,9 @@ export const SignerInfo = {
 
   fromSDK(object: SignerInfoSDKType): SignerInfo {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      modeInfo: isSet(object.mode_info) ? ModeInfo.fromSDK(object.mode_info) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      modeInfo: object.mode_info ? ModeInfo.fromSDK(object.mode_info) : undefined,
+      sequence: object?.sequence
     };
   },
 
@@ -1449,7 +1449,7 @@ export const SignerInfo = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
     message.modeInfo !== undefined && (obj.mode_info = message.modeInfo ? ModeInfo.toSDK(message.modeInfo) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -1524,8 +1524,8 @@ export const ModeInfo = {
 
   fromSDK(object: ModeInfoSDKType): ModeInfo {
     return {
-      single: isSet(object.single) ? ModeInfo_Single.fromSDK(object.single) : undefined,
-      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDK(object.multi) : undefined
+      single: object.single ? ModeInfo_Single.fromSDK(object.single) : undefined,
+      multi: object.multi ? ModeInfo_Multi.fromSDK(object.multi) : undefined
     };
   },
 
@@ -1682,7 +1682,7 @@ export const ModeInfo_Multi = {
 
   fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
     return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDK(object.bitarray) : undefined,
+      bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
       modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDK(e)) : []
     };
   },
@@ -1802,9 +1802,9 @@ export const Fee = {
   fromSDK(object: FeeSDKType): Fee {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
-      gasLimit: isSet(object.gas_limit) ? object.gas_limit : undefined,
-      payer: isSet(object.payer) ? object.payer : undefined,
-      granter: isSet(object.granter) ? object.granter : undefined
+      gasLimit: object?.gas_limit,
+      payer: object?.payer,
+      granter: object?.granter
     };
   },
 
@@ -1817,9 +1817,9 @@ export const Fee = {
       obj.amount = [];
     }
 
-    message.gasLimit !== undefined && (obj.gas_limit = message.gasLimit);
-    message.payer !== undefined && (obj.payer = message.payer);
-    message.granter !== undefined && (obj.granter = message.granter);
+    obj.gas_limit = message.gasLimit;
+    obj.payer = message.payer;
+    obj.granter = message.granter;
     return obj;
   }
 
@@ -1901,7 +1901,7 @@ export const Tip = {
   fromSDK(object: TipSDKType): Tip {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
-      tipper: isSet(object.tipper) ? object.tipper : undefined
+      tipper: object?.tipper
     };
   },
 
@@ -1914,7 +1914,7 @@ export const Tip = {
       obj.amount = [];
     }
 
-    message.tipper !== undefined && (obj.tipper = message.tipper);
+    obj.tipper = message.tipper;
     return obj;
   }
 
@@ -2013,19 +2013,19 @@ export const AuxSignerData = {
 
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
+      address: object?.address,
+      signDoc: object.sign_doc ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sig: isSet(object.sig) ? object.sig : undefined
+      sig: object?.sig
     };
   },
 
   toSDK(message: AuxSignerData): AuxSignerDataSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.signDoc !== undefined && (obj.sign_doc = message.signDoc ? SignDocDirectAux.toSDK(message.signDoc) : undefined);
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.sig !== undefined && (obj.sig = message.sig);
+    obj.sig = message.sig;
     return obj;
   }
 

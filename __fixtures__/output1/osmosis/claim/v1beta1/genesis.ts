@@ -116,8 +116,8 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      moduleAccountBalance: isSet(object.module_account_balance) ? Coin.fromSDK(object.module_account_balance) : undefined,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      moduleAccountBalance: object.module_account_balance ? Coin.fromSDK(object.module_account_balance) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromSDK(e)) : []
     };
   },

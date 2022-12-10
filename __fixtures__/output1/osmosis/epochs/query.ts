@@ -213,13 +213,13 @@ export const QueryCurrentEpochRequest = {
 
   fromSDK(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
     return {
-      identifier: isSet(object.identifier) ? object.identifier : undefined
+      identifier: object?.identifier
     };
   },
 
   toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
     const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
+    obj.identifier = message.identifier;
     return obj;
   }
 
@@ -282,13 +282,13 @@ export const QueryCurrentEpochResponse = {
 
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined
+      currentEpoch: object?.current_epoch
     };
   },
 
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
     const obj: any = {};
-    message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
+    obj.current_epoch = message.currentEpoch;
     return obj;
   }
 

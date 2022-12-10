@@ -202,11 +202,11 @@ export const MsgCreateDeployment = {
 
   fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined
+      version: object?.version,
+      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined,
+      depositor: object?.depositor
     };
   },
 
@@ -220,9 +220,9 @@ export const MsgCreateDeployment = {
       obj.groups = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.depositor = message.depositor;
     return obj;
   }
 
@@ -361,9 +361,9 @@ export const MsgDepositDeployment = {
 
   fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
-      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
+      amount: object.amount ? Coin.fromSDK(object.amount) : undefined,
+      depositor: object?.depositor
     };
   },
 
@@ -371,7 +371,7 @@ export const MsgDepositDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.depositor = message.depositor;
     return obj;
   }
 
@@ -498,15 +498,15 @@ export const MsgUpdateDeployment = {
 
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
-      version: isSet(object.version) ? object.version : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined,
+      version: object?.version
     };
   },
 
   toSDK(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     return obj;
   }
 
@@ -621,7 +621,7 @@ export const MsgCloseDeployment = {
 
   fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
     };
   },
 

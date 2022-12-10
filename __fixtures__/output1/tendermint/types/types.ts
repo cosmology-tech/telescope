@@ -3,7 +3,7 @@ import { Consensus, ConsensusSDKType } from "../version/types";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { ValidatorSet, ValidatorSetSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 
 /** BlockIdFlag indicates which BlcokID the signature is for */
@@ -14,15 +14,7 @@ export enum BlockIDFlag {
   BLOCK_ID_FLAG_NIL = 3,
   UNRECOGNIZED = -1,
 }
-
-/** BlockIdFlag indicates which BlcokID the signature is for */
-export enum BlockIDFlagSDKType {
-  BLOCK_ID_FLAG_UNKNOWN = 0,
-  BLOCK_ID_FLAG_ABSENT = 1,
-  BLOCK_ID_FLAG_COMMIT = 2,
-  BLOCK_ID_FLAG_NIL = 3,
-  UNRECOGNIZED = -1,
-}
+export const BlockIDFlagSDKType = BlockIDFlag;
 export function blockIDFlagFromJSON(object: any): BlockIDFlag {
   switch (object) {
     case 0:
@@ -79,19 +71,7 @@ export enum SignedMsgType {
   SIGNED_MSG_TYPE_PROPOSAL = 32,
   UNRECOGNIZED = -1,
 }
-
-/** SignedMsgType is a type of signed message in the consensus. */
-export enum SignedMsgTypeSDKType {
-  SIGNED_MSG_TYPE_UNKNOWN = 0,
-
-  /** SIGNED_MSG_TYPE_PREVOTE - Votes */
-  SIGNED_MSG_TYPE_PREVOTE = 1,
-  SIGNED_MSG_TYPE_PRECOMMIT = 2,
-
-  /** SIGNED_MSG_TYPE_PROPOSAL - Proposals */
-  SIGNED_MSG_TYPE_PROPOSAL = 32,
-  UNRECOGNIZED = -1,
-}
+export const SignedMsgTypeSDKType = SignedMsgType;
 export function signedMsgTypeFromJSON(object: any): SignedMsgType {
   switch (object) {
     case 0:
@@ -282,7 +262,7 @@ export interface Vote {
  * consensus.
  */
 export interface VoteSDKType {
-  type: SignedMsgTypeSDKType;
+  type: SignedMsgType;
   height: Long;
   round: number;
 
@@ -320,7 +300,7 @@ export interface CommitSig {
 
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSigSDKType {
-  block_id_flag: BlockIDFlagSDKType;
+  block_id_flag: BlockIDFlag;
   validator_address: Uint8Array;
   timestamp?: Date;
   signature: Uint8Array;
@@ -335,7 +315,7 @@ export interface Proposal {
   signature: Uint8Array;
 }
 export interface ProposalSDKType {
-  type: SignedMsgTypeSDKType;
+  type: SignedMsgType;
   height: Long;
   round: number;
   pol_round: number;
@@ -455,15 +435,15 @@ export const PartSetHeader = {
 
   fromSDK(object: PartSetHeaderSDKType): PartSetHeader {
     return {
-      total: isSet(object.total) ? object.total : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined
+      total: object?.total,
+      hash: object?.hash
     };
   },
 
   toSDK(message: PartSetHeader): PartSetHeaderSDKType {
     const obj: any = {};
-    message.total !== undefined && (obj.total = message.total);
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.total = message.total;
+    obj.hash = message.hash;
     return obj;
   }
 
@@ -550,16 +530,16 @@ export const Part = {
 
   fromSDK(object: PartSDKType): Part {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      bytes: isSet(object.bytes) ? object.bytes : undefined,
-      proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
+      index: object?.index,
+      bytes: object?.bytes,
+      proof: object.proof ? Proof.fromSDK(object.proof) : undefined
     };
   },
 
   toSDK(message: Part): PartSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.bytes !== undefined && (obj.bytes = message.bytes);
+    obj.index = message.index;
+    obj.bytes = message.bytes;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
     return obj;
   }
@@ -635,14 +615,14 @@ export const BlockID = {
 
   fromSDK(object: BlockIDSDKType): BlockID {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined,
-      partSetHeader: isSet(object.part_set_header) ? PartSetHeader.fromSDK(object.part_set_header) : undefined
+      hash: object?.hash,
+      partSetHeader: object.part_set_header ? PartSetHeader.fromSDK(object.part_set_header) : undefined
     };
   },
 
   toSDK(message: BlockID): BlockIDSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     message.partSetHeader !== undefined && (obj.part_set_header = message.partSetHeader ? PartSetHeader.toSDK(message.partSetHeader) : undefined);
     return obj;
   }
@@ -862,39 +842,39 @@ export const Header = {
 
   fromSDK(object: HeaderSDKType): Header {
     return {
-      version: isSet(object.version) ? Consensus.fromSDK(object.version) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      lastBlockId: isSet(object.last_block_id) ? BlockID.fromSDK(object.last_block_id) : undefined,
-      lastCommitHash: isSet(object.last_commit_hash) ? object.last_commit_hash : undefined,
-      dataHash: isSet(object.data_hash) ? object.data_hash : undefined,
-      validatorsHash: isSet(object.validators_hash) ? object.validators_hash : undefined,
-      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : undefined,
-      consensusHash: isSet(object.consensus_hash) ? object.consensus_hash : undefined,
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined,
-      lastResultsHash: isSet(object.last_results_hash) ? object.last_results_hash : undefined,
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined,
-      proposerAddress: isSet(object.proposer_address) ? object.proposer_address : undefined
+      version: object.version ? Consensus.fromSDK(object.version) : undefined,
+      chainId: object?.chain_id,
+      height: object?.height,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      lastBlockId: object.last_block_id ? BlockID.fromSDK(object.last_block_id) : undefined,
+      lastCommitHash: object?.last_commit_hash,
+      dataHash: object?.data_hash,
+      validatorsHash: object?.validators_hash,
+      nextValidatorsHash: object?.next_validators_hash,
+      consensusHash: object?.consensus_hash,
+      appHash: object?.app_hash,
+      lastResultsHash: object?.last_results_hash,
+      evidenceHash: object?.evidence_hash,
+      proposerAddress: object?.proposer_address
     };
   },
 
   toSDK(message: Header): HeaderSDKType {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version ? Consensus.toSDK(message.version) : undefined);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
-    message.height !== undefined && (obj.height = message.height);
+    obj.chain_id = message.chainId;
+    obj.height = message.height;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
     message.lastBlockId !== undefined && (obj.last_block_id = message.lastBlockId ? BlockID.toSDK(message.lastBlockId) : undefined);
-    message.lastCommitHash !== undefined && (obj.last_commit_hash = message.lastCommitHash);
-    message.dataHash !== undefined && (obj.data_hash = message.dataHash);
-    message.validatorsHash !== undefined && (obj.validators_hash = message.validatorsHash);
-    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = message.nextValidatorsHash);
-    message.consensusHash !== undefined && (obj.consensus_hash = message.consensusHash);
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
-    message.lastResultsHash !== undefined && (obj.last_results_hash = message.lastResultsHash);
-    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
-    message.proposerAddress !== undefined && (obj.proposer_address = message.proposerAddress);
+    obj.last_commit_hash = message.lastCommitHash;
+    obj.data_hash = message.dataHash;
+    obj.validators_hash = message.validatorsHash;
+    obj.next_validators_hash = message.nextValidatorsHash;
+    obj.consensus_hash = message.consensusHash;
+    obj.app_hash = message.appHash;
+    obj.last_results_hash = message.lastResultsHash;
+    obj.evidence_hash = message.evidenceHash;
+    obj.proposer_address = message.proposerAddress;
     return obj;
   }
 
@@ -1123,26 +1103,26 @@ export const Vote = {
   fromSDK(object: VoteSDKType): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? object.height : undefined,
-      round: isSet(object.round) ? object.round : undefined,
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      validatorIndex: isSet(object.validator_index) ? object.validator_index : undefined,
-      signature: isSet(object.signature) ? object.signature : undefined
+      height: object?.height,
+      round: object?.round,
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      validatorAddress: object?.validator_address,
+      validatorIndex: object?.validator_index,
+      signature: object?.signature
     };
   },
 
   toSDK(message: Vote): VoteSDKType {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
-    message.round !== undefined && (obj.round = message.round);
+    obj.height = message.height;
+    obj.round = message.round;
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.validatorIndex !== undefined && (obj.validator_index = message.validatorIndex);
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.validator_address = message.validatorAddress;
+    obj.validator_index = message.validatorIndex;
+    obj.signature = message.signature;
     return obj;
   }
 
@@ -1247,17 +1227,17 @@ export const Commit = {
 
   fromSDK(object: CommitSDKType): Commit {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      round: isSet(object.round) ? object.round : undefined,
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
+      height: object?.height,
+      round: object?.round,
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Commit): CommitSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.round !== undefined && (obj.round = message.round);
+    obj.height = message.height;
+    obj.round = message.round;
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
 
     if (message.signatures) {
@@ -1365,18 +1345,18 @@ export const CommitSig = {
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
       blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? object.signature : undefined
+      validatorAddress: object?.validator_address,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      signature: object?.signature
     };
   },
 
   toSDK(message: CommitSig): CommitSigSDKType {
     const obj: any = {};
     message.blockIdFlag !== undefined && (obj.block_id_flag = blockIDFlagToJSON(message.blockIdFlag));
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.signature = message.signature;
     return obj;
   }
 
@@ -1512,24 +1492,24 @@ export const Proposal = {
   fromSDK(object: ProposalSDKType): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? object.height : undefined,
-      round: isSet(object.round) ? object.round : undefined,
-      polRound: isSet(object.pol_round) ? object.pol_round : undefined,
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? object.signature : undefined
+      height: object?.height,
+      round: object?.round,
+      polRound: object?.pol_round,
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      signature: object?.signature
     };
   },
 
   toSDK(message: Proposal): ProposalSDKType {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
-    message.round !== undefined && (obj.round = message.round);
-    message.polRound !== undefined && (obj.pol_round = message.polRound);
+    obj.height = message.height;
+    obj.round = message.round;
+    obj.pol_round = message.polRound;
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.signature = message.signature;
     return obj;
   }
 
@@ -1604,8 +1584,8 @@ export const SignedHeader = {
 
   fromSDK(object: SignedHeaderSDKType): SignedHeader {
     return {
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      commit: isSet(object.commit) ? Commit.fromSDK(object.commit) : undefined
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      commit: object.commit ? Commit.fromSDK(object.commit) : undefined
     };
   },
 
@@ -1687,8 +1667,8 @@ export const LightBlock = {
 
   fromSDK(object: LightBlockSDKType): LightBlock {
     return {
-      signedHeader: isSet(object.signed_header) ? SignedHeader.fromSDK(object.signed_header) : undefined,
-      validatorSet: isSet(object.validator_set) ? ValidatorSet.fromSDK(object.validator_set) : undefined
+      signedHeader: object.signed_header ? SignedHeader.fromSDK(object.signed_header) : undefined,
+      validatorSet: object.validator_set ? ValidatorSet.fromSDK(object.validator_set) : undefined
     };
   },
 
@@ -1794,19 +1774,19 @@ export const BlockMeta = {
 
   fromSDK(object: BlockMetaSDKType): BlockMeta {
     return {
-      blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      blockSize: isSet(object.block_size) ? object.block_size : undefined,
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      numTxs: isSet(object.num_txs) ? object.num_txs : undefined
+      blockId: object.block_id ? BlockID.fromSDK(object.block_id) : undefined,
+      blockSize: object?.block_size,
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      numTxs: object?.num_txs
     };
   },
 
   toSDK(message: BlockMeta): BlockMetaSDKType {
     const obj: any = {};
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
-    message.blockSize !== undefined && (obj.block_size = message.blockSize);
+    obj.block_size = message.blockSize;
     message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
-    message.numTxs !== undefined && (obj.num_txs = message.numTxs);
+    obj.num_txs = message.numTxs;
     return obj;
   }
 
@@ -1893,16 +1873,16 @@ export const TxProof = {
 
   fromSDK(object: TxProofSDKType): TxProof {
     return {
-      rootHash: isSet(object.root_hash) ? object.root_hash : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
+      rootHash: object?.root_hash,
+      data: object?.data,
+      proof: object.proof ? Proof.fromSDK(object.proof) : undefined
     };
   },
 
   toSDK(message: TxProof): TxProofSDKType {
     const obj: any = {};
-    message.rootHash !== undefined && (obj.root_hash = message.rootHash);
-    message.data !== undefined && (obj.data = message.data);
+    obj.root_hash = message.rootHash;
+    obj.data = message.data;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
     return obj;
   }

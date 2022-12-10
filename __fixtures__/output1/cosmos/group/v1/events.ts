@@ -1,6 +1,6 @@
 import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";
 
 /** EventCreateGroup is an event emitted when a group is created. */
@@ -102,7 +102,7 @@ export interface EventExecSDKType {
   proposal_id: Long;
 
   /** result is the proposal execution result. */
-  result: ProposalExecutorResultSDKType;
+  result: ProposalExecutorResult;
 }
 
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
@@ -180,13 +180,13 @@ export const EventCreateGroup = {
 
   fromSDK(object: EventCreateGroupSDKType): EventCreateGroup {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
+      groupId: object?.group_id
     };
   },
 
   toSDK(message: EventCreateGroup): EventCreateGroupSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
+    obj.group_id = message.groupId;
     return obj;
   }
 
@@ -249,13 +249,13 @@ export const EventUpdateGroup = {
 
   fromSDK(object: EventUpdateGroupSDKType): EventUpdateGroup {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined
+      groupId: object?.group_id
     };
   },
 
   toSDK(message: EventUpdateGroup): EventUpdateGroupSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
+    obj.group_id = message.groupId;
     return obj;
   }
 
@@ -318,13 +318,13 @@ export const EventCreateGroupPolicy = {
 
   fromSDK(object: EventCreateGroupPolicySDKType): EventCreateGroupPolicy {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: EventCreateGroupPolicy): EventCreateGroupPolicySDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -387,13 +387,13 @@ export const EventUpdateGroupPolicy = {
 
   fromSDK(object: EventUpdateGroupPolicySDKType): EventUpdateGroupPolicy {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: EventUpdateGroupPolicy): EventUpdateGroupPolicySDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -456,13 +456,13 @@ export const EventSubmitProposal = {
 
   fromSDK(object: EventSubmitProposalSDKType): EventSubmitProposal {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: EventSubmitProposal): EventSubmitProposalSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -525,13 +525,13 @@ export const EventWithdrawProposal = {
 
   fromSDK(object: EventWithdrawProposalSDKType): EventWithdrawProposal {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: EventWithdrawProposal): EventWithdrawProposalSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -594,13 +594,13 @@ export const EventVote = {
 
   fromSDK(object: EventVoteSDKType): EventVote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: EventVote): EventVoteSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -675,14 +675,14 @@ export const EventExec = {
 
   fromSDK(object: EventExecSDKType): EventExec {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      proposalId: object?.proposal_id,
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
     };
   },
 
   toSDK(message: EventExec): EventExecSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
   }
@@ -758,15 +758,15 @@ export const EventLeaveGroup = {
 
   fromSDK(object: EventLeaveGroupSDKType): EventLeaveGroup {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : undefined,
-      address: isSet(object.address) ? object.address : undefined
+      groupId: object?.group_id,
+      address: object?.address
     };
   },
 
   toSDK(message: EventLeaveGroup): EventLeaveGroupSDKType {
     const obj: any = {};
-    message.groupId !== undefined && (obj.group_id = message.groupId);
-    message.address !== undefined && (obj.address = message.address);
+    obj.group_id = message.groupId;
+    obj.address = message.address;
     return obj;
   }
 

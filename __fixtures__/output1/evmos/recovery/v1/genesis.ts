@@ -90,7 +90,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -171,14 +171,14 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
-      packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromSDK(object.packet_timeout_duration) : undefined
+      enableRecovery: object?.enable_recovery,
+      packetTimeoutDuration: object.packet_timeout_duration ? Duration.fromSDK(object.packet_timeout_duration) : undefined
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
+    obj.enable_recovery = message.enableRecovery;
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
     return obj;
   }

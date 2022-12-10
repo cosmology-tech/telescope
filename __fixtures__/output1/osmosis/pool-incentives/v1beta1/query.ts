@@ -1,8 +1,8 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: Long;
@@ -134,13 +134,13 @@ export const QueryGaugeIdsRequest = {
 
   fromSDK(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+      poolId: object?.pool_id
     };
   },
 
   toSDK(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    obj.pool_id = message.poolId;
     return obj;
   }
 
@@ -308,17 +308,17 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromSDK(object: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      gaugeIncentivePercentage: isSet(object.gauge_incentive_percentage) ? object.gauge_incentive_percentage : undefined
+      gaugeId: object?.gauge_id,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
+      gaugeIncentivePercentage: object?.gauge_incentive_percentage
     };
   },
 
   toSDK(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.gauge_id = message.gaugeId;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    message.gaugeIncentivePercentage !== undefined && (obj.gauge_incentive_percentage = message.gaugeIncentivePercentage);
+    obj.gauge_incentive_percentage = message.gaugeIncentivePercentage;
     return obj;
   }
 
@@ -433,7 +433,7 @@ export const QueryDistrInfoResponse = {
 
   fromSDK(object: QueryDistrInfoResponseSDKType): QueryDistrInfoResponse {
     return {
-      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined
+      distrInfo: object.distr_info ? DistrInfo.fromSDK(object.distr_info) : undefined
     };
   },
 
@@ -554,7 +554,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -832,17 +832,17 @@ export const IncentivizedPool = {
 
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      lockableDuration: isSet(object.lockable_duration) ? Duration.fromSDK(object.lockable_duration) : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
+      poolId: object?.pool_id,
+      lockableDuration: object.lockable_duration ? Duration.fromSDK(object.lockable_duration) : undefined,
+      gaugeId: object?.gauge_id
     };
   },
 
   toSDK(message: IncentivizedPool): IncentivizedPoolSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    obj.pool_id = message.poolId;
     message.lockableDuration !== undefined && (obj.lockable_duration = message.lockableDuration ? Duration.toSDK(message.lockableDuration) : undefined);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.gauge_id = message.gaugeId;
     return obj;
   }
 

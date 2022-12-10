@@ -58,7 +58,7 @@ export interface QueryClaimableForActionRequest {
 }
 export interface QueryClaimableForActionRequestSDKType {
   address: string;
-  action: ActionSDKType;
+  action: Action;
 }
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
@@ -321,7 +321,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -390,13 +390,13 @@ export const QueryClaimRecordRequest = {
 
   fromSDK(object: QueryClaimRecordRequestSDKType): QueryClaimRecordRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -459,7 +459,7 @@ export const QueryClaimRecordResponse = {
 
   fromSDK(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
     return {
-      claimRecord: isSet(object.claim_record) ? ClaimRecord.fromSDK(object.claim_record) : undefined
+      claimRecord: object.claim_record ? ClaimRecord.fromSDK(object.claim_record) : undefined
     };
   },
 
@@ -540,14 +540,14 @@ export const QueryClaimableForActionRequest = {
 
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       action: isSet(object.action) ? actionFromJSON(object.action) : 0
     };
   },
 
   toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.action !== undefined && (obj.action = actionToJSON(message.action));
     return obj;
   }
@@ -692,13 +692,13 @@ export const QueryTotalClaimableRequest = {
 
   fromSDK(object: QueryTotalClaimableRequestSDKType): QueryTotalClaimableRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 

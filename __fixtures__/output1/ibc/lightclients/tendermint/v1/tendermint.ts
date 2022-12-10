@@ -409,23 +409,23 @@ export const ClientState = {
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
-      trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
-      unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
-      maxClockDrift: isSet(object.max_clock_drift) ? Duration.fromSDK(object.max_clock_drift) : undefined,
-      frozenHeight: isSet(object.frozen_height) ? Height.fromSDK(object.frozen_height) : undefined,
-      latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
+      chainId: object?.chain_id,
+      trustLevel: object.trust_level ? Fraction.fromSDK(object.trust_level) : undefined,
+      trustingPeriod: object.trusting_period ? Duration.fromSDK(object.trusting_period) : undefined,
+      unbondingPeriod: object.unbonding_period ? Duration.fromSDK(object.unbonding_period) : undefined,
+      maxClockDrift: object.max_clock_drift ? Duration.fromSDK(object.max_clock_drift) : undefined,
+      frozenHeight: object.frozen_height ? Height.fromSDK(object.frozen_height) : undefined,
+      latestHeight: object.latest_height ? Height.fromSDK(object.latest_height) : undefined,
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : undefined,
-      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : undefined
+      allowUpdateAfterExpiry: object?.allow_update_after_expiry,
+      allowUpdateAfterMisbehaviour: object?.allow_update_after_misbehaviour
     };
   },
 
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    obj.chain_id = message.chainId;
     message.trustLevel !== undefined && (obj.trust_level = message.trustLevel ? Fraction.toSDK(message.trustLevel) : undefined);
     message.trustingPeriod !== undefined && (obj.trusting_period = message.trustingPeriod ? Duration.toSDK(message.trustingPeriod) : undefined);
     message.unbondingPeriod !== undefined && (obj.unbonding_period = message.unbondingPeriod ? Duration.toSDK(message.unbondingPeriod) : undefined);
@@ -445,8 +445,8 @@ export const ClientState = {
       obj.upgrade_path = [];
     }
 
-    message.allowUpdateAfterExpiry !== undefined && (obj.allow_update_after_expiry = message.allowUpdateAfterExpiry);
-    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour);
+    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
+    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   }
 
@@ -533,9 +533,9 @@ export const ConsensusState = {
 
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
     return {
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      root: isSet(object.root) ? MerkleRoot.fromSDK(object.root) : undefined,
-      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : undefined
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      root: object.root ? MerkleRoot.fromSDK(object.root) : undefined,
+      nextValidatorsHash: object?.next_validators_hash
     };
   },
 
@@ -543,7 +543,7 @@ export const ConsensusState = {
     const obj: any = {};
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     message.root !== undefined && (obj.root = message.root ? MerkleRoot.toSDK(message.root) : undefined);
-    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = message.nextValidatorsHash);
+    obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
   }
 
@@ -630,15 +630,15 @@ export const Misbehaviour = {
 
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      header_1: isSet(object.header_1) ? Header.fromSDK(object.header_1) : undefined,
-      header_2: isSet(object.header_2) ? Header.fromSDK(object.header_2) : undefined
+      clientId: object?.client_id,
+      header_1: object.header_1 ? Header.fromSDK(object.header_1) : undefined,
+      header_2: object.header_2 ? Header.fromSDK(object.header_2) : undefined
     };
   },
 
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
     message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
     return obj;
@@ -739,10 +739,10 @@ export const Header = {
 
   fromSDK(object: HeaderSDKType): Header {
     return {
-      signedHeader: isSet(object.signed_header) ? SignedHeader.fromSDK(object.signed_header) : undefined,
-      validatorSet: isSet(object.validator_set) ? ValidatorSet.fromSDK(object.validator_set) : undefined,
-      trustedHeight: isSet(object.trusted_height) ? Height.fromSDK(object.trusted_height) : undefined,
-      trustedValidators: isSet(object.trusted_validators) ? ValidatorSet.fromSDK(object.trusted_validators) : undefined
+      signedHeader: object.signed_header ? SignedHeader.fromSDK(object.signed_header) : undefined,
+      validatorSet: object.validator_set ? ValidatorSet.fromSDK(object.validator_set) : undefined,
+      trustedHeight: object.trusted_height ? Height.fromSDK(object.trusted_height) : undefined,
+      trustedValidators: object.trusted_validators ? ValidatorSet.fromSDK(object.trusted_validators) : undefined
     };
   },
 
@@ -826,15 +826,15 @@ export const Fraction = {
 
   fromSDK(object: FractionSDKType): Fraction {
     return {
-      numerator: isSet(object.numerator) ? object.numerator : undefined,
-      denominator: isSet(object.denominator) ? object.denominator : undefined
+      numerator: object?.numerator,
+      denominator: object?.denominator
     };
   },
 
   toSDK(message: Fraction): FractionSDKType {
     const obj: any = {};
-    message.numerator !== undefined && (obj.numerator = message.numerator);
-    message.denominator !== undefined && (obj.denominator = message.denominator);
+    obj.numerator = message.numerator;
+    obj.denominator = message.denominator;
     return obj;
   }
 

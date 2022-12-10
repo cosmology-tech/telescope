@@ -108,18 +108,18 @@ exports[`MsgExecuteContract interface 2`] = `
 
   fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      contract: isSet(object.contract) ? object.contract : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined,
+      sender: object?.sender,
+      contract: object?.contract,
+      msg: object?.msg,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgExecuteContract): MsgExecuteContractSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.msg = message.msg;
 
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);

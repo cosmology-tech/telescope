@@ -144,16 +144,16 @@ export const MsgGrantAllowance = {
 
   fromSDK(object: MsgGrantAllowanceSDKType): MsgGrantAllowance {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
+      granter: object?.granter,
+      grantee: object?.grantee,
+      allowance: object.allowance ? Any.fromSDK(object.allowance) : undefined
     };
   },
 
   toSDK(message: MsgGrantAllowance): MsgGrantAllowanceSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
     return obj;
   }
@@ -281,15 +281,15 @@ export const MsgRevokeAllowance = {
 
   fromSDK(object: MsgRevokeAllowanceSDKType): MsgRevokeAllowance {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined
+      granter: object?.granter,
+      grantee: object?.grantee
     };
   },
 
   toSDK(message: MsgRevokeAllowance): MsgRevokeAllowanceSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
     return obj;
   }
 

@@ -23,25 +23,7 @@ export enum Group_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of group */
-export enum Group_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** open - GroupOpen denotes state for group open */
-  open = 1,
-
-  /** paused - GroupOrdered denotes state for group ordered */
-  paused = 2,
-
-  /** insufficient_funds - GroupInsufficientFunds denotes state for group insufficient_funds */
-  insufficient_funds = 3,
-
-  /** closed - GroupClosed denotes state for group closed */
-  closed = 4,
-  UNRECOGNIZED = -1,
-}
+export const Group_StateSDKType = Group_State;
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:
@@ -180,7 +162,7 @@ export interface Group {
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id?: GroupIDSDKType | undefined;
-  state: Group_StateSDKType;
+  state: Group_State;
   group_spec?: GroupSpecSDKType | undefined;
   created_at: Long;
 }
@@ -256,7 +238,7 @@ export const MsgCloseGroup = {
 
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -377,7 +359,7 @@ export const MsgPauseGroup = {
 
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -498,7 +480,7 @@ export const MsgStartGroup = {
 
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -643,17 +625,17 @@ export const GroupID = {
 
   fromSDK(object: GroupIDSDKType): GroupID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      gseq: object?.gseq
     };
   },
 
   toSDK(message: GroupID): GroupIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
     return obj;
   }
 
@@ -746,15 +728,15 @@ export const GroupSpec = {
 
   fromSDK(object: GroupSpecSDKType): GroupSpec {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDK(object.requirements) : undefined,
+      name: object?.name,
+      requirements: object.requirements ? PlacementRequirements.fromSDK(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
     };
   },
 
   toSDK(message: GroupSpec): GroupSpecSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toSDK(message.requirements) : undefined);
 
     if (message.resources) {
@@ -861,10 +843,10 @@ export const Group = {
 
   fromSDK(object: GroupSDKType): Group {
     return {
-      groupId: isSet(object.group_id) ? GroupID.fromSDK(object.group_id) : undefined,
+      groupId: object.group_id ? GroupID.fromSDK(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
-      groupSpec: isSet(object.group_spec) ? GroupSpec.fromSDK(object.group_spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
+      groupSpec: object.group_spec ? GroupSpec.fromSDK(object.group_spec) : undefined,
+      createdAt: object?.created_at
     };
   },
 
@@ -873,7 +855,7 @@ export const Group = {
     message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toSDK(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    obj.created_at = message.createdAt;
     return obj;
   }
 
@@ -960,16 +942,16 @@ export const Resource = {
 
   fromSDK(object: ResourceSDKType): Resource {
     return {
-      resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
-      count: isSet(object.count) ? object.count : undefined,
-      price: isSet(object.price) ? Coin.fromSDK(object.price) : undefined
+      resources: object.resources ? ResourceUnits.fromSDK(object.resources) : undefined,
+      count: object?.count,
+      price: object.price ? Coin.fromSDK(object.price) : undefined
     };
   },
 
   toSDK(message: Resource): ResourceSDKType {
     const obj: any = {};
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
-    message.count !== undefined && (obj.count = message.count);
+    obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? Coin.toSDK(message.price) : undefined);
     return obj;
   }

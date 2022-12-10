@@ -70,7 +70,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      deploymentMinDeposit: isSet(object.deployment_min_deposit) ? Coin.fromSDK(object.deployment_min_deposit) : undefined
+      deploymentMinDeposit: object.deployment_min_deposit ? Coin.fromSDK(object.deployment_min_deposit) : undefined
     };
   },
 

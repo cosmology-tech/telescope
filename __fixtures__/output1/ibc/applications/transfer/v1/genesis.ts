@@ -104,15 +104,15 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
+      portId: object?.port_id,
       denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDK(e)) : [],
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
+    obj.port_id = message.portId;
 
     if (message.denomTraces) {
       obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toSDK(e) : undefined);

@@ -143,13 +143,13 @@ export const GenericAuthorization = {
 
   fromSDK(object: GenericAuthorizationSDKType): GenericAuthorization {
     return {
-      msg: isSet(object.msg) ? object.msg : undefined
+      msg: object?.msg
     };
   },
 
   toSDK(message: GenericAuthorization): GenericAuthorizationSDKType {
     const obj: any = {};
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.msg = message.msg;
     return obj;
   }
 
@@ -224,8 +224,8 @@ export const Grant = {
 
   fromSDK(object: GrantSDKType): Grant {
     return {
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 
@@ -331,17 +331,17 @@ export const GrantAuthorization = {
 
   fromSDK(object: GrantAuthorizationSDKType): GrantAuthorization {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      granter: object?.granter,
+      grantee: object?.grantee,
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 
   toSDK(message: GrantAuthorization): GrantAuthorizationSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
     return obj;

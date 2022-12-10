@@ -392,15 +392,15 @@ export const EvalState_Result = {
 
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? IdRef.fromSDK(object.expr) : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      expr: object.expr ? IdRef.fromSDK(object.expr) : undefined,
+      value: object?.value
     };
   },
 
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? IdRef.toSDK(message.expr) : undefined);
-    message.value !== undefined && (obj.value = message.value);
+    obj.value = message.value;
     return obj;
   }
 
@@ -487,9 +487,9 @@ export const ExprValue = {
 
   fromSDK(object: ExprValueSDKType): ExprValue {
     return {
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromSDK(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromSDK(object.unknown) : undefined
+      value: object.value ? Value.fromSDK(object.value) : undefined,
+      error: object.error ? ErrorSet.fromSDK(object.error) : undefined,
+      unknown: object.unknown ? UnknownSet.fromSDK(object.unknown) : undefined
     };
   },
 
@@ -722,13 +722,13 @@ export const IdRef = {
 
   fromSDK(object: IdRefSDKType): IdRef {
     return {
-      id: isSet(object.id) ? object.id : undefined
+      id: object?.id
     };
   },
 
   toSDK(message: IdRef): IdRefSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    obj.id = message.id;
     return obj;
   }
 

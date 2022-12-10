@@ -146,9 +146,9 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       saleCreationFee: Array.isArray(object?.sale_creation_fee) ? object.sale_creation_fee.map((e: any) => Coin.fromSDK(e)) : [],
-      saleCreationFeeRecipient: isSet(object.sale_creation_fee_recipient) ? object.sale_creation_fee_recipient : undefined,
-      minDurationUntilStartTime: isSet(object.min_duration_until_start_time) ? Duration.fromSDK(object.min_duration_until_start_time) : undefined,
-      minSaleDuration: isSet(object.min_sale_duration) ? Duration.fromSDK(object.min_sale_duration) : undefined
+      saleCreationFeeRecipient: object?.sale_creation_fee_recipient,
+      minDurationUntilStartTime: object.min_duration_until_start_time ? Duration.fromSDK(object.min_duration_until_start_time) : undefined,
+      minSaleDuration: object.min_sale_duration ? Duration.fromSDK(object.min_sale_duration) : undefined
     };
   },
 
@@ -161,7 +161,7 @@ export const Params = {
       obj.sale_creation_fee = [];
     }
 
-    message.saleCreationFeeRecipient !== undefined && (obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient);
+    obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient;
     message.minDurationUntilStartTime !== undefined && (obj.min_duration_until_start_time = message.minDurationUntilStartTime ? Duration.toSDK(message.minDurationUntilStartTime) : undefined);
     message.minSaleDuration !== undefined && (obj.min_sale_duration = message.minSaleDuration ? Duration.toSDK(message.minSaleDuration) : undefined);
     return obj;

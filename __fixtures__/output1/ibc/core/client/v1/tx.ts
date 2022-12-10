@@ -258,9 +258,9 @@ export const MsgCreateClient = {
 
   fromSDK(object: MsgCreateClientSDKType): MsgCreateClient {
     return {
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
+      signer: object?.signer
     };
   },
 
@@ -268,7 +268,7 @@ export const MsgCreateClient = {
     const obj: any = {};
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -407,17 +407,17 @@ export const MsgUpdateClient = {
 
   fromSDK(object: MsgUpdateClientSDKType): MsgUpdateClient {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      header: isSet(object.header) ? Any.fromSDK(object.header) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      clientId: object?.client_id,
+      header: object.header ? Any.fromSDK(object.header) : undefined,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgUpdateClient): MsgUpdateClientSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     message.header !== undefined && (obj.header = message.header ? Any.toSDK(message.header) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -592,23 +592,23 @@ export const MsgUpgradeClient = {
 
   fromSDK(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : undefined,
-      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      clientId: object?.client_id,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
+      proofUpgradeClient: object?.proof_upgrade_client,
+      proofUpgradeConsensusState: object?.proof_upgrade_consensus_state,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
-    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = message.proofUpgradeClient);
-    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.proof_upgrade_client = message.proofUpgradeClient;
+    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
+    obj.signer = message.signer;
     return obj;
   }
 
@@ -747,17 +747,17 @@ export const MsgSubmitMisbehaviour = {
 
   fromSDK(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDK(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? object.signer : undefined
+      clientId: object?.client_id,
+      misbehaviour: object.misbehaviour ? Any.fromSDK(object.misbehaviour) : undefined,
+      signer: object?.signer
     };
   },
 
   toSDK(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
+    obj.client_id = message.clientId;
     message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toSDK(message.misbehaviour) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
+    obj.signer = message.signer;
     return obj;
   }
 

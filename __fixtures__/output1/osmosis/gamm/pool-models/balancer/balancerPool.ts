@@ -311,8 +311,8 @@ export const SmoothWeightChangeParams = {
 
   fromSDK(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
     return {
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : [],
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
     };
@@ -421,16 +421,16 @@ export const PoolParams = {
 
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
-      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
-      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined,
-      smoothWeightChangeParams: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
+      swapFee: object?.swap_fee,
+      exitFee: object?.exit_fee,
+      smoothWeightChangeParams: object.smooth_weight_change_params ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
     };
   },
 
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
-    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
-    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
+    obj.swap_fee = message.swapFee;
+    obj.exit_fee = message.exitFee;
     message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
     return obj;
   }
@@ -506,15 +506,15 @@ export const PoolAsset = {
 
   fromSDK(object: PoolAssetSDKType): PoolAsset {
     return {
-      token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined
+      token: object.token ? Coin.fromSDK(object.token) : undefined,
+      weight: object?.weight
     };
   },
 
   toSDK(message: PoolAsset): PoolAssetSDKType {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
-    message.weight !== undefined && (obj.weight = message.weight);
+    obj.weight = message.weight;
     return obj;
   }
 
@@ -655,22 +655,22 @@ export const Pool = {
 
   fromSDK(object: PoolSDKType): Pool {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
-      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
+      address: object?.address,
+      id: object?.id,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
+      futurePoolGovernor: object?.future_pool_governor,
+      totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined
+      totalWeight: object?.total_weight
     };
   },
 
   toSDK(message: Pool): PoolSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = message.id);
+    obj.address = message.address;
+    obj.id = message.id;
     message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor;
     message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
 
     if (message.poolAssets) {
@@ -679,7 +679,7 @@ export const Pool = {
       obj.pool_assets = [];
     }
 
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
+    obj.total_weight = message.totalWeight;
     return obj;
   }
 

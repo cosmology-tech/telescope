@@ -380,7 +380,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -449,7 +449,7 @@ export const QueryClaimsRecordsRequest = {
 
   fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -537,7 +537,7 @@ export const QueryClaimsRecordsResponse = {
   fromSDK(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
     return {
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -613,13 +613,13 @@ export const QueryClaimsRecordRequest = {
 
   fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -700,14 +700,14 @@ export const QueryClaimsRecordResponse = {
 
   fromSDK(object: QueryClaimsRecordResponseSDKType): QueryClaimsRecordResponse {
     return {
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
+      initialClaimableAmount: object?.initial_claimable_amount,
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDK(e)) : []
     };
   },
 
   toSDK(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseSDKType {
     const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
+    obj.initial_claimable_amount = message.initialClaimableAmount;
 
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? Claim.toSDK(e) : undefined);

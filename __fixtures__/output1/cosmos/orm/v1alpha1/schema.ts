@@ -49,54 +49,7 @@ export enum StorageType {
   STORAGE_TYPE_COMMITMENT = 4,
   UNRECOGNIZED = -1,
 }
-
-/** StorageType */
-export enum StorageTypeSDKType {
-  /**
-   * STORAGE_TYPE_DEFAULT_UNSPECIFIED - STORAGE_TYPE_DEFAULT_UNSPECIFIED indicates the persistent
-   * KV-storage where primary key entries are stored in merkle-tree
-   * backed commitment storage and indexes and seqs are stored in
-   * fast index storage. Note that the Cosmos SDK before store/v2alpha1
-   * does not support this.
-   */
-  STORAGE_TYPE_DEFAULT_UNSPECIFIED = 0,
-
-  /**
-   * STORAGE_TYPE_MEMORY - STORAGE_TYPE_MEMORY indicates in-memory storage that will be
-   * reloaded every time an app restarts. Tables with this type of storage
-   * will by default be ignored when importing and exporting a module's
-   * state from JSON.
-   */
-  STORAGE_TYPE_MEMORY = 1,
-
-  /**
-   * STORAGE_TYPE_TRANSIENT - STORAGE_TYPE_TRANSIENT indicates transient storage that is reset
-   * at the end of every block. Tables with this type of storage
-   * will by default be ignored when importing and exporting a module's
-   * state from JSON.
-   */
-  STORAGE_TYPE_TRANSIENT = 2,
-
-  /**
-   * STORAGE_TYPE_INDEX - STORAGE_TYPE_INDEX indicates persistent storage which is not backed
-   * by a merkle-tree and won't affect the app hash. Note that the Cosmos SDK
-   * before store/v2alpha1 does not support this.
-   */
-  STORAGE_TYPE_INDEX = 3,
-
-  /**
-   * STORAGE_TYPE_COMMITMENT - STORAGE_TYPE_INDEX indicates persistent storage which is backed by
-   * a merkle-tree. With this type of storage, both primary and index keys
-   * will affect the app hash and this is generally less efficient
-   * than using STORAGE_TYPE_DEFAULT_UNSPECIFIED which separates index
-   * keys into index storage. Note that modules built with the
-   * Cosmos SDK before store/v2alpha1 must specify STORAGE_TYPE_COMMITMENT
-   * instead of STORAGE_TYPE_DEFAULT_UNSPECIFIED or STORAGE_TYPE_INDEX
-   * because this is the only type of persistent storage available.
-   */
-  STORAGE_TYPE_COMMITMENT = 4,
-  UNRECOGNIZED = -1,
-}
+export const StorageTypeSDKType = StorageType;
 export function storageTypeFromJSON(object: any): StorageType {
   switch (object) {
     case 0:
@@ -213,7 +166,7 @@ export interface ModuleSchemaDescriptor_FileEntrySDKType {
    * tables should used. If it is left unspecified, the default KV-storage
    * of the app will be used.
    */
-  storage_type: StorageTypeSDKType;
+  storage_type: StorageType;
 }
 
 function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
@@ -292,7 +245,7 @@ export const ModuleSchemaDescriptor = {
   fromSDK(object: ModuleSchemaDescriptorSDKType): ModuleSchemaDescriptor {
     return {
       schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromSDK(e)) : [],
-      prefix: isSet(object.prefix) ? object.prefix : undefined
+      prefix: object?.prefix
     };
   },
 
@@ -305,7 +258,7 @@ export const ModuleSchemaDescriptor = {
       obj.schema_file = [];
     }
 
-    message.prefix !== undefined && (obj.prefix = message.prefix);
+    obj.prefix = message.prefix;
     return obj;
   }
 
@@ -392,16 +345,16 @@ export const ModuleSchemaDescriptor_FileEntry = {
 
   fromSDK(object: ModuleSchemaDescriptor_FileEntrySDKType): ModuleSchemaDescriptor_FileEntry {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      protoFileName: isSet(object.proto_file_name) ? object.proto_file_name : undefined,
+      id: object?.id,
+      protoFileName: object?.proto_file_name,
       storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
     };
   },
 
   toSDK(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntrySDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.protoFileName !== undefined && (obj.proto_file_name = message.protoFileName);
+    obj.id = message.id;
+    obj.proto_file_name = message.protoFileName;
     message.storageType !== undefined && (obj.storage_type = storageTypeToJSON(message.storageType));
     return obj;
   }

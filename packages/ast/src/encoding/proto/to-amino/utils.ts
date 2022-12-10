@@ -1,4 +1,7 @@
 import * as t from '@babel/types';
+import { ProtoType } from '@osmonauts/types';
+import { BILLION } from '../../../utils';
+import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
 import { ToAminoJSONMethod } from './index';
 
@@ -31,10 +34,19 @@ export const toAminoJSON = {
     scalar(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
 
-        return notUndefinedSetValue(origName, propName, t.memberExpression(
-            t.identifier('message'),
-            t.identifier(propName)
-        ));
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(propName)
+                )
+            )
+        );
     },
 
     string(args: ToAminoJSONMethod) {
@@ -71,50 +83,86 @@ export const toAminoJSON = {
     sfixed32(args: ToAminoJSONMethod) {
         return toAminoJSON.scalar(args);
     },
+
     long(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                            t.identifier('toString')
+                        ),
+                        []
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+
     },
     int64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     uint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     sint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     fixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     sfixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
 
     type(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
 
-        // TODO isn't the nested conditional a waste? (using ts-proto as reference)
-        // maybe null is OK?
-        return notUndefinedSetValue(origName, propName, t.conditionalExpression(
-            t.memberExpression(
-                t.identifier('message'),
-                t.identifier(propName)
-            ),
-            t.callExpression(
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
                 t.memberExpression(
-                    t.identifier(name),
-                    t.identifier('toAmino')
+                    t.identifier('obj'),
+                    t.identifier(origName)
                 ),
-                [
+                t.conditionalExpression(
                     t.memberExpression(
                         t.identifier('message'),
                         t.identifier(propName)
-                    )
-                ]
-            ),
-            t.identifier('undefined')
-        ));
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier(name),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
     },
 
     enum(args: ToAminoJSONMethod) {
@@ -395,3 +443,37 @@ export const arrayTypes = {
     }
 }
 
+
+export const toAminoMessages = {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        return t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.binaryExpression(
+                        '+',
+                        t.binaryExpression(
+                            '*',
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier('seconds')
+                                    ),
+                                    t.identifier('toInt')
+                                ),
+                                []
+                            ),
+                            BILLION
+                        ),
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier('nanos')
+                        )
+                    ),
+                    t.identifier('toString')
+                ),
+                []
+            )
+        )
+    }
+}

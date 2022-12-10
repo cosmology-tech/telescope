@@ -203,18 +203,18 @@ export const Record = {
 
   fromSDK(object: RecordSDKType): Record {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      local: isSet(object.local) ? Record_Local.fromSDK(object.local) : undefined,
-      ledger: isSet(object.ledger) ? Record_Ledger.fromSDK(object.ledger) : undefined,
-      multi: isSet(object.multi) ? Record_Multi.fromSDK(object.multi) : undefined,
-      offline: isSet(object.offline) ? Record_Offline.fromSDK(object.offline) : undefined
+      name: object?.name,
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
+      local: object.local ? Record_Local.fromSDK(object.local) : undefined,
+      ledger: object.ledger ? Record_Ledger.fromSDK(object.ledger) : undefined,
+      multi: object.multi ? Record_Multi.fromSDK(object.multi) : undefined,
+      offline: object.offline ? Record_Offline.fromSDK(object.offline) : undefined
     };
   },
 
   toSDK(message: Record): RecordSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toSDK(message.pubKey) : undefined);
     message.local !== undefined && (obj.local = message.local ? Record_Local.toSDK(message.local) : undefined);
     message.ledger !== undefined && (obj.ledger = message.ledger ? Record_Ledger.toSDK(message.ledger) : undefined);
@@ -294,15 +294,15 @@ export const Record_Local = {
 
   fromSDK(object: Record_LocalSDKType): Record_Local {
     return {
-      privKey: isSet(object.priv_key) ? Any.fromSDK(object.priv_key) : undefined,
-      privKeyType: isSet(object.priv_key_type) ? object.priv_key_type : undefined
+      privKey: object.priv_key ? Any.fromSDK(object.priv_key) : undefined,
+      privKeyType: object?.priv_key_type
     };
   },
 
   toSDK(message: Record_Local): Record_LocalSDKType {
     const obj: any = {};
     message.privKey !== undefined && (obj.priv_key = message.privKey ? Any.toSDK(message.privKey) : undefined);
-    message.privKeyType !== undefined && (obj.priv_key_type = message.privKeyType);
+    obj.priv_key_type = message.privKeyType;
     return obj;
   }
 
@@ -365,7 +365,7 @@ export const Record_Ledger = {
 
   fromSDK(object: Record_LedgerSDKType): Record_Ledger {
     return {
-      path: isSet(object.path) ? BIP44Params.fromSDK(object.path) : undefined
+      path: object.path ? BIP44Params.fromSDK(object.path) : undefined
     };
   },
 

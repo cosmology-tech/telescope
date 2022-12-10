@@ -1,6 +1,6 @@
 import { CapabilityOwners, CapabilityOwnersSDKType } from "./capability";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.capability.v1beta1";
 
 /** GenesisOwners defines the capability owners with their corresponding index. */
@@ -114,14 +114,14 @@ export const GenesisOwners = {
 
   fromSDK(object: GenesisOwnersSDKType): GenesisOwners {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      indexOwners: isSet(object.index_owners) ? CapabilityOwners.fromSDK(object.index_owners) : undefined
+      index: object?.index,
+      indexOwners: object.index_owners ? CapabilityOwners.fromSDK(object.index_owners) : undefined
     };
   },
 
   toSDK(message: GenesisOwners): GenesisOwnersSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    obj.index = message.index;
     message.indexOwners !== undefined && (obj.index_owners = message.indexOwners ? CapabilityOwners.toSDK(message.indexOwners) : undefined);
     return obj;
   }
@@ -203,14 +203,14 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      index: isSet(object.index) ? object.index : undefined,
+      index: object?.index,
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDK(e)) : []
     };
   },
 
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    obj.index = message.index;
 
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toSDK(e) : undefined);

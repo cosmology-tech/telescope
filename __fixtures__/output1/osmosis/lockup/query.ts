@@ -535,13 +535,13 @@ export const AccountUnlockableCoinsRequest = {
 
   fromSDK(object: AccountUnlockableCoinsRequestSDKType): AccountUnlockableCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -685,13 +685,13 @@ export const AccountUnlockingCoinsRequest = {
 
   fromSDK(object: AccountUnlockingCoinsRequestSDKType): AccountUnlockingCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -835,13 +835,13 @@ export const AccountLockedCoinsRequest = {
 
   fromSDK(object: AccountLockedCoinsRequestSDKType): AccountLockedCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -997,14 +997,14 @@ export const AccountLockedPastTimeRequest = {
 
   fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      owner: object?.owner,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
   toSDK(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
   }
@@ -1161,14 +1161,14 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
 
   fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      owner: object?.owner,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
   toSDK(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
   }
@@ -1325,14 +1325,14 @@ export const AccountUnlockedBeforeTimeRequest = {
 
   fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+      owner: object?.owner,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
 
   toSDK(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     return obj;
   }
@@ -1501,17 +1501,17 @@ export const AccountLockedPastTimeDenomRequest = {
 
   fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      owner: object?.owner,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      denom: object?.denom
     };
   },
 
   toSDK(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -1667,14 +1667,14 @@ export const LockedDenomRequest = {
 
   fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      denom: object?.denom,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: LockedDenomRequest): LockedDenomRequestSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }
@@ -1738,13 +1738,13 @@ export const LockedDenomResponse = {
 
   fromSDK(object: LockedDenomResponseSDKType): LockedDenomResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : undefined
+      amount: object?.amount
     };
   },
 
   toSDK(message: LockedDenomResponse): LockedDenomResponseSDKType {
     const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -1807,13 +1807,13 @@ export const LockedRequest = {
 
   fromSDK(object: LockedRequestSDKType): LockedRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+      lockId: object?.lock_id
     };
   },
 
   toSDK(message: LockedRequest): LockedRequestSDKType {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    obj.lock_id = message.lockId;
     return obj;
   }
 
@@ -1876,7 +1876,7 @@ export const LockedResponse = {
 
   fromSDK(object: LockedResponseSDKType): LockedResponse {
     return {
-      lock: isSet(object.lock) ? PeriodLock.fromSDK(object.lock) : undefined
+      lock: object.lock ? PeriodLock.fromSDK(object.lock) : undefined
     };
   },
 
@@ -1945,13 +1945,13 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+      lockId: object?.lock_id
     };
   },
 
   toSDK(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    obj.lock_id = message.lockId;
     return obj;
   }
 
@@ -2107,14 +2107,14 @@ export const AccountLockedLongerDurationRequest = {
 
   fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }
@@ -2271,14 +2271,14 @@ export const AccountLockedDurationRequest = {
 
   fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: AccountLockedDurationRequest): AccountLockedDurationRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }
@@ -2435,14 +2435,14 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
 
   fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }
@@ -2611,17 +2611,17 @@ export const AccountLockedLongerDurationDenomRequest = {
 
   fromSDK(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
+      denom: object?.denom
     };
   },
 
   toSDK(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 

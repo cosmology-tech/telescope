@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Duration } from "../../protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.type";
 
 /**

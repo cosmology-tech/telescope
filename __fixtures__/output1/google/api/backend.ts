@@ -65,70 +65,7 @@ export enum BackendRule_PathTranslation {
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Path Translation specifies how to combine the backend address with the
- * request path in order to produce the appropriate forwarding URL for the
- * request.
- * 
- * Path Translation is applicable only to HTTP-based backends. Backends which
- * do not accept requests over HTTP/HTTPS should leave `path_translation`
- * unspecified.
- */
-export enum BackendRule_PathTranslationSDKType {
-  PATH_TRANSLATION_UNSPECIFIED = 0,
-
-  /**
-   * CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
-   * URL pattern contains variables, the variable names and values will be
-   * appended to the query string. If a query string parameter and a URL
-   * pattern variable have the same name, this may result in duplicate keys in
-   * the query string.
-   * 
-   * # Examples
-   * 
-   * Given the following operation config:
-   * 
-   *     Method path:        /api/company/{cid}/user/{uid}
-   *     Backend address:    https://example.cloudfunctions.net/getUser
-   * 
-   * Requests to the following request paths will call the backend at the
-   * translated path:
-   * 
-   *     Request path: /api/company/widgetworks/user/johndoe
-   *     Translated:
-   *     https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
-   * 
-   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *     Translated:
-   *     https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
-   */
-  CONSTANT_ADDRESS = 1,
-
-  /**
-   * APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
-   * 
-   * # Examples
-   * 
-   * Given the following operation config:
-   * 
-   *     Method path:        /api/company/{cid}/user/{uid}
-   *     Backend address:    https://example.appspot.com
-   * 
-   * Requests to the following request paths will call the backend at the
-   * translated path:
-   * 
-   *     Request path: /api/company/widgetworks/user/johndoe
-   *     Translated:
-   *     https://example.appspot.com/api/company/widgetworks/user/johndoe
-   * 
-   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *     Translated:
-   *     https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
-   */
-  APPEND_PATH_TO_ADDRESS = 2,
-  UNRECOGNIZED = -1,
-}
+export const BackendRule_PathTranslationSDKType = BackendRule_PathTranslation;
 export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
   switch (object) {
     case 0:
@@ -329,7 +266,7 @@ export interface BackendRuleSDKType {
    * operation. The default is no deadline.
    */
   operation_deadline: number;
-  path_translation: BackendRule_PathTranslationSDKType;
+  path_translation: BackendRule_PathTranslation;
 
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
@@ -606,29 +543,29 @@ export const BackendRule = {
 
   fromSDK(object: BackendRuleSDKType): BackendRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      address: isSet(object.address) ? object.address : undefined,
-      deadline: isSet(object.deadline) ? object.deadline : undefined,
-      minDeadline: isSet(object.min_deadline) ? object.min_deadline : undefined,
-      operationDeadline: isSet(object.operation_deadline) ? object.operation_deadline : undefined,
+      selector: object?.selector,
+      address: object?.address,
+      deadline: object?.deadline,
+      minDeadline: object?.min_deadline,
+      operationDeadline: object?.operation_deadline,
       pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
-      jwtAudience: isSet(object.jwt_audience) ? object.jwt_audience : undefined,
-      disableAuth: isSet(object.disable_auth) ? object.disable_auth : undefined,
-      protocol: isSet(object.protocol) ? object.protocol : undefined
+      jwtAudience: object?.jwt_audience,
+      disableAuth: object?.disable_auth,
+      protocol: object?.protocol
     };
   },
 
   toSDK(message: BackendRule): BackendRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.address !== undefined && (obj.address = message.address);
-    message.deadline !== undefined && (obj.deadline = message.deadline);
-    message.minDeadline !== undefined && (obj.min_deadline = message.minDeadline);
-    message.operationDeadline !== undefined && (obj.operation_deadline = message.operationDeadline);
+    obj.selector = message.selector;
+    obj.address = message.address;
+    obj.deadline = message.deadline;
+    obj.min_deadline = message.minDeadline;
+    obj.operation_deadline = message.operationDeadline;
     message.pathTranslation !== undefined && (obj.path_translation = backendRule_PathTranslationToJSON(message.pathTranslation));
-    message.jwtAudience !== undefined && (obj.jwt_audience = message.jwtAudience);
-    message.disableAuth !== undefined && (obj.disable_auth = message.disableAuth);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
+    obj.jwt_audience = message.jwtAudience;
+    obj.disable_auth = message.disableAuth;
+    obj.protocol = message.protocol;
     return obj;
   }
 

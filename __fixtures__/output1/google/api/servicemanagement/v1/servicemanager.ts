@@ -17,19 +17,7 @@ export enum GetServiceConfigRequest_ConfigView {
   FULL = 1,
   UNRECOGNIZED = -1,
 }
-export enum GetServiceConfigRequest_ConfigViewSDKType {
-  /** BASIC - Server response includes all fields except SourceInfo. */
-  BASIC = 0,
-
-  /**
-   * FULL - Server response includes all fields including SourceInfo.
-   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-   * and are only available for configs created using the
-   * SubmitConfigSource method.
-   */
-  FULL = 1,
-  UNRECOGNIZED = -1,
-}
+export const GetServiceConfigRequest_ConfigViewSDKType = GetServiceConfigRequest_ConfigView;
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case 0:
@@ -257,7 +245,7 @@ export interface GetServiceConfigRequestSDKType {
    * Specifies which parts of the Service Config should be returned in the
    * response.
    */
-  view: GetServiceConfigRequest_ConfigViewSDKType;
+  view: GetServiceConfigRequest_ConfigView;
 }
 
 /** Request message for ListServiceConfigs method. */
@@ -693,19 +681,19 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined
+      producerProjectId: object?.producer_project_id,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      consumerId: object?.consumer_id
     };
   },
 
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
     const obj: any = {};
-    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.producer_project_id = message.producerProjectId;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.consumer_id = message.consumerId;
     return obj;
   }
 
@@ -787,7 +775,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -800,7 +788,7 @@ export const ListServicesResponse = {
       obj.services = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -863,13 +851,13 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined
+      serviceName: object?.service_name
     };
   },
 
   toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     return obj;
   }
 
@@ -932,7 +920,7 @@ export const CreateServiceRequest = {
 
   fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
     return {
-      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+      service: object.service ? ManagedService.fromSDK(object.service) : undefined
     };
   },
 
@@ -1001,13 +989,13 @@ export const DeleteServiceRequest = {
 
   fromSDK(object: DeleteServiceRequestSDKType): DeleteServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined
+      serviceName: object?.service_name
     };
   },
 
   toSDK(message: DeleteServiceRequest): DeleteServiceRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     return obj;
   }
 
@@ -1070,13 +1058,13 @@ export const UndeleteServiceRequest = {
 
   fromSDK(object: UndeleteServiceRequestSDKType): UndeleteServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined
+      serviceName: object?.service_name
     };
   },
 
   toSDK(message: UndeleteServiceRequest): UndeleteServiceRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     return obj;
   }
 
@@ -1139,7 +1127,7 @@ export const UndeleteServiceResponse = {
 
   fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
     return {
-      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+      service: object.service ? ManagedService.fromSDK(object.service) : undefined
     };
   },
 
@@ -1232,16 +1220,16 @@ export const GetServiceConfigRequest = {
 
   fromSDK(object: GetServiceConfigRequestSDKType): GetServiceConfigRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      configId: isSet(object.config_id) ? object.config_id : undefined,
+      serviceName: object?.service_name,
+      configId: object?.config_id,
       view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
     };
   },
 
   toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.configId !== undefined && (obj.config_id = message.configId);
+    obj.service_name = message.serviceName;
+    obj.config_id = message.configId;
     message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
     return obj;
   }
@@ -1329,17 +1317,17 @@ export const ListServiceConfigsRequest = {
 
   fromSDK(object: ListServiceConfigsRequestSDKType): ListServiceConfigsRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
+      serviceName: object?.service_name,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size
     };
   },
 
   toSDK(message: ListServiceConfigsRequest): ListServiceConfigsRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    obj.service_name = message.serviceName;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   }
 
@@ -1421,7 +1409,7 @@ export const ListServiceConfigsResponse = {
   fromSDK(object: ListServiceConfigsResponseSDKType): ListServiceConfigsResponse {
     return {
       serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1434,7 +1422,7 @@ export const ListServiceConfigsResponse = {
       obj.service_configs = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -1509,14 +1497,14 @@ export const CreateServiceConfigRequest = {
 
   fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+      serviceName: object?.service_name,
+      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
     };
   },
 
   toSDK(message: CreateServiceConfigRequest): CreateServiceConfigRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
     return obj;
   }
@@ -1604,17 +1592,17 @@ export const SubmitConfigSourceRequest = {
 
   fromSDK(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      configSource: isSet(object.config_source) ? ConfigSource.fromSDK(object.config_source) : undefined,
-      validateOnly: isSet(object.validate_only) ? object.validate_only : undefined
+      serviceName: object?.service_name,
+      configSource: object.config_source ? ConfigSource.fromSDK(object.config_source) : undefined,
+      validateOnly: object?.validate_only
     };
   },
 
   toSDK(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     message.configSource !== undefined && (obj.config_source = message.configSource ? ConfigSource.toSDK(message.configSource) : undefined);
-    message.validateOnly !== undefined && (obj.validate_only = message.validateOnly);
+    obj.validate_only = message.validateOnly;
     return obj;
   }
 
@@ -1677,7 +1665,7 @@ export const SubmitConfigSourceResponse = {
 
   fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
     return {
-      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+      serviceConfig: object.service_config ? Service.fromSDK(object.service_config) : undefined
     };
   },
 
@@ -1758,14 +1746,14 @@ export const CreateServiceRolloutRequest = {
 
   fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      rollout: isSet(object.rollout) ? Rollout.fromSDK(object.rollout) : undefined
+      serviceName: object?.service_name,
+      rollout: object.rollout ? Rollout.fromSDK(object.rollout) : undefined
     };
   },
 
   toSDK(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toSDK(message.rollout) : undefined);
     return obj;
   }
@@ -1865,19 +1853,19 @@ export const ListServiceRolloutsRequest = {
 
   fromSDK(object: ListServiceRolloutsRequestSDKType): ListServiceRolloutsRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
+      serviceName: object?.service_name,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size,
+      filter: object?.filter
     };
   },
 
   toSDK(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.filter !== undefined && (obj.filter = message.filter);
+    obj.service_name = message.serviceName;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    obj.filter = message.filter;
     return obj;
   }
 
@@ -1959,7 +1947,7 @@ export const ListServiceRolloutsResponse = {
   fromSDK(object: ListServiceRolloutsResponseSDKType): ListServiceRolloutsResponse {
     return {
       rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1972,7 +1960,7 @@ export const ListServiceRolloutsResponse = {
       obj.rollouts = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -2047,15 +2035,15 @@ export const GetServiceRolloutRequest = {
 
   fromSDK(object: GetServiceRolloutRequestSDKType): GetServiceRolloutRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      rolloutId: isSet(object.rollout_id) ? object.rollout_id : undefined
+      serviceName: object?.service_name,
+      rolloutId: object?.rollout_id
     };
   },
 
   toSDK(message: GetServiceRolloutRequest): GetServiceRolloutRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.rolloutId !== undefined && (obj.rollout_id = message.rolloutId);
+    obj.service_name = message.serviceName;
+    obj.rollout_id = message.rolloutId;
     return obj;
   }
 
@@ -2130,8 +2118,8 @@ export const GenerateConfigReportRequest = {
 
   fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
     return {
-      newConfig: isSet(object.new_config) ? Any.fromSDK(object.new_config) : undefined,
-      oldConfig: isSet(object.old_config) ? Any.fromSDK(object.old_config) : undefined
+      newConfig: object.new_config ? Any.fromSDK(object.new_config) : undefined,
+      oldConfig: object.old_config ? Any.fromSDK(object.old_config) : undefined
     };
   },
 
@@ -2248,8 +2236,8 @@ export const GenerateConfigReportResponse = {
 
   fromSDK(object: GenerateConfigReportResponseSDKType): GenerateConfigReportResponse {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      id: isSet(object.id) ? object.id : undefined,
+      serviceName: object?.service_name,
+      id: object?.id,
       changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDK(e)) : [],
       diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDK(e)) : []
     };
@@ -2257,8 +2245,8 @@ export const GenerateConfigReportResponse = {
 
   toSDK(message: GenerateConfigReportResponse): GenerateConfigReportResponseSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
-    message.id !== undefined && (obj.id = message.id);
+    obj.service_name = message.serviceName;
+    obj.id = message.id;
 
     if (message.changeReports) {
       obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toSDK(e) : undefined);

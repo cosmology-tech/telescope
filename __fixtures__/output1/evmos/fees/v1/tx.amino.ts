@@ -6,7 +6,7 @@ export interface AminoMsgRegisterDevFeeInfo extends AminoMsg {
     contract_address: string;
     deployer_address: string;
     withdraw_address: string;
-    nonces: Long[];
+    nonces: string[];
   };
 }
 export interface AminoMsgCancelDevFeeInfo extends AminoMsg {

@@ -1,10 +1,9 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
-import { BILLION, callExpression, identifier, memberExpressionOrIdentifierAminoCaseField } from '../../../utils';
-import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
-
-// TODO remove this...
-import { camel } from 'case';
+import { BILLION, callExpression, identifier } from '../../../utils';
+import { getFieldNames } from '../../types';
+import { ProtoParseContext } from '../../context';
+import { ProtoType } from '@osmonauts/types';
 
 export const fromAminoJSON = {
 
@@ -13,28 +12,16 @@ export const fromAminoJSON = {
             propName,
             origName
         } = getFieldNames(args.field);
-        args.context.addUtil('isSet');
 
         return t.objectProperty(
             t.identifier(propName),
-            t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(origName)
-                        )
-                    ]
-                ),
-                t.memberExpression(
-                    t.identifier('object'),
-                    t.identifier(origName)
-                ),
-                // getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-                t.identifier('undefined')
+            t.optionalMemberExpression(
+                t.identifier('object'),
+                t.identifier(origName),
+                false,
+                args.isOptional
             )
-        )
+        );
     },
 
     string(args: FromAminoJSONMethod) {
@@ -68,22 +55,63 @@ export const fromAminoJSON = {
         return fromAminoJSON.scalar(args);
     },
     long(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+
+        args.context.addUtil('Long');
+
+        const callExpr = t.callExpression(
+            t.memberExpression(
+                t.identifier('Long'),
+                t.identifier('fromString')
+            ),
+            [
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
+                )
+            ]
+        );
+
+        const prop = t.objectProperty(
+            t.identifier(propName),
+            callExpr
+        );
+
+        if (args.isOptional) {
+            return t.objectProperty(
+                t.identifier(propName),
+                t.conditionalExpression(
+                    t.optionalMemberExpression(
+                        t.identifier('object'),
+                        t.identifier(origName),
+                        false,
+                        true
+                    ),
+                    callExpr,
+                    t.identifier('undefined')
+                )
+            );
+        }
+        return prop;
     },
     int64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     uint64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     sint64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     fixed64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     sfixed64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
 
     type(args: FromAminoJSONMethod) {
@@ -92,19 +120,15 @@ export const fromAminoJSON = {
             origName
         } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
-        args.context.addUtil('isSet');
 
         return t.objectProperty(
             t.identifier(propName),
             t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(origName)
-                        )
-                    ]
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
                 ),
                 t.callExpression(
                     t.memberExpression(
@@ -163,58 +187,9 @@ export const fromAminoJSON = {
     },
 
     duration(args: FromAminoJSONMethod) {
-        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
-        switch (durationFormat) {
-            case 'duration':
-            // TODO duration amino type
-            case 'string':
-            default:
-                return fromAminoJSON.durationString(args);
-        }
+        return fromAminoJSON.type(args);
     },
 
-    durationString(args: FromAminoJSONMethod) {
-        args.context.addUtil('Long');
-
-        const value = t.objectExpression(
-            [
-                t.objectProperty(t.identifier('seconds'), t.callExpression(
-                    t.memberExpression(t.identifier('Long'), t.identifier('fromNumber')), [
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Math'),
-                            t.identifier('floor')
-                        ),
-                        [
-                            t.binaryExpression('/',
-                                t.callExpression(
-                                    t.identifier('parseInt'),
-                                    [
-                                        memberExpressionOrIdentifierAminoCaseField([args.field], camel)
-                                    ]
-                                ),
-                                BILLION
-                            )
-                        ]
-                    )
-                ]
-                )),
-                t.objectProperty(
-                    t.identifier('nanos'),
-                    t.binaryExpression('%',
-                        t.callExpression(
-                            t.identifier('parseInt'),
-                            [
-                                memberExpressionOrIdentifierAminoCaseField([args.field], camel)
-                            ]
-                        ),
-                        BILLION
-                    )
-                )
-            ]
-        );
-        return t.objectProperty(t.identifier(args.field.name), value);
-    },
     timestamp(args: FromAminoJSONMethod) {
         return fromAminoJSON.type(args);
     },
@@ -557,3 +532,63 @@ export const arrayTypes = {
     }
 };
 
+
+export const fromAminoMessages = {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('Long');
+        return [
+            t.variableDeclaration('const', [
+                t.variableDeclarator(
+                    t.identifier('value'),
+                    t.callExpression(
+                        t.identifier('parseInt'),
+                        [
+                            t.identifier('object')
+                        ]
+                    )
+                )
+            ]),
+            // return
+            t.returnStatement(
+                t.objectExpression([
+
+                    // seconds
+                    t.objectProperty(
+                        t.identifier('seconds'),
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Long'),
+                                t.identifier('fromNumber')
+                            ),
+                            [
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.identifier('Math'),
+                                        t.identifier('floor')
+                                    ),
+                                    [
+                                        t.binaryExpression(
+                                            '/',
+                                            t.identifier('value'),
+                                            BILLION
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+                    ),
+
+                    // nanos
+                    t.objectProperty(
+                        t.identifier('nanos'),
+                        t.binaryExpression(
+                            '%',
+                            t.identifier('value'),
+                            BILLION
+                        )
+                    )
+                ])
+            )
+        ];
+    }
+}

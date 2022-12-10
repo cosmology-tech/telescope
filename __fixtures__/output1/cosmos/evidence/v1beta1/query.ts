@@ -127,13 +127,13 @@ export const QueryEvidenceRequest = {
 
   fromSDK(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
     return {
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined
+      evidenceHash: object?.evidence_hash
     };
   },
 
   toSDK(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
     const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
+    obj.evidence_hash = message.evidenceHash;
     return obj;
   }
 
@@ -196,7 +196,7 @@ export const QueryEvidenceResponse = {
 
   fromSDK(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
     return {
-      evidence: isSet(object.evidence) ? Any.fromSDK(object.evidence) : undefined
+      evidence: object.evidence ? Any.fromSDK(object.evidence) : undefined
     };
   },
 
@@ -265,7 +265,7 @@ export const QueryAllEvidenceRequest = {
 
   fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -353,7 +353,7 @@ export const QueryAllEvidenceResponse = {
   fromSDK(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {
     return {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

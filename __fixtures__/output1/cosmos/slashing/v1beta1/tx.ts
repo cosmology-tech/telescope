@@ -75,13 +75,13 @@ export const MsgUnjail = {
 
   fromSDK(object: MsgUnjailSDKType): MsgUnjail {
     return {
-      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+      validatorAddr: object?.validator_addr
     };
   },
 
   toSDK(message: MsgUnjail): MsgUnjailSDKType {
     const obj: any = {};
-    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    obj.validator_addr = message.validatorAddr;
     return obj;
   }
 

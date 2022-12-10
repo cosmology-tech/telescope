@@ -157,13 +157,13 @@ export const QueryDenomTraceRequest = {
 
   fromSDK(object: QueryDenomTraceRequestSDKType): QueryDenomTraceRequest {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined
+      hash: object?.hash
     };
   },
 
   toSDK(message: QueryDenomTraceRequest): QueryDenomTraceRequestSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     return obj;
   }
 
@@ -226,7 +226,7 @@ export const QueryDenomTraceResponse = {
 
   fromSDK(object: QueryDenomTraceResponseSDKType): QueryDenomTraceResponse {
     return {
-      denomTrace: isSet(object.denom_trace) ? DenomTrace.fromSDK(object.denom_trace) : undefined
+      denomTrace: object.denom_trace ? DenomTrace.fromSDK(object.denom_trace) : undefined
     };
   },
 
@@ -295,7 +295,7 @@ export const QueryDenomTracesRequest = {
 
   fromSDK(object: QueryDenomTracesRequestSDKType): QueryDenomTracesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -383,7 +383,7 @@ export const QueryDenomTracesResponse = {
   fromSDK(object: QueryDenomTracesResponseSDKType): QueryDenomTracesResponse {
     return {
       denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -511,7 +511,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

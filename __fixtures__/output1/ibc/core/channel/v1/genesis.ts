@@ -1,6 +1,6 @@
 import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.channel.v1";
 
 /** GenesisState defines the ibc channel submodule's genesis state. */
@@ -235,7 +235,7 @@ export const GenesisState = {
       sendSequences: Array.isArray(object?.send_sequences) ? object.send_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
       recvSequences: Array.isArray(object?.recv_sequences) ? object.recv_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
       ackSequences: Array.isArray(object?.ack_sequences) ? object.ack_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
-      nextChannelSequence: isSet(object.next_channel_sequence) ? object.next_channel_sequence : undefined
+      nextChannelSequence: object?.next_channel_sequence
     };
   },
 
@@ -284,7 +284,7 @@ export const GenesisState = {
       obj.ack_sequences = [];
     }
 
-    message.nextChannelSequence !== undefined && (obj.next_channel_sequence = message.nextChannelSequence);
+    obj.next_channel_sequence = message.nextChannelSequence;
     return obj;
   }
 
@@ -371,17 +371,17 @@ export const PacketSequence = {
 
   fromSDK(object: PacketSequenceSDKType): PacketSequence {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence
     };
   },
 
   toSDK(message: PacketSequence): PacketSequenceSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
     return obj;
   }
 

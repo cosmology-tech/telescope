@@ -57,60 +57,7 @@ export enum QuotaOperation_QuotaMode {
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
 }
-
-/** Supported quota modes. */
-export enum QuotaOperation_QuotaModeSDKType {
-  /** UNSPECIFIED - Guard against implicit default. Must not be used. */
-  UNSPECIFIED = 0,
-
-  /**
-   * NORMAL - For AllocateQuota request, allocates quota for the amount specified in
-   * the service configuration or specified using the quota metrics. If the
-   * amount is higher than the available quota, allocation error will be
-   * returned and no quota will be allocated.
-   * If multiple quotas are part of the request, and one fails, none of the
-   * quotas are allocated or released.
-   */
-  NORMAL = 1,
-
-  /**
-   * BEST_EFFORT - The operation allocates quota for the amount specified in the service
-   * configuration or specified using the quota metrics. If the amount is
-   * higher than the available quota, request does not fail but all available
-   * quota will be allocated.
-   * For rate quota, BEST_EFFORT will continue to deduct from other groups
-   * even if one does not have enough quota. For allocation, it will find the
-   * minimum available amount across all groups and deduct that amount from
-   * all the affected groups.
-   */
-  BEST_EFFORT = 2,
-
-  /**
-   * CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
-   * available and does not change the available quota. No lock is placed on
-   * the available quota either.
-   */
-  CHECK_ONLY = 3,
-
-  /**
-   * QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
-   * effective quota limit(s) in the response, and no quota check will be
-   * performed. Not supported for other requests, and even for
-   * AllocateQuotaRequest, this is currently supported only for allowlisted
-   * services.
-   */
-  QUERY_ONLY = 4,
-
-  /**
-   * ADJUST_ONLY - The operation allocates quota for the amount specified in the service
-   * configuration or specified using the quota metrics. If the requested
-   * amount is higher than the available quota, request does not fail and
-   * remaining quota would become negative (going over the limit).
-   * Not supported for Rate Quota.
-   */
-  ADJUST_ONLY = 5,
-  UNRECOGNIZED = -1,
-}
+export const QuotaOperation_QuotaModeSDKType = QuotaOperation_QuotaMode;
 export function quotaOperation_QuotaModeFromJSON(object: any): QuotaOperation_QuotaMode {
   switch (object) {
     case 0:
@@ -202,40 +149,7 @@ export enum QuotaError_Code {
   API_KEY_EXPIRED = 112,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Error codes related to project config validations are deprecated since the
- * quota controller methods do not perform these validations. Instead services
- * have to call the Check method, without quota_properties field, to perform
- * these validations before calling the quota controller methods. These
- * methods check only for project deletion to be wipe out compliant.
- */
-export enum QuotaError_CodeSDKType {
-  /** UNSPECIFIED - This is never used. */
-  UNSPECIFIED = 0,
-
-  /**
-   * RESOURCE_EXHAUSTED - Quota allocation failed.
-   * Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
-   */
-  RESOURCE_EXHAUSTED = 8,
-
-  /**
-   * BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
-   * billing.
-   */
-  BILLING_NOT_ACTIVE = 107,
-
-  /** PROJECT_DELETED - Consumer's project has been marked as deleted (soft deletion). */
-  PROJECT_DELETED = 108,
-
-  /** API_KEY_INVALID - Specified API key is invalid. */
-  API_KEY_INVALID = 105,
-
-  /** API_KEY_EXPIRED - Specified API Key has expired. */
-  API_KEY_EXPIRED = 112,
-  UNRECOGNIZED = -1,
-}
+export const QuotaError_CodeSDKType = QuotaError_Code;
 export function quotaError_CodeFromJSON(object: any): QuotaError_Code {
   switch (object) {
     case 0:
@@ -471,7 +385,7 @@ export interface QuotaOperationSDKType {
   quota_metrics: MetricValueSetSDKType[];
 
   /** Quota mode for this operation. */
-  quota_mode: QuotaOperation_QuotaModeSDKType;
+  quota_mode: QuotaOperation_QuotaMode;
 }
 
 /** Response message for the AllocateQuota method. */
@@ -557,7 +471,7 @@ export interface QuotaError {
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
   /** Error code. */
-  code: QuotaError_CodeSDKType;
+  code: QuotaError_Code;
 
   /**
    * Subject to whom this error applies. See the specific enum for more details
@@ -657,17 +571,17 @@ export const AllocateQuotaRequest = {
 
   fromSDK(object: AllocateQuotaRequestSDKType): AllocateQuotaRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      allocateOperation: isSet(object.allocate_operation) ? QuotaOperation.fromSDK(object.allocate_operation) : undefined,
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+      serviceName: object?.service_name,
+      allocateOperation: object.allocate_operation ? QuotaOperation.fromSDK(object.allocate_operation) : undefined,
+      serviceConfigId: object?.service_config_id
     };
   },
 
   toSDK(message: AllocateQuotaRequest): AllocateQuotaRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     message.allocateOperation !== undefined && (obj.allocate_operation = message.allocateOperation ? QuotaOperation.toSDK(message.allocateOperation) : undefined);
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   }
 
@@ -742,15 +656,15 @@ export const QuotaOperation_LabelsEntry = {
 
   fromSDK(object: QuotaOperation_LabelsEntrySDKType): QuotaOperation_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -906,9 +820,9 @@ export const QuotaOperation = {
 
   fromSDK(object: QuotaOperationSDKType): QuotaOperation {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
-      methodName: isSet(object.method_name) ? object.method_name : undefined,
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
+      operationId: object?.operation_id,
+      methodName: object?.method_name,
+      consumerId: object?.consumer_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -922,9 +836,9 @@ export const QuotaOperation = {
 
   toSDK(message: QuotaOperation): QuotaOperationSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
-    message.methodName !== undefined && (obj.method_name = message.methodName);
-    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.operation_id = message.operationId;
+    obj.method_name = message.methodName;
+    obj.consumer_id = message.consumerId;
     obj.labels = {};
 
     if (message.labels) {
@@ -1049,16 +963,16 @@ export const AllocateQuotaResponse = {
 
   fromSDK(object: AllocateQuotaResponseSDKType): AllocateQuotaResponse {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      operationId: object?.operation_id,
       allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDK(e)) : [],
       quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+      serviceConfigId: object?.service_config_id
     };
   },
 
   toSDK(message: AllocateQuotaResponse): AllocateQuotaResponseSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    obj.operation_id = message.operationId;
 
     if (message.allocateErrors) {
       obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toSDK(e) : undefined);
@@ -1072,7 +986,7 @@ export const AllocateQuotaResponse = {
       obj.quota_metrics = [];
     }
 
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   }
 
@@ -1172,17 +1086,17 @@ export const QuotaError = {
   fromSDK(object: QuotaErrorSDKType): QuotaError {
     return {
       code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? object.subject : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+      subject: object?.subject,
+      description: object?.description,
+      status: object.status ? Status.fromSDK(object.status) : undefined
     };
   },
 
   toSDK(message: QuotaError): QuotaErrorSDKType {
     const obj: any = {};
     message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
+    obj.subject = message.subject;
+    obj.description = message.description;
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
     return obj;
   }

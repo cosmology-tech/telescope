@@ -370,14 +370,14 @@ export const Monitoring_MonitoringDestination = {
 
   fromSDK(object: Monitoring_MonitoringDestinationSDKType): Monitoring_MonitoringDestination {
     return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
+      monitoredResource: object?.monitored_resource,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },
 
   toSDK(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationSDKType {
     const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
+    obj.monitored_resource = message.monitoredResource;
 
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e);

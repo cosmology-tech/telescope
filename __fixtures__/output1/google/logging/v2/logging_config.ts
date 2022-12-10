@@ -16,19 +16,7 @@ export enum LogSink_VersionFormat {
   V1 = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Deprecated. This is unused. */
-export enum LogSink_VersionFormatSDKType {
-  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
-  VERSION_FORMAT_UNSPECIFIED = 0,
-
-  /** V2 - `LogEntry` version 2 format. */
-  V2 = 1,
-
-  /** V1 - `LogEntry` version 1 format. */
-  V1 = 2,
-  UNRECOGNIZED = -1,
-}
+export const LogSink_VersionFormatSDKType = LogSink_VersionFormat;
 export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
     case 0:
@@ -84,25 +72,7 @@ export enum LifecycleState {
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** LogBucket lifecycle states. */
-export enum LifecycleStateSDKType {
-  /**
-   * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
-   * values.
-   */
-  LIFECYCLE_STATE_UNSPECIFIED = 0,
-
-  /** ACTIVE - The normal and active state. */
-  ACTIVE = 1,
-
-  /**
-   * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
-   * (e.g. buckets), this can be reversed by an un-delete operation.
-   */
-  DELETE_REQUESTED = 2,
-  UNRECOGNIZED = -1,
-}
+export const LifecycleStateSDKType = LifecycleState;
 export function lifecycleStateFromJSON(object: any): LifecycleState {
   switch (object) {
     case 0:
@@ -170,37 +140,7 @@ export enum OperationState {
   OPERATION_STATE_CANCELLED = 6,
   UNRECOGNIZED = -1,
 }
-
-/**
- * List of different operation states.
- * High level state of the operation. This is used to report the job's
- * current state to the user. Once a long running operation is created,
- * the current state of the operation can be queried even before the
- * operation is finished and the final result is available.
- */
-export enum OperationStateSDKType {
-  /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
-  OPERATION_STATE_UNSPECIFIED = 0,
-
-  /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
-  OPERATION_STATE_SCHEDULED = 1,
-
-  /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
-  OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
-
-  /** OPERATION_STATE_RUNNING - The operation is running. */
-  OPERATION_STATE_RUNNING = 3,
-
-  /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
-  OPERATION_STATE_SUCCEEDED = 4,
-
-  /** OPERATION_STATE_FAILED - The operation failed. */
-  OPERATION_STATE_FAILED = 5,
-
-  /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
-  OPERATION_STATE_CANCELLED = 6,
-  UNRECOGNIZED = -1,
-}
+export const OperationStateSDKType = OperationState;
 export function operationStateFromJSON(object: any): OperationState {
   switch (object) {
     case 0:
@@ -385,7 +325,7 @@ export interface LogBucketSDKType {
   locked: boolean;
 
   /** Output only. The bucket lifecycle state. */
-  lifecycle_state: LifecycleStateSDKType;
+  lifecycle_state: LifecycleState;
 
   /**
    * Log entry field paths that are denied access in this bucket.
@@ -686,7 +626,7 @@ export interface LogSinkSDKType {
   /** Deprecated. This field is unused. */
 
   /** @deprecated */
-  output_version_format: LogSink_VersionFormatSDKType;
+  output_version_format: LogSink_VersionFormat;
 
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
@@ -2727,7 +2667,7 @@ export interface CopyLogEntriesMetadataSDKType {
   end_time?: Date;
 
   /** State of an operation. */
-  state: OperationStateSDKType;
+  state: OperationState;
 
   /** Identifies whether the user has requested cancellation of the operation. */
   cancellation_requested: boolean;
@@ -2921,26 +2861,26 @@ export const LogBucket = {
 
   fromSDK(object: LogBucketSDKType): LogBucket {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
-      retentionDays: isSet(object.retention_days) ? object.retention_days : undefined,
-      locked: isSet(object.locked) ? object.locked : undefined,
+      name: object?.name,
+      description: object?.description,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      retentionDays: object?.retention_days,
+      locked: object?.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
       restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined
+      cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined
     };
   },
 
   toSDK(message: LogBucket): LogBucketSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    obj.name = message.name;
+    obj.description = message.description;
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
-    message.retentionDays !== undefined && (obj.retention_days = message.retentionDays);
-    message.locked !== undefined && (obj.locked = message.locked);
+    obj.retention_days = message.retentionDays;
+    obj.locked = message.locked;
     message.lifecycleState !== undefined && (obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState));
 
     if (message.restrictedFields) {
@@ -3060,21 +3000,21 @@ export const LogView = {
 
   fromSDK(object: LogViewSDKType): LogView {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
+      name: object?.name,
+      description: object?.description,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      filter: object?.filter
     };
   },
 
   toSDK(message: LogView): LogViewSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    obj.name = message.name;
+    obj.description = message.description;
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
-    message.filter !== undefined && (obj.filter = message.filter);
+    obj.filter = message.filter;
     return obj;
   }
 
@@ -3275,28 +3215,28 @@ export const LogSink = {
 
   fromSDK(object: LogSinkSDKType): LogSink {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      destination: isSet(object.destination) ? object.destination : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      disabled: isSet(object.disabled) ? object.disabled : undefined,
+      name: object?.name,
+      destination: object?.destination,
+      filter: object?.filter,
+      description: object?.description,
+      disabled: object?.disabled,
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
       outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
-      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined,
-      includeChildren: isSet(object.include_children) ? object.include_children : undefined,
-      bigqueryOptions: isSet(object.bigquery_options) ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+      writerIdentity: object?.writer_identity,
+      includeChildren: object?.include_children,
+      bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
     };
   },
 
   toSDK(message: LogSink): LogSinkSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.destination !== undefined && (obj.destination = message.destination);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.description !== undefined && (obj.description = message.description);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
+    obj.name = message.name;
+    obj.destination = message.destination;
+    obj.filter = message.filter;
+    obj.description = message.description;
+    obj.disabled = message.disabled;
 
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toSDK(e) : undefined);
@@ -3305,8 +3245,8 @@ export const LogSink = {
     }
 
     message.outputVersionFormat !== undefined && (obj.output_version_format = logSink_VersionFormatToJSON(message.outputVersionFormat));
-    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
-    message.includeChildren !== undefined && (obj.include_children = message.includeChildren);
+    obj.writer_identity = message.writerIdentity;
+    obj.include_children = message.includeChildren;
     message.bigqueryOptions !== undefined && (obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toSDK(message.bigqueryOptions) : undefined);
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
@@ -3384,15 +3324,15 @@ export const BigQueryOptions = {
 
   fromSDK(object: BigQueryOptionsSDKType): BigQueryOptions {
     return {
-      usePartitionedTables: isSet(object.use_partitioned_tables) ? object.use_partitioned_tables : undefined,
-      usesTimestampColumnPartitioning: isSet(object.uses_timestamp_column_partitioning) ? object.uses_timestamp_column_partitioning : undefined
+      usePartitionedTables: object?.use_partitioned_tables,
+      usesTimestampColumnPartitioning: object?.uses_timestamp_column_partitioning
     };
   },
 
   toSDK(message: BigQueryOptions): BigQueryOptionsSDKType {
     const obj: any = {};
-    message.usePartitionedTables !== undefined && (obj.use_partitioned_tables = message.usePartitionedTables);
-    message.usesTimestampColumnPartitioning !== undefined && (obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning);
+    obj.use_partitioned_tables = message.usePartitionedTables;
+    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
     return obj;
   }
 
@@ -3479,17 +3419,17 @@ export const ListBucketsRequest = {
 
   fromSDK(object: ListBucketsRequestSDKType): ListBucketsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
+      parent: object?.parent,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size
     };
   },
 
   toSDK(message: ListBucketsRequest): ListBucketsRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   }
 
@@ -3571,7 +3511,7 @@ export const ListBucketsResponse = {
   fromSDK(object: ListBucketsResponseSDKType): ListBucketsResponse {
     return {
       buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -3584,7 +3524,7 @@ export const ListBucketsResponse = {
       obj.buckets = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -3671,16 +3611,16 @@ export const CreateBucketRequest = {
 
   fromSDK(object: CreateBucketRequestSDKType): CreateBucketRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      bucketId: isSet(object.bucket_id) ? object.bucket_id : undefined,
-      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined
+      parent: object?.parent,
+      bucketId: object?.bucket_id,
+      bucket: object.bucket ? LogBucket.fromSDK(object.bucket) : undefined
     };
   },
 
   toSDK(message: CreateBucketRequest): CreateBucketRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.bucketId !== undefined && (obj.bucket_id = message.bucketId);
+    obj.parent = message.parent;
+    obj.bucket_id = message.bucketId;
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     return obj;
   }
@@ -3768,15 +3708,15 @@ export const UpdateBucketRequest = {
 
   fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      name: object?.name,
+      bucket: object.bucket ? LogBucket.fromSDK(object.bucket) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateBucketRequest): UpdateBucketRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
@@ -3841,13 +3781,13 @@ export const GetBucketRequest = {
 
   fromSDK(object: GetBucketRequestSDKType): GetBucketRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetBucketRequest): GetBucketRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -3910,13 +3850,13 @@ export const DeleteBucketRequest = {
 
   fromSDK(object: DeleteBucketRequestSDKType): DeleteBucketRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: DeleteBucketRequest): DeleteBucketRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -3979,13 +3919,13 @@ export const UndeleteBucketRequest = {
 
   fromSDK(object: UndeleteBucketRequestSDKType): UndeleteBucketRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: UndeleteBucketRequest): UndeleteBucketRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -4072,17 +4012,17 @@ export const ListViewsRequest = {
 
   fromSDK(object: ListViewsRequestSDKType): ListViewsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
+      parent: object?.parent,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size
     };
   },
 
   toSDK(message: ListViewsRequest): ListViewsRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   }
 
@@ -4164,7 +4104,7 @@ export const ListViewsResponse = {
   fromSDK(object: ListViewsResponseSDKType): ListViewsResponse {
     return {
       views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -4177,7 +4117,7 @@ export const ListViewsResponse = {
       obj.views = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -4264,16 +4204,16 @@ export const CreateViewRequest = {
 
   fromSDK(object: CreateViewRequestSDKType): CreateViewRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      viewId: isSet(object.view_id) ? object.view_id : undefined,
-      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined
+      parent: object?.parent,
+      viewId: object?.view_id,
+      view: object.view ? LogView.fromSDK(object.view) : undefined
     };
   },
 
   toSDK(message: CreateViewRequest): CreateViewRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.viewId !== undefined && (obj.view_id = message.viewId);
+    obj.parent = message.parent;
+    obj.view_id = message.viewId;
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     return obj;
   }
@@ -4361,15 +4301,15 @@ export const UpdateViewRequest = {
 
   fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      name: object?.name,
+      view: object.view ? LogView.fromSDK(object.view) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateViewRequest): UpdateViewRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
@@ -4434,13 +4374,13 @@ export const GetViewRequest = {
 
   fromSDK(object: GetViewRequestSDKType): GetViewRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetViewRequest): GetViewRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -4503,13 +4443,13 @@ export const DeleteViewRequest = {
 
   fromSDK(object: DeleteViewRequestSDKType): DeleteViewRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: DeleteViewRequest): DeleteViewRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -4596,17 +4536,17 @@ export const ListSinksRequest = {
 
   fromSDK(object: ListSinksRequestSDKType): ListSinksRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
+      parent: object?.parent,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size
     };
   },
 
   toSDK(message: ListSinksRequest): ListSinksRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   }
 
@@ -4688,7 +4628,7 @@ export const ListSinksResponse = {
   fromSDK(object: ListSinksResponseSDKType): ListSinksResponse {
     return {
       sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -4701,7 +4641,7 @@ export const ListSinksResponse = {
       obj.sinks = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -4764,13 +4704,13 @@ export const GetSinkRequest = {
 
   fromSDK(object: GetSinkRequestSDKType): GetSinkRequest {
     return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
+      sinkName: object?.sink_name
     };
   },
 
   toSDK(message: GetSinkRequest): GetSinkRequestSDKType {
     const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    obj.sink_name = message.sinkName;
     return obj;
   }
 
@@ -4857,17 +4797,17 @@ export const CreateSinkRequest = {
 
   fromSDK(object: CreateSinkRequestSDKType): CreateSinkRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined
+      parent: object?.parent,
+      sink: object.sink ? LogSink.fromSDK(object.sink) : undefined,
+      uniqueWriterIdentity: object?.unique_writer_identity
     };
   },
 
   toSDK(message: CreateSinkRequest): CreateSinkRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
+    obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
   }
 
@@ -4966,18 +4906,18 @@ export const UpdateSinkRequest = {
 
   fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
     return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined,
-      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      sinkName: object?.sink_name,
+      sink: object.sink ? LogSink.fromSDK(object.sink) : undefined,
+      uniqueWriterIdentity: object?.unique_writer_identity,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateSinkRequest): UpdateSinkRequestSDKType {
     const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    obj.sink_name = message.sinkName;
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
+    obj.unique_writer_identity = message.uniqueWriterIdentity;
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
   }
@@ -5041,13 +4981,13 @@ export const DeleteSinkRequest = {
 
   fromSDK(object: DeleteSinkRequestSDKType): DeleteSinkRequest {
     return {
-      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
+      sinkName: object?.sink_name
     };
   },
 
   toSDK(message: DeleteSinkRequest): DeleteSinkRequestSDKType {
     const obj: any = {};
-    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    obj.sink_name = message.sinkName;
     return obj;
   }
 
@@ -5170,21 +5110,21 @@ export const LogExclusion = {
 
   fromSDK(object: LogExclusionSDKType): LogExclusion {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      disabled: isSet(object.disabled) ? object.disabled : undefined,
-      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+      name: object?.name,
+      description: object?.description,
+      filter: object?.filter,
+      disabled: object?.disabled,
+      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
     };
   },
 
   toSDK(message: LogExclusion): LogExclusionSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.filter = message.filter;
+    obj.disabled = message.disabled;
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
     return obj;
@@ -5273,17 +5213,17 @@ export const ListExclusionsRequest = {
 
   fromSDK(object: ListExclusionsRequestSDKType): ListExclusionsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined
+      parent: object?.parent,
+      pageToken: object?.page_token,
+      pageSize: object?.page_size
     };
   },
 
   toSDK(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   }
 
@@ -5365,7 +5305,7 @@ export const ListExclusionsResponse = {
   fromSDK(object: ListExclusionsResponseSDKType): ListExclusionsResponse {
     return {
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -5378,7 +5318,7 @@ export const ListExclusionsResponse = {
       obj.exclusions = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -5441,13 +5381,13 @@ export const GetExclusionRequest = {
 
   fromSDK(object: GetExclusionRequestSDKType): GetExclusionRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetExclusionRequest): GetExclusionRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -5522,14 +5462,14 @@ export const CreateExclusionRequest = {
 
   fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined
+      parent: object?.parent,
+      exclusion: object.exclusion ? LogExclusion.fromSDK(object.exclusion) : undefined
     };
   },
 
   toSDK(message: CreateExclusionRequest): CreateExclusionRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     return obj;
   }
@@ -5617,15 +5557,15 @@ export const UpdateExclusionRequest = {
 
   fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      name: object?.name,
+      exclusion: object.exclusion ? LogExclusion.fromSDK(object.exclusion) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateExclusionRequest): UpdateExclusionRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
@@ -5690,13 +5630,13 @@ export const DeleteExclusionRequest = {
 
   fromSDK(object: DeleteExclusionRequestSDKType): DeleteExclusionRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: DeleteExclusionRequest): DeleteExclusionRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -5759,13 +5699,13 @@ export const GetCmekSettingsRequest = {
 
   fromSDK(object: GetCmekSettingsRequestSDKType): GetCmekSettingsRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetCmekSettingsRequest): GetCmekSettingsRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -5852,15 +5792,15 @@ export const UpdateCmekSettingsRequest = {
 
   fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      name: object?.name,
+      cmekSettings: object.cmek_settings ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
@@ -5949,17 +5889,17 @@ export const CmekSettings = {
 
   fromSDK(object: CmekSettingsSDKType): CmekSettings {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
-      serviceAccountId: isSet(object.service_account_id) ? object.service_account_id : undefined
+      name: object?.name,
+      kmsKeyName: object?.kms_key_name,
+      serviceAccountId: object?.service_account_id
     };
   },
 
   toSDK(message: CmekSettings): CmekSettingsSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
-    message.serviceAccountId !== undefined && (obj.service_account_id = message.serviceAccountId);
+    obj.name = message.name;
+    obj.kms_key_name = message.kmsKeyName;
+    obj.service_account_id = message.serviceAccountId;
     return obj;
   }
 
@@ -6022,13 +5962,13 @@ export const GetSettingsRequest = {
 
   fromSDK(object: GetSettingsRequestSDKType): GetSettingsRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetSettingsRequest): GetSettingsRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -6115,15 +6055,15 @@ export const UpdateSettingsRequest = {
 
   fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      settings: isSet(object.settings) ? Settings.fromSDK(object.settings) : undefined,
-      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+      name: object?.name,
+      settings: object.settings ? Settings.fromSDK(object.settings) : undefined,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined
     };
   },
 
   toSDK(message: UpdateSettingsRequest): UpdateSettingsRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
@@ -6236,21 +6176,21 @@ export const Settings = {
 
   fromSDK(object: SettingsSDKType): Settings {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
-      kmsServiceAccountId: isSet(object.kms_service_account_id) ? object.kms_service_account_id : undefined,
-      storageLocation: isSet(object.storage_location) ? object.storage_location : undefined,
-      disableDefaultSink: isSet(object.disable_default_sink) ? object.disable_default_sink : undefined
+      name: object?.name,
+      kmsKeyName: object?.kms_key_name,
+      kmsServiceAccountId: object?.kms_service_account_id,
+      storageLocation: object?.storage_location,
+      disableDefaultSink: object?.disable_default_sink
     };
   },
 
   toSDK(message: Settings): SettingsSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
-    message.kmsServiceAccountId !== undefined && (obj.kms_service_account_id = message.kmsServiceAccountId);
-    message.storageLocation !== undefined && (obj.storage_location = message.storageLocation);
-    message.disableDefaultSink !== undefined && (obj.disable_default_sink = message.disableDefaultSink);
+    obj.name = message.name;
+    obj.kms_key_name = message.kmsKeyName;
+    obj.kms_service_account_id = message.kmsServiceAccountId;
+    obj.storage_location = message.storageLocation;
+    obj.disable_default_sink = message.disableDefaultSink;
     return obj;
   }
 
@@ -6337,17 +6277,17 @@ export const CopyLogEntriesRequest = {
 
   fromSDK(object: CopyLogEntriesRequestSDKType): CopyLogEntriesRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined,
-      destination: isSet(object.destination) ? object.destination : undefined
+      name: object?.name,
+      filter: object?.filter,
+      destination: object?.destination
     };
   },
 
   toSDK(message: CopyLogEntriesRequest): CopyLogEntriesRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.destination !== undefined && (obj.destination = message.destination);
+    obj.name = message.name;
+    obj.filter = message.filter;
+    obj.destination = message.destination;
     return obj;
   }
 
@@ -6482,13 +6422,13 @@ export const CopyLogEntriesMetadata = {
 
   fromSDK(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
     return {
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
-      cancellationRequested: isSet(object.cancellation_requested) ? object.cancellation_requested : undefined,
-      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
-      progress: isSet(object.progress) ? object.progress : undefined,
-      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined
+      cancellationRequested: object?.cancellation_requested,
+      request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
+      progress: object?.progress,
+      writerIdentity: object?.writer_identity
     };
   },
 
@@ -6497,10 +6437,10 @@ export const CopyLogEntriesMetadata = {
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     message.state !== undefined && (obj.state = operationStateToJSON(message.state));
-    message.cancellationRequested !== undefined && (obj.cancellation_requested = message.cancellationRequested);
+    obj.cancellation_requested = message.cancellationRequested;
     message.request !== undefined && (obj.request = message.request ? CopyLogEntriesRequest.toSDK(message.request) : undefined);
-    message.progress !== undefined && (obj.progress = message.progress);
-    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
+    obj.progress = message.progress;
+    obj.writer_identity = message.writerIdentity;
     return obj;
   }
 
@@ -6563,13 +6503,13 @@ export const CopyLogEntriesResponse = {
 
   fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: isSet(object.log_entries_copied_count) ? object.log_entries_copied_count : undefined
+      logEntriesCopiedCount: object?.log_entries_copied_count
     };
   },
 
   toSDK(message: CopyLogEntriesResponse): CopyLogEntriesResponseSDKType {
     const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.log_entries_copied_count = message.logEntriesCopiedCount);
+    obj.log_entries_copied_count = message.logEntriesCopiedCount;
     return obj;
   }
 

@@ -180,16 +180,16 @@ export const Provider = {
 
   fromSDK(object: ProviderSDKType): Provider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Provider): ProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -289,16 +289,16 @@ export const AuditedAttributes = {
 
   fromSDK(object: AuditedAttributesSDKType): AuditedAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: AuditedAttributes): AuditedAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -584,16 +584,16 @@ export const MsgSignProviderAttributes = {
 
   fromSDK(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -745,16 +745,16 @@ export const MsgDeleteProviderAttributes = {
 
   fromSDK(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: object?.owner,
+      auditor: object?.auditor,
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },
 
   toSDK(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
 
     if (message.keys) {
       obj.keys = message.keys.map(e => e);

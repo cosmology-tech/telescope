@@ -48,9 +48,7 @@ const options: TelescopeOptions = {
       toJSON: true,
       fromPartial: true,
       toSDK: true,
-      fromSDK: true,
-      toAmino: false,
-      fromAmino: false
+      fromSDK: true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
@@ -223,6 +221,7 @@ const options: TelescopeOptions = {
         }
       }
     },
+    useRecursiveV2encoding: false
   },
   packages: {
     akash: {

@@ -189,17 +189,17 @@ export const InflationDistribution = {
 
   fromSDK(object: InflationDistributionSDKType): InflationDistribution {
     return {
-      stakingRewards: isSet(object.staking_rewards) ? object.staking_rewards : undefined,
-      usageIncentives: isSet(object.usage_incentives) ? object.usage_incentives : undefined,
-      communityPool: isSet(object.community_pool) ? object.community_pool : undefined
+      stakingRewards: object?.staking_rewards,
+      usageIncentives: object?.usage_incentives,
+      communityPool: object?.community_pool
     };
   },
 
   toSDK(message: InflationDistribution): InflationDistributionSDKType {
     const obj: any = {};
-    message.stakingRewards !== undefined && (obj.staking_rewards = message.stakingRewards);
-    message.usageIncentives !== undefined && (obj.usage_incentives = message.usageIncentives);
-    message.communityPool !== undefined && (obj.community_pool = message.communityPool);
+    obj.staking_rewards = message.stakingRewards;
+    obj.usage_incentives = message.usageIncentives;
+    obj.community_pool = message.communityPool;
     return obj;
   }
 
@@ -310,21 +310,21 @@ export const ExponentialCalculation = {
 
   fromSDK(object: ExponentialCalculationSDKType): ExponentialCalculation {
     return {
-      a: isSet(object.a) ? object.a : undefined,
-      r: isSet(object.r) ? object.r : undefined,
-      c: isSet(object.c) ? object.c : undefined,
-      bondingTarget: isSet(object.bonding_target) ? object.bonding_target : undefined,
-      maxVariance: isSet(object.max_variance) ? object.max_variance : undefined
+      a: object?.a,
+      r: object?.r,
+      c: object?.c,
+      bondingTarget: object?.bonding_target,
+      maxVariance: object?.max_variance
     };
   },
 
   toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
     const obj: any = {};
-    message.a !== undefined && (obj.a = message.a);
-    message.r !== undefined && (obj.r = message.r);
-    message.c !== undefined && (obj.c = message.c);
-    message.bondingTarget !== undefined && (obj.bonding_target = message.bondingTarget);
-    message.maxVariance !== undefined && (obj.max_variance = message.maxVariance);
+    obj.a = message.a;
+    obj.r = message.r;
+    obj.c = message.c;
+    obj.bonding_target = message.bondingTarget;
+    obj.max_variance = message.maxVariance;
     return obj;
   }
 

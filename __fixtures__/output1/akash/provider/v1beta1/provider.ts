@@ -160,15 +160,15 @@ export const ProviderInfo = {
 
   fromSDK(object: ProviderInfoSDKType): ProviderInfo {
     return {
-      email: isSet(object.email) ? object.email : undefined,
-      website: isSet(object.website) ? object.website : undefined
+      email: object?.email,
+      website: object?.website
     };
   },
 
   toSDK(message: ProviderInfo): ProviderInfoSDKType {
     const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.website !== undefined && (obj.website = message.website);
+    obj.email = message.email;
+    obj.website = message.website;
     return obj;
   }
 
@@ -273,17 +273,17 @@ export const MsgCreateProvider = {
 
   fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 
   toSDK(message: MsgCreateProvider): MsgCreateProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -448,17 +448,17 @@ export const MsgUpdateProvider = {
 
   fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 
   toSDK(message: MsgUpdateProvider): MsgUpdateProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -581,13 +581,13 @@ export const MsgDeleteProvider = {
 
   fromSDK(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined
+      owner: object?.owner
     };
   },
 
   toSDK(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     return obj;
   }
 
@@ -744,17 +744,17 @@ export const Provider = {
 
   fromSDK(object: ProviderSDKType): Provider {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      owner: object?.owner,
+      hostUri: object?.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
-      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+      info: object.info ? ProviderInfo.fromSDK(object.info) : undefined
     };
   },
 
   toSDK(message: Provider): ProviderSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);

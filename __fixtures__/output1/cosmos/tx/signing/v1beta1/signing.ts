@@ -51,54 +51,7 @@ export enum SignMode {
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
 }
-
-/**
- * SignMode represents a signing mode with its own security guarantees.
- * 
- * This enum should be considered a registry of all known sign modes
- * in the Cosmos ecosystem. Apps are not expected to support all known
- * sign modes. Apps that would like to support custom  sign modes are
- * encouraged to open a small PR against this file to add a new case
- * to this SignMode enum describing their sign mode so that different
- * apps have a consistent version of this enum.
- */
-export enum SignModeSDKType {
-  /**
-   * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-   * rejected.
-   */
-  SIGN_MODE_UNSPECIFIED = 0,
-
-  /**
-   * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-   * verified with raw bytes from Tx.
-   */
-  SIGN_MODE_DIRECT = 1,
-
-  /**
-   * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-   * human-readable textual representation on top of the binary representation
-   * from SIGN_MODE_DIRECT. It is currently not supported.
-   */
-  SIGN_MODE_TEXTUAL = 2,
-
-  /**
-   * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-   * require signers signing over other signers' `signer_info`. It also allows
-   * for adding Tips in transactions.
-   * 
-   * Since: cosmos-sdk 0.46
-   */
-  SIGN_MODE_DIRECT_AUX = 3,
-
-  /**
-   * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-   * Amino JSON and will be removed in the future.
-   */
-  SIGN_MODE_LEGACY_AMINO_JSON = 127,
-  UNRECOGNIZED = -1,
-}
+export const SignModeSDKType = SignMode;
 export function signModeFromJSON(object: any): SignMode {
   switch (object) {
     case 0:
@@ -230,7 +183,7 @@ export interface SignatureDescriptor_Data_Single {
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
   /** mode is the signing mode of the single signer */
-  mode: SignModeSDKType;
+  mode: SignMode;
 
   /** signature is the raw signature bytes */
   signature: Uint8Array;
@@ -416,9 +369,9 @@ export const SignatureDescriptor = {
 
   fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      data: object.data ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
+      sequence: object?.sequence
     };
   },
 
@@ -426,7 +379,7 @@ export const SignatureDescriptor = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.sequence = message.sequence;
     return obj;
   }
 
@@ -501,8 +454,8 @@ export const SignatureDescriptor_Data = {
 
   fromSDK(object: SignatureDescriptor_DataSDKType): SignatureDescriptor_Data {
     return {
-      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromSDK(object.single) : undefined,
-      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromSDK(object.multi) : undefined
+      single: object.single ? SignatureDescriptor_Data_Single.fromSDK(object.single) : undefined,
+      multi: object.multi ? SignatureDescriptor_Data_Multi.fromSDK(object.multi) : undefined
     };
   },
 
@@ -585,14 +538,14 @@ export const SignatureDescriptor_Data_Single = {
   fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      signature: isSet(object.signature) ? object.signature : undefined
+      signature: object?.signature
     };
   },
 
   toSDK(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.signature = message.signature;
     return obj;
   }
 
@@ -673,7 +626,7 @@ export const SignatureDescriptor_Data_Multi = {
 
   fromSDK(object: SignatureDescriptor_Data_MultiSDKType): SignatureDescriptor_Data_Multi {
     return {
-      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDK(object.bitarray) : undefined,
+      bitarray: object.bitarray ? CompactBitArray.fromSDK(object.bitarray) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDK(e)) : []
     };
   },

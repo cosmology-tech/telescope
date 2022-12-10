@@ -20,25 +20,7 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
-
-/** Supported data type of the property values */
-export enum Property_PropertyTypeSDKType {
-  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
-  UNSPECIFIED = 0,
-
-  /** INT64 - The type is `int64`. */
-  INT64 = 1,
-
-  /** BOOL - The type is `bool`. */
-  BOOL = 2,
-
-  /** STRING - The type is `string`. */
-  STRING = 3,
-
-  /** DOUBLE - The type is 'double'. */
-  DOUBLE = 4,
-  UNRECOGNIZED = -1,
-}
+export const Property_PropertyTypeSDKType = Property_PropertyType;
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -176,7 +158,7 @@ export interface PropertySDKType {
   name: string;
 
   /** The type of this property. */
-  type: Property_PropertyTypeSDKType;
+  type: Property_PropertyType;
 
   /** The description of the property */
   description: string;
@@ -344,17 +326,17 @@ export const Property = {
 
   fromSDK(object: PropertySDKType): Property {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
-      description: isSet(object.description) ? object.description : undefined
+      description: object?.description
     };
   },
 
   toSDK(message: Property): PropertySDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
-    message.description !== undefined && (obj.description = message.description);
+    obj.description = message.description;
     return obj;
   }
 

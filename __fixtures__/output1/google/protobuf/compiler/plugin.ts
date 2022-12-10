@@ -346,19 +346,19 @@ export const Version = {
 
   fromSDK(object: VersionSDKType): Version {
     return {
-      major: isSet(object.major) ? object.major : undefined,
-      minor: isSet(object.minor) ? object.minor : undefined,
-      patch: isSet(object.patch) ? object.patch : undefined,
-      suffix: isSet(object.suffix) ? object.suffix : undefined
+      major: object?.major,
+      minor: object?.minor,
+      patch: object?.patch,
+      suffix: object?.suffix
     };
   },
 
   toSDK(message: Version): VersionSDKType {
     const obj: any = {};
-    message.major !== undefined && (obj.major = message.major);
-    message.minor !== undefined && (obj.minor = message.minor);
-    message.patch !== undefined && (obj.patch = message.patch);
-    message.suffix !== undefined && (obj.suffix = message.suffix);
+    obj.major = message.major;
+    obj.minor = message.minor;
+    obj.patch = message.patch;
+    obj.suffix = message.suffix;
     return obj;
   }
 
@@ -470,9 +470,9 @@ export const CodeGeneratorRequest = {
   fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
     return {
       fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: isSet(object.parameter) ? object.parameter : undefined,
+      parameter: object?.parameter,
       protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDK(e)) : [],
-      compilerVersion: isSet(object.compiler_version) ? Version.fromSDK(object.compiler_version) : undefined
+      compilerVersion: object.compiler_version ? Version.fromSDK(object.compiler_version) : undefined
     };
   },
 
@@ -485,7 +485,7 @@ export const CodeGeneratorRequest = {
       obj.file_to_generate = [];
     }
 
-    message.parameter !== undefined && (obj.parameter = message.parameter);
+    obj.parameter = message.parameter;
 
     if (message.protoFile) {
       obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toSDK(e) : undefined);
@@ -574,14 +574,14 @@ export const CodeGeneratorResponse = {
 
   fromSDK(object: CodeGeneratorResponseSDKType): CodeGeneratorResponse {
     return {
-      error: isSet(object.error) ? object.error : undefined,
+      error: object?.error,
       file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDK(e)) : []
     };
   },
 
   toSDK(message: CodeGeneratorResponse): CodeGeneratorResponseSDKType {
     const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
+    obj.error = message.error;
 
     if (message.file) {
       obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toSDK(e) : undefined);
@@ -675,17 +675,17 @@ export const CodeGeneratorResponse_File = {
 
   fromSDK(object: CodeGeneratorResponse_FileSDKType): CodeGeneratorResponse_File {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      insertionPoint: isSet(object.insertion_point) ? object.insertion_point : undefined,
-      content: isSet(object.content) ? object.content : undefined
+      name: object?.name,
+      insertionPoint: object?.insertion_point,
+      content: object?.content
     };
   },
 
   toSDK(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.insertionPoint !== undefined && (obj.insertion_point = message.insertionPoint);
-    message.content !== undefined && (obj.content = message.content);
+    obj.name = message.name;
+    obj.insertion_point = message.insertionPoint;
+    obj.content = message.content;
     return obj;
   }
 

@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.protobuf";
 
 /**
@@ -273,15 +273,15 @@ export const Timestamp = {
 
   fromSDK(object: TimestampSDKType): Timestamp {
     return {
-      seconds: isSet(object.seconds) ? object.seconds : undefined,
-      nanos: isSet(object.nanos) ? object.nanos : undefined
+      seconds: object?.seconds,
+      nanos: object?.nanos
     };
   },
 
   toSDK(message: Timestamp): TimestampSDKType {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
-    message.nanos !== undefined && (obj.nanos = message.nanos);
+    obj.seconds = message.seconds;
+    obj.nanos = message.nanos;
     return obj;
   }
 

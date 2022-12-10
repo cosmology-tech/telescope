@@ -201,7 +201,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -270,13 +270,13 @@ export const QuerySigningInfoRequest = {
 
   fromSDK(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
     return {
-      consAddress: isSet(object.cons_address) ? object.cons_address : undefined
+      consAddress: object?.cons_address
     };
   },
 
   toSDK(message: QuerySigningInfoRequest): QuerySigningInfoRequestSDKType {
     const obj: any = {};
-    message.consAddress !== undefined && (obj.cons_address = message.consAddress);
+    obj.cons_address = message.consAddress;
     return obj;
   }
 
@@ -339,7 +339,7 @@ export const QuerySigningInfoResponse = {
 
   fromSDK(object: QuerySigningInfoResponseSDKType): QuerySigningInfoResponse {
     return {
-      valSigningInfo: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromSDK(object.val_signing_info) : undefined
+      valSigningInfo: object.val_signing_info ? ValidatorSigningInfo.fromSDK(object.val_signing_info) : undefined
     };
   },
 
@@ -408,7 +408,7 @@ export const QuerySigningInfosRequest = {
 
   fromSDK(object: QuerySigningInfosRequestSDKType): QuerySigningInfosRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -496,7 +496,7 @@ export const QuerySigningInfosResponse = {
   fromSDK(object: QuerySigningInfosResponseSDKType): QuerySigningInfosResponse {
     return {
       info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

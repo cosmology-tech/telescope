@@ -121,7 +121,7 @@ export interface ApiSDKType {
   mixins: MixinSDKType[];
 
   /** The source syntax of the service. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /** Method represents a method of an API interface. */
@@ -169,7 +169,7 @@ export interface MethodSDKType {
   options: OptionSDKType[];
 
   /** The source syntax of this method. */
-  syntax: SyntaxSDKType;
+  syntax: Syntax;
 }
 
 /**
@@ -500,11 +500,11 @@ export const Api = {
 
   fromSDK(object: ApiSDKType): Api {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      version: object?.version,
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
@@ -512,7 +512,7 @@ export const Api = {
 
   toSDK(message: Api): ApiSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
 
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? Method.toSDK(e) : undefined);
@@ -526,7 +526,7 @@ export const Api = {
       obj.options = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
 
     if (message.mixins) {
@@ -676,11 +676,11 @@ export const Method = {
 
   fromSDK(object: MethodSDKType): Method {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      requestTypeUrl: isSet(object.request_type_url) ? object.request_type_url : undefined,
-      requestStreaming: isSet(object.request_streaming) ? object.request_streaming : undefined,
-      responseTypeUrl: isSet(object.response_type_url) ? object.response_type_url : undefined,
-      responseStreaming: isSet(object.response_streaming) ? object.response_streaming : undefined,
+      name: object?.name,
+      requestTypeUrl: object?.request_type_url,
+      requestStreaming: object?.request_streaming,
+      responseTypeUrl: object?.response_type_url,
+      responseStreaming: object?.response_streaming,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
@@ -688,11 +688,11 @@ export const Method = {
 
   toSDK(message: Method): MethodSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.requestTypeUrl !== undefined && (obj.request_type_url = message.requestTypeUrl);
-    message.requestStreaming !== undefined && (obj.request_streaming = message.requestStreaming);
-    message.responseTypeUrl !== undefined && (obj.response_type_url = message.responseTypeUrl);
-    message.responseStreaming !== undefined && (obj.response_streaming = message.responseStreaming);
+    obj.name = message.name;
+    obj.request_type_url = message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming;
 
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
@@ -775,15 +775,15 @@ export const Mixin = {
 
   fromSDK(object: MixinSDKType): Mixin {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      root: isSet(object.root) ? object.root : undefined
+      name: object?.name,
+      root: object?.root
     };
   },
 
   toSDK(message: Mixin): MixinSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.root !== undefined && (obj.root = message.root);
+    obj.name = message.name;
+    obj.root = message.root;
     return obj;
   }
 

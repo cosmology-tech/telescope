@@ -201,8 +201,8 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
-      nextPoolNumber: isSet(object.next_pool_number) ? object.next_pool_number : undefined,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      nextPoolNumber: object?.next_pool_number,
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -215,7 +215,7 @@ export const GenesisState = {
       obj.pools = [];
     }
 
-    message.nextPoolNumber !== undefined && (obj.next_pool_number = message.nextPoolNumber);
+    obj.next_pool_number = message.nextPoolNumber;
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
   }

@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmwasm.wasm.v1";
 
 /** MsgIBCSend */
@@ -153,19 +153,19 @@ export const MsgIBCSend = {
 
   fromSDK(object: MsgIBCSendSDKType): MsgIBCSend {
     return {
-      channel: isSet(object.channel) ? object.channel : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? object.timeout_height : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined,
-      data: isSet(object.data) ? object.data : undefined
+      channel: object?.channel,
+      timeoutHeight: object?.timeout_height,
+      timeoutTimestamp: object?.timeout_timestamp,
+      data: object?.data
     };
   },
 
   toSDK(message: MsgIBCSend): MsgIBCSendSDKType {
     const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
-    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
-    message.data !== undefined && (obj.data = message.data);
+    obj.channel = message.channel;
+    obj.timeout_height = message.timeoutHeight;
+    obj.timeout_timestamp = message.timeoutTimestamp;
+    obj.data = message.data;
     return obj;
   }
 
@@ -228,13 +228,13 @@ export const MsgIBCCloseChannel = {
 
   fromSDK(object: MsgIBCCloseChannelSDKType): MsgIBCCloseChannel {
     return {
-      channel: isSet(object.channel) ? object.channel : undefined
+      channel: object?.channel
     };
   },
 
   toSDK(message: MsgIBCCloseChannel): MsgIBCCloseChannelSDKType {
     const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
+    obj.channel = message.channel;
     return obj;
   }
 

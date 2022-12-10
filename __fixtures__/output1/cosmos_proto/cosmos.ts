@@ -7,12 +7,7 @@ export enum ScalarType {
   SCALAR_TYPE_BYTES = 2,
   UNRECOGNIZED = -1,
 }
-export enum ScalarTypeSDKType {
-  SCALAR_TYPE_UNSPECIFIED = 0,
-  SCALAR_TYPE_STRING = 1,
-  SCALAR_TYPE_BYTES = 2,
-  UNRECOGNIZED = -1,
-}
+export const ScalarTypeSDKType = ScalarType;
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:
@@ -155,7 +150,7 @@ export interface ScalarDescriptorSDKType {
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
-  field_type: ScalarTypeSDKType[];
+  field_type: ScalarType[];
 }
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
@@ -227,15 +222,15 @@ export const InterfaceDescriptor = {
 
   fromSDK(object: InterfaceDescriptorSDKType): InterfaceDescriptor {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined
+      name: object?.name,
+      description: object?.description
     };
   },
 
   toSDK(message: InterfaceDescriptor): InterfaceDescriptorSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    obj.name = message.name;
+    obj.description = message.description;
     return obj;
   }
 
@@ -340,16 +335,16 @@ export const ScalarDescriptor = {
 
   fromSDK(object: ScalarDescriptorSDKType): ScalarDescriptor {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      name: object?.name,
+      description: object?.description,
       fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
     };
   },
 
   toSDK(message: ScalarDescriptor): ScalarDescriptorSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    obj.name = message.name;
+    obj.description = message.description;
 
     if (message.fieldType) {
       obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));

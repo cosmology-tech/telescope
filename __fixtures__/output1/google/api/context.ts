@@ -365,7 +365,7 @@ export const ContextRule = {
 
   fromSDK(object: ContextRuleSDKType): ContextRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
+      selector: object?.selector,
       requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
       provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
       allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
@@ -375,7 +375,7 @@ export const ContextRule = {
 
   toSDK(message: ContextRule): ContextRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
+    obj.selector = message.selector;
 
     if (message.requested) {
       obj.requested = message.requested.map(e => e);

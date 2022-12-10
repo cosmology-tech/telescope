@@ -215,14 +215,14 @@ export const Entry = {
 
   fromSDK(object: EntrySDKType): Entry {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
+      owner: object?.owner,
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Entry): EntrySDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
 
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toSDK(e) : undefined);

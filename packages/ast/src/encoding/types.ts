@@ -19,7 +19,7 @@ export interface CreateProtoTypeOptions {
     typeNameSuffix?: string;
 };
 
-export const createProtoTypeOptionsDefaults = {
+export const createProtoTypeOptionsDefaults: CreateProtoTypeOptions = {
     useOriginalCase: false
 };
 
@@ -49,7 +49,49 @@ export const getFieldTypeReference = (
         typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
         const propName = getProtoFieldTypeName(context, field);
-        const MsgName = getMessageName(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
+        typ = t.tsTypeReference(t.identifier(MsgName));
+    }
+
+    if (
+        field.parsedType?.type === 'Type' &&
+        field.rule !== 'repeated' &&
+        context.pluginValue('prototypes.allowUndefinedTypes')
+    ) {
+        // NOTE: unfortunately bc of defaults...
+        ast = t.tsUnionType(
+            [
+                typ,
+                t.tsUndefinedKeyword()
+            ]
+        )
+    } else {
+        ast = typ;
+    }
+
+    return ast;
+}
+
+export const getFieldAminoTypeReference = (
+    context: ProtoParseContext,
+    field: ProtoField,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+    let ast: any = null;
+    let typ: any = null;
+
+    if (SCALAR_TYPES.includes(field.type)) {
+
+        // return on scalar
+        typ = getTSTypeForAmino(context, field);
+        return typ;
+
+    } else if (GOOGLE_TYPES.includes(field.type)) {
+        typ = getTSTypeFromGoogleType(context, field.type, options);
+    } else {
+        const propName = getProtoFieldTypeName(context, field);
+        // enums don't need suffixes, etc.
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -90,6 +132,33 @@ export const getTSType = (context: GenericParseContext, type: string) => {
         case 'fixed64':
         case 'sfixed64':
             return t.tsTypeReference(t.identifier('Long'))
+        case 'bytes':
+            return t.tsTypeReference(t.identifier('Uint8Array'));
+        case 'bool':
+            return t.tsBooleanKeyword();
+        default:
+            throw new Error('getTSType() type not found');
+    };
+};
+
+export const getTSAminoType = (context: GenericParseContext, type: string) => {
+    switch (type) {
+        case 'string':
+            return t.tsStringKeyword();
+        case 'double':
+        case 'float':
+        case 'int32':
+        case 'uint32':
+        case 'sint32':
+        case 'fixed32':
+        case 'sfixed32':
+            return t.tsNumberKeyword();
+        case 'int64':
+        case 'uint64':
+        case 'sint64':
+        case 'fixed64':
+        case 'sfixed64':
+            return t.tsStringKeyword();
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
@@ -142,7 +211,7 @@ export const getTSTypeForAmino = (context: GenericParseContext, field: ProtoFiel
             }
             return t.tsTypeReference(t.identifier('Uint8Array'));
         default:
-            return getTSType(context, field.type);
+            return getTSAminoType(context, field.type);
     };
 };
 
@@ -192,6 +261,7 @@ export const getDefaultTSTypeFromProtoType = (
         case 'sfixed32':
             return t.numericLiteral(0);
         case 'uint64':
+            context.addUtil('Long');
             return t.memberExpression(
                 t.identifier('Long'),
                 t.identifier('UZERO')
@@ -200,6 +270,7 @@ export const getDefaultTSTypeFromProtoType = (
         case 'sint64':
         case 'fixed64':
         case 'sfixed64':
+            context.addUtil('Long');
             return t.memberExpression(
                 t.identifier('Long'),
                 t.identifier('ZERO')

@@ -162,17 +162,17 @@ export const MsgConvertCoin = {
 
   fromSDK(object: MsgConvertCoinSDKType): MsgConvertCoin {
     return {
-      coin: isSet(object.coin) ? Coin.fromSDK(object.coin) : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
+      coin: object.coin ? Coin.fromSDK(object.coin) : undefined,
+      receiver: object?.receiver,
+      sender: object?.sender
     };
   },
 
   toSDK(message: MsgConvertCoin): MsgConvertCoinSDKType {
     const obj: any = {};
     message.coin !== undefined && (obj.coin = message.coin ? Coin.toSDK(message.coin) : undefined);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.receiver = message.receiver;
+    obj.sender = message.sender;
     return obj;
   }
 
@@ -323,19 +323,19 @@ export const MsgConvertERC20 = {
 
   fromSDK(object: MsgConvertERC20SDKType): MsgConvertERC20 {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
+      contractAddress: object?.contract_address,
+      amount: object?.amount,
+      receiver: object?.receiver,
+      sender: object?.sender
     };
   },
 
   toSDK(message: MsgConvertERC20): MsgConvertERC20SDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.contract_address = message.contractAddress;
+    obj.amount = message.amount;
+    obj.receiver = message.receiver;
+    obj.sender = message.sender;
     return obj;
   }
 

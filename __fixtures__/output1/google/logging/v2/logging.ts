@@ -26,27 +26,7 @@ export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** An indicator of why entries were omitted. */
-export enum TailLogEntriesResponse_SuppressionInfo_ReasonSDKType {
-  /** REASON_UNSPECIFIED - Unexpected default. */
-  REASON_UNSPECIFIED = 0,
-
-  /**
-   * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-   * received in excess of rate limits. For quotas and limits, see
-   * [Logging API quotas and
-   * limits](https://cloud.google.com/logging/quotas#api-limits).
-   */
-  RATE_LIMIT = 1,
-
-  /**
-   * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-   * responses quickly enough.
-   */
-  NOT_CONSUMED = 2,
-  UNRECOGNIZED = -1,
-}
+export const TailLogEntriesResponse_SuppressionInfo_ReasonSDKType = TailLogEntriesResponse_SuppressionInfo_Reason;
 export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
     case 0:
@@ -838,7 +818,7 @@ export interface TailLogEntriesResponse_SuppressionInfo {
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
   /** The reason that entries were omitted from the session. */
-  reason: TailLogEntriesResponse_SuppressionInfo_ReasonSDKType;
+  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
 
   /** A lower bound on the count of entries omitted due to `reason`. */
   suppressed_count: number;
@@ -901,13 +881,13 @@ export const DeleteLogRequest = {
 
   fromSDK(object: DeleteLogRequestSDKType): DeleteLogRequest {
     return {
-      logName: isSet(object.log_name) ? object.log_name : undefined
+      logName: object?.log_name
     };
   },
 
   toSDK(message: DeleteLogRequest): DeleteLogRequestSDKType {
     const obj: any = {};
-    message.logName !== undefined && (obj.log_name = message.logName);
+    obj.log_name = message.logName;
     return obj;
   }
 
@@ -982,15 +962,15 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 
   fromSDK(object: WriteLogEntriesRequest_LabelsEntrySDKType): WriteLogEntriesRequest_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1146,8 +1126,8 @@ export const WriteLogEntriesRequest = {
 
   fromSDK(object: WriteLogEntriesRequestSDKType): WriteLogEntriesRequest {
     return {
-      logName: isSet(object.log_name) ? object.log_name : undefined,
-      resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
+      logName: object?.log_name,
+      resource: object.resource ? MonitoredResource.fromSDK(object.resource) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1155,14 +1135,14 @@ export const WriteLogEntriesRequest = {
         return acc;
       }, {}) : {},
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      partialSuccess: isSet(object.partial_success) ? object.partial_success : undefined,
-      dryRun: isSet(object.dry_run) ? object.dry_run : undefined
+      partialSuccess: object?.partial_success,
+      dryRun: object?.dry_run
     };
   },
 
   toSDK(message: WriteLogEntriesRequest): WriteLogEntriesRequestSDKType {
     const obj: any = {};
-    message.logName !== undefined && (obj.log_name = message.logName);
+    obj.log_name = message.logName;
     message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toSDK(message.resource) : undefined);
     obj.labels = {};
 
@@ -1178,8 +1158,8 @@ export const WriteLogEntriesRequest = {
       obj.entries = [];
     }
 
-    message.partialSuccess !== undefined && (obj.partial_success = message.partialSuccess);
-    message.dryRun !== undefined && (obj.dry_run = message.dryRun);
+    obj.partial_success = message.partialSuccess;
+    obj.dry_run = message.dryRun;
     return obj;
   }
 
@@ -1306,14 +1286,14 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
 
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? google.rpc.Status.fromSDK(object.value) : undefined
+      key: object?.key,
+      value: object.value ? google.rpc.Status.fromSDK(object.value) : undefined
     };
   },
 
   toSDK(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toSDK(message.value) : undefined);
     return obj;
   }
@@ -1540,10 +1520,10 @@ export const ListLogEntriesRequest = {
   fromSDK(object: ListLogEntriesRequestSDKType): ListLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: isSet(object.filter) ? object.filter : undefined,
-      orderBy: isSet(object.order_by) ? object.order_by : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
+      filter: object?.filter,
+      orderBy: object?.order_by,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
 
@@ -1556,10 +1536,10 @@ export const ListLogEntriesRequest = {
       obj.resource_names = [];
     }
 
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.orderBy !== undefined && (obj.order_by = message.orderBy);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.filter = message.filter;
+    obj.order_by = message.orderBy;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     return obj;
   }
 
@@ -1641,7 +1621,7 @@ export const ListLogEntriesResponse = {
   fromSDK(object: ListLogEntriesResponseSDKType): ListLogEntriesResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1654,7 +1634,7 @@ export const ListLogEntriesResponse = {
       obj.entries = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -1729,15 +1709,15 @@ export const ListMonitoredResourceDescriptorsRequest = {
 
   fromSDK(object: ListMonitoredResourceDescriptorsRequestSDKType): ListMonitoredResourceDescriptorsRequest {
     return {
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
     };
   },
 
   toSDK(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestSDKType {
     const obj: any = {};
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
     return obj;
   }
 
@@ -1819,7 +1799,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   fromSDK(object: ListMonitoredResourceDescriptorsResponseSDKType): ListMonitoredResourceDescriptorsResponse {
     return {
       resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1832,7 +1812,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
       obj.resource_descriptors = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -1937,18 +1917,18 @@ export const ListLogsRequest = {
 
   fromSDK(object: ListLogsRequestSDKType): ListLogsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
 
   toSDK(message: ListLogsRequest): ListLogsRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
 
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -2037,7 +2017,7 @@ export const ListLogsResponse = {
   fromSDK(object: ListLogsResponseSDKType): ListLogsResponse {
     return {
       logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -2050,7 +2030,7 @@ export const ListLogsResponse = {
       obj.log_names = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -2144,8 +2124,8 @@ export const TailLogEntriesRequest = {
   fromSDK(object: TailLogEntriesRequestSDKType): TailLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: isSet(object.filter) ? object.filter : undefined,
-      bufferWindow: isSet(object.buffer_window) ? Duration.fromSDK(object.buffer_window) : undefined
+      filter: object?.filter,
+      bufferWindow: object.buffer_window ? Duration.fromSDK(object.buffer_window) : undefined
     };
   },
 
@@ -2158,7 +2138,7 @@ export const TailLogEntriesRequest = {
       obj.resource_names = [];
     }
 
-    message.filter !== undefined && (obj.filter = message.filter);
+    obj.filter = message.filter;
     message.bufferWindow !== undefined && (obj.buffer_window = message.bufferWindow ? Duration.toSDK(message.bufferWindow) : undefined);
     return obj;
   }
@@ -2340,14 +2320,14 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
       reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
-      suppressedCount: isSet(object.suppressed_count) ? object.suppressed_count : undefined
+      suppressedCount: object?.suppressed_count
     };
   },
 
   toSDK(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoSDKType {
     const obj: any = {};
     message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
-    message.suppressedCount !== undefined && (obj.suppressed_count = message.suppressedCount);
+    obj.suppressed_count = message.suppressedCount;
     return obj;
   }
 

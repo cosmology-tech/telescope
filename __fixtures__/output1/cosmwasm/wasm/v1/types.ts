@@ -18,22 +18,7 @@ export enum AccessType {
   ACCESS_TYPE_EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
-
-/** AccessType permission types */
-export enum AccessTypeSDKType {
-  /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
-  ACCESS_TYPE_UNSPECIFIED = 0,
-
-  /** ACCESS_TYPE_NOBODY - AccessTypeNobody forbidden */
-  ACCESS_TYPE_NOBODY = 1,
-
-  /** ACCESS_TYPE_ONLY_ADDRESS - AccessTypeOnlyAddress restricted to an address */
-  ACCESS_TYPE_ONLY_ADDRESS = 2,
-
-  /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
-  ACCESS_TYPE_EVERYBODY = 3,
-  UNRECOGNIZED = -1,
-}
+export const AccessTypeSDKType = AccessType;
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
     case 0:
@@ -93,22 +78,7 @@ export enum ContractCodeHistoryOperationType {
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
   UNRECOGNIZED = -1,
 }
-
-/** ContractCodeHistoryOperationType actions that caused a code change */
-export enum ContractCodeHistoryOperationTypeSDKType {
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
-
-  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
-  CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
-  UNRECOGNIZED = -1,
-}
+export const ContractCodeHistoryOperationTypeSDKType = ContractCodeHistoryOperationType;
 export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
   switch (object) {
     case 0:
@@ -160,7 +130,7 @@ export interface AccessTypeParam {
 
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
-  value: AccessTypeSDKType;
+  value: AccessType;
 }
 
 /** AccessConfig access control type. */
@@ -171,7 +141,7 @@ export interface AccessConfig {
 
 /** AccessConfig access control type. */
 export interface AccessConfigSDKType {
-  permission: AccessTypeSDKType;
+  permission: AccessType;
   address: string;
 }
 
@@ -185,7 +155,7 @@ export interface Params {
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
   code_upload_access?: AccessConfigSDKType;
-  instantiate_default_permission: AccessTypeSDKType;
+  instantiate_default_permission: AccessType;
   max_wasm_code_size: Long;
 }
 
@@ -285,7 +255,7 @@ export interface ContractCodeHistoryEntry {
 
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
-  operation: ContractCodeHistoryOperationTypeSDKType;
+  operation: ContractCodeHistoryOperationType;
 
   /** CodeID is the reference to the stored WASM code */
   code_id: Long;
@@ -482,14 +452,14 @@ export const AccessConfig = {
   fromSDK(object: AccessConfigSDKType): AccessConfig {
     return {
       permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: AccessConfig): AccessConfigSDKType {
     const obj: any = {};
     message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 
@@ -576,9 +546,9 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      codeUploadAccess: isSet(object.code_upload_access) ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
+      codeUploadAccess: object.code_upload_access ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
       instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
-      maxWasmCodeSize: isSet(object.max_wasm_code_size) ? object.max_wasm_code_size : undefined
+      maxWasmCodeSize: object?.max_wasm_code_size
     };
   },
 
@@ -586,7 +556,7 @@ export const Params = {
     const obj: any = {};
     message.codeUploadAccess !== undefined && (obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toSDK(message.codeUploadAccess) : undefined);
     message.instantiateDefaultPermission !== undefined && (obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission));
-    message.maxWasmCodeSize !== undefined && (obj.max_wasm_code_size = message.maxWasmCodeSize);
+    obj.max_wasm_code_size = message.maxWasmCodeSize;
     return obj;
   }
 
@@ -673,16 +643,16 @@ export const CodeInfo = {
 
   fromSDK(object: CodeInfoSDKType): CodeInfo {
     return {
-      codeHash: isSet(object.code_hash) ? object.code_hash : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      instantiateConfig: isSet(object.instantiate_config) ? AccessConfig.fromSDK(object.instantiate_config) : undefined
+      codeHash: object?.code_hash,
+      creator: object?.creator,
+      instantiateConfig: object.instantiate_config ? AccessConfig.fromSDK(object.instantiate_config) : undefined
     };
   },
 
   toSDK(message: CodeInfo): CodeInfoSDKType {
     const obj: any = {};
-    message.codeHash !== undefined && (obj.code_hash = message.codeHash);
-    message.creator !== undefined && (obj.creator = message.creator);
+    obj.code_hash = message.codeHash;
+    obj.creator = message.creator;
     message.instantiateConfig !== undefined && (obj.instantiate_config = message.instantiateConfig ? AccessConfig.toSDK(message.instantiateConfig) : undefined);
     return obj;
   }
@@ -818,24 +788,24 @@ export const ContractInfo = {
 
   fromSDK(object: ContractInfoSDKType): ContractInfo {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      creator: isSet(object.creator) ? object.creator : undefined,
-      admin: isSet(object.admin) ? object.admin : undefined,
-      label: isSet(object.label) ? object.label : undefined,
-      created: isSet(object.created) ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
-      ibcPortId: isSet(object.ibc_port_id) ? object.ibc_port_id : undefined,
-      extension: isSet(object.extension) ? Any.fromSDK(object.extension) : undefined
+      codeId: object?.code_id,
+      creator: object?.creator,
+      admin: object?.admin,
+      label: object?.label,
+      created: object.created ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
+      ibcPortId: object?.ibc_port_id,
+      extension: object.extension ? Any.fromSDK(object.extension) : undefined
     };
   },
 
   toSDK(message: ContractInfo): ContractInfoSDKType {
     const obj: any = {};
-    message.codeId !== undefined && (obj.code_id = message.codeId);
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.label !== undefined && (obj.label = message.label);
+    obj.code_id = message.codeId;
+    obj.creator = message.creator;
+    obj.admin = message.admin;
+    obj.label = message.label;
     message.created !== undefined && (obj.created = message.created ? AbsoluteTxPosition.toSDK(message.created) : undefined);
-    message.ibcPortId !== undefined && (obj.ibc_port_id = message.ibcPortId);
+    obj.ibc_port_id = message.ibcPortId;
     message.extension !== undefined && (obj.extension = message.extension ? Any.toSDK(message.extension) : undefined);
     return obj;
   }
@@ -936,18 +906,18 @@ export const ContractCodeHistoryEntry = {
   fromSDK(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.code_id) ? object.code_id : undefined,
-      updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
-      msg: isSet(object.msg) ? object.msg : undefined
+      codeId: object?.code_id,
+      updated: object.updated ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
+      msg: object?.msg
     };
   },
 
   toSDK(message: ContractCodeHistoryEntry): ContractCodeHistoryEntrySDKType {
     const obj: any = {};
     message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.code_id = message.codeId);
+    obj.code_id = message.codeId;
     message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toSDK(message.updated) : undefined);
-    message.msg !== undefined && (obj.msg = message.msg);
+    obj.msg = message.msg;
     return obj;
   }
 
@@ -1022,15 +992,15 @@ export const AbsoluteTxPosition = {
 
   fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
-      txIndex: isSet(object.tx_index) ? object.tx_index : undefined
+      blockHeight: object?.block_height,
+      txIndex: object?.tx_index
     };
   },
 
   toSDK(message: AbsoluteTxPosition): AbsoluteTxPositionSDKType {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
-    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
+    obj.block_height = message.blockHeight;
+    obj.tx_index = message.txIndex;
     return obj;
   }
 
@@ -1105,15 +1075,15 @@ export const Model = {
 
   fromSDK(object: ModelSDKType): Model {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Model): ModelSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 

@@ -91,13 +91,13 @@ export const PubKey = {
 
   fromSDK(object: PubKeySDKType): PubKey {
     return {
-      key: isSet(object.key) ? object.key : undefined
+      key: object?.key
     };
   },
 
   toSDK(message: PubKey): PubKeySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     return obj;
   }
 
@@ -160,13 +160,13 @@ export const PrivKey = {
 
   fromSDK(object: PrivKeySDKType): PrivKey {
     return {
-      key: isSet(object.key) ? object.key : undefined
+      key: object?.key
     };
   },
 
   toSDK(message: PrivKey): PrivKeySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
+    obj.key = message.key;
     return obj;
   }
 

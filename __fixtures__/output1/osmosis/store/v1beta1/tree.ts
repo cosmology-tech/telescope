@@ -172,15 +172,15 @@ export const Child = {
 
   fromSDK(object: ChildSDKType): Child {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      accumulation: isSet(object.accumulation) ? object.accumulation : undefined
+      index: object?.index,
+      accumulation: object?.accumulation
     };
   },
 
   toSDK(message: Child): ChildSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.accumulation !== undefined && (obj.accumulation = message.accumulation);
+    obj.index = message.index;
+    obj.accumulation = message.accumulation;
     return obj;
   }
 
@@ -243,7 +243,7 @@ export const Leaf = {
 
   fromSDK(object: LeafSDKType): Leaf {
     return {
-      leaf: isSet(object.leaf) ? Child.fromSDK(object.leaf) : undefined
+      leaf: object.leaf ? Child.fromSDK(object.leaf) : undefined
     };
   },
 

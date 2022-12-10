@@ -216,24 +216,24 @@ export const Class = {
 
   fromSDK(object: ClassSDKType): Class {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      symbol: isSet(object.symbol) ? object.symbol : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      uri: isSet(object.uri) ? object.uri : undefined,
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
-      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+      id: object?.id,
+      name: object?.name,
+      symbol: object?.symbol,
+      description: object?.description,
+      uri: object?.uri,
+      uriHash: object?.uri_hash,
+      data: object.data ? Any.fromSDK(object.data) : undefined
     };
   },
 
   toSDK(message: Class): ClassSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.description !== undefined && (obj.description = message.description);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.description = message.description;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
     return obj;
   }
@@ -345,20 +345,20 @@ export const NFT = {
 
   fromSDK(object: NFTSDKType): NFT {
     return {
-      classId: isSet(object.class_id) ? object.class_id : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      uri: isSet(object.uri) ? object.uri : undefined,
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
-      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+      classId: object?.class_id,
+      id: object?.id,
+      uri: object?.uri,
+      uriHash: object?.uri_hash,
+      data: object.data ? Any.fromSDK(object.data) : undefined
     };
   },
 
   toSDK(message: NFT): NFTSDKType {
     const obj: any = {};
-    message.classId !== undefined && (obj.class_id = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
     return obj;
   }

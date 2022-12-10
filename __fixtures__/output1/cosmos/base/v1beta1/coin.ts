@@ -135,15 +135,15 @@ export const Coin = {
 
   fromSDK(object: CoinSDKType): Coin {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
+      denom: object?.denom,
+      amount: object?.amount
     };
   },
 
   toSDK(message: Coin): CoinSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.denom = message.denom;
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -218,15 +218,15 @@ export const DecCoin = {
 
   fromSDK(object: DecCoinSDKType): DecCoin {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined
+      denom: object?.denom,
+      amount: object?.amount
     };
   },
 
   toSDK(message: DecCoin): DecCoinSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
+    obj.denom = message.denom;
+    obj.amount = message.amount;
     return obj;
   }
 
@@ -289,13 +289,13 @@ export const IntProto = {
 
   fromSDK(object: IntProtoSDKType): IntProto {
     return {
-      int: isSet(object.int) ? object.int : undefined
+      int: object?.int
     };
   },
 
   toSDK(message: IntProto): IntProtoSDKType {
     const obj: any = {};
-    message.int !== undefined && (obj.int = message.int);
+    obj.int = message.int;
     return obj;
   }
 
@@ -358,13 +358,13 @@ export const DecProto = {
 
   fromSDK(object: DecProtoSDKType): DecProto {
     return {
-      dec: isSet(object.dec) ? object.dec : undefined
+      dec: object?.dec
     };
   },
 
   toSDK(message: DecProto): DecProtoSDKType {
     const obj: any = {};
-    message.dec !== undefined && (obj.dec = message.dec);
+    obj.dec = message.dec;
     return obj;
   }
 

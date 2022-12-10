@@ -268,7 +268,7 @@ export const Usage = {
     return {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDK(e)) : [],
-      producerNotificationChannel: isSet(object.producer_notification_channel) ? object.producer_notification_channel : undefined
+      producerNotificationChannel: object?.producer_notification_channel
     };
   },
 
@@ -287,7 +287,7 @@ export const Usage = {
       obj.rules = [];
     }
 
-    message.producerNotificationChannel !== undefined && (obj.producer_notification_channel = message.producerNotificationChannel);
+    obj.producer_notification_channel = message.producerNotificationChannel;
     return obj;
   }
 
@@ -374,17 +374,17 @@ export const UsageRule = {
 
   fromSDK(object: UsageRuleSDKType): UsageRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      allowUnregisteredCalls: isSet(object.allow_unregistered_calls) ? object.allow_unregistered_calls : undefined,
-      skipServiceControl: isSet(object.skip_service_control) ? object.skip_service_control : undefined
+      selector: object?.selector,
+      allowUnregisteredCalls: object?.allow_unregistered_calls,
+      skipServiceControl: object?.skip_service_control
     };
   },
 
   toSDK(message: UsageRule): UsageRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.allowUnregisteredCalls !== undefined && (obj.allow_unregistered_calls = message.allowUnregisteredCalls);
-    message.skipServiceControl !== undefined && (obj.skip_service_control = message.skipServiceControl);
+    obj.selector = message.selector;
+    obj.allow_unregistered_calls = message.allowUnregisteredCalls;
+    obj.skip_service_control = message.skipServiceControl;
     return obj;
   }
 

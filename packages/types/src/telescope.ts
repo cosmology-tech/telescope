@@ -35,8 +35,6 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
-            toAmino?: boolean;
-            fromAmino?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -95,6 +93,10 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
+        // temporary field for backwards compat 
+
+        useRecursiveV2encoding?: boolean;
+
     };
 
     lcdClients?: {
@@ -169,9 +171,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toJSON: false,
             fromPartial: true,
             toSDK: false,
-            fromSDK: false,
-            toAmino: false,
-            fromAmino: false
+            fromSDK: false
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
@@ -216,7 +216,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         casingFn: snake,
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
-        }
+        },
+        useRecursiveV2encoding: false
     },
     lcdClients: {
         bundle: true,

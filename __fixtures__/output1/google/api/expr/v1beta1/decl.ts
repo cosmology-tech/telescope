@@ -226,19 +226,19 @@ export const Decl = {
 
   fromSDK(object: DeclSDKType): Decl {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      doc: isSet(object.doc) ? object.doc : undefined,
-      ident: isSet(object.ident) ? IdentDecl.fromSDK(object.ident) : undefined,
-      function: isSet(object.function) ? FunctionDecl.fromSDK(object.function) : undefined
+      id: object?.id,
+      name: object?.name,
+      doc: object?.doc,
+      ident: object.ident ? IdentDecl.fromSDK(object.ident) : undefined,
+      function: object.function ? FunctionDecl.fromSDK(object.function) : undefined
     };
   },
 
   toSDK(message: Decl): DeclSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.doc !== undefined && (obj.doc = message.doc);
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.doc = message.doc;
     message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toSDK(message.ident) : undefined);
     message.function !== undefined && (obj.function = message.function ? FunctionDecl.toSDK(message.function) : undefined);
     return obj;
@@ -333,16 +333,16 @@ export const DeclType = {
 
   fromSDK(object: DeclTypeSDKType): DeclType {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      type: isSet(object.type) ? object.type : undefined,
+      id: object?.id,
+      type: object?.type,
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDK(e)) : []
     };
   },
 
   toSDK(message: DeclType): DeclTypeSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.type !== undefined && (obj.type = message.type);
+    obj.id = message.id;
+    obj.type = message.type;
 
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e ? DeclType.toSDK(e) : undefined);
@@ -424,8 +424,8 @@ export const IdentDecl = {
 
   fromSDK(object: IdentDeclSDKType): IdentDecl {
     return {
-      type: isSet(object.type) ? DeclType.fromSDK(object.type) : undefined,
-      value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
+      type: object.type ? DeclType.fromSDK(object.type) : undefined,
+      value: object.value ? Expr.fromSDK(object.value) : undefined
     };
   },
 
@@ -526,8 +526,8 @@ export const FunctionDecl = {
   fromSDK(object: FunctionDeclSDKType): FunctionDecl {
     return {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDK(e)) : [],
-      returnType: isSet(object.return_type) ? DeclType.fromSDK(object.return_type) : undefined,
-      receiverFunction: isSet(object.receiver_function) ? object.receiver_function : undefined
+      returnType: object.return_type ? DeclType.fromSDK(object.return_type) : undefined,
+      receiverFunction: object?.receiver_function
     };
   },
 
@@ -541,7 +541,7 @@ export const FunctionDecl = {
     }
 
     message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toSDK(message.returnType) : undefined);
-    message.receiverFunction !== undefined && (obj.receiver_function = message.receiverFunction);
+    obj.receiver_function = message.receiverFunction;
     return obj;
   }
 

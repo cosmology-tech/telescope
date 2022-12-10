@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.streamswap.v1";
 export interface Sale {
   /** Destination for the earned token_in */
@@ -404,45 +404,45 @@ export const Sale = {
 
   fromSDK(object: SaleSDKType): Sale {
     return {
-      treasury: isSet(object.treasury) ? object.treasury : undefined,
-      id: isSet(object.id) ? object.id : undefined,
-      tokenOut: isSet(object.token_out) ? object.token_out : undefined,
-      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
-      tokenOutSupply: isSet(object.token_out_supply) ? object.token_out_supply : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
-      round: isSet(object.round) ? object.round : undefined,
-      endRound: isSet(object.end_round) ? object.end_round : undefined,
-      outRemaining: isSet(object.out_remaining) ? object.out_remaining : undefined,
-      outSold: isSet(object.out_sold) ? object.out_sold : undefined,
-      outPerShare: isSet(object.out_per_share) ? object.out_per_share : undefined,
-      staked: isSet(object.staked) ? object.staked : undefined,
-      income: isSet(object.income) ? object.income : undefined,
-      shares: isSet(object.shares) ? object.shares : undefined,
-      name: isSet(object.name) ? object.name : undefined,
-      url: isSet(object.url) ? object.url : undefined
+      treasury: object?.treasury,
+      id: object?.id,
+      tokenOut: object?.token_out,
+      tokenIn: object?.token_in,
+      tokenOutSupply: object?.token_out_supply,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      round: object?.round,
+      endRound: object?.end_round,
+      outRemaining: object?.out_remaining,
+      outSold: object?.out_sold,
+      outPerShare: object?.out_per_share,
+      staked: object?.staked,
+      income: object?.income,
+      shares: object?.shares,
+      name: object?.name,
+      url: object?.url
     };
   },
 
   toSDK(message: Sale): SaleSDKType {
     const obj: any = {};
-    message.treasury !== undefined && (obj.treasury = message.treasury);
-    message.id !== undefined && (obj.id = message.id);
-    message.tokenOut !== undefined && (obj.token_out = message.tokenOut);
-    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
-    message.tokenOutSupply !== undefined && (obj.token_out_supply = message.tokenOutSupply);
+    obj.treasury = message.treasury;
+    obj.id = message.id;
+    obj.token_out = message.tokenOut;
+    obj.token_in = message.tokenIn;
+    obj.token_out_supply = message.tokenOutSupply;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
-    message.round !== undefined && (obj.round = message.round);
-    message.endRound !== undefined && (obj.end_round = message.endRound);
-    message.outRemaining !== undefined && (obj.out_remaining = message.outRemaining);
-    message.outSold !== undefined && (obj.out_sold = message.outSold);
-    message.outPerShare !== undefined && (obj.out_per_share = message.outPerShare);
-    message.staked !== undefined && (obj.staked = message.staked);
-    message.income !== undefined && (obj.income = message.income);
-    message.shares !== undefined && (obj.shares = message.shares);
-    message.name !== undefined && (obj.name = message.name);
-    message.url !== undefined && (obj.url = message.url);
+    obj.round = message.round;
+    obj.end_round = message.endRound;
+    obj.out_remaining = message.outRemaining;
+    obj.out_sold = message.outSold;
+    obj.out_per_share = message.outPerShare;
+    obj.staked = message.staked;
+    obj.income = message.income;
+    obj.shares = message.shares;
+    obj.name = message.name;
+    obj.url = message.url;
     return obj;
   }
 
@@ -553,21 +553,21 @@ export const UserPosition = {
 
   fromSDK(object: UserPositionSDKType): UserPosition {
     return {
-      shares: isSet(object.shares) ? object.shares : undefined,
-      staked: isSet(object.staked) ? object.staked : undefined,
-      outPerShare: isSet(object.out_per_share) ? object.out_per_share : undefined,
-      spent: isSet(object.spent) ? object.spent : undefined,
-      purchased: isSet(object.purchased) ? object.purchased : undefined
+      shares: object?.shares,
+      staked: object?.staked,
+      outPerShare: object?.out_per_share,
+      spent: object?.spent,
+      purchased: object?.purchased
     };
   },
 
   toSDK(message: UserPosition): UserPositionSDKType {
     const obj: any = {};
-    message.shares !== undefined && (obj.shares = message.shares);
-    message.staked !== undefined && (obj.staked = message.staked);
-    message.outPerShare !== undefined && (obj.out_per_share = message.outPerShare);
-    message.spent !== undefined && (obj.spent = message.spent);
-    message.purchased !== undefined && (obj.purchased = message.purchased);
+    obj.shares = message.shares;
+    obj.staked = message.staked;
+    obj.out_per_share = message.outPerShare;
+    obj.spent = message.spent;
+    obj.purchased = message.purchased;
     return obj;
   }
 

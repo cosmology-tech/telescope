@@ -146,14 +146,14 @@ export const MsgSoftwareUpgrade = {
 
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : undefined,
-      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+      authority: object?.authority,
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined
     };
   },
 
   toSDK(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
     const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
+    obj.authority = message.authority;
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
   }
@@ -269,13 +269,13 @@ export const MsgCancelUpgrade = {
 
   fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : undefined
+      authority: object?.authority
     };
   },
 
   toSDK(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
     const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
+    obj.authority = message.authority;
     return obj;
   }
 

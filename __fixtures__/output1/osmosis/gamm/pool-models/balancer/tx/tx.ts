@@ -128,16 +128,16 @@ export const MsgCreateBalancerPool = {
 
   fromSDK(object: MsgCreateBalancerPoolSDKType): MsgCreateBalancerPool {
     return {
-      sender: isSet(object.sender) ? object.sender : undefined,
-      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
+      sender: object?.sender,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined
+      futurePoolGovernor: object?.future_pool_governor
     };
   },
 
   toSDK(message: MsgCreateBalancerPool): MsgCreateBalancerPoolSDKType {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.sender = message.sender;
     message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
 
     if (message.poolAssets) {
@@ -146,7 +146,7 @@ export const MsgCreateBalancerPool = {
       obj.pool_assets = [];
     }
 
-    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor;
     return obj;
   }
 
@@ -209,13 +209,13 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+      poolId: object?.pool_id
     };
   },
 
   toSDK(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    obj.pool_id = message.poolId;
     return obj;
   }
 

@@ -30,34 +30,7 @@ export enum State {
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
-
-/**
- * State defines if a channel is in one of the following states:
- * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
- */
-export enum StateSDKType {
-  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
-  STATE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** STATE_INIT - A channel has just started the opening handshake. */
-  STATE_INIT = 1,
-
-  /** STATE_TRYOPEN - A channel has acknowledged the handshake step on the counterparty chain. */
-  STATE_TRYOPEN = 2,
-
-  /**
-   * STATE_OPEN - A channel has completed the handshake. Open channels are
-   * ready to send and receive packets.
-   */
-  STATE_OPEN = 3,
-
-  /**
-   * STATE_CLOSED - A channel has been closed and can no longer be used to send or receive
-   * packets.
-   */
-  STATE_CLOSED = 4,
-  UNRECOGNIZED = -1,
-}
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -124,22 +97,7 @@ export enum Order {
   ORDER_ORDERED = 2,
   UNRECOGNIZED = -1,
 }
-
-/** Order defines if a channel is ORDERED or UNORDERED */
-export enum OrderSDKType {
-  /** ORDER_NONE_UNSPECIFIED - zero-value for channel ordering */
-  ORDER_NONE_UNSPECIFIED = 0,
-
-  /**
-   * ORDER_UNORDERED - packets can be delivered in any order, which may differ from the order in
-   * which they were sent.
-   */
-  ORDER_UNORDERED = 1,
-
-  /** ORDER_ORDERED - packets are delivered exactly in the order which they were sent */
-  ORDER_ORDERED = 2,
-  UNRECOGNIZED = -1,
-}
+export const OrderSDKType = Order;
 export function orderFromJSON(object: any): Order {
   switch (object) {
     case 0:
@@ -209,10 +167,10 @@ export interface Channel {
  */
 export interface ChannelSDKType {
   /** current state of the channel end */
-  state: StateSDKType;
+  state: State;
 
   /** whether the channel is ordered or unordered */
-  ordering: OrderSDKType;
+  ordering: Order;
 
   /** counterparty channel end */
   counterparty?: CounterpartySDKType;
@@ -263,10 +221,10 @@ export interface IdentifiedChannel {
  */
 export interface IdentifiedChannelSDKType {
   /** current state of the channel end */
-  state: StateSDKType;
+  state: State;
 
   /** whether the channel is ordered or unordered */
-  ordering: OrderSDKType;
+  ordering: Order;
 
   /** counterparty channel end */
   counterparty?: CounterpartySDKType;
@@ -548,9 +506,9 @@ export const Channel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : undefined
+      version: object?.version
     };
   },
 
@@ -566,7 +524,7 @@ export const Channel = {
       obj.connection_hops = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
+    obj.version = message.version;
     return obj;
   }
 
@@ -709,11 +667,11 @@ export const IdentifiedChannel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : undefined,
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+      version: object?.version,
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
 
@@ -729,9 +687,9 @@ export const IdentifiedChannel = {
       obj.connection_hops = [];
     }
 
-    message.version !== undefined && (obj.version = message.version);
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.version = message.version;
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     return obj;
   }
 
@@ -806,15 +764,15 @@ export const Counterparty = {
 
   fromSDK(object: CounterpartySDKType): Counterparty {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id
     };
   },
 
   toSDK(message: Counterparty): CounterpartySDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
     return obj;
   }
 
@@ -961,27 +919,27 @@ export const Packet = {
 
   fromSDK(object: PacketSDKType): Packet {
     return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
-      destinationPort: isSet(object.destination_port) ? object.destination_port : undefined,
-      destinationChannel: isSet(object.destination_channel) ? object.destination_channel : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
+      sequence: object?.sequence,
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
+      destinationPort: object?.destination_port,
+      destinationChannel: object?.destination_channel,
+      data: object?.data,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: object?.timeout_timestamp
     };
   },
 
   toSDK(message: Packet): PacketSDKType {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
-    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
-    message.destinationPort !== undefined && (obj.destination_port = message.destinationPort);
-    message.destinationChannel !== undefined && (obj.destination_channel = message.destinationChannel);
-    message.data !== undefined && (obj.data = message.data);
+    obj.sequence = message.sequence;
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.destination_port = message.destinationPort;
+    obj.destination_channel = message.destinationChannel;
+    obj.data = message.data;
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
   }
 
@@ -1080,19 +1038,19 @@ export const PacketState = {
 
   fromSDK(object: PacketStateSDKType): PacketState {
     return {
-      portId: isSet(object.port_id) ? object.port_id : undefined,
-      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      data: isSet(object.data) ? object.data : undefined
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence,
+      data: object?.data
     };
   },
 
   toSDK(message: PacketState): PacketStateSDKType {
     const obj: any = {};
-    message.portId !== undefined && (obj.port_id = message.portId);
-    message.channelId !== undefined && (obj.channel_id = message.channelId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.data !== undefined && (obj.data = message.data);
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
+    obj.data = message.data;
     return obj;
   }
 
@@ -1167,15 +1125,15 @@ export const Acknowledgement = {
 
   fromSDK(object: AcknowledgementSDKType): Acknowledgement {
     return {
-      result: isSet(object.result) ? object.result : undefined,
-      error: isSet(object.error) ? object.error : undefined
+      result: object?.result,
+      error: object?.error
     };
   },
 
   toSDK(message: Acknowledgement): AcknowledgementSDKType {
     const obj: any = {};
-    message.result !== undefined && (obj.result = message.result);
-    message.error !== undefined && (obj.error = message.error);
+    obj.result = message.result;
+    obj.error = message.error;
     return obj;
   }
 

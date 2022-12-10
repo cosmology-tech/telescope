@@ -108,7 +108,7 @@ export interface MonitoredResourceDescriptorSDKType {
   labels: LabelDescriptorSDKType[];
 
   /** Optional. The launch stage of the monitored resource definition. */
-  launch_stage: LaunchStageSDKType;
+  launch_stage: LaunchStage;
 }
 export interface MonitoredResource_LabelsEntry {
   key: string;
@@ -374,10 +374,10 @@ export const MonitoredResourceDescriptor = {
 
   fromSDK(object: MonitoredResourceDescriptorSDKType): MonitoredResourceDescriptor {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      type: isSet(object.type) ? object.type : undefined,
-      displayName: isSet(object.display_name) ? object.display_name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
+      name: object?.name,
+      type: object?.type,
+      displayName: object?.display_name,
+      description: object?.description,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
     };
@@ -385,10 +385,10 @@ export const MonitoredResourceDescriptor = {
 
   toSDK(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.displayName !== undefined && (obj.display_name = message.displayName);
-    message.description !== undefined && (obj.description = message.description);
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.display_name = message.displayName;
+    obj.description = message.description;
 
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
@@ -471,15 +471,15 @@ export const MonitoredResource_LabelsEntry = {
 
   fromSDK(object: MonitoredResource_LabelsEntrySDKType): MonitoredResource_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -581,7 +581,7 @@ export const MonitoredResource = {
 
   fromSDK(object: MonitoredResourceSDKType): MonitoredResource {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -593,7 +593,7 @@ export const MonitoredResource = {
 
   toSDK(message: MonitoredResource): MonitoredResourceSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
     obj.labels = {};
 
     if (message.labels) {
@@ -676,15 +676,15 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 
   fromSDK(object: MonitoredResourceMetadata_UserLabelsEntrySDKType): MonitoredResourceMetadata_UserLabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -786,7 +786,7 @@ export const MonitoredResourceMetadata = {
 
   fromSDK(object: MonitoredResourceMetadataSDKType): MonitoredResourceMetadata {
     return {
-      systemLabels: isSet(object.system_labels) ? Struct.fromSDK(object.system_labels) : undefined,
+      systemLabels: object.system_labels ? Struct.fromSDK(object.system_labels) : undefined,
       userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

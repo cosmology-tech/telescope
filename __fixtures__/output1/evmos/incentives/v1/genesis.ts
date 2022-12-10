@@ -149,7 +149,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
       gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : []
     };
@@ -269,19 +269,19 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableIncentives: isSet(object.enable_incentives) ? object.enable_incentives : undefined,
-      allocationLimit: isSet(object.allocation_limit) ? object.allocation_limit : undefined,
-      incentivesEpochIdentifier: isSet(object.incentives_epoch_identifier) ? object.incentives_epoch_identifier : undefined,
-      rewardScaler: isSet(object.reward_scaler) ? object.reward_scaler : undefined
+      enableIncentives: object?.enable_incentives,
+      allocationLimit: object?.allocation_limit,
+      incentivesEpochIdentifier: object?.incentives_epoch_identifier,
+      rewardScaler: object?.reward_scaler
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.enableIncentives !== undefined && (obj.enable_incentives = message.enableIncentives);
-    message.allocationLimit !== undefined && (obj.allocation_limit = message.allocationLimit);
-    message.incentivesEpochIdentifier !== undefined && (obj.incentives_epoch_identifier = message.incentivesEpochIdentifier);
-    message.rewardScaler !== undefined && (obj.reward_scaler = message.rewardScaler);
+    obj.enable_incentives = message.enableIncentives;
+    obj.allocation_limit = message.allocationLimit;
+    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
+    obj.reward_scaler = message.rewardScaler;
     return obj;
   }
 

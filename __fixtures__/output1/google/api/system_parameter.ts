@@ -334,14 +334,14 @@ export const SystemParameterRule = {
 
   fromSDK(object: SystemParameterRuleSDKType): SystemParameterRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
+      selector: object?.selector,
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDK(e)) : []
     };
   },
 
   toSDK(message: SystemParameterRule): SystemParameterRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
+    obj.selector = message.selector;
 
     if (message.parameters) {
       obj.parameters = message.parameters.map(e => e ? SystemParameter.toSDK(e) : undefined);
@@ -435,17 +435,17 @@ export const SystemParameter = {
 
   fromSDK(object: SystemParameterSDKType): SystemParameter {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      httpHeader: isSet(object.http_header) ? object.http_header : undefined,
-      urlQueryParameter: isSet(object.url_query_parameter) ? object.url_query_parameter : undefined
+      name: object?.name,
+      httpHeader: object?.http_header,
+      urlQueryParameter: object?.url_query_parameter
     };
   },
 
   toSDK(message: SystemParameter): SystemParameterSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.httpHeader !== undefined && (obj.http_header = message.httpHeader);
-    message.urlQueryParameter !== undefined && (obj.url_query_parameter = message.urlQueryParameter);
+    obj.name = message.name;
+    obj.http_header = message.httpHeader;
+    obj.url_query_parameter = message.urlQueryParameter;
     return obj;
   }
 

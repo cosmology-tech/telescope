@@ -119,7 +119,7 @@ export const QuerySales = {
 
   fromSDK(object: QuerySalesSDKType): QuerySales {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -207,7 +207,7 @@ export const QuerySalesResponse = {
   fromSDK(object: QuerySalesResponseSDKType): QuerySalesResponse {
     return {
       sales: Array.isArray(object?.sales) ? object.sales.map((e: any) => Sale.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -283,13 +283,13 @@ export const QuerySale = {
 
   fromSDK(object: QuerySaleSDKType): QuerySale {
     return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined
+      saleId: object?.sale_id
     };
   },
 
   toSDK(message: QuerySale): QuerySaleSDKType {
     const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    obj.sale_id = message.saleId;
     return obj;
   }
 
@@ -352,7 +352,7 @@ export const QuerySaleResponse = {
 
   fromSDK(object: QuerySaleResponseSDKType): QuerySaleResponse {
     return {
-      sale: isSet(object.sale) ? Sale.fromSDK(object.sale) : undefined
+      sale: object.sale ? Sale.fromSDK(object.sale) : undefined
     };
   },
 
@@ -433,15 +433,15 @@ export const QueryUserPosition = {
 
   fromSDK(object: QueryUserPositionSDKType): QueryUserPosition {
     return {
-      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
-      user: isSet(object.user) ? object.user : undefined
+      saleId: object?.sale_id,
+      user: object?.user
     };
   },
 
   toSDK(message: QueryUserPosition): QueryUserPositionSDKType {
     const obj: any = {};
-    message.saleId !== undefined && (obj.sale_id = message.saleId);
-    message.user !== undefined && (obj.user = message.user);
+    obj.sale_id = message.saleId;
+    obj.user = message.user;
     return obj;
   }
 
@@ -504,7 +504,7 @@ export const QueryUserPositionResponse = {
 
   fromSDK(object: QueryUserPositionResponseSDKType): QueryUserPositionResponse {
     return {
-      userPosition: isSet(object.user_position) ? UserPosition.fromSDK(object.user_position) : undefined
+      userPosition: object.user_position ? UserPosition.fromSDK(object.user_position) : undefined
     };
   },
 

@@ -191,7 +191,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDK(e)) : [],
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDK(e)) : []
     };
@@ -287,14 +287,14 @@ export const SigningInfo = {
 
   fromSDK(object: SigningInfoSDKType): SigningInfo {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
+      address: object?.address,
+      validatorSigningInfo: object.validator_signing_info ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
     };
   },
 
   toSDK(message: SigningInfo): SigningInfoSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toSDK(message.validatorSigningInfo) : undefined);
     return obj;
   }
@@ -376,14 +376,14 @@ export const ValidatorMissedBlocks = {
 
   fromSDK(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
     return {
-      address: isSet(object.address) ? object.address : undefined,
+      address: object?.address,
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
 
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toSDK(e) : undefined);
@@ -465,15 +465,15 @@ export const MissedBlock = {
 
   fromSDK(object: MissedBlockSDKType): MissedBlock {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      missed: isSet(object.missed) ? object.missed : undefined
+      index: object?.index,
+      missed: object?.missed
     };
   },
 
   toSDK(message: MissedBlock): MissedBlockSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.missed !== undefined && (obj.missed = message.missed);
+    obj.index = message.index;
+    obj.missed = message.missed;
     return obj;
   }
 

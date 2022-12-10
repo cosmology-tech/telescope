@@ -269,13 +269,13 @@ export const QueryPeriodResponse = {
 
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? object.period : undefined
+      period: object?.period
     };
   },
 
   toSDK(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
     const obj: any = {};
-    message.period !== undefined && (obj.period = message.period);
+    obj.period = message.period;
     return obj;
   }
 
@@ -390,7 +390,7 @@ export const QueryEpochMintProvisionResponse = {
 
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
     return {
-      epochMintProvision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDK(object.epoch_mint_provision) : undefined
+      epochMintProvision: object.epoch_mint_provision ? DecCoin.fromSDK(object.epoch_mint_provision) : undefined
     };
   },
 
@@ -511,13 +511,13 @@ export const QuerySkippedEpochsResponse = {
 
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
+      skippedEpochs: object?.skipped_epochs
     };
   },
 
   toSDK(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
     const obj: any = {};
-    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
+    obj.skipped_epochs = message.skippedEpochs;
     return obj;
   }
 
@@ -632,7 +632,7 @@ export const QueryCirculatingSupplyResponse = {
 
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
     return {
-      circulatingSupply: isSet(object.circulating_supply) ? DecCoin.fromSDK(object.circulating_supply) : undefined
+      circulatingSupply: object.circulating_supply ? DecCoin.fromSDK(object.circulating_supply) : undefined
     };
   },
 
@@ -753,13 +753,13 @@ export const QueryInflationRateResponse = {
 
   fromSDK(object: QueryInflationRateResponseSDKType): QueryInflationRateResponse {
     return {
-      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : undefined
+      inflationRate: object?.inflation_rate
     };
   },
 
   toSDK(message: QueryInflationRateResponse): QueryInflationRateResponseSDKType {
     const obj: any = {};
-    message.inflationRate !== undefined && (obj.inflation_rate = message.inflationRate);
+    obj.inflation_rate = message.inflationRate;
     return obj;
   }
 
@@ -874,7 +874,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

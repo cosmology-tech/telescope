@@ -27,7 +27,7 @@ export interface AssetTypeResponse {
   assetType: SuperfluidAssetType;
 }
 export interface AssetTypeResponseSDKType {
-  asset_type: SuperfluidAssetTypeSDKType;
+  asset_type: SuperfluidAssetType;
 }
 export interface AllAssetsRequest {}
 export interface AllAssetsRequestSDKType {}
@@ -301,7 +301,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -370,13 +370,13 @@ export const AssetTypeRequest = {
 
   fromSDK(object: AssetTypeRequestSDKType): AssetTypeRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined
+      denom: object?.denom
     };
   },
 
   toSDK(message: AssetTypeRequest): AssetTypeRequestSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -641,13 +641,13 @@ export const AssetMultiplierRequest = {
 
   fromSDK(object: AssetMultiplierRequestSDKType): AssetMultiplierRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined
+      denom: object?.denom
     };
   },
 
   toSDK(message: AssetMultiplierRequest): AssetMultiplierRequestSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -710,7 +710,7 @@ export const AssetMultiplierResponse = {
 
   fromSDK(object: AssetMultiplierResponseSDKType): AssetMultiplierResponse {
     return {
-      osmoEquivalentMultiplier: isSet(object.osmo_equivalent_multiplier) ? OsmoEquivalentMultiplierRecord.fromSDK(object.osmo_equivalent_multiplier) : undefined
+      osmoEquivalentMultiplier: object.osmo_equivalent_multiplier ? OsmoEquivalentMultiplierRecord.fromSDK(object.osmo_equivalent_multiplier) : undefined
     };
   },
 
@@ -815,19 +815,19 @@ export const SuperfluidIntermediaryAccountInfo = {
 
   fromSDK(object: SuperfluidIntermediaryAccountInfoSDKType): SuperfluidIntermediaryAccountInfo {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined,
-      valAddr: isSet(object.val_addr) ? object.val_addr : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      address: isSet(object.address) ? object.address : undefined
+      denom: object?.denom,
+      valAddr: object?.val_addr,
+      gaugeId: object?.gauge_id,
+      address: object?.address
     };
   },
 
   toSDK(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.address !== undefined && (obj.address = message.address);
+    obj.denom = message.denom;
+    obj.val_addr = message.valAddr;
+    obj.gauge_id = message.gaugeId;
+    obj.address = message.address;
     return obj;
   }
 
@@ -890,7 +890,7 @@ export const AllIntermediaryAccountsRequest = {
 
   fromSDK(object: AllIntermediaryAccountsRequestSDKType): AllIntermediaryAccountsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -978,7 +978,7 @@ export const AllIntermediaryAccountsResponse = {
   fromSDK(object: AllIntermediaryAccountsResponseSDKType): AllIntermediaryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1054,13 +1054,13 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromSDK(object: ConnectedIntermediaryAccountRequestSDKType): ConnectedIntermediaryAccountRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+      lockId: object?.lock_id
     };
   },
 
   toSDK(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestSDKType {
     const obj: any = {};
-    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    obj.lock_id = message.lockId;
     return obj;
   }
 
@@ -1123,7 +1123,7 @@ export const ConnectedIntermediaryAccountResponse = {
 
   fromSDK(object: ConnectedIntermediaryAccountResponseSDKType): ConnectedIntermediaryAccountResponse {
     return {
-      account: isSet(object.account) ? SuperfluidIntermediaryAccountInfo.fromSDK(object.account) : undefined
+      account: object.account ? SuperfluidIntermediaryAccountInfo.fromSDK(object.account) : undefined
     };
   },
 
@@ -1244,13 +1244,13 @@ export const TotalSuperfluidDelegationsResponse = {
 
   fromSDK(object: TotalSuperfluidDelegationsResponseSDKType): TotalSuperfluidDelegationsResponse {
     return {
-      totalDelegations: isSet(object.total_delegations) ? object.total_delegations : undefined
+      totalDelegations: object?.total_delegations
     };
   },
 
   toSDK(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseSDKType {
     const obj: any = {};
-    message.totalDelegations !== undefined && (obj.total_delegations = message.totalDelegations);
+    obj.total_delegations = message.totalDelegations;
     return obj;
   }
 
@@ -1337,17 +1337,17 @@ export const SuperfluidDelegationAmountRequest = {
 
   fromSDK(object: SuperfluidDelegationAmountRequestSDKType): SuperfluidDelegationAmountRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
+      denom: object?.denom
     };
   },
 
   toSDK(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -1491,13 +1491,13 @@ export const SuperfluidDelegationsByDelegatorRequest = {
 
   fromSDK(object: SuperfluidDelegationsByDelegatorRequestSDKType): SuperfluidDelegationsByDelegatorRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1597,7 +1597,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
+      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
     };
   },
 
@@ -1691,15 +1691,15 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
 
   fromSDK(object: SuperfluidUndelegationsByDelegatorRequestSDKType): SuperfluidUndelegationsByDelegatorRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      delegatorAddress: object?.delegator_address,
+      denom: object?.denom
     };
   },
 
   toSDK(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.delegator_address = message.delegatorAddress;
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -1903,15 +1903,15 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
 
   fromSDK(object: SuperfluidDelegationsByValidatorDenomRequestSDKType): SuperfluidDelegationsByValidatorDenomRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      validatorAddress: object?.validator_address,
+      denom: object?.denom
     };
   },
 
   toSDK(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.validator_address = message.validatorAddress;
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -2067,15 +2067,15 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
 
   fromSDK(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      denom: isSet(object.denom) ? object.denom : undefined
+      validatorAddress: object?.validator_address,
+      denom: object?.denom
     };
   },
 
   toSDK(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.validator_address = message.validatorAddress;
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -2219,13 +2219,13 @@ export const QueryTotalDelegationByDelegatorRequest = {
 
   fromSDK(object: QueryTotalDelegationByDelegatorRequestSDKType): QueryTotalDelegationByDelegatorRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -2343,7 +2343,7 @@ export const QueryTotalDelegationByDelegatorResponse = {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
       delegationResponse: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDK(e)) : [],
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
-      totalEquivalentStakedAmount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
+      totalEquivalentStakedAmount: object.total_equivalent_staked_amount ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
     };
   },
 

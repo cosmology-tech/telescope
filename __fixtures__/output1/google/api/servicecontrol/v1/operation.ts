@@ -22,23 +22,7 @@ export enum Operation_Importance {
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
-
-/** Defines the importance of the data contained in the operation. */
-export enum Operation_ImportanceSDKType {
-  /**
-   * LOW - Allows data caching, batching, and aggregation. It provides
-   * higher performance with higher data loss risk.
-   */
-  LOW = 0,
-
-  /**
-   * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   * that contains significant monetary value or audit trail. This feature
-   * only applies to the client libraries.
-   */
-  HIGH = 1,
-  UNRECOGNIZED = -1,
-}
+export const Operation_ImportanceSDKType = Operation_Importance;
 export function operation_ImportanceFromJSON(object: any): Operation_Importance {
   switch (object) {
     case 0:
@@ -255,7 +239,7 @@ export interface OperationSDKType {
   log_entries: LogEntrySDKType[];
 
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_ImportanceSDKType;
+  importance: Operation_Importance;
 
   /** Unimplemented. */
   extensions: AnySDKType[];
@@ -330,15 +314,15 @@ export const Operation_LabelsEntry = {
 
   fromSDK(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -553,11 +537,11 @@ export const Operation = {
 
   fromSDK(object: OperationSDKType): Operation {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
-      operationName: isSet(object.operation_name) ? object.operation_name : undefined,
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      operationId: object?.operation_id,
+      operationName: object?.operation_name,
+      consumerId: object?.consumer_id,
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -573,9 +557,9 @@ export const Operation = {
 
   toSDK(message: Operation): OperationSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
-    message.operationName !== undefined && (obj.operation_name = message.operationName);
-    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.operation_id = message.operationId;
+    obj.operation_name = message.operationName;
+    obj.consumer_id = message.consumerId;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     obj.labels = {};

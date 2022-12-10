@@ -11,11 +11,7 @@ export enum CheckTxType {
   RECHECK = 1,
   UNRECOGNIZED = -1,
 }
-export enum CheckTxTypeSDKType {
-  NEW = 0,
-  RECHECK = 1,
-  UNRECOGNIZED = -1,
-}
+export const CheckTxTypeSDKType = CheckTxType;
 export function checkTxTypeFromJSON(object: any): CheckTxType {
   switch (object) {
     case 0:
@@ -65,26 +61,7 @@ export enum ResponseOfferSnapshot_Result {
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
-export enum ResponseOfferSnapshot_ResultSDKType {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Snapshot accepted, apply chunks */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** REJECT - Reject this specific snapshot, try others */
-  REJECT = 3,
-
-  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
-  REJECT_FORMAT = 4,
-
-  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
-  REJECT_SENDER = 5,
-  UNRECOGNIZED = -1,
-}
+export const ResponseOfferSnapshot_ResultSDKType = ResponseOfferSnapshot_Result;
 export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
   switch (object) {
     case 0:
@@ -162,26 +139,7 @@ export enum ResponseApplySnapshotChunk_Result {
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
-export enum ResponseApplySnapshotChunk_ResultSDKType {
-  /** UNKNOWN - Unknown result, abort all snapshot restoration */
-  UNKNOWN = 0,
-
-  /** ACCEPT - Chunk successfully accepted */
-  ACCEPT = 1,
-
-  /** ABORT - Abort all snapshot restoration */
-  ABORT = 2,
-
-  /** RETRY - Retry chunk (combine with refetch and reject) */
-  RETRY = 3,
-
-  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
-  RETRY_SNAPSHOT = 4,
-
-  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
-  REJECT_SNAPSHOT = 5,
-  UNRECOGNIZED = -1,
-}
+export const ResponseApplySnapshotChunk_ResultSDKType = ResponseApplySnapshotChunk_Result;
 export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
     case 0:
@@ -245,12 +203,7 @@ export enum EvidenceType {
   LIGHT_CLIENT_ATTACK = 2,
   UNRECOGNIZED = -1,
 }
-export enum EvidenceTypeSDKType {
-  UNKNOWN = 0,
-  DUPLICATE_VOTE = 1,
-  LIGHT_CLIENT_ATTACK = 2,
-  UNRECOGNIZED = -1,
-}
+export const EvidenceTypeSDKType = EvidenceType;
 export function evidenceTypeFromJSON(object: any): EvidenceType {
   switch (object) {
     case 0:
@@ -397,7 +350,7 @@ export interface RequestCheckTx {
 }
 export interface RequestCheckTxSDKType {
   tx: Uint8Array;
-  type: CheckTxTypeSDKType;
+  type: CheckTxType;
 }
 export interface RequestDeliverTx {
   tx: Uint8Array;
@@ -683,7 +636,7 @@ export interface ResponseOfferSnapshot {
   result: ResponseOfferSnapshot_Result;
 }
 export interface ResponseOfferSnapshotSDKType {
-  result: ResponseOfferSnapshot_ResultSDKType;
+  result: ResponseOfferSnapshot_Result;
 }
 export interface ResponseLoadSnapshotChunk {
   chunk: Uint8Array;
@@ -701,7 +654,7 @@ export interface ResponseApplySnapshotChunk {
   rejectSenders: string[];
 }
 export interface ResponseApplySnapshotChunkSDKType {
-  result: ResponseApplySnapshotChunk_ResultSDKType;
+  result: ResponseApplySnapshotChunk_Result;
 
   /** Chunks to refetch and reapply */
   refetch_chunks: number[];
@@ -887,7 +840,7 @@ export interface Evidence {
   totalVotingPower: Long;
 }
 export interface EvidenceSDKType {
-  type: EvidenceTypeSDKType;
+  type: EvidenceType;
 
   /** The offending validator */
   validator?: ValidatorSDKType;
@@ -1163,21 +1116,21 @@ export const Request = {
 
   fromSDK(object: RequestSDKType): Request {
     return {
-      echo: isSet(object.echo) ? RequestEcho.fromSDK(object.echo) : undefined,
-      flush: isSet(object.flush) ? RequestFlush.fromSDK(object.flush) : undefined,
-      info: isSet(object.info) ? RequestInfo.fromSDK(object.info) : undefined,
-      setOption: isSet(object.set_option) ? RequestSetOption.fromSDK(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? RequestInitChain.fromSDK(object.init_chain) : undefined,
-      query: isSet(object.query) ? RequestQuery.fromSDK(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? RequestBeginBlock.fromSDK(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? RequestCheckTx.fromSDK(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? RequestDeliverTx.fromSDK(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? RequestEndBlock.fromSDK(object.end_block) : undefined,
-      commit: isSet(object.commit) ? RequestCommit.fromSDK(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromSDK(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+      echo: object.echo ? RequestEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? RequestFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? RequestInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? RequestSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? RequestInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? RequestQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? RequestBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? RequestCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? RequestDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? RequestEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? RequestCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? RequestListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? RequestOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? RequestLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? RequestApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
     };
   },
 
@@ -1260,13 +1213,13 @@ export const RequestEcho = {
 
   fromSDK(object: RequestEchoSDKType): RequestEcho {
     return {
-      message: isSet(object.message) ? object.message : undefined
+      message: object?.message
     };
   },
 
   toSDK(message: RequestEcho): RequestEchoSDKType {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
+    obj.message = message.message;
     return obj;
   }
 
@@ -1405,17 +1358,17 @@ export const RequestInfo = {
 
   fromSDK(object: RequestInfoSDKType): RequestInfo {
     return {
-      version: isSet(object.version) ? object.version : undefined,
-      blockVersion: isSet(object.block_version) ? object.block_version : undefined,
-      p2pVersion: isSet(object.p2p_version) ? object.p2p_version : undefined
+      version: object?.version,
+      blockVersion: object?.block_version,
+      p2pVersion: object?.p2p_version
     };
   },
 
   toSDK(message: RequestInfo): RequestInfoSDKType {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.block_version = message.blockVersion);
-    message.p2pVersion !== undefined && (obj.p2p_version = message.p2pVersion);
+    obj.version = message.version;
+    obj.block_version = message.blockVersion;
+    obj.p2p_version = message.p2pVersion;
     return obj;
   }
 
@@ -1490,15 +1443,15 @@ export const RequestSetOption = {
 
   fromSDK(object: RequestSetOptionSDKType): RequestSetOption {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: RequestSetOption): RequestSetOptionSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1627,19 +1580,19 @@ export const RequestInitChain = {
 
   fromSDK(object: RequestInitChainSDKType): RequestInitChain {
     return {
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      chainId: object?.chain_id,
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      appStateBytes: isSet(object.app_state_bytes) ? object.app_state_bytes : undefined,
-      initialHeight: isSet(object.initial_height) ? object.initial_height : undefined
+      appStateBytes: object?.app_state_bytes,
+      initialHeight: object?.initial_height
     };
   },
 
   toSDK(message: RequestInitChain): RequestInitChainSDKType {
     const obj: any = {};
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    obj.chain_id = message.chainId;
     message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toSDK(message.consensusParams) : undefined);
 
     if (message.validators) {
@@ -1648,8 +1601,8 @@ export const RequestInitChain = {
       obj.validators = [];
     }
 
-    message.appStateBytes !== undefined && (obj.app_state_bytes = message.appStateBytes);
-    message.initialHeight !== undefined && (obj.initial_height = message.initialHeight);
+    obj.app_state_bytes = message.appStateBytes;
+    obj.initial_height = message.initialHeight;
     return obj;
   }
 
@@ -1748,19 +1701,19 @@ export const RequestQuery = {
 
   fromSDK(object: RequestQuerySDKType): RequestQuery {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      path: isSet(object.path) ? object.path : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      prove: isSet(object.prove) ? object.prove : undefined
+      data: object?.data,
+      path: object?.path,
+      height: object?.height,
+      prove: object?.prove
     };
   },
 
   toSDK(message: RequestQuery): RequestQuerySDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = message.height);
-    message.prove !== undefined && (obj.prove = message.prove);
+    obj.data = message.data;
+    obj.path = message.path;
+    obj.height = message.height;
+    obj.prove = message.prove;
     return obj;
   }
 
@@ -1865,16 +1818,16 @@ export const RequestBeginBlock = {
 
   fromSDK(object: RequestBeginBlockSDKType): RequestBeginBlock {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined,
-      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      lastCommitInfo: isSet(object.last_commit_info) ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
+      hash: object?.hash,
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      lastCommitInfo: object.last_commit_info ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDK(e)) : []
     };
   },
 
   toSDK(message: RequestBeginBlock): RequestBeginBlockSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
     message.lastCommitInfo !== undefined && (obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toSDK(message.lastCommitInfo) : undefined);
 
@@ -1958,14 +1911,14 @@ export const RequestCheckTx = {
 
   fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
     return {
-      tx: isSet(object.tx) ? object.tx : undefined,
+      tx: object?.tx,
       type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
     };
   },
 
   toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.tx = message.tx;
     message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
     return obj;
   }
@@ -2029,13 +1982,13 @@ export const RequestDeliverTx = {
 
   fromSDK(object: RequestDeliverTxSDKType): RequestDeliverTx {
     return {
-      tx: isSet(object.tx) ? object.tx : undefined
+      tx: object?.tx
     };
   },
 
   toSDK(message: RequestDeliverTx): RequestDeliverTxSDKType {
     const obj: any = {};
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.tx = message.tx;
     return obj;
   }
 
@@ -2098,13 +2051,13 @@ export const RequestEndBlock = {
 
   fromSDK(object: RequestEndBlockSDKType): RequestEndBlock {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: RequestEndBlock): RequestEndBlockSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -2283,15 +2236,15 @@ export const RequestOfferSnapshot = {
 
   fromSDK(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
     return {
-      snapshot: isSet(object.snapshot) ? Snapshot.fromSDK(object.snapshot) : undefined,
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
+      snapshot: object.snapshot ? Snapshot.fromSDK(object.snapshot) : undefined,
+      appHash: object?.app_hash
     };
   },
 
   toSDK(message: RequestOfferSnapshot): RequestOfferSnapshotSDKType {
     const obj: any = {};
     message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toSDK(message.snapshot) : undefined);
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
+    obj.app_hash = message.appHash;
     return obj;
   }
 
@@ -2378,17 +2331,17 @@ export const RequestLoadSnapshotChunk = {
 
   fromSDK(object: RequestLoadSnapshotChunkSDKType): RequestLoadSnapshotChunk {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined
+      height: object?.height,
+      format: object?.format,
+      chunk: object?.chunk
     };
   },
 
   toSDK(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunk = message.chunk;
     return obj;
   }
 
@@ -2475,17 +2428,17 @@ export const RequestApplySnapshotChunk = {
 
   fromSDK(object: RequestApplySnapshotChunkSDKType): RequestApplySnapshotChunk {
     return {
-      index: isSet(object.index) ? object.index : undefined,
-      chunk: isSet(object.chunk) ? object.chunk : undefined,
-      sender: isSet(object.sender) ? object.sender : undefined
+      index: object?.index,
+      chunk: object?.chunk,
+      sender: object?.sender
     };
   },
 
   toSDK(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkSDKType {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.chunk !== undefined && (obj.chunk = message.chunk);
-    message.sender !== undefined && (obj.sender = message.sender);
+    obj.index = message.index;
+    obj.chunk = message.chunk;
+    obj.sender = message.sender;
     return obj;
   }
 
@@ -2728,22 +2681,22 @@ export const Response = {
 
   fromSDK(object: ResponseSDKType): Response {
     return {
-      exception: isSet(object.exception) ? ResponseException.fromSDK(object.exception) : undefined,
-      echo: isSet(object.echo) ? ResponseEcho.fromSDK(object.echo) : undefined,
-      flush: isSet(object.flush) ? ResponseFlush.fromSDK(object.flush) : undefined,
-      info: isSet(object.info) ? ResponseInfo.fromSDK(object.info) : undefined,
-      setOption: isSet(object.set_option) ? ResponseSetOption.fromSDK(object.set_option) : undefined,
-      initChain: isSet(object.init_chain) ? ResponseInitChain.fromSDK(object.init_chain) : undefined,
-      query: isSet(object.query) ? ResponseQuery.fromSDK(object.query) : undefined,
-      beginBlock: isSet(object.begin_block) ? ResponseBeginBlock.fromSDK(object.begin_block) : undefined,
-      checkTx: isSet(object.check_tx) ? ResponseCheckTx.fromSDK(object.check_tx) : undefined,
-      deliverTx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromSDK(object.deliver_tx) : undefined,
-      endBlock: isSet(object.end_block) ? ResponseEndBlock.fromSDK(object.end_block) : undefined,
-      commit: isSet(object.commit) ? ResponseCommit.fromSDK(object.commit) : undefined,
-      listSnapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromSDK(object.list_snapshots) : undefined,
-      offerSnapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
-      loadSnapshotChunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
-      applySnapshotChunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+      exception: object.exception ? ResponseException.fromSDK(object.exception) : undefined,
+      echo: object.echo ? ResponseEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? ResponseFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? ResponseInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? ResponseSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? ResponseInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? ResponseQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? ResponseBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? ResponseCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? ResponseDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? ResponseEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? ResponseCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? ResponseListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? ResponseOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? ResponseLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? ResponseApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
     };
   },
 
@@ -2827,13 +2780,13 @@ export const ResponseException = {
 
   fromSDK(object: ResponseExceptionSDKType): ResponseException {
     return {
-      error: isSet(object.error) ? object.error : undefined
+      error: object?.error
     };
   },
 
   toSDK(message: ResponseException): ResponseExceptionSDKType {
     const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
+    obj.error = message.error;
     return obj;
   }
 
@@ -2896,13 +2849,13 @@ export const ResponseEcho = {
 
   fromSDK(object: ResponseEchoSDKType): ResponseEcho {
     return {
-      message: isSet(object.message) ? object.message : undefined
+      message: object?.message
     };
   },
 
   toSDK(message: ResponseEcho): ResponseEchoSDKType {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
+    obj.message = message.message;
     return obj;
   }
 
@@ -3065,21 +3018,21 @@ export const ResponseInfo = {
 
   fromSDK(object: ResponseInfoSDKType): ResponseInfo {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      appVersion: isSet(object.app_version) ? object.app_version : undefined,
-      lastBlockHeight: isSet(object.last_block_height) ? object.last_block_height : undefined,
-      lastBlockAppHash: isSet(object.last_block_app_hash) ? object.last_block_app_hash : undefined
+      data: object?.data,
+      version: object?.version,
+      appVersion: object?.app_version,
+      lastBlockHeight: object?.last_block_height,
+      lastBlockAppHash: object?.last_block_app_hash
     };
   },
 
   toSDK(message: ResponseInfo): ResponseInfoSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.app_version = message.appVersion);
-    message.lastBlockHeight !== undefined && (obj.last_block_height = message.lastBlockHeight);
-    message.lastBlockAppHash !== undefined && (obj.last_block_app_hash = message.lastBlockAppHash);
+    obj.data = message.data;
+    obj.version = message.version;
+    obj.app_version = message.appVersion;
+    obj.last_block_height = message.lastBlockHeight;
+    obj.last_block_app_hash = message.lastBlockAppHash;
     return obj;
   }
 
@@ -3166,17 +3119,17 @@ export const ResponseSetOption = {
 
   fromSDK(object: ResponseSetOptionSDKType): ResponseSetOption {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined
+      code: object?.code,
+      log: object?.log,
+      info: object?.info
     };
   },
 
   toSDK(message: ResponseSetOption): ResponseSetOptionSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
     return obj;
   }
 
@@ -3269,9 +3222,9 @@ export const ResponseInitChain = {
 
   fromSDK(object: ResponseInitChainSDKType): ResponseInitChain {
     return {
-      consensusParams: isSet(object.consensus_params) ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      appHash: isSet(object.app_hash) ? object.app_hash : undefined
+      appHash: object?.app_hash
     };
   },
 
@@ -3285,7 +3238,7 @@ export const ResponseInitChain = {
       obj.validators = [];
     }
 
-    message.appHash !== undefined && (obj.app_hash = message.appHash);
+    obj.app_hash = message.appHash;
     return obj;
   }
 
@@ -3444,29 +3397,29 @@ export const ResponseQuery = {
 
   fromSDK(object: ResponseQuerySDKType): ResponseQuery {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      proofOps: isSet(object.proof_ops) ? ProofOps.fromSDK(object.proof_ops) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      code: object?.code,
+      log: object?.log,
+      info: object?.info,
+      index: object?.index,
+      key: object?.key,
+      value: object?.value,
+      proofOps: object.proof_ops ? ProofOps.fromSDK(object.proof_ops) : undefined,
+      height: object?.height,
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseQuery): ResponseQuerySDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = message.index);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.index = message.index;
+    obj.key = message.key;
+    obj.value = message.value;
     message.proofOps !== undefined && (obj.proof_ops = message.proofOps ? ProofOps.toSDK(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = message.height);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.height = message.height;
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -3700,25 +3653,25 @@ export const ResponseCheckTx = {
 
   fromSDK(object: ResponseCheckTxSDKType): ResponseCheckTx {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseCheckTx): ResponseCheckTxSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -3726,7 +3679,7 @@ export const ResponseCheckTx = {
       obj.events = [];
     }
 
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -3879,25 +3832,25 @@ export const ResponseDeliverTx = {
 
   fromSDK(object: ResponseDeliverTxSDKType): ResponseDeliverTx {
     return {
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
-      codespace: isSet(object.codespace) ? object.codespace : undefined
+      codespace: object?.codespace
     };
   },
 
   toSDK(message: ResponseDeliverTx): ResponseDeliverTxSDKType {
     const obj: any = {};
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -3905,7 +3858,7 @@ export const ResponseDeliverTx = {
       obj.events = [];
     }
 
-    message.codespace !== undefined && (obj.codespace = message.codespace);
+    obj.codespace = message.codespace;
     return obj;
   }
 
@@ -4005,7 +3958,7 @@ export const ResponseEndBlock = {
   fromSDK(object: ResponseEndBlockSDKType): ResponseEndBlock {
     return {
       validatorUpdates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
-      consensusParamUpdates: isSet(object.consensus_param_updates) ? ConsensusParams.fromSDK(object.consensus_param_updates) : undefined,
+      consensusParamUpdates: object.consensus_param_updates ? ConsensusParams.fromSDK(object.consensus_param_updates) : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
     };
   },
@@ -4101,15 +4054,15 @@ export const ResponseCommit = {
 
   fromSDK(object: ResponseCommitSDKType): ResponseCommit {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      retainHeight: isSet(object.retain_height) ? object.retain_height : undefined
+      data: object?.data,
+      retainHeight: object?.retain_height
     };
   },
 
   toSDK(message: ResponseCommit): ResponseCommitSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.retainHeight !== undefined && (obj.retain_height = message.retainHeight);
+    obj.data = message.data;
+    obj.retain_height = message.retainHeight;
     return obj;
   }
 
@@ -4322,13 +4275,13 @@ export const ResponseLoadSnapshotChunk = {
 
   fromSDK(object: ResponseLoadSnapshotChunkSDKType): ResponseLoadSnapshotChunk {
     return {
-      chunk: isSet(object.chunk) ? object.chunk : undefined
+      chunk: object?.chunk
     };
   },
 
   toSDK(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkSDKType {
     const obj: any = {};
-    message.chunk !== undefined && (obj.chunk = message.chunk);
+    obj.chunk = message.chunk;
     return obj;
   }
 
@@ -4559,10 +4512,10 @@ export const ConsensusParams = {
 
   fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
     return {
-      block: isSet(object.block) ? BlockParams.fromSDK(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDK(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDK(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDK(object.version) : undefined
+      block: object.block ? BlockParams.fromSDK(object.block) : undefined,
+      evidence: object.evidence ? EvidenceParams.fromSDK(object.evidence) : undefined,
+      validator: object.validator ? ValidatorParams.fromSDK(object.validator) : undefined,
+      version: object.version ? VersionParams.fromSDK(object.version) : undefined
     };
   },
 
@@ -4646,15 +4599,15 @@ export const BlockParams = {
 
   fromSDK(object: BlockParamsSDKType): BlockParams {
     return {
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
-      maxGas: isSet(object.max_gas) ? object.max_gas : undefined
+      maxBytes: object?.max_bytes,
+      maxGas: object?.max_gas
     };
   },
 
   toSDK(message: BlockParams): BlockParamsSDKType {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
-    message.maxGas !== undefined && (obj.max_gas = message.maxGas);
+    obj.max_bytes = message.maxBytes;
+    obj.max_gas = message.maxGas;
     return obj;
   }
 
@@ -4735,14 +4688,14 @@ export const LastCommitInfo = {
 
   fromSDK(object: LastCommitInfoSDKType): LastCommitInfo {
     return {
-      round: isSet(object.round) ? object.round : undefined,
+      round: object?.round,
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDK(e)) : []
     };
   },
 
   toSDK(message: LastCommitInfo): LastCommitInfoSDKType {
     const obj: any = {};
-    message.round !== undefined && (obj.round = message.round);
+    obj.round = message.round;
 
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? VoteInfo.toSDK(e) : undefined);
@@ -4830,14 +4783,14 @@ export const Event = {
 
   fromSDK(object: EventSDKType): Event {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Event): EventSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? EventAttribute.toSDK(e) : undefined);
@@ -4931,17 +4884,17 @@ export const EventAttribute = {
 
   fromSDK(object: EventAttributeSDKType): EventAttribute {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined,
-      index: isSet(object.index) ? object.index : undefined
+      key: object?.key,
+      value: object?.value,
+      index: object?.index
     };
   },
 
   toSDK(message: EventAttribute): EventAttributeSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    message.index !== undefined && (obj.index = message.index);
+    obj.key = message.key;
+    obj.value = message.value;
+    obj.index = message.index;
     return obj;
   }
 
@@ -5040,18 +4993,18 @@ export const TxResult = {
 
   fromSDK(object: TxResultSDKType): TxResult {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      index: isSet(object.index) ? object.index : undefined,
-      tx: isSet(object.tx) ? object.tx : undefined,
-      result: isSet(object.result) ? ResponseDeliverTx.fromSDK(object.result) : undefined
+      height: object?.height,
+      index: object?.index,
+      tx: object?.tx,
+      result: object.result ? ResponseDeliverTx.fromSDK(object.result) : undefined
     };
   },
 
   toSDK(message: TxResult): TxResultSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.index !== undefined && (obj.index = message.index);
-    message.tx !== undefined && (obj.tx = message.tx);
+    obj.height = message.height;
+    obj.index = message.index;
+    obj.tx = message.tx;
     message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toSDK(message.result) : undefined);
     return obj;
   }
@@ -5127,15 +5080,15 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      power: isSet(object.power) ? object.power : undefined
+      address: object?.address,
+      power: object?.power
     };
   },
 
   toSDK(message: Validator): ValidatorSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
+    obj.address = message.address;
+    obj.power = message.power;
     return obj;
   }
 
@@ -5210,15 +5163,15 @@ export const ValidatorUpdate = {
 
   fromSDK(object: ValidatorUpdateSDKType): ValidatorUpdate {
     return {
-      pubKey: isSet(object.pub_key) ? PublicKey.fromSDK(object.pub_key) : undefined,
-      power: isSet(object.power) ? object.power : undefined
+      pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
+      power: object?.power
     };
   },
 
   toSDK(message: ValidatorUpdate): ValidatorUpdateSDKType {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = message.power);
+    obj.power = message.power;
     return obj;
   }
 
@@ -5293,15 +5246,15 @@ export const VoteInfo = {
 
   fromSDK(object: VoteInfoSDKType): VoteInfo {
     return {
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
-      signedLastBlock: isSet(object.signed_last_block) ? object.signed_last_block : undefined
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
+      signedLastBlock: object?.signed_last_block
     };
   },
 
   toSDK(message: VoteInfo): VoteInfoSDKType {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    message.signedLastBlock !== undefined && (obj.signed_last_block = message.signedLastBlock);
+    obj.signed_last_block = message.signedLastBlock;
     return obj;
   }
 
@@ -5413,10 +5366,10 @@ export const Evidence = {
   fromSDK(object: EvidenceSDKType): Evidence {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
-      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined,
-      height: isSet(object.height) ? object.height : undefined,
-      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
+      height: object?.height,
+      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      totalVotingPower: object?.total_voting_power
     };
   },
 
@@ -5424,9 +5377,9 @@ export const Evidence = {
     const obj: any = {};
     message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
-    message.totalVotingPower !== undefined && (obj.total_voting_power = message.totalVotingPower);
+    obj.total_voting_power = message.totalVotingPower;
     return obj;
   }
 
@@ -5537,21 +5490,21 @@ export const Snapshot = {
 
   fromSDK(object: SnapshotSDKType): Snapshot {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      format: isSet(object.format) ? object.format : undefined,
-      chunks: isSet(object.chunks) ? object.chunks : undefined,
-      hash: isSet(object.hash) ? object.hash : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : undefined
+      height: object?.height,
+      format: object?.format,
+      chunks: object?.chunks,
+      hash: object?.hash,
+      metadata: object?.metadata
     };
   },
 
   toSDK(message: Snapshot): SnapshotSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.format !== undefined && (obj.format = message.format);
-    message.chunks !== undefined && (obj.chunks = message.chunks);
-    message.hash !== undefined && (obj.hash = message.hash);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunks = message.chunks;
+    obj.hash = message.hash;
+    obj.metadata = message.metadata;
     return obj;
   }
 

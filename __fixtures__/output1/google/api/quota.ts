@@ -580,15 +580,15 @@ export const MetricRule_MetricCostsEntry = {
 
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -690,7 +690,7 @@ export const MetricRule = {
 
   fromSDK(object: MetricRuleSDKType): MetricRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
+      selector: object?.selector,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
@@ -702,7 +702,7 @@ export const MetricRule = {
 
   toSDK(message: MetricRule): MetricRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
+    obj.selector = message.selector;
     obj.metric_costs = {};
 
     if (message.metricCosts) {
@@ -785,15 +785,15 @@ export const QuotaLimit_ValuesEntry = {
 
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -992,34 +992,34 @@ export const QuotaLimit = {
 
   fromSDK(object: QuotaLimitSDKType): QuotaLimit {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      defaultLimit: isSet(object.default_limit) ? object.default_limit : undefined,
-      maxLimit: isSet(object.max_limit) ? object.max_limit : undefined,
-      freeTier: isSet(object.free_tier) ? object.free_tier : undefined,
-      duration: isSet(object.duration) ? object.duration : undefined,
-      metric: isSet(object.metric) ? object.metric : undefined,
-      unit: isSet(object.unit) ? object.unit : undefined,
+      name: object?.name,
+      description: object?.description,
+      defaultLimit: object?.default_limit,
+      maxLimit: object?.max_limit,
+      freeTier: object?.free_tier,
+      duration: object?.duration,
+      metric: object?.metric,
+      unit: object?.unit,
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
         acc[key] = Long.fromValue((value as Long | string));
         return acc;
       }, {}) : {},
-      displayName: isSet(object.display_name) ? object.display_name : undefined
+      displayName: object?.display_name
     };
   },
 
   toSDK(message: QuotaLimit): QuotaLimitSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.default_limit = message.defaultLimit);
-    message.maxLimit !== undefined && (obj.max_limit = message.maxLimit);
-    message.freeTier !== undefined && (obj.free_tier = message.freeTier);
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.default_limit = message.defaultLimit;
+    obj.max_limit = message.maxLimit;
+    obj.free_tier = message.freeTier;
+    obj.duration = message.duration;
+    obj.metric = message.metric;
+    obj.unit = message.unit;
     obj.values = {};
 
     if (message.values) {
@@ -1028,7 +1028,7 @@ export const QuotaLimit = {
       });
     }
 
-    message.displayName !== undefined && (obj.display_name = message.displayName);
+    obj.display_name = message.displayName;
     return obj;
   }
 

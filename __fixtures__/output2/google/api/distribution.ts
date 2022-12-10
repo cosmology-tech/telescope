@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
 
 /**

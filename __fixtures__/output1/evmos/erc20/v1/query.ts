@@ -158,7 +158,7 @@ export const QueryTokenPairsRequest = {
 
   fromSDK(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -246,7 +246,7 @@ export const QueryTokenPairsResponse = {
   fromSDK(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
     return {
       tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -322,13 +322,13 @@ export const QueryTokenPairRequest = {
 
   fromSDK(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
     return {
-      token: isSet(object.token) ? object.token : undefined
+      token: object?.token
     };
   },
 
   toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
     const obj: any = {};
-    message.token !== undefined && (obj.token = message.token);
+    obj.token = message.token;
     return obj;
   }
 
@@ -391,7 +391,7 @@ export const QueryTokenPairResponse = {
 
   fromSDK(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
     return {
-      tokenPair: isSet(object.token_pair) ? TokenPair.fromSDK(object.token_pair) : undefined
+      tokenPair: object.token_pair ? TokenPair.fromSDK(object.token_pair) : undefined
     };
   },
 
@@ -512,7 +512,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

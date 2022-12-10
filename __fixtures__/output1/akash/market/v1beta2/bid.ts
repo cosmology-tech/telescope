@@ -22,25 +22,7 @@ export enum Bid_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
-
-/** State is an enum which refers to state of bid */
-export enum Bid_StateSDKType {
-  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
-  invalid = 0,
-
-  /** open - BidOpen denotes state for bid open */
-  open = 1,
-
-  /** active - BidMatched denotes state for bid open */
-  active = 2,
-
-  /** lost - BidLost denotes state for bid lost */
-  lost = 3,
-
-  /** closed - BidClosed denotes state for bid closed */
-  closed = 4,
-  UNRECOGNIZED = -1,
-}
+export const Bid_StateSDKType = Bid_State;
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:
@@ -165,7 +147,7 @@ export interface Bid {
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id?: BidIDSDKType;
-  state: Bid_StateSDKType;
+  state: Bid_State;
   price?: DecCoinSDKType;
   created_at: Long;
 }
@@ -283,17 +265,17 @@ export const MsgCreateBid = {
 
   fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
     return {
-      order: isSet(object.order) ? OrderID.fromSDK(object.order) : undefined,
-      provider: isSet(object.provider) ? object.provider : undefined,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
-      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
+      order: object.order ? OrderID.fromSDK(object.order) : undefined,
+      provider: object?.provider,
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
+      deposit: object.deposit ? Coin.fromSDK(object.deposit) : undefined
     };
   },
 
   toSDK(message: MsgCreateBid): MsgCreateBidSDKType {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? OrderID.toSDK(message.order) : undefined);
-    message.provider !== undefined && (obj.provider = message.provider);
+    obj.provider = message.provider;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
@@ -410,7 +392,7 @@ export const MsgCloseBid = {
 
   fromSDK(object: MsgCloseBidSDKType): MsgCloseBid {
     return {
-      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined
+      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined
     };
   },
 
@@ -579,21 +561,21 @@ export const BidID = {
 
   fromSDK(object: BidIDSDKType): BidID {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined,
-      oseq: isSet(object.oseq) ? object.oseq : undefined,
-      provider: isSet(object.provider) ? object.provider : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      gseq: object?.gseq,
+      oseq: object?.oseq,
+      provider: object?.provider
     };
   },
 
   toSDK(message: BidID): BidIDSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
-    message.oseq !== undefined && (obj.oseq = message.oseq);
-    message.provider !== undefined && (obj.provider = message.provider);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
     return obj;
   }
 
@@ -692,10 +674,10 @@ export const Bid = {
 
   fromSDK(object: BidSDKType): Bid {
     return {
-      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined,
+      bidId: object.bid_id ? BidID.fromSDK(object.bid_id) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
-      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : undefined
+      price: object.price ? DecCoin.fromSDK(object.price) : undefined,
+      createdAt: object?.created_at
     };
   },
 
@@ -704,7 +686,7 @@ export const Bid = {
     message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
     message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
-    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    obj.created_at = message.createdAt;
     return obj;
   }
 
@@ -827,23 +809,23 @@ export const BidFilters = {
 
   fromSDK(object: BidFiltersSDKType): BidFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      dseq: isSet(object.dseq) ? object.dseq : undefined,
-      gseq: isSet(object.gseq) ? object.gseq : undefined,
-      oseq: isSet(object.oseq) ? object.oseq : undefined,
-      provider: isSet(object.provider) ? object.provider : undefined,
-      state: isSet(object.state) ? object.state : undefined
+      owner: object?.owner,
+      dseq: object?.dseq,
+      gseq: object?.gseq,
+      oseq: object?.oseq,
+      provider: object?.provider,
+      state: object?.state
     };
   },
 
   toSDK(message: BidFilters): BidFiltersSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = message.dseq);
-    message.gseq !== undefined && (obj.gseq = message.gseq);
-    message.oseq !== undefined && (obj.oseq = message.oseq);
-    message.provider !== undefined && (obj.provider = message.provider);
-    message.state !== undefined && (obj.state = message.state);
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
+    obj.state = message.state;
     return obj;
   }
 

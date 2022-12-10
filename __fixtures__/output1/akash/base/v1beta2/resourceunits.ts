@@ -130,8 +130,8 @@ export const ResourceUnits = {
 
   fromSDK(object: ResourceUnitsSDKType): ResourceUnits {
     return {
-      cpu: isSet(object.cpu) ? CPU.fromSDK(object.cpu) : undefined,
-      memory: isSet(object.memory) ? Memory.fromSDK(object.memory) : undefined,
+      cpu: object.cpu ? CPU.fromSDK(object.cpu) : undefined,
+      memory: object.memory ? Memory.fromSDK(object.memory) : undefined,
       storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDK(e)) : [],
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : []
     };

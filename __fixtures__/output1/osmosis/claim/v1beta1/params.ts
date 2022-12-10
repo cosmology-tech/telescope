@@ -117,10 +117,10 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
-      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
-      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
-      claimDenom: isSet(object.claim_denom) ? object.claim_denom : undefined
+      airdropStartTime: object.airdrop_start_time ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      durationUntilDecay: object.duration_until_decay ? Duration.fromSDK(object.duration_until_decay) : undefined,
+      durationOfDecay: object.duration_of_decay ? Duration.fromSDK(object.duration_of_decay) : undefined,
+      claimDenom: object?.claim_denom
     };
   },
 
@@ -129,7 +129,7 @@ export const Params = {
     message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
     message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
     message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
-    message.claimDenom !== undefined && (obj.claim_denom = message.claimDenom);
+    obj.claim_denom = message.claimDenom;
     return obj;
   }
 

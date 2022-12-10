@@ -144,8 +144,8 @@ export const QueryDeploymentsRequest = {
 
   fromSDK(object: QueryDeploymentsRequestSDKType): QueryDeploymentsRequest {
     return {
-      filters: isSet(object.filters) ? DeploymentFilters.fromSDK(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      filters: object.filters ? DeploymentFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -234,7 +234,7 @@ export const QueryDeploymentsResponse = {
   fromSDK(object: QueryDeploymentsResponseSDKType): QueryDeploymentsResponse {
     return {
       deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -310,7 +310,7 @@ export const QueryDeploymentRequest = {
 
   fromSDK(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
     return {
-      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
     };
   },
 
@@ -409,9 +409,9 @@ export const QueryDeploymentResponse = {
 
   fromSDK(object: QueryDeploymentResponseSDKType): QueryDeploymentResponse {
     return {
-      deployment: isSet(object.deployment) ? Deployment.fromSDK(object.deployment) : undefined,
+      deployment: object.deployment ? Deployment.fromSDK(object.deployment) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : [],
-      escrowAccount: isSet(object.escrow_account) ? Account.fromSDK(object.escrow_account) : undefined
+      escrowAccount: object.escrow_account ? Account.fromSDK(object.escrow_account) : undefined
     };
   },
 
@@ -488,7 +488,7 @@ export const QueryGroupRequest = {
 
   fromSDK(object: QueryGroupRequestSDKType): QueryGroupRequest {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -557,7 +557,7 @@ export const QueryGroupResponse = {
 
   fromSDK(object: QueryGroupResponseSDKType): QueryGroupResponse {
     return {
-      group: isSet(object.group) ? Group.fromSDK(object.group) : undefined
+      group: object.group ? Group.fromSDK(object.group) : undefined
     };
   },
 

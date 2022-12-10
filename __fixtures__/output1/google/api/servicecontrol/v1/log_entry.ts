@@ -110,7 +110,7 @@ export interface LogEntrySDKType {
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeveritySDKType;
+  severity: LogSeverity;
 
   /**
    * Optional. Information about the HTTP request associated with this
@@ -344,15 +344,15 @@ export const LogEntry_LabelsEntry = {
 
   fromSDK(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -575,34 +575,34 @@ export const LogEntry = {
 
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      name: object?.name,
+      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
-      trace: isSet(object.trace) ? object.trace : undefined,
-      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
+      httpRequest: object.http_request ? HttpRequest.fromSDK(object.http_request) : undefined,
+      trace: object?.trace,
+      insertId: object?.insert_id,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
-      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
-      structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
-      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
-      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
+      protoPayload: object.proto_payload ? Any.fromSDK(object.proto_payload) : undefined,
+      textPayload: object?.text_payload,
+      structPayload: object.struct_payload ? Struct.fromSDK(object.struct_payload) : undefined,
+      operation: object.operation ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      sourceLocation: object.source_location ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
     };
   },
 
   toSDK(message: LogEntry): LogEntrySDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
     message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
     message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
-    message.trace !== undefined && (obj.trace = message.trace);
-    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.trace = message.trace;
+    obj.insert_id = message.insertId;
     obj.labels = {};
 
     if (message.labels) {
@@ -612,7 +612,7 @@ export const LogEntry = {
     }
 
     message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
-    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    obj.text_payload = message.textPayload;
     message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toSDK(message.structPayload) : undefined);
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
@@ -714,19 +714,19 @@ export const LogEntryOperation = {
 
   fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      producer: isSet(object.producer) ? object.producer : undefined,
-      first: isSet(object.first) ? object.first : undefined,
-      last: isSet(object.last) ? object.last : undefined
+      id: object?.id,
+      producer: object?.producer,
+      first: object?.first,
+      last: object?.last
     };
   },
 
   toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.producer !== undefined && (obj.producer = message.producer);
-    message.first !== undefined && (obj.first = message.first);
-    message.last !== undefined && (obj.last = message.last);
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
     return obj;
   }
 
@@ -813,17 +813,17 @@ export const LogEntrySourceLocation = {
 
   fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
     return {
-      file: isSet(object.file) ? object.file : undefined,
-      line: isSet(object.line) ? object.line : undefined,
-      function: isSet(object.function) ? object.function : undefined
+      file: object?.file,
+      line: object?.line,
+      function: object?.function
     };
   },
 
   toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
     const obj: any = {};
-    message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = message.line);
-    message.function !== undefined && (obj.function = message.function);
+    obj.file = message.file;
+    obj.line = message.line;
+    obj.function = message.function;
     return obj;
   }
 

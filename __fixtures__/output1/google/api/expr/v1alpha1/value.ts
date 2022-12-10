@@ -56,7 +56,7 @@ export interface Value {
  */
 export interface ValueSDKType {
   /** Null value. */
-  null_value?: NullValueSDKType;
+  null_value?: NullValue;
 
   /** Boolean value. */
   bool_value?: boolean;
@@ -382,34 +382,34 @@ export const Value = {
   fromSDK(object: ValueSDKType): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
-      enumValue: isSet(object.enum_value) ? EnumValue.fromSDK(object.enum_value) : undefined,
-      objectValue: isSet(object.object_value) ? Any.fromSDK(object.object_value) : undefined,
-      mapValue: isSet(object.map_value) ? MapValue.fromSDK(object.map_value) : undefined,
-      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined,
-      typeValue: isSet(object.type_value) ? object.type_value : undefined
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      uint64Value: object?.uint64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
+      enumValue: object.enum_value ? EnumValue.fromSDK(object.enum_value) : undefined,
+      objectValue: object.object_value ? Any.fromSDK(object.object_value) : undefined,
+      mapValue: object.map_value ? MapValue.fromSDK(object.map_value) : undefined,
+      listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined,
+      typeValue: object?.type_value
     };
   },
 
   toSDK(message: Value): ValueSDKType {
     const obj: any = {};
     message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.uint64_value = message.uint64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
     message.enumValue !== undefined && (obj.enum_value = message.enumValue ? EnumValue.toSDK(message.enumValue) : undefined);
     message.objectValue !== undefined && (obj.object_value = message.objectValue ? Any.toSDK(message.objectValue) : undefined);
     message.mapValue !== undefined && (obj.map_value = message.mapValue ? MapValue.toSDK(message.mapValue) : undefined);
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
-    message.typeValue !== undefined && (obj.type_value = message.typeValue);
+    obj.type_value = message.typeValue;
     return obj;
   }
 
@@ -484,15 +484,15 @@ export const EnumValue = {
 
   fromSDK(object: EnumValueSDKType): EnumValue {
     return {
-      type: isSet(object.type) ? object.type : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      type: object?.type,
+      value: object?.value
     };
   },
 
   toSDK(message: EnumValue): EnumValueSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.value !== undefined && (obj.value = message.value);
+    obj.type = message.type;
+    obj.value = message.value;
     return obj;
   }
 
@@ -729,8 +729,8 @@ export const MapValue_Entry = {
 
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {
     return {
-      key: isSet(object.key) ? Value.fromSDK(object.key) : undefined,
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+      key: object.key ? Value.fromSDK(object.key) : undefined,
+      value: object.value ? Value.fromSDK(object.value) : undefined
     };
   },
 

@@ -315,7 +315,7 @@ export const QueryIncentivesRequest = {
 
   fromSDK(object: QueryIncentivesRequestSDKType): QueryIncentivesRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -403,7 +403,7 @@ export const QueryIncentivesResponse = {
   fromSDK(object: QueryIncentivesResponseSDKType): QueryIncentivesResponse {
     return {
       incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -479,13 +479,13 @@ export const QueryIncentiveRequest = {
 
   fromSDK(object: QueryIncentiveRequestSDKType): QueryIncentiveRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : undefined
+      contract: object?.contract
     };
   },
 
   toSDK(message: QueryIncentiveRequest): QueryIncentiveRequestSDKType {
     const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.contract = message.contract;
     return obj;
   }
 
@@ -548,7 +548,7 @@ export const QueryIncentiveResponse = {
 
   fromSDK(object: QueryIncentiveResponseSDKType): QueryIncentiveResponse {
     return {
-      incentive: isSet(object.incentive) ? Incentive.fromSDK(object.incentive) : undefined
+      incentive: object.incentive ? Incentive.fromSDK(object.incentive) : undefined
     };
   },
 
@@ -629,14 +629,14 @@ export const QueryGasMetersRequest = {
 
   fromSDK(object: QueryGasMetersRequestSDKType): QueryGasMetersRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      contract: object?.contract,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGasMetersRequest): QueryGasMetersRequestSDKType {
     const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
+    obj.contract = message.contract;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -719,7 +719,7 @@ export const QueryGasMetersResponse = {
   fromSDK(object: QueryGasMetersResponseSDKType): QueryGasMetersResponse {
     return {
       gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -807,15 +807,15 @@ export const QueryGasMeterRequest = {
 
   fromSDK(object: QueryGasMeterRequestSDKType): QueryGasMeterRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : undefined,
-      participant: isSet(object.participant) ? object.participant : undefined
+      contract: object?.contract,
+      participant: object?.participant
     };
   },
 
   toSDK(message: QueryGasMeterRequest): QueryGasMeterRequestSDKType {
     const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.participant !== undefined && (obj.participant = message.participant);
+    obj.contract = message.contract;
+    obj.participant = message.participant;
     return obj;
   }
 
@@ -878,13 +878,13 @@ export const QueryGasMeterResponse = {
 
   fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gas_meter) ? object.gas_meter : undefined
+      gasMeter: object?.gas_meter
     };
   },
 
   toSDK(message: QueryGasMeterResponse): QueryGasMeterResponseSDKType {
     const obj: any = {};
-    message.gasMeter !== undefined && (obj.gas_meter = message.gasMeter);
+    obj.gas_meter = message.gasMeter;
     return obj;
   }
 
@@ -947,7 +947,7 @@ export const QueryAllocationMetersRequest = {
 
   fromSDK(object: QueryAllocationMetersRequestSDKType): QueryAllocationMetersRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1035,7 +1035,7 @@ export const QueryAllocationMetersResponse = {
   fromSDK(object: QueryAllocationMetersResponseSDKType): QueryAllocationMetersResponse {
     return {
       allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1111,13 +1111,13 @@ export const QueryAllocationMeterRequest = {
 
   fromSDK(object: QueryAllocationMeterRequestSDKType): QueryAllocationMeterRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined
+      denom: object?.denom
     };
   },
 
   toSDK(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -1180,7 +1180,7 @@ export const QueryAllocationMeterResponse = {
 
   fromSDK(object: QueryAllocationMeterResponseSDKType): QueryAllocationMeterResponse {
     return {
-      allocationMeter: isSet(object.allocation_meter) ? DecCoin.fromSDK(object.allocation_meter) : undefined
+      allocationMeter: object.allocation_meter ? DecCoin.fromSDK(object.allocation_meter) : undefined
     };
   },
 
@@ -1301,7 +1301,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 

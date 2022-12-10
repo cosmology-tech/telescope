@@ -141,15 +141,15 @@ export const DenomTrace = {
 
   fromSDK(object: DenomTraceSDKType): DenomTrace {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      baseDenom: isSet(object.base_denom) ? object.base_denom : undefined
+      path: object?.path,
+      baseDenom: object?.base_denom
     };
   },
 
   toSDK(message: DenomTrace): DenomTraceSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
+    obj.path = message.path;
+    obj.base_denom = message.baseDenom;
     return obj;
   }
 
@@ -224,15 +224,15 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      sendEnabled: isSet(object.send_enabled) ? object.send_enabled : undefined,
-      receiveEnabled: isSet(object.receive_enabled) ? object.receive_enabled : undefined
+      sendEnabled: object?.send_enabled,
+      receiveEnabled: object?.receive_enabled
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.sendEnabled !== undefined && (obj.send_enabled = message.sendEnabled);
-    message.receiveEnabled !== undefined && (obj.receive_enabled = message.receiveEnabled);
+    obj.send_enabled = message.sendEnabled;
+    obj.receive_enabled = message.receiveEnabled;
     return obj;
   }
 

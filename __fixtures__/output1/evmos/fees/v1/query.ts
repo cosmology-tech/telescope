@@ -204,7 +204,7 @@ export const QueryDevFeeInfosRequest = {
 
   fromSDK(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
     return {
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -292,7 +292,7 @@ export const QueryDevFeeInfosResponse = {
   fromSDK(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
     return {
       fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -368,13 +368,13 @@ export const QueryDevFeeInfoRequest = {
 
   fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined
+      contractAddress: object?.contract_address
     };
   },
 
   toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
     const obj: any = {};
-    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    obj.contract_address = message.contractAddress;
     return obj;
   }
 
@@ -437,7 +437,7 @@ export const QueryDevFeeInfoResponse = {
 
   fromSDK(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
     return {
-      fee: isSet(object.fee) ? DevFeeInfo.fromSDK(object.fee) : undefined
+      fee: object.fee ? DevFeeInfo.fromSDK(object.fee) : undefined
     };
   },
 
@@ -558,7 +558,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -639,14 +639,14 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 
   fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
     return {
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      deployerAddress: object?.deployer_address,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestSDKType {
     const obj: any = {};
-    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    obj.deployer_address = message.deployerAddress;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -729,7 +729,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
   fromSDK(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
     return {
       fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

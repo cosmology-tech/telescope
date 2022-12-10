@@ -109,15 +109,15 @@ export const CertificateResponse = {
 
   fromSDK(object: CertificateResponseSDKType): CertificateResponse {
     return {
-      certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined,
-      serial: isSet(object.serial) ? object.serial : undefined
+      certificate: object.certificate ? Certificate.fromSDK(object.certificate) : undefined,
+      serial: object?.serial
     };
   },
 
   toSDK(message: CertificateResponse): CertificateResponseSDKType {
     const obj: any = {};
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
-    message.serial !== undefined && (obj.serial = message.serial);
+    obj.serial = message.serial;
     return obj;
   }
 
@@ -192,8 +192,8 @@ export const QueryCertificatesRequest = {
 
   fromSDK(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
     return {
-      filter: isSet(object.filter) ? CertificateFilter.fromSDK(object.filter) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      filter: object.filter ? CertificateFilter.fromSDK(object.filter) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -282,7 +282,7 @@ export const QueryCertificatesResponse = {
   fromSDK(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {
     return {
       certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

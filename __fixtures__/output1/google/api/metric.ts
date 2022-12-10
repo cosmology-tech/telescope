@@ -30,32 +30,7 @@ export enum MetricDescriptor_MetricKind {
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
-
-/**
- * The kind of measurement. It describes how the data is reported.
- * For information on setting the start time and end time based on
- * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
- */
-export enum MetricDescriptor_MetricKindSDKType {
-  /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
-  METRIC_KIND_UNSPECIFIED = 0,
-
-  /** GAUGE - An instantaneous measurement of a value. */
-  GAUGE = 1,
-
-  /** DELTA - The change in a value during a time interval. */
-  DELTA = 2,
-
-  /**
-   * CUMULATIVE - A value accumulated over a time interval.  Cumulative
-   * measurements in a time series should have the same start time
-   * and increasing end times, until an event resets the cumulative
-   * value to zero and sets a new start time for the following
-   * points.
-   */
-  CUMULATIVE = 3,
-  UNRECOGNIZED = -1,
-}
+export const MetricDescriptor_MetricKindSDKType = MetricDescriptor_MetricKind;
 export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
   switch (object) {
     case 0:
@@ -130,37 +105,7 @@ export enum MetricDescriptor_ValueType {
   MONEY = 6,
   UNRECOGNIZED = -1,
 }
-
-/** The value type of a metric. */
-export enum MetricDescriptor_ValueTypeSDKType {
-  /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
-  VALUE_TYPE_UNSPECIFIED = 0,
-
-  /**
-   * BOOL - The value is a boolean.
-   * This value type can be used only if the metric kind is `GAUGE`.
-   */
-  BOOL = 1,
-
-  /** INT64 - The value is a signed 64-bit integer. */
-  INT64 = 2,
-
-  /** DOUBLE - The value is a double precision floating point number. */
-  DOUBLE = 3,
-
-  /**
-   * STRING - The value is a text string.
-   * This value type can be used only if the metric kind is `GAUGE`.
-   */
-  STRING = 4,
-
-  /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
-  DISTRIBUTION = 5,
-
-  /** MONEY - The value is money. */
-  MONEY = 6,
-  UNRECOGNIZED = -1,
-}
+export const MetricDescriptor_ValueTypeSDKType = MetricDescriptor_ValueType;
 export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -437,13 +382,13 @@ export interface MetricDescriptorSDKType {
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  metric_kind: MetricDescriptor_MetricKindSDKType;
+  metric_kind: MetricDescriptor_MetricKind;
 
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  value_type: MetricDescriptor_ValueTypeSDKType;
+  value_type: MetricDescriptor_ValueType;
 
   /**
    * The units in which the metric value is reported. It is only applicable
@@ -566,7 +511,7 @@ export interface MetricDescriptorSDKType {
   metadata?: MetricDescriptor_MetricDescriptorMetadataSDKType;
 
   /** Optional. The launch stage of the metric definition. */
-  launch_stage: LaunchStageSDKType;
+  launch_stage: LaunchStage;
 
   /**
    * Read-only. If present, then a [time
@@ -606,7 +551,7 @@ export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
 
   /** @deprecated */
-  launch_stage: LaunchStageSDKType;
+  launch_stage: LaunchStage;
 
   /**
    * The sampling period of metric data points. For metrics which are written
@@ -861,15 +806,15 @@ export const MetricDescriptor = {
 
   fromSDK(object: MetricDescriptorSDKType): MetricDescriptor {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      type: isSet(object.type) ? object.type : undefined,
+      name: object?.name,
+      type: object?.type,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
       metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : 0,
       valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : 0,
-      unit: isSet(object.unit) ? object.unit : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      displayName: isSet(object.display_name) ? object.display_name : undefined,
-      metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromSDK(object.metadata) : undefined,
+      unit: object?.unit,
+      description: object?.description,
+      displayName: object?.display_name,
+      metadata: object.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromSDK(object.metadata) : undefined,
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
       monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
     };
@@ -877,8 +822,8 @@ export const MetricDescriptor = {
 
   toSDK(message: MetricDescriptor): MetricDescriptorSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
+    obj.name = message.name;
+    obj.type = message.type;
 
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
@@ -888,9 +833,9 @@ export const MetricDescriptor = {
 
     message.metricKind !== undefined && (obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind));
     message.valueType !== undefined && (obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType));
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.description !== undefined && (obj.description = message.description);
-    message.displayName !== undefined && (obj.display_name = message.displayName);
+    obj.unit = message.unit;
+    obj.description = message.description;
+    obj.display_name = message.displayName;
     message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toSDK(message.metadata) : undefined);
     message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
 
@@ -987,8 +932,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromSDK(object: MetricDescriptor_MetricDescriptorMetadataSDKType): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
-      samplePeriod: isSet(object.sample_period) ? Duration.fromSDK(object.sample_period) : undefined,
-      ingestDelay: isSet(object.ingest_delay) ? Duration.fromSDK(object.ingest_delay) : undefined
+      samplePeriod: object.sample_period ? Duration.fromSDK(object.sample_period) : undefined,
+      ingestDelay: object.ingest_delay ? Duration.fromSDK(object.ingest_delay) : undefined
     };
   },
 
@@ -1071,15 +1016,15 @@ export const Metric_LabelsEntry = {
 
   fromSDK(object: Metric_LabelsEntrySDKType): Metric_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Metric_LabelsEntry): Metric_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -1181,7 +1126,7 @@ export const Metric = {
 
   fromSDK(object: MetricSDKType): Metric {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1193,7 +1138,7 @@ export const Metric = {
 
   toSDK(message: Metric): MetricSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
     obj.labels = {};
 
     if (message.labels) {

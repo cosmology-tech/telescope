@@ -1,7 +1,7 @@
 import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, VotingParams, VotingParamsSDKType, DepositParams, DepositParamsSDKType, TallyParams, TallyParamsSDKType, Deposit, DepositSDKType, TallyResult, TallyResultSDKType, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1";
 
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
@@ -44,7 +44,7 @@ export interface QueryProposalsRequest {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
   /** proposal_status defines the status of the proposals. */
-  proposal_status: ProposalStatusSDKType;
+  proposal_status: ProposalStatus;
 
   /** voter defines the voter address for the proposals. */
   voter: string;
@@ -331,13 +331,13 @@ export const QueryProposalRequest = {
 
   fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -400,7 +400,7 @@ export const QueryProposalResponse = {
 
   fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
     return {
-      proposal: isSet(object.proposal) ? Proposal.fromSDK(object.proposal) : undefined
+      proposal: object.proposal ? Proposal.fromSDK(object.proposal) : undefined
     };
   },
 
@@ -506,17 +506,17 @@ export const QueryProposalsRequest = {
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
     return {
       proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
-      voter: isSet(object.voter) ? object.voter : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      voter: object?.voter,
+      depositor: object?.depositor,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryProposalsRequest): QueryProposalsRequestSDKType {
     const obj: any = {};
     message.proposalStatus !== undefined && (obj.proposal_status = proposalStatusToJSON(message.proposalStatus));
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.voter = message.voter;
+    obj.depositor = message.depositor;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -599,7 +599,7 @@ export const QueryProposalsResponse = {
   fromSDK(object: QueryProposalsResponseSDKType): QueryProposalsResponse {
     return {
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -687,15 +687,15 @@ export const QueryVoteRequest = {
 
   fromSDK(object: QueryVoteRequestSDKType): QueryVoteRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      voter: isSet(object.voter) ? object.voter : undefined
+      proposalId: object?.proposal_id,
+      voter: object?.voter
     };
   },
 
   toSDK(message: QueryVoteRequest): QueryVoteRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.voter !== undefined && (obj.voter = message.voter);
+    obj.proposal_id = message.proposalId;
+    obj.voter = message.voter;
     return obj;
   }
 
@@ -758,7 +758,7 @@ export const QueryVoteResponse = {
 
   fromSDK(object: QueryVoteResponseSDKType): QueryVoteResponse {
     return {
-      vote: isSet(object.vote) ? Vote.fromSDK(object.vote) : undefined
+      vote: object.vote ? Vote.fromSDK(object.vote) : undefined
     };
   },
 
@@ -839,14 +839,14 @@ export const QueryVotesRequest = {
 
   fromSDK(object: QueryVotesRequestSDKType): QueryVotesRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      proposalId: object?.proposal_id,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryVotesRequest): QueryVotesRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -929,7 +929,7 @@ export const QueryVotesResponse = {
   fromSDK(object: QueryVotesResponseSDKType): QueryVotesResponse {
     return {
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1005,13 +1005,13 @@ export const QueryParamsRequest = {
 
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
     return {
-      paramsType: isSet(object.params_type) ? object.params_type : undefined
+      paramsType: object?.params_type
     };
   },
 
   toSDK(message: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
-    message.paramsType !== undefined && (obj.params_type = message.paramsType);
+    obj.params_type = message.paramsType;
     return obj;
   }
 
@@ -1098,9 +1098,9 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      votingParams: isSet(object.voting_params) ? VotingParams.fromSDK(object.voting_params) : undefined,
-      depositParams: isSet(object.deposit_params) ? DepositParams.fromSDK(object.deposit_params) : undefined,
-      tallyParams: isSet(object.tally_params) ? TallyParams.fromSDK(object.tally_params) : undefined
+      votingParams: object.voting_params ? VotingParams.fromSDK(object.voting_params) : undefined,
+      depositParams: object.deposit_params ? DepositParams.fromSDK(object.deposit_params) : undefined,
+      tallyParams: object.tally_params ? TallyParams.fromSDK(object.tally_params) : undefined
     };
   },
 
@@ -1183,15 +1183,15 @@ export const QueryDepositRequest = {
 
   fromSDK(object: QueryDepositRequestSDKType): QueryDepositRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : undefined
+      proposalId: object?.proposal_id,
+      depositor: object?.depositor
     };
   },
 
   toSDK(message: QueryDepositRequest): QueryDepositRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
-    message.depositor !== undefined && (obj.depositor = message.depositor);
+    obj.proposal_id = message.proposalId;
+    obj.depositor = message.depositor;
     return obj;
   }
 
@@ -1254,7 +1254,7 @@ export const QueryDepositResponse = {
 
   fromSDK(object: QueryDepositResponseSDKType): QueryDepositResponse {
     return {
-      deposit: isSet(object.deposit) ? Deposit.fromSDK(object.deposit) : undefined
+      deposit: object.deposit ? Deposit.fromSDK(object.deposit) : undefined
     };
   },
 
@@ -1335,14 +1335,14 @@ export const QueryDepositsRequest = {
 
   fromSDK(object: QueryDepositsRequestSDKType): QueryDepositsRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      proposalId: object?.proposal_id,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryDepositsRequest): QueryDepositsRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -1425,7 +1425,7 @@ export const QueryDepositsResponse = {
   fromSDK(object: QueryDepositsResponseSDKType): QueryDepositsResponse {
     return {
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1501,13 +1501,13 @@ export const QueryTallyResultRequest = {
 
   fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+      proposalId: object?.proposal_id
     };
   },
 
   toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    obj.proposal_id = message.proposalId;
     return obj;
   }
 
@@ -1570,7 +1570,7 @@ export const QueryTallyResultResponse = {
 
   fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
     return {
-      tally: isSet(object.tally) ? TallyResult.fromSDK(object.tally) : undefined
+      tally: object.tally ? TallyResult.fromSDK(object.tally) : undefined
     };
   },
 

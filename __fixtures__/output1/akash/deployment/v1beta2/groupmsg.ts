@@ -108,7 +108,7 @@ export const MsgCloseGroup = {
 
   fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -229,7 +229,7 @@ export const MsgPauseGroup = {
 
   fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 
@@ -350,7 +350,7 @@ export const MsgStartGroup = {
 
   fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
     return {
-      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
     };
   },
 

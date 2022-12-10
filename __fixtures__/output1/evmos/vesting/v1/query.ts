@@ -102,13 +102,13 @@ export const QueryBalancesRequest = {
 
   fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 

@@ -88,15 +88,15 @@ exports[`osmosis/lockup/tx duration 2`] = `
 
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
 
     if (message.coins) {
@@ -255,15 +255,15 @@ exports[`osmosis/lockup/tx string 2`] = `
 
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? object.owner : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
     const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
+    obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
 
     if (message.coins) {

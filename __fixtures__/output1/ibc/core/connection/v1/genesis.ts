@@ -1,6 +1,6 @@
 import { IdentifiedConnection, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsSDKType, Params, ParamsSDKType } from "./connection";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
@@ -129,8 +129,8 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDK(e)) : [],
       clientConnectionPaths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromSDK(e)) : [],
-      nextConnectionSequence: isSet(object.next_connection_sequence) ? object.next_connection_sequence : undefined,
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      nextConnectionSequence: object?.next_connection_sequence,
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -149,7 +149,7 @@ export const GenesisState = {
       obj.client_connection_paths = [];
     }
 
-    message.nextConnectionSequence !== undefined && (obj.next_connection_sequence = message.nextConnectionSequence);
+    obj.next_connection_sequence = message.nextConnectionSequence;
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
   }

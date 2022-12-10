@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /**

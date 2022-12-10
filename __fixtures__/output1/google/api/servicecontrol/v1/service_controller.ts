@@ -30,32 +30,7 @@ export enum CheckResponse_ConsumerInfo_ConsumerType {
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
-
-/**
- * The type of the consumer as defined in
- * [Google Resource Manager](https://cloud.google.com/resource-manager/).
- */
-export enum CheckResponse_ConsumerInfo_ConsumerTypeSDKType {
-  /** CONSUMER_TYPE_UNSPECIFIED - This is never used. */
-  CONSUMER_TYPE_UNSPECIFIED = 0,
-
-  /** PROJECT - The consumer is a Google Cloud Project. */
-  PROJECT = 1,
-
-  /** FOLDER - The consumer is a Google Cloud Folder. */
-  FOLDER = 2,
-
-  /** ORGANIZATION - The consumer is a Google Cloud Organization. */
-  ORGANIZATION = 3,
-
-  /**
-   * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
-   * producer to offer their users the ability to manage service control
-   * functionalities at a finer level of granularity than the PROJECT.
-   */
-  SERVICE_SPECIFIC = 4,
-  UNRECOGNIZED = -1,
-}
+export const CheckResponse_ConsumerInfo_ConsumerTypeSDKType = CheckResponse_ConsumerInfo_ConsumerType;
 export function checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object: any): CheckResponse_ConsumerInfo_ConsumerType {
   switch (object) {
     case 0:
@@ -279,7 +254,7 @@ export interface CheckResponse_ConsumerInfoSDKType {
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
    */
-  type: CheckResponse_ConsumerInfo_ConsumerTypeSDKType;
+  type: CheckResponse_ConsumerInfo_ConsumerType;
 
   /**
    * The consumer identity number, can be Google cloud project number, folder
@@ -536,17 +511,17 @@ export const CheckRequest = {
 
   fromSDK(object: CheckRequestSDKType): CheckRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
-      operation: isSet(object.operation) ? Operation.fromSDK(object.operation) : undefined,
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+      serviceName: object?.service_name,
+      operation: object.operation ? Operation.fromSDK(object.operation) : undefined,
+      serviceConfigId: object?.service_config_id
     };
   },
 
   toSDK(message: CheckRequest): CheckRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
     message.operation !== undefined && (obj.operation = message.operation ? Operation.toSDK(message.operation) : undefined);
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   }
 
@@ -663,17 +638,17 @@ export const CheckResponse = {
 
   fromSDK(object: CheckResponseSDKType): CheckResponse {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      operationId: object?.operation_id,
       checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDK(e)) : [],
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
-      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : undefined,
-      checkInfo: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
+      serviceConfigId: object?.service_config_id,
+      serviceRolloutId: object?.service_rollout_id,
+      checkInfo: object.check_info ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
     };
   },
 
   toSDK(message: CheckResponse): CheckResponseSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    obj.operation_id = message.operationId;
 
     if (message.checkErrors) {
       obj.check_errors = message.checkErrors.map(e => e ? CheckError.toSDK(e) : undefined);
@@ -681,8 +656,8 @@ export const CheckResponse = {
       obj.check_errors = [];
     }
 
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    obj.service_config_id = message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId;
     message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toSDK(message.checkInfo) : undefined);
     return obj;
   }
@@ -765,7 +740,7 @@ export const CheckResponse_CheckInfo = {
   fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
     return {
       unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
-      consumerInfo: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
+      consumerInfo: object.consumer_info ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
     };
   },
 
@@ -865,17 +840,17 @@ export const CheckResponse_ConsumerInfo = {
 
   fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.project_number) ? object.project_number : undefined,
+      projectNumber: object?.project_number,
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumer_number) ? object.consumer_number : undefined
+      consumerNumber: object?.consumer_number
     };
   },
 
   toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
     const obj: any = {};
-    message.projectNumber !== undefined && (obj.project_number = message.projectNumber);
+    obj.project_number = message.projectNumber;
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumer_number = message.consumerNumber);
+    obj.consumer_number = message.consumerNumber;
     return obj;
   }
 
@@ -968,15 +943,15 @@ export const ReportRequest = {
 
   fromSDK(object: ReportRequestSDKType): ReportRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      serviceName: object?.service_name,
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDK(e)) : [],
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+      serviceConfigId: object?.service_config_id
     };
   },
 
   toSDK(message: ReportRequest): ReportRequestSDKType {
     const obj: any = {};
-    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    obj.service_name = message.serviceName;
 
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toSDK(e) : undefined);
@@ -984,7 +959,7 @@ export const ReportRequest = {
       obj.operations = [];
     }
 
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   }
 
@@ -1078,8 +1053,8 @@ export const ReportResponse = {
   fromSDK(object: ReportResponseSDKType): ReportResponse {
     return {
       reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDK(e)) : [],
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
-      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : undefined
+      serviceConfigId: object?.service_config_id,
+      serviceRolloutId: object?.service_rollout_id
     };
   },
 
@@ -1092,8 +1067,8 @@ export const ReportResponse = {
       obj.report_errors = [];
     }
 
-    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    obj.service_config_id = message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId;
     return obj;
   }
 
@@ -1168,14 +1143,14 @@ export const ReportResponse_ReportError = {
 
   fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
-      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+      operationId: object?.operation_id,
+      status: object.status ? Status.fromSDK(object.status) : undefined
     };
   },
 
   toSDK(message: ReportResponse_ReportError): ReportResponse_ReportErrorSDKType {
     const obj: any = {};
-    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    obj.operation_id = message.operationId;
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
     return obj;
   }

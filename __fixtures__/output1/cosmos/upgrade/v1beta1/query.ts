@@ -312,7 +312,7 @@ export const QueryCurrentPlanResponse = {
 
   fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
     return {
-      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined
     };
   },
 
@@ -381,13 +381,13 @@ export const QueryAppliedPlanRequest = {
 
   fromSDK(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -450,13 +450,13 @@ export const QueryAppliedPlanResponse = {
 
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? object.height : undefined
+      height: object?.height
     };
   },
 
   toSDK(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    obj.height = message.height;
     return obj;
   }
 
@@ -519,13 +519,13 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.last_height) ? object.last_height : undefined
+      lastHeight: object?.last_height
     };
   },
 
   toSDK(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
     const obj: any = {};
-    message.lastHeight !== undefined && (obj.last_height = message.lastHeight);
+    obj.last_height = message.lastHeight;
     return obj;
   }
 
@@ -588,13 +588,13 @@ export const QueryUpgradedConsensusStateResponse = {
 
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : undefined
+      upgradedConsensusState: object?.upgraded_consensus_state
     };
   },
 
   toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
     const obj: any = {};
-    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState);
+    obj.upgraded_consensus_state = message.upgradedConsensusState;
     return obj;
   }
 
@@ -657,13 +657,13 @@ export const QueryModuleVersionsRequest = {
 
   fromSDK(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
     return {
-      moduleName: isSet(object.module_name) ? object.module_name : undefined
+      moduleName: object?.module_name
     };
   },
 
   toSDK(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestSDKType {
     const obj: any = {};
-    message.moduleName !== undefined && (obj.module_name = message.moduleName);
+    obj.module_name = message.moduleName;
     return obj;
   }
 
@@ -859,13 +859,13 @@ export const QueryAuthorityResponse = {
 
   fromSDK(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
     return {
-      address: isSet(object.address) ? object.address : undefined
+      address: object?.address
     };
   },
 
   toSDK(message: QueryAuthorityResponse): QueryAuthorityResponseSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     return obj;
   }
 

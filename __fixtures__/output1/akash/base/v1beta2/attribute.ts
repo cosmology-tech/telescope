@@ -129,15 +129,15 @@ export const Attribute = {
 
   fromSDK(object: AttributeSDKType): Attribute {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Attribute): AttributeSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -323,7 +323,7 @@ export const PlacementRequirements = {
 
   fromSDK(object: PlacementRequirementsSDKType): PlacementRequirements {
     return {
-      signedBy: isSet(object.signed_by) ? SignedBy.fromSDK(object.signed_by) : undefined,
+      signedBy: object.signed_by ? SignedBy.fromSDK(object.signed_by) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },

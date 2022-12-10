@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { ExponentialCalculation, InflationDistribution } from "./inflation";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";
 
 /** GenesisState defines the inflation module's genesis state. */

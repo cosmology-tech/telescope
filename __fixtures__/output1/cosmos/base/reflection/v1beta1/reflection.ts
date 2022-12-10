@@ -244,13 +244,13 @@ export const ListImplementationsRequest = {
 
   fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
     return {
-      interfaceName: isSet(object.interface_name) ? object.interface_name : undefined
+      interfaceName: object?.interface_name
     };
   },
 
   toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
     const obj: any = {};
-    message.interfaceName !== undefined && (obj.interface_name = message.interfaceName);
+    obj.interface_name = message.interfaceName;
     return obj;
   }
 

@@ -22,26 +22,7 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   CHECK = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Enum to determine if service usage should be checked when disabling a
- * service.
- */
-export enum DisableServiceRequest_CheckIfServiceHasUsageSDKType {
-  /** CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED - When unset, the default behavior is used, which is SKIP. */
-  CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED = 0,
-
-  /** SKIP - If set, skip checking service usage when disabling a service. */
-  SKIP = 1,
-
-  /**
-   * CHECK - If set, service usage is checked when disabling the service. If a
-   * service, or its dependents, has usage in the last 30 days, the request
-   * returns a FAILED_PRECONDITION error.
-   */
-  CHECK = 2,
-  UNRECOGNIZED = -1,
-}
+export const DisableServiceRequest_CheckIfServiceHasUsageSDKType = DisableServiceRequest_CheckIfServiceHasUsage;
 export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
     case 0:
@@ -184,7 +165,7 @@ export interface DisableServiceRequestSDKType {
   disable_dependent_services: boolean;
 
   /** Defines the behavior for checking service usage when disabling a service. */
-  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsageSDKType;
+  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 
 /**
@@ -534,13 +515,13 @@ export const EnableServiceRequest = {
 
   fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -603,7 +584,7 @@ export const EnableServiceResponse = {
 
   fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
     return {
-      service: isSet(object.service) ? Service.fromSDK(object.service) : undefined
+      service: object.service ? Service.fromSDK(object.service) : undefined
     };
   },
 
@@ -696,16 +677,16 @@ export const DisableServiceRequest = {
 
   fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      disableDependentServices: isSet(object.disable_dependent_services) ? object.disable_dependent_services : undefined,
+      name: object?.name,
+      disableDependentServices: object?.disable_dependent_services,
       checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
     };
   },
 
   toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.disableDependentServices !== undefined && (obj.disable_dependent_services = message.disableDependentServices);
+    obj.name = message.name;
+    obj.disable_dependent_services = message.disableDependentServices;
     message.checkIfServiceHasUsage !== undefined && (obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
     return obj;
   }
@@ -769,7 +750,7 @@ export const DisableServiceResponse = {
 
   fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {
     return {
-      service: isSet(object.service) ? Service.fromSDK(object.service) : undefined
+      service: object.service ? Service.fromSDK(object.service) : undefined
     };
   },
 
@@ -838,13 +819,13 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : undefined
+      name: object?.name
     };
   },
 
   toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     return obj;
   }
 
@@ -943,19 +924,19 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
-      pageSize: isSet(object.page_size) ? object.page_size : undefined,
-      pageToken: isSet(object.page_token) ? object.page_token : undefined,
-      filter: isSet(object.filter) ? object.filter : undefined
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      filter: object?.filter
     };
   },
 
   toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.page_size = message.pageSize);
-    message.pageToken !== undefined && (obj.page_token = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.filter = message.filter;
     return obj;
   }
 
@@ -1037,7 +1018,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+      nextPageToken: object?.next_page_token
     };
   },
 
@@ -1050,7 +1031,7 @@ export const ListServicesResponse = {
       obj.services = [];
     }
 
-    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   }
 
@@ -1131,14 +1112,14 @@ export const BatchEnableServicesRequest = {
 
   fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
 
   toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
 
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
@@ -1325,15 +1306,15 @@ export const BatchEnableServicesResponse_EnableFailure = {
 
   fromSDK(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
     return {
-      serviceId: isSet(object.service_id) ? object.service_id : undefined,
-      errorMessage: isSet(object.error_message) ? object.error_message : undefined
+      serviceId: object?.service_id,
+      errorMessage: object?.error_message
     };
   },
 
   toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
     const obj: any = {};
-    message.serviceId !== undefined && (obj.service_id = message.serviceId);
-    message.errorMessage !== undefined && (obj.error_message = message.errorMessage);
+    obj.service_id = message.serviceId;
+    obj.error_message = message.errorMessage;
     return obj;
   }
 
@@ -1414,14 +1395,14 @@ export const BatchGetServicesRequest = {
 
   fromSDK(object: BatchGetServicesRequestSDKType): BatchGetServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : undefined,
+      parent: object?.parent,
       names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
     };
   },
 
   toSDK(message: BatchGetServicesRequest): BatchGetServicesRequestSDKType {
     const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
+    obj.parent = message.parent;
 
     if (message.names) {
       obj.names = message.names.map(e => e);

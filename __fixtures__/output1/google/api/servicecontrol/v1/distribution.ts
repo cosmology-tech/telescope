@@ -1,6 +1,6 @@
 import { Distribution_Exemplar } from "../../distribution";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
@@ -463,26 +463,26 @@ export const Distribution = {
 
   fromSDK(object: DistributionSDKType): Distribution {
     return {
-      count: isSet(object.count) ? object.count : undefined,
-      mean: isSet(object.mean) ? object.mean : undefined,
-      minimum: isSet(object.minimum) ? object.minimum : undefined,
-      maximum: isSet(object.maximum) ? object.maximum : undefined,
-      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
+      count: object?.count,
+      mean: object?.mean,
+      minimum: object?.minimum,
+      maximum: object?.maximum,
+      sumOfSquaredDeviation: object?.sum_of_squared_deviation,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
-      linearBuckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
-      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
-      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDK(object.explicit_buckets) : undefined,
+      linearBuckets: object.linear_buckets ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
+      exponentialBuckets: object.exponential_buckets ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
+      explicitBuckets: object.explicit_buckets ? Distribution_ExplicitBuckets.fromSDK(object.explicit_buckets) : undefined,
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
     };
   },
 
   toSDK(message: Distribution): DistributionSDKType {
     const obj: any = {};
-    message.count !== undefined && (obj.count = message.count);
-    message.mean !== undefined && (obj.mean = message.mean);
-    message.minimum !== undefined && (obj.minimum = message.minimum);
-    message.maximum !== undefined && (obj.maximum = message.maximum);
-    message.sumOfSquaredDeviation !== undefined && (obj.sum_of_squared_deviation = message.sumOfSquaredDeviation);
+    obj.count = message.count;
+    obj.mean = message.mean;
+    obj.minimum = message.minimum;
+    obj.maximum = message.maximum;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
 
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e);
@@ -586,17 +586,17 @@ export const Distribution_LinearBuckets = {
 
   fromSDK(object: Distribution_LinearBucketsSDKType): Distribution_LinearBuckets {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      width: isSet(object.width) ? object.width : undefined,
-      offset: isSet(object.offset) ? object.offset : undefined
+      numFiniteBuckets: object?.num_finite_buckets,
+      width: object?.width,
+      offset: object?.offset
     };
   },
 
   toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
     const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.width !== undefined && (obj.width = message.width);
-    message.offset !== undefined && (obj.offset = message.offset);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
     return obj;
   }
 
@@ -683,17 +683,17 @@ export const Distribution_ExponentialBuckets = {
 
   fromSDK(object: Distribution_ExponentialBucketsSDKType): Distribution_ExponentialBuckets {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
-      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
-      scale: isSet(object.scale) ? object.scale : undefined
+      numFiniteBuckets: object?.num_finite_buckets,
+      growthFactor: object?.growth_factor,
+      scale: object?.scale
     };
   },
 
   toSDK(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsSDKType {
     const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
-    message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
-    message.scale !== undefined && (obj.scale = message.scale);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
     return obj;
   }
 

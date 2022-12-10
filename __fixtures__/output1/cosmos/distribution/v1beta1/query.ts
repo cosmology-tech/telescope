@@ -448,7 +448,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -517,13 +517,13 @@ export const QueryValidatorOutstandingRewardsRequest = {
 
   fromSDK(object: QueryValidatorOutstandingRewardsRequestSDKType): QueryValidatorOutstandingRewardsRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryValidatorOutstandingRewardsRequest): QueryValidatorOutstandingRewardsRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -586,7 +586,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
 
   fromSDK(object: QueryValidatorOutstandingRewardsResponseSDKType): QueryValidatorOutstandingRewardsResponse {
     return {
-      rewards: isSet(object.rewards) ? ValidatorOutstandingRewards.fromSDK(object.rewards) : undefined
+      rewards: object.rewards ? ValidatorOutstandingRewards.fromSDK(object.rewards) : undefined
     };
   },
 
@@ -655,13 +655,13 @@ export const QueryValidatorCommissionRequest = {
 
   fromSDK(object: QueryValidatorCommissionRequestSDKType): QueryValidatorCommissionRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryValidatorCommissionRequest): QueryValidatorCommissionRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -724,7 +724,7 @@ export const QueryValidatorCommissionResponse = {
 
   fromSDK(object: QueryValidatorCommissionResponseSDKType): QueryValidatorCommissionResponse {
     return {
-      commission: isSet(object.commission) ? ValidatorAccumulatedCommission.fromSDK(object.commission) : undefined
+      commission: object.commission ? ValidatorAccumulatedCommission.fromSDK(object.commission) : undefined
     };
   },
 
@@ -829,18 +829,18 @@ export const QueryValidatorSlashesRequest = {
 
   fromSDK(object: QueryValidatorSlashesRequestSDKType): QueryValidatorSlashesRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
-      startingHeight: isSet(object.starting_height) ? object.starting_height : undefined,
-      endingHeight: isSet(object.ending_height) ? object.ending_height : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      validatorAddress: object?.validator_address,
+      startingHeight: object?.starting_height,
+      endingHeight: object?.ending_height,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryValidatorSlashesRequest): QueryValidatorSlashesRequestSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.starting_height = message.startingHeight);
-    message.endingHeight !== undefined && (obj.ending_height = message.endingHeight);
+    obj.validator_address = message.validatorAddress;
+    obj.starting_height = message.startingHeight;
+    obj.ending_height = message.endingHeight;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -923,7 +923,7 @@ export const QueryValidatorSlashesResponse = {
   fromSDK(object: QueryValidatorSlashesResponseSDKType): QueryValidatorSlashesResponse {
     return {
       slashes: Array.isArray(object?.slashes) ? object.slashes.map((e: any) => ValidatorSlashEvent.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1011,15 +1011,15 @@ export const QueryDelegationRewardsRequest = {
 
   fromSDK(object: QueryDelegationRewardsRequestSDKType): QueryDelegationRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address
     };
   },
 
   toSDK(message: QueryDelegationRewardsRequest): QueryDelegationRewardsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
     return obj;
   }
 
@@ -1163,13 +1163,13 @@ export const QueryDelegationTotalRewardsRequest = {
 
   fromSDK(object: QueryDelegationTotalRewardsRequestSDKType): QueryDelegationTotalRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegationTotalRewardsRequest): QueryDelegationTotalRewardsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1337,13 +1337,13 @@ export const QueryDelegatorValidatorsRequest = {
 
   fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1487,13 +1487,13 @@ export const QueryDelegatorWithdrawAddressRequest = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressRequestSDKType): QueryDelegatorWithdrawAddressRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+      delegatorAddress: object?.delegator_address
     };
   },
 
   toSDK(message: QueryDelegatorWithdrawAddressRequest): QueryDelegatorWithdrawAddressRequestSDKType {
     const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    obj.delegator_address = message.delegatorAddress;
     return obj;
   }
 
@@ -1556,13 +1556,13 @@ export const QueryDelegatorWithdrawAddressResponse = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressResponseSDKType): QueryDelegatorWithdrawAddressResponse {
     return {
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+      withdrawAddress: object?.withdraw_address
     };
   },
 
   toSDK(message: QueryDelegatorWithdrawAddressResponse): QueryDelegatorWithdrawAddressResponseSDKType {
     const obj: any = {};
-    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   }
 

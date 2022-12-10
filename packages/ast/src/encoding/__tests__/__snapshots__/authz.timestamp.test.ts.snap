@@ -80,8 +80,8 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
 
   fromSDK(object: GrantSDKType): Grant {
     return {
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 
@@ -223,8 +223,8 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
 
   fromSDK(object: GrantSDKType): Grant {
     return {
-      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+      authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
     };
   },
 

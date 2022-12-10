@@ -1,8 +1,8 @@
 //@ts-nocheck
 /* eslint-disable */
 import { CapabilityOwners } from "./capability";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.capability.v1beta1";
 
 /** GenesisOwners defines the capability owners with their corresponding index. */

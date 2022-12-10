@@ -1,5 +1,7 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
+import { ProtoParseContext } from '../../context';
+import { ProtoType } from '@osmonauts/types';
 export declare const fromAminoJSON: {
     scalar(args: FromAminoJSONMethod): t.ObjectProperty;
     string(args: FromAminoJSONMethod): t.ObjectProperty;
@@ -22,7 +24,6 @@ export declare const fromAminoJSON: {
     enum(args: FromAminoJSONMethod): t.ObjectProperty;
     bytes(args: FromAminoJSONMethod): t.ObjectProperty;
     duration(args: FromAminoJSONMethod): t.ObjectProperty;
-    durationString(args: FromAminoJSONMethod): t.ObjectProperty;
     timestamp(args: FromAminoJSONMethod): t.ObjectProperty;
     keyHash(args: FromAminoJSONMethod): t.ObjectProperty;
     array(args: FromAminoJSONMethod, expr: t.Expression): t.ObjectProperty;
@@ -48,4 +49,7 @@ export declare const arrayTypes: {
     float(): t.Identifier;
     enum(args: FromAminoJSONMethod): t.CallExpression;
     type(args: FromAminoJSONMethod): t.CallExpression;
+};
+export declare const fromAminoMessages: {
+    duration(context: ProtoParseContext, name: string, proto: ProtoType): (t.ReturnStatement | t.VariableDeclaration)[];
 };

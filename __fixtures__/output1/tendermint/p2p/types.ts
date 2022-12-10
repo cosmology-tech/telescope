@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: Long;
@@ -144,17 +144,17 @@ export const ProtocolVersion = {
 
   fromSDK(object: ProtocolVersionSDKType): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? object.p2p : undefined,
-      block: isSet(object.block) ? object.block : undefined,
-      app: isSet(object.app) ? object.app : undefined
+      p2p: object?.p2p,
+      block: object?.block,
+      app: object?.app
     };
   },
 
   toSDK(message: ProtocolVersion): ProtocolVersionSDKType {
     const obj: any = {};
-    message.p2p !== undefined && (obj.p2p = message.p2p);
-    message.block !== undefined && (obj.block = message.block);
-    message.app !== undefined && (obj.app = message.app);
+    obj.p2p = message.p2p;
+    obj.block = message.block;
+    obj.app = message.app;
     return obj;
   }
 
@@ -301,26 +301,26 @@ export const NodeInfo = {
 
   fromSDK(object: NodeInfoSDKType): NodeInfo {
     return {
-      protocolVersion: isSet(object.protocol_version) ? ProtocolVersion.fromSDK(object.protocol_version) : undefined,
-      nodeId: isSet(object.node_id) ? object.node_id : undefined,
-      listenAddr: isSet(object.listen_addr) ? object.listen_addr : undefined,
-      network: isSet(object.network) ? object.network : undefined,
-      version: isSet(object.version) ? object.version : undefined,
-      channels: isSet(object.channels) ? object.channels : undefined,
-      moniker: isSet(object.moniker) ? object.moniker : undefined,
-      other: isSet(object.other) ? NodeInfoOther.fromSDK(object.other) : undefined
+      protocolVersion: object.protocol_version ? ProtocolVersion.fromSDK(object.protocol_version) : undefined,
+      nodeId: object?.node_id,
+      listenAddr: object?.listen_addr,
+      network: object?.network,
+      version: object?.version,
+      channels: object?.channels,
+      moniker: object?.moniker,
+      other: object.other ? NodeInfoOther.fromSDK(object.other) : undefined
     };
   },
 
   toSDK(message: NodeInfo): NodeInfoSDKType {
     const obj: any = {};
     message.protocolVersion !== undefined && (obj.protocol_version = message.protocolVersion ? ProtocolVersion.toSDK(message.protocolVersion) : undefined);
-    message.nodeId !== undefined && (obj.node_id = message.nodeId);
-    message.listenAddr !== undefined && (obj.listen_addr = message.listenAddr);
-    message.network !== undefined && (obj.network = message.network);
-    message.version !== undefined && (obj.version = message.version);
-    message.channels !== undefined && (obj.channels = message.channels);
-    message.moniker !== undefined && (obj.moniker = message.moniker);
+    obj.node_id = message.nodeId;
+    obj.listen_addr = message.listenAddr;
+    obj.network = message.network;
+    obj.version = message.version;
+    obj.channels = message.channels;
+    obj.moniker = message.moniker;
     message.other !== undefined && (obj.other = message.other ? NodeInfoOther.toSDK(message.other) : undefined);
     return obj;
   }
@@ -396,15 +396,15 @@ export const NodeInfoOther = {
 
   fromSDK(object: NodeInfoOtherSDKType): NodeInfoOther {
     return {
-      txIndex: isSet(object.tx_index) ? object.tx_index : undefined,
-      rpcAddress: isSet(object.rpc_address) ? object.rpc_address : undefined
+      txIndex: object?.tx_index,
+      rpcAddress: object?.rpc_address
     };
   },
 
   toSDK(message: NodeInfoOther): NodeInfoOtherSDKType {
     const obj: any = {};
-    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
-    message.rpcAddress !== undefined && (obj.rpc_address = message.rpcAddress);
+    obj.tx_index = message.txIndex;
+    obj.rpc_address = message.rpcAddress;
     return obj;
   }
 
@@ -497,15 +497,15 @@ export const PeerInfo = {
 
   fromSDK(object: PeerInfoSDKType): PeerInfo {
     return {
-      id: isSet(object.id) ? object.id : undefined,
+      id: object?.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDK(e)) : [],
-      lastConnected: isSet(object.last_connected) ? Timestamp.fromSDK(object.last_connected) : undefined
+      lastConnected: object.last_connected ? Timestamp.fromSDK(object.last_connected) : undefined
     };
   },
 
   toSDK(message: PeerInfo): PeerInfoSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    obj.id = message.id;
 
     if (message.addressInfo) {
       obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toSDK(e) : undefined);
@@ -612,19 +612,19 @@ export const PeerAddressInfo = {
 
   fromSDK(object: PeerAddressInfoSDKType): PeerAddressInfo {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      lastDialSuccess: isSet(object.last_dial_success) ? Timestamp.fromSDK(object.last_dial_success) : undefined,
-      lastDialFailure: isSet(object.last_dial_failure) ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
-      dialFailures: isSet(object.dial_failures) ? object.dial_failures : undefined
+      address: object?.address,
+      lastDialSuccess: object.last_dial_success ? Timestamp.fromSDK(object.last_dial_success) : undefined,
+      lastDialFailure: object.last_dial_failure ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
+      dialFailures: object?.dial_failures
     };
   },
 
   toSDK(message: PeerAddressInfo): PeerAddressInfoSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
+    obj.address = message.address;
     message.lastDialSuccess !== undefined && (obj.last_dial_success = message.lastDialSuccess ? Timestamp.toSDK(message.lastDialSuccess) : undefined);
     message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ? Timestamp.toSDK(message.lastDialFailure) : undefined);
-    message.dialFailures !== undefined && (obj.dial_failures = message.dialFailures);
+    obj.dial_failures = message.dialFailures;
     return obj;
   }
 

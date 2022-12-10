@@ -282,15 +282,15 @@ export const VisibilityRule = {
 
   fromSDK(object: VisibilityRuleSDKType): VisibilityRule {
     return {
-      selector: isSet(object.selector) ? object.selector : undefined,
-      restriction: isSet(object.restriction) ? object.restriction : undefined
+      selector: object?.selector,
+      restriction: object?.restriction
     };
   },
 
   toSDK(message: VisibilityRule): VisibilityRuleSDKType {
     const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.restriction !== undefined && (obj.restriction = message.restriction);
+    obj.selector = message.selector;
+    obj.restriction = message.restriction;
     return obj;
   }
 

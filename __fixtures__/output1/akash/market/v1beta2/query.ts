@@ -212,8 +212,8 @@ export const QueryOrdersRequest = {
 
   fromSDK(object: QueryOrdersRequestSDKType): QueryOrdersRequest {
     return {
-      filters: isSet(object.filters) ? OrderFilters.fromSDK(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      filters: object.filters ? OrderFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -302,7 +302,7 @@ export const QueryOrdersResponse = {
   fromSDK(object: QueryOrdersResponseSDKType): QueryOrdersResponse {
     return {
       orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -378,7 +378,7 @@ export const QueryOrderRequest = {
 
   fromSDK(object: QueryOrderRequestSDKType): QueryOrderRequest {
     return {
-      id: isSet(object.id) ? OrderID.fromSDK(object.id) : undefined
+      id: object.id ? OrderID.fromSDK(object.id) : undefined
     };
   },
 
@@ -447,7 +447,7 @@ export const QueryOrderResponse = {
 
   fromSDK(object: QueryOrderResponseSDKType): QueryOrderResponse {
     return {
-      order: isSet(object.order) ? Order.fromSDK(object.order) : undefined
+      order: object.order ? Order.fromSDK(object.order) : undefined
     };
   },
 
@@ -528,8 +528,8 @@ export const QueryBidsRequest = {
 
   fromSDK(object: QueryBidsRequestSDKType): QueryBidsRequest {
     return {
-      filters: isSet(object.filters) ? BidFilters.fromSDK(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      filters: object.filters ? BidFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -618,7 +618,7 @@ export const QueryBidsResponse = {
   fromSDK(object: QueryBidsResponseSDKType): QueryBidsResponse {
     return {
       bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -694,7 +694,7 @@ export const QueryBidRequest = {
 
   fromSDK(object: QueryBidRequestSDKType): QueryBidRequest {
     return {
-      id: isSet(object.id) ? BidID.fromSDK(object.id) : undefined
+      id: object.id ? BidID.fromSDK(object.id) : undefined
     };
   },
 
@@ -775,8 +775,8 @@ export const QueryBidResponse = {
 
   fromSDK(object: QueryBidResponseSDKType): QueryBidResponse {
     return {
-      bid: isSet(object.bid) ? Bid.fromSDK(object.bid) : undefined,
-      escrowAccount: isSet(object.escrow_account) ? Account.fromSDK(object.escrow_account) : undefined
+      bid: object.bid ? Bid.fromSDK(object.bid) : undefined,
+      escrowAccount: object.escrow_account ? Account.fromSDK(object.escrow_account) : undefined
     };
   },
 
@@ -858,8 +858,8 @@ export const QueryLeasesRequest = {
 
   fromSDK(object: QueryLeasesRequestSDKType): QueryLeasesRequest {
     return {
-      filters: isSet(object.filters) ? LeaseFilters.fromSDK(object.filters) : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      filters: object.filters ? LeaseFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -948,7 +948,7 @@ export const QueryLeasesResponse = {
   fromSDK(object: QueryLeasesResponseSDKType): QueryLeasesResponse {
     return {
       leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -1024,7 +1024,7 @@ export const QueryLeaseRequest = {
 
   fromSDK(object: QueryLeaseRequestSDKType): QueryLeaseRequest {
     return {
-      id: isSet(object.id) ? LeaseID.fromSDK(object.id) : undefined
+      id: object.id ? LeaseID.fromSDK(object.id) : undefined
     };
   },
 
@@ -1105,8 +1105,8 @@ export const QueryLeaseResponse = {
 
   fromSDK(object: QueryLeaseResponseSDKType): QueryLeaseResponse {
     return {
-      lease: isSet(object.lease) ? Lease.fromSDK(object.lease) : undefined,
-      escrowPayment: isSet(object.escrow_payment) ? FractionalPayment.fromSDK(object.escrow_payment) : undefined
+      lease: object.lease ? Lease.fromSDK(object.lease) : undefined,
+      escrowPayment: object.escrow_payment ? FractionalPayment.fromSDK(object.escrow_payment) : undefined
     };
   },
 

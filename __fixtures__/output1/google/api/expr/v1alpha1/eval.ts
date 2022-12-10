@@ -380,15 +380,15 @@ export const EvalState_Result = {
 
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? object.expr : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      expr: object?.expr,
+      value: object?.value
     };
   },
 
   toSDK(message: EvalState_Result): EvalState_ResultSDKType {
     const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr);
-    message.value !== undefined && (obj.value = message.value);
+    obj.expr = message.expr;
+    obj.value = message.value;
     return obj;
   }
 
@@ -475,9 +475,9 @@ export const ExprValue = {
 
   fromSDK(object: ExprValueSDKType): ExprValue {
     return {
-      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromSDK(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromSDK(object.unknown) : undefined
+      value: object.value ? Value.fromSDK(object.value) : undefined,
+      error: object.error ? ErrorSet.fromSDK(object.error) : undefined,
+      unknown: object.unknown ? UnknownSet.fromSDK(object.unknown) : undefined
     };
   },
 

@@ -338,19 +338,19 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      communityTax: isSet(object.community_tax) ? object.community_tax : undefined,
-      baseProposerReward: isSet(object.base_proposer_reward) ? object.base_proposer_reward : undefined,
-      bonusProposerReward: isSet(object.bonus_proposer_reward) ? object.bonus_proposer_reward : undefined,
-      withdrawAddrEnabled: isSet(object.withdraw_addr_enabled) ? object.withdraw_addr_enabled : undefined
+      communityTax: object?.community_tax,
+      baseProposerReward: object?.base_proposer_reward,
+      bonusProposerReward: object?.bonus_proposer_reward,
+      withdrawAddrEnabled: object?.withdraw_addr_enabled
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.communityTax !== undefined && (obj.community_tax = message.communityTax);
-    message.baseProposerReward !== undefined && (obj.base_proposer_reward = message.baseProposerReward);
-    message.bonusProposerReward !== undefined && (obj.bonus_proposer_reward = message.bonusProposerReward);
-    message.withdrawAddrEnabled !== undefined && (obj.withdraw_addr_enabled = message.withdrawAddrEnabled);
+    obj.community_tax = message.communityTax;
+    obj.base_proposer_reward = message.baseProposerReward;
+    obj.bonus_proposer_reward = message.bonusProposerReward;
+    obj.withdraw_addr_enabled = message.withdrawAddrEnabled;
     return obj;
   }
 
@@ -432,7 +432,7 @@ export const ValidatorHistoricalRewards = {
   fromSDK(object: ValidatorHistoricalRewardsSDKType): ValidatorHistoricalRewards {
     return {
       cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDK(e)) : [],
-      referenceCount: isSet(object.reference_count) ? object.reference_count : undefined
+      referenceCount: object?.reference_count
     };
   },
 
@@ -445,7 +445,7 @@ export const ValidatorHistoricalRewards = {
       obj.cumulative_reward_ratio = [];
     }
 
-    message.referenceCount !== undefined && (obj.reference_count = message.referenceCount);
+    obj.reference_count = message.referenceCount;
     return obj;
   }
 
@@ -527,7 +527,7 @@ export const ValidatorCurrentRewards = {
   fromSDK(object: ValidatorCurrentRewardsSDKType): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDK(e)) : [],
-      period: isSet(object.period) ? object.period : undefined
+      period: object?.period
     };
   },
 
@@ -540,7 +540,7 @@ export const ValidatorCurrentRewards = {
       obj.rewards = [];
     }
 
-    message.period !== undefined && (obj.period = message.period);
+    obj.period = message.period;
     return obj;
   }
 
@@ -777,15 +777,15 @@ export const ValidatorSlashEvent = {
 
   fromSDK(object: ValidatorSlashEventSDKType): ValidatorSlashEvent {
     return {
-      validatorPeriod: isSet(object.validator_period) ? object.validator_period : undefined,
-      fraction: isSet(object.fraction) ? object.fraction : undefined
+      validatorPeriod: object?.validator_period,
+      fraction: object?.fraction
     };
   },
 
   toSDK(message: ValidatorSlashEvent): ValidatorSlashEventSDKType {
     const obj: any = {};
-    message.validatorPeriod !== undefined && (obj.validator_period = message.validatorPeriod);
-    message.fraction !== undefined && (obj.fraction = message.fraction);
+    obj.validator_period = message.validatorPeriod;
+    obj.fraction = message.fraction;
     return obj;
   }
 
@@ -1052,18 +1052,18 @@ export const CommunityPoolSpendProposal = {
 
   fromSDK(object: CommunityPoolSpendProposalSDKType): CommunityPoolSpendProposal {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      recipient: isSet(object.recipient) ? object.recipient : undefined,
+      title: object?.title,
+      description: object?.description,
+      recipient: object?.recipient,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.recipient !== undefined && (obj.recipient = message.recipient);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.recipient = message.recipient;
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
@@ -1157,17 +1157,17 @@ export const DelegatorStartingInfo = {
 
   fromSDK(object: DelegatorStartingInfoSDKType): DelegatorStartingInfo {
     return {
-      previousPeriod: isSet(object.previous_period) ? object.previous_period : undefined,
-      stake: isSet(object.stake) ? object.stake : undefined,
-      height: isSet(object.height) ? object.height : undefined
+      previousPeriod: object?.previous_period,
+      stake: object?.stake,
+      height: object?.height
     };
   },
 
   toSDK(message: DelegatorStartingInfo): DelegatorStartingInfoSDKType {
     const obj: any = {};
-    message.previousPeriod !== undefined && (obj.previous_period = message.previousPeriod);
-    message.stake !== undefined && (obj.stake = message.stake);
-    message.height !== undefined && (obj.height = message.height);
+    obj.previous_period = message.previousPeriod;
+    obj.stake = message.stake;
+    obj.height = message.height;
     return obj;
   }
 
@@ -1248,14 +1248,14 @@ export const DelegationDelegatorReward = {
 
   fromSDK(object: DelegationDelegatorRewardSDKType): DelegationDelegatorReward {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorAddress: object?.validator_address,
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: DelegationDelegatorReward): DelegationDelegatorRewardSDKType {
     const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
 
     if (message.reward) {
       obj.reward = message.reward.map(e => e ? DecCoin.toSDK(e) : undefined);
@@ -1373,21 +1373,21 @@ export const CommunityPoolSpendProposalWithDeposit = {
 
   fromSDK(object: CommunityPoolSpendProposalWithDepositSDKType): CommunityPoolSpendProposalWithDeposit {
     return {
-      title: isSet(object.title) ? object.title : undefined,
-      description: isSet(object.description) ? object.description : undefined,
-      recipient: isSet(object.recipient) ? object.recipient : undefined,
-      amount: isSet(object.amount) ? object.amount : undefined,
-      deposit: isSet(object.deposit) ? object.deposit : undefined
+      title: object?.title,
+      description: object?.description,
+      recipient: object?.recipient,
+      amount: object?.amount,
+      deposit: object?.deposit
     };
   },
 
   toSDK(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositSDKType {
     const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.deposit !== undefined && (obj.deposit = message.deposit);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.recipient = message.recipient;
+    obj.amount = message.amount;
+    obj.deposit = message.deposit;
     return obj;
   }
 

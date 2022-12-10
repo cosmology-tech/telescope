@@ -264,10 +264,10 @@ export const ConsensusParams = {
 
   fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
     return {
-      block: isSet(object.block) ? BlockParams.fromSDK(object.block) : undefined,
-      evidence: isSet(object.evidence) ? EvidenceParams.fromSDK(object.evidence) : undefined,
-      validator: isSet(object.validator) ? ValidatorParams.fromSDK(object.validator) : undefined,
-      version: isSet(object.version) ? VersionParams.fromSDK(object.version) : undefined
+      block: object.block ? BlockParams.fromSDK(object.block) : undefined,
+      evidence: object.evidence ? EvidenceParams.fromSDK(object.evidence) : undefined,
+      validator: object.validator ? ValidatorParams.fromSDK(object.validator) : undefined,
+      version: object.version ? VersionParams.fromSDK(object.version) : undefined
     };
   },
 
@@ -363,17 +363,17 @@ export const BlockParams = {
 
   fromSDK(object: BlockParamsSDKType): BlockParams {
     return {
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
-      maxGas: isSet(object.max_gas) ? object.max_gas : undefined,
-      timeIotaMs: isSet(object.time_iota_ms) ? object.time_iota_ms : undefined
+      maxBytes: object?.max_bytes,
+      maxGas: object?.max_gas,
+      timeIotaMs: object?.time_iota_ms
     };
   },
 
   toSDK(message: BlockParams): BlockParamsSDKType {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
-    message.maxGas !== undefined && (obj.max_gas = message.maxGas);
-    message.timeIotaMs !== undefined && (obj.time_iota_ms = message.timeIotaMs);
+    obj.max_bytes = message.maxBytes;
+    obj.max_gas = message.maxGas;
+    obj.time_iota_ms = message.timeIotaMs;
     return obj;
   }
 
@@ -460,17 +460,17 @@ export const EvidenceParams = {
 
   fromSDK(object: EvidenceParamsSDKType): EvidenceParams {
     return {
-      maxAgeNumBlocks: isSet(object.max_age_num_blocks) ? object.max_age_num_blocks : undefined,
-      maxAgeDuration: isSet(object.max_age_duration) ? Duration.fromSDK(object.max_age_duration) : undefined,
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined
+      maxAgeNumBlocks: object?.max_age_num_blocks,
+      maxAgeDuration: object.max_age_duration ? Duration.fromSDK(object.max_age_duration) : undefined,
+      maxBytes: object?.max_bytes
     };
   },
 
   toSDK(message: EvidenceParams): EvidenceParamsSDKType {
     const obj: any = {};
-    message.maxAgeNumBlocks !== undefined && (obj.max_age_num_blocks = message.maxAgeNumBlocks);
+    obj.max_age_num_blocks = message.maxAgeNumBlocks;
     message.maxAgeDuration !== undefined && (obj.max_age_duration = message.maxAgeDuration ? Duration.toSDK(message.maxAgeDuration) : undefined);
-    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
+    obj.max_bytes = message.maxBytes;
     return obj;
   }
 
@@ -614,13 +614,13 @@ export const VersionParams = {
 
   fromSDK(object: VersionParamsSDKType): VersionParams {
     return {
-      appVersion: isSet(object.app_version) ? object.app_version : undefined
+      appVersion: object?.app_version
     };
   },
 
   toSDK(message: VersionParams): VersionParamsSDKType {
     const obj: any = {};
-    message.appVersion !== undefined && (obj.app_version = message.appVersion);
+    obj.app_version = message.appVersion;
     return obj;
   }
 
@@ -695,15 +695,15 @@ export const HashedParams = {
 
   fromSDK(object: HashedParamsSDKType): HashedParams {
     return {
-      blockMaxBytes: isSet(object.block_max_bytes) ? object.block_max_bytes : undefined,
-      blockMaxGas: isSet(object.block_max_gas) ? object.block_max_gas : undefined
+      blockMaxBytes: object?.block_max_bytes,
+      blockMaxGas: object?.block_max_gas
     };
   },
 
   toSDK(message: HashedParams): HashedParamsSDKType {
     const obj: any = {};
-    message.blockMaxBytes !== undefined && (obj.block_max_bytes = message.blockMaxBytes);
-    message.blockMaxGas !== undefined && (obj.block_max_gas = message.blockMaxGas);
+    obj.block_max_bytes = message.blockMaxBytes;
+    obj.block_max_gas = message.blockMaxGas;
     return obj;
   }
 

@@ -116,13 +116,13 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : undefined
+      mintedDenom: object?.minted_denom
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.mintedDenom !== undefined && (obj.minted_denom = message.mintedDenom);
+    obj.minted_denom = message.mintedDenom;
     return obj;
   }
 
@@ -284,14 +284,14 @@ export const DistrInfo = {
 
   fromSDK(object: DistrInfoSDKType): DistrInfo {
     return {
-      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
+      totalWeight: object?.total_weight,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
 
   toSDK(message: DistrInfo): DistrInfoSDKType {
     const obj: any = {};
-    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
+    obj.total_weight = message.totalWeight;
 
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
@@ -373,15 +373,15 @@ export const DistrRecord = {
 
   fromSDK(object: DistrRecordSDKType): DistrRecord {
     return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      weight: isSet(object.weight) ? object.weight : undefined
+      gaugeId: object?.gauge_id,
+      weight: object?.weight
     };
   },
 
   toSDK(message: DistrRecord): DistrRecordSDKType {
     const obj: any = {};
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
-    message.weight !== undefined && (obj.weight = message.weight);
+    obj.gauge_id = message.gaugeId;
+    obj.weight = message.weight;
     return obj;
   }
 
@@ -468,16 +468,16 @@ export const PoolToGauge = {
 
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      poolId: object?.pool_id,
+      gaugeId: object?.gauge_id,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
     };
   },
 
   toSDK(message: PoolToGauge): PoolToGaugeSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.pool_id = message.poolId);
-    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    obj.pool_id = message.poolId;
+    obj.gauge_id = message.gaugeId;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
   }

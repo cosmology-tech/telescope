@@ -29,8 +29,6 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
-            toAmino?: boolean;
-            fromAmino?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -79,6 +77,7 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
+        useRecursiveV2encoding?: boolean;
     };
     lcdClients?: {
         enabled: boolean;

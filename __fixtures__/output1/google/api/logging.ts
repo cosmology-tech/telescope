@@ -320,14 +320,14 @@ export const Logging_LoggingDestination = {
 
   fromSDK(object: Logging_LoggingDestinationSDKType): Logging_LoggingDestination {
     return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
+      monitoredResource: object?.monitored_resource,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },
 
   toSDK(message: Logging_LoggingDestination): Logging_LoggingDestinationSDKType {
     const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
+    obj.monitored_resource = message.monitoredResource;
 
     if (message.logs) {
       obj.logs = message.logs.map(e => e);

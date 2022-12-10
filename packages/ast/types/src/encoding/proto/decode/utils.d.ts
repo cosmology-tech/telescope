@@ -43,7 +43,7 @@ export declare const baseTypes: {
     type(args: DecodeMethod): t.CallExpression;
     enum(args: DecodeMethod): t.TSAsExpression;
     bytes(args: DecodeMethod): t.CallExpression;
-    duration(args: DecodeMethod): t.CallExpression;
+    durationString(args: DecodeMethod): t.CallExpression;
     timestamp(args: DecodeMethod): t.CallExpression;
     timestampDate(args: DecodeMethod): t.CallExpression;
     keyHash(args: DecodeMethod): (t.IfStatement | t.VariableDeclaration)[];

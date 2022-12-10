@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.version";
 
 /**
@@ -111,15 +111,15 @@ export const App = {
 
   fromSDK(object: AppSDKType): App {
     return {
-      protocol: isSet(object.protocol) ? object.protocol : undefined,
-      software: isSet(object.software) ? object.software : undefined
+      protocol: object?.protocol,
+      software: object?.software
     };
   },
 
   toSDK(message: App): AppSDKType {
     const obj: any = {};
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.software !== undefined && (obj.software = message.software);
+    obj.protocol = message.protocol;
+    obj.software = message.software;
     return obj;
   }
 
@@ -194,15 +194,15 @@ export const Consensus = {
 
   fromSDK(object: ConsensusSDKType): Consensus {
     return {
-      block: isSet(object.block) ? object.block : undefined,
-      app: isSet(object.app) ? object.app : undefined
+      block: object?.block,
+      app: object?.app
     };
   },
 
   toSDK(message: Consensus): ConsensusSDKType {
     const obj: any = {};
-    message.block !== undefined && (obj.block = message.block);
-    message.app !== undefined && (obj.app = message.app);
+    obj.block = message.block;
+    obj.app = message.app;
     return obj;
   }
 

@@ -195,15 +195,15 @@ export const MetricValue_LabelsEntry = {
 
   fromSDK(object: MetricValue_LabelsEntrySDKType): MetricValue_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -384,13 +384,13 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
-      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
-      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      distributionValue: isSet(object.distribution_value) ? Distribution.fromSDK(object.distribution_value) : undefined
+      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      distributionValue: object.distribution_value ? Distribution.fromSDK(object.distribution_value) : undefined
     };
   },
 
@@ -406,10 +406,10 @@ export const MetricValue = {
 
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
-    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
-    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
     message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toSDK(message.distributionValue) : undefined);
     return obj;
   }
@@ -491,14 +491,14 @@ export const MetricValueSet = {
 
   fromSDK(object: MetricValueSetSDKType): MetricValueSet {
     return {
-      metricName: isSet(object.metric_name) ? object.metric_name : undefined,
+      metricName: object?.metric_name,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MetricValueSet): MetricValueSetSDKType {
     const obj: any = {};
-    message.metricName !== undefined && (obj.metric_name = message.metricName);
+    obj.metric_name = message.metricName;
 
     if (message.metricValues) {
       obj.metric_values = message.metricValues.map(e => e ? MetricValue.toSDK(e) : undefined);

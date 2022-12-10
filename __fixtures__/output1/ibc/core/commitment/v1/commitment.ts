@@ -134,13 +134,13 @@ export const MerkleRoot = {
 
   fromSDK(object: MerkleRootSDKType): MerkleRoot {
     return {
-      hash: isSet(object.hash) ? object.hash : undefined
+      hash: object?.hash
     };
   },
 
   toSDK(message: MerkleRoot): MerkleRootSDKType {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = message.hash);
+    obj.hash = message.hash;
     return obj;
   }
 
@@ -203,13 +203,13 @@ export const MerklePrefix = {
 
   fromSDK(object: MerklePrefixSDKType): MerklePrefix {
     return {
-      keyPrefix: isSet(object.key_prefix) ? object.key_prefix : undefined
+      keyPrefix: object?.key_prefix
     };
   },
 
   toSDK(message: MerklePrefix): MerklePrefixSDKType {
     const obj: any = {};
-    message.keyPrefix !== undefined && (obj.key_prefix = message.keyPrefix);
+    obj.key_prefix = message.keyPrefix;
     return obj;
   }
 

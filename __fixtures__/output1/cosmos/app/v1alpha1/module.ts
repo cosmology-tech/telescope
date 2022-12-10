@@ -270,7 +270,7 @@ export const ModuleDescriptor = {
 
   fromSDK(object: ModuleDescriptorSDKType): ModuleDescriptor {
     return {
-      goImport: isSet(object.go_import) ? object.go_import : undefined,
+      goImport: object?.go_import,
       usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDK(e)) : [],
       canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDK(e)) : []
     };
@@ -278,7 +278,7 @@ export const ModuleDescriptor = {
 
   toSDK(message: ModuleDescriptor): ModuleDescriptorSDKType {
     const obj: any = {};
-    message.goImport !== undefined && (obj.go_import = message.goImport);
+    obj.go_import = message.goImport;
 
     if (message.usePackage) {
       obj.use_package = message.usePackage.map(e => e ? PackageReference.toSDK(e) : undefined);
@@ -366,15 +366,15 @@ export const PackageReference = {
 
   fromSDK(object: PackageReferenceSDKType): PackageReference {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      revision: isSet(object.revision) ? object.revision : undefined
+      name: object?.name,
+      revision: object?.revision
     };
   },
 
   toSDK(message: PackageReference): PackageReferenceSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.revision !== undefined && (obj.revision = message.revision);
+    obj.name = message.name;
+    obj.revision = message.revision;
     return obj;
   }
 
@@ -437,13 +437,13 @@ export const MigrateFromInfo = {
 
   fromSDK(object: MigrateFromInfoSDKType): MigrateFromInfo {
     return {
-      module: isSet(object.module) ? object.module : undefined
+      module: object?.module
     };
   },
 
   toSDK(message: MigrateFromInfo): MigrateFromInfoSDKType {
     const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
+    obj.module = message.module;
     return obj;
   }
 

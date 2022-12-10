@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /**
@@ -205,23 +205,23 @@ export const ValidatorSigningInfo = {
 
   fromSDK(object: ValidatorSigningInfoSDKType): ValidatorSigningInfo {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      startHeight: isSet(object.start_height) ? object.start_height : undefined,
-      indexOffset: isSet(object.index_offset) ? object.index_offset : undefined,
-      jailedUntil: isSet(object.jailed_until) ? Timestamp.fromSDK(object.jailed_until) : undefined,
-      tombstoned: isSet(object.tombstoned) ? object.tombstoned : undefined,
-      missedBlocksCounter: isSet(object.missed_blocks_counter) ? object.missed_blocks_counter : undefined
+      address: object?.address,
+      startHeight: object?.start_height,
+      indexOffset: object?.index_offset,
+      jailedUntil: object.jailed_until ? Timestamp.fromSDK(object.jailed_until) : undefined,
+      tombstoned: object?.tombstoned,
+      missedBlocksCounter: object?.missed_blocks_counter
     };
   },
 
   toSDK(message: ValidatorSigningInfo): ValidatorSigningInfoSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.startHeight !== undefined && (obj.start_height = message.startHeight);
-    message.indexOffset !== undefined && (obj.index_offset = message.indexOffset);
+    obj.address = message.address;
+    obj.start_height = message.startHeight;
+    obj.index_offset = message.indexOffset;
     message.jailedUntil !== undefined && (obj.jailed_until = message.jailedUntil ? Timestamp.toSDK(message.jailedUntil) : undefined);
-    message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
-    message.missedBlocksCounter !== undefined && (obj.missed_blocks_counter = message.missedBlocksCounter);
+    obj.tombstoned = message.tombstoned;
+    obj.missed_blocks_counter = message.missedBlocksCounter;
     return obj;
   }
 
@@ -332,21 +332,21 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      signedBlocksWindow: isSet(object.signed_blocks_window) ? object.signed_blocks_window : undefined,
-      minSignedPerWindow: isSet(object.min_signed_per_window) ? object.min_signed_per_window : undefined,
-      downtimeJailDuration: isSet(object.downtime_jail_duration) ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
-      slashFractionDoubleSign: isSet(object.slash_fraction_double_sign) ? object.slash_fraction_double_sign : undefined,
-      slashFractionDowntime: isSet(object.slash_fraction_downtime) ? object.slash_fraction_downtime : undefined
+      signedBlocksWindow: object?.signed_blocks_window,
+      minSignedPerWindow: object?.min_signed_per_window,
+      downtimeJailDuration: object.downtime_jail_duration ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
+      slashFractionDoubleSign: object?.slash_fraction_double_sign,
+      slashFractionDowntime: object?.slash_fraction_downtime
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.signedBlocksWindow !== undefined && (obj.signed_blocks_window = message.signedBlocksWindow);
-    message.minSignedPerWindow !== undefined && (obj.min_signed_per_window = message.minSignedPerWindow);
+    obj.signed_blocks_window = message.signedBlocksWindow;
+    obj.min_signed_per_window = message.minSignedPerWindow;
     message.downtimeJailDuration !== undefined && (obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toSDK(message.downtimeJailDuration) : undefined);
-    message.slashFractionDoubleSign !== undefined && (obj.slash_fraction_double_sign = message.slashFractionDoubleSign);
-    message.slashFractionDowntime !== undefined && (obj.slash_fraction_downtime = message.slashFractionDowntime);
+    obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
+    obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;
   }
 

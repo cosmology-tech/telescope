@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Event, EventSDKType } from "../../../../tendermint/abci/types";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 
 /**
@@ -589,30 +589,30 @@ export const TxResponse = {
 
   fromSDK(object: TxResponseSDKType): TxResponse {
     return {
-      height: isSet(object.height) ? object.height : undefined,
-      txhash: isSet(object.txhash) ? object.txhash : undefined,
-      codespace: isSet(object.codespace) ? object.codespace : undefined,
-      code: isSet(object.code) ? object.code : undefined,
-      data: isSet(object.data) ? object.data : undefined,
-      rawLog: isSet(object.raw_log) ? object.raw_log : undefined,
+      height: object?.height,
+      txhash: object?.txhash,
+      codespace: object?.codespace,
+      code: object?.code,
+      data: object?.data,
+      rawLog: object?.raw_log,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromSDK(e)) : [],
-      info: isSet(object.info) ? object.info : undefined,
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
-      tx: isSet(object.tx) ? Any.fromSDK(object.tx) : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
+      tx: object.tx ? Any.fromSDK(object.tx) : undefined,
+      timestamp: object?.timestamp,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
     };
   },
 
   toSDK(message: TxResponse): TxResponseSDKType {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
-    message.txhash !== undefined && (obj.txhash = message.txhash);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    message.code !== undefined && (obj.code = message.code);
-    message.data !== undefined && (obj.data = message.data);
-    message.rawLog !== undefined && (obj.raw_log = message.rawLog);
+    obj.height = message.height;
+    obj.txhash = message.txhash;
+    obj.codespace = message.codespace;
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.raw_log = message.rawLog;
 
     if (message.logs) {
       obj.logs = message.logs.map(e => e ? ABCIMessageLog.toSDK(e) : undefined);
@@ -620,11 +620,11 @@ export const TxResponse = {
       obj.logs = [];
     }
 
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
     message.tx !== undefined && (obj.tx = message.tx ? Any.toSDK(message.tx) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    obj.timestamp = message.timestamp;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -724,16 +724,16 @@ export const ABCIMessageLog = {
 
   fromSDK(object: ABCIMessageLogSDKType): ABCIMessageLog {
     return {
-      msgIndex: isSet(object.msg_index) ? object.msg_index : undefined,
-      log: isSet(object.log) ? object.log : undefined,
+      msgIndex: object?.msg_index,
+      log: object?.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ABCIMessageLog): ABCIMessageLogSDKType {
     const obj: any = {};
-    message.msgIndex !== undefined && (obj.msg_index = message.msgIndex);
-    message.log !== undefined && (obj.log = message.log);
+    obj.msg_index = message.msgIndex;
+    obj.log = message.log;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? StringEvent.toSDK(e) : undefined);
@@ -821,14 +821,14 @@ export const StringEvent = {
 
   fromSDK(object: StringEventSDKType): StringEvent {
     return {
-      type: isSet(object.type) ? object.type : undefined,
+      type: object?.type,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
 
   toSDK(message: StringEvent): StringEventSDKType {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
+    obj.type = message.type;
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
@@ -910,15 +910,15 @@ export const Attribute = {
 
   fromSDK(object: AttributeSDKType): Attribute {
     return {
-      key: isSet(object.key) ? object.key : undefined,
-      value: isSet(object.value) ? object.value : undefined
+      key: object?.key,
+      value: object?.value
     };
   },
 
   toSDK(message: Attribute): AttributeSDKType {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   }
 
@@ -993,15 +993,15 @@ export const GasInfo = {
 
   fromSDK(object: GasInfoSDKType): GasInfo {
     return {
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used
     };
   },
 
   toSDK(message: GasInfo): GasInfoSDKType {
     const obj: any = {};
-    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
     return obj;
   }
 
@@ -1111,8 +1111,8 @@ export const Result = {
 
   fromSDK(object: ResultSDKType): Result {
     return {
-      data: isSet(object.data) ? object.data : undefined,
-      log: isSet(object.log) ? object.log : undefined,
+      data: object?.data,
+      log: object?.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromSDK(e)) : []
     };
@@ -1120,8 +1120,8 @@ export const Result = {
 
   toSDK(message: Result): ResultSDKType {
     const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.log !== undefined && (obj.log = message.log);
+    obj.data = message.data;
+    obj.log = message.log;
 
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
@@ -1209,8 +1209,8 @@ export const SimulationResponse = {
 
   fromSDK(object: SimulationResponseSDKType): SimulationResponse {
     return {
-      gasInfo: isSet(object.gas_info) ? GasInfo.fromSDK(object.gas_info) : undefined,
-      result: isSet(object.result) ? Result.fromSDK(object.result) : undefined
+      gasInfo: object.gas_info ? GasInfo.fromSDK(object.gas_info) : undefined,
+      result: object.result ? Result.fromSDK(object.result) : undefined
     };
   },
 
@@ -1292,15 +1292,15 @@ export const MsgData = {
 
   fromSDK(object: MsgDataSDKType): MsgData {
     return {
-      msgType: isSet(object.msg_type) ? object.msg_type : undefined,
-      data: isSet(object.data) ? object.data : undefined
+      msgType: object?.msg_type,
+      data: object?.data
     };
   },
 
   toSDK(message: MsgData): MsgDataSDKType {
     const obj: any = {};
-    message.msgType !== undefined && (obj.msg_type = message.msgType);
-    message.data !== undefined && (obj.data = message.data);
+    obj.msg_type = message.msgType;
+    obj.data = message.data;
     return obj;
   }
 
@@ -1534,22 +1534,22 @@ export const SearchTxsResult = {
 
   fromSDK(object: SearchTxsResultSDKType): SearchTxsResult {
     return {
-      totalCount: isSet(object.total_count) ? object.total_count : undefined,
-      count: isSet(object.count) ? object.count : undefined,
-      pageNumber: isSet(object.page_number) ? object.page_number : undefined,
-      pageTotal: isSet(object.page_total) ? object.page_total : undefined,
-      limit: isSet(object.limit) ? object.limit : undefined,
+      totalCount: object?.total_count,
+      count: object?.count,
+      pageNumber: object?.page_number,
+      pageTotal: object?.page_total,
+      limit: object?.limit,
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromSDK(e)) : []
     };
   },
 
   toSDK(message: SearchTxsResult): SearchTxsResultSDKType {
     const obj: any = {};
-    message.totalCount !== undefined && (obj.total_count = message.totalCount);
-    message.count !== undefined && (obj.count = message.count);
-    message.pageNumber !== undefined && (obj.page_number = message.pageNumber);
-    message.pageTotal !== undefined && (obj.page_total = message.pageTotal);
-    message.limit !== undefined && (obj.limit = message.limit);
+    obj.total_count = message.totalCount;
+    obj.count = message.count;
+    obj.page_number = message.pageNumber;
+    obj.page_total = message.pageTotal;
+    obj.limit = message.limit;
 
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? TxResponse.toSDK(e) : undefined);

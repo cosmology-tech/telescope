@@ -195,7 +195,7 @@ export const QueryParamsResponse = {
 
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+      params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
 
@@ -264,13 +264,13 @@ export const QueryDenomAuthorityMetadataRequest = {
 
   fromSDK(object: QueryDenomAuthorityMetadataRequestSDKType): QueryDenomAuthorityMetadataRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : undefined
+      denom: object?.denom
     };
   },
 
   toSDK(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestSDKType {
     const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
+    obj.denom = message.denom;
     return obj;
   }
 
@@ -333,7 +333,7 @@ export const QueryDenomAuthorityMetadataResponse = {
 
   fromSDK(object: QueryDenomAuthorityMetadataResponseSDKType): QueryDenomAuthorityMetadataResponse {
     return {
-      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
+      authorityMetadata: object.authority_metadata ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
     };
   },
 
@@ -402,13 +402,13 @@ export const QueryDenomsFromCreatorRequest = {
 
   fromSDK(object: QueryDenomsFromCreatorRequestSDKType): QueryDenomsFromCreatorRequest {
     return {
-      creator: isSet(object.creator) ? object.creator : undefined
+      creator: object?.creator
     };
   },
 
   toSDK(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestSDKType {
     const obj: any = {};
-    message.creator !== undefined && (obj.creator = message.creator);
+    obj.creator = message.creator;
     return obj;
   }
 

@@ -49,54 +49,7 @@ export enum FieldDescriptorProto_Type {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
-export enum FieldDescriptorProto_TypeSDKType {
-  /**
-   * TYPE_DOUBLE - 0 is reserved for errors.
-   * Order is weird for historical reasons.
-   */
-  TYPE_DOUBLE = 1,
-  TYPE_FLOAT = 2,
-
-  /**
-   * TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-   * negative values are likely.
-   */
-  TYPE_INT64 = 3,
-  TYPE_UINT64 = 4,
-
-  /**
-   * TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-   * negative values are likely.
-   */
-  TYPE_INT32 = 5,
-  TYPE_FIXED64 = 6,
-  TYPE_FIXED32 = 7,
-  TYPE_BOOL = 8,
-  TYPE_STRING = 9,
-
-  /**
-   * TYPE_GROUP - Tag-delimited aggregate.
-   * Group type is deprecated and not supported in proto3. However, Proto3
-   * implementations should still be able to parse the group wire format and
-   * treat group fields as unknown fields.
-   */
-  TYPE_GROUP = 10,
-  TYPE_MESSAGE = 11,
-
-  /** TYPE_BYTES - New in version 2. */
-  TYPE_BYTES = 12,
-  TYPE_UINT32 = 13,
-  TYPE_ENUM = 14,
-  TYPE_SFIXED32 = 15,
-  TYPE_SFIXED64 = 16,
-
-  /** TYPE_SINT32 - Uses ZigZag encoding. */
-  TYPE_SINT32 = 17,
-
-  /** TYPE_SINT64 - Uses ZigZag encoding. */
-  TYPE_SINT64 = 18,
-  UNRECOGNIZED = -1,
-}
+export const FieldDescriptorProto_TypeSDKType = FieldDescriptorProto_Type;
 export function fieldDescriptorProto_TypeFromJSON(object: any): FieldDescriptorProto_Type {
   switch (object) {
     case 1:
@@ -245,13 +198,7 @@ export enum FieldDescriptorProto_Label {
   LABEL_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
-export enum FieldDescriptorProto_LabelSDKType {
-  /** LABEL_OPTIONAL - 0 is reserved for errors */
-  LABEL_OPTIONAL = 1,
-  LABEL_REQUIRED = 2,
-  LABEL_REPEATED = 3,
-  UNRECOGNIZED = -1,
-}
+export const FieldDescriptorProto_LabelSDKType = FieldDescriptorProto_Label;
 export function fieldDescriptorProto_LabelFromJSON(object: any): FieldDescriptorProto_Label {
   switch (object) {
     case 1:
@@ -304,22 +251,7 @@ export enum FileOptions_OptimizeMode {
   LITE_RUNTIME = 3,
   UNRECOGNIZED = -1,
 }
-
-/** Generated classes can be optimized for speed or code size. */
-export enum FileOptions_OptimizeModeSDKType {
-  /**
-   * SPEED - Generate complete code for parsing, serialization,
-   * etc.
-   */
-  SPEED = 1,
-
-  /** CODE_SIZE - Use ReflectionOps to implement these methods. */
-  CODE_SIZE = 2,
-
-  /** LITE_RUNTIME - Generate code using MessageLite and the lite runtime. */
-  LITE_RUNTIME = 3,
-  UNRECOGNIZED = -1,
-}
+export const FileOptions_OptimizeModeSDKType = FileOptions_OptimizeMode;
 export function fileOptions_OptimizeModeFromJSON(object: any): FileOptions_OptimizeMode {
   switch (object) {
     case 1:
@@ -363,13 +295,7 @@ export enum FieldOptions_CType {
   STRING_PIECE = 2,
   UNRECOGNIZED = -1,
 }
-export enum FieldOptions_CTypeSDKType {
-  /** STRING - Default mode. */
-  STRING = 0,
-  CORD = 1,
-  STRING_PIECE = 2,
-  UNRECOGNIZED = -1,
-}
+export const FieldOptions_CTypeSDKType = FieldOptions_CType;
 export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   switch (object) {
     case 0:
@@ -417,17 +343,7 @@ export enum FieldOptions_JSType {
   JS_NUMBER = 2,
   UNRECOGNIZED = -1,
 }
-export enum FieldOptions_JSTypeSDKType {
-  /** JS_NORMAL - Use the default type. */
-  JS_NORMAL = 0,
-
-  /** JS_STRING - Use JavaScript strings. */
-  JS_STRING = 1,
-
-  /** JS_NUMBER - Use JavaScript numbers. */
-  JS_NUMBER = 2,
-  UNRECOGNIZED = -1,
-}
+export const FieldOptions_JSTypeSDKType = FieldOptions_JSType;
 export function fieldOptions_JSTypeFromJSON(object: any): FieldOptions_JSType {
   switch (object) {
     case 0:
@@ -480,22 +396,7 @@ export enum MethodOptions_IdempotencyLevel {
   IDEMPOTENT = 2,
   UNRECOGNIZED = -1,
 }
-
-/**
- * Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
- * or neither? HTTP based RPC implementation may choose GET verb for safe
- * methods, and PUT verb for idempotent methods instead of the default POST.
- */
-export enum MethodOptions_IdempotencyLevelSDKType {
-  IDEMPOTENCY_UNKNOWN = 0,
-
-  /** NO_SIDE_EFFECTS - implies idempotent */
-  NO_SIDE_EFFECTS = 1,
-
-  /** IDEMPOTENT - idempotent, but may have side effects */
-  IDEMPOTENT = 2,
-  UNRECOGNIZED = -1,
-}
+export const MethodOptions_IdempotencyLevelSDKType = MethodOptions_IdempotencyLevel;
 export function methodOptions_IdempotencyLevelFromJSON(object: any): MethodOptions_IdempotencyLevel {
   switch (object) {
     case 0:
@@ -773,13 +674,13 @@ export interface FieldDescriptorProto {
 export interface FieldDescriptorProtoSDKType {
   name: string;
   number: number;
-  label: FieldDescriptorProto_LabelSDKType;
+  label: FieldDescriptorProto_Label;
 
   /**
    * If type_name is set, this need not be set.  If both this and type_name
    * are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP.
    */
-  type: FieldDescriptorProto_TypeSDKType;
+  type: FieldDescriptorProto_Type;
 
   /**
    * For message and enum types, this is the name of the type.  If the name
@@ -1146,7 +1047,7 @@ export interface FileOptionsSDKType {
    * This option has no effect on when used with the lite runtime.
    */
   java_string_check_utf8: boolean;
-  optimize_for: FileOptions_OptimizeModeSDKType;
+  optimize_for: FileOptions_OptimizeMode;
 
   /**
    * Sets the Go package where structs generated from this .proto will be
@@ -1456,7 +1357,7 @@ export interface FieldOptionsSDKType {
    * options below.  This option is not yet implemented in the open source
    * release -- sorry, we'll try to include it in a future version!
    */
-  ctype: FieldOptions_CTypeSDKType;
+  ctype: FieldOptions_CType;
 
   /**
    * The packed option can be enabled for repeated primitive fields to enable
@@ -1480,7 +1381,7 @@ export interface FieldOptionsSDKType {
    * This option is an enum to permit additional types to be added, e.g.
    * goog.math.Integer.
    */
-  jstype: FieldOptions_JSTypeSDKType;
+  jstype: FieldOptions_JSType;
 
   /**
    * Should this field be parsed lazily?  Lazy applies only to message-type
@@ -1641,7 +1542,7 @@ export interface MethodOptionsSDKType {
    * this is a formalization for deprecating methods.
    */
   deprecated: boolean;
-  idempotency_level: MethodOptions_IdempotencyLevelSDKType;
+  idempotency_level: MethodOptions_IdempotencyLevel;
 
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpreted_option: UninterpretedOptionSDKType[];
@@ -2406,8 +2307,8 @@ export const FileDescriptorProto = {
 
   fromSDK(object: FileDescriptorProtoSDKType): FileDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      package: isSet(object.package) ? object.package : undefined,
+      name: object?.name,
+      package: object?.package,
       dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => e) : [],
       publicDependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => e) : [],
       weakDependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => e) : [],
@@ -2415,16 +2316,16 @@ export const FileDescriptorProto = {
       enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDK(e)) : [],
       service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromSDK(e)) : [],
       extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
-      options: isSet(object.options) ? FileOptions.fromSDK(object.options) : undefined,
-      sourceCodeInfo: isSet(object.source_code_info) ? SourceCodeInfo.fromSDK(object.source_code_info) : undefined,
-      syntax: isSet(object.syntax) ? object.syntax : undefined
+      options: object.options ? FileOptions.fromSDK(object.options) : undefined,
+      sourceCodeInfo: object.source_code_info ? SourceCodeInfo.fromSDK(object.source_code_info) : undefined,
+      syntax: object?.syntax
     };
   },
 
   toSDK(message: FileDescriptorProto): FileDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.package !== undefined && (obj.package = message.package);
+    obj.name = message.name;
+    obj.package = message.package;
 
     if (message.dependency) {
       obj.dependency = message.dependency.map(e => e);
@@ -2470,7 +2371,7 @@ export const FileDescriptorProto = {
 
     message.options !== undefined && (obj.options = message.options ? FileOptions.toSDK(message.options) : undefined);
     message.sourceCodeInfo !== undefined && (obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toSDK(message.sourceCodeInfo) : undefined);
-    message.syntax !== undefined && (obj.syntax = message.syntax);
+    obj.syntax = message.syntax;
     return obj;
   }
 
@@ -2683,14 +2584,14 @@ export const DescriptorProto = {
 
   fromSDK(object: DescriptorProtoSDKType): DescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
       extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
       nestedType: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromSDK(e)) : [],
       enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDK(e)) : [],
       extensionRange: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromSDK(e)) : [],
       oneofDecl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromSDK(e)) : [],
-      options: isSet(object.options) ? MessageOptions.fromSDK(object.options) : undefined,
+      options: object.options ? MessageOptions.fromSDK(object.options) : undefined,
       reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromSDK(e)) : [],
       reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
     };
@@ -2698,7 +2599,7 @@ export const DescriptorProto = {
 
   toSDK(message: DescriptorProto): DescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
 
     if (message.field) {
       obj.field = message.field.map(e => e ? FieldDescriptorProto.toSDK(e) : undefined);
@@ -2836,16 +2737,16 @@ export const DescriptorProto_ExtensionRange = {
 
   fromSDK(object: DescriptorProto_ExtensionRangeSDKType): DescriptorProto_ExtensionRange {
     return {
-      start: isSet(object.start) ? object.start : undefined,
-      end: isSet(object.end) ? object.end : undefined,
-      options: isSet(object.options) ? ExtensionRangeOptions.fromSDK(object.options) : undefined
+      start: object?.start,
+      end: object?.end,
+      options: object.options ? ExtensionRangeOptions.fromSDK(object.options) : undefined
     };
   },
 
   toSDK(message: DescriptorProto_ExtensionRange): DescriptorProto_ExtensionRangeSDKType {
     const obj: any = {};
-    message.start !== undefined && (obj.start = message.start);
-    message.end !== undefined && (obj.end = message.end);
+    obj.start = message.start;
+    obj.end = message.end;
     message.options !== undefined && (obj.options = message.options ? ExtensionRangeOptions.toSDK(message.options) : undefined);
     return obj;
   }
@@ -2921,15 +2822,15 @@ export const DescriptorProto_ReservedRange = {
 
   fromSDK(object: DescriptorProto_ReservedRangeSDKType): DescriptorProto_ReservedRange {
     return {
-      start: isSet(object.start) ? object.start : undefined,
-      end: isSet(object.end) ? object.end : undefined
+      start: object?.start,
+      end: object?.end
     };
   },
 
   toSDK(message: DescriptorProto_ReservedRange): DescriptorProto_ReservedRangeSDKType {
     const obj: any = {};
-    message.start !== undefined && (obj.start = message.start);
-    message.end !== undefined && (obj.end = message.end);
+    obj.start = message.start;
+    obj.end = message.end;
     return obj;
   }
 
@@ -3181,30 +3082,30 @@ export const FieldDescriptorProto = {
 
   fromSDK(object: FieldDescriptorProtoSDKType): FieldDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      number: isSet(object.number) ? object.number : undefined,
+      name: object?.name,
+      number: object?.number,
       label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
       type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
-      typeName: isSet(object.type_name) ? object.type_name : undefined,
-      extendee: isSet(object.extendee) ? object.extendee : undefined,
-      defaultValue: isSet(object.default_value) ? object.default_value : undefined,
-      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
-      jsonName: isSet(object.json_name) ? object.json_name : undefined,
-      options: isSet(object.options) ? FieldOptions.fromSDK(object.options) : undefined
+      typeName: object?.type_name,
+      extendee: object?.extendee,
+      defaultValue: object?.default_value,
+      oneofIndex: object?.oneof_index,
+      jsonName: object?.json_name,
+      options: object.options ? FieldOptions.fromSDK(object.options) : undefined
     };
   },
 
   toSDK(message: FieldDescriptorProto): FieldDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.number !== undefined && (obj.number = message.number);
+    obj.name = message.name;
+    obj.number = message.number;
     message.label !== undefined && (obj.label = fieldDescriptorProto_LabelToJSON(message.label));
     message.type !== undefined && (obj.type = fieldDescriptorProto_TypeToJSON(message.type));
-    message.typeName !== undefined && (obj.type_name = message.typeName);
-    message.extendee !== undefined && (obj.extendee = message.extendee);
-    message.defaultValue !== undefined && (obj.default_value = message.defaultValue);
-    message.oneofIndex !== undefined && (obj.oneof_index = message.oneofIndex);
-    message.jsonName !== undefined && (obj.json_name = message.jsonName);
+    obj.type_name = message.typeName;
+    obj.extendee = message.extendee;
+    obj.default_value = message.defaultValue;
+    obj.oneof_index = message.oneofIndex;
+    obj.json_name = message.jsonName;
     message.options !== undefined && (obj.options = message.options ? FieldOptions.toSDK(message.options) : undefined);
     return obj;
   }
@@ -3280,14 +3181,14 @@ export const OneofDescriptorProto = {
 
   fromSDK(object: OneofDescriptorProtoSDKType): OneofDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      options: isSet(object.options) ? OneofOptions.fromSDK(object.options) : undefined
+      name: object?.name,
+      options: object.options ? OneofOptions.fromSDK(object.options) : undefined
     };
   },
 
   toSDK(message: OneofDescriptorProto): OneofDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
     message.options !== undefined && (obj.options = message.options ? OneofOptions.toSDK(message.options) : undefined);
     return obj;
   }
@@ -3416,9 +3317,9 @@ export const EnumDescriptorProto = {
 
   fromSDK(object: EnumDescriptorProtoSDKType): EnumDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromSDK(e)) : [],
-      options: isSet(object.options) ? EnumOptions.fromSDK(object.options) : undefined,
+      options: object.options ? EnumOptions.fromSDK(object.options) : undefined,
       reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromSDK(e)) : [],
       reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
     };
@@ -3426,7 +3327,7 @@ export const EnumDescriptorProto = {
 
   toSDK(message: EnumDescriptorProto): EnumDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
 
     if (message.value) {
       obj.value = message.value.map(e => e ? EnumValueDescriptorProto.toSDK(e) : undefined);
@@ -3522,15 +3423,15 @@ export const EnumDescriptorProto_EnumReservedRange = {
 
   fromSDK(object: EnumDescriptorProto_EnumReservedRangeSDKType): EnumDescriptorProto_EnumReservedRange {
     return {
-      start: isSet(object.start) ? object.start : undefined,
-      end: isSet(object.end) ? object.end : undefined
+      start: object?.start,
+      end: object?.end
     };
   },
 
   toSDK(message: EnumDescriptorProto_EnumReservedRange): EnumDescriptorProto_EnumReservedRangeSDKType {
     const obj: any = {};
-    message.start !== undefined && (obj.start = message.start);
-    message.end !== undefined && (obj.end = message.end);
+    obj.start = message.start;
+    obj.end = message.end;
     return obj;
   }
 
@@ -3617,16 +3518,16 @@ export const EnumValueDescriptorProto = {
 
   fromSDK(object: EnumValueDescriptorProtoSDKType): EnumValueDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      number: isSet(object.number) ? object.number : undefined,
-      options: isSet(object.options) ? EnumValueOptions.fromSDK(object.options) : undefined
+      name: object?.name,
+      number: object?.number,
+      options: object.options ? EnumValueOptions.fromSDK(object.options) : undefined
     };
   },
 
   toSDK(message: EnumValueDescriptorProto): EnumValueDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.number !== undefined && (obj.number = message.number);
+    obj.name = message.name;
+    obj.number = message.number;
     message.options !== undefined && (obj.options = message.options ? EnumValueOptions.toSDK(message.options) : undefined);
     return obj;
   }
@@ -3720,15 +3621,15 @@ export const ServiceDescriptorProto = {
 
   fromSDK(object: ServiceDescriptorProtoSDKType): ServiceDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
+      name: object?.name,
       method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromSDK(e)) : [],
-      options: isSet(object.options) ? ServiceOptions.fromSDK(object.options) : undefined
+      options: object.options ? ServiceOptions.fromSDK(object.options) : undefined
     };
   },
 
   toSDK(message: ServiceDescriptorProto): ServiceDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    obj.name = message.name;
 
     if (message.method) {
       obj.method = message.method.map(e => e ? MethodDescriptorProto.toSDK(e) : undefined);
@@ -3859,23 +3760,23 @@ export const MethodDescriptorProto = {
 
   fromSDK(object: MethodDescriptorProtoSDKType): MethodDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      inputType: isSet(object.input_type) ? object.input_type : undefined,
-      outputType: isSet(object.output_type) ? object.output_type : undefined,
-      options: isSet(object.options) ? MethodOptions.fromSDK(object.options) : undefined,
-      clientStreaming: isSet(object.client_streaming) ? object.client_streaming : undefined,
-      serverStreaming: isSet(object.server_streaming) ? object.server_streaming : undefined
+      name: object?.name,
+      inputType: object?.input_type,
+      outputType: object?.output_type,
+      options: object.options ? MethodOptions.fromSDK(object.options) : undefined,
+      clientStreaming: object?.client_streaming,
+      serverStreaming: object?.server_streaming
     };
   },
 
   toSDK(message: MethodDescriptorProto): MethodDescriptorProtoSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.inputType !== undefined && (obj.input_type = message.inputType);
-    message.outputType !== undefined && (obj.output_type = message.outputType);
+    obj.name = message.name;
+    obj.input_type = message.inputType;
+    obj.output_type = message.outputType;
     message.options !== undefined && (obj.options = message.options ? MethodOptions.toSDK(message.options) : undefined);
-    message.clientStreaming !== undefined && (obj.client_streaming = message.clientStreaming);
-    message.serverStreaming !== undefined && (obj.server_streaming = message.serverStreaming);
+    obj.client_streaming = message.clientStreaming;
+    obj.server_streaming = message.serverStreaming;
     return obj;
   }
 
@@ -4184,52 +4085,52 @@ export const FileOptions = {
 
   fromSDK(object: FileOptionsSDKType): FileOptions {
     return {
-      javaPackage: isSet(object.java_package) ? object.java_package : undefined,
-      javaOuterClassname: isSet(object.java_outer_classname) ? object.java_outer_classname : undefined,
-      javaMultipleFiles: isSet(object.java_multiple_files) ? object.java_multiple_files : undefined,
-      javaGenerateEqualsAndHash: isSet(object.java_generate_equals_and_hash) ? object.java_generate_equals_and_hash : undefined,
-      javaStringCheckUtf8: isSet(object.java_string_check_utf8) ? object.java_string_check_utf8 : undefined,
+      javaPackage: object?.java_package,
+      javaOuterClassname: object?.java_outer_classname,
+      javaMultipleFiles: object?.java_multiple_files,
+      javaGenerateEqualsAndHash: object?.java_generate_equals_and_hash,
+      javaStringCheckUtf8: object?.java_string_check_utf8,
       optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
-      goPackage: isSet(object.go_package) ? object.go_package : undefined,
-      ccGenericServices: isSet(object.cc_generic_services) ? object.cc_generic_services : undefined,
-      javaGenericServices: isSet(object.java_generic_services) ? object.java_generic_services : undefined,
-      pyGenericServices: isSet(object.py_generic_services) ? object.py_generic_services : undefined,
-      phpGenericServices: isSet(object.php_generic_services) ? object.php_generic_services : undefined,
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
-      ccEnableArenas: isSet(object.cc_enable_arenas) ? object.cc_enable_arenas : undefined,
-      objcClassPrefix: isSet(object.objc_class_prefix) ? object.objc_class_prefix : undefined,
-      csharpNamespace: isSet(object.csharp_namespace) ? object.csharp_namespace : undefined,
-      swiftPrefix: isSet(object.swift_prefix) ? object.swift_prefix : undefined,
-      phpClassPrefix: isSet(object.php_class_prefix) ? object.php_class_prefix : undefined,
-      phpNamespace: isSet(object.php_namespace) ? object.php_namespace : undefined,
-      phpMetadataNamespace: isSet(object.php_metadata_namespace) ? object.php_metadata_namespace : undefined,
-      rubyPackage: isSet(object.ruby_package) ? object.ruby_package : undefined,
+      goPackage: object?.go_package,
+      ccGenericServices: object?.cc_generic_services,
+      javaGenericServices: object?.java_generic_services,
+      pyGenericServices: object?.py_generic_services,
+      phpGenericServices: object?.php_generic_services,
+      deprecated: object?.deprecated,
+      ccEnableArenas: object?.cc_enable_arenas,
+      objcClassPrefix: object?.objc_class_prefix,
+      csharpNamespace: object?.csharp_namespace,
+      swiftPrefix: object?.swift_prefix,
+      phpClassPrefix: object?.php_class_prefix,
+      phpNamespace: object?.php_namespace,
+      phpMetadataNamespace: object?.php_metadata_namespace,
+      rubyPackage: object?.ruby_package,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
 
   toSDK(message: FileOptions): FileOptionsSDKType {
     const obj: any = {};
-    message.javaPackage !== undefined && (obj.java_package = message.javaPackage);
-    message.javaOuterClassname !== undefined && (obj.java_outer_classname = message.javaOuterClassname);
-    message.javaMultipleFiles !== undefined && (obj.java_multiple_files = message.javaMultipleFiles);
-    message.javaGenerateEqualsAndHash !== undefined && (obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash);
-    message.javaStringCheckUtf8 !== undefined && (obj.java_string_check_utf8 = message.javaStringCheckUtf8);
+    obj.java_package = message.javaPackage;
+    obj.java_outer_classname = message.javaOuterClassname;
+    obj.java_multiple_files = message.javaMultipleFiles;
+    obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash;
+    obj.java_string_check_utf8 = message.javaStringCheckUtf8;
     message.optimizeFor !== undefined && (obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimizeFor));
-    message.goPackage !== undefined && (obj.go_package = message.goPackage);
-    message.ccGenericServices !== undefined && (obj.cc_generic_services = message.ccGenericServices);
-    message.javaGenericServices !== undefined && (obj.java_generic_services = message.javaGenericServices);
-    message.pyGenericServices !== undefined && (obj.py_generic_services = message.pyGenericServices);
-    message.phpGenericServices !== undefined && (obj.php_generic_services = message.phpGenericServices);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.ccEnableArenas !== undefined && (obj.cc_enable_arenas = message.ccEnableArenas);
-    message.objcClassPrefix !== undefined && (obj.objc_class_prefix = message.objcClassPrefix);
-    message.csharpNamespace !== undefined && (obj.csharp_namespace = message.csharpNamespace);
-    message.swiftPrefix !== undefined && (obj.swift_prefix = message.swiftPrefix);
-    message.phpClassPrefix !== undefined && (obj.php_class_prefix = message.phpClassPrefix);
-    message.phpNamespace !== undefined && (obj.php_namespace = message.phpNamespace);
-    message.phpMetadataNamespace !== undefined && (obj.php_metadata_namespace = message.phpMetadataNamespace);
-    message.rubyPackage !== undefined && (obj.ruby_package = message.rubyPackage);
+    obj.go_package = message.goPackage;
+    obj.cc_generic_services = message.ccGenericServices;
+    obj.java_generic_services = message.javaGenericServices;
+    obj.py_generic_services = message.pyGenericServices;
+    obj.php_generic_services = message.phpGenericServices;
+    obj.deprecated = message.deprecated;
+    obj.cc_enable_arenas = message.ccEnableArenas;
+    obj.objc_class_prefix = message.objcClassPrefix;
+    obj.csharp_namespace = message.csharpNamespace;
+    obj.swift_prefix = message.swiftPrefix;
+    obj.php_class_prefix = message.phpClassPrefix;
+    obj.php_namespace = message.phpNamespace;
+    obj.php_metadata_namespace = message.phpMetadataNamespace;
+    obj.ruby_package = message.rubyPackage;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -4353,20 +4254,20 @@ export const MessageOptions = {
 
   fromSDK(object: MessageOptionsSDKType): MessageOptions {
     return {
-      messageSetWireFormat: isSet(object.message_set_wire_format) ? object.message_set_wire_format : undefined,
-      noStandardDescriptorAccessor: isSet(object.no_standard_descriptor_accessor) ? object.no_standard_descriptor_accessor : undefined,
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
-      mapEntry: isSet(object.map_entry) ? object.map_entry : undefined,
+      messageSetWireFormat: object?.message_set_wire_format,
+      noStandardDescriptorAccessor: object?.no_standard_descriptor_accessor,
+      deprecated: object?.deprecated,
+      mapEntry: object?.map_entry,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MessageOptions): MessageOptionsSDKType {
     const obj: any = {};
-    message.messageSetWireFormat !== undefined && (obj.message_set_wire_format = message.messageSetWireFormat);
-    message.noStandardDescriptorAccessor !== undefined && (obj.no_standard_descriptor_accessor = message.noStandardDescriptorAccessor);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.mapEntry !== undefined && (obj.map_entry = message.mapEntry);
+    obj.message_set_wire_format = message.messageSetWireFormat;
+    obj.no_standard_descriptor_accessor = message.noStandardDescriptorAccessor;
+    obj.deprecated = message.deprecated;
+    obj.map_entry = message.mapEntry;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -4515,11 +4416,11 @@ export const FieldOptions = {
   fromSDK(object: FieldOptionsSDKType): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? object.packed : undefined,
+      packed: object?.packed,
       jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
-      lazy: isSet(object.lazy) ? object.lazy : undefined,
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
-      weak: isSet(object.weak) ? object.weak : undefined,
+      lazy: object?.lazy,
+      deprecated: object?.deprecated,
+      weak: object?.weak,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4527,11 +4428,11 @@ export const FieldOptions = {
   toSDK(message: FieldOptions): FieldOptionsSDKType {
     const obj: any = {};
     message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
-    message.packed !== undefined && (obj.packed = message.packed);
+    obj.packed = message.packed;
     message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
-    message.lazy !== undefined && (obj.lazy = message.lazy);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
-    message.weak !== undefined && (obj.weak = message.weak);
+    obj.lazy = message.lazy;
+    obj.deprecated = message.deprecated;
+    obj.weak = message.weak;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -4712,16 +4613,16 @@ export const EnumOptions = {
 
   fromSDK(object: EnumOptionsSDKType): EnumOptions {
     return {
-      allowAlias: isSet(object.allow_alias) ? object.allow_alias : undefined,
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      allowAlias: object?.allow_alias,
+      deprecated: object?.deprecated,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
 
   toSDK(message: EnumOptions): EnumOptionsSDKType {
     const obj: any = {};
-    message.allowAlias !== undefined && (obj.allow_alias = message.allowAlias);
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    obj.allow_alias = message.allowAlias;
+    obj.deprecated = message.deprecated;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -4809,14 +4710,14 @@ export const EnumValueOptions = {
 
   fromSDK(object: EnumValueOptionsSDKType): EnumValueOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      deprecated: object?.deprecated,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
 
   toSDK(message: EnumValueOptions): EnumValueOptionsSDKType {
     const obj: any = {};
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    obj.deprecated = message.deprecated;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -4904,14 +4805,14 @@ export const ServiceOptions = {
 
   fromSDK(object: ServiceOptionsSDKType): ServiceOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      deprecated: object?.deprecated,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
 
   toSDK(message: ServiceOptions): ServiceOptionsSDKType {
     const obj: any = {};
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    obj.deprecated = message.deprecated;
 
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
@@ -5011,7 +4912,7 @@ export const MethodOptions = {
 
   fromSDK(object: MethodOptionsSDKType): MethodOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      deprecated: object?.deprecated,
       idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
@@ -5019,7 +4920,7 @@ export const MethodOptions = {
 
   toSDK(message: MethodOptions): MethodOptionsSDKType {
     const obj: any = {};
-    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
+    obj.deprecated = message.deprecated;
     message.idempotencyLevel !== undefined && (obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
 
     if (message.uninterpretedOption) {
@@ -5169,12 +5070,12 @@ export const UninterpretedOption = {
   fromSDK(object: UninterpretedOptionSDKType): UninterpretedOption {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDK(e)) : [],
-      identifierValue: isSet(object.identifier_value) ? object.identifier_value : undefined,
-      positiveIntValue: isSet(object.positive_int_value) ? object.positive_int_value : undefined,
-      negativeIntValue: isSet(object.negative_int_value) ? object.negative_int_value : undefined,
-      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
-      stringValue: isSet(object.string_value) ? object.string_value : undefined,
-      aggregateValue: isSet(object.aggregate_value) ? object.aggregate_value : undefined
+      identifierValue: object?.identifier_value,
+      positiveIntValue: object?.positive_int_value,
+      negativeIntValue: object?.negative_int_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      aggregateValue: object?.aggregate_value
     };
   },
 
@@ -5187,12 +5088,12 @@ export const UninterpretedOption = {
       obj.name = [];
     }
 
-    message.identifierValue !== undefined && (obj.identifier_value = message.identifierValue);
-    message.positiveIntValue !== undefined && (obj.positive_int_value = message.positiveIntValue);
-    message.negativeIntValue !== undefined && (obj.negative_int_value = message.negativeIntValue);
-    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
-    message.stringValue !== undefined && (obj.string_value = message.stringValue);
-    message.aggregateValue !== undefined && (obj.aggregate_value = message.aggregateValue);
+    obj.identifier_value = message.identifierValue;
+    obj.positive_int_value = message.positiveIntValue;
+    obj.negative_int_value = message.negativeIntValue;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.aggregate_value = message.aggregateValue;
     return obj;
   }
 
@@ -5267,15 +5168,15 @@ export const UninterpretedOption_NamePart = {
 
   fromSDK(object: UninterpretedOption_NamePartSDKType): UninterpretedOption_NamePart {
     return {
-      namePart: isSet(object.name_part) ? object.name_part : undefined,
-      isExtension: isSet(object.is_extension) ? object.is_extension : undefined
+      namePart: object?.name_part,
+      isExtension: object?.is_extension
     };
   },
 
   toSDK(message: UninterpretedOption_NamePart): UninterpretedOption_NamePartSDKType {
     const obj: any = {};
-    message.namePart !== undefined && (obj.name_part = message.namePart);
-    message.isExtension !== undefined && (obj.is_extension = message.isExtension);
+    obj.name_part = message.namePart;
+    obj.is_extension = message.isExtension;
     return obj;
   }
 
@@ -5511,8 +5412,8 @@ export const SourceCodeInfo_Location = {
     return {
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
       span: Array.isArray(object?.span) ? object.span.map((e: any) => e) : [],
-      leadingComments: isSet(object.leading_comments) ? object.leading_comments : undefined,
-      trailingComments: isSet(object.trailing_comments) ? object.trailing_comments : undefined,
+      leadingComments: object?.leading_comments,
+      trailingComments: object?.trailing_comments,
       leadingDetachedComments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => e) : []
     };
   },
@@ -5532,8 +5433,8 @@ export const SourceCodeInfo_Location = {
       obj.span = [];
     }
 
-    message.leadingComments !== undefined && (obj.leading_comments = message.leadingComments);
-    message.trailingComments !== undefined && (obj.trailing_comments = message.trailingComments);
+    obj.leading_comments = message.leadingComments;
+    obj.trailing_comments = message.trailingComments;
 
     if (message.leadingDetachedComments) {
       obj.leading_detached_comments = message.leadingDetachedComments.map(e => e);
@@ -5740,9 +5641,9 @@ export const GeneratedCodeInfo_Annotation = {
   fromSDK(object: GeneratedCodeInfo_AnnotationSDKType): GeneratedCodeInfo_Annotation {
     return {
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
-      sourceFile: isSet(object.source_file) ? object.source_file : undefined,
-      begin: isSet(object.begin) ? object.begin : undefined,
-      end: isSet(object.end) ? object.end : undefined
+      sourceFile: object?.source_file,
+      begin: object?.begin,
+      end: object?.end
     };
   },
 
@@ -5755,9 +5656,9 @@ export const GeneratedCodeInfo_Annotation = {
       obj.path = [];
     }
 
-    message.sourceFile !== undefined && (obj.source_file = message.sourceFile);
-    message.begin !== undefined && (obj.begin = message.begin);
-    message.end !== undefined && (obj.end = message.end);
+    obj.source_file = message.sourceFile;
+    obj.begin = message.begin;
+    obj.end = message.end;
     return obj;
   }
 

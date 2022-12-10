@@ -79,13 +79,13 @@ export const DenomAuthorityMetadata = {
 
   fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
     return {
-      admin: isSet(object.admin) ? object.admin : undefined
+      admin: object?.admin
     };
   },
 
   toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
     const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
+    obj.admin = message.admin;
     return obj;
   }
 

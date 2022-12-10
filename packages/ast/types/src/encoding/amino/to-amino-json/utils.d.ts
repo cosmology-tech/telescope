@@ -8,6 +8,7 @@ export declare const toAmino: {
     wasmByteCode(args: ToAminoParseField): t.ObjectProperty;
     duration(args: ToAminoParseField): t.ObjectProperty;
     durationString(args: ToAminoParseField): t.ObjectProperty;
+    durationType(args: ToAminoParseField): t.ObjectProperty;
     height(args: ToAminoParseField): t.ObjectProperty;
     coin(args: ToAminoParseField): t.ObjectProperty;
     type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField): any;

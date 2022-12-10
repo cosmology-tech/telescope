@@ -207,18 +207,18 @@ export const QueryGrantsRequest = {
 
   fromSDK(object: QueryGrantsRequestSDKType): QueryGrantsRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      granter: object?.granter,
+      grantee: object?.grantee,
+      msgTypeUrl: object?.msg_type_url,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGrantsRequest): QueryGrantsRequestSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -301,7 +301,7 @@ export const QueryGrantsResponse = {
   fromSDK(object: QueryGrantsResponseSDKType): QueryGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -389,14 +389,14 @@ export const QueryGranterGrantsRequest = {
 
   fromSDK(object: QueryGranterGrantsRequestSDKType): QueryGranterGrantsRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      granter: object?.granter,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestSDKType {
     const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
+    obj.granter = message.granter;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -479,7 +479,7 @@ export const QueryGranterGrantsResponse = {
   fromSDK(object: QueryGranterGrantsResponseSDKType): QueryGranterGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 
@@ -567,14 +567,14 @@ export const QueryGranteeGrantsRequest = {
 
   fromSDK(object: QueryGranteeGrantsRequestSDKType): QueryGranteeGrantsRequest {
     return {
-      grantee: isSet(object.grantee) ? object.grantee : undefined,
-      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+      grantee: object?.grantee,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
 
   toSDK(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestSDKType {
     const obj: any = {};
-    message.grantee !== undefined && (obj.grantee = message.grantee);
+    obj.grantee = message.grantee;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
   }
@@ -657,7 +657,7 @@ export const QueryGranteeGrantsResponse = {
   fromSDK(object: QueryGranteeGrantsResponseSDKType): QueryGranteeGrantsResponse {
     return {
       grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
 

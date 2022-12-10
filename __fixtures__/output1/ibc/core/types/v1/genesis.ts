@@ -113,9 +113,9 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      clientGenesis: isSet(object.client_genesis) ? GenesisState1.fromSDK(object.client_genesis) : undefined,
-      connectionGenesis: isSet(object.connection_genesis) ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
-      channelGenesis: isSet(object.channel_genesis) ? GenesisState3.fromSDK(object.channel_genesis) : undefined
+      clientGenesis: object.client_genesis ? GenesisState1.fromSDK(object.client_genesis) : undefined,
+      connectionGenesis: object.connection_genesis ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
+      channelGenesis: object.channel_genesis ? GenesisState3.fromSDK(object.channel_genesis) : undefined
     };
   },
 

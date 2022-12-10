@@ -1,8 +1,8 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
 import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.solomachine.v2";
 
 /**
@@ -41,43 +41,7 @@ export enum DataType {
   DATA_TYPE_HEADER = 9,
   UNRECOGNIZED = -1,
 }
-
-/**
- * DataType defines the type of solo machine proof being created. This is done
- * to preserve uniqueness of different data sign byte encodings.
- */
-export enum DataTypeSDKType {
-  /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
-  DATA_TYPE_UNINITIALIZED_UNSPECIFIED = 0,
-
-  /** DATA_TYPE_CLIENT_STATE - Data type for client state verification */
-  DATA_TYPE_CLIENT_STATE = 1,
-
-  /** DATA_TYPE_CONSENSUS_STATE - Data type for consensus state verification */
-  DATA_TYPE_CONSENSUS_STATE = 2,
-
-  /** DATA_TYPE_CONNECTION_STATE - Data type for connection state verification */
-  DATA_TYPE_CONNECTION_STATE = 3,
-
-  /** DATA_TYPE_CHANNEL_STATE - Data type for channel state verification */
-  DATA_TYPE_CHANNEL_STATE = 4,
-
-  /** DATA_TYPE_PACKET_COMMITMENT - Data type for packet commitment verification */
-  DATA_TYPE_PACKET_COMMITMENT = 5,
-
-  /** DATA_TYPE_PACKET_ACKNOWLEDGEMENT - Data type for packet acknowledgement verification */
-  DATA_TYPE_PACKET_ACKNOWLEDGEMENT = 6,
-
-  /** DATA_TYPE_PACKET_RECEIPT_ABSENCE - Data type for packet receipt absence verification */
-  DATA_TYPE_PACKET_RECEIPT_ABSENCE = 7,
-
-  /** DATA_TYPE_NEXT_SEQUENCE_RECV - Data type for next sequence recv verification */
-  DATA_TYPE_NEXT_SEQUENCE_RECV = 8,
-
-  /** DATA_TYPE_HEADER - Data type for header verification */
-  DATA_TYPE_HEADER = 9,
-  UNRECOGNIZED = -1,
-}
+export const DataTypeSDKType = DataType;
 export function dataTypeFromJSON(object: any): DataType {
   switch (object) {
     case 0:
@@ -297,7 +261,7 @@ export interface SignatureAndData {
  */
 export interface SignatureAndDataSDKType {
   signature: Uint8Array;
-  data_type: DataTypeSDKType;
+  data_type: DataType;
   data: Uint8Array;
   timestamp: Long;
 }
@@ -340,7 +304,7 @@ export interface SignBytesSDKType {
   diversifier: string;
 
   /** type of the data used */
-  data_type: DataTypeSDKType;
+  data_type: DataType;
 
   /** marshaled data */
   data: Uint8Array;
@@ -593,19 +557,19 @@ export const ClientState = {
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      isFrozen: isSet(object.is_frozen) ? object.is_frozen : undefined,
-      consensusState: isSet(object.consensus_state) ? ConsensusState.fromSDK(object.consensus_state) : undefined,
-      allowUpdateAfterProposal: isSet(object.allow_update_after_proposal) ? object.allow_update_after_proposal : undefined
+      sequence: object?.sequence,
+      isFrozen: object?.is_frozen,
+      consensusState: object.consensus_state ? ConsensusState.fromSDK(object.consensus_state) : undefined,
+      allowUpdateAfterProposal: object?.allow_update_after_proposal
     };
   },
 
   toSDK(message: ClientState): ClientStateSDKType {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.isFrozen !== undefined && (obj.is_frozen = message.isFrozen);
+    obj.sequence = message.sequence;
+    obj.is_frozen = message.isFrozen;
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? ConsensusState.toSDK(message.consensusState) : undefined);
-    message.allowUpdateAfterProposal !== undefined && (obj.allow_update_after_proposal = message.allowUpdateAfterProposal);
+    obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
     return obj;
   }
 
@@ -692,17 +656,17 @@ export const ConsensusState = {
 
   fromSDK(object: ConsensusStateSDKType): ConsensusState {
     return {
-      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
-      diversifier: isSet(object.diversifier) ? object.diversifier : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
+      publicKey: object.public_key ? Any.fromSDK(object.public_key) : undefined,
+      diversifier: object?.diversifier,
+      timestamp: object?.timestamp
     };
   },
 
   toSDK(message: ConsensusState): ConsensusStateSDKType {
     const obj: any = {};
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    obj.diversifier = message.diversifier;
+    obj.timestamp = message.timestamp;
     return obj;
   }
 
@@ -813,21 +777,21 @@ export const Header = {
 
   fromSDK(object: HeaderSDKType): Header {
     return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
-      signature: isSet(object.signature) ? object.signature : undefined,
-      newPublicKey: isSet(object.new_public_key) ? Any.fromSDK(object.new_public_key) : undefined,
-      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : undefined
+      sequence: object?.sequence,
+      timestamp: object?.timestamp,
+      signature: object?.signature,
+      newPublicKey: object.new_public_key ? Any.fromSDK(object.new_public_key) : undefined,
+      newDiversifier: object?.new_diversifier
     };
   },
 
   toSDK(message: Header): HeaderSDKType {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.sequence = message.sequence;
+    obj.timestamp = message.timestamp;
+    obj.signature = message.signature;
     message.newPublicKey !== undefined && (obj.new_public_key = message.newPublicKey ? Any.toSDK(message.newPublicKey) : undefined);
-    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
+    obj.new_diversifier = message.newDiversifier;
     return obj;
   }
 
@@ -926,17 +890,17 @@ export const Misbehaviour = {
 
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      signatureOne: isSet(object.signature_one) ? SignatureAndData.fromSDK(object.signature_one) : undefined,
-      signatureTwo: isSet(object.signature_two) ? SignatureAndData.fromSDK(object.signature_two) : undefined
+      clientId: object?.client_id,
+      sequence: object?.sequence,
+      signatureOne: object.signature_one ? SignatureAndData.fromSDK(object.signature_one) : undefined,
+      signatureTwo: object.signature_two ? SignatureAndData.fromSDK(object.signature_two) : undefined
     };
   },
 
   toSDK(message: Misbehaviour): MisbehaviourSDKType {
     const obj: any = {};
-    message.clientId !== undefined && (obj.client_id = message.clientId);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    obj.client_id = message.clientId;
+    obj.sequence = message.sequence;
     message.signatureOne !== undefined && (obj.signature_one = message.signatureOne ? SignatureAndData.toSDK(message.signatureOne) : undefined);
     message.signatureTwo !== undefined && (obj.signature_two = message.signatureTwo ? SignatureAndData.toSDK(message.signatureTwo) : undefined);
     return obj;
@@ -1037,19 +1001,19 @@ export const SignatureAndData = {
 
   fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
     return {
-      signature: isSet(object.signature) ? object.signature : undefined,
+      signature: object?.signature,
       dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
-      data: isSet(object.data) ? object.data : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
+      data: object?.data,
+      timestamp: object?.timestamp
     };
   },
 
   toSDK(message: SignatureAndData): SignatureAndDataSDKType {
     const obj: any = {};
-    message.signature !== undefined && (obj.signature = message.signature);
+    obj.signature = message.signature;
     message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = message.data);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    obj.data = message.data;
+    obj.timestamp = message.timestamp;
     return obj;
   }
 
@@ -1124,15 +1088,15 @@ export const TimestampedSignatureData = {
 
   fromSDK(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
     return {
-      signatureData: isSet(object.signature_data) ? object.signature_data : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined
+      signatureData: object?.signature_data,
+      timestamp: object?.timestamp
     };
   },
 
   toSDK(message: TimestampedSignatureData): TimestampedSignatureDataSDKType {
     const obj: any = {};
-    message.signatureData !== undefined && (obj.signature_data = message.signatureData);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    obj.signature_data = message.signatureData;
+    obj.timestamp = message.timestamp;
     return obj;
   }
 
@@ -1243,21 +1207,21 @@ export const SignBytes = {
 
   fromSDK(object: SignBytesSDKType): SignBytes {
     return {
-      sequence: isSet(object.sequence) ? object.sequence : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
-      diversifier: isSet(object.diversifier) ? object.diversifier : undefined,
+      sequence: object?.sequence,
+      timestamp: object?.timestamp,
+      diversifier: object?.diversifier,
       dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
-      data: isSet(object.data) ? object.data : undefined
+      data: object?.data
     };
   },
 
   toSDK(message: SignBytes): SignBytesSDKType {
     const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = message.sequence);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
+    obj.sequence = message.sequence;
+    obj.timestamp = message.timestamp;
+    obj.diversifier = message.diversifier;
     message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = message.data);
+    obj.data = message.data;
     return obj;
   }
 
@@ -1332,15 +1296,15 @@ export const HeaderData = {
 
   fromSDK(object: HeaderDataSDKType): HeaderData {
     return {
-      newPubKey: isSet(object.new_pub_key) ? Any.fromSDK(object.new_pub_key) : undefined,
-      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : undefined
+      newPubKey: object.new_pub_key ? Any.fromSDK(object.new_pub_key) : undefined,
+      newDiversifier: object?.new_diversifier
     };
   },
 
   toSDK(message: HeaderData): HeaderDataSDKType {
     const obj: any = {};
     message.newPubKey !== undefined && (obj.new_pub_key = message.newPubKey ? Any.toSDK(message.newPubKey) : undefined);
-    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
+    obj.new_diversifier = message.newDiversifier;
     return obj;
   }
 
@@ -1415,14 +1379,14 @@ export const ClientStateData = {
 
   fromSDK(object: ClientStateDataSDKType): ClientStateData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
+      path: object?.path,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined
     };
   },
 
   toSDK(message: ClientStateData): ClientStateDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
+    obj.path = message.path;
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     return obj;
   }
@@ -1498,14 +1462,14 @@ export const ConsensusStateData = {
 
   fromSDK(object: ConsensusStateDataSDKType): ConsensusStateData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined
+      path: object?.path,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
     };
   },
 
   toSDK(message: ConsensusStateData): ConsensusStateDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
+    obj.path = message.path;
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
     return obj;
   }
@@ -1581,14 +1545,14 @@ export const ConnectionStateData = {
 
   fromSDK(object: ConnectionStateDataSDKType): ConnectionStateData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      connection: isSet(object.connection) ? ConnectionEnd.fromSDK(object.connection) : undefined
+      path: object?.path,
+      connection: object.connection ? ConnectionEnd.fromSDK(object.connection) : undefined
     };
   },
 
   toSDK(message: ConnectionStateData): ConnectionStateDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
+    obj.path = message.path;
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
     return obj;
   }
@@ -1664,14 +1628,14 @@ export const ChannelStateData = {
 
   fromSDK(object: ChannelStateDataSDKType): ChannelStateData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined
+      path: object?.path,
+      channel: object.channel ? Channel.fromSDK(object.channel) : undefined
     };
   },
 
   toSDK(message: ChannelStateData): ChannelStateDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
+    obj.path = message.path;
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
     return obj;
   }
@@ -1747,15 +1711,15 @@ export const PacketCommitmentData = {
 
   fromSDK(object: PacketCommitmentDataSDKType): PacketCommitmentData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      commitment: isSet(object.commitment) ? object.commitment : undefined
+      path: object?.path,
+      commitment: object?.commitment
     };
   },
 
   toSDK(message: PacketCommitmentData): PacketCommitmentDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.commitment !== undefined && (obj.commitment = message.commitment);
+    obj.path = message.path;
+    obj.commitment = message.commitment;
     return obj;
   }
 
@@ -1830,15 +1794,15 @@ export const PacketAcknowledgementData = {
 
   fromSDK(object: PacketAcknowledgementDataSDKType): PacketAcknowledgementData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined
+      path: object?.path,
+      acknowledgement: object?.acknowledgement
     };
   },
 
   toSDK(message: PacketAcknowledgementData): PacketAcknowledgementDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
+    obj.path = message.path;
+    obj.acknowledgement = message.acknowledgement;
     return obj;
   }
 
@@ -1901,13 +1865,13 @@ export const PacketReceiptAbsenceData = {
 
   fromSDK(object: PacketReceiptAbsenceDataSDKType): PacketReceiptAbsenceData {
     return {
-      path: isSet(object.path) ? object.path : undefined
+      path: object?.path
     };
   },
 
   toSDK(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
+    obj.path = message.path;
     return obj;
   }
 
@@ -1982,15 +1946,15 @@ export const NextSequenceRecvData = {
 
   fromSDK(object: NextSequenceRecvDataSDKType): NextSequenceRecvData {
     return {
-      path: isSet(object.path) ? object.path : undefined,
-      nextSeqRecv: isSet(object.next_seq_recv) ? object.next_seq_recv : undefined
+      path: object?.path,
+      nextSeqRecv: object?.next_seq_recv
     };
   },
 
   toSDK(message: NextSequenceRecvData): NextSequenceRecvDataSDKType {
     const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.nextSeqRecv !== undefined && (obj.next_seq_recv = message.nextSeqRecv);
+    obj.path = message.path;
+    obj.next_seq_recv = message.nextSeqRecv;
     return obj;
   }
 

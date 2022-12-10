@@ -250,21 +250,21 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
-      lastTotalPower: isSet(object.last_total_power) ? object.last_total_power : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
+      lastTotalPower: object?.last_total_power,
       lastValidatorPowers: Array.isArray(object?.last_validator_powers) ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromSDK(e)) : [],
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromSDK(e)) : [],
       unbondingDelegations: Array.isArray(object?.unbonding_delegations) ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
       redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromSDK(e)) : [],
-      exported: isSet(object.exported) ? object.exported : undefined
+      exported: object?.exported
     };
   },
 
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
-    message.lastTotalPower !== undefined && (obj.last_total_power = message.lastTotalPower);
+    obj.last_total_power = message.lastTotalPower;
 
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toSDK(e) : undefined);
@@ -296,7 +296,7 @@ export const GenesisState = {
       obj.redelegations = [];
     }
 
-    message.exported !== undefined && (obj.exported = message.exported);
+    obj.exported = message.exported;
     return obj;
   }
 
@@ -371,15 +371,15 @@ export const LastValidatorPower = {
 
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {
     return {
-      address: isSet(object.address) ? object.address : undefined,
-      power: isSet(object.power) ? object.power : undefined
+      address: object?.address,
+      power: object?.power
     };
   },
 
   toSDK(message: LastValidatorPower): LastValidatorPowerSDKType {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
+    obj.address = message.address;
+    obj.power = message.power;
     return obj;
   }
 

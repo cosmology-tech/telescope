@@ -20,6 +20,25 @@ export const createAminoConverterItem = (
 
     const typeUrl = getTypeUrl(root, proto);
 
+    const toAmino = context.options.aminoEncoding.useRecursiveV2encoding ?
+        t.memberExpression(
+            t.identifier(proto.name),
+            t.identifier('toAmino')
+        ) : toAminoJsonMethod({
+            context,
+            proto
+        });
+
+    const fromAmino = context.options.aminoEncoding.useRecursiveV2encoding ?
+        t.memberExpression(
+            t.identifier(proto.name),
+            t.identifier('fromAmino')
+        ) : fromAminoJsonMethod({
+            context,
+            proto
+        })
+
+
     return t.objectProperty(
         t.stringLiteral(typeUrl),
         t.objectExpression(
@@ -32,17 +51,11 @@ export const createAminoConverterItem = (
                 ),
                 t.objectProperty(
                     t.identifier('toAmino'),
-                    toAminoJsonMethod({
-                        context,
-                        proto
-                    })
+                    toAmino
                 ),
                 t.objectProperty(
                     t.identifier('fromAmino'),
-                    fromAminoJsonMethod({
-                        context,
-                        proto
-                    })
+                    fromAmino
                 )
             ]
         )

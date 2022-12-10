@@ -701,40 +701,40 @@ export const Service = {
 
   fromSDK(object: ServiceSDKType): Service {
     return {
-      name: isSet(object.name) ? object.name : undefined,
-      title: isSet(object.title) ? object.title : undefined,
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
-      id: isSet(object.id) ? object.id : undefined,
+      name: object?.name,
+      title: object?.title,
+      producerProjectId: object?.producer_project_id,
+      id: object?.id,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDK(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDK(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
-      backend: isSet(object.backend) ? Backend.fromSDK(object.backend) : undefined,
-      http: isSet(object.http) ? Http.fromSDK(object.http) : undefined,
-      quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromSDK(object.authentication) : undefined,
-      context: isSet(object.context) ? Context.fromSDK(object.context) : undefined,
-      usage: isSet(object.usage) ? Usage.fromSDK(object.usage) : undefined,
+      documentation: object.documentation ? Documentation.fromSDK(object.documentation) : undefined,
+      backend: object.backend ? Backend.fromSDK(object.backend) : undefined,
+      http: object.http ? Http.fromSDK(object.http) : undefined,
+      quota: object.quota ? Quota.fromSDK(object.quota) : undefined,
+      authentication: object.authentication ? Authentication.fromSDK(object.authentication) : undefined,
+      context: object.context ? Context.fromSDK(object.context) : undefined,
+      usage: object.usage ? Usage.fromSDK(object.usage) : undefined,
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
-      control: isSet(object.control) ? Control.fromSDK(object.control) : undefined,
+      control: object.control ? Control.fromSDK(object.control) : undefined,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromSDK(e)) : [],
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromSDK(e)) : [],
       monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      billing: isSet(object.billing) ? Billing.fromSDK(object.billing) : undefined,
-      logging: isSet(object.logging) ? Logging.fromSDK(object.logging) : undefined,
-      monitoring: isSet(object.monitoring) ? Monitoring.fromSDK(object.monitoring) : undefined,
-      systemParameters: isSet(object.system_parameters) ? SystemParameters.fromSDK(object.system_parameters) : undefined,
-      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
-      configVersion: isSet(object.config_version) ? UInt32Value.fromSDK(object.config_version) : undefined
+      billing: object.billing ? Billing.fromSDK(object.billing) : undefined,
+      logging: object.logging ? Logging.fromSDK(object.logging) : undefined,
+      monitoring: object.monitoring ? Monitoring.fromSDK(object.monitoring) : undefined,
+      systemParameters: object.system_parameters ? SystemParameters.fromSDK(object.system_parameters) : undefined,
+      sourceInfo: object.source_info ? SourceInfo.fromSDK(object.source_info) : undefined,
+      configVersion: object.config_version ? UInt32Value.fromSDK(object.config_version) : undefined
     };
   },
 
   toSDK(message: Service): ServiceSDKType {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
-    message.id !== undefined && (obj.id = message.id);
+    obj.name = message.name;
+    obj.title = message.title;
+    obj.producer_project_id = message.producerProjectId;
+    obj.id = message.id;
 
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);

@@ -10,12 +10,12 @@ export interface CreateProtoTypeOptions {
     typeNamePrefix?: string;
     typeNameSuffix?: string;
 }
-export declare const createProtoTypeOptionsDefaults: {
-    useOriginalCase: boolean;
-};
+export declare const createProtoTypeOptionsDefaults: CreateProtoTypeOptions;
 export declare const getMessageName: (name: string, options?: CreateProtoTypeOptions) => string;
 export declare const getFieldTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => any;
+export declare const getFieldAminoTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => any;
 export declare const getTSType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
+export declare const getTSAminoType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeFromGoogleType: (context: GenericParseContext, type: string, options?: CreateProtoTypeOptions) => t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeForAmino: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeForProto: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;

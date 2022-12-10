@@ -150,7 +150,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined,
       devFeeInfos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromSDK(e)) : []
     };
   },
@@ -275,21 +275,21 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableFees: isSet(object.enable_fees) ? object.enable_fees : undefined,
-      developerShares: isSet(object.developer_shares) ? object.developer_shares : undefined,
-      validatorShares: isSet(object.validator_shares) ? object.validator_shares : undefined,
-      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : undefined,
-      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : undefined
+      enableFees: object?.enable_fees,
+      developerShares: object?.developer_shares,
+      validatorShares: object?.validator_shares,
+      addrDerivationCostCreate: object?.addr_derivation_cost_create,
+      minGasPrice: object?.min_gas_price
     };
   },
 
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
-    message.enableFees !== undefined && (obj.enable_fees = message.enableFees);
-    message.developerShares !== undefined && (obj.developer_shares = message.developerShares);
-    message.validatorShares !== undefined && (obj.validator_shares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addr_derivation_cost_create = message.addrDerivationCostCreate);
-    message.minGasPrice !== undefined && (obj.min_gas_price = message.minGasPrice);
+    obj.enable_fees = message.enableFees;
+    obj.developer_shares = message.developerShares;
+    obj.validator_shares = message.validatorShares;
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate;
+    obj.min_gas_price = message.minGasPrice;
     return obj;
   }
 

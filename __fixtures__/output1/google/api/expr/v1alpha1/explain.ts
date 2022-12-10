@@ -245,15 +245,15 @@ export const Explain_ExprStep = {
 
   fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? object.id : undefined,
-      valueIndex: isSet(object.value_index) ? object.value_index : undefined
+      id: object?.id,
+      valueIndex: object?.value_index
     };
   },
 
   toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.valueIndex !== undefined && (obj.value_index = message.valueIndex);
+    obj.id = message.id;
+    obj.value_index = message.valueIndex;
     return obj;
   }
 
