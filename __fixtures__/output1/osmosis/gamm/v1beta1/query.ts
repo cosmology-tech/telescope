@@ -3,6 +3,9 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial } from "../../../helpers";
+
+import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
+import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
@@ -16,7 +19,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool?: Any;
+  pool?: Pool1 | Pool2;
 }
 export interface QueryPoolResponseSDKType {
   pool?: AnySDKType;
@@ -34,7 +37,7 @@ export interface QueryPoolsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: Any[];
+  pools: (Pool1 | Pool2)[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -398,9 +401,8 @@ export const QueryPoolResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.pool = Any.decode(reader, reader.uint32());
+          message.pool = PoolI_InterfaceDecoder(reader);
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
@@ -518,6 +520,23 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   };
 }
 
+export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const message: any = {};
+
+  const data = Any.decode(reader, reader.uint32());
+  switch (data.typeUrl) {
+    case '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool':
+      return Pool2.decode(data.value);
+    case '/osmosis.gamm.v1beta1.Pool':
+      return Pool1.decode(data.value);
+    default:
+      throw new Error('unknown value in typeUrl for interface PoolI');
+  }
+
+  return message;
+}
+
 export const QueryPoolsResponse = {
   encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
@@ -541,7 +560,7 @@ export const QueryPoolsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(Any.decode(reader, reader.uint32()));
+          message.pools.push(PoolI_InterfaceDecoder(reader));
           break;
 
         case 2:
