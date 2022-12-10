@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField, TelescopeLogLevel } from '@osmonauts/types';
 import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -69,7 +69,7 @@ export const getFieldTypeReference = (
         // const found = context.ref.traversed.symbols
 
         const symb = context.store._symbols.find(s => s.implementsType === lookupInterface);
-        if (!symb && context.pluginValue('prototypes.warningAcceptsNotImplemented')) {
+        if (!symb && context.options.logLevel >= TelescopeLogLevel.Warn) {
             console.warn(`[WARN] ${lookupInterface} is accepted but not implemented`);
         }
 
