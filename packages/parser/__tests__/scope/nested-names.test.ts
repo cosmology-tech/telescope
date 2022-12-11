@@ -1,6 +1,6 @@
-import { traverse } from '../src/';
+import { traverse } from '../../src';
 import * as dotty from 'dotty';
-import { getTestProtoStore } from '../test-utils';
+import { getTestProtoStore } from '../../test-utils';
 
 const store = getTestProtoStore();
 

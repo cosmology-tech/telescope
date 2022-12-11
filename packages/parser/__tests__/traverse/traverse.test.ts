@@ -1,6 +1,6 @@
-import { traverse } from '../src/';
-import { getNested } from '../src/utils'
-import { getTestProtoStore } from '../test-utils';
+import { traverse } from '../../src';
+import { getNested } from '../../src/utils'
+import { getTestProtoStore } from '../../test-utils';
 
 const store = getTestProtoStore();
 

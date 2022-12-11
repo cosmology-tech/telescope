@@ -1,5 +1,5 @@
-import { importLookup, protoImportLookup, traverse } from '../src/';
-import { getTestProtoStore } from '../test-utils';
+import { importLookup, protoImportLookup, traverse } from '../../src';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('google/api/expr/v1alpha1/checked', () => {

@@ -1,8 +1,8 @@
 import { ProtoRef } from '@osmonauts/types';
-import { ProtoStore } from '../src/index'
-import { traverse } from '../src/';
-import { getNested } from '../src/utils'
-import { getTestProtoStore } from '../test-utils';
+import { ProtoStore } from '../../src/index'
+import { traverse } from '../../src';
+import { getNested } from '../../src/utils'
+import { getTestProtoStore } from '../../test-utils';
 
 const store = getTestProtoStore();
 

@@ -1,5 +1,5 @@
-import { importLookup, protoImportLookup } from '../src/';
-import { getTestProtoStore } from '../test-utils';
+import { importLookup, protoImportLookup } from '../../src';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 describe('imports lookup', () => {

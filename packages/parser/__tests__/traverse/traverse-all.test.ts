@@ -1,4 +1,4 @@
-import { getTestProtoStore } from '../test-utils';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 describe('osmosis/gamm/v1beta1/tx', () => {

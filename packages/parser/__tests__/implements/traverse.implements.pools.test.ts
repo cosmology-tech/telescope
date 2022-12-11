@@ -1,7 +1,4 @@
-import { GenericParseContext, getTypeUrl } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
-import { getNestedProto, ProtoStore } from '../src';
-import { getTestProtoStore } from '../test-utils';
+import { getTestProtoStore } from '../../test-utils';
 
 describe('PoolI', () => {
   const store = getTestProtoStore();
@@ -24,6 +21,7 @@ describe('PoolI', () => {
           types: [
             {
               typeUrl: '/osmosis.gamm.v1beta1.Pool',
+              aminoType: "osmosis/gamm/pool",
               type: 'Pool',
               importAs: 'Pool1'
             }
@@ -34,6 +32,8 @@ describe('PoolI', () => {
           types: [
             {
               typeUrl: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',
+              // TODO this is WRONG!!!!!!!!!!
+              aminoType: "osmosis/gamm/pool",
               type: 'Pool',
               importAs: 'Pool2'
             }

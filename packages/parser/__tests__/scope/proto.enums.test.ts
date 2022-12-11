@@ -1,5 +1,5 @@
-import { getEnums } from '../src/utils';
-import { getTestProtoStore } from '../test-utils';
+import { getEnums } from '../../src/utils';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('find', () => {

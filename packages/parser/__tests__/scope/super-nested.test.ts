@@ -1,6 +1,6 @@
 import generate from '@babel/generator';
 import { ProtoRef } from '@osmonauts/types'
-import { ProtoStore, getNestedProtoGeneric, parseProto } from '../src/'
+import { ProtoStore, getNestedProtoGeneric, parseProto } from '../../src'
 
 /*
 

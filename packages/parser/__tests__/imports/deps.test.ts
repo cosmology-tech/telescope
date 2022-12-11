@@ -1,5 +1,5 @@
-import { ProtoResolver } from '../src/index'
-import { getTestProtoStore } from '../test-utils';
+import { ProtoResolver } from '../../src/index'
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 const resolver = new ProtoResolver(store.getDeps());
 

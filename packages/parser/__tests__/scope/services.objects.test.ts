@@ -1,5 +1,5 @@
-import { getServices } from '../src/utils';
-import { getTestProtoStore } from '../test-utils';
+import { getServices } from '../../src/utils';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('Msg', () => {

@@ -1,5 +1,5 @@
-import { getObjectName, lookup } from '../src/';
-import { getTestProtoStore } from '../test-utils';
+import { getObjectName, lookup } from '../../src';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('top-level lookup', () => {

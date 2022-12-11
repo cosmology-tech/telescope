@@ -1,6 +1,6 @@
-import { ProtoStore } from '../src/index';
-import { getObjectName, lookup } from '../src/';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { ProtoStore } from '../../src/index';
+import { getObjectName, lookup } from '../../src';
+const store = new ProtoStore([__dirname + '/../../../../__fixtures__/chain1']);
 
 it('nested lookup', () => {
   // TODO generate the enum function

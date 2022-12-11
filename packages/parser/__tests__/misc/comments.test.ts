@@ -1,5 +1,5 @@
-import { traverse } from '../src/';
-import { getTestProtoStore } from '../test-utils';
+import { traverse } from '../../src';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('cosmos/base/query/v1beta1/pagination', () => {

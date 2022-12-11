@@ -1,6 +1,6 @@
 import { ProtoRef, ProtoRoot } from '@osmonauts/types';
-import { parseFullyTraversedProtoImports, parseProto, ProtoStore, TraverseContext } from '../src';
-import google_any from '../src/native/any';
+import { parseFullyTraversedProtoImports, parseProto, ProtoStore } from '../../src';
+import google_any from '../../src/native/any';
 const getStore = () => {
 
     const store = new ProtoStore();

@@ -1,4 +1,4 @@
-import { getTestProtoStore } from '../test-utils';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 it('Coin', () => {

@@ -1,6 +1,6 @@
-import { ProtoStore } from '../src/index'
-import { getObjectName, lookupSymbolScopes, lookup, getPackageAndNestedFromStr } from '../src/';
-import { getTestProtoStore } from '../test-utils';
+import { ProtoStore } from '../../src/index'
+import { getObjectName, lookupSymbolScopes, lookup, getPackageAndNestedFromStr } from '../../src';
+import { getTestProtoStore } from '../../test-utils';
 const store = getTestProtoStore();
 
 // you may need to fix TRAVERSE
