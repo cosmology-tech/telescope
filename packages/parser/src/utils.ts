@@ -55,6 +55,7 @@ export const createTypeUrlTypeMap = (
                 result[implementsType] = result[implementsType] || [];
                 result[implementsType].push({
                     ref: ref.filename,
+                    pkg: ref.proto.package,
                     types: types?.map(type => {
                         const typeUrl = getTypeUrl(ref.proto, getNestedProto(ref.proto)[type]);
                         const aminoType = typeUrlToAmino(ctx, typeUrl);
