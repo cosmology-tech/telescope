@@ -139,6 +139,11 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        }
     };
 }
 interface TelescopePackageOpts {
@@ -243,7 +248,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     reactQuery: {
-        enabled: false
+        enabled: false,
+        include: {
+            patterns: [],
+            packages: [],
+            protos: []
+        }
     },
 
     // packages

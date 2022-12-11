@@ -34,7 +34,6 @@ export const writeAstToFile = (
     }
 }
 
-
 export const writeContentToFile = (
     outPath: string,
     options: TelescopeOptions,

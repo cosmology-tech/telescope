@@ -111,6 +111,11 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
     };
 }
 interface TelescopePackageOpts {
