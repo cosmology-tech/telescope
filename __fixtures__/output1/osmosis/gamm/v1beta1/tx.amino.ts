@@ -4,7 +4,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType, MsgJoinPool, MsgJoinPoolSDKType, MsgExitPool, MsgExitPoolSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType } from "./tx";
 export interface AminoMsgJoinPool extends AminoMsg {
-  type: "osmosis/gamm/join-pool";
+  type: "osmosis-sdk/JoinPool";
   value: {
     sender: string;
     pool_id: string;
@@ -103,7 +103,7 @@ export interface AminoMsgExitSwapShareAmountIn extends AminoMsg {
 }
 export const AminoConverter = {
   "/osmosis.gamm.v1beta1.MsgJoinPool": {
-    aminoType: "osmosis/gamm/join-pool",
+    aminoType: "osmosis-sdk/JoinPool",
     toAmino: ({
       sender,
       poolId,
