@@ -14,33 +14,7 @@ describe('PoolI', () => {
       queryRef
     );
 
-    expect(result).toEqual({
-      PoolI: [
-        {
-          ref: 'osmosis/gamm/pool-models/balancer/balancerPool.proto',
-          types: [
-            {
-              typeUrl: '/osmosis.gamm.v1beta1.Pool',
-              aminoType: "osmosis/gamm/pool",
-              type: 'Pool',
-              importAs: 'Pool1'
-            }
-          ]
-        },
-        {
-          ref: 'osmosis/gamm/pool-models/stableswap/stableswap_pool.proto',
-          types: [
-            {
-              typeUrl: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',
-              // TODO this is WRONG!!!!!!!!!!
-              aminoType: "osmosis/gamm/pool",
-              type: 'Pool',
-              importAs: 'Pool2'
-            }
-          ]
-        }
-      ]
-    })
+    expect(result).toMatchSnapshot();
   });
 
   it('balancerRef', () => {

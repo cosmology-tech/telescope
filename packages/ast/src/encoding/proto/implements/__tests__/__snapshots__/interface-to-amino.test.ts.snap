@@ -1,6 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProposalContent ProposalContent 1`] = `
+"export const ProposalContentI_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.gov.v1beta1.TextProposal":
+      {
+        const data = TextProposal.decode(content.value);
+        return {
+          type: "cosmos-sdk/v1/TextProposal",
+          value: TextProposal.toAmino(data)
+        };
+      }
+
+    case "/evmos.incentives.v1.RegisterIncentiveProposal":
+      {
+        const data = RegisterIncentiveProposal.decode(content.value);
+        return {
+          type: "/evmos.incentives.v1.RegisterIncentiveProposal",
+          value: RegisterIncentiveProposal.toAmino(data)
+        };
+      }
+
+    case "/ibc.core.client.v1.ClientUpdateProposal":
+      {
+        const data = ClientUpdateProposal.decode(content.value);
+        return {
+          type: "cosmos-sdk/ClientUpdateProposal",
+          value: ClientUpdateProposal.toAmino(data)
+        };
+      }
+
+    case "/ibc.core.client.v1.UpgradeProposal":
+      {
+        const data = UpgradeProposal.decode(content.value);
+        return {
+          type: "cosmos-sdk/UpgradeProposal",
+          value: UpgradeProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal":
+      {
+        const data = ReplacePoolIncentivesProposal.decode(content.value);
+        return {
+          type: "osmosis/poolincentives/replace-pool-incentives-proposal",
+          value: ReplacePoolIncentivesProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal":
+      {
+        const data = UpdatePoolIncentivesProposal.decode(content.value);
+        return {
+          type: "osmosis/poolincentives/update-pool-incentives-proposal",
+          value: UpdatePoolIncentivesProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal":
+      {
+        const data = SetSuperfluidAssetsProposal.decode(content.value);
+        return {
+          type: "osmosis/v1beta1/set-superfluid-assets-proposal",
+          value: SetSuperfluidAssetsProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal":
+      {
+        const data = RemoveSuperfluidAssetsProposal.decode(content.value);
+        return {
+          type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
+          value: RemoveSuperfluidAssetsProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal":
+      {
+        const data = UpdateUnpoolWhiteListProposal.decode(content.value);
+        return {
+          type: "osmosis/v1beta1/update-unpool-white-list-proposal",
+          value: UpdateUnpoolWhiteListProposal.toAmino(data)
+        };
+      }
+
+    case "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal":
+      {
+        const data = UpdateFeeTokenProposal.decode(content.value);
+        return {
+          type: "osmosis/txfees/update-fee-token-proposal",
+          value: UpdateFeeTokenProposal.toAmino(data)
+        };
+      }
+
+    default:
+      return Any.toAmino(content);
+  }
+};"
+`;
+
+exports[`ProposalContent ProposalContent helper 1`] = `
 "export const ProposalContentI_toAmino = (content: Any) => {
   switch (content.typeUrl) {
     case "/cosmos.gov.v1beta1.TextProposal":

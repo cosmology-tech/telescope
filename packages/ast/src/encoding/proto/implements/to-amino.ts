@@ -1,15 +1,47 @@
 import * as t from '@babel/types';
+import { InterfaceTypeUrlMap, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
+import { slugify } from '@osmonauts/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
+const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
+
+const getInterfaceToAminoName = (str: string) => {
+    return firstUpper(slugify(str) + '_ToAmino');
+};
+
+export const createInterfaceToAmino = (
+    context: ProtoParseContext,
+    typeMap: InterfaceTypeUrlMap,
+    interfaceName: string,
+) => {
+    const typeRefs = typeMap[interfaceName];
+    return createInterfaceToAminoHelper(
+        context,
+        getInterfaceToAminoName(interfaceName),
+        typeRefs
+    );
+};
+
 export const createInterfaceToAminoHelper = (
     context: ProtoParseContext,
-    functionName: string
+    functionName: string,
+    typeRefs: TraverseTypeUrlRef[]
 ) => {
 
-    const switchCases = [
-        t.switchCase(
-            t.stringLiteral('/cosmos.gov.v1beta1.TextProposal'),
+    const allTypes: TypeUrlRef[] = typeRefs.reduce((m, typeRef) => {
+        // check excludes
+        const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
+        const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
+        const excluded = packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
+        if (excluded) return m;
+        return [...m, ...typeRef.types];
+    }, []);
+
+    const switchCases = allTypes.map(type => {
+        if (!type.aminoType) return;
+        return t.switchCase(
+            t.stringLiteral(type.typeUrl),
             [
                 t.blockStatement([
                     // decoded data
@@ -18,7 +50,7 @@ export const createInterfaceToAminoHelper = (
                             t.identifier('data'),
                             t.callExpression(
                                 t.memberExpression(
-                                    t.identifier('TextProposal'),
+                                    t.identifier(type.importAs),
                                     t.identifier('decode')
                                 ),
                                 [
@@ -35,13 +67,13 @@ export const createInterfaceToAminoHelper = (
                         t.objectExpression([
                             t.objectProperty(
                                 t.identifier('type'),
-                                t.stringLiteral('cosmos-sdk/TextProposal')
+                                t.stringLiteral(type.aminoType)
                             ),
                             t.objectProperty(
                                 t.identifier('value'),
                                 t.callExpression(
                                     t.memberExpression(
-                                        t.identifier('TextProposal'),
+                                        t.identifier(type.importAs),
                                         t.identifier('toAmino')
                                     ),
                                     [
@@ -53,7 +85,7 @@ export const createInterfaceToAminoHelper = (
                     )
                 ])
             ])
-    ];
+    }).filter(Boolean);
 
     return t.exportNamedDeclaration(
         t.variableDeclaration(

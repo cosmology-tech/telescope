@@ -1961,7 +1961,7 @@ exports[`top-level lookup 1`] = `
           "content": {
             "id": 2,
             "options": {
-              "(cosmos_proto.accepts_interface)": "Content",
+              "(cosmos_proto.accepts_interface)": "ProposalContentI",
               "(telescope:camel)": "content",
               "(telescope:name)": "content",
               "(telescope:orig)": "content",
@@ -2187,7 +2187,7 @@ exports[`top-level lookup 1`] = `
           },
         },
         "options": {
-          "(cosmos_proto.implements_interface)": "Content",
+          "(cosmos_proto.implements_interface)": "ProposalContentI",
           "(gogoproto.equal)": true,
         },
       },
