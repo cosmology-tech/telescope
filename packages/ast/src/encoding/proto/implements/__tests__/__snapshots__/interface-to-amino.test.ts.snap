@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProposalContent ProposalContent 1`] = `
+"export const ProposalContentI_toAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.gov.v1beta1.TextProposal":
+      {
+        const data = TextProposal.decode(content.value);
+        return {
+          type: "cosmos-sdk/TextProposal",
+          value: TextProposal.toAmino(data)
+        };
+      }
+
+    default:
+      return Any.toAmino(content);
+  }
+};"
+`;
