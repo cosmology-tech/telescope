@@ -21,6 +21,8 @@ import {
     // helper
     createHelperObject,
     createInterfaceDecoder,
+    createInterfaceFromAmino,
+    createInterfaceToAmino,
 } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
 
@@ -165,6 +167,13 @@ export class TelescopeParseContext implements TelescopeParseContext {
                 console.log({ interfaces })
                 interfaces.forEach(interfaceName => {
                     this.body.push(createInterfaceDecoder(this.proto, this.ref, interfaceName));
+                    if (
+                        this.options.aminoEncoding.enabled &&
+                        this.options.aminoEncoding.useRecursiveV2encoding
+                    ) {
+                        this.body.push(createInterfaceFromAmino(this.proto, this.ref, interfaceName));
+                        this.body.push(createInterfaceToAmino(this.proto, this.ref, interfaceName));
+                    }
                 })
             }
         }
