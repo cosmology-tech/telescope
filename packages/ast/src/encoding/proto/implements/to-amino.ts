@@ -45,47 +45,38 @@ export const createInterfaceToAminoHelper = (
         return t.switchCase(
             t.stringLiteral(type.typeUrl),
             [
-                t.blockStatement([
-                    // decoded data
-                    t.variableDeclaration('const', [
-                        t.variableDeclarator(
-                            t.identifier('data'),
+                // return
+                t.returnStatement(
+                    t.objectExpression([
+                        t.objectProperty(
+                            t.identifier('type'),
+                            t.stringLiteral(type.aminoType)
+                        ),
+                        t.objectProperty(
+                            t.identifier('value'),
                             t.callExpression(
                                 t.memberExpression(
                                     t.identifier(type.importAs),
-                                    t.identifier('decode')
+                                    t.identifier('toAmino')
                                 ),
                                 [
-                                    t.memberExpression(
-                                        t.identifier('content'),
-                                        t.identifier('value')
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier(type.importAs),
+                                            t.identifier('decode')
+                                        ),
+                                        [
+                                            t.memberExpression(
+                                                t.identifier('content'),
+                                                t.identifier('value')
+                                            )
+                                        ]
                                     )
                                 ]
                             )
                         )
-                    ]),
-                    // return
-                    t.returnStatement(
-                        t.objectExpression([
-                            t.objectProperty(
-                                t.identifier('type'),
-                                t.stringLiteral(type.aminoType)
-                            ),
-                            t.objectProperty(
-                                t.identifier('value'),
-                                t.callExpression(
-                                    t.memberExpression(
-                                        t.identifier(type.importAs),
-                                        t.identifier('toAmino')
-                                    ),
-                                    [
-                                        t.identifier('data')
-                                    ]
-                                )
-                            )
-                        ])
-                    )
-                ])
+                    ])
+                )
             ])
     }).filter(Boolean);
 
