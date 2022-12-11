@@ -135,6 +135,7 @@ export declare type TraverseTypeUrlRef = {
     ref: string;
     types: {
         typeUrl: string;
+        aminoType: string;
         type: string;
         importAs: string;
     }[];
