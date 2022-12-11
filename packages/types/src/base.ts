@@ -161,16 +161,18 @@ export type TraverseImport = Record<string, string[]>;
 export type TraverseAccept = Record<string, string[]>;
 export type TraverseImplement = Record<string, string[]>;
 export type TraverseExport = Record<string, boolean>;
-export type TraverseTypeUrlRef = {
-    ref: string;
-    types: {
-        typeUrl: string;
-        aminoType: string;
-        type: string;
-        importAs: string;
-    }[]
+export interface TypeUrlRef {
+    typeUrl: string;
+    aminoType: string;
+    type: string;
+    importAs: string;
 };
 
+export interface TraverseTypeUrlRef {
+    ref: string;
+    pkg: string;
+    types: TypeUrlRef[]
+};
 
 export type TraversedProtoRoot = ProtoRoot & {
     parsedImports: TraverseImport;
