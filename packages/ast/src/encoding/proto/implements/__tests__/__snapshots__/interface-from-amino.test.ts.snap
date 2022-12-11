@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProposalContent ProposalContent 1`] = `
+"export const ProposalContentI_fromAmino = () => {
+  switch (content.type) {
+    case "cosmos-sdk/TextProposal":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.gov.v1beta1.TextProposal",
+        value: TextProposal.encode(TextProposal.fromPartial((content.value as DeepPartial<TextProposal>))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};"
+`;
