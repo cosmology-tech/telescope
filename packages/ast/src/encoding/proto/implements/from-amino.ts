@@ -1,15 +1,51 @@
 import * as t from '@babel/types';
+import { InterfaceTypeUrlMap, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
+import { slugify } from '@osmonauts/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
+
+const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
+
+const getInterfaceFromAminoName = (str: string) => {
+    return firstUpper(slugify(str) + '_FromAmino');
+};
+
+export const createInterfaceFromAmino = (
+    context: ProtoParseContext,
+    typeMap: InterfaceTypeUrlMap,
+    interfaceName: string,
+) => {
+    const typeRefs = typeMap[interfaceName];
+    return createInterfaceFromAminoHelper(
+        context,
+        getInterfaceFromAminoName(interfaceName),
+        typeRefs
+    );
+};
+
 export const createInterfaceFromAminoHelper = (
     context: ProtoParseContext,
-    functionName: string
+    functionName: string,
+    typeRefs: TraverseTypeUrlRef[]
 ) => {
 
-    const switchCases = [
-        t.switchCase(
-            t.stringLiteral('cosmos-sdk/TextProposal'),
+    context.addUtil('DeepPartial');
+
+    const allTypes: TypeUrlRef[] = typeRefs.reduce((m, typeRef) => {
+        // check excludes
+        const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
+        const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
+        const excluded = packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
+        if (excluded) return m;
+        return [...m, ...typeRef.types];
+    }, []);
+
+    const switchCases = allTypes.map(type => {
+        if (!type.aminoType) return;
+
+        return t.switchCase(
+            t.stringLiteral(type.aminoType),
             [
                 t.returnStatement(
                     t.callExpression(
@@ -21,7 +57,7 @@ export const createInterfaceFromAminoHelper = (
                             t.objectExpression([
                                 t.objectProperty(
                                     t.identifier('typeUrl'),
-                                    t.stringLiteral('/cosmos.gov.v1beta1.TextProposal')
+                                    t.stringLiteral(type.typeUrl)
                                 ),
                                 t.objectProperty(
                                     t.identifier('value'),
@@ -29,13 +65,13 @@ export const createInterfaceFromAminoHelper = (
                                         t.memberExpression(
                                             t.callExpression(
                                                 t.memberExpression(
-                                                    t.identifier('TextProposal'),
+                                                    t.identifier(type.importAs),
                                                     t.identifier('encode')
                                                 ),
                                                 [
                                                     t.callExpression(
                                                         t.memberExpression(
-                                                            t.identifier('TextProposal'),
+                                                            t.identifier(type.importAs),
                                                             t.identifier('fromPartial')
                                                         ),
                                                         [
@@ -48,7 +84,7 @@ export const createInterfaceFromAminoHelper = (
                                                                     t.identifier('DeepPartial'),
                                                                     t.tsTypeParameterInstantiation([
                                                                         t.tsTypeReference(
-                                                                            t.identifier('TextProposal')
+                                                                            t.identifier(type.importAs)
                                                                         )
                                                                     ])
                                                                 )
@@ -67,8 +103,8 @@ export const createInterfaceFromAminoHelper = (
                         ]
                     )
                 )]
-        )
-    ];
+        );
+    }).filter(Boolean);
 
     return t.exportNamedDeclaration(
         t.variableDeclaration(
