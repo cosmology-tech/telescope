@@ -42,14 +42,14 @@ export const createInterfaceDecoderHelper = (
     context.addUtil('_m0');
 
     // MARKED AS NOT DRY
-    const allTypes: TypeUrlRef[] = typeRefs.reduce((m, typeRef) => {
+    const allTypes: TypeUrlRef[] = typeRefs?.reduce((m, typeRef) => {
         // check excludes
         const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
         const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
         const excluded = packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
         if (excluded) return m;
         return [...m, ...typeRef.types];
-    }, []);
+    }, []) ?? [];
 
 
     const returnTypes: string[] = allTypes.map(type => type.importAs);
