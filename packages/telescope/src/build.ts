@@ -20,6 +20,7 @@ import {
     createRegistryLoader,
     // helper
     createHelperObject,
+    createInterfaceDecoder,
 } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
 
@@ -143,19 +144,31 @@ export class TelescopeParseContext implements TelescopeParseContext {
             if (obj.type === 'Enum') {
                 buildEnums(this, name, obj);
             }
-        })
+        });
         this.types.forEach(typeReg => {
             const { name, obj } = typeReg;
             if (obj.type === 'Type') {
                 buildBaseTypeScriptInterface(this, name, obj);
             }
-        })
+        });
         this.types.forEach(typeReg => {
             const { name, obj } = typeReg;
             if (obj.type === 'Type') {
                 buildBaseTypeScriptClass(this, name, obj);
             }
-        })
+        });
+
+        // interfaces
+        if (this.options.prototypes.implementsAcceptsAny) {
+            const interfaces = Object.keys(this.ref.traversed.acceptsInterface ?? {});
+            if (interfaces.length) {
+                console.log({ interfaces })
+                interfaces.forEach(interfaceName => {
+                    this.body.push(createInterfaceDecoder(this.proto, this.ref, interfaceName));
+                })
+            }
+        }
+
     }
 
     buildRegistry() {
