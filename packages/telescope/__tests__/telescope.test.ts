@@ -198,19 +198,19 @@ const options: TelescopeOptions = {
 
   reactQuery: {
     enabled: true,
-    include: {
-      patterns: [
-        'osmosis/**/gamm/**/query.proto'
-      ],
-      protos: [
-        'akash/cert/v1beta2/query.proto'
-      ],
-      packages: [
-        'cosmos.bank.v1beta1',
-        'cosmos.gov.v1beta1',
-        'evmos.erc20.v1'
-      ]
-    }
+    // include: {
+    //   patterns: [
+    //     'osmosis/**/gamm/**/query.proto'
+    //   ],
+    //   protos: [
+    //     'akash/cert/v1beta2/query.proto'
+    //   ],
+    //   packages: [
+    //     'cosmos.bank.v1beta1',
+    //     'cosmos.gov.v1beta1',
+    //     'evmos.erc20.v1'
+    //   ]
+    // }
   },
 
   aminoEncoding: {
