@@ -8,7 +8,7 @@ import {
     createRpcQueryHookClientMap,
     createRpcQueryHooks
 } from '@osmonauts/ast';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoService } from '@osmonauts/types';
@@ -76,9 +76,14 @@ export const plugin = (
                     asts.push(createRpcQueryExtension(ctx.generic, svc));
                 }
 
+                const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
+                    c.ref,
+                    c.proto.pluginValue('reactQuery.include')
+                )
+
                 // react query
                 // TODO use the imports and make separate files
-                if (c.proto.pluginValue('reactQuery.enabled')) {
+                if (includeReactQueryHooks) {
                     [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
                     [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                     asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
