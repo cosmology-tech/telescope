@@ -5,7 +5,7 @@ import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
 const getMapFromTypeUrlMap = (urlMap: InterfaceTypeUrlMap, name: string) => {
-    return urlMap?.[name].reduce((m, v) => {
+    return urlMap?.[name]?.reduce((m, v) => {
         v.types.forEach(type => {
             m[type.importAs] = type.typeUrl;
         })
