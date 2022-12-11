@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProposalContent ProposalContent 1`] = `
-"export const ProposalContentI_FromAmino = () => {
+"export const ProposalContentI_FromAmino = (content: AnyAmino) => {
   switch (content.type) {
     case "cosmos-sdk/v1/TextProposal":
       return Any.fromPartial({
@@ -70,7 +70,7 @@ exports[`ProposalContent ProposalContent 1`] = `
 `;
 
 exports[`ProposalContent ProposalContent helper 1`] = `
-"export const ProposalContentI_fromAmino = () => {
+"export const ProposalContentI_fromAmino = (content: AnyAmino) => {
   switch (content.type) {
     case "cosmos-sdk/TextProposal":
       return Any.fromPartial({

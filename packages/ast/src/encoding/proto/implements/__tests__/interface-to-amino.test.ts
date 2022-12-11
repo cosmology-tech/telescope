@@ -39,7 +39,7 @@ describe('ProposalContent', () => {
     it('ProposalContent', () => {
         expectCode(createInterfaceToAmino(
             txContext,
-            store.getTypeUrlMap(txRef),
+            txRef,
             'ProposalContentI',
         ));
     });

@@ -1,3 +1,4 @@
+import { InterfaceTypeUrlMap } from '@osmonauts/types';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createInterfaceDecoder, createInterfaceDecoderHelper } from '../decoder';
@@ -5,6 +6,29 @@ import { createInterfaceDecoder, createInterfaceDecoderHelper } from '../decoder
 const store = getTestProtoStore();
 store.options.prototypes.implementsAcceptsAny = true;
 store.traverseAll();
+
+const typeMap: InterfaceTypeUrlMap = {
+    PoolI: [
+        {
+            ref: 'a/b/c.proto',
+            pkg: 'a.b.c',
+            types: [
+                {
+                    typeUrl: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',
+                    aminoType: 'osmo-sdk/StablePool',
+                    type: 'Pool',
+                    importAs: 'Pool1'
+                },
+                {
+                    typeUrl: '/osmosis.gamm.v1beta1.Pool',
+                    aminoType: 'osmo-sdk/Pool',
+                    type: 'Pool',
+                    importAs: 'Pool2'
+                }
+            ]
+        }
+    ]
+};
 
 describe('PoolI', () => {
     const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
@@ -16,10 +40,7 @@ describe('PoolI', () => {
         expectCode(createInterfaceDecoderHelper(
             queryContext,
             'PoolI_InterfaceDecoder',
-            {
-                Pool2: '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool',
-                Pool1: '/osmosis.gamm.v1beta1.Pool'
-            }
+            typeMap['PoolI']
         ));
     });
 });

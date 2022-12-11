@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { InterfaceTypeUrlMap, ProtoRef } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
 import { slugify } from '@osmonauts/utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
@@ -24,24 +24,36 @@ export const createInterfaceDecoder = (
     ref: ProtoRef,
     interfaceName: string
 ) => {
-    const map = context.store.getTypeUrlMap(ref);
+    const typeMap = context.store.getTypeUrlMap(ref);
+    const typeRefs = typeMap[interfaceName];
     return createInterfaceDecoderHelper(
         context,
         getInterfaceDecoderName(interfaceName),
-        getMapFromTypeUrlMap(map, interfaceName)
+        typeRefs
     );
 }
 
 export const createInterfaceDecoderHelper = (
     context: ProtoParseContext,
-    decoder: string,
-    typeHash: Record<string, string>
+    functionName: string,
+    typeRefs: TraverseTypeUrlRef[]
 ) => {
 
     context.addUtil('_m0');
 
-    const returnTypes: string[] = Object.keys(typeHash);
-    const decodeMessages: string[] = Object.values(typeHash);
+    // MARKED AS NOT DRY
+    const allTypes: TypeUrlRef[] = typeRefs.reduce((m, typeRef) => {
+        // check excludes
+        const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
+        const protos = context.pluginValue('prototypes.excluded.protos') ?? [];
+        const excluded = packages.includes(typeRef.pkg) || protos.includes(typeRef.ref);
+        if (excluded) return m;
+        return [...m, ...typeRef.types];
+    }, []);
+
+
+    const returnTypes: string[] = allTypes.map(type => type.importAs);
+    const decodeMessages: string[] = allTypes.map(type => type.typeUrl);
     const switches = returnTypes.map((returnType, i) => {
         return t.switchCase(
             t.stringLiteral(decodeMessages[i]),
@@ -69,7 +81,7 @@ export const createInterfaceDecoderHelper = (
             'const',
             [
                 t.variableDeclarator(
-                    t.identifier(decoder),
+                    t.identifier(functionName),
                     arrowFunctionExpression(
                         [
                             identifier(

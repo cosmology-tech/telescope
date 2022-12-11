@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
-import { InterfaceTypeUrlMap, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
 import { slugify } from '@osmonauts/utils';
-import { arrowFunctionExpression, identifier } from '../../../utils';
+import { identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
 
@@ -13,9 +13,10 @@ const getInterfaceFromAminoName = (str: string) => {
 
 export const createInterfaceFromAmino = (
     context: ProtoParseContext,
-    typeMap: InterfaceTypeUrlMap,
+    ref: ProtoRef,
     interfaceName: string,
 ) => {
+    const typeMap = context.store.getTypeUrlMap(ref);
     const typeRefs = typeMap[interfaceName];
     return createInterfaceFromAminoHelper(
         context,
@@ -32,6 +33,7 @@ export const createInterfaceFromAminoHelper = (
 
     context.addUtil('DeepPartial');
 
+    // MARKED AS NOT DRY
     const allTypes: TypeUrlRef[] = typeRefs.reduce((m, typeRef) => {
         // check excludes
         const packages = context.pluginValue('prototypes.excluded.packages') ?? [];
@@ -114,7 +116,14 @@ export const createInterfaceFromAminoHelper = (
                     t.identifier(functionName),
                     t.arrowFunctionExpression(
                         [
-                            // params
+                            identifier(
+                                'content',
+                                t.tsTypeAnnotation(
+                                    t.tsTypeReference(
+                                        t.identifier('AnyAmino')
+                                    )
+                                )
+                            )
                         ],
                         t.blockStatement([
                             t.switchStatement(
