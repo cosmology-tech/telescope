@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { InterfaceTypeUrlMap, ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
+import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@osmonauts/types';
 import { slugify } from '@osmonauts/utils';
 import { identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";

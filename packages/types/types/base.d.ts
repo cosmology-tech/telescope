@@ -22,6 +22,7 @@ export interface ProtoType {
         [key: string]: any;
         deprecated?: boolean;
         "(cosmos_proto.implements_interface)"?: string;
+        "(amino.name)"?: string;
     };
     fields: {
         [key: string]: ProtoField;

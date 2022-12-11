@@ -14,10 +14,18 @@ export const arrayTypeNDim = (body, n) => {
     );
 };
 
-export const typeUrlToAmino = (
+export const getAminoTypeName = (
     context: GenericParseContext,
-    typeUrl: string
+    root: ProtoRoot,
+    proto: ProtoType
 ) => {
+
+    if (proto.options?.['(amino.name)']) {
+        return proto.options['(amino.name)'];
+    }
+
+    const typeUrl: string = getTypeUrl(root, proto);
+
     const exceptionsToCheck = {
         ...(context.options.aminoEncoding.exceptions ?? {}),
         ...DEFAULT_AMINO_EXCEPTIONS

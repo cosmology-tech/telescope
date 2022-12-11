@@ -25,7 +25,7 @@ export declare class GenericParseContext implements ParseContext {
     addImport(imp: ImportUsage): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
-    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@osmonauts/proto-parser").Lookup;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {

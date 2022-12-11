@@ -6391,7 +6391,9 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "name": "MsgJoinPool",
                     "nested": null,
                     "oneofs": undefined,
-                    "options": undefined,
+                    "options": {
+                      "(amino.name)": "osmosis-sdk/JoinPool",
+                    },
                     "type": "Type",
                   },
                   "MsgJoinPoolResponse": {

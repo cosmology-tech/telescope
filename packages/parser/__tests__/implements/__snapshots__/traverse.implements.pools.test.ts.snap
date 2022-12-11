@@ -20,7 +20,7 @@ exports[`PoolI createMap 1`] = `
       "ref": "osmosis/gamm/pool-models/stableswap/stableswap_pool.proto",
       "types": [
         {
-          "aminoType": "osmosis/gamm/pool",
+          "aminoType": "osmosis-sdk/StablePool",
           "importAs": "Pool2",
           "type": "Pool",
           "typeUrl": "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",

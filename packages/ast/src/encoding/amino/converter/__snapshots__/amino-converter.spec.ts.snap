@@ -299,7 +299,7 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
 exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
 "export const AminoConverter = {
   "/osmosis.gamm.v1beta1.MsgJoinPool": {
-    aminoType: "osmosis/gamm/join-pool",
+    aminoType: "osmosis-sdk/JoinPool",
     toAmino: ({
       sender,
       poolId,

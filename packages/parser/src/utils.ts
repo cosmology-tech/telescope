@@ -1,8 +1,8 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@osmonauts/types';
 import { ProtoStore } from './store';
-import { GenericParseContext, getTypeUrl, typeUrlToAmino } from '@osmonauts/ast';
+import { GenericParseContext, getTypeUrl, getAminoTypeName } from '@osmonauts/ast';
 
 export const getNestedProto = (root: ProtoRoot) => {
     const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
@@ -57,8 +57,9 @@ export const createTypeUrlTypeMap = (
                     ref: ref.filename,
                     pkg: ref.proto.package,
                     types: types?.map(type => {
-                        const typeUrl = getTypeUrl(ref.proto, getNestedProto(ref.proto)[type]);
-                        const aminoType = typeUrlToAmino(ctx, typeUrl);
+                        const protoType: ProtoType = getNestedProto(ref.proto)[type];
+                        const typeUrl = getTypeUrl(ref.proto, protoType);
+                        const aminoType = getAminoTypeName(ctx, ref.proto, protoType);
                         return {
                             typeUrl,
                             aminoType,
