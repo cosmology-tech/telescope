@@ -13,6 +13,8 @@ message SetSuperfluidAssetsProposal {
   option (gogoproto.goproto_getters) = false;
   option (gogoproto.goproto_stringer) = false;
 
+  option (cosmos_proto.implements_interface) = "ProposalContentI";
+
   string title = 1;
   string description = 2;
   repeated SuperfluidAsset assets = 3 [ (gogoproto.nullable) = false ];
@@ -25,6 +27,8 @@ message RemoveSuperfluidAssetsProposal {
   option (gogoproto.goproto_getters) = false;
   option (gogoproto.goproto_stringer) = false;
 
+  option (cosmos_proto.implements_interface) = "ProposalContentI";
+
   string title = 1;
   string description = 2;
   repeated string superfluid_asset_denoms = 3;
@@ -36,6 +40,8 @@ message UpdateUnpoolWhiteListProposal {
   option (gogoproto.equal) = true;
   option (gogoproto.goproto_getters) = false;
   option (gogoproto.goproto_stringer) = false;
+
+  option (cosmos_proto.implements_interface) = "ProposalContentI";
 
   string title = 1;
   string description = 2;
