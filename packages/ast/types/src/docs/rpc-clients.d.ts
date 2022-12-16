@@ -1,5 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoRef, ProtoService, ProtoServiceMethod } from "@osmonauts/types";
+import { ProtoStore } from "@osmonauts/proto-parser";
 import { ProtoParseContext } from "../encoding";
 interface DocumentRpcClient {
     service: DocumentService;

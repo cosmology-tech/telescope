@@ -1,4 +1,5 @@
 import { ProtoType, TelescopeOptions } from '@osmonauts/types';
+import { ProtoStore } from '@osmonauts/proto-parser';
 import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
@@ -107,6 +108,11 @@ export declare const defaultTelescopeOptions: {
     };
     reactQuery: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
     };
     packages: Record<string, any>;
 } & {
@@ -125,10 +131,10 @@ export declare const defaultTelescopeOptions: {
         };
     };
 };
-export declare const getTestProtoStore: (options?: TelescopeOptions) => any;
+export declare const getTestProtoStore: (options?: TelescopeOptions) => ProtoStore;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     context: AminoParseContext;
-    root: any;
+    root: import("@osmonauts/types").TraversedProtoRoot;
     protos: ProtoType[];
 };
 export declare const getGenericParseContext: () => GenericParseContext;

@@ -286,6 +286,7 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (field.parsedType?.type === 'Enum') {
+        // @ts-ignore
         if (context.ref.proto?.syntax === 'proto2') {
             return t.numericLiteral(1);
         }
