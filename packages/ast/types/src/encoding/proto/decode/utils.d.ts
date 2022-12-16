@@ -40,6 +40,8 @@ export declare const baseTypes: {
     uint64(args: DecodeMethod): t.TSAsExpression;
     fixed64(args: DecodeMethod): t.TSAsExpression;
     sfixed64(args: DecodeMethod): t.TSAsExpression;
+    protoType(args: DecodeMethod): t.CallExpression;
+    anyType(args: DecodeMethod): t.CallExpression;
     type(args: DecodeMethod): t.CallExpression;
     enum(args: DecodeMethod): t.TSAsExpression;
     bytes(args: DecodeMethod): t.CallExpression;
