@@ -3,9 +3,6 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial } from "../../../helpers";
-
-import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
@@ -19,7 +16,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool?: Pool1 | Pool2;
+  pool?: Any;
 }
 export interface QueryPoolResponseSDKType {
   pool?: AnySDKType;
@@ -33,19 +30,16 @@ export interface QueryPoolsRequest {
 
 /** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: (Pool1 | Pool2)[];
+  pools: Any[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 export interface QueryPoolsResponseSDKType {
   pools: AnySDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -224,8 +218,6 @@ export interface QueryPoolsWithFilterResponse {
 }
 export interface QueryPoolsWithFilterResponseSDKType {
   pools: AnySDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -247,7 +239,6 @@ export interface QuerySpotPriceResponse {
 
 /** @deprecated */
 export interface QuerySpotPriceResponseSDKType {
-  /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
 }
 
@@ -262,7 +253,6 @@ export interface QuerySwapExactAmountInRequest {
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
-  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   pool_id: Long;
   token_in: string;
@@ -286,7 +276,6 @@ export interface QuerySwapExactAmountOutRequest {
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
-  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
   sender: string;
   pool_id: Long;
   routes: SwapAmountOutRouteSDKType[];
@@ -401,8 +390,9 @@ export const QueryPoolResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.pool = PoolI_InterfaceDecoder(reader);
+          message.pool = Any.decode(reader, reader.uint32());
           break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -520,23 +510,6 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   };
 }
 
-export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 => {
-  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-  const message: any = {};
-
-  const data = Any.decode(reader, reader.uint32());
-  switch (data.typeUrl) {
-    case '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool':
-      return Pool2.decode(data.value);
-    case '/osmosis.gamm.v1beta1.Pool':
-      return Pool1.decode(data.value);
-    default:
-      throw new Error('unknown value in typeUrl for interface PoolI');
-  }
-
-  return message;
-}
-
 export const QueryPoolsResponse = {
   encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
@@ -560,7 +533,7 @@ export const QueryPoolsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(PoolI_InterfaceDecoder(reader));
+          message.pools.push(Any.decode(reader, reader.uint32()));
           break;
 
         case 2:

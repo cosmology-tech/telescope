@@ -19,8 +19,6 @@ export interface ParamsSDKType {
   airdrop_start_time?: Date;
   duration_until_decay?: DurationSDKType;
   duration_of_decay?: DurationSDKType;
-
-  /** denom of claimable asset */
   claim_denom: string;
 }
 

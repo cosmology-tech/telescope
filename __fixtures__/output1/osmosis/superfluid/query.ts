@@ -14,7 +14,6 @@ export interface QueryParamsResponse {
   params?: Params;
 }
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 export interface AssetTypeRequest {

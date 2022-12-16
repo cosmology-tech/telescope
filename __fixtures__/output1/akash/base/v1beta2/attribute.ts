@@ -35,10 +35,7 @@ export interface SignedBy {
  * this behaviour to be discussed
  */
 export interface SignedBySDKType {
-  /** all_of all keys in this list must have signed attributes */
   all_of: string[];
-
-  /** any_of at least of of the keys from the list must have signed attributes */
   any_of: string[];
 }
 
@@ -53,10 +50,7 @@ export interface PlacementRequirements {
 
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
-  /** SignedBy list of keys that tenants expect to have signatures from */
   signed_by?: SignedBySDKType;
-
-  /** Attribute list of attributes tenant expects from the provider */
   attributes: AttributeSDKType[];
 }
 

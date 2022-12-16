@@ -58,45 +58,15 @@ export interface MetricValue {
 
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
-  /**
-   * The labels describing the metric value.
-   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-   * the overriding relationship.
-   * Note that this map must not contain monitored resource labels.
-   */
   labels: {
     [key: string]: string;
   };
-
-  /**
-   * The start of the time period over which this metric value's measurement
-   * applies. The time period has different semantics for different metric
-   * types (cumulative, delta, and gauge). See the metric definition
-   * documentation in the service configuration for details. If not specified,
-   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
-   */
   start_time?: Date;
-
-  /**
-   * The end of the time period over which this metric value's measurement
-   * applies.  If not specified,
-   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
-   */
   end_time?: Date;
-
-  /** A boolean value. */
   bool_value?: boolean;
-
-  /** A signed 64-bit integer value. */
   int64_value?: Long;
-
-  /** A double precision floating point value. */
   double_value?: number;
-
-  /** A text string value. */
   string_value?: string;
-
-  /** A distribution value. */
   distribution_value?: DistributionSDKType;
 }
 
@@ -119,10 +89,7 @@ export interface MetricValueSet {
  * end time, and label values.
  */
 export interface MetricValueSetSDKType {
-  /** The metric name defined in the service configuration. */
   metric_name: string;
-
-  /** The values in this metric. */
   metric_values: MetricValueSDKType[];
 }
 

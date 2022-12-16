@@ -106,26 +106,10 @@ export interface ConnectionEnd {
  * a connection between two chains.
  */
 export interface ConnectionEndSDKType {
-  /** client associated with this connection. */
   client_id: string;
-
-  /**
-   * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection.
-   */
   versions: VersionSDKType[];
-
-  /** current state of the connection end. */
   state: State;
-
-  /** counterparty chain associated with this connection. */
   counterparty?: CounterpartySDKType;
-
-  /**
-   * delay period that must pass before a consensus state can be used for
-   * packet-verification NOTE: delay period logic is only implemented by some
-   * clients.
-   */
   delay_period: Long;
 }
 
@@ -161,25 +145,11 @@ export interface IdentifiedConnection {
  * identifier field.
  */
 export interface IdentifiedConnectionSDKType {
-  /** connection identifier. */
   id: string;
-
-  /** client associated with this connection. */
   client_id: string;
-
-  /**
-   * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection
-   */
   versions: VersionSDKType[];
-
-  /** current state of the connection end. */
   state: State;
-
-  /** counterparty chain associated with this connection. */
   counterparty?: CounterpartySDKType;
-
-  /** delay period associated with this connection. */
   delay_period: Long;
 }
 
@@ -203,19 +173,8 @@ export interface Counterparty {
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartySDKType {
-  /**
-   * identifies the client on the counterparty chain associated with a given
-   * connection.
-   */
   client_id: string;
-
-  /**
-   * identifies the connection end on the counterparty chain associated with a
-   * given connection.
-   */
   connection_id: string;
-
-  /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefixSDKType;
 }
 
@@ -227,7 +186,6 @@ export interface ClientPaths {
 
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsSDKType {
-  /** list of connection paths */
   paths: string[];
 }
 
@@ -242,10 +200,7 @@ export interface ConnectionPaths {
 
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsSDKType {
-  /** client state unique identifier */
   client_id: string;
-
-  /** list of connection paths */
   paths: string[];
 }
 
@@ -266,10 +221,7 @@ export interface Version {
  * the connection handshake.
  */
 export interface VersionSDKType {
-  /** unique version identifier */
   identifier: string;
-
-  /** list of features compatible with the specified identifier */
   features: string[];
 }
 
@@ -285,11 +237,6 @@ export interface Params {
 
 /** Params defines the set of Connection parameters. */
 export interface ParamsSDKType {
-  /**
-   * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
-   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
-   * conditions. A safe choice is 3-5x the expected time per block.
-   */
   max_expected_time_per_block: Long;
 }
 

@@ -384,10 +384,7 @@ export interface RequestOfferSnapshot {
 
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshotSDKType {
-  /** snapshot offered by peers */
   snapshot?: SnapshotSDKType;
-
-  /** light client-verified app hash for snapshot height */
   app_hash: Uint8Array;
 }
 
@@ -499,8 +496,6 @@ export interface ResponseSetOption {
 /** nondeterministic */
 export interface ResponseSetOptionSDKType {
   code: number;
-
-  /** bytes data = 2; */
   log: string;
   info: string;
 }
@@ -531,11 +526,7 @@ export interface ResponseQuery {
 }
 export interface ResponseQuerySDKType {
   code: number;
-
-  /** bytes data = 2; // use "value" instead. */
   log: string;
-
-  /** nondeterministic */
   info: string;
   index: Long;
   key: Uint8Array;
@@ -567,11 +558,7 @@ export interface ResponseCheckTx {
 export interface ResponseCheckTxSDKType {
   code: number;
   data: Uint8Array;
-
-  /** nondeterministic */
   log: string;
-
-  /** nondeterministic */
   info: string;
   gas_wanted: Long;
   gas_used: Long;
@@ -595,11 +582,7 @@ export interface ResponseDeliverTx {
 export interface ResponseDeliverTxSDKType {
   code: number;
   data: Uint8Array;
-
-  /** nondeterministic */
   log: string;
-
-  /** nondeterministic */
   info: string;
   gas_wanted: Long;
   gas_used: Long;
@@ -622,7 +605,6 @@ export interface ResponseCommit {
   retainHeight: Long;
 }
 export interface ResponseCommitSDKType {
-  /** reserve 1 */
   data: Uint8Array;
   retain_height: Long;
 }
@@ -655,11 +637,7 @@ export interface ResponseApplySnapshotChunk {
 }
 export interface ResponseApplySnapshotChunkSDKType {
   result: ResponseApplySnapshotChunk_Result;
-
-  /** Chunks to refetch and reapply */
   refetch_chunks: number[];
-
-  /** Chunk senders to reject and ban */
   reject_senders: string[];
 }
 
@@ -696,10 +674,7 @@ export interface BlockParams {
 
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
-  /** Note: must be greater than 0 */
   max_bytes: Long;
-
-  /** Note: must be greater or equal to -1 */
   max_gas: Long;
 }
 export interface LastCommitInfo {
@@ -744,8 +719,6 @@ export interface EventAttribute {
 export interface EventAttributeSDKType {
   key: Uint8Array;
   value: Uint8Array;
-
-  /** nondeterministic */
   index: boolean;
 }
 
@@ -787,13 +760,7 @@ export interface Validator {
 
 /** Validator */
 export interface ValidatorSDKType {
-  /**
-   * The first 20 bytes of SHA256(public key)
-   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
-   */
   address: Uint8Array;
-
-  /** The voting power */
   power: Long;
 }
 
@@ -841,21 +808,9 @@ export interface Evidence {
 }
 export interface EvidenceSDKType {
   type: EvidenceType;
-
-  /** The offending validator */
   validator?: ValidatorSDKType;
-
-  /** The height when the offense occurred */
   height: Long;
-
-  /** The corresponding time where the offense occurred */
   time?: Date;
-
-  /**
-   * Total voting power of the validator set in case the ABCI application does
-   * not store historical validators.
-   * https://github.com/tendermint/tendermint/issues/4581
-   */
   total_voting_power: Long;
 }
 export interface Snapshot {
@@ -875,19 +830,10 @@ export interface Snapshot {
   metadata: Uint8Array;
 }
 export interface SnapshotSDKType {
-  /** The height at which the snapshot was taken */
   height: Long;
-
-  /** The application-specific snapshot format */
   format: number;
-
-  /** Number of chunks in the snapshot */
   chunks: number;
-
-  /** Arbitrary snapshot hash, equal only if identical */
   hash: Uint8Array;
-
-  /** Arbitrary application metadata */
   metadata: Uint8Array;
 }
 

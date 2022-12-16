@@ -11,7 +11,6 @@ export interface GenesisState {
 
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateSDKType {
-  /** evidence defines all the evidence at genesis. */
   evidence: AnySDKType[];
 }
 

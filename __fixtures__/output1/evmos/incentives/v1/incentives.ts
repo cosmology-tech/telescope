@@ -30,19 +30,10 @@ export interface Incentive {
  * given smart contract
  */
 export interface IncentiveSDKType {
-  /** contract address */
   contract: string;
-
-  /** denoms and percentage of rewards to be allocated */
   allocations: DecCoinSDKType[];
-
-  /** number of remaining epochs */
   epochs: number;
-
-  /** distribution start time */
   start_time?: Date;
-
-  /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   total_gas: Long;
 }
 
@@ -60,13 +51,8 @@ export interface GasMeter {
 
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterSDKType {
-  /** hex address of the incentivized contract */
   contract: string;
-
-  /** participant address that interacts with the incentive */
   participant: string;
-
-  /** cumulative gas spent during the epoch */
   cumulative_gas: Long;
 }
 
@@ -90,19 +76,10 @@ export interface RegisterIncentiveProposal {
 
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
-  /** title of the proposal */
   title: string;
-
-  /** proposal description */
   description: string;
-
-  /** contract address */
   contract: string;
-
-  /** denoms and percentage of rewards to be allocated */
   allocations: DecCoinSDKType[];
-
-  /** number of remaining epochs */
   epochs: number;
 }
 
@@ -120,13 +97,8 @@ export interface CancelIncentiveProposal {
 
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalSDKType {
-  /** title of the proposal */
   title: string;
-
-  /** proposal description */
   description: string;
-
-  /** contract address */
   contract: string;
 }
 

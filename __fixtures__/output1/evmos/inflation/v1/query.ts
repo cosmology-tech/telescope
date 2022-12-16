@@ -18,7 +18,6 @@ export interface QueryPeriodResponse {
 
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
-  /** period is the current minting per epoch provision value. */
   period: Long;
 }
 
@@ -48,7 +47,6 @@ export interface QueryEpochMintProvisionResponse {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionResponseSDKType {
-  /** epoch_mint_provision is the current minting per epoch provision value. */
   epoch_mint_provision?: DecCoinSDKType;
 }
 
@@ -78,7 +76,6 @@ export interface QuerySkippedEpochsResponse {
  * RPC method.
  */
 export interface QuerySkippedEpochsResponseSDKType {
-  /** number of epochs that the inflation module has been disabled. */
   skipped_epochs: Long;
 }
 
@@ -108,7 +105,6 @@ export interface QueryCirculatingSupplyResponse {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyResponseSDKType {
-  /** total amount of coins in circulation */
   circulating_supply?: DecCoinSDKType;
 }
 
@@ -138,7 +134,6 @@ export interface QueryInflationRateResponse {
  * RPC method.
  */
 export interface QueryInflationRateResponseSDKType {
-  /** rate by which the total supply increases within one period */
   inflation_rate: string;
 }
 
@@ -156,7 +151,6 @@ export interface QueryParamsResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 

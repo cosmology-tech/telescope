@@ -291,16 +291,9 @@ export interface Member {
  * non-zero weight and metadata.
  */
 export interface MemberSDKType {
-  /** address is the member's account address. */
   address: string;
-
-  /** weight is the member's voting weight that should be greater than 0. */
   weight: string;
-
-  /** metadata is any arbitrary metadata to attached to the member. */
   metadata: string;
-
-  /** added_at is a timestamp specifying when a member was added. */
   added_at?: Date;
 }
 
@@ -312,7 +305,6 @@ export interface Members {
 
 /** Members defines a repeated slice of Member objects. */
 export interface MembersSDKType {
-  /** members is the list of members. */
   members: MemberSDKType[];
 }
 
@@ -327,10 +319,7 @@ export interface ThresholdDecisionPolicy {
 
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicySDKType {
-  /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
   threshold: string;
-
-  /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsSDKType;
 }
 
@@ -345,10 +334,7 @@ export interface PercentageDecisionPolicy {
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicySDKType {
-  /** percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed. */
   percentage: string;
-
-  /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsSDKType;
 }
 
@@ -378,25 +364,7 @@ export interface DecisionPolicyWindows {
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindowsSDKType {
-  /**
-   * voting_period is the duration from submission of a proposal to the end of voting period
-   * Within this times votes can be submitted with MsgVote.
-   */
   voting_period?: DurationSDKType;
-
-  /**
-   * min_execution_period is the minimum duration after the proposal submission
-   * where members can start sending MsgExec. This means that the window for
-   * sending a MsgExec transaction is:
-   * `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
-   * where max_execution_period is a app-specific config, defined in the keeper.
-   * If not set, min_execution_period will default to 0.
-   * 
-   * Please make sure to set a `min_execution_period` that is smaller than
-   * `voting_period + max_execution_period`, or else the above execution window
-   * is empty, meaning that all proposals created with this decision policy
-   * won't be able to be executed.
-   */
   min_execution_period?: DurationSDKType;
 }
 
@@ -428,27 +396,11 @@ export interface GroupInfo {
 
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoSDKType {
-  /** id is the unique ID of the group. */
   id: Long;
-
-  /** admin is the account address of the group's admin. */
   admin: string;
-
-  /** metadata is any arbitrary metadata to attached to the group. */
   metadata: string;
-
-  /**
-   * version is used to track changes to a group's membership structure that
-   * would break existing proposals. Whenever any members weight is changed,
-   * or any member is added or removed this version is incremented and will
-   * cause proposals based on older versions of this group to fail
-   */
   version: Long;
-
-  /** total_weight is the sum of the group members' weights. */
   total_weight: string;
-
-  /** created_at is a timestamp specifying when a group was created. */
   created_at?: Date;
 }
 
@@ -463,10 +415,7 @@ export interface GroupMember {
 
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberSDKType {
-  /** group_id is the unique ID of the group. */
   group_id: Long;
-
-  /** member is the member data. */
   member?: MemberSDKType;
 }
 
@@ -499,28 +448,12 @@ export interface GroupPolicyInfo {
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfoSDKType {
-  /** address is the account address of group policy. */
   address: string;
-
-  /** group_id is the unique ID of the group. */
   group_id: Long;
-
-  /** admin is the account address of the group admin. */
   admin: string;
-
-  /** metadata is any arbitrary metadata to attached to the group policy. */
   metadata: string;
-
-  /**
-   * version is used to track changes to a group's GroupPolicyInfo structure that
-   * would create a different result on a running proposal.
-   */
   version: Long;
-
-  /** decision_policy specifies the group policy's decision policy. */
   decision_policy?: AnySDKType;
-
-  /** created_at is a timestamp specifying when a group policy was created. */
   created_at?: Date;
 }
 
@@ -598,63 +531,18 @@ export interface Proposal {
  * passes as well as some optional metadata associated with the proposal.
  */
 export interface ProposalSDKType {
-  /** id is the unique id of the proposal. */
   id: Long;
-
-  /** address is the account address of group policy. */
   address: string;
-
-  /** metadata is any arbitrary metadata to attached to the proposal. */
   metadata: string;
-
-  /** proposers are the account addresses of the proposers. */
   proposers: string[];
-
-  /** submit_time is a timestamp specifying when a proposal was submitted. */
   submit_time?: Date;
-
-  /**
-   * group_version tracks the version of the group that this proposal corresponds to.
-   * When group membership is changed, existing proposals from previous group versions will become invalid.
-   */
   group_version: Long;
-
-  /**
-   * group_policy_version tracks the version of the group policy that this proposal corresponds to.
-   * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
-   */
   group_policy_version: Long;
-
-  /** status represents the high level position in the life cycle of the proposal. Initial value is Submitted. */
   status: ProposalStatus;
-
-  /**
-   * result is the final result based on the votes and election rule. Initial value is unfinalized.
-   * The result is persisted so that clients can always rely on this state and not have to replicate the logic.
-   */
   result: ProposalResult;
-
-  /**
-   * final_tally_result contains the sums of all weighted votes for this
-   * proposal for each vote option, after tallying. When querying a proposal
-   * via gRPC, this field is not populated until the proposal's voting period
-   * has ended.
-   */
   final_tally_result?: TallyResultSDKType;
-
-  /**
-   * voting_period_end is the timestamp before which voting must be done.
-   * Unless a successfull MsgExec is called before (to execute a proposal whose
-   * tally is successful before the voting period ends), tallying will be done
-   * at this point, and the `final_tally_result`, as well
-   * as `status` and `result` fields will be accordingly updated.
-   */
   voting_period_end?: Date;
-
-  /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executor_result: ProposalExecutorResult;
-
-  /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: AnySDKType[];
 }
 
@@ -675,16 +563,9 @@ export interface TallyResult {
 
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResultSDKType {
-  /** yes_count is the weighted sum of yes votes. */
   yes_count: string;
-
-  /** abstain_count is the weighted sum of abstainers. */
   abstain_count: string;
-
-  /** no is the weighted sum of no votes. */
   no_count: string;
-
-  /** no_with_veto_count is the weighted sum of veto. */
   no_with_veto_count: string;
 }
 
@@ -708,19 +589,10 @@ export interface Vote {
 
 /** Vote represents a vote for a proposal. */
 export interface VoteSDKType {
-  /** proposal is the unique ID of the proposal. */
   proposal_id: Long;
-
-  /** voter is the account address of the voter. */
   voter: string;
-
-  /** option is the voter's choice on the proposal. */
   option: VoteOption;
-
-  /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
-
-  /** submit_time is the timestamp when the vote was submitted. */
   submit_time?: Date;
 }
 

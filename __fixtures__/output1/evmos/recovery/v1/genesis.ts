@@ -11,7 +11,6 @@ export interface GenesisState {
 
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
 }
 
@@ -26,10 +25,7 @@ export interface Params {
 
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
-  /** enable recovery IBC middleware */
   enable_recovery: boolean;
-
-  /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationSDKType;
 }
 

@@ -261,7 +261,6 @@ export interface NonExistenceProof {
  * then there is no valid proof for the given key.
  */
 export interface NonExistenceProofSDKType {
-  /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
   left?: ExistenceProofSDKType;
   right?: ExistenceProofSDKType;
@@ -333,11 +332,6 @@ export interface LeafOpSDKType {
   prehash_key: HashOp;
   prehash_value: HashOp;
   length: LengthOp;
-
-  /**
-   * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
-   * a leaf node from an inner node.
-   */
   prefix: Uint8Array;
 }
 
@@ -427,17 +421,9 @@ export interface ProofSpec {
  * tree format server uses. But not in code, rather a configuration object.
  */
 export interface ProofSpecSDKType {
-  /**
-   * any field in the ExistenceProof must be the same as in this spec.
-   * except Prefix, which is just the first bytes of prefix (spec can be longer)
-   */
   leaf_spec?: LeafOpSDKType;
   inner_spec?: InnerSpecSDKType;
-
-  /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   max_depth: number;
-
-  /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   min_depth: number;
 }
 
@@ -480,20 +466,11 @@ export interface InnerSpec {
  * isLeftNeighbor(spec: InnerSpec, left: InnerOp, right: InnerOp)
  */
 export interface InnerSpecSDKType {
-  /**
-   * Child order is the ordering of the children node, must count from 0
-   * iavl tree is [0, 1] (left then right)
-   * merk is [0, 2, 1] (left, right, here)
-   */
   child_order: number[];
   child_size: number;
   min_prefix_length: number;
   max_prefix_length: number;
-
-  /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
   empty_child: Uint8Array;
-
-  /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
 
@@ -550,8 +527,6 @@ export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
   leaf?: LeafOpSDKType;
-
-  /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
 export interface CompressedNonExistenceProof {
@@ -561,7 +536,6 @@ export interface CompressedNonExistenceProof {
   right?: CompressedExistenceProof;
 }
 export interface CompressedNonExistenceProofSDKType {
-  /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
   left?: CompressedExistenceProofSDKType;
   right?: CompressedExistenceProofSDKType;

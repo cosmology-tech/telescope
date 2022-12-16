@@ -18,13 +18,8 @@ export interface ParsedExpr {
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
-  /** The parsed expression. */
   expr?: ExprSDKType;
-
-  /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoSDKType;
-
-  /** The syntax version of the source, e.g. `cel1`. */
   syntax_version: string;
 }
 
@@ -93,32 +88,13 @@ export interface Expr {
  * the function declaration `startsWith`.
  */
 export interface ExprSDKType {
-  /**
-   * Required. An id assigned to this node by the parser which is unique in a
-   * given expression tree. This is used to associate type information and other
-   * attributes to a node in the parse tree.
-   */
   id: number;
-
-  /** A literal expression. */
   literal_expr?: LiteralSDKType;
-
-  /** An identifier expression. */
   ident_expr?: Expr_IdentSDKType;
-
-  /** A field selection expression, e.g. `request.auth`. */
   select_expr?: Expr_SelectSDKType;
-
-  /** A call expression, including calls to predefined functions and operators. */
   call_expr?: Expr_CallSDKType;
-
-  /** A list creation expression. */
   list_expr?: Expr_CreateListSDKType;
-
-  /** A map or object creation expression. */
   struct_expr?: Expr_CreateStructSDKType;
-
-  /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionSDKType;
 }
 
@@ -135,12 +111,6 @@ export interface Expr_Ident {
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
-  /**
-   * Required. Holds a single, unqualified identifier, possibly preceded by a
-   * '.'.
-   * 
-   * Qualified names are represented by the [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression.
-   */
   name: string;
 }
 
@@ -172,27 +142,8 @@ export interface Expr_Select {
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
-  /**
-   * Required. The target of the selection expression.
-   * 
-   * For example, in the select expression `request.auth`, the `request`
-   * portion of the expression is the `operand`.
-   */
   operand?: ExprSDKType;
-
-  /**
-   * Required. The name of the field to select.
-   * 
-   * For example, in the select expression `request.auth`, the `auth` portion
-   * of the expression would be the `field`.
-   */
   field: string;
-
-  /**
-   * Whether the select is to be interpreted as a field presence test.
-   * 
-   * This results from the macro `has(request.auth)`.
-   */
   test_only: boolean;
 }
 
@@ -221,16 +172,8 @@ export interface Expr_Call {
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_CallSDKType {
-  /**
-   * The target of an method call-style expression. For example, `x` in
-   * `x.f()`.
-   */
   target?: ExprSDKType;
-
-  /** Required. The name of the function or method being called. */
   function: string;
-
-  /** The arguments. */
   args: ExprSDKType[];
 }
 
@@ -252,7 +195,6 @@ export interface Expr_CreateList {
  * `dyn([1, 'hello', 2.0])`
  */
 export interface Expr_CreateListSDKType {
-  /** The elements part of the list. */
   elements: ExprSDKType[];
 }
 
@@ -282,13 +224,7 @@ export interface Expr_CreateStruct {
  * `types.MyType{field_id: 'value'}`.
  */
 export interface Expr_CreateStructSDKType {
-  /**
-   * The type name of the message to be created, empty when creating map
-   * literals.
-   */
   type: string;
-
-  /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntrySDKType[];
 }
 
@@ -313,20 +249,9 @@ export interface Expr_CreateStruct_Entry {
 
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
-  /**
-   * Required. An id assigned to this node by the parser which is unique
-   * in a given expression tree. This is used to associate type
-   * information and other attributes to the node.
-   */
   id: number;
-
-  /** The field key for a message creator statement. */
   field_key?: string;
-
-  /** The key expression for a map creation statement. */
   map_key?: ExprSDKType;
-
-  /** Required. The value assigned to the key. */
   value?: ExprSDKType;
 }
 
@@ -423,38 +348,12 @@ export interface Expr_Comprehension {
  * types, the macro tests whether the property `x` is defined on `m`.
  */
 export interface Expr_ComprehensionSDKType {
-  /** The name of the iteration variable. */
   iter_var: string;
-
-  /** The range over which var iterates. */
   iter_range?: ExprSDKType;
-
-  /** The name of the variable used for accumulation of the result. */
   accu_var: string;
-
-  /** The initial value of the accumulator. */
   accu_init?: ExprSDKType;
-
-  /**
-   * An expression which can contain iter_var and accu_var.
-   * 
-   * Returns false when the result has been computed and may be used as
-   * a hint to short-circuit the remainder of the comprehension.
-   */
   loop_condition?: ExprSDKType;
-
-  /**
-   * An expression which can contain iter_var and accu_var.
-   * 
-   * Computes the next value of accu_var.
-   */
   loop_step?: ExprSDKType;
-
-  /**
-   * An expression which can contain accu_var.
-   * 
-   * Computes the result.
-   */
   result?: ExprSDKType;
 }
 
@@ -508,25 +407,12 @@ export interface Literal {
  * `true`, `null`.
  */
 export interface LiteralSDKType {
-  /** null value. */
   null_value?: NullValue;
-
-  /** boolean value. */
   bool_value?: boolean;
-
-  /** int64 value. */
   int64_value?: Long;
-
-  /** uint64 value. */
   uint64_value?: Long;
-
-  /** double value. */
   double_value?: number;
-
-  /** string value. */
   string_value?: string;
-
-  /** bytes value. */
   bytes_value?: Uint8Array;
 }
 

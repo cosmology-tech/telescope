@@ -91,33 +91,10 @@ export interface PeriodLock {
  * the `duration` has passed since unbonding started.
  */
 export interface PeriodLockSDKType {
-  /**
-   * ID is the unique id of the lock.
-   * The ID of the lock is decided upon lock creation, incrementing by 1 for
-   * every lock.
-   */
   ID: Long;
-
-  /**
-   * Owner is the account address of the lock owner.
-   * Only the owner can modify the state of the lock.
-   */
   owner: string;
-
-  /**
-   * Duration is the time needed for a lock to mature after unlocking has
-   * started.
-   */
   duration?: DurationSDKType;
-
-  /**
-   * EndTime refers to the time at which the lock would mature and get deleted.
-   * This value is first initialized when an unlock has started for the lock,
-   * end time being block time + duration.
-   */
   end_time?: Date;
-
-  /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: CoinSDKType[];
 }
 
@@ -154,24 +131,9 @@ export interface QueryCondition {
  * LockQueryType.
  */
 export interface QueryConditionSDKType {
-  /** LockQueryType is a type of lock query, ByLockDuration | ByLockTime */
   lock_query_type: LockQueryType;
-
-  /** Denom represents the token denomination we are looking to lock up */
   denom: string;
-
-  /**
-   * Duration is used to query locks with longer duration than the specified
-   * duration. Duration field must not be nil when the lock query type is
-   * `ByLockDuration`.
-   */
   duration?: DurationSDKType;
-
-  /**
-   * Timestamp is used by locks started before the specified duration.
-   * Timestamp field must not be nil when the lock query type is `ByLockTime`.
-   * Querying locks with timestamp is currently not implemented.
-   */
   timestamp?: Date;
 }
 
@@ -214,28 +176,9 @@ export interface SyntheticLock {
  * they can query as freely as native lockup.
  */
 export interface SyntheticLockSDKType {
-  /**
-   * Underlying Lock ID is the underlying native lock's id for this synthetic
-   * lockup. A synthetic lock MUST have an underlying lock.
-   */
   underlying_lock_id: Long;
-
-  /**
-   * SynthDenom is the synthetic denom that is a combination of
-   * gamm share + bonding status + validator address.
-   */
   synth_denom: string;
-
-  /**
-   * used for unbonding synthetic lockups, for active synthetic lockups, this
-   * value is set to uninitialized value
-   */
   end_time?: Date;
-
-  /**
-   * Duration is the duration for a synthetic lock to mature
-   * at the point of unbonding has started.
-   */
   duration?: DurationSDKType;
 }
 

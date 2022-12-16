@@ -17,13 +17,8 @@ export interface GenesisState {
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  /** module parameters */
   params?: ParamsSDKType;
-
-  /** active incentives */
   incentives: IncentiveSDKType[];
-
-  /** active Gasmeters */
   gas_meters: GasMeterSDKType[];
 }
 
@@ -44,16 +39,9 @@ export interface Params {
 
 /** Params defines the incentives module params */
 export interface ParamsSDKType {
-  /** parameter to enable incentives */
   enable_incentives: boolean;
-
-  /** maximum percentage an incentive can allocate per denomination */
   allocation_limit: string;
-
-  /** identifier for the epochs module hooks */
   incentives_epoch_identifier: string;
-
-  /** scaling factor for capping rewards */
   reward_scaler: string;
 }
 

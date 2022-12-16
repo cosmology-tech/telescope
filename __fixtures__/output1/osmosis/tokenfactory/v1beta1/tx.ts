@@ -35,8 +35,6 @@ export interface MsgCreateDenom {
  */
 export interface MsgCreateDenomSDKType {
   sender: string;
-
-  /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
 

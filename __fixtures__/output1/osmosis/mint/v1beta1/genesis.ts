@@ -20,16 +20,8 @@ export interface GenesisState {
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
-  /** minter is an abstraction for holding current rewards information. */
   minter?: MinterSDKType;
-
-  /** params defines all the paramaters of the mint module. */
   params?: ParamsSDKType;
-
-  /**
-   * reduction_started_epoch is the first epoch in which the reduction of mint
-   * begins.
-   */
   reduction_started_epoch: Long;
 }
 

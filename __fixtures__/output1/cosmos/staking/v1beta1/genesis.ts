@@ -36,31 +36,12 @@ export interface GenesisState {
 
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of related to deposit. */
   params?: ParamsSDKType;
-
-  /**
-   * last_total_power tracks the total amounts of bonded tokens recorded during
-   * the previous end block.
-   */
   last_total_power: Uint8Array;
-
-  /**
-   * last_validator_powers is a special index that provides a historical list
-   * of the last-block's bonded validators.
-   */
   last_validator_powers: LastValidatorPowerSDKType[];
-
-  /** delegations defines the validator set at genesis. */
   validators: ValidatorSDKType[];
-
-  /** delegations defines the delegations active at genesis. */
   delegations: DelegationSDKType[];
-
-  /** unbonding_delegations defines the unbonding delegations active at genesis. */
   unbonding_delegations: UnbondingDelegationSDKType[];
-
-  /** redelegations defines the redelegations active at genesis. */
   redelegations: RedelegationSDKType[];
   exported: boolean;
 }
@@ -76,10 +57,7 @@ export interface LastValidatorPower {
 
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
-  /** address is the address of the validator. */
   address: string;
-
-  /** power defines the power of the validator. */
   power: Long;
 }
 

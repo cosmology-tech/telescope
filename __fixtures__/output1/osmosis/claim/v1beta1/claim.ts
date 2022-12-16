@@ -71,16 +71,8 @@ export interface ClaimRecord {
 
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
-  /** address of claim user */
   address: string;
-
-  /** total initial claimable amount for the user */
   initial_claimable_amount: CoinSDKType[];
-
-  /**
-   * true if action is completed
-   * index of bool in array refers to action enum #
-   */
   action_completed: boolean[];
 }
 

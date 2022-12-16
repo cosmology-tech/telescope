@@ -86,16 +86,9 @@ export interface ParseRequest {
 
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
-  /** Required. Source text in CEL syntax. */
   cel_source: string;
-
-  /** Tag for version of CEL syntax, for future use. */
   syntax_version: string;
-
-  /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
   source_location: string;
-
-  /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disable_macros: boolean;
 }
 
@@ -110,10 +103,7 @@ export interface ParseResponse {
 
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
-  /** The parsed representation, or unset if parsing failed. */
   parsed_expr?: ParsedExprSDKType;
-
-  /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusSDKType[];
 }
 
@@ -145,27 +135,9 @@ export interface CheckRequest {
 
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
-  /** Required. The parsed representation of the CEL program. */
   parsed_expr?: ParsedExprSDKType;
-
-  /**
-   * Declarations of types for external variables and functions.
-   * Required if program uses external variables or functions
-   * not in the default environment.
-   */
   type_env: DeclSDKType[];
-
-  /**
-   * The protocol buffer context.  See "Name Resolution" in the
-   * Language Definition.
-   */
   container: string;
-
-  /**
-   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-   * add declarations for the standard definitions to the type environment.  See
-   * "Standard Definitions" in the Language Definition.
-   */
   no_std_env: boolean;
 }
 
@@ -180,10 +152,7 @@ export interface CheckResponse {
 
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  /** The annotated representation, or unset if checking failed. */
   checked_expr?: CheckedExprSDKType;
-
-  /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusSDKType[];
 }
 export interface EvalRequest_BindingsEntry {
@@ -217,21 +186,11 @@ export interface EvalRequest {
 
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
-  /** Evaluate based on the parsed representation. */
   parsed_expr?: ParsedExprSDKType;
-
-  /** Evaluate based on the checked representation. */
   checked_expr?: CheckedExprSDKType;
-
-  /**
-   * Bindings for the external variables.  The types SHOULD be compatible
-   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
-   */
   bindings?: {
     [key: string]: ExprValueSDKType;
   };
-
-  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
 }
 
@@ -251,15 +210,7 @@ export interface EvalResponse {
 
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
-  /** The execution result, or unset if execution couldn't start. */
   result?: ExprValueSDKType;
-
-  /**
-   * Any number of issues with [StatusDetails][] as the details.
-   * Note that CEL execution errors are reified into [ExprValue][].
-   * Nevertheless, we'll allow out-of-band issues to be raised,
-   * which also makes the replies more regular.
-   */
   issues: StatusSDKType[];
 }
 
@@ -285,13 +236,8 @@ export interface IssueDetails {
  * in the details field.
  */
 export interface IssueDetailsSDKType {
-  /** The severity of the issue. */
   severity: IssueDetails_Severity;
-
-  /** Position in the source, if known. */
   position?: SourcePositionSDKType;
-
-  /** Expression ID from [Expr][], 0 if unknown. */
   id: Long;
 }
 

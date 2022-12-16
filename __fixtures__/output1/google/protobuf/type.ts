@@ -337,22 +337,11 @@ export interface Type {
 
 /** A protocol buffer message type. */
 export interface TypeSDKType {
-  /** The fully qualified message name. */
   name: string;
-
-  /** The list of fields. */
   fields: FieldSDKType[];
-
-  /** The list of types appearing in `oneof` definitions in this type. */
   oneofs: string[];
-
-  /** The protocol buffer options. */
   options: OptionSDKType[];
-
-  /** The source context. */
   source_context?: SourceContextSDKType;
-
-  /** The source syntax. */
   syntax: Syntax;
 }
 
@@ -397,40 +386,15 @@ export interface Field {
 
 /** A single field of a message type. */
 export interface FieldSDKType {
-  /** The field type. */
   kind: Field_Kind;
-
-  /** The field cardinality. */
   cardinality: Field_Cardinality;
-
-  /** The field number. */
   number: number;
-
-  /** The field name. */
   name: string;
-
-  /**
-   * The field type URL, without the scheme, for message or enumeration
-   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
-   */
   type_url: string;
-
-  /**
-   * The index of the field type in `Type.oneofs`, for message or enumeration
-   * types. The first type has index 1; zero means the type is not in the list.
-   */
   oneof_index: number;
-
-  /** Whether to use alternative packed wire representation. */
   packed: boolean;
-
-  /** The protocol buffer options. */
   options: OptionSDKType[];
-
-  /** The field JSON name. */
   json_name: string;
-
-  /** The string value of the default value of this field. Proto2 syntax only. */
   default_value: string;
 }
 
@@ -454,19 +418,10 @@ export interface Enum {
 
 /** Enum type definition. */
 export interface EnumSDKType {
-  /** Enum type name. */
   name: string;
-
-  /** Enum value definitions. */
   enumvalue: EnumValueSDKType[];
-
-  /** Protocol buffer options. */
   options: OptionSDKType[];
-
-  /** The source context. */
   source_context?: SourceContextSDKType;
-
-  /** The source syntax. */
   syntax: Syntax;
 }
 
@@ -484,13 +439,8 @@ export interface EnumValue {
 
 /** Enum value definition. */
 export interface EnumValueSDKType {
-  /** Enum value name. */
   name: string;
-
-  /** Enum value number. */
   number: number;
-
-  /** Protocol buffer options. */
   options: OptionSDKType[];
 }
 
@@ -521,20 +471,7 @@ export interface Option {
  * enumeration, etc.
  */
 export interface OptionSDKType {
-  /**
-   * The option's name. For protobuf built-in options (options defined in
-   * descriptor.proto), this is the short name. For example, `"map_entry"`.
-   * For custom options, it should be the fully-qualified name. For example,
-   * `"google.api.http"`.
-   */
   name: string;
-
-  /**
-   * The option's value packed in an Any message. If the value is a primitive,
-   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
-   * should be used. If the value is an enum, it should be stored as an int32
-   * value using the google.protobuf.Int32Value type.
-   */
   value?: AnySDKType;
 }
 

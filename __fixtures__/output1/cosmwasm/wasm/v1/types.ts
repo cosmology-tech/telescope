@@ -173,13 +173,8 @@ export interface CodeInfo {
 
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoSDKType {
-  /** CodeHash is the unique identifier created by wasmvm */
   code_hash: Uint8Array;
-
-  /** Creator address who initially stored the code */
   creator: string;
-
-  /** InstantiateConfig access control to apply on contract creation, optional */
   instantiate_config?: AccessConfigSDKType;
 }
 
@@ -214,30 +209,12 @@ export interface ContractInfo {
 
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
-  /** CodeID is the reference to the stored Wasm code */
   code_id: Long;
-
-  /** Creator address who initially instantiated the contract */
   creator: string;
-
-  /** Admin is an optional address that can execute migrations */
   admin: string;
-
-  /** Label is optional metadata to be stored with a contract instance. */
   label: string;
-
-  /**
-   * Created Tx position when the contract was instantiated.
-   * This data should kept internal and not be exposed via query results. Just
-   * use for sorting
-   */
   created?: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
-
-  /**
-   * Extension is an extension point to store custom metadata within the
-   * persistence model.
-   */
   extension?: AnySDKType;
 }
 
@@ -256,11 +233,7 @@ export interface ContractCodeHistoryEntry {
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
   operation: ContractCodeHistoryOperationType;
-
-  /** CodeID is the reference to the stored WASM code */
   code_id: Long;
-
-  /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
@@ -285,13 +258,7 @@ export interface AbsoluteTxPosition {
  * ordering of transactions.
  */
 export interface AbsoluteTxPositionSDKType {
-  /** BlockHeight is the block the contract was created at */
   block_height: Long;
-
-  /**
-   * TxIndex is a monotonic counter within the block (actual transaction index,
-   * or gas consumed)
-   */
   tx_index: Long;
 }
 
@@ -306,10 +273,7 @@ export interface Model {
 
 /** Model is a struct that holds a KV pair */
 export interface ModelSDKType {
-  /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
-
-  /** base64-encode raw value */
   value: Uint8Array;
 }
 

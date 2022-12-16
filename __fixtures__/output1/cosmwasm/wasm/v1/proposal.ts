@@ -24,19 +24,10 @@ export interface StoreCodeProposal {
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** RunAs is the address that is passed to the contract's environment as sender */
   run_as: string;
-
-  /** WASMByteCode can be raw or gzip compressed */
   wasm_byte_code: Uint8Array;
-
-  /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigSDKType;
 }
 
@@ -75,28 +66,13 @@ export interface InstantiateContractProposal {
  * contract.
  */
 export interface InstantiateContractProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** RunAs is the address that is passed to the contract's environment as sender */
   run_as: string;
-
-  /** Admin is an optional address that can execute migrations */
   admin: string;
-
-  /** CodeID is the reference to the stored WASM code */
   code_id: Long;
-
-  /** Label is optional metadata to be stored with a constract instance. */
   label: string;
-
-  /** Msg json encoded message to be passed to the contract on instantiation */
   msg: Uint8Array;
-
-  /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinSDKType[];
 }
 
@@ -120,19 +96,10 @@ export interface MigrateContractProposal {
 
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** Contract is the address of the smart contract */
   contract: string;
-
-  /** CodeID references the new WASM codesudo */
   code_id: Long;
-
-  /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
 
@@ -153,16 +120,9 @@ export interface SudoContractProposal {
 
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** Contract is the address of the smart contract */
   contract: string;
-
-  /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
 }
 
@@ -195,22 +155,11 @@ export interface ExecuteContractProposal {
  * contract.
  */
 export interface ExecuteContractProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** RunAs is the address that is passed to the contract's environment as sender */
   run_as: string;
-
-  /** Contract is the address of the smart contract */
   contract: string;
-
-  /** Msg json encoded message to be passed to the contract as execute */
   msg: Uint8Array;
-
-  /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinSDKType[];
 }
 
@@ -231,16 +180,9 @@ export interface UpdateAdminProposal {
 
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** NewAdmin address to be set */
   new_admin: string;
-
-  /** Contract is the address of the smart contract */
   contract: string;
 }
 
@@ -264,13 +206,8 @@ export interface ClearAdminProposal {
  * contract.
  */
 export interface ClearAdminProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** Contract is the address of the smart contract */
   contract: string;
 }
 
@@ -294,13 +231,8 @@ export interface PinCodesProposal {
  * wasmvm cache.
  */
 export interface PinCodesProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** CodeIDs references the new WASM codes */
   code_ids: Long[];
 }
 
@@ -324,13 +256,8 @@ export interface UnpinCodesProposal {
  * the wasmvm cache.
  */
 export interface UnpinCodesProposalSDKType {
-  /** Title is a short summary */
   title: string;
-
-  /** Description is a human readable text */
   description: string;
-
-  /** CodeIDs references the WASM codes */
   code_ids: Long[];
 }
 

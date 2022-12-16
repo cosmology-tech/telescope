@@ -25,16 +25,8 @@ export interface DevFeeInfo {
  * for the owner of a given smart contract
  */
 export interface DevFeeInfoSDKType {
-  /** hex address of registered contract */
   contract_address: string;
-
-  /** bech32 address of contract deployer */
   deployer_address: string;
-
-  /**
-   * bech32 address of account receiving the transaction fees
-   * it defaults to deployer_address
-   */
   withdraw_address: string;
 }
 

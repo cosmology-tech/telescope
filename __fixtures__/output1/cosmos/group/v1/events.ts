@@ -11,7 +11,6 @@ export interface EventCreateGroup {
 
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupSDKType {
-  /** group_id is the unique ID of the group. */
   group_id: Long;
 }
 
@@ -23,7 +22,6 @@ export interface EventUpdateGroup {
 
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupSDKType {
-  /** group_id is the unique ID of the group. */
   group_id: Long;
 }
 
@@ -35,7 +33,6 @@ export interface EventCreateGroupPolicy {
 
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicySDKType {
-  /** address is the account address of the group policy. */
   address: string;
 }
 
@@ -47,7 +44,6 @@ export interface EventUpdateGroupPolicy {
 
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicySDKType {
-  /** address is the account address of the group policy. */
   address: string;
 }
 
@@ -59,7 +55,6 @@ export interface EventSubmitProposal {
 
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalSDKType {
-  /** proposal_id is the unique ID of the proposal. */
   proposal_id: Long;
 }
 
@@ -71,7 +66,6 @@ export interface EventWithdrawProposal {
 
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalSDKType {
-  /** proposal_id is the unique ID of the proposal. */
   proposal_id: Long;
 }
 
@@ -83,7 +77,6 @@ export interface EventVote {
 
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteSDKType {
-  /** proposal_id is the unique ID of the proposal. */
   proposal_id: Long;
 }
 
@@ -98,10 +91,7 @@ export interface EventExec {
 
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecSDKType {
-  /** proposal_id is the unique ID of the proposal. */
   proposal_id: Long;
-
-  /** result is the proposal execution result. */
   result: ProposalExecutorResult;
 }
 
@@ -116,10 +106,7 @@ export interface EventLeaveGroup {
 
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupSDKType {
-  /** group_id is the unique ID of the group. */
   group_id: Long;
-
-  /** address is the account address of the group member. */
   address: string;
 }
 

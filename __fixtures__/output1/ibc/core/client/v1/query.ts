@@ -19,7 +19,6 @@ export interface QueryClientStateRequest {
  * method
  */
 export interface QueryClientStateRequestSDKType {
-  /** client state unique identifier */
   client_id: string;
 }
 
@@ -45,13 +44,8 @@ export interface QueryClientStateResponse {
  * which the proof was retrieved.
  */
 export interface QueryClientStateResponseSDKType {
-  /** client state associated with the request identifier */
   client_state?: AnySDKType;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -69,7 +63,6 @@ export interface QueryClientStatesRequest {
  * method
  */
 export interface QueryClientStatesRequestSDKType {
-  /** pagination request */
   pagination?: PageRequestSDKType;
 }
 
@@ -90,10 +83,7 @@ export interface QueryClientStatesResponse {
  * method.
  */
 export interface QueryClientStatesResponseSDKType {
-  /** list of stored ClientStates of the chain. */
   client_states: IdentifiedClientStateSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
 }
 
@@ -125,19 +115,9 @@ export interface QueryConsensusStateRequest {
  * from which the proof was retrieved.
  */
 export interface QueryConsensusStateRequestSDKType {
-  /** client identifier */
   client_id: string;
-
-  /** consensus state revision number */
   revision_number: Long;
-
-  /** consensus state revision height */
   revision_height: Long;
-
-  /**
-   * latest_height overrrides the height field and queries the latest stored
-   * ConsensusState
-   */
   latest_height: boolean;
 }
 
@@ -161,13 +141,8 @@ export interface QueryConsensusStateResponse {
  * RPC method
  */
 export interface QueryConsensusStateResponseSDKType {
-  /** consensus state associated with the client identifier at the given height */
   consensus_state?: AnySDKType;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -188,10 +163,7 @@ export interface QueryConsensusStatesRequest {
  * RPC method.
  */
 export interface QueryConsensusStatesRequestSDKType {
-  /** client identifier */
   client_id: string;
-
-  /** pagination request */
   pagination?: PageRequestSDKType;
 }
 
@@ -212,10 +184,7 @@ export interface QueryConsensusStatesResponse {
  * Query/ConsensusStates RPC method
  */
 export interface QueryConsensusStatesResponseSDKType {
-  /** consensus states associated with the identifier */
   consensus_states: ConsensusStateWithHeightSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
 }
 
@@ -233,7 +202,6 @@ export interface QueryClientStatusRequest {
  * method
  */
 export interface QueryClientStatusRequestSDKType {
-  /** client unique identifier */
   client_id: string;
 }
 
@@ -279,7 +247,6 @@ export interface QueryClientParamsResponse {
  * method.
  */
 export interface QueryClientParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 
@@ -309,7 +276,6 @@ export interface QueryUpgradedClientStateResponse {
  * Query/UpgradedClientState RPC method.
  */
 export interface QueryUpgradedClientStateResponseSDKType {
-  /** client state associated with the request identifier */
   upgraded_client_state?: AnySDKType;
 }
 
@@ -339,7 +305,6 @@ export interface QueryUpgradedConsensusStateResponse {
  * Query/UpgradedConsensusState RPC method.
  */
 export interface QueryUpgradedConsensusStateResponseSDKType {
-  /** Consensus state associated with the request identifier */
   upgraded_consensus_state?: AnySDKType;
 }
 

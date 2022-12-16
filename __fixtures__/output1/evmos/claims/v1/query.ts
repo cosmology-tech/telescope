@@ -32,7 +32,6 @@ export interface QueryTotalUnclaimedResponse {
  * RPC method.
  */
 export interface QueryTotalUnclaimedResponseSDKType {
-  /** coins defines the unclaimed coins */
   coins: CoinSDKType[];
 }
 
@@ -50,7 +49,6 @@ export interface QueryParamsResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 
@@ -68,7 +66,6 @@ export interface QueryClaimsRecordsRequest {
  * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -89,10 +86,7 @@ export interface QueryClaimsRecordsResponse {
  * RPC method.
  */
 export interface QueryClaimsRecordsResponseSDKType {
-  /** claims defines all claims records */
   claims: ClaimsRecordAddressSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -110,7 +104,6 @@ export interface QueryClaimsRecordRequest {
  * method.
  */
 export interface QueryClaimsRecordRequestSDKType {
-  /** address defines the user to query claims record for */
   address: string;
 }
 
@@ -131,10 +124,7 @@ export interface QueryClaimsRecordResponse {
  * method.
  */
 export interface QueryClaimsRecordResponseSDKType {
-  /** total initial claimable amount for the user */
   initial_claimable_amount: string;
-
-  /** the claims of the user */
   claims: ClaimSDKType[];
 }
 

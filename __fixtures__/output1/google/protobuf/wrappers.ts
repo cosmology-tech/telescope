@@ -18,7 +18,6 @@ export interface DoubleValue {
  * The JSON representation for `DoubleValue` is JSON number.
  */
 export interface DoubleValueSDKType {
-  /** The double value. */
   value: number;
 }
 
@@ -38,7 +37,6 @@ export interface FloatValue {
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValueSDKType {
-  /** The float value. */
   value: number;
 }
 
@@ -58,7 +56,6 @@ export interface Int64Value {
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64ValueSDKType {
-  /** The int64 value. */
   value: Long;
 }
 
@@ -78,7 +75,6 @@ export interface UInt64Value {
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64ValueSDKType {
-  /** The uint64 value. */
   value: Long;
 }
 
@@ -98,7 +94,6 @@ export interface Int32Value {
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32ValueSDKType {
-  /** The int32 value. */
   value: number;
 }
 
@@ -118,7 +113,6 @@ export interface UInt32Value {
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32ValueSDKType {
-  /** The uint32 value. */
   value: number;
 }
 
@@ -138,7 +132,6 @@ export interface BoolValue {
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValueSDKType {
-  /** The bool value. */
   value: boolean;
 }
 
@@ -158,7 +151,6 @@ export interface StringValue {
  * The JSON representation for `StringValue` is JSON string.
  */
 export interface StringValueSDKType {
-  /** The string value. */
   value: string;
 }
 
@@ -178,7 +170,6 @@ export interface BytesValue {
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValueSDKType {
-  /** The bytes value. */
   value: Uint8Array;
 }
 

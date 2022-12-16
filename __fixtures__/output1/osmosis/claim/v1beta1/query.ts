@@ -19,7 +19,6 @@ export interface QueryModuleAccountBalanceResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponseSDKType {
-  /** params defines the parameters of the module. */
   moduleAccountBalance: CoinSDKType[];
 }
 
@@ -37,7 +36,6 @@ export interface QueryParamsResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 export interface QueryClaimRecordRequest {

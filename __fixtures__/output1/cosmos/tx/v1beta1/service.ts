@@ -144,10 +144,7 @@ export interface GetTxsEventRequest {
  * RPC method.
  */
 export interface GetTxsEventRequestSDKType {
-  /** events is the list of transaction event type. */
   events: string[];
-
-  /** pagination defines a pagination for the request. */
   pagination?: PageRequestSDKType;
   order_by: OrderBy;
 }
@@ -172,13 +169,8 @@ export interface GetTxsEventResponse {
  * RPC method.
  */
 export interface GetTxsEventResponseSDKType {
-  /** txs is the list of queried transactions. */
   txs: TxSDKType[];
-
-  /** tx_responses is the list of queried TxResponses. */
   tx_responses: TxResponseSDKType[];
-
-  /** pagination defines a pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -197,7 +189,6 @@ export interface BroadcastTxRequest {
  * RPC method.
  */
 export interface BroadcastTxRequestSDKType {
-  /** tx_bytes is the raw transaction. */
   tx_bytes: Uint8Array;
   mode: BroadcastMode;
 }
@@ -216,7 +207,6 @@ export interface BroadcastTxResponse {
  * Service.BroadcastTx method.
  */
 export interface BroadcastTxResponseSDKType {
-  /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseSDKType;
 }
 
@@ -246,19 +236,8 @@ export interface SimulateRequest {
  * RPC method.
  */
 export interface SimulateRequestSDKType {
-  /**
-   * tx is the transaction to simulate.
-   * Deprecated. Send raw tx bytes instead.
-   */
-
   /** @deprecated */
   tx?: TxSDKType;
-
-  /**
-   * tx_bytes is the raw transaction.
-   * 
-   * Since: cosmos-sdk 0.43
-   */
   tx_bytes: Uint8Array;
 }
 
@@ -279,10 +258,7 @@ export interface SimulateResponse {
  * Service.SimulateRPC method.
  */
 export interface SimulateResponseSDKType {
-  /** gas_info is the information about gas used in the simulation. */
   gas_info?: GasInfoSDKType;
-
-  /** result is the result of the simulation. */
   result?: ResultSDKType;
 }
 
@@ -300,7 +276,6 @@ export interface GetTxRequest {
  * RPC method.
  */
 export interface GetTxRequestSDKType {
-  /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
 
@@ -315,10 +290,7 @@ export interface GetTxResponse {
 
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseSDKType {
-  /** tx is the queried transaction. */
   tx?: TxSDKType;
-
-  /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseSDKType;
 }
 
@@ -343,10 +315,7 @@ export interface GetBlockWithTxsRequest {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequestSDKType {
-  /** height is the height of the block to query. */
   height: Long;
-
-  /** pagination defines a pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -371,12 +340,9 @@ export interface GetBlockWithTxsResponse {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponseSDKType {
-  /** txs are the transactions in the block. */
   txs: TxSDKType[];
   block_id?: BlockIDSDKType;
   block?: BlockSDKType;
-
-  /** pagination defines a pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 

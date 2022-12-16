@@ -61,29 +61,10 @@ export interface PoolSDKType {
   address: string;
   id: Long;
   pool_params?: PoolParamsSDKType;
-
-  /**
-   * This string specifies who will govern the pool in the future.
-   * Valid forms of this are:
-   * {token name},{duration}
-   * {duration}
-   * where {token name} if specified is the token which determines the
-   * governor, and if not specified is the LP token for this pool.duration is
-   * a time specified as 0w,1w,2w, etc. which specifies how long the token
-   * would need to be locked up to count in governance. 0w means no lockup.
-   */
   future_pool_governor: string;
-
-  /** sum of all LP shares */
   total_shares?: CoinSDKType;
-
-  /** assets in the pool */
   pool_liquidity: CoinSDKType[];
-
-  /** for calculation amognst assets with different precisions */
   scaling_factors: Long[];
-
-  /** scaling_factor_controller is the address can adjust pool scaling factors */
   scaling_factor_controller: string;
 }
 

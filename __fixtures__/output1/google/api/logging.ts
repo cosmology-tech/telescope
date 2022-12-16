@@ -83,20 +83,7 @@ export interface Logging {
  *         - activity_history
  */
 export interface LoggingSDKType {
-  /**
-   * Logging configurations for sending logs to the producer project.
-   * There can be multiple producer destinations, each one must have a
-   * different monitored resource type. A log can be used in at most
-   * one producer destination.
-   */
   producer_destinations: Logging_LoggingDestinationSDKType[];
-
-  /**
-   * Logging configurations for sending logs to the consumer project.
-   * There can be multiple consumer destinations, each one must have a
-   * different monitored resource type. A log can be used in at most
-   * one consumer destination.
-   */
   consumer_destinations: Logging_LoggingDestinationSDKType[];
 }
 
@@ -125,18 +112,7 @@ export interface Logging_LoggingDestination {
  * or the consumer project).
  */
 export interface Logging_LoggingDestinationSDKType {
-  /**
-   * The monitored resource type. The type must be defined in the
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
   monitored_resource: string;
-
-  /**
-   * Names of the logs to be sent to this destination. Each name must
-   * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-   * not a domain scoped name, it will be automatically prefixed with
-   * the service name followed by "/".
-   */
   logs: string[];
 }
 

@@ -12,7 +12,6 @@ export interface QueryProposalRequest {
 
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
 }
 
@@ -43,16 +42,9 @@ export interface QueryProposalsRequest {
 
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
-  /** proposal_status defines the status of the proposals. */
   proposal_status: ProposalStatus;
-
-  /** voter defines the voter address for the proposals. */
   voter: string;
-
-  /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
-
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -73,8 +65,6 @@ export interface QueryProposalsResponse {
  */
 export interface QueryProposalsResponseSDKType {
   proposals: ProposalSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -89,10 +79,7 @@ export interface QueryVoteRequest {
 
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
-
-  /** voter defines the oter address for the proposals. */
   voter: string;
 }
 
@@ -104,7 +91,6 @@ export interface QueryVoteResponse {
 
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponseSDKType {
-  /** vote defined the queried vote. */
   vote?: VoteSDKType;
 }
 
@@ -119,10 +105,7 @@ export interface QueryVotesRequest {
 
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
-
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -137,10 +120,7 @@ export interface QueryVotesResponse {
 
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponseSDKType {
-  /** votes defined the queried votes. */
   votes: VoteSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -155,10 +135,6 @@ export interface QueryParamsRequest {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {
-  /**
-   * params_type defines which parameters to query for, can be one of "voting",
-   * "tallying" or "deposit".
-   */
   params_type: string;
 }
 
@@ -176,13 +152,8 @@ export interface QueryParamsResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  /** voting_params defines the parameters related to voting. */
   voting_params?: VotingParamsSDKType;
-
-  /** deposit_params defines the parameters related to deposit. */
   deposit_params?: DepositParamsSDKType;
-
-  /** tally_params defines the parameters related to tally. */
   tally_params?: TallyParamsSDKType;
 }
 
@@ -197,10 +168,7 @@ export interface QueryDepositRequest {
 
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
-
-  /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
 }
 
@@ -212,7 +180,6 @@ export interface QueryDepositResponse {
 
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponseSDKType {
-  /** deposit defines the requested deposit. */
   deposit?: DepositSDKType;
 }
 
@@ -227,10 +194,7 @@ export interface QueryDepositsRequest {
 
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
-
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -245,8 +209,6 @@ export interface QueryDepositsResponse {
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponseSDKType {
   deposits: DepositSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -258,7 +220,6 @@ export interface QueryTallyResultRequest {
 
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequestSDKType {
-  /** proposal_id defines the unique id of the proposal. */
   proposal_id: Long;
 }
 
@@ -270,7 +231,6 @@ export interface QueryTallyResultResponse {
 
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponseSDKType {
-  /** tally defines the requested tally. */
   tally?: TallyResultSDKType;
 }
 

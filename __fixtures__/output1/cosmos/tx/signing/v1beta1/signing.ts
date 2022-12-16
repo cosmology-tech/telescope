@@ -111,7 +111,6 @@ export interface SignatureDescriptors {
 
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
-  /** signatures are the signature descriptors */
   signatures: SignatureDescriptorSDKType[];
 }
 
@@ -141,15 +140,8 @@ export interface SignatureDescriptor {
  * clients.
  */
 export interface SignatureDescriptorSDKType {
-  /** public_key is the public key of the signer */
   public_key?: AnySDKType;
   data?: SignatureDescriptor_DataSDKType;
-
-  /**
-   * sequence is the sequence of the account, which describes the
-   * number of committed transactions signed by a given address. It is used to prevent
-   * replay attacks.
-   */
   sequence: Long;
 }
 
@@ -164,10 +156,7 @@ export interface SignatureDescriptor_Data {
 
 /** Data represents signature data */
 export interface SignatureDescriptor_DataSDKType {
-  /** single represents a single signer */
   single?: SignatureDescriptor_Data_SingleSDKType;
-
-  /** multi represents a multisig signer */
   multi?: SignatureDescriptor_Data_MultiSDKType;
 }
 
@@ -182,10 +171,7 @@ export interface SignatureDescriptor_Data_Single {
 
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
-  /** mode is the signing mode of the single signer */
   mode: SignMode;
-
-  /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
 
@@ -200,10 +186,7 @@ export interface SignatureDescriptor_Data_Multi {
 
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
-  /** bitarray specifies which keys within the multisig are signing */
   bitarray?: CompactBitArraySDKType;
-
-  /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_DataSDKType[];
 }
 
