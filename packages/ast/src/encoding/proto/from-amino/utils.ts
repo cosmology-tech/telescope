@@ -4,6 +4,7 @@ import { BILLION, callExpression, identifier } from '../../../utils';
 import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
+import { getInterfaceFromAminoName } from '../implements';
 
 export const fromAminoJSON = {
 
@@ -114,7 +115,7 @@ export const fromAminoJSON = {
         return fromAminoJSON.long(args);
     },
 
-    type(args: FromAminoJSONMethod) {
+    protoType(args: FromAminoJSONMethod) {
         const {
             propName,
             origName
@@ -147,6 +148,50 @@ export const fromAminoJSON = {
         );
     },
 
+    anyType(args: FromAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
+                ),
+                t.callExpression(
+                    t.identifier(interfaceFnName),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
+    },
+
+    type(args: FromAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return fromAminoJSON.anyType(args);
+        }
+        return fromAminoJSON.protoType(args);
+
+    },
     enum(args: FromAminoJSONMethod) {
         const {
             propName,
