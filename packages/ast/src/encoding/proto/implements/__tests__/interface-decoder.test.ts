@@ -1,9 +1,12 @@
+import { getNestedProto } from '@osmonauts/proto-parser';
 import { InterfaceTypeUrlMap } from '@osmonauts/types';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
+import { createObjectWithMethods } from '../../../object';
 import { createInterfaceDecoder, createInterfaceDecoderHelper } from '../decoder';
 
 const store = getTestProtoStore();
+store.options.aminoEncoding.useRecursiveV2encoding = true;
 store.options.prototypes.implementsAcceptsAny = true;
 store.traverseAll();
 
@@ -41,6 +44,13 @@ describe('PoolI', () => {
             queryContext,
             'PoolI_InterfaceDecoder',
             typeMap['PoolI']
+        ));
+    });
+    it('objects', () => {
+        expectCode(createObjectWithMethods(
+            queryContext,
+            'QueryPoolsResponse',
+            getNestedProto(queryRef.traversed).QueryPoolsResponse
         ));
     });
 });
