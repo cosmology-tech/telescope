@@ -563,7 +563,17 @@ export const arrayTypes = {
     },
 
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromAminoJSON(e)) : []
-    type(args: FromAminoJSONMethod) {
+    anyType(args: FromAminoJSONMethod) {
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+        return t.callExpression(
+            t.identifier(interfaceFnName),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+    protoType(args: FromAminoJSONMethod) {
         const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
@@ -574,6 +584,19 @@ export const arrayTypes = {
                 t.identifier('e')
             ]
         );
+    },
+    type(args: FromAminoJSONMethod) {
+
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return arrayTypes.anyType(args);
+        }
+        return arrayTypes.protoType(args);
     }
 };
 

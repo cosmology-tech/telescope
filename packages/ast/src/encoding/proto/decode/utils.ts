@@ -139,10 +139,27 @@ export const decode = {
         const num = args.field.id;
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
-        return switchTypeArray(num,
+
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+            const interfaceFnName = getInterfaceDecoderName(interfaceName)
+
+            return switchAnyTypeArray(
+                num,
+                prop,
+                interfaceFnName
+            );
+        }
+        return switchProtoTypeArray(num,
             prop,
             name
-        )
+        );
     }
 
 };
@@ -600,7 +617,7 @@ export const switchOnTagTakesArray = (num: number, prop: string, expr: t.Stateme
 };
 
 //    message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-export const switchTypeArray = (num: number, prop: string, name: string) => {
+export const switchProtoTypeArray = (num: number, prop: string, name: string) => {
     return t.switchCase(
         t.numericLiteral(num),
         [
@@ -631,6 +648,39 @@ export const switchTypeArray = (num: number, prop: string, name: string) => {
                             ]
                         )
                     ]
+                )
+            ),
+            t.breakStatement()
+        ]
+    )
+};
+
+export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
+    return t.switchCase(
+        t.numericLiteral(num),
+        [
+            t.expressionStatement(
+                t.tsAsExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            ),
+                            t.identifier('push')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier(name),
+                                [
+                                    t.identifier('reader')
+                                ]
+                            )
+                        ]
+                    ),
+                    t.tsTypeReference(
+                        t.identifier('Any')
+                    )
                 )
             ),
             t.breakStatement()
