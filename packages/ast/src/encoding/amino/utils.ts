@@ -3,8 +3,11 @@ import { DEFAULT_AMINO_EXCEPTIONS, ProtoAny, ProtoRoot, ProtoType } from '@osmon
 import { kebab } from "case";
 import { GenericParseContext } from '../context';
 
+export const getTypeUrlWithPkgAndName = (pkg: string, name: string) => {
+    return `/${pkg}.${name}`;
+}
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
-    return `/${root.package}.${proto.name}`;
+    return getTypeUrlWithPkgAndName(root.package, proto.name);
 }
 
 export const arrayTypeNDim = (body, n) => {

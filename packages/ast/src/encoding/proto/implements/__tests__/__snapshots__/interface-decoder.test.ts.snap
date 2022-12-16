@@ -60,7 +60,7 @@ exports[`PoolI objects 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          (message.pools.push(PoolI_InterfaceDecoder(reader)) as Any);
+          message.pools.push((PoolI_InterfaceDecoder(reader) as Any));
           break;
 
         case 2:

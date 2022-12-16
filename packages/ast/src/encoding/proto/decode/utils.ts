@@ -660,27 +660,28 @@ export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
         t.numericLiteral(num),
         [
             t.expressionStatement(
-                t.tsAsExpression(
-                    t.callExpression(
+                t.callExpression(
+                    t.memberExpression(
                         t.memberExpression(
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            ),
-                            t.identifier('push')
+                            t.identifier('message'),
+                            t.identifier(prop)
                         ),
-                        [
+                        t.identifier('push')
+                    ),
+                    [
+                        t.tsAsExpression(
                             t.callExpression(
                                 t.identifier(name),
                                 [
                                     t.identifier('reader')
                                 ]
+                            ),
+                            t.tsTypeReference(
+                                t.identifier('Any')
                             )
-                        ]
-                    ),
-                    t.tsTypeReference(
-                        t.identifier('Any')
-                    )
+                        )
+
+                    ]
                 )
             ),
             t.breakStatement()
