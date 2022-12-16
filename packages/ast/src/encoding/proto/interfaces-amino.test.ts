@@ -1,7 +1,7 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { ProtoParseContext } from '@osmonauts/ast';
-import { expectCode, getTestProtoStore, defaultTelescopeOptions } from '../../../../test-utils';
-import { createObjectWithMethods } from '../../object';
+import { expectCode, getTestProtoStore, defaultTelescopeOptions } from '../../../test-utils';
+import { createObjectWithMethods } from '../object';
 
 const store = getTestProtoStore();
 store.options.aminoEncoding.useRecursiveV2encoding = true;

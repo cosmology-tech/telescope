@@ -102,7 +102,7 @@ exports[`MsgSubmitProposal 1`] = `
 
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
     return {
-      content: object?.content ? Any.fromAmino(object.content) : undefined,
+      content: object?.content ? ProposalContentI_FromAmino(object.content) : undefined,
       initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
       proposer: object.proposer
     };
