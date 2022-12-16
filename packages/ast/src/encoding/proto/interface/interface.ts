@@ -109,7 +109,20 @@ export const createProtoType = (
                     optional = true;
                 }
 
-                const fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+                let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+
+                // should we actually just edit/add comments 
+                // to make this more "native" for any google.protobuf.Any?
+                // let's see...
+                if (
+                    name === 'Any' &&
+                    context.ref.proto.package === 'google.protobuf' &&
+                    options.typeNameSuffix === 'Amino' &&
+                    orig === 'type_url'
+                ) {
+                    // type_url => type
+                    fieldNameWithCase = 'type';
+                }
 
                 const propSig = tsPropertySignature(
                     t.identifier(fieldNameWithCase),
@@ -120,7 +133,11 @@ export const createProtoType = (
                 );
 
                 const comments = [];
-                if (field.comment) {
+                if (
+                    field.comment &&
+                    // no comment for derivative types
+                    (!options.typeNamePrefix && !options.typeNameSuffix)
+                ) {
                     comments.push(
                         makeCommentBlock(field.comment)
                     );
