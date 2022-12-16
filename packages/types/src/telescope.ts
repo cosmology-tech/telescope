@@ -45,6 +45,8 @@ interface TelescopeOpts {
         optionalPageRequests?: boolean;
 
         implementsAcceptsAny?: boolean;
+        addTypeUrlToDecoders?: boolean;
+        addTypeUrlToDecoders?: boolean;
 
         excluded?: {
             packages?: string[];
@@ -186,6 +188,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         useOptionalNullable: true,
 
         implementsAcceptsAny: false,
+        addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
