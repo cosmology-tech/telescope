@@ -17,6 +17,7 @@ import {
     getMessageName,
     getTSType
 } from '../../types';
+import { getTypeUrl, getTypeUrlWithPkgAndName } from '../../amino';
 
 const getProtoField = (
     context: ProtoParseContext,
@@ -92,55 +93,71 @@ export const createProtoType = (
 
     const MsgName = getMessageName(name, options);
 
+    const fields = [];
+
+    if (
+        context.pluginValue('prototypes.addTypeUrlToDecoders') &&
+        context.pluginValue('prototypes.implementsAcceptsAny') &&
+        proto.options?.['(cosmos_proto.implements_interface)']
+    ) {
+        fields.push(tsPropertySignature(
+            t.identifier('$typeUrl'),
+            t.tsTypeAnnotation(t.tsStringKeyword()),
+            true
+        ));
+    }
+
+    [].push.apply(fields, Object.keys(proto.fields).reduce((m, fieldName) => {
+        const isOneOf = oneOfs.includes(fieldName);
+        const field = proto.fields[fieldName];
+
+        // optionalityMap is coupled to API requests
+        const orig = field.options?.['(telescope:orig)'] ?? fieldName;
+        let optional = false;
+        if (optionalityMap[orig]) {
+            optional = true;
+        }
+
+        let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+
+        const propSig = tsPropertySignature(
+            t.identifier(fieldNameWithCase),
+            t.tsTypeAnnotation(
+                getProtoField(context, field, options)
+            ),
+            optional || getFieldOptionality(context, field, isOneOf)
+        );
+
+        const comments = [];
+        if (
+            field.comment &&
+            // no comment for derivative types
+            (!options.typeNamePrefix && !options.typeNameSuffix)
+        ) {
+            comments.push(
+                makeCommentBlock(field.comment)
+            );
+        }
+        if (field.options?.deprecated) {
+            comments.push(
+                makeCommentBlock('@deprecated')
+            );
+        }
+        if (comments.length) {
+            propSig.leadingComments = comments;
+        }
+
+        m.push(propSig)
+        return m;
+    }, []));
+
     // declaration
     const declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
         t.identifier(MsgName),
         null,
         [],
         t.tsInterfaceBody(
-            Object.keys(proto.fields).reduce((m, fieldName) => {
-                const isOneOf = oneOfs.includes(fieldName);
-                const field = proto.fields[fieldName];
-
-                // optionalityMap is coupled to API requests
-                const orig = field.options?.['(telescope:orig)'] ?? fieldName;
-                let optional = false;
-                if (optionalityMap[orig]) {
-                    optional = true;
-                }
-
-                let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
-
-                const propSig = tsPropertySignature(
-                    t.identifier(fieldNameWithCase),
-                    t.tsTypeAnnotation(
-                        getProtoField(context, field, options)
-                    ),
-                    optional || getFieldOptionality(context, field, isOneOf)
-                );
-
-                const comments = [];
-                if (
-                    field.comment &&
-                    // no comment for derivative types
-                    (!options.typeNamePrefix && !options.typeNameSuffix)
-                ) {
-                    comments.push(
-                        makeCommentBlock(field.comment)
-                    );
-                }
-                if (field.options?.deprecated) {
-                    comments.push(
-                        makeCommentBlock('@deprecated')
-                    );
-                }
-                if (comments.length) {
-                    propSig.leadingComments = comments;
-                }
-
-                m.push(propSig)
-                return m;
-            }, [])
+            fields
         )
     ));
 
@@ -170,7 +187,21 @@ export const createCreateProtoType = (
 ) => {
     const oneOfs = getOneOfs(proto);
 
-    const fields = Object.keys(proto.fields).map(key => {
+    const fields = [];
+
+    if (
+        context.pluginValue('prototypes.addTypeUrlToDecoders') &&
+        context.pluginValue('prototypes.implementsAcceptsAny') &&
+        proto.options?.['(cosmos_proto.implements_interface)']
+    ) {
+        const typeUrl = getTypeUrlWithPkgAndName(context.ref.proto.package, name);
+        fields.push(t.objectProperty(
+            t.identifier('$typeUrl'),
+            t.stringLiteral(typeUrl)
+        ));
+    }
+
+    [].push.apply(fields, Object.keys(proto.fields).map(key => {
         const isOneOf = oneOfs.includes(key);
         const isOptional = getFieldOptionality(context, proto.fields[key], isOneOf)
         return {
@@ -185,7 +216,7 @@ export const createCreateProtoType = (
                 t.identifier(field.name),
                 getDefaultTSTypeFromProtoType(context, field, field.isOneOf)
             )
-        })
+        }));
 
 
     return functionDeclaration(t.identifier(getBaseCreateTypeFuncName(name)),
