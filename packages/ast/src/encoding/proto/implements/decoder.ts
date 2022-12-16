@@ -15,7 +15,7 @@ const getMapFromTypeUrlMap = (urlMap: InterfaceTypeUrlMap, name: string) => {
 
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
-const getInterfaceDecoderName = (str: string) => {
+export const getInterfaceDecoderName = (str: string) => {
     return firstUpper(slugify(str) + '_InterfaceDecoder');
 };
 
