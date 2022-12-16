@@ -474,7 +474,25 @@ export const arrayTypes = {
             ]
         );
     },
-    type(args: ToAminoJSONMethod) {
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
+        return t.conditionalExpression(
+            t.identifier('e'),
+            t.callExpression(
+                t.identifier(interfaceFnName),
+                [
+                    t.identifier('e')
+                ]
+            ),
+            t.identifier('undefined')
+        );
+    },
+    protoType(args: ToAminoJSONMethod) {
         const name = args.context.getTypeName(args.field);
         return t.conditionalExpression(
             t.identifier('e'),
@@ -489,6 +507,18 @@ export const arrayTypes = {
             ),
             t.identifier('undefined')
         );
+    },
+    type(args: ToAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return arrayTypes.anyType(args);
+        }
+        return arrayTypes.protoType(args);
     }
 }
 

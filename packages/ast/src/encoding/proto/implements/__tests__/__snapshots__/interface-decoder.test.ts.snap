@@ -134,7 +134,7 @@ exports[`PoolI objects 1`] = `
     const obj: any = {};
 
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+      obj.pools = message.pools.map(e => e ? PoolI_ToAmino(e) : undefined);
     } else {
       obj.pools = [];
     }
