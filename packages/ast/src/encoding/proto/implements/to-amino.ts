@@ -6,7 +6,7 @@ import { ProtoParseContext } from "../../context";
 
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
-const getInterfaceToAminoName = (str: string) => {
+export const getInterfaceToAminoName = (str: string) => {
     return firstUpper(slugify(str) + '_ToAmino');
 };
 

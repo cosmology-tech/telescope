@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MsgSubmitProposal 1`] = `
+"export const MsgSubmitProposal = {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.content !== undefined) {
+      Any.encode(message.content, writer.uint32(10).fork()).ldelim();
+    }
+
+    for (const v of message.initialDeposit) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.proposer !== "") {
+      writer.uint32(26).string(message.proposer);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSubmitProposal();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.content = Any.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.initialDeposit.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.proposer = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgSubmitProposal {
+    return {
+      content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initialDeposit) ? object.initialDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
+  },
+
+  toJSON(message: MsgSubmitProposal): unknown {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initialDeposit = message.initialDeposit.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.initialDeposit = [];
+    }
+
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
+    const message = createBaseMsgSubmitProposal();
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
+    message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
+    message.proposer = object.proposer ?? "";
+    return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
+    return {
+      content: object.content ? Any.fromSDK(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
+      proposer: object?.proposer
+    };
+  },
+
+  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    obj.proposer = message.proposer;
+    return obj;
+  },
+
+  fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
+    return {
+      content: object?.content ? Any.fromAmino(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
+      proposer: object.proposer
+    };
+  },
+
+  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
+    const obj: any = {};
+    obj.content = message.content ? ProposalContentI_ToAmino(message.content) : undefined;
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    obj.proposer = message.proposer;
+    return obj;
+  }
+
+};"
+`;
