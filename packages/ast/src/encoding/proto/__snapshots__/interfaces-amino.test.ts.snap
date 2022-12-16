@@ -28,7 +28,7 @@ exports[`MsgSubmitProposal 1`] = `
 
       switch (tag >>> 3) {
         case 1:
-          message.content = ProposalContentI_InterfaceDecoder(reader, reader.uint32());
+          message.content = (ProposalContentI_InterfaceDecoder(reader) as Any);
           break;
 
         case 2:

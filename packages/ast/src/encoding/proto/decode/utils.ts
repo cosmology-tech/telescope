@@ -367,19 +367,18 @@ export const baseTypes = {
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceDecoderName(interfaceName)
 
-        return t.callExpression(
-            t.identifier(interfaceFnName),
-            [
-                t.identifier('reader'),
-                t.callExpression(
-                    t.memberExpression(
-                        t.identifier('reader'),
-                        t.identifier('uint32')
-                    ),
-                    []
-                )
-            ]
+        return t.tsAsExpression(
+            t.callExpression(
+                t.identifier(interfaceFnName),
+                [
+                    t.identifier('reader')
+                ]
+            ),
+            t.tsTypeReference(
+                t.identifier('Any')
+            )
         )
+
     },
 
     type(args: DecodeMethod) {
