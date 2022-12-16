@@ -50,6 +50,8 @@ export declare const arrayTypes: {
     double(): t.Identifier;
     float(): t.Identifier;
     enum(args: FromAminoJSONMethod): t.CallExpression;
+    anyType(args: FromAminoJSONMethod): t.CallExpression;
+    protoType(args: FromAminoJSONMethod): t.CallExpression;
     type(args: FromAminoJSONMethod): t.CallExpression;
 };
 export declare const fromAminoMessages: {

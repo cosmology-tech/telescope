@@ -50,6 +50,8 @@ export declare const arrayTypes: {
     sfixed64(args: ToAminoJSONMethod): t.Identifier;
     bytes(args: ToAminoJSONMethod): t.Identifier;
     enum(args: ToAminoJSONMethod): t.CallExpression;
+    anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
+    protoType(args: ToAminoJSONMethod): t.ConditionalExpression;
     type(args: ToAminoJSONMethod): t.ConditionalExpression;
 };
 export declare const toAminoMessages: {
