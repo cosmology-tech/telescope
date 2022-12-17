@@ -47,11 +47,11 @@ const main = async () => {
 
     const [account] = await signer.getAccounts();
 
+
     const fee = {
         amount: coins('0', 'uosmo'),
         gas: '250000'
     }
-
 
     const accountBalances = await client.cosmos.bank.v1beta1.allBalances({
         address: account.address

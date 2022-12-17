@@ -36,6 +36,11 @@ const options: TelescopeOptions = {
     ]
   },
 
+  interfaces: {
+    enabled: false,
+    useUnionTypes: false
+  },
+
   prototypes: {
     enabled: true,
     parser: {
@@ -54,7 +59,6 @@ const options: TelescopeOptions = {
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
     allowUndefinedTypes: false,
-    implementsAcceptsAny: false,
     excluded: {
       packages: [
         // 'cosmos.gov.v1',
