@@ -1,26 +1,24 @@
 import Long from 'long';
-import { coin, coins } from '@cosmjs/amino';
+import { coins } from '@cosmjs/amino';
 import {
     prettyPool,
     getPricesFromCoinGecko,
     makePoolPairs,
-    makePoolsPretty,
-    calculateCoinsNeededInPoolForValue,
-    calculateShareOutAmount
+    makePoolsPretty
 } from '@cosmology/core';
 import { getSigningOsmosisClient, osmosis } from './codegen';
 // import { osmosis as cosmology } from 'osmojs';
 import { getOfflineSignerAmino, signAndBroadcast } from 'cosmjs-utils';
-import { MsgJoinPool } from './codegen/osmosis/gamm/v1beta1/tx';
-// import { MsgJoinPool as MsgJoinPool2 } from 'osmojs/main/codegen/osmosis/gamm/v1beta1/tx';
+import { MsgLockTokens } from './codegen/osmosis/lockup/tx';
+// import { MsgLockTokens as MsgLockTokens2 } from 'osmojs/main/codegen/osmosis/lockup/tx';
 
 const RPC_ENDPOINT = 'https://rpc.cosmos.directory/osmosis'
 
 const main = async () => {
 
     const {
-        joinPool
-    } = osmosis.gamm.v1beta1.MessageComposer.withTypeUrl;
+        lockTokens
+    } = osmosis.lockup.MessageComposer.withTypeUrl;
 
     const signer = await getOfflineSignerAmino({
         mnemonic: process.env.MNEMONIC,
@@ -47,35 +45,56 @@ const main = async () => {
     const prettyPools = makePoolsPretty(prices, pools);
     const pairs = makePoolPairs(prettyPools);
 
-
-    const atomPool = await client.osmosis.gamm.v1beta1.pool({
-        poolId: Long.fromValue('1')
-    });
-    const poolInfo = prettyPool(atomPool.pool, { includeDetails: false });
-    const value = '0.1';
-    const coinsNeeded = calculateCoinsNeededInPoolForValue(prices, poolInfo, value);
-
     const [account] = await signer.getAccounts();
 
     const fee = {
         amount: coins('0', 'uosmo'),
         gas: '250000'
     }
-    const shareOutAmount = calculateShareOutAmount(poolInfo, coinsNeeded);
-    const msg = joinPool({
-        sender: account.address,
-        poolId: '1',
-        shareOutAmount,
-        tokenInMaxs: coinsNeeded.map((c) => {
-            return coin(c.amount, c.denom);
-        })
 
+
+    const accountBalances = await client.cosmos.bank.v1beta1.allBalances({
+        address: account.address
+    })
+
+    const gammTokens = accountBalances.balances
+        .filter((a) => a.denom.startsWith('gamm'))
+        .map((obj) => {
+            return {
+                ...obj,
+                poolId: obj.denom.split('/')[2]
+            };
+        });
+
+    if (!gammTokens.length) {
+        return console.log('no gamm tokens to stake');
+    }
+
+    console.log({ gammTokens })
+
+    const tokens = gammTokens.find((gamm) => gamm.poolId == '1');
+    if (!tokens) {
+        return console.log('no gamm tokens from pool to stake');
+    }
+    const gammCoins = [tokens].map(
+        ({ denom, amount }) => ({ amount, denom })
+    );
+
+    const msg = lockTokens({
+        owner: account.address,
+        coins: gammCoins,
+        duration: {
+            seconds: Long.fromValue(8),
+            // seconds: Long.fromValue(86400),
+            nanos: 0
+        }
     });
 
     console.log(JSON.stringify(msg));
 
-    const aminoVersion = MsgJoinPool.toAmino(msg.value);
-    const fromAmino = MsgJoinPool.fromAmino(aminoVersion);
+    const aminoVersion = MsgLockTokens.toAmino(msg.value);
+    const fromAmino = MsgLockTokens.fromAmino(aminoVersion);
+
     console.log(JSON.stringify({
         msg,
         aminoVersion,
@@ -87,20 +106,20 @@ const main = async () => {
         signer
     });
 
-    const result = await signAndBroadcast({
-        client: stargateClient,
-        address: account.address,
-        chainId: 'osmosis-1',
-        fee,
-        memo: '',
-        msgs: [msg]
-    })
+    // const result = await signAndBroadcast({
+    //     client: stargateClient,
+    //     address: account.address,
+    //     chainId: 'osmosis-1',
+    //     fee,
+    //     memo: '',
+    //     msgs: [msg]
+    // })
 
-    // const result = await stargateClient.signAndBroadcast(
-    //     account.address,
-    //     [msg],
-    //     fee
-    // );
+    const result = await stargateClient.signAndBroadcast(
+        account.address,
+        [msg],
+        fee
+    );
 
     console.log(result);
 

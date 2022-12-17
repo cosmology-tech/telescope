@@ -1,26 +1,24 @@
 import Long from 'long';
-import { coin, coins } from '@cosmjs/amino';
+import { coins } from '@cosmjs/amino';
 import {
     prettyPool,
     getPricesFromCoinGecko,
     makePoolPairs,
-    makePoolsPretty,
-    calculateCoinsNeededInPoolForValue,
-    calculateShareOutAmount
+    makePoolsPretty
 } from '@cosmology/core';
 import { getSigningOsmosisClient, osmosis } from './codegen';
 // import { osmosis as cosmology } from 'osmojs';
 import { getOfflineSignerAmino, signAndBroadcast } from 'cosmjs-utils';
-import { MsgJoinPool } from './codegen/osmosis/gamm/v1beta1/tx';
-// import { MsgJoinPool as MsgJoinPool2 } from 'osmojs/main/codegen/osmosis/gamm/v1beta1/tx';
+import { MsgBeginUnlocking } from './codegen/osmosis/lockup/tx';
+// import { MsgBeginUnlocking as MsgBeginUnlocking2 } from 'osmojs/main/codegen/osmosis/lockup/tx';
 
 const RPC_ENDPOINT = 'https://rpc.cosmos.directory/osmosis'
 
 const main = async () => {
 
     const {
-        joinPool
-    } = osmosis.gamm.v1beta1.MessageComposer.withTypeUrl;
+        beginUnlocking
+    } = osmosis.lockup.MessageComposer.withTypeUrl;
 
     const signer = await getOfflineSignerAmino({
         mnemonic: process.env.MNEMONIC,
@@ -47,35 +45,46 @@ const main = async () => {
     const prettyPools = makePoolsPretty(prices, pools);
     const pairs = makePoolPairs(prettyPools);
 
-
-    const atomPool = await client.osmosis.gamm.v1beta1.pool({
-        poolId: Long.fromValue('1')
-    });
-    const poolInfo = prettyPool(atomPool.pool, { includeDetails: false });
-    const value = '0.1';
-    const coinsNeeded = calculateCoinsNeededInPoolForValue(prices, poolInfo, value);
-
     const [account] = await signer.getAccounts();
 
     const fee = {
         amount: coins('0', 'uosmo'),
         gas: '250000'
     }
-    const shareOutAmount = calculateShareOutAmount(poolInfo, coinsNeeded);
-    const msg = joinPool({
-        sender: account.address,
-        poolId: '1',
-        shareOutAmount,
-        tokenInMaxs: coinsNeeded.map((c) => {
-            return coin(c.amount, c.denom);
-        })
 
+
+    const accountLockedLongerDurationDenom = await client.osmosis.lockup.accountLockedLongerDurationDenom({
+        owner: account.address,
+        denom: 'gamm/pool/1'
+    })
+
+    const accountLockedCoins = await client.osmosis.lockup.accountLockedCoins({
+        owner: account.address
+    })
+
+    const accountUnlockableCoins = await client.osmosis.lockup.accountUnlockableCoins({
+        owner: account.address
+    })
+
+    console.log(JSON.stringify({ accountUnlockableCoins, accountLockedCoins, accountLockedLongerDurationDenom }, null, 2));
+
+    if (!accountLockedLongerDurationDenom.locks.length) {
+        throw new Error('no locks!');
+    }
+
+    const [lock] = accountLockedLongerDurationDenom.locks;
+
+    const msg = beginUnlocking({
+        owner: account.address,
+        coins: [],
+        ID: lock.ID
     });
 
     console.log(JSON.stringify(msg));
 
-    const aminoVersion = MsgJoinPool.toAmino(msg.value);
-    const fromAmino = MsgJoinPool.fromAmino(aminoVersion);
+    const aminoVersion = MsgBeginUnlocking.toAmino(msg.value);
+    const fromAmino = MsgBeginUnlocking.fromAmino(aminoVersion);
+
     console.log(JSON.stringify({
         msg,
         aminoVersion,
@@ -87,20 +96,20 @@ const main = async () => {
         signer
     });
 
-    const result = await signAndBroadcast({
-        client: stargateClient,
-        address: account.address,
-        chainId: 'osmosis-1',
-        fee,
-        memo: '',
-        msgs: [msg]
-    })
+    // const result = await signAndBroadcast({
+    //     client: stargateClient,
+    //     address: account.address,
+    //     chainId: 'osmosis-1',
+    //     fee,
+    //     memo: '',
+    //     msgs: [msg]
+    // })
 
-    // const result = await stargateClient.signAndBroadcast(
-    //     account.address,
-    //     [msg],
-    //     fee
-    // );
+    const result = await stargateClient.signAndBroadcast(
+        account.address,
+        [msg],
+        fee
+    );
 
     console.log(result);
 
