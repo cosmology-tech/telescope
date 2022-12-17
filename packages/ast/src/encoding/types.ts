@@ -53,55 +53,42 @@ export const getFieldTypeReference = (
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
+    const implementsAcceptsAny = context.pluginValue('prototypes.implementsAcceptsAny');
+    const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
+    const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
+    const isArray = field.rule === 'repeated';
 
-
-    if (
-        field.parsedType?.type === 'Type' &&
-        field.parsedType?.name === 'Any' &&
-        field.rule !== 'repeated' &&
-        field.options?.['(cosmos_proto.accepts_interface)'] &&
-        context.pluginValue('prototypes.implementsAcceptsAny')
-    ) {
-        const lookupInterface = field.options['(cosmos_proto.accepts_interface)'];
-
-        // crude way of doing this (e.g. Thing vs. some.scope.Thing could be same!)
-        // const found = context.store.implementsInterface[lookupInterface];
-        // const found = context.ref.traversed.symbols
-
-        const symb = context.store._symbols.find(s => s.implementsType === lookupInterface);
-        if (!symb && context.options.logLevel >= TelescopeLogLevel.Warn) {
+    let symbols = null;
+    if (implementsAcceptsAny && lookupInterface) {
+        symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
+        if (!symbols.length && context.options.logLevel >= TelescopeLogLevel.Warn) {
             console.warn(`[WARN] ${lookupInterface} is accepted but not implemented`);
         }
-
-        // if (found && found.length) {
-
-
-        //     // ast = t.tsUnionType(
-        //     //     [
-        //     //         ...found.map(a => {
-        //     //             // - [ ] insert import...
-        //     //             return t.tsTypeReference(t.identifier(a.type));
-        //     //         }),
-        //     //         t.tsUndefinedKeyword()
-        //     //     ]
-        //     // )
-        // } else {
-        //     console.log('INTERFACE NOT FOUND: ', lookupInterface);
-        //     ast = t.tsUnionType(
-        //         [
-        //             typ,
-        //             t.tsUndefinedKeyword()
-        //         ]
-        //     );
-        // }
     }
 
+    // cast Any types!
+
     if (
+        isAnyType &&
+        lookupInterface &&
+        implementsAcceptsAny &&
+        symbols
+    ) {
+        ast = t.tsUnionType(
+            [
+                ...symbols.map(a => {
+                    return t.tsTypeReference(t.identifier(a.readAs));
+                }),
+                typ,
+                !isArray && t.tsUndefinedKeyword()
+            ].filter(Boolean)
+        )
+    } else if (
         field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&
         context.pluginValue('prototypes.allowUndefinedTypes')
     ) {
-        // NOTE: unfortunately bc of defaults...
+        // regular types!
         ast = t.tsUnionType(
             [
                 typ,

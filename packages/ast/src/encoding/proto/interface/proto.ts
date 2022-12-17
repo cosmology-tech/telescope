@@ -17,7 +17,7 @@ import {
     getMessageName,
     getTSType
 } from '../../types';
-import { getTypeUrl, getTypeUrlWithPkgAndName } from '../../amino';
+import { getTypeUrlWithPkgAndName } from '../../amino';
 
 const getProtoField = (
     context: ProtoParseContext,
