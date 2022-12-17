@@ -12,6 +12,8 @@ telescope({
   options: {
     removeUnusedImports: true,
     prototypes: {
+      implementsAcceptsAny: true,
+      addTypeUrlToDecoders: true,
       excluded: {
         packages: ['cosmos.group.v1']
       },
@@ -29,7 +31,8 @@ telescope({
       }
     },
     aminoEncoding: {
-      enabled: true
+      enabled: true,
+      useRecursiveV2encoding: true
     },
     lcdClients: {
       enabled: true
