@@ -14,6 +14,10 @@ interface TelescopeOpts {
     useSDKTypes?: boolean;
     includeExternalHelpers?: boolean;
     logLevel?: TelescopeLogLevel;
+    interfaces?: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    };
     prototypes?: {
         enabled?: boolean;
         parser?: {
@@ -36,8 +40,6 @@ interface TelescopeOpts {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
-        implementsAcceptsAny?: boolean;
-        addTypeUrlToDecoders?: boolean;
         addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];

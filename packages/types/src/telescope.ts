@@ -20,6 +20,11 @@ interface TelescopeOpts {
 
     logLevel?: TelescopeLogLevel;
 
+    interfaces?: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    },
+
     prototypes?: {
         enabled?: boolean;
         parser?: {
@@ -44,8 +49,6 @@ interface TelescopeOpts {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
 
-        implementsAcceptsAny?: boolean;
-        addTypeUrlToDecoders?: boolean;
         addTypeUrlToDecoders?: boolean;
 
         excluded?: {
@@ -166,6 +169,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     includeExternalHelpers: false,
     logLevel: TelescopeLogLevel.None,
 
+    interfaces: {
+        enabled: false,
+        useUnionTypes: false,
+    },
+
     prototypes: {
         enabled: true,
         parser: {
@@ -187,7 +195,6 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
-        implementsAcceptsAny: false,
         addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
