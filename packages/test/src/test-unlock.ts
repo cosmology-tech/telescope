@@ -7,10 +7,8 @@ import {
     makePoolsPretty
 } from '@cosmology/core';
 import { getSigningOsmosisClient, osmosis } from './codegen';
-// import { osmosis as cosmology } from 'osmojs';
-import { getOfflineSignerAmino, signAndBroadcast } from 'cosmjs-utils';
+import { getOfflineSignerAmino } from 'cosmjs-utils';
 import { MsgBeginUnlocking } from './codegen/osmosis/lockup/tx';
-// import { MsgBeginUnlocking as MsgBeginUnlocking2 } from 'osmojs/main/codegen/osmosis/lockup/tx';
 
 const RPC_ENDPOINT = 'https://rpc.cosmos.directory/osmosis'
 
@@ -95,15 +93,6 @@ const main = async () => {
         rpcEndpoint: RPC_ENDPOINT,
         signer
     });
-
-    // const result = await signAndBroadcast({
-    //     client: stargateClient,
-    //     address: account.address,
-    //     chainId: 'osmosis-1',
-    //     fee,
-    //     memo: '',
-    //     msgs: [msg]
-    // })
 
     const result = await stargateClient.signAndBroadcast(
         account.address,

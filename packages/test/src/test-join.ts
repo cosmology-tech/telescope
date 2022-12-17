@@ -9,10 +9,8 @@ import {
     calculateShareOutAmount
 } from '@cosmology/core';
 import { getSigningOsmosisClient, osmosis } from './codegen';
-// import { osmosis as cosmology } from 'osmojs';
 import { getOfflineSignerAmino, signAndBroadcast } from 'cosmjs-utils';
 import { MsgJoinPool } from './codegen/osmosis/gamm/v1beta1/tx';
-// import { MsgJoinPool as MsgJoinPool2 } from 'osmojs/main/codegen/osmosis/gamm/v1beta1/tx';
 
 const RPC_ENDPOINT = 'https://rpc.cosmos.directory/osmosis'
 
@@ -95,12 +93,6 @@ const main = async () => {
         memo: '',
         msgs: [msg]
     })
-
-    // const result = await stargateClient.signAndBroadcast(
-    //     account.address,
-    //     [msg],
-    //     fee
-    // );
 
     console.log(result);
 
