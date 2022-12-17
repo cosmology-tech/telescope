@@ -57,7 +57,7 @@ export const getFieldTypeReference = (
     const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
     const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
     const isArray = field.rule === 'repeated';
-
+    const isBaseType = !options.typeNamePrefix && !options.typeNameSuffix;
     let symbols = null;
     if (implementsAcceptsAny && lookupInterface) {
         symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
@@ -72,7 +72,9 @@ export const getFieldTypeReference = (
         isAnyType &&
         lookupInterface &&
         implementsAcceptsAny &&
-        symbols
+        symbols &&
+        // not sdk or amino types
+        isBaseType
     ) {
         ast = t.tsUnionType(
             [
