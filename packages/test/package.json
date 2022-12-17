@@ -24,6 +24,7 @@
     "test:lcd-balance": "cross-env NODE_ENV=development babel-node src/test-lcd-balance --extensions \".tsx,.ts,.js\"",
     "test:lcd-client": "cross-env NODE_ENV=development babel-node src/test-lcd-client --extensions \".tsx,.ts,.js\"",
     "test:swap": "cross-env NODE_ENV=development babel-node src/test-swap --extensions \".tsx,.ts,.js\"",
+    "test:join": "cross-env NODE_ENV=development babel-node src/test-join --extensions \".tsx,.ts,.js\"",
     "lint": "eslint .",
     "format": "eslint . --fix",
     "clean": "rimraf ./types && rimraf ./src/codegen",
