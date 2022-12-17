@@ -4,7 +4,7 @@ exports[`MsgSubmitProposal 1`] = `
 "export const MsgSubmitProposal = {
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
-      Any.encode(message.content, writer.uint32(10).fork()).ldelim();
+      Any.encode((message.content as Any), writer.uint32(10).fork()).ldelim();
     }
 
     for (const v of message.initialDeposit) {
@@ -110,7 +110,7 @@ exports[`MsgSubmitProposal 1`] = `
 
   toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
     const obj: any = {};
-    obj.content = message.content ? ProposalContentI_ToAmino(message.content) : undefined;
+    obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any)) : undefined;
 
     if (message.initialDeposit) {
       obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
