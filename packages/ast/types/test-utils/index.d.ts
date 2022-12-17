@@ -11,9 +11,10 @@ export declare const defaultTelescopeOptions: {
     useSDKTypes: boolean;
     includeExternalHelpers: boolean;
     logLevel: import("@osmonauts/types").TelescopeLogLevel;
-    interfaces?: {
+    interfaces: {
         enabled?: boolean;
-    },
+        useUnionTypes?: boolean;
+    };
     prototypes: {
         enabled?: boolean;
         parser?: {
