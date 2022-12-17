@@ -34,6 +34,7 @@ export declare const defaultTelescopeOptions: {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
         implementsAcceptsAny?: boolean;
+        addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
