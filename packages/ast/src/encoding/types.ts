@@ -43,7 +43,9 @@ export const getFieldTypeReference = (
 
         // return on scalar
         typ = getTSTypeForProto(context, field);
-        return typ;
+        return {
+            ast: typ
+        };
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
         typ = getTSTypeFromGoogleType(context, field.type, options);
@@ -68,20 +70,14 @@ export const getFieldTypeReference = (
 
     // cast Any types!
 
-    if (
-        isAnyType &&
-        lookupInterface &&
-        implementsAcceptsAny &&
-        symbols &&
-        // not sdk or amino types
-        isBaseType
-    ) {
+    const isTypeCastable = isAnyType && lookupInterface && implementsAcceptsAny && symbols && isBaseType;
+
+    if (isTypeCastable) {
         const tp = [
             ...symbols.map(a => {
                 return t.tsTypeReference(t.identifier(a.readAs));
             }),
             typ
-            // !isArray && t.tsUndefinedKeyword()
         ].filter(Boolean);
         if (context.pluginValue('interfaces.useUnionTypes')) {
             if (!isArray) {
@@ -89,12 +85,17 @@ export const getFieldTypeReference = (
             }
             ast = t.tsUnionType(tp)
         } else {
-            ast = t.tsUnionType(
-                [
-                    t.tsIntersectionType(tp),
-                    t.tsUndefinedKeyword()
-                ]
-            )
+            // intersections
+            if (isArray) {
+                ast = t.tsIntersectionType(tp);
+            } else {
+                ast = t.tsUnionType(
+                    [
+                        t.tsIntersectionType(tp),
+                        t.tsUndefinedKeyword()
+                    ]
+                )
+            }
         }
     } else if (
         field.parsedType?.type === 'Type' &&
@@ -112,7 +113,7 @@ export const getFieldTypeReference = (
         ast = typ;
     }
 
-    return ast;
+    return { ast, isTypeCastableAnyType: isTypeCastable };
 }
 
 export const getFieldAminoTypeReference = (

@@ -26,10 +26,22 @@ const getProtoField = (
 ) => {
     let ast: any = null;
 
-    ast = getFieldTypeReference(context, field, options);
+    const fieldRef = getFieldTypeReference(context, field, options);
+    ast = fieldRef.ast
+    const isTypeCastableAnyType = fieldRef.isTypeCastableAnyType
 
     if (field.rule === 'repeated') {
         ast = t.tsArrayType(ast);
+        if (isTypeCastableAnyType) {
+            ast = t.tsUnionType([
+                ast,
+                t.tsArrayType(
+                    t.tsTypeReference(
+                        t.identifier('Any')
+                    )
+                )
+            ])
+        }
     }
 
     if (field.keyType) {
