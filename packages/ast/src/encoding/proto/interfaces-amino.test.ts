@@ -10,7 +10,7 @@ store.traverseAll();
 
 it('MsgSubmitProposal', async () => {
     const ref = store.findProto('cosmos/gov/v1beta1/tx.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     expectCode(createObjectWithMethods(
         context,
         'MsgSubmitProposal', getNestedProto(ref.traversed).MsgSubmitProposal
