@@ -69,16 +69,15 @@ export const getFieldTypeReference = (
     }
 
     // cast Any types!
-
     const isTypeCastable = isAnyType && lookupInterface && implementsAcceptsAny && symbols && isBaseType;
+    const isNonArrayNullableType = field.parsedType?.type === 'Type' &&
+        field.rule !== 'repeated' &&
+        context.pluginValue('prototypes.allowUndefinedTypes');
 
     if (isTypeCastable) {
-        const tp = [
-            ...symbols.map(a => {
-                return t.tsTypeReference(t.identifier(a.readAs));
-            }),
-            typ
-        ].filter(Boolean);
+        const tp = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
+        tp.push(typ);
+
         if (context.pluginValue('interfaces.useUnionTypes')) {
             if (!isArray) {
                 tp.push(t.tsUndefinedKeyword())
@@ -97,11 +96,7 @@ export const getFieldTypeReference = (
                 )
             }
         }
-    } else if (
-        field.parsedType?.type === 'Type' &&
-        field.rule !== 'repeated' &&
-        context.pluginValue('prototypes.allowUndefinedTypes')
-    ) {
+    } else if (isNonArrayNullableType) {
         // regular types!
         ast = t.tsUnionType(
             [
