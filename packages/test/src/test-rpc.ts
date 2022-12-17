@@ -21,8 +21,23 @@ const main = async () => {
     const balancers = response.pools.filter(p => p.$typeUrl === '/osmosis.gamm.v1beta1.Pool')
     console.log(balancers[0]);
     console.log(stables[0]);
+
+    // stables[0].
 };
 
 main().then(() => {
     console.log('all done')
 })
+
+// interface A {
+//     a: string;
+// }
+// interface B {
+//     b: string;
+// }
+
+// type C = (A & B) & undefined;
+
+// const c: C = {};
+
+// c.

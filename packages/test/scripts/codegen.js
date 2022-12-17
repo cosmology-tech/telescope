@@ -11,8 +11,11 @@ telescope({
   outPath,
   options: {
     removeUnusedImports: true,
+    interfaces: {
+      enabled: true,
+      useUnionTypes: false
+    },
     prototypes: {
-      implementsAcceptsAny: true,
       addTypeUrlToDecoders: true,
       excluded: {
         packages: ['cosmos.group.v1']
