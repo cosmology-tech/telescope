@@ -189,9 +189,14 @@ export const toAminoJSON = {
                     t.callExpression(
                         t.identifier(interfaceFnName),
                         [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(propName)
+                            t.tsAsExpression(
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(propName)
+                                ),
+                                t.tsTypeReference(
+                                    t.identifier('Any')
+                                )
                             )
                         ]
                     ),
@@ -486,7 +491,12 @@ export const arrayTypes = {
             t.callExpression(
                 t.identifier(interfaceFnName),
                 [
-                    t.identifier('e')
+                    t.tsAsExpression(
+                        t.identifier('e'),
+                        t.tsTypeReference(
+                            t.identifier('Any')
+                        )
+                    )
                 ]
             ),
             t.identifier('undefined')
