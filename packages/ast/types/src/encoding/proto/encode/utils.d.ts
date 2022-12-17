@@ -42,7 +42,7 @@ export declare const types: {
     fixed64(num: number, prop: string, isOptional: boolean): t.IfStatement;
     sfixed64(num: number, prop: string, isOptional: boolean): t.IfStatement;
     bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    type(num: number, prop: string, name: string): t.IfStatement;
+    type(num: number, prop: string, name: string, isAnyType: boolean): t.IfStatement;
     enum(context: ProtoParseContext, num: number, field: ProtoField, isOptional: boolean, isOneOf: boolean): t.IfStatement;
     bytes(num: number, prop: string, isOptional: boolean): t.IfStatement;
     timestamp(num: number, prop: string): t.Statement;
@@ -50,7 +50,7 @@ export declare const types: {
     duration(num: number, prop: string): t.IfStatement;
     forkDelimArray(num: number, prop: string, expr: t.Statement): (t.ExpressionStatement | t.ForOfStatement)[];
     array(num: number, prop: string, expr: t.Statement): t.ForOfStatement[];
-    typeArray(num: number, prop: string, name: string): t.ForOfStatement[];
+    typeArray(num: number, prop: string, name: string, isAnyType: boolean): t.ForOfStatement[];
     keyHash(num: number, prop: string, name: string): t.ExpressionStatement;
 };
 export declare const arrayTypes: {
