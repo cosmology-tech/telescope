@@ -210,7 +210,19 @@ export const encode = {
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
         const num = getTagNumber(args.field);
-        return types.type(num, prop, name);
+
+        let isAnyType = false;
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            isAnyType = true;
+        }
+
+        return types.type(num, prop, name, isAnyType);
     },
 
     enum(args: EncodeMethod) {
@@ -268,7 +280,19 @@ export const encode = {
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
         const num = getTagNumber(args.field);
-        return types.typeArray(num, prop, name);
+
+        let isAnyType = false;
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            isAnyType = true;
+        }
+
+        return types.typeArray(num, prop, name, isAnyType);
     },
 
     keyHash(args: EncodeMethod) {
@@ -428,7 +452,22 @@ export const types = {
         )
     },
 
-    type(num: number, prop: string, name: string) {
+    type(num: number, prop: string, name: string, isAnyType: boolean) {
+
+        let messageProp: t.MemberExpression | t.TSAsExpression = t.memberExpression(
+            t.identifier('message'),
+            t.identifier(prop)
+        );
+
+        if (isAnyType) {
+            messageProp = t.tsAsExpression(
+                messageProp,
+                t.tsTypeReference(
+                    t.identifier('Any')
+                )
+            )
+        }
+
         return t.ifStatement(
             notUndefined(prop),
             t.blockStatement([
@@ -441,10 +480,7 @@ export const types = {
                                     t.identifier('encode')
                                 ),
                                 [
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier(prop)
-                                    ),
+                                    messageProp,
                                     t.callExpression(
                                         t.memberExpression(
                                             t.callExpression(
@@ -728,7 +764,21 @@ export const types = {
         ];
     },
 
-    typeArray(num: number, prop: string, name: string) {
+    typeArray(num: number, prop: string, name: string, isAnyType: boolean) {
+        // "v!" just means it's NOT NULLABLE
+        let nestedProp: t.TSNonNullExpression | t.TSAsExpression = t.tsNonNullExpression(
+            t.identifier('v')
+        );
+        if (isAnyType) {
+            nestedProp = t.tsAsExpression(
+                nestedProp,
+                t.tsTypeReference(
+                    t.identifier('Any')
+                )
+            )
+        }
+
+
         return [
             t.forOfStatement(
                 t.variableDeclaration('const',
@@ -754,10 +804,7 @@ export const types = {
                                             t.identifier('encode')
                                         ),
                                         [
-                                            // "v!" just means it's NOT NULLABLE
-                                            t.tsNonNullExpression(
-                                                t.identifier('v')
-                                            ),
+                                            nestedProp,
                                             t.callExpression(
                                                 t.memberExpression(
                                                     t.callExpression(
