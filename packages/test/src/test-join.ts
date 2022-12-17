@@ -85,14 +85,11 @@ const main = async () => {
         signer
     });
 
-    const result = await signAndBroadcast({
-        client: stargateClient,
-        address: account.address,
-        chainId: 'osmosis-1',
-        fee,
-        memo: '',
-        msgs: [msg]
-    })
+    const result = await stargateClient.signAndBroadcast(
+        account.address,
+        [msg],
+        fee
+    );
 
     console.log(result);
 
