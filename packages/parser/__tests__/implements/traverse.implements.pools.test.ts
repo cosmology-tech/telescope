@@ -3,7 +3,7 @@ import { getTestProtoStore } from '../../test-utils';
 describe('PoolI', () => {
   const store = getTestProtoStore();
   // @ts-ignore
-  store.options.prototypes.implementsAcceptsAny = true;
+  store.options.interfaces.enabled = true;
   store.traverseAll();
   const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
   const balancerRef = store.findProto('osmosis/gamm/pool-models/balancer/balancerPool.proto');

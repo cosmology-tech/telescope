@@ -4,7 +4,7 @@ import { ProtoParseContext } from '../../../context';
 import { createInterfaceFromAminoHelper, createInterfaceFromAmino } from '../from-amino';
 
 const store = getTestProtoStore();
-store.options.prototypes.implementsAcceptsAny = true;
+store.options.interfaces.enabled = true;
 store.options.aminoEncoding.enabled = true;
 store.options.aminoEncoding.useRecursiveV2encoding = true;
 store.traverseAll();

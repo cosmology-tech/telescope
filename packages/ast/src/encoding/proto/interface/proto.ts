@@ -97,8 +97,14 @@ export const createProtoType = (
 
     if (
         context.pluginValue('prototypes.addTypeUrlToDecoders') &&
-        context.pluginValue('prototypes.implementsAcceptsAny') &&
-        proto.options?.['(cosmos_proto.implements_interface)']
+        ((
+            context.pluginValue('interfaces.enabled') &&
+            proto.options?.['(cosmos_proto.implements_interface)']
+        ) ||
+            (
+                context.ref.proto.package === 'google.protobuf'
+                && name === 'Any'
+            ))
     ) {
         fields.push(tsPropertySignature(
             t.identifier('$typeUrl'),
@@ -106,6 +112,18 @@ export const createProtoType = (
             true
         ));
     }
+
+    // if (
+    //     context.pluginValue('prototypes.addTypeUrlToDecoders') &&
+    //     context.pluginValue('interfaces.enabled') &&
+    //     proto.options?.['(cosmos_proto.implements_interface)']
+    // ) {
+    //     fields.push(tsPropertySignature(
+    //         t.identifier('$typeUrl'),
+    //         t.tsTypeAnnotation(t.tsStringKeyword()),
+    //         true
+    //     ));
+    // }
 
     [].push.apply(fields, Object.keys(proto.fields).reduce((m, fieldName) => {
         const isOneOf = oneOfs.includes(fieldName);
@@ -191,8 +209,14 @@ export const createCreateProtoType = (
 
     if (
         context.pluginValue('prototypes.addTypeUrlToDecoders') &&
-        context.pluginValue('prototypes.implementsAcceptsAny') &&
-        proto.options?.['(cosmos_proto.implements_interface)']
+        ((
+            context.pluginValue('interfaces.enabled') &&
+            proto.options?.['(cosmos_proto.implements_interface)']
+        ) ||
+            (
+                context.ref.proto.package === 'google.protobuf'
+                && name === 'Any'
+            ))
     ) {
         const typeUrl = getTypeUrlWithPkgAndName(context.ref.proto.package, name);
         fields.push(t.objectProperty(
@@ -200,6 +224,17 @@ export const createCreateProtoType = (
             t.stringLiteral(typeUrl)
         ));
     }
+    // if (
+    //     context.pluginValue('prototypes.addTypeUrlToDecoders') &&
+    //     context.pluginValue('interfaces.enabled') &&
+    //     proto.options?.['(cosmos_proto.implements_interface)']
+    // ) {
+    //     const typeUrl = getTypeUrlWithPkgAndName(context.ref.proto.package, name);
+    //     fields.push(t.objectProperty(
+    //         t.identifier('$typeUrl'),
+    //         t.stringLiteral(typeUrl)
+    //     ));
+    // }
 
     [].push.apply(fields, Object.keys(proto.fields).map(key => {
         const isOneOf = oneOfs.includes(key);

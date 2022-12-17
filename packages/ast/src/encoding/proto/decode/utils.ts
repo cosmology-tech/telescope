@@ -142,7 +142,7 @@ export const decode = {
 
         if (
             args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
-            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.context.options.interfaces.enabled == true &&
             args.field.type === 'google.protobuf.Any' &&
             args.field.options['(cosmos_proto.accepts_interface)']
 
@@ -401,7 +401,7 @@ export const baseTypes = {
     type(args: DecodeMethod) {
         if (
             args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
-            args.context.options.prototypes.implementsAcceptsAny == true &&
+            args.context.options.interfaces.enabled == true &&
             args.field.type === 'google.protobuf.Any' &&
             args.field.options['(cosmos_proto.accepts_interface)']
 

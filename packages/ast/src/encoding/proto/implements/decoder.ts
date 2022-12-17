@@ -179,6 +179,7 @@ export const createInterfaceDecoderHelper = (
 
                         // return type
                         t.tsTypeAnnotation(
+                            // do we need to use interfaces.useUnionTypes here ?
                             t.tsUnionType([
                                 ...returnTypes.map(type => t.tsTypeReference(
                                     t.identifier(type)

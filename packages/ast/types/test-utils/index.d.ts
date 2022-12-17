@@ -11,6 +11,9 @@ export declare const defaultTelescopeOptions: {
     useSDKTypes: boolean;
     includeExternalHelpers: boolean;
     logLevel: import("@osmonauts/types").TelescopeLogLevel;
+    interfaces?: {
+        enabled?: boolean;
+    },
     prototypes: {
         enabled?: boolean;
         parser?: {
@@ -33,7 +36,6 @@ export declare const defaultTelescopeOptions: {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
-        implementsAcceptsAny?: boolean;
         addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];

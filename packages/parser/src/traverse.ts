@@ -92,7 +92,7 @@ export const parseFullyTraversedProtoImports = (
     // AGGREGATE ALL implements
 
     protos.forEach(ref => {
-        const enabled = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+        const enabled = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
         if (!enabled) return;
 
         //
@@ -154,7 +154,7 @@ export const parseFullyTraversedProtoImports = (
         });
 
         Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
-            const enabled = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+            const enabled = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
             if (!enabled) return;
 
             const recordsThatMatter = records.filter(rec => rec.implementsType === implementsType);
@@ -270,7 +270,7 @@ const traverseFields = (
             return field;
         }
 
-        const implementsAcceptsAny = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+        const implementsAcceptsAny = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
         if (implementsAcceptsAny && field.options?.['(cosmos_proto.accepts_interface)']) {
             const value = field.options['(cosmos_proto.accepts_interface)'];
             // some of these contain a comma ...
@@ -451,7 +451,7 @@ const traverseType = (
 
     traversed.keyTypes = keyTypes;
 
-    const implementsAcceptsAny = getPluginValue('prototypes.implementsAcceptsAny', ref.proto.package, store.options);
+    const implementsAcceptsAny = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
     if (implementsAcceptsAny && traversed.options?.["(cosmos_proto.implements_interface)"]) {
         const name = traversed.options['(cosmos_proto.implements_interface)'];
         context.addImplements(name, obj.name);

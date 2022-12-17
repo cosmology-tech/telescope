@@ -53,7 +53,7 @@ export const getFieldTypeReference = (
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
-    const implementsAcceptsAny = context.pluginValue('prototypes.implementsAcceptsAny');
+    const implementsAcceptsAny = context.pluginValue('interfaces.enabled');
     const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
     const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
     const isArray = field.rule === 'repeated';
@@ -76,15 +76,18 @@ export const getFieldTypeReference = (
         // not sdk or amino types
         isBaseType
     ) {
-        ast = t.tsUnionType(
-            [
-                ...symbols.map(a => {
-                    return t.tsTypeReference(t.identifier(a.readAs));
-                }),
-                typ,
-                !isArray && t.tsUndefinedKeyword()
-            ].filter(Boolean)
-        )
+        const tp = [
+            ...symbols.map(a => {
+                return t.tsTypeReference(t.identifier(a.readAs));
+            }),
+            typ,
+            !isArray && t.tsUndefinedKeyword()
+        ].filter(Boolean);
+        if (context.pluginValue('interfaces.useUnionTypes')) {
+            ast = t.tsUnionType(tp)
+        } else {
+            ast = t.tsIntersectionType(tp)
+        }
     } else if (
         field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&

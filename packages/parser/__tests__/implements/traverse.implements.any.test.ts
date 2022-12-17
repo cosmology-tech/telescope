@@ -91,7 +91,7 @@ message Dog {
 
 it('implementsAcceptsAny', () => {
     const store = getStore();
-    store.options.prototypes!.implementsAcceptsAny = true;
+    store.options.interfaces!.enabled = true;
     store.traverseAll();
     const symbols = parseFullyTraversedProtoImports(store);
     expect(symbols).toMatchSnapshot();
@@ -99,7 +99,7 @@ it('implementsAcceptsAny', () => {
 
 it('implementsAcceptsAny=false', () => {
     const store = getStore();
-    store.options.prototypes!.implementsAcceptsAny = false;
+    store.options.interfaces!.enabled = false;
     store.traverseAll();
     const symbols = parseFullyTraversedProtoImports(store);
     expect(symbols).toMatchSnapshot();

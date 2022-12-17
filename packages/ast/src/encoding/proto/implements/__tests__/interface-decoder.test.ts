@@ -7,7 +7,7 @@ import { createInterfaceDecoder, createInterfaceDecoderHelper } from '../decoder
 
 const store = getTestProtoStore();
 store.options.aminoEncoding.useRecursiveV2encoding = true;
-store.options.prototypes.implementsAcceptsAny = true;
+store.options.interfaces.enabled = true;
 store.traverseAll();
 
 const typeMap: InterfaceTypeUrlMap = {

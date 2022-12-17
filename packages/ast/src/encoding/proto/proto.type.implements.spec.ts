@@ -5,11 +5,11 @@ import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 
 
-describe('Any', () => {
+describe('Cast', () => {
     const implementsStore = getTestProtoStore();
     implementsStore.options.aminoEncoding.useRecursiveV2encoding = true;
     implementsStore.options.prototypes.addTypeUrlToDecoders = true;
-    implementsStore.options.prototypes.implementsAcceptsAny = true;
+    implementsStore.options.interfaces.enabled = true;
     implementsStore.traverseAll();
 
     it('standard', async () => {
@@ -28,11 +28,11 @@ describe('Any', () => {
 })
 
 
-describe('Cast', () => {
+describe('Any', () => {
     const standardStore = getTestProtoStore();
     standardStore.options.aminoEncoding.useRecursiveV2encoding = false;
     standardStore.options.prototypes.addTypeUrlToDecoders = false;
-    standardStore.options.prototypes.implementsAcceptsAny = false;
+    standardStore.options.interfaces.enabled = false;
     standardStore.traverseAll();
 
     it('standard', async () => {

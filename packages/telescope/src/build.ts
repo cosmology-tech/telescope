@@ -161,7 +161,7 @@ export class TelescopeParseContext implements TelescopeParseContext {
         });
 
         // interfaces
-        if (this.options.prototypes.implementsAcceptsAny) {
+        if (this.options.interfaces.enabled) {
             const interfaces = Object.keys(this.ref.traversed.acceptsInterface ?? {});
             if (interfaces.length) {
                 interfaces.forEach(interfaceName => {
