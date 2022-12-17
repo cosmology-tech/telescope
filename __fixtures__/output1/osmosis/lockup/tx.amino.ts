@@ -20,13 +20,13 @@ export interface AminoMsgLockTokens extends AminoMsg {
   };
 }
 export interface AminoMsgBeginUnlockingAll extends AminoMsg {
-  type: "osmosis/lockup/begin-unlocking-all";
+  type: "osmosis/lockup/begin-unlock-tokens";
   value: {
     owner: string;
   };
 }
 export interface AminoMsgBeginUnlocking extends AminoMsg {
-  type: "osmosis/lockup/begin-unlocking";
+  type: "osmosis/lockup/begin-unlock-period-lock";
   value: {
     owner: string;
     ID: string;
@@ -94,7 +94,7 @@ export const AminoConverter = {
     }
   },
   "/osmosis.lockup.MsgBeginUnlockingAll": {
-    aminoType: "osmosis/lockup/begin-unlocking-all",
+    aminoType: "osmosis/lockup/begin-unlock-tokens",
     toAmino: ({
       owner
     }: MsgBeginUnlockingAll): AminoMsgBeginUnlockingAll["value"] => {
@@ -111,7 +111,7 @@ export const AminoConverter = {
     }
   },
   "/osmosis.lockup.MsgBeginUnlocking": {
-    aminoType: "osmosis/lockup/begin-unlocking",
+    aminoType: "osmosis/lockup/begin-unlock-period-lock",
     toAmino: ({
       owner,
       ID,
