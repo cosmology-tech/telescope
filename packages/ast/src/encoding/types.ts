@@ -80,13 +80,21 @@ export const getFieldTypeReference = (
             ...symbols.map(a => {
                 return t.tsTypeReference(t.identifier(a.readAs));
             }),
-            typ,
-            !isArray && t.tsUndefinedKeyword()
+            typ
+            // !isArray && t.tsUndefinedKeyword()
         ].filter(Boolean);
         if (context.pluginValue('interfaces.useUnionTypes')) {
+            if (!isArray) {
+                tp.push(t.tsUndefinedKeyword())
+            }
             ast = t.tsUnionType(tp)
         } else {
-            ast = t.tsIntersectionType(tp)
+            ast = t.tsUnionType(
+                [
+                    t.tsIntersectionType(tp),
+                    t.tsUndefinedKeyword()
+                ]
+            )
         }
     } else if (
         field.parsedType?.type === 'Type' &&

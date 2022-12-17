@@ -17,7 +17,7 @@ exports[`Any standard 1`] = `
 
 exports[`Cast repeated 1`] = `
 "export interface QueryPoolsResponse {
-  pools: (Pool1 & Pool2 & Any)[];
+  pools: ((Pool1 & Pool2 & Any) | undefined)[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -26,6 +26,6 @@ exports[`Cast repeated 1`] = `
 
 exports[`Cast standard 1`] = `
 "export interface QueryPoolResponse {
-  pool?: Pool1 & Pool2 & Any & undefined;
+  pool?: (Pool1 & Pool2 & Any) | undefined;
 }"
 `;
