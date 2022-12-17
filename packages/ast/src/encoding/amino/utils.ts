@@ -85,6 +85,17 @@ export const getAminoTypeName = (
                 return n.join('/');
             }
 
+            if (/lockup/.test(typeUrl)) {
+                switch (typeUrl) {
+                    case '/osmosis.lockup.MsgLockTokens':
+                        return 'osmosis/lockup/lock-tokens';
+                    case '/osmosis.lockup.MsgBeginUnlockingAll':
+                        return 'osmosis/lockup/begin-unlock-tokens';
+                    case '/osmosis.lockup.MsgBeginUnlocking':
+                        return 'osmosis/lockup/begin-unlock-period-lock';
+                }
+            }
+
             const n = elements.filter(a => !a.match(/v1beta1/));
             n[n.length - 1] = kebab(n[n.length - 1]);
             n[n.length - 1] = n[n.length - 1].replace(/^msg-/, '');
