@@ -65,7 +65,7 @@ exports[`cosmos/staking/v1beta1/tx MsgUndelegate 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx Interfaces 1`] = `
 "export interface AminoMsgJoinPool extends AminoMsg {
-  type: "osmosis-sdk/JoinPool";
+  type: "osmosis/gamm/join-pool";
   value: {
     sender: string;
     pool_id: string;
