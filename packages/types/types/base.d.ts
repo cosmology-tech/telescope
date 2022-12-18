@@ -12,6 +12,7 @@ export interface ProtoEnum {
 export interface ProtoType {
     type?: 'Type';
     name?: string;
+    package?: string;
     oneofs?: {
         [key: string]: {
             oneof: string[];
@@ -37,6 +38,8 @@ export interface ProtoField {
         name: string;
         type: string;
     };
+    message?: string;
+    package?: string;
     keyType?: string;
     rule?: string;
     id: number;

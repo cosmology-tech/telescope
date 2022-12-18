@@ -8,6 +8,7 @@ export interface ProtoEnum {
 export interface ProtoType {
     type?: 'Type';
     name?: string;
+    package?: string; // added by parser
     oneofs?: { [key: string]: { oneof: string[], comment: string | undefined } },
     options?: {
         [key: string]: any;
@@ -45,6 +46,8 @@ export interface ProtoField {
         name: string;
         type: string;
     },
+    message?: string; // added by parser
+    package?: string; // added by parser
 
     keyType?: string;
     rule?: string;

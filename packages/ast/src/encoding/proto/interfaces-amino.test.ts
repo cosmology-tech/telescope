@@ -17,6 +17,15 @@ it('MsgSubmitProposal', async () => {
     ))
 });
 
+// Google
+it('Duration', async () => {
+    const ref = store.findProto('google/protobuf/duration.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'Duration', getNestedProto(ref.traversed).Duration
+    ))
+});
 // IBC
 it('Height', async () => {
     const ref = store.findProto('ibc/core/client/v1/client.proto');

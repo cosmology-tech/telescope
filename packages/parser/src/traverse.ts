@@ -246,6 +246,7 @@ const traverseFields = (
     context: TraverseContext,
     traversal: string[]
 ): Record<string, ProtoField> => {
+
     return Object.keys(obj.fields).reduce((m, mykey) => {
         const field: ProtoField & { toJSON?: Function } = obj.fields[mykey];
 
@@ -267,6 +268,8 @@ const traverseFields = (
             // traversed
             // field.name is used for proto!
             field.name = fieldName;
+            field.message = obj.name;
+            field.package = ref.proto.package
             return field;
         }
 
@@ -421,6 +424,7 @@ const traverseType = (
     const traversed = {
         type: 'Type',
         name: obj.name,
+        package: ref.proto.package,
         options: obj.options,
         oneofs: obj.oneofs ? Object.keys(obj.oneofs).reduce((m, v) => {
             m[v] = {
@@ -429,7 +433,13 @@ const traverseType = (
             };
             return m;
         }, {}) : undefined,
-        fields: traverseFields(store, ref, obj, context, traversal),
+        fields: traverseFields(
+            store,
+            ref,
+            obj,
+            context,
+            traversal
+        ),
         nested,
         keyTypes: [],
         comment: obj.comment

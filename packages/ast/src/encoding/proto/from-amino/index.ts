@@ -161,16 +161,14 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
     // 1. some messages we parse specially
     if (proto.type === 'Type') {
         switch (proto.name) {
-            case 'Duration':
-            case 'google.protobuf.Duration': {
-                [].push.apply(body, fromAminoMessages.duration(context, name, proto));
+            case 'Duration': {
+                if (proto.package === 'google.protobuf') {
+                    [].push.apply(body, fromAminoMessages.duration(context, name, proto));
+                }
                 break;
             }
             case 'Height': {
-                // type: 'ibc.core.client.v1.Height'
-                if
-                    ((proto.fields.revisionNumber && proto.fields.revisionHeight) ||
-                    (proto.fields.revision_number && proto.fields.revision_height)) {
+                if (proto.package === 'ibc.core.client.v1') {
                     [].push.apply(body, fromAminoMessages.height(context, name, proto));
                 }
                 break;
