@@ -136,6 +136,11 @@ export const toAminoJSON = {
         const { propName, origName } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
 
+        let defaultValue: t.ObjectExpression | t.Identifier = t.identifier('undefined');
+        if (args.field.type === 'ibc.core.client.v1.Height') {
+            defaultValue = t.objectExpression([])
+        }
+
         return t.expressionStatement(
             t.assignmentExpression(
                 '=',
@@ -160,7 +165,7 @@ export const toAminoJSON = {
                             )
                         ]
                     ),
-                    t.identifier('undefined')
+                    defaultValue
                 )
             )
         );
@@ -216,6 +221,7 @@ export const toAminoJSON = {
         ) {
             return toAminoJSON.anyType(args);
         }
+
         return toAminoJSON.protoType(args);
     },
 

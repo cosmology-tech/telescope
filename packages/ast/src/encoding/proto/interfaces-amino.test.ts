@@ -16,3 +16,21 @@ it('MsgSubmitProposal', async () => {
         'MsgSubmitProposal', getNestedProto(ref.traversed).MsgSubmitProposal
     ))
 });
+
+// IBC
+it('Height', async () => {
+    const ref = store.findProto('ibc/core/client/v1/client.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'Height', getNestedProto(ref.traversed).Height
+    ))
+});
+it('MsgTransfer', async () => {
+    const ref = store.findProto('ibc/applications/transfer/v1/tx.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'MsgTransfer', getNestedProto(ref.traversed).MsgTransfer
+    ))
+});

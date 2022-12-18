@@ -1,5 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Height 1`] = `
+"export const Height = {
+  encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.revisionNumber.isZero()) {
+      writer.uint32(8).uint64(message.revisionNumber);
+    }
+
+    if (!message.revisionHeight.isZero()) {
+      writer.uint32(16).uint64(message.revisionHeight);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Height {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHeight();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.revisionNumber = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.revisionHeight = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Height {
+    return {
+      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
+      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO
+    };
+  },
+
+  toJSON(message: Height): unknown {
+    const obj: any = {};
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<Height>): Height {
+    const message = createBaseHeight();
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    return message;
+  },
+
+  fromSDK(object: HeightSDKType): Height {
+    return {
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
+    };
+  },
+
+  toSDK(message: Height): HeightSDKType {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
+    return obj;
+  },
+
+  fromAmino(object: HeightAmino): Height {
+    return {
+      revisionNumber: Long.fromString(object.revision_number),
+      revisionHeight: Long.fromString(object.revision_height)
+    };
+  },
+
+  toAmino(message: Height): HeightAmino {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    return obj;
+  }
+
+};"
+`;
+
 exports[`MsgSubmitProposal 1`] = `
 "export const MsgSubmitProposal = {
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -119,6 +211,173 @@ exports[`MsgSubmitProposal 1`] = `
     }
 
     obj.proposer = message.proposer;
+    return obj;
+  }
+
+};"
+`;
+
+exports[`MsgTransfer 1`] = `
+"export const MsgTransfer = {
+  encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sourcePort !== "") {
+      writer.uint32(10).string(message.sourcePort);
+    }
+
+    if (message.sourceChannel !== "") {
+      writer.uint32(18).string(message.sourceChannel);
+    }
+
+    if (message.token !== undefined) {
+      Coin.encode(message.token, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.sender !== "") {
+      writer.uint32(34).string(message.sender);
+    }
+
+    if (message.receiver !== "") {
+      writer.uint32(42).string(message.receiver);
+    }
+
+    if (message.timeoutHeight !== undefined) {
+      Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (!message.timeoutTimestamp.isZero()) {
+      writer.uint32(56).uint64(message.timeoutTimestamp);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransfer {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgTransfer();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sourcePort = reader.string();
+          break;
+
+        case 2:
+          message.sourceChannel = reader.string();
+          break;
+
+        case 3:
+          message.token = Coin.decode(reader, reader.uint32());
+          break;
+
+        case 4:
+          message.sender = reader.string();
+          break;
+
+        case 5:
+          message.receiver = reader.string();
+          break;
+
+        case 6:
+          message.timeoutHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.timeoutTimestamp = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgTransfer {
+    return {
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
+    };
+  },
+
+  toJSON(message: MsgTransfer): unknown {
+    const obj: any = {};
+    message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
+    message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
+    const message = createBaseMsgTransfer();
+    message.sourcePort = object.sourcePort ?? "";
+    message.sourceChannel = object.sourceChannel ?? "";
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
+    return message;
+  },
+
+  fromSDK(object: MsgTransferSDKType): MsgTransfer {
+    return {
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
+      token: object.token ? Coin.fromSDK(object.token) : undefined,
+      sender: object?.sender,
+      receiver: object?.receiver,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: object?.timeout_timestamp
+    };
+  },
+
+  toSDK(message: MsgTransfer): MsgTransferSDKType {
+    const obj: any = {};
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
+    obj.timeout_timestamp = message.timeoutTimestamp;
+    return obj;
+  },
+
+  fromAmino(object: MsgTransferAmino): MsgTransfer {
+    return {
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
+      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      sender: object.sender,
+      receiver: object.receiver,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp)
+    };
+  },
+
+  toAmino(message: MsgTransfer): MsgTransferAmino {
+    const obj: any = {};
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   }
 
