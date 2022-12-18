@@ -24,6 +24,35 @@ export const createInterfaceToAmino = (
     );
 };
 
+const makeFunctionWrapper = (functionName: string, stmt: t.Statement) => {
+    return t.exportNamedDeclaration(
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                    t.identifier(functionName),
+                    t.arrowFunctionExpression(
+                        [
+                            identifier(
+                                'content',
+                                t.tsTypeAnnotation(
+                                    t.tsTypeReference(
+                                        t.identifier('Any')
+                                    )
+                                )
+                            )
+                        ],
+                        t.blockStatement([
+                            stmt
+                        ])
+                    )
+
+                )
+            ]
+        )
+    );
+};
+
 export const createInterfaceToAminoHelper = (
     context: ProtoParseContext,
     functionName: string,
@@ -80,55 +109,48 @@ export const createInterfaceToAminoHelper = (
             ])
     }).filter(Boolean);
 
-    return t.exportNamedDeclaration(
-        t.variableDeclaration(
-            'const',
+    let ast: t.Statement;
+
+    if (!switchCases.length) {
+        ast = t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('Any'),
+                    t.identifier('toAmino')
+                ),
+                [
+                    t.identifier('content')
+                ]
+            )
+        );
+    } else {
+        ast = t.switchStatement(
+            t.memberExpression(
+                t.identifier('content'),
+                t.identifier('typeUrl')
+            ),
             [
-                t.variableDeclarator(
-                    t.identifier(functionName),
-                    t.arrowFunctionExpression(
-                        [
-                            identifier(
-                                'content',
-                                t.tsTypeAnnotation(
-                                    t.tsTypeReference(
-                                        t.identifier('Any')
-                                    )
-                                )
-                            )
-                        ],
-                        t.blockStatement([
-                            t.switchStatement(
+                ...switchCases,
+                // default
+                t.switchCase(
+                    null,
+                    [
+                        t.returnStatement(
+                            t.callExpression(
                                 t.memberExpression(
-                                    t.identifier('content'),
-                                    t.identifier('typeUrl')
+                                    t.identifier('Any'),
+                                    t.identifier('toAmino')
                                 ),
                                 [
-                                    ...switchCases,
-                                    // default
-                                    t.switchCase(
-                                        null,
-                                        [
-                                            t.returnStatement(
-                                                t.callExpression(
-                                                    t.memberExpression(
-                                                        t.identifier('Any'),
-                                                        t.identifier('toAmino')
-                                                    ),
-                                                    [
-                                                        t.identifier('content')
-                                                    ]
-                                                )
-                                            )
-                                        ]
-                                    )
+                                    t.identifier('content')
                                 ]
                             )
-                        ])
-                    )
-
+                        )
+                    ]
                 )
             ]
-        )
-    )
+        );
+    }
+
+    return makeFunctionWrapper(functionName, ast);
 };
