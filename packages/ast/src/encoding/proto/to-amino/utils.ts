@@ -220,18 +220,7 @@ export const toAminoJSON = {
     },
 
     enum(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
-
-        const enumFuncName = args.context.getToEnum(args.field);
-        return notUndefinedSetValue(origName, propName, t.callExpression(
-            t.identifier(enumFuncName),
-            [
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(propName)
-                )
-            ]
-        ));
+        return toAminoJSON.scalar(args);
     },
 
     bytes(args: ToAminoJSONMethod) {
