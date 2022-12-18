@@ -3,14 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.80.0-rc.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/babel@0.6.0...@osmonauts/babel@0.80.0-rc.1) (2022-12-17)
-
-**Note:** Version bump only for package @osmonauts/babel
-
-
-
-
-
 # [0.6.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/babel@0.5.0...@osmonauts/babel@0.6.0) (2022-10-14)
 
 **Note:** Version bump only for package @osmonauts/babel
