@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/utils@0.9.0...@osmonauts/utils@0.9.1) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/utils
+
+
+
+
+
 # [0.9.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/utils@0.80.0-rc.1...@osmonauts/utils@0.9.0) (2022-12-18)
 
 

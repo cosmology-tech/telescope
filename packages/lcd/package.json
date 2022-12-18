@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/lcd",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Telescope LCDClient helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers#readme",
