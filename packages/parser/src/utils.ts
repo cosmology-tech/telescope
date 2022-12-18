@@ -22,6 +22,9 @@ export const getNested = (root: ProtoRoot, path: string[]) => {
 };
 
 // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
+// NOTE: sometimes you need to pass in `.Dummy` for the first call,
+// for example, osmosis.gamm.v1beta1.Dummy, so the first pop()
+// that gets called, it will still look relative to the current module scope
 export const lookupSymbolScopes = (name: string, relativeTo: string, list?: string[]) => {
     // fully-qualified name
     if (name.startsWith('.')) return [name.replace(/^\./, '')];
