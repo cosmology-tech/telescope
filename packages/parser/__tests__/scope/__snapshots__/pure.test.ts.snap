@@ -95,6 +95,7 @@ exports[`pure proto 1`] = `
                 "nested": null,
                 "oneofs": undefined,
                 "options": undefined,
+                "package": "cosmology.finance",
                 "type": "Type",
               },
               "FancyEnumType": {
@@ -194,6 +195,7 @@ exports[`pure proto 1`] = `
                 "nested": null,
                 "oneofs": undefined,
                 "options": undefined,
+                "package": "cosmology.finance",
                 "type": "Type",
               },
               "NonExistenceProof": {
@@ -255,6 +257,7 @@ exports[`pure proto 1`] = `
                 "nested": null,
                 "oneofs": undefined,
                 "options": undefined,
+                "package": "cosmology.finance",
                 "type": "Type",
               },
             },

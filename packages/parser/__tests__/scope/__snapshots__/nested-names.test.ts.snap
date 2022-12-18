@@ -95,11 +95,13 @@ exports[`google/rpc/error_details 1`] = `
       "nested": null,
       "oneofs": undefined,
       "options": undefined,
+      "package": "google.rpc",
       "type": "Type",
     },
   },
   "oneofs": undefined,
   "options": undefined,
+  "package": "google.rpc",
   "type": "Type",
 }
 `;

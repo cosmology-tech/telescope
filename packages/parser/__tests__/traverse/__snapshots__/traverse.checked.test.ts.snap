@@ -228,6 +228,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Decl": {
@@ -469,11 +470,13 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                                 "nested": null,
                                 "oneofs": undefined,
                                 "options": undefined,
+                                "package": "google.api.expr.v1alpha1",
                                 "type": "Type",
                               },
                             },
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "IdentDecl": {
@@ -546,6 +549,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                         },
@@ -558,6 +562,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                           },
                         },
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Reference": {
@@ -632,6 +637,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Type": {
@@ -933,6 +939,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "FunctionType": {
@@ -979,6 +986,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "ListType": {
@@ -1007,6 +1015,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "MapType": {
@@ -1052,6 +1061,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "PrimitiveType": {
@@ -1125,6 +1135,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                           },
                         },
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                     },

@@ -76,6 +76,7 @@ exports[`double import bug GenesisState 1`] = `
   "nested": null,
   "oneofs": undefined,
   "options": undefined,
+  "package": "ibc.core.types.v1",
   "scope": [
     "ibc.core.types.v1",
   ],

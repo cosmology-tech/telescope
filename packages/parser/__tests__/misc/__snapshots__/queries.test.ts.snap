@@ -942,6 +942,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryCalcExitPoolCoinsFromSharesResponse": {
@@ -976,6 +977,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryCalcJoinPoolNoSwapSharesRequest": {
@@ -1027,6 +1029,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryCalcJoinPoolNoSwapSharesResponse": {
@@ -1080,6 +1083,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryCalcJoinPoolSharesRequest": {
@@ -1131,6 +1135,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryCalcJoinPoolSharesResponse": {
@@ -1184,6 +1189,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryNumPoolsRequest": {
@@ -1194,6 +1200,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryNumPoolsResponse": {
@@ -1222,6 +1229,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolParamsRequest": {
@@ -1250,6 +1258,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolParamsResponse": {
@@ -1281,6 +1290,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolRequest": {
@@ -1309,6 +1319,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolResponse": {
@@ -1341,6 +1352,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolTypeRequest": {
@@ -1369,6 +1381,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolTypeResponse": {
@@ -1397,6 +1410,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolsRequest": {
@@ -1428,6 +1442,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolsResponse": {
@@ -1481,6 +1496,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolsWithFilterRequest": {
@@ -1552,6 +1568,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryPoolsWithFilterResponse": {
@@ -1605,6 +1622,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySpotPriceRequest": {
@@ -1670,6 +1688,7 @@ exports[`queries 1`] = `
     "options": {
       "deprecated": true,
     },
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySpotPriceResponse": {
@@ -1701,6 +1720,7 @@ exports[`queries 1`] = `
     "options": {
       "deprecated": true,
     },
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySwapExactAmountInRequest": {
@@ -1788,6 +1808,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySwapExactAmountInResponse": {
@@ -1818,6 +1839,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySwapExactAmountOutRequest": {
@@ -1905,6 +1927,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QuerySwapExactAmountOutResponse": {
@@ -1935,6 +1958,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalLiquidityRequest": {
@@ -1945,6 +1969,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalLiquidityResponse": {
@@ -1980,6 +2005,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalPoolLiquidityRequest": {
@@ -2008,6 +2034,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalPoolLiquidityResponse": {
@@ -2043,6 +2070,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalSharesRequest": {
@@ -2071,6 +2099,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
   "QueryTotalSharesResponse": {
@@ -2104,6 +2133,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "osmosis.gamm.v1beta1",
     "type": "Type",
   },
 }

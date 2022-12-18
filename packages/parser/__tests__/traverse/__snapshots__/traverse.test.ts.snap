@@ -62,6 +62,7 @@ exports[`cosmos/authz/v1beta1/authz 1`] = `
                     "options": {
                       "(cosmos_proto.implements_interface)": "Authorization",
                     },
+                    "package": "cosmos.authz.v1beta1",
                     "type": "Type",
                   },
                   "Grant": {
@@ -119,6 +120,7 @@ exports[`cosmos/authz/v1beta1/authz 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.authz.v1beta1",
                     "type": "Type",
                   },
                   "GrantAuthorization": {
@@ -207,6 +209,7 @@ exports[`cosmos/authz/v1beta1/authz 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.authz.v1beta1",
                     "type": "Type",
                   },
                   "GrantQueueItem": {
@@ -235,6 +238,7 @@ exports[`cosmos/authz/v1beta1/authz 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.authz.v1beta1",
                     "type": "Type",
                   },
                 },
@@ -479,6 +483,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
                                 "nested": null,
                                 "oneofs": undefined,
                                 "options": undefined,
+                                "package": "cosmos.tx.signing.v1beta1",
                                 "type": "Type",
                               },
                               "Single": {
@@ -523,6 +528,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
                                 "nested": null,
                                 "oneofs": undefined,
                                 "options": undefined,
+                                "package": "cosmos.tx.signing.v1beta1",
                                 "type": "Type",
                               },
                             },
@@ -535,11 +541,13 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
                               },
                             },
                             "options": undefined,
+                            "package": "cosmos.tx.signing.v1beta1",
                             "type": "Type",
                           },
                         },
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "cosmos.tx.signing.v1beta1",
                         "type": "Type",
                       },
                       "SignatureDescriptors": {
@@ -569,6 +577,7 @@ exports[`cosmos/tx/signing/v1beta1/signing 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "cosmos.tx.signing.v1beta1",
                         "type": "Type",
                       },
                     },
@@ -708,6 +717,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "AuxSignerData": {
@@ -798,6 +808,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "Fee": {
@@ -889,6 +900,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "ModeInfo": {
@@ -982,6 +994,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "cosmos.tx.v1beta1",
                         "type": "Type",
                       },
                       "Single": {
@@ -1015,6 +1028,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "cosmos.tx.v1beta1",
                         "type": "Type",
                       },
                     },
@@ -1027,6 +1041,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                       },
                     },
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "SignDoc": {
@@ -1106,6 +1121,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "SignDocDirectAux": {
@@ -1225,6 +1241,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "SignerInfo": {
@@ -1295,6 +1312,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "Tip": {
@@ -1348,6 +1366,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "Tx": {
@@ -1413,6 +1432,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "TxBody": {
@@ -1532,6 +1552,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                   "TxRaw": {
@@ -1600,6 +1621,7 @@ exports[`cosmos/tx/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmos.tx.v1beta1",
                     "type": "Type",
                   },
                 },
@@ -1713,6 +1735,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "ExecuteContractProposal": {
@@ -1829,6 +1852,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "InstantiateContractProposal": {
@@ -1978,6 +2002,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "MigrateContractProposal": {
@@ -2071,6 +2096,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "PinCodesProposal": {
@@ -2136,6 +2162,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "StoreCodeProposal": {
@@ -2234,6 +2261,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "SudoContractProposal": {
@@ -2310,6 +2338,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "UnpinCodesProposal": {
@@ -2375,6 +2404,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "UpdateAdminProposal": {
@@ -2451,6 +2481,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                 },
@@ -2582,6 +2613,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "options": {
                       "(gogoproto.equal)": true,
                     },
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "Query": {
@@ -3135,6 +3167,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryAllContractStateResponse": {
@@ -3191,6 +3224,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryCodeRequest": {
@@ -3218,6 +3252,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryCodeResponse": {
@@ -3267,6 +3302,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "options": {
                       "(gogoproto.equal)": true,
                     },
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryCodesRequest": {
@@ -3298,6 +3334,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryCodesResponse": {
@@ -3348,6 +3385,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractHistoryRequest": {
@@ -3396,6 +3434,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractHistoryResponse": {
@@ -3452,6 +3491,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractInfoRequest": {
@@ -3480,6 +3520,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractInfoResponse": {
@@ -3535,6 +3576,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "options": {
                       "(gogoproto.equal)": true,
                     },
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractsByCodeRequest": {
@@ -3584,6 +3626,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryContractsByCodeResponse": {
@@ -3633,6 +3676,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryPinnedCodesRequest": {
@@ -3665,6 +3709,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryPinnedCodesResponse": {
@@ -3716,6 +3761,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryRawContractStateRequest": {
@@ -3760,6 +3806,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QueryRawContractStateResponse": {
@@ -3788,6 +3835,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QuerySmartContractStateRequest": {
@@ -3833,6 +3881,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                   "QuerySmartContractStateResponse": {
@@ -3862,6 +3911,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "cosmwasm.wasm.v1",
                     "type": "Type",
                   },
                 },
@@ -4107,6 +4157,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Decl": {
@@ -4348,11 +4399,13 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                                 "nested": null,
                                 "oneofs": undefined,
                                 "options": undefined,
+                                "package": "google.api.expr.v1alpha1",
                                 "type": "Type",
                               },
                             },
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "IdentDecl": {
@@ -4425,6 +4478,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                         },
@@ -4437,6 +4491,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                           },
                         },
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Reference": {
@@ -4511,6 +4566,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                       "Type": {
@@ -4812,6 +4868,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "FunctionType": {
@@ -4858,6 +4915,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "ListType": {
@@ -4886,6 +4944,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "MapType": {
@@ -4931,6 +4990,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Type",
                           },
                           "PrimitiveType": {
@@ -5004,6 +5064,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                           },
                         },
                         "options": undefined,
+                        "package": "google.api.expr.v1alpha1",
                         "type": "Type",
                       },
                     },
@@ -5150,6 +5211,7 @@ exports[`osmosis/claim/v1beta1/params 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.claim.v1beta1",
                     "type": "Type",
                   },
                 },
@@ -6024,6 +6086,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgExitPoolResponse": {
@@ -6058,6 +6121,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgExitSwapExternAmountOut": {
@@ -6144,6 +6208,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgExitSwapExternAmountOutResponse": {
@@ -6174,6 +6239,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgExitSwapShareAmountIn": {
@@ -6274,6 +6340,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgExitSwapShareAmountInResponse": {
@@ -6304,6 +6371,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinPool": {
@@ -6392,6 +6460,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinPoolResponse": {
@@ -6445,6 +6514,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinSwapExternAmountIn": {
@@ -6532,6 +6602,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinSwapExternAmountInResponse": {
@@ -6562,6 +6633,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinSwapShareAmountOut": {
@@ -6662,6 +6734,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgJoinSwapShareAmountOutResponse": {
@@ -6692,6 +6765,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountIn": {
@@ -6780,6 +6854,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountInResponse": {
@@ -6810,6 +6885,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountOut": {
@@ -6898,6 +6974,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "MsgSwapExactAmountOutResponse": {
@@ -6928,6 +7005,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "SwapAmountInRoute": {
@@ -6973,6 +7051,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                   "SwapAmountOutRoute": {
@@ -7018,6 +7097,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                     "nested": null,
                     "oneofs": undefined,
                     "options": undefined,
+                    "package": "osmosis.gamm.v1beta1",
                     "type": "Type",
                   },
                 },

@@ -878,6 +878,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegationResponse": {
@@ -911,6 +912,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorDelegationsRequest": {
@@ -963,6 +965,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorDelegationsResponse": {
@@ -1019,6 +1022,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorUnbondingDelegationsRequest": {
@@ -1071,6 +1075,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorUnbondingDelegationsResponse": {
@@ -1127,6 +1132,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorValidatorRequest": {
@@ -1176,6 +1182,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorValidatorResponse": {
@@ -1211,6 +1218,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorValidatorsRequest": {
@@ -1263,6 +1271,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryDelegatorValidatorsResponse": {
@@ -1319,6 +1328,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryHistoricalInfoRequest": {
@@ -1347,6 +1357,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryHistoricalInfoResponse": {
@@ -1381,6 +1392,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryParamsRequest": {
@@ -1391,6 +1403,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryParamsResponse": {
@@ -1425,6 +1438,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryPoolRequest": {
@@ -1435,6 +1449,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryPoolResponse": {
@@ -1469,6 +1484,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryRedelegationsRequest": {
@@ -1555,6 +1571,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryRedelegationsResponse": {
@@ -1611,6 +1628,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryUnbondingDelegationRequest": {
@@ -1660,6 +1678,7 @@ exports[`queries 1`] = `
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryUnbondingDelegationResponse": {
@@ -1695,6 +1714,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorDelegationsRequest": {
@@ -1744,6 +1764,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorDelegationsResponse": {
@@ -1801,6 +1822,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorRequest": {
@@ -1829,6 +1851,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorResponse": {
@@ -1863,6 +1886,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorUnbondingDelegationsRequest": {
@@ -1912,6 +1936,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorUnbondingDelegationsResponse": {
@@ -1968,6 +1993,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorsRequest": {
@@ -2015,6 +2041,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
   "QueryValidatorsResponse": {
@@ -2070,6 +2097,7 @@ exports[`queries 1`] = `
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
+    "package": "cosmos.staking.v1beta1",
     "type": "Type",
   },
 }
