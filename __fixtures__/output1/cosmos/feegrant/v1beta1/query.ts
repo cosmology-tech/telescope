@@ -15,10 +15,7 @@ export interface QueryAllowanceRequest {
 
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequestSDKType {
-  /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
-
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
 
@@ -30,7 +27,6 @@ export interface QueryAllowanceResponse {
 
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponseSDKType {
-  /** allowance is a allowance granted for grantee by granter. */
   allowance?: GrantSDKType;
 }
 
@@ -45,8 +41,6 @@ export interface QueryAllowancesRequest {
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequestSDKType {
   grantee: string;
-
-  /** pagination defines an pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -61,10 +55,7 @@ export interface QueryAllowancesResponse {
 
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponseSDKType {
-  /** allowances are allowance's granted for grantee by granter. */
   allowances: GrantSDKType[];
-
-  /** pagination defines an pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -79,8 +70,6 @@ export interface QueryAllowancesByGranterRequest {
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequestSDKType {
   granter: string;
-
-  /** pagination defines an pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -95,10 +84,7 @@ export interface QueryAllowancesByGranterResponse {
 
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterResponseSDKType {
-  /** allowances that have been issued by the granter. */
   allowances: GrantSDKType[];
-
-  /** pagination defines an pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 

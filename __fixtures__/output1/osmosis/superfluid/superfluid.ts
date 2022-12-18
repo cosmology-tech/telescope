@@ -57,11 +57,6 @@ export interface SuperfluidAsset {
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
   denom: string;
-
-  /**
-   * AssetType indicates whether the superfluid asset is a native token or an lp
-   * share
-   */
   asset_type: SuperfluidAssetType;
 }
 
@@ -85,11 +80,8 @@ export interface SuperfluidIntermediaryAccount {
  * actual account responsible for delegation, not the validator account itself.
  */
 export interface SuperfluidIntermediaryAccountSDKType {
-  /** Denom indicates the denom of the superfluid asset. */
   denom: string;
   val_addr: string;
-
-  /** perpetual gauge for rewards distribution */
   gauge_id: Long;
 }
 
@@ -121,8 +113,6 @@ export interface OsmoEquivalentMultiplierRecord {
  */
 export interface OsmoEquivalentMultiplierRecordSDKType {
   epoch_number: Long;
-
-  /** superfluid asset denom, can be LP token or native token */
   denom: string;
   multiplier: string;
 }

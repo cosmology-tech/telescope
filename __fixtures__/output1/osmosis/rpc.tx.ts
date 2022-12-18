@@ -60,9 +60,6 @@ export const createRPCMsgClient = async ({
     },
     incentives: new (await import("./incentives/tx.rpc.msg")).MsgClientImpl(rpc),
     lockup: new (await import("./lockup/tx.rpc.msg")).MsgClientImpl(rpc),
-    streamswap: {
-      v1: new (await import("./streamswap/v1/tx.rpc.msg")).MsgClientImpl(rpc)
-    },
     superfluid: new (await import("./superfluid/tx.rpc.msg")).MsgClientImpl(rpc),
     tokenfactory: {
       v1beta1: new (await import("./tokenfactory/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)

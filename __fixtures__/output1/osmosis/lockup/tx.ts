@@ -42,8 +42,6 @@ export interface MsgBeginUnlocking {
 export interface MsgBeginUnlockingSDKType {
   owner: string;
   ID: Long;
-
-  /** Amount of unlocking coins. Unlock all if not set. */
   coins: CoinSDKType[];
 }
 export interface MsgBeginUnlockingResponse {
@@ -75,17 +73,40 @@ export interface MsgExtendLockup {
 export interface MsgExtendLockupSDKType {
   owner: string;
   ID: Long;
-
-  /**
-   * duration to be set. fails if lower than the current duration, or is
-   * unlocking
-   */
   duration?: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
   success: boolean;
 }
 export interface MsgExtendLockupResponseSDKType {
+  success: boolean;
+}
+
+/**
+ * MsgForceUnlock unlocks locks immediately for
+ * addresses registered via governance.
+ */
+export interface MsgForceUnlock {
+  owner: string;
+  ID: Long;
+
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: Coin[];
+}
+
+/**
+ * MsgForceUnlock unlocks locks immediately for
+ * addresses registered via governance.
+ */
+export interface MsgForceUnlockSDKType {
+  owner: string;
+  ID: Long;
+  coins: CoinSDKType[];
+}
+export interface MsgForceUnlockResponse {
+  success: boolean;
+}
+export interface MsgForceUnlockResponseSDKType {
   success: boolean;
 }
 
@@ -754,6 +775,184 @@ export const MsgExtendLockupResponse = {
   },
 
   toSDK(message: MsgExtendLockupResponse): MsgExtendLockupResponseSDKType {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  }
+
+};
+
+function createBaseMsgForceUnlock(): MsgForceUnlock {
+  return {
+    owner: "",
+    ID: Long.UZERO,
+    coins: []
+  };
+}
+
+export const MsgForceUnlock = {
+  encode(message: MsgForceUnlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
+      writer.uint32(10).string(message.owner);
+    }
+
+    if (!message.ID.isZero()) {
+      writer.uint32(16).uint64(message.ID);
+    }
+
+    for (const v of message.coins) {
+      Coin.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgForceUnlock {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgForceUnlock();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string();
+          break;
+
+        case 2:
+          message.ID = (reader.uint64() as Long);
+          break;
+
+        case 3:
+          message.coins.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgForceUnlock {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: MsgForceUnlock): unknown {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
+    const message = createBaseMsgForceUnlock();
+    message.owner = object.owner ?? "";
+    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: MsgForceUnlockSDKType): MsgForceUnlock {
+    return {
+      owner: object?.owner,
+      ID: object?.ID,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgForceUnlock): MsgForceUnlockSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
+  }
+
+};
+
+function createBaseMsgForceUnlockResponse(): MsgForceUnlockResponse {
+  return {
+    success: false
+  };
+}
+
+export const MsgForceUnlockResponse = {
+  encode(message: MsgForceUnlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.success === true) {
+      writer.uint32(8).bool(message.success);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgForceUnlockResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgForceUnlockResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.success = reader.bool();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgForceUnlockResponse {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
+  },
+
+  toJSON(message: MsgForceUnlockResponse): unknown {
+    const obj: any = {};
+    message.success !== undefined && (obj.success = message.success);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgForceUnlockResponse>): MsgForceUnlockResponse {
+    const message = createBaseMsgForceUnlockResponse();
+    message.success = object.success ?? false;
+    return message;
+  },
+
+  fromSDK(object: MsgForceUnlockResponseSDKType): MsgForceUnlockResponse {
+    return {
+      success: object?.success
+    };
+  },
+
+  toSDK(message: MsgForceUnlockResponse): MsgForceUnlockResponseSDKType {
     const obj: any = {};
     obj.success = message.success;
     return obj;

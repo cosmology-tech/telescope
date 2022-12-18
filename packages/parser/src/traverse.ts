@@ -1,56 +1,233 @@
-import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
+import {
+    TraversedProtoRoot,
+    ProtoRef,
+    ProtoType,
+    ProtoService,
+    ProtoField,
+    ProtoServiceMethod,
+    ProtoServiceMethodInfo,
+    TraverseRecord,
+    TraverseImport,
+    TraverseAccept,
+    TraverseImplement,
+    TraverseExport,
+    TraverseLocalSymbol,
+    TraverseImportNames
+} from '@osmonauts/types';
+import {
+    getPluginValue
+} from '@osmonauts/ast';
+
 import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
 import { ProtoStore } from './store';
 import { instanceType, lookupSymbolScopes, SCALAR_TYPES } from './utils';
 
+export interface TraverseContext {
+    imports: TraverseImport;
+    acceptsInterface: TraverseAccept;
+    implementsInterface: TraverseImplement;
+    exports: TraverseExport;
+    store: ProtoStore;
+    ref: ProtoRef;
+}
+
+export class TraverseContext implements TraverseContext {
+    constructor(store: ProtoStore, ref: ProtoRef) {
+        this.store = store;
+        this.ref = ref;
+        this.acceptsInterface = {};
+        this.implementsInterface = {};
+        this.imports = {};
+        this.exports = {};
+    }
+
+    addImport(filename: string, symbolName: string) {
+        this.imports[filename] = this.imports[filename] || [];
+        this.imports[filename] = [...new Set([...this.imports[filename], symbolName])];
+    }
+
+    addImplements(symbolName: string, msgName: string) {
+        this.implementsInterface = this.implementsInterface || {};
+        this.implementsInterface[symbolName] = this.implementsInterface[symbolName] || [];
+        this.implementsInterface[symbolName] = [...new Set([...this.implementsInterface[symbolName], msgName])];
+    }
+
+    addAccepts(symbolName: string, msgName: string) {
+        this.acceptsInterface[symbolName] = this.acceptsInterface[symbolName] || [];
+        this.acceptsInterface[symbolName] = [...new Set([...this.acceptsInterface[symbolName], msgName])];
+    }
+
+    addExport(symbolName: string) {
+        this.exports[symbolName] = true;
+    }
+}
+
+export type TraversalSymbols = TraverseLocalSymbol & {
+    ref: string;
+}
+
+export const symbolsToImportNames = (
+    ref: ProtoRef,
+    symbols: TraversalSymbols[]
+): TraverseImportNames => {
+    return symbols.reduce((m, v) => {
+        // imports to self... nope.
+        if (v.source === ref.filename) return m;
+
+        m[v.source] = m[v.source] || {};
+        m[v.source][v.symbolName] = v.readAs;
+        return m;
+    }, {});
+};
+
+export const parseFullyTraversedProtoImports = (
+    store: ProtoStore
+): TraversalSymbols[] => {
+    const protos = store.getProtos();
+    const records: TraverseRecord[] = [];
+    const symbols: TraversalSymbols[] = [];
+
+    // AGGREGATE ALL implements
+
+    protos.forEach(ref => {
+        const enabled = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
+        if (!enabled) return;
+
+        //
+        const implementsInterface = ref.traversed?.implementsInterface ?? {};
+        Object.keys(implementsInterface).forEach(implementsType => {
+            implementsInterface[implementsType].forEach(msgName => {
+                records.push({
+                    filename: ref.filename,
+                    implementsType,
+                    msgName
+                })
+            })
+        });
+    });
+
+    protos.forEach(ref => {
+        const localSymbols: TraverseLocalSymbol[] = [];
+
+        const hasConflict = (
+            symbolName: string
+        ) => {
+            return localSymbols.filter(a => a.symbolName === symbolName).length > 1
+        }
+        const findAvailableName = (
+            symbolName: string
+        ) => {
+            let counter = 1;
+            if (!hasConflict(symbolName)) return symbolName;
+            while (true) {
+                const testName = symbolName + counter;
+                const found = localSymbols.find(a => a.readAs === testName);
+                if (found) {
+                    counter++;
+                } else {
+                    return testName;
+                }
+
+            }
+        };
+
+        Object.keys(ref.traversed?.parsedExports ?? {}).forEach(e => {
+            localSymbols.push({
+                type: 'export',
+                source: ref.filename,
+                symbolName: e,
+                readAs: e
+            })
+        })
+        Object.keys(ref.traversed?.parsedImports ?? {}).forEach(source => {
+            const imps = ref.traversed?.parsedImports?.[source] ?? [];
+            imps.forEach(im => {
+                localSymbols.push({
+                    type: 'import',
+                    source,
+                    symbolName: im,
+                    readAs: im
+                })
+            });
+        });
+
+        Object.keys(ref.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
+            const enabled = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
+            if (!enabled) return;
+
+            const recordsThatMatter = records.filter(rec => rec.implementsType === implementsType);
+            const notYetInImports = recordsThatMatter.filter(r => {
+                return !localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
+            });
+            const alreadyInImports = recordsThatMatter.filter(r => {
+                return localSymbols.find(l => l.source === r.filename && l.symbolName === r.msgName);
+            });
+            notYetInImports.forEach(imp => {
+                localSymbols.push({
+                    type: 'import',
+                    source: imp.filename,
+                    readAs: imp.msgName,
+                    symbolName: imp.msgName,
+                    implementsType: imp.implementsType
+                })
+            });
+            // if already imported, addd implementsType
+            alreadyInImports.forEach(imp => {
+                const index = localSymbols.findIndex(l => l.source === imp.filename && l.symbolName === imp.msgName);
+                localSymbols[index].implementsType = imp.implementsType;
+            });
+        });
+
+        // update localSymbols for any conflicts
+        localSymbols.forEach(sym => {
+            // aside from exports, update readAs names...
+            if (
+                sym.readAs === sym.symbolName &&
+                hasConflict(sym.symbolName) &&
+                sym.type !== 'export'
+            ) {
+                sym.readAs = findAvailableName(sym.symbolName)
+            }
+            // add to symbols
+            symbols.push({
+                ref: ref.filename,
+                ...sym
+            });
+        })
+    });
+    return symbols;
+};
+
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
-    const imports: Record<string, string[]> = {};
-    const exports: Record<string, any> = {};
-    const obj: ProtoRoot & {
-        parsedImports: Record<string, string[]>;
-        parsedExports: Record<string, any>;
-        importNames: Record<string, any>;
-    } = {
+    const context = new TraverseContext(store, ref);
+    const obj: TraversedProtoRoot = {
         imports: ref.proto.imports,
         package: ref.proto.package,
         root: recursiveTraversal(
             store,
             ref,
             ref.proto.root,
-            imports,
-            exports,
+            context,
             [],
             false
         ),
         parsedImports: null,
         parsedExports: null,
-        importNames: null,
+        importNames: {},
     };
 
-    obj.parsedImports = imports;
-    obj.parsedExports = exports;
-    let counter = 1;
-    obj.importNames = Object.entries(imports).reduce((m, [path, names]) => {
-        m[path] = m[path] || {};
-        names.forEach(importName => {
-            const hasConflict = Object.entries(imports).some(([otherPath, otherNames]) => {
-                if (path === otherPath) return false;
-                if (otherNames.includes(importName)) return true;
-            });
-            if (hasConflict || exports.hasOwnProperty(importName)) {
-                m[path][importName] = importName + counter++;
-            } else {
-                m[path][importName] = importName;
-            }
-        })
-        return m;
-    }, {});
+    obj.parsedImports = context.imports;
+    obj.parsedExports = context.exports;
+
+    obj.acceptsInterface = context.acceptsInterface;
+    obj.implementsInterface = context.implementsInterface;
+
     // just bc devs use proto syntax for types in the same file
     // does not mean we need to import them
     // delete any imports related to "this" file
-    delete obj.importNames[ref.filename];
+    // delete obj.importNames[ref.filename];
     delete obj.parsedImports[ref.filename];
     return obj;
 };
@@ -66,7 +243,7 @@ const traverseFields = (
     store: ProtoStore,
     ref: ProtoRef,
     obj: any,
-    imports: object,
+    context: TraverseContext,
     traversal: string[]
 ): Record<string, ProtoField> => {
     return Object.keys(obj.fields).reduce((m, mykey) => {
@@ -91,6 +268,15 @@ const traverseFields = (
             // field.name is used for proto!
             field.name = fieldName;
             return field;
+        }
+
+        const implementsAcceptsAny = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
+        if (implementsAcceptsAny && field.options?.['(cosmos_proto.accepts_interface)']) {
+            const value = field.options['(cosmos_proto.accepts_interface)'];
+            // some of these contain a comma ...
+            value.split(',').map(a => a.trim()).forEach(name => {
+                context.addAccepts(name, obj.name);
+            });
         }
 
         let found: any = null;
@@ -129,8 +315,8 @@ const traverseFields = (
 
         found = importLookup(store, ref, field.type);
         if (found) {
-            imports[found.import] = imports[found.import] || [];
-            imports[found.import] = [...new Set([...imports[found.import], found.name])];
+            context.addImport(found.import, found.name);
+
             m[fieldName] = {
                 parsedType: instanceType(found.obj),
                 scopeType: 'import',
@@ -163,8 +349,7 @@ const traverseFields = (
         for (let lookupType of typeNames) {
             found = protoScopeImportLookup(store, ref, lookupType);
             if (found) {
-                imports[found.import] = imports[found.import] || [];
-                imports[found.import] = [...new Set([...imports[found.import], found.name])];
+                context.addImport(found.import, found.name);
                 m[fieldName] = {
 
                     parsedType: instanceType(found.obj),
@@ -188,8 +373,8 @@ const traverseFields = (
             for (let lookupType of typeNames) {
                 found = protoScopeImportLookup(store, importRef, lookupType);
                 if (found) {
-                    imports[found.import] = imports[found.import] || [];
-                    imports[found.import] = [...new Set([...imports[found.import], found.name])];
+
+                    context.addImport(found.import, found.name);
                     m[fieldName] = {
                         parsedType: instanceType(found.obj),
                         scopeType: 'protoImport',
@@ -217,22 +402,20 @@ const traverseType = (
     store: ProtoStore,
     ref: ProtoRef,
     obj: any,
-    imports: object,
-    exports: object,
+    context: TraverseContext,
     traversal: string[],
     isNested: boolean
 ): ProtoType => {
     let nested = null;
     if (obj.nested) {
         nested = Object.keys(obj.nested).reduce((m, key) => {
-            m[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], true);
+            m[key] = recursiveTraversal(store, ref, obj.nested[key], context, [...traversal, key], true);
             return m;
         }, {});
     }
 
     if (!isNested) {
-        exports[obj.name] = exports[obj.name] || [];
-        exports[obj.name] = true;
+        context.addExport(obj.name);
     }
 
     const traversed = {
@@ -246,7 +429,7 @@ const traverseType = (
             };
             return m;
         }, {}) : undefined,
-        fields: traverseFields(store, ref, obj, imports, traversal),
+        fields: traverseFields(store, ref, obj, context, traversal),
         nested,
         keyTypes: [],
         comment: obj.comment
@@ -267,10 +450,17 @@ const traverseType = (
     }
 
     traversed.keyTypes = keyTypes;
-    return traversed;
+
+    const implementsAcceptsAny = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
+    if (implementsAcceptsAny && traversed.options?.["(cosmos_proto.implements_interface)"]) {
+        const name = traversed.options['(cosmos_proto.implements_interface)'];
+        context.addImplements(name, obj.name);
+    }
+
+    return traversed as ProtoType;
 };
 
-const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext,) => {
     return {
         type: 'Enum',
         name: obj.name,
@@ -278,7 +468,7 @@ const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, imports: objec
     }
 };
 
-const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
+const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext,) => {
     return {
         // type is already a property on field
         name: obj.name,
@@ -290,7 +480,7 @@ const traverseServiceMethod = (
     store: ProtoStore,
     ref: ProtoRef,
     obj: any,
-    imports: object,
+    context: TraverseContext,
     name: string,
     traversal: string[]
 ) => {
@@ -306,7 +496,7 @@ const traverseServiceMethod = (
     }
 
 
-    const fields = traverseFields(store, ref, requestObject.obj, imports, traversal);
+    const fields = traverseFields(store, ref, requestObject.obj, context, traversal);
     const info: ProtoServiceMethodInfo = parseService({
         options,
         fields
@@ -352,13 +542,13 @@ const traverseService = (
     store: ProtoStore,
     ref: ProtoRef,
     obj: any,
-    imports: object,
+    context: TraverseContext,
     traversal: string[]
 ): ProtoService => {
     const json = obj.toJSON({ keepComments: true });
     const methods = Object.keys(json.methods).reduce((m, key) => {
         m[key] = traverseServiceMethod(
-            store, ref, json, imports, key, traversal
+            store, ref, json, context, key, traversal
         );
         return m;
     }, {})
@@ -374,27 +564,26 @@ export const recursiveTraversal = (
     store: ProtoStore,
     ref: ProtoRef,
     obj: any,
-    imports: object,
-    exports: object,
+    context: TraverseContext,
     traversal: string[],
     isNested: boolean
 ) => {
     if (obj instanceof Type) {
-        return traverseType(store, ref, obj, imports, exports, traversal, isNested);
+        return traverseType(store, ref, obj, context, traversal, isNested);
     }
     if (obj instanceof Enum) {
-        return traverseEnum(store, ref, obj, imports);
+        return traverseEnum(store, ref, obj, context);
     }
     if (obj instanceof Service) {
-        return traverseService(store, ref, obj, imports, traversal);
+        return traverseService(store, ref, obj, context, traversal);
     }
     if (obj instanceof Field) {
-        return traverseField(store, ref, obj, imports);
+        return traverseField(store, ref, obj, context);
     }
     if (obj instanceof Root) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], isNested);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], context, [...traversal, key], isNested);
                 return m;
             }, {
                 type: 'Root',
@@ -407,7 +596,7 @@ export const recursiveTraversal = (
     if (obj instanceof Namespace) {
         if (obj.nested) {
             return Object.keys(obj.nested).reduce((m, key) => {
-                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], imports, exports, [...traversal, key], isNested);
+                m.nested[key] = recursiveTraversal(store, ref, obj.nested[key], context, [...traversal, key], isNested);
                 return m;
             }, {
                 type: 'Namespace',

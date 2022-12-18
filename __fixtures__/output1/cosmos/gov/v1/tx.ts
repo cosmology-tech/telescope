@@ -26,8 +26,6 @@ export interface MsgSubmitProposalSDKType {
   messages: AnySDKType[];
   initial_deposit: CoinSDKType[];
   proposer: string;
-
-  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
 
@@ -58,10 +56,7 @@ export interface MsgExecLegacyContent {
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentSDKType {
-  /** content is the proposal's content. */
   content?: AnySDKType;
-
-  /** authority must be the gov module address. */
   authority: string;
 }
 

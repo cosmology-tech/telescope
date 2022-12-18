@@ -335,13 +335,7 @@ export interface ManagedService {
  * Google Service Management.
  */
 export interface ManagedServiceSDKType {
-  /**
-   * The name of the service. See the [overview](/service-management/overview)
-   * for naming requirements.
-   */
   service_name: string;
-
-  /** ID of the project that produces and owns this service. */
   producer_project_id: string;
 }
 
@@ -365,19 +359,9 @@ export interface OperationMetadata {
 
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
-  /**
-   * The full name of the resources that this operation is directly
-   * associated with.
-   */
   resource_names: string[];
-
-  /** Detailed status information for each step. The order is undetermined. */
   steps: OperationMetadata_StepSDKType[];
-
-  /** Percentage of completion of this operation, ranging from 0 to 100. */
   progress_percentage: number;
-
-  /** The start time of the operation. */
   start_time?: Date;
 }
 
@@ -392,10 +376,7 @@ export interface OperationMetadata_Step {
 
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
-  /** The short description of the step. */
   description: string;
-
-  /** The status code. */
   status: OperationMetadata_Status;
 }
 
@@ -413,13 +394,8 @@ export interface Diagnostic {
 
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticSDKType {
-  /** File name and line number of the error or warning. */
   location: string;
-
-  /** The kind of diagnostic information provided. */
   kind: Diagnostic_Kind;
-
-  /** Message describing the error or warning. */
   message: string;
 }
 
@@ -447,17 +423,7 @@ export interface ConfigSource {
  * defined by `google.api.Service`.
  */
 export interface ConfigSourceSDKType {
-  /**
-   * A unique ID for a specific instance of this message, typically assigned
-   * by the client for tracking purpose. If empty, the server may choose to
-   * generate one instead.
-   */
   id: string;
-
-  /**
-   * Set of source configuration files that are used to generate a service
-   * configuration (`google.api.Service`).
-   */
   files: ConfigFileSDKType[];
 }
 
@@ -475,13 +441,8 @@ export interface ConfigFile {
 
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
-  /** The file name of the configuration file (full or relative path). */
   file_path: string;
-
-  /** The bytes that constitute the file. */
   file_contents: Uint8Array;
-
-  /** The type of configuration file this represents. */
   file_type: ConfigFile_FileType;
 }
 
@@ -496,10 +457,6 @@ export interface ConfigRef {
 
 /** Represents a service configuration with its name and id. */
 export interface ConfigRefSDKType {
-  /**
-   * Resource name of a service config. It must have the following
-   * format: "services/{service name}/configs/{config id}".
-   */
   name: string;
 }
 
@@ -527,13 +484,6 @@ export interface ChangeReport {
  * two service configurations.
  */
 export interface ChangeReportSDKType {
-  /**
-   * List of changes between two service configurations.
-   * The changes will be alphabetically sorted based on the identifier
-   * of each change.
-   * A ConfigChange identifier is a dot separated path to the configuration.
-   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
-   */
   config_changes: ConfigChangeSDKType[];
 }
 
@@ -590,44 +540,12 @@ export interface Rollout {
  * service config, and then create a Rollout to push the service config.
  */
 export interface RolloutSDKType {
-  /**
-   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
-   * and only lower case letters, digits, '.', '_' and '-' are allowed.
-   * 
-   * If not specified by client, the server will generate one. The generated id
-   * will have the form of <date><revision number>, where "date" is the create
-   * date in ISO 8601 format.  "revision number" is a monotonically increasing
-   * positive number that is reset every day for each service.
-   * An example of the generated rollout_id is '2016-02-16r1'
-   */
   rollout_id: string;
-
-  /** Creation time of the rollout. Readonly. */
   create_time?: Date;
-
-  /** The user who created the Rollout. Readonly. */
   created_by: string;
-
-  /**
-   * The status of this rollout. Readonly. In case of a failed rollout,
-   * the system will automatically rollback to the current Rollout
-   * version. Readonly.
-   */
   status: Rollout_RolloutStatus;
-
-  /**
-   * Google Service Control selects service configurations based on
-   * traffic percentage.
-   */
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
-
-  /**
-   * The strategy associated with a rollout to delete a `ManagedService`.
-   * Readonly.
-   */
   delete_service_strategy?: Rollout_DeleteServiceStrategySDKType;
-
-  /** The name of the service associated with this Rollout. */
   service_name: string;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
@@ -715,11 +633,6 @@ export interface Rollout_TrafficPercentStrategy {
  *     }
  */
 export interface Rollout_TrafficPercentStrategySDKType {
-  /**
-   * Maps service configuration IDs to their corresponding traffic percentage.
-   * Key is the service configuration ID, Value is the traffic percentage
-   * which must be greater than 0.0 and the sum must equal to 100.0.
-   */
   percentages: {
     [key: string]: number;
   };

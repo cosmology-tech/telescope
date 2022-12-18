@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { ProtoType, ProtoRoot } from '@osmonauts/types';
 import { toAminoJsonMethod } from '../to-amino-json';
 import { fromAminoJsonMethod } from '../from-amino-json';
-import { getTypeUrl, typeUrlToAmino } from '../utils';
+import { getTypeUrl, getAminoTypeName } from '../utils';
 import { AminoParseContext } from '../../context';
 
 interface AminoConverterItemParams {
@@ -19,6 +19,7 @@ export const createAminoConverterItem = (
 ) => {
 
     const typeUrl = getTypeUrl(root, proto);
+    const aminoType = getAminoTypeName(context, root, proto);
 
     const toAmino = context.options.aminoEncoding.useRecursiveV2encoding ?
         t.memberExpression(
@@ -46,7 +47,7 @@ export const createAminoConverterItem = (
                 t.objectProperty(
                     t.identifier('aminoType'),
                     t.stringLiteral(
-                        typeUrlToAmino(context, typeUrl)
+                        aminoType
                     )
                 ),
                 t.objectProperty(

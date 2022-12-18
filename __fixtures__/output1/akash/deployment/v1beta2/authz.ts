@@ -20,10 +20,6 @@ export interface DepositDeploymentAuthorization {
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
-  /**
-   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
-   * the purpose of deployment.
-   */
   spend_limit?: CoinSDKType;
 }
 

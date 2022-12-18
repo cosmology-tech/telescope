@@ -34,22 +34,9 @@ export interface GenesisState {
  * initialized
  */
 export interface GenesisStateSDKType {
-  /** params are all the parameters of the module */
   params?: ParamsSDKType;
-
-  /** gauges are all gauges that should exist at genesis */
   gauges: GaugeSDKType[];
-
-  /**
-   * lockable_durations are all lockup durations that gauges can be locked for
-   * in order to recieve incentives
-   */
   lockable_durations: DurationSDKType[];
-
-  /**
-   * last_gauge_id is what the gauge number will increment from when creating
-   * the next gauge after genesis
-   */
   last_gauge_id: Long;
 }
 

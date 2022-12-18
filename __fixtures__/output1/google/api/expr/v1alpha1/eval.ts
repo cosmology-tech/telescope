@@ -28,15 +28,7 @@ export interface EvalState {
  * Can represent an inital, partial, or completed state of evaluation.
  */
 export interface EvalStateSDKType {
-  /** The unique values referenced in this message. */
   values: ExprValueSDKType[];
-
-  /**
-   * An ordered list of results.
-   * 
-   * Tracks the flow of evaluation through the expression.
-   * May be sparse.
-   */
   results: EvalState_ResultSDKType[];
 }
 
@@ -51,10 +43,7 @@ export interface EvalState_Result {
 
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
-  /** The id of the expression this result if for. */
   expr: Long;
-
-  /** The index in `values` of the resulting value. */
   value: Long;
 }
 
@@ -114,55 +103,8 @@ export interface ExprValue {
 
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
-  /** A concrete value. */
   value?: ValueSDKType;
-
-  /**
-   * The set of errors in the critical path of evalution.
-   * 
-   * Only errors in the critical path are included. For example,
-   * `(<error1> || true) && <error2>` will only result in `<error2>`,
-   * while `<error1> || <error2>` will result in both `<error1>` and
-   * `<error2>`.
-   * 
-   * Errors cause by the presence of other errors are not included in the
-   * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
-   * only result in `<error1>`.
-   * 
-   * Multiple errors *might* be included when evaluation could result
-   * in different errors. For example `<error1> + <error2>` and
-   * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
-   * The exact subset of errors included for this case is unspecified and
-   * depends on the implementation details of the evaluator.
-   */
   error?: ErrorSetSDKType;
-
-  /**
-   * The set of unknowns in the critical path of evaluation.
-   * 
-   * Unknown behaves identically to Error with regards to propagation.
-   * Specifically, only unknowns in the critical path are included, unknowns
-   * caused by the presence of other unknowns are not included, and multiple
-   * unknowns *might* be included included when evaluation could result in
-   * different unknowns. For example:
-   * 
-   *     (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
-   *     <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
-   *     <unknown[1]>.foo -> <unknown[1]>
-   *     foo(<unknown[1]>) -> <unknown[1]>
-   *     <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
-   * 
-   * Unknown takes precidence over Error in cases where a `Value` can short
-   * circuit the result:
-   * 
-   *     <error> || <unknown> -> <unknown>
-   *     <error> && <unknown> -> <unknown>
-   * 
-   * Errors take precidence in all other cases:
-   * 
-   *     <unknown> + <error> -> <error>
-   *     foo(<unknown>, <error>) -> <error>
-   */
   unknown?: UnknownSetSDKType;
 }
 
@@ -182,7 +124,6 @@ export interface ErrorSet {
  * The errors included depend on the context. See `ExprValue.error`.
  */
 export interface ErrorSetSDKType {
-  /** The errors in the set. */
   errors: StatusSDKType[];
 }
 
@@ -202,7 +143,6 @@ export interface UnknownSet {
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
 export interface UnknownSetSDKType {
-  /** The ids of the expressions with unknown values. */
   exprs: Long[];
 }
 

@@ -79,28 +79,9 @@ export interface ListServicesRequest {
 
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
-  /** Include services produced by the specified project. */
   producer_project_id: string;
-
-  /**
-   * The max number of items to include in the response list. Page size is 50
-   * if not specified. Maximum value is 100.
-   */
   page_size: number;
-
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
   page_token: string;
-
-  /**
-   * Include services consumed by the specified consumer.
-   * 
-   * The Google Service Management implementation accepts the following
-   * forms:
-   * - project:<project_id>
-   */
 
   /** @deprecated */
   consumer_id: string;
@@ -117,10 +98,7 @@ export interface ListServicesResponse {
 
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
-  /** The returned services will only have the name field set. */
   services: ManagedServiceSDKType[];
-
-  /** Token that can be passed to `ListServices` to resume a paginated query. */
   next_page_token: string;
 }
 
@@ -135,10 +113,6 @@ export interface GetServiceRequest {
 
 /** Request message for `GetService` method. */
 export interface GetServiceRequestSDKType {
-  /**
-   * Required. The name of the service.  See the `ServiceManager` overview for naming
-   * requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
 }
 
@@ -150,7 +124,6 @@ export interface CreateServiceRequest {
 
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
-  /** Required. Initial values for the service resource. */
   service?: ManagedServiceSDKType;
 }
 
@@ -165,10 +138,6 @@ export interface DeleteServiceRequest {
 
 /** Request message for DeleteService method. */
 export interface DeleteServiceRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
 }
 
@@ -183,10 +152,6 @@ export interface UndeleteServiceRequest {
 
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestSDKType {
-  /**
-   * Required. The name of the service. See the [overview](/service-management/overview)
-   * for naming requirements. For example: `example.googleapis.com`.
-   */
   service_name: string;
 }
 
@@ -198,7 +163,6 @@ export interface UndeleteServiceResponse {
 
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
-  /** Revived service resource. */
   service?: ManagedServiceSDKType;
 }
 
@@ -227,24 +191,8 @@ export interface GetServiceConfigRequest {
 
 /** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /**
-   * Required. The id of the service configuration resource.
-   * 
-   * This field must be specified for the server to return all fields, including
-   * `SourceInfo`.
-   */
   config_id: string;
-
-  /**
-   * Specifies which parts of the Service Config should be returned in the
-   * response.
-   */
   view: GetServiceConfigRequest_ConfigView;
 }
 
@@ -268,19 +216,8 @@ export interface ListServiceConfigsRequest {
 
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** The token of the page to retrieve. */
   page_token: string;
-
-  /**
-   * The max number of items to include in the response list. Page size is 50
-   * if not specified. Maximum value is 100.
-   */
   page_size: number;
 }
 
@@ -295,10 +232,7 @@ export interface ListServiceConfigsResponse {
 
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
-  /** The list of service configuration resources. */
   service_configs: ServiceSDKType[];
-
-  /** The token of the next page of results. */
   next_page_token: string;
 }
 
@@ -316,13 +250,7 @@ export interface CreateServiceConfigRequest {
 
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** Required. The service configuration resource. */
   service_config?: ServiceSDKType;
 }
 
@@ -347,20 +275,8 @@ export interface SubmitConfigSourceRequest {
 
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** Required. The source configuration for the service. */
   config_source?: ConfigSourceSDKType;
-
-  /**
-   * Optional. If set, this will result in the generation of a
-   * `google.api.Service` configuration based on the `ConfigSource` provided,
-   * but the generated config and the sources will NOT be persisted.
-   */
   validate_only: boolean;
 }
 
@@ -372,7 +288,6 @@ export interface SubmitConfigSourceResponse {
 
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
-  /** The generated service configuration. */
   service_config?: ServiceSDKType;
 }
 
@@ -390,13 +305,7 @@ export interface CreateServiceRolloutRequest {
 
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: RolloutSDKType;
 }
 
@@ -432,31 +341,9 @@ export interface ListServiceRolloutsRequest {
 
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** The token of the page to retrieve. */
   page_token: string;
-
-  /**
-   * The max number of items to include in the response list. Page size is 50
-   * if not specified. Maximum value is 100.
-   */
   page_size: number;
-
-  /**
-   * Required. Use `filter` to return subset of rollouts.
-   * The following filters are supported:
-   *   -- To limit the results to only those in
-   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
-   *      use filter='status=SUCCESS'
-   *   -- To limit the results to those in
-   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
-   *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
-   */
   filter: string;
 }
 
@@ -471,10 +358,7 @@ export interface ListServiceRolloutsResponse {
 
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
-  /** The list of rollout resources. */
   rollouts: RolloutSDKType[];
-
-  /** The token of the next page of results. */
   next_page_token: string;
 }
 
@@ -492,13 +376,7 @@ export interface GetServiceRolloutRequest {
 
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestSDKType {
-  /**
-   * Required. The name of the service.  See the [overview](/service-management/overview)
-   * for naming requirements.  For example: `example.googleapis.com`.
-   */
   service_name: string;
-
-  /** Required. The id of the rollout resource. */
   rollout_id: string;
 }
 
@@ -525,22 +403,7 @@ export interface GenerateConfigReportRequest {
 
 /** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
-  /**
-   * Required. Service configuration for which we want to generate the report.
-   * For this version of API, the supported types are
-   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
-   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
-   * and [google.api.Service][google.api.Service]
-   */
   new_config?: AnySDKType;
-
-  /**
-   * Optional. Service configuration against which the comparison will be done.
-   * For this version of API, the supported types are
-   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
-   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
-   * and [google.api.Service][google.api.Service]
-   */
   old_config?: AnySDKType;
 }
 
@@ -568,23 +431,9 @@ export interface GenerateConfigReportResponse {
 
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
-  /** Name of the service this report belongs to. */
   service_name: string;
-
-  /** ID of the service configuration this report belongs to. */
   id: string;
-
-  /**
-   * list of ChangeReport, each corresponding to comparison between two
-   * service configurations.
-   */
   change_reports: ChangeReportSDKType[];
-
-  /**
-   * Errors / Linter warnings associated with the service definition this
-   * report
-   * belongs to.
-   */
   diagnostics: DiagnosticSDKType[];
 }
 

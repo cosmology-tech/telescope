@@ -230,20 +230,12 @@ export interface ProposalSDKType {
   id: Long;
   messages: AnySDKType[];
   status: ProposalStatus;
-
-  /**
-   * final_tally_result is the final tally result of the proposal. When
-   * querying a proposal via gRPC, this field is not populated until the
-   * proposal's voting period has ended.
-   */
   final_tally_result?: TallyResultSDKType;
   submit_time?: Date;
   deposit_end_time?: Date;
   total_deposit: CoinSDKType[];
   voting_start_time?: Date;
   voting_end_time?: Date;
-
-  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
 
@@ -284,8 +276,6 @@ export interface VoteSDKType {
   proposal_id: Long;
   voter: string;
   options: WeightedVoteOptionSDKType[];
-
-  /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
 }
 
@@ -303,13 +293,7 @@ export interface DepositParams {
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
-  /** Minimum deposit for a proposal to enter voting period. */
   min_deposit: CoinSDKType[];
-
-  /**
-   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   *  months.
-   */
   max_deposit_period?: DurationSDKType;
 }
 
@@ -321,7 +305,6 @@ export interface VotingParams {
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
-  /** Length of the voting period. */
   voting_period?: DurationSDKType;
 }
 
@@ -345,19 +328,8 @@ export interface TallyParams {
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsSDKType {
-  /**
-   * Minimum percentage of total stake needed to vote for a result to be
-   *  considered valid.
-   */
   quorum: string;
-
-  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
   threshold: string;
-
-  /**
-   * Minimum value of Veto votes to Total votes ratio for proposal to be
-   *  vetoed. Default value: 1/3.
-   */
   veto_threshold: string;
 }
 

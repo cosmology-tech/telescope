@@ -17,8 +17,6 @@ export interface GenesisState {
 export interface GenesisStateSDKType {
   connections: IdentifiedConnectionSDKType[];
   client_connection_paths: ConnectionPathsSDKType[];
-
-  /** the sequence for the next generated connection identifier */
   next_connection_sequence: Long;
   params?: ParamsSDKType;
 }

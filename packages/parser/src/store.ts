@@ -2,9 +2,9 @@ import { sync as glob } from 'glob';
 import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
-import { getNestedProto, getPackageAndNestedFromStr } from './utils';
-import { traverse } from './traverse';
+import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
+import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr } from './utils';
+import { parseFullyTraversedProtoImports, symbolsToImportNames, TraversalSymbols, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions, TelescopeLogLevel } from '@osmonauts/types';
 
@@ -58,6 +58,7 @@ export class ProtoStore {
     responses: Record<string, ProtoServiceMethod> = {};
 
     _traversed: boolean = false;
+    _symbols: TraversalSymbols[] = [];
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
@@ -214,7 +215,30 @@ export class ProtoStore {
                 proto: ref.proto,
                 traversed: traverse(this, ref)
             };
-        })
+        });
+        this._symbols = parseFullyTraversedProtoImports(this);
+
+        // process import names
+        this.protos = this.protos.map((ref: ProtoRef) => {
+            const traversed = ref.traversed;
+            const symbs = this._symbols
+                .filter(f => f.ref === ref.filename);
+            traversed.importNames = symbolsToImportNames(ref, symbs);
+
+            // now add any inferred imports as a result of accepts/implements
+            symbs
+                .filter(f => f.ref !== f.source)
+                .forEach(f => {
+                    traversed.parsedImports[f.source] = traversed.parsedImports[f.source] || [];
+                    traversed.parsedImports[f.source] = [...new Set([...traversed.parsedImports[f.source], f.symbolName])];
+                })
+
+            return {
+                ...ref,
+                traversed
+            };
+        });
+
         this._traversed = true;
     }
 
@@ -226,6 +250,10 @@ export class ProtoStore {
     getImportFromRef(ref: ProtoRef, name: string) {
         if (!this._traversed) throw new Error('getImportFromRef() requires traversal')
         return lookupAnyFromImports(this, ref, name);
+    }
+
+    getTypeUrlMap(ref: ProtoRef) {
+        return createTypeUrlTypeMap(this, ref);
     }
 
     // DOCUMENTATION

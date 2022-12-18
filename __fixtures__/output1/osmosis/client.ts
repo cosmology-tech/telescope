@@ -6,7 +6,6 @@ import * as osmosisGammPoolmodelsStableswapTxRegistry from "./gamm/pool-models/s
 import * as osmosisGammV1beta1TxRegistry from "./gamm/v1beta1/tx.registry";
 import * as osmosisIncentivesTxRegistry from "./incentives/tx.registry";
 import * as osmosisLockupTxRegistry from "./lockup/tx.registry";
-import * as osmosisStreamswapV1TxRegistry from "./streamswap/v1/tx.registry";
 import * as osmosisSuperfluidTxRegistry from "./superfluid/tx.registry";
 import * as osmosisTokenfactoryV1beta1TxRegistry from "./tokenfactory/v1beta1/tx.registry";
 import * as osmosisGammPoolmodelsBalancerTxTxAmino from "./gamm/pool-models/balancer/tx/tx.amino";
@@ -14,7 +13,6 @@ import * as osmosisGammPoolmodelsStableswapTxAmino from "./gamm/pool-models/stab
 import * as osmosisGammV1beta1TxAmino from "./gamm/v1beta1/tx.amino";
 import * as osmosisIncentivesTxAmino from "./incentives/tx.amino";
 import * as osmosisLockupTxAmino from "./lockup/tx.amino";
-import * as osmosisStreamswapV1TxAmino from "./streamswap/v1/tx.amino";
 import * as osmosisSuperfluidTxAmino from "./superfluid/tx.amino";
 import * as osmosisTokenfactoryV1beta1TxAmino from "./tokenfactory/v1beta1/tx.amino";
 export const osmosisAminoConverters = { ...osmosisGammPoolmodelsBalancerTxTxAmino.AminoConverter,
@@ -22,11 +20,10 @@ export const osmosisAminoConverters = { ...osmosisGammPoolmodelsBalancerTxTxAmin
   ...osmosisGammV1beta1TxAmino.AminoConverter,
   ...osmosisIncentivesTxAmino.AminoConverter,
   ...osmosisLockupTxAmino.AminoConverter,
-  ...osmosisStreamswapV1TxAmino.AminoConverter,
   ...osmosisSuperfluidTxAmino.AminoConverter,
   ...osmosisTokenfactoryV1beta1TxAmino.AminoConverter
 };
-export const osmosisProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [...osmosisGammPoolmodelsBalancerTxTxRegistry.registry, ...osmosisGammPoolmodelsStableswapTxRegistry.registry, ...osmosisGammV1beta1TxRegistry.registry, ...osmosisIncentivesTxRegistry.registry, ...osmosisLockupTxRegistry.registry, ...osmosisStreamswapV1TxRegistry.registry, ...osmosisSuperfluidTxRegistry.registry, ...osmosisTokenfactoryV1beta1TxRegistry.registry];
+export const osmosisProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [...osmosisGammPoolmodelsBalancerTxTxRegistry.registry, ...osmosisGammPoolmodelsStableswapTxRegistry.registry, ...osmosisGammV1beta1TxRegistry.registry, ...osmosisIncentivesTxRegistry.registry, ...osmosisLockupTxRegistry.registry, ...osmosisSuperfluidTxRegistry.registry, ...osmosisTokenfactoryV1beta1TxRegistry.registry];
 export const getSigningOsmosisClientOptions = ({
   defaultTypes = defaultRegistryTypes
 }: {

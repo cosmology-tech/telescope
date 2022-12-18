@@ -21,10 +21,6 @@ export interface Control {
  * monitoring, etc.
  */
 export interface ControlSDKType {
-  /**
-   * The service control environment to use. If empty, no control plane
-   * feature (like quota and billing) will be enabled.
-   */
   environment: string;
 }
 

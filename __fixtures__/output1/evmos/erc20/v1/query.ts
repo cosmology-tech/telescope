@@ -19,7 +19,6 @@ export interface QueryTokenPairsRequest {
  * method.
  */
 export interface QueryTokenPairsRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -40,8 +39,6 @@ export interface QueryTokenPairsResponse {
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -56,10 +53,6 @@ export interface QueryTokenPairRequest {
 
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
-  /**
-   * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
-   */
   token: string;
 }
 

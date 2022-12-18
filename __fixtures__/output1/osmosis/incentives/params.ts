@@ -13,10 +13,6 @@ export interface Params {
 
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
-  /**
-   * distr_epoch_identifier is what epoch type distribution will be triggered by
-   * (day, week, etc.)
-   */
   distr_epoch_identifier: string;
 }
 

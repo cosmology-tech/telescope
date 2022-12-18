@@ -26,8 +26,6 @@ export interface GenesisStateSDKType {
   send_sequences: PacketSequenceSDKType[];
   recv_sequences: PacketSequenceSDKType[];
   ack_sequences: PacketSequenceSDKType[];
-
-  /** the sequence for the next generated channel identifier */
   next_channel_sequence: Long;
 }
 

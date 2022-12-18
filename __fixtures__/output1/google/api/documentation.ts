@@ -163,48 +163,11 @@ export interface Documentation {
  * and is documented together with service config validation.
  */
 export interface DocumentationSDKType {
-  /**
-   * A short summary of what the service does. Can only be provided by
-   * plain text.
-   */
   summary: string;
-
-  /** The top level pages for the documentation set. */
   pages: PageSDKType[];
-
-  /**
-   * A list of documentation rules that apply to individual API elements.
-   * 
-   * **NOTE:** All service configuration rules follow "last one wins" order.
-   */
   rules: DocumentationRuleSDKType[];
-
-  /** The URL to the root of documentation. */
   documentation_root_url: string;
-
-  /**
-   * Specifies the service root url if the default one (the service name
-   * from the yaml file) is not suitable. This can be seen in any fully
-   * specified service urls as well as sections that show a base that other
-   * urls are relative to.
-   */
   service_root_url: string;
-
-  /**
-   * Declares a single overview page. For example:
-   * <pre><code>documentation:
-   *   summary: ...
-   *   overview: &#40;== include overview.md ==&#41;
-   * </code></pre>
-   * This is a shortcut for the following declaration (using pages style):
-   * <pre><code>documentation:
-   *   summary: ...
-   *   pages:
-   *   - name: Overview
-   *     content: &#40;== include overview.md ==&#41;
-   * </code></pre>
-   * Note: you cannot specify both `overview` field and `pages` field.
-   */
   overview: string;
 }
 
@@ -232,23 +195,8 @@ export interface DocumentationRule {
 
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
-  /**
-   * The selector is a comma-separated list of patterns. Each pattern is a
-   * qualified name of the element which may end in "*", indicating a wildcard.
-   * Wildcards are only allowed at the end and for a whole component of the
-   * qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
-   * wildcard will match one or more components. To specify a default for all
-   * applicable elements, the whole pattern "*" is used.
-   */
   selector: string;
-
-  /** Description of the selected API(s). */
   description: string;
-
-  /**
-   * Deprecation description of the selected element(s). It can be provided if
-   * an element is marked as `deprecated`.
-   */
   deprecation_description: string;
 }
 
@@ -293,34 +241,8 @@ export interface Page {
  * nested documentation set structure.
  */
 export interface PageSDKType {
-  /**
-   * The name of the page. It will be used as an identity of the page to
-   * generate URI of the page, text of the link to this page in navigation,
-   * etc. The full page name (start from the root page name to this page
-   * concatenated with `.`) can be used as reference to the page in your
-   * documentation. For example:
-   * <pre><code>pages:
-   * - name: Tutorial
-   *   content: &#40;== include tutorial.md ==&#41;
-   *   subpages:
-   *   - name: Java
-   *     content: &#40;== include tutorial_java.md ==&#41;
-   * </code></pre>
-   * You can reference `Java` page using Markdown reference link syntax:
-   * `[Java][Tutorial.Java]`.
-   */
   name: string;
-
-  /**
-   * The Markdown content of the page. You can use <code>&#40;== include {path}
-   * ==&#41;</code> to include content from a Markdown file.
-   */
   content: string;
-
-  /**
-   * Subpages of this page. The order of subpages specified here will be
-   * honored in the generated docset.
-   */
   subpages: PageSDKType[];
 }
 

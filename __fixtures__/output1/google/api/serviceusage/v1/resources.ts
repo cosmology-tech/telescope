@@ -99,31 +99,9 @@ export interface Service {
 
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
-  /**
-   * The resource name of the consumer and service.
-   * 
-   * A valid name would be:
-   * - projects/123/services/serviceusage.googleapis.com
-   */
   name: string;
-
-  /**
-   * The resource name of the consumer.
-   * 
-   * A valid name would be:
-   * - projects/123
-   */
   parent: string;
-
-  /**
-   * The service configuration of the available service.
-   * Some fields may be filtered out of the configuration in responses to
-   * the `ListServices` method. These fields are present only in responses to
-   * the `GetService` method.
-   */
   config?: ServiceConfigSDKType;
-
-  /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
 
@@ -182,54 +160,15 @@ export interface ServiceConfig {
 
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
-  /**
-   * The DNS address at which this service is available.
-   * 
-   * An example DNS address would be:
-   * `calendar.googleapis.com`.
-   */
   name: string;
-
-  /** The product title for this service. */
   title: string;
-
-  /**
-   * A list of API interfaces exported by this service. Contains only the names,
-   * versions, and method names of the interfaces.
-   */
   apis: ApiSDKType[];
-
-  /**
-   * Additional API documentation. Contains only the summary and the
-   * documentation URL.
-   */
   documentation?: DocumentationSDKType;
-
-  /** Quota configuration. */
   quota?: QuotaSDKType;
-
-  /** Auth configuration. Contains only the OAuth rules. */
   authentication?: AuthenticationSDKType;
-
-  /** Configuration controlling usage of this service. */
   usage?: UsageSDKType;
-
-  /**
-   * Configuration for network endpoints. Contains only the names and aliases
-   * of the endpoints.
-   */
   endpoints: EndpointSDKType[];
-
-  /**
-   * Defines the monitored resources used by this service. This is required
-   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
-   */
   monitored_resources: MonitoredResourceDescriptorSDKType[];
-
-  /**
-   * Monitoring configuration.
-   * This should not include the 'producer_destinations' field.
-   */
   monitoring?: MonitoringSDKType;
 }
 
@@ -244,10 +183,6 @@ export interface OperationMetadata {
 
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
-  /**
-   * The full name of the resources that this operation is directly
-   * associated with.
-   */
   resource_names: string[];
 }
 

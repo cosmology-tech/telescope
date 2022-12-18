@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pure proto 1`] = `
+{
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
+  "imports": undefined,
+  "package": "cosmology.finance",
+  "parsedExports": {
+    "ExistenceProof": true,
+    "LeafOp": true,
+    "NonExistenceProof": true,
+  },
+  "parsedImports": {},
+  "root": {
+    "nested": {
+      "cosmology": {
+        "nested": {
+          "finance": {
+            "nested": {
+              "ExistenceProof": {
+                "comment": null,
+                "fields": {
+                  "key": {
+                    "comment": null,
+                    "id": 1,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "key",
+                      "(telescope:name)": "key",
+                      "(telescope:orig)": "key",
+                    },
+                    "parsedType": {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "leaf": {
+                    "comment": null,
+                    "id": 3,
+                    "options": {
+                      "(telescope:camel)": "leaf",
+                      "(telescope:name)": "leaf",
+                      "(telescope:orig)": "leaf",
+                    },
+                    "parsedType": {
+                      "name": "LeafOp",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "LeafOp",
+                  },
+                  "path": {
+                    "comment": null,
+                    "id": 4,
+                    "options": {
+                      "(telescope:camel)": "path",
+                      "(telescope:name)": "path",
+                      "(telescope:orig)": "path",
+                    },
+                    "parsedType": {
+                      "name": "LeafOp",
+                      "type": "Type",
+                    },
+                    "rule": "repeated",
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "LeafOp",
+                  },
+                  "value": {
+                    "comment": null,
+                    "id": 2,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "value",
+                      "(telescope:name)": "value",
+                      "(telescope:orig)": "value",
+                    },
+                    "parsedType": {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                },
+                "keyTypes": [],
+                "name": "ExistenceProof",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+              "FancyEnumType": {
+                "comment": null,
+                "comments": {
+                  "BITCOIN": null,
+                  "KECCAK": null,
+                  "NO_HASH": null,
+                  "RIPEMD160": null,
+                  "SHA256": null,
+                  "SHA512": null,
+                },
+                "name": "FancyEnumType",
+                "type": "Enum",
+                "values": {
+                  "BITCOIN": 5,
+                  "KECCAK": 3,
+                  "NO_HASH": 0,
+                  "RIPEMD160": 4,
+                  "SHA256": 1,
+                  "SHA512": 2,
+                },
+              },
+              "LeafOp": {
+                "comment": null,
+                "fields": {
+                  "hash": {
+                    "comment": null,
+                    "id": 1,
+                    "options": {
+                      "(telescope:camel)": "hash",
+                      "(telescope:name)": "hash",
+                      "(telescope:orig)": "hash",
+                    },
+                    "parsedType": {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                  "prefix": {
+                    "comment": null,
+                    "id": 5,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "prefix",
+                      "(telescope:name)": "prefix",
+                      "(telescope:orig)": "prefix",
+                    },
+                    "parsedType": {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "prehashKey": {
+                    "comment": null,
+                    "id": 2,
+                    "options": {
+                      "(telescope:camel)": "prehashKey",
+                      "(telescope:name)": "prehashKey",
+                      "(telescope:orig)": "prehash_key",
+                    },
+                    "parsedType": {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                  "prehashValue": {
+                    "comment": null,
+                    "id": 3,
+                    "options": {
+                      "(telescope:camel)": "prehashValue",
+                      "(telescope:name)": "prehashValue",
+                      "(telescope:orig)": "prehash_value",
+                    },
+                    "parsedType": {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                },
+                "keyTypes": [],
+                "name": "LeafOp",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+              "NonExistenceProof": {
+                "comment": null,
+                "fields": {
+                  "key": {
+                    "comment": null,
+                    "id": 1,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "key",
+                      "(telescope:name)": "key",
+                      "(telescope:orig)": "key",
+                    },
+                    "parsedType": {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "left": {
+                    "comment": null,
+                    "id": 2,
+                    "options": {
+                      "(telescope:camel)": "left",
+                      "(telescope:name)": "left",
+                      "(telescope:orig)": "left",
+                    },
+                    "parsedType": {
+                      "name": "ExistenceProof",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "ExistenceProof",
+                  },
+                  "right": {
+                    "comment": null,
+                    "id": 3,
+                    "options": {
+                      "(telescope:camel)": "right",
+                      "(telescope:name)": "right",
+                      "(telescope:orig)": "right",
+                    },
+                    "parsedType": {
+                      "name": "ExistenceProof",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "cosmology.finance",
+                    ],
+                    "type": "ExistenceProof",
+                  },
+                },
+                "keyTypes": [],
+                "name": "NonExistenceProof",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+            },
+            "type": "Namespace",
+          },
+        },
+        "type": "Namespace",
+      },
+    },
+    "type": "Root",
+  },
+}
+`;

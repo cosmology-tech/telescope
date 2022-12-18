@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`empty google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `true`;
+
+exports[`empty osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`empty osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
+
+exports[`empty osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`isRefIncluded google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`isRefIncluded osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`isRefIncluded osmosis/gamm/v1beta1/tx.proto 1`] = `false`;
+
+exports[`isRefIncluded osmosis/gamm/v2/query.proto 1`] = `true`;
+
+exports[`pkg google/api/expr/conformance/v1alpha1/conformance_service.proto 1`] = `false`;
+
+exports[`pkg osmosis/gamm/v1beta1/query.proto 1`] = `true`;
+
+exports[`pkg osmosis/gamm/v1beta1/tx.proto 1`] = `true`;
+
+exports[`pkg osmosis/gamm/v2/query.proto 1`] = `false`;

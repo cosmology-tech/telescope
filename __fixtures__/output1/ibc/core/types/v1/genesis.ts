@@ -22,13 +22,8 @@ export interface GenesisState {
 
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateSDKType {
-  /** ICS002 - Clients genesis state */
   client_genesis?: GenesisState1SDKType;
-
-  /** ICS003 - Connections genesis state */
   connection_genesis?: GenesisState2SDKType;
-
-  /** ICS004 - Channel genesis state */
   channel_genesis?: GenesisState3SDKType;
 }
 

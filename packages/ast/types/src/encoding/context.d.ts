@@ -23,15 +23,16 @@ export declare class GenericParseContext implements ParseContext {
     isExcluded(): any;
     addUtil(util: any): void;
     addImport(imp: ImportUsage): void;
+    getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@osmonauts/proto-parser").Lookup;
+    getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {
     aminoCasingFn: Function;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
     private setAminoCasingFn;
     aminoCaseField(field: ProtoField): string;
-    private lookupTypeFromCurrentPath;
-    getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string): string;
     lookupEnumToJson(field: ProtoField, currentProtoPath: string): string;
 }

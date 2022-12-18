@@ -18,8 +18,6 @@ export interface GetValidatorSetByHeightRequest {
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequestSDKType {
   height: Long;
-
-  /** pagination defines an pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -36,8 +34,6 @@ export interface GetValidatorSetByHeightResponse {
 export interface GetValidatorSetByHeightResponseSDKType {
   block_height: Long;
   validators: ValidatorSDKType[];
-
-  /** pagination defines an pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -49,7 +45,6 @@ export interface GetLatestValidatorSetRequest {
 
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequestSDKType {
-  /** pagination defines an pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -66,8 +61,6 @@ export interface GetLatestValidatorSetResponse {
 export interface GetLatestValidatorSetResponseSDKType {
   block_height: Long;
   validators: ValidatorSDKType[];
-
-  /** pagination defines an pagination for the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -184,8 +177,6 @@ export interface VersionInfoSDKType {
   build_tags: string;
   go_version: string;
   build_deps: ModuleSDKType[];
-
-  /** Since: cosmos-sdk 0.43 */
   cosmos_sdk_version: string;
 }
 
@@ -203,13 +194,8 @@ export interface Module {
 
 /** Module is the type for VersionInfo */
 export interface ModuleSDKType {
-  /** module path */
   path: string;
-
-  /** module version */
   version: string;
-
-  /** checksum */
   sum: string;
 }
 

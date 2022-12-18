@@ -14,10 +14,7 @@ export interface GenesisState {
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  /** module parameters */
   params?: ParamsSDKType;
-
-  /** active registered contracts */
   dev_fee_infos: DevFeeInfoSDKType[];
 }
 
@@ -50,28 +47,10 @@ export interface Params {
 
 /** Params defines the fees module params */
 export interface ParamsSDKType {
-  /** parameter to enable fees */
   enable_fees: boolean;
-
-  /**
-   * developer_shares defines the proportion of the transaction fees to be
-   * distributed to the registered contract owner
-   */
   developer_shares: string;
-
-  /**
-   * developer_shares defines the proportion of the transaction fees to be
-   * distributed to validators
-   */
   validator_shares: string;
-
-  /**
-   * addr_derivation_cost_create defines the cost of address derivation for
-   * verifying the contract deployer at fee registration
-   */
   addr_derivation_cost_create: Long;
-
-  /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   min_gas_price: string;
 }
 

@@ -1,7 +1,7 @@
 import { ProtoEnum, ProtoType } from '@osmonauts/types';
 import { ProtoParseContext } from '../../context';
 import { createProtoEnum } from '../enums';
-import { createProtoType } from './interface';
+import { createProtoType } from './proto';
 import * as t from '@babel/types';
 
 export const createSDKType = (

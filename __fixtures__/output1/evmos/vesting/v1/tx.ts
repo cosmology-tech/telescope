@@ -36,31 +36,11 @@ export interface MsgCreateClawbackVestingAccount {
 
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
-  /**
-   * from_address specifies the account to provide the funds and sign the
-   * clawback request
-   */
   from_address: string;
-
-  /** to_address specifies the account to receive the funds */
   to_address: string;
-
-  /** start_time defines the time at which the vesting period begins */
   start_time?: Date;
-
-  /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockup_periods: PeriodSDKType[];
-
-  /** vesting_periods defines thevesting schedule relative to the start_time */
   vesting_periods: PeriodSDKType[];
-
-  /**
-   * merge specifies a the creation mechanism for existing
-   * ClawbackVestingAccounts. If true, merge this new grant into an existing
-   * ClawbackVestingAccount, or create it if it does not exist. If false,
-   * creates a new account. New grants to an existing account must be from the
-   * same from_address.
-   */
   merge: boolean;
 }
 
@@ -100,17 +80,8 @@ export interface MsgClawback {
  * ClawbackVestingAccount.
  */
 export interface MsgClawbackSDKType {
-  /** funder_address is the address which funded the account */
   funder_address: string;
-
-  /** account_address is the address of the ClawbackVestingAccount to claw back from. */
   account_address: string;
-
-  /**
-   * dest_address specifies where the clawed-back tokens should be transferred
-   * to. If empty, the tokens will be transferred back to the original funder of
-   * the account.
-   */
   dest_address: string;
 }
 

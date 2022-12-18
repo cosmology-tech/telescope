@@ -23,19 +23,10 @@ export interface GenesisState {
 
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
-
-  /** amount of past periods, based on the epochs per period param */
   period: Long;
-
-  /** inflation epoch identifier */
   epoch_identifier: string;
-
-  /** number of epochs after which inflation is recalculated */
   epochs_per_period: Long;
-
-  /** number of epochs that have passed while inflation is disabled */
   skipped_epochs: Long;
 }
 
@@ -56,16 +47,9 @@ export interface Params {
 
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
-  /** type of coin to mint */
   mint_denom: string;
-
-  /** variables to calculate exponential inflation */
   exponential_calculation?: ExponentialCalculationSDKType;
-
-  /** inflation distribution of the minted denom */
   inflation_distribution?: InflationDistributionSDKType;
-
-  /** parameter to enable inflation and halt increasing the skipped_epochs */
   enable_inflation: boolean;
 }
 

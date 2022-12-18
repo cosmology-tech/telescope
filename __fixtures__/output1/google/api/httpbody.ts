@@ -108,16 +108,8 @@ export interface HttpBody {
  * handled, all other features will continue to work unchanged.
  */
 export interface HttpBodySDKType {
-  /** The HTTP Content-Type header value specifying the content type of the body. */
   content_type: string;
-
-  /** The HTTP request/response body as raw binary. */
   data: Uint8Array;
-
-  /**
-   * Application specific response metadata. Must be set in the first response
-   * for streaming APIs.
-   */
   extensions: AnySDKType[];
 }
 

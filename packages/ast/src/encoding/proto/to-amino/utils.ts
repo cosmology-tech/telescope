@@ -3,6 +3,7 @@ import { ProtoType } from '@osmonauts/types';
 import { BILLION } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
+import { getInterfaceToAminoName } from '../implements';
 import { ToAminoJSONMethod } from './index';
 
 const notUndefinedSetValue = (sdkName: string, msgName: string, expr: t.Expression) => {
@@ -131,7 +132,7 @@ export const toAminoJSON = {
         return toAminoJSON.long(args);
     },
 
-    type(args: ToAminoJSONMethod) {
+    protoType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
 
@@ -163,6 +164,59 @@ export const toAminoJSON = {
                 )
             )
         );
+    },
+
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.identifier(interfaceFnName),
+                        [
+                            t.tsAsExpression(
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(propName)
+                                ),
+                                t.tsTypeReference(
+                                    t.identifier('Any')
+                                )
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    type(args: ToAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return toAminoJSON.anyType(args);
+        }
+        return toAminoJSON.protoType(args);
     },
 
     enum(args: ToAminoJSONMethod) {
@@ -425,7 +479,30 @@ export const arrayTypes = {
             ]
         );
     },
-    type(args: ToAminoJSONMethod) {
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
+        return t.conditionalExpression(
+            t.identifier('e'),
+            t.callExpression(
+                t.identifier(interfaceFnName),
+                [
+                    t.tsAsExpression(
+                        t.identifier('e'),
+                        t.tsTypeReference(
+                            t.identifier('Any')
+                        )
+                    )
+                ]
+            ),
+            t.identifier('undefined')
+        );
+    },
+    protoType(args: ToAminoJSONMethod) {
         const name = args.context.getTypeName(args.field);
         return t.conditionalExpression(
             t.identifier('e'),
@@ -440,6 +517,18 @@ export const arrayTypes = {
             ),
             t.identifier('undefined')
         );
+    },
+    type(args: ToAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return arrayTypes.anyType(args);
+        }
+        return arrayTypes.protoType(args);
     }
 }
 

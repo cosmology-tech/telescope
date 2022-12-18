@@ -17,10 +17,7 @@ export interface QueryChannelRequest {
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
 }
 
@@ -46,13 +43,8 @@ export interface QueryChannelResponse {
  * proof was retrieved.
  */
 export interface QueryChannelResponseSDKType {
-  /** channel associated with the request identifiers */
   channel?: ChannelSDKType;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -64,7 +56,6 @@ export interface QueryChannelsRequest {
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequestSDKType {
-  /** pagination request */
   pagination?: PageRequestSDKType;
 }
 
@@ -82,13 +73,8 @@ export interface QueryChannelsResponse {
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponseSDKType {
-  /** list of stored channels of the chain. */
   channels: IdentifiedChannelSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -109,10 +95,7 @@ export interface QueryConnectionChannelsRequest {
  * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsRequestSDKType {
-  /** connection unique identifier */
   connection: string;
-
-  /** pagination request */
   pagination?: PageRequestSDKType;
 }
 
@@ -136,13 +119,8 @@ export interface QueryConnectionChannelsResponse {
  * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsResponseSDKType {
-  /** list of channels associated with a connection. */
   channels: IdentifiedChannelSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -163,10 +141,7 @@ export interface QueryChannelClientStateRequest {
  * RPC method
  */
 export interface QueryChannelClientStateRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
 }
 
@@ -190,13 +165,8 @@ export interface QueryChannelClientStateResponse {
  * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelClientStateResponseSDKType {
-  /** client state associated with the channel */
   identified_client_state?: IdentifiedClientStateSDKType;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -223,16 +193,9 @@ export interface QueryChannelConsensusStateRequest {
  * Query/ConsensusState RPC method
  */
 export interface QueryChannelConsensusStateRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** revision number of the consensus state */
   revision_number: Long;
-
-  /** revision height of the consensus state */
   revision_height: Long;
 }
 
@@ -259,16 +222,9 @@ export interface QueryChannelConsensusStateResponse {
  * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelConsensusStateResponseSDKType {
-  /** consensus state associated with the channel */
   consensus_state?: AnySDKType;
-
-  /** client ID associated with the consensus state */
   client_id: string;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -292,13 +248,8 @@ export interface QueryPacketCommitmentRequest {
  * Query/PacketCommitment RPC method
  */
 export interface QueryPacketCommitmentRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** packet sequence */
   sequence: Long;
 }
 
@@ -324,13 +275,8 @@ export interface QueryPacketCommitmentResponse {
  * retrieved
  */
 export interface QueryPacketCommitmentResponseSDKType {
-  /** packet associated with the request fields */
   commitment: Uint8Array;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -354,13 +300,8 @@ export interface QueryPacketCommitmentsRequest {
  * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** pagination request */
   pagination?: PageRequestSDKType;
 }
 
@@ -384,11 +325,7 @@ export interface QueryPacketCommitmentsResponse {
  */
 export interface QueryPacketCommitmentsResponseSDKType {
   commitments: PacketStateSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -412,13 +349,8 @@ export interface QueryPacketReceiptRequest {
  * Query/PacketReceipt RPC method
  */
 export interface QueryPacketReceiptRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** packet sequence */
   sequence: Long;
 }
 
@@ -444,13 +376,8 @@ export interface QueryPacketReceiptResponse {
  * retrieved
  */
 export interface QueryPacketReceiptResponseSDKType {
-  /** success flag for if receipt exists */
   received: boolean;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -474,13 +401,8 @@ export interface QueryPacketAcknowledgementRequest {
  * Query/PacketAcknowledgement RPC method
  */
 export interface QueryPacketAcknowledgementRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** packet sequence */
   sequence: Long;
 }
 
@@ -506,13 +428,8 @@ export interface QueryPacketAcknowledgementResponse {
  * proof was retrieved
  */
 export interface QueryPacketAcknowledgementResponseSDKType {
-  /** packet associated with the request fields */
   acknowledgement: Uint8Array;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 
@@ -539,16 +456,9 @@ export interface QueryPacketAcknowledgementsRequest {
  * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketAcknowledgementsRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** pagination request */
   pagination?: PageRequestSDKType;
-
-  /** list of packet sequences */
   packet_commitment_sequences: Long[];
 }
 
@@ -572,11 +482,7 @@ export interface QueryPacketAcknowledgementsResponse {
  */
 export interface QueryPacketAcknowledgementsResponseSDKType {
   acknowledgements: PacketStateSDKType[];
-
-  /** pagination response */
   pagination?: PageResponseSDKType;
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -600,13 +506,8 @@ export interface QueryUnreceivedPacketsRequest {
  * Query/UnreceivedPackets RPC method
  */
 export interface QueryUnreceivedPacketsRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** list of packet sequences */
   packet_commitment_sequences: Long[];
 }
 
@@ -627,10 +528,7 @@ export interface QueryUnreceivedPacketsResponse {
  * Query/UnreceivedPacketCommitments RPC method
  */
 export interface QueryUnreceivedPacketsResponseSDKType {
-  /** list of unreceived packet sequences */
   sequences: Long[];
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -654,13 +552,8 @@ export interface QueryUnreceivedAcksRequest {
  * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
-
-  /** list of acknowledgement sequences */
   packet_ack_sequences: Long[];
 }
 
@@ -681,10 +574,7 @@ export interface QueryUnreceivedAcksResponse {
  * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksResponseSDKType {
-  /** list of unreceived acknowledgement sequences */
   sequences: Long[];
-
-  /** query block height */
   height?: HeightSDKType;
 }
 
@@ -705,10 +595,7 @@ export interface QueryNextSequenceReceiveRequest {
  * Query/QueryNextSequenceReceiveRequest RPC method
  */
 export interface QueryNextSequenceReceiveRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** channel unique identifier */
   channel_id: string;
 }
 
@@ -732,13 +619,8 @@ export interface QueryNextSequenceReceiveResponse {
  * Query/QueryNextSequenceReceiveResponse RPC method
  */
 export interface QueryNextSequenceReceiveResponseSDKType {
-  /** next sequence receive number */
   next_sequence_receive: Long;
-
-  /** merkle proof of existence */
   proof: Uint8Array;
-
-  /** height at which the proof was retrieved */
   proof_height?: HeightSDKType;
 }
 

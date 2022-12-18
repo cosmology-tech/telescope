@@ -342,6 +342,13 @@ const result = await osmosis.gamm.v1beta1.numPools(request);
 const request: QueryTotalLiquidityRequest;
 const result = await osmosis.gamm.v1beta1.totalLiquidity(request);
 
+/**
+ * PoolsWithFilter allows you to query specific pools with requested
+ * parameters
+ */
+const request: QueryPoolsWithFilterRequest;
+const result = await osmosis.gamm.v1beta1.poolsWithFilter(request);
+
 /** Per Pool gRPC Endpoints */
 const request: QueryPoolRequest;
 const result = await osmosis.gamm.v1beta1.pool(request);
@@ -353,6 +360,21 @@ const result = await osmosis.gamm.v1beta1.pool(request);
  */
 const request: QueryPoolTypeRequest;
 const result = await osmosis.gamm.v1beta1.poolType(request);
+
+/**
+ * Simulates joining pool without a swap. Returns the amount of shares you'd
+ * get and tokens needed to provide
+ */
+const request: QueryCalcJoinPoolNoSwapSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares(request);
+
+/** CalcJoinPoolShares */
+const request: QueryCalcJoinPoolSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcJoinPoolShares(request);
+
+/** CalcExitPoolCoinsFromShares */
+const request: QueryCalcExitPoolCoinsFromSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares(request);
 
 /** PoolParams */
 const request: QueryPoolParamsRequest;
@@ -381,16 +403,23 @@ const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountIn(request);
 const request: QuerySwapExactAmountOutRequest;
 const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountOut(request);
 
+/**
+ * SpotPrice defines a gRPC query handler that returns the spot price given
+ * a base denomination and a quote denomination.
+ */
+const request: QuerySpotPriceRequest;
+const result = await osmosis.gamm.v2.spotPrice(request);
+
+/**
+ * Params defines a gRPC query method that returns the ibc-rate-limit module's
+ * parameters.
+ */
+const request: QueryParamsRequest;
+const result = await osmosis.ibcratelimit.v1beta1.params(request);
+
 /** ModuleToDistributeCoins returns coins that are going to be distributed */
 const request: ModuleToDistributeCoinsRequest;
 const result = await osmosis.incentives.moduleToDistributeCoins(request);
-
-/**
- * ModuleDistributedCoins returns coins that are distributed by the module so
- * far
- */
-const request: ModuleDistributedCoinsRequest;
-const result = await osmosis.incentives.moduleDistributedCoins(request);
 
 /** GaugeByID returns gauges by their respective ID */
 const request: GaugeByIDRequest;
@@ -504,6 +533,10 @@ const result = await osmosis.lockup.accountLockedLongerDurationNotUnlockingOnly(
 const request: AccountLockedLongerDurationDenomRequest;
 const result = await osmosis.lockup.accountLockedLongerDurationDenom(request);
 
+/** Params returns lockup params. */
+const request: QueryParamsRequest;
+const result = await osmosis.lockup.params(request);
+
 /** Params returns the total set of minting parameters. */
 const request: QueryParamsRequest;
 const result = await osmosis.mint.v1beta1.params(request);
@@ -536,18 +569,6 @@ const result = await osmosis.poolincentives.v1beta1.incentivizedPools(request);
 const request: QueryExternalIncentiveGaugesRequest;
 const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(request);
 
-/** Returns list of Sales ordered by the creation time */
-const request: QuerySales;
-const result = await osmosis.streamswap.v1.sales(request);
-
-/** Returns the specific Sale object */
-const request: QuerySale;
-const result = await osmosis.streamswap.v1.sale(request);
-
-/** UserPosition */
-const request: QueryUserPosition;
-const result = await osmosis.streamswap.v1.userPosition(request);
-
 /** Params returns the total set of superfluid parameters. */
 const request: QueryParamsRequest;
 const result = await osmosis.superfluid.params(request);
@@ -574,6 +595,10 @@ const result = await osmosis.superfluid.allIntermediaryAccounts(request);
 /** Returns intermediary account connected to a superfluid staked lock by id */
 const request: ConnectedIntermediaryAccountRequest;
 const result = await osmosis.superfluid.connectedIntermediaryAccount(request);
+
+/** Returns the amount of delegations of specific denom for all validators */
+const request: QueryTotalDelegationByValidatorForDenomRequest;
+const result = await osmosis.superfluid.totalDelegationByValidatorForDenom(request);
 
 /**
  * Returns the total amount of osmo superfluidly staked.
@@ -615,6 +640,10 @@ const result = await osmosis.superfluid.estimateSuperfluidDelegatedAmountByValid
 /** Returns the specified delegations for a specific delegator */
 const request: QueryTotalDelegationByDelegatorRequest;
 const result = await osmosis.superfluid.totalDelegationByDelegator(request);
+
+/** Returns a list of whitelisted pool ids to unpool. */
+const request: QueryUnpoolWhitelistRequest;
+const result = await osmosis.superfluid.unpoolWhitelist(request);
 
 /**
  * Params defines a gRPC query method that returns the tokenfactory module's
@@ -684,16 +713,21 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.gamm.v1beta1.pools()\` RPC](#osmosisgammv1beta1pools-rpc)
 [\`osmosis.gamm.v1beta1.numPools()\` RPC](#osmosisgammv1beta1numpools-rpc)
 [\`osmosis.gamm.v1beta1.totalLiquidity()\` RPC](#osmosisgammv1beta1totalliquidity-rpc)
+[\`osmosis.gamm.v1beta1.poolsWithFilter()\` RPC](#osmosisgammv1beta1poolswithfilter-rpc)
 [\`osmosis.gamm.v1beta1.pool()\` RPC](#osmosisgammv1beta1pool-rpc)
 [\`osmosis.gamm.v1beta1.poolType()\` RPC](#osmosisgammv1beta1pooltype-rpc)
+[\`osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares()\` RPC](#osmosisgammv1beta1calcjoinpoolnoswapshares-rpc)
+[\`osmosis.gamm.v1beta1.calcJoinPoolShares()\` RPC](#osmosisgammv1beta1calcjoinpoolshares-rpc)
+[\`osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares()\` RPC](#osmosisgammv1beta1calcexitpoolcoinsfromshares-rpc)
 [\`osmosis.gamm.v1beta1.poolParams()\` RPC](#osmosisgammv1beta1poolparams-rpc)
 [\`osmosis.gamm.v1beta1.totalPoolLiquidity()\` RPC](#osmosisgammv1beta1totalpoolliquidity-rpc)
 [\`osmosis.gamm.v1beta1.totalShares()\` RPC](#osmosisgammv1beta1totalshares-rpc)
 [\`osmosis.gamm.v1beta1.spotPrice()\` RPC](#osmosisgammv1beta1spotprice-rpc)
 [\`osmosis.gamm.v1beta1.estimateSwapExactAmountIn()\` RPC](#osmosisgammv1beta1estimateswapexactamountin-rpc)
 [\`osmosis.gamm.v1beta1.estimateSwapExactAmountOut()\` RPC](#osmosisgammv1beta1estimateswapexactamountout-rpc)
+[\`osmosis.gamm.v2.spotPrice()\` RPC](#osmosisgammv2spotprice-rpc)
+[\`osmosis.ibcratelimit.v1beta1.params()\` RPC](#osmosisibcratelimitv1beta1params-rpc)
 [\`osmosis.incentives.moduleToDistributeCoins()\` RPC](#osmosisincentivesmoduletodistributecoins-rpc)
-[\`osmosis.incentives.moduleDistributedCoins()\` RPC](#osmosisincentivesmoduledistributedcoins-rpc)
 [\`osmosis.incentives.gaugeByID()\` RPC](#osmosisincentivesgaugebyid-rpc)
 [\`osmosis.incentives.gauges()\` RPC](#osmosisincentivesgauges-rpc)
 [\`osmosis.incentives.activeGauges()\` RPC](#osmosisincentivesactivegauges-rpc)
@@ -718,6 +752,7 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.lockup.accountLockedDuration()\` RPC](#osmosislockupaccountlockedduration-rpc)
 [\`osmosis.lockup.accountLockedLongerDurationNotUnlockingOnly()\` RPC](#osmosislockupaccountlockedlongerdurationnotunlockingonly-rpc)
 [\`osmosis.lockup.accountLockedLongerDurationDenom()\` RPC](#osmosislockupaccountlockedlongerdurationdenom-rpc)
+[\`osmosis.lockup.params()\` RPC](#osmosislockupparams-rpc)
 [\`osmosis.mint.v1beta1.params()\` RPC](#osmosismintv1beta1params-rpc)
 [\`osmosis.mint.v1beta1.epochProvisions()\` RPC](#osmosismintv1beta1epochprovisions-rpc)
 [\`osmosis.poolincentives.v1beta1.gaugeIds()\` RPC](#osmosispoolincentivesv1beta1gaugeids-rpc)
@@ -726,15 +761,13 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.poolincentives.v1beta1.lockableDurations()\` RPC](#osmosispoolincentivesv1beta1lockabledurations-rpc)
 [\`osmosis.poolincentives.v1beta1.incentivizedPools()\` RPC](#osmosispoolincentivesv1beta1incentivizedpools-rpc)
 [\`osmosis.poolincentives.v1beta1.externalIncentiveGauges()\` RPC](#osmosispoolincentivesv1beta1externalincentivegauges-rpc)
-[\`osmosis.streamswap.v1.sales()\` RPC](#osmosisstreamswapv1sales-rpc)
-[\`osmosis.streamswap.v1.sale()\` RPC](#osmosisstreamswapv1sale-rpc)
-[\`osmosis.streamswap.v1.userPosition()\` RPC](#osmosisstreamswapv1userposition-rpc)
 [\`osmosis.superfluid.params()\` RPC](#osmosissuperfluidparams-rpc)
 [\`osmosis.superfluid.assetType()\` RPC](#osmosissuperfluidassettype-rpc)
 [\`osmosis.superfluid.allAssets()\` RPC](#osmosissuperfluidallassets-rpc)
 [\`osmosis.superfluid.assetMultiplier()\` RPC](#osmosissuperfluidassetmultiplier-rpc)
 [\`osmosis.superfluid.allIntermediaryAccounts()\` RPC](#osmosissuperfluidallintermediaryaccounts-rpc)
 [\`osmosis.superfluid.connectedIntermediaryAccount()\` RPC](#osmosissuperfluidconnectedintermediaryaccount-rpc)
+[\`osmosis.superfluid.totalDelegationByValidatorForDenom()\` RPC](#osmosissuperfluidtotaldelegationbyvalidatorfordenom-rpc)
 [\`osmosis.superfluid.totalSuperfluidDelegations()\` RPC](#osmosissuperfluidtotalsuperfluiddelegations-rpc)
 [\`osmosis.superfluid.superfluidDelegationAmount()\` RPC](#osmosissuperfluidsuperfluiddelegationamount-rpc)
 [\`osmosis.superfluid.superfluidDelegationsByDelegator()\` RPC](#osmosissuperfluidsuperfluiddelegationsbydelegator-rpc)
@@ -742,6 +775,7 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.superfluid.superfluidDelegationsByValidatorDenom()\` RPC](#osmosissuperfluidsuperfluiddelegationsbyvalidatordenom-rpc)
 [\`osmosis.superfluid.estimateSuperfluidDelegatedAmountByValidatorDenom()\` RPC](#osmosissuperfluidestimatesuperfluiddelegatedamountbyvalidatordenom-rpc)
 [\`osmosis.superfluid.totalDelegationByDelegator()\` RPC](#osmosissuperfluidtotaldelegationbydelegator-rpc)
+[\`osmosis.superfluid.unpoolWhitelist()\` RPC](#osmosissuperfluidunpoolwhitelist-rpc)
 [\`osmosis.tokenfactory.v1beta1.params()\` RPC](#osmosistokenfactoryv1beta1params-rpc)
 [\`osmosis.tokenfactory.v1beta1.denomAuthorityMetadata()\` RPC](#osmosistokenfactoryv1beta1denomauthoritymetadata-rpc)
 [\`osmosis.tokenfactory.v1beta1.denomsFromCreator()\` RPC](#osmosistokenfactoryv1beta1denomsfromcreator-rpc)
@@ -855,6 +889,19 @@ const request: QueryTotalLiquidityRequest;
 const result = await osmosis.gamm.v1beta1.totalLiquidity(request);
 \`\`\`
 
+##### \`osmosis.gamm.v1beta1.poolsWithFilter()\` RPC
+        
+PoolsWithFilter
+
+\`\`\`js
+/**
+ * PoolsWithFilter allows you to query specific pools with requested
+ * parameters
+ */
+const request: QueryPoolsWithFilterRequest;
+const result = await osmosis.gamm.v1beta1.poolsWithFilter(request);
+\`\`\`
+
 ##### \`osmosis.gamm.v1beta1.pool()\` RPC
         
 Pool
@@ -877,6 +924,39 @@ PoolType
  */
 const request: QueryPoolTypeRequest;
 const result = await osmosis.gamm.v1beta1.poolType(request);
+\`\`\`
+
+##### \`osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares()\` RPC
+        
+CalcJoinPoolNoSwapShares
+
+\`\`\`js
+/**
+ * Simulates joining pool without a swap. Returns the amount of shares you'd
+ * get and tokens needed to provide
+ */
+const request: QueryCalcJoinPoolNoSwapSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcJoinPoolNoSwapShares(request);
+\`\`\`
+
+##### \`osmosis.gamm.v1beta1.calcJoinPoolShares()\` RPC
+        
+CalcJoinPoolShares
+
+\`\`\`js
+/** CalcJoinPoolShares */
+const request: QueryCalcJoinPoolSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcJoinPoolShares(request);
+\`\`\`
+
+##### \`osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares()\` RPC
+        
+CalcExitPoolCoinsFromShares
+
+\`\`\`js
+/** CalcExitPoolCoinsFromShares */
+const request: QueryCalcExitPoolCoinsFromSharesRequest;
+const result = await osmosis.gamm.v1beta1.calcExitPoolCoinsFromShares(request);
 \`\`\`
 
 ##### \`osmosis.gamm.v1beta1.poolParams()\` RPC
@@ -942,6 +1022,32 @@ const request: QuerySwapExactAmountOutRequest;
 const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountOut(request);
 \`\`\`
 
+##### \`osmosis.gamm.v2.spotPrice()\` RPC
+        
+SpotPrice
+
+\`\`\`js
+/**
+ * SpotPrice defines a gRPC query handler that returns the spot price given
+ * a base denomination and a quote denomination.
+ */
+const request: QuerySpotPriceRequest;
+const result = await osmosis.gamm.v2.spotPrice(request);
+\`\`\`
+
+##### \`osmosis.ibcratelimit.v1beta1.params()\` RPC
+        
+Params
+
+\`\`\`js
+/**
+ * Params defines a gRPC query method that returns the ibc-rate-limit module's
+ * parameters.
+ */
+const request: QueryParamsRequest;
+const result = await osmosis.ibcratelimit.v1beta1.params(request);
+\`\`\`
+
 ##### \`osmosis.incentives.moduleToDistributeCoins()\` RPC
         
 ModuleToDistributeCoins
@@ -950,19 +1056,6 @@ ModuleToDistributeCoins
 /** ModuleToDistributeCoins returns coins that are going to be distributed */
 const request: ModuleToDistributeCoinsRequest;
 const result = await osmosis.incentives.moduleToDistributeCoins(request);
-\`\`\`
-
-##### \`osmosis.incentives.moduleDistributedCoins()\` RPC
-        
-ModuleDistributedCoins
-
-\`\`\`js
-/**
- * ModuleDistributedCoins returns coins that are distributed by the module so
- * far
- */
-const request: ModuleDistributedCoinsRequest;
-const result = await osmosis.incentives.moduleDistributedCoins(request);
 \`\`\`
 
 ##### \`osmosis.incentives.gaugeByID()\` RPC
@@ -1221,6 +1314,16 @@ const request: AccountLockedLongerDurationDenomRequest;
 const result = await osmosis.lockup.accountLockedLongerDurationDenom(request);
 \`\`\`
 
+##### \`osmosis.lockup.params()\` RPC
+        
+Params
+
+\`\`\`js
+/** Params returns lockup params. */
+const request: QueryParamsRequest;
+const result = await osmosis.lockup.params(request);
+\`\`\`
+
 ##### \`osmosis.mint.v1beta1.params()\` RPC
         
 Params
@@ -1301,36 +1404,6 @@ const request: QueryExternalIncentiveGaugesRequest;
 const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(request);
 \`\`\`
 
-##### \`osmosis.streamswap.v1.sales()\` RPC
-        
-Sales
-
-\`\`\`js
-/** Returns list of Sales ordered by the creation time */
-const request: QuerySales;
-const result = await osmosis.streamswap.v1.sales(request);
-\`\`\`
-
-##### \`osmosis.streamswap.v1.sale()\` RPC
-        
-Sale
-
-\`\`\`js
-/** Returns the specific Sale object */
-const request: QuerySale;
-const result = await osmosis.streamswap.v1.sale(request);
-\`\`\`
-
-##### \`osmosis.streamswap.v1.userPosition()\` RPC
-        
-UserPosition
-
-\`\`\`js
-/** UserPosition */
-const request: QueryUserPosition;
-const result = await osmosis.streamswap.v1.userPosition(request);
-\`\`\`
-
 ##### \`osmosis.superfluid.params()\` RPC
         
 Params
@@ -1392,6 +1465,16 @@ ConnectedIntermediaryAccount
 /** Returns intermediary account connected to a superfluid staked lock by id */
 const request: ConnectedIntermediaryAccountRequest;
 const result = await osmosis.superfluid.connectedIntermediaryAccount(request);
+\`\`\`
+
+##### \`osmosis.superfluid.totalDelegationByValidatorForDenom()\` RPC
+        
+TotalDelegationByValidatorForDenom
+
+\`\`\`js
+/** Returns the amount of delegations of specific denom for all validators */
+const request: QueryTotalDelegationByValidatorForDenomRequest;
+const result = await osmosis.superfluid.totalDelegationByValidatorForDenom(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.totalSuperfluidDelegations()\` RPC
@@ -1475,6 +1558,16 @@ TotalDelegationByDelegator
 /** Returns the specified delegations for a specific delegator */
 const request: QueryTotalDelegationByDelegatorRequest;
 const result = await osmosis.superfluid.totalDelegationByDelegator(request);
+\`\`\`
+
+##### \`osmosis.superfluid.unpoolWhitelist()\` RPC
+        
+UnpoolWhitelist
+
+\`\`\`js
+/** Returns a list of whitelisted pool ids to unpool. */
+const request: QueryUnpoolWhitelistRequest;
+const result = await osmosis.superfluid.unpoolWhitelist(request);
 \`\`\`
 
 ##### \`osmosis.tokenfactory.v1beta1.params()\` RPC

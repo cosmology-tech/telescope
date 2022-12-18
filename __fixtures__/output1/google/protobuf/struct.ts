@@ -73,7 +73,6 @@ export interface Struct {
  * The JSON representation for `Struct` is JSON object.
  */
 export interface StructSDKType {
-  /** Unordered map of dynamically typed values. */
   fields?: {
     [key: string]: ValueSDKType;
   };
@@ -116,22 +115,11 @@ export interface Value {
  * The JSON representation for `Value` is JSON value.
  */
 export interface ValueSDKType {
-  /** Represents a null value. */
   null_value?: NullValue;
-
-  /** Represents a double value. */
   number_value?: number;
-
-  /** Represents a string value. */
   string_value?: string;
-
-  /** Represents a boolean value. */
   bool_value?: boolean;
-
-  /** Represents a structured value. */
   struct_value?: StructSDKType;
-
-  /** Represents a repeated `Value`. */
   list_value?: ListValueSDKType;
 }
 
@@ -151,7 +139,6 @@ export interface ListValue {
  * The JSON representation for `ListValue` is JSON array.
  */
 export interface ListValueSDKType {
-  /** Repeated field of dynamically typed values. */
   values: ValueSDKType[];
 }
 

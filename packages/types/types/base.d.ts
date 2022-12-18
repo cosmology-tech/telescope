@@ -22,6 +22,7 @@ export interface ProtoType {
         [key: string]: any;
         deprecated?: boolean;
         "(cosmos_proto.implements_interface)"?: string;
+        "(amino.name)"?: string;
     };
     fields: {
         [key: string]: ProtoField;
@@ -106,7 +107,7 @@ export interface ProtoRef {
     absolute: string;
     filename: string;
     proto: ProtoRoot;
-    traversed?: ProtoRoot;
+    traversed?: TraversedProtoRoot;
 }
 export interface ProtoRoot {
     package: string;
@@ -114,3 +115,40 @@ export interface ProtoRoot {
     importNames?: Record<string, Record<string, string>>;
     root: any;
 }
+export interface TraverseRecord {
+    filename: string;
+    implementsType: string;
+    msgName: string;
+}
+export interface TraverseLocalSymbol {
+    type: 'import' | 'export' | 'importFromImplements';
+    symbolName: string;
+    readAs: string;
+    source: string;
+    implementsType?: string;
+}
+export declare type TraverseImportNames = Record<string, Record<string, string>>;
+export declare type TraverseImport = Record<string, string[]>;
+export declare type TraverseAccept = Record<string, string[]>;
+export declare type TraverseImplement = Record<string, string[]>;
+export declare type TraverseExport = Record<string, boolean>;
+export interface TypeUrlRef {
+    typeUrl: string;
+    aminoType: string;
+    type: string;
+    importAs: string;
+}
+export interface TraverseTypeUrlRef {
+    ref: string;
+    pkg: string;
+    types: TypeUrlRef[];
+}
+export declare type TraversedProtoRoot = ProtoRoot & {
+    parsedImports: TraverseImport;
+    parsedExports: TraverseExport;
+    acceptsInterface: TraverseAccept;
+    implementsInterface: TraverseImplement;
+    importNames: TraverseImportNames | null;
+    symbols: TraverseLocalSymbol | null;
+};
+export declare type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>;

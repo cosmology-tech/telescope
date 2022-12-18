@@ -43,11 +43,12 @@ import * as _IbcCorePortV1Queryrpc from "./ibc/core/port/v1/query.rpc.Query";
 import * as _OsmosisClaimV1beta1Queryrpc from "./osmosis/claim/v1beta1/query.rpc.Query";
 import * as _OsmosisEpochsQueryrpc from "./osmosis/epochs/query.rpc.Query";
 import * as _OsmosisGammV1beta1Queryrpc from "./osmosis/gamm/v1beta1/query.rpc.Query";
+import * as _OsmosisGammV2Queryrpc from "./osmosis/gamm/v2/query.rpc.Query";
+import * as _OsmosisIbcratelimitV1beta1Queryrpc from "./osmosis/ibc-rate-limit/v1beta1/query.rpc.Query";
 import * as _OsmosisIncentivesQueryrpc from "./osmosis/incentives/query.rpc.Query";
 import * as _OsmosisLockupQueryrpc from "./osmosis/lockup/query.rpc.Query";
 import * as _OsmosisMintV1beta1Queryrpc from "./osmosis/mint/v1beta1/query.rpc.Query";
 import * as _OsmosisPoolincentivesV1beta1Queryrpc from "./osmosis/pool-incentives/v1beta1/query.rpc.Query";
-import * as _OsmosisStreamswapV1Queryrpc from "./osmosis/streamswap/v1/query.rpc.Query";
 import * as _OsmosisSuperfluidQueryrpc from "./osmosis/superfluid/query.rpc.Query";
 import * as _OsmosisTokenfactoryV1beta1Queryrpc from "./osmosis/tokenfactory/v1beta1/query.rpc.Query";
 import * as _OsmosisTwapV1beta1Queryrpc from "./osmosis/twap/v1beta1/query.rpc.Query";
@@ -200,7 +201,11 @@ export const createRpcQueryHooks = ({
         v1beta1: _OsmosisEpochsQueryrpc.createRpcQueryHooks(rpc)
       },
       gamm: {
-        v1beta1: _OsmosisGammV1beta1Queryrpc.createRpcQueryHooks(rpc)
+        v1beta1: _OsmosisGammV1beta1Queryrpc.createRpcQueryHooks(rpc),
+        v2: _OsmosisGammV2Queryrpc.createRpcQueryHooks(rpc)
+      },
+      ibcratelimit: {
+        v1beta1: _OsmosisIbcratelimitV1beta1Queryrpc.createRpcQueryHooks(rpc)
       },
       incentives: _OsmosisIncentivesQueryrpc.createRpcQueryHooks(rpc),
       lockup: _OsmosisLockupQueryrpc.createRpcQueryHooks(rpc),
@@ -209,9 +214,6 @@ export const createRpcQueryHooks = ({
       },
       poolincentives: {
         v1beta1: _OsmosisPoolincentivesV1beta1Queryrpc.createRpcQueryHooks(rpc)
-      },
-      streamswap: {
-        v1: _OsmosisStreamswapV1Queryrpc.createRpcQueryHooks(rpc)
       },
       superfluid: _OsmosisSuperfluidQueryrpc.createRpcQueryHooks(rpc),
       tokenfactory: {

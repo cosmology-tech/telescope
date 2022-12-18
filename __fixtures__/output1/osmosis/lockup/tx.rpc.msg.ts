@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType } from "./tx";
+import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
 
 /** Msg defines the Msg service. */
 export interface Msg {
@@ -18,6 +18,7 @@ export interface Msg {
 
   /** MsgEditLockup edits the existing lockups by lock ID */
   extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse>;
+  forceUnlock(request: MsgForceUnlock): Promise<MsgForceUnlockResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -28,6 +29,7 @@ export class MsgClientImpl implements Msg {
     this.beginUnlockingAll = this.beginUnlockingAll.bind(this);
     this.beginUnlocking = this.beginUnlocking.bind(this);
     this.extendLockup = this.extendLockup.bind(this);
+    this.forceUnlock = this.forceUnlock.bind(this);
   }
 
   lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse> {
@@ -52,6 +54,12 @@ export class MsgClientImpl implements Msg {
     const data = MsgExtendLockup.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Msg", "ExtendLockup", data);
     return promise.then(data => MsgExtendLockupResponse.decode(new _m0.Reader(data)));
+  }
+
+  forceUnlock(request: MsgForceUnlock): Promise<MsgForceUnlockResponse> {
+    const data = MsgForceUnlock.encode(request).finish();
+    const promise = this.rpc.request("osmosis.lockup.Msg", "ForceUnlock", data);
+    return promise.then(data => MsgForceUnlockResponse.decode(new _m0.Reader(data)));
   }
 
 }

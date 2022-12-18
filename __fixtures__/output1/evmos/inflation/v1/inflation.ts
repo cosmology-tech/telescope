@@ -41,22 +41,8 @@ export interface InflationDistribution {
  * 0.5333333         = 40%           / (1 - 25%)
  */
 export interface InflationDistributionSDKType {
-  /**
-   * staking_rewards defines the proportion of the minted minted_denom that is
-   * to be allocated as staking rewards
-   */
   staking_rewards: string;
-
-  /**
-   * usage_incentives defines the proportion of the minted minted_denom that is
-   * to be allocated to the incentives module address
-   */
   usage_incentives: string;
-
-  /**
-   * community_pool defines the proportion of the minted minted_denom that is to
-   * be allocated to the community pool
-   */
   community_pool: string;
 }
 
@@ -92,19 +78,10 @@ export interface ExponentialCalculation {
  * (max_variance / bonding_target))
  */
 export interface ExponentialCalculationSDKType {
-  /** initial value */
   a: string;
-
-  /** reduction factor */
   r: string;
-
-  /** long term inflation */
   c: string;
-
-  /** bonding target */
   bonding_target: string;
-
-  /** max variance */
   max_variance: string;
 }
 

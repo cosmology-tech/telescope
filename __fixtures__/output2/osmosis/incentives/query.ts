@@ -12,11 +12,6 @@ export interface ModuleToDistributeCoinsResponse {
   /** Coins that have yet to be distributed */
   coins: Coin[];
 }
-export interface ModuleDistributedCoinsRequest {}
-export interface ModuleDistributedCoinsResponse {
-  /** Coins that have been distributed already */
-  coins: Coin[];
-}
 export interface GaugeByIDRequest {
   /** Gague ID being queried */
   id: Long;
@@ -212,112 +207,6 @@ export const ModuleToDistributeCoinsResponse = {
 
   fromPartial(object: DeepPartial<ModuleToDistributeCoinsResponse>): ModuleToDistributeCoinsResponse {
     const message = createBaseModuleToDistributeCoinsResponse();
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  }
-
-};
-
-function createBaseModuleDistributedCoinsRequest(): ModuleDistributedCoinsRequest {
-  return {};
-}
-
-export const ModuleDistributedCoinsRequest = {
-  encode(_: ModuleDistributedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDistributedCoinsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseModuleDistributedCoinsRequest();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(_: any): ModuleDistributedCoinsRequest {
-    return {};
-  },
-
-  toJSON(_: ModuleDistributedCoinsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromPartial(_: DeepPartial<ModuleDistributedCoinsRequest>): ModuleDistributedCoinsRequest {
-    const message = createBaseModuleDistributedCoinsRequest();
-    return message;
-  }
-
-};
-
-function createBaseModuleDistributedCoinsResponse(): ModuleDistributedCoinsResponse {
-  return {
-    coins: []
-  };
-}
-
-export const ModuleDistributedCoinsResponse = {
-  encode(message: ModuleDistributedCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.coins) {
-      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDistributedCoinsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseModuleDistributedCoinsResponse();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ModuleDistributedCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
-    };
-  },
-
-  toJSON(message: ModuleDistributedCoinsResponse): unknown {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromPartial(object: DeepPartial<ModuleDistributedCoinsResponse>): ModuleDistributedCoinsResponse {
-    const message = createBaseModuleDistributedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }
@@ -1396,12 +1285,6 @@ export interface Query {
   /** ModuleToDistributeCoins returns coins that are going to be distributed */
   ModuleToDistributeCoins(request?: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponse>;
 
-  /**
-   * ModuleDistributedCoins returns coins that are distributed by the module so
-   * far
-   */
-  ModuleDistributedCoins(request?: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponse>;
-
   /** GaugeByID returns gauges by their respective ID */
   GaugeByID(request: GaugeByIDRequest): Promise<GaugeByIDResponse>;
 
@@ -1442,7 +1325,6 @@ export class QueryClientImpl implements Query {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.ModuleToDistributeCoins = this.ModuleToDistributeCoins.bind(this);
-    this.ModuleDistributedCoins = this.ModuleDistributedCoins.bind(this);
     this.GaugeByID = this.GaugeByID.bind(this);
     this.Gauges = this.Gauges.bind(this);
     this.ActiveGauges = this.ActiveGauges.bind(this);
@@ -1457,12 +1339,6 @@ export class QueryClientImpl implements Query {
     const data = ModuleToDistributeCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "ModuleToDistributeCoins", data);
     return promise.then(data => ModuleToDistributeCoinsResponse.decode(new _m0.Reader(data)));
-  }
-
-  ModuleDistributedCoins(request: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponse> {
-    const data = ModuleDistributedCoinsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.incentives.Query", "ModuleDistributedCoins", data);
-    return promise.then(data => ModuleDistributedCoinsResponse.decode(new _m0.Reader(data)));
   }
 
   GaugeByID(request: GaugeByIDRequest): Promise<GaugeByIDResponse> {

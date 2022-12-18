@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField } from '@osmonauts/types';
+import { ProtoField, TelescopeLogLevel } from '@osmonauts/types';
 import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -43,7 +43,9 @@ export const getFieldTypeReference = (
 
         // return on scalar
         typ = getTSTypeForProto(context, field);
-        return typ;
+        return {
+            ast: typ
+        };
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
         typ = getTSTypeFromGoogleType(context, field.type, options);
@@ -53,12 +55,49 @@ export const getFieldTypeReference = (
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
-    if (
-        field.parsedType?.type === 'Type' &&
+    const implementsAcceptsAny = context.pluginValue('interfaces.enabled');
+    const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
+    const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
+    const isArray = field.rule === 'repeated';
+    const isBaseType = !options.typeNamePrefix && !options.typeNameSuffix;
+    let symbols = null;
+    if (implementsAcceptsAny && lookupInterface) {
+        symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
+        if (!symbols.length && context.options.logLevel >= TelescopeLogLevel.Warn) {
+            console.warn(`[WARN] ${lookupInterface} is accepted but not implemented`);
+        }
+    }
+
+    // cast Any types!
+    const isTypeCastable = isAnyType && lookupInterface && implementsAcceptsAny && symbols && isBaseType;
+    const isNonArrayNullableType = field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&
-        context.pluginValue('prototypes.allowUndefinedTypes')
-    ) {
-        // NOTE: unfortunately bc of defaults...
+        context.pluginValue('prototypes.allowUndefinedTypes');
+
+    if (isTypeCastable) {
+        const tp = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
+        tp.push(typ);
+
+        if (context.pluginValue('interfaces.useUnionTypes')) {
+            if (!isArray) {
+                tp.push(t.tsUndefinedKeyword())
+            }
+            ast = t.tsUnionType(tp)
+        } else {
+            // intersections
+            if (isArray) {
+                ast = t.tsIntersectionType(tp);
+            } else {
+                ast = t.tsUnionType(
+                    [
+                        t.tsIntersectionType(tp),
+                        t.tsUndefinedKeyword()
+                    ]
+                )
+            }
+        }
+    } else if (isNonArrayNullableType) {
+        // regular types!
         ast = t.tsUnionType(
             [
                 typ,
@@ -69,7 +108,7 @@ export const getFieldTypeReference = (
         ast = typ;
     }
 
-    return ast;
+    return { ast, isTypeCastableAnyType: isTypeCastable };
 }
 
 export const getFieldAminoTypeReference = (
@@ -243,6 +282,7 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (field.parsedType?.type === 'Enum') {
+        // @ts-ignore
         if (context.ref.proto?.syntax === 'proto2') {
             return t.numericLiteral(1);
         }

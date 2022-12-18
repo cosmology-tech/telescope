@@ -253,12 +253,6 @@ export interface ProposalSDKType {
   proposal_id: Long;
   content?: AnySDKType;
   status: ProposalStatus;
-
-  /**
-   * final_tally_result is the final tally result of the proposal. When
-   * querying a proposal via gRPC, this field is not populated until the
-   * proposal's voting period has ended.
-   */
   final_tally_result?: TallyResultSDKType;
   submit_time?: Date;
   deposit_end_time?: Date;
@@ -312,16 +306,8 @@ export interface VoteSDKType {
   proposal_id: Long;
   voter: string;
 
-  /**
-   * Deprecated: Prefer to use `options` instead. This field is set in queries
-   * if and only if `len(options) == 1` and that option has weight 1. In all
-   * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
-   */
-
   /** @deprecated */
   option: VoteOption;
-
-  /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOptionSDKType[];
 }
 
@@ -339,13 +325,7 @@ export interface DepositParams {
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
-  /** Minimum deposit for a proposal to enter voting period. */
   min_deposit: CoinSDKType[];
-
-  /**
-   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   *  months.
-   */
   max_deposit_period?: DurationSDKType;
 }
 
@@ -357,7 +337,6 @@ export interface VotingParams {
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
-  /** Length of the voting period. */
   voting_period?: DurationSDKType;
 }
 
@@ -381,19 +360,8 @@ export interface TallyParams {
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsSDKType {
-  /**
-   * Minimum percentage of total stake needed to vote for a result to be
-   *  considered valid.
-   */
   quorum: Uint8Array;
-
-  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
   threshold: Uint8Array;
-
-  /**
-   * Minimum value of Veto votes to Total votes ratio for proposal to be
-   *  vetoed. Default value: 1/3.
-   */
   veto_threshold: Uint8Array;
 }
 

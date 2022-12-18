@@ -35,7 +35,7 @@ service Msg {
 message MsgSubmitProposal {
   option (cosmos.msg.v1.signer) = "proposer";
 
-  repeated google.protobuf.Any messages             = 1;
+  repeated google.protobuf.Any messages             = 1 [(cosmos_proto.accepts_interface) = "ProposalContentI"]; 
   repeated cosmos.base.v1beta1.Coin initial_deposit = 2 [(gogoproto.nullable) = false];
   string                            proposer        = 3 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   // metadata is any arbitrary metadata attached to the proposal.
@@ -53,7 +53,7 @@ message MsgExecLegacyContent {
   option (cosmos.msg.v1.signer) = "authority";
 
   // content is the proposal's content.
-  google.protobuf.Any content = 1 [(cosmos_proto.accepts_interface) = "Content"];
+  google.protobuf.Any content = 1 [(cosmos_proto.accepts_interface) = "ProposalContentI"];
   // authority must be the gov module address.
   string authority = 2;
 }

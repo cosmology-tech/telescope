@@ -45,7 +45,7 @@ message WeightedVoteOption {
 // TextProposal defines a standard text proposal whose changes need to be
 // manually updated in case of approval.
 message TextProposal {
-  option (cosmos_proto.implements_interface) = "Content";
+  option (cosmos_proto.implements_interface) = "ProposalContentI";
 
   option (gogoproto.equal) = true;
 
@@ -70,7 +70,7 @@ message Proposal {
   option (gogoproto.equal) = true;
 
   uint64              proposal_id = 1;
-  google.protobuf.Any content     = 2 [(cosmos_proto.accepts_interface) = "Content"];
+  google.protobuf.Any content     = 2 [(cosmos_proto.accepts_interface) = "ProposalContentI"];
   ProposalStatus      status      = 3;
   // final_tally_result is the final tally result of the proposal. When
   // querying a proposal via gRPC, this field is not populated until the

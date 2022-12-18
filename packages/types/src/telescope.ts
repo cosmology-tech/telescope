@@ -20,6 +20,11 @@ interface TelescopeOpts {
 
     logLevel?: TelescopeLogLevel;
 
+    interfaces?: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    },
+
     prototypes?: {
         enabled?: boolean;
         parser?: {
@@ -43,6 +48,8 @@ interface TelescopeOpts {
 
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+
+        addTypeUrlToDecoders?: boolean;
 
         excluded?: {
             packages?: string[];
@@ -137,6 +144,11 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        }
     };
 }
 interface TelescopePackageOpts {
@@ -156,6 +168,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     useSDKTypes: true,
     includeExternalHelpers: false,
     logLevel: TelescopeLogLevel.None,
+
+    interfaces: {
+        enabled: false,
+        useUnionTypes: false,
+    },
 
     prototypes: {
         enabled: true,
@@ -177,6 +194,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
+
+        addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
@@ -239,7 +258,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     reactQuery: {
-        enabled: false
+        enabled: false,
+        include: {
+            patterns: [],
+            packages: [],
+            protos: []
+        }
     },
 
     // packages

@@ -70,44 +70,11 @@ export interface MonitoredResourceDescriptor {
  * by the API.
  */
 export interface MonitoredResourceDescriptorSDKType {
-  /**
-   * Optional. The resource name of the monitored resource descriptor:
-   * `"projects/{project_id}/monitoredResourceDescriptors/{type}"` where
-   * {type} is the value of the `type` field in this object and
-   * {project_id} is a project ID that provides API-specific context for
-   * accessing the type.  APIs that do not use project information can use the
-   * resource name format `"monitoredResourceDescriptors/{type}"`.
-   */
   name: string;
-
-  /**
-   * Required. The monitored resource type. For example, the type
-   * `"cloudsql_database"` represents databases in Google Cloud SQL.
-   */
   type: string;
-
-  /**
-   * Optional. A concise name for the monitored resource type that might be
-   * displayed in user interfaces. It should be a Title Cased Noun Phrase,
-   * without any article or other determiners. For example,
-   * `"Google Cloud SQL Database"`.
-   */
   display_name: string;
-
-  /**
-   * Optional. A detailed description of the monitored resource type that might
-   * be used in documentation.
-   */
   description: string;
-
-  /**
-   * Required. A set of labels used to describe instances of this monitored
-   * resource type. For example, an individual Google Cloud SQL database is
-   * identified by values for the labels `"database_id"` and `"zone"`.
-   */
   labels: LabelDescriptorSDKType[];
-
-  /** Optional. The launch stage of the monitored resource definition. */
   launch_stage: LaunchStage;
 }
 export interface MonitoredResource_LabelsEntry {
@@ -168,18 +135,7 @@ export interface MonitoredResource {
  *                   "zone": "us-central1-a" }}
  */
 export interface MonitoredResourceSDKType {
-  /**
-   * Required. The monitored resource type. This field must match
-   * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
-   * example, the type of a Compute Engine VM instance is `gce_instance`.
-   */
   type: string;
-
-  /**
-   * Required. Values for all of the labels listed in the associated monitored
-   * resource descriptor. For example, Compute Engine VM instances use the
-   * labels `"project_id"`, `"instance_id"`, and `"zone"`.
-   */
   labels: {
     [key: string]: string;
   };
@@ -231,21 +187,7 @@ export interface MonitoredResourceMetadata {
  * the metadata in this message.
  */
 export interface MonitoredResourceMetadataSDKType {
-  /**
-   * Output only. Values for predefined system metadata labels.
-   * System labels are a kind of metadata extracted by Google, including
-   * "machine_image", "vpc", "subnet_id",
-   * "security_group", "name", etc.
-   * System label values can be only strings, Boolean values, or a list of
-   * strings. For example:
-   * 
-   *     { "name": "my-test-instance",
-   *       "security_group": ["a", "b", "c"],
-   *       "spot_instance": false }
-   */
   system_labels?: StructSDKType;
-
-  /** Output only. A map of user-defined metadata labels. */
   user_labels: {
     [key: string]: string;
   };

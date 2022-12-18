@@ -16,10 +16,7 @@ export interface ParsedExpr {
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
-  /** The parsed expression. */
   expr?: ExprSDKType;
-
-  /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoSDKType;
 }
 
@@ -88,32 +85,13 @@ export interface Expr {
  * the function declaration `startsWith`.
  */
 export interface ExprSDKType {
-  /**
-   * Required. An id assigned to this node by the parser which is unique in a
-   * given expression tree. This is used to associate type information and other
-   * attributes to a node in the parse tree.
-   */
   id: Long;
-
-  /** A literal expression. */
   const_expr?: ConstantSDKType;
-
-  /** An identifier expression. */
   ident_expr?: Expr_IdentSDKType;
-
-  /** A field selection expression, e.g. `request.auth`. */
   select_expr?: Expr_SelectSDKType;
-
-  /** A call expression, including calls to predefined functions and operators. */
   call_expr?: Expr_CallSDKType;
-
-  /** A list creation expression. */
   list_expr?: Expr_CreateListSDKType;
-
-  /** A map or message creation expression. */
   struct_expr?: Expr_CreateStructSDKType;
-
-  /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionSDKType;
 }
 
@@ -130,12 +108,6 @@ export interface Expr_Ident {
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
-  /**
-   * Required. Holds a single, unqualified identifier, possibly preceded by a
-   * '.'.
-   * 
-   * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
-   */
   name: string;
 }
 
@@ -167,27 +139,8 @@ export interface Expr_Select {
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
-  /**
-   * Required. The target of the selection expression.
-   * 
-   * For example, in the select expression `request.auth`, the `request`
-   * portion of the expression is the `operand`.
-   */
   operand?: ExprSDKType;
-
-  /**
-   * Required. The name of the field to select.
-   * 
-   * For example, in the select expression `request.auth`, the `auth` portion
-   * of the expression would be the `field`.
-   */
   field: string;
-
-  /**
-   * Whether the select is to be interpreted as a field presence test.
-   * 
-   * This results from the macro `has(request.auth)`.
-   */
   test_only: boolean;
 }
 
@@ -216,16 +169,8 @@ export interface Expr_Call {
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_CallSDKType {
-  /**
-   * The target of an method call-style expression. For example, `x` in
-   * `x.f()`.
-   */
   target?: ExprSDKType;
-
-  /** Required. The name of the function or method being called. */
   function: string;
-
-  /** The arguments. */
   args: ExprSDKType[];
 }
 
@@ -247,7 +192,6 @@ export interface Expr_CreateList {
  * `dyn([1, 'hello', 2.0])`
  */
 export interface Expr_CreateListSDKType {
-  /** The elements part of the list. */
   elements: ExprSDKType[];
 }
 
@@ -277,13 +221,7 @@ export interface Expr_CreateStruct {
  * `types.MyType{field_id: 'value'}`.
  */
 export interface Expr_CreateStructSDKType {
-  /**
-   * The type name of the message to be created, empty when creating map
-   * literals.
-   */
   message_name: string;
-
-  /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntrySDKType[];
 }
 
@@ -308,20 +246,9 @@ export interface Expr_CreateStruct_Entry {
 
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
-  /**
-   * Required. An id assigned to this node by the parser which is unique
-   * in a given expression tree. This is used to associate type
-   * information and other attributes to the node.
-   */
   id: Long;
-
-  /** The field key for a message creator statement. */
   field_key?: string;
-
-  /** The key expression for a map creation statement. */
   map_key?: ExprSDKType;
-
-  /** Required. The value assigned to the key. */
   value?: ExprSDKType;
 }
 
@@ -418,38 +345,12 @@ export interface Expr_Comprehension {
  * types, the macro tests whether the property `x` is defined on `m`.
  */
 export interface Expr_ComprehensionSDKType {
-  /** The name of the iteration variable. */
   iter_var: string;
-
-  /** The range over which var iterates. */
   iter_range?: ExprSDKType;
-
-  /** The name of the variable used for accumulation of the result. */
   accu_var: string;
-
-  /** The initial value of the accumulator. */
   accu_init?: ExprSDKType;
-
-  /**
-   * An expression which can contain iter_var and accu_var.
-   * 
-   * Returns false when the result has been computed and may be used as
-   * a hint to short-circuit the remainder of the comprehension.
-   */
   loop_condition?: ExprSDKType;
-
-  /**
-   * An expression which can contain iter_var and accu_var.
-   * 
-   * Computes the next value of accu_var.
-   */
   loop_step?: ExprSDKType;
-
-  /**
-   * An expression which can contain accu_var.
-   * 
-   * Computes the result.
-   */
   result?: ExprSDKType;
 }
 
@@ -525,41 +426,16 @@ export interface Constant {
  * `true`, `null`.
  */
 export interface ConstantSDKType {
-  /** null value. */
   null_value?: NullValue;
-
-  /** boolean value. */
   bool_value?: boolean;
-
-  /** int64 value. */
   int64_value?: Long;
-
-  /** uint64 value. */
   uint64_value?: Long;
-
-  /** double value. */
   double_value?: number;
-
-  /** string value. */
   string_value?: string;
-
-  /** bytes value. */
   bytes_value?: Uint8Array;
-
-  /**
-   * protobuf.Duration value.
-   * 
-   * Deprecated: duration is no longer considered a builtin cel type.
-   */
 
   /** @deprecated */
   duration_value?: DurationSDKType;
-
-  /**
-   * protobuf.Timestamp value.
-   * 
-   * Deprecated: timestamp is no longer considered a builtin cel type.
-   */
 
   /** @deprecated */
   timestamp_value?: Date;
@@ -630,46 +506,12 @@ export interface SourceInfo {
 
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
-  /** The syntax version of the source, e.g. `cel1`. */
   syntax_version: string;
-
-  /**
-   * The location name. All position information attached to an expression is
-   * relative to this location.
-   * 
-   * The location could be a file, UI element, or similar. For example,
-   * `acme/app/AnvilPolicy.cel`.
-   */
   location: string;
-
-  /**
-   * Monotonically increasing list of code point offsets where newlines
-   * `\n` appear.
-   * 
-   * The line number of a given position is the index `i` where for a given
-   * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
-   * column may be derivd from `id_positions[id] - line_offsets[i]`.
-   */
   line_offsets: number[];
-
-  /**
-   * A map from the parse node id (e.g. `Expr.id`) to the code point offset
-   * within the source.
-   */
   positions: {
     [key: Long]: number;
   };
-
-  /**
-   * A map from the parse node id where a macro replacement was made to the
-   * call `Expr` that resulted in a macro expansion.
-   * 
-   * For example, `has(value.field)` is a function call that is replaced by a
-   * `test_only` field selection in the AST. Likewise, the call
-   * `list.exists(e, e > 10)` translates to a comprehension expression. The key
-   * in the map corresponds to the expression id of the expanded macro, and the
-   * value is the call `Expr` that was replaced.
-   */
   macro_calls?: {
     [key: Long]: ExprSDKType;
   };
@@ -698,22 +540,9 @@ export interface SourcePosition {
 
 /** A specific position in source. */
 export interface SourcePositionSDKType {
-  /** The soucre location name (e.g. file name). */
   location: string;
-
-  /** The UTF-8 code unit offset. */
   offset: number;
-
-  /**
-   * The 1-based index of the starting line in the source text
-   * where the issue occurs, or 0 if unknown.
-   */
   line: number;
-
-  /**
-   * The 0-based index of the starting position within the line of source text
-   * where the issue occurs.  Only meaningful if line is nonzero.
-   */
   column: number;
 }
 

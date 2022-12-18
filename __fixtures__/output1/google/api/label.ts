@@ -66,13 +66,8 @@ export interface LabelDescriptor {
 
 /** A description of a label. */
 export interface LabelDescriptorSDKType {
-  /** The label key. */
   key: string;
-
-  /** The type of data that can be assigned to the label. */
   value_type: LabelDescriptor_ValueType;
-
-  /** A human-readable description for the label. */
   description: string;
 }
 

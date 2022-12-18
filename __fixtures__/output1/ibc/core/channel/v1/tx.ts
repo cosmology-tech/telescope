@@ -55,11 +55,6 @@ export interface MsgChannelOpenTry {
  */
 export interface MsgChannelOpenTrySDKType {
   port_id: string;
-
-  /**
-   * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the channel identifier of the previous channel in state INIT
-   */
   previous_channel_id: string;
   channel?: ChannelSDKType;
   counterparty_version: string;

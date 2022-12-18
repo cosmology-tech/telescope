@@ -14,10 +14,7 @@ export interface GenesisState {
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
-  /** minter is a space for holding current inflation information. */
   minter?: MinterSDKType;
-
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
 }
 

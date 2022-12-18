@@ -17,7 +17,6 @@ export interface QueryParamsResponse {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 
@@ -47,7 +46,6 @@ export interface QueryEpochProvisionsResponse {
  * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsResponseSDKType {
-  /** epoch_provisions is the current minting per epoch provisions value. */
   epoch_provisions: Uint8Array;
 }
 

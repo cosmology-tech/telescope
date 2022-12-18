@@ -92,13 +92,8 @@ export interface Claim {
  * for a given user. This is only used during client queries.
  */
 export interface ClaimSDKType {
-  /** action enum */
   action: Action;
-
-  /** true if the action has been completed */
   completed: boolean;
-
-  /** claimable token amount for the action. Zero if completed */
   claimable_amount: string;
 }
 
@@ -116,13 +111,8 @@ export interface ClaimsRecordAddress {
 
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
-  /** bech32 or hex address of claim user */
   address: string;
-
-  /** total initial claimable amount for the user */
   initial_claimable_amount: string;
-
-  /** slice of the available actions completed */
   actions_completed: boolean[];
 }
 
@@ -143,10 +133,7 @@ export interface ClaimsRecord {
  * completed actions to claim the tokens.
  */
 export interface ClaimsRecordSDKType {
-  /** total initial claimable amount for the user */
   initial_claimable_amount: string;
-
-  /** slice of the available actions completed */
   actions_completed: boolean[];
 }
 
