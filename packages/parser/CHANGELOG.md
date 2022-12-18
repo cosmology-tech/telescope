@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.80.0-rc.1...@osmonauts/proto-parser@0.35.0) (2022-12-18)
+
+
+### Reverts
+
+* Revert "RC versions ready" ([04081a9](https://github.com/osmosis-labs/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+* Revert "chore(release): publish" ([086a55f](https://github.com/osmosis-labs/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 # [0.34.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.33.0...@osmonauts/proto-parser@0.34.0) (2022-11-25)
 
 **Note:** Version bump only for package @osmonauts/proto-parser
