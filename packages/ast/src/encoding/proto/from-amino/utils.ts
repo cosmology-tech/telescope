@@ -5,6 +5,7 @@ import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
 import { getInterfaceFromAminoName } from '../implements';
+import { camel } from '@osmonauts/utils';
 
 export const fromAminoJSON = {
 
@@ -602,6 +603,45 @@ export const arrayTypes = {
 
 
 export const fromAminoMessages = {
+    height(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('Long');
+
+        const keepCase = context.options.prototypes.parser.keepCase;
+        const casing = keepCase ? (str) => str : camel;
+
+        const makeField = (fieldName: string) =>
+            t.objectProperty(
+                t.identifier(casing(fieldName)),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromString')
+                    ),
+                    [
+                        t.logicalExpression(
+                            '||',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(fieldName)
+                            ),
+                            t.stringLiteral('0')
+                        ),
+                        t.booleanLiteral(true)
+                    ]
+                )
+            );
+
+        return [
+            // return
+            t.returnStatement(
+                t.objectExpression([
+                    makeField('revision_number'),
+                    makeField('revision_height')
+                ])
+            )
+        ]
+
+    },
     duration(context: ProtoParseContext, name: string, proto: ProtoType) {
         context.addUtil('Long');
         return [
