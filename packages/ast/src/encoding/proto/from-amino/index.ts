@@ -32,6 +32,7 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
             isOptional
         };
 
+        // arrays
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
@@ -94,6 +95,27 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
             }
         }
 
+        // casting special types
+        if (field.type === 'google.protobuf.Any') {
+            switch (field.options?.['(cosmos_proto.accepts_interface)']) {
+                case 'cosmos.crypto.PubKey':
+                    return fromAminoJSON.pubkey(args);
+            }
+        }
+
+        if (field.type === 'bytes') {
+            // bytes [RawContractMessage]
+            if (field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
+                return fromAminoJSON.rawBytes(args);
+            }
+            // bytes [WASMByteCode]
+            // TODO use a better option for this in proto source
+            if (field.options?.['(gogoproto.customname)'] === 'WASMByteCode') {
+                return fromAminoJSON.wasmByteCode(args);
+            }
+        }
+
+        // default types
         switch (field.type) {
             case 'string':
                 return fromAminoJSON.string(args);

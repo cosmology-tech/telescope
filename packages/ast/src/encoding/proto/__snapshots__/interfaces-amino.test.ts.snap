@@ -329,7 +329,10 @@ exports[`MsgCreateValidator 1`] = `
       minSelfDelegation: object.min_self_delegation,
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      pubkey: object?.pubkey ? Cosmos_cryptoPubKey_FromAmino(object.pubkey) : undefined,
+      pubkey: encodeBech32Pubkey({
+        type: "tendermint/PubKeySecp256k1",
+        value: toBase64(object.pubkey.value)
+      }, "cosmos"),
       value: object?.value ? Coin.fromAmino(object.value) : undefined
     };
   },
