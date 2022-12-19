@@ -196,7 +196,7 @@ export const fromAminoJSON = {
                                 t.memberExpression(
                                     t.memberExpression(
                                         t.identifier('object'),
-                                        t.identifier('pubkey')
+                                        t.identifier(origName)
                                     ),
                                     t.identifier('value')
                                 )
