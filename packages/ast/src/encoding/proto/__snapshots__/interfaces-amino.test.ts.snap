@@ -355,6 +355,113 @@ exports[`MsgCreateValidator 1`] = `
 };"
 `;
 
+exports[`MsgStoreCode 1`] = `
+"export const MsgStoreCode = {
+  encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (message.wasmByteCode.length !== 0) {
+      writer.uint32(18).bytes(message.wasmByteCode);
+    }
+
+    if (message.instantiatePermission !== undefined) {
+      AccessConfig.encode(message.instantiatePermission, writer.uint32(42).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCode {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreCode();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.wasmByteCode = reader.bytes();
+          break;
+
+        case 5:
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgStoreCode {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(),
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
+    };
+  },
+
+  toJSON(message: MsgStoreCode): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
+    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
+    const message = createBaseMsgStoreCode();
+    message.sender = object.sender ?? "";
+    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    return message;
+  },
+
+  fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
+    return {
+      sender: object?.sender,
+      wasmByteCode: object?.wasm_byte_code,
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
+    };
+  },
+
+  toSDK(message: MsgStoreCode): MsgStoreCodeSDKType {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode;
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
+    return {
+      sender: object.sender,
+      wasmByteCode: fromBase64(object.wasm_byte_code),
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
+    };
+  },
+
+  toAmino(message: MsgStoreCode): MsgStoreCodeAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    return obj;
+  }
+
+};"
+`;
+
 exports[`MsgSubmitProposal 1`] = `
 "export const MsgSubmitProposal = {
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {

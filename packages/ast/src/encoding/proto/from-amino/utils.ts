@@ -152,6 +152,8 @@ export const fromAminoJSON = {
                 )
             ]
         );
+
+        return setProp(args, expr);
     },
 
     wasmByteCode(args: FromAminoJSONMethod) {
@@ -170,6 +172,8 @@ export const fromAminoJSON = {
                 )
             ]
         );
+
+        return setProp(args, expr);
     },
 
     pubkey(args: FromAminoJSONMethod) {

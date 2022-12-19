@@ -35,6 +35,15 @@ it('Duration', async () => {
         'Duration', getNestedProto(ref.traversed).Duration
     ))
 });
+// Wasm
+it('MsgStoreCode', async () => {
+    const ref = store.findProto('cosmwasm/wasm/v1/tx.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'MsgStoreCode', getNestedProto(ref.traversed).MsgStoreCode
+    ))
+});
 // IBC
 it('Height', async () => {
     const ref = store.findProto('ibc/core/client/v1/client.proto');
