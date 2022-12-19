@@ -1,7 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ContractInfo, ContractInfoAmino, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntryAmino, ContractCodeHistoryEntrySDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 
 /**
@@ -9,6 +10,15 @@ export const protobufPackage = "cosmwasm.wasm.v1";
  * method
  */
 export interface QueryContractInfoRequest {
+  /** address is the address of the contract to query */
+  address: string;
+}
+
+/**
+ * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
+ * method
+ */
+export interface QueryContractInfoRequestAmino {
   /** address is the address of the contract to query */
   address: string;
 }
@@ -29,6 +39,16 @@ export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: string;
   contractInfo?: ContractInfo;
+}
+
+/**
+ * QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
+ * method
+ */
+export interface QueryContractInfoResponseAmino {
+  /** address is the address of the contract */
+  address: string;
+  contract_info?: ContractInfoAmino;
 }
 
 /**
@@ -56,6 +76,18 @@ export interface QueryContractHistoryRequest {
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
  * RPC method
  */
+export interface QueryContractHistoryRequestAmino {
+  /** address is the address of the contract to query */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryContractHistoryRequest is the request type for the Query/ContractHistory
+ * RPC method
+ */
 export interface QueryContractHistoryRequestSDKType {
   address: string;
   pagination?: PageRequestSDKType;
@@ -70,6 +102,17 @@ export interface QueryContractHistoryResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryContractHistoryResponse is the response type for the
+ * Query/ContractHistory RPC method
+ */
+export interface QueryContractHistoryResponseAmino {
+  entries: ContractCodeHistoryEntryAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -98,6 +141,19 @@ export interface QueryContractsByCodeRequest {
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
  * RPC method
  */
+export interface QueryContractsByCodeRequestAmino {
+  /**
+   * grpc-gateway_out does not support Go style CodID
+   * pagination defines an optional pagination for the request.
+   */
+  code_id: string;
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
+ * RPC method
+ */
 export interface QueryContractsByCodeRequestSDKType {
   code_id: Long;
   pagination?: PageRequestSDKType;
@@ -113,6 +169,18 @@ export interface QueryContractsByCodeResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryContractsByCodeResponse is the response type for the
+ * Query/ContractsByCode RPC method
+ */
+export interface QueryContractsByCodeResponseAmino {
+  /** contracts are a set of contract addresses */
+  contracts: string[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -140,6 +208,18 @@ export interface QueryAllContractStateRequest {
  * QueryAllContractStateRequest is the request type for the
  * Query/AllContractState RPC method
  */
+export interface QueryAllContractStateRequestAmino {
+  /** address is the address of the contract */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryAllContractStateRequest is the request type for the
+ * Query/AllContractState RPC method
+ */
 export interface QueryAllContractStateRequestSDKType {
   address: string;
   pagination?: PageRequestSDKType;
@@ -154,6 +234,17 @@ export interface QueryAllContractStateResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryAllContractStateResponse is the response type for the
+ * Query/AllContractState RPC method
+ */
+export interface QueryAllContractStateResponseAmino {
+  models: ModelAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -179,6 +270,16 @@ export interface QueryRawContractStateRequest {
  * QueryRawContractStateRequest is the request type for the
  * Query/RawContractState RPC method
  */
+export interface QueryRawContractStateRequestAmino {
+  /** address is the address of the contract */
+  address: string;
+  query_data: Uint8Array;
+}
+
+/**
+ * QueryRawContractStateRequest is the request type for the
+ * Query/RawContractState RPC method
+ */
 export interface QueryRawContractStateRequestSDKType {
   address: string;
   query_data: Uint8Array;
@@ -189,6 +290,15 @@ export interface QueryRawContractStateRequestSDKType {
  * Query/RawContractState RPC method
  */
 export interface QueryRawContractStateResponse {
+  /** Data contains the raw store data */
+  data: Uint8Array;
+}
+
+/**
+ * QueryRawContractStateResponse is the response type for the
+ * Query/RawContractState RPC method
+ */
+export interface QueryRawContractStateResponseAmino {
   /** Data contains the raw store data */
   data: Uint8Array;
 }
@@ -217,6 +327,18 @@ export interface QuerySmartContractStateRequest {
  * QuerySmartContractStateRequest is the request type for the
  * Query/SmartContractState RPC method
  */
+export interface QuerySmartContractStateRequestAmino {
+  /** address is the address of the contract */
+  address: string;
+
+  /** QueryData contains the query data passed to the contract */
+  query_data: Uint8Array;
+}
+
+/**
+ * QuerySmartContractStateRequest is the request type for the
+ * Query/SmartContractState RPC method
+ */
 export interface QuerySmartContractStateRequestSDKType {
   address: string;
   query_data: Uint8Array;
@@ -227,6 +349,15 @@ export interface QuerySmartContractStateRequestSDKType {
  * Query/SmartContractState RPC method
  */
 export interface QuerySmartContractStateResponse {
+  /** Data contains the json data returned from the smart contract */
+  data: Uint8Array;
+}
+
+/**
+ * QuerySmartContractStateResponse is the response type for the
+ * Query/SmartContractState RPC method
+ */
+export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
@@ -246,6 +377,12 @@ export interface QueryCodeRequest {
 }
 
 /** QueryCodeRequest is the request type for the Query/Code RPC method */
+export interface QueryCodeRequestAmino {
+  /** grpc-gateway_out does not support Go style CodID */
+  code_id: string;
+}
+
+/** QueryCodeRequest is the request type for the Query/Code RPC method */
 export interface QueryCodeRequestSDKType {
   code_id: Long;
 }
@@ -255,6 +392,13 @@ export interface CodeInfoResponse {
   codeId: Long;
   creator: string;
   dataHash: Uint8Array;
+}
+
+/** CodeInfoResponse contains code meta data from CodeInfo */
+export interface CodeInfoResponseAmino {
+  code_id: string;
+  creator: string;
+  data_hash: Uint8Array;
 }
 
 /** CodeInfoResponse contains code meta data from CodeInfo */
@@ -271,6 +415,12 @@ export interface QueryCodeResponse {
 }
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
+export interface QueryCodeResponseAmino {
+  code_info?: CodeInfoResponseAmino;
+  data: Uint8Array;
+}
+
+/** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseSDKType {
   code_info?: CodeInfoResponseSDKType;
   data: Uint8Array;
@@ -280,6 +430,12 @@ export interface QueryCodeResponseSDKType {
 export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryCodesRequest is the request type for the Query/Codes RPC method */
+export interface QueryCodesRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /** QueryCodesRequest is the request type for the Query/Codes RPC method */
@@ -293,6 +449,14 @@ export interface QueryCodesResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryCodesResponse is the response type for the Query/Codes RPC method */
+export interface QueryCodesResponseAmino {
+  code_infos: CodeInfoResponseAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
@@ -314,6 +478,15 @@ export interface QueryPinnedCodesRequest {
  * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
  * RPC method
  */
+export interface QueryPinnedCodesRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
+ * RPC method
+ */
 export interface QueryPinnedCodesRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -327,6 +500,17 @@ export interface QueryPinnedCodesResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryPinnedCodesResponse is the response type for the
+ * Query/PinnedCodes RPC method
+ */
+export interface QueryPinnedCodesResponseAmino {
+  code_ids: string[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -400,6 +584,18 @@ export const QueryContractInfoRequest = {
   },
 
   toSDK(message: QueryContractInfoRequest): QueryContractInfoRequestSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+
+  fromAmino(object: QueryContractInfoRequestAmino): QueryContractInfoRequest {
+    return {
+      address: object.address
+    };
+  },
+
+  toAmino(message: QueryContractInfoRequest): QueryContractInfoRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -486,6 +682,20 @@ export const QueryContractInfoResponse = {
     obj.address = message.address;
     message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toSDK(message.contractInfo) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryContractInfoResponseAmino): QueryContractInfoResponse {
+    return {
+      address: object.address,
+      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined
+    };
+  },
+
+  toAmino(message: QueryContractInfoResponse): QueryContractInfoResponseAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined;
+    return obj;
   }
 
 };
@@ -568,6 +778,20 @@ export const QueryContractHistoryRequest = {
     const obj: any = {};
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryContractHistoryRequestAmino): QueryContractHistoryRequest {
+    return {
+      address: object.address,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryContractHistoryRequest): QueryContractHistoryRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -664,6 +888,26 @@ export const QueryContractHistoryResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryContractHistoryResponseAmino): QueryContractHistoryResponse {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryContractHistoryResponse): QueryContractHistoryResponseAmino {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? ContractCodeHistoryEntry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -746,6 +990,20 @@ export const QueryContractsByCodeRequest = {
     const obj: any = {};
     obj.code_id = message.codeId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryContractsByCodeRequestAmino): QueryContractsByCodeRequest {
+    return {
+      codeId: Long.fromString(object.code_id),
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestAmino {
+    const obj: any = {};
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -842,6 +1100,26 @@ export const QueryContractsByCodeResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryContractsByCodeResponseAmino): QueryContractsByCodeResponse {
+    return {
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => e) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseAmino {
+    const obj: any = {};
+
+    if (message.contracts) {
+      obj.contracts = message.contracts.map(e => e);
+    } else {
+      obj.contracts = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -924,6 +1202,20 @@ export const QueryAllContractStateRequest = {
     const obj: any = {};
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllContractStateRequestAmino): QueryAllContractStateRequest {
+    return {
+      address: object.address,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllContractStateRequest): QueryAllContractStateRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1020,6 +1312,26 @@ export const QueryAllContractStateResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAllContractStateResponseAmino): QueryAllContractStateResponse {
+    return {
+      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllContractStateResponse): QueryAllContractStateResponseAmino {
+    const obj: any = {};
+
+    if (message.models) {
+      obj.models = message.models.map(e => e ? Model.toAmino(e) : undefined);
+    } else {
+      obj.models = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1103,6 +1415,20 @@ export const QueryRawContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+
+  fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
+    return {
+      address: object.address,
+      queryData: object.query_data
+    };
+  },
+
+  toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.query_data = message.queryData;
+    return obj;
   }
 
 };
@@ -1169,6 +1495,18 @@ export const QueryRawContractStateResponse = {
   },
 
   toSDK(message: QueryRawContractStateResponse): QueryRawContractStateResponseSDKType {
+    const obj: any = {};
+    obj.data = message.data;
+    return obj;
+  },
+
+  fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
+    return {
+      data: object.data
+    };
+  },
+
+  toAmino(message: QueryRawContractStateResponse): QueryRawContractStateResponseAmino {
     const obj: any = {};
     obj.data = message.data;
     return obj;
@@ -1255,6 +1593,20 @@ export const QuerySmartContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+
+  fromAmino(object: QuerySmartContractStateRequestAmino): QuerySmartContractStateRequest {
+    return {
+      address: object.address,
+      queryData: toUtf8(JSON.stringify(object.query_data))
+    };
+  },
+
+  toAmino(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.query_data = message.queryData ? JSON.parse(fromUtf8(message.queryData)) : undefined;
+    return obj;
   }
 
 };
@@ -1324,6 +1676,18 @@ export const QuerySmartContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: QuerySmartContractStateResponseAmino): QuerySmartContractStateResponse {
+    return {
+      data: toUtf8(JSON.stringify(object.data))
+    };
+  },
+
+  toAmino(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseAmino {
+    const obj: any = {};
+    obj.data = message.data ? JSON.parse(fromUtf8(message.data)) : undefined;
+    return obj;
   }
 
 };
@@ -1392,6 +1756,18 @@ export const QueryCodeRequest = {
   toSDK(message: QueryCodeRequest): QueryCodeRequestSDKType {
     const obj: any = {};
     obj.code_id = message.codeId;
+    return obj;
+  },
+
+  fromAmino(object: QueryCodeRequestAmino): QueryCodeRequest {
+    return {
+      codeId: Long.fromString(object.code_id)
+    };
+  },
+
+  toAmino(message: QueryCodeRequest): QueryCodeRequestAmino {
+    const obj: any = {};
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     return obj;
   }
 
@@ -1490,6 +1866,22 @@ export const CodeInfoResponse = {
     obj.creator = message.creator;
     obj.data_hash = message.dataHash;
     return obj;
+  },
+
+  fromAmino(object: CodeInfoResponseAmino): CodeInfoResponse {
+    return {
+      codeId: Long.fromString(object.code_id),
+      creator: object.creator,
+      dataHash: object.data_hash
+    };
+  },
+
+  toAmino(message: CodeInfoResponse): CodeInfoResponseAmino {
+    const obj: any = {};
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.creator = message.creator;
+    obj.data_hash = message.dataHash;
+    return obj;
   }
 
 };
@@ -1573,6 +1965,20 @@ export const QueryCodeResponse = {
     message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfoResponse.toSDK(message.codeInfo) : undefined);
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: QueryCodeResponseAmino): QueryCodeResponse {
+    return {
+      codeInfo: object?.code_info ? CodeInfoResponse.fromAmino(object.code_info) : undefined,
+      data: object.data
+    };
+  },
+
+  toAmino(message: QueryCodeResponse): QueryCodeResponseAmino {
+    const obj: any = {};
+    obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined;
+    obj.data = message.data;
+    return obj;
   }
 
 };
@@ -1641,6 +2047,18 @@ export const QueryCodesRequest = {
   toSDK(message: QueryCodesRequest): QueryCodesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryCodesRequestAmino): QueryCodesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryCodesRequest): QueryCodesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1737,6 +2155,26 @@ export const QueryCodesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryCodesResponseAmino): QueryCodesResponse {
+    return {
+      codeInfos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryCodesResponse): QueryCodesResponseAmino {
+    const obj: any = {};
+
+    if (message.codeInfos) {
+      obj.code_infos = message.codeInfos.map(e => e ? CodeInfoResponse.toAmino(e) : undefined);
+    } else {
+      obj.code_infos = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1805,6 +2243,18 @@ export const QueryPinnedCodesRequest = {
   toSDK(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryPinnedCodesRequestAmino): QueryPinnedCodesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1913,6 +2363,26 @@ export const QueryPinnedCodesResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryPinnedCodesResponseAmino): QueryPinnedCodesResponse {
+    return {
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseAmino {
+    const obj: any = {};
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 

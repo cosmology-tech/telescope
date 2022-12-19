@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
@@ -13,6 +13,15 @@ export const protobufPackage = "evmos.incentives.v1";
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryIncentivesRequest is the request type for the Query/Incentives RPC
+ * method.
+ */
+export interface QueryIncentivesRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -38,6 +47,17 @@ export interface QueryIncentivesResponse {
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
  * method.
  */
+export interface QueryIncentivesResponseAmino {
+  incentives: IncentiveAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryIncentivesResponse is the response type for the Query/Incentives RPC
+ * method.
+ */
 export interface QueryIncentivesResponseSDKType {
   incentives: IncentiveSDKType[];
   pagination?: PageResponseSDKType;
@@ -45,6 +65,12 @@ export interface QueryIncentivesResponseSDKType {
 
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequest {
+  /** contract identifier is the hex contract address of a contract */
+  contract: string;
+}
+
+/** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
+export interface QueryIncentiveRequestAmino {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
@@ -60,6 +86,14 @@ export interface QueryIncentiveRequestSDKType {
  */
 export interface QueryIncentiveResponse {
   incentive?: Incentive;
+}
+
+/**
+ * QueryIncentiveResponse is the response type for the Query/Incentive RPC
+ * method.
+ */
+export interface QueryIncentiveResponseAmino {
+  incentive?: IncentiveAmino;
 }
 
 /**
@@ -86,6 +120,18 @@ export interface QueryGasMetersRequest {
  * QueryGasMetersRequest is the request type for the Query/Incentives RPC
  * method.
  */
+export interface QueryGasMetersRequestAmino {
+  /** contract is the hex contract address of a incentivized smart contract */
+  contract: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryGasMetersRequest is the request type for the Query/Incentives RPC
+ * method.
+ */
 export interface QueryGasMetersRequestSDKType {
   contract: string;
   pagination?: PageRequestSDKType;
@@ -106,6 +152,17 @@ export interface QueryGasMetersResponse {
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
  * method.
  */
+export interface QueryGasMetersResponseAmino {
+  gas_meters: GasMeterAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryGasMetersResponse is the response type for the Query/Incentives RPC
+ * method.
+ */
 export interface QueryGasMetersResponseSDKType {
   gas_meters: GasMeterSDKType[];
   pagination?: PageResponseSDKType;
@@ -113,6 +170,15 @@ export interface QueryGasMetersResponseSDKType {
 
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequest {
+  /** contract identifier is the hex contract address of a contract */
+  contract: string;
+
+  /** participant identifier is the hex address of a user */
+  participant: string;
+}
+
+/** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
+export interface QueryGasMeterRequestAmino {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 
@@ -142,6 +208,18 @@ export interface QueryGasMeterResponse {
  * QueryGasMeterResponse is the response type for the Query/Incentive RPC
  * method.
  */
+export interface QueryGasMeterResponseAmino {
+  /**
+   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
+   * method.
+   */
+  gas_meter: string;
+}
+
+/**
+ * QueryGasMeterResponse is the response type for the Query/Incentive RPC
+ * method.
+ */
 export interface QueryGasMeterResponseSDKType {
   gas_meter: Long;
 }
@@ -153,6 +231,15 @@ export interface QueryGasMeterResponseSDKType {
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryAllocationMetersRequest is the request type for the
+ * Query/AllocationMeters RPC method.
+ */
+export interface QueryAllocationMetersRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -178,6 +265,17 @@ export interface QueryAllocationMetersResponse {
  * QueryAllocationMetersResponse is the response type for the
  * Query/AllocationMeters RPC method.
  */
+export interface QueryAllocationMetersResponseAmino {
+  allocation_meters: DecCoinAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryAllocationMetersResponse is the response type for the
+ * Query/AllocationMeters RPC method.
+ */
 export interface QueryAllocationMetersResponseSDKType {
   allocation_meters: DecCoinSDKType[];
   pagination?: PageResponseSDKType;
@@ -188,6 +286,15 @@ export interface QueryAllocationMetersResponseSDKType {
  * RPC method.
  */
 export interface QueryAllocationMeterRequest {
+  /** denom is the coin denom to query an allocation meter for. */
+  denom: string;
+}
+
+/**
+ * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
+ * RPC method.
+ */
+export interface QueryAllocationMeterRequestAmino {
   /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
@@ -212,12 +319,23 @@ export interface QueryAllocationMeterResponse {
  * QueryAllocationMeterResponse is the response type for the
  * Query/AllocationMeter RPC method.
  */
+export interface QueryAllocationMeterResponseAmino {
+  allocation_meter?: DecCoinAmino;
+}
+
+/**
+ * QueryAllocationMeterResponse is the response type for the
+ * Query/AllocationMeter RPC method.
+ */
 export interface QueryAllocationMeterResponseSDKType {
   allocation_meter?: DecCoinSDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -228,6 +346,14 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params?: Params;
+}
+
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
 }
 
 /**
@@ -302,6 +428,18 @@ export const QueryIncentivesRequest = {
   toSDK(message: QueryIncentivesRequest): QueryIncentivesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryIncentivesRequestAmino): QueryIncentivesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryIncentivesRequest): QueryIncentivesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -398,6 +536,26 @@ export const QueryIncentivesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryIncentivesResponseAmino): QueryIncentivesResponse {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryIncentivesResponse): QueryIncentivesResponseAmino {
+    const obj: any = {};
+
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -464,6 +622,18 @@ export const QueryIncentiveRequest = {
   },
 
   toSDK(message: QueryIncentiveRequest): QueryIncentiveRequestSDKType {
+    const obj: any = {};
+    obj.contract = message.contract;
+    return obj;
+  },
+
+  fromAmino(object: QueryIncentiveRequestAmino): QueryIncentiveRequest {
+    return {
+      contract: object.contract
+    };
+  },
+
+  toAmino(message: QueryIncentiveRequest): QueryIncentiveRequestAmino {
     const obj: any = {};
     obj.contract = message.contract;
     return obj;
@@ -535,6 +705,18 @@ export const QueryIncentiveResponse = {
   toSDK(message: QueryIncentiveResponse): QueryIncentiveResponseSDKType {
     const obj: any = {};
     message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toSDK(message.incentive) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
+    return {
+      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : undefined
+    };
+  },
+
+  toAmino(message: QueryIncentiveResponse): QueryIncentiveResponseAmino {
+    const obj: any = {};
+    obj.incentive = message.incentive ? Incentive.toAmino(message.incentive) : undefined;
     return obj;
   }
 
@@ -618,6 +800,20 @@ export const QueryGasMetersRequest = {
     const obj: any = {};
     obj.contract = message.contract;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGasMetersRequestAmino): QueryGasMetersRequest {
+    return {
+      contract: object.contract,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGasMetersRequest): QueryGasMetersRequestAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -714,6 +910,26 @@ export const QueryGasMetersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGasMetersResponseAmino): QueryGasMetersResponse {
+    return {
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryGasMetersResponse): QueryGasMetersResponseAmino {
+    const obj: any = {};
+
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -797,6 +1013,20 @@ export const QueryGasMeterRequest = {
     obj.contract = message.contract;
     obj.participant = message.participant;
     return obj;
+  },
+
+  fromAmino(object: QueryGasMeterRequestAmino): QueryGasMeterRequest {
+    return {
+      contract: object.contract,
+      participant: object.participant
+    };
+  },
+
+  toAmino(message: QueryGasMeterRequest): QueryGasMeterRequestAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    return obj;
   }
 
 };
@@ -866,6 +1096,18 @@ export const QueryGasMeterResponse = {
     const obj: any = {};
     obj.gas_meter = message.gasMeter;
     return obj;
+  },
+
+  fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
+    return {
+      gasMeter: Long.fromString(object.gas_meter)
+    };
+  },
+
+  toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
+    const obj: any = {};
+    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
+    return obj;
   }
 
 };
@@ -934,6 +1176,18 @@ export const QueryAllocationMetersRequest = {
   toSDK(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllocationMetersRequestAmino): QueryAllocationMetersRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1030,6 +1284,26 @@ export const QueryAllocationMetersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAllocationMetersResponseAmino): QueryAllocationMetersResponse {
+    return {
+      allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseAmino {
+    const obj: any = {};
+
+    if (message.allocationMeters) {
+      obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocation_meters = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1096,6 +1370,18 @@ export const QueryAllocationMeterRequest = {
   },
 
   toSDK(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAmino(object: QueryAllocationMeterRequestAmino): QueryAllocationMeterRequest {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -1168,6 +1454,18 @@ export const QueryAllocationMeterResponse = {
     const obj: any = {};
     message.allocationMeter !== undefined && (obj.allocation_meter = message.allocationMeter ? DecCoin.toSDK(message.allocationMeter) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
+    return {
+      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseAmino {
+    const obj: any = {};
+    obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter) : undefined;
+    return obj;
   }
 
 };
@@ -1218,6 +1516,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1288,6 +1595,18 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

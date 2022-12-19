@@ -1,4 +1,4 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
@@ -7,6 +7,12 @@ export const protobufPackage = "evmos.recovery.v1";
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
+}
+
+/** GenesisState defines the recovery module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
 }
 
 /** GenesisState defines the recovery module's genesis state. */
@@ -21,6 +27,15 @@ export interface Params {
 
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration?: Duration;
+}
+
+/** Params holds parameters for the recovery module */
+export interface ParamsAmino {
+  /** enable recovery IBC middleware */
+  enable_recovery: boolean;
+
+  /** duration added to timeout timestamp for balances recovered via IBC packets */
+  packet_timeout_duration?: DurationAmino;
 }
 
 /** Params holds parameters for the recovery module */
@@ -93,6 +108,18 @@ export const GenesisState = {
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 
@@ -176,6 +203,20 @@ export const Params = {
     const obj: any = {};
     obj.enable_recovery = message.enableRecovery;
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableRecovery: object.enable_recovery,
+      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_recovery = message.enableRecovery;
+    obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
     return obj;
   }
 

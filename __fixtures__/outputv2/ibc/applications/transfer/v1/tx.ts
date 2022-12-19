@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Height, HeightSDKType } from "../../../core/client/v1/client";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.applications.transfer.v1";
@@ -43,6 +43,40 @@ export interface MsgTransfer {
  * ICS20 enabled chains. See ICS Spec here:
  * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
+export interface MsgTransferAmino {
+  /** the port on which the packet will be sent */
+  source_port: string;
+
+  /** the channel by which the packet will be sent */
+  source_channel: string;
+
+  /** the tokens to be transferred */
+  token?: CoinAmino;
+
+  /** the sender address */
+  sender: string;
+
+  /** the recipient address on the destination chain */
+  receiver: string;
+
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height?: HeightAmino;
+
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: string;
+}
+
+/**
+ * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
+ * ICS20 enabled chains. See ICS Spec here:
+ * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ */
 export interface MsgTransferSDKType {
   source_port: string;
   source_channel: string;
@@ -55,6 +89,9 @@ export interface MsgTransferSDKType {
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
+
+/** MsgTransferResponse defines the Msg/Transfer response type. */
+export interface MsgTransferResponseAmino {}
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseSDKType {}
@@ -208,6 +245,30 @@ export const MsgTransfer = {
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
     obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
+  },
+
+  fromAmino(object: MsgTransferAmino): MsgTransfer {
+    return {
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
+      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      sender: object.sender,
+      receiver: object.receiver,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp)
+    };
+  },
+
+  toAmino(message: MsgTransfer): MsgTransferAmino {
+    const obj: any = {};
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    return obj;
   }
 
 };
@@ -258,6 +319,15 @@ export const MsgTransferResponse = {
   },
 
   toSDK(_: MsgTransferResponse): MsgTransferResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
+    return {};
+  },
+
+  toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
   }

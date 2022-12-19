@@ -200,6 +200,7 @@ export enum Code {
   UNRECOGNIZED = -1,
 }
 export const CodeSDKType = Code;
+export const CodeAmino = Code;
 export function codeFromJSON(object: any): Code {
   switch (object) {
     case 0:

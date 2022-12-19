@@ -1,4 +1,4 @@
-import { Params, ParamsSDKType } from "./mint";
+import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
@@ -7,12 +7,21 @@ export const protobufPackage = "osmosis.mint.v1beta1";
 export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -30,6 +39,12 @@ export interface QueryEpochProvisionsRequest {}
  * QueryEpochProvisionsRequest is the request type for the
  * Query/EpochProvisions RPC method.
  */
+export interface QueryEpochProvisionsRequestAmino {}
+
+/**
+ * QueryEpochProvisionsRequest is the request type for the
+ * Query/EpochProvisions RPC method.
+ */
 export interface QueryEpochProvisionsRequestSDKType {}
 
 /**
@@ -39,6 +54,15 @@ export interface QueryEpochProvisionsRequestSDKType {}
 export interface QueryEpochProvisionsResponse {
   /** epoch_provisions is the current minting per epoch provisions value. */
   epochProvisions: Uint8Array;
+}
+
+/**
+ * QueryEpochProvisionsResponse is the response type for the
+ * Query/EpochProvisions RPC method.
+ */
+export interface QueryEpochProvisionsResponseAmino {
+  /** epoch_provisions is the current minting per epoch provisions value. */
+  epoch_provisions: Uint8Array;
 }
 
 /**
@@ -95,6 +119,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -166,6 +199,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -216,6 +261,15 @@ export const QueryEpochProvisionsRequest = {
   },
 
   toSDK(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryEpochProvisionsRequestAmino): QueryEpochProvisionsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -284,6 +338,18 @@ export const QueryEpochProvisionsResponse = {
   },
 
   toSDK(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseSDKType {
+    const obj: any = {};
+    obj.epoch_provisions = message.epochProvisions;
+    return obj;
+  },
+
+  fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {
+    return {
+      epochProvisions: object.epoch_provisions
+    };
+  },
+
+  toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;

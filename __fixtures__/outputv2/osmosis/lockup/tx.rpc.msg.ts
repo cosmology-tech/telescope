@@ -1,9 +1,9 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockSDKType } from "./lock";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
+import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseAmino, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseAmino, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseAmino, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseAmino, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseAmino, MsgForceUnlockResponseSDKType } from "./tx";
 
 /** Msg defines the Msg service. */
 export interface Msg {

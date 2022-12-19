@@ -1,7 +1,7 @@
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../protobuf/duration";
-import { Any, AnySDKType } from "../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
+import { Any, AnyAmino, AnySDKType } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
@@ -86,6 +86,67 @@ export interface AttributeContext {
  * verify the system specification before relying on an attribute generated
  * a system.
  */
+export interface AttributeContextAmino {
+  /**
+   * The origin of a network activity. In a multi hop network activity,
+   * the origin represents the sender of the first hop. For the first hop,
+   * the `source` and the `origin` must have the same content.
+   */
+  origin?: AttributeContext_PeerAmino;
+
+  /**
+   * The source of a network activity, such as starting a TCP connection.
+   * In a multi hop network activity, the source represents the sender of the
+   * last hop.
+   */
+  source?: AttributeContext_PeerAmino;
+
+  /**
+   * The destination of a network activity, such as accepting a TCP connection.
+   * In a multi hop network activity, the destination represents the receiver of
+   * the last hop.
+   */
+  destination?: AttributeContext_PeerAmino;
+
+  /** Represents a network request, such as an HTTP request. */
+  request?: AttributeContext_RequestAmino;
+
+  /** Represents a network response, such as an HTTP response. */
+  response?: AttributeContext_ResponseAmino;
+
+  /**
+   * Represents a target resource that is involved with a network activity.
+   * If multiple resources are involved with an activity, this must be the
+   * primary one.
+   */
+  resource?: AttributeContext_ResourceAmino;
+
+  /** Represents an API operation that is involved to a network activity. */
+  api?: AttributeContext_ApiAmino;
+
+  /** Supports extensions for advanced use cases, such as logs and metrics. */
+  extensions: AnyAmino[];
+}
+
+/**
+ * This message defines the standard attribute vocabulary for Google APIs.
+ * 
+ * An attribute is a piece of metadata that describes an activity on a network
+ * service. For example, the size of an HTTP request, or the status code of
+ * an HTTP response.
+ * 
+ * Each attribute has a type and a name, which is logically defined as
+ * a proto message field in `AttributeContext`. The field type becomes the
+ * attribute type, and the field path becomes the attribute name. For example,
+ * the attribute `source.ip` maps to field `AttributeContext.source.ip`.
+ * 
+ * This message definition is guaranteed not to have any wire breaking change.
+ * So you can use it directly for passing attributes across different systems.
+ * 
+ * NOTE: Different system may generate different subset of attributes. Please
+ * verify the system specification before relying on an attribute generated
+ * a system.
+ */
 export interface AttributeContextSDKType {
   origin?: AttributeContext_PeerSDKType;
   source?: AttributeContext_PeerSDKType;
@@ -97,6 +158,10 @@ export interface AttributeContextSDKType {
   extensions: AnySDKType[];
 }
 export interface AttributeContext_Peer_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface AttributeContext_Peer_LabelsEntryAmino {
   key: string;
   value: string;
 }
@@ -144,6 +209,39 @@ export interface AttributeContext_Peer {
  * or receives the request. Service peers should fill in
  * `principal` and `labels` as appropriate.
  */
+export interface AttributeContext_PeerAmino {
+  /** The IP address of the peer. */
+  ip: string;
+
+  /** The network port of the peer. */
+  port: string;
+
+  /** The labels associated with the peer. */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The identity of this peer. Similar to `Request.auth.principal`, but
+   * relative to the peer instead of the request. For example, the
+   * idenity associated with a load balancer that forwared the request.
+   */
+  principal: string;
+
+  /**
+   * The CLDR country/region code associated with the above IP address.
+   * If the IP address is private, the `region_code` should reflect the
+   * physical location where this peer is running.
+   */
+  region_code: string;
+}
+
+/**
+ * This message defines attributes for a node that handles a network request.
+ * The node can be either a service or an application that sends, forwards,
+ * or receives the request. Service peers should fill in
+ * `principal` and `labels` as appropriate.
+ */
 export interface AttributeContext_PeerSDKType {
   ip: string;
   port: Long;
@@ -160,6 +258,39 @@ export interface AttributeContext_PeerSDKType {
  * by Google APIs, Istio, and OpenAPI.
  */
 export interface AttributeContext_Api {
+  /**
+   * The API service name. It is a logical identifier for a networked API,
+   * such as "pubsub.googleapis.com". The naming syntax depends on the
+   * API management system being used for handling the request.
+   */
+  service: string;
+
+  /**
+   * The API operation name. For gRPC requests, it is the fully qualified API
+   * method name, such as "google.pubsub.v1.Publisher.Publish". For OpenAPI
+   * requests, it is the `operationId`, such as "getPet".
+   */
+  operation: string;
+
+  /**
+   * The API protocol used for sending the request, such as "http", "https",
+   * "grpc", or "internal".
+   */
+  protocol: string;
+
+  /**
+   * The API version associated with the API operation above, such as "v1" or
+   * "v1alpha1".
+   */
+  version: string;
+}
+
+/**
+ * This message defines attributes associated with API operations, such as
+ * a network API request. The terminology is based on the conventions used
+ * by Google APIs, Istio, and OpenAPI.
+ */
+export interface AttributeContext_ApiAmino {
   /**
    * The API service name. It is a logical identifier for a networked API,
    * such as "pubsub.googleapis.com". The naming syntax depends on the
@@ -276,6 +407,78 @@ export interface AttributeContext_Auth {
  * based on the JSON Web Token (JWT) standard, but the terms also
  * correlate to concepts in other standards.
  */
+export interface AttributeContext_AuthAmino {
+  /**
+   * The authenticated principal. Reflects the issuer (`iss`) and subject
+   * (`sub`) claims within a JWT. The issuer and subject should be `/`
+   * delimited, with `/` percent-encoded within the subject fragment. For
+   * Google accounts, the principal format is:
+   * "https://accounts.google.com/{id}"
+   */
+  principal: string;
+
+  /**
+   * The intended audience(s) for this authentication information. Reflects
+   * the audience (`aud`) claim within a JWT. The audience
+   * value(s) depends on the `issuer`, but typically include one or more of
+   * the following pieces of information:
+   * 
+   * *  The services intended to receive the credential. For example,
+   *    ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
+   * *  A set of service-based scopes. For example,
+   *    ["https://www.googleapis.com/auth/cloud-platform"].
+   * *  The client id of an app, such as the Firebase project id for JWTs
+   *    from Firebase Auth.
+   * 
+   * Consult the documentation for the credential issuer to determine the
+   * information provided.
+   */
+  audiences: string[];
+
+  /**
+   * The authorized presenter of the credential. Reflects the optional
+   * Authorized Presenter (`azp`) claim within a JWT or the
+   * OAuth client id. For example, a Google Cloud Platform client id looks
+   * as follows: "123456789012.apps.googleusercontent.com".
+   */
+  presenter: string;
+
+  /**
+   * Structured claims presented with the credential. JWTs include
+   * `{key: value}` pairs for standard and private claims. The following
+   * is a subset of the standard required and optional claims that would
+   * typically be presented for a Google-based JWT:
+   * 
+   *    {'iss': 'accounts.google.com',
+   *     'sub': '113289723416554971153',
+   *     'aud': ['123456789012', 'pubsub.googleapis.com'],
+   *     'azp': '123456789012.apps.googleusercontent.com',
+   *     'email': 'jsmith@example.com',
+   *     'iat': 1353601026,
+   *     'exp': 1353604926}
+   * 
+   * SAML assertions are similarly specified, but with an identity provider
+   * dependent structure.
+   */
+  claims?: StructAmino;
+
+  /**
+   * A list of access level resource names that allow resources to be
+   * accessed by authenticated requester. It is part of Secure GCP processing
+   * for the incoming request. An access level string has the format:
+   * "//{api_service_name}/accessPolicies/{policy_id}/accessLevels/{short_name}"
+   * 
+   * Example:
+   * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
+   */
+  access_levels: string[];
+}
+
+/**
+ * This message defines request authentication attributes. Terminology is
+ * based on the JSON Web Token (JWT) standard, but the terms also
+ * correlate to concepts in other standards.
+ */
 export interface AttributeContext_AuthSDKType {
   principal: string;
   audiences: string[];
@@ -284,6 +487,10 @@ export interface AttributeContext_AuthSDKType {
   access_levels: string[];
 }
 export interface AttributeContext_Request_HeadersEntry {
+  key: string;
+  value: string;
+}
+export interface AttributeContext_Request_HeadersEntryAmino {
   key: string;
   value: string;
 }
@@ -367,6 +574,76 @@ export interface AttributeContext_Request {
  * request is not an HTTP request, the runtime system should try to map
  * the actual request to an equivalent HTTP request.
  */
+export interface AttributeContext_RequestAmino {
+  /**
+   * The unique ID for a request, which can be propagated to downstream
+   * systems. The ID should have low probability of collision
+   * within a single day for a specific service.
+   */
+  id: string;
+
+  /** The HTTP request method, such as `GET`, `POST`. */
+  method: string;
+
+  /**
+   * The HTTP request headers. If multiple headers share the same key, they
+   * must be merged according to the HTTP spec. All header keys must be
+   * lowercased, because HTTP header keys are case-insensitive.
+   */
+  headers: {
+    [key: string]: string;
+  };
+
+  /** The HTTP URL path. */
+  path: string;
+
+  /** The HTTP request `Host` header value. */
+  host: string;
+
+  /** The HTTP URL scheme, such as `http` and `https`. */
+  scheme: string;
+
+  /**
+   * The HTTP URL query in the format of `name1=value1&name2=value2`, as it
+   * appears in the first line of the HTTP request. No decoding is performed.
+   */
+  query: string;
+
+  /**
+   * The timestamp when the `destination` service receives the last byte of
+   * the request.
+   */
+  time?: Date;
+
+  /** The HTTP request size in bytes. If unknown, it must be -1. */
+  size: string;
+
+  /**
+   * The network protocol used with the request, such as "http/1.1",
+   * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
+   * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+   * for details.
+   */
+  protocol: string;
+
+  /**
+   * A special parameter for request reason. It is used by security systems
+   * to associate auditing information with a request.
+   */
+  reason: string;
+
+  /**
+   * The request authentication. May be absent for unauthenticated requests.
+   * Derived from the HTTP request `Authorization` header or equivalent.
+   */
+  auth?: AttributeContext_AuthAmino;
+}
+
+/**
+ * This message defines attributes for an HTTP request. If the actual
+ * request is not an HTTP request, the runtime system should try to map
+ * the actual request to an equivalent HTTP request.
+ */
 export interface AttributeContext_RequestSDKType {
   id: string;
   method: string;
@@ -384,6 +661,10 @@ export interface AttributeContext_RequestSDKType {
   auth?: AttributeContext_AuthSDKType;
 }
 export interface AttributeContext_Response_HeadersEntry {
+  key: string;
+  value: string;
+}
+export interface AttributeContext_Response_HeadersEntryAmino {
   key: string;
   value: string;
 }
@@ -431,6 +712,41 @@ export interface AttributeContext_Response {
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
  */
+export interface AttributeContext_ResponseAmino {
+  /** The HTTP response status code, such as `200` and `404`. */
+  code: string;
+
+  /** The HTTP response size in bytes. If unknown, it must be -1. */
+  size: string;
+
+  /**
+   * The HTTP response headers. If multiple headers share the same key, they
+   * must be merged according to HTTP spec. All header keys must be
+   * lowercased, because HTTP header keys are case-insensitive.
+   */
+  headers: {
+    [key: string]: string;
+  };
+
+  /**
+   * The timestamp when the `destination` service sends the last byte of
+   * the response.
+   */
+  time?: Date;
+
+  /**
+   * The length of time it takes the backend service to fully respond to a
+   * request. Measured from when the destination service starts to send the
+   * request to the backend until when the destination service receives the
+   * complete response from the backend.
+   */
+  backend_latency?: DurationAmino;
+}
+
+/**
+ * This message defines attributes for a typical network response. It
+ * generally models semantics of an HTTP response.
+ */
 export interface AttributeContext_ResponseSDKType {
   code: Long;
   size: Long;
@@ -444,11 +760,19 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Resource_LabelsEntryAmino {
+  key: string;
+  value: string;
+}
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
   value: string;
 }
 export interface AttributeContext_Resource_AnnotationsEntry {
+  key: string;
+  value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryAmino {
   key: string;
   value: string;
 }
@@ -543,6 +867,113 @@ export interface AttributeContext_Resource {
    * If the resource is not deleted, this must be empty.
    */
   deleteTime?: Date;
+
+  /**
+   * Output only. An opaque value that uniquely identifies a version or
+   * generation of a resource. It can be used to confirm that the client
+   * and server agree on the ordering of a resource being written.
+   */
+  etag: string;
+
+  /**
+   * Immutable. The location of the resource. The location encoding is
+   * specific to the service provider, and new encoding may be introduced
+   * as the service evolves.
+   * 
+   * For Google Cloud products, the encoding is what is used by Google Cloud
+   * APIs, such as `us-east1`, `aws-us-east-1`, and `azure-eastus2`. The
+   * semantics of `location` is identical to the
+   * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
+   */
+  location: string;
+}
+
+/**
+ * This message defines core attributes for a resource. A resource is an
+ * addressable (named) entity provided by the destination service. For
+ * example, a file stored on a network storage service.
+ */
+export interface AttributeContext_ResourceAmino {
+  /**
+   * The name of the service that this resource belongs to, such as
+   * `pubsub.googleapis.com`. The service may be different from the DNS
+   * hostname that actually serves the request.
+   */
+  service: string;
+
+  /**
+   * The stable identifier (name) of a resource on the `service`. A resource
+   * can be logically identified as "//{resource.service}/{resource.name}".
+   * The differences between a resource name and a URI are:
+   * 
+   * *   Resource name is a logical identifier, independent of network
+   *     protocol and API version. For example,
+   *     `//pubsub.googleapis.com/projects/123/topics/news-feed`.
+   * *   URI often includes protocol and version information, so it can
+   *     be used directly by applications. For example,
+   *     `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
+   * 
+   * See https://cloud.google.com/apis/design/resource_names for details.
+   */
+  name: string;
+
+  /**
+   * The type of the resource. The syntax is platform-specific because
+   * different platforms define their resources differently.
+   * 
+   * For Google APIs, the type format must be "{service}/{kind}".
+   */
+  type: string;
+
+  /**
+   * The labels or tags on the resource, such as AWS resource tags and
+   * Kubernetes resource labels.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The unique identifier of the resource. UID is unique in the time
+   * and space for this resource within the scope of the service. It is
+   * typically generated by the server on successful creation of a resource
+   * and must not be changed. UID is used to uniquely identify resources
+   * with resource name reuses. This should be a UUID4.
+   */
+  uid: string;
+
+  /**
+   * Annotations is an unstructured key-value map stored with a resource that
+   * may be set by external tools to store and retrieve arbitrary metadata.
+   * They are not queryable and should be preserved when modifying objects.
+   * 
+   * More info: https://kubernetes.io/docs/user-guide/annotations
+   */
+  annotations: {
+    [key: string]: string;
+  };
+
+  /** Mutable. The display name set by clients. Must be <= 63 characters. */
+  display_name: string;
+
+  /**
+   * Output only. The timestamp when the resource was created. This may
+   * be either the time creation was initiated or when it was completed.
+   */
+  create_time?: Date;
+
+  /**
+   * Output only. The timestamp when the resource was last updated. Any
+   * change to the resource made by users must refresh this value.
+   * Changes to a resource made by the service should refresh this value.
+   */
+  update_time?: Date;
+
+  /**
+   * Output only. The timestamp when the resource was deleted.
+   * If the resource is not deleted, this must be empty.
+   */
+  delete_time?: Date;
 
   /**
    * Output only. An opaque value that uniquely identifies a version or
@@ -763,6 +1194,38 @@ export const AttributeContext = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: AttributeContextAmino): AttributeContext {
+    return {
+      origin: object?.origin ? AttributeContext_Peer.fromAmino(object.origin) : undefined,
+      source: object?.source ? AttributeContext_Peer.fromAmino(object.source) : undefined,
+      destination: object?.destination ? AttributeContext_Peer.fromAmino(object.destination) : undefined,
+      request: object?.request ? AttributeContext_Request.fromAmino(object.request) : undefined,
+      response: object?.response ? AttributeContext_Response.fromAmino(object.response) : undefined,
+      resource: object?.resource ? AttributeContext_Resource.fromAmino(object.resource) : undefined,
+      api: object?.api ? AttributeContext_Api.fromAmino(object.api) : undefined,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AttributeContext): AttributeContextAmino {
+    const obj: any = {};
+    obj.origin = message.origin ? AttributeContext_Peer.toAmino(message.origin) : undefined;
+    obj.source = message.source ? AttributeContext_Peer.toAmino(message.source) : undefined;
+    obj.destination = message.destination ? AttributeContext_Peer.toAmino(message.destination) : undefined;
+    obj.request = message.request ? AttributeContext_Request.toAmino(message.request) : undefined;
+    obj.response = message.response ? AttributeContext_Response.toAmino(message.response) : undefined;
+    obj.resource = message.resource ? AttributeContext_Resource.toAmino(message.resource) : undefined;
+    obj.api = message.api ? AttributeContext_Api.toAmino(message.api) : undefined;
+
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+
+    return obj;
   }
 
 };
@@ -842,6 +1305,20 @@ export const AttributeContext_Peer_LabelsEntry = {
   },
 
   toSDK(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_Peer_LabelsEntryAmino): AttributeContext_Peer_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1011,6 +1488,38 @@ export const AttributeContext_Peer = {
     obj.principal = message.principal;
     obj.region_code = message.regionCode;
     return obj;
+  },
+
+  fromAmino(object: AttributeContext_PeerAmino): AttributeContext_Peer {
+    return {
+      ip: object.ip,
+      port: Long.fromString(object.port),
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      principal: object.principal,
+      regionCode: object.region_code
+    };
+  },
+
+  toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
+    const obj: any = {};
+    obj.ip = message.ip;
+    obj.port = message.port ? message.port.toString() : undefined;
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    obj.principal = message.principal;
+    obj.region_code = message.regionCode;
+    return obj;
   }
 
 };
@@ -1116,6 +1625,24 @@ export const AttributeContext_Api = {
   },
 
   toSDK(message: AttributeContext_Api): AttributeContext_ApiSDKType {
+    const obj: any = {};
+    obj.service = message.service;
+    obj.operation = message.operation;
+    obj.protocol = message.protocol;
+    obj.version = message.version;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_ApiAmino): AttributeContext_Api {
+    return {
+      service: object.service,
+      operation: object.operation,
+      protocol: object.protocol,
+      version: object.version
+    };
+  },
+
+  toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
     const obj: any = {};
     obj.service = message.service;
     obj.operation = message.operation;
@@ -1271,6 +1798,38 @@ export const AttributeContext_Auth = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: AttributeContext_AuthAmino): AttributeContext_Auth {
+    return {
+      principal: object.principal,
+      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
+      presenter: object.presenter,
+      claims: object?.claims ? Struct.fromAmino(object.claims) : undefined,
+      accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
+    const obj: any = {};
+    obj.principal = message.principal;
+
+    if (message.audiences) {
+      obj.audiences = message.audiences.map(e => e);
+    } else {
+      obj.audiences = [];
+    }
+
+    obj.presenter = message.presenter;
+    obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
+
+    if (message.accessLevels) {
+      obj.access_levels = message.accessLevels.map(e => e);
+    } else {
+      obj.access_levels = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1350,6 +1909,20 @@ export const AttributeContext_Request_HeadersEntry = {
   },
 
   toSDK(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_Request_HeadersEntryAmino): AttributeContext_Request_HeadersEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1617,6 +2190,52 @@ export const AttributeContext_Request = {
     obj.reason = message.reason;
     message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toSDK(message.auth) : undefined);
     return obj;
+  },
+
+  fromAmino(object: AttributeContext_RequestAmino): AttributeContext_Request {
+    return {
+      id: object.id,
+      method: object.method,
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      path: object.path,
+      host: object.host,
+      scheme: object.scheme,
+      query: object.query,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
+      size: Long.fromString(object.size),
+      protocol: object.protocol,
+      reason: object.reason,
+      auth: object?.auth ? AttributeContext_Auth.fromAmino(object.auth) : undefined
+    };
+  },
+
+  toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.method = message.method;
+    obj.headers = {};
+
+    if (message.headers) {
+      Object.entries(message.headers).forEach(([k, v]) => {
+        obj.headers[k] = v;
+      });
+    }
+
+    obj.path = message.path;
+    obj.host = message.host;
+    obj.scheme = message.scheme;
+    obj.query = message.query;
+    obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
+    obj.size = message.size ? message.size.toString() : undefined;
+    obj.protocol = message.protocol;
+    obj.reason = message.reason;
+    obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
+    return obj;
   }
 
 };
@@ -1696,6 +2315,20 @@ export const AttributeContext_Response_HeadersEntry = {
   },
 
   toSDK(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_Response_HeadersEntryAmino): AttributeContext_Response_HeadersEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1865,6 +2498,38 @@ export const AttributeContext_Response = {
     message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
     message.backendLatency !== undefined && (obj.backend_latency = message.backendLatency ? Duration.toSDK(message.backendLatency) : undefined);
     return obj;
+  },
+
+  fromAmino(object: AttributeContext_ResponseAmino): AttributeContext_Response {
+    return {
+      code: Long.fromString(object.code),
+      size: Long.fromString(object.size),
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
+      backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
+    };
+  },
+
+  toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
+    const obj: any = {};
+    obj.code = message.code ? message.code.toString() : undefined;
+    obj.size = message.size ? message.size.toString() : undefined;
+    obj.headers = {};
+
+    if (message.headers) {
+      Object.entries(message.headers).forEach(([k, v]) => {
+        obj.headers[k] = v;
+      });
+    }
+
+    obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
+    obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
+    return obj;
   }
 
 };
@@ -1948,6 +2613,20 @@ export const AttributeContext_Resource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: AttributeContext_Resource_LabelsEntryAmino): AttributeContext_Resource_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
   }
 
 };
@@ -2027,6 +2706,20 @@ export const AttributeContext_Resource_AnnotationsEntry = {
   },
 
   toSDK(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_Resource_AnnotationsEntryAmino): AttributeContext_Resource_AnnotationsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -2331,6 +3024,64 @@ export const AttributeContext_Resource = {
     message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
     message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
     message.deleteTime !== undefined && (obj.delete_time = message.deleteTime ? Timestamp.toSDK(message.deleteTime) : undefined);
+    obj.etag = message.etag;
+    obj.location = message.location;
+    return obj;
+  },
+
+  fromAmino(object: AttributeContext_ResourceAmino): AttributeContext_Resource {
+    return {
+      service: object.service,
+      name: object.name,
+      type: object.type,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      uid: object.uid,
+      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      displayName: object.display_name,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
+      deleteTime: object?.delete_time ? Timestamp.fromAmino(object.delete_time) : undefined,
+      etag: object.etag,
+      location: object.location
+    };
+  },
+
+  toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
+    const obj: any = {};
+    obj.service = message.service;
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    obj.uid = message.uid;
+    obj.annotations = {};
+
+    if (message.annotations) {
+      Object.entries(message.annotations).forEach(([k, v]) => {
+        obj.annotations[k] = v;
+      });
+    }
+
+    obj.display_name = message.displayName;
+    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
+    obj.delete_time = message.deleteTime ? Timestamp.toAmino(message.deleteTime) : undefined;
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;

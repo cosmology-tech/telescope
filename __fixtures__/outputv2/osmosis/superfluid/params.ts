@@ -14,6 +14,17 @@ export interface Params {
 }
 
 /** Params holds parameters for the superfluid module */
+export interface ParamsAmino {
+  /**
+   * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%. The minimum risk factor works
+   * to counter-balance the staked amount on chain's exposure to various asset
+   * volatilities, and have base staking be 'resistant' to volatility.
+   */
+  minimum_risk_factor: string;
+}
+
+/** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
   minimum_risk_factor: string;
 }
@@ -80,6 +91,18 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.minimum_risk_factor = message.minimumRiskFactor;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      minimumRiskFactor: object.minimum_risk_factor
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.minimum_risk_factor = message.minimumRiskFactor;
     return obj;

@@ -1,5 +1,5 @@
-import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BaseVestingAccount, BaseVestingAccountAmino, BaseVestingAccountSDKType, Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
@@ -28,6 +28,32 @@ export interface ClawbackVestingAccount {
 
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
+}
+
+/**
+ * ClawbackVestingAccount implements the VestingAccount interface. It provides
+ * an account that can hold contributions subject to "lockup" (like a
+ * PeriodicVestingAccount), or vesting which is subject to clawback
+ * of unvested tokens, or a combination (tokens vest, but are still locked).
+ */
+export interface ClawbackVestingAccountAmino {
+  /**
+   * base_vesting_account implements the VestingAccount interface. It contains
+   * all the necessary fields needed for any vesting account implementation
+   */
+  base_vesting_account?: BaseVestingAccountAmino;
+
+  /** funder_address specifies the account which can perform clawback */
+  funder_address: string;
+
+  /** start_time defines the time at which the vesting period begins */
+  start_time?: Date;
+
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods: PeriodAmino[];
+
+  /** vesting_periods defines the vesting schedule relative to the start_time */
+  vesting_periods: PeriodAmino[];
 }
 
 /**
@@ -182,6 +208,37 @@ export const ClawbackVestingAccount = {
 
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ClawbackVestingAccountAmino): ClawbackVestingAccount {
+    return {
+      baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
+      funderAddress: object.funder_address,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
+    const obj: any = {};
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.funder_address = message.funderAddress;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
       obj.vesting_periods = [];
     }

@@ -1,11 +1,15 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
+import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
+export interface QueryFeeTokensRequestAmino {}
 export interface QueryFeeTokensRequestSDKType {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
+}
+export interface QueryFeeTokensResponseAmino {
+  fee_tokens: FeeTokenAmino[];
 }
 export interface QueryFeeTokensResponseSDKType {
   fee_tokens: FeeTokenSDKType[];
@@ -16,6 +20,14 @@ export interface QueryFeeTokensResponseSDKType {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceRequest {
+  denom: string;
+}
+
+/**
+ * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
+ * price for the specified tx fee denom
+ */
+export interface QueryDenomSpotPriceRequestAmino {
   denom: string;
 }
 
@@ -40,11 +52,23 @@ export interface QueryDenomSpotPriceResponse {
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
+export interface QueryDenomSpotPriceResponseAmino {
+  poolID: string;
+  spot_price: string;
+}
+
+/**
+ * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
+ * price for the specified tx fee denom
+ */
 export interface QueryDenomSpotPriceResponseSDKType {
   poolID: Long;
   spot_price: string;
 }
 export interface QueryDenomPoolIdRequest {
+  denom: string;
+}
+export interface QueryDenomPoolIdRequestAmino {
   denom: string;
 }
 export interface QueryDenomPoolIdRequestSDKType {
@@ -53,13 +77,20 @@ export interface QueryDenomPoolIdRequestSDKType {
 export interface QueryDenomPoolIdResponse {
   poolID: Long;
 }
+export interface QueryDenomPoolIdResponseAmino {
+  poolID: string;
+}
 export interface QueryDenomPoolIdResponseSDKType {
   poolID: Long;
 }
 export interface QueryBaseDenomRequest {}
+export interface QueryBaseDenomRequestAmino {}
 export interface QueryBaseDenomRequestSDKType {}
 export interface QueryBaseDenomResponse {
   baseDenom: string;
+}
+export interface QueryBaseDenomResponseAmino {
+  base_denom: string;
 }
 export interface QueryBaseDenomResponseSDKType {
   base_denom: string;
@@ -111,6 +142,15 @@ export const QueryFeeTokensRequest = {
   },
 
   toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryFeeTokensRequestAmino): QueryFeeTokensRequest {
+    return {};
+  },
+
+  toAmino(_: QueryFeeTokensRequest): QueryFeeTokensRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -194,6 +234,24 @@ export const QueryFeeTokensResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryFeeTokensResponseAmino): QueryFeeTokensResponse {
+    return {
+      feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryFeeTokensResponse): QueryFeeTokensResponseAmino {
+    const obj: any = {};
+
+    if (message.feeTokens) {
+      obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toAmino(e) : undefined);
+    } else {
+      obj.fee_tokens = [];
+    }
+
+    return obj;
   }
 
 };
@@ -260,6 +318,18 @@ export const QueryDenomSpotPriceRequest = {
   },
 
   toSDK(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomSpotPriceRequestAmino): QueryDenomSpotPriceRequest {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -346,6 +416,20 @@ export const QueryDenomSpotPriceResponse = {
     obj.poolID = message.poolID;
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromAmino(object: QueryDenomSpotPriceResponseAmino): QueryDenomSpotPriceResponse {
+    return {
+      poolID: Long.fromString(object.poolID),
+      spotPrice: object.spot_price
+    };
+  },
+
+  toAmino(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseAmino {
+    const obj: any = {};
+    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
+    obj.spot_price = message.spotPrice;
+    return obj;
   }
 
 };
@@ -412,6 +496,18 @@ export const QueryDenomPoolIdRequest = {
   },
 
   toSDK(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomPoolIdRequestAmino): QueryDenomPoolIdRequest {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -484,6 +580,18 @@ export const QueryDenomPoolIdResponse = {
     const obj: any = {};
     obj.poolID = message.poolID;
     return obj;
+  },
+
+  fromAmino(object: QueryDenomPoolIdResponseAmino): QueryDenomPoolIdResponse {
+    return {
+      poolID: Long.fromString(object.poolID)
+    };
+  },
+
+  toAmino(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseAmino {
+    const obj: any = {};
+    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
+    return obj;
   }
 
 };
@@ -534,6 +642,15 @@ export const QueryBaseDenomRequest = {
   },
 
   toSDK(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryBaseDenomRequestAmino): QueryBaseDenomRequest {
+    return {};
+  },
+
+  toAmino(_: QueryBaseDenomRequest): QueryBaseDenomRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -602,6 +719,18 @@ export const QueryBaseDenomResponse = {
   },
 
   toSDK(message: QueryBaseDenomResponse): QueryBaseDenomResponseSDKType {
+    const obj: any = {};
+    obj.base_denom = message.baseDenom;
+    return obj;
+  },
+
+  fromAmino(object: QueryBaseDenomResponseAmino): QueryBaseDenomResponse {
+    return {
+      baseDenom: object.base_denom
+    };
+  },
+
+  toAmino(message: QueryBaseDenomResponse): QueryBaseDenomResponseAmino {
     const obj: any = {};
     obj.base_denom = message.baseDenom;
     return obj;

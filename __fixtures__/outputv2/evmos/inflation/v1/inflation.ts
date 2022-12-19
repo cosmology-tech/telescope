@@ -40,6 +40,35 @@ export interface InflationDistribution {
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
+export interface InflationDistributionAmino {
+  /**
+   * staking_rewards defines the proportion of the minted minted_denom that is
+   * to be allocated as staking rewards
+   */
+  staking_rewards: string;
+
+  /**
+   * usage_incentives defines the proportion of the minted minted_denom that is
+   * to be allocated to the incentives module address
+   */
+  usage_incentives: string;
+
+  /**
+   * community_pool defines the proportion of the minted minted_denom that is to
+   * be allocated to the community pool
+   */
+  community_pool: string;
+}
+
+/**
+ * InflationDistribution defines the distribution in which inflation is
+ * allocated through minting on each epoch (staking, incentives, community). It
+ * excludes the team vesting distribution, as this is minted once at genesis.
+ * The initial InflationDistribution can be calculated from the Evmos Token
+ * Model like this:
+ * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
+ * 0.5333333         = 40%           / (1 - 25%)
+ */
 export interface InflationDistributionSDKType {
   staking_rewards: string;
   usage_incentives: string;
@@ -68,6 +97,30 @@ export interface ExponentialCalculation {
 
   /** max variance */
   maxVariance: string;
+}
+
+/**
+ * ExponentialCalculation holds factors to calculate exponential inflation on
+ * each period. Calculation reference:
+ * periodProvision = exponentialDecay       *  bondingIncentive
+ * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
+ * (max_variance / bonding_target))
+ */
+export interface ExponentialCalculationAmino {
+  /** initial value */
+  a: string;
+
+  /** reduction factor */
+  r: string;
+
+  /** long term inflation */
+  c: string;
+
+  /** bonding target */
+  bonding_target: string;
+
+  /** max variance */
+  max_variance: string;
 }
 
 /**
@@ -173,6 +226,22 @@ export const InflationDistribution = {
   },
 
   toSDK(message: InflationDistribution): InflationDistributionSDKType {
+    const obj: any = {};
+    obj.staking_rewards = message.stakingRewards;
+    obj.usage_incentives = message.usageIncentives;
+    obj.community_pool = message.communityPool;
+    return obj;
+  },
+
+  fromAmino(object: InflationDistributionAmino): InflationDistribution {
+    return {
+      stakingRewards: object.staking_rewards,
+      usageIncentives: object.usage_incentives,
+      communityPool: object.community_pool
+    };
+  },
+
+  toAmino(message: InflationDistribution): InflationDistributionAmino {
     const obj: any = {};
     obj.staking_rewards = message.stakingRewards;
     obj.usage_incentives = message.usageIncentives;
@@ -296,6 +365,26 @@ export const ExponentialCalculation = {
   },
 
   toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
+    const obj: any = {};
+    obj.a = message.a;
+    obj.r = message.r;
+    obj.c = message.c;
+    obj.bonding_target = message.bondingTarget;
+    obj.max_variance = message.maxVariance;
+    return obj;
+  },
+
+  fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
+    return {
+      a: object.a,
+      r: object.r,
+      c: object.c,
+      bondingTarget: object.bonding_target,
+      maxVariance: object.max_variance
+    };
+  },
+
+  toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
     const obj: any = {};
     obj.a = message.a;
     obj.r = message.r;

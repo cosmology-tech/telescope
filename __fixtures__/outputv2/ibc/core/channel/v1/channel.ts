@@ -1,4 +1,4 @@
-import { Height, HeightSDKType } from "../../client/v1/client";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
@@ -31,6 +31,7 @@ export enum State {
   UNRECOGNIZED = -1,
 }
 export const StateSDKType = State;
+export const StateAmino = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -98,6 +99,7 @@ export enum Order {
   UNRECOGNIZED = -1,
 }
 export const OrderSDKType = Order;
+export const OrderAmino = Order;
 export function orderFromJSON(object: any): Order {
   switch (object) {
     case 0:
@@ -165,6 +167,31 @@ export interface Channel {
  * modules on separate blockchains, which has at least one end capable of
  * sending packets and one end capable of receiving packets.
  */
+export interface ChannelAmino {
+  /** current state of the channel end */
+  state: State;
+
+  /** whether the channel is ordered or unordered */
+  ordering: Order;
+
+  /** counterparty channel end */
+  counterparty?: CounterpartyAmino;
+
+  /**
+   * list of connection identifiers, in order, along which packets sent on
+   * this channel will travel
+   */
+  connection_hops: string[];
+
+  /** opaque channel version, which is agreed upon during the handshake */
+  version: string;
+}
+
+/**
+ * Channel defines pipeline for exactly-once packet delivery between specific
+ * modules on separate blockchains, which has at least one end capable of
+ * sending packets and one end capable of receiving packets.
+ */
 export interface ChannelSDKType {
   state: State;
   ordering: Order;
@@ -207,6 +234,36 @@ export interface IdentifiedChannel {
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
  */
+export interface IdentifiedChannelAmino {
+  /** current state of the channel end */
+  state: State;
+
+  /** whether the channel is ordered or unordered */
+  ordering: Order;
+
+  /** counterparty channel end */
+  counterparty?: CounterpartyAmino;
+
+  /**
+   * list of connection identifiers, in order, along which packets sent on
+   * this channel will travel
+   */
+  connection_hops: string[];
+
+  /** opaque channel version, which is agreed upon during the handshake */
+  version: string;
+
+  /** port identifier */
+  port_id: string;
+
+  /** channel identifier */
+  channel_id: string;
+}
+
+/**
+ * IdentifiedChannel defines a channel with additional port and channel
+ * identifier fields.
+ */
 export interface IdentifiedChannelSDKType {
   state: State;
   ordering: Order;
@@ -224,6 +281,15 @@ export interface Counterparty {
 
   /** channel end on the counterparty chain */
   channelId: string;
+}
+
+/** Counterparty defines a channel end counterparty */
+export interface CounterpartyAmino {
+  /** port on the counterparty chain which owns the other end of the channel. */
+  port_id: string;
+
+  /** channel end on the counterparty chain */
+  channel_id: string;
 }
 
 /** Counterparty defines a channel end counterparty */
@@ -264,6 +330,37 @@ export interface Packet {
 }
 
 /** Packet defines a type that carries data across different chains through IBC */
+export interface PacketAmino {
+  /**
+   * number corresponds to the order of sends and receives, where a Packet
+   * with an earlier sequence number must be sent and received before a Packet
+   * with a later sequence number.
+   */
+  sequence: string;
+
+  /** identifies the port on the sending chain. */
+  source_port: string;
+
+  /** identifies the channel end on the sending chain. */
+  source_channel: string;
+
+  /** identifies the port on the receiving chain. */
+  destination_port: string;
+
+  /** identifies the channel end on the receiving chain. */
+  destination_channel: string;
+
+  /** actual opaque bytes transferred directly to the application module */
+  data: Uint8Array;
+
+  /** block height after which the packet times out */
+  timeout_height?: HeightAmino;
+
+  /** block timestamp (in nanoseconds) after which the packet times out */
+  timeout_timestamp: string;
+}
+
+/** Packet defines a type that carries data across different chains through IBC */
 export interface PacketSDKType {
   sequence: Long;
   source_port: string;
@@ -301,6 +398,26 @@ export interface PacketState {
  * Caller is responsible for knowing the context necessary to interpret this
  * state as a commitment, acknowledgement, or a receipt.
  */
+export interface PacketStateAmino {
+  /** channel port identifier. */
+  port_id: string;
+
+  /** channel unique identifier. */
+  channel_id: string;
+
+  /** packet sequence. */
+  sequence: string;
+
+  /** embedded data that represents packet state. */
+  data: Uint8Array;
+}
+
+/**
+ * PacketState defines the generic type necessary to retrieve and store
+ * packet commitments, acknowledgements, and receipts.
+ * Caller is responsible for knowing the context necessary to interpret this
+ * state as a commitment, acknowledgement, or a receipt.
+ */
 export interface PacketStateSDKType {
   port_id: string;
   channel_id: string;
@@ -318,6 +435,20 @@ export interface PacketStateSDKType {
  * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
 export interface Acknowledgement {
+  result?: Uint8Array;
+  error?: string;
+}
+
+/**
+ * Acknowledgement is the recommended acknowledgement format to be used by
+ * app-specific protocols.
+ * NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
+ * conflicts with other protobuf message formats used for acknowledgements.
+ * The first byte of any message with this format will be the non-ASCII values
+ * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
+ * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
+ */
+export interface AcknowledgementAmino {
   result?: Uint8Array;
   error?: string;
 }
@@ -460,6 +591,32 @@ export const Channel = {
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+
+    obj.version = message.version;
+    return obj;
+  },
+
+  fromAmino(object: ChannelAmino): Channel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: object.version
+    };
+  },
+
+  toAmino(message: Channel): ChannelAmino {
+    const obj: any = {};
+    obj.state = message.state;
+    obj.ordering = message.ordering;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
 
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
@@ -634,6 +791,36 @@ export const IdentifiedChannel = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: object.version,
+      portId: object.port_id,
+      channelId: object.channel_id
+    };
+  },
+
+  toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
+    const obj: any = {};
+    obj.state = message.state;
+    obj.ordering = message.ordering;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+
+    obj.version = message.version;
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    return obj;
   }
 
 };
@@ -713,6 +900,20 @@ export const Counterparty = {
   },
 
   toSDK(message: Counterparty): CounterpartySDKType {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    return obj;
+  },
+
+  fromAmino(object: CounterpartyAmino): Counterparty {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id
+    };
+  },
+
+  toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -884,6 +1085,32 @@ export const Packet = {
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
     obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
+  },
+
+  fromAmino(object: PacketAmino): Packet {
+    return {
+      sequence: Long.fromString(object.sequence),
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
+      destinationPort: object.destination_port,
+      destinationChannel: object.destination_channel,
+      data: object.data,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp)
+    };
+  },
+
+  toAmino(message: Packet): PacketAmino {
+    const obj: any = {};
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.destination_port = message.destinationPort;
+    obj.destination_channel = message.destinationChannel;
+    obj.data = message.data;
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    return obj;
   }
 
 };
@@ -995,6 +1222,24 @@ export const PacketState = {
     obj.sequence = message.sequence;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: PacketStateAmino): PacketState {
+    return {
+      portId: object.port_id,
+      channelId: object.channel_id,
+      sequence: Long.fromString(object.sequence),
+      data: object.data
+    };
+  },
+
+  toAmino(message: PacketState): PacketStateAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.data = message.data;
+    return obj;
   }
 
 };
@@ -1074,6 +1319,20 @@ export const Acknowledgement = {
   },
 
   toSDK(message: Acknowledgement): AcknowledgementSDKType {
+    const obj: any = {};
+    obj.result = message.result;
+    obj.error = message.error;
+    return obj;
+  },
+
+  fromAmino(object: AcknowledgementAmino): Acknowledgement {
+    return {
+      result: object?.result,
+      error: object?.error
+    };
+  },
+
+  toAmino(message: Acknowledgement): AcknowledgementAmino {
     const obj: any = {};
     obj.result = message.result;
     obj.error = message.error;

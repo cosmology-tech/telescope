@@ -4,6 +4,9 @@ export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
 }
+export interface ParamsAmino {
+  force_unlock_allowed_addresses: string[];
+}
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
 }
@@ -76,6 +79,24 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+
+    if (message.forceUnlockAllowedAddresses) {
+      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
+    } else {
+      obj.force_unlock_allowed_addresses = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      forceUnlockAllowedAddresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
 
     if (message.forceUnlockAllowedAddresses) {

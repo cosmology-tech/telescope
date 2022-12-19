@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.epochs.v1";
@@ -11,6 +11,15 @@ export interface EpochInfo {
   currentEpochStartTime?: Date;
   epochCountingStarted: boolean;
   currentEpochStartHeight: Long;
+}
+export interface EpochInfoAmino {
+  identifier: string;
+  start_time?: Date;
+  duration?: DurationAmino;
+  current_epoch: string;
+  current_epoch_start_time?: Date;
+  epoch_counting_started: boolean;
+  current_epoch_start_height: string;
 }
 export interface EpochInfoSDKType {
   identifier: string;
@@ -25,6 +34,11 @@ export interface EpochInfoSDKType {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
+}
+
+/** GenesisState defines the epochs module's genesis state. */
+export interface GenesisStateAmino {
+  epochs: EpochInfoAmino[];
 }
 
 /** GenesisState defines the epochs module's genesis state. */
@@ -181,6 +195,30 @@ export const EpochInfo = {
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight;
     return obj;
+  },
+
+  fromAmino(object: EpochInfoAmino): EpochInfo {
+    return {
+      identifier: object.identifier,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      currentEpoch: Long.fromString(object.current_epoch),
+      currentEpochStartTime: object?.current_epoch_start_time ? Timestamp.fromAmino(object.current_epoch_start_time) : undefined,
+      epochCountingStarted: object.epoch_counting_started,
+      currentEpochStartHeight: Long.fromString(object.current_epoch_start_height)
+    };
+  },
+
+  toAmino(message: EpochInfo): EpochInfoAmino {
+    const obj: any = {};
+    obj.identifier = message.identifier;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(message.currentEpochStartTime) : undefined;
+    obj.epoch_counting_started = message.epochCountingStarted;
+    obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
+    return obj;
   }
 
 };
@@ -257,6 +295,24 @@ export const GenesisState = {
 
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toSDK(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
     } else {
       obj.epochs = [];
     }

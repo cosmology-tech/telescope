@@ -1,4 +1,4 @@
-import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
+import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";
@@ -16,6 +16,21 @@ export interface GenesisState {
    * begins.
    */
   reductionStartedEpoch: Long;
+}
+
+/** GenesisState defines the mint module's genesis state. */
+export interface GenesisStateAmino {
+  /** minter is an abstraction for holding current rewards information. */
+  minter?: MinterAmino;
+
+  /** params defines all the paramaters of the mint module. */
+  params?: ParamsAmino;
+
+  /**
+   * reduction_started_epoch is the first epoch in which the reduction of mint
+   * begins.
+   */
+  reduction_started_epoch: string;
 }
 
 /** GenesisState defines the mint module's genesis state. */
@@ -117,6 +132,22 @@ export const GenesisState = {
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     obj.reduction_started_epoch = message.reductionStartedEpoch;
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      reductionStartedEpoch: Long.fromString(object.reduction_started_epoch)
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.reduction_started_epoch = message.reductionStartedEpoch ? message.reductionStartedEpoch.toString() : undefined;
     return obj;
   }
 

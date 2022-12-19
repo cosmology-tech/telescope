@@ -24,6 +24,24 @@ export interface DevFeeInfo {
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
+export interface DevFeeInfoAmino {
+  /** hex address of registered contract */
+  contract_address: string;
+
+  /** bech32 address of contract deployer */
+  deployer_address: string;
+
+  /**
+   * bech32 address of account receiving the transaction fees
+   * it defaults to deployer_address
+   */
+  withdraw_address: string;
+}
+
+/**
+ * DevFeeInfo defines an instance that organizes fee distribution conditions
+ * for the owner of a given smart contract
+ */
 export interface DevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -118,6 +136,22 @@ export const DevFeeInfo = {
   },
 
   toSDK(message: DevFeeInfo): DevFeeInfoSDKType {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    return obj;
+  },
+
+  fromAmino(object: DevFeeInfoAmino): DevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address
+    };
+  },
+
+  toAmino(message: DevFeeInfo): DevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;

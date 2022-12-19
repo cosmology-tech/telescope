@@ -1,5 +1,5 @@
-import { Params, ParamsSDKType } from "./params";
-import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { DenomAuthorityMetadata, DenomAuthorityMetadataAmino, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
@@ -8,12 +8,21 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -26,6 +35,14 @@ export interface QueryParamsResponseSDKType {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataRequest {
+  denom: string;
+}
+
+/**
+ * QueryDenomAuthorityMetadataRequest defines the request structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
+export interface QueryDenomAuthorityMetadataRequestAmino {
   denom: string;
 }
 
@@ -49,6 +66,14 @@ export interface QueryDenomAuthorityMetadataResponse {
  * QueryDenomAuthorityMetadataResponse defines the response structure for the
  * DenomAuthorityMetadata gRPC query.
  */
+export interface QueryDenomAuthorityMetadataResponseAmino {
+  authority_metadata?: DenomAuthorityMetadataAmino;
+}
+
+/**
+ * QueryDenomAuthorityMetadataResponse defines the response structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
 export interface QueryDenomAuthorityMetadataResponseSDKType {
   authority_metadata?: DenomAuthorityMetadataSDKType;
 }
@@ -65,6 +90,14 @@ export interface QueryDenomsFromCreatorRequest {
  * QueryDenomsFromCreatorRequest defines the request structure for the
  * DenomsFromCreator gRPC query.
  */
+export interface QueryDenomsFromCreatorRequestAmino {
+  creator: string;
+}
+
+/**
+ * QueryDenomsFromCreatorRequest defines the request structure for the
+ * DenomsFromCreator gRPC query.
+ */
 export interface QueryDenomsFromCreatorRequestSDKType {
   creator: string;
 }
@@ -74,6 +107,14 @@ export interface QueryDenomsFromCreatorRequestSDKType {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorResponse {
+  denoms: string[];
+}
+
+/**
+ * QueryDenomsFromCreatorRequest defines the response structure for the
+ * DenomsFromCreator gRPC query.
+ */
+export interface QueryDenomsFromCreatorResponseAmino {
   denoms: string[];
 }
 
@@ -131,6 +172,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -202,6 +252,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -268,6 +330,18 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
 
   toSDK(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomAuthorityMetadataRequestAmino): QueryDenomAuthorityMetadataRequest {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -340,6 +414,18 @@ export const QueryDenomAuthorityMetadataResponse = {
     const obj: any = {};
     message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toSDK(message.authorityMetadata) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDenomAuthorityMetadataResponseAmino): QueryDenomAuthorityMetadataResponse {
+    return {
+      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAmino {
+    const obj: any = {};
+    obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
+    return obj;
   }
 
 };
@@ -406,6 +492,18 @@ export const QueryDenomsFromCreatorRequest = {
   },
 
   toSDK(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestSDKType {
+    const obj: any = {};
+    obj.creator = message.creator;
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomsFromCreatorRequestAmino): QueryDenomsFromCreatorRequest {
+    return {
+      creator: object.creator
+    };
+  },
+
+  toAmino(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
@@ -481,6 +579,24 @@ export const QueryDenomsFromCreatorResponse = {
   },
 
   toSDK(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseSDKType {
+    const obj: any = {};
+
+    if (message.denoms) {
+      obj.denoms = message.denoms.map(e => e);
+    } else {
+      obj.denoms = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryDenomsFromCreatorResponseAmino): QueryDenomsFromCreatorResponse {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseAmino {
     const obj: any = {};
 
     if (message.denoms) {

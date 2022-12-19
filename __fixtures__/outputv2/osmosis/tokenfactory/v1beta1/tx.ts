@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
@@ -16,6 +16,24 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
  * denom does not indicate the current admin.
  */
 export interface MsgCreateDenom {
+  sender: string;
+
+  /** subdenom can be up to 44 "alphanumeric" characters long. */
+  subdenom: string;
+}
+
+/**
+ * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
+ * method. It allows an account to create a new denom. It requires a sender
+ * address and a sub denomination. The (sender_address, sub_denomination) tuple
+ * must be unique and cannot be re-used.
+ * 
+ * The resulting denom created is defined as
+ * <factory/{creatorAddress}/{subdenom}>. The resulting denom's admin is
+ * originally set to be the creator, but this can be changed later. The token
+ * denom does not indicate the current admin.
+ */
+export interface MsgCreateDenomAmino {
   sender: string;
 
   /** subdenom can be up to 44 "alphanumeric" characters long. */
@@ -50,6 +68,14 @@ export interface MsgCreateDenomResponse {
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
  * It returns the full string of the newly created denom
  */
+export interface MsgCreateDenomResponseAmino {
+  new_token_denom: string;
+}
+
+/**
+ * MsgCreateDenomResponse is the return value of MsgCreateDenom
+ * It returns the full string of the newly created denom
+ */
 export interface MsgCreateDenomResponseSDKType {
   new_token_denom: string;
 }
@@ -67,11 +93,21 @@ export interface MsgMint {
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
  * more of a token.  For now, we only support minting to the sender account
  */
+export interface MsgMintAmino {
+  sender: string;
+  amount?: CoinAmino;
+}
+
+/**
+ * MsgMint is the sdk.Msg type for allowing an admin account to mint
+ * more of a token.  For now, we only support minting to the sender account
+ */
 export interface MsgMintSDKType {
   sender: string;
   amount?: CoinSDKType;
 }
 export interface MsgMintResponse {}
+export interface MsgMintResponseAmino {}
 export interface MsgMintResponseSDKType {}
 
 /**
@@ -87,11 +123,21 @@ export interface MsgBurn {
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
  * a token.  For now, we only support burning from the sender account.
  */
+export interface MsgBurnAmino {
+  sender: string;
+  amount?: CoinAmino;
+}
+
+/**
+ * MsgBurn is the sdk.Msg type for allowing an admin account to burn
+ * a token.  For now, we only support burning from the sender account.
+ */
 export interface MsgBurnSDKType {
   sender: string;
   amount?: CoinSDKType;
 }
 export interface MsgBurnResponse {}
+export interface MsgBurnResponseAmino {}
 export interface MsgBurnResponseSDKType {}
 
 /**
@@ -102,6 +148,16 @@ export interface MsgChangeAdmin {
   sender: string;
   denom: string;
   newAdmin: string;
+}
+
+/**
+ * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
+ * adminship of a denom to a new account
+ */
+export interface MsgChangeAdminAmino {
+  sender: string;
+  denom: string;
+  new_admin: string;
 }
 
 /**
@@ -124,6 +180,12 @@ export interface MsgChangeAdminResponse {}
  * MsgChangeAdminResponse defines the response structure for an executed
  * MsgChangeAdmin message.
  */
+export interface MsgChangeAdminResponseAmino {}
+
+/**
+ * MsgChangeAdminResponse defines the response structure for an executed
+ * MsgChangeAdmin message.
+ */
 export interface MsgChangeAdminResponseSDKType {}
 
 /**
@@ -133,6 +195,15 @@ export interface MsgChangeAdminResponseSDKType {}
 export interface MsgSetDenomMetadata {
   sender: string;
   metadata?: Metadata;
+}
+
+/**
+ * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
+ * the denom's bank metadata
+ */
+export interface MsgSetDenomMetadataAmino {
+  sender: string;
+  metadata?: MetadataAmino;
 }
 
 /**
@@ -149,6 +220,12 @@ export interface MsgSetDenomMetadataSDKType {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponse {}
+
+/**
+ * MsgSetDenomMetadataResponse defines the response structure for an executed
+ * MsgSetDenomMetadata message.
+ */
+export interface MsgSetDenomMetadataResponseAmino {}
 
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
@@ -235,6 +312,20 @@ export const MsgCreateDenom = {
     obj.sender = message.sender;
     obj.subdenom = message.subdenom;
     return obj;
+  },
+
+  fromAmino(object: MsgCreateDenomAmino): MsgCreateDenom {
+    return {
+      sender: object.sender,
+      subdenom: object.subdenom
+    };
+  },
+
+  toAmino(message: MsgCreateDenom): MsgCreateDenomAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.subdenom = message.subdenom;
+    return obj;
   }
 
 };
@@ -301,6 +392,18 @@ export const MsgCreateDenomResponse = {
   },
 
   toSDK(message: MsgCreateDenomResponse): MsgCreateDenomResponseSDKType {
+    const obj: any = {};
+    obj.new_token_denom = message.newTokenDenom;
+    return obj;
+  },
+
+  fromAmino(object: MsgCreateDenomResponseAmino): MsgCreateDenomResponse {
+    return {
+      newTokenDenom: object.new_token_denom
+    };
+  },
+
+  toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseAmino {
     const obj: any = {};
     obj.new_token_denom = message.newTokenDenom;
     return obj;
@@ -387,6 +490,20 @@ export const MsgMint = {
     obj.sender = message.sender;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgMintAmino): MsgMint {
+    return {
+      sender: object.sender,
+      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+    };
+  },
+
+  toAmino(message: MsgMint): MsgMintAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
   }
 
 };
@@ -437,6 +554,15 @@ export const MsgMintResponse = {
   },
 
   toSDK(_: MsgMintResponse): MsgMintResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgMintResponseAmino): MsgMintResponse {
+    return {};
+  },
+
+  toAmino(_: MsgMintResponse): MsgMintResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -522,6 +648,20 @@ export const MsgBurn = {
     obj.sender = message.sender;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgBurnAmino): MsgBurn {
+    return {
+      sender: object.sender,
+      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+    };
+  },
+
+  toAmino(message: MsgBurn): MsgBurnAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
   }
 
 };
@@ -572,6 +712,15 @@ export const MsgBurnResponse = {
   },
 
   toSDK(_: MsgBurnResponse): MsgBurnResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgBurnResponseAmino): MsgBurnResponse {
+    return {};
+  },
+
+  toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -671,6 +820,22 @@ export const MsgChangeAdmin = {
     obj.denom = message.denom;
     obj.new_admin = message.newAdmin;
     return obj;
+  },
+
+  fromAmino(object: MsgChangeAdminAmino): MsgChangeAdmin {
+    return {
+      sender: object.sender,
+      denom: object.denom,
+      newAdmin: object.new_admin
+    };
+  },
+
+  toAmino(message: MsgChangeAdmin): MsgChangeAdminAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.denom = message.denom;
+    obj.new_admin = message.newAdmin;
+    return obj;
   }
 
 };
@@ -721,6 +886,15 @@ export const MsgChangeAdminResponse = {
   },
 
   toSDK(_: MsgChangeAdminResponse): MsgChangeAdminResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgChangeAdminResponseAmino): MsgChangeAdminResponse {
+    return {};
+  },
+
+  toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -806,6 +980,20 @@ export const MsgSetDenomMetadata = {
     obj.sender = message.sender;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgSetDenomMetadataAmino): MsgSetDenomMetadata {
+    return {
+      sender: object.sender,
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+    };
+  },
+
+  toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
+    return obj;
   }
 
 };
@@ -856,6 +1044,15 @@ export const MsgSetDenomMetadataResponse = {
   },
 
   toSDK(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSetDenomMetadataResponseAmino): MsgSetDenomMetadataResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};
     return obj;
   }

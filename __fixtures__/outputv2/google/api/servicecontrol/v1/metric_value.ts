@@ -1,9 +1,13 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { Distribution, DistributionSDKType } from "./distribution";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface MetricValue_LabelsEntryAmino {
   key: string;
   value: string;
 }
@@ -57,6 +61,50 @@ export interface MetricValue {
 }
 
 /** Represents a single metric value. */
+export interface MetricValueAmino {
+  /**
+   * The labels describing the metric value.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The start of the time period over which this metric value's measurement
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   */
+  start_time?: Date;
+
+  /**
+   * The end of the time period over which this metric value's measurement
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   */
+  end_time?: Date;
+
+  /** A boolean value. */
+  bool_value?: boolean;
+
+  /** A signed 64-bit integer value. */
+  int64_value?: string;
+
+  /** A double precision floating point value. */
+  double_value?: number;
+
+  /** A text string value. */
+  string_value?: string;
+
+  /** A distribution value. */
+  distribution_value?: DistributionAmino;
+}
+
+/** Represents a single metric value. */
 export interface MetricValueSDKType {
   labels: {
     [key: string]: string;
@@ -81,6 +129,19 @@ export interface MetricValueSet {
 
   /** The values in this metric. */
   metricValues: MetricValue[];
+}
+
+/**
+ * Represents a set of metric values in the same metric.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
+ */
+export interface MetricValueSetAmino {
+  /** The metric name defined in the service configuration. */
+  metric_name: string;
+
+  /** The values in this metric. */
+  metric_values: MetricValueAmino[];
 }
 
 /**
@@ -168,6 +229,20 @@ export const MetricValue_LabelsEntry = {
   },
 
   toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -379,6 +454,44 @@ export const MetricValue = {
     obj.string_value = message.stringValue;
     message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toSDK(message.distributionValue) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MetricValueAmino): MetricValue {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value ? Long.fromString(object.int64_value) : undefined,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
+    };
+  },
+
+  toAmino(message: MetricValue): MetricValueAmino {
+    const obj: any = {};
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
+    return obj;
   }
 
 };
@@ -469,6 +582,26 @@ export const MetricValueSet = {
 
     if (message.metricValues) {
       obj.metric_values = message.metricValues.map(e => e ? MetricValue.toSDK(e) : undefined);
+    } else {
+      obj.metric_values = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MetricValueSetAmino): MetricValueSet {
+    return {
+      metricName: object.metric_name,
+      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MetricValueSet): MetricValueSetAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+
+    if (message.metricValues) {
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
     } else {
       obj.metric_values = [];
     }

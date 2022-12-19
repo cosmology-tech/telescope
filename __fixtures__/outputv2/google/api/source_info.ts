@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
@@ -7,6 +7,12 @@ export const protobufPackage = "google.api";
 export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
+}
+
+/** Source information used to create a Service Config */
+export interface SourceInfoAmino {
+  /** All files used during config generation. */
+  source_files: AnyAmino[];
 }
 
 /** Source information used to create a Service Config */
@@ -86,6 +92,24 @@ export const SourceInfo = {
 
     if (message.sourceFiles) {
       obj.source_files = message.sourceFiles.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.source_files = [];
     }

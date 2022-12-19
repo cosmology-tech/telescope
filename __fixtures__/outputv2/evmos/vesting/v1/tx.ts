@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
@@ -35,6 +35,36 @@ export interface MsgCreateClawbackVestingAccount {
 }
 
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+export interface MsgCreateClawbackVestingAccountAmino {
+  /**
+   * from_address specifies the account to provide the funds and sign the
+   * clawback request
+   */
+  from_address: string;
+
+  /** to_address specifies the account to receive the funds */
+  to_address: string;
+
+  /** start_time defines the time at which the vesting period begins */
+  start_time?: Date;
+
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods: PeriodAmino[];
+
+  /** vesting_periods defines thevesting schedule relative to the start_time */
+  vesting_periods: PeriodAmino[];
+
+  /**
+   * merge specifies a the creation mechanism for existing
+   * ClawbackVestingAccounts. If true, merge this new grant into an existing
+   * ClawbackVestingAccount, or create it if it does not exist. If false,
+   * creates a new account. New grants to an existing account must be from the
+   * same from_address.
+   */
+  merge: boolean;
+}
+
+/** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
   to_address: string;
@@ -49,6 +79,12 @@ export interface MsgCreateClawbackVestingAccountSDKType {
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
+
+/**
+ * MsgCreateClawbackVestingAccountResponse defines the
+ * MsgCreateClawbackVestingAccount response type.
+ */
+export interface MsgCreateClawbackVestingAccountResponseAmino {}
 
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
@@ -79,6 +115,25 @@ export interface MsgClawback {
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
  */
+export interface MsgClawbackAmino {
+  /** funder_address is the address which funded the account */
+  funder_address: string;
+
+  /** account_address is the address of the ClawbackVestingAccount to claw back from. */
+  account_address: string;
+
+  /**
+   * dest_address specifies where the clawed-back tokens should be transferred
+   * to. If empty, the tokens will be transferred back to the original funder of
+   * the account.
+   */
+  dest_address: string;
+}
+
+/**
+ * MsgClawback defines a message that removes unvested tokens from a
+ * ClawbackVestingAccount.
+ */
 export interface MsgClawbackSDKType {
   funder_address: string;
   account_address: string;
@@ -87,6 +142,9 @@ export interface MsgClawbackSDKType {
 
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
+
+/** MsgClawbackResponse defines the MsgClawback response type. */
+export interface MsgClawbackResponseAmino {}
 
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}
@@ -248,6 +306,39 @@ export const MsgCreateClawbackVestingAccount = {
 
     obj.merge = message.merge;
     return obj;
+  },
+
+  fromAmino(object: MsgCreateClawbackVestingAccountAmino): MsgCreateClawbackVestingAccount {
+    return {
+      fromAddress: object.from_address,
+      toAddress: object.to_address,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
+      merge: object.merge
+    };
+  },
+
+  toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
+    const obj: any = {};
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+
+    obj.merge = message.merge;
+    return obj;
   }
 
 };
@@ -298,6 +389,15 @@ export const MsgCreateClawbackVestingAccountResponse = {
   },
 
   toSDK(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -397,6 +497,22 @@ export const MsgClawback = {
     obj.account_address = message.accountAddress;
     obj.dest_address = message.destAddress;
     return obj;
+  },
+
+  fromAmino(object: MsgClawbackAmino): MsgClawback {
+    return {
+      funderAddress: object.funder_address,
+      accountAddress: object.account_address,
+      destAddress: object.dest_address
+    };
+  },
+
+  toAmino(message: MsgClawback): MsgClawbackAmino {
+    const obj: any = {};
+    obj.funder_address = message.funderAddress;
+    obj.account_address = message.accountAddress;
+    obj.dest_address = message.destAddress;
+    return obj;
   }
 
 };
@@ -447,6 +563,15 @@ export const MsgClawbackResponse = {
   },
 
   toSDK(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {
+    return {};
+  },
+
+  toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
     const obj: any = {};
     return obj;
   }

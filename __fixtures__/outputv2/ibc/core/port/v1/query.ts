@@ -1,4 +1,4 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
+import { Order, OrderAmino, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.port.v1";
@@ -22,6 +22,24 @@ export interface QueryAppVersionRequest {
 }
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
+export interface QueryAppVersionRequestAmino {
+  /** port unique identifier */
+  port_id: string;
+
+  /** connection unique identifier */
+  connection_id: string;
+
+  /** whether the channel is ordered or unordered */
+  ordering: Order;
+
+  /** counterparty channel end */
+  counterparty?: CounterpartyAmino;
+
+  /** proposed version */
+  proposed_version: string;
+}
+
+/** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
   port_id: string;
   connection_id: string;
@@ -34,6 +52,15 @@ export interface QueryAppVersionRequestSDKType {
 export interface QueryAppVersionResponse {
   /** port id associated with the request identifiers */
   portId: string;
+
+  /** supported app version */
+  version: string;
+}
+
+/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
+export interface QueryAppVersionResponseAmino {
+  /** port id associated with the request identifiers */
+  port_id: string;
 
   /** supported app version */
   version: string;
@@ -166,6 +193,26 @@ export const QueryAppVersionRequest = {
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     obj.proposed_version = message.proposedVersion;
     return obj;
+  },
+
+  fromAmino(object: QueryAppVersionRequestAmino): QueryAppVersionRequest {
+    return {
+      portId: object.port_id,
+      connectionId: object.connection_id,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      proposedVersion: object.proposed_version
+    };
+  },
+
+  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.connection_id = message.connectionId;
+    obj.ordering = message.ordering;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.proposed_version = message.proposedVersion;
+    return obj;
   }
 
 };
@@ -245,6 +292,20 @@ export const QueryAppVersionResponse = {
   },
 
   toSDK(message: QueryAppVersionResponse): QueryAppVersionResponseSDKType {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.version = message.version;
+    return obj;
+  },
+
+  fromAmino(object: QueryAppVersionResponseAmino): QueryAppVersionResponse {
+    return {
+      portId: object.port_id,
+      version: object.version
+    };
+  },
+
+  toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.version = message.version;

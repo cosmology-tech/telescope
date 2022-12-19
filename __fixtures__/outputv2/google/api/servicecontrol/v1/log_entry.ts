@@ -1,12 +1,16 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
-import { HttpRequest, HttpRequestSDKType } from "./http_request";
-import { Any, AnySDKType } from "../../../protobuf/any";
-import { Struct, StructSDKType } from "../../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { LogSeverity, LogSeverityAmino, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
+import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
@@ -93,6 +97,83 @@ export interface LogEntry {
 }
 
 /** An individual log entry. */
+export interface LogEntryAmino {
+  /**
+   * Required. The log to which this log entry belongs. Examples: `"syslog"`,
+   * `"book_log"`.
+   */
+  name: string;
+
+  /**
+   * The time the event described by the log entry occurred. If
+   * omitted, defaults to operation start time.
+   */
+  timestamp?: Date;
+
+  /**
+   * The severity of the log entry. The default value is
+   * `LogSeverity.DEFAULT`.
+   */
+  severity: LogSeverity;
+
+  /**
+   * Optional. Information about the HTTP request associated with this
+   * log entry, if applicable.
+   */
+  http_request?: HttpRequestAmino;
+
+  /**
+   * Optional. Resource name of the trace associated with the log entry, if any.
+   * If this field contains a relative resource name, you can assume the name is
+   * relative to `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   */
+  trace: string;
+
+  /**
+   * A unique ID for the log entry used for deduplication. If omitted,
+   * the implementation will generate one based on operation_id.
+   */
+  insert_id: string;
+
+  /**
+   * A set of user-defined (key, value) data that provides additional
+   * information about the log entry.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The log entry payload, represented as a protocol buffer that is
+   * expressed as a JSON object. The only accepted type currently is
+   * [AuditLog][google.cloud.audit.AuditLog].
+   */
+  proto_payload?: AnyAmino;
+
+  /** The log entry payload, represented as a Unicode string (UTF-8). */
+  text_payload?: string;
+
+  /**
+   * The log entry payload, represented as a structure that
+   * is expressed as a JSON object.
+   */
+  struct_payload?: StructAmino;
+
+  /**
+   * Optional. Information about an operation associated with the log entry, if
+   * applicable.
+   */
+  operation?: LogEntryOperationAmino;
+
+  /**
+   * Optional. Source code location information associated with the log entry,
+   * if any.
+   */
+  source_location?: LogEntrySourceLocationAmino;
+}
+
+/** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
   timestamp?: Date;
@@ -115,6 +196,31 @@ export interface LogEntrySDKType {
  * a log entry is associated.
  */
 export interface LogEntryOperation {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the
+   * same identifier are assumed to be part of the same operation.
+   */
+  id: string;
+
+  /**
+   * Optional. An arbitrary producer identifier. The combination of
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperationAmino {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the
    * same identifier are assumed to be part of the same operation.
@@ -162,6 +268,34 @@ export interface LogEntrySourceLocation {
    * available.
    */
   line: Long;
+
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocationAmino {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: string;
 
   /**
    * Optional. Human-readable name of the function or method being invoked, with
@@ -259,6 +393,20 @@ export const LogEntry_LabelsEntry = {
   },
 
   toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -526,6 +674,52 @@ export const LogEntry = {
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     return obj;
+  },
+
+  fromAmino(object: LogEntryAmino): LogEntry {
+    return {
+      name: object.name,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
+      trace: object.trace,
+      insertId: object.insert_id,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
+      textPayload: object?.text_payload,
+      structPayload: object?.struct_payload ? Struct.fromAmino(object.struct_payload) : undefined,
+      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
+      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
+    };
+  },
+
+  toAmino(message: LogEntry): LogEntryAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    obj.severity = message.severity;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.trace = message.trace;
+    obj.insert_id = message.insertId;
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.text_payload = message.textPayload;
+    obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
+    return obj;
   }
 
 };
@@ -637,6 +831,24 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
+  },
+
+  fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
+    return {
+      id: object.id,
+      producer: object.producer,
+      first: object.first,
+      last: object.last
+    };
+  },
+
+  toAmino(message: LogEntryOperation): LogEntryOperationAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
+    return obj;
   }
 
 };
@@ -732,6 +944,22 @@ export const LogEntrySourceLocation = {
     const obj: any = {};
     obj.file = message.file;
     obj.line = message.line;
+    obj.function = message.function;
+    return obj;
+  },
+
+  fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
+    return {
+      file: object.file,
+      line: Long.fromString(object.line),
+      function: object.function
+    };
+  },
+
+  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
+    const obj: any = {};
+    obj.file = message.file;
+    obj.line = message.line ? message.line.toString() : undefined;
     obj.function = message.function;
     return obj;
   }

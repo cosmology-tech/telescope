@@ -21,6 +21,7 @@ export enum Action {
   UNRECOGNIZED = -1,
 }
 export const ActionSDKType = Action;
+export const ActionAmino = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -91,6 +92,21 @@ export interface Claim {
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
+export interface ClaimAmino {
+  /** action enum */
+  action: Action;
+
+  /** true if the action has been completed */
+  completed: boolean;
+
+  /** claimable token amount for the action. Zero if completed */
+  claimable_amount: string;
+}
+
+/**
+ * Claim defines the action, completed flag and the remaining claimable amount
+ * for a given user. This is only used during client queries.
+ */
 export interface ClaimSDKType {
   action: Action;
   completed: boolean;
@@ -110,6 +126,18 @@ export interface ClaimsRecordAddress {
 }
 
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+export interface ClaimsRecordAddressAmino {
+  /** bech32 or hex address of claim user */
+  address: string;
+
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: string;
+
+  /** slice of the available actions completed */
+  actions_completed: boolean[];
+}
+
+/** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
   address: string;
   initial_claimable_amount: string;
@@ -126,6 +154,18 @@ export interface ClaimsRecord {
 
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+
+/**
+ * ClaimsRecord defines the initial claimable airdrop amount and the list of
+ * completed actions to claim the tokens.
+ */
+export interface ClaimsRecordAmino {
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: string;
+
+  /** slice of the available actions completed */
+  actions_completed: boolean[];
 }
 
 /**
@@ -227,6 +267,22 @@ export const Claim = {
   toSDK(message: Claim): ClaimSDKType {
     const obj: any = {};
     message.action !== undefined && (obj.action = actionToJSON(message.action));
+    obj.completed = message.completed;
+    obj.claimable_amount = message.claimableAmount;
+    return obj;
+  },
+
+  fromAmino(object: ClaimAmino): Claim {
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      completed: object.completed,
+      claimableAmount: object.claimable_amount
+    };
+  },
+
+  toAmino(message: Claim): ClaimAmino {
+    const obj: any = {};
+    obj.action = message.action;
     obj.completed = message.completed;
     obj.claimable_amount = message.claimableAmount;
     return obj;
@@ -351,6 +407,28 @@ export const ClaimsRecordAddress = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
+    return {
+      address: object.address,
+      initialClaimableAmount: object.initial_claimable_amount,
+      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.initial_claimable_amount = message.initialClaimableAmount;
+
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = [];
+    }
+
+    return obj;
   }
 
 };
@@ -448,6 +526,26 @@ export const ClaimsRecord = {
   },
 
   toSDK(message: ClaimsRecord): ClaimsRecordSDKType {
+    const obj: any = {};
+    obj.initial_claimable_amount = message.initialClaimableAmount;
+
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
+    return {
+      initialClaimableAmount: object.initial_claimable_amount,
+      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ClaimsRecord): ClaimsRecordAmino {
     const obj: any = {};
     obj.initial_claimable_amount = message.initialClaimableAmount;
 

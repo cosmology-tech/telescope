@@ -17,6 +17,16 @@ export interface App {
  * This information is included in ResponseInfo. The App.Protocol can be
  * updated in ResponseEndBlock.
  */
+export interface AppAmino {
+  protocol: string;
+  software: string;
+}
+
+/**
+ * App includes the protocol and software version for the application.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
+ */
 export interface AppSDKType {
   protocol: Long;
   software: string;
@@ -30,6 +40,16 @@ export interface AppSDKType {
 export interface Consensus {
   block: Long;
   app: Long;
+}
+
+/**
+ * Consensus captures the consensus rules for processing a block in the blockchain,
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
+ */
+export interface ConsensusAmino {
+  block: string;
+  app: string;
 }
 
 /**
@@ -121,6 +141,20 @@ export const App = {
     obj.protocol = message.protocol;
     obj.software = message.software;
     return obj;
+  },
+
+  fromAmino(object: AppAmino): App {
+    return {
+      protocol: Long.fromString(object.protocol),
+      software: object.software
+    };
+  },
+
+  toAmino(message: App): AppAmino {
+    const obj: any = {};
+    obj.protocol = message.protocol ? message.protocol.toString() : undefined;
+    obj.software = message.software;
+    return obj;
   }
 
 };
@@ -203,6 +237,20 @@ export const Consensus = {
     const obj: any = {};
     obj.block = message.block;
     obj.app = message.app;
+    return obj;
+  },
+
+  fromAmino(object: ConsensusAmino): Consensus {
+    return {
+      block: Long.fromString(object.block),
+      app: Long.fromString(object.app)
+    };
+  },
+
+  toAmino(message: Consensus): ConsensusAmino {
+    const obj: any = {};
+    obj.block = message.block ? message.block.toString() : undefined;
+    obj.app = message.app ? message.app.toString() : undefined;
     return obj;
   }
 

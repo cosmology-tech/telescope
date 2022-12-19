@@ -7,6 +7,12 @@ export interface Proof {
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
+export interface ProofAmino {
+  total: string;
+  index: string;
+  leaf_hash: Uint8Array;
+  aunts: Uint8Array[];
+}
 export interface ProofSDKType {
   total: Long;
   index: Long;
@@ -20,11 +26,23 @@ export interface ValueOp {
   /** To encode in ProofOp.Data */
   proof?: Proof;
 }
+export interface ValueOpAmino {
+  /** Encoded in ProofOp.Key. */
+  key: Uint8Array;
+
+  /** To encode in ProofOp.Data */
+  proof?: ProofAmino;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof?: ProofSDKType;
 }
 export interface DominoOp {
+  key: string;
+  input: string;
+  output: string;
+}
+export interface DominoOpAmino {
   key: string;
   input: string;
   output: string;
@@ -51,6 +69,17 @@ export interface ProofOp {
  * The data could be arbitrary format, providing nessecary data
  * for example neighbouring node hash
  */
+export interface ProofOpAmino {
+  type: string;
+  key: Uint8Array;
+  data: Uint8Array;
+}
+
+/**
+ * ProofOp defines an operation used for calculating Merkle root
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
+ */
 export interface ProofOpSDKType {
   type: string;
   key: Uint8Array;
@@ -60,6 +89,11 @@ export interface ProofOpSDKType {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOps {
   ops: ProofOp[];
+}
+
+/** ProofOps is Merkle proof defined by the list of ProofOps */
+export interface ProofOpsAmino {
+  ops: ProofOpAmino[];
 }
 
 /** ProofOps is Merkle proof defined by the list of ProofOps */
@@ -186,6 +220,30 @@ export const Proof = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ProofAmino): Proof {
+    return {
+      total: Long.fromString(object.total),
+      index: Long.fromString(object.index),
+      leafHash: object.leaf_hash,
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Proof): ProofAmino {
+    const obj: any = {};
+    obj.total = message.total ? message.total.toString() : undefined;
+    obj.index = message.index ? message.index.toString() : undefined;
+    obj.leaf_hash = message.leafHash;
+
+    if (message.aunts) {
+      obj.aunts = message.aunts.map(e => e);
+    } else {
+      obj.aunts = [];
+    }
+
+    return obj;
   }
 
 };
@@ -268,6 +326,20 @@ export const ValueOp = {
     const obj: any = {};
     obj.key = message.key;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ValueOpAmino): ValueOp {
+    return {
+      key: object.key,
+      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+
+  toAmino(message: ValueOp): ValueOpAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   }
 
@@ -361,6 +433,22 @@ export const DominoOp = {
   },
 
   toSDK(message: DominoOp): DominoOpSDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.input = message.input;
+    obj.output = message.output;
+    return obj;
+  },
+
+  fromAmino(object: DominoOpAmino): DominoOp {
+    return {
+      key: object.key,
+      input: object.input,
+      output: object.output
+    };
+  },
+
+  toAmino(message: DominoOp): DominoOpAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.input = message.input;
@@ -463,6 +551,22 @@ export const ProofOp = {
     obj.key = message.key;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: ProofOpAmino): ProofOp {
+    return {
+      type: object.type,
+      key: object.key,
+      data: object.data
+    };
+  },
+
+  toAmino(message: ProofOp): ProofOpAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.key = message.key;
+    obj.data = message.data;
+    return obj;
   }
 
 };
@@ -539,6 +643,24 @@ export const ProofOps = {
 
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toSDK(e) : undefined);
+    } else {
+      obj.ops = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ProofOpsAmino): ProofOps {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ProofOps): ProofOpsAmino {
+    const obj: any = {};
+
+    if (message.ops) {
+      obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
     } else {
       obj.ops = [];
     }

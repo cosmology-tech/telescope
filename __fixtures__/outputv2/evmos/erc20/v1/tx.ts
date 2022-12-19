@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -19,6 +19,21 @@ export interface MsgConvertCoin {
 }
 
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
+export interface MsgConvertCoinAmino {
+  /**
+   * Cosmos coin which denomination is registered in a token pair. The coin
+   * amount defines the amount of coins to convert.
+   */
+  coin?: CoinAmino;
+
+  /** recipient hex address to receive ERC20 token */
+  receiver: string;
+
+  /** cosmos bech32 address from the owner of the given Cosmos coins */
+  sender: string;
+}
+
+/** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinSDKType {
   coin?: CoinSDKType;
   receiver: string;
@@ -27,6 +42,9 @@ export interface MsgConvertCoinSDKType {
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponse {}
+
+/** MsgConvertCoinResponse returns no fields */
+export interface MsgConvertCoinResponseAmino {}
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseSDKType {}
@@ -53,6 +71,24 @@ export interface MsgConvertERC20 {
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
  * coin.
  */
+export interface MsgConvertERC20Amino {
+  /** ERC20 token contract address registered in a token pair */
+  contract_address: string;
+
+  /** amount of ERC20 tokens to convert */
+  amount: string;
+
+  /** bech32 address to receive native Cosmos coins */
+  receiver: string;
+
+  /** sender hex address from the owner of the given ERC20 tokens */
+  sender: string;
+}
+
+/**
+ * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
+ * coin.
+ */
 export interface MsgConvertERC20SDKType {
   contract_address: string;
   amount: string;
@@ -62,6 +98,9 @@ export interface MsgConvertERC20SDKType {
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20Response {}
+
+/** MsgConvertERC20Response returns no fields */
+export interface MsgConvertERC20ResponseAmino {}
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseSDKType {}
@@ -159,6 +198,22 @@ export const MsgConvertCoin = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
+    return {
+      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
+      receiver: object.receiver,
+      sender: object.sender
+    };
+  },
+
+  toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
+    const obj: any = {};
+    obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
+    obj.receiver = message.receiver;
+    obj.sender = message.sender;
+    return obj;
   }
 
 };
@@ -209,6 +264,15 @@ export const MsgConvertCoinResponse = {
   },
 
   toSDK(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
+    return {};
+  },
+
+  toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -322,6 +386,24 @@ export const MsgConvertERC20 = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
+    return {
+      contractAddress: object.contract_address,
+      amount: object.amount,
+      receiver: object.receiver,
+      sender: object.sender
+    };
+  },
+
+  toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.amount = message.amount;
+    obj.receiver = message.receiver;
+    obj.sender = message.sender;
+    return obj;
   }
 
 };
@@ -372,6 +454,15 @@ export const MsgConvertERC20Response = {
   },
 
   toSDK(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
+    return {};
+  },
+
+  toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
     const obj: any = {};
     return obj;
   }

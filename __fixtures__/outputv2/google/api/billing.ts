@@ -80,6 +80,50 @@ export interface Billing {
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
+export interface BillingAmino {
+  /**
+   * Billing configurations for sending metrics to the consumer project.
+   * There can be multiple consumer destinations per service, each one must have
+   * a different monitored resource type. A metric can be used in at most
+   * one consumer destination.
+   */
+  consumer_destinations: Billing_BillingDestinationAmino[];
+}
+
+/**
+ * Billing related configuration of the service.
+ * 
+ * The following example shows how to configure monitored resources and metrics
+ * for billing, `consumer_destinations` is the only supported destination and
+ * the monitored resources need at least one label key
+ * `cloud.googleapis.com/location` to indicate the location of the billing
+ * usage, using different monitored resources between monitoring and billing is
+ * recommended so they can be evolved independently:
+ * 
+ * 
+ *     monitored_resources:
+ *     - type: library.googleapis.com/billing_branch
+ *       labels:
+ *       - key: cloud.googleapis.com/location
+ *         description: |
+ *           Predefined label to support billing location restriction.
+ *       - key: city
+ *         description: |
+ *           Custom label to define the city where the library branch is located
+ *           in.
+ *       - key: name
+ *         description: Custom label to define the name of the library branch.
+ *     metrics:
+ *     - name: library.googleapis.com/book/borrowed_count
+ *       metric_kind: DELTA
+ *       value_type: INT64
+ *       unit: "1"
+ *     billing:
+ *       consumer_destinations:
+ *       - monitored_resource: library.googleapis.com/billing_branch
+ *         metrics:
+ *         - library.googleapis.com/book/borrowed_count
+ */
 export interface BillingSDKType {
   consumer_destinations: Billing_BillingDestinationSDKType[];
 }
@@ -94,6 +138,24 @@ export interface Billing_BillingDestination {
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitoredResource: string;
+
+  /**
+   * Names of the metrics to report to this billing destination.
+   * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics: string[];
+}
+
+/**
+ * Configuration of a specific billing destination (Currently only support
+ * bill against consumer project).
+ */
+export interface Billing_BillingDestinationAmino {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitored_resource: string;
 
   /**
    * Names of the metrics to report to this billing destination.
@@ -188,6 +250,24 @@ export const Billing = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: BillingAmino): Billing {
+    return {
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Billing): BillingAmino {
+    const obj: any = {};
+
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -273,6 +353,26 @@ export const Billing_BillingDestination = {
   },
 
   toSDK(message: Billing_BillingDestination): Billing_BillingDestinationSDKType {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource;
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
+    return {
+      monitoredResource: object.monitored_resource,
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = message.monitoredResource;
 

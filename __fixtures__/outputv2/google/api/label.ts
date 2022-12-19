@@ -15,6 +15,7 @@ export enum LabelDescriptor_ValueType {
   UNRECOGNIZED = -1,
 }
 export const LabelDescriptor_ValueTypeSDKType = LabelDescriptor_ValueType;
+export const LabelDescriptor_ValueTypeAmino = LabelDescriptor_ValueType;
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -59,6 +60,18 @@ export interface LabelDescriptor {
 
   /** The type of data that can be assigned to the label. */
   valueType: LabelDescriptor_ValueType;
+
+  /** A human-readable description for the label. */
+  description: string;
+}
+
+/** A description of a label. */
+export interface LabelDescriptorAmino {
+  /** The label key. */
+  key: string;
+
+  /** The type of data that can be assigned to the label. */
+  value_type: LabelDescriptor_ValueType;
 
   /** A human-readable description for the label. */
   description: string;
@@ -162,6 +175,22 @@ export const LabelDescriptor = {
     const obj: any = {};
     obj.key = message.key;
     message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
+    obj.description = message.description;
+    return obj;
+  },
+
+  fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
+    return {
+      key: object.key,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: object.description
+    };
+  },
+
+  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value_type = message.valueType;
     obj.description = message.description;
     return obj;
   }

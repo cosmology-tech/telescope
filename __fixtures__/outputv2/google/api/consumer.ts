@@ -21,6 +21,7 @@ export enum Property_PropertyType {
   UNRECOGNIZED = -1,
 }
 export const Property_PropertyTypeSDKType = Property_PropertyType;
+export const Property_PropertyTypeAmino = Property_PropertyType;
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -113,6 +114,29 @@ export interface ProjectProperties {
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
+export interface ProjectPropertiesAmino {
+  /** List of per consumer project-specific properties. */
+  properties: PropertyAmino[];
+}
+
+/**
+ * A descriptor for defining project properties for a service. One service may
+ * have many consumer projects, and the service may want to behave differently
+ * depending on some properties on the project. For example, a project may be
+ * associated with a school, or a business, or a government agency, a business
+ * type property on the project may affect how a service responds to the client.
+ * This descriptor defines which properties are allowed to be set on a project.
+ * 
+ * Example:
+ * 
+ *    project_properties:
+ *      properties:
+ *      - name: NO_WATERMARK
+ *        type: BOOL
+ *        description: Allows usage of the API without watermarks.
+ *      - name: EXTENDED_TILE_CACHE_PERIOD
+ *        type: INT64
+ */
 export interface ProjectPropertiesSDKType {
   properties: PropertySDKType[];
 }
@@ -130,6 +154,29 @@ export interface ProjectPropertiesSDKType {
  * define and set these properties.
  */
 export interface Property {
+  /** The name of the property (a.k.a key). */
+  name: string;
+
+  /** The type of this property. */
+  type: Property_PropertyType;
+
+  /** The description of the property */
+  description: string;
+}
+
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
+export interface PropertyAmino {
   /** The name of the property (a.k.a key). */
   name: string;
 
@@ -235,6 +282,24 @@ export const ProjectProperties = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
+    const obj: any = {};
+
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
+    } else {
+      obj.properties = [];
+    }
+
+    return obj;
   }
 
 };
@@ -330,6 +395,22 @@ export const Property = {
     const obj: any = {};
     obj.name = message.name;
     message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
+    obj.description = message.description;
+    return obj;
+  },
+
+  fromAmino(object: PropertyAmino): Property {
+    return {
+      name: object.name,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
+      description: object.description
+    };
+  },
+
+  toAmino(message: Property): PropertyAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.type = message.type;
     obj.description = message.description;
     return obj;
   }

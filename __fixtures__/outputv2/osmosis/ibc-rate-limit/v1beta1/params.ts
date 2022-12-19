@@ -8,6 +8,11 @@ export interface Params {
 }
 
 /** Params defines the parameters for the ibc-rate-limit module. */
+export interface ParamsAmino {
+  contract_address: string;
+}
+
+/** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
   contract_address: string;
 }
@@ -74,6 +79,18 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      contractAddress: object.contract_address
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     return obj;

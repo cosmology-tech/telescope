@@ -5,6 +5,10 @@ export interface BitArray {
   bits: Long;
   elems: Long[];
 }
+export interface BitArrayAmino {
+  bits: string;
+  elems: string[];
+}
 export interface BitArraySDKType {
   bits: Long;
   elems: Long[];
@@ -105,6 +109,26 @@ export const BitArray = {
   toSDK(message: BitArray): BitArraySDKType {
     const obj: any = {};
     obj.bits = message.bits;
+
+    if (message.elems) {
+      obj.elems = message.elems.map(e => e);
+    } else {
+      obj.elems = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: BitArrayAmino): BitArray {
+    return {
+      bits: Long.fromString(object.bits),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: BitArray): BitArrayAmino {
+    const obj: any = {};
+    obj.bits = message.bits ? message.bits.toString() : undefined;
 
     if (message.elems) {
       obj.elems = message.elems.map(e => e);

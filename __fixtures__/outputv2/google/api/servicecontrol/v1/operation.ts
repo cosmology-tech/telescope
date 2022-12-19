@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
-import { LogEntry, LogEntrySDKType } from "./log_entry";
-import { Any, AnySDKType } from "../../../protobuf/any";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
+import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -23,6 +23,7 @@ export enum Operation_Importance {
   UNRECOGNIZED = -1,
 }
 export const Operation_ImportanceSDKType = Operation_Importance;
+export const Operation_ImportanceAmino = Operation_Importance;
 export function operation_ImportanceFromJSON(object: any): Operation_Importance {
   switch (object) {
     case 0:
@@ -53,6 +54,10 @@ export function operation_ImportanceToJSON(object: Operation_Importance): string
   }
 }
 export interface Operation_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
 }
@@ -154,6 +159,98 @@ export interface Operation {
 }
 
 /** Represents information regarding an operation. */
+export interface OperationAmino {
+  /**
+   * Identity of the operation. This must be unique within the scope of the
+   * service that generated the operation. If the service calls
+   * Check() and Report() on the same operation, the two calls should carry
+   * the same id.
+   * 
+   * UUID version 4 is recommended, though not required.
+   * In scenarios where an operation is computed from existing information
+   * and an idempotent id is desirable for deduplication purpose, UUID version 5
+   * is recommended. See RFC 4122 for details.
+   */
+  operation_id: string;
+
+  /** Fully qualified name of the operation. Reserved for future use. */
+  operation_name: string;
+
+  /**
+   * Identity of the consumer who is using the service.
+   * This field should be filled in for the operations initiated by a
+   * consumer, but not for service-initiated operations that are
+   * not related to a specific consumer.
+   * 
+   * - This can be in one of the following formats:
+   *     - project:PROJECT_ID,
+   *     - project`_`number:PROJECT_NUMBER,
+   *     - projects/PROJECT_ID or PROJECT_NUMBER,
+   *     - folders/FOLDER_NUMBER,
+   *     - organizations/ORGANIZATION_NUMBER,
+   *     - api`_`key:API_KEY.
+   */
+  consumer_id: string;
+
+  /** Required. Start time of the operation. */
+  start_time?: Date;
+
+  /**
+   * End time of the operation.
+   * Required when the operation is used in
+   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
+   * but optional when the operation is used in
+   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
+   */
+  end_time?: Date;
+
+  /**
+   * Labels describing the operation. Only the following labels are allowed:
+   * 
+   * - Labels describing monitored resources as defined in
+   *   the service configuration.
+   * - Default labels of metric values. When specified, labels defined in the
+   *   metric value override these default.
+   * - The following labels defined by Google Cloud Platform:
+   *     - `cloud.googleapis.com/location` describing the location where the
+   *        operation happened,
+   *     - `servicecontrol.googleapis.com/user_agent` describing the user agent
+   *        of the API request,
+   *     - `servicecontrol.googleapis.com/service_agent` describing the service
+   *        used to handle the API request (e.g. ESP),
+   *     - `servicecontrol.googleapis.com/platform` describing the platform
+   *        where the API is served, such as App Engine, Compute Engine, or
+   *        Kubernetes Engine.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   */
+  metric_value_sets: MetricValueSetAmino[];
+
+  /** Represents information to be logged. */
+  log_entries: LogEntryAmino[];
+
+  /** DO NOT USE. This is an experimental field. */
+  importance: Operation_Importance;
+
+  /** Unimplemented. */
+  extensions: AnyAmino[];
+}
+
+/** Represents information regarding an operation. */
 export interface OperationSDKType {
   operation_id: string;
   operation_name: string;
@@ -244,6 +341,20 @@ export const Operation_LabelsEntry = {
   },
 
   toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: Operation_LabelsEntryAmino): Operation_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -510,6 +621,64 @@ export const Operation = {
 
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: OperationAmino): Operation {
+    return {
+      operationId: object.operation_id,
+      operationName: object.operation_name,
+      consumerId: object.consumer_id,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromAmino(e)) : [],
+      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromAmino(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Operation): OperationAmino {
+    const obj: any = {};
+    obj.operation_id = message.operationId;
+    obj.operation_name = message.operationName;
+    obj.consumer_id = message.consumerId;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    if (message.metricValueSets) {
+      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
+    } else {
+      obj.metric_value_sets = [];
+    }
+
+    if (message.logEntries) {
+      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.log_entries = [];
+    }
+
+    obj.importance = message.importance;
+
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.extensions = [];
     }

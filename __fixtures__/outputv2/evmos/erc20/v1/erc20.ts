@@ -1,4 +1,4 @@
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -16,6 +16,7 @@ export enum Owner {
   UNRECOGNIZED = -1,
 }
 export const OwnerSDKType = Owner;
+export const OwnerAmino = Owner;
 export function ownerFromJSON(object: any): Owner {
   switch (object) {
     case 0:
@@ -75,6 +76,24 @@ export interface TokenPair {
  * TokenPair defines an instance that records a pairing consisting of a native
  *  Cosmos Coin and an ERC20 token address.
  */
+export interface TokenPairAmino {
+  /** address of ERC20 contract token */
+  erc20_address: string;
+
+  /** cosmos base denomination to be mapped to */
+  denom: string;
+
+  /** shows token mapping enable status */
+  enabled: boolean;
+
+  /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
+  contract_owner: Owner;
+}
+
+/**
+ * TokenPair defines an instance that records a pairing consisting of a native
+ *  Cosmos Coin and an ERC20 token address.
+ */
 export interface TokenPairSDKType {
   erc20_address: string;
   denom: string;
@@ -95,6 +114,21 @@ export interface RegisterCoinProposal {
 
   /** metadata of the native Cosmos coin */
   metadata?: Metadata;
+}
+
+/**
+ * RegisterCoinProposal is a gov Content type to register a token pair for a
+ * native Cosmos coin.
+ */
+export interface RegisterCoinProposalAmino {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** metadata of the native Cosmos coin */
+  metadata?: MetadataAmino;
 }
 
 /**
@@ -126,6 +160,21 @@ export interface RegisterERC20Proposal {
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
  * ERC20 token
  */
+export interface RegisterERC20ProposalAmino {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address of ERC20 token */
+  erc20address: string;
+}
+
+/**
+ * RegisterERC20Proposal is a gov Content type to register a token pair for an
+ * ERC20 token
+ */
 export interface RegisterERC20ProposalSDKType {
   title: string;
   description: string;
@@ -137,6 +186,24 @@ export interface RegisterERC20ProposalSDKType {
  * of a token pair.
  */
 export interface ToggleTokenConversionProposal {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token: string;
+}
+
+/**
+ * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
+ * of a token pair.
+ */
+export interface ToggleTokenConversionProposalAmino {
   /** title of the proposal */
   title: string;
 
@@ -267,6 +334,24 @@ export const TokenPair = {
     obj.enabled = message.enabled;
     message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
     return obj;
+  },
+
+  fromAmino(object: TokenPairAmino): TokenPair {
+    return {
+      erc20Address: object.erc20_address,
+      denom: object.denom,
+      enabled: object.enabled,
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+    };
+  },
+
+  toAmino(message: TokenPair): TokenPairAmino {
+    const obj: any = {};
+    obj.erc20_address = message.erc20Address;
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    obj.contract_owner = message.contractOwner;
+    return obj;
   }
 
 };
@@ -363,6 +448,22 @@ export const RegisterCoinProposal = {
     obj.title = message.title;
     obj.description = message.description;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+    };
+  },
+
+  toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   }
 
@@ -461,6 +562,22 @@ export const RegisterERC20Proposal = {
     obj.description = message.description;
     obj.erc20address = message.erc20address;
     return obj;
+  },
+
+  fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
+    return {
+      title: object.title,
+      description: object.description,
+      erc20address: object.erc20address
+    };
+  },
+
+  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.erc20address = message.erc20address;
+    return obj;
   }
 
 };
@@ -553,6 +670,22 @@ export const ToggleTokenConversionProposal = {
   },
 
   toSDK(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.token = message.token;
+    return obj;
+  },
+
+  fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      token: object.token
+    };
+  },
+
+  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;

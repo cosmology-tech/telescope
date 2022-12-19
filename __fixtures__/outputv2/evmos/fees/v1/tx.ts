@@ -25,6 +25,28 @@ export interface MsgRegisterDevFeeInfo {
 }
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
+export interface MsgRegisterDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+
+  /**
+   * bech32 address of message sender, must be the same as the origin EOA
+   * sending the transaction which deploys the contract
+   */
+  deployer_address: string;
+
+  /** bech32 address of account receiving the transaction fees */
+  withdraw_address: string;
+
+  /**
+   * array of nonces from the address path, where the last nonce is
+   * the nonce that determines the contract's address - it can be an EOA nonce
+   * or a factory contract nonce
+   */
+  nonces: string[];
+}
+
+/** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -37,6 +59,12 @@ export interface MsgRegisterDevFeeInfoSDKType {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+
+/**
+ * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
+ * type
+ */
+export interface MsgRegisterDevFeeInfoResponseAmino {}
 
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -60,6 +88,18 @@ export interface MsgCancelDevFeeInfo {
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
  */
+export interface MsgCancelDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+
+  /** deployer bech32 address */
+  deployer_address: string;
+}
+
+/**
+ * MsgCancelDevFeeInfo defines a message that cancels a registered a
+ * DevFeeInfo
+ */
 export interface MsgCancelDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -67,6 +107,9 @@ export interface MsgCancelDevFeeInfoSDKType {
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+
+/** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
+export interface MsgCancelDevFeeInfoResponseAmino {}
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
@@ -90,6 +133,21 @@ export interface MsgUpdateDevFeeInfo {
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
  */
+export interface MsgUpdateDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+
+  /** deployer bech32 address */
+  deployer_address: string;
+
+  /** new withdraw bech32 address for receiving the transaction fees */
+  withdraw_address: string;
+}
+
+/**
+ * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
+ * a registered DevFeeInfo
+ */
 export interface MsgUpdateDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -98,6 +156,9 @@ export interface MsgUpdateDevFeeInfoSDKType {
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+
+/** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
+export interface MsgUpdateDevFeeInfoResponseAmino {}
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
@@ -233,6 +294,30 @@ export const MsgRegisterDevFeeInfo = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address,
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e);
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
   }
 
 };
@@ -283,6 +368,15 @@ export const MsgRegisterDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -368,6 +462,20 @@ export const MsgCancelDevFeeInfo = {
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;
     return obj;
+  },
+
+  fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address
+    };
+  },
+
+  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    return obj;
   }
 
 };
@@ -418,6 +526,15 @@ export const MsgCancelDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -517,6 +634,22 @@ export const MsgUpdateDevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
+  },
+
+  fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address
+    };
+  },
+
+  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    return obj;
   }
 
 };
@@ -567,6 +700,15 @@ export const MsgUpdateDevFeeInfoResponse = {
   },
 
   toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   }

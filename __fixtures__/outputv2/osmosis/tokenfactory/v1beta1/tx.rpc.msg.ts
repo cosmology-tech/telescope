@@ -1,8 +1,8 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
+import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseAmino, MsgCreateDenomResponseSDKType, MsgMint, MsgMintAmino, MsgMintSDKType, MsgMintResponse, MsgMintResponseAmino, MsgMintResponseSDKType, MsgBurn, MsgBurnAmino, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseAmino, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseAmino, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseAmino, MsgSetDenomMetadataResponseSDKType } from "./tx";
 
 /** Msg defines the tokefactory module's gRPC message service. */
 export interface Msg {

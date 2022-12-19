@@ -18,6 +18,18 @@ export interface SourceContext {
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
+export interface SourceContextAmino {
+  /**
+   * The path-qualified name of the .proto file that contained the associated
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   */
+  file_name: string;
+}
+
+/**
+ * `SourceContext` represents information about the source of a
+ * protobuf element, like the file in which it is defined.
+ */
 export interface SourceContextSDKType {
   file_name: string;
 }
@@ -84,6 +96,18 @@ export const SourceContext = {
   },
 
   toSDK(message: SourceContext): SourceContextSDKType {
+    const obj: any = {};
+    obj.file_name = message.fileName;
+    return obj;
+  },
+
+  fromAmino(object: SourceContextAmino): SourceContext {
+    return {
+      fileName: object.file_name
+    };
+  },
+
+  toAmino(message: SourceContext): SourceContextAmino {
     const obj: any = {};
     obj.file_name = message.fileName;
     return obj;

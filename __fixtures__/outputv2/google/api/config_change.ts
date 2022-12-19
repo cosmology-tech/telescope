@@ -30,6 +30,7 @@ export enum ChangeType {
   UNRECOGNIZED = -1,
 }
 export const ChangeTypeSDKType = ChangeType;
+export const ChangeTypeAmino = ChangeType;
 export function changeTypeFromJSON(object: any): ChangeType {
   switch (object) {
     case 0:
@@ -126,6 +127,50 @@ export interface ConfigChange {
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
+export interface ConfigChangeAmino {
+  /**
+   * Object hierarchy path to the change, with levels separated by a '.'
+   * character. For repeated fields, an applicable unique identifier field is
+   * used for the index (usually selector, name, or id). For maps, the term
+   * 'key' is used. If the field has no unique identifier, the numeric index
+   * is used.
+   * Examples:
+   * - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
+   * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
+   * - logging.producer_destinations[0]
+   */
+  element: string;
+
+  /**
+   * Value of the changed object in the old Service configuration,
+   * in JSON format. This field will not be populated if ChangeType == ADDED.
+   */
+  old_value: string;
+
+  /**
+   * Value of the changed object in the new Service configuration,
+   * in JSON format. This field will not be populated if ChangeType == REMOVED.
+   */
+  new_value: string;
+
+  /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
+  change_type: ChangeType;
+
+  /**
+   * Collection of advice provided for this change, useful for determining the
+   * possible impact of this change.
+   */
+  advices: AdviceAmino[];
+}
+
+/**
+ * Output generated from semantically comparing two versions of a service
+ * configuration.
+ * 
+ * Includes detailed information about a field that have changed with
+ * applicable advice about potential consequences for the change, such as
+ * backwards-incompatibility.
+ */
 export interface ConfigChangeSDKType {
   element: string;
   old_value: string;
@@ -139,6 +184,18 @@ export interface ConfigChangeSDKType {
  * information about how a change will affect the existing service.
  */
 export interface Advice {
+  /**
+   * Useful description for why this advice was applied and what actions should
+   * be taken to mitigate any implied risks.
+   */
+  description: string;
+}
+
+/**
+ * Generated advice about this change, used for providing more
+ * information about how a change will affect the existing service.
+ */
+export interface AdviceAmino {
   /**
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
@@ -287,6 +344,32 @@ export const ConfigChange = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ConfigChangeAmino): ConfigChange {
+    return {
+      element: object.element,
+      oldValue: object.old_value,
+      newValue: object.new_value,
+      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
+      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ConfigChange): ConfigChangeAmino {
+    const obj: any = {};
+    obj.element = message.element;
+    obj.old_value = message.oldValue;
+    obj.new_value = message.newValue;
+    obj.change_type = message.changeType;
+
+    if (message.advices) {
+      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
+    } else {
+      obj.advices = [];
+    }
+
+    return obj;
   }
 
 };
@@ -353,6 +436,18 @@ export const Advice = {
   },
 
   toSDK(message: Advice): AdviceSDKType {
+    const obj: any = {};
+    obj.description = message.description;
+    return obj;
+  },
+
+  fromAmino(object: AdviceAmino): Advice {
+    return {
+      description: object.description
+    };
+  },
+
+  toAmino(message: Advice): AdviceAmino {
     const obj: any = {};
     obj.description = message.description;
     return obj;

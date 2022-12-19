@@ -14,6 +14,7 @@ export enum NullValue {
   UNRECOGNIZED = -1,
 }
 export const NullValueSDKType = NullValue;
+export const NullValueAmino = NullValue;
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
@@ -40,6 +41,10 @@ export interface Struct_FieldsEntry {
   key: string;
   value?: Value;
 }
+export interface Struct_FieldsEntryAmino {
+  key: string;
+  value?: ValueAmino;
+}
 export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
@@ -59,6 +64,23 @@ export interface Struct {
   /** Unordered map of dynamically typed values. */
   fields?: {
     [key: string]: Value;
+  };
+}
+
+/**
+ * `Struct` represents a structured data value, consisting of fields
+ * which map to dynamically typed values. In some languages, `Struct`
+ * might be supported by a native representation. For example, in
+ * scripting languages like JS a struct is represented as an
+ * object. The details of that representation are described together
+ * with the proto support for the language.
+ * 
+ * The JSON representation for `Struct` is JSON object.
+ */
+export interface StructAmino {
+  /** Unordered map of dynamically typed values. */
+  fields?: {
+    [key: string]: ValueAmino;
   };
 }
 
@@ -114,6 +136,34 @@ export interface Value {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+export interface ValueAmino {
+  /** Represents a null value. */
+  null_value?: NullValue;
+
+  /** Represents a double value. */
+  number_value?: number;
+
+  /** Represents a string value. */
+  string_value?: string;
+
+  /** Represents a boolean value. */
+  bool_value?: boolean;
+
+  /** Represents a structured value. */
+  struct_value?: StructAmino;
+
+  /** Represents a repeated `Value`. */
+  list_value?: ListValueAmino;
+}
+
+/**
+ * `Value` represents a dynamically typed value which can be either
+ * null, a number, a string, a boolean, a recursive struct value, or a
+ * list of values. A producer of value is expected to set one of that
+ * variants, absence of any variant indicates an error.
+ * 
+ * The JSON representation for `Value` is JSON value.
+ */
 export interface ValueSDKType {
   null_value?: NullValue;
   number_value?: number;
@@ -131,6 +181,16 @@ export interface ValueSDKType {
 export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
+}
+
+/**
+ * `ListValue` is a wrapper around a repeated field of values.
+ * 
+ * The JSON representation for `ListValue` is JSON array.
+ */
+export interface ListValueAmino {
+  /** Repeated field of dynamically typed values. */
+  values: ValueAmino[];
 }
 
 /**
@@ -220,6 +280,20 @@ export const Struct_FieldsEntry = {
     const obj: any = {};
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? Value.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   }
 
@@ -325,6 +399,30 @@ export const Struct = {
     if (message.fields) {
       Object.entries(message.fields).forEach(([k, v]) => {
         obj.fields[k] = Value.toSDK(v);
+      });
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: StructAmino): Struct {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: Struct): StructAmino {
+    const obj: any = {};
+    obj.fields = {};
+
+    if (message.fields) {
+      Object.entries(message.fields).forEach(([k, v]) => {
+        obj.fields[k] = Value.toAmino(v);
       });
     }
 
@@ -468,6 +566,28 @@ export const Value = {
     message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toSDK(message.structValue) : undefined);
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ValueAmino): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      numberValue: object?.number_value,
+      stringValue: object?.string_value,
+      boolValue: object?.bool_value,
+      structValue: object?.struct_value ? Struct.fromAmino(object.struct_value) : undefined,
+      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
+    };
+  },
+
+  toAmino(message: Value): ValueAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
+    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    return obj;
   }
 
 };
@@ -544,6 +664,24 @@ export const ListValue = {
 
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ListValueAmino): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ListValue): ListValueAmino {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
       obj.values = [];
     }

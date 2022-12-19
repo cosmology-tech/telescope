@@ -20,6 +20,19 @@ export interface Control {
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
+export interface ControlAmino {
+  /**
+   * The service control environment to use. If empty, no control plane
+   * feature (like quota and billing) will be enabled.
+   */
+  environment: string;
+}
+
+/**
+ * Selects and configures the service controller used by the service.  The
+ * service controller handles features like abuse, quota, billing, logging,
+ * monitoring, etc.
+ */
 export interface ControlSDKType {
   environment: string;
 }
@@ -86,6 +99,18 @@ export const Control = {
   },
 
   toSDK(message: Control): ControlSDKType {
+    const obj: any = {};
+    obj.environment = message.environment;
+    return obj;
+  },
+
+  fromAmino(object: ControlAmino): Control {
+    return {
+      environment: object.environment
+    };
+  },
+
+  toAmino(message: Control): ControlAmino {
     const obj: any = {};
     obj.environment = message.environment;
     return obj;

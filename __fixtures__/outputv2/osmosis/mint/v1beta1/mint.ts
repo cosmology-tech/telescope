@@ -9,6 +9,12 @@ export interface Minter {
 }
 
 /** Minter represents the minting state. */
+export interface MinterAmino {
+  /** epoch_provisions represent rewards for the current epoch. */
+  epoch_provisions: string;
+}
+
+/** Minter represents the minting state. */
 export interface MinterSDKType {
   epoch_provisions: string;
 }
@@ -19,6 +25,16 @@ export interface MinterSDKType {
  * tokens to be minted to the address.
  */
 export interface WeightedAddress {
+  address: string;
+  weight: string;
+}
+
+/**
+ * WeightedAddress represents an address with a weight assigned to it.
+ * The weight is used to determine the proportion of the total minted
+ * tokens to be minted to the address.
+ */
+export interface WeightedAddressAmino {
   address: string;
   weight: string;
 }
@@ -62,6 +78,37 @@ export interface DistributionProportions {
    * to be allocated to the community pool.
    */
   communityPool: string;
+}
+
+/**
+ * DistributionProportions defines the distribution proportions of the minted
+ * denom. In other words, defines which stakeholders will receive the minted
+ * denoms and how much.
+ */
+export interface DistributionProportionsAmino {
+  /**
+   * staking defines the proportion of the minted mint_denom that is to be
+   * allocated as staking rewards.
+   */
+  staking: string;
+
+  /**
+   * pool_incentives defines the proportion of the minted mint_denom that is
+   * to be allocated as pool incentives.
+   */
+  pool_incentives: string;
+
+  /**
+   * developer_rewards defines the proportion of the minted mint_denom that is
+   * to be allocated to developer rewards address.
+   */
+  developer_rewards: string;
+
+  /**
+   * community_pool defines the proportion of the minted mint_denom that is
+   * to be allocated to the community pool.
+   */
+  community_pool: string;
 }
 
 /**
@@ -119,6 +166,51 @@ export interface Params {
    * rewards
    */
   mintingRewardsDistributionStartEpoch: Long;
+}
+
+/** Params holds parameters for the x/mint module. */
+export interface ParamsAmino {
+  /** mint_denom is the denom of the coin to mint. */
+  mint_denom: string;
+
+  /** genesis_epoch_provisions epoch provisions from the first epoch. */
+  genesis_epoch_provisions: string;
+
+  /** epoch_identifier mint epoch identifier e.g. (day, week). */
+  epoch_identifier: string;
+
+  /**
+   * reduction_period_in_epochs the number of epochs it takes
+   * to reduce the rewards.
+   */
+  reduction_period_in_epochs: string;
+
+  /**
+   * reduction_factor is the reduction multiplier to execute
+   * at the end of each period set by reduction_period_in_epochs.
+   */
+  reduction_factor: string;
+
+  /**
+   * distribution_proportions defines the distribution proportions of the minted
+   * denom. In other words, defines which stakeholders will receive the minted
+   * denoms and how much.
+   */
+  distribution_proportions?: DistributionProportionsAmino;
+
+  /**
+   * weighted_developer_rewards_receivers is the address to receive developer
+   * rewards with weights assignedt to each address. The final amount that each
+   * address receives is: epoch_provisions *
+   * distribution_proportions.developer_rewards * Address's Weight.
+   */
+  weighted_developer_rewards_receivers: WeightedAddressAmino[];
+
+  /**
+   * minting_rewards_distribution_start_epoch start epoch to distribute minting
+   * rewards
+   */
+  minting_rewards_distribution_start_epoch: string;
 }
 
 /** Params holds parameters for the x/mint module. */
@@ -195,6 +287,18 @@ export const Minter = {
   },
 
   toSDK(message: Minter): MinterSDKType {
+    const obj: any = {};
+    obj.epoch_provisions = message.epochProvisions;
+    return obj;
+  },
+
+  fromAmino(object: MinterAmino): Minter {
+    return {
+      epochProvisions: object.epoch_provisions
+    };
+  },
+
+  toAmino(message: Minter): MinterAmino {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
@@ -277,6 +381,20 @@ export const WeightedAddress = {
   },
 
   toSDK(message: WeightedAddress): WeightedAddressSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.weight = message.weight;
+    return obj;
+  },
+
+  fromAmino(object: WeightedAddressAmino): WeightedAddress {
+    return {
+      address: object.address,
+      weight: object.weight
+    };
+  },
+
+  toAmino(message: WeightedAddress): WeightedAddressAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.weight = message.weight;
@@ -386,6 +504,24 @@ export const DistributionProportions = {
   },
 
   toSDK(message: DistributionProportions): DistributionProportionsSDKType {
+    const obj: any = {};
+    obj.staking = message.staking;
+    obj.pool_incentives = message.poolIncentives;
+    obj.developer_rewards = message.developerRewards;
+    obj.community_pool = message.communityPool;
+    return obj;
+  },
+
+  fromAmino(object: DistributionProportionsAmino): DistributionProportions {
+    return {
+      staking: object.staking,
+      poolIncentives: object.pool_incentives,
+      developerRewards: object.developer_rewards,
+      communityPool: object.community_pool
+    };
+  },
+
+  toAmino(message: DistributionProportions): DistributionProportionsAmino {
     const obj: any = {};
     obj.staking = message.staking;
     obj.pool_incentives = message.poolIncentives;
@@ -570,6 +706,38 @@ export const Params = {
     }
 
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      mintDenom: object.mint_denom,
+      genesisEpochProvisions: object.genesis_epoch_provisions,
+      epochIdentifier: object.epoch_identifier,
+      reductionPeriodInEpochs: Long.fromString(object.reduction_period_in_epochs),
+      reductionFactor: object.reduction_factor,
+      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
+      weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
+      mintingRewardsDistributionStartEpoch: Long.fromString(object.minting_rewards_distribution_start_epoch)
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.mint_denom = message.mintDenom;
+    obj.genesis_epoch_provisions = message.genesisEpochProvisions;
+    obj.epoch_identifier = message.epochIdentifier;
+    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
+    obj.reduction_factor = message.reductionFactor;
+    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
+
+    if (message.weightedDeveloperRewardsReceivers) {
+      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
+    } else {
+      obj.weighted_developer_rewards_receivers = [];
+    }
+
+    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
     return obj;
   }
 

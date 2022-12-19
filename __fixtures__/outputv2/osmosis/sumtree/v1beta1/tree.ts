@@ -4,10 +4,17 @@ export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
 }
+export interface NodeAmino {
+  children: ChildAmino[];
+}
 export interface NodeSDKType {
   children: ChildSDKType[];
 }
 export interface Child {
+  index: Uint8Array;
+  accumulation: string;
+}
+export interface ChildAmino {
   index: Uint8Array;
   accumulation: string;
 }
@@ -17,6 +24,9 @@ export interface ChildSDKType {
 }
 export interface Leaf {
   leaf?: Child;
+}
+export interface LeafAmino {
+  leaf?: ChildAmino;
 }
 export interface LeafSDKType {
   leaf?: ChildSDKType;
@@ -94,6 +104,24 @@ export const Node = {
 
     if (message.children) {
       obj.children = message.children.map(e => e ? Child.toSDK(e) : undefined);
+    } else {
+      obj.children = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: NodeAmino): Node {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Node): NodeAmino {
+    const obj: any = {};
+
+    if (message.children) {
+      obj.children = message.children.map(e => e ? Child.toAmino(e) : undefined);
     } else {
       obj.children = [];
     }
@@ -182,6 +210,20 @@ export const Child = {
     obj.index = message.index;
     obj.accumulation = message.accumulation;
     return obj;
+  },
+
+  fromAmino(object: ChildAmino): Child {
+    return {
+      index: object.index,
+      accumulation: object.accumulation
+    };
+  },
+
+  toAmino(message: Child): ChildAmino {
+    const obj: any = {};
+    obj.index = message.index;
+    obj.accumulation = message.accumulation;
+    return obj;
   }
 
 };
@@ -250,6 +292,18 @@ export const Leaf = {
   toSDK(message: Leaf): LeafSDKType {
     const obj: any = {};
     message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toSDK(message.leaf) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: LeafAmino): Leaf {
+    return {
+      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
+    };
+  },
+
+  toAmino(message: Leaf): LeafAmino {
+    const obj: any = {};
+    obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined;
     return obj;
   }
 

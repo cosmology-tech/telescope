@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Params, ParamsSDKType } from "./genesis";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
@@ -9,6 +9,13 @@ export interface ArithmeticTwapRequest {
   quoteAsset: string;
   startTime?: Date;
   endTime?: Date;
+}
+export interface ArithmeticTwapRequestAmino {
+  pool_id: string;
+  base_asset: string;
+  quote_asset: string;
+  start_time?: Date;
+  end_time?: Date;
 }
 export interface ArithmeticTwapRequestSDKType {
   pool_id: Long;
@@ -20,6 +27,9 @@ export interface ArithmeticTwapRequestSDKType {
 export interface ArithmeticTwapResponse {
   arithmeticTwap: string;
 }
+export interface ArithmeticTwapResponseAmino {
+  arithmetic_twap: string;
+}
 export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
 }
@@ -28,6 +38,12 @@ export interface ArithmeticTwapToNowRequest {
   baseAsset: string;
   quoteAsset: string;
   startTime?: Date;
+}
+export interface ArithmeticTwapToNowRequestAmino {
+  pool_id: string;
+  base_asset: string;
+  quote_asset: string;
+  start_time?: Date;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: Long;
@@ -38,13 +54,20 @@ export interface ArithmeticTwapToNowRequestSDKType {
 export interface ArithmeticTwapToNowResponse {
   arithmeticTwap: string;
 }
+export interface ArithmeticTwapToNowResponseAmino {
+  arithmetic_twap: string;
+}
 export interface ArithmeticTwapToNowResponseSDKType {
   arithmetic_twap: string;
 }
 export interface ParamsRequest {}
+export interface ParamsRequestAmino {}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params?: Params;
+}
+export interface ParamsResponseAmino {
+  params?: ParamsAmino;
 }
 export interface ParamsResponseSDKType {
   params?: ParamsSDKType;
@@ -171,6 +194,26 @@ export const ArithmeticTwapRequest = {
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ArithmeticTwapRequestAmino): ArithmeticTwapRequest {
+    return {
+      poolId: Long.fromString(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined
+    };
+  },
+
+  toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
+    return obj;
   }
 
 };
@@ -237,6 +280,18 @@ export const ArithmeticTwapResponse = {
   },
 
   toSDK(message: ArithmeticTwapResponse): ArithmeticTwapResponseSDKType {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
+  },
+
+  fromAmino(object: ArithmeticTwapResponseAmino): ArithmeticTwapResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+
+  toAmino(message: ArithmeticTwapResponse): ArithmeticTwapResponseAmino {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
@@ -351,6 +406,24 @@ export const ArithmeticTwapToNowRequest = {
     obj.quote_asset = message.quoteAsset;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ArithmeticTwapToNowRequestAmino): ArithmeticTwapToNowRequest {
+    return {
+      poolId: Long.fromString(object.pool_id),
+      baseAsset: object.base_asset,
+      quoteAsset: object.quote_asset,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
+    };
+  },
+
+  toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    return obj;
   }
 
 };
@@ -420,6 +493,18 @@ export const ArithmeticTwapToNowResponse = {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
+  },
+
+  fromAmino(object: ArithmeticTwapToNowResponseAmino): ArithmeticTwapToNowResponse {
+    return {
+      arithmeticTwap: object.arithmetic_twap
+    };
+  },
+
+  toAmino(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAmino {
+    const obj: any = {};
+    obj.arithmetic_twap = message.arithmeticTwap;
+    return obj;
   }
 
 };
@@ -470,6 +555,15 @@ export const ParamsRequest = {
   },
 
   toSDK(_: ParamsRequest): ParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: ParamsRequestAmino): ParamsRequest {
+    return {};
+  },
+
+  toAmino(_: ParamsRequest): ParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -540,6 +634,18 @@ export const ParamsResponse = {
   toSDK(message: ParamsResponse): ParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ParamsResponseAmino): ParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: ParamsResponse): ParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

@@ -1,4 +1,4 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "tendermint.types";
@@ -12,6 +12,17 @@ export interface ConsensusParams {
   evidence?: EvidenceParams;
   validator?: ValidatorParams;
   version?: VersionParams;
+}
+
+/**
+ * ConsensusParams contains consensus critical parameters that determine the
+ * validity of blocks.
+ */
+export interface ConsensusParamsAmino {
+  block?: BlockParamsAmino;
+  evidence?: EvidenceParamsAmino;
+  validator?: ValidatorParamsAmino;
+  version?: VersionParamsAmino;
 }
 
 /**
@@ -49,6 +60,29 @@ export interface BlockParams {
 }
 
 /** BlockParams contains limits on the block size. */
+export interface BlockParamsAmino {
+  /**
+   * Max block size, in bytes.
+   * Note: must be greater than 0
+   */
+  max_bytes: string;
+
+  /**
+   * Max gas per block.
+   * Note: must be greater or equal to -1
+   */
+  max_gas: string;
+
+  /**
+   * Minimum time increment between consecutive blocks (in milliseconds) If the
+   * block header timestamp is ahead of the system clock, decrease this value.
+   * 
+   * Not exposed to the application.
+   */
+  time_iota_ms: string;
+}
+
+/** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
   max_bytes: Long;
   max_gas: Long;
@@ -83,6 +117,33 @@ export interface EvidenceParams {
 }
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
+export interface EvidenceParamsAmino {
+  /**
+   * Max age of evidence, in blocks.
+   * 
+   * The basic formula for calculating this is: MaxAgeDuration / {average block
+   * time}.
+   */
+  max_age_num_blocks: string;
+
+  /**
+   * Max age of evidence, in time.
+   * 
+   * It should correspond with an app's "unbonding period" or other similar
+   * mechanism for handling [Nothing-At-Stake
+   * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
+   */
+  max_age_duration?: DurationAmino;
+
+  /**
+   * This sets the maximum size of total evidence in bytes that can be committed in a single block.
+   * and should fall comfortably under the max block bytes.
+   * Default is 1048576 or 1MB
+   */
+  max_bytes: string;
+}
+
+/** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsSDKType {
   max_age_num_blocks: Long;
   max_age_duration?: DurationSDKType;
@@ -101,6 +162,14 @@ export interface ValidatorParams {
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
+export interface ValidatorParamsAmino {
+  pub_key_types: string[];
+}
+
+/**
+ * ValidatorParams restrict the public key types validators can use.
+ * NOTE: uses ABCI pubkey naming, not Amino names.
+ */
 export interface ValidatorParamsSDKType {
   pub_key_types: string[];
 }
@@ -108,6 +177,11 @@ export interface ValidatorParamsSDKType {
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
   appVersion: Long;
+}
+
+/** VersionParams contains the ABCI application version. */
+export interface VersionParamsAmino {
+  app_version: string;
 }
 
 /** VersionParams contains the ABCI application version. */
@@ -123,6 +197,16 @@ export interface VersionParamsSDKType {
 export interface HashedParams {
   blockMaxBytes: Long;
   blockMaxGas: Long;
+}
+
+/**
+ * HashedParams is a subset of ConsensusParams.
+ * 
+ * It is hashed into the Header.ConsensusHash.
+ */
+export interface HashedParamsAmino {
+  block_max_bytes: string;
+  block_max_gas: string;
 }
 
 /**
@@ -242,6 +326,24 @@ export const ConsensusParams = {
     message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toSDK(message.validator) : undefined);
     message.version !== undefined && (obj.version = message.version ? VersionParams.toSDK(message.version) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ConsensusParamsAmino): ConsensusParams {
+    return {
+      block: object?.block ? BlockParams.fromAmino(object.block) : undefined,
+      evidence: object?.evidence ? EvidenceParams.fromAmino(object.evidence) : undefined,
+      validator: object?.validator ? ValidatorParams.fromAmino(object.validator) : undefined,
+      version: object?.version ? VersionParams.fromAmino(object.version) : undefined
+    };
+  },
+
+  toAmino(message: ConsensusParams): ConsensusParamsAmino {
+    const obj: any = {};
+    obj.block = message.block ? BlockParams.toAmino(message.block) : undefined;
+    obj.evidence = message.evidence ? EvidenceParams.toAmino(message.evidence) : undefined;
+    obj.validator = message.validator ? ValidatorParams.toAmino(message.validator) : undefined;
+    obj.version = message.version ? VersionParams.toAmino(message.version) : undefined;
+    return obj;
   }
 
 };
@@ -338,6 +440,22 @@ export const BlockParams = {
     obj.max_bytes = message.maxBytes;
     obj.max_gas = message.maxGas;
     obj.time_iota_ms = message.timeIotaMs;
+    return obj;
+  },
+
+  fromAmino(object: BlockParamsAmino): BlockParams {
+    return {
+      maxBytes: Long.fromString(object.max_bytes),
+      maxGas: Long.fromString(object.max_gas),
+      timeIotaMs: Long.fromString(object.time_iota_ms)
+    };
+  },
+
+  toAmino(message: BlockParams): BlockParamsAmino {
+    const obj: any = {};
+    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
+    obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
+    obj.time_iota_ms = message.timeIotaMs ? message.timeIotaMs.toString() : undefined;
     return obj;
   }
 
@@ -436,6 +554,22 @@ export const EvidenceParams = {
     message.maxAgeDuration !== undefined && (obj.max_age_duration = message.maxAgeDuration ? Duration.toSDK(message.maxAgeDuration) : undefined);
     obj.max_bytes = message.maxBytes;
     return obj;
+  },
+
+  fromAmino(object: EvidenceParamsAmino): EvidenceParams {
+    return {
+      maxAgeNumBlocks: Long.fromString(object.max_age_num_blocks),
+      maxAgeDuration: object?.max_age_duration ? Duration.fromAmino(object.max_age_duration) : undefined,
+      maxBytes: Long.fromString(object.max_bytes)
+    };
+  },
+
+  toAmino(message: EvidenceParams): EvidenceParamsAmino {
+    const obj: any = {};
+    obj.max_age_num_blocks = message.maxAgeNumBlocks ? message.maxAgeNumBlocks.toString() : undefined;
+    obj.max_age_duration = message.maxAgeDuration ? Duration.toAmino(message.maxAgeDuration) : undefined;
+    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
+    return obj;
   }
 
 };
@@ -517,6 +651,24 @@ export const ValidatorParams = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ValidatorParamsAmino): ValidatorParams {
+    return {
+      pubKeyTypes: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ValidatorParams): ValidatorParamsAmino {
+    const obj: any = {};
+
+    if (message.pubKeyTypes) {
+      obj.pub_key_types = message.pubKeyTypes.map(e => e);
+    } else {
+      obj.pub_key_types = [];
+    }
+
+    return obj;
   }
 
 };
@@ -585,6 +737,18 @@ export const VersionParams = {
   toSDK(message: VersionParams): VersionParamsSDKType {
     const obj: any = {};
     obj.app_version = message.appVersion;
+    return obj;
+  },
+
+  fromAmino(object: VersionParamsAmino): VersionParams {
+    return {
+      appVersion: Long.fromString(object.app_version)
+    };
+  },
+
+  toAmino(message: VersionParams): VersionParamsAmino {
+    const obj: any = {};
+    obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     return obj;
   }
 
@@ -668,6 +832,20 @@ export const HashedParams = {
     const obj: any = {};
     obj.block_max_bytes = message.blockMaxBytes;
     obj.block_max_gas = message.blockMaxGas;
+    return obj;
+  },
+
+  fromAmino(object: HashedParamsAmino): HashedParams {
+    return {
+      blockMaxBytes: Long.fromString(object.block_max_bytes),
+      blockMaxGas: Long.fromString(object.block_max_gas)
+    };
+  },
+
+  toAmino(message: HashedParams): HashedParamsAmino {
+    const obj: any = {};
+    obj.block_max_bytes = message.blockMaxBytes ? message.blockMaxBytes.toString() : undefined;
+    obj.block_max_gas = message.blockMaxGas ? message.blockMaxGas.toString() : undefined;
     return obj;
   }
 

@@ -1,7 +1,7 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";
@@ -60,6 +60,55 @@ export interface Gauge {
  * satisfy certain conditions. Currently gauges support conditions around the
  * duration for which a given denom is locked.
  */
+export interface GaugeAmino {
+  /** id is the unique ID of a Gauge */
+  id: string;
+
+  /**
+   * is_perpetual is a flag to show if it's a perpetual or non-perpetual gauge
+   * Non-perpetual gauges distribute their tokens equally per epoch while the
+   * gauge is in the active period. Perpetual gauges distribute all their tokens
+   * at a single time and only distribute their tokens again once the gauge is
+   * refilled, Intended for use with incentives that get refilled daily.
+   */
+  is_perpetual: boolean;
+
+  /**
+   * distribute_to is where the gauge rewards are distributed to.
+   * This is queried via lock duration or by timestamp
+   */
+  distribute_to?: QueryConditionAmino;
+
+  /**
+   * coins is the total amount of coins that have been in the gauge
+   * Can distribute multiple coin denoms
+   */
+  coins: CoinAmino[];
+
+  /** start_time is the distribution start time */
+  start_time?: Date;
+
+  /**
+   * num_epochs_paid_over is the number of total epochs distribution will be
+   * completed over
+   */
+  num_epochs_paid_over: string;
+
+  /**
+   * filled_epochs is the number of epochs distribution has been completed on
+   * already
+   */
+  filled_epochs: string;
+
+  /** distributed_coins are coins that have been distributed already */
+  distributed_coins: CoinAmino[];
+}
+
+/**
+ * Gauge is an object that stores and distributes yields to recipients who
+ * satisfy certain conditions. Currently gauges support conditions around the
+ * duration for which a given denom is locked.
+ */
 export interface GaugeSDKType {
   id: Long;
   is_perpetual: boolean;
@@ -73,6 +122,10 @@ export interface GaugeSDKType {
 export interface LockableDurationsInfo {
   /** List of incentivised durations that gauges will pay out to */
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoAmino {
+  /** List of incentivised durations that gauges will pay out to */
+  lockable_durations: DurationAmino[];
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -265,6 +318,44 @@ export const Gauge = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GaugeAmino): Gauge {
+    return {
+      id: Long.fromString(object.id),
+      isPerpetual: object.is_perpetual,
+      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      numEpochsPaidOver: Long.fromString(object.num_epochs_paid_over),
+      filledEpochs: Long.fromString(object.filled_epochs),
+      distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Gauge): GaugeAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.is_perpetual = message.isPerpetual;
+    obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
+    obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
+
+    if (message.distributedCoins) {
+      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.distributed_coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -341,6 +432,24 @@ export const LockableDurationsInfo = {
 
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
       obj.lockable_durations = [];
     }

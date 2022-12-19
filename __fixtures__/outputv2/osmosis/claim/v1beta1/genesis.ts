@@ -1,6 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./params";
-import { ClaimRecord, ClaimRecordSDKType } from "./claim";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -15,6 +15,18 @@ export interface GenesisState {
 
   /** list of claim records, one for every airdrop recipient */
   claimRecords: ClaimRecord[];
+}
+
+/** GenesisState defines the claim module's genesis state. */
+export interface GenesisStateAmino {
+  /** balance of the claim module's account */
+  module_account_balance?: CoinAmino;
+
+  /** params defines all the parameters of the module. */
+  params?: ParamsAmino;
+
+  /** list of claim records, one for every airdrop recipient */
+  claim_records: ClaimRecordAmino[];
 }
 
 /** GenesisState defines the claim module's genesis state. */
@@ -124,6 +136,28 @@ export const GenesisState = {
 
     if (message.claimRecords) {
       obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toSDK(e) : undefined);
+    } else {
+      obj.claim_records = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      moduleAccountBalance: object?.module_account_balance ? Coin.fromAmino(object.module_account_balance) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.module_account_balance = message.moduleAccountBalance ? Coin.toAmino(message.moduleAccountBalance) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.claimRecords) {
+      obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toAmino(e) : undefined);
     } else {
       obj.claim_records = [];
     }

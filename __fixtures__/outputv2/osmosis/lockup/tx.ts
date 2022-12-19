@@ -1,6 +1,6 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockSDKType } from "./lock";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
@@ -8,6 +8,11 @@ export interface MsgLockTokens {
   owner: string;
   duration?: Duration;
   coins: Coin[];
+}
+export interface MsgLockTokensAmino {
+  owner: string;
+  duration?: DurationAmino;
+  coins: CoinAmino[];
 }
 export interface MsgLockTokensSDKType {
   owner: string;
@@ -17,10 +22,16 @@ export interface MsgLockTokensSDKType {
 export interface MsgLockTokensResponse {
   ID: Long;
 }
+export interface MsgLockTokensResponseAmino {
+  ID: string;
+}
 export interface MsgLockTokensResponseSDKType {
   ID: Long;
 }
 export interface MsgBeginUnlockingAll {
+  owner: string;
+}
+export interface MsgBeginUnlockingAllAmino {
   owner: string;
 }
 export interface MsgBeginUnlockingAllSDKType {
@@ -28,6 +39,9 @@ export interface MsgBeginUnlockingAllSDKType {
 }
 export interface MsgBeginUnlockingAllResponse {
   unlocks: PeriodLock[];
+}
+export interface MsgBeginUnlockingAllResponseAmino {
+  unlocks: PeriodLockAmino[];
 }
 export interface MsgBeginUnlockingAllResponseSDKType {
   unlocks: PeriodLockSDKType[];
@@ -39,12 +53,22 @@ export interface MsgBeginUnlocking {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
+export interface MsgBeginUnlockingAmino {
+  owner: string;
+  ID: string;
+
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: CoinAmino[];
+}
 export interface MsgBeginUnlockingSDKType {
   owner: string;
   ID: Long;
   coins: CoinSDKType[];
 }
 export interface MsgBeginUnlockingResponse {
+  success: boolean;
+}
+export interface MsgBeginUnlockingResponseAmino {
   success: boolean;
 }
 export interface MsgBeginUnlockingResponseSDKType {
@@ -70,12 +94,30 @@ export interface MsgExtendLockup {
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
+export interface MsgExtendLockupAmino {
+  owner: string;
+  ID: string;
+
+  /**
+   * duration to be set. fails if lower than the current duration, or is
+   * unlocking
+   */
+  duration?: DurationAmino;
+}
+
+/**
+ * MsgExtendLockup extends the existing lockup's duration.
+ * The new duration is longer than the original.
+ */
 export interface MsgExtendLockupSDKType {
   owner: string;
   ID: Long;
   duration?: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
+  success: boolean;
+}
+export interface MsgExtendLockupResponseAmino {
   success: boolean;
 }
 export interface MsgExtendLockupResponseSDKType {
@@ -98,12 +140,27 @@ export interface MsgForceUnlock {
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
+export interface MsgForceUnlockAmino {
+  owner: string;
+  ID: string;
+
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: CoinAmino[];
+}
+
+/**
+ * MsgForceUnlock unlocks locks immediately for
+ * addresses registered via governance.
+ */
 export interface MsgForceUnlockSDKType {
   owner: string;
   ID: Long;
   coins: CoinSDKType[];
 }
 export interface MsgForceUnlockResponse {
+  success: boolean;
+}
+export interface MsgForceUnlockResponseAmino {
   success: boolean;
 }
 export interface MsgForceUnlockResponseSDKType {
@@ -215,6 +272,28 @@ export const MsgLockTokens = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
+    return {
+      owner: object.owner,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgLockTokens): MsgLockTokensAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -284,6 +363,18 @@ export const MsgLockTokensResponse = {
     const obj: any = {};
     obj.ID = message.ID;
     return obj;
+  },
+
+  fromAmino(object: MsgLockTokensResponseAmino): MsgLockTokensResponse {
+    return {
+      ID: Long.fromString(object.ID)
+    };
+  },
+
+  toAmino(message: MsgLockTokensResponse): MsgLockTokensResponseAmino {
+    const obj: any = {};
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    return obj;
   }
 
 };
@@ -350,6 +441,18 @@ export const MsgBeginUnlockingAll = {
   },
 
   toSDK(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
+  },
+
+  fromAmino(object: MsgBeginUnlockingAllAmino): MsgBeginUnlockingAll {
+    return {
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -429,6 +532,24 @@ export const MsgBeginUnlockingAllResponse = {
 
     if (message.unlocks) {
       obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.unlocks = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MsgBeginUnlockingAllResponseAmino): MsgBeginUnlockingAllResponse {
+    return {
+      unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseAmino {
+    const obj: any = {};
+
+    if (message.unlocks) {
+      obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.unlocks = [];
     }
@@ -543,6 +664,28 @@ export const MsgBeginUnlocking = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgBeginUnlockingAmino): MsgBeginUnlocking {
+    return {
+      owner: object.owner,
+      ID: Long.fromString(object.ID),
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgBeginUnlocking): MsgBeginUnlockingAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -609,6 +752,18 @@ export const MsgBeginUnlockingResponse = {
   },
 
   toSDK(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseSDKType {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+
+  fromAmino(object: MsgBeginUnlockingResponseAmino): MsgBeginUnlockingResponse {
+    return {
+      success: object.success
+    };
+  },
+
+  toAmino(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;
@@ -709,6 +864,22 @@ export const MsgExtendLockup = {
     obj.ID = message.ID;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgExtendLockupAmino): MsgExtendLockup {
+    return {
+      owner: object.owner,
+      ID: Long.fromString(object.ID),
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+    };
+  },
+
+  toAmino(message: MsgExtendLockup): MsgExtendLockupAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    return obj;
   }
 
 };
@@ -775,6 +946,18 @@ export const MsgExtendLockupResponse = {
   },
 
   toSDK(message: MsgExtendLockupResponse): MsgExtendLockupResponseSDKType {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+
+  fromAmino(object: MsgExtendLockupResponseAmino): MsgExtendLockupResponse {
+    return {
+      success: object.success
+    };
+  },
+
+  toAmino(message: MsgExtendLockupResponse): MsgExtendLockupResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;
@@ -887,6 +1070,28 @@ export const MsgForceUnlock = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgForceUnlockAmino): MsgForceUnlock {
+    return {
+      owner: object.owner,
+      ID: Long.fromString(object.ID),
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgForceUnlock): MsgForceUnlockAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -953,6 +1158,18 @@ export const MsgForceUnlockResponse = {
   },
 
   toSDK(message: MsgForceUnlockResponse): MsgForceUnlockResponseSDKType {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+
+  fromAmino(object: MsgForceUnlockResponseAmino): MsgForceUnlockResponse {
+    return {
+      success: object.success
+    };
+  },
+
+  toAmino(message: MsgForceUnlockResponse): MsgForceUnlockResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;

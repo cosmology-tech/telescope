@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -10,6 +10,7 @@ export enum Action {
   UNRECOGNIZED = -1,
 }
 export const ActionSDKType = Action;
+export const ActionAmino = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -67,6 +68,21 @@ export interface ClaimRecord {
    * index of bool in array refers to action enum #
    */
   actionCompleted: boolean[];
+}
+
+/** A Claim Records is the metadata of claim data per address */
+export interface ClaimRecordAmino {
+  /** address of claim user */
+  address: string;
+
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: CoinAmino[];
+
+  /**
+   * true if action is completed
+   * index of bool in array refers to action enum #
+   */
+  action_completed: boolean[];
 }
 
 /** A Claim Records is the metadata of claim data per address */
@@ -192,6 +208,33 @@ export const ClaimRecord = {
 
     if (message.initialClaimableAmount) {
       obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_claimable_amount = [];
+    }
+
+    if (message.actionCompleted) {
+      obj.action_completed = message.actionCompleted.map(e => e);
+    } else {
+      obj.action_completed = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ClaimRecordAmino): ClaimRecord {
+    return {
+      address: object.address,
+      initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromAmino(e)) : [],
+      actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ClaimRecord): ClaimRecordAmino {
+    const obj: any = {};
+    obj.address = message.address;
+
+    if (message.initialClaimableAmount) {
+      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.initial_claimable_amount = [];
     }

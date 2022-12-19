@@ -1,4 +1,4 @@
-import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs";
+import { CommitmentProof, CommitmentProofAmino, CommitmentProofSDKType } from "../../../../confio/proofs";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.commitment.v1";
@@ -8,6 +8,14 @@ export const protobufPackage = "ibc.core.commitment.v1";
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRoot {
+  hash: Uint8Array;
+}
+
+/**
+ * MerkleRoot defines a merkle root hash.
+ * In the Cosmos SDK, the AppHash of a block header becomes the root.
+ */
+export interface MerkleRootAmino {
   hash: Uint8Array;
 }
 
@@ -33,6 +41,15 @@ export interface MerklePrefix {
  * The constructed key from the Path and the key will be append(Path.KeyPath,
  * append(Path.KeyPrefix, key...))
  */
+export interface MerklePrefixAmino {
+  key_prefix: Uint8Array;
+}
+
+/**
+ * MerklePrefix is merkle path prefixed to the key.
+ * The constructed key from the Path and the key will be append(Path.KeyPath,
+ * append(Path.KeyPrefix, key...))
+ */
 export interface MerklePrefixSDKType {
   key_prefix: Uint8Array;
 }
@@ -44,6 +61,15 @@ export interface MerklePrefixSDKType {
  */
 export interface MerklePath {
   keyPath: string[];
+}
+
+/**
+ * MerklePath is the path used to verify commitment proofs, which can be an
+ * arbitrary structured object (defined by a commitment type).
+ * MerklePath is represented from root-to-leaf
+ */
+export interface MerklePathAmino {
+  key_path: string[];
 }
 
 /**
@@ -64,6 +90,17 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+
+/**
+ * MerkleProof is a wrapper type over a chain of CommitmentProofs.
+ * It demonstrates membership or non-membership for an element or set of
+ * elements, verifiable in conjunction with a known commitment root. Proofs
+ * should be succinct.
+ * MerkleProofs are ordered from leaf-to-root
+ */
+export interface MerkleProofAmino {
+  proofs: CommitmentProofAmino[];
 }
 
 /**
@@ -142,6 +179,18 @@ export const MerkleRoot = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromAmino(object: MerkleRootAmino): MerkleRoot {
+    return {
+      hash: object.hash
+    };
+  },
+
+  toAmino(message: MerkleRoot): MerkleRootAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    return obj;
   }
 
 };
@@ -208,6 +257,18 @@ export const MerklePrefix = {
   },
 
   toSDK(message: MerklePrefix): MerklePrefixSDKType {
+    const obj: any = {};
+    obj.key_prefix = message.keyPrefix;
+    return obj;
+  },
+
+  fromAmino(object: MerklePrefixAmino): MerklePrefix {
+    return {
+      keyPrefix: object.key_prefix
+    };
+  },
+
+  toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
@@ -283,6 +344,24 @@ export const MerklePath = {
   },
 
   toSDK(message: MerklePath): MerklePathSDKType {
+    const obj: any = {};
+
+    if (message.keyPath) {
+      obj.key_path = message.keyPath.map(e => e);
+    } else {
+      obj.key_path = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MerklePathAmino): MerklePath {
+    return {
+      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MerklePath): MerklePathAmino {
     const obj: any = {};
 
     if (message.keyPath) {
@@ -368,6 +447,24 @@ export const MerkleProof = {
 
     if (message.proofs) {
       obj.proofs = message.proofs.map(e => e ? CommitmentProof.toSDK(e) : undefined);
+    } else {
+      obj.proofs = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MerkleProofAmino): MerkleProof {
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MerkleProof): MerkleProofAmino {
+    const obj: any = {};
+
+    if (message.proofs) {
+      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e) : undefined);
     } else {
       obj.proofs = [];
     }

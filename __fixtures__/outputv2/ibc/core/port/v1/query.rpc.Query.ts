@@ -1,8 +1,8 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
+import { Order, OrderAmino, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType } from "../../channel/v1/channel";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
+import { QueryAppVersionRequest, QueryAppVersionRequestAmino, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseAmino, QueryAppVersionResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
 export interface Query {

@@ -1,4 +1,4 @@
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
+import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
@@ -8,6 +8,13 @@ export interface GenesisState {
   portId: string;
   denomTraces: DenomTrace[];
   params?: Params;
+}
+
+/** GenesisState defines the ibc-transfer genesis state */
+export interface GenesisStateAmino {
+  port_id: string;
+  denom_traces: DenomTraceAmino[];
+  params?: ParamsAmino;
 }
 
 /** GenesisState defines the ibc-transfer genesis state */
@@ -121,6 +128,28 @@ export const GenesisState = {
     }
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      portId: object.port_id,
+      denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromAmino(e)) : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+
+    if (message.denomTraces) {
+      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
+    } else {
+      obj.denom_traces = [];
+    }
+
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

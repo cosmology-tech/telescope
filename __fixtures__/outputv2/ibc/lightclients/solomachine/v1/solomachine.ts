@@ -1,6 +1,6 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
-import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
+import { Channel, ChannelAmino, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";
@@ -42,6 +42,7 @@ export enum DataType {
   UNRECOGNIZED = -1,
 }
 export const DataTypeSDKType = DataType;
+export const DataTypeAmino = DataType;
 export function dataTypeFromJSON(object: any): DataType {
   switch (object) {
     case 0:
@@ -151,6 +152,25 @@ export interface ClientState {
  * ClientState defines a solo machine client that tracks the current consensus
  * state and if the client is frozen.
  */
+export interface ClientStateAmino {
+  /** latest sequence of the client state */
+  sequence: string;
+
+  /** frozen sequence of the solo machine */
+  frozen_sequence: string;
+  consensus_state?: ConsensusStateAmino;
+
+  /**
+   * when set to true, will allow governance to update a solo machine client.
+   * The client will be unfrozen if it is frozen.
+   */
+  allow_update_after_proposal: boolean;
+}
+
+/**
+ * ClientState defines a solo machine client that tracks the current consensus
+ * state and if the client is frozen.
+ */
 export interface ClientStateSDKType {
   sequence: Long;
   frozen_sequence: Long;
@@ -181,6 +201,24 @@ export interface ConsensusState {
  * consensus state is contained in the "height" key used in storing the
  * consensus state.
  */
+export interface ConsensusStateAmino {
+  /** public key of the solo machine */
+  public_key?: AnyAmino;
+
+  /**
+   * diversifier allows the same public key to be re-used across different solo
+   * machine clients (potentially on different chains) without being considered
+   * misbehaviour.
+   */
+  diversifier: string;
+  timestamp: string;
+}
+
+/**
+ * ConsensusState defines a solo machine consensus state. The sequence of a
+ * consensus state is contained in the "height" key used in storing the
+ * consensus state.
+ */
 export interface ConsensusStateSDKType {
   public_key?: AnySDKType;
   diversifier: string;
@@ -195,6 +233,16 @@ export interface Header {
   signature: Uint8Array;
   newPublicKey?: Any;
   newDiversifier: string;
+}
+
+/** Header defines a solo machine consensus header */
+export interface HeaderAmino {
+  /** sequence to update solo machine public key at */
+  sequence: string;
+  timestamp: string;
+  signature: Uint8Array;
+  new_public_key?: AnyAmino;
+  new_diversifier: string;
 }
 
 /** Header defines a solo machine consensus header */
@@ -215,6 +263,17 @@ export interface Misbehaviour {
   sequence: Long;
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
+}
+
+/**
+ * Misbehaviour defines misbehaviour for a solo machine which consists
+ * of a sequence and two signatures over different messages at that sequence.
+ */
+export interface MisbehaviourAmino {
+  client_id: string;
+  sequence: string;
+  signature_one?: SignatureAndDataAmino;
+  signature_two?: SignatureAndDataAmino;
 }
 
 /**
@@ -243,6 +302,17 @@ export interface SignatureAndData {
  * SignatureAndData contains a signature and the data signed over to create that
  * signature.
  */
+export interface SignatureAndDataAmino {
+  signature: Uint8Array;
+  data_type: DataType;
+  data: Uint8Array;
+  timestamp: string;
+}
+
+/**
+ * SignatureAndData contains a signature and the data signed over to create that
+ * signature.
+ */
 export interface SignatureAndDataSDKType {
   signature: Uint8Array;
   data_type: DataType;
@@ -257,6 +327,15 @@ export interface SignatureAndDataSDKType {
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
+}
+
+/**
+ * TimestampedSignatureData contains the signature data and the timestamp of the
+ * signature.
+ */
+export interface TimestampedSignatureDataAmino {
+  signature_data: Uint8Array;
+  timestamp: string;
 }
 
 /**
@@ -282,6 +361,19 @@ export interface SignBytes {
 }
 
 /** SignBytes defines the signed bytes used for signature verification. */
+export interface SignBytesAmino {
+  sequence: string;
+  timestamp: string;
+  diversifier: string;
+
+  /** type of the data used */
+  data_type: DataType;
+
+  /** marshaled data */
+  data: Uint8Array;
+}
+
+/** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
   sequence: Long;
   timestamp: Long;
@@ -300,6 +392,15 @@ export interface HeaderData {
 }
 
 /** HeaderData returns the SignBytes data for update verification. */
+export interface HeaderDataAmino {
+  /** header public key */
+  new_pub_key?: AnyAmino;
+
+  /** header diversifier */
+  new_diversifier: string;
+}
+
+/** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
   new_pub_key?: AnySDKType;
   new_diversifier: string;
@@ -309,6 +410,12 @@ export interface HeaderDataSDKType {
 export interface ClientStateData {
   path: Uint8Array;
   clientState?: Any;
+}
+
+/** ClientStateData returns the SignBytes data for client state verification. */
+export interface ClientStateDataAmino {
+  path: Uint8Array;
+  client_state?: AnyAmino;
 }
 
 /** ClientStateData returns the SignBytes data for client state verification. */
@@ -324,6 +431,15 @@ export interface ClientStateDataSDKType {
 export interface ConsensusStateData {
   path: Uint8Array;
   consensusState?: Any;
+}
+
+/**
+ * ConsensusStateData returns the SignBytes data for consensus state
+ * verification.
+ */
+export interface ConsensusStateDataAmino {
+  path: Uint8Array;
+  consensus_state?: AnyAmino;
 }
 
 /**
@@ -348,6 +464,15 @@ export interface ConnectionStateData {
  * ConnectionStateData returns the SignBytes data for connection state
  * verification.
  */
+export interface ConnectionStateDataAmino {
+  path: Uint8Array;
+  connection?: ConnectionEndAmino;
+}
+
+/**
+ * ConnectionStateData returns the SignBytes data for connection state
+ * verification.
+ */
 export interface ConnectionStateDataSDKType {
   path: Uint8Array;
   connection?: ConnectionEndSDKType;
@@ -366,6 +491,15 @@ export interface ChannelStateData {
  * ChannelStateData returns the SignBytes data for channel state
  * verification.
  */
+export interface ChannelStateDataAmino {
+  path: Uint8Array;
+  channel?: ChannelAmino;
+}
+
+/**
+ * ChannelStateData returns the SignBytes data for channel state
+ * verification.
+ */
 export interface ChannelStateDataSDKType {
   path: Uint8Array;
   channel?: ChannelSDKType;
@@ -376,6 +510,15 @@ export interface ChannelStateDataSDKType {
  * verification.
  */
 export interface PacketCommitmentData {
+  path: Uint8Array;
+  commitment: Uint8Array;
+}
+
+/**
+ * PacketCommitmentData returns the SignBytes data for packet commitment
+ * verification.
+ */
+export interface PacketCommitmentDataAmino {
   path: Uint8Array;
   commitment: Uint8Array;
 }
@@ -402,6 +545,15 @@ export interface PacketAcknowledgementData {
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
  * verification.
  */
+export interface PacketAcknowledgementDataAmino {
+  path: Uint8Array;
+  acknowledgement: Uint8Array;
+}
+
+/**
+ * PacketAcknowledgementData returns the SignBytes data for acknowledgement
+ * verification.
+ */
 export interface PacketAcknowledgementDataSDKType {
   path: Uint8Array;
   acknowledgement: Uint8Array;
@@ -412,6 +564,14 @@ export interface PacketAcknowledgementDataSDKType {
  * packet receipt absence verification.
  */
 export interface PacketReceiptAbsenceData {
+  path: Uint8Array;
+}
+
+/**
+ * PacketReceiptAbsenceData returns the SignBytes data for
+ * packet receipt absence verification.
+ */
+export interface PacketReceiptAbsenceDataAmino {
   path: Uint8Array;
 }
 
@@ -430,6 +590,15 @@ export interface PacketReceiptAbsenceDataSDKType {
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
+}
+
+/**
+ * NextSequenceRecvData returns the SignBytes data for verification of the next
+ * sequence to be received.
+ */
+export interface NextSequenceRecvDataAmino {
+  path: Uint8Array;
+  next_seq_recv: string;
 }
 
 /**
@@ -548,6 +717,24 @@ export const ClientState = {
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? ConsensusState.toSDK(message.consensusState) : undefined);
     obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
     return obj;
+  },
+
+  fromAmino(object: ClientStateAmino): ClientState {
+    return {
+      sequence: Long.fromString(object.sequence),
+      frozenSequence: Long.fromString(object.frozen_sequence),
+      consensusState: object?.consensus_state ? ConsensusState.fromAmino(object.consensus_state) : undefined,
+      allowUpdateAfterProposal: object.allow_update_after_proposal
+    };
+  },
+
+  toAmino(message: ClientState): ClientStateAmino {
+    const obj: any = {};
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.frozen_sequence = message.frozenSequence ? message.frozenSequence.toString() : undefined;
+    obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined;
+    obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
+    return obj;
   }
 
 };
@@ -644,6 +831,22 @@ export const ConsensusState = {
     message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
     obj.diversifier = message.diversifier;
     obj.timestamp = message.timestamp;
+    return obj;
+  },
+
+  fromAmino(object: ConsensusStateAmino): ConsensusState {
+    return {
+      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
+      diversifier: object.diversifier,
+      timestamp: Long.fromString(object.timestamp)
+    };
+  },
+
+  toAmino(message: ConsensusState): ConsensusStateAmino {
+    const obj: any = {};
+    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
+    obj.diversifier = message.diversifier;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   }
 
@@ -770,6 +973,26 @@ export const Header = {
     message.newPublicKey !== undefined && (obj.new_public_key = message.newPublicKey ? Any.toSDK(message.newPublicKey) : undefined);
     obj.new_diversifier = message.newDiversifier;
     return obj;
+  },
+
+  fromAmino(object: HeaderAmino): Header {
+    return {
+      sequence: Long.fromString(object.sequence),
+      timestamp: Long.fromString(object.timestamp),
+      signature: object.signature,
+      newPublicKey: object?.new_public_key ? Any.fromAmino(object.new_public_key) : undefined,
+      newDiversifier: object.new_diversifier
+    };
+  },
+
+  toAmino(message: Header): HeaderAmino {
+    const obj: any = {};
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.signature = message.signature;
+    obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
+    obj.new_diversifier = message.newDiversifier;
+    return obj;
   }
 
 };
@@ -880,6 +1103,24 @@ export const Misbehaviour = {
     obj.sequence = message.sequence;
     message.signatureOne !== undefined && (obj.signature_one = message.signatureOne ? SignatureAndData.toSDK(message.signatureOne) : undefined);
     message.signatureTwo !== undefined && (obj.signature_two = message.signatureTwo ? SignatureAndData.toSDK(message.signatureTwo) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MisbehaviourAmino): Misbehaviour {
+    return {
+      clientId: object.client_id,
+      sequence: Long.fromString(object.sequence),
+      signatureOne: object?.signature_one ? SignatureAndData.fromAmino(object.signature_one) : undefined,
+      signatureTwo: object?.signature_two ? SignatureAndData.fromAmino(object.signature_two) : undefined
+    };
+  },
+
+  toAmino(message: Misbehaviour): MisbehaviourAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined;
+    obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
   }
 
@@ -992,6 +1233,24 @@ export const SignatureAndData = {
     obj.data = message.data;
     obj.timestamp = message.timestamp;
     return obj;
+  },
+
+  fromAmino(object: SignatureAndDataAmino): SignatureAndData {
+    return {
+      signature: object.signature,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: object.data,
+      timestamp: Long.fromString(object.timestamp)
+    };
+  },
+
+  toAmino(message: SignatureAndData): SignatureAndDataAmino {
+    const obj: any = {};
+    obj.signature = message.signature;
+    obj.data_type = message.dataType;
+    obj.data = message.data;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    return obj;
   }
 
 };
@@ -1074,6 +1333,20 @@ export const TimestampedSignatureData = {
     const obj: any = {};
     obj.signature_data = message.signatureData;
     obj.timestamp = message.timestamp;
+    return obj;
+  },
+
+  fromAmino(object: TimestampedSignatureDataAmino): TimestampedSignatureData {
+    return {
+      signatureData: object.signature_data,
+      timestamp: Long.fromString(object.timestamp)
+    };
+  },
+
+  toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
+    const obj: any = {};
+    obj.signature_data = message.signatureData;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   }
 
@@ -1200,6 +1473,26 @@ export const SignBytes = {
     message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: SignBytesAmino): SignBytes {
+    return {
+      sequence: Long.fromString(object.sequence),
+      timestamp: Long.fromString(object.timestamp),
+      diversifier: object.diversifier,
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: object.data
+    };
+  },
+
+  toAmino(message: SignBytes): SignBytesAmino {
+    const obj: any = {};
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.diversifier = message.diversifier;
+    obj.data_type = message.dataType;
+    obj.data = message.data;
+    return obj;
   }
 
 };
@@ -1281,6 +1574,20 @@ export const HeaderData = {
   toSDK(message: HeaderData): HeaderDataSDKType {
     const obj: any = {};
     message.newPubKey !== undefined && (obj.new_pub_key = message.newPubKey ? Any.toSDK(message.newPubKey) : undefined);
+    obj.new_diversifier = message.newDiversifier;
+    return obj;
+  },
+
+  fromAmino(object: HeaderDataAmino): HeaderData {
+    return {
+      newPubKey: object?.new_pub_key ? Any.fromAmino(object.new_pub_key) : undefined,
+      newDiversifier: object.new_diversifier
+    };
+  },
+
+  toAmino(message: HeaderData): HeaderDataAmino {
+    const obj: any = {};
+    obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
   }
@@ -1366,6 +1673,20 @@ export const ClientStateData = {
     obj.path = message.path;
     message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ClientStateDataAmino): ClientStateData {
+    return {
+      path: object.path,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
+    };
+  },
+
+  toAmino(message: ClientStateData): ClientStateDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    return obj;
   }
 
 };
@@ -1448,6 +1769,20 @@ export const ConsensusStateData = {
     const obj: any = {};
     obj.path = message.path;
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ConsensusStateDataAmino): ConsensusStateData {
+    return {
+      path: object.path,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
+    };
+  },
+
+  toAmino(message: ConsensusStateData): ConsensusStateDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     return obj;
   }
 
@@ -1532,6 +1867,20 @@ export const ConnectionStateData = {
     obj.path = message.path;
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ConnectionStateDataAmino): ConnectionStateData {
+    return {
+      path: object.path,
+      connection: object?.connection ? ConnectionEnd.fromAmino(object.connection) : undefined
+    };
+  },
+
+  toAmino(message: ConnectionStateData): ConnectionStateDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
+    return obj;
   }
 
 };
@@ -1615,6 +1964,20 @@ export const ChannelStateData = {
     obj.path = message.path;
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ChannelStateDataAmino): ChannelStateData {
+    return {
+      path: object.path,
+      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined
+    };
+  },
+
+  toAmino(message: ChannelStateData): ChannelStateDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
+    return obj;
   }
 
 };
@@ -1694,6 +2057,20 @@ export const PacketCommitmentData = {
   },
 
   toSDK(message: PacketCommitmentData): PacketCommitmentDataSDKType {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.commitment = message.commitment;
+    return obj;
+  },
+
+  fromAmino(object: PacketCommitmentDataAmino): PacketCommitmentData {
+    return {
+      path: object.path,
+      commitment: object.commitment
+    };
+  },
+
+  toAmino(message: PacketCommitmentData): PacketCommitmentDataAmino {
     const obj: any = {};
     obj.path = message.path;
     obj.commitment = message.commitment;
@@ -1781,6 +2158,20 @@ export const PacketAcknowledgementData = {
     obj.path = message.path;
     obj.acknowledgement = message.acknowledgement;
     return obj;
+  },
+
+  fromAmino(object: PacketAcknowledgementDataAmino): PacketAcknowledgementData {
+    return {
+      path: object.path,
+      acknowledgement: object.acknowledgement
+    };
+  },
+
+  toAmino(message: PacketAcknowledgementData): PacketAcknowledgementDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.acknowledgement = message.acknowledgement;
+    return obj;
   }
 
 };
@@ -1847,6 +2238,18 @@ export const PacketReceiptAbsenceData = {
   },
 
   toSDK(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataSDKType {
+    const obj: any = {};
+    obj.path = message.path;
+    return obj;
+  },
+
+  fromAmino(object: PacketReceiptAbsenceDataAmino): PacketReceiptAbsenceData {
+    return {
+      path: object.path
+    };
+  },
+
+  toAmino(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataAmino {
     const obj: any = {};
     obj.path = message.path;
     return obj;
@@ -1932,6 +2335,20 @@ export const NextSequenceRecvData = {
     const obj: any = {};
     obj.path = message.path;
     obj.next_seq_recv = message.nextSeqRecv;
+    return obj;
+  },
+
+  fromAmino(object: NextSequenceRecvDataAmino): NextSequenceRecvData {
+    return {
+      path: object.path,
+      nextSeqRecv: Long.fromString(object.next_seq_recv)
+    };
+  },
+
+  toAmino(message: NextSequenceRecvData): NextSequenceRecvDataAmino {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
   }
 

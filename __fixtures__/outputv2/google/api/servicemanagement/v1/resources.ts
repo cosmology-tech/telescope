@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
@@ -29,6 +29,7 @@ export enum OperationMetadata_Status {
   UNRECOGNIZED = -1,
 }
 export const OperationMetadata_StatusSDKType = OperationMetadata_Status;
+export const OperationMetadata_StatusAmino = OperationMetadata_Status;
 export function operationMetadata_StatusFromJSON(object: any): OperationMetadata_Status {
   switch (object) {
     case 0:
@@ -97,6 +98,7 @@ export enum Diagnostic_Kind {
   UNRECOGNIZED = -1,
 }
 export const Diagnostic_KindSDKType = Diagnostic_Kind;
+export const Diagnostic_KindAmino = Diagnostic_Kind;
 export function diagnostic_KindFromJSON(object: any): Diagnostic_Kind {
   switch (object) {
     case 0:
@@ -161,6 +163,7 @@ export enum ConfigFile_FileType {
   UNRECOGNIZED = -1,
 }
 export const ConfigFile_FileTypeSDKType = ConfigFile_FileType;
+export const ConfigFile_FileTypeAmino = ConfigFile_FileType;
 export function configFile_FileTypeFromJSON(object: any): ConfigFile_FileType {
   switch (object) {
     case 0:
@@ -250,6 +253,7 @@ export enum Rollout_RolloutStatus {
   UNRECOGNIZED = -1,
 }
 export const Rollout_RolloutStatusSDKType = Rollout_RolloutStatus;
+export const Rollout_RolloutStatusAmino = Rollout_RolloutStatus;
 export function rollout_RolloutStatusFromJSON(object: any): Rollout_RolloutStatus {
   switch (object) {
     case 0:
@@ -334,6 +338,21 @@ export interface ManagedService {
  * The full representation of a Service that is managed by
  * Google Service Management.
  */
+export interface ManagedServiceAmino {
+  /**
+   * The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements.
+   */
+  service_name: string;
+
+  /** ID of the project that produces and owns this service. */
+  producer_project_id: string;
+}
+
+/**
+ * The full representation of a Service that is managed by
+ * Google Service Management.
+ */
 export interface ManagedServiceSDKType {
   service_name: string;
   producer_project_id: string;
@@ -358,6 +377,24 @@ export interface OperationMetadata {
 }
 
 /** The metadata associated with a long running operation resource. */
+export interface OperationMetadataAmino {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resource_names: string[];
+
+  /** Detailed status information for each step. The order is undetermined. */
+  steps: OperationMetadata_StepAmino[];
+
+  /** Percentage of completion of this operation, ranging from 0 to 100. */
+  progress_percentage: number;
+
+  /** The start time of the operation. */
+  start_time?: Date;
+}
+
+/** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
@@ -375,6 +412,15 @@ export interface OperationMetadata_Step {
 }
 
 /** Represents the status of one operation step. */
+export interface OperationMetadata_StepAmino {
+  /** The short description of the step. */
+  description: string;
+
+  /** The status code. */
+  status: OperationMetadata_Status;
+}
+
+/** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
   description: string;
   status: OperationMetadata_Status;
@@ -382,6 +428,18 @@ export interface OperationMetadata_StepSDKType {
 
 /** Represents a diagnostic message (error or warning) */
 export interface Diagnostic {
+  /** File name and line number of the error or warning. */
+  location: string;
+
+  /** The kind of diagnostic information provided. */
+  kind: Diagnostic_Kind;
+
+  /** Message describing the error or warning. */
+  message: string;
+}
+
+/** Represents a diagnostic message (error or warning) */
+export interface DiagnosticAmino {
   /** File name and line number of the error or warning. */
   location: string;
 
@@ -422,6 +480,25 @@ export interface ConfigSource {
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
  */
+export interface ConfigSourceAmino {
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
+   */
+  id: string;
+
+  /**
+   * Set of source configuration files that are used to generate a service
+   * configuration (`google.api.Service`).
+   */
+  files: ConfigFileAmino[];
+}
+
+/**
+ * Represents a source file which is used to generate the service configuration
+ * defined by `google.api.Service`.
+ */
 export interface ConfigSourceSDKType {
   id: string;
   files: ConfigFileSDKType[];
@@ -440,6 +517,18 @@ export interface ConfigFile {
 }
 
 /** Generic specification of a source configuration file */
+export interface ConfigFileAmino {
+  /** The file name of the configuration file (full or relative path). */
+  file_path: string;
+
+  /** The bytes that constitute the file. */
+  file_contents: Uint8Array;
+
+  /** The type of configuration file this represents. */
+  file_type: ConfigFile_FileType;
+}
+
+/** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
   file_path: string;
   file_contents: Uint8Array;
@@ -448,6 +537,15 @@ export interface ConfigFileSDKType {
 
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
+  /**
+   * Resource name of a service config. It must have the following
+   * format: "services/{service name}/configs/{config id}".
+   */
+  name: string;
+}
+
+/** Represents a service configuration with its name and id. */
+export interface ConfigRefAmino {
   /**
    * Resource name of a service config. It must have the following
    * format: "services/{service name}/configs/{config id}".
@@ -475,6 +573,23 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
+}
+
+/**
+ * Change report associated with a particular service configuration.
+ * 
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
+ */
+export interface ChangeReportAmino {
+  /**
+   * List of changes between two service configurations.
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   */
+  config_changes: ConfigChangeAmino[];
 }
 
 /**
@@ -539,6 +654,53 @@ export interface Rollout {
  * to control plane systems. Typically, you create a new version of the
  * service config, and then create a Rollout to push the service config.
  */
+export interface RolloutAmino {
+  /**
+   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   * 
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
+   */
+  rollout_id: string;
+
+  /** Creation time of the rollout. Readonly. */
+  create_time?: Date;
+
+  /** The user who created the Rollout. Readonly. */
+  created_by: string;
+
+  /**
+   * The status of this rollout. Readonly. In case of a failed rollout,
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
+   */
+  status: Rollout_RolloutStatus;
+
+  /**
+   * Google Service Control selects service configurations based on
+   * traffic percentage.
+   */
+  traffic_percent_strategy?: Rollout_TrafficPercentStrategyAmino;
+
+  /**
+   * The strategy associated with a rollout to delete a `ManagedService`.
+   * Readonly.
+   */
+  delete_service_strategy?: Rollout_DeleteServiceStrategyAmino;
+
+  /** The name of the service associated with this Rollout. */
+  service_name: string;
+}
+
+/**
+ * A rollout resource that defines how service configuration versions are pushed
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
+ */
 export interface RolloutSDKType {
   rollout_id: string;
   create_time?: Date;
@@ -549,6 +711,10 @@ export interface RolloutSDKType {
   service_name: string;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
+  key: string;
+  value: number;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   key: string;
   value: number;
 }
@@ -632,6 +798,49 @@ export interface Rollout_TrafficPercentStrategy {
  *       }
  *     }
  */
+export interface Rollout_TrafficPercentStrategyAmino {
+  /**
+   * Maps service configuration IDs to their corresponding traffic percentage.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
+   */
+  percentages: {
+    [key: string]: number;
+  };
+}
+
+/**
+ * Strategy that specifies how clients of Google Service Controller want to
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ * 
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ * 
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160206"
+ *       traffic_percent_strategy {
+ *         percentages: {
+ *           "example.googleapis.com/20160201": 70.00
+ *           "example.googleapis.com/20160206": 30.00
+ *         }
+ *       }
+ *     }
+ * 
+ * Day 2
+ * 
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160207"
+ *       traffic_percent_strategy: {
+ *         percentages: {
+ *           "example.googleapis.com/20160206": 100.00
+ *         }
+ *       }
+ *     }
+ */
 export interface Rollout_TrafficPercentStrategySDKType {
   percentages: {
     [key: string]: number;
@@ -643,6 +852,12 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
+
+/**
+ * Strategy used to delete a service. This strategy is a placeholder only
+ * used by the system generated rollout to delete a service.
+ */
+export interface Rollout_DeleteServiceStrategyAmino {}
 
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
@@ -725,6 +940,20 @@ export const ManagedService = {
   },
 
   toSDK(message: ManagedService): ManagedServiceSDKType {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.producer_project_id = message.producerProjectId;
+    return obj;
+  },
+
+  fromAmino(object: ManagedServiceAmino): ManagedService {
+    return {
+      serviceName: object.service_name,
+      producerProjectId: object.producer_project_id
+    };
+  },
+
+  toAmino(message: ManagedService): ManagedServiceAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.producer_project_id = message.producerProjectId;
@@ -862,6 +1091,35 @@ export const OperationMetadata = {
     obj.progress_percentage = message.progressPercentage;
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     return obj;
+  },
+
+  fromAmino(object: OperationMetadataAmino): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
+      progressPercentage: object.progress_percentage,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
+    };
+  },
+
+  toAmino(message: OperationMetadata): OperationMetadataAmino {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    if (message.steps) {
+      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toAmino(e) : undefined);
+    } else {
+      obj.steps = [];
+    }
+
+    obj.progress_percentage = message.progressPercentage;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    return obj;
   }
 
 };
@@ -944,6 +1202,20 @@ export const OperationMetadata_Step = {
     const obj: any = {};
     obj.description = message.description;
     message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
+    return obj;
+  },
+
+  fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
+    return {
+      description: object.description,
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+    };
+  },
+
+  toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
+    const obj: any = {};
+    obj.description = message.description;
+    obj.status = message.status;
     return obj;
   }
 
@@ -1042,6 +1314,22 @@ export const Diagnostic = {
     message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
     obj.message = message.message;
     return obj;
+  },
+
+  fromAmino(object: DiagnosticAmino): Diagnostic {
+    return {
+      location: object.location,
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      message: object.message
+    };
+  },
+
+  toAmino(message: Diagnostic): DiagnosticAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    obj.kind = message.kind;
+    obj.message = message.message;
+    return obj;
   }
 
 };
@@ -1132,6 +1420,26 @@ export const ConfigSource = {
 
     if (message.files) {
       obj.files = message.files.map(e => e ? ConfigFile.toSDK(e) : undefined);
+    } else {
+      obj.files = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ConfigSourceAmino): ConfigSource {
+    return {
+      id: object.id,
+      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ConfigSource): ConfigSourceAmino {
+    const obj: any = {};
+    obj.id = message.id;
+
+    if (message.files) {
+      obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
     } else {
       obj.files = [];
     }
@@ -1234,6 +1542,22 @@ export const ConfigFile = {
     obj.file_contents = message.fileContents;
     message.fileType !== undefined && (obj.file_type = configFile_FileTypeToJSON(message.fileType));
     return obj;
+  },
+
+  fromAmino(object: ConfigFileAmino): ConfigFile {
+    return {
+      filePath: object.file_path,
+      fileContents: object.file_contents,
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+    };
+  },
+
+  toAmino(message: ConfigFile): ConfigFileAmino {
+    const obj: any = {};
+    obj.file_path = message.filePath;
+    obj.file_contents = message.fileContents;
+    obj.file_type = message.fileType;
+    return obj;
   }
 
 };
@@ -1300,6 +1624,18 @@ export const ConfigRef = {
   },
 
   toSDK(message: ConfigRef): ConfigRefSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+
+  fromAmino(object: ConfigRefAmino): ConfigRef {
+    return {
+      name: object.name
+    };
+  },
+
+  toAmino(message: ConfigRef): ConfigRefAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -1379,6 +1715,24 @@ export const ChangeReport = {
 
     if (message.configChanges) {
       obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toSDK(e) : undefined);
+    } else {
+      obj.config_changes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ChangeReportAmino): ChangeReport {
+    return {
+      configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ChangeReport): ChangeReportAmino {
+    const obj: any = {};
+
+    if (message.configChanges) {
+      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toAmino(e) : undefined);
     } else {
       obj.config_changes = [];
     }
@@ -1537,6 +1891,30 @@ export const Rollout = {
     message.deleteServiceStrategy !== undefined && (obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toSDK(message.deleteServiceStrategy) : undefined);
     obj.service_name = message.serviceName;
     return obj;
+  },
+
+  fromAmino(object: RolloutAmino): Rollout {
+    return {
+      rolloutId: object.rollout_id,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      createdBy: object.created_by,
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
+      deleteServiceStrategy: object?.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
+      serviceName: object.service_name
+    };
+  },
+
+  toAmino(message: Rollout): RolloutAmino {
+    const obj: any = {};
+    obj.rollout_id = message.rolloutId;
+    obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
+    obj.created_by = message.createdBy;
+    obj.status = message.status;
+    obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
+    obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
+    obj.service_name = message.serviceName;
+    return obj;
   }
 
 };
@@ -1616,6 +1994,20 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   },
 
   toSDK(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: Rollout_TrafficPercentStrategy_PercentagesEntryAmino): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1728,6 +2120,30 @@ export const Rollout_TrafficPercentStrategy = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: Rollout_TrafficPercentStrategyAmino): Rollout_TrafficPercentStrategy {
+    return {
+      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
+        [key: string]: double;
+      }>((acc, [key, value]) => {
+        acc[key] = double.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyAmino {
+    const obj: any = {};
+    obj.percentages = {};
+
+    if (message.percentages) {
+      Object.entries(message.percentages).forEach(([k, v]) => {
+        obj.percentages[k] = double.toAmino(v);
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -1778,6 +2194,15 @@ export const Rollout_DeleteServiceStrategy = {
   },
 
   toSDK(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategySDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: Rollout_DeleteServiceStrategyAmino): Rollout_DeleteServiceStrategy {
+    return {};
+  },
+
+  toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
     const obj: any = {};
     return obj;
   }

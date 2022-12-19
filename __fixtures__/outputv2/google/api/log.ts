@@ -1,4 +1,4 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
@@ -40,6 +40,45 @@ export interface LogDescriptor {
    * the user interface and should be concise.
    */
   displayName: string;
+}
+
+/**
+ * A description of a log type. Example in YAML format:
+ * 
+ *     - name: library.googleapis.com/activity_history
+ *       description: The history of borrowing and returning library items.
+ *       display_name: Activity
+ *       labels:
+ *       - key: /customer_id
+ *         description: Identifier of a library customer
+ */
+export interface LogDescriptorAmino {
+  /**
+   * The name of the log. It must be less than 512 characters long and can
+   * include the following characters: upper- and lower-case alphanumeric
+   * characters [A-Za-z0-9], and punctuation characters including
+   * slash, underscore, hyphen, period [/_-.].
+   */
+  name: string;
+
+  /**
+   * The set of labels that are available to describe a specific log entry.
+   * Runtime requests that contain labels not specified here are
+   * considered invalid.
+   */
+  labels: LabelDescriptorAmino[];
+
+  /**
+   * A human-readable description of this log. This information appears in
+   * the documentation and can contain details.
+   */
+  description: string;
+
+  /**
+   * The human-readable name for this log. This information appears on
+   * the user interface and should be concise.
+   */
+  display_name: string;
 }
 
 /**
@@ -171,6 +210,30 @@ export const LogDescriptor = {
 
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+
+    obj.description = message.description;
+    obj.display_name = message.displayName;
+    return obj;
+  },
+
+  fromAmino(object: LogDescriptorAmino): LogDescriptor {
+    return {
+      name: object.name,
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
+      description: object.description,
+      displayName: object.display_name
+    };
+  },
+
+  toAmino(message: LogDescriptor): LogDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name;
+
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
       obj.labels = [];
     }

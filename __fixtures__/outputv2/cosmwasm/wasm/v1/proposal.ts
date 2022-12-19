@@ -1,7 +1,8 @@
-import { AccessConfig, AccessConfigSDKType } from "./types";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
+import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -20,6 +21,24 @@ export interface StoreCodeProposal {
 
   /** InstantiatePermission to apply on contract creation, optional */
   instantiatePermission?: AccessConfig;
+}
+
+/** StoreCodeProposal gov proposal content type to submit WASM code to the system */
+export interface StoreCodeProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as: string;
+
+  /** WASMByteCode can be raw or gzip compressed */
+  wasm_byte_code: string;
+
+  /** InstantiatePermission to apply on contract creation, optional */
+  instantiate_permission?: AccessConfigAmino;
 }
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -65,6 +84,36 @@ export interface InstantiateContractProposal {
  * InstantiateContractProposal gov proposal content type to instantiate a
  * contract.
  */
+export interface InstantiateContractProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** CodeID is the reference to the stored WASM code */
+  code_id: string;
+
+  /** Label is optional metadata to be stored with a constract instance. */
+  label: string;
+
+  /** Msg json encoded message to be passed to the contract on instantiation */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: CoinAmino[];
+}
+
+/**
+ * InstantiateContractProposal gov proposal content type to instantiate a
+ * contract.
+ */
 export interface InstantiateContractProposalSDKType {
   title: string;
   description: string;
@@ -95,6 +144,24 @@ export interface MigrateContractProposal {
 }
 
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
+export interface MigrateContractProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** CodeID references the new WASM codesudo */
+  code_id: string;
+
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg: Uint8Array;
+}
+
+/** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
   title: string;
   description: string;
@@ -105,6 +172,21 @@ export interface MigrateContractProposalSDKType {
 
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** Msg json encoded message to be passed to the contract as sudo */
+  msg: Uint8Array;
+}
+
+/** SudoContractProposal gov proposal content type to call sudo on a contract. */
+export interface SudoContractProposalAmino {
   /** Title is a short summary */
   title: string;
 
@@ -154,6 +236,30 @@ export interface ExecuteContractProposal {
  * ExecuteContractProposal gov proposal content type to call execute on a
  * contract.
  */
+export interface ExecuteContractProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** Msg json encoded message to be passed to the contract as execute */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: CoinAmino[];
+}
+
+/**
+ * ExecuteContractProposal gov proposal content type to call execute on a
+ * contract.
+ */
 export interface ExecuteContractProposalSDKType {
   title: string;
   description: string;
@@ -179,6 +285,21 @@ export interface UpdateAdminProposal {
 }
 
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
+export interface UpdateAdminProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** NewAdmin address to be set */
+  new_admin: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
+/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
   title: string;
   description: string;
@@ -191,6 +312,21 @@ export interface UpdateAdminProposalSDKType {
  * contract.
  */
 export interface ClearAdminProposal {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
+/**
+ * ClearAdminProposal gov proposal content type to clear the admin of a
+ * contract.
+ */
+export interface ClearAdminProposalAmino {
   /** Title is a short summary */
   title: string;
 
@@ -230,6 +366,21 @@ export interface PinCodesProposal {
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
  * wasmvm cache.
  */
+export interface PinCodesProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** CodeIDs references the new WASM codes */
+  code_ids: string[];
+}
+
+/**
+ * PinCodesProposal gov proposal content type to pin a set of code ids in the
+ * wasmvm cache.
+ */
 export interface PinCodesProposalSDKType {
   title: string;
   description: string;
@@ -249,6 +400,21 @@ export interface UnpinCodesProposal {
 
   /** CodeIDs references the WASM codes */
   codeIds: Long[];
+}
+
+/**
+ * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
+ * the wasmvm cache.
+ */
+export interface UnpinCodesProposalAmino {
+  /** Title is a short summary */
+  title: string;
+
+  /** Description is a human readable text */
+  description: string;
+
+  /** CodeIDs references the WASM codes */
+  code_ids: string[];
 }
 
 /**
@@ -381,6 +547,26 @@ export const StoreCodeProposal = {
     obj.run_as = message.runAs;
     obj.wasm_byte_code = message.wasmByteCode;
     message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: StoreCodeProposalAmino): StoreCodeProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      runAs: object.run_as,
+      wasmByteCode: fromBase64(object.wasm_byte_code),
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
+    };
+  },
+
+  toAmino(message: StoreCodeProposal): StoreCodeProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.run_as = message.runAs;
+    obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
     return obj;
   }
 
@@ -561,6 +747,38 @@ export const InstantiateContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: InstantiateContractProposalAmino): InstantiateContractProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      runAs: object.run_as,
+      admin: object.admin,
+      codeId: Long.fromString(object.code_id),
+      label: object.label,
+      msg: toUtf8(JSON.stringify(object.msg)),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: InstantiateContractProposal): InstantiateContractProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.run_as = message.runAs;
+    obj.admin = message.admin;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.label = message.label;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -686,6 +904,26 @@ export const MigrateContractProposal = {
     obj.code_id = message.codeId;
     obj.msg = message.msg;
     return obj;
+  },
+
+  fromAmino(object: MigrateContractProposalAmino): MigrateContractProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract,
+      codeId: Long.fromString(object.code_id),
+      msg: toUtf8(JSON.stringify(object.msg))
+    };
+  },
+
+  toAmino(message: MigrateContractProposal): MigrateContractProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    return obj;
   }
 
 };
@@ -796,6 +1034,24 @@ export const SudoContractProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     obj.msg = message.msg;
+    return obj;
+  },
+
+  fromAmino(object: SudoContractProposalAmino): SudoContractProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract,
+      msg: toUtf8(JSON.stringify(object.msg))
+    };
+  },
+
+  toAmino(message: SudoContractProposal): SudoContractProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   }
 
@@ -948,6 +1204,34 @@ export const ExecuteContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ExecuteContractProposalAmino): ExecuteContractProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      runAs: object.run_as,
+      contract: object.contract,
+      msg: toUtf8(JSON.stringify(object.msg)),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ExecuteContractProposal): ExecuteContractProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.run_as = message.runAs;
+    obj.contract = message.contract;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1059,6 +1343,24 @@ export const UpdateAdminProposal = {
     obj.new_admin = message.newAdmin;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromAmino(object: UpdateAdminProposalAmino): UpdateAdminProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      newAdmin: object.new_admin,
+      contract: object.contract
+    };
+  },
+
+  toAmino(message: UpdateAdminProposal): UpdateAdminProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.new_admin = message.newAdmin;
+    obj.contract = message.contract;
+    return obj;
   }
 
 };
@@ -1151,6 +1453,22 @@ export const ClearAdminProposal = {
   },
 
   toSDK(message: ClearAdminProposal): ClearAdminProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    return obj;
+  },
+
+  fromAmino(object: ClearAdminProposalAmino): ClearAdminProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract
+    };
+  },
+
+  toAmino(message: ClearAdminProposal): ClearAdminProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1277,6 +1595,28 @@ export const PinCodesProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: PinCodesProposalAmino): PinCodesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: PinCodesProposal): PinCodesProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1387,6 +1727,28 @@ export const UnpinCodesProposal = {
   },
 
   toSDK(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: UnpinCodesProposalAmino): UnpinCodesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: UnpinCodesProposal): UnpinCodesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;

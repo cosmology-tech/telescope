@@ -1,4 +1,4 @@
-import { IdentifiedConnection, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsSDKType, Params, ParamsSDKType } from "./connection";
+import { IdentifiedConnection, IdentifiedConnectionAmino, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsAmino, ConnectionPathsSDKType, Params, ParamsAmino, ParamsSDKType } from "./connection";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";
@@ -11,6 +11,16 @@ export interface GenesisState {
   /** the sequence for the next generated connection identifier */
   nextConnectionSequence: Long;
   params?: Params;
+}
+
+/** GenesisState defines the ibc connection submodule's genesis state. */
+export interface GenesisStateAmino {
+  connections: IdentifiedConnectionAmino[];
+  client_connection_paths: ConnectionPathsAmino[];
+
+  /** the sequence for the next generated connection identifier */
+  next_connection_sequence: string;
+  params?: ParamsAmino;
 }
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
@@ -149,6 +159,35 @@ export const GenesisState = {
 
     obj.next_connection_sequence = message.nextConnectionSequence;
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromAmino(e)) : [],
+      clientConnectionPaths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromAmino(e)) : [],
+      nextConnectionSequence: Long.fromString(object.next_connection_sequence),
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.connections) {
+      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
+    } else {
+      obj.connections = [];
+    }
+
+    if (message.clientConnectionPaths) {
+      obj.client_connection_paths = message.clientConnectionPaths.map(e => e ? ConnectionPaths.toAmino(e) : undefined);
+    } else {
+      obj.client_connection_paths = [];
+    }
+
+    obj.next_connection_sequence = message.nextConnectionSequence ? message.nextConnectionSequence.toString() : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

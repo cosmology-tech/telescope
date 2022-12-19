@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -19,6 +19,21 @@ export interface MsgCreateClient {
 }
 
 /** MsgCreateClient defines a message to create an IBC client */
+export interface MsgCreateClientAmino {
+  /** light client state */
+  client_state?: AnyAmino;
+
+  /**
+   * consensus state associated with the client that corresponds to a given
+   * height.
+   */
+  consensus_state?: AnyAmino;
+
+  /** signer address */
+  signer: string;
+}
+
+/** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
   client_state?: AnySDKType;
   consensus_state?: AnySDKType;
@@ -27,6 +42,9 @@ export interface MsgCreateClientSDKType {
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+
+/** MsgCreateClientResponse defines the Msg/CreateClient response type. */
+export interface MsgCreateClientResponseAmino {}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
@@ -50,6 +68,21 @@ export interface MsgUpdateClient {
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
  * the given header.
  */
+export interface MsgUpdateClientAmino {
+  /** client unique identifier */
+  client_id: string;
+
+  /** header to update the light client */
+  header?: AnyAmino;
+
+  /** signer address */
+  signer: string;
+}
+
+/**
+ * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
+ * the given header.
+ */
 export interface MsgUpdateClientSDKType {
   client_id: string;
   header?: AnySDKType;
@@ -58,6 +91,9 @@ export interface MsgUpdateClientSDKType {
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+
+/** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
+export interface MsgUpdateClientResponseAmino {}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
@@ -93,6 +129,33 @@ export interface MsgUpgradeClient {
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
  * state
  */
+export interface MsgUpgradeClientAmino {
+  /** client unique identifier */
+  client_id: string;
+
+  /** upgraded client state */
+  client_state?: AnyAmino;
+
+  /**
+   * upgraded consensus state, only contains enough information to serve as a
+   * basis of trust in update logic
+   */
+  consensus_state?: AnyAmino;
+
+  /** proof that old chain committed to new client */
+  proof_upgrade_client: Uint8Array;
+
+  /** proof that old chain committed to new consensus state */
+  proof_upgrade_consensus_state: Uint8Array;
+
+  /** signer address */
+  signer: string;
+}
+
+/**
+ * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
+ * state
+ */
 export interface MsgUpgradeClientSDKType {
   client_id: string;
   client_state?: AnySDKType;
@@ -104,6 +167,9 @@ export interface MsgUpgradeClientSDKType {
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+
+/** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
+export interface MsgUpgradeClientResponseAmino {}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
@@ -127,6 +193,21 @@ export interface MsgSubmitMisbehaviour {
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
  * light client misbehaviour.
  */
+export interface MsgSubmitMisbehaviourAmino {
+  /** client unique identifier */
+  client_id: string;
+
+  /** misbehaviour used for freezing the light client */
+  misbehaviour?: AnyAmino;
+
+  /** signer address */
+  signer: string;
+}
+
+/**
+ * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
+ * light client misbehaviour.
+ */
 export interface MsgSubmitMisbehaviourSDKType {
   client_id: string;
   misbehaviour?: AnySDKType;
@@ -138,6 +219,12 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+
+/**
+ * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
+ * type.
+ */
+export interface MsgSubmitMisbehaviourResponseAmino {}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
@@ -238,6 +325,22 @@ export const MsgCreateClient = {
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAmino(object: MsgCreateClientAmino): MsgCreateClient {
+    return {
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      signer: object.signer
+    };
+  },
+
+  toAmino(message: MsgCreateClient): MsgCreateClientAmino {
+    const obj: any = {};
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.signer = message.signer;
+    return obj;
   }
 
 };
@@ -288,6 +391,15 @@ export const MsgCreateClientResponse = {
   },
 
   toSDK(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateClientResponseAmino): MsgCreateClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -387,6 +499,22 @@ export const MsgUpdateClient = {
     message.header !== undefined && (obj.header = message.header ? Any.toSDK(message.header) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAmino(object: MsgUpdateClientAmino): MsgUpdateClient {
+    return {
+      clientId: object.client_id,
+      header: object?.header ? Any.fromAmino(object.header) : undefined,
+      signer: object.signer
+    };
+  },
+
+  toAmino(message: MsgUpdateClient): MsgUpdateClientAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.header = message.header ? Any.toAmino(message.header) : undefined;
+    obj.signer = message.signer;
+    return obj;
   }
 
 };
@@ -437,6 +565,15 @@ export const MsgUpdateClientResponse = {
   },
 
   toSDK(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpdateClientResponseAmino): MsgUpdateClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -578,6 +715,28 @@ export const MsgUpgradeClient = {
     obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAmino(object: MsgUpgradeClientAmino): MsgUpgradeClient {
+    return {
+      clientId: object.client_id,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      proofUpgradeClient: object.proof_upgrade_client,
+      proofUpgradeConsensusState: object.proof_upgrade_consensus_state,
+      signer: object.signer
+    };
+  },
+
+  toAmino(message: MsgUpgradeClient): MsgUpgradeClientAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.proof_upgrade_client = message.proofUpgradeClient;
+    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
+    obj.signer = message.signer;
+    return obj;
   }
 
 };
@@ -628,6 +787,15 @@ export const MsgUpgradeClientResponse = {
   },
 
   toSDK(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpgradeClientResponseAmino): MsgUpgradeClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -727,6 +895,22 @@ export const MsgSubmitMisbehaviour = {
     message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toSDK(message.misbehaviour) : undefined);
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAmino(object: MsgSubmitMisbehaviourAmino): MsgSubmitMisbehaviour {
+    return {
+      clientId: object.client_id,
+      misbehaviour: object?.misbehaviour ? Any.fromAmino(object.misbehaviour) : undefined,
+      signer: object.signer
+    };
+  },
+
+  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
+    obj.signer = message.signer;
+    return obj;
   }
 
 };
@@ -777,6 +961,15 @@ export const MsgSubmitMisbehaviourResponse = {
   },
 
   toSDK(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSubmitMisbehaviourResponseAmino): MsgSubmitMisbehaviourResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
     const obj: any = {};
     return obj;
   }

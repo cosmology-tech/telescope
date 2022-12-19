@@ -75,6 +75,68 @@ export interface Distribution {
  * * the sum-squared-deviation of the samples, used to compute variance
  * * a histogram of the values of the sample points
  */
+export interface DistributionAmino {
+  /** The total number of samples in the distribution. Must be >= 0. */
+  count: string;
+
+  /**
+   * The arithmetic mean of the samples in the distribution. If `count` is
+   * zero then this field must be zero.
+   */
+  mean: number;
+
+  /** The minimum of the population of values. Ignored if `count` is zero. */
+  minimum: number;
+
+  /** The maximum of the population of values. Ignored if `count` is zero. */
+  maximum: number;
+
+  /**
+   * The sum of squared deviations from the mean:
+   *   Sum[i=1..count]((x_i - mean)^2)
+   * where each x_i is a sample values. If `count` is zero then this field
+   * must be zero, otherwise validation of the request fails.
+   */
+  sum_of_squared_deviation: number;
+
+  /**
+   * The number of samples in each histogram bucket. `bucket_counts` are
+   * optional. If present, they must sum to the `count` value.
+   * 
+   * The buckets are defined below in `bucket_option`. There are N buckets.
+   * `bucket_counts[0]` is the number of samples in the underflow bucket.
+   * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
+   * in each of the finite buckets. And `bucket_counts[N] is the number
+   * of samples in the overflow bucket. See the comments of `bucket_option`
+   * below for more details.
+   * 
+   * Any suffix of trailing zeros may be omitted.
+   */
+  bucket_counts: string[];
+
+  /** Buckets with constant width. */
+  linear_buckets?: Distribution_LinearBucketsAmino;
+
+  /** Buckets with exponentially growing width. */
+  exponential_buckets?: Distribution_ExponentialBucketsAmino;
+
+  /** Buckets with arbitrary user-provided width. */
+  explicit_buckets?: Distribution_ExplicitBucketsAmino;
+
+  /** Example points. Must be in increasing order of `value` field. */
+  exemplars: Distribution_ExemplarAmino[];
+}
+
+/**
+ * Distribution represents a frequency distribution of double-valued sample
+ * points. It contains the size of the population of sample points plus
+ * additional optional information:
+ * 
+ * * the arithmetic mean of the samples
+ * * the minimum and maximum of the samples
+ * * the sum-squared-deviation of the samples, used to compute variance
+ * * a histogram of the values of the sample points
+ */
 export interface DistributionSDKType {
   count: Long;
   mean: number;
@@ -96,6 +158,31 @@ export interface Distribution_LinearBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   *   [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   * Must be strictly positive.
+   */
+  width: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   *   [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   */
+  offset: number;
+}
+
+/** Describing buckets with constant width. */
+export interface Distribution_LinearBucketsAmino {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets: number;
 
   /**
    * The i'th linear bucket covers the interval
@@ -147,6 +234,32 @@ export interface Distribution_ExponentialBuckets {
 }
 
 /** Describing buckets with exponentially growing width. */
+export interface Distribution_ExponentialBucketsAmino {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be larger than 1.0.
+   */
+  growth_factor: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be > 0.
+   */
+  scale: number;
+}
+
+/** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
   growth_factor: number;
@@ -155,6 +268,28 @@ export interface Distribution_ExponentialBucketsSDKType {
 
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBuckets {
+  /**
+   * 'bound' is a list of strictly increasing boundaries between
+   * buckets. Note that a list of length N-1 defines N buckets because
+   * of fenceposting. See comments on `bucket_options` for details.
+   * 
+   * The i'th finite bucket covers the interval
+   *   [bound[i-1], bound[i])
+   * where i ranges from 1 to bound_size() - 1. Note that there are no
+   * finite buckets at all if 'bound' only contains a single element; in
+   * that special case the single bound defines the boundary between the
+   * underflow and overflow buckets.
+   * 
+   * bucket number                   lower bound    upper bound
+   *  i == 0 (underflow)              -inf           bound[i]
+   *  0 < i < bound_size()            bound[i-1]     bound[i]
+   *  i == bound_size() (overflow)    bound[i-1]     +inf
+   */
+  bounds: number[];
+}
+
+/** Describing buckets with arbitrary user-provided width. */
+export interface Distribution_ExplicitBucketsAmino {
   /**
    * 'bound' is a list of strictly increasing boundaries between
    * buckets. Note that a list of length N-1 defines N buckets because
@@ -408,6 +543,48 @@ export const Distribution = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: DistributionAmino): Distribution {
+    return {
+      count: Long.fromString(object.count),
+      mean: object.mean,
+      minimum: object.minimum,
+      maximum: object.maximum,
+      sumOfSquaredDeviation: object.sum_of_squared_deviation,
+      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
+      linearBuckets: object?.linear_buckets ? Distribution_LinearBuckets.fromAmino(object.linear_buckets) : undefined,
+      exponentialBuckets: object?.exponential_buckets ? Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets) : undefined,
+      explicitBuckets: object?.explicit_buckets ? Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Distribution): DistributionAmino {
+    const obj: any = {};
+    obj.count = message.count ? message.count.toString() : undefined;
+    obj.mean = message.mean;
+    obj.minimum = message.minimum;
+    obj.maximum = message.maximum;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+
+    if (message.bucketCounts) {
+      obj.bucket_counts = message.bucketCounts.map(e => e);
+    } else {
+      obj.bucket_counts = [];
+    }
+
+    obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toAmino(message.linearBuckets) : undefined;
+    obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toAmino(message.exponentialBuckets) : undefined;
+    obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toAmino(message.explicitBuckets) : undefined;
+
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+
+    return obj;
   }
 
 };
@@ -500,6 +677,22 @@ export const Distribution_LinearBuckets = {
   },
 
   toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
+    return obj;
+  },
+
+  fromAmino(object: Distribution_LinearBucketsAmino): Distribution_LinearBuckets {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      width: object.width,
+      offset: object.offset
+    };
+  },
+
+  toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
     obj.width = message.width;
@@ -602,6 +795,22 @@ export const Distribution_ExponentialBuckets = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+
+  fromAmino(object: Distribution_ExponentialBucketsAmino): Distribution_ExponentialBuckets {
+    return {
+      numFiniteBuckets: object.num_finite_buckets,
+      growthFactor: object.growth_factor,
+      scale: object.scale
+    };
+  },
+
+  toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
+    const obj: any = {};
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
+    return obj;
   }
 
 };
@@ -686,6 +895,24 @@ export const Distribution_ExplicitBuckets = {
   },
 
   toSDK(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsSDKType {
+    const obj: any = {};
+
+    if (message.bounds) {
+      obj.bounds = message.bounds.map(e => e);
+    } else {
+      obj.bounds = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: Distribution_ExplicitBucketsAmino): Distribution_ExplicitBuckets {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsAmino {
     const obj: any = {};
 
     if (message.bounds) {

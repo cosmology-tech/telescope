@@ -1,5 +1,5 @@
-import { Params, ParamsSDKType } from "./params";
-import { SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidIntermediaryAccount, SuperfluidIntermediaryAccountSDKType, LockIdIntermediaryAccountConnection, LockIdIntermediaryAccountConnectionSDKType } from "./superfluid";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordAmino, OsmoEquivalentMultiplierRecordSDKType, SuperfluidIntermediaryAccount, SuperfluidIntermediaryAccountAmino, SuperfluidIntermediaryAccountSDKType, LockIdIntermediaryAccountConnection, LockIdIntermediaryAccountConnectionAmino, LockIdIntermediaryAccountConnectionSDKType } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
@@ -26,6 +26,30 @@ export interface GenesisState {
    */
   intermediaryAccounts: SuperfluidIntermediaryAccount[];
   intemediaryAccountConnections: LockIdIntermediaryAccountConnection[];
+}
+
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  params?: ParamsAmino;
+
+  /**
+   * superfluid_assets defines the registered superfluid assets that have been
+   * registered via governance.
+   */
+  superfluid_assets: SuperfluidAssetAmino[];
+
+  /**
+   * osmo_equivalent_multipliers is the records of osmo equivalent amount of
+   * each superfluid registered pool, updated every epoch.
+   */
+  osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordAmino[];
+
+  /**
+   * intermediary_accounts is a secondary account for superfluid staking that
+   * plays an intermediary role between validators and the delegators.
+   */
+  intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
+  intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
 }
 
 /** GenesisState defines the module's genesis state. */
@@ -195,6 +219,47 @@ export const GenesisState = {
 
     if (message.intemediaryAccountConnections) {
       obj.intemediary_account_connections = message.intemediaryAccountConnections.map(e => e ? LockIdIntermediaryAccountConnection.toSDK(e) : undefined);
+    } else {
+      obj.intemediary_account_connections = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      superfluidAssets: Array.isArray(object?.superfluid_assets) ? object.superfluid_assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : [],
+      osmoEquivalentMultipliers: Array.isArray(object?.osmo_equivalent_multipliers) ? object.osmo_equivalent_multipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromAmino(e)) : [],
+      intermediaryAccounts: Array.isArray(object?.intermediary_accounts) ? object.intermediary_accounts.map((e: any) => SuperfluidIntermediaryAccount.fromAmino(e)) : [],
+      intemediaryAccountConnections: Array.isArray(object?.intemediary_account_connections) ? object.intemediary_account_connections.map((e: any) => LockIdIntermediaryAccountConnection.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.superfluidAssets) {
+      obj.superfluid_assets = message.superfluidAssets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
+    } else {
+      obj.superfluid_assets = [];
+    }
+
+    if (message.osmoEquivalentMultipliers) {
+      obj.osmo_equivalent_multipliers = message.osmoEquivalentMultipliers.map(e => e ? OsmoEquivalentMultiplierRecord.toAmino(e) : undefined);
+    } else {
+      obj.osmo_equivalent_multipliers = [];
+    }
+
+    if (message.intermediaryAccounts) {
+      obj.intermediary_accounts = message.intermediaryAccounts.map(e => e ? SuperfluidIntermediaryAccount.toAmino(e) : undefined);
+    } else {
+      obj.intermediary_accounts = [];
+    }
+
+    if (message.intemediaryAccountConnections) {
+      obj.intemediary_account_connections = message.intemediaryAccountConnections.map(e => e ? LockIdIntermediaryAccountConnection.toAmino(e) : undefined);
     } else {
       obj.intemediary_account_connections = [];
     }

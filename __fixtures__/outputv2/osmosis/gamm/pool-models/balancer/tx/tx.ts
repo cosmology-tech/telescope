@@ -1,4 +1,4 @@
-import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
@@ -12,6 +12,14 @@ export interface MsgCreateBalancerPool {
 }
 
 /** ===================== MsgCreatePool */
+export interface MsgCreateBalancerPoolAmino {
+  sender: string;
+  pool_params?: PoolParamsAmino;
+  pool_assets: PoolAssetAmino[];
+  future_pool_governor: string;
+}
+
+/** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolSDKType {
   sender: string;
   pool_params?: PoolParamsSDKType;
@@ -22,6 +30,11 @@ export interface MsgCreateBalancerPoolSDKType {
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
   poolId: Long;
+}
+
+/** Returns the poolID */
+export interface MsgCreateBalancerPoolResponseAmino {
+  pool_id: string;
 }
 
 /** Returns the poolID */
@@ -148,6 +161,30 @@ export const MsgCreateBalancerPool = {
 
     obj.future_pool_governor = message.futurePoolGovernor;
     return obj;
+  },
+
+  fromAmino(object: MsgCreateBalancerPoolAmino): MsgCreateBalancerPool {
+    return {
+      sender: object.sender,
+      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
+      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
+      futurePoolGovernor: object.future_pool_governor
+    };
+  },
+
+  toAmino(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+
+    if (message.poolAssets) {
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.pool_assets = [];
+    }
+
+    obj.future_pool_governor = message.futurePoolGovernor;
+    return obj;
   }
 
 };
@@ -216,6 +253,18 @@ export const MsgCreateBalancerPoolResponse = {
   toSDK(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseSDKType {
     const obj: any = {};
     obj.pool_id = message.poolId;
+    return obj;
+  },
+
+  fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {
+    return {
+      poolId: Long.fromString(object.pool_id)
+    };
+  },
+
+  toAmino(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   }
 

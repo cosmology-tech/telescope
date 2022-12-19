@@ -1,12 +1,15 @@
-import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./params";
+import { Action, ActionAmino, ActionSDKType, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceRequestAmino {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequestSDKType {}
@@ -18,12 +21,21 @@ export interface QueryModuleAccountBalanceResponse {
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceResponseAmino {
+  /** params defines the parameters of the module. */
+  moduleAccountBalance: CoinAmino[];
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponseSDKType {
   moduleAccountBalance: CoinSDKType[];
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -35,10 +47,19 @@ export interface QueryParamsResponse {
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params?: ParamsSDKType;
 }
 export interface QueryClaimRecordRequest {
+  address: string;
+}
+export interface QueryClaimRecordRequestAmino {
   address: string;
 }
 export interface QueryClaimRecordRequestSDKType {
@@ -47,10 +68,17 @@ export interface QueryClaimRecordRequestSDKType {
 export interface QueryClaimRecordResponse {
   claimRecord?: ClaimRecord;
 }
+export interface QueryClaimRecordResponseAmino {
+  claim_record?: ClaimRecordAmino;
+}
 export interface QueryClaimRecordResponseSDKType {
   claim_record?: ClaimRecordSDKType;
 }
 export interface QueryClaimableForActionRequest {
+  address: string;
+  action: Action;
+}
+export interface QueryClaimableForActionRequestAmino {
   address: string;
   action: Action;
 }
@@ -61,10 +89,16 @@ export interface QueryClaimableForActionRequestSDKType {
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
 }
+export interface QueryClaimableForActionResponseAmino {
+  coins: CoinAmino[];
+}
 export interface QueryClaimableForActionResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface QueryTotalClaimableRequest {
+  address: string;
+}
+export interface QueryTotalClaimableRequestAmino {
   address: string;
 }
 export interface QueryTotalClaimableRequestSDKType {
@@ -72,6 +106,9 @@ export interface QueryTotalClaimableRequestSDKType {
 }
 export interface QueryTotalClaimableResponse {
   coins: Coin[];
+}
+export interface QueryTotalClaimableResponseAmino {
+  coins: CoinAmino[];
 }
 export interface QueryTotalClaimableResponseSDKType {
   coins: CoinSDKType[];
@@ -123,6 +160,15 @@ export const QueryModuleAccountBalanceRequest = {
   },
 
   toSDK(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryModuleAccountBalanceRequestAmino): QueryModuleAccountBalanceRequest {
+    return {};
+  },
+
+  toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -206,6 +252,24 @@ export const QueryModuleAccountBalanceResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryModuleAccountBalanceResponseAmino): QueryModuleAccountBalanceResponse {
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAmino {
+    const obj: any = {};
+
+    if (message.moduleAccountBalance) {
+      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.moduleAccountBalance = [];
+    }
+
+    return obj;
   }
 
 };
@@ -256,6 +320,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -327,6 +400,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -393,6 +478,18 @@ export const QueryClaimRecordRequest = {
   },
 
   toSDK(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+
+  fromAmino(object: QueryClaimRecordRequestAmino): QueryClaimRecordRequest {
+    return {
+      address: object.address
+    };
+  },
+
+  toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -464,6 +561,18 @@ export const QueryClaimRecordResponse = {
   toSDK(message: QueryClaimRecordResponse): QueryClaimRecordResponseSDKType {
     const obj: any = {};
     message.claimRecord !== undefined && (obj.claim_record = message.claimRecord ? ClaimRecord.toSDK(message.claimRecord) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryClaimRecordResponseAmino): QueryClaimRecordResponse {
+    return {
+      claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseAmino {
+    const obj: any = {};
+    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined;
     return obj;
   }
 
@@ -548,6 +657,20 @@ export const QueryClaimableForActionRequest = {
     obj.address = message.address;
     message.action !== undefined && (obj.action = actionToJSON(message.action));
     return obj;
+  },
+
+  fromAmino(object: QueryClaimableForActionRequestAmino): QueryClaimableForActionRequest {
+    return {
+      address: object.address,
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+    };
+  },
+
+  toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.action = message.action;
+    return obj;
   }
 
 };
@@ -629,6 +752,24 @@ export const QueryClaimableForActionResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryClaimableForActionResponseAmino): QueryClaimableForActionResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAmino {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -695,6 +836,18 @@ export const QueryTotalClaimableRequest = {
   },
 
   toSDK(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
+  },
+
+  fromAmino(object: QueryTotalClaimableRequestAmino): QueryTotalClaimableRequest {
+    return {
+      address: object.address
+    };
+  },
+
+  toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -774,6 +927,24 @@ export const QueryTotalClaimableResponse = {
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryTotalClaimableResponseAmino): QueryTotalClaimableResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAmino {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }

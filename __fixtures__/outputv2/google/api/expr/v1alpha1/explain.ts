@@ -1,4 +1,4 @@
-import { Value, ValueSDKType } from "./value";
+import { Value, ValueAmino, ValueSDKType } from "./value";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -34,6 +34,31 @@ export interface Explain {
  */
 
 /** @deprecated */
+export interface ExplainAmino {
+  /**
+   * All of the observed values.
+   * 
+   * The field value_index is an index in the values list.
+   * Separating values from steps is needed to remove redundant values.
+   */
+  values: ValueAmino[];
+
+  /**
+   * List of steps.
+   * 
+   * Repeated evaluations of the same expression generate new ExprStep
+   * instances. The order of such ExprStep instances matches the order of
+   * elements returned by Comprehension.iter_range.
+   */
+  expr_steps: Explain_ExprStepAmino[];
+}
+
+/**
+ * Values of intermediate expressions produced when evaluating expression.
+ * Deprecated, use `EvalState` instead.
+ */
+
+/** @deprecated */
 export interface ExplainSDKType {
   values: ValueSDKType[];
   expr_steps: Explain_ExprStepSDKType[];
@@ -46,6 +71,15 @@ export interface Explain_ExprStep {
 
   /** Index of the value in the values list. */
   valueIndex: number;
+}
+
+/** ID and value index of one step. */
+export interface Explain_ExprStepAmino {
+  /** ID of corresponding Expr node. */
+  id: string;
+
+  /** Index of the value in the values list. */
+  value_index: number;
 }
 
 /** ID and value index of one step. */
@@ -155,6 +189,31 @@ export const Explain = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ExplainAmino): Explain {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
+      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Explain): ExplainAmino {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    if (message.exprSteps) {
+      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
+    } else {
+      obj.expr_steps = [];
+    }
+
+    return obj;
   }
 
 };
@@ -236,6 +295,20 @@ export const Explain_ExprStep = {
   toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
     const obj: any = {};
     obj.id = message.id;
+    obj.value_index = message.valueIndex;
+    return obj;
+  },
+
+  fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
+    return {
+      id: Long.fromString(object.id),
+      valueIndex: object.value_index
+    };
+  },
+
+  toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
     obj.value_index = message.valueIndex;
     return obj;
   }

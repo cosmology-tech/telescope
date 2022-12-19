@@ -1,6 +1,6 @@
-import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType } from "./tx";
+import { MsgCreateBalancerPool, MsgCreateBalancerPoolAmino, MsgCreateBalancerPoolSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool", MsgCreateBalancerPool]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

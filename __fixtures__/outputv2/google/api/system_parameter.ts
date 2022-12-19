@@ -53,6 +53,49 @@ export interface SystemParameters {
  * and/or a URL query parameter. This configuration specifies which methods
  * change the names of the system parameters.
  */
+export interface SystemParametersAmino {
+  /**
+   * Define system parameters.
+   * 
+   * The parameters defined here will override the default parameters
+   * implemented by the system. If this field is missing from the service
+   * config, default system parameters will be used. Default system parameters
+   * and names is implementation-dependent.
+   * 
+   * Example: define api key for all methods
+   * 
+   *     system_parameters
+   *       rules:
+   *         - selector: "*"
+   *           parameters:
+   *             - name: api_key
+   *               url_query_parameter: api_key
+   * 
+   * 
+   * Example: define 2 api key names for a specific method.
+   * 
+   *     system_parameters
+   *       rules:
+   *         - selector: "/ListShelves"
+   *           parameters:
+   *             - name: api_key
+   *               http_header: Api-Key1
+   *             - name: api_key
+   *               http_header: Api-Key2
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: SystemParameterRuleAmino[];
+}
+
+/**
+ * ### System parameter configuration
+ * 
+ * A system parameter is a special kind of parameter defined by the API
+ * system, not by an individual API. It is typically mapped to an HTTP header
+ * and/or a URL query parameter. This configuration specifies which methods
+ * change the names of the system parameters.
+ */
 export interface SystemParametersSDKType {
   rules: SystemParameterRuleSDKType[];
 }
@@ -84,6 +127,29 @@ export interface SystemParameterRule {
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
+export interface SystemParameterRuleAmino {
+  /**
+   * Selects the methods to which this rule applies. Use '*' to indicate all
+   * methods in all APIs.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+
+  /**
+   * Define parameters. Multiple names may be defined for a parameter.
+   * For a given method call, only one of them should be used. If multiple
+   * names are used the behavior is implementation-dependent.
+   * If none of the specified names are present the behavior is
+   * parameter-dependent.
+   */
+  parameters: SystemParameterAmino[];
+}
+
+/**
+ * Define a system parameter rule mapping system parameter definitions to
+ * methods.
+ */
 export interface SystemParameterRuleSDKType {
   selector: string;
   parameters: SystemParameterSDKType[];
@@ -109,6 +175,28 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+
+/**
+ * Define a parameter's name and location. The parameter may be passed as either
+ * an HTTP header or a URL query parameter, and if both are passed the behavior
+ * is implementation-dependent.
+ */
+export interface SystemParameterAmino {
+  /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
+  name: string;
+
+  /**
+   * Define the HTTP header name to use for the parameter. It is case
+   * insensitive.
+   */
+  http_header: string;
+
+  /**
+   * Define the URL query parameter name to use for the parameter. It is case
+   * sensitive.
+   */
+  url_query_parameter: string;
 }
 
 /**
@@ -194,6 +282,24 @@ export const SystemParameters = {
 
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? SystemParameterRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SystemParametersAmino): SystemParameters {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SystemParameters): SystemParametersAmino {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
     } else {
       obj.rules = [];
     }
@@ -294,6 +400,26 @@ export const SystemParameterRule = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
+    return {
+      selector: object.selector,
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+
+    if (message.parameters) {
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
+    } else {
+      obj.parameters = [];
+    }
+
+    return obj;
   }
 
 };
@@ -386,6 +512,22 @@ export const SystemParameter = {
   },
 
   toSDK(message: SystemParameter): SystemParameterSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.http_header = message.httpHeader;
+    obj.url_query_parameter = message.urlQueryParameter;
+    return obj;
+  },
+
+  fromAmino(object: SystemParameterAmino): SystemParameter {
+    return {
+      name: object.name,
+      httpHeader: object.http_header,
+      urlQueryParameter: object.url_query_parameter
+    };
+  },
+
+  toAmino(message: SystemParameter): SystemParameterAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.http_header = message.httpHeader;

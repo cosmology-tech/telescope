@@ -1,4 +1,4 @@
-import { TokenPair, TokenPairSDKType } from "./erc20";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -10,6 +10,15 @@ export interface GenesisState {
 
   /** registered token pairs */
   tokenPairs: TokenPair[];
+}
+
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params?: ParamsAmino;
+
+  /** registered token pairs */
+  token_pairs: TokenPairAmino[];
 }
 
 /** GenesisState defines the module's genesis state. */
@@ -29,6 +38,19 @@ export interface Params {
    * ModuleAddress Ethereum address.
    */
   enableEvmHook: boolean;
+}
+
+/** Params defines the erc20 module params */
+export interface ParamsAmino {
+  /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
+  enable_erc20: boolean;
+
+  /**
+   * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
+   * Coin by transferring the Tokens through a MsgEthereumTx to the
+   * ModuleAddress Ethereum address.
+   */
+  enable_evm_hook: boolean;
 }
 
 /** Params defines the erc20 module params */
@@ -128,6 +150,26 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -207,6 +249,20 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.enable_erc20 = message.enableErc20;
+    obj.enable_evm_hook = message.enableEvmHook;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableErc20: object.enable_erc20,
+      enableEvmHook: object.enable_evm_hook
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.enable_erc20 = message.enableErc20;
     obj.enable_evm_hook = message.enableEvmHook;

@@ -1,6 +1,6 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
@@ -12,6 +12,15 @@ export const protobufPackage = "evmos.fees.v1";
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
+ * method.
+ */
+export interface QueryDevFeeInfosRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -37,6 +46,17 @@ export interface QueryDevFeeInfosResponse {
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
  * RPC method.
  */
+export interface QueryDevFeeInfosResponseAmino {
+  fees: DevFeeInfoAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
+ * RPC method.
+ */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -49,6 +69,15 @@ export interface QueryDevFeeInfosResponseSDKType {
 export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
   contractAddress: string;
+}
+
+/**
+ * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
+ * method.
+ */
+export interface QueryDevFeeInfoRequestAmino {
+  /** contract identifier is the hex contract address of a contract */
+  contract_address: string;
 }
 
 /**
@@ -71,12 +100,23 @@ export interface QueryDevFeeInfoResponse {
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
  */
+export interface QueryDevFeeInfoResponseAmino {
+  fee?: DevFeeInfoAmino;
+}
+
+/**
+ * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
+ * method.
+ */
 export interface QueryDevFeeInfoResponseSDKType {
   fee?: DevFeeInfoSDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -87,6 +127,14 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params?: Params;
+}
+
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
 }
 
 /**
@@ -113,6 +161,18 @@ export interface QueryDevFeeInfosPerDeployerRequest {
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
+export interface QueryDevFeeInfosPerDeployerRequestAmino {
+  /** deployer bech32 address */
+  deployer_address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryDevFeeInfosPerDeployerRequest is the request type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   deployer_address: string;
   pagination?: PageRequestSDKType;
@@ -127,6 +187,17 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDevFeeInfosPerDeployerResponse is the response type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
+export interface QueryDevFeeInfosPerDeployerResponseAmino {
+  fees: DevFeeInfoAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -202,6 +273,18 @@ export const QueryDevFeeInfosRequest = {
   toSDK(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosRequestAmino): QueryDevFeeInfosRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -298,6 +381,26 @@ export const QueryDevFeeInfosResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosResponseAmino): QueryDevFeeInfosResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseAmino {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -364,6 +467,18 @@ export const QueryDevFeeInfoRequest = {
   },
 
   toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
+    return {
+      contractAddress: object.contract_address
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     return obj;
@@ -436,6 +551,18 @@ export const QueryDevFeeInfoResponse = {
     const obj: any = {};
     message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toSDK(message.fee) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
+    return {
+      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseAmino {
+    const obj: any = {};
+    obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined;
+    return obj;
   }
 
 };
@@ -486,6 +613,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -556,6 +692,18 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 
@@ -639,6 +787,20 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     const obj: any = {};
     obj.deployer_address = message.deployerAddress;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
+    return {
+      deployerAddress: object.deployer_address,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
+    const obj: any = {};
+    obj.deployer_address = message.deployerAddress;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -734,6 +896,26 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDevFeeInfosPerDeployerResponseAmino): QueryDevFeeInfosPerDeployerResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseAmino {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 

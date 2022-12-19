@@ -17,6 +17,16 @@ export interface DoubleValue {
  * 
  * The JSON representation for `DoubleValue` is JSON number.
  */
+export interface DoubleValueAmino {
+  /** The double value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `double`.
+ * 
+ * The JSON representation for `DoubleValue` is JSON number.
+ */
 export interface DoubleValueSDKType {
   value: number;
 }
@@ -27,6 +37,16 @@ export interface DoubleValueSDKType {
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValue {
+  /** The float value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `float`.
+ * 
+ * The JSON representation for `FloatValue` is JSON number.
+ */
+export interface FloatValueAmino {
   /** The float value. */
   value: number;
 }
@@ -55,6 +75,16 @@ export interface Int64Value {
  * 
  * The JSON representation for `Int64Value` is JSON string.
  */
+export interface Int64ValueAmino {
+  /** The int64 value. */
+  value: string;
+}
+
+/**
+ * Wrapper message for `int64`.
+ * 
+ * The JSON representation for `Int64Value` is JSON string.
+ */
 export interface Int64ValueSDKType {
   value: Long;
 }
@@ -74,6 +104,16 @@ export interface UInt64Value {
  * 
  * The JSON representation for `UInt64Value` is JSON string.
  */
+export interface UInt64ValueAmino {
+  /** The uint64 value. */
+  value: string;
+}
+
+/**
+ * Wrapper message for `uint64`.
+ * 
+ * The JSON representation for `UInt64Value` is JSON string.
+ */
 export interface UInt64ValueSDKType {
   value: Long;
 }
@@ -84,6 +124,16 @@ export interface UInt64ValueSDKType {
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32Value {
+  /** The int32 value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `int32`.
+ * 
+ * The JSON representation for `Int32Value` is JSON number.
+ */
+export interface Int32ValueAmino {
   /** The int32 value. */
   value: number;
 }
@@ -112,6 +162,16 @@ export interface UInt32Value {
  * 
  * The JSON representation for `UInt32Value` is JSON number.
  */
+export interface UInt32ValueAmino {
+  /** The uint32 value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `uint32`.
+ * 
+ * The JSON representation for `UInt32Value` is JSON number.
+ */
 export interface UInt32ValueSDKType {
   value: number;
 }
@@ -122,6 +182,16 @@ export interface UInt32ValueSDKType {
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValue {
+  /** The bool value. */
+  value: boolean;
+}
+
+/**
+ * Wrapper message for `bool`.
+ * 
+ * The JSON representation for `BoolValue` is JSON `true` and `false`.
+ */
+export interface BoolValueAmino {
   /** The bool value. */
   value: boolean;
 }
@@ -150,6 +220,16 @@ export interface StringValue {
  * 
  * The JSON representation for `StringValue` is JSON string.
  */
+export interface StringValueAmino {
+  /** The string value. */
+  value: string;
+}
+
+/**
+ * Wrapper message for `string`.
+ * 
+ * The JSON representation for `StringValue` is JSON string.
+ */
 export interface StringValueSDKType {
   value: string;
 }
@@ -160,6 +240,16 @@ export interface StringValueSDKType {
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValue {
+  /** The bytes value. */
+  value: Uint8Array;
+}
+
+/**
+ * Wrapper message for `bytes`.
+ * 
+ * The JSON representation for `BytesValue` is JSON string.
+ */
+export interface BytesValueAmino {
   /** The bytes value. */
   value: Uint8Array;
 }
@@ -238,6 +328,18 @@ export const DoubleValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: DoubleValueAmino): DoubleValue {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: DoubleValue): DoubleValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
   }
 
 };
@@ -304,6 +406,18 @@ export const FloatValue = {
   },
 
   toSDK(message: FloatValue): FloatValueSDKType {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: FloatValueAmino): FloatValue {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: FloatValue): FloatValueAmino {
     const obj: any = {};
     obj.value = message.value;
     return obj;
@@ -376,6 +490,18 @@ export const Int64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: Int64ValueAmino): Int64Value {
+    return {
+      value: Long.fromString(object.value)
+    };
+  },
+
+  toAmino(message: Int64Value): Int64ValueAmino {
+    const obj: any = {};
+    obj.value = message.value ? message.value.toString() : undefined;
+    return obj;
   }
 
 };
@@ -445,6 +571,18 @@ export const UInt64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: UInt64ValueAmino): UInt64Value {
+    return {
+      value: Long.fromString(object.value)
+    };
+  },
+
+  toAmino(message: UInt64Value): UInt64ValueAmino {
+    const obj: any = {};
+    obj.value = message.value ? message.value.toString() : undefined;
+    return obj;
   }
 
 };
@@ -511,6 +649,18 @@ export const Int32Value = {
   },
 
   toSDK(message: Int32Value): Int32ValueSDKType {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: Int32ValueAmino): Int32Value {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: Int32Value): Int32ValueAmino {
     const obj: any = {};
     obj.value = message.value;
     return obj;
@@ -583,6 +733,18 @@ export const UInt32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: UInt32ValueAmino): UInt32Value {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: UInt32Value): UInt32ValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
   }
 
 };
@@ -649,6 +811,18 @@ export const BoolValue = {
   },
 
   toSDK(message: BoolValue): BoolValueSDKType {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: BoolValueAmino): BoolValue {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: BoolValue): BoolValueAmino {
     const obj: any = {};
     obj.value = message.value;
     return obj;
@@ -721,6 +895,18 @@ export const StringValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: StringValueAmino): StringValue {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: StringValue): StringValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
   }
 
 };
@@ -787,6 +973,18 @@ export const BytesValue = {
   },
 
   toSDK(message: BytesValue): BytesValueSDKType {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: BytesValueAmino): BytesValue {
+    return {
+      value: object.value
+    };
+  },
+
+  toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
     obj.value = message.value;
     return obj;

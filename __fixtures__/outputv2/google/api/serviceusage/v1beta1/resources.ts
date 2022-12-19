@@ -1,11 +1,11 @@
-import { Api, ApiSDKType } from "../../../protobuf/api";
-import { Documentation, DocumentationSDKType } from "../../documentation";
-import { Quota, QuotaSDKType } from "../../quota";
-import { Authentication, AuthenticationSDKType } from "../../auth";
-import { Usage, UsageSDKType } from "../../usage";
-import { Endpoint, EndpointSDKType } from "../../endpoint";
-import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
-import { Monitoring, MonitoringSDKType } from "../../monitoring";
+import { Api, ApiAmino, ApiSDKType } from "../../../protobuf/api";
+import { Documentation, DocumentationAmino, DocumentationSDKType } from "../../documentation";
+import { Quota, QuotaAmino, QuotaSDKType } from "../../quota";
+import { Authentication, AuthenticationAmino, AuthenticationSDKType } from "../../auth";
+import { Usage, UsageAmino, UsageSDKType } from "../../usage";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "../../endpoint";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
+import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
@@ -30,6 +30,7 @@ export enum State {
   UNRECOGNIZED = -1,
 }
 export const StateSDKType = State;
+export const StateAmino = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -93,6 +94,7 @@ export enum QuotaView {
   UNRECOGNIZED = -1,
 }
 export const QuotaViewSDKType = QuotaView;
+export const QuotaViewAmino = QuotaView;
 export function quotaViewFromJSON(object: any): QuotaView {
   switch (object) {
     case 0:
@@ -149,6 +151,7 @@ export enum QuotaSafetyCheck {
   UNRECOGNIZED = -1,
 }
 export const QuotaSafetyCheckSDKType = QuotaSafetyCheck;
+export const QuotaSafetyCheckAmino = QuotaSafetyCheck;
 export function quotaSafetyCheckFromJSON(object: any): QuotaSafetyCheck {
   switch (object) {
     case 0:
@@ -217,6 +220,36 @@ export interface Service {
 }
 
 /** A service that is available for use by the consumer. */
+export interface ServiceAmino {
+  /**
+   * The resource name of the consumer and service.
+   * 
+   * A valid name would be:
+   * - `projects/123/services/serviceusage.googleapis.com`
+   */
+  name: string;
+
+  /**
+   * The resource name of the consumer.
+   * 
+   * A valid name would be:
+   * - `projects/123`
+   */
+  parent: string;
+
+  /**
+   * The service configuration of the available service.
+   * Some fields may be filtered out of the configuration in responses to
+   * the `ListServices` method. These fields are present only in responses to
+   * the `GetService` method.
+   */
+  config?: ServiceConfigAmino;
+
+  /** Whether or not the service has been enabled for use by the consumer. */
+  state: State;
+}
+
+/** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
   parent: string;
@@ -278,6 +311,59 @@ export interface ServiceConfig {
 }
 
 /** The configuration of the service. */
+export interface ServiceConfigAmino {
+  /**
+   * The DNS address at which this service is available.
+   * 
+   * An example DNS address would be:
+   * `calendar.googleapis.com`.
+   */
+  name: string;
+
+  /** The product title for this service. */
+  title: string;
+
+  /**
+   * A list of API interfaces exported by this service. Contains only the names,
+   * versions, and method names of the interfaces.
+   */
+  apis: ApiAmino[];
+
+  /**
+   * Additional API documentation. Contains only the summary and the
+   * documentation URL.
+   */
+  documentation?: DocumentationAmino;
+
+  /** Quota configuration. */
+  quota?: QuotaAmino;
+
+  /** Auth configuration. Contains only the OAuth rules. */
+  authentication?: AuthenticationAmino;
+
+  /** Configuration controlling usage of this service. */
+  usage?: UsageAmino;
+
+  /**
+   * Configuration for network endpoints. Contains only the names and aliases
+   * of the endpoints.
+   */
+  endpoints: EndpointAmino[];
+
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitored_resources: MonitoredResourceDescriptorAmino[];
+
+  /**
+   * Monitoring configuration.
+   * This should not include the 'producer_destinations' field.
+   */
+  monitoring?: MonitoringAmino;
+}
+
+/** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
   title: string;
@@ -298,6 +384,15 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+
+/** The operation metadata returned for the batchend services operation. */
+export interface OperationMetadataAmino {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resource_names: string[];
 }
 
 /** The operation metadata returned for the batchend services operation. */
@@ -349,6 +444,55 @@ export interface ConsumerQuotaMetric {
    * be populated.
    */
   descendantConsumerQuotaLimits: ConsumerQuotaLimit[];
+
+  /** The units in which the metric value is reported. */
+  unit: string;
+}
+
+/** Consumer quota settings for a quota metric. */
+export interface ConsumerQuotaMetricAmino {
+  /**
+   * The resource name of the quota settings on this metric for this consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The name of the metric.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The display name of the metric.
+   * 
+   * An example name would be:
+   * `CPUs`
+   */
+  display_name: string;
+
+  /** The consumer quota for each quota limit defined on the metric. */
+  consumer_quota_limits: ConsumerQuotaLimitAmino[];
+
+  /**
+   * The quota limits targeting the descendant containers of the
+   * consumer in request.
+   * 
+   * If the consumer in request is of type `organizations`
+   * or `folders`, the field will list per-project limits in the metric; if the
+   * consumer in request is of type `project`, the field will be empty.
+   * 
+   * The `quota_buckets` field of each descendant consumer quota limit will not
+   * be populated.
+   */
+  descendant_consumer_quota_limits: ConsumerQuotaLimitAmino[];
 
   /** The units in which the metric value is reported. */
   unit: string;
@@ -410,6 +554,51 @@ export interface ConsumerQuotaLimit {
 }
 
 /** Consumer quota settings for a quota limit. */
+export interface ConsumerQuotaLimitAmino {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The name of the parent metric of this limit.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit.
+   * 
+   * An example unit would be
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /** Whether this limit is precise or imprecise. */
+  is_precise: boolean;
+
+  /** Whether admin overrides are allowed on this limit */
+  allows_admin_overrides: boolean;
+
+  /**
+   * Summary of the enforced quota buckets, organized by quota dimension,
+   * ordered from least specific to most specific (for example, the global
+   * default bucket, with no quota dimensions, will always appear first).
+   */
+  quota_buckets: QuotaBucketAmino[];
+}
+
+/** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
   name: string;
   metric: string;
@@ -419,6 +608,10 @@ export interface ConsumerQuotaLimitSDKType {
   quota_buckets: QuotaBucketSDKType[];
 }
 export interface QuotaBucket_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
 }
@@ -469,6 +662,47 @@ export interface QuotaBucket {
 }
 
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
+export interface QuotaBucketAmino {
+  /**
+   * The effective limit of this quota bucket. Equal to default_limit if there
+   * are no overrides.
+   */
+  effective_limit: string;
+
+  /**
+   * The default limit of this quota bucket, as specified by the service
+   * configuration.
+   */
+  default_limit: string;
+
+  /** Producer override on this quota bucket. */
+  producer_override?: QuotaOverrideAmino;
+
+  /** Consumer override on this quota bucket. */
+  consumer_override?: QuotaOverrideAmino;
+
+  /** Admin override on this quota bucket. */
+  admin_override?: QuotaOverrideAmino;
+
+  /**
+   * The dimensions of this quota bucket.
+   * 
+   * If this map is empty, this is the global bucket, which is the default quota
+   * value applied to all requests that do not have a more specific override.
+   * 
+   * If this map is nonempty, the default limit, effective limit, and quota
+   * overrides apply only to requests that have the dimensions given in the map.
+   * 
+   * For example, if the map has key `region` and value `us-east-1`, then the
+   * specified effective limit is only effective in that region, and the
+   * specified overrides apply only in that region.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+}
+
+/** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
   effective_limit: Long;
   default_limit: Long;
@@ -480,6 +714,10 @@ export interface QuotaBucketSDKType {
   };
 }
 export interface QuotaOverride_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface QuotaOverride_DimensionsEntryAmino {
   key: string;
   value: string;
 }
@@ -564,6 +802,81 @@ export interface QuotaOverride {
 }
 
 /** A quota override */
+export interface QuotaOverrideAmino {
+  /**
+   * The resource name of the override.
+   * This name is generated by the server when the override is created.
+   * 
+   * Example names would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The overriding quota limit value.
+   * Can be any nonnegative integer, or -1 (unlimited quota).
+   */
+  override_value: string;
+
+  /**
+   * If this map is nonempty, then this override applies only to specific values
+   * for dimensions defined in the limit unit.
+   * 
+   * For example, an override on a limit with the unit `1/{project}/{region}`
+   * could contain an entry with the key `region` and the value `us-east-1`;
+   * the override is only applied to quota consumed in that region.
+   * 
+   * This map has the following restrictions:
+   * 
+   * *   Keys that are not defined in the limit's unit are not valid keys.
+   *     Any string appearing in `{brackets}` in the unit (besides `{project}`
+   *     or
+   *     `{user}`) is a defined key.
+   * *   `project` is not a valid key; the project is already specified in
+   *     the parent resource name.
+   * *   `user` is not a valid key; the API does not support quota overrides
+   *     that apply only to a specific user.
+   * *   If `region` appears as a key, its value must be a valid Cloud region.
+   * *   If `zone` appears as a key, its value must be a valid Cloud zone.
+   * *   If any valid key other than `region` or `zone` appears in the map, then
+   *     all valid keys other than `region` or `zone` must also appear in the
+   *     map.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+
+  /**
+   * The name of the metric to which this override applies.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit of the limit to which this override applies.
+   * 
+   * An example unit would be:
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /**
+   * The resource name of the ancestor that requested the override. For example:
+   * `organizations/12345` or `folders/67890`.
+   * Used by admin overrides only.
+   */
+  admin_override_ancestor: string;
+}
+
+/** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
   override_value: Long;
@@ -587,10 +900,25 @@ export interface OverrideInlineSource {
 }
 
 /** Import data embedded in the request message */
+export interface OverrideInlineSourceAmino {
+  /**
+   * The overrides to create.
+   * Each override must have a value for 'metric' and 'unit', to specify
+   * which metric and which limit the override should be applied to.
+   * The 'name' field of the override does not need to be set; it is ignored.
+   */
+  overrides: QuotaOverrideAmino[];
+}
+
+/** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
   overrides: QuotaOverrideSDKType[];
 }
 export interface AdminQuotaPolicy_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryAmino {
   key: string;
   value: string;
 }
@@ -615,6 +943,66 @@ export interface AdminQuotaPolicy {
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
   policyValue: Long;
+
+  /**
+   * If this map is nonempty, then this policy applies only to specific values
+   * for dimensions defined in the limit unit.
+   * 
+   * For example, an policy on a limit with the unit `1/{project}/{region}`
+   * could contain an entry with the key `region` and the value `us-east-1`;
+   * the policy is only applied to quota consumed in that region.
+   * 
+   * This map has the following restrictions:
+   * 
+   * *   If `region` appears as a key, its value must be a valid Cloud region.
+   * *   If `zone` appears as a key, its value must be a valid Cloud zone.
+   * *   Keys other than `region` or `zone` are not valid.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+
+  /**
+   * The name of the metric to which this policy applies.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit of the limit to which this policy applies.
+   * 
+   * An example unit would be:
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /**
+   * The cloud resource container at which the quota policy is created. The
+   * format is `{container_type}/{container_number}`
+   */
+  container: string;
+}
+
+/** Quota policy created by quota administrator. */
+export interface AdminQuotaPolicyAmino {
+  /**
+   * The resource name of the policy.
+   * This name is generated by the server when the policy is created.
+   * 
+   * Example names would be:
+   * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The quota policy value.
+   * Can be any nonnegative integer, or -1 (unlimited quota).
+   */
+  policy_value: string;
 
   /**
    * If this map is nonempty, then this policy applies only to specific values
@@ -687,6 +1075,24 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+
+/**
+ * Service identity for a service. This is the identity that service producer
+ * should use to access consumer resources.
+ */
+export interface ServiceIdentityAmino {
+  /**
+   * The email address of the service account that a service producer would use
+   * to access consumer resources.
+   */
+  email: string;
+
+  /**
+   * The unique and stable id of the service account.
+   * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
+   */
+  unique_id: string;
 }
 
 /**
@@ -804,6 +1210,24 @@ export const Service = {
     obj.parent = message.parent;
     message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
     message.state !== undefined && (obj.state = stateToJSON(message.state));
+    return obj;
+  },
+
+  fromAmino(object: ServiceAmino): Service {
+    return {
+      name: object.name,
+      parent: object.parent,
+      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+    };
+  },
+
+  toAmino(message: Service): ServiceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.parent = message.parent;
+    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
+    obj.state = message.state;
     return obj;
   }
 
@@ -1034,6 +1458,53 @@ export const ServiceConfig = {
 
     message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ServiceConfigAmino): ServiceConfig {
+    return {
+      name: object.name,
+      title: object.title,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
+      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
+      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
+      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
+    };
+  },
+
+  toAmino(message: ServiceConfig): ServiceConfigAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.title = message.title;
+
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
+    return obj;
   }
 
 };
@@ -1106,6 +1577,24 @@ export const OperationMetadata = {
   },
 
   toSDK(message: OperationMetadata): OperationMetadataSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: OperationMetadataAmino): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: OperationMetadata): OperationMetadataAmino {
     const obj: any = {};
 
     if (message.resourceNames) {
@@ -1276,6 +1765,39 @@ export const ConsumerQuotaMetric = {
 
     obj.unit = message.unit;
     return obj;
+  },
+
+  fromAmino(object: ConsumerQuotaMetricAmino): ConsumerQuotaMetric {
+    return {
+      name: object.name,
+      metric: object.metric,
+      displayName: object.display_name,
+      consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
+      descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromAmino(e)) : [],
+      unit: object.unit
+    };
+  },
+
+  toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.display_name = message.displayName;
+
+    if (message.consumerQuotaLimits) {
+      obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
+    } else {
+      obj.consumer_quota_limits = [];
+    }
+
+    if (message.descendantConsumerQuotaLimits) {
+      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
+    } else {
+      obj.descendant_consumer_quota_limits = [];
+    }
+
+    obj.unit = message.unit;
+    return obj;
   }
 
 };
@@ -1427,6 +1949,34 @@ export const ConsumerQuotaLimit = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ConsumerQuotaLimitAmino): ConsumerQuotaLimit {
+    return {
+      name: object.name,
+      metric: object.metric,
+      unit: object.unit,
+      isPrecise: object.is_precise,
+      allowsAdminOverrides: object.allows_admin_overrides,
+      quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ConsumerQuotaLimit): ConsumerQuotaLimitAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.is_precise = message.isPrecise;
+    obj.allows_admin_overrides = message.allowsAdminOverrides;
+
+    if (message.quotaBuckets) {
+      obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toAmino(e) : undefined);
+    } else {
+      obj.quota_buckets = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1506,6 +2056,20 @@ export const QuotaBucket_DimensionsEntry = {
   },
 
   toSDK(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: QuotaBucket_DimensionsEntryAmino): QuotaBucket_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1688,6 +2252,40 @@ export const QuotaBucket = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QuotaBucketAmino): QuotaBucket {
+    return {
+      effectiveLimit: Long.fromString(object.effective_limit),
+      defaultLimit: Long.fromString(object.default_limit),
+      producerOverride: object?.producer_override ? QuotaOverride.fromAmino(object.producer_override) : undefined,
+      consumerOverride: object?.consumer_override ? QuotaOverride.fromAmino(object.consumer_override) : undefined,
+      adminOverride: object?.admin_override ? QuotaOverride.fromAmino(object.admin_override) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: QuotaBucket): QuotaBucketAmino {
+    const obj: any = {};
+    obj.effective_limit = message.effectiveLimit ? message.effectiveLimit.toString() : undefined;
+    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
+    obj.producer_override = message.producerOverride ? QuotaOverride.toAmino(message.producerOverride) : undefined;
+    obj.consumer_override = message.consumerOverride ? QuotaOverride.toAmino(message.consumerOverride) : undefined;
+    obj.admin_override = message.adminOverride ? QuotaOverride.toAmino(message.adminOverride) : undefined;
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -1767,6 +2365,20 @@ export const QuotaOverride_DimensionsEntry = {
   },
 
   toSDK(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: QuotaOverride_DimensionsEntryAmino): QuotaOverride_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1950,6 +2562,40 @@ export const QuotaOverride = {
     obj.unit = message.unit;
     obj.admin_override_ancestor = message.adminOverrideAncestor;
     return obj;
+  },
+
+  fromAmino(object: QuotaOverrideAmino): QuotaOverride {
+    return {
+      name: object.name,
+      overrideValue: Long.fromString(object.override_value),
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: object.metric,
+      unit: object.unit,
+      adminOverrideAncestor: object.admin_override_ancestor
+    };
+  },
+
+  toAmino(message: QuotaOverride): QuotaOverrideAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.override_value = message.overrideValue ? message.overrideValue.toString() : undefined;
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.admin_override_ancestor = message.adminOverrideAncestor;
+    return obj;
   }
 
 };
@@ -2026,6 +2672,24 @@ export const OverrideInlineSource = {
 
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: OverrideInlineSourceAmino): OverrideInlineSource {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: OverrideInlineSource): OverrideInlineSourceAmino {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
       obj.overrides = [];
     }
@@ -2110,6 +2774,20 @@ export const AdminQuotaPolicy_DimensionsEntry = {
   },
 
   toSDK(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AdminQuotaPolicy_DimensionsEntryAmino): AdminQuotaPolicy_DimensionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -2293,6 +2971,40 @@ export const AdminQuotaPolicy = {
     obj.unit = message.unit;
     obj.container = message.container;
     return obj;
+  },
+
+  fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
+    return {
+      name: object.name,
+      policyValue: Long.fromString(object.policy_value),
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: object.metric,
+      unit: object.unit,
+      container: object.container
+    };
+  },
+
+  toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.policy_value = message.policyValue ? message.policyValue.toString() : undefined;
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    obj.metric = message.metric;
+    obj.unit = message.unit;
+    obj.container = message.container;
+    return obj;
   }
 
 };
@@ -2372,6 +3084,20 @@ export const ServiceIdentity = {
   },
 
   toSDK(message: ServiceIdentity): ServiceIdentitySDKType {
+    const obj: any = {};
+    obj.email = message.email;
+    obj.unique_id = message.uniqueId;
+    return obj;
+  },
+
+  fromAmino(object: ServiceIdentityAmino): ServiceIdentity {
+    return {
+      email: object.email,
+      uniqueId: object.unique_id
+    };
+  },
+
+  toAmino(message: ServiceIdentity): ServiceIdentityAmino {
     const obj: any = {};
     obj.email = message.email;
     obj.unique_id = message.uniqueId;

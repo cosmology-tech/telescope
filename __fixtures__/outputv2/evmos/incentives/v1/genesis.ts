@@ -1,4 +1,4 @@
-import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
+import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
@@ -13,6 +13,18 @@ export interface GenesisState {
 
   /** active Gasmeters */
   gasMeters: GasMeter[];
+}
+
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params?: ParamsAmino;
+
+  /** active incentives */
+  incentives: IncentiveAmino[];
+
+  /** active Gasmeters */
+  gas_meters: GasMeterAmino[];
 }
 
 /** GenesisState defines the module's genesis state. */
@@ -35,6 +47,21 @@ export interface Params {
 
   /** scaling factor for capping rewards */
   rewardScaler: string;
+}
+
+/** Params defines the incentives module params */
+export interface ParamsAmino {
+  /** parameter to enable incentives */
+  enable_incentives: boolean;
+
+  /** maximum percentage an incentive can allocate per denomination */
+  allocation_limit: string;
+
+  /** identifier for the epochs module hooks */
+  incentives_epoch_identifier: string;
+
+  /** scaling factor for capping rewards */
+  reward_scaler: string;
 }
 
 /** Params defines the incentives module params */
@@ -160,6 +187,33 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+
+    return obj;
   }
 
 };
@@ -265,6 +319,24 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.enable_incentives = message.enableIncentives;
+    obj.allocation_limit = message.allocationLimit;
+    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
+    obj.reward_scaler = message.rewardScaler;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableIncentives: object.enable_incentives,
+      allocationLimit: object.allocation_limit,
+      incentivesEpochIdentifier: object.incentives_epoch_identifier,
+      rewardScaler: object.reward_scaler
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.enable_incentives = message.enableIncentives;
     obj.allocation_limit = message.allocationLimit;

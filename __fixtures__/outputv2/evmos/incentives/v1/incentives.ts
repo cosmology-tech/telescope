@@ -1,5 +1,5 @@
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
@@ -29,6 +29,27 @@ export interface Incentive {
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
+export interface IncentiveAmino {
+  /** contract address */
+  contract: string;
+
+  /** denoms and percentage of rewards to be allocated */
+  allocations: DecCoinAmino[];
+
+  /** number of remaining epochs */
+  epochs: number;
+
+  /** distribution start time */
+  start_time?: Date;
+
+  /** cumulative gas spent by all gasmeters of the incentive during the epoch */
+  total_gas: string;
+}
+
+/**
+ * Incentive defines an instance that organizes distribution conditions for a
+ * given smart contract
+ */
 export interface IncentiveSDKType {
   contract: string;
   allocations: DecCoinSDKType[];
@@ -47,6 +68,18 @@ export interface GasMeter {
 
   /** cumulative gas spent during the epoch */
   cumulativeGas: Long;
+}
+
+/** GasMeter tracks the cumulative gas spent per participant in one epoch */
+export interface GasMeterAmino {
+  /** hex address of the incentivized contract */
+  contract: string;
+
+  /** participant address that interacts with the incentive */
+  participant: string;
+
+  /** cumulative gas spent during the epoch */
+  cumulative_gas: string;
 }
 
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
@@ -75,6 +108,24 @@ export interface RegisterIncentiveProposal {
 }
 
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
+export interface RegisterIncentiveProposalAmino {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address */
+  contract: string;
+
+  /** denoms and percentage of rewards to be allocated */
+  allocations: DecCoinAmino[];
+
+  /** number of remaining epochs */
+  epochs: number;
+}
+
+/** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
   title: string;
   description: string;
@@ -85,6 +136,18 @@ export interface RegisterIncentiveProposalSDKType {
 
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposal {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address */
+  contract: string;
+}
+
+/** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+export interface CancelIncentiveProposalAmino {
   /** title of the proposal */
   title: string;
 
@@ -235,6 +298,32 @@ export const Incentive = {
     message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
     obj.total_gas = message.totalGas;
     return obj;
+  },
+
+  fromAmino(object: IncentiveAmino): Incentive {
+    return {
+      contract: object.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
+      epochs: object.epochs,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      totalGas: Long.fromString(object.total_gas)
+    };
+  },
+
+  toAmino(message: Incentive): IncentiveAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+
+    obj.epochs = message.epochs;
+    obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
+    obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
+    return obj;
   }
 
 };
@@ -331,6 +420,22 @@ export const GasMeter = {
     obj.contract = message.contract;
     obj.participant = message.participant;
     obj.cumulative_gas = message.cumulativeGas;
+    return obj;
+  },
+
+  fromAmino(object: GasMeterAmino): GasMeter {
+    return {
+      contract: object.contract,
+      participant: object.participant,
+      cumulativeGas: Long.fromString(object.cumulative_gas)
+    };
+  },
+
+  toAmino(message: GasMeter): GasMeterAmino {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
     return obj;
   }
 
@@ -469,6 +574,32 @@ export const RegisterIncentiveProposal = {
 
     obj.epochs = message.epochs;
     return obj;
+  },
+
+  fromAmino(object: RegisterIncentiveProposalAmino): RegisterIncentiveProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
+      epochs: object.epochs
+    };
+  },
+
+  toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+
+    obj.epochs = message.epochs;
+    return obj;
   }
 
 };
@@ -561,6 +692,22 @@ export const CancelIncentiveProposal = {
   },
 
   toSDK(message: CancelIncentiveProposal): CancelIncentiveProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    return obj;
+  },
+
+  fromAmino(object: CancelIncentiveProposalAmino): CancelIncentiveProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      contract: object.contract
+    };
+  },
+
+  toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;

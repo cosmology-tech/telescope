@@ -1,4 +1,4 @@
-import { PublicKey, PublicKeySDKType } from "../crypto/keys";
+import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";
@@ -6,6 +6,11 @@ export interface ValidatorSet {
   validators: Validator[];
   proposer?: Validator;
   totalVotingPower: Long;
+}
+export interface ValidatorSetAmino {
+  validators: ValidatorAmino[];
+  proposer?: ValidatorAmino;
+  total_voting_power: string;
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
@@ -18,6 +23,12 @@ export interface Validator {
   votingPower: Long;
   proposerPriority: Long;
 }
+export interface ValidatorAmino {
+  address: Uint8Array;
+  pub_key?: PublicKeyAmino;
+  voting_power: string;
+  proposer_priority: string;
+}
 export interface ValidatorSDKType {
   address: Uint8Array;
   pub_key?: PublicKeySDKType;
@@ -27,6 +38,10 @@ export interface ValidatorSDKType {
 export interface SimpleValidator {
   pubKey?: PublicKey;
   votingPower: Long;
+}
+export interface SimpleValidatorAmino {
+  pub_key?: PublicKeyAmino;
+  voting_power: string;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;
@@ -137,6 +152,28 @@ export const ValidatorSet = {
 
     message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toSDK(message.proposer) : undefined);
     obj.total_voting_power = message.totalVotingPower;
+    return obj;
+  },
+
+  fromAmino(object: ValidatorSetAmino): ValidatorSet {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
+      proposer: object?.proposer ? Validator.fromAmino(object.proposer) : undefined,
+      totalVotingPower: Long.fromString(object.total_voting_power)
+    };
+  },
+
+  toAmino(message: ValidatorSet): ValidatorSetAmino {
+    const obj: any = {};
+
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+
+    obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
+    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     return obj;
   }
 
@@ -249,6 +286,24 @@ export const Validator = {
     obj.voting_power = message.votingPower;
     obj.proposer_priority = message.proposerPriority;
     return obj;
+  },
+
+  fromAmino(object: ValidatorAmino): Validator {
+    return {
+      address: object.address,
+      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
+      votingPower: Long.fromString(object.voting_power),
+      proposerPriority: Long.fromString(object.proposer_priority)
+    };
+  },
+
+  toAmino(message: Validator): ValidatorAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
+    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
+    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
+    return obj;
   }
 
 };
@@ -331,6 +386,20 @@ export const SimpleValidator = {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
     obj.voting_power = message.votingPower;
+    return obj;
+  },
+
+  fromAmino(object: SimpleValidatorAmino): SimpleValidator {
+    return {
+      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
+      votingPower: Long.fromString(object.voting_power)
+    };
+  },
+
+  toAmino(message: SimpleValidator): SimpleValidatorAmino {
+    const obj: any = {};
+    obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
+    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     return obj;
   }
 

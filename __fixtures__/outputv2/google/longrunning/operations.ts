@@ -1,6 +1,6 @@
-import { Duration, DurationSDKType } from "../protobuf/duration";
-import { Any, AnySDKType } from "../protobuf/any";
-import { Status, StatusSDKType } from "../rpc/status";
+import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Status, StatusAmino, StatusSDKType } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.longrunning";
@@ -52,6 +52,49 @@ export interface Operation {
  * This resource represents a long-running operation that is the result of a
  * network API call.
  */
+export interface OperationAmino {
+  /**
+   * The server-assigned name, which is only unique within the same service that
+   * originally returns it. If you use the default HTTP mapping, the
+   * `name` should be a resource name ending with `operations/{unique_id}`.
+   */
+  name: string;
+
+  /**
+   * Service-specific metadata associated with the operation.  It typically
+   * contains progress information and common metadata such as create time.
+   * Some services might not provide such metadata.  Any method that returns a
+   * long-running operation should document the metadata type, if any.
+   */
+  metadata?: AnyAmino;
+
+  /**
+   * If the value is `false`, it means the operation is still in progress.
+   * If `true`, the operation is completed, and either `error` or `response` is
+   * available.
+   */
+  done: boolean;
+
+  /** The error result of the operation in case of failure or cancellation. */
+  error?: StatusAmino;
+
+  /**
+   * The normal response of the operation in case of success.  If the original
+   * method returns no data on success, such as `Delete`, the response is
+   * `google.protobuf.Empty`.  If the original method is standard
+   * `Get`/`Create`/`Update`, the response should be the resource.  For other
+   * methods, the response should have the type `XxxResponse`, where `Xxx`
+   * is the original method name.  For example, if the original method name
+   * is `TakeSnapshot()`, the inferred response type is
+   * `TakeSnapshotResponse`.
+   */
+  response?: AnyAmino;
+}
+
+/**
+ * This resource represents a long-running operation that is the result of a
+ * network API call.
+ */
 export interface OperationSDKType {
   name: string;
   metadata?: AnySDKType;
@@ -62,6 +105,12 @@ export interface OperationSDKType {
 
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
+  /** The name of the operation resource. */
+  name: string;
+}
+
+/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
+export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
   name: string;
 }
@@ -87,6 +136,21 @@ export interface ListOperationsRequest {
 }
 
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsRequestAmino {
+  /** The name of the operation's parent resource. */
+  name: string;
+
+  /** The standard list filter. */
+  filter: string;
+
+  /** The standard list page size. */
+  page_size: number;
+
+  /** The standard list page token. */
+  page_token: string;
+}
+
+/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
   name: string;
   filter: string;
@@ -104,6 +168,15 @@ export interface ListOperationsResponse {
 }
 
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsResponseAmino {
+  /** A list of operations that matches the specified filter in the request. */
+  operations: OperationAmino[];
+
+  /** The standard List next-page token. */
+  next_page_token: string;
+}
+
+/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
   operations: OperationSDKType[];
   next_page_token: string;
@@ -116,12 +189,24 @@ export interface CancelOperationRequest {
 }
 
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
+export interface CancelOperationRequestAmino {
+  /** The name of the operation resource to be cancelled. */
+  name: string;
+}
+
+/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
   name: string;
 }
 
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequest {
+  /** The name of the operation resource to be deleted. */
+  name: string;
+}
+
+/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
+export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
@@ -142,6 +227,19 @@ export interface WaitOperationRequest {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout?: Duration;
+}
+
+/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
+export interface WaitOperationRequestAmino {
+  /** The name of the operation resource to wait on. */
+  name: string;
+
+  /**
+   * The maximum duration to wait before timing out. If left blank, the wait
+   * will be at most the time permitted by the underlying HTTP/RPC protocol.
+   * If RPC context deadline is also specified, the shorter one will be used.
+   */
+  timeout?: DurationAmino;
 }
 
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
@@ -186,6 +284,44 @@ export interface OperationInfo {
    * Note: Altering this value constitutes a breaking change.
    */
   metadataType: string;
+}
+
+/**
+ * A message representing the message types used by a long-running operation.
+ * 
+ * Example:
+ * 
+ *   rpc LongRunningRecognize(LongRunningRecognizeRequest)
+ *       returns (google.longrunning.Operation) {
+ *     option (google.longrunning.operation_info) = {
+ *       response_type: "LongRunningRecognizeResponse"
+ *       metadata_type: "LongRunningRecognizeMetadata"
+ *     };
+ *   }
+ */
+export interface OperationInfoAmino {
+  /**
+   * Required. The message name of the primary return type for this
+   * long-running operation.
+   * This type will be used to deserialize the LRO's response.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  response_type: string;
+
+  /**
+   * Required. The message name of the metadata type for this long-running
+   * operation.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  metadata_type: string;
 }
 
 /**
@@ -327,6 +463,26 @@ export const Operation = {
     message.error !== undefined && (obj.error = message.error ? Status.toSDK(message.error) : undefined);
     message.response !== undefined && (obj.response = message.response ? Any.toSDK(message.response) : undefined);
     return obj;
+  },
+
+  fromAmino(object: OperationAmino): Operation {
+    return {
+      name: object.name,
+      metadata: object?.metadata ? Any.fromAmino(object.metadata) : undefined,
+      done: object.done,
+      error: object?.error ? Status.fromAmino(object.error) : undefined,
+      response: object?.response ? Any.fromAmino(object.response) : undefined
+    };
+  },
+
+  toAmino(message: Operation): OperationAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.metadata = message.metadata ? Any.toAmino(message.metadata) : undefined;
+    obj.done = message.done;
+    obj.error = message.error ? Status.toAmino(message.error) : undefined;
+    obj.response = message.response ? Any.toAmino(message.response) : undefined;
+    return obj;
   }
 
 };
@@ -393,6 +549,18 @@ export const GetOperationRequest = {
   },
 
   toSDK(message: GetOperationRequest): GetOperationRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+
+  fromAmino(object: GetOperationRequestAmino): GetOperationRequest {
+    return {
+      name: object.name
+    };
+  },
+
+  toAmino(message: GetOperationRequest): GetOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -507,6 +675,24 @@ export const ListOperationsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromAmino(object: ListOperationsRequestAmino): ListOperationsRequest {
+    return {
+      name: object.name,
+      filter: object.filter,
+      pageSize: object.page_size,
+      pageToken: object.page_token
+    };
+  },
+
+  toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.filter = message.filter;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
   }
 
 };
@@ -602,6 +788,26 @@ export const ListOperationsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAmino(object: ListOperationsResponseAmino): ListOperationsResponse {
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+
+  toAmino(message: ListOperationsResponse): ListOperationsResponseAmino {
+    const obj: any = {};
+
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   }
 
 };
@@ -671,6 +877,18 @@ export const CancelOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAmino(object: CancelOperationRequestAmino): CancelOperationRequest {
+    return {
+      name: object.name
+    };
+  },
+
+  toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   }
 
 };
@@ -737,6 +955,18 @@ export const DeleteOperationRequest = {
   },
 
   toSDK(message: DeleteOperationRequest): DeleteOperationRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+
+  fromAmino(object: DeleteOperationRequestAmino): DeleteOperationRequest {
+    return {
+      name: object.name
+    };
+  },
+
+  toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -823,6 +1053,20 @@ export const WaitOperationRequest = {
     obj.name = message.name;
     message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toSDK(message.timeout) : undefined);
     return obj;
+  },
+
+  fromAmino(object: WaitOperationRequestAmino): WaitOperationRequest {
+    return {
+      name: object.name,
+      timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
+    };
+  },
+
+  toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
+    return obj;
   }
 
 };
@@ -902,6 +1146,20 @@ export const OperationInfo = {
   },
 
   toSDK(message: OperationInfo): OperationInfoSDKType {
+    const obj: any = {};
+    obj.response_type = message.responseType;
+    obj.metadata_type = message.metadataType;
+    return obj;
+  },
+
+  fromAmino(object: OperationInfoAmino): OperationInfo {
+    return {
+      responseType: object.response_type,
+      metadataType: object.metadata_type
+    };
+  },
+
+  toAmino(message: OperationInfo): OperationInfoAmino {
     const obj: any = {};
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;

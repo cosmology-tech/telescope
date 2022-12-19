@@ -1,4 +1,4 @@
-import { ExponentialCalculation, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionSDKType } from "./inflation";
+import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";
@@ -19,6 +19,24 @@ export interface GenesisState {
 
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: Long;
+}
+
+/** GenesisState defines the inflation module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+
+  /** amount of past periods, based on the epochs per period param */
+  period: string;
+
+  /** inflation epoch identifier */
+  epoch_identifier: string;
+
+  /** number of epochs after which inflation is recalculated */
+  epochs_per_period: string;
+
+  /** number of epochs that have passed while inflation is disabled */
+  skipped_epochs: string;
 }
 
 /** GenesisState defines the inflation module's genesis state. */
@@ -43,6 +61,21 @@ export interface Params {
 
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+
+/** Params holds parameters for the inflation module. */
+export interface ParamsAmino {
+  /** type of coin to mint */
+  mint_denom: string;
+
+  /** variables to calculate exponential inflation */
+  exponential_calculation?: ExponentialCalculationAmino;
+
+  /** inflation distribution of the minted denom */
+  inflation_distribution?: InflationDistributionAmino;
+
+  /** parameter to enable inflation and halt increasing the skipped_epochs */
+  enable_inflation: boolean;
 }
 
 /** Params holds parameters for the inflation module. */
@@ -174,6 +207,26 @@ export const GenesisState = {
     obj.epochs_per_period = message.epochsPerPeriod;
     obj.skipped_epochs = message.skippedEpochs;
     return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      period: Long.fromString(object.period),
+      epochIdentifier: object.epoch_identifier,
+      epochsPerPeriod: Long.fromString(object.epochs_per_period),
+      skippedEpochs: Long.fromString(object.skipped_epochs)
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.epoch_identifier = message.epochIdentifier;
+    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
+    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
+    return obj;
   }
 
 };
@@ -283,6 +336,24 @@ export const Params = {
     obj.mint_denom = message.mintDenom;
     message.exponentialCalculation !== undefined && (obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toSDK(message.exponentialCalculation) : undefined);
     message.inflationDistribution !== undefined && (obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toSDK(message.inflationDistribution) : undefined);
+    obj.enable_inflation = message.enableInflation;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      mintDenom: object.mint_denom,
+      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
+      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
+      enableInflation: object.enable_inflation
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.mint_denom = message.mintDenom;
+    obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined;
+    obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
     obj.enable_inflation = message.enableInflation;
     return obj;
   }

@@ -1,8 +1,8 @@
-import { Params, ParamsSDKType } from "./mint";
+import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestAmino, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseAmino, QueryEpochProvisionsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {

@@ -1491,7 +1491,7 @@ export const Validator = {
       operatorAddress: object.operator_address,
       consensusPubkey: encodeBech32Pubkey({
         type: "tendermint/PubKeySecp256k1",
-        value: toBase64(pubkey.value)
+        value: toBase64(object.consensus_pubkey.value)
       }, "cosmos"),
       jailed: object.jailed,
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,

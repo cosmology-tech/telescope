@@ -1,6 +1,6 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightAmino, ConsensusStateWithHeightSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -12,6 +12,15 @@ export const protobufPackage = "ibc.core.client.v1";
 export interface QueryClientStateRequest {
   /** client state unique identifier */
   clientId: string;
+}
+
+/**
+ * QueryClientStateRequest is the request type for the Query/ClientState RPC
+ * method
+ */
+export interface QueryClientStateRequestAmino {
+  /** client state unique identifier */
+  client_id: string;
 }
 
 /**
@@ -43,6 +52,22 @@ export interface QueryClientStateResponse {
  * method. Besides the client state, it includes a proof and the height from
  * which the proof was retrieved.
  */
+export interface QueryClientStateResponseAmino {
+  /** client state associated with the request identifier */
+  client_state?: AnyAmino;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+
+/**
+ * QueryClientStateResponse is the response type for the Query/ClientState RPC
+ * method. Besides the client state, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
 export interface QueryClientStateResponseSDKType {
   client_state?: AnySDKType;
   proof: Uint8Array;
@@ -56,6 +81,15 @@ export interface QueryClientStateResponseSDKType {
 export interface QueryClientStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
+ * method
+ */
+export interface QueryClientStatesRequestAmino {
+  /** pagination request */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -76,6 +110,18 @@ export interface QueryClientStatesResponse {
 
   /** pagination response */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
+ * method.
+ */
+export interface QueryClientStatesResponseAmino {
+  /** list of stored ClientStates of the chain. */
+  client_states: IdentifiedClientStateAmino[];
+
+  /** pagination response */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -114,6 +160,28 @@ export interface QueryConsensusStateRequest {
  * RPC method. Besides the consensus state, it includes a proof and the height
  * from which the proof was retrieved.
  */
+export interface QueryConsensusStateRequestAmino {
+  /** client identifier */
+  client_id: string;
+
+  /** consensus state revision number */
+  revision_number: string;
+
+  /** consensus state revision height */
+  revision_height: string;
+
+  /**
+   * latest_height overrrides the height field and queries the latest stored
+   * ConsensusState
+   */
+  latest_height: boolean;
+}
+
+/**
+ * QueryConsensusStateRequest is the request type for the Query/ConsensusState
+ * RPC method. Besides the consensus state, it includes a proof and the height
+ * from which the proof was retrieved.
+ */
 export interface QueryConsensusStateRequestSDKType {
   client_id: string;
   revision_number: Long;
@@ -134,6 +202,21 @@ export interface QueryConsensusStateResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+
+/**
+ * QueryConsensusStateResponse is the response type for the Query/ConsensusState
+ * RPC method
+ */
+export interface QueryConsensusStateResponseAmino {
+  /** consensus state associated with the client identifier at the given height */
+  consensus_state?: AnyAmino;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
 }
 
 /**
@@ -162,6 +245,18 @@ export interface QueryConsensusStatesRequest {
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
  */
+export interface QueryConsensusStatesRequestAmino {
+  /** client identifier */
+  client_id: string;
+
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
+ * RPC method.
+ */
 export interface QueryConsensusStatesRequestSDKType {
   client_id: string;
   pagination?: PageRequestSDKType;
@@ -177,6 +272,18 @@ export interface QueryConsensusStatesResponse {
 
   /** pagination response */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryConsensusStatesResponse is the response type for the
+ * Query/ConsensusStates RPC method
+ */
+export interface QueryConsensusStatesResponseAmino {
+  /** consensus states associated with the identifier */
+  consensus_states: ConsensusStateWithHeightAmino[];
+
+  /** pagination response */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -201,6 +308,15 @@ export interface QueryClientStatusRequest {
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
+export interface QueryClientStatusRequestAmino {
+  /** client unique identifier */
+  client_id: string;
+}
+
+/**
+ * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
+ * method
+ */
 export interface QueryClientStatusRequestSDKType {
   client_id: string;
 }
@@ -210,6 +326,14 @@ export interface QueryClientStatusRequestSDKType {
  * method. It returns the current status of the IBC client.
  */
 export interface QueryClientStatusResponse {
+  status: string;
+}
+
+/**
+ * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
+ * method. It returns the current status of the IBC client.
+ */
+export interface QueryClientStatusResponseAmino {
   status: string;
 }
 
@@ -231,6 +355,12 @@ export interface QueryClientParamsRequest {}
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
  */
+export interface QueryClientParamsRequestAmino {}
+
+/**
+ * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
+ * method.
+ */
 export interface QueryClientParamsRequestSDKType {}
 
 /**
@@ -240,6 +370,15 @@ export interface QueryClientParamsRequestSDKType {}
 export interface QueryClientParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+
+/**
+ * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
 }
 
 /**
@@ -260,6 +399,12 @@ export interface QueryUpgradedClientStateRequest {}
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
  */
+export interface QueryUpgradedClientStateRequestAmino {}
+
+/**
+ * QueryUpgradedClientStateRequest is the request type for the
+ * Query/UpgradedClientState RPC method
+ */
 export interface QueryUpgradedClientStateRequestSDKType {}
 
 /**
@@ -269,6 +414,15 @@ export interface QueryUpgradedClientStateRequestSDKType {}
 export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
   upgradedClientState?: Any;
+}
+
+/**
+ * QueryUpgradedClientStateResponse is the response type for the
+ * Query/UpgradedClientState RPC method.
+ */
+export interface QueryUpgradedClientStateResponseAmino {
+  /** client state associated with the request identifier */
+  upgraded_client_state?: AnyAmino;
 }
 
 /**
@@ -289,6 +443,12 @@ export interface QueryUpgradedConsensusStateRequest {}
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
  */
+export interface QueryUpgradedConsensusStateRequestAmino {}
+
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the
+ * Query/UpgradedConsensusState RPC method
+ */
 export interface QueryUpgradedConsensusStateRequestSDKType {}
 
 /**
@@ -298,6 +458,15 @@ export interface QueryUpgradedConsensusStateRequestSDKType {}
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgradedConsensusState?: Any;
+}
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the
+ * Query/UpgradedConsensusState RPC method.
+ */
+export interface QueryUpgradedConsensusStateResponseAmino {
+  /** Consensus state associated with the request identifier */
+  upgraded_consensus_state?: AnyAmino;
 }
 
 /**
@@ -370,6 +539,18 @@ export const QueryClientStateRequest = {
   },
 
   toSDK(message: QueryClientStateRequest): QueryClientStateRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
+  },
+
+  fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
+    return {
+      clientId: object.client_id
+    };
+  },
+
+  toAmino(message: QueryClientStateRequest): QueryClientStateRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
@@ -470,6 +651,22 @@ export const QueryClientStateResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
+    return {
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      proof: object.proof,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
+    const obj: any = {};
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.proof = message.proof;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    return obj;
   }
 
 };
@@ -538,6 +735,18 @@ export const QueryClientStatesRequest = {
   toSDK(message: QueryClientStatesRequest): QueryClientStatesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryClientStatesRequestAmino): QueryClientStatesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryClientStatesRequest): QueryClientStatesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -633,6 +842,26 @@ export const QueryClientStatesResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryClientStatesResponseAmino): QueryClientStatesResponse {
+    return {
+      clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryClientStatesResponse): QueryClientStatesResponseAmino {
+    const obj: any = {};
+
+    if (message.clientStates) {
+      obj.client_states = message.clientStates.map(e => e ? IdentifiedClientState.toAmino(e) : undefined);
+    } else {
+      obj.client_states = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -745,6 +974,24 @@ export const QueryConsensusStateRequest = {
     obj.revision_height = message.revisionHeight;
     obj.latest_height = message.latestHeight;
     return obj;
+  },
+
+  fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
+    return {
+      clientId: object.client_id,
+      revisionNumber: Long.fromString(object.revision_number),
+      revisionHeight: Long.fromString(object.revision_height),
+      latestHeight: object.latest_height
+    };
+  },
+
+  toAmino(message: QueryConsensusStateRequest): QueryConsensusStateRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.latest_height = message.latestHeight;
+    return obj;
   }
 
 };
@@ -842,6 +1089,22 @@ export const QueryConsensusStateResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
+    return {
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      proof: object.proof,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
+    const obj: any = {};
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.proof = message.proof;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    return obj;
   }
 
 };
@@ -924,6 +1187,20 @@ export const QueryConsensusStatesRequest = {
     const obj: any = {};
     obj.client_id = message.clientId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
+    return {
+      clientId: object.client_id,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1020,6 +1297,26 @@ export const QueryConsensusStatesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryConsensusStatesResponseAmino): QueryConsensusStatesResponse {
+    return {
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseAmino {
+    const obj: any = {};
+
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1086,6 +1383,18 @@ export const QueryClientStatusRequest = {
   },
 
   toSDK(message: QueryClientStatusRequest): QueryClientStatusRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
+  },
+
+  fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
+    return {
+      clientId: object.client_id
+    };
+  },
+
+  toAmino(message: QueryClientStatusRequest): QueryClientStatusRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
@@ -1158,6 +1467,18 @@ export const QueryClientStatusResponse = {
     const obj: any = {};
     obj.status = message.status;
     return obj;
+  },
+
+  fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
+    return {
+      status: object.status
+    };
+  },
+
+  toAmino(message: QueryClientStatusResponse): QueryClientStatusResponseAmino {
+    const obj: any = {};
+    obj.status = message.status;
+    return obj;
   }
 
 };
@@ -1208,6 +1529,15 @@ export const QueryClientParamsRequest = {
   },
 
   toSDK(_: QueryClientParamsRequest): QueryClientParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryClientParamsRequestAmino): QueryClientParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryClientParamsRequest): QueryClientParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1279,6 +1609,18 @@ export const QueryClientParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryClientParamsResponseAmino): QueryClientParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryClientParamsResponse): QueryClientParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -1329,6 +1671,15 @@ export const QueryUpgradedClientStateRequest = {
   },
 
   toSDK(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryUpgradedClientStateRequestAmino): QueryUpgradedClientStateRequest {
+    return {};
+  },
+
+  toAmino(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1400,6 +1751,18 @@ export const QueryUpgradedClientStateResponse = {
     const obj: any = {};
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryUpgradedClientStateResponseAmino): QueryUpgradedClientStateResponse {
+    return {
+      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
+    };
+  },
+
+  toAmino(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseAmino {
+    const obj: any = {};
+    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
+    return obj;
   }
 
 };
@@ -1450,6 +1813,15 @@ export const QueryUpgradedConsensusStateRequest = {
   },
 
   toSDK(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
+    return {};
+  },
+
+  toAmino(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1520,6 +1892,18 @@ export const QueryUpgradedConsensusStateResponse = {
   toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toSDK(message.upgradedConsensusState) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
+    return {
+      upgradedConsensusState: object?.upgraded_consensus_state ? Any.fromAmino(object.upgraded_consensus_state) : undefined
+    };
+  },
+
+  toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
+    const obj: any = {};
+    obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toAmino(message.upgradedConsensusState) : undefined;
     return obj;
   }
 

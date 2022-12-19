@@ -1,10 +1,13 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { EpochInfo, EpochInfoAmino, EpochInfoSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
+}
+export interface QueryEpochsInfoRequestAmino {
+  pagination?: PageRequestAmino;
 }
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -13,6 +16,10 @@ export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
 }
+export interface QueryEpochsInfoResponseAmino {
+  epochs: EpochInfoAmino[];
+  pagination?: PageResponseAmino;
+}
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -20,11 +27,17 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestAmino {
+  identifier: string;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
+}
+export interface QueryCurrentEpochResponseAmino {
+  current_epoch: string;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: Long;
@@ -94,6 +107,18 @@ export const QueryEpochsInfoRequest = {
   toSDK(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -190,6 +215,26 @@ export const QueryEpochsInfoResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
+    const obj: any = {};
+
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -256,6 +301,18 @@ export const QueryCurrentEpochRequest = {
   },
 
   toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
+    const obj: any = {};
+    obj.identifier = message.identifier;
+    return obj;
+  },
+
+  fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
+    return {
+      identifier: object.identifier
+    };
+  },
+
+  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
     return obj;
@@ -327,6 +384,18 @@ export const QueryCurrentEpochResponse = {
   toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
     const obj: any = {};
     obj.current_epoch = message.currentEpoch;
+    return obj;
+  },
+
+  fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: Long.fromString(object.current_epoch)
+    };
+  },
+
+  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
+    const obj: any = {};
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
     return obj;
   }
 

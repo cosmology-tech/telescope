@@ -1,4 +1,4 @@
-import { Duration, DurationSDKType } from "../../protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.type";
@@ -92,6 +92,100 @@ export interface HttpRequest {
    * cache fill was attempted.
    */
   cacheFillBytes: Long;
+
+  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
+  protocol: string;
+}
+
+/**
+ * A common proto for logging HTTP requests. Only contains semantics
+ * defined by the HTTP specification. Product-specific logging
+ * information MUST be defined in a separate message.
+ */
+export interface HttpRequestAmino {
+  /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
+  request_method: string;
+
+  /**
+   * The scheme (http, https), the host name, the path and the query
+   * portion of the URL that was requested.
+   * Example: `"http://example.com/some/info?color=red"`.
+   */
+  request_url: string;
+
+  /**
+   * The size of the HTTP request message in bytes, including the request
+   * headers and the request body.
+   */
+  request_size: string;
+
+  /**
+   * The response code indicating the status of response.
+   * Examples: 200, 404.
+   */
+  status: number;
+
+  /**
+   * The size of the HTTP response message sent back to the client, in bytes,
+   * including the response headers and the response body.
+   */
+  response_size: string;
+
+  /**
+   * The user agent sent by the client. Example:
+   * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
+   * CLR 1.0.3705)"`.
+   */
+  user_agent: string;
+
+  /**
+   * The IP address (IPv4 or IPv6) of the client that issued the HTTP
+   * request. This field can include port information. Examples:
+   * `"192.168.1.1"`, `"10.0.0.1:80"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  remote_ip: string;
+
+  /**
+   * The IP address (IPv4 or IPv6) of the origin server that the request was
+   * sent to. This field can include port information. Examples:
+   * `"192.168.1.1"`, `"10.0.0.1:80"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  server_ip: string;
+
+  /**
+   * The referer URL of the request, as defined in
+   * [HTTP/1.1 Header Field
+   * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+   */
+  referer: string;
+
+  /**
+   * The request processing latency on the server, from the time the request was
+   * received until the response was sent.
+   */
+  latency?: DurationAmino;
+
+  /** Whether or not a cache lookup was attempted. */
+  cache_lookup: boolean;
+
+  /**
+   * Whether or not an entity was served from cache
+   * (with or without validation).
+   */
+  cache_hit: boolean;
+
+  /**
+   * Whether or not the response was validated with the origin server before
+   * being served from cache. This field is only meaningful if `cache_hit` is
+   * True.
+   */
+  cache_validated_with_origin_server: boolean;
+
+  /**
+   * The number of HTTP response bytes inserted into cache. Set only when a
+   * cache fill was attempted.
+   */
+  cache_fill_bytes: string;
 
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
@@ -379,6 +473,46 @@ export const HttpRequest = {
     obj.cache_hit = message.cacheHit;
     obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
     obj.cache_fill_bytes = message.cacheFillBytes;
+    obj.protocol = message.protocol;
+    return obj;
+  },
+
+  fromAmino(object: HttpRequestAmino): HttpRequest {
+    return {
+      requestMethod: object.request_method,
+      requestUrl: object.request_url,
+      requestSize: Long.fromString(object.request_size),
+      status: object.status,
+      responseSize: Long.fromString(object.response_size),
+      userAgent: object.user_agent,
+      remoteIp: object.remote_ip,
+      serverIp: object.server_ip,
+      referer: object.referer,
+      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
+      cacheLookup: object.cache_lookup,
+      cacheHit: object.cache_hit,
+      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
+      cacheFillBytes: Long.fromString(object.cache_fill_bytes),
+      protocol: object.protocol
+    };
+  },
+
+  toAmino(message: HttpRequest): HttpRequestAmino {
+    const obj: any = {};
+    obj.request_method = message.requestMethod;
+    obj.request_url = message.requestUrl;
+    obj.request_size = message.requestSize ? message.requestSize.toString() : undefined;
+    obj.status = message.status;
+    obj.response_size = message.responseSize ? message.responseSize.toString() : undefined;
+    obj.user_agent = message.userAgent;
+    obj.remote_ip = message.remoteIp;
+    obj.server_ip = message.serverIp;
+    obj.referer = message.referer;
+    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
+    obj.cache_lookup = message.cacheLookup;
+    obj.cache_hit = message.cacheHit;
+    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
+    obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
     obj.protocol = message.protocol;
     return obj;
   }

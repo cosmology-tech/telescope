@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.rpc";
@@ -28,6 +28,33 @@ export interface Status {
    * message types for APIs to use.
    */
   details: Any[];
+}
+
+/**
+ * The `Status` type defines a logical error model that is suitable for
+ * different programming environments, including REST APIs and RPC APIs. It is
+ * used by [gRPC](https://github.com/grpc). Each `Status` message contains
+ * three pieces of data: error code, error message, and error details.
+ * 
+ * You can find out more about this error model and how to work with it in the
+ * [API Design Guide](https://cloud.google.com/apis/design/errors).
+ */
+export interface StatusAmino {
+  /** The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]. */
+  code: number;
+
+  /**
+   * A developer-facing error message, which should be in English. Any
+   * user-facing error message should be localized and sent in the
+   * [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+   */
+  message: string;
+
+  /**
+   * A list of messages that carry the error details.  There is a common set of
+   * message types for APIs to use.
+   */
+  details: AnyAmino[];
 }
 
 /**
@@ -145,6 +172,28 @@ export const Status = {
 
     if (message.details) {
       obj.details = message.details.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.details = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: StatusAmino): Status {
+    return {
+      code: object.code,
+      message: object.message,
+      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Status): StatusAmino {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.message = message.message;
+
+    if (message.details) {
+      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.details = [];
     }

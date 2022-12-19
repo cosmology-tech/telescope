@@ -1,6 +1,7 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 
 /** AccessType permission types */
@@ -19,6 +20,7 @@ export enum AccessType {
   UNRECOGNIZED = -1,
 }
 export const AccessTypeSDKType = AccessType;
+export const AccessTypeAmino = AccessType;
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
     case 0:
@@ -79,6 +81,7 @@ export enum ContractCodeHistoryOperationType {
   UNRECOGNIZED = -1,
 }
 export const ContractCodeHistoryOperationTypeSDKType = ContractCodeHistoryOperationType;
+export const ContractCodeHistoryOperationTypeAmino = ContractCodeHistoryOperationType;
 export function contractCodeHistoryOperationTypeFromJSON(object: any): ContractCodeHistoryOperationType {
   switch (object) {
     case 0:
@@ -129,12 +132,23 @@ export interface AccessTypeParam {
 }
 
 /** AccessTypeParam */
+export interface AccessTypeParamAmino {
+  value: AccessType;
+}
+
+/** AccessTypeParam */
 export interface AccessTypeParamSDKType {
   value: AccessType;
 }
 
 /** AccessConfig access control type. */
 export interface AccessConfig {
+  permission: AccessType;
+  address: string;
+}
+
+/** AccessConfig access control type. */
+export interface AccessConfigAmino {
   permission: AccessType;
   address: string;
 }
@@ -150,6 +164,13 @@ export interface Params {
   codeUploadAccess?: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
+}
+
+/** Params defines the set of wasm parameters. */
+export interface ParamsAmino {
+  code_upload_access?: AccessConfigAmino;
+  instantiate_default_permission: AccessType;
+  max_wasm_code_size: string;
 }
 
 /** Params defines the set of wasm parameters. */
@@ -169,6 +190,18 @@ export interface CodeInfo {
 
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig?: AccessConfig;
+}
+
+/** CodeInfo is data for the uploaded contract WASM code */
+export interface CodeInfoAmino {
+  /** CodeHash is the unique identifier created by wasmvm */
+  code_hash: Uint8Array;
+
+  /** Creator address who initially stored the code */
+  creator: string;
+
+  /** InstantiateConfig access control to apply on contract creation, optional */
+  instantiate_config?: AccessConfigAmino;
 }
 
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -208,6 +241,35 @@ export interface ContractInfo {
 }
 
 /** ContractInfo stores a WASM contract instance */
+export interface ContractInfoAmino {
+  /** CodeID is the reference to the stored Wasm code */
+  code_id: string;
+
+  /** Creator address who initially instantiated the contract */
+  creator: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** Label is optional metadata to be stored with a contract instance. */
+  label: string;
+
+  /**
+   * Created Tx position when the contract was instantiated.
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
+   */
+  created?: AbsoluteTxPositionAmino;
+  ibc_port_id: string;
+
+  /**
+   * Extension is an extension point to store custom metadata within the
+   * persistence model.
+   */
+  extension?: AnyAmino;
+}
+
+/** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
   code_id: Long;
   creator: string;
@@ -227,6 +289,18 @@ export interface ContractCodeHistoryEntry {
 
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPosition;
+  msg: Uint8Array;
+}
+
+/** ContractCodeHistoryEntry metadata to a contract. */
+export interface ContractCodeHistoryEntryAmino {
+  operation: ContractCodeHistoryOperationType;
+
+  /** CodeID is the reference to the stored WASM code */
+  code_id: string;
+
+  /** Updated Tx position when the operation was executed. */
+  updated?: AbsoluteTxPositionAmino;
   msg: Uint8Array;
 }
 
@@ -257,6 +331,21 @@ export interface AbsoluteTxPosition {
  * AbsoluteTxPosition is a unique transaction position that allows for global
  * ordering of transactions.
  */
+export interface AbsoluteTxPositionAmino {
+  /** BlockHeight is the block the contract was created at */
+  block_height: string;
+
+  /**
+   * TxIndex is a monotonic counter within the block (actual transaction index,
+   * or gas consumed)
+   */
+  tx_index: string;
+}
+
+/**
+ * AbsoluteTxPosition is a unique transaction position that allows for global
+ * ordering of transactions.
+ */
 export interface AbsoluteTxPositionSDKType {
   block_height: Long;
   tx_index: Long;
@@ -264,6 +353,15 @@ export interface AbsoluteTxPositionSDKType {
 
 /** Model is a struct that holds a KV pair */
 export interface Model {
+  /** hex-encode key to read it better (this is often ascii) */
+  key: Uint8Array;
+
+  /** base64-encode raw value */
+  value: Uint8Array;
+}
+
+/** Model is a struct that holds a KV pair */
+export interface ModelAmino {
   /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
 
@@ -341,6 +439,18 @@ export const AccessTypeParam = {
   toSDK(message: AccessTypeParam): AccessTypeParamSDKType {
     const obj: any = {};
     message.value !== undefined && (obj.value = accessTypeToJSON(message.value));
+    return obj;
+  },
+
+  fromAmino(object: AccessTypeParamAmino): AccessTypeParam {
+    return {
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+    };
+  },
+
+  toAmino(message: AccessTypeParam): AccessTypeParamAmino {
+    const obj: any = {};
+    obj.value = message.value;
     return obj;
   }
 
@@ -423,6 +533,20 @@ export const AccessConfig = {
   toSDK(message: AccessConfig): AccessConfigSDKType {
     const obj: any = {};
     message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
+    obj.address = message.address;
+    return obj;
+  },
+
+  fromAmino(object: AccessConfigAmino): AccessConfig {
+    return {
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      address: object.address
+    };
+  },
+
+  toAmino(message: AccessConfig): AccessConfigAmino {
+    const obj: any = {};
+    obj.permission = message.permission;
     obj.address = message.address;
     return obj;
   }
@@ -522,6 +646,22 @@ export const Params = {
     message.instantiateDefaultPermission !== undefined && (obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission));
     obj.max_wasm_code_size = message.maxWasmCodeSize;
     return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
+      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      maxWasmCodeSize: Long.fromString(object.max_wasm_code_size)
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined;
+    obj.instantiate_default_permission = message.instantiateDefaultPermission;
+    obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
+    return obj;
   }
 
 };
@@ -619,6 +759,22 @@ export const CodeInfo = {
     obj.creator = message.creator;
     message.instantiateConfig !== undefined && (obj.instantiate_config = message.instantiateConfig ? AccessConfig.toSDK(message.instantiateConfig) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CodeInfoAmino): CodeInfo {
+    return {
+      codeHash: object.code_hash,
+      creator: object.creator,
+      instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : undefined
+    };
+  },
+
+  toAmino(message: CodeInfo): CodeInfoAmino {
+    const obj: any = {};
+    obj.code_hash = message.codeHash;
+    obj.creator = message.creator;
+    obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
+    return obj;
   }
 
 };
@@ -662,7 +818,7 @@ export const ContractInfo = {
     }
 
     if (message.extension !== undefined) {
-      Any.encode(message.extension, writer.uint32(58).fork()).ldelim();
+      Any.encode((message.extension as Any), writer.uint32(58).fork()).ldelim();
     }
 
     return writer;
@@ -702,7 +858,7 @@ export const ContractInfo = {
           break;
 
         case 7:
-          message.extension = Any.decode(reader, reader.uint32());
+          message.extension = (ContractInfoExtension_InterfaceDecoder(reader) as Any);
           break;
 
         default:
@@ -771,6 +927,30 @@ export const ContractInfo = {
     message.created !== undefined && (obj.created = message.created ? AbsoluteTxPosition.toSDK(message.created) : undefined);
     obj.ibc_port_id = message.ibcPortId;
     message.extension !== undefined && (obj.extension = message.extension ? Any.toSDK(message.extension) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ContractInfoAmino): ContractInfo {
+    return {
+      codeId: Long.fromString(object.code_id),
+      creator: object.creator,
+      admin: object.admin,
+      label: object.label,
+      created: object?.created ? AbsoluteTxPosition.fromAmino(object.created) : undefined,
+      ibcPortId: object.ibc_port_id,
+      extension: object?.extension ? ContractInfoExtension_FromAmino(object.extension) : undefined
+    };
+  },
+
+  toAmino(message: ContractInfo): ContractInfoAmino {
+    const obj: any = {};
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.creator = message.creator;
+    obj.admin = message.admin;
+    obj.label = message.label;
+    obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created) : undefined;
+    obj.ibc_port_id = message.ibcPortId;
+    obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any)) : undefined;
     return obj;
   }
 
@@ -883,6 +1063,24 @@ export const ContractCodeHistoryEntry = {
     message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toSDK(message.updated) : undefined);
     obj.msg = message.msg;
     return obj;
+  },
+
+  fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
+    return {
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      codeId: Long.fromString(object.code_id),
+      updated: object?.updated ? AbsoluteTxPosition.fromAmino(object.updated) : undefined,
+      msg: toUtf8(JSON.stringify(object.msg))
+    };
+  },
+
+  toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAmino {
+    const obj: any = {};
+    obj.operation = message.operation;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined;
+    obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
+    return obj;
   }
 
 };
@@ -965,6 +1163,20 @@ export const AbsoluteTxPosition = {
     const obj: any = {};
     obj.block_height = message.blockHeight;
     obj.tx_index = message.txIndex;
+    return obj;
+  },
+
+  fromAmino(object: AbsoluteTxPositionAmino): AbsoluteTxPosition {
+    return {
+      blockHeight: Long.fromString(object.block_height),
+      txIndex: Long.fromString(object.tx_index)
+    };
+  },
+
+  toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionAmino {
+    const obj: any = {};
+    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.tx_index = message.txIndex ? message.txIndex.toString() : undefined;
     return obj;
   }
 
@@ -1049,6 +1261,20 @@ export const Model = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAmino(object: ModelAmino): Model {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Model): ModelAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
   }
 
 };
@@ -1060,4 +1286,10 @@ export const ContractInfoExtension_InterfaceDecoder = (input: _m0.Reader | Uint8
     default:
       return data;
   }
+};
+export const ContractInfoExtension_FromAmino = (content: AnyAmino) => {
+  return Any.fromAmino(content);
+};
+export const ContractInfoExtension_ToAmino = (content: Any) => {
+  return Any.toAmino(content);
 };
