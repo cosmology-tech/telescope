@@ -44,3 +44,15 @@ describe('ProposalContent', () => {
         ));
     });
 });
+
+describe('MsgCreateValidator', () => {
+    const ref = store.findProto('cosmos/staking/v1beta1/tx.proto');
+    const ctx = new ProtoParseContext(ref, store, store.options);
+    it('MsgCreateValidator', () => {
+        expectCode(createInterfaceFromAmino(
+            ctx,
+            ref,
+            'cosmos.crypto.PubKey',
+        ));
+    });
+});

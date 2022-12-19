@@ -7,6 +7,38 @@ import { ProtoType } from '@osmonauts/types';
 import { getInterfaceFromAminoName } from '../implements';
 import { camel } from '@osmonauts/utils';
 
+const setProp = (
+    args: FromAminoJSONMethod,
+    callExpr: t.Expression
+) => {
+    const {
+        propName,
+        origName
+    } = getFieldNames(args.field);
+
+    const prop = t.objectProperty(
+        t.identifier(propName),
+        callExpr
+    );
+
+    if (args.isOptional) {
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
+                ),
+                callExpr,
+                t.identifier('undefined')
+            )
+        );
+    }
+    return prop;
+};
+
 export const fromAminoJSON = {
 
     scalar(args: FromAminoJSONMethod) {
@@ -59,7 +91,6 @@ export const fromAminoJSON = {
     long(args: FromAminoJSONMethod) {
 
         const {
-            propName,
             origName
         } = getFieldNames(args.field);
 
@@ -78,27 +109,7 @@ export const fromAminoJSON = {
             ]
         );
 
-        const prop = t.objectProperty(
-            t.identifier(propName),
-            callExpr
-        );
-
-        if (args.isOptional) {
-            return t.objectProperty(
-                t.identifier(propName),
-                t.conditionalExpression(
-                    t.optionalMemberExpression(
-                        t.identifier('object'),
-                        t.identifier(origName),
-                        false,
-                        true
-                    ),
-                    callExpr,
-                    t.identifier('undefined')
-                )
-            );
-        }
-        return prop;
+        return setProp(args, callExpr);
     },
     int64(args: FromAminoJSONMethod) {
         return fromAminoJSON.long(args);
@@ -115,6 +126,99 @@ export const fromAminoJSON = {
     sfixed64(args: FromAminoJSONMethod) {
         return fromAminoJSON.long(args);
     },
+
+
+    rawBytes(args: FromAminoJSONMethod) {
+        args.context.addUtil('toUtf8');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const expr = t.callExpression(
+            t.identifier('toUtf8'),
+            [
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('JSON'),
+                        t.identifier('stringify')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                )
+            ]
+        );
+
+        return setProp(args, expr);
+    },
+
+    wasmByteCode(args: FromAminoJSONMethod) {
+        args.context.addUtil('fromBase64');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const expr = t.callExpression(
+            t.identifier('fromBase64'),
+            [
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
+                )
+            ]
+        );
+
+        return setProp(args, expr);
+    },
+
+    pubkey(args: FromAminoJSONMethod) {
+        args.context.addUtil('toBase64');
+        args.context.addUtil('encodeBech32Pubkey');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const callExpr = t.callExpression(
+            t.identifier('encodeBech32Pubkey'),
+            [
+                t.objectExpression([
+                    t.objectProperty(
+                        t.identifier('type'),
+                        t.stringLiteral('tendermint/PubKeySecp256k1')
+                    ),
+                    t.objectProperty(
+                        t.identifier('value'),
+                        t.callExpression(
+                            t.identifier('toBase64'),
+                            [
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('object'),
+                                        t.identifier(origName)
+                                    ),
+                                    t.identifier('value')
+                                )
+                            ]
+                        )
+                    )
+                ]),
+                // TODO how to manage this?
+                // 1. options.prefix
+                // 2. look into prefix and how it's used across chains
+                // 3. maybe AminoConverter is a class and has this.prefix!
+                t.stringLiteral('cosmos')
+            ]
+        );
+
+        return setProp(args, callExpr);
+    },
+
 
     protoType(args: FromAminoJSONMethod) {
         const {

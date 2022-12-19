@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MsgCreateValidator MsgCreateValidator 1`] = `
+"export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
+  return encodeBech32Pubkey({
+    type: "tendermint/PubKeySecp256k1",
+    value: toBase64(content.value)
+  }, "cosmos");
+};"
+`;
+
 exports[`ProposalContent ProposalContent 1`] = `
 "export const ProposalContentI_FromAmino = (content: AnyAmino) => {
   switch (content.type) {

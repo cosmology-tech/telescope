@@ -17,6 +17,15 @@ it('MsgSubmitProposal', async () => {
     ))
 });
 
+// MsgCreateValidator
+it('MsgCreateValidator', async () => {
+    const ref = store.findProto('cosmos/staking/v1beta1/tx.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'MsgCreateValidator', getNestedProto(ref.traversed).MsgCreateValidator
+    ))
+});
 // Google
 it('Duration', async () => {
     const ref = store.findProto('google/protobuf/duration.proto');
@@ -24,6 +33,15 @@ it('Duration', async () => {
     expectCode(createObjectWithMethods(
         context,
         'Duration', getNestedProto(ref.traversed).Duration
+    ))
+});
+// Wasm
+it('MsgStoreCode', async () => {
+    const ref = store.findProto('cosmwasm/wasm/v1/tx.proto');
+    const context = new ProtoParseContext(ref, store, store.options);
+    expectCode(createObjectWithMethods(
+        context,
+        'MsgStoreCode', getNestedProto(ref.traversed).MsgStoreCode
     ))
 });
 // IBC

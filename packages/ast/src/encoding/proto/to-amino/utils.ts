@@ -241,6 +241,138 @@ export const toAminoJSON = {
         return toAminoJSON.type(args);
     },
 
+    pubkey(args: ToAminoJSONMethod) {
+        args.context.addUtil('fromBase64');
+        args.context.addUtil('decodeBech32Pubkey');
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.objectExpression([
+                        t.objectProperty(
+                            t.identifier('typeUrl'),
+                            t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
+                        ),
+                        t.objectProperty(
+                            t.identifier('value'),
+                            t.callExpression(
+                                t.identifier('fromBase64'),
+                                [
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.identifier('decodeBech32Pubkey'),
+                                            [
+                                                t.memberExpression(
+                                                    t.identifier('message'),
+                                                    t.identifier(propName)
+                                                ),
+                                            ]
+                                        ),
+                                        t.identifier('value')
+                                    )
+
+                                ]
+                            )
+                        )
+                    ]),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    rawBytes(args: ToAminoJSONMethod) {
+        args.context.addUtil('fromUtf8');
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('JSON'),
+                            t.identifier('parse')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('fromUtf8'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    ),
+                                ]
+                            )
+                        ]
+                    ),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    wasmByteCode(args: ToAminoJSONMethod) {
+        args.context.addUtil('toBase64');
+
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.identifier('toBase64'),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                        ]
+                    ),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+
+
     keyHash(args: ToAminoJSONMethod) {
 
         const { propName, origName } = getFieldNames(args.field);
