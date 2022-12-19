@@ -440,7 +440,7 @@ export interface GroupPolicyInfo {
   version: Long;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy?: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
 
   /** created_at is a timestamp specifying when a group policy was created. */
   createdAt?: Date;
@@ -1907,4 +1907,19 @@ export const Vote = {
     return obj;
   }
 
+};
+export const DecisionPolicy_InterfaceDecoder = (input: _m0.Reader | Uint8Array): ThresholdDecisionPolicy | PercentageDecisionPolicy | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.group.v1.ThresholdDecisionPolicy":
+      return ThresholdDecisionPolicy.decode(data.value);
+
+    case "/cosmos.group.v1.PercentageDecisionPolicy":
+      return PercentageDecisionPolicy.decode(data.value);
+
+    default:
+      return data;
+  }
 };

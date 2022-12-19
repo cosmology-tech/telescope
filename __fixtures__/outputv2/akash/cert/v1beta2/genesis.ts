@@ -1,6 +1,6 @@
 import { Certificate, CertificateSDKType } from "./cert";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 
 /** GenesisCertificate defines certificate entry at genesis */
@@ -85,7 +85,7 @@ export const GenesisCertificate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisCertificate>, I>>(object: I): GenesisCertificate {
+  fromPartial(object: DeepPartial<GenesisCertificate>): GenesisCertificate {
     const message = createBaseGenesisCertificate();
     message.owner = object.owner ?? "";
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
@@ -163,7 +163,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.certificates = object.certificates?.map(e => GenesisCertificate.fromPartial(e)) || [];
     return message;

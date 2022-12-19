@@ -1,7 +1,7 @@
 import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupSpec stores group specifications */
@@ -95,7 +95,7 @@ export const GroupSpec = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
+  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;

@@ -12,10 +12,11 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
+    this.certificates = this.certificates.bind(this);
   }
 
   /* Certificates queries certificates */
-  certificates = async (params: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> => {
+  async certificates(params: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -30,5 +31,6 @@ export class LCDQueryClient {
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;
     return await this.req.get<QueryCertificatesResponseSDKType>(endpoint, options);
-  };
+  }
+
 }

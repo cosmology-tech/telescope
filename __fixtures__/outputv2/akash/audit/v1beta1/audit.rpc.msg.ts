@@ -16,19 +16,20 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.signProviderAttributes = this.signProviderAttributes.bind(this);
+    this.deleteProviderAttributes = this.deleteProviderAttributes.bind(this);
   }
 
-  /* SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes = async (request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse> => {
+  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse> {
     const data = MsgSignProviderAttributes.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta1.Msg", "SignProviderAttributes", data);
     return promise.then(data => MsgSignProviderAttributesResponse.decode(new _m0.Reader(data)));
-  };
+  }
 
-  /* DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes = async (request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse> => {
+  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse> {
     const data = MsgDeleteProviderAttributes.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta1.Msg", "DeleteProviderAttributes", data);
     return promise.then(data => MsgDeleteProviderAttributesResponse.decode(new _m0.Reader(data)));
-  };
+  }
+
 }

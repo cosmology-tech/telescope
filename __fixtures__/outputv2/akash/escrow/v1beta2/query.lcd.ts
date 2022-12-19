@@ -12,12 +12,14 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
+    this.accounts = this.accounts.bind(this);
+    this.payments = this.payments.bind(this);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Accounts queries all accounts */
-  accounts = async (params: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> => {
+  async accounts(params: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -44,12 +46,12 @@ export class LCDQueryClient {
 
     const endpoint = `akash/escrow/v1beta2/types/accounts/list`;
     return await this.req.get<QueryAccountsResponseSDKType>(endpoint, options);
-  };
+  }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    Payments queries all payments */
-  payments = async (params: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> => {
+  async payments(params: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -80,5 +82,6 @@ export class LCDQueryClient {
 
     const endpoint = `akash/escrow/v1beta2/types/payments/list`;
     return await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options);
-  };
+  }
+
 }

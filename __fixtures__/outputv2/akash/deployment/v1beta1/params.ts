@@ -1,16 +1,16 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
-  deploymentMinDeposit?: Coin | undefined;
+  deploymentMinDeposit?: Coin;
 }
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
-  deployment_min_deposit?: CoinSDKType | undefined;
+  deployment_min_deposit?: CoinSDKType;
 }
 
 function createBaseParams(): Params {
@@ -62,7 +62,7 @@ export const Params = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<Params>, I>>(object: I): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
     return message;

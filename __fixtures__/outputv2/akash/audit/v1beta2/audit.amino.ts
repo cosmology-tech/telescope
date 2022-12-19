@@ -3,7 +3,7 @@ import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType } from "./audit";
 export interface AminoMsgSignProviderAttributes extends AminoMsg {
-  type: "mymessage-testonly";
+  type: "/akash.audit.v1beta2.MsgSignProviderAttributes";
   value: {
     owner: string;
     auditor: string;
@@ -14,7 +14,7 @@ export interface AminoMsgSignProviderAttributes extends AminoMsg {
   };
 }
 export interface AminoMsgDeleteProviderAttributes extends AminoMsg {
-  type: "akash/audit/v1beta2/testonly-delete-provider-attributes";
+  type: "/akash.audit.v1beta2.MsgDeleteProviderAttributes";
   value: {
     owner: string;
     auditor: string;
@@ -23,7 +23,7 @@ export interface AminoMsgDeleteProviderAttributes extends AminoMsg {
 }
 export const AminoConverter = {
   "/akash.audit.v1beta2.MsgSignProviderAttributes": {
-    aminoType: "mymessage-testonly",
+    aminoType: "/akash.audit.v1beta2.MsgSignProviderAttributes",
     toAmino: ({
       owner,
       auditor,
@@ -54,7 +54,7 @@ export const AminoConverter = {
     }
   },
   "/akash.audit.v1beta2.MsgDeleteProviderAttributes": {
-    aminoType: "akash/audit/v1beta2/testonly-delete-provider-attributes",
+    aminoType: "/akash.audit.v1beta2.MsgDeleteProviderAttributes",
     toAmino: ({
       owner,
       auditor,

@@ -1,4 +1,4 @@
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.deployment.v1beta2";
 
@@ -87,7 +87,7 @@ export const GroupID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

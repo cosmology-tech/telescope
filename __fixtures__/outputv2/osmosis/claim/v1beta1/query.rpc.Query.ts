@@ -3,9 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { ReactQueryParams } from "../../../react-query";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -83,98 +81,5 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.totalClaimable(request);
     }
 
-  };
-};
-export interface UseModuleAccountBalanceQuery<TData> extends ReactQueryParams<QueryModuleAccountBalanceResponse, TData> {
-  request?: QueryModuleAccountBalanceRequest;
-}
-export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
-  request?: QueryParamsRequest;
-}
-export interface UseClaimRecordQuery<TData> extends ReactQueryParams<QueryClaimRecordResponse, TData> {
-  request: QueryClaimRecordRequest;
-}
-export interface UseClaimableForActionQuery<TData> extends ReactQueryParams<QueryClaimableForActionResponse, TData> {
-  request: QueryClaimableForActionRequest;
-}
-export interface UseTotalClaimableQuery<TData> extends ReactQueryParams<QueryTotalClaimableResponse, TData> {
-  request: QueryTotalClaimableRequest;
-}
-
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
-  if (!rpc) return;
-
-  if (_queryClients.has(rpc)) {
-    return _queryClients.get(rpc);
-  }
-
-  const queryService = new QueryClientImpl(rpc);
-
-  _queryClients.set(rpc, queryService);
-
-  return queryService;
-};
-
-export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  const useModuleAccountBalance = <TData = QueryModuleAccountBalanceResponse,>({
-    request,
-    options
-  }: UseModuleAccountBalanceQuery<TData>) => {
-    return useQuery<QueryModuleAccountBalanceResponse, Error, TData>(["moduleAccountBalanceQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.moduleAccountBalance(request);
-    }, options);
-  };
-
-  const useParams = <TData = QueryParamsResponse,>({
-    request,
-    options
-  }: UseParamsQuery<TData>) => {
-    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.params(request);
-    }, options);
-  };
-
-  const useClaimRecord = <TData = QueryClaimRecordResponse,>({
-    request,
-    options
-  }: UseClaimRecordQuery<TData>) => {
-    return useQuery<QueryClaimRecordResponse, Error, TData>(["claimRecordQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.claimRecord(request);
-    }, options);
-  };
-
-  const useClaimableForAction = <TData = QueryClaimableForActionResponse,>({
-    request,
-    options
-  }: UseClaimableForActionQuery<TData>) => {
-    return useQuery<QueryClaimableForActionResponse, Error, TData>(["claimableForActionQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.claimableForAction(request);
-    }, options);
-  };
-
-  const useTotalClaimable = <TData = QueryTotalClaimableResponse,>({
-    request,
-    options
-  }: UseTotalClaimableQuery<TData>) => {
-    return useQuery<QueryTotalClaimableResponse, Error, TData>(["totalClaimableQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.totalClaimable(request);
-    }, options);
-  };
-
-  return {
-    useModuleAccountBalance,
-    useParams,
-    useClaimRecord,
-    useClaimableForAction,
-    useTotalClaimable
   };
 };

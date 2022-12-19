@@ -1,4 +1,4 @@
-import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON } from "./types";
+import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, ThresholdDecisionPolicy, ThresholdDecisionPolicySDKType, PercentageDecisionPolicy, PercentageDecisionPolicySDKType, voteOptionFromJSON } from "./types";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";

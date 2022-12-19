@@ -204,7 +204,7 @@ export interface ContractInfo {
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension?: Any;
+  extension?: (Any) | undefined;
 }
 
 /** ContractInfo stores a WASM contract instance */
@@ -1051,4 +1051,13 @@ export const Model = {
     return obj;
   }
 
+};
+export const ContractInfoExtension_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    default:
+      return data;
+  }
 };

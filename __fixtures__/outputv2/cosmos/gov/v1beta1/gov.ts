@@ -2,6 +2,11 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { RegisterIncentiveProposal, RegisterIncentiveProposalSDKType } from "../../../evmos/incentives/v1/incentives";
+import { ClientUpdateProposal, ClientUpdateProposalSDKType, UpgradeProposal, UpgradeProposalSDKType } from "../../../ibc/core/client/v1/client";
+import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalSDKType, UpdatePoolIncentivesProposal, UpdatePoolIncentivesProposalSDKType } from "../../../osmosis/pool-incentives/v1beta1/gov";
+import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalSDKType, RemoveSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposalSDKType, UpdateUnpoolWhiteListProposal, UpdateUnpoolWhiteListProposalSDKType } from "../../../osmosis/superfluid/v1beta1/gov";
+import { UpdateFeeTokenProposal, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
@@ -232,7 +237,7 @@ export interface DepositSDKType {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
-  content?: Any;
+  content?: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
   status: ProposalStatus;
 
   /**
@@ -1326,4 +1331,43 @@ export const TallyParams = {
     return obj;
   }
 
+};
+export const ProposalContentI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.gov.v1beta1.TextProposal":
+      return TextProposal.decode(data.value);
+
+    case "/evmos.incentives.v1.RegisterIncentiveProposal":
+      return RegisterIncentiveProposal.decode(data.value);
+
+    case "/ibc.core.client.v1.ClientUpdateProposal":
+      return ClientUpdateProposal.decode(data.value);
+
+    case "/ibc.core.client.v1.UpgradeProposal":
+      return UpgradeProposal.decode(data.value);
+
+    case "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal":
+      return ReplacePoolIncentivesProposal.decode(data.value);
+
+    case "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal":
+      return UpdatePoolIncentivesProposal.decode(data.value);
+
+    case "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal":
+      return SetSuperfluidAssetsProposal.decode(data.value);
+
+    case "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal":
+      return RemoveSuperfluidAssetsProposal.decode(data.value);
+
+    case "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal":
+      return UpdateUnpoolWhiteListProposal.decode(data.value);
+
+    case "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal":
+      return UpdateFeeTokenProposal.decode(data.value);
+
+    default:
+      return data;
+  }
 };

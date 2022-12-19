@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact, Long } from "../../../helpers";
+import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 
 /** State stores state for an escrow account */
@@ -248,7 +248,7 @@ export const AccountID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
+  fromPartial(object: DeepPartial<AccountID>): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -375,7 +375,7 @@ export const Account = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
+  fromPartial(object: DeepPartial<Account>): Account {
     const message = createBaseAccount();
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
@@ -525,7 +525,7 @@ export const Payment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Payment>, I>>(object: I): Payment {
+  fromPartial(object: DeepPartial<Payment>): Payment {
     const message = createBasePayment();
     message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";

@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 
 /** Unit stores cpu, memory and storage metrics */
@@ -61,7 +61,7 @@ export const ResourceValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceValue>, I>>(object: I): ResourceValue {
+  fromPartial(object: DeepPartial<ResourceValue>): ResourceValue {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;

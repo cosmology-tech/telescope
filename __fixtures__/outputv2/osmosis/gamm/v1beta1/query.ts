@@ -2,6 +2,10 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
+import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
+import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
+import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.gamm.v1beta1";
@@ -16,7 +20,7 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool?: Any;
+  pool?: (Pool1 & Pool2 & Any) | undefined;
 }
 export interface QueryPoolResponseSDKType {
   pool?: AnySDKType;
@@ -33,7 +37,7 @@ export interface QueryPoolsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: Any[];
+  pools: (Pool1 & Pool2 & Any)[] | Any[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -211,7 +215,7 @@ export interface QueryPoolsWithFilterRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools: Any[];
+  pools: (Pool1 & Pool2 & Any)[] | Any[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -2712,4 +2716,19 @@ export const QueryTotalLiquidityResponse = {
     return obj;
   }
 
+};
+export const PoolI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Pool1 | Pool2 | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/osmosis.gamm.v1beta1.Pool":
+      return Pool1.decode(data.value);
+
+    case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
+      return Pool2.decode(data.value);
+
+    default:
+      return data;
+  }
 };

@@ -17,14 +17,15 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.certificates = this.certificates.bind(this);
   }
 
-  /* Certificates queries certificates */
-  certificates = async (request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> => {
+  certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> {
     const data = QueryCertificatesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Query", "Certificates", data);
     return promise.then(data => QueryCertificatesResponse.decode(new _m0.Reader(data)));
-  };
+  }
+
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);

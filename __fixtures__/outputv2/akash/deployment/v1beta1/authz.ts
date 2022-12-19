@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /**
@@ -12,7 +12,7 @@ export interface DepositDeploymentAuthorization {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spendLimit?: Coin | undefined;
+  spendLimit?: Coin;
 }
 
 /**
@@ -20,7 +20,7 @@ export interface DepositDeploymentAuthorization {
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
-  spend_limit?: CoinSDKType | undefined;
+  spend_limit?: CoinSDKType;
 }
 
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
@@ -72,7 +72,7 @@ export const DepositDeploymentAuthorization = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<DepositDeploymentAuthorization>, I>>(object: I): DepositDeploymentAuthorization {
+  fromPartial(object: DeepPartial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
     const message = createBaseDepositDeploymentAuthorization();
     message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : undefined;
     return message;

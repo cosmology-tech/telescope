@@ -1,6 +1,6 @@
 import { AuditedAttributes, AuditedAttributesSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Exact } from "../../../helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 
 /** GenesisState defines the basic genesis state used by audit module */
@@ -68,7 +68,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;

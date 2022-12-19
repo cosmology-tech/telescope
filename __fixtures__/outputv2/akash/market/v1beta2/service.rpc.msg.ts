@@ -27,40 +27,41 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.createBid = this.createBid.bind(this);
+    this.closeBid = this.closeBid.bind(this);
+    this.withdrawLease = this.withdrawLease.bind(this);
+    this.createLease = this.createLease.bind(this);
+    this.closeLease = this.closeLease.bind(this);
   }
 
-  /* CreateBid defines a method to create a bid given proper inputs. */
-  createBid = async (request: MsgCreateBid): Promise<MsgCreateBidResponse> => {
+  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse> {
     const data = MsgCreateBid.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateBid", data);
     return promise.then(data => MsgCreateBidResponse.decode(new _m0.Reader(data)));
-  };
+  }
 
-  /* CloseBid defines a method to close a bid given proper inputs. */
-  closeBid = async (request: MsgCloseBid): Promise<MsgCloseBidResponse> => {
+  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse> {
     const data = MsgCloseBid.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseBid", data);
     return promise.then(data => MsgCloseBidResponse.decode(new _m0.Reader(data)));
-  };
+  }
 
-  /* WithdrawLease withdraws accrued funds from the lease payment */
-  withdrawLease = async (request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse> => {
+  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse> {
     const data = MsgWithdrawLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "WithdrawLease", data);
     return promise.then(data => MsgWithdrawLeaseResponse.decode(new _m0.Reader(data)));
-  };
+  }
 
-  /* CreateLease creates a new lease */
-  createLease = async (request: MsgCreateLease): Promise<MsgCreateLeaseResponse> => {
+  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse> {
     const data = MsgCreateLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateLease", data);
     return promise.then(data => MsgCreateLeaseResponse.decode(new _m0.Reader(data)));
-  };
+  }
 
-  /* CloseLease defines a method to close an order given proper inputs. */
-  closeLease = async (request: MsgCloseLease): Promise<MsgCloseLeaseResponse> => {
+  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse> {
     const data = MsgCloseLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseLease", data);
     return promise.then(data => MsgCloseLeaseResponse.decode(new _m0.Reader(data)));
-  };
+  }
+
 }

@@ -17,6 +17,7 @@ export const createRPCQueryClient = async ({
         v1beta2: (await import("./cert/v1beta2/query.rpc.Query")).createRpcQueryExtension(client)
       },
       deployment: {
+        v1beta1: (await import("./deployment/v1beta1/query.rpc.Query")).createRpcQueryExtension(client),
         v1beta2: (await import("./deployment/v1beta2/query.rpc.Query")).createRpcQueryExtension(client)
       },
       escrow: {
@@ -44,10 +45,6 @@ export const createRPCQueryClient = async ({
         v1beta1: (await import("../cosmos/bank/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       base: {
-        reflection: {
-          v1beta1: (await import("../cosmos/base/reflection/v1beta1/reflection.rpc.ReflectionService")).createRpcQueryExtension(client),
-          v2alpha1: (await import("../cosmos/base/reflection/v2alpha1/reflection.rpc.ReflectionService")).createRpcQueryExtension(client)
-        },
         tendermint: {
           v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }

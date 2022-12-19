@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence?: Any;
+  evidence?: (Any) | undefined;
 }
 
 /**
@@ -182,4 +182,13 @@ export const MsgSubmitEvidenceResponse = {
     return obj;
   }
 
+};
+export const Evidence_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    default:
+      return data;
+  }
 };

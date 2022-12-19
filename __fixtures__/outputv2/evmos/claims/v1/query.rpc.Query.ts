@@ -4,9 +4,7 @@ import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { ReactQueryParams } from "../../../react-query";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -81,91 +79,5 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.claimsRecord(request);
     }
 
-  };
-};
-export interface UseTotalUnclaimedQuery<TData> extends ReactQueryParams<QueryTotalUnclaimedResponse, TData> {
-  request?: QueryTotalUnclaimedRequest;
-}
-export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
-  request?: QueryParamsRequest;
-}
-export interface UseClaimsRecordsQuery<TData> extends ReactQueryParams<QueryClaimsRecordsResponse, TData> {
-  request?: QueryClaimsRecordsRequest;
-}
-export interface UseClaimsRecordQuery<TData> extends ReactQueryParams<QueryClaimsRecordResponse, TData> {
-  request: QueryClaimsRecordRequest;
-}
-
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
-  if (!rpc) return;
-
-  if (_queryClients.has(rpc)) {
-    return _queryClients.get(rpc);
-  }
-
-  const queryService = new QueryClientImpl(rpc);
-
-  _queryClients.set(rpc, queryService);
-
-  return queryService;
-};
-
-export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  const useTotalUnclaimed = <TData = QueryTotalUnclaimedResponse,>({
-    request,
-    options
-  }: UseTotalUnclaimedQuery<TData>) => {
-    return useQuery<QueryTotalUnclaimedResponse, Error, TData>(["totalUnclaimedQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.totalUnclaimed(request);
-    }, options);
-  };
-
-  const useParams = <TData = QueryParamsResponse,>({
-    request,
-    options
-  }: UseParamsQuery<TData>) => {
-    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.params(request);
-    }, options);
-  };
-
-  const useClaimsRecords = <TData = QueryClaimsRecordsResponse,>({
-    request,
-    options
-  }: UseClaimsRecordsQuery<TData>) => {
-    return useQuery<QueryClaimsRecordsResponse, Error, TData>(["claimsRecordsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.claimsRecords(request);
-    }, options);
-  };
-
-  const useClaimsRecord = <TData = QueryClaimsRecordResponse,>({
-    request,
-    options
-  }: UseClaimsRecordQuery<TData>) => {
-    return useQuery<QueryClaimsRecordResponse, Error, TData>(["claimsRecordQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.claimsRecord(request);
-    }, options);
-  };
-
-  return {
-    /** TotalUnclaimed queries the total unclaimed tokens from the airdrop */
-    useTotalUnclaimed,
-
-    /** Params returns the claims module parameters */
-    useParams,
-
-    /** ClaimsRecords returns all claims records */
-    useClaimsRecords,
-
-    /** ClaimsRecord returns the claims record for a given address */
-    useClaimsRecord
   };
 };

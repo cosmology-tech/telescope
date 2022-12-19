@@ -1,6 +1,7 @@
 import { ProtobufRpcClient } from "@cosmjs/stargate";
 import * as _AkashAuditV1beta2Queryrpc from "./akash/audit/v1beta2/query.rpc.Query";
 import * as _AkashCertV1beta2Queryrpc from "./akash/cert/v1beta2/query.rpc.Query";
+import * as _AkashDeploymentV1beta1Queryrpc from "./akash/deployment/v1beta1/query.rpc.Query";
 import * as _AkashDeploymentV1beta2Queryrpc from "./akash/deployment/v1beta2/query.rpc.Query";
 import * as _AkashEscrowV1beta1Queryrpc from "./akash/escrow/v1beta1/query.rpc.Query";
 import * as _AkashEscrowV1beta2Queryrpc from "./akash/escrow/v1beta2/query.rpc.Query";
@@ -10,8 +11,6 @@ import * as _CosmosAppV1alpha1Queryrpc from "./cosmos/app/v1alpha1/query.rpc.Que
 import * as _CosmosAuthV1beta1Queryrpc from "./cosmos/auth/v1beta1/query.rpc.Query";
 import * as _CosmosAuthzV1beta1Queryrpc from "./cosmos/authz/v1beta1/query.rpc.Query";
 import * as _CosmosBankV1beta1Queryrpc from "./cosmos/bank/v1beta1/query.rpc.Query";
-import * as _CosmosBaseReflectionV1beta1Reflectionrpc from "./cosmos/base/reflection/v1beta1/reflection.rpc.ReflectionService";
-import * as _CosmosBaseReflectionV2alpha1Reflectionrpc from "./cosmos/base/reflection/v2alpha1/reflection.rpc.ReflectionService";
 import * as _CosmosBaseTendermintV1beta1Queryrpc from "./cosmos/base/tendermint/v1beta1/query.rpc.Service";
 import * as _CosmosDistributionV1beta1Queryrpc from "./cosmos/distribution/v1beta1/query.rpc.Query";
 import * as _CosmosEvidenceV1beta1Queryrpc from "./cosmos/evidence/v1beta1/query.rpc.Query";
@@ -53,7 +52,6 @@ import * as _OsmosisSuperfluidQueryrpc from "./osmosis/superfluid/query.rpc.Quer
 import * as _OsmosisTokenfactoryV1beta1Queryrpc from "./osmosis/tokenfactory/v1beta1/query.rpc.Query";
 import * as _OsmosisTwapV1beta1Queryrpc from "./osmosis/twap/v1beta1/query.rpc.Query";
 import * as _OsmosisTxfeesV1beta1Queryrpc from "./osmosis/txfees/v1beta1/query.rpc.Query";
-import * as _TendermintAbciTypesrpc from "./tendermint/abci/types.rpc.ABCIApplication";
 export const createRpcQueryHooks = ({
   rpc
 }: {
@@ -68,6 +66,7 @@ export const createRpcQueryHooks = ({
         v1beta2: _AkashCertV1beta2Queryrpc.createRpcQueryHooks(rpc)
       },
       deployment: {
+        v1beta1: _AkashDeploymentV1beta1Queryrpc.createRpcQueryHooks(rpc),
         v1beta2: _AkashDeploymentV1beta2Queryrpc.createRpcQueryHooks(rpc)
       },
       escrow: {
@@ -95,10 +94,6 @@ export const createRpcQueryHooks = ({
         v1beta1: _CosmosBankV1beta1Queryrpc.createRpcQueryHooks(rpc)
       },
       base: {
-        reflection: {
-          v1beta1: _CosmosBaseReflectionV1beta1Reflectionrpc.createRpcQueryHooks(rpc),
-          v2alpha1: _CosmosBaseReflectionV2alpha1Reflectionrpc.createRpcQueryHooks(rpc)
-        },
         tendermint: {
           v1beta1: _CosmosBaseTendermintV1beta1Queryrpc.createRpcQueryHooks(rpc)
         }
@@ -225,9 +220,6 @@ export const createRpcQueryHooks = ({
       txfees: {
         v1beta1: _OsmosisTxfeesV1beta1Queryrpc.createRpcQueryHooks(rpc)
       }
-    },
-    tendermint: {
-      abci: _TendermintAbciTypesrpc.createRpcQueryHooks(rpc)
     }
   };
 };

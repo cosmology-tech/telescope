@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
@@ -95,7 +95,7 @@ export const QueryProvidersRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProvidersRequest>, I>>(object: I): QueryProvidersRequest {
+  fromPartial(object: DeepPartial<QueryProvidersRequest>): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -181,7 +181,7 @@ export const QueryProvidersResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
+  fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -259,7 +259,7 @@ export const QueryProviderRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProviderRequest>, I>>(object: I): QueryProviderRequest {
+  fromPartial(object: DeepPartial<QueryProviderRequest>): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
@@ -328,7 +328,7 @@ export const QueryProviderResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProviderResponse>, I>>(object: I): QueryProviderResponse {
+  fromPartial(object: DeepPartial<QueryProviderResponse>): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
     message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;

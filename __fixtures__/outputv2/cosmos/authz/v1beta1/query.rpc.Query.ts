@@ -2,9 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { ReactQueryParams } from "../../../react-query";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -71,83 +69,5 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.granteeGrants(request);
     }
 
-  };
-};
-export interface UseGrantsQuery<TData> extends ReactQueryParams<QueryGrantsResponse, TData> {
-  request: QueryGrantsRequest;
-}
-export interface UseGranterGrantsQuery<TData> extends ReactQueryParams<QueryGranterGrantsResponse, TData> {
-  request: QueryGranterGrantsRequest;
-}
-export interface UseGranteeGrantsQuery<TData> extends ReactQueryParams<QueryGranteeGrantsResponse, TData> {
-  request: QueryGranteeGrantsRequest;
-}
-
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
-  if (!rpc) return;
-
-  if (_queryClients.has(rpc)) {
-    return _queryClients.get(rpc);
-  }
-
-  const queryService = new QueryClientImpl(rpc);
-
-  _queryClients.set(rpc, queryService);
-
-  return queryService;
-};
-
-export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  const useGrants = <TData = QueryGrantsResponse,>({
-    request,
-    options
-  }: UseGrantsQuery<TData>) => {
-    return useQuery<QueryGrantsResponse, Error, TData>(["grantsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.grants(request);
-    }, options);
-  };
-
-  const useGranterGrants = <TData = QueryGranterGrantsResponse,>({
-    request,
-    options
-  }: UseGranterGrantsQuery<TData>) => {
-    return useQuery<QueryGranterGrantsResponse, Error, TData>(["granterGrantsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.granterGrants(request);
-    }, options);
-  };
-
-  const useGranteeGrants = <TData = QueryGranteeGrantsResponse,>({
-    request,
-    options
-  }: UseGranteeGrantsQuery<TData>) => {
-    return useQuery<QueryGranteeGrantsResponse, Error, TData>(["granteeGrantsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.granteeGrants(request);
-    }, options);
-  };
-
-  return {
-    /** Returns list of `Authorization`, granted to the grantee by the granter. */
-    useGrants,
-
-    /**
-     * GranterGrants returns list of `GrantAuthorization`, granted by granter.
-     * 
-     * Since: cosmos-sdk 0.46
-     */
-    useGranterGrants,
-
-    /**
-     * GranteeGrants returns a list of `GrantAuthorization` by grantee.
-     * 
-     * Since: cosmos-sdk 0.46
-     */
-    useGranteeGrants
   };
 };

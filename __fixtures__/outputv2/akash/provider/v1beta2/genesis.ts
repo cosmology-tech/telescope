@@ -1,6 +1,6 @@
 import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Exact } from "../../../helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 
 /** GenesisState defines the basic genesis state used by provider module */
@@ -68,7 +68,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     return message;

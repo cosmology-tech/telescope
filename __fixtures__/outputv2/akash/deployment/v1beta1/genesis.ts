@@ -2,31 +2,31 @@ import { Deployment, DeploymentSDKType } from "./deployment";
 import { Group, GroupSDKType } from "./group";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
-  deployment?: Deployment | undefined;
+  deployment?: Deployment;
   groups: Group[];
 }
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
-  deployment?: DeploymentSDKType | undefined;
+  deployment?: DeploymentSDKType;
   groups: GroupSDKType[];
 }
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
   deployments: GenesisDeployment[];
-  params?: Params | undefined;
+  params?: Params;
 }
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
   deployments: GenesisDeploymentSDKType[];
-  params?: ParamsSDKType | undefined;
+  params?: ParamsSDKType;
 }
 
 function createBaseGenesisDeployment(): GenesisDeployment {
@@ -95,7 +95,7 @@ export const GenesisDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
+  fromPartial(object: DeepPartial<GenesisDeployment>): GenesisDeployment {
     const message = createBaseGenesisDeployment();
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
@@ -190,7 +190,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;

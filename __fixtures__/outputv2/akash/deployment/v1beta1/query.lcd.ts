@@ -14,10 +14,13 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
+    this.deployments = this.deployments.bind(this);
+    this.deployment = this.deployment.bind(this);
+    this.group = this.group.bind(this);
   }
 
   /* Deployments queries deployments */
-  deployments = async (params: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> => {
+  async deployments(params: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -32,10 +35,10 @@ export class LCDQueryClient {
 
     const endpoint = `akash/deployment/v1beta1/deployments/list`;
     return await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options);
-  };
+  }
 
   /* Deployment queries deployment details */
-  deployment = async (params: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> => {
+  async deployment(params: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -46,10 +49,10 @@ export class LCDQueryClient {
 
     const endpoint = `akash/deployment/v1beta1/deployments/info`;
     return await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options);
-  };
+  }
 
   /* Group queries group details */
-  group = async (params: QueryGroupRequest): Promise<QueryGroupResponseSDKType> => {
+  async group(params: QueryGroupRequest): Promise<QueryGroupResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -60,5 +63,6 @@ export class LCDQueryClient {
 
     const endpoint = `akash/deployment/v1beta1/groups/info`;
     return await this.req.get<QueryGroupResponseSDKType>(endpoint, options);
-  };
+  }
+
 }

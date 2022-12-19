@@ -47,12 +47,9 @@ import * as _459 from "./vesting/v1/query.rpc.Query";
 import * as _460 from "./erc20/v1/tx.rpc.msg";
 import * as _461 from "./fees/v1/tx.rpc.msg";
 import * as _462 from "./vesting/v1/tx.rpc.msg";
-import * as _543 from "./lcd";
-import * as _544 from "./custom-lcd-client";
-import * as _545 from "./rpc.query";
-import * as _546 from "./evmos-rpc-client.query";
-import * as _547 from "./rpc.tx";
-import * as _548 from "./evmos-rpc-client.tx";
+import * as _540 from "./lcd";
+import * as _541 from "./rpc.query";
+import * as _542 from "./rpc.tx";
 export namespace evmos {
   export namespace claims {
     export const v1 = { ..._153,
@@ -127,11 +124,8 @@ export namespace evmos {
       ..._462
     };
   }
-  export const ClientFactory = { ..._543,
-    ..._544,
-    ..._545,
-    ..._546,
-    ..._547,
-    ..._548
+  export const ClientFactory = { ..._540,
+    ..._541,
+    ..._542
   };
 }

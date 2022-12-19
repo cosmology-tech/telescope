@@ -3,76 +3,75 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, Rpc } from "../../../helpers";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters?: DeploymentFilters | undefined;
-  pagination?: PageRequest | undefined;
+  filters?: DeploymentFilters;
+  pagination?: PageRequest;
 }
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
-  filters?: DeploymentFiltersSDKType | undefined;
-  pagination?: PageRequestSDKType | undefined;
+  filters?: DeploymentFiltersSDKType;
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination?: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination?: PageResponseSDKType | undefined;
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id?: DeploymentID | undefined;
+  id?: DeploymentID;
 }
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id?: DeploymentIDSDKType;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment?: Deployment | undefined;
+  deployment?: Deployment;
   groups: Group[];
-  escrowAccount?: Account | undefined;
+  escrowAccount?: Account;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
-  deployment?: DeploymentSDKType | undefined;
+  deployment?: DeploymentSDKType;
   groups: GroupSDKType[];
-  escrow_account?: AccountSDKType | undefined;
+  escrow_account?: AccountSDKType;
 }
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id?: GroupID | undefined;
+  id?: GroupID;
 }
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
-  id?: GroupIDSDKType | undefined;
+  id?: GroupIDSDKType;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group?: Group | undefined;
+  group?: Group;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
-  group?: GroupSDKType | undefined;
+  group?: GroupSDKType;
 }
 
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
@@ -135,7 +134,7 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryDeploymentsRequest>, I>>(object: I): QueryDeploymentsRequest {
+  fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
     message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -224,7 +223,7 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryDeploymentsResponse>, I>>(object: I): QueryDeploymentsResponse {
+  fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -302,7 +301,7 @@ export const QueryDeploymentRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryDeploymentRequest>, I>>(object: I): QueryDeploymentRequest {
+  fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -399,7 +398,7 @@ export const QueryDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryDeploymentResponse>, I>>(object: I): QueryDeploymentResponse {
+  fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
@@ -480,7 +479,7 @@ export const QueryGroupRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryGroupRequest>, I>>(object: I): QueryGroupRequest {
+  fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -549,7 +548,7 @@ export const QueryGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<QueryGroupResponse>, I>>(object: I): QueryGroupResponse {
+  fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
     message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
     return message;
@@ -567,62 +566,4 @@ export const QueryGroupResponse = {
     return obj;
   }
 
-};
-
-/** Query defines the gRPC querier service */
-export interface Query {
-  /** Deployments queries deployments */
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
-
-  /** Deployment queries deployment details */
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
-
-  /** Group queries group details */
-  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-  }
-
-  /* Deployments queries deployments */
-  deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> => {
-    const data = QueryDeploymentsRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployments", data);
-    return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* Deployment queries deployment details */
-  deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> => {
-    const data = QueryDeploymentRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployment", data);
-    return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* Group queries group details */
-  group = async (request: QueryGroupRequest): Promise<QueryGroupResponse> => {
-    const data = QueryGroupRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Group", data);
-    return promise.then(data => QueryGroupResponse.decode(new _m0.Reader(data)));
-  };
-}
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
-      return queryService.deployments(request);
-    },
-
-    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
-      return queryService.deployment(request);
-    },
-
-    group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
-      return queryService.group(request);
-    }
-
-  };
 };

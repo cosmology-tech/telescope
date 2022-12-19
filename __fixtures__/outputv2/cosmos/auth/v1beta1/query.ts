@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Params, ParamsSDKType } from "./auth";
+import { Params, ParamsSDKType, BaseAccount, BaseAccountSDKType, ModuleAccount, ModuleAccountSDKType } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -31,7 +31,7 @@ export interface QueryAccountsRequestSDKType {
  */
 export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
-  accounts: Any[];
+  accounts: (BaseAccount & Any)[] | Any[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -78,7 +78,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
-  account?: Any;
+  account?: (BaseAccount & Any) | undefined;
 }
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
@@ -94,7 +94,7 @@ export interface QueryParamsRequestSDKType {}
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
-  accounts: Any[];
+  accounts: (ModuleAccount & Any)[] | Any[];
 }
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
@@ -1109,4 +1109,28 @@ export const AddressStringToBytesResponse = {
     return obj;
   }
 
+};
+export const AccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): BaseAccount | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.auth.v1beta1.BaseAccount":
+      return BaseAccount.decode(data.value);
+
+    default:
+      return data;
+  }
+};
+export const ModuleAccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): ModuleAccount | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.auth.v1beta1.ModuleAccount":
+      return ModuleAccount.decode(data.value);
+
+    default:
+      return data;
+  }
 };

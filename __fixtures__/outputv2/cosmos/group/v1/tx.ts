@@ -1,4 +1,4 @@
-import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
+import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, ThresholdDecisionPolicy, ThresholdDecisionPolicySDKType, PercentageDecisionPolicy, PercentageDecisionPolicySDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
@@ -172,7 +172,7 @@ export interface MsgCreateGroupPolicy {
   metadata: string;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy?: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
 }
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
@@ -231,7 +231,7 @@ export interface MsgCreateGroupWithPolicy {
   groupPolicyAsAdmin: boolean;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy?: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
 }
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
@@ -274,7 +274,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   address: string;
 
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy?: (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any) | undefined;
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
@@ -2755,4 +2755,19 @@ export const MsgLeaveGroupResponse = {
     return obj;
   }
 
+};
+export const DecisionPolicy_InterfaceDecoder = (input: _m0.Reader | Uint8Array): ThresholdDecisionPolicy | PercentageDecisionPolicy | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.group.v1.ThresholdDecisionPolicy":
+      return ThresholdDecisionPolicy.decode(data.value);
+
+    case "/cosmos.group.v1.PercentageDecisionPolicy":
+      return PercentageDecisionPolicy.decode(data.value);
+
+    default:
+      return data;
+  }
 };

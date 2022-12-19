@@ -1,4 +1,5 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -15,7 +16,7 @@ export interface MsgGrantAllowance {
   grantee: string;
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance?: Any;
+  allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
 }
 
 /**
@@ -337,4 +338,22 @@ export const MsgRevokeAllowanceResponse = {
     return obj;
   }
 
+};
+export const FeeAllowanceI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/cosmos.feegrant.v1beta1.BasicAllowance":
+      return BasicAllowance.decode(data.value);
+
+    case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
+      return PeriodicAllowance.decode(data.value);
+
+    case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
+      return AllowedMsgAllowance.decode(data.value);
+
+    default:
+      return data;
+  }
 };

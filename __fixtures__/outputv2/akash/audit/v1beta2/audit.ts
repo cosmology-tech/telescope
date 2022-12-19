@@ -1,6 +1,6 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 
 /** Provider stores owner auditor and attributes details */
@@ -170,7 +170,7 @@ export const Provider = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Provider>, I>>(object: I): Provider {
+  fromPartial(object: DeepPartial<Provider>): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -279,7 +279,7 @@ export const AuditedAttributes = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuditedAttributes>, I>>(object: I): AuditedAttributes {
+  fromPartial(object: DeepPartial<AuditedAttributes>): AuditedAttributes {
     const message = createBaseAuditedAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -366,7 +366,7 @@ export const AttributesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributesResponse>, I>>(object: I): AttributesResponse {
+  fromPartial(object: DeepPartial<AttributesResponse>): AttributesResponse {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
@@ -463,7 +463,7 @@ export const AttributesFilters = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributesFilters>, I>>(object: I): AttributesFilters {
+  fromPartial(object: DeepPartial<AttributesFilters>): AttributesFilters {
     const message = createBaseAttributesFilters();
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
@@ -574,7 +574,7 @@ export const MsgSignProviderAttributes = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSignProviderAttributes>, I>>(object: I): MsgSignProviderAttributes {
+  fromPartial(object: DeepPartial<MsgSignProviderAttributes>): MsgSignProviderAttributes {
     const message = createBaseMsgSignProviderAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -642,7 +642,7 @@ export const MsgSignProviderAttributesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSignProviderAttributesResponse>, I>>(_: I): MsgSignProviderAttributesResponse {
+  fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
   },
@@ -735,7 +735,7 @@ export const MsgDeleteProviderAttributes = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderAttributes>, I>>(object: I): MsgDeleteProviderAttributes {
+  fromPartial(object: DeepPartial<MsgDeleteProviderAttributes>): MsgDeleteProviderAttributes {
     const message = createBaseMsgDeleteProviderAttributes();
     message.owner = object.owner ?? "";
     message.auditor = object.auditor ?? "";
@@ -803,7 +803,7 @@ export const MsgDeleteProviderAttributesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderAttributesResponse>, I>>(_: I): MsgDeleteProviderAttributesResponse {
+  fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
   },

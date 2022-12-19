@@ -12,12 +12,14 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
+    this.providers = this.providers.bind(this);
+    this.provider = this.provider.bind(this);
   }
 
   /* Providers queries providers */
-  providers = async (params: QueryProvidersRequest = {
+  async providers(params: QueryProvidersRequest = {
     pagination: undefined
-  }): Promise<QueryProvidersResponseSDKType> => {
+  }): Promise<QueryProvidersResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -28,11 +30,12 @@ export class LCDQueryClient {
 
     const endpoint = `akash/provider/v1beta2/providers`;
     return await this.req.get<QueryProvidersResponseSDKType>(endpoint, options);
-  };
+  }
 
   /* Provider queries provider details */
-  provider = async (params: QueryProviderRequest): Promise<QueryProviderResponseSDKType> => {
+  async provider(params: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
     const endpoint = `akash/provider/v1beta2/providers/${params.owner}`;
     return await this.req.get<QueryProviderResponseSDKType>(endpoint);
-  };
+  }
+
 }

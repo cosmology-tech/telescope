@@ -47,7 +47,7 @@ export interface MsgExec {
    * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
    * triple and validate it.
    */
-  msgs: Any[];
+  msgs: (Any)[] | Any[];
 }
 
 /**
@@ -564,4 +564,22 @@ export const MsgRevokeResponse = {
     return obj;
   }
 
+};
+export const Sdk_Msg_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    default:
+      return data;
+  }
+};
+export const Authz_Authorization_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    default:
+      return data;
+  }
 };

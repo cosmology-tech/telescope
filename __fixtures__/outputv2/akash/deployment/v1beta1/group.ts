@@ -2,7 +2,7 @@ import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, Long } from "../../../helpers";
+import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** State is an enum which refers to state of group */
@@ -77,12 +77,12 @@ export function group_StateToJSON(object: Group_State): string {
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
-  id?: GroupID | undefined;
+  id?: GroupID;
 }
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id?: GroupIDSDKType;
 }
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
@@ -93,12 +93,12 @@ export interface MsgCloseGroupResponseSDKType {}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
-  id?: GroupID | undefined;
+  id?: GroupID;
 }
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id?: GroupIDSDKType;
 }
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
@@ -109,12 +109,12 @@ export interface MsgPauseGroupResponseSDKType {}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
-  id?: GroupID | undefined;
+  id?: GroupID;
 }
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
-  id?: GroupIDSDKType | undefined;
+  id?: GroupIDSDKType;
 }
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
@@ -140,45 +140,45 @@ export interface GroupIDSDKType {
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements?: PlacementRequirements | undefined;
+  requirements?: PlacementRequirements;
   resources: Resource[];
 }
 
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements?: PlacementRequirementsSDKType | undefined;
+  requirements?: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 
 /** Group stores group id, state and specifications of group */
 export interface Group {
-  groupId?: GroupID | undefined;
+  groupId?: GroupID;
   state: Group_State;
-  groupSpec?: GroupSpec | undefined;
+  groupSpec?: GroupSpec;
   createdAt: Long;
 }
 
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
-  group_id?: GroupIDSDKType | undefined;
+  group_id?: GroupIDSDKType;
   state: Group_State;
-  group_spec?: GroupSpecSDKType | undefined;
+  group_spec?: GroupSpecSDKType;
   created_at: Long;
 }
 
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
-  resources?: ResourceUnits | undefined;
+  resources?: ResourceUnits;
   count: number;
-  price?: Coin | undefined;
+  price?: Coin;
 }
 
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
-  resources?: ResourceUnitsSDKType | undefined;
+  resources?: ResourceUnitsSDKType;
   count: number;
-  price?: CoinSDKType | undefined;
+  price?: CoinSDKType;
 }
 
 function createBaseMsgCloseGroup(): MsgCloseGroup {
@@ -230,7 +230,7 @@ export const MsgCloseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
+  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -286,7 +286,7 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
+  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
   },
@@ -351,7 +351,7 @@ export const MsgPauseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
+  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -407,7 +407,7 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
+  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
   },
@@ -472,7 +472,7 @@ export const MsgStartGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
+  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -528,7 +528,7 @@ export const MsgStartGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
+  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
   },
@@ -615,7 +615,7 @@ export const GroupID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<GroupID>, I>>(object: I): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -718,7 +718,7 @@ export const GroupSpec = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<GroupSpec>, I>>(object: I): GroupSpec {
+  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
@@ -832,7 +832,7 @@ export const Group = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<Group>, I>>(object: I): Group {
+  fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
@@ -932,7 +932,7 @@ export const Resource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<Resource>, I>>(object: I): Resource {
+  fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
     message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;

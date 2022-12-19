@@ -3,7 +3,7 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, Long, Rpc } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** State is an enum which refers to state of deployment */
@@ -58,18 +58,18 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id?: DeploymentID | undefined;
+  id?: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit?: Coin | undefined;
+  deposit?: Coin;
 }
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id?: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit?: CoinSDKType | undefined;
+  deposit?: CoinSDKType;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
@@ -80,14 +80,14 @@ export interface MsgCreateDeploymentResponseSDKType {}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id?: DeploymentID | undefined;
-  amount?: Coin | undefined;
+  id?: DeploymentID;
+  amount?: Coin;
 }
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
-  amount?: CoinSDKType | undefined;
+  id?: DeploymentIDSDKType;
+  amount?: CoinSDKType;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
@@ -98,14 +98,14 @@ export interface MsgDepositDeploymentResponseSDKType {}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id?: DeploymentID | undefined;
+  id?: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
 }
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id?: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
 }
@@ -118,12 +118,12 @@ export interface MsgUpdateDeploymentResponseSDKType {}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id?: DeploymentID | undefined;
+  id?: DeploymentID;
 }
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id?: DeploymentIDSDKType | undefined;
+  id?: DeploymentIDSDKType;
 }
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
@@ -146,7 +146,7 @@ export interface DeploymentIDSDKType {
 
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId?: DeploymentID | undefined;
+  deploymentId?: DeploymentID;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
@@ -154,7 +154,7 @@ export interface Deployment {
 
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
-  deployment_id?: DeploymentIDSDKType | undefined;
+  deployment_id?: DeploymentIDSDKType;
   state: Deployment_State;
   version: Uint8Array;
   created_at: Long;
@@ -262,7 +262,7 @@ export const MsgCreateDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
+  fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -333,7 +333,7 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
   },
@@ -409,7 +409,7 @@ export const MsgDepositDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
+  fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
@@ -468,7 +468,7 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
   },
@@ -561,7 +561,7 @@ export const MsgUpdateDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
+  fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -629,7 +629,7 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
   },
@@ -694,7 +694,7 @@ export const MsgCloseDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
+  fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -750,7 +750,7 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
+  fromPartial(_: DeepPartial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
   },
@@ -826,7 +826,7 @@ export const DeploymentID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
+  fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -931,7 +931,7 @@ export const Deployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
+  fromPartial(object: DeepPartial<Deployment>): Deployment {
     const message = createBaseDeployment();
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
@@ -1031,7 +1031,7 @@ export const DeploymentFilters = {
     return obj;
   },
 
-  fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
+  fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -1056,83 +1056,3 @@ export const DeploymentFilters = {
   }
 
 };
-
-/** Msg defines the deployment Msg service. */
-export interface Msg {
-  /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
-
-  /** DepositDeployment deposits more funds into the deployment account */
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
-
-  /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
-
-  /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
-
-  /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
-
-  /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
-
-  /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-  }
-
-  /* CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment = async (request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse> => {
-    const data = MsgCreateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CreateDeployment", data);
-    return promise.then(data => MsgCreateDeploymentResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* DepositDeployment deposits more funds into the deployment account */
-  depositDeployment = async (request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse> => {
-    const data = MsgDepositDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "DepositDeployment", data);
-    return promise.then(data => MsgDepositDeploymentResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment = async (request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse> => {
-    const data = MsgUpdateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "UpdateDeployment", data);
-    return promise.then(data => MsgUpdateDeploymentResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment = async (request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse> => {
-    const data = MsgCloseDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseDeployment", data);
-    return promise.then(data => MsgCloseDeploymentResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup = async (request: MsgCloseGroup): Promise<MsgCloseGroupResponse> => {
-    const data = MsgCloseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseGroup", data);
-    return promise.then(data => MsgCloseGroupResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup = async (request: MsgPauseGroup): Promise<MsgPauseGroupResponse> => {
-    const data = MsgPauseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "PauseGroup", data);
-    return promise.then(data => MsgPauseGroupResponse.decode(new _m0.Reader(data)));
-  };
-
-  /* StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup = async (request: MsgStartGroup): Promise<MsgStartGroupResponse> => {
-    const data = MsgStartGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "StartGroup", data);
-    return promise.then(data => MsgStartGroupResponse.decode(new _m0.Reader(data)));
-  };
-}

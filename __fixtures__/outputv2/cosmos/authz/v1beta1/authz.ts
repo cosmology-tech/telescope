@@ -1,5 +1,11 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { DepositDeploymentAuthorization as DepositDeploymentAuthorization1 } from "../../../akash/deployment/v1beta1/authz";
+import { DepositDeploymentAuthorizationSDKType as DepositDeploymentAuthorization1SDKType } from "../../../akash/deployment/v1beta1/authz";
+import { DepositDeploymentAuthorization as DepositDeploymentAuthorization2 } from "../../../akash/deployment/v1beta2/authz";
+import { DepositDeploymentAuthorizationSDKType as DepositDeploymentAuthorization2SDKType } from "../../../akash/deployment/v1beta2/authz";
+import { SendAuthorization, SendAuthorizationSDKType } from "../../bank/v1beta1/authz";
+import { StakeAuthorization, StakeAuthorizationSDKType } from "../../staking/v1beta1/authz";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -26,7 +32,7 @@ export interface GenericAuthorizationSDKType {
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: Any;
+  authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
@@ -52,7 +58,7 @@ export interface GrantSDKType {
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization?: Any;
+  authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
   expiration?: Date;
 }
 
@@ -420,4 +426,28 @@ export const GrantQueueItem = {
     return obj;
   }
 
+};
+export const Authorization_InterfaceDecoder = (input: _m0.Reader | Uint8Array): DepositDeploymentAuthorization1 | DepositDeploymentAuthorization2 | GenericAuthorization | SendAuthorization | StakeAuthorization | Any => {
+  const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  const data = Any.decode(reader, reader.uint32());
+
+  switch (data.typeUrl) {
+    case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
+      return DepositDeploymentAuthorization1.decode(data.value);
+
+    case "/akash.deployment.v1beta2.DepositDeploymentAuthorization":
+      return DepositDeploymentAuthorization2.decode(data.value);
+
+    case "/cosmos.authz.v1beta1.GenericAuthorization":
+      return GenericAuthorization.decode(data.value);
+
+    case "/cosmos.bank.v1beta1.SendAuthorization":
+      return SendAuthorization.decode(data.value);
+
+    case "/cosmos.staking.v1beta1.StakeAuthorization":
+      return StakeAuthorization.decode(data.value);
+
+    default:
+      return data;
+  }
 };

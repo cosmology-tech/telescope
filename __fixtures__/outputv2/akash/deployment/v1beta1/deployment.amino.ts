@@ -1,20 +1,15 @@
 /* eslint-disable */
-import { DeploymentID, DeploymentIDSDKType } from "./deployment";
-import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { GroupID, GroupIDSDKType } from "./groupid";
+import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, Resource, ResourceSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./group";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
-import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceSDKType } from "./resource";
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "../../base/v1beta2/resource";
-import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta2/resourcevalue";
-import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint";
-import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deploymentmsg";
-import { MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./groupmsg";
+import { DeploymentID, DeploymentIDSDKType, MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deployment";
+import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { ResourceUnits, ResourceUnitsSDKType, CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "../../base/v1beta1/resource";
+import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta1/resourcevalue";
+import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta1/endpoint";
 export interface AminoMsgCreateDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCreateDeployment";
+  type: "/akash.deployment.v1beta1.MsgCreateDeployment";
   value: {
     id: {
       owner: string;
@@ -53,7 +48,6 @@ export interface AminoMsgCreateDeployment extends AminoMsg {
             }[];
           };
           storage: {
-            name: string;
             quantity: {
               val: Uint8Array;
             };
@@ -61,10 +55,9 @@ export interface AminoMsgCreateDeployment extends AminoMsg {
               key: string;
               value: string;
             }[];
-          }[];
+          };
           endpoints: {
             kind: number;
-            sequence_number: number;
           }[];
         };
         count: number;
@@ -79,11 +72,10 @@ export interface AminoMsgCreateDeployment extends AminoMsg {
       denom: string;
       amount: string;
     };
-    depositor: string;
   };
 }
 export interface AminoMsgDepositDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgDepositDeployment";
+  type: "/akash.deployment.v1beta1.MsgDepositDeployment";
   value: {
     id: {
       owner: string;
@@ -93,21 +85,72 @@ export interface AminoMsgDepositDeployment extends AminoMsg {
       denom: string;
       amount: string;
     };
-    depositor: string;
   };
 }
 export interface AminoMsgUpdateDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
+  type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
   value: {
     id: {
       owner: string;
       dseq: string;
     };
+    groups: {
+      name: string;
+      requirements: {
+        signed_by: {
+          all_of: string[];
+          any_of: string[];
+        };
+        attributes: {
+          key: string;
+          value: string;
+        }[];
+      };
+      resources: {
+        resources: {
+          cpu: {
+            units: {
+              val: Uint8Array;
+            };
+            attributes: {
+              key: string;
+              value: string;
+            }[];
+          };
+          memory: {
+            quantity: {
+              val: Uint8Array;
+            };
+            attributes: {
+              key: string;
+              value: string;
+            }[];
+          };
+          storage: {
+            quantity: {
+              val: Uint8Array;
+            };
+            attributes: {
+              key: string;
+              value: string;
+            }[];
+          };
+          endpoints: {
+            kind: number;
+          }[];
+        };
+        count: number;
+        price: {
+          denom: string;
+          amount: string;
+        };
+      }[];
+    }[];
     version: Uint8Array;
   };
 }
 export interface AminoMsgCloseDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseDeployment";
+  type: "/akash.deployment.v1beta1.MsgCloseDeployment";
   value: {
     id: {
       owner: string;
@@ -116,7 +159,7 @@ export interface AminoMsgCloseDeployment extends AminoMsg {
   };
 }
 export interface AminoMsgCloseGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroup";
+  type: "/akash.deployment.v1beta1.MsgCloseGroup";
   value: {
     id: {
       owner: string;
@@ -126,7 +169,7 @@ export interface AminoMsgCloseGroup extends AminoMsg {
   };
 }
 export interface AminoMsgPauseGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroup";
+  type: "/akash.deployment.v1beta1.MsgPauseGroup";
   value: {
     id: {
       owner: string;
@@ -136,7 +179,7 @@ export interface AminoMsgPauseGroup extends AminoMsg {
   };
 }
 export interface AminoMsgStartGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroup";
+  type: "/akash.deployment.v1beta1.MsgStartGroup";
   value: {
     id: {
       owner: string;
@@ -146,14 +189,13 @@ export interface AminoMsgStartGroup extends AminoMsg {
   };
 }
 export const AminoConverter = {
-  "/akash.deployment.v1beta2.MsgCreateDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgCreateDeployment",
+  "/akash.deployment.v1beta1.MsgCreateDeployment": {
+    aminoType: "/akash.deployment.v1beta1.MsgCreateDeployment",
     toAmino: ({
       id,
       groups,
       version,
-      deposit,
-      depositor
+      deposit
     }: MsgCreateDeployment): AminoMsgCreateDeployment["value"] => {
       return {
         id: {
@@ -192,25 +234,23 @@ export const AminoConverter = {
                   value: el2.value
                 }))
               },
-              storage: el1.resources.storage.map(el2 => ({
-                name: el2.name,
+              storage: {
                 quantity: {
-                  val: el2.quantity.val
+                  val: el1.resources.storage.quantity.val
                 },
-                attributes: el2.attributes.map(el3 => ({
-                  key: el3.key,
-                  value: el3.value
+                attributes: el1.resources.storage.attributes.map(el2 => ({
+                  key: el2.key,
+                  value: el2.value
                 }))
-              })),
+              },
               endpoints: el1.resources.endpoints.map(el2 => ({
-                kind: el2.kind,
-                sequence_number: el2.sequenceNumber
+                kind: el2.kind
               }))
             },
             count: el1.count,
             price: {
               denom: el1.price.denom,
-              amount: el1.price.amount
+              amount: Long.fromValue(el1.price.amount).toString()
             }
           }))
         })),
@@ -218,16 +258,14 @@ export const AminoConverter = {
         deposit: {
           denom: deposit.denom,
           amount: Long.fromValue(deposit.amount).toString()
-        },
-        depositor
+        }
       };
     },
     fromAmino: ({
       id,
       groups,
       version,
-      deposit,
-      depositor
+      deposit
     }: AminoMsgCreateDeployment["value"]): MsgCreateDeployment => {
       return {
         id: {
@@ -266,19 +304,17 @@ export const AminoConverter = {
                   value: el4.value
                 }))
               },
-              storage: el1.resources.storage.map(el3 => ({
-                name: el3.name,
+              storage: {
                 quantity: {
-                  val: el3.quantity.val
+                  val: el1.resources.storage.quantity.val
                 },
-                attributes: el3.attributes.map(el4 => ({
+                attributes: el1.resources.storage.attributes.map(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
-              })),
+              },
               endpoints: el1.resources.endpoints.map(el3 => ({
-                kind: endpoint_KindFromJSON(el3.kind),
-                sequenceNumber: el3.sequence_number
+                kind: endpoint_KindFromJSON(el3.kind)
               }))
             },
             count: el1.count,
@@ -292,17 +328,15 @@ export const AminoConverter = {
         deposit: {
           denom: deposit.denom,
           amount: deposit.amount
-        },
-        depositor
+        }
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgDepositDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgDepositDeployment",
+  "/akash.deployment.v1beta1.MsgDepositDeployment": {
+    aminoType: "/akash.deployment.v1beta1.MsgDepositDeployment",
     toAmino: ({
       id,
-      amount,
-      depositor
+      amount
     }: MsgDepositDeployment): AminoMsgDepositDeployment["value"] => {
       return {
         id: {
@@ -312,14 +346,12 @@ export const AminoConverter = {
         amount: {
           denom: amount.denom,
           amount: Long.fromValue(amount.amount).toString()
-        },
-        depositor
+        }
       };
     },
     fromAmino: ({
       id,
-      amount,
-      depositor
+      amount
     }: AminoMsgDepositDeployment["value"]): MsgDepositDeployment => {
       return {
         id: {
@@ -329,15 +361,15 @@ export const AminoConverter = {
         amount: {
           denom: amount.denom,
           amount: amount.amount
-        },
-        depositor
+        }
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgUpdateDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgUpdateDeployment",
+  "/akash.deployment.v1beta1.MsgUpdateDeployment": {
+    aminoType: "/akash.deployment.v1beta1.MsgUpdateDeployment",
     toAmino: ({
       id,
+      groups,
       version
     }: MsgUpdateDeployment): AminoMsgUpdateDeployment["value"] => {
       return {
@@ -345,11 +377,64 @@ export const AminoConverter = {
           owner: id.owner,
           dseq: id.dseq.toString()
         },
+        groups: groups.map(el0 => ({
+          name: el0.name,
+          requirements: {
+            signed_by: {
+              all_of: el0.requirements.signedBy.allOf,
+              any_of: el0.requirements.signedBy.anyOf
+            },
+            attributes: el0.requirements.attributes.map(el1 => ({
+              key: el1.key,
+              value: el1.value
+            }))
+          },
+          resources: el0.resources.map(el1 => ({
+            resources: {
+              cpu: {
+                units: {
+                  val: el1.resources.cpu.units.val
+                },
+                attributes: el1.resources.cpu.attributes.map(el2 => ({
+                  key: el2.key,
+                  value: el2.value
+                }))
+              },
+              memory: {
+                quantity: {
+                  val: el1.resources.memory.quantity.val
+                },
+                attributes: el1.resources.memory.attributes.map(el2 => ({
+                  key: el2.key,
+                  value: el2.value
+                }))
+              },
+              storage: {
+                quantity: {
+                  val: el1.resources.storage.quantity.val
+                },
+                attributes: el1.resources.storage.attributes.map(el2 => ({
+                  key: el2.key,
+                  value: el2.value
+                }))
+              },
+              endpoints: el1.resources.endpoints.map(el2 => ({
+                kind: el2.kind
+              }))
+            },
+            count: el1.count,
+            price: {
+              denom: el1.price.denom,
+              amount: Long.fromValue(el1.price.amount).toString()
+            }
+          }))
+        })),
         version
       };
     },
     fromAmino: ({
       id,
+      groups,
       version
     }: AminoMsgUpdateDeployment["value"]): MsgUpdateDeployment => {
       return {
@@ -357,12 +442,64 @@ export const AminoConverter = {
           owner: id.owner,
           dseq: Long.fromString(id.dseq)
         },
+        groups: groups.map(el0 => ({
+          name: el0.name,
+          requirements: {
+            signedBy: {
+              allOf: el0.requirements.signed_by.all_of,
+              anyOf: el0.requirements.signed_by.any_of
+            },
+            attributes: el0.requirements.attributes.map(el2 => ({
+              key: el2.key,
+              value: el2.value
+            }))
+          },
+          resources: el0.resources.map(el1 => ({
+            resources: {
+              cpu: {
+                units: {
+                  val: el1.resources.cpu.units.val
+                },
+                attributes: el1.resources.cpu.attributes.map(el4 => ({
+                  key: el4.key,
+                  value: el4.value
+                }))
+              },
+              memory: {
+                quantity: {
+                  val: el1.resources.memory.quantity.val
+                },
+                attributes: el1.resources.memory.attributes.map(el4 => ({
+                  key: el4.key,
+                  value: el4.value
+                }))
+              },
+              storage: {
+                quantity: {
+                  val: el1.resources.storage.quantity.val
+                },
+                attributes: el1.resources.storage.attributes.map(el4 => ({
+                  key: el4.key,
+                  value: el4.value
+                }))
+              },
+              endpoints: el1.resources.endpoints.map(el3 => ({
+                kind: endpoint_KindFromJSON(el3.kind)
+              }))
+            },
+            count: el1.count,
+            price: {
+              denom: el1.price.denom,
+              amount: el1.price.amount
+            }
+          }))
+        })),
         version
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgCloseDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgCloseDeployment",
+  "/akash.deployment.v1beta1.MsgCloseDeployment": {
+    aminoType: "/akash.deployment.v1beta1.MsgCloseDeployment",
     toAmino: ({
       id
     }: MsgCloseDeployment): AminoMsgCloseDeployment["value"] => {
@@ -384,8 +521,8 @@ export const AminoConverter = {
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgCloseGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgCloseGroup",
+  "/akash.deployment.v1beta1.MsgCloseGroup": {
+    aminoType: "/akash.deployment.v1beta1.MsgCloseGroup",
     toAmino: ({
       id
     }: MsgCloseGroup): AminoMsgCloseGroup["value"] => {
@@ -409,8 +546,8 @@ export const AminoConverter = {
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgPauseGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgPauseGroup",
+  "/akash.deployment.v1beta1.MsgPauseGroup": {
+    aminoType: "/akash.deployment.v1beta1.MsgPauseGroup",
     toAmino: ({
       id
     }: MsgPauseGroup): AminoMsgPauseGroup["value"] => {
@@ -434,8 +571,8 @@ export const AminoConverter = {
       };
     }
   },
-  "/akash.deployment.v1beta2.MsgStartGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgStartGroup",
+  "/akash.deployment.v1beta1.MsgStartGroup": {
+    aminoType: "/akash.deployment.v1beta1.MsgStartGroup",
     toAmino: ({
       id
     }: MsgStartGroup): AminoMsgStartGroup["value"] => {

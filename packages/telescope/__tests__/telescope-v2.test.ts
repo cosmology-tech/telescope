@@ -37,10 +37,13 @@ const options: TelescopeOptions = {
   },
 
   interfaces: {
-    enabled: false,
+    enabled: true,
     useUnionTypes: false
   },
-
+  aminoEncoding: {
+    enabled: true,
+    useRecursiveV2encoding: false
+  },
   prototypes: {
     enabled: true,
     parser: {
@@ -60,10 +63,6 @@ const options: TelescopeOptions = {
     useOptionalNullable: true,
     allowUndefinedTypes: false,
     excluded: {
-      packages: [
-        // 'cosmos.gov.v1',
-        // 'cosmos.group.v1'
-      ],
       protos: [
         'cosmos/authz/v1beta1/event.proto'
       ]
@@ -80,191 +79,30 @@ const options: TelescopeOptions = {
     enabled: true
   },
 
-  cosmwasm: {
-    contracts: [
-      {
-        name: 'SG721',
-        dir: join(contractsDir, 'sg721')
-      },
-      {
-        name: 'Minter',
-        dir: join(contractsDir, 'minter')
-      }
-    ],
-    outPath,
-    options: {
-      bundle: {
-        bundleFile: 'contracts.ts',
-        scope: 'contracts'
-      },
-      types: {
-        enabled: true
-      },
-      client: {
-        enabled: true
-      },
-      reactQuery: {
-        enabled: true,
-        optionalClient: true,
-        version: 'v4',
-        mutations: true
-      },
-      recoil: {
-        enabled: false
-      },
-      messageComposer: {
-        enabled: false
-      }
-    }
-  },
-
   stargateClients: {
     enabled: true,
     includeCosmosDefaultTypes: true
   },
 
-  aggregatedLCD: {
-    dir: 'osmosis',
-    filename: 'agg-lcd.ts',
-    packages: [
-      'cosmos.bank.v1beta1',
-      'osmosis.gamm.v1beta1'
-    ],
-    addToBundle: true
-  },
-
-  lcdClients: {
-    enabled: true,
-    scopedIsExclusive: false,
-    scoped: [
-      {
-        dir: 'osmosis',
-        filename: 'custom-lcd-client.ts',
-        packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'osmosis.gamm.v1beta1'
-        ],
-        addToBundle: true,
-        methodName: 'createCustomLCDClient'
-      },
-      {
-        dir: 'evmos',
-        filename: 'custom-lcd-client.ts',
-        packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'evmos.erc20.v1'
-        ],
-        addToBundle: true,
-        methodName: 'createEvmosLCDClient'
-      }
-    ]
-  },
-
   rpcClients: {
     enabled: true,
-    camelCase: true,
-    scopedIsExclusive: false,
-    scoped: [
-      {
-        dir: 'cosmos',
-        filename: 'cosmos-rpc-client.ts',
-        packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1'
-        ],
-        addToBundle: true,
-        methodNameQuery: 'createCosmicRPCQueryClient',
-        methodNameTx: 'createCosmicRPCTxClient'
-      },
-      {
-        dir: 'evmos',
-        filename: 'evmos-rpc-client.ts',
-        packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'evmos.erc20.v1'
-        ],
-        addToBundle: true,
-        methodNameQuery: 'createEvmosRPCQueryClient',
-        methodNameTx: 'createEvmosRPCTxClient'
-      }
-    ],
-    enabledServices: [
-      'Msg',
-      'Query',
-      'Service',
-      'ReflectionService',
-      'ABCIApplication'
-    ]
+    camelCase: true
   },
 
   reactQuery: {
     enabled: true,
-    // include: {
-    //   patterns: [
-    //     'osmosis/**/gamm/**/query.proto'
-    //   ],
-    //   protos: [
-    //     'akash/cert/v1beta2/query.proto'
-    //   ],
-    //   packages: [
-    //     'cosmos.bank.v1beta1',
-    //     'cosmos.gov.v1beta1',
-    //     'evmos.erc20.v1'
-    //   ]
-    // }
-  },
-
-  aminoEncoding: {
-    enabled: true,
-    exceptions: {
-      '/akash.audit.v1beta2.MsgSignProviderAttributes': {
-        aminoType: 'mymessage-testonly'
-      }
-    },
-    typeUrlToAmino: (typeUrl: string) => {
-      const name = typeUrl.replace(/^\//, '');
-      const elements = name.split('.');
-      const pkg = elements[0];
-
-      switch (pkg) {
-        case 'akash': {
-          const n = elements
-            .filter(a => !a.match(/v1beta1/));
-          n[n.length - 1] = kebab(n[n.length - 1]);
-          n[n.length - 1] = n[n.length - 1].replace(/^msg-/, 'testonly-');
-          return n.join('/');
-        }
-      }
-    },
-    useRecursiveV2encoding: false
-  },
-  packages: {
-    akash: {
-      classesUseArrowFunctions: true,
-      deployment: {
-        v1beta1: {
-          prototypes: {
-            allowUndefinedTypes: true,
-            typingsFormat: {
-              useDeepPartial: false
-            }
-          },
-          aminoEncoding: {
-            enabled: false
-          },
-          rpcClients: {
-            inline: true
-          }
-        }
-      },
-      prototypes: {
-        typingsFormat: {
-          useExact: true
-        }
-      }
+    include: {
+      patterns: [
+        'osmosis/**/gamm/**/query.proto'
+      ],
+      protos: [
+        'akash/cert/v1beta2/query.proto'
+      ],
+      packages: [
+        'cosmos.bank.v1beta1',
+        'cosmos.gov.v1beta1',
+        'evmos.erc20.v1'
+      ]
     }
   }
 };
