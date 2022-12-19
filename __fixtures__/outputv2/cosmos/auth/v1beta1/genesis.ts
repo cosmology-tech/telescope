@@ -1,5 +1,5 @@
-import { Params, ParamsSDKType } from "./auth";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Params, ParamsAmino, ParamsSDKType } from "./auth";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -11,6 +11,15 @@ export interface GenesisState {
 
   /** accounts are the accounts present at genesis. */
   accounts: Any[];
+}
+
+/** GenesisState defines the auth module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+
+  /** accounts are the accounts present at genesis. */
+  accounts: AnyAmino[];
 }
 
 /** GenesisState defines the auth module's genesis state. */
@@ -105,6 +114,26 @@ export const GenesisState = {
 
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.accounts = [];
     }

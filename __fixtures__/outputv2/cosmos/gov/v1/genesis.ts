@@ -1,4 +1,4 @@
-import { Deposit, DepositSDKType, Vote, VoteSDKType, Proposal, ProposalSDKType, DepositParams, DepositParamsSDKType, VotingParams, VotingParamsSDKType, TallyParams, TallyParamsSDKType } from "./gov";
+import { Deposit, DepositAmino, DepositSDKType, Vote, VoteAmino, VoteSDKType, Proposal, ProposalAmino, ProposalSDKType, DepositParams, DepositParamsAmino, DepositParamsSDKType, VotingParams, VotingParamsAmino, VotingParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsSDKType } from "./gov";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1";
@@ -25,6 +25,30 @@ export interface GenesisState {
 
   /** params defines all the paramaters of related to tally. */
   tallyParams?: TallyParams;
+}
+
+/** GenesisState defines the gov module's genesis state. */
+export interface GenesisStateAmino {
+  /** starting_proposal_id is the ID of the starting proposal. */
+  starting_proposal_id: string;
+
+  /** deposits defines all the deposits present at genesis. */
+  deposits: DepositAmino[];
+
+  /** votes defines all the votes present at genesis. */
+  votes: VoteAmino[];
+
+  /** proposals defines all the proposals present at genesis. */
+  proposals: ProposalAmino[];
+
+  /** params defines all the paramaters of related to deposit. */
+  deposit_params?: DepositParamsAmino;
+
+  /** params defines all the paramaters of related to voting. */
+  voting_params?: VotingParamsAmino;
+
+  /** params defines all the paramaters of related to tally. */
+  tally_params?: TallyParamsAmino;
 }
 
 /** GenesisState defines the gov module's genesis state. */
@@ -218,6 +242,46 @@ export const GenesisState = {
     message.depositParams !== undefined && (obj.deposit_params = message.depositParams ? DepositParams.toSDK(message.depositParams) : undefined);
     message.votingParams !== undefined && (obj.voting_params = message.votingParams ? VotingParams.toSDK(message.votingParams) : undefined);
     message.tallyParams !== undefined && (obj.tally_params = message.tallyParams ? TallyParams.toSDK(message.tallyParams) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      startingProposalId: Long.fromString(object.starting_proposal_id),
+      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromAmino(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
+      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : undefined,
+      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : undefined,
+      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.starting_proposal_id = message.startingProposalId ? message.startingProposalId.toString() : undefined;
+
+    if (message.deposits) {
+      obj.deposits = message.deposits.map(e => e ? Deposit.toAmino(e) : undefined);
+    } else {
+      obj.deposits = [];
+    }
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+
+    obj.deposit_params = message.depositParams ? DepositParams.toAmino(message.depositParams) : undefined;
+    obj.voting_params = message.votingParams ? VotingParams.toAmino(message.votingParams) : undefined;
+    obj.tally_params = message.tallyParams ? TallyParams.toAmino(message.tallyParams) : undefined;
     return obj;
   }
 

@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -6,6 +6,11 @@ export const protobufPackage = "akash.deployment.v1beta1";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit?: Coin;
+}
+
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  deployment_min_deposit?: CoinAmino;
 }
 
 /** Params defines the parameters for the x/deployment package */
@@ -77,6 +82,18 @@ export const Params = {
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     message.deploymentMinDeposit !== undefined && (obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toSDK(message.deploymentMinDeposit) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined;
     return obj;
   }
 

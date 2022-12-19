@@ -27,6 +27,30 @@ export interface MsgIBCSend {
 }
 
 /** MsgIBCSend */
+export interface MsgIBCSendAmino {
+  /** the channel by which the packet will be sent */
+  channel: string;
+
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height: string;
+
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: string;
+
+  /**
+   * Data is the payload to transfer. We must not make assumption what format or
+   * content is in here.
+   */
+  data: Uint8Array;
+}
+
+/** MsgIBCSend */
 export interface MsgIBCSendSDKType {
   channel: string;
   timeout_height: Long;
@@ -36,6 +60,11 @@ export interface MsgIBCSendSDKType {
 
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannel {
+  channel: string;
+}
+
+/** MsgIBCCloseChannel port and channel need to be owned by the contract */
+export interface MsgIBCCloseChannelAmino {
   channel: string;
 }
 
@@ -151,6 +180,24 @@ export const MsgIBCSend = {
     obj.timeout_timestamp = message.timeoutTimestamp;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAmino(object: MsgIBCSendAmino): MsgIBCSend {
+    return {
+      channel: object.channel,
+      timeoutHeight: Long.fromString(object.timeout_height),
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp),
+      data: object.data
+    };
+  },
+
+  toAmino(message: MsgIBCSend): MsgIBCSendAmino {
+    const obj: any = {};
+    obj.channel = message.channel;
+    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.data = message.data;
+    return obj;
   }
 
 };
@@ -217,6 +264,18 @@ export const MsgIBCCloseChannel = {
   },
 
   toSDK(message: MsgIBCCloseChannel): MsgIBCCloseChannelSDKType {
+    const obj: any = {};
+    obj.channel = message.channel;
+    return obj;
+  },
+
+  fromAmino(object: MsgIBCCloseChannelAmino): MsgIBCCloseChannel {
+    return {
+      channel: object.channel
+    };
+  },
+
+  toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelAmino {
     const obj: any = {};
     obj.channel = message.channel;
     return obj;

@@ -1,5 +1,5 @@
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -9,6 +9,13 @@ export interface Resource {
   resources?: ResourceUnits;
   count: number;
   price?: DecCoin;
+}
+
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources?: ResourceUnitsAmino;
+  count: number;
+  price?: DecCoinAmino;
 }
 
 /** Resource stores unit, total count and price of resource */
@@ -110,6 +117,22 @@ export const Resource = {
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
     obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ResourceAmino): Resource {
+    return {
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: object.count,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
+    };
+  },
+
+  toAmino(message: Resource): ResourceAmino {
+    const obj: any = {};
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
+    obj.count = message.count;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     return obj;
   }
 

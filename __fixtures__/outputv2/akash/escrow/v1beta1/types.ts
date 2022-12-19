@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
@@ -19,6 +19,7 @@ export enum Account_State {
   UNRECOGNIZED = -1,
 }
 export const Account_StateSDKType = Account_State;
+export const Account_StateAmino = Account_State;
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -79,6 +80,7 @@ export enum Payment_State {
   UNRECOGNIZED = -1,
 }
 export const Payment_StateSDKType = Payment_State;
+export const Payment_StateAmino = Payment_State;
 export function payment_StateFromJSON(object: any): Payment_State {
   switch (object) {
     case 0:
@@ -130,6 +132,12 @@ export interface AccountID {
 }
 
 /** AccountID is the account identifier */
+export interface AccountIDAmino {
+  scope: string;
+  xid: string;
+}
+
+/** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
   xid: string;
@@ -157,6 +165,27 @@ export interface Account {
 }
 
 /** Account stores state for an escrow account */
+export interface AccountAmino {
+  /** unique identifier for this escrow account */
+  id?: AccountIDAmino;
+
+  /** bech32 encoded account address of the owner of this escrow account */
+  owner: string;
+
+  /** current state of this escrow account */
+  state: Account_State;
+
+  /** unspent coins received from the owner's wallet */
+  balance?: CoinAmino;
+
+  /** total coins spent by this account */
+  transferred?: CoinAmino;
+
+  /** block height at which this account was last settled */
+  settled_at: string;
+}
+
+/** Account stores state for an escrow account */
 export interface AccountSDKType {
   id?: AccountIDSDKType;
   owner: string;
@@ -175,6 +204,17 @@ export interface Payment {
   rate?: Coin;
   balance?: Coin;
   withdrawn?: Coin;
+}
+
+/** Payment stores state for a payment */
+export interface PaymentAmino {
+  account_id?: AccountIDAmino;
+  payment_id: string;
+  owner: string;
+  state: Payment_State;
+  rate?: CoinAmino;
+  balance?: CoinAmino;
+  withdrawn?: CoinAmino;
 }
 
 /** Payment stores state for a payment */
@@ -263,6 +303,20 @@ export const AccountID = {
   },
 
   toSDK(message: AccountID): AccountIDSDKType {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    return obj;
+  },
+
+  fromAmino(object: AccountIDAmino): AccountID {
+    return {
+      scope: object.scope,
+      xid: object.xid
+    };
+  },
+
+  toAmino(message: AccountID): AccountIDAmino {
     const obj: any = {};
     obj.scope = message.scope;
     obj.xid = message.xid;
@@ -405,6 +459,28 @@ export const Account = {
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
     message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toSDK(message.transferred) : undefined);
     obj.settled_at = message.settledAt;
+    return obj;
+  },
+
+  fromAmino(object: AccountAmino): Account {
+    return {
+      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      owner: object.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
+      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : undefined,
+      settledAt: Long.fromString(object.settled_at)
+    };
+  },
+
+  toAmino(message: Account): AccountAmino {
+    const obj: any = {};
+    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
     return obj;
   }
 
@@ -558,6 +634,30 @@ export const Payment = {
     message.rate !== undefined && (obj.rate = message.rate ? Coin.toSDK(message.rate) : undefined);
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
     message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: PaymentAmino): Payment {
+    return {
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      paymentId: object.payment_id,
+      owner: object.owner,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
+      rate: object?.rate ? Coin.fromAmino(object.rate) : undefined,
+      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+    };
+  },
+
+  toAmino(message: Payment): PaymentAmino {
+    const obj: any = {};
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
   }
 

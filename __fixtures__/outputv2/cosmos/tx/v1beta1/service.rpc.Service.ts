@@ -1,12 +1,12 @@
-import { Tx, TxSDKType } from "./tx";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci";
-import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../tendermint/types/block";
+import { Tx, TxAmino, TxSDKType } from "./tx";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { TxResponse, TxResponseAmino, TxResponseSDKType, GasInfo, GasInfoAmino, GasInfoSDKType, Result, ResultAmino, ResultSDKType } from "../../base/abci/v1beta1/abci";
+import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../tendermint/types/types";
+import { Block, BlockAmino, BlockSDKType } from "../../../tendermint/types/block";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
+import { SimulateRequest, SimulateRequestAmino, SimulateRequestSDKType, SimulateResponse, SimulateResponseAmino, SimulateResponseSDKType, GetTxRequest, GetTxRequestAmino, GetTxRequestSDKType, GetTxResponse, GetTxResponseAmino, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestAmino, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseAmino, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestAmino, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseAmino, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestAmino, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseAmino, GetBlockWithTxsResponseSDKType } from "./service";
 
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {

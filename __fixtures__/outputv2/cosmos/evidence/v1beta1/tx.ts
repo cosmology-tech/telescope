@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
@@ -16,6 +16,15 @@ export interface MsgSubmitEvidence {
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
+export interface MsgSubmitEvidenceAmino {
+  submitter: string;
+  evidence?: AnyAmino;
+}
+
+/**
+ * MsgSubmitEvidence represents a message that supports submitting arbitrary
+ * Evidence of misbehavior such as equivocation or counterfactual signing.
+ */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
   evidence?: AnySDKType;
@@ -23,6 +32,12 @@ export interface MsgSubmitEvidenceSDKType {
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
+  /** hash defines the hash of the evidence. */
+  hash: Uint8Array;
+}
+
+/** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
 }
@@ -46,7 +61,7 @@ export const MsgSubmitEvidence = {
     }
 
     if (message.evidence !== undefined) {
-      Any.encode(message.evidence, writer.uint32(18).fork()).ldelim();
+      Any.encode((message.evidence as Any), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -66,7 +81,7 @@ export const MsgSubmitEvidence = {
           break;
 
         case 2:
-          message.evidence = Any.decode(reader, reader.uint32());
+          message.evidence = (Evidence_InterfaceDecoder(reader) as Any);
           break;
 
         default:
@@ -110,6 +125,20 @@ export const MsgSubmitEvidence = {
     const obj: any = {};
     obj.submitter = message.submitter;
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
+    return {
+      submitter: object.submitter,
+      evidence: object?.evidence ? Evidence_FromAmino(object.evidence) : undefined
+    };
+  },
+
+  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
+    const obj: any = {};
+    obj.submitter = message.submitter;
+    obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any)) : undefined;
     return obj;
   }
 
@@ -180,6 +209,18 @@ export const MsgSubmitEvidenceResponse = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
+    return {
+      hash: object.hash
+    };
+  },
+
+  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    return obj;
   }
 
 };
@@ -191,4 +232,10 @@ export const Evidence_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any =
     default:
       return data;
   }
+};
+export const Evidence_FromAmino = (content: AnyAmino) => {
+  return Any.fromAmino(content);
+};
+export const Evidence_ToAmino = (content: Any) => {
+  return Any.toAmino(content);
 };

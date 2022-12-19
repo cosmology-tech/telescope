@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDAmino, GroupIDSDKType } from "./group";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -19,6 +19,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -65,6 +66,14 @@ export interface MsgCreateDeployment {
 }
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
+export interface MsgCreateDeploymentAmino {
+  id?: DeploymentIDAmino;
+  groups: GroupSpecAmino[];
+  version: Uint8Array;
+  deposit?: CoinAmino;
+}
+
+/** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id?: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
@@ -76,12 +85,21 @@ export interface MsgCreateDeploymentSDKType {
 export interface MsgCreateDeploymentResponse {}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgCreateDeploymentResponseAmino {}
+
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
   id?: DeploymentID;
   amount?: Coin;
+}
+
+/** MsgDepositDeployment deposits more funds into the deposit account */
+export interface MsgDepositDeploymentAmino {
+  id?: DeploymentIDAmino;
+  amount?: CoinAmino;
 }
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
@@ -94,12 +112,22 @@ export interface MsgDepositDeploymentSDKType {
 export interface MsgDepositDeploymentResponse {}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgDepositDeploymentResponseAmino {}
+
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
   id?: DeploymentID;
   groups: GroupSpec[];
+  version: Uint8Array;
+}
+
+/** MsgUpdateDeployment defines an SDK message for updating deployment */
+export interface MsgUpdateDeploymentAmino {
+  id?: DeploymentIDAmino;
+  groups: GroupSpecAmino[];
   version: Uint8Array;
 }
 
@@ -114,11 +142,19 @@ export interface MsgUpdateDeploymentSDKType {
 export interface MsgUpdateDeploymentResponse {}
 
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
+export interface MsgUpdateDeploymentResponseAmino {}
+
+/** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id?: DeploymentID;
+}
+
+/** MsgCloseDeployment defines an SDK message for closing deployment */
+export interface MsgCloseDeploymentAmino {
+  id?: DeploymentIDAmino;
 }
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
@@ -130,12 +166,21 @@ export interface MsgCloseDeploymentSDKType {
 export interface MsgCloseDeploymentResponse {}
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
+export interface MsgCloseDeploymentResponseAmino {}
+
+/** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
   dseq: Long;
+}
+
+/** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
 }
 
 /** DeploymentID stores owner and sequence number */
@@ -153,6 +198,14 @@ export interface Deployment {
 }
 
 /** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id?: DeploymentIDAmino;
+  state: Deployment_State;
+  version: Uint8Array;
+  created_at: string;
+}
+
+/** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType;
   state: Deployment_State;
@@ -164,6 +217,13 @@ export interface DeploymentSDKType {
 export interface DeploymentFilters {
   owner: string;
   dseq: Long;
+  state: string;
+}
+
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
   state: string;
 }
 
@@ -293,6 +353,30 @@ export const MsgCreateDeployment = {
     obj.version = message.version;
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version,
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    obj.version = message.version;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    return obj;
   }
 
 };
@@ -343,6 +427,15 @@ export const MsgCreateDeploymentResponse = {
   },
 
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -428,6 +521,20 @@ export const MsgDepositDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+    };
+  },
+
+  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
   }
 
 };
@@ -478,6 +585,15 @@ export const MsgDepositDeploymentResponse = {
   },
 
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
+    return {};
+  },
+
+  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -589,6 +705,28 @@ export const MsgUpdateDeployment = {
 
     obj.version = message.version;
     return obj;
+  },
+
+  fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
+      version: object.version
+    };
+  },
+
+  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    obj.version = message.version;
+    return obj;
   }
 
 };
@@ -639,6 +777,15 @@ export const MsgUpdateDeploymentResponse = {
   },
 
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -710,6 +857,18 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -760,6 +919,15 @@ export const MsgCloseDeploymentResponse = {
   },
 
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -844,6 +1012,20 @@ export const DeploymentID = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    return obj;
+  },
+
+  fromAmino(object: DeploymentIDAmino): DeploymentID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq)
+    };
+  },
+
+  toAmino(message: DeploymentID): DeploymentIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
   }
 
@@ -956,6 +1138,24 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromAmino(object: DeploymentAmino): Deployment {
+    return {
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: object.version,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+
+  toAmino(message: Deployment): DeploymentAmino {
+    const obj: any = {};
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
+    obj.state = message.state;
+    obj.version = message.version;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
   }
 
 };
@@ -1051,6 +1251,22 @@ export const DeploymentFilters = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.state = message.state;
+    return obj;
+  },
+
+  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      state: object.state
+    };
+  },
+
+  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
   }

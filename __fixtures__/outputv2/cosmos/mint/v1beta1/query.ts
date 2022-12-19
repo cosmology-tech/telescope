@@ -1,10 +1,13 @@
-import { Params, ParamsSDKType } from "./mint";
+import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -16,12 +19,21 @@ export interface QueryParamsResponse {
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params?: ParamsSDKType;
 }
 
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequest {}
+
+/** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
+export interface QueryInflationRequestAmino {}
 
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequestSDKType {}
@@ -31,6 +43,15 @@ export interface QueryInflationRequestSDKType {}
  * method.
  */
 export interface QueryInflationResponse {
+  /** inflation is the current minting inflation value. */
+  inflation: Uint8Array;
+}
+
+/**
+ * QueryInflationResponse is the response type for the Query/Inflation RPC
+ * method.
+ */
+export interface QueryInflationResponseAmino {
   /** inflation is the current minting inflation value. */
   inflation: Uint8Array;
 }
@@ -53,6 +74,12 @@ export interface QueryAnnualProvisionsRequest {}
  * QueryAnnualProvisionsRequest is the request type for the
  * Query/AnnualProvisions RPC method.
  */
+export interface QueryAnnualProvisionsRequestAmino {}
+
+/**
+ * QueryAnnualProvisionsRequest is the request type for the
+ * Query/AnnualProvisions RPC method.
+ */
 export interface QueryAnnualProvisionsRequestSDKType {}
 
 /**
@@ -62,6 +89,15 @@ export interface QueryAnnualProvisionsRequestSDKType {}
 export interface QueryAnnualProvisionsResponse {
   /** annual_provisions is the current minting annual provisions value. */
   annualProvisions: Uint8Array;
+}
+
+/**
+ * QueryAnnualProvisionsResponse is the response type for the
+ * Query/AnnualProvisions RPC method.
+ */
+export interface QueryAnnualProvisionsResponseAmino {
+  /** annual_provisions is the current minting annual provisions value. */
+  annual_provisions: Uint8Array;
 }
 
 /**
@@ -118,6 +154,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -189,6 +234,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -239,6 +296,15 @@ export const QueryInflationRequest = {
   },
 
   toSDK(_: QueryInflationRequest): QueryInflationRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryInflationRequestAmino): QueryInflationRequest {
+    return {};
+  },
+
+  toAmino(_: QueryInflationRequest): QueryInflationRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -310,6 +376,18 @@ export const QueryInflationResponse = {
     const obj: any = {};
     obj.inflation = message.inflation;
     return obj;
+  },
+
+  fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
+    return {
+      inflation: object.inflation
+    };
+  },
+
+  toAmino(message: QueryInflationResponse): QueryInflationResponseAmino {
+    const obj: any = {};
+    obj.inflation = message.inflation;
+    return obj;
   }
 
 };
@@ -360,6 +438,15 @@ export const QueryAnnualProvisionsRequest = {
   },
 
   toSDK(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryAnnualProvisionsRequestAmino): QueryAnnualProvisionsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -428,6 +515,18 @@ export const QueryAnnualProvisionsResponse = {
   },
 
   toSDK(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseSDKType {
+    const obj: any = {};
+    obj.annual_provisions = message.annualProvisions;
+    return obj;
+  },
+
+  fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
+    return {
+      annualProvisions: object.annual_provisions
+    };
+  },
+
+  toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
     obj.annual_provisions = message.annualProvisions;
     return obj;

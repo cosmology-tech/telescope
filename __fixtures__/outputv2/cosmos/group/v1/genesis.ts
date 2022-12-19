@@ -1,4 +1,4 @@
-import { GroupInfo, GroupInfoSDKType, GroupMember, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType } from "./types";
+import { GroupInfo, GroupInfoAmino, GroupInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoSDKType, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType } from "./types";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";
@@ -37,6 +37,42 @@ export interface GenesisState {
 
   /** votes is the list of votes. */
   votes: Vote[];
+}
+
+/** GenesisState defines the group module's genesis state. */
+export interface GenesisStateAmino {
+  /**
+   * group_seq is the group table orm.Sequence,
+   * it is used to get the next group ID.
+   */
+  group_seq: string;
+
+  /** groups is the list of groups info. */
+  groups: GroupInfoAmino[];
+
+  /** group_members is the list of groups members. */
+  group_members: GroupMemberAmino[];
+
+  /**
+   * group_policy_seq is the group policy table orm.Sequence,
+   * it is used to generate the next group policy account address.
+   */
+  group_policy_seq: string;
+
+  /** group_policies is the list of group policies info. */
+  group_policies: GroupPolicyInfoAmino[];
+
+  /**
+   * proposal_seq is the proposal table orm.Sequence,
+   * it is used to get the next proposal ID.
+   */
+  proposal_seq: string;
+
+  /** proposals is the list of proposals. */
+  proposals: ProposalAmino[];
+
+  /** votes is the list of votes. */
+  votes: VoteAmino[];
 }
 
 /** GenesisState defines the group module's genesis state. */
@@ -265,6 +301,60 @@ export const GenesisState = {
 
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      groupSeq: Long.fromString(object.group_seq),
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
+      groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromAmino(e)) : [],
+      groupPolicySeq: Long.fromString(object.group_policy_seq),
+      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
+      proposalSeq: Long.fromString(object.proposal_seq),
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.group_seq = message.groupSeq ? message.groupSeq.toString() : undefined;
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    if (message.groupMembers) {
+      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e) : undefined);
+    } else {
+      obj.group_members = [];
+    }
+
+    obj.group_policy_seq = message.groupPolicySeq ? message.groupPolicySeq.toString() : undefined;
+
+    if (message.groupPolicies) {
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
+    } else {
+      obj.group_policies = [];
+    }
+
+    obj.proposal_seq = message.proposalSeq ? message.proposalSeq.toString() : undefined;
+
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
       obj.votes = [];
     }

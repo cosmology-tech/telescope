@@ -1,4 +1,4 @@
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
@@ -9,6 +9,14 @@ export interface Params {
   baseProposerReward: string;
   bonusProposerReward: string;
   withdrawAddrEnabled: boolean;
+}
+
+/** Params defines the set of params for the distribution module. */
+export interface ParamsAmino {
+  community_tax: string;
+  base_proposer_reward: string;
+  bonus_proposer_reward: string;
+  withdraw_addr_enabled: boolean;
 }
 
 /** Params defines the set of params for the distribution module. */
@@ -52,6 +60,25 @@ export interface ValidatorHistoricalRewards {
  *  read that record)
  *  + one per validator for the zeroeth period, set on initialization
  */
+export interface ValidatorHistoricalRewardsAmino {
+  cumulative_reward_ratio: DecCoinAmino[];
+  reference_count: number;
+}
+
+/**
+ * ValidatorHistoricalRewards represents historical rewards for a validator.
+ * Height is implicit within the store key.
+ * Cumulative reward ratio is the sum from the zeroeth period
+ * until this period of rewards / tokens, per the spec.
+ * The reference count indicates the number of objects
+ * which might need to reference this historical entry at any point.
+ * ReferenceCount =
+ *    number of outstanding delegations which ended the associated period (and
+ *    might need to read that record)
+ *  + number of slashes which ended the associated period (and might need to
+ *  read that record)
+ *  + one per validator for the zeroeth period, set on initialization
+ */
 export interface ValidatorHistoricalRewardsSDKType {
   cumulative_reward_ratio: DecCoinSDKType[];
   reference_count: number;
@@ -65,6 +92,16 @@ export interface ValidatorHistoricalRewardsSDKType {
 export interface ValidatorCurrentRewards {
   rewards: DecCoin[];
   period: Long;
+}
+
+/**
+ * ValidatorCurrentRewards represents current rewards and current
+ * period for a validator kept as a running counter and incremented
+ * each block as long as the validator's tokens remain constant.
+ */
+export interface ValidatorCurrentRewardsAmino {
+  rewards: DecCoinAmino[];
+  period: string;
 }
 
 /**
@@ -89,6 +126,14 @@ export interface ValidatorAccumulatedCommission {
  * ValidatorAccumulatedCommission represents accumulated commission
  * for a validator kept as a running counter, can be withdrawn at any time.
  */
+export interface ValidatorAccumulatedCommissionAmino {
+  commission: DecCoinAmino[];
+}
+
+/**
+ * ValidatorAccumulatedCommission represents accumulated commission
+ * for a validator kept as a running counter, can be withdrawn at any time.
+ */
 export interface ValidatorAccumulatedCommissionSDKType {
   commission: DecCoinSDKType[];
 }
@@ -99,6 +144,14 @@ export interface ValidatorAccumulatedCommissionSDKType {
  */
 export interface ValidatorOutstandingRewards {
   rewards: DecCoin[];
+}
+
+/**
+ * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
+ * for a validator inexpensive to track, allows simple sanity checks.
+ */
+export interface ValidatorOutstandingRewardsAmino {
+  rewards: DecCoinAmino[];
 }
 
 /**
@@ -126,6 +179,17 @@ export interface ValidatorSlashEvent {
  * This is needed to calculate appropriate amount of staking tokens
  * for delegations which are withdrawn after a slash has occurred.
  */
+export interface ValidatorSlashEventAmino {
+  validator_period: string;
+  fraction: string;
+}
+
+/**
+ * ValidatorSlashEvent represents a validator slash event.
+ * Height is implicit within the store key.
+ * This is needed to calculate appropriate amount of staking tokens
+ * for delegations which are withdrawn after a slash has occurred.
+ */
 export interface ValidatorSlashEventSDKType {
   validator_period: Long;
   fraction: string;
@@ -137,6 +201,11 @@ export interface ValidatorSlashEvents {
 }
 
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
+export interface ValidatorSlashEventsAmino {
+  validator_slash_events: ValidatorSlashEventAmino[];
+}
+
+/** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
 export interface ValidatorSlashEventsSDKType {
   validator_slash_events: ValidatorSlashEventSDKType[];
 }
@@ -144,6 +213,11 @@ export interface ValidatorSlashEventsSDKType {
 /** FeePool is the global fee pool for distribution. */
 export interface FeePool {
   communityPool: DecCoin[];
+}
+
+/** FeePool is the global fee pool for distribution. */
+export interface FeePoolAmino {
+  community_pool: DecCoinAmino[];
 }
 
 /** FeePool is the global fee pool for distribution. */
@@ -161,6 +235,18 @@ export interface CommunityPoolSpendProposal {
   description: string;
   recipient: string;
   amount: Coin[];
+}
+
+/**
+ * CommunityPoolSpendProposal details a proposal for use of community funds,
+ * together with how many coins are proposed to be spent, and to which
+ * recipient account.
+ */
+export interface CommunityPoolSpendProposalAmino {
+  title: string;
+  description: string;
+  recipient: string;
+  amount: CoinAmino[];
 }
 
 /**
@@ -197,6 +283,20 @@ export interface DelegatorStartingInfo {
  * the delegators within the validator may be left with less than a full token,
  * thus sdk.Dec is used.
  */
+export interface DelegatorStartingInfoAmino {
+  previous_period: string;
+  stake: string;
+  height: string;
+}
+
+/**
+ * DelegatorStartingInfo represents the starting info for a delegator reward
+ * period. It tracks the previous validator period, the delegation's amount of
+ * staking token, and the creation height (to check later on if any slashes have
+ * occurred). NOTE: Even though validators are slashed to whole staking tokens,
+ * the delegators within the validator may be left with less than a full token,
+ * thus sdk.Dec is used.
+ */
 export interface DelegatorStartingInfoSDKType {
   previous_period: Long;
   stake: string;
@@ -216,6 +316,15 @@ export interface DelegationDelegatorReward {
  * DelegationDelegatorReward represents the properties
  * of a delegator's delegation reward.
  */
+export interface DelegationDelegatorRewardAmino {
+  validator_address: string;
+  reward: DecCoinAmino[];
+}
+
+/**
+ * DelegationDelegatorReward represents the properties
+ * of a delegator's delegation reward.
+ */
 export interface DelegationDelegatorRewardSDKType {
   validator_address: string;
   reward: DecCoinSDKType[];
@@ -226,6 +335,18 @@ export interface DelegationDelegatorRewardSDKType {
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDeposit {
+  title: string;
+  description: string;
+  recipient: string;
+  amount: string;
+  deposit: string;
+}
+
+/**
+ * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
+ * with a deposit
+ */
+export interface CommunityPoolSpendProposalWithDepositAmino {
   title: string;
   description: string;
   recipient: string;
@@ -352,6 +473,24 @@ export const Params = {
     obj.bonus_proposer_reward = message.bonusProposerReward;
     obj.withdraw_addr_enabled = message.withdrawAddrEnabled;
     return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      communityTax: object.community_tax,
+      baseProposerReward: object.base_proposer_reward,
+      bonusProposerReward: object.bonus_proposer_reward,
+      withdrawAddrEnabled: object.withdraw_addr_enabled
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.community_tax = message.communityTax;
+    obj.base_proposer_reward = message.baseProposerReward;
+    obj.bonus_proposer_reward = message.bonusProposerReward;
+    obj.withdraw_addr_enabled = message.withdrawAddrEnabled;
+    return obj;
   }
 
 };
@@ -441,6 +580,26 @@ export const ValidatorHistoricalRewards = {
 
     if (message.cumulativeRewardRatio) {
       obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.cumulative_reward_ratio = [];
+    }
+
+    obj.reference_count = message.referenceCount;
+    return obj;
+  },
+
+  fromAmino(object: ValidatorHistoricalRewardsAmino): ValidatorHistoricalRewards {
+    return {
+      cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromAmino(e)) : [],
+      referenceCount: object.reference_count
+    };
+  },
+
+  toAmino(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAmino {
+    const obj: any = {};
+
+    if (message.cumulativeRewardRatio) {
+      obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.cumulative_reward_ratio = [];
     }
@@ -542,6 +701,26 @@ export const ValidatorCurrentRewards = {
 
     obj.period = message.period;
     return obj;
+  },
+
+  fromAmino(object: ValidatorCurrentRewardsAmino): ValidatorCurrentRewards {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
+      period: Long.fromString(object.period)
+    };
+  },
+
+  toAmino(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAmino {
+    const obj: any = {};
+
+    if (message.rewards) {
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.rewards = [];
+    }
+
+    obj.period = message.period ? message.period.toString() : undefined;
+    return obj;
   }
 
 };
@@ -623,6 +802,24 @@ export const ValidatorAccumulatedCommission = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ValidatorAccumulatedCommissionAmino): ValidatorAccumulatedCommission {
+    return {
+      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionAmino {
+    const obj: any = {};
+
+    if (message.commission) {
+      obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e) : undefined);
+    } else {
+      obj.commission = [];
+    }
+
+    return obj;
   }
 
 };
@@ -699,6 +896,24 @@ export const ValidatorOutstandingRewards = {
 
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.rewards = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ValidatorOutstandingRewardsAmino): ValidatorOutstandingRewards {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsAmino {
+    const obj: any = {};
+
+    if (message.rewards) {
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.rewards = [];
     }
@@ -787,6 +1002,20 @@ export const ValidatorSlashEvent = {
     obj.validator_period = message.validatorPeriod;
     obj.fraction = message.fraction;
     return obj;
+  },
+
+  fromAmino(object: ValidatorSlashEventAmino): ValidatorSlashEvent {
+    return {
+      validatorPeriod: Long.fromString(object.validator_period),
+      fraction: object.fraction
+    };
+  },
+
+  toAmino(message: ValidatorSlashEvent): ValidatorSlashEventAmino {
+    const obj: any = {};
+    obj.validator_period = message.validatorPeriod ? message.validatorPeriod.toString() : undefined;
+    obj.fraction = message.fraction;
+    return obj;
   }
 
 };
@@ -868,6 +1097,24 @@ export const ValidatorSlashEvents = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ValidatorSlashEventsAmino): ValidatorSlashEvents {
+    return {
+      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ValidatorSlashEvents): ValidatorSlashEventsAmino {
+    const obj: any = {};
+
+    if (message.validatorSlashEvents) {
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e) : undefined);
+    } else {
+      obj.validator_slash_events = [];
+    }
+
+    return obj;
   }
 
 };
@@ -944,6 +1191,24 @@ export const FeePool = {
 
     if (message.communityPool) {
       obj.community_pool = message.communityPool.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.community_pool = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: FeePoolAmino): FeePool {
+    return {
+      communityPool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: FeePool): FeePoolAmino {
+    const obj: any = {};
+
+    if (message.communityPool) {
+      obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.community_pool = [];
     }
@@ -1072,6 +1337,30 @@ export const CommunityPoolSpendProposal = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: CommunityPoolSpendProposalAmino): CommunityPoolSpendProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      recipient: object.recipient,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.recipient = message.recipient;
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1169,6 +1458,22 @@ export const DelegatorStartingInfo = {
     obj.stake = message.stake;
     obj.height = message.height;
     return obj;
+  },
+
+  fromAmino(object: DelegatorStartingInfoAmino): DelegatorStartingInfo {
+    return {
+      previousPeriod: Long.fromString(object.previous_period),
+      stake: object.stake,
+      height: Long.fromString(object.height)
+    };
+  },
+
+  toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
+    const obj: any = {};
+    obj.previous_period = message.previousPeriod ? message.previousPeriod.toString() : undefined;
+    obj.stake = message.stake;
+    obj.height = message.height ? message.height.toString() : undefined;
+    return obj;
   }
 
 };
@@ -1259,6 +1564,26 @@ export const DelegationDelegatorReward = {
 
     if (message.reward) {
       obj.reward = message.reward.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.reward = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: DelegationDelegatorRewardAmino): DelegationDelegatorReward {
+    return {
+      validatorAddress: object.validator_address,
+      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: DelegationDelegatorReward): DelegationDelegatorRewardAmino {
+    const obj: any = {};
+    obj.validator_address = message.validatorAddress;
+
+    if (message.reward) {
+      obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.reward = [];
     }
@@ -1382,6 +1707,26 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
 
   toSDK(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.recipient = message.recipient;
+    obj.amount = message.amount;
+    obj.deposit = message.deposit;
+    return obj;
+  },
+
+  fromAmino(object: CommunityPoolSpendProposalWithDepositAmino): CommunityPoolSpendProposalWithDeposit {
+    return {
+      title: object.title,
+      description: object.description,
+      recipient: object.recipient,
+      amount: object.amount,
+      deposit: object.deposit
+    };
+  },
+
+  toAmino(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;

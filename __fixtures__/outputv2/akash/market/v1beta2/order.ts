@@ -1,4 +1,4 @@
-import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";
@@ -19,6 +19,7 @@ export enum Order_State {
   UNRECOGNIZED = -1,
 }
 export const Order_StateSDKType = Order_State;
+export const Order_StateAmino = Order_State;
 export function order_StateFromJSON(object: any): Order_State {
   switch (object) {
     case 0:
@@ -72,6 +73,14 @@ export interface OrderID {
 }
 
 /** OrderID stores owner and all other seq numbers */
+export interface OrderIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+}
+
+/** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
   dseq: Long;
@@ -88,6 +97,14 @@ export interface Order {
 }
 
 /** Order stores orderID, state of order and other details */
+export interface OrderAmino {
+  order_id?: OrderIDAmino;
+  state: Order_State;
+  spec?: GroupSpecAmino;
+  created_at: string;
+}
+
+/** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
   order_id?: OrderIDSDKType;
   state: Order_State;
@@ -99,6 +116,15 @@ export interface OrderSDKType {
 export interface OrderFilters {
   owner: string;
   dseq: Long;
+  gseq: number;
+  oseq: number;
+  state: string;
+}
+
+/** OrderFilters defines flags for order list filter */
+export interface OrderFiltersAmino {
+  owner: string;
+  dseq: string;
   gseq: number;
   oseq: number;
   state: string;
@@ -220,6 +246,24 @@ export const OrderID = {
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
+  },
+
+  fromAmino(object: OrderIDAmino): OrderID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq
+    };
+  },
+
+  toAmino(message: OrderID): OrderIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    return obj;
   }
 
 };
@@ -330,6 +374,24 @@ export const Order = {
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
     obj.created_at = message.createdAt;
+    return obj;
+  },
+
+  fromAmino(object: OrderAmino): Order {
+    return {
+      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+
+  toAmino(message: Order): OrderAmino {
+    const obj: any = {};
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
+    obj.state = message.state;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   }
 
@@ -452,6 +514,26 @@ export const OrderFilters = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.state = message.state;
+    return obj;
+  },
+
+  fromAmino(object: OrderFiltersAmino): OrderFilters {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      state: object.state
+    };
+  },
+
+  toAmino(message: OrderFilters): OrderFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.state = message.state;

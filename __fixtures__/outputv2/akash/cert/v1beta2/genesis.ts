@@ -1,4 +1,4 @@
-import { Certificate, CertificateSDKType } from "./cert";
+import { Certificate, CertificateAmino, CertificateSDKType } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
@@ -10,6 +10,12 @@ export interface GenesisCertificate {
 }
 
 /** GenesisCertificate defines certificate entry at genesis */
+export interface GenesisCertificateAmino {
+  owner: string;
+  certificate?: CertificateAmino;
+}
+
+/** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
   owner: string;
   certificate?: CertificateSDKType;
@@ -18,6 +24,11 @@ export interface GenesisCertificateSDKType {
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisState {
   certificates: GenesisCertificate[];
+}
+
+/** GenesisState defines the basic genesis state used by cert module */
+export interface GenesisStateAmino {
+  certificates: GenesisCertificateAmino[];
 }
 
 /** GenesisState defines the basic genesis state used by cert module */
@@ -104,6 +115,20 @@ export const GenesisCertificate = {
     obj.owner = message.owner;
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
+    return {
+      owner: object.owner,
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
+    };
+  },
+
+  toAmino(message: GenesisCertificate): GenesisCertificateAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    return obj;
   }
 
 };
@@ -180,6 +205,24 @@ export const GenesisState = {
 
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toSDK(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e) : undefined);
     } else {
       obj.certificates = [];
     }

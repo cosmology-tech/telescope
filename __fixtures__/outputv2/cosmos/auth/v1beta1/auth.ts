@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -13,6 +13,18 @@ export interface BaseAccount {
   pubKey?: Any;
   accountNumber: Long;
   sequence: Long;
+}
+
+/**
+ * BaseAccount defines a base account type. It contains all the necessary fields
+ * for basic account functionality. Any custom account type should extend this
+ * type for additional functionality (e.g. vesting).
+ */
+export interface BaseAccountAmino {
+  address: string;
+  pub_key?: AnyAmino;
+  account_number: string;
+  sequence: string;
 }
 
 /**
@@ -35,6 +47,13 @@ export interface ModuleAccount {
 }
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
+export interface ModuleAccountAmino {
+  base_account?: BaseAccountAmino;
+  name: string;
+  permissions: string[];
+}
+
+/** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
   base_account?: BaseAccountSDKType;
   name: string;
@@ -48,6 +67,15 @@ export interface Params {
   txSizeCostPerByte: Long;
   sigVerifyCostEd25519: Long;
   sigVerifyCostSecp256k1: Long;
+}
+
+/** Params defines the parameters for the auth module. */
+export interface ParamsAmino {
+  max_memo_characters: string;
+  tx_sig_limit: string;
+  tx_size_cost_per_byte: string;
+  sig_verify_cost_ed25519: string;
+  sig_verify_cost_secp256k1: string;
 }
 
 /** Params defines the parameters for the auth module. */
@@ -166,6 +194,24 @@ export const BaseAccount = {
     obj.account_number = message.accountNumber;
     obj.sequence = message.sequence;
     return obj;
+  },
+
+  fromAmino(object: BaseAccountAmino): BaseAccount {
+    return {
+      address: object.address,
+      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
+      accountNumber: Long.fromString(object.account_number),
+      sequence: Long.fromString(object.sequence)
+    };
+  },
+
+  toAmino(message: BaseAccount): BaseAccountAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
+    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    return obj;
   }
 
 };
@@ -266,6 +312,28 @@ export const ModuleAccount = {
   toSDK(message: ModuleAccount): ModuleAccountSDKType {
     const obj: any = {};
     message.baseAccount !== undefined && (obj.base_account = message.baseAccount ? BaseAccount.toSDK(message.baseAccount) : undefined);
+    obj.name = message.name;
+
+    if (message.permissions) {
+      obj.permissions = message.permissions.map(e => e);
+    } else {
+      obj.permissions = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ModuleAccountAmino): ModuleAccount {
+    return {
+      baseAccount: object?.base_account ? BaseAccount.fromAmino(object.base_account) : undefined,
+      name: object.name,
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ModuleAccount): ModuleAccountAmino {
+    const obj: any = {};
+    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
     obj.name = message.name;
 
     if (message.permissions) {
@@ -399,6 +467,26 @@ export const Params = {
     obj.tx_size_cost_per_byte = message.txSizeCostPerByte;
     obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519;
     obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      maxMemoCharacters: Long.fromString(object.max_memo_characters),
+      txSigLimit: Long.fromString(object.tx_sig_limit),
+      txSizeCostPerByte: Long.fromString(object.tx_size_cost_per_byte),
+      sigVerifyCostEd25519: Long.fromString(object.sig_verify_cost_ed25519),
+      sigVerifyCostSecp256k1: Long.fromString(object.sig_verify_cost_secp256k1)
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.max_memo_characters = message.maxMemoCharacters ? message.maxMemoCharacters.toString() : undefined;
+    obj.tx_sig_limit = message.txSigLimit ? message.txSigLimit.toString() : undefined;
+    obj.tx_size_cost_per_byte = message.txSizeCostPerByte ? message.txSizeCostPerByte.toString() : undefined;
+    obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519 ? message.sigVerifyCostEd25519.toString() : undefined;
+    obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1 ? message.sigVerifyCostSecp256k1.toString() : undefined;
     return obj;
   }
 

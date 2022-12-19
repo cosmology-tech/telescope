@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Grant, GrantSDKType } from "./feegrant";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
+import { QueryAllowanceRequest, QueryAllowanceRequestAmino, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseAmino, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestAmino, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseAmino, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestAmino, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseAmino, QueryAllowancesByGranterResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

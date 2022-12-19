@@ -1,6 +1,6 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Params, ParamsSDKType, BaseAccount, BaseAccountSDKType, ModuleAccount, ModuleAccountSDKType } from "./auth";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountAmino, BaseAccountSDKType, ModuleAccount, ModuleAccountAmino, ModuleAccountSDKType } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -13,6 +13,16 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryAccountsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -42,6 +52,19 @@ export interface QueryAccountsResponse {
  * 
  * Since: cosmos-sdk 0.43
  */
+export interface QueryAccountsResponseAmino {
+  /** accounts are the existing accounts */
+  accounts: AnyAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface QueryAccountsResponseSDKType {
   accounts: AnySDKType[];
   pagination?: PageResponseSDKType;
@@ -49,6 +72,12 @@ export interface QueryAccountsResponseSDKType {
 
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
+  /** address defines the address to query for. */
+  address: string;
+}
+
+/** QueryAccountRequest is the request type for the Query/Account RPC method. */
+export interface QueryAccountRequestAmino {
   /** address defines the address to query for. */
   address: string;
 }
@@ -62,12 +91,21 @@ export interface QueryAccountRequestSDKType {
 export interface QueryModuleAccountsRequest {}
 
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsRequestAmino {}
+
+/** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -82,6 +120,12 @@ export interface QueryAccountResponse {
 }
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
+export interface QueryAccountResponseAmino {
+  /** account defines the account of the corresponding address. */
+  account?: AnyAmino;
+}
+
+/** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
   account?: AnySDKType;
 }
@@ -90,11 +134,19 @@ export interface QueryAccountResponseSDKType {
 export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: (ModuleAccount & Any)[] | Any[];
+}
+
+/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsResponseAmino {
+  accounts: AnyAmino[];
 }
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
@@ -106,11 +158,19 @@ export interface QueryModuleAccountsResponseSDKType {
 export interface Bech32PrefixRequest {}
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
+export interface Bech32PrefixRequestAmino {}
+
+/** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequestSDKType {}
 
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
+}
+
+/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
+export interface Bech32PrefixResponseAmino {
+  bech32_prefix: string;
 }
 
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
@@ -124,6 +184,11 @@ export interface AddressBytesToStringRequest {
 }
 
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
+export interface AddressBytesToStringRequestAmino {
+  address_bytes: Uint8Array;
+}
+
+/** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestSDKType {
   address_bytes: Uint8Array;
 }
@@ -131,6 +196,11 @@ export interface AddressBytesToStringRequestSDKType {
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
+}
+
+/** AddressBytesToStringResponse is the response type for AddressString rpc method */
+export interface AddressBytesToStringResponseAmino {
+  address_string: string;
 }
 
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
@@ -144,6 +214,11 @@ export interface AddressStringToBytesRequest {
 }
 
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
+export interface AddressStringToBytesRequestAmino {
+  address_string: string;
+}
+
+/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequestSDKType {
   address_string: string;
 }
@@ -151,6 +226,11 @@ export interface AddressStringToBytesRequestSDKType {
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
+}
+
+/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
+export interface AddressStringToBytesResponseAmino {
+  address_bytes: Uint8Array;
 }
 
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
@@ -223,6 +303,18 @@ export const QueryAccountsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -237,7 +329,7 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
 export const QueryAccountsResponse = {
   encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+      Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();
     }
 
     if (message.pagination !== undefined) {
@@ -257,7 +349,7 @@ export const QueryAccountsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push(Any.decode(reader, reader.uint32()));
+          message.accounts.push((AccountI_InterfaceDecoder(reader) as Any));
           break;
 
         case 2:
@@ -317,6 +409,26 @@ export const QueryAccountsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => AccountI_FromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any)) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -387,6 +499,18 @@ export const QueryAccountRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAmino(object: QueryAccountRequestAmino): QueryAccountRequest {
+    return {
+      address: object.address
+    };
+  },
+
+  toAmino(message: QueryAccountRequest): QueryAccountRequestAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
   }
 
 };
@@ -437,6 +561,15 @@ export const QueryModuleAccountsRequest = {
   },
 
   toSDK(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -508,6 +641,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
   }
 
 };
@@ -521,7 +666,7 @@ function createBaseQueryAccountResponse(): QueryAccountResponse {
 export const QueryAccountResponse = {
   encode(message: QueryAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
-      Any.encode(message.account, writer.uint32(10).fork()).ldelim();
+      Any.encode((message.account as Any), writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -537,7 +682,7 @@ export const QueryAccountResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.account = Any.decode(reader, reader.uint32());
+          message.account = (AccountI_InterfaceDecoder(reader) as Any);
           break;
 
         default:
@@ -576,6 +721,18 @@ export const QueryAccountResponse = {
   toSDK(message: QueryAccountResponse): QueryAccountResponseSDKType {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toSDK(message.account) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAccountResponseAmino): QueryAccountResponse {
+    return {
+      account: object?.account ? AccountI_FromAmino(object.account) : undefined
+    };
+  },
+
+  toAmino(message: QueryAccountResponse): QueryAccountResponseAmino {
+    const obj: any = {};
+    obj.account = message.account ? AccountI_ToAmino((message.account as Any)) : undefined;
     return obj;
   }
 
@@ -629,6 +786,15 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -642,7 +808,7 @@ function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
 export const QueryModuleAccountsResponse = {
   encode(message: QueryModuleAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+      Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();
     }
 
     return writer;
@@ -658,7 +824,7 @@ export const QueryModuleAccountsResponse = {
 
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push(Any.decode(reader, reader.uint32()));
+          message.accounts.push((ModuleAccountI_InterfaceDecoder(reader) as Any));
           break;
 
         default:
@@ -705,6 +871,24 @@ export const QueryModuleAccountsResponse = {
 
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => ModuleAccountI_FromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAmino {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any)) : undefined);
     } else {
       obj.accounts = [];
     }
@@ -760,6 +944,15 @@ export const Bech32PrefixRequest = {
   },
 
   toSDK(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
+    return {};
+  },
+
+  toAmino(_: Bech32PrefixRequest): Bech32PrefixRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -828,6 +1021,18 @@ export const Bech32PrefixResponse = {
   },
 
   toSDK(message: Bech32PrefixResponse): Bech32PrefixResponseSDKType {
+    const obj: any = {};
+    obj.bech32_prefix = message.bech32Prefix;
+    return obj;
+  },
+
+  fromAmino(object: Bech32PrefixResponseAmino): Bech32PrefixResponse {
+    return {
+      bech32Prefix: object.bech32_prefix
+    };
+  },
+
+  toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseAmino {
     const obj: any = {};
     obj.bech32_prefix = message.bech32Prefix;
     return obj;
@@ -900,6 +1105,18 @@ export const AddressBytesToStringRequest = {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
+  },
+
+  fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
+    return {
+      addressBytes: object.address_bytes
+    };
+  },
+
+  toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
+    const obj: any = {};
+    obj.address_bytes = message.addressBytes;
+    return obj;
   }
 
 };
@@ -966,6 +1183,18 @@ export const AddressBytesToStringResponse = {
   },
 
   toSDK(message: AddressBytesToStringResponse): AddressBytesToStringResponseSDKType {
+    const obj: any = {};
+    obj.address_string = message.addressString;
+    return obj;
+  },
+
+  fromAmino(object: AddressBytesToStringResponseAmino): AddressBytesToStringResponse {
+    return {
+      addressString: object.address_string
+    };
+  },
+
+  toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseAmino {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
@@ -1038,6 +1267,18 @@ export const AddressStringToBytesRequest = {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
+  },
+
+  fromAmino(object: AddressStringToBytesRequestAmino): AddressStringToBytesRequest {
+    return {
+      addressString: object.address_string
+    };
+  },
+
+  toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestAmino {
+    const obj: any = {};
+    obj.address_string = message.addressString;
+    return obj;
   }
 
 };
@@ -1107,6 +1348,18 @@ export const AddressStringToBytesResponse = {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
+  },
+
+  fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
+    return {
+      addressBytes: object.address_bytes
+    };
+  },
+
+  toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
+    const obj: any = {};
+    obj.address_bytes = message.addressBytes;
+    return obj;
   }
 
 };
@@ -1122,6 +1375,30 @@ export const AccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): BaseA
       return data;
   }
 };
+export const AccountI_FromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/BaseAccount":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
+        value: BaseAccount.encode(BaseAccount.fromPartial((content.value as DeepPartial<BaseAccount>))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};
+export const AccountI_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.auth.v1beta1.BaseAccount":
+      return {
+        type: "cosmos-sdk/BaseAccount",
+        value: BaseAccount.toAmino(BaseAccount.decode(content.value))
+      };
+
+    default:
+      return Any.toAmino(content);
+  }
+};
 export const ModuleAccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): ModuleAccount | Any => {
   const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
   const data = Any.decode(reader, reader.uint32());
@@ -1132,5 +1409,29 @@ export const ModuleAccountI_InterfaceDecoder = (input: _m0.Reader | Uint8Array):
 
     default:
       return data;
+  }
+};
+export const ModuleAccountI_FromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/ModuleAccount":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
+        value: ModuleAccount.encode(ModuleAccount.fromPartial((content.value as DeepPartial<ModuleAccount>))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};
+export const ModuleAccountI_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.auth.v1beta1.ModuleAccount":
+      return {
+        type: "cosmos-sdk/ModuleAccount",
+        value: ModuleAccount.toAmino(ModuleAccount.decode(content.value))
+      };
+
+    default:
+      return Any.toAmino(content);
   }
 };

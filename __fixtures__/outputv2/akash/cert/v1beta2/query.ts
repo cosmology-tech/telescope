@@ -1,5 +1,5 @@
-import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
@@ -7,6 +7,12 @@ export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
   certificate?: Certificate;
+  serial: string;
+}
+
+/** CertificateResponse contains a single X509 certificate and its serial number */
+export interface CertificateResponseAmino {
+  certificate?: CertificateAmino;
   serial: string;
 }
 
@@ -23,6 +29,12 @@ export interface QueryCertificatesRequest {
 }
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryCertificatesRequestAmino {
+  filter?: CertificateFilterAmino;
+  pagination?: PageRequestAmino;
+}
+
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter?: CertificateFilterSDKType;
   pagination?: PageRequestSDKType;
@@ -32,6 +44,12 @@ export interface QueryCertificatesRequestSDKType {
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
+}
+
+/** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+export interface QueryCertificatesResponseAmino {
+  certificates: CertificateResponseAmino[];
+  pagination?: PageResponseAmino;
 }
 
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
@@ -119,6 +137,20 @@ export const CertificateResponse = {
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
     obj.serial = message.serial;
     return obj;
+  },
+
+  fromAmino(object: CertificateResponseAmino): CertificateResponse {
+    return {
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined,
+      serial: object.serial
+    };
+  },
+
+  toAmino(message: CertificateResponse): CertificateResponseAmino {
+    const obj: any = {};
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    obj.serial = message.serial;
+    return obj;
   }
 
 };
@@ -201,6 +233,20 @@ export const QueryCertificatesRequest = {
     const obj: any = {};
     message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toSDK(message.filter) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryCertificatesRequestAmino): QueryCertificatesRequest {
+    return {
+      filter: object?.filter ? CertificateFilter.fromAmino(object.filter) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryCertificatesRequest): QueryCertificatesRequestAmino {
+    const obj: any = {};
+    obj.filter = message.filter ? CertificateFilter.toAmino(message.filter) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -296,6 +342,26 @@ export const QueryCertificatesResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryCertificatesResponseAmino): QueryCertificatesResponse {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryCertificatesResponse): QueryCertificatesResponseAmino {
+    const obj: any = {};
+
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 

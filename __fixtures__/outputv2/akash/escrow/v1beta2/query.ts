@@ -1,5 +1,5 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
@@ -11,6 +11,15 @@ export interface QueryAccountsRequest {
   owner: string;
   state: string;
   pagination?: PageRequest;
+}
+
+/** QueryAccountRequest is request type for the Query/Account RPC method */
+export interface QueryAccountsRequestAmino {
+  scope: string;
+  xid: string;
+  owner: string;
+  state: string;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryAccountRequest is request type for the Query/Account RPC method */
@@ -26,6 +35,12 @@ export interface QueryAccountsRequestSDKType {
 export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryAccountsResponseAmino {
+  accounts: AccountAmino[];
+  pagination?: PageResponseAmino;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -45,6 +60,16 @@ export interface QueryPaymentsRequest {
 }
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
+export interface QueryPaymentsRequestAmino {
+  scope: string;
+  xid: string;
+  id: string;
+  owner: string;
+  state: string;
+  pagination?: PageRequestAmino;
+}
+
+/** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
   scope: string;
   xid: string;
@@ -58,6 +83,12 @@ export interface QueryPaymentsRequestSDKType {
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
   pagination?: PageResponse;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryPaymentsResponseAmino {
+  payments: FractionalPaymentAmino[];
+  pagination?: PageResponseAmino;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -187,6 +218,26 @@ export const QueryAccountsRequest = {
     obj.state = message.state;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
+    return {
+      scope: object.scope,
+      xid: object.xid,
+      owner: object.owner,
+      state: object.state,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -281,6 +332,26 @@ export const QueryAccountsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -421,6 +492,28 @@ export const QueryPaymentsRequest = {
     obj.state = message.state;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
+    return {
+      scope: object.scope,
+      xid: object.xid,
+      id: object.id,
+      owner: object.owner,
+      state: object.state,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -515,6 +608,26 @@ export const QueryPaymentsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryPaymentsResponseAmino): QueryPaymentsResponse {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPaymentsResponse): QueryPaymentsResponseAmino {
+    const obj: any = {};
+
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 

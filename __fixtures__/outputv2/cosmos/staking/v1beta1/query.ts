@@ -1,5 +1,5 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Validator, ValidatorAmino, ValidatorSDKType, DelegationResponse, DelegationResponseAmino, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseAmino, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoAmino, HistoricalInfoSDKType, Pool, PoolAmino, PoolSDKType, Params, ParamsAmino, ParamsSDKType } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -11,6 +11,15 @@ export interface QueryValidatorsRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryValidatorsRequest is request type for Query/Validators RPC method. */
+export interface QueryValidatorsRequestAmino {
+  /** status enables to query for validators matching a given status. */
+  status: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /** QueryValidatorsRequest is request type for Query/Validators RPC method. */
@@ -29,6 +38,15 @@ export interface QueryValidatorsResponse {
 }
 
 /** QueryValidatorsResponse is response type for the Query/Validators RPC method */
+export interface QueryValidatorsResponseAmino {
+  /** validators contains all the queried validators. */
+  validators: ValidatorAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/** QueryValidatorsResponse is response type for the Query/Validators RPC method */
 export interface QueryValidatorsResponseSDKType {
   validators: ValidatorSDKType[];
   pagination?: PageResponseSDKType;
@@ -41,6 +59,12 @@ export interface QueryValidatorRequest {
 }
 
 /** QueryValidatorRequest is response type for the Query/Validator RPC method */
+export interface QueryValidatorRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
+/** QueryValidatorRequest is response type for the Query/Validator RPC method */
 export interface QueryValidatorRequestSDKType {
   validator_addr: string;
 }
@@ -49,6 +73,12 @@ export interface QueryValidatorRequestSDKType {
 export interface QueryValidatorResponse {
   /** validator defines the the validator info. */
   validator?: Validator;
+}
+
+/** QueryValidatorResponse is response type for the Query/Validator RPC method */
+export interface QueryValidatorResponseAmino {
+  /** validator defines the the validator info. */
+  validator?: ValidatorAmino;
 }
 
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
@@ -72,6 +102,18 @@ export interface QueryValidatorDelegationsRequest {
  * QueryValidatorDelegationsRequest is request type for the
  * Query/ValidatorDelegations RPC method
  */
+export interface QueryValidatorDelegationsRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryValidatorDelegationsRequest is request type for the
+ * Query/ValidatorDelegations RPC method
+ */
 export interface QueryValidatorDelegationsRequestSDKType {
   validator_addr: string;
   pagination?: PageRequestSDKType;
@@ -86,6 +128,17 @@ export interface QueryValidatorDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryValidatorDelegationsResponse is response type for the
+ * Query/ValidatorDelegations RPC method
+ */
+export interface QueryValidatorDelegationsResponseAmino {
+  delegation_responses: DelegationResponseAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -113,6 +166,18 @@ export interface QueryValidatorUnbondingDelegationsRequest {
  * QueryValidatorUnbondingDelegationsRequest is required type for the
  * Query/ValidatorUnbondingDelegations RPC method
  */
+export interface QueryValidatorUnbondingDelegationsRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryValidatorUnbondingDelegationsRequest is required type for the
+ * Query/ValidatorUnbondingDelegations RPC method
+ */
 export interface QueryValidatorUnbondingDelegationsRequestSDKType {
   validator_addr: string;
   pagination?: PageRequestSDKType;
@@ -127,6 +192,17 @@ export interface QueryValidatorUnbondingDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryValidatorUnbondingDelegationsResponse is response type for the
+ * Query/ValidatorUnbondingDelegations RPC method.
+ */
+export interface QueryValidatorUnbondingDelegationsResponseAmino {
+  unbonding_responses: UnbondingDelegationAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -148,6 +224,15 @@ export interface QueryDelegationRequest {
 }
 
 /** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
+export interface QueryDelegationRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
+/** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
 export interface QueryDelegationRequestSDKType {
   delegator_addr: string;
   validator_addr: string;
@@ -157,6 +242,12 @@ export interface QueryDelegationRequestSDKType {
 export interface QueryDelegationResponse {
   /** delegation_responses defines the delegation info of a delegation. */
   delegationResponse?: DelegationResponse;
+}
+
+/** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
+export interface QueryDelegationResponseAmino {
+  /** delegation_responses defines the delegation info of a delegation. */
+  delegation_response?: DelegationResponseAmino;
 }
 
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
@@ -174,6 +265,18 @@ export interface QueryUnbondingDelegationRequest {
 
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
+}
+
+/**
+ * QueryUnbondingDelegationRequest is request type for the
+ * Query/UnbondingDelegation RPC method.
+ */
+export interface QueryUnbondingDelegationRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
 }
 
 /**
@@ -198,6 +301,15 @@ export interface QueryUnbondingDelegationResponse {
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
  * RPC method.
  */
+export interface QueryUnbondingDelegationResponseAmino {
+  /** unbond defines the unbonding information of a delegation. */
+  unbond?: UnbondingDelegationAmino;
+}
+
+/**
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation
+ * RPC method.
+ */
 export interface QueryUnbondingDelegationResponseSDKType {
   unbond?: UnbondingDelegationSDKType;
 }
@@ -212,6 +324,18 @@ export interface QueryDelegatorDelegationsRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryDelegatorDelegationsRequest is request type for the
+ * Query/DelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorDelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
 }
 
 /**
@@ -239,6 +363,18 @@ export interface QueryDelegatorDelegationsResponse {
  * QueryDelegatorDelegationsResponse is response type for the
  * Query/DelegatorDelegations RPC method.
  */
+export interface QueryDelegatorDelegationsResponseAmino {
+  /** delegation_responses defines all the delegations' info of a delegator. */
+  delegation_responses: DelegationResponseAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+
+/**
+ * QueryDelegatorDelegationsResponse is response type for the
+ * Query/DelegatorDelegations RPC method.
+ */
 export interface QueryDelegatorDelegationsResponseSDKType {
   delegation_responses: DelegationResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -260,6 +396,18 @@ export interface QueryDelegatorUnbondingDelegationsRequest {
  * QueryDelegatorUnbondingDelegationsRequest is request type for the
  * Query/DelegatorUnbondingDelegations RPC method.
  */
+export interface QueryDelegatorUnbondingDelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryDelegatorUnbondingDelegationsRequest is request type for the
+ * Query/DelegatorUnbondingDelegations RPC method.
+ */
 export interface QueryDelegatorUnbondingDelegationsRequestSDKType {
   delegator_addr: string;
   pagination?: PageRequestSDKType;
@@ -274,6 +422,17 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the
+ * Query/UnbondingDelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorUnbondingDelegationsResponseAmino {
+  unbonding_responses: UnbondingDelegationAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -307,6 +466,24 @@ export interface QueryRedelegationsRequest {
  * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
  * method.
  */
+export interface QueryRedelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** src_validator_addr defines the validator address to redelegate from. */
+  src_validator_addr: string;
+
+  /** dst_validator_addr defines the validator address to redelegate to. */
+  dst_validator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
+ * method.
+ */
 export interface QueryRedelegationsRequestSDKType {
   delegator_addr: string;
   src_validator_addr: string;
@@ -323,6 +500,17 @@ export interface QueryRedelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
+ * method.
+ */
+export interface QueryRedelegationsResponseAmino {
+  redelegation_responses: RedelegationResponseAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -350,6 +538,18 @@ export interface QueryDelegatorValidatorsRequest {
  * QueryDelegatorValidatorsRequest is request type for the
  * Query/DelegatorValidators RPC method.
  */
+export interface QueryDelegatorValidatorsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+
+/**
+ * QueryDelegatorValidatorsRequest is request type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsRequestSDKType {
   delegator_addr: string;
   pagination?: PageRequestSDKType;
@@ -365,6 +565,18 @@ export interface QueryDelegatorValidatorsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDelegatorValidatorsResponse is response type for the
+ * Query/DelegatorValidators RPC method.
+ */
+export interface QueryDelegatorValidatorsResponseAmino {
+  /** validators defines the the validators' info of a delegator. */
+  validators: ValidatorAmino[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
 }
 
 /**
@@ -392,6 +604,18 @@ export interface QueryDelegatorValidatorRequest {
  * QueryDelegatorValidatorRequest is request type for the
  * Query/DelegatorValidator RPC method.
  */
+export interface QueryDelegatorValidatorRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
+/**
+ * QueryDelegatorValidatorRequest is request type for the
+ * Query/DelegatorValidator RPC method.
+ */
 export interface QueryDelegatorValidatorRequestSDKType {
   delegator_addr: string;
   validator_addr: string;
@@ -404,6 +628,15 @@ export interface QueryDelegatorValidatorRequestSDKType {
 export interface QueryDelegatorValidatorResponse {
   /** validator defines the the validator info. */
   validator?: Validator;
+}
+
+/**
+ * QueryDelegatorValidatorResponse response type for the
+ * Query/DelegatorValidator RPC method.
+ */
+export interface QueryDelegatorValidatorResponseAmino {
+  /** validator defines the the validator info. */
+  validator?: ValidatorAmino;
 }
 
 /**
@@ -427,6 +660,15 @@ export interface QueryHistoricalInfoRequest {
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
  * method.
  */
+export interface QueryHistoricalInfoRequestAmino {
+  /** height defines at which height to query the historical info. */
+  height: string;
+}
+
+/**
+ * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoRequestSDKType {
   height: Long;
 }
@@ -444,12 +686,24 @@ export interface QueryHistoricalInfoResponse {
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
  * method.
  */
+export interface QueryHistoricalInfoResponseAmino {
+  /** hist defines the historical info at the given height. */
+  hist?: HistoricalInfoAmino;
+}
+
+/**
+ * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoResponseSDKType {
   hist?: HistoricalInfoSDKType;
 }
 
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequest {}
+
+/** QueryPoolRequest is request type for the Query/Pool RPC method. */
+export interface QueryPoolRequestAmino {}
 
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequestSDKType {}
@@ -461,6 +715,12 @@ export interface QueryPoolResponse {
 }
 
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
+export interface QueryPoolResponseAmino {
+  /** pool defines the pool info. */
+  pool?: PoolAmino;
+}
+
+/** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponseSDKType {
   pool?: PoolSDKType;
 }
@@ -469,12 +729,21 @@ export interface QueryPoolResponseSDKType {
 export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+
+/** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
   params?: Params;
+}
+
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params holds all the parameters of this module. */
+  params?: ParamsAmino;
 }
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
@@ -560,6 +829,20 @@ export const QueryValidatorsRequest = {
     const obj: any = {};
     obj.status = message.status;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryValidatorsRequestAmino): QueryValidatorsRequest {
+    return {
+      status: object.status,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorsRequest): QueryValidatorsRequestAmino {
+    const obj: any = {};
+    obj.status = message.status;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -656,6 +939,26 @@ export const QueryValidatorsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryValidatorsResponseAmino): QueryValidatorsResponse {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorsResponse): QueryValidatorsResponseAmino {
+    const obj: any = {};
+
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -722,6 +1025,18 @@ export const QueryValidatorRequest = {
   },
 
   toSDK(message: QueryValidatorRequest): QueryValidatorRequestSDKType {
+    const obj: any = {};
+    obj.validator_addr = message.validatorAddr;
+    return obj;
+  },
+
+  fromAmino(object: QueryValidatorRequestAmino): QueryValidatorRequest {
+    return {
+      validatorAddr: object.validator_addr
+    };
+  },
+
+  toAmino(message: QueryValidatorRequest): QueryValidatorRequestAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
@@ -793,6 +1108,18 @@ export const QueryValidatorResponse = {
   toSDK(message: QueryValidatorResponse): QueryValidatorResponseSDKType {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryValidatorResponseAmino): QueryValidatorResponse {
+    return {
+      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorResponse): QueryValidatorResponseAmino {
+    const obj: any = {};
+    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
     return obj;
   }
 
@@ -876,6 +1203,20 @@ export const QueryValidatorDelegationsRequest = {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryValidatorDelegationsRequestAmino): QueryValidatorDelegationsRequest {
+    return {
+      validatorAddr: object.validator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAmino {
+    const obj: any = {};
+    obj.validator_addr = message.validatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -972,6 +1313,26 @@ export const QueryValidatorDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryValidatorDelegationsResponseAmino): QueryValidatorDelegationsResponse {
+    return {
+      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseAmino {
+    const obj: any = {};
+
+    if (message.delegationResponses) {
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
+    } else {
+      obj.delegation_responses = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1054,6 +1415,20 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryValidatorUnbondingDelegationsRequestAmino): QueryValidatorUnbondingDelegationsRequest {
+    return {
+      validatorAddr: object.validator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAmino {
+    const obj: any = {};
+    obj.validator_addr = message.validatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1150,6 +1525,26 @@ export const QueryValidatorUnbondingDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryValidatorUnbondingDelegationsResponseAmino): QueryValidatorUnbondingDelegationsResponse {
+    return {
+      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseAmino {
+    const obj: any = {};
+
+    if (message.unbondingResponses) {
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
+    } else {
+      obj.unbonding_responses = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1233,6 +1628,20 @@ export const QueryDelegationRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromAmino(object: QueryDelegationRequestAmino): QueryDelegationRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      validatorAddr: object.validator_addr
+    };
+  },
+
+  toAmino(message: QueryDelegationRequest): QueryDelegationRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr;
+    return obj;
   }
 
 };
@@ -1301,6 +1710,18 @@ export const QueryDelegationResponse = {
   toSDK(message: QueryDelegationResponse): QueryDelegationResponseSDKType {
     const obj: any = {};
     message.delegationResponse !== undefined && (obj.delegation_response = message.delegationResponse ? DelegationResponse.toSDK(message.delegationResponse) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegationResponseAmino): QueryDelegationResponse {
+    return {
+      delegationResponse: object?.delegation_response ? DelegationResponse.fromAmino(object.delegation_response) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegationResponse): QueryDelegationResponseAmino {
+    const obj: any = {};
+    obj.delegation_response = message.delegationResponse ? DelegationResponse.toAmino(message.delegationResponse) : undefined;
     return obj;
   }
 
@@ -1385,6 +1806,20 @@ export const QueryUnbondingDelegationRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromAmino(object: QueryUnbondingDelegationRequestAmino): QueryUnbondingDelegationRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      validatorAddr: object.validator_addr
+    };
+  },
+
+  toAmino(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr;
+    return obj;
   }
 
 };
@@ -1453,6 +1888,18 @@ export const QueryUnbondingDelegationResponse = {
   toSDK(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseSDKType {
     const obj: any = {};
     message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toSDK(message.unbond) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryUnbondingDelegationResponseAmino): QueryUnbondingDelegationResponse {
+    return {
+      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : undefined
+    };
+  },
+
+  toAmino(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAmino {
+    const obj: any = {};
+    obj.unbond = message.unbond ? UnbondingDelegation.toAmino(message.unbond) : undefined;
     return obj;
   }
 
@@ -1536,6 +1983,20 @@ export const QueryDelegatorDelegationsRequest = {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegatorDelegationsRequestAmino): QueryDelegatorDelegationsRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1632,6 +2093,26 @@ export const QueryDelegatorDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDelegatorDelegationsResponseAmino): QueryDelegatorDelegationsResponse {
+    return {
+      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseAmino {
+    const obj: any = {};
+
+    if (message.delegationResponses) {
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
+    } else {
+      obj.delegation_responses = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1714,6 +2195,20 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegatorUnbondingDelegationsRequestAmino): QueryDelegatorUnbondingDelegationsRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1809,6 +2304,26 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegatorUnbondingDelegationsResponseAmino): QueryDelegatorUnbondingDelegationsResponse {
+    return {
+      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseAmino {
+    const obj: any = {};
+
+    if (message.unbondingResponses) {
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
+    } else {
+      obj.unbonding_responses = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -1921,6 +2436,24 @@ export const QueryRedelegationsRequest = {
     obj.dst_validator_addr = message.dstValidatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryRedelegationsRequestAmino): QueryRedelegationsRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      srcValidatorAddr: object.src_validator_addr,
+      dstValidatorAddr: object.dst_validator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryRedelegationsRequest): QueryRedelegationsRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.src_validator_addr = message.srcValidatorAddr;
+    obj.dst_validator_addr = message.dstValidatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -2016,6 +2549,26 @@ export const QueryRedelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryRedelegationsResponseAmino): QueryRedelegationsResponse {
+    return {
+      redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryRedelegationsResponse): QueryRedelegationsResponseAmino {
+    const obj: any = {};
+
+    if (message.redelegationResponses) {
+      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toAmino(e) : undefined);
+    } else {
+      obj.redelegation_responses = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -2098,6 +2651,20 @@ export const QueryDelegatorValidatorsRequest = {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegatorValidatorsRequestAmino): QueryDelegatorValidatorsRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -2194,6 +2761,26 @@ export const QueryDelegatorValidatorsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDelegatorValidatorsResponseAmino): QueryDelegatorValidatorsResponse {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAmino {
+    const obj: any = {};
+
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -2277,6 +2864,20 @@ export const QueryDelegatorValidatorRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromAmino(object: QueryDelegatorValidatorRequestAmino): QueryDelegatorValidatorRequest {
+    return {
+      delegatorAddr: object.delegator_addr,
+      validatorAddr: object.validator_addr
+    };
+  },
+
+  toAmino(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAmino {
+    const obj: any = {};
+    obj.delegator_addr = message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr;
+    return obj;
   }
 
 };
@@ -2345,6 +2946,18 @@ export const QueryDelegatorValidatorResponse = {
   toSDK(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseSDKType {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDelegatorValidatorResponseAmino): QueryDelegatorValidatorResponse {
+    return {
+      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+    };
+  },
+
+  toAmino(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAmino {
+    const obj: any = {};
+    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
     return obj;
   }
 
@@ -2415,6 +3028,18 @@ export const QueryHistoricalInfoRequest = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromAmino(object: QueryHistoricalInfoRequestAmino): QueryHistoricalInfoRequest {
+    return {
+      height: Long.fromString(object.height)
+    };
+  },
+
+  toAmino(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestAmino {
+    const obj: any = {};
+    obj.height = message.height ? message.height.toString() : undefined;
+    return obj;
   }
 
 };
@@ -2484,6 +3109,18 @@ export const QueryHistoricalInfoResponse = {
     const obj: any = {};
     message.hist !== undefined && (obj.hist = message.hist ? HistoricalInfo.toSDK(message.hist) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryHistoricalInfoResponseAmino): QueryHistoricalInfoResponse {
+    return {
+      hist: object?.hist ? HistoricalInfo.fromAmino(object.hist) : undefined
+    };
+  },
+
+  toAmino(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseAmino {
+    const obj: any = {};
+    obj.hist = message.hist ? HistoricalInfo.toAmino(message.hist) : undefined;
+    return obj;
   }
 
 };
@@ -2534,6 +3171,15 @@ export const QueryPoolRequest = {
   },
 
   toSDK(_: QueryPoolRequest): QueryPoolRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryPoolRequestAmino): QueryPoolRequest {
+    return {};
+  },
+
+  toAmino(_: QueryPoolRequest): QueryPoolRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -2605,6 +3251,18 @@ export const QueryPoolResponse = {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = message.pool ? Pool.toSDK(message.pool) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
+    return {
+      pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolResponse): QueryPoolResponseAmino {
+    const obj: any = {};
+    obj.pool = message.pool ? Pool.toAmino(message.pool) : undefined;
+    return obj;
   }
 
 };
@@ -2655,6 +3313,15 @@ export const QueryParamsRequest = {
   },
 
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -2725,6 +3392,18 @@ export const QueryParamsResponse = {
   toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

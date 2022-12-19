@@ -1,5 +1,5 @@
-import { CompactBitArray, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
@@ -52,6 +52,7 @@ export enum SignMode {
   UNRECOGNIZED = -1,
 }
 export const SignModeSDKType = SignMode;
+export const SignModeAmino = SignMode;
 export function signModeFromJSON(object: any): SignMode {
   switch (object) {
     case 0:
@@ -110,6 +111,12 @@ export interface SignatureDescriptors {
 }
 
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
+export interface SignatureDescriptorsAmino {
+  /** signatures are the signature descriptors */
+  signatures: SignatureDescriptorAmino[];
+}
+
+/** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
   signatures: SignatureDescriptorSDKType[];
 }
@@ -139,6 +146,25 @@ export interface SignatureDescriptor {
  * signature itself. It is primarily used for coordinating signatures between
  * clients.
  */
+export interface SignatureDescriptorAmino {
+  /** public_key is the public key of the signer */
+  public_key?: AnyAmino;
+  data?: SignatureDescriptor_DataAmino;
+
+  /**
+   * sequence is the sequence of the account, which describes the
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
+   */
+  sequence: string;
+}
+
+/**
+ * SignatureDescriptor is a convenience type which represents the full data for
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
+ */
 export interface SignatureDescriptorSDKType {
   public_key?: AnySDKType;
   data?: SignatureDescriptor_DataSDKType;
@@ -155,6 +181,15 @@ export interface SignatureDescriptor_Data {
 }
 
 /** Data represents signature data */
+export interface SignatureDescriptor_DataAmino {
+  /** single represents a single signer */
+  single?: SignatureDescriptor_Data_SingleAmino;
+
+  /** multi represents a multisig signer */
+  multi?: SignatureDescriptor_Data_MultiAmino;
+}
+
+/** Data represents signature data */
 export interface SignatureDescriptor_DataSDKType {
   single?: SignatureDescriptor_Data_SingleSDKType;
   multi?: SignatureDescriptor_Data_MultiSDKType;
@@ -162,6 +197,15 @@ export interface SignatureDescriptor_DataSDKType {
 
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
+  /** mode is the signing mode of the single signer */
+  mode: SignMode;
+
+  /** signature is the raw signature bytes */
+  signature: Uint8Array;
+}
+
+/** Single is the signature data for a single signer */
+export interface SignatureDescriptor_Data_SingleAmino {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
 
@@ -182,6 +226,15 @@ export interface SignatureDescriptor_Data_Multi {
 
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
+}
+
+/** Multi is the signature data for a multisig public key */
+export interface SignatureDescriptor_Data_MultiAmino {
+  /** bitarray specifies which keys within the multisig are signing */
+  bitarray?: CompactBitArrayAmino;
+
+  /** signatures is the signatures of the multi-signature */
+  signatures: SignatureDescriptor_DataAmino[];
 }
 
 /** Multi is the signature data for a multisig public key */
@@ -262,6 +315,24 @@ export const SignatureDescriptors = {
 
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SignatureDescriptorsAmino): SignatureDescriptors {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SignatureDescriptors): SignatureDescriptorsAmino {
+    const obj: any = {};
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e) : undefined);
     } else {
       obj.signatures = [];
     }
@@ -364,6 +435,22 @@ export const SignatureDescriptor = {
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
     obj.sequence = message.sequence;
     return obj;
+  },
+
+  fromAmino(object: SignatureDescriptorAmino): SignatureDescriptor {
+    return {
+      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
+      data: object?.data ? SignatureDescriptor_Data.fromAmino(object.data) : undefined,
+      sequence: Long.fromString(object.sequence)
+    };
+  },
+
+  toAmino(message: SignatureDescriptor): SignatureDescriptorAmino {
+    const obj: any = {};
+    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
+    obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    return obj;
   }
 
 };
@@ -447,6 +534,20 @@ export const SignatureDescriptor_Data = {
     message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toSDK(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toSDK(message.multi) : undefined);
     return obj;
+  },
+
+  fromAmino(object: SignatureDescriptor_DataAmino): SignatureDescriptor_Data {
+    return {
+      single: object?.single ? SignatureDescriptor_Data_Single.fromAmino(object.single) : undefined,
+      multi: object?.multi ? SignatureDescriptor_Data_Multi.fromAmino(object.multi) : undefined
+    };
+  },
+
+  toAmino(message: SignatureDescriptor_Data): SignatureDescriptor_DataAmino {
+    const obj: any = {};
+    obj.single = message.single ? SignatureDescriptor_Data_Single.toAmino(message.single) : undefined;
+    obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toAmino(message.multi) : undefined;
+    return obj;
   }
 
 };
@@ -528,6 +629,20 @@ export const SignatureDescriptor_Data_Single = {
   toSDK(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    obj.signature = message.signature;
+    return obj;
+  },
+
+  fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      signature: object.signature
+    };
+  },
+
+  toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
+    const obj: any = {};
+    obj.mode = message.mode;
     obj.signature = message.signature;
     return obj;
   }
@@ -620,6 +735,26 @@ export const SignatureDescriptor_Data_Multi = {
 
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toSDK(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SignatureDescriptor_Data_MultiAmino): SignatureDescriptor_Data_Multi {
+    return {
+      bitarray: object?.bitarray ? CompactBitArray.fromAmino(object.bitarray) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiAmino {
+    const obj: any = {};
+    obj.bitarray = message.bitarray ? CompactBitArray.toAmino(message.bitarray) : undefined;
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toAmino(e) : undefined);
     } else {
       obj.signatures = [];
     }

@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { NFT, NFTSDKType, Class, ClassSDKType } from "./nft";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { NFT, NFTAmino, NFTSDKType, Class, ClassAmino, ClassSDKType } from "./nft";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryOwnerRequest, QueryOwnerRequestSDKType, QueryOwnerResponse, QueryOwnerResponseSDKType, QuerySupplyRequest, QuerySupplyRequestSDKType, QuerySupplyResponse, QuerySupplyResponseSDKType, QueryNFTsRequest, QueryNFTsRequestSDKType, QueryNFTsResponse, QueryNFTsResponseSDKType, QueryNFTRequest, QueryNFTRequestSDKType, QueryNFTResponse, QueryNFTResponseSDKType, QueryClassRequest, QueryClassRequestSDKType, QueryClassResponse, QueryClassResponseSDKType, QueryClassesRequest, QueryClassesRequestSDKType, QueryClassesResponse, QueryClassesResponseSDKType } from "./query";
+import { QueryBalanceRequest, QueryBalanceRequestAmino, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseAmino, QueryBalanceResponseSDKType, QueryOwnerRequest, QueryOwnerRequestAmino, QueryOwnerRequestSDKType, QueryOwnerResponse, QueryOwnerResponseAmino, QueryOwnerResponseSDKType, QuerySupplyRequest, QuerySupplyRequestAmino, QuerySupplyRequestSDKType, QuerySupplyResponse, QuerySupplyResponseAmino, QuerySupplyResponseSDKType, QueryNFTsRequest, QueryNFTsRequestAmino, QueryNFTsRequestSDKType, QueryNFTsResponse, QueryNFTsResponseAmino, QueryNFTsResponseSDKType, QueryNFTRequest, QueryNFTRequestAmino, QueryNFTRequestSDKType, QueryNFTResponse, QueryNFTResponseAmino, QueryNFTResponseSDKType, QueryClassRequest, QueryClassRequestAmino, QueryClassRequestSDKType, QueryClassResponse, QueryClassResponseAmino, QueryClassResponseSDKType, QueryClassesRequest, QueryClassesRequestAmino, QueryClassesRequestSDKType, QueryClassesResponse, QueryClassesResponseAmino, QueryClassesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

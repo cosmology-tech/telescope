@@ -14,6 +14,13 @@ export interface Module {}
  * module-scoped DB's. In the future it may provide gRPC services for interacting
  * with ORM data.
  */
+export interface ModuleAmino {}
+
+/**
+ * Module defines the ORM module which adds providers to the app container for
+ * module-scoped DB's. In the future it may provide gRPC services for interacting
+ * with ORM data.
+ */
 export interface ModuleSDKType {}
 
 function createBaseModule(): Module {
@@ -62,6 +69,15 @@ export const Module = {
   },
 
   toSDK(_: Module): ModuleSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: ModuleAmino): Module {
+    return {};
+  },
+
+  toAmino(_: Module): ModuleAmino {
     const obj: any = {};
     return obj;
   }

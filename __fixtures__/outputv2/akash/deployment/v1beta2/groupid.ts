@@ -10,6 +10,13 @@ export interface GroupID {
 }
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
+export interface GroupIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+}
+
+/** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
   owner: string;
   dseq: Long;
@@ -107,6 +114,22 @@ export const GroupID = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    return obj;
+  },
+
+  fromAmino(object: GroupIDAmino): GroupID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq
+    };
+  },
+
+  toAmino(message: GroupID): GroupIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
   }

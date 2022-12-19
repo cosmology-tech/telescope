@@ -1,6 +1,6 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -24,6 +24,7 @@ export enum Group_State {
   UNRECOGNIZED = -1,
 }
 export const Group_StateSDKType = Group_State;
+export const Group_StateAmino = Group_State;
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:
@@ -81,6 +82,11 @@ export interface MsgCloseGroup {
 }
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupAmino {
+  id?: GroupIDAmino;
+}
+
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id?: GroupIDSDKType;
 }
@@ -89,11 +95,19 @@ export interface MsgCloseGroupSDKType {
 export interface MsgCloseGroupResponse {}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseAmino {}
+
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id?: GroupID;
+}
+
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupAmino {
+  id?: GroupIDAmino;
 }
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
@@ -105,11 +119,19 @@ export interface MsgPauseGroupSDKType {
 export interface MsgPauseGroupResponse {}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseAmino {}
+
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id?: GroupID;
+}
+
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupAmino {
+  id?: GroupIDAmino;
 }
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
@@ -121,12 +143,22 @@ export interface MsgStartGroupSDKType {
 export interface MsgStartGroupResponse {}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseAmino {}
+
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
   owner: string;
   dseq: Long;
+  gseq: number;
+}
+
+/** GroupID stores owner, deployment sequence number and group sequence number */
+export interface GroupIDAmino {
+  owner: string;
+  dseq: string;
   gseq: number;
 }
 
@@ -145,6 +177,13 @@ export interface GroupSpec {
 }
 
 /** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements?: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
+}
+
+/** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
   requirements?: PlacementRequirementsSDKType;
@@ -160,6 +199,14 @@ export interface Group {
 }
 
 /** Group stores group id, state and specifications of group */
+export interface GroupAmino {
+  group_id?: GroupIDAmino;
+  state: Group_State;
+  group_spec?: GroupSpecAmino;
+  created_at: string;
+}
+
+/** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id?: GroupIDSDKType;
   state: Group_State;
@@ -172,6 +219,13 @@ export interface Resource {
   resources?: ResourceUnits;
   count: number;
   price?: Coin;
+}
+
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources?: ResourceUnitsAmino;
+  count: number;
+  price?: CoinAmino;
 }
 
 /** Resource stores unit, total count and price of resource */
@@ -246,6 +300,18 @@ export const MsgCloseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -296,6 +362,15 @@ export const MsgCloseGroupResponse = {
   },
 
   toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -367,6 +442,18 @@ export const MsgPauseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -417,6 +504,15 @@ export const MsgPauseGroupResponse = {
   },
 
   toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -488,6 +584,18 @@ export const MsgStartGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgStartGroup): MsgStartGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -538,6 +646,15 @@ export const MsgStartGroupResponse = {
   },
 
   toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -635,6 +752,22 @@ export const GroupID = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    return obj;
+  },
+
+  fromAmino(object: GroupIDAmino): GroupID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq
+    };
+  },
+
+  toAmino(message: GroupID): GroupIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
   }
@@ -741,6 +874,28 @@ export const GroupSpec = {
 
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toSDK(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GroupSpecAmino): GroupSpec {
+    return {
+      name: object.name,
+      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GroupSpec): GroupSpecAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
+
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
       obj.resources = [];
     }
@@ -857,6 +1012,24 @@ export const Group = {
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromAmino(object: GroupAmino): Group {
+    return {
+      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+
+  toAmino(message: Group): GroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
+    obj.state = message.state;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
   }
 
 };
@@ -953,6 +1126,22 @@ export const Resource = {
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
     obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? Coin.toSDK(message.price) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ResourceAmino): Resource {
+    return {
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: object.count,
+      price: object?.price ? Coin.fromAmino(object.price) : undefined
+    };
+  },
+
+  toAmino(message: Resource): ResourceAmino {
+    const obj: any = {};
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
+    obj.count = message.count;
+    obj.price = message.price ? Coin.toAmino(message.price) : undefined;
     return obj;
   }
 

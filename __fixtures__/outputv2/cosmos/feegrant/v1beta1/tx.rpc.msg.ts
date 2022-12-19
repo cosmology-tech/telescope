@@ -1,8 +1,8 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgGrantAllowanceResponse, MsgGrantAllowanceResponseSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType, MsgRevokeAllowanceResponse, MsgRevokeAllowanceResponseSDKType } from "./tx";
+import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceSDKType, MsgGrantAllowanceResponse, MsgGrantAllowanceResponseAmino, MsgGrantAllowanceResponseSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceSDKType, MsgRevokeAllowanceResponse, MsgRevokeAllowanceResponseAmino, MsgRevokeAllowanceResponseSDKType } from "./tx";
 
 /** Msg defines the feegrant msg service. */
 export interface Msg {

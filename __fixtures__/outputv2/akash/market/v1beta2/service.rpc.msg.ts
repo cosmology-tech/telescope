@@ -1,7 +1,7 @@
-import { OrderID, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
-import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
+import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BidID, BidIDAmino, BidIDSDKType, MsgCreateBid, MsgCreateBidAmino, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseAmino, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidAmino, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseAmino, MsgCloseBidResponseSDKType } from "./bid";
+import { LeaseID, LeaseIDAmino, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseAmino, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseAmino, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseAmino, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseAmino, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseAmino, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseAmino, MsgCloseLeaseResponseSDKType } from "./lease";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 

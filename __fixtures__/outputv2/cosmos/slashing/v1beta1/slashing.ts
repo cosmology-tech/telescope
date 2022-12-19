@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.slashing.v1beta1";
@@ -41,6 +41,39 @@ export interface ValidatorSigningInfo {
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
  */
+export interface ValidatorSigningInfoAmino {
+  address: string;
+
+  /** Height at which validator was first a candidate OR was unjailed */
+  start_height: string;
+
+  /**
+   * Index which is incremented each time the validator was a bonded
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   */
+  index_offset: string;
+
+  /** Timestamp until which the validator is jailed due to liveness downtime. */
+  jailed_until?: Date;
+
+  /**
+   * Whether or not a validator has been tombstoned (killed out of validator set). It is set
+   * once the validator commits an equivocation or for any other configured misbehiavor.
+   */
+  tombstoned: boolean;
+
+  /**
+   * A counter kept to avoid unnecessary array reads.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   */
+  missed_blocks_counter: string;
+}
+
+/**
+ * ValidatorSigningInfo defines a validator's signing info for monitoring their
+ * liveness activity.
+ */
 export interface ValidatorSigningInfoSDKType {
   address: string;
   start_height: Long;
@@ -57,6 +90,15 @@ export interface Params {
   downtimeJailDuration?: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
+}
+
+/** Params represents the parameters used for by the slashing module. */
+export interface ParamsAmino {
+  signed_blocks_window: string;
+  min_signed_per_window: Uint8Array;
+  downtime_jail_duration?: DurationAmino;
+  slash_fraction_double_sign: Uint8Array;
+  slash_fraction_downtime: Uint8Array;
 }
 
 /** Params represents the parameters used for by the slashing module. */
@@ -203,6 +245,28 @@ export const ValidatorSigningInfo = {
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter;
     return obj;
+  },
+
+  fromAmino(object: ValidatorSigningInfoAmino): ValidatorSigningInfo {
+    return {
+      address: object.address,
+      startHeight: Long.fromString(object.start_height),
+      indexOffset: Long.fromString(object.index_offset),
+      jailedUntil: object?.jailed_until ? Timestamp.fromAmino(object.jailed_until) : undefined,
+      tombstoned: object.tombstoned,
+      missedBlocksCounter: Long.fromString(object.missed_blocks_counter)
+    };
+  },
+
+  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
+    obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
+    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(message.jailedUntil) : undefined;
+    obj.tombstoned = message.tombstoned;
+    obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
+    return obj;
   }
 
 };
@@ -325,6 +389,26 @@ export const Params = {
     obj.signed_blocks_window = message.signedBlocksWindow;
     obj.min_signed_per_window = message.minSignedPerWindow;
     message.downtimeJailDuration !== undefined && (obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toSDK(message.downtimeJailDuration) : undefined);
+    obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
+    obj.slash_fraction_downtime = message.slashFractionDowntime;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      signedBlocksWindow: Long.fromString(object.signed_blocks_window),
+      minSignedPerWindow: object.min_signed_per_window,
+      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
+      slashFractionDoubleSign: object.slash_fraction_double_sign,
+      slashFractionDowntime: object.slash_fraction_downtime
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
+    obj.min_signed_per_window = message.minSignedPerWindow;
+    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
     obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;

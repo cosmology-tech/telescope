@@ -1,5 +1,5 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -23,6 +23,21 @@ export interface MsgGrantAllowance {
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
  */
+export interface MsgGrantAllowanceAmino {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance?: AnyAmino;
+}
+
+/**
+ * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
+ * of fees from the account of Granter.
+ */
 export interface MsgGrantAllowanceSDKType {
   granter: string;
   grantee: string;
@@ -33,10 +48,22 @@ export interface MsgGrantAllowanceSDKType {
 export interface MsgGrantAllowanceResponse {}
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
+export interface MsgGrantAllowanceResponseAmino {}
+
+/** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseSDKType {}
 
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowance {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+}
+
+/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
+export interface MsgRevokeAllowanceAmino {
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
 
@@ -52,6 +79,9 @@ export interface MsgRevokeAllowanceSDKType {
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
+
+/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
+export interface MsgRevokeAllowanceResponseAmino {}
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseSDKType {}
@@ -75,7 +105,7 @@ export const MsgGrantAllowance = {
     }
 
     if (message.allowance !== undefined) {
-      Any.encode(message.allowance, writer.uint32(26).fork()).ldelim();
+      Any.encode((message.allowance as Any), writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -99,7 +129,7 @@ export const MsgGrantAllowance = {
           break;
 
         case 3:
-          message.allowance = Any.decode(reader, reader.uint32());
+          message.allowance = (FeeAllowanceI_InterfaceDecoder(reader) as Any);
           break;
 
         default:
@@ -148,6 +178,22 @@ export const MsgGrantAllowance = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MsgGrantAllowanceAmino): MsgGrantAllowance {
+    return {
+      granter: object.granter,
+      grantee: object.grantee,
+      allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined
+    };
+  },
+
+  toAmino(message: MsgGrantAllowance): MsgGrantAllowanceAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     return obj;
   }
 
@@ -199,6 +245,15 @@ export const MsgGrantAllowanceResponse = {
   },
 
   toSDK(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgGrantAllowanceResponseAmino): MsgGrantAllowanceResponse {
+    return {};
+  },
+
+  toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -284,6 +339,20 @@ export const MsgRevokeAllowance = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     return obj;
+  },
+
+  fromAmino(object: MsgRevokeAllowanceAmino): MsgRevokeAllowance {
+    return {
+      granter: object.granter,
+      grantee: object.grantee
+    };
+  },
+
+  toAmino(message: MsgRevokeAllowance): MsgRevokeAllowanceAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    return obj;
   }
 
 };
@@ -336,6 +405,15 @@ export const MsgRevokeAllowanceResponse = {
   toSDK(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: MsgRevokeAllowanceResponseAmino): MsgRevokeAllowanceResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAmino {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -355,5 +433,53 @@ export const FeeAllowanceI_InterfaceDecoder = (input: _m0.Reader | Uint8Array): 
 
     default:
       return data;
+  }
+};
+export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/BasicAllowance":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
+        value: BasicAllowance.encode(BasicAllowance.fromPartial((content.value as DeepPartial<BasicAllowance>))).finish()
+      });
+
+    case "cosmos-sdk/PeriodicAllowance":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance",
+        value: PeriodicAllowance.encode(PeriodicAllowance.fromPartial((content.value as DeepPartial<PeriodicAllowance>))).finish()
+      });
+
+    case "cosmos-sdk/AllowedMsgAllowance":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
+        value: AllowedMsgAllowance.encode(AllowedMsgAllowance.fromPartial((content.value as DeepPartial<AllowedMsgAllowance>))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};
+export const FeeAllowanceI_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/cosmos.feegrant.v1beta1.BasicAllowance":
+      return {
+        type: "cosmos-sdk/BasicAllowance",
+        value: BasicAllowance.toAmino(BasicAllowance.decode(content.value))
+      };
+
+    case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
+      return {
+        type: "cosmos-sdk/PeriodicAllowance",
+        value: PeriodicAllowance.toAmino(PeriodicAllowance.decode(content.value))
+      };
+
+    case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
+      return {
+        type: "cosmos-sdk/AllowedMsgAllowance",
+        value: AllowedMsgAllowance.toAmino(AllowedMsgAllowance.decode(content.value))
+      };
+
+    default:
+      return Any.toAmino(content);
   }
 };

@@ -8,6 +8,11 @@ export interface ResourceValue {
 }
 
 /** Unit stores cpu, memory and storage metrics */
+export interface ResourceValueAmino {
+  val: Uint8Array;
+}
+
+/** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
   val: Uint8Array;
 }
@@ -74,6 +79,18 @@ export const ResourceValue = {
   },
 
   toSDK(message: ResourceValue): ResourceValueSDKType {
+    const obj: any = {};
+    obj.val = message.val;
+    return obj;
+  },
+
+  fromAmino(object: ResourceValueAmino): ResourceValue {
+    return {
+      val: object.val
+    };
+  },
+
+  toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};
     obj.val = message.val;
     return obj;

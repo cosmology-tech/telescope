@@ -1,5 +1,5 @@
-import { OrderID, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -23,6 +23,7 @@ export enum Bid_State {
   UNRECOGNIZED = -1,
 }
 export const Bid_StateSDKType = Bid_State;
+export const Bid_StateAmino = Bid_State;
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:
@@ -83,6 +84,14 @@ export interface MsgCreateBid {
 }
 
 /** MsgCreateBid defines an SDK message for creating Bid */
+export interface MsgCreateBidAmino {
+  order?: OrderIDAmino;
+  provider: string;
+  price?: DecCoinAmino;
+  deposit?: CoinAmino;
+}
+
+/** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
   order?: OrderIDSDKType;
   provider: string;
@@ -94,11 +103,19 @@ export interface MsgCreateBidSDKType {
 export interface MsgCreateBidResponse {}
 
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+export interface MsgCreateBidResponseAmino {}
+
+/** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseSDKType {}
 
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
   bidId?: BidID;
+}
+
+/** MsgCloseBid defines an SDK message for closing bid */
+export interface MsgCloseBidAmino {
+  bid_id?: BidIDAmino;
 }
 
 /** MsgCloseBid defines an SDK message for closing bid */
@@ -110,6 +127,9 @@ export interface MsgCloseBidSDKType {
 export interface MsgCloseBidResponse {}
 
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+export interface MsgCloseBidResponseAmino {}
+
+/** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseSDKType {}
 
 /**
@@ -119,6 +139,18 @@ export interface MsgCloseBidResponseSDKType {}
 export interface BidID {
   owner: string;
   dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+}
+
+/**
+ * BidID stores owner and all other seq numbers
+ * A successful bid becomes a Lease(ID).
+ */
+export interface BidIDAmino {
+  owner: string;
+  dseq: string;
   gseq: number;
   oseq: number;
   provider: string;
@@ -145,6 +177,14 @@ export interface Bid {
 }
 
 /** Bid stores BidID, state of bid and price */
+export interface BidAmino {
+  bid_id?: BidIDAmino;
+  state: Bid_State;
+  price?: DecCoinAmino;
+  created_at: string;
+}
+
+/** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id?: BidIDSDKType;
   state: Bid_State;
@@ -156,6 +196,16 @@ export interface BidSDKType {
 export interface BidFilters {
   owner: string;
   dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
+}
+
+/** BidFilters defines flags for bid list filter */
+export interface BidFiltersAmino {
+  owner: string;
+  dseq: string;
   gseq: number;
   oseq: number;
   provider: string;
@@ -279,6 +329,24 @@ export const MsgCreateBid = {
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateBidAmino): MsgCreateBid {
+    return {
+      order: object?.order ? OrderID.fromAmino(object.order) : undefined,
+      provider: object.provider,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateBid): MsgCreateBidAmino {
+    const obj: any = {};
+    obj.order = message.order ? OrderID.toAmino(message.order) : undefined;
+    obj.provider = message.provider;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    return obj;
   }
 
 };
@@ -329,6 +397,15 @@ export const MsgCreateBidResponse = {
   },
 
   toSDK(_: MsgCreateBidResponse): MsgCreateBidResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateBidResponseAmino): MsgCreateBidResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateBidResponse): MsgCreateBidResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -400,6 +477,18 @@ export const MsgCloseBid = {
     const obj: any = {};
     message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCloseBidAmino): MsgCloseBid {
+    return {
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseBid): MsgCloseBidAmino {
+    const obj: any = {};
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    return obj;
   }
 
 };
@@ -450,6 +539,15 @@ export const MsgCloseBidResponse = {
   },
 
   toSDK(_: MsgCloseBidResponse): MsgCloseBidResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCloseBidResponseAmino): MsgCloseBidResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseBidResponse): MsgCloseBidResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -577,6 +675,26 @@ export const BidID = {
     obj.oseq = message.oseq;
     obj.provider = message.provider;
     return obj;
+  },
+
+  fromAmino(object: BidIDAmino): BidID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      provider: object.provider
+    };
+  },
+
+  toAmino(message: BidID): BidIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
+    return obj;
   }
 
 };
@@ -687,6 +805,24 @@ export const Bid = {
     message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     obj.created_at = message.createdAt;
+    return obj;
+  },
+
+  fromAmino(object: BidAmino): Bid {
+    return {
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+
+  toAmino(message: Bid): BidAmino {
+    const obj: any = {};
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    obj.state = message.state;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   }
 
@@ -822,6 +958,28 @@ export const BidFilters = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.provider = message.provider;
+    obj.state = message.state;
+    return obj;
+  },
+
+  fromAmino(object: BidFiltersAmino): BidFilters {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      provider: object.provider,
+      state: object.state
+    };
+  },
+
+  toAmino(message: BidFilters): BidFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.provider = message.provider;

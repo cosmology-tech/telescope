@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -7,6 +7,12 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
+}
+
+/** Params defines the parameters for the bank module. */
+export interface ParamsAmino {
+  send_enabled: SendEnabledAmino[];
+  default_send_enabled: boolean;
 }
 
 /** Params defines the parameters for the bank module. */
@@ -28,6 +34,15 @@ export interface SendEnabled {
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
  */
+export interface SendEnabledAmino {
+  denom: string;
+  enabled: boolean;
+}
+
+/**
+ * SendEnabled maps coin denom to a send_enabled status (whether a denom is
+ * sendable).
+ */
 export interface SendEnabledSDKType {
   denom: string;
   enabled: boolean;
@@ -40,6 +55,12 @@ export interface Input {
 }
 
 /** Input models transaction input. */
+export interface InputAmino {
+  address: string;
+  coins: CoinAmino[];
+}
+
+/** Input models transaction input. */
 export interface InputSDKType {
   address: string;
   coins: CoinSDKType[];
@@ -49,6 +70,12 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+
+/** Output models transaction outputs. */
+export interface OutputAmino {
+  address: string;
+  coins: CoinAmino[];
 }
 
 /** Output models transaction outputs. */
@@ -75,6 +102,17 @@ export interface Supply {
  */
 
 /** @deprecated */
+export interface SupplyAmino {
+  total: CoinAmino[];
+}
+
+/**
+ * Supply represents a struct that passively keeps track of the total supply
+ * amounts in the network.
+ * This message is deprecated now that supply is indexed by denom.
+ */
+
+/** @deprecated */
 export interface SupplySDKType {
   total: CoinSDKType[];
 }
@@ -84,6 +122,27 @@ export interface SupplySDKType {
  * denomination unit of the basic token.
  */
 export interface DenomUnit {
+  /** denom represents the string name of the given denom unit (e.g uatom). */
+  denom: string;
+
+  /**
+   * exponent represents power of 10 exponent that one must
+   * raise the base_denom to in order to equal the given DenomUnit's denom
+   * 1 denom = 10^exponent base_denom
+   * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
+   * exponent = 6, thus: 1 atom = 10^6 uatom).
+   */
+  exponent: number;
+
+  /** aliases is a list of string aliases for the given denom */
+  aliases: string[];
+}
+
+/**
+ * DenomUnit represents a struct that describes a given
+ * denomination unit of the basic token.
+ */
+export interface DenomUnitAmino {
   /** denom represents the string name of the given denom unit (e.g uatom). */
   denom: string;
 
@@ -158,6 +217,56 @@ export interface Metadata {
    * Since: cosmos-sdk 0.46
    */
   uriHash: string;
+}
+
+/**
+ * Metadata represents a struct that describes
+ * a basic token.
+ */
+export interface MetadataAmino {
+  description: string;
+
+  /** denom_units represents the list of DenomUnit's for a given coin */
+  denom_units: DenomUnitAmino[];
+
+  /** base represents the base denom (should be the DenomUnit with exponent = 0). */
+  base: string;
+
+  /**
+   * display indicates the suggested denom that should be
+   * displayed in clients.
+   */
+  display: string;
+
+  /**
+   * name defines the name of the token (eg: Cosmos Atom)
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  name: string;
+
+  /**
+   * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
+   * be the same as the display.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  symbol: string;
+
+  /**
+   * URI to a document (on or off-chain) that contains additional information. Optional.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  uri: string;
+
+  /**
+   * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
+   * the document didn't change. Optional.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  uri_hash: string;
 }
 
 /**
@@ -266,6 +375,26 @@ export const Params = {
 
     obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
+      defaultSendEnabled: object.default_send_enabled
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+
+    if (message.sendEnabled) {
+      obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e) : undefined);
+    } else {
+      obj.send_enabled = [];
+    }
+
+    obj.default_send_enabled = message.defaultSendEnabled;
+    return obj;
   }
 
 };
@@ -345,6 +474,20 @@ export const SendEnabled = {
   },
 
   toSDK(message: SendEnabled): SendEnabledSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    return obj;
+  },
+
+  fromAmino(object: SendEnabledAmino): SendEnabled {
+    return {
+      denom: object.denom,
+      enabled: object.enabled
+    };
+  },
+
+  toAmino(message: SendEnabled): SendEnabledAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.enabled = message.enabled;
@@ -439,6 +582,26 @@ export const Input = {
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: InputAmino): Input {
+    return {
+      address: object.address,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Input): InputAmino {
+    const obj: any = {};
+    obj.address = message.address;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -539,6 +702,26 @@ export const Output = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: OutputAmino): Output {
+    return {
+      address: object.address,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Output): OutputAmino {
+    const obj: any = {};
+    obj.address = message.address;
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -615,6 +798,24 @@ export const Supply = {
 
     if (message.total) {
       obj.total = message.total.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.total = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SupplyAmino): Supply {
+    return {
+      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Supply): SupplyAmino {
+    const obj: any = {};
+
+    if (message.total) {
+      obj.total = message.total.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total = [];
     }
@@ -718,6 +919,28 @@ export const DenomUnit = {
   },
 
   toSDK(message: DenomUnit): DenomUnitSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.exponent = message.exponent;
+
+    if (message.aliases) {
+      obj.aliases = message.aliases.map(e => e);
+    } else {
+      obj.aliases = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: DenomUnitAmino): DenomUnit {
+    return {
+      denom: object.denom,
+      exponent: object.exponent,
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: DenomUnit): DenomUnitAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.exponent = message.exponent;
@@ -897,6 +1120,38 @@ export const Metadata = {
 
     if (message.denomUnits) {
       obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toSDK(e) : undefined);
+    } else {
+      obj.denom_units = [];
+    }
+
+    obj.base = message.base;
+    obj.display = message.display;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    return obj;
+  },
+
+  fromAmino(object: MetadataAmino): Metadata {
+    return {
+      description: object.description,
+      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
+      base: object.base,
+      display: object.display,
+      name: object.name,
+      symbol: object.symbol,
+      uri: object.uri,
+      uriHash: object.uri_hash
+    };
+  },
+
+  toAmino(message: Metadata): MetadataAmino {
+    const obj: any = {};
+    obj.description = message.description;
+
+    if (message.denomUnits) {
+      obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
     } else {
       obj.denom_units = [];
     }

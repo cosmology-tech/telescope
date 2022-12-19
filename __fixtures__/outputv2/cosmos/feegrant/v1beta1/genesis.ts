@@ -1,4 +1,4 @@
-import { Grant, GrantSDKType } from "./feegrant";
+import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -6,6 +6,11 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
   allowances: Grant[];
+}
+
+/** GenesisState contains a set of fee allowances, persisted from the store */
+export interface GenesisStateAmino {
+  allowances: GrantAmino[];
 }
 
 /** GenesisState contains a set of fee allowances, persisted from the store */
@@ -85,6 +90,24 @@ export const GenesisState = {
 
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toSDK(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e) : undefined);
     } else {
       obj.allowances = [];
     }

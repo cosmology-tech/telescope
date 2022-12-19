@@ -1,4 +1,4 @@
-import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
+import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
@@ -10,6 +10,15 @@ export interface GenesisState {
 
   /** params defines all the paramaters of the module. */
   params?: Params;
+}
+
+/** GenesisState defines the mint module's genesis state. */
+export interface GenesisStateAmino {
+  /** minter is a space for holding current inflation information. */
+  minter?: MinterAmino;
+
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
 }
 
 /** GenesisState defines the mint module's genesis state. */
@@ -96,6 +105,20 @@ export const GenesisState = {
     const obj: any = {};
     message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   }
 

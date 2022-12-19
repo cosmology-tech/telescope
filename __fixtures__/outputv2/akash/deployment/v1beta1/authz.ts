@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -13,6 +13,18 @@ export interface DepositDeploymentAuthorization {
    * the purpose of deployment.
    */
   spendLimit?: Coin;
+}
+
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit?: CoinAmino;
 }
 
 /**
@@ -87,6 +99,18 @@ export const DepositDeploymentAuthorization = {
   toSDK(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationSDKType {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spend_limit = message.spendLimit ? Coin.toSDK(message.spendLimit) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
+    return {
+      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
+    };
+  },
+
+  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+    const obj: any = {};
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
     return obj;
   }
 

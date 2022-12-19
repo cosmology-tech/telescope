@@ -1,5 +1,5 @@
-import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "./resource";
-import { Endpoint, EndpointSDKType } from "./endpoint";
+import { CPU, CPUAmino, CPUSDKType, Memory, MemoryAmino, MemorySDKType, Storage, StorageAmino, StorageSDKType } from "./resource";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
@@ -13,6 +13,17 @@ export interface ResourceUnits {
   memory?: Memory;
   storage: Storage[];
   endpoints: Endpoint[];
+}
+
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
+export interface ResourceUnitsAmino {
+  cpu?: CPUAmino;
+  memory?: MemoryAmino;
+  storage: StorageAmino[];
+  endpoints: EndpointAmino[];
 }
 
 /**
@@ -150,6 +161,35 @@ export const ResourceUnits = {
 
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ResourceUnitsAmino): ResourceUnits {
+    return {
+      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
+      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
+      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+    const obj: any = {};
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
+
+    if (message.storage) {
+      obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
+    } else {
+      obj.storage = [];
+    }
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
       obj.endpoints = [];
     }

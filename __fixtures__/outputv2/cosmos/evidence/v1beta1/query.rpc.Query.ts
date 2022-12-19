@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
+import { QueryEvidenceRequest, QueryEvidenceRequestAmino, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseAmino, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestAmino, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseAmino, QueryAllEvidenceResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

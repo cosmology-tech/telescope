@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderSDKType } from "./provider";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
+import { QueryProvidersRequest, QueryProvidersRequestAmino, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestAmino, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseAmino, QueryProviderResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
 export interface Query {

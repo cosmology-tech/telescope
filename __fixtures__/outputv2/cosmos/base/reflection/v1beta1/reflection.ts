@@ -6,12 +6,21 @@ export const protobufPackage = "cosmos.base.reflection.v1beta1";
 export interface ListAllInterfacesRequest {}
 
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
+export interface ListAllInterfacesRequestAmino {}
+
+/** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestSDKType {}
 
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
+}
+
+/** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
+export interface ListAllInterfacesResponseAmino {
+  /** interface_names is an array of all the registered interfaces. */
+  interface_names: string[];
 }
 
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
@@ -32,6 +41,15 @@ export interface ListImplementationsRequest {
  * ListImplementationsRequest is the request type of the ListImplementations
  * RPC.
  */
+export interface ListImplementationsRequestAmino {
+  /** interface_name defines the interface to query the implementations for. */
+  interface_name: string;
+}
+
+/**
+ * ListImplementationsRequest is the request type of the ListImplementations
+ * RPC.
+ */
 export interface ListImplementationsRequestSDKType {
   interface_name: string;
 }
@@ -42,6 +60,14 @@ export interface ListImplementationsRequestSDKType {
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
+}
+
+/**
+ * ListImplementationsResponse is the response type of the ListImplementations
+ * RPC.
+ */
+export interface ListImplementationsResponseAmino {
+  implementation_message_names: string[];
 }
 
 /**
@@ -98,6 +124,15 @@ export const ListAllInterfacesRequest = {
   },
 
   toSDK(_: ListAllInterfacesRequest): ListAllInterfacesRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
+    return {};
+  },
+
+  toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -181,6 +216,24 @@ export const ListAllInterfacesResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
+    return {
+      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
+    const obj: any = {};
+
+    if (message.interfaceNames) {
+      obj.interface_names = message.interfaceNames.map(e => e);
+    } else {
+      obj.interface_names = [];
+    }
+
+    return obj;
   }
 
 };
@@ -247,6 +300,18 @@ export const ListImplementationsRequest = {
   },
 
   toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
+    const obj: any = {};
+    obj.interface_name = message.interfaceName;
+    return obj;
+  },
+
+  fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
+    return {
+      interfaceName: object.interface_name
+    };
+  },
+
+  toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
     obj.interface_name = message.interfaceName;
     return obj;
@@ -322,6 +387,24 @@ export const ListImplementationsResponse = {
   },
 
   toSDK(message: ListImplementationsResponse): ListImplementationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.implementationMessageNames) {
+      obj.implementation_message_names = message.implementationMessageNames.map(e => e);
+    } else {
+      obj.implementation_message_names = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
+    return {
+      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
     const obj: any = {};
 
     if (message.implementationMessageNames) {

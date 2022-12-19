@@ -1,12 +1,12 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../query/v1beta1/pagination";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../../tendermint/types/block";
-import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../query/v1beta1/pagination";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../../tendermint/types/types";
+import { Block, BlockAmino, BlockSDKType } from "../../../../tendermint/types/block";
+import { NodeInfo, NodeInfoAmino, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseSDKType } from "./query";
+import { GetNodeInfoRequest, GetNodeInfoRequestAmino, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseAmino, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestAmino, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseAmino, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestAmino, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseAmino, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestAmino, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseAmino, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestAmino, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseAmino, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestAmino, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseAmino, GetValidatorSetByHeightResponseSDKType } from "./query";
 
 /** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {

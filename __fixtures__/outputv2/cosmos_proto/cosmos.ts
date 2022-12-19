@@ -8,6 +8,7 @@ export enum ScalarType {
   UNRECOGNIZED = -1,
 }
 export const ScalarTypeSDKType = ScalarType;
+export const ScalarTypeAmino = ScalarType;
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:
@@ -69,6 +70,26 @@ export interface InterfaceDescriptor {
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
  */
+export interface InterfaceDescriptorAmino {
+  /**
+   * name is the name of the interface. It should be a short-name (without
+   * a period) such that the fully qualified name of the interface will be
+   * package.name, ex. for the package a.b and interface named C, the
+   * fully-qualified name will be a.b.C.
+   */
+  name: string;
+
+  /**
+   * description is a human-readable description of the interface and its
+   * purpose.
+   */
+  description: string;
+}
+
+/**
+ * InterfaceDescriptor describes an interface type to be used with
+ * accepts_interface and implements_interface and declared by declare_interface.
+ */
 export interface InterfaceDescriptorSDKType {
   name: string;
   description: string;
@@ -106,6 +127,40 @@ export interface ScalarDescriptor {
    * bytes fields are supported for scalars.
    */
   fieldType: ScalarType[];
+}
+
+/**
+ * ScalarDescriptor describes an scalar type to be used with
+ * the scalar field option and declared by declare_scalar.
+ * Scalars extend simple protobuf built-in types with additional
+ * syntax and semantics, for instance to represent big integers.
+ * Scalars should ideally define an encoding such that there is only one
+ * valid syntactical representation for a given semantic meaning,
+ * i.e. the encoding should be deterministic.
+ */
+export interface ScalarDescriptorAmino {
+  /**
+   * name is the name of the scalar. It should be a short-name (without
+   * a period) such that the fully qualified name of the scalar will be
+   * package.name, ex. for the package a.b and scalar named C, the
+   * fully-qualified name will be a.b.C.
+   */
+  name: string;
+
+  /**
+   * description is a human-readable description of the scalar and its
+   * encoding format. For instance a big integer or decimal scalar should
+   * specify precisely the expected encoding format.
+   */
+  description: string;
+
+  /**
+   * field_type is the type of field with which this scalar can be used.
+   * Scalars can be used with one and only one type of field so that
+   * encoding standards and simple and clear. Currently only string and
+   * bytes fields are supported for scalars.
+   */
+  field_type: ScalarType[];
 }
 
 /**
@@ -198,6 +253,20 @@ export const InterfaceDescriptor = {
   },
 
   toSDK(message: InterfaceDescriptor): InterfaceDescriptorSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    return obj;
+  },
+
+  fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
+    return {
+      name: object.name,
+      description: object.description
+    };
+  },
+
+  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
@@ -312,6 +381,28 @@ export const ScalarDescriptor = {
   },
 
   toSDK(message: ScalarDescriptor): ScalarDescriptorSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+
+    if (message.fieldType) {
+      obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
+    } else {
+      obj.field_type = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
+    return {
+      name: object.name,
+      description: object.description,
+      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
+    };
+  },
+
+  toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;

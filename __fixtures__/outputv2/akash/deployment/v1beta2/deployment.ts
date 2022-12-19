@@ -15,6 +15,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -59,6 +60,12 @@ export interface DeploymentID {
 }
 
 /** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
+}
+
+/** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
   dseq: Long;
@@ -73,6 +80,14 @@ export interface Deployment {
 }
 
 /** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id?: DeploymentIDAmino;
+  state: Deployment_State;
+  version: Uint8Array;
+  created_at: string;
+}
+
+/** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id?: DeploymentIDSDKType;
   state: Deployment_State;
@@ -84,6 +99,13 @@ export interface DeploymentSDKType {
 export interface DeploymentFilters {
   owner: string;
   dseq: Long;
+  state: string;
+}
+
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
   state: string;
 }
 
@@ -172,6 +194,20 @@ export const DeploymentID = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    return obj;
+  },
+
+  fromAmino(object: DeploymentIDAmino): DeploymentID {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq)
+    };
+  },
+
+  toAmino(message: DeploymentID): DeploymentIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
   }
 
@@ -284,6 +320,24 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromAmino(object: DeploymentAmino): Deployment {
+    return {
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: object.version,
+      createdAt: Long.fromString(object.created_at)
+    };
+  },
+
+  toAmino(message: Deployment): DeploymentAmino {
+    const obj: any = {};
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
+    obj.state = message.state;
+    obj.version = message.version;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
   }
 
 };
@@ -379,6 +433,22 @@ export const DeploymentFilters = {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
+    obj.state = message.state;
+    return obj;
+  },
+
+  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
+    return {
+      owner: object.owner,
+      dseq: Long.fromString(object.dseq),
+      state: object.state
+    };
+  },
+
+  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
   }

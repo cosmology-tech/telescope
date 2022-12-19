@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig";
@@ -11,6 +11,16 @@ export const protobufPackage = "cosmos.crypto.multisig";
 export interface LegacyAminoPubKey {
   threshold: number;
   publicKeys: Any[];
+}
+
+/**
+ * LegacyAminoPubKey specifies a public key type
+ * which nests multiple public keys and a threshold,
+ * it uses legacy amino address rules.
+ */
+export interface LegacyAminoPubKeyAmino {
+  threshold: number;
+  public_keys: AnyAmino[];
 }
 
 /**
@@ -109,6 +119,26 @@ export const LegacyAminoPubKey = {
 
     if (message.publicKeys) {
       obj.public_keys = message.publicKeys.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.public_keys = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: LegacyAminoPubKeyAmino): LegacyAminoPubKey {
+    return {
+      threshold: object.threshold,
+      publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
+    const obj: any = {};
+    obj.threshold = message.threshold;
+
+    if (message.publicKeys) {
+      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.public_keys = [];
     }

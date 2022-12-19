@@ -1,76 +1,15 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceSDKType } from "./feegrant";
-import { AminoMsg } from "@cosmjs/amino";
-import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType } from "./tx";
-export interface AminoMsgGrantAllowance extends AminoMsg {
-  type: "cosmos-sdk/MsgGrantAllowance";
-  value: {
-    granter: string;
-    grantee: string;
-    allowance: {
-      type_url: string;
-      value: Uint8Array;
-    };
-  };
-}
-export interface AminoMsgRevokeAllowance extends AminoMsg {
-  type: "cosmos-sdk/MsgRevokeAllowance";
-  value: {
-    granter: string;
-    grantee: string;
-  };
-}
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
     aminoType: "cosmos-sdk/MsgGrantAllowance",
-    toAmino: ({
-      granter,
-      grantee,
-      allowance
-    }: MsgGrantAllowance): AminoMsgGrantAllowance["value"] => {
-      return {
-        granter,
-        grantee,
-        allowance: {
-          type_url: allowance.typeUrl,
-          value: allowance.value
-        }
-      };
-    },
-    fromAmino: ({
-      granter,
-      grantee,
-      allowance
-    }: AminoMsgGrantAllowance["value"]): MsgGrantAllowance => {
-      return {
-        granter,
-        grantee,
-        allowance: {
-          typeUrl: allowance.type_url,
-          value: allowance.value
-        }
-      };
-    }
+    toAmino: MsgGrantAllowance.toAmino,
+    fromAmino: MsgGrantAllowance.fromAmino
   },
   "/cosmos.feegrant.v1beta1.MsgRevokeAllowance": {
     aminoType: "cosmos-sdk/MsgRevokeAllowance",
-    toAmino: ({
-      granter,
-      grantee
-    }: MsgRevokeAllowance): AminoMsgRevokeAllowance["value"] => {
-      return {
-        granter,
-        grantee
-      };
-    },
-    fromAmino: ({
-      granter,
-      grantee
-    }: AminoMsgRevokeAllowance["value"]): MsgRevokeAllowance => {
-      return {
-        granter,
-        grantee
-      };
-    }
+    toAmino: MsgRevokeAllowance.toAmino,
+    fromAmino: MsgRevokeAllowance.fromAmino
   }
 };

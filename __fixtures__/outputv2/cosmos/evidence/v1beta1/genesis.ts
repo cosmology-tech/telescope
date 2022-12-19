@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
@@ -7,6 +7,12 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
 export interface GenesisState {
   /** evidence defines all the evidence at genesis. */
   evidence: Any[];
+}
+
+/** GenesisState defines the evidence module's genesis state. */
+export interface GenesisStateAmino {
+  /** evidence defines all the evidence at genesis. */
+  evidence: AnyAmino[];
 }
 
 /** GenesisState defines the evidence module's genesis state. */
@@ -86,6 +92,24 @@ export const GenesisState = {
 
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.evidence = [];
     }

@@ -15,6 +15,7 @@ export enum Certificate_State {
   UNRECOGNIZED = -1,
 }
 export const Certificate_StateSDKType = Certificate_State;
+export const Certificate_StateAmino = Certificate_State;
 export function certificate_StateFromJSON(object: any): Certificate_State {
   switch (object) {
     case 0:
@@ -59,6 +60,12 @@ export interface CertificateID {
 }
 
 /** CertificateID stores owner and sequence number */
+export interface CertificateIDAmino {
+  owner: string;
+  serial: string;
+}
+
+/** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
   owner: string;
   serial: string;
@@ -66,6 +73,13 @@ export interface CertificateIDSDKType {
 
 /** Certificate stores state, certificate and it's public key */
 export interface Certificate {
+  state: Certificate_State;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+
+/** Certificate stores state, certificate and it's public key */
+export interface CertificateAmino {
   state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
@@ -86,6 +100,13 @@ export interface CertificateFilter {
 }
 
 /** CertificateFilter defines filters used to filter certificates */
+export interface CertificateFilterAmino {
+  owner: string;
+  serial: string;
+  state: string;
+}
+
+/** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
   owner: string;
   serial: string;
@@ -94,6 +115,13 @@ export interface CertificateFilterSDKType {
 
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificate {
+  owner: string;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+
+/** MsgCreateCertificate defines an SDK message for creating certificate */
+export interface MsgCreateCertificateAmino {
   owner: string;
   cert: Uint8Array;
   pubkey: Uint8Array;
@@ -110,11 +138,19 @@ export interface MsgCreateCertificateSDKType {
 export interface MsgCreateCertificateResponse {}
 
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
+export interface MsgCreateCertificateResponseAmino {}
+
+/** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponseSDKType {}
 
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
   id?: CertificateID;
+}
+
+/** MsgRevokeCertificate defines an SDK message for revoking certificate */
+export interface MsgRevokeCertificateAmino {
+  id?: CertificateIDAmino;
 }
 
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
@@ -124,6 +160,9 @@ export interface MsgRevokeCertificateSDKType {
 
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponse {}
+
+/** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+export interface MsgRevokeCertificateResponseAmino {}
 
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponseSDKType {}
@@ -203,6 +242,20 @@ export const CertificateID = {
   },
 
   toSDK(message: CertificateID): CertificateIDSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.serial = message.serial;
+    return obj;
+  },
+
+  fromAmino(object: CertificateIDAmino): CertificateID {
+    return {
+      owner: object.owner,
+      serial: object.serial
+    };
+  },
+
+  toAmino(message: CertificateID): CertificateIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.serial = message.serial;
@@ -304,6 +357,22 @@ export const Certificate = {
     obj.cert = message.cert;
     obj.pubkey = message.pubkey;
     return obj;
+  },
+
+  fromAmino(object: CertificateAmino): Certificate {
+    return {
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      cert: object.cert,
+      pubkey: object.pubkey
+    };
+  },
+
+  toAmino(message: Certificate): CertificateAmino {
+    const obj: any = {};
+    obj.state = message.state;
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
+    return obj;
   }
 
 };
@@ -396,6 +465,22 @@ export const CertificateFilter = {
   },
 
   toSDK(message: CertificateFilter): CertificateFilterSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.serial = message.serial;
+    obj.state = message.state;
+    return obj;
+  },
+
+  fromAmino(object: CertificateFilterAmino): CertificateFilter {
+    return {
+      owner: object.owner,
+      serial: object.serial,
+      state: object.state
+    };
+  },
+
+  toAmino(message: CertificateFilter): CertificateFilterAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.serial = message.serial;
@@ -498,6 +583,22 @@ export const MsgCreateCertificate = {
     obj.cert = message.cert;
     obj.pubkey = message.pubkey;
     return obj;
+  },
+
+  fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
+    return {
+      owner: object.owner,
+      cert: object.cert,
+      pubkey: object.pubkey
+    };
+  },
+
+  toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
+    return obj;
   }
 
 };
@@ -548,6 +649,15 @@ export const MsgCreateCertificateResponse = {
   },
 
   toSDK(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateCertificateResponseAmino): MsgCreateCertificateResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -619,6 +729,18 @@ export const MsgRevokeCertificate = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? CertificateID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgRevokeCertificateAmino): MsgRevokeCertificate {
+    return {
+      id: object?.id ? CertificateID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
+    const obj: any = {};
+    obj.id = message.id ? CertificateID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -669,6 +791,15 @@ export const MsgRevokeCertificateResponse = {
   },
 
   toSDK(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgRevokeCertificateResponseAmino): MsgRevokeCertificateResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseAmino {
     const obj: any = {};
     return obj;
   }

@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -9,6 +9,13 @@ export interface MsgSend {
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
+}
+
+/** MsgSend represents a message to send coins from one account to another. */
+export interface MsgSendAmino {
+  from_address: string;
+  to_address: string;
+  amount: CoinAmino[];
 }
 
 /** MsgSend represents a message to send coins from one account to another. */
@@ -22,12 +29,21 @@ export interface MsgSendSDKType {
 export interface MsgSendResponse {}
 
 /** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseAmino {}
+
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSend {
   inputs: Input[];
   outputs: Output[];
+}
+
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
+export interface MsgMultiSendAmino {
+  inputs: InputAmino[];
+  outputs: OutputAmino[];
 }
 
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
@@ -38,6 +54,9 @@ export interface MsgMultiSendSDKType {
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
+
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
+export interface MsgMultiSendResponseAmino {}
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseSDKType {}
@@ -147,6 +166,28 @@ export const MsgSend = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgSendAmino): MsgSend {
+    return {
+      fromAddress: object.from_address,
+      toAddress: object.to_address,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgSend): MsgSendAmino {
+    const obj: any = {};
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
   }
 
 };
@@ -197,6 +238,15 @@ export const MsgSendResponse = {
   },
 
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -304,6 +354,31 @@ export const MsgMultiSend = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgMultiSendAmino): MsgMultiSend {
+    return {
+      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromAmino(e)) : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgMultiSend): MsgMultiSendAmino {
+    const obj: any = {};
+
+    if (message.inputs) {
+      obj.inputs = message.inputs.map(e => e ? Input.toAmino(e) : undefined);
+    } else {
+      obj.inputs = [];
+    }
+
+    if (message.outputs) {
+      obj.outputs = message.outputs.map(e => e ? Output.toAmino(e) : undefined);
+    } else {
+      obj.outputs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -354,6 +429,15 @@ export const MsgMultiSendResponse = {
   },
 
   toSDK(_: MsgMultiSendResponse): MsgMultiSendResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgMultiSendResponseAmino): MsgMultiSendResponse {
+    return {};
+  },
+
+  toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseAmino {
     const obj: any = {};
     return obj;
   }

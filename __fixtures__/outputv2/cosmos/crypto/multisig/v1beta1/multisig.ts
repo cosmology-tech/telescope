@@ -16,6 +16,15 @@ export interface MultiSignature {
  * See cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers
  * signed and with which modes.
  */
+export interface MultiSignatureAmino {
+  signatures: Uint8Array[];
+}
+
+/**
+ * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
+ * See cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers
+ * signed and with which modes.
+ */
 export interface MultiSignatureSDKType {
   signatures: Uint8Array[];
 }
@@ -28,6 +37,17 @@ export interface MultiSignatureSDKType {
  */
 export interface CompactBitArray {
   extraBitsStored: number;
+  elems: Uint8Array;
+}
+
+/**
+ * CompactBitArray is an implementation of a space efficient bit array.
+ * This is used to ensure that the encoded data takes up a minimal amount of
+ * space after proto encoding.
+ * This is not thread safe, and is not intended for concurrent usage.
+ */
+export interface CompactBitArrayAmino {
+  extra_bits_stored: number;
   elems: Uint8Array;
 }
 
@@ -119,6 +139,24 @@ export const MultiSignature = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MultiSignatureAmino): MultiSignature {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MultiSignature): MultiSignatureAmino {
+    const obj: any = {};
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
   }
 
 };
@@ -198,6 +236,20 @@ export const CompactBitArray = {
   },
 
   toSDK(message: CompactBitArray): CompactBitArraySDKType {
+    const obj: any = {};
+    obj.extra_bits_stored = message.extraBitsStored;
+    obj.elems = message.elems;
+    return obj;
+  },
+
+  fromAmino(object: CompactBitArrayAmino): CompactBitArray {
+    return {
+      extraBitsStored: object.extra_bits_stored,
+      elems: object.elems
+    };
+  },
+
+  toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
     obj.elems = message.elems;

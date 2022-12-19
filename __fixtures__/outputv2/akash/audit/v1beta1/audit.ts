@@ -1,4 +1,4 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta1";
@@ -8,6 +8,13 @@ export interface Provider {
   owner: string;
   auditor: string;
   attributes: Attribute[];
+}
+
+/** Provider stores owner auditor and attributes details */
+export interface ProviderAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
 }
 
 /** Provider stores owner auditor and attributes details */
@@ -25,6 +32,13 @@ export interface AuditedAttributes {
 }
 
 /** Attributes */
+export interface AuditedAttributesAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
+}
+
+/** Attributes */
 export interface AuditedAttributesSDKType {
   owner: string;
   auditor: string;
@@ -37,12 +51,23 @@ export interface AttributesResponse {
 }
 
 /** AttributesResponse represents details of deployment along with group details */
+export interface AttributesResponseAmino {
+  attributes: AuditedAttributesAmino[];
+}
+
+/** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
   attributes: AuditedAttributesSDKType[];
 }
 
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFilters {
+  auditors: string[];
+  owners: string[];
+}
+
+/** AttributesFilters defines filters used to filter deployments */
+export interface AttributesFiltersAmino {
   auditors: string[];
   owners: string[];
 }
@@ -61,6 +86,13 @@ export interface MsgSignProviderAttributes {
 }
 
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
+export interface MsgSignProviderAttributesAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
+}
+
+/** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
   owner: string;
   auditor: string;
@@ -71,10 +103,20 @@ export interface MsgSignProviderAttributesSDKType {
 export interface MsgSignProviderAttributesResponse {}
 
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
+export interface MsgSignProviderAttributesResponseAmino {}
+
+/** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseSDKType {}
 
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributes {
+  owner: string;
+  auditor: string;
+  keys: string[];
+}
+
+/** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
+export interface MsgDeleteProviderAttributesAmino {
   owner: string;
   auditor: string;
   keys: string[];
@@ -89,6 +131,9 @@ export interface MsgDeleteProviderAttributesSDKType {
 
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
+
+/** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
+export interface MsgDeleteProviderAttributesResponseAmino {}
 
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseSDKType {}
@@ -193,6 +238,28 @@ export const Provider = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ProviderAmino): Provider {
+    return {
+      owner: object.owner,
+      auditor: object.auditor,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Provider): ProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -307,6 +374,28 @@ export const AuditedAttributes = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
+    return {
+      owner: object.owner,
+      auditor: object.auditor,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AuditedAttributes): AuditedAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -383,6 +472,24 @@ export const AttributesResponse = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: AttributesResponseAmino): AttributesResponse {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AttributesResponse): AttributesResponseAmino {
+    const obj: any = {};
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }
@@ -478,6 +585,31 @@ export const AttributesFilters = {
   },
 
   toSDK(message: AttributesFilters): AttributesFiltersSDKType {
+    const obj: any = {};
+
+    if (message.auditors) {
+      obj.auditors = message.auditors.map(e => e);
+    } else {
+      obj.auditors = [];
+    }
+
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e);
+    } else {
+      obj.owners = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: AttributesFiltersAmino): AttributesFilters {
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: AttributesFilters): AttributesFiltersAmino {
     const obj: any = {};
 
     if (message.auditors) {
@@ -602,6 +734,28 @@ export const MsgSignProviderAttributes = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
+    return {
+      owner: object.owner,
+      auditor: object.auditor,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -652,6 +806,15 @@ export const MsgSignProviderAttributesResponse = {
   },
 
   toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -763,6 +926,28 @@ export const MsgDeleteProviderAttributes = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
+    return {
+      owner: object.owner,
+      auditor: object.auditor,
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.auditor = message.auditor;
+
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+
+    return obj;
   }
 
 };
@@ -813,6 +998,15 @@ export const MsgDeleteProviderAttributesResponse = {
   },
 
   toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
+    return {};
+  },
+
+  toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
   }

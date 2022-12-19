@@ -27,6 +27,30 @@ export interface AppDescriptor {
 }
 
 /** AppDescriptor describes a cosmos-sdk based application */
+export interface AppDescriptorAmino {
+  /**
+   * AuthnDescriptor provides information on how to authenticate transactions on the application
+   * NOTE: experimental and subject to change in future releases.
+   */
+  authn?: AuthnDescriptorAmino;
+
+  /** chain provides the chain descriptor */
+  chain?: ChainDescriptorAmino;
+
+  /** codec provides metadata information regarding codec related types */
+  codec?: CodecDescriptorAmino;
+
+  /** configuration provides metadata information regarding the sdk.Config type */
+  configuration?: ConfigurationDescriptorAmino;
+
+  /** query_services provides metadata information regarding the available queriable endpoints */
+  query_services?: QueryServicesDescriptorAmino;
+
+  /** tx provides metadata information regarding how to send transactions to the given application */
+  tx?: TxDescriptorAmino;
+}
+
+/** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptorSDKType {
   authn?: AuthnDescriptorSDKType;
   chain?: ChainDescriptorSDKType;
@@ -50,6 +74,19 @@ export interface TxDescriptor {
 }
 
 /** TxDescriptor describes the accepted transaction type */
+export interface TxDescriptorAmino {
+  /**
+   * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
+   * it is not meant to support polymorphism of transaction types, it is supposed to be used by
+   * reflection clients to understand if they can handle a specific transaction type in an application.
+   */
+  fullname: string;
+
+  /** msgs lists the accepted application messages (sdk.Msg) */
+  msgs: MsgDescriptorAmino[];
+}
+
+/** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptorSDKType {
   fullname: string;
   msgs: MsgDescriptorSDKType[];
@@ -62,6 +99,15 @@ export interface TxDescriptorSDKType {
 export interface AuthnDescriptor {
   /** sign_modes defines the supported signature algorithm */
   signModes: SigningModeDescriptor[];
+}
+
+/**
+ * AuthnDescriptor provides information on how to sign transactions without relying
+ * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
+ */
+export interface AuthnDescriptorAmino {
+  /** sign_modes defines the supported signature algorithm */
+  sign_modes: SigningModeDescriptorAmino[];
 }
 
 /**
@@ -98,6 +144,26 @@ export interface SigningModeDescriptor {
  * to sign a message given a SigningModeDescriptor, but it's better to think about
  * this another time
  */
+export interface SigningModeDescriptorAmino {
+  /** name defines the unique name of the signing mode */
+  name: string;
+
+  /** number is the unique int32 identifier for the sign_mode enum */
+  number: number;
+
+  /**
+   * authn_info_provider_method_fullname defines the fullname of the method to call to get
+   * the metadata required to authenticate using the provided sign_modes
+   */
+  authn_info_provider_method_fullname: string;
+}
+
+/**
+ * SigningModeDescriptor provides information on a signing flow of the application
+ * NOTE(fdymylja): here we could go as far as providing an entire flow on how
+ * to sign a message given a SigningModeDescriptor, but it's better to think about
+ * this another time
+ */
 export interface SigningModeDescriptorSDKType {
   name: string;
   number: number;
@@ -111,6 +177,12 @@ export interface ChainDescriptor {
 }
 
 /** ChainDescriptor describes chain information of the application */
+export interface ChainDescriptorAmino {
+  /** id is the chain id */
+  id: string;
+}
+
+/** ChainDescriptor describes chain information of the application */
 export interface ChainDescriptorSDKType {
   id: string;
 }
@@ -119,6 +191,12 @@ export interface ChainDescriptorSDKType {
 export interface CodecDescriptor {
   /** interfaces is a list of the registerted interfaces descriptors */
   interfaces: InterfaceDescriptor[];
+}
+
+/** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
+export interface CodecDescriptorAmino {
+  /** interfaces is a list of the registerted interfaces descriptors */
+  interfaces: InterfaceDescriptorAmino[];
 }
 
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
@@ -142,6 +220,21 @@ export interface InterfaceDescriptor {
 }
 
 /** InterfaceDescriptor describes the implementation of an interface */
+export interface InterfaceDescriptorAmino {
+  /** fullname is the name of the interface */
+  fullname: string;
+
+  /**
+   * interface_accepting_messages contains information regarding the proto messages which contain the interface as
+   * google.protobuf.Any field
+   */
+  interface_accepting_messages: InterfaceAcceptingMessageDescriptorAmino[];
+
+  /** interface_implementers is a list of the descriptors of the interface implementers */
+  interface_implementers: InterfaceImplementerDescriptorAmino[];
+}
+
+/** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptorSDKType {
   fullname: string;
   interface_accepting_messages: InterfaceAcceptingMessageDescriptorSDKType[];
@@ -160,6 +253,20 @@ export interface InterfaceImplementerDescriptor {
    * in our interface fields
    */
   typeUrl: string;
+}
+
+/** InterfaceImplementerDescriptor describes an interface implementer */
+export interface InterfaceImplementerDescriptorAmino {
+  /** fullname is the protobuf queryable name of the interface implementer */
+  fullname: string;
+
+  /**
+   * type_url defines the type URL used when marshalling the type as any
+   * this is required so we can provide type safe google.protobuf.Any marshalling and
+   * unmarshalling, making sure that we don't accept just 'any' type
+   * in our interface fields
+   */
+  type_url: string;
 }
 
 /** InterfaceImplementerDescriptor describes an interface implementer */
@@ -188,6 +295,22 @@ export interface InterfaceAcceptingMessageDescriptor {
  * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
  * an interface represented as a google.protobuf.Any
  */
+export interface InterfaceAcceptingMessageDescriptorAmino {
+  /** fullname is the protobuf fullname of the type containing the interface */
+  fullname: string;
+
+  /**
+   * field_descriptor_names is a list of the protobuf name (not fullname) of the field
+   * which contains the interface as google.protobuf.Any (the interface is the same, but
+   * it can be in multiple fields of the same proto message)
+   */
+  field_descriptor_names: string[];
+}
+
+/**
+ * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
+ * an interface represented as a google.protobuf.Any
+ */
 export interface InterfaceAcceptingMessageDescriptorSDKType {
   fullname: string;
   field_descriptor_names: string[];
@@ -197,6 +320,12 @@ export interface InterfaceAcceptingMessageDescriptorSDKType {
 export interface ConfigurationDescriptor {
   /** bech32_account_address_prefix is the account address prefix */
   bech32AccountAddressPrefix: string;
+}
+
+/** ConfigurationDescriptor contains metadata information on the sdk.Config */
+export interface ConfigurationDescriptorAmino {
+  /** bech32_account_address_prefix is the account address prefix */
+  bech32_account_address_prefix: string;
 }
 
 /** ConfigurationDescriptor contains metadata information on the sdk.Config */
@@ -211,12 +340,21 @@ export interface MsgDescriptor {
 }
 
 /** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
+export interface MsgDescriptorAmino {
+  /** msg_type_url contains the TypeURL of a sdk.Msg. */
+  msg_type_url: string;
+}
+
+/** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
 export interface MsgDescriptorSDKType {
   msg_type_url: string;
 }
 
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequest {}
+
+/** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
+export interface GetAuthnDescriptorRequestAmino {}
 
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequestSDKType {}
@@ -228,12 +366,21 @@ export interface GetAuthnDescriptorResponse {
 }
 
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
+export interface GetAuthnDescriptorResponseAmino {
+  /** authn describes how to authenticate to the application when sending transactions */
+  authn?: AuthnDescriptorAmino;
+}
+
+/** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponseSDKType {
   authn?: AuthnDescriptorSDKType;
 }
 
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {}
+
+/** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
+export interface GetChainDescriptorRequestAmino {}
 
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequestSDKType {}
@@ -245,12 +392,21 @@ export interface GetChainDescriptorResponse {
 }
 
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
+export interface GetChainDescriptorResponseAmino {
+  /** chain describes application chain information */
+  chain?: ChainDescriptorAmino;
+}
+
+/** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponseSDKType {
   chain?: ChainDescriptorSDKType;
 }
 
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {}
+
+/** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
+export interface GetCodecDescriptorRequestAmino {}
 
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequestSDKType {}
@@ -262,12 +418,21 @@ export interface GetCodecDescriptorResponse {
 }
 
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
+export interface GetCodecDescriptorResponseAmino {
+  /** codec describes the application codec such as registered interfaces and implementations */
+  codec?: CodecDescriptorAmino;
+}
+
+/** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponseSDKType {
   codec?: CodecDescriptorSDKType;
 }
 
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {}
+
+/** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
+export interface GetConfigurationDescriptorRequestAmino {}
 
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequestSDKType {}
@@ -279,12 +444,21 @@ export interface GetConfigurationDescriptorResponse {
 }
 
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
+export interface GetConfigurationDescriptorResponseAmino {
+  /** config describes the application's sdk.Config */
+  config?: ConfigurationDescriptorAmino;
+}
+
+/** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponseSDKType {
   config?: ConfigurationDescriptorSDKType;
 }
 
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {}
+
+/** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
+export interface GetQueryServicesDescriptorRequestAmino {}
 
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequestSDKType {}
@@ -296,12 +470,21 @@ export interface GetQueryServicesDescriptorResponse {
 }
 
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
+export interface GetQueryServicesDescriptorResponseAmino {
+  /** queries provides information on the available queryable services */
+  queries?: QueryServicesDescriptorAmino;
+}
+
+/** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponseSDKType {
   queries?: QueryServicesDescriptorSDKType;
 }
 
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {}
+
+/** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
+export interface GetTxDescriptorRequestAmino {}
 
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequestSDKType {}
@@ -316,6 +499,15 @@ export interface GetTxDescriptorResponse {
 }
 
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
+export interface GetTxDescriptorResponseAmino {
+  /**
+   * tx provides information on msgs that can be forwarded to the application
+   * alongside the accepted transaction protobuf type
+   */
+  tx?: TxDescriptorAmino;
+}
+
+/** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
 export interface GetTxDescriptorResponseSDKType {
   tx?: TxDescriptorSDKType;
 }
@@ -324,6 +516,12 @@ export interface GetTxDescriptorResponseSDKType {
 export interface QueryServicesDescriptor {
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
   queryServices: QueryServiceDescriptor[];
+}
+
+/** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
+export interface QueryServicesDescriptorAmino {
+  /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
+  query_services: QueryServiceDescriptorAmino[];
 }
 
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
@@ -341,6 +539,18 @@ export interface QueryServiceDescriptor {
 
   /** methods provides a list of query service methods */
   methods: QueryMethodDescriptor[];
+}
+
+/** QueryServiceDescriptor describes a cosmos-sdk queryable service */
+export interface QueryServiceDescriptorAmino {
+  /** fullname is the protobuf fullname of the service descriptor */
+  fullname: string;
+
+  /** is_module describes if this service is actually exposed by an application's module */
+  is_module: boolean;
+
+  /** methods provides a list of query service methods */
+  methods: QueryMethodDescriptorAmino[];
 }
 
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
@@ -364,6 +574,22 @@ export interface QueryMethodDescriptor {
    * this method via tendermint abci.Query
    */
   fullQueryPath: string;
+}
+
+/**
+ * QueryMethodDescriptor describes a queryable method of a query service
+ * no other info is provided beside method name and tendermint queryable path
+ * because it would be redundant with the grpc reflection service
+ */
+export interface QueryMethodDescriptorAmino {
+  /** name is the protobuf name (not fullname) of the method */
+  name: string;
+
+  /**
+   * full_query_path is the path that can be used to query
+   * this method via tendermint abci.Query
+   */
+  full_query_path: string;
 }
 
 /**
@@ -511,6 +737,28 @@ export const AppDescriptor = {
     message.queryServices !== undefined && (obj.query_services = message.queryServices ? QueryServicesDescriptor.toSDK(message.queryServices) : undefined);
     message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toSDK(message.tx) : undefined);
     return obj;
+  },
+
+  fromAmino(object: AppDescriptorAmino): AppDescriptor {
+    return {
+      authn: object?.authn ? AuthnDescriptor.fromAmino(object.authn) : undefined,
+      chain: object?.chain ? ChainDescriptor.fromAmino(object.chain) : undefined,
+      codec: object?.codec ? CodecDescriptor.fromAmino(object.codec) : undefined,
+      configuration: object?.configuration ? ConfigurationDescriptor.fromAmino(object.configuration) : undefined,
+      queryServices: object?.query_services ? QueryServicesDescriptor.fromAmino(object.query_services) : undefined,
+      tx: object?.tx ? TxDescriptor.fromAmino(object.tx) : undefined
+    };
+  },
+
+  toAmino(message: AppDescriptor): AppDescriptorAmino {
+    const obj: any = {};
+    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn) : undefined;
+    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain) : undefined;
+    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec) : undefined;
+    obj.configuration = message.configuration ? ConfigurationDescriptor.toAmino(message.configuration) : undefined;
+    obj.query_services = message.queryServices ? QueryServicesDescriptor.toAmino(message.queryServices) : undefined;
+    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
+    return obj;
   }
 
 };
@@ -606,6 +854,26 @@ export const TxDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: TxDescriptorAmino): TxDescriptor {
+    return {
+      fullname: object.fullname,
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: TxDescriptor): TxDescriptorAmino {
+    const obj: any = {};
+    obj.fullname = message.fullname;
+
+    if (message.msgs) {
+      obj.msgs = message.msgs.map(e => e ? MsgDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.msgs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -682,6 +950,24 @@ export const AuthnDescriptor = {
 
     if (message.signModes) {
       obj.sign_modes = message.signModes.map(e => e ? SigningModeDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.sign_modes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: AuthnDescriptorAmino): AuthnDescriptor {
+    return {
+      signModes: Array.isArray(object?.sign_modes) ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AuthnDescriptor): AuthnDescriptorAmino {
+    const obj: any = {};
+
+    if (message.signModes) {
+      obj.sign_modes = message.signModes.map(e => e ? SigningModeDescriptor.toAmino(e) : undefined);
     } else {
       obj.sign_modes = [];
     }
@@ -784,6 +1070,22 @@ export const SigningModeDescriptor = {
     obj.number = message.number;
     obj.authn_info_provider_method_fullname = message.authnInfoProviderMethodFullname;
     return obj;
+  },
+
+  fromAmino(object: SigningModeDescriptorAmino): SigningModeDescriptor {
+    return {
+      name: object.name,
+      number: object.number,
+      authnInfoProviderMethodFullname: object.authn_info_provider_method_fullname
+    };
+  },
+
+  toAmino(message: SigningModeDescriptor): SigningModeDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    obj.authn_info_provider_method_fullname = message.authnInfoProviderMethodFullname;
+    return obj;
   }
 
 };
@@ -850,6 +1152,18 @@ export const ChainDescriptor = {
   },
 
   toSDK(message: ChainDescriptor): ChainDescriptorSDKType {
+    const obj: any = {};
+    obj.id = message.id;
+    return obj;
+  },
+
+  fromAmino(object: ChainDescriptorAmino): ChainDescriptor {
+    return {
+      id: object.id
+    };
+  },
+
+  toAmino(message: ChainDescriptor): ChainDescriptorAmino {
     const obj: any = {};
     obj.id = message.id;
     return obj;
@@ -929,6 +1243,24 @@ export const CodecDescriptor = {
 
     if (message.interfaces) {
       obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.interfaces = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: CodecDescriptorAmino): CodecDescriptor {
+    return {
+      interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CodecDescriptor): CodecDescriptorAmino {
+    const obj: any = {};
+
+    if (message.interfaces) {
+      obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toAmino(e) : undefined);
     } else {
       obj.interfaces = [];
     }
@@ -1053,6 +1385,33 @@ export const InterfaceDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
+    return {
+      fullname: object.fullname,
+      interfaceAcceptingMessages: Array.isArray(object?.interface_accepting_messages) ? object.interface_accepting_messages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromAmino(e)) : [],
+      interfaceImplementers: Array.isArray(object?.interface_implementers) ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
+    const obj: any = {};
+    obj.fullname = message.fullname;
+
+    if (message.interfaceAcceptingMessages) {
+      obj.interface_accepting_messages = message.interfaceAcceptingMessages.map(e => e ? InterfaceAcceptingMessageDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.interface_accepting_messages = [];
+    }
+
+    if (message.interfaceImplementers) {
+      obj.interface_implementers = message.interfaceImplementers.map(e => e ? InterfaceImplementerDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.interface_implementers = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1132,6 +1491,20 @@ export const InterfaceImplementerDescriptor = {
   },
 
   toSDK(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorSDKType {
+    const obj: any = {};
+    obj.fullname = message.fullname;
+    obj.type_url = message.typeUrl;
+    return obj;
+  },
+
+  fromAmino(object: InterfaceImplementerDescriptorAmino): InterfaceImplementerDescriptor {
+    return {
+      fullname: object.fullname,
+      typeUrl: object.type_url
+    };
+  },
+
+  toAmino(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     obj.type_url = message.typeUrl;
@@ -1231,6 +1604,26 @@ export const InterfaceAcceptingMessageDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: InterfaceAcceptingMessageDescriptorAmino): InterfaceAcceptingMessageDescriptor {
+    return {
+      fullname: object.fullname,
+      fieldDescriptorNames: Array.isArray(object?.field_descriptor_names) ? object.field_descriptor_names.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAmino {
+    const obj: any = {};
+    obj.fullname = message.fullname;
+
+    if (message.fieldDescriptorNames) {
+      obj.field_descriptor_names = message.fieldDescriptorNames.map(e => e);
+    } else {
+      obj.field_descriptor_names = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1297,6 +1690,18 @@ export const ConfigurationDescriptor = {
   },
 
   toSDK(message: ConfigurationDescriptor): ConfigurationDescriptorSDKType {
+    const obj: any = {};
+    obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
+    return obj;
+  },
+
+  fromAmino(object: ConfigurationDescriptorAmino): ConfigurationDescriptor {
+    return {
+      bech32AccountAddressPrefix: object.bech32_account_address_prefix
+    };
+  },
+
+  toAmino(message: ConfigurationDescriptor): ConfigurationDescriptorAmino {
     const obj: any = {};
     obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
     return obj;
@@ -1369,6 +1774,18 @@ export const MsgDescriptor = {
     const obj: any = {};
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
+  },
+
+  fromAmino(object: MsgDescriptorAmino): MsgDescriptor {
+    return {
+      msgTypeUrl: object.msg_type_url
+    };
+  },
+
+  toAmino(message: MsgDescriptor): MsgDescriptorAmino {
+    const obj: any = {};
+    obj.msg_type_url = message.msgTypeUrl;
+    return obj;
   }
 
 };
@@ -1419,6 +1836,15 @@ export const GetAuthnDescriptorRequest = {
   },
 
   toSDK(_: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetAuthnDescriptorRequestAmino): GetAuthnDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1490,6 +1916,18 @@ export const GetAuthnDescriptorResponse = {
     const obj: any = {};
     message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toSDK(message.authn) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GetAuthnDescriptorResponseAmino): GetAuthnDescriptorResponse {
+    return {
+      authn: object?.authn ? AuthnDescriptor.fromAmino(object.authn) : undefined
+    };
+  },
+
+  toAmino(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseAmino {
+    const obj: any = {};
+    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn) : undefined;
+    return obj;
   }
 
 };
@@ -1540,6 +1978,15 @@ export const GetChainDescriptorRequest = {
   },
 
   toSDK(_: GetChainDescriptorRequest): GetChainDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetChainDescriptorRequestAmino): GetChainDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetChainDescriptorRequest): GetChainDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1611,6 +2058,18 @@ export const GetChainDescriptorResponse = {
     const obj: any = {};
     message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toSDK(message.chain) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GetChainDescriptorResponseAmino): GetChainDescriptorResponse {
+    return {
+      chain: object?.chain ? ChainDescriptor.fromAmino(object.chain) : undefined
+    };
+  },
+
+  toAmino(message: GetChainDescriptorResponse): GetChainDescriptorResponseAmino {
+    const obj: any = {};
+    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain) : undefined;
+    return obj;
   }
 
 };
@@ -1661,6 +2120,15 @@ export const GetCodecDescriptorRequest = {
   },
 
   toSDK(_: GetCodecDescriptorRequest): GetCodecDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetCodecDescriptorRequestAmino): GetCodecDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetCodecDescriptorRequest): GetCodecDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1732,6 +2200,18 @@ export const GetCodecDescriptorResponse = {
     const obj: any = {};
     message.codec !== undefined && (obj.codec = message.codec ? CodecDescriptor.toSDK(message.codec) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GetCodecDescriptorResponseAmino): GetCodecDescriptorResponse {
+    return {
+      codec: object?.codec ? CodecDescriptor.fromAmino(object.codec) : undefined
+    };
+  },
+
+  toAmino(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseAmino {
+    const obj: any = {};
+    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec) : undefined;
+    return obj;
   }
 
 };
@@ -1782,6 +2262,15 @@ export const GetConfigurationDescriptorRequest = {
   },
 
   toSDK(_: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetConfigurationDescriptorRequestAmino): GetConfigurationDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1853,6 +2342,18 @@ export const GetConfigurationDescriptorResponse = {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? ConfigurationDescriptor.toSDK(message.config) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GetConfigurationDescriptorResponseAmino): GetConfigurationDescriptorResponse {
+    return {
+      config: object?.config ? ConfigurationDescriptor.fromAmino(object.config) : undefined
+    };
+  },
+
+  toAmino(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseAmino {
+    const obj: any = {};
+    obj.config = message.config ? ConfigurationDescriptor.toAmino(message.config) : undefined;
+    return obj;
   }
 
 };
@@ -1903,6 +2404,15 @@ export const GetQueryServicesDescriptorRequest = {
   },
 
   toSDK(_: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetQueryServicesDescriptorRequestAmino): GetQueryServicesDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -1974,6 +2484,18 @@ export const GetQueryServicesDescriptorResponse = {
     const obj: any = {};
     message.queries !== undefined && (obj.queries = message.queries ? QueryServicesDescriptor.toSDK(message.queries) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GetQueryServicesDescriptorResponseAmino): GetQueryServicesDescriptorResponse {
+    return {
+      queries: object?.queries ? QueryServicesDescriptor.fromAmino(object.queries) : undefined
+    };
+  },
+
+  toAmino(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseAmino {
+    const obj: any = {};
+    obj.queries = message.queries ? QueryServicesDescriptor.toAmino(message.queries) : undefined;
+    return obj;
   }
 
 };
@@ -2024,6 +2546,15 @@ export const GetTxDescriptorRequest = {
   },
 
   toSDK(_: GetTxDescriptorRequest): GetTxDescriptorRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: GetTxDescriptorRequestAmino): GetTxDescriptorRequest {
+    return {};
+  },
+
+  toAmino(_: GetTxDescriptorRequest): GetTxDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   }
@@ -2094,6 +2625,18 @@ export const GetTxDescriptorResponse = {
   toSDK(message: GetTxDescriptorResponse): GetTxDescriptorResponseSDKType {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toSDK(message.tx) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GetTxDescriptorResponseAmino): GetTxDescriptorResponse {
+    return {
+      tx: object?.tx ? TxDescriptor.fromAmino(object.tx) : undefined
+    };
+  },
+
+  toAmino(message: GetTxDescriptorResponse): GetTxDescriptorResponseAmino {
+    const obj: any = {};
+    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
     return obj;
   }
 
@@ -2171,6 +2714,24 @@ export const QueryServicesDescriptor = {
 
     if (message.queryServices) {
       obj.query_services = message.queryServices.map(e => e ? QueryServiceDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.query_services = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: QueryServicesDescriptorAmino): QueryServicesDescriptor {
+    return {
+      queryServices: Array.isArray(object?.query_services) ? object.query_services.map((e: any) => QueryServiceDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryServicesDescriptor): QueryServicesDescriptorAmino {
+    const obj: any = {};
+
+    if (message.queryServices) {
+      obj.query_services = message.queryServices.map(e => e ? QueryServiceDescriptor.toAmino(e) : undefined);
     } else {
       obj.query_services = [];
     }
@@ -2285,6 +2846,28 @@ export const QueryServiceDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: QueryServiceDescriptorAmino): QueryServiceDescriptor {
+    return {
+      fullname: object.fullname,
+      isModule: object.is_module,
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryServiceDescriptor): QueryServiceDescriptorAmino {
+    const obj: any = {};
+    obj.fullname = message.fullname;
+    obj.is_module = message.isModule;
+
+    if (message.methods) {
+      obj.methods = message.methods.map(e => e ? QueryMethodDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.methods = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2364,6 +2947,20 @@ export const QueryMethodDescriptor = {
   },
 
   toSDK(message: QueryMethodDescriptor): QueryMethodDescriptorSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.full_query_path = message.fullQueryPath;
+    return obj;
+  },
+
+  fromAmino(object: QueryMethodDescriptorAmino): QueryMethodDescriptor {
+    return {
+      name: object.name,
+      fullQueryPath: object.full_query_path
+    };
+  },
+
+  toAmino(message: QueryMethodDescriptor): QueryMethodDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.full_query_path = message.fullQueryPath;

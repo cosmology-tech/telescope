@@ -1,4 +1,4 @@
-import { GroupID, GroupIDSDKType } from "./groupid";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -6,6 +6,11 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
   id?: GroupID;
+}
+
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupAmino {
+  id?: GroupIDAmino;
 }
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
@@ -17,11 +22,19 @@ export interface MsgCloseGroupSDKType {
 export interface MsgCloseGroupResponse {}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseAmino {}
+
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id?: GroupID;
+}
+
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupAmino {
+  id?: GroupIDAmino;
 }
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
@@ -33,11 +46,19 @@ export interface MsgPauseGroupSDKType {
 export interface MsgPauseGroupResponse {}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseAmino {}
+
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id?: GroupID;
+}
+
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupAmino {
+  id?: GroupIDAmino;
 }
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
@@ -47,6 +68,9 @@ export interface MsgStartGroupSDKType {
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
+
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseAmino {}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
@@ -116,6 +140,18 @@ export const MsgCloseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -166,6 +202,15 @@ export const MsgCloseGroupResponse = {
   },
 
   toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -237,6 +282,18 @@ export const MsgPauseGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -287,6 +344,15 @@ export const MsgPauseGroupResponse = {
   },
 
   toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -358,6 +424,18 @@ export const MsgStartGroup = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgStartGroup): MsgStartGroupAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -408,6 +486,15 @@ export const MsgStartGroupResponse = {
   },
 
   toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};
     return obj;
   }

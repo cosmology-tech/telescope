@@ -1,8 +1,8 @@
-import { OrderFilters, OrderFiltersSDKType, OrderID, OrderIDSDKType, Order, OrderSDKType } from "./order";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
-import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
+import { OrderFilters, OrderFiltersAmino, OrderFiltersSDKType, OrderID, OrderIDAmino, OrderIDSDKType, Order, OrderAmino, OrderSDKType } from "./order";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { BidFilters, BidFiltersAmino, BidFiltersSDKType, BidID, BidIDAmino, BidIDSDKType, Bid, BidAmino, BidSDKType } from "./bid";
+import { LeaseFilters, LeaseFiltersAmino, LeaseFiltersSDKType, LeaseID, LeaseIDAmino, LeaseIDSDKType, Lease, LeaseAmino, LeaseSDKType } from "./lease";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -11,6 +11,12 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface QueryOrdersRequest {
   filters?: OrderFilters;
   pagination?: PageRequest;
+}
+
+/** QueryOrdersRequest is request type for the Query/Orders RPC method */
+export interface QueryOrdersRequestAmino {
+  filters?: OrderFiltersAmino;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
@@ -26,6 +32,12 @@ export interface QueryOrdersResponse {
 }
 
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
+export interface QueryOrdersResponseAmino {
+  orders: OrderAmino[];
+  pagination?: PageResponseAmino;
+}
+
+/** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseSDKType {
   orders: OrderSDKType[];
   pagination?: PageResponseSDKType;
@@ -34,6 +46,11 @@ export interface QueryOrdersResponseSDKType {
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
   id?: OrderID;
+}
+
+/** QueryOrderRequest is request type for the Query/Order RPC method */
+export interface QueryOrderRequestAmino {
+  id?: OrderIDAmino;
 }
 
 /** QueryOrderRequest is request type for the Query/Order RPC method */
@@ -47,6 +64,11 @@ export interface QueryOrderResponse {
 }
 
 /** QueryOrderResponse is response type for the Query/Order RPC method */
+export interface QueryOrderResponseAmino {
+  order?: OrderAmino;
+}
+
+/** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseSDKType {
   order?: OrderSDKType;
 }
@@ -55,6 +77,12 @@ export interface QueryOrderResponseSDKType {
 export interface QueryBidsRequest {
   filters?: BidFilters;
   pagination?: PageRequest;
+}
+
+/** QueryBidsRequest is request type for the Query/Bids RPC method */
+export interface QueryBidsRequestAmino {
+  filters?: BidFiltersAmino;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
@@ -70,6 +98,12 @@ export interface QueryBidsResponse {
 }
 
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
+export interface QueryBidsResponseAmino {
+  bids: QueryBidResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+
+/** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseSDKType {
   bids: QueryBidResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -81,6 +115,11 @@ export interface QueryBidRequest {
 }
 
 /** QueryBidRequest is request type for the Query/Bid RPC method */
+export interface QueryBidRequestAmino {
+  id?: BidIDAmino;
+}
+
+/** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestSDKType {
   id?: BidIDSDKType;
 }
@@ -89,6 +128,12 @@ export interface QueryBidRequestSDKType {
 export interface QueryBidResponse {
   bid?: Bid;
   escrowAccount?: Account;
+}
+
+/** QueryBidResponse is response type for the Query/Bid RPC method */
+export interface QueryBidResponseAmino {
+  bid?: BidAmino;
+  escrow_account?: AccountAmino;
 }
 
 /** QueryBidResponse is response type for the Query/Bid RPC method */
@@ -104,6 +149,12 @@ export interface QueryLeasesRequest {
 }
 
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
+export interface QueryLeasesRequestAmino {
+  filters?: LeaseFiltersAmino;
+  pagination?: PageRequestAmino;
+}
+
+/** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestSDKType {
   filters?: LeaseFiltersSDKType;
   pagination?: PageRequestSDKType;
@@ -113,6 +164,12 @@ export interface QueryLeasesRequestSDKType {
 export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
   pagination?: PageResponse;
+}
+
+/** QueryLeasesResponse is response type for the Query/Leases RPC method */
+export interface QueryLeasesResponseAmino {
+  leases: QueryLeaseResponseAmino[];
+  pagination?: PageResponseAmino;
 }
 
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
@@ -127,6 +184,11 @@ export interface QueryLeaseRequest {
 }
 
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
+export interface QueryLeaseRequestAmino {
+  id?: LeaseIDAmino;
+}
+
+/** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestSDKType {
   id?: LeaseIDSDKType;
 }
@@ -135,6 +197,12 @@ export interface QueryLeaseRequestSDKType {
 export interface QueryLeaseResponse {
   lease?: Lease;
   escrowPayment?: FractionalPayment;
+}
+
+/** QueryLeaseResponse is response type for the Query/Lease RPC method */
+export interface QueryLeaseResponseAmino {
+  lease?: LeaseAmino;
+  escrow_payment?: FractionalPaymentAmino;
 }
 
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
@@ -221,6 +289,20 @@ export const QueryOrdersRequest = {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
+    return {
+      filters: object?.filters ? OrderFilters.fromAmino(object.filters) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryOrdersRequest): QueryOrdersRequestAmino {
+    const obj: any = {};
+    obj.filters = message.filters ? OrderFilters.toAmino(message.filters) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -317,6 +399,26 @@ export const QueryOrdersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryOrdersResponseAmino): QueryOrdersResponse {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryOrdersResponse): QueryOrdersResponseAmino {
+    const obj: any = {};
+
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -386,6 +488,18 @@ export const QueryOrderRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? OrderID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
+    return {
+      id: object?.id ? OrderID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryOrderRequest): QueryOrderRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? OrderID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -454,6 +568,18 @@ export const QueryOrderResponse = {
   toSDK(message: QueryOrderResponse): QueryOrderResponseSDKType {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? Order.toSDK(message.order) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
+    return {
+      order: object?.order ? Order.fromAmino(object.order) : undefined
+    };
+  },
+
+  toAmino(message: QueryOrderResponse): QueryOrderResponseAmino {
+    const obj: any = {};
+    obj.order = message.order ? Order.toAmino(message.order) : undefined;
     return obj;
   }
 
@@ -537,6 +663,20 @@ export const QueryBidsRequest = {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
+    return {
+      filters: object?.filters ? BidFilters.fromAmino(object.filters) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryBidsRequest): QueryBidsRequestAmino {
+    const obj: any = {};
+    obj.filters = message.filters ? BidFilters.toAmino(message.filters) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -633,6 +773,26 @@ export const QueryBidsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryBidsResponseAmino): QueryBidsResponse {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryBidsResponse): QueryBidsResponseAmino {
+    const obj: any = {};
+
+    if (message.bids) {
+      obj.bids = message.bids.map(e => e ? QueryBidResponse.toAmino(e) : undefined);
+    } else {
+      obj.bids = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -701,6 +861,18 @@ export const QueryBidRequest = {
   toSDK(message: QueryBidRequest): QueryBidRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? BidID.toSDK(message.id) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
+    return {
+      id: object?.id ? BidID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryBidRequest): QueryBidRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? BidID.toAmino(message.id) : undefined;
     return obj;
   }
 
@@ -785,6 +957,20 @@ export const QueryBidResponse = {
     message.bid !== undefined && (obj.bid = message.bid ? Bid.toSDK(message.bid) : undefined);
     message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
+    return {
+      bid: object?.bid ? Bid.fromAmino(object.bid) : undefined,
+      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
+    };
+  },
+
+  toAmino(message: QueryBidResponse): QueryBidResponseAmino {
+    const obj: any = {};
+    obj.bid = message.bid ? Bid.toAmino(message.bid) : undefined;
+    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
+    return obj;
   }
 
 };
@@ -867,6 +1053,20 @@ export const QueryLeasesRequest = {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
+    return {
+      filters: object?.filters ? LeaseFilters.fromAmino(object.filters) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryLeasesRequest): QueryLeasesRequestAmino {
+    const obj: any = {};
+    obj.filters = message.filters ? LeaseFilters.toAmino(message.filters) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -963,6 +1163,26 @@ export const QueryLeasesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryLeasesResponseAmino): QueryLeasesResponse {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryLeasesResponse): QueryLeasesResponseAmino {
+    const obj: any = {};
+
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toAmino(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -1031,6 +1251,18 @@ export const QueryLeaseRequest = {
   toSDK(message: QueryLeaseRequest): QueryLeaseRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? LeaseID.toSDK(message.id) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
+    return {
+      id: object?.id ? LeaseID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryLeaseRequest): QueryLeaseRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? LeaseID.toAmino(message.id) : undefined;
     return obj;
   }
 
@@ -1114,6 +1346,20 @@ export const QueryLeaseResponse = {
     const obj: any = {};
     message.lease !== undefined && (obj.lease = message.lease ? Lease.toSDK(message.lease) : undefined);
     message.escrowPayment !== undefined && (obj.escrow_payment = message.escrowPayment ? FractionalPayment.toSDK(message.escrowPayment) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {
+    return {
+      lease: object?.lease ? Lease.fromAmino(object.lease) : undefined,
+      escrowPayment: object?.escrow_payment ? FractionalPayment.fromAmino(object.escrow_payment) : undefined
+    };
+  },
+
+  toAmino(message: QueryLeaseResponse): QueryLeaseResponseAmino {
+    const obj: any = {};
+    obj.lease = message.lease ? Lease.toAmino(message.lease) : undefined;
+    obj.escrow_payment = message.escrowPayment ? FractionalPayment.toAmino(message.escrowPayment) : undefined;
     return obj;
   }
 

@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
+import { QueryAccountsRequest, QueryAccountsRequestAmino, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseAmino, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestAmino, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseAmino, QueryPaymentsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,181 +1,31 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, TextProposal, TextProposalSDKType, voteOptionFromJSON } from "./gov";
-import { RegisterIncentiveProposal, RegisterIncentiveProposalSDKType } from "../../../evmos/incentives/v1/incentives";
-import { ClientUpdateProposal, ClientUpdateProposalSDKType, UpgradeProposal, UpgradeProposalSDKType } from "../../../ibc/core/client/v1/client";
-import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalSDKType, UpdatePoolIncentivesProposal, UpdatePoolIncentivesProposalSDKType } from "../../../osmosis/pool-incentives/v1beta1/gov";
-import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalSDKType, RemoveSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposalSDKType, UpdateUnpoolWhiteListProposal, UpdateUnpoolWhiteListProposalSDKType } from "../../../osmosis/superfluid/v1beta1/gov";
-import { UpdateFeeTokenProposal, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
-import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
-import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
-export interface AminoMsgSubmitProposal extends AminoMsg {
-  type: "cosmos-sdk/MsgSubmitProposal";
-  value: {
-    content: {
-      type_url: string;
-      value: Uint8Array;
-    };
-    initial_deposit: {
-      denom: string;
-      amount: string;
-    }[];
-    proposer: string;
-  };
-}
-export interface AminoMsgVote extends AminoMsg {
-  type: "cosmos-sdk/MsgVote";
-  value: {
-    proposal_id: string;
-    voter: string;
-    option: number;
-  };
-}
-export interface AminoMsgVoteWeighted extends AminoMsg {
-  type: "cosmos-sdk/MsgVoteWeighted";
-  value: {
-    proposal_id: string;
-    voter: string;
-    options: {
-      option: number;
-      weight: string;
-    }[];
-  };
-}
-export interface AminoMsgDeposit extends AminoMsg {
-  type: "cosmos-sdk/MsgDeposit";
-  value: {
-    proposal_id: string;
-    depositor: string;
-    amount: {
-      denom: string;
-      amount: string;
-    }[];
-  };
-}
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { VoteOption, VoteOptionAmino, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionAmino, WeightedVoteOptionSDKType, TextProposal, TextProposalAmino, TextProposalSDKType } from "./gov";
+import { RegisterIncentiveProposal, RegisterIncentiveProposalAmino, RegisterIncentiveProposalSDKType } from "../../../evmos/incentives/v1/incentives";
+import { ClientUpdateProposal, ClientUpdateProposalAmino, ClientUpdateProposalSDKType, UpgradeProposal, UpgradeProposalAmino, UpgradeProposalSDKType } from "../../../ibc/core/client/v1/client";
+import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalAmino, ReplacePoolIncentivesProposalSDKType, UpdatePoolIncentivesProposal, UpdatePoolIncentivesProposalAmino, UpdatePoolIncentivesProposalSDKType } from "../../../osmosis/pool-incentives/v1beta1/gov";
+import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalAmino, SetSuperfluidAssetsProposalSDKType, RemoveSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposalAmino, RemoveSuperfluidAssetsProposalSDKType, UpdateUnpoolWhiteListProposal, UpdateUnpoolWhiteListProposalAmino, UpdateUnpoolWhiteListProposalSDKType } from "../../../osmosis/superfluid/v1beta1/gov";
+import { UpdateFeeTokenProposal, UpdateFeeTokenProposalAmino, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
+import { MsgSubmitProposal, MsgSubmitProposalAmino, MsgSubmitProposalSDKType, MsgVote, MsgVoteAmino, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedAmino, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositAmino, MsgDepositSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.gov.v1beta1.MsgSubmitProposal": {
     aminoType: "cosmos-sdk/MsgSubmitProposal",
-    toAmino: ({
-      content,
-      initialDeposit,
-      proposer
-    }: MsgSubmitProposal): AminoMsgSubmitProposal["value"] => {
-      return {
-        content: {
-          type_url: content.typeUrl,
-          value: content.value
-        },
-        initial_deposit: initialDeposit.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
-        })),
-        proposer
-      };
-    },
-    fromAmino: ({
-      content,
-      initial_deposit,
-      proposer
-    }: AminoMsgSubmitProposal["value"]): MsgSubmitProposal => {
-      return {
-        content: {
-          typeUrl: content.type_url,
-          value: content.value
-        },
-        initialDeposit: initial_deposit.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
-        })),
-        proposer
-      };
-    }
+    toAmino: MsgSubmitProposal.toAmino,
+    fromAmino: MsgSubmitProposal.fromAmino
   },
   "/cosmos.gov.v1beta1.MsgVote": {
     aminoType: "cosmos-sdk/MsgVote",
-    toAmino: ({
-      proposalId,
-      voter,
-      option
-    }: MsgVote): AminoMsgVote["value"] => {
-      return {
-        proposal_id: proposalId.toString(),
-        voter,
-        option
-      };
-    },
-    fromAmino: ({
-      proposal_id,
-      voter,
-      option
-    }: AminoMsgVote["value"]): MsgVote => {
-      return {
-        proposalId: Long.fromString(proposal_id),
-        voter,
-        option: voteOptionFromJSON(option)
-      };
-    }
+    toAmino: MsgVote.toAmino,
+    fromAmino: MsgVote.fromAmino
   },
   "/cosmos.gov.v1beta1.MsgVoteWeighted": {
     aminoType: "cosmos-sdk/MsgVoteWeighted",
-    toAmino: ({
-      proposalId,
-      voter,
-      options
-    }: MsgVoteWeighted): AminoMsgVoteWeighted["value"] => {
-      return {
-        proposal_id: proposalId.toString(),
-        voter,
-        options: options.map(el0 => ({
-          option: el0.option,
-          weight: el0.weight
-        }))
-      };
-    },
-    fromAmino: ({
-      proposal_id,
-      voter,
-      options
-    }: AminoMsgVoteWeighted["value"]): MsgVoteWeighted => {
-      return {
-        proposalId: Long.fromString(proposal_id),
-        voter,
-        options: options.map(el0 => ({
-          option: voteOptionFromJSON(el0.option),
-          weight: el0.weight
-        }))
-      };
-    }
+    toAmino: MsgVoteWeighted.toAmino,
+    fromAmino: MsgVoteWeighted.fromAmino
   },
   "/cosmos.gov.v1beta1.MsgDeposit": {
     aminoType: "cosmos-sdk/MsgDeposit",
-    toAmino: ({
-      proposalId,
-      depositor,
-      amount
-    }: MsgDeposit): AminoMsgDeposit["value"] => {
-      return {
-        proposal_id: proposalId.toString(),
-        depositor,
-        amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
-        }))
-      };
-    },
-    fromAmino: ({
-      proposal_id,
-      depositor,
-      amount
-    }: AminoMsgDeposit["value"]): MsgDeposit => {
-      return {
-        proposalId: Long.fromString(proposal_id),
-        depositor,
-        amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
-        }))
-      };
-    }
+    toAmino: MsgDeposit.toAmino,
+    fromAmino: MsgDeposit.fromAmino
   }
 };

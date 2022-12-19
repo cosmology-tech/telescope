@@ -1,5 +1,5 @@
-import { Grant, GrantSDKType } from "./authz";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Grant, GrantAmino, GrantSDKType } from "./authz";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -18,6 +18,16 @@ export interface MsgGrant {
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
  * on behalf of the granter with the provided expiration time.
  */
+export interface MsgGrantAmino {
+  granter: string;
+  grantee: string;
+  grant?: GrantAmino;
+}
+
+/**
+ * MsgGrant is a request type for Grant method. It declares authorization to the grantee
+ * on behalf of the granter with the provided expiration time.
+ */
 export interface MsgGrantSDKType {
   granter: string;
   grantee: string;
@@ -26,6 +36,11 @@ export interface MsgGrantSDKType {
 
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
+  results: Uint8Array[];
+}
+
+/** MsgExecResponse defines the Msg/MsgExecResponse response type. */
+export interface MsgExecResponseAmino {
   results: Uint8Array[];
 }
 
@@ -55,6 +70,22 @@ export interface MsgExec {
  * authorizations granted to the grantee. Each message should have only
  * one signer corresponding to the granter of the authorization.
  */
+export interface MsgExecAmino {
+  grantee: string;
+
+  /**
+   * Authorization Msg requests to execute. Each msg must implement Authorization interface
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
+   */
+  msgs: AnyAmino[];
+}
+
+/**
+ * MsgExec attempts to execute the provided messages using
+ * authorizations granted to the grantee. Each message should have only
+ * one signer corresponding to the granter of the authorization.
+ */
 export interface MsgExecSDKType {
   grantee: string;
   msgs: AnySDKType[];
@@ -62,6 +93,9 @@ export interface MsgExecSDKType {
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponse {}
+
+/** MsgGrantResponse defines the Msg/MsgGrant response type. */
+export interface MsgGrantResponseAmino {}
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponseSDKType {}
@@ -80,6 +114,16 @@ export interface MsgRevoke {
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
  * granter's account with that has been granted to the grantee.
  */
+export interface MsgRevokeAmino {
+  granter: string;
+  grantee: string;
+  msg_type_url: string;
+}
+
+/**
+ * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
+ * granter's account with that has been granted to the grantee.
+ */
 export interface MsgRevokeSDKType {
   granter: string;
   grantee: string;
@@ -88,6 +132,9 @@ export interface MsgRevokeSDKType {
 
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponse {}
+
+/** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
+export interface MsgRevokeResponseAmino {}
 
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponseSDKType {}
@@ -185,6 +232,22 @@ export const MsgGrant = {
     obj.grantee = message.grantee;
     message.grant !== undefined && (obj.grant = message.grant ? Grant.toSDK(message.grant) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgGrantAmino): MsgGrant {
+    return {
+      granter: object.granter,
+      grantee: object.grantee,
+      grant: object?.grant ? Grant.fromAmino(object.grant) : undefined
+    };
+  },
+
+  toAmino(message: MsgGrant): MsgGrantAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
+    return obj;
   }
 
 };
@@ -266,6 +329,24 @@ export const MsgExecResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgExecResponseAmino): MsgExecResponse {
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgExecResponse): MsgExecResponseAmino {
+    const obj: any = {};
+
+    if (message.results) {
+      obj.results = message.results.map(e => e);
+    } else {
+      obj.results = [];
+    }
+
+    return obj;
   }
 
 };
@@ -284,7 +365,7 @@ export const MsgExec = {
     }
 
     for (const v of message.msgs) {
-      Any.encode(v!, writer.uint32(18).fork()).ldelim();
+      Any.encode((v! as Any), writer.uint32(18).fork()).ldelim();
     }
 
     return writer;
@@ -304,7 +385,7 @@ export const MsgExec = {
           break;
 
         case 2:
-          message.msgs.push(Any.decode(reader, reader.uint32()));
+          message.msgs.push((Sdk_MsgauthzAuthorization_InterfaceDecoder(reader) as Any));
           break;
 
         default:
@@ -361,6 +442,26 @@ export const MsgExec = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: MsgExecAmino): MsgExec {
+    return {
+      grantee: object.grantee,
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Sdk_MsgauthzAuthorization_FromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgExec): MsgExecAmino {
+    const obj: any = {};
+    obj.grantee = message.grantee;
+
+    if (message.msgs) {
+      obj.msgs = message.msgs.map(e => e ? Sdk_MsgauthzAuthorization_ToAmino((e as Any)) : undefined);
+    } else {
+      obj.msgs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -411,6 +512,15 @@ export const MsgGrantResponse = {
   },
 
   toSDK(_: MsgGrantResponse): MsgGrantResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgGrantResponseAmino): MsgGrantResponse {
+    return {};
+  },
+
+  toAmino(_: MsgGrantResponse): MsgGrantResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -510,6 +620,22 @@ export const MsgRevoke = {
     obj.grantee = message.grantee;
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
+  },
+
+  fromAmino(object: MsgRevokeAmino): MsgRevoke {
+    return {
+      granter: object.granter,
+      grantee: object.grantee,
+      msgTypeUrl: object.msg_type_url
+    };
+  },
+
+  toAmino(message: MsgRevoke): MsgRevokeAmino {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
+    return obj;
   }
 
 };
@@ -562,6 +688,15 @@ export const MsgRevokeResponse = {
   toSDK(_: MsgRevokeResponse): MsgRevokeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: MsgRevokeResponseAmino): MsgRevokeResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRevokeResponse): MsgRevokeResponseAmino {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -574,6 +709,12 @@ export const Sdk_Msg_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any =>
       return data;
   }
 };
+export const Sdk_Msg_FromAmino = (content: AnyAmino) => {
+  return Any.fromAmino(content);
+};
+export const Sdk_Msg_ToAmino = (content: Any) => {
+  return Any.toAmino(content);
+};
 export const Authz_Authorization_InterfaceDecoder = (input: _m0.Reader | Uint8Array): Any => {
   const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
   const data = Any.decode(reader, reader.uint32());
@@ -582,4 +723,10 @@ export const Authz_Authorization_InterfaceDecoder = (input: _m0.Reader | Uint8Ar
     default:
       return data;
   }
+};
+export const Authz_Authorization_FromAmino = (content: AnyAmino) => {
+  return Any.fromAmino(content);
+};
+export const Authz_Authorization_ToAmino = (content: Any) => {
+  return Any.toAmino(content);
 };

@@ -14,6 +14,14 @@ export interface Capability {
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
  */
+export interface CapabilityAmino {
+  index: string;
+}
+
+/**
+ * Capability defines an implementation of an object capability. The index
+ * provided to a Capability must be globally unique.
+ */
 export interface CapabilitySDKType {
   index: Long;
 }
@@ -23,6 +31,15 @@ export interface CapabilitySDKType {
  * capability and the module name.
  */
 export interface Owner {
+  module: string;
+  name: string;
+}
+
+/**
+ * Owner defines a single capability owner. An owner is defined by the name of
+ * capability and the module name.
+ */
+export interface OwnerAmino {
   module: string;
   name: string;
 }
@@ -42,6 +59,14 @@ export interface OwnerSDKType {
  */
 export interface CapabilityOwners {
   owners: Owner[];
+}
+
+/**
+ * CapabilityOwners defines a set of owners of a single Capability. The set of
+ * owners must be unique.
+ */
+export interface CapabilityOwnersAmino {
+  owners: OwnerAmino[];
 }
 
 /**
@@ -116,6 +141,18 @@ export const Capability = {
   toSDK(message: Capability): CapabilitySDKType {
     const obj: any = {};
     obj.index = message.index;
+    return obj;
+  },
+
+  fromAmino(object: CapabilityAmino): Capability {
+    return {
+      index: Long.fromString(object.index)
+    };
+  },
+
+  toAmino(message: Capability): CapabilityAmino {
+    const obj: any = {};
+    obj.index = message.index ? message.index.toString() : undefined;
     return obj;
   }
 
@@ -200,6 +237,20 @@ export const Owner = {
     obj.module = message.module;
     obj.name = message.name;
     return obj;
+  },
+
+  fromAmino(object: OwnerAmino): Owner {
+    return {
+      module: object.module,
+      name: object.name
+    };
+  },
+
+  toAmino(message: Owner): OwnerAmino {
+    const obj: any = {};
+    obj.module = message.module;
+    obj.name = message.name;
+    return obj;
   }
 
 };
@@ -276,6 +327,24 @@ export const CapabilityOwners = {
 
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toSDK(e) : undefined);
+    } else {
+      obj.owners = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
+    const obj: any = {};
+
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
     } else {
       obj.owners = [];
     }

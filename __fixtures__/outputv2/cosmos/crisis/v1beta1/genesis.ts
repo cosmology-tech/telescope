@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
@@ -10,6 +10,15 @@ export interface GenesisState {
    * module.
    */
   constantFee?: Coin;
+}
+
+/** GenesisState defines the crisis module's genesis state. */
+export interface GenesisStateAmino {
+  /**
+   * constant_fee is the fee used to verify the invariant in the crisis
+   * module.
+   */
+  constant_fee?: CoinAmino;
 }
 
 /** GenesisState defines the crisis module's genesis state. */
@@ -81,6 +90,18 @@ export const GenesisState = {
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     message.constantFee !== undefined && (obj.constant_fee = message.constantFee ? Coin.toSDK(message.constantFee) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.constant_fee = message.constantFee ? Coin.toAmino(message.constantFee) : undefined;
     return obj;
   }
 

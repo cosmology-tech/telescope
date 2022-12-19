@@ -1,4 +1,4 @@
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
@@ -7,6 +7,12 @@ export const protobufPackage = "akash.escrow.v1beta2";
 export interface GenesisState {
   accounts: Account[];
   payments: FractionalPayment[];
+}
+
+/** GenesisState defines the basic genesis state used by escrow module */
+export interface GenesisStateAmino {
+  accounts: AccountAmino[];
+  payments: FractionalPaymentAmino[];
 }
 
 /** GenesisState defines the basic genesis state used by escrow module */
@@ -111,6 +117,31 @@ export const GenesisState = {
 
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? FractionalPayment.toSDK(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
     } else {
       obj.payments = [];
     }

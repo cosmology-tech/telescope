@@ -1,10 +1,16 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta1";
 
 /** ProviderInfo */
 export interface ProviderInfo {
+  email: string;
+  website: string;
+}
+
+/** ProviderInfo */
+export interface ProviderInfoAmino {
   email: string;
   website: string;
 }
@@ -24,6 +30,14 @@ export interface MsgCreateProvider {
 }
 
 /** MsgCreateProvider defines an SDK message for creating a provider */
+export interface MsgCreateProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
+}
+
+/** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
   owner: string;
   host_uri: string;
@@ -35,6 +49,9 @@ export interface MsgCreateProviderSDKType {
 export interface MsgCreateProviderResponse {}
 
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
+export interface MsgCreateProviderResponseAmino {}
+
+/** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
 
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -43,6 +60,14 @@ export interface MsgUpdateProvider {
   hostUri: string;
   attributes: Attribute[];
   info?: ProviderInfo;
+}
+
+/** MsgUpdateProvider defines an SDK message for updating a provider */
+export interface MsgUpdateProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
 }
 
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -57,10 +82,18 @@ export interface MsgUpdateProviderSDKType {
 export interface MsgUpdateProviderResponse {}
 
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
+export interface MsgUpdateProviderResponseAmino {}
+
+/** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
 
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
+  owner: string;
+}
+
+/** MsgDeleteProvider defines an SDK message for deleting a provider */
+export interface MsgDeleteProviderAmino {
   owner: string;
 }
 
@@ -73,6 +106,9 @@ export interface MsgDeleteProviderSDKType {
 export interface MsgDeleteProviderResponse {}
 
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
+export interface MsgDeleteProviderResponseAmino {}
+
+/** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
 
 /** Provider stores owner and host details */
@@ -81,6 +117,14 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info?: ProviderInfo;
+}
+
+/** Provider stores owner and host details */
+export interface ProviderAmino {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info?: ProviderInfoAmino;
 }
 
 /** Provider stores owner and host details */
@@ -166,6 +210,20 @@ export const ProviderInfo = {
   },
 
   toSDK(message: ProviderInfo): ProviderInfoSDKType {
+    const obj: any = {};
+    obj.email = message.email;
+    obj.website = message.website;
+    return obj;
+  },
+
+  fromAmino(object: ProviderInfoAmino): ProviderInfo {
+    return {
+      email: object.email,
+      website: object.website
+    };
+  },
+
+  toAmino(message: ProviderInfo): ProviderInfoAmino {
     const obj: any = {};
     obj.email = message.email;
     obj.website = message.website;
@@ -293,6 +351,30 @@ export const MsgCreateProvider = {
 
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
   }
 
 };
@@ -343,6 +425,15 @@ export const MsgCreateProviderResponse = {
   },
 
   toSDK(_: MsgCreateProviderResponse): MsgCreateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -468,6 +559,30 @@ export const MsgUpdateProvider = {
 
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    return obj;
   }
 
 };
@@ -518,6 +633,15 @@ export const MsgUpdateProviderResponse = {
   },
 
   toSDK(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -589,6 +713,18 @@ export const MsgDeleteProvider = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
+    return {
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
   }
 
 };
@@ -639,6 +775,15 @@ export const MsgDeleteProviderResponse = {
   },
 
   toSDK(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
     const obj: any = {};
     return obj;
   }
@@ -763,6 +908,30 @@ export const Provider = {
     }
 
     message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ProviderAmino): Provider {
+    return {
+      owner: object.owner,
+      hostUri: object.host_uri,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: Provider): ProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.host_uri = message.hostUri;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
     return obj;
   }
 

@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -7,6 +7,12 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface Params {
   bidMinDeposit?: Coin;
   orderMaxBids: number;
+}
+
+/** Params is the params for the x/market module */
+export interface ParamsAmino {
+  bid_min_deposit?: CoinAmino;
+  order_max_bids: number;
 }
 
 /** Params is the params for the x/market module */
@@ -92,6 +98,20 @@ export const Params = {
   toSDK(message: Params): ParamsSDKType {
     const obj: any = {};
     message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toSDK(message.bidMinDeposit) : undefined);
+    obj.order_max_bids = message.orderMaxBids;
+    return obj;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      orderMaxBids: object.order_max_bids
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
     obj.order_max_bids = message.orderMaxBids;
     return obj;
   }

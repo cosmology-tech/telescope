@@ -24,6 +24,27 @@ export interface BIP44Params {
 }
 
 /** BIP44Params is used as path field in ledger item in Record. */
+export interface BIP44ParamsAmino {
+  /** purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation */
+  purpose: number;
+
+  /** coin_type is a constant that improves privacy */
+  coin_type: number;
+
+  /** account splits the key space into independent user identities */
+  account: number;
+
+  /**
+   * change is a constant used for public derivation. Constant 0 is used for external chain and constant 1 for internal
+   * chain.
+   */
+  change: boolean;
+
+  /** address_index is used as child index in BIP32 derivation */
+  address_index: number;
+}
+
+/** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44ParamsSDKType {
   purpose: number;
   coin_type: number;
@@ -146,6 +167,26 @@ export const BIP44Params = {
   },
 
   toSDK(message: BIP44Params): BIP44ParamsSDKType {
+    const obj: any = {};
+    obj.purpose = message.purpose;
+    obj.coin_type = message.coinType;
+    obj.account = message.account;
+    obj.change = message.change;
+    obj.address_index = message.addressIndex;
+    return obj;
+  },
+
+  fromAmino(object: BIP44ParamsAmino): BIP44Params {
+    return {
+      purpose: object.purpose,
+      coinType: object.coin_type,
+      account: object.account,
+      change: object.change,
+      addressIndex: object.address_index
+    };
+  },
+
+  toAmino(message: BIP44Params): BIP44ParamsAmino {
     const obj: any = {};
     obj.purpose = message.purpose;
     obj.coin_type = message.coinType;

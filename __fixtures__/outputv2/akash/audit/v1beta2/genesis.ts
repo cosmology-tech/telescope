@@ -1,4 +1,4 @@
-import { AuditedAttributes, AuditedAttributesSDKType } from "./audit";
+import { AuditedAttributes, AuditedAttributesAmino, AuditedAttributesSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
@@ -6,6 +6,11 @@ export const protobufPackage = "akash.audit.v1beta2";
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisState {
   attributes: AuditedAttributes[];
+}
+
+/** GenesisState defines the basic genesis state used by audit module */
+export interface GenesisStateAmino {
+  attributes: AuditedAttributesAmino[];
 }
 
 /** GenesisState defines the basic genesis state used by audit module */
@@ -85,6 +90,24 @@ export const GenesisState = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }

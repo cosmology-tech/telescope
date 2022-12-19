@@ -9,6 +9,12 @@ export interface Attribute {
 }
 
 /** Attribute represents key value pair */
+export interface AttributeAmino {
+  key: string;
+  value: string;
+}
+
+/** Attribute represents key value pair */
 export interface AttributeSDKType {
   key: string;
   value: string;
@@ -34,6 +40,20 @@ export interface SignedBy {
  * entries there
  * this behaviour to be discussed
  */
+export interface SignedByAmino {
+  /** all_of all keys in this list must have signed attributes */
+  all_of: string[];
+
+  /** any_of at least of of the keys from the list must have signed attributes */
+  any_of: string[];
+}
+
+/**
+ * SignedBy represents validation accounts that tenant expects signatures for provider attributes
+ * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ * entries there
+ * this behaviour to be discussed
+ */
 export interface SignedBySDKType {
   all_of: string[];
   any_of: string[];
@@ -46,6 +66,15 @@ export interface PlacementRequirements {
 
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
+}
+
+/** PlacementRequirements */
+export interface PlacementRequirementsAmino {
+  /** SignedBy list of keys that tenants expect to have signatures from */
+  signed_by?: SignedByAmino;
+
+  /** Attribute list of attributes tenant expects from the provider */
+  attributes: AttributeAmino[];
 }
 
 /** PlacementRequirements */
@@ -129,6 +158,20 @@ export const Attribute = {
   },
 
   toSDK(message: Attribute): AttributeSDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: AttributeAmino): Attribute {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Attribute): AttributeAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -238,6 +281,31 @@ export const SignedBy = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: SignedByAmino): SignedBy {
+    return {
+      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
+      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: SignedBy): SignedByAmino {
+    const obj: any = {};
+
+    if (message.allOf) {
+      obj.all_of = message.allOf.map(e => e);
+    } else {
+      obj.all_of = [];
+    }
+
+    if (message.anyOf) {
+      obj.any_of = message.anyOf.map(e => e);
+    } else {
+      obj.any_of = [];
+    }
+
+    return obj;
   }
 
 };
@@ -328,6 +396,26 @@ export const PlacementRequirements = {
 
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
+    return {
+      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
+    const obj: any = {};
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : undefined;
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
       obj.attributes = [];
     }

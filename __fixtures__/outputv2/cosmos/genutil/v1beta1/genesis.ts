@@ -9,6 +9,12 @@ export interface GenesisState {
 }
 
 /** GenesisState defines the raw genesis transaction in JSON. */
+export interface GenesisStateAmino {
+  /** gen_txs defines the genesis transactions. */
+  gen_txs: Uint8Array[];
+}
+
+/** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateSDKType {
   gen_txs: Uint8Array[];
 }
@@ -81,6 +87,24 @@ export const GenesisState = {
   },
 
   toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.genTxs) {
+      obj.gen_txs = message.genTxs.map(e => e);
+    } else {
+      obj.gen_txs = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
 
     if (message.genTxs) {

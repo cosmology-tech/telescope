@@ -8,12 +8,23 @@ export interface Pairs {
 }
 
 /** Pairs defines a repeated slice of Pair objects. */
+export interface PairsAmino {
+  pairs: PairAmino[];
+}
+
+/** Pairs defines a repeated slice of Pair objects. */
 export interface PairsSDKType {
   pairs: PairSDKType[];
 }
 
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
+  key: Uint8Array;
+  value: Uint8Array;
+}
+
+/** Pair defines a key/value bytes tuple. */
+export interface PairAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
@@ -101,6 +112,24 @@ export const Pairs = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: PairsAmino): Pairs {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Pairs): PairsAmino {
+    const obj: any = {};
+
+    if (message.pairs) {
+      obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e) : undefined);
+    } else {
+      obj.pairs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -180,6 +209,20 @@ export const Pair = {
   },
 
   toSDK(message: Pair): PairSDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAmino(object: PairAmino): Pair {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Pair): PairAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;

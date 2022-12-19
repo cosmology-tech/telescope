@@ -15,6 +15,7 @@ export enum Endpoint_Kind {
   UNRECOGNIZED = -1,
 }
 export const Endpoint_KindSDKType = Endpoint_Kind;
+export const Endpoint_KindAmino = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -56,6 +57,12 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
+}
+
+/** Endpoint describes a publicly accessible IP service */
+export interface EndpointAmino {
+  kind: Endpoint_Kind;
+  sequence_number: number;
 }
 
 /** Endpoint describes a publicly accessible IP service */
@@ -141,6 +148,20 @@ export const Endpoint = {
   toSDK(message: Endpoint): EndpointSDKType {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    obj.sequence_number = message.sequenceNumber;
+    return obj;
+  },
+
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      sequenceNumber: object.sequence_number
+    };
+  },
+
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
     obj.sequence_number = message.sequenceNumber;
     return obj;
   }

@@ -1,5 +1,5 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderSDKType } from "./audit";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
@@ -11,6 +11,12 @@ export interface QueryProvidersResponse {
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryProvidersResponseAmino {
+  providers: ProviderAmino[];
+  pagination?: PageResponseAmino;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
   pagination?: PageResponseSDKType;
@@ -18,6 +24,12 @@ export interface QueryProvidersResponseSDKType {
 
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
+  auditor: string;
+  owner: string;
+}
+
+/** QueryProviderRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderRequestAmino {
   auditor: string;
   owner: string;
 }
@@ -34,6 +46,11 @@ export interface QueryAllProvidersAttributesRequest {
 }
 
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
+export interface QueryAllProvidersAttributesRequestAmino {
+  pagination?: PageRequestAmino;
+}
+
+/** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -42,6 +59,12 @@ export interface QueryAllProvidersAttributesRequestSDKType {
 export interface QueryProviderAttributesRequest {
   owner: string;
   pagination?: PageRequest;
+}
+
+/** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderAttributesRequestAmino {
+  owner: string;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
@@ -57,6 +80,12 @@ export interface QueryProviderAuditorRequest {
 }
 
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
+export interface QueryProviderAuditorRequestAmino {
+  auditor: string;
+  owner: string;
+}
+
+/** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestSDKType {
   auditor: string;
   owner: string;
@@ -66,6 +95,12 @@ export interface QueryProviderAuditorRequestSDKType {
 export interface QueryAuditorAttributesRequest {
   auditor: string;
   pagination?: PageRequest;
+}
+
+/** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
+export interface QueryAuditorAttributesRequestAmino {
+  auditor: string;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
@@ -165,6 +200,26 @@ export const QueryProvidersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
+    const obj: any = {};
+
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -248,6 +303,20 @@ export const QueryProviderRequest = {
     obj.auditor = message.auditor;
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
+    return {
+      auditor: object.auditor,
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
   }
 
 };
@@ -316,6 +385,18 @@ export const QueryAllProvidersAttributesRequest = {
   toSDK(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestSDKType {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -400,6 +481,20 @@ export const QueryProviderAttributesRequest = {
     obj.owner = message.owner;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
+    return {
+      owner: object.owner,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -479,6 +574,20 @@ export const QueryProviderAuditorRequest = {
   },
 
   toSDK(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
+  },
+
+  fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
+    return {
+      auditor: object.auditor,
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
     const obj: any = {};
     obj.auditor = message.auditor;
     obj.owner = message.owner;
@@ -565,6 +674,20 @@ export const QueryAuditorAttributesRequest = {
     const obj: any = {};
     obj.auditor = message.auditor;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
+    return {
+      auditor: object.auditor,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 

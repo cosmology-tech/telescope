@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1";
@@ -25,6 +25,7 @@ export enum VoteOption {
   UNRECOGNIZED = -1,
 }
 export const VoteOptionSDKType = VoteOption;
+export const VoteOptionAmino = VoteOption;
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -113,6 +114,7 @@ export enum ProposalStatus {
   UNRECOGNIZED = -1,
 }
 export const ProposalStatusSDKType = ProposalStatus;
+export const ProposalStatusAmino = ProposalStatus;
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
@@ -178,6 +180,12 @@ export interface WeightedVoteOption {
 }
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
+export interface WeightedVoteOptionAmino {
+  option: VoteOption;
+  weight: string;
+}
+
+/** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionSDKType {
   option: VoteOption;
   weight: string;
@@ -191,6 +199,16 @@ export interface Deposit {
   proposalId: Long;
   depositor: string;
   amount: Coin[];
+}
+
+/**
+ * Deposit defines an amount deposited by an account address to an active
+ * proposal.
+ */
+export interface DepositAmino {
+  proposal_id: string;
+  depositor: string;
+  amount: CoinAmino[];
 }
 
 /**
@@ -226,6 +244,28 @@ export interface Proposal {
 }
 
 /** Proposal defines the core field members of a governance proposal. */
+export interface ProposalAmino {
+  id: string;
+  messages: AnyAmino[];
+  status: ProposalStatus;
+
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
+  final_tally_result?: TallyResultAmino;
+  submit_time?: Date;
+  deposit_end_time?: Date;
+  total_deposit: CoinAmino[];
+  voting_start_time?: Date;
+  voting_end_time?: Date;
+
+  /** metadata is any arbitrary metadata attached to the proposal. */
+  metadata: string;
+}
+
+/** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   id: Long;
   messages: AnySDKType[];
@@ -248,6 +288,14 @@ export interface TallyResult {
 }
 
 /** TallyResult defines a standard tally for a governance proposal. */
+export interface TallyResultAmino {
+  yes_count: string;
+  abstain_count: string;
+  no_count: string;
+  no_with_veto_count: string;
+}
+
+/** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultSDKType {
   yes_count: string;
   abstain_count: string;
@@ -263,6 +311,19 @@ export interface Vote {
   proposalId: Long;
   voter: string;
   options: WeightedVoteOption[];
+
+  /** metadata is any  arbitrary metadata to attached to the vote. */
+  metadata: string;
+}
+
+/**
+ * Vote defines a vote on a governance proposal.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
+ */
+export interface VoteAmino {
+  proposal_id: string;
+  voter: string;
+  options: WeightedVoteOptionAmino[];
 
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
@@ -292,6 +353,18 @@ export interface DepositParams {
 }
 
 /** DepositParams defines the params for deposits on governance proposals. */
+export interface DepositParamsAmino {
+  /** Minimum deposit for a proposal to enter voting period. */
+  min_deposit: CoinAmino[];
+
+  /**
+   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
+   *  months.
+   */
+  max_deposit_period?: DurationAmino;
+}
+
+/** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
   min_deposit: CoinSDKType[];
   max_deposit_period?: DurationSDKType;
@@ -301,6 +374,12 @@ export interface DepositParamsSDKType {
 export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod?: Duration;
+}
+
+/** VotingParams defines the params for voting on governance proposals. */
+export interface VotingParamsAmino {
+  /** Length of the voting period. */
+  voting_period?: DurationAmino;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
@@ -324,6 +403,24 @@ export interface TallyParams {
    *  vetoed. Default value: 1/3.
    */
   vetoThreshold: string;
+}
+
+/** TallyParams defines the params for tallying votes on governance proposals. */
+export interface TallyParamsAmino {
+  /**
+   * Minimum percentage of total stake needed to vote for a result to be
+   *  considered valid.
+   */
+  quorum: string;
+
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
+  threshold: string;
+
+  /**
+   * Minimum value of Veto votes to Total votes ratio for proposal to be
+   *  vetoed. Default value: 1/3.
+   */
+  veto_threshold: string;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
@@ -410,6 +507,20 @@ export const WeightedVoteOption = {
   toSDK(message: WeightedVoteOption): WeightedVoteOptionSDKType {
     const obj: any = {};
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    obj.weight = message.weight;
+    return obj;
+  },
+
+  fromAmino(object: WeightedVoteOptionAmino): WeightedVoteOption {
+    return {
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      weight: object.weight
+    };
+  },
+
+  toAmino(message: WeightedVoteOption): WeightedVoteOptionAmino {
+    const obj: any = {};
+    obj.option = message.option;
     obj.weight = message.weight;
     return obj;
   }
@@ -516,6 +627,28 @@ export const Deposit = {
 
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: DepositAmino): Deposit {
+    return {
+      proposalId: Long.fromString(object.proposal_id),
+      depositor: object.depositor,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Deposit): DepositAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.depositor = message.depositor;
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -740,6 +873,48 @@ export const Proposal = {
     message.votingEndTime !== undefined && (obj.voting_end_time = message.votingEndTime ? Timestamp.toSDK(message.votingEndTime) : undefined);
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromAmino(object: ProposalAmino): Proposal {
+    return {
+      id: Long.fromString(object.id),
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
+      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined,
+      depositEndTime: object?.deposit_end_time ? Timestamp.fromAmino(object.deposit_end_time) : undefined,
+      totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
+      votingStartTime: object?.voting_start_time ? Timestamp.fromAmino(object.voting_start_time) : undefined,
+      votingEndTime: object?.voting_end_time ? Timestamp.fromAmino(object.voting_end_time) : undefined,
+      metadata: object.metadata
+    };
+  },
+
+  toAmino(message: Proposal): ProposalAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
+
+    obj.status = message.status;
+    obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
+    obj.submit_time = message.submitTime ? Timestamp.toAmino(message.submitTime) : undefined;
+    obj.deposit_end_time = message.depositEndTime ? Timestamp.toAmino(message.depositEndTime) : undefined;
+
+    if (message.totalDeposit) {
+      obj.total_deposit = message.totalDeposit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.total_deposit = [];
+    }
+
+    obj.voting_start_time = message.votingStartTime ? Timestamp.toAmino(message.votingStartTime) : undefined;
+    obj.voting_end_time = message.votingEndTime ? Timestamp.toAmino(message.votingEndTime) : undefined;
+    obj.metadata = message.metadata;
+    return obj;
   }
 
 };
@@ -845,6 +1020,24 @@ export const TallyResult = {
   },
 
   toSDK(message: TallyResult): TallyResultSDKType {
+    const obj: any = {};
+    obj.yes_count = message.yesCount;
+    obj.abstain_count = message.abstainCount;
+    obj.no_count = message.noCount;
+    obj.no_with_veto_count = message.noWithVetoCount;
+    return obj;
+  },
+
+  fromAmino(object: TallyResultAmino): TallyResult {
+    return {
+      yesCount: object.yes_count,
+      abstainCount: object.abstain_count,
+      noCount: object.no_count,
+      noWithVetoCount: object.no_with_veto_count
+    };
+  },
+
+  toAmino(message: TallyResult): TallyResultAmino {
     const obj: any = {};
     obj.yes_count = message.yesCount;
     obj.abstain_count = message.abstainCount;
@@ -974,6 +1167,30 @@ export const Vote = {
 
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromAmino(object: VoteAmino): Vote {
+    return {
+      proposalId: Long.fromString(object.proposal_id),
+      voter: object.voter,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : [],
+      metadata: object.metadata
+    };
+  },
+
+  toAmino(message: Vote): VoteAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.voter = message.voter;
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    obj.metadata = message.metadata;
+    return obj;
   }
 
 };
@@ -1069,6 +1286,26 @@ export const DepositParams = {
 
     message.maxDepositPeriod !== undefined && (obj.max_deposit_period = message.maxDepositPeriod ? Duration.toSDK(message.maxDepositPeriod) : undefined);
     return obj;
+  },
+
+  fromAmino(object: DepositParamsAmino): DepositParams {
+    return {
+      minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
+      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
+    };
+  },
+
+  toAmino(message: DepositParams): DepositParamsAmino {
+    const obj: any = {};
+
+    if (message.minDeposit) {
+      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.min_deposit = [];
+    }
+
+    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
+    return obj;
   }
 
 };
@@ -1137,6 +1374,18 @@ export const VotingParams = {
   toSDK(message: VotingParams): VotingParamsSDKType {
     const obj: any = {};
     message.votingPeriod !== undefined && (obj.voting_period = message.votingPeriod ? Duration.toSDK(message.votingPeriod) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: VotingParamsAmino): VotingParams {
+    return {
+      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : undefined
+    };
+  },
+
+  toAmino(message: VotingParams): VotingParamsAmino {
+    const obj: any = {};
+    obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
     return obj;
   }
 
@@ -1230,6 +1479,22 @@ export const TallyParams = {
   },
 
   toSDK(message: TallyParams): TallyParamsSDKType {
+    const obj: any = {};
+    obj.quorum = message.quorum;
+    obj.threshold = message.threshold;
+    obj.veto_threshold = message.vetoThreshold;
+    return obj;
+  },
+
+  fromAmino(object: TallyParamsAmino): TallyParams {
+    return {
+      quorum: object.quorum,
+      threshold: object.threshold,
+      vetoThreshold: object.veto_threshold
+    };
+  },
+
+  toAmino(message: TallyParams): TallyParamsAmino {
     const obj: any = {};
     obj.quorum = message.quorum;
     obj.threshold = message.threshold;

@@ -10,6 +10,13 @@ export interface MsgVerifyInvariant {
 }
 
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
+export interface MsgVerifyInvariantAmino {
+  sender: string;
+  invariant_module_name: string;
+  invariant_route: string;
+}
+
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
   sender: string;
   invariant_module_name: string;
@@ -18,6 +25,9 @@ export interface MsgVerifyInvariantSDKType {
 
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
+
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
+export interface MsgVerifyInvariantResponseAmino {}
 
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseSDKType {}
@@ -115,6 +125,22 @@ export const MsgVerifyInvariant = {
     obj.invariant_module_name = message.invariantModuleName;
     obj.invariant_route = message.invariantRoute;
     return obj;
+  },
+
+  fromAmino(object: MsgVerifyInvariantAmino): MsgVerifyInvariant {
+    return {
+      sender: object.sender,
+      invariantModuleName: object.invariant_module_name,
+      invariantRoute: object.invariant_route
+    };
+  },
+
+  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.invariant_module_name = message.invariantModuleName;
+    obj.invariant_route = message.invariantRoute;
+    return obj;
   }
 
 };
@@ -165,6 +191,15 @@ export const MsgVerifyInvariantResponse = {
   },
 
   toSDK(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgVerifyInvariantResponseAmino): MsgVerifyInvariantResponse {
+    return {};
+  },
+
+  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
     const obj: any = {};
     return obj;
   }

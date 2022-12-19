@@ -11,6 +11,14 @@ export interface EventSend {
 }
 
 /** EventSend is emitted on Msg/Send */
+export interface EventSendAmino {
+  class_id: string;
+  id: string;
+  sender: string;
+  receiver: string;
+}
+
+/** EventSend is emitted on Msg/Send */
 export interface EventSendSDKType {
   class_id: string;
   id: string;
@@ -26,6 +34,13 @@ export interface EventMint {
 }
 
 /** EventMint is emitted on Mint */
+export interface EventMintAmino {
+  class_id: string;
+  id: string;
+  owner: string;
+}
+
+/** EventMint is emitted on Mint */
 export interface EventMintSDKType {
   class_id: string;
   id: string;
@@ -35,6 +50,13 @@ export interface EventMintSDKType {
 /** EventBurn is emitted on Burn */
 export interface EventBurn {
   classId: string;
+  id: string;
+  owner: string;
+}
+
+/** EventBurn is emitted on Burn */
+export interface EventBurnAmino {
+  class_id: string;
   id: string;
   owner: string;
 }
@@ -153,6 +175,24 @@ export const EventSend = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
+  },
+
+  fromAmino(object: EventSendAmino): EventSend {
+    return {
+      classId: object.class_id,
+      id: object.id,
+      sender: object.sender,
+      receiver: object.receiver
+    };
+  },
+
+  toAmino(message: EventSend): EventSendAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    return obj;
   }
 
 };
@@ -250,6 +290,22 @@ export const EventMint = {
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAmino(object: EventMintAmino): EventMint {
+    return {
+      classId: object.class_id,
+      id: object.id,
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: EventMint): EventMintAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    return obj;
   }
 
 };
@@ -342,6 +398,22 @@ export const EventBurn = {
   },
 
   toSDK(message: EventBurn): EventBurnSDKType {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    return obj;
+  },
+
+  fromAmino(object: EventBurnAmino): EventBurn {
+    return {
+      classId: object.class_id,
+      id: object.id,
+      owner: object.owner
+    };
+  },
+
+  toAmino(message: EventBurn): EventBurnAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;

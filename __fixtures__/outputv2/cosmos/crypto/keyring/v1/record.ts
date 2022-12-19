@@ -1,5 +1,5 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { BIP44Params, BIP44ParamsSDKType } from "../../hd/v1/hd";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { BIP44Params, BIP44ParamsAmino, BIP44ParamsSDKType } from "../../hd/v1/hd";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
@@ -26,6 +26,27 @@ export interface Record {
 }
 
 /** Record is used for representing a key in the keyring. */
+export interface RecordAmino {
+  /** name represents a name of Record */
+  name: string;
+
+  /** pub_key represents a public key in any format */
+  pub_key?: AnyAmino;
+
+  /** local stores the public information about a locally stored key */
+  local?: Record_LocalAmino;
+
+  /** ledger stores the public information about a Ledger key */
+  ledger?: Record_LedgerAmino;
+
+  /** Multi does not store any information. */
+  multi?: Record_MultiAmino;
+
+  /** Offline does not store any information. */
+  offline?: Record_OfflineAmino;
+}
+
+/** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
   name: string;
   pub_key?: AnySDKType;
@@ -48,6 +69,15 @@ export interface Record_Local {
  * Item is a keyring item stored in a keyring backend.
  * Local item
  */
+export interface Record_LocalAmino {
+  priv_key?: AnyAmino;
+  priv_key_type: string;
+}
+
+/**
+ * Item is a keyring item stored in a keyring backend.
+ * Local item
+ */
 export interface Record_LocalSDKType {
   priv_key?: AnySDKType;
   priv_key_type: string;
@@ -59,6 +89,11 @@ export interface Record_Ledger {
 }
 
 /** Ledger item */
+export interface Record_LedgerAmino {
+  path?: BIP44ParamsAmino;
+}
+
+/** Ledger item */
 export interface Record_LedgerSDKType {
   path?: BIP44ParamsSDKType;
 }
@@ -67,10 +102,16 @@ export interface Record_LedgerSDKType {
 export interface Record_Multi {}
 
 /** Multi item */
+export interface Record_MultiAmino {}
+
+/** Multi item */
 export interface Record_MultiSDKType {}
 
 /** Offline item */
 export interface Record_Offline {}
+
+/** Offline item */
+export interface Record_OfflineAmino {}
 
 /** Offline item */
 export interface Record_OfflineSDKType {}
@@ -210,6 +251,28 @@ export const Record = {
     message.multi !== undefined && (obj.multi = message.multi ? Record_Multi.toSDK(message.multi) : undefined);
     message.offline !== undefined && (obj.offline = message.offline ? Record_Offline.toSDK(message.offline) : undefined);
     return obj;
+  },
+
+  fromAmino(object: RecordAmino): Record {
+    return {
+      name: object.name,
+      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
+      local: object?.local ? Record_Local.fromAmino(object.local) : undefined,
+      ledger: object?.ledger ? Record_Ledger.fromAmino(object.ledger) : undefined,
+      multi: object?.multi ? Record_Multi.fromAmino(object.multi) : undefined,
+      offline: object?.offline ? Record_Offline.fromAmino(object.offline) : undefined
+    };
+  },
+
+  toAmino(message: Record): RecordAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
+    obj.local = message.local ? Record_Local.toAmino(message.local) : undefined;
+    obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger) : undefined;
+    obj.multi = message.multi ? Record_Multi.toAmino(message.multi) : undefined;
+    obj.offline = message.offline ? Record_Offline.toAmino(message.offline) : undefined;
+    return obj;
   }
 
 };
@@ -293,6 +356,20 @@ export const Record_Local = {
     message.privKey !== undefined && (obj.priv_key = message.privKey ? Any.toSDK(message.privKey) : undefined);
     obj.priv_key_type = message.privKeyType;
     return obj;
+  },
+
+  fromAmino(object: Record_LocalAmino): Record_Local {
+    return {
+      privKey: object?.priv_key ? Any.fromAmino(object.priv_key) : undefined,
+      privKeyType: object.priv_key_type
+    };
+  },
+
+  toAmino(message: Record_Local): Record_LocalAmino {
+    const obj: any = {};
+    obj.priv_key = message.privKey ? Any.toAmino(message.privKey) : undefined;
+    obj.priv_key_type = message.privKeyType;
+    return obj;
   }
 
 };
@@ -362,6 +439,18 @@ export const Record_Ledger = {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path ? BIP44Params.toSDK(message.path) : undefined);
     return obj;
+  },
+
+  fromAmino(object: Record_LedgerAmino): Record_Ledger {
+    return {
+      path: object?.path ? BIP44Params.fromAmino(object.path) : undefined
+    };
+  },
+
+  toAmino(message: Record_Ledger): Record_LedgerAmino {
+    const obj: any = {};
+    obj.path = message.path ? BIP44Params.toAmino(message.path) : undefined;
+    return obj;
   }
 
 };
@@ -414,6 +503,15 @@ export const Record_Multi = {
   toSDK(_: Record_Multi): Record_MultiSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: Record_MultiAmino): Record_Multi {
+    return {};
+  },
+
+  toAmino(_: Record_Multi): Record_MultiAmino {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -464,6 +562,15 @@ export const Record_Offline = {
   },
 
   toSDK(_: Record_Offline): Record_OfflineSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: Record_OfflineAmino): Record_Offline {
+    return {};
+  },
+
+  toAmino(_: Record_Offline): Record_OfflineAmino {
     const obj: any = {};
     return obj;
   }

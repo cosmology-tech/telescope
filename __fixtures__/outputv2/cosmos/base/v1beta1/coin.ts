@@ -19,6 +19,17 @@ export interface Coin {
  * NOTE: The amount field is an Int which implements the custom method
  * signatures required by gogoproto.
  */
+export interface CoinAmino {
+  denom: string;
+  amount: string;
+}
+
+/**
+ * Coin defines a token with a denomination and an amount.
+ * 
+ * NOTE: The amount field is an Int which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface CoinSDKType {
   denom: string;
   amount: string;
@@ -41,6 +52,17 @@ export interface DecCoin {
  * NOTE: The amount field is an Dec which implements the custom method
  * signatures required by gogoproto.
  */
+export interface DecCoinAmino {
+  denom: string;
+  amount: string;
+}
+
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface DecCoinSDKType {
   denom: string;
   amount: string;
@@ -52,12 +74,22 @@ export interface IntProto {
 }
 
 /** IntProto defines a Protobuf wrapper around an Int object. */
+export interface IntProtoAmino {
+  int: string;
+}
+
+/** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
   int: string;
 }
 
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProto {
+  dec: string;
+}
+
+/** DecProto defines a Protobuf wrapper around a Dec object. */
+export interface DecProtoAmino {
   dec: string;
 }
 
@@ -145,6 +177,20 @@ export const Coin = {
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
+  },
+
+  fromAmino(object: CoinAmino): Coin {
+    return {
+      denom: object.denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: Coin): CoinAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
   }
 
 };
@@ -228,6 +274,20 @@ export const DecCoin = {
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
+  },
+
+  fromAmino(object: DecCoinAmino): DecCoin {
+    return {
+      denom: object.denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: DecCoin): DecCoinAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
   }
 
 };
@@ -297,6 +357,18 @@ export const IntProto = {
     const obj: any = {};
     obj.int = message.int;
     return obj;
+  },
+
+  fromAmino(object: IntProtoAmino): IntProto {
+    return {
+      int: object.int
+    };
+  },
+
+  toAmino(message: IntProto): IntProtoAmino {
+    const obj: any = {};
+    obj.int = message.int;
+    return obj;
   }
 
 };
@@ -363,6 +435,18 @@ export const DecProto = {
   },
 
   toSDK(message: DecProto): DecProtoSDKType {
+    const obj: any = {};
+    obj.dec = message.dec;
+    return obj;
+  },
+
+  fromAmino(object: DecProtoAmino): DecProto {
+    return {
+      dec: object.dec
+    };
+  },
+
+  toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};
     obj.dec = message.dec;
     return obj;

@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -11,6 +11,16 @@ export const protobufPackage = "cosmos.bank.v1beta1";
  */
 export interface SendAuthorization {
   spendLimit: Coin[];
+}
+
+/**
+ * SendAuthorization allows the grantee to spend up to spend_limit coins from
+ * the granter's account.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface SendAuthorizationAmino {
+  spend_limit: CoinAmino[];
 }
 
 /**
@@ -95,6 +105,24 @@ export const SendAuthorization = {
 
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.spend_limit = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SendAuthorizationAmino): SendAuthorization {
+    return {
+      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SendAuthorization): SendAuthorizationAmino {
+    const obj: any = {};
+
+    if (message.spendLimit) {
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.spend_limit = [];
     }

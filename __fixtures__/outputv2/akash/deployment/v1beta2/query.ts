@@ -1,8 +1,8 @@
-import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDSDKType } from "./groupid";
-import { Group, GroupSDKType } from "./group";
-import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
+import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -11,6 +11,12 @@ export const protobufPackage = "akash.deployment.v1beta2";
 export interface QueryDeploymentsRequest {
   filters?: DeploymentFilters;
   pagination?: PageRequest;
+}
+
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryDeploymentsRequestAmino {
+  filters?: DeploymentFiltersAmino;
+  pagination?: PageRequestAmino;
 }
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -26,6 +32,12 @@ export interface QueryDeploymentsResponse {
 }
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
+export interface QueryDeploymentsResponseAmino {
+  deployments: QueryDeploymentResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+
+/** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -34,6 +46,11 @@ export interface QueryDeploymentsResponseSDKType {
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
   id?: DeploymentID;
+}
+
+/** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
+export interface QueryDeploymentRequestAmino {
+  id?: DeploymentIDAmino;
 }
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
@@ -49,6 +66,13 @@ export interface QueryDeploymentResponse {
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
+export interface QueryDeploymentResponseAmino {
+  deployment?: DeploymentAmino;
+  groups: GroupAmino[];
+  escrow_account?: AccountAmino;
+}
+
+/** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
   deployment?: DeploymentSDKType;
   groups: GroupSDKType[];
@@ -61,6 +85,11 @@ export interface QueryGroupRequest {
 }
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
+export interface QueryGroupRequestAmino {
+  id?: GroupIDAmino;
+}
+
+/** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id?: GroupIDSDKType;
 }
@@ -68,6 +97,11 @@ export interface QueryGroupRequestSDKType {
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
   group?: Group;
+}
+
+/** QueryGroupResponse is response type for the Query/Group RPC method */
+export interface QueryGroupResponseAmino {
+  group?: GroupAmino;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
@@ -153,6 +187,20 @@ export const QueryDeploymentsRequest = {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
+    return {
+      filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : undefined,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestAmino {
+    const obj: any = {};
+    obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   }
 
@@ -249,6 +297,26 @@ export const QueryDeploymentsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseAmino {
+    const obj: any = {};
+
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
   }
 
 };
@@ -317,6 +385,18 @@ export const QueryDeploymentRequest = {
   toSDK(message: QueryDeploymentRequest): QueryDeploymentRequestSDKType {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
+    return {
+      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
     return obj;
   }
 
@@ -427,6 +507,28 @@ export const QueryDeploymentResponse = {
 
     message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
+    return {
+      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
+      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
+    };
+  },
+
+  toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
+    const obj: any = {};
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
+    return obj;
   }
 
 };
@@ -496,6 +598,18 @@ export const QueryGroupRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
+    return {
+      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: QueryGroupRequest): QueryGroupRequestAmino {
+    const obj: any = {};
+    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    return obj;
   }
 
 };
@@ -564,6 +678,18 @@ export const QueryGroupResponse = {
   toSDK(message: QueryGroupResponse): QueryGroupResponseSDKType {
     const obj: any = {};
     message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
+    return {
+      group: object?.group ? Group.fromAmino(object.group) : undefined
+    };
+  },
+
+  toAmino(message: QueryGroupResponse): QueryGroupResponseAmino {
+    const obj: any = {};
+    obj.group = message.group ? Group.toAmino(message.group) : undefined;
     return obj;
   }
 
