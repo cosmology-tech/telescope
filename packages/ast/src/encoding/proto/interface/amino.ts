@@ -156,6 +156,42 @@ export const createAminoType = (
     return declaration;
 };
 
+export const createAminoTypeType = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType,
+    options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
+) => {
+    const MsgName = getMessageName(name, options)
+    const AminoMsgName = MsgName + 'Type'
+
+    // scalar amino types!
+    return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
+        t.identifier(AminoMsgName),
+        null,
+        [],
+        t.tsInterfaceBody([
+            tsPropertySignature(
+                t.identifier('type'),
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier('string')
+                    )
+                ),
+                false
+            ),
+            tsPropertySignature(
+                t.identifier('value'),
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier(MsgName)
+                    )
+                ),
+                false
+            )
+        ])));
+};
+
 
 
 export const createEnumAminoType = (
