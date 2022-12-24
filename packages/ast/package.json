@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/ast",
-  "version": "0.69.5",
+  "version": "0.70.0",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
