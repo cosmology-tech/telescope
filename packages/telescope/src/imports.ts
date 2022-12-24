@@ -271,38 +271,28 @@ const addDerivativeTypesToImports = (
             try {
                 lookup = context.store.getImportFromRef(ref, obj.name);
             } catch (e) { }
-            const SDKTypeObject = {
-                ...obj,
-                name: obj.name + 'SDKType',
-                importAs: (obj.importAs ?? obj.name) + 'SDKType',
-            };
-            const AminoTypeObject = {
-                ...obj,
-                name: obj.name + 'Amino',
-                importAs: (obj.importAs ?? obj.name) + 'Amino',
-            };
-            const AminoTypeUrlObject = {
-                ...obj,
-                name: obj.name + 'AminoType',
-                importAs: (obj.importAs ?? obj.name) + 'AminoType',
-            };
+
+            const appendSuffix = (obj, suffix) => {
+                return {
+                    ...obj,
+                    name: obj.name + suffix,
+                    importAs: (obj.importAs ?? obj.name) + suffix,
+                };
+            }
 
             // MARKED AS NOT DRY [google.protobuf names]
             // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
-            if (/\./.test(SDKTypeObject.name)) {
-                SDKTypeObject.name = SDKTypeObject.name.split('.')[SDKTypeObject.name.split('.').length - 1];
-                SDKTypeObject.importAs = SDKTypeObject.importAs.split('.')[SDKTypeObject.importAs.split('.').length - 1];
+            const removeProtoPrefix = obj => {
+                if (/\./.test(obj.name)) {
+                    obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
+                    obj.importAs = obj.importAs.split('.')[obj.importAs.split('.').length - 1];
+                }
+                return obj;
             }
 
-            if (/\./.test(AminoTypeObject.name)) {
-                AminoTypeObject.name = AminoTypeObject.name.split('.')[AminoTypeObject.name.split('.').length - 1];
-                AminoTypeObject.importAs = AminoTypeObject.importAs.split('.')[AminoTypeObject.importAs.split('.').length - 1];
-            }
-
-            if (/\./.test(AminoTypeUrlObject.name)) {
-                AminoTypeUrlObject.name = AminoTypeUrlObject.name.split('.')[AminoTypeUrlObject.name.split('.').length - 1];
-                AminoTypeUrlObject.importAs = AminoTypeUrlObject.importAs.split('.')[AminoTypeUrlObject.importAs.split('.').length - 1];
-            }
+            const SDKTypeObject = removeProtoPrefix(appendSuffix(obj, 'SDKType'));
+            const AminoTypeObject = removeProtoPrefix(appendSuffix(obj, 'Amino'));
+            // const AminoTypeUrlObject = removeProtoPrefix(appendSuffix(obj, 'AminoType'));
 
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
 
@@ -313,7 +303,7 @@ const addDerivativeTypesToImports = (
 
                 if (context.options.aminoEncoding.useRecursiveV2encoding) {
                     arr.push(AminoTypeObject);
-                    arr.push(AminoTypeUrlObject);
+                    // arr.push(AminoTypeUrlObject);
                 }
                 if (context.options.useSDKTypes) {
                     arr.push(SDKTypeObject);
