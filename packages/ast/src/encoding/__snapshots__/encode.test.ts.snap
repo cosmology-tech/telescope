@@ -7,7 +7,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     toAmino: ({
       address,
       myEnumField
-    }: MsgDoFunThing): AminoMsgDoFunThing["value"] => {
+    }: MsgDoFunThing): MsgDoFunThingAminoType["value"] => {
       return {
         address,
         myEnumField
@@ -16,7 +16,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     fromAmino: ({
       address,
       myEnumField
-    }: AminoMsgDoFunThing["value"]): MsgDoFunThing => {
+    }: MsgDoFunThingAminoType["value"]): MsgDoFunThing => {
       return {
         address,
         myEnumField: fancyEnumTypeFromJSON(myEnumField)

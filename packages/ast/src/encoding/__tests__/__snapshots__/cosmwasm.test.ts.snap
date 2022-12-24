@@ -9,7 +9,7 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
       contract,
       msg,
       funds
-    }: MsgExecuteContract): AminoMsgExecuteContract["value"] => {
+    }: MsgExecuteContract): MsgExecuteContractAminoType["value"] => {
       return {
         sender,
         contract,
@@ -25,7 +25,7 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
       contract,
       msg,
       funds
-    }: AminoMsgExecuteContract["value"]): MsgExecuteContract => {
+    }: MsgExecuteContractAminoType["value"]): MsgExecuteContract => {
       return {
         sender,
         contract,
@@ -51,7 +51,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       label,
       msg,
       funds
-    }: MsgInstantiateContract): AminoMsgInstantiateContract["value"] => {
+    }: MsgInstantiateContract): MsgInstantiateContractAminoType["value"] => {
       return {
         sender,
         admin,
@@ -71,7 +71,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       label,
       msg,
       funds
-    }: AminoMsgInstantiateContract["value"]): MsgInstantiateContract => {
+    }: MsgInstantiateContractAminoType["value"]): MsgInstantiateContract => {
       return {
         sender,
         admin,
@@ -97,7 +97,7 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       contract,
       codeId,
       msg
-    }: MsgMigrateContract): AminoMsgMigrateContract["value"] => {
+    }: MsgMigrateContract): MsgMigrateContractAminoType["value"] => {
       return {
         sender,
         contract,
@@ -110,7 +110,7 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       contract,
       code_id,
       msg
-    }: AminoMsgMigrateContract["value"]): MsgMigrateContract => {
+    }: MsgMigrateContractAminoType["value"]): MsgMigrateContract => {
       return {
         sender,
         contract,
@@ -130,7 +130,7 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
       sender,
       wasmByteCode,
       instantiatePermission
-    }: MsgStoreCode): AminoMsgStoreCode["value"] => {
+    }: MsgStoreCode): MsgStoreCodeAminoType["value"] => {
       return {
         sender,
         wasm_byte_code: toBase64(wasmByteCode),
@@ -144,7 +144,7 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
       sender,
       wasm_byte_code,
       instantiate_permission
-    }: AminoMsgStoreCode["value"]): MsgStoreCode => {
+    }: MsgStoreCodeAminoType["value"]): MsgStoreCode => {
       return {
         sender,
         wasmByteCode: fromBase64(wasm_byte_code),

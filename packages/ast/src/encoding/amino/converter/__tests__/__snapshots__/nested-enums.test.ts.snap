@@ -7,7 +7,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     toAmino: ({
       address,
       awesome
-    }: MsgDoFunThing): AminoMsgDoFunThing["value"] => {
+    }: MsgDoFunThing): MsgDoFunThingAminoType["value"] => {
       return {
         address,
         awesome: {
@@ -19,7 +19,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     fromAmino: ({
       address,
       awesome
-    }: AminoMsgDoFunThing["value"]): MsgDoFunThing => {
+    }: MsgDoFunThingAminoType["value"]): MsgDoFunThing => {
       return {
         address,
         awesome: {

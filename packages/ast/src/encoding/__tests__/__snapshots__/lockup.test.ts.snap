@@ -136,7 +136,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
       owner,
       duration,
       coins
-    }: MsgLockTokens): AminoMsgLockTokens["value"] => {
+    }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
         owner,
         duration: (duration * 1_000_000_000).toString(),
@@ -150,7 +150,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
       owner,
       duration,
       coins
-    }: AminoMsgLockTokens["value"]): MsgLockTokens => {
+    }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
         duration: {
@@ -300,7 +300,7 @@ exports[`osmosis/lockup/tx string 4`] = `
       owner,
       duration,
       coins
-    }: MsgLockTokens): AminoMsgLockTokens["value"] => {
+    }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
         owner,
         duration: (duration * 1_000_000_000).toString(),
@@ -314,7 +314,7 @@ exports[`osmosis/lockup/tx string 4`] = `
       owner,
       duration,
       coins
-    }: AminoMsgLockTokens["value"]): MsgLockTokens => {
+    }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
         duration: {
