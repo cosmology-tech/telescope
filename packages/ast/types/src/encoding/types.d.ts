@@ -12,7 +12,13 @@ export interface CreateProtoTypeOptions {
 }
 export declare const createProtoTypeOptionsDefaults: CreateProtoTypeOptions;
 export declare const getMessageName: (name: string, options?: CreateProtoTypeOptions) => string;
-export declare const getFieldTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => any;
+export declare const getFieldTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => {
+    ast: any;
+    isTypeCastableAnyType?: undefined;
+} | {
+    ast: any;
+    isTypeCastableAnyType: boolean;
+};
 export declare const getFieldAminoTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => any;
 export declare const getTSType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSAminoType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
