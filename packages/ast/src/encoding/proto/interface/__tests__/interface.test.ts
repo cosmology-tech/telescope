@@ -2,7 +2,7 @@ import { getNestedProto } from '@osmonauts/proto-parser';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
-import { createSDKType, createProtoType } from '..';
+import { createSDKType, createProtoType, createProtoTypeType } from '..';
 import { createAminoType } from '../amino';
 
 const store = getTestProtoStore();
@@ -13,6 +13,11 @@ describe('MsgSend', () => {
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgSend',
+            getNestedProto(ref.traversed).MsgSend
+        ));
+    });
+    it('interface type', () => {
+        expectCode(createProtoTypeType(context, 'MsgSend',
             getNestedProto(ref.traversed).MsgSend
         ));
     });
