@@ -96,6 +96,16 @@ describe('GenesisState', () => {
 describe('cosmos/authz/v1beta1/authz.proto', () => {
     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('Grant Type', () => {
+        expectCode(createProtoTypeType(context, 'Grant',
+            getNestedProto(ref.traversed).Grant
+        ));
+    });
+    it('GrantAuthorization Type', () => {
+        expectCode(createProtoTypeType(context, 'GrantAuthorization',
+            getNestedProto(ref.traversed).GrantAuthorization
+        ));
+    });
     it('Grant', () => {
         expectCode(createProtoType(context, 'Grant',
             getNestedProto(ref.traversed).Grant
