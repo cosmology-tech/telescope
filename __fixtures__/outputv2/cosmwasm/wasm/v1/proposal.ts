@@ -22,6 +22,10 @@ export interface StoreCodeProposal {
   /** InstantiatePermission to apply on contract creation, optional */
   instantiatePermission?: AccessConfig;
 }
+export interface StoreCodeProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
+  value: Uint8Array;
+}
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalAmino {
@@ -39,6 +43,10 @@ export interface StoreCodeProposalAmino {
 
   /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigAmino;
+}
+export interface StoreCodeProposalAminoType {
+  type: "wasm/StoreCodeProposal";
+  value: StoreCodeProposalAmino;
 }
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -79,6 +87,10 @@ export interface InstantiateContractProposal {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
+export interface InstantiateContractProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal";
+  value: Uint8Array;
+}
 
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
@@ -108,6 +120,10 @@ export interface InstantiateContractProposalAmino {
 
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
+}
+export interface InstantiateContractProposalAminoType {
+  type: "wasm/InstantiateContractProposal";
+  value: InstantiateContractProposalAmino;
 }
 
 /**
@@ -142,6 +158,10 @@ export interface MigrateContractProposal {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
+export interface MigrateContractProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal";
+  value: Uint8Array;
+}
 
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalAmino {
@@ -159,6 +179,10 @@ export interface MigrateContractProposalAmino {
 
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
+}
+export interface MigrateContractProposalAminoType {
+  type: "wasm/MigrateContractProposal";
+  value: MigrateContractProposalAmino;
 }
 
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
@@ -184,6 +208,10 @@ export interface SudoContractProposal {
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
 }
+export interface SudoContractProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal";
+  value: Uint8Array;
+}
 
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalAmino {
@@ -198,6 +226,10 @@ export interface SudoContractProposalAmino {
 
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
+}
+export interface SudoContractProposalAminoType {
+  type: "wasm/SudoContractProposal";
+  value: SudoContractProposalAmino;
 }
 
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
@@ -231,6 +263,10 @@ export interface ExecuteContractProposal {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
+export interface ExecuteContractProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal";
+  value: Uint8Array;
+}
 
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
@@ -254,6 +290,10 @@ export interface ExecuteContractProposalAmino {
 
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
+}
+export interface ExecuteContractProposalAminoType {
+  type: "wasm/ExecuteContractProposal";
+  value: ExecuteContractProposalAmino;
 }
 
 /**
@@ -283,6 +323,10 @@ export interface UpdateAdminProposal {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface UpdateAdminProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal";
+  value: Uint8Array;
+}
 
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalAmino {
@@ -297,6 +341,10 @@ export interface UpdateAdminProposalAmino {
 
   /** Contract is the address of the smart contract */
   contract: string;
+}
+export interface UpdateAdminProposalAminoType {
+  type: "wasm/UpdateAdminProposal";
+  value: UpdateAdminProposalAmino;
 }
 
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
@@ -321,6 +369,10 @@ export interface ClearAdminProposal {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface ClearAdminProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal";
+  value: Uint8Array;
+}
 
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
@@ -335,6 +387,10 @@ export interface ClearAdminProposalAmino {
 
   /** Contract is the address of the smart contract */
   contract: string;
+}
+export interface ClearAdminProposalAminoType {
+  type: "wasm/ClearAdminProposal";
+  value: ClearAdminProposalAmino;
 }
 
 /**
@@ -361,6 +417,10 @@ export interface PinCodesProposal {
   /** CodeIDs references the new WASM codes */
   codeIds: Long[];
 }
+export interface PinCodesProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal";
+  value: Uint8Array;
+}
 
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
@@ -375,6 +435,10 @@ export interface PinCodesProposalAmino {
 
   /** CodeIDs references the new WASM codes */
   code_ids: string[];
+}
+export interface PinCodesProposalAminoType {
+  type: "wasm/PinCodesProposal";
+  value: PinCodesProposalAmino;
 }
 
 /**
@@ -401,6 +465,10 @@ export interface UnpinCodesProposal {
   /** CodeIDs references the WASM codes */
   codeIds: Long[];
 }
+export interface UnpinCodesProposalProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal";
+  value: Uint8Array;
+}
 
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
@@ -415,6 +483,10 @@ export interface UnpinCodesProposalAmino {
 
   /** CodeIDs references the WASM codes */
   code_ids: string[];
+}
+export interface UnpinCodesProposalAminoType {
+  type: "wasm/UnpinCodesProposal";
+  value: UnpinCodesProposalAmino;
 }
 
 /**

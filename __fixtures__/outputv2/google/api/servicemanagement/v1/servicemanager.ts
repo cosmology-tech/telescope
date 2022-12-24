@@ -77,6 +77,10 @@ export interface ListServicesRequest {
   /** @deprecated */
   consumerId: string;
 }
+export interface ListServicesRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: Uint8Array;
+}
 
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestAmino {
@@ -106,6 +110,10 @@ export interface ListServicesRequestAmino {
   /** @deprecated */
   consumer_id: string;
 }
+export interface ListServicesRequestAminoType {
+  type: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: ListServicesRequestAmino;
+}
 
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
@@ -125,6 +133,10 @@ export interface ListServicesResponse {
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken: string;
 }
+export interface ListServicesResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: Uint8Array;
+}
 
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseAmino {
@@ -133,6 +145,10 @@ export interface ListServicesResponseAmino {
 
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   next_page_token: string;
+}
+export interface ListServicesResponseAminoType {
+  type: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: ListServicesResponseAmino;
 }
 
 /** Response message for `ListServices` method. */
@@ -149,6 +165,10 @@ export interface GetServiceRequest {
    */
   serviceName: string;
 }
+export interface GetServiceRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for `GetService` method. */
 export interface GetServiceRequestAmino {
@@ -157,6 +177,10 @@ export interface GetServiceRequestAmino {
    * requirements.  For example: `example.googleapis.com`.
    */
   service_name: string;
+}
+export interface GetServiceRequestAminoType {
+  type: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: GetServiceRequestAmino;
 }
 
 /** Request message for `GetService` method. */
@@ -169,11 +193,19 @@ export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
   service?: ManagedService;
 }
+export interface CreateServiceRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for CreateService method. */
 export interface CreateServiceRequestAmino {
   /** Required. Initial values for the service resource. */
   service?: ManagedServiceAmino;
+}
+export interface CreateServiceRequestAminoType {
+  type: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: CreateServiceRequestAmino;
 }
 
 /** Request message for CreateService method. */
@@ -189,6 +221,10 @@ export interface DeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface DeleteServiceRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for DeleteService method. */
 export interface DeleteServiceRequestAmino {
@@ -197,6 +233,10 @@ export interface DeleteServiceRequestAmino {
    * for naming requirements.  For example: `example.googleapis.com`.
    */
   service_name: string;
+}
+export interface DeleteServiceRequestAminoType {
+  type: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: DeleteServiceRequestAmino;
 }
 
 /** Request message for DeleteService method. */
@@ -212,6 +252,10 @@ export interface UndeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface UndeleteServiceRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestAmino {
@@ -220,6 +264,10 @@ export interface UndeleteServiceRequestAmino {
    * for naming requirements. For example: `example.googleapis.com`.
    */
   service_name: string;
+}
+export interface UndeleteServiceRequestAminoType {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: UndeleteServiceRequestAmino;
 }
 
 /** Request message for UndeleteService method. */
@@ -232,11 +280,19 @@ export interface UndeleteServiceResponse {
   /** Revived service resource. */
   service?: ManagedService;
 }
+export interface UndeleteServiceResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: Uint8Array;
+}
 
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseAmino {
   /** Revived service resource. */
   service?: ManagedServiceAmino;
+}
+export interface UndeleteServiceResponseAminoType {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: UndeleteServiceResponseAmino;
 }
 
 /** Response message for UndeleteService method. */
@@ -266,6 +322,10 @@ export interface GetServiceConfigRequest {
    */
   view: GetServiceConfigRequest_ConfigView;
 }
+export interface GetServiceConfigRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: Uint8Array;
+}
 
 /** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestAmino {
@@ -288,6 +348,10 @@ export interface GetServiceConfigRequestAmino {
    * response.
    */
   view: GetServiceConfigRequest_ConfigView;
+}
+export interface GetServiceConfigRequestAminoType {
+  type: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: GetServiceConfigRequestAmino;
 }
 
 /** Request message for GetServiceConfig method. */
@@ -314,6 +378,10 @@ export interface ListServiceConfigsRequest {
    */
   pageSize: number;
 }
+export interface ListServiceConfigsRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: Uint8Array;
+}
 
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestAmino {
@@ -332,6 +400,10 @@ export interface ListServiceConfigsRequestAmino {
    */
   page_size: number;
 }
+export interface ListServiceConfigsRequestAminoType {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: ListServiceConfigsRequestAmino;
+}
 
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
@@ -348,6 +420,10 @@ export interface ListServiceConfigsResponse {
   /** The token of the next page of results. */
   nextPageToken: string;
 }
+export interface ListServiceConfigsResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: Uint8Array;
+}
 
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseAmino {
@@ -356,6 +432,10 @@ export interface ListServiceConfigsResponseAmino {
 
   /** The token of the next page of results. */
   next_page_token: string;
+}
+export interface ListServiceConfigsResponseAminoType {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: ListServiceConfigsResponseAmino;
 }
 
 /** Response message for ListServiceConfigs method. */
@@ -375,6 +455,10 @@ export interface CreateServiceConfigRequest {
   /** Required. The service configuration resource. */
   serviceConfig?: Service;
 }
+export interface CreateServiceConfigRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: Uint8Array;
+}
 
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestAmino {
@@ -386,6 +470,10 @@ export interface CreateServiceConfigRequestAmino {
 
   /** Required. The service configuration resource. */
   service_config?: ServiceAmino;
+}
+export interface CreateServiceConfigRequestAminoType {
+  type: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: CreateServiceConfigRequestAmino;
 }
 
 /** Request message for CreateServiceConfig method. */
@@ -412,6 +500,10 @@ export interface SubmitConfigSourceRequest {
    */
   validateOnly: boolean;
 }
+export interface SubmitConfigSourceRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestAmino {
@@ -431,6 +523,10 @@ export interface SubmitConfigSourceRequestAmino {
    */
   validate_only: boolean;
 }
+export interface SubmitConfigSourceRequestAminoType {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: SubmitConfigSourceRequestAmino;
+}
 
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
@@ -444,11 +540,19 @@ export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
   serviceConfig?: Service;
 }
+export interface SubmitConfigSourceResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: Uint8Array;
+}
 
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseAmino {
   /** The generated service configuration. */
   service_config?: ServiceAmino;
+}
+export interface SubmitConfigSourceResponseAminoType {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: SubmitConfigSourceResponseAmino;
 }
 
 /** Response message for SubmitConfigSource method. */
@@ -467,6 +571,10 @@ export interface CreateServiceRolloutRequest {
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: Rollout;
 }
+export interface CreateServiceRolloutRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: Uint8Array;
+}
 
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestAmino {
@@ -478,6 +586,10 @@ export interface CreateServiceRolloutRequestAmino {
 
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: RolloutAmino;
+}
+export interface CreateServiceRolloutRequestAminoType {
+  type: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: CreateServiceRolloutRequestAmino;
 }
 
 /** Request message for 'CreateServiceRollout' */
@@ -515,6 +627,10 @@ export interface ListServiceRolloutsRequest {
    */
   filter: string;
 }
+export interface ListServiceRolloutsRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: Uint8Array;
+}
 
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestAmino {
@@ -545,6 +661,10 @@ export interface ListServiceRolloutsRequestAmino {
    */
   filter: string;
 }
+export interface ListServiceRolloutsRequestAminoType {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: ListServiceRolloutsRequestAmino;
+}
 
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
@@ -562,6 +682,10 @@ export interface ListServiceRolloutsResponse {
   /** The token of the next page of results. */
   nextPageToken: string;
 }
+export interface ListServiceRolloutsResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: Uint8Array;
+}
 
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseAmino {
@@ -570,6 +694,10 @@ export interface ListServiceRolloutsResponseAmino {
 
   /** The token of the next page of results. */
   next_page_token: string;
+}
+export interface ListServiceRolloutsResponseAminoType {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: ListServiceRolloutsResponseAmino;
 }
 
 /** Response message for ListServiceRollouts method. */
@@ -589,6 +717,10 @@ export interface GetServiceRolloutRequest {
   /** Required. The id of the rollout resource. */
   rolloutId: string;
 }
+export interface GetServiceRolloutRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: Uint8Array;
+}
 
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestAmino {
@@ -600,6 +732,10 @@ export interface GetServiceRolloutRequestAmino {
 
   /** Required. The id of the rollout resource. */
   rollout_id: string;
+}
+export interface GetServiceRolloutRequestAminoType {
+  type: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: GetServiceRolloutRequestAmino;
 }
 
 /** Request message for GetServiceRollout method. */
@@ -628,6 +764,10 @@ export interface GenerateConfigReportRequest {
    */
   oldConfig?: Any;
 }
+export interface GenerateConfigReportRequestProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: Uint8Array;
+}
 
 /** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestAmino {
@@ -648,6 +788,10 @@ export interface GenerateConfigReportRequestAmino {
    * and [google.api.Service][google.api.Service]
    */
   old_config?: AnyAmino;
+}
+export interface GenerateConfigReportRequestAminoType {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: GenerateConfigReportRequestAmino;
 }
 
 /** Request message for GenerateConfigReport method. */
@@ -677,6 +821,10 @@ export interface GenerateConfigReportResponse {
    */
   diagnostics: Diagnostic[];
 }
+export interface GenerateConfigReportResponseProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: Uint8Array;
+}
 
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseAmino {
@@ -698,6 +846,10 @@ export interface GenerateConfigReportResponseAmino {
    * belongs to.
    */
   diagnostics: DiagnosticAmino[];
+}
+export interface GenerateConfigReportResponseAminoType {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: GenerateConfigReportResponseAmino;
 }
 
 /** Response message for GenerateConfigReport method. */

@@ -289,6 +289,10 @@ export interface Member {
   /** added_at is a timestamp specifying when a member was added. */
   addedAt?: Date;
 }
+export interface MemberProtoType {
+  typeUrl: "/cosmos.group.v1.Member";
+  value: Uint8Array;
+}
 
 /**
  * Member represents a group member with an account address,
@@ -307,6 +311,10 @@ export interface MemberAmino {
   /** added_at is a timestamp specifying when a member was added. */
   added_at?: Date;
 }
+export interface MemberAminoType {
+  type: "cosmos-sdk/Member";
+  value: MemberAmino;
+}
 
 /**
  * Member represents a group member with an account address,
@@ -324,11 +332,19 @@ export interface Members {
   /** members is the list of members. */
   members: Member[];
 }
+export interface MembersProtoType {
+  typeUrl: "/cosmos.group.v1.Members";
+  value: Uint8Array;
+}
 
 /** Members defines a repeated slice of Member objects. */
 export interface MembersAmino {
   /** members is the list of members. */
   members: MemberAmino[];
+}
+export interface MembersAminoType {
+  type: "cosmos-sdk/Members";
+  value: MembersAmino;
 }
 
 /** Members defines a repeated slice of Member objects. */
@@ -344,6 +360,10 @@ export interface ThresholdDecisionPolicy {
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
 }
+export interface ThresholdDecisionPolicyProtoType {
+  typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy";
+  value: Uint8Array;
+}
 
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicyAmino {
@@ -352,6 +372,10 @@ export interface ThresholdDecisionPolicyAmino {
 
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsAmino;
+}
+export interface ThresholdDecisionPolicyAminoType {
+  type: "cosmos-sdk/ThresholdDecisionPolicy";
+  value: ThresholdDecisionPolicyAmino;
 }
 
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
@@ -368,6 +392,10 @@ export interface PercentageDecisionPolicy {
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
 }
+export interface PercentageDecisionPolicyProtoType {
+  typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy";
+  value: Uint8Array;
+}
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicyAmino {
@@ -376,6 +404,10 @@ export interface PercentageDecisionPolicyAmino {
 
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsAmino;
+}
+export interface PercentageDecisionPolicyAminoType {
+  type: "cosmos-sdk/PercentageDecisionPolicy";
+  value: PercentageDecisionPolicyAmino;
 }
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
@@ -407,6 +439,10 @@ export interface DecisionPolicyWindows {
    */
   minExecutionPeriod?: Duration;
 }
+export interface DecisionPolicyWindowsProtoType {
+  typeUrl: "/cosmos.group.v1.DecisionPolicyWindows";
+  value: Uint8Array;
+}
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindowsAmino {
@@ -430,6 +466,10 @@ export interface DecisionPolicyWindowsAmino {
    * won't be able to be executed.
    */
   min_execution_period?: DurationAmino;
+}
+export interface DecisionPolicyWindowsAminoType {
+  type: "cosmos-sdk/DecisionPolicyWindows";
+  value: DecisionPolicyWindowsAmino;
 }
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
@@ -463,6 +503,10 @@ export interface GroupInfo {
   /** created_at is a timestamp specifying when a group was created. */
   createdAt?: Date;
 }
+export interface GroupInfoProtoType {
+  typeUrl: "/cosmos.group.v1.GroupInfo";
+  value: Uint8Array;
+}
 
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoAmino {
@@ -489,6 +533,10 @@ export interface GroupInfoAmino {
   /** created_at is a timestamp specifying when a group was created. */
   created_at?: Date;
 }
+export interface GroupInfoAminoType {
+  type: "cosmos-sdk/GroupInfo";
+  value: GroupInfoAmino;
+}
 
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoSDKType {
@@ -508,6 +556,10 @@ export interface GroupMember {
   /** member is the member data. */
   member?: Member;
 }
+export interface GroupMemberProtoType {
+  typeUrl: "/cosmos.group.v1.GroupMember";
+  value: Uint8Array;
+}
 
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberAmino {
@@ -516,6 +568,10 @@ export interface GroupMemberAmino {
 
   /** member is the member data. */
   member?: MemberAmino;
+}
+export interface GroupMemberAminoType {
+  type: "cosmos-sdk/GroupMember";
+  value: GroupMemberAmino;
 }
 
 /** GroupMember represents the relationship between a group and a member. */
@@ -550,6 +606,10 @@ export interface GroupPolicyInfo {
   /** created_at is a timestamp specifying when a group policy was created. */
   createdAt?: Date;
 }
+export interface GroupPolicyInfoProtoType {
+  typeUrl: "/cosmos.group.v1.GroupPolicyInfo";
+  value: Uint8Array;
+}
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfoAmino {
@@ -576,6 +636,10 @@ export interface GroupPolicyInfoAmino {
 
   /** created_at is a timestamp specifying when a group policy was created. */
   created_at?: Date;
+}
+export interface GroupPolicyInfoAminoType {
+  type: "cosmos-sdk/GroupPolicyInfo";
+  value: GroupPolicyInfoAmino;
 }
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
@@ -655,6 +719,10 @@ export interface Proposal {
   /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: Any[];
 }
+export interface ProposalProtoType {
+  typeUrl: "/cosmos.group.v1.Proposal";
+  value: Uint8Array;
+}
 
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
@@ -722,6 +790,10 @@ export interface ProposalAmino {
   /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: AnyAmino[];
 }
+export interface ProposalAminoType {
+  type: "cosmos-sdk/Proposal";
+  value: ProposalAmino;
+}
 
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
@@ -759,6 +831,10 @@ export interface TallyResult {
   /** no_with_veto_count is the weighted sum of veto. */
   noWithVetoCount: string;
 }
+export interface TallyResultProtoType {
+  typeUrl: "/cosmos.group.v1.TallyResult";
+  value: Uint8Array;
+}
 
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResultAmino {
@@ -773,6 +849,10 @@ export interface TallyResultAmino {
 
   /** no_with_veto_count is the weighted sum of veto. */
   no_with_veto_count: string;
+}
+export interface TallyResultAminoType {
+  type: "cosmos-sdk/TallyResult";
+  value: TallyResultAmino;
 }
 
 /** TallyResult represents the sum of weighted votes for each vote option. */
@@ -800,6 +880,10 @@ export interface Vote {
   /** submit_time is the timestamp when the vote was submitted. */
   submitTime?: Date;
 }
+export interface VoteProtoType {
+  typeUrl: "/cosmos.group.v1.Vote";
+  value: Uint8Array;
+}
 
 /** Vote represents a vote for a proposal. */
 export interface VoteAmino {
@@ -817,6 +901,10 @@ export interface VoteAmino {
 
   /** submit_time is the timestamp when the vote was submitted. */
   submit_time?: Date;
+}
+export interface VoteAminoType {
+  type: "cosmos-sdk/Vote";
+  value: VoteAmino;
 }
 
 /** Vote represents a vote for a proposal. */

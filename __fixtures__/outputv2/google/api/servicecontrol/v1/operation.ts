@@ -57,9 +57,17 @@ export interface Operation_LabelsEntry {
   key: string;
   value: string;
 }
+export interface Operation_LabelsEntryProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  value: Uint8Array;
+}
 export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface Operation_LabelsEntryAminoType {
+  type: "/google.api.servicecontrol.v1.undefined";
+  value: Operation_LabelsEntryAmino;
 }
 export interface Operation_LabelsEntrySDKType {
   key: string;
@@ -157,6 +165,10 @@ export interface Operation {
   /** Unimplemented. */
   extensions: Any[];
 }
+export interface OperationProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.Operation";
+  value: Uint8Array;
+}
 
 /** Represents information regarding an operation. */
 export interface OperationAmino {
@@ -248,6 +260,10 @@ export interface OperationAmino {
 
   /** Unimplemented. */
   extensions: AnyAmino[];
+}
+export interface OperationAminoType {
+  type: "/google.api.servicecontrol.v1.Operation";
+  value: OperationAmino;
 }
 
 /** Represents information regarding an operation. */

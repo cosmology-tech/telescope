@@ -9,12 +9,20 @@ export interface GenesisState {
   denomTraces: DenomTrace[];
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateAmino {
   port_id: string;
   denom_traces: DenomTraceAmino[];
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the ibc-transfer genesis state */

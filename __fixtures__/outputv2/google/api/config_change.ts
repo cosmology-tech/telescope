@@ -118,6 +118,10 @@ export interface ConfigChange {
    */
   advices: Advice[];
 }
+export interface ConfigChangeProtoType {
+  typeUrl: "/google.api.ConfigChange";
+  value: Uint8Array;
+}
 
 /**
  * Output generated from semantically comparing two versions of a service
@@ -162,6 +166,10 @@ export interface ConfigChangeAmino {
    */
   advices: AdviceAmino[];
 }
+export interface ConfigChangeAminoType {
+  type: "/google.api.ConfigChange";
+  value: ConfigChangeAmino;
+}
 
 /**
  * Output generated from semantically comparing two versions of a service
@@ -190,6 +198,10 @@ export interface Advice {
    */
   description: string;
 }
+export interface AdviceProtoType {
+  typeUrl: "/google.api.Advice";
+  value: Uint8Array;
+}
 
 /**
  * Generated advice about this change, used for providing more
@@ -201,6 +213,10 @@ export interface AdviceAmino {
    * be taken to mitigate any implied risks.
    */
   description: string;
+}
+export interface AdviceAminoType {
+  type: "/google.api.Advice";
+  value: AdviceAmino;
 }
 
 /**

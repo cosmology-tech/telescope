@@ -48,6 +48,10 @@ export interface Context {
    */
   rules: ContextRule[];
 }
+export interface ContextProtoType {
+  typeUrl: "/google.api.Context";
+  value: Uint8Array;
+}
 
 /**
  * `Context` defines which contexts an API requests.
@@ -94,6 +98,10 @@ export interface ContextAmino {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: ContextRuleAmino[];
+}
+export interface ContextAminoType {
+  type: "/google.api.Context";
+  value: ContextAmino;
 }
 
 /**
@@ -168,6 +176,10 @@ export interface ContextRule {
    */
   allowedResponseExtensions: string[];
 }
+export interface ContextRuleProtoType {
+  typeUrl: "/google.api.ContextRule";
+  value: Uint8Array;
+}
 
 /**
  * A context rule provides information about the context for an individual API
@@ -198,6 +210,10 @@ export interface ContextRuleAmino {
    * side channel from backend to client.
    */
   allowed_response_extensions: string[];
+}
+export interface ContextRuleAminoType {
+  type: "/google.api.ContextRule";
+  value: ContextRuleAmino;
 }
 
 /**

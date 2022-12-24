@@ -71,6 +71,10 @@ export interface OrderID {
   gseq: number;
   oseq: number;
 }
+export interface OrderIDProtoType {
+  typeUrl: "/akash.market.v1beta2.OrderID";
+  value: Uint8Array;
+}
 
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
@@ -78,6 +82,10 @@ export interface OrderIDAmino {
   dseq: string;
   gseq: number;
   oseq: number;
+}
+export interface OrderIDAminoType {
+  type: "/akash.market.v1beta2.OrderID";
+  value: OrderIDAmino;
 }
 
 /** OrderID stores owner and all other seq numbers */
@@ -95,6 +103,10 @@ export interface Order {
   spec?: GroupSpec;
   createdAt: Long;
 }
+export interface OrderProtoType {
+  typeUrl: "/akash.market.v1beta2.Order";
+  value: Uint8Array;
+}
 
 /** Order stores orderID, state of order and other details */
 export interface OrderAmino {
@@ -102,6 +114,10 @@ export interface OrderAmino {
   state: Order_State;
   spec?: GroupSpecAmino;
   created_at: string;
+}
+export interface OrderAminoType {
+  type: "/akash.market.v1beta2.Order";
+  value: OrderAmino;
 }
 
 /** Order stores orderID, state of order and other details */
@@ -120,6 +136,10 @@ export interface OrderFilters {
   oseq: number;
   state: string;
 }
+export interface OrderFiltersProtoType {
+  typeUrl: "/akash.market.v1beta2.OrderFilters";
+  value: Uint8Array;
+}
 
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersAmino {
@@ -128,6 +148,10 @@ export interface OrderFiltersAmino {
   gseq: number;
   oseq: number;
   state: string;
+}
+export interface OrderFiltersAminoType {
+  type: "/akash.market.v1beta2.OrderFilters";
+  value: OrderFiltersAmino;
 }
 
 /** OrderFilters defines flags for order list filter */

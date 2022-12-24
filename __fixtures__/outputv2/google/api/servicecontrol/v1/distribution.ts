@@ -64,6 +64,10 @@ export interface Distribution {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.Distribution";
+  value: Uint8Array;
+}
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -126,6 +130,10 @@ export interface DistributionAmino {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
+export interface DistributionAminoType {
+  type: "/google.api.servicecontrol.v1.Distribution";
+  value: DistributionAmino;
+}
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -174,6 +182,10 @@ export interface Distribution_LinearBuckets {
    */
   offset: number;
 }
+export interface Distribution_LinearBucketsProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Uint8Array;
+}
 
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsAmino {
@@ -198,6 +210,10 @@ export interface Distribution_LinearBucketsAmino {
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
   offset: number;
+}
+export interface Distribution_LinearBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Distribution_LinearBucketsAmino;
 }
 
 /** Describing buckets with constant width. */
@@ -232,6 +248,10 @@ export interface Distribution_ExponentialBuckets {
    */
   scale: number;
 }
+export interface Distribution_ExponentialBucketsProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Uint8Array;
+}
 
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsAmino {
@@ -257,6 +277,10 @@ export interface Distribution_ExponentialBucketsAmino {
    * Must be > 0.
    */
   scale: number;
+}
+export interface Distribution_ExponentialBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Distribution_ExponentialBucketsAmino;
 }
 
 /** Describing buckets with exponentially growing width. */
@@ -287,6 +311,10 @@ export interface Distribution_ExplicitBuckets {
    */
   bounds: number[];
 }
+export interface Distribution_ExplicitBucketsProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Uint8Array;
+}
 
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsAmino {
@@ -308,6 +336,10 @@ export interface Distribution_ExplicitBucketsAmino {
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
+}
+export interface Distribution_ExplicitBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Distribution_ExplicitBucketsAmino;
 }
 
 /** Describing buckets with arbitrary user-provided width. */

@@ -30,6 +30,10 @@ export interface InflationDistribution {
    */
   communityPool: string;
 }
+export interface InflationDistributionProtoType {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution";
+  value: Uint8Array;
+}
 
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -58,6 +62,10 @@ export interface InflationDistributionAmino {
    * be allocated to the community pool
    */
   community_pool: string;
+}
+export interface InflationDistributionAminoType {
+  type: "/evmos.inflation.v1.InflationDistribution";
+  value: InflationDistributionAmino;
 }
 
 /**
@@ -98,6 +106,10 @@ export interface ExponentialCalculation {
   /** max variance */
   maxVariance: string;
 }
+export interface ExponentialCalculationProtoType {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
+  value: Uint8Array;
+}
 
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
@@ -121,6 +133,10 @@ export interface ExponentialCalculationAmino {
 
   /** max variance */
   max_variance: string;
+}
+export interface ExponentialCalculationAminoType {
+  type: "/evmos.inflation.v1.ExponentialCalculation";
+  value: ExponentialCalculationAmino;
 }
 
 /**

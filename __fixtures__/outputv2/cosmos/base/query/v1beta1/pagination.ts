@@ -47,6 +47,10 @@ export interface PageRequest {
    */
   reverse: boolean;
 }
+export interface PageRequestProtoType {
+  typeUrl: "/cosmos.base.query.v1beta1.PageRequest";
+  value: Uint8Array;
+}
 
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -93,6 +97,10 @@ export interface PageRequestAmino {
    */
   reverse: boolean;
 }
+export interface PageRequestAminoType {
+  type: "cosmos-sdk/PageRequest";
+  value: PageRequestAmino;
+}
 
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -134,6 +142,10 @@ export interface PageResponse {
    */
   total: Long;
 }
+export interface PageResponseProtoType {
+  typeUrl: "/cosmos.base.query.v1beta1.PageResponse";
+  value: Uint8Array;
+}
 
 /**
  * PageResponse is to be embedded in gRPC response messages where the
@@ -157,6 +169,10 @@ export interface PageResponseAmino {
    * was set, its value is undefined otherwise
    */
   total: string;
+}
+export interface PageResponseAminoType {
+  type: "cosmos-sdk/PageResponse";
+  value: PageResponseAmino;
 }
 
 /**

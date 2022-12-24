@@ -218,6 +218,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service";
+  value: Uint8Array;
+}
 
 /** A service that is available for use by the consumer. */
 export interface ServiceAmino {
@@ -247,6 +251,10 @@ export interface ServiceAmino {
 
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
+}
+export interface ServiceAminoType {
+  type: "/google.api.serviceusage.v1beta1.Service";
+  value: ServiceAmino;
 }
 
 /** A service that is available for use by the consumer. */
@@ -309,6 +317,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: Uint8Array;
+}
 
 /** The configuration of the service. */
 export interface ServiceConfigAmino {
@@ -362,6 +374,10 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
+export interface ServiceConfigAminoType {
+  type: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: ServiceConfigAmino;
+}
 
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
@@ -385,6 +401,10 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
+export interface OperationMetadataProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: Uint8Array;
+}
 
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataAmino {
@@ -393,6 +413,10 @@ export interface OperationMetadataAmino {
    * associated with.
    */
   resource_names: string[];
+}
+export interface OperationMetadataAminoType {
+  type: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: OperationMetadataAmino;
 }
 
 /** The operation metadata returned for the batchend services operation. */
@@ -448,6 +472,10 @@ export interface ConsumerQuotaMetric {
   /** The units in which the metric value is reported. */
   unit: string;
 }
+export interface ConsumerQuotaMetricProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: Uint8Array;
+}
 
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetricAmino {
@@ -496,6 +524,10 @@ export interface ConsumerQuotaMetricAmino {
 
   /** The units in which the metric value is reported. */
   unit: string;
+}
+export interface ConsumerQuotaMetricAminoType {
+  type: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: ConsumerQuotaMetricAmino;
 }
 
 /** Consumer quota settings for a quota metric. */
@@ -552,6 +584,10 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
+export interface ConsumerQuotaLimitProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: Uint8Array;
+}
 
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitAmino {
@@ -597,6 +633,10 @@ export interface ConsumerQuotaLimitAmino {
    */
   quota_buckets: QuotaBucketAmino[];
 }
+export interface ConsumerQuotaLimitAminoType {
+  type: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: ConsumerQuotaLimitAmino;
+}
 
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
@@ -611,9 +651,17 @@ export interface QuotaBucket_DimensionsEntry {
   key: string;
   value: string;
 }
+export interface QuotaBucket_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
+}
 export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
+}
+export interface QuotaBucket_DimensionsEntryAminoType {
+  type: "/google.api.serviceusage.v1beta1.undefined";
+  value: QuotaBucket_DimensionsEntryAmino;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
   key: string;
@@ -660,6 +708,10 @@ export interface QuotaBucket {
     [key: string]: string;
   };
 }
+export interface QuotaBucketProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: Uint8Array;
+}
 
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketAmino {
@@ -701,6 +753,10 @@ export interface QuotaBucketAmino {
     [key: string]: string;
   };
 }
+export interface QuotaBucketAminoType {
+  type: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: QuotaBucketAmino;
+}
 
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
@@ -717,9 +773,17 @@ export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
 }
+export interface QuotaOverride_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
+}
 export interface QuotaOverride_DimensionsEntryAmino {
   key: string;
   value: string;
+}
+export interface QuotaOverride_DimensionsEntryAminoType {
+  type: "/google.api.serviceusage.v1beta1.undefined";
+  value: QuotaOverride_DimensionsEntryAmino;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
   key: string;
@@ -800,6 +864,10 @@ export interface QuotaOverride {
    */
   adminOverrideAncestor: string;
 }
+export interface QuotaOverrideProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: Uint8Array;
+}
 
 /** A quota override */
 export interface QuotaOverrideAmino {
@@ -875,6 +943,10 @@ export interface QuotaOverrideAmino {
    */
   admin_override_ancestor: string;
 }
+export interface QuotaOverrideAminoType {
+  type: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: QuotaOverrideAmino;
+}
 
 /** A quota override */
 export interface QuotaOverrideSDKType {
@@ -898,6 +970,10 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
+export interface OverrideInlineSourceProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: Uint8Array;
+}
 
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceAmino {
@@ -909,6 +985,10 @@ export interface OverrideInlineSourceAmino {
    */
   overrides: QuotaOverrideAmino[];
 }
+export interface OverrideInlineSourceAminoType {
+  type: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: OverrideInlineSourceAmino;
+}
 
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
@@ -918,9 +998,17 @@ export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
 }
+export interface AdminQuotaPolicy_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
+}
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
   key: string;
   value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryAminoType {
+  type: "/google.api.serviceusage.v1beta1.undefined";
+  value: AdminQuotaPolicy_DimensionsEntryAmino;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
   key: string;
@@ -986,6 +1074,10 @@ export interface AdminQuotaPolicy {
    */
   container: string;
 }
+export interface AdminQuotaPolicyProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: Uint8Array;
+}
 
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicyAmino {
@@ -1046,6 +1138,10 @@ export interface AdminQuotaPolicyAmino {
    */
   container: string;
 }
+export interface AdminQuotaPolicyAminoType {
+  type: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: AdminQuotaPolicyAmino;
+}
 
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
@@ -1076,6 +1172,10 @@ export interface ServiceIdentity {
    */
   uniqueId: string;
 }
+export interface ServiceIdentityProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: Uint8Array;
+}
 
 /**
  * Service identity for a service. This is the identity that service producer
@@ -1093,6 +1193,10 @@ export interface ServiceIdentityAmino {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   unique_id: string;
+}
+export interface ServiceIdentityAminoType {
+  type: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: ServiceIdentityAmino;
 }
 
 /**

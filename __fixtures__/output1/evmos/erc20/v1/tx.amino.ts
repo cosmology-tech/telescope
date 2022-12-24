@@ -2,7 +2,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertERC20, MsgConvertERC20SDKType } from "./tx";
-export interface AminoMsgConvertCoin extends AminoMsg {
+export interface MsgConvertCoinAminoType extends AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";
   value: {
     coin: {
@@ -13,7 +13,7 @@ export interface AminoMsgConvertCoin extends AminoMsg {
     sender: string;
   };
 }
-export interface AminoMsgConvertERC20 extends AminoMsg {
+export interface MsgConvertERC20AminoType extends AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertERC20";
   value: {
     contract_address: string;
@@ -29,7 +29,7 @@ export const AminoConverter = {
       coin,
       receiver,
       sender
-    }: MsgConvertCoin): AminoMsgConvertCoin["value"] => {
+    }: MsgConvertCoin): MsgConvertCoinAminoType["value"] => {
       return {
         coin: {
           denom: coin.denom,
@@ -43,7 +43,7 @@ export const AminoConverter = {
       coin,
       receiver,
       sender
-    }: AminoMsgConvertCoin["value"]): MsgConvertCoin => {
+    }: MsgConvertCoinAminoType["value"]): MsgConvertCoin => {
       return {
         coin: {
           denom: coin.denom,
@@ -61,7 +61,7 @@ export const AminoConverter = {
       amount,
       receiver,
       sender
-    }: MsgConvertERC20): AminoMsgConvertERC20["value"] => {
+    }: MsgConvertERC20): MsgConvertERC20AminoType["value"] => {
       return {
         contract_address: contractAddress,
         amount,
@@ -74,7 +74,7 @@ export const AminoConverter = {
       amount,
       receiver,
       sender
-    }: AminoMsgConvertERC20["value"]): MsgConvertERC20 => {
+    }: MsgConvertERC20AminoType["value"]): MsgConvertERC20 => {
       return {
         contractAddress: contract_address,
         amount,

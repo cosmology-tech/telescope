@@ -18,6 +18,10 @@ export interface MsgGrantAllowance {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
 }
+export interface MsgGrantAllowanceProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
+  value: Uint8Array;
+}
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -33,6 +37,10 @@ export interface MsgGrantAllowanceAmino {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
 }
+export interface MsgGrantAllowanceAminoType {
+  type: "cosmos-sdk/MsgGrantAllowance";
+  value: MsgGrantAllowanceAmino;
+}
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -46,9 +54,17 @@ export interface MsgGrantAllowanceSDKType {
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
+export interface MsgGrantAllowanceResponseProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
+  value: Uint8Array;
+}
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseAmino {}
+export interface MsgGrantAllowanceResponseAminoType {
+  type: "cosmos-sdk/MsgGrantAllowanceResponse";
+  value: MsgGrantAllowanceResponseAmino;
+}
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseSDKType {}
@@ -61,6 +77,10 @@ export interface MsgRevokeAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
+export interface MsgRevokeAllowanceProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
+  value: Uint8Array;
+}
 
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowanceAmino {
@@ -69,6 +89,10 @@ export interface MsgRevokeAllowanceAmino {
 
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
+}
+export interface MsgRevokeAllowanceAminoType {
+  type: "cosmos-sdk/MsgRevokeAllowance";
+  value: MsgRevokeAllowanceAmino;
 }
 
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
@@ -79,9 +103,17 @@ export interface MsgRevokeAllowanceSDKType {
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
+export interface MsgRevokeAllowanceResponseProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
+  value: Uint8Array;
+}
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseAmino {}
+export interface MsgRevokeAllowanceResponseAminoType {
+  type: "cosmos-sdk/MsgRevokeAllowanceResponse";
+  value: MsgRevokeAllowanceResponseAmino;
+}
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseSDKType {}

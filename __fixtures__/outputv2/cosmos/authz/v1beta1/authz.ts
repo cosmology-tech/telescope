@@ -20,6 +20,10 @@ export interface GenericAuthorization {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
+export interface GenericAuthorizationProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization";
+  value: Uint8Array;
+}
 
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -28,6 +32,10 @@ export interface GenericAuthorization {
 export interface GenericAuthorizationAmino {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
+}
+export interface GenericAuthorizationAminoType {
+  type: "cosmos-sdk/GenericAuthorization";
+  value: GenericAuthorizationAmino;
 }
 
 /**
@@ -52,6 +60,10 @@ export interface Grant {
    */
   expiration?: Date;
 }
+export interface GrantProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.Grant";
+  value: Uint8Array;
+}
 
 /**
  * Grant gives permissions to execute
@@ -66,6 +78,10 @@ export interface GrantAmino {
    * may apply to invalidate the grant)
    */
   expiration?: Date;
+}
+export interface GrantAminoType {
+  type: "cosmos-sdk/Grant";
+  value: GrantAmino;
 }
 
 /**
@@ -87,6 +103,10 @@ export interface GrantAuthorization {
   authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
   expiration?: Date;
 }
+export interface GrantAuthorizationProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
+  value: Uint8Array;
+}
 
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
@@ -97,6 +117,10 @@ export interface GrantAuthorizationAmino {
   grantee: string;
   authorization?: AnyAmino;
   expiration?: Date;
+}
+export interface GrantAuthorizationAminoType {
+  type: "cosmos-sdk/GrantAuthorization";
+  value: GrantAuthorizationAmino;
 }
 
 /**
@@ -115,11 +139,19 @@ export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msgTypeUrls: string[];
 }
+export interface GrantQueueItemProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem";
+  value: Uint8Array;
+}
 
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItemAmino {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msg_type_urls: string[];
+}
+export interface GrantQueueItemAminoType {
+  type: "cosmos-sdk/GrantQueueItem";
+  value: GrantQueueItemAmino;
 }
 
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */

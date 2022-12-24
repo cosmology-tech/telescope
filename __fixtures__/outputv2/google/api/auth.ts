@@ -33,6 +33,10 @@ export interface Authentication {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
 }
+export interface AuthenticationProtoType {
+  typeUrl: "/google.api.Authentication";
+  value: Uint8Array;
+}
 
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -64,6 +68,10 @@ export interface AuthenticationAmino {
 
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProviderAmino[];
+}
+export interface AuthenticationAminoType {
+  type: "/google.api.Authentication";
+  value: AuthenticationAmino;
 }
 
 /**
@@ -122,6 +130,10 @@ export interface AuthenticationRule {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
+export interface AuthenticationRuleProtoType {
+  typeUrl: "/google.api.AuthenticationRule";
+  value: Uint8Array;
+}
 
 /**
  * Authentication rules for the service.
@@ -153,6 +165,10 @@ export interface AuthenticationRuleAmino {
 
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirementAmino[];
+}
+export interface AuthenticationRuleAminoType {
+  type: "/google.api.AuthenticationRule";
+  value: AuthenticationRuleAmino;
 }
 
 /**
@@ -193,6 +209,10 @@ export interface JwtLocation {
    */
   valuePrefix: string;
 }
+export interface JwtLocationProtoType {
+  typeUrl: "/google.api.JwtLocation";
+  value: Uint8Array;
+}
 
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationAmino {
@@ -213,6 +233,10 @@ export interface JwtLocationAmino {
    * value_prefix="Bearer " with a space at the end.
    */
   value_prefix: string;
+}
+export interface JwtLocationAminoType {
+  type: "/google.api.JwtLocation";
+  value: JwtLocationAmino;
 }
 
 /** Specifies a location to extract JWT from an API request. */
@@ -310,6 +334,10 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
+export interface AuthProviderProtoType {
+  typeUrl: "/google.api.AuthProvider";
+  value: Uint8Array;
+}
 
 /**
  * Configuration for an authentication provider, including support for
@@ -399,6 +427,10 @@ export interface AuthProviderAmino {
    */
   jwt_locations: JwtLocationAmino[];
 }
+export interface AuthProviderAminoType {
+  type: "/google.api.AuthProvider";
+  value: AuthProviderAmino;
+}
 
 /**
  * Configuration for an authentication provider, including support for
@@ -446,6 +478,10 @@ export interface OAuthRequirements {
    */
   canonicalScopes: string;
 }
+export interface OAuthRequirementsProtoType {
+  typeUrl: "/google.api.OAuthRequirements";
+  value: Uint8Array;
+}
 
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -478,6 +514,10 @@ export interface OAuthRequirementsAmino {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonical_scopes: string;
+}
+export interface OAuthRequirementsAminoType {
+  type: "/google.api.OAuthRequirements";
+  value: OAuthRequirementsAmino;
 }
 
 /**
@@ -539,6 +579,10 @@ export interface AuthRequirement {
    */
   audiences: string;
 }
+export interface AuthRequirementProtoType {
+  typeUrl: "/google.api.AuthRequirement";
+  value: Uint8Array;
+}
 
 /**
  * User-defined authentication requirements, including support for
@@ -574,6 +618,10 @@ export interface AuthRequirementAmino {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
+}
+export interface AuthRequirementAminoType {
+  type: "/google.api.AuthRequirement";
+  value: AuthRequirementAmino;
 }
 
 /**

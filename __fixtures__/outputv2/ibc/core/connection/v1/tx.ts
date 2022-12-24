@@ -16,6 +16,10 @@ export interface MsgConnectionOpenInit {
   delayPeriod: Long;
   signer: string;
 }
+export interface MsgConnectionOpenInitProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -27,6 +31,10 @@ export interface MsgConnectionOpenInitAmino {
   version?: VersionAmino;
   delay_period: string;
   signer: string;
+}
+export interface MsgConnectionOpenInitAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenInit";
+  value: MsgConnectionOpenInitAmino;
 }
 
 /**
@@ -46,12 +54,20 @@ export interface MsgConnectionOpenInitSDKType {
  * type.
  */
 export interface MsgConnectionOpenInitResponse {}
+export interface MsgConnectionOpenInitResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInitResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
  * type.
  */
 export interface MsgConnectionOpenInitResponseAmino {}
+export interface MsgConnectionOpenInitResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenInitResponse";
+  value: MsgConnectionOpenInitResponseAmino;
+}
 
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
@@ -91,6 +107,10 @@ export interface MsgConnectionOpenTry {
   consensusHeight?: Height;
   signer: string;
 }
+export interface MsgConnectionOpenTryProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
@@ -124,6 +144,10 @@ export interface MsgConnectionOpenTryAmino {
   consensus_height?: HeightAmino;
   signer: string;
 }
+export interface MsgConnectionOpenTryAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenTry";
+  value: MsgConnectionOpenTryAmino;
+}
 
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
@@ -146,9 +170,17 @@ export interface MsgConnectionOpenTrySDKType {
 
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponse {}
+export interface MsgConnectionOpenTryResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTryResponse";
+  value: Uint8Array;
+}
 
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseAmino {}
+export interface MsgConnectionOpenTryResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenTryResponse";
+  value: MsgConnectionOpenTryResponseAmino;
+}
 
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseSDKType {}
@@ -178,6 +210,10 @@ export interface MsgConnectionOpenAck {
   consensusHeight?: Height;
   signer: string;
 }
+export interface MsgConnectionOpenAckProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
@@ -204,6 +240,10 @@ export interface MsgConnectionOpenAckAmino {
   consensus_height?: HeightAmino;
   signer: string;
 }
+export interface MsgConnectionOpenAckAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenAck";
+  value: MsgConnectionOpenAckAmino;
+}
 
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
@@ -224,9 +264,17 @@ export interface MsgConnectionOpenAckSDKType {
 
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponse {}
+export interface MsgConnectionOpenAckResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAckResponse";
+  value: Uint8Array;
+}
 
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseAmino {}
+export interface MsgConnectionOpenAckResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenAckResponse";
+  value: MsgConnectionOpenAckResponseAmino;
+}
 
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseSDKType {}
@@ -243,6 +291,10 @@ export interface MsgConnectionOpenConfirm {
   proofHeight?: Height;
   signer: string;
 }
+export interface MsgConnectionOpenConfirmProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -255,6 +307,10 @@ export interface MsgConnectionOpenConfirmAmino {
   proof_ack: Uint8Array;
   proof_height?: HeightAmino;
   signer: string;
+}
+export interface MsgConnectionOpenConfirmAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenConfirm";
+  value: MsgConnectionOpenConfirmAmino;
 }
 
 /**
@@ -273,12 +329,20 @@ export interface MsgConnectionOpenConfirmSDKType {
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponse {}
+export interface MsgConnectionOpenConfirmResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirmResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponseAmino {}
+export interface MsgConnectionOpenConfirmResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenConfirmResponse";
+  value: MsgConnectionOpenConfirmResponseAmino;
+}
 
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm

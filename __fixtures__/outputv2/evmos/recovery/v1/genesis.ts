@@ -8,11 +8,19 @@ export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.recovery.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.recovery.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the recovery module's genesis state. */
@@ -28,6 +36,10 @@ export interface Params {
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration?: Duration;
 }
+export interface ParamsProtoType {
+  typeUrl: "/evmos.recovery.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the recovery module */
 export interface ParamsAmino {
@@ -36,6 +48,10 @@ export interface ParamsAmino {
 
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationAmino;
+}
+export interface ParamsAminoType {
+  type: "/evmos.recovery.v1.Params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the recovery module */

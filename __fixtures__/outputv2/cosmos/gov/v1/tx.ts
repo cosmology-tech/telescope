@@ -23,6 +23,10 @@ export interface MsgSubmitProposal {
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
+export interface MsgSubmitProposalProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposal";
+  value: Uint8Array;
+}
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -35,6 +39,10 @@ export interface MsgSubmitProposalAmino {
 
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
+}
+export interface MsgSubmitProposalAminoType {
+  type: "cosmos-sdk/v1/MsgSubmitProposal";
+  value: MsgSubmitProposalAmino;
 }
 
 /**
@@ -52,10 +60,18 @@ export interface MsgSubmitProposalSDKType {
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
+export interface MsgSubmitProposalResponseProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse";
+  value: Uint8Array;
+}
 
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
+}
+export interface MsgSubmitProposalResponseAminoType {
+  type: "cosmos-sdk/v1/MsgSubmitProposalResponse";
+  value: MsgSubmitProposalResponseAmino;
 }
 
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
@@ -74,6 +90,10 @@ export interface MsgExecLegacyContent {
   /** authority must be the gov module address. */
   authority: string;
 }
+export interface MsgExecLegacyContentProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent";
+  value: Uint8Array;
+}
 
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
@@ -85,6 +105,10 @@ export interface MsgExecLegacyContentAmino {
 
   /** authority must be the gov module address. */
   authority: string;
+}
+export interface MsgExecLegacyContentAminoType {
+  type: "cosmos-sdk/v1/MsgExecLegacyContent";
+  value: MsgExecLegacyContentAmino;
 }
 
 /**
@@ -98,9 +122,17 @@ export interface MsgExecLegacyContentSDKType {
 
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponse {}
+export interface MsgExecLegacyContentResponseProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse";
+  value: Uint8Array;
+}
 
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponseAmino {}
+export interface MsgExecLegacyContentResponseAminoType {
+  type: "cosmos-sdk/v1/MsgExecLegacyContentResponse";
+  value: MsgExecLegacyContentResponseAmino;
+}
 
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponseSDKType {}
@@ -112,6 +144,10 @@ export interface MsgVote {
   option: VoteOption;
   metadata: string;
 }
+export interface MsgVoteProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgVote";
+  value: Uint8Array;
+}
 
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteAmino {
@@ -119,6 +155,10 @@ export interface MsgVoteAmino {
   voter: string;
   option: VoteOption;
   metadata: string;
+}
+export interface MsgVoteAminoType {
+  type: "cosmos-sdk/v1/MsgVote";
+  value: MsgVoteAmino;
 }
 
 /** MsgVote defines a message to cast a vote. */
@@ -131,9 +171,17 @@ export interface MsgVoteSDKType {
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+export interface MsgVoteResponseProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgVoteResponse";
+  value: Uint8Array;
+}
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
+export interface MsgVoteResponseAminoType {
+  type: "cosmos-sdk/v1/MsgVoteResponse";
+  value: MsgVoteResponseAmino;
+}
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseSDKType {}
@@ -145,6 +193,10 @@ export interface MsgVoteWeighted {
   options: WeightedVoteOption[];
   metadata: string;
 }
+export interface MsgVoteWeightedProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeighted";
+  value: Uint8Array;
+}
 
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedAmino {
@@ -152,6 +204,10 @@ export interface MsgVoteWeightedAmino {
   voter: string;
   options: WeightedVoteOptionAmino[];
   metadata: string;
+}
+export interface MsgVoteWeightedAminoType {
+  type: "cosmos-sdk/v1/MsgVoteWeighted";
+  value: MsgVoteWeightedAmino;
 }
 
 /** MsgVoteWeighted defines a message to cast a vote. */
@@ -164,9 +220,17 @@ export interface MsgVoteWeightedSDKType {
 
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponse {}
+export interface MsgVoteWeightedResponseProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse";
+  value: Uint8Array;
+}
 
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponseAmino {}
+export interface MsgVoteWeightedResponseAminoType {
+  type: "cosmos-sdk/v1/MsgVoteWeightedResponse";
+  value: MsgVoteWeightedResponseAmino;
+}
 
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponseSDKType {}
@@ -177,12 +241,20 @@ export interface MsgDeposit {
   depositor: string;
   amount: Coin[];
 }
+export interface MsgDepositProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgDeposit";
+  value: Uint8Array;
+}
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositAmino {
   proposal_id: string;
   depositor: string;
   amount: CoinAmino[];
+}
+export interface MsgDepositAminoType {
+  type: "cosmos-sdk/v1/MsgDeposit";
+  value: MsgDepositAmino;
 }
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
@@ -194,9 +266,17 @@ export interface MsgDepositSDKType {
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+export interface MsgDepositResponseProtoType {
+  typeUrl: "/cosmos.gov.v1.MsgDepositResponse";
+  value: Uint8Array;
+}
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseAmino {}
+export interface MsgDepositResponseAminoType {
+  type: "cosmos-sdk/v1/MsgDepositResponse";
+  value: MsgDepositResponseAmino;
+}
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseSDKType {}

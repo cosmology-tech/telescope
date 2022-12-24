@@ -21,6 +21,10 @@ export interface EvalState {
    */
   results: EvalState_Result[];
 }
+export interface EvalStateProtoType {
+  typeUrl: "/google.api.expr.v1beta1.EvalState";
+  value: Uint8Array;
+}
 
 /**
  * The state of an evaluation.
@@ -38,6 +42,10 @@ export interface EvalStateAmino {
    * May be sparse.
    */
   results: EvalState_ResultAmino[];
+}
+export interface EvalStateAminoType {
+  type: "/google.api.expr.v1beta1.EvalState";
+  value: EvalStateAmino;
 }
 
 /**
@@ -58,6 +66,10 @@ export interface EvalState_Result {
   /** The index in `values` of the resulting value. */
   value: number;
 }
+export interface EvalState_ResultProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Result";
+  value: Uint8Array;
+}
 
 /** A single evaluation result. */
 export interface EvalState_ResultAmino {
@@ -66,6 +78,10 @@ export interface EvalState_ResultAmino {
 
   /** The index in `values` of the resulting value. */
   value: number;
+}
+export interface EvalState_ResultAminoType {
+  type: "/google.api.expr.v1beta1.Result";
+  value: EvalState_ResultAmino;
 }
 
 /** A single evaluation result. */
@@ -127,6 +143,10 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
+export interface ExprValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.ExprValue";
+  value: Uint8Array;
+}
 
 /** The value of an evaluated expression. */
 export interface ExprValueAmino {
@@ -181,6 +201,10 @@ export interface ExprValueAmino {
    */
   unknown?: UnknownSetAmino;
 }
+export interface ExprValueAminoType {
+  type: "/google.api.expr.v1beta1.ExprValue";
+  value: ExprValueAmino;
+}
 
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
@@ -198,6 +222,10 @@ export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
 }
+export interface ErrorSetProtoType {
+  typeUrl: "/google.api.expr.v1beta1.ErrorSet";
+  value: Uint8Array;
+}
 
 /**
  * A set of errors.
@@ -207,6 +235,10 @@ export interface ErrorSet {
 export interface ErrorSetAmino {
   /** The errors in the set. */
   errors: StatusAmino[];
+}
+export interface ErrorSetAminoType {
+  type: "/google.api.expr.v1beta1.ErrorSet";
+  value: ErrorSetAmino;
 }
 
 /**
@@ -227,6 +259,10 @@ export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: IdRef[];
 }
+export interface UnknownSetProtoType {
+  typeUrl: "/google.api.expr.v1beta1.UnknownSet";
+  value: Uint8Array;
+}
 
 /**
  * A set of expressions for which the value is unknown.
@@ -236,6 +272,10 @@ export interface UnknownSet {
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
   exprs: IdRefAmino[];
+}
+export interface UnknownSetAminoType {
+  type: "/google.api.expr.v1beta1.UnknownSet";
+  value: UnknownSetAmino;
 }
 
 /**
@@ -252,11 +292,19 @@ export interface IdRef {
   /** The expression id. */
   id: number;
 }
+export interface IdRefProtoType {
+  typeUrl: "/google.api.expr.v1beta1.IdRef";
+  value: Uint8Array;
+}
 
 /** A reference to an expression id. */
 export interface IdRefAmino {
   /** The expression id. */
   id: number;
+}
+export interface IdRefAminoType {
+  type: "/google.api.expr.v1beta1.IdRef";
+  value: IdRefAmino;
 }
 
 /** A reference to an expression id. */

@@ -12,6 +12,10 @@ export const protobufPackage = "cosmos.crypto.secp256k1";
 export interface PubKey {
   key: Uint8Array;
 }
+export interface PubKeyProtoType {
+  typeUrl: "/cosmos.crypto.secp256k1.PubKey";
+  value: Uint8Array;
+}
 
 /**
  * PubKey defines a secp256k1 public key
@@ -22,6 +26,10 @@ export interface PubKey {
  */
 export interface PubKeyAmino {
   key: Uint8Array;
+}
+export interface PubKeyAminoType {
+  type: "cosmos-sdk/PubKey";
+  value: PubKeyAmino;
 }
 
 /**
@@ -39,10 +47,18 @@ export interface PubKeySDKType {
 export interface PrivKey {
   key: Uint8Array;
 }
+export interface PrivKeyProtoType {
+  typeUrl: "/cosmos.crypto.secp256k1.PrivKey";
+  value: Uint8Array;
+}
 
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeyAmino {
   key: Uint8Array;
+}
+export interface PrivKeyAminoType {
+  type: "cosmos-sdk/PrivKey";
+  value: PrivKeyAmino;
 }
 
 /** PrivKey defines a secp256k1 private key. */

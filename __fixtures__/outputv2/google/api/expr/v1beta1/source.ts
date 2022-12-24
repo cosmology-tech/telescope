@@ -5,9 +5,17 @@ export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
 }
+export interface SourceInfo_PositionsEntryProtoType {
+  typeUrl: "/google.api.expr.v1beta1.undefined";
+  value: Uint8Array;
+}
 export interface SourceInfo_PositionsEntryAmino {
   key: number;
   value: number;
+}
+export interface SourceInfo_PositionsEntryAminoType {
+  type: "/google.api.expr.v1beta1.undefined";
+  value: SourceInfo_PositionsEntryAmino;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
@@ -42,6 +50,10 @@ export interface SourceInfo {
     [key: number]: number;
   };
 }
+export interface SourceInfoProtoType {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo";
+  value: Uint8Array;
+}
 
 /** Source information collected at parse time. */
 export interface SourceInfoAmino {
@@ -70,6 +82,10 @@ export interface SourceInfoAmino {
   positions: {
     [key: number]: number;
   };
+}
+export interface SourceInfoAminoType {
+  type: "/google.api.expr.v1beta1.SourceInfo";
+  value: SourceInfoAmino;
 }
 
 /** Source information collected at parse time. */
@@ -101,6 +117,10 @@ export interface SourcePosition {
    */
   column: number;
 }
+export interface SourcePositionProtoType {
+  typeUrl: "/google.api.expr.v1beta1.SourcePosition";
+  value: Uint8Array;
+}
 
 /** A specific position in source. */
 export interface SourcePositionAmino {
@@ -121,6 +141,10 @@ export interface SourcePositionAmino {
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
   column: number;
+}
+export interface SourcePositionAminoType {
+  type: "/google.api.expr.v1beta1.SourcePosition";
+  value: SourcePositionAmino;
 }
 
 /** A specific position in source. */

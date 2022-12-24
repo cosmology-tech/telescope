@@ -66,6 +66,10 @@ export interface AttributeContext {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
+export interface AttributeContextProtoType {
+  typeUrl: "/google.rpc.context.AttributeContext";
+  value: Uint8Array;
+}
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -127,6 +131,10 @@ export interface AttributeContextAmino {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: AnyAmino[];
 }
+export interface AttributeContextAminoType {
+  type: "/google.rpc.context.AttributeContext";
+  value: AttributeContextAmino;
+}
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -161,9 +169,17 @@ export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Peer_LabelsEntryProtoType {
+  typeUrl: "/google.rpc.context.undefined";
+  value: Uint8Array;
+}
 export interface AttributeContext_Peer_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface AttributeContext_Peer_LabelsEntryAminoType {
+  type: "/google.rpc.context.undefined";
+  value: AttributeContext_Peer_LabelsEntryAmino;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
@@ -202,6 +218,10 @@ export interface AttributeContext_Peer {
    */
   regionCode: string;
 }
+export interface AttributeContext_PeerProtoType {
+  typeUrl: "/google.rpc.context.Peer";
+  value: Uint8Array;
+}
 
 /**
  * This message defines attributes for a node that handles a network request.
@@ -234,6 +254,10 @@ export interface AttributeContext_PeerAmino {
    * physical location where this peer is running.
    */
   region_code: string;
+}
+export interface AttributeContext_PeerAminoType {
+  type: "/google.rpc.context.Peer";
+  value: AttributeContext_PeerAmino;
 }
 
 /**
@@ -284,6 +308,10 @@ export interface AttributeContext_Api {
    */
   version: string;
 }
+export interface AttributeContext_ApiProtoType {
+  typeUrl: "/google.rpc.context.Api";
+  value: Uint8Array;
+}
 
 /**
  * This message defines attributes associated with API operations, such as
@@ -316,6 +344,10 @@ export interface AttributeContext_ApiAmino {
    * "v1alpha1".
    */
   version: string;
+}
+export interface AttributeContext_ApiAminoType {
+  type: "/google.rpc.context.Api";
+  value: AttributeContext_ApiAmino;
 }
 
 /**
@@ -401,6 +433,10 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
+export interface AttributeContext_AuthProtoType {
+  typeUrl: "/google.rpc.context.Auth";
+  value: Uint8Array;
+}
 
 /**
  * This message defines request authentication attributes. Terminology is
@@ -473,6 +509,10 @@ export interface AttributeContext_AuthAmino {
    */
   access_levels: string[];
 }
+export interface AttributeContext_AuthAminoType {
+  type: "/google.rpc.context.Auth";
+  value: AttributeContext_AuthAmino;
+}
 
 /**
  * This message defines request authentication attributes. Terminology is
@@ -490,9 +530,17 @@ export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Request_HeadersEntryProtoType {
+  typeUrl: "/google.rpc.context.undefined";
+  value: Uint8Array;
+}
 export interface AttributeContext_Request_HeadersEntryAmino {
   key: string;
   value: string;
+}
+export interface AttributeContext_Request_HeadersEntryAminoType {
+  type: "/google.rpc.context.undefined";
+  value: AttributeContext_Request_HeadersEntryAmino;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -568,6 +616,10 @@ export interface AttributeContext_Request {
    */
   auth?: AttributeContext_Auth;
 }
+export interface AttributeContext_RequestProtoType {
+  typeUrl: "/google.rpc.context.Request";
+  value: Uint8Array;
+}
 
 /**
  * This message defines attributes for an HTTP request. If the actual
@@ -638,6 +690,10 @@ export interface AttributeContext_RequestAmino {
    */
   auth?: AttributeContext_AuthAmino;
 }
+export interface AttributeContext_RequestAminoType {
+  type: "/google.rpc.context.Request";
+  value: AttributeContext_RequestAmino;
+}
 
 /**
  * This message defines attributes for an HTTP request. If the actual
@@ -664,9 +720,17 @@ export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Response_HeadersEntryProtoType {
+  typeUrl: "/google.rpc.context.undefined";
+  value: Uint8Array;
+}
 export interface AttributeContext_Response_HeadersEntryAmino {
   key: string;
   value: string;
+}
+export interface AttributeContext_Response_HeadersEntryAminoType {
+  type: "/google.rpc.context.undefined";
+  value: AttributeContext_Response_HeadersEntryAmino;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -707,6 +771,10 @@ export interface AttributeContext_Response {
    */
   backendLatency?: Duration;
 }
+export interface AttributeContext_ResponseProtoType {
+  typeUrl: "/google.rpc.context.Response";
+  value: Uint8Array;
+}
 
 /**
  * This message defines attributes for a typical network response. It
@@ -742,6 +810,10 @@ export interface AttributeContext_ResponseAmino {
    */
   backend_latency?: DurationAmino;
 }
+export interface AttributeContext_ResponseAminoType {
+  type: "/google.rpc.context.Response";
+  value: AttributeContext_ResponseAmino;
+}
 
 /**
  * This message defines attributes for a typical network response. It
@@ -760,9 +832,17 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Resource_LabelsEntryProtoType {
+  typeUrl: "/google.rpc.context.undefined";
+  value: Uint8Array;
+}
 export interface AttributeContext_Resource_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_LabelsEntryAminoType {
+  type: "/google.rpc.context.undefined";
+  value: AttributeContext_Resource_LabelsEntryAmino;
 }
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
@@ -772,9 +852,17 @@ export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
 }
+export interface AttributeContext_Resource_AnnotationsEntryProtoType {
+  typeUrl: "/google.rpc.context.undefined";
+  value: Uint8Array;
+}
 export interface AttributeContext_Resource_AnnotationsEntryAmino {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryAminoType {
+  type: "/google.rpc.context.undefined";
+  value: AttributeContext_Resource_AnnotationsEntryAmino;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -887,6 +975,10 @@ export interface AttributeContext_Resource {
    */
   location: string;
 }
+export interface AttributeContext_ResourceProtoType {
+  typeUrl: "/google.rpc.context.Resource";
+  value: Uint8Array;
+}
 
 /**
  * This message defines core attributes for a resource. A resource is an
@@ -993,6 +1085,10 @@ export interface AttributeContext_ResourceAmino {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
+}
+export interface AttributeContext_ResourceAminoType {
+  type: "/google.rpc.context.Resource";
+  value: AttributeContext_ResourceAmino;
 }
 
 /**

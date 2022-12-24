@@ -12,11 +12,19 @@ export interface QueryDeploymentsRequest {
   filters?: DeploymentFilters;
   pagination?: PageRequest;
 }
+export interface QueryDeploymentsRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestAmino {
   filters?: DeploymentFiltersAmino;
   pagination?: PageRequestAmino;
+}
+export interface QueryDeploymentsRequestAminoType {
+  type: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
+  value: QueryDeploymentsRequestAmino;
 }
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -30,11 +38,19 @@ export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
   pagination?: PageResponse;
 }
+export interface QueryDeploymentsResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseAmino {
   deployments: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QueryDeploymentsResponseAminoType {
+  type: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
+  value: QueryDeploymentsResponseAmino;
 }
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
@@ -47,10 +63,18 @@ export interface QueryDeploymentsResponseSDKType {
 export interface QueryDeploymentRequest {
   id?: DeploymentID;
 }
+export interface QueryDeploymentRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestAmino {
   id?: DeploymentIDAmino;
+}
+export interface QueryDeploymentRequestAminoType {
+  type: "/akash.deployment.v1beta2.QueryDeploymentRequest";
+  value: QueryDeploymentRequestAmino;
 }
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
@@ -64,12 +88,20 @@ export interface QueryDeploymentResponse {
   groups: Group[];
   escrowAccount?: Account;
 }
+export interface QueryDeploymentResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
   deployment?: DeploymentAmino;
   groups: GroupAmino[];
   escrow_account?: AccountAmino;
+}
+export interface QueryDeploymentResponseAminoType {
+  type: "/akash.deployment.v1beta2.QueryDeploymentResponse";
+  value: QueryDeploymentResponseAmino;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
@@ -83,10 +115,18 @@ export interface QueryDeploymentResponseSDKType {
 export interface QueryGroupRequest {
   id?: GroupID;
 }
+export interface QueryGroupRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest";
+  value: Uint8Array;
+}
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestAmino {
   id?: GroupIDAmino;
+}
+export interface QueryGroupRequestAminoType {
+  type: "/akash.deployment.v1beta2.QueryGroupRequest";
+  value: QueryGroupRequestAmino;
 }
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
@@ -98,10 +138,18 @@ export interface QueryGroupRequestSDKType {
 export interface QueryGroupResponse {
   group?: Group;
 }
+export interface QueryGroupResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse";
+  value: Uint8Array;
+}
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseAmino {
   group?: GroupAmino;
+}
+export interface QueryGroupResponseAminoType {
+  type: "/akash.deployment.v1beta2.QueryGroupResponse";
+  value: QueryGroupResponseAmino;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */

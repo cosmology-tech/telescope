@@ -97,6 +97,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoType {
+  typeUrl: "/google.api.serviceusage.v1.Service";
+  value: Uint8Array;
+}
 
 /** A service that is available for use by the consumer. */
 export interface ServiceAmino {
@@ -126,6 +130,10 @@ export interface ServiceAmino {
 
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
+}
+export interface ServiceAminoType {
+  type: "/google.api.serviceusage.v1.Service";
+  value: ServiceAmino;
 }
 
 /** A service that is available for use by the consumer. */
@@ -188,6 +196,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoType {
+  typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
+  value: Uint8Array;
+}
 
 /** The configuration of the service. */
 export interface ServiceConfigAmino {
@@ -241,6 +253,10 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
+export interface ServiceConfigAminoType {
+  type: "/google.api.serviceusage.v1.ServiceConfig";
+  value: ServiceConfigAmino;
+}
 
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
@@ -264,6 +280,10 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
+export interface OperationMetadataProtoType {
+  typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
+  value: Uint8Array;
+}
 
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataAmino {
@@ -272,6 +292,10 @@ export interface OperationMetadataAmino {
    * associated with.
    */
   resource_names: string[];
+}
+export interface OperationMetadataAminoType {
+  type: "/google.api.serviceusage.v1.OperationMetadata";
+  value: OperationMetadataAmino;
 }
 
 /** The operation metadata returned for the batchend services operation. */

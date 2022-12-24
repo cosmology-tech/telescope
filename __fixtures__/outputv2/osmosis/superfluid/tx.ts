@@ -7,10 +7,18 @@ export interface MsgSuperfluidDelegate {
   lockId: Long;
   valAddr: string;
 }
+export interface MsgSuperfluidDelegateProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateAmino {
   sender: string;
   lock_id: string;
   val_addr: string;
+}
+export interface MsgSuperfluidDelegateAminoType {
+  type: "osmosis/superfluid-delegate";
+  value: MsgSuperfluidDelegateAmino;
 }
 export interface MsgSuperfluidDelegateSDKType {
   sender: string;
@@ -18,37 +26,77 @@ export interface MsgSuperfluidDelegateSDKType {
   val_addr: string;
 }
 export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidDelegateResponseProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateResponseAmino {}
+export interface MsgSuperfluidDelegateResponseAminoType {
+  type: "osmosis/superfluid-delegate-response";
+  value: MsgSuperfluidDelegateResponseAmino;
+}
 export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
   lockId: Long;
 }
+export interface MsgSuperfluidUndelegateProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUndelegateAmino {
   sender: string;
   lock_id: string;
+}
+export interface MsgSuperfluidUndelegateAminoType {
+  type: "osmosis/superfluid-undelegate";
+  value: MsgSuperfluidUndelegateAmino;
 }
 export interface MsgSuperfluidUndelegateSDKType {
   sender: string;
   lock_id: Long;
 }
 export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUndelegateResponseProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUndelegateResponseAmino {}
+export interface MsgSuperfluidUndelegateResponseAminoType {
+  type: "osmosis/superfluid-undelegate-response";
+  value: MsgSuperfluidUndelegateResponseAmino;
+}
 export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
   lockId: Long;
 }
+export interface MsgSuperfluidUnbondLockProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUnbondLockAmino {
   sender: string;
   lock_id: string;
+}
+export interface MsgSuperfluidUnbondLockAminoType {
+  type: "osmosis/superfluid-unbond-lock";
+  value: MsgSuperfluidUnbondLockAmino;
 }
 export interface MsgSuperfluidUnbondLockSDKType {
   sender: string;
   lock_id: Long;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
+export interface MsgSuperfluidUnbondLockResponseProtoType {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUnbondLockResponseAmino {}
+export interface MsgSuperfluidUnbondLockResponseAminoType {
+  type: "osmosis/superfluid-unbond-lock-response";
+  value: MsgSuperfluidUnbondLockResponseAmino;
+}
 export interface MsgSuperfluidUnbondLockResponseSDKType {}
 
 /**
@@ -61,6 +109,10 @@ export interface MsgLockAndSuperfluidDelegate {
   coins: Coin[];
   valAddr: string;
 }
+export interface MsgLockAndSuperfluidDelegateProtoType {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
+  value: Uint8Array;
+}
 
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -71,6 +123,10 @@ export interface MsgLockAndSuperfluidDelegateAmino {
   sender: string;
   coins: CoinAmino[];
   val_addr: string;
+}
+export interface MsgLockAndSuperfluidDelegateAminoType {
+  type: "osmosis/lock-and-superfluid-delegate";
+  value: MsgLockAndSuperfluidDelegateAmino;
 }
 
 /**
@@ -86,8 +142,16 @@ export interface MsgLockAndSuperfluidDelegateSDKType {
 export interface MsgLockAndSuperfluidDelegateResponse {
   ID: Long;
 }
+export interface MsgLockAndSuperfluidDelegateResponseProtoType {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgLockAndSuperfluidDelegateResponseAmino {
   ID: string;
+}
+export interface MsgLockAndSuperfluidDelegateResponseAminoType {
+  type: "osmosis/lock-and-superfluid-delegate-response";
+  value: MsgLockAndSuperfluidDelegateResponseAmino;
 }
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: Long;
@@ -107,6 +171,10 @@ export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: Long;
 }
+export interface MsgUnPoolWhitelistedPoolProtoType {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
+  value: Uint8Array;
+}
 
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
@@ -121,6 +189,10 @@ export interface MsgUnPoolWhitelistedPool {
 export interface MsgUnPoolWhitelistedPoolAmino {
   sender: string;
   pool_id: string;
+}
+export interface MsgUnPoolWhitelistedPoolAminoType {
+  type: "osmosis/unpool-whitelisted-pool";
+  value: MsgUnPoolWhitelistedPoolAmino;
 }
 
 /**
@@ -140,8 +212,16 @@ export interface MsgUnPoolWhitelistedPoolSDKType {
 export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: Long[];
 }
+export interface MsgUnPoolWhitelistedPoolResponseProtoType {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";
+  value: Uint8Array;
+}
 export interface MsgUnPoolWhitelistedPoolResponseAmino {
   exited_lock_ids: string[];
+}
+export interface MsgUnPoolWhitelistedPoolResponseAminoType {
+  type: "osmosis/un-pool-whitelisted-pool-response";
+  value: MsgUnPoolWhitelistedPoolResponseAmino;
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exited_lock_ids: Long[];

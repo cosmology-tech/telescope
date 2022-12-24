@@ -104,6 +104,10 @@ export interface Documentation {
    */
   overview: string;
 }
+export interface DocumentationProtoType {
+  typeUrl: "/google.api.Documentation";
+  value: Uint8Array;
+}
 
 /**
  * `Documentation` provides the information for describing a service.
@@ -207,6 +211,10 @@ export interface DocumentationAmino {
    */
   overview: string;
 }
+export interface DocumentationAminoType {
+  type: "/google.api.Documentation";
+  value: DocumentationAmino;
+}
 
 /**
  * `Documentation` provides the information for describing a service.
@@ -295,6 +303,10 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
+export interface DocumentationRuleProtoType {
+  typeUrl: "/google.api.DocumentationRule";
+  value: Uint8Array;
+}
 
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleAmino {
@@ -316,6 +328,10 @@ export interface DocumentationRuleAmino {
    * an element is marked as `deprecated`.
    */
   deprecation_description: string;
+}
+export interface DocumentationRuleAminoType {
+  type: "/google.api.DocumentationRule";
+  value: DocumentationRuleAmino;
 }
 
 /** A documentation rule provides information about individual API elements. */
@@ -360,6 +376,10 @@ export interface Page {
    */
   subpages: Page[];
 }
+export interface PageProtoType {
+  typeUrl: "/google.api.Page";
+  value: Uint8Array;
+}
 
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -395,6 +415,10 @@ export interface PageAmino {
    * honored in the generated docset.
    */
   subpages: PageAmino[];
+}
+export interface PageAminoType {
+  type: "/google.api.Page";
+  value: PageAmino;
 }
 
 /**

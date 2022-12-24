@@ -11,6 +11,10 @@ export interface GenesisState {
    */
   constantFee?: Coin;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.crisis.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisStateAmino {
@@ -19,6 +23,10 @@ export interface GenesisStateAmino {
    * module.
    */
   constant_fee?: CoinAmino;
+}
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the crisis module's genesis state. */

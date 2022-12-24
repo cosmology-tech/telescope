@@ -37,6 +37,10 @@ export interface MsgCreateGauge {
    */
   numEpochsPaidOver: Long;
 }
+export interface MsgCreateGaugeProtoType {
+  typeUrl: "/osmosis.incentives.MsgCreateGauge";
+  value: Uint8Array;
+}
 
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeAmino {
@@ -70,6 +74,10 @@ export interface MsgCreateGaugeAmino {
    */
   num_epochs_paid_over: string;
 }
+export interface MsgCreateGaugeAminoType {
+  type: "osmosis/incentives/create-gauge";
+  value: MsgCreateGaugeAmino;
+}
 
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
@@ -81,7 +89,15 @@ export interface MsgCreateGaugeSDKType {
   num_epochs_paid_over: Long;
 }
 export interface MsgCreateGaugeResponse {}
+export interface MsgCreateGaugeResponseProtoType {
+  typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgCreateGaugeResponseAmino {}
+export interface MsgCreateGaugeResponseAminoType {
+  type: "osmosis/incentives/create-gauge-response";
+  value: MsgCreateGaugeResponseAmino;
+}
 export interface MsgCreateGaugeResponseSDKType {}
 
 /** MsgAddToGauge adds coins to a previously created gauge */
@@ -95,6 +111,10 @@ export interface MsgAddToGauge {
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
+export interface MsgAddToGaugeProtoType {
+  typeUrl: "/osmosis.incentives.MsgAddToGauge";
+  value: Uint8Array;
+}
 
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeAmino {
@@ -107,6 +127,10 @@ export interface MsgAddToGaugeAmino {
   /** rewards are the coin(s) to add to gauge */
   rewards: CoinAmino[];
 }
+export interface MsgAddToGaugeAminoType {
+  type: "osmosis/incentives/add-to-gauge";
+  value: MsgAddToGaugeAmino;
+}
 
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
@@ -115,7 +139,15 @@ export interface MsgAddToGaugeSDKType {
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
+export interface MsgAddToGaugeResponseProtoType {
+  typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
+  value: Uint8Array;
+}
 export interface MsgAddToGaugeResponseAmino {}
+export interface MsgAddToGaugeResponseAminoType {
+  type: "osmosis/incentives/add-to-gauge-response";
+  value: MsgAddToGaugeResponseAmino;
+}
 export interface MsgAddToGaugeResponseSDKType {}
 
 function createBaseMsgCreateGauge(): MsgCreateGauge {

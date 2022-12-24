@@ -12,6 +12,10 @@ export interface FeeToken {
   denom: string;
   poolID: Long;
 }
+export interface FeeTokenProtoType {
+  typeUrl: "/osmosis.txfees.v1beta1.FeeToken";
+  value: Uint8Array;
+}
 
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -22,6 +26,10 @@ export interface FeeToken {
 export interface FeeTokenAmino {
   denom: string;
   poolID: string;
+}
+export interface FeeTokenAminoType {
+  type: "osmosis/txfees/fee-token";
+  value: FeeTokenAmino;
 }
 
 /**

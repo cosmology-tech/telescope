@@ -10,6 +10,10 @@ export interface Snapshot {
   hash: Uint8Array;
   metadata?: Metadata;
 }
+export interface SnapshotProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.Snapshot";
+  value: Uint8Array;
+}
 
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotAmino {
@@ -18,6 +22,10 @@ export interface SnapshotAmino {
   chunks: number;
   hash: Uint8Array;
   metadata?: MetadataAmino;
+}
+export interface SnapshotAminoType {
+  type: "cosmos-sdk/Snapshot";
+  value: SnapshotAmino;
 }
 
 /** Snapshot contains Tendermint state sync snapshot info. */
@@ -34,11 +42,19 @@ export interface Metadata {
   /** SHA-256 chunk hashes */
   chunkHashes: Uint8Array[];
 }
+export interface MetadataProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.Metadata";
+  value: Uint8Array;
+}
 
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataAmino {
   /** SHA-256 chunk hashes */
   chunk_hashes: Uint8Array[];
+}
+export interface MetadataAminoType {
+  type: "cosmos-sdk/Metadata";
+  value: MetadataAmino;
 }
 
 /** Metadata contains SDK-specific snapshot metadata. */
@@ -55,6 +71,10 @@ export interface SnapshotItem {
   kv?: SnapshotKVItem;
   schema?: SnapshotSchema;
 }
+export interface SnapshotItemProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotItem";
+  value: Uint8Array;
+}
 
 /** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
 export interface SnapshotItemAmino {
@@ -64,6 +84,10 @@ export interface SnapshotItemAmino {
   extension_payload?: SnapshotExtensionPayloadAmino;
   kv?: SnapshotKVItemAmino;
   schema?: SnapshotSchemaAmino;
+}
+export interface SnapshotItemAminoType {
+  type: "cosmos-sdk/SnapshotItem";
+  value: SnapshotItemAmino;
 }
 
 /** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
@@ -80,10 +104,18 @@ export interface SnapshotItemSDKType {
 export interface SnapshotStoreItem {
   name: string;
 }
+export interface SnapshotStoreItemProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotStoreItem";
+  value: Uint8Array;
+}
 
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemAmino {
   name: string;
+}
+export interface SnapshotStoreItemAminoType {
+  type: "cosmos-sdk/SnapshotStoreItem";
+  value: SnapshotStoreItemAmino;
 }
 
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
@@ -102,6 +134,10 @@ export interface SnapshotIAVLItem {
   /** height is depth of the tree. */
   height: number;
 }
+export interface SnapshotIAVLItemProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotIAVLItem";
+  value: Uint8Array;
+}
 
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemAmino {
@@ -113,6 +149,10 @@ export interface SnapshotIAVLItemAmino {
 
   /** height is depth of the tree. */
   height: number;
+}
+export interface SnapshotIAVLItemAminoType {
+  type: "cosmos-sdk/SnapshotIAVLItem";
+  value: SnapshotIAVLItemAmino;
 }
 
 /** SnapshotIAVLItem is an exported IAVL node. */
@@ -128,11 +168,19 @@ export interface SnapshotExtensionMeta {
   name: string;
   format: number;
 }
+export interface SnapshotExtensionMetaProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotExtensionMeta";
+  value: Uint8Array;
+}
 
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMetaAmino {
   name: string;
   format: number;
+}
+export interface SnapshotExtensionMetaAminoType {
+  type: "cosmos-sdk/SnapshotExtensionMeta";
+  value: SnapshotExtensionMetaAmino;
 }
 
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
@@ -145,10 +193,18 @@ export interface SnapshotExtensionMetaSDKType {
 export interface SnapshotExtensionPayload {
   payload: Uint8Array;
 }
+export interface SnapshotExtensionPayloadProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotExtensionPayload";
+  value: Uint8Array;
+}
 
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadAmino {
   payload: Uint8Array;
+}
+export interface SnapshotExtensionPayloadAminoType {
+  type: "cosmos-sdk/SnapshotExtensionPayload";
+  value: SnapshotExtensionPayloadAmino;
 }
 
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
@@ -161,11 +217,19 @@ export interface SnapshotKVItem {
   key: Uint8Array;
   value: Uint8Array;
 }
+export interface SnapshotKVItemProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotKVItem";
+  value: Uint8Array;
+}
 
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemAmino {
   key: Uint8Array;
   value: Uint8Array;
+}
+export interface SnapshotKVItemAminoType {
+  type: "cosmos-sdk/SnapshotKVItem";
+  value: SnapshotKVItemAmino;
 }
 
 /** SnapshotKVItem is an exported Key/Value Pair */
@@ -178,10 +242,18 @@ export interface SnapshotKVItemSDKType {
 export interface SnapshotSchema {
   keys: Uint8Array[];
 }
+export interface SnapshotSchemaProtoType {
+  typeUrl: "/cosmos.base.snapshots.v1beta1.SnapshotSchema";
+  value: Uint8Array;
+}
 
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaAmino {
   keys: Uint8Array[];
+}
+export interface SnapshotSchemaAminoType {
+  type: "cosmos-sdk/SnapshotSchema";
+  value: SnapshotSchemaAmino;
 }
 
 /** SnapshotSchema is an exported schema of smt store */

@@ -10,6 +10,10 @@ export interface Params {
    */
   distrEpochIdentifier: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.incentives.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
@@ -18,6 +22,10 @@ export interface ParamsAmino {
    * (day, week, etc.)
    */
   distr_epoch_identifier: string;
+}
+export interface ParamsAminoType {
+  type: "osmosis/incentives/params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the incentives module */

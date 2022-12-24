@@ -5,7 +5,7 @@ import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
-export interface AminoMsgLockTokens extends AminoMsg {
+export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
@@ -19,13 +19,13 @@ export interface AminoMsgLockTokens extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgBeginUnlockingAll extends AminoMsg {
+export interface MsgBeginUnlockingAllAminoType extends AminoMsg {
   type: "osmosis/lockup/begin-unlock-tokens";
   value: {
     owner: string;
   };
 }
-export interface AminoMsgBeginUnlocking extends AminoMsg {
+export interface MsgBeginUnlockingAminoType extends AminoMsg {
   type: "osmosis/lockup/begin-unlock-period-lock";
   value: {
     owner: string;
@@ -36,7 +36,7 @@ export interface AminoMsgBeginUnlocking extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgExtendLockup extends AminoMsg {
+export interface MsgExtendLockupAminoType extends AminoMsg {
   type: "osmosis/lockup/extend-lockup";
   value: {
     owner: string;
@@ -47,7 +47,7 @@ export interface AminoMsgExtendLockup extends AminoMsg {
     };
   };
 }
-export interface AminoMsgForceUnlock extends AminoMsg {
+export interface MsgForceUnlockAminoType extends AminoMsg {
   type: "osmosis/lockup/force-unlock";
   value: {
     owner: string;
@@ -65,7 +65,7 @@ export const AminoConverter = {
       owner,
       duration,
       coins
-    }: MsgLockTokens): AminoMsgLockTokens["value"] => {
+    }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
         owner,
         duration: (duration * 1_000_000_000).toString(),
@@ -79,7 +79,7 @@ export const AminoConverter = {
       owner,
       duration,
       coins
-    }: AminoMsgLockTokens["value"]): MsgLockTokens => {
+    }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
         duration: {
@@ -97,14 +97,14 @@ export const AminoConverter = {
     aminoType: "osmosis/lockup/begin-unlock-tokens",
     toAmino: ({
       owner
-    }: MsgBeginUnlockingAll): AminoMsgBeginUnlockingAll["value"] => {
+    }: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoType["value"] => {
       return {
         owner
       };
     },
     fromAmino: ({
       owner
-    }: AminoMsgBeginUnlockingAll["value"]): MsgBeginUnlockingAll => {
+    }: MsgBeginUnlockingAllAminoType["value"]): MsgBeginUnlockingAll => {
       return {
         owner
       };
@@ -116,7 +116,7 @@ export const AminoConverter = {
       owner,
       ID,
       coins
-    }: MsgBeginUnlocking): AminoMsgBeginUnlocking["value"] => {
+    }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
         owner,
         ID: ID.toString(),
@@ -130,7 +130,7 @@ export const AminoConverter = {
       owner,
       ID,
       coins
-    }: AminoMsgBeginUnlocking["value"]): MsgBeginUnlocking => {
+    }: MsgBeginUnlockingAminoType["value"]): MsgBeginUnlocking => {
       return {
         owner,
         ID: Long.fromString(ID),
@@ -147,7 +147,7 @@ export const AminoConverter = {
       owner,
       ID,
       duration
-    }: MsgExtendLockup): AminoMsgExtendLockup["value"] => {
+    }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
         owner,
         ID: ID.toString(),
@@ -158,7 +158,7 @@ export const AminoConverter = {
       owner,
       ID,
       duration
-    }: AminoMsgExtendLockup["value"]): MsgExtendLockup => {
+    }: MsgExtendLockupAminoType["value"]): MsgExtendLockup => {
       return {
         owner,
         ID: Long.fromString(ID),
@@ -175,7 +175,7 @@ export const AminoConverter = {
       owner,
       ID,
       coins
-    }: MsgForceUnlock): AminoMsgForceUnlock["value"] => {
+    }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
         owner,
         ID: ID.toString(),
@@ -189,7 +189,7 @@ export const AminoConverter = {
       owner,
       ID,
       coins
-    }: AminoMsgForceUnlock["value"]): MsgForceUnlock => {
+    }: MsgForceUnlockAminoType["value"]): MsgForceUnlock => {
       return {
         owner,
         ID: Long.fromString(ID),

@@ -14,6 +14,10 @@ export const protobufPackage = "google.protobuf";
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface Empty {}
+export interface EmptyProtoType {
+  typeUrl: "/google.protobuf.Empty";
+  value: Uint8Array;
+}
 
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
@@ -27,6 +31,10 @@ export interface Empty {}
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface EmptyAmino {}
+export interface EmptyAminoType {
+  type: "/google.protobuf.Empty";
+  value: EmptyAmino;
+}
 
 /**
  * A generic empty message that you can re-use to avoid defining duplicated

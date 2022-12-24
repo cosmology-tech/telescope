@@ -11,6 +11,10 @@ export interface DenomAuthorityMetadata {
   /** Can be empty for no admin, or a valid osmosis address */
   admin: string;
 }
+export interface DenomAuthorityMetadataProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata";
+  value: Uint8Array;
+}
 
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -20,6 +24,10 @@ export interface DenomAuthorityMetadata {
 export interface DenomAuthorityMetadataAmino {
   /** Can be empty for no admin, or a valid osmosis address */
   admin: string;
+}
+export interface DenomAuthorityMetadataAminoType {
+  type: "osmosis/tokenfactory/denom-authority-metadata";
+  value: DenomAuthorityMetadataAmino;
 }
 
 /**

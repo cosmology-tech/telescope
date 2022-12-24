@@ -25,6 +25,10 @@ export interface MsgIBCSend {
    */
   data: Uint8Array;
 }
+export interface MsgIBCSendProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend";
+  value: Uint8Array;
+}
 
 /** MsgIBCSend */
 export interface MsgIBCSendAmino {
@@ -49,6 +53,10 @@ export interface MsgIBCSendAmino {
    */
   data: Uint8Array;
 }
+export interface MsgIBCSendAminoType {
+  type: "wasm/MsgIBCSend";
+  value: MsgIBCSendAmino;
+}
 
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
@@ -62,10 +70,18 @@ export interface MsgIBCSendSDKType {
 export interface MsgIBCCloseChannel {
   channel: string;
 }
+export interface MsgIBCCloseChannelProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel";
+  value: Uint8Array;
+}
 
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelAmino {
   channel: string;
+}
+export interface MsgIBCCloseChannelAminoType {
+  type: "wasm/MsgIBCCloseChannel";
+  value: MsgIBCCloseChannelAmino;
 }
 
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */

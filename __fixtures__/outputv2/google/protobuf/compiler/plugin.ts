@@ -15,6 +15,10 @@ export interface Version {
    */
   suffix: string;
 }
+export interface VersionProtoType {
+  typeUrl: "/google.protobuf.compiler.Version";
+  value: Uint8Array;
+}
 
 /** The version number of protocol compiler. */
 export interface VersionAmino {
@@ -27,6 +31,10 @@ export interface VersionAmino {
    * be empty for mainline stable releases.
    */
   suffix: string;
+}
+export interface VersionAminoType {
+  type: "/google.protobuf.compiler.Version";
+  value: VersionAmino;
 }
 
 /** The version number of protocol compiler. */
@@ -70,6 +78,10 @@ export interface CodeGeneratorRequest {
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
 }
+export interface CodeGeneratorRequestProtoType {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
+  value: Uint8Array;
+}
 
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestAmino {
@@ -104,6 +116,10 @@ export interface CodeGeneratorRequestAmino {
   /** The version number of protocol compiler. */
   compiler_version?: VersionAmino;
 }
+export interface CodeGeneratorRequestAminoType {
+  type: "/google.protobuf.compiler.CodeGeneratorRequest";
+  value: CodeGeneratorRequestAmino;
+}
 
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
 export interface CodeGeneratorRequestSDKType {
@@ -128,6 +144,10 @@ export interface CodeGeneratorResponse {
   error: string;
   file: CodeGeneratorResponse_File[];
 }
+export interface CodeGeneratorResponseProtoType {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
+  value: Uint8Array;
+}
 
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseAmino {
@@ -143,6 +163,10 @@ export interface CodeGeneratorResponseAmino {
    */
   error: string;
   file: CodeGeneratorResponse_FileAmino[];
+}
+export interface CodeGeneratorResponseAminoType {
+  type: "/google.protobuf.compiler.CodeGeneratorResponse";
+  value: CodeGeneratorResponseAmino;
 }
 
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
@@ -212,6 +236,10 @@ export interface CodeGeneratorResponse_File {
   /** The file contents. */
   content: string;
 }
+export interface CodeGeneratorResponse_FileProtoType {
+  typeUrl: "/google.protobuf.compiler.File";
+  value: Uint8Array;
+}
 
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileAmino {
@@ -273,6 +301,10 @@ export interface CodeGeneratorResponse_FileAmino {
 
   /** The file contents. */
   content: string;
+}
+export interface CodeGeneratorResponse_FileAminoType {
+  type: "/google.protobuf.compiler.File";
+  value: CodeGeneratorResponse_FileAmino;
 }
 
 /** Represents a single generated file. */

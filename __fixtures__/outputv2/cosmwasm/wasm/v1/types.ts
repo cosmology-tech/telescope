@@ -130,10 +130,18 @@ export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHisto
 export interface AccessTypeParam {
   value: AccessType;
 }
+export interface AccessTypeParamProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam";
+  value: Uint8Array;
+}
 
 /** AccessTypeParam */
 export interface AccessTypeParamAmino {
   value: AccessType;
+}
+export interface AccessTypeParamAminoType {
+  type: "wasm/AccessTypeParam";
+  value: AccessTypeParamAmino;
 }
 
 /** AccessTypeParam */
@@ -146,11 +154,19 @@ export interface AccessConfig {
   permission: AccessType;
   address: string;
 }
+export interface AccessConfigProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AccessConfig";
+  value: Uint8Array;
+}
 
 /** AccessConfig access control type. */
 export interface AccessConfigAmino {
   permission: AccessType;
   address: string;
+}
+export interface AccessConfigAminoType {
+  type: "wasm/AccessConfig";
+  value: AccessConfigAmino;
 }
 
 /** AccessConfig access control type. */
@@ -165,12 +181,20 @@ export interface Params {
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
 }
+export interface ParamsProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the set of wasm parameters. */
 export interface ParamsAmino {
   code_upload_access?: AccessConfigAmino;
   instantiate_default_permission: AccessType;
   max_wasm_code_size: string;
+}
+export interface ParamsAminoType {
+  type: "wasm/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the set of wasm parameters. */
@@ -191,6 +215,10 @@ export interface CodeInfo {
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig?: AccessConfig;
 }
+export interface CodeInfoProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
+  value: Uint8Array;
+}
 
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoAmino {
@@ -202,6 +230,10 @@ export interface CodeInfoAmino {
 
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiate_config?: AccessConfigAmino;
+}
+export interface CodeInfoAminoType {
+  type: "wasm/CodeInfo";
+  value: CodeInfoAmino;
 }
 
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -239,6 +271,10 @@ export interface ContractInfo {
    */
   extension?: (Any) | undefined;
 }
+export interface ContractInfoProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
+  value: Uint8Array;
+}
 
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoAmino {
@@ -268,6 +304,10 @@ export interface ContractInfoAmino {
    */
   extension?: AnyAmino;
 }
+export interface ContractInfoAminoType {
+  type: "wasm/ContractInfo";
+  value: ContractInfoAmino;
+}
 
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
@@ -291,6 +331,10 @@ export interface ContractCodeHistoryEntry {
   updated?: AbsoluteTxPosition;
   msg: Uint8Array;
 }
+export interface ContractCodeHistoryEntryProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry";
+  value: Uint8Array;
+}
 
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntryAmino {
@@ -302,6 +346,10 @@ export interface ContractCodeHistoryEntryAmino {
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
   msg: Uint8Array;
+}
+export interface ContractCodeHistoryEntryAminoType {
+  type: "wasm/ContractCodeHistoryEntry";
+  value: ContractCodeHistoryEntryAmino;
 }
 
 /** ContractCodeHistoryEntry metadata to a contract. */
@@ -326,6 +374,10 @@ export interface AbsoluteTxPosition {
    */
   txIndex: Long;
 }
+export interface AbsoluteTxPositionProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
+  value: Uint8Array;
+}
 
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
@@ -340,6 +392,10 @@ export interface AbsoluteTxPositionAmino {
    * or gas consumed)
    */
   tx_index: string;
+}
+export interface AbsoluteTxPositionAminoType {
+  type: "wasm/AbsoluteTxPosition";
+  value: AbsoluteTxPositionAmino;
 }
 
 /**
@@ -359,6 +415,10 @@ export interface Model {
   /** base64-encode raw value */
   value: Uint8Array;
 }
+export interface ModelProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.Model";
+  value: Uint8Array;
+}
 
 /** Model is a struct that holds a KV pair */
 export interface ModelAmino {
@@ -367,6 +427,10 @@ export interface ModelAmino {
 
   /** base64-encode raw value */
   value: Uint8Array;
+}
+export interface ModelAminoType {
+  type: "wasm/Model";
+  value: ModelAmino;
 }
 
 /** Model is a struct that holds a KV pair */

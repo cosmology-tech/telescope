@@ -12,6 +12,10 @@ export interface SetSuperfluidAssetsProposal {
   description: string;
   assets: SuperfluidAsset[];
 }
+export interface SetSuperfluidAssetsProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
+  value: Uint8Array;
+}
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -21,6 +25,10 @@ export interface SetSuperfluidAssetsProposalAmino {
   title: string;
   description: string;
   assets: SuperfluidAssetAmino[];
+}
+export interface SetSuperfluidAssetsProposalAminoType {
+  type: "osmosis/v1beta1/set-superfluid-assets-proposal";
+  value: SetSuperfluidAssetsProposalAmino;
 }
 
 /**
@@ -42,6 +50,10 @@ export interface RemoveSuperfluidAssetsProposal {
   description: string;
   superfluidAssetDenoms: string[];
 }
+export interface RemoveSuperfluidAssetsProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
+  value: Uint8Array;
+}
 
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
@@ -51,6 +63,10 @@ export interface RemoveSuperfluidAssetsProposalAmino {
   title: string;
   description: string;
   superfluid_asset_denoms: string[];
+}
+export interface RemoveSuperfluidAssetsProposalAminoType {
+  type: "osmosis/v1beta1/remove-superfluid-assets-proposal";
+  value: RemoveSuperfluidAssetsProposalAmino;
 }
 
 /**
@@ -73,6 +89,10 @@ export interface UpdateUnpoolWhiteListProposal {
   ids: Long[];
   isOverwrite: boolean;
 }
+export interface UpdateUnpoolWhiteListProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
+  value: Uint8Array;
+}
 
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
@@ -83,6 +103,10 @@ export interface UpdateUnpoolWhiteListProposalAmino {
   description: string;
   ids: string[];
   is_overwrite: boolean;
+}
+export interface UpdateUnpoolWhiteListProposalAminoType {
+  type: "osmosis/v1beta1/update-unpool-white-list-proposal";
+  value: UpdateUnpoolWhiteListProposalAmino;
 }
 
 /**

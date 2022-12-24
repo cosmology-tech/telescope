@@ -374,6 +374,10 @@ export interface RoutingRule {
    */
   routingParameters: RoutingParameter[];
 }
+export interface RoutingRuleProtoType {
+  typeUrl: "/google.api.RoutingRule";
+  value: Uint8Array;
+}
 
 /**
  * Specifies the routing information that should be sent along with the request
@@ -746,6 +750,10 @@ export interface RoutingRuleAmino {
    * See the examples for more details.
    */
   routing_parameters: RoutingParameterAmino[];
+}
+export interface RoutingRuleAminoType {
+  type: "/google.api.RoutingRule";
+  value: RoutingRuleAmino;
 }
 
 /**
@@ -1176,6 +1184,10 @@ export interface RoutingParameter {
    */
   pathTemplate: string;
 }
+export interface RoutingParameterProtoType {
+  typeUrl: "/google.api.RoutingParameter";
+  value: Uint8Array;
+}
 
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterAmino {
@@ -1239,6 +1251,10 @@ export interface RoutingParameterAmino {
    * See Example 1 for more details.
    */
   path_template: string;
+}
+export interface RoutingParameterAminoType {
+  type: "/google.api.RoutingParameter";
+  value: RoutingParameterAmino;
 }
 
 /** A projection from an input message to the GRPC or REST header. */

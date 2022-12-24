@@ -58,11 +58,19 @@ export interface DeploymentID {
   owner: string;
   dseq: Long;
 }
+export interface DeploymentIDProtoType {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentID";
+  value: Uint8Array;
+}
 
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
+}
+export interface DeploymentIDAminoType {
+  type: "/akash.deployment.v1beta2.DeploymentID";
+  value: DeploymentIDAmino;
 }
 
 /** DeploymentID stores owner and sequence number */
@@ -78,6 +86,10 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: Long;
 }
+export interface DeploymentProtoType {
+  typeUrl: "/akash.deployment.v1beta2.Deployment";
+  value: Uint8Array;
+}
 
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
@@ -85,6 +97,10 @@ export interface DeploymentAmino {
   state: Deployment_State;
   version: Uint8Array;
   created_at: string;
+}
+export interface DeploymentAminoType {
+  type: "/akash.deployment.v1beta2.Deployment";
+  value: DeploymentAmino;
 }
 
 /** Deployment stores deploymentID, state and version details */
@@ -101,12 +117,20 @@ export interface DeploymentFilters {
   dseq: Long;
   state: string;
 }
+export interface DeploymentFiltersProtoType {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: Uint8Array;
+}
 
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
   owner: string;
   dseq: string;
   state: string;
+}
+export interface DeploymentFiltersAminoType {
+  type: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: DeploymentFiltersAmino;
 }
 
 /** DeploymentFilters defines filters used to filter deployments */

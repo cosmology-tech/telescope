@@ -13,6 +13,10 @@ export interface GenesisState {
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.claims.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateAmino {
@@ -21,6 +25,10 @@ export interface GenesisStateAmino {
 
   /** list of claim records with the corresponding airdrop recipient */
   claims_records: ClaimsRecordAddressAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.claims.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState define the claims module's genesis state. */
@@ -55,6 +63,10 @@ export interface Params {
   /** list of channel identifiers from EVM compatible chains */
   evmChannels: string[];
 }
+export interface ParamsProtoType {
+  typeUrl: "/evmos.claims.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the claims module's parameters. */
 export interface ParamsAmino {
@@ -81,6 +93,10 @@ export interface ParamsAmino {
 
   /** list of channel identifiers from EVM compatible chains */
   evm_channels: string[];
+}
+export interface ParamsAminoType {
+  type: "/evmos.claims.v1.Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the claims module's parameters. */

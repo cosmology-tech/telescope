@@ -14,6 +14,10 @@ export interface BaseAccount {
   accountNumber: Long;
   sequence: Long;
 }
+export interface BaseAccountProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
+  value: Uint8Array;
+}
 
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -25,6 +29,10 @@ export interface BaseAccountAmino {
   pub_key?: AnyAmino;
   account_number: string;
   sequence: string;
+}
+export interface BaseAccountAminoType {
+  type: "cosmos-sdk/BaseAccount";
+  value: BaseAccountAmino;
 }
 
 /**
@@ -45,12 +53,20 @@ export interface ModuleAccount {
   name: string;
   permissions: string[];
 }
+export interface ModuleAccountProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.ModuleAccount";
+  value: Uint8Array;
+}
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountAmino {
   base_account?: BaseAccountAmino;
   name: string;
   permissions: string[];
+}
+export interface ModuleAccountAminoType {
+  type: "cosmos-sdk/ModuleAccount";
+  value: ModuleAccountAmino;
 }
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
@@ -68,6 +84,10 @@ export interface Params {
   sigVerifyCostEd25519: Long;
   sigVerifyCostSecp256k1: Long;
 }
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the parameters for the auth module. */
 export interface ParamsAmino {
@@ -76,6 +96,10 @@ export interface ParamsAmino {
   tx_size_cost_per_byte: string;
   sig_verify_cost_ed25519: string;
   sig_verify_cost_secp256k1: string;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the parameters for the auth module. */

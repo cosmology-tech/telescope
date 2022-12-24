@@ -4,7 +4,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx";
-export interface AminoMsgCreateClawbackVestingAccount extends AminoMsg {
+export interface MsgCreateClawbackVestingAccountAminoType extends AminoMsg {
   type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: {
     from_address: string;
@@ -30,7 +30,7 @@ export interface AminoMsgCreateClawbackVestingAccount extends AminoMsg {
     merge: boolean;
   };
 }
-export interface AminoMsgClawback extends AminoMsg {
+export interface MsgClawbackAminoType extends AminoMsg {
   type: "/evmos.vesting.v1.MsgClawback";
   value: {
     funder_address: string;
@@ -48,7 +48,7 @@ export const AminoConverter = {
       lockupPeriods,
       vestingPeriods,
       merge
-    }: MsgCreateClawbackVestingAccount): AminoMsgCreateClawbackVestingAccount["value"] => {
+    }: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAminoType["value"] => {
       return {
         from_address: fromAddress,
         to_address: toAddress,
@@ -77,7 +77,7 @@ export const AminoConverter = {
       lockup_periods,
       vesting_periods,
       merge
-    }: AminoMsgCreateClawbackVestingAccount["value"]): MsgCreateClawbackVestingAccount => {
+    }: MsgCreateClawbackVestingAccountAminoType["value"]): MsgCreateClawbackVestingAccount => {
       return {
         fromAddress: from_address,
         toAddress: to_address,
@@ -106,7 +106,7 @@ export const AminoConverter = {
       funderAddress,
       accountAddress,
       destAddress
-    }: MsgClawback): AminoMsgClawback["value"] => {
+    }: MsgClawback): MsgClawbackAminoType["value"] => {
       return {
         funder_address: funderAddress,
         account_address: accountAddress,
@@ -117,7 +117,7 @@ export const AminoConverter = {
       funder_address,
       account_address,
       dest_address
-    }: AminoMsgClawback["value"]): MsgClawback => {
+    }: MsgClawbackAminoType["value"]): MsgClawback => {
       return {
         funderAddress: funder_address,
         accountAddress: account_address,

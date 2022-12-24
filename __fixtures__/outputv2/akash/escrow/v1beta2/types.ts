@@ -130,11 +130,19 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
+export interface AccountIDProtoType {
+  typeUrl: "/akash.escrow.v1beta2.AccountID";
+  value: Uint8Array;
+}
 
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
   scope: string;
   xid: string;
+}
+export interface AccountIDAminoType {
+  type: "/akash.escrow.v1beta2.AccountID";
+  value: AccountIDAmino;
 }
 
 /** AccountID is the account identifier */
@@ -176,6 +184,10 @@ export interface Account {
    */
   funds?: DecCoin;
 }
+export interface AccountProtoType {
+  typeUrl: "/akash.escrow.v1beta2.Account";
+  value: Uint8Array;
+}
 
 /** Account stores state for an escrow account */
 export interface AccountAmino {
@@ -210,6 +222,10 @@ export interface AccountAmino {
    */
   funds?: DecCoinAmino;
 }
+export interface AccountAminoType {
+  type: "/akash.escrow.v1beta2.Account";
+  value: AccountAmino;
+}
 
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
@@ -233,6 +249,10 @@ export interface FractionalPayment {
   balance?: DecCoin;
   withdrawn?: Coin;
 }
+export interface FractionalPaymentProtoType {
+  typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
+  value: Uint8Array;
+}
 
 /** Payment stores state for a payment */
 export interface FractionalPaymentAmino {
@@ -243,6 +263,10 @@ export interface FractionalPaymentAmino {
   rate?: DecCoinAmino;
   balance?: DecCoinAmino;
   withdrawn?: CoinAmino;
+}
+export interface FractionalPaymentAminoType {
+  type: "/akash.escrow.v1beta2.FractionalPayment";
+  value: FractionalPaymentAmino;
 }
 
 /** Payment stores state for a payment */

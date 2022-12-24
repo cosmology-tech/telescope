@@ -10,11 +10,19 @@ export interface GenesisDeployment {
   deployment?: Deployment;
   groups: Group[];
 }
+export interface GenesisDeploymentProtoType {
+  typeUrl: "/akash.deployment.v1beta2.GenesisDeployment";
+  value: Uint8Array;
+}
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentAmino {
   deployment?: DeploymentAmino;
   groups: GroupAmino[];
+}
+export interface GenesisDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.GenesisDeployment";
+  value: GenesisDeploymentAmino;
 }
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
@@ -28,11 +36,19 @@ export interface GenesisState {
   deployments: GenesisDeployment[];
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/akash.deployment.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {
   deployments: GenesisDeploymentAmino[];
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "/akash.deployment.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState stores slice of genesis deployment instance */

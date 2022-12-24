@@ -21,6 +21,10 @@ export interface BasicAllowance {
   /** expiration specifies an optional time when this allowance expires */
   expiration?: Date;
 }
+export interface BasicAllowanceProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
+  value: Uint8Array;
+}
 
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -36,6 +40,10 @@ export interface BasicAllowanceAmino {
 
   /** expiration specifies an optional time when this allowance expires */
   expiration?: Date;
+}
+export interface BasicAllowanceAminoType {
+  type: "cosmos-sdk/BasicAllowance";
+  value: BasicAllowanceAmino;
 }
 
 /**
@@ -77,6 +85,10 @@ export interface PeriodicAllowance {
    */
   periodReset?: Date;
 }
+export interface PeriodicAllowanceProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
+  value: Uint8Array;
+}
 
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -108,6 +120,10 @@ export interface PeriodicAllowanceAmino {
    */
   period_reset?: Date;
 }
+export interface PeriodicAllowanceAminoType {
+  type: "cosmos-sdk/PeriodicAllowance";
+  value: PeriodicAllowanceAmino;
+}
 
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -129,6 +145,10 @@ export interface AllowedMsgAllowance {
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
+export interface AllowedMsgAllowanceProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
+  value: Uint8Array;
+}
 
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceAmino {
@@ -137,6 +157,10 @@ export interface AllowedMsgAllowanceAmino {
 
   /** allowed_messages are the messages for which the grantee has the access. */
   allowed_messages: string[];
+}
+export interface AllowedMsgAllowanceAminoType {
+  type: "cosmos-sdk/AllowedMsgAllowance";
+  value: AllowedMsgAllowanceAmino;
 }
 
 /** AllowedMsgAllowance creates allowance only for specified message types. */
@@ -156,6 +180,10 @@ export interface Grant {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
 }
+export interface GrantProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.Grant";
+  value: Uint8Array;
+}
 
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantAmino {
@@ -167,6 +195,10 @@ export interface GrantAmino {
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
+}
+export interface GrantAminoType {
+  type: "cosmos-sdk/Grant";
+  value: GrantAmino;
 }
 
 /** Grant is stored in the KVStore to record a grant with full context */

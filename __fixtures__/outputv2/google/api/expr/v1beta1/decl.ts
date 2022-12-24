@@ -20,6 +20,10 @@ export interface Decl {
   /** A function declaration. */
   function?: FunctionDecl;
 }
+export interface DeclProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Decl";
+  value: Uint8Array;
+}
 
 /** A declaration. */
 export interface DeclAmino {
@@ -37,6 +41,10 @@ export interface DeclAmino {
 
   /** A function declaration. */
   function?: FunctionDeclAmino;
+}
+export interface DeclAminoType {
+  type: "/google.api.expr.v1beta1.Decl";
+  value: DeclAmino;
 }
 
 /** A declaration. */
@@ -67,6 +75,10 @@ export interface DeclType {
    */
   typeParams: DeclType[];
 }
+export interface DeclTypeProtoType {
+  typeUrl: "/google.api.expr.v1beta1.DeclType";
+  value: Uint8Array;
+}
 
 /**
  * The declared type of a variable.
@@ -86,6 +98,10 @@ export interface DeclTypeAmino {
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
   type_params: DeclTypeAmino[];
+}
+export interface DeclTypeAminoType {
+  type: "/google.api.expr.v1beta1.DeclType";
+  value: DeclTypeAmino;
 }
 
 /**
@@ -108,6 +124,10 @@ export interface IdentDecl {
   /** Optional value of the identifier. */
   value?: Expr;
 }
+export interface IdentDeclProtoType {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl";
+  value: Uint8Array;
+}
 
 /** An identifier declaration. */
 export interface IdentDeclAmino {
@@ -116,6 +136,10 @@ export interface IdentDeclAmino {
 
   /** Optional value of the identifier. */
   value?: ExprAmino;
+}
+export interface IdentDeclAminoType {
+  type: "/google.api.expr.v1beta1.IdentDecl";
+  value: IdentDeclAmino;
 }
 
 /** An identifier declaration. */
@@ -135,6 +159,10 @@ export interface FunctionDecl {
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
 }
+export interface FunctionDeclProtoType {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
+  value: Uint8Array;
+}
 
 /** A function declaration. */
 export interface FunctionDeclAmino {
@@ -146,6 +174,10 @@ export interface FunctionDeclAmino {
 
   /** If the first argument of the function is the receiver. */
   receiver_function: boolean;
+}
+export interface FunctionDeclAminoType {
+  type: "/google.api.expr.v1beta1.FunctionDecl";
+  value: FunctionDeclAmino;
 }
 
 /** A function declaration. */

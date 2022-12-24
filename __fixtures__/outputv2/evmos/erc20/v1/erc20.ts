@@ -71,6 +71,10 @@ export interface TokenPair {
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contractOwner: Owner;
 }
+export interface TokenPairProtoType {
+  typeUrl: "/evmos.erc20.v1.TokenPair";
+  value: Uint8Array;
+}
 
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
@@ -88,6 +92,10 @@ export interface TokenPairAmino {
 
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contract_owner: Owner;
+}
+export interface TokenPairAminoType {
+  type: "/evmos.erc20.v1.TokenPair";
+  value: TokenPairAmino;
 }
 
 /**
@@ -115,6 +123,10 @@ export interface RegisterCoinProposal {
   /** metadata of the native Cosmos coin */
   metadata?: Metadata;
 }
+export interface RegisterCoinProposalProtoType {
+  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: Uint8Array;
+}
 
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
@@ -129,6 +141,10 @@ export interface RegisterCoinProposalAmino {
 
   /** metadata of the native Cosmos coin */
   metadata?: MetadataAmino;
+}
+export interface RegisterCoinProposalAminoType {
+  type: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: RegisterCoinProposalAmino;
 }
 
 /**
@@ -155,6 +171,10 @@ export interface RegisterERC20Proposal {
   /** contract address of ERC20 token */
   erc20address: string;
 }
+export interface RegisterERC20ProposalProtoType {
+  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: Uint8Array;
+}
 
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -169,6 +189,10 @@ export interface RegisterERC20ProposalAmino {
 
   /** contract address of ERC20 token */
   erc20address: string;
+}
+export interface RegisterERC20ProposalAminoType {
+  type: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: RegisterERC20ProposalAmino;
 }
 
 /**
@@ -198,6 +222,10 @@ export interface ToggleTokenConversionProposal {
    */
   token: string;
 }
+export interface ToggleTokenConversionProposalProtoType {
+  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: Uint8Array;
+}
 
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
@@ -215,6 +243,10 @@ export interface ToggleTokenConversionProposalAmino {
    * Cosmos base denomination
    */
   token: string;
+}
+export interface ToggleTokenConversionProposalAminoType {
+  type: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: ToggleTokenConversionProposalAmino;
 }
 
 /**

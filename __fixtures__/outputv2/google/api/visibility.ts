@@ -34,6 +34,10 @@ export interface Visibility {
    */
   rules: VisibilityRule[];
 }
+export interface VisibilityProtoType {
+  typeUrl: "/google.api.Visibility";
+  value: Uint8Array;
+}
 
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -66,6 +70,10 @@ export interface VisibilityAmino {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: VisibilityRuleAmino[];
+}
+export interface VisibilityAminoType {
+  type: "/google.api.Visibility";
+  value: VisibilityAmino;
 }
 
 /**
@@ -127,6 +135,10 @@ export interface VisibilityRule {
    */
   restriction: string;
 }
+export interface VisibilityRuleProtoType {
+  typeUrl: "/google.api.VisibilityRule";
+  value: Uint8Array;
+}
 
 /**
  * A visibility rule provides visibility configuration for an individual API
@@ -158,6 +170,10 @@ export interface VisibilityRuleAmino {
    * this method and only had access to it through INTERNAL.
    */
   restriction: string;
+}
+export interface VisibilityRuleAminoType {
+  type: "/google.api.VisibilityRule";
+  value: VisibilityRuleAmino;
 }
 
 /**

@@ -10,12 +10,20 @@ export interface GenesisState {
   params?: Params;
   factoryDenoms: GenesisDenom[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines the paramaters of the module. */
   params?: ParamsAmino;
   factory_denoms: GenesisDenomAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/tokenfactory/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the tokenfactory module's genesis state. */
@@ -33,6 +41,10 @@ export interface GenesisDenom {
   denom: string;
   authorityMetadata?: DenomAuthorityMetadata;
 }
+export interface GenesisDenomProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom";
+  value: Uint8Array;
+}
 
 /**
  * GenesisDenom defines a tokenfactory denom that is defined within genesis
@@ -42,6 +54,10 @@ export interface GenesisDenom {
 export interface GenesisDenomAmino {
   denom: string;
   authority_metadata?: DenomAuthorityMetadataAmino;
+}
+export interface GenesisDenomAminoType {
+  type: "osmosis/tokenfactory/genesis-denom";
+  value: GenesisDenomAmino;
 }
 
 /**

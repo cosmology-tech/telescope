@@ -12,6 +12,10 @@ export interface GenesisState {
   nextConnectionSequence: Long;
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.core.connection.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisStateAmino {
@@ -21,6 +25,10 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated connection identifier */
   next_connection_sequence: string;
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the ibc connection submodule's genesis state. */

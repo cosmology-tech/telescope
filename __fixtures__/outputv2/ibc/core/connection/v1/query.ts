@@ -14,6 +14,10 @@ export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
 }
+export interface QueryConnectionRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -22,6 +26,10 @@ export interface QueryConnectionRequest {
 export interface QueryConnectionRequestAmino {
   /** connection unique identifier */
   connection_id: string;
+}
+export interface QueryConnectionRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionRequest";
+  value: QueryConnectionRequestAmino;
 }
 
 /**
@@ -47,6 +55,10 @@ export interface QueryConnectionResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryConnectionResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
@@ -62,6 +74,10 @@ export interface QueryConnectionResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryConnectionResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionResponse";
+  value: QueryConnectionResponseAmino;
 }
 
 /**
@@ -82,6 +98,10 @@ export interface QueryConnectionResponseSDKType {
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
 }
+export interface QueryConnectionsRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
@@ -89,6 +109,10 @@ export interface QueryConnectionsRequest {
  */
 export interface QueryConnectionsRequestAmino {
   pagination?: PageRequestAmino;
+}
+export interface QueryConnectionsRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionsRequest";
+  value: QueryConnectionsRequestAmino;
 }
 
 /**
@@ -113,6 +137,10 @@ export interface QueryConnectionsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryConnectionsResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
@@ -127,6 +155,10 @@ export interface QueryConnectionsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryConnectionsResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionsResponse";
+  value: QueryConnectionsResponseAmino;
 }
 
 /**
@@ -147,6 +179,10 @@ export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
 }
+export interface QueryClientConnectionsRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientConnectionsRequest is the request type for the
@@ -155,6 +191,10 @@ export interface QueryClientConnectionsRequest {
 export interface QueryClientConnectionsRequestAmino {
   /** client identifier associated with a connection */
   client_id: string;
+}
+export interface QueryClientConnectionsRequestAminoType {
+  type: "cosmos-sdk/QueryClientConnectionsRequest";
+  value: QueryClientConnectionsRequestAmino;
 }
 
 /**
@@ -179,6 +219,10 @@ export interface QueryClientConnectionsResponse {
   /** height at which the proof was generated */
   proofHeight?: Height;
 }
+export interface QueryClientConnectionsResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientConnectionsResponse is the response type for the
@@ -193,6 +237,10 @@ export interface QueryClientConnectionsResponseAmino {
 
   /** height at which the proof was generated */
   proof_height?: HeightAmino;
+}
+export interface QueryClientConnectionsResponseAminoType {
+  type: "cosmos-sdk/QueryClientConnectionsResponse";
+  value: QueryClientConnectionsResponseAmino;
 }
 
 /**
@@ -213,6 +261,10 @@ export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
 }
+export interface QueryConnectionClientStateRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionClientStateRequest is the request type for the
@@ -221,6 +273,10 @@ export interface QueryConnectionClientStateRequest {
 export interface QueryConnectionClientStateRequestAmino {
   /** connection identifier */
   connection_id: string;
+}
+export interface QueryConnectionClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionClientStateRequest";
+  value: QueryConnectionClientStateRequestAmino;
 }
 
 /**
@@ -245,6 +301,10 @@ export interface QueryConnectionClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryConnectionClientStateResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionClientStateResponse is the response type for the
@@ -259,6 +319,10 @@ export interface QueryConnectionClientStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryConnectionClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionClientStateResponse";
+  value: QueryConnectionClientStateResponseAmino;
 }
 
 /**
@@ -281,6 +345,10 @@ export interface QueryConnectionConsensusStateRequest {
   revisionNumber: Long;
   revisionHeight: Long;
 }
+export interface QueryConnectionConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
@@ -291,6 +359,10 @@ export interface QueryConnectionConsensusStateRequestAmino {
   connection_id: string;
   revision_number: string;
   revision_height: string;
+}
+export interface QueryConnectionConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionConsensusStateRequest";
+  value: QueryConnectionConsensusStateRequestAmino;
 }
 
 /**
@@ -320,6 +392,10 @@ export interface QueryConnectionConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryConnectionConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
@@ -337,6 +413,10 @@ export interface QueryConnectionConsensusStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryConnectionConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionConsensusStateResponse";
+  value: QueryConnectionConsensusStateResponseAmino;
 }
 
 /**

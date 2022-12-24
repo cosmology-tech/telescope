@@ -41,9 +41,17 @@ export interface Struct_FieldsEntry {
   key: string;
   value?: Value;
 }
+export interface Struct_FieldsEntryProtoType {
+  typeUrl: "/google.protobuf.undefined";
+  value: Uint8Array;
+}
 export interface Struct_FieldsEntryAmino {
   key: string;
   value?: ValueAmino;
+}
+export interface Struct_FieldsEntryAminoType {
+  type: "/google.protobuf.undefined";
+  value: Struct_FieldsEntryAmino;
 }
 export interface Struct_FieldsEntrySDKType {
   key: string;
@@ -66,6 +74,10 @@ export interface Struct {
     [key: string]: Value;
   };
 }
+export interface StructProtoType {
+  typeUrl: "/google.protobuf.Struct";
+  value: Uint8Array;
+}
 
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -82,6 +94,10 @@ export interface StructAmino {
   fields?: {
     [key: string]: ValueAmino;
   };
+}
+export interface StructAminoType {
+  type: "/google.protobuf.Struct";
+  value: StructAmino;
 }
 
 /**
@@ -127,6 +143,10 @@ export interface Value {
   /** Represents a repeated `Value`. */
   listValue?: ListValue;
 }
+export interface ValueProtoType {
+  typeUrl: "/google.protobuf.Value";
+  value: Uint8Array;
+}
 
 /**
  * `Value` represents a dynamically typed value which can be either
@@ -155,6 +175,10 @@ export interface ValueAmino {
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
+export interface ValueAminoType {
+  type: "/google.protobuf.Value";
+  value: ValueAmino;
+}
 
 /**
  * `Value` represents a dynamically typed value which can be either
@@ -182,6 +206,10 @@ export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
 }
+export interface ListValueProtoType {
+  typeUrl: "/google.protobuf.ListValue";
+  value: Uint8Array;
+}
 
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -191,6 +219,10 @@ export interface ListValue {
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
   values: ValueAmino[];
+}
+export interface ListValueAminoType {
+  type: "/google.protobuf.ListValue";
+  value: ListValueAmino;
 }
 
 /**

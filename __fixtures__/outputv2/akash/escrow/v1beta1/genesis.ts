@@ -8,11 +8,19 @@ export interface GenesisState {
   accounts: Account[];
   payments: Payment[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/akash.escrow.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
   accounts: AccountAmino[];
   payments: PaymentAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/akash.escrow.v1beta1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the basic genesis state used by escrow module */

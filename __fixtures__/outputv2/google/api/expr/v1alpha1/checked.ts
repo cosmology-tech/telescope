@@ -178,9 +178,17 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value?: Reference;
 }
+export interface CheckedExpr_ReferenceMapEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface CheckedExpr_ReferenceMapEntryAmino {
   key: string;
   value?: ReferenceAmino;
+}
+export interface CheckedExpr_ReferenceMapEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: CheckedExpr_ReferenceMapEntryAmino;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: Long;
@@ -190,9 +198,17 @@ export interface CheckedExpr_TypeMapEntry {
   key: Long;
   value?: Type;
 }
+export interface CheckedExpr_TypeMapEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface CheckedExpr_TypeMapEntryAmino {
   key: string;
   value?: TypeAmino;
+}
+export interface CheckedExpr_TypeMapEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: CheckedExpr_TypeMapEntryAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: Long;
@@ -256,6 +272,10 @@ export interface CheckedExpr {
    */
   expr?: Expr;
 }
+export interface CheckedExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: Uint8Array;
+}
 
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprAmino {
@@ -313,6 +333,10 @@ export interface CheckedExprAmino {
    * may have structural differences.
    */
   expr?: ExprAmino;
+}
+export interface CheckedExprAminoType {
+  type: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: CheckedExprAmino;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -391,6 +415,10 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface TypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Type";
+  value: Uint8Array;
+}
 
 /** Represents a CEL type. */
 export interface TypeAmino {
@@ -455,6 +483,10 @@ export interface TypeAmino {
   /** Abstract, application defined type. */
   abstract_type?: Type_AbstractTypeAmino;
 }
+export interface TypeAminoType {
+  type: "/google.api.expr.v1alpha1.Type";
+  value: TypeAmino;
+}
 
 /** Represents a CEL type. */
 export interface TypeSDKType {
@@ -478,11 +510,19 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
+export interface Type_ListTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.ListType";
+  value: Uint8Array;
+}
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeAmino {
   /** The element type. */
   elem_type?: TypeAmino;
+}
+export interface Type_ListTypeAminoType {
+  type: "/google.api.expr.v1alpha1.ListType";
+  value: Type_ListTypeAmino;
 }
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
@@ -498,6 +538,10 @@ export interface Type_MapType {
   /** The type of the value. */
   valueType?: Type;
 }
+export interface Type_MapTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.MapType";
+  value: Uint8Array;
+}
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeAmino {
@@ -506,6 +550,10 @@ export interface Type_MapTypeAmino {
 
   /** The type of the value. */
   value_type?: TypeAmino;
+}
+export interface Type_MapTypeAminoType {
+  type: "/google.api.expr.v1alpha1.MapType";
+  value: Type_MapTypeAmino;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
@@ -522,6 +570,10 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface Type_FunctionTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType";
+  value: Uint8Array;
+}
 
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeAmino {
@@ -530,6 +582,10 @@ export interface Type_FunctionTypeAmino {
 
   /** Argument types of the function. */
   arg_types: TypeAmino[];
+}
+export interface Type_FunctionTypeAminoType {
+  type: "/google.api.expr.v1alpha1.FunctionType";
+  value: Type_FunctionTypeAmino;
 }
 
 /** Function type with result and arg types. */
@@ -546,6 +602,10 @@ export interface Type_AbstractType {
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
 }
+export interface Type_AbstractTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType";
+  value: Uint8Array;
+}
 
 /** Application defined abstract type. */
 export interface Type_AbstractTypeAmino {
@@ -554,6 +614,10 @@ export interface Type_AbstractTypeAmino {
 
   /** Parameter types for this abstract type. */
   parameter_types: TypeAmino[];
+}
+export interface Type_AbstractTypeAminoType {
+  type: "/google.api.expr.v1alpha1.AbstractType";
+  value: Type_AbstractTypeAmino;
 }
 
 /** Application defined abstract type. */
@@ -587,6 +651,10 @@ export interface Decl {
   /** Function declaration. */
   function?: Decl_FunctionDecl;
 }
+export interface DeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Decl";
+  value: Uint8Array;
+}
 
 /**
  * Represents a declaration of a named value or function.
@@ -612,6 +680,10 @@ export interface DeclAmino {
 
   /** Function declaration. */
   function?: Decl_FunctionDeclAmino;
+}
+export interface DeclAminoType {
+  type: "/google.api.expr.v1alpha1.Decl";
+  value: DeclAmino;
 }
 
 /**
@@ -647,6 +719,10 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface Decl_IdentDeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Uint8Array;
+}
 
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
@@ -668,6 +744,10 @@ export interface Decl_IdentDeclAmino {
 
   /** Documentation string for the identifier. */
   doc: string;
+}
+export interface Decl_IdentDeclAminoType {
+  type: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Decl_IdentDeclAmino;
 }
 
 /**
@@ -695,6 +775,10 @@ export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
 }
+export interface Decl_FunctionDeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Uint8Array;
+}
 
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -706,6 +790,10 @@ export interface Decl_FunctionDecl {
 export interface Decl_FunctionDeclAmino {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_OverloadAmino[];
+}
+export interface Decl_FunctionDeclAminoType {
+  type: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Decl_FunctionDeclAmino;
 }
 
 /**
@@ -781,6 +869,10 @@ export interface Decl_FunctionDecl_Overload {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface Decl_FunctionDecl_OverloadProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Overload";
+  value: Uint8Array;
+}
 
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -844,6 +936,10 @@ export interface Decl_FunctionDecl_OverloadAmino {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface Decl_FunctionDecl_OverloadAminoType {
+  type: "/google.api.expr.v1alpha1.Overload";
+  value: Decl_FunctionDecl_OverloadAmino;
+}
 
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -889,6 +985,10 @@ export interface Reference {
    */
   value?: Constant;
 }
+export interface ReferenceProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Reference";
+  value: Uint8Array;
+}
 
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceAmino {
@@ -912,6 +1012,10 @@ export interface ReferenceAmino {
    * constant if known at compile time.
    */
   value?: ConstantAmino;
+}
+export interface ReferenceAminoType {
+  type: "/google.api.expr.v1alpha1.Reference";
+  value: ReferenceAmino;
 }
 
 /** Describes a resolved reference to a declaration. */

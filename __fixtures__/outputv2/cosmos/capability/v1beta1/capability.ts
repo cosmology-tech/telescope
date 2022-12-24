@@ -9,6 +9,10 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 export interface Capability {
   index: Long;
 }
+export interface CapabilityProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.Capability";
+  value: Uint8Array;
+}
 
 /**
  * Capability defines an implementation of an object capability. The index
@@ -16,6 +20,10 @@ export interface Capability {
  */
 export interface CapabilityAmino {
   index: string;
+}
+export interface CapabilityAminoType {
+  type: "cosmos-sdk/Capability";
+  value: CapabilityAmino;
 }
 
 /**
@@ -34,6 +42,10 @@ export interface Owner {
   module: string;
   name: string;
 }
+export interface OwnerProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.Owner";
+  value: Uint8Array;
+}
 
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -42,6 +54,10 @@ export interface Owner {
 export interface OwnerAmino {
   module: string;
   name: string;
+}
+export interface OwnerAminoType {
+  type: "cosmos-sdk/Owner";
+  value: OwnerAmino;
 }
 
 /**
@@ -60,6 +76,10 @@ export interface OwnerSDKType {
 export interface CapabilityOwners {
   owners: Owner[];
 }
+export interface CapabilityOwnersProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
+  value: Uint8Array;
+}
 
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -67,6 +87,10 @@ export interface CapabilityOwners {
  */
 export interface CapabilityOwnersAmino {
   owners: OwnerAmino[];
+}
+export interface CapabilityOwnersAminoType {
+  type: "cosmos-sdk/CapabilityOwners";
+  value: CapabilityOwnersAmino;
 }
 
 /**

@@ -6,10 +6,18 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
 export interface MsgUnjail {
   validatorAddr: string;
 }
+export interface MsgUnjailProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail";
+  value: Uint8Array;
+}
 
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailAmino {
   validator_addr: string;
+}
+export interface MsgUnjailAminoType {
+  type: "cosmos-sdk/MsgUnjail";
+  value: MsgUnjailAmino;
 }
 
 /** MsgUnjail defines the Msg/Unjail request type */
@@ -19,9 +27,17 @@ export interface MsgUnjailSDKType {
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
+export interface MsgUnjailResponseProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse";
+  value: Uint8Array;
+}
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseAmino {}
+export interface MsgUnjailResponseAminoType {
+  type: "cosmos-sdk/MsgUnjailResponse";
+  value: MsgUnjailResponseAmino;
+}
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseSDKType {}

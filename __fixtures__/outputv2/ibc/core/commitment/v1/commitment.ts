@@ -10,6 +10,10 @@ export const protobufPackage = "ibc.core.commitment.v1";
 export interface MerkleRoot {
   hash: Uint8Array;
 }
+export interface MerkleRootProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
+  value: Uint8Array;
+}
 
 /**
  * MerkleRoot defines a merkle root hash.
@@ -17,6 +21,10 @@ export interface MerkleRoot {
  */
 export interface MerkleRootAmino {
   hash: Uint8Array;
+}
+export interface MerkleRootAminoType {
+  type: "cosmos-sdk/MerkleRoot";
+  value: MerkleRootAmino;
 }
 
 /**
@@ -35,6 +43,10 @@ export interface MerkleRootSDKType {
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
 }
+export interface MerklePrefixProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
+  value: Uint8Array;
+}
 
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -43,6 +55,10 @@ export interface MerklePrefix {
  */
 export interface MerklePrefixAmino {
   key_prefix: Uint8Array;
+}
+export interface MerklePrefixAminoType {
+  type: "cosmos-sdk/MerklePrefix";
+  value: MerklePrefixAmino;
 }
 
 /**
@@ -62,6 +78,10 @@ export interface MerklePrefixSDKType {
 export interface MerklePath {
   keyPath: string[];
 }
+export interface MerklePathProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath";
+  value: Uint8Array;
+}
 
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -70,6 +90,10 @@ export interface MerklePath {
  */
 export interface MerklePathAmino {
   key_path: string[];
+}
+export interface MerklePathAminoType {
+  type: "cosmos-sdk/MerklePath";
+  value: MerklePathAmino;
 }
 
 /**
@@ -91,6 +115,10 @@ export interface MerklePathSDKType {
 export interface MerkleProof {
   proofs: CommitmentProof[];
 }
+export interface MerkleProofProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof";
+  value: Uint8Array;
+}
 
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -101,6 +129,10 @@ export interface MerkleProof {
  */
 export interface MerkleProofAmino {
   proofs: CommitmentProofAmino[];
+}
+export interface MerkleProofAminoType {
+  type: "cosmos-sdk/MerkleProof";
+  value: MerkleProofAmino;
 }
 
 /**

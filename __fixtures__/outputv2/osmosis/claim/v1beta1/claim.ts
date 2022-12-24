@@ -69,6 +69,10 @@ export interface ClaimRecord {
    */
   actionCompleted: boolean[];
 }
+export interface ClaimRecordProtoType {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
+  value: Uint8Array;
+}
 
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordAmino {
@@ -83,6 +87,10 @@ export interface ClaimRecordAmino {
    * index of bool in array refers to action enum #
    */
   action_completed: boolean[];
+}
+export interface ClaimRecordAminoType {
+  type: "osmosis/claim/claim-record";
+  value: ClaimRecordAmino;
 }
 
 /** A Claim Records is the metadata of claim data per address */

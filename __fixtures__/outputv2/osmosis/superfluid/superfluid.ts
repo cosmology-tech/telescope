@@ -54,6 +54,10 @@ export interface SuperfluidAsset {
    */
   assetType: SuperfluidAssetType;
 }
+export interface SuperfluidAssetProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidAsset";
+  value: Uint8Array;
+}
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetAmino {
@@ -64,6 +68,10 @@ export interface SuperfluidAssetAmino {
    * share
    */
   asset_type: SuperfluidAssetType;
+}
+export interface SuperfluidAssetAminoType {
+  type: "osmosis/superfluid-asset";
+  value: SuperfluidAssetAmino;
 }
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
@@ -85,6 +93,10 @@ export interface SuperfluidIntermediaryAccount {
   /** perpetual gauge for rewards distribution */
   gaugeId: Long;
 }
+export interface SuperfluidIntermediaryAccountProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
+  value: Uint8Array;
+}
 
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
@@ -98,6 +110,10 @@ export interface SuperfluidIntermediaryAccountAmino {
 
   /** perpetual gauge for rewards distribution */
   gauge_id: string;
+}
+export interface SuperfluidIntermediaryAccountAminoType {
+  type: "osmosis/superfluid-intermediary-account";
+  value: SuperfluidIntermediaryAccountAmino;
 }
 
 /**
@@ -127,6 +143,10 @@ export interface OsmoEquivalentMultiplierRecord {
   denom: string;
   multiplier: string;
 }
+export interface OsmoEquivalentMultiplierRecordProtoType {
+  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
+  value: Uint8Array;
+}
 
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
@@ -143,6 +163,10 @@ export interface OsmoEquivalentMultiplierRecordAmino {
   /** superfluid asset denom, can be LP token or native token */
   denom: string;
   multiplier: string;
+}
+export interface OsmoEquivalentMultiplierRecordAminoType {
+  type: "osmosis/osmo-equivalent-multiplier-record";
+  value: OsmoEquivalentMultiplierRecordAmino;
 }
 
 /**
@@ -170,6 +194,10 @@ export interface SuperfluidDelegationRecord {
   delegationAmount?: Coin;
   equivalentStakedAmount?: Coin;
 }
+export interface SuperfluidDelegationRecordProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
+  value: Uint8Array;
+}
 
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
@@ -180,6 +208,10 @@ export interface SuperfluidDelegationRecordAmino {
   validator_address: string;
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
+}
+export interface SuperfluidDelegationRecordAminoType {
+  type: "osmosis/superfluid-delegation-record";
+  value: SuperfluidDelegationRecordAmino;
 }
 
 /**
@@ -202,6 +234,10 @@ export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
 }
+export interface LockIdIntermediaryAccountConnectionProtoType {
+  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
+  value: Uint8Array;
+}
 
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -211,6 +247,10 @@ export interface LockIdIntermediaryAccountConnection {
 export interface LockIdIntermediaryAccountConnectionAmino {
   lock_id: string;
   intermediary_account: string;
+}
+export interface LockIdIntermediaryAccountConnectionAminoType {
+  type: "osmosis/lock-id-intermediary-account-connection";
+  value: LockIdIntermediaryAccountConnectionAmino;
 }
 
 /**
@@ -225,8 +265,16 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
 export interface UnpoolWhitelistedPools {
   ids: Long[];
 }
+export interface UnpoolWhitelistedPoolsProtoType {
+  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
+  value: Uint8Array;
+}
 export interface UnpoolWhitelistedPoolsAmino {
   ids: string[];
+}
+export interface UnpoolWhitelistedPoolsAminoType {
+  type: "osmosis/unpool-whitelisted-pools";
+  value: UnpoolWhitelistedPoolsAmino;
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: Long[];

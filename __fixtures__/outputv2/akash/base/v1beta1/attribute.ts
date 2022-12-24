@@ -7,11 +7,19 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoType {
+  typeUrl: "/akash.base.v1beta1.Attribute";
+  value: Uint8Array;
+}
 
 /** Attribute represents key value pair */
 export interface AttributeAmino {
   key: string;
   value: string;
+}
+export interface AttributeAminoType {
+  type: "/akash.base.v1beta1.Attribute";
+  value: AttributeAmino;
 }
 
 /** Attribute represents key value pair */
@@ -33,6 +41,10 @@ export interface SignedBy {
   /** any_of at least of of the keys from the list must have signed attributes */
   anyOf: string[];
 }
+export interface SignedByProtoType {
+  typeUrl: "/akash.base.v1beta1.SignedBy";
+  value: Uint8Array;
+}
 
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -46,6 +58,10 @@ export interface SignedByAmino {
 
   /** any_of at least of of the keys from the list must have signed attributes */
   any_of: string[];
+}
+export interface SignedByAminoType {
+  type: "/akash.base.v1beta1.SignedBy";
+  value: SignedByAmino;
 }
 
 /**
@@ -67,6 +83,10 @@ export interface PlacementRequirements {
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
 }
+export interface PlacementRequirementsProtoType {
+  typeUrl: "/akash.base.v1beta1.PlacementRequirements";
+  value: Uint8Array;
+}
 
 /** PlacementRequirements */
 export interface PlacementRequirementsAmino {
@@ -75,6 +95,10 @@ export interface PlacementRequirementsAmino {
 
   /** Attribute list of attributes tenant expects from the provider */
   attributes: AttributeAmino[];
+}
+export interface PlacementRequirementsAminoType {
+  type: "/akash.base.v1beta1.PlacementRequirements";
+  value: PlacementRequirementsAmino;
 }
 
 /** PlacementRequirements */

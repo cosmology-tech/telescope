@@ -20,6 +20,10 @@ export interface GenesisState {
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.inflation.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateAmino {
@@ -37,6 +41,10 @@ export interface GenesisStateAmino {
 
   /** number of epochs that have passed while inflation is disabled */
   skipped_epochs: string;
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.inflation.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the inflation module's genesis state. */
@@ -62,6 +70,10 @@ export interface Params {
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
 }
+export interface ParamsProtoType {
+  typeUrl: "/evmos.inflation.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the inflation module. */
 export interface ParamsAmino {
@@ -76,6 +88,10 @@ export interface ParamsAmino {
 
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enable_inflation: boolean;
+}
+export interface ParamsAminoType {
+  type: "/evmos.inflation.v1.Params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the inflation module. */

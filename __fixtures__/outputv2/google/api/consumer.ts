@@ -95,6 +95,10 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
+export interface ProjectPropertiesProtoType {
+  typeUrl: "/google.api.ProjectProperties";
+  value: Uint8Array;
+}
 
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -117,6 +121,10 @@ export interface ProjectProperties {
 export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
   properties: PropertyAmino[];
+}
+export interface ProjectPropertiesAminoType {
+  type: "/google.api.ProjectProperties";
+  value: ProjectPropertiesAmino;
 }
 
 /**
@@ -163,6 +171,10 @@ export interface Property {
   /** The description of the property */
   description: string;
 }
+export interface PropertyProtoType {
+  typeUrl: "/google.api.Property";
+  value: Uint8Array;
+}
 
 /**
  * Defines project properties.
@@ -185,6 +197,10 @@ export interface PropertyAmino {
 
   /** The description of the property */
   description: string;
+}
+export interface PropertyAminoType {
+  type: "/google.api.Property";
+  value: PropertyAmino;
 }
 
 /**

@@ -11,6 +11,10 @@ export interface MsgSubmitEvidence {
   submitter: string;
   evidence?: (Any) | undefined;
 }
+export interface MsgSubmitEvidenceProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
+  value: Uint8Array;
+}
 
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -19,6 +23,10 @@ export interface MsgSubmitEvidence {
 export interface MsgSubmitEvidenceAmino {
   submitter: string;
   evidence?: AnyAmino;
+}
+export interface MsgSubmitEvidenceAminoType {
+  type: "cosmos-sdk/MsgSubmitEvidence";
+  value: MsgSubmitEvidenceAmino;
 }
 
 /**
@@ -35,11 +43,19 @@ export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
 }
+export interface MsgSubmitEvidenceResponseProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
+  value: Uint8Array;
+}
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitEvidenceResponse";
+  value: MsgSubmitEvidenceResponseAmino;
 }
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */

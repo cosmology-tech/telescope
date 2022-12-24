@@ -7,10 +7,18 @@ export const protobufPackage = "akash.provider.v1beta2";
 export interface GenesisState {
   providers: Provider[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/akash.provider.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateAmino {
   providers: ProviderAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/akash.provider.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the basic genesis state used by provider module */

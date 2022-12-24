@@ -38,6 +38,13 @@ export interface MsgSend {
 }"
 `;
 
+exports[`MsgSend interface type 1`] = `
+"export interface MsgSendProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.MsgSend";
+  value: Uint8Array;
+}"
+`;
+
 exports[`PageRequest api interface 1`] = `
 "/**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -217,6 +224,13 @@ export interface Grant {
 }"
 `;
 
+exports[`cosmos/authz/v1beta1/authz.proto Grant Type 1`] = `
+"export interface GrantProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.Grant";
+  value: Uint8Array;
+}"
+`;
+
 exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization 1`] = `
 "/**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
@@ -227,6 +241,13 @@ export interface GrantAuthorization {
   grantee: string;
   authorization?: Any;
   expiration?: Date;
+}"
+`;
+
+exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization Type 1`] = `
+"export interface GrantAuthorizationProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
+  value: Uint8Array;
 }"
 `;
 

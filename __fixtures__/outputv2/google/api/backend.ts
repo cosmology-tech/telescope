@@ -113,6 +113,10 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
+export interface BackendProtoType {
+  typeUrl: "/google.api.Backend";
+  value: Uint8Array;
+}
 
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendAmino {
@@ -122,6 +126,10 @@ export interface BackendAmino {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: BackendRuleAmino[];
+}
+export interface BackendAminoType {
+  type: "/google.api.Backend";
+  value: BackendAmino;
 }
 
 /** `Backend` defines the backend configuration for a service. */
@@ -221,6 +229,10 @@ export interface BackendRule {
    */
   protocol: string;
 }
+export interface BackendRuleProtoType {
+  typeUrl: "/google.api.BackendRule";
+  value: Uint8Array;
+}
 
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleAmino {
@@ -313,6 +325,10 @@ export interface BackendRuleAmino {
    * for more details on the supported values.
    */
   protocol: string;
+}
+export interface BackendRuleAminoType {
+  type: "/google.api.BackendRule";
+  value: BackendRuleAmino;
 }
 
 /** A backend rule provides configuration for an individual API element. */

@@ -7,9 +7,17 @@ export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -19,11 +27,19 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -39,6 +55,10 @@ export interface QueryValidatorOutstandingRewardsRequest {
   /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
+export interface QueryValidatorOutstandingRewardsRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
@@ -47,6 +67,10 @@ export interface QueryValidatorOutstandingRewardsRequest {
 export interface QueryValidatorOutstandingRewardsRequestAmino {
   /** validator_address defines the validator address to query for. */
   validator_address: string;
+}
+export interface QueryValidatorOutstandingRewardsRequestAminoType {
+  type: "cosmos-sdk/QueryValidatorOutstandingRewardsRequest";
+  value: QueryValidatorOutstandingRewardsRequestAmino;
 }
 
 /**
@@ -64,6 +88,10 @@ export interface QueryValidatorOutstandingRewardsRequestSDKType {
 export interface QueryValidatorOutstandingRewardsResponse {
   rewards?: ValidatorOutstandingRewards;
 }
+export interface QueryValidatorOutstandingRewardsResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the
@@ -71,6 +99,10 @@ export interface QueryValidatorOutstandingRewardsResponse {
  */
 export interface QueryValidatorOutstandingRewardsResponseAmino {
   rewards?: ValidatorOutstandingRewardsAmino;
+}
+export interface QueryValidatorOutstandingRewardsResponseAminoType {
+  type: "cosmos-sdk/QueryValidatorOutstandingRewardsResponse";
+  value: QueryValidatorOutstandingRewardsResponseAmino;
 }
 
 /**
@@ -89,6 +121,10 @@ export interface QueryValidatorCommissionRequest {
   /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
+export interface QueryValidatorCommissionRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorCommissionRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorCommissionRequest is the request type for the
@@ -97,6 +133,10 @@ export interface QueryValidatorCommissionRequest {
 export interface QueryValidatorCommissionRequestAmino {
   /** validator_address defines the validator address to query for. */
   validator_address: string;
+}
+export interface QueryValidatorCommissionRequestAminoType {
+  type: "cosmos-sdk/QueryValidatorCommissionRequest";
+  value: QueryValidatorCommissionRequestAmino;
 }
 
 /**
@@ -115,6 +155,10 @@ export interface QueryValidatorCommissionResponse {
   /** commission defines the commision the validator received. */
   commission?: ValidatorAccumulatedCommission;
 }
+export interface QueryValidatorCommissionResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorCommissionResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorCommissionResponse is the response type for the
@@ -123,6 +167,10 @@ export interface QueryValidatorCommissionResponse {
 export interface QueryValidatorCommissionResponseAmino {
   /** commission defines the commision the validator received. */
   commission?: ValidatorAccumulatedCommissionAmino;
+}
+export interface QueryValidatorCommissionResponseAminoType {
+  type: "cosmos-sdk/QueryValidatorCommissionResponse";
+  value: QueryValidatorCommissionResponseAmino;
 }
 
 /**
@@ -150,6 +198,10 @@ export interface QueryValidatorSlashesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryValidatorSlashesRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorSlashesRequest is the request type for the
@@ -167,6 +219,10 @@ export interface QueryValidatorSlashesRequestAmino {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryValidatorSlashesRequestAminoType {
+  type: "cosmos-sdk/QueryValidatorSlashesRequest";
+  value: QueryValidatorSlashesRequestAmino;
 }
 
 /**
@@ -191,6 +247,10 @@ export interface QueryValidatorSlashesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryValidatorSlashesResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryValidatorSlashesResponse is the response type for the
@@ -202,6 +262,10 @@ export interface QueryValidatorSlashesResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryValidatorSlashesResponseAminoType {
+  type: "cosmos-sdk/QueryValidatorSlashesResponse";
+  value: QueryValidatorSlashesResponseAmino;
 }
 
 /**
@@ -224,6 +288,10 @@ export interface QueryDelegationRewardsRequest {
   /** validator_address defines the validator address to query for. */
   validatorAddress: string;
 }
+export interface QueryDelegationRewardsRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationRewardsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegationRewardsRequest is the request type for the
@@ -235,6 +303,10 @@ export interface QueryDelegationRewardsRequestAmino {
 
   /** validator_address defines the validator address to query for. */
   validator_address: string;
+}
+export interface QueryDelegationRewardsRequestAminoType {
+  type: "cosmos-sdk/QueryDelegationRewardsRequest";
+  value: QueryDelegationRewardsRequestAmino;
 }
 
 /**
@@ -254,6 +326,10 @@ export interface QueryDelegationRewardsResponse {
   /** rewards defines the rewards accrued by a delegation. */
   rewards: DecCoin[];
 }
+export interface QueryDelegationRewardsResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationRewardsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegationRewardsResponse is the response type for the
@@ -262,6 +338,10 @@ export interface QueryDelegationRewardsResponse {
 export interface QueryDelegationRewardsResponseAmino {
   /** rewards defines the rewards accrued by a delegation. */
   rewards: DecCoinAmino[];
+}
+export interface QueryDelegationRewardsResponseAminoType {
+  type: "cosmos-sdk/QueryDelegationRewardsResponse";
+  value: QueryDelegationRewardsResponseAmino;
 }
 
 /**
@@ -280,6 +360,10 @@ export interface QueryDelegationTotalRewardsRequest {
   /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
+export interface QueryDelegationTotalRewardsRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationTotalRewardsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegationTotalRewardsRequest is the request type for the
@@ -288,6 +372,10 @@ export interface QueryDelegationTotalRewardsRequest {
 export interface QueryDelegationTotalRewardsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
+}
+export interface QueryDelegationTotalRewardsRequestAminoType {
+  type: "cosmos-sdk/QueryDelegationTotalRewardsRequest";
+  value: QueryDelegationTotalRewardsRequestAmino;
 }
 
 /**
@@ -309,6 +397,10 @@ export interface QueryDelegationTotalRewardsResponse {
   /** total defines the sum of all the rewards. */
   total: DecCoin[];
 }
+export interface QueryDelegationTotalRewardsResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationTotalRewardsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the
@@ -320,6 +412,10 @@ export interface QueryDelegationTotalRewardsResponseAmino {
 
   /** total defines the sum of all the rewards. */
   total: DecCoinAmino[];
+}
+export interface QueryDelegationTotalRewardsResponseAminoType {
+  type: "cosmos-sdk/QueryDelegationTotalRewardsResponse";
+  value: QueryDelegationTotalRewardsResponseAmino;
 }
 
 /**
@@ -339,6 +435,10 @@ export interface QueryDelegatorValidatorsRequest {
   /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
+export interface QueryDelegatorValidatorsRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorValidatorsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegatorValidatorsRequest is the request type for the
@@ -347,6 +447,10 @@ export interface QueryDelegatorValidatorsRequest {
 export interface QueryDelegatorValidatorsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
+}
+export interface QueryDelegatorValidatorsRequestAminoType {
+  type: "cosmos-sdk/QueryDelegatorValidatorsRequest";
+  value: QueryDelegatorValidatorsRequestAmino;
 }
 
 /**
@@ -365,6 +469,10 @@ export interface QueryDelegatorValidatorsResponse {
   /** validators defines the validators a delegator is delegating for. */
   validators: string[];
 }
+export interface QueryDelegatorValidatorsResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorValidatorsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
@@ -373,6 +481,10 @@ export interface QueryDelegatorValidatorsResponse {
 export interface QueryDelegatorValidatorsResponseAmino {
   /** validators defines the validators a delegator is delegating for. */
   validators: string[];
+}
+export interface QueryDelegatorValidatorsResponseAminoType {
+  type: "cosmos-sdk/QueryDelegatorValidatorsResponse";
+  value: QueryDelegatorValidatorsResponseAmino;
 }
 
 /**
@@ -391,6 +503,10 @@ export interface QueryDelegatorWithdrawAddressRequest {
   /** delegator_address defines the delegator address to query for. */
   delegatorAddress: string;
 }
+export interface QueryDelegatorWithdrawAddressRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
@@ -399,6 +515,10 @@ export interface QueryDelegatorWithdrawAddressRequest {
 export interface QueryDelegatorWithdrawAddressRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
+}
+export interface QueryDelegatorWithdrawAddressRequestAminoType {
+  type: "cosmos-sdk/QueryDelegatorWithdrawAddressRequest";
+  value: QueryDelegatorWithdrawAddressRequestAmino;
 }
 
 /**
@@ -417,6 +537,10 @@ export interface QueryDelegatorWithdrawAddressResponse {
   /** withdraw_address defines the delegator address to query for. */
   withdrawAddress: string;
 }
+export interface QueryDelegatorWithdrawAddressResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the
@@ -425,6 +549,10 @@ export interface QueryDelegatorWithdrawAddressResponse {
 export interface QueryDelegatorWithdrawAddressResponseAmino {
   /** withdraw_address defines the delegator address to query for. */
   withdraw_address: string;
+}
+export interface QueryDelegatorWithdrawAddressResponseAminoType {
+  type: "cosmos-sdk/QueryDelegatorWithdrawAddressResponse";
+  value: QueryDelegatorWithdrawAddressResponseAmino;
 }
 
 /**
@@ -440,12 +568,20 @@ export interface QueryDelegatorWithdrawAddressResponseSDKType {
  * method.
  */
 export interface QueryCommunityPoolRequest {}
+export interface QueryCommunityPoolRequestProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryCommunityPoolRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
  * method.
  */
 export interface QueryCommunityPoolRequestAmino {}
+export interface QueryCommunityPoolRequestAminoType {
+  type: "cosmos-sdk/QueryCommunityPoolRequest";
+  value: QueryCommunityPoolRequestAmino;
+}
 
 /**
  * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
@@ -461,6 +597,10 @@ export interface QueryCommunityPoolResponse {
   /** pool defines community pool's coins. */
   pool: DecCoin[];
 }
+export interface QueryCommunityPoolResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryCommunityPoolResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryCommunityPoolResponse is the response type for the Query/CommunityPool
@@ -469,6 +609,10 @@ export interface QueryCommunityPoolResponse {
 export interface QueryCommunityPoolResponseAmino {
   /** pool defines community pool's coins. */
   pool: DecCoinAmino[];
+}
+export interface QueryCommunityPoolResponseAminoType {
+  type: "cosmos-sdk/QueryCommunityPoolResponse";
+  value: QueryCommunityPoolResponseAmino;
 }
 
 /**

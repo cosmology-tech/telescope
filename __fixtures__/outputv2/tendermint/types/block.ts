@@ -9,11 +9,19 @@ export interface Block {
   evidence?: EvidenceList;
   lastCommit?: Commit;
 }
+export interface BlockProtoType {
+  typeUrl: "/tendermint.types.Block";
+  value: Uint8Array;
+}
 export interface BlockAmino {
   header?: HeaderAmino;
   data?: DataAmino;
   evidence?: EvidenceListAmino;
   last_commit?: CommitAmino;
+}
+export interface BlockAminoType {
+  type: "/tendermint.types.Block";
+  value: BlockAmino;
 }
 export interface BlockSDKType {
   header?: HeaderSDKType;

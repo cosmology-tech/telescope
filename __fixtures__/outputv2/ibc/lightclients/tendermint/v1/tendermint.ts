@@ -61,6 +61,10 @@ export interface ClientState {
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
+export interface ClientStateProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
+  value: Uint8Array;
+}
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -114,6 +118,10 @@ export interface ClientStateAmino {
    */
   allow_update_after_misbehaviour: boolean;
 }
+export interface ClientStateAminoType {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
+}
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -145,6 +153,10 @@ export interface ConsensusState {
   root?: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
+export interface ConsensusStateProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
+  value: Uint8Array;
+}
 
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateAmino {
@@ -157,6 +169,10 @@ export interface ConsensusStateAmino {
   /** commitment root (i.e app hash) */
   root?: MerkleRootAmino;
   next_validators_hash: Uint8Array;
+}
+export interface ConsensusStateAminoType {
+  type: "cosmos-sdk/ConsensusState";
+  value: ConsensusStateAmino;
 }
 
 /** ConsensusState defines the consensus state from Tendermint. */
@@ -175,6 +191,10 @@ export interface Misbehaviour {
   header1?: Header;
   header2?: Header;
 }
+export interface MisbehaviourProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
+  value: Uint8Array;
+}
 
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
@@ -184,6 +204,10 @@ export interface MisbehaviourAmino {
   client_id: string;
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
+}
+export interface MisbehaviourAminoType {
+  type: "cosmos-sdk/Misbehaviour";
+  value: MisbehaviourAmino;
 }
 
 /**
@@ -216,6 +240,10 @@ export interface Header {
   trustedHeight?: Height;
   trustedValidators?: ValidatorSet;
 }
+export interface HeaderProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Header";
+  value: Uint8Array;
+}
 
 /**
  * Header defines the Tendermint client consensus Header.
@@ -236,6 +264,10 @@ export interface HeaderAmino {
   validator_set?: ValidatorSetAmino;
   trusted_height?: HeightAmino;
   trusted_validators?: ValidatorSetAmino;
+}
+export interface HeaderAminoType {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
 }
 
 /**
@@ -267,6 +299,10 @@ export interface Fraction {
   numerator: Long;
   denominator: Long;
 }
+export interface FractionProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
+  value: Uint8Array;
+}
 
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
@@ -275,6 +311,10 @@ export interface Fraction {
 export interface FractionAmino {
   numerator: string;
   denominator: string;
+}
+export interface FractionAminoType {
+  type: "cosmos-sdk/Fraction";
+  value: FractionAmino;
 }
 
 /**

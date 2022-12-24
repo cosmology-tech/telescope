@@ -107,6 +107,10 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
 }
+export interface CheckRequestProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the Check method. */
 export interface CheckRequestAmino {
@@ -131,6 +135,10 @@ export interface CheckRequestAmino {
    * latest one will be used.
    */
   service_config_id: string;
+}
+export interface CheckRequestAminoType {
+  type: "/google.api.servicecontrol.v1.CheckRequest";
+  value: CheckRequestAmino;
 }
 
 /** Request message for the Check method. */
@@ -167,6 +175,10 @@ export interface CheckResponse {
   /** Feedback data returned from the server during processing a Check request. */
   checkInfo?: CheckResponse_CheckInfo;
 }
+export interface CheckResponseProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the Check method. */
 export interface CheckResponseAmino {
@@ -195,6 +207,10 @@ export interface CheckResponseAmino {
   /** Feedback data returned from the server during processing a Check request. */
   check_info?: CheckResponse_CheckInfoAmino;
 }
+export interface CheckResponseAminoType {
+  type: "/google.api.servicecontrol.v1.CheckResponse";
+  value: CheckResponseAmino;
+}
 
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -217,6 +233,10 @@ export interface CheckResponse_CheckInfo {
   /** Consumer info of this check. */
   consumerInfo?: CheckResponse_ConsumerInfo;
 }
+export interface CheckResponse_CheckInfoProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
+  value: Uint8Array;
+}
 
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfoAmino {
@@ -229,6 +249,10 @@ export interface CheckResponse_CheckInfoAmino {
 
   /** Consumer info of this check. */
   consumer_info?: CheckResponse_ConsumerInfoAmino;
+}
+export interface CheckResponse_CheckInfoAminoType {
+  type: "/google.api.servicecontrol.v1.CheckInfo";
+  value: CheckResponse_CheckInfoAmino;
 }
 
 /** Contains additional information about the check operation. */
@@ -261,6 +285,10 @@ export interface CheckResponse_ConsumerInfo {
    */
   consumerNumber: Long;
 }
+export interface CheckResponse_ConsumerInfoProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
+  value: Uint8Array;
+}
 
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoAmino {
@@ -285,6 +313,10 @@ export interface CheckResponse_ConsumerInfoAmino {
    * consumer number is found.
    */
   consumer_number: string;
+}
+export interface CheckResponse_ConsumerInfoAminoType {
+  type: "/google.api.servicecontrol.v1.ConsumerInfo";
+  value: CheckResponse_ConsumerInfoAmino;
 }
 
 /** `ConsumerInfo` provides information about the consumer. */
@@ -330,6 +362,10 @@ export interface ReportRequest {
    */
   serviceConfigId: string;
 }
+export interface ReportRequestProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the Report method. */
 export interface ReportRequestAmino {
@@ -367,6 +403,10 @@ export interface ReportRequestAmino {
    */
   service_config_id: string;
 }
+export interface ReportRequestAminoType {
+  type: "/google.api.servicecontrol.v1.ReportRequest";
+  value: ReportRequestAmino;
+}
 
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
@@ -401,6 +441,10 @@ export interface ReportResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
 }
+export interface ReportResponseProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the Report method. */
 export interface ReportResponseAmino {
@@ -428,6 +472,10 @@ export interface ReportResponseAmino {
   /** The current service rollout id used to process the request. */
   service_rollout_id: string;
 }
+export interface ReportResponseAminoType {
+  type: "/google.api.servicecontrol.v1.ReportResponse";
+  value: ReportResponseAmino;
+}
 
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
@@ -454,6 +502,10 @@ export interface ReportResponse_ReportError {
    */
   status?: Status;
 }
+export interface ReportResponse_ReportErrorProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError";
+  value: Uint8Array;
+}
 
 /**
  * Represents the processing error of one
@@ -472,6 +524,10 @@ export interface ReportResponse_ReportErrorAmino {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status?: StatusAmino;
+}
+export interface ReportResponse_ReportErrorAminoType {
+  type: "/google.api.servicecontrol.v1.ReportError";
+  value: ReportResponse_ReportErrorAmino;
 }
 
 /**

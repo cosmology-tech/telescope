@@ -45,6 +45,10 @@ export interface Billing {
    */
   consumerDestinations: Billing_BillingDestination[];
 }
+export interface BillingProtoType {
+  typeUrl: "/google.api.Billing";
+  value: Uint8Array;
+}
 
 /**
  * Billing related configuration of the service.
@@ -88,6 +92,10 @@ export interface BillingAmino {
    * one consumer destination.
    */
   consumer_destinations: Billing_BillingDestinationAmino[];
+}
+export interface BillingAminoType {
+  type: "/google.api.Billing";
+  value: BillingAmino;
 }
 
 /**
@@ -145,6 +153,10 @@ export interface Billing_BillingDestination {
    */
   metrics: string[];
 }
+export interface Billing_BillingDestinationProtoType {
+  typeUrl: "/google.api.BillingDestination";
+  value: Uint8Array;
+}
 
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -162,6 +174,10 @@ export interface Billing_BillingDestinationAmino {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Billing_BillingDestinationAminoType {
+  type: "/google.api.BillingDestination";
+  value: Billing_BillingDestinationAmino;
 }
 
 /**

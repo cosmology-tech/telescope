@@ -2,7 +2,7 @@ import { getNestedProto } from '@osmonauts/proto-parser';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
-import { createSDKType, createProtoType } from '..';
+import { createSDKType, createProtoType, createProtoTypeType } from '..';
 import { createAminoType } from '../amino';
 
 const store = getTestProtoStore();
@@ -13,6 +13,11 @@ describe('MsgSend', () => {
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgSend',
+            getNestedProto(ref.traversed).MsgSend
+        ));
+    });
+    it('interface type', () => {
+        expectCode(createProtoTypeType(context, 'MsgSend',
             getNestedProto(ref.traversed).MsgSend
         ));
     });
@@ -91,6 +96,16 @@ describe('GenesisState', () => {
 describe('cosmos/authz/v1beta1/authz.proto', () => {
     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('Grant Type', () => {
+        expectCode(createProtoTypeType(context, 'Grant',
+            getNestedProto(ref.traversed).Grant
+        ));
+    });
+    it('GrantAuthorization Type', () => {
+        expectCode(createProtoTypeType(context, 'GrantAuthorization',
+            getNestedProto(ref.traversed).GrantAuthorization
+        ));
+    });
     it('Grant', () => {
         expectCode(createProtoType(context, 'Grant',
             getNestedProto(ref.traversed).Grant

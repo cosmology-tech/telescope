@@ -12,6 +12,8 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
         name: string;
         type: string;
     };
+    message?: string;
+    package?: string;
     keyType?: string;
     rule?: string;
     id: number;

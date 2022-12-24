@@ -12,6 +12,10 @@ export interface GenesisState {
   distrInfo?: DistrInfo;
   poolToGauges?: PoolToGauges;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateAmino {
@@ -20,6 +24,10 @@ export interface GenesisStateAmino {
   lockable_durations: DurationAmino[];
   distr_info?: DistrInfoAmino;
   pool_to_gauges?: PoolToGaugesAmino;
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/poolincentives/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the pool incentives module's genesis state. */

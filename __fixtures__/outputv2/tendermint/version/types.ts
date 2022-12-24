@@ -11,6 +11,10 @@ export interface App {
   protocol: Long;
   software: string;
 }
+export interface AppProtoType {
+  typeUrl: "/tendermint.version.App";
+  value: Uint8Array;
+}
 
 /**
  * App includes the protocol and software version for the application.
@@ -20,6 +24,10 @@ export interface App {
 export interface AppAmino {
   protocol: string;
   software: string;
+}
+export interface AppAminoType {
+  type: "/tendermint.version.App";
+  value: AppAmino;
 }
 
 /**
@@ -41,6 +49,10 @@ export interface Consensus {
   block: Long;
   app: Long;
 }
+export interface ConsensusProtoType {
+  typeUrl: "/tendermint.version.Consensus";
+  value: Uint8Array;
+}
 
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -50,6 +62,10 @@ export interface Consensus {
 export interface ConsensusAmino {
   block: string;
   app: string;
+}
+export interface ConsensusAminoType {
+  type: "/tendermint.version.Consensus";
+  value: ConsensusAmino;
 }
 
 /**

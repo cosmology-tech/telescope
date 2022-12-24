@@ -63,6 +63,10 @@ export interface Api {
   /** The source syntax of the service. */
   syntax: Syntax;
 }
+export interface ApiProtoType {
+  typeUrl: "/google.protobuf.Api";
+  value: Uint8Array;
+}
 
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -123,6 +127,10 @@ export interface ApiAmino {
   /** The source syntax of the service. */
   syntax: Syntax;
 }
+export interface ApiAminoType {
+  type: "/google.protobuf.Api";
+  value: ApiAmino;
+}
 
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -168,6 +176,10 @@ export interface Method {
   /** The source syntax of this method. */
   syntax: Syntax;
 }
+export interface MethodProtoType {
+  typeUrl: "/google.protobuf.Method";
+  value: Uint8Array;
+}
 
 /** Method represents a method of an API interface. */
 export interface MethodAmino {
@@ -191,6 +203,10 @@ export interface MethodAmino {
 
   /** The source syntax of this method. */
   syntax: Syntax;
+}
+export interface MethodAminoType {
+  type: "/google.protobuf.Method";
+  value: MethodAmino;
 }
 
 /** Method represents a method of an API interface. */
@@ -294,6 +310,10 @@ export interface Mixin {
    */
   root: string;
 }
+export interface MixinProtoType {
+  typeUrl: "/google.protobuf.Mixin";
+  value: Uint8Array;
+}
 
 /**
  * Declares an API Interface to be included in this interface. The including
@@ -384,6 +404,10 @@ export interface MixinAmino {
    * are rooted.
    */
   root: string;
+}
+export interface MixinAminoType {
+  type: "/google.protobuf.Mixin";
+  value: MixinAmino;
 }
 
 /**

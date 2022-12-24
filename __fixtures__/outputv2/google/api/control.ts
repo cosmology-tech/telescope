@@ -14,6 +14,10 @@ export interface Control {
    */
   environment: string;
 }
+export interface ControlProtoType {
+  typeUrl: "/google.api.Control";
+  value: Uint8Array;
+}
 
 /**
  * Selects and configures the service controller used by the service.  The
@@ -26,6 +30,10 @@ export interface ControlAmino {
    * feature (like quota and billing) will be enabled.
    */
   environment: string;
+}
+export interface ControlAminoType {
+  type: "/google.api.Control";
+  value: ControlAmino;
 }
 
 /**

@@ -13,6 +13,10 @@ export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
   address: string;
 }
+export interface QueryContractInfoRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -21,6 +25,10 @@ export interface QueryContractInfoRequest {
 export interface QueryContractInfoRequestAmino {
   /** address is the address of the contract to query */
   address: string;
+}
+export interface QueryContractInfoRequestAminoType {
+  type: "wasm/QueryContractInfoRequest";
+  value: QueryContractInfoRequestAmino;
 }
 
 /**
@@ -40,6 +48,10 @@ export interface QueryContractInfoResponse {
   address: string;
   contractInfo?: ContractInfo;
 }
+export interface QueryContractInfoResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
@@ -49,6 +61,10 @@ export interface QueryContractInfoResponseAmino {
   /** address is the address of the contract */
   address: string;
   contract_info?: ContractInfoAmino;
+}
+export interface QueryContractInfoResponseAminoType {
+  type: "wasm/QueryContractInfoResponse";
+  value: QueryContractInfoResponseAmino;
 }
 
 /**
@@ -71,6 +87,10 @@ export interface QueryContractHistoryRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryContractHistoryRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
@@ -82,6 +102,10 @@ export interface QueryContractHistoryRequestAmino {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryContractHistoryRequestAminoType {
+  type: "wasm/QueryContractHistoryRequest";
+  value: QueryContractHistoryRequestAmino;
 }
 
 /**
@@ -103,6 +127,10 @@ export interface QueryContractHistoryResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryContractHistoryResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractHistoryResponse is the response type for the
@@ -113,6 +141,10 @@ export interface QueryContractHistoryResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryContractHistoryResponseAminoType {
+  type: "wasm/QueryContractHistoryResponse";
+  value: QueryContractHistoryResponseAmino;
 }
 
 /**
@@ -136,6 +168,10 @@ export interface QueryContractsByCodeRequest {
   codeId: Long;
   pagination?: PageRequest;
 }
+export interface QueryContractsByCodeRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
@@ -148,6 +184,10 @@ export interface QueryContractsByCodeRequestAmino {
    */
   code_id: string;
   pagination?: PageRequestAmino;
+}
+export interface QueryContractsByCodeRequestAminoType {
+  type: "wasm/QueryContractsByCodeRequest";
+  value: QueryContractsByCodeRequestAmino;
 }
 
 /**
@@ -170,6 +210,10 @@ export interface QueryContractsByCodeResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryContractsByCodeResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryContractsByCodeResponse is the response type for the
@@ -181,6 +225,10 @@ export interface QueryContractsByCodeResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryContractsByCodeResponseAminoType {
+  type: "wasm/QueryContractsByCodeResponse";
+  value: QueryContractsByCodeResponseAmino;
 }
 
 /**
@@ -203,6 +251,10 @@ export interface QueryAllContractStateRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryAllContractStateRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryAllContractStateRequest is the request type for the
@@ -214,6 +266,10 @@ export interface QueryAllContractStateRequestAmino {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryAllContractStateRequestAminoType {
+  type: "wasm/QueryAllContractStateRequest";
+  value: QueryAllContractStateRequestAmino;
 }
 
 /**
@@ -235,6 +291,10 @@ export interface QueryAllContractStateResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryAllContractStateResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryAllContractStateResponse is the response type for the
@@ -245,6 +305,10 @@ export interface QueryAllContractStateResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryAllContractStateResponseAminoType {
+  type: "wasm/QueryAllContractStateResponse";
+  value: QueryAllContractStateResponseAmino;
 }
 
 /**
@@ -265,6 +329,10 @@ export interface QueryRawContractStateRequest {
   address: string;
   queryData: Uint8Array;
 }
+export interface QueryRawContractStateRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryRawContractStateRequest is the request type for the
@@ -274,6 +342,10 @@ export interface QueryRawContractStateRequestAmino {
   /** address is the address of the contract */
   address: string;
   query_data: Uint8Array;
+}
+export interface QueryRawContractStateRequestAminoType {
+  type: "wasm/QueryRawContractStateRequest";
+  value: QueryRawContractStateRequestAmino;
 }
 
 /**
@@ -293,6 +365,10 @@ export interface QueryRawContractStateResponse {
   /** Data contains the raw store data */
   data: Uint8Array;
 }
+export interface QueryRawContractStateResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryRawContractStateResponse is the response type for the
@@ -301,6 +377,10 @@ export interface QueryRawContractStateResponse {
 export interface QueryRawContractStateResponseAmino {
   /** Data contains the raw store data */
   data: Uint8Array;
+}
+export interface QueryRawContractStateResponseAminoType {
+  type: "wasm/QueryRawContractStateResponse";
+  value: QueryRawContractStateResponseAmino;
 }
 
 /**
@@ -322,6 +402,10 @@ export interface QuerySmartContractStateRequest {
   /** QueryData contains the query data passed to the contract */
   queryData: Uint8Array;
 }
+export interface QuerySmartContractStateRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QuerySmartContractStateRequest is the request type for the
@@ -333,6 +417,10 @@ export interface QuerySmartContractStateRequestAmino {
 
   /** QueryData contains the query data passed to the contract */
   query_data: Uint8Array;
+}
+export interface QuerySmartContractStateRequestAminoType {
+  type: "wasm/QuerySmartContractStateRequest";
+  value: QuerySmartContractStateRequestAmino;
 }
 
 /**
@@ -352,6 +440,10 @@ export interface QuerySmartContractStateResponse {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
+export interface QuerySmartContractStateResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QuerySmartContractStateResponse is the response type for the
@@ -360,6 +452,10 @@ export interface QuerySmartContractStateResponse {
 export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
+}
+export interface QuerySmartContractStateResponseAminoType {
+  type: "wasm/QuerySmartContractStateResponse";
+  value: QuerySmartContractStateResponseAmino;
 }
 
 /**
@@ -375,11 +471,19 @@ export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
+export interface QueryCodeRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest";
+  value: Uint8Array;
+}
 
 /** QueryCodeRequest is the request type for the Query/Code RPC method */
 export interface QueryCodeRequestAmino {
   /** grpc-gateway_out does not support Go style CodID */
   code_id: string;
+}
+export interface QueryCodeRequestAminoType {
+  type: "wasm/QueryCodeRequest";
+  value: QueryCodeRequestAmino;
 }
 
 /** QueryCodeRequest is the request type for the Query/Code RPC method */
@@ -393,12 +497,20 @@ export interface CodeInfoResponse {
   creator: string;
   dataHash: Uint8Array;
 }
+export interface CodeInfoResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse";
+  value: Uint8Array;
+}
 
 /** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponseAmino {
   code_id: string;
   creator: string;
   data_hash: Uint8Array;
+}
+export interface CodeInfoResponseAminoType {
+  type: "wasm/CodeInfoResponse";
+  value: CodeInfoResponseAmino;
 }
 
 /** CodeInfoResponse contains code meta data from CodeInfo */
@@ -413,11 +525,19 @@ export interface QueryCodeResponse {
   codeInfo?: CodeInfoResponse;
   data: Uint8Array;
 }
+export interface QueryCodeResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse";
+  value: Uint8Array;
+}
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseAmino {
   code_info?: CodeInfoResponseAmino;
   data: Uint8Array;
+}
+export interface QueryCodeResponseAminoType {
+  type: "wasm/QueryCodeResponse";
+  value: QueryCodeResponseAmino;
 }
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
@@ -431,11 +551,19 @@ export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryCodesRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest";
+  value: Uint8Array;
+}
 
 /** QueryCodesRequest is the request type for the Query/Codes RPC method */
 export interface QueryCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryCodesRequestAminoType {
+  type: "wasm/QueryCodesRequest";
+  value: QueryCodesRequestAmino;
 }
 
 /** QueryCodesRequest is the request type for the Query/Codes RPC method */
@@ -450,6 +578,10 @@ export interface QueryCodesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryCodesResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse";
+  value: Uint8Array;
+}
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
 export interface QueryCodesResponseAmino {
@@ -457,6 +589,10 @@ export interface QueryCodesResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryCodesResponseAminoType {
+  type: "wasm/QueryCodesResponse";
+  value: QueryCodesResponseAmino;
 }
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
@@ -473,6 +609,10 @@ export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryPinnedCodesRequestProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
@@ -481,6 +621,10 @@ export interface QueryPinnedCodesRequest {
 export interface QueryPinnedCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryPinnedCodesRequestAminoType {
+  type: "wasm/QueryPinnedCodesRequest";
+  value: QueryPinnedCodesRequestAmino;
 }
 
 /**
@@ -501,6 +645,10 @@ export interface QueryPinnedCodesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryPinnedCodesResponseProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPinnedCodesResponse is the response type for the
@@ -511,6 +659,10 @@ export interface QueryPinnedCodesResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryPinnedCodesResponseAminoType {
+  type: "wasm/QueryPinnedCodesResponse";
+  value: QueryPinnedCodesResponseAmino;
 }
 
 /**

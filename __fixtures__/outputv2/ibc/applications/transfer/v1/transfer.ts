@@ -16,6 +16,10 @@ export interface DenomTrace {
   /** base denomination of the relayed fungible token. */
   baseDenom: string;
 }
+export interface DenomTraceProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.DenomTrace";
+  value: Uint8Array;
+}
 
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -30,6 +34,10 @@ export interface DenomTraceAmino {
 
   /** base denomination of the relayed fungible token. */
   base_denom: string;
+}
+export interface DenomTraceAminoType {
+  type: "cosmos-sdk/DenomTrace";
+  value: DenomTraceAmino;
 }
 
 /**
@@ -60,6 +68,10 @@ export interface Params {
    */
   receiveEnabled: boolean;
 }
+export interface ParamsProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.Params";
+  value: Uint8Array;
+}
 
 /**
  * Params defines the set of IBC transfer parameters.
@@ -79,6 +91,10 @@ export interface ParamsAmino {
    * chain.
    */
   receive_enabled: boolean;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /**

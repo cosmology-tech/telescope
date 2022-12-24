@@ -63,6 +63,10 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
+export interface QuotaProtoType {
+  typeUrl: "/google.api.Quota";
+  value: Uint8Array;
+}
 
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -125,6 +129,10 @@ export interface QuotaAmino {
    */
   metric_rules: MetricRuleAmino[];
 }
+export interface QuotaAminoType {
+  type: "/google.api.Quota";
+  value: QuotaAmino;
+}
 
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -185,9 +193,17 @@ export interface MetricRule_MetricCostsEntry {
   key: string;
   value: Long;
 }
+export interface MetricRule_MetricCostsEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface MetricRule_MetricCostsEntryAmino {
   key: string;
   value: string;
+}
+export interface MetricRule_MetricCostsEntryAminoType {
+  type: "/google.api.undefined";
+  value: MetricRule_MetricCostsEntryAmino;
 }
 export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
@@ -218,6 +234,10 @@ export interface MetricRule {
     [key: string]: Long;
   };
 }
+export interface MetricRuleProtoType {
+  typeUrl: "/google.api.MetricRule";
+  value: Uint8Array;
+}
 
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
@@ -243,6 +263,10 @@ export interface MetricRuleAmino {
     [key: string]: string;
   };
 }
+export interface MetricRuleAminoType {
+  type: "/google.api.MetricRule";
+  value: MetricRuleAmino;
+}
 
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
@@ -258,9 +282,17 @@ export interface QuotaLimit_ValuesEntry {
   key: string;
   value: Long;
 }
+export interface QuotaLimit_ValuesEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface QuotaLimit_ValuesEntryAmino {
   key: string;
   value: string;
+}
+export interface QuotaLimit_ValuesEntryAminoType {
+  type: "/google.api.undefined";
+  value: QuotaLimit_ValuesEntryAmino;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
@@ -373,6 +405,10 @@ export interface QuotaLimit {
    */
   displayName: string;
 }
+export interface QuotaLimitProtoType {
+  typeUrl: "/google.api.QuotaLimit";
+  value: Uint8Array;
+}
 
 /**
  * `QuotaLimit` defines a specific limit that applies over a specified duration
@@ -479,6 +515,10 @@ export interface QuotaLimitAmino {
    * display name generated from the configuration.
    */
   display_name: string;
+}
+export interface QuotaLimitAminoType {
+  type: "/google.api.QuotaLimit";
+  value: QuotaLimitAmino;
 }
 
 /**

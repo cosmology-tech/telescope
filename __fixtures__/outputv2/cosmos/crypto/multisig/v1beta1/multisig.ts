@@ -10,6 +10,10 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 export interface MultiSignature {
   signatures: Uint8Array[];
 }
+export interface MultiSignatureProtoType {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature";
+  value: Uint8Array;
+}
 
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -18,6 +22,10 @@ export interface MultiSignature {
  */
 export interface MultiSignatureAmino {
   signatures: Uint8Array[];
+}
+export interface MultiSignatureAminoType {
+  type: "cosmos-sdk/MultiSignature";
+  value: MultiSignatureAmino;
 }
 
 /**
@@ -39,6 +47,10 @@ export interface CompactBitArray {
   extraBitsStored: number;
   elems: Uint8Array;
 }
+export interface CompactBitArrayProtoType {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray";
+  value: Uint8Array;
+}
 
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -49,6 +61,10 @@ export interface CompactBitArray {
 export interface CompactBitArrayAmino {
   extra_bits_stored: number;
   elems: Uint8Array;
+}
+export interface CompactBitArrayAminoType {
+  type: "cosmos-sdk/CompactBitArray";
+  value: CompactBitArrayAmino;
 }
 
 /**

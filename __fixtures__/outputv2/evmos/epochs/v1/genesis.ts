@@ -12,6 +12,10 @@ export interface EpochInfo {
   epochCountingStarted: boolean;
   currentEpochStartHeight: Long;
 }
+export interface EpochInfoProtoType {
+  typeUrl: "/evmos.epochs.v1.EpochInfo";
+  value: Uint8Array;
+}
 export interface EpochInfoAmino {
   identifier: string;
   start_time?: Date;
@@ -20,6 +24,10 @@ export interface EpochInfoAmino {
   current_epoch_start_time?: Date;
   epoch_counting_started: boolean;
   current_epoch_start_height: string;
+}
+export interface EpochInfoAminoType {
+  type: "/evmos.epochs.v1.EpochInfo";
+  value: EpochInfoAmino;
 }
 export interface EpochInfoSDKType {
   identifier: string;
@@ -35,10 +43,18 @@ export interface EpochInfoSDKType {
 export interface GenesisState {
   epochs: EpochInfo[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.epochs.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.epochs.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the epochs module's genesis state. */

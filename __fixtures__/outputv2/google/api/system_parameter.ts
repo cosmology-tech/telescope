@@ -44,6 +44,10 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
+export interface SystemParametersProtoType {
+  typeUrl: "/google.api.SystemParameters";
+  value: Uint8Array;
+}
 
 /**
  * ### System parameter configuration
@@ -87,6 +91,10 @@ export interface SystemParametersAmino {
    */
   rules: SystemParameterRuleAmino[];
 }
+export interface SystemParametersAminoType {
+  type: "/google.api.SystemParameters";
+  value: SystemParametersAmino;
+}
 
 /**
  * ### System parameter configuration
@@ -122,6 +130,10 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
+export interface SystemParameterRuleProtoType {
+  typeUrl: "/google.api.SystemParameterRule";
+  value: Uint8Array;
+}
 
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -144,6 +156,10 @@ export interface SystemParameterRuleAmino {
    * parameter-dependent.
    */
   parameters: SystemParameterAmino[];
+}
+export interface SystemParameterRuleAminoType {
+  type: "/google.api.SystemParameterRule";
+  value: SystemParameterRuleAmino;
 }
 
 /**
@@ -176,6 +192,10 @@ export interface SystemParameter {
    */
   urlQueryParameter: string;
 }
+export interface SystemParameterProtoType {
+  typeUrl: "/google.api.SystemParameter";
+  value: Uint8Array;
+}
 
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -197,6 +217,10 @@ export interface SystemParameterAmino {
    * sensitive.
    */
   url_query_parameter: string;
+}
+export interface SystemParameterAminoType {
+  type: "/google.api.SystemParameter";
+  value: SystemParameterAmino;
 }
 
 /**

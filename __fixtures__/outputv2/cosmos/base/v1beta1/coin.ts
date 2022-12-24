@@ -12,6 +12,10 @@ export interface Coin {
   denom: string;
   amount: string;
 }
+export interface CoinProtoType {
+  typeUrl: "/cosmos.base.v1beta1.Coin";
+  value: Uint8Array;
+}
 
 /**
  * Coin defines a token with a denomination and an amount.
@@ -22,6 +26,10 @@ export interface Coin {
 export interface CoinAmino {
   denom: string;
   amount: string;
+}
+export interface CoinAminoType {
+  type: "cosmos-sdk/Coin";
+  value: CoinAmino;
 }
 
 /**
@@ -45,6 +53,10 @@ export interface DecCoin {
   denom: string;
   amount: string;
 }
+export interface DecCoinProtoType {
+  typeUrl: "/cosmos.base.v1beta1.DecCoin";
+  value: Uint8Array;
+}
 
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
@@ -55,6 +67,10 @@ export interface DecCoin {
 export interface DecCoinAmino {
   denom: string;
   amount: string;
+}
+export interface DecCoinAminoType {
+  type: "cosmos-sdk/DecCoin";
+  value: DecCoinAmino;
 }
 
 /**
@@ -72,10 +88,18 @@ export interface DecCoinSDKType {
 export interface IntProto {
   int: string;
 }
+export interface IntProtoProtoType {
+  typeUrl: "/cosmos.base.v1beta1.IntProto";
+  value: Uint8Array;
+}
 
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoAmino {
   int: string;
+}
+export interface IntProtoAminoType {
+  type: "cosmos-sdk/IntProto";
+  value: IntProtoAmino;
 }
 
 /** IntProto defines a Protobuf wrapper around an Int object. */
@@ -87,10 +111,18 @@ export interface IntProtoSDKType {
 export interface DecProto {
   dec: string;
 }
+export interface DecProtoProtoType {
+  typeUrl: "/cosmos.base.v1beta1.DecProto";
+  value: Uint8Array;
+}
 
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
   dec: string;
+}
+export interface DecProtoAminoType {
+  type: "cosmos-sdk/DecProto";
+  value: DecProtoAmino;
 }
 
 /** DecProto defines a Protobuf wrapper around a Dec object. */

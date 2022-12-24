@@ -96,7 +96,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
 `;
 
 exports[`cosmos/authz/v1beta1/authz date 3`] = `
-"export interface AminoGrant extends AminoMsg {
+"export interface GrantAminoType extends AminoMsg {
   type: "cosmos-sdk/Grant";
   value: {
     authorization: {
@@ -118,7 +118,7 @@ exports[`cosmos/authz/v1beta1/authz date 4`] = `
     toAmino: ({
       authorization,
       expiration
-    }: Grant): AminoGrant["value"] => {
+    }: Grant): GrantAminoType["value"] => {
       return {
         authorization: {
           type_url: authorization.typeUrl,
@@ -130,7 +130,7 @@ exports[`cosmos/authz/v1beta1/authz date 4`] = `
     fromAmino: ({
       authorization,
       expiration
-    }: AminoGrant["value"]): Grant => {
+    }: GrantAminoType["value"]): Grant => {
       return {
         authorization: {
           typeUrl: authorization.type_url,
@@ -239,7 +239,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
 `;
 
 exports[`cosmos/authz/v1beta1/authz timestamp 3`] = `
-"export interface AminoGrant extends AminoMsg {
+"export interface GrantAminoType extends AminoMsg {
   type: "cosmos-sdk/Grant";
   value: {
     authorization: {
@@ -261,7 +261,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 4`] = `
     toAmino: ({
       authorization,
       expiration
-    }: Grant): AminoGrant["value"] => {
+    }: Grant): GrantAminoType["value"] => {
       return {
         authorization: {
           type_url: authorization.typeUrl,
@@ -273,7 +273,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 4`] = `
     fromAmino: ({
       authorization,
       expiration
-    }: AminoGrant["value"]): Grant => {
+    }: GrantAminoType["value"]): Grant => {
       return {
         authorization: {
           typeUrl: authorization.type_url,

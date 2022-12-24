@@ -216,6 +216,10 @@ export interface ExistenceProof {
   leaf?: LeafOp;
   path: InnerOp[];
 }
+export interface ExistenceProofProtoType {
+  typeUrl: "/ics23.ExistenceProof";
+  value: Uint8Array;
+}
 
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
@@ -243,6 +247,10 @@ export interface ExistenceProofAmino {
   value: Uint8Array;
   leaf?: LeafOpAmino;
   path: InnerOpAmino[];
+}
+export interface ExistenceProofAminoType {
+  type: "/ics23.ExistenceProof";
+  value: ExistenceProofAmino;
 }
 
 /**
@@ -284,6 +292,10 @@ export interface NonExistenceProof {
   left?: ExistenceProof;
   right?: ExistenceProof;
 }
+export interface NonExistenceProofProtoType {
+  typeUrl: "/ics23.NonExistenceProof";
+  value: Uint8Array;
+}
 
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
@@ -295,6 +307,10 @@ export interface NonExistenceProofAmino {
   key: Uint8Array;
   left?: ExistenceProofAmino;
   right?: ExistenceProofAmino;
+}
+export interface NonExistenceProofAminoType {
+  type: "/ics23.NonExistenceProof";
+  value: NonExistenceProofAmino;
 }
 
 /**
@@ -315,6 +331,10 @@ export interface CommitmentProof {
   batch?: BatchProof;
   compressed?: CompressedBatchProof;
 }
+export interface CommitmentProofProtoType {
+  typeUrl: "/ics23.CommitmentProof";
+  value: Uint8Array;
+}
 
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProofAmino {
@@ -322,6 +342,10 @@ export interface CommitmentProofAmino {
   nonexist?: NonExistenceProofAmino;
   batch?: BatchProofAmino;
   compressed?: CompressedBatchProofAmino;
+}
+export interface CommitmentProofAminoType {
+  type: "/ics23.CommitmentProof";
+  value: CommitmentProofAmino;
 }
 
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
@@ -360,6 +384,10 @@ export interface LeafOp {
    */
   prefix: Uint8Array;
 }
+export interface LeafOpProtoType {
+  typeUrl: "/ics23.LeafOp";
+  value: Uint8Array;
+}
 
 /**
  * LeafOp represents the raw key-value data we wish to prove, and
@@ -388,6 +416,10 @@ export interface LeafOpAmino {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
+}
+export interface LeafOpAminoType {
+  type: "/ics23.LeafOp";
+  value: LeafOpAmino;
 }
 
 /**
@@ -436,6 +468,10 @@ export interface InnerOp {
   prefix: Uint8Array;
   suffix: Uint8Array;
 }
+export interface InnerOpProtoType {
+  typeUrl: "/ics23.InnerOp";
+  value: Uint8Array;
+}
 
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -458,6 +494,10 @@ export interface InnerOpAmino {
   hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
+}
+export interface InnerOpAminoType {
+  type: "/ics23.InnerOp";
+  value: InnerOpAmino;
 }
 
 /**
@@ -509,6 +549,10 @@ export interface ProofSpec {
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   minDepth: number;
 }
+export interface ProofSpecProtoType {
+  typeUrl: "/ics23.ProofSpec";
+  value: Uint8Array;
+}
 
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
@@ -535,6 +579,10 @@ export interface ProofSpecAmino {
 
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   min_depth: number;
+}
+export interface ProofSpecAminoType {
+  type: "/ics23.ProofSpec";
+  value: ProofSpecAmino;
 }
 
 /**
@@ -583,6 +631,10 @@ export interface InnerSpec {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
+export interface InnerSpecProtoType {
+  typeUrl: "/ics23.InnerSpec";
+  value: Uint8Array;
+}
 
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -611,6 +663,10 @@ export interface InnerSpecAmino {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
+export interface InnerSpecAminoType {
+  type: "/ics23.InnerSpec";
+  value: InnerSpecAmino;
+}
 
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -635,10 +691,18 @@ export interface InnerSpecSDKType {
 export interface BatchProof {
   entries: BatchEntry[];
 }
+export interface BatchProofProtoType {
+  typeUrl: "/ics23.BatchProof";
+  value: Uint8Array;
+}
 
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofAmino {
   entries: BatchEntryAmino[];
+}
+export interface BatchProofAminoType {
+  type: "/ics23.BatchProof";
+  value: BatchProofAmino;
 }
 
 /** BatchProof is a group of multiple proof types than can be compressed */
@@ -651,11 +715,19 @@ export interface BatchEntry {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
 }
+export interface BatchEntryProtoType {
+  typeUrl: "/ics23.BatchEntry";
+  value: Uint8Array;
+}
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntryAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
+}
+export interface BatchEntryAminoType {
+  type: "/ics23.BatchEntry";
+  value: BatchEntryAmino;
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -667,9 +739,17 @@ export interface CompressedBatchProof {
   entries: CompressedBatchEntry[];
   lookupInners: InnerOp[];
 }
+export interface CompressedBatchProofProtoType {
+  typeUrl: "/ics23.CompressedBatchProof";
+  value: Uint8Array;
+}
 export interface CompressedBatchProofAmino {
   entries: CompressedBatchEntryAmino[];
   lookup_inners: InnerOpAmino[];
+}
+export interface CompressedBatchProofAminoType {
+  type: "/ics23.CompressedBatchProof";
+  value: CompressedBatchProofAmino;
 }
 export interface CompressedBatchProofSDKType {
   entries: CompressedBatchEntrySDKType[];
@@ -681,11 +761,19 @@ export interface CompressedBatchEntry {
   exist?: CompressedExistenceProof;
   nonexist?: CompressedNonExistenceProof;
 }
+export interface CompressedBatchEntryProtoType {
+  typeUrl: "/ics23.CompressedBatchEntry";
+  value: Uint8Array;
+}
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface CompressedBatchEntryAmino {
   exist?: CompressedExistenceProofAmino;
   nonexist?: CompressedNonExistenceProofAmino;
+}
+export interface CompressedBatchEntryAminoType {
+  type: "/ics23.CompressedBatchEntry";
+  value: CompressedBatchEntryAmino;
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -701,6 +789,10 @@ export interface CompressedExistenceProof {
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
+export interface CompressedExistenceProofProtoType {
+  typeUrl: "/ics23.CompressedExistenceProof";
+  value: Uint8Array;
+}
 export interface CompressedExistenceProofAmino {
   key: Uint8Array;
   value: Uint8Array;
@@ -708,6 +800,10 @@ export interface CompressedExistenceProofAmino {
 
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
+}
+export interface CompressedExistenceProofAminoType {
+  type: "/ics23.CompressedExistenceProof";
+  value: CompressedExistenceProofAmino;
 }
 export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
@@ -721,11 +817,19 @@ export interface CompressedNonExistenceProof {
   left?: CompressedExistenceProof;
   right?: CompressedExistenceProof;
 }
+export interface CompressedNonExistenceProofProtoType {
+  typeUrl: "/ics23.CompressedNonExistenceProof";
+  value: Uint8Array;
+}
 export interface CompressedNonExistenceProofAmino {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
   left?: CompressedExistenceProofAmino;
   right?: CompressedExistenceProofAmino;
+}
+export interface CompressedNonExistenceProofAminoType {
+  type: "/ics23.CompressedNonExistenceProof";
+  value: CompressedNonExistenceProofAmino;
 }
 export interface CompressedNonExistenceProofSDKType {
   key: Uint8Array;

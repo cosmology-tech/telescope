@@ -29,6 +29,10 @@ export interface Status {
    */
   details: Any[];
 }
+export interface StatusProtoType {
+  typeUrl: "/google.rpc.Status";
+  value: Uint8Array;
+}
 
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -55,6 +59,10 @@ export interface StatusAmino {
    * message types for APIs to use.
    */
   details: AnyAmino[];
+}
+export interface StatusAminoType {
+  type: "/google.rpc.Status";
+  value: StatusAmino;
 }
 
 /**

@@ -9,11 +9,19 @@ export interface CertificateResponse {
   certificate?: Certificate;
   serial: string;
 }
+export interface CertificateResponseProtoType {
+  typeUrl: "/akash.cert.v1beta2.CertificateResponse";
+  value: Uint8Array;
+}
 
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseAmino {
   certificate?: CertificateAmino;
   serial: string;
+}
+export interface CertificateResponseAminoType {
+  type: "/akash.cert.v1beta2.CertificateResponse";
+  value: CertificateResponseAmino;
 }
 
 /** CertificateResponse contains a single X509 certificate and its serial number */
@@ -27,11 +35,19 @@ export interface QueryCertificatesRequest {
   filter?: CertificateFilter;
   pagination?: PageRequest;
 }
+export interface QueryCertificatesRequestProtoType {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestAmino {
   filter?: CertificateFilterAmino;
   pagination?: PageRequestAmino;
+}
+export interface QueryCertificatesRequestAminoType {
+  type: "/akash.cert.v1beta2.QueryCertificatesRequest";
+  value: QueryCertificatesRequestAmino;
 }
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -45,11 +61,19 @@ export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
 }
+export interface QueryCertificatesResponseProtoType {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
+  value: Uint8Array;
+}
 
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseAmino {
   certificates: CertificateResponseAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QueryCertificatesResponseAminoType {
+  type: "/akash.cert.v1beta2.QueryCertificatesResponse";
+  value: QueryCertificatesResponseAmino;
 }
 
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */

@@ -9,11 +9,19 @@ export interface QueryEvidenceRequest {
   /** evidence_hash defines the hash of the requested evidence. */
   evidenceHash: Uint8Array;
 }
+export interface QueryEvidenceRequestProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest";
+  value: Uint8Array;
+}
 
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
   evidence_hash: Uint8Array;
+}
+export interface QueryEvidenceRequestAminoType {
+  type: "cosmos-sdk/QueryEvidenceRequest";
+  value: QueryEvidenceRequestAmino;
 }
 
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
@@ -26,11 +34,19 @@ export interface QueryEvidenceResponse {
   /** evidence returns the requested evidence. */
   evidence?: Any;
 }
+export interface QueryEvidenceResponseProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse";
+  value: Uint8Array;
+}
 
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseAmino {
   /** evidence returns the requested evidence. */
   evidence?: AnyAmino;
+}
+export interface QueryEvidenceResponseAminoType {
+  type: "cosmos-sdk/QueryEvidenceResponse";
+  value: QueryEvidenceResponseAmino;
 }
 
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
@@ -46,6 +62,10 @@ export interface QueryAllEvidenceRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryAllEvidenceRequestProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -54,6 +74,10 @@ export interface QueryAllEvidenceRequest {
 export interface QueryAllEvidenceRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryAllEvidenceRequestAminoType {
+  type: "cosmos-sdk/QueryAllEvidenceRequest";
+  value: QueryAllEvidenceRequestAmino;
 }
 
 /**
@@ -75,6 +99,10 @@ export interface QueryAllEvidenceResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryAllEvidenceResponseProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -86,6 +114,10 @@ export interface QueryAllEvidenceResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryAllEvidenceResponseAminoType {
+  type: "cosmos-sdk/QueryAllEvidenceResponse";
+  value: QueryAllEvidenceResponseAmino;
 }
 
 /**

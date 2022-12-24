@@ -7,11 +7,19 @@ export interface Minter {
   /** epoch_provisions represent rewards for the current epoch. */
   epochProvisions: string;
 }
+export interface MinterProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.Minter";
+  value: Uint8Array;
+}
 
 /** Minter represents the minting state. */
 export interface MinterAmino {
   /** epoch_provisions represent rewards for the current epoch. */
   epoch_provisions: string;
+}
+export interface MinterAminoType {
+  type: "osmosis/mint/minter";
+  value: MinterAmino;
 }
 
 /** Minter represents the minting state. */
@@ -28,6 +36,10 @@ export interface WeightedAddress {
   address: string;
   weight: string;
 }
+export interface WeightedAddressProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.WeightedAddress";
+  value: Uint8Array;
+}
 
 /**
  * WeightedAddress represents an address with a weight assigned to it.
@@ -37,6 +49,10 @@ export interface WeightedAddress {
 export interface WeightedAddressAmino {
   address: string;
   weight: string;
+}
+export interface WeightedAddressAminoType {
+  type: "osmosis/mint/weighted-address";
+  value: WeightedAddressAmino;
 }
 
 /**
@@ -79,6 +95,10 @@ export interface DistributionProportions {
    */
   communityPool: string;
 }
+export interface DistributionProportionsProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.DistributionProportions";
+  value: Uint8Array;
+}
 
 /**
  * DistributionProportions defines the distribution proportions of the minted
@@ -109,6 +129,10 @@ export interface DistributionProportionsAmino {
    * to be allocated to the community pool.
    */
   community_pool: string;
+}
+export interface DistributionProportionsAminoType {
+  type: "osmosis/mint/distribution-proportions";
+  value: DistributionProportionsAmino;
 }
 
 /**
@@ -167,6 +191,10 @@ export interface Params {
    */
   mintingRewardsDistributionStartEpoch: Long;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the x/mint module. */
 export interface ParamsAmino {
@@ -211,6 +239,10 @@ export interface ParamsAmino {
    * rewards
    */
   minting_rewards_distribution_start_epoch: string;
+}
+export interface ParamsAminoType {
+  type: "osmosis/mint/params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the x/mint module. */

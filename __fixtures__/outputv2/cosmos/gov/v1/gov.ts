@@ -178,11 +178,19 @@ export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
 }
+export interface WeightedVoteOptionProtoType {
+  typeUrl: "/cosmos.gov.v1.WeightedVoteOption";
+  value: Uint8Array;
+}
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionAmino {
   option: VoteOption;
   weight: string;
+}
+export interface WeightedVoteOptionAminoType {
+  type: "cosmos-sdk/v1/WeightedVoteOption";
+  value: WeightedVoteOptionAmino;
 }
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
@@ -200,6 +208,10 @@ export interface Deposit {
   depositor: string;
   amount: Coin[];
 }
+export interface DepositProtoType {
+  typeUrl: "/cosmos.gov.v1.Deposit";
+  value: Uint8Array;
+}
 
 /**
  * Deposit defines an amount deposited by an account address to an active
@@ -209,6 +221,10 @@ export interface DepositAmino {
   proposal_id: string;
   depositor: string;
   amount: CoinAmino[];
+}
+export interface DepositAminoType {
+  type: "cosmos-sdk/v1/Deposit";
+  value: DepositAmino;
 }
 
 /**
@@ -242,6 +258,10 @@ export interface Proposal {
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
+export interface ProposalProtoType {
+  typeUrl: "/cosmos.gov.v1.Proposal";
+  value: Uint8Array;
+}
 
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalAmino {
@@ -263,6 +283,10 @@ export interface ProposalAmino {
 
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
+}
+export interface ProposalAminoType {
+  type: "cosmos-sdk/v1/Proposal";
+  value: ProposalAmino;
 }
 
 /** Proposal defines the core field members of a governance proposal. */
@@ -286,6 +310,10 @@ export interface TallyResult {
   noCount: string;
   noWithVetoCount: string;
 }
+export interface TallyResultProtoType {
+  typeUrl: "/cosmos.gov.v1.TallyResult";
+  value: Uint8Array;
+}
 
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultAmino {
@@ -293,6 +321,10 @@ export interface TallyResultAmino {
   abstain_count: string;
   no_count: string;
   no_with_veto_count: string;
+}
+export interface TallyResultAminoType {
+  type: "cosmos-sdk/v1/TallyResult";
+  value: TallyResultAmino;
 }
 
 /** TallyResult defines a standard tally for a governance proposal. */
@@ -315,6 +347,10 @@ export interface Vote {
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
 }
+export interface VoteProtoType {
+  typeUrl: "/cosmos.gov.v1.Vote";
+  value: Uint8Array;
+}
 
 /**
  * Vote defines a vote on a governance proposal.
@@ -327,6 +363,10 @@ export interface VoteAmino {
 
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
+}
+export interface VoteAminoType {
+  type: "cosmos-sdk/v1/Vote";
+  value: VoteAmino;
 }
 
 /**
@@ -351,6 +391,10 @@ export interface DepositParams {
    */
   maxDepositPeriod?: Duration;
 }
+export interface DepositParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.DepositParams";
+  value: Uint8Array;
+}
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsAmino {
@@ -362,6 +406,10 @@ export interface DepositParamsAmino {
    *  months.
    */
   max_deposit_period?: DurationAmino;
+}
+export interface DepositParamsAminoType {
+  type: "cosmos-sdk/v1/DepositParams";
+  value: DepositParamsAmino;
 }
 
 /** DepositParams defines the params for deposits on governance proposals. */
@@ -375,11 +423,19 @@ export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod?: Duration;
 }
+export interface VotingParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.VotingParams";
+  value: Uint8Array;
+}
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsAmino {
   /** Length of the voting period. */
   voting_period?: DurationAmino;
+}
+export interface VotingParamsAminoType {
+  type: "cosmos-sdk/v1/VotingParams";
+  value: VotingParamsAmino;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
@@ -404,6 +460,10 @@ export interface TallyParams {
    */
   vetoThreshold: string;
 }
+export interface TallyParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.TallyParams";
+  value: Uint8Array;
+}
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsAmino {
@@ -421,6 +481,10 @@ export interface TallyParamsAmino {
    *  vetoed. Default value: 1/3.
    */
   veto_threshold: string;
+}
+export interface TallyParamsAminoType {
+  type: "cosmos-sdk/v1/TallyParams";
+  value: TallyParamsAmino;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

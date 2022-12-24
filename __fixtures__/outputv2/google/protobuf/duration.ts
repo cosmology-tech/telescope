@@ -80,6 +80,10 @@ export interface Duration {
    */
   nanos: number;
 }
+export interface DurationProtoType {
+  typeUrl: "/google.protobuf.Duration";
+  value: Uint8Array;
+}
 
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -142,6 +146,10 @@ export interface Duration {
  * microsecond should be expressed in JSON format as "3.000001s".
  */
 export type DurationAmino = string;
+export interface DurationAminoType {
+  type: "/google.protobuf.Duration";
+  value: DurationAmino;
+}
 
 /**
  * A Duration represents a signed, fixed-length span of time represented

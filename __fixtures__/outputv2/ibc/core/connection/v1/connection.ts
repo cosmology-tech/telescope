@@ -99,6 +99,10 @@ export interface ConnectionEnd {
    */
   delayPeriod: Long;
 }
+export interface ConnectionEndProtoType {
+  typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
+  value: Uint8Array;
+}
 
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
@@ -128,6 +132,10 @@ export interface ConnectionEndAmino {
    * clients.
    */
   delay_period: string;
+}
+export interface ConnectionEndAminoType {
+  type: "cosmos-sdk/ConnectionEnd";
+  value: ConnectionEndAmino;
 }
 
 /**
@@ -170,6 +178,10 @@ export interface IdentifiedConnection {
   /** delay period associated with this connection. */
   delayPeriod: Long;
 }
+export interface IdentifiedConnectionProtoType {
+  typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedConnection defines a connection with additional connection
@@ -196,6 +208,10 @@ export interface IdentifiedConnectionAmino {
 
   /** delay period associated with this connection. */
   delay_period: string;
+}
+export interface IdentifiedConnectionAminoType {
+  type: "cosmos-sdk/IdentifiedConnection";
+  value: IdentifiedConnectionAmino;
 }
 
 /**
@@ -228,6 +244,10 @@ export interface Counterparty {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefix;
 }
+export interface CounterpartyProtoType {
+  typeUrl: "/ibc.core.connection.v1.Counterparty";
+  value: Uint8Array;
+}
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartyAmino {
@@ -246,6 +266,10 @@ export interface CounterpartyAmino {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefixAmino;
 }
+export interface CounterpartyAminoType {
+  type: "cosmos-sdk/Counterparty";
+  value: CounterpartyAmino;
+}
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartySDKType {
@@ -259,11 +283,19 @@ export interface ClientPaths {
   /** list of connection paths */
   paths: string[];
 }
+export interface ClientPathsProtoType {
+  typeUrl: "/ibc.core.connection.v1.ClientPaths";
+  value: Uint8Array;
+}
 
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsAmino {
   /** list of connection paths */
   paths: string[];
+}
+export interface ClientPathsAminoType {
+  type: "cosmos-sdk/ClientPaths";
+  value: ClientPathsAmino;
 }
 
 /** ClientPaths define all the connection paths for a client state. */
@@ -279,6 +311,10 @@ export interface ConnectionPaths {
   /** list of connection paths */
   paths: string[];
 }
+export interface ConnectionPathsProtoType {
+  typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
+  value: Uint8Array;
+}
 
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsAmino {
@@ -287,6 +323,10 @@ export interface ConnectionPathsAmino {
 
   /** list of connection paths */
   paths: string[];
+}
+export interface ConnectionPathsAminoType {
+  type: "cosmos-sdk/ConnectionPaths";
+  value: ConnectionPathsAmino;
 }
 
 /** ConnectionPaths define all the connection paths for a given client state. */
@@ -306,6 +346,10 @@ export interface Version {
   /** list of features compatible with the specified identifier */
   features: string[];
 }
+export interface VersionProtoType {
+  typeUrl: "/ibc.core.connection.v1.Version";
+  value: Uint8Array;
+}
 
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
@@ -317,6 +361,10 @@ export interface VersionAmino {
 
   /** list of features compatible with the specified identifier */
   features: string[];
+}
+export interface VersionAminoType {
+  type: "cosmos-sdk/Version";
+  value: VersionAmino;
 }
 
 /**
@@ -337,6 +385,10 @@ export interface Params {
    */
   maxExpectedTimePerBlock: Long;
 }
+export interface ParamsProtoType {
+  typeUrl: "/ibc.core.connection.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the set of Connection parameters. */
 export interface ParamsAmino {
@@ -346,6 +398,10 @@ export interface ParamsAmino {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   max_expected_time_per_block: string;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the set of Connection parameters. */

@@ -28,6 +28,10 @@ export interface GenesisState {
    */
   lastGaugeId: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.incentives.GenesisState";
+  value: Uint8Array;
+}
 
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -51,6 +55,10 @@ export interface GenesisStateAmino {
    * the next gauge after genesis
    */
   last_gauge_id: string;
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/incentives/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /**

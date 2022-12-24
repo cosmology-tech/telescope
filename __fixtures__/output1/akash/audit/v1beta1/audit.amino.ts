@@ -2,7 +2,7 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType } from "./audit";
-export interface AminoMsgSignProviderAttributes extends AminoMsg {
+export interface MsgSignProviderAttributesAminoType extends AminoMsg {
   type: "akash/audit/testonly-sign-provider-attributes";
   value: {
     owner: string;
@@ -13,7 +13,7 @@ export interface AminoMsgSignProviderAttributes extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgDeleteProviderAttributes extends AminoMsg {
+export interface MsgDeleteProviderAttributesAminoType extends AminoMsg {
   type: "akash/audit/testonly-delete-provider-attributes";
   value: {
     owner: string;
@@ -28,7 +28,7 @@ export const AminoConverter = {
       owner,
       auditor,
       attributes
-    }: MsgSignProviderAttributes): AminoMsgSignProviderAttributes["value"] => {
+    }: MsgSignProviderAttributes): MsgSignProviderAttributesAminoType["value"] => {
       return {
         owner,
         auditor,
@@ -42,7 +42,7 @@ export const AminoConverter = {
       owner,
       auditor,
       attributes
-    }: AminoMsgSignProviderAttributes["value"]): MsgSignProviderAttributes => {
+    }: MsgSignProviderAttributesAminoType["value"]): MsgSignProviderAttributes => {
       return {
         owner,
         auditor,
@@ -59,7 +59,7 @@ export const AminoConverter = {
       owner,
       auditor,
       keys
-    }: MsgDeleteProviderAttributes): AminoMsgDeleteProviderAttributes["value"] => {
+    }: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAminoType["value"] => {
       return {
         owner,
         auditor,
@@ -70,7 +70,7 @@ export const AminoConverter = {
       owner,
       auditor,
       keys
-    }: AminoMsgDeleteProviderAttributes["value"]): MsgDeleteProviderAttributes => {
+    }: MsgDeleteProviderAttributesAminoType["value"]): MsgDeleteProviderAttributes => {
       return {
         owner,
         auditor,

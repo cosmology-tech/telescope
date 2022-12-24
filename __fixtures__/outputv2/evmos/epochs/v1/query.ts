@@ -6,8 +6,16 @@ export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
 }
+export interface QueryEpochsInfoRequestProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestAmino {
   pagination?: PageRequestAmino;
+}
+export interface QueryEpochsInfoRequestAminoType {
+  type: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: QueryEpochsInfoRequestAmino;
 }
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -16,9 +24,17 @@ export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
 }
+export interface QueryEpochsInfoResponseProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoResponseAmino {
   epochs: EpochInfoAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QueryEpochsInfoResponseAminoType {
+  type: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: QueryEpochsInfoResponseAmino;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -27,8 +43,16 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
+}
+export interface QueryCurrentEpochRequestAminoType {
+  type: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: QueryCurrentEpochRequestAmino;
 }
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
@@ -36,8 +60,16 @@ export interface QueryCurrentEpochRequestSDKType {
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
 }
+export interface QueryCurrentEpochResponseProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochResponseAmino {
   current_epoch: string;
+}
+export interface QueryCurrentEpochResponseAminoType {
+  type: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: QueryCurrentEpochResponseAmino;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: Long;

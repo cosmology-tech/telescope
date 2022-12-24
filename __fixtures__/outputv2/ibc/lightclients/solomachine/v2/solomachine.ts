@@ -147,6 +147,10 @@ export interface ClientState {
    */
   allowUpdateAfterProposal: boolean;
 }
+export interface ClientStateProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ClientState";
+  value: Uint8Array;
+}
 
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -165,6 +169,10 @@ export interface ClientStateAmino {
    * The client will be unfrozen if it is frozen.
    */
   allow_update_after_proposal: boolean;
+}
+export interface ClientStateAminoType {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
 }
 
 /**
@@ -195,6 +203,10 @@ export interface ConsensusState {
   diversifier: string;
   timestamp: Long;
 }
+export interface ConsensusStateProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusState";
+  value: Uint8Array;
+}
 
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -212,6 +224,10 @@ export interface ConsensusStateAmino {
    */
   diversifier: string;
   timestamp: string;
+}
+export interface ConsensusStateAminoType {
+  type: "cosmos-sdk/ConsensusState";
+  value: ConsensusStateAmino;
 }
 
 /**
@@ -234,6 +250,10 @@ export interface Header {
   newPublicKey?: Any;
   newDiversifier: string;
 }
+export interface HeaderProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.Header";
+  value: Uint8Array;
+}
 
 /** Header defines a solo machine consensus header */
 export interface HeaderAmino {
@@ -243,6 +263,10 @@ export interface HeaderAmino {
   signature: Uint8Array;
   new_public_key?: AnyAmino;
   new_diversifier: string;
+}
+export interface HeaderAminoType {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
 }
 
 /** Header defines a solo machine consensus header */
@@ -264,6 +288,10 @@ export interface Misbehaviour {
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
 }
+export interface MisbehaviourProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.Misbehaviour";
+  value: Uint8Array;
+}
 
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
@@ -274,6 +302,10 @@ export interface MisbehaviourAmino {
   sequence: string;
   signature_one?: SignatureAndDataAmino;
   signature_two?: SignatureAndDataAmino;
+}
+export interface MisbehaviourAminoType {
+  type: "cosmos-sdk/Misbehaviour";
+  value: MisbehaviourAmino;
 }
 
 /**
@@ -297,6 +329,10 @@ export interface SignatureAndData {
   data: Uint8Array;
   timestamp: Long;
 }
+export interface SignatureAndDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.SignatureAndData";
+  value: Uint8Array;
+}
 
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -307,6 +343,10 @@ export interface SignatureAndDataAmino {
   data_type: DataType;
   data: Uint8Array;
   timestamp: string;
+}
+export interface SignatureAndDataAminoType {
+  type: "cosmos-sdk/SignatureAndData";
+  value: SignatureAndDataAmino;
 }
 
 /**
@@ -328,6 +368,10 @@ export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
 }
+export interface TimestampedSignatureDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.TimestampedSignatureData";
+  value: Uint8Array;
+}
 
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -336,6 +380,10 @@ export interface TimestampedSignatureData {
 export interface TimestampedSignatureDataAmino {
   signature_data: Uint8Array;
   timestamp: string;
+}
+export interface TimestampedSignatureDataAminoType {
+  type: "cosmos-sdk/TimestampedSignatureData";
+  value: TimestampedSignatureDataAmino;
 }
 
 /**
@@ -359,6 +407,10 @@ export interface SignBytes {
   /** marshaled data */
   data: Uint8Array;
 }
+export interface SignBytesProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.SignBytes";
+  value: Uint8Array;
+}
 
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesAmino {
@@ -371,6 +423,10 @@ export interface SignBytesAmino {
 
   /** marshaled data */
   data: Uint8Array;
+}
+export interface SignBytesAminoType {
+  type: "cosmos-sdk/SignBytes";
+  value: SignBytesAmino;
 }
 
 /** SignBytes defines the signed bytes used for signature verification. */
@@ -390,6 +446,10 @@ export interface HeaderData {
   /** header diversifier */
   newDiversifier: string;
 }
+export interface HeaderDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.HeaderData";
+  value: Uint8Array;
+}
 
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataAmino {
@@ -398,6 +458,10 @@ export interface HeaderDataAmino {
 
   /** header diversifier */
   new_diversifier: string;
+}
+export interface HeaderDataAminoType {
+  type: "cosmos-sdk/HeaderData";
+  value: HeaderDataAmino;
 }
 
 /** HeaderData returns the SignBytes data for update verification. */
@@ -411,11 +475,19 @@ export interface ClientStateData {
   path: Uint8Array;
   clientState?: Any;
 }
+export interface ClientStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ClientStateData";
+  value: Uint8Array;
+}
 
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataAmino {
   path: Uint8Array;
   client_state?: AnyAmino;
+}
+export interface ClientStateDataAminoType {
+  type: "cosmos-sdk/ClientStateData";
+  value: ClientStateDataAmino;
 }
 
 /** ClientStateData returns the SignBytes data for client state verification. */
@@ -432,6 +504,10 @@ export interface ConsensusStateData {
   path: Uint8Array;
   consensusState?: Any;
 }
+export interface ConsensusStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusStateData";
+  value: Uint8Array;
+}
 
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
@@ -440,6 +516,10 @@ export interface ConsensusStateData {
 export interface ConsensusStateDataAmino {
   path: Uint8Array;
   consensus_state?: AnyAmino;
+}
+export interface ConsensusStateDataAminoType {
+  type: "cosmos-sdk/ConsensusStateData";
+  value: ConsensusStateDataAmino;
 }
 
 /**
@@ -459,6 +539,10 @@ export interface ConnectionStateData {
   path: Uint8Array;
   connection?: ConnectionEnd;
 }
+export interface ConnectionStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ConnectionStateData";
+  value: Uint8Array;
+}
 
 /**
  * ConnectionStateData returns the SignBytes data for connection state
@@ -467,6 +551,10 @@ export interface ConnectionStateData {
 export interface ConnectionStateDataAmino {
   path: Uint8Array;
   connection?: ConnectionEndAmino;
+}
+export interface ConnectionStateDataAminoType {
+  type: "cosmos-sdk/ConnectionStateData";
+  value: ConnectionStateDataAmino;
 }
 
 /**
@@ -486,6 +574,10 @@ export interface ChannelStateData {
   path: Uint8Array;
   channel?: Channel;
 }
+export interface ChannelStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.ChannelStateData";
+  value: Uint8Array;
+}
 
 /**
  * ChannelStateData returns the SignBytes data for channel state
@@ -494,6 +586,10 @@ export interface ChannelStateData {
 export interface ChannelStateDataAmino {
   path: Uint8Array;
   channel?: ChannelAmino;
+}
+export interface ChannelStateDataAminoType {
+  type: "cosmos-sdk/ChannelStateData";
+  value: ChannelStateDataAmino;
 }
 
 /**
@@ -513,6 +609,10 @@ export interface PacketCommitmentData {
   path: Uint8Array;
   commitment: Uint8Array;
 }
+export interface PacketCommitmentDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.PacketCommitmentData";
+  value: Uint8Array;
+}
 
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
@@ -521,6 +621,10 @@ export interface PacketCommitmentData {
 export interface PacketCommitmentDataAmino {
   path: Uint8Array;
   commitment: Uint8Array;
+}
+export interface PacketCommitmentDataAminoType {
+  type: "cosmos-sdk/PacketCommitmentData";
+  value: PacketCommitmentDataAmino;
 }
 
 /**
@@ -540,6 +644,10 @@ export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
+export interface PacketAcknowledgementDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.PacketAcknowledgementData";
+  value: Uint8Array;
+}
 
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
@@ -548,6 +656,10 @@ export interface PacketAcknowledgementData {
 export interface PacketAcknowledgementDataAmino {
   path: Uint8Array;
   acknowledgement: Uint8Array;
+}
+export interface PacketAcknowledgementDataAminoType {
+  type: "cosmos-sdk/PacketAcknowledgementData";
+  value: PacketAcknowledgementDataAmino;
 }
 
 /**
@@ -566,6 +678,10 @@ export interface PacketAcknowledgementDataSDKType {
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
 }
+export interface PacketReceiptAbsenceDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.PacketReceiptAbsenceData";
+  value: Uint8Array;
+}
 
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
@@ -573,6 +689,10 @@ export interface PacketReceiptAbsenceData {
  */
 export interface PacketReceiptAbsenceDataAmino {
   path: Uint8Array;
+}
+export interface PacketReceiptAbsenceDataAminoType {
+  type: "cosmos-sdk/PacketReceiptAbsenceData";
+  value: PacketReceiptAbsenceDataAmino;
 }
 
 /**
@@ -591,6 +711,10 @@ export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
 }
+export interface NextSequenceRecvDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v2.NextSequenceRecvData";
+  value: Uint8Array;
+}
 
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
@@ -599,6 +723,10 @@ export interface NextSequenceRecvData {
 export interface NextSequenceRecvDataAmino {
   path: Uint8Array;
   next_seq_recv: string;
+}
+export interface NextSequenceRecvDataAminoType {
+  type: "cosmos-sdk/NextSequenceRecvData";
+  value: NextSequenceRecvDataAmino;
 }
 
 /**

@@ -14,6 +14,10 @@ export interface GenesisState {
   /** active Gasmeters */
   gasMeters: GasMeter[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.incentives.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
@@ -25,6 +29,10 @@ export interface GenesisStateAmino {
 
   /** active Gasmeters */
   gas_meters: GasMeterAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.incentives.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the module's genesis state. */
@@ -48,6 +56,10 @@ export interface Params {
   /** scaling factor for capping rewards */
   rewardScaler: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/evmos.incentives.v1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the incentives module params */
 export interface ParamsAmino {
@@ -62,6 +74,10 @@ export interface ParamsAmino {
 
   /** scaling factor for capping rewards */
   reward_scaler: string;
+}
+export interface ParamsAminoType {
+  type: "/evmos.incentives.v1.Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the incentives module params */

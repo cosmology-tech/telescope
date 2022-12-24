@@ -17,6 +17,10 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient";
+  value: Uint8Array;
+}
 
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientAmino {
@@ -32,6 +36,10 @@ export interface MsgCreateClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientAminoType {
+  type: "cosmos-sdk/MsgCreateClient";
+  value: MsgCreateClientAmino;
+}
 
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
@@ -42,9 +50,17 @@ export interface MsgCreateClientSDKType {
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+export interface MsgCreateClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseAmino {}
+export interface MsgCreateClientResponseAminoType {
+  type: "cosmos-sdk/MsgCreateClientResponse";
+  value: MsgCreateClientResponseAmino;
+}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
@@ -63,6 +79,10 @@ export interface MsgUpdateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpdateClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
+  value: Uint8Array;
+}
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
@@ -78,6 +98,10 @@ export interface MsgUpdateClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgUpdateClientAminoType {
+  type: "cosmos-sdk/MsgUpdateClient";
+  value: MsgUpdateClientAmino;
+}
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
@@ -91,9 +115,17 @@ export interface MsgUpdateClientSDKType {
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+export interface MsgUpdateClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseAmino {}
+export interface MsgUpdateClientResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateClientResponse";
+  value: MsgUpdateClientResponseAmino;
+}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
@@ -124,6 +156,10 @@ export interface MsgUpgradeClient {
   /** signer address */
   signer: string;
 }
+export interface MsgUpgradeClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
+  value: Uint8Array;
+}
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
@@ -151,6 +187,10 @@ export interface MsgUpgradeClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgUpgradeClientAminoType {
+  type: "cosmos-sdk/MsgUpgradeClient";
+  value: MsgUpgradeClientAmino;
+}
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
@@ -167,9 +207,17 @@ export interface MsgUpgradeClientSDKType {
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+export interface MsgUpgradeClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseAmino {}
+export interface MsgUpgradeClientResponseAminoType {
+  type: "cosmos-sdk/MsgUpgradeClientResponse";
+  value: MsgUpgradeClientResponseAmino;
+}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
@@ -188,6 +236,10 @@ export interface MsgSubmitMisbehaviour {
   /** signer address */
   signer: string;
 }
+export interface MsgSubmitMisbehaviourProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
+  value: Uint8Array;
+}
 
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -202,6 +254,10 @@ export interface MsgSubmitMisbehaviourAmino {
 
   /** signer address */
   signer: string;
+}
+export interface MsgSubmitMisbehaviourAminoType {
+  type: "cosmos-sdk/MsgSubmitMisbehaviour";
+  value: MsgSubmitMisbehaviourAmino;
 }
 
 /**
@@ -219,12 +275,20 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+export interface MsgSubmitMisbehaviourResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
  * type.
  */
 export interface MsgSubmitMisbehaviourResponseAmino {}
+export interface MsgSubmitMisbehaviourResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitMisbehaviourResponse";
+  value: MsgSubmitMisbehaviourResponseAmino;
+}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response

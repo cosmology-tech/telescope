@@ -6,7 +6,7 @@ import { Timestamp, TimestampSDKType } from "../../../../../google/protobuf/time
 import { Duration, DurationSDKType } from "../../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../../cosmos/base/v1beta1/coin";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType } from "./tx";
-export interface AminoMsgCreateBalancerPool extends AminoMsg {
+export interface MsgCreateBalancerPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
   value: {
     sender: string;
@@ -56,7 +56,7 @@ export const AminoConverter = {
       poolParams,
       poolAssets,
       futurePoolGovernor
-    }: MsgCreateBalancerPool): AminoMsgCreateBalancerPool["value"] => {
+    }: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoType["value"] => {
       return {
         sender,
         pool_params: {
@@ -96,7 +96,7 @@ export const AminoConverter = {
       pool_params,
       pool_assets,
       future_pool_governor
-    }: AminoMsgCreateBalancerPool["value"]): MsgCreateBalancerPool => {
+    }: MsgCreateBalancerPoolAminoType["value"]): MsgCreateBalancerPool => {
       return {
         sender,
         poolParams: {

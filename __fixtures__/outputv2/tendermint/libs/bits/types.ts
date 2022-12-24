@@ -5,9 +5,17 @@ export interface BitArray {
   bits: Long;
   elems: Long[];
 }
+export interface BitArrayProtoType {
+  typeUrl: "/tendermint.libs.bits.BitArray";
+  value: Uint8Array;
+}
 export interface BitArrayAmino {
   bits: string;
   elems: string[];
+}
+export interface BitArrayAminoType {
+  type: "/tendermint.libs.bits.BitArray";
+  value: BitArrayAmino;
 }
 export interface BitArraySDKType {
   bits: Long;

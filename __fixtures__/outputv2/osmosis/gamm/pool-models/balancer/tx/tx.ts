@@ -10,6 +10,10 @@ export interface MsgCreateBalancerPool {
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
+export interface MsgCreateBalancerPoolProtoType {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
+  value: Uint8Array;
+}
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolAmino {
@@ -17,6 +21,10 @@ export interface MsgCreateBalancerPoolAmino {
   pool_params?: PoolParamsAmino;
   pool_assets: PoolAssetAmino[];
   future_pool_governor: string;
+}
+export interface MsgCreateBalancerPoolAminoType {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
+  value: MsgCreateBalancerPoolAmino;
 }
 
 /** ===================== MsgCreatePool */
@@ -31,10 +39,18 @@ export interface MsgCreateBalancerPoolSDKType {
 export interface MsgCreateBalancerPoolResponse {
   poolId: Long;
 }
+export interface MsgCreateBalancerPoolResponseProtoType {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
+  value: Uint8Array;
+}
 
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseAmino {
   pool_id: string;
+}
+export interface MsgCreateBalancerPoolResponseAminoType {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
+  value: MsgCreateBalancerPoolResponseAmino;
 }
 
 /** Returns the poolID */

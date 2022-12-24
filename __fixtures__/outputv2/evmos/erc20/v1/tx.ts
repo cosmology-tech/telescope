@@ -17,6 +17,10 @@ export interface MsgConvertCoin {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
+export interface MsgConvertCoinProtoType {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
+  value: Uint8Array;
+}
 
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinAmino {
@@ -32,6 +36,10 @@ export interface MsgConvertCoinAmino {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
+export interface MsgConvertCoinAminoType {
+  type: "/evmos.erc20.v1.MsgConvertCoin";
+  value: MsgConvertCoinAmino;
+}
 
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinSDKType {
@@ -42,9 +50,17 @@ export interface MsgConvertCoinSDKType {
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponse {}
+export interface MsgConvertCoinResponseProtoType {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
+  value: Uint8Array;
+}
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseAmino {}
+export interface MsgConvertCoinResponseAminoType {
+  type: "/evmos.erc20.v1.MsgConvertCoinResponse";
+  value: MsgConvertCoinResponseAmino;
+}
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseSDKType {}
@@ -66,6 +82,10 @@ export interface MsgConvertERC20 {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
+export interface MsgConvertERC20ProtoType {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
+  value: Uint8Array;
+}
 
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
@@ -84,6 +104,10 @@ export interface MsgConvertERC20Amino {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
+export interface MsgConvertERC20AminoType {
+  type: "/evmos.erc20.v1.MsgConvertERC20";
+  value: MsgConvertERC20Amino;
+}
 
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
@@ -98,9 +122,17 @@ export interface MsgConvertERC20SDKType {
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20Response {}
+export interface MsgConvertERC20ResponseProtoType {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
+  value: Uint8Array;
+}
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseAmino {}
+export interface MsgConvertERC20ResponseAminoType {
+  type: "/evmos.erc20.v1.MsgConvertERC20Response";
+  value: MsgConvertERC20ResponseAmino;
+}
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseSDKType {}

@@ -6,7 +6,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../helpers";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeSDKType } from "./tx";
-export interface AminoMsgCreateGauge extends AminoMsg {
+export interface MsgCreateGaugeAminoType extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {
     is_perpetual: boolean;
@@ -34,7 +34,7 @@ export interface AminoMsgCreateGauge extends AminoMsg {
     num_epochs_paid_over: string;
   };
 }
-export interface AminoMsgAddToGauge extends AminoMsg {
+export interface MsgAddToGaugeAminoType extends AminoMsg {
   type: "osmosis/incentives/add-to-gauge";
   value: {
     owner: string;
@@ -55,7 +55,7 @@ export const AminoConverter = {
       coins,
       startTime,
       numEpochsPaidOver
-    }: MsgCreateGauge): AminoMsgCreateGauge["value"] => {
+    }: MsgCreateGauge): MsgCreateGaugeAminoType["value"] => {
       return {
         is_perpetual: isPerpetual,
         owner,
@@ -80,7 +80,7 @@ export const AminoConverter = {
       coins,
       start_time,
       num_epochs_paid_over
-    }: AminoMsgCreateGauge["value"]): MsgCreateGauge => {
+    }: MsgCreateGaugeAminoType["value"]): MsgCreateGauge => {
       return {
         isPerpetual: is_perpetual,
         owner,
@@ -108,7 +108,7 @@ export const AminoConverter = {
       owner,
       gaugeId,
       rewards
-    }: MsgAddToGauge): AminoMsgAddToGauge["value"] => {
+    }: MsgAddToGauge): MsgAddToGaugeAminoType["value"] => {
       return {
         owner,
         gauge_id: gaugeId.toString(),
@@ -122,7 +122,7 @@ export const AminoConverter = {
       owner,
       gauge_id,
       rewards
-    }: AminoMsgAddToGauge["value"]): MsgAddToGauge => {
+    }: MsgAddToGaugeAminoType["value"]): MsgAddToGauge => {
       return {
         owner,
         gaugeId: Long.fromString(gauge_id),

@@ -13,6 +13,10 @@ export interface MsgJoinPool {
   shareOutAmount: string;
   tokenInMaxs: Coin[];
 }
+export interface MsgJoinPoolProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool";
+  value: Uint8Array;
+}
 
 /**
  * ===================== MsgJoinPool
@@ -23,6 +27,10 @@ export interface MsgJoinPoolAmino {
   pool_id: string;
   share_out_amount: string;
   token_in_maxs: CoinAmino[];
+}
+export interface MsgJoinPoolAminoType {
+  type: "osmosis/gamm/join-pool";
+  value: MsgJoinPoolAmino;
 }
 
 /**
@@ -39,9 +47,17 @@ export interface MsgJoinPoolResponse {
   shareOutAmount: string;
   tokenIn: Coin[];
 }
+export interface MsgJoinPoolResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse";
+  value: Uint8Array;
+}
 export interface MsgJoinPoolResponseAmino {
   share_out_amount: string;
   token_in: CoinAmino[];
+}
+export interface MsgJoinPoolResponseAminoType {
+  type: "osmosis/gamm/join-pool-response";
+  value: MsgJoinPoolResponseAmino;
 }
 export interface MsgJoinPoolResponseSDKType {
   share_out_amount: string;
@@ -55,6 +71,10 @@ export interface MsgExitPool {
   shareInAmount: string;
   tokenOutMins: Coin[];
 }
+export interface MsgExitPoolProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool";
+  value: Uint8Array;
+}
 
 /** ===================== MsgExitPool */
 export interface MsgExitPoolAmino {
@@ -62,6 +82,10 @@ export interface MsgExitPoolAmino {
   pool_id: string;
   share_in_amount: string;
   token_out_mins: CoinAmino[];
+}
+export interface MsgExitPoolAminoType {
+  type: "osmosis/gamm/exit-pool";
+  value: MsgExitPoolAmino;
 }
 
 /** ===================== MsgExitPool */
@@ -74,8 +98,16 @@ export interface MsgExitPoolSDKType {
 export interface MsgExitPoolResponse {
   tokenOut: Coin[];
 }
+export interface MsgExitPoolResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitPoolResponse";
+  value: Uint8Array;
+}
 export interface MsgExitPoolResponseAmino {
   token_out: CoinAmino[];
+}
+export interface MsgExitPoolResponseAminoType {
+  type: "osmosis/gamm/exit-pool-response";
+  value: MsgExitPoolResponseAmino;
 }
 export interface MsgExitPoolResponseSDKType {
   token_out: CoinSDKType[];
@@ -86,11 +118,19 @@ export interface SwapAmountInRoute {
   poolId: Long;
   tokenOutDenom: string;
 }
+export interface SwapAmountInRouteProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute";
+  value: Uint8Array;
+}
 
 /** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRouteAmino {
   pool_id: string;
   token_out_denom: string;
+}
+export interface SwapAmountInRouteAminoType {
+  type: "osmosis/gamm/swap-amount-in-route";
+  value: SwapAmountInRouteAmino;
 }
 
 /** ===================== MsgSwapExactAmountIn */
@@ -104,11 +144,19 @@ export interface MsgSwapExactAmountIn {
   tokenIn?: Coin;
   tokenOutMinAmount: string;
 }
+export interface MsgSwapExactAmountInProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn";
+  value: Uint8Array;
+}
 export interface MsgSwapExactAmountInAmino {
   sender: string;
   routes: SwapAmountInRouteAmino[];
   token_in?: CoinAmino;
   token_out_min_amount: string;
+}
+export interface MsgSwapExactAmountInAminoType {
+  type: "osmosis/gamm/swap-exact-amount-in";
+  value: MsgSwapExactAmountInAmino;
 }
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
@@ -119,8 +167,16 @@ export interface MsgSwapExactAmountInSDKType {
 export interface MsgSwapExactAmountInResponse {
   tokenOutAmount: string;
 }
+export interface MsgSwapExactAmountInResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse";
+  value: Uint8Array;
+}
 export interface MsgSwapExactAmountInResponseAmino {
   token_out_amount: string;
+}
+export interface MsgSwapExactAmountInResponseAminoType {
+  type: "osmosis/gamm/swap-exact-amount-in-response";
+  value: MsgSwapExactAmountInResponseAmino;
 }
 export interface MsgSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -131,11 +187,19 @@ export interface SwapAmountOutRoute {
   poolId: Long;
   tokenInDenom: string;
 }
+export interface SwapAmountOutRouteProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute";
+  value: Uint8Array;
+}
 
 /** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRouteAmino {
   pool_id: string;
   token_in_denom: string;
+}
+export interface SwapAmountOutRouteAminoType {
+  type: "osmosis/gamm/swap-amount-out-route";
+  value: SwapAmountOutRouteAmino;
 }
 
 /** ===================== MsgSwapExactAmountOut */
@@ -149,11 +213,19 @@ export interface MsgSwapExactAmountOut {
   tokenInMaxAmount: string;
   tokenOut?: Coin;
 }
+export interface MsgSwapExactAmountOutProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut";
+  value: Uint8Array;
+}
 export interface MsgSwapExactAmountOutAmino {
   sender: string;
   routes: SwapAmountOutRouteAmino[];
   token_in_max_amount: string;
   token_out?: CoinAmino;
+}
+export interface MsgSwapExactAmountOutAminoType {
+  type: "osmosis/gamm/swap-exact-amount-out";
+  value: MsgSwapExactAmountOutAmino;
 }
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
@@ -164,8 +236,16 @@ export interface MsgSwapExactAmountOutSDKType {
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;
 }
+export interface MsgSwapExactAmountOutResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse";
+  value: Uint8Array;
+}
 export interface MsgSwapExactAmountOutResponseAmino {
   token_in_amount: string;
+}
+export interface MsgSwapExactAmountOutResponseAminoType {
+  type: "osmosis/gamm/swap-exact-amount-out-response";
+  value: MsgSwapExactAmountOutResponseAmino;
 }
 export interface MsgSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
@@ -181,6 +261,10 @@ export interface MsgJoinSwapExternAmountIn {
   tokenIn?: Coin;
   shareOutMinAmount: string;
 }
+export interface MsgJoinSwapExternAmountInProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn";
+  value: Uint8Array;
+}
 
 /**
  * ===================== MsgJoinSwapExternAmountIn
@@ -191,6 +275,10 @@ export interface MsgJoinSwapExternAmountInAmino {
   pool_id: string;
   token_in?: CoinAmino;
   share_out_min_amount: string;
+}
+export interface MsgJoinSwapExternAmountInAminoType {
+  type: "osmosis/gamm/join-swap-extern-amount-in";
+  value: MsgJoinSwapExternAmountInAmino;
 }
 
 /**
@@ -206,8 +294,16 @@ export interface MsgJoinSwapExternAmountInSDKType {
 export interface MsgJoinSwapExternAmountInResponse {
   shareOutAmount: string;
 }
+export interface MsgJoinSwapExternAmountInResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse";
+  value: Uint8Array;
+}
 export interface MsgJoinSwapExternAmountInResponseAmino {
   share_out_amount: string;
+}
+export interface MsgJoinSwapExternAmountInResponseAminoType {
+  type: "osmosis/gamm/join-swap-extern-amount-in-response";
+  value: MsgJoinSwapExternAmountInResponseAmino;
 }
 export interface MsgJoinSwapExternAmountInResponseSDKType {
   share_out_amount: string;
@@ -221,6 +317,10 @@ export interface MsgJoinSwapShareAmountOut {
   shareOutAmount: string;
   tokenInMaxAmount: string;
 }
+export interface MsgJoinSwapShareAmountOutProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut";
+  value: Uint8Array;
+}
 
 /** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOutAmino {
@@ -229,6 +329,10 @@ export interface MsgJoinSwapShareAmountOutAmino {
   token_in_denom: string;
   share_out_amount: string;
   token_in_max_amount: string;
+}
+export interface MsgJoinSwapShareAmountOutAminoType {
+  type: "osmosis/gamm/join-swap-share-amount-out";
+  value: MsgJoinSwapShareAmountOutAmino;
 }
 
 /** ===================== MsgJoinSwapShareAmountOut */
@@ -242,8 +346,16 @@ export interface MsgJoinSwapShareAmountOutSDKType {
 export interface MsgJoinSwapShareAmountOutResponse {
   tokenInAmount: string;
 }
+export interface MsgJoinSwapShareAmountOutResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse";
+  value: Uint8Array;
+}
 export interface MsgJoinSwapShareAmountOutResponseAmino {
   token_in_amount: string;
+}
+export interface MsgJoinSwapShareAmountOutResponseAminoType {
+  type: "osmosis/gamm/join-swap-share-amount-out-response";
+  value: MsgJoinSwapShareAmountOutResponseAmino;
 }
 export interface MsgJoinSwapShareAmountOutResponseSDKType {
   token_in_amount: string;
@@ -257,6 +369,10 @@ export interface MsgExitSwapShareAmountIn {
   shareInAmount: string;
   tokenOutMinAmount: string;
 }
+export interface MsgExitSwapShareAmountInProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn";
+  value: Uint8Array;
+}
 
 /** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountInAmino {
@@ -265,6 +381,10 @@ export interface MsgExitSwapShareAmountInAmino {
   token_out_denom: string;
   share_in_amount: string;
   token_out_min_amount: string;
+}
+export interface MsgExitSwapShareAmountInAminoType {
+  type: "osmosis/gamm/exit-swap-share-amount-in";
+  value: MsgExitSwapShareAmountInAmino;
 }
 
 /** ===================== MsgExitSwapShareAmountIn */
@@ -278,8 +398,16 @@ export interface MsgExitSwapShareAmountInSDKType {
 export interface MsgExitSwapShareAmountInResponse {
   tokenOutAmount: string;
 }
+export interface MsgExitSwapShareAmountInResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse";
+  value: Uint8Array;
+}
 export interface MsgExitSwapShareAmountInResponseAmino {
   token_out_amount: string;
+}
+export interface MsgExitSwapShareAmountInResponseAminoType {
+  type: "osmosis/gamm/exit-swap-share-amount-in-response";
+  value: MsgExitSwapShareAmountInResponseAmino;
 }
 export interface MsgExitSwapShareAmountInResponseSDKType {
   token_out_amount: string;
@@ -292,6 +420,10 @@ export interface MsgExitSwapExternAmountOut {
   tokenOut?: Coin;
   shareInMaxAmount: string;
 }
+export interface MsgExitSwapExternAmountOutProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut";
+  value: Uint8Array;
+}
 
 /** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOutAmino {
@@ -299,6 +431,10 @@ export interface MsgExitSwapExternAmountOutAmino {
   pool_id: string;
   token_out?: CoinAmino;
   share_in_max_amount: string;
+}
+export interface MsgExitSwapExternAmountOutAminoType {
+  type: "osmosis/gamm/exit-swap-extern-amount-out";
+  value: MsgExitSwapExternAmountOutAmino;
 }
 
 /** ===================== MsgExitSwapExternAmountOut */
@@ -311,8 +447,16 @@ export interface MsgExitSwapExternAmountOutSDKType {
 export interface MsgExitSwapExternAmountOutResponse {
   shareInAmount: string;
 }
+export interface MsgExitSwapExternAmountOutResponseProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse";
+  value: Uint8Array;
+}
 export interface MsgExitSwapExternAmountOutResponseAmino {
   share_in_amount: string;
+}
+export interface MsgExitSwapExternAmountOutResponseAminoType {
+  type: "osmosis/gamm/exit-swap-extern-amount-out-response";
+  value: MsgExitSwapExternAmountOutResponseAmino;
 }
 export interface MsgExitSwapExternAmountOutResponseSDKType {
   share_in_amount: string;

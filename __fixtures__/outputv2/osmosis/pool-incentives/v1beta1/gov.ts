@@ -17,6 +17,10 @@ export interface ReplacePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
+export interface ReplacePoolIncentivesProposalProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
+  value: Uint8Array;
+}
 
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -31,6 +35,10 @@ export interface ReplacePoolIncentivesProposalAmino {
   title: string;
   description: string;
   records: DistrRecordAmino[];
+}
+export interface ReplacePoolIncentivesProposalAminoType {
+  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
+  value: ReplacePoolIncentivesProposalAmino;
 }
 
 /**
@@ -62,6 +70,10 @@ export interface UpdatePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
+export interface UpdatePoolIncentivesProposalProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
+  value: Uint8Array;
+}
 
 /**
  * For example: if the existing DistrRecords were:
@@ -76,6 +88,10 @@ export interface UpdatePoolIncentivesProposalAmino {
   title: string;
   description: string;
   records: DistrRecordAmino[];
+}
+export interface UpdatePoolIncentivesProposalAminoType {
+  type: "osmosis/poolincentives/update-pool-incentives-proposal";
+  value: UpdatePoolIncentivesProposalAmino;
 }
 
 /**

@@ -58,11 +58,19 @@ export interface Endpoint {
   kind: Endpoint_Kind;
   sequenceNumber: number;
 }
+export interface EndpointProtoType {
+  typeUrl: "/akash.base.v1beta2.Endpoint";
+  value: Uint8Array;
+}
 
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
   kind: Endpoint_Kind;
   sequence_number: number;
+}
+export interface EndpointAminoType {
+  type: "/akash.base.v1beta2.Endpoint";
+  value: EndpointAmino;
 }
 
 /** Endpoint describes a publicly accessible IP service */

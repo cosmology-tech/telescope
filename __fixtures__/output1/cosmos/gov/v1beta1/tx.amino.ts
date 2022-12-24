@@ -4,7 +4,7 @@ import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSD
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
-export interface AminoMsgSubmitProposal extends AminoMsg {
+export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: {
     content: {
@@ -18,7 +18,7 @@ export interface AminoMsgSubmitProposal extends AminoMsg {
     proposer: string;
   };
 }
-export interface AminoMsgVote extends AminoMsg {
+export interface MsgVoteAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgVote";
   value: {
     proposal_id: string;
@@ -26,7 +26,7 @@ export interface AminoMsgVote extends AminoMsg {
     option: number;
   };
 }
-export interface AminoMsgVoteWeighted extends AminoMsg {
+export interface MsgVoteWeightedAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgVoteWeighted";
   value: {
     proposal_id: string;
@@ -37,7 +37,7 @@ export interface AminoMsgVoteWeighted extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgDeposit extends AminoMsg {
+export interface MsgDepositAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgDeposit";
   value: {
     proposal_id: string;
@@ -55,7 +55,7 @@ export const AminoConverter = {
       content,
       initialDeposit,
       proposer
-    }: MsgSubmitProposal): AminoMsgSubmitProposal["value"] => {
+    }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         content: {
           type_url: content.typeUrl,
@@ -72,7 +72,7 @@ export const AminoConverter = {
       content,
       initial_deposit,
       proposer
-    }: AminoMsgSubmitProposal["value"]): MsgSubmitProposal => {
+    }: MsgSubmitProposalAminoType["value"]): MsgSubmitProposal => {
       return {
         content: {
           typeUrl: content.type_url,
@@ -92,7 +92,7 @@ export const AminoConverter = {
       proposalId,
       voter,
       option
-    }: MsgVote): AminoMsgVote["value"] => {
+    }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
         voter,
@@ -103,7 +103,7 @@ export const AminoConverter = {
       proposal_id,
       voter,
       option
-    }: AminoMsgVote["value"]): MsgVote => {
+    }: MsgVoteAminoType["value"]): MsgVote => {
       return {
         proposalId: Long.fromString(proposal_id),
         voter,
@@ -117,7 +117,7 @@ export const AminoConverter = {
       proposalId,
       voter,
       options
-    }: MsgVoteWeighted): AminoMsgVoteWeighted["value"] => {
+    }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
         voter,
@@ -131,7 +131,7 @@ export const AminoConverter = {
       proposal_id,
       voter,
       options
-    }: AminoMsgVoteWeighted["value"]): MsgVoteWeighted => {
+    }: MsgVoteWeightedAminoType["value"]): MsgVoteWeighted => {
       return {
         proposalId: Long.fromString(proposal_id),
         voter,
@@ -148,7 +148,7 @@ export const AminoConverter = {
       proposalId,
       depositor,
       amount
-    }: MsgDeposit): AminoMsgDeposit["value"] => {
+    }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
         depositor,
@@ -162,7 +162,7 @@ export const AminoConverter = {
       proposal_id,
       depositor,
       amount
-    }: AminoMsgDeposit["value"]): MsgDeposit => {
+    }: MsgDepositAminoType["value"]): MsgDeposit => {
       return {
         proposalId: Long.fromString(proposal_id),
         depositor,

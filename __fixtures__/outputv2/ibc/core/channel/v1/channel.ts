@@ -161,6 +161,10 @@ export interface Channel {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+export interface ChannelProtoType {
+  typeUrl: "/ibc.core.channel.v1.Channel";
+  value: Uint8Array;
+}
 
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
@@ -185,6 +189,10 @@ export interface ChannelAmino {
 
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
+}
+export interface ChannelAminoType {
+  type: "cosmos-sdk/Channel";
+  value: ChannelAmino;
 }
 
 /**
@@ -229,6 +237,10 @@ export interface IdentifiedChannel {
   /** channel identifier */
   channelId: string;
 }
+export interface IdentifiedChannelProtoType {
+  typeUrl: "/ibc.core.channel.v1.IdentifiedChannel";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -259,6 +271,10 @@ export interface IdentifiedChannelAmino {
   /** channel identifier */
   channel_id: string;
 }
+export interface IdentifiedChannelAminoType {
+  type: "cosmos-sdk/IdentifiedChannel";
+  value: IdentifiedChannelAmino;
+}
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -282,6 +298,10 @@ export interface Counterparty {
   /** channel end on the counterparty chain */
   channelId: string;
 }
+export interface CounterpartyProtoType {
+  typeUrl: "/ibc.core.channel.v1.Counterparty";
+  value: Uint8Array;
+}
 
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartyAmino {
@@ -290,6 +310,10 @@ export interface CounterpartyAmino {
 
   /** channel end on the counterparty chain */
   channel_id: string;
+}
+export interface CounterpartyAminoType {
+  type: "cosmos-sdk/Counterparty";
+  value: CounterpartyAmino;
 }
 
 /** Counterparty defines a channel end counterparty */
@@ -328,6 +352,10 @@ export interface Packet {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
 }
+export interface PacketProtoType {
+  typeUrl: "/ibc.core.channel.v1.Packet";
+  value: Uint8Array;
+}
 
 /** Packet defines a type that carries data across different chains through IBC */
 export interface PacketAmino {
@@ -358,6 +386,10 @@ export interface PacketAmino {
 
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeout_timestamp: string;
+}
+export interface PacketAminoType {
+  type: "cosmos-sdk/Packet";
+  value: PacketAmino;
 }
 
 /** Packet defines a type that carries data across different chains through IBC */
@@ -391,6 +423,10 @@ export interface PacketState {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+export interface PacketStateProtoType {
+  typeUrl: "/ibc.core.channel.v1.PacketState";
+  value: Uint8Array;
+}
 
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -410,6 +446,10 @@ export interface PacketStateAmino {
 
   /** embedded data that represents packet state. */
   data: Uint8Array;
+}
+export interface PacketStateAminoType {
+  type: "cosmos-sdk/PacketState";
+  value: PacketStateAmino;
 }
 
 /**
@@ -438,6 +478,10 @@ export interface Acknowledgement {
   result?: Uint8Array;
   error?: string;
 }
+export interface AcknowledgementProtoType {
+  typeUrl: "/ibc.core.channel.v1.Acknowledgement";
+  value: Uint8Array;
+}
 
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
@@ -451,6 +495,10 @@ export interface Acknowledgement {
 export interface AcknowledgementAmino {
   result?: Uint8Array;
   error?: string;
+}
+export interface AcknowledgementAminoType {
+  type: "cosmos-sdk/Acknowledgement";
+  value: AcknowledgementAmino;
 }
 
 /**

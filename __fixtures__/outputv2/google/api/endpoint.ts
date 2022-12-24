@@ -56,6 +56,10 @@ export interface Endpoint {
    */
   allowCors: boolean;
 }
+export interface EndpointProtoType {
+  typeUrl: "/google.api.Endpoint";
+  value: Uint8Array;
+}
 
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -110,6 +114,10 @@ export interface EndpointAmino {
    * allowed to proceed.
    */
   allow_cors: boolean;
+}
+export interface EndpointAminoType {
+  type: "/google.api.Endpoint";
+  value: EndpointAmino;
 }
 
 /**

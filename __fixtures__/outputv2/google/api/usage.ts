@@ -36,6 +36,10 @@ export interface Usage {
    */
   producerNotificationChannel: string;
 }
+export interface UsageProtoType {
+  typeUrl: "/google.api.Usage";
+  value: Uint8Array;
+}
 
 /** Configuration controlling usage of a service. */
 export interface UsageAmino {
@@ -70,6 +74,10 @@ export interface UsageAmino {
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
   producer_notification_channel: string;
+}
+export interface UsageAminoType {
+  type: "/google.api.Usage";
+  value: UsageAmino;
 }
 
 /** Configuration controlling usage of a service. */
@@ -129,6 +137,10 @@ export interface UsageRule {
    */
   skipServiceControl: boolean;
 }
+export interface UsageRuleProtoType {
+  typeUrl: "/google.api.UsageRule";
+  value: Uint8Array;
+}
 
 /**
  * Usage configuration rules for the service.
@@ -179,6 +191,10 @@ export interface UsageRuleAmino {
    * methods, such as service health check methods.
    */
   skip_service_control: boolean;
+}
+export interface UsageRuleAminoType {
+  type: "/google.api.UsageRule";
+  value: UsageRuleAmino;
 }
 
 /**

@@ -19,6 +19,10 @@ export interface Params {
    */
   variance: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
@@ -36,6 +40,10 @@ export interface ParamsAmino {
    * It is a decimal value in the range [0.0, 1.0].
    */
   variance: string;
+}
+export interface ParamsAminoType {
+  type: "/akash.inflation.v1beta2.Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the parameters for the x/deployment package */

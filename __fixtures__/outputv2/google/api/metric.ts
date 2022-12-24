@@ -348,6 +348,10 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
+export interface MetricDescriptorProtoType {
+  typeUrl: "/google.api.MetricDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -524,6 +528,10 @@ export interface MetricDescriptorAmino {
    */
   monitored_resource_types: string[];
 }
+export interface MetricDescriptorAminoType {
+  type: "/google.api.MetricDescriptor";
+  value: MetricDescriptorAmino;
+}
 
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -566,6 +574,10 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataProtoType {
+  typeUrl: "/google.api.MetricDescriptorMetadata";
+  value: Uint8Array;
+}
 
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
@@ -589,6 +601,10 @@ export interface MetricDescriptor_MetricDescriptorMetadataAmino {
    */
   ingest_delay?: DurationAmino;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataAminoType {
+  type: "/google.api.MetricDescriptorMetadata";
+  value: MetricDescriptor_MetricDescriptorMetadataAmino;
+}
 
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
@@ -601,9 +617,17 @@ export interface Metric_LabelsEntry {
   key: string;
   value: string;
 }
+export interface Metric_LabelsEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface Metric_LabelsEntryAminoType {
+  type: "/google.api.undefined";
+  value: Metric_LabelsEntryAmino;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -629,6 +653,10 @@ export interface Metric {
     [key: string]: string;
   };
 }
+export interface MetricProtoType {
+  typeUrl: "/google.api.Metric";
+  value: Uint8Array;
+}
 
 /**
  * A specific metric, identified by specifying values for all of the
@@ -648,6 +676,10 @@ export interface MetricAmino {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricAminoType {
+  type: "/google.api.Metric";
+  value: MetricAmino;
 }
 
 /**

@@ -37,6 +37,10 @@ export interface MsgTransfer {
    */
   timeoutTimestamp: Long;
 }
+export interface MsgTransferProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransfer";
+  value: Uint8Array;
+}
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -71,6 +75,10 @@ export interface MsgTransferAmino {
    */
   timeout_timestamp: string;
 }
+export interface MsgTransferAminoType {
+  type: "cosmos-sdk/MsgTransfer";
+  value: MsgTransferAmino;
+}
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -89,9 +97,17 @@ export interface MsgTransferSDKType {
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
+export interface MsgTransferResponseProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse";
+  value: Uint8Array;
+}
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseAmino {}
+export interface MsgTransferResponseAminoType {
+  type: "cosmos-sdk/MsgTransferResponse";
+  value: MsgTransferResponseAmino;
+}
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseSDKType {}

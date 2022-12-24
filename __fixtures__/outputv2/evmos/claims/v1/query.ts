@@ -11,12 +11,20 @@ export const protobufPackage = "evmos.claims.v1";
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequest {}
+export interface QueryTotalUnclaimedRequestProtoType {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequestAmino {}
+export interface QueryTotalUnclaimedRequestAminoType {
+  type: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
+  value: QueryTotalUnclaimedRequestAmino;
+}
 
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -32,6 +40,10 @@ export interface QueryTotalUnclaimedResponse {
   /** coins defines the unclaimed coins */
   coins: Coin[];
 }
+export interface QueryTotalUnclaimedResponseProtoType {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
@@ -40,6 +52,10 @@ export interface QueryTotalUnclaimedResponse {
 export interface QueryTotalUnclaimedResponseAmino {
   /** coins defines the unclaimed coins */
   coins: CoinAmino[];
+}
+export interface QueryTotalUnclaimedResponseAminoType {
+  type: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
+  value: QueryTotalUnclaimedResponseAmino;
 }
 
 /**
@@ -52,9 +68,17 @@ export interface QueryTotalUnclaimedResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/evmos.claims.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "/evmos.claims.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -64,11 +88,19 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/evmos.claims.v1.QueryParamsResponse";
+  value: Uint8Array;
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "/evmos.claims.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -84,6 +116,10 @@ export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryClaimsRecordsRequestProtoType {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
@@ -92,6 +128,10 @@ export interface QueryClaimsRecordsRequest {
 export interface QueryClaimsRecordsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryClaimsRecordsRequestAminoType {
+  type: "/evmos.claims.v1.QueryClaimsRecordsRequest";
+  value: QueryClaimsRecordsRequestAmino;
 }
 
 /**
@@ -113,6 +153,10 @@ export interface QueryClaimsRecordsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryClaimsRecordsResponseProtoType {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -124,6 +168,10 @@ export interface QueryClaimsRecordsResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryClaimsRecordsResponseAminoType {
+  type: "/evmos.claims.v1.QueryClaimsRecordsResponse";
+  value: QueryClaimsRecordsResponseAmino;
 }
 
 /**
@@ -143,6 +191,10 @@ export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
   address: string;
 }
+export interface QueryClaimsRecordRequestProtoType {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -151,6 +203,10 @@ export interface QueryClaimsRecordRequest {
 export interface QueryClaimsRecordRequestAmino {
   /** address defines the user to query claims record for */
   address: string;
+}
+export interface QueryClaimsRecordRequestAminoType {
+  type: "/evmos.claims.v1.QueryClaimsRecordRequest";
+  value: QueryClaimsRecordRequestAmino;
 }
 
 /**
@@ -172,6 +228,10 @@ export interface QueryClaimsRecordResponse {
   /** the claims of the user */
   claims: Claim[];
 }
+export interface QueryClaimsRecordResponseProtoType {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
@@ -183,6 +243,10 @@ export interface QueryClaimsRecordResponseAmino {
 
   /** the claims of the user */
   claims: ClaimAmino[];
+}
+export interface QueryClaimsRecordResponseAminoType {
+  type: "/evmos.claims.v1.QueryClaimsRecordResponse";
+  value: QueryClaimsRecordResponseAmino;
 }
 
 /**

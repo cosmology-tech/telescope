@@ -77,6 +77,10 @@ export interface Monitoring {
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
+export interface MonitoringProtoType {
+  typeUrl: "/google.api.Monitoring";
+  value: Uint8Array;
+}
 
 /**
  * Monitoring configuration of the service.
@@ -152,6 +156,10 @@ export interface MonitoringAmino {
    * in the Monitoring configuration.
    */
   consumer_destinations: Monitoring_MonitoringDestinationAmino[];
+}
+export interface MonitoringAminoType {
+  type: "/google.api.Monitoring";
+  value: MonitoringAmino;
 }
 
 /**
@@ -230,6 +238,10 @@ export interface Monitoring_MonitoringDestination {
    */
   metrics: string[];
 }
+export interface Monitoring_MonitoringDestinationProtoType {
+  typeUrl: "/google.api.MonitoringDestination";
+  value: Uint8Array;
+}
 
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -247,6 +259,10 @@ export interface Monitoring_MonitoringDestinationAmino {
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Monitoring_MonitoringDestinationAminoType {
+  type: "/google.api.MonitoringDestination";
+  value: Monitoring_MonitoringDestinationAmino;
 }
 
 /**

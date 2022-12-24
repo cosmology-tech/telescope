@@ -50,6 +50,10 @@ export interface Logging {
    */
   consumerDestinations: Logging_LoggingDestination[];
 }
+export interface LoggingProtoType {
+  typeUrl: "/google.api.Logging";
+  value: Uint8Array;
+}
 
 /**
  * Logging configuration of the service.
@@ -98,6 +102,10 @@ export interface LoggingAmino {
    * one consumer destination.
    */
   consumer_destinations: Logging_LoggingDestinationAmino[];
+}
+export interface LoggingAminoType {
+  type: "/google.api.Logging";
+  value: LoggingAmino;
 }
 
 /**
@@ -155,6 +163,10 @@ export interface Logging_LoggingDestination {
    */
   logs: string[];
 }
+export interface Logging_LoggingDestinationProtoType {
+  typeUrl: "/google.api.LoggingDestination";
+  value: Uint8Array;
+}
 
 /**
  * Configuration of a specific logging destination (the producer project
@@ -174,6 +186,10 @@ export interface Logging_LoggingDestinationAmino {
    * the service name followed by "/".
    */
   logs: string[];
+}
+export interface Logging_LoggingDestinationAminoType {
+  type: "/google.api.LoggingDestination";
+  value: Logging_LoggingDestinationAmino;
 }
 
 /**

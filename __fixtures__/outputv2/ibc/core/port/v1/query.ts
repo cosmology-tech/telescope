@@ -20,6 +20,10 @@ export interface QueryAppVersionRequest {
   /** proposed version */
   proposedVersion: string;
 }
+export interface QueryAppVersionRequestProtoType {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest";
+  value: Uint8Array;
+}
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestAmino {
@@ -37,6 +41,10 @@ export interface QueryAppVersionRequestAmino {
 
   /** proposed version */
   proposed_version: string;
+}
+export interface QueryAppVersionRequestAminoType {
+  type: "cosmos-sdk/QueryAppVersionRequest";
+  value: QueryAppVersionRequestAmino;
 }
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
@@ -56,6 +64,10 @@ export interface QueryAppVersionResponse {
   /** supported app version */
   version: string;
 }
+export interface QueryAppVersionResponseProtoType {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
+  value: Uint8Array;
+}
 
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseAmino {
@@ -64,6 +76,10 @@ export interface QueryAppVersionResponseAmino {
 
   /** supported app version */
   version: string;
+}
+export interface QueryAppVersionResponseAminoType {
+  type: "cosmos-sdk/QueryAppVersionResponse";
+  value: QueryAppVersionResponseAmino;
 }
 
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */

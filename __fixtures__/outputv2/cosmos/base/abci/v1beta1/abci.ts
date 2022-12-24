@@ -62,6 +62,10 @@ export interface TxResponse {
    */
   events: Event[];
 }
+export interface TxResponseProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxResponse";
+  value: Uint8Array;
+}
 
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -121,6 +125,10 @@ export interface TxResponseAmino {
    */
   events: EventAmino[];
 }
+export interface TxResponseAminoType {
+  type: "cosmos-sdk/TxResponse";
+  value: TxResponseAmino;
+}
 
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -153,6 +161,10 @@ export interface ABCIMessageLog {
    */
   events: StringEvent[];
 }
+export interface ABCIMessageLogProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.ABCIMessageLog";
+  value: Uint8Array;
+}
 
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogAmino {
@@ -164,6 +176,10 @@ export interface ABCIMessageLogAmino {
    * execution.
    */
   events: StringEventAmino[];
+}
+export interface ABCIMessageLogAminoType {
+  type: "cosmos-sdk/ABCIMessageLog";
+  value: ABCIMessageLogAmino;
 }
 
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
@@ -181,6 +197,10 @@ export interface StringEvent {
   type: string;
   attributes: Attribute[];
 }
+export interface StringEventProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.StringEvent";
+  value: Uint8Array;
+}
 
 /**
  * StringEvent defines en Event object wrapper where all the attributes
@@ -189,6 +209,10 @@ export interface StringEvent {
 export interface StringEventAmino {
   type: string;
   attributes: AttributeAmino[];
+}
+export interface StringEventAminoType {
+  type: "cosmos-sdk/StringEvent";
+  value: StringEventAmino;
 }
 
 /**
@@ -208,6 +232,10 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.Attribute";
+  value: Uint8Array;
+}
 
 /**
  * Attribute defines an attribute wrapper where the key and value are
@@ -216,6 +244,10 @@ export interface Attribute {
 export interface AttributeAmino {
   key: string;
   value: string;
+}
+export interface AttributeAminoType {
+  type: "cosmos-sdk/Attribute";
+  value: AttributeAmino;
 }
 
 /**
@@ -235,6 +267,10 @@ export interface GasInfo {
   /** GasUsed is the amount of gas actually consumed. */
   gasUsed: Long;
 }
+export interface GasInfoProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.GasInfo";
+  value: Uint8Array;
+}
 
 /** GasInfo defines tx execution gas context. */
 export interface GasInfoAmino {
@@ -243,6 +279,10 @@ export interface GasInfoAmino {
 
   /** GasUsed is the amount of gas actually consumed. */
   gas_used: string;
+}
+export interface GasInfoAminoType {
+  type: "cosmos-sdk/GasInfo";
+  value: GasInfoAmino;
 }
 
 /** GasInfo defines tx execution gas context. */
@@ -279,6 +319,10 @@ export interface Result {
    */
   msgResponses: Any[];
 }
+export interface ResultProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.Result";
+  value: Uint8Array;
+}
 
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultAmino {
@@ -308,6 +352,10 @@ export interface ResultAmino {
    */
   msg_responses: AnyAmino[];
 }
+export interface ResultAminoType {
+  type: "cosmos-sdk/Result";
+  value: ResultAmino;
+}
 
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
 export interface ResultSDKType {
@@ -326,6 +374,10 @@ export interface SimulationResponse {
   gasInfo?: GasInfo;
   result?: Result;
 }
+export interface SimulationResponseProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.SimulationResponse";
+  value: Uint8Array;
+}
 
 /**
  * SimulationResponse defines the response generated when a transaction is
@@ -334,6 +386,10 @@ export interface SimulationResponse {
 export interface SimulationResponseAmino {
   gas_info?: GasInfoAmino;
   result?: ResultAmino;
+}
+export interface SimulationResponseAminoType {
+  type: "cosmos-sdk/SimulationResponse";
+  value: SimulationResponseAmino;
 }
 
 /**
@@ -355,6 +411,10 @@ export interface MsgData {
   msgType: string;
   data: Uint8Array;
 }
+export interface MsgDataProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.MsgData";
+  value: Uint8Array;
+}
 
 /**
  * MsgData defines the data returned in a Result object during message
@@ -365,6 +425,10 @@ export interface MsgData {
 export interface MsgDataAmino {
   msg_type: string;
   data: Uint8Array;
+}
+export interface MsgDataAminoType {
+  type: "cosmos-sdk/MsgData";
+  value: MsgDataAmino;
 }
 
 /**
@@ -395,6 +459,10 @@ export interface TxMsgData {
    */
   msgResponses: Any[];
 }
+export interface TxMsgDataProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxMsgData";
+  value: Uint8Array;
+}
 
 /**
  * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
@@ -412,6 +480,10 @@ export interface TxMsgDataAmino {
    * Since: cosmos-sdk 0.46
    */
   msg_responses: AnyAmino[];
+}
+export interface TxMsgDataAminoType {
+  type: "cosmos-sdk/TxMsgData";
+  value: TxMsgDataAmino;
 }
 
 /**
@@ -444,6 +516,10 @@ export interface SearchTxsResult {
   /** List of txs in current page */
   txs: TxResponse[];
 }
+export interface SearchTxsResultProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.SearchTxsResult";
+  value: Uint8Array;
+}
 
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultAmino {
@@ -464,6 +540,10 @@ export interface SearchTxsResultAmino {
 
   /** List of txs in current page */
   txs: TxResponseAmino[];
+}
+export interface SearchTxsResultAminoType {
+  type: "cosmos-sdk/SearchTxsResult";
+  value: SearchTxsResultAmino;
 }
 
 /** SearchTxsResult defines a structure for querying txs pageable */

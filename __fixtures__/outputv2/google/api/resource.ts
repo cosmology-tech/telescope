@@ -251,6 +251,10 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorProtoType {
+  typeUrl: "/google.api.ResourceDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * A simple descriptor of a resource type.
@@ -390,6 +394,10 @@ export interface ResourceDescriptorAmino {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorAminoType {
+  type: "/google.api.ResourceDescriptor";
+  value: ResourceDescriptorAmino;
+}
 
 /**
  * A simple descriptor of a resource type.
@@ -494,6 +502,10 @@ export interface ResourceReference {
    */
   childType: string;
 }
+export interface ResourceReferenceProtoType {
+  typeUrl: "/google.api.ResourceReference";
+  value: Uint8Array;
+}
 
 /**
  * Defines a proto annotation that describes a string field that refers to
@@ -538,6 +550,10 @@ export interface ResourceReferenceAmino {
    *     }
    */
   child_type: string;
+}
+export interface ResourceReferenceAminoType {
+  type: "/google.api.ResourceReference";
+  value: ResourceReferenceAmino;
 }
 
 /**

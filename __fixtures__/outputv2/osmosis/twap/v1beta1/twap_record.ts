@@ -46,6 +46,10 @@ export interface TwapRecord {
    */
   lastErrorTime?: Date;
 }
+export interface TwapRecordProtoType {
+  typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
+  value: Uint8Array;
+}
 
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -89,6 +93,10 @@ export interface TwapRecordAmino {
    * TWAP, due to an unforeseen underlying error.
    */
   last_error_time?: Date;
+}
+export interface TwapRecordAminoType {
+  type: "osmosis/twap/twap-record";
+  value: TwapRecordAmino;
 }
 
 /**

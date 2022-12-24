@@ -47,6 +47,10 @@ export interface Value {
   /** A Type value represented by the fully qualified name of the type. */
   typeValue?: string;
 }
+export interface ValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Value";
+  value: Uint8Array;
+}
 
 /**
  * Represents a CEL value.
@@ -91,6 +95,10 @@ export interface ValueAmino {
   /** A Type value represented by the fully qualified name of the type. */
   type_value?: string;
 }
+export interface ValueAminoType {
+  type: "/google.api.expr.v1beta1.Value";
+  value: ValueAmino;
+}
 
 /**
  * Represents a CEL value.
@@ -121,6 +129,10 @@ export interface EnumValue {
   /** The value of the enum. */
   value: number;
 }
+export interface EnumValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.EnumValue";
+  value: Uint8Array;
+}
 
 /** An enum value. */
 export interface EnumValueAmino {
@@ -129,6 +141,10 @@ export interface EnumValueAmino {
 
   /** The value of the enum. */
   value: number;
+}
+export interface EnumValueAminoType {
+  type: "/google.api.expr.v1beta1.EnumValue";
+  value: EnumValueAmino;
 }
 
 /** An enum value. */
@@ -147,6 +163,10 @@ export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
 }
+export interface ListValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.ListValue";
+  value: Uint8Array;
+}
 
 /**
  * A list.
@@ -157,6 +177,10 @@ export interface ListValue {
 export interface ListValueAmino {
   /** The ordered values in the list. */
   values: ValueAmino[];
+}
+export interface ListValueAminoType {
+  type: "/google.api.expr.v1beta1.ListValue";
+  value: ListValueAmino;
 }
 
 /**
@@ -184,6 +208,10 @@ export interface MapValue {
    */
   entries: MapValue_Entry[];
 }
+export interface MapValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.MapValue";
+  value: Uint8Array;
+}
 
 /**
  * A map.
@@ -199,6 +227,10 @@ export interface MapValueAmino {
    * cannot be used.
    */
   entries: MapValue_EntryAmino[];
+}
+export interface MapValueAminoType {
+  type: "/google.api.expr.v1beta1.MapValue";
+  value: MapValueAmino;
 }
 
 /**
@@ -224,6 +256,10 @@ export interface MapValue_Entry {
   /** The value. */
   value?: Value;
 }
+export interface MapValue_EntryProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
+}
 
 /** An entry in the map. */
 export interface MapValue_EntryAmino {
@@ -237,6 +273,10 @@ export interface MapValue_EntryAmino {
 
   /** The value. */
   value?: ValueAmino;
+}
+export interface MapValue_EntryAminoType {
+  type: "/google.api.expr.v1beta1.Entry";
+  value: MapValue_EntryAmino;
 }
 
 /** An entry in the map. */

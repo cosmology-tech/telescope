@@ -13,6 +13,10 @@ export interface ParsedExpr {
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo?: SourceInfo;
 }
+export interface ParsedExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
+  value: Uint8Array;
+}
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprAmino {
@@ -21,6 +25,10 @@ export interface ParsedExprAmino {
 
   /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoAmino;
+}
+export interface ParsedExprAminoType {
+  type: "/google.api.expr.v1alpha1.ParsedExpr";
+  value: ParsedExprAmino;
 }
 
 /** An expression together with source information as returned by the parser. */
@@ -75,6 +83,10 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
+export interface ExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Expr";
+  value: Uint8Array;
+}
 
 /**
  * An abstract representation of a common expression.
@@ -122,6 +134,10 @@ export interface ExprAmino {
   /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionAmino;
 }
+export interface ExprAminoType {
+  type: "/google.api.expr.v1alpha1.Expr";
+  value: ExprAmino;
+}
 
 /**
  * An abstract representation of a common expression.
@@ -161,6 +177,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Ident";
+  value: Uint8Array;
+}
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentAmino {
@@ -171,6 +191,10 @@ export interface Expr_IdentAmino {
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
   name: string;
+}
+export interface Expr_IdentAminoType {
+  type: "/google.api.expr.v1alpha1.Ident";
+  value: Expr_IdentAmino;
 }
 
 /** An identifier expression. e.g. `request`. */
@@ -203,6 +227,10 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
+export interface Expr_SelectProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Select";
+  value: Uint8Array;
+}
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectAmino {
@@ -228,6 +256,10 @@ export interface Expr_SelectAmino {
    * This results from the macro `has(request.auth)`.
    */
   test_only: boolean;
+}
+export interface Expr_SelectAminoType {
+  type: "/google.api.expr.v1alpha1.Select";
+  value: Expr_SelectAmino;
 }
 
 /** A field selection expression. e.g. `request.auth`. */
@@ -255,6 +287,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Call";
+  value: Uint8Array;
+}
 
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -273,6 +309,10 @@ export interface Expr_CallAmino {
 
   /** The arguments. */
   args: ExprAmino[];
+}
+export interface Expr_CallAminoType {
+  type: "/google.api.expr.v1alpha1.Call";
+  value: Expr_CallAmino;
 }
 
 /**
@@ -296,6 +336,10 @@ export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
 }
+export interface Expr_CreateListProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CreateList";
+  value: Uint8Array;
+}
 
 /**
  * A list creation expression.
@@ -306,6 +350,10 @@ export interface Expr_CreateList {
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
   elements: ExprAmino[];
+}
+export interface Expr_CreateListAminoType {
+  type: "/google.api.expr.v1alpha1.CreateList";
+  value: Expr_CreateListAmino;
 }
 
 /**
@@ -335,6 +383,10 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
+export interface Expr_CreateStructProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
+  value: Uint8Array;
+}
 
 /**
  * A map or message creation expression.
@@ -352,6 +404,10 @@ export interface Expr_CreateStructAmino {
 
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntryAmino[];
+}
+export interface Expr_CreateStructAminoType {
+  type: "/google.api.expr.v1alpha1.CreateStruct";
+  value: Expr_CreateStructAmino;
 }
 
 /**
@@ -384,6 +440,10 @@ export interface Expr_CreateStruct_Entry {
   /** Required. The value assigned to the key. */
   value?: Expr;
 }
+export interface Expr_CreateStruct_EntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Entry";
+  value: Uint8Array;
+}
 
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntryAmino {
@@ -402,6 +462,10 @@ export interface Expr_CreateStruct_EntryAmino {
 
   /** Required. The value assigned to the key. */
   value?: ExprAmino;
+}
+export interface Expr_CreateStruct_EntryAminoType {
+  type: "/google.api.expr.v1alpha1.Entry";
+  value: Expr_CreateStruct_EntryAmino;
 }
 
 /** Represents an entry. */
@@ -475,6 +539,10 @@ export interface Expr_Comprehension {
    */
   result?: Expr;
 }
+export interface Expr_ComprehensionProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Comprehension";
+  value: Uint8Array;
+}
 
 /**
  * A comprehension expression applied to a list or map.
@@ -538,6 +606,10 @@ export interface Expr_ComprehensionAmino {
    * Computes the result.
    */
   result?: ExprAmino;
+}
+export interface Expr_ComprehensionAminoType {
+  type: "/google.api.expr.v1alpha1.Comprehension";
+  value: Expr_ComprehensionAmino;
 }
 
 /**
@@ -633,6 +705,10 @@ export interface Constant {
   /** @deprecated */
   timestampValue?: Date;
 }
+export interface ConstantProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Constant";
+  value: Uint8Array;
+}
 
 /**
  * Represents a primitive literal.
@@ -689,6 +765,10 @@ export interface ConstantAmino {
   /** @deprecated */
   timestamp_value?: Date;
 }
+export interface ConstantAminoType {
+  type: "/google.api.expr.v1alpha1.Constant";
+  value: ConstantAmino;
+}
 
 /**
  * Represents a primitive literal.
@@ -724,9 +804,17 @@ export interface SourceInfo_PositionsEntry {
   key: Long;
   value: number;
 }
+export interface SourceInfo_PositionsEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface SourceInfo_PositionsEntryAmino {
   key: string;
   value: number;
+}
+export interface SourceInfo_PositionsEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: SourceInfo_PositionsEntryAmino;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: Long;
@@ -736,9 +824,17 @@ export interface SourceInfo_MacroCallsEntry {
   key: Long;
   value?: Expr;
 }
+export interface SourceInfo_MacroCallsEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface SourceInfo_MacroCallsEntryAmino {
   key: string;
   value?: ExprAmino;
+}
+export interface SourceInfo_MacroCallsEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: SourceInfo_MacroCallsEntryAmino;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
   key: Long;
@@ -791,6 +887,10 @@ export interface SourceInfo {
     [key: Long]: Expr;
   };
 }
+export interface SourceInfoProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
+  value: Uint8Array;
+}
 
 /** Source information collected at parse time. */
 export interface SourceInfoAmino {
@@ -838,6 +938,10 @@ export interface SourceInfoAmino {
     [key: string]: ExprAmino;
   };
 }
+export interface SourceInfoAminoType {
+  type: "/google.api.expr.v1alpha1.SourceInfo";
+  value: SourceInfoAmino;
+}
 
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
@@ -872,6 +976,10 @@ export interface SourcePosition {
    */
   column: number;
 }
+export interface SourcePositionProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.SourcePosition";
+  value: Uint8Array;
+}
 
 /** A specific position in source. */
 export interface SourcePositionAmino {
@@ -892,6 +1000,10 @@ export interface SourcePositionAmino {
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
   column: number;
+}
+export interface SourcePositionAminoType {
+  type: "/google.api.expr.v1alpha1.SourcePosition";
+  value: SourcePositionAmino;
 }
 
 /** A specific position in source. */

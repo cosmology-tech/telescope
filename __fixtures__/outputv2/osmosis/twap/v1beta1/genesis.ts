@@ -9,11 +9,19 @@ export interface Params {
   pruneEpochIdentifier: string;
   recordHistoryKeepPeriod?: Duration;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.twap.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the twap module */
 export interface ParamsAmino {
   prune_epoch_identifier: string;
   record_history_keep_period?: DurationAmino;
+}
+export interface ParamsAminoType {
+  type: "osmosis/twap/params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the twap module */
@@ -30,6 +38,10 @@ export interface GenesisState {
   /** params is the container of twap parameters. */
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.twap.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateAmino {
@@ -38,6 +50,10 @@ export interface GenesisStateAmino {
 
   /** params is the container of twap parameters. */
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/twap/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the twap module's genesis state. */

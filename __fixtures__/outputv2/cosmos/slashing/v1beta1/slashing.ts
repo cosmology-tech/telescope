@@ -36,6 +36,10 @@ export interface ValidatorSigningInfo {
    */
   missedBlocksCounter: Long;
 }
+export interface ValidatorSigningInfoProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
+  value: Uint8Array;
+}
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -69,6 +73,10 @@ export interface ValidatorSigningInfoAmino {
    */
   missed_blocks_counter: string;
 }
+export interface ValidatorSigningInfoAminoType {
+  type: "cosmos-sdk/ValidatorSigningInfo";
+  value: ValidatorSigningInfoAmino;
+}
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -91,6 +99,10 @@ export interface Params {
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
 }
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params represents the parameters used for by the slashing module. */
 export interface ParamsAmino {
@@ -99,6 +111,10 @@ export interface ParamsAmino {
   downtime_jail_duration?: DurationAmino;
   slash_fraction_double_sign: Uint8Array;
   slash_fraction_downtime: Uint8Array;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params represents the parameters used for by the slashing module. */

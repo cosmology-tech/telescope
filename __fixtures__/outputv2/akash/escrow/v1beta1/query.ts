@@ -12,6 +12,10 @@ export interface QueryAccountsRequest {
   state: string;
   pagination?: PageRequest;
 }
+export interface QueryAccountsRequestProtoType {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsRequest";
+  value: Uint8Array;
+}
 
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestAmino {
@@ -20,6 +24,10 @@ export interface QueryAccountsRequestAmino {
   owner: string;
   state: string;
   pagination?: PageRequestAmino;
+}
+export interface QueryAccountsRequestAminoType {
+  type: "/akash.escrow.v1beta1.QueryAccountsRequest";
+  value: QueryAccountsRequestAmino;
 }
 
 /** QueryAccountRequest is request type for the Query/Account RPC method */
@@ -36,11 +44,19 @@ export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
 }
+export interface QueryAccountsResponseProtoType {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsResponse";
+  value: Uint8Array;
+}
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseAmino {
   accounts: AccountAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QueryAccountsResponseAminoType {
+  type: "/akash.escrow.v1beta1.QueryAccountsResponse";
+  value: QueryAccountsResponseAmino;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -58,6 +74,10 @@ export interface QueryPaymentsRequest {
   state: string;
   pagination?: PageRequest;
 }
+export interface QueryPaymentsRequestProtoType {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsRequest";
+  value: Uint8Array;
+}
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestAmino {
@@ -67,6 +87,10 @@ export interface QueryPaymentsRequestAmino {
   owner: string;
   state: string;
   pagination?: PageRequestAmino;
+}
+export interface QueryPaymentsRequestAminoType {
+  type: "/akash.escrow.v1beta1.QueryPaymentsRequest";
+  value: QueryPaymentsRequestAmino;
 }
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
@@ -84,11 +108,19 @@ export interface QueryPaymentsResponse {
   payments: Payment[];
   pagination?: PageResponse;
 }
+export interface QueryPaymentsResponseProtoType {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsResponse";
+  value: Uint8Array;
+}
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseAmino {
   payments: PaymentAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QueryPaymentsResponseAminoType {
+  type: "/akash.escrow.v1beta1.QueryPaymentsResponse";
+  value: QueryPaymentsResponseAmino;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */

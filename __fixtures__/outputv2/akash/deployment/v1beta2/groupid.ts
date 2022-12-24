@@ -8,12 +8,20 @@ export interface GroupID {
   dseq: Long;
   gseq: number;
 }
+export interface GroupIDProtoType {
+  typeUrl: "/akash.deployment.v1beta2.GroupID";
+  value: Uint8Array;
+}
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
   owner: string;
   dseq: string;
   gseq: number;
+}
+export interface GroupIDAminoType {
+  type: "/akash.deployment.v1beta2.GroupID";
+  value: GroupIDAmino;
 }
 
 /** GroupID stores owner, deployment sequence number and group sequence number */

@@ -49,9 +49,17 @@ export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
 }
+export interface LogMetric_LabelExtractorsEntryProtoType {
+  typeUrl: "/google.logging.v2.undefined";
+  value: Uint8Array;
+}
 export interface LogMetric_LabelExtractorsEntryAmino {
   key: string;
   value: string;
+}
+export interface LogMetric_LabelExtractorsEntryAminoType {
+  type: "/google.logging.v2.undefined";
+  value: LogMetric_LabelExtractorsEntryAmino;
 }
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
@@ -205,6 +213,10 @@ export interface LogMetric {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
+export interface LogMetricProtoType {
+  typeUrl: "/google.logging.v2.LogMetric";
+  value: Uint8Array;
+}
 
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
@@ -353,6 +365,10 @@ export interface LogMetricAmino {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
+export interface LogMetricAminoType {
+  type: "/google.logging.v2.LogMetric";
+  value: LogMetricAmino;
+}
 
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
@@ -405,6 +421,10 @@ export interface ListLogMetricsRequest {
    */
   pageSize: number;
 }
+export interface ListLogMetricsRequestProtoType {
+  typeUrl: "/google.logging.v2.ListLogMetricsRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestAmino {
@@ -430,6 +450,10 @@ export interface ListLogMetricsRequestAmino {
    */
   page_size: number;
 }
+export interface ListLogMetricsRequestAminoType {
+  type: "/google.logging.v2.ListLogMetricsRequest";
+  value: ListLogMetricsRequestAmino;
+}
 
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
@@ -450,6 +474,10 @@ export interface ListLogMetricsResponse {
    */
   nextPageToken: string;
 }
+export interface ListLogMetricsResponseProtoType {
+  typeUrl: "/google.logging.v2.ListLogMetricsResponse";
+  value: Uint8Array;
+}
 
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseAmino {
@@ -462,6 +490,10 @@ export interface ListLogMetricsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
+}
+export interface ListLogMetricsResponseAminoType {
+  type: "/google.logging.v2.ListLogMetricsResponse";
+  value: ListLogMetricsResponseAmino;
 }
 
 /** Result returned from ListLogMetrics. */
@@ -479,6 +511,10 @@ export interface GetLogMetricRequest {
    */
   metricName: string;
 }
+export interface GetLogMetricRequestProtoType {
+  typeUrl: "/google.logging.v2.GetLogMetricRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestAmino {
@@ -488,6 +524,10 @@ export interface GetLogMetricRequestAmino {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metric_name: string;
+}
+export interface GetLogMetricRequestAminoType {
+  type: "/google.logging.v2.GetLogMetricRequest";
+  value: GetLogMetricRequestAmino;
 }
 
 /** The parameters to GetLogMetric. */
@@ -512,6 +552,10 @@ export interface CreateLogMetricRequest {
    */
   metric?: LogMetric;
 }
+export interface CreateLogMetricRequestProtoType {
+  typeUrl: "/google.logging.v2.CreateLogMetricRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestAmino {
@@ -529,6 +573,10 @@ export interface CreateLogMetricRequestAmino {
    * already exists.
    */
   metric?: LogMetricAmino;
+}
+export interface CreateLogMetricRequestAminoType {
+  type: "/google.logging.v2.CreateLogMetricRequest";
+  value: CreateLogMetricRequestAmino;
 }
 
 /** The parameters to CreateLogMetric. */
@@ -553,6 +601,10 @@ export interface UpdateLogMetricRequest {
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
+export interface UpdateLogMetricRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestAmino {
@@ -570,6 +622,10 @@ export interface UpdateLogMetricRequestAmino {
   /** Required. The updated metric. */
   metric?: LogMetricAmino;
 }
+export interface UpdateLogMetricRequestAminoType {
+  type: "/google.logging.v2.UpdateLogMetricRequest";
+  value: UpdateLogMetricRequestAmino;
+}
 
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
@@ -586,6 +642,10 @@ export interface DeleteLogMetricRequest {
    */
   metricName: string;
 }
+export interface DeleteLogMetricRequestProtoType {
+  typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestAmino {
@@ -595,6 +655,10 @@ export interface DeleteLogMetricRequestAmino {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metric_name: string;
+}
+export interface DeleteLogMetricRequestAminoType {
+  type: "/google.logging.v2.DeleteLogMetricRequest";
+  value: DeleteLogMetricRequestAmino;
 }
 
 /** The parameters to DeleteLogMetric. */

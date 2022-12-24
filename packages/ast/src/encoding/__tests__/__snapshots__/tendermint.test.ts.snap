@@ -273,7 +273,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
 `;
 
 exports[`ibc/lightclients/tendermint/v1/tendermint duration 3`] = `
-"export interface AminoClientState extends AminoMsg {
+"export interface ClientStateAminoType extends AminoMsg {
   type: "cosmos-sdk/ClientState";
   value: {
     chain_id: string;
@@ -337,7 +337,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
       upgradePath,
       allowUpdateAfterExpiry,
       allowUpdateAfterMisbehaviour
-    }: ClientState): AminoClientState["value"] => {
+    }: ClientState): ClientStateAminoType["value"] => {
       return {
         chain_id: chainId,
         trust_level: {
@@ -391,7 +391,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
       upgrade_path,
       allow_update_after_expiry,
       allow_update_after_misbehaviour
-    }: AminoClientState["value"]): ClientState => {
+    }: ClientStateAminoType["value"]): ClientState => {
       return {
         chainId: chain_id,
         trustLevel: {
@@ -719,7 +719,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
 `;
 
 exports[`ibc/lightclients/tendermint/v1/tendermint string 3`] = `
-"export interface AminoClientState extends AminoMsg {
+"export interface ClientStateAminoType extends AminoMsg {
   type: "cosmos-sdk/ClientState";
   value: {
     chain_id: string;
@@ -774,7 +774,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
       upgradePath,
       allowUpdateAfterExpiry,
       allowUpdateAfterMisbehaviour
-    }: ClientState): AminoClientState["value"] => {
+    }: ClientState): ClientStateAminoType["value"] => {
       return {
         chain_id: chainId,
         trust_level: {
@@ -828,7 +828,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
       upgrade_path,
       allow_update_after_expiry,
       allow_update_after_misbehaviour
-    }: AminoClientState["value"]): ClientState => {
+    }: ClientStateAminoType["value"]): ClientState => {
       return {
         chainId: chain_id,
         trustLevel: {

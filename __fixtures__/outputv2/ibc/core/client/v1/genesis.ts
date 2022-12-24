@@ -21,6 +21,10 @@ export interface GenesisState {
   /** the sequence for the next generated client identifier */
   nextClientSequence: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.core.client.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateAmino {
@@ -39,6 +43,10 @@ export interface GenesisStateAmino {
 
   /** the sequence for the next generated client identifier */
   next_client_sequence: string;
+}
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the ibc client submodule's genesis state. */
@@ -62,6 +70,10 @@ export interface GenesisMetadata {
   /** metadata value */
   value: Uint8Array;
 }
+export interface GenesisMetadataProtoType {
+  typeUrl: "/ibc.core.client.v1.GenesisMetadata";
+  value: Uint8Array;
+}
 
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
@@ -73,6 +85,10 @@ export interface GenesisMetadataAmino {
 
   /** metadata value */
   value: Uint8Array;
+}
+export interface GenesisMetadataAminoType {
+  type: "cosmos-sdk/GenesisMetadata";
+  value: GenesisMetadataAmino;
 }
 
 /**
@@ -92,6 +108,10 @@ export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];
 }
+export interface IdentifiedGenesisMetadataProtoType {
+  typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
@@ -100,6 +120,10 @@ export interface IdentifiedGenesisMetadata {
 export interface IdentifiedGenesisMetadataAmino {
   client_id: string;
   client_metadata: GenesisMetadataAmino[];
+}
+export interface IdentifiedGenesisMetadataAminoType {
+  type: "cosmos-sdk/IdentifiedGenesisMetadata";
+  value: IdentifiedGenesisMetadataAmino;
 }
 
 /**

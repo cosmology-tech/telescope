@@ -8,11 +8,19 @@ export interface GenesisState {
   basedenom: string;
   feetokens: FeeToken[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateAmino {
   basedenom: string;
   feetokens: FeeTokenAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/txfees/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the txfees module's genesis state. */

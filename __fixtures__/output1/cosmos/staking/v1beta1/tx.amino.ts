@@ -6,7 +6,7 @@ import { AminoMsg, decodeBech32Pubkey, encodeBech32Pubkey } from "@cosmjs/amino"
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
 import { Long } from "../../../helpers";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateSDKType } from "./tx";
-export interface AminoMsgCreateValidator extends AminoMsg {
+export interface MsgCreateValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";
   value: {
     description: {
@@ -34,7 +34,7 @@ export interface AminoMsgCreateValidator extends AminoMsg {
     };
   };
 }
-export interface AminoMsgEditValidator extends AminoMsg {
+export interface MsgEditValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgEditValidator";
   value: {
     description: {
@@ -49,7 +49,7 @@ export interface AminoMsgEditValidator extends AminoMsg {
     min_self_delegation: string;
   };
 }
-export interface AminoMsgDelegate extends AminoMsg {
+export interface MsgDelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgDelegate";
   value: {
     delegator_address: string;
@@ -60,7 +60,7 @@ export interface AminoMsgDelegate extends AminoMsg {
     };
   };
 }
-export interface AminoMsgBeginRedelegate extends AminoMsg {
+export interface MsgBeginRedelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgBeginRedelegate";
   value: {
     delegator_address: string;
@@ -72,7 +72,7 @@ export interface AminoMsgBeginRedelegate extends AminoMsg {
     };
   };
 }
-export interface AminoMsgUndelegate extends AminoMsg {
+export interface MsgUndelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUndelegate";
   value: {
     delegator_address: string;
@@ -94,7 +94,7 @@ export const AminoConverter = {
       validatorAddress,
       pubkey,
       value
-    }: MsgCreateValidator): AminoMsgCreateValidator["value"] => {
+    }: MsgCreateValidator): MsgCreateValidatorAminoType["value"] => {
       return {
         description: {
           moniker: description.moniker,
@@ -129,7 +129,7 @@ export const AminoConverter = {
       validator_address,
       pubkey,
       value
-    }: AminoMsgCreateValidator["value"]): MsgCreateValidator => {
+    }: MsgCreateValidatorAminoType["value"]): MsgCreateValidator => {
       return {
         description: {
           moniker: description.moniker,
@@ -164,7 +164,7 @@ export const AminoConverter = {
       validatorAddress,
       commissionRate,
       minSelfDelegation
-    }: MsgEditValidator): AminoMsgEditValidator["value"] => {
+    }: MsgEditValidator): MsgEditValidatorAminoType["value"] => {
       return {
         description: {
           moniker: description.moniker,
@@ -183,7 +183,7 @@ export const AminoConverter = {
       validator_address,
       commission_rate,
       min_self_delegation
-    }: AminoMsgEditValidator["value"]): MsgEditValidator => {
+    }: MsgEditValidatorAminoType["value"]): MsgEditValidator => {
       return {
         description: {
           moniker: description.moniker,
@@ -204,7 +204,7 @@ export const AminoConverter = {
       delegatorAddress,
       validatorAddress,
       amount
-    }: MsgDelegate): AminoMsgDelegate["value"] => {
+    }: MsgDelegate): MsgDelegateAminoType["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
@@ -218,7 +218,7 @@ export const AminoConverter = {
       delegator_address,
       validator_address,
       amount
-    }: AminoMsgDelegate["value"]): MsgDelegate => {
+    }: MsgDelegateAminoType["value"]): MsgDelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
@@ -236,7 +236,7 @@ export const AminoConverter = {
       validatorSrcAddress,
       validatorDstAddress,
       amount
-    }: MsgBeginRedelegate): AminoMsgBeginRedelegate["value"] => {
+    }: MsgBeginRedelegate): MsgBeginRedelegateAminoType["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_src_address: validatorSrcAddress,
@@ -252,7 +252,7 @@ export const AminoConverter = {
       validator_src_address,
       validator_dst_address,
       amount
-    }: AminoMsgBeginRedelegate["value"]): MsgBeginRedelegate => {
+    }: MsgBeginRedelegateAminoType["value"]): MsgBeginRedelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorSrcAddress: validator_src_address,
@@ -270,7 +270,7 @@ export const AminoConverter = {
       delegatorAddress,
       validatorAddress,
       amount
-    }: MsgUndelegate): AminoMsgUndelegate["value"] => {
+    }: MsgUndelegate): MsgUndelegateAminoType["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
@@ -284,7 +284,7 @@ export const AminoConverter = {
       delegator_address,
       validator_address,
       amount
-    }: AminoMsgUndelegate["value"]): MsgUndelegate => {
+    }: MsgUndelegateAminoType["value"]): MsgUndelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,

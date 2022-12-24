@@ -140,6 +140,10 @@ export interface GetTxsEventRequest {
   pagination?: PageRequest;
   orderBy: OrderBy;
 }
+export interface GetTxsEventRequestProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest";
+  value: Uint8Array;
+}
 
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
@@ -152,6 +156,10 @@ export interface GetTxsEventRequestAmino {
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestAmino;
   order_by: OrderBy;
+}
+export interface GetTxsEventRequestAminoType {
+  type: "cosmos-sdk/GetTxsEventRequest";
+  value: GetTxsEventRequestAmino;
 }
 
 /**
@@ -178,6 +186,10 @@ export interface GetTxsEventResponse {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
 }
+export interface GetTxsEventResponseProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
+  value: Uint8Array;
+}
 
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
@@ -192,6 +204,10 @@ export interface GetTxsEventResponseAmino {
 
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseAmino;
+}
+export interface GetTxsEventResponseAminoType {
+  type: "cosmos-sdk/GetTxsEventResponse";
+  value: GetTxsEventResponseAmino;
 }
 
 /**
@@ -213,6 +229,10 @@ export interface BroadcastTxRequest {
   txBytes: Uint8Array;
   mode: BroadcastMode;
 }
+export interface BroadcastTxRequestProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest";
+  value: Uint8Array;
+}
 
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
@@ -222,6 +242,10 @@ export interface BroadcastTxRequestAmino {
   /** tx_bytes is the raw transaction. */
   tx_bytes: Uint8Array;
   mode: BroadcastMode;
+}
+export interface BroadcastTxRequestAminoType {
+  type: "cosmos-sdk/BroadcastTxRequest";
+  value: BroadcastTxRequestAmino;
 }
 
 /**
@@ -241,6 +265,10 @@ export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
   txResponse?: TxResponse;
 }
+export interface BroadcastTxResponseProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
+  value: Uint8Array;
+}
 
 /**
  * BroadcastTxResponse is the response type for the
@@ -249,6 +277,10 @@ export interface BroadcastTxResponse {
 export interface BroadcastTxResponseAmino {
   /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseAmino;
+}
+export interface BroadcastTxResponseAminoType {
+  type: "cosmos-sdk/BroadcastTxResponse";
+  value: BroadcastTxResponseAmino;
 }
 
 /**
@@ -279,6 +311,10 @@ export interface SimulateRequest {
    */
   txBytes: Uint8Array;
 }
+export interface SimulateRequestProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateRequest";
+  value: Uint8Array;
+}
 
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -299,6 +335,10 @@ export interface SimulateRequestAmino {
    * Since: cosmos-sdk 0.43
    */
   tx_bytes: Uint8Array;
+}
+export interface SimulateRequestAminoType {
+  type: "cosmos-sdk/SimulateRequest";
+  value: SimulateRequestAmino;
 }
 
 /**
@@ -322,6 +362,10 @@ export interface SimulateResponse {
   /** result is the result of the simulation. */
   result?: Result;
 }
+export interface SimulateResponseProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
+  value: Uint8Array;
+}
 
 /**
  * SimulateResponse is the response type for the
@@ -333,6 +377,10 @@ export interface SimulateResponseAmino {
 
   /** result is the result of the simulation. */
   result?: ResultAmino;
+}
+export interface SimulateResponseAminoType {
+  type: "cosmos-sdk/SimulateResponse";
+  value: SimulateResponseAmino;
 }
 
 /**
@@ -352,6 +400,10 @@ export interface GetTxRequest {
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
+export interface GetTxRequestProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxRequest";
+  value: Uint8Array;
+}
 
 /**
  * GetTxRequest is the request type for the Service.GetTx
@@ -360,6 +412,10 @@ export interface GetTxRequest {
 export interface GetTxRequestAmino {
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
+}
+export interface GetTxRequestAminoType {
+  type: "cosmos-sdk/GetTxRequest";
+  value: GetTxRequestAmino;
 }
 
 /**
@@ -378,6 +434,10 @@ export interface GetTxResponse {
   /** tx_response is the queried TxResponses. */
   txResponse?: TxResponse;
 }
+export interface GetTxResponseProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
+  value: Uint8Array;
+}
 
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseAmino {
@@ -386,6 +446,10 @@ export interface GetTxResponseAmino {
 
   /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseAmino;
+}
+export interface GetTxResponseAminoType {
+  type: "cosmos-sdk/GetTxResponse";
+  value: GetTxResponseAmino;
 }
 
 /** GetTxResponse is the response type for the Service.GetTx method. */
@@ -407,6 +471,10 @@ export interface GetBlockWithTxsRequest {
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
 }
+export interface GetBlockWithTxsRequestProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
+  value: Uint8Array;
+}
 
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
@@ -420,6 +488,10 @@ export interface GetBlockWithTxsRequestAmino {
 
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface GetBlockWithTxsRequestAminoType {
+  type: "cosmos-sdk/GetBlockWithTxsRequest";
+  value: GetBlockWithTxsRequestAmino;
 }
 
 /**
@@ -447,6 +519,10 @@ export interface GetBlockWithTxsResponse {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
 }
+export interface GetBlockWithTxsResponseProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse";
+  value: Uint8Array;
+}
 
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
@@ -461,6 +537,10 @@ export interface GetBlockWithTxsResponseAmino {
 
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseAmino;
+}
+export interface GetBlockWithTxsResponseAminoType {
+  type: "cosmos-sdk/GetBlockWithTxsResponse";
+  value: GetBlockWithTxsResponseAmino;
 }
 
 /**

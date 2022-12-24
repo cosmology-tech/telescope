@@ -14,6 +14,10 @@ export interface QueryChannelRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryChannelRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelRequest";
+  value: Uint8Array;
+}
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestAmino {
@@ -22,6 +26,10 @@ export interface QueryChannelRequestAmino {
 
   /** channel unique identifier */
   channel_id: string;
+}
+export interface QueryChannelRequestAminoType {
+  type: "cosmos-sdk/QueryChannelRequest";
+  value: QueryChannelRequestAmino;
 }
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
@@ -45,6 +53,10 @@ export interface QueryChannelResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryChannelResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
@@ -60,6 +72,10 @@ export interface QueryChannelResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryChannelResponseAminoType {
+  type: "cosmos-sdk/QueryChannelResponse";
+  value: QueryChannelResponseAmino;
 }
 
 /**
@@ -78,11 +94,19 @@ export interface QueryChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryChannelsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest";
+  value: Uint8Array;
+}
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryChannelsRequestAminoType {
+  type: "cosmos-sdk/QueryChannelsRequest";
+  value: QueryChannelsRequestAmino;
 }
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
@@ -101,6 +125,10 @@ export interface QueryChannelsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryChannelsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse";
+  value: Uint8Array;
+}
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponseAmino {
@@ -112,6 +140,10 @@ export interface QueryChannelsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryChannelsResponseAminoType {
+  type: "cosmos-sdk/QueryChannelsResponse";
+  value: QueryChannelsResponseAmino;
 }
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
@@ -132,6 +164,10 @@ export interface QueryConnectionChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryConnectionChannelsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionChannelsRequest is the request type for the
@@ -143,6 +179,10 @@ export interface QueryConnectionChannelsRequestAmino {
 
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryConnectionChannelsRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionChannelsRequest";
+  value: QueryConnectionChannelsRequestAmino;
 }
 
 /**
@@ -168,6 +208,10 @@ export interface QueryConnectionChannelsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryConnectionChannelsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionChannelsResponse is the Response type for the
@@ -182,6 +226,10 @@ export interface QueryConnectionChannelsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryConnectionChannelsResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionChannelsResponse";
+  value: QueryConnectionChannelsResponseAmino;
 }
 
 /**
@@ -205,6 +253,10 @@ export interface QueryChannelClientStateRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryChannelClientStateRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
@@ -216,6 +268,10 @@ export interface QueryChannelClientStateRequestAmino {
 
   /** channel unique identifier */
   channel_id: string;
+}
+export interface QueryChannelClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryChannelClientStateRequest";
+  value: QueryChannelClientStateRequestAmino;
 }
 
 /**
@@ -241,6 +297,10 @@ export interface QueryChannelClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryChannelClientStateResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
@@ -255,6 +315,10 @@ export interface QueryChannelClientStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryChannelClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryChannelClientStateResponse";
+  value: QueryChannelClientStateResponseAmino;
 }
 
 /**
@@ -284,6 +348,10 @@ export interface QueryChannelConsensusStateRequest {
   /** revision height of the consensus state */
   revisionHeight: Long;
 }
+export interface QueryChannelConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelConsensusStateRequest is the request type for the
@@ -301,6 +369,10 @@ export interface QueryChannelConsensusStateRequestAmino {
 
   /** revision height of the consensus state */
   revision_height: string;
+}
+export interface QueryChannelConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryChannelConsensusStateRequest";
+  value: QueryChannelConsensusStateRequestAmino;
 }
 
 /**
@@ -331,6 +403,10 @@ export interface QueryChannelConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryChannelConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
@@ -348,6 +424,10 @@ export interface QueryChannelConsensusStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryChannelConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryChannelConsensusStateResponse";
+  value: QueryChannelConsensusStateResponseAmino;
 }
 
 /**
@@ -375,6 +455,10 @@ export interface QueryPacketCommitmentRequest {
   /** packet sequence */
   sequence: Long;
 }
+export interface QueryPacketCommitmentRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentRequest is the request type for the
@@ -389,6 +473,10 @@ export interface QueryPacketCommitmentRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketCommitmentRequestAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentRequest";
+  value: QueryPacketCommitmentRequestAmino;
 }
 
 /**
@@ -416,6 +504,10 @@ export interface QueryPacketCommitmentResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryPacketCommitmentResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
@@ -431,6 +523,10 @@ export interface QueryPacketCommitmentResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryPacketCommitmentResponseAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentResponse";
+  value: QueryPacketCommitmentResponseAmino;
 }
 
 /**
@@ -458,6 +554,10 @@ export interface QueryPacketCommitmentsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryPacketCommitmentsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentsRequest is the request type for the
@@ -472,6 +572,10 @@ export interface QueryPacketCommitmentsRequestAmino {
 
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryPacketCommitmentsRequestAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentsRequest";
+  value: QueryPacketCommitmentsRequestAmino;
 }
 
 /**
@@ -497,6 +601,10 @@ export interface QueryPacketCommitmentsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryPacketCommitmentsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentsResponse is the request type for the
@@ -510,6 +618,10 @@ export interface QueryPacketCommitmentsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryPacketCommitmentsResponseAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentsResponse";
+  value: QueryPacketCommitmentsResponseAmino;
 }
 
 /**
@@ -536,6 +648,10 @@ export interface QueryPacketReceiptRequest {
   /** packet sequence */
   sequence: Long;
 }
+export interface QueryPacketReceiptRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketReceiptRequest is the request type for the
@@ -550,6 +666,10 @@ export interface QueryPacketReceiptRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketReceiptRequestAminoType {
+  type: "cosmos-sdk/QueryPacketReceiptRequest";
+  value: QueryPacketReceiptRequestAmino;
 }
 
 /**
@@ -577,6 +697,10 @@ export interface QueryPacketReceiptResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryPacketReceiptResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
@@ -592,6 +716,10 @@ export interface QueryPacketReceiptResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryPacketReceiptResponseAminoType {
+  type: "cosmos-sdk/QueryPacketReceiptResponse";
+  value: QueryPacketReceiptResponseAmino;
 }
 
 /**
@@ -619,6 +747,10 @@ export interface QueryPacketAcknowledgementRequest {
   /** packet sequence */
   sequence: Long;
 }
+export interface QueryPacketAcknowledgementRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
@@ -633,6 +765,10 @@ export interface QueryPacketAcknowledgementRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketAcknowledgementRequestAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementRequest";
+  value: QueryPacketAcknowledgementRequestAmino;
 }
 
 /**
@@ -660,6 +796,10 @@ export interface QueryPacketAcknowledgementResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryPacketAcknowledgementResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
@@ -675,6 +815,10 @@ export interface QueryPacketAcknowledgementResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementResponseAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementResponse";
+  value: QueryPacketAcknowledgementResponseAmino;
 }
 
 /**
@@ -705,6 +849,10 @@ export interface QueryPacketAcknowledgementsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+export interface QueryPacketAcknowledgementsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
@@ -722,6 +870,10 @@ export interface QueryPacketAcknowledgementsRequestAmino {
 
   /** list of packet sequences */
   packet_commitment_sequences: string[];
+}
+export interface QueryPacketAcknowledgementsRequestAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsRequest";
+  value: QueryPacketAcknowledgementsRequestAmino;
 }
 
 /**
@@ -748,6 +900,10 @@ export interface QueryPacketAcknowledgementsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryPacketAcknowledgementsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
@@ -761,6 +917,10 @@ export interface QueryPacketAcknowledgementsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementsResponseAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsResponse";
+  value: QueryPacketAcknowledgementsResponseAmino;
 }
 
 /**
@@ -787,6 +947,10 @@ export interface QueryUnreceivedPacketsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+export interface QueryUnreceivedPacketsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
@@ -801,6 +965,10 @@ export interface QueryUnreceivedPacketsRequestAmino {
 
   /** list of packet sequences */
   packet_commitment_sequences: string[];
+}
+export interface QueryUnreceivedPacketsRequestAminoType {
+  type: "cosmos-sdk/QueryUnreceivedPacketsRequest";
+  value: QueryUnreceivedPacketsRequestAmino;
 }
 
 /**
@@ -824,6 +992,10 @@ export interface QueryUnreceivedPacketsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryUnreceivedPacketsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
@@ -835,6 +1007,10 @@ export interface QueryUnreceivedPacketsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryUnreceivedPacketsResponseAminoType {
+  type: "cosmos-sdk/QueryUnreceivedPacketsResponse";
+  value: QueryUnreceivedPacketsResponseAmino;
 }
 
 /**
@@ -860,6 +1036,10 @@ export interface QueryUnreceivedAcksRequest {
   /** list of acknowledgement sequences */
   packetAckSequences: Long[];
 }
+export interface QueryUnreceivedAcksRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedAcks is the request type for the
@@ -874,6 +1054,10 @@ export interface QueryUnreceivedAcksRequestAmino {
 
   /** list of acknowledgement sequences */
   packet_ack_sequences: string[];
+}
+export interface QueryUnreceivedAcksRequestAminoType {
+  type: "cosmos-sdk/QueryUnreceivedAcksRequest";
+  value: QueryUnreceivedAcksRequestAmino;
 }
 
 /**
@@ -897,6 +1081,10 @@ export interface QueryUnreceivedAcksResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryUnreceivedAcksResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedAcksResponse is the response type for the
@@ -908,6 +1096,10 @@ export interface QueryUnreceivedAcksResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryUnreceivedAcksResponseAminoType {
+  type: "cosmos-sdk/QueryUnreceivedAcksResponse";
+  value: QueryUnreceivedAcksResponseAmino;
 }
 
 /**
@@ -930,6 +1122,10 @@ export interface QueryNextSequenceReceiveRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryNextSequenceReceiveRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
@@ -941,6 +1137,10 @@ export interface QueryNextSequenceReceiveRequestAmino {
 
   /** channel unique identifier */
   channel_id: string;
+}
+export interface QueryNextSequenceReceiveRequestAminoType {
+  type: "cosmos-sdk/QueryNextSequenceReceiveRequest";
+  value: QueryNextSequenceReceiveRequestAmino;
 }
 
 /**
@@ -966,6 +1166,10 @@ export interface QueryNextSequenceReceiveResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryNextSequenceReceiveResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse";
+  value: Uint8Array;
+}
 
 /**
  * QuerySequenceResponse is the request type for the
@@ -980,6 +1184,10 @@ export interface QueryNextSequenceReceiveResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryNextSequenceReceiveResponseAminoType {
+  type: "cosmos-sdk/QueryNextSequenceReceiveResponse";
+  value: QueryNextSequenceReceiveResponseAmino;
 }
 
 /**

@@ -46,6 +46,10 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
+export interface SmoothWeightChangeParamsProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
+  value: Uint8Array;
+}
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -88,6 +92,10 @@ export interface SmoothWeightChangeParamsAmino {
    */
   target_pool_weights: PoolAssetAmino[];
 }
+export interface SmoothWeightChangeParamsAminoType {
+  type: "osmosis/gamm/smooth-weight-change-params";
+  value: SmoothWeightChangeParamsAmino;
+}
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -120,6 +128,10 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
+export interface PoolParamsProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -131,6 +143,10 @@ export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
+}
+export interface PoolParamsAminoType {
+  type: "osmosis/gamm/pool-params";
+  value: PoolParamsAmino;
 }
 
 /**
@@ -161,6 +177,10 @@ export interface PoolAsset {
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
 }
+export interface PoolAssetProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
+  value: Uint8Array;
+}
 
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -177,6 +197,10 @@ export interface PoolAssetAmino {
 
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface PoolAssetAminoType {
+  type: "osmosis/gamm/pool-asset";
+  value: PoolAssetAmino;
 }
 
 /**
@@ -219,6 +243,10 @@ export interface Pool {
   /** sum of all non-normalized pool weights */
   totalWeight: string;
 }
+export interface PoolProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool";
+  value: Uint8Array;
+}
 export interface PoolAmino {
   address: string;
   id: string;
@@ -248,6 +276,10 @@ export interface PoolAmino {
 
   /** sum of all non-normalized pool weights */
   total_weight: string;
+}
+export interface PoolAminoType {
+  type: "osmosis/gamm/pool";
+  value: PoolAmino;
 }
 export interface PoolSDKType {
   address: string;

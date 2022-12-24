@@ -230,6 +230,10 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
+export interface AllocateQuotaRequestProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestAmino {
@@ -251,6 +255,10 @@ export interface AllocateQuotaRequestAmino {
    */
   service_config_id: string;
 }
+export interface AllocateQuotaRequestAminoType {
+  type: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
+  value: AllocateQuotaRequestAmino;
+}
 
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
@@ -262,9 +270,17 @@ export interface QuotaOperation_LabelsEntry {
   key: string;
   value: string;
 }
+export interface QuotaOperation_LabelsEntryProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  value: Uint8Array;
+}
 export interface QuotaOperation_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface QuotaOperation_LabelsEntryAminoType {
+  type: "/google.api.servicecontrol.v1.undefined";
+  value: QuotaOperation_LabelsEntryAmino;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -335,6 +351,10 @@ export interface QuotaOperation {
   /** Quota mode for this operation. */
   quotaMode: QuotaOperation_QuotaMode;
 }
+export interface QuotaOperationProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaOperation";
+  value: Uint8Array;
+}
 
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationAmino {
@@ -400,6 +420,10 @@ export interface QuotaOperationAmino {
   /** Quota mode for this operation. */
   quota_mode: QuotaOperation_QuotaMode;
 }
+export interface QuotaOperationAminoType {
+  type: "/google.api.servicecontrol.v1.QuotaOperation";
+  value: QuotaOperationAmino;
+}
 
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
@@ -441,6 +465,10 @@ export interface AllocateQuotaResponse {
   /** ID of the actual config used to process the request. */
   serviceConfigId: string;
 }
+export interface AllocateQuotaResponseProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseAmino {
@@ -469,6 +497,10 @@ export interface AllocateQuotaResponseAmino {
 
   /** ID of the actual config used to process the request. */
   service_config_id: string;
+}
+export interface AllocateQuotaResponseAminoType {
+  type: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
+  value: AllocateQuotaResponseAmino;
 }
 
 /** Response message for the AllocateQuota method. */
@@ -500,6 +532,10 @@ export interface QuotaError {
    */
   status?: Status;
 }
+export interface QuotaErrorProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaError";
+  value: Uint8Array;
+}
 
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorAmino {
@@ -521,6 +557,10 @@ export interface QuotaErrorAmino {
    * If available, `status.code` will be non zero.
    */
   status?: StatusAmino;
+}
+export interface QuotaErrorAminoType {
+  type: "/google.api.servicecontrol.v1.QuotaError";
+  value: QuotaErrorAmino;
 }
 
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */

@@ -11,9 +11,17 @@ export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
 }
+export interface LogEntry_LabelsEntryProtoType {
+  typeUrl: "/google.logging.v2.undefined";
+  value: Uint8Array;
+}
 export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface LogEntry_LabelsEntryAminoType {
+  type: "/google.logging.v2.undefined";
+  value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
@@ -184,6 +192,10 @@ export interface LogEntry {
    */
   split?: LogSplit;
 }
+export interface LogEntryProtoType {
+  typeUrl: "/google.logging.v2.LogEntry";
+  value: Uint8Array;
+}
 
 /** An individual entry in a log. */
 export interface LogEntryAmino {
@@ -349,6 +361,10 @@ export interface LogEntryAmino {
    */
   split?: LogSplitAmino;
 }
+export interface LogEntryAminoType {
+  type: "/google.logging.v2.LogEntry";
+  value: LogEntryAmino;
+}
 
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
@@ -397,6 +413,10 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
+export interface LogEntryOperationProtoType {
+  typeUrl: "/google.logging.v2.LogEntryOperation";
+  value: Uint8Array;
+}
 
 /**
  * Additional information about a potentially long-running operation with which
@@ -421,6 +441,10 @@ export interface LogEntryOperationAmino {
 
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
+}
+export interface LogEntryOperationAminoType {
+  type: "/google.logging.v2.LogEntryOperation";
+  value: LogEntryOperationAmino;
 }
 
 /**
@@ -461,6 +485,10 @@ export interface LogEntrySourceLocation {
    */
   function: string;
 }
+export interface LogEntrySourceLocationProtoType {
+  typeUrl: "/google.logging.v2.LogEntrySourceLocation";
+  value: Uint8Array;
+}
 
 /**
  * Additional information about the source code location that produced the log
@@ -488,6 +516,10 @@ export interface LogEntrySourceLocationAmino {
    * (Python).
    */
   function: string;
+}
+export interface LogEntrySourceLocationAminoType {
+  type: "/google.logging.v2.LogEntrySourceLocation";
+  value: LogEntrySourceLocationAmino;
 }
 
 /**
@@ -523,6 +555,10 @@ export interface LogSplit {
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
 }
+export interface LogSplitProtoType {
+  typeUrl: "/google.logging.v2.LogSplit";
+  value: Uint8Array;
+}
 
 /**
  * Additional information used to correlate multiple log entries. Used when a
@@ -546,6 +582,10 @@ export interface LogSplitAmino {
 
   /** The total number of log entries that the original LogEntry was split into. */
   total_splits: number;
+}
+export interface LogSplitAminoType {
+  type: "/google.logging.v2.LogSplit";
+  value: LogSplitAmino;
 }
 
 /**

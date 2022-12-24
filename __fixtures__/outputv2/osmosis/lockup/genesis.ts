@@ -9,12 +9,20 @@ export interface GenesisState {
   locks: PeriodLock[];
   syntheticLocks: SyntheticLock[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.lockup.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateAmino {
   last_lock_id: string;
   locks: PeriodLockAmino[];
   synthetic_locks: SyntheticLockAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/lockup/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the lockup module's genesis state. */
