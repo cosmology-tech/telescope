@@ -161,6 +161,10 @@ export interface Channel {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+export interface ChannelProtoType {
+  typeUrl: "/ibc.core.channel.v1.Channel";
+  value: Uint8Array;
+}
 
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
@@ -233,6 +237,10 @@ export interface IdentifiedChannel {
   /** channel identifier */
   channelId: string;
 }
+export interface IdentifiedChannelProtoType {
+  typeUrl: "/ibc.core.channel.v1.IdentifiedChannel";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -290,6 +298,10 @@ export interface Counterparty {
   /** channel end on the counterparty chain */
   channelId: string;
 }
+export interface CounterpartyProtoType {
+  typeUrl: "/ibc.core.channel.v1.Counterparty";
+  value: Uint8Array;
+}
 
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartyAmino {
@@ -339,6 +351,10 @@ export interface Packet {
 
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
+}
+export interface PacketProtoType {
+  typeUrl: "/ibc.core.channel.v1.Packet";
+  value: Uint8Array;
 }
 
 /** Packet defines a type that carries data across different chains through IBC */
@@ -407,6 +423,10 @@ export interface PacketState {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+export interface PacketStateProtoType {
+  typeUrl: "/ibc.core.channel.v1.PacketState";
+  value: Uint8Array;
+}
 
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -457,6 +477,10 @@ export interface PacketStateSDKType {
 export interface Acknowledgement {
   result?: Uint8Array;
   error?: string;
+}
+export interface AcknowledgementProtoType {
+  typeUrl: "/ibc.core.channel.v1.Acknowledgement";
+  value: Uint8Array;
 }
 
 /**

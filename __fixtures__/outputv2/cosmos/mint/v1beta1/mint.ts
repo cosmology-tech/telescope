@@ -10,6 +10,10 @@ export interface Minter {
   /** current annual expected provisions */
   annualProvisions: string;
 }
+export interface MinterProtoType {
+  typeUrl: "/cosmos.mint.v1beta1.Minter";
+  value: Uint8Array;
+}
 
 /** Minter represents the minting state. */
 export interface MinterAmino {
@@ -49,6 +53,10 @@ export interface Params {
 
   /** expected blocks per year */
   blocksPerYear: Long;
+}
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.mint.v1beta1.Params";
+  value: Uint8Array;
 }
 
 /** Params holds parameters for the mint module. */

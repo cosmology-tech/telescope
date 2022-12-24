@@ -13,6 +13,10 @@ export interface MsgChannelOpenInit {
   channel?: Channel;
   signer: string;
 }
+export interface MsgChannelOpenInitProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit";
+  value: Uint8Array;
+}
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -40,6 +44,10 @@ export interface MsgChannelOpenInitSDKType {
 
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponse {}
+export interface MsgChannelOpenInitResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse";
+  value: Uint8Array;
+}
 
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseAmino {}
@@ -68,6 +76,10 @@ export interface MsgChannelOpenTry {
   proofInit: Uint8Array;
   proofHeight?: Height;
   signer: string;
+}
+export interface MsgChannelOpenTryProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry";
+  value: Uint8Array;
 }
 
 /**
@@ -109,6 +121,10 @@ export interface MsgChannelOpenTrySDKType {
 
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponse {}
+export interface MsgChannelOpenTryResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse";
+  value: Uint8Array;
+}
 
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseAmino {}
@@ -132,6 +148,10 @@ export interface MsgChannelOpenAck {
   proofTry: Uint8Array;
   proofHeight?: Height;
   signer: string;
+}
+export interface MsgChannelOpenAckProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck";
+  value: Uint8Array;
 }
 
 /**
@@ -168,6 +188,10 @@ export interface MsgChannelOpenAckSDKType {
 
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponse {}
+export interface MsgChannelOpenAckResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse";
+  value: Uint8Array;
+}
 
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseAmino {}
@@ -189,6 +213,10 @@ export interface MsgChannelOpenConfirm {
   proofAck: Uint8Array;
   proofHeight?: Height;
   signer: string;
+}
+export interface MsgChannelOpenConfirmProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm";
+  value: Uint8Array;
 }
 
 /**
@@ -224,6 +252,10 @@ export interface MsgChannelOpenConfirmSDKType {
  * type.
  */
 export interface MsgChannelOpenConfirmResponse {}
+export interface MsgChannelOpenConfirmResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
@@ -249,6 +281,10 @@ export interface MsgChannelCloseInit {
   portId: string;
   channelId: string;
   signer: string;
+}
+export interface MsgChannelCloseInitProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit";
+  value: Uint8Array;
 }
 
 /**
@@ -277,6 +313,10 @@ export interface MsgChannelCloseInitSDKType {
 
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponse {}
+export interface MsgChannelCloseInitResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse";
+  value: Uint8Array;
+}
 
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseAmino {}
@@ -298,6 +338,10 @@ export interface MsgChannelCloseConfirm {
   proofInit: Uint8Array;
   proofHeight?: Height;
   signer: string;
+}
+export interface MsgChannelCloseConfirmProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm";
+  value: Uint8Array;
 }
 
 /**
@@ -333,6 +377,10 @@ export interface MsgChannelCloseConfirmSDKType {
  * type.
  */
 export interface MsgChannelCloseConfirmResponse {}
+export interface MsgChannelCloseConfirmResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
@@ -357,6 +405,10 @@ export interface MsgRecvPacket {
   proofHeight?: Height;
   signer: string;
 }
+export interface MsgRecvPacketProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacket";
+  value: Uint8Array;
+}
 
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketAmino {
@@ -380,6 +432,10 @@ export interface MsgRecvPacketSDKType {
 
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponse {}
+export interface MsgRecvPacketResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse";
+  value: Uint8Array;
+}
 
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseAmino {}
@@ -398,6 +454,10 @@ export interface MsgTimeout {
   proofHeight?: Height;
   nextSequenceRecv: Long;
   signer: string;
+}
+export interface MsgTimeoutProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeout";
+  value: Uint8Array;
 }
 
 /** MsgTimeout receives timed-out packet */
@@ -424,6 +484,10 @@ export interface MsgTimeoutSDKType {
 
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponse {}
+export interface MsgTimeoutResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse";
+  value: Uint8Array;
+}
 
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseAmino {}
@@ -443,6 +507,10 @@ export interface MsgTimeoutOnClose {
   proofHeight?: Height;
   nextSequenceRecv: Long;
   signer: string;
+}
+export interface MsgTimeoutOnCloseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose";
+  value: Uint8Array;
 }
 
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
@@ -471,6 +539,10 @@ export interface MsgTimeoutOnCloseSDKType {
 
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponse {}
+export interface MsgTimeoutOnCloseResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse";
+  value: Uint8Array;
+}
 
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseAmino {}
@@ -489,6 +561,10 @@ export interface MsgAcknowledgement {
   proofAcked: Uint8Array;
   proofHeight?: Height;
   signer: string;
+}
+export interface MsgAcknowledgementProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement";
+  value: Uint8Array;
 }
 
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
@@ -515,6 +591,10 @@ export interface MsgAcknowledgementSDKType {
 
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponse {}
+export interface MsgAcknowledgementResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse";
+  value: Uint8Array;
+}
 
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponseAmino {}

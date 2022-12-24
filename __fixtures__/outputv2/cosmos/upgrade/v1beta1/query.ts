@@ -8,6 +8,10 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
  * method.
  */
 export interface QueryCurrentPlanRequest {}
+export interface QueryCurrentPlanRequestProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryCurrentPlanRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
@@ -32,6 +36,10 @@ export interface QueryCurrentPlanRequestSDKType {}
 export interface QueryCurrentPlanResponse {
   /** plan is the current upgrade plan. */
   plan?: Plan;
+}
+export interface QueryCurrentPlanResponseProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryCurrentPlanResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -63,6 +71,10 @@ export interface QueryAppliedPlanRequest {
   /** name is the name of the applied plan to query for. */
   name: string;
 }
+export interface QueryAppliedPlanRequestProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryAppliedPlanRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
@@ -92,6 +104,10 @@ export interface QueryAppliedPlanRequestSDKType {
 export interface QueryAppliedPlanResponse {
   /** height is the block height at which the plan was applied. */
   height: Long;
+}
+export interface QueryAppliedPlanResponseProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryAppliedPlanResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -127,6 +143,10 @@ export interface QueryUpgradedConsensusStateRequest {
    * as this is the height under which next consensus state is stored
    */
   lastHeight: Long;
+}
+export interface QueryUpgradedConsensusStateRequestProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryUpgradedConsensusStateRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -166,6 +186,10 @@ export interface QueryUpgradedConsensusStateRequestSDKType {
 export interface QueryUpgradedConsensusStateResponse {
   /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;
+}
+export interface QueryUpgradedConsensusStateResponseProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryUpgradedConsensusStateResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -207,6 +231,10 @@ export interface QueryModuleVersionsRequest {
    */
   moduleName: string;
 }
+export interface QueryModuleVersionsRequestProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryModuleVersionsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
@@ -247,6 +275,10 @@ export interface QueryModuleVersionsResponse {
   /** module_versions is a list of module names with their consensus versions. */
   moduleVersions: ModuleVersion[];
 }
+export interface QueryModuleVersionsResponseProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryModuleVersionsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
@@ -279,6 +311,10 @@ export interface QueryModuleVersionsResponseSDKType {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityRequest {}
+export interface QueryAuthorityRequestProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryAuthorityRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryAuthorityRequest is the request type for Query/Authority
@@ -305,6 +341,10 @@ export interface QueryAuthorityRequestSDKType {}
  */
 export interface QueryAuthorityResponse {
   address: string;
+}
+export interface QueryAuthorityResponseProtoType {
+  typeUrl: "/cosmos.upgrade.v1beta1.QueryAuthorityResponse";
+  value: Uint8Array;
 }
 
 /**

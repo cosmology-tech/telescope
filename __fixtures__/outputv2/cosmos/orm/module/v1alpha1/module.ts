@@ -8,6 +8,10 @@ export const protobufPackage = "cosmos.orm.module.v1alpha1";
  * with ORM data.
  */
 export interface Module {}
+export interface ModuleProtoType {
+  typeUrl: "/cosmos.orm.module.v1alpha1.Module";
+  value: Uint8Array;
+}
 
 /**
  * Module defines the ORM module which adds providers to the app container for

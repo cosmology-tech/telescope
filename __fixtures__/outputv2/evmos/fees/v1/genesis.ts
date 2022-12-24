@@ -11,6 +11,10 @@ export interface GenesisState {
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.fees.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
@@ -56,6 +60,10 @@ export interface Params {
 
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
+}
+export interface ParamsProtoType {
+  typeUrl: "/evmos.fees.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the fees module params */

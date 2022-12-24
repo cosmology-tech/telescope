@@ -65,6 +65,10 @@ export interface InterfaceDescriptor {
    */
   description: string;
 }
+export interface InterfaceDescriptorProtoType {
+  typeUrl: "/cosmos_proto.InterfaceDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * InterfaceDescriptor describes an interface type to be used with
@@ -131,6 +135,10 @@ export interface ScalarDescriptor {
    * bytes fields are supported for scalars.
    */
   fieldType: ScalarType[];
+}
+export interface ScalarDescriptorProtoType {
+  typeUrl: "/cosmos_proto.ScalarDescriptor";
+  value: Uint8Array;
 }
 
 /**

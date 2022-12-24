@@ -6,6 +6,10 @@ export const protobufPackage = "evmos.inflation.v1";
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequest {}
+export interface QueryPeriodRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
+  value: Uint8Array;
+}
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestAmino {}
@@ -21,6 +25,10 @@ export interface QueryPeriodRequestSDKType {}
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
   period: Long;
+}
+export interface QueryPeriodResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
+  value: Uint8Array;
 }
 
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
@@ -43,6 +51,10 @@ export interface QueryPeriodResponseSDKType {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequest {}
+export interface QueryEpochMintProvisionRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryEpochMintProvisionRequest is the request type for the
@@ -67,6 +79,10 @@ export interface QueryEpochMintProvisionRequestSDKType {}
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epochMintProvision?: DecCoin;
+}
+export interface QueryEpochMintProvisionResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -95,6 +111,10 @@ export interface QueryEpochMintProvisionResponseSDKType {
  * method.
  */
 export interface QuerySkippedEpochsRequest {}
+export interface QuerySkippedEpochsRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
@@ -119,6 +139,10 @@ export interface QuerySkippedEpochsRequestSDKType {}
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
   skippedEpochs: Long;
+}
+export interface QuerySkippedEpochsResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -147,6 +171,10 @@ export interface QuerySkippedEpochsResponseSDKType {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequest {}
+export interface QueryCirculatingSupplyRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryCirculatingSupplyRequest is the request type for the
@@ -171,6 +199,10 @@ export interface QueryCirculatingSupplyRequestSDKType {}
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
   circulatingSupply?: DecCoin;
+}
+export interface QueryCirculatingSupplyResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -199,6 +231,10 @@ export interface QueryCirculatingSupplyResponseSDKType {
  * method.
  */
 export interface QueryInflationRateRequest {}
+export interface QueryInflationRateRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
@@ -224,6 +260,10 @@ export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
   inflationRate: string;
 }
+export interface QueryInflationRateResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
@@ -248,6 +288,10 @@ export interface QueryInflationRateResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
@@ -263,6 +307,10 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/evmos.inflation.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */

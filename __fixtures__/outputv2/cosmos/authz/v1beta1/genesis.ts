@@ -7,6 +7,10 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 export interface GenesisState {
   authorization: GrantAuthorization[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateAmino {

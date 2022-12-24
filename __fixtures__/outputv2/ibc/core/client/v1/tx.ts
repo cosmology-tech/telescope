@@ -17,6 +17,10 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient";
+  value: Uint8Array;
+}
 
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientAmino {
@@ -46,6 +50,10 @@ export interface MsgCreateClientSDKType {
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+export interface MsgCreateClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseAmino {}
@@ -70,6 +78,10 @@ export interface MsgUpdateClient {
 
   /** signer address */
   signer: string;
+}
+export interface MsgUpdateClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
+  value: Uint8Array;
 }
 
 /**
@@ -103,6 +115,10 @@ export interface MsgUpdateClientSDKType {
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+export interface MsgUpdateClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseAmino {}
@@ -139,6 +155,10 @@ export interface MsgUpgradeClient {
 
   /** signer address */
   signer: string;
+}
+export interface MsgUpgradeClientProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
+  value: Uint8Array;
 }
 
 /**
@@ -187,6 +207,10 @@ export interface MsgUpgradeClientSDKType {
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+export interface MsgUpgradeClientResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
+  value: Uint8Array;
+}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseAmino {}
@@ -211,6 +235,10 @@ export interface MsgSubmitMisbehaviour {
 
   /** signer address */
   signer: string;
+}
+export interface MsgSubmitMisbehaviourProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
+  value: Uint8Array;
 }
 
 /**
@@ -247,6 +275,10 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+export interface MsgSubmitMisbehaviourResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response

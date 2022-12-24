@@ -12,6 +12,10 @@ export interface GenesisState {
   nextConnectionSequence: Long;
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.core.connection.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisStateAmino {

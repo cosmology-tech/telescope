@@ -24,6 +24,10 @@ export interface Tx {
    */
   signatures: Uint8Array[];
 }
+export interface TxProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.Tx";
+  value: Uint8Array;
+}
 
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxAmino {
@@ -81,6 +85,10 @@ export interface TxRaw {
    * public key and signing mode by position.
    */
   signatures: Uint8Array[];
+}
+export interface TxRawProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.TxRaw";
+  value: Uint8Array;
 }
 
 /**
@@ -151,6 +159,10 @@ export interface SignDoc {
 
   /** account_number is the account number of the account in state */
   accountNumber: Long;
+}
+export interface SignDocProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.SignDoc";
+  value: Uint8Array;
 }
 
 /** SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT. */
@@ -224,6 +236,10 @@ export interface SignDocDirectAux {
    * empty if the signer is not the tipper for this transaction.
    */
   tip?: Tip;
+}
+export interface SignDocDirectAuxProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.SignDocDirectAux";
+  value: Uint8Array;
 }
 
 /**
@@ -321,6 +337,10 @@ export interface TxBody {
    */
   nonCriticalExtensionOptions: Any[];
 }
+export interface TxBodyProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.TxBody";
+  value: Uint8Array;
+}
 
 /** TxBody is the body of a transaction that all signers sign over. */
 export interface TxBodyAmino {
@@ -404,6 +424,10 @@ export interface AuthInfo {
    */
   tip?: Tip;
 }
+export interface AuthInfoProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.AuthInfo";
+  value: Uint8Array;
+}
 
 /**
  * AuthInfo describes the fee and signer modes that are used to sign a
@@ -473,6 +497,10 @@ export interface SignerInfo {
    */
   sequence: Long;
 }
+export interface SignerInfoProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.SignerInfo";
+  value: Uint8Array;
+}
 
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
@@ -522,6 +550,10 @@ export interface ModeInfo {
   /** multi represents a nested multisig signer */
   multi?: ModeInfo_Multi;
 }
+export interface ModeInfoProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.ModeInfo";
+  value: Uint8Array;
+}
 
 /** ModeInfo describes the signing mode of a single or nested multisig signer. */
 export interface ModeInfoAmino {
@@ -550,6 +582,10 @@ export interface ModeInfoSDKType {
 export interface ModeInfo_Single {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
+}
+export interface ModeInfo_SingleProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.Single";
+  value: Uint8Array;
 }
 
 /**
@@ -585,6 +621,10 @@ export interface ModeInfo_Multi {
    * which could include nested multisig public keys
    */
   modeInfos: ModeInfo[];
+}
+export interface ModeInfo_MultiProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.Multi";
+  value: Uint8Array;
 }
 
 /** Multi is the mode info for a multisig public key */
@@ -637,6 +677,10 @@ export interface Fee {
    * not support fee grants, this will fail
    */
   granter: string;
+}
+export interface FeeProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.Fee";
+  value: Uint8Array;
 }
 
 /**
@@ -697,6 +741,10 @@ export interface Tip {
   /** tipper is the address of the account paying for the tip */
   tipper: string;
 }
+export interface TipProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.Tip";
+  value: Uint8Array;
+}
 
 /**
  * Tip is the tip used for meta-transactions.
@@ -753,6 +801,10 @@ export interface AuxSignerData {
 
   /** sig is the signature of the sign doc. */
   sig: Uint8Array;
+}
+export interface AuxSignerDataProtoType {
+  typeUrl: "/cosmos.tx.v1beta1.AuxSignerData";
+  value: Uint8Array;
 }
 
 /**

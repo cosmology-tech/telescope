@@ -178,6 +178,10 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value?: Reference;
 }
+export interface CheckedExpr_ReferenceMapEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface CheckedExpr_ReferenceMapEntryAmino {
   key: string;
   value?: ReferenceAmino;
@@ -193,6 +197,10 @@ export interface CheckedExpr_ReferenceMapEntrySDKType {
 export interface CheckedExpr_TypeMapEntry {
   key: Long;
   value?: Type;
+}
+export interface CheckedExpr_TypeMapEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntryAmino {
   key: string;
@@ -263,6 +271,10 @@ export interface CheckedExpr {
    * may have structural differences.
    */
   expr?: Expr;
+}
+export interface CheckedExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: Uint8Array;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -403,6 +415,10 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface TypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Type";
+  value: Uint8Array;
+}
 
 /** Represents a CEL type. */
 export interface TypeAmino {
@@ -494,6 +510,10 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
+export interface Type_ListTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.ListType";
+  value: Uint8Array;
+}
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeAmino {
@@ -517,6 +537,10 @@ export interface Type_MapType {
 
   /** The type of the value. */
   valueType?: Type;
+}
+export interface Type_MapTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.MapType";
+  value: Uint8Array;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
@@ -546,6 +570,10 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface Type_FunctionTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType";
+  value: Uint8Array;
+}
 
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeAmino {
@@ -573,6 +601,10 @@ export interface Type_AbstractType {
 
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+export interface Type_AbstractTypeProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType";
+  value: Uint8Array;
 }
 
 /** Application defined abstract type. */
@@ -618,6 +650,10 @@ export interface Decl {
 
   /** Function declaration. */
   function?: Decl_FunctionDecl;
+}
+export interface DeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Decl";
+  value: Uint8Array;
 }
 
 /**
@@ -683,6 +719,10 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface Decl_IdentDeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Uint8Array;
+}
 
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
@@ -734,6 +774,10 @@ export interface Decl_IdentDeclSDKType {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+export interface Decl_FunctionDeclProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Uint8Array;
 }
 
 /**
@@ -824,6 +868,10 @@ export interface Decl_FunctionDecl_Overload {
 
   /** Documentation string for the overload. */
   doc: string;
+}
+export interface Decl_FunctionDecl_OverloadProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Overload";
+  value: Uint8Array;
 }
 
 /**
@@ -936,6 +984,10 @@ export interface Reference {
    * constant if known at compile time.
    */
   value?: Constant;
+}
+export interface ReferenceProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Reference";
+  value: Uint8Array;
 }
 
 /** Describes a resolved reference to a declaration. */

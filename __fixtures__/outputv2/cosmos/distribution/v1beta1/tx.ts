@@ -11,6 +11,10 @@ export interface MsgSetWithdrawAddress {
   delegatorAddress: string;
   withdrawAddress: string;
 }
+export interface MsgSetWithdrawAddressProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress";
+  value: Uint8Array;
+}
 
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
@@ -36,6 +40,10 @@ export interface MsgSetWithdrawAddressSDKType {
 
 /** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 export interface MsgSetWithdrawAddressResponse {}
+export interface MsgSetWithdrawAddressResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgSetWithdrawAddressResponse";
+  value: Uint8Array;
+}
 
 /** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
 export interface MsgSetWithdrawAddressResponseAmino {}
@@ -54,6 +62,10 @@ export interface MsgSetWithdrawAddressResponseSDKType {}
 export interface MsgWithdrawDelegatorReward {
   delegatorAddress: string;
   validatorAddress: string;
+}
+export interface MsgWithdrawDelegatorRewardProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward";
+  value: Uint8Array;
 }
 
 /**
@@ -82,6 +94,10 @@ export interface MsgWithdrawDelegatorRewardSDKType {
 export interface MsgWithdrawDelegatorRewardResponse {
   amount: Coin[];
 }
+export interface MsgWithdrawDelegatorRewardResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse";
+  value: Uint8Array;
+}
 
 /** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponseAmino {
@@ -103,6 +119,10 @@ export interface MsgWithdrawDelegatorRewardResponseSDKType {
  */
 export interface MsgWithdrawValidatorCommission {
   validatorAddress: string;
+}
+export interface MsgWithdrawValidatorCommissionProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission";
+  value: Uint8Array;
 }
 
 /**
@@ -129,6 +149,10 @@ export interface MsgWithdrawValidatorCommissionSDKType {
 export interface MsgWithdrawValidatorCommissionResponse {
   amount: Coin[];
 }
+export interface MsgWithdrawValidatorCommissionResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse";
+  value: Uint8Array;
+}
 
 /** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponseAmino {
@@ -151,6 +175,10 @@ export interface MsgWithdrawValidatorCommissionResponseSDKType {
 export interface MsgFundCommunityPool {
   amount: Coin[];
   depositor: string;
+}
+export interface MsgFundCommunityPoolProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgFundCommunityPool";
+  value: Uint8Array;
 }
 
 /**
@@ -177,6 +205,10 @@ export interface MsgFundCommunityPoolSDKType {
 
 /** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 export interface MsgFundCommunityPoolResponse {}
+export interface MsgFundCommunityPoolResponseProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.MsgFundCommunityPoolResponse";
+  value: Uint8Array;
+}
 
 /** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
 export interface MsgFundCommunityPoolResponseAmino {}

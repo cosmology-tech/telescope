@@ -5,6 +5,10 @@ export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
+export interface QueryConfigRequestProtoType {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
+  value: Uint8Array;
+}
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestAmino {}
@@ -20,6 +24,10 @@ export interface QueryConfigRequestSDKType {}
 export interface QueryConfigResponse {
   /** config is the current app config. */
   config?: Config;
+}
+export interface QueryConfigResponseProtoType {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
+  value: Uint8Array;
 }
 
 /** QueryConfigRequest is the Query/Config response type. */

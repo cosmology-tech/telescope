@@ -25,6 +25,10 @@ export interface Http {
    */
   fullyDecodeReservedExpansion: boolean;
 }
+export interface HttpProtoType {
+  typeUrl: "/google.api.Http";
+  value: Uint8Array;
+}
 
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -395,6 +399,10 @@ export interface HttpRule {
    * the nesting may only be one level deep).
    */
   additionalBindings: HttpRule[];
+}
+export interface HttpRuleProtoType {
+  typeUrl: "/google.api.HttpRule";
+  value: Uint8Array;
 }
 
 /**
@@ -1025,6 +1033,10 @@ export interface CustomHttpPattern {
 
   /** The path matched by this custom verb. */
   path: string;
+}
+export interface CustomHttpPatternProtoType {
+  typeUrl: "/google.api.CustomHttpPattern";
+  value: Uint8Array;
 }
 
 /** A custom pattern is used for defining custom HTTP verb. */

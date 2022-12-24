@@ -4,6 +4,10 @@ export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
 }
+export interface NodeProtoType {
+  typeUrl: "/osmosis.store.v1beta1.Node";
+  value: Uint8Array;
+}
 export interface NodeAmino {
   children: ChildAmino[];
 }
@@ -17,6 +21,10 @@ export interface NodeSDKType {
 export interface Child {
   index: Uint8Array;
   accumulation: string;
+}
+export interface ChildProtoType {
+  typeUrl: "/osmosis.store.v1beta1.Child";
+  value: Uint8Array;
 }
 export interface ChildAmino {
   index: Uint8Array;
@@ -32,6 +40,10 @@ export interface ChildSDKType {
 }
 export interface Leaf {
   leaf?: Child;
+}
+export interface LeafProtoType {
+  typeUrl: "/osmosis.store.v1beta1.Leaf";
+  value: Uint8Array;
 }
 export interface LeafAmino {
   leaf?: ChildAmino;

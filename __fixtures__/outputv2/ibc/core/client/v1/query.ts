@@ -13,6 +13,10 @@ export interface QueryClientStateRequest {
   /** client state unique identifier */
   clientId: string;
 }
+export interface QueryClientStateRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -49,6 +53,10 @@ export interface QueryClientStateResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryClientStateResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStateResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -90,6 +98,10 @@ export interface QueryClientStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryClientStatesRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
@@ -122,6 +134,10 @@ export interface QueryClientStatesResponse {
 
   /** pagination response */
   pagination?: PageResponse;
+}
+export interface QueryClientStatesResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -169,6 +185,10 @@ export interface QueryConsensusStateRequest {
    * ConsensusState
    */
   latestHeight: boolean;
+}
+export interface QueryConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -223,6 +243,10 @@ export interface QueryConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
@@ -264,6 +288,10 @@ export interface QueryConsensusStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryConsensusStatesRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
@@ -301,6 +329,10 @@ export interface QueryConsensusStatesResponse {
   /** pagination response */
   pagination?: PageResponse;
 }
+export interface QueryConsensusStatesResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConsensusStatesResponse is the response type for the
@@ -335,6 +367,10 @@ export interface QueryClientStatusRequest {
   /** client unique identifier */
   clientId: string;
 }
+export interface QueryClientStatusRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
@@ -364,6 +400,10 @@ export interface QueryClientStatusRequestSDKType {
 export interface QueryClientStatusResponse {
   status: string;
 }
+export interface QueryClientStatusResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
@@ -390,6 +430,10 @@ export interface QueryClientStatusResponseSDKType {
  * method.
  */
 export interface QueryClientParamsRequest {}
+export interface QueryClientParamsRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
@@ -414,6 +458,10 @@ export interface QueryClientParamsRequestSDKType {}
 export interface QueryClientParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+export interface QueryClientParamsResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -442,6 +490,10 @@ export interface QueryClientParamsResponseSDKType {
  * Query/UpgradedClientState RPC method
  */
 export interface QueryUpgradedClientStateRequest {}
+export interface QueryUpgradedClientStateRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryUpgradedClientStateRequest is the request type for the
@@ -466,6 +518,10 @@ export interface QueryUpgradedClientStateRequestSDKType {}
 export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
   upgradedClientState?: Any;
+}
+export interface QueryUpgradedClientStateResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -494,6 +550,10 @@ export interface QueryUpgradedClientStateResponseSDKType {
  * Query/UpgradedConsensusState RPC method
  */
 export interface QueryUpgradedConsensusStateRequest {}
+export interface QueryUpgradedConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
@@ -518,6 +578,10 @@ export interface QueryUpgradedConsensusStateRequestSDKType {}
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgradedConsensusState?: Any;
+}
+export interface QueryUpgradedConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse";
+  value: Uint8Array;
 }
 
 /**

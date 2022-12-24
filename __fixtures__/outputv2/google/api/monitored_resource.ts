@@ -57,6 +57,10 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResourceDescriptorProtoType {
+  typeUrl: "/google.api.MonitoredResourceDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -138,6 +142,10 @@ export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
 }
+export interface MonitoredResource_LabelsEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface MonitoredResource_LabelsEntryAmino {
   key: string;
   value: string;
@@ -182,6 +190,10 @@ export interface MonitoredResource {
   labels: {
     [key: string]: string;
   };
+}
+export interface MonitoredResourceProtoType {
+  typeUrl: "/google.api.MonitoredResource";
+  value: Uint8Array;
 }
 
 /**
@@ -246,6 +258,10 @@ export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
 }
+export interface MonitoredResourceMetadata_UserLabelsEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
   key: string;
   value: string;
@@ -286,6 +302,10 @@ export interface MonitoredResourceMetadata {
   userLabels: {
     [key: string]: string;
   };
+}
+export interface MonitoredResourceMetadataProtoType {
+  typeUrl: "/google.api.MonitoredResourceMetadata";
+  value: Uint8Array;
 }
 
 /**

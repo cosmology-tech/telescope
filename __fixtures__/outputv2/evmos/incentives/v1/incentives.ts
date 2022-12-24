@@ -24,6 +24,10 @@ export interface Incentive {
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
 }
+export interface IncentiveProtoType {
+  typeUrl: "/evmos.incentives.v1.Incentive";
+  value: Uint8Array;
+}
 
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -73,6 +77,10 @@ export interface GasMeter {
   /** cumulative gas spent during the epoch */
   cumulativeGas: Long;
 }
+export interface GasMeterProtoType {
+  typeUrl: "/evmos.incentives.v1.GasMeter";
+  value: Uint8Array;
+}
 
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterAmino {
@@ -113,6 +121,10 @@ export interface RegisterIncentiveProposal {
 
   /** number of remaining epochs */
   epochs: number;
+}
+export interface RegisterIncentiveProposalProtoType {
+  typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
+  value: Uint8Array;
 }
 
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
@@ -156,6 +168,10 @@ export interface CancelIncentiveProposal {
 
   /** contract address */
   contract: string;
+}
+export interface CancelIncentiveProposalProtoType {
+  typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";
+  value: Uint8Array;
 }
 
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */

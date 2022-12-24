@@ -12,6 +12,10 @@ export interface QueryOrdersRequest {
   filters?: OrderFilters;
   pagination?: PageRequest;
 }
+export interface QueryOrdersRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryOrdersRequest";
+  value: Uint8Array;
+}
 
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequestAmino {
@@ -34,6 +38,10 @@ export interface QueryOrdersResponse {
   orders: Order[];
   pagination?: PageResponse;
 }
+export interface QueryOrdersResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryOrdersResponse";
+  value: Uint8Array;
+}
 
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseAmino {
@@ -55,6 +63,10 @@ export interface QueryOrdersResponseSDKType {
 export interface QueryOrderRequest {
   id?: OrderID;
 }
+export interface QueryOrderRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryOrderRequest";
+  value: Uint8Array;
+}
 
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequestAmino {
@@ -73,6 +85,10 @@ export interface QueryOrderRequestSDKType {
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponse {
   order?: Order;
+}
+export interface QueryOrderResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryOrderResponse";
+  value: Uint8Array;
 }
 
 /** QueryOrderResponse is response type for the Query/Order RPC method */
@@ -93,6 +109,10 @@ export interface QueryOrderResponseSDKType {
 export interface QueryBidsRequest {
   filters?: BidFilters;
   pagination?: PageRequest;
+}
+export interface QueryBidsRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryBidsRequest";
+  value: Uint8Array;
 }
 
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
@@ -116,6 +136,10 @@ export interface QueryBidsResponse {
   bids: QueryBidResponse[];
   pagination?: PageResponse;
 }
+export interface QueryBidsResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryBidsResponse";
+  value: Uint8Array;
+}
 
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseAmino {
@@ -137,6 +161,10 @@ export interface QueryBidsResponseSDKType {
 export interface QueryBidRequest {
   id?: BidID;
 }
+export interface QueryBidRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryBidRequest";
+  value: Uint8Array;
+}
 
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestAmino {
@@ -156,6 +184,10 @@ export interface QueryBidRequestSDKType {
 export interface QueryBidResponse {
   bid?: Bid;
   escrowAccount?: Account;
+}
+export interface QueryBidResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryBidResponse";
+  value: Uint8Array;
 }
 
 /** QueryBidResponse is response type for the Query/Bid RPC method */
@@ -179,6 +211,10 @@ export interface QueryLeasesRequest {
   filters?: LeaseFilters;
   pagination?: PageRequest;
 }
+export interface QueryLeasesRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryLeasesRequest";
+  value: Uint8Array;
+}
 
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestAmino {
@@ -201,6 +237,10 @@ export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
   pagination?: PageResponse;
 }
+export interface QueryLeasesResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryLeasesResponse";
+  value: Uint8Array;
+}
 
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseAmino {
@@ -222,6 +262,10 @@ export interface QueryLeasesResponseSDKType {
 export interface QueryLeaseRequest {
   id?: LeaseID;
 }
+export interface QueryLeaseRequestProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryLeaseRequest";
+  value: Uint8Array;
+}
 
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestAmino {
@@ -241,6 +285,10 @@ export interface QueryLeaseRequestSDKType {
 export interface QueryLeaseResponse {
   lease?: Lease;
   escrowPayment?: FractionalPayment;
+}
+export interface QueryLeaseResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.QueryLeaseResponse";
+  value: Uint8Array;
 }
 
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */

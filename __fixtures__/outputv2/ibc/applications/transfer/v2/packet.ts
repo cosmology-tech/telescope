@@ -20,6 +20,10 @@ export interface FungibleTokenPacketData {
   /** the recipient address on the destination chain */
   receiver: string;
 }
+export interface FungibleTokenPacketDataProtoType {
+  typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
+  value: Uint8Array;
+}
 
 /**
  * FungibleTokenPacketData defines a struct for the packet payload

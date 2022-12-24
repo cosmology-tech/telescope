@@ -36,6 +36,10 @@ export interface Usage {
    */
   producerNotificationChannel: string;
 }
+export interface UsageProtoType {
+  typeUrl: "/google.api.Usage";
+  value: Uint8Array;
+}
 
 /** Configuration controlling usage of a service. */
 export interface UsageAmino {
@@ -132,6 +136,10 @@ export interface UsageRule {
    * methods, such as service health check methods.
    */
   skipServiceControl: boolean;
+}
+export interface UsageRuleProtoType {
+  typeUrl: "/google.api.UsageRule";
+  value: Uint8Array;
 }
 
 /**

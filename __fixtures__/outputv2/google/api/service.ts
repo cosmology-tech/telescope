@@ -169,6 +169,10 @@ export interface Service {
   /** @deprecated */
   configVersion?: UInt32Value;
 }
+export interface ServiceProtoType {
+  typeUrl: "/google.api.Service";
+  value: Uint8Array;
+}
 
 /**
  * `Service` is the root object of Google service configuration schema. It

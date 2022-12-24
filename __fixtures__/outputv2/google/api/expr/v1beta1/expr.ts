@@ -15,6 +15,10 @@ export interface ParsedExpr {
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
+export interface ParsedExprProtoType {
+  typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
+  value: Uint8Array;
+}
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprAmino {
@@ -84,6 +88,10 @@ export interface Expr {
 
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
+}
+export interface ExprProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Expr";
+  value: Uint8Array;
 }
 
 /**
@@ -175,6 +183,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Ident";
+  value: Uint8Array;
+}
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentAmino {
@@ -220,6 +232,10 @@ export interface Expr_Select {
    * This results from the macro `has(request.auth)`.
    */
   testOnly: boolean;
+}
+export interface Expr_SelectProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Select";
+  value: Uint8Array;
 }
 
 /** A field selection expression. e.g. `request.auth`. */
@@ -277,6 +293,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Call";
+  value: Uint8Array;
+}
 
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -322,6 +342,10 @@ export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
 }
+export interface Expr_CreateListProtoType {
+  typeUrl: "/google.api.expr.v1beta1.CreateList";
+  value: Uint8Array;
+}
 
 /**
  * A list creation expression.
@@ -364,6 +388,10 @@ export interface Expr_CreateStruct {
 
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
+}
+export interface Expr_CreateStructProtoType {
+  typeUrl: "/google.api.expr.v1beta1.CreateStruct";
+  value: Uint8Array;
 }
 
 /**
@@ -417,6 +445,10 @@ export interface Expr_CreateStruct_Entry {
 
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 
 /** Represents an entry. */
@@ -512,6 +544,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Comprehension";
+  value: Uint8Array;
 }
 
 /**
@@ -654,6 +690,10 @@ export interface Literal {
 
   /** bytes value. */
   bytesValue?: Uint8Array;
+}
+export interface LiteralProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Literal";
+  value: Uint8Array;
 }
 
 /**

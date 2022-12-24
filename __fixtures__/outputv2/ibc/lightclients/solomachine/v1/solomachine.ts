@@ -147,6 +147,10 @@ export interface ClientState {
    */
   allowUpdateAfterProposal: boolean;
 }
+export interface ClientStateProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ClientState";
+  value: Uint8Array;
+}
 
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -199,6 +203,10 @@ export interface ConsensusState {
   diversifier: string;
   timestamp: Long;
 }
+export interface ConsensusStateProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusState";
+  value: Uint8Array;
+}
 
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -242,6 +250,10 @@ export interface Header {
   newPublicKey?: Any;
   newDiversifier: string;
 }
+export interface HeaderProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.Header";
+  value: Uint8Array;
+}
 
 /** Header defines a solo machine consensus header */
 export interface HeaderAmino {
@@ -275,6 +287,10 @@ export interface Misbehaviour {
   sequence: Long;
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
+}
+export interface MisbehaviourProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.Misbehaviour";
+  value: Uint8Array;
 }
 
 /**
@@ -313,6 +329,10 @@ export interface SignatureAndData {
   data: Uint8Array;
   timestamp: Long;
 }
+export interface SignatureAndDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.SignatureAndData";
+  value: Uint8Array;
+}
 
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -347,6 +367,10 @@ export interface SignatureAndDataSDKType {
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
+}
+export interface TimestampedSignatureDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.TimestampedSignatureData";
+  value: Uint8Array;
 }
 
 /**
@@ -383,6 +407,10 @@ export interface SignBytes {
   /** marshaled data */
   data: Uint8Array;
 }
+export interface SignBytesProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.SignBytes";
+  value: Uint8Array;
+}
 
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesAmino {
@@ -418,6 +446,10 @@ export interface HeaderData {
   /** header diversifier */
   newDiversifier: string;
 }
+export interface HeaderDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.HeaderData";
+  value: Uint8Array;
+}
 
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataAmino {
@@ -443,6 +475,10 @@ export interface ClientStateData {
   path: Uint8Array;
   clientState?: Any;
 }
+export interface ClientStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ClientStateData";
+  value: Uint8Array;
+}
 
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataAmino {
@@ -467,6 +503,10 @@ export interface ClientStateDataSDKType {
 export interface ConsensusStateData {
   path: Uint8Array;
   consensusState?: Any;
+}
+export interface ConsensusStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusStateData";
+  value: Uint8Array;
 }
 
 /**
@@ -499,6 +539,10 @@ export interface ConnectionStateData {
   path: Uint8Array;
   connection?: ConnectionEnd;
 }
+export interface ConnectionStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ConnectionStateData";
+  value: Uint8Array;
+}
 
 /**
  * ConnectionStateData returns the SignBytes data for connection state
@@ -529,6 +573,10 @@ export interface ConnectionStateDataSDKType {
 export interface ChannelStateData {
   path: Uint8Array;
   channel?: Channel;
+}
+export interface ChannelStateDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.ChannelStateData";
+  value: Uint8Array;
 }
 
 /**
@@ -561,6 +609,10 @@ export interface PacketCommitmentData {
   path: Uint8Array;
   commitment: Uint8Array;
 }
+export interface PacketCommitmentDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.PacketCommitmentData";
+  value: Uint8Array;
+}
 
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
@@ -592,6 +644,10 @@ export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
+export interface PacketAcknowledgementDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.PacketAcknowledgementData";
+  value: Uint8Array;
+}
 
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
@@ -622,6 +678,10 @@ export interface PacketAcknowledgementDataSDKType {
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
 }
+export interface PacketReceiptAbsenceDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.PacketReceiptAbsenceData";
+  value: Uint8Array;
+}
 
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
@@ -650,6 +710,10 @@ export interface PacketReceiptAbsenceDataSDKType {
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
+}
+export interface NextSequenceRecvDataProtoType {
+  typeUrl: "/ibc.lightclients.solomachine.v1.NextSequenceRecvData";
+  value: Uint8Array;
 }
 
 /**

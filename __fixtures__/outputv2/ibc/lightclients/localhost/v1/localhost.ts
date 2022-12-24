@@ -14,6 +14,10 @@ export interface ClientState {
   /** self latest block height */
   height?: Height;
 }
+export interface ClientStateProtoType {
+  typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
+  value: Uint8Array;
+}
 
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)

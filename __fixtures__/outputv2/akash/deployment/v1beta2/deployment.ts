@@ -58,6 +58,10 @@ export interface DeploymentID {
   owner: string;
   dseq: Long;
 }
+export interface DeploymentIDProtoType {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentID";
+  value: Uint8Array;
+}
 
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
@@ -81,6 +85,10 @@ export interface Deployment {
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;
+}
+export interface DeploymentProtoType {
+  typeUrl: "/akash.deployment.v1beta2.Deployment";
+  value: Uint8Array;
 }
 
 /** Deployment stores deploymentID, state and version details */
@@ -108,6 +116,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: Long;
   state: string;
+}
+export interface DeploymentFiltersProtoType {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: Uint8Array;
 }
 
 /** DeploymentFilters defines filters used to filter deployments */

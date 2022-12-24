@@ -16,6 +16,10 @@ export interface DelegatorWithdrawInfo {
   /** withdraw_address is the address to withdraw the delegation rewards to. */
   withdrawAddress: string;
 }
+export interface DelegatorWithdrawInfoProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorWithdrawInfo";
+  value: Uint8Array;
+}
 
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -52,6 +56,10 @@ export interface ValidatorOutstandingRewardsRecord {
   /** outstanding_rewards represents the oustanding rewards of a validator. */
   outstandingRewards: DecCoin[];
 }
+export interface ValidatorOutstandingRewardsRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord";
+  value: Uint8Array;
+}
 
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
 export interface ValidatorOutstandingRewardsRecordAmino {
@@ -82,6 +90,10 @@ export interface ValidatorAccumulatedCommissionRecord {
 
   /** accumulated is the accumulated commission of a validator. */
   accumulated?: ValidatorAccumulatedCommission;
+}
+export interface ValidatorAccumulatedCommissionRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord";
+  value: Uint8Array;
 }
 
 /**
@@ -123,6 +135,10 @@ export interface ValidatorHistoricalRewardsRecord {
   /** rewards defines the historical rewards of a validator. */
   rewards?: ValidatorHistoricalRewards;
 }
+export interface ValidatorHistoricalRewardsRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord";
+  value: Uint8Array;
+}
 
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -161,6 +177,10 @@ export interface ValidatorCurrentRewardsRecord {
   /** rewards defines the current rewards of a validator. */
   rewards?: ValidatorCurrentRewards;
 }
+export interface ValidatorCurrentRewardsRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord";
+  value: Uint8Array;
+}
 
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordAmino {
@@ -191,6 +211,10 @@ export interface DelegatorStartingInfoRecord {
 
   /** starting_info defines the starting info of a delegator. */
   startingInfo?: DelegatorStartingInfo;
+}
+export interface DelegatorStartingInfoRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord";
+  value: Uint8Array;
 }
 
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
@@ -229,6 +253,10 @@ export interface ValidatorSlashEventRecord {
 
   /** validator_slash_event describes the slash event. */
   validatorSlashEvent?: ValidatorSlashEvent;
+}
+export interface ValidatorSlashEventRecordProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord";
+  value: Uint8Array;
 }
 
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
@@ -289,6 +317,10 @@ export interface GenesisState {
 
   /** fee_pool defines the validator slash events at genesis. */
   validatorSlashEvents: ValidatorSlashEventRecord[];
+}
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.distribution.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 
 /** GenesisState defines the distribution module's genesis state. */

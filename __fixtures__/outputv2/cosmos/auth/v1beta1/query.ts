@@ -14,6 +14,10 @@ export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryAccountsRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -50,6 +54,10 @@ export interface QueryAccountsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryAccountsResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -83,6 +91,10 @@ export interface QueryAccountRequest {
   /** address defines the address to query for. */
   address: string;
 }
+export interface QueryAccountRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountRequest";
+  value: Uint8Array;
+}
 
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequestAmino {
@@ -101,6 +113,10 @@ export interface QueryAccountRequestSDKType {
 
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequest {}
+export interface QueryModuleAccountsRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsRequest";
+  value: Uint8Array;
+}
 
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequestAmino {}
@@ -116,6 +132,10 @@ export interface QueryModuleAccountsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -138,6 +158,10 @@ export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
   account?: (BaseAccount & Any) | undefined;
 }
+export interface QueryAccountResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
+  value: Uint8Array;
+}
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseAmino {
@@ -156,6 +180,10 @@ export interface QueryAccountResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
@@ -170,6 +198,10 @@ export interface QueryParamsRequestSDKType {}
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: (ModuleAccount & Any)[] | Any[];
+}
+export interface QueryModuleAccountsResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse";
+  value: Uint8Array;
 }
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
@@ -188,6 +220,10 @@ export interface QueryModuleAccountsResponseSDKType {
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequest {}
+export interface Bech32PrefixRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixRequest";
+  value: Uint8Array;
+}
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequestAmino {}
@@ -202,6 +238,10 @@ export interface Bech32PrefixRequestSDKType {}
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
+}
+export interface Bech32PrefixResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixResponse";
+  value: Uint8Array;
 }
 
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
@@ -222,6 +262,10 @@ export interface Bech32PrefixResponseSDKType {
 export interface AddressBytesToStringRequest {
   addressBytes: Uint8Array;
 }
+export interface AddressBytesToStringRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringRequest";
+  value: Uint8Array;
+}
 
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestAmino {
@@ -240,6 +284,10 @@ export interface AddressBytesToStringRequestSDKType {
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
+}
+export interface AddressBytesToStringResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringResponse";
+  value: Uint8Array;
 }
 
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
@@ -260,6 +308,10 @@ export interface AddressBytesToStringResponseSDKType {
 export interface AddressStringToBytesRequest {
   addressString: string;
 }
+export interface AddressStringToBytesRequestProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesRequest";
+  value: Uint8Array;
+}
 
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequestAmino {
@@ -278,6 +330,10 @@ export interface AddressStringToBytesRequestSDKType {
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
+}
+export interface AddressStringToBytesResponseProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesResponse";
+  value: Uint8Array;
 }
 
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */

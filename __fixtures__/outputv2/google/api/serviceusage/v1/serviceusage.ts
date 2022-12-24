@@ -78,6 +78,10 @@ export interface EnableServiceRequest {
    */
   name: string;
 }
+export interface EnableServiceRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestAmino {
@@ -114,6 +118,10 @@ export interface EnableServiceRequestSDKType {
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
   service?: Service;
+}
+export interface EnableServiceResponseProtoType {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -164,6 +172,10 @@ export interface DisableServiceRequest {
   /** Defines the behavior for checking service usage when disabling a service. */
   checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
+export interface DisableServiceRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestAmino {
@@ -211,6 +223,10 @@ export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
   service?: Service;
 }
+export interface DisableServiceResponseProtoType {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse";
+  value: Uint8Array;
+}
 
 /**
  * Response message for the `DisableService` method.
@@ -245,6 +261,10 @@ export interface GetServiceRequest {
    * project number.
    */
   name: string;
+}
+export interface GetServiceRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.GetServiceRequest";
+  value: Uint8Array;
 }
 
 /** Request message for the `GetService` method. */
@@ -296,6 +316,10 @@ export interface ListServicesRequest {
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
   filter: string;
+}
+export interface ListServicesRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesRequest";
+  value: Uint8Array;
 }
 
 /** Request message for the `ListServices` method. */
@@ -351,6 +375,10 @@ export interface ListServicesResponse {
    */
   nextPageToken: string;
 }
+export interface ListServicesResponseProtoType {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseAmino {
@@ -400,6 +428,10 @@ export interface BatchEnableServicesRequest {
    * will occur.
    */
   serviceIds: string[];
+}
+export interface BatchEnableServicesRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
+  value: Uint8Array;
 }
 
 /** Request message for the `BatchEnableServices` method. */
@@ -455,6 +487,10 @@ export interface BatchEnableServicesResponse {
    */
   failures: BatchEnableServicesResponse_EnableFailure[];
 }
+export interface BatchEnableServicesResponseProtoType {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
+  value: Uint8Array;
+}
 
 /**
  * Response message for the `BatchEnableServices` method.
@@ -493,6 +529,10 @@ export interface BatchEnableServicesResponse_EnableFailure {
 
   /** An error message describing why the service could not be enabled. */
   errorMessage: string;
+}
+export interface BatchEnableServicesResponse_EnableFailureProtoType {
+  typeUrl: "/google.api.serviceusage.v1.EnableFailure";
+  value: Uint8Array;
 }
 
 /** Provides error messages for the failing services. */
@@ -535,6 +575,10 @@ export interface BatchGetServicesRequest {
    */
   names: string[];
 }
+export interface BatchGetServicesRequestProtoType {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestAmino {
@@ -572,6 +616,10 @@ export interface BatchGetServicesRequestSDKType {
 export interface BatchGetServicesResponse {
   /** The requested Service states. */
   services: Service[];
+}
+export interface BatchGetServicesResponseProtoType {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse";
+  value: Uint8Array;
 }
 
 /** Response message for the `BatchGetServices` method. */

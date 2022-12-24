@@ -13,6 +13,10 @@ export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryDevFeeInfosRequestProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -44,6 +48,10 @@ export interface QueryDevFeeInfosResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryDevFeeInfosResponseProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -78,6 +86,10 @@ export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
   contractAddress: string;
 }
+export interface QueryDevFeeInfoRequestProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -107,6 +119,10 @@ export interface QueryDevFeeInfoRequestSDKType {
 export interface QueryDevFeeInfoResponse {
   fee?: DevFeeInfo;
 }
+export interface QueryDevFeeInfoResponseProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
@@ -130,6 +146,10 @@ export interface QueryDevFeeInfoResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/evmos.fees.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
@@ -147,6 +167,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params?: Params;
+}
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/evmos.fees.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -179,6 +203,10 @@ export interface QueryDevFeeInfosPerDeployerRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryDevFeeInfosPerDeployerRequestProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -215,6 +243,10 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryDevFeeInfosPerDeployerResponseProtoType {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: Uint8Array;
 }
 
 /**

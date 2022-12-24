@@ -7,6 +7,10 @@ export const protobufPackage = "akash.deployment.v1beta2";
 export interface Params {
   deploymentMinDeposit?: Coin;
 }
+export interface ParamsProtoType {
+  typeUrl: "/akash.deployment.v1beta2.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {

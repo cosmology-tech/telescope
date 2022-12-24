@@ -123,6 +123,10 @@ export interface PartSetHeader {
   total: number;
   hash: Uint8Array;
 }
+export interface PartSetHeaderProtoType {
+  typeUrl: "/tendermint.types.PartSetHeader";
+  value: Uint8Array;
+}
 
 /** PartsetHeader */
 export interface PartSetHeaderAmino {
@@ -144,6 +148,10 @@ export interface Part {
   bytes: Uint8Array;
   proof?: Proof;
 }
+export interface PartProtoType {
+  typeUrl: "/tendermint.types.Part";
+  value: Uint8Array;
+}
 export interface PartAmino {
   index: number;
   bytes: Uint8Array;
@@ -163,6 +171,10 @@ export interface PartSDKType {
 export interface BlockID {
   hash: Uint8Array;
   partSetHeader?: PartSetHeader;
+}
+export interface BlockIDProtoType {
+  typeUrl: "/tendermint.types.BlockID";
+  value: Uint8Array;
 }
 
 /** BlockID */
@@ -214,6 +226,10 @@ export interface Header {
 
   /** original proposer of the block */
   proposerAddress: Uint8Array;
+}
+export interface HeaderProtoType {
+  typeUrl: "/tendermint.types.Header";
+  value: Uint8Array;
 }
 
 /** Header defines the structure of a Tendermint block header. */
@@ -282,6 +298,10 @@ export interface Data {
    */
   txs: Uint8Array[];
 }
+export interface DataProtoType {
+  typeUrl: "/tendermint.types.Data";
+  value: Uint8Array;
+}
 
 /** Data contains the set of transactions included in the block */
 export interface DataAmino {
@@ -317,6 +337,10 @@ export interface Vote {
   validatorAddress: Uint8Array;
   validatorIndex: number;
   signature: Uint8Array;
+}
+export interface VoteProtoType {
+  typeUrl: "/tendermint.types.Vote";
+  value: Uint8Array;
 }
 
 /**
@@ -362,6 +386,10 @@ export interface Commit {
   blockId?: BlockID;
   signatures: CommitSig[];
 }
+export interface CommitProtoType {
+  typeUrl: "/tendermint.types.Commit";
+  value: Uint8Array;
+}
 
 /** Commit contains the evidence that a block was committed by a set of validators. */
 export interface CommitAmino {
@@ -389,6 +417,10 @@ export interface CommitSig {
   validatorAddress: Uint8Array;
   timestamp?: Date;
   signature: Uint8Array;
+}
+export interface CommitSigProtoType {
+  typeUrl: "/tendermint.types.CommitSig";
+  value: Uint8Array;
 }
 
 /** CommitSig is a part of the Vote included in a Commit. */
@@ -419,6 +451,10 @@ export interface Proposal {
   timestamp?: Date;
   signature: Uint8Array;
 }
+export interface ProposalProtoType {
+  typeUrl: "/tendermint.types.Proposal";
+  value: Uint8Array;
+}
 export interface ProposalAmino {
   type: SignedMsgType;
   height: string;
@@ -445,6 +481,10 @@ export interface SignedHeader {
   header?: Header;
   commit?: Commit;
 }
+export interface SignedHeaderProtoType {
+  typeUrl: "/tendermint.types.SignedHeader";
+  value: Uint8Array;
+}
 export interface SignedHeaderAmino {
   header?: HeaderAmino;
   commit?: CommitAmino;
@@ -460,6 +500,10 @@ export interface SignedHeaderSDKType {
 export interface LightBlock {
   signedHeader?: SignedHeader;
   validatorSet?: ValidatorSet;
+}
+export interface LightBlockProtoType {
+  typeUrl: "/tendermint.types.LightBlock";
+  value: Uint8Array;
 }
 export interface LightBlockAmino {
   signed_header?: SignedHeaderAmino;
@@ -478,6 +522,10 @@ export interface BlockMeta {
   blockSize: Long;
   header?: Header;
   numTxs: Long;
+}
+export interface BlockMetaProtoType {
+  typeUrl: "/tendermint.types.BlockMeta";
+  value: Uint8Array;
 }
 export interface BlockMetaAmino {
   block_id?: BlockIDAmino;
@@ -501,6 +549,10 @@ export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;
   proof?: Proof;
+}
+export interface TxProofProtoType {
+  typeUrl: "/tendermint.types.TxProof";
+  value: Uint8Array;
 }
 
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */

@@ -36,6 +36,10 @@ export interface ValidatorSigningInfo {
    */
   missedBlocksCounter: Long;
 }
+export interface ValidatorSigningInfoProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
+  value: Uint8Array;
+}
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -94,6 +98,10 @@ export interface Params {
   downtimeJailDuration?: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
+}
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.Params";
+  value: Uint8Array;
 }
 
 /** Params represents the parameters used for by the slashing module. */

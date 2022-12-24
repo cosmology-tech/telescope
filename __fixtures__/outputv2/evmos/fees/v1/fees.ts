@@ -19,6 +19,10 @@ export interface DevFeeInfo {
    */
   withdrawAddress: string;
 }
+export interface DevFeeInfoProtoType {
+  typeUrl: "/evmos.fees.v1.DevFeeInfo";
+  value: Uint8Array;
+}
 
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions

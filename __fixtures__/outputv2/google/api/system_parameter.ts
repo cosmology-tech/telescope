@@ -44,6 +44,10 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
+export interface SystemParametersProtoType {
+  typeUrl: "/google.api.SystemParameters";
+  value: Uint8Array;
+}
 
 /**
  * ### System parameter configuration
@@ -126,6 +130,10 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
+export interface SystemParameterRuleProtoType {
+  typeUrl: "/google.api.SystemParameterRule";
+  value: Uint8Array;
+}
 
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -183,6 +191,10 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+export interface SystemParameterProtoType {
+  typeUrl: "/google.api.SystemParameter";
+  value: Uint8Array;
 }
 
 /**

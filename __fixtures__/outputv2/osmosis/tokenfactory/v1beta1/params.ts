@@ -7,6 +7,10 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 export interface Params {
   denomCreationFee: Coin[];
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the parameters for the tokenfactory module. */
 export interface ParamsAmino {

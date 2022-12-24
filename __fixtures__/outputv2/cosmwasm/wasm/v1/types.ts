@@ -130,6 +130,10 @@ export function contractCodeHistoryOperationTypeToJSON(object: ContractCodeHisto
 export interface AccessTypeParam {
   value: AccessType;
 }
+export interface AccessTypeParamProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam";
+  value: Uint8Array;
+}
 
 /** AccessTypeParam */
 export interface AccessTypeParamAmino {
@@ -149,6 +153,10 @@ export interface AccessTypeParamSDKType {
 export interface AccessConfig {
   permission: AccessType;
   address: string;
+}
+export interface AccessConfigProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AccessConfig";
+  value: Uint8Array;
 }
 
 /** AccessConfig access control type. */
@@ -172,6 +180,10 @@ export interface Params {
   codeUploadAccess?: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
+}
+export interface ParamsProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the set of wasm parameters. */
@@ -202,6 +214,10 @@ export interface CodeInfo {
 
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig?: AccessConfig;
+}
+export interface CodeInfoProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfo";
+  value: Uint8Array;
 }
 
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -254,6 +270,10 @@ export interface ContractInfo {
    * persistence model.
    */
   extension?: (Any) | undefined;
+}
+export interface ContractInfoProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
+  value: Uint8Array;
 }
 
 /** ContractInfo stores a WASM contract instance */
@@ -311,6 +331,10 @@ export interface ContractCodeHistoryEntry {
   updated?: AbsoluteTxPosition;
   msg: Uint8Array;
 }
+export interface ContractCodeHistoryEntryProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry";
+  value: Uint8Array;
+}
 
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntryAmino {
@@ -350,6 +374,10 @@ export interface AbsoluteTxPosition {
    */
   txIndex: Long;
 }
+export interface AbsoluteTxPositionProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition";
+  value: Uint8Array;
+}
 
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
@@ -385,6 +413,10 @@ export interface Model {
   key: Uint8Array;
 
   /** base64-encode raw value */
+  value: Uint8Array;
+}
+export interface ModelProtoType {
+  typeUrl: "/cosmwasm.wasm.v1.Model";
   value: Uint8Array;
 }
 

@@ -11,6 +11,10 @@ export interface QueryDeploymentsRequest {
   filters?: DeploymentFilters;
   pagination?: PageRequest;
 }
+export interface QueryDeploymentsRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestAmino {
@@ -33,6 +37,10 @@ export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
   pagination?: PageResponse;
 }
+export interface QueryDeploymentsResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseAmino {
@@ -54,6 +62,10 @@ export interface QueryDeploymentsResponseSDKType {
 export interface QueryDeploymentRequest {
   id?: DeploymentID;
 }
+export interface QueryDeploymentRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest";
+  value: Uint8Array;
+}
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestAmino {
@@ -74,6 +86,10 @@ export interface QueryDeploymentResponse {
   deployment?: Deployment;
   groups: Group[];
   escrowAccount?: Account;
+}
+export interface QueryDeploymentResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryDeploymentResponse";
+  value: Uint8Array;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
@@ -98,6 +114,10 @@ export interface QueryDeploymentResponseSDKType {
 export interface QueryGroupRequest {
   id?: GroupID;
 }
+export interface QueryGroupRequestProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupRequest";
+  value: Uint8Array;
+}
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestAmino {
@@ -116,6 +136,10 @@ export interface QueryGroupRequestSDKType {
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
   group?: Group;
+}
+export interface QueryGroupResponseProtoType {
+  typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse";
+  value: Uint8Array;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */

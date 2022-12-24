@@ -20,6 +20,10 @@ export interface QueryAppVersionRequest {
   /** proposed version */
   proposedVersion: string;
 }
+export interface QueryAppVersionRequestProtoType {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest";
+  value: Uint8Array;
+}
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestAmino {
@@ -59,6 +63,10 @@ export interface QueryAppVersionResponse {
 
   /** supported app version */
   version: string;
+}
+export interface QueryAppVersionResponseProtoType {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
+  value: Uint8Array;
 }
 
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */

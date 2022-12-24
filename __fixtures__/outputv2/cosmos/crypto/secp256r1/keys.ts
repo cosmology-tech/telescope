@@ -10,6 +10,10 @@ export interface PubKey {
    */
   key: Uint8Array;
 }
+export interface PubKeyProtoType {
+  typeUrl: "/cosmos.crypto.secp256r1.PubKey";
+  value: Uint8Array;
+}
 
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKeyAmino {
@@ -33,6 +37,10 @@ export interface PubKeySDKType {
 export interface PrivKey {
   /** secret number serialized using big-endian encoding */
   secret: Uint8Array;
+}
+export interface PrivKeyProtoType {
+  typeUrl: "/cosmos.crypto.secp256r1.PrivKey";
+  value: Uint8Array;
 }
 
 /** PrivKey defines a secp256r1 ECDSA private key. */

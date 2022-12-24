@@ -20,6 +20,10 @@ export interface GenesisState {
    */
   missedBlocks: ValidatorMissedBlocks[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisStateAmino {
@@ -58,6 +62,10 @@ export interface SigningInfo {
   /** validator_signing_info represents the signing info of this validator. */
   validatorSigningInfo?: ValidatorSigningInfo;
 }
+export interface SigningInfoProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.SigningInfo";
+  value: Uint8Array;
+}
 
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoAmino {
@@ -88,6 +96,10 @@ export interface ValidatorMissedBlocks {
 
   /** missed_blocks is an array of missed blocks by the validator. */
   missedBlocks: MissedBlock[];
+}
+export interface ValidatorMissedBlocksProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks";
+  value: Uint8Array;
 }
 
 /**
@@ -122,6 +134,10 @@ export interface MissedBlock {
 
   /** missed is the missed status. */
   missed: boolean;
+}
+export interface MissedBlockProtoType {
+  typeUrl: "/cosmos.slashing.v1beta1.MissedBlock";
+  value: Uint8Array;
 }
 
 /** MissedBlock contains height and missed status as boolean. */

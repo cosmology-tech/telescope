@@ -283,6 +283,10 @@ export interface CheckError {
    */
   status?: Status;
 }
+export interface CheckErrorProtoType {
+  typeUrl: "/google.api.servicecontrol.v1.CheckError";
+  value: Uint8Array;
+}
 
 /**
  * Defines the errors to be returned in

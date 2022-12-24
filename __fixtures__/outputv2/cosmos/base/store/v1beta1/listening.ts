@@ -18,6 +18,10 @@ export interface StoreKVPair {
   key: Uint8Array;
   value: Uint8Array;
 }
+export interface StoreKVPairProtoType {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair";
+  value: Uint8Array;
+}
 
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)

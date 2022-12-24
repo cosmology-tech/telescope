@@ -102,6 +102,10 @@ export interface Timestamp {
    */
   nanos: number;
 }
+export interface TimestampProtoType {
+  typeUrl: "/google.protobuf.Timestamp";
+  value: Uint8Array;
+}
 
 /**
  * A Timestamp represents a point in time independent of any time zone or local

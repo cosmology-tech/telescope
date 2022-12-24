@@ -15,6 +15,10 @@ export interface QueryGrantsRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryGrantsRequestProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
+  value: Uint8Array;
+}
 
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestAmino {
@@ -48,6 +52,10 @@ export interface QueryGrantsResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface QueryGrantsResponseProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse";
+  value: Uint8Array;
+}
 
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseAmino {
@@ -74,6 +82,10 @@ export interface QueryGranterGrantsRequest {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryGranterGrantsRequestProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
+  value: Uint8Array;
 }
 
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
@@ -102,6 +114,10 @@ export interface QueryGranterGrantsResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface QueryGranterGrantsResponseProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse";
+  value: Uint8Array;
+}
 
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseAmino {
@@ -129,6 +145,10 @@ export interface QueryGranteeGrantsRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryGranteeGrantsRequestProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
+  value: Uint8Array;
+}
 
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestAmino {
@@ -155,6 +175,10 @@ export interface QueryGranteeGrantsResponse {
 
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
+}
+export interface QueryGranteeGrantsResponseProtoType {
+  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse";
+  value: Uint8Array;
 }
 
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */

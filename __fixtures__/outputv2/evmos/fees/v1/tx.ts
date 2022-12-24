@@ -23,6 +23,10 @@ export interface MsgRegisterDevFeeInfo {
    */
   nonces: Long[];
 }
+export interface MsgRegisterDevFeeInfoProtoType {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: Uint8Array;
+}
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoAmino {
@@ -63,6 +67,10 @@ export interface MsgRegisterDevFeeInfoSDKType {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+export interface MsgRegisterDevFeeInfoResponseProtoType {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -90,6 +98,10 @@ export interface MsgCancelDevFeeInfo {
 
   /** deployer bech32 address */
   deployerAddress: string;
+}
+export interface MsgCancelDevFeeInfoProtoType {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: Uint8Array;
 }
 
 /**
@@ -119,6 +131,10 @@ export interface MsgCancelDevFeeInfoSDKType {
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+export interface MsgCancelDevFeeInfoResponseProtoType {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: Uint8Array;
+}
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseAmino {}
@@ -143,6 +159,10 @@ export interface MsgUpdateDevFeeInfo {
 
   /** new withdraw bech32 address for receiving the transaction fees */
   withdrawAddress: string;
+}
+export interface MsgUpdateDevFeeInfoProtoType {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: Uint8Array;
 }
 
 /**
@@ -176,6 +196,10 @@ export interface MsgUpdateDevFeeInfoSDKType {
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+export interface MsgUpdateDevFeeInfoResponseProtoType {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: Uint8Array;
+}
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseAmino {}

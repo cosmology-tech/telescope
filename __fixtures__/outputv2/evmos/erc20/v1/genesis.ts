@@ -11,6 +11,10 @@ export interface GenesisState {
   /** registered token pairs */
   tokenPairs: TokenPair[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.erc20.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
@@ -42,6 +46,10 @@ export interface Params {
    * ModuleAddress Ethereum address.
    */
   enableEvmHook: boolean;
+}
+export interface ParamsProtoType {
+  typeUrl: "/evmos.erc20.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the erc20 module params */

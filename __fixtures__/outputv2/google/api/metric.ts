@@ -348,6 +348,10 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
+export interface MetricDescriptorProtoType {
+  typeUrl: "/google.api.MetricDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -570,6 +574,10 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataProtoType {
+  typeUrl: "/google.api.MetricDescriptorMetadata";
+  value: Uint8Array;
+}
 
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
@@ -609,6 +617,10 @@ export interface Metric_LabelsEntry {
   key: string;
   value: string;
 }
+export interface Metric_LabelsEntryProtoType {
+  typeUrl: "/google.api.undefined";
+  value: Uint8Array;
+}
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
@@ -640,6 +652,10 @@ export interface Metric {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricProtoType {
+  typeUrl: "/google.api.Metric";
+  value: Uint8Array;
 }
 
 /**

@@ -10,6 +10,10 @@ export interface Resource {
   count: number;
   price?: DecCoin;
 }
+export interface ResourceProtoType {
+  typeUrl: "/akash.deployment.v1beta2.Resource";
+  value: Uint8Array;
+}
 
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {

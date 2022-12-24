@@ -14,6 +14,10 @@ export interface QueryChannelRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryChannelRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelRequest";
+  value: Uint8Array;
+}
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestAmino {
@@ -48,6 +52,10 @@ export interface QueryChannelResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryChannelResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -86,6 +94,10 @@ export interface QueryChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryChannelsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest";
+  value: Uint8Array;
+}
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequestAmino {
@@ -112,6 +124,10 @@ export interface QueryChannelsResponse {
 
   /** query block height */
   height?: Height;
+}
+export interface QueryChannelsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse";
+  value: Uint8Array;
 }
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
@@ -147,6 +163,10 @@ export interface QueryConnectionChannelsRequest {
 
   /** pagination request */
   pagination?: PageRequest;
+}
+export interface QueryConnectionChannelsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -187,6 +207,10 @@ export interface QueryConnectionChannelsResponse {
 
   /** query block height */
   height?: Height;
+}
+export interface QueryConnectionChannelsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -229,6 +253,10 @@ export interface QueryChannelClientStateRequest {
   /** channel unique identifier */
   channelId: string;
 }
+export interface QueryChannelClientStateRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
@@ -268,6 +296,10 @@ export interface QueryChannelClientStateResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryChannelClientStateResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -315,6 +347,10 @@ export interface QueryChannelConsensusStateRequest {
 
   /** revision height of the consensus state */
   revisionHeight: Long;
+}
+export interface QueryChannelConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -367,6 +403,10 @@ export interface QueryChannelConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
+export interface QueryChannelConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
@@ -415,6 +455,10 @@ export interface QueryPacketCommitmentRequest {
   /** packet sequence */
   sequence: Long;
 }
+export interface QueryPacketCommitmentRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentRequest is the request type for the
@@ -459,6 +503,10 @@ export interface QueryPacketCommitmentResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryPacketCommitmentResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -506,6 +554,10 @@ export interface QueryPacketCommitmentsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
+export interface QueryPacketCommitmentsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentsRequest is the request type for the
@@ -549,6 +601,10 @@ export interface QueryPacketCommitmentsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryPacketCommitmentsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketCommitmentsResponse is the request type for the
@@ -591,6 +647,10 @@ export interface QueryPacketReceiptRequest {
 
   /** packet sequence */
   sequence: Long;
+}
+export interface QueryPacketReceiptRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -636,6 +696,10 @@ export interface QueryPacketReceiptResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryPacketReceiptResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -683,6 +747,10 @@ export interface QueryPacketAcknowledgementRequest {
   /** packet sequence */
   sequence: Long;
 }
+export interface QueryPacketAcknowledgementRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
@@ -727,6 +795,10 @@ export interface QueryPacketAcknowledgementResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryPacketAcknowledgementResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -777,6 +849,10 @@ export interface QueryPacketAcknowledgementsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+export interface QueryPacketAcknowledgementsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
@@ -824,6 +900,10 @@ export interface QueryPacketAcknowledgementsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryPacketAcknowledgementsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
@@ -867,6 +947,10 @@ export interface QueryUnreceivedPacketsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
+export interface QueryUnreceivedPacketsRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
@@ -908,6 +992,10 @@ export interface QueryUnreceivedPacketsResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryUnreceivedPacketsResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
@@ -947,6 +1035,10 @@ export interface QueryUnreceivedAcksRequest {
 
   /** list of acknowledgement sequences */
   packetAckSequences: Long[];
+}
+export interface QueryUnreceivedAcksRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -989,6 +1081,10 @@ export interface QueryUnreceivedAcksResponse {
   /** query block height */
   height?: Height;
 }
+export interface QueryUnreceivedAcksResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryUnreceivedAcksResponse is the response type for the
@@ -1025,6 +1121,10 @@ export interface QueryNextSequenceReceiveRequest {
 
   /** channel unique identifier */
   channelId: string;
+}
+export interface QueryNextSequenceReceiveRequestProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -1065,6 +1165,10 @@ export interface QueryNextSequenceReceiveResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryNextSequenceReceiveResponseProtoType {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse";
+  value: Uint8Array;
 }
 
 /**

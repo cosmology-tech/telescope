@@ -12,6 +12,10 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 export interface SendAuthorization {
   spendLimit: Coin[];
 }
+export interface SendAuthorizationProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.SendAuthorization";
+  value: Uint8Array;
+}
 
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from

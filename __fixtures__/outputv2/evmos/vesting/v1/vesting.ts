@@ -29,6 +29,10 @@ export interface ClawbackVestingAccount {
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
 }
+export interface ClawbackVestingAccountProtoType {
+  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
+  value: Uint8Array;
+}
 
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides

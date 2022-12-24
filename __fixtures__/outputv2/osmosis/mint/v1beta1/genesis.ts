@@ -17,6 +17,10 @@ export interface GenesisState {
    */
   reductionStartedEpoch: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateAmino {

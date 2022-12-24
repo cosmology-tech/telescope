@@ -8,6 +8,10 @@ export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
 }
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the parameters for the bank module. */
 export interface ParamsAmino {
@@ -32,6 +36,10 @@ export interface ParamsSDKType {
 export interface SendEnabled {
   denom: string;
   enabled: boolean;
+}
+export interface SendEnabledProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
+  value: Uint8Array;
 }
 
 /**
@@ -61,6 +69,10 @@ export interface Input {
   address: string;
   coins: Coin[];
 }
+export interface InputProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.Input";
+  value: Uint8Array;
+}
 
 /** Input models transaction input. */
 export interface InputAmino {
@@ -82,6 +94,10 @@ export interface InputSDKType {
 export interface Output {
   address: string;
   coins: Coin[];
+}
+export interface OutputProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.Output";
+  value: Uint8Array;
 }
 
 /** Output models transaction outputs. */
@@ -109,6 +125,10 @@ export interface OutputSDKType {
 /** @deprecated */
 export interface Supply {
   total: Coin[];
+}
+export interface SupplyProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.Supply";
+  value: Uint8Array;
 }
 
 /**
@@ -156,6 +176,10 @@ export interface DenomUnit {
 
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
+  value: Uint8Array;
 }
 
 /**
@@ -241,6 +265,10 @@ export interface Metadata {
    * Since: cosmos-sdk 0.46
    */
   uriHash: string;
+}
+export interface MetadataProtoType {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata";
+  value: Uint8Array;
 }
 
 /**

@@ -16,6 +16,10 @@ export interface GenesisState {
   /** the sequence for the next generated channel identifier */
   nextChannelSequence: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.core.channel.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisStateAmino {
@@ -55,6 +59,10 @@ export interface PacketSequence {
   portId: string;
   channelId: string;
   sequence: Long;
+}
+export interface PacketSequenceProtoType {
+  typeUrl: "/ibc.core.channel.v1.PacketSequence";
+  value: Uint8Array;
 }
 
 /**

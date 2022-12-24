@@ -54,6 +54,10 @@ export interface SuperfluidAsset {
    */
   assetType: SuperfluidAssetType;
 }
+export interface SuperfluidAssetProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidAsset";
+  value: Uint8Array;
+}
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetAmino {
@@ -88,6 +92,10 @@ export interface SuperfluidIntermediaryAccount {
 
   /** perpetual gauge for rewards distribution */
   gaugeId: Long;
+}
+export interface SuperfluidIntermediaryAccountProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
+  value: Uint8Array;
 }
 
 /**
@@ -134,6 +142,10 @@ export interface OsmoEquivalentMultiplierRecord {
   /** superfluid asset denom, can be LP token or native token */
   denom: string;
   multiplier: string;
+}
+export interface OsmoEquivalentMultiplierRecordProtoType {
+  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
+  value: Uint8Array;
 }
 
 /**
@@ -182,6 +194,10 @@ export interface SuperfluidDelegationRecord {
   delegationAmount?: Coin;
   equivalentStakedAmount?: Coin;
 }
+export interface SuperfluidDelegationRecordProtoType {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
+  value: Uint8Array;
+}
 
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
@@ -218,6 +234,10 @@ export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
 }
+export interface LockIdIntermediaryAccountConnectionProtoType {
+  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
+  value: Uint8Array;
+}
 
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -244,6 +264,10 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
 }
 export interface UnpoolWhitelistedPools {
   ids: Long[];
+}
+export interface UnpoolWhitelistedPoolsProtoType {
+  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
+  value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsAmino {
   ids: string[];

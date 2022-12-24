@@ -13,6 +13,10 @@ export interface SourceContext {
    */
   fileName: string;
 }
+export interface SourceContextProtoType {
+  typeUrl: "/google.protobuf.SourceContext";
+  value: Uint8Array;
+}
 
 /**
  * `SourceContext` represents information about the source of a

@@ -6,6 +6,10 @@ import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
+export interface ModuleToDistributeCoinsRequestProtoType {
+  typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsRequest";
+  value: Uint8Array;
+}
 export interface ModuleToDistributeCoinsRequestAmino {}
 export interface ModuleToDistributeCoinsRequestAminoType {
   type: "osmosis/incentives/module-to-distribute-coins-request";
@@ -15,6 +19,10 @@ export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
   /** Coins that have yet to be distributed */
   coins: Coin[];
+}
+export interface ModuleToDistributeCoinsResponseProtoType {
+  typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsResponse";
+  value: Uint8Array;
 }
 export interface ModuleToDistributeCoinsResponseAmino {
   /** Coins that have yet to be distributed */
@@ -31,6 +39,10 @@ export interface GaugeByIDRequest {
   /** Gague ID being queried */
   id: Long;
 }
+export interface GaugeByIDRequestProtoType {
+  typeUrl: "/osmosis.incentives.GaugeByIDRequest";
+  value: Uint8Array;
+}
 export interface GaugeByIDRequestAmino {
   /** Gague ID being queried */
   id: string;
@@ -46,6 +58,10 @@ export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
   gauge?: Gauge;
 }
+export interface GaugeByIDResponseProtoType {
+  typeUrl: "/osmosis.incentives.GaugeByIDResponse";
+  value: Uint8Array;
+}
 export interface GaugeByIDResponseAmino {
   /** Gauge that corresponds to provided gague ID */
   gauge?: GaugeAmino;
@@ -60,6 +76,10 @@ export interface GaugeByIDResponseSDKType {
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
+}
+export interface GaugesRequestProtoType {
+  typeUrl: "/osmosis.incentives.GaugesRequest";
+  value: Uint8Array;
 }
 export interface GaugesRequestAmino {
   /** Pagination defines pagination for the request */
@@ -78,6 +98,10 @@ export interface GaugesResponse {
 
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface GaugesResponseProtoType {
+  typeUrl: "/osmosis.incentives.GaugesResponse";
+  value: Uint8Array;
 }
 export interface GaugesResponseAmino {
   /** Upcoming and active gauges */
@@ -98,6 +122,10 @@ export interface ActiveGaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface ActiveGaugesRequestProtoType {
+  typeUrl: "/osmosis.incentives.ActiveGaugesRequest";
+  value: Uint8Array;
+}
 export interface ActiveGaugesRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
@@ -115,6 +143,10 @@ export interface ActiveGaugesResponse {
 
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface ActiveGaugesResponseProtoType {
+  typeUrl: "/osmosis.incentives.ActiveGaugesResponse";
+  value: Uint8Array;
 }
 export interface ActiveGaugesResponseAmino {
   /** Active gagues only */
@@ -138,6 +170,10 @@ export interface ActiveGaugesPerDenomRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface ActiveGaugesPerDenomRequestProtoType {
+  typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomRequest";
+  value: Uint8Array;
+}
 export interface ActiveGaugesPerDenomRequestAmino {
   /** Desired denom when querying active gagues */
   denom: string;
@@ -160,6 +196,10 @@ export interface ActiveGaugesPerDenomResponse {
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
+export interface ActiveGaugesPerDenomResponseProtoType {
+  typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomResponse";
+  value: Uint8Array;
+}
 export interface ActiveGaugesPerDenomResponseAmino {
   /** Active gagues that match denom in query */
   data: GaugeAmino[];
@@ -179,6 +219,10 @@ export interface UpcomingGaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface UpcomingGaugesRequestProtoType {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesRequest";
+  value: Uint8Array;
+}
 export interface UpcomingGaugesRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
@@ -196,6 +240,10 @@ export interface UpcomingGaugesResponse {
 
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface UpcomingGaugesResponseProtoType {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesResponse";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesResponseAmino {
   /** Gauges whose distribution is upcoming */
@@ -219,6 +267,10 @@ export interface UpcomingGaugesPerDenomRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface UpcomingGaugesPerDenomRequestProtoType {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomRequest";
+  value: Uint8Array;
+}
 export interface UpcomingGaugesPerDenomRequestAmino {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
@@ -240,6 +292,10 @@ export interface UpcomingGaugesPerDenomResponse {
 
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface UpcomingGaugesPerDenomResponseProtoType {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomResponse";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesPerDenomResponseAmino {
   /** Upcoming gagues that match denom in query */
@@ -268,6 +324,10 @@ export interface RewardsEstRequest {
    * Lower limit is current epoch
    */
   endEpoch: Long;
+}
+export interface RewardsEstRequestProtoType {
+  typeUrl: "/osmosis.incentives.RewardsEstRequest";
+  value: Uint8Array;
 }
 export interface RewardsEstRequestAmino {
   /** Address that is being queried for future estimated rewards */
@@ -298,6 +358,10 @@ export interface RewardsEstResponse {
    */
   coins: Coin[];
 }
+export interface RewardsEstResponseProtoType {
+  typeUrl: "/osmosis.incentives.RewardsEstResponse";
+  value: Uint8Array;
+}
 export interface RewardsEstResponseAmino {
   /**
    * Estimated coin rewards that will be recieved at provided address
@@ -313,6 +377,10 @@ export interface RewardsEstResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequestProtoType {
+  typeUrl: "/osmosis.incentives.QueryLockableDurationsRequest";
+  value: Uint8Array;
+}
 export interface QueryLockableDurationsRequestAmino {}
 export interface QueryLockableDurationsRequestAminoType {
   type: "osmosis/incentives/query-lockable-durations-request";
@@ -322,6 +390,10 @@ export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   /** Time durations that users can lock coins for in order to recieve rewards */
   lockableDurations: Duration[];
+}
+export interface QueryLockableDurationsResponseProtoType {
+  typeUrl: "/osmosis.incentives.QueryLockableDurationsResponse";
+  value: Uint8Array;
 }
 export interface QueryLockableDurationsResponseAmino {
   /** Time durations that users can lock coins for in order to recieve rewards */

@@ -87,6 +87,10 @@ export interface Claim {
   /** claimable token amount for the action. Zero if completed */
   claimableAmount: string;
 }
+export interface ClaimProtoType {
+  typeUrl: "/evmos.claims.v1.Claim";
+  value: Uint8Array;
+}
 
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
@@ -128,6 +132,10 @@ export interface ClaimsRecordAddress {
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
 }
+export interface ClaimsRecordAddressProtoType {
+  typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
+  value: Uint8Array;
+}
 
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressAmino {
@@ -162,6 +170,10 @@ export interface ClaimsRecord {
 
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+export interface ClaimsRecordProtoType {
+  typeUrl: "/evmos.claims.v1.ClaimsRecord";
+  value: Uint8Array;
 }
 
 /**

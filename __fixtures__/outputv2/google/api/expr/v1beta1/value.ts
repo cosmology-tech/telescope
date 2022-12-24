@@ -47,6 +47,10 @@ export interface Value {
   /** A Type value represented by the fully qualified name of the type. */
   typeValue?: string;
 }
+export interface ValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Value";
+  value: Uint8Array;
+}
 
 /**
  * Represents a CEL value.
@@ -125,6 +129,10 @@ export interface EnumValue {
   /** The value of the enum. */
   value: number;
 }
+export interface EnumValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.EnumValue";
+  value: Uint8Array;
+}
 
 /** An enum value. */
 export interface EnumValueAmino {
@@ -154,6 +162,10 @@ export interface EnumValueSDKType {
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
+}
+export interface ListValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.ListValue";
+  value: Uint8Array;
 }
 
 /**
@@ -195,6 +207,10 @@ export interface MapValue {
    * cannot be used.
    */
   entries: MapValue_Entry[];
+}
+export interface MapValueProtoType {
+  typeUrl: "/google.api.expr.v1beta1.MapValue";
+  value: Uint8Array;
 }
 
 /**
@@ -239,6 +255,10 @@ export interface MapValue_Entry {
 
   /** The value. */
   value?: Value;
+}
+export interface MapValue_EntryProtoType {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 
 /** An entry in the map. */

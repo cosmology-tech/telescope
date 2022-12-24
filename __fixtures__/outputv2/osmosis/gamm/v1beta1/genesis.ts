@@ -14,6 +14,10 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 export interface Params {
   poolCreationFee: Coin[];
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
@@ -36,6 +40,10 @@ export interface GenesisState {
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: Long;
   params?: Params;
+}
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 
 /** GenesisState defines the gamm module's genesis state. */

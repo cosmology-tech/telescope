@@ -6,6 +6,10 @@ export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
 }
+export interface QueryEpochsInfoRequestProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestAmino {
   pagination?: PageRequestAmino;
 }
@@ -19,6 +23,10 @@ export interface QueryEpochsInfoRequestSDKType {
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
+}
+export interface QueryEpochsInfoResponseProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseAmino {
   epochs: EpochInfoAmino[];
@@ -35,6 +43,10 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
@@ -47,6 +59,10 @@ export interface QueryCurrentEpochRequestSDKType {
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
+}
+export interface QueryCurrentEpochResponseProtoType {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseAmino {
   current_epoch: string;

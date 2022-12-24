@@ -118,6 +118,10 @@ export interface ConfigChange {
    */
   advices: Advice[];
 }
+export interface ConfigChangeProtoType {
+  typeUrl: "/google.api.ConfigChange";
+  value: Uint8Array;
+}
 
 /**
  * Output generated from semantically comparing two versions of a service
@@ -193,6 +197,10 @@ export interface Advice {
    * be taken to mitigate any implied risks.
    */
   description: string;
+}
+export interface AdviceProtoType {
+  typeUrl: "/google.api.Advice";
+  value: Uint8Array;
 }
 
 /**

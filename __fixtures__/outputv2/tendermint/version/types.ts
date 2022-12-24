@@ -11,6 +11,10 @@ export interface App {
   protocol: Long;
   software: string;
 }
+export interface AppProtoType {
+  typeUrl: "/tendermint.version.App";
+  value: Uint8Array;
+}
 
 /**
  * App includes the protocol and software version for the application.
@@ -44,6 +48,10 @@ export interface AppSDKType {
 export interface Consensus {
   block: Long;
   app: Long;
+}
+export interface ConsensusProtoType {
+  typeUrl: "/tendermint.version.Consensus";
+  value: Uint8Array;
 }
 
 /**

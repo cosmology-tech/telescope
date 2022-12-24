@@ -13,6 +13,10 @@ export interface GenesisState {
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/evmos.claims.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateAmino {
@@ -58,6 +62,10 @@ export interface Params {
 
   /** list of channel identifiers from EVM compatible chains */
   evmChannels: string[];
+}
+export interface ParamsProtoType {
+  typeUrl: "/evmos.claims.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the claims module's parameters. */

@@ -333,6 +333,10 @@ export interface ManagedService {
   /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
+export interface ManagedServiceProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ManagedService";
+  value: Uint8Array;
+}
 
 /**
  * The full representation of a Service that is managed by
@@ -379,6 +383,10 @@ export interface OperationMetadata {
   /** The start time of the operation. */
   startTime?: Date;
 }
+export interface OperationMetadataProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
+  value: Uint8Array;
+}
 
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataAmino {
@@ -418,6 +426,10 @@ export interface OperationMetadata_Step {
   /** The status code. */
   status: OperationMetadata_Status;
 }
+export interface OperationMetadata_StepProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.Step";
+  value: Uint8Array;
+}
 
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepAmino {
@@ -448,6 +460,10 @@ export interface Diagnostic {
 
   /** Message describing the error or warning. */
   message: string;
+}
+export interface DiagnosticProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
+  value: Uint8Array;
 }
 
 /** Represents a diagnostic message (error or warning) */
@@ -490,6 +506,10 @@ export interface ConfigSource {
    * configuration (`google.api.Service`).
    */
   files: ConfigFile[];
+}
+export interface ConfigSourceProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
+  value: Uint8Array;
 }
 
 /**
@@ -535,6 +555,10 @@ export interface ConfigFile {
   /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
+export interface ConfigFileProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
+  value: Uint8Array;
+}
 
 /** Generic specification of a source configuration file */
 export interface ConfigFileAmino {
@@ -566,6 +590,10 @@ export interface ConfigRef {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
+}
+export interface ConfigRefProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
+  value: Uint8Array;
 }
 
 /** Represents a service configuration with its name and id. */
@@ -601,6 +629,10 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
+}
+export interface ChangeReportProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
+  value: Uint8Array;
 }
 
 /**
@@ -680,6 +712,10 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
+export interface RolloutProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.Rollout";
+  value: Uint8Array;
+}
 
 /**
  * A rollout resource that defines how service configuration versions are pushed
@@ -750,6 +786,10 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
 }
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.undefined";
+  value: Uint8Array;
+}
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   key: string;
   value: number;
@@ -804,6 +844,10 @@ export interface Rollout_TrafficPercentStrategy {
   percentages: {
     [key: string]: number;
   };
+}
+export interface Rollout_TrafficPercentStrategyProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
+  value: Uint8Array;
 }
 
 /**
@@ -896,6 +940,10 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
+export interface Rollout_DeleteServiceStrategyProtoType {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
+  value: Uint8Array;
+}
 
 /**
  * Strategy used to delete a service. This strategy is a placeholder only

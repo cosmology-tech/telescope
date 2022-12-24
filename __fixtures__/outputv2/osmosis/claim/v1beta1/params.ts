@@ -13,6 +13,10 @@ export interface Params {
   /** denom of claimable asset */
   claimDenom: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.claim.v1beta1.Params";
+  value: Uint8Array;
+}
 
 /** Params defines the claim module's parameters. */
 export interface ParamsAmino {

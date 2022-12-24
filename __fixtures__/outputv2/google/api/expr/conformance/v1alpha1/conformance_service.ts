@@ -84,6 +84,10 @@ export interface ParseRequest {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
 }
+export interface ParseRequestProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the Parse method. */
 export interface ParseRequestAmino {
@@ -119,6 +123,10 @@ export interface ParseResponse {
 
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
+}
+export interface ParseResponseProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: Uint8Array;
 }
 
 /** Response message for the Parse method. */
@@ -164,6 +172,10 @@ export interface CheckRequest {
    * "Standard Definitions" in the Language Definition.
    */
   noStdEnv: boolean;
+}
+export interface CheckRequestProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: Uint8Array;
 }
 
 /** Request message for the Check method. */
@@ -212,6 +224,10 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
+export interface CheckResponseProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the Check method. */
 export interface CheckResponseAmino {
@@ -234,6 +250,10 @@ export interface CheckResponseSDKType {
 export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
+}
+export interface EvalRequest_BindingsEntryProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.undefined";
+  value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
@@ -266,6 +286,10 @@ export interface EvalRequest {
 
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
+}
+export interface EvalRequestProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: Uint8Array;
 }
 
 /** Request message for the Eval method. */
@@ -315,6 +339,10 @@ export interface EvalResponse {
    */
   issues: Status[];
 }
+export interface EvalResponseProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: Uint8Array;
+}
 
 /** Response message for the Eval method. */
 export interface EvalResponseAmino {
@@ -354,6 +382,10 @@ export interface IssueDetails {
 
   /** Expression ID from [Expr][], 0 if unknown. */
   id: Long;
+}
+export interface IssueDetailsProtoType {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: Uint8Array;
 }
 
 /**

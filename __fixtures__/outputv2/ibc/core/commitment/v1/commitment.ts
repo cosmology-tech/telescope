@@ -10,6 +10,10 @@ export const protobufPackage = "ibc.core.commitment.v1";
 export interface MerkleRoot {
   hash: Uint8Array;
 }
+export interface MerkleRootProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
+  value: Uint8Array;
+}
 
 /**
  * MerkleRoot defines a merkle root hash.
@@ -38,6 +42,10 @@ export interface MerkleRootSDKType {
  */
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
+}
+export interface MerklePrefixProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
+  value: Uint8Array;
 }
 
 /**
@@ -69,6 +77,10 @@ export interface MerklePrefixSDKType {
  */
 export interface MerklePath {
   keyPath: string[];
+}
+export interface MerklePathProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath";
+  value: Uint8Array;
 }
 
 /**
@@ -102,6 +114,10 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+export interface MerkleProofProtoType {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof";
+  value: Uint8Array;
 }
 
 /**

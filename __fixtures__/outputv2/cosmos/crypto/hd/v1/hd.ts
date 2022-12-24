@@ -22,6 +22,10 @@ export interface BIP44Params {
   /** address_index is used as child index in BIP32 derivation */
   addressIndex: number;
 }
+export interface BIP44ParamsProtoType {
+  typeUrl: "/cosmos.crypto.hd.v1.BIP44Params";
+  value: Uint8Array;
+}
 
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44ParamsAmino {

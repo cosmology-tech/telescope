@@ -21,6 +21,10 @@ export interface MsgCreateDenom {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
+export interface MsgCreateDenomProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom";
+  value: Uint8Array;
+}
 
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -67,6 +71,10 @@ export interface MsgCreateDenomSDKType {
 export interface MsgCreateDenomResponse {
   newTokenDenom: string;
 }
+export interface MsgCreateDenomResponseProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenomResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
@@ -96,6 +104,10 @@ export interface MsgMint {
   sender: string;
   amount?: Coin;
 }
+export interface MsgMintProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint";
+  value: Uint8Array;
+}
 
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
@@ -119,6 +131,10 @@ export interface MsgMintSDKType {
   amount?: CoinSDKType;
 }
 export interface MsgMintResponse {}
+export interface MsgMintResponseProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMintResponse";
+  value: Uint8Array;
+}
 export interface MsgMintResponseAmino {}
 export interface MsgMintResponseAminoType {
   type: "osmosis/tokenfactory/mint-response";
@@ -133,6 +149,10 @@ export interface MsgMintResponseSDKType {}
 export interface MsgBurn {
   sender: string;
   amount?: Coin;
+}
+export interface MsgBurnProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn";
+  value: Uint8Array;
 }
 
 /**
@@ -157,6 +177,10 @@ export interface MsgBurnSDKType {
   amount?: CoinSDKType;
 }
 export interface MsgBurnResponse {}
+export interface MsgBurnResponseProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurnResponse";
+  value: Uint8Array;
+}
 export interface MsgBurnResponseAmino {}
 export interface MsgBurnResponseAminoType {
   type: "osmosis/tokenfactory/burn-response";
@@ -172,6 +196,10 @@ export interface MsgChangeAdmin {
   sender: string;
   denom: string;
   newAdmin: string;
+}
+export interface MsgChangeAdminProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin";
+  value: Uint8Array;
 }
 
 /**
@@ -203,6 +231,10 @@ export interface MsgChangeAdminSDKType {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponse {}
+export interface MsgChangeAdminResponseProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdminResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgChangeAdminResponse defines the response structure for an executed
@@ -227,6 +259,10 @@ export interface MsgChangeAdminResponseSDKType {}
 export interface MsgSetDenomMetadata {
   sender: string;
   metadata?: Metadata;
+}
+export interface MsgSetDenomMetadataProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata";
+  value: Uint8Array;
 }
 
 /**
@@ -256,6 +292,10 @@ export interface MsgSetDenomMetadataSDKType {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponse {}
+export interface MsgSetDenomMetadataResponseProtoType {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadataResponse";
+  value: Uint8Array;
+}
 
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed

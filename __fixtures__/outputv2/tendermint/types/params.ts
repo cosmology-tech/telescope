@@ -13,6 +13,10 @@ export interface ConsensusParams {
   validator?: ValidatorParams;
   version?: VersionParams;
 }
+export interface ConsensusParamsProtoType {
+  typeUrl: "/tendermint.types.ConsensusParams";
+  value: Uint8Array;
+}
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -61,6 +65,10 @@ export interface BlockParams {
    * Not exposed to the application.
    */
   timeIotaMs: Long;
+}
+export interface BlockParamsProtoType {
+  typeUrl: "/tendermint.types.BlockParams";
+  value: Uint8Array;
 }
 
 /** BlockParams contains limits on the block size. */
@@ -123,6 +131,10 @@ export interface EvidenceParams {
    */
   maxBytes: Long;
 }
+export interface EvidenceParamsProtoType {
+  typeUrl: "/tendermint.types.EvidenceParams";
+  value: Uint8Array;
+}
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsAmino {
@@ -169,6 +181,10 @@ export interface EvidenceParamsSDKType {
 export interface ValidatorParams {
   pubKeyTypes: string[];
 }
+export interface ValidatorParamsProtoType {
+  typeUrl: "/tendermint.types.ValidatorParams";
+  value: Uint8Array;
+}
 
 /**
  * ValidatorParams restrict the public key types validators can use.
@@ -194,6 +210,10 @@ export interface ValidatorParamsSDKType {
 export interface VersionParams {
   appVersion: Long;
 }
+export interface VersionParamsProtoType {
+  typeUrl: "/tendermint.types.VersionParams";
+  value: Uint8Array;
+}
 
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsAmino {
@@ -217,6 +237,10 @@ export interface VersionParamsSDKType {
 export interface HashedParams {
   blockMaxBytes: Long;
   blockMaxGas: Long;
+}
+export interface HashedParamsProtoType {
+  typeUrl: "/tendermint.types.HashedParams";
+  value: Uint8Array;
 }
 
 /**

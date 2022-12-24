@@ -11,6 +11,10 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.Params";
+  value: Uint8Array;
+}
 export interface ParamsAmino {
   /**
    * minted_denom is the denomination of the coin expected to be minted by the
@@ -30,6 +34,10 @@ export interface ParamsSDKType {
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
 }
+export interface LockableDurationsInfoProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
+  value: Uint8Array;
+}
 export interface LockableDurationsInfoAmino {
   lockable_durations: DurationAmino[];
 }
@@ -43,6 +51,10 @@ export interface LockableDurationsInfoSDKType {
 export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
+}
+export interface DistrInfoProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
+  value: Uint8Array;
 }
 export interface DistrInfoAmino {
   total_weight: string;
@@ -59,6 +71,10 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: Long;
   weight: string;
+}
+export interface DistrRecordProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
+  value: Uint8Array;
 }
 export interface DistrRecordAmino {
   gauge_id: string;
@@ -77,6 +93,10 @@ export interface PoolToGauge {
   gaugeId: Long;
   duration?: Duration;
 }
+export interface PoolToGaugeProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
+  value: Uint8Array;
+}
 export interface PoolToGaugeAmino {
   pool_id: string;
   gauge_id: string;
@@ -93,6 +113,10 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
+}
+export interface PoolToGaugesProtoType {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
+  value: Uint8Array;
 }
 export interface PoolToGaugesAmino {
   pool_to_gauge: PoolToGaugeAmino[];

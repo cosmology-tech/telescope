@@ -7,6 +7,10 @@ export interface Minter {
   /** epoch_provisions represent rewards for the current epoch. */
   epochProvisions: string;
 }
+export interface MinterProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.Minter";
+  value: Uint8Array;
+}
 
 /** Minter represents the minting state. */
 export interface MinterAmino {
@@ -31,6 +35,10 @@ export interface MinterSDKType {
 export interface WeightedAddress {
   address: string;
   weight: string;
+}
+export interface WeightedAddressProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.WeightedAddress";
+  value: Uint8Array;
 }
 
 /**
@@ -86,6 +94,10 @@ export interface DistributionProportions {
    * to be allocated to the community pool.
    */
   communityPool: string;
+}
+export interface DistributionProportionsProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.DistributionProportions";
+  value: Uint8Array;
 }
 
 /**
@@ -178,6 +190,10 @@ export interface Params {
    * rewards
    */
   mintingRewardsDistributionStartEpoch: Long;
+}
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.mint.v1beta1.Params";
+  value: Uint8Array;
 }
 
 /** Params holds parameters for the x/mint module. */

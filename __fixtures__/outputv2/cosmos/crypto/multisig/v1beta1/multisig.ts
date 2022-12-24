@@ -10,6 +10,10 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 export interface MultiSignature {
   signatures: Uint8Array[];
 }
+export interface MultiSignatureProtoType {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature";
+  value: Uint8Array;
+}
 
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -42,6 +46,10 @@ export interface MultiSignatureSDKType {
 export interface CompactBitArray {
   extraBitsStored: number;
   elems: Uint8Array;
+}
+export interface CompactBitArrayProtoType {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray";
+  value: Uint8Array;
 }
 
 /**

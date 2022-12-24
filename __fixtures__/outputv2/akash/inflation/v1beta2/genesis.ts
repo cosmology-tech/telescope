@@ -7,6 +7,10 @@ export const protobufPackage = "akash.inflation.v1beta2";
 export interface GenesisState {
   params?: Params;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/akash.inflation.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {

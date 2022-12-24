@@ -32,6 +32,10 @@ export interface CheckRequest {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
+export interface CheckRequestProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the Check method. */
 export interface CheckRequestAmino {
@@ -108,6 +112,10 @@ export interface ResourceInfo {
    */
   location: string;
 }
+export interface ResourceInfoProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: Uint8Array;
+}
 
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoAmino {
@@ -159,6 +167,10 @@ export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
 }
+export interface CheckResponse_HeadersEntryProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.undefined";
+  value: Uint8Array;
+}
 export interface CheckResponse_HeadersEntryAmino {
   key: string;
   value: string;
@@ -185,6 +197,10 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
+  value: Uint8Array;
 }
 
 /** Response message for the Check method. */
@@ -240,6 +256,10 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
+export interface ReportRequestProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
+  value: Uint8Array;
+}
 
 /** Request message for the Report method. */
 export interface ReportRequestAmino {
@@ -284,6 +304,10 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReportResponseProtoType {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
+  value: Uint8Array;
+}
 
 /**
  * Response message for the Report method.

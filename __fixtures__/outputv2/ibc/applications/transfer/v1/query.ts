@@ -12,6 +12,10 @@ export interface QueryDenomTraceRequest {
   /** hash (in hex format) of the denomination trace information. */
   hash: string;
 }
+export interface QueryDenomTraceRequestProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -42,6 +46,10 @@ export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
   denomTrace?: DenomTrace;
 }
+export interface QueryDenomTraceResponseProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
@@ -71,6 +79,10 @@ export interface QueryDenomTraceResponseSDKType {
 export interface QueryDenomTracesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryDenomTracesRequestProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -105,6 +117,10 @@ export interface QueryDenomTracesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface QueryDenomTracesResponseProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
@@ -133,6 +149,10 @@ export interface QueryDenomTracesResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
@@ -148,6 +168,10 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */

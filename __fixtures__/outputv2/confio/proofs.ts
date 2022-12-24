@@ -216,6 +216,10 @@ export interface ExistenceProof {
   leaf?: LeafOp;
   path: InnerOp[];
 }
+export interface ExistenceProofProtoType {
+  typeUrl: "/ics23.ExistenceProof";
+  value: Uint8Array;
+}
 
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
@@ -288,6 +292,10 @@ export interface NonExistenceProof {
   left?: ExistenceProof;
   right?: ExistenceProof;
 }
+export interface NonExistenceProofProtoType {
+  typeUrl: "/ics23.NonExistenceProof";
+  value: Uint8Array;
+}
 
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
@@ -322,6 +330,10 @@ export interface CommitmentProof {
   nonexist?: NonExistenceProof;
   batch?: BatchProof;
   compressed?: CompressedBatchProof;
+}
+export interface CommitmentProofProtoType {
+  typeUrl: "/ics23.CommitmentProof";
+  value: Uint8Array;
 }
 
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
@@ -371,6 +383,10 @@ export interface LeafOp {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
+}
+export interface LeafOpProtoType {
+  typeUrl: "/ics23.LeafOp";
+  value: Uint8Array;
 }
 
 /**
@@ -452,6 +468,10 @@ export interface InnerOp {
   prefix: Uint8Array;
   suffix: Uint8Array;
 }
+export interface InnerOpProtoType {
+  typeUrl: "/ics23.InnerOp";
+  value: Uint8Array;
+}
 
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
@@ -528,6 +548,10 @@ export interface ProofSpec {
 
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   minDepth: number;
+}
+export interface ProofSpecProtoType {
+  typeUrl: "/ics23.ProofSpec";
+  value: Uint8Array;
 }
 
 /**
@@ -607,6 +631,10 @@ export interface InnerSpec {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
+export interface InnerSpecProtoType {
+  typeUrl: "/ics23.InnerSpec";
+  value: Uint8Array;
+}
 
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -663,6 +691,10 @@ export interface InnerSpecSDKType {
 export interface BatchProof {
   entries: BatchEntry[];
 }
+export interface BatchProofProtoType {
+  typeUrl: "/ics23.BatchProof";
+  value: Uint8Array;
+}
 
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofAmino {
@@ -682,6 +714,10 @@ export interface BatchProofSDKType {
 export interface BatchEntry {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
+}
+export interface BatchEntryProtoType {
+  typeUrl: "/ics23.BatchEntry";
+  value: Uint8Array;
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -703,6 +739,10 @@ export interface CompressedBatchProof {
   entries: CompressedBatchEntry[];
   lookupInners: InnerOp[];
 }
+export interface CompressedBatchProofProtoType {
+  typeUrl: "/ics23.CompressedBatchProof";
+  value: Uint8Array;
+}
 export interface CompressedBatchProofAmino {
   entries: CompressedBatchEntryAmino[];
   lookup_inners: InnerOpAmino[];
@@ -720,6 +760,10 @@ export interface CompressedBatchProofSDKType {
 export interface CompressedBatchEntry {
   exist?: CompressedExistenceProof;
   nonexist?: CompressedNonExistenceProof;
+}
+export interface CompressedBatchEntryProtoType {
+  typeUrl: "/ics23.CompressedBatchEntry";
+  value: Uint8Array;
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -745,6 +789,10 @@ export interface CompressedExistenceProof {
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
+export interface CompressedExistenceProofProtoType {
+  typeUrl: "/ics23.CompressedExistenceProof";
+  value: Uint8Array;
+}
 export interface CompressedExistenceProofAmino {
   key: Uint8Array;
   value: Uint8Array;
@@ -768,6 +816,10 @@ export interface CompressedNonExistenceProof {
   key: Uint8Array;
   left?: CompressedExistenceProof;
   right?: CompressedExistenceProof;
+}
+export interface CompressedNonExistenceProofProtoType {
+  typeUrl: "/ics23.CompressedNonExistenceProof";
+  value: Uint8Array;
 }
 export interface CompressedNonExistenceProofAmino {
   /** TODO: remove this as unnecessary??? we prove a range */

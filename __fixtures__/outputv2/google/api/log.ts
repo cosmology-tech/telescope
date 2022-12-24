@@ -41,6 +41,10 @@ export interface LogDescriptor {
    */
   displayName: string;
 }
+export interface LogDescriptorProtoType {
+  typeUrl: "/google.api.LogDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * A description of a log type. Example in YAML format:

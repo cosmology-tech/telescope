@@ -95,6 +95,10 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
+export interface ProjectPropertiesProtoType {
+  typeUrl: "/google.api.ProjectProperties";
+  value: Uint8Array;
+}
 
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -166,6 +170,10 @@ export interface Property {
 
   /** The description of the property */
   description: string;
+}
+export interface PropertyProtoType {
+  typeUrl: "/google.api.Property";
+  value: Uint8Array;
 }
 
 /**

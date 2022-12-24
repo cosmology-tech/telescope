@@ -82,6 +82,10 @@ export interface MsgCreateBid {
   price?: DecCoin;
   deposit?: Coin;
 }
+export interface MsgCreateBidProtoType {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBid";
+  value: Uint8Array;
+}
 
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
@@ -105,6 +109,10 @@ export interface MsgCreateBidSDKType {
 
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponse {}
+export interface MsgCreateBidResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse";
+  value: Uint8Array;
+}
 
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseAmino {}
@@ -119,6 +127,10 @@ export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
   bidId?: BidID;
+}
+export interface MsgCloseBidProtoType {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBid";
+  value: Uint8Array;
 }
 
 /** MsgCloseBid defines an SDK message for closing bid */
@@ -137,6 +149,10 @@ export interface MsgCloseBidSDKType {
 
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponse {}
+export interface MsgCloseBidResponseProtoType {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
+  value: Uint8Array;
+}
 
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseAmino {}
@@ -158,6 +174,10 @@ export interface BidID {
   gseq: number;
   oseq: number;
   provider: string;
+}
+export interface BidIDProtoType {
+  typeUrl: "/akash.market.v1beta2.BidID";
+  value: Uint8Array;
 }
 
 /**
@@ -195,6 +215,10 @@ export interface Bid {
   price?: DecCoin;
   createdAt: Long;
 }
+export interface BidProtoType {
+  typeUrl: "/akash.market.v1beta2.Bid";
+  value: Uint8Array;
+}
 
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
@@ -224,6 +248,10 @@ export interface BidFilters {
   oseq: number;
   provider: string;
   state: string;
+}
+export interface BidFiltersProtoType {
+  typeUrl: "/akash.market.v1beta2.BidFilters";
+  value: Uint8Array;
 }
 
 /** BidFilters defines flags for bid list filter */

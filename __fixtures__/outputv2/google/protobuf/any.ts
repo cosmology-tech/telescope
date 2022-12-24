@@ -118,6 +118,10 @@ export interface Any {
   /** Must be a valid serialized protocol buffer of the above specified type. */
   value: Uint8Array;
 }
+export interface AnyProtoType {
+  typeUrl: "/google.protobuf.Any";
+  value: Uint8Array;
+}
 
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a

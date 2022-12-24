@@ -99,6 +99,10 @@ export interface ConnectionEnd {
    */
   delayPeriod: Long;
 }
+export interface ConnectionEndProtoType {
+  typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
+  value: Uint8Array;
+}
 
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
@@ -174,6 +178,10 @@ export interface IdentifiedConnection {
   /** delay period associated with this connection. */
   delayPeriod: Long;
 }
+export interface IdentifiedConnectionProtoType {
+  typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedConnection defines a connection with additional connection
@@ -236,6 +244,10 @@ export interface Counterparty {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefix;
 }
+export interface CounterpartyProtoType {
+  typeUrl: "/ibc.core.connection.v1.Counterparty";
+  value: Uint8Array;
+}
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartyAmino {
@@ -271,6 +283,10 @@ export interface ClientPaths {
   /** list of connection paths */
   paths: string[];
 }
+export interface ClientPathsProtoType {
+  typeUrl: "/ibc.core.connection.v1.ClientPaths";
+  value: Uint8Array;
+}
 
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsAmino {
@@ -294,6 +310,10 @@ export interface ConnectionPaths {
 
   /** list of connection paths */
   paths: string[];
+}
+export interface ConnectionPathsProtoType {
+  typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
+  value: Uint8Array;
 }
 
 /** ConnectionPaths define all the connection paths for a given client state. */
@@ -325,6 +345,10 @@ export interface Version {
 
   /** list of features compatible with the specified identifier */
   features: string[];
+}
+export interface VersionProtoType {
+  typeUrl: "/ibc.core.connection.v1.Version";
+  value: Uint8Array;
 }
 
 /**
@@ -360,6 +384,10 @@ export interface Params {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   maxExpectedTimePerBlock: Long;
+}
+export interface ParamsProtoType {
+  typeUrl: "/ibc.core.connection.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the set of Connection parameters. */

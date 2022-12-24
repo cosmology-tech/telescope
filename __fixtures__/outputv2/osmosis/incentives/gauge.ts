@@ -54,6 +54,10 @@ export interface Gauge {
   /** distributed_coins are coins that have been distributed already */
   distributedCoins: Coin[];
 }
+export interface GaugeProtoType {
+  typeUrl: "/osmosis.incentives.Gauge";
+  value: Uint8Array;
+}
 
 /**
  * Gauge is an object that stores and distributes yields to recipients who
@@ -126,6 +130,10 @@ export interface GaugeSDKType {
 export interface LockableDurationsInfo {
   /** List of incentivised durations that gauges will pay out to */
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoProtoType {
+  typeUrl: "/osmosis.incentives.LockableDurationsInfo";
+  value: Uint8Array;
 }
 export interface LockableDurationsInfoAmino {
   /** List of incentivised durations that gauges will pay out to */

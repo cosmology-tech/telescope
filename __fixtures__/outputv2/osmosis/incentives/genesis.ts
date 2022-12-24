@@ -28,6 +28,10 @@ export interface GenesisState {
    */
   lastGaugeId: Long;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/osmosis.incentives.GenesisState";
+  value: Uint8Array;
+}
 
 /**
  * GenesisState defines the incentives module's various parameters when first

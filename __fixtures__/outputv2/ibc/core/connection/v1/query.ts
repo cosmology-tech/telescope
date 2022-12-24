@@ -14,6 +14,10 @@ export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
 }
+export interface QueryConnectionRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -50,6 +54,10 @@ export interface QueryConnectionResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryConnectionResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -90,6 +98,10 @@ export interface QueryConnectionResponseSDKType {
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
 }
+export interface QueryConnectionsRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
@@ -124,6 +136,10 @@ export interface QueryConnectionsResponse {
 
   /** query block height */
   height?: Height;
+}
+export interface QueryConnectionsResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -163,6 +179,10 @@ export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
 }
+export interface QueryClientConnectionsRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryClientConnectionsRequest is the request type for the
@@ -198,6 +218,10 @@ export interface QueryClientConnectionsResponse {
 
   /** height at which the proof was generated */
   proofHeight?: Height;
+}
+export interface QueryClientConnectionsResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -237,6 +261,10 @@ export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
 }
+export interface QueryConnectionClientStateRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryConnectionClientStateRequest is the request type for the
@@ -272,6 +300,10 @@ export interface QueryConnectionClientStateResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryConnectionClientStateResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -312,6 +344,10 @@ export interface QueryConnectionConsensusStateRequest {
   connectionId: string;
   revisionNumber: Long;
   revisionHeight: Long;
+}
+export interface QueryConnectionConsensusStateRequestProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -355,6 +391,10 @@ export interface QueryConnectionConsensusStateResponse {
 
   /** height at which the proof was retrieved */
   proofHeight?: Height;
+}
+export interface QueryConnectionConsensusStateResponseProtoType {
+  typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
+  value: Uint8Array;
 }
 
 /**

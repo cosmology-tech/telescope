@@ -62,6 +62,10 @@ export interface TxResponse {
    */
   events: Event[];
 }
+export interface TxResponseProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxResponse";
+  value: Uint8Array;
+}
 
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -157,6 +161,10 @@ export interface ABCIMessageLog {
    */
   events: StringEvent[];
 }
+export interface ABCIMessageLogProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.ABCIMessageLog";
+  value: Uint8Array;
+}
 
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogAmino {
@@ -189,6 +197,10 @@ export interface StringEvent {
   type: string;
   attributes: Attribute[];
 }
+export interface StringEventProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.StringEvent";
+  value: Uint8Array;
+}
 
 /**
  * StringEvent defines en Event object wrapper where all the attributes
@@ -220,6 +232,10 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.Attribute";
+  value: Uint8Array;
+}
 
 /**
  * Attribute defines an attribute wrapper where the key and value are
@@ -250,6 +266,10 @@ export interface GasInfo {
 
   /** GasUsed is the amount of gas actually consumed. */
   gasUsed: Long;
+}
+export interface GasInfoProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.GasInfo";
+  value: Uint8Array;
 }
 
 /** GasInfo defines tx execution gas context. */
@@ -298,6 +318,10 @@ export interface Result {
    * Since: cosmos-sdk 0.46
    */
   msgResponses: Any[];
+}
+export interface ResultProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.Result";
+  value: Uint8Array;
 }
 
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
@@ -350,6 +374,10 @@ export interface SimulationResponse {
   gasInfo?: GasInfo;
   result?: Result;
 }
+export interface SimulationResponseProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.SimulationResponse";
+  value: Uint8Array;
+}
 
 /**
  * SimulationResponse defines the response generated when a transaction is
@@ -382,6 +410,10 @@ export interface SimulationResponseSDKType {
 export interface MsgData {
   msgType: string;
   data: Uint8Array;
+}
+export interface MsgDataProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.MsgData";
+  value: Uint8Array;
 }
 
 /**
@@ -426,6 +458,10 @@ export interface TxMsgData {
    * Since: cosmos-sdk 0.46
    */
   msgResponses: Any[];
+}
+export interface TxMsgDataProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.TxMsgData";
+  value: Uint8Array;
 }
 
 /**
@@ -479,6 +515,10 @@ export interface SearchTxsResult {
 
   /** List of txs in current page */
   txs: TxResponse[];
+}
+export interface SearchTxsResultProtoType {
+  typeUrl: "/cosmos.base.abci.v1beta1.SearchTxsResult";
+  value: Uint8Array;
 }
 
 /** SearchTxsResult defines a structure for querying txs pageable */

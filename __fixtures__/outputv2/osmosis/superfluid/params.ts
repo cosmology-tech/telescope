@@ -12,6 +12,10 @@ export interface Params {
    */
   minimumRiskFactor: string;
 }
+export interface ParamsProtoType {
+  typeUrl: "/osmosis.superfluid.Params";
+  value: Uint8Array;
+}
 
 /** Params holds parameters for the superfluid module */
 export interface ParamsAmino {

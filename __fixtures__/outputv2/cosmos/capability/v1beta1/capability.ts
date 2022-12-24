@@ -9,6 +9,10 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 export interface Capability {
   index: Long;
 }
+export interface CapabilityProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.Capability";
+  value: Uint8Array;
+}
 
 /**
  * Capability defines an implementation of an object capability. The index
@@ -37,6 +41,10 @@ export interface CapabilitySDKType {
 export interface Owner {
   module: string;
   name: string;
+}
+export interface OwnerProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.Owner";
+  value: Uint8Array;
 }
 
 /**
@@ -67,6 +75,10 @@ export interface OwnerSDKType {
  */
 export interface CapabilityOwners {
   owners: Owner[];
+}
+export interface CapabilityOwnersProtoType {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
+  value: Uint8Array;
 }
 
 /**

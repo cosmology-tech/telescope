@@ -30,6 +30,10 @@ export interface InflationDistribution {
    */
   communityPool: string;
 }
+export interface InflationDistributionProtoType {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution";
+  value: Uint8Array;
+}
 
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -101,6 +105,10 @@ export interface ExponentialCalculation {
 
   /** max variance */
   maxVariance: string;
+}
+export interface ExponentialCalculationProtoType {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
+  value: Uint8Array;
 }
 
 /**

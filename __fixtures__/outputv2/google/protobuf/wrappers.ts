@@ -11,6 +11,10 @@ export interface DoubleValue {
   /** The double value. */
   value: number;
 }
+export interface DoubleValueProtoType {
+  typeUrl: "/google.protobuf.DoubleValue";
+  value: Uint8Array;
+}
 
 /**
  * Wrapper message for `double`.
@@ -43,6 +47,10 @@ export interface DoubleValueSDKType {
 export interface FloatValue {
   /** The float value. */
   value: number;
+}
+export interface FloatValueProtoType {
+  typeUrl: "/google.protobuf.FloatValue";
+  value: Uint8Array;
 }
 
 /**
@@ -77,6 +85,10 @@ export interface Int64Value {
   /** The int64 value. */
   value: Long;
 }
+export interface Int64ValueProtoType {
+  typeUrl: "/google.protobuf.Int64Value";
+  value: Uint8Array;
+}
 
 /**
  * Wrapper message for `int64`.
@@ -109,6 +121,10 @@ export interface Int64ValueSDKType {
 export interface UInt64Value {
   /** The uint64 value. */
   value: Long;
+}
+export interface UInt64ValueProtoType {
+  typeUrl: "/google.protobuf.UInt64Value";
+  value: Uint8Array;
 }
 
 /**
@@ -143,6 +159,10 @@ export interface Int32Value {
   /** The int32 value. */
   value: number;
 }
+export interface Int32ValueProtoType {
+  typeUrl: "/google.protobuf.Int32Value";
+  value: Uint8Array;
+}
 
 /**
  * Wrapper message for `int32`.
@@ -175,6 +195,10 @@ export interface Int32ValueSDKType {
 export interface UInt32Value {
   /** The uint32 value. */
   value: number;
+}
+export interface UInt32ValueProtoType {
+  typeUrl: "/google.protobuf.UInt32Value";
+  value: Uint8Array;
 }
 
 /**
@@ -209,6 +233,10 @@ export interface BoolValue {
   /** The bool value. */
   value: boolean;
 }
+export interface BoolValueProtoType {
+  typeUrl: "/google.protobuf.BoolValue";
+  value: Uint8Array;
+}
 
 /**
  * Wrapper message for `bool`.
@@ -242,6 +270,10 @@ export interface StringValue {
   /** The string value. */
   value: string;
 }
+export interface StringValueProtoType {
+  typeUrl: "/google.protobuf.StringValue";
+  value: Uint8Array;
+}
 
 /**
  * Wrapper message for `string`.
@@ -273,6 +305,10 @@ export interface StringValueSDKType {
  */
 export interface BytesValue {
   /** The bytes value. */
+  value: Uint8Array;
+}
+export interface BytesValueProtoType {
+  typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
 }
 

@@ -7,6 +7,10 @@ export interface ProtocolVersion {
   block: Long;
   app: Long;
 }
+export interface ProtocolVersionProtoType {
+  typeUrl: "/tendermint.p2p.ProtocolVersion";
+  value: Uint8Array;
+}
 export interface ProtocolVersionAmino {
   p2p: string;
   block: string;
@@ -30,6 +34,10 @@ export interface NodeInfo {
   channels: Uint8Array;
   moniker: string;
   other?: NodeInfoOther;
+}
+export interface NodeInfoProtoType {
+  typeUrl: "/tendermint.p2p.NodeInfo";
+  value: Uint8Array;
 }
 export interface NodeInfoAmino {
   protocol_version?: ProtocolVersionAmino;
@@ -59,6 +67,10 @@ export interface NodeInfoOther {
   txIndex: string;
   rpcAddress: string;
 }
+export interface NodeInfoOtherProtoType {
+  typeUrl: "/tendermint.p2p.NodeInfoOther";
+  value: Uint8Array;
+}
 export interface NodeInfoOtherAmino {
   tx_index: string;
   rpc_address: string;
@@ -75,6 +87,10 @@ export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
   lastConnected?: Date;
+}
+export interface PeerInfoProtoType {
+  typeUrl: "/tendermint.p2p.PeerInfo";
+  value: Uint8Array;
 }
 export interface PeerInfoAmino {
   id: string;
@@ -95,6 +111,10 @@ export interface PeerAddressInfo {
   lastDialSuccess?: Date;
   lastDialFailure?: Date;
   dialFailures: number;
+}
+export interface PeerAddressInfoProtoType {
+  typeUrl: "/tendermint.p2p.PeerAddressInfo";
+  value: Uint8Array;
 }
 export interface PeerAddressInfoAmino {
   address: string;

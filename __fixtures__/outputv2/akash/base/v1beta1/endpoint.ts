@@ -47,6 +47,10 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 export interface Endpoint {
   kind: Endpoint_Kind;
 }
+export interface EndpointProtoType {
+  typeUrl: "/akash.base.v1beta1.Endpoint";
+  value: Uint8Array;
+}
 
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {

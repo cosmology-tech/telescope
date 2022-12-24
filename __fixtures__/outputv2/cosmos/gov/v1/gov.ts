@@ -178,6 +178,10 @@ export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
 }
+export interface WeightedVoteOptionProtoType {
+  typeUrl: "/cosmos.gov.v1.WeightedVoteOption";
+  value: Uint8Array;
+}
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionAmino {
@@ -203,6 +207,10 @@ export interface Deposit {
   proposalId: Long;
   depositor: string;
   amount: Coin[];
+}
+export interface DepositProtoType {
+  typeUrl: "/cosmos.gov.v1.Deposit";
+  value: Uint8Array;
 }
 
 /**
@@ -249,6 +257,10 @@ export interface Proposal {
 
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
+}
+export interface ProposalProtoType {
+  typeUrl: "/cosmos.gov.v1.Proposal";
+  value: Uint8Array;
 }
 
 /** Proposal defines the core field members of a governance proposal. */
@@ -298,6 +310,10 @@ export interface TallyResult {
   noCount: string;
   noWithVetoCount: string;
 }
+export interface TallyResultProtoType {
+  typeUrl: "/cosmos.gov.v1.TallyResult";
+  value: Uint8Array;
+}
 
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultAmino {
@@ -330,6 +346,10 @@ export interface Vote {
 
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
+}
+export interface VoteProtoType {
+  typeUrl: "/cosmos.gov.v1.Vote";
+  value: Uint8Array;
 }
 
 /**
@@ -371,6 +391,10 @@ export interface DepositParams {
    */
   maxDepositPeriod?: Duration;
 }
+export interface DepositParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.DepositParams";
+  value: Uint8Array;
+}
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsAmino {
@@ -398,6 +422,10 @@ export interface DepositParamsSDKType {
 export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod?: Duration;
+}
+export interface VotingParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.VotingParams";
+  value: Uint8Array;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
@@ -431,6 +459,10 @@ export interface TallyParams {
    *  vetoed. Default value: 1/3.
    */
   vetoThreshold: string;
+}
+export interface TallyParamsProtoType {
+  typeUrl: "/cosmos.gov.v1.TallyParams";
+  value: Uint8Array;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

@@ -24,6 +24,10 @@ export interface Record {
   /** Offline does not store any information. */
   offline?: Record_Offline;
 }
+export interface RecordProtoType {
+  typeUrl: "/cosmos.crypto.keyring.v1.Record";
+  value: Uint8Array;
+}
 
 /** Record is used for representing a key in the keyring. */
 export interface RecordAmino {
@@ -68,6 +72,10 @@ export interface Record_Local {
   privKey?: Any;
   privKeyType: string;
 }
+export interface Record_LocalProtoType {
+  typeUrl: "/cosmos.crypto.keyring.v1.Local";
+  value: Uint8Array;
+}
 
 /**
  * Item is a keyring item stored in a keyring backend.
@@ -95,6 +103,10 @@ export interface Record_LocalSDKType {
 export interface Record_Ledger {
   path?: BIP44Params;
 }
+export interface Record_LedgerProtoType {
+  typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
+  value: Uint8Array;
+}
 
 /** Ledger item */
 export interface Record_LedgerAmino {
@@ -112,6 +124,10 @@ export interface Record_LedgerSDKType {
 
 /** Multi item */
 export interface Record_Multi {}
+export interface Record_MultiProtoType {
+  typeUrl: "/cosmos.crypto.keyring.v1.Multi";
+  value: Uint8Array;
+}
 
 /** Multi item */
 export interface Record_MultiAmino {}
@@ -125,6 +141,10 @@ export interface Record_MultiSDKType {}
 
 /** Offline item */
 export interface Record_Offline {}
+export interface Record_OfflineProtoType {
+  typeUrl: "/cosmos.crypto.keyring.v1.Offline";
+  value: Uint8Array;
+}
 
 /** Offline item */
 export interface Record_OfflineAmino {}

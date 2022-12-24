@@ -130,6 +130,10 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
+export interface AccountIDProtoType {
+  typeUrl: "/akash.escrow.v1beta1.AccountID";
+  value: Uint8Array;
+}
 
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
@@ -166,6 +170,10 @@ export interface Account {
 
   /** block height at which this account was last settled */
   settledAt: Long;
+}
+export interface AccountProtoType {
+  typeUrl: "/akash.escrow.v1beta1.Account";
+  value: Uint8Array;
 }
 
 /** Account stores state for an escrow account */
@@ -212,6 +220,10 @@ export interface Payment {
   rate?: Coin;
   balance?: Coin;
   withdrawn?: Coin;
+}
+export interface PaymentProtoType {
+  typeUrl: "/akash.escrow.v1beta1.Payment";
+  value: Uint8Array;
 }
 
 /** Payment stores state for a payment */

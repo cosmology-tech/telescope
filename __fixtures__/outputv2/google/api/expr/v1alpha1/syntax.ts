@@ -13,6 +13,10 @@ export interface ParsedExpr {
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo?: SourceInfo;
 }
+export interface ParsedExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
+  value: Uint8Array;
+}
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprAmino {
@@ -78,6 +82,10 @@ export interface Expr {
 
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
+}
+export interface ExprProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Expr";
+  value: Uint8Array;
 }
 
 /**
@@ -169,6 +177,10 @@ export interface Expr_Ident {
    */
   name: string;
 }
+export interface Expr_IdentProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Ident";
+  value: Uint8Array;
+}
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentAmino {
@@ -214,6 +226,10 @@ export interface Expr_Select {
    * This results from the macro `has(request.auth)`.
    */
   testOnly: boolean;
+}
+export interface Expr_SelectProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Select";
+  value: Uint8Array;
 }
 
 /** A field selection expression. e.g. `request.auth`. */
@@ -271,6 +287,10 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
+export interface Expr_CallProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Call";
+  value: Uint8Array;
+}
 
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -316,6 +336,10 @@ export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
 }
+export interface Expr_CreateListProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CreateList";
+  value: Uint8Array;
+}
 
 /**
  * A list creation expression.
@@ -358,6 +382,10 @@ export interface Expr_CreateStruct {
 
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
+}
+export interface Expr_CreateStructProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
+  value: Uint8Array;
 }
 
 /**
@@ -411,6 +439,10 @@ export interface Expr_CreateStruct_Entry {
 
   /** Required. The value assigned to the key. */
   value?: Expr;
+}
+export interface Expr_CreateStruct_EntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Entry";
+  value: Uint8Array;
 }
 
 /** Represents an entry. */
@@ -506,6 +538,10 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
+}
+export interface Expr_ComprehensionProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Comprehension";
+  value: Uint8Array;
 }
 
 /**
@@ -669,6 +705,10 @@ export interface Constant {
   /** @deprecated */
   timestampValue?: Date;
 }
+export interface ConstantProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.Constant";
+  value: Uint8Array;
+}
 
 /**
  * Represents a primitive literal.
@@ -764,6 +804,10 @@ export interface SourceInfo_PositionsEntry {
   key: Long;
   value: number;
 }
+export interface SourceInfo_PositionsEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
+}
 export interface SourceInfo_PositionsEntryAmino {
   key: string;
   value: number;
@@ -779,6 +823,10 @@ export interface SourceInfo_PositionsEntrySDKType {
 export interface SourceInfo_MacroCallsEntry {
   key: Long;
   value?: Expr;
+}
+export interface SourceInfo_MacroCallsEntryProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntryAmino {
   key: string;
@@ -838,6 +886,10 @@ export interface SourceInfo {
   macroCalls?: {
     [key: Long]: Expr;
   };
+}
+export interface SourceInfoProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
+  value: Uint8Array;
 }
 
 /** Source information collected at parse time. */
@@ -923,6 +975,10 @@ export interface SourcePosition {
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
   column: number;
+}
+export interface SourcePositionProtoType {
+  typeUrl: "/google.api.expr.v1alpha1.SourcePosition";
+  value: Uint8Array;
 }
 
 /** A specific position in source. */

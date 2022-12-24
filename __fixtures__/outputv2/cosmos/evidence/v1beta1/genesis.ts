@@ -8,6 +8,10 @@ export interface GenesisState {
   /** evidence defines all the evidence at genesis. */
   evidence: Any[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.evidence.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateAmino {

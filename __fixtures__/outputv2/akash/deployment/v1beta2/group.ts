@@ -82,6 +82,10 @@ export interface Group {
   groupSpec?: GroupSpec;
   createdAt: Long;
 }
+export interface GroupProtoType {
+  typeUrl: "/akash.deployment.v1beta2.Group";
+  value: Uint8Array;
+}
 
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {

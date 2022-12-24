@@ -13,6 +13,10 @@ export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryTokenPairsRequestProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
+  value: Uint8Array;
+}
 
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -44,6 +48,10 @@ export interface QueryTokenPairsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+export interface QueryTokenPairsResponseProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse";
+  value: Uint8Array;
 }
 
 /**
@@ -78,6 +86,10 @@ export interface QueryTokenPairRequest {
    */
   token: string;
 }
+export interface QueryTokenPairRequestProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest";
+  value: Uint8Array;
+}
 
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestAmino {
@@ -104,6 +116,10 @@ export interface QueryTokenPairRequestSDKType {
 export interface QueryTokenPairResponse {
   tokenPair?: TokenPair;
 }
+export interface QueryTokenPairResponseProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse";
+  value: Uint8Array;
+}
 
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
@@ -127,6 +143,10 @@ export interface QueryTokenPairResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
@@ -144,6 +164,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params?: Params;
+}
+export interface QueryParamsResponseProtoType {
+  typeUrl: "/evmos.erc20.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 
 /**

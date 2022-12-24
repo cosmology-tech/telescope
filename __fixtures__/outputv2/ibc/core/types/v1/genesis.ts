@@ -22,6 +22,10 @@ export interface GenesisState {
   /** ICS004 - Channel genesis state */
   channelGenesis?: GenesisState3;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/ibc.core.types.v1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateAmino {

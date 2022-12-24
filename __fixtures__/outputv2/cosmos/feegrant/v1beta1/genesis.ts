@@ -7,6 +7,10 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 export interface GenesisState {
   allowances: Grant[];
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateAmino {

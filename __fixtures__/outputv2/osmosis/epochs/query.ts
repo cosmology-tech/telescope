@@ -3,6 +3,10 @@ import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
+export interface QueryEpochsInfoRequestProtoType {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
+  value: Uint8Array;
+}
 export interface QueryEpochsInfoRequestAmino {}
 export interface QueryEpochsInfoRequestAminoType {
   type: "osmosis/epochs/query-epochs-info-request";
@@ -11,6 +15,10 @@ export interface QueryEpochsInfoRequestAminoType {
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
+}
+export interface QueryEpochsInfoResponseProtoType {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseAmino {
   epochs: EpochInfoAmino[];
@@ -25,6 +33,10 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestProtoType {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
@@ -37,6 +49,10 @@ export interface QueryCurrentEpochRequestSDKType {
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
+}
+export interface QueryCurrentEpochResponseProtoType {
+  typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseAmino {
   current_epoch: string;

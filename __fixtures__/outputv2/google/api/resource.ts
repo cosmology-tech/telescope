@@ -251,6 +251,10 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorProtoType {
+  typeUrl: "/google.api.ResourceDescriptor";
+  value: Uint8Array;
+}
 
 /**
  * A simple descriptor of a resource type.
@@ -497,6 +501,10 @@ export interface ResourceReference {
    *     }
    */
   childType: string;
+}
+export interface ResourceReferenceProtoType {
+  typeUrl: "/google.api.ResourceReference";
+  value: Uint8Array;
 }
 
 /**

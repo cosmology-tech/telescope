@@ -279,6 +279,10 @@ export interface LogBucket {
    */
   cmekSettings?: CmekSettings;
 }
+export interface LogBucketProtoType {
+  typeUrl: "/google.logging.v2.LogBucket";
+  value: Uint8Array;
+}
 
 /** Describes a repository in which log entries are stored. */
 export interface LogBucketAmino {
@@ -405,6 +409,10 @@ export interface LogView {
    *                                AND LOG_ID("stdout")
    */
   filter: string;
+}
+export interface LogViewProtoType {
+  typeUrl: "/google.logging.v2.LogView";
+  value: Uint8Array;
 }
 
 /** Describes a view over log entries in a bucket. */
@@ -588,6 +596,10 @@ export interface LogSink {
    * This field may not be present for older sinks.
    */
   updateTime?: Date;
+}
+export interface LogSinkProtoType {
+  typeUrl: "/google.logging.v2.LogSink";
+  value: Uint8Array;
 }
 
 /**
@@ -774,6 +786,10 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
+export interface BigQueryOptionsProtoType {
+  typeUrl: "/google.logging.v2.BigQueryOptions";
+  value: Uint8Array;
+}
 
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptionsAmino {
@@ -842,6 +858,10 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
+export interface ListBucketsRequestProtoType {
+  typeUrl: "/google.logging.v2.ListBucketsRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequestAmino {
@@ -898,6 +918,10 @@ export interface ListBucketsResponse {
    */
   nextPageToken: string;
 }
+export interface ListBucketsResponseProtoType {
+  typeUrl: "/google.logging.v2.ListBucketsResponse";
+  value: Uint8Array;
+}
 
 /** The response from ListBuckets. */
 export interface ListBucketsResponseAmino {
@@ -948,6 +972,10 @@ export interface CreateBucketRequest {
    * ignored.
    */
   bucket?: LogBucket;
+}
+export interface CreateBucketRequestProtoType {
+  typeUrl: "/google.logging.v2.CreateBucketRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `CreateBucket`. */
@@ -1020,6 +1048,10 @@ export interface UpdateBucketRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateBucketRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateBucketRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestAmino {
@@ -1080,6 +1112,10 @@ export interface GetBucketRequest {
    */
   name: string;
 }
+export interface GetBucketRequestProtoType {
+  typeUrl: "/google.logging.v2.GetBucketRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequestAmino {
@@ -1123,6 +1159,10 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
+export interface DeleteBucketRequestProtoType {
+  typeUrl: "/google.logging.v2.DeleteBucketRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequestAmino {
@@ -1165,6 +1205,10 @@ export interface UndeleteBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
+}
+export interface UndeleteBucketRequestProtoType {
+  typeUrl: "/google.logging.v2.UndeleteBucketRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `UndeleteBucket`. */
@@ -1218,6 +1262,10 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
+export interface ListViewsRequestProtoType {
+  typeUrl: "/google.logging.v2.ListViewsRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `ListViews`. */
 export interface ListViewsRequestAmino {
@@ -1268,6 +1316,10 @@ export interface ListViewsResponse {
    */
   nextPageToken: string;
 }
+export interface ListViewsResponseProtoType {
+  typeUrl: "/google.logging.v2.ListViewsResponse";
+  value: Uint8Array;
+}
 
 /** The response from ListViews. */
 export interface ListViewsResponseAmino {
@@ -1310,6 +1362,10 @@ export interface CreateViewRequest {
 
   /** Required. The new view. */
   view?: LogView;
+}
+export interface CreateViewRequestProtoType {
+  typeUrl: "/google.logging.v2.CreateViewRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `CreateView`. */
@@ -1371,6 +1427,10 @@ export interface UpdateViewRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateViewRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateViewRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestAmino {
@@ -1425,6 +1485,10 @@ export interface GetViewRequest {
    */
   name: string;
 }
+export interface GetViewRequestProtoType {
+  typeUrl: "/google.logging.v2.GetViewRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `GetView`. */
 export interface GetViewRequestAmino {
@@ -1461,6 +1525,10 @@ export interface DeleteViewRequest {
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
+}
+export interface DeleteViewRequestProtoType {
+  typeUrl: "/google.logging.v2.DeleteViewRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `DeleteView`. */
@@ -1512,6 +1580,10 @@ export interface ListSinksRequest {
    * response indicates that more results might be available.
    */
   pageSize: number;
+}
+export interface ListSinksRequestProtoType {
+  typeUrl: "/google.logging.v2.ListSinksRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `ListSinks`. */
@@ -1565,6 +1637,10 @@ export interface ListSinksResponse {
    */
   nextPageToken: string;
 }
+export interface ListSinksResponseProtoType {
+  typeUrl: "/google.logging.v2.ListSinksResponse";
+  value: Uint8Array;
+}
 
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseAmino {
@@ -1604,6 +1680,10 @@ export interface GetSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+export interface GetSinkRequestProtoType {
+  typeUrl: "/google.logging.v2.GetSinkRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `GetSink`. */
@@ -1669,6 +1749,10 @@ export interface CreateSinkRequest {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   uniqueWriterIdentity: boolean;
+}
+export interface CreateSinkRequestProtoType {
+  typeUrl: "/google.logging.v2.CreateSinkRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `CreateSink`. */
@@ -1779,6 +1863,10 @@ export interface UpdateSinkRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateSinkRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateSinkRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestAmino {
@@ -1868,6 +1956,10 @@ export interface DeleteSinkRequest {
    */
   sinkName: string;
 }
+export interface DeleteSinkRequestProtoType {
+  typeUrl: "/google.logging.v2.DeleteSinkRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequestAmino {
@@ -1950,6 +2042,10 @@ export interface LogExclusion {
    * This field may not be present for older exclusions.
    */
   updateTime?: Date;
+}
+export interface LogExclusionProtoType {
+  typeUrl: "/google.logging.v2.LogExclusion";
+  value: Uint8Array;
 }
 
 /**
@@ -2055,6 +2151,10 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
+export interface ListExclusionsRequestProtoType {
+  typeUrl: "/google.logging.v2.ListExclusionsRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequestAmino {
@@ -2107,6 +2207,10 @@ export interface ListExclusionsResponse {
    */
   nextPageToken: string;
 }
+export interface ListExclusionsResponseProtoType {
+  typeUrl: "/google.logging.v2.ListExclusionsResponse";
+  value: Uint8Array;
+}
 
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseAmino {
@@ -2146,6 +2250,10 @@ export interface GetExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
+}
+export interface GetExclusionRequestProtoType {
+  typeUrl: "/google.logging.v2.GetExclusionRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `GetExclusion`. */
@@ -2196,6 +2304,10 @@ export interface CreateExclusionRequest {
    * that is not already used in the parent resource.
    */
   exclusion?: LogExclusion;
+}
+export interface CreateExclusionRequestProtoType {
+  typeUrl: "/google.logging.v2.CreateExclusionRequest";
+  value: Uint8Array;
 }
 
 /** The parameters to `CreateExclusion`. */
@@ -2265,6 +2377,10 @@ export interface UpdateExclusionRequest {
    */
   updateMask?: FieldMask;
 }
+export interface UpdateExclusionRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateExclusionRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestAmino {
@@ -2327,6 +2443,10 @@ export interface DeleteExclusionRequest {
    */
   name: string;
 }
+export interface DeleteExclusionRequestProtoType {
+  typeUrl: "/google.logging.v2.DeleteExclusionRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequestAmino {
@@ -2381,6 +2501,10 @@ export interface GetCmekSettingsRequest {
    * organization.
    */
   name: string;
+}
+export interface GetCmekSettingsRequestProtoType {
+  typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -2474,6 +2598,10 @@ export interface UpdateCmekSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
+}
+export interface UpdateCmekSettingsRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -2606,6 +2734,10 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
+export interface CmekSettingsProtoType {
+  typeUrl: "/google.logging.v2.CmekSettings";
+  value: Uint8Array;
+}
 
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
@@ -2722,6 +2854,10 @@ export interface GetSettingsRequest {
    */
   name: string;
 }
+export interface GetSettingsRequestProtoType {
+  typeUrl: "/google.logging.v2.GetSettingsRequest";
+  value: Uint8Array;
+}
 
 /**
  * The parameters to
@@ -2811,6 +2947,10 @@ export interface UpdateSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
+}
+export interface UpdateSettingsRequestProtoType {
+  typeUrl: "/google.logging.v2.UpdateSettingsRequest";
+  value: Uint8Array;
 }
 
 /**
@@ -2946,6 +3086,10 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
+export interface SettingsProtoType {
+  typeUrl: "/google.logging.v2.Settings";
+  value: Uint8Array;
+}
 
 /**
  * Describes the settings associated with a project, folder, organization,
@@ -3054,6 +3198,10 @@ export interface CopyLogEntriesRequest {
   /** Required. Destination to which to copy log entries. */
   destination: string;
 }
+export interface CopyLogEntriesRequestProtoType {
+  typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
+  value: Uint8Array;
+}
 
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequestAmino {
@@ -3118,6 +3266,10 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
+export interface CopyLogEntriesMetadataProtoType {
+  typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
+  value: Uint8Array;
+}
 
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataAmino {
@@ -3170,6 +3322,10 @@ export interface CopyLogEntriesMetadataSDKType {
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
+}
+export interface CopyLogEntriesResponseProtoType {
+  typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
+  value: Uint8Array;
 }
 
 /** Response type for CopyLogEntries long running operations. */

@@ -10,6 +10,10 @@ export interface CPU {
   units?: ResourceValue;
   attributes: Attribute[];
 }
+export interface CPUProtoType {
+  typeUrl: "/akash.base.v1beta1.CPU";
+  value: Uint8Array;
+}
 
 /** CPU stores resource units and cpu config attributes */
 export interface CPUAmino {
@@ -32,6 +36,10 @@ export interface Memory {
   quantity?: ResourceValue;
   attributes: Attribute[];
 }
+export interface MemoryProtoType {
+  typeUrl: "/akash.base.v1beta1.Memory";
+  value: Uint8Array;
+}
 
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
@@ -53,6 +61,10 @@ export interface MemorySDKType {
 export interface Storage {
   quantity?: ResourceValue;
   attributes: Attribute[];
+}
+export interface StorageProtoType {
+  typeUrl: "/akash.base.v1beta1.Storage";
+  value: Uint8Array;
 }
 
 /** Storage stores resource quantity and storage attributes */
@@ -80,6 +92,10 @@ export interface ResourceUnits {
   memory?: Memory;
   storage?: Storage;
   endpoints: Endpoint[];
+}
+export interface ResourceUnitsProtoType {
+  typeUrl: "/akash.base.v1beta1.ResourceUnits";
+  value: Uint8Array;
 }
 
 /**

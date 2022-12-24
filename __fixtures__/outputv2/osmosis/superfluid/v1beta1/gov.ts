@@ -12,6 +12,10 @@ export interface SetSuperfluidAssetsProposal {
   description: string;
   assets: SuperfluidAsset[];
 }
+export interface SetSuperfluidAssetsProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
+  value: Uint8Array;
+}
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -45,6 +49,10 @@ export interface RemoveSuperfluidAssetsProposal {
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
+}
+export interface RemoveSuperfluidAssetsProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
+  value: Uint8Array;
 }
 
 /**
@@ -80,6 +88,10 @@ export interface UpdateUnpoolWhiteListProposal {
   description: string;
   ids: Long[];
   isOverwrite: boolean;
+}
+export interface UpdateUnpoolWhiteListProposalProtoType {
+  typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
+  value: Uint8Array;
 }
 
 /**

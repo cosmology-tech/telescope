@@ -33,6 +33,10 @@ export interface GenesisState {
   redelegations: Redelegation[];
   exported: boolean;
 }
+export interface GenesisStateProtoType {
+  typeUrl: "/cosmos.staking.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateAmino {
@@ -88,6 +92,10 @@ export interface LastValidatorPower {
 
   /** power defines the power of the validator. */
   power: Long;
+}
+export interface LastValidatorPowerProtoType {
+  typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower";
+  value: Uint8Array;
 }
 
 /** LastValidatorPower required for validator set update logic. */

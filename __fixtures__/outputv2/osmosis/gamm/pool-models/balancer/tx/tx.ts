@@ -10,6 +10,10 @@ export interface MsgCreateBalancerPool {
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
+export interface MsgCreateBalancerPoolProtoType {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
+  value: Uint8Array;
+}
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolAmino {
@@ -34,6 +38,10 @@ export interface MsgCreateBalancerPoolSDKType {
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
   poolId: Long;
+}
+export interface MsgCreateBalancerPoolResponseProtoType {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
+  value: Uint8Array;
 }
 
 /** Returns the poolID */

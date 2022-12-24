@@ -14,6 +14,10 @@ export interface BaseAccount {
   accountNumber: Long;
   sequence: Long;
 }
+export interface BaseAccountProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
+  value: Uint8Array;
+}
 
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -49,6 +53,10 @@ export interface ModuleAccount {
   name: string;
   permissions: string[];
 }
+export interface ModuleAccountProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.ModuleAccount";
+  value: Uint8Array;
+}
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountAmino {
@@ -75,6 +83,10 @@ export interface Params {
   txSizeCostPerByte: Long;
   sigVerifyCostEd25519: Long;
   sigVerifyCostSecp256k1: Long;
+}
+export interface ParamsProtoType {
+  typeUrl: "/cosmos.auth.v1beta1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the parameters for the auth module. */

@@ -218,6 +218,10 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
+export interface ServiceProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service";
+  value: Uint8Array;
+}
 
 /** A service that is available for use by the consumer. */
 export interface ServiceAmino {
@@ -313,6 +317,10 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
+export interface ServiceConfigProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
+  value: Uint8Array;
+}
 
 /** The configuration of the service. */
 export interface ServiceConfigAmino {
@@ -393,6 +401,10 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
+export interface OperationMetadataProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
+  value: Uint8Array;
+}
 
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataAmino {
@@ -459,6 +471,10 @@ export interface ConsumerQuotaMetric {
 
   /** The units in which the metric value is reported. */
   unit: string;
+}
+export interface ConsumerQuotaMetricProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
+  value: Uint8Array;
 }
 
 /** Consumer quota settings for a quota metric. */
@@ -568,6 +584,10 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
+export interface ConsumerQuotaLimitProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
+  value: Uint8Array;
+}
 
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitAmino {
@@ -631,6 +651,10 @@ export interface QuotaBucket_DimensionsEntry {
   key: string;
   value: string;
 }
+export interface QuotaBucket_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
+}
 export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
@@ -683,6 +707,10 @@ export interface QuotaBucket {
   dimensions: {
     [key: string]: string;
   };
+}
+export interface QuotaBucketProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
+  value: Uint8Array;
 }
 
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
@@ -744,6 +772,10 @@ export interface QuotaBucketSDKType {
 export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOverride_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntryAmino {
   key: string;
@@ -831,6 +863,10 @@ export interface QuotaOverride {
    * Used by admin overrides only.
    */
   adminOverrideAncestor: string;
+}
+export interface QuotaOverrideProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
+  value: Uint8Array;
 }
 
 /** A quota override */
@@ -934,6 +970,10 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
+export interface OverrideInlineSourceProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
+  value: Uint8Array;
+}
 
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceAmino {
@@ -957,6 +997,10 @@ export interface OverrideInlineSourceSDKType {
 export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntryProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
   key: string;
@@ -1029,6 +1073,10 @@ export interface AdminQuotaPolicy {
    * format is `{container_type}/{container_number}`
    */
   container: string;
+}
+export interface AdminQuotaPolicyProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
+  value: Uint8Array;
 }
 
 /** Quota policy created by quota administrator. */
@@ -1123,6 +1171,10 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+export interface ServiceIdentityProtoType {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
+  value: Uint8Array;
 }
 
 /**

@@ -61,6 +61,10 @@ export interface ClientState {
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
+export interface ClientStateProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
+  value: Uint8Array;
+}
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -149,6 +153,10 @@ export interface ConsensusState {
   root?: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
+export interface ConsensusStateProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
+  value: Uint8Array;
+}
 
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateAmino {
@@ -182,6 +190,10 @@ export interface Misbehaviour {
   clientId: string;
   header1?: Header;
   header2?: Header;
+}
+export interface MisbehaviourProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
+  value: Uint8Array;
 }
 
 /**
@@ -227,6 +239,10 @@ export interface Header {
   validatorSet?: ValidatorSet;
   trustedHeight?: Height;
   trustedValidators?: ValidatorSet;
+}
+export interface HeaderProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Header";
+  value: Uint8Array;
 }
 
 /**
@@ -282,6 +298,10 @@ export interface HeaderSDKType {
 export interface Fraction {
   numerator: Long;
   denominator: Long;
+}
+export interface FractionProtoType {
+  typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
+  value: Uint8Array;
 }
 
 /**

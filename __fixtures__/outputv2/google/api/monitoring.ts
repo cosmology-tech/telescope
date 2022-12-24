@@ -77,6 +77,10 @@ export interface Monitoring {
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
+export interface MonitoringProtoType {
+  typeUrl: "/google.api.Monitoring";
+  value: Uint8Array;
+}
 
 /**
  * Monitoring configuration of the service.
@@ -233,6 +237,10 @@ export interface Monitoring_MonitoringDestination {
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Monitoring_MonitoringDestinationProtoType {
+  typeUrl: "/google.api.MonitoringDestination";
+  value: Uint8Array;
 }
 
 /**

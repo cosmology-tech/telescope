@@ -447,6 +447,10 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
 export interface FileDescriptorSet {
   file: FileDescriptorProto[];
 }
+export interface FileDescriptorSetProtoType {
+  typeUrl: "/google.protobuf.FileDescriptorSet";
+  value: Uint8Array;
+}
 
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
@@ -506,6 +510,10 @@ export interface FileDescriptorProto {
    * The supported values are "proto2" and "proto3".
    */
   syntax: string;
+}
+export interface FileDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.FileDescriptorProto";
+  value: Uint8Array;
 }
 
 /** Describes a complete .proto file. */
@@ -586,6 +594,10 @@ export interface DescriptorProto {
    */
   reservedName: string[];
 }
+export interface DescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.DescriptorProto";
+  value: Uint8Array;
+}
 
 /** Describes a message type. */
 export interface DescriptorProtoAmino {
@@ -631,6 +643,10 @@ export interface DescriptorProto_ExtensionRange {
   end: number;
   options?: ExtensionRangeOptions;
 }
+export interface DescriptorProto_ExtensionRangeProtoType {
+  typeUrl: "/google.protobuf.ExtensionRange";
+  value: Uint8Array;
+}
 export interface DescriptorProto_ExtensionRangeAmino {
   /** Inclusive. */
   start: number;
@@ -660,6 +676,10 @@ export interface DescriptorProto_ReservedRange {
 
   /** Exclusive. */
   end: number;
+}
+export interface DescriptorProto_ReservedRangeProtoType {
+  typeUrl: "/google.protobuf.ReservedRange";
+  value: Uint8Array;
 }
 
 /**
@@ -691,6 +711,10 @@ export interface DescriptorProto_ReservedRangeSDKType {
 export interface ExtensionRangeOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
+}
+export interface ExtensionRangeOptionsProtoType {
+  typeUrl: "/google.protobuf.ExtensionRangeOptions";
+  value: Uint8Array;
 }
 export interface ExtensionRangeOptionsAmino {
   /** The parser stores options it doesn't recognize here. See above. */
@@ -754,6 +778,10 @@ export interface FieldDescriptorProto {
    */
   jsonName: string;
   options?: FieldOptions;
+}
+export interface FieldDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.FieldDescriptorProto";
+  value: Uint8Array;
 }
 
 /** Describes a field within a message. */
@@ -831,6 +859,10 @@ export interface OneofDescriptorProto {
   name: string;
   options?: OneofOptions;
 }
+export interface OneofDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.OneofDescriptorProto";
+  value: Uint8Array;
+}
 
 /** Describes a oneof. */
 export interface OneofDescriptorProtoAmino {
@@ -866,6 +898,10 @@ export interface EnumDescriptorProto {
    * be reserved once.
    */
   reservedName: string[];
+}
+export interface EnumDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.EnumDescriptorProto";
+  value: Uint8Array;
 }
 
 /** Describes an enum type. */
@@ -916,6 +952,10 @@ export interface EnumDescriptorProto_EnumReservedRange {
   /** Inclusive. */
   end: number;
 }
+export interface EnumDescriptorProto_EnumReservedRangeProtoType {
+  typeUrl: "/google.protobuf.EnumReservedRange";
+  value: Uint8Array;
+}
 
 /**
  * Range of reserved numeric values. Reserved values may not be used by
@@ -956,6 +996,10 @@ export interface EnumValueDescriptorProto {
   number: number;
   options?: EnumValueOptions;
 }
+export interface EnumValueDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.EnumValueDescriptorProto";
+  value: Uint8Array;
+}
 
 /** Describes a value within an enum. */
 export interface EnumValueDescriptorProtoAmino {
@@ -980,6 +1024,10 @@ export interface ServiceDescriptorProto {
   name: string;
   method: MethodDescriptorProto[];
   options?: ServiceOptions;
+}
+export interface ServiceDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.ServiceDescriptorProto";
+  value: Uint8Array;
 }
 
 /** Describes a service. */
@@ -1017,6 +1065,10 @@ export interface MethodDescriptorProto {
 
   /** Identifies if server streams multiple server messages */
   serverStreaming: boolean;
+}
+export interface MethodDescriptorProtoProtoType {
+  typeUrl: "/google.protobuf.MethodDescriptorProto";
+  value: Uint8Array;
 }
 
 /** Describes a method of a service. */
@@ -1184,6 +1236,10 @@ export interface FileOptions {
    * See the documentation for the "Options" section above.
    */
   uninterpretedOption: UninterpretedOption[];
+}
+export interface FileOptionsProtoType {
+  typeUrl: "/google.protobuf.FileOptions";
+  value: Uint8Array;
 }
 export interface FileOptionsAmino {
   /**
@@ -1414,6 +1470,10 @@ export interface MessageOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
 }
+export interface MessageOptionsProtoType {
+  typeUrl: "/google.protobuf.MessageOptions";
+  value: Uint8Array;
+}
 export interface MessageOptionsAmino {
   /**
    * Set true to use the old proto1 MessageSet wire format for extensions.
@@ -1570,6 +1630,10 @@ export interface FieldOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
 }
+export interface FieldOptionsProtoType {
+  typeUrl: "/google.protobuf.FieldOptions";
+  value: Uint8Array;
+}
 export interface FieldOptionsAmino {
   /**
    * The ctype option instructs the C++ code generator to use a different
@@ -1666,6 +1730,10 @@ export interface OneofOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
 }
+export interface OneofOptionsProtoType {
+  typeUrl: "/google.protobuf.OneofOptions";
+  value: Uint8Array;
+}
 export interface OneofOptionsAmino {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpreted_option: UninterpretedOptionAmino[];
@@ -1694,6 +1762,10 @@ export interface EnumOptions {
 
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
+}
+export interface EnumOptionsProtoType {
+  typeUrl: "/google.protobuf.EnumOptions";
+  value: Uint8Array;
 }
 export interface EnumOptionsAmino {
   /**
@@ -1734,6 +1806,10 @@ export interface EnumValueOptions {
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
 }
+export interface EnumValueOptionsProtoType {
+  typeUrl: "/google.protobuf.EnumValueOptions";
+  value: Uint8Array;
+}
 export interface EnumValueOptionsAmino {
   /**
    * Is this enum value deprecated?
@@ -1765,6 +1841,10 @@ export interface ServiceOptions {
 
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
+}
+export interface ServiceOptionsProtoType {
+  typeUrl: "/google.protobuf.ServiceOptions";
+  value: Uint8Array;
 }
 export interface ServiceOptionsAmino {
   /**
@@ -1798,6 +1878,10 @@ export interface MethodOptions {
 
   /** The parser stores options it doesn't recognize here. See above. */
   uninterpretedOption: UninterpretedOption[];
+}
+export interface MethodOptionsProtoType {
+  typeUrl: "/google.protobuf.MethodOptions";
+  value: Uint8Array;
 }
 export interface MethodOptionsAmino {
   /**
@@ -1843,6 +1927,10 @@ export interface UninterpretedOption {
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;
+}
+export interface UninterpretedOptionProtoType {
+  typeUrl: "/google.protobuf.UninterpretedOption";
+  value: Uint8Array;
 }
 
 /**
@@ -1900,6 +1988,10 @@ export interface UninterpretedOptionSDKType {
 export interface UninterpretedOption_NamePart {
   namePart: string;
   isExtension: boolean;
+}
+export interface UninterpretedOption_NamePartProtoType {
+  typeUrl: "/google.protobuf.NamePart";
+  value: Uint8Array;
 }
 
 /**
@@ -1981,6 +2073,10 @@ export interface SourceCodeInfo {
    *   be recorded in the future.
    */
   location: SourceCodeInfo_Location[];
+}
+export interface SourceCodeInfoProtoType {
+  typeUrl: "/google.protobuf.SourceCodeInfo";
+  value: Uint8Array;
 }
 
 /**
@@ -2137,6 +2233,10 @@ export interface SourceCodeInfo_Location {
   trailingComments: string;
   leadingDetachedComments: string[];
 }
+export interface SourceCodeInfo_LocationProtoType {
+  typeUrl: "/google.protobuf.Location";
+  value: Uint8Array;
+}
 export interface SourceCodeInfo_LocationAmino {
   /**
    * Identifies which part of the FileDescriptorProto was defined at this
@@ -2251,6 +2351,10 @@ export interface GeneratedCodeInfo {
    */
   annotation: GeneratedCodeInfo_Annotation[];
 }
+export interface GeneratedCodeInfoProtoType {
+  typeUrl: "/google.protobuf.GeneratedCodeInfo";
+  value: Uint8Array;
+}
 
 /**
  * Describes the relationship between generated code and its original source
@@ -2299,6 +2403,10 @@ export interface GeneratedCodeInfo_Annotation {
    * the last relevant byte (so the length of the text = end - begin).
    */
   end: number;
+}
+export interface GeneratedCodeInfo_AnnotationProtoType {
+  typeUrl: "/google.protobuf.Annotation";
+  value: Uint8Array;
 }
 export interface GeneratedCodeInfo_AnnotationAmino {
   /**

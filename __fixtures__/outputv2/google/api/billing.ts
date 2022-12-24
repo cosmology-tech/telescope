@@ -45,6 +45,10 @@ export interface Billing {
    */
   consumerDestinations: Billing_BillingDestination[];
 }
+export interface BillingProtoType {
+  typeUrl: "/google.api.Billing";
+  value: Uint8Array;
+}
 
 /**
  * Billing related configuration of the service.
@@ -148,6 +152,10 @@ export interface Billing_BillingDestination {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Billing_BillingDestinationProtoType {
+  typeUrl: "/google.api.BillingDestination";
+  value: Uint8Array;
 }
 
 /**

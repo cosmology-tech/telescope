@@ -7,6 +7,10 @@ export interface Attribute {
   key: string;
   value: string;
 }
+export interface AttributeProtoType {
+  typeUrl: "/akash.base.v1beta1.Attribute";
+  value: Uint8Array;
+}
 
 /** Attribute represents key value pair */
 export interface AttributeAmino {
@@ -36,6 +40,10 @@ export interface SignedBy {
 
   /** any_of at least of of the keys from the list must have signed attributes */
   anyOf: string[];
+}
+export interface SignedByProtoType {
+  typeUrl: "/akash.base.v1beta1.SignedBy";
+  value: Uint8Array;
 }
 
 /**
@@ -74,6 +82,10 @@ export interface PlacementRequirements {
 
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
+}
+export interface PlacementRequirementsProtoType {
+  typeUrl: "/akash.base.v1beta1.PlacementRequirements";
+  value: Uint8Array;
 }
 
 /** PlacementRequirements */

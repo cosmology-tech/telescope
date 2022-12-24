@@ -34,6 +34,10 @@ export interface Visibility {
    */
   rules: VisibilityRule[];
 }
+export interface VisibilityProtoType {
+  typeUrl: "/google.api.Visibility";
+  value: Uint8Array;
+}
 
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -130,6 +134,10 @@ export interface VisibilityRule {
    * this method and only had access to it through INTERNAL.
    */
   restriction: string;
+}
+export interface VisibilityRuleProtoType {
+  typeUrl: "/google.api.VisibilityRule";
+  value: Uint8Array;
 }
 
 /**

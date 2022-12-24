@@ -26,6 +26,10 @@ export interface Class {
   /** data is the app specific metadata of the NFT class. Optional */
   data?: Any;
 }
+export interface ClassProtoType {
+  typeUrl: "/cosmos.nft.v1beta1.Class";
+  value: Uint8Array;
+}
 
 /** Class defines the class of the nft type. */
 export interface ClassAmino {
@@ -82,6 +86,10 @@ export interface NFT {
 
   /** data is an app specific data of the NFT. Optional */
   data?: Any;
+}
+export interface NFTProtoType {
+  typeUrl: "/cosmos.nft.v1beta1.NFT";
+  value: Uint8Array;
 }
 
 /** NFT defines the NFT. */

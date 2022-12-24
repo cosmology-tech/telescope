@@ -16,6 +16,10 @@ export interface DenomTrace {
   /** base denomination of the relayed fungible token. */
   baseDenom: string;
 }
+export interface DenomTraceProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.DenomTrace";
+  value: Uint8Array;
+}
 
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -63,6 +67,10 @@ export interface Params {
    * chain.
    */
   receiveEnabled: boolean;
+}
+export interface ParamsProtoType {
+  typeUrl: "/ibc.applications.transfer.v1.Params";
+  value: Uint8Array;
 }
 
 /**

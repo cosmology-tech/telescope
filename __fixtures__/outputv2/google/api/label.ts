@@ -64,6 +64,10 @@ export interface LabelDescriptor {
   /** A human-readable description for the label. */
   description: string;
 }
+export interface LabelDescriptorProtoType {
+  typeUrl: "/google.api.LabelDescriptor";
+  value: Uint8Array;
+}
 
 /** A description of a label. */
 export interface LabelDescriptorAmino {

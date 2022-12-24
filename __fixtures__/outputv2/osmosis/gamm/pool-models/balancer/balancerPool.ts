@@ -46,6 +46,10 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
+export interface SmoothWeightChangeParamsProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
+  value: Uint8Array;
+}
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -124,6 +128,10 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
+export interface PoolParamsProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -168,6 +176,10 @@ export interface PoolAsset {
 
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface PoolAssetProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
+  value: Uint8Array;
 }
 
 /**
@@ -230,6 +242,10 @@ export interface Pool {
 
   /** sum of all non-normalized pool weights */
   totalWeight: string;
+}
+export interface PoolProtoType {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool";
+  value: Uint8Array;
 }
 export interface PoolAmino {
   address: string;

@@ -15,6 +15,10 @@ export interface IdentifiedClientState {
   /** client state */
   clientState?: Any;
 }
+export interface IdentifiedClientStateProtoType {
+  typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
+  value: Uint8Array;
+}
 
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -52,6 +56,10 @@ export interface ConsensusStateWithHeight {
   /** consensus state */
   consensusState?: Any;
 }
+export interface ConsensusStateWithHeightProtoType {
+  typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
+  value: Uint8Array;
+}
 
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -88,6 +96,10 @@ export interface ClientConsensusStates {
 
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+export interface ClientConsensusStatesProtoType {
+  typeUrl: "/ibc.core.client.v1.ClientConsensusStates";
+  value: Uint8Array;
 }
 
 /**
@@ -136,6 +148,10 @@ export interface ClientUpdateProposal {
    * client
    */
   substituteClientId: string;
+}
+export interface ClientUpdateProposalProtoType {
+  typeUrl: "/ibc.core.client.v1.ClientUpdateProposal";
+  value: Uint8Array;
 }
 
 /**
@@ -197,6 +213,10 @@ export interface UpgradeProposal {
    */
   upgradedClientState?: Any;
 }
+export interface UpgradeProposalProtoType {
+  typeUrl: "/ibc.core.client.v1.UpgradeProposal";
+  value: Uint8Array;
+}
 
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
@@ -252,6 +272,10 @@ export interface Height {
   /** the height within the given revision */
   revisionHeight: Long;
 }
+export interface HeightProtoType {
+  typeUrl: "/ibc.core.client.v1.Height";
+  value: Uint8Array;
+}
 
 /**
  * Height is a monotonically increasing data type
@@ -298,6 +322,10 @@ export interface HeightSDKType {
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
+}
+export interface ParamsProtoType {
+  typeUrl: "/ibc.core.client.v1.Params";
+  value: Uint8Array;
 }
 
 /** Params defines the set of IBC light client parameters. */

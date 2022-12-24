@@ -12,6 +12,10 @@ export interface QueryAllowanceRequest {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
+export interface QueryAllowanceRequestProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowanceRequest";
+  value: Uint8Array;
+}
 
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequestAmino {
@@ -37,6 +41,10 @@ export interface QueryAllowanceResponse {
   /** allowance is a allowance granted for grantee by granter. */
   allowance?: Grant;
 }
+export interface QueryAllowanceResponseProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowanceResponse";
+  value: Uint8Array;
+}
 
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponseAmino {
@@ -59,6 +67,10 @@ export interface QueryAllowancesRequest {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QueryAllowancesRequestProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesRequest";
+  value: Uint8Array;
 }
 
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
@@ -87,6 +99,10 @@ export interface QueryAllowancesResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface QueryAllowancesResponseProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesResponse";
+  value: Uint8Array;
+}
 
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponseAmino {
@@ -114,6 +130,10 @@ export interface QueryAllowancesByGranterRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryAllowancesByGranterRequestProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest";
+  value: Uint8Array;
+}
 
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequestAmino {
@@ -140,6 +160,10 @@ export interface QueryAllowancesByGranterResponse {
 
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
+}
+export interface QueryAllowancesByGranterResponseProtoType {
+  typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse";
+  value: Uint8Array;
 }
 
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */

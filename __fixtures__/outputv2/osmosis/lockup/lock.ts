@@ -83,6 +83,10 @@ export interface PeriodLock {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
+export interface PeriodLockProtoType {
+  typeUrl: "/osmosis.lockup.PeriodLock";
+  value: Uint8Array;
+}
 
 /**
  * PeriodLock is a single lock unit by period defined by the x/lockup module.
@@ -167,6 +171,10 @@ export interface QueryCondition {
    */
   timestamp?: Date;
 }
+export interface QueryConditionProtoType {
+  typeUrl: "/osmosis.lockup.QueryCondition";
+  value: Uint8Array;
+}
 
 /**
  * QueryCondition is a struct used for querying locks upon different conditions.
@@ -241,6 +249,10 @@ export interface SyntheticLock {
    * at the point of unbonding has started.
    */
   duration?: Duration;
+}
+export interface SyntheticLockProtoType {
+  typeUrl: "/osmosis.lockup.SyntheticLock";
+  value: Uint8Array;
 }
 
 /**

@@ -337,6 +337,10 @@ export interface Type {
   /** The source syntax. */
   syntax: Syntax;
 }
+export interface TypeProtoType {
+  typeUrl: "/google.protobuf.Type";
+  value: Uint8Array;
+}
 
 /** A protocol buffer message type. */
 export interface TypeAmino {
@@ -410,6 +414,10 @@ export interface Field {
 
   /** The string value of the default value of this field. Proto2 syntax only. */
   defaultValue: string;
+}
+export interface FieldProtoType {
+  typeUrl: "/google.protobuf.Field";
+  value: Uint8Array;
 }
 
 /** A single field of a message type. */
@@ -486,6 +494,10 @@ export interface Enum {
   /** The source syntax. */
   syntax: Syntax;
 }
+export interface EnumProtoType {
+  typeUrl: "/google.protobuf.Enum";
+  value: Uint8Array;
+}
 
 /** Enum type definition. */
 export interface EnumAmino {
@@ -528,6 +540,10 @@ export interface EnumValue {
 
   /** Protocol buffer options. */
   options: Option[];
+}
+export interface EnumValueProtoType {
+  typeUrl: "/google.protobuf.EnumValue";
+  value: Uint8Array;
 }
 
 /** Enum value definition. */
@@ -573,6 +589,10 @@ export interface Option {
    * value using the google.protobuf.Int32Value type.
    */
   value?: Any;
+}
+export interface OptionProtoType {
+  typeUrl: "/google.protobuf.Option";
+  value: Uint8Array;
 }
 
 /**
