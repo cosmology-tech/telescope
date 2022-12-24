@@ -172,7 +172,7 @@ export const fromAminoJsonMethod = ({
         )
     );
     fromAminoParams.typeAnnotation = t.tsTypeAnnotation(t.tsIndexedAccessType(
-        t.tsTypeReference(t.identifier('Amino' + proto.name)),
+        t.tsTypeReference(t.identifier(proto.name + 'AminoType')),
         t.tsLiteralType(t.stringLiteral('value'))
     ));
 
