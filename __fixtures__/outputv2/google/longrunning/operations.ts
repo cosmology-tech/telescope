@@ -1,6 +1,6 @@
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../protobuf/duration";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../protobuf/any";
-import { Status, StatusAmino, StatusAminoType, StatusSDKType } from "../rpc/status";
+import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
+import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Status, StatusAmino, StatusSDKType } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.longrunning";

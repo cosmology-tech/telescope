@@ -1,11 +1,11 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
-import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressAminoType, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimAminoType, ClaimSDKType } from "./claims";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimSDKType } from "./claims";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestAmino, QueryTotalUnclaimedRequestAminoType, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseAmino, QueryTotalUnclaimedResponseAminoType, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestAmino, QueryClaimsRecordsRequestAminoType, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseAmino, QueryClaimsRecordsResponseAminoType, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestAmino, QueryClaimsRecordRequestAminoType, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseAmino, QueryClaimsRecordResponseAminoType, QueryClaimsRecordResponseSDKType } from "./query";
+import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestAmino, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseAmino, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestAmino, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseAmino, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestAmino, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseAmino, QueryClaimsRecordResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

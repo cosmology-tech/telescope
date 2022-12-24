@@ -1,8 +1,8 @@
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockAmino, PeriodLockAminoType, PeriodLockSDKType } from "./lock";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensAminoType, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllAminoType, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingAminoType, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupAminoType, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockAminoType, MsgForceUnlockSDKType } from "./tx";
+import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.lockup.MsgLockTokens", MsgLockTokens], ["/osmosis.lockup.MsgBeginUnlockingAll", MsgBeginUnlockingAll], ["/osmosis.lockup.MsgBeginUnlocking", MsgBeginUnlocking], ["/osmosis.lockup.MsgExtendLockup", MsgExtendLockup], ["/osmosis.lockup.MsgForceUnlock", MsgForceUnlock]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

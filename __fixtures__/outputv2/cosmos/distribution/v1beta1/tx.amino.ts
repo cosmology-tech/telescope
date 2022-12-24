@@ -1,5 +1,5 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
-import { MsgSetWithdrawAddress, MsgSetWithdrawAddressAmino, MsgSetWithdrawAddressAminoType, MsgSetWithdrawAddressSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardAmino, MsgWithdrawDelegatorRewardAminoType, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionAmino, MsgWithdrawValidatorCommissionAminoType, MsgWithdrawValidatorCommissionSDKType, MsgFundCommunityPool, MsgFundCommunityPoolAmino, MsgFundCommunityPoolAminoType, MsgFundCommunityPoolSDKType } from "./tx";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { MsgSetWithdrawAddress, MsgSetWithdrawAddressAmino, MsgSetWithdrawAddressSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardAmino, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionAmino, MsgWithdrawValidatorCommissionSDKType, MsgFundCommunityPool, MsgFundCommunityPoolAmino, MsgFundCommunityPoolSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
     aminoType: "cosmos-sdk/MsgModifyWithdrawAddress",

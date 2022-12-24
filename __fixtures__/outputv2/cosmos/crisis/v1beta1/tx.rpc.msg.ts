@@ -1,6 +1,6 @@
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgVerifyInvariant, MsgVerifyInvariantAmino, MsgVerifyInvariantAminoType, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseAmino, MsgVerifyInvariantResponseAminoType, MsgVerifyInvariantResponseSDKType } from "./tx";
+import { MsgVerifyInvariant, MsgVerifyInvariantAmino, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseAmino, MsgVerifyInvariantResponseSDKType } from "./tx";
 
 /** Msg defines the bank Msg service. */
 export interface Msg {

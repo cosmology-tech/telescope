@@ -1,4 +1,4 @@
-import { FeeToken, FeeTokenAmino, FeeTokenAminoType, FeeTokenSDKType } from "./feetoken";
+import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";

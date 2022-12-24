@@ -1,5 +1,5 @@
-import { Plan, PlanAmino, PlanAminoType, PlanSDKType } from "./upgrade";
-import { MsgSoftwareUpgrade, MsgSoftwareUpgradeAmino, MsgSoftwareUpgradeAminoType, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeAmino, MsgCancelUpgradeAminoType, MsgCancelUpgradeSDKType } from "./tx";
+import { Plan, PlanAmino, PlanSDKType } from "./upgrade";
+import { MsgSoftwareUpgrade, MsgSoftwareUpgradeAmino, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeAmino, MsgCancelUpgradeSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
     aminoType: "cosmos-sdk/MsgSoftwareUpgrade",

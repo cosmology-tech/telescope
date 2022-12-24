@@ -1,6 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Period, PeriodAmino, PeriodAminoType, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountAmino, MsgCreateClawbackVestingAccountAminoType, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackAmino, MsgClawbackAminoType, MsgClawbackSDKType } from "./tx";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountAmino, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackAmino, MsgClawbackSDKType } from "./tx";
 export const AminoConverter = {
   "/evmos.vesting.v1.MsgCreateClawbackVestingAccount": {
     aminoType: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",

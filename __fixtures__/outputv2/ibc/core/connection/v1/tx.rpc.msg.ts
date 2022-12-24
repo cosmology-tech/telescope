@@ -1,9 +1,9 @@
-import { Counterparty, CounterpartyAmino, CounterpartyAminoType, CounterpartySDKType, Version, VersionAmino, VersionAminoType, VersionSDKType } from "./connection";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightAmino, HeightAminoType, HeightSDKType } from "../../client/v1/client";
+import { Counterparty, CounterpartyAmino, CounterpartySDKType, Version, VersionAmino, VersionSDKType } from "./connection";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgConnectionOpenInit, MsgConnectionOpenInitAmino, MsgConnectionOpenInitAminoType, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseAmino, MsgConnectionOpenInitResponseAminoType, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTryAmino, MsgConnectionOpenTryAminoType, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseAmino, MsgConnectionOpenTryResponseAminoType, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckAmino, MsgConnectionOpenAckAminoType, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseAmino, MsgConnectionOpenAckResponseAminoType, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmAmino, MsgConnectionOpenConfirmAminoType, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseAmino, MsgConnectionOpenConfirmResponseAminoType, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
+import { MsgConnectionOpenInit, MsgConnectionOpenInitAmino, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseAmino, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTryAmino, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseAmino, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckAmino, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseAmino, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmAmino, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseAmino, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
 
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {

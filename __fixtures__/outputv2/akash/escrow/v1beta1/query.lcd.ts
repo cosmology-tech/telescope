@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountAmino, AccountAminoType, AccountSDKType, Payment, PaymentAmino, PaymentAminoType, PaymentSDKType } from "./types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryAccountsRequest, QueryAccountsRequestAmino, QueryAccountsRequestAminoType, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseAmino, QueryAccountsResponseAminoType, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestAmino, QueryPaymentsRequestAminoType, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseAmino, QueryPaymentsResponseAminoType, QueryPaymentsResponseSDKType } from "./query";
+import { QueryAccountsRequest, QueryAccountsRequestAmino, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseAmino, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestAmino, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseAmino, QueryPaymentsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairAmino, TokenPairAminoType, TokenPairSDKType } from "./erc20";
-import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryTokenPairsRequest, QueryTokenPairsRequestAmino, QueryTokenPairsRequestAminoType, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseAmino, QueryTokenPairsResponseAminoType, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestAmino, QueryTokenPairRequestAminoType, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseAmino, QueryTokenPairResponseAminoType, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType } from "./query";
+import { QueryTokenPairsRequest, QueryTokenPairsRequestAmino, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseAmino, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestAmino, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseAmino, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

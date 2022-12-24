@@ -56,7 +56,7 @@ export const AminoConverter = {
       poolParams,
       poolAssets,
       futurePoolGovernor
-    }: MsgCreateBalancerPool): AminoMsgCreateBalancerPool["value"] => {
+    }: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoType["value"] => {
       return {
         sender,
         pool_params: {
@@ -96,7 +96,7 @@ export const AminoConverter = {
       pool_params,
       pool_assets,
       future_pool_governor
-    }: AminoMsgCreateBalancerPool["value"]): MsgCreateBalancerPool => {
+    }: MsgCreateBalancerPoolAminoType["value"]): MsgCreateBalancerPool => {
       return {
         sender,
         poolParams: {

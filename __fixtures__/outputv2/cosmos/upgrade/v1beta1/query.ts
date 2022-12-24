@@ -1,4 +1,4 @@
-import { Plan, PlanAmino, PlanAminoType, PlanSDKType, ModuleVersion, ModuleVersionAmino, ModuleVersionAminoType, ModuleVersionSDKType } from "./upgrade";
+import { Plan, PlanAmino, PlanSDKType, ModuleVersion, ModuleVersionAmino, ModuleVersionSDKType } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";

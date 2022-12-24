@@ -1,5 +1,5 @@
-import { AttributeContext, AttributeContextAmino, AttributeContextAminoType, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
-import { Status, StatusAmino, StatusAminoType, StatusSDKType } from "../../../rpc/status";
+import { AttributeContext, AttributeContextAmino, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";

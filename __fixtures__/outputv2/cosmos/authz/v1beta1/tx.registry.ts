@@ -1,7 +1,7 @@
-import { Grant, GrantAmino, GrantAminoType, GrantSDKType } from "./authz";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { Grant, GrantAmino, GrantSDKType } from "./authz";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgGrant, MsgGrantAmino, MsgGrantAminoType, MsgGrantSDKType, MsgExec, MsgExecAmino, MsgExecAminoType, MsgExecSDKType, MsgRevoke, MsgRevokeAmino, MsgRevokeAminoType, MsgRevokeSDKType } from "./tx";
+import { MsgGrant, MsgGrantAmino, MsgGrantSDKType, MsgExec, MsgExecAmino, MsgExecSDKType, MsgRevoke, MsgRevokeAmino, MsgRevokeSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.authz.v1beta1.MsgGrant", MsgGrant], ["/cosmos.authz.v1beta1.MsgExec", MsgExec], ["/cosmos.authz.v1beta1.MsgRevoke", MsgRevoke]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

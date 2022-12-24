@@ -1,4 +1,4 @@
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.logging.type";

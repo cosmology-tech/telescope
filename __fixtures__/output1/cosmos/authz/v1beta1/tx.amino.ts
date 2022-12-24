@@ -45,7 +45,7 @@ export const AminoConverter = {
       granter,
       grantee,
       grant
-    }: MsgGrant): AminoMsgGrant["value"] => {
+    }: MsgGrant): MsgGrantAminoType["value"] => {
       return {
         granter,
         grantee,
@@ -62,7 +62,7 @@ export const AminoConverter = {
       granter,
       grantee,
       grant
-    }: AminoMsgGrant["value"]): MsgGrant => {
+    }: MsgGrantAminoType["value"]): MsgGrant => {
       return {
         granter,
         grantee,
@@ -81,7 +81,7 @@ export const AminoConverter = {
     toAmino: ({
       grantee,
       msgs
-    }: MsgExec): AminoMsgExec["value"] => {
+    }: MsgExec): MsgExecAminoType["value"] => {
       return {
         grantee,
         msgs: msgs.map(el0 => ({
@@ -93,7 +93,7 @@ export const AminoConverter = {
     fromAmino: ({
       grantee,
       msgs
-    }: AminoMsgExec["value"]): MsgExec => {
+    }: MsgExecAminoType["value"]): MsgExec => {
       return {
         grantee,
         msgs: msgs.map(el0 => ({
@@ -109,7 +109,7 @@ export const AminoConverter = {
       granter,
       grantee,
       msgTypeUrl
-    }: MsgRevoke): AminoMsgRevoke["value"] => {
+    }: MsgRevoke): MsgRevokeAminoType["value"] => {
       return {
         granter,
         grantee,
@@ -120,7 +120,7 @@ export const AminoConverter = {
       granter,
       grantee,
       msg_type_url
-    }: AminoMsgRevoke["value"]): MsgRevoke => {
+    }: MsgRevokeAminoType["value"]): MsgRevoke => {
       return {
         granter,
         grantee,

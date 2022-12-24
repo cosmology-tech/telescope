@@ -1,7 +1,7 @@
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceAminoType, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceAminoType, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceAminoType, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceAminoType, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceAminoType, MsgRevokeAllowanceSDKType } from "./tx";
+import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.feegrant.v1beta1.MsgGrantAllowance", MsgGrantAllowance], ["/cosmos.feegrant.v1beta1.MsgRevokeAllowance", MsgRevokeAllowance]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

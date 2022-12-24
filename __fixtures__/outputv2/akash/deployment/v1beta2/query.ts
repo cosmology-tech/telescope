@@ -1,8 +1,8 @@
-import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersAminoType, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDAminoType, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentAminoType, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDAmino, GroupIDAminoType, GroupIDSDKType } from "./groupid";
-import { Group, GroupAmino, GroupAminoType, GroupSDKType } from "./group";
-import { Account, AccountAmino, AccountAminoType, AccountSDKType } from "../../escrow/v1beta2/types";
+import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

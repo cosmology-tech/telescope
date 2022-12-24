@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Grant, GrantAmino, GrantAminoType, GrantSDKType } from "./feegrant";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryAllowanceRequest, QueryAllowanceRequestAmino, QueryAllowanceRequestAminoType, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseAmino, QueryAllowanceResponseAminoType, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestAmino, QueryAllowancesRequestAminoType, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseAmino, QueryAllowancesResponseAminoType, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestAmino, QueryAllowancesByGranterRequestAminoType, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseAmino, QueryAllowancesByGranterResponseAminoType, QueryAllowancesByGranterResponseSDKType } from "./query";
+import { QueryAllowanceRequest, QueryAllowanceRequestAmino, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseAmino, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestAmino, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseAmino, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestAmino, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseAmino, QueryAllowancesByGranterResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

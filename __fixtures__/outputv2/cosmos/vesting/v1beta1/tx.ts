@@ -1,5 +1,5 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
-import { Period, PeriodAmino, PeriodAminoType, PeriodSDKType } from "./vesting";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Period, PeriodAmino, PeriodSDKType } from "./vesting";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.vesting.v1beta1";

@@ -1,6 +1,6 @@
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoAmino, MsgRegisterDevFeeInfoAminoType, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseAmino, MsgRegisterDevFeeInfoResponseAminoType, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoAmino, MsgCancelDevFeeInfoAminoType, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseAmino, MsgCancelDevFeeInfoResponseAminoType, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoAmino, MsgUpdateDevFeeInfoAminoType, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseAmino, MsgUpdateDevFeeInfoResponseAminoType, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
+import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoAmino, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseAmino, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoAmino, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseAmino, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoAmino, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseAmino, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
 
 /** Msg defines the fees Msg service. */
 export interface Msg {

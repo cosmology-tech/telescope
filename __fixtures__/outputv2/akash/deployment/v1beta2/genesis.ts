@@ -1,6 +1,6 @@
-import { Deployment, DeploymentAmino, DeploymentAminoType, DeploymentSDKType } from "./deployment";
-import { Group, GroupAmino, GroupAminoType, GroupSDKType } from "./group";
-import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
+import { Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

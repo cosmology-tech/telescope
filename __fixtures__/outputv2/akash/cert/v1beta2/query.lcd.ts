@@ -1,8 +1,8 @@
-import { CertificateFilter, CertificateFilterAmino, CertificateFilterAminoType, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateAminoType, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryCertificatesRequest, QueryCertificatesRequestAmino, QueryCertificatesRequestAminoType, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseAmino, QueryCertificatesResponseAminoType, QueryCertificatesResponseSDKType } from "./query";
+import { QueryCertificatesRequest, QueryCertificatesRequestAmino, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseAmino, QueryCertificatesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

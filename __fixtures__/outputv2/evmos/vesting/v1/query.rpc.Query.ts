@@ -1,8 +1,8 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryBalancesRequest, QueryBalancesRequestAmino, QueryBalancesRequestAminoType, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseAmino, QueryBalancesResponseAminoType, QueryBalancesResponseSDKType } from "./query";
+import { QueryBalancesRequest, QueryBalancesRequestAmino, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseAmino, QueryBalancesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

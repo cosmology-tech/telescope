@@ -1,4 +1,4 @@
-import { Config, ConfigAmino, ConfigAminoType, ConfigSDKType } from "./config";
+import { Config, ConfigAmino, ConfigSDKType } from "./config";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";

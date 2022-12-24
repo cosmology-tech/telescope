@@ -26,7 +26,7 @@ export const AminoConverter = {
       granter,
       grantee,
       allowance
-    }: MsgGrantAllowance): AminoMsgGrantAllowance["value"] => {
+    }: MsgGrantAllowance): MsgGrantAllowanceAminoType["value"] => {
       return {
         granter,
         grantee,
@@ -40,7 +40,7 @@ export const AminoConverter = {
       granter,
       grantee,
       allowance
-    }: AminoMsgGrantAllowance["value"]): MsgGrantAllowance => {
+    }: MsgGrantAllowanceAminoType["value"]): MsgGrantAllowance => {
       return {
         granter,
         grantee,
@@ -56,7 +56,7 @@ export const AminoConverter = {
     toAmino: ({
       granter,
       grantee
-    }: MsgRevokeAllowance): AminoMsgRevokeAllowance["value"] => {
+    }: MsgRevokeAllowance): MsgRevokeAllowanceAminoType["value"] => {
       return {
         granter,
         grantee
@@ -65,7 +65,7 @@ export const AminoConverter = {
     fromAmino: ({
       granter,
       grantee
-    }: AminoMsgRevokeAllowance["value"]): MsgRevokeAllowance => {
+    }: MsgRevokeAllowanceAminoType["value"]): MsgRevokeAllowance => {
       return {
         granter,
         grantee

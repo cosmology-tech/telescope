@@ -61,7 +61,7 @@ export const AminoConverter = {
       clientState,
       consensusState,
       signer
-    }: MsgCreateClient): AminoMsgCreateClient["value"] => {
+    }: MsgCreateClient): MsgCreateClientAminoType["value"] => {
       return {
         client_state: {
           type_url: clientState.typeUrl,
@@ -78,7 +78,7 @@ export const AminoConverter = {
       client_state,
       consensus_state,
       signer
-    }: AminoMsgCreateClient["value"]): MsgCreateClient => {
+    }: MsgCreateClientAminoType["value"]): MsgCreateClient => {
       return {
         clientState: {
           typeUrl: client_state.type_url,
@@ -98,7 +98,7 @@ export const AminoConverter = {
       clientId,
       header,
       signer
-    }: MsgUpdateClient): AminoMsgUpdateClient["value"] => {
+    }: MsgUpdateClient): MsgUpdateClientAminoType["value"] => {
       return {
         client_id: clientId,
         header: {
@@ -112,7 +112,7 @@ export const AminoConverter = {
       client_id,
       header,
       signer
-    }: AminoMsgUpdateClient["value"]): MsgUpdateClient => {
+    }: MsgUpdateClientAminoType["value"]): MsgUpdateClient => {
       return {
         clientId: client_id,
         header: {
@@ -132,7 +132,7 @@ export const AminoConverter = {
       proofUpgradeClient,
       proofUpgradeConsensusState,
       signer
-    }: MsgUpgradeClient): AminoMsgUpgradeClient["value"] => {
+    }: MsgUpgradeClient): MsgUpgradeClientAminoType["value"] => {
       return {
         client_id: clientId,
         client_state: {
@@ -155,7 +155,7 @@ export const AminoConverter = {
       proof_upgrade_client,
       proof_upgrade_consensus_state,
       signer
-    }: AminoMsgUpgradeClient["value"]): MsgUpgradeClient => {
+    }: MsgUpgradeClientAminoType["value"]): MsgUpgradeClient => {
       return {
         clientId: client_id,
         clientState: {
@@ -178,7 +178,7 @@ export const AminoConverter = {
       clientId,
       misbehaviour,
       signer
-    }: MsgSubmitMisbehaviour): AminoMsgSubmitMisbehaviour["value"] => {
+    }: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoType["value"] => {
       return {
         client_id: clientId,
         misbehaviour: {
@@ -192,7 +192,7 @@ export const AminoConverter = {
       client_id,
       misbehaviour,
       signer
-    }: AminoMsgSubmitMisbehaviour["value"]): MsgSubmitMisbehaviour => {
+    }: MsgSubmitMisbehaviourAminoType["value"]): MsgSubmitMisbehaviour => {
       return {
         clientId: client_id,
         misbehaviour: {

@@ -1,4 +1,4 @@
-import { Attribute, AttributeAmino, AttributeAminoType, AttributeSDKType } from "../../base/v1beta2/attribute";
+import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";

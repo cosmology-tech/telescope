@@ -154,7 +154,7 @@ export const AminoConverter = {
       version,
       deposit,
       depositor
-    }: MsgCreateDeployment): AminoMsgCreateDeployment["value"] => {
+    }: MsgCreateDeployment): MsgCreateDeploymentAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -228,7 +228,7 @@ export const AminoConverter = {
       version,
       deposit,
       depositor
-    }: AminoMsgCreateDeployment["value"]): MsgCreateDeployment => {
+    }: MsgCreateDeploymentAminoType["value"]): MsgCreateDeployment => {
       return {
         id: {
           owner: id.owner,
@@ -303,7 +303,7 @@ export const AminoConverter = {
       id,
       amount,
       depositor
-    }: MsgDepositDeployment): AminoMsgDepositDeployment["value"] => {
+    }: MsgDepositDeployment): MsgDepositDeploymentAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -320,7 +320,7 @@ export const AminoConverter = {
       id,
       amount,
       depositor
-    }: AminoMsgDepositDeployment["value"]): MsgDepositDeployment => {
+    }: MsgDepositDeploymentAminoType["value"]): MsgDepositDeployment => {
       return {
         id: {
           owner: id.owner,
@@ -339,7 +339,7 @@ export const AminoConverter = {
     toAmino: ({
       id,
       version
-    }: MsgUpdateDeployment): AminoMsgUpdateDeployment["value"] => {
+    }: MsgUpdateDeployment): MsgUpdateDeploymentAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -351,7 +351,7 @@ export const AminoConverter = {
     fromAmino: ({
       id,
       version
-    }: AminoMsgUpdateDeployment["value"]): MsgUpdateDeployment => {
+    }: MsgUpdateDeploymentAminoType["value"]): MsgUpdateDeployment => {
       return {
         id: {
           owner: id.owner,
@@ -365,7 +365,7 @@ export const AminoConverter = {
     aminoType: "akash/deployment/v1beta2/testonly-close-deployment",
     toAmino: ({
       id
-    }: MsgCloseDeployment): AminoMsgCloseDeployment["value"] => {
+    }: MsgCloseDeployment): MsgCloseDeploymentAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -375,7 +375,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       id
-    }: AminoMsgCloseDeployment["value"]): MsgCloseDeployment => {
+    }: MsgCloseDeploymentAminoType["value"]): MsgCloseDeployment => {
       return {
         id: {
           owner: id.owner,
@@ -388,7 +388,7 @@ export const AminoConverter = {
     aminoType: "akash/deployment/v1beta2/testonly-close-group",
     toAmino: ({
       id
-    }: MsgCloseGroup): AminoMsgCloseGroup["value"] => {
+    }: MsgCloseGroup): MsgCloseGroupAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -399,7 +399,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       id
-    }: AminoMsgCloseGroup["value"]): MsgCloseGroup => {
+    }: MsgCloseGroupAminoType["value"]): MsgCloseGroup => {
       return {
         id: {
           owner: id.owner,
@@ -413,7 +413,7 @@ export const AminoConverter = {
     aminoType: "akash/deployment/v1beta2/testonly-pause-group",
     toAmino: ({
       id
-    }: MsgPauseGroup): AminoMsgPauseGroup["value"] => {
+    }: MsgPauseGroup): MsgPauseGroupAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -424,7 +424,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       id
-    }: AminoMsgPauseGroup["value"]): MsgPauseGroup => {
+    }: MsgPauseGroupAminoType["value"]): MsgPauseGroup => {
       return {
         id: {
           owner: id.owner,
@@ -438,7 +438,7 @@ export const AminoConverter = {
     aminoType: "akash/deployment/v1beta2/testonly-start-group",
     toAmino: ({
       id
-    }: MsgStartGroup): AminoMsgStartGroup["value"] => {
+    }: MsgStartGroup): MsgStartGroupAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -449,7 +449,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       id
-    }: AminoMsgStartGroup["value"]): MsgStartGroup => {
+    }: MsgStartGroupAminoType["value"]): MsgStartGroup => {
       return {
         id: {
           owner: id.owner,

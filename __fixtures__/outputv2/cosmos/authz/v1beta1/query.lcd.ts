@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Grant, GrantAmino, GrantAminoType, GrantSDKType, GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationAminoType, GrantAuthorizationSDKType } from "./authz";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantAmino, GrantSDKType, GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationSDKType } from "./authz";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryGrantsRequest, QueryGrantsRequestAmino, QueryGrantsRequestAminoType, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseAmino, QueryGrantsResponseAminoType, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestAmino, QueryGranterGrantsRequestAminoType, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseAmino, QueryGranterGrantsResponseAminoType, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestAmino, QueryGranteeGrantsRequestAminoType, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseAmino, QueryGranteeGrantsResponseAminoType, QueryGranteeGrantsResponseSDKType } from "./query";
+import { QueryGrantsRequest, QueryGrantsRequestAmino, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseAmino, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestAmino, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseAmino, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestAmino, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseAmino, QueryGranteeGrantsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,9 +1,9 @@
-import { QueryCondition, QueryConditionAmino, QueryConditionAminoType, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateGauge, MsgCreateGaugeAmino, MsgCreateGaugeAminoType, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseAmino, MsgCreateGaugeResponseAminoType, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeAmino, MsgAddToGaugeAminoType, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseAmino, MsgAddToGaugeResponseAminoType, MsgAddToGaugeResponseSDKType } from "./tx";
+import { MsgCreateGauge, MsgCreateGaugeAmino, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseAmino, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeAmino, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseAmino, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
   createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
   addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;

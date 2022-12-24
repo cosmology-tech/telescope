@@ -1,4 +1,4 @@
-import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorAminoType, LabelDescriptorSDKType } from "./label";
+import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";

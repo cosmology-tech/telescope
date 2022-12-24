@@ -1,4 +1,4 @@
-import { CapabilityOwners, CapabilityOwnersAmino, CapabilityOwnersAminoType, CapabilityOwnersSDKType } from "./capability";
+import { CapabilityOwners, CapabilityOwnersAmino, CapabilityOwnersSDKType } from "./capability";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.capability.v1beta1";

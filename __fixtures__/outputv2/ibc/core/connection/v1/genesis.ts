@@ -1,4 +1,4 @@
-import { IdentifiedConnection, IdentifiedConnectionAmino, IdentifiedConnectionAminoType, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsAmino, ConnectionPathsAminoType, ConnectionPathsSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./connection";
+import { IdentifiedConnection, IdentifiedConnectionAmino, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsAmino, ConnectionPathsSDKType, Params, ParamsAmino, ParamsSDKType } from "./connection";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";

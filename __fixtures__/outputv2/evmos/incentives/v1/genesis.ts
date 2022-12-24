@@ -1,4 +1,4 @@
-import { Incentive, IncentiveAmino, IncentiveAminoType, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterAminoType, GasMeterSDKType } from "./incentives";
+import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";

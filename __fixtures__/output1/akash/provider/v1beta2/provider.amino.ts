@@ -46,7 +46,7 @@ export const AminoConverter = {
       hostUri,
       attributes,
       info
-    }: MsgCreateProvider): AminoMsgCreateProvider["value"] => {
+    }: MsgCreateProvider): MsgCreateProviderAminoType["value"] => {
       return {
         owner,
         host_uri: hostUri,
@@ -65,7 +65,7 @@ export const AminoConverter = {
       host_uri,
       attributes,
       info
-    }: AminoMsgCreateProvider["value"]): MsgCreateProvider => {
+    }: MsgCreateProviderAminoType["value"]): MsgCreateProvider => {
       return {
         owner,
         hostUri: host_uri,
@@ -87,7 +87,7 @@ export const AminoConverter = {
       hostUri,
       attributes,
       info
-    }: MsgUpdateProvider): AminoMsgUpdateProvider["value"] => {
+    }: MsgUpdateProvider): MsgUpdateProviderAminoType["value"] => {
       return {
         owner,
         host_uri: hostUri,
@@ -106,7 +106,7 @@ export const AminoConverter = {
       host_uri,
       attributes,
       info
-    }: AminoMsgUpdateProvider["value"]): MsgUpdateProvider => {
+    }: MsgUpdateProviderAminoType["value"]): MsgUpdateProvider => {
       return {
         owner,
         hostUri: host_uri,
@@ -125,14 +125,14 @@ export const AminoConverter = {
     aminoType: "akash/provider/v1beta2/testonly-delete-provider",
     toAmino: ({
       owner
-    }: MsgDeleteProvider): AminoMsgDeleteProvider["value"] => {
+    }: MsgDeleteProvider): MsgDeleteProviderAminoType["value"] => {
       return {
         owner
       };
     },
     fromAmino: ({
       owner
-    }: AminoMsgDeleteProvider["value"]): MsgDeleteProvider => {
+    }: MsgDeleteProviderAminoType["value"]): MsgDeleteProvider => {
       return {
         owner
       };

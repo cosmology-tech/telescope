@@ -1,6 +1,6 @@
-import { ManagedService, ManagedServiceAmino, ManagedServiceAminoType, ManagedServiceSDKType, ConfigSource, ConfigSourceAmino, ConfigSourceAminoType, ConfigSourceSDKType, Rollout, RolloutAmino, RolloutAminoType, RolloutSDKType, ChangeReport, ChangeReportAmino, ChangeReportAminoType, ChangeReportSDKType, Diagnostic, DiagnosticAmino, DiagnosticAminoType, DiagnosticSDKType } from "./resources";
-import { Service, ServiceAmino, ServiceAminoType, ServiceSDKType } from "../../service";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../protobuf/any";
+import { ManagedService, ManagedServiceAmino, ManagedServiceSDKType, ConfigSource, ConfigSourceAmino, ConfigSourceSDKType, Rollout, RolloutAmino, RolloutSDKType, ChangeReport, ChangeReportAmino, ChangeReportSDKType, Diagnostic, DiagnosticAmino, DiagnosticSDKType } from "./resources";
+import { Service, ServiceAmino, ServiceSDKType } from "../../service";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";

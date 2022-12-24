@@ -1,7 +1,7 @@
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateClient, MsgCreateClientAmino, MsgCreateClientAminoType, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseAmino, MsgCreateClientResponseAminoType, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientAmino, MsgUpdateClientAminoType, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseAmino, MsgUpdateClientResponseAminoType, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientAmino, MsgUpgradeClientAminoType, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseAmino, MsgUpgradeClientResponseAminoType, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourAmino, MsgSubmitMisbehaviourAminoType, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseAmino, MsgSubmitMisbehaviourResponseAminoType, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
+import { MsgCreateClient, MsgCreateClientAmino, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseAmino, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientAmino, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseAmino, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientAmino, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseAmino, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourAmino, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseAmino, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
 
 /** Msg defines the ibc/client Msg service. */
 export interface Msg {

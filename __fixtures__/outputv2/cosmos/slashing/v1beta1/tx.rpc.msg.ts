@@ -1,6 +1,6 @@
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgUnjail, MsgUnjailAmino, MsgUnjailAminoType, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseAmino, MsgUnjailResponseAminoType, MsgUnjailResponseSDKType } from "./tx";
+import { MsgUnjail, MsgUnjailAmino, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseAmino, MsgUnjailResponseSDKType } from "./tx";
 
 /** Msg defines the slashing Msg service. */
 export interface Msg {

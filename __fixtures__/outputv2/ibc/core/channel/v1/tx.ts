@@ -1,5 +1,5 @@
-import { Channel, ChannelAmino, ChannelAminoType, ChannelSDKType, Packet, PacketAmino, PacketAminoType, PacketSDKType } from "./channel";
-import { Height, HeightAmino, HeightAminoType, HeightSDKType } from "../../client/v1/client";
+import { Channel, ChannelAmino, ChannelSDKType, Packet, PacketAmino, PacketSDKType } from "./channel";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";

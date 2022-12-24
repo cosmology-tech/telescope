@@ -1,6 +1,6 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryBalancesRequest, QueryBalancesRequestAmino, QueryBalancesRequestAminoType, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseAmino, QueryBalancesResponseAminoType, QueryBalancesResponseSDKType } from "./query";
+import { QueryBalancesRequest, QueryBalancesRequestAmino, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseAmino, QueryBalancesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

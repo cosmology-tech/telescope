@@ -184,7 +184,7 @@ export const AminoConverter = {
       port_id,
       channel,
       signer
-    }: AminoMsgChannelOpenInit["value"]): MsgChannelOpenInit => {
+    }: MsgChannelOpenInitAminoType["value"]): MsgChannelOpenInit => {
       return {
         portId: port_id,
         channel: {
@@ -211,7 +211,7 @@ export const AminoConverter = {
       proofInit,
       proofHeight,
       signer
-    }: MsgChannelOpenTry): AminoMsgChannelOpenTry["value"] => {
+    }: MsgChannelOpenTry): MsgChannelOpenTryAminoType["value"] => {
       return {
         port_id: portId,
         previous_channel_id: previousChannelId,
@@ -242,7 +242,7 @@ export const AminoConverter = {
       proof_init,
       proof_height,
       signer
-    }: AminoMsgChannelOpenTry["value"]): MsgChannelOpenTry => {
+    }: MsgChannelOpenTryAminoType["value"]): MsgChannelOpenTry => {
       return {
         portId: port_id,
         previousChannelId: previous_channel_id,
@@ -276,7 +276,7 @@ export const AminoConverter = {
       proofTry,
       proofHeight,
       signer
-    }: MsgChannelOpenAck): AminoMsgChannelOpenAck["value"] => {
+    }: MsgChannelOpenAck): MsgChannelOpenAckAminoType["value"] => {
       return {
         port_id: portId,
         channel_id: channelId,
@@ -298,7 +298,7 @@ export const AminoConverter = {
       proof_try,
       proof_height,
       signer
-    }: AminoMsgChannelOpenAck["value"]): MsgChannelOpenAck => {
+    }: MsgChannelOpenAckAminoType["value"]): MsgChannelOpenAck => {
       return {
         portId: port_id,
         channelId: channel_id,
@@ -321,7 +321,7 @@ export const AminoConverter = {
       proofAck,
       proofHeight,
       signer
-    }: MsgChannelOpenConfirm): AminoMsgChannelOpenConfirm["value"] => {
+    }: MsgChannelOpenConfirm): MsgChannelOpenConfirmAminoType["value"] => {
       return {
         port_id: portId,
         channel_id: channelId,
@@ -339,7 +339,7 @@ export const AminoConverter = {
       proof_ack,
       proof_height,
       signer
-    }: AminoMsgChannelOpenConfirm["value"]): MsgChannelOpenConfirm => {
+    }: MsgChannelOpenConfirmAminoType["value"]): MsgChannelOpenConfirm => {
       return {
         portId: port_id,
         channelId: channel_id,
@@ -358,7 +358,7 @@ export const AminoConverter = {
       portId,
       channelId,
       signer
-    }: MsgChannelCloseInit): AminoMsgChannelCloseInit["value"] => {
+    }: MsgChannelCloseInit): MsgChannelCloseInitAminoType["value"] => {
       return {
         port_id: portId,
         channel_id: channelId,
@@ -369,7 +369,7 @@ export const AminoConverter = {
       port_id,
       channel_id,
       signer
-    }: AminoMsgChannelCloseInit["value"]): MsgChannelCloseInit => {
+    }: MsgChannelCloseInitAminoType["value"]): MsgChannelCloseInit => {
       return {
         portId: port_id,
         channelId: channel_id,
@@ -385,7 +385,7 @@ export const AminoConverter = {
       proofInit,
       proofHeight,
       signer
-    }: MsgChannelCloseConfirm): AminoMsgChannelCloseConfirm["value"] => {
+    }: MsgChannelCloseConfirm): MsgChannelCloseConfirmAminoType["value"] => {
       return {
         port_id: portId,
         channel_id: channelId,
@@ -403,7 +403,7 @@ export const AminoConverter = {
       proof_init,
       proof_height,
       signer
-    }: AminoMsgChannelCloseConfirm["value"]): MsgChannelCloseConfirm => {
+    }: MsgChannelCloseConfirmAminoType["value"]): MsgChannelCloseConfirm => {
       return {
         portId: port_id,
         channelId: channel_id,
@@ -423,7 +423,7 @@ export const AminoConverter = {
       proofCommitment,
       proofHeight,
       signer
-    }: MsgRecvPacket): AminoMsgRecvPacket["value"] => {
+    }: MsgRecvPacket): MsgRecvPacketAminoType["value"] => {
       return {
         packet: {
           sequence: packet.sequence.toString(),
@@ -451,7 +451,7 @@ export const AminoConverter = {
       proof_commitment,
       proof_height,
       signer
-    }: AminoMsgRecvPacket["value"]): MsgRecvPacket => {
+    }: MsgRecvPacketAminoType["value"]): MsgRecvPacket => {
       return {
         packet: {
           sequence: Long.fromString(packet.sequence),
@@ -483,7 +483,7 @@ export const AminoConverter = {
       proofHeight,
       nextSequenceRecv,
       signer
-    }: MsgTimeout): AminoMsgTimeout["value"] => {
+    }: MsgTimeout): MsgTimeoutAminoType["value"] => {
       return {
         packet: {
           sequence: packet.sequence.toString(),
@@ -513,7 +513,7 @@ export const AminoConverter = {
       proof_height,
       next_sequence_recv,
       signer
-    }: AminoMsgTimeout["value"]): MsgTimeout => {
+    }: MsgTimeoutAminoType["value"]): MsgTimeout => {
       return {
         packet: {
           sequence: Long.fromString(packet.sequence),
@@ -547,7 +547,7 @@ export const AminoConverter = {
       proofHeight,
       nextSequenceRecv,
       signer
-    }: MsgTimeoutOnClose): AminoMsgTimeoutOnClose["value"] => {
+    }: MsgTimeoutOnClose): MsgTimeoutOnCloseAminoType["value"] => {
       return {
         packet: {
           sequence: packet.sequence.toString(),
@@ -579,7 +579,7 @@ export const AminoConverter = {
       proof_height,
       next_sequence_recv,
       signer
-    }: AminoMsgTimeoutOnClose["value"]): MsgTimeoutOnClose => {
+    }: MsgTimeoutOnCloseAminoType["value"]): MsgTimeoutOnClose => {
       return {
         packet: {
           sequence: Long.fromString(packet.sequence),
@@ -613,7 +613,7 @@ export const AminoConverter = {
       proofAcked,
       proofHeight,
       signer
-    }: MsgAcknowledgement): AminoMsgAcknowledgement["value"] => {
+    }: MsgAcknowledgement): MsgAcknowledgementAminoType["value"] => {
       return {
         packet: {
           sequence: packet.sequence.toString(),
@@ -643,7 +643,7 @@ export const AminoConverter = {
       proof_acked,
       proof_height,
       signer
-    }: AminoMsgAcknowledgement["value"]): MsgAcknowledgement => {
+    }: MsgAcknowledgementAminoType["value"]): MsgAcknowledgement => {
       return {
         packet: {
           sequence: Long.fromString(packet.sequence),

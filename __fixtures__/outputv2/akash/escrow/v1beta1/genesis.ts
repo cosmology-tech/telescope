@@ -1,4 +1,4 @@
-import { Account, AccountAmino, AccountAminoType, AccountSDKType, Payment, PaymentAmino, PaymentAminoType, PaymentSDKType } from "./types";
+import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";

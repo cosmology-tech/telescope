@@ -1,7 +1,7 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Height, HeightAmino, HeightAminoType, HeightSDKType } from "../../../core/client/v1/client";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgTransfer, MsgTransferAmino, MsgTransferAminoType, MsgTransferSDKType } from "./tx";
+import { MsgTransfer, MsgTransferAmino, MsgTransferSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/ibc.applications.transfer.v1.MsgTransfer", MsgTransfer]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

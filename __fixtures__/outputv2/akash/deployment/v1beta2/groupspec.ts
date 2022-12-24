@@ -1,5 +1,5 @@
-import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsAminoType, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceAmino, ResourceAminoType, ResourceSDKType } from "./resource";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
+import { Resource, ResourceAmino, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

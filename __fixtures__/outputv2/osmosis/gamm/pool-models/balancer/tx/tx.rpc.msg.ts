@@ -1,7 +1,7 @@
-import { PoolParams, PoolParamsAmino, PoolParamsAminoType, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetAminoType, PoolAssetSDKType } from "../balancerPool";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import { Rpc } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateBalancerPool, MsgCreateBalancerPoolAmino, MsgCreateBalancerPoolAminoType, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseAmino, MsgCreateBalancerPoolResponseAminoType, MsgCreateBalancerPoolResponseSDKType } from "./tx";
+import { MsgCreateBalancerPool, MsgCreateBalancerPoolAmino, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseAmino, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 export interface Msg {
   createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;
 }

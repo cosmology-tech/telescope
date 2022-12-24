@@ -1,7 +1,7 @@
-import { Counterparty, CounterpartyAmino, CounterpartyAminoType, CounterpartySDKType, Version, VersionAmino, VersionAminoType, VersionSDKType } from "./connection";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightAmino, HeightAminoType, HeightSDKType } from "../../client/v1/client";
-import { MsgConnectionOpenInit, MsgConnectionOpenInitAmino, MsgConnectionOpenInitAminoType, MsgConnectionOpenInitSDKType, MsgConnectionOpenTry, MsgConnectionOpenTryAmino, MsgConnectionOpenTryAminoType, MsgConnectionOpenTrySDKType, MsgConnectionOpenAck, MsgConnectionOpenAckAmino, MsgConnectionOpenAckAminoType, MsgConnectionOpenAckSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmAmino, MsgConnectionOpenConfirmAminoType, MsgConnectionOpenConfirmSDKType } from "./tx";
+import { Counterparty, CounterpartyAmino, CounterpartySDKType, Version, VersionAmino, VersionSDKType } from "./connection";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
+import { MsgConnectionOpenInit, MsgConnectionOpenInitAmino, MsgConnectionOpenInitSDKType, MsgConnectionOpenTry, MsgConnectionOpenTryAmino, MsgConnectionOpenTrySDKType, MsgConnectionOpenAck, MsgConnectionOpenAckAmino, MsgConnectionOpenAckSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmAmino, MsgConnectionOpenConfirmSDKType } from "./tx";
 export const AminoConverter = {
   "/ibc.core.connection.v1.MsgConnectionOpenInit": {
     aminoType: "cosmos-sdk/MsgConnectionOpenInit",

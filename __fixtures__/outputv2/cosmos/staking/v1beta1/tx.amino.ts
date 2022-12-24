@@ -1,8 +1,8 @@
-import { Description, DescriptionAmino, DescriptionAminoType, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesAminoType, CommissionRatesSDKType } from "./staking";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorAminoType, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorAminoType, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateAminoType, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateAminoType, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateAminoType, MsgUndelegateSDKType } from "./tx";
+import { Description, DescriptionAmino, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesSDKType } from "./staking";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.staking.v1beta1.MsgCreateValidator": {
     aminoType: "cosmos-sdk/MsgCreateValidator",

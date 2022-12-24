@@ -32,7 +32,7 @@ export const AminoConverter = {
       deployerAddress,
       withdrawAddress,
       nonces
-    }: MsgRegisterDevFeeInfo): AminoMsgRegisterDevFeeInfo["value"] => {
+    }: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAminoType["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress,
@@ -45,7 +45,7 @@ export const AminoConverter = {
       deployer_address,
       withdraw_address,
       nonces
-    }: AminoMsgRegisterDevFeeInfo["value"]): MsgRegisterDevFeeInfo => {
+    }: MsgRegisterDevFeeInfoAminoType["value"]): MsgRegisterDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address,
@@ -59,7 +59,7 @@ export const AminoConverter = {
     toAmino: ({
       contractAddress,
       deployerAddress
-    }: MsgCancelDevFeeInfo): AminoMsgCancelDevFeeInfo["value"] => {
+    }: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAminoType["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress
@@ -68,7 +68,7 @@ export const AminoConverter = {
     fromAmino: ({
       contract_address,
       deployer_address
-    }: AminoMsgCancelDevFeeInfo["value"]): MsgCancelDevFeeInfo => {
+    }: MsgCancelDevFeeInfoAminoType["value"]): MsgCancelDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address
@@ -81,7 +81,7 @@ export const AminoConverter = {
       contractAddress,
       deployerAddress,
       withdrawAddress
-    }: MsgUpdateDevFeeInfo): AminoMsgUpdateDevFeeInfo["value"] => {
+    }: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAminoType["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress,
@@ -92,7 +92,7 @@ export const AminoConverter = {
       contract_address,
       deployer_address,
       withdraw_address
-    }: AminoMsgUpdateDevFeeInfo["value"]): MsgUpdateDevFeeInfo => {
+    }: MsgUpdateDevFeeInfoAminoType["value"]): MsgUpdateDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address,

@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Attribute, AttributeAmino, AttributeAminoType, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { MsgCreateProvider, MsgCreateProviderAmino, MsgCreateProviderAminoType, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderAmino, MsgUpdateProviderAminoType, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderAmino, MsgDeleteProviderAminoType, MsgDeleteProviderSDKType } from "./provider";
+import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { MsgCreateProvider, MsgCreateProviderAmino, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderAmino, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderAmino, MsgDeleteProviderSDKType } from "./provider";
 export const AminoConverter = {
   "/akash.provider.v1beta1.MsgCreateProvider": {
     aminoType: "/akash.provider.v1beta1.MsgCreateProvider",

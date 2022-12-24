@@ -1,7 +1,7 @@
 //@ts-nocheck
-import { PoolParams, PoolParamsAmino, PoolParamsAminoType, PoolParamsSDKType } from "./stableswap_pool";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { MsgCreateStableswapPool, MsgCreateStableswapPoolAmino, MsgCreateStableswapPoolAminoType, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsAmino, MsgStableSwapAdjustScalingFactorsAminoType, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { MsgCreateStableswapPool, MsgCreateStableswapPoolAmino, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsAmino, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool": {
     aminoType: "osmosis/gamm/create-stableswap-pool",

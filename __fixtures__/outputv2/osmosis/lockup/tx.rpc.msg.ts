@@ -1,9 +1,9 @@
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockAmino, PeriodLockAminoType, PeriodLockSDKType } from "./lock";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensAminoType, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseAmino, MsgLockTokensResponseAminoType, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllAminoType, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseAmino, MsgBeginUnlockingAllResponseAminoType, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingAminoType, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseAmino, MsgBeginUnlockingResponseAminoType, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupAminoType, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseAmino, MsgExtendLockupResponseAminoType, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockAminoType, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseAmino, MsgForceUnlockResponseAminoType, MsgForceUnlockResponseSDKType } from "./tx";
+import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseAmino, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseAmino, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseAmino, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseAmino, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseAmino, MsgForceUnlockResponseSDKType } from "./tx";
 
 /** Msg defines the Msg service. */
 export interface Msg {

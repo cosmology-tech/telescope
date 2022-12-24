@@ -28,7 +28,7 @@ export const AminoConverter = {
       owner,
       auditor,
       attributes
-    }: MsgSignProviderAttributes): AminoMsgSignProviderAttributes["value"] => {
+    }: MsgSignProviderAttributes): MsgSignProviderAttributesAminoType["value"] => {
       return {
         owner,
         auditor,
@@ -42,7 +42,7 @@ export const AminoConverter = {
       owner,
       auditor,
       attributes
-    }: AminoMsgSignProviderAttributes["value"]): MsgSignProviderAttributes => {
+    }: MsgSignProviderAttributesAminoType["value"]): MsgSignProviderAttributes => {
       return {
         owner,
         auditor,
@@ -59,7 +59,7 @@ export const AminoConverter = {
       owner,
       auditor,
       keys
-    }: MsgDeleteProviderAttributes): AminoMsgDeleteProviderAttributes["value"] => {
+    }: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAminoType["value"] => {
       return {
         owner,
         auditor,
@@ -70,7 +70,7 @@ export const AminoConverter = {
       owner,
       auditor,
       keys
-    }: AminoMsgDeleteProviderAttributes["value"]): MsgDeleteProviderAttributes => {
+    }: MsgDeleteProviderAttributesAminoType["value"]): MsgDeleteProviderAttributes => {
       return {
         owner,
         auditor,

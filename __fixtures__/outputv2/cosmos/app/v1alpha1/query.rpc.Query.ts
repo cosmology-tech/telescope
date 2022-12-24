@@ -1,8 +1,8 @@
-import { Config, ConfigAmino, ConfigAminoType, ConfigSDKType } from "./config";
+import { Config, ConfigAmino, ConfigSDKType } from "./config";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryConfigRequest, QueryConfigRequestAmino, QueryConfigRequestAminoType, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseAmino, QueryConfigResponseAminoType, QueryConfigResponseSDKType } from "./query";
+import { QueryConfigRequest, QueryConfigRequestAmino, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseAmino, QueryConfigResponseSDKType } from "./query";
 
 /** Query is the app module query service. */
 export interface Query {

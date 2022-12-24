@@ -1,8 +1,8 @@
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Metadata, MetadataAmino, MetadataAminoType, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomAminoType, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseAmino, MsgCreateDenomResponseAminoType, MsgCreateDenomResponseSDKType, MsgMint, MsgMintAmino, MsgMintAminoType, MsgMintSDKType, MsgMintResponse, MsgMintResponseAmino, MsgMintResponseAminoType, MsgMintResponseSDKType, MsgBurn, MsgBurnAmino, MsgBurnAminoType, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseAmino, MsgBurnResponseAminoType, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminAminoType, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseAmino, MsgChangeAdminResponseAminoType, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataAminoType, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseAmino, MsgSetDenomMetadataResponseAminoType, MsgSetDenomMetadataResponseSDKType } from "./tx";
+import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseAmino, MsgCreateDenomResponseSDKType, MsgMint, MsgMintAmino, MsgMintSDKType, MsgMintResponse, MsgMintResponseAmino, MsgMintResponseSDKType, MsgBurn, MsgBurnAmino, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseAmino, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseAmino, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseAmino, MsgSetDenomMetadataResponseSDKType } from "./tx";
 
 /** Msg defines the tokefactory module's gRPC message service. */
 export interface Msg {

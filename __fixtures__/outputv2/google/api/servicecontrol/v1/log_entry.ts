@@ -1,8 +1,8 @@
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeverityAmino, LogSeverityAminoType, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
-import { HttpRequest, HttpRequestAmino, HttpRequestAminoType, HttpRequestSDKType } from "./http_request";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../protobuf/any";
-import { Struct, StructAmino, StructAminoType, StructSDKType } from "../../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { LogSeverity, LogSeverityAmino, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
+import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

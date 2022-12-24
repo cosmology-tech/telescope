@@ -1,8 +1,8 @@
 //@ts-nocheck
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockAmino, PeriodLockAminoType, PeriodLockSDKType } from "./lock";
-import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensAminoType, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllAminoType, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingAminoType, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupAminoType, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockAminoType, MsgForceUnlockSDKType } from "./tx";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
+import { MsgLockTokens, MsgLockTokensAmino, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllAmino, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingAmino, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupAmino, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockAmino, MsgForceUnlockSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.lockup.MsgLockTokens": {
     aminoType: "osmosis/lockup/lock-tokens",

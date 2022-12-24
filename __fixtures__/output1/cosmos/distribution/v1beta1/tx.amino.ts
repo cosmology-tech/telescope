@@ -37,7 +37,7 @@ export const AminoConverter = {
     toAmino: ({
       delegatorAddress,
       withdrawAddress
-    }: MsgSetWithdrawAddress): AminoMsgSetWithdrawAddress["value"] => {
+    }: MsgSetWithdrawAddress): MsgSetWithdrawAddressAminoType["value"] => {
       return {
         delegator_address: delegatorAddress,
         withdraw_address: withdrawAddress
@@ -46,7 +46,7 @@ export const AminoConverter = {
     fromAmino: ({
       delegator_address,
       withdraw_address
-    }: AminoMsgSetWithdrawAddress["value"]): MsgSetWithdrawAddress => {
+    }: MsgSetWithdrawAddressAminoType["value"]): MsgSetWithdrawAddress => {
       return {
         delegatorAddress: delegator_address,
         withdrawAddress: withdraw_address
@@ -58,7 +58,7 @@ export const AminoConverter = {
     toAmino: ({
       delegatorAddress,
       validatorAddress
-    }: MsgWithdrawDelegatorReward): AminoMsgWithdrawDelegatorReward["value"] => {
+    }: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardAminoType["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_address: validatorAddress
@@ -67,7 +67,7 @@ export const AminoConverter = {
     fromAmino: ({
       delegator_address,
       validator_address
-    }: AminoMsgWithdrawDelegatorReward["value"]): MsgWithdrawDelegatorReward => {
+    }: MsgWithdrawDelegatorRewardAminoType["value"]): MsgWithdrawDelegatorReward => {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address
@@ -78,14 +78,14 @@ export const AminoConverter = {
     aminoType: "cosmos-sdk/MsgWithdrawValidatorCommission",
     toAmino: ({
       validatorAddress
-    }: MsgWithdrawValidatorCommission): AminoMsgWithdrawValidatorCommission["value"] => {
+    }: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionAminoType["value"] => {
       return {
         validator_address: validatorAddress
       };
     },
     fromAmino: ({
       validator_address
-    }: AminoMsgWithdrawValidatorCommission["value"]): MsgWithdrawValidatorCommission => {
+    }: MsgWithdrawValidatorCommissionAminoType["value"]): MsgWithdrawValidatorCommission => {
       return {
         validatorAddress: validator_address
       };
@@ -96,7 +96,7 @@ export const AminoConverter = {
     toAmino: ({
       amount,
       depositor
-    }: MsgFundCommunityPool): AminoMsgFundCommunityPool["value"] => {
+    }: MsgFundCommunityPool): MsgFundCommunityPoolAminoType["value"] => {
       return {
         amount: amount.map(el0 => ({
           denom: el0.denom,
@@ -108,7 +108,7 @@ export const AminoConverter = {
     fromAmino: ({
       amount,
       depositor
-    }: AminoMsgFundCommunityPool["value"]): MsgFundCommunityPool => {
+    }: MsgFundCommunityPoolAminoType["value"]): MsgFundCommunityPool => {
       return {
         amount: amount.map(el0 => ({
           denom: el0.denom,

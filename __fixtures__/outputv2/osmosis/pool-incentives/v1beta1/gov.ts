@@ -1,4 +1,4 @@
-import { DistrRecord, DistrRecordAmino, DistrRecordAminoType, DistrRecordSDKType } from "./incentives";
+import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";

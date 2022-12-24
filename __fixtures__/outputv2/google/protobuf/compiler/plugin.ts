@@ -1,4 +1,4 @@
-import { FileDescriptorProto, FileDescriptorProtoAmino, FileDescriptorProtoAminoType, FileDescriptorProtoSDKType } from "../descriptor";
+import { FileDescriptorProto, FileDescriptorProtoAmino, FileDescriptorProtoSDKType } from "../descriptor";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";

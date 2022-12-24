@@ -1,5 +1,5 @@
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
-import { Event, EventAmino, EventAminoType, EventSDKType } from "../../../../tendermint/abci/types";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Event, EventAmino, EventSDKType } from "../../../../tendermint/abci/types";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.abci.v1beta1";

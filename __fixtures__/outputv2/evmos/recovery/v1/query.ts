@@ -1,4 +1,4 @@
-import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";

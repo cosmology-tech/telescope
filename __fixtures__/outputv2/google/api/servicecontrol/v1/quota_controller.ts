@@ -1,5 +1,5 @@
-import { MetricValueSet, MetricValueSetAmino, MetricValueSetAminoType, MetricValueSetSDKType } from "./metric_value";
-import { Status, StatusAmino, StatusAminoType, StatusSDKType } from "../../../rpc/status";
+import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

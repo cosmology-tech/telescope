@@ -1,6 +1,6 @@
-import { LaunchStage, LaunchStageAmino, LaunchStageAminoType, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../protobuf/duration";
-import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorAminoType, LabelDescriptorSDKType } from "./label";
+import { LaunchStage, LaunchStageAmino, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
+import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";

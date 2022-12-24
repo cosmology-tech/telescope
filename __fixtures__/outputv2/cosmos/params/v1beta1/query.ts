@@ -1,4 +1,4 @@
-import { ParamChange, ParamChangeAmino, ParamChangeAminoType, ParamChangeSDKType } from "./params";
+import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";

@@ -51,7 +51,7 @@ export const AminoConverter = {
       amount,
       endTime,
       delayed
-    }: MsgCreateVestingAccount): AminoMsgCreateVestingAccount["value"] => {
+    }: MsgCreateVestingAccount): MsgCreateVestingAccountAminoType["value"] => {
       return {
         from_address: fromAddress,
         to_address: toAddress,
@@ -69,7 +69,7 @@ export const AminoConverter = {
       amount,
       end_time,
       delayed
-    }: AminoMsgCreateVestingAccount["value"]): MsgCreateVestingAccount => {
+    }: MsgCreateVestingAccountAminoType["value"]): MsgCreateVestingAccount => {
       return {
         fromAddress: from_address,
         toAddress: to_address,
@@ -88,7 +88,7 @@ export const AminoConverter = {
       fromAddress,
       toAddress,
       amount
-    }: MsgCreatePermanentLockedAccount): AminoMsgCreatePermanentLockedAccount["value"] => {
+    }: MsgCreatePermanentLockedAccount): MsgCreatePermanentLockedAccountAminoType["value"] => {
       return {
         from_address: fromAddress,
         to_address: toAddress,
@@ -102,7 +102,7 @@ export const AminoConverter = {
       from_address,
       to_address,
       amount
-    }: AminoMsgCreatePermanentLockedAccount["value"]): MsgCreatePermanentLockedAccount => {
+    }: MsgCreatePermanentLockedAccountAminoType["value"]): MsgCreatePermanentLockedAccount => {
       return {
         fromAddress: from_address,
         toAddress: to_address,
@@ -120,7 +120,7 @@ export const AminoConverter = {
       toAddress,
       startTime,
       vestingPeriods
-    }: MsgCreatePeriodicVestingAccount): AminoMsgCreatePeriodicVestingAccount["value"] => {
+    }: MsgCreatePeriodicVestingAccount): MsgCreatePeriodicVestingAccountAminoType["value"] => {
       return {
         from_address: fromAddress,
         to_address: toAddress,
@@ -139,7 +139,7 @@ export const AminoConverter = {
       to_address,
       start_time,
       vesting_periods
-    }: AminoMsgCreatePeriodicVestingAccount["value"]): MsgCreatePeriodicVestingAccount => {
+    }: MsgCreatePeriodicVestingAccountAminoType["value"]): MsgCreatePeriodicVestingAccount => {
       return {
         fromAddress: from_address,
         toAddress: to_address,

@@ -29,7 +29,7 @@ export const AminoConverter = {
       coin,
       receiver,
       sender
-    }: MsgConvertCoin): AminoMsgConvertCoin["value"] => {
+    }: MsgConvertCoin): MsgConvertCoinAminoType["value"] => {
       return {
         coin: {
           denom: coin.denom,
@@ -43,7 +43,7 @@ export const AminoConverter = {
       coin,
       receiver,
       sender
-    }: AminoMsgConvertCoin["value"]): MsgConvertCoin => {
+    }: MsgConvertCoinAminoType["value"]): MsgConvertCoin => {
       return {
         coin: {
           denom: coin.denom,
@@ -61,7 +61,7 @@ export const AminoConverter = {
       amount,
       receiver,
       sender
-    }: MsgConvertERC20): AminoMsgConvertERC20["value"] => {
+    }: MsgConvertERC20): MsgConvertERC20AminoType["value"] => {
       return {
         contract_address: contractAddress,
         amount,
@@ -74,7 +74,7 @@ export const AminoConverter = {
       amount,
       receiver,
       sender
-    }: AminoMsgConvertERC20["value"]): MsgConvertERC20 => {
+    }: MsgConvertERC20AminoType["value"]): MsgConvertERC20 => {
       return {
         contractAddress: contract_address,
         amount,

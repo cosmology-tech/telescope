@@ -1,5 +1,5 @@
-import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType, DistrInfo, DistrInfoAmino, DistrInfoAminoType, DistrInfoSDKType, PoolToGauges, PoolToGaugesAmino, PoolToGaugesAminoType, PoolToGaugesSDKType } from "./incentives";
-import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../../google/protobuf/duration";
+import { Params, ParamsAmino, ParamsSDKType, DistrInfo, DistrInfoAmino, DistrInfoSDKType, PoolToGauges, PoolToGaugesAmino, PoolToGaugesSDKType } from "./incentives";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";

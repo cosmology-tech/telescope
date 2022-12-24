@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderAmino, ProviderAminoType, ProviderSDKType } from "./audit";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestAmino, QueryAllProvidersAttributesRequestAminoType, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseAminoType, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestAmino, QueryProviderAttributesRequestAminoType, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestAmino, QueryProviderAuditorRequestAminoType, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestAmino, QueryAuditorAttributesRequestAminoType, QueryAuditorAttributesRequestSDKType } from "./query";
+import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestAmino, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestAmino, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestAmino, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestAmino, QueryAuditorAttributesRequestSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
 export interface Query {

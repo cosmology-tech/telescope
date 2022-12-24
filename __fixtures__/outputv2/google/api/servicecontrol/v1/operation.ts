@@ -1,7 +1,7 @@
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../protobuf/timestamp";
-import { MetricValueSet, MetricValueSetAmino, MetricValueSetAminoType, MetricValueSetSDKType } from "./metric_value";
-import { LogEntry, LogEntryAmino, LogEntryAminoType, LogEntrySDKType } from "./log_entry";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../protobuf/any";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
+import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
+import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

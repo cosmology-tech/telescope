@@ -1,5 +1,5 @@
-import { CPU, CPUAmino, CPUAminoType, CPUSDKType, Memory, MemoryAmino, MemoryAminoType, MemorySDKType, Storage, StorageAmino, StorageAminoType, StorageSDKType } from "./resource";
-import { Endpoint, EndpointAmino, EndpointAminoType, EndpointSDKType } from "./endpoint";
+import { CPU, CPUAmino, CPUSDKType, Memory, MemoryAmino, MemorySDKType, Storage, StorageAmino, StorageSDKType } from "./resource";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";

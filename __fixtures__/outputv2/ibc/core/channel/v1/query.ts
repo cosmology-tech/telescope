@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Channel, ChannelAmino, ChannelAminoType, ChannelSDKType, IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelAminoType, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateAminoType, PacketStateSDKType } from "./channel";
-import { Height, HeightAmino, HeightAminoType, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateAminoType, IdentifiedClientStateSDKType } from "../../client/v1/client";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Channel, ChannelAmino, ChannelSDKType, IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateSDKType } from "./channel";
+import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
+import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";

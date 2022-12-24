@@ -1,5 +1,5 @@
-import { Header, HeaderAmino, HeaderAminoType, HeaderSDKType, Data, DataAmino, DataAminoType, DataSDKType, Commit, CommitAmino, CommitAminoType, CommitSDKType } from "./types";
-import { EvidenceList, EvidenceListAmino, EvidenceListAminoType, EvidenceListSDKType } from "./evidence";
+import { Header, HeaderAmino, HeaderSDKType, Data, DataAmino, DataSDKType, Commit, CommitAmino, CommitSDKType } from "./types";
+import { EvidenceList, EvidenceListAmino, EvidenceListSDKType } from "./evidence";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.types";

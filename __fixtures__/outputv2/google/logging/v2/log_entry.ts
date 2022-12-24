@@ -1,9 +1,9 @@
-import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceAminoType, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../protobuf/any";
-import { Struct, StructAmino, StructAminoType, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeverityAmino, LogSeverityAminoType, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
-import { HttpRequest, HttpRequestAmino, HttpRequestAminoType, HttpRequestSDKType } from "../type/http_request";
+import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType } from "../../api/monitored_resource";
+import { Any, AnyAmino, AnySDKType } from "../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { LogSeverity, LogSeverityAmino, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
+import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";

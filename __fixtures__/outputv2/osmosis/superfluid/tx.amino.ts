@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { MsgSuperfluidDelegate, MsgSuperfluidDelegateAmino, MsgSuperfluidDelegateAminoType, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateAmino, MsgSuperfluidUndelegateAminoType, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockAmino, MsgSuperfluidUnbondLockAminoType, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateAmino, MsgLockAndSuperfluidDelegateAminoType, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolAmino, MsgUnPoolWhitelistedPoolAminoType, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { MsgSuperfluidDelegate, MsgSuperfluidDelegateAmino, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateAmino, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockAmino, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateAmino, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolAmino, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.superfluid.MsgSuperfluidDelegate": {
     aminoType: "osmosis/superfluid-delegate",

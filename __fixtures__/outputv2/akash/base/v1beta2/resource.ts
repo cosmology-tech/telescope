@@ -1,5 +1,5 @@
-import { ResourceValue, ResourceValueAmino, ResourceValueAminoType, ResourceValueSDKType } from "./resourcevalue";
-import { Attribute, AttributeAmino, AttributeAminoType, AttributeSDKType } from "./attribute";
+import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resourcevalue";
+import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";

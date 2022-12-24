@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { DeploymentID, DeploymentIDAmino, DeploymentIDAminoType, DeploymentIDSDKType } from "./deployment";
-import { GroupSpec, GroupSpecAmino, GroupSpecAminoType, GroupSpecSDKType } from "./groupspec";
-import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { GroupID, GroupIDAmino, GroupIDAminoType, GroupIDSDKType } from "./groupid";
-import { MsgCreateDeployment, MsgCreateDeploymentAmino, MsgCreateDeploymentAminoType, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentAmino, MsgDepositDeploymentAminoType, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentAmino, MsgUpdateDeploymentAminoType, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentAmino, MsgCloseDeploymentAminoType, MsgCloseDeploymentSDKType } from "./deploymentmsg";
-import { MsgCloseGroup, MsgCloseGroupAmino, MsgCloseGroupAminoType, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupAmino, MsgPauseGroupAminoType, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupAmino, MsgStartGroupAminoType, MsgStartGroupSDKType } from "./groupmsg";
+import { DeploymentID, DeploymentIDAmino, DeploymentIDSDKType } from "./deployment";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
+import { MsgCreateDeployment, MsgCreateDeploymentAmino, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentAmino, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentAmino, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentAmino, MsgCloseDeploymentSDKType } from "./deploymentmsg";
+import { MsgCloseGroup, MsgCloseGroupAmino, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupAmino, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupAmino, MsgStartGroupSDKType } from "./groupmsg";
 export const AminoConverter = {
   "/akash.deployment.v1beta2.MsgCreateDeployment": {
     aminoType: "/akash.deployment.v1beta2.MsgCreateDeployment",
