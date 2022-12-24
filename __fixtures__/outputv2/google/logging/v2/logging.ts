@@ -1,7 +1,7 @@
-import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType, MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "../../api/monitored_resource";
-import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
-import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
-import { Status, StatusAmino, StatusSDKType } from "../../rpc/status";
+import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceAminoType, MonitoredResourceSDKType, MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorAminoType, MonitoredResourceDescriptorSDKType } from "../../api/monitored_resource";
+import { LogEntry, LogEntryAmino, LogEntryAminoType, LogEntrySDKType } from "./log_entry";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../protobuf/duration";
+import { Status, StatusAmino, StatusAminoType, StatusSDKType } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";

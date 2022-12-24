@@ -1,8 +1,8 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Header, HeaderAmino, HeaderSDKType } from "../types/types";
-import { ProofOps, ProofOpsAmino, ProofOpsSDKType } from "../crypto/proof";
-import { EvidenceParams, EvidenceParamsAmino, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsAmino, ValidatorParamsSDKType, VersionParams, VersionParamsAmino, VersionParamsSDKType } from "../types/params";
-import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Header, HeaderAmino, HeaderAminoType, HeaderSDKType } from "../types/types";
+import { ProofOps, ProofOpsAmino, ProofOpsAminoType, ProofOpsSDKType } from "../crypto/proof";
+import { EvidenceParams, EvidenceParamsAmino, EvidenceParamsAminoType, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsAmino, ValidatorParamsAminoType, ValidatorParamsSDKType, VersionParams, VersionParamsAmino, VersionParamsAminoType, VersionParamsSDKType } from "../types/params";
+import { PublicKey, PublicKeyAmino, PublicKeyAminoType, PublicKeySDKType } from "../crypto/keys";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.abci";

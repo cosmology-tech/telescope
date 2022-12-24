@@ -112,7 +112,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
 `;
 
 exports[`osmosis/lockup/tx duration 3`] = `
-"export interface AminoMsgLockTokens extends AminoMsg {
+"export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
@@ -279,7 +279,7 @@ exports[`osmosis/lockup/tx string 2`] = `
 `;
 
 exports[`osmosis/lockup/tx string 3`] = `
-"export interface AminoMsgLockTokens extends AminoMsg {
+"export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;

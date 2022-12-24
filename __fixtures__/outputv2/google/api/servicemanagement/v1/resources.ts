@@ -1,5 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
-import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../protobuf/timestamp";
+import { ConfigChange, ConfigChangeAmino, ConfigChangeAminoType, ConfigChangeSDKType } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";

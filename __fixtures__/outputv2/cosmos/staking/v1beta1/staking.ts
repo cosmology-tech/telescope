@@ -1,8 +1,8 @@
-import { Header, HeaderAmino, HeaderSDKType } from "../../../tendermint/types/types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Header, HeaderAmino, HeaderAminoType, HeaderSDKType } from "../../../tendermint/types/types";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "../../../helpers";
 import { toBase64, fromBase64 } from "@cosmjs/encoding";

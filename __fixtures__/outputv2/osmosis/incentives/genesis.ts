@@ -1,6 +1,6 @@
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
-import { Gauge, GaugeAmino, GaugeSDKType } from "./gauge";
-import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
+import { Gauge, GaugeAmino, GaugeAminoType, GaugeSDKType } from "./gauge";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../google/protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.incentives";

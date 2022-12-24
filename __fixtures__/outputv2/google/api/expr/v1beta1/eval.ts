@@ -1,5 +1,5 @@
-import { Value, ValueAmino, ValueSDKType } from "./value";
-import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
+import { Value, ValueAmino, ValueAminoType, ValueSDKType } from "./value";
+import { Status, StatusAmino, StatusAminoType, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";

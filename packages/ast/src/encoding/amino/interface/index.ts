@@ -144,7 +144,7 @@ export const makeAminoTypeInterface = ({
 
     return t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
-            t.identifier('Amino' + TypeName),
+            t.identifier(TypeName + 'AminoType'),
             null,
             [t.tsExpressionWithTypeArguments(t.identifier('AminoMsg'))],
             t.tSInterfaceBody([

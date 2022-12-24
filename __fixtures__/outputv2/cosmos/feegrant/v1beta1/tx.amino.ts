@@ -1,6 +1,6 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
-import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceSDKType } from "./tx";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceAminoType, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceAminoType, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceAminoType, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { MsgGrantAllowance, MsgGrantAllowanceAmino, MsgGrantAllowanceAminoType, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceAmino, MsgRevokeAllowanceAminoType, MsgRevokeAllowanceSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
     aminoType: "cosmos-sdk/MsgGrantAllowance",

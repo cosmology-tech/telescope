@@ -1,7 +1,7 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataAmino, MetadataAminoType, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomSDKType, MsgMint, MsgMintAmino, MsgMintSDKType, MsgBurn, MsgBurnAmino, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataSDKType } from "./tx";
+import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomAminoType, MsgCreateDenomSDKType, MsgMint, MsgMintAmino, MsgMintAminoType, MsgMintSDKType, MsgBurn, MsgBurnAmino, MsgBurnAminoType, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminAminoType, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataAminoType, MsgSetDenomMetadataSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.tokenfactory.v1beta1.MsgCreateDenom", MsgCreateDenom], ["/osmosis.tokenfactory.v1beta1.MsgMint", MsgMint], ["/osmosis.tokenfactory.v1beta1.MsgBurn", MsgBurn], ["/osmosis.tokenfactory.v1beta1.MsgChangeAdmin", MsgChangeAdmin], ["/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata", MsgSetDenomMetadata]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

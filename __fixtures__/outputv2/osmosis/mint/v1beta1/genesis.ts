@@ -1,4 +1,4 @@
-import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
+import { Minter, MinterAmino, MinterAminoType, MinterSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./mint";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.mint.v1beta1";

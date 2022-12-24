@@ -1,7 +1,7 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { SignMode, SignModeAmino, SignModeSDKType, signModeFromJSON, signModeToJSON } from "../signing/v1beta1/signing";
-import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { SignMode, SignModeAmino, SignModeAminoType, SignModeSDKType, signModeFromJSON, signModeToJSON } from "../signing/v1beta1/signing";
+import { CompactBitArray, CompactBitArrayAmino, CompactBitArrayAminoType, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.tx.v1beta1";

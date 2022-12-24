@@ -1,6 +1,6 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoAminoType, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";

@@ -1,7 +1,7 @@
 //@ts-nocheck
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomSDKType, MsgMint, MsgMintAmino, MsgMintSDKType, MsgBurn, MsgBurnAmino, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataSDKType } from "./tx";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataAmino, MetadataAminoType, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { MsgCreateDenom, MsgCreateDenomAmino, MsgCreateDenomAminoType, MsgCreateDenomSDKType, MsgMint, MsgMintAmino, MsgMintAminoType, MsgMintSDKType, MsgBurn, MsgBurnAmino, MsgBurnAminoType, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminAmino, MsgChangeAdminAminoType, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataAmino, MsgSetDenomMetadataAminoType, MsgSetDenomMetadataSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.tokenfactory.v1beta1.MsgCreateDenom": {
     aminoType: "osmosis/tokenfactory/create-denom",

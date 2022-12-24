@@ -1,4 +1,4 @@
-import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
+import { GroupSpec, GroupSpecAmino, GroupSpecAminoType, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "akash.market.v1beta2";

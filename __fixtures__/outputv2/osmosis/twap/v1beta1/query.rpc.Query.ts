@@ -1,9 +1,9 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { ParamsRequest, ParamsRequestAmino, ParamsRequestSDKType, ParamsResponse, ParamsResponseAmino, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestAmino, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseAmino, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestAmino, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseAmino, ArithmeticTwapToNowResponseSDKType } from "./query";
+import { ParamsRequest, ParamsRequestAmino, ParamsRequestAminoType, ParamsRequestSDKType, ParamsResponse, ParamsResponseAmino, ParamsResponseAminoType, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestAmino, ArithmeticTwapRequestAminoType, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseAmino, ArithmeticTwapResponseAminoType, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestAmino, ArithmeticTwapToNowRequestAminoType, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseAmino, ArithmeticTwapToNowResponseAminoType, ArithmeticTwapToNowResponseSDKType } from "./query";
 export interface Query {
   params(request?: ParamsRequest): Promise<ParamsResponse>;
   arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse>;

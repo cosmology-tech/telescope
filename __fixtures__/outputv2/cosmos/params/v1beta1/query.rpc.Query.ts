@@ -1,8 +1,8 @@
-import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
+import { ParamChange, ParamChangeAmino, ParamChangeAminoType, ParamChangeSDKType } from "./params";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestAmino, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseAmino, QuerySubspacesResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestAmino, QuerySubspacesRequestAminoType, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseAmino, QuerySubspacesResponseAminoType, QuerySubspacesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

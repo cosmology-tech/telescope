@@ -1,4 +1,4 @@
-import { MerklePrefix, MerklePrefixAmino, MerklePrefixSDKType } from "../../commitment/v1/commitment";
+import { MerklePrefix, MerklePrefixAmino, MerklePrefixAminoType, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.connection.v1";

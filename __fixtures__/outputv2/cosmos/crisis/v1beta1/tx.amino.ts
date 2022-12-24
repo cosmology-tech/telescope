@@ -1,4 +1,4 @@
-import { MsgVerifyInvariant, MsgVerifyInvariantAmino, MsgVerifyInvariantSDKType } from "./tx";
+import { MsgVerifyInvariant, MsgVerifyInvariantAmino, MsgVerifyInvariantAminoType, MsgVerifyInvariantSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.crisis.v1beta1.MsgVerifyInvariant": {
     aminoType: "cosmos-sdk/MsgVerifyInvariant",

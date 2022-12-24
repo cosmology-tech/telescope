@@ -1,4 +1,4 @@
-import { IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateSDKType } from "./channel";
+import { IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelAminoType, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateAminoType, PacketStateSDKType } from "./channel";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.channel.v1";

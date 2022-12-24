@@ -1,9 +1,9 @@
-import { Description, DescriptionAmino, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesSDKType } from "./staking";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Description, DescriptionAmino, DescriptionAminoType, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesAminoType, CommissionRatesSDKType } from "./staking";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateSDKType } from "./tx";
+import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorAminoType, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorAminoType, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateAminoType, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateAminoType, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateAminoType, MsgUndelegateSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.staking.v1beta1.MsgCreateValidator", MsgCreateValidator], ["/cosmos.staking.v1beta1.MsgEditValidator", MsgEditValidator], ["/cosmos.staking.v1beta1.MsgDelegate", MsgDelegate], ["/cosmos.staking.v1beta1.MsgBeginRedelegate", MsgBeginRedelegate], ["/cosmos.staking.v1beta1.MsgUndelegate", MsgUndelegate]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

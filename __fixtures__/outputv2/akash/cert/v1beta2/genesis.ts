@@ -1,4 +1,4 @@
-import { Certificate, CertificateAmino, CertificateSDKType } from "./cert";
+import { Certificate, CertificateAmino, CertificateAminoType, CertificateSDKType } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";

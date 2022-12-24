@@ -1,8 +1,8 @@
-import { OrderFilters, OrderFiltersAmino, OrderFiltersSDKType, OrderID, OrderIDAmino, OrderIDSDKType, Order, OrderAmino, OrderSDKType } from "./order";
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidFiltersAmino, BidFiltersSDKType, BidID, BidIDAmino, BidIDSDKType, Bid, BidAmino, BidSDKType } from "./bid";
-import { LeaseFilters, LeaseFiltersAmino, LeaseFiltersSDKType, LeaseID, LeaseIDAmino, LeaseIDSDKType, Lease, LeaseAmino, LeaseSDKType } from "./lease";
-import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
+import { OrderFilters, OrderFiltersAmino, OrderFiltersAminoType, OrderFiltersSDKType, OrderID, OrderIDAmino, OrderIDAminoType, OrderIDSDKType, Order, OrderAmino, OrderAminoType, OrderSDKType } from "./order";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { BidFilters, BidFiltersAmino, BidFiltersAminoType, BidFiltersSDKType, BidID, BidIDAmino, BidIDAminoType, BidIDSDKType, Bid, BidAmino, BidAminoType, BidSDKType } from "./bid";
+import { LeaseFilters, LeaseFiltersAmino, LeaseFiltersAminoType, LeaseFiltersSDKType, LeaseID, LeaseIDAmino, LeaseIDAminoType, LeaseIDSDKType, Lease, LeaseAmino, LeaseAminoType, LeaseSDKType } from "./lease";
+import { Account, AccountAmino, AccountAminoType, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentAminoType, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";

@@ -1,4 +1,4 @@
-import { Params, ParamsAmino, ParamsSDKType, Validator, ValidatorAmino, ValidatorSDKType, Delegation, DelegationAmino, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationSDKType } from "./staking";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType, Validator, ValidatorAmino, ValidatorAminoType, ValidatorSDKType, Delegation, DelegationAmino, DelegationAminoType, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationAminoType, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationAminoType, RedelegationSDKType } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";

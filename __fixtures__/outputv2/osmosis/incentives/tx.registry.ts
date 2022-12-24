@@ -1,8 +1,8 @@
-import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { QueryCondition, QueryConditionAmino, QueryConditionAminoType, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateGauge, MsgCreateGaugeAmino, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeAmino, MsgAddToGaugeSDKType } from "./tx";
+import { MsgCreateGauge, MsgCreateGaugeAmino, MsgCreateGaugeAminoType, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeAmino, MsgAddToGaugeAminoType, MsgAddToGaugeSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.incentives.MsgCreateGauge", MsgCreateGauge], ["/osmosis.incentives.MsgAddToGauge", MsgAddToGauge]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

@@ -1,5 +1,5 @@
-import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { OrderID, OrderIDAmino, OrderIDAminoType, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinAminoType, DecCoinSDKType, Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";

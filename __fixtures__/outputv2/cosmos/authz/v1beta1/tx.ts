@@ -1,5 +1,5 @@
-import { Grant, GrantAmino, GrantSDKType } from "./authz";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Grant, GrantAmino, GrantAminoType, GrantSDKType } from "./authz";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";

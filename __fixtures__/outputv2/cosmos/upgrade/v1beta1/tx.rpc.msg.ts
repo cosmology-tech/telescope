@@ -1,7 +1,7 @@
-import { Plan, PlanAmino, PlanSDKType } from "./upgrade";
+import { Plan, PlanAmino, PlanAminoType, PlanSDKType } from "./upgrade";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgSoftwareUpgrade, MsgSoftwareUpgradeAmino, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeResponse, MsgSoftwareUpgradeResponseAmino, MsgSoftwareUpgradeResponseSDKType, MsgCancelUpgrade, MsgCancelUpgradeAmino, MsgCancelUpgradeSDKType, MsgCancelUpgradeResponse, MsgCancelUpgradeResponseAmino, MsgCancelUpgradeResponseSDKType } from "./tx";
+import { MsgSoftwareUpgrade, MsgSoftwareUpgradeAmino, MsgSoftwareUpgradeAminoType, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeResponse, MsgSoftwareUpgradeResponseAmino, MsgSoftwareUpgradeResponseAminoType, MsgSoftwareUpgradeResponseSDKType, MsgCancelUpgrade, MsgCancelUpgradeAmino, MsgCancelUpgradeAminoType, MsgCancelUpgradeSDKType, MsgCancelUpgradeResponse, MsgCancelUpgradeResponseAmino, MsgCancelUpgradeResponseAminoType, MsgCancelUpgradeResponseSDKType } from "./tx";
 
 /** Msg defines the upgrade Msg service. */
 export interface Msg {

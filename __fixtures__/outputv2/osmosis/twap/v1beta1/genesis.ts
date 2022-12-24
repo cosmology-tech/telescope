@@ -1,5 +1,5 @@
-import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
-import { TwapRecord, TwapRecordAmino, TwapRecordSDKType } from "./twap_record";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../../google/protobuf/duration";
+import { TwapRecord, TwapRecordAmino, TwapRecordAminoType, TwapRecordSDKType } from "./twap_record";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";

@@ -1,4 +1,4 @@
-import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType } from "../superfluid";
+import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetAminoType, SuperfluidAssetSDKType } from "../superfluid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";

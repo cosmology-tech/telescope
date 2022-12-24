@@ -273,7 +273,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
 `;
 
 exports[`ibc/lightclients/tendermint/v1/tendermint duration 3`] = `
-"export interface AminoClientState extends AminoMsg {
+"export interface ClientStateAminoType extends AminoMsg {
   type: "cosmos-sdk/ClientState";
   value: {
     chain_id: string;
@@ -719,7 +719,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
 `;
 
 exports[`ibc/lightclients/tendermint/v1/tendermint string 3`] = `
-"export interface AminoClientState extends AminoMsg {
+"export interface ClientStateAminoType extends AminoMsg {
   type: "cosmos-sdk/ClientState";
   value: {
     chain_id: string;

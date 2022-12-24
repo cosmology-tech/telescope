@@ -1,5 +1,5 @@
-import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../protobuf/field_mask";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { FieldMask, FieldMaskAmino, FieldMaskAminoType, FieldMaskSDKType } from "../../protobuf/field_mask";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";

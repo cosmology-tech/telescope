@@ -1,10 +1,10 @@
-import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
-import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
-import { ProofSpec, ProofSpecAmino, ProofSpecSDKType } from "../../../../confio/proofs";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
-import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
-import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Height, HeightAmino, HeightAminoType, HeightSDKType } from "../../../core/client/v1/client";
+import { ProofSpec, ProofSpecAmino, ProofSpecAminoType, ProofSpecSDKType } from "../../../../confio/proofs";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { MerkleRoot, MerkleRootAmino, MerkleRootAminoType, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
+import { SignedHeader, SignedHeaderAmino, SignedHeaderAminoType, SignedHeaderSDKType } from "../../../../tendermint/types/types";
+import { ValidatorSet, ValidatorSetAmino, ValidatorSetAminoType, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";

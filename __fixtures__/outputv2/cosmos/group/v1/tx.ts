@@ -1,5 +1,5 @@
-import { Member, MemberAmino, MemberSDKType, VoteOption, VoteOptionAmino, VoteOptionSDKType, ThresholdDecisionPolicy, ThresholdDecisionPolicyAmino, ThresholdDecisionPolicySDKType, PercentageDecisionPolicy, PercentageDecisionPolicyAmino, PercentageDecisionPolicySDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Member, MemberAmino, MemberAminoType, MemberSDKType, VoteOption, VoteOptionAmino, VoteOptionAminoType, VoteOptionSDKType, ThresholdDecisionPolicy, ThresholdDecisionPolicyAmino, ThresholdDecisionPolicyAminoType, ThresholdDecisionPolicySDKType, PercentageDecisionPolicy, PercentageDecisionPolicyAmino, PercentageDecisionPolicyAminoType, PercentageDecisionPolicySDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";

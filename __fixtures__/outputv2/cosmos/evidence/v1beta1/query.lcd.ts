@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryEvidenceRequest, QueryEvidenceRequestAmino, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseAmino, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestAmino, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseAmino, QueryAllEvidenceResponseSDKType } from "./query";
+import { QueryEvidenceRequest, QueryEvidenceRequestAmino, QueryEvidenceRequestAminoType, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseAmino, QueryEvidenceResponseAminoType, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestAmino, QueryAllEvidenceRequestAminoType, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseAmino, QueryAllEvidenceResponseAminoType, QueryAllEvidenceResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,8 +1,8 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Period, PeriodAmino, PeriodSDKType } from "./vesting";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
+import { Period, PeriodAmino, PeriodAminoType, PeriodSDKType } from "./vesting";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateVestingAccount, MsgCreateVestingAccountAmino, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseAmino, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountAmino, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseAmino, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountAmino, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseAmino, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx";
+import { MsgCreateVestingAccount, MsgCreateVestingAccountAmino, MsgCreateVestingAccountAminoType, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseAmino, MsgCreateVestingAccountResponseAminoType, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountAmino, MsgCreatePermanentLockedAccountAminoType, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseAmino, MsgCreatePermanentLockedAccountResponseAminoType, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountAmino, MsgCreatePeriodicVestingAccountAminoType, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseAmino, MsgCreatePeriodicVestingAccountResponseAminoType, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx";
 
 /** Msg defines the bank Msg service. */
 export interface Msg {

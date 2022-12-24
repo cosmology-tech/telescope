@@ -1,4 +1,4 @@
-import { Deposit, DepositAmino, DepositSDKType, Vote, VoteAmino, VoteSDKType, Proposal, ProposalAmino, ProposalSDKType, DepositParams, DepositParamsAmino, DepositParamsSDKType, VotingParams, VotingParamsAmino, VotingParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsSDKType } from "./gov";
+import { Deposit, DepositAmino, DepositAminoType, DepositSDKType, Vote, VoteAmino, VoteAminoType, VoteSDKType, Proposal, ProposalAmino, ProposalAminoType, ProposalSDKType, DepositParams, DepositParamsAmino, DepositParamsAminoType, DepositParamsSDKType, VotingParams, VotingParamsAmino, VotingParamsAminoType, VotingParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsAminoType, TallyParamsSDKType } from "./gov";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1";

@@ -1,6 +1,6 @@
-import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateClient, MsgCreateClientAmino, MsgCreateClientSDKType, MsgUpdateClient, MsgUpdateClientAmino, MsgUpdateClientSDKType, MsgUpgradeClient, MsgUpgradeClientAmino, MsgUpgradeClientSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourAmino, MsgSubmitMisbehaviourSDKType } from "./tx";
+import { MsgCreateClient, MsgCreateClientAmino, MsgCreateClientAminoType, MsgCreateClientSDKType, MsgUpdateClient, MsgUpdateClientAmino, MsgUpdateClientAminoType, MsgUpdateClientSDKType, MsgUpgradeClient, MsgUpgradeClientAmino, MsgUpgradeClientAminoType, MsgUpgradeClientSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourAmino, MsgSubmitMisbehaviourAminoType, MsgSubmitMisbehaviourSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/ibc.core.client.v1.MsgCreateClient", MsgCreateClient], ["/ibc.core.client.v1.MsgUpdateClient", MsgUpdateClient], ["/ibc.core.client.v1.MsgUpgradeClient", MsgUpgradeClient], ["/ibc.core.client.v1.MsgSubmitMisbehaviour", MsgSubmitMisbehaviour]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

@@ -1,4 +1,4 @@
-import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
+import { DenomTrace, DenomTraceAmino, DenomTraceAminoType, DenomTraceSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";

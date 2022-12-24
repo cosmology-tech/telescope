@@ -1,4 +1,4 @@
-import { Value, ValueAmino, ValueSDKType } from "./value";
+import { Value, ValueAmino, ValueAminoType, ValueSDKType } from "./value";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";

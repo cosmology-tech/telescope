@@ -1,7 +1,7 @@
-import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigAmino, AccessConfigAminoType, AccessConfigSDKType } from "./types";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractAmino, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminAmino, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminAmino, MsgClearAdminSDKType } from "./tx";
+import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeAminoType, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractAminoType, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractAminoType, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractAmino, MsgMigrateContractAminoType, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminAmino, MsgUpdateAdminAminoType, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminAmino, MsgClearAdminAminoType, MsgClearAdminSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmwasm.wasm.v1.MsgStoreCode", MsgStoreCode], ["/cosmwasm.wasm.v1.MsgInstantiateContract", MsgInstantiateContract], ["/cosmwasm.wasm.v1.MsgExecuteContract", MsgExecuteContract], ["/cosmwasm.wasm.v1.MsgMigrateContract", MsgMigrateContract], ["/cosmwasm.wasm.v1.MsgUpdateAdmin", MsgUpdateAdmin], ["/cosmwasm.wasm.v1.MsgClearAdmin", MsgClearAdmin]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

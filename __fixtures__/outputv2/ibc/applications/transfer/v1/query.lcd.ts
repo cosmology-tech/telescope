@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { DenomTrace, DenomTraceAmino, DenomTraceAminoType, DenomTraceSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./transfer";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDenomTraceRequest, QueryDenomTraceRequestAmino, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseAmino, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestAmino, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseAmino, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType } from "./query";
+import { QueryDenomTraceRequest, QueryDenomTraceRequestAmino, QueryDenomTraceRequestAminoType, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseAmino, QueryDenomTraceResponseAminoType, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestAmino, QueryDenomTracesRequestAminoType, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseAmino, QueryDenomTracesResponseAminoType, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

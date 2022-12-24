@@ -1,7 +1,7 @@
-import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeAmino, AttributeAminoType, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateProvider, MsgCreateProviderAmino, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseAmino, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderAmino, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseAmino, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderAmino, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseAmino, MsgDeleteProviderResponseSDKType } from "./provider";
+import { MsgCreateProvider, MsgCreateProviderAmino, MsgCreateProviderAminoType, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseAmino, MsgCreateProviderResponseAminoType, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderAmino, MsgUpdateProviderAminoType, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseAmino, MsgUpdateProviderResponseAminoType, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderAmino, MsgDeleteProviderAminoType, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseAmino, MsgDeleteProviderResponseAminoType, MsgDeleteProviderResponseSDKType } from "./provider";
 
 /** Msg defines the provider Msg service */
 export interface Msg {

@@ -1,6 +1,6 @@
-import { DeploymentID, DeploymentIDAmino, DeploymentIDSDKType } from "./deployment";
-import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { DeploymentID, DeploymentIDAmino, DeploymentIDAminoType, DeploymentIDSDKType } from "./deployment";
+import { GroupSpec, GroupSpecAmino, GroupSpecAminoType, GroupSpecSDKType } from "./groupspec";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

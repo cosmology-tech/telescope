@@ -1,4 +1,4 @@
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";

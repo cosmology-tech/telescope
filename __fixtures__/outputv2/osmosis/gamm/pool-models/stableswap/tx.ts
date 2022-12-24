@@ -1,5 +1,5 @@
-import { PoolParams, PoolParamsAmino, PoolParamsSDKType } from "./stableswap_pool";
-import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { PoolParams, PoolParamsAmino, PoolParamsAminoType, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";

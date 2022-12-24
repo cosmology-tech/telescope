@@ -1,4 +1,4 @@
-import { GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationSDKType } from "./authz";
+import { GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationAminoType, GrantAuthorizationSDKType } from "./authz";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";

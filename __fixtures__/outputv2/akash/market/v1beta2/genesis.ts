@@ -1,6 +1,6 @@
-import { Order, OrderAmino, OrderSDKType } from "./order";
-import { Lease, LeaseAmino, LeaseSDKType } from "./lease";
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { Order, OrderAmino, OrderAminoType, OrderSDKType } from "./order";
+import { Lease, LeaseAmino, LeaseAminoType, LeaseSDKType } from "./lease";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";

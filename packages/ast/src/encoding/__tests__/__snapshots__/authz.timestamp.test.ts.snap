@@ -96,7 +96,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
 `;
 
 exports[`cosmos/authz/v1beta1/authz date 3`] = `
-"export interface AminoGrant extends AminoMsg {
+"export interface GrantAminoType extends AminoMsg {
   type: "cosmos-sdk/Grant";
   value: {
     authorization: {
@@ -239,7 +239,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
 `;
 
 exports[`cosmos/authz/v1beta1/authz timestamp 3`] = `
-"export interface AminoGrant extends AminoMsg {
+"export interface GrantAminoType extends AminoMsg {
   type: "cosmos-sdk/Grant";
   value: {
     authorization: {

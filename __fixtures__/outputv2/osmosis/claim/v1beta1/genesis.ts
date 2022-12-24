@@ -1,6 +1,6 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
-import { ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
+import { ClaimRecord, ClaimRecordAmino, ClaimRecordAminoType, ClaimRecordSDKType } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";

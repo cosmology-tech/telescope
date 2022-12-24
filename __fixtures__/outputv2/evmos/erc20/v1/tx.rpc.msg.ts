@@ -1,7 +1,7 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgConvertCoin, MsgConvertCoinAmino, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseAmino, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20Amino, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseAmino, MsgConvertERC20ResponseSDKType } from "./tx";
+import { MsgConvertCoin, MsgConvertCoinAmino, MsgConvertCoinAminoType, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseAmino, MsgConvertCoinResponseAminoType, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20Amino, MsgConvertERC20AminoType, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseAmino, MsgConvertERC20ResponseAminoType, MsgConvertERC20ResponseSDKType } from "./tx";
 
 /** Msg defines the erc20 Msg service. */
 export interface Msg {

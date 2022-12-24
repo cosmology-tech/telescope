@@ -1,11 +1,14 @@
 import { GenesisState as GenesisState1 } from "../../client/v1/genesis";
 import { GenesisStateAmino as GenesisState1Amino } from "../../client/v1/genesis";
+import { GenesisStateAminoType as GenesisState1AminoType } from "../../client/v1/genesis";
 import { GenesisStateSDKType as GenesisState1SDKType } from "../../client/v1/genesis";
 import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
 import { GenesisStateAmino as GenesisState2Amino } from "../../connection/v1/genesis";
+import { GenesisStateAminoType as GenesisState2AminoType } from "../../connection/v1/genesis";
 import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1/genesis";
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
 import { GenesisStateAmino as GenesisState3Amino } from "../../channel/v1/genesis";
+import { GenesisStateAminoType as GenesisState3AminoType } from "../../channel/v1/genesis";
 import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";

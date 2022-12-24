@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoAminoType, ValidatorSigningInfoSDKType } from "./slashing";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestAmino, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseAmino, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestAmino, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseAmino, QuerySigningInfosResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestAmino, QuerySigningInfoRequestAminoType, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseAmino, QuerySigningInfoResponseAminoType, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestAmino, QuerySigningInfosRequestAminoType, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseAmino, QuerySigningInfosResponseAminoType, QuerySigningInfosResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

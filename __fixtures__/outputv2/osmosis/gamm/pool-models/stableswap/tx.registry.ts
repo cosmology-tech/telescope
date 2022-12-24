@@ -1,7 +1,7 @@
-import { PoolParams, PoolParamsAmino, PoolParamsSDKType } from "./stableswap_pool";
-import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { PoolParams, PoolParamsAmino, PoolParamsAminoType, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateStableswapPool, MsgCreateStableswapPoolAmino, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsAmino, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
+import { MsgCreateStableswapPool, MsgCreateStableswapPoolAmino, MsgCreateStableswapPoolAminoType, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsAmino, MsgStableSwapAdjustScalingFactorsAminoType, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool", MsgCreateStableswapPool], ["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors", MsgStableSwapAdjustScalingFactors]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

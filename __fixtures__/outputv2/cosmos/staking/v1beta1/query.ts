@@ -1,5 +1,5 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Validator, ValidatorAmino, ValidatorSDKType, DelegationResponse, DelegationResponseAmino, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseAmino, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoAmino, HistoricalInfoSDKType, Pool, PoolAmino, PoolSDKType, Params, ParamsAmino, ParamsSDKType } from "./staking";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Validator, ValidatorAmino, ValidatorAminoType, ValidatorSDKType, DelegationResponse, DelegationResponseAmino, DelegationResponseAminoType, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationAminoType, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseAmino, RedelegationResponseAminoType, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoAmino, HistoricalInfoAminoType, HistoricalInfoSDKType, Pool, PoolAmino, PoolAminoType, PoolSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";

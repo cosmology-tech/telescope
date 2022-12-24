@@ -1,8 +1,8 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationAminoType, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockAminoType, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockAminoType, SyntheticLockSDKType } from "./lock";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";

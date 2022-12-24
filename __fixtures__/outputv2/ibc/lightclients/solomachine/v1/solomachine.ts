@@ -1,6 +1,6 @@
-import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
-import { Channel, ChannelAmino, ChannelSDKType } from "../../../core/channel/v1/channel";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
+import { ConnectionEnd, ConnectionEndAmino, ConnectionEndAminoType, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
+import { Channel, ChannelAmino, ChannelAminoType, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";

@@ -1,4 +1,4 @@
-import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
+import { PeriodLock, PeriodLockAmino, PeriodLockAminoType, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockAminoType, SyntheticLockSDKType } from "./lock";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.lockup";

@@ -1,4 +1,4 @@
-import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoAminoType, DevFeeInfoSDKType } from "./fees";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";

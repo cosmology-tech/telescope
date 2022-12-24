@@ -1,7 +1,7 @@
-import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BidID, BidIDAmino, BidIDSDKType, MsgCreateBid, MsgCreateBidAmino, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidAmino, MsgCloseBidSDKType } from "./bid";
-import { LeaseID, LeaseIDAmino, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseAmino, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseAmino, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseAmino, MsgCloseLeaseSDKType } from "./lease";
+import { OrderID, OrderIDAmino, OrderIDAminoType, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinAminoType, DecCoinSDKType, Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BidID, BidIDAmino, BidIDAminoType, BidIDSDKType, MsgCreateBid, MsgCreateBidAmino, MsgCreateBidAminoType, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidAmino, MsgCloseBidAminoType, MsgCloseBidSDKType } from "./bid";
+import { LeaseID, LeaseIDAmino, LeaseIDAminoType, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseAmino, MsgWithdrawLeaseAminoType, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseAmino, MsgCreateLeaseAminoType, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseAmino, MsgCloseLeaseAminoType, MsgCloseLeaseSDKType } from "./lease";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/akash.market.v1beta2.MsgCreateBid", MsgCreateBid], ["/akash.market.v1beta2.MsgCloseBid", MsgCloseBid], ["/akash.market.v1beta2.MsgWithdrawLease", MsgWithdrawLease], ["/akash.market.v1beta2.MsgCreateLease", MsgCreateLease], ["/akash.market.v1beta2.MsgCloseLease", MsgCloseLease]];
 export const load = (protoRegistry: Registry) => {

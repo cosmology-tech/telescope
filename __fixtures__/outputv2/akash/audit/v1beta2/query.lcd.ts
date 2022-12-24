@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderAminoType, ProviderSDKType } from "./audit";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestAmino, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestAmino, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestAmino, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestAmino, QueryAuditorAttributesRequestSDKType } from "./query";
+import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestAmino, QueryAllProvidersAttributesRequestAminoType, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseAminoType, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestAmino, QueryProviderAttributesRequestAminoType, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestAmino, QueryProviderAuditorRequestAminoType, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestAmino, QueryAuditorAttributesRequestAminoType, QueryAuditorAttributesRequestSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

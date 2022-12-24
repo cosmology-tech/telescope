@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderAminoType, ProviderSDKType } from "./provider";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryProvidersRequest, QueryProvidersRequestAmino, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestAmino, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseAmino, QueryProviderResponseSDKType } from "./query";
+import { QueryProvidersRequest, QueryProvidersRequestAmino, QueryProvidersRequestAminoType, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseAmino, QueryProvidersResponseAminoType, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestAmino, QueryProviderRequestAminoType, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseAmino, QueryProviderResponseAminoType, QueryProviderResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

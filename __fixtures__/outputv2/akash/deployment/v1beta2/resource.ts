@@ -1,5 +1,5 @@
-import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsAminoType, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino, DecCoinAminoType, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

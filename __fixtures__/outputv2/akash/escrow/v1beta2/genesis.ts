@@ -1,4 +1,4 @@
-import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
+import { Account, AccountAmino, AccountAminoType, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentAminoType, FractionalPaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";

@@ -1,4 +1,4 @@
-import { IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesAmino, ClientConsensusStatesSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
+import { IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateAminoType, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesAmino, ClientConsensusStatesAminoType, ClientConsensusStatesSDKType, Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./client";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "ibc.core.client.v1";

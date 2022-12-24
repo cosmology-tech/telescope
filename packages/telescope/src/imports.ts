@@ -281,6 +281,11 @@ const addDerivativeTypesToImports = (
                 name: obj.name + 'Amino',
                 importAs: (obj.importAs ?? obj.name) + 'Amino',
             };
+            const AminoTypeUrlObject = {
+                ...obj,
+                name: obj.name + 'AminoType',
+                importAs: (obj.importAs ?? obj.name) + 'AminoType',
+            };
 
             // MARKED AS NOT DRY [google.protobuf names]
             // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
@@ -294,6 +299,11 @@ const addDerivativeTypesToImports = (
                 AminoTypeObject.importAs = AminoTypeObject.importAs.split('.')[AminoTypeObject.importAs.split('.').length - 1];
             }
 
+            if (/\./.test(AminoTypeUrlObject.name)) {
+                AminoTypeUrlObject.name = AminoTypeUrlObject.name.split('.')[AminoTypeUrlObject.name.split('.').length - 1];
+                AminoTypeUrlObject.importAs = AminoTypeUrlObject.importAs.split('.')[AminoTypeUrlObject.importAs.split('.').length - 1];
+            }
+
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
 
                 const arr = [
@@ -303,6 +313,7 @@ const addDerivativeTypesToImports = (
 
                 if (context.options.aminoEncoding.useRecursiveV2encoding) {
                     arr.push(AminoTypeObject);
+                    arr.push(AminoTypeUrlObject);
                 }
                 if (context.options.useSDKTypes) {
                     arr.push(SDKTypeObject);

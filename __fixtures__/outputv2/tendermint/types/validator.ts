@@ -1,4 +1,4 @@
-import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
+import { PublicKey, PublicKeyAmino, PublicKeyAminoType, PublicKeySDKType } from "../crypto/keys";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.types";

@@ -1,4 +1,4 @@
-import { GroupInfo, GroupInfoAmino, GroupInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoSDKType, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType } from "./types";
+import { GroupInfo, GroupInfoAmino, GroupInfoAminoType, GroupInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberAminoType, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoAminoType, GroupPolicyInfoSDKType, Proposal, ProposalAmino, ProposalAminoType, ProposalSDKType, Vote, VoteAmino, VoteAminoType, VoteSDKType } from "./types";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.group.v1";

@@ -1,4 +1,4 @@
-import { AuditedAttributes, AuditedAttributesAmino, AuditedAttributesSDKType } from "./audit";
+import { AuditedAttributes, AuditedAttributesAmino, AuditedAttributesAminoType, AuditedAttributesSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";

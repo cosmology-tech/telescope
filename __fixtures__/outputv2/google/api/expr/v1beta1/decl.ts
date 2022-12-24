@@ -1,4 +1,4 @@
-import { Expr, ExprAmino, ExprSDKType } from "./expr";
+import { Expr, ExprAmino, ExprAminoType, ExprSDKType } from "./expr";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";

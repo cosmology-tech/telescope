@@ -3,7 +3,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QuerySpotPriceRequest, QuerySpotPriceRequestAmino, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseAmino, QuerySpotPriceResponseSDKType } from "./query";
+import { QuerySpotPriceRequest, QuerySpotPriceRequestAmino, QuerySpotPriceRequestAminoType, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseAmino, QuerySpotPriceResponseAminoType, QuerySpotPriceResponseSDKType } from "./query";
 export interface Query {
   /**
    * SpotPrice defines a gRPC query handler that returns the spot price given

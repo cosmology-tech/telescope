@@ -1,4 +1,4 @@
-import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
+import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationAminoType, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionAminoType, InflationDistributionSDKType } from "./inflation";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.inflation.v1";

@@ -1,7 +1,7 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputAmino, InputAminoType, InputSDKType, Output, OutputAmino, OutputAminoType, OutputSDKType } from "./bank";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgSend, MsgSendAmino, MsgSendSDKType, MsgMultiSend, MsgMultiSendAmino, MsgMultiSendSDKType } from "./tx";
+import { MsgSend, MsgSendAmino, MsgSendAminoType, MsgSendSDKType, MsgMultiSend, MsgMultiSendAmino, MsgMultiSendAminoType, MsgMultiSendSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.bank.v1beta1.MsgSend", MsgSend], ["/cosmos.bank.v1beta1.MsgMultiSend", MsgMultiSend]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

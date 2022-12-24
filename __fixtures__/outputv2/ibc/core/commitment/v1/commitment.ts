@@ -1,4 +1,4 @@
-import { CommitmentProof, CommitmentProofAmino, CommitmentProofSDKType } from "../../../../confio/proofs";
+import { CommitmentProof, CommitmentProofAmino, CommitmentProofAminoType, CommitmentProofSDKType } from "../../../../confio/proofs";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.commitment.v1";

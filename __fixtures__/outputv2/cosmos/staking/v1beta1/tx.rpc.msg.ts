@@ -1,10 +1,10 @@
-import { Description, DescriptionAmino, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesSDKType } from "./staking";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Description, DescriptionAmino, DescriptionAminoType, DescriptionSDKType, CommissionRates, CommissionRatesAmino, CommissionRatesAminoType, CommissionRatesSDKType } from "./staking";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseAmino, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseAmino, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseAmino, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseAmino, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseAmino, MsgUndelegateResponseSDKType } from "./tx";
+import { MsgCreateValidator, MsgCreateValidatorAmino, MsgCreateValidatorAminoType, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseAmino, MsgCreateValidatorResponseAminoType, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorAmino, MsgEditValidatorAminoType, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseAmino, MsgEditValidatorResponseAminoType, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateAmino, MsgDelegateAminoType, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseAmino, MsgDelegateResponseAminoType, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateAmino, MsgBeginRedelegateAminoType, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseAmino, MsgBeginRedelegateResponseAminoType, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateAmino, MsgUndelegateAminoType, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseAmino, MsgUndelegateResponseAminoType, MsgUndelegateResponseSDKType } from "./tx";
 
 /** Msg defines the staking Msg service. */
 export interface Msg {

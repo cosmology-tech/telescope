@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoAminoType, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsAmino, ParamsAminoType, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestAmino, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseAmino, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestAmino, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseAmino, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestAmino, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseAmino, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
+import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestAmino, QueryDevFeeInfosRequestAminoType, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseAmino, QueryDevFeeInfosResponseAminoType, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestAmino, QueryDevFeeInfoRequestAminoType, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseAmino, QueryDevFeeInfoResponseAminoType, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestAminoType, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseAminoType, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestAmino, QueryDevFeeInfosPerDeployerRequestAminoType, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseAmino, QueryDevFeeInfosPerDeployerResponseAminoType, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,4 +1,4 @@
-import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
+import { TokenPair, TokenPairAmino, TokenPairAminoType, TokenPairSDKType } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";

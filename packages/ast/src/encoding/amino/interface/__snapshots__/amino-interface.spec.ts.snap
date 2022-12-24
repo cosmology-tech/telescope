@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
-"export interface AminoMsgCreateValidator extends AminoMsg {
+"export interface MsgCreateValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";
   value: {
     description: {
@@ -32,7 +32,7 @@ exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
 `;
 
 exports[`cosmos/staking/v1beta1/tx MsgEditValidator 1`] = `
-"export interface AminoMsgEditValidator extends AminoMsg {
+"export interface MsgEditValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgEditValidator";
   value: {
     description: {
@@ -50,7 +50,7 @@ exports[`cosmos/staking/v1beta1/tx MsgEditValidator 1`] = `
 `;
 
 exports[`cosmos/staking/v1beta1/tx MsgUndelegate 1`] = `
-"export interface AminoMsgUndelegate extends AminoMsg {
+"export interface MsgUndelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUndelegate";
   value: {
     delegator_address: string;
@@ -64,7 +64,7 @@ exports[`cosmos/staking/v1beta1/tx MsgUndelegate 1`] = `
 `;
 
 exports[`osmosis/gamm/v1beta1/tx Interfaces 1`] = `
-"export interface AminoMsgJoinPool extends AminoMsg {
+"export interface MsgJoinPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/join-pool";
   value: {
     sender: string;

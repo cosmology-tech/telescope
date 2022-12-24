@@ -1,4 +1,4 @@
-import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
+import { GroupID, GroupIDAmino, GroupIDAminoType, GroupIDSDKType } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";

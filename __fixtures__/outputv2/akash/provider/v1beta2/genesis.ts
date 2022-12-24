@@ -1,4 +1,4 @@
-import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
+import { Provider, ProviderAmino, ProviderAminoType, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";

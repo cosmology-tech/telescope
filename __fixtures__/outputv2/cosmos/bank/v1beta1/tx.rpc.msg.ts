@@ -1,8 +1,8 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
+import { Coin, CoinAmino, CoinAminoType, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputAmino, InputAminoType, InputSDKType, Output, OutputAmino, OutputAminoType, OutputSDKType } from "./bank";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgSend, MsgSendAmino, MsgSendSDKType, MsgSendResponse, MsgSendResponseAmino, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendAmino, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseAmino, MsgMultiSendResponseSDKType } from "./tx";
+import { MsgSend, MsgSendAmino, MsgSendAminoType, MsgSendSDKType, MsgSendResponse, MsgSendResponseAmino, MsgSendResponseAminoType, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendAmino, MsgMultiSendAminoType, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseAmino, MsgMultiSendResponseAminoType, MsgMultiSendResponseSDKType } from "./tx";
 
 /** Msg defines the bank Msg service. */
 export interface Msg {

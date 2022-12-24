@@ -1,4 +1,4 @@
-import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
+import { Grant, GrantAmino, GrantAminoType, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";

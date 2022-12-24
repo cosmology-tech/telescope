@@ -1,5 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
-import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Distribution, DistributionAmino, DistributionAminoType, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

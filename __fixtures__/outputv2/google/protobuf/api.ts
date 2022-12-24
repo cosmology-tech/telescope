@@ -1,5 +1,5 @@
-import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxAmino, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
-import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
+import { Option, OptionAmino, OptionAminoType, OptionSDKType, Syntax, SyntaxAmino, SyntaxAminoType, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
+import { SourceContext, SourceContextAmino, SourceContextAminoType, SourceContextSDKType } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";

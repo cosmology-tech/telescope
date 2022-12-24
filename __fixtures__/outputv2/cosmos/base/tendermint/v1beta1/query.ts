@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../query/v1beta1/pagination";
-import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../../tendermint/types/types";
-import { Block, BlockAmino, BlockSDKType } from "../../../../tendermint/types/block";
-import { NodeInfo, NodeInfoAmino, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
+import { PageRequest, PageRequestAmino, PageRequestAminoType, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseAminoType, PageResponseSDKType } from "../../query/v1beta1/pagination";
+import { Any, AnyAmino, AnyAminoType, AnySDKType } from "../../../../google/protobuf/any";
+import { BlockID, BlockIDAmino, BlockIDAminoType, BlockIDSDKType } from "../../../../tendermint/types/types";
+import { Block, BlockAmino, BlockAminoType, BlockSDKType } from "../../../../tendermint/types/block";
+import { NodeInfo, NodeInfoAmino, NodeInfoAminoType, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";

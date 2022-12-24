@@ -1,6 +1,6 @@
-import { Vote, VoteAmino, VoteSDKType, LightBlock, LightBlockAmino, LightBlockSDKType } from "./types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Validator, ValidatorAmino, ValidatorSDKType } from "./validator";
+import { Vote, VoteAmino, VoteAminoType, VoteSDKType, LightBlock, LightBlockAmino, LightBlockAminoType, LightBlockSDKType } from "./types";
+import { Timestamp, TimestampAmino, TimestampAminoType, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Validator, ValidatorAmino, ValidatorAminoType, ValidatorSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
