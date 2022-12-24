@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenesisState interface 1`] = `
+"export interface GenesisStateAminoType {
+  type: string;
+  value: GenesisStateAmino;
+}"
+`;
+
+exports[`MsgSend amino interface 1`] = `
+"export interface MsgSendAminoType {
+  type: string;
+  value: MsgSendAmino;
+}"
+`;
+
+exports[`PageRequest interface 1`] = `
+"export interface PageRequestAminoType {
+  type: string;
+  value: PageRequestAmino;
+}"
+`;
+
+exports[`PageResponse interface 1`] = `
+"export interface PageResponseAminoType {
+  type: string;
+  value: PageResponseAmino;
+}"
+`;
+
+exports[`confio/proofs.proto ExistenceProof 1`] = `
+"export interface ExistenceProofAminoType {
+  type: string;
+  value: ExistenceProofAmino;
+}"
+`;
+
+exports[`cosmos/auth/v1beta1/auth.proto BaseAccount 1`] = `
+"export interface BaseAccountAminoType {
+  type: string;
+  value: BaseAccountAmino;
+}"
+`;
+
+exports[`cosmos/authz/v1beta1/authz.proto Grant 1`] = `
+"export interface GrantAminoType {
+  type: string;
+  value: GrantAmino;
+}"
+`;
+
+exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization 1`] = `
+"export interface GrantAuthorizationAminoType {
+  type: string;
+  value: GrantAuthorizationAmino;
+}"
+`;
+
+exports[`cosmos/authz/v1beta1/query.proto QueryGrantsRequest 1`] = `
+"export interface QueryGrantsRequestAminoType {
+  type: string;
+  value: QueryGrantsRequestAmino;
+}"
+`;
+
+exports[`osmosis/gamm/v1beta1/tx.proto MsgJoinPool 1`] = `
+"export interface MsgJoinPoolAminoType {
+  type: string;
+  value: MsgJoinPoolAmino;
+}"
+`;
