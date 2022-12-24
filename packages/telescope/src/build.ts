@@ -9,6 +9,7 @@ import {
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
     createProtoType,
+    createProtoTypeType,
     createSDKType,
     createAminoType,
     createAminoTypeType,
@@ -62,6 +63,7 @@ export const buildBaseTypeScriptInterface = (
 ) => {
     context.body.push(createProtoType(context.proto, name, obj));
     if (context.options.aminoEncoding.useRecursiveV2encoding) {
+        context.body.push(createProtoTypeType(context.proto, name, obj));
         context.body.push(createAminoType(context.proto, name, obj));
 
         // TODO optimization:
