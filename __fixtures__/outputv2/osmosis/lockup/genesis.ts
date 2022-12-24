@@ -16,6 +16,10 @@ export interface GenesisStateAmino {
   locks: PeriodLockAmino[];
   synthetic_locks: SyntheticLockAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/lockup/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateSDKType {

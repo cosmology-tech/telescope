@@ -51,6 +51,10 @@ export interface GenesisStateAmino {
   intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
   intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {

@@ -12,6 +12,10 @@ export interface ValidatorSetAmino {
   proposer?: ValidatorAmino;
   total_voting_power: string;
 }
+export interface ValidatorSetAminoType {
+  type: "/tendermint.types.ValidatorSet";
+  value: ValidatorSetAmino;
+}
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
   proposer?: ValidatorSDKType;
@@ -29,6 +33,10 @@ export interface ValidatorAmino {
   voting_power: string;
   proposer_priority: string;
 }
+export interface ValidatorAminoType {
+  type: "/tendermint.types.Validator";
+  value: ValidatorAmino;
+}
 export interface ValidatorSDKType {
   address: Uint8Array;
   pub_key?: PublicKeySDKType;
@@ -42,6 +50,10 @@ export interface SimpleValidator {
 export interface SimpleValidatorAmino {
   pub_key?: PublicKeyAmino;
   voting_power: string;
+}
+export interface SimpleValidatorAminoType {
+  type: "/tendermint.types.SimpleValidator";
+  value: SimpleValidatorAmino;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;

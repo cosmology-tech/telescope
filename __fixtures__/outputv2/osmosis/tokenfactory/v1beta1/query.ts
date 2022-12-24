@@ -9,6 +9,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "osmosis/tokenfactory/query-params-request";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -23,6 +27,10 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "osmosis/tokenfactory/query-params-response";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -44,6 +52,10 @@ export interface QueryDenomAuthorityMetadataRequest {
  */
 export interface QueryDenomAuthorityMetadataRequestAmino {
   denom: string;
+}
+export interface QueryDenomAuthorityMetadataRequestAminoType {
+  type: "osmosis/tokenfactory/query-denom-authority-metadata-request";
+  value: QueryDenomAuthorityMetadataRequestAmino;
 }
 
 /**
@@ -69,6 +81,10 @@ export interface QueryDenomAuthorityMetadataResponse {
 export interface QueryDenomAuthorityMetadataResponseAmino {
   authority_metadata?: DenomAuthorityMetadataAmino;
 }
+export interface QueryDenomAuthorityMetadataResponseAminoType {
+  type: "osmosis/tokenfactory/query-denom-authority-metadata-response";
+  value: QueryDenomAuthorityMetadataResponseAmino;
+}
 
 /**
  * QueryDenomAuthorityMetadataResponse defines the response structure for the
@@ -93,6 +109,10 @@ export interface QueryDenomsFromCreatorRequest {
 export interface QueryDenomsFromCreatorRequestAmino {
   creator: string;
 }
+export interface QueryDenomsFromCreatorRequestAminoType {
+  type: "osmosis/tokenfactory/query-denoms-from-creator-request";
+  value: QueryDenomsFromCreatorRequestAmino;
+}
 
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
@@ -116,6 +136,10 @@ export interface QueryDenomsFromCreatorResponse {
  */
 export interface QueryDenomsFromCreatorResponseAmino {
   denoms: string[];
+}
+export interface QueryDenomsFromCreatorResponseAminoType {
+  type: "osmosis/tokenfactory/query-denoms-from-creator-response";
+  value: QueryDenomsFromCreatorResponseAmino;
 }
 
 /**

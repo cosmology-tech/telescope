@@ -59,6 +59,10 @@ export interface InflationDistributionAmino {
    */
   community_pool: string;
 }
+export interface InflationDistributionAminoType {
+  type: "/evmos.inflation.v1.InflationDistribution";
+  value: InflationDistributionAmino;
+}
 
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -121,6 +125,10 @@ export interface ExponentialCalculationAmino {
 
   /** max variance */
   max_variance: string;
+}
+export interface ExponentialCalculationAminoType {
+  type: "/evmos.inflation.v1.ExponentialCalculation";
+  value: ExponentialCalculationAmino;
 }
 
 /**

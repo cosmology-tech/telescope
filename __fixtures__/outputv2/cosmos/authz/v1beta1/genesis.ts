@@ -12,6 +12,10 @@ export interface GenesisState {
 export interface GenesisStateAmino {
   authorization: GrantAuthorizationAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateSDKType {

@@ -15,6 +15,10 @@ export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
+export interface LogEntry_LabelsEntryAminoType {
+  type: "/google.logging.v2.undefined";
+  value: LogEntry_LabelsEntryAmino;
+}
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -349,6 +353,10 @@ export interface LogEntryAmino {
    */
   split?: LogSplitAmino;
 }
+export interface LogEntryAminoType {
+  type: "/google.logging.v2.LogEntry";
+  value: LogEntryAmino;
+}
 
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
@@ -422,6 +430,10 @@ export interface LogEntryOperationAmino {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
+export interface LogEntryOperationAminoType {
+  type: "/google.logging.v2.LogEntryOperation";
+  value: LogEntryOperationAmino;
+}
 
 /**
  * Additional information about a potentially long-running operation with which
@@ -489,6 +501,10 @@ export interface LogEntrySourceLocationAmino {
    */
   function: string;
 }
+export interface LogEntrySourceLocationAminoType {
+  type: "/google.logging.v2.LogEntrySourceLocation";
+  value: LogEntrySourceLocationAmino;
+}
 
 /**
  * Additional information about the source code location that produced the log
@@ -546,6 +562,10 @@ export interface LogSplitAmino {
 
   /** The total number of log entries that the original LogEntry was split into. */
   total_splits: number;
+}
+export interface LogSplitAminoType {
+  type: "/google.logging.v2.LogSplit";
+  value: LogSplitAmino;
 }
 
 /**

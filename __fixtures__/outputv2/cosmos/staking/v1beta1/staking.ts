@@ -91,6 +91,10 @@ export interface HistoricalInfoAmino {
   header?: HeaderAmino;
   valset: ValidatorAmino[];
 }
+export interface HistoricalInfoAminoType {
+  type: "cosmos-sdk/HistoricalInfo";
+  value: HistoricalInfoAmino;
+}
 
 /**
  * HistoricalInfo contains header and validator information for a given block.
@@ -132,6 +136,10 @@ export interface CommissionRatesAmino {
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   max_change_rate: string;
 }
+export interface CommissionRatesAminoType {
+  type: "cosmos-sdk/CommissionRates";
+  value: CommissionRatesAmino;
+}
 
 /**
  * CommissionRates defines the initial commission rates to be used for creating
@@ -159,6 +167,10 @@ export interface CommissionAmino {
 
   /** update_time is the last time the commission rate was changed. */
   update_time?: Date;
+}
+export interface CommissionAminoType {
+  type: "cosmos-sdk/Commission";
+  value: CommissionAmino;
 }
 
 /** Commission defines commission parameters for a given validator. */
@@ -201,6 +213,10 @@ export interface DescriptionAmino {
 
   /** details define other optional details. */
   details: string;
+}
+export interface DescriptionAminoType {
+  type: "cosmos-sdk/Description";
+  value: DescriptionAmino;
 }
 
 /** Description defines a validator description. */
@@ -301,6 +317,10 @@ export interface ValidatorAmino {
   /** min_self_delegation is the validator's self declared minimum self delegation. */
   min_self_delegation: string;
 }
+export interface ValidatorAminoType {
+  type: "cosmos-sdk/Validator";
+  value: ValidatorAmino;
+}
 
 /**
  * Validator defines a validator, together with the total amount of the
@@ -335,6 +355,10 @@ export interface ValAddresses {
 export interface ValAddressesAmino {
   addresses: string[];
 }
+export interface ValAddressesAminoType {
+  type: "cosmos-sdk/ValAddresses";
+  value: ValAddressesAmino;
+}
 
 /** ValAddresses defines a repeated set of validator addresses. */
 export interface ValAddressesSDKType {
@@ -360,6 +384,10 @@ export interface DVPairAmino {
   delegator_address: string;
   validator_address: string;
 }
+export interface DVPairAminoType {
+  type: "cosmos-sdk/DVPair";
+  value: DVPairAmino;
+}
 
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
@@ -379,6 +407,10 @@ export interface DVPairs {
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairsAmino {
   pairs: DVPairAmino[];
+}
+export interface DVPairsAminoType {
+  type: "cosmos-sdk/DVPairs";
+  value: DVPairsAmino;
 }
 
 /** DVPairs defines an array of DVPair objects. */
@@ -409,6 +441,10 @@ export interface DVVTripletAmino {
   validator_src_address: string;
   validator_dst_address: string;
 }
+export interface DVVTripletAminoType {
+  type: "cosmos-sdk/DVVTriplet";
+  value: DVVTripletAmino;
+}
 
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
@@ -430,6 +466,10 @@ export interface DVVTriplets {
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTripletsAmino {
   triplets: DVVTripletAmino[];
+}
+export interface DVVTripletsAminoType {
+  type: "cosmos-sdk/DVVTriplets";
+  value: DVVTripletsAmino;
 }
 
 /** DVVTriplets defines an array of DVVTriplet objects. */
@@ -467,6 +507,10 @@ export interface DelegationAmino {
 
   /** shares define the delegation shares received. */
   shares: string;
+}
+export interface DelegationAminoType {
+  type: "cosmos-sdk/Delegation";
+  value: DelegationAmino;
 }
 
 /**
@@ -509,6 +553,10 @@ export interface UnbondingDelegationAmino {
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntryAmino[];
 }
+export interface UnbondingDelegationAminoType {
+  type: "cosmos-sdk/UnbondingDelegation";
+  value: UnbondingDelegationAmino;
+}
 
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
@@ -549,6 +597,10 @@ export interface UnbondingDelegationEntryAmino {
   /** balance defines the tokens to receive at completion. */
   balance: string;
 }
+export interface UnbondingDelegationEntryAminoType {
+  type: "cosmos-sdk/UnbondingDelegationEntry";
+  value: UnbondingDelegationEntryAmino;
+}
 
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntrySDKType {
@@ -586,6 +638,10 @@ export interface RedelegationEntryAmino {
 
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
   shares_dst: string;
+}
+export interface RedelegationEntryAminoType {
+  type: "cosmos-sdk/RedelegationEntry";
+  value: RedelegationEntryAmino;
 }
 
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
@@ -630,6 +686,10 @@ export interface RedelegationAmino {
 
   /** entries are the redelegation entries. */
   entries: RedelegationEntryAmino[];
+}
+export interface RedelegationAminoType {
+  type: "cosmos-sdk/Redelegation";
+  value: RedelegationAmino;
 }
 
 /**
@@ -684,6 +744,10 @@ export interface ParamsAmino {
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   min_commission_rate: string;
 }
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the staking module. */
 export interface ParamsSDKType {
@@ -711,6 +775,10 @@ export interface DelegationResponse {
 export interface DelegationResponseAmino {
   delegation?: DelegationAmino;
   balance?: CoinAmino;
+}
+export interface DelegationResponseAminoType {
+  type: "cosmos-sdk/DelegationResponse";
+  value: DelegationResponseAmino;
 }
 
 /**
@@ -740,6 +808,10 @@ export interface RedelegationEntryResponse {
 export interface RedelegationEntryResponseAmino {
   redelegation_entry?: RedelegationEntryAmino;
   balance: string;
+}
+export interface RedelegationEntryResponseAminoType {
+  type: "cosmos-sdk/RedelegationEntryResponse";
+  value: RedelegationEntryResponseAmino;
 }
 
 /**
@@ -771,6 +843,10 @@ export interface RedelegationResponseAmino {
   redelegation?: RedelegationAmino;
   entries: RedelegationEntryResponseAmino[];
 }
+export interface RedelegationResponseAminoType {
+  type: "cosmos-sdk/RedelegationResponse";
+  value: RedelegationResponseAmino;
+}
 
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
@@ -798,6 +874,10 @@ export interface Pool {
 export interface PoolAmino {
   not_bonded_tokens: string;
   bonded_tokens: string;
+}
+export interface PoolAminoType {
+  type: "cosmos-sdk/Pool";
+  value: PoolAmino;
 }
 
 /**

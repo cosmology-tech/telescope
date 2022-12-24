@@ -524,6 +524,10 @@ export interface MetricDescriptorAmino {
    */
   monitored_resource_types: string[];
 }
+export interface MetricDescriptorAminoType {
+  type: "/google.api.MetricDescriptor";
+  value: MetricDescriptorAmino;
+}
 
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -589,6 +593,10 @@ export interface MetricDescriptor_MetricDescriptorMetadataAmino {
    */
   ingest_delay?: DurationAmino;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataAminoType {
+  type: "/google.api.MetricDescriptorMetadata";
+  value: MetricDescriptor_MetricDescriptorMetadataAmino;
+}
 
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
@@ -604,6 +612,10 @@ export interface Metric_LabelsEntry {
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
+}
+export interface Metric_LabelsEntryAminoType {
+  type: "/google.api.undefined";
+  value: Metric_LabelsEntryAmino;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -648,6 +660,10 @@ export interface MetricAmino {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricAminoType {
+  type: "/google.api.Metric";
+  value: MetricAmino;
 }
 
 /**

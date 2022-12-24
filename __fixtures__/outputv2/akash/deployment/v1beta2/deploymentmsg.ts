@@ -26,6 +26,10 @@ export interface MsgCreateDeploymentAmino {
   /** Depositor pays for the deposit */
   depositor: string;
 }
+export interface MsgCreateDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.MsgCreateDeployment";
+  value: MsgCreateDeploymentAmino;
+}
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
@@ -41,6 +45,10 @@ export interface MsgCreateDeploymentResponse {}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseAmino {}
+export interface MsgCreateDeploymentResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse";
+  value: MsgCreateDeploymentResponseAmino;
+}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
@@ -62,6 +70,10 @@ export interface MsgDepositDeploymentAmino {
   /** Depositor pays for the deposit */
   depositor: string;
 }
+export interface MsgDepositDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.MsgDepositDeployment";
+  value: MsgDepositDeploymentAmino;
+}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -75,6 +87,10 @@ export interface MsgDepositDeploymentResponse {}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseAmino {}
+export interface MsgDepositDeploymentResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse";
+  value: MsgDepositDeploymentResponseAmino;
+}
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
@@ -90,6 +106,10 @@ export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
   version: Uint8Array;
 }
+export interface MsgUpdateDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
+  value: MsgUpdateDeploymentAmino;
+}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -102,6 +122,10 @@ export interface MsgUpdateDeploymentResponse {}
 
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseAmino {}
+export interface MsgUpdateDeploymentResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse";
+  value: MsgUpdateDeploymentResponseAmino;
+}
 
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
@@ -115,6 +139,10 @@ export interface MsgCloseDeployment {
 export interface MsgCloseDeploymentAmino {
   id?: DeploymentIDAmino;
 }
+export interface MsgCloseDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.MsgCloseDeployment";
+  value: MsgCloseDeploymentAmino;
+}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -126,6 +154,10 @@ export interface MsgCloseDeploymentResponse {}
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseAmino {}
+export interface MsgCloseDeploymentResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse";
+  value: MsgCloseDeploymentResponseAmino;
+}
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}

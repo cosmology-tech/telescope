@@ -39,6 +39,10 @@ export interface MsgCreateDenomAmino {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
+export interface MsgCreateDenomAminoType {
+  type: "osmosis/tokenfactory/create-denom";
+  value: MsgCreateDenomAmino;
+}
 
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -71,6 +75,10 @@ export interface MsgCreateDenomResponse {
 export interface MsgCreateDenomResponseAmino {
   new_token_denom: string;
 }
+export interface MsgCreateDenomResponseAminoType {
+  type: "osmosis/tokenfactory/create-denom-response";
+  value: MsgCreateDenomResponseAmino;
+}
 
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
@@ -97,6 +105,10 @@ export interface MsgMintAmino {
   sender: string;
   amount?: CoinAmino;
 }
+export interface MsgMintAminoType {
+  type: "osmosis/tokenfactory/mint";
+  value: MsgMintAmino;
+}
 
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
@@ -108,6 +120,10 @@ export interface MsgMintSDKType {
 }
 export interface MsgMintResponse {}
 export interface MsgMintResponseAmino {}
+export interface MsgMintResponseAminoType {
+  type: "osmosis/tokenfactory/mint-response";
+  value: MsgMintResponseAmino;
+}
 export interface MsgMintResponseSDKType {}
 
 /**
@@ -127,6 +143,10 @@ export interface MsgBurnAmino {
   sender: string;
   amount?: CoinAmino;
 }
+export interface MsgBurnAminoType {
+  type: "osmosis/tokenfactory/burn";
+  value: MsgBurnAmino;
+}
 
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -138,6 +158,10 @@ export interface MsgBurnSDKType {
 }
 export interface MsgBurnResponse {}
 export interface MsgBurnResponseAmino {}
+export interface MsgBurnResponseAminoType {
+  type: "osmosis/tokenfactory/burn-response";
+  value: MsgBurnResponseAmino;
+}
 export interface MsgBurnResponseSDKType {}
 
 /**
@@ -158,6 +182,10 @@ export interface MsgChangeAdminAmino {
   sender: string;
   denom: string;
   new_admin: string;
+}
+export interface MsgChangeAdminAminoType {
+  type: "osmosis/tokenfactory/change-admin";
+  value: MsgChangeAdminAmino;
 }
 
 /**
@@ -181,6 +209,10 @@ export interface MsgChangeAdminResponse {}
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponseAmino {}
+export interface MsgChangeAdminResponseAminoType {
+  type: "osmosis/tokenfactory/change-admin-response";
+  value: MsgChangeAdminResponseAmino;
+}
 
 /**
  * MsgChangeAdminResponse defines the response structure for an executed
@@ -205,6 +237,10 @@ export interface MsgSetDenomMetadataAmino {
   sender: string;
   metadata?: MetadataAmino;
 }
+export interface MsgSetDenomMetadataAminoType {
+  type: "osmosis/tokenfactory/set-denom-metadata";
+  value: MsgSetDenomMetadataAmino;
+}
 
 /**
  * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
@@ -226,6 +262,10 @@ export interface MsgSetDenomMetadataResponse {}
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponseAmino {}
+export interface MsgSetDenomMetadataResponseAminoType {
+  type: "osmosis/tokenfactory/set-denom-metadata-response";
+  value: MsgSetDenomMetadataResponseAmino;
+}
 
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed

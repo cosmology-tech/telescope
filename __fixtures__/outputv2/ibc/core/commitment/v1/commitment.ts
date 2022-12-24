@@ -18,6 +18,10 @@ export interface MerkleRoot {
 export interface MerkleRootAmino {
   hash: Uint8Array;
 }
+export interface MerkleRootAminoType {
+  type: "cosmos-sdk/MerkleRoot";
+  value: MerkleRootAmino;
+}
 
 /**
  * MerkleRoot defines a merkle root hash.
@@ -43,6 +47,10 @@ export interface MerklePrefix {
  */
 export interface MerklePrefixAmino {
   key_prefix: Uint8Array;
+}
+export interface MerklePrefixAminoType {
+  type: "cosmos-sdk/MerklePrefix";
+  value: MerklePrefixAmino;
 }
 
 /**
@@ -70,6 +78,10 @@ export interface MerklePath {
  */
 export interface MerklePathAmino {
   key_path: string[];
+}
+export interface MerklePathAminoType {
+  type: "cosmos-sdk/MerklePath";
+  value: MerklePathAmino;
 }
 
 /**
@@ -101,6 +113,10 @@ export interface MerkleProof {
  */
 export interface MerkleProofAmino {
   proofs: CommitmentProofAmino[];
+}
+export interface MerkleProofAminoType {
+  type: "cosmos-sdk/MerkleProof";
+  value: MerkleProofAmino;
 }
 
 /**

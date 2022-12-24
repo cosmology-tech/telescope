@@ -84,6 +84,10 @@ export interface ClaimRecordAmino {
    */
   action_completed: boolean[];
 }
+export interface ClaimRecordAminoType {
+  type: "osmosis/claim/claim-record";
+  value: ClaimRecordAmino;
+}
 
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {

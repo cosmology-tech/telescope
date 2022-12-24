@@ -20,6 +20,10 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {

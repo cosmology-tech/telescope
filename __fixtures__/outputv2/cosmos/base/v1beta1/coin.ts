@@ -23,6 +23,10 @@ export interface CoinAmino {
   denom: string;
   amount: string;
 }
+export interface CoinAminoType {
+  type: "cosmos-sdk/Coin";
+  value: CoinAmino;
+}
 
 /**
  * Coin defines a token with a denomination and an amount.
@@ -56,6 +60,10 @@ export interface DecCoinAmino {
   denom: string;
   amount: string;
 }
+export interface DecCoinAminoType {
+  type: "cosmos-sdk/DecCoin";
+  value: DecCoinAmino;
+}
 
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
@@ -77,6 +85,10 @@ export interface IntProto {
 export interface IntProtoAmino {
   int: string;
 }
+export interface IntProtoAminoType {
+  type: "cosmos-sdk/IntProto";
+  value: IntProtoAmino;
+}
 
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
@@ -91,6 +103,10 @@ export interface DecProto {
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
   dec: string;
+}
+export interface DecProtoAminoType {
+  type: "cosmos-sdk/DecProto";
+  value: DecProtoAmino;
 }
 
 /** DecProto defines a Protobuf wrapper around a Dec object. */

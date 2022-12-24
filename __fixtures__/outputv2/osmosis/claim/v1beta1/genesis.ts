@@ -28,6 +28,10 @@ export interface GenesisStateAmino {
   /** list of claim records, one for every airdrop recipient */
   claim_records: ClaimRecordAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/claim/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateSDKType {

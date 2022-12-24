@@ -99,6 +99,10 @@ export interface ParseRequestAmino {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disable_macros: boolean;
 }
+export interface ParseRequestAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: ParseRequestAmino;
+}
 
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
@@ -124,6 +128,10 @@ export interface ParseResponseAmino {
 
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
+}
+export interface ParseResponseAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: ParseResponseAmino;
 }
 
 /** Response message for the Parse method. */
@@ -183,6 +191,10 @@ export interface CheckRequestAmino {
    */
   no_std_env: boolean;
 }
+export interface CheckRequestAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: CheckRequestAmino;
+}
 
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -209,6 +221,10 @@ export interface CheckResponseAmino {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
 }
+export interface CheckResponseAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: CheckResponseAmino;
+}
 
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -222,6 +238,10 @@ export interface EvalRequest_BindingsEntry {
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
   value?: ExprValueAmino;
+}
+export interface EvalRequest_BindingsEntryAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.undefined";
+  value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
@@ -267,6 +287,10 @@ export interface EvalRequestAmino {
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
 }
+export interface EvalRequestAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: EvalRequestAmino;
+}
 
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -305,6 +329,10 @@ export interface EvalResponseAmino {
    */
   issues: StatusAmino[];
 }
+export interface EvalResponseAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: EvalResponseAmino;
+}
 
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
@@ -342,6 +370,10 @@ export interface IssueDetailsAmino {
 
   /** Expression ID from [Expr][], 0 if unknown. */
   id: string;
+}
+export interface IssueDetailsAminoType {
+  type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: IssueDetailsAmino;
 }
 
 /**

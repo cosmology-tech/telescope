@@ -19,6 +19,10 @@ export interface CommitInfoAmino {
   version: string;
   store_infos: StoreInfoAmino[];
 }
+export interface CommitInfoAminoType {
+  type: "cosmos-sdk/CommitInfo";
+  value: CommitInfoAmino;
+}
 
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -46,6 +50,10 @@ export interface StoreInfoAmino {
   name: string;
   commit_id?: CommitIDAmino;
 }
+export interface StoreInfoAminoType {
+  type: "cosmos-sdk/StoreInfo";
+  value: StoreInfoAmino;
+}
 
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
@@ -72,6 +80,10 @@ export interface CommitID {
 export interface CommitIDAmino {
   version: string;
   hash: Uint8Array;
+}
+export interface CommitIDAminoType {
+  type: "cosmos-sdk/CommitID";
+  value: CommitIDAmino;
 }
 
 /**

@@ -21,6 +21,10 @@ export interface GenesisStateAmino {
   distr_info?: DistrInfoAmino;
   pool_to_gauges?: PoolToGaugesAmino;
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/poolincentives/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {

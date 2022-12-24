@@ -12,6 +12,10 @@ export interface Params {
 export interface ParamsAmino {
   deployment_min_deposit?: CoinAmino;
 }
+export interface ParamsAminoType {
+  type: "/akash.deployment.v1beta2.Params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {

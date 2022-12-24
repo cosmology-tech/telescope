@@ -18,6 +18,10 @@ export interface GenesisStateAmino {
   leases: LeaseAmino[];
   params?: ParamsAmino;
 }
+export interface GenesisStateAminoType {
+  type: "/akash.market.v1beta2.GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateSDKType {

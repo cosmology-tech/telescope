@@ -39,6 +39,10 @@ export interface EvalStateAmino {
    */
   results: EvalState_ResultAmino[];
 }
+export interface EvalStateAminoType {
+  type: "/google.api.expr.v1alpha1.EvalState";
+  value: EvalStateAmino;
+}
 
 /**
  * The state of an evaluation.
@@ -66,6 +70,10 @@ export interface EvalState_ResultAmino {
 
   /** The index in `values` of the resulting value. */
   value: string;
+}
+export interface EvalState_ResultAminoType {
+  type: "/google.api.expr.v1alpha1.Result";
+  value: EvalState_ResultAmino;
 }
 
 /** A single evalution result. */
@@ -181,6 +189,10 @@ export interface ExprValueAmino {
    */
   unknown?: UnknownSetAmino;
 }
+export interface ExprValueAminoType {
+  type: "/google.api.expr.v1alpha1.ExprValue";
+  value: ExprValueAmino;
+}
 
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
@@ -207,6 +219,10 @@ export interface ErrorSet {
 export interface ErrorSetAmino {
   /** The errors in the set. */
   errors: StatusAmino[];
+}
+export interface ErrorSetAminoType {
+  type: "/google.api.expr.v1alpha1.ErrorSet";
+  value: ErrorSetAmino;
 }
 
 /**
@@ -236,6 +252,10 @@ export interface UnknownSet {
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
   exprs: string[];
+}
+export interface UnknownSetAminoType {
+  type: "/google.api.expr.v1alpha1.UnknownSet";
+  value: UnknownSetAmino;
 }
 
 /**

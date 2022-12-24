@@ -64,6 +64,10 @@ export interface CertificateIDAmino {
   owner: string;
   serial: string;
 }
+export interface CertificateIDAminoType {
+  type: "/akash.cert.v1beta2.CertificateID";
+  value: CertificateIDAmino;
+}
 
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
@@ -83,6 +87,10 @@ export interface CertificateAmino {
   state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
+}
+export interface CertificateAminoType {
+  type: "/akash.cert.v1beta2.Certificate";
+  value: CertificateAmino;
 }
 
 /** Certificate stores state, certificate and it's public key */
@@ -105,6 +113,10 @@ export interface CertificateFilterAmino {
   serial: string;
   state: string;
 }
+export interface CertificateFilterAminoType {
+  type: "/akash.cert.v1beta2.CertificateFilter";
+  value: CertificateFilterAmino;
+}
 
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
@@ -126,6 +138,10 @@ export interface MsgCreateCertificateAmino {
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
+export interface MsgCreateCertificateAminoType {
+  type: "/akash.cert.v1beta2.MsgCreateCertificate";
+  value: MsgCreateCertificateAmino;
+}
 
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
@@ -139,6 +155,10 @@ export interface MsgCreateCertificateResponse {}
 
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponseAmino {}
+export interface MsgCreateCertificateResponseAminoType {
+  type: "/akash.cert.v1beta2.MsgCreateCertificateResponse";
+  value: MsgCreateCertificateResponseAmino;
+}
 
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponseSDKType {}
@@ -152,6 +172,10 @@ export interface MsgRevokeCertificate {
 export interface MsgRevokeCertificateAmino {
   id?: CertificateIDAmino;
 }
+export interface MsgRevokeCertificateAminoType {
+  type: "/akash.cert.v1beta2.MsgRevokeCertificate";
+  value: MsgRevokeCertificateAmino;
+}
 
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
@@ -163,6 +187,10 @@ export interface MsgRevokeCertificateResponse {}
 
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponseAmino {}
+export interface MsgRevokeCertificateResponseAminoType {
+  type: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
+  value: MsgRevokeCertificateResponseAmino;
+}
 
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponseSDKType {}

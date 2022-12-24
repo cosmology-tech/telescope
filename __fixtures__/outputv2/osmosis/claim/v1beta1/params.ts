@@ -23,6 +23,10 @@ export interface ParamsAmino {
   /** denom of claimable asset */
   claim_denom: string;
 }
+export interface ParamsAminoType {
+  type: "osmosis/claim/params";
+  value: ParamsAmino;
+}
 
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {

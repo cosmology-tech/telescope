@@ -28,6 +28,10 @@ export interface UpdateFeeTokenProposalAmino {
   description: string;
   feetoken?: FeeTokenAmino;
 }
+export interface UpdateFeeTokenProposalAminoType {
+  type: "osmosis/txfees/update-fee-token-proposal";
+  value: UpdateFeeTokenProposalAmino;
+}
 
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee

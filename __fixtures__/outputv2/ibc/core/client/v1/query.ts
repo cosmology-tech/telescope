@@ -22,6 +22,10 @@ export interface QueryClientStateRequestAmino {
   /** client state unique identifier */
   client_id: string;
 }
+export interface QueryClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryClientStateRequest";
+  value: QueryClientStateRequestAmino;
+}
 
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -62,6 +66,10 @@ export interface QueryClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryClientStateResponse";
+  value: QueryClientStateResponseAmino;
+}
 
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
@@ -90,6 +98,10 @@ export interface QueryClientStatesRequest {
 export interface QueryClientStatesRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryClientStatesRequestAminoType {
+  type: "cosmos-sdk/QueryClientStatesRequest";
+  value: QueryClientStatesRequestAmino;
 }
 
 /**
@@ -122,6 +134,10 @@ export interface QueryClientStatesResponseAmino {
 
   /** pagination response */
   pagination?: PageResponseAmino;
+}
+export interface QueryClientStatesResponseAminoType {
+  type: "cosmos-sdk/QueryClientStatesResponse";
+  value: QueryClientStatesResponseAmino;
 }
 
 /**
@@ -176,6 +192,10 @@ export interface QueryConsensusStateRequestAmino {
    */
   latest_height: boolean;
 }
+export interface QueryConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryConsensusStateRequest";
+  value: QueryConsensusStateRequestAmino;
+}
 
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
@@ -218,6 +238,10 @@ export interface QueryConsensusStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryConsensusStateResponse";
+  value: QueryConsensusStateResponseAmino;
+}
 
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
@@ -252,6 +276,10 @@ export interface QueryConsensusStatesRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
+export interface QueryConsensusStatesRequestAminoType {
+  type: "cosmos-sdk/QueryConsensusStatesRequest";
+  value: QueryConsensusStatesRequestAmino;
+}
 
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
@@ -285,6 +313,10 @@ export interface QueryConsensusStatesResponseAmino {
   /** pagination response */
   pagination?: PageResponseAmino;
 }
+export interface QueryConsensusStatesResponseAminoType {
+  type: "cosmos-sdk/QueryConsensusStatesResponse";
+  value: QueryConsensusStatesResponseAmino;
+}
 
 /**
  * QueryConsensusStatesResponse is the response type for the
@@ -312,6 +344,10 @@ export interface QueryClientStatusRequestAmino {
   /** client unique identifier */
   client_id: string;
 }
+export interface QueryClientStatusRequestAminoType {
+  type: "cosmos-sdk/QueryClientStatusRequest";
+  value: QueryClientStatusRequestAmino;
+}
 
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
@@ -336,6 +372,10 @@ export interface QueryClientStatusResponse {
 export interface QueryClientStatusResponseAmino {
   status: string;
 }
+export interface QueryClientStatusResponseAminoType {
+  type: "cosmos-sdk/QueryClientStatusResponse";
+  value: QueryClientStatusResponseAmino;
+}
 
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
@@ -356,6 +396,10 @@ export interface QueryClientParamsRequest {}
  * method.
  */
 export interface QueryClientParamsRequestAmino {}
+export interface QueryClientParamsRequestAminoType {
+  type: "cosmos-sdk/QueryClientParamsRequest";
+  value: QueryClientParamsRequestAmino;
+}
 
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
@@ -380,6 +424,10 @@ export interface QueryClientParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
+export interface QueryClientParamsResponseAminoType {
+  type: "cosmos-sdk/QueryClientParamsResponse";
+  value: QueryClientParamsResponseAmino;
+}
 
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
@@ -400,6 +448,10 @@ export interface QueryUpgradedClientStateRequest {}
  * Query/UpgradedClientState RPC method
  */
 export interface QueryUpgradedClientStateRequestAmino {}
+export interface QueryUpgradedClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryUpgradedClientStateRequest";
+  value: QueryUpgradedClientStateRequestAmino;
+}
 
 /**
  * QueryUpgradedClientStateRequest is the request type for the
@@ -424,6 +476,10 @@ export interface QueryUpgradedClientStateResponseAmino {
   /** client state associated with the request identifier */
   upgraded_client_state?: AnyAmino;
 }
+export interface QueryUpgradedClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryUpgradedClientStateResponse";
+  value: QueryUpgradedClientStateResponseAmino;
+}
 
 /**
  * QueryUpgradedClientStateResponse is the response type for the
@@ -444,6 +500,10 @@ export interface QueryUpgradedConsensusStateRequest {}
  * Query/UpgradedConsensusState RPC method
  */
 export interface QueryUpgradedConsensusStateRequestAmino {}
+export interface QueryUpgradedConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
+  value: QueryUpgradedConsensusStateRequestAmino;
+}
 
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
@@ -467,6 +527,10 @@ export interface QueryUpgradedConsensusStateResponse {
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Consensus state associated with the request identifier */
   upgraded_consensus_state?: AnyAmino;
+}
+export interface QueryUpgradedConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
+  value: QueryUpgradedConsensusStateResponseAmino;
 }
 
 /**

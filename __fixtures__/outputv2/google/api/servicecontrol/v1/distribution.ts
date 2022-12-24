@@ -126,6 +126,10 @@ export interface DistributionAmino {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
+export interface DistributionAminoType {
+  type: "/google.api.servicecontrol.v1.Distribution";
+  value: DistributionAmino;
+}
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -199,6 +203,10 @@ export interface Distribution_LinearBucketsAmino {
    */
   offset: number;
 }
+export interface Distribution_LinearBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Distribution_LinearBucketsAmino;
+}
 
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsSDKType {
@@ -258,6 +266,10 @@ export interface Distribution_ExponentialBucketsAmino {
    */
   scale: number;
 }
+export interface Distribution_ExponentialBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Distribution_ExponentialBucketsAmino;
+}
 
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
@@ -308,6 +320,10 @@ export interface Distribution_ExplicitBucketsAmino {
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
+}
+export interface Distribution_ExplicitBucketsAminoType {
+  type: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Distribution_ExplicitBucketsAmino;
 }
 
 /** Describing buckets with arbitrary user-provided width. */

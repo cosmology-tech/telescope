@@ -182,6 +182,10 @@ export interface CheckedExpr_ReferenceMapEntryAmino {
   key: string;
   value?: ReferenceAmino;
 }
+export interface CheckedExpr_ReferenceMapEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: CheckedExpr_ReferenceMapEntryAmino;
+}
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: Long;
   value?: ReferenceSDKType;
@@ -193,6 +197,10 @@ export interface CheckedExpr_TypeMapEntry {
 export interface CheckedExpr_TypeMapEntryAmino {
   key: string;
   value?: TypeAmino;
+}
+export interface CheckedExpr_TypeMapEntryAminoType {
+  type: "/google.api.expr.v1alpha1.undefined";
+  value: CheckedExpr_TypeMapEntryAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: Long;
@@ -313,6 +321,10 @@ export interface CheckedExprAmino {
    * may have structural differences.
    */
   expr?: ExprAmino;
+}
+export interface CheckedExprAminoType {
+  type: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: CheckedExprAmino;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -455,6 +467,10 @@ export interface TypeAmino {
   /** Abstract, application defined type. */
   abstract_type?: Type_AbstractTypeAmino;
 }
+export interface TypeAminoType {
+  type: "/google.api.expr.v1alpha1.Type";
+  value: TypeAmino;
+}
 
 /** Represents a CEL type. */
 export interface TypeSDKType {
@@ -484,6 +500,10 @@ export interface Type_ListTypeAmino {
   /** The element type. */
   elem_type?: TypeAmino;
 }
+export interface Type_ListTypeAminoType {
+  type: "/google.api.expr.v1alpha1.ListType";
+  value: Type_ListTypeAmino;
+}
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
@@ -506,6 +526,10 @@ export interface Type_MapTypeAmino {
 
   /** The type of the value. */
   value_type?: TypeAmino;
+}
+export interface Type_MapTypeAminoType {
+  type: "/google.api.expr.v1alpha1.MapType";
+  value: Type_MapTypeAmino;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
@@ -531,6 +555,10 @@ export interface Type_FunctionTypeAmino {
   /** Argument types of the function. */
   arg_types: TypeAmino[];
 }
+export interface Type_FunctionTypeAminoType {
+  type: "/google.api.expr.v1alpha1.FunctionType";
+  value: Type_FunctionTypeAmino;
+}
 
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
@@ -554,6 +582,10 @@ export interface Type_AbstractTypeAmino {
 
   /** Parameter types for this abstract type. */
   parameter_types: TypeAmino[];
+}
+export interface Type_AbstractTypeAminoType {
+  type: "/google.api.expr.v1alpha1.AbstractType";
+  value: Type_AbstractTypeAmino;
 }
 
 /** Application defined abstract type. */
@@ -613,6 +645,10 @@ export interface DeclAmino {
   /** Function declaration. */
   function?: Decl_FunctionDeclAmino;
 }
+export interface DeclAminoType {
+  type: "/google.api.expr.v1alpha1.Decl";
+  value: DeclAmino;
+}
 
 /**
  * Represents a declaration of a named value or function.
@@ -669,6 +705,10 @@ export interface Decl_IdentDeclAmino {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface Decl_IdentDeclAminoType {
+  type: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Decl_IdentDeclAmino;
+}
 
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
@@ -706,6 +746,10 @@ export interface Decl_FunctionDecl {
 export interface Decl_FunctionDeclAmino {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_OverloadAmino[];
+}
+export interface Decl_FunctionDeclAminoType {
+  type: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Decl_FunctionDeclAmino;
 }
 
 /**
@@ -844,6 +888,10 @@ export interface Decl_FunctionDecl_OverloadAmino {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface Decl_FunctionDecl_OverloadAminoType {
+  type: "/google.api.expr.v1alpha1.Overload";
+  value: Decl_FunctionDecl_OverloadAmino;
+}
 
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -912,6 +960,10 @@ export interface ReferenceAmino {
    * constant if known at compile time.
    */
   value?: ConstantAmino;
+}
+export interface ReferenceAminoType {
+  type: "/google.api.expr.v1alpha1.Reference";
+  value: ReferenceAmino;
 }
 
 /** Describes a resolved reference to a declaration. */

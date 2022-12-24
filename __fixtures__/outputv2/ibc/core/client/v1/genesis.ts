@@ -40,6 +40,10 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated client identifier */
   next_client_sequence: string;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateSDKType {
@@ -74,6 +78,10 @@ export interface GenesisMetadataAmino {
   /** metadata value */
   value: Uint8Array;
 }
+export interface GenesisMetadataAminoType {
+  type: "cosmos-sdk/GenesisMetadata";
+  value: GenesisMetadataAmino;
+}
 
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
@@ -100,6 +108,10 @@ export interface IdentifiedGenesisMetadata {
 export interface IdentifiedGenesisMetadataAmino {
   client_id: string;
   client_metadata: GenesisMetadataAmino[];
+}
+export interface IdentifiedGenesisMetadataAminoType {
+  type: "cosmos-sdk/IdentifiedGenesisMetadata";
+  value: IdentifiedGenesisMetadataAmino;
 }
 
 /**

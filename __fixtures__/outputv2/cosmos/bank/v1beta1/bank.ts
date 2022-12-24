@@ -14,6 +14,10 @@ export interface ParamsAmino {
   send_enabled: SendEnabledAmino[];
   default_send_enabled: boolean;
 }
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
@@ -38,6 +42,10 @@ export interface SendEnabledAmino {
   denom: string;
   enabled: boolean;
 }
+export interface SendEnabledAminoType {
+  type: "cosmos-sdk/SendEnabled";
+  value: SendEnabledAmino;
+}
 
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
@@ -59,6 +67,10 @@ export interface InputAmino {
   address: string;
   coins: CoinAmino[];
 }
+export interface InputAminoType {
+  type: "cosmos-sdk/Input";
+  value: InputAmino;
+}
 
 /** Input models transaction input. */
 export interface InputSDKType {
@@ -76,6 +88,10 @@ export interface Output {
 export interface OutputAmino {
   address: string;
   coins: CoinAmino[];
+}
+export interface OutputAminoType {
+  type: "cosmos-sdk/Output";
+  value: OutputAmino;
 }
 
 /** Output models transaction outputs. */
@@ -104,6 +120,10 @@ export interface Supply {
 /** @deprecated */
 export interface SupplyAmino {
   total: CoinAmino[];
+}
+export interface SupplyAminoType {
+  type: "cosmos-sdk/Supply";
+  value: SupplyAmino;
 }
 
 /**
@@ -157,6 +177,10 @@ export interface DenomUnitAmino {
 
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
+}
+export interface DenomUnitAminoType {
+  type: "cosmos-sdk/DenomUnit";
+  value: DenomUnitAmino;
 }
 
 /**
@@ -267,6 +291,10 @@ export interface MetadataAmino {
    * Since: cosmos-sdk 0.46
    */
   uri_hash: string;
+}
+export interface MetadataAminoType {
+  type: "cosmos-sdk/Metadata";
+  value: MetadataAmino;
 }
 
 /**

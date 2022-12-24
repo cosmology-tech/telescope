@@ -23,6 +23,10 @@ export interface ParamsAmino {
    */
   minimum_risk_factor: string;
 }
+export interface ParamsAminoType {
+  type: "osmosis/params";
+  value: ParamsAmino;
+}
 
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {

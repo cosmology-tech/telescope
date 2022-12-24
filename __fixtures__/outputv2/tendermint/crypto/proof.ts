@@ -13,6 +13,10 @@ export interface ProofAmino {
   leaf_hash: Uint8Array;
   aunts: Uint8Array[];
 }
+export interface ProofAminoType {
+  type: "/tendermint.crypto.Proof";
+  value: ProofAmino;
+}
 export interface ProofSDKType {
   total: Long;
   index: Long;
@@ -33,6 +37,10 @@ export interface ValueOpAmino {
   /** To encode in ProofOp.Data */
   proof?: ProofAmino;
 }
+export interface ValueOpAminoType {
+  type: "/tendermint.crypto.ValueOp";
+  value: ValueOpAmino;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof?: ProofSDKType;
@@ -46,6 +54,10 @@ export interface DominoOpAmino {
   key: string;
   input: string;
   output: string;
+}
+export interface DominoOpAminoType {
+  type: "/tendermint.crypto.DominoOp";
+  value: DominoOpAmino;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -74,6 +86,10 @@ export interface ProofOpAmino {
   key: Uint8Array;
   data: Uint8Array;
 }
+export interface ProofOpAminoType {
+  type: "/tendermint.crypto.ProofOp";
+  value: ProofOpAmino;
+}
 
 /**
  * ProofOp defines an operation used for calculating Merkle root
@@ -94,6 +110,10 @@ export interface ProofOps {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsAmino {
   ops: ProofOpAmino[];
+}
+export interface ProofOpsAminoType {
+  type: "/tendermint.crypto.ProofOps";
+  value: ProofOpsAmino;
 }
 
 /** ProofOps is Merkle proof defined by the list of ProofOps */

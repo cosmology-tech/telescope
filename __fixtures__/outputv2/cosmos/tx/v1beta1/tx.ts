@@ -43,6 +43,10 @@ export interface TxAmino {
    */
   signatures: Uint8Array[];
 }
+export interface TxAminoType {
+  type: "cosmos-sdk/Tx";
+  value: TxAmino;
+}
 
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
@@ -106,6 +110,10 @@ export interface TxRawAmino {
    */
   signatures: Uint8Array[];
 }
+export interface TxRawAminoType {
+  type: "cosmos-sdk/TxRaw";
+  value: TxRawAmino;
+}
 
 /**
  * TxRaw is a variant of Tx that pins the signer's exact binary representation
@@ -168,6 +176,10 @@ export interface SignDocAmino {
 
   /** account_number is the account number of the account in state */
   account_number: string;
+}
+export interface SignDocAminoType {
+  type: "cosmos-sdk/SignDoc";
+  value: SignDocAmino;
 }
 
 /** SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT. */
@@ -248,6 +260,10 @@ export interface SignDocDirectAuxAmino {
    * empty if the signer is not the tipper for this transaction.
    */
   tip?: TipAmino;
+}
+export interface SignDocDirectAuxAminoType {
+  type: "cosmos-sdk/SignDocDirectAux";
+  value: SignDocDirectAuxAmino;
 }
 
 /**
@@ -346,6 +362,10 @@ export interface TxBodyAmino {
    */
   non_critical_extension_options: AnyAmino[];
 }
+export interface TxBodyAminoType {
+  type: "cosmos-sdk/TxBody";
+  value: TxBodyAmino;
+}
 
 /** TxBody is the body of a transaction that all signers sign over. */
 export interface TxBodySDKType {
@@ -413,6 +433,10 @@ export interface AuthInfoAmino {
    */
   tip?: TipAmino;
 }
+export interface AuthInfoAminoType {
+  type: "cosmos-sdk/AuthInfo";
+  value: AuthInfoAmino;
+}
 
 /**
  * AuthInfo describes the fee and signer modes that are used to sign a
@@ -475,6 +499,10 @@ export interface SignerInfoAmino {
    */
   sequence: string;
 }
+export interface SignerInfoAminoType {
+  type: "cosmos-sdk/SignerInfo";
+  value: SignerInfoAmino;
+}
 
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
@@ -503,6 +531,10 @@ export interface ModeInfoAmino {
   /** multi represents a nested multisig signer */
   multi?: ModeInfo_MultiAmino;
 }
+export interface ModeInfoAminoType {
+  type: "cosmos-sdk/ModeInfo";
+  value: ModeInfoAmino;
+}
 
 /** ModeInfo describes the signing mode of a single or nested multisig signer. */
 export interface ModeInfoSDKType {
@@ -528,6 +560,10 @@ export interface ModeInfo_Single {
 export interface ModeInfo_SingleAmino {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
+}
+export interface ModeInfo_SingleAminoType {
+  type: "cosmos-sdk/Single";
+  value: ModeInfo_SingleAmino;
 }
 
 /**
@@ -561,6 +597,10 @@ export interface ModeInfo_MultiAmino {
    * which could include nested multisig public keys
    */
   mode_infos: ModeInfoAmino[];
+}
+export interface ModeInfo_MultiAminoType {
+  type: "cosmos-sdk/Multi";
+  value: ModeInfo_MultiAmino;
 }
 
 /** Multi is the mode info for a multisig public key */
@@ -628,6 +668,10 @@ export interface FeeAmino {
    */
   granter: string;
 }
+export interface FeeAminoType {
+  type: "cosmos-sdk/Fee";
+  value: FeeAmino;
+}
 
 /**
  * Fee includes the amount of coins paid in fees and the maximum
@@ -665,6 +709,10 @@ export interface TipAmino {
 
   /** tipper is the address of the account paying for the tip */
   tipper: string;
+}
+export interface TipAminoType {
+  type: "cosmos-sdk/Tip";
+  value: TipAmino;
 }
 
 /**
@@ -735,6 +783,10 @@ export interface AuxSignerDataAmino {
 
   /** sig is the signature of the sign doc. */
   sig: Uint8Array;
+}
+export interface AuxSignerDataAminoType {
+  type: "cosmos-sdk/AuxSignerData";
+  value: AuxSignerDataAmino;
 }
 
 /**

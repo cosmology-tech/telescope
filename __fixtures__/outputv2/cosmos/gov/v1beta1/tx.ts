@@ -29,6 +29,10 @@ export interface MsgSubmitProposalAmino {
   initial_deposit: CoinAmino[];
   proposer: string;
 }
+export interface MsgSubmitProposalAminoType {
+  type: "cosmos-sdk/MsgSubmitProposal";
+  value: MsgSubmitProposalAmino;
+}
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -49,6 +53,10 @@ export interface MsgSubmitProposalResponse {
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
 }
+export interface MsgSubmitProposalResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitProposalResponse";
+  value: MsgSubmitProposalResponseAmino;
+}
 
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseSDKType {
@@ -68,6 +76,10 @@ export interface MsgVoteAmino {
   voter: string;
   option: VoteOption;
 }
+export interface MsgVoteAminoType {
+  type: "cosmos-sdk/MsgVote";
+  value: MsgVoteAmino;
+}
 
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteSDKType {
@@ -81,6 +93,10 @@ export interface MsgVoteResponse {}
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
+export interface MsgVoteResponseAminoType {
+  type: "cosmos-sdk/MsgVoteResponse";
+  value: MsgVoteResponseAmino;
+}
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseSDKType {}
@@ -105,6 +121,10 @@ export interface MsgVoteWeightedAmino {
   proposal_id: string;
   voter: string;
   options: WeightedVoteOptionAmino[];
+}
+export interface MsgVoteWeightedAminoType {
+  type: "cosmos-sdk/MsgVoteWeighted";
+  value: MsgVoteWeightedAmino;
 }
 
 /**
@@ -131,6 +151,10 @@ export interface MsgVoteWeightedResponse {}
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponseAmino {}
+export interface MsgVoteWeightedResponseAminoType {
+  type: "cosmos-sdk/MsgVoteWeightedResponse";
+  value: MsgVoteWeightedResponseAmino;
+}
 
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
@@ -152,6 +176,10 @@ export interface MsgDepositAmino {
   depositor: string;
   amount: CoinAmino[];
 }
+export interface MsgDepositAminoType {
+  type: "cosmos-sdk/MsgDeposit";
+  value: MsgDepositAmino;
+}
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositSDKType {
@@ -165,6 +193,10 @@ export interface MsgDepositResponse {}
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseAmino {}
+export interface MsgDepositResponseAminoType {
+  type: "cosmos-sdk/MsgDepositResponse";
+  value: MsgDepositResponseAmino;
+}
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseSDKType {}

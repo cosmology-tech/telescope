@@ -32,6 +32,10 @@ export interface GenesisStateAmino {
    */
   reduction_started_epoch: string;
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/mint/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {

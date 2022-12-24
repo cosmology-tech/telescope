@@ -37,6 +37,10 @@ export interface ParamsAmino {
    */
   variance: string;
 }
+export interface ParamsAminoType {
+  type: "/akash.inflation.v1beta2.Params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {

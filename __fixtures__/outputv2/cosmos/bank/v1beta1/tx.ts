@@ -17,6 +17,10 @@ export interface MsgSendAmino {
   to_address: string;
   amount: CoinAmino[];
 }
+export interface MsgSendAminoType {
+  type: "cosmos-sdk/MsgSend";
+  value: MsgSendAmino;
+}
 
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
@@ -30,6 +34,10 @@ export interface MsgSendResponse {}
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoType {
+  type: "cosmos-sdk/MsgSendResponse";
+  value: MsgSendResponseAmino;
+}
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
@@ -45,6 +53,10 @@ export interface MsgMultiSendAmino {
   inputs: InputAmino[];
   outputs: OutputAmino[];
 }
+export interface MsgMultiSendAminoType {
+  type: "cosmos-sdk/MsgMultiSend";
+  value: MsgMultiSendAmino;
+}
 
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendSDKType {
@@ -57,6 +69,10 @@ export interface MsgMultiSendResponse {}
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseAmino {}
+export interface MsgMultiSendResponseAminoType {
+  type: "cosmos-sdk/MsgMultiSendResponse";
+  value: MsgMultiSendResponseAmino;
+}
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseSDKType {}

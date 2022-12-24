@@ -31,6 +31,10 @@ export interface DenomTraceAmino {
   /** base denomination of the relayed fungible token. */
   base_denom: string;
 }
+export interface DenomTraceAminoType {
+  type: "cosmos-sdk/DenomTrace";
+  value: DenomTraceAmino;
+}
 
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -79,6 +83,10 @@ export interface ParamsAmino {
    * chain.
    */
   receive_enabled: boolean;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /**

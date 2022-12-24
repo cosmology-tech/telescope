@@ -88,6 +88,10 @@ export interface SmoothWeightChangeParamsAmino {
    */
   target_pool_weights: PoolAssetAmino[];
 }
+export interface SmoothWeightChangeParamsAminoType {
+  type: "osmosis/gamm/smooth-weight-change-params";
+  value: SmoothWeightChangeParamsAmino;
+}
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -131,6 +135,10 @@ export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
+}
+export interface PoolParamsAminoType {
+  type: "osmosis/gamm/pool-params";
+  value: PoolParamsAmino;
 }
 
 /**
@@ -177,6 +185,10 @@ export interface PoolAssetAmino {
 
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface PoolAssetAminoType {
+  type: "osmosis/gamm/pool-asset";
+  value: PoolAssetAmino;
 }
 
 /**
@@ -248,6 +260,10 @@ export interface PoolAmino {
 
   /** sum of all non-normalized pool weights */
   total_weight: string;
+}
+export interface PoolAminoType {
+  type: "osmosis/gamm/pool";
+  value: PoolAmino;
 }
 export interface PoolSDKType {
   address: string;

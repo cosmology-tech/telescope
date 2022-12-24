@@ -23,6 +23,10 @@ export interface MsgGrantAmino {
   grantee: string;
   grant?: GrantAmino;
 }
+export interface MsgGrantAminoType {
+  type: "cosmos-sdk/MsgGrant";
+  value: MsgGrantAmino;
+}
 
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -42,6 +46,10 @@ export interface MsgExecResponse {
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseAmino {
   results: Uint8Array[];
+}
+export interface MsgExecResponseAminoType {
+  type: "cosmos-sdk/MsgExecResponse";
+  value: MsgExecResponseAmino;
 }
 
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
@@ -80,6 +88,10 @@ export interface MsgExecAmino {
    */
   msgs: AnyAmino[];
 }
+export interface MsgExecAminoType {
+  type: "cosmos-sdk/MsgExec";
+  value: MsgExecAmino;
+}
 
 /**
  * MsgExec attempts to execute the provided messages using
@@ -96,6 +108,10 @@ export interface MsgGrantResponse {}
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponseAmino {}
+export interface MsgGrantResponseAminoType {
+  type: "cosmos-sdk/MsgGrantResponse";
+  value: MsgGrantResponseAmino;
+}
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponseSDKType {}
@@ -119,6 +135,10 @@ export interface MsgRevokeAmino {
   grantee: string;
   msg_type_url: string;
 }
+export interface MsgRevokeAminoType {
+  type: "cosmos-sdk/MsgRevoke";
+  value: MsgRevokeAmino;
+}
 
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
@@ -135,6 +155,10 @@ export interface MsgRevokeResponse {}
 
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponseAmino {}
+export interface MsgRevokeResponseAminoType {
+  type: "cosmos-sdk/MsgRevokeResponse";
+  value: MsgRevokeResponseAmino;
+}
 
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponseSDKType {}

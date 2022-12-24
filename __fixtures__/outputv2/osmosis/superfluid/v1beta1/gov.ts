@@ -22,6 +22,10 @@ export interface SetSuperfluidAssetsProposalAmino {
   description: string;
   assets: SuperfluidAssetAmino[];
 }
+export interface SetSuperfluidAssetsProposalAminoType {
+  type: "osmosis/v1beta1/set-superfluid-assets-proposal";
+  value: SetSuperfluidAssetsProposalAmino;
+}
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -51,6 +55,10 @@ export interface RemoveSuperfluidAssetsProposalAmino {
   title: string;
   description: string;
   superfluid_asset_denoms: string[];
+}
+export interface RemoveSuperfluidAssetsProposalAminoType {
+  type: "osmosis/v1beta1/remove-superfluid-assets-proposal";
+  value: RemoveSuperfluidAssetsProposalAmino;
 }
 
 /**
@@ -83,6 +91,10 @@ export interface UpdateUnpoolWhiteListProposalAmino {
   description: string;
   ids: string[];
   is_overwrite: boolean;
+}
+export interface UpdateUnpoolWhiteListProposalAminoType {
+  type: "osmosis/v1beta1/update-unpool-white-list-proposal";
+  value: UpdateUnpoolWhiteListProposalAmino;
 }
 
 /**

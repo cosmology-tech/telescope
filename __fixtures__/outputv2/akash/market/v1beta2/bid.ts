@@ -90,6 +90,10 @@ export interface MsgCreateBidAmino {
   price?: DecCoinAmino;
   deposit?: CoinAmino;
 }
+export interface MsgCreateBidAminoType {
+  type: "/akash.market.v1beta2.MsgCreateBid";
+  value: MsgCreateBidAmino;
+}
 
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
@@ -104,6 +108,10 @@ export interface MsgCreateBidResponse {}
 
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseAmino {}
+export interface MsgCreateBidResponseAminoType {
+  type: "/akash.market.v1beta2.MsgCreateBidResponse";
+  value: MsgCreateBidResponseAmino;
+}
 
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseSDKType {}
@@ -117,6 +125,10 @@ export interface MsgCloseBid {
 export interface MsgCloseBidAmino {
   bid_id?: BidIDAmino;
 }
+export interface MsgCloseBidAminoType {
+  type: "/akash.market.v1beta2.MsgCloseBid";
+  value: MsgCloseBidAmino;
+}
 
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
@@ -128,6 +140,10 @@ export interface MsgCloseBidResponse {}
 
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseAmino {}
+export interface MsgCloseBidResponseAminoType {
+  type: "/akash.market.v1beta2.MsgCloseBidResponse";
+  value: MsgCloseBidResponseAmino;
+}
 
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseSDKType {}
@@ -154,6 +170,10 @@ export interface BidIDAmino {
   gseq: number;
   oseq: number;
   provider: string;
+}
+export interface BidIDAminoType {
+  type: "/akash.market.v1beta2.BidID";
+  value: BidIDAmino;
 }
 
 /**
@@ -183,6 +203,10 @@ export interface BidAmino {
   price?: DecCoinAmino;
   created_at: string;
 }
+export interface BidAminoType {
+  type: "/akash.market.v1beta2.Bid";
+  value: BidAmino;
+}
 
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
@@ -210,6 +234,10 @@ export interface BidFiltersAmino {
   oseq: number;
   provider: string;
   state: string;
+}
+export interface BidFiltersAminoType {
+  type: "/akash.market.v1beta2.BidFilters";
+  value: BidFiltersAmino;
 }
 
 /** BidFilters defines flags for bid list filter */

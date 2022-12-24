@@ -22,6 +22,10 @@ export interface QueryContractInfoRequestAmino {
   /** address is the address of the contract to query */
   address: string;
 }
+export interface QueryContractInfoRequestAminoType {
+  type: "wasm/QueryContractInfoRequest";
+  value: QueryContractInfoRequestAmino;
+}
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -49,6 +53,10 @@ export interface QueryContractInfoResponseAmino {
   /** address is the address of the contract */
   address: string;
   contract_info?: ContractInfoAmino;
+}
+export interface QueryContractInfoResponseAminoType {
+  type: "wasm/QueryContractInfoResponse";
+  value: QueryContractInfoResponseAmino;
 }
 
 /**
@@ -83,6 +91,10 @@ export interface QueryContractHistoryRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryContractHistoryRequestAminoType {
+  type: "wasm/QueryContractHistoryRequest";
+  value: QueryContractHistoryRequestAmino;
+}
 
 /**
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
@@ -113,6 +125,10 @@ export interface QueryContractHistoryResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryContractHistoryResponseAminoType {
+  type: "wasm/QueryContractHistoryResponse";
+  value: QueryContractHistoryResponseAmino;
 }
 
 /**
@@ -149,6 +165,10 @@ export interface QueryContractsByCodeRequestAmino {
   code_id: string;
   pagination?: PageRequestAmino;
 }
+export interface QueryContractsByCodeRequestAminoType {
+  type: "wasm/QueryContractsByCodeRequest";
+  value: QueryContractsByCodeRequestAmino;
+}
 
 /**
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
@@ -181,6 +201,10 @@ export interface QueryContractsByCodeResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryContractsByCodeResponseAminoType {
+  type: "wasm/QueryContractsByCodeResponse";
+  value: QueryContractsByCodeResponseAmino;
 }
 
 /**
@@ -215,6 +239,10 @@ export interface QueryAllContractStateRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryAllContractStateRequestAminoType {
+  type: "wasm/QueryAllContractStateRequest";
+  value: QueryAllContractStateRequestAmino;
+}
 
 /**
  * QueryAllContractStateRequest is the request type for the
@@ -246,6 +274,10 @@ export interface QueryAllContractStateResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
+export interface QueryAllContractStateResponseAminoType {
+  type: "wasm/QueryAllContractStateResponse";
+  value: QueryAllContractStateResponseAmino;
+}
 
 /**
  * QueryAllContractStateResponse is the response type for the
@@ -275,6 +307,10 @@ export interface QueryRawContractStateRequestAmino {
   address: string;
   query_data: Uint8Array;
 }
+export interface QueryRawContractStateRequestAminoType {
+  type: "wasm/QueryRawContractStateRequest";
+  value: QueryRawContractStateRequestAmino;
+}
 
 /**
  * QueryRawContractStateRequest is the request type for the
@@ -301,6 +337,10 @@ export interface QueryRawContractStateResponse {
 export interface QueryRawContractStateResponseAmino {
   /** Data contains the raw store data */
   data: Uint8Array;
+}
+export interface QueryRawContractStateResponseAminoType {
+  type: "wasm/QueryRawContractStateResponse";
+  value: QueryRawContractStateResponseAmino;
 }
 
 /**
@@ -334,6 +374,10 @@ export interface QuerySmartContractStateRequestAmino {
   /** QueryData contains the query data passed to the contract */
   query_data: Uint8Array;
 }
+export interface QuerySmartContractStateRequestAminoType {
+  type: "wasm/QuerySmartContractStateRequest";
+  value: QuerySmartContractStateRequestAmino;
+}
 
 /**
  * QuerySmartContractStateRequest is the request type for the
@@ -361,6 +405,10 @@ export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
+export interface QuerySmartContractStateResponseAminoType {
+  type: "wasm/QuerySmartContractStateResponse";
+  value: QuerySmartContractStateResponseAmino;
+}
 
 /**
  * QuerySmartContractStateResponse is the response type for the
@@ -381,6 +429,10 @@ export interface QueryCodeRequestAmino {
   /** grpc-gateway_out does not support Go style CodID */
   code_id: string;
 }
+export interface QueryCodeRequestAminoType {
+  type: "wasm/QueryCodeRequest";
+  value: QueryCodeRequestAmino;
+}
 
 /** QueryCodeRequest is the request type for the Query/Code RPC method */
 export interface QueryCodeRequestSDKType {
@@ -399,6 +451,10 @@ export interface CodeInfoResponseAmino {
   code_id: string;
   creator: string;
   data_hash: Uint8Array;
+}
+export interface CodeInfoResponseAminoType {
+  type: "wasm/CodeInfoResponse";
+  value: CodeInfoResponseAmino;
 }
 
 /** CodeInfoResponse contains code meta data from CodeInfo */
@@ -419,6 +475,10 @@ export interface QueryCodeResponseAmino {
   code_info?: CodeInfoResponseAmino;
   data: Uint8Array;
 }
+export interface QueryCodeResponseAminoType {
+  type: "wasm/QueryCodeResponse";
+  value: QueryCodeResponseAmino;
+}
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseSDKType {
@@ -436,6 +496,10 @@ export interface QueryCodesRequest {
 export interface QueryCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryCodesRequestAminoType {
+  type: "wasm/QueryCodesRequest";
+  value: QueryCodesRequestAmino;
 }
 
 /** QueryCodesRequest is the request type for the Query/Codes RPC method */
@@ -457,6 +521,10 @@ export interface QueryCodesResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryCodesResponseAminoType {
+  type: "wasm/QueryCodesResponse";
+  value: QueryCodesResponseAmino;
 }
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
@@ -481,6 +549,10 @@ export interface QueryPinnedCodesRequest {
 export interface QueryPinnedCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryPinnedCodesRequestAminoType {
+  type: "wasm/QueryPinnedCodesRequest";
+  value: QueryPinnedCodesRequestAmino;
 }
 
 /**
@@ -511,6 +583,10 @@ export interface QueryPinnedCodesResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryPinnedCodesResponseAminoType {
+  type: "wasm/QueryPinnedCodesResponse";
+  value: QueryPinnedCodesResponseAmino;
 }
 
 /**

@@ -28,6 +28,10 @@ export interface MsgSoftwareUpgradeAmino {
   /** plan is the upgrade plan. */
   plan?: PlanAmino;
 }
+export interface MsgSoftwareUpgradeAminoType {
+  type: "cosmos-sdk/MsgSoftwareUpgrade";
+  value: MsgSoftwareUpgradeAmino;
+}
 
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
@@ -52,6 +56,10 @@ export interface MsgSoftwareUpgradeResponse {}
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeResponseAmino {}
+export interface MsgSoftwareUpgradeResponseAminoType {
+  type: "cosmos-sdk/MsgSoftwareUpgradeResponse";
+  value: MsgSoftwareUpgradeResponseAmino;
+}
 
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
@@ -79,6 +87,10 @@ export interface MsgCancelUpgradeAmino {
   /** authority is the address of the governance account. */
   authority: string;
 }
+export interface MsgCancelUpgradeAminoType {
+  type: "cosmos-sdk/MsgCancelUpgrade";
+  value: MsgCancelUpgradeAmino;
+}
 
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
@@ -102,6 +114,10 @@ export interface MsgCancelUpgradeResponse {}
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponseAmino {}
+export interface MsgCancelUpgradeResponseAminoType {
+  type: "cosmos-sdk/MsgCancelUpgradeResponse";
+  value: MsgCancelUpgradeResponseAmino;
+}
 
 /**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.

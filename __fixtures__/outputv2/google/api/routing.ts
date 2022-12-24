@@ -747,6 +747,10 @@ export interface RoutingRuleAmino {
    */
   routing_parameters: RoutingParameterAmino[];
 }
+export interface RoutingRuleAminoType {
+  type: "/google.api.RoutingRule";
+  value: RoutingRuleAmino;
+}
 
 /**
  * Specifies the routing information that should be sent along with the request
@@ -1239,6 +1243,10 @@ export interface RoutingParameterAmino {
    * See Example 1 for more details.
    */
   path_template: string;
+}
+export interface RoutingParameterAminoType {
+  type: "/google.api.RoutingParameter";
+  value: RoutingParameterAmino;
 }
 
 /** A projection from an input message to the GRPC or REST header. */

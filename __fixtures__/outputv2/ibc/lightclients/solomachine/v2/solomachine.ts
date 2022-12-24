@@ -166,6 +166,10 @@ export interface ClientStateAmino {
    */
   allow_update_after_proposal: boolean;
 }
+export interface ClientStateAminoType {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
+}
 
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -213,6 +217,10 @@ export interface ConsensusStateAmino {
   diversifier: string;
   timestamp: string;
 }
+export interface ConsensusStateAminoType {
+  type: "cosmos-sdk/ConsensusState";
+  value: ConsensusStateAmino;
+}
 
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -244,6 +252,10 @@ export interface HeaderAmino {
   new_public_key?: AnyAmino;
   new_diversifier: string;
 }
+export interface HeaderAminoType {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
+}
 
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
@@ -274,6 +286,10 @@ export interface MisbehaviourAmino {
   sequence: string;
   signature_one?: SignatureAndDataAmino;
   signature_two?: SignatureAndDataAmino;
+}
+export interface MisbehaviourAminoType {
+  type: "cosmos-sdk/Misbehaviour";
+  value: MisbehaviourAmino;
 }
 
 /**
@@ -308,6 +324,10 @@ export interface SignatureAndDataAmino {
   data: Uint8Array;
   timestamp: string;
 }
+export interface SignatureAndDataAminoType {
+  type: "cosmos-sdk/SignatureAndData";
+  value: SignatureAndDataAmino;
+}
 
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -336,6 +356,10 @@ export interface TimestampedSignatureData {
 export interface TimestampedSignatureDataAmino {
   signature_data: Uint8Array;
   timestamp: string;
+}
+export interface TimestampedSignatureDataAminoType {
+  type: "cosmos-sdk/TimestampedSignatureData";
+  value: TimestampedSignatureDataAmino;
 }
 
 /**
@@ -372,6 +396,10 @@ export interface SignBytesAmino {
   /** marshaled data */
   data: Uint8Array;
 }
+export interface SignBytesAminoType {
+  type: "cosmos-sdk/SignBytes";
+  value: SignBytesAmino;
+}
 
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
@@ -399,6 +427,10 @@ export interface HeaderDataAmino {
   /** header diversifier */
   new_diversifier: string;
 }
+export interface HeaderDataAminoType {
+  type: "cosmos-sdk/HeaderData";
+  value: HeaderDataAmino;
+}
 
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
@@ -416,6 +448,10 @@ export interface ClientStateData {
 export interface ClientStateDataAmino {
   path: Uint8Array;
   client_state?: AnyAmino;
+}
+export interface ClientStateDataAminoType {
+  type: "cosmos-sdk/ClientStateData";
+  value: ClientStateDataAmino;
 }
 
 /** ClientStateData returns the SignBytes data for client state verification. */
@@ -440,6 +476,10 @@ export interface ConsensusStateData {
 export interface ConsensusStateDataAmino {
   path: Uint8Array;
   consensus_state?: AnyAmino;
+}
+export interface ConsensusStateDataAminoType {
+  type: "cosmos-sdk/ConsensusStateData";
+  value: ConsensusStateDataAmino;
 }
 
 /**
@@ -468,6 +508,10 @@ export interface ConnectionStateDataAmino {
   path: Uint8Array;
   connection?: ConnectionEndAmino;
 }
+export interface ConnectionStateDataAminoType {
+  type: "cosmos-sdk/ConnectionStateData";
+  value: ConnectionStateDataAmino;
+}
 
 /**
  * ConnectionStateData returns the SignBytes data for connection state
@@ -494,6 +538,10 @@ export interface ChannelStateData {
 export interface ChannelStateDataAmino {
   path: Uint8Array;
   channel?: ChannelAmino;
+}
+export interface ChannelStateDataAminoType {
+  type: "cosmos-sdk/ChannelStateData";
+  value: ChannelStateDataAmino;
 }
 
 /**
@@ -522,6 +570,10 @@ export interface PacketCommitmentDataAmino {
   path: Uint8Array;
   commitment: Uint8Array;
 }
+export interface PacketCommitmentDataAminoType {
+  type: "cosmos-sdk/PacketCommitmentData";
+  value: PacketCommitmentDataAmino;
+}
 
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
@@ -549,6 +601,10 @@ export interface PacketAcknowledgementDataAmino {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
+export interface PacketAcknowledgementDataAminoType {
+  type: "cosmos-sdk/PacketAcknowledgementData";
+  value: PacketAcknowledgementDataAmino;
+}
 
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
@@ -573,6 +629,10 @@ export interface PacketReceiptAbsenceData {
  */
 export interface PacketReceiptAbsenceDataAmino {
   path: Uint8Array;
+}
+export interface PacketReceiptAbsenceDataAminoType {
+  type: "cosmos-sdk/PacketReceiptAbsenceData";
+  value: PacketReceiptAbsenceDataAmino;
 }
 
 /**
@@ -599,6 +659,10 @@ export interface NextSequenceRecvData {
 export interface NextSequenceRecvDataAmino {
   path: Uint8Array;
   next_seq_recv: string;
+}
+export interface NextSequenceRecvDataAminoType {
+  type: "cosmos-sdk/NextSequenceRecvData";
+  value: NextSequenceRecvDataAmino;
 }
 
 /**

@@ -207,6 +207,10 @@ export interface DocumentationAmino {
    */
   overview: string;
 }
+export interface DocumentationAminoType {
+  type: "/google.api.Documentation";
+  value: DocumentationAmino;
+}
 
 /**
  * `Documentation` provides the information for describing a service.
@@ -317,6 +321,10 @@ export interface DocumentationRuleAmino {
    */
   deprecation_description: string;
 }
+export interface DocumentationRuleAminoType {
+  type: "/google.api.DocumentationRule";
+  value: DocumentationRuleAmino;
+}
 
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
@@ -395,6 +403,10 @@ export interface PageAmino {
    * honored in the generated docset.
    */
   subpages: PageAmino[];
+}
+export interface PageAminoType {
+  type: "/google.api.Page";
+  value: PageAmino;
 }
 
 /**

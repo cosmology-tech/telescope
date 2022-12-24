@@ -20,6 +20,10 @@ export interface MsgSubmitEvidenceAmino {
   submitter: string;
   evidence?: AnyAmino;
 }
+export interface MsgSubmitEvidenceAminoType {
+  type: "cosmos-sdk/MsgSubmitEvidence";
+  value: MsgSubmitEvidenceAmino;
+}
 
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -40,6 +44,10 @@ export interface MsgSubmitEvidenceResponse {
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitEvidenceResponse";
+  value: MsgSubmitEvidenceResponseAmino;
 }
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */

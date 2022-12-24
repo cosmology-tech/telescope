@@ -16,6 +16,10 @@ export interface GenesisStateAmino {
   classes: ClassAmino[];
   entries: EntryAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateSDKType {
@@ -39,6 +43,10 @@ export interface EntryAmino {
 
   /** nfts is a group of nfts of the same owner */
   nfts: NFTAmino[];
+}
+export interface EntryAminoType {
+  type: "cosmos-sdk/Entry";
+  value: EntryAmino;
 }
 
 /** Entry Defines all nft owned by a person */

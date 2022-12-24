@@ -17,6 +17,10 @@ export interface ResourceAmino {
   count: number;
   price?: DecCoinAmino;
 }
+export interface ResourceAminoType {
+  type: "/akash.deployment.v1beta2.Resource";
+  value: ResourceAmino;
+}
 
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {

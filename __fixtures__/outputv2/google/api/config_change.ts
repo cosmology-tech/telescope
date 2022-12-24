@@ -162,6 +162,10 @@ export interface ConfigChangeAmino {
    */
   advices: AdviceAmino[];
 }
+export interface ConfigChangeAminoType {
+  type: "/google.api.ConfigChange";
+  value: ConfigChangeAmino;
+}
 
 /**
  * Output generated from semantically comparing two versions of a service
@@ -201,6 +205,10 @@ export interface AdviceAmino {
    * be taken to mitigate any implied risks.
    */
   description: string;
+}
+export interface AdviceAminoType {
+  type: "/google.api.Advice";
+  value: AdviceAmino;
 }
 
 /**

@@ -9,6 +9,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestSDKType {}
@@ -21,6 +25,10 @@ export interface QueryParamsResponse {
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
@@ -44,6 +52,10 @@ export interface QuerySigningInfoRequest {
 export interface QuerySigningInfoRequestAmino {
   /** cons_address is the address to query signing info of */
   cons_address: string;
+}
+export interface QuerySigningInfoRequestAminoType {
+  type: "cosmos-sdk/QuerySigningInfoRequest";
+  value: QuerySigningInfoRequestAmino;
 }
 
 /**
@@ -71,6 +83,10 @@ export interface QuerySigningInfoResponseAmino {
   /** val_signing_info is the signing info of requested val cons address */
   val_signing_info?: ValidatorSigningInfoAmino;
 }
+export interface QuerySigningInfoResponseAminoType {
+  type: "cosmos-sdk/QuerySigningInfoResponse";
+  value: QuerySigningInfoResponseAmino;
+}
 
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
@@ -94,6 +110,10 @@ export interface QuerySigningInfosRequest {
  */
 export interface QuerySigningInfosRequestAmino {
   pagination?: PageRequestAmino;
+}
+export interface QuerySigningInfosRequestAminoType {
+  type: "cosmos-sdk/QuerySigningInfosRequest";
+  value: QuerySigningInfosRequestAmino;
 }
 
 /**
@@ -122,6 +142,10 @@ export interface QuerySigningInfosResponseAmino {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfoAmino[];
   pagination?: PageResponseAmino;
+}
+export interface QuerySigningInfosResponseAminoType {
+  type: "cosmos-sdk/QuerySigningInfosResponse";
+  value: QuerySigningInfosResponseAmino;
 }
 
 /**

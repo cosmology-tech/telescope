@@ -27,6 +27,10 @@ export interface IdentifiedClientStateAmino {
   /** client state */
   client_state?: AnyAmino;
 }
+export interface IdentifiedClientStateAminoType {
+  type: "cosmos-sdk/IdentifiedClientState";
+  value: IdentifiedClientStateAmino;
+}
 
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -60,6 +64,10 @@ export interface ConsensusStateWithHeightAmino {
   /** consensus state */
   consensus_state?: AnyAmino;
 }
+export interface ConsensusStateWithHeightAminoType {
+  type: "cosmos-sdk/ConsensusStateWithHeight";
+  value: ConsensusStateWithHeightAmino;
+}
 
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -92,6 +100,10 @@ export interface ClientConsensusStatesAmino {
 
   /** consensus states and their heights associated with the client */
   consensus_states: ConsensusStateWithHeightAmino[];
+}
+export interface ClientConsensusStatesAminoType {
+  type: "cosmos-sdk/ClientConsensusStates";
+  value: ClientConsensusStatesAmino;
 }
 
 /**
@@ -148,6 +160,10 @@ export interface ClientUpdateProposalAmino {
    */
   substitute_client_id: string;
 }
+export interface ClientUpdateProposalAminoType {
+  type: "cosmos-sdk/ClientUpdateProposal";
+  value: ClientUpdateProposalAmino;
+}
 
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -201,6 +217,10 @@ export interface UpgradeProposalAmino {
    */
   upgraded_client_state?: AnyAmino;
 }
+export interface UpgradeProposalAminoType {
+  type: "cosmos-sdk/UpgradeProposal";
+  value: UpgradeProposalAmino;
+}
 
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
@@ -252,6 +272,10 @@ export interface HeightAmino {
   /** the height within the given revision */
   revision_height: string;
 }
+export interface HeightAminoType {
+  type: "cosmos-sdk/Height";
+  value: HeightAmino;
+}
 
 /**
  * Height is a monotonically increasing data type
@@ -280,6 +304,10 @@ export interface Params {
 export interface ParamsAmino {
   /** allowed_clients defines the list of allowed client state types. */
   allowed_clients: string[];
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the set of IBC light client parameters. */

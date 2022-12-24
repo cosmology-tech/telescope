@@ -159,6 +159,10 @@ export interface DistributionAmino {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
+export interface DistributionAminoType {
+  type: "/google.api.Distribution";
+  value: DistributionAmino;
+}
 
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -202,6 +206,10 @@ export interface Distribution_RangeAmino {
 
   /** The maximum of the population values. */
   max: number;
+}
+export interface Distribution_RangeAminoType {
+  type: "/google.api.Range";
+  value: Distribution_RangeAmino;
 }
 
 /** The range of the population values. */
@@ -264,6 +272,10 @@ export interface Distribution_BucketOptionsAmino {
 
   /** The explicit buckets. */
   explicit_buckets?: Distribution_BucketOptions_ExplicitAmino;
+}
+export interface Distribution_BucketOptionsAminoType {
+  type: "/google.api.BucketOptions";
+  value: Distribution_BucketOptionsAmino;
 }
 
 /**
@@ -332,6 +344,10 @@ export interface Distribution_BucketOptions_LinearAmino {
   /** Lower bound of the first bucket. */
   offset: number;
 }
+export interface Distribution_BucketOptions_LinearAminoType {
+  type: "/google.api.Linear";
+  value: Distribution_BucketOptions_LinearAmino;
+}
 
 /**
  * Specifies a linear sequence of buckets that all have the same width
@@ -393,6 +409,10 @@ export interface Distribution_BucketOptions_ExponentialAmino {
   /** Must be greater than 0. */
   scale: number;
 }
+export interface Distribution_BucketOptions_ExponentialAminoType {
+  type: "/google.api.Exponential";
+  value: Distribution_BucketOptions_ExponentialAmino;
+}
 
 /**
  * Specifies an exponential sequence of buckets that have a width that is
@@ -445,6 +465,10 @@ export interface Distribution_BucketOptions_Explicit {
 export interface Distribution_BucketOptions_ExplicitAmino {
   /** The values must be monotonically increasing. */
   bounds: number[];
+}
+export interface Distribution_BucketOptions_ExplicitAminoType {
+  type: "/google.api.Explicit";
+  value: Distribution_BucketOptions_ExplicitAmino;
 }
 
 /**
@@ -528,6 +552,10 @@ export interface Distribution_ExemplarAmino {
    * single exemplar, and this is enforced by the system.
    */
   attachments: AnyAmino[];
+}
+export interface Distribution_ExemplarAminoType {
+  type: "/google.api.Exemplar";
+  value: Distribution_ExemplarAmino;
 }
 
 /**

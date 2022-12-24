@@ -12,6 +12,10 @@ export interface MsgCloseGroup {
 export interface MsgCloseGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgCloseGroupAminoType {
+  type: "/akash.deployment.v1beta2.MsgCloseGroup";
+  value: MsgCloseGroupAmino;
+}
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
@@ -23,6 +27,10 @@ export interface MsgCloseGroupResponse {}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseAmino {}
+export interface MsgCloseGroupResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgCloseGroupResponse";
+  value: MsgCloseGroupResponseAmino;
+}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
@@ -36,6 +44,10 @@ export interface MsgPauseGroup {
 export interface MsgPauseGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgPauseGroupAminoType {
+  type: "/akash.deployment.v1beta2.MsgPauseGroup";
+  value: MsgPauseGroupAmino;
+}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -47,6 +59,10 @@ export interface MsgPauseGroupResponse {}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseAmino {}
+export interface MsgPauseGroupResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgPauseGroupResponse";
+  value: MsgPauseGroupResponseAmino;
+}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
@@ -60,6 +76,10 @@ export interface MsgStartGroup {
 export interface MsgStartGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgStartGroupAminoType {
+  type: "/akash.deployment.v1beta2.MsgStartGroup";
+  value: MsgStartGroupAmino;
+}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -71,6 +91,10 @@ export interface MsgStartGroupResponse {}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseAmino {}
+export interface MsgStartGroupResponseAminoType {
+  type: "/akash.deployment.v1beta2.MsgStartGroupResponse";
+  value: MsgStartGroupResponseAmino;
+}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}

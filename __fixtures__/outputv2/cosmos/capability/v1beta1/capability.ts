@@ -17,6 +17,10 @@ export interface Capability {
 export interface CapabilityAmino {
   index: string;
 }
+export interface CapabilityAminoType {
+  type: "cosmos-sdk/Capability";
+  value: CapabilityAmino;
+}
 
 /**
  * Capability defines an implementation of an object capability. The index
@@ -43,6 +47,10 @@ export interface OwnerAmino {
   module: string;
   name: string;
 }
+export interface OwnerAminoType {
+  type: "cosmos-sdk/Owner";
+  value: OwnerAmino;
+}
 
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -67,6 +75,10 @@ export interface CapabilityOwners {
  */
 export interface CapabilityOwnersAmino {
   owners: OwnerAmino[];
+}
+export interface CapabilityOwnersAminoType {
+  type: "cosmos-sdk/CapabilityOwners";
+  value: CapabilityOwnersAmino;
 }
 
 /**

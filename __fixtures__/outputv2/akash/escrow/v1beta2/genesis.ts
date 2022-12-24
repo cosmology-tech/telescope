@@ -14,6 +14,10 @@ export interface GenesisStateAmino {
   accounts: AccountAmino[];
   payments: FractionalPaymentAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "/akash.escrow.v1beta2.GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {

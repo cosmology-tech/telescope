@@ -121,6 +121,10 @@ export interface PeriodLockAmino {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: CoinAmino[];
 }
+export interface PeriodLockAminoType {
+  type: "osmosis/lockup/period-lock";
+  value: PeriodLockAmino;
+}
 
 /**
  * PeriodLock is a single lock unit by period defined by the x/lockup module.
@@ -189,6 +193,10 @@ export interface QueryConditionAmino {
    * Querying locks with timestamp is currently not implemented.
    */
   timestamp?: Date;
+}
+export interface QueryConditionAminoType {
+  type: "osmosis/lockup/query-condition";
+  value: QueryConditionAmino;
 }
 
 /**
@@ -265,6 +273,10 @@ export interface SyntheticLockAmino {
    * at the point of unbonding has started.
    */
   duration?: DurationAmino;
+}
+export interface SyntheticLockAminoType {
+  type: "osmosis/lockup/synthetic-lock";
+  value: SyntheticLockAmino;
 }
 
 /**

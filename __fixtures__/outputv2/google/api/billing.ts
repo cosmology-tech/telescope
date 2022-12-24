@@ -89,6 +89,10 @@ export interface BillingAmino {
    */
   consumer_destinations: Billing_BillingDestinationAmino[];
 }
+export interface BillingAminoType {
+  type: "/google.api.Billing";
+  value: BillingAmino;
+}
 
 /**
  * Billing related configuration of the service.
@@ -162,6 +166,10 @@ export interface Billing_BillingDestinationAmino {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Billing_BillingDestinationAminoType {
+  type: "/google.api.BillingDestination";
+  value: Billing_BillingDestinationAmino;
 }
 
 /**

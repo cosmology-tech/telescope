@@ -123,6 +123,10 @@ export interface ModuleSchemaDescriptorAmino {
    */
   prefix: Uint8Array;
 }
+export interface ModuleSchemaDescriptorAminoType {
+  type: "cosmos-sdk/ModuleSchemaDescriptor";
+  value: ModuleSchemaDescriptorAmino;
+}
 
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorSDKType {
@@ -174,6 +178,10 @@ export interface ModuleSchemaDescriptor_FileEntryAmino {
    * of the app will be used.
    */
   storage_type: StorageType;
+}
+export interface ModuleSchemaDescriptor_FileEntryAminoType {
+  type: "cosmos-sdk/FileEntry";
+  value: ModuleSchemaDescriptor_FileEntryAmino;
 }
 
 /** FileEntry describes an ORM file used in a module. */

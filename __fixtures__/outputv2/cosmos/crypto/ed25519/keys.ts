@@ -23,6 +23,10 @@ export interface PubKey {
 export interface PubKeyAmino {
   key: Uint8Array;
 }
+export interface PubKeyAminoType {
+  type: "cosmos-sdk/PubKey";
+  value: PubKeyAmino;
+}
 
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
@@ -49,6 +53,10 @@ export interface PrivKey {
  */
 export interface PrivKeyAmino {
   key: Uint8Array;
+}
+export interface PrivKeyAminoType {
+  type: "cosmos-sdk/PrivKey";
+  value: PrivKeyAmino;
 }
 
 /**

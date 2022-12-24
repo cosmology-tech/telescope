@@ -16,6 +16,10 @@ export interface GenesisStateAmino {
   denom_traces: DenomTraceAmino[];
   params?: ParamsAmino;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateSDKType {

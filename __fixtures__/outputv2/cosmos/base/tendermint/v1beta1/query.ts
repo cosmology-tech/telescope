@@ -22,6 +22,10 @@ export interface GetValidatorSetByHeightRequestAmino {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface GetValidatorSetByHeightRequestAminoType {
+  type: "cosmos-sdk/GetValidatorSetByHeightRequest";
+  value: GetValidatorSetByHeightRequestAmino;
+}
 
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequestSDKType {
@@ -46,6 +50,10 @@ export interface GetValidatorSetByHeightResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
+export interface GetValidatorSetByHeightResponseAminoType {
+  type: "cosmos-sdk/GetValidatorSetByHeightResponse";
+  value: GetValidatorSetByHeightResponseAmino;
+}
 
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponseSDKType {
@@ -64,6 +72,10 @@ export interface GetLatestValidatorSetRequest {
 export interface GetLatestValidatorSetRequestAmino {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface GetLatestValidatorSetRequestAminoType {
+  type: "cosmos-sdk/GetLatestValidatorSetRequest";
+  value: GetLatestValidatorSetRequestAmino;
 }
 
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
@@ -88,6 +100,10 @@ export interface GetLatestValidatorSetResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
+export interface GetLatestValidatorSetResponseAminoType {
+  type: "cosmos-sdk/GetLatestValidatorSetResponse";
+  value: GetLatestValidatorSetResponseAmino;
+}
 
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponseSDKType {
@@ -111,6 +127,10 @@ export interface ValidatorAmino {
   voting_power: string;
   proposer_priority: string;
 }
+export interface ValidatorAminoType {
+  type: "cosmos-sdk/Validator";
+  value: ValidatorAmino;
+}
 
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
@@ -129,6 +149,10 @@ export interface GetBlockByHeightRequest {
 export interface GetBlockByHeightRequestAmino {
   height: string;
 }
+export interface GetBlockByHeightRequestAminoType {
+  type: "cosmos-sdk/GetBlockByHeightRequest";
+  value: GetBlockByHeightRequestAmino;
+}
 
 /** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequestSDKType {
@@ -146,6 +170,10 @@ export interface GetBlockByHeightResponseAmino {
   block_id?: BlockIDAmino;
   block?: BlockAmino;
 }
+export interface GetBlockByHeightResponseAminoType {
+  type: "cosmos-sdk/GetBlockByHeightResponse";
+  value: GetBlockByHeightResponseAmino;
+}
 
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponseSDKType {
@@ -158,6 +186,10 @@ export interface GetLatestBlockRequest {}
 
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequestAmino {}
+export interface GetLatestBlockRequestAminoType {
+  type: "cosmos-sdk/GetLatestBlockRequest";
+  value: GetLatestBlockRequestAmino;
+}
 
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequestSDKType {}
@@ -173,6 +205,10 @@ export interface GetLatestBlockResponseAmino {
   block_id?: BlockIDAmino;
   block?: BlockAmino;
 }
+export interface GetLatestBlockResponseAminoType {
+  type: "cosmos-sdk/GetLatestBlockResponse";
+  value: GetLatestBlockResponseAmino;
+}
 
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponseSDKType {
@@ -185,6 +221,10 @@ export interface GetSyncingRequest {}
 
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequestAmino {}
+export interface GetSyncingRequestAminoType {
+  type: "cosmos-sdk/GetSyncingRequest";
+  value: GetSyncingRequestAmino;
+}
 
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequestSDKType {}
@@ -198,6 +238,10 @@ export interface GetSyncingResponse {
 export interface GetSyncingResponseAmino {
   syncing: boolean;
 }
+export interface GetSyncingResponseAminoType {
+  type: "cosmos-sdk/GetSyncingResponse";
+  value: GetSyncingResponseAmino;
+}
 
 /** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponseSDKType {
@@ -209,6 +253,10 @@ export interface GetNodeInfoRequest {}
 
 /** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoRequestAmino {}
+export interface GetNodeInfoRequestAminoType {
+  type: "cosmos-sdk/GetNodeInfoRequest";
+  value: GetNodeInfoRequestAmino;
+}
 
 /** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoRequestSDKType {}
@@ -223,6 +271,10 @@ export interface GetNodeInfoResponse {
 export interface GetNodeInfoResponseAmino {
   node_info?: NodeInfoAmino;
   application_version?: VersionInfoAmino;
+}
+export interface GetNodeInfoResponseAminoType {
+  type: "cosmos-sdk/GetNodeInfoResponse";
+  value: GetNodeInfoResponseAmino;
 }
 
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
@@ -257,6 +309,10 @@ export interface VersionInfoAmino {
 
   /** Since: cosmos-sdk 0.43 */
   cosmos_sdk_version: string;
+}
+export interface VersionInfoAminoType {
+  type: "cosmos-sdk/VersionInfo";
+  value: VersionInfoAmino;
 }
 
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
@@ -293,6 +349,10 @@ export interface ModuleAmino {
 
   /** checksum */
   sum: string;
+}
+export interface ModuleAminoType {
+  type: "cosmos-sdk/Module";
+  value: ModuleAmino;
 }
 
 /** Module is the type for VersionInfo */

@@ -67,6 +67,10 @@ export interface VisibilityAmino {
    */
   rules: VisibilityRuleAmino[];
 }
+export interface VisibilityAminoType {
+  type: "/google.api.Visibility";
+  value: VisibilityAmino;
+}
 
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -158,6 +162,10 @@ export interface VisibilityRuleAmino {
    * this method and only had access to it through INTERNAL.
    */
   restriction: string;
+}
+export interface VisibilityRuleAminoType {
+  type: "/google.api.VisibilityRule";
+  value: VisibilityRuleAmino;
 }
 
 /**

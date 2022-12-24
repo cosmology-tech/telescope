@@ -52,6 +52,10 @@ export interface ExplainAmino {
    */
   expr_steps: Explain_ExprStepAmino[];
 }
+export interface ExplainAminoType {
+  type: "/google.api.expr.v1alpha1.Explain";
+  value: ExplainAmino;
+}
 
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -80,6 +84,10 @@ export interface Explain_ExprStepAmino {
 
   /** Index of the value in the values list. */
   value_index: number;
+}
+export interface Explain_ExprStepAminoType {
+  type: "/google.api.expr.v1alpha1.ExprStep";
+  value: Explain_ExprStepAmino;
 }
 
 /** ID and value index of one step. */

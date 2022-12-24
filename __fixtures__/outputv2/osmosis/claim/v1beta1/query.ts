@@ -10,6 +10,10 @@ export interface QueryModuleAccountBalanceRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequestAmino {}
+export interface QueryModuleAccountBalanceRequestAminoType {
+  type: "osmosis/claim/query-module-account-balance-request";
+  value: QueryModuleAccountBalanceRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequestSDKType {}
@@ -25,6 +29,10 @@ export interface QueryModuleAccountBalanceResponseAmino {
   /** params defines the parameters of the module. */
   moduleAccountBalance: CoinAmino[];
 }
+export interface QueryModuleAccountBalanceResponseAminoType {
+  type: "osmosis/claim/query-module-account-balance-response";
+  value: QueryModuleAccountBalanceResponseAmino;
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponseSDKType {
@@ -36,6 +44,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "osmosis/claim/query-params-request";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -51,6 +63,10 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
+export interface QueryParamsResponseAminoType {
+  type: "osmosis/claim/query-params-response";
+  value: QueryParamsResponseAmino;
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -62,6 +78,10 @@ export interface QueryClaimRecordRequest {
 export interface QueryClaimRecordRequestAmino {
   address: string;
 }
+export interface QueryClaimRecordRequestAminoType {
+  type: "osmosis/claim/query-claim-record-request";
+  value: QueryClaimRecordRequestAmino;
+}
 export interface QueryClaimRecordRequestSDKType {
   address: string;
 }
@@ -70,6 +90,10 @@ export interface QueryClaimRecordResponse {
 }
 export interface QueryClaimRecordResponseAmino {
   claim_record?: ClaimRecordAmino;
+}
+export interface QueryClaimRecordResponseAminoType {
+  type: "osmosis/claim/query-claim-record-response";
+  value: QueryClaimRecordResponseAmino;
 }
 export interface QueryClaimRecordResponseSDKType {
   claim_record?: ClaimRecordSDKType;
@@ -82,6 +106,10 @@ export interface QueryClaimableForActionRequestAmino {
   address: string;
   action: Action;
 }
+export interface QueryClaimableForActionRequestAminoType {
+  type: "osmosis/claim/query-claimable-for-action-request";
+  value: QueryClaimableForActionRequestAmino;
+}
 export interface QueryClaimableForActionRequestSDKType {
   address: string;
   action: Action;
@@ -92,6 +120,10 @@ export interface QueryClaimableForActionResponse {
 export interface QueryClaimableForActionResponseAmino {
   coins: CoinAmino[];
 }
+export interface QueryClaimableForActionResponseAminoType {
+  type: "osmosis/claim/query-claimable-for-action-response";
+  value: QueryClaimableForActionResponseAmino;
+}
 export interface QueryClaimableForActionResponseSDKType {
   coins: CoinSDKType[];
 }
@@ -101,6 +133,10 @@ export interface QueryTotalClaimableRequest {
 export interface QueryTotalClaimableRequestAmino {
   address: string;
 }
+export interface QueryTotalClaimableRequestAminoType {
+  type: "osmosis/claim/query-total-claimable-request";
+  value: QueryTotalClaimableRequestAmino;
+}
 export interface QueryTotalClaimableRequestSDKType {
   address: string;
 }
@@ -109,6 +145,10 @@ export interface QueryTotalClaimableResponse {
 }
 export interface QueryTotalClaimableResponseAmino {
   coins: CoinAmino[];
+}
+export interface QueryTotalClaimableResponseAminoType {
+  type: "osmosis/claim/query-total-claimable-response";
+  value: QueryTotalClaimableResponseAmino;
 }
 export interface QueryTotalClaimableResponseSDKType {
   coins: CoinSDKType[];

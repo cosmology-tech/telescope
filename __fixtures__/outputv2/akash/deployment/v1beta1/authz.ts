@@ -26,6 +26,10 @@ export interface DepositDeploymentAuthorizationAmino {
    */
   spend_limit?: CoinAmino;
 }
+export interface DepositDeploymentAuthorizationAminoType {
+  type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
+  value: DepositDeploymentAuthorizationAmino;
+}
 
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from

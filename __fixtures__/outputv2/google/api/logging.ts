@@ -99,6 +99,10 @@ export interface LoggingAmino {
    */
   consumer_destinations: Logging_LoggingDestinationAmino[];
 }
+export interface LoggingAminoType {
+  type: "/google.api.Logging";
+  value: LoggingAmino;
+}
 
 /**
  * Logging configuration of the service.
@@ -174,6 +178,10 @@ export interface Logging_LoggingDestinationAmino {
    * the service name followed by "/".
    */
   logs: string[];
+}
+export interface Logging_LoggingDestinationAminoType {
+  type: "/google.api.LoggingDestination";
+  value: Logging_LoggingDestinationAmino;
 }
 
 /**

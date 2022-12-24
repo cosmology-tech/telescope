@@ -24,6 +24,10 @@ export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
 }
+export interface PoolParamsAminoType {
+  type: "osmosis/gamm/pool-params";
+  value: PoolParamsAmino;
+}
 
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -96,6 +100,10 @@ export interface PoolAmino {
 
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scaling_factor_controller: string;
+}
+export interface PoolAminoType {
+  type: "osmosis/gamm/pool";
+  value: PoolAmino;
 }
 
 /** Pool is the stableswap Pool struct */

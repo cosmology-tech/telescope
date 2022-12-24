@@ -114,6 +114,10 @@ export interface ClientStateAmino {
    */
   allow_update_after_misbehaviour: boolean;
 }
+export interface ClientStateAminoType {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
+}
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -158,6 +162,10 @@ export interface ConsensusStateAmino {
   root?: MerkleRootAmino;
   next_validators_hash: Uint8Array;
 }
+export interface ConsensusStateAminoType {
+  type: "cosmos-sdk/ConsensusState";
+  value: ConsensusStateAmino;
+}
 
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
@@ -184,6 +192,10 @@ export interface MisbehaviourAmino {
   client_id: string;
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
+}
+export interface MisbehaviourAminoType {
+  type: "cosmos-sdk/Misbehaviour";
+  value: MisbehaviourAmino;
 }
 
 /**
@@ -237,6 +249,10 @@ export interface HeaderAmino {
   trusted_height?: HeightAmino;
   trusted_validators?: ValidatorSetAmino;
 }
+export interface HeaderAminoType {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
+}
 
 /**
  * Header defines the Tendermint client consensus Header.
@@ -275,6 +291,10 @@ export interface Fraction {
 export interface FractionAmino {
   numerator: string;
   denominator: string;
+}
+export interface FractionAminoType {
+  type: "cosmos-sdk/Fraction";
+  value: FractionAmino;
 }
 
 /**

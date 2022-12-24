@@ -153,6 +153,10 @@ export interface MonitoringAmino {
    */
   consumer_destinations: Monitoring_MonitoringDestinationAmino[];
 }
+export interface MonitoringAminoType {
+  type: "/google.api.Monitoring";
+  value: MonitoringAmino;
+}
 
 /**
  * Monitoring configuration of the service.
@@ -247,6 +251,10 @@ export interface Monitoring_MonitoringDestinationAmino {
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Monitoring_MonitoringDestinationAminoType {
+  type: "/google.api.MonitoringDestination";
+  value: Monitoring_MonitoringDestinationAmino;
 }
 
 /**

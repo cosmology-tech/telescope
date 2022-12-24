@@ -9,6 +9,10 @@ export interface QueryPeriodRequest {}
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestAmino {}
+export interface QueryPeriodRequestAminoType {
+  type: "/evmos.inflation.v1.QueryPeriodRequest";
+  value: QueryPeriodRequestAmino;
+}
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestSDKType {}
@@ -23,6 +27,10 @@ export interface QueryPeriodResponse {
 export interface QueryPeriodResponseAmino {
   /** period is the current minting per epoch provision value. */
   period: string;
+}
+export interface QueryPeriodResponseAminoType {
+  type: "/evmos.inflation.v1.QueryPeriodResponse";
+  value: QueryPeriodResponseAmino;
 }
 
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
@@ -41,6 +49,10 @@ export interface QueryEpochMintProvisionRequest {}
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequestAmino {}
+export interface QueryEpochMintProvisionRequestAminoType {
+  type: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
+  value: QueryEpochMintProvisionRequestAmino;
+}
 
 /**
  * QueryEpochMintProvisionRequest is the request type for the
@@ -65,6 +77,10 @@ export interface QueryEpochMintProvisionResponseAmino {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epoch_mint_provision?: DecCoinAmino;
 }
+export interface QueryEpochMintProvisionResponseAminoType {
+  type: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
+  value: QueryEpochMintProvisionResponseAmino;
+}
 
 /**
  * QueryEpochMintProvisionResponse is the response type for the
@@ -85,6 +101,10 @@ export interface QuerySkippedEpochsRequest {}
  * method.
  */
 export interface QuerySkippedEpochsRequestAmino {}
+export interface QuerySkippedEpochsRequestAminoType {
+  type: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
+  value: QuerySkippedEpochsRequestAmino;
+}
 
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
@@ -109,6 +129,10 @@ export interface QuerySkippedEpochsResponseAmino {
   /** number of epochs that the inflation module has been disabled. */
   skipped_epochs: string;
 }
+export interface QuerySkippedEpochsResponseAminoType {
+  type: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
+  value: QuerySkippedEpochsResponseAmino;
+}
 
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
@@ -129,6 +153,10 @@ export interface QueryCirculatingSupplyRequest {}
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequestAmino {}
+export interface QueryCirculatingSupplyRequestAminoType {
+  type: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
+  value: QueryCirculatingSupplyRequestAmino;
+}
 
 /**
  * QueryCirculatingSupplyRequest is the request type for the
@@ -153,6 +181,10 @@ export interface QueryCirculatingSupplyResponseAmino {
   /** total amount of coins in circulation */
   circulating_supply?: DecCoinAmino;
 }
+export interface QueryCirculatingSupplyResponseAminoType {
+  type: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
+  value: QueryCirculatingSupplyResponseAmino;
+}
 
 /**
  * QueryCirculatingSupplyResponse is the response type for the
@@ -173,6 +205,10 @@ export interface QueryInflationRateRequest {}
  * method.
  */
 export interface QueryInflationRateRequestAmino {}
+export interface QueryInflationRateRequestAminoType {
+  type: "/evmos.inflation.v1.QueryInflationRateRequest";
+  value: QueryInflationRateRequestAmino;
+}
 
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
@@ -197,6 +233,10 @@ export interface QueryInflationRateResponseAmino {
   /** rate by which the total supply increases within one period */
   inflation_rate: string;
 }
+export interface QueryInflationRateResponseAminoType {
+  type: "/evmos.inflation.v1.QueryInflationRateResponse";
+  value: QueryInflationRateResponseAmino;
+}
 
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
@@ -211,6 +251,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "/evmos.inflation.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -225,6 +269,10 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "/evmos.inflation.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */

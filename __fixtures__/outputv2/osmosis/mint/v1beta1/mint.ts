@@ -13,6 +13,10 @@ export interface MinterAmino {
   /** epoch_provisions represent rewards for the current epoch. */
   epoch_provisions: string;
 }
+export interface MinterAminoType {
+  type: "osmosis/mint/minter";
+  value: MinterAmino;
+}
 
 /** Minter represents the minting state. */
 export interface MinterSDKType {
@@ -37,6 +41,10 @@ export interface WeightedAddress {
 export interface WeightedAddressAmino {
   address: string;
   weight: string;
+}
+export interface WeightedAddressAminoType {
+  type: "osmosis/mint/weighted-address";
+  value: WeightedAddressAmino;
 }
 
 /**
@@ -109,6 +117,10 @@ export interface DistributionProportionsAmino {
    * to be allocated to the community pool.
    */
   community_pool: string;
+}
+export interface DistributionProportionsAminoType {
+  type: "osmosis/mint/distribution-proportions";
+  value: DistributionProportionsAmino;
 }
 
 /**
@@ -211,6 +223,10 @@ export interface ParamsAmino {
    * rewards
    */
   minting_rewards_distribution_start_epoch: string;
+}
+export interface ParamsAminoType {
+  type: "osmosis/mint/params";
+  value: ParamsAmino;
 }
 
 /** Params holds parameters for the x/mint module. */

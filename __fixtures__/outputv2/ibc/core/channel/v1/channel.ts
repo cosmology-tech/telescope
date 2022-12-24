@@ -186,6 +186,10 @@ export interface ChannelAmino {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+export interface ChannelAminoType {
+  type: "cosmos-sdk/Channel";
+  value: ChannelAmino;
+}
 
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
@@ -259,6 +263,10 @@ export interface IdentifiedChannelAmino {
   /** channel identifier */
   channel_id: string;
 }
+export interface IdentifiedChannelAminoType {
+  type: "cosmos-sdk/IdentifiedChannel";
+  value: IdentifiedChannelAmino;
+}
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -290,6 +298,10 @@ export interface CounterpartyAmino {
 
   /** channel end on the counterparty chain */
   channel_id: string;
+}
+export interface CounterpartyAminoType {
+  type: "cosmos-sdk/Counterparty";
+  value: CounterpartyAmino;
 }
 
 /** Counterparty defines a channel end counterparty */
@@ -359,6 +371,10 @@ export interface PacketAmino {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeout_timestamp: string;
 }
+export interface PacketAminoType {
+  type: "cosmos-sdk/Packet";
+  value: PacketAmino;
+}
 
 /** Packet defines a type that carries data across different chains through IBC */
 export interface PacketSDKType {
@@ -411,6 +427,10 @@ export interface PacketStateAmino {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+export interface PacketStateAminoType {
+  type: "cosmos-sdk/PacketState";
+  value: PacketStateAmino;
+}
 
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -451,6 +471,10 @@ export interface Acknowledgement {
 export interface AcknowledgementAmino {
   result?: Uint8Array;
   error?: string;
+}
+export interface AcknowledgementAminoType {
+  type: "cosmos-sdk/Acknowledgement";
+  value: AcknowledgementAmino;
 }
 
 /**

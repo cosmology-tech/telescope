@@ -42,6 +42,10 @@ export interface RetryInfoAmino {
   /** Clients should wait at least this long between retrying the same request. */
   retry_delay?: DurationAmino;
 }
+export interface RetryInfoAminoType {
+  type: "/google.rpc.RetryInfo";
+  value: RetryInfoAmino;
+}
 
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -78,6 +82,10 @@ export interface DebugInfoAmino {
 
   /** Additional debugging information provided by the server. */
   detail: string;
+}
+export interface DebugInfoAminoType {
+  type: "/google.rpc.DebugInfo";
+  value: DebugInfoAmino;
 }
 
 /** Describes additional debugging info. */
@@ -120,6 +128,10 @@ export interface QuotaFailure {
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
   violations: QuotaFailure_ViolationAmino[];
+}
+export interface QuotaFailureAminoType {
+  type: "/google.rpc.QuotaFailure";
+  value: QuotaFailureAmino;
 }
 
 /**
@@ -186,6 +198,10 @@ export interface QuotaFailure_ViolationAmino {
    */
   description: string;
 }
+export interface QuotaFailure_ViolationAminoType {
+  type: "/google.rpc.Violation";
+  value: QuotaFailure_ViolationAmino;
+}
 
 /**
  * A message type used to describe a single quota violation.  For example, a
@@ -202,6 +218,10 @@ export interface ErrorInfo_MetadataEntry {
 export interface ErrorInfo_MetadataEntryAmino {
   key: string;
   value: string;
+}
+export interface ErrorInfo_MetadataEntryAminoType {
+  type: "/google.rpc.undefined";
+  value: ErrorInfo_MetadataEntryAmino;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -327,6 +347,10 @@ export interface ErrorInfoAmino {
     [key: string]: string;
   };
 }
+export interface ErrorInfoAminoType {
+  type: "/google.rpc.ErrorInfo";
+  value: ErrorInfoAmino;
+}
 
 /**
  * Describes the cause of the error with structured details.
@@ -384,6 +408,10 @@ export interface PreconditionFailure {
 export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_ViolationAmino[];
+}
+export interface PreconditionFailureAminoType {
+  type: "/google.rpc.PreconditionFailure";
+  value: PreconditionFailureAmino;
 }
 
 /**
@@ -446,6 +474,10 @@ export interface PreconditionFailure_ViolationAmino {
    */
   description: string;
 }
+export interface PreconditionFailure_ViolationAminoType {
+  type: "/google.rpc.Violation";
+  value: PreconditionFailure_ViolationAmino;
+}
 
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
@@ -470,6 +502,10 @@ export interface BadRequest {
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
   field_violations: BadRequest_FieldViolationAmino[];
+}
+export interface BadRequestAminoType {
+  type: "/google.rpc.BadRequest";
+  value: BadRequestAmino;
 }
 
 /**
@@ -504,6 +540,10 @@ export interface BadRequest_FieldViolationAmino {
 
   /** A description of why the request element is bad. */
   description: string;
+}
+export interface BadRequest_FieldViolationAminoType {
+  type: "/google.rpc.FieldViolation";
+  value: BadRequest_FieldViolationAmino;
 }
 
 /** A message type used to describe a single bad request field. */
@@ -546,6 +586,10 @@ export interface RequestInfoAmino {
    * stack trace that can be sent back to the service provider for debugging.
    */
   serving_data: string;
+}
+export interface RequestInfoAminoType {
+  type: "/google.rpc.RequestInfo";
+  value: RequestInfoAmino;
 }
 
 /**
@@ -618,6 +662,10 @@ export interface ResourceInfoAmino {
    */
   description: string;
 }
+export interface ResourceInfoAminoType {
+  type: "/google.rpc.ResourceInfo";
+  value: ResourceInfoAmino;
+}
 
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
@@ -650,6 +698,10 @@ export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_LinkAmino[];
 }
+export interface HelpAminoType {
+  type: "/google.rpc.Help";
+  value: HelpAmino;
+}
 
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -678,6 +730,10 @@ export interface Help_LinkAmino {
 
   /** The URL of the link. */
   url: string;
+}
+export interface Help_LinkAminoType {
+  type: "/google.rpc.Link";
+  value: Help_LinkAmino;
 }
 
 /** Describes a URL link. */
@@ -716,6 +772,10 @@ export interface LocalizedMessageAmino {
 
   /** The localized error message in the above locale. */
   message: string;
+}
+export interface LocalizedMessageAminoType {
+  type: "/google.rpc.LocalizedMessage";
+  value: LocalizedMessageAmino;
 }
 
 /**

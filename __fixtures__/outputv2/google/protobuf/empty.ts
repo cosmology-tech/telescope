@@ -27,6 +27,10 @@ export interface Empty {}
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface EmptyAmino {}
+export interface EmptyAminoType {
+  type: "/google.protobuf.Empty";
+  value: EmptyAmino;
+}
 
 /**
  * A generic empty message that you can re-use to avoid defining duplicated

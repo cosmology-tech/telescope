@@ -64,6 +64,10 @@ export interface GenesisStateAmino {
   redelegations: RedelegationAmino[];
   exported: boolean;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
@@ -93,6 +97,10 @@ export interface LastValidatorPowerAmino {
 
   /** power defines the power of the validator. */
   power: string;
+}
+export interface LastValidatorPowerAminoType {
+  type: "cosmos-sdk/LastValidatorPower";
+  value: LastValidatorPowerAmino;
 }
 
 /** LastValidatorPower required for validator set update logic. */

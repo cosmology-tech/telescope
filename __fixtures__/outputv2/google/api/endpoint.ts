@@ -111,6 +111,10 @@ export interface EndpointAmino {
    */
   allow_cors: boolean;
 }
+export interface EndpointAminoType {
+  type: "/google.api.Endpoint";
+  value: EndpointAmino;
+}
 
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of

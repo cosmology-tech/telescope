@@ -27,6 +27,10 @@ export interface MsgCreateVestingAccountAmino {
   end_time: string;
   delayed: boolean;
 }
+export interface MsgCreateVestingAccountAminoType {
+  type: "cosmos-sdk/MsgCreateVestingAccount";
+  value: MsgCreateVestingAccountAmino;
+}
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -45,6 +49,10 @@ export interface MsgCreateVestingAccountResponse {}
 
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
 export interface MsgCreateVestingAccountResponseAmino {}
+export interface MsgCreateVestingAccountResponseAminoType {
+  type: "cosmos-sdk/MsgCreateVestingAccountResponse";
+  value: MsgCreateVestingAccountResponseAmino;
+}
 
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
 export interface MsgCreateVestingAccountResponseSDKType {}
@@ -68,6 +76,10 @@ export interface MsgCreatePermanentLockedAccountAmino {
   to_address: string;
   amount: CoinAmino[];
 }
+export interface MsgCreatePermanentLockedAccountAminoType {
+  type: "cosmos-sdk/MsgCreatePermanentLockedAccount";
+  value: MsgCreatePermanentLockedAccountAmino;
+}
 
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
@@ -84,6 +96,10 @@ export interface MsgCreatePermanentLockedAccountResponse {}
 
 /** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
 export interface MsgCreatePermanentLockedAccountResponseAmino {}
+export interface MsgCreatePermanentLockedAccountResponseAminoType {
+  type: "cosmos-sdk/MsgCreatePermanentLockedAccountResponse";
+  value: MsgCreatePermanentLockedAccountResponseAmino;
+}
 
 /** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
 export interface MsgCreatePermanentLockedAccountResponseSDKType {}
@@ -109,6 +125,10 @@ export interface MsgCreatePeriodicVestingAccountAmino {
   start_time: string;
   vesting_periods: PeriodAmino[];
 }
+export interface MsgCreatePeriodicVestingAccountAminoType {
+  type: "cosmos-sdk/MsgCreatePeriodicVestingAccount";
+  value: MsgCreatePeriodicVestingAccountAmino;
+}
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -132,6 +152,10 @@ export interface MsgCreatePeriodicVestingAccountResponse {}
  * response type.
  */
 export interface MsgCreatePeriodicVestingAccountResponseAmino {}
+export interface MsgCreatePeriodicVestingAccountResponseAminoType {
+  type: "cosmos-sdk/MsgCreatePeriodicVestingAccountResponse";
+  value: MsgCreatePeriodicVestingAccountResponseAmino;
+}
 
 /**
  * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount

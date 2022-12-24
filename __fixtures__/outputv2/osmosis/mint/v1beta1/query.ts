@@ -8,6 +8,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "osmosis/mint/query-params-request";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -22,6 +26,10 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "osmosis/mint/query-params-response";
+  value: QueryParamsResponseAmino;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -40,6 +48,10 @@ export interface QueryEpochProvisionsRequest {}
  * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsRequestAmino {}
+export interface QueryEpochProvisionsRequestAminoType {
+  type: "osmosis/mint/query-epoch-provisions-request";
+  value: QueryEpochProvisionsRequestAmino;
+}
 
 /**
  * QueryEpochProvisionsRequest is the request type for the
@@ -63,6 +75,10 @@ export interface QueryEpochProvisionsResponse {
 export interface QueryEpochProvisionsResponseAmino {
   /** epoch_provisions is the current minting per epoch provisions value. */
   epoch_provisions: Uint8Array;
+}
+export interface QueryEpochProvisionsResponseAminoType {
+  type: "osmosis/mint/query-epoch-provisions-response";
+  value: QueryEpochProvisionsResponseAmino;
 }
 
 /**

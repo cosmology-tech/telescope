@@ -133,6 +133,10 @@ export interface EpochInfoAmino {
    */
   current_epoch_start_height: string;
 }
+export interface EpochInfoAminoType {
+  type: "osmosis/epochs/epoch-info";
+  value: EpochInfoAmino;
+}
 
 /**
  * EpochInfo is a struct that describes the data going into
@@ -156,6 +160,10 @@ export interface GenesisState {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "osmosis/epochs/genesis-state";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the epochs module's genesis state. */

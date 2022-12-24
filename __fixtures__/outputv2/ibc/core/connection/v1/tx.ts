@@ -28,6 +28,10 @@ export interface MsgConnectionOpenInitAmino {
   delay_period: string;
   signer: string;
 }
+export interface MsgConnectionOpenInitAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenInit";
+  value: MsgConnectionOpenInitAmino;
+}
 
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -52,6 +56,10 @@ export interface MsgConnectionOpenInitResponse {}
  * type.
  */
 export interface MsgConnectionOpenInitResponseAmino {}
+export interface MsgConnectionOpenInitResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenInitResponse";
+  value: MsgConnectionOpenInitResponseAmino;
+}
 
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
@@ -124,6 +132,10 @@ export interface MsgConnectionOpenTryAmino {
   consensus_height?: HeightAmino;
   signer: string;
 }
+export interface MsgConnectionOpenTryAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenTry";
+  value: MsgConnectionOpenTryAmino;
+}
 
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
@@ -149,6 +161,10 @@ export interface MsgConnectionOpenTryResponse {}
 
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseAmino {}
+export interface MsgConnectionOpenTryResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenTryResponse";
+  value: MsgConnectionOpenTryResponseAmino;
+}
 
 /** MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type. */
 export interface MsgConnectionOpenTryResponseSDKType {}
@@ -204,6 +220,10 @@ export interface MsgConnectionOpenAckAmino {
   consensus_height?: HeightAmino;
   signer: string;
 }
+export interface MsgConnectionOpenAckAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenAck";
+  value: MsgConnectionOpenAckAmino;
+}
 
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
@@ -227,6 +247,10 @@ export interface MsgConnectionOpenAckResponse {}
 
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseAmino {}
+export interface MsgConnectionOpenAckResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenAckResponse";
+  value: MsgConnectionOpenAckResponseAmino;
+}
 
 /** MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type. */
 export interface MsgConnectionOpenAckResponseSDKType {}
@@ -256,6 +280,10 @@ export interface MsgConnectionOpenConfirmAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgConnectionOpenConfirmAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenConfirm";
+  value: MsgConnectionOpenConfirmAmino;
+}
 
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -279,6 +307,10 @@ export interface MsgConnectionOpenConfirmResponse {}
  * response type.
  */
 export interface MsgConnectionOpenConfirmResponseAmino {}
+export interface MsgConnectionOpenConfirmResponseAminoType {
+  type: "cosmos-sdk/MsgConnectionOpenConfirmResponse";
+  value: MsgConnectionOpenConfirmResponseAmino;
+}
 
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm

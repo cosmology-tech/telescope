@@ -12,6 +12,10 @@ export interface Params {
 export interface ParamsAmino {
   denom_creation_fee: CoinAmino[];
 }
+export interface ParamsAminoType {
+  type: "osmosis/tokenfactory/params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the tokenfactory module. */
 export interface ParamsSDKType {

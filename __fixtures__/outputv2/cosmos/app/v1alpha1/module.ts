@@ -63,6 +63,10 @@ export interface ModuleDescriptorAmino {
    */
   can_migrate_from: MigrateFromInfoAmino[];
 }
+export interface ModuleDescriptorAminoType {
+  type: "cosmos-sdk/ModuleDescriptor";
+  value: ModuleDescriptorAmino;
+}
 
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptorSDKType {
@@ -160,6 +164,10 @@ export interface PackageReferenceAmino {
    */
   revision: number;
 }
+export interface PackageReferenceAminoType {
+  type: "cosmos-sdk/PackageReference";
+  value: PackageReferenceAmino;
+}
 
 /** PackageReference is a reference to a protobuf package used by a module. */
 export interface PackageReferenceSDKType {
@@ -189,6 +197,10 @@ export interface MigrateFromInfoAmino {
    * for the previous module version, ex: "cosmos.group.module.v1.Module".
    */
   module: string;
+}
+export interface MigrateFromInfoAminoType {
+  type: "cosmos-sdk/MigrateFromInfo";
+  value: MigrateFromInfoAmino;
 }
 
 /**

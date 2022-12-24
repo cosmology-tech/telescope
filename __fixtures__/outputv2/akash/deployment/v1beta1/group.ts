@@ -85,6 +85,10 @@ export interface MsgCloseGroup {
 export interface MsgCloseGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgCloseGroupAminoType {
+  type: "/akash.deployment.v1beta1.MsgCloseGroup";
+  value: MsgCloseGroupAmino;
+}
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
@@ -96,6 +100,10 @@ export interface MsgCloseGroupResponse {}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseAmino {}
+export interface MsgCloseGroupResponseAminoType {
+  type: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
+  value: MsgCloseGroupResponseAmino;
+}
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
@@ -109,6 +117,10 @@ export interface MsgPauseGroup {
 export interface MsgPauseGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgPauseGroupAminoType {
+  type: "/akash.deployment.v1beta1.MsgPauseGroup";
+  value: MsgPauseGroupAmino;
+}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -120,6 +132,10 @@ export interface MsgPauseGroupResponse {}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseAmino {}
+export interface MsgPauseGroupResponseAminoType {
+  type: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
+  value: MsgPauseGroupResponseAmino;
+}
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
@@ -133,6 +149,10 @@ export interface MsgStartGroup {
 export interface MsgStartGroupAmino {
   id?: GroupIDAmino;
 }
+export interface MsgStartGroupAminoType {
+  type: "/akash.deployment.v1beta1.MsgStartGroup";
+  value: MsgStartGroupAmino;
+}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -144,6 +164,10 @@ export interface MsgStartGroupResponse {}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseAmino {}
+export interface MsgStartGroupResponseAminoType {
+  type: "/akash.deployment.v1beta1.MsgStartGroupResponse";
+  value: MsgStartGroupResponseAmino;
+}
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
@@ -160,6 +184,10 @@ export interface GroupIDAmino {
   owner: string;
   dseq: string;
   gseq: number;
+}
+export interface GroupIDAminoType {
+  type: "/akash.deployment.v1beta1.GroupID";
+  value: GroupIDAmino;
 }
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -181,6 +209,10 @@ export interface GroupSpecAmino {
   name: string;
   requirements?: PlacementRequirementsAmino;
   resources: ResourceAmino[];
+}
+export interface GroupSpecAminoType {
+  type: "/akash.deployment.v1beta1.GroupSpec";
+  value: GroupSpecAmino;
 }
 
 /** GroupSpec stores group specifications */
@@ -205,6 +237,10 @@ export interface GroupAmino {
   group_spec?: GroupSpecAmino;
   created_at: string;
 }
+export interface GroupAminoType {
+  type: "/akash.deployment.v1beta1.Group";
+  value: GroupAmino;
+}
 
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
@@ -226,6 +262,10 @@ export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
   count: number;
   price?: CoinAmino;
+}
+export interface ResourceAminoType {
+  type: "/akash.deployment.v1beta1.Resource";
+  value: ResourceAmino;
 }
 
 /** Resource stores unit, total count and price of resource */

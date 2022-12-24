@@ -7,6 +7,10 @@ export interface ListAllInterfacesRequest {}
 
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestAmino {}
+export interface ListAllInterfacesRequestAminoType {
+  type: "cosmos-sdk/ListAllInterfacesRequest";
+  value: ListAllInterfacesRequestAmino;
+}
 
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestSDKType {}
@@ -21,6 +25,10 @@ export interface ListAllInterfacesResponse {
 export interface ListAllInterfacesResponseAmino {
   /** interface_names is an array of all the registered interfaces. */
   interface_names: string[];
+}
+export interface ListAllInterfacesResponseAminoType {
+  type: "cosmos-sdk/ListAllInterfacesResponse";
+  value: ListAllInterfacesResponseAmino;
 }
 
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
@@ -45,6 +53,10 @@ export interface ListImplementationsRequestAmino {
   /** interface_name defines the interface to query the implementations for. */
   interface_name: string;
 }
+export interface ListImplementationsRequestAminoType {
+  type: "cosmos-sdk/ListImplementationsRequest";
+  value: ListImplementationsRequestAmino;
+}
 
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -68,6 +80,10 @@ export interface ListImplementationsResponse {
  */
 export interface ListImplementationsResponseAmino {
   implementation_message_names: string[];
+}
+export interface ListImplementationsResponseAminoType {
+  type: "cosmos-sdk/ListImplementationsResponse";
+  value: ListImplementationsResponseAmino;
 }
 
 /**

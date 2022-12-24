@@ -23,6 +23,10 @@ export interface PubKey {
 export interface PubKeyAmino {
   key: Uint8Array;
 }
+export interface PubKeyAminoType {
+  type: "cosmos-sdk/PubKey";
+  value: PubKeyAmino;
+}
 
 /**
  * PubKey defines a secp256k1 public key
@@ -43,6 +47,10 @@ export interface PrivKey {
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeyAmino {
   key: Uint8Array;
+}
+export interface PrivKeyAminoType {
+  type: "cosmos-sdk/PrivKey";
+  value: PrivKeyAmino;
 }
 
 /** PrivKey defines a secp256k1 private key. */

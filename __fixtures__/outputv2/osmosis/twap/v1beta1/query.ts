@@ -17,6 +17,10 @@ export interface ArithmeticTwapRequestAmino {
   start_time?: Date;
   end_time?: Date;
 }
+export interface ArithmeticTwapRequestAminoType {
+  type: "osmosis/twap/arithmetic-twap-request";
+  value: ArithmeticTwapRequestAmino;
+}
 export interface ArithmeticTwapRequestSDKType {
   pool_id: Long;
   base_asset: string;
@@ -29,6 +33,10 @@ export interface ArithmeticTwapResponse {
 }
 export interface ArithmeticTwapResponseAmino {
   arithmetic_twap: string;
+}
+export interface ArithmeticTwapResponseAminoType {
+  type: "osmosis/twap/arithmetic-twap-response";
+  value: ArithmeticTwapResponseAmino;
 }
 export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
@@ -45,6 +53,10 @@ export interface ArithmeticTwapToNowRequestAmino {
   quote_asset: string;
   start_time?: Date;
 }
+export interface ArithmeticTwapToNowRequestAminoType {
+  type: "osmosis/twap/arithmetic-twap-to-now-request";
+  value: ArithmeticTwapToNowRequestAmino;
+}
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: Long;
   base_asset: string;
@@ -57,17 +69,29 @@ export interface ArithmeticTwapToNowResponse {
 export interface ArithmeticTwapToNowResponseAmino {
   arithmetic_twap: string;
 }
+export interface ArithmeticTwapToNowResponseAminoType {
+  type: "osmosis/twap/arithmetic-twap-to-now-response";
+  value: ArithmeticTwapToNowResponseAmino;
+}
 export interface ArithmeticTwapToNowResponseSDKType {
   arithmetic_twap: string;
 }
 export interface ParamsRequest {}
 export interface ParamsRequestAmino {}
+export interface ParamsRequestAminoType {
+  type: "osmosis/twap/params-request";
+  value: ParamsRequestAmino;
+}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params?: Params;
 }
 export interface ParamsResponseAmino {
   params?: ParamsAmino;
+}
+export interface ParamsResponseAminoType {
+  type: "osmosis/twap/params-response";
+  value: ParamsResponseAmino;
 }
 export interface ParamsResponseSDKType {
   params?: ParamsSDKType;

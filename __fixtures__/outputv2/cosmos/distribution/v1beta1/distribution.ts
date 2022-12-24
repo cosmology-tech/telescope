@@ -18,6 +18,10 @@ export interface ParamsAmino {
   bonus_proposer_reward: string;
   withdraw_addr_enabled: boolean;
 }
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
 
 /** Params defines the set of params for the distribution module. */
 export interface ParamsSDKType {
@@ -64,6 +68,10 @@ export interface ValidatorHistoricalRewardsAmino {
   cumulative_reward_ratio: DecCoinAmino[];
   reference_count: number;
 }
+export interface ValidatorHistoricalRewardsAminoType {
+  type: "cosmos-sdk/ValidatorHistoricalRewards";
+  value: ValidatorHistoricalRewardsAmino;
+}
 
 /**
  * ValidatorHistoricalRewards represents historical rewards for a validator.
@@ -103,6 +111,10 @@ export interface ValidatorCurrentRewardsAmino {
   rewards: DecCoinAmino[];
   period: string;
 }
+export interface ValidatorCurrentRewardsAminoType {
+  type: "cosmos-sdk/ValidatorCurrentRewards";
+  value: ValidatorCurrentRewardsAmino;
+}
 
 /**
  * ValidatorCurrentRewards represents current rewards and current
@@ -129,6 +141,10 @@ export interface ValidatorAccumulatedCommission {
 export interface ValidatorAccumulatedCommissionAmino {
   commission: DecCoinAmino[];
 }
+export interface ValidatorAccumulatedCommissionAminoType {
+  type: "cosmos-sdk/ValidatorAccumulatedCommission";
+  value: ValidatorAccumulatedCommissionAmino;
+}
 
 /**
  * ValidatorAccumulatedCommission represents accumulated commission
@@ -152,6 +168,10 @@ export interface ValidatorOutstandingRewards {
  */
 export interface ValidatorOutstandingRewardsAmino {
   rewards: DecCoinAmino[];
+}
+export interface ValidatorOutstandingRewardsAminoType {
+  type: "cosmos-sdk/ValidatorOutstandingRewards";
+  value: ValidatorOutstandingRewardsAmino;
 }
 
 /**
@@ -183,6 +203,10 @@ export interface ValidatorSlashEventAmino {
   validator_period: string;
   fraction: string;
 }
+export interface ValidatorSlashEventAminoType {
+  type: "cosmos-sdk/ValidatorSlashEvent";
+  value: ValidatorSlashEventAmino;
+}
 
 /**
  * ValidatorSlashEvent represents a validator slash event.
@@ -204,6 +228,10 @@ export interface ValidatorSlashEvents {
 export interface ValidatorSlashEventsAmino {
   validator_slash_events: ValidatorSlashEventAmino[];
 }
+export interface ValidatorSlashEventsAminoType {
+  type: "cosmos-sdk/ValidatorSlashEvents";
+  value: ValidatorSlashEventsAmino;
+}
 
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
 export interface ValidatorSlashEventsSDKType {
@@ -218,6 +246,10 @@ export interface FeePool {
 /** FeePool is the global fee pool for distribution. */
 export interface FeePoolAmino {
   community_pool: DecCoinAmino[];
+}
+export interface FeePoolAminoType {
+  type: "cosmos-sdk/FeePool";
+  value: FeePoolAmino;
 }
 
 /** FeePool is the global fee pool for distribution. */
@@ -247,6 +279,10 @@ export interface CommunityPoolSpendProposalAmino {
   description: string;
   recipient: string;
   amount: CoinAmino[];
+}
+export interface CommunityPoolSpendProposalAminoType {
+  type: "cosmos-sdk/CommunityPoolSpendProposal";
+  value: CommunityPoolSpendProposalAmino;
 }
 
 /**
@@ -288,6 +324,10 @@ export interface DelegatorStartingInfoAmino {
   stake: string;
   height: string;
 }
+export interface DelegatorStartingInfoAminoType {
+  type: "cosmos-sdk/DelegatorStartingInfo";
+  value: DelegatorStartingInfoAmino;
+}
 
 /**
  * DelegatorStartingInfo represents the starting info for a delegator reward
@@ -319,6 +359,10 @@ export interface DelegationDelegatorReward {
 export interface DelegationDelegatorRewardAmino {
   validator_address: string;
   reward: DecCoinAmino[];
+}
+export interface DelegationDelegatorRewardAminoType {
+  type: "cosmos-sdk/DelegationDelegatorReward";
+  value: DelegationDelegatorRewardAmino;
 }
 
 /**
@@ -352,6 +396,10 @@ export interface CommunityPoolSpendProposalWithDepositAmino {
   recipient: string;
   amount: string;
   deposit: string;
+}
+export interface CommunityPoolSpendProposalWithDepositAminoType {
+  type: "cosmos-sdk/CommunityPoolSpendProposalWithDeposit";
+  value: CommunityPoolSpendProposalWithDepositAmino;
 }
 
 /**

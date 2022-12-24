@@ -90,6 +90,10 @@ export interface OperationAmino {
    */
   response?: AnyAmino;
 }
+export interface OperationAminoType {
+  type: "/google.longrunning.Operation";
+  value: OperationAmino;
+}
 
 /**
  * This resource represents a long-running operation that is the result of a
@@ -113,6 +117,10 @@ export interface GetOperationRequest {
 export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
   name: string;
+}
+export interface GetOperationRequestAminoType {
+  type: "/google.longrunning.GetOperationRequest";
+  value: GetOperationRequestAmino;
 }
 
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
@@ -149,6 +157,10 @@ export interface ListOperationsRequestAmino {
   /** The standard list page token. */
   page_token: string;
 }
+export interface ListOperationsRequestAminoType {
+  type: "/google.longrunning.ListOperationsRequest";
+  value: ListOperationsRequestAmino;
+}
 
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
@@ -175,6 +187,10 @@ export interface ListOperationsResponseAmino {
   /** The standard List next-page token. */
   next_page_token: string;
 }
+export interface ListOperationsResponseAminoType {
+  type: "/google.longrunning.ListOperationsResponse";
+  value: ListOperationsResponseAmino;
+}
 
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
@@ -193,6 +209,10 @@ export interface CancelOperationRequestAmino {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
+export interface CancelOperationRequestAminoType {
+  type: "/google.longrunning.CancelOperationRequest";
+  value: CancelOperationRequestAmino;
+}
 
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
@@ -209,6 +229,10 @@ export interface DeleteOperationRequest {
 export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
   name: string;
+}
+export interface DeleteOperationRequestAminoType {
+  type: "/google.longrunning.DeleteOperationRequest";
+  value: DeleteOperationRequestAmino;
 }
 
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
@@ -240,6 +264,10 @@ export interface WaitOperationRequestAmino {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout?: DurationAmino;
+}
+export interface WaitOperationRequestAminoType {
+  type: "/google.longrunning.WaitOperationRequest";
+  value: WaitOperationRequestAmino;
 }
 
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
@@ -322,6 +350,10 @@ export interface OperationInfoAmino {
    * Note: Altering this value constitutes a breaking change.
    */
   metadata_type: string;
+}
+export interface OperationInfoAminoType {
+  type: "/google.longrunning.OperationInfo";
+  value: OperationInfoAmino;
 }
 
 /**

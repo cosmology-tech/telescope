@@ -26,6 +26,10 @@ export interface BaseAccountAmino {
   account_number: string;
   sequence: string;
 }
+export interface BaseAccountAminoType {
+  type: "cosmos-sdk/BaseAccount";
+  value: BaseAccountAmino;
+}
 
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -52,6 +56,10 @@ export interface ModuleAccountAmino {
   name: string;
   permissions: string[];
 }
+export interface ModuleAccountAminoType {
+  type: "cosmos-sdk/ModuleAccount";
+  value: ModuleAccountAmino;
+}
 
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
@@ -76,6 +84,10 @@ export interface ParamsAmino {
   tx_size_cost_per_byte: string;
   sig_verify_cost_ed25519: string;
   sig_verify_cost_secp256k1: string;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the parameters for the auth module. */

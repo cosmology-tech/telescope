@@ -23,6 +23,10 @@ export interface MsgCreateStableswapPoolAmino {
   future_pool_governor: string;
   scaling_factor_controller: string;
 }
+export interface MsgCreateStableswapPoolAminoType {
+  type: "osmosis/gamm/create-stableswap-pool";
+  value: MsgCreateStableswapPoolAmino;
+}
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
@@ -42,6 +46,10 @@ export interface MsgCreateStableswapPoolResponse {
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseAmino {
   pool_id: string;
+}
+export interface MsgCreateStableswapPoolResponseAminoType {
+  type: "osmosis/gamm/create-stableswap-pool-response";
+  value: MsgCreateStableswapPoolResponseAmino;
 }
 
 /** Returns a poolID with custom poolName. */
@@ -68,6 +76,10 @@ export interface MsgStableSwapAdjustScalingFactorsAmino {
   pool_id: string;
   scaling_factors: string[];
 }
+export interface MsgStableSwapAdjustScalingFactorsAminoType {
+  type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
+  value: MsgStableSwapAdjustScalingFactorsAmino;
+}
 
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
@@ -80,6 +92,10 @@ export interface MsgStableSwapAdjustScalingFactorsSDKType {
 }
 export interface MsgStableSwapAdjustScalingFactorsResponse {}
 export interface MsgStableSwapAdjustScalingFactorsResponseAmino {}
+export interface MsgStableSwapAdjustScalingFactorsResponseAminoType {
+  type: "osmosis/gamm/stable-swap-adjust-scaling-factors-response";
+  value: MsgStableSwapAdjustScalingFactorsResponseAmino;
+}
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {

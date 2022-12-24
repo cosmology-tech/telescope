@@ -65,6 +65,10 @@ export interface SuperfluidAssetAmino {
    */
   asset_type: SuperfluidAssetType;
 }
+export interface SuperfluidAssetAminoType {
+  type: "osmosis/superfluid-asset";
+  value: SuperfluidAssetAmino;
+}
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
@@ -98,6 +102,10 @@ export interface SuperfluidIntermediaryAccountAmino {
 
   /** perpetual gauge for rewards distribution */
   gauge_id: string;
+}
+export interface SuperfluidIntermediaryAccountAminoType {
+  type: "osmosis/superfluid-intermediary-account";
+  value: SuperfluidIntermediaryAccountAmino;
 }
 
 /**
@@ -144,6 +152,10 @@ export interface OsmoEquivalentMultiplierRecordAmino {
   denom: string;
   multiplier: string;
 }
+export interface OsmoEquivalentMultiplierRecordAminoType {
+  type: "osmosis/osmo-equivalent-multiplier-record";
+  value: OsmoEquivalentMultiplierRecordAmino;
+}
 
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
@@ -181,6 +193,10 @@ export interface SuperfluidDelegationRecordAmino {
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
 }
+export interface SuperfluidDelegationRecordAminoType {
+  type: "osmosis/superfluid-delegation-record";
+  value: SuperfluidDelegationRecordAmino;
+}
 
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
@@ -212,6 +228,10 @@ export interface LockIdIntermediaryAccountConnectionAmino {
   lock_id: string;
   intermediary_account: string;
 }
+export interface LockIdIntermediaryAccountConnectionAminoType {
+  type: "osmosis/lock-id-intermediary-account-connection";
+  value: LockIdIntermediaryAccountConnectionAmino;
+}
 
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -227,6 +247,10 @@ export interface UnpoolWhitelistedPools {
 }
 export interface UnpoolWhitelistedPoolsAmino {
   ids: string[];
+}
+export interface UnpoolWhitelistedPoolsAminoType {
+  type: "osmosis/unpool-whitelisted-pools";
+  value: UnpoolWhitelistedPoolsAmino;
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: Long[];

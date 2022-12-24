@@ -39,6 +39,10 @@ export interface GenesisStateAmino {
   /** denom_metadata defines the metadata of the differents coins. */
   denom_metadata: MetadataAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
@@ -70,6 +74,10 @@ export interface BalanceAmino {
 
   /** coins defines the different coins this balance holds. */
   coins: CoinAmino[];
+}
+export interface BalanceAminoType {
+  type: "cosmos-sdk/Balance";
+  value: BalanceAmino;
 }
 
 /**

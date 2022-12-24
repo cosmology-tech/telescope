@@ -21,6 +21,10 @@ export interface QuerySpotPriceRequestAmino {
   base_asset_denom: string;
   quote_asset_denom: string;
 }
+export interface QuerySpotPriceRequestAminoType {
+  type: "osmosis/gamm/v2/query-spot-price-request";
+  value: QuerySpotPriceRequestAmino;
+}
 
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -48,6 +52,10 @@ export interface QuerySpotPriceResponse {
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
+}
+export interface QuerySpotPriceResponseAminoType {
+  type: "osmosis/gamm/v2/query-spot-price-response";
+  value: QuerySpotPriceResponseAmino;
 }
 
 /**

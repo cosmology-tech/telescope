@@ -95,6 +95,10 @@ export interface ContextAmino {
    */
   rules: ContextRuleAmino[];
 }
+export interface ContextAminoType {
+  type: "/google.api.Context";
+  value: ContextAmino;
+}
 
 /**
  * `Context` defines which contexts an API requests.
@@ -198,6 +202,10 @@ export interface ContextRuleAmino {
    * side channel from backend to client.
    */
   allowed_response_extensions: string[];
+}
+export interface ContextRuleAminoType {
+  type: "/google.api.ContextRule";
+  value: ContextRuleAmino;
 }
 
 /**

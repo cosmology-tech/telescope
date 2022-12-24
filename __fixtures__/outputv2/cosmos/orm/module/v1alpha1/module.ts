@@ -15,6 +15,10 @@ export interface Module {}
  * with ORM data.
  */
 export interface ModuleAmino {}
+export interface ModuleAminoType {
+  type: "cosmos-sdk/Module";
+  value: ModuleAmino;
+}
 
 /**
  * Module defines the ORM module which adds providers to the app container for

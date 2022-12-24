@@ -91,6 +91,10 @@ export interface ValueAmino {
   /** A Type value represented by the fully qualified name of the type. */
   type_value?: string;
 }
+export interface ValueAminoType {
+  type: "/google.api.expr.v1beta1.Value";
+  value: ValueAmino;
+}
 
 /**
  * Represents a CEL value.
@@ -130,6 +134,10 @@ export interface EnumValueAmino {
   /** The value of the enum. */
   value: number;
 }
+export interface EnumValueAminoType {
+  type: "/google.api.expr.v1beta1.EnumValue";
+  value: EnumValueAmino;
+}
 
 /** An enum value. */
 export interface EnumValueSDKType {
@@ -157,6 +165,10 @@ export interface ListValue {
 export interface ListValueAmino {
   /** The ordered values in the list. */
   values: ValueAmino[];
+}
+export interface ListValueAminoType {
+  type: "/google.api.expr.v1beta1.ListValue";
+  value: ListValueAmino;
 }
 
 /**
@@ -200,6 +212,10 @@ export interface MapValueAmino {
    */
   entries: MapValue_EntryAmino[];
 }
+export interface MapValueAminoType {
+  type: "/google.api.expr.v1beta1.MapValue";
+  value: MapValueAmino;
+}
 
 /**
  * A map.
@@ -237,6 +253,10 @@ export interface MapValue_EntryAmino {
 
   /** The value. */
   value?: ValueAmino;
+}
+export interface MapValue_EntryAminoType {
+  type: "/google.api.expr.v1beta1.Entry";
+  value: MapValue_EntryAmino;
 }
 
 /** An entry in the map. */

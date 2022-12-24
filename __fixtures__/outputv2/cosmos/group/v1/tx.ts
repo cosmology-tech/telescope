@@ -76,6 +76,10 @@ export interface MsgCreateGroupAmino {
   /** metadata is any arbitrary metadata to attached to the group. */
   metadata: string;
 }
+export interface MsgCreateGroupAminoType {
+  type: "cosmos-sdk/MsgCreateGroup";
+  value: MsgCreateGroupAmino;
+}
 
 /** MsgCreateGroup is the Msg/CreateGroup request type. */
 export interface MsgCreateGroupSDKType {
@@ -94,6 +98,10 @@ export interface MsgCreateGroupResponse {
 export interface MsgCreateGroupResponseAmino {
   /** group_id is the unique ID of the newly created group. */
   group_id: string;
+}
+export interface MsgCreateGroupResponseAminoType {
+  type: "cosmos-sdk/MsgCreateGroupResponse";
+  value: MsgCreateGroupResponseAmino;
 }
 
 /** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
@@ -130,6 +138,10 @@ export interface MsgUpdateGroupMembersAmino {
    */
   member_updates: MemberAmino[];
 }
+export interface MsgUpdateGroupMembersAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupMembers";
+  value: MsgUpdateGroupMembersAmino;
+}
 
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
 export interface MsgUpdateGroupMembersSDKType {
@@ -143,6 +155,10 @@ export interface MsgUpdateGroupMembersResponse {}
 
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponseAmino {}
+export interface MsgUpdateGroupMembersResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupMembersResponse";
+  value: MsgUpdateGroupMembersResponseAmino;
+}
 
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponseSDKType {}
@@ -170,6 +186,10 @@ export interface MsgUpdateGroupAdminAmino {
   /** new_admin is the group new admin account address. */
   new_admin: string;
 }
+export interface MsgUpdateGroupAdminAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupAdmin";
+  value: MsgUpdateGroupAdminAmino;
+}
 
 /** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
 export interface MsgUpdateGroupAdminSDKType {
@@ -183,6 +203,10 @@ export interface MsgUpdateGroupAdminResponse {}
 
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponseAmino {}
+export interface MsgUpdateGroupAdminResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupAdminResponse";
+  value: MsgUpdateGroupAdminResponseAmino;
+}
 
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponseSDKType {}
@@ -210,6 +234,10 @@ export interface MsgUpdateGroupMetadataAmino {
   /** metadata is the updated group's metadata. */
   metadata: string;
 }
+export interface MsgUpdateGroupMetadataAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupMetadata";
+  value: MsgUpdateGroupMetadataAmino;
+}
 
 /** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
 export interface MsgUpdateGroupMetadataSDKType {
@@ -223,6 +251,10 @@ export interface MsgUpdateGroupMetadataResponse {}
 
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponseAmino {}
+export interface MsgUpdateGroupMetadataResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupMetadataResponse";
+  value: MsgUpdateGroupMetadataResponseAmino;
+}
 
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponseSDKType {}
@@ -256,6 +288,10 @@ export interface MsgCreateGroupPolicyAmino {
   /** decision_policy specifies the group policy's decision policy. */
   decision_policy?: AnyAmino;
 }
+export interface MsgCreateGroupPolicyAminoType {
+  type: "cosmos-sdk/MsgCreateGroupPolicy";
+  value: MsgCreateGroupPolicyAmino;
+}
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
 export interface MsgCreateGroupPolicySDKType {
@@ -275,6 +311,10 @@ export interface MsgCreateGroupPolicyResponse {
 export interface MsgCreateGroupPolicyResponseAmino {
   /** address is the account address of the newly created group policy. */
   address: string;
+}
+export interface MsgCreateGroupPolicyResponseAminoType {
+  type: "cosmos-sdk/MsgCreateGroupPolicyResponse";
+  value: MsgCreateGroupPolicyResponseAmino;
 }
 
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
@@ -304,6 +344,10 @@ export interface MsgUpdateGroupPolicyAdminAmino {
 
   /** new_admin is the new group policy admin. */
   new_admin: string;
+}
+export interface MsgUpdateGroupPolicyAdminAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyAdmin";
+  value: MsgUpdateGroupPolicyAdminAmino;
 }
 
 /** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
@@ -354,6 +398,10 @@ export interface MsgCreateGroupWithPolicyAmino {
   /** decision_policy specifies the group policy's decision policy. */
   decision_policy?: AnyAmino;
 }
+export interface MsgCreateGroupWithPolicyAminoType {
+  type: "cosmos-sdk/MsgCreateGroupWithPolicy";
+  value: MsgCreateGroupWithPolicyAmino;
+}
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
 export interface MsgCreateGroupWithPolicySDKType {
@@ -382,6 +430,10 @@ export interface MsgCreateGroupWithPolicyResponseAmino {
   /** group_policy_address is the account address of the newly created group policy. */
   group_policy_address: string;
 }
+export interface MsgCreateGroupWithPolicyResponseAminoType {
+  type: "cosmos-sdk/MsgCreateGroupWithPolicyResponse";
+  value: MsgCreateGroupWithPolicyResponseAmino;
+}
 
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponseSDKType {
@@ -394,6 +446,10 @@ export interface MsgUpdateGroupPolicyAdminResponse {}
 
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
 export interface MsgUpdateGroupPolicyAdminResponseAmino {}
+export interface MsgUpdateGroupPolicyAdminResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyAdminResponse";
+  value: MsgUpdateGroupPolicyAdminResponseAmino;
+}
 
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
 export interface MsgUpdateGroupPolicyAdminResponseSDKType {}
@@ -421,6 +477,10 @@ export interface MsgUpdateGroupPolicyDecisionPolicyAmino {
   /** decision_policy is the updated group policy's decision policy. */
   decision_policy?: AnyAmino;
 }
+export interface MsgUpdateGroupPolicyDecisionPolicyAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicy";
+  value: MsgUpdateGroupPolicyDecisionPolicyAmino;
+}
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
 export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
@@ -434,6 +494,10 @@ export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponseAmino {}
+export interface MsgUpdateGroupPolicyDecisionPolicyResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicyResponse";
+  value: MsgUpdateGroupPolicyDecisionPolicyResponseAmino;
+}
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {}
@@ -461,6 +525,10 @@ export interface MsgUpdateGroupPolicyMetadataAmino {
   /** metadata is the updated group policy metadata. */
   metadata: string;
 }
+export interface MsgUpdateGroupPolicyMetadataAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyMetadata";
+  value: MsgUpdateGroupPolicyMetadataAmino;
+}
 
 /** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
 export interface MsgUpdateGroupPolicyMetadataSDKType {
@@ -474,6 +542,10 @@ export interface MsgUpdateGroupPolicyMetadataResponse {}
 
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
 export interface MsgUpdateGroupPolicyMetadataResponseAmino {}
+export interface MsgUpdateGroupPolicyMetadataResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateGroupPolicyMetadataResponse";
+  value: MsgUpdateGroupPolicyMetadataResponseAmino;
+}
 
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
 export interface MsgUpdateGroupPolicyMetadataResponseSDKType {}
@@ -527,6 +599,10 @@ export interface MsgSubmitProposalAmino {
    */
   exec: Exec;
 }
+export interface MsgSubmitProposalAminoType {
+  type: "cosmos-sdk/group/MsgSubmitProposal";
+  value: MsgSubmitProposalAmino;
+}
 
 /** MsgSubmitProposal is the Msg/SubmitProposal request type. */
 export interface MsgSubmitProposalSDKType {
@@ -547,6 +623,10 @@ export interface MsgSubmitProposalResponse {
 export interface MsgSubmitProposalResponseAmino {
   /** proposal is the unique ID of the proposal. */
   proposal_id: string;
+}
+export interface MsgSubmitProposalResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitProposalResponse";
+  value: MsgSubmitProposalResponseAmino;
 }
 
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
@@ -571,6 +651,10 @@ export interface MsgWithdrawProposalAmino {
   /** address is the admin of the group policy or one of the proposer of the proposal. */
   address: string;
 }
+export interface MsgWithdrawProposalAminoType {
+  type: "cosmos-sdk/group/MsgWithdrawProposal";
+  value: MsgWithdrawProposalAmino;
+}
 
 /** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
 export interface MsgWithdrawProposalSDKType {
@@ -583,6 +667,10 @@ export interface MsgWithdrawProposalResponse {}
 
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
 export interface MsgWithdrawProposalResponseAmino {}
+export interface MsgWithdrawProposalResponseAminoType {
+  type: "cosmos-sdk/MsgWithdrawProposalResponse";
+  value: MsgWithdrawProposalResponseAmino;
+}
 
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
 export interface MsgWithdrawProposalResponseSDKType {}
@@ -628,6 +716,10 @@ export interface MsgVoteAmino {
    */
   exec: Exec;
 }
+export interface MsgVoteAminoType {
+  type: "cosmos-sdk/group/MsgVote";
+  value: MsgVoteAmino;
+}
 
 /** MsgVote is the Msg/Vote request type. */
 export interface MsgVoteSDKType {
@@ -643,6 +735,10 @@ export interface MsgVoteResponse {}
 
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
+export interface MsgVoteResponseAminoType {
+  type: "cosmos-sdk/MsgVoteResponse";
+  value: MsgVoteResponseAmino;
+}
 
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponseSDKType {}
@@ -664,6 +760,10 @@ export interface MsgExecAmino {
   /** signer is the account address used to execute the proposal. */
   signer: string;
 }
+export interface MsgExecAminoType {
+  type: "cosmos-sdk/group/MsgExec";
+  value: MsgExecAmino;
+}
 
 /** MsgExec is the Msg/Exec request type. */
 export interface MsgExecSDKType {
@@ -676,6 +776,10 @@ export interface MsgExecResponse {}
 
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponseAmino {}
+export interface MsgExecResponseAminoType {
+  type: "cosmos-sdk/MsgExecResponse";
+  value: MsgExecResponseAmino;
+}
 
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponseSDKType {}
@@ -697,6 +801,10 @@ export interface MsgLeaveGroupAmino {
   /** group_id is the unique ID of the group. */
   group_id: string;
 }
+export interface MsgLeaveGroupAminoType {
+  type: "cosmos-sdk/group/MsgLeaveGroup";
+  value: MsgLeaveGroupAmino;
+}
 
 /** MsgLeaveGroup is the Msg/LeaveGroup request type. */
 export interface MsgLeaveGroupSDKType {
@@ -709,6 +817,10 @@ export interface MsgLeaveGroupResponse {}
 
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponseAmino {}
+export interface MsgLeaveGroupResponseAminoType {
+  type: "cosmos-sdk/MsgLeaveGroupResponse";
+  value: MsgLeaveGroupResponseAmino;
+}
 
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponseSDKType {}

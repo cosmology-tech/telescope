@@ -390,6 +390,10 @@ export interface ResourceDescriptorAmino {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorAminoType {
+  type: "/google.api.ResourceDescriptor";
+  value: ResourceDescriptorAmino;
+}
 
 /**
  * A simple descriptor of a resource type.
@@ -538,6 +542,10 @@ export interface ResourceReferenceAmino {
    *     }
    */
   child_type: string;
+}
+export interface ResourceReferenceAminoType {
+  type: "/google.api.ResourceReference";
+  value: ResourceReferenceAmino;
 }
 
 /**

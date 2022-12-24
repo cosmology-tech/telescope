@@ -91,6 +91,10 @@ export interface PlanAmino {
   /** @deprecated */
   upgraded_client_state?: AnyAmino;
 }
+export interface PlanAminoType {
+  type: "cosmos-sdk/Plan";
+  value: PlanAmino;
+}
 
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface PlanSDKType {
@@ -132,6 +136,10 @@ export interface SoftwareUpgradeProposalAmino {
   description: string;
   plan?: PlanAmino;
 }
+export interface SoftwareUpgradeProposalAminoType {
+  type: "cosmos-sdk/SoftwareUpgradeProposal";
+  value: SoftwareUpgradeProposalAmino;
+}
 
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
@@ -172,6 +180,10 @@ export interface CancelSoftwareUpgradeProposalAmino {
   title: string;
   description: string;
 }
+export interface CancelSoftwareUpgradeProposalAminoType {
+  type: "cosmos-sdk/CancelSoftwareUpgradeProposal";
+  value: CancelSoftwareUpgradeProposalAmino;
+}
 
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
@@ -210,6 +222,10 @@ export interface ModuleVersionAmino {
 
   /** consensus version of the app module */
   version: string;
+}
+export interface ModuleVersionAminoType {
+  type: "cosmos-sdk/ModuleVersion";
+  value: ModuleVersionAmino;
 }
 
 /**

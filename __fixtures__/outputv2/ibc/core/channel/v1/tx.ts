@@ -23,6 +23,10 @@ export interface MsgChannelOpenInitAmino {
   channel?: ChannelAmino;
   signer: string;
 }
+export interface MsgChannelOpenInitAminoType {
+  type: "cosmos-sdk/MsgChannelOpenInit";
+  value: MsgChannelOpenInitAmino;
+}
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -39,6 +43,10 @@ export interface MsgChannelOpenInitResponse {}
 
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseAmino {}
+export interface MsgChannelOpenInitResponseAminoType {
+  type: "cosmos-sdk/MsgChannelOpenInitResponse";
+  value: MsgChannelOpenInitResponseAmino;
+}
 
 /** MsgChannelOpenInitResponse defines the Msg/ChannelOpenInit response type. */
 export interface MsgChannelOpenInitResponseSDKType {}
@@ -80,6 +88,10 @@ export interface MsgChannelOpenTryAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgChannelOpenTryAminoType {
+  type: "cosmos-sdk/MsgChannelOpenTry";
+  value: MsgChannelOpenTryAmino;
+}
 
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
@@ -100,6 +112,10 @@ export interface MsgChannelOpenTryResponse {}
 
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseAmino {}
+export interface MsgChannelOpenTryResponseAminoType {
+  type: "cosmos-sdk/MsgChannelOpenTryResponse";
+  value: MsgChannelOpenTryResponseAmino;
+}
 
 /** MsgChannelOpenTryResponse defines the Msg/ChannelOpenTry response type. */
 export interface MsgChannelOpenTryResponseSDKType {}
@@ -131,6 +147,10 @@ export interface MsgChannelOpenAckAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgChannelOpenAckAminoType {
+  type: "cosmos-sdk/MsgChannelOpenAck";
+  value: MsgChannelOpenAckAmino;
+}
 
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
@@ -151,6 +171,10 @@ export interface MsgChannelOpenAckResponse {}
 
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseAmino {}
+export interface MsgChannelOpenAckResponseAminoType {
+  type: "cosmos-sdk/MsgChannelOpenAckResponse";
+  value: MsgChannelOpenAckResponseAmino;
+}
 
 /** MsgChannelOpenAckResponse defines the Msg/ChannelOpenAck response type. */
 export interface MsgChannelOpenAckResponseSDKType {}
@@ -178,6 +202,10 @@ export interface MsgChannelOpenConfirmAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgChannelOpenConfirmAminoType {
+  type: "cosmos-sdk/MsgChannelOpenConfirm";
+  value: MsgChannelOpenConfirmAmino;
+}
 
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -202,6 +230,10 @@ export interface MsgChannelOpenConfirmResponse {}
  * type.
  */
 export interface MsgChannelOpenConfirmResponseAmino {}
+export interface MsgChannelOpenConfirmResponseAminoType {
+  type: "cosmos-sdk/MsgChannelOpenConfirmResponse";
+  value: MsgChannelOpenConfirmResponseAmino;
+}
 
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
@@ -228,6 +260,10 @@ export interface MsgChannelCloseInitAmino {
   channel_id: string;
   signer: string;
 }
+export interface MsgChannelCloseInitAminoType {
+  type: "cosmos-sdk/MsgChannelCloseInit";
+  value: MsgChannelCloseInitAmino;
+}
 
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
@@ -244,6 +280,10 @@ export interface MsgChannelCloseInitResponse {}
 
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseAmino {}
+export interface MsgChannelCloseInitResponseAminoType {
+  type: "cosmos-sdk/MsgChannelCloseInitResponse";
+  value: MsgChannelCloseInitResponseAmino;
+}
 
 /** MsgChannelCloseInitResponse defines the Msg/ChannelCloseInit response type. */
 export interface MsgChannelCloseInitResponseSDKType {}
@@ -271,6 +311,10 @@ export interface MsgChannelCloseConfirmAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgChannelCloseConfirmAminoType {
+  type: "cosmos-sdk/MsgChannelCloseConfirm";
+  value: MsgChannelCloseConfirmAmino;
+}
 
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
@@ -295,6 +339,10 @@ export interface MsgChannelCloseConfirmResponse {}
  * type.
  */
 export interface MsgChannelCloseConfirmResponseAmino {}
+export interface MsgChannelCloseConfirmResponseAminoType {
+  type: "cosmos-sdk/MsgChannelCloseConfirmResponse";
+  value: MsgChannelCloseConfirmResponseAmino;
+}
 
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
@@ -317,6 +365,10 @@ export interface MsgRecvPacketAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgRecvPacketAminoType {
+  type: "cosmos-sdk/MsgRecvPacket";
+  value: MsgRecvPacketAmino;
+}
 
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketSDKType {
@@ -331,6 +383,10 @@ export interface MsgRecvPacketResponse {}
 
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseAmino {}
+export interface MsgRecvPacketResponseAminoType {
+  type: "cosmos-sdk/MsgRecvPacketResponse";
+  value: MsgRecvPacketResponseAmino;
+}
 
 /** MsgRecvPacketResponse defines the Msg/RecvPacket response type. */
 export interface MsgRecvPacketResponseSDKType {}
@@ -352,6 +408,10 @@ export interface MsgTimeoutAmino {
   next_sequence_recv: string;
   signer: string;
 }
+export interface MsgTimeoutAminoType {
+  type: "cosmos-sdk/MsgTimeout";
+  value: MsgTimeoutAmino;
+}
 
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutSDKType {
@@ -367,6 +427,10 @@ export interface MsgTimeoutResponse {}
 
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseAmino {}
+export interface MsgTimeoutResponseAminoType {
+  type: "cosmos-sdk/MsgTimeoutResponse";
+  value: MsgTimeoutResponseAmino;
+}
 
 /** MsgTimeoutResponse defines the Msg/Timeout response type. */
 export interface MsgTimeoutResponseSDKType {}
@@ -390,6 +454,10 @@ export interface MsgTimeoutOnCloseAmino {
   next_sequence_recv: string;
   signer: string;
 }
+export interface MsgTimeoutOnCloseAminoType {
+  type: "cosmos-sdk/MsgTimeoutOnClose";
+  value: MsgTimeoutOnCloseAmino;
+}
 
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseSDKType {
@@ -406,6 +474,10 @@ export interface MsgTimeoutOnCloseResponse {}
 
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseAmino {}
+export interface MsgTimeoutOnCloseResponseAminoType {
+  type: "cosmos-sdk/MsgTimeoutOnCloseResponse";
+  value: MsgTimeoutOnCloseResponseAmino;
+}
 
 /** MsgTimeoutOnCloseResponse defines the Msg/TimeoutOnClose response type. */
 export interface MsgTimeoutOnCloseResponseSDKType {}
@@ -427,6 +499,10 @@ export interface MsgAcknowledgementAmino {
   proof_height?: HeightAmino;
   signer: string;
 }
+export interface MsgAcknowledgementAminoType {
+  type: "cosmos-sdk/MsgAcknowledgement";
+  value: MsgAcknowledgementAmino;
+}
 
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementSDKType {
@@ -442,6 +518,10 @@ export interface MsgAcknowledgementResponse {}
 
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponseAmino {}
+export interface MsgAcknowledgementResponseAminoType {
+  type: "cosmos-sdk/MsgAcknowledgementResponse";
+  value: MsgAcknowledgementResponseAmino;
+}
 
 /** MsgAcknowledgementResponse defines the Msg/Acknowledgement response type. */
 export interface MsgAcknowledgementResponseSDKType {}

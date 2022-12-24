@@ -80,6 +80,10 @@ export interface LogDescriptorAmino {
    */
   display_name: string;
 }
+export interface LogDescriptorAminoType {
+  type: "/google.api.LogDescriptor";
+  value: LogDescriptorAmino;
+}
 
 /**
  * A description of a log type. Example in YAML format:

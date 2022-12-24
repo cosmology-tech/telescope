@@ -27,6 +27,10 @@ export interface ControlAmino {
    */
   environment: string;
 }
+export interface ControlAminoType {
+  type: "/google.api.Control";
+  value: ControlAmino;
+}
 
 /**
  * Selects and configures the service controller used by the service.  The

@@ -22,6 +22,10 @@ export interface LegacyAminoPubKeyAmino {
   threshold: number;
   public_keys: AnyAmino[];
 }
+export interface LegacyAminoPubKeyAminoType {
+  type: "cosmos-sdk/LegacyAminoPubKey";
+  value: LegacyAminoPubKeyAmino;
+}
 
 /**
  * LegacyAminoPubKey specifies a public key type

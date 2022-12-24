@@ -8,6 +8,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -23,6 +27,10 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
+export interface QueryParamsResponseAminoType {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -34,6 +42,10 @@ export interface QueryInflationRequest {}
 
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequestAmino {}
+export interface QueryInflationRequestAminoType {
+  type: "cosmos-sdk/QueryInflationRequest";
+  value: QueryInflationRequestAmino;
+}
 
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequestSDKType {}
@@ -55,6 +67,10 @@ export interface QueryInflationResponseAmino {
   /** inflation is the current minting inflation value. */
   inflation: Uint8Array;
 }
+export interface QueryInflationResponseAminoType {
+  type: "cosmos-sdk/QueryInflationResponse";
+  value: QueryInflationResponseAmino;
+}
 
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
@@ -75,6 +91,10 @@ export interface QueryAnnualProvisionsRequest {}
  * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsRequestAmino {}
+export interface QueryAnnualProvisionsRequestAminoType {
+  type: "cosmos-sdk/QueryAnnualProvisionsRequest";
+  value: QueryAnnualProvisionsRequestAmino;
+}
 
 /**
  * QueryAnnualProvisionsRequest is the request type for the
@@ -98,6 +118,10 @@ export interface QueryAnnualProvisionsResponse {
 export interface QueryAnnualProvisionsResponseAmino {
   /** annual_provisions is the current minting annual provisions value. */
   annual_provisions: Uint8Array;
+}
+export interface QueryAnnualProvisionsResponseAminoType {
+  type: "cosmos-sdk/QueryAnnualProvisionsResponse";
+  value: QueryAnnualProvisionsResponseAmino;
 }
 
 /**

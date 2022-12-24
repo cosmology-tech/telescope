@@ -27,6 +27,10 @@ export interface ParsedExprAmino {
   /** The syntax version of the source, e.g. `cel1`. */
   syntax_version: string;
 }
+export interface ParsedExprAminoType {
+  type: "/google.api.expr.v1beta1.ParsedExpr";
+  value: ParsedExprAmino;
+}
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
@@ -128,6 +132,10 @@ export interface ExprAmino {
   /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionAmino;
 }
+export interface ExprAminoType {
+  type: "/google.api.expr.v1beta1.Expr";
+  value: ExprAmino;
+}
 
 /**
  * An abstract representation of a common expression.
@@ -177,6 +185,10 @@ export interface Expr_IdentAmino {
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression.
    */
   name: string;
+}
+export interface Expr_IdentAminoType {
+  type: "/google.api.expr.v1beta1.Ident";
+  value: Expr_IdentAmino;
 }
 
 /** An identifier expression. e.g. `request`. */
@@ -235,6 +247,10 @@ export interface Expr_SelectAmino {
    */
   test_only: boolean;
 }
+export interface Expr_SelectAminoType {
+  type: "/google.api.expr.v1beta1.Select";
+  value: Expr_SelectAmino;
+}
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
@@ -280,6 +296,10 @@ export interface Expr_CallAmino {
   /** The arguments. */
   args: ExprAmino[];
 }
+export interface Expr_CallAminoType {
+  type: "/google.api.expr.v1beta1.Call";
+  value: Expr_CallAmino;
+}
 
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -312,6 +332,10 @@ export interface Expr_CreateList {
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
   elements: ExprAmino[];
+}
+export interface Expr_CreateListAminoType {
+  type: "/google.api.expr.v1beta1.CreateList";
+  value: Expr_CreateListAmino;
 }
 
 /**
@@ -358,6 +382,10 @@ export interface Expr_CreateStructAmino {
 
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntryAmino[];
+}
+export interface Expr_CreateStructAminoType {
+  type: "/google.api.expr.v1beta1.CreateStruct";
+  value: Expr_CreateStructAmino;
 }
 
 /**
@@ -408,6 +436,10 @@ export interface Expr_CreateStruct_EntryAmino {
 
   /** Required. The value assigned to the key. */
   value?: ExprAmino;
+}
+export interface Expr_CreateStruct_EntryAminoType {
+  type: "/google.api.expr.v1beta1.Entry";
+  value: Expr_CreateStruct_EntryAmino;
 }
 
 /** Represents an entry. */
@@ -545,6 +577,10 @@ export interface Expr_ComprehensionAmino {
    */
   result?: ExprAmino;
 }
+export interface Expr_ComprehensionAminoType {
+  type: "/google.api.expr.v1beta1.Comprehension";
+  value: Expr_ComprehensionAmino;
+}
 
 /**
  * A comprehension expression applied to a list or map.
@@ -654,6 +690,10 @@ export interface LiteralAmino {
 
   /** bytes value. */
   bytes_value?: Uint8Array;
+}
+export interface LiteralAminoType {
+  type: "/google.api.expr.v1beta1.Literal";
+  value: LiteralAmino;
 }
 
 /**

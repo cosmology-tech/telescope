@@ -64,6 +64,10 @@ export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
 }
+export interface DeploymentIDAminoType {
+  type: "/akash.deployment.v1beta2.DeploymentID";
+  value: DeploymentIDAmino;
+}
 
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -86,6 +90,10 @@ export interface DeploymentAmino {
   version: Uint8Array;
   created_at: string;
 }
+export interface DeploymentAminoType {
+  type: "/akash.deployment.v1beta2.Deployment";
+  value: DeploymentAmino;
+}
 
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -107,6 +115,10 @@ export interface DeploymentFiltersAmino {
   owner: string;
   dseq: string;
   state: string;
+}
+export interface DeploymentFiltersAminoType {
+  type: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: DeploymentFiltersAmino;
 }
 
 /** DeploymentFilters defines filters used to filter deployments */

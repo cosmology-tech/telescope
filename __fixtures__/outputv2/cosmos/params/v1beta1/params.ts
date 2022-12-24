@@ -15,6 +15,10 @@ export interface ParameterChangeProposalAmino {
   description: string;
   changes: ParamChangeAmino[];
 }
+export interface ParameterChangeProposalAminoType {
+  type: "cosmos-sdk/ParameterChangeProposal";
+  value: ParameterChangeProposalAmino;
+}
 
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
@@ -41,6 +45,10 @@ export interface ParamChangeAmino {
   subspace: string;
   key: string;
   value: string;
+}
+export interface ParamChangeAminoType {
+  type: "cosmos-sdk/ParamChange";
+  value: ParamChangeAmino;
 }
 
 /**

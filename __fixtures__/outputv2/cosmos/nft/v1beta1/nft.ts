@@ -50,6 +50,10 @@ export interface ClassAmino {
   /** data is the app specific metadata of the NFT class. Optional */
   data?: AnyAmino;
 }
+export interface ClassAminoType {
+  type: "cosmos-sdk/Class";
+  value: ClassAmino;
+}
 
 /** Class defines the class of the nft type. */
 export interface ClassSDKType {
@@ -96,6 +100,10 @@ export interface NFTAmino {
 
   /** data is an app specific data of the NFT. Optional */
   data?: AnyAmino;
+}
+export interface NFTAminoType {
+  type: "cosmos-sdk/NFT";
+  value: NFTAmino;
 }
 
 /** NFT defines the NFT. */

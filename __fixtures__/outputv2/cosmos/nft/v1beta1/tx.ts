@@ -31,6 +31,10 @@ export interface MsgSendAmino {
   /** receiver is the receiver address of nft */
   receiver: string;
 }
+export interface MsgSendAminoType {
+  type: "cosmos-sdk/MsgNFTSend";
+  value: MsgSendAmino;
+}
 
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
@@ -45,6 +49,10 @@ export interface MsgSendResponse {}
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoType {
+  type: "cosmos-sdk/MsgSendResponse";
+  value: MsgSendResponseAmino;
+}
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}

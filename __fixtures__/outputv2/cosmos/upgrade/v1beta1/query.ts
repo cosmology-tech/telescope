@@ -14,6 +14,10 @@ export interface QueryCurrentPlanRequest {}
  * method.
  */
 export interface QueryCurrentPlanRequestAmino {}
+export interface QueryCurrentPlanRequestAminoType {
+  type: "cosmos-sdk/QueryCurrentPlanRequest";
+  value: QueryCurrentPlanRequestAmino;
+}
 
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
@@ -37,6 +41,10 @@ export interface QueryCurrentPlanResponse {
 export interface QueryCurrentPlanResponseAmino {
   /** plan is the current upgrade plan. */
   plan?: PlanAmino;
+}
+export interface QueryCurrentPlanResponseAminoType {
+  type: "cosmos-sdk/QueryCurrentPlanResponse";
+  value: QueryCurrentPlanResponseAmino;
 }
 
 /**
@@ -64,6 +72,10 @@ export interface QueryAppliedPlanRequestAmino {
   /** name is the name of the applied plan to query for. */
   name: string;
 }
+export interface QueryAppliedPlanRequestAminoType {
+  type: "cosmos-sdk/QueryAppliedPlanRequest";
+  value: QueryAppliedPlanRequestAmino;
+}
 
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
@@ -89,6 +101,10 @@ export interface QueryAppliedPlanResponse {
 export interface QueryAppliedPlanResponseAmino {
   /** height is the block height at which the plan was applied. */
   height: string;
+}
+export interface QueryAppliedPlanResponseAminoType {
+  type: "cosmos-sdk/QueryAppliedPlanResponse";
+  value: QueryAppliedPlanResponseAmino;
 }
 
 /**
@@ -126,6 +142,10 @@ export interface QueryUpgradedConsensusStateRequestAmino {
    */
   last_height: string;
 }
+export interface QueryUpgradedConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
+  value: QueryUpgradedConsensusStateRequestAmino;
+}
 
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
@@ -157,6 +177,10 @@ export interface QueryUpgradedConsensusStateResponse {
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Since: cosmos-sdk 0.43 */
   upgraded_consensus_state: Uint8Array;
+}
+export interface QueryUpgradedConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
+  value: QueryUpgradedConsensusStateResponseAmino;
 }
 
 /**
@@ -198,6 +222,10 @@ export interface QueryModuleVersionsRequestAmino {
    */
   module_name: string;
 }
+export interface QueryModuleVersionsRequestAminoType {
+  type: "cosmos-sdk/QueryModuleVersionsRequest";
+  value: QueryModuleVersionsRequestAmino;
+}
 
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
@@ -230,6 +258,10 @@ export interface QueryModuleVersionsResponseAmino {
   /** module_versions is a list of module names with their consensus versions. */
   module_versions: ModuleVersionAmino[];
 }
+export interface QueryModuleVersionsResponseAminoType {
+  type: "cosmos-sdk/QueryModuleVersionsResponse";
+  value: QueryModuleVersionsResponseAmino;
+}
 
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
@@ -254,6 +286,10 @@ export interface QueryAuthorityRequest {}
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityRequestAmino {}
+export interface QueryAuthorityRequestAminoType {
+  type: "cosmos-sdk/QueryAuthorityRequest";
+  value: QueryAuthorityRequestAmino;
+}
 
 /**
  * QueryAuthorityRequest is the request type for Query/Authority
@@ -278,6 +314,10 @@ export interface QueryAuthorityResponse {
  */
 export interface QueryAuthorityResponseAmino {
   address: string;
+}
+export interface QueryAuthorityResponseAminoType {
+  type: "cosmos-sdk/QueryAuthorityResponse";
+  value: QueryAuthorityResponseAmino;
 }
 
 /**

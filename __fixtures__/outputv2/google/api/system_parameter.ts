@@ -87,6 +87,10 @@ export interface SystemParametersAmino {
    */
   rules: SystemParameterRuleAmino[];
 }
+export interface SystemParametersAminoType {
+  type: "/google.api.SystemParameters";
+  value: SystemParametersAmino;
+}
 
 /**
  * ### System parameter configuration
@@ -145,6 +149,10 @@ export interface SystemParameterRuleAmino {
    */
   parameters: SystemParameterAmino[];
 }
+export interface SystemParameterRuleAminoType {
+  type: "/google.api.SystemParameterRule";
+  value: SystemParameterRuleAmino;
+}
 
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -197,6 +205,10 @@ export interface SystemParameterAmino {
    * sensitive.
    */
   url_query_parameter: string;
+}
+export interface SystemParameterAminoType {
+  type: "/google.api.SystemParameter";
+  value: SystemParameterAmino;
 }
 
 /**

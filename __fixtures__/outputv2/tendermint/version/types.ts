@@ -21,6 +21,10 @@ export interface AppAmino {
   protocol: string;
   software: string;
 }
+export interface AppAminoType {
+  type: "/tendermint.version.App";
+  value: AppAmino;
+}
 
 /**
  * App includes the protocol and software version for the application.
@@ -50,6 +54,10 @@ export interface Consensus {
 export interface ConsensusAmino {
   block: string;
   app: string;
+}
+export interface ConsensusAminoType {
+  type: "/tendermint.version.Consensus";
+  value: ConsensusAmino;
 }
 
 /**

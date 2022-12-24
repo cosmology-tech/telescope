@@ -24,6 +24,10 @@ export interface ConsensusParamsAmino {
   validator?: ValidatorParamsAmino;
   version?: VersionParamsAmino;
 }
+export interface ConsensusParamsAminoType {
+  type: "/tendermint.types.ConsensusParams";
+  value: ConsensusParamsAmino;
+}
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -80,6 +84,10 @@ export interface BlockParamsAmino {
    * Not exposed to the application.
    */
   time_iota_ms: string;
+}
+export interface BlockParamsAminoType {
+  type: "/tendermint.types.BlockParams";
+  value: BlockParamsAmino;
 }
 
 /** BlockParams contains limits on the block size. */
@@ -142,6 +150,10 @@ export interface EvidenceParamsAmino {
    */
   max_bytes: string;
 }
+export interface EvidenceParamsAminoType {
+  type: "/tendermint.types.EvidenceParams";
+  value: EvidenceParamsAmino;
+}
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsSDKType {
@@ -165,6 +177,10 @@ export interface ValidatorParams {
 export interface ValidatorParamsAmino {
   pub_key_types: string[];
 }
+export interface ValidatorParamsAminoType {
+  type: "/tendermint.types.ValidatorParams";
+  value: ValidatorParamsAmino;
+}
 
 /**
  * ValidatorParams restrict the public key types validators can use.
@@ -182,6 +198,10 @@ export interface VersionParams {
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsAmino {
   app_version: string;
+}
+export interface VersionParamsAminoType {
+  type: "/tendermint.types.VersionParams";
+  value: VersionParamsAmino;
 }
 
 /** VersionParams contains the ABCI application version. */
@@ -207,6 +227,10 @@ export interface HashedParams {
 export interface HashedParamsAmino {
   block_max_bytes: string;
   block_max_gas: string;
+}
+export interface HashedParamsAminoType {
+  type: "/tendermint.types.HashedParams";
+  value: HashedParamsAmino;
 }
 
 /**

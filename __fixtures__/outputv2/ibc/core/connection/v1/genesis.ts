@@ -22,6 +22,10 @@ export interface GenesisStateAmino {
   next_connection_sequence: string;
   params?: ParamsAmino;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisStateSDKType {

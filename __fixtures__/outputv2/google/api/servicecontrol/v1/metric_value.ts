@@ -11,6 +11,10 @@ export interface MetricValue_LabelsEntryAmino {
   key: string;
   value: string;
 }
+export interface MetricValue_LabelsEntryAminoType {
+  type: "/google.api.servicecontrol.v1.undefined";
+  value: MetricValue_LabelsEntryAmino;
+}
 export interface MetricValue_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -103,6 +107,10 @@ export interface MetricValueAmino {
   /** A distribution value. */
   distribution_value?: DistributionAmino;
 }
+export interface MetricValueAminoType {
+  type: "/google.api.servicecontrol.v1.MetricValue";
+  value: MetricValueAmino;
+}
 
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
@@ -142,6 +150,10 @@ export interface MetricValueSetAmino {
 
   /** The values in this metric. */
   metric_values: MetricValueAmino[];
+}
+export interface MetricValueSetAminoType {
+  type: "/google.api.servicecontrol.v1.MetricValueSet";
+  value: MetricValueSetAmino;
 }
 
 /**

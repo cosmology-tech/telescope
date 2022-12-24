@@ -30,6 +30,10 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated channel identifier */
   next_channel_sequence: string;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisStateSDKType {
@@ -61,6 +65,10 @@ export interface PacketSequenceAmino {
   port_id: string;
   channel_id: string;
   sequence: string;
+}
+export interface PacketSequenceAminoType {
+  type: "cosmos-sdk/PacketSequence";
+  value: PacketSequenceAmino;
 }
 
 /**

@@ -16,6 +16,10 @@ export interface ProviderAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
+export interface ProviderAminoType {
+  type: "/akash.audit.v1beta2.Provider";
+  value: ProviderAmino;
+}
 
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
@@ -37,6 +41,10 @@ export interface AuditedAttributesAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
+export interface AuditedAttributesAminoType {
+  type: "/akash.audit.v1beta2.AuditedAttributes";
+  value: AuditedAttributesAmino;
+}
 
 /** Attributes */
 export interface AuditedAttributesSDKType {
@@ -54,6 +62,10 @@ export interface AttributesResponse {
 export interface AttributesResponseAmino {
   attributes: AuditedAttributesAmino[];
 }
+export interface AttributesResponseAminoType {
+  type: "/akash.audit.v1beta2.AttributesResponse";
+  value: AttributesResponseAmino;
+}
 
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
@@ -70,6 +82,10 @@ export interface AttributesFilters {
 export interface AttributesFiltersAmino {
   auditors: string[];
   owners: string[];
+}
+export interface AttributesFiltersAminoType {
+  type: "/akash.audit.v1beta2.AttributesFilters";
+  value: AttributesFiltersAmino;
 }
 
 /** AttributesFilters defines filters used to filter deployments */
@@ -91,6 +107,10 @@ export interface MsgSignProviderAttributesAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
+export interface MsgSignProviderAttributesAminoType {
+  type: "/akash.audit.v1beta2.MsgSignProviderAttributes";
+  value: MsgSignProviderAttributesAmino;
+}
 
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
@@ -104,6 +124,10 @@ export interface MsgSignProviderAttributesResponse {}
 
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseAmino {}
+export interface MsgSignProviderAttributesResponseAminoType {
+  type: "/akash.audit.v1beta2.MsgSignProviderAttributesResponse";
+  value: MsgSignProviderAttributesResponseAmino;
+}
 
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseSDKType {}
@@ -121,6 +145,10 @@ export interface MsgDeleteProviderAttributesAmino {
   auditor: string;
   keys: string[];
 }
+export interface MsgDeleteProviderAttributesAminoType {
+  type: "/akash.audit.v1beta2.MsgDeleteProviderAttributes";
+  value: MsgDeleteProviderAttributesAmino;
+}
 
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
@@ -134,6 +162,10 @@ export interface MsgDeleteProviderAttributesResponse {}
 
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseAmino {}
+export interface MsgDeleteProviderAttributesResponseAminoType {
+  type: "/akash.audit.v1beta2.MsgDeleteProviderAttributesResponse";
+  value: MsgDeleteProviderAttributesResponseAmino;
+}
 
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseSDKType {}

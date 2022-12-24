@@ -348,6 +348,10 @@ export interface ManagedServiceAmino {
   /** ID of the project that produces and owns this service. */
   producer_project_id: string;
 }
+export interface ManagedServiceAminoType {
+  type: "/google.api.servicemanagement.v1.ManagedService";
+  value: ManagedServiceAmino;
+}
 
 /**
  * The full representation of a Service that is managed by
@@ -393,6 +397,10 @@ export interface OperationMetadataAmino {
   /** The start time of the operation. */
   start_time?: Date;
 }
+export interface OperationMetadataAminoType {
+  type: "/google.api.servicemanagement.v1.OperationMetadata";
+  value: OperationMetadataAmino;
+}
 
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
@@ -418,6 +426,10 @@ export interface OperationMetadata_StepAmino {
 
   /** The status code. */
   status: OperationMetadata_Status;
+}
+export interface OperationMetadata_StepAminoType {
+  type: "/google.api.servicemanagement.v1.Step";
+  value: OperationMetadata_StepAmino;
 }
 
 /** Represents the status of one operation step. */
@@ -448,6 +460,10 @@ export interface DiagnosticAmino {
 
   /** Message describing the error or warning. */
   message: string;
+}
+export interface DiagnosticAminoType {
+  type: "/google.api.servicemanagement.v1.Diagnostic";
+  value: DiagnosticAmino;
 }
 
 /** Represents a diagnostic message (error or warning) */
@@ -494,6 +510,10 @@ export interface ConfigSourceAmino {
    */
   files: ConfigFileAmino[];
 }
+export interface ConfigSourceAminoType {
+  type: "/google.api.servicemanagement.v1.ConfigSource";
+  value: ConfigSourceAmino;
+}
 
 /**
  * Represents a source file which is used to generate the service configuration
@@ -527,6 +547,10 @@ export interface ConfigFileAmino {
   /** The type of configuration file this represents. */
   file_type: ConfigFile_FileType;
 }
+export interface ConfigFileAminoType {
+  type: "/google.api.servicemanagement.v1.ConfigFile";
+  value: ConfigFileAmino;
+}
 
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
@@ -551,6 +575,10 @@ export interface ConfigRefAmino {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
+}
+export interface ConfigRefAminoType {
+  type: "/google.api.servicemanagement.v1.ConfigRef";
+  value: ConfigRefAmino;
 }
 
 /** Represents a service configuration with its name and id. */
@@ -590,6 +618,10 @@ export interface ChangeReportAmino {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   config_changes: ConfigChangeAmino[];
+}
+export interface ChangeReportAminoType {
+  type: "/google.api.servicemanagement.v1.ChangeReport";
+  value: ChangeReportAmino;
 }
 
 /**
@@ -695,6 +727,10 @@ export interface RolloutAmino {
   /** The name of the service associated with this Rollout. */
   service_name: string;
 }
+export interface RolloutAminoType {
+  type: "/google.api.servicemanagement.v1.Rollout";
+  value: RolloutAmino;
+}
 
 /**
  * A rollout resource that defines how service configuration versions are pushed
@@ -717,6 +753,10 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   key: string;
   value: number;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoType {
+  type: "/google.api.servicemanagement.v1.undefined";
+  value: Rollout_TrafficPercentStrategy_PercentagesEntryAmino;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
@@ -808,6 +848,10 @@ export interface Rollout_TrafficPercentStrategyAmino {
     [key: string]: number;
   };
 }
+export interface Rollout_TrafficPercentStrategyAminoType {
+  type: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
+  value: Rollout_TrafficPercentStrategyAmino;
+}
 
 /**
  * Strategy that specifies how clients of Google Service Controller want to
@@ -858,6 +902,10 @@ export interface Rollout_DeleteServiceStrategy {}
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategyAmino {}
+export interface Rollout_DeleteServiceStrategyAminoType {
+  type: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
+  value: Rollout_DeleteServiceStrategyAmino;
+}
 
 /**
  * Strategy used to delete a service. This strategy is a placeholder only

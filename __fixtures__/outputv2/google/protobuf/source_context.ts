@@ -25,6 +25,10 @@ export interface SourceContextAmino {
    */
   file_name: string;
 }
+export interface SourceContextAminoType {
+  type: "/google.protobuf.SourceContext";
+  value: SourceContextAmino;
+}
 
 /**
  * `SourceContext` represents information about the source of a

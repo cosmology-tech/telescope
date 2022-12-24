@@ -45,6 +45,10 @@ export interface RecordAmino {
   /** Offline does not store any information. */
   offline?: Record_OfflineAmino;
 }
+export interface RecordAminoType {
+  type: "cosmos-sdk/Record";
+  value: RecordAmino;
+}
 
 /** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
@@ -73,6 +77,10 @@ export interface Record_LocalAmino {
   priv_key?: AnyAmino;
   priv_key_type: string;
 }
+export interface Record_LocalAminoType {
+  type: "cosmos-sdk/Local";
+  value: Record_LocalAmino;
+}
 
 /**
  * Item is a keyring item stored in a keyring backend.
@@ -92,6 +100,10 @@ export interface Record_Ledger {
 export interface Record_LedgerAmino {
   path?: BIP44ParamsAmino;
 }
+export interface Record_LedgerAminoType {
+  type: "cosmos-sdk/Ledger";
+  value: Record_LedgerAmino;
+}
 
 /** Ledger item */
 export interface Record_LedgerSDKType {
@@ -103,6 +115,10 @@ export interface Record_Multi {}
 
 /** Multi item */
 export interface Record_MultiAmino {}
+export interface Record_MultiAminoType {
+  type: "cosmos-sdk/Multi";
+  value: Record_MultiAmino;
+}
 
 /** Multi item */
 export interface Record_MultiSDKType {}
@@ -112,6 +128,10 @@ export interface Record_Offline {}
 
 /** Offline item */
 export interface Record_OfflineAmino {}
+export interface Record_OfflineAminoType {
+  type: "cosmos-sdk/Offline";
+  value: Record_OfflineAmino;
+}
 
 /** Offline item */
 export interface Record_OfflineSDKType {}

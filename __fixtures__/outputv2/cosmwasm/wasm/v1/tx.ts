@@ -34,6 +34,10 @@ export interface MsgStoreCodeAmino {
    */
   instantiate_permission?: AccessConfigAmino;
 }
+export interface MsgStoreCodeAminoType {
+  type: "wasm/MsgStoreCode";
+  value: MsgStoreCodeAmino;
+}
 
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeSDKType {
@@ -52,6 +56,10 @@ export interface MsgStoreCodeResponse {
 export interface MsgStoreCodeResponseAmino {
   /** CodeID is the reference to the stored WASM code */
   code_id: string;
+}
+export interface MsgStoreCodeResponseAminoType {
+  type: "wasm/MsgStoreCodeResponse";
+  value: MsgStoreCodeResponseAmino;
 }
 
 /** MsgStoreCodeResponse returns store result data. */
@@ -106,6 +114,10 @@ export interface MsgInstantiateContractAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
+export interface MsgInstantiateContractAminoType {
+  type: "wasm/MsgInstantiateContract";
+  value: MsgInstantiateContractAmino;
+}
 
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
@@ -136,6 +148,10 @@ export interface MsgInstantiateContractResponseAmino {
 
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
+}
+export interface MsgInstantiateContractResponseAminoType {
+  type: "wasm/MsgInstantiateContractResponse";
+  value: MsgInstantiateContractResponseAmino;
 }
 
 /** MsgInstantiateContractResponse return instantiation result data */
@@ -173,6 +189,10 @@ export interface MsgExecuteContractAmino {
   /** Funds coins that are transferred to the contract on execution */
   funds: CoinAmino[];
 }
+export interface MsgExecuteContractAminoType {
+  type: "wasm/MsgExecuteContract";
+  value: MsgExecuteContractAmino;
+}
 
 /** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContractSDKType {
@@ -192,6 +212,10 @@ export interface MsgExecuteContractResponse {
 export interface MsgExecuteContractResponseAmino {
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
+}
+export interface MsgExecuteContractResponseAminoType {
+  type: "wasm/MsgExecuteContractResponse";
+  value: MsgExecuteContractResponseAmino;
 }
 
 /** MsgExecuteContractResponse returns execution result data. */
@@ -228,6 +252,10 @@ export interface MsgMigrateContractAmino {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
+export interface MsgMigrateContractAminoType {
+  type: "wasm/MsgMigrateContract";
+  value: MsgMigrateContractAmino;
+}
 
 /** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContractSDKType {
@@ -253,6 +281,10 @@ export interface MsgMigrateContractResponseAmino {
    * (May be empty)
    */
   data: Uint8Array;
+}
+export interface MsgMigrateContractResponseAminoType {
+  type: "wasm/MsgMigrateContractResponse";
+  value: MsgMigrateContractResponseAmino;
 }
 
 /** MsgMigrateContractResponse returns contract migration result data. */
@@ -283,6 +315,10 @@ export interface MsgUpdateAdminAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface MsgUpdateAdminAminoType {
+  type: "wasm/MsgUpdateAdmin";
+  value: MsgUpdateAdminAmino;
+}
 
 /** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdminSDKType {
@@ -296,6 +332,10 @@ export interface MsgUpdateAdminResponse {}
 
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseAmino {}
+export interface MsgUpdateAdminResponseAminoType {
+  type: "wasm/MsgUpdateAdminResponse";
+  value: MsgUpdateAdminResponseAmino;
+}
 
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseSDKType {}
@@ -317,6 +357,10 @@ export interface MsgClearAdminAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface MsgClearAdminAminoType {
+  type: "wasm/MsgClearAdmin";
+  value: MsgClearAdminAmino;
+}
 
 /** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdminSDKType {
@@ -329,6 +373,10 @@ export interface MsgClearAdminResponse {}
 
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponseAmino {}
+export interface MsgClearAdminResponseAminoType {
+  type: "wasm/MsgClearAdminResponse";
+  value: MsgClearAdminResponseAmino;
+}
 
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponseSDKType {}

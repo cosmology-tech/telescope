@@ -11,6 +11,10 @@ export interface MsgUnjail {
 export interface MsgUnjailAmino {
   validator_addr: string;
 }
+export interface MsgUnjailAminoType {
+  type: "cosmos-sdk/MsgUnjail";
+  value: MsgUnjailAmino;
+}
 
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailSDKType {
@@ -22,6 +26,10 @@ export interface MsgUnjailResponse {}
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseAmino {}
+export interface MsgUnjailResponseAminoType {
+  type: "cosmos-sdk/MsgUnjailResponse";
+  value: MsgUnjailResponseAmino;
+}
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseSDKType {}

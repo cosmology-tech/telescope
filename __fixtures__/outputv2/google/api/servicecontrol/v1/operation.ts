@@ -61,6 +61,10 @@ export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
 }
+export interface Operation_LabelsEntryAminoType {
+  type: "/google.api.servicecontrol.v1.undefined";
+  value: Operation_LabelsEntryAmino;
+}
 export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -248,6 +252,10 @@ export interface OperationAmino {
 
   /** Unimplemented. */
   extensions: AnyAmino[];
+}
+export interface OperationAminoType {
+  type: "/google.api.servicecontrol.v1.Operation";
+  value: OperationAmino;
 }
 
 /** Represents information regarding an operation. */

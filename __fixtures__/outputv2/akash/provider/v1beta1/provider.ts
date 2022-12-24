@@ -14,6 +14,10 @@ export interface ProviderInfoAmino {
   email: string;
   website: string;
 }
+export interface ProviderInfoAminoType {
+  type: "/akash.provider.v1beta1.ProviderInfo";
+  value: ProviderInfoAmino;
+}
 
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
@@ -36,6 +40,10 @@ export interface MsgCreateProviderAmino {
   attributes: AttributeAmino[];
   info?: ProviderInfoAmino;
 }
+export interface MsgCreateProviderAminoType {
+  type: "/akash.provider.v1beta1.MsgCreateProvider";
+  value: MsgCreateProviderAmino;
+}
 
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
@@ -50,6 +58,10 @@ export interface MsgCreateProviderResponse {}
 
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseAmino {}
+export interface MsgCreateProviderResponseAminoType {
+  type: "/akash.provider.v1beta1.MsgCreateProviderResponse";
+  value: MsgCreateProviderResponseAmino;
+}
 
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
@@ -69,6 +81,10 @@ export interface MsgUpdateProviderAmino {
   attributes: AttributeAmino[];
   info?: ProviderInfoAmino;
 }
+export interface MsgUpdateProviderAminoType {
+  type: "/akash.provider.v1beta1.MsgUpdateProvider";
+  value: MsgUpdateProviderAmino;
+}
 
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -83,6 +99,10 @@ export interface MsgUpdateProviderResponse {}
 
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseAmino {}
+export interface MsgUpdateProviderResponseAminoType {
+  type: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
+  value: MsgUpdateProviderResponseAmino;
+}
 
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
@@ -96,6 +116,10 @@ export interface MsgDeleteProvider {
 export interface MsgDeleteProviderAmino {
   owner: string;
 }
+export interface MsgDeleteProviderAminoType {
+  type: "/akash.provider.v1beta1.MsgDeleteProvider";
+  value: MsgDeleteProviderAmino;
+}
 
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -107,6 +131,10 @@ export interface MsgDeleteProviderResponse {}
 
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseAmino {}
+export interface MsgDeleteProviderResponseAminoType {
+  type: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
+  value: MsgDeleteProviderResponseAmino;
+}
 
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
@@ -125,6 +153,10 @@ export interface ProviderAmino {
   host_uri: string;
   attributes: AttributeAmino[];
   info?: ProviderInfoAmino;
+}
+export interface ProviderAminoType {
+  type: "/akash.provider.v1beta1.Provider";
+  value: ProviderAmino;
 }
 
 /** Provider stores owner and host details */

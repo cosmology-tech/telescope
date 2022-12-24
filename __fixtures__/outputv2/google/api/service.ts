@@ -317,6 +317,10 @@ export interface ServiceAmino {
   /** @deprecated */
   config_version?: UInt32ValueAmino;
 }
+export interface ServiceAminoType {
+  type: "/google.api.Service";
+  value: ServiceAmino;
+}
 
 /**
  * `Service` is the root object of Google service configuration schema. It

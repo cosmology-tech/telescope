@@ -29,6 +29,10 @@ export interface DelegatorWithdrawInfoAmino {
   /** withdraw_address is the address to withdraw the delegation rewards to. */
   withdraw_address: string;
 }
+export interface DelegatorWithdrawInfoAminoType {
+  type: "cosmos-sdk/DelegatorWithdrawInfo";
+  value: DelegatorWithdrawInfoAmino;
+}
 
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -56,6 +60,10 @@ export interface ValidatorOutstandingRewardsRecordAmino {
 
   /** outstanding_rewards represents the oustanding rewards of a validator. */
   outstanding_rewards: DecCoinAmino[];
+}
+export interface ValidatorOutstandingRewardsRecordAminoType {
+  type: "cosmos-sdk/ValidatorOutstandingRewardsRecord";
+  value: ValidatorOutstandingRewardsRecordAmino;
 }
 
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
@@ -86,6 +94,10 @@ export interface ValidatorAccumulatedCommissionRecordAmino {
 
   /** accumulated is the accumulated commission of a validator. */
   accumulated?: ValidatorAccumulatedCommissionAmino;
+}
+export interface ValidatorAccumulatedCommissionRecordAminoType {
+  type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord";
+  value: ValidatorAccumulatedCommissionRecordAmino;
 }
 
 /**
@@ -126,6 +138,10 @@ export interface ValidatorHistoricalRewardsRecordAmino {
   /** rewards defines the historical rewards of a validator. */
   rewards?: ValidatorHistoricalRewardsAmino;
 }
+export interface ValidatorHistoricalRewardsRecordAminoType {
+  type: "cosmos-sdk/ValidatorHistoricalRewardsRecord";
+  value: ValidatorHistoricalRewardsRecordAmino;
+}
 
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -153,6 +169,10 @@ export interface ValidatorCurrentRewardsRecordAmino {
 
   /** rewards defines the current rewards of a validator. */
   rewards?: ValidatorCurrentRewardsAmino;
+}
+export interface ValidatorCurrentRewardsRecordAminoType {
+  type: "cosmos-sdk/ValidatorCurrentRewardsRecord";
+  value: ValidatorCurrentRewardsRecordAmino;
 }
 
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
@@ -183,6 +203,10 @@ export interface DelegatorStartingInfoRecordAmino {
 
   /** starting_info defines the starting info of a delegator. */
   starting_info?: DelegatorStartingInfoAmino;
+}
+export interface DelegatorStartingInfoRecordAminoType {
+  type: "cosmos-sdk/DelegatorStartingInfoRecord";
+  value: DelegatorStartingInfoRecordAmino;
 }
 
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
@@ -220,6 +244,10 @@ export interface ValidatorSlashEventRecordAmino {
 
   /** validator_slash_event describes the slash event. */
   validator_slash_event?: ValidatorSlashEventAmino;
+}
+export interface ValidatorSlashEventRecordAminoType {
+  type: "cosmos-sdk/ValidatorSlashEventRecord";
+  value: ValidatorSlashEventRecordAmino;
 }
 
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
@@ -294,6 +322,10 @@ export interface GenesisStateAmino {
 
   /** fee_pool defines the validator slash events at genesis. */
   validator_slash_events: ValidatorSlashEventRecordAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the distribution module's genesis state. */

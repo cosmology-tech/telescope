@@ -37,6 +37,10 @@ export interface BasicAllowanceAmino {
   /** expiration specifies an optional time when this allowance expires */
   expiration?: Date;
 }
+export interface BasicAllowanceAminoType {
+  type: "cosmos-sdk/BasicAllowance";
+  value: BasicAllowanceAmino;
+}
 
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -108,6 +112,10 @@ export interface PeriodicAllowanceAmino {
    */
   period_reset?: Date;
 }
+export interface PeriodicAllowanceAminoType {
+  type: "cosmos-sdk/PeriodicAllowance";
+  value: PeriodicAllowanceAmino;
+}
 
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -138,6 +146,10 @@ export interface AllowedMsgAllowanceAmino {
   /** allowed_messages are the messages for which the grantee has the access. */
   allowed_messages: string[];
 }
+export interface AllowedMsgAllowanceAminoType {
+  type: "cosmos-sdk/AllowedMsgAllowance";
+  value: AllowedMsgAllowanceAmino;
+}
 
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
@@ -167,6 +179,10 @@ export interface GrantAmino {
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
+}
+export interface GrantAminoType {
+  type: "cosmos-sdk/Grant";
+  value: GrantAmino;
 }
 
 /** Grant is stored in the KVStore to record a grant with full context */

@@ -358,6 +358,10 @@ export interface TypeAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
+export interface TypeAminoType {
+  type: "/google.protobuf.Type";
+  value: TypeAmino;
+}
 
 /** A protocol buffer message type. */
 export interface TypeSDKType {
@@ -446,6 +450,10 @@ export interface FieldAmino {
   /** The string value of the default value of this field. Proto2 syntax only. */
   default_value: string;
 }
+export interface FieldAminoType {
+  type: "/google.protobuf.Field";
+  value: FieldAmino;
+}
 
 /** A single field of a message type. */
 export interface FieldSDKType {
@@ -496,6 +504,10 @@ export interface EnumAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
+export interface EnumAminoType {
+  type: "/google.protobuf.Enum";
+  value: EnumAmino;
+}
 
 /** Enum type definition. */
 export interface EnumSDKType {
@@ -528,6 +540,10 @@ export interface EnumValueAmino {
 
   /** Protocol buffer options. */
   options: OptionAmino[];
+}
+export interface EnumValueAminoType {
+  type: "/google.protobuf.EnumValue";
+  value: EnumValueAmino;
 }
 
 /** Enum value definition. */
@@ -579,6 +595,10 @@ export interface OptionAmino {
    * value using the google.protobuf.Int32Value type.
    */
   value?: AnyAmino;
+}
+export interface OptionAminoType {
+  type: "/google.protobuf.Option";
+  value: OptionAmino;
 }
 
 /**

@@ -76,6 +76,10 @@ export interface LabelDescriptorAmino {
   /** A human-readable description for the label. */
   description: string;
 }
+export interface LabelDescriptorAminoType {
+  type: "/google.api.LabelDescriptor";
+  value: LabelDescriptorAmino;
+}
 
 /** A description of a label. */
 export interface LabelDescriptorSDKType {

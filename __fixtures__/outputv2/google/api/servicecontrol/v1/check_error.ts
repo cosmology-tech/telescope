@@ -312,6 +312,10 @@ export interface CheckErrorAmino {
    */
   status?: StatusAmino;
 }
+export interface CheckErrorAminoType {
+  type: "/google.api.servicecontrol.v1.CheckError";
+  value: CheckErrorAmino;
+}
 
 /**
  * Defines the errors to be returned in

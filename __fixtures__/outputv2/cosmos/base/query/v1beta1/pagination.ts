@@ -93,6 +93,10 @@ export interface PageRequestAmino {
    */
   reverse: boolean;
 }
+export interface PageRequestAminoType {
+  type: "cosmos-sdk/PageRequest";
+  value: PageRequestAmino;
+}
 
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -157,6 +161,10 @@ export interface PageResponseAmino {
    * was set, its value is undefined otherwise
    */
   total: string;
+}
+export interface PageResponseAminoType {
+  type: "cosmos-sdk/PageResponse";
+  value: PageResponseAmino;
 }
 
 /**

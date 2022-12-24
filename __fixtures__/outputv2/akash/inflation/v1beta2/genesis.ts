@@ -12,6 +12,10 @@ export interface GenesisState {
 export interface GenesisStateAmino {
   params?: ParamsAmino;
 }
+export interface GenesisStateAminoType {
+  type: "/akash.inflation.v1beta2.GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {

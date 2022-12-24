@@ -32,6 +32,10 @@ export interface ReplacePoolIncentivesProposalAmino {
   description: string;
   records: DistrRecordAmino[];
 }
+export interface ReplacePoolIncentivesProposalAminoType {
+  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
+  value: ReplacePoolIncentivesProposalAmino;
+}
 
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -76,6 +80,10 @@ export interface UpdatePoolIncentivesProposalAmino {
   title: string;
   description: string;
   records: DistrRecordAmino[];
+}
+export interface UpdatePoolIncentivesProposalAminoType {
+  type: "osmosis/poolincentives/update-pool-incentives-proposal";
+  value: UpdatePoolIncentivesProposalAmino;
 }
 
 /**

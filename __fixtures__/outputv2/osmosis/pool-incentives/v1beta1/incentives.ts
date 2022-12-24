@@ -20,6 +20,10 @@ export interface ParamsAmino {
    */
   minted_denom: string;
 }
+export interface ParamsAminoType {
+  type: "osmosis/poolincentives/params";
+  value: ParamsAmino;
+}
 export interface ParamsSDKType {
   minted_denom: string;
 }
@@ -28,6 +32,10 @@ export interface LockableDurationsInfo {
 }
 export interface LockableDurationsInfoAmino {
   lockable_durations: DurationAmino[];
+}
+export interface LockableDurationsInfoAminoType {
+  type: "osmosis/poolincentives/lockable-durations-info";
+  value: LockableDurationsInfoAmino;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -40,6 +48,10 @@ export interface DistrInfoAmino {
   total_weight: string;
   records: DistrRecordAmino[];
 }
+export interface DistrInfoAminoType {
+  type: "osmosis/poolincentives/distr-info";
+  value: DistrInfoAmino;
+}
 export interface DistrInfoSDKType {
   total_weight: string;
   records: DistrRecordSDKType[];
@@ -51,6 +63,10 @@ export interface DistrRecord {
 export interface DistrRecordAmino {
   gauge_id: string;
   weight: string;
+}
+export interface DistrRecordAminoType {
+  type: "osmosis/poolincentives/distr-record";
+  value: DistrRecordAmino;
 }
 export interface DistrRecordSDKType {
   gauge_id: Long;
@@ -66,6 +82,10 @@ export interface PoolToGaugeAmino {
   gauge_id: string;
   duration?: DurationAmino;
 }
+export interface PoolToGaugeAminoType {
+  type: "osmosis/poolincentives/pool-to-gauge";
+  value: PoolToGaugeAmino;
+}
 export interface PoolToGaugeSDKType {
   pool_id: Long;
   gauge_id: Long;
@@ -76,6 +96,10 @@ export interface PoolToGauges {
 }
 export interface PoolToGaugesAmino {
   pool_to_gauge: PoolToGaugeAmino[];
+}
+export interface PoolToGaugesAminoType {
+  type: "osmosis/poolincentives/pool-to-gauges";
+  value: PoolToGaugesAmino;
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];

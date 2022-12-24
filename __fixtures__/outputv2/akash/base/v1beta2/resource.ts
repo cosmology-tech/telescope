@@ -15,6 +15,10 @@ export interface CPUAmino {
   units?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
+export interface CPUAminoType {
+  type: "/akash.base.v1beta2.CPU";
+  value: CPUAmino;
+}
 
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -32,6 +36,10 @@ export interface Memory {
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
+}
+export interface MemoryAminoType {
+  type: "/akash.base.v1beta2.Memory";
+  value: MemoryAmino;
 }
 
 /** Memory stores resource quantity and memory attributes */
@@ -52,6 +60,10 @@ export interface StorageAmino {
   name: string;
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
+}
+export interface StorageAminoType {
+  type: "/akash.base.v1beta2.Storage";
+  value: StorageAmino;
 }
 
 /** Storage stores resource quantity and storage attributes */

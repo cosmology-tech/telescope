@@ -15,6 +15,10 @@ export interface GroupIDAmino {
   dseq: string;
   gseq: number;
 }
+export interface GroupIDAminoType {
+  type: "/akash.deployment.v1beta2.GroupID";
+  value: GroupIDAmino;
+}
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {

@@ -14,6 +14,10 @@ export interface GenesisStateAmino {
   /** evidence defines all the evidence at genesis. */
   evidence: AnyAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateSDKType {

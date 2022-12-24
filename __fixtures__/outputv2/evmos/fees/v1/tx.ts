@@ -45,6 +45,10 @@ export interface MsgRegisterDevFeeInfoAmino {
    */
   nonces: string[];
 }
+export interface MsgRegisterDevFeeInfoAminoType {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: MsgRegisterDevFeeInfoAmino;
+}
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
@@ -65,6 +69,10 @@ export interface MsgRegisterDevFeeInfoResponse {}
  * type
  */
 export interface MsgRegisterDevFeeInfoResponseAmino {}
+export interface MsgRegisterDevFeeInfoResponseAminoType {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: MsgRegisterDevFeeInfoResponseAmino;
+}
 
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -95,6 +103,10 @@ export interface MsgCancelDevFeeInfoAmino {
   /** deployer bech32 address */
   deployer_address: string;
 }
+export interface MsgCancelDevFeeInfoAminoType {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: MsgCancelDevFeeInfoAmino;
+}
 
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
@@ -110,6 +122,10 @@ export interface MsgCancelDevFeeInfoResponse {}
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseAmino {}
+export interface MsgCancelDevFeeInfoResponseAminoType {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: MsgCancelDevFeeInfoResponseAmino;
+}
 
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
@@ -143,6 +159,10 @@ export interface MsgUpdateDevFeeInfoAmino {
   /** new withdraw bech32 address for receiving the transaction fees */
   withdraw_address: string;
 }
+export interface MsgUpdateDevFeeInfoAminoType {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: MsgUpdateDevFeeInfoAmino;
+}
 
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
@@ -159,6 +179,10 @@ export interface MsgUpdateDevFeeInfoResponse {}
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseAmino {}
+export interface MsgUpdateDevFeeInfoResponseAminoType {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: MsgUpdateDevFeeInfoResponseAmino;
+}
 
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}

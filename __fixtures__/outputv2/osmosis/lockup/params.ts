@@ -7,6 +7,10 @@ export interface Params {
 export interface ParamsAmino {
   force_unlock_allowed_addresses: string[];
 }
+export interface ParamsAminoType {
+  type: "osmosis/lockup/params";
+  value: ParamsAmino;
+}
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
 }

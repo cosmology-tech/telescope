@@ -23,6 +23,10 @@ export interface QueryChannelRequestAmino {
   /** channel unique identifier */
   channel_id: string;
 }
+export interface QueryChannelRequestAminoType {
+  type: "cosmos-sdk/QueryChannelRequest";
+  value: QueryChannelRequestAmino;
+}
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestSDKType {
@@ -61,6 +65,10 @@ export interface QueryChannelResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryChannelResponseAminoType {
+  type: "cosmos-sdk/QueryChannelResponse";
+  value: QueryChannelResponseAmino;
+}
 
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
@@ -83,6 +91,10 @@ export interface QueryChannelsRequest {
 export interface QueryChannelsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryChannelsRequestAminoType {
+  type: "cosmos-sdk/QueryChannelsRequest";
+  value: QueryChannelsRequestAmino;
 }
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
@@ -112,6 +124,10 @@ export interface QueryChannelsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryChannelsResponseAminoType {
+  type: "cosmos-sdk/QueryChannelsResponse";
+  value: QueryChannelsResponseAmino;
 }
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
@@ -143,6 +159,10 @@ export interface QueryConnectionChannelsRequestAmino {
 
   /** pagination request */
   pagination?: PageRequestAmino;
+}
+export interface QueryConnectionChannelsRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionChannelsRequest";
+  value: QueryConnectionChannelsRequestAmino;
 }
 
 /**
@@ -183,6 +203,10 @@ export interface QueryConnectionChannelsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
+export interface QueryConnectionChannelsResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionChannelsResponse";
+  value: QueryConnectionChannelsResponseAmino;
+}
 
 /**
  * QueryConnectionChannelsResponse is the Response type for the
@@ -216,6 +240,10 @@ export interface QueryChannelClientStateRequestAmino {
 
   /** channel unique identifier */
   channel_id: string;
+}
+export interface QueryChannelClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryChannelClientStateRequest";
+  value: QueryChannelClientStateRequestAmino;
 }
 
 /**
@@ -255,6 +283,10 @@ export interface QueryChannelClientStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryChannelClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryChannelClientStateResponse";
+  value: QueryChannelClientStateResponseAmino;
 }
 
 /**
@@ -301,6 +333,10 @@ export interface QueryChannelConsensusStateRequestAmino {
 
   /** revision height of the consensus state */
   revision_height: string;
+}
+export interface QueryChannelConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryChannelConsensusStateRequest";
+  value: QueryChannelConsensusStateRequestAmino;
 }
 
 /**
@@ -349,6 +385,10 @@ export interface QueryChannelConsensusStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryChannelConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryChannelConsensusStateResponse";
+  value: QueryChannelConsensusStateResponseAmino;
+}
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
@@ -389,6 +429,10 @@ export interface QueryPacketCommitmentRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketCommitmentRequestAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentRequest";
+  value: QueryPacketCommitmentRequestAmino;
 }
 
 /**
@@ -432,6 +476,10 @@ export interface QueryPacketCommitmentResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryPacketCommitmentResponseAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentResponse";
+  value: QueryPacketCommitmentResponseAmino;
+}
 
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
@@ -473,6 +521,10 @@ export interface QueryPacketCommitmentsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
+export interface QueryPacketCommitmentsRequestAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentsRequest";
+  value: QueryPacketCommitmentsRequestAmino;
+}
 
 /**
  * QueryPacketCommitmentsRequest is the request type for the
@@ -510,6 +562,10 @@ export interface QueryPacketCommitmentsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryPacketCommitmentsResponseAminoType {
+  type: "cosmos-sdk/QueryPacketCommitmentsResponse";
+  value: QueryPacketCommitmentsResponseAmino;
 }
 
 /**
@@ -550,6 +606,10 @@ export interface QueryPacketReceiptRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketReceiptRequestAminoType {
+  type: "cosmos-sdk/QueryPacketReceiptRequest";
+  value: QueryPacketReceiptRequestAmino;
 }
 
 /**
@@ -593,6 +653,10 @@ export interface QueryPacketReceiptResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryPacketReceiptResponseAminoType {
+  type: "cosmos-sdk/QueryPacketReceiptResponse";
+  value: QueryPacketReceiptResponseAmino;
+}
 
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
@@ -633,6 +697,10 @@ export interface QueryPacketAcknowledgementRequestAmino {
 
   /** packet sequence */
   sequence: string;
+}
+export interface QueryPacketAcknowledgementRequestAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementRequest";
+  value: QueryPacketAcknowledgementRequestAmino;
 }
 
 /**
@@ -675,6 +743,10 @@ export interface QueryPacketAcknowledgementResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementResponseAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementResponse";
+  value: QueryPacketAcknowledgementResponseAmino;
 }
 
 /**
@@ -723,6 +795,10 @@ export interface QueryPacketAcknowledgementsRequestAmino {
   /** list of packet sequences */
   packet_commitment_sequences: string[];
 }
+export interface QueryPacketAcknowledgementsRequestAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsRequest";
+  value: QueryPacketAcknowledgementsRequestAmino;
+}
 
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
@@ -761,6 +837,10 @@ export interface QueryPacketAcknowledgementsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementsResponseAminoType {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsResponse";
+  value: QueryPacketAcknowledgementsResponseAmino;
 }
 
 /**
@@ -802,6 +882,10 @@ export interface QueryUnreceivedPacketsRequestAmino {
   /** list of packet sequences */
   packet_commitment_sequences: string[];
 }
+export interface QueryUnreceivedPacketsRequestAminoType {
+  type: "cosmos-sdk/QueryUnreceivedPacketsRequest";
+  value: QueryUnreceivedPacketsRequestAmino;
+}
 
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
@@ -835,6 +919,10 @@ export interface QueryUnreceivedPacketsResponseAmino {
 
   /** query block height */
   height?: HeightAmino;
+}
+export interface QueryUnreceivedPacketsResponseAminoType {
+  type: "cosmos-sdk/QueryUnreceivedPacketsResponse";
+  value: QueryUnreceivedPacketsResponseAmino;
 }
 
 /**
@@ -875,6 +963,10 @@ export interface QueryUnreceivedAcksRequestAmino {
   /** list of acknowledgement sequences */
   packet_ack_sequences: string[];
 }
+export interface QueryUnreceivedAcksRequestAminoType {
+  type: "cosmos-sdk/QueryUnreceivedAcksRequest";
+  value: QueryUnreceivedAcksRequestAmino;
+}
 
 /**
  * QueryUnreceivedAcks is the request type for the
@@ -909,6 +1001,10 @@ export interface QueryUnreceivedAcksResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
+export interface QueryUnreceivedAcksResponseAminoType {
+  type: "cosmos-sdk/QueryUnreceivedAcksResponse";
+  value: QueryUnreceivedAcksResponseAmino;
+}
 
 /**
  * QueryUnreceivedAcksResponse is the response type for the
@@ -941,6 +1037,10 @@ export interface QueryNextSequenceReceiveRequestAmino {
 
   /** channel unique identifier */
   channel_id: string;
+}
+export interface QueryNextSequenceReceiveRequestAminoType {
+  type: "cosmos-sdk/QueryNextSequenceReceiveRequest";
+  value: QueryNextSequenceReceiveRequestAmino;
 }
 
 /**
@@ -980,6 +1080,10 @@ export interface QueryNextSequenceReceiveResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryNextSequenceReceiveResponseAminoType {
+  type: "cosmos-sdk/QueryNextSequenceReceiveResponse";
+  value: QueryNextSequenceReceiveResponseAmino;
 }
 
 /**

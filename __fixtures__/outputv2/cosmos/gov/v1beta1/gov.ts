@@ -197,6 +197,10 @@ export interface WeightedVoteOptionAmino {
   option: VoteOption;
   weight: string;
 }
+export interface WeightedVoteOptionAminoType {
+  type: "cosmos-sdk/WeightedVoteOption";
+  value: WeightedVoteOptionAmino;
+}
 
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
@@ -224,6 +228,10 @@ export interface TextProposal {
 export interface TextProposalAmino {
   title: string;
   description: string;
+}
+export interface TextProposalAminoType {
+  type: "cosmos-sdk/TextProposal";
+  value: TextProposalAmino;
 }
 
 /**
@@ -253,6 +261,10 @@ export interface DepositAmino {
   proposal_id: string;
   depositor: string;
   amount: CoinAmino[];
+}
+export interface DepositAminoType {
+  type: "cosmos-sdk/Deposit";
+  value: DepositAmino;
 }
 
 /**
@@ -302,6 +314,10 @@ export interface ProposalAmino {
   voting_start_time?: Date;
   voting_end_time?: Date;
 }
+export interface ProposalAminoType {
+  type: "cosmos-sdk/Proposal";
+  value: ProposalAmino;
+}
 
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
@@ -330,6 +346,10 @@ export interface TallyResultAmino {
   abstain: string;
   no: string;
   no_with_veto: string;
+}
+export interface TallyResultAminoType {
+  type: "cosmos-sdk/TallyResult";
+  value: TallyResultAmino;
 }
 
 /** TallyResult defines a standard tally for a governance proposal. */
@@ -381,6 +401,10 @@ export interface VoteAmino {
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOptionAmino[];
 }
+export interface VoteAminoType {
+  type: "cosmos-sdk/Vote";
+  value: VoteAmino;
+}
 
 /**
  * Vote defines a vote on a governance proposal.
@@ -418,6 +442,10 @@ export interface DepositParamsAmino {
    */
   max_deposit_period?: DurationAmino;
 }
+export interface DepositParamsAminoType {
+  type: "cosmos-sdk/DepositParams";
+  value: DepositParamsAmino;
+}
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
@@ -435,6 +463,10 @@ export interface VotingParams {
 export interface VotingParamsAmino {
   /** Length of the voting period. */
   voting_period?: DurationAmino;
+}
+export interface VotingParamsAminoType {
+  type: "cosmos-sdk/VotingParams";
+  value: VotingParamsAmino;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
@@ -476,6 +508,10 @@ export interface TallyParamsAmino {
    *  vetoed. Default value: 1/3.
    */
   veto_threshold: Uint8Array;
+}
+export interface TallyParamsAminoType {
+  type: "cosmos-sdk/TallyParams";
+  value: TallyParamsAmino;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

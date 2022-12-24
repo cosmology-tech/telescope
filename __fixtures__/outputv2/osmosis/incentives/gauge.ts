@@ -103,6 +103,10 @@ export interface GaugeAmino {
   /** distributed_coins are coins that have been distributed already */
   distributed_coins: CoinAmino[];
 }
+export interface GaugeAminoType {
+  type: "osmosis/incentives/gauge";
+  value: GaugeAmino;
+}
 
 /**
  * Gauge is an object that stores and distributes yields to recipients who
@@ -126,6 +130,10 @@ export interface LockableDurationsInfo {
 export interface LockableDurationsInfoAmino {
   /** List of incentivised durations that gauges will pay out to */
   lockable_durations: DurationAmino[];
+}
+export interface LockableDurationsInfoAminoType {
+  type: "osmosis/incentives/lockable-durations-info";
+  value: LockableDurationsInfoAmino;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];

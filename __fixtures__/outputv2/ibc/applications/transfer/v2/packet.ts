@@ -39,6 +39,10 @@ export interface FungibleTokenPacketDataAmino {
   /** the recipient address on the destination chain */
   receiver: string;
 }
+export interface FungibleTokenPacketDataAminoType {
+  type: "cosmos-sdk/FungibleTokenPacketData";
+  value: FungibleTokenPacketDataAmino;
+}
 
 /**
  * FungibleTokenPacketData defines a struct for the packet payload

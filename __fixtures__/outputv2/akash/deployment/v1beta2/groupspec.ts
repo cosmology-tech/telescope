@@ -17,6 +17,10 @@ export interface GroupSpecAmino {
   requirements?: PlacementRequirementsAmino;
   resources: ResourceAmino[];
 }
+export interface GroupSpecAminoType {
+  type: "/akash.deployment.v1beta2.GroupSpec";
+  value: GroupSpecAmino;
+}
 
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {

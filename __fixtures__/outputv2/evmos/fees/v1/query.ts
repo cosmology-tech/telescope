@@ -22,6 +22,10 @@ export interface QueryDevFeeInfosRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryDevFeeInfosRequestAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: QueryDevFeeInfosRequestAmino;
+}
 
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -52,6 +56,10 @@ export interface QueryDevFeeInfosResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
+export interface QueryDevFeeInfosResponseAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: QueryDevFeeInfosResponseAmino;
+}
 
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -79,6 +87,10 @@ export interface QueryDevFeeInfoRequestAmino {
   /** contract identifier is the hex contract address of a contract */
   contract_address: string;
 }
+export interface QueryDevFeeInfoRequestAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: QueryDevFeeInfoRequestAmino;
+}
 
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -103,6 +115,10 @@ export interface QueryDevFeeInfoResponse {
 export interface QueryDevFeeInfoResponseAmino {
   fee?: DevFeeInfoAmino;
 }
+export interface QueryDevFeeInfoResponseAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: QueryDevFeeInfoResponseAmino;
+}
 
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
@@ -117,6 +133,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "/evmos.fees.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -135,6 +155,10 @@ export interface QueryParamsResponse {
  */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "/evmos.fees.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /**
@@ -168,6 +192,10 @@ export interface QueryDevFeeInfosPerDeployerRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryDevFeeInfosPerDeployerRequestAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: QueryDevFeeInfosPerDeployerRequestAmino;
+}
 
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
@@ -198,6 +226,10 @@ export interface QueryDevFeeInfosPerDeployerResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryDevFeeInfosPerDeployerResponseAminoType {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: QueryDevFeeInfosPerDeployerResponseAmino;
 }
 
 /**

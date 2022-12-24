@@ -71,6 +71,10 @@ export interface UsageAmino {
    */
   producer_notification_channel: string;
 }
+export interface UsageAminoType {
+  type: "/google.api.Usage";
+  value: UsageAmino;
+}
 
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
@@ -179,6 +183,10 @@ export interface UsageRuleAmino {
    * methods, such as service health check methods.
    */
   skip_service_control: boolean;
+}
+export interface UsageRuleAminoType {
+  type: "/google.api.UsageRule";
+  value: UsageRuleAmino;
 }
 
 /**

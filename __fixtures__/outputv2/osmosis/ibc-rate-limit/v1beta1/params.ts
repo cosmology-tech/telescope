@@ -11,6 +11,10 @@ export interface Params {
 export interface ParamsAmino {
   contract_address: string;
 }
+export interface ParamsAminoType {
+  type: "osmosis/ibcratelimit/params";
+  value: ParamsAmino;
+}
 
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {

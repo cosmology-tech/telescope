@@ -15,6 +15,10 @@ export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
   evidence_hash: Uint8Array;
 }
+export interface QueryEvidenceRequestAminoType {
+  type: "cosmos-sdk/QueryEvidenceRequest";
+  value: QueryEvidenceRequestAmino;
+}
 
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestSDKType {
@@ -31,6 +35,10 @@ export interface QueryEvidenceResponse {
 export interface QueryEvidenceResponseAmino {
   /** evidence returns the requested evidence. */
   evidence?: AnyAmino;
+}
+export interface QueryEvidenceResponseAminoType {
+  type: "cosmos-sdk/QueryEvidenceResponse";
+  value: QueryEvidenceResponseAmino;
 }
 
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
@@ -54,6 +62,10 @@ export interface QueryAllEvidenceRequest {
 export interface QueryAllEvidenceRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryAllEvidenceRequestAminoType {
+  type: "cosmos-sdk/QueryAllEvidenceRequest";
+  value: QueryAllEvidenceRequestAmino;
 }
 
 /**
@@ -86,6 +98,10 @@ export interface QueryAllEvidenceResponseAmino {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryAllEvidenceResponseAminoType {
+  type: "cosmos-sdk/QueryAllEvidenceResponse";
+  value: QueryAllEvidenceResponseAmino;
 }
 
 /**

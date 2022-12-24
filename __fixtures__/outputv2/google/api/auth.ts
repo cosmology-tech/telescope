@@ -65,6 +65,10 @@ export interface AuthenticationAmino {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProviderAmino[];
 }
+export interface AuthenticationAminoType {
+  type: "/google.api.Authentication";
+  value: AuthenticationAmino;
+}
 
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -154,6 +158,10 @@ export interface AuthenticationRuleAmino {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirementAmino[];
 }
+export interface AuthenticationRuleAminoType {
+  type: "/google.api.AuthenticationRule";
+  value: AuthenticationRuleAmino;
+}
 
 /**
  * Authentication rules for the service.
@@ -213,6 +221,10 @@ export interface JwtLocationAmino {
    * value_prefix="Bearer " with a space at the end.
    */
   value_prefix: string;
+}
+export interface JwtLocationAminoType {
+  type: "/google.api.JwtLocation";
+  value: JwtLocationAmino;
 }
 
 /** Specifies a location to extract JWT from an API request. */
@@ -399,6 +411,10 @@ export interface AuthProviderAmino {
    */
   jwt_locations: JwtLocationAmino[];
 }
+export interface AuthProviderAminoType {
+  type: "/google.api.AuthProvider";
+  value: AuthProviderAmino;
+}
 
 /**
  * Configuration for an authentication provider, including support for
@@ -478,6 +494,10 @@ export interface OAuthRequirementsAmino {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonical_scopes: string;
+}
+export interface OAuthRequirementsAminoType {
+  type: "/google.api.OAuthRequirements";
+  value: OAuthRequirementsAmino;
 }
 
 /**
@@ -574,6 +594,10 @@ export interface AuthRequirementAmino {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
+}
+export interface AuthRequirementAminoType {
+  type: "/google.api.AuthRequirement";
+  value: AuthRequirementAmino;
 }
 
 /**

@@ -7,6 +7,10 @@ export interface Node {
 export interface NodeAmino {
   children: ChildAmino[];
 }
+export interface NodeAminoType {
+  type: "osmosis/store/node";
+  value: NodeAmino;
+}
 export interface NodeSDKType {
   children: ChildSDKType[];
 }
@@ -18,6 +22,10 @@ export interface ChildAmino {
   index: Uint8Array;
   accumulation: string;
 }
+export interface ChildAminoType {
+  type: "osmosis/store/child";
+  value: ChildAmino;
+}
 export interface ChildSDKType {
   index: Uint8Array;
   accumulation: string;
@@ -27,6 +35,10 @@ export interface Leaf {
 }
 export interface LeafAmino {
   leaf?: ChildAmino;
+}
+export interface LeafAminoType {
+  type: "osmosis/store/leaf";
+  value: LeafAmino;
 }
 export interface LeafSDKType {
   leaf?: ChildSDKType;

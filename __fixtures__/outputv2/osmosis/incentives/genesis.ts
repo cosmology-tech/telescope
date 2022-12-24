@@ -52,6 +52,10 @@ export interface GenesisStateAmino {
    */
   last_gauge_id: string;
 }
+export interface GenesisStateAminoType {
+  type: "osmosis/incentives/genesis-state";
+  value: GenesisStateAmino;
+}
 
 /**
  * GenesisState defines the incentives module's various parameters when first

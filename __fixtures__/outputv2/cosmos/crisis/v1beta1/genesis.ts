@@ -20,6 +20,10 @@ export interface GenesisStateAmino {
    */
   constant_fee?: CoinAmino;
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisStateSDKType {

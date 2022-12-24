@@ -49,6 +49,10 @@ export interface HttpAmino {
    */
   fully_decode_reserved_expansion: boolean;
 }
+export interface HttpAminoType {
+  type: "/google.api.Http";
+  value: HttpAmino;
+}
 
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -725,6 +729,10 @@ export interface HttpRuleAmino {
    */
   additional_bindings: HttpRuleAmino[];
 }
+export interface HttpRuleAminoType {
+  type: "/google.api.HttpRule";
+  value: HttpRuleAmino;
+}
 
 /**
  * # gRPC Transcoding
@@ -1026,6 +1034,10 @@ export interface CustomHttpPatternAmino {
 
   /** The path matched by this custom verb. */
   path: string;
+}
+export interface CustomHttpPatternAminoType {
+  type: "/google.api.CustomHttpPattern";
+  value: CustomHttpPatternAmino;
 }
 
 /** A custom pattern is used for defining custom HTTP verb. */

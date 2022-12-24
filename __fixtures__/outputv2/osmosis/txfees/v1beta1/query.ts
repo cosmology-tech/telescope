@@ -4,12 +4,20 @@ import { DeepPartial, isSet, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensRequestAmino {}
+export interface QueryFeeTokensRequestAminoType {
+  type: "osmosis/txfees/query-fee-tokens-request";
+  value: QueryFeeTokensRequestAmino;
+}
 export interface QueryFeeTokensRequestSDKType {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
 }
 export interface QueryFeeTokensResponseAmino {
   fee_tokens: FeeTokenAmino[];
+}
+export interface QueryFeeTokensResponseAminoType {
+  type: "osmosis/txfees/query-fee-tokens-response";
+  value: QueryFeeTokensResponseAmino;
 }
 export interface QueryFeeTokensResponseSDKType {
   fee_tokens: FeeTokenSDKType[];
@@ -29,6 +37,10 @@ export interface QueryDenomSpotPriceRequest {
  */
 export interface QueryDenomSpotPriceRequestAmino {
   denom: string;
+}
+export interface QueryDenomSpotPriceRequestAminoType {
+  type: "osmosis/txfees/query-denom-spot-price-request";
+  value: QueryDenomSpotPriceRequestAmino;
 }
 
 /**
@@ -56,6 +68,10 @@ export interface QueryDenomSpotPriceResponseAmino {
   poolID: string;
   spot_price: string;
 }
+export interface QueryDenomSpotPriceResponseAminoType {
+  type: "osmosis/txfees/query-denom-spot-price-response";
+  value: QueryDenomSpotPriceResponseAmino;
+}
 
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
@@ -71,6 +87,10 @@ export interface QueryDenomPoolIdRequest {
 export interface QueryDenomPoolIdRequestAmino {
   denom: string;
 }
+export interface QueryDenomPoolIdRequestAminoType {
+  type: "osmosis/txfees/query-denom-pool-id-request";
+  value: QueryDenomPoolIdRequestAmino;
+}
 export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
 }
@@ -80,17 +100,29 @@ export interface QueryDenomPoolIdResponse {
 export interface QueryDenomPoolIdResponseAmino {
   poolID: string;
 }
+export interface QueryDenomPoolIdResponseAminoType {
+  type: "osmosis/txfees/query-denom-pool-id-response";
+  value: QueryDenomPoolIdResponseAmino;
+}
 export interface QueryDenomPoolIdResponseSDKType {
   poolID: Long;
 }
 export interface QueryBaseDenomRequest {}
 export interface QueryBaseDenomRequestAmino {}
+export interface QueryBaseDenomRequestAminoType {
+  type: "osmosis/txfees/query-base-denom-request";
+  value: QueryBaseDenomRequestAmino;
+}
 export interface QueryBaseDenomRequestSDKType {}
 export interface QueryBaseDenomResponse {
   baseDenom: string;
 }
 export interface QueryBaseDenomResponseAmino {
   base_denom: string;
+}
+export interface QueryBaseDenomResponseAminoType {
+  type: "osmosis/txfees/query-base-denom-response";
+  value: QueryBaseDenomResponseAmino;
 }
 export interface QueryBaseDenomResponseSDKType {
   base_denom: string;

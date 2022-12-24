@@ -190,6 +190,10 @@ export interface HttpRequestAmino {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
+export interface HttpRequestAminoType {
+  type: "/google.logging.type.HttpRequest";
+  value: HttpRequestAmino;
+}
 
 /**
  * A common proto for logging HTTP requests. Only contains semantics

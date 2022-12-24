@@ -69,6 +69,10 @@ export interface ValidatorSigningInfoAmino {
    */
   missed_blocks_counter: string;
 }
+export interface ValidatorSigningInfoAminoType {
+  type: "cosmos-sdk/ValidatorSigningInfo";
+  value: ValidatorSigningInfoAmino;
+}
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -99,6 +103,10 @@ export interface ParamsAmino {
   downtime_jail_duration?: DurationAmino;
   slash_fraction_double_sign: Uint8Array;
   slash_fraction_downtime: Uint8Array;
+}
+export interface ParamsAminoType {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 
 /** Params represents the parameters used for by the slashing module. */

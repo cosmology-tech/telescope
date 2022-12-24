@@ -21,6 +21,10 @@ export interface DoubleValueAmino {
   /** The double value. */
   value: number;
 }
+export interface DoubleValueAminoType {
+  type: "/google.protobuf.DoubleValue";
+  value: DoubleValueAmino;
+}
 
 /**
  * Wrapper message for `double`.
@@ -49,6 +53,10 @@ export interface FloatValue {
 export interface FloatValueAmino {
   /** The float value. */
   value: number;
+}
+export interface FloatValueAminoType {
+  type: "/google.protobuf.FloatValue";
+  value: FloatValueAmino;
 }
 
 /**
@@ -79,6 +87,10 @@ export interface Int64ValueAmino {
   /** The int64 value. */
   value: string;
 }
+export interface Int64ValueAminoType {
+  type: "/google.protobuf.Int64Value";
+  value: Int64ValueAmino;
+}
 
 /**
  * Wrapper message for `int64`.
@@ -107,6 +119,10 @@ export interface UInt64Value {
 export interface UInt64ValueAmino {
   /** The uint64 value. */
   value: string;
+}
+export interface UInt64ValueAminoType {
+  type: "/google.protobuf.UInt64Value";
+  value: UInt64ValueAmino;
 }
 
 /**
@@ -137,6 +153,10 @@ export interface Int32ValueAmino {
   /** The int32 value. */
   value: number;
 }
+export interface Int32ValueAminoType {
+  type: "/google.protobuf.Int32Value";
+  value: Int32ValueAmino;
+}
 
 /**
  * Wrapper message for `int32`.
@@ -165,6 +185,10 @@ export interface UInt32Value {
 export interface UInt32ValueAmino {
   /** The uint32 value. */
   value: number;
+}
+export interface UInt32ValueAminoType {
+  type: "/google.protobuf.UInt32Value";
+  value: UInt32ValueAmino;
 }
 
 /**
@@ -195,6 +219,10 @@ export interface BoolValueAmino {
   /** The bool value. */
   value: boolean;
 }
+export interface BoolValueAminoType {
+  type: "/google.protobuf.BoolValue";
+  value: BoolValueAmino;
+}
 
 /**
  * Wrapper message for `bool`.
@@ -224,6 +252,10 @@ export interface StringValueAmino {
   /** The string value. */
   value: string;
 }
+export interface StringValueAminoType {
+  type: "/google.protobuf.StringValue";
+  value: StringValueAmino;
+}
 
 /**
  * Wrapper message for `string`.
@@ -252,6 +284,10 @@ export interface BytesValue {
 export interface BytesValueAmino {
   /** The bytes value. */
   value: Uint8Array;
+}
+export interface BytesValueAminoType {
+  type: "/google.protobuf.BytesValue";
+  value: BytesValueAmino;
 }
 
 /**

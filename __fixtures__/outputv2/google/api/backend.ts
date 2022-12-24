@@ -123,6 +123,10 @@ export interface BackendAmino {
    */
   rules: BackendRuleAmino[];
 }
+export interface BackendAminoType {
+  type: "/google.api.Backend";
+  value: BackendAmino;
+}
 
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
@@ -313,6 +317,10 @@ export interface BackendRuleAmino {
    * for more details on the supported values.
    */
   protocol: string;
+}
+export interface BackendRuleAminoType {
+  type: "/google.api.BackendRule";
+  value: BackendRuleAmino;
 }
 
 /** A backend rule provides configuration for an individual API element. */

@@ -38,6 +38,10 @@ export interface QueryAppVersionRequestAmino {
   /** proposed version */
   proposed_version: string;
 }
+export interface QueryAppVersionRequestAminoType {
+  type: "cosmos-sdk/QueryAppVersionRequest";
+  value: QueryAppVersionRequestAmino;
+}
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
@@ -64,6 +68,10 @@ export interface QueryAppVersionResponseAmino {
 
   /** supported app version */
   version: string;
+}
+export interface QueryAppVersionResponseAminoType {
+  type: "cosmos-sdk/QueryAppVersionResponse";
+  value: QueryAppVersionResponseAmino;
 }
 
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */

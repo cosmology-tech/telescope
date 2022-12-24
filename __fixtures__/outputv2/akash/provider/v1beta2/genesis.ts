@@ -12,6 +12,10 @@ export interface GenesisState {
 export interface GenesisStateAmino {
   providers: ProviderAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "/akash.provider.v1beta2.GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateSDKType {

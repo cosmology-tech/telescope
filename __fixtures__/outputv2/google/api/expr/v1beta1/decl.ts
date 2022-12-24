@@ -38,6 +38,10 @@ export interface DeclAmino {
   /** A function declaration. */
   function?: FunctionDeclAmino;
 }
+export interface DeclAminoType {
+  type: "/google.api.expr.v1beta1.Decl";
+  value: DeclAmino;
+}
 
 /** A declaration. */
 export interface DeclSDKType {
@@ -87,6 +91,10 @@ export interface DeclTypeAmino {
    */
   type_params: DeclTypeAmino[];
 }
+export interface DeclTypeAminoType {
+  type: "/google.api.expr.v1beta1.DeclType";
+  value: DeclTypeAmino;
+}
 
 /**
  * The declared type of a variable.
@@ -117,6 +125,10 @@ export interface IdentDeclAmino {
   /** Optional value of the identifier. */
   value?: ExprAmino;
 }
+export interface IdentDeclAminoType {
+  type: "/google.api.expr.v1beta1.IdentDecl";
+  value: IdentDeclAmino;
+}
 
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
@@ -146,6 +158,10 @@ export interface FunctionDeclAmino {
 
   /** If the first argument of the function is the receiver. */
   receiver_function: boolean;
+}
+export interface FunctionDeclAminoType {
+  type: "/google.api.expr.v1beta1.FunctionDecl";
+  value: FunctionDeclAmino;
 }
 
 /** A function declaration. */

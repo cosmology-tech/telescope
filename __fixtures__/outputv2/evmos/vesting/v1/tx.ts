@@ -63,6 +63,10 @@ export interface MsgCreateClawbackVestingAccountAmino {
    */
   merge: boolean;
 }
+export interface MsgCreateClawbackVestingAccountAminoType {
+  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
+  value: MsgCreateClawbackVestingAccountAmino;
+}
 
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
@@ -85,6 +89,10 @@ export interface MsgCreateClawbackVestingAccountResponse {}
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponseAmino {}
+export interface MsgCreateClawbackVestingAccountResponseAminoType {
+  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
+  value: MsgCreateClawbackVestingAccountResponseAmino;
+}
 
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
@@ -129,6 +137,10 @@ export interface MsgClawbackAmino {
    */
   dest_address: string;
 }
+export interface MsgClawbackAminoType {
+  type: "/evmos.vesting.v1.MsgClawback";
+  value: MsgClawbackAmino;
+}
 
 /**
  * MsgClawback defines a message that removes unvested tokens from a
@@ -145,6 +157,10 @@ export interface MsgClawbackResponse {}
 
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseAmino {}
+export interface MsgClawbackResponseAminoType {
+  type: "/evmos.vesting.v1.MsgClawbackResponse";
+  value: MsgClawbackResponseAmino;
+}
 
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}

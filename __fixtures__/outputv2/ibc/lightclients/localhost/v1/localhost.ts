@@ -26,6 +26,10 @@ export interface ClientStateAmino {
   /** self latest block height */
   height?: HeightAmino;
 }
+export interface ClientStateAminoType {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
+}
 
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)

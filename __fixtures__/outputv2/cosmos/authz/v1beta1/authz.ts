@@ -29,6 +29,10 @@ export interface GenericAuthorizationAmino {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
+export interface GenericAuthorizationAminoType {
+  type: "cosmos-sdk/GenericAuthorization";
+  value: GenericAuthorizationAmino;
+}
 
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -67,6 +71,10 @@ export interface GrantAmino {
    */
   expiration?: Date;
 }
+export interface GrantAminoType {
+  type: "cosmos-sdk/Grant";
+  value: GrantAmino;
+}
 
 /**
  * Grant gives permissions to execute
@@ -98,6 +106,10 @@ export interface GrantAuthorizationAmino {
   authorization?: AnyAmino;
   expiration?: Date;
 }
+export interface GrantAuthorizationAminoType {
+  type: "cosmos-sdk/GrantAuthorization";
+  value: GrantAuthorizationAmino;
+}
 
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
@@ -120,6 +132,10 @@ export interface GrantQueueItem {
 export interface GrantQueueItemAmino {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msg_type_urls: string[];
+}
+export interface GrantQueueItemAminoType {
+  type: "cosmos-sdk/GrantQueueItem";
+  value: GrantQueueItemAmino;
 }
 
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */

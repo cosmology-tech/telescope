@@ -120,6 +120,10 @@ export interface HttpBodyAmino {
    */
   extensions: AnyAmino[];
 }
+export interface HttpBodyAminoType {
+  type: "/google.api.HttpBody";
+  value: HttpBodyAmino;
+}
 
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for

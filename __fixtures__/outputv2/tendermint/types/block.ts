@@ -15,6 +15,10 @@ export interface BlockAmino {
   evidence?: EvidenceListAmino;
   last_commit?: CommitAmino;
 }
+export interface BlockAminoType {
+  type: "/tendermint.types.Block";
+  value: BlockAmino;
+}
 export interface BlockSDKType {
   header?: HeaderSDKType;
   data?: DataSDKType;

@@ -56,6 +56,10 @@ export interface StatusAmino {
    */
   details: AnyAmino[];
 }
+export interface StatusAminoType {
+  type: "/google.rpc.Status";
+  value: StatusAmino;
+}
 
 /**
  * The `Status` type defines a logical error model that is suitable for

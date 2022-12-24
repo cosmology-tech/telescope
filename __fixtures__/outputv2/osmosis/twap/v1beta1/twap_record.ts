@@ -90,6 +90,10 @@ export interface TwapRecordAmino {
    */
   last_error_time?: Date;
 }
+export interface TwapRecordAminoType {
+  type: "osmosis/twap/twap-record";
+  value: TwapRecordAmino;
+}
 
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp

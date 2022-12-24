@@ -19,6 +19,10 @@ export interface MultiSignature {
 export interface MultiSignatureAmino {
   signatures: Uint8Array[];
 }
+export interface MultiSignatureAminoType {
+  type: "cosmos-sdk/MultiSignature";
+  value: MultiSignatureAmino;
+}
 
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -49,6 +53,10 @@ export interface CompactBitArray {
 export interface CompactBitArrayAmino {
   extra_bits_stored: number;
   elems: Uint8Array;
+}
+export interface CompactBitArrayAminoType {
+  type: "cosmos-sdk/CompactBitArray";
+  value: CompactBitArrayAmino;
 }
 
 /**

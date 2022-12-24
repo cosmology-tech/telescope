@@ -16,6 +16,10 @@ export interface GenesisDeploymentAmino {
   deployment?: DeploymentAmino;
   groups: GroupAmino[];
 }
+export interface GenesisDeploymentAminoType {
+  type: "/akash.deployment.v1beta2.GenesisDeployment";
+  value: GenesisDeploymentAmino;
+}
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
@@ -33,6 +37,10 @@ export interface GenesisState {
 export interface GenesisStateAmino {
   deployments: GenesisDeploymentAmino[];
   params?: ParamsAmino;
+}
+export interface GenesisStateAminoType {
+  type: "/akash.deployment.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState stores slice of genesis deployment instance */

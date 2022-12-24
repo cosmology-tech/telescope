@@ -22,6 +22,10 @@ export interface QueryTokenPairsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryTokenPairsRequestAminoType {
+  type: "/evmos.erc20.v1.QueryTokenPairsRequest";
+  value: QueryTokenPairsRequestAmino;
+}
 
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -52,6 +56,10 @@ export interface QueryTokenPairsResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
+export interface QueryTokenPairsResponseAminoType {
+  type: "/evmos.erc20.v1.QueryTokenPairsResponse";
+  value: QueryTokenPairsResponseAmino;
+}
 
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -79,6 +87,10 @@ export interface QueryTokenPairRequestAmino {
    */
   token: string;
 }
+export interface QueryTokenPairRequestAminoType {
+  type: "/evmos.erc20.v1.QueryTokenPairRequest";
+  value: QueryTokenPairRequestAmino;
+}
 
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
@@ -100,6 +112,10 @@ export interface QueryTokenPairResponse {
 export interface QueryTokenPairResponseAmino {
   token_pair?: TokenPairAmino;
 }
+export interface QueryTokenPairResponseAminoType {
+  type: "/evmos.erc20.v1.QueryTokenPairResponse";
+  value: QueryTokenPairResponseAmino;
+}
 
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
@@ -114,6 +130,10 @@ export interface QueryParamsRequest {}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoType {
+  type: "/evmos.erc20.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -132,6 +152,10 @@ export interface QueryParamsResponse {
  */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoType {
+  type: "/evmos.erc20.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 
 /**

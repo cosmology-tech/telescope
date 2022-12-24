@@ -21,6 +21,10 @@ export interface GenesisStateAmino {
   /** accounts are the accounts present at genesis. */
   accounts: AnyAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisStateSDKType {

@@ -35,6 +35,10 @@ export interface StoreKVPairAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
+export interface StoreKVPairAminoType {
+  type: "cosmos-sdk/StoreKVPair";
+  value: StoreKVPairAmino;
+}
 
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)

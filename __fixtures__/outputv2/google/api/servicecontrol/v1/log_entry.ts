@@ -14,6 +14,10 @@ export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
+export interface LogEntry_LabelsEntryAminoType {
+  type: "/google.api.servicecontrol.v1.undefined";
+  value: LogEntry_LabelsEntryAmino;
+}
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -172,6 +176,10 @@ export interface LogEntryAmino {
    */
   source_location?: LogEntrySourceLocationAmino;
 }
+export interface LogEntryAminoType {
+  type: "/google.api.servicecontrol.v1.LogEntry";
+  value: LogEntryAmino;
+}
 
 /** An individual log entry. */
 export interface LogEntrySDKType {
@@ -240,6 +248,10 @@ export interface LogEntryOperationAmino {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
+export interface LogEntryOperationAminoType {
+  type: "/google.api.servicecontrol.v1.LogEntryOperation";
+  value: LogEntryOperationAmino;
+}
 
 /**
  * Additional information about a potentially long-running operation with which
@@ -306,6 +318,10 @@ export interface LogEntrySourceLocationAmino {
    * (Python).
    */
   function: string;
+}
+export interface LogEntrySourceLocationAminoType {
+  type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
+  value: LogEntrySourceLocationAmino;
 }
 
 /**

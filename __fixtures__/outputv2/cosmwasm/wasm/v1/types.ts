@@ -135,6 +135,10 @@ export interface AccessTypeParam {
 export interface AccessTypeParamAmino {
   value: AccessType;
 }
+export interface AccessTypeParamAminoType {
+  type: "wasm/AccessTypeParam";
+  value: AccessTypeParamAmino;
+}
 
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
@@ -151,6 +155,10 @@ export interface AccessConfig {
 export interface AccessConfigAmino {
   permission: AccessType;
   address: string;
+}
+export interface AccessConfigAminoType {
+  type: "wasm/AccessConfig";
+  value: AccessConfigAmino;
 }
 
 /** AccessConfig access control type. */
@@ -171,6 +179,10 @@ export interface ParamsAmino {
   code_upload_access?: AccessConfigAmino;
   instantiate_default_permission: AccessType;
   max_wasm_code_size: string;
+}
+export interface ParamsAminoType {
+  type: "wasm/Params";
+  value: ParamsAmino;
 }
 
 /** Params defines the set of wasm parameters. */
@@ -202,6 +214,10 @@ export interface CodeInfoAmino {
 
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiate_config?: AccessConfigAmino;
+}
+export interface CodeInfoAminoType {
+  type: "wasm/CodeInfo";
+  value: CodeInfoAmino;
 }
 
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -268,6 +284,10 @@ export interface ContractInfoAmino {
    */
   extension?: AnyAmino;
 }
+export interface ContractInfoAminoType {
+  type: "wasm/ContractInfo";
+  value: ContractInfoAmino;
+}
 
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
@@ -302,6 +322,10 @@ export interface ContractCodeHistoryEntryAmino {
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
   msg: Uint8Array;
+}
+export interface ContractCodeHistoryEntryAminoType {
+  type: "wasm/ContractCodeHistoryEntry";
+  value: ContractCodeHistoryEntryAmino;
 }
 
 /** ContractCodeHistoryEntry metadata to a contract. */
@@ -341,6 +365,10 @@ export interface AbsoluteTxPositionAmino {
    */
   tx_index: string;
 }
+export interface AbsoluteTxPositionAminoType {
+  type: "wasm/AbsoluteTxPosition";
+  value: AbsoluteTxPositionAmino;
+}
 
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
@@ -367,6 +395,10 @@ export interface ModelAmino {
 
   /** base64-encode raw value */
   value: Uint8Array;
+}
+export interface ModelAminoType {
+  type: "wasm/Model";
+  value: ModelAmino;
 }
 
 /** Model is a struct that holds a KV pair */

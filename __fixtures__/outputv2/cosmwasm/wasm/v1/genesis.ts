@@ -21,6 +21,10 @@ export interface GenesisStateAmino {
   sequences: SequenceAmino[];
   gen_msgs: GenesisState_GenMsgsAmino[];
 }
+export interface GenesisStateAminoType {
+  type: "wasm/GenesisState";
+  value: GenesisStateAmino;
+}
 
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateSDKType {
@@ -49,6 +53,10 @@ export interface GenesisState_GenMsgsAmino {
   store_code?: MsgStoreCodeAmino;
   instantiate_contract?: MsgInstantiateContractAmino;
   execute_contract?: MsgExecuteContractAmino;
+}
+export interface GenesisState_GenMsgsAminoType {
+  type: "wasm/GenMsgs";
+  value: GenesisState_GenMsgsAmino;
 }
 
 /**
@@ -80,6 +88,10 @@ export interface CodeAmino {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
+export interface CodeAminoType {
+  type: "wasm/Code";
+  value: CodeAmino;
+}
 
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
@@ -102,6 +114,10 @@ export interface ContractAmino {
   contract_info?: ContractInfoAmino;
   contract_state: ModelAmino[];
 }
+export interface ContractAminoType {
+  type: "wasm/Contract";
+  value: ContractAmino;
+}
 
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
@@ -120,6 +136,10 @@ export interface Sequence {
 export interface SequenceAmino {
   id_key: Uint8Array;
   value: string;
+}
+export interface SequenceAminoType {
+  type: "wasm/Sequence";
+  value: SequenceAmino;
 }
 
 /** Sequence key and value of an id generation counter */

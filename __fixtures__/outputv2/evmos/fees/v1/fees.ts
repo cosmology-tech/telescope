@@ -37,6 +37,10 @@ export interface DevFeeInfoAmino {
    */
   withdraw_address: string;
 }
+export interface DevFeeInfoAminoType {
+  type: "/evmos.fees.v1.DevFeeInfo";
+  value: DevFeeInfoAmino;
+}
 
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions

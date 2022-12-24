@@ -8,6 +8,10 @@ export interface QueryConfigRequest {}
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestAmino {}
+export interface QueryConfigRequestAminoType {
+  type: "cosmos-sdk/QueryConfigRequest";
+  value: QueryConfigRequestAmino;
+}
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestSDKType {}
@@ -22,6 +26,10 @@ export interface QueryConfigResponse {
 export interface QueryConfigResponseAmino {
   /** config is the current app config. */
   config?: ConfigAmino;
+}
+export interface QueryConfigResponseAminoType {
+  type: "cosmos-sdk/QueryConfigResponse";
+  value: QueryConfigResponseAmino;
 }
 
 /** QueryConfigRequest is the Query/Config response type. */

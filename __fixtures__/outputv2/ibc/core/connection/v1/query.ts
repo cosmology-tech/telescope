@@ -23,6 +23,10 @@ export interface QueryConnectionRequestAmino {
   /** connection unique identifier */
   connection_id: string;
 }
+export interface QueryConnectionRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionRequest";
+  value: QueryConnectionRequestAmino;
+}
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -63,6 +67,10 @@ export interface QueryConnectionResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryConnectionResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionResponse";
+  value: QueryConnectionResponseAmino;
+}
 
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
@@ -89,6 +97,10 @@ export interface QueryConnectionsRequest {
  */
 export interface QueryConnectionsRequestAmino {
   pagination?: PageRequestAmino;
+}
+export interface QueryConnectionsRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionsRequest";
+  value: QueryConnectionsRequestAmino;
 }
 
 /**
@@ -128,6 +140,10 @@ export interface QueryConnectionsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
+export interface QueryConnectionsResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionsResponse";
+  value: QueryConnectionsResponseAmino;
+}
 
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
@@ -155,6 +171,10 @@ export interface QueryClientConnectionsRequest {
 export interface QueryClientConnectionsRequestAmino {
   /** client identifier associated with a connection */
   client_id: string;
+}
+export interface QueryClientConnectionsRequestAminoType {
+  type: "cosmos-sdk/QueryClientConnectionsRequest";
+  value: QueryClientConnectionsRequestAmino;
 }
 
 /**
@@ -194,6 +214,10 @@ export interface QueryClientConnectionsResponseAmino {
   /** height at which the proof was generated */
   proof_height?: HeightAmino;
 }
+export interface QueryClientConnectionsResponseAminoType {
+  type: "cosmos-sdk/QueryClientConnectionsResponse";
+  value: QueryClientConnectionsResponseAmino;
+}
 
 /**
  * QueryClientConnectionsResponse is the response type for the
@@ -221,6 +245,10 @@ export interface QueryConnectionClientStateRequest {
 export interface QueryConnectionClientStateRequestAmino {
   /** connection identifier */
   connection_id: string;
+}
+export interface QueryConnectionClientStateRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionClientStateRequest";
+  value: QueryConnectionClientStateRequestAmino;
 }
 
 /**
@@ -260,6 +288,10 @@ export interface QueryConnectionClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
+export interface QueryConnectionClientStateResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionClientStateResponse";
+  value: QueryConnectionClientStateResponseAmino;
+}
 
 /**
  * QueryConnectionClientStateResponse is the response type for the
@@ -291,6 +323,10 @@ export interface QueryConnectionConsensusStateRequestAmino {
   connection_id: string;
   revision_number: string;
   revision_height: string;
+}
+export interface QueryConnectionConsensusStateRequestAminoType {
+  type: "cosmos-sdk/QueryConnectionConsensusStateRequest";
+  value: QueryConnectionConsensusStateRequestAmino;
 }
 
 /**
@@ -337,6 +373,10 @@ export interface QueryConnectionConsensusStateResponseAmino {
 
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
+}
+export interface QueryConnectionConsensusStateResponseAminoType {
+  type: "cosmos-sdk/QueryConnectionConsensusStateResponse";
+  value: QueryConnectionConsensusStateResponseAmino;
 }
 
 /**

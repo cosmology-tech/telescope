@@ -24,6 +24,10 @@ export interface EquivocationAmino {
   power: string;
   consensus_address: string;
 }
+export interface EquivocationAminoType {
+  type: "cosmos-sdk/Equivocation";
+  value: EquivocationAmino;
+}
 
 /**
  * Equivocation implements the Evidence interface and defines evidence of double

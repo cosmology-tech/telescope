@@ -33,6 +33,10 @@ export interface TableDescriptorAmino {
    */
   id: number;
 }
+export interface TableDescriptorAminoType {
+  type: "cosmos-sdk/TableDescriptor";
+  value: TableDescriptorAmino;
+}
 
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
@@ -128,6 +132,10 @@ export interface PrimaryKeyDescriptorAmino {
    */
   auto_increment: boolean;
 }
+export interface PrimaryKeyDescriptorAminoType {
+  type: "cosmos-sdk/PrimaryKeyDescriptor";
+  value: PrimaryKeyDescriptorAmino;
+}
 
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptorSDKType {
@@ -186,6 +194,10 @@ export interface SecondaryIndexDescriptorAmino {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
+export interface SecondaryIndexDescriptorAminoType {
+  type: "cosmos-sdk/SecondaryIndexDescriptor";
+  value: SecondaryIndexDescriptorAmino;
+}
 
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorSDKType {
@@ -212,6 +224,10 @@ export interface SingletonDescriptorAmino {
    * can be auto-generated.
    */
   id: number;
+}
+export interface SingletonDescriptorAminoType {
+  type: "cosmos-sdk/SingletonDescriptor";
+  value: SingletonDescriptorAmino;
 }
 
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */

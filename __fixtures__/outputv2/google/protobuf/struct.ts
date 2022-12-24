@@ -45,6 +45,10 @@ export interface Struct_FieldsEntryAmino {
   key: string;
   value?: ValueAmino;
 }
+export interface Struct_FieldsEntryAminoType {
+  type: "/google.protobuf.undefined";
+  value: Struct_FieldsEntryAmino;
+}
 export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
@@ -82,6 +86,10 @@ export interface StructAmino {
   fields?: {
     [key: string]: ValueAmino;
   };
+}
+export interface StructAminoType {
+  type: "/google.protobuf.Struct";
+  value: StructAmino;
 }
 
 /**
@@ -155,6 +163,10 @@ export interface ValueAmino {
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
+export interface ValueAminoType {
+  type: "/google.protobuf.Value";
+  value: ValueAmino;
+}
 
 /**
  * `Value` represents a dynamically typed value which can be either
@@ -191,6 +203,10 @@ export interface ListValue {
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
   values: ValueAmino[];
+}
+export interface ListValueAminoType {
+  type: "/google.protobuf.ListValue";
+  value: ListValueAmino;
 }
 
 /**

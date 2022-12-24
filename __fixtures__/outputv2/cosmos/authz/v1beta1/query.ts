@@ -27,6 +27,10 @@ export interface QueryGrantsRequestAmino {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
+export interface QueryGrantsRequestAminoType {
+  type: "cosmos-sdk/QueryGrantsRequest";
+  value: QueryGrantsRequestAmino;
+}
 
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestSDKType {
@@ -53,6 +57,10 @@ export interface QueryGrantsResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
+export interface QueryGrantsResponseAminoType {
+  type: "cosmos-sdk/QueryGrantsResponse";
+  value: QueryGrantsResponseAmino;
+}
 
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
@@ -74,6 +82,10 @@ export interface QueryGranterGrantsRequestAmino {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryGranterGrantsRequestAminoType {
+  type: "cosmos-sdk/QueryGranterGrantsRequest";
+  value: QueryGranterGrantsRequestAmino;
 }
 
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
@@ -99,6 +111,10 @@ export interface QueryGranterGrantsResponseAmino {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
+export interface QueryGranterGrantsResponseAminoType {
+  type: "cosmos-sdk/QueryGranterGrantsResponse";
+  value: QueryGranterGrantsResponseAmino;
+}
 
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
@@ -120,6 +136,10 @@ export interface QueryGranteeGrantsRequestAmino {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
+}
+export interface QueryGranteeGrantsRequestAminoType {
+  type: "cosmos-sdk/QueryGranteeGrantsRequest";
+  value: QueryGranteeGrantsRequestAmino;
 }
 
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
@@ -144,6 +164,10 @@ export interface QueryGranteeGrantsResponseAmino {
 
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
+}
+export interface QueryGranteeGrantsResponseAminoType {
+  type: "cosmos-sdk/QueryGranteeGrantsResponse";
+  value: QueryGranteeGrantsResponseAmino;
 }
 
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */

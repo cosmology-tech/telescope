@@ -9,6 +9,10 @@ export interface QueryEpochsInfoRequest {
 export interface QueryEpochsInfoRequestAmino {
   pagination?: PageRequestAmino;
 }
+export interface QueryEpochsInfoRequestAminoType {
+  type: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: QueryEpochsInfoRequestAmino;
+}
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -20,6 +24,10 @@ export interface QueryEpochsInfoResponseAmino {
   epochs: EpochInfoAmino[];
   pagination?: PageResponseAmino;
 }
+export interface QueryEpochsInfoResponseAminoType {
+  type: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: QueryEpochsInfoResponseAmino;
+}
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -30,6 +38,10 @@ export interface QueryCurrentEpochRequest {
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
+export interface QueryCurrentEpochRequestAminoType {
+  type: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: QueryCurrentEpochRequestAmino;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
@@ -38,6 +50,10 @@ export interface QueryCurrentEpochResponse {
 }
 export interface QueryCurrentEpochResponseAmino {
   current_epoch: string;
+}
+export interface QueryCurrentEpochResponseAminoType {
+  type: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: QueryCurrentEpochResponseAmino;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: Long;

@@ -244,6 +244,10 @@ export interface ExistenceProofAmino {
   leaf?: LeafOpAmino;
   path: InnerOpAmino[];
 }
+export interface ExistenceProofAminoType {
+  type: "/ics23.ExistenceProof";
+  value: ExistenceProofAmino;
+}
 
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
@@ -296,6 +300,10 @@ export interface NonExistenceProofAmino {
   left?: ExistenceProofAmino;
   right?: ExistenceProofAmino;
 }
+export interface NonExistenceProofAminoType {
+  type: "/ics23.NonExistenceProof";
+  value: NonExistenceProofAmino;
+}
 
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
@@ -322,6 +330,10 @@ export interface CommitmentProofAmino {
   nonexist?: NonExistenceProofAmino;
   batch?: BatchProofAmino;
   compressed?: CompressedBatchProofAmino;
+}
+export interface CommitmentProofAminoType {
+  type: "/ics23.CommitmentProof";
+  value: CommitmentProofAmino;
 }
 
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
@@ -388,6 +400,10 @@ export interface LeafOpAmino {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
+}
+export interface LeafOpAminoType {
+  type: "/ics23.LeafOp";
+  value: LeafOpAmino;
 }
 
 /**
@@ -458,6 +474,10 @@ export interface InnerOpAmino {
   hash: HashOp;
   prefix: Uint8Array;
   suffix: Uint8Array;
+}
+export interface InnerOpAminoType {
+  type: "/ics23.InnerOp";
+  value: InnerOpAmino;
 }
 
 /**
@@ -536,6 +556,10 @@ export interface ProofSpecAmino {
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   min_depth: number;
 }
+export interface ProofSpecAminoType {
+  type: "/ics23.ProofSpec";
+  value: ProofSpecAmino;
+}
 
 /**
  * ProofSpec defines what the expected parameters are for a given proof type.
@@ -611,6 +635,10 @@ export interface InnerSpecAmino {
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
+export interface InnerSpecAminoType {
+  type: "/ics23.InnerSpec";
+  value: InnerSpecAmino;
+}
 
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
@@ -640,6 +668,10 @@ export interface BatchProof {
 export interface BatchProofAmino {
   entries: BatchEntryAmino[];
 }
+export interface BatchProofAminoType {
+  type: "/ics23.BatchProof";
+  value: BatchProofAmino;
+}
 
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofSDKType {
@@ -657,6 +689,10 @@ export interface BatchEntryAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
 }
+export interface BatchEntryAminoType {
+  type: "/ics23.BatchEntry";
+  value: BatchEntryAmino;
+}
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
 export interface BatchEntrySDKType {
@@ -670,6 +706,10 @@ export interface CompressedBatchProof {
 export interface CompressedBatchProofAmino {
   entries: CompressedBatchEntryAmino[];
   lookup_inners: InnerOpAmino[];
+}
+export interface CompressedBatchProofAminoType {
+  type: "/ics23.CompressedBatchProof";
+  value: CompressedBatchProofAmino;
 }
 export interface CompressedBatchProofSDKType {
   entries: CompressedBatchEntrySDKType[];
@@ -686,6 +726,10 @@ export interface CompressedBatchEntry {
 export interface CompressedBatchEntryAmino {
   exist?: CompressedExistenceProofAmino;
   nonexist?: CompressedNonExistenceProofAmino;
+}
+export interface CompressedBatchEntryAminoType {
+  type: "/ics23.CompressedBatchEntry";
+  value: CompressedBatchEntryAmino;
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -709,6 +753,10 @@ export interface CompressedExistenceProofAmino {
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
 }
+export interface CompressedExistenceProofAminoType {
+  type: "/ics23.CompressedExistenceProof";
+  value: CompressedExistenceProofAmino;
+}
 export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
@@ -726,6 +774,10 @@ export interface CompressedNonExistenceProofAmino {
   key: Uint8Array;
   left?: CompressedExistenceProofAmino;
   right?: CompressedExistenceProofAmino;
+}
+export interface CompressedNonExistenceProofAminoType {
+  type: "/ics23.CompressedNonExistenceProof";
+  value: CompressedNonExistenceProofAmino;
 }
 export interface CompressedNonExistenceProofSDKType {
   key: Uint8Array;

@@ -25,6 +25,10 @@ export interface ResourceUnitsAmino {
   storage: StorageAmino[];
   endpoints: EndpointAmino[];
 }
+export interface ResourceUnitsAminoType {
+  type: "/akash.base.v1beta2.ResourceUnits";
+  value: ResourceUnitsAmino;
+}
 
 /**
  * ResourceUnits describes all available resources types for deployment/node etc

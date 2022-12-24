@@ -30,6 +30,10 @@ export interface ConfigAmino {
   /** modules are the module configurations for the app. */
   modules: ModuleConfigAmino[];
 }
+export interface ConfigAminoType {
+  type: "cosmos-sdk/Config";
+  value: ConfigAmino;
+}
 
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -88,6 +92,10 @@ export interface ModuleConfigAmino {
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
   config?: AnyAmino;
+}
+export interface ModuleConfigAminoType {
+  type: "cosmos-sdk/ModuleConfig";
+  value: ModuleConfigAmino;
 }
 
 /** ModuleConfig is a module configuration for an app. */

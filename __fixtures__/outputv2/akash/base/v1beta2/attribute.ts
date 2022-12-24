@@ -13,6 +13,10 @@ export interface AttributeAmino {
   key: string;
   value: string;
 }
+export interface AttributeAminoType {
+  type: "/akash.base.v1beta2.Attribute";
+  value: AttributeAmino;
+}
 
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
@@ -47,6 +51,10 @@ export interface SignedByAmino {
   /** any_of at least of of the keys from the list must have signed attributes */
   any_of: string[];
 }
+export interface SignedByAminoType {
+  type: "/akash.base.v1beta2.SignedBy";
+  value: SignedByAmino;
+}
 
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -75,6 +83,10 @@ export interface PlacementRequirementsAmino {
 
   /** Attribute list of attributes tenant expects from the provider */
   attributes: AttributeAmino[];
+}
+export interface PlacementRequirementsAminoType {
+  type: "/akash.base.v1beta2.PlacementRequirements";
+  value: PlacementRequirementsAmino;
 }
 
 /** PlacementRequirements */

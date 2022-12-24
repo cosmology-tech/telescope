@@ -21,6 +21,10 @@ export interface EpochInfoAmino {
   epoch_counting_started: boolean;
   current_epoch_start_height: string;
 }
+export interface EpochInfoAminoType {
+  type: "/evmos.epochs.v1.EpochInfo";
+  value: EpochInfoAmino;
+}
 export interface EpochInfoSDKType {
   identifier: string;
   start_time?: Date;
@@ -39,6 +43,10 @@ export interface GenesisState {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
+}
+export interface GenesisStateAminoType {
+  type: "/evmos.epochs.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 
 /** GenesisState defines the epochs module's genesis state. */

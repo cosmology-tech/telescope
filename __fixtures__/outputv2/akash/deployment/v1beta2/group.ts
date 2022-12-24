@@ -90,6 +90,10 @@ export interface GroupAmino {
   group_spec?: GroupSpecAmino;
   created_at: string;
 }
+export interface GroupAminoType {
+  type: "/akash.deployment.v1beta2.Group";
+  value: GroupAmino;
+}
 
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {

@@ -61,6 +61,10 @@ export interface CheckRequestAmino {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
+export interface CheckRequestAminoType {
+  type: "/google.api.servicecontrol.v2.CheckRequest";
+  value: CheckRequestAmino;
+}
 
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -138,6 +142,10 @@ export interface ResourceInfoAmino {
    */
   location: string;
 }
+export interface ResourceInfoAminoType {
+  type: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: ResourceInfoAmino;
+}
 
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
@@ -154,6 +162,10 @@ export interface CheckResponse_HeadersEntry {
 export interface CheckResponse_HeadersEntryAmino {
   key: string;
   value: string;
+}
+export interface CheckResponse_HeadersEntryAminoType {
+  type: "/google.api.servicecontrol.v2.undefined";
+  value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -188,6 +200,10 @@ export interface CheckResponseAmino {
   headers: {
     [key: string]: string;
   };
+}
+export interface CheckResponseAminoType {
+  type: "/google.api.servicecontrol.v2.CheckResponse";
+  value: CheckResponseAmino;
 }
 
 /** Response message for the Check method. */
@@ -251,6 +267,10 @@ export interface ReportRequestAmino {
    */
   operations: AttributeContextAmino[];
 }
+export interface ReportRequestAminoType {
+  type: "/google.api.servicecontrol.v2.ReportRequest";
+  value: ReportRequestAmino;
+}
 
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
@@ -270,6 +290,10 @@ export interface ReportResponse {}
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponseAmino {}
+export interface ReportResponseAminoType {
+  type: "/google.api.servicecontrol.v2.ReportResponse";
+  value: ReportResponseAmino;
+}
 
 /**
  * Response message for the Report method.

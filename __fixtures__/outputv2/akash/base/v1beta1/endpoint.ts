@@ -52,6 +52,10 @@ export interface Endpoint {
 export interface EndpointAmino {
   kind: Endpoint_Kind;
 }
+export interface EndpointAminoType {
+  type: "/akash.base.v1beta1.Endpoint";
+  value: EndpointAmino;
+}
 
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {

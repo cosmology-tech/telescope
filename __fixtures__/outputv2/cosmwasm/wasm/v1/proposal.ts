@@ -40,6 +40,10 @@ export interface StoreCodeProposalAmino {
   /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigAmino;
 }
+export interface StoreCodeProposalAminoType {
+  type: "wasm/StoreCodeProposal";
+  value: StoreCodeProposalAmino;
+}
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalSDKType {
@@ -109,6 +113,10 @@ export interface InstantiateContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
+export interface InstantiateContractProposalAminoType {
+  type: "wasm/InstantiateContractProposal";
+  value: InstantiateContractProposalAmino;
+}
 
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
@@ -160,6 +168,10 @@ export interface MigrateContractProposalAmino {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
+export interface MigrateContractProposalAminoType {
+  type: "wasm/MigrateContractProposal";
+  value: MigrateContractProposalAmino;
+}
 
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
@@ -198,6 +210,10 @@ export interface SudoContractProposalAmino {
 
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
+}
+export interface SudoContractProposalAminoType {
+  type: "wasm/SudoContractProposal";
+  value: SudoContractProposalAmino;
 }
 
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
@@ -255,6 +271,10 @@ export interface ExecuteContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
+export interface ExecuteContractProposalAminoType {
+  type: "wasm/ExecuteContractProposal";
+  value: ExecuteContractProposalAmino;
+}
 
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
@@ -298,6 +318,10 @@ export interface UpdateAdminProposalAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
+export interface UpdateAdminProposalAminoType {
+  type: "wasm/UpdateAdminProposal";
+  value: UpdateAdminProposalAmino;
+}
 
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
@@ -335,6 +359,10 @@ export interface ClearAdminProposalAmino {
 
   /** Contract is the address of the smart contract */
   contract: string;
+}
+export interface ClearAdminProposalAminoType {
+  type: "wasm/ClearAdminProposal";
+  value: ClearAdminProposalAmino;
 }
 
 /**
@@ -376,6 +404,10 @@ export interface PinCodesProposalAmino {
   /** CodeIDs references the new WASM codes */
   code_ids: string[];
 }
+export interface PinCodesProposalAminoType {
+  type: "wasm/PinCodesProposal";
+  value: PinCodesProposalAmino;
+}
 
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
@@ -415,6 +447,10 @@ export interface UnpinCodesProposalAmino {
 
   /** CodeIDs references the WASM codes */
   code_ids: string[];
+}
+export interface UnpinCodesProposalAminoType {
+  type: "wasm/UnpinCodesProposal";
+  value: UnpinCodesProposalAmino;
 }
 
 /**

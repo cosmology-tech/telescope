@@ -32,6 +32,10 @@ export interface MsgCreateClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgCreateClientAminoType {
+  type: "cosmos-sdk/MsgCreateClient";
+  value: MsgCreateClientAmino;
+}
 
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
@@ -45,6 +49,10 @@ export interface MsgCreateClientResponse {}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseAmino {}
+export interface MsgCreateClientResponseAminoType {
+  type: "cosmos-sdk/MsgCreateClientResponse";
+  value: MsgCreateClientResponseAmino;
+}
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
@@ -78,6 +86,10 @@ export interface MsgUpdateClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgUpdateClientAminoType {
+  type: "cosmos-sdk/MsgUpdateClient";
+  value: MsgUpdateClientAmino;
+}
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
@@ -94,6 +106,10 @@ export interface MsgUpdateClientResponse {}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseAmino {}
+export interface MsgUpdateClientResponseAminoType {
+  type: "cosmos-sdk/MsgUpdateClientResponse";
+  value: MsgUpdateClientResponseAmino;
+}
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
@@ -151,6 +167,10 @@ export interface MsgUpgradeClientAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgUpgradeClientAminoType {
+  type: "cosmos-sdk/MsgUpgradeClient";
+  value: MsgUpgradeClientAmino;
+}
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
@@ -170,6 +190,10 @@ export interface MsgUpgradeClientResponse {}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseAmino {}
+export interface MsgUpgradeClientResponseAminoType {
+  type: "cosmos-sdk/MsgUpgradeClientResponse";
+  value: MsgUpgradeClientResponseAmino;
+}
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
@@ -203,6 +227,10 @@ export interface MsgSubmitMisbehaviourAmino {
   /** signer address */
   signer: string;
 }
+export interface MsgSubmitMisbehaviourAminoType {
+  type: "cosmos-sdk/MsgSubmitMisbehaviour";
+  value: MsgSubmitMisbehaviourAmino;
+}
 
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -225,6 +253,10 @@ export interface MsgSubmitMisbehaviourResponse {}
  * type.
  */
 export interface MsgSubmitMisbehaviourResponseAmino {}
+export interface MsgSubmitMisbehaviourResponseAminoType {
+  type: "cosmos-sdk/MsgSubmitMisbehaviourResponse";
+  value: MsgSubmitMisbehaviourResponseAmino;
+}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
