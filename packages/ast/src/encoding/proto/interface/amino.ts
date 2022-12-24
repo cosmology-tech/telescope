@@ -14,6 +14,7 @@ import {
     getMessageName,
     getTSAminoType
 } from '../../types';
+import { getAminoTypeName } from '../../amino';
 
 export const createAminoTypeOptionsDefaults: CreateProtoTypeOptions = {
     useOriginalCase: true,
@@ -163,8 +164,14 @@ export const createAminoTypeType = (
     options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
 ) => {
     const MsgName = getMessageName(name, options)
-    const AminoMsgName = MsgName + 'Type'
+    const AminoMsgName = MsgName + 'Type';
 
+    const aminoName = getAminoTypeName(context, context.ref.proto, proto);
+    const typ = aminoName ? t.tsLiteralType(
+        t.stringLiteral(aminoName)
+    ) : t.tsTypeReference(
+        t.identifier('string')
+    );
     // scalar amino types!
     return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
         t.identifier(AminoMsgName),
@@ -174,9 +181,7 @@ export const createAminoTypeType = (
             tsPropertySignature(
                 t.identifier('type'),
                 t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier('string')
-                    )
+                    typ
                 ),
                 false
             ),
