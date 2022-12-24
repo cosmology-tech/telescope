@@ -17,7 +17,7 @@ import {
     getMessageName,
     getTSType
 } from '../../types';
-import { getTypeUrlWithPkgAndName } from '../../amino';
+import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
 
 const getProtoField = (
     context: ProtoParseContext,
@@ -207,6 +207,46 @@ export const createProtoType = (
 
 
     return declaration;
+};
+
+export const createProtoTypeType = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+    const MsgName = getMessageName(name, options);
+    const ProtoMsgName = MsgName + 'ProtoType';
+
+    const typeUrl = getTypeUrl(context.ref.proto, proto);
+    const typ = typeUrl ? t.tsLiteralType(
+        t.stringLiteral(typeUrl)
+    ) : t.tsTypeReference(
+        t.identifier('string')
+    );
+
+    return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
+        t.identifier(ProtoMsgName),
+        null,
+        [],
+        t.tsInterfaceBody([
+            tsPropertySignature(
+                t.identifier(context.options.prototypes.parser.keepCase ? 'type_url' : 'typeUrl'),
+                t.tsTypeAnnotation(
+                    typ
+                ),
+                false
+            ),
+            tsPropertySignature(
+                t.identifier('value'),
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier('Uint8Array')
+                    )
+                ),
+                false
+            )
+        ])));
 };
 
 
