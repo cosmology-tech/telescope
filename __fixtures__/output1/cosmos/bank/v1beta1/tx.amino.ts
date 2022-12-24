@@ -2,7 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSend, MsgSendSDKType, MsgMultiSend, MsgMultiSendSDKType } from "./tx";
-export interface AminoMsgSend extends AminoMsg {
+export interface MsgSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: {
     from_address: string;
@@ -13,7 +13,7 @@ export interface AminoMsgSend extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgMultiSend extends AminoMsg {
+export interface MsgMultiSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgMultiSend";
   value: {
     inputs: {

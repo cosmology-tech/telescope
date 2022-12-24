@@ -3,7 +3,7 @@ import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoHeight, omitDefault, Long } from "../../../../helpers";
 import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx";
-export interface AminoMsgChannelOpenInit extends AminoMsg {
+export interface MsgChannelOpenInitAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenInit";
   value: {
     port_id: string;
@@ -20,7 +20,7 @@ export interface AminoMsgChannelOpenInit extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgChannelOpenTry extends AminoMsg {
+export interface MsgChannelOpenTryAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenTry";
   value: {
     port_id: string;
@@ -41,7 +41,7 @@ export interface AminoMsgChannelOpenTry extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgChannelOpenAck extends AminoMsg {
+export interface MsgChannelOpenAckAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenAck";
   value: {
     port_id: string;
@@ -53,7 +53,7 @@ export interface AminoMsgChannelOpenAck extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgChannelOpenConfirm extends AminoMsg {
+export interface MsgChannelOpenConfirmAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenConfirm";
   value: {
     port_id: string;
@@ -63,7 +63,7 @@ export interface AminoMsgChannelOpenConfirm extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgChannelCloseInit extends AminoMsg {
+export interface MsgChannelCloseInitAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelCloseInit";
   value: {
     port_id: string;
@@ -71,7 +71,7 @@ export interface AminoMsgChannelCloseInit extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgChannelCloseConfirm extends AminoMsg {
+export interface MsgChannelCloseConfirmAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelCloseConfirm";
   value: {
     port_id: string;
@@ -81,7 +81,7 @@ export interface AminoMsgChannelCloseConfirm extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgRecvPacket extends AminoMsg {
+export interface MsgRecvPacketAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgRecvPacket";
   value: {
     packet: {
@@ -99,7 +99,7 @@ export interface AminoMsgRecvPacket extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgTimeout extends AminoMsg {
+export interface MsgTimeoutAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgTimeout";
   value: {
     packet: {
@@ -118,7 +118,7 @@ export interface AminoMsgTimeout extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgTimeoutOnClose extends AminoMsg {
+export interface MsgTimeoutOnCloseAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgTimeoutOnClose";
   value: {
     packet: {
@@ -138,7 +138,7 @@ export interface AminoMsgTimeoutOnClose extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgAcknowledgement extends AminoMsg {
+export interface MsgAcknowledgementAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgAcknowledgement";
   value: {
     packet: {
@@ -164,7 +164,7 @@ export const AminoConverter = {
       portId,
       channel,
       signer
-    }: MsgChannelOpenInit): AminoMsgChannelOpenInit["value"] => {
+    }: MsgChannelOpenInit): MsgChannelOpenInitAminoType["value"] => {
       return {
         port_id: portId,
         channel: {

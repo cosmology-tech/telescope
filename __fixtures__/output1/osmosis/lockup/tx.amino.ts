@@ -5,7 +5,7 @@ import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
-export interface AminoMsgLockTokens extends AminoMsg {
+export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
@@ -19,13 +19,13 @@ export interface AminoMsgLockTokens extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgBeginUnlockingAll extends AminoMsg {
+export interface MsgBeginUnlockingAllAminoType extends AminoMsg {
   type: "osmosis/lockup/begin-unlock-tokens";
   value: {
     owner: string;
   };
 }
-export interface AminoMsgBeginUnlocking extends AminoMsg {
+export interface MsgBeginUnlockingAminoType extends AminoMsg {
   type: "osmosis/lockup/begin-unlock-period-lock";
   value: {
     owner: string;
@@ -36,7 +36,7 @@ export interface AminoMsgBeginUnlocking extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgExtendLockup extends AminoMsg {
+export interface MsgExtendLockupAminoType extends AminoMsg {
   type: "osmosis/lockup/extend-lockup";
   value: {
     owner: string;
@@ -47,7 +47,7 @@ export interface AminoMsgExtendLockup extends AminoMsg {
     };
   };
 }
-export interface AminoMsgForceUnlock extends AminoMsg {
+export interface MsgForceUnlockAminoType extends AminoMsg {
   type: "osmosis/lockup/force-unlock";
   value: {
     owner: string;

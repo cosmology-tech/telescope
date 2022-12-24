@@ -4,7 +4,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { execFromJSON, MsgCreateGroup, MsgCreateGroupSDKType, MsgUpdateGroupMembers, MsgUpdateGroupMembersSDKType, MsgUpdateGroupAdmin, MsgUpdateGroupAdminSDKType, MsgUpdateGroupMetadata, MsgUpdateGroupMetadataSDKType, MsgCreateGroupPolicy, MsgCreateGroupPolicySDKType, MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicySDKType, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdminSDKType, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicySDKType, MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadataSDKType, MsgSubmitProposal, MsgSubmitProposalSDKType, MsgWithdrawProposal, MsgWithdrawProposalSDKType, MsgVote, MsgVoteSDKType, MsgExec, MsgExecSDKType, MsgLeaveGroup, MsgLeaveGroupSDKType } from "./tx";
-export interface AminoMsgCreateGroup extends AminoMsg {
+export interface MsgCreateGroupAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateGroup";
   value: {
     admin: string;
@@ -20,7 +20,7 @@ export interface AminoMsgCreateGroup extends AminoMsg {
     metadata: string;
   };
 }
-export interface AminoMsgUpdateGroupMembers extends AminoMsg {
+export interface MsgUpdateGroupMembersAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupMembers";
   value: {
     admin: string;
@@ -36,7 +36,7 @@ export interface AminoMsgUpdateGroupMembers extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgUpdateGroupAdmin extends AminoMsg {
+export interface MsgUpdateGroupAdminAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupAdmin";
   value: {
     admin: string;
@@ -44,7 +44,7 @@ export interface AminoMsgUpdateGroupAdmin extends AminoMsg {
     new_admin: string;
   };
 }
-export interface AminoMsgUpdateGroupMetadata extends AminoMsg {
+export interface MsgUpdateGroupMetadataAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupMetadata";
   value: {
     admin: string;
@@ -52,7 +52,7 @@ export interface AminoMsgUpdateGroupMetadata extends AminoMsg {
     metadata: string;
   };
 }
-export interface AminoMsgCreateGroupPolicy extends AminoMsg {
+export interface MsgCreateGroupPolicyAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateGroupPolicy";
   value: {
     admin: string;
@@ -64,7 +64,7 @@ export interface AminoMsgCreateGroupPolicy extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCreateGroupWithPolicy extends AminoMsg {
+export interface MsgCreateGroupWithPolicyAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateGroupWithPolicy";
   value: {
     admin: string;
@@ -86,7 +86,7 @@ export interface AminoMsgCreateGroupWithPolicy extends AminoMsg {
     };
   };
 }
-export interface AminoMsgUpdateGroupPolicyAdmin extends AminoMsg {
+export interface MsgUpdateGroupPolicyAdminAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupPolicyAdmin";
   value: {
     admin: string;
@@ -94,7 +94,7 @@ export interface AminoMsgUpdateGroupPolicyAdmin extends AminoMsg {
     new_admin: string;
   };
 }
-export interface AminoMsgUpdateGroupPolicyDecisionPolicy extends AminoMsg {
+export interface MsgUpdateGroupPolicyDecisionPolicyAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicy";
   value: {
     admin: string;
@@ -105,7 +105,7 @@ export interface AminoMsgUpdateGroupPolicyDecisionPolicy extends AminoMsg {
     };
   };
 }
-export interface AminoMsgUpdateGroupPolicyMetadata extends AminoMsg {
+export interface MsgUpdateGroupPolicyMetadataAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUpdateGroupPolicyMetadata";
   value: {
     admin: string;
@@ -113,7 +113,7 @@ export interface AminoMsgUpdateGroupPolicyMetadata extends AminoMsg {
     metadata: string;
   };
 }
-export interface AminoMsgSubmitProposal extends AminoMsg {
+export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/group/MsgSubmitProposal";
   value: {
     address: string;
@@ -126,14 +126,14 @@ export interface AminoMsgSubmitProposal extends AminoMsg {
     exec: number;
   };
 }
-export interface AminoMsgWithdrawProposal extends AminoMsg {
+export interface MsgWithdrawProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/group/MsgWithdrawProposal";
   value: {
     proposal_id: string;
     address: string;
   };
 }
-export interface AminoMsgVote extends AminoMsg {
+export interface MsgVoteAminoType extends AminoMsg {
   type: "cosmos-sdk/group/MsgVote";
   value: {
     proposal_id: string;
@@ -143,14 +143,14 @@ export interface AminoMsgVote extends AminoMsg {
     exec: number;
   };
 }
-export interface AminoMsgExec extends AminoMsg {
+export interface MsgExecAminoType extends AminoMsg {
   type: "cosmos-sdk/group/MsgExec";
   value: {
     proposal_id: string;
     signer: string;
   };
 }
-export interface AminoMsgLeaveGroup extends AminoMsg {
+export interface MsgLeaveGroupAminoType extends AminoMsg {
   type: "cosmos-sdk/group/MsgLeaveGroup";
   value: {
     address: string;

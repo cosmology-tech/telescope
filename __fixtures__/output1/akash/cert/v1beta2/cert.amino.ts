@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { AminoMsg } from "@cosmjs/amino";
 import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
-export interface AminoMsgCreateCertificate extends AminoMsg {
+export interface MsgCreateCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-create-certificate";
   value: {
     owner: string;
@@ -9,7 +9,7 @@ export interface AminoMsgCreateCertificate extends AminoMsg {
     pubkey: Uint8Array;
   };
 }
-export interface AminoMsgRevokeCertificate extends AminoMsg {
+export interface MsgRevokeCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-revoke-certificate";
   value: {
     id: {

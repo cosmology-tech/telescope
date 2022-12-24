@@ -13,7 +13,7 @@ import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta2/resource
 import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deploymentmsg";
 import { MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./groupmsg";
-export interface AminoMsgCreateDeployment extends AminoMsg {
+export interface MsgCreateDeploymentAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-create-deployment";
   value: {
     id: {
@@ -82,7 +82,7 @@ export interface AminoMsgCreateDeployment extends AminoMsg {
     depositor: string;
   };
 }
-export interface AminoMsgDepositDeployment extends AminoMsg {
+export interface MsgDepositDeploymentAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-deposit-deployment";
   value: {
     id: {
@@ -96,7 +96,7 @@ export interface AminoMsgDepositDeployment extends AminoMsg {
     depositor: string;
   };
 }
-export interface AminoMsgUpdateDeployment extends AminoMsg {
+export interface MsgUpdateDeploymentAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-update-deployment";
   value: {
     id: {
@@ -106,7 +106,7 @@ export interface AminoMsgUpdateDeployment extends AminoMsg {
     version: Uint8Array;
   };
 }
-export interface AminoMsgCloseDeployment extends AminoMsg {
+export interface MsgCloseDeploymentAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-close-deployment";
   value: {
     id: {
@@ -115,7 +115,7 @@ export interface AminoMsgCloseDeployment extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCloseGroup extends AminoMsg {
+export interface MsgCloseGroupAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-close-group";
   value: {
     id: {
@@ -125,7 +125,7 @@ export interface AminoMsgCloseGroup extends AminoMsg {
     };
   };
 }
-export interface AminoMsgPauseGroup extends AminoMsg {
+export interface MsgPauseGroupAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-pause-group";
   value: {
     id: {
@@ -135,7 +135,7 @@ export interface AminoMsgPauseGroup extends AminoMsg {
     };
   };
 }
-export interface AminoMsgStartGroup extends AminoMsg {
+export interface MsgStartGroupAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-start-group";
   value: {
     id: {

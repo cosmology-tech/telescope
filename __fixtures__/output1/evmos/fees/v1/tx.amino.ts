@@ -1,6 +1,6 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType } from "./tx";
-export interface AminoMsgRegisterDevFeeInfo extends AminoMsg {
+export interface MsgRegisterDevFeeInfoAminoType extends AminoMsg {
   type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
   value: {
     contract_address: string;
@@ -9,14 +9,14 @@ export interface AminoMsgRegisterDevFeeInfo extends AminoMsg {
     nonces: string[];
   };
 }
-export interface AminoMsgCancelDevFeeInfo extends AminoMsg {
+export interface MsgCancelDevFeeInfoAminoType extends AminoMsg {
   type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
   value: {
     contract_address: string;
     deployer_address: string;
   };
 }
-export interface AminoMsgUpdateDevFeeInfo extends AminoMsg {
+export interface MsgUpdateDevFeeInfoAminoType extends AminoMsg {
   type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
   value: {
     contract_address: string;

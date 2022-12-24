@@ -4,7 +4,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { toBase64, fromBase64, fromUtf8, toUtf8 } from "@cosmjs/encoding";
 import { Long } from "../../../helpers";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminSDKType } from "./tx";
-export interface AminoMsgStoreCode extends AminoMsg {
+export interface MsgStoreCodeAminoType extends AminoMsg {
   type: "wasm/MsgStoreCode";
   value: {
     sender: string;
@@ -15,7 +15,7 @@ export interface AminoMsgStoreCode extends AminoMsg {
     };
   };
 }
-export interface AminoMsgInstantiateContract extends AminoMsg {
+export interface MsgInstantiateContractAminoType extends AminoMsg {
   type: "wasm/MsgInstantiateContract";
   value: {
     sender: string;
@@ -29,7 +29,7 @@ export interface AminoMsgInstantiateContract extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgExecuteContract extends AminoMsg {
+export interface MsgExecuteContractAminoType extends AminoMsg {
   type: "wasm/MsgExecuteContract";
   value: {
     sender: string;
@@ -41,7 +41,7 @@ export interface AminoMsgExecuteContract extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgMigrateContract extends AminoMsg {
+export interface MsgMigrateContractAminoType extends AminoMsg {
   type: "wasm/MsgMigrateContract";
   value: {
     sender: string;
@@ -50,7 +50,7 @@ export interface AminoMsgMigrateContract extends AminoMsg {
     msg: Uint8Array;
   };
 }
-export interface AminoMsgUpdateAdmin extends AminoMsg {
+export interface MsgUpdateAdminAminoType extends AminoMsg {
   type: "wasm/MsgUpdateAdmin";
   value: {
     sender: string;
@@ -58,7 +58,7 @@ export interface AminoMsgUpdateAdmin extends AminoMsg {
     contract: string;
   };
 }
-export interface AminoMsgClearAdmin extends AminoMsg {
+export interface MsgClearAdminAminoType extends AminoMsg {
   type: "wasm/MsgClearAdmin";
   value: {
     sender: string;

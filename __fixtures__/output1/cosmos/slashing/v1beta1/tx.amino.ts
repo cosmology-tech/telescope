@@ -1,6 +1,6 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgUnjail, MsgUnjailSDKType } from "./tx";
-export interface AminoMsgUnjail extends AminoMsg {
+export interface MsgUnjailAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUnjail";
   value: {
     validator_addr: string;

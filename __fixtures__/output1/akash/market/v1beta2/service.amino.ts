@@ -5,7 +5,7 @@ import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, Ms
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
-export interface AminoMsgCreateBid extends AminoMsg {
+export interface MsgCreateBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-bid";
   value: {
     order: {
@@ -25,7 +25,7 @@ export interface AminoMsgCreateBid extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCloseBid extends AminoMsg {
+export interface MsgCloseBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-close-bid";
   value: {
     bid_id: {
@@ -37,7 +37,7 @@ export interface AminoMsgCloseBid extends AminoMsg {
     };
   };
 }
-export interface AminoMsgWithdrawLease extends AminoMsg {
+export interface MsgWithdrawLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-withdraw-lease";
   value: {
     bid_id: {
@@ -49,7 +49,7 @@ export interface AminoMsgWithdrawLease extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCreateLease extends AminoMsg {
+export interface MsgCreateLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-lease";
   value: {
     bid_id: {
@@ -61,7 +61,7 @@ export interface AminoMsgCreateLease extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCloseLease extends AminoMsg {
+export interface MsgCloseLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-close-lease";
   value: {
     lease_id: {

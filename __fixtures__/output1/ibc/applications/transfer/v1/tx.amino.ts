@@ -3,7 +3,7 @@ import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoHeight, Long, omitDefault } from "../../../../helpers";
 import { MsgTransfer, MsgTransferSDKType } from "./tx";
-export interface AminoMsgTransfer extends AminoMsg {
+export interface MsgTransferAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgTransfer";
   value: {
     source_port: string;

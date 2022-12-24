@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType, MsgJoinPool, MsgJoinPoolSDKType, MsgExitPool, MsgExitPoolSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType } from "./tx";
-export interface AminoMsgJoinPool extends AminoMsg {
+export interface MsgJoinPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/join-pool";
   value: {
     sender: string;
@@ -15,7 +15,7 @@ export interface AminoMsgJoinPool extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgExitPool extends AminoMsg {
+export interface MsgExitPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/exit-pool";
   value: {
     sender: string;
@@ -27,7 +27,7 @@ export interface AminoMsgExitPool extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgSwapExactAmountIn extends AminoMsg {
+export interface MsgSwapExactAmountInAminoType extends AminoMsg {
   type: "osmosis/gamm/swap-exact-amount-in";
   value: {
     sender: string;
@@ -42,7 +42,7 @@ export interface AminoMsgSwapExactAmountIn extends AminoMsg {
     token_out_min_amount: string;
   };
 }
-export interface AminoMsgSwapExactAmountOut extends AminoMsg {
+export interface MsgSwapExactAmountOutAminoType extends AminoMsg {
   type: "osmosis/gamm/swap-exact-amount-out";
   value: {
     sender: string;
@@ -57,7 +57,7 @@ export interface AminoMsgSwapExactAmountOut extends AminoMsg {
     };
   };
 }
-export interface AminoMsgJoinSwapExternAmountIn extends AminoMsg {
+export interface MsgJoinSwapExternAmountInAminoType extends AminoMsg {
   type: "osmosis/gamm/join-swap-extern-amount-in";
   value: {
     sender: string;
@@ -69,7 +69,7 @@ export interface AminoMsgJoinSwapExternAmountIn extends AminoMsg {
     share_out_min_amount: string;
   };
 }
-export interface AminoMsgJoinSwapShareAmountOut extends AminoMsg {
+export interface MsgJoinSwapShareAmountOutAminoType extends AminoMsg {
   type: "osmosis/gamm/join-swap-share-amount-out";
   value: {
     sender: string;
@@ -79,7 +79,7 @@ export interface AminoMsgJoinSwapShareAmountOut extends AminoMsg {
     token_in_max_amount: string;
   };
 }
-export interface AminoMsgExitSwapExternAmountOut extends AminoMsg {
+export interface MsgExitSwapExternAmountOutAminoType extends AminoMsg {
   type: "osmosis/gamm/exit-swap-extern-amount-out";
   value: {
     sender: string;
@@ -91,7 +91,7 @@ export interface AminoMsgExitSwapExternAmountOut extends AminoMsg {
     share_in_max_amount: string;
   };
 }
-export interface AminoMsgExitSwapShareAmountIn extends AminoMsg {
+export interface MsgExitSwapShareAmountInAminoType extends AminoMsg {
   type: "osmosis/gamm/exit-swap-share-amount-in";
   value: {
     sender: string;

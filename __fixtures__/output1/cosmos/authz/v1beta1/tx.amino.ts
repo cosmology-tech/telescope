@@ -3,7 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { MsgGrant, MsgGrantSDKType, MsgExec, MsgExecSDKType, MsgRevoke, MsgRevokeSDKType } from "./tx";
-export interface AminoMsgGrant extends AminoMsg {
+export interface MsgGrantAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrant";
   value: {
     granter: string;
@@ -20,7 +20,7 @@ export interface AminoMsgGrant extends AminoMsg {
     };
   };
 }
-export interface AminoMsgExec extends AminoMsg {
+export interface MsgExecAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgExec";
   value: {
     grantee: string;
@@ -30,7 +30,7 @@ export interface AminoMsgExec extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgRevoke extends AminoMsg {
+export interface MsgRevokeAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgRevoke";
   value: {
     granter: string;

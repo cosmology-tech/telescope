@@ -1,6 +1,6 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgSend, MsgSendSDKType } from "./tx";
-export interface AminoMsgSend extends AminoMsg {
+export interface MsgSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
   value: {
     class_id: string;

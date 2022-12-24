@@ -2,7 +2,7 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { AminoMsg } from "@cosmjs/amino";
 import { ProviderInfo, ProviderInfoSDKType, MsgCreateProvider, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType } from "./provider";
-export interface AminoMsgCreateProvider extends AminoMsg {
+export interface MsgCreateProviderAminoType extends AminoMsg {
   type: "akash/provider/testonly-create-provider";
   value: {
     owner: string;
@@ -17,7 +17,7 @@ export interface AminoMsgCreateProvider extends AminoMsg {
     };
   };
 }
-export interface AminoMsgUpdateProvider extends AminoMsg {
+export interface MsgUpdateProviderAminoType extends AminoMsg {
   type: "akash/provider/testonly-update-provider";
   value: {
     owner: string;
@@ -32,7 +32,7 @@ export interface AminoMsgUpdateProvider extends AminoMsg {
     };
   };
 }
-export interface AminoMsgDeleteProvider extends AminoMsg {
+export interface MsgDeleteProviderAminoType extends AminoMsg {
   type: "akash/provider/testonly-delete-provider";
   value: {
     owner: string;

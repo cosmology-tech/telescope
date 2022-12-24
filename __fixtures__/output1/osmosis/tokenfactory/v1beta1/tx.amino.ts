@@ -4,14 +4,14 @@ import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../..
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
-export interface AminoMsgCreateDenom extends AminoMsg {
+export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
   value: {
     sender: string;
     subdenom: string;
   };
 }
-export interface AminoMsgMint extends AminoMsg {
+export interface MsgMintAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/mint";
   value: {
     sender: string;
@@ -21,7 +21,7 @@ export interface AminoMsgMint extends AminoMsg {
     };
   };
 }
-export interface AminoMsgBurn extends AminoMsg {
+export interface MsgBurnAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/burn";
   value: {
     sender: string;
@@ -31,7 +31,7 @@ export interface AminoMsgBurn extends AminoMsg {
     };
   };
 }
-export interface AminoMsgChangeAdmin extends AminoMsg {
+export interface MsgChangeAdminAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/change-admin";
   value: {
     sender: string;
@@ -39,7 +39,7 @@ export interface AminoMsgChangeAdmin extends AminoMsg {
     new_admin: string;
   };
 }
-export interface AminoMsgSetDenomMetadata extends AminoMsg {
+export interface MsgSetDenomMetadataAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/set-denom-metadata";
   value: {
     sender: string;

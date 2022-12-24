@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
 import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType } from "./tx";
-export interface AminoMsgGrantAllowance extends AminoMsg {
+export interface MsgGrantAllowanceAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrantAllowance";
   value: {
     granter: string;
@@ -12,7 +12,7 @@ export interface AminoMsgGrantAllowance extends AminoMsg {
     };
   };
 }
-export interface AminoMsgRevokeAllowance extends AminoMsg {
+export interface MsgRevokeAllowanceAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgRevokeAllowance";
   value: {
     granter: string;

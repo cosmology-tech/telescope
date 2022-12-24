@@ -6,7 +6,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../helpers";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeSDKType } from "./tx";
-export interface AminoMsgCreateGauge extends AminoMsg {
+export interface MsgCreateGaugeAminoType extends AminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: {
     is_perpetual: boolean;
@@ -34,7 +34,7 @@ export interface AminoMsgCreateGauge extends AminoMsg {
     num_epochs_paid_over: string;
   };
 }
-export interface AminoMsgAddToGauge extends AminoMsg {
+export interface MsgAddToGaugeAminoType extends AminoMsg {
   type: "osmosis/incentives/add-to-gauge";
   value: {
     owner: string;

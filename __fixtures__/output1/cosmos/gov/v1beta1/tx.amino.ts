@@ -4,7 +4,7 @@ import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSD
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
-export interface AminoMsgSubmitProposal extends AminoMsg {
+export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: {
     content: {
@@ -18,7 +18,7 @@ export interface AminoMsgSubmitProposal extends AminoMsg {
     proposer: string;
   };
 }
-export interface AminoMsgVote extends AminoMsg {
+export interface MsgVoteAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgVote";
   value: {
     proposal_id: string;
@@ -26,7 +26,7 @@ export interface AminoMsgVote extends AminoMsg {
     option: number;
   };
 }
-export interface AminoMsgVoteWeighted extends AminoMsg {
+export interface MsgVoteWeightedAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgVoteWeighted";
   value: {
     proposal_id: string;
@@ -37,7 +37,7 @@ export interface AminoMsgVoteWeighted extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgDeposit extends AminoMsg {
+export interface MsgDepositAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgDeposit";
   value: {
     proposal_id: string;

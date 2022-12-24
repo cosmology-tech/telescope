@@ -6,7 +6,7 @@ import { AminoMsg, decodeBech32Pubkey, encodeBech32Pubkey } from "@cosmjs/amino"
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
 import { Long } from "../../../helpers";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateSDKType } from "./tx";
-export interface AminoMsgCreateValidator extends AminoMsg {
+export interface MsgCreateValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";
   value: {
     description: {
@@ -34,7 +34,7 @@ export interface AminoMsgCreateValidator extends AminoMsg {
     };
   };
 }
-export interface AminoMsgEditValidator extends AminoMsg {
+export interface MsgEditValidatorAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgEditValidator";
   value: {
     description: {
@@ -49,7 +49,7 @@ export interface AminoMsgEditValidator extends AminoMsg {
     min_self_delegation: string;
   };
 }
-export interface AminoMsgDelegate extends AminoMsg {
+export interface MsgDelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgDelegate";
   value: {
     delegator_address: string;
@@ -60,7 +60,7 @@ export interface AminoMsgDelegate extends AminoMsg {
     };
   };
 }
-export interface AminoMsgBeginRedelegate extends AminoMsg {
+export interface MsgBeginRedelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgBeginRedelegate";
   value: {
     delegator_address: string;
@@ -72,7 +72,7 @@ export interface AminoMsgBeginRedelegate extends AminoMsg {
     };
   };
 }
-export interface AminoMsgUndelegate extends AminoMsg {
+export interface MsgUndelegateAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUndelegate";
   value: {
     delegator_address: string;

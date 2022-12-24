@@ -3,7 +3,7 @@ import { Period, PeriodSDKType } from "./vesting";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType } from "./tx";
-export interface AminoMsgCreateVestingAccount extends AminoMsg {
+export interface MsgCreateVestingAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateVestingAccount";
   value: {
     from_address: string;
@@ -16,7 +16,7 @@ export interface AminoMsgCreateVestingAccount extends AminoMsg {
     delayed: boolean;
   };
 }
-export interface AminoMsgCreatePermanentLockedAccount extends AminoMsg {
+export interface MsgCreatePermanentLockedAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreatePermanentLockedAccount";
   value: {
     from_address: string;
@@ -27,7 +27,7 @@ export interface AminoMsgCreatePermanentLockedAccount extends AminoMsg {
     }[];
   };
 }
-export interface AminoMsgCreatePeriodicVestingAccount extends AminoMsg {
+export interface MsgCreatePeriodicVestingAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreatePeriodicVestingAccount";
   value: {
     from_address: string;

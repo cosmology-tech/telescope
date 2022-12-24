@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../helpers";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
-export interface AminoMsgSuperfluidDelegate extends AminoMsg {
+export interface MsgSuperfluidDelegateAminoType extends AminoMsg {
   type: "osmosis/superfluid-delegate";
   value: {
     sender: string;
@@ -11,21 +11,21 @@ export interface AminoMsgSuperfluidDelegate extends AminoMsg {
     val_addr: string;
   };
 }
-export interface AminoMsgSuperfluidUndelegate extends AminoMsg {
+export interface MsgSuperfluidUndelegateAminoType extends AminoMsg {
   type: "osmosis/superfluid-undelegate";
   value: {
     sender: string;
     lock_id: string;
   };
 }
-export interface AminoMsgSuperfluidUnbondLock extends AminoMsg {
+export interface MsgSuperfluidUnbondLockAminoType extends AminoMsg {
   type: "osmosis/superfluid-unbond-lock";
   value: {
     sender: string;
     lock_id: string;
   };
 }
-export interface AminoMsgLockAndSuperfluidDelegate extends AminoMsg {
+export interface MsgLockAndSuperfluidDelegateAminoType extends AminoMsg {
   type: "osmosis/lock-and-superfluid-delegate";
   value: {
     sender: string;
@@ -36,7 +36,7 @@ export interface AminoMsgLockAndSuperfluidDelegate extends AminoMsg {
     val_addr: string;
   };
 }
-export interface AminoMsgUnPoolWhitelistedPool extends AminoMsg {
+export interface MsgUnPoolWhitelistedPoolAminoType extends AminoMsg {
   type: "osmosis/unpool-whitelisted-pool";
   value: {
     sender: string;

@@ -5,7 +5,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { AminoHeight, Long, omitDefault } from "../../../../helpers";
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType } from "./tx";
-export interface AminoMsgConnectionOpenInit extends AminoMsg {
+export interface MsgConnectionOpenInitAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenInit";
   value: {
     client_id: string;
@@ -24,7 +24,7 @@ export interface AminoMsgConnectionOpenInit extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgConnectionOpenTry extends AminoMsg {
+export interface MsgConnectionOpenTryAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenTry";
   value: {
     client_id: string;
@@ -53,7 +53,7 @@ export interface AminoMsgConnectionOpenTry extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgConnectionOpenAck extends AminoMsg {
+export interface MsgConnectionOpenAckAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenAck";
   value: {
     connection_id: string;
@@ -74,7 +74,7 @@ export interface AminoMsgConnectionOpenAck extends AminoMsg {
     signer: string;
   };
 }
-export interface AminoMsgConnectionOpenConfirm extends AminoMsg {
+export interface MsgConnectionOpenConfirmAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenConfirm";
   value: {
     connection_id: string;

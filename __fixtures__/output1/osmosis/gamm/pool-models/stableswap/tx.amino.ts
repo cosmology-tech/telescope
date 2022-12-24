@@ -4,7 +4,7 @@ import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../../helpers";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
-export interface AminoMsgCreateStableswapPool extends AminoMsg {
+export interface MsgCreateStableswapPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
   value: {
     sender: string;
@@ -21,7 +21,7 @@ export interface AminoMsgCreateStableswapPool extends AminoMsg {
     scaling_factor_controller: string;
   };
 }
-export interface AminoMsgStableSwapAdjustScalingFactors extends AminoMsg {
+export interface MsgStableSwapAdjustScalingFactorsAminoType extends AminoMsg {
   type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
   value: {
     sender: string;
