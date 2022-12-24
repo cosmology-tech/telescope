@@ -2,70 +2,70 @@
 
 exports[`GenesisState interface 1`] = `
 "export interface GenesisStateAminoType {
-  type: string;
+  type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }"
 `;
 
 exports[`MsgSend amino interface 1`] = `
 "export interface MsgSendAminoType {
-  type: string;
+  type: "cosmos-sdk/MsgSend";
   value: MsgSendAmino;
 }"
 `;
 
 exports[`PageRequest interface 1`] = `
 "export interface PageRequestAminoType {
-  type: string;
+  type: "cosmos-sdk/PageRequest";
   value: PageRequestAmino;
 }"
 `;
 
 exports[`PageResponse interface 1`] = `
 "export interface PageResponseAminoType {
-  type: string;
+  type: "cosmos-sdk/PageResponse";
   value: PageResponseAmino;
 }"
 `;
 
 exports[`confio/proofs.proto ExistenceProof 1`] = `
 "export interface ExistenceProofAminoType {
-  type: string;
+  type: "/ics23.ExistenceProof";
   value: ExistenceProofAmino;
 }"
 `;
 
 exports[`cosmos/auth/v1beta1/auth.proto BaseAccount 1`] = `
 "export interface BaseAccountAminoType {
-  type: string;
+  type: "cosmos-sdk/BaseAccount";
   value: BaseAccountAmino;
 }"
 `;
 
 exports[`cosmos/authz/v1beta1/authz.proto Grant 1`] = `
 "export interface GrantAminoType {
-  type: string;
+  type: "cosmos-sdk/Grant";
   value: GrantAmino;
 }"
 `;
 
 exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization 1`] = `
 "export interface GrantAuthorizationAminoType {
-  type: string;
+  type: "cosmos-sdk/GrantAuthorization";
   value: GrantAuthorizationAmino;
 }"
 `;
 
 exports[`cosmos/authz/v1beta1/query.proto QueryGrantsRequest 1`] = `
 "export interface QueryGrantsRequestAminoType {
-  type: string;
+  type: "cosmos-sdk/QueryGrantsRequest";
   value: QueryGrantsRequestAmino;
 }"
 `;
 
 exports[`osmosis/gamm/v1beta1/tx.proto MsgJoinPool 1`] = `
 "export interface MsgJoinPoolAminoType {
-  type: string;
+  type: "osmosis/gamm/join-pool";
   value: MsgJoinPoolAmino;
 }"
 `;
