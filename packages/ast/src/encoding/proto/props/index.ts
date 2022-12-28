@@ -7,9 +7,11 @@ export const createTypeUrlProperty = (
     context: ProtoParseContext,
     proto: ProtoType
 ) => {
+    const typeUrl = getTypeUrl(context.ref.proto, proto);
+    if (!typeUrl) return;
     return t.objectProperty(
         t.identifier('typeUrl'),
-        t.stringLiteral(getTypeUrl(context.ref.proto, proto))
+        t.stringLiteral(typeUrl)
     )
 };
 
@@ -17,8 +19,10 @@ export const createAminoTypeProperty = (
     context: ProtoParseContext,
     proto: ProtoType
 ) => {
+    const str = getAminoTypeName(context, context.ref.proto, proto);
+    if (!str || str.startsWith('/')) return;
     return t.objectProperty(
         t.identifier('aminoType'),
-        t.stringLiteral(getAminoTypeName(context, context.ref.proto, proto))
+        t.stringLiteral(str)
     )
 };
