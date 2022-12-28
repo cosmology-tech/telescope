@@ -8,6 +8,10 @@
   "scripts": {
     "build": "lerna run prepare --parallel",
     "buidl": "lerna run buidl --parallel",
+    "buidl:ast": "lerna run buidl --parallel --scope \"@osmonauts/ast\"",
+    "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/parser\"",
+    "buidl:telescope": "lerna run buidl --parallel --scope \"@osmonauts/telescope\"",
+    "buidl:types": "lerna run buidl --parallel --scope \"@osmonauts/types\"",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "lint": "lerna run lint",
     "format": "lerna run format",

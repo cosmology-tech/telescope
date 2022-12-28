@@ -40,6 +40,10 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -49,6 +53,8 @@ interface TelescopeOpts {
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
 
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
 
         excluded?: {
@@ -188,13 +194,19 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toJSON: false,
             fromPartial: true,
             toSDK: false,
-            fromSDK: false
+            fromSDK: false,
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
 
+        addTypeUrlToObjects: false,
+        addAminoTypeToObjects: false,
         addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
