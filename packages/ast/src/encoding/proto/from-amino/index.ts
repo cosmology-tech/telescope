@@ -239,3 +239,43 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         )
     )
 };
+
+export const fromAminoTypeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const fields = fromAminoJSONMethodFields(context, name, proto);
+    let varName = 'object';
+    if (!fields.length) {
+        varName = '_';
+    }
+
+    const AminoTypeName =
+        [name, 'Amino']
+            .filter(Boolean).join('');
+
+    const body: t.Statement[] = [];
+
+    return objectMethod('method',
+        t.identifier('fromAminoType'),
+        [
+            identifier(varName,
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier(AminoTypeName)
+                    )
+                ),
+                false
+            )
+
+        ],
+        t.blockStatement(
+            body
+        ),
+        false,
+        false,
+        false,
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(name)
+            )
+        )
+    )
+};

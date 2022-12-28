@@ -6,11 +6,11 @@ import { encodeMethod } from './proto/encode';
 import { fromJSONMethod } from './proto/from-json';
 import { toJSONMethod } from './proto/to-json';
 import { fromAminoJSONMethod } from './proto/from-amino';
-import { toAminoJSONMethod } from './proto/to-amino';
+import { toAminoJSONMethod, toAminoTypeMethod } from './proto/to-amino';
 import { toSDKMethod } from './proto/to-sdk';
 import { fromSDKMethod } from './proto/from-sdk';
 import { ProtoParseContext } from './context';
-import { createAminoTypeProperty, createTypeUrlProperty } from './proto';
+import { createAminoTypeProperty, createTypeUrlProperty, fromProtoTypeMethod, toProtoTypeMethod } from './proto';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,
@@ -30,6 +30,10 @@ export const createObjectWithMethods = (
         context.pluginValue('prototypes.methods.toSDK') && toSDKMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.fromAmino')) && fromAminoJSONMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.toAmino')) && toAminoJSONMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.fromAmino')) && toAminoTypeMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.toAmino')) && toAminoTypeMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.fromProto')) && fromProtoTypeMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoTypeMethod(context, name, proto),
         // context.options.aminoEncoding.useRecursiveV2encoding && fromAminoJSONMethod(context, name, proto),
         // context.options.aminoEncoding.useRecursiveV2encoding && toAminoJSONMethod(context, name, proto),
     ].filter(Boolean);
