@@ -10,7 +10,7 @@
     "buidl": "lerna run buidl --parallel",
     "ast:fixture": "lerna run test:ast --parallel --scope \"@osmonauts/ast\"",
     "buidl:ast": "lerna run buidl --parallel --scope \"@osmonauts/ast\"",
-    "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/parser\"",
+    "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/proto-parser\"",
     "buidl:telescope": "lerna run buidl --parallel --scope \"@osmonauts/telescope\"",
     "buidl:types": "lerna run buidl --parallel --scope \"@osmonauts/types\"",
     "bootstrap": "lerna bootstrap --use-workspaces",
