@@ -10,4 +10,5 @@ export * from './interface';
 export * from './to-amino';
 export * from './to-json';
 export * from './to-sdk';
+export * from './props';
 export * from './types';

@@ -18,22 +18,20 @@ export const createObjectWithMethods = (
     proto: ProtoType
 ) => {
 
-    const gv = context.pluginValue;
-
     const methodsAndProps = [
-        gv('prototypes.addTypeUrlToObjects') && createTypeUrlProperty(context, proto),
-        gv('prototypes.addAminoTypeToObjects') && createAminoTypeProperty(context, proto),
-        gv('prototypes.methods.encode') && encodeMethod(context, name, proto),
-        gv('prototypes.methods.decode') && decodeMethod(context, name, proto),
-        gv('prototypes.methods.fromJSON') && fromJSONMethod(context, name, proto),
-        gv('prototypes.methods.toJSON') && toJSONMethod(context, name, proto),
-        gv('prototypes.methods.fromPartial') && fromPartialMethod(context, name, proto),
-        gv('prototypes.methods.fromSDK') && fromSDKMethod(context, name, proto),
-        gv('prototypes.methods.toSDK') && toSDKMethod(context, name, proto),
-        (gv('aminoEncoding.useRecursiveV2encoding') || gv('prototypes.methods.fromAmino')) && fromAminoJSONMethod(context, name, proto),
-        (gv('aminoEncoding.useRecursiveV2encoding') || gv('prototypes.methods.toAmino')) && toAminoJSONMethod(context, name, proto),
-        context.options.aminoEncoding.useRecursiveV2encoding && fromAminoJSONMethod(context, name, proto),
-        context.options.aminoEncoding.useRecursiveV2encoding && toAminoJSONMethod(context, name, proto),
+        context.pluginValue('prototypes.addTypeUrlToObjects') && createTypeUrlProperty(context, proto),
+        context.pluginValue('prototypes.addAminoTypeToObjects') && createAminoTypeProperty(context, proto),
+        context.pluginValue('prototypes.methods.encode') && encodeMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.decode') && decodeMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromJSON') && fromJSONMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.toJSON') && toJSONMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromPartial') && fromPartialMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromSDK') && fromSDKMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.toSDK') && toSDKMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.fromAmino')) && fromAminoJSONMethod(context, name, proto),
+        (context.pluginValue('aminoEncoding.useRecursiveV2encoding') || context.pluginValue('prototypes.methods.toAmino')) && toAminoJSONMethod(context, name, proto),
+        // context.options.aminoEncoding.useRecursiveV2encoding && fromAminoJSONMethod(context, name, proto),
+        // context.options.aminoEncoding.useRecursiveV2encoding && toAminoJSONMethod(context, name, proto),
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(
