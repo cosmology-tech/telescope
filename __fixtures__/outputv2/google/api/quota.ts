@@ -194,7 +194,7 @@ export interface MetricRule_MetricCostsEntry {
   value: Long;
 }
 export interface MetricRule_MetricCostsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MetricRule_MetricCostsEntryAmino {
@@ -202,7 +202,7 @@ export interface MetricRule_MetricCostsEntryAmino {
   value: string;
 }
 export interface MetricRule_MetricCostsEntryAminoType {
-  type: "/google.api.undefined";
+  type: string;
   value: MetricRule_MetricCostsEntryAmino;
 }
 export interface MetricRule_MetricCostsEntrySDKType {
@@ -283,7 +283,7 @@ export interface QuotaLimit_ValuesEntry {
   value: Long;
 }
 export interface QuotaLimit_ValuesEntryProtoType {
-  typeUrl: "/google.api.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntryAmino {
@@ -291,7 +291,7 @@ export interface QuotaLimit_ValuesEntryAmino {
   value: string;
 }
 export interface QuotaLimit_ValuesEntryAminoType {
-  type: "/google.api.undefined";
+  type: string;
   value: QuotaLimit_ValuesEntryAmino;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
@@ -549,6 +549,8 @@ function createBaseQuota(): Quota {
 }
 
 export const Quota = {
+  typeUrl: "/google.api.Quota",
+
   encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -776,6 +778,8 @@ function createBaseMetricRule(): MetricRule {
 }
 
 export const MetricRule = {
+  typeUrl: "/google.api.MetricRule",
+
   encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -1029,6 +1033,8 @@ function createBaseQuotaLimit(): QuotaLimit {
 }
 
 export const QuotaLimit = {
+  typeUrl: "/google.api.QuotaLimit",
+
   encode(message: QuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(50).string(message.name);

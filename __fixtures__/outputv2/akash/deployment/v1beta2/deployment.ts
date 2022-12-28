@@ -148,6 +148,8 @@ function createBaseDeploymentID(): DeploymentID {
 }
 
 export const DeploymentID = {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentID",
+
   encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -247,6 +249,8 @@ function createBaseDeployment(): Deployment {
 }
 
 export const Deployment = {
+  typeUrl: "/akash.deployment.v1beta2.Deployment",
+
   encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
@@ -375,6 +379,8 @@ function createBaseDeploymentFilters(): DeploymentFilters {
 }
 
 export const DeploymentFilters = {
+  typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
+
   encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);

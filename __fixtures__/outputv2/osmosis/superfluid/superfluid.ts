@@ -288,6 +288,9 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
 }
 
 export const SuperfluidAsset = {
+  typeUrl: "/osmosis.superfluid.SuperfluidAsset",
+  aminoType: "osmosis/superfluid-asset",
+
   encode(message: SuperfluidAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -386,6 +389,9 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
 }
 
 export const SuperfluidIntermediaryAccount = {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
+  aminoType: "osmosis/superfluid-intermediary-account",
+
   encode(message: SuperfluidIntermediaryAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -499,6 +505,9 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 }
 
 export const OsmoEquivalentMultiplierRecord = {
+  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
+  aminoType: "osmosis/osmo-equivalent-multiplier-record",
+
   encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.epochNumber.isZero()) {
       writer.uint32(8).int64(message.epochNumber);
@@ -613,6 +622,9 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 }
 
 export const SuperfluidDelegationRecord = {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
+  aminoType: "osmosis/superfluid-delegation-record",
+
   encode(message: SuperfluidDelegationRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -740,6 +752,9 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
 }
 
 export const LockIdIntermediaryAccountConnection = {
+  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
+  aminoType: "osmosis/lock-id-intermediary-account-connection",
+
   encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
@@ -836,6 +851,9 @@ function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
 }
 
 export const UnpoolWhitelistedPools = {
+  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools",
+  aminoType: "osmosis/unpool-whitelisted-pools",
+
   encode(message: UnpoolWhitelistedPools, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 

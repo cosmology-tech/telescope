@@ -42,6 +42,8 @@ function createBaseGroupSpec(): GroupSpec {
 }
 
 export const GroupSpec = {
+  typeUrl: "/akash.deployment.v1beta2.GroupSpec",
+
   encode(message: GroupSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

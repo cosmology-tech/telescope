@@ -280,6 +280,8 @@ function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
 }
 
 export const QueryDevFeeInfosRequest = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest",
+
   encode(message: QueryDevFeeInfosRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -362,6 +364,8 @@ function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
 }
 
 export const QueryDevFeeInfosResponse = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse",
+
   encode(message: QueryDevFeeInfosResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -476,6 +480,8 @@ function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
 }
 
 export const QueryDevFeeInfoRequest = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
+
   encode(message: QueryDevFeeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -557,6 +563,8 @@ function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
 }
 
 export const QueryDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse",
+
   encode(message: QueryDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fee !== undefined) {
       DevFeeInfo.encode(message.fee, writer.uint32(10).fork()).ldelim();
@@ -636,6 +644,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.fees.v1.QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -699,6 +709,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.fees.v1.QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -781,6 +793,8 @@ function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDepl
 }
 
 export const QueryDevFeeInfosPerDeployerRequest = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
+
   encode(message: QueryDevFeeInfosPerDeployerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deployerAddress !== "") {
       writer.uint32(10).string(message.deployerAddress);
@@ -878,6 +892,8 @@ function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDep
 }
 
 export const QueryDevFeeInfosPerDeployerResponse = {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse",
+
   encode(message: QueryDevFeeInfosPerDeployerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();

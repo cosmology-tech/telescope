@@ -63,6 +63,9 @@ function createBaseNode(): Node {
 }
 
 export const Node = {
+  typeUrl: "/osmosis.store.v1beta1.Node",
+  aminoType: "osmosis/store/node",
+
   encode(message: Node, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.children) {
       Child.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -163,6 +166,9 @@ function createBaseChild(): Child {
 }
 
 export const Child = {
+  typeUrl: "/osmosis.store.v1beta1.Child",
+  aminoType: "osmosis/store/child",
+
   encode(message: Child, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
@@ -259,6 +265,9 @@ function createBaseLeaf(): Leaf {
 }
 
 export const Leaf = {
+  typeUrl: "/osmosis.store.v1beta1.Leaf",
+  aminoType: "osmosis/store/leaf",
+
   encode(message: Leaf, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leaf !== undefined) {
       Child.encode(message.leaf, writer.uint32(10).fork()).ldelim();

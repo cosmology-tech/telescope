@@ -138,6 +138,9 @@ function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
 }
 
 export const ValidatorSigningInfo = {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo",
+  aminoType: "cosmos-sdk/ValidatorSigningInfo",
+
   encode(message: ValidatorSigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -298,6 +301,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/cosmos.slashing.v1beta1.Params",
+  aminoType: "cosmos-sdk/Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.signedBlocksWindow.isZero()) {
       writer.uint32(8).int64(message.signedBlocksWindow);

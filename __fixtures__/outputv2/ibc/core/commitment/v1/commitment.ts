@@ -153,6 +153,9 @@ function createBaseMerkleRoot(): MerkleRoot {
 }
 
 export const MerkleRoot = {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot",
+  aminoType: "cosmos-sdk/MerkleRoot",
+
   encode(message: MerkleRoot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -234,6 +237,9 @@ function createBaseMerklePrefix(): MerklePrefix {
 }
 
 export const MerklePrefix = {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix",
+  aminoType: "cosmos-sdk/MerklePrefix",
+
   encode(message: MerklePrefix, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyPrefix.length !== 0) {
       writer.uint32(10).bytes(message.keyPrefix);
@@ -315,6 +321,9 @@ function createBaseMerklePath(): MerklePath {
 }
 
 export const MerklePath = {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath",
+  aminoType: "cosmos-sdk/MerklePath",
+
   encode(message: MerklePath, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.keyPath) {
       writer.uint32(10).string(v!);
@@ -414,6 +423,9 @@ function createBaseMerkleProof(): MerkleProof {
 }
 
 export const MerkleProof = {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof",
+  aminoType: "cosmos-sdk/MerkleProof",
+
   encode(message: MerkleProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proofs) {
       CommitmentProof.encode(v!, writer.uint32(10).fork()).ldelim();

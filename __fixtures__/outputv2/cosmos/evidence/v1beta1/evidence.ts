@@ -54,6 +54,9 @@ function createBaseEquivocation(): Equivocation {
 }
 
 export const Equivocation = {
+  typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
+  aminoType: "cosmos-sdk/Equivocation",
+
   encode(message: Equivocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);

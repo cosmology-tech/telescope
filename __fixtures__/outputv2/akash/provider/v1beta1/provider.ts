@@ -207,6 +207,8 @@ function createBaseProviderInfo(): ProviderInfo {
 }
 
 export const ProviderInfo = {
+  typeUrl: "/akash.provider.v1beta1.ProviderInfo",
+
   encode(message: ProviderInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
@@ -306,6 +308,8 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
 }
 
 export const MsgCreateProvider = {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProvider",
+
   encode(message: MsgCreateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -448,6 +452,8 @@ function createBaseMsgCreateProviderResponse(): MsgCreateProviderResponse {
 }
 
 export const MsgCreateProviderResponse = {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse",
+
   encode(_: MsgCreateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -514,6 +520,8 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
 }
 
 export const MsgUpdateProvider = {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider",
+
   encode(message: MsgUpdateProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -656,6 +664,8 @@ function createBaseMsgUpdateProviderResponse(): MsgUpdateProviderResponse {
 }
 
 export const MsgUpdateProviderResponse = {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse",
+
   encode(_: MsgUpdateProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -719,6 +729,8 @@ function createBaseMsgDeleteProvider(): MsgDeleteProvider {
 }
 
 export const MsgDeleteProvider = {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider",
+
   encode(message: MsgDeleteProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -798,6 +810,8 @@ function createBaseMsgDeleteProviderResponse(): MsgDeleteProviderResponse {
 }
 
 export const MsgDeleteProviderResponse = {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse",
+
   encode(_: MsgDeleteProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -864,6 +878,8 @@ function createBaseProvider(): Provider {
 }
 
 export const Provider = {
+  typeUrl: "/akash.provider.v1beta1.Provider",
+
   encode(message: Provider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);

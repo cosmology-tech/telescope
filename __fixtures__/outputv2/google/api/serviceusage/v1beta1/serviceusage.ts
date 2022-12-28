@@ -1771,6 +1771,8 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 }
 
 export const EnableServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
+
   encode(message: EnableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1852,6 +1854,8 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 }
 
 export const DisableServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
+
   encode(message: DisableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1933,6 +1937,8 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 
 export const GetServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
+
   encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2017,6 +2023,8 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 
 export const ListServicesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
+
   encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2144,6 +2152,8 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 
 export const ListServicesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse",
+
   encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2259,6 +2269,8 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 }
 
 export const BatchEnableServicesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
+
   encode(message: BatchEnableServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2376,6 +2388,8 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
 }
 
 export const ListConsumerQuotaMetricsRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
+
   encode(message: ListConsumerQuotaMetricsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2503,6 +2517,8 @@ function createBaseListConsumerQuotaMetricsResponse(): ListConsumerQuotaMetricsR
 }
 
 export const ListConsumerQuotaMetricsResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
+
   encode(message: ListConsumerQuotaMetricsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.metrics) {
       ConsumerQuotaMetric.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2618,6 +2634,8 @@ function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricReques
 }
 
 export const GetConsumerQuotaMetricRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
+
   encode(message: GetConsumerQuotaMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2715,6 +2733,8 @@ function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest 
 }
 
 export const GetConsumerQuotaLimitRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
+
   encode(message: GetConsumerQuotaLimitRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2814,6 +2834,8 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
 }
 
 export const CreateAdminOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
+
   encode(message: CreateAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2974,6 +2996,8 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
 }
 
 export const UpdateAdminOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
+
   encode(message: UpdateAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3147,6 +3171,8 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
 }
 
 export const DeleteAdminOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
+
   encode(message: DeleteAdminOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3290,6 +3316,8 @@ function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
 }
 
 export const ListAdminOverridesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
+
   encode(message: ListAdminOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3402,6 +3430,8 @@ function createBaseListAdminOverridesResponse(): ListAdminOverridesResponse {
 }
 
 export const ListAdminOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
+
   encode(message: ListAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3516,6 +3546,8 @@ function createBaseBatchCreateAdminOverridesResponse(): BatchCreateAdminOverride
 }
 
 export const BatchCreateAdminOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse",
+
   encode(message: BatchCreateAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3618,6 +3650,8 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
 }
 
 export const ImportAdminOverridesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
+
   encode(message: ImportAdminOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -3774,6 +3808,8 @@ function createBaseImportAdminOverridesResponse(): ImportAdminOverridesResponse 
 }
 
 export const ImportAdminOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse",
+
   encode(message: ImportAdminOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3871,6 +3907,8 @@ function createBaseImportAdminOverridesMetadata(): ImportAdminOverridesMetadata 
 }
 
 export const ImportAdminOverridesMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata",
+
   encode(_: ImportAdminOverridesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -3937,6 +3975,8 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
 }
 
 export const CreateConsumerOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
+
   encode(message: CreateConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4097,6 +4137,8 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
 }
 
 export const UpdateConsumerOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
+
   encode(message: UpdateConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4270,6 +4312,8 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
 }
 
 export const DeleteConsumerOverrideRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
+
   encode(message: DeleteConsumerOverrideRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4413,6 +4457,8 @@ function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest 
 }
 
 export const ListConsumerOverridesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
+
   encode(message: ListConsumerOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4525,6 +4571,8 @@ function createBaseListConsumerOverridesResponse(): ListConsumerOverridesRespons
 }
 
 export const ListConsumerOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
+
   encode(message: ListConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4639,6 +4687,8 @@ function createBaseBatchCreateConsumerOverridesResponse(): BatchCreateConsumerOv
 }
 
 export const BatchCreateConsumerOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse",
+
   encode(message: BatchCreateConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4741,6 +4791,8 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
 }
 
 export const ImportConsumerOverridesRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
+
   encode(message: ImportConsumerOverridesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4897,6 +4949,8 @@ function createBaseImportConsumerOverridesResponse(): ImportConsumerOverridesRes
 }
 
 export const ImportConsumerOverridesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse",
+
   encode(message: ImportConsumerOverridesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4994,6 +5048,8 @@ function createBaseImportConsumerOverridesMetadata(): ImportConsumerOverridesMet
 }
 
 export const ImportConsumerOverridesMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata",
+
   encode(_: ImportConsumerOverridesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -5057,6 +5113,8 @@ function createBaseImportAdminQuotaPoliciesResponse(): ImportAdminQuotaPoliciesR
 }
 
 export const ImportAdminQuotaPoliciesResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse",
+
   encode(message: ImportAdminQuotaPoliciesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.policies) {
       AdminQuotaPolicy.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -5154,6 +5212,8 @@ function createBaseImportAdminQuotaPoliciesMetadata(): ImportAdminQuotaPoliciesM
 }
 
 export const ImportAdminQuotaPoliciesMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata",
+
   encode(_: ImportAdminQuotaPoliciesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -5215,6 +5275,8 @@ function createBaseCreateAdminQuotaPolicyMetadata(): CreateAdminQuotaPolicyMetad
 }
 
 export const CreateAdminQuotaPolicyMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata",
+
   encode(_: CreateAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -5276,6 +5338,8 @@ function createBaseUpdateAdminQuotaPolicyMetadata(): UpdateAdminQuotaPolicyMetad
 }
 
 export const UpdateAdminQuotaPolicyMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata",
+
   encode(_: UpdateAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -5337,6 +5401,8 @@ function createBaseDeleteAdminQuotaPolicyMetadata(): DeleteAdminQuotaPolicyMetad
 }
 
 export const DeleteAdminQuotaPolicyMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata",
+
   encode(_: DeleteAdminQuotaPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -5400,6 +5466,8 @@ function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequ
 }
 
 export const GenerateServiceIdentityRequest = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
+
   encode(message: GenerateServiceIdentityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -5482,6 +5550,8 @@ function createBaseGetServiceIdentityResponse(): GetServiceIdentityResponse {
 }
 
 export const GetServiceIdentityResponse = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse",
+
   encode(message: GetServiceIdentityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identity !== undefined) {
       ServiceIdentity.encode(message.identity, writer.uint32(10).fork()).ldelim();
@@ -5576,6 +5646,8 @@ function createBaseGetServiceIdentityMetadata(): GetServiceIdentityMetadata {
 }
 
 export const GetServiceIdentityMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata",
+
   encode(_: GetServiceIdentityMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

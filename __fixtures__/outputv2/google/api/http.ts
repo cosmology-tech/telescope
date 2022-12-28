@@ -1066,6 +1066,8 @@ function createBaseHttp(): Http {
 }
 
 export const Http = {
+  typeUrl: "/google.api.Http",
+
   encode(message: Http, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1189,6 +1191,8 @@ function createBaseHttpRule(): HttpRule {
 }
 
 export const HttpRule = {
+  typeUrl: "/google.api.HttpRule",
+
   encode(message: HttpRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -1424,6 +1428,8 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 }
 
 export const CustomHttpPattern = {
+  typeUrl: "/google.api.CustomHttpPattern",
+
   encode(message: CustomHttpPattern, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);

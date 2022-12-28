@@ -232,6 +232,9 @@ function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
 }
 
 export const QueryGaugeIdsRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
+  aminoType: "osmosis/poolincentives/query-gauge-ids-request",
+
   encode(message: QueryGaugeIdsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -313,6 +316,9 @@ function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
 }
 
 export const QueryGaugeIdsResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
+  aminoType: "osmosis/poolincentives/query-gauge-ids-response",
+
   encode(message: QueryGaugeIdsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.gaugeIdsWithDuration) {
       QueryGaugeIdsResponse_GaugeIdWithDuration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -414,6 +420,9 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 }
 
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
+  aminoType: "osmosis/poolincentives/gauge-id-with-duration",
+
   encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
@@ -523,6 +532,9 @@ function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
 }
 
 export const QueryDistrInfoRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest",
+  aminoType: "osmosis/poolincentives/query-distr-info-request",
+
   encode(_: QueryDistrInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -586,6 +598,9 @@ function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
 }
 
 export const QueryDistrInfoResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
+  aminoType: "osmosis/poolincentives/query-distr-info-response",
+
   encode(message: QueryDistrInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.distrInfo !== undefined) {
       DistrInfo.encode(message.distrInfo, writer.uint32(10).fork()).ldelim();
@@ -665,6 +680,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/poolincentives/query-params-request",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -728,6 +746,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/poolincentives/query-params-response",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -807,6 +828,9 @@ function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsReques
 }
 
 export const QueryLockableDurationsRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
+  aminoType: "osmosis/poolincentives/query-lockable-durations-request",
+
   encode(_: QueryLockableDurationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -870,6 +894,9 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 }
 
 export const QueryLockableDurationsResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
+  aminoType: "osmosis/poolincentives/query-lockable-durations-response",
+
   encode(message: QueryLockableDurationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -967,6 +994,9 @@ function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsReques
 }
 
 export const QueryIncentivizedPoolsRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
+  aminoType: "osmosis/poolincentives/query-incentivized-pools-request",
+
   encode(_: QueryIncentivizedPoolsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1032,6 +1062,9 @@ function createBaseIncentivizedPool(): IncentivizedPool {
 }
 
 export const IncentivizedPool = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
+  aminoType: "osmosis/poolincentives/incentivized-pool",
+
   encode(message: IncentivizedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -1143,6 +1176,9 @@ function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsRespo
 }
 
 export const QueryIncentivizedPoolsResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
+  aminoType: "osmosis/poolincentives/query-incentivized-pools-response",
+
   encode(message: QueryIncentivizedPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentivizedPools) {
       IncentivizedPool.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1240,6 +1276,9 @@ function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentive
 }
 
 export const QueryExternalIncentiveGaugesRequest = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
+  aminoType: "osmosis/poolincentives/query-external-incentive-gauges-request",
+
   encode(_: QueryExternalIncentiveGaugesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1303,6 +1342,9 @@ function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiv
 }
 
 export const QueryExternalIncentiveGaugesResponse = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
+  aminoType: "osmosis/poolincentives/query-external-incentive-gauges-response",
+
   encode(message: QueryExternalIncentiveGaugesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();

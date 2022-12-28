@@ -787,7 +787,7 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   value: number;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoType {
-  typeUrl: "/google.api.servicemanagement.v1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
@@ -795,7 +795,7 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   value: number;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoType {
-  type: "/google.api.servicemanagement.v1.undefined";
+  type: string;
   value: Rollout_TrafficPercentStrategy_PercentagesEntryAmino;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
@@ -969,6 +969,8 @@ function createBaseManagedService(): ManagedService {
 }
 
 export const ManagedService = {
+  typeUrl: "/google.api.servicemanagement.v1.ManagedService",
+
   encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
@@ -1068,6 +1070,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata",
+
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -1228,6 +1232,8 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
 }
 
 export const OperationMetadata_Step = {
+  typeUrl: "/google.api.servicemanagement.v1.Step",
+
   encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
@@ -1326,6 +1332,8 @@ function createBaseDiagnostic(): Diagnostic {
 }
 
 export const Diagnostic = {
+  typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
+
   encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
@@ -1438,6 +1446,8 @@ function createBaseConfigSource(): ConfigSource {
 }
 
 export const ConfigSource = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
+
   encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(42).string(message.id);
@@ -1554,6 +1564,8 @@ function createBaseConfigFile(): ConfigFile {
 }
 
 export const ConfigFile = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
+
   encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
@@ -1665,6 +1677,8 @@ function createBaseConfigRef(): ConfigRef {
 }
 
 export const ConfigRef = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
+
   encode(message: ConfigRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1746,6 +1760,8 @@ function createBaseChangeReport(): ChangeReport {
 }
 
 export const ChangeReport = {
+  typeUrl: "/google.api.servicemanagement.v1.ChangeReport",
+
   encode(message: ChangeReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.configChanges) {
       ConfigChange.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1851,6 +1867,8 @@ function createBaseRollout(): Rollout {
 }
 
 export const Rollout = {
+  typeUrl: "/google.api.servicemanagement.v1.Rollout",
+
   encode(message: Rollout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
@@ -2119,6 +2137,8 @@ function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrat
 }
 
 export const Rollout_TrafficPercentStrategy = {
+  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy",
+
   encode(message: Rollout_TrafficPercentStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
       Rollout_TrafficPercentStrategy_PercentagesEntry.encode({
@@ -2249,6 +2269,8 @@ function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrateg
 }
 
 export const Rollout_DeleteServiceStrategy = {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy",
+
   encode(_: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

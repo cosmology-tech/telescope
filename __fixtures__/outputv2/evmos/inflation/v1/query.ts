@@ -333,6 +333,8 @@ function createBaseQueryPeriodRequest(): QueryPeriodRequest {
 }
 
 export const QueryPeriodRequest = {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodRequest",
+
   encode(_: QueryPeriodRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -396,6 +398,8 @@ function createBaseQueryPeriodResponse(): QueryPeriodResponse {
 }
 
 export const QueryPeriodResponse = {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
+
   encode(message: QueryPeriodResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.period.isZero()) {
       writer.uint32(8).uint64(message.period);
@@ -475,6 +479,8 @@ function createBaseQueryEpochMintProvisionRequest(): QueryEpochMintProvisionRequ
 }
 
 export const QueryEpochMintProvisionRequest = {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest",
+
   encode(_: QueryEpochMintProvisionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -538,6 +544,8 @@ function createBaseQueryEpochMintProvisionResponse(): QueryEpochMintProvisionRes
 }
 
 export const QueryEpochMintProvisionResponse = {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse",
+
   encode(message: QueryEpochMintProvisionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochMintProvision !== undefined) {
       DecCoin.encode(message.epochMintProvision, writer.uint32(10).fork()).ldelim();
@@ -617,6 +625,8 @@ function createBaseQuerySkippedEpochsRequest(): QuerySkippedEpochsRequest {
 }
 
 export const QuerySkippedEpochsRequest = {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest",
+
   encode(_: QuerySkippedEpochsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -680,6 +690,8 @@ function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
 }
 
 export const QuerySkippedEpochsResponse = {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
+
   encode(message: QuerySkippedEpochsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.skippedEpochs.isZero()) {
       writer.uint32(8).uint64(message.skippedEpochs);
@@ -759,6 +771,8 @@ function createBaseQueryCirculatingSupplyRequest(): QueryCirculatingSupplyReques
 }
 
 export const QueryCirculatingSupplyRequest = {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest",
+
   encode(_: QueryCirculatingSupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -822,6 +836,8 @@ function createBaseQueryCirculatingSupplyResponse(): QueryCirculatingSupplyRespo
 }
 
 export const QueryCirculatingSupplyResponse = {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse",
+
   encode(message: QueryCirculatingSupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.circulatingSupply !== undefined) {
       DecCoin.encode(message.circulatingSupply, writer.uint32(10).fork()).ldelim();
@@ -901,6 +917,8 @@ function createBaseQueryInflationRateRequest(): QueryInflationRateRequest {
 }
 
 export const QueryInflationRateRequest = {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest",
+
   encode(_: QueryInflationRateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -964,6 +982,8 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
 }
 
 export const QueryInflationRateResponse = {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
+
   encode(message: QueryInflationRateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationRate !== "") {
       writer.uint32(10).string(message.inflationRate);
@@ -1043,6 +1063,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.inflation.v1.QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1106,6 +1128,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.inflation.v1.QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

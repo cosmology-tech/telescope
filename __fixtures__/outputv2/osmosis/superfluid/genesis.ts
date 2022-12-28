@@ -80,6 +80,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/osmosis.superfluid.GenesisState",
+  aminoType: "osmosis/genesis-state",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

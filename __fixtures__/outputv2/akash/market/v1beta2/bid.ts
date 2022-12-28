@@ -288,6 +288,8 @@ function createBaseMsgCreateBid(): MsgCreateBid {
 }
 
 export const MsgCreateBid = {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBid",
+
   encode(message: MsgCreateBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.order !== undefined) {
       OrderID.encode(message.order, writer.uint32(10).fork()).ldelim();
@@ -412,6 +414,8 @@ function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
 }
 
 export const MsgCreateBidResponse = {
+  typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse",
+
   encode(_: MsgCreateBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -475,6 +479,8 @@ function createBaseMsgCloseBid(): MsgCloseBid {
 }
 
 export const MsgCloseBid = {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBid",
+
   encode(message: MsgCloseBid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -554,6 +560,8 @@ function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
 }
 
 export const MsgCloseBidResponse = {
+  typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse",
+
   encode(_: MsgCloseBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -621,6 +629,8 @@ function createBaseBidID(): BidID {
 }
 
 export const BidID = {
+  typeUrl: "/akash.market.v1beta2.BidID",
+
   encode(message: BidID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -765,6 +775,8 @@ function createBaseBid(): Bid {
 }
 
 export const Bid = {
+  typeUrl: "/akash.market.v1beta2.Bid",
+
   encode(message: Bid, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -896,6 +908,8 @@ function createBaseBidFilters(): BidFilters {
 }
 
 export const BidFilters = {
+  typeUrl: "/akash.market.v1beta2.BidFilters",
+
   encode(message: BidFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);

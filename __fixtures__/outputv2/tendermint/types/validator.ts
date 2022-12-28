@@ -81,6 +81,8 @@ function createBaseValidatorSet(): ValidatorSet {
 }
 
 export const ValidatorSet = {
+  typeUrl: "/tendermint.types.ValidatorSet",
+
   encode(message: ValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -213,6 +215,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  typeUrl: "/tendermint.types.Validator",
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
@@ -340,6 +344,8 @@ function createBaseSimpleValidator(): SimpleValidator {
 }
 
 export const SimpleValidator = {
+  typeUrl: "/tendermint.types.SimpleValidator",
+
   encode(message: SimpleValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();

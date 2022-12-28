@@ -70,6 +70,9 @@ function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
 }
 
 export const FungibleTokenPacketData = {
+  typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData",
+  aminoType: "cosmos-sdk/FungibleTokenPacketData",
+
   encode(message: FungibleTokenPacketData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);

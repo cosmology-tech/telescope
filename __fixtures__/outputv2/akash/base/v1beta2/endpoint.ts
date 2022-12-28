@@ -87,6 +87,8 @@ function createBaseEndpoint(): Endpoint {
 }
 
 export const Endpoint = {
+  typeUrl: "/akash.base.v1beta2.Endpoint",
+
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);

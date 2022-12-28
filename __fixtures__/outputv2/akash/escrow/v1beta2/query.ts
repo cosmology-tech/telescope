@@ -140,6 +140,8 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 }
 
 export const QueryAccountsRequest = {
+  typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest",
+
   encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -282,6 +284,8 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
 }
 
 export const QueryAccountsResponse = {
+  typeUrl: "/akash.escrow.v1beta2.QueryAccountsResponse",
+
   encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Account.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -401,6 +405,8 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
 }
 
 export const QueryPaymentsRequest = {
+  typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest",
+
   encode(message: QueryPaymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -558,6 +564,8 @@ function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
 }
 
 export const QueryPaymentsResponse = {
+  typeUrl: "/akash.escrow.v1beta2.QueryPaymentsResponse",
+
   encode(message: QueryPaymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.payments) {
       FractionalPayment.encode(v!, writer.uint32(10).fork()).ldelim();

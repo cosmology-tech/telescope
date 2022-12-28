@@ -130,6 +130,8 @@ function createBaseMsgCloseGroup(): MsgCloseGroup {
 }
 
 export const MsgCloseGroup = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup",
+
   encode(message: MsgCloseGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -209,6 +211,8 @@ function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
 }
 
 export const MsgCloseGroupResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse",
+
   encode(_: MsgCloseGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -272,6 +276,8 @@ function createBaseMsgPauseGroup(): MsgPauseGroup {
 }
 
 export const MsgPauseGroup = {
+  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup",
+
   encode(message: MsgPauseGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -351,6 +357,8 @@ function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
 }
 
 export const MsgPauseGroupResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse",
+
   encode(_: MsgPauseGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -414,6 +422,8 @@ function createBaseMsgStartGroup(): MsgStartGroup {
 }
 
 export const MsgStartGroup = {
+  typeUrl: "/akash.deployment.v1beta2.MsgStartGroup",
+
   encode(message: MsgStartGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -493,6 +503,8 @@ function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
 }
 
 export const MsgStartGroupResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse",
+
   encode(_: MsgStartGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

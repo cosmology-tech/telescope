@@ -6,7 +6,7 @@ export interface SourceInfo_PositionsEntry {
   value: number;
 }
 export interface SourceInfo_PositionsEntryProtoType {
-  typeUrl: "/google.api.expr.v1beta1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntryAmino {
@@ -14,7 +14,7 @@ export interface SourceInfo_PositionsEntryAmino {
   value: number;
 }
 export interface SourceInfo_PositionsEntryAminoType {
-  type: "/google.api.expr.v1beta1.undefined";
+  type: string;
   value: SourceInfo_PositionsEntryAmino;
 }
 export interface SourceInfo_PositionsEntrySDKType {
@@ -261,6 +261,8 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
+  typeUrl: "/google.api.expr.v1beta1.SourceInfo",
+
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(18).string(message.location);
@@ -456,6 +458,8 @@ function createBaseSourcePosition(): SourcePosition {
 }
 
 export const SourcePosition = {
+  typeUrl: "/google.api.expr.v1beta1.SourcePosition",
+
   encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);

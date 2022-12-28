@@ -304,6 +304,8 @@ function createBaseLeaseID(): LeaseID {
 }
 
 export const LeaseID = {
+  typeUrl: "/akash.market.v1beta2.LeaseID",
+
   encode(message: LeaseID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -449,6 +451,8 @@ function createBaseLease(): Lease {
 }
 
 export const Lease = {
+  typeUrl: "/akash.market.v1beta2.Lease",
+
   encode(message: Lease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
@@ -595,6 +599,8 @@ function createBaseLeaseFilters(): LeaseFilters {
 }
 
 export const LeaseFilters = {
+  typeUrl: "/akash.market.v1beta2.LeaseFilters",
+
   encode(message: LeaseFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -751,6 +757,8 @@ function createBaseMsgCreateLease(): MsgCreateLease {
 }
 
 export const MsgCreateLease = {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLease",
+
   encode(message: MsgCreateLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -830,6 +838,8 @@ function createBaseMsgCreateLeaseResponse(): MsgCreateLeaseResponse {
 }
 
 export const MsgCreateLeaseResponse = {
+  typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse",
+
   encode(_: MsgCreateLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -893,6 +903,8 @@ function createBaseMsgWithdrawLease(): MsgWithdrawLease {
 }
 
 export const MsgWithdrawLease = {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLease",
+
   encode(message: MsgWithdrawLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidId !== undefined) {
       LeaseID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -972,6 +984,8 @@ function createBaseMsgWithdrawLeaseResponse(): MsgWithdrawLeaseResponse {
 }
 
 export const MsgWithdrawLeaseResponse = {
+  typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse",
+
   encode(_: MsgWithdrawLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1035,6 +1049,8 @@ function createBaseMsgCloseLease(): MsgCloseLease {
 }
 
 export const MsgCloseLease = {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLease",
+
   encode(message: MsgCloseLease, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leaseId !== undefined) {
       LeaseID.encode(message.leaseId, writer.uint32(10).fork()).ldelim();
@@ -1114,6 +1130,8 @@ function createBaseMsgCloseLeaseResponse(): MsgCloseLeaseResponse {
 }
 
 export const MsgCloseLeaseResponse = {
+  typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse",
+
   encode(_: MsgCloseLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

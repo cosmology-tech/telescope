@@ -51,6 +51,9 @@ function createBaseFeeToken(): FeeToken {
 }
 
 export const FeeToken = {
+  typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
+  aminoType: "osmosis/txfees/fee-token",
+
   encode(message: FeeToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);

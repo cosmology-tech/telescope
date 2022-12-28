@@ -198,6 +198,8 @@ function createBaseDecl(): Decl {
 }
 
 export const Decl = {
+  typeUrl: "/google.api.expr.v1beta1.Decl",
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -341,6 +343,8 @@ function createBaseDeclType(): DeclType {
 }
 
 export const DeclType = {
+  typeUrl: "/google.api.expr.v1beta1.DeclType",
+
   encode(message: DeclType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -471,6 +475,8 @@ function createBaseIdentDecl(): IdentDecl {
 }
 
 export const IdentDecl = {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl",
+
   encode(message: IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       DeclType.encode(message.type, writer.uint32(26).fork()).ldelim();
@@ -569,6 +575,8 @@ function createBaseFunctionDecl(): FunctionDecl {
 }
 
 export const FunctionDecl = {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
+
   encode(message: FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.args) {
       IdentDecl.encode(v!, writer.uint32(10).fork()).ldelim();

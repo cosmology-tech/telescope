@@ -109,6 +109,9 @@ function createBaseClaimRecord(): ClaimRecord {
 }
 
 export const ClaimRecord = {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
+  aminoType: "osmosis/claim/claim-record",
+
   encode(message: ClaimRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);

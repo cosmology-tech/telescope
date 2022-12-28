@@ -49,6 +49,8 @@ function createBaseSourceContext(): SourceContext {
 }
 
 export const SourceContext = {
+  typeUrl: "/google.protobuf.SourceContext",
+
   encode(message: SourceContext, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fileName !== "") {
       writer.uint32(10).string(message.fileName);

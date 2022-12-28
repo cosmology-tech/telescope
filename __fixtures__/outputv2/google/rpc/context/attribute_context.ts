@@ -170,7 +170,7 @@ export interface AttributeContext_Peer_LabelsEntry {
   value: string;
 }
 export interface AttributeContext_Peer_LabelsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Peer_LabelsEntryAmino {
@@ -178,7 +178,7 @@ export interface AttributeContext_Peer_LabelsEntryAmino {
   value: string;
 }
 export interface AttributeContext_Peer_LabelsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+  type: string;
   value: AttributeContext_Peer_LabelsEntryAmino;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
@@ -531,7 +531,7 @@ export interface AttributeContext_Request_HeadersEntry {
   value: string;
 }
 export interface AttributeContext_Request_HeadersEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntryAmino {
@@ -539,7 +539,7 @@ export interface AttributeContext_Request_HeadersEntryAmino {
   value: string;
 }
 export interface AttributeContext_Request_HeadersEntryAminoType {
-  type: "/google.rpc.context.undefined";
+  type: string;
   value: AttributeContext_Request_HeadersEntryAmino;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
@@ -721,7 +721,7 @@ export interface AttributeContext_Response_HeadersEntry {
   value: string;
 }
 export interface AttributeContext_Response_HeadersEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntryAmino {
@@ -729,7 +729,7 @@ export interface AttributeContext_Response_HeadersEntryAmino {
   value: string;
 }
 export interface AttributeContext_Response_HeadersEntryAminoType {
-  type: "/google.rpc.context.undefined";
+  type: string;
   value: AttributeContext_Response_HeadersEntryAmino;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
@@ -833,7 +833,7 @@ export interface AttributeContext_Resource_LabelsEntry {
   value: string;
 }
 export interface AttributeContext_Resource_LabelsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_LabelsEntryAmino {
@@ -841,7 +841,7 @@ export interface AttributeContext_Resource_LabelsEntryAmino {
   value: string;
 }
 export interface AttributeContext_Resource_LabelsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+  type: string;
   value: AttributeContext_Resource_LabelsEntryAmino;
 }
 export interface AttributeContext_Resource_LabelsEntrySDKType {
@@ -853,7 +853,7 @@ export interface AttributeContext_Resource_AnnotationsEntry {
   value: string;
 }
 export interface AttributeContext_Resource_AnnotationsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntryAmino {
@@ -861,7 +861,7 @@ export interface AttributeContext_Resource_AnnotationsEntryAmino {
   value: string;
 }
 export interface AttributeContext_Resource_AnnotationsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+  type: string;
   value: AttributeContext_Resource_AnnotationsEntryAmino;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
@@ -1129,6 +1129,8 @@ function createBaseAttributeContext(): AttributeContext {
 }
 
 export const AttributeContext = {
+  typeUrl: "/google.rpc.context.AttributeContext",
+
   encode(message: AttributeContext, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.origin !== undefined) {
       AttributeContext_Peer.encode(message.origin, writer.uint32(58).fork()).ldelim();
@@ -1434,6 +1436,8 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
 }
 
 export const AttributeContext_Peer = {
+  typeUrl: "/google.rpc.context.Peer",
+
   encode(message: AttributeContext_Peer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ip !== "") {
       writer.uint32(10).string(message.ip);
@@ -1630,6 +1634,8 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 }
 
 export const AttributeContext_Api = {
+  typeUrl: "/google.rpc.context.Api",
+
   encode(message: AttributeContext_Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -1760,6 +1766,8 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 }
 
 export const AttributeContext_Auth = {
+  typeUrl: "/google.rpc.context.Auth",
+
   encode(message: AttributeContext_Auth, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
@@ -2045,6 +2053,8 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
 }
 
 export const AttributeContext_Request = {
+  typeUrl: "/google.rpc.context.Request",
+
   encode(message: AttributeContext_Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -2444,6 +2454,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 }
 
 export const AttributeContext_Response = {
+  typeUrl: "/google.rpc.context.Response",
+
   encode(message: AttributeContext_Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.code.isZero()) {
       writer.uint32(8).int64(message.code);
@@ -2842,6 +2854,8 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
 }
 
 export const AttributeContext_Resource = {
+  typeUrl: "/google.rpc.context.Resource",
+
   encode(message: AttributeContext_Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);

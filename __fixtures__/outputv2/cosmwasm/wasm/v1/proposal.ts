@@ -510,6 +510,9 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
 }
 
 export const StoreCodeProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal",
+  aminoType: "wasm/StoreCodeProposal",
+
   encode(message: StoreCodeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -658,6 +661,9 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
 }
 
 export const InstantiateContractProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal",
+  aminoType: "wasm/InstantiateContractProposal",
+
   encode(message: InstantiateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -866,6 +872,9 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
 }
 
 export const MigrateContractProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal",
+  aminoType: "wasm/MigrateContractProposal",
+
   encode(message: MigrateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1010,6 +1019,9 @@ function createBaseSudoContractProposal(): SudoContractProposal {
 }
 
 export const SudoContractProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal",
+  aminoType: "wasm/SudoContractProposal",
+
   encode(message: SudoContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1141,6 +1153,9 @@ function createBaseExecuteContractProposal(): ExecuteContractProposal {
 }
 
 export const ExecuteContractProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal",
+  aminoType: "wasm/ExecuteContractProposal",
+
   encode(message: ExecuteContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1318,6 +1333,9 @@ function createBaseUpdateAdminProposal(): UpdateAdminProposal {
 }
 
 export const UpdateAdminProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal",
+  aminoType: "wasm/UpdateAdminProposal",
+
   encode(message: UpdateAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1446,6 +1464,9 @@ function createBaseClearAdminProposal(): ClearAdminProposal {
 }
 
 export const ClearAdminProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal",
+  aminoType: "wasm/ClearAdminProposal",
+
   encode(message: ClearAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1559,6 +1580,9 @@ function createBasePinCodesProposal(): PinCodesProposal {
 }
 
 export const PinCodesProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
+  aminoType: "wasm/PinCodesProposal",
+
   encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1702,6 +1726,9 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
 }
 
 export const UnpinCodesProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
+  aminoType: "wasm/UnpinCodesProposal",
+
   encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);

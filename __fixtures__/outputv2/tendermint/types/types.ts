@@ -581,6 +581,8 @@ function createBasePartSetHeader(): PartSetHeader {
 }
 
 export const PartSetHeader = {
+  typeUrl: "/tendermint.types.PartSetHeader",
+
   encode(message: PartSetHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.total !== 0) {
       writer.uint32(8).uint32(message.total);
@@ -679,6 +681,8 @@ function createBasePart(): Part {
 }
 
 export const Part = {
+  typeUrl: "/tendermint.types.Part",
+
   encode(message: Part, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
@@ -791,6 +795,8 @@ function createBaseBlockID(): BlockID {
 }
 
 export const BlockID = {
+  typeUrl: "/tendermint.types.BlockID",
+
   encode(message: BlockID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -900,6 +906,8 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
+  typeUrl: "/tendermint.types.Header",
+
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== undefined) {
       Consensus.encode(message.version, writer.uint32(10).fork()).ldelim();
@@ -1176,6 +1184,8 @@ function createBaseData(): Data {
 }
 
 export const Data = {
+  typeUrl: "/tendermint.types.Data",
+
   encode(message: Data, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       writer.uint32(10).bytes(v!);
@@ -1282,6 +1292,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  typeUrl: "/tendermint.types.Vote",
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -1471,6 +1483,8 @@ function createBaseCommit(): Commit {
 }
 
 export const Commit = {
+  typeUrl: "/tendermint.types.Commit",
+
   encode(message: Commit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
@@ -1618,6 +1632,8 @@ function createBaseCommitSig(): CommitSig {
 }
 
 export const CommitSig = {
+  typeUrl: "/tendermint.types.CommitSig",
+
   encode(message: CommitSig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockIdFlag !== 0) {
       writer.uint32(8).int32(message.blockIdFlag);
@@ -1750,6 +1766,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  typeUrl: "/tendermint.types.Proposal",
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -1922,6 +1940,8 @@ function createBaseSignedHeader(): SignedHeader {
 }
 
 export const SignedHeader = {
+  typeUrl: "/tendermint.types.SignedHeader",
+
   encode(message: SignedHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -2019,6 +2039,8 @@ function createBaseLightBlock(): LightBlock {
 }
 
 export const LightBlock = {
+  typeUrl: "/tendermint.types.LightBlock",
+
   encode(message: LightBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedHeader !== undefined) {
       SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
@@ -2118,6 +2140,8 @@ function createBaseBlockMeta(): BlockMeta {
 }
 
 export const BlockMeta = {
+  typeUrl: "/tendermint.types.BlockMeta",
+
   encode(message: BlockMeta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -2246,6 +2270,8 @@ function createBaseTxProof(): TxProof {
 }
 
 export const TxProof = {
+  typeUrl: "/tendermint.types.TxProof",
+
   encode(message: TxProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rootHash.length !== 0) {
       writer.uint32(10).bytes(message.rootHash);

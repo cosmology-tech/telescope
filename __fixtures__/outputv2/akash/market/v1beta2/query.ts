@@ -315,6 +315,8 @@ function createBaseQueryOrdersRequest(): QueryOrdersRequest {
 }
 
 export const QueryOrdersRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
+
   encode(message: QueryOrdersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       OrderFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -412,6 +414,8 @@ function createBaseQueryOrdersResponse(): QueryOrdersResponse {
 }
 
 export const QueryOrdersResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
+
   encode(message: QueryOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.orders) {
       Order.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -526,6 +530,8 @@ function createBaseQueryOrderRequest(): QueryOrderRequest {
 }
 
 export const QueryOrderRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
+
   encode(message: QueryOrderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       OrderID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -607,6 +613,8 @@ function createBaseQueryOrderResponse(): QueryOrderResponse {
 }
 
 export const QueryOrderResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
+
   encode(message: QueryOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.order !== undefined) {
       Order.encode(message.order, writer.uint32(10).fork()).ldelim();
@@ -689,6 +697,8 @@ function createBaseQueryBidsRequest(): QueryBidsRequest {
 }
 
 export const QueryBidsRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
+
   encode(message: QueryBidsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       BidFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -786,6 +796,8 @@ function createBaseQueryBidsResponse(): QueryBidsResponse {
 }
 
 export const QueryBidsResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
+
   encode(message: QueryBidsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.bids) {
       QueryBidResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -900,6 +912,8 @@ function createBaseQueryBidRequest(): QueryBidRequest {
 }
 
 export const QueryBidRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryBidRequest",
+
   encode(message: QueryBidRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       BidID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -982,6 +996,8 @@ function createBaseQueryBidResponse(): QueryBidResponse {
 }
 
 export const QueryBidResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryBidResponse",
+
   encode(message: QueryBidResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bid !== undefined) {
       Bid.encode(message.bid, writer.uint32(10).fork()).ldelim();
@@ -1079,6 +1095,8 @@ function createBaseQueryLeasesRequest(): QueryLeasesRequest {
 }
 
 export const QueryLeasesRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
+
   encode(message: QueryLeasesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       LeaseFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -1176,6 +1194,8 @@ function createBaseQueryLeasesResponse(): QueryLeasesResponse {
 }
 
 export const QueryLeasesResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
+
   encode(message: QueryLeasesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.leases) {
       QueryLeaseResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1290,6 +1310,8 @@ function createBaseQueryLeaseRequest(): QueryLeaseRequest {
 }
 
 export const QueryLeaseRequest = {
+  typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
+
   encode(message: QueryLeaseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       LeaseID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -1372,6 +1394,8 @@ function createBaseQueryLeaseResponse(): QueryLeaseResponse {
 }
 
 export const QueryLeaseResponse = {
+  typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
+
   encode(message: QueryLeaseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lease !== undefined) {
       Lease.encode(message.lease, writer.uint32(10).fork()).ldelim();

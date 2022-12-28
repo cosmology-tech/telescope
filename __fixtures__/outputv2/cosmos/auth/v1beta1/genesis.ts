@@ -44,6 +44,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.auth.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

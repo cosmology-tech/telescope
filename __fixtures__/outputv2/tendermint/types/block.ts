@@ -40,6 +40,8 @@ function createBaseBlock(): Block {
 }
 
 export const Block = {
+  typeUrl: "/tendermint.types.Block",
+
   encode(message: Block, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();

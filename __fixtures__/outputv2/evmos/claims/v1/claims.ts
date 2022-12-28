@@ -210,6 +210,8 @@ function createBaseClaim(): Claim {
 }
 
 export const Claim = {
+  typeUrl: "/evmos.claims.v1.Claim",
+
   encode(message: Claim, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
@@ -323,6 +325,8 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 }
 
 export const ClaimsRecordAddress = {
+  typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
+
   encode(message: ClaimsRecordAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -465,6 +469,8 @@ function createBaseClaimsRecord(): ClaimsRecord {
 }
 
 export const ClaimsRecord = {
+  typeUrl: "/evmos.claims.v1.ClaimsRecord",
+
   encode(message: ClaimsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);

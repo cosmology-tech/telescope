@@ -211,6 +211,8 @@ function createBaseProvider(): Provider {
 }
 
 export const Provider = {
+  typeUrl: "/akash.audit.v1beta2.Provider",
+
   encode(message: Provider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -342,6 +344,8 @@ function createBaseAuditedAttributes(): AuditedAttributes {
 }
 
 export const AuditedAttributes = {
+  typeUrl: "/akash.audit.v1beta2.AuditedAttributes",
+
   encode(message: AuditedAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -471,6 +475,8 @@ function createBaseAttributesResponse(): AttributesResponse {
 }
 
 export const AttributesResponse = {
+  typeUrl: "/akash.audit.v1beta2.AttributesResponse",
+
   encode(message: AttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.attributes) {
       AuditedAttributes.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -571,6 +577,8 @@ function createBaseAttributesFilters(): AttributesFilters {
 }
 
 export const AttributesFilters = {
+  typeUrl: "/akash.audit.v1beta2.AttributesFilters",
+
   encode(message: AttributesFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.auditors) {
       writer.uint32(10).string(v!);
@@ -702,6 +710,8 @@ function createBaseMsgSignProviderAttributes(): MsgSignProviderAttributes {
 }
 
 export const MsgSignProviderAttributes = {
+  typeUrl: "/akash.audit.v1beta2.MsgSignProviderAttributes",
+
   encode(message: MsgSignProviderAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -829,6 +839,8 @@ function createBaseMsgSignProviderAttributesResponse(): MsgSignProviderAttribute
 }
 
 export const MsgSignProviderAttributesResponse = {
+  typeUrl: "/akash.audit.v1beta2.MsgSignProviderAttributesResponse",
+
   encode(_: MsgSignProviderAttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -894,6 +906,8 @@ function createBaseMsgDeleteProviderAttributes(): MsgDeleteProviderAttributes {
 }
 
 export const MsgDeleteProviderAttributes = {
+  typeUrl: "/akash.audit.v1beta2.MsgDeleteProviderAttributes",
+
   encode(message: MsgDeleteProviderAttributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -1021,6 +1035,8 @@ function createBaseMsgDeleteProviderAttributesResponse(): MsgDeleteProviderAttri
 }
 
 export const MsgDeleteProviderAttributesResponse = {
+  typeUrl: "/akash.audit.v1beta2.MsgDeleteProviderAttributesResponse",
+
   encode(_: MsgDeleteProviderAttributesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

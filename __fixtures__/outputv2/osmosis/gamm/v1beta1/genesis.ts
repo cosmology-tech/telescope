@@ -73,6 +73,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/osmosis.gamm.v1beta1.Params",
+  aminoType: "osmosis/gamm/params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.poolCreationFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -174,6 +177,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/osmosis.gamm.v1beta1.GenesisState",
+  aminoType: "osmosis/gamm/genesis-state",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pools) {
       Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();

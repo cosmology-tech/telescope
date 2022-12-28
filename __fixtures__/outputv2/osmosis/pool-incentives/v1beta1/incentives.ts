@@ -136,6 +136,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.Params",
+  aminoType: "osmosis/poolincentives/params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintedDenom !== "") {
       writer.uint32(10).string(message.mintedDenom);
@@ -217,6 +220,9 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 
 export const LockableDurationsInfo = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo",
+  aminoType: "osmosis/poolincentives/lockable-durations-info",
+
   encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -317,6 +323,9 @@ function createBaseDistrInfo(): DistrInfo {
 }
 
 export const DistrInfo = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo",
+  aminoType: "osmosis/poolincentives/distr-info",
+
   encode(message: DistrInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalWeight !== "") {
       writer.uint32(10).string(message.totalWeight);
@@ -432,6 +441,9 @@ function createBaseDistrRecord(): DistrRecord {
 }
 
 export const DistrRecord = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
+  aminoType: "osmosis/poolincentives/distr-record",
+
   encode(message: DistrRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gaugeId.isZero()) {
       writer.uint32(8).uint64(message.gaugeId);
@@ -530,6 +542,9 @@ function createBasePoolToGauge(): PoolToGauge {
 }
 
 export const PoolToGauge = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
+  aminoType: "osmosis/poolincentives/pool-to-gauge",
+
   encode(message: PoolToGauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -641,6 +656,9 @@ function createBasePoolToGauges(): PoolToGauges {
 }
 
 export const PoolToGauges = {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges",
+  aminoType: "osmosis/poolincentives/pool-to-gauges",
+
   encode(message: PoolToGauges, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.poolToGauge) {
       PoolToGauge.encode(v!, writer.uint32(18).fork()).ldelim();

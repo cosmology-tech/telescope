@@ -57,6 +57,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/osmosis.mint.v1beta1.GenesisState",
+  aminoType: "osmosis/mint/genesis-state",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minter !== undefined) {
       Minter.encode(message.minter, writer.uint32(10).fork()).ldelim();

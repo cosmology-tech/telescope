@@ -50,6 +50,9 @@ function createBaseQueryConfigRequest(): QueryConfigRequest {
 }
 
 export const QueryConfigRequest = {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest",
+  aminoType: "cosmos-sdk/QueryConfigRequest",
+
   encode(_: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -113,6 +116,9 @@ function createBaseQueryConfigResponse(): QueryConfigResponse {
 }
 
 export const QueryConfigResponse = {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse",
+  aminoType: "cosmos-sdk/QueryConfigResponse",
+
   encode(message: QueryConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();

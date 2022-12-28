@@ -207,6 +207,9 @@ function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
 }
 
 export const ModuleSchemaDescriptor = {
+  typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor",
+  aminoType: "cosmos-sdk/ModuleSchemaDescriptor",
+
   encode(message: ModuleSchemaDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.schemaFile) {
       ModuleSchemaDescriptor_FileEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -323,6 +326,9 @@ function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_Fi
 }
 
 export const ModuleSchemaDescriptor_FileEntry = {
+  typeUrl: "/cosmos.orm.v1alpha1.FileEntry",
+  aminoType: "cosmos-sdk/FileEntry",
+
   encode(message: ModuleSchemaDescriptor_FileEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);

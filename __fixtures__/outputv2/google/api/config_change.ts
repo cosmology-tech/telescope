@@ -238,6 +238,8 @@ function createBaseConfigChange(): ConfigChange {
 }
 
 export const ConfigChange = {
+  typeUrl: "/google.api.ConfigChange",
+
   encode(message: ConfigChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.element !== "") {
       writer.uint32(10).string(message.element);
@@ -397,6 +399,8 @@ function createBaseAdvice(): Advice {
 }
 
 export const Advice = {
+  typeUrl: "/google.api.Advice",
+
   encode(message: Advice, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);

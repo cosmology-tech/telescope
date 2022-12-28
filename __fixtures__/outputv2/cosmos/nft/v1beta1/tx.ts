@@ -75,6 +75,9 @@ function createBaseMsgSend(): MsgSend {
 }
 
 export const MsgSend = {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSend",
+  aminoType: "cosmos-sdk/MsgNFTSend",
+
   encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -199,6 +202,9 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 
 export const MsgSendResponse = {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
+  aminoType: "cosmos-sdk/MsgSendResponse",
+
   encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

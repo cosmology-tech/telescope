@@ -55,6 +55,8 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 
 export const ResourceUnits = {
+  typeUrl: "/akash.base.v1beta2.ResourceUnits",
+
   encode(message: ResourceUnits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();

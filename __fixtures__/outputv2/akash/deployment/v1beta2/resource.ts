@@ -42,6 +42,8 @@ function createBaseResource(): Resource {
 }
 
 export const Resource = {
+  typeUrl: "/akash.deployment.v1beta2.Resource",
+
   encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();

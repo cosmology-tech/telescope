@@ -89,6 +89,8 @@ function createBaseStatus(): Status {
 }
 
 export const Status = {
+  typeUrl: "/google.rpc.Status",
+
   encode(message: Status, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);

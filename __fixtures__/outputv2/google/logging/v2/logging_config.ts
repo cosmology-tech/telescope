@@ -3358,6 +3358,8 @@ function createBaseLogBucket(): LogBucket {
 }
 
 export const LogBucket = {
+  typeUrl: "/google.logging.v2.LogBucket",
+
   encode(message: LogBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3581,6 +3583,8 @@ function createBaseLogView(): LogView {
 }
 
 export const LogView = {
+  typeUrl: "/google.logging.v2.LogView",
+
   encode(message: LogView, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3733,6 +3737,8 @@ function createBaseLogSink(): LogSink {
 }
 
 export const LogSink = {
+  typeUrl: "/google.logging.v2.LogSink",
+
   encode(message: LogSink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3998,6 +4004,8 @@ function createBaseBigQueryOptions(): BigQueryOptions {
 }
 
 export const BigQueryOptions = {
+  typeUrl: "/google.logging.v2.BigQueryOptions",
+
   encode(message: BigQueryOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.usePartitionedTables === true) {
       writer.uint32(8).bool(message.usePartitionedTables);
@@ -4096,6 +4104,8 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
 }
 
 export const ListBucketsRequest = {
+  typeUrl: "/google.logging.v2.ListBucketsRequest",
+
   encode(message: ListBucketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4208,6 +4218,8 @@ function createBaseListBucketsResponse(): ListBucketsResponse {
 }
 
 export const ListBucketsResponse = {
+  typeUrl: "/google.logging.v2.ListBucketsResponse",
+
   encode(message: ListBucketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4324,6 +4336,8 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
 }
 
 export const CreateBucketRequest = {
+  typeUrl: "/google.logging.v2.CreateBucketRequest",
+
   encode(message: CreateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4437,6 +4451,8 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 }
 
 export const UpdateBucketRequest = {
+  typeUrl: "/google.logging.v2.UpdateBucketRequest",
+
   encode(message: UpdateBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4548,6 +4564,8 @@ function createBaseGetBucketRequest(): GetBucketRequest {
 }
 
 export const GetBucketRequest = {
+  typeUrl: "/google.logging.v2.GetBucketRequest",
+
   encode(message: GetBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4629,6 +4647,8 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
 }
 
 export const DeleteBucketRequest = {
+  typeUrl: "/google.logging.v2.DeleteBucketRequest",
+
   encode(message: DeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4710,6 +4730,8 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
 }
 
 export const UndeleteBucketRequest = {
+  typeUrl: "/google.logging.v2.UndeleteBucketRequest",
+
   encode(message: UndeleteBucketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -4793,6 +4815,8 @@ function createBaseListViewsRequest(): ListViewsRequest {
 }
 
 export const ListViewsRequest = {
+  typeUrl: "/google.logging.v2.ListViewsRequest",
+
   encode(message: ListViewsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -4905,6 +4929,8 @@ function createBaseListViewsResponse(): ListViewsResponse {
 }
 
 export const ListViewsResponse = {
+  typeUrl: "/google.logging.v2.ListViewsResponse",
+
   encode(message: ListViewsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -5021,6 +5047,8 @@ function createBaseCreateViewRequest(): CreateViewRequest {
 }
 
 export const CreateViewRequest = {
+  typeUrl: "/google.logging.v2.CreateViewRequest",
+
   encode(message: CreateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -5134,6 +5162,8 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 }
 
 export const UpdateViewRequest = {
+  typeUrl: "/google.logging.v2.UpdateViewRequest",
+
   encode(message: UpdateViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5245,6 +5275,8 @@ function createBaseGetViewRequest(): GetViewRequest {
 }
 
 export const GetViewRequest = {
+  typeUrl: "/google.logging.v2.GetViewRequest",
+
   encode(message: GetViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5326,6 +5358,8 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
 }
 
 export const DeleteViewRequest = {
+  typeUrl: "/google.logging.v2.DeleteViewRequest",
+
   encode(message: DeleteViewRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -5409,6 +5443,8 @@ function createBaseListSinksRequest(): ListSinksRequest {
 }
 
 export const ListSinksRequest = {
+  typeUrl: "/google.logging.v2.ListSinksRequest",
+
   encode(message: ListSinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -5521,6 +5557,8 @@ function createBaseListSinksResponse(): ListSinksResponse {
 }
 
 export const ListSinksResponse = {
+  typeUrl: "/google.logging.v2.ListSinksResponse",
+
   encode(message: ListSinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -5635,6 +5673,8 @@ function createBaseGetSinkRequest(): GetSinkRequest {
 }
 
 export const GetSinkRequest = {
+  typeUrl: "/google.logging.v2.GetSinkRequest",
+
   encode(message: GetSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -5718,6 +5758,8 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
 }
 
 export const CreateSinkRequest = {
+  typeUrl: "/google.logging.v2.CreateSinkRequest",
+
   encode(message: CreateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -5832,6 +5874,8 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
 }
 
 export const UpdateSinkRequest = {
+  typeUrl: "/google.logging.v2.UpdateSinkRequest",
+
   encode(message: UpdateSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -5958,6 +6002,8 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
 }
 
 export const DeleteSinkRequest = {
+  typeUrl: "/google.logging.v2.DeleteSinkRequest",
+
   encode(message: DeleteSinkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sinkName !== "") {
       writer.uint32(10).string(message.sinkName);
@@ -6044,6 +6090,8 @@ function createBaseLogExclusion(): LogExclusion {
 }
 
 export const LogExclusion = {
+  typeUrl: "/google.logging.v2.LogExclusion",
+
   encode(message: LogExclusion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6202,6 +6250,8 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
 }
 
 export const ListExclusionsRequest = {
+  typeUrl: "/google.logging.v2.ListExclusionsRequest",
+
   encode(message: ListExclusionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -6314,6 +6364,8 @@ function createBaseListExclusionsResponse(): ListExclusionsResponse {
 }
 
 export const ListExclusionsResponse = {
+  typeUrl: "/google.logging.v2.ListExclusionsResponse",
+
   encode(message: ListExclusionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -6428,6 +6480,8 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
 }
 
 export const GetExclusionRequest = {
+  typeUrl: "/google.logging.v2.GetExclusionRequest",
+
   encode(message: GetExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6510,6 +6564,8 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
 }
 
 export const CreateExclusionRequest = {
+  typeUrl: "/google.logging.v2.CreateExclusionRequest",
+
   encode(message: CreateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -6608,6 +6664,8 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 }
 
 export const UpdateExclusionRequest = {
+  typeUrl: "/google.logging.v2.UpdateExclusionRequest",
+
   encode(message: UpdateExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6719,6 +6777,8 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
 }
 
 export const DeleteExclusionRequest = {
+  typeUrl: "/google.logging.v2.DeleteExclusionRequest",
+
   encode(message: DeleteExclusionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6800,6 +6860,8 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
 }
 
 export const GetCmekSettingsRequest = {
+  typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
+
   encode(message: GetCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6883,6 +6945,8 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 }
 
 export const UpdateCmekSettingsRequest = {
+  typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
+
   encode(message: UpdateCmekSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -6996,6 +7060,8 @@ function createBaseCmekSettings(): CmekSettings {
 }
 
 export const CmekSettings = {
+  typeUrl: "/google.logging.v2.CmekSettings",
+
   encode(message: CmekSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -7107,6 +7173,8 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
 }
 
 export const GetSettingsRequest = {
+  typeUrl: "/google.logging.v2.GetSettingsRequest",
+
   encode(message: GetSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -7190,6 +7258,8 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 }
 
 export const UpdateSettingsRequest = {
+  typeUrl: "/google.logging.v2.UpdateSettingsRequest",
+
   encode(message: UpdateSettingsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -7305,6 +7375,8 @@ function createBaseSettings(): Settings {
 }
 
 export const Settings = {
+  typeUrl: "/google.logging.v2.Settings",
+
   encode(message: Settings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -7448,6 +7520,8 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
 }
 
 export const CopyLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
+
   encode(message: CopyLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -7565,6 +7639,8 @@ function createBaseCopyLogEntriesMetadata(): CopyLogEntriesMetadata {
 }
 
 export const CopyLogEntriesMetadata = {
+  typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
+
   encode(message: CopyLogEntriesMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
@@ -7736,6 +7812,8 @@ function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
 }
 
 export const CopyLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
+
   encode(message: CopyLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.logEntriesCopiedCount.isZero()) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);

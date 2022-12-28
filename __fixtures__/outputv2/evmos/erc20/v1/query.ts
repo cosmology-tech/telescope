@@ -197,6 +197,8 @@ function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
 }
 
 export const QueryTokenPairsRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest",
+
   encode(message: QueryTokenPairsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -279,6 +281,8 @@ function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
 }
 
 export const QueryTokenPairsResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse",
+
   encode(message: QueryTokenPairsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.tokenPairs) {
       TokenPair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -393,6 +397,8 @@ function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
 }
 
 export const QueryTokenPairRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
+
   encode(message: QueryTokenPairRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== "") {
       writer.uint32(10).string(message.token);
@@ -474,6 +480,8 @@ function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
 }
 
 export const QueryTokenPairResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse",
+
   encode(message: QueryTokenPairResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenPair !== undefined) {
       TokenPair.encode(message.tokenPair, writer.uint32(10).fork()).ldelim();
@@ -553,6 +561,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.erc20.v1.QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -616,6 +626,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.erc20.v1.QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

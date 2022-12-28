@@ -132,6 +132,9 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
 }
 
 export const ArithmeticTwapRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
+  aminoType: "osmosis/twap/arithmetic-twap-request",
+
   encode(message: ArithmeticTwapRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -273,6 +276,9 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
 }
 
 export const ArithmeticTwapResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
+  aminoType: "osmosis/twap/arithmetic-twap-response",
+
   encode(message: ArithmeticTwapResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
       writer.uint32(10).string(message.arithmeticTwap);
@@ -357,6 +363,9 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
 }
 
 export const ArithmeticTwapToNowRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
+  aminoType: "osmosis/twap/arithmetic-twap-to-now-request",
+
   encode(message: ArithmeticTwapToNowRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -483,6 +492,9 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
 }
 
 export const ArithmeticTwapToNowResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
+  aminoType: "osmosis/twap/arithmetic-twap-to-now-response",
+
   encode(message: ArithmeticTwapToNowResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.arithmeticTwap !== "") {
       writer.uint32(10).string(message.arithmeticTwap);
@@ -562,6 +574,9 @@ function createBaseParamsRequest(): ParamsRequest {
 }
 
 export const ParamsRequest = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsRequest",
+  aminoType: "osmosis/twap/params-request",
+
   encode(_: ParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -625,6 +640,9 @@ function createBaseParamsResponse(): ParamsResponse {
 }
 
 export const ParamsResponse = {
+  typeUrl: "/osmosis.twap.v1beta1.ParamsResponse",
+  aminoType: "osmosis/twap/params-response",
+
   encode(message: ParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

@@ -199,6 +199,9 @@ function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalance
 }
 
 export const QueryModuleAccountBalanceRequest = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
+  aminoType: "osmosis/claim/query-module-account-balance-request",
+
   encode(_: QueryModuleAccountBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -262,6 +265,9 @@ function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanc
 }
 
 export const QueryModuleAccountBalanceResponse = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
+  aminoType: "osmosis/claim/query-module-account-balance-response",
+
   encode(message: QueryModuleAccountBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.moduleAccountBalance) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -359,6 +365,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/claim/query-params-request",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -422,6 +431,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/claim/query-params-response",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -503,6 +515,9 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
 }
 
 export const QueryClaimRecordRequest = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
+  aminoType: "osmosis/claim/query-claim-record-request",
+
   encode(message: QueryClaimRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -584,6 +599,9 @@ function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
 }
 
 export const QueryClaimRecordResponse = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
+  aminoType: "osmosis/claim/query-claim-record-response",
+
   encode(message: QueryClaimRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.claimRecord !== undefined) {
       ClaimRecord.encode(message.claimRecord, writer.uint32(10).fork()).ldelim();
@@ -666,6 +684,9 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
 }
 
 export const QueryClaimableForActionRequest = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
+  aminoType: "osmosis/claim/query-claimable-for-action-request",
+
   encode(message: QueryClaimableForActionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -762,6 +783,9 @@ function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionRes
 }
 
 export const QueryClaimableForActionResponse = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
+  aminoType: "osmosis/claim/query-claimable-for-action-response",
+
   encode(message: QueryClaimableForActionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -861,6 +885,9 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
 }
 
 export const QueryTotalClaimableRequest = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
+  aminoType: "osmosis/claim/query-total-claimable-request",
+
   encode(message: QueryTotalClaimableRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -942,6 +969,9 @@ function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
 }
 
 export const QueryTotalClaimableResponse = {
+  typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
+  aminoType: "osmosis/claim/query-total-claimable-response",
+
   encode(message: QueryTotalClaimableResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();

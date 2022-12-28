@@ -50,7 +50,7 @@ export interface LogMetric_LabelExtractorsEntry {
   value: string;
 }
 export interface LogMetric_LabelExtractorsEntryProtoType {
-  typeUrl: "/google.logging.v2.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface LogMetric_LabelExtractorsEntryAmino {
@@ -58,7 +58,7 @@ export interface LogMetric_LabelExtractorsEntryAmino {
   value: string;
 }
 export interface LogMetric_LabelExtractorsEntryAminoType {
-  type: "/google.logging.v2.undefined";
+  type: string;
   value: LogMetric_LabelExtractorsEntryAmino;
 }
 export interface LogMetric_LabelExtractorsEntrySDKType {
@@ -780,6 +780,8 @@ function createBaseLogMetric(): LogMetric {
 }
 
 export const LogMetric = {
+  typeUrl: "/google.logging.v2.LogMetric",
+
   encode(message: LogMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1065,6 +1067,8 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
 }
 
 export const ListLogMetricsRequest = {
+  typeUrl: "/google.logging.v2.ListLogMetricsRequest",
+
   encode(message: ListLogMetricsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1177,6 +1181,8 @@ function createBaseListLogMetricsResponse(): ListLogMetricsResponse {
 }
 
 export const ListLogMetricsResponse = {
+  typeUrl: "/google.logging.v2.ListLogMetricsResponse",
+
   encode(message: ListLogMetricsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1291,6 +1297,8 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
 }
 
 export const GetLogMetricRequest = {
+  typeUrl: "/google.logging.v2.GetLogMetricRequest",
+
   encode(message: GetLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -1373,6 +1381,8 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
 }
 
 export const CreateLogMetricRequest = {
+  typeUrl: "/google.logging.v2.CreateLogMetricRequest",
+
   encode(message: CreateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1470,6 +1480,8 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
 }
 
 export const UpdateLogMetricRequest = {
+  typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
+
   encode(message: UpdateLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -1566,6 +1578,8 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
 }
 
 export const DeleteLogMetricRequest = {
+  typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
+
   encode(message: DeleteLogMetricRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);

@@ -446,6 +446,9 @@ function createBaseAccessTypeParam(): AccessTypeParam {
 }
 
 export const AccessTypeParam = {
+  typeUrl: "/cosmwasm.wasm.v1.AccessTypeParam",
+  aminoType: "wasm/AccessTypeParam",
+
   encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
@@ -528,6 +531,9 @@ function createBaseAccessConfig(): AccessConfig {
 }
 
 export const AccessConfig = {
+  typeUrl: "/cosmwasm.wasm.v1.AccessConfig",
+  aminoType: "wasm/AccessConfig",
+
   encode(message: AccessConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.permission !== 0) {
       writer.uint32(8).int32(message.permission);
@@ -626,6 +632,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/cosmwasm.wasm.v1.Params",
+  aminoType: "wasm/Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeUploadAccess !== undefined) {
       AccessConfig.encode(message.codeUploadAccess, writer.uint32(10).fork()).ldelim();
@@ -739,6 +748,9 @@ function createBaseCodeInfo(): CodeInfo {
 }
 
 export const CodeInfo = {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfo",
+  aminoType: "wasm/CodeInfo",
+
   encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
@@ -856,6 +868,9 @@ function createBaseContractInfo(): ContractInfo {
 }
 
 export const ContractInfo = {
+  typeUrl: "/cosmwasm.wasm.v1.ContractInfo",
+  aminoType: "wasm/ContractInfo",
+
   encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
@@ -1030,6 +1045,9 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
 }
 
 export const ContractCodeHistoryEntry = {
+  typeUrl: "/cosmwasm.wasm.v1.ContractCodeHistoryEntry",
+  aminoType: "wasm/ContractCodeHistoryEntry",
+
   encode(message: ContractCodeHistoryEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operation !== 0) {
       writer.uint32(8).int32(message.operation);
@@ -1157,6 +1175,9 @@ function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
 }
 
 export const AbsoluteTxPosition = {
+  typeUrl: "/cosmwasm.wasm.v1.AbsoluteTxPosition",
+  aminoType: "wasm/AbsoluteTxPosition",
+
   encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).uint64(message.blockHeight);
@@ -1254,6 +1275,9 @@ function createBaseModel(): Model {
 }
 
 export const Model = {
+  typeUrl: "/cosmwasm.wasm.v1.Model",
+  aminoType: "wasm/Model",
+
   encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);

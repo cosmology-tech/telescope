@@ -205,6 +205,8 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
 }
 
 export const MsgCreateDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCreateDeployment",
+
   encode(message: MsgCreateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -362,6 +364,8 @@ function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
 }
 
 export const MsgCreateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse",
+
   encode(_: MsgCreateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -427,6 +431,8 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
 }
 
 export const MsgDepositDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.MsgDepositDeployment",
+
   encode(message: MsgDepositDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -536,6 +542,8 @@ function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse 
 }
 
 export const MsgDepositDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse",
+
   encode(_: MsgDepositDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -600,6 +608,8 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
 }
 
 export const MsgUpdateDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeployment",
+
   encode(message: MsgUpdateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -694,6 +704,8 @@ function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
 }
 
 export const MsgUpdateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse",
+
   encode(_: MsgUpdateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -757,6 +769,8 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
 }
 
 export const MsgCloseDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseDeployment",
+
   encode(message: MsgCloseDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -836,6 +850,8 @@ function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
 }
 
 export const MsgCloseDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse",
+
   encode(_: MsgCloseDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

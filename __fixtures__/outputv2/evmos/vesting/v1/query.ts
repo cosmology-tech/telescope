@@ -83,6 +83,8 @@ function createBaseQueryBalancesRequest(): QueryBalancesRequest {
 }
 
 export const QueryBalancesRequest = {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
+
   encode(message: QueryBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -166,6 +168,8 @@ function createBaseQueryBalancesResponse(): QueryBalancesResponse {
 }
 
 export const QueryBalancesResponse = {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesResponse",
+
   encode(message: QueryBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.locked) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();

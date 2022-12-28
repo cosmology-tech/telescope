@@ -60,6 +60,8 @@ function createBaseGenesisCertificate(): GenesisCertificate {
 }
 
 export const GenesisCertificate = {
+  typeUrl: "/akash.cert.v1beta2.GenesisCertificate",
+
   encode(message: GenesisCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -156,6 +158,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/akash.cert.v1beta2.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.certificates) {
       GenesisCertificate.encode(v!, writer.uint32(10).fork()).ldelim();

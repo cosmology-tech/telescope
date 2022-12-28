@@ -102,6 +102,9 @@ function createBaseEventSend(): EventSend {
 }
 
 export const EventSend = {
+  typeUrl: "/cosmos.nft.v1beta1.EventSend",
+  aminoType: "cosmos-sdk/EventSend",
+
   encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -230,6 +233,9 @@ function createBaseEventMint(): EventMint {
 }
 
 export const EventMint = {
+  typeUrl: "/cosmos.nft.v1beta1.EventMint",
+  aminoType: "cosmos-sdk/EventMint",
+
   encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -343,6 +349,9 @@ function createBaseEventBurn(): EventBurn {
 }
 
 export const EventBurn = {
+  typeUrl: "/cosmos.nft.v1beta1.EventBurn",
+  aminoType: "cosmos-sdk/EventBurn",
+
   encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);

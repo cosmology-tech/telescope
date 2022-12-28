@@ -50,6 +50,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/ibcratelimit/query-params-request",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -113,6 +116,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/ibcratelimit/query-params-response",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

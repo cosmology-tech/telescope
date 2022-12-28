@@ -109,6 +109,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.group.v1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupSeq.isZero()) {
       writer.uint32(8).uint64(message.groupSeq);

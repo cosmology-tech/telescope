@@ -363,6 +363,8 @@ function createBaseDistribution(): Distribution {
 }
 
 export const Distribution = {
+  typeUrl: "/google.api.servicecontrol.v1.Distribution",
+
   encode(message: Distribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.count.isZero()) {
       writer.uint32(8).int64(message.count);
@@ -630,6 +632,8 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
 }
 
 export const Distribution_LinearBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
+
   encode(message: Distribution_LinearBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -743,6 +747,8 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
 }
 
 export const Distribution_ExponentialBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
+
   encode(message: Distribution_ExponentialBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -854,6 +860,8 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
 }
 
 export const Distribution_ExplicitBuckets = {
+  typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
+
   encode(message: Distribution_ExplicitBuckets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 

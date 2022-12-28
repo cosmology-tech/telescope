@@ -179,7 +179,7 @@ export interface CheckedExpr_ReferenceMapEntry {
   value?: Reference;
 }
 export interface CheckedExpr_ReferenceMapEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckedExpr_ReferenceMapEntryAmino {
@@ -187,7 +187,7 @@ export interface CheckedExpr_ReferenceMapEntryAmino {
   value?: ReferenceAmino;
 }
 export interface CheckedExpr_ReferenceMapEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+  type: string;
   value: CheckedExpr_ReferenceMapEntryAmino;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
@@ -199,7 +199,7 @@ export interface CheckedExpr_TypeMapEntry {
   value?: Type;
 }
 export interface CheckedExpr_TypeMapEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntryAmino {
@@ -207,7 +207,7 @@ export interface CheckedExpr_TypeMapEntryAmino {
   value?: TypeAmino;
 }
 export interface CheckedExpr_TypeMapEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+  type: string;
   value: CheckedExpr_TypeMapEntryAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
@@ -1230,6 +1230,8 @@ function createBaseCheckedExpr(): CheckedExpr {
 }
 
 export const CheckedExpr = {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr",
+
   encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
@@ -1486,6 +1488,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  typeUrl: "/google.api.expr.v1alpha1.Type",
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
@@ -1747,6 +1751,8 @@ function createBaseType_ListType(): Type_ListType {
 }
 
 export const Type_ListType = {
+  typeUrl: "/google.api.expr.v1alpha1.ListType",
+
   encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
@@ -1829,6 +1835,8 @@ function createBaseType_MapType(): Type_MapType {
 }
 
 export const Type_MapType = {
+  typeUrl: "/google.api.expr.v1alpha1.MapType",
+
   encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
@@ -1926,6 +1934,8 @@ function createBaseType_FunctionType(): Type_FunctionType {
 }
 
 export const Type_FunctionType = {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType",
+
   encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
@@ -2041,6 +2051,8 @@ function createBaseType_AbstractType(): Type_AbstractType {
 }
 
 export const Type_AbstractType = {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType",
+
   encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2157,6 +2169,8 @@ function createBaseDecl(): Decl {
 }
 
 export const Decl = {
+  typeUrl: "/google.api.expr.v1alpha1.Decl",
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2270,6 +2284,8 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
 }
 
 export const Decl_IdentDecl = {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl",
+
   encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
@@ -2381,6 +2397,8 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
 }
 
 export const Decl_FunctionDecl = {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl",
+
   encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2485,6 +2503,8 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 }
 
 export const Decl_FunctionDecl_Overload = {
+  typeUrl: "/google.api.expr.v1alpha1.Overload",
+
   encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
@@ -2676,6 +2696,8 @@ function createBaseReference(): Reference {
 }
 
 export const Reference = {
+  typeUrl: "/google.api.expr.v1alpha1.Reference",
+
   encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

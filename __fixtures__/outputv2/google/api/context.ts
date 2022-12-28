@@ -235,6 +235,8 @@ function createBaseContext(): Context {
 }
 
 export const Context = {
+  typeUrl: "/google.api.Context",
+
   encode(message: Context, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       ContextRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -338,6 +340,8 @@ function createBaseContextRule(): ContextRule {
 }
 
 export const ContextRule = {
+  typeUrl: "/google.api.ContextRule",
+
   encode(message: ContextRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);

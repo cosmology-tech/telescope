@@ -115,6 +115,8 @@ function createBaseAttribute(): Attribute {
 }
 
 export const Attribute = {
+  typeUrl: "/akash.base.v1beta1.Attribute",
+
   encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -212,6 +214,8 @@ function createBaseSignedBy(): SignedBy {
 }
 
 export const SignedBy = {
+  typeUrl: "/akash.base.v1beta1.SignedBy",
+
   encode(message: SignedBy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allOf) {
       writer.uint32(10).string(v!);
@@ -342,6 +346,8 @@ function createBasePlacementRequirements(): PlacementRequirements {
 }
 
 export const PlacementRequirements = {
+  typeUrl: "/akash.base.v1beta1.PlacementRequirements",
+
   encode(message: PlacementRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedBy !== undefined) {
       SignedBy.encode(message.signedBy, writer.uint32(10).fork()).ldelim();

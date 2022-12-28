@@ -780,6 +780,9 @@ function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
 }
 
 export const QueryGroupInfoRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupInfoRequest",
+  aminoType: "cosmos-sdk/QueryGroupInfoRequest",
+
   encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -861,6 +864,9 @@ function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
 }
 
 export const QueryGroupInfoResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupInfoResponse",
+  aminoType: "cosmos-sdk/QueryGroupInfoResponse",
+
   encode(message: QueryGroupInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
@@ -942,6 +948,9 @@ function createBaseQueryGroupPolicyInfoRequest(): QueryGroupPolicyInfoRequest {
 }
 
 export const QueryGroupPolicyInfoRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoRequest",
+  aminoType: "cosmos-sdk/QueryGroupPolicyInfoRequest",
+
   encode(message: QueryGroupPolicyInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1023,6 +1032,9 @@ function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse 
 }
 
 export const QueryGroupPolicyInfoResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoResponse",
+  aminoType: "cosmos-sdk/QueryGroupPolicyInfoResponse",
+
   encode(message: QueryGroupPolicyInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupPolicyInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
@@ -1105,6 +1117,9 @@ function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
 }
 
 export const QueryGroupMembersRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupMembersRequest",
+  aminoType: "cosmos-sdk/QueryGroupMembersRequest",
+
   encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -1202,6 +1217,9 @@ function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
 }
 
 export const QueryGroupMembersResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupMembersResponse",
+  aminoType: "cosmos-sdk/QueryGroupMembersResponse",
+
   encode(message: QueryGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.members) {
       GroupMember.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1317,6 +1335,9 @@ function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
 }
 
 export const QueryGroupsByAdminRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupsByAdminRequest",
+  aminoType: "cosmos-sdk/QueryGroupsByAdminRequest",
+
   encode(message: QueryGroupsByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1414,6 +1435,9 @@ function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
 }
 
 export const QueryGroupsByAdminResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupsByAdminResponse",
+  aminoType: "cosmos-sdk/QueryGroupsByAdminResponse",
+
   encode(message: QueryGroupsByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1529,6 +1553,9 @@ function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroup
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupRequest",
+  aminoType: "cosmos-sdk/QueryGroupPoliciesByGroupRequest",
+
   encode(message: QueryGroupPoliciesByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -1626,6 +1653,9 @@ function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGrou
 }
 
 export const QueryGroupPoliciesByGroupResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupResponse",
+  aminoType: "cosmos-sdk/QueryGroupPoliciesByGroupResponse",
+
   encode(message: QueryGroupPoliciesByGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1741,6 +1771,9 @@ function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdmin
 }
 
 export const QueryGroupPoliciesByAdminRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminRequest",
+  aminoType: "cosmos-sdk/QueryGroupPoliciesByAdminRequest",
+
   encode(message: QueryGroupPoliciesByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1838,6 +1871,9 @@ function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdmi
 }
 
 export const QueryGroupPoliciesByAdminResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminResponse",
+  aminoType: "cosmos-sdk/QueryGroupPoliciesByAdminResponse",
+
   encode(message: QueryGroupPoliciesByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1952,6 +1988,9 @@ function createBaseQueryProposalRequest(): QueryProposalRequest {
 }
 
 export const QueryProposalRequest = {
+  typeUrl: "/cosmos.group.v1.QueryProposalRequest",
+  aminoType: "cosmos-sdk/QueryProposalRequest",
+
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -2033,6 +2072,9 @@ function createBaseQueryProposalResponse(): QueryProposalResponse {
 }
 
 export const QueryProposalResponse = {
+  typeUrl: "/cosmos.group.v1.QueryProposalResponse",
+  aminoType: "cosmos-sdk/QueryProposalResponse",
+
   encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -2115,6 +2157,9 @@ function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPo
 }
 
 export const QueryProposalsByGroupPolicyRequest = {
+  typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyRequest",
+  aminoType: "cosmos-sdk/QueryProposalsByGroupPolicyRequest",
+
   encode(message: QueryProposalsByGroupPolicyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -2212,6 +2257,9 @@ function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupP
 }
 
 export const QueryProposalsByGroupPolicyResponse = {
+  typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyResponse",
+  aminoType: "cosmos-sdk/QueryProposalsByGroupPolicyResponse",
+
   encode(message: QueryProposalsByGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2327,6 +2375,9 @@ function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRe
 }
 
 export const QueryVoteByProposalVoterRequest = {
+  typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterRequest",
+  aminoType: "cosmos-sdk/QueryVoteByProposalVoterRequest",
+
   encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -2423,6 +2474,9 @@ function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterR
 }
 
 export const QueryVoteByProposalVoterResponse = {
+  typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterResponse",
+  aminoType: "cosmos-sdk/QueryVoteByProposalVoterResponse",
+
   encode(message: QueryVoteByProposalVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -2505,6 +2559,9 @@ function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
 }
 
 export const QueryVotesByProposalRequest = {
+  typeUrl: "/cosmos.group.v1.QueryVotesByProposalRequest",
+  aminoType: "cosmos-sdk/QueryVotesByProposalRequest",
+
   encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -2602,6 +2659,9 @@ function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse 
 }
 
 export const QueryVotesByProposalResponse = {
+  typeUrl: "/cosmos.group.v1.QueryVotesByProposalResponse",
+  aminoType: "cosmos-sdk/QueryVotesByProposalResponse",
+
   encode(message: QueryVotesByProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2717,6 +2777,9 @@ function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
 }
 
 export const QueryVotesByVoterRequest = {
+  typeUrl: "/cosmos.group.v1.QueryVotesByVoterRequest",
+  aminoType: "cosmos-sdk/QueryVotesByVoterRequest",
+
   encode(message: QueryVotesByVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.voter !== "") {
       writer.uint32(10).string(message.voter);
@@ -2814,6 +2877,9 @@ function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
 }
 
 export const QueryVotesByVoterResponse = {
+  typeUrl: "/cosmos.group.v1.QueryVotesByVoterResponse",
+  aminoType: "cosmos-sdk/QueryVotesByVoterResponse",
+
   encode(message: QueryVotesByVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2929,6 +2995,9 @@ function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
 }
 
 export const QueryGroupsByMemberRequest = {
+  typeUrl: "/cosmos.group.v1.QueryGroupsByMemberRequest",
+  aminoType: "cosmos-sdk/QueryGroupsByMemberRequest",
+
   encode(message: QueryGroupsByMemberRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -3026,6 +3095,9 @@ function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
 }
 
 export const QueryGroupsByMemberResponse = {
+  typeUrl: "/cosmos.group.v1.QueryGroupsByMemberResponse",
+  aminoType: "cosmos-sdk/QueryGroupsByMemberResponse",
+
   encode(message: QueryGroupsByMemberResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3140,6 +3212,9 @@ function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
 }
 
 export const QueryTallyResultRequest = {
+  typeUrl: "/cosmos.group.v1.QueryTallyResultRequest",
+  aminoType: "cosmos-sdk/QueryTallyResultRequest",
+
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -3221,6 +3296,9 @@ function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
 }
 
 export const QueryTallyResultResponse = {
+  typeUrl: "/cosmos.group.v1.QueryTallyResultResponse",
+  aminoType: "cosmos-sdk/QueryTallyResultResponse",
+
   encode(message: QueryTallyResultResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tally !== undefined) {
       TallyResult.encode(message.tally, writer.uint32(10).fork()).ldelim();

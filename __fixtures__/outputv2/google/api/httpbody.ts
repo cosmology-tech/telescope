@@ -189,6 +189,8 @@ function createBaseHttpBody(): HttpBody {
 }
 
 export const HttpBody = {
+  typeUrl: "/google.api.HttpBody",
+
   encode(message: HttpBody, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contentType !== "") {
       writer.uint32(10).string(message.contentType);

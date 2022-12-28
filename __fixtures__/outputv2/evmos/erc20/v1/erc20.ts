@@ -269,6 +269,8 @@ function createBaseTokenPair(): TokenPair {
 }
 
 export const TokenPair = {
+  typeUrl: "/evmos.erc20.v1.TokenPair",
+
   encode(message: TokenPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.erc20Address !== "") {
       writer.uint32(10).string(message.erc20Address);
@@ -397,6 +399,8 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
 }
 
 export const RegisterCoinProposal = {
+  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
+
   encode(message: RegisterCoinProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -510,6 +514,8 @@ function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
 }
 
 export const RegisterERC20Proposal = {
+  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
+
   encode(message: RegisterERC20Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -623,6 +629,8 @@ function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposa
 }
 
 export const ToggleTokenConversionProposal = {
+  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
+
   encode(message: ToggleTokenConversionProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);

@@ -35,6 +35,8 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
+  typeUrl: "/google.api.SourceInfo",
+
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sourceFiles) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();

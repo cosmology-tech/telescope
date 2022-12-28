@@ -49,6 +49,9 @@ function createBaseMsgUnjail(): MsgUnjail {
 }
 
 export const MsgUnjail = {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
+  aminoType: "cosmos-sdk/MsgUnjail",
+
   encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -128,6 +131,9 @@ function createBaseMsgUnjailResponse(): MsgUnjailResponse {
 }
 
 export const MsgUnjailResponse = {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse",
+  aminoType: "cosmos-sdk/MsgUnjailResponse",
+
   encode(_: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

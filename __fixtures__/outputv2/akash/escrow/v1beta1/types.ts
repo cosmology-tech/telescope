@@ -260,6 +260,8 @@ function createBaseAccountID(): AccountID {
 }
 
 export const AccountID = {
+  typeUrl: "/akash.escrow.v1beta1.AccountID",
+
   encode(message: AccountID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -361,6 +363,8 @@ function createBaseAccount(): Account {
 }
 
 export const Account = {
+  typeUrl: "/akash.escrow.v1beta1.Account",
+
   encode(message: Account, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -523,6 +527,8 @@ function createBasePayment(): Payment {
 }
 
 export const Payment = {
+  typeUrl: "/akash.escrow.v1beta1.Payment",
+
   encode(message: Payment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();

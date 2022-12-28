@@ -75,6 +75,8 @@ function createBaseEpochInfo(): EpochInfo {
 }
 
 export const EpochInfo = {
+  typeUrl: "/evmos.epochs.v1.EpochInfo",
+
   encode(message: EpochInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
@@ -246,6 +248,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/evmos.epochs.v1.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();

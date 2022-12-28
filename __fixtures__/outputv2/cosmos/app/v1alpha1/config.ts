@@ -119,6 +119,9 @@ function createBaseConfig(): Config {
 }
 
 export const Config = {
+  typeUrl: "/cosmos.app.v1alpha1.Config",
+  aminoType: "cosmos-sdk/Config",
+
   encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -219,6 +222,9 @@ function createBaseModuleConfig(): ModuleConfig {
 }
 
 export const ModuleConfig = {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
+  aminoType: "cosmos-sdk/ModuleConfig",
+
   encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

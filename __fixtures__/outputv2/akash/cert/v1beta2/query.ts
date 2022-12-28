@@ -90,6 +90,8 @@ function createBaseCertificateResponse(): CertificateResponse {
 }
 
 export const CertificateResponse = {
+  typeUrl: "/akash.cert.v1beta2.CertificateResponse",
+
   encode(message: CertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
@@ -187,6 +189,8 @@ function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
 }
 
 export const QueryCertificatesRequest = {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest",
+
   encode(message: QueryCertificatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filter !== undefined) {
       CertificateFilter.encode(message.filter, writer.uint32(10).fork()).ldelim();
@@ -284,6 +288,8 @@ function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
 }
 
 export const QueryCertificatesResponse = {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse",
+
   encode(message: QueryCertificatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.certificates) {
       CertificateResponse.encode(v!, writer.uint32(10).fork()).ldelim();

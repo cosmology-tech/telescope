@@ -57,6 +57,9 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
 }
 
 export const MsgVerifyInvariant = {
+  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
+  aminoType: "cosmos-sdk/MsgVerifyInvariant",
+
   encode(message: MsgVerifyInvariant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -166,6 +169,9 @@ function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
 }
 
 export const MsgVerifyInvariantResponse = {
+  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
+  aminoType: "cosmos-sdk/MsgVerifyInvariantResponse",
+
   encode(_: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

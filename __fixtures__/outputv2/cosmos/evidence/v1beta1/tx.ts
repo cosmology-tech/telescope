@@ -71,6 +71,9 @@ function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
 }
 
 export const MsgSubmitEvidence = {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+  aminoType: "cosmos-sdk/MsgSubmitEvidence",
+
   encode(message: MsgSubmitEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.submitter !== "") {
       writer.uint32(10).string(message.submitter);
@@ -167,6 +170,9 @@ function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
 }
 
 export const MsgSubmitEvidenceResponse = {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse",
+  aminoType: "cosmos-sdk/MsgSubmitEvidenceResponse",
+
   encode(message: MsgSubmitEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(34).bytes(message.hash);

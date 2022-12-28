@@ -228,6 +228,8 @@ function createBaseProjectProperties(): ProjectProperties {
 }
 
 export const ProjectProperties = {
+  typeUrl: "/google.api.ProjectProperties",
+
   encode(message: ProjectProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.properties) {
       Property.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -329,6 +331,8 @@ function createBaseProperty(): Property {
 }
 
 export const Property = {
+  typeUrl: "/google.api.Property",
+
   encode(message: Property, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

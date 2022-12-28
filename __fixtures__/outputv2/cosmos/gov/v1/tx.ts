@@ -291,6 +291,9 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposal",
+  aminoType: "cosmos-sdk/v1/MsgSubmitProposal",
+
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       Any.encode((v! as Any), writer.uint32(10).fork()).ldelim();
@@ -450,6 +453,9 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
+  typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse",
+  aminoType: "cosmos-sdk/v1/MsgSubmitProposalResponse",
+
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -532,6 +538,9 @@ function createBaseMsgExecLegacyContent(): MsgExecLegacyContent {
 }
 
 export const MsgExecLegacyContent = {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent",
+  aminoType: "cosmos-sdk/v1/MsgExecLegacyContent",
+
   encode(message: MsgExecLegacyContent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode((message.content as Any), writer.uint32(10).fork()).ldelim();
@@ -626,6 +635,9 @@ function createBaseMsgExecLegacyContentResponse(): MsgExecLegacyContentResponse 
 }
 
 export const MsgExecLegacyContentResponse = {
+  typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse",
+  aminoType: "cosmos-sdk/v1/MsgExecLegacyContentResponse",
+
   encode(_: MsgExecLegacyContentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -692,6 +704,9 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  typeUrl: "/cosmos.gov.v1.MsgVote",
+  aminoType: "cosmos-sdk/v1/MsgVote",
+
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -816,6 +831,9 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
+  typeUrl: "/cosmos.gov.v1.MsgVoteResponse",
+  aminoType: "cosmos-sdk/v1/MsgVoteResponse",
+
   encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -882,6 +900,9 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
 }
 
 export const MsgVoteWeighted = {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeighted",
+  aminoType: "cosmos-sdk/v1/MsgVoteWeighted",
+
   encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1024,6 +1045,9 @@ function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
 }
 
 export const MsgVoteWeightedResponse = {
+  typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse",
+  aminoType: "cosmos-sdk/v1/MsgVoteWeightedResponse",
+
   encode(_: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1089,6 +1113,9 @@ function createBaseMsgDeposit(): MsgDeposit {
 }
 
 export const MsgDeposit = {
+  typeUrl: "/cosmos.gov.v1.MsgDeposit",
+  aminoType: "cosmos-sdk/v1/MsgDeposit",
+
   encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1216,6 +1243,9 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 }
 
 export const MsgDepositResponse = {
+  typeUrl: "/cosmos.gov.v1.MsgDepositResponse",
+  aminoType: "cosmos-sdk/v1/MsgDepositResponse",
+
   encode(_: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

@@ -231,6 +231,8 @@ function createBaseCertificateID(): CertificateID {
 }
 
 export const CertificateID = {
+  typeUrl: "/akash.cert.v1beta2.CertificateID",
+
   encode(message: CertificateID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -329,6 +331,8 @@ function createBaseCertificate(): Certificate {
 }
 
 export const Certificate = {
+  typeUrl: "/akash.cert.v1beta2.Certificate",
+
   encode(message: Certificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.state !== 0) {
       writer.uint32(16).int32(message.state);
@@ -442,6 +446,8 @@ function createBaseCertificateFilter(): CertificateFilter {
 }
 
 export const CertificateFilter = {
+  typeUrl: "/akash.cert.v1beta2.CertificateFilter",
+
   encode(message: CertificateFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -555,6 +561,8 @@ function createBaseMsgCreateCertificate(): MsgCreateCertificate {
 }
 
 export const MsgCreateCertificate = {
+  typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate",
+
   encode(message: MsgCreateCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -664,6 +672,8 @@ function createBaseMsgCreateCertificateResponse(): MsgCreateCertificateResponse 
 }
 
 export const MsgCreateCertificateResponse = {
+  typeUrl: "/akash.cert.v1beta2.MsgCreateCertificateResponse",
+
   encode(_: MsgCreateCertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -727,6 +737,8 @@ function createBaseMsgRevokeCertificate(): MsgRevokeCertificate {
 }
 
 export const MsgRevokeCertificate = {
+  typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
+
   encode(message: MsgRevokeCertificate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       CertificateID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -806,6 +818,8 @@ function createBaseMsgRevokeCertificateResponse(): MsgRevokeCertificateResponse 
 }
 
 export const MsgRevokeCertificateResponse = {
+  typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificateResponse",
+
   encode(_: MsgRevokeCertificateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

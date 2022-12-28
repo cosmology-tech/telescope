@@ -301,6 +301,9 @@ function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
 }
 
 export const SmoothWeightChangeParams = {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
+  aminoType: "osmosis/gamm/smooth-weight-change-params",
+
   encode(message: SmoothWeightChangeParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(10).fork()).ldelim();
@@ -462,6 +465,9 @@ function createBasePoolParams(): PoolParams {
 }
 
 export const PoolParams = {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
+  aminoType: "osmosis/gamm/pool-params",
+
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
       writer.uint32(10).string(message.swapFee);
@@ -574,6 +580,9 @@ function createBasePoolAsset(): PoolAsset {
 }
 
 export const PoolAsset = {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
+  aminoType: "osmosis/gamm/pool-asset",
+
   encode(message: PoolAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
@@ -676,6 +685,9 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool",
+  aminoType: "osmosis/gamm/pool",
+
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);

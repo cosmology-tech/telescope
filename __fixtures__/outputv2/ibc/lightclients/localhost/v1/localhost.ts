@@ -52,6 +52,9 @@ function createBaseClientState(): ClientState {
 }
 
 export const ClientState = {
+  typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
+  aminoType: "cosmos-sdk/ClientState",
+
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);

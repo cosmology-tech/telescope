@@ -161,6 +161,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -224,6 +227,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -303,6 +309,9 @@ function createBaseQueryInflationRequest(): QueryInflationRequest {
 }
 
 export const QueryInflationRequest = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest",
+  aminoType: "cosmos-sdk/QueryInflationRequest",
+
   encode(_: QueryInflationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -366,6 +375,9 @@ function createBaseQueryInflationResponse(): QueryInflationResponse {
 }
 
 export const QueryInflationResponse = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryInflationResponse",
+  aminoType: "cosmos-sdk/QueryInflationResponse",
+
   encode(message: QueryInflationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflation.length !== 0) {
       writer.uint32(10).bytes(message.inflation);
@@ -445,6 +457,9 @@ function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest 
 }
 
 export const QueryAnnualProvisionsRequest = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest",
+  aminoType: "cosmos-sdk/QueryAnnualProvisionsRequest",
+
   encode(_: QueryAnnualProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -508,6 +523,9 @@ function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsRespons
 }
 
 export const QueryAnnualProvisionsResponse = {
+  typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsResponse",
+  aminoType: "cosmos-sdk/QueryAnnualProvisionsResponse",
+
   encode(message: QueryAnnualProvisionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.annualProvisions.length !== 0) {
       writer.uint32(10).bytes(message.annualProvisions);

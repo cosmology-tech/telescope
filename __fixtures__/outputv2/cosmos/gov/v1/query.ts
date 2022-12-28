@@ -504,6 +504,9 @@ function createBaseQueryProposalRequest(): QueryProposalRequest {
 }
 
 export const QueryProposalRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryProposalRequest",
+  aminoType: "cosmos-sdk/v1/QueryProposalRequest",
+
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -585,6 +588,9 @@ function createBaseQueryProposalResponse(): QueryProposalResponse {
 }
 
 export const QueryProposalResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryProposalResponse",
+  aminoType: "cosmos-sdk/v1/QueryProposalResponse",
+
   encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -669,6 +675,9 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
 }
 
 export const QueryProposalsRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryProposalsRequest",
+  aminoType: "cosmos-sdk/v1/QueryProposalsRequest",
+
   encode(message: QueryProposalsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalStatus !== 0) {
       writer.uint32(8).int32(message.proposalStatus);
@@ -796,6 +805,9 @@ function createBaseQueryProposalsResponse(): QueryProposalsResponse {
 }
 
 export const QueryProposalsResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryProposalsResponse",
+  aminoType: "cosmos-sdk/v1/QueryProposalsResponse",
+
   encode(message: QueryProposalsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -911,6 +923,9 @@ function createBaseQueryVoteRequest(): QueryVoteRequest {
 }
 
 export const QueryVoteRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryVoteRequest",
+  aminoType: "cosmos-sdk/v1/QueryVoteRequest",
+
   encode(message: QueryVoteRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1007,6 +1022,9 @@ function createBaseQueryVoteResponse(): QueryVoteResponse {
 }
 
 export const QueryVoteResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryVoteResponse",
+  aminoType: "cosmos-sdk/v1/QueryVoteResponse",
+
   encode(message: QueryVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -1089,6 +1107,9 @@ function createBaseQueryVotesRequest(): QueryVotesRequest {
 }
 
 export const QueryVotesRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryVotesRequest",
+  aminoType: "cosmos-sdk/v1/QueryVotesRequest",
+
   encode(message: QueryVotesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1186,6 +1207,9 @@ function createBaseQueryVotesResponse(): QueryVotesResponse {
 }
 
 export const QueryVotesResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryVotesResponse",
+  aminoType: "cosmos-sdk/v1/QueryVotesResponse",
+
   encode(message: QueryVotesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1300,6 +1324,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/v1/QueryParamsRequest",
+
   encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.paramsType !== "") {
       writer.uint32(10).string(message.paramsType);
@@ -1383,6 +1410,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/v1/QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingParams !== undefined) {
       VotingParams.encode(message.votingParams, writer.uint32(10).fork()).ldelim();
@@ -1495,6 +1525,9 @@ function createBaseQueryDepositRequest(): QueryDepositRequest {
 }
 
 export const QueryDepositRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryDepositRequest",
+  aminoType: "cosmos-sdk/v1/QueryDepositRequest",
+
   encode(message: QueryDepositRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1591,6 +1624,9 @@ function createBaseQueryDepositResponse(): QueryDepositResponse {
 }
 
 export const QueryDepositResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryDepositResponse",
+  aminoType: "cosmos-sdk/v1/QueryDepositResponse",
+
   encode(message: QueryDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deposit !== undefined) {
       Deposit.encode(message.deposit, writer.uint32(10).fork()).ldelim();
@@ -1673,6 +1709,9 @@ function createBaseQueryDepositsRequest(): QueryDepositsRequest {
 }
 
 export const QueryDepositsRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryDepositsRequest",
+  aminoType: "cosmos-sdk/v1/QueryDepositsRequest",
+
   encode(message: QueryDepositsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1770,6 +1809,9 @@ function createBaseQueryDepositsResponse(): QueryDepositsResponse {
 }
 
 export const QueryDepositsResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryDepositsResponse",
+  aminoType: "cosmos-sdk/v1/QueryDepositsResponse",
+
   encode(message: QueryDepositsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deposits) {
       Deposit.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1884,6 +1926,9 @@ function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
 }
 
 export const QueryTallyResultRequest = {
+  typeUrl: "/cosmos.gov.v1.QueryTallyResultRequest",
+  aminoType: "cosmos-sdk/v1/QueryTallyResultRequest",
+
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1965,6 +2010,9 @@ function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
 }
 
 export const QueryTallyResultResponse = {
+  typeUrl: "/cosmos.gov.v1.QueryTallyResultResponse",
+  aminoType: "cosmos-sdk/v1/QueryTallyResultResponse",
+
   encode(message: QueryTallyResultResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tally !== undefined) {
       TallyResult.encode(message.tally, writer.uint32(10).fork()).ldelim();

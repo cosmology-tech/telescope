@@ -122,7 +122,7 @@ export interface WriteLogEntriesRequest_LabelsEntry {
   value: string;
 }
 export interface WriteLogEntriesRequest_LabelsEntryProtoType {
-  typeUrl: "/google.logging.v2.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface WriteLogEntriesRequest_LabelsEntryAmino {
@@ -130,7 +130,7 @@ export interface WriteLogEntriesRequest_LabelsEntryAmino {
   value: string;
 }
 export interface WriteLogEntriesRequest_LabelsEntryAminoType {
-  type: "/google.logging.v2.undefined";
+  type: string;
   value: WriteLogEntriesRequest_LabelsEntryAmino;
 }
 export interface WriteLogEntriesRequest_LabelsEntrySDKType {
@@ -359,7 +359,7 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   value?: Status;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoType {
-  typeUrl: "/google.logging.v2.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
@@ -367,7 +367,7 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
   value?: StatusAmino;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoType {
-  type: "/google.logging.v2.undefined";
+  type: string;
   value: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
@@ -1047,6 +1047,8 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
 }
 
 export const DeleteLogRequest = {
+  typeUrl: "/google.logging.v2.DeleteLogRequest",
+
   encode(message: DeleteLogRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -1230,6 +1232,8 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
 }
 
 export const WriteLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
+
   encode(message: WriteLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(10).string(message.logName);
@@ -1451,6 +1455,8 @@ function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
 }
 
 export const WriteLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
+
   encode(_: WriteLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1611,6 +1617,8 @@ function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors 
 }
 
 export const WriteLogEntriesPartialErrors = {
+  typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
+
   encode(message: WriteLogEntriesPartialErrors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
       WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
@@ -1747,6 +1755,8 @@ function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
 }
 
 export const ListLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.ListLogEntriesRequest",
+
   encode(message: ListLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
@@ -1907,6 +1917,8 @@ function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
 }
 
 export const ListLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.ListLogEntriesResponse",
+
   encode(message: ListLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2022,6 +2034,8 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
 }
 
 export const ListMonitoredResourceDescriptorsRequest = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
+
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pageSize !== 0) {
       writer.uint32(8).int32(message.pageSize);
@@ -2119,6 +2133,8 @@ function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredReso
 }
 
 export const ListMonitoredResourceDescriptorsResponse = {
+  typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
+
   encode(message: ListMonitoredResourceDescriptorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2236,6 +2252,8 @@ function createBaseListLogsRequest(): ListLogsRequest {
 }
 
 export const ListLogsRequest = {
+  typeUrl: "/google.logging.v2.ListLogsRequest",
+
   encode(message: ListLogsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -2381,6 +2399,8 @@ function createBaseListLogsResponse(): ListLogsResponse {
 }
 
 export const ListLogsResponse = {
+  typeUrl: "/google.logging.v2.ListLogsResponse",
+
   encode(message: ListLogsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
@@ -2497,6 +2517,8 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
 }
 
 export const TailLogEntriesRequest = {
+  typeUrl: "/google.logging.v2.TailLogEntriesRequest",
+
   encode(message: TailLogEntriesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -2627,6 +2649,8 @@ function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
 }
 
 export const TailLogEntriesResponse = {
+  typeUrl: "/google.logging.v2.TailLogEntriesResponse",
+
   encode(message: TailLogEntriesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2757,6 +2781,8 @@ function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesRespo
 }
 
 export const TailLogEntriesResponse_SuppressionInfo = {
+  typeUrl: "/google.logging.v2.SuppressionInfo",
+
   encode(message: TailLogEntriesResponse_SuppressionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);

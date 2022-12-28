@@ -89,6 +89,8 @@ function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
 }
 
 export const ClawbackVestingAccount = {
+  typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount",
+
   encode(message: ClawbackVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();

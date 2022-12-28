@@ -805,7 +805,7 @@ export interface SourceInfo_PositionsEntry {
   value: number;
 }
 export interface SourceInfo_PositionsEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntryAmino {
@@ -813,7 +813,7 @@ export interface SourceInfo_PositionsEntryAmino {
   value: number;
 }
 export interface SourceInfo_PositionsEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+  type: string;
   value: SourceInfo_PositionsEntryAmino;
 }
 export interface SourceInfo_PositionsEntrySDKType {
@@ -825,7 +825,7 @@ export interface SourceInfo_MacroCallsEntry {
   value?: Expr;
 }
 export interface SourceInfo_MacroCallsEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntryAmino {
@@ -833,7 +833,7 @@ export interface SourceInfo_MacroCallsEntryAmino {
   value?: ExprAmino;
 }
 export interface SourceInfo_MacroCallsEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+  type: string;
   value: SourceInfo_MacroCallsEntryAmino;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
@@ -1022,6 +1022,8 @@ function createBaseParsedExpr(): ParsedExpr {
 }
 
 export const ParsedExpr = {
+  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
+
   encode(message: ParsedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
@@ -1125,6 +1127,8 @@ function createBaseExpr(): Expr {
 }
 
 export const Expr = {
+  typeUrl: "/google.api.expr.v1alpha1.Expr",
+
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(16).int64(message.id);
@@ -1311,6 +1315,8 @@ function createBaseExpr_Ident(): Expr_Ident {
 }
 
 export const Expr_Ident = {
+  typeUrl: "/google.api.expr.v1alpha1.Ident",
+
   encode(message: Expr_Ident, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1394,6 +1400,8 @@ function createBaseExpr_Select(): Expr_Select {
 }
 
 export const Expr_Select = {
+  typeUrl: "/google.api.expr.v1alpha1.Select",
+
   encode(message: Expr_Select, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
@@ -1507,6 +1515,8 @@ function createBaseExpr_Call(): Expr_Call {
 }
 
 export const Expr_Call = {
+  typeUrl: "/google.api.expr.v1alpha1.Call",
+
   encode(message: Expr_Call, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
@@ -1636,6 +1646,8 @@ function createBaseExpr_CreateList(): Expr_CreateList {
 }
 
 export const Expr_CreateList = {
+  typeUrl: "/google.api.expr.v1alpha1.CreateList",
+
   encode(message: Expr_CreateList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1736,6 +1748,8 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 }
 
 export const Expr_CreateStruct = {
+  typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
+
   encode(message: Expr_CreateStruct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
@@ -1853,6 +1867,8 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 }
 
 export const Expr_CreateStruct_Entry = {
+  typeUrl: "/google.api.expr.v1alpha1.Entry",
+
   encode(message: Expr_CreateStruct_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
@@ -1985,6 +2001,8 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 
 export const Expr_Comprehension = {
+  typeUrl: "/google.api.expr.v1alpha1.Comprehension",
+
   encode(message: Expr_Comprehension, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.iterVar !== "") {
       writer.uint32(10).string(message.iterVar);
@@ -2164,6 +2182,8 @@ function createBaseConstant(): Constant {
 }
 
 export const Constant = {
+  typeUrl: "/google.api.expr.v1alpha1.Constant",
+
   encode(message: Constant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -2563,6 +2583,8 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
+  typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
+
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syntaxVersion !== "") {
       writer.uint32(10).string(message.syntaxVersion);
@@ -2839,6 +2861,8 @@ function createBaseSourcePosition(): SourcePosition {
 }
 
 export const SourcePosition = {
+  typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
+
   encode(message: SourcePosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);

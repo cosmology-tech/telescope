@@ -232,7 +232,7 @@ export interface ErrorInfo_MetadataEntry {
   value: string;
 }
 export interface ErrorInfo_MetadataEntryProtoType {
-  typeUrl: "/google.rpc.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryAmino {
@@ -240,7 +240,7 @@ export interface ErrorInfo_MetadataEntryAmino {
   value: string;
 }
 export interface ErrorInfo_MetadataEntryAminoType {
-  type: "/google.rpc.undefined";
+  type: string;
   value: ErrorInfo_MetadataEntryAmino;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
@@ -854,6 +854,8 @@ function createBaseRetryInfo(): RetryInfo {
 }
 
 export const RetryInfo = {
+  typeUrl: "/google.rpc.RetryInfo",
+
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
       Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
@@ -936,6 +938,8 @@ function createBaseDebugInfo(): DebugInfo {
 }
 
 export const DebugInfo = {
+  typeUrl: "/google.rpc.DebugInfo",
+
   encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
@@ -1050,6 +1054,8 @@ function createBaseQuotaFailure(): QuotaFailure {
 }
 
 export const QuotaFailure = {
+  typeUrl: "/google.rpc.QuotaFailure",
+
   encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1150,6 +1156,8 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 }
 
 export const QuotaFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
+
   encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
@@ -1345,6 +1353,8 @@ function createBaseErrorInfo(): ErrorInfo {
 }
 
 export const ErrorInfo = {
+  typeUrl: "/google.rpc.ErrorInfo",
+
   encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
@@ -1507,6 +1517,8 @@ function createBasePreconditionFailure(): PreconditionFailure {
 }
 
 export const PreconditionFailure = {
+  typeUrl: "/google.rpc.PreconditionFailure",
+
   encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1608,6 +1620,8 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 }
 
 export const PreconditionFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
+
   encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -1719,6 +1733,8 @@ function createBaseBadRequest(): BadRequest {
 }
 
 export const BadRequest = {
+  typeUrl: "/google.rpc.BadRequest",
+
   encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1819,6 +1835,8 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 }
 
 export const BadRequest_FieldViolation = {
+  typeUrl: "/google.rpc.FieldViolation",
+
   encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
@@ -1916,6 +1934,8 @@ function createBaseRequestInfo(): RequestInfo {
 }
 
 export const RequestInfo = {
+  typeUrl: "/google.rpc.RequestInfo",
+
   encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
@@ -2015,6 +2035,8 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
+  typeUrl: "/google.rpc.ResourceInfo",
+
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
@@ -2141,6 +2163,8 @@ function createBaseHelp(): Help {
 }
 
 export const Help = {
+  typeUrl: "/google.rpc.Help",
+
   encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2241,6 +2265,8 @@ function createBaseHelp_Link(): Help_Link {
 }
 
 export const Help_Link = {
+  typeUrl: "/google.rpc.Link",
+
   encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
@@ -2338,6 +2364,8 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 }
 
 export const LocalizedMessage = {
+  typeUrl: "/google.rpc.LocalizedMessage",
+
   encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);

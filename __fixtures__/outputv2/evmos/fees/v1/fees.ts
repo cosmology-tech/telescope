@@ -65,6 +65,8 @@ function createBaseDevFeeInfo(): DevFeeInfo {
 }
 
 export const DevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.DevFeeInfo",
+
   encode(message: DevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);

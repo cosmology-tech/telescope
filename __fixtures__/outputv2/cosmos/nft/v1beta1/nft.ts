@@ -136,6 +136,9 @@ function createBaseClass(): Class {
 }
 
 export const Class = {
+  typeUrl: "/cosmos.nft.v1beta1.Class",
+  aminoType: "cosmos-sdk/Class",
+
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -311,6 +314,9 @@ function createBaseNFT(): NFT {
 }
 
 export const NFT = {
+  typeUrl: "/cosmos.nft.v1beta1.NFT",
+  aminoType: "cosmos-sdk/NFT",
+
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);

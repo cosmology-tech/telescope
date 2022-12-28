@@ -117,6 +117,8 @@ function createBaseGroup(): Group {
 }
 
 export const Group = {
+  typeUrl: "/akash.deployment.v1beta2.Group",
+
   encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();

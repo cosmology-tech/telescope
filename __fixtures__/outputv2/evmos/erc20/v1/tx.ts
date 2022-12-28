@@ -146,6 +146,8 @@ function createBaseMsgConvertCoin(): MsgConvertCoin {
 }
 
 export const MsgConvertCoin = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
+
   encode(message: MsgConvertCoin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.coin !== undefined) {
       Coin.encode(message.coin, writer.uint32(10).fork()).ldelim();
@@ -255,6 +257,8 @@ function createBaseMsgConvertCoinResponse(): MsgConvertCoinResponse {
 }
 
 export const MsgConvertCoinResponse = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse",
+
   encode(_: MsgConvertCoinResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -321,6 +325,8 @@ function createBaseMsgConvertERC20(): MsgConvertERC20 {
 }
 
 export const MsgConvertERC20 = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
+
   encode(message: MsgConvertERC20, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -445,6 +451,8 @@ function createBaseMsgConvertERC20Response(): MsgConvertERC20Response {
 }
 
 export const MsgConvertERC20Response = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response",
+
   encode(_: MsgConvertERC20Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

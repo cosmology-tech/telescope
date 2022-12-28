@@ -127,6 +127,9 @@ function createBaseMsgGrantAllowance(): MsgGrantAllowance {
 }
 
 export const MsgGrantAllowance = {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
+  aminoType: "cosmos-sdk/MsgGrantAllowance",
+
   encode(message: MsgGrantAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -236,6 +239,9 @@ function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
 }
 
 export const MsgGrantAllowanceResponse = {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse",
+  aminoType: "cosmos-sdk/MsgGrantAllowanceResponse",
+
   encode(_: MsgGrantAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -300,6 +306,9 @@ function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
 }
 
 export const MsgRevokeAllowance = {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance",
+  aminoType: "cosmos-sdk/MsgRevokeAllowance",
+
   encode(message: MsgRevokeAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -394,6 +403,9 @@ function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
 }
 
 export const MsgRevokeAllowanceResponse = {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse",
+  aminoType: "cosmos-sdk/MsgRevokeAllowanceResponse",
+
   encode(_: MsgRevokeAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

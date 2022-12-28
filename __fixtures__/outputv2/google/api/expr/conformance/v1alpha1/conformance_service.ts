@@ -252,7 +252,7 @@ export interface EvalRequest_BindingsEntry {
   value?: ExprValue;
 }
 export interface EvalRequest_BindingsEntryProtoType {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryAmino {
@@ -260,7 +260,7 @@ export interface EvalRequest_BindingsEntryAmino {
   value?: ExprValueAmino;
 }
 export interface EvalRequest_BindingsEntryAminoType {
-  type: "/google.api.expr.conformance.v1alpha1.undefined";
+  type: string;
   value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
@@ -429,6 +429,8 @@ function createBaseParseRequest(): ParseRequest {
 }
 
 export const ParseRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
+
   encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
@@ -556,6 +558,8 @@ function createBaseParseResponse(): ParseResponse {
 }
 
 export const ParseResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse",
+
   encode(message: ParseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -673,6 +677,8 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest",
+
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -818,6 +824,8 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse",
+
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.checkedExpr !== undefined) {
       CheckedExpr.encode(message.checkedExpr, writer.uint32(10).fork()).ldelim();
@@ -1032,6 +1040,8 @@ function createBaseEvalRequest(): EvalRequest {
 }
 
 export const EvalRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest",
+
   encode(message: EvalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -1211,6 +1221,8 @@ function createBaseEvalResponse(): EvalResponse {
 }
 
 export const EvalResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse",
+
   encode(message: EvalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       ExprValue.encode(message.result, writer.uint32(10).fork()).ldelim();
@@ -1327,6 +1339,8 @@ function createBaseIssueDetails(): IssueDetails {
 }
 
 export const IssueDetails = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
+
   encode(message: IssueDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);

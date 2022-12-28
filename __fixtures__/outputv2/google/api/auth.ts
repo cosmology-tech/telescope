@@ -642,6 +642,8 @@ function createBaseAuthentication(): Authentication {
 }
 
 export const Authentication = {
+  typeUrl: "/google.api.Authentication",
+
   encode(message: Authentication, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -774,6 +776,8 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 }
 
 export const AuthenticationRule = {
+  typeUrl: "/google.api.AuthenticationRule",
+
   encode(message: AuthenticationRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -920,6 +924,8 @@ function createBaseJwtLocation(): JwtLocation {
 }
 
 export const JwtLocation = {
+  typeUrl: "/google.api.JwtLocation",
+
   encode(message: JwtLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
@@ -1036,6 +1042,8 @@ function createBaseAuthProvider(): AuthProvider {
 }
 
 export const AuthProvider = {
+  typeUrl: "/google.api.AuthProvider",
+
   encode(message: AuthProvider, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -1210,6 +1218,8 @@ function createBaseOAuthRequirements(): OAuthRequirements {
 }
 
 export const OAuthRequirements = {
+  typeUrl: "/google.api.OAuthRequirements",
+
   encode(message: OAuthRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.canonicalScopes !== "") {
       writer.uint32(10).string(message.canonicalScopes);
@@ -1292,6 +1302,8 @@ function createBaseAuthRequirement(): AuthRequirement {
 }
 
 export const AuthRequirement = {
+  typeUrl: "/google.api.AuthRequirement",
+
   encode(message: AuthRequirement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.providerId !== "") {
       writer.uint32(10).string(message.providerId);

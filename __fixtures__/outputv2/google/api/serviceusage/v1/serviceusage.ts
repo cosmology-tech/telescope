@@ -644,6 +644,8 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 }
 
 export const EnableServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
+
   encode(message: EnableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -725,6 +727,8 @@ function createBaseEnableServiceResponse(): EnableServiceResponse {
 }
 
 export const EnableServiceResponse = {
+  typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse",
+
   encode(message: EnableServiceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       Service.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -808,6 +812,8 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 }
 
 export const DisableServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
+
   encode(message: DisableServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -919,6 +925,8 @@ function createBaseDisableServiceResponse(): DisableServiceResponse {
 }
 
 export const DisableServiceResponse = {
+  typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse",
+
   encode(message: DisableServiceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       Service.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -1000,6 +1008,8 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 
 export const GetServiceRequest = {
+  typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
+
   encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1084,6 +1094,8 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 
 export const ListServicesRequest = {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
+
   encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1211,6 +1223,8 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 
 export const ListServicesResponse = {
+  typeUrl: "/google.api.serviceusage.v1.ListServicesResponse",
+
   encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1326,6 +1340,8 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 }
 
 export const BatchEnableServicesRequest = {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
+
   encode(message: BatchEnableServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1441,6 +1457,8 @@ function createBaseBatchEnableServicesResponse(): BatchEnableServicesResponse {
 }
 
 export const BatchEnableServicesResponse = {
+  typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse",
+
   encode(message: BatchEnableServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1571,6 +1589,8 @@ function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServi
 }
 
 export const BatchEnableServicesResponse_EnableFailure = {
+  typeUrl: "/google.api.serviceusage.v1.EnableFailure",
+
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceId !== "") {
       writer.uint32(10).string(message.serviceId);
@@ -1668,6 +1688,8 @@ function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
 }
 
 export const BatchGetServicesRequest = {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
+
   encode(message: BatchGetServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
@@ -1782,6 +1804,8 @@ function createBaseBatchGetServicesResponse(): BatchGetServicesResponse {
 }
 
 export const BatchGetServicesResponse = {
+  typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse",
+
   encode(message: BatchGetServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();

@@ -165,6 +165,8 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
 }
 
 export const QueryProvidersResponse = {
+  typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
+
   encode(message: QueryProvidersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -280,6 +282,8 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 }
 
 export const QueryProviderRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
+
   encode(message: QueryProviderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
@@ -376,6 +380,8 @@ function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttrib
 }
 
 export const QueryAllProvidersAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
+
   encode(message: QueryAllProvidersAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -458,6 +464,8 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
 }
 
 export const QueryProviderAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
+
   encode(message: QueryProviderAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -555,6 +563,8 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
 }
 
 export const QueryProviderAuditorRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
+
   encode(message: QueryProviderAuditorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);
@@ -652,6 +662,8 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
 }
 
 export const QueryAuditorAttributesRequest = {
+  typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
+
   encode(message: QueryAuditorAttributesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.auditor !== "") {
       writer.uint32(10).string(message.auditor);

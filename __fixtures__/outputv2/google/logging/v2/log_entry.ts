@@ -12,7 +12,7 @@ export interface LogEntry_LabelsEntry {
   value: string;
 }
 export interface LogEntry_LabelsEntryProtoType {
-  typeUrl: "/google.logging.v2.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
@@ -20,7 +20,7 @@ export interface LogEntry_LabelsEntryAmino {
   value: string;
 }
 export interface LogEntry_LabelsEntryAminoType {
-  type: "/google.logging.v2.undefined";
+  type: string;
   value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
@@ -719,6 +719,8 @@ function createBaseLogEntry(): LogEntry {
 }
 
 export const LogEntry = {
+  typeUrl: "/google.logging.v2.LogEntry",
+
   encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.logName !== "") {
       writer.uint32(98).string(message.logName);
@@ -1095,6 +1097,8 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 
 export const LogEntryOperation = {
+  typeUrl: "/google.logging.v2.LogEntryOperation",
+
   encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -1223,6 +1227,8 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 }
 
 export const LogEntrySourceLocation = {
+  typeUrl: "/google.logging.v2.LogEntrySourceLocation",
+
   encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
@@ -1336,6 +1342,8 @@ function createBaseLogSplit(): LogSplit {
 }
 
 export const LogSplit = {
+  typeUrl: "/google.logging.v2.LogSplit",
+
   encode(message: LogSplit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.uid !== "") {
       writer.uint32(10).string(message.uid);

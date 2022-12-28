@@ -58,7 +58,7 @@ export interface Operation_LabelsEntry {
   value: string;
 }
 export interface Operation_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Operation_LabelsEntryAmino {
@@ -66,7 +66,7 @@ export interface Operation_LabelsEntryAmino {
   value: string;
 }
 export interface Operation_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+  type: string;
   value: Operation_LabelsEntryAmino;
 }
 export interface Operation_LabelsEntrySDKType {
@@ -395,6 +395,8 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
+  typeUrl: "/google.api.servicecontrol.v1.Operation",
+
   encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);

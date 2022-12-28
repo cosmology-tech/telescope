@@ -1208,6 +1208,9 @@ function createBaseQueryChannelRequest(): QueryChannelRequest {
 }
 
 export const QueryChannelRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelRequest",
+  aminoType: "cosmos-sdk/QueryChannelRequest",
+
   encode(message: QueryChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1306,6 +1309,9 @@ function createBaseQueryChannelResponse(): QueryChannelResponse {
 }
 
 export const QueryChannelResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelResponse",
+  aminoType: "cosmos-sdk/QueryChannelResponse",
+
   encode(message: QueryChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(10).fork()).ldelim();
@@ -1417,6 +1423,9 @@ function createBaseQueryChannelsRequest(): QueryChannelsRequest {
 }
 
 export const QueryChannelsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest",
+  aminoType: "cosmos-sdk/QueryChannelsRequest",
+
   encode(message: QueryChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1500,6 +1509,9 @@ function createBaseQueryChannelsResponse(): QueryChannelsResponse {
 }
 
 export const QueryChannelsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse",
+  aminoType: "cosmos-sdk/QueryChannelsResponse",
+
   encode(message: QueryChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1630,6 +1642,9 @@ function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequ
 }
 
 export const QueryConnectionChannelsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsRequest",
+
   encode(message: QueryConnectionChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== "") {
       writer.uint32(10).string(message.connection);
@@ -1728,6 +1743,9 @@ function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsRes
 }
 
 export const QueryConnectionChannelsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsResponse",
+
   encode(message: QueryConnectionChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1858,6 +1876,9 @@ function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequ
 }
 
 export const QueryChannelClientStateRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelClientStateRequest",
+
   encode(message: QueryChannelClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1956,6 +1977,9 @@ function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateRes
 }
 
 export const QueryChannelClientStateResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelClientStateResponse",
+
   encode(message: QueryChannelClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
@@ -2070,6 +2094,9 @@ function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusSta
 }
 
 export const QueryChannelConsensusStateRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateRequest",
+
   encode(message: QueryChannelConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2199,6 +2226,9 @@ function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusSt
 }
 
 export const QueryChannelConsensusStateResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateResponse",
+
   encode(message: QueryChannelConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -2327,6 +2357,9 @@ function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest 
 }
 
 export const QueryPacketCommitmentRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentRequest",
+
   encode(message: QueryPacketCommitmentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2440,6 +2473,9 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
 }
 
 export const QueryPacketCommitmentResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentResponse",
+
   encode(message: QueryPacketCommitmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commitment.length !== 0) {
       writer.uint32(10).bytes(message.commitment);
@@ -2553,6 +2589,9 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
 }
 
 export const QueryPacketCommitmentsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsRequest",
+
   encode(message: QueryPacketCommitmentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2666,6 +2705,9 @@ function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsRespo
 }
 
 export const QueryPacketCommitmentsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsResponse",
+
   encode(message: QueryPacketCommitmentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commitments) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2797,6 +2839,9 @@ function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
 }
 
 export const QueryPacketReceiptRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest",
+  aminoType: "cosmos-sdk/QueryPacketReceiptRequest",
+
   encode(message: QueryPacketReceiptRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2910,6 +2955,9 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
 }
 
 export const QueryPacketReceiptResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse",
+  aminoType: "cosmos-sdk/QueryPacketReceiptResponse",
+
   encode(message: QueryPacketReceiptResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.received === true) {
       writer.uint32(16).bool(message.received);
@@ -3023,6 +3071,9 @@ function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgeme
 }
 
 export const QueryPacketAcknowledgementRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementRequest",
+
   encode(message: QueryPacketAcknowledgementRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3136,6 +3187,9 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementResponse",
+
   encode(message: QueryPacketAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.acknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.acknowledgement);
@@ -3250,6 +3304,9 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsRequest",
+
   encode(message: QueryPacketAcknowledgementsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3408,6 +3465,9 @@ function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledge
 }
 
 export const QueryPacketAcknowledgementsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsResponse",
+
   encode(message: QueryPacketAcknowledgementsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.acknowledgements) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3539,6 +3599,9 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
 }
 
 export const QueryUnreceivedPacketsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsRequest",
+
   encode(message: QueryUnreceivedPacketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3681,6 +3744,9 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 }
 
 export const QueryUnreceivedPacketsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsResponse",
+
   encode(message: QueryUnreceivedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 
@@ -3810,6 +3876,9 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
 }
 
 export const QueryUnreceivedAcksRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksRequest",
+
   encode(message: QueryUnreceivedAcksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3952,6 +4021,9 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 }
 
 export const QueryUnreceivedAcksResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksResponse",
+
   encode(message: QueryUnreceivedAcksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 
@@ -4080,6 +4152,9 @@ function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRe
 }
 
 export const QueryNextSequenceReceiveRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveRequest",
+
   encode(message: QueryNextSequenceReceiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -4178,6 +4253,9 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
 }
 
 export const QueryNextSequenceReceiveResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveResponse",
+
   encode(message: QueryNextSequenceReceiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.nextSequenceReceive.isZero()) {
       writer.uint32(8).uint64(message.nextSequenceReceive);

@@ -508,6 +508,8 @@ function createBaseApi(): Api {
 }
 
 export const Api = {
+  typeUrl: "/google.protobuf.Api",
+
   encode(message: Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -736,6 +738,8 @@ function createBaseMethod(): Method {
 }
 
 export const Method = {
+  typeUrl: "/google.protobuf.Method",
+
   encode(message: Method, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -926,6 +930,8 @@ function createBaseMixin(): Mixin {
 }
 
 export const Mixin = {
+  typeUrl: "/google.protobuf.Mixin",
+
   encode(message: Mixin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

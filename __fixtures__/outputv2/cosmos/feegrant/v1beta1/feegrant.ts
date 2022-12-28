@@ -216,6 +216,9 @@ function createBaseBasicAllowance(): BasicAllowance {
 }
 
 export const BasicAllowance = {
+  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
+  aminoType: "cosmos-sdk/BasicAllowance",
+
   encode(message: BasicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -334,6 +337,9 @@ function createBasePeriodicAllowance(): PeriodicAllowance {
 }
 
 export const PeriodicAllowance = {
+  typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance",
+  aminoType: "cosmos-sdk/PeriodicAllowance",
+
   encode(message: PeriodicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.basic !== undefined) {
       BasicAllowance.encode(message.basic, writer.uint32(10).fork()).ldelim();
@@ -509,6 +515,9 @@ function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
 }
 
 export const AllowedMsgAllowance = {
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
+  aminoType: "cosmos-sdk/AllowedMsgAllowance",
+
   encode(message: AllowedMsgAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Any.encode((message.allowance as Any), writer.uint32(10).fork()).ldelim();
@@ -625,6 +634,9 @@ function createBaseGrant(): Grant {
 }
 
 export const Grant = {
+  typeUrl: "/cosmos.feegrant.v1beta1.Grant",
+  aminoType: "cosmos-sdk/Grant",
+
   encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);

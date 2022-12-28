@@ -548,6 +548,8 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
+
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -663,6 +665,8 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
+
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -823,6 +827,8 @@ function createBaseCheckResponse_CheckInfo(): CheckResponse_CheckInfo {
 }
 
 export const CheckResponse_CheckInfo = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckInfo",
+
   encode(message: CheckResponse_CheckInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unusedArguments) {
       writer.uint32(10).string(v!);
@@ -939,6 +945,8 @@ function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
 }
 
 export const CheckResponse_ConsumerInfo = {
+  typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
+
   encode(message: CheckResponse_ConsumerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.projectNumber.isZero()) {
       writer.uint32(8).int64(message.projectNumber);
@@ -1052,6 +1060,8 @@ function createBaseReportRequest(): ReportRequest {
 }
 
 export const ReportRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
+
   encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1183,6 +1193,8 @@ function createBaseReportResponse(): ReportResponse {
 }
 
 export const ReportResponse = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportResponse",
+
   encode(message: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.reportErrors) {
       ReportResponse_ReportError.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1313,6 +1325,8 @@ function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
 }
 
 export const ReportResponse_ReportError = {
+  typeUrl: "/google.api.servicecontrol.v1.ReportError",
+
   encode(message: ReportResponse_ReportError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);

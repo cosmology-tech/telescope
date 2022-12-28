@@ -681,6 +681,9 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
 }
 
 export const QueryContractInfoRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest",
+  aminoType: "wasm/QueryContractInfoRequest",
+
   encode(message: QueryContractInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -763,6 +766,9 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
 }
 
 export const QueryContractInfoResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse",
+  aminoType: "wasm/QueryContractInfoResponse",
+
   encode(message: QueryContractInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -860,6 +866,9 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
 }
 
 export const QueryContractHistoryRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest",
+  aminoType: "wasm/QueryContractHistoryRequest",
+
   encode(message: QueryContractHistoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -957,6 +966,9 @@ function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse 
 }
 
 export const QueryContractHistoryResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse",
+  aminoType: "wasm/QueryContractHistoryResponse",
+
   encode(message: QueryContractHistoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       ContractCodeHistoryEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1072,6 +1084,9 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
 }
 
 export const QueryContractsByCodeRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest",
+  aminoType: "wasm/QueryContractsByCodeRequest",
+
   encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
@@ -1169,6 +1184,9 @@ function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse 
 }
 
 export const QueryContractsByCodeResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse",
+  aminoType: "wasm/QueryContractsByCodeResponse",
+
   encode(message: QueryContractsByCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contracts) {
       writer.uint32(10).string(v!);
@@ -1284,6 +1302,9 @@ function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest 
 }
 
 export const QueryAllContractStateRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest",
+  aminoType: "wasm/QueryAllContractStateRequest",
+
   encode(message: QueryAllContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1381,6 +1402,9 @@ function createBaseQueryAllContractStateResponse(): QueryAllContractStateRespons
 }
 
 export const QueryAllContractStateResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse",
+  aminoType: "wasm/QueryAllContractStateResponse",
+
   encode(message: QueryAllContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.models) {
       Model.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1496,6 +1520,9 @@ function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest 
 }
 
 export const QueryRawContractStateRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
+  aminoType: "wasm/QueryRawContractStateRequest",
+
   encode(message: QueryRawContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1592,6 +1619,9 @@ function createBaseQueryRawContractStateResponse(): QueryRawContractStateRespons
 }
 
 export const QueryRawContractStateResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse",
+  aminoType: "wasm/QueryRawContractStateResponse",
+
   encode(message: QueryRawContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1674,6 +1704,9 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
 }
 
 export const QuerySmartContractStateRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest",
+  aminoType: "wasm/QuerySmartContractStateRequest",
+
   encode(message: QuerySmartContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1770,6 +1803,9 @@ function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateRes
 }
 
 export const QuerySmartContractStateResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse",
+  aminoType: "wasm/QuerySmartContractStateResponse",
+
   encode(message: QuerySmartContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1851,6 +1887,9 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
 }
 
 export const QueryCodeRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest",
+  aminoType: "wasm/QueryCodeRequest",
+
   encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
@@ -1934,6 +1973,9 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 }
 
 export const CodeInfoResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse",
+  aminoType: "wasm/CodeInfoResponse",
+
   encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
@@ -2046,6 +2088,9 @@ function createBaseQueryCodeResponse(): QueryCodeResponse {
 }
 
 export const QueryCodeResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse",
+  aminoType: "wasm/QueryCodeResponse",
+
   encode(message: QueryCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeInfo !== undefined) {
       CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
@@ -2142,6 +2187,9 @@ function createBaseQueryCodesRequest(): QueryCodesRequest {
 }
 
 export const QueryCodesRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest",
+  aminoType: "wasm/QueryCodesRequest",
+
   encode(message: QueryCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -2224,6 +2272,9 @@ function createBaseQueryCodesResponse(): QueryCodesResponse {
 }
 
 export const QueryCodesResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse",
+  aminoType: "wasm/QueryCodesResponse",
+
   encode(message: QueryCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.codeInfos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2338,6 +2389,9 @@ function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
 }
 
 export const QueryPinnedCodesRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest",
+  aminoType: "wasm/QueryPinnedCodesRequest",
+
   encode(message: QueryPinnedCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -2420,6 +2474,9 @@ function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
 }
 
 export const QueryPinnedCodesResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse",
+  aminoType: "wasm/QueryPinnedCodesResponse",
+
   encode(message: QueryPinnedCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 

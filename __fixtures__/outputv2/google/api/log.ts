@@ -116,6 +116,8 @@ function createBaseLogDescriptor(): LogDescriptor {
 }
 
 export const LogDescriptor = {
+  typeUrl: "/google.api.LogDescriptor",
+
   encode(message: LogDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

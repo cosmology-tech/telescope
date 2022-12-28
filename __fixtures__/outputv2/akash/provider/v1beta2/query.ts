@@ -106,6 +106,8 @@ function createBaseQueryProvidersRequest(): QueryProvidersRequest {
 }
 
 export const QueryProvidersRequest = {
+  typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest",
+
   encode(message: QueryProvidersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -188,6 +190,8 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
 }
 
 export const QueryProvidersResponse = {
+  typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse",
+
   encode(message: QueryProvidersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -302,6 +306,8 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 }
 
 export const QueryProviderRequest = {
+  typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
+
   encode(message: QueryProviderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -383,6 +389,8 @@ function createBaseQueryProviderResponse(): QueryProviderResponse {
 }
 
 export const QueryProviderResponse = {
+  typeUrl: "/akash.provider.v1beta2.QueryProviderResponse",
+
   encode(message: QueryProviderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.provider !== undefined) {
       Provider.encode(message.provider, writer.uint32(10).fork()).ldelim();

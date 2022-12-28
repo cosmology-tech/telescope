@@ -295,6 +295,8 @@ function createBaseEvalState(): EvalState {
 }
 
 export const EvalState = {
+  typeUrl: "/google.api.expr.v1alpha1.EvalState",
+
   encode(message: EvalState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       ExprValue.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -425,6 +427,8 @@ function createBaseEvalState_Result(): EvalState_Result {
 }
 
 export const EvalState_Result = {
+  typeUrl: "/google.api.expr.v1alpha1.Result",
+
   encode(message: EvalState_Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.expr.isZero()) {
       writer.uint32(8).int64(message.expr);
@@ -523,6 +527,8 @@ function createBaseExprValue(): ExprValue {
 }
 
 export const ExprValue = {
+  typeUrl: "/google.api.expr.v1alpha1.ExprValue",
+
   encode(message: ExprValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -634,6 +640,8 @@ function createBaseErrorSet(): ErrorSet {
 }
 
 export const ErrorSet = {
+  typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
+
   encode(message: ErrorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.errors) {
       Status.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -733,6 +741,8 @@ function createBaseUnknownSet(): UnknownSet {
 }
 
 export const UnknownSet = {
+  typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
+
   encode(message: UnknownSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 

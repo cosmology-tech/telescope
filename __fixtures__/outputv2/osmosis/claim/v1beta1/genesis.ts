@@ -53,6 +53,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/osmosis.claim.v1beta1.GenesisState",
+  aminoType: "osmosis/claim/genesis-state",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moduleAccountBalance !== undefined) {
       Coin.encode(message.moduleAccountBalance, writer.uint32(10).fork()).ldelim();

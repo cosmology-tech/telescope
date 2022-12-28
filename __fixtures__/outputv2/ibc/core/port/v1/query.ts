@@ -99,6 +99,9 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
 }
 
 export const QueryAppVersionRequest = {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
+  aminoType: "cosmos-sdk/QueryAppVersionRequest",
+
   encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -241,6 +244,9 @@ function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
 }
 
 export const QueryAppVersionResponse = {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse",
+  aminoType: "cosmos-sdk/QueryAppVersionResponse",
+
   encode(message: QueryAppVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);

@@ -342,6 +342,8 @@ function createBaseCheckError(): CheckError {
 }
 
 export const CheckError = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckError",
+
   encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);

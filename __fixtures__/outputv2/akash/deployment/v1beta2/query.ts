@@ -165,6 +165,8 @@ function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
 }
 
 export const QueryDeploymentsRequest = {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest",
+
   encode(message: QueryDeploymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filters !== undefined) {
       DeploymentFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -262,6 +264,8 @@ function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
 }
 
 export const QueryDeploymentsResponse = {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse",
+
   encode(message: QueryDeploymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deployments) {
       QueryDeploymentResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -376,6 +380,8 @@ function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
 }
 
 export const QueryDeploymentRequest = {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest",
+
   encode(message: QueryDeploymentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -459,6 +465,8 @@ function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
 }
 
 export const QueryDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse",
+
   encode(message: QueryDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -588,6 +596,8 @@ function createBaseQueryGroupRequest(): QueryGroupRequest {
 }
 
 export const QueryGroupRequest = {
+  typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest",
+
   encode(message: QueryGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -669,6 +679,8 @@ function createBaseQueryGroupResponse(): QueryGroupResponse {
 }
 
 export const QueryGroupResponse = {
+  typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse",
+
   encode(message: QueryGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();

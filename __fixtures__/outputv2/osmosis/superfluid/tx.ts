@@ -236,6 +236,9 @@ function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
 }
 
 export const MsgSuperfluidDelegate = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate",
+  aminoType: "osmosis/superfluid-delegate",
+
   encode(message: MsgSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -345,6 +348,9 @@ function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateRespons
 }
 
 export const MsgSuperfluidDelegateResponse = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse",
+  aminoType: "osmosis/superfluid-delegate-response",
+
   encode(_: MsgSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -409,6 +415,9 @@ function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
 }
 
 export const MsgSuperfluidUndelegate = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate",
+  aminoType: "osmosis/superfluid-undelegate",
+
   encode(message: MsgSuperfluidUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -503,6 +512,9 @@ function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateRes
 }
 
 export const MsgSuperfluidUndelegateResponse = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse",
+  aminoType: "osmosis/superfluid-undelegate-response",
+
   encode(_: MsgSuperfluidUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -567,6 +579,9 @@ function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
 }
 
 export const MsgSuperfluidUnbondLock = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock",
+  aminoType: "osmosis/superfluid-unbond-lock",
+
   encode(message: MsgSuperfluidUnbondLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -661,6 +676,9 @@ function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockRes
 }
 
 export const MsgSuperfluidUnbondLockResponse = {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse",
+  aminoType: "osmosis/superfluid-unbond-lock-response",
+
   encode(_: MsgSuperfluidUnbondLockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -726,6 +744,9 @@ function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate 
 }
 
 export const MsgLockAndSuperfluidDelegate = {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+  aminoType: "osmosis/lock-and-superfluid-delegate",
+
   encode(message: MsgLockAndSuperfluidDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -855,6 +876,9 @@ function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidD
 }
 
 export const MsgLockAndSuperfluidDelegateResponse = {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse",
+  aminoType: "osmosis/lock-and-superfluid-delegate-response",
+
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
@@ -937,6 +961,9 @@ function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
 }
 
 export const MsgUnPoolWhitelistedPool = {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+  aminoType: "osmosis/unpool-whitelisted-pool",
+
   encode(message: MsgUnPoolWhitelistedPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1033,6 +1060,9 @@ function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolR
 }
 
 export const MsgUnPoolWhitelistedPoolResponse = {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse",
+  aminoType: "osmosis/un-pool-whitelisted-pool-response",
+
   encode(message: MsgUnPoolWhitelistedPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 

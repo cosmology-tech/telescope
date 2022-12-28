@@ -256,6 +256,9 @@ function createBaseMsgLockTokens(): MsgLockTokens {
 }
 
 export const MsgLockTokens = {
+  typeUrl: "/osmosis.lockup.MsgLockTokens",
+  aminoType: "osmosis/lockup/lock-tokens",
+
   encode(message: MsgLockTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -385,6 +388,9 @@ function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
 }
 
 export const MsgLockTokensResponse = {
+  typeUrl: "/osmosis.lockup.MsgLockTokensResponse",
+  aminoType: "osmosis/lockup/lock-tokens-response",
+
   encode(message: MsgLockTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
@@ -466,6 +472,9 @@ function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
 }
 
 export const MsgBeginUnlockingAll = {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+  aminoType: "osmosis/lockup/begin-unlock-tokens",
+
   encode(message: MsgBeginUnlockingAll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -547,6 +556,9 @@ function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse 
 }
 
 export const MsgBeginUnlockingAllResponse = {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse",
+  aminoType: "osmosis/lockup/begin-unlocking-all-response",
+
   encode(message: MsgBeginUnlockingAllResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unlocks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -648,6 +660,9 @@ function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
 }
 
 export const MsgBeginUnlocking = {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+  aminoType: "osmosis/lockup/begin-unlock-period-lock",
+
   encode(message: MsgBeginUnlocking, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -777,6 +792,9 @@ function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
 }
 
 export const MsgBeginUnlockingResponse = {
+  typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse",
+  aminoType: "osmosis/lockup/begin-unlocking-response",
+
   encode(message: MsgBeginUnlockingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
@@ -860,6 +878,9 @@ function createBaseMsgExtendLockup(): MsgExtendLockup {
 }
 
 export const MsgExtendLockup = {
+  typeUrl: "/osmosis.lockup.MsgExtendLockup",
+  aminoType: "osmosis/lockup/extend-lockup",
+
   encode(message: MsgExtendLockup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -971,6 +992,9 @@ function createBaseMsgExtendLockupResponse(): MsgExtendLockupResponse {
 }
 
 export const MsgExtendLockupResponse = {
+  typeUrl: "/osmosis.lockup.MsgExtendLockupResponse",
+  aminoType: "osmosis/lockup/extend-lockup-response",
+
   encode(message: MsgExtendLockupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);
@@ -1054,6 +1078,9 @@ function createBaseMsgForceUnlock(): MsgForceUnlock {
 }
 
 export const MsgForceUnlock = {
+  typeUrl: "/osmosis.lockup.MsgForceUnlock",
+  aminoType: "osmosis/lockup/force-unlock",
+
   encode(message: MsgForceUnlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -1183,6 +1210,9 @@ function createBaseMsgForceUnlockResponse(): MsgForceUnlockResponse {
 }
 
 export const MsgForceUnlockResponse = {
+  typeUrl: "/osmosis.lockup.MsgForceUnlockResponse",
+  aminoType: "osmosis/lockup/force-unlock-response",
+
   encode(message: MsgForceUnlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.success === true) {
       writer.uint32(8).bool(message.success);

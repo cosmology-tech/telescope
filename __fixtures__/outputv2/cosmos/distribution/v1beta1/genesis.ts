@@ -382,6 +382,9 @@ function createBaseDelegatorWithdrawInfo(): DelegatorWithdrawInfo {
 }
 
 export const DelegatorWithdrawInfo = {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorWithdrawInfo",
+  aminoType: "cosmos-sdk/DelegatorWithdrawInfo",
+
   encode(message: DelegatorWithdrawInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -479,6 +482,9 @@ function createBaseValidatorOutstandingRewardsRecord(): ValidatorOutstandingRewa
 }
 
 export const ValidatorOutstandingRewardsRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord",
+  aminoType: "cosmos-sdk/ValidatorOutstandingRewardsRecord",
+
   encode(message: ValidatorOutstandingRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -594,6 +600,9 @@ function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedC
 }
 
 export const ValidatorAccumulatedCommissionRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord",
+  aminoType: "cosmos-sdk/ValidatorAccumulatedCommissionRecord",
+
   encode(message: ValidatorAccumulatedCommissionRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -692,6 +701,9 @@ function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalReward
 }
 
 export const ValidatorHistoricalRewardsRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord",
+  aminoType: "cosmos-sdk/ValidatorHistoricalRewardsRecord",
+
   encode(message: ValidatorHistoricalRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -804,6 +816,9 @@ function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecor
 }
 
 export const ValidatorCurrentRewardsRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord",
+  aminoType: "cosmos-sdk/ValidatorCurrentRewardsRecord",
+
   encode(message: ValidatorCurrentRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -902,6 +917,9 @@ function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
 }
 
 export const DelegatorStartingInfoRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfoRecord",
+  aminoType: "cosmos-sdk/DelegatorStartingInfoRecord",
+
   encode(message: DelegatorStartingInfoRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1016,6 +1034,9 @@ function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
 }
 
 export const ValidatorSlashEventRecord = {
+  typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEventRecord",
+  aminoType: "cosmos-sdk/ValidatorSlashEventRecord",
+
   encode(message: ValidatorSlashEventRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -1151,6 +1172,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.distribution.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

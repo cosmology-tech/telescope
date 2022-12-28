@@ -870,6 +870,8 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 
 export const ListServicesRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
+
   encode(message: ListServicesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.producerProjectId !== "") {
       writer.uint32(10).string(message.producerProjectId);
@@ -997,6 +999,8 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 
 export const ListServicesResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse",
+
   encode(message: ListServicesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1111,6 +1115,8 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 
 export const GetServiceRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
+
   encode(message: GetServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1192,6 +1198,8 @@ function createBaseCreateServiceRequest(): CreateServiceRequest {
 }
 
 export const CreateServiceRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest",
+
   encode(message: CreateServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -1273,6 +1281,8 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
 }
 
 export const DeleteServiceRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
+
   encode(message: DeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1354,6 +1364,8 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
 }
 
 export const UndeleteServiceRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
+
   encode(message: UndeleteServiceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1435,6 +1447,8 @@ function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
 }
 
 export const UndeleteServiceResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse",
+
   encode(message: UndeleteServiceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -1518,6 +1532,8 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
 }
 
 export const GetServiceConfigRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
+
   encode(message: GetServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1631,6 +1647,8 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
 }
 
 export const ListServiceConfigsRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
+
   encode(message: ListServiceConfigsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1743,6 +1761,8 @@ function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
 }
 
 export const ListServiceConfigsResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse",
+
   encode(message: ListServiceConfigsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1858,6 +1878,8 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
 }
 
 export const CreateServiceConfigRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
+
   encode(message: CreateServiceConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1956,6 +1978,8 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
 }
 
 export const SubmitConfigSourceRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
+
   encode(message: SubmitConfigSourceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -2067,6 +2091,8 @@ function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
 }
 
 export const SubmitConfigSourceResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse",
+
   encode(message: SubmitConfigSourceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceConfig !== undefined) {
       Service.encode(message.serviceConfig, writer.uint32(10).fork()).ldelim();
@@ -2149,6 +2175,8 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
 }
 
 export const CreateServiceRolloutRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
+
   encode(message: CreateServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -2248,6 +2276,8 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
 }
 
 export const ListServiceRolloutsRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
+
   encode(message: ListServiceRolloutsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -2375,6 +2405,8 @@ function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
 }
 
 export const ListServiceRolloutsResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse",
+
   encode(message: ListServiceRolloutsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2490,6 +2522,8 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
 }
 
 export const GetServiceRolloutRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
+
   encode(message: GetServiceRolloutRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -2587,6 +2621,8 @@ function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
 }
 
 export const GenerateConfigReportRequest = {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest",
+
   encode(message: GenerateConfigReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.newConfig !== undefined) {
       Any.encode(message.newConfig, writer.uint32(10).fork()).ldelim();
@@ -2686,6 +2722,8 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
 }
 
 export const GenerateConfigReportResponse = {
+  typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
+
   encode(message: GenerateConfigReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);

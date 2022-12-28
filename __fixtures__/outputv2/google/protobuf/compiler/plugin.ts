@@ -324,6 +324,8 @@ function createBaseVersion(): Version {
 }
 
 export const Version = {
+  typeUrl: "/google.protobuf.compiler.Version",
+
   encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.major !== 0) {
       writer.uint32(8).int32(message.major);
@@ -453,6 +455,8 @@ function createBaseCodeGeneratorRequest(): CodeGeneratorRequest {
 }
 
 export const CodeGeneratorRequest = {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest",
+
   encode(message: CodeGeneratorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fileToGenerate) {
       writer.uint32(10).string(v!);
@@ -616,6 +620,8 @@ function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
 }
 
 export const CodeGeneratorResponse = {
+  typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
+
   encode(message: CodeGeneratorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
@@ -732,6 +738,8 @@ function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
 }
 
 export const CodeGeneratorResponse_File = {
+  typeUrl: "/google.protobuf.compiler.File",
+
   encode(message: CodeGeneratorResponse_File, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

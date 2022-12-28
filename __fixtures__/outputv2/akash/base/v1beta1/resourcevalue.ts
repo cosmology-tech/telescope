@@ -32,6 +32,8 @@ function createBaseResourceValue(): ResourceValue {
 }
 
 export const ResourceValue = {
+  typeUrl: "/akash.base.v1beta1.ResourceValue",
+
   encode(message: ResourceValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.val.length !== 0) {
       writer.uint32(10).bytes(message.val);

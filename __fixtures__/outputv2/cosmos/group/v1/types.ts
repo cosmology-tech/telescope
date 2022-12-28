@@ -926,6 +926,9 @@ function createBaseMember(): Member {
 }
 
 export const Member = {
+  typeUrl: "/cosmos.group.v1.Member",
+  aminoType: "cosmos-sdk/Member",
+
   encode(message: Member, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1052,6 +1055,9 @@ function createBaseMembers(): Members {
 }
 
 export const Members = {
+  typeUrl: "/cosmos.group.v1.Members",
+  aminoType: "cosmos-sdk/Members",
+
   encode(message: Members, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.members) {
       Member.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1152,6 +1158,9 @@ function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
 }
 
 export const ThresholdDecisionPolicy = {
+  typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy",
+  aminoType: "cosmos-sdk/ThresholdDecisionPolicy",
+
   encode(message: ThresholdDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.threshold !== "") {
       writer.uint32(10).string(message.threshold);
@@ -1249,6 +1258,9 @@ function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
 }
 
 export const PercentageDecisionPolicy = {
+  typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy",
+  aminoType: "cosmos-sdk/PercentageDecisionPolicy",
+
   encode(message: PercentageDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.percentage !== "") {
       writer.uint32(10).string(message.percentage);
@@ -1346,6 +1358,9 @@ function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
 }
 
 export const DecisionPolicyWindows = {
+  typeUrl: "/cosmos.group.v1.DecisionPolicyWindows",
+  aminoType: "cosmos-sdk/DecisionPolicyWindows",
+
   encode(message: DecisionPolicyWindows, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -1447,6 +1462,9 @@ function createBaseGroupInfo(): GroupInfo {
 }
 
 export const GroupInfo = {
+  typeUrl: "/cosmos.group.v1.GroupInfo",
+  aminoType: "cosmos-sdk/GroupInfo",
+
   encode(message: GroupInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -1604,6 +1622,9 @@ function createBaseGroupMember(): GroupMember {
 }
 
 export const GroupMember = {
+  typeUrl: "/cosmos.group.v1.GroupMember",
+  aminoType: "cosmos-sdk/GroupMember",
+
   encode(message: GroupMember, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -1706,6 +1727,9 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
 }
 
 export const GroupPolicyInfo = {
+  typeUrl: "/cosmos.group.v1.GroupPolicyInfo",
+  aminoType: "cosmos-sdk/GroupPolicyInfo",
+
   encode(message: GroupPolicyInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1889,6 +1913,9 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  typeUrl: "/cosmos.group.v1.Proposal",
+  aminoType: "cosmos-sdk/Proposal",
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -2189,6 +2216,9 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
+  typeUrl: "/cosmos.group.v1.TallyResult",
+  aminoType: "cosmos-sdk/TallyResult",
+
   encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
@@ -2319,6 +2349,9 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  typeUrl: "/cosmos.group.v1.Vote",
+  aminoType: "cosmos-sdk/Vote",
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);

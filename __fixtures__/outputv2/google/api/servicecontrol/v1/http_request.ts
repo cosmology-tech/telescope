@@ -239,6 +239,8 @@ function createBaseHttpRequest(): HttpRequest {
 }
 
 export const HttpRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
+
   encode(message: HttpRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestMethod !== "") {
       writer.uint32(10).string(message.requestMethod);

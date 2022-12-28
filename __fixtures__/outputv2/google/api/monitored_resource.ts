@@ -143,7 +143,7 @@ export interface MonitoredResource_LabelsEntry {
   value: string;
 }
 export interface MonitoredResource_LabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MonitoredResource_LabelsEntryAmino {
@@ -151,7 +151,7 @@ export interface MonitoredResource_LabelsEntryAmino {
   value: string;
 }
 export interface MonitoredResource_LabelsEntryAminoType {
-  type: "/google.api.undefined";
+  type: string;
   value: MonitoredResource_LabelsEntryAmino;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
@@ -259,7 +259,7 @@ export interface MonitoredResourceMetadata_UserLabelsEntry {
   value: string;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
@@ -267,7 +267,7 @@ export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
   value: string;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntryAminoType {
-  type: "/google.api.undefined";
+  type: string;
   value: MonitoredResourceMetadata_UserLabelsEntryAmino;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
@@ -368,6 +368,8 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 }
 
 export const MonitoredResourceDescriptor = {
+  typeUrl: "/google.api.MonitoredResourceDescriptor",
+
   encode(message: MonitoredResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
@@ -640,6 +642,8 @@ function createBaseMonitoredResource(): MonitoredResource {
 }
 
 export const MonitoredResource = {
+  typeUrl: "/google.api.MonitoredResource",
+
   encode(message: MonitoredResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -885,6 +889,8 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
 }
 
 export const MonitoredResourceMetadata = {
+  typeUrl: "/google.api.MonitoredResourceMetadata",
+
   encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();

@@ -208,6 +208,8 @@ function createBaseIncentive(): Incentive {
 }
 
 export const Incentive = {
+  typeUrl: "/evmos.incentives.v1.Incentive",
+
   encode(message: Incentive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -369,6 +371,8 @@ function createBaseGasMeter(): GasMeter {
 }
 
 export const GasMeter = {
+  typeUrl: "/evmos.incentives.v1.GasMeter",
+
   encode(message: GasMeter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -484,6 +488,8 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
 }
 
 export const RegisterIncentiveProposal = {
+  typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
+
   encode(message: RegisterIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -645,6 +651,8 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
 }
 
 export const CancelIncentiveProposal = {
+  typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
+
   encode(message: CancelIncentiveProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);

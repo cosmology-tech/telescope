@@ -628,6 +628,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -691,6 +694,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -772,6 +778,9 @@ function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOuts
 }
 
 export const QueryValidatorOutstandingRewardsRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsRequest",
+  aminoType: "cosmos-sdk/QueryValidatorOutstandingRewardsRequest",
+
   encode(message: QueryValidatorOutstandingRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -853,6 +862,9 @@ function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOut
 }
 
 export const QueryValidatorOutstandingRewardsResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsResponse",
+  aminoType: "cosmos-sdk/QueryValidatorOutstandingRewardsResponse",
+
   encode(message: QueryValidatorOutstandingRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rewards !== undefined) {
       ValidatorOutstandingRewards.encode(message.rewards, writer.uint32(10).fork()).ldelim();
@@ -934,6 +946,9 @@ function createBaseQueryValidatorCommissionRequest(): QueryValidatorCommissionRe
 }
 
 export const QueryValidatorCommissionRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorCommissionRequest",
+  aminoType: "cosmos-sdk/QueryValidatorCommissionRequest",
+
   encode(message: QueryValidatorCommissionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -1015,6 +1030,9 @@ function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionR
 }
 
 export const QueryValidatorCommissionResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorCommissionResponse",
+  aminoType: "cosmos-sdk/QueryValidatorCommissionResponse",
+
   encode(message: QueryValidatorCommissionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commission !== undefined) {
       ValidatorAccumulatedCommission.encode(message.commission, writer.uint32(10).fork()).ldelim();
@@ -1099,6 +1117,9 @@ function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest 
 }
 
 export const QueryValidatorSlashesRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesRequest",
+  aminoType: "cosmos-sdk/QueryValidatorSlashesRequest",
+
   encode(message: QueryValidatorSlashesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -1226,6 +1247,9 @@ function createBaseQueryValidatorSlashesResponse(): QueryValidatorSlashesRespons
 }
 
 export const QueryValidatorSlashesResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesResponse",
+  aminoType: "cosmos-sdk/QueryValidatorSlashesResponse",
+
   encode(message: QueryValidatorSlashesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.slashes) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1341,6 +1365,9 @@ function createBaseQueryDelegationRewardsRequest(): QueryDelegationRewardsReques
 }
 
 export const QueryDelegationRewardsRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationRewardsRequest",
+  aminoType: "cosmos-sdk/QueryDelegationRewardsRequest",
+
   encode(message: QueryDelegationRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1437,6 +1464,9 @@ function createBaseQueryDelegationRewardsResponse(): QueryDelegationRewardsRespo
 }
 
 export const QueryDelegationRewardsResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationRewardsResponse",
+  aminoType: "cosmos-sdk/QueryDelegationRewardsResponse",
+
   encode(message: QueryDelegationRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1536,6 +1566,9 @@ function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRew
 }
 
 export const QueryDelegationTotalRewardsRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationTotalRewardsRequest",
+  aminoType: "cosmos-sdk/QueryDelegationTotalRewardsRequest",
+
   encode(message: QueryDelegationTotalRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1618,6 +1651,9 @@ function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRe
 }
 
 export const QueryDelegationTotalRewardsResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegationTotalRewardsResponse",
+  aminoType: "cosmos-sdk/QueryDelegationTotalRewardsResponse",
+
   encode(message: QueryDelegationTotalRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DelegationDelegatorReward.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1747,6 +1783,9 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 
 export const QueryDelegatorValidatorsRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorValidatorsRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorsRequest",
+
   encode(message: QueryDelegatorValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1828,6 +1867,9 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorValidatorsResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorsResponse",
+
   encode(message: QueryDelegatorValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       writer.uint32(10).string(v!);
@@ -1927,6 +1969,9 @@ function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdra
 }
 
 export const QueryDelegatorWithdrawAddressRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorWithdrawAddressRequest",
+
   encode(message: QueryDelegatorWithdrawAddressRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -2008,6 +2053,9 @@ function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdr
 }
 
 export const QueryDelegatorWithdrawAddressResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorWithdrawAddressResponse",
+
   encode(message: QueryDelegatorWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.withdrawAddress !== "") {
       writer.uint32(10).string(message.withdrawAddress);
@@ -2087,6 +2135,9 @@ function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
 }
 
 export const QueryCommunityPoolRequest = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryCommunityPoolRequest",
+  aminoType: "cosmos-sdk/QueryCommunityPoolRequest",
+
   encode(_: QueryCommunityPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2150,6 +2201,9 @@ function createBaseQueryCommunityPoolResponse(): QueryCommunityPoolResponse {
 }
 
 export const QueryCommunityPoolResponse = {
+  typeUrl: "/cosmos.distribution.v1beta1.QueryCommunityPoolResponse",
+  aminoType: "cosmos-sdk/QueryCommunityPoolResponse",
+
   encode(message: QueryCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();

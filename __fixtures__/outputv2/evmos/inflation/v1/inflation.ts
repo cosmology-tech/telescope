@@ -163,6 +163,8 @@ function createBaseInflationDistribution(): InflationDistribution {
 }
 
 export const InflationDistribution = {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution",
+
   encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.stakingRewards !== "") {
       writer.uint32(10).string(message.stakingRewards);
@@ -278,6 +280,8 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 }
 
 export const ExponentialCalculation = {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
+
   encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.a !== "") {
       writer.uint32(10).string(message.a);

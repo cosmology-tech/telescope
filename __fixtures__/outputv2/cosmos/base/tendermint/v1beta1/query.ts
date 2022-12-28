@@ -430,6 +430,9 @@ function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequ
 }
 
 export const GetValidatorSetByHeightRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest",
+  aminoType: "cosmos-sdk/GetValidatorSetByHeightRequest",
+
   encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
@@ -528,6 +531,9 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 }
 
 export const GetValidatorSetByHeightResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse",
+  aminoType: "cosmos-sdk/GetValidatorSetByHeightResponse",
+
   encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
@@ -657,6 +663,9 @@ function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest 
 }
 
 export const GetLatestValidatorSetRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest",
+  aminoType: "cosmos-sdk/GetLatestValidatorSetRequest",
+
   encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -740,6 +749,9 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 }
 
 export const GetLatestValidatorSetResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse",
+  aminoType: "cosmos-sdk/GetLatestValidatorSetResponse",
+
   encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockHeight.isZero()) {
       writer.uint32(8).int64(message.blockHeight);
@@ -872,6 +884,9 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Validator",
+  aminoType: "cosmos-sdk/Validator",
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -998,6 +1013,9 @@ function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
 }
 
 export const GetBlockByHeightRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest",
+  aminoType: "cosmos-sdk/GetBlockByHeightRequest",
+
   encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
@@ -1080,6 +1098,9 @@ function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
 }
 
 export const GetBlockByHeightResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse",
+  aminoType: "cosmos-sdk/GetBlockByHeightResponse",
+
   encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -1174,6 +1195,9 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
 }
 
 export const GetLatestBlockRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockRequest",
+  aminoType: "cosmos-sdk/GetLatestBlockRequest",
+
   encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1238,6 +1262,9 @@ function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
 }
 
 export const GetLatestBlockResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockResponse",
+  aminoType: "cosmos-sdk/GetLatestBlockResponse",
+
   encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -1332,6 +1359,9 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
 }
 
 export const GetSyncingRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingRequest",
+  aminoType: "cosmos-sdk/GetSyncingRequest",
+
   encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1395,6 +1425,9 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
 }
 
 export const GetSyncingResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingResponse",
+  aminoType: "cosmos-sdk/GetSyncingResponse",
+
   encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
@@ -1474,6 +1507,9 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
 }
 
 export const GetNodeInfoRequest = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoRequest",
+  aminoType: "cosmos-sdk/GetNodeInfoRequest",
+
   encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1538,6 +1574,9 @@ function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
 }
 
 export const GetNodeInfoResponse = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoResponse",
+  aminoType: "cosmos-sdk/GetNodeInfoResponse",
+
   encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nodeInfo !== undefined) {
       NodeInfo.encode(message.nodeInfo, writer.uint32(10).fork()).ldelim();
@@ -1641,6 +1680,9 @@ function createBaseVersionInfo(): VersionInfo {
 }
 
 export const VersionInfo = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.VersionInfo",
+  aminoType: "cosmos-sdk/VersionInfo",
+
   encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1847,6 +1889,9 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Module",
+  aminoType: "cosmos-sdk/Module",
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);

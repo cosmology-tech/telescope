@@ -37,6 +37,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/akash.market.v1beta2.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidMinDeposit !== undefined) {
       Coin.encode(message.bidMinDeposit, writer.uint32(10).fork()).ldelim();

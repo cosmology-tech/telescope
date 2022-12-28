@@ -40,6 +40,8 @@ function createBaseGroupID(): GroupID {
 }
 
 export const GroupID = {
+  typeUrl: "/akash.deployment.v1beta2.GroupID",
+
   encode(message: GroupID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);

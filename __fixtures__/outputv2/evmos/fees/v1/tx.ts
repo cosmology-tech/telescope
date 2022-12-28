@@ -221,6 +221,8 @@ function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
 }
 
 export const MsgRegisterDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+
   encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -375,6 +377,8 @@ function createBaseMsgRegisterDevFeeInfoResponse(): MsgRegisterDevFeeInfoRespons
 }
 
 export const MsgRegisterDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
+
   encode(_: MsgRegisterDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -439,6 +443,8 @@ function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
 }
 
 export const MsgCancelDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
+
   encode(message: MsgCancelDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -533,6 +539,8 @@ function createBaseMsgCancelDevFeeInfoResponse(): MsgCancelDevFeeInfoResponse {
 }
 
 export const MsgCancelDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
+
   encode(_: MsgCancelDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -598,6 +606,8 @@ function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
 }
 
 export const MsgUpdateDevFeeInfo = {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
+
   encode(message: MsgUpdateDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -707,6 +717,8 @@ function createBaseMsgUpdateDevFeeInfoResponse(): MsgUpdateDevFeeInfoResponse {
 }
 
 export const MsgUpdateDevFeeInfoResponse = {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
+
   encode(_: MsgUpdateDevFeeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

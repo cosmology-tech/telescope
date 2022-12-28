@@ -168,7 +168,7 @@ export interface CheckResponse_HeadersEntry {
   value: string;
 }
 export interface CheckResponse_HeadersEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v2.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntryAmino {
@@ -176,7 +176,7 @@ export interface CheckResponse_HeadersEntryAmino {
   value: string;
 }
 export interface CheckResponse_HeadersEntryAminoType {
-  type: "/google.api.servicecontrol.v2.undefined";
+  type: string;
   value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
@@ -336,6 +336,8 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -499,6 +501,8 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -738,6 +742,8 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== undefined) {
       Status.encode(message.status, writer.uint32(10).fork()).ldelim();
@@ -887,6 +893,8 @@ function createBaseReportRequest(): ReportRequest {
 }
 
 export const ReportRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+
   encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1014,6 +1022,8 @@ function createBaseReportResponse(): ReportResponse {
 }
 
 export const ReportResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+
   encode(_: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

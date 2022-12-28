@@ -615,6 +615,9 @@ function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
 }
 
 export const MsgChannelOpenInit = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit",
+  aminoType: "cosmos-sdk/MsgChannelOpenInit",
+
   encode(message: MsgChannelOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -724,6 +727,9 @@ function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
 }
 
 export const MsgChannelOpenInitResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInitResponse",
+  aminoType: "cosmos-sdk/MsgChannelOpenInitResponse",
+
   encode(_: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -793,6 +799,9 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
 }
 
 export const MsgChannelOpenTry = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry",
+  aminoType: "cosmos-sdk/MsgChannelOpenTry",
+
   encode(message: MsgChannelOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -962,6 +971,9 @@ function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
 }
 
 export const MsgChannelOpenTryResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTryResponse",
+  aminoType: "cosmos-sdk/MsgChannelOpenTryResponse",
+
   encode(_: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1031,6 +1043,9 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
 }
 
 export const MsgChannelOpenAck = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck",
+  aminoType: "cosmos-sdk/MsgChannelOpenAck",
+
   encode(message: MsgChannelOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1200,6 +1215,9 @@ function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
 }
 
 export const MsgChannelOpenAckResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAckResponse",
+  aminoType: "cosmos-sdk/MsgChannelOpenAckResponse",
+
   encode(_: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1267,6 +1285,9 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
 }
 
 export const MsgChannelOpenConfirm = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm",
+  aminoType: "cosmos-sdk/MsgChannelOpenConfirm",
+
   encode(message: MsgChannelOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1406,6 +1427,9 @@ function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmRespons
 }
 
 export const MsgChannelOpenConfirmResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirmResponse",
+  aminoType: "cosmos-sdk/MsgChannelOpenConfirmResponse",
+
   encode(_: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1471,6 +1495,9 @@ function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
 }
 
 export const MsgChannelCloseInit = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit",
+  aminoType: "cosmos-sdk/MsgChannelCloseInit",
+
   encode(message: MsgChannelCloseInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1580,6 +1607,9 @@ function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
 }
 
 export const MsgChannelCloseInitResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInitResponse",
+  aminoType: "cosmos-sdk/MsgChannelCloseInitResponse",
+
   encode(_: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1647,6 +1677,9 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
 }
 
 export const MsgChannelCloseConfirm = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm",
+  aminoType: "cosmos-sdk/MsgChannelCloseConfirm",
+
   encode(message: MsgChannelCloseConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1786,6 +1819,9 @@ function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmRespo
 }
 
 export const MsgChannelCloseConfirmResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirmResponse",
+  aminoType: "cosmos-sdk/MsgChannelCloseConfirmResponse",
+
   encode(_: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1852,6 +1888,9 @@ function createBaseMsgRecvPacket(): MsgRecvPacket {
 }
 
 export const MsgRecvPacket = {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacket",
+  aminoType: "cosmos-sdk/MsgRecvPacket",
+
   encode(message: MsgRecvPacket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -1976,6 +2015,9 @@ function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
 }
 
 export const MsgRecvPacketResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgRecvPacketResponse",
+  aminoType: "cosmos-sdk/MsgRecvPacketResponse",
+
   encode(_: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2043,6 +2085,9 @@ function createBaseMsgTimeout(): MsgTimeout {
 }
 
 export const MsgTimeout = {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeout",
+  aminoType: "cosmos-sdk/MsgTimeout",
+
   encode(message: MsgTimeout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -2182,6 +2227,9 @@ function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
 }
 
 export const MsgTimeoutResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutResponse",
+  aminoType: "cosmos-sdk/MsgTimeoutResponse",
+
   encode(_: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2250,6 +2298,9 @@ function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
 }
 
 export const MsgTimeoutOnClose = {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose",
+  aminoType: "cosmos-sdk/MsgTimeoutOnClose",
+
   encode(message: MsgTimeoutOnClose, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -2404,6 +2455,9 @@ function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
 }
 
 export const MsgTimeoutOnCloseResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnCloseResponse",
+  aminoType: "cosmos-sdk/MsgTimeoutOnCloseResponse",
+
   encode(_: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2471,6 +2525,9 @@ function createBaseMsgAcknowledgement(): MsgAcknowledgement {
 }
 
 export const MsgAcknowledgement = {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement",
+  aminoType: "cosmos-sdk/MsgAcknowledgement",
+
   encode(message: MsgAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -2610,6 +2667,9 @@ function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
 }
 
 export const MsgAcknowledgementResponse = {
+  typeUrl: "/ibc.core.channel.v1.MsgAcknowledgementResponse",
+  aminoType: "cosmos-sdk/MsgAcknowledgementResponse",
+
   encode(_: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

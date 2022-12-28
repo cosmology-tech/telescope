@@ -33,6 +33,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/akash.deployment.v1beta1.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deploymentMinDeposit !== undefined) {
       Coin.encode(message.deploymentMinDeposit, writer.uint32(10).fork()).ldelim();

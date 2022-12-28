@@ -115,6 +115,9 @@ function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
 }
 
 export const ListAllInterfacesRequest = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest",
+  aminoType: "cosmos-sdk/ListAllInterfacesRequest",
+
   encode(_: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -178,6 +181,9 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
 }
 
 export const ListAllInterfacesResponse = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse",
+  aminoType: "cosmos-sdk/ListAllInterfacesResponse",
+
   encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
@@ -277,6 +283,9 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
 }
 
 export const ListImplementationsRequest = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
+  aminoType: "cosmos-sdk/ListImplementationsRequest",
+
   encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
@@ -358,6 +367,9 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
 }
 
 export const ListImplementationsResponse = {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse",
+  aminoType: "cosmos-sdk/ListImplementationsResponse",
+
   encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);

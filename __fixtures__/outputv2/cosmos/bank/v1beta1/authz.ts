@@ -48,6 +48,9 @@ function createBaseSendAuthorization(): SendAuthorization {
 }
 
 export const SendAuthorization = {
+  typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+  aminoType: "cosmos-sdk/SendAuthorization",
+
   encode(message: SendAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();

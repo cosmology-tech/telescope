@@ -134,6 +134,9 @@ function createBasePoolParams(): PoolParams {
 }
 
 export const PoolParams = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
+  aminoType: "osmosis/gamm/pool-params",
+
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
       writer.uint32(10).string(message.swapFee);
@@ -237,6 +240,9 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
+  aminoType: "osmosis/gamm/pool",
+
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);

@@ -483,6 +483,8 @@ function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
 }
 
 export const QueryIncentivesRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest",
+
   encode(message: QueryIncentivesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -565,6 +567,8 @@ function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
 }
 
 export const QueryIncentivesResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse",
+
   encode(message: QueryIncentivesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentives) {
       Incentive.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -679,6 +683,8 @@ function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
 }
 
 export const QueryIncentiveRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
+
   encode(message: QueryIncentiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -760,6 +766,8 @@ function createBaseQueryIncentiveResponse(): QueryIncentiveResponse {
 }
 
 export const QueryIncentiveResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse",
+
   encode(message: QueryIncentiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.incentive !== undefined) {
       Incentive.encode(message.incentive, writer.uint32(10).fork()).ldelim();
@@ -842,6 +850,8 @@ function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
 }
 
 export const QueryGasMetersRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
+
   encode(message: QueryGasMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -939,6 +949,8 @@ function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
 }
 
 export const QueryGasMetersResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse",
+
   encode(message: QueryGasMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.gasMeters) {
       GasMeter.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1054,6 +1066,8 @@ function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
 }
 
 export const QueryGasMeterRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
+
   encode(message: QueryGasMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -1150,6 +1164,8 @@ function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
 }
 
 export const QueryGasMeterResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
+
   encode(message: QueryGasMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.gasMeter.isZero()) {
       writer.uint32(8).uint64(message.gasMeter);
@@ -1231,6 +1247,8 @@ function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest 
 }
 
 export const QueryAllocationMetersRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest",
+
   encode(message: QueryAllocationMetersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1313,6 +1331,8 @@ function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersRespons
 }
 
 export const QueryAllocationMetersResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse",
+
   encode(message: QueryAllocationMetersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allocationMeters) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1427,6 +1447,8 @@ function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
 }
 
 export const QueryAllocationMeterRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
+
   encode(message: QueryAllocationMeterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -1508,6 +1530,8 @@ function createBaseQueryAllocationMeterResponse(): QueryAllocationMeterResponse 
 }
 
 export const QueryAllocationMeterResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse",
+
   encode(message: QueryAllocationMeterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allocationMeter !== undefined) {
       DecCoin.encode(message.allocationMeter, writer.uint32(10).fork()).ldelim();
@@ -1587,6 +1611,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.incentives.v1.QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1650,6 +1676,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.incentives.v1.QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

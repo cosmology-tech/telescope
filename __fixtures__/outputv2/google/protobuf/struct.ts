@@ -42,7 +42,7 @@ export interface Struct_FieldsEntry {
   value?: Value;
 }
 export interface Struct_FieldsEntryProtoType {
-  typeUrl: "/google.protobuf.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Struct_FieldsEntryAmino {
@@ -50,7 +50,7 @@ export interface Struct_FieldsEntryAmino {
   value?: ValueAmino;
 }
 export interface Struct_FieldsEntryAminoType {
-  type: "/google.protobuf.undefined";
+  type: string;
   value: Struct_FieldsEntryAmino;
 }
 export interface Struct_FieldsEntrySDKType {
@@ -338,6 +338,8 @@ function createBaseStruct(): Struct {
 }
 
 export const Struct = {
+  typeUrl: "/google.protobuf.Struct",
+
   encode(message: Struct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.fields).forEach(([key, value]) => {
       Struct_FieldsEntry.encode({
@@ -475,6 +477,8 @@ function createBaseValue(): Value {
 }
 
 export const Value = {
+  typeUrl: "/google.protobuf.Value",
+
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -631,6 +635,8 @@ function createBaseListValue(): ListValue {
 }
 
 export const ListValue = {
+  typeUrl: "/google.protobuf.ListValue",
+
   encode(message: ListValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();

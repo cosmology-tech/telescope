@@ -239,6 +239,8 @@ function createBaseUsage(): Usage {
 }
 
 export const Usage = {
+  typeUrl: "/google.api.Usage",
+
   encode(message: Usage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.requirements) {
       writer.uint32(10).string(v!);
@@ -385,6 +387,8 @@ function createBaseUsageRule(): UsageRule {
 }
 
 export const UsageRule = {
+  typeUrl: "/google.api.UsageRule",
+
   encode(message: UsageRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);

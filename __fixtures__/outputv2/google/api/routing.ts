@@ -1270,6 +1270,8 @@ function createBaseRoutingRule(): RoutingRule {
 }
 
 export const RoutingRule = {
+  typeUrl: "/google.api.RoutingRule",
+
   encode(message: RoutingRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.routingParameters) {
       RoutingParameter.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -1370,6 +1372,8 @@ function createBaseRoutingParameter(): RoutingParameter {
 }
 
 export const RoutingParameter = {
+  typeUrl: "/google.api.RoutingParameter",
+
   encode(message: RoutingParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);

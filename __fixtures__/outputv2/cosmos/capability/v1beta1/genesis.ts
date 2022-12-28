@@ -81,6 +81,9 @@ function createBaseGenesisOwners(): GenesisOwners {
 }
 
 export const GenesisOwners = {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners",
+  aminoType: "cosmos-sdk/GenesisOwners",
+
   encode(message: GenesisOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).uint64(message.index);
@@ -178,6 +181,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).uint64(message.index);

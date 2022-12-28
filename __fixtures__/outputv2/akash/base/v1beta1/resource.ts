@@ -132,6 +132,8 @@ function createBaseCPU(): CPU {
 }
 
 export const CPU = {
+  typeUrl: "/akash.base.v1beta1.CPU",
+
   encode(message: CPU, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
@@ -247,6 +249,8 @@ function createBaseMemory(): Memory {
 }
 
 export const Memory = {
+  typeUrl: "/akash.base.v1beta1.Memory",
+
   encode(message: Memory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -362,6 +366,8 @@ function createBaseStorage(): Storage {
 }
 
 export const Storage = {
+  typeUrl: "/akash.base.v1beta1.Storage",
+
   encode(message: Storage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -479,6 +485,8 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 
 export const ResourceUnits = {
+  typeUrl: "/akash.base.v1beta1.ResourceUnits",
+
   encode(message: ResourceUnits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();

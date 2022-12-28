@@ -179,6 +179,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/tokenfactory/query-params-request",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -242,6 +245,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/tokenfactory/query-params-response",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -323,6 +329,9 @@ function createBaseQueryDenomAuthorityMetadataRequest(): QueryDenomAuthorityMeta
 }
 
 export const QueryDenomAuthorityMetadataRequest = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest",
+  aminoType: "osmosis/tokenfactory/query-denom-authority-metadata-request",
+
   encode(message: QueryDenomAuthorityMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -404,6 +413,9 @@ function createBaseQueryDenomAuthorityMetadataResponse(): QueryDenomAuthorityMet
 }
 
 export const QueryDenomAuthorityMetadataResponse = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse",
+  aminoType: "osmosis/tokenfactory/query-denom-authority-metadata-response",
+
   encode(message: QueryDenomAuthorityMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorityMetadata !== undefined) {
       DenomAuthorityMetadata.encode(message.authorityMetadata, writer.uint32(10).fork()).ldelim();
@@ -485,6 +497,9 @@ function createBaseQueryDenomsFromCreatorRequest(): QueryDenomsFromCreatorReques
 }
 
 export const QueryDenomsFromCreatorRequest = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest",
+  aminoType: "osmosis/tokenfactory/query-denoms-from-creator-request",
+
   encode(message: QueryDenomsFromCreatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
@@ -566,6 +581,9 @@ function createBaseQueryDenomsFromCreatorResponse(): QueryDenomsFromCreatorRespo
 }
 
 export const QueryDenomsFromCreatorResponse = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse",
+  aminoType: "osmosis/tokenfactory/query-denoms-from-creator-response",
+
   encode(message: QueryDenomsFromCreatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denoms) {
       writer.uint32(10).string(v!);

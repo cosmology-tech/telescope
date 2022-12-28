@@ -83,6 +83,9 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 }
 
 export const QuerySpotPriceRequest = {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest",
+  aminoType: "osmosis/gamm/v2/query-spot-price-request",
+
   encode(message: QuerySpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -194,6 +197,9 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 }
 
 export const QuerySpotPriceResponse = {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse",
+  aminoType: "osmosis/gamm/v2/query-spot-price-response",
+
   encode(message: QuerySpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);

@@ -642,6 +642,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  typeUrl: "/google.protobuf.Type",
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -855,6 +857,8 @@ function createBaseField(): Field {
 }
 
 export const Field = {
+  typeUrl: "/google.protobuf.Field",
+
   encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -1093,6 +1097,8 @@ function createBaseEnum(): Enum {
 }
 
 export const Enum = {
+  typeUrl: "/google.protobuf.Enum",
+
   encode(message: Enum, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1269,6 +1275,8 @@ function createBaseEnumValue(): EnumValue {
 }
 
 export const EnumValue = {
+  typeUrl: "/google.protobuf.EnumValue",
+
   encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1399,6 +1407,8 @@ function createBaseOption(): Option {
 }
 
 export const Option = {
+  typeUrl: "/google.protobuf.Option",
+
   encode(message: Option, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

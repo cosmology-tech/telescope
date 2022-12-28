@@ -150,6 +150,9 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
 }
 
 export const MsgSoftwareUpgrade = {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+  aminoType: "cosmos-sdk/MsgSoftwareUpgrade",
+
   encode(message: MsgSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -244,6 +247,9 @@ function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
 }
 
 export const MsgSoftwareUpgradeResponse = {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
+  aminoType: "cosmos-sdk/MsgSoftwareUpgradeResponse",
+
   encode(_: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -307,6 +313,9 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
 }
 
 export const MsgCancelUpgrade = {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
+  aminoType: "cosmos-sdk/MsgCancelUpgrade",
+
   encode(message: MsgCancelUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -386,6 +395,9 @@ function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
 }
 
 export const MsgCancelUpgradeResponse = {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse",
+  aminoType: "cosmos-sdk/MsgCancelUpgradeResponse",
+
   encode(_: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

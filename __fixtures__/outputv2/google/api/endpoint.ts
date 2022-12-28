@@ -157,6 +157,8 @@ function createBaseEndpoint(): Endpoint {
 }
 
 export const Endpoint = {
+  typeUrl: "/google.api.Endpoint",
+
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

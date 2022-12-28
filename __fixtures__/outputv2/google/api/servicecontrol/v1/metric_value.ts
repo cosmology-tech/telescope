@@ -8,7 +8,7 @@ export interface MetricValue_LabelsEntry {
   value: string;
 }
 export interface MetricValue_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MetricValue_LabelsEntryAmino {
@@ -16,7 +16,7 @@ export interface MetricValue_LabelsEntryAmino {
   value: string;
 }
 export interface MetricValue_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+  type: string;
   value: MetricValue_LabelsEntryAmino;
 }
 export interface MetricValue_LabelsEntrySDKType {
@@ -289,6 +289,8 @@ function createBaseMetricValue(): MetricValue {
 }
 
 export const MetricValue = {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValue",
+
   encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
@@ -528,6 +530,8 @@ function createBaseMetricValueSet(): MetricValueSet {
 }
 
 export const MetricValueSet = {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
+
   encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);

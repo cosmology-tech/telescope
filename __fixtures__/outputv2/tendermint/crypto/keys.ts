@@ -36,6 +36,8 @@ function createBasePublicKey(): PublicKey {
 }
 
 export const PublicKey = {
+  typeUrl: "/tendermint.crypto.PublicKey",
+
   encode(message: PublicKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ed25519 !== undefined) {
       writer.uint32(10).bytes(message.ed25519);

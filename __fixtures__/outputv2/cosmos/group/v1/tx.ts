@@ -946,6 +946,9 @@ function createBaseMsgCreateGroup(): MsgCreateGroup {
 }
 
 export const MsgCreateGroup = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroup",
+  aminoType: "cosmos-sdk/MsgCreateGroup",
+
   encode(message: MsgCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1075,6 +1078,9 @@ function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
 }
 
 export const MsgCreateGroupResponse = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroupResponse",
+  aminoType: "cosmos-sdk/MsgCreateGroupResponse",
+
   encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -1158,6 +1164,9 @@ function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
 }
 
 export const MsgUpdateGroupMembers = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembers",
+  aminoType: "cosmos-sdk/MsgUpdateGroupMembers",
+
   encode(message: MsgUpdateGroupMembers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1285,6 +1294,9 @@ function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersRespons
 }
 
 export const MsgUpdateGroupMembersResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembersResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupMembersResponse",
+
   encode(_: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1350,6 +1362,9 @@ function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
 }
 
 export const MsgUpdateGroupAdmin = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupAdmin",
+  aminoType: "cosmos-sdk/MsgUpdateGroupAdmin",
+
   encode(message: MsgUpdateGroupAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1459,6 +1474,9 @@ function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
 }
 
 export const MsgUpdateGroupAdminResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupAdminResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupAdminResponse",
+
   encode(_: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1524,6 +1542,9 @@ function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
 }
 
 export const MsgUpdateGroupMetadata = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupMetadata",
+  aminoType: "cosmos-sdk/MsgUpdateGroupMetadata",
+
   encode(message: MsgUpdateGroupMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1633,6 +1654,9 @@ function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataRespo
 }
 
 export const MsgUpdateGroupMetadataResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupMetadataResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupMetadataResponse",
+
   encode(_: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1699,6 +1723,9 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
 }
 
 export const MsgCreateGroupPolicy = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy",
+  aminoType: "cosmos-sdk/MsgCreateGroupPolicy",
+
   encode(message: MsgCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1825,6 +1852,9 @@ function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse 
 }
 
 export const MsgCreateGroupPolicyResponse = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicyResponse",
+  aminoType: "cosmos-sdk/MsgCreateGroupPolicyResponse",
+
   encode(message: MsgCreateGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1908,6 +1938,9 @@ function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
 }
 
 export const MsgUpdateGroupPolicyAdmin = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyAdmin",
+
   encode(message: MsgUpdateGroupPolicyAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -2024,6 +2057,9 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
 }
 
 export const MsgCreateGroupWithPolicy = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy",
+  aminoType: "cosmos-sdk/MsgCreateGroupWithPolicy",
+
   encode(message: MsgCreateGroupWithPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -2199,6 +2235,9 @@ function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyR
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
+  typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicyResponse",
+  aminoType: "cosmos-sdk/MsgCreateGroupWithPolicyResponse",
+
   encode(message: MsgCreateGroupWithPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
@@ -2293,6 +2332,9 @@ function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdmi
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyAdminResponse",
+
   encode(_: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2358,6 +2400,9 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicy = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicy",
+
   encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -2467,6 +2512,9 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupP
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicyResponse",
+
   encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2532,6 +2580,9 @@ function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata 
 }
 
 export const MsgUpdateGroupPolicyMetadata = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyMetadata",
+
   encode(message: MsgUpdateGroupPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -2641,6 +2692,9 @@ function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyM
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
+  typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse",
+  aminoType: "cosmos-sdk/MsgUpdateGroupPolicyMetadataResponse",
+
   encode(_: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2708,6 +2762,9 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
+  typeUrl: "/cosmos.group.v1.MsgSubmitProposal",
+  aminoType: "cosmos-sdk/group/MsgSubmitProposal",
+
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -2885,6 +2942,9 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
+  typeUrl: "/cosmos.group.v1.MsgSubmitProposalResponse",
+  aminoType: "cosmos-sdk/MsgSubmitProposalResponse",
+
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -2967,6 +3027,9 @@ function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
 }
 
 export const MsgWithdrawProposal = {
+  typeUrl: "/cosmos.group.v1.MsgWithdrawProposal",
+  aminoType: "cosmos-sdk/group/MsgWithdrawProposal",
+
   encode(message: MsgWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -3061,6 +3124,9 @@ function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
 }
 
 export const MsgWithdrawProposalResponse = {
+  typeUrl: "/cosmos.group.v1.MsgWithdrawProposalResponse",
+  aminoType: "cosmos-sdk/MsgWithdrawProposalResponse",
+
   encode(_: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -3128,6 +3194,9 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  typeUrl: "/cosmos.group.v1.MsgVote",
+  aminoType: "cosmos-sdk/group/MsgVote",
+
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -3267,6 +3336,9 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
+  typeUrl: "/cosmos.group.v1.MsgVoteResponse",
+  aminoType: "cosmos-sdk/MsgVoteResponse",
+
   encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -3331,6 +3403,9 @@ function createBaseMsgExec(): MsgExec {
 }
 
 export const MsgExec = {
+  typeUrl: "/cosmos.group.v1.MsgExec",
+  aminoType: "cosmos-sdk/group/MsgExec",
+
   encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -3425,6 +3500,9 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 }
 
 export const MsgExecResponse = {
+  typeUrl: "/cosmos.group.v1.MsgExecResponse",
+  aminoType: "cosmos-sdk/MsgExecResponse",
+
   encode(_: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -3489,6 +3567,9 @@ function createBaseMsgLeaveGroup(): MsgLeaveGroup {
 }
 
 export const MsgLeaveGroup = {
+  typeUrl: "/cosmos.group.v1.MsgLeaveGroup",
+  aminoType: "cosmos-sdk/group/MsgLeaveGroup",
+
   encode(message: MsgLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -3583,6 +3664,9 @@ function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
 }
 
 export const MsgLeaveGroupResponse = {
+  typeUrl: "/cosmos.group.v1.MsgLeaveGroupResponse",
+  aminoType: "cosmos-sdk/MsgLeaveGroupResponse",
+
   encode(_: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

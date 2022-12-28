@@ -52,6 +52,8 @@ function createBaseControl(): Control {
 }
 
 export const Control = {
+  typeUrl: "/google.api.Control",
+
   encode(message: Control, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.environment !== "") {
       writer.uint32(10).string(message.environment);

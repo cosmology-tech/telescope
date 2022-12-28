@@ -417,6 +417,8 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
+  typeUrl: "/google.longrunning.Operation",
+
   encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -558,6 +560,8 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 }
 
 export const GetOperationRequest = {
+  typeUrl: "/google.longrunning.GetOperationRequest",
+
   encode(message: GetOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -642,6 +646,8 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 }
 
 export const ListOperationsRequest = {
+  typeUrl: "/google.longrunning.ListOperationsRequest",
+
   encode(message: ListOperationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
@@ -769,6 +775,8 @@ function createBaseListOperationsResponse(): ListOperationsResponse {
 }
 
 export const ListOperationsResponse = {
+  typeUrl: "/google.longrunning.ListOperationsResponse",
+
   encode(message: ListOperationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -883,6 +891,8 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 }
 
 export const CancelOperationRequest = {
+  typeUrl: "/google.longrunning.CancelOperationRequest",
+
   encode(message: CancelOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -964,6 +974,8 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 }
 
 export const DeleteOperationRequest = {
+  typeUrl: "/google.longrunning.DeleteOperationRequest",
+
   encode(message: DeleteOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1046,6 +1058,8 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 }
 
 export const WaitOperationRequest = {
+  typeUrl: "/google.longrunning.WaitOperationRequest",
+
   encode(message: WaitOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1143,6 +1157,8 @@ function createBaseOperationInfo(): OperationInfo {
 }
 
 export const OperationInfo = {
+  typeUrl: "/google.longrunning.OperationInfo",
+
   encode(message: OperationInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.responseType !== "") {
       writer.uint32(10).string(message.responseType);

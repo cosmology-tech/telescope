@@ -193,6 +193,8 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
 }
 
 export const MsgCreateClawbackVestingAccount = {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
+
   encode(message: MsgCreateClawbackVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -380,6 +382,8 @@ function createBaseMsgCreateClawbackVestingAccountResponse(): MsgCreateClawbackV
 }
 
 export const MsgCreateClawbackVestingAccountResponse = {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse",
+
   encode(_: MsgCreateClawbackVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -445,6 +449,8 @@ function createBaseMsgClawback(): MsgClawback {
 }
 
 export const MsgClawback = {
+  typeUrl: "/evmos.vesting.v1.MsgClawback",
+
   encode(message: MsgClawback, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.funderAddress !== "") {
       writer.uint32(10).string(message.funderAddress);
@@ -554,6 +560,8 @@ function createBaseMsgClawbackResponse(): MsgClawbackResponse {
 }
 
 export const MsgClawbackResponse = {
+  typeUrl: "/evmos.vesting.v1.MsgClawbackResponse",
+
   encode(_: MsgClawbackResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },

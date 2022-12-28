@@ -68,6 +68,9 @@ function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
 }
 
 export const MsgCreateBalancerPool = {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
+
   encode(message: MsgCreateBalancerPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -212,6 +215,9 @@ function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolRespons
 }
 
 export const MsgCreateBalancerPoolResponse = {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
+
   encode(message: MsgCreateBalancerPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);

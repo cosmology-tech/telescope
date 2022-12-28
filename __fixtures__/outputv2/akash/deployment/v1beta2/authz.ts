@@ -50,6 +50,8 @@ function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorizat
 }
 
 export const DepositDeploymentAuthorization = {
+  typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
+
   encode(message: DepositDeploymentAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.spendLimit !== undefined) {
       Coin.encode(message.spendLimit, writer.uint32(10).fork()).ldelim();

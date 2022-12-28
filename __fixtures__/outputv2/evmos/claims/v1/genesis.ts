@@ -118,6 +118,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/evmos.claims.v1.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -238,6 +240,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/evmos.claims.v1.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enableClaims === true) {
       writer.uint32(8).bool(message.enableClaims);

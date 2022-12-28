@@ -62,6 +62,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/akash.inflation.v1beta2.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflationDecayFactor !== "") {
       writer.uint32(10).string(message.inflationDecayFactor);

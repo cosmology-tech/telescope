@@ -472,6 +472,9 @@ function createBaseMsgJoinPool(): MsgJoinPool {
 }
 
 export const MsgJoinPool = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
+  aminoType: "osmosis/gamm/join-pool",
+
   encode(message: MsgJoinPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -617,6 +620,9 @@ function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
 }
 
 export const MsgJoinPoolResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse",
+  aminoType: "osmosis/gamm/join-pool-response",
+
   encode(message: MsgJoinPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareOutAmount !== "") {
       writer.uint32(10).string(message.shareOutAmount);
@@ -734,6 +740,9 @@ function createBaseMsgExitPool(): MsgExitPool {
 }
 
 export const MsgExitPool = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool",
+  aminoType: "osmosis/gamm/exit-pool",
+
   encode(message: MsgExitPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -878,6 +887,9 @@ function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
 }
 
 export const MsgExitPoolResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitPoolResponse",
+  aminoType: "osmosis/gamm/exit-pool-response",
+
   encode(message: MsgExitPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.tokenOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -978,6 +990,9 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
 }
 
 export const SwapAmountInRoute = {
+  typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute",
+  aminoType: "osmosis/gamm/swap-amount-in-route",
+
   encode(message: SwapAmountInRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -1077,6 +1092,9 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
 }
 
 export const MsgSwapExactAmountIn = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+  aminoType: "osmosis/gamm/swap-exact-amount-in",
+
   encode(message: MsgSwapExactAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1221,6 +1239,9 @@ function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse 
 }
 
 export const MsgSwapExactAmountInResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse",
+  aminoType: "osmosis/gamm/swap-exact-amount-in-response",
+
   encode(message: MsgSwapExactAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -1303,6 +1324,9 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
 }
 
 export const SwapAmountOutRoute = {
+  typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute",
+  aminoType: "osmosis/gamm/swap-amount-out-route",
+
   encode(message: SwapAmountOutRoute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -1402,6 +1426,9 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
 }
 
 export const MsgSwapExactAmountOut = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+  aminoType: "osmosis/gamm/swap-exact-amount-out",
+
   encode(message: MsgSwapExactAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1546,6 +1573,9 @@ function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutRespons
 }
 
 export const MsgSwapExactAmountOutResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse",
+  aminoType: "osmosis/gamm/swap-exact-amount-out-response",
+
   encode(message: MsgSwapExactAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
@@ -1630,6 +1660,9 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
 }
 
 export const MsgJoinSwapExternAmountIn = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
+  aminoType: "osmosis/gamm/join-swap-extern-amount-in",
+
   encode(message: MsgJoinSwapExternAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1756,6 +1789,9 @@ function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountI
 }
 
 export const MsgJoinSwapExternAmountInResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse",
+  aminoType: "osmosis/gamm/join-swap-extern-amount-in-response",
+
   encode(message: MsgJoinSwapExternAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareOutAmount !== "") {
       writer.uint32(10).string(message.shareOutAmount);
@@ -1841,6 +1877,9 @@ function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
 }
 
 export const MsgJoinSwapShareAmountOut = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
+  aminoType: "osmosis/gamm/join-swap-share-amount-out",
+
   encode(message: MsgJoinSwapShareAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1982,6 +2021,9 @@ function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOu
 }
 
 export const MsgJoinSwapShareAmountOutResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse",
+  aminoType: "osmosis/gamm/join-swap-share-amount-out-response",
+
   encode(message: MsgJoinSwapShareAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenInAmount !== "") {
       writer.uint32(10).string(message.tokenInAmount);
@@ -2067,6 +2109,9 @@ function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
 }
 
 export const MsgExitSwapShareAmountIn = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
+  aminoType: "osmosis/gamm/exit-swap-share-amount-in",
+
   encode(message: MsgExitSwapShareAmountIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -2208,6 +2253,9 @@ function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInR
 }
 
 export const MsgExitSwapShareAmountInResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse",
+  aminoType: "osmosis/gamm/exit-swap-share-amount-in-response",
+
   encode(message: MsgExitSwapShareAmountInResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tokenOutAmount !== "") {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -2292,6 +2340,9 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
 }
 
 export const MsgExitSwapExternAmountOut = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
+  aminoType: "osmosis/gamm/exit-swap-extern-amount-out",
+
   encode(message: MsgExitSwapExternAmountOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -2418,6 +2469,9 @@ function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmount
 }
 
 export const MsgExitSwapExternAmountOutResponse = {
+  typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse",
+  aminoType: "osmosis/gamm/exit-swap-extern-amount-out-response",
+
   encode(message: MsgExitSwapExternAmountOutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.shareInAmount !== "") {
       writer.uint32(10).string(message.shareInAmount);

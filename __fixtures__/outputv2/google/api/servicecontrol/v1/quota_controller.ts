@@ -271,7 +271,7 @@ export interface QuotaOperation_LabelsEntry {
   value: string;
 }
 export interface QuotaOperation_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaOperation_LabelsEntryAmino {
@@ -279,7 +279,7 @@ export interface QuotaOperation_LabelsEntryAmino {
   value: string;
 }
 export interface QuotaOperation_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+  type: string;
   value: QuotaOperation_LabelsEntryAmino;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
@@ -580,6 +580,8 @@ function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
 }
 
 export const AllocateQuotaRequest = {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
+
   encode(message: AllocateQuotaRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -793,6 +795,8 @@ function createBaseQuotaOperation(): QuotaOperation {
 }
 
 export const QuotaOperation = {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
+
   encode(message: QuotaOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -1019,6 +1023,8 @@ function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
 }
 
 export const AllocateQuotaResponse = {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
+
   encode(message: AllocateQuotaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
@@ -1181,6 +1187,8 @@ function createBaseQuotaError(): QuotaError {
 }
 
 export const QuotaError = {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaError",
+
   encode(message: QuotaError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);

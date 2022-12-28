@@ -65,6 +65,8 @@ function createBaseGenesisDeployment(): GenesisDeployment {
 }
 
 export const GenesisDeployment = {
+  typeUrl: "/akash.deployment.v1beta2.GenesisDeployment",
+
   encode(message: GenesisDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -180,6 +182,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/akash.deployment.v1beta2.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deployments) {
       GenesisDeployment.encode(v!, writer.uint32(10).fork()).ldelim();

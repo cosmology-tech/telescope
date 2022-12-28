@@ -263,6 +263,8 @@ function createBaseQueryTotalUnclaimedRequest(): QueryTotalUnclaimedRequest {
 }
 
 export const QueryTotalUnclaimedRequest = {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
+
   encode(_: QueryTotalUnclaimedRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -326,6 +328,8 @@ function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
 }
 
 export const QueryTotalUnclaimedResponse = {
+  typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
+
   encode(message: QueryTotalUnclaimedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -423,6 +427,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/evmos.claims.v1.QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -486,6 +492,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/evmos.claims.v1.QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -567,6 +575,8 @@ function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
 }
 
 export const QueryClaimsRecordsRequest = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
+
   encode(message: QueryClaimsRecordsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -649,6 +659,8 @@ function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
 }
 
 export const QueryClaimsRecordsResponse = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
+
   encode(message: QueryClaimsRecordsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.claims) {
       ClaimsRecordAddress.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -763,6 +775,8 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
 }
 
 export const QueryClaimsRecordRequest = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
+
   encode(message: QueryClaimsRecordRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -845,6 +859,8 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
 }
 
 export const QueryClaimsRecordResponse = {
+  typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
+
   encode(message: QueryClaimsRecordResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);

@@ -411,6 +411,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  typeUrl: "/google.api.Service",
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);

@@ -618,7 +618,7 @@ export interface Metric_LabelsEntry {
   value: string;
 }
 export interface Metric_LabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Metric_LabelsEntryAmino {
@@ -626,7 +626,7 @@ export interface Metric_LabelsEntryAmino {
   value: string;
 }
 export interface Metric_LabelsEntryAminoType {
-  type: "/google.api.undefined";
+  type: string;
   value: Metric_LabelsEntryAmino;
 }
 export interface Metric_LabelsEntrySDKType {
@@ -710,6 +710,8 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 }
 
 export const MetricDescriptor = {
+  typeUrl: "/google.api.MetricDescriptor",
+
   encode(message: MetricDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -979,6 +981,8 @@ function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor
 }
 
 export const MetricDescriptor_MetricDescriptorMetadata = {
+  typeUrl: "/google.api.MetricDescriptorMetadata",
+
   encode(message: MetricDescriptor_MetricDescriptorMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.launchStage !== 0) {
       writer.uint32(8).int32(message.launchStage);
@@ -1188,6 +1192,8 @@ function createBaseMetric(): Metric {
 }
 
 export const Metric = {
+  typeUrl: "/google.api.Metric",
+
   encode(message: Metric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(26).string(message.type);

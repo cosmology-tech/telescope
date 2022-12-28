@@ -652,7 +652,7 @@ export interface QuotaBucket_DimensionsEntry {
   value: string;
 }
 export interface QuotaBucket_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaBucket_DimensionsEntryAmino {
@@ -660,7 +660,7 @@ export interface QuotaBucket_DimensionsEntryAmino {
   value: string;
 }
 export interface QuotaBucket_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+  type: string;
   value: QuotaBucket_DimensionsEntryAmino;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
@@ -774,7 +774,7 @@ export interface QuotaOverride_DimensionsEntry {
   value: string;
 }
 export interface QuotaOverride_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntryAmino {
@@ -782,7 +782,7 @@ export interface QuotaOverride_DimensionsEntryAmino {
   value: string;
 }
 export interface QuotaOverride_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+  type: string;
   value: QuotaOverride_DimensionsEntryAmino;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
@@ -999,7 +999,7 @@ export interface AdminQuotaPolicy_DimensionsEntry {
   value: string;
 }
 export interface AdminQuotaPolicy_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
@@ -1007,7 +1007,7 @@ export interface AdminQuotaPolicy_DimensionsEntryAmino {
   value: string;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+  type: string;
   value: AdminQuotaPolicy_DimensionsEntryAmino;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
@@ -1218,6 +1218,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service",
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1353,6 +1355,8 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
+
   encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1620,6 +1624,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
+
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -1724,6 +1730,8 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
 }
 
 export const ConsumerQuotaMetric = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
+
   encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1918,6 +1926,8 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
 }
 
 export const ConsumerQuotaLimit = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
+
   encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2194,6 +2204,8 @@ function createBaseQuotaBucket(): QuotaBucket {
 }
 
 export const QuotaBucket = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
+
   encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.effectiveLimit.isZero()) {
       writer.uint32(8).int64(message.effectiveLimit);
@@ -2503,6 +2515,8 @@ function createBaseQuotaOverride(): QuotaOverride {
 }
 
 export const QuotaOverride = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
+
   encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2711,6 +2725,8 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
 }
 
 export const OverrideInlineSource = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
+
   encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2912,6 +2928,8 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
 }
 
 export const AdminQuotaPolicy = {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
+
   encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3121,6 +3139,8 @@ function createBaseServiceIdentity(): ServiceIdentity {
 }
 
 export const ServiceIdentity = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
+
   encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);

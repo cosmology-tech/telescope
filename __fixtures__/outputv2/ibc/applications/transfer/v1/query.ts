@@ -196,6 +196,9 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
 }
 
 export const QueryDenomTraceRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
+  aminoType: "cosmos-sdk/QueryDenomTraceRequest",
+
   encode(message: QueryDenomTraceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -277,6 +280,9 @@ function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
 }
 
 export const QueryDenomTraceResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse",
+  aminoType: "cosmos-sdk/QueryDenomTraceResponse",
+
   encode(message: QueryDenomTraceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denomTrace !== undefined) {
       DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
@@ -358,6 +364,9 @@ function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
 }
 
 export const QueryDenomTracesRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest",
+  aminoType: "cosmos-sdk/QueryDenomTracesRequest",
+
   encode(message: QueryDenomTracesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -440,6 +449,9 @@ function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
 }
 
 export const QueryDenomTracesResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse",
+  aminoType: "cosmos-sdk/QueryDenomTracesResponse",
+
   encode(message: QueryDenomTracesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denomTraces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -552,6 +564,9 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -615,6 +630,9 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();

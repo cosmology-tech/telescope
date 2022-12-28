@@ -173,6 +173,8 @@ function createBaseOrderID(): OrderID {
 }
 
 export const OrderID = {
+  typeUrl: "/akash.market.v1beta2.OrderID",
+
   encode(message: OrderID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -302,6 +304,8 @@ function createBaseOrder(): Order {
 }
 
 export const Order = {
+  typeUrl: "/akash.market.v1beta2.Order",
+
   encode(message: Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
@@ -432,6 +436,8 @@ function createBaseOrderFilters(): OrderFilters {
 }
 
 export const OrderFilters = {
+  typeUrl: "/akash.market.v1beta2.OrderFilters",
+
   encode(message: OrderFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);

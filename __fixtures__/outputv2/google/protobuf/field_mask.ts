@@ -634,6 +634,8 @@ function createBaseFieldMask(): FieldMask {
 }
 
 export const FieldMask = {
+  typeUrl: "/google.protobuf.FieldMask",
+
   encode(message: FieldMask, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.paths) {
       writer.uint32(10).string(v!);

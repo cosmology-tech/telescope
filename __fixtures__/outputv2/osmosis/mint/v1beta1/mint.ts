@@ -264,6 +264,9 @@ function createBaseMinter(): Minter {
 }
 
 export const Minter = {
+  typeUrl: "/osmosis.mint.v1beta1.Minter",
+  aminoType: "osmosis/mint/minter",
+
   encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.epochProvisions !== "") {
       writer.uint32(10).string(message.epochProvisions);
@@ -346,6 +349,9 @@ function createBaseWeightedAddress(): WeightedAddress {
 }
 
 export const WeightedAddress = {
+  typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
+  aminoType: "osmosis/mint/weighted-address",
+
   encode(message: WeightedAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -445,6 +451,9 @@ function createBaseDistributionProportions(): DistributionProportions {
 }
 
 export const DistributionProportions = {
+  typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
+  aminoType: "osmosis/mint/distribution-proportions",
+
   encode(message: DistributionProportions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.staking !== "") {
       writer.uint32(10).string(message.staking);
@@ -578,6 +587,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/osmosis.mint.v1beta1.Params",
+  aminoType: "osmosis/mint/params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);

@@ -11,7 +11,7 @@ export interface LogEntry_LabelsEntry {
   value: string;
 }
 export interface LogEntry_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
@@ -19,7 +19,7 @@ export interface LogEntry_LabelsEntryAmino {
   value: string;
 }
 export interface LogEntry_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+  type: string;
   value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
@@ -465,6 +465,8 @@ function createBaseLogEntry(): LogEntry {
 }
 
 export const LogEntry = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+
   encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
@@ -766,6 +768,8 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 
 export const LogEntryOperation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
+
   encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -894,6 +898,8 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 }
 
 export const LogEntrySourceLocation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
+
   encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);

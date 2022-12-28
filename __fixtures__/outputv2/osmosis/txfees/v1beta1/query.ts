@@ -165,6 +165,9 @@ function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
 }
 
 export const QueryFeeTokensRequest = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensRequest",
+  aminoType: "osmosis/txfees/query-fee-tokens-request",
+
   encode(_: QueryFeeTokensRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -228,6 +231,9 @@ function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
 }
 
 export const QueryFeeTokensResponse = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensResponse",
+  aminoType: "osmosis/txfees/query-fee-tokens-response",
+
   encode(message: QueryFeeTokensResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.feeTokens) {
       FeeToken.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -327,6 +333,9 @@ function createBaseQueryDenomSpotPriceRequest(): QueryDenomSpotPriceRequest {
 }
 
 export const QueryDenomSpotPriceRequest = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceRequest",
+  aminoType: "osmosis/txfees/query-denom-spot-price-request",
+
   encode(message: QueryDenomSpotPriceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -409,6 +418,9 @@ function createBaseQueryDenomSpotPriceResponse(): QueryDenomSpotPriceResponse {
 }
 
 export const QueryDenomSpotPriceResponse = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceResponse",
+  aminoType: "osmosis/txfees/query-denom-spot-price-response",
+
   encode(message: QueryDenomSpotPriceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
@@ -505,6 +517,9 @@ function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
 }
 
 export const QueryDenomPoolIdRequest = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdRequest",
+  aminoType: "osmosis/txfees/query-denom-pool-id-request",
+
   encode(message: QueryDenomPoolIdRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -586,6 +601,9 @@ function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
 }
 
 export const QueryDenomPoolIdResponse = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse",
+  aminoType: "osmosis/txfees/query-denom-pool-id-response",
+
   encode(message: QueryDenomPoolIdResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolID.isZero()) {
       writer.uint32(8).uint64(message.poolID);
@@ -665,6 +683,9 @@ function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
 }
 
 export const QueryBaseDenomRequest = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomRequest",
+  aminoType: "osmosis/txfees/query-base-denom-request",
+
   encode(_: QueryBaseDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -728,6 +749,9 @@ function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
 }
 
 export const QueryBaseDenomResponse = {
+  typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomResponse",
+  aminoType: "osmosis/txfees/query-base-denom-response",
+
   encode(message: QueryBaseDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseDenom !== "") {
       writer.uint32(10).string(message.baseDenom);
