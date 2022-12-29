@@ -10,8 +10,8 @@ import {
 
 import {
     CreateProtoTypeOptions,
+    SymbolNames,
     getFieldAminoTypeReference,
-    getMessageName,
     getTSAminoType
 } from '../../types';
 import { getAminoTypeName } from '../../amino';
@@ -60,7 +60,8 @@ export const createAminoType = (
     options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
 ) => {
     const oneOfs = getOneOfs(proto);
-    const MsgName = getMessageName(name, options);
+
+    const MsgName = SymbolNames.Msg(name, options);
 
     // scalar amino types!
     let declaration: t.ExportNamedDeclaration | undefined;
@@ -163,8 +164,8 @@ export const createAminoTypeType = (
     proto: ProtoType,
     options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
 ) => {
-    const MsgName = getMessageName(name, options)
-    const AminoMsgName = MsgName + 'Type';
+    const MsgName = SymbolNames.Msg(name, options);
+    const AminoMsgName = SymbolNames.AminoType(name, options);
 
     const aminoName = getAminoTypeName(context, context.ref.proto, proto);
     const typ = aminoName ? t.tsLiteralType(

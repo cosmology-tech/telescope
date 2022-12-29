@@ -11,10 +11,10 @@ import {
 
 import {
     CreateProtoTypeOptions,
+    SymbolNames,
     createProtoTypeOptionsDefaults,
     getDefaultTSTypeFromProtoType,
     getFieldTypeReference,
-    getMessageName,
     getTSType
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
@@ -103,7 +103,7 @@ export const createProtoType = (
         }
     }
 
-    const MsgName = getMessageName(name, options);
+    const MsgName = SymbolNames.Msg(name, options);
 
     const fields = [];
 
@@ -215,8 +215,7 @@ export const createProtoTypeType = (
     proto: ProtoType,
     options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
 ) => {
-    const MsgName = getMessageName(name, options);
-    const ProtoMsgName = MsgName + 'ProtoType';
+    const ProtoMsgName = SymbolNames.ProtoType(name, options);
 
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const typ = typeUrl ? t.tsLiteralType(

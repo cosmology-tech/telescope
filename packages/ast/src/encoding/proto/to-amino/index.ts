@@ -247,7 +247,7 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
     );
 };
 
-export const toAminoTypeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     let varName = 'message';
     const fields = toAminoJSONMethodFields(context, name, proto);
 
@@ -264,7 +264,7 @@ export const toAminoTypeMethod = (context: ProtoParseContext, name: string, prot
     // body
 
     return objectMethod('method',
-        t.identifier('toAminoType'),
+        t.identifier('toAminoMsg'),
         [
             identifier(
                 varName,

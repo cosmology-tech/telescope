@@ -11,7 +11,7 @@ export interface CreateProtoTypeOptions {
     typeNameSuffix?: string;
 }
 export declare const createProtoTypeOptionsDefaults: CreateProtoTypeOptions;
-export declare const getMessageName: (name: string, options?: CreateProtoTypeOptions) => string;
+export declare const getSymbolName: (name: string, options?: CreateProtoTypeOptions) => string;
 export declare const getFieldTypeReference: (context: ProtoParseContext, field: ProtoField, options?: CreateProtoTypeOptions) => {
     ast: any;
     isTypeCastableAnyType?: undefined;

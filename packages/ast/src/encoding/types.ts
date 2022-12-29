@@ -23,13 +23,36 @@ export const createProtoTypeOptionsDefaults: CreateProtoTypeOptions = {
     useOriginalCase: false
 };
 
-export const getMessageName = (
+const getSymbolName = (
     name: string,
     options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
-) => {
-    const MsgName = [options.typeNamePrefix, name, options.typeNameSuffix].filter(Boolean).join('');
-    return MsgName;
-}
+) => [options.typeNamePrefix, name, options.typeNameSuffix].filter(Boolean).join('');
+
+export const SymbolNames = {
+    Msg: (
+        name: string,
+        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    ) => getSymbolName(name, options),
+
+    ProtoType: (
+        name: string,
+        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    ) => {
+        const MsgName = getSymbolName(name, options);
+        const ProtoMsgName = MsgName + 'ProtoType';
+        return ProtoMsgName;
+    },
+
+    AminoType: (
+        name: string,
+        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    ) => {
+        const MsgName = SymbolNames.Msg(name, options);
+        const AminoMsgName = MsgName + 'Type';
+        return AminoMsgName;
+    }
+
+};
 
 export const getFieldTypeReference = (
     context: ProtoParseContext,
@@ -51,7 +74,7 @@ export const getFieldTypeReference = (
         typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
         const propName = getProtoFieldTypeName(context, field);
-        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Msg(propName, options);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -130,7 +153,7 @@ export const getFieldAminoTypeReference = (
     } else {
         const propName = getProtoFieldTypeName(context, field);
         // enums don't need suffixes, etc.
-        const MsgName = field.parsedType?.type === 'Enum' ? propName : getMessageName(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Msg(propName, options);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -214,7 +237,7 @@ export const getTSTypeFromGoogleType = (
 ) => {
 
     const identifier = (str) => {
-        return t.identifier(getMessageName(str, options));
+        return t.identifier(SymbolNames.Msg(str, options));
     };
 
     switch (type) {

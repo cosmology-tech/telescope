@@ -240,7 +240,7 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
     )
 };
 
-export const fromAminoTypeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     const fields = fromAminoJSONMethodFields(context, name, proto);
     let varName = 'object';
     if (!fields.length) {
@@ -254,7 +254,7 @@ export const fromAminoTypeMethod = (context: ProtoParseContext, name: string, pr
     const body: t.Statement[] = [];
 
     return objectMethod('method',
-        t.identifier('fromAminoType'),
+        t.identifier('fromAminoMsg'),
         [
             identifier(varName,
                 t.tsTypeAnnotation(

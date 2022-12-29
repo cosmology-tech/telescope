@@ -3,7 +3,7 @@ import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
 
-export const fromProtoTypeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     let varName = 'message';
 
     const AminoTypeName =
@@ -15,7 +15,7 @@ export const fromProtoTypeMethod = (context: ProtoParseContext, name: string, pr
     // body
 
     return objectMethod('method',
-        t.identifier('fromProtoType'),
+        t.identifier('fromProtoMsg'),
         [
             identifier(
                 varName,
