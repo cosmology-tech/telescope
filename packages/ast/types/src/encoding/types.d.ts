@@ -5,12 +5,12 @@ export declare const getFieldNames: (field: ProtoField) => {
     propName: string;
     origName: string;
 };
-export declare type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoType' | 'ProtoType';
+export declare type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoMsg' | 'ProtoMsg';
 export declare const SymbolNames: {
     Msg: (name: string) => string;
     SDKType: (name: string) => string;
-    ProtoType: (name: string) => string;
-    AminoType: (name: string) => string;
+    ProtoMsg: (name: string) => string;
+    AminoMsg: (name: string) => string;
     Amino: (name: string) => string;
 };
 export declare const getFieldTypeReference: (context: ProtoParseContext, field: ProtoField, type?: TelescopeBaseTypes) => {
