@@ -85,6 +85,25 @@ exports[`Duration 1`] = `
 
   toAmino(message: Duration): DurationAmino {
     return (message.seconds.toInt() * 1_000_000_000 + message.nanos).toString();
+  },
+
+  fromAminoMsg(object: DurationAminoMsg): Duration {
+    return Duration.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DurationProtoMsg): Duration {
+    return Duration.decode(message.value);
+  },
+
+  toProto(message: Duration): Uint8Array {
+    return Duration.encode(message).finish();
+  },
+
+  toProtoMsg(message: Duration): DurationProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Duration",
+      value: Duration.encode(message).finish()
+    };
   }
 
 };"
@@ -177,6 +196,32 @@ exports[`Height 1`] = `
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: HeightAminoMsg): Height {
+    return Height.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Height): HeightAminoMsg {
+    return {
+      type: "cosmos-sdk/Height",
+      value: Height.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeightProtoMsg): Height {
+    return Height.decode(message.value);
+  },
+
+  toProto(message: Height): Uint8Array {
+    return Height.encode(message).finish();
+  },
+
+  toProtoMsg(message: Height): HeightProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.Height",
+      value: Height.encode(message).finish()
+    };
   }
 
 };"
@@ -350,6 +395,32 @@ exports[`MsgCreateValidator 1`] = `
     } : undefined;
     obj.value = message.value ? Coin.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateValidatorAminoMsg): MsgCreateValidator {
+    return MsgCreateValidator.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateValidator): MsgCreateValidatorAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateValidator",
+      value: MsgCreateValidator.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateValidatorProtoMsg): MsgCreateValidator {
+    return MsgCreateValidator.decode(message.value);
+  },
+
+  toProto(message: MsgCreateValidator): Uint8Array {
+    return MsgCreateValidator.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateValidator): MsgCreateValidatorProtoMsg {
+    return {
+      typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator",
+      value: MsgCreateValidator.encode(message).finish()
+    };
   }
 
 };"
@@ -457,6 +528,32 @@ exports[`MsgStoreCode 1`] = `
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgStoreCodeAminoMsg): MsgStoreCode {
+    return MsgStoreCode.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgStoreCode): MsgStoreCodeAminoMsg {
+    return {
+      type: "wasm/MsgStoreCode",
+      value: MsgStoreCode.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgStoreCodeProtoMsg): MsgStoreCode {
+    return MsgStoreCode.decode(message.value);
+  },
+
+  toProto(message: MsgStoreCode): Uint8Array {
+    return MsgStoreCode.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgStoreCode): MsgStoreCodeProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode",
+      value: MsgStoreCode.encode(message).finish()
+    };
   }
 
 };"
@@ -582,6 +679,32 @@ exports[`MsgSubmitProposal 1`] = `
 
     obj.proposer = message.proposer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitProposal",
+      value: MsgSubmitProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposal): Uint8Array {
+    return MsgSubmitProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposal): MsgSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
+      value: MsgSubmitProposal.encode(message).finish()
+    };
   }
 
 };"
@@ -749,6 +872,32 @@ exports[`MsgTransfer 1`] = `
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {
+    return MsgTransfer.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgTransfer): MsgTransferAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTransfer",
+      value: MsgTransfer.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
+    return MsgTransfer.decode(message.value);
+  },
+
+  toProto(message: MsgTransfer): Uint8Array {
+    return MsgTransfer.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTransfer): MsgTransferProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+      value: MsgTransfer.encode(message).finish()
+    };
   }
 
 };"

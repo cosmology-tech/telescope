@@ -141,6 +141,32 @@ exports[`PoolI objects 1`] = `
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolsResponseAminoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolsResponse): QueryPoolsResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-response",
+      value: QueryPoolsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolsResponseProtoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolsResponse): Uint8Array {
+    return QueryPoolsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolsResponse): QueryPoolsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
+      value: QueryPoolsResponse.encode(message).finish()
+    };
   }
 
 };"
