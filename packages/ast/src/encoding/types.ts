@@ -17,7 +17,8 @@ export type TelescopeBaseTypes = 'Msg' |
     'SDKType' |
     'Amino' |
     'AminoMsg' |
-    'ProtoMsg';
+    'ProtoMsg' |
+    'Encoded';
 
 
 const getSymbolName = (
@@ -37,6 +38,9 @@ const getSymbolName = (
             break;
         case 'SDKType':
             typeNameSuffix = 'SDKType';
+            break;
+        case 'Encoded':
+            typeNameSuffix = 'Encoded';
             break;
         case 'Msg':
         default:
@@ -64,6 +68,10 @@ export const SymbolNames = {
     Amino: (
         name: string
     ) => getSymbolName(name, 'Amino'),
+
+    Encoded: (
+        name: string
+    ) => getSymbolName(name, 'Encoded'),
 
 };
 
@@ -96,6 +104,9 @@ export const getFieldTypeReference = (
     const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
     const isArray = field.rule === 'repeated';
     const isBaseType = type === 'Msg';
+    const isEncodedType = type === 'ProtoMsg';
+
+    // MARKED AS NOT DRY (symbols)
     let symbols = null;
     if (implementsAcceptsAny && lookupInterface) {
         symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
@@ -105,7 +116,10 @@ export const getFieldTypeReference = (
     }
 
     // cast Any types!
-    const isTypeCastable = isAnyType && lookupInterface && implementsAcceptsAny && symbols && isBaseType;
+    const isAnyInterface = isAnyType && lookupInterface && implementsAcceptsAny && symbols;
+    const isTypeCastable = isAnyInterface && isBaseType;
+    const isProtoTypeCastable = isAnyInterface && isEncodedType;
+
     const isNonArrayNullableType = field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&
         context.pluginValue('prototypes.allowUndefinedTypes');
@@ -132,6 +146,17 @@ export const getFieldTypeReference = (
                 )
             }
         }
+    } else if (isProtoTypeCastable) {
+        const tp = symbols.map(a => t.tsTypeReference(t.identifier(
+            SymbolNames.ProtoMsg(a.readAs)
+        )));
+        tp.push(typ);
+
+        if (!isArray) {
+            tp.push(t.tsUndefinedKeyword())
+        }
+        ast = t.tsUnionType(tp)
+
     } else if (isNonArrayNullableType) {
         // regular types!
         ast = t.tsUnionType(

@@ -292,6 +292,9 @@ const addDerivativeTypesToImports = (
 
             const SDKTypeObject = removeProtoPrefix(appendSuffix(obj, 'SDKType'));
             const AminoTypeObject = removeProtoPrefix(appendSuffix(obj, 'Amino'));
+
+            // shit they all won't have this one...
+            const EncodedTypeObject = removeProtoPrefix(appendSuffix(obj, 'ProtoMsg'));
             // const AminoTypeUrlObject = removeProtoPrefix(appendSuffix(obj, 'AminoType'));
 
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
@@ -303,6 +306,7 @@ const addDerivativeTypesToImports = (
 
                 if (context.options.aminoEncoding.useRecursiveV2encoding) {
                     arr.push(AminoTypeObject);
+                    arr.push(EncodedTypeObject);
                     // arr.push(AminoTypeUrlObject);
                 }
                 if (context.options.useSDKTypes) {

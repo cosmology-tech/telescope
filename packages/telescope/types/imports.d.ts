@@ -1,3 +1,4 @@
+import { GenericParseContext } from '@osmonauts/ast';
 import { ServiceMutation } from '@osmonauts/types';
 import { ImportHash, ImportObj } from './types';
 import { TelescopeParseContext } from './build';

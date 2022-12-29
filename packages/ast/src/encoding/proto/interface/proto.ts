@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField } from '@osmonauts/types';
+import { ProtoType, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
 import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 
@@ -17,6 +17,7 @@ import {
     getTSType
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
+import { TraversalSymbols } from '@osmonauts/proto-parser';
 
 const getProtoField = (
     context: ProtoParseContext,
@@ -245,6 +246,126 @@ export const createProtoTypeType = (
                 false
             )
         ])));
+};
+
+interface FieldInfo {
+    isOneOf: boolean,
+    field: ProtoField,
+    name: string,
+    lookupInterface: string,
+    isAnyType: boolean,
+    symbols: TraversalSymbols[]
+}
+
+export const createProtoInterfaceEncodedType = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
+
+    const MsgName = SymbolNames.Msg(name);
+    const EncodedMsgName = SymbolNames.Encoded(name);
+
+    const oneOfs = getOneOfs(proto);
+
+    const implementsAcceptsAny = context.pluginValue('interfaces.enabled');
+
+    const fieldsWithInfo: FieldInfo[] = Object.keys(proto.fields)
+        .reduce((m, fieldName) => {
+            const isOneOf = oneOfs.includes(fieldName);
+            const field = proto.fields[fieldName];
+
+            const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
+            const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
+
+            // MARKED AS NOT DRY (symbols)
+            let symbols = null;
+            if (implementsAcceptsAny && lookupInterface) {
+                symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
+                if (!symbols.length && context.options.logLevel >= TelescopeLogLevel.Warn) {
+                    console.warn(`[WARN] ${lookupInterface} is accepted but not implemented`);
+                }
+            }
+
+            const isAnyInterface = isAnyType && lookupInterface && implementsAcceptsAny && symbols;
+            if (!isAnyInterface) return m;
+            // ONLY INTERFACES!
+
+            return [...m, {
+                isOneOf,
+                field,
+                name: fieldName,
+                lookupInterface,
+                isAnyType,
+                symbols
+            }];
+        }, []).filter(Boolean);
+
+    if (!fieldsWithInfo.length) return;
+
+    const interfaceFields = fieldsWithInfo.map(fieldInfo => {
+        return t.tsLiteralType(
+            t.stringLiteral(fieldInfo.name)
+        );
+    });
+
+    const fields = fieldsWithInfo.map(fieldsInfo => {
+        const {
+            field,
+            isOneOf,
+            name: fieldName
+        } = fieldsInfo;
+
+        let optional = false;
+        const protoField = getProtoField(context, field, 'ProtoMsg');
+
+        const propSig = tsPropertySignature(
+            t.identifier(fieldName),
+            t.tsTypeAnnotation(
+                protoField
+            ),
+            optional || getFieldOptionality(context, field, isOneOf)
+        );
+
+        const comments = [];
+        if (field.comment) {
+            comments.push(
+                makeCommentBlock(field.comment)
+            );
+        }
+        if (field.options?.deprecated) {
+            comments.push(
+                makeCommentBlock('@deprecated')
+            );
+        }
+        if (comments.length) {
+            propSig.leadingComments = comments;
+        }
+
+        return propSig;
+    });
+
+    return t.exportNamedDeclaration(t.tsTypeAliasDeclaration(
+        t.identifier(EncodedMsgName),
+        null,
+        t.tsIntersectionType([
+            t.tsTypeReference(
+                t.identifier('Omit'),
+                t.tsTypeParameterInstantiation([
+                    t.tsTypeReference(
+                        t.identifier(MsgName)
+                    ),
+                    interfaceFields.length > 1 ? t.tsUnionType([
+                        ...interfaceFields
+                    ]) : interfaceFields[0]
+                ])
+            ),
+            t.tsTypeLiteral([
+                ...fields
+            ])
+        ])
+    ));
+
 };
 
 
