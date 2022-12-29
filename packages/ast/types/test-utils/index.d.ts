@@ -30,6 +30,10 @@ export declare const defaultTelescopeOptions: {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -37,6 +41,8 @@ export declare const defaultTelescopeOptions: {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];

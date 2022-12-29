@@ -7,7 +7,7 @@ export interface Attribute {
   key: string;
   value: string;
 }
-export interface AttributeProtoType {
+export interface AttributeProtoMsg {
   typeUrl: "/akash.base.v1beta2.Attribute";
   value: Uint8Array;
 }
@@ -17,7 +17,7 @@ export interface AttributeAmino {
   key: string;
   value: string;
 }
-export interface AttributeAminoType {
+export interface AttributeAminoMsg {
   type: "/akash.base.v1beta2.Attribute";
   value: AttributeAmino;
 }
@@ -41,7 +41,7 @@ export interface SignedBy {
   /** any_of at least of of the keys from the list must have signed attributes */
   anyOf: string[];
 }
-export interface SignedByProtoType {
+export interface SignedByProtoMsg {
   typeUrl: "/akash.base.v1beta2.SignedBy";
   value: Uint8Array;
 }
@@ -59,7 +59,7 @@ export interface SignedByAmino {
   /** any_of at least of of the keys from the list must have signed attributes */
   any_of: string[];
 }
-export interface SignedByAminoType {
+export interface SignedByAminoMsg {
   type: "/akash.base.v1beta2.SignedBy";
   value: SignedByAmino;
 }
@@ -83,7 +83,7 @@ export interface PlacementRequirements {
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
 }
-export interface PlacementRequirementsProtoType {
+export interface PlacementRequirementsProtoMsg {
   typeUrl: "/akash.base.v1beta2.PlacementRequirements";
   value: Uint8Array;
 }
@@ -96,7 +96,7 @@ export interface PlacementRequirementsAmino {
   /** Attribute list of attributes tenant expects from the provider */
   attributes: AttributeAmino[];
 }
-export interface PlacementRequirementsAminoType {
+export interface PlacementRequirementsAminoMsg {
   type: "/akash.base.v1beta2.PlacementRequirements";
   value: PlacementRequirementsAmino;
 }
@@ -115,6 +115,8 @@ function createBaseAttribute(): Attribute {
 }
 
 export const Attribute = {
+  typeUrl: "/akash.base.v1beta2.Attribute",
+
   encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -200,6 +202,25 @@ export const Attribute = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeAminoMsg): Attribute {
+    return Attribute.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeProtoMsg): Attribute {
+    return Attribute.decode(message.value);
+  },
+
+  toProto(message: Attribute): Uint8Array {
+    return Attribute.encode(message).finish();
+  },
+
+  toProtoMsg(message: Attribute): AttributeProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.Attribute",
+      value: Attribute.encode(message).finish()
+    };
   }
 
 };
@@ -212,6 +233,8 @@ function createBaseSignedBy(): SignedBy {
 }
 
 export const SignedBy = {
+  typeUrl: "/akash.base.v1beta2.SignedBy",
+
   encode(message: SignedBy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allOf) {
       writer.uint32(10).string(v!);
@@ -330,6 +353,25 @@ export const SignedBy = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SignedByAminoMsg): SignedBy {
+    return SignedBy.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SignedByProtoMsg): SignedBy {
+    return SignedBy.decode(message.value);
+  },
+
+  toProto(message: SignedBy): Uint8Array {
+    return SignedBy.encode(message).finish();
+  },
+
+  toProtoMsg(message: SignedBy): SignedByProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.SignedBy",
+      value: SignedBy.encode(message).finish()
+    };
   }
 
 };
@@ -342,6 +384,8 @@ function createBasePlacementRequirements(): PlacementRequirements {
 }
 
 export const PlacementRequirements = {
+  typeUrl: "/akash.base.v1beta2.PlacementRequirements",
+
   encode(message: PlacementRequirements, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedBy !== undefined) {
       SignedBy.encode(message.signedBy, writer.uint32(10).fork()).ldelim();
@@ -445,6 +489,25 @@ export const PlacementRequirements = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
+    return PlacementRequirements.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PlacementRequirementsProtoMsg): PlacementRequirements {
+    return PlacementRequirements.decode(message.value);
+  },
+
+  toProto(message: PlacementRequirements): Uint8Array {
+    return PlacementRequirements.encode(message).finish();
+  },
+
+  toProtoMsg(message: PlacementRequirements): PlacementRequirementsProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.PlacementRequirements",
+      value: PlacementRequirements.encode(message).finish()
+    };
   }
 
 };

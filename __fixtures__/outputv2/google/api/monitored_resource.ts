@@ -57,7 +57,7 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
-export interface MonitoredResourceDescriptorProtoType {
+export interface MonitoredResourceDescriptorProtoMsg {
   typeUrl: "/google.api.MonitoredResourceDescriptor";
   value: Uint8Array;
 }
@@ -114,7 +114,7 @@ export interface MonitoredResourceDescriptorAmino {
   /** Optional. The launch stage of the monitored resource definition. */
   launch_stage: LaunchStage;
 }
-export interface MonitoredResourceDescriptorAminoType {
+export interface MonitoredResourceDescriptorAminoMsg {
   type: "/google.api.MonitoredResourceDescriptor";
   value: MonitoredResourceDescriptorAmino;
 }
@@ -142,16 +142,16 @@ export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
 }
-export interface MonitoredResource_LabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+export interface MonitoredResource_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MonitoredResource_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface MonitoredResource_LabelsEntryAminoType {
-  type: "/google.api.undefined";
+export interface MonitoredResource_LabelsEntryAminoMsg {
+  type: string;
   value: MonitoredResource_LabelsEntryAmino;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
@@ -191,7 +191,7 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
-export interface MonitoredResourceProtoType {
+export interface MonitoredResourceProtoMsg {
   typeUrl: "/google.api.MonitoredResource";
   value: Uint8Array;
 }
@@ -228,7 +228,7 @@ export interface MonitoredResourceAmino {
     [key: string]: string;
   };
 }
-export interface MonitoredResourceAminoType {
+export interface MonitoredResourceAminoMsg {
   type: "/google.api.MonitoredResource";
   value: MonitoredResourceAmino;
 }
@@ -258,16 +258,16 @@ export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
 }
-export interface MonitoredResourceMetadata_UserLabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface MonitoredResourceMetadata_UserLabelsEntryAminoType {
-  type: "/google.api.undefined";
+export interface MonitoredResourceMetadata_UserLabelsEntryAminoMsg {
+  type: string;
   value: MonitoredResourceMetadata_UserLabelsEntryAmino;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
@@ -303,7 +303,7 @@ export interface MonitoredResourceMetadata {
     [key: string]: string;
   };
 }
-export interface MonitoredResourceMetadataProtoType {
+export interface MonitoredResourceMetadataProtoMsg {
   typeUrl: "/google.api.MonitoredResourceMetadata";
   value: Uint8Array;
 }
@@ -336,7 +336,7 @@ export interface MonitoredResourceMetadataAmino {
     [key: string]: string;
   };
 }
-export interface MonitoredResourceMetadataAminoType {
+export interface MonitoredResourceMetadataAminoMsg {
   type: "/google.api.MonitoredResourceMetadata";
   value: MonitoredResourceMetadataAmino;
 }
@@ -368,6 +368,8 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 }
 
 export const MonitoredResourceDescriptor = {
+  typeUrl: "/google.api.MonitoredResourceDescriptor",
+
   encode(message: MonitoredResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(42).string(message.name);
@@ -531,6 +533,25 @@ export const MonitoredResourceDescriptor = {
 
     obj.launch_stage = message.launchStage;
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
+    return MonitoredResourceDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg): MonitoredResourceDescriptor {
+    return MonitoredResourceDescriptor.decode(message.value);
+  },
+
+  toProto(message: MonitoredResourceDescriptor): Uint8Array {
+    return MonitoredResourceDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.MonitoredResourceDescriptor",
+      value: MonitoredResourceDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -628,6 +649,18 @@ export const MonitoredResource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
+    return MonitoredResource_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg): MonitoredResource_LabelsEntry {
+    return MonitoredResource_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: MonitoredResource_LabelsEntry): Uint8Array {
+    return MonitoredResource_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -640,6 +673,8 @@ function createBaseMonitoredResource(): MonitoredResource {
 }
 
 export const MonitoredResource = {
+  typeUrl: "/google.api.MonitoredResource",
+
   encode(message: MonitoredResource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -776,6 +811,25 @@ export const MonitoredResource = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoredResourceAminoMsg): MonitoredResource {
+    return MonitoredResource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoredResourceProtoMsg): MonitoredResource {
+    return MonitoredResource.decode(message.value);
+  },
+
+  toProto(message: MonitoredResource): Uint8Array {
+    return MonitoredResource.encode(message).finish();
+  },
+
+  toProtoMsg(message: MonitoredResource): MonitoredResourceProtoMsg {
+    return {
+      typeUrl: "/google.api.MonitoredResource",
+      value: MonitoredResource.encode(message).finish()
+    };
   }
 
 };
@@ -873,6 +927,18 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
+    return MonitoredResourceMetadata_UserLabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg): MonitoredResourceMetadata_UserLabelsEntry {
+    return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value);
+  },
+
+  toProto(message: MonitoredResourceMetadata_UserLabelsEntry): Uint8Array {
+    return MonitoredResourceMetadata_UserLabelsEntry.encode(message).finish();
   }
 
 };
@@ -885,6 +951,8 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
 }
 
 export const MonitoredResourceMetadata = {
+  typeUrl: "/google.api.MonitoredResourceMetadata",
+
   encode(message: MonitoredResourceMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
@@ -1021,6 +1089,25 @@ export const MonitoredResourceMetadata = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoredResourceMetadataAminoMsg): MonitoredResourceMetadata {
+    return MonitoredResourceMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoredResourceMetadataProtoMsg): MonitoredResourceMetadata {
+    return MonitoredResourceMetadata.decode(message.value);
+  },
+
+  toProto(message: MonitoredResourceMetadata): Uint8Array {
+    return MonitoredResourceMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: MonitoredResourceMetadata): MonitoredResourceMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.MonitoredResourceMetadata",
+      value: MonitoredResourceMetadata.encode(message).finish()
+    };
   }
 
 };

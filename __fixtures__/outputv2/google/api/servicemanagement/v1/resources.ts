@@ -333,7 +333,7 @@ export interface ManagedService {
   /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
-export interface ManagedServiceProtoType {
+export interface ManagedServiceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService";
   value: Uint8Array;
 }
@@ -352,7 +352,7 @@ export interface ManagedServiceAmino {
   /** ID of the project that produces and owns this service. */
   producer_project_id: string;
 }
-export interface ManagedServiceAminoType {
+export interface ManagedServiceAminoMsg {
   type: "/google.api.servicemanagement.v1.ManagedService";
   value: ManagedServiceAmino;
 }
@@ -383,7 +383,7 @@ export interface OperationMetadata {
   /** The start time of the operation. */
   startTime?: Date;
 }
-export interface OperationMetadataProtoType {
+export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
   value: Uint8Array;
 }
@@ -405,7 +405,7 @@ export interface OperationMetadataAmino {
   /** The start time of the operation. */
   start_time?: Date;
 }
-export interface OperationMetadataAminoType {
+export interface OperationMetadataAminoMsg {
   type: "/google.api.servicemanagement.v1.OperationMetadata";
   value: OperationMetadataAmino;
 }
@@ -426,7 +426,7 @@ export interface OperationMetadata_Step {
   /** The status code. */
   status: OperationMetadata_Status;
 }
-export interface OperationMetadata_StepProtoType {
+export interface OperationMetadata_StepProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Step";
   value: Uint8Array;
 }
@@ -439,7 +439,7 @@ export interface OperationMetadata_StepAmino {
   /** The status code. */
   status: OperationMetadata_Status;
 }
-export interface OperationMetadata_StepAminoType {
+export interface OperationMetadata_StepAminoMsg {
   type: "/google.api.servicemanagement.v1.Step";
   value: OperationMetadata_StepAmino;
 }
@@ -461,7 +461,7 @@ export interface Diagnostic {
   /** Message describing the error or warning. */
   message: string;
 }
-export interface DiagnosticProtoType {
+export interface DiagnosticProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
   value: Uint8Array;
 }
@@ -477,7 +477,7 @@ export interface DiagnosticAmino {
   /** Message describing the error or warning. */
   message: string;
 }
-export interface DiagnosticAminoType {
+export interface DiagnosticAminoMsg {
   type: "/google.api.servicemanagement.v1.Diagnostic";
   value: DiagnosticAmino;
 }
@@ -507,7 +507,7 @@ export interface ConfigSource {
    */
   files: ConfigFile[];
 }
-export interface ConfigSourceProtoType {
+export interface ConfigSourceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
   value: Uint8Array;
 }
@@ -530,7 +530,7 @@ export interface ConfigSourceAmino {
    */
   files: ConfigFileAmino[];
 }
-export interface ConfigSourceAminoType {
+export interface ConfigSourceAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigSource";
   value: ConfigSourceAmino;
 }
@@ -555,7 +555,7 @@ export interface ConfigFile {
   /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
-export interface ConfigFileProtoType {
+export interface ConfigFileProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
   value: Uint8Array;
 }
@@ -571,7 +571,7 @@ export interface ConfigFileAmino {
   /** The type of configuration file this represents. */
   file_type: ConfigFile_FileType;
 }
-export interface ConfigFileAminoType {
+export interface ConfigFileAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigFile";
   value: ConfigFileAmino;
 }
@@ -591,7 +591,7 @@ export interface ConfigRef {
    */
   name: string;
 }
-export interface ConfigRefProtoType {
+export interface ConfigRefProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
   value: Uint8Array;
 }
@@ -604,7 +604,7 @@ export interface ConfigRefAmino {
    */
   name: string;
 }
-export interface ConfigRefAminoType {
+export interface ConfigRefAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigRef";
   value: ConfigRefAmino;
 }
@@ -630,7 +630,7 @@ export interface ChangeReport {
    */
   configChanges: ConfigChange[];
 }
-export interface ChangeReportProtoType {
+export interface ChangeReportProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
   value: Uint8Array;
 }
@@ -651,7 +651,7 @@ export interface ChangeReportAmino {
    */
   config_changes: ConfigChangeAmino[];
 }
-export interface ChangeReportAminoType {
+export interface ChangeReportAminoMsg {
   type: "/google.api.servicemanagement.v1.ChangeReport";
   value: ChangeReportAmino;
 }
@@ -712,7 +712,7 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
-export interface RolloutProtoType {
+export interface RolloutProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Rollout";
   value: Uint8Array;
 }
@@ -763,7 +763,7 @@ export interface RolloutAmino {
   /** The name of the service associated with this Rollout. */
   service_name: string;
 }
-export interface RolloutAminoType {
+export interface RolloutAminoMsg {
   type: "/google.api.servicemanagement.v1.Rollout";
   value: RolloutAmino;
 }
@@ -786,16 +786,16 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
 }
-export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoType {
-  typeUrl: "/google.api.servicemanagement.v1.undefined";
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
   key: string;
   value: number;
 }
-export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoType {
-  type: "/google.api.servicemanagement.v1.undefined";
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg {
+  type: string;
   value: Rollout_TrafficPercentStrategy_PercentagesEntryAmino;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
@@ -845,7 +845,7 @@ export interface Rollout_TrafficPercentStrategy {
     [key: string]: number;
   };
 }
-export interface Rollout_TrafficPercentStrategyProtoType {
+export interface Rollout_TrafficPercentStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
   value: Uint8Array;
 }
@@ -892,7 +892,7 @@ export interface Rollout_TrafficPercentStrategyAmino {
     [key: string]: number;
   };
 }
-export interface Rollout_TrafficPercentStrategyAminoType {
+export interface Rollout_TrafficPercentStrategyAminoMsg {
   type: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
   value: Rollout_TrafficPercentStrategyAmino;
 }
@@ -940,7 +940,7 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
-export interface Rollout_DeleteServiceStrategyProtoType {
+export interface Rollout_DeleteServiceStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
   value: Uint8Array;
 }
@@ -950,7 +950,7 @@ export interface Rollout_DeleteServiceStrategyProtoType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategyAmino {}
-export interface Rollout_DeleteServiceStrategyAminoType {
+export interface Rollout_DeleteServiceStrategyAminoMsg {
   type: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
   value: Rollout_DeleteServiceStrategyAmino;
 }
@@ -969,6 +969,8 @@ function createBaseManagedService(): ManagedService {
 }
 
 export const ManagedService = {
+  typeUrl: "/google.api.servicemanagement.v1.ManagedService",
+
   encode(message: ManagedService, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(18).string(message.serviceName);
@@ -1054,6 +1056,25 @@ export const ManagedService = {
     obj.service_name = message.serviceName;
     obj.producer_project_id = message.producerProjectId;
     return obj;
+  },
+
+  fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
+    return ManagedService.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ManagedServiceProtoMsg): ManagedService {
+    return ManagedService.decode(message.value);
+  },
+
+  toProto(message: ManagedService): Uint8Array {
+    return ManagedService.encode(message).finish();
+  },
+
+  toProtoMsg(message: ManagedService): ManagedServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.ManagedService",
+      value: ManagedService.encode(message).finish()
+    };
   }
 
 };
@@ -1068,6 +1089,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata",
+
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -1216,6 +1239,25 @@ export const OperationMetadata = {
     obj.progress_percentage = message.progressPercentage;
     obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
+    return OperationMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
+  },
+
+  toProto(message: OperationMetadata): Uint8Array {
+    return OperationMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.OperationMetadata",
+      value: OperationMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1228,6 +1270,8 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
 }
 
 export const OperationMetadata_Step = {
+  typeUrl: "/google.api.servicemanagement.v1.Step",
+
   encode(message: OperationMetadata_Step, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
@@ -1313,6 +1357,25 @@ export const OperationMetadata_Step = {
     obj.description = message.description;
     obj.status = message.status;
     return obj;
+  },
+
+  fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
+    return OperationMetadata_Step.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationMetadata_StepProtoMsg): OperationMetadata_Step {
+    return OperationMetadata_Step.decode(message.value);
+  },
+
+  toProto(message: OperationMetadata_Step): Uint8Array {
+    return OperationMetadata_Step.encode(message).finish();
+  },
+
+  toProtoMsg(message: OperationMetadata_Step): OperationMetadata_StepProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.Step",
+      value: OperationMetadata_Step.encode(message).finish()
+    };
   }
 
 };
@@ -1326,6 +1389,8 @@ function createBaseDiagnostic(): Diagnostic {
 }
 
 export const Diagnostic = {
+  typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
+
   encode(message: Diagnostic, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.location !== "") {
       writer.uint32(10).string(message.location);
@@ -1426,6 +1491,25 @@ export const Diagnostic = {
     obj.kind = message.kind;
     obj.message = message.message;
     return obj;
+  },
+
+  fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
+    return Diagnostic.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DiagnosticProtoMsg): Diagnostic {
+    return Diagnostic.decode(message.value);
+  },
+
+  toProto(message: Diagnostic): Uint8Array {
+    return Diagnostic.encode(message).finish();
+  },
+
+  toProtoMsg(message: Diagnostic): DiagnosticProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
+      value: Diagnostic.encode(message).finish()
+    };
   }
 
 };
@@ -1438,6 +1522,8 @@ function createBaseConfigSource(): ConfigSource {
 }
 
 export const ConfigSource = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
+
   encode(message: ConfigSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(42).string(message.id);
@@ -1541,6 +1627,25 @@ export const ConfigSource = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigSourceAminoMsg): ConfigSource {
+    return ConfigSource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConfigSourceProtoMsg): ConfigSource {
+    return ConfigSource.decode(message.value);
+  },
+
+  toProto(message: ConfigSource): Uint8Array {
+    return ConfigSource.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConfigSource): ConfigSourceProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
+      value: ConfigSource.encode(message).finish()
+    };
   }
 
 };
@@ -1554,6 +1659,8 @@ function createBaseConfigFile(): ConfigFile {
 }
 
 export const ConfigFile = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
+
   encode(message: ConfigFile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.filePath !== "") {
       writer.uint32(10).string(message.filePath);
@@ -1654,6 +1761,25 @@ export const ConfigFile = {
     obj.file_contents = message.fileContents;
     obj.file_type = message.fileType;
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
+    return ConfigFile.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConfigFileProtoMsg): ConfigFile {
+    return ConfigFile.decode(message.value);
+  },
+
+  toProto(message: ConfigFile): Uint8Array {
+    return ConfigFile.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConfigFile): ConfigFileProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
+      value: ConfigFile.encode(message).finish()
+    };
   }
 
 };
@@ -1665,6 +1791,8 @@ function createBaseConfigRef(): ConfigRef {
 }
 
 export const ConfigRef = {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
+
   encode(message: ConfigRef, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1735,6 +1863,25 @@ export const ConfigRef = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
+    return ConfigRef.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConfigRefProtoMsg): ConfigRef {
+    return ConfigRef.decode(message.value);
+  },
+
+  toProto(message: ConfigRef): Uint8Array {
+    return ConfigRef.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConfigRef): ConfigRefProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
+      value: ConfigRef.encode(message).finish()
+    };
   }
 
 };
@@ -1746,6 +1893,8 @@ function createBaseChangeReport(): ChangeReport {
 }
 
 export const ChangeReport = {
+  typeUrl: "/google.api.servicemanagement.v1.ChangeReport",
+
   encode(message: ChangeReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.configChanges) {
       ConfigChange.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1834,6 +1983,25 @@ export const ChangeReport = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ChangeReportAminoMsg): ChangeReport {
+    return ChangeReport.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ChangeReportProtoMsg): ChangeReport {
+    return ChangeReport.decode(message.value);
+  },
+
+  toProto(message: ChangeReport): Uint8Array {
+    return ChangeReport.encode(message).finish();
+  },
+
+  toProtoMsg(message: ChangeReport): ChangeReportProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.ChangeReport",
+      value: ChangeReport.encode(message).finish()
+    };
   }
 
 };
@@ -1851,6 +2019,8 @@ function createBaseRollout(): Rollout {
 }
 
 export const Rollout = {
+  typeUrl: "/google.api.servicemanagement.v1.Rollout",
+
   encode(message: Rollout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rolloutId !== "") {
       writer.uint32(10).string(message.rolloutId);
@@ -2011,6 +2181,25 @@ export const Rollout = {
     obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
     obj.service_name = message.serviceName;
     return obj;
+  },
+
+  fromAminoMsg(object: RolloutAminoMsg): Rollout {
+    return Rollout.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RolloutProtoMsg): Rollout {
+    return Rollout.decode(message.value);
+  },
+
+  toProto(message: Rollout): Uint8Array {
+    return Rollout.encode(message).finish();
+  },
+
+  toProtoMsg(message: Rollout): RolloutProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.Rollout",
+      value: Rollout.encode(message).finish()
+    };
   }
 
 };
@@ -2108,6 +2297,18 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    return Rollout_TrafficPercentStrategy_PercentagesEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    return Rollout_TrafficPercentStrategy_PercentagesEntry.decode(message.value);
+  },
+
+  toProto(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Uint8Array {
+    return Rollout_TrafficPercentStrategy_PercentagesEntry.encode(message).finish();
   }
 
 };
@@ -2119,6 +2320,8 @@ function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrat
 }
 
 export const Rollout_TrafficPercentStrategy = {
+  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy",
+
   encode(message: Rollout_TrafficPercentStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
       Rollout_TrafficPercentStrategy_PercentagesEntry.encode({
@@ -2240,6 +2443,25 @@ export const Rollout_TrafficPercentStrategy = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Rollout_TrafficPercentStrategyAminoMsg): Rollout_TrafficPercentStrategy {
+    return Rollout_TrafficPercentStrategy.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Rollout_TrafficPercentStrategyProtoMsg): Rollout_TrafficPercentStrategy {
+    return Rollout_TrafficPercentStrategy.decode(message.value);
+  },
+
+  toProto(message: Rollout_TrafficPercentStrategy): Uint8Array {
+    return Rollout_TrafficPercentStrategy.encode(message).finish();
+  },
+
+  toProtoMsg(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy",
+      value: Rollout_TrafficPercentStrategy.encode(message).finish()
+    };
   }
 
 };
@@ -2249,6 +2471,8 @@ function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrateg
 }
 
 export const Rollout_DeleteServiceStrategy = {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy",
+
   encode(_: Rollout_DeleteServiceStrategy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2301,6 +2525,25 @@ export const Rollout_DeleteServiceStrategy = {
   toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: Rollout_DeleteServiceStrategyAminoMsg): Rollout_DeleteServiceStrategy {
+    return Rollout_DeleteServiceStrategy.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Rollout_DeleteServiceStrategyProtoMsg): Rollout_DeleteServiceStrategy {
+    return Rollout_DeleteServiceStrategy.decode(message.value);
+  },
+
+  toProto(message: Rollout_DeleteServiceStrategy): Uint8Array {
+    return Rollout_DeleteServiceStrategy.encode(message).finish();
+  },
+
+  toProtoMsg(message: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyProtoMsg {
+    return {
+      typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy",
+      value: Rollout_DeleteServiceStrategy.encode(message).finish()
+    };
   }
 
 };

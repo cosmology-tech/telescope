@@ -7,7 +7,7 @@ export interface GenesisState {
   /** gen_txs defines the genesis transactions. */
   genTxs: Uint8Array[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.genutil.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -17,7 +17,7 @@ export interface GenesisStateAmino {
   /** gen_txs defines the genesis transactions. */
   gen_txs: Uint8Array[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
@@ -34,6 +34,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.genutil.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.genTxs) {
       writer.uint32(10).bytes(v!);
@@ -122,6 +125,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.genutil.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

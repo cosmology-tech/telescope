@@ -54,7 +54,7 @@ export interface Gauge {
   /** distributed_coins are coins that have been distributed already */
   distributedCoins: Coin[];
 }
-export interface GaugeProtoType {
+export interface GaugeProtoMsg {
   typeUrl: "/osmosis.incentives.Gauge";
   value: Uint8Array;
 }
@@ -107,7 +107,7 @@ export interface GaugeAmino {
   /** distributed_coins are coins that have been distributed already */
   distributed_coins: CoinAmino[];
 }
-export interface GaugeAminoType {
+export interface GaugeAminoMsg {
   type: "osmosis/incentives/gauge";
   value: GaugeAmino;
 }
@@ -131,7 +131,7 @@ export interface LockableDurationsInfo {
   /** List of incentivised durations that gauges will pay out to */
   lockableDurations: Duration[];
 }
-export interface LockableDurationsInfoProtoType {
+export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.incentives.LockableDurationsInfo";
   value: Uint8Array;
 }
@@ -139,7 +139,7 @@ export interface LockableDurationsInfoAmino {
   /** List of incentivised durations that gauges will pay out to */
   lockable_durations: DurationAmino[];
 }
-export interface LockableDurationsInfoAminoType {
+export interface LockableDurationsInfoAminoMsg {
   type: "osmosis/incentives/lockable-durations-info";
   value: LockableDurationsInfoAmino;
 }
@@ -161,6 +161,9 @@ function createBaseGauge(): Gauge {
 }
 
 export const Gauge = {
+  typeUrl: "/osmosis.incentives.Gauge",
+  aminoType: "osmosis/incentives/gauge",
+
   encode(message: Gauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -372,6 +375,32 @@ export const Gauge = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GaugeAminoMsg): Gauge {
+    return Gauge.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Gauge): GaugeAminoMsg {
+    return {
+      type: "osmosis/incentives/gauge",
+      value: Gauge.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GaugeProtoMsg): Gauge {
+    return Gauge.decode(message.value);
+  },
+
+  toProto(message: Gauge): Uint8Array {
+    return Gauge.encode(message).finish();
+  },
+
+  toProtoMsg(message: Gauge): GaugeProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.Gauge",
+      value: Gauge.encode(message).finish()
+    };
   }
 
 };
@@ -383,6 +412,9 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 
 export const LockableDurationsInfo = {
+  typeUrl: "/osmosis.incentives.LockableDurationsInfo",
+  aminoType: "osmosis/incentives/lockable-durations-info",
+
   encode(message: LockableDurationsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -471,6 +503,32 @@ export const LockableDurationsInfo = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
+    return LockableDurationsInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
+    return {
+      type: "osmosis/incentives/lockable-durations-info",
+      value: LockableDurationsInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
+    return LockableDurationsInfo.decode(message.value);
+  },
+
+  toProto(message: LockableDurationsInfo): Uint8Array {
+    return LockableDurationsInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: LockableDurationsInfo): LockableDurationsInfoProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.LockableDurationsInfo",
+      value: LockableDurationsInfo.encode(message).finish()
+    };
   }
 
 };

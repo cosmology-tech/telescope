@@ -169,7 +169,7 @@ export interface Service {
   /** @deprecated */
   configVersion?: UInt32Value;
 }
-export interface ServiceProtoType {
+export interface ServiceProtoMsg {
   typeUrl: "/google.api.Service";
   value: Uint8Array;
 }
@@ -321,7 +321,7 @@ export interface ServiceAmino {
   /** @deprecated */
   config_version?: UInt32ValueAmino;
 }
-export interface ServiceAminoType {
+export interface ServiceAminoMsg {
   type: "/google.api.Service";
   value: ServiceAmino;
 }
@@ -411,6 +411,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  typeUrl: "/google.api.Service",
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -955,6 +957,25 @@ export const Service = {
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
     obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
+  },
+
+  toProto(message: Service): Uint8Array {
+    return Service.encode(message).finish();
+  },
+
+  toProtoMsg(message: Service): ServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.Service",
+      value: Service.encode(message).finish()
+    };
   }
 
 };

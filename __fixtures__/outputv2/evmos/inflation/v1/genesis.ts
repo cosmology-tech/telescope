@@ -20,7 +20,7 @@ export interface GenesisState {
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: Long;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.inflation.v1.GenesisState";
   value: Uint8Array;
 }
@@ -42,7 +42,7 @@ export interface GenesisStateAmino {
   /** number of epochs that have passed while inflation is disabled */
   skipped_epochs: string;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/evmos.inflation.v1.GenesisState";
   value: GenesisStateAmino;
 }
@@ -70,7 +70,7 @@ export interface Params {
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/evmos.inflation.v1.Params";
   value: Uint8Array;
 }
@@ -89,7 +89,7 @@ export interface ParamsAmino {
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enable_inflation: boolean;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/evmos.inflation.v1.Params";
   value: ParamsAmino;
 }
@@ -113,6 +113,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/evmos.inflation.v1.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -243,6 +245,25 @@ export const GenesisState = {
     obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
     obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -257,6 +278,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/evmos.inflation.v1.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
@@ -372,6 +395,25 @@ export const Params = {
     obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
     obj.enable_inflation = message.enableInflation;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

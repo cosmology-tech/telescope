@@ -10,7 +10,7 @@ export interface GenesisState {
   params?: Params;
   factoryDenoms: GenesisDenom[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface GenesisStateAmino {
   params?: ParamsAmino;
   factory_denoms: GenesisDenomAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/tokenfactory/genesis-state";
   value: GenesisStateAmino;
 }
@@ -41,7 +41,7 @@ export interface GenesisDenom {
   denom: string;
   authorityMetadata?: DenomAuthorityMetadata;
 }
-export interface GenesisDenomProtoType {
+export interface GenesisDenomProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom";
   value: Uint8Array;
 }
@@ -55,7 +55,7 @@ export interface GenesisDenomAmino {
   denom: string;
   authority_metadata?: DenomAuthorityMetadataAmino;
 }
-export interface GenesisDenomAminoType {
+export interface GenesisDenomAminoMsg {
   type: "osmosis/tokenfactory/genesis-denom";
   value: GenesisDenomAmino;
 }
@@ -78,6 +78,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisState",
+  aminoType: "osmosis/tokenfactory/genesis-state",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -181,6 +184,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -193,6 +222,9 @@ function createBaseGenesisDenom(): GenesisDenom {
 }
 
 export const GenesisDenom = {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom",
+  aminoType: "osmosis/tokenfactory/genesis-denom",
+
   encode(message: GenesisDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -278,6 +310,32 @@ export const GenesisDenom = {
     obj.denom = message.denom;
     obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisDenomAminoMsg): GenesisDenom {
+    return GenesisDenom.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisDenom): GenesisDenomAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/genesis-denom",
+      value: GenesisDenom.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisDenomProtoMsg): GenesisDenom {
+    return GenesisDenom.decode(message.value);
+  },
+
+  toProto(message: GenesisDenom): Uint8Array {
+    return GenesisDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisDenom): GenesisDenomProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom",
+      value: GenesisDenom.encode(message).finish()
+    };
   }
 
 };

@@ -12,7 +12,7 @@ export interface Params {
    */
   minimumRiskFactor: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.superfluid.Params";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface ParamsAmino {
    */
   minimum_risk_factor: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/params";
   value: ParamsAmino;
 }
@@ -44,6 +44,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/osmosis.superfluid.Params",
+  aminoType: "osmosis/params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minimumRiskFactor !== "") {
       writer.uint32(10).string(message.minimumRiskFactor);
@@ -114,6 +117,32 @@ export const Params = {
     const obj: any = {};
     obj.minimum_risk_factor = message.minimumRiskFactor;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

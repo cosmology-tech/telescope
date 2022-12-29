@@ -16,7 +16,7 @@ export interface GenesisState {
   /** the sequence for the next generated channel identifier */
   nextChannelSequence: Long;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.channel.v1.GenesisState";
   value: Uint8Array;
 }
@@ -34,7 +34,7 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated channel identifier */
   next_channel_sequence: string;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
@@ -60,7 +60,7 @@ export interface PacketSequence {
   channelId: string;
   sequence: Long;
 }
-export interface PacketSequenceProtoType {
+export interface PacketSequenceProtoMsg {
   typeUrl: "/ibc.core.channel.v1.PacketSequence";
   value: Uint8Array;
 }
@@ -74,7 +74,7 @@ export interface PacketSequenceAmino {
   channel_id: string;
   sequence: string;
 }
-export interface PacketSequenceAminoType {
+export interface PacketSequenceAminoMsg {
   type: "cosmos-sdk/PacketSequence";
   value: PacketSequenceAmino;
 }
@@ -103,6 +103,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/ibc.core.channel.v1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -386,6 +389,32 @@ export const GenesisState = {
 
     obj.next_channel_sequence = message.nextChannelSequence ? message.nextChannelSequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -399,6 +428,9 @@ function createBasePacketSequence(): PacketSequence {
 }
 
 export const PacketSequence = {
+  typeUrl: "/ibc.core.channel.v1.PacketSequence",
+  aminoType: "cosmos-sdk/PacketSequence",
+
   encode(message: PacketSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -499,6 +531,32 @@ export const PacketSequence = {
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketSequenceAminoMsg): PacketSequence {
+    return PacketSequence.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PacketSequence): PacketSequenceAminoMsg {
+    return {
+      type: "cosmos-sdk/PacketSequence",
+      value: PacketSequence.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketSequenceProtoMsg): PacketSequence {
+    return PacketSequence.decode(message.value);
+  },
+
+  toProto(message: PacketSequence): Uint8Array {
+    return PacketSequence.encode(message).finish();
+  },
+
+  toProtoMsg(message: PacketSequence): PacketSequenceProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.PacketSequence",
+      value: PacketSequence.encode(message).finish()
+    };
   }
 
 };

@@ -46,7 +46,7 @@ export interface TwapRecord {
    */
   lastErrorTime?: Date;
 }
-export interface TwapRecordProtoType {
+export interface TwapRecordProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
   value: Uint8Array;
 }
@@ -94,7 +94,7 @@ export interface TwapRecordAmino {
    */
   last_error_time?: Date;
 }
-export interface TwapRecordAminoType {
+export interface TwapRecordAminoMsg {
   type: "osmosis/twap/twap-record";
   value: TwapRecordAmino;
 }
@@ -137,6 +137,9 @@ function createBaseTwapRecord(): TwapRecord {
 }
 
 export const TwapRecord = {
+  typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
+  aminoType: "osmosis/twap/twap-record",
+
   encode(message: TwapRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -342,6 +345,32 @@ export const TwapRecord = {
     obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
     obj.last_error_time = message.lastErrorTime ? Timestamp.toAmino(message.lastErrorTime) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: TwapRecordAminoMsg): TwapRecord {
+    return TwapRecord.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TwapRecord): TwapRecordAminoMsg {
+    return {
+      type: "osmosis/twap/twap-record",
+      value: TwapRecord.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TwapRecordProtoMsg): TwapRecord {
+    return TwapRecord.decode(message.value);
+  },
+
+  toProto(message: TwapRecord): Uint8Array {
+    return TwapRecord.encode(message).finish();
+  },
+
+  toProtoMsg(message: TwapRecord): TwapRecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
+      value: TwapRecord.encode(message).finish()
+    };
   }
 
 };

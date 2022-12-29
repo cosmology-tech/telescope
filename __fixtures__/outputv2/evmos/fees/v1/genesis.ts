@@ -11,7 +11,7 @@ export interface GenesisState {
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.fees.v1.GenesisState";
   value: Uint8Array;
 }
@@ -24,7 +24,7 @@ export interface GenesisStateAmino {
   /** active registered contracts */
   dev_fee_infos: DevFeeInfoAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/evmos.fees.v1.GenesisState";
   value: GenesisStateAmino;
 }
@@ -61,7 +61,7 @@ export interface Params {
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/evmos.fees.v1.Params";
   value: Uint8Array;
 }
@@ -92,7 +92,7 @@ export interface ParamsAmino {
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   min_gas_price: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/evmos.fees.v1.Params";
   value: ParamsAmino;
 }
@@ -114,6 +114,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/evmos.fees.v1.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -217,6 +219,25 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -232,6 +253,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/evmos.fees.v1.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enableFees === true) {
       writer.uint32(8).bool(message.enableFees);
@@ -362,6 +385,25 @@ export const Params = {
     obj.addr_derivation_cost_create = message.addrDerivationCostCreate ? message.addrDerivationCostCreate.toString() : undefined;
     obj.min_gas_price = message.minGasPrice;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

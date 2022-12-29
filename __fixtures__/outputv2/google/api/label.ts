@@ -64,7 +64,7 @@ export interface LabelDescriptor {
   /** A human-readable description for the label. */
   description: string;
 }
-export interface LabelDescriptorProtoType {
+export interface LabelDescriptorProtoMsg {
   typeUrl: "/google.api.LabelDescriptor";
   value: Uint8Array;
 }
@@ -80,7 +80,7 @@ export interface LabelDescriptorAmino {
   /** A human-readable description for the label. */
   description: string;
 }
-export interface LabelDescriptorAminoType {
+export interface LabelDescriptorAminoMsg {
   type: "/google.api.LabelDescriptor";
   value: LabelDescriptorAmino;
 }
@@ -101,6 +101,8 @@ function createBaseLabelDescriptor(): LabelDescriptor {
 }
 
 export const LabelDescriptor = {
+  typeUrl: "/google.api.LabelDescriptor",
+
   encode(message: LabelDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -201,6 +203,25 @@ export const LabelDescriptor = {
     obj.value_type = message.valueType;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
+    return LabelDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
+    return LabelDescriptor.decode(message.value);
+  },
+
+  toProto(message: LabelDescriptor): Uint8Array {
+    return LabelDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: LabelDescriptor): LabelDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.LabelDescriptor",
+      value: LabelDescriptor.encode(message).finish()
+    };
   }
 
 };

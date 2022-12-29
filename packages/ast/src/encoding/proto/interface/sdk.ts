@@ -1,8 +1,8 @@
+import * as t from '@babel/types';
 import { ProtoEnum, ProtoType } from '@osmonauts/types';
 import { ProtoParseContext } from '../../context';
-import { createProtoEnum } from '../enums';
 import { createProtoType } from './proto';
-import * as t from '@babel/types';
+import { SymbolNames } from '../../types';
 
 export const createSDKType = (
     context: ProtoParseContext,
@@ -13,10 +13,7 @@ export const createSDKType = (
         context,
         name,
         proto,
-        {
-            useOriginalCase: true,
-            typeNameSuffix: 'SDKType',
-        }
+        'SDKType'
     );
 };
 
@@ -28,7 +25,7 @@ export const createEnumSDKType = (
     return t.exportNamedDeclaration(
         t.variableDeclaration('const', [
             t.variableDeclarator(
-                t.identifier(name + 'SDKType'),
+                t.identifier(SymbolNames.SDKType(name)),
                 t.identifier(name)
             )
         ])

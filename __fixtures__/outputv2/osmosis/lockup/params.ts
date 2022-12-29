@@ -4,14 +4,14 @@ export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.lockup.Params";
   value: Uint8Array;
 }
 export interface ParamsAmino {
   force_unlock_allowed_addresses: string[];
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/lockup/params";
   value: ParamsAmino;
 }
@@ -26,6 +26,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/osmosis.lockup.Params",
+  aminoType: "osmosis/lockup/params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.forceUnlockAllowedAddresses) {
       writer.uint32(10).string(v!);
@@ -114,6 +117,32 @@ export const Params = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/lockup/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

@@ -10,11 +10,10 @@ import {
 } from '../types';
 
 import {
-    CreateProtoTypeOptions,
-    createProtoTypeOptionsDefaults,
+    SymbolNames,
     getDefaultTSTypeFromProtoType,
     getFieldTypeReference,
-    getMessageName,
+    TelescopeBaseTypes,
     getTSType
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
@@ -22,11 +21,11 @@ import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
 const getProtoField = (
     context: ProtoParseContext,
     field: ProtoField,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    type: TelescopeBaseTypes = 'Msg'
 ) => {
     let ast: any = null;
 
-    const fieldRef = getFieldTypeReference(context, field, options);
+    const fieldRef = getFieldTypeReference(context, field, type);
     ast = fieldRef.ast
     const isTypeCastableAnyType = fieldRef.isTypeCastableAnyType
 
@@ -67,7 +66,7 @@ export const createProtoType = (
     context: ProtoParseContext,
     name: string,
     proto: ProtoType,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    type: TelescopeBaseTypes = 'Msg'
 ) => {
     const oneOfs = getOneOfs(proto);
 
@@ -103,7 +102,7 @@ export const createProtoType = (
         }
     }
 
-    const MsgName = getMessageName(name, options);
+    const MsgName = SymbolNames[type](name);
 
     const fields = [];
 
@@ -148,12 +147,13 @@ export const createProtoType = (
             optional = true;
         }
 
-        let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+        // let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+        let fieldNameWithCase = type === 'SDKType' ? orig : fieldName;
 
         const propSig = tsPropertySignature(
             t.identifier(fieldNameWithCase),
             t.tsTypeAnnotation(
-                getProtoField(context, field, options)
+                getProtoField(context, field, type)
             ),
             optional || getFieldOptionality(context, field, isOneOf)
         );
@@ -162,7 +162,7 @@ export const createProtoType = (
         if (
             field.comment &&
             // no comment for derivative types
-            (!options.typeNamePrefix && !options.typeNameSuffix)
+            (type === 'Msg')
         ) {
             comments.push(
                 makeCommentBlock(field.comment)
@@ -212,11 +212,9 @@ export const createProtoType = (
 export const createProtoTypeType = (
     context: ProtoParseContext,
     name: string,
-    proto: ProtoType,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    proto: ProtoType
 ) => {
-    const MsgName = getMessageName(name, options);
-    const ProtoMsgName = MsgName + 'ProtoType';
+    const ProtoMsgName = SymbolNames.ProtoMsg(name);
 
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const typ = typeUrl ? t.tsLiteralType(

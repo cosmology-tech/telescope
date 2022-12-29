@@ -22,7 +22,7 @@ export interface BIP44Params {
   /** address_index is used as child index in BIP32 derivation */
   addressIndex: number;
 }
-export interface BIP44ParamsProtoType {
+export interface BIP44ParamsProtoMsg {
   typeUrl: "/cosmos.crypto.hd.v1.BIP44Params";
   value: Uint8Array;
 }
@@ -47,7 +47,7 @@ export interface BIP44ParamsAmino {
   /** address_index is used as child index in BIP32 derivation */
   address_index: number;
 }
-export interface BIP44ParamsAminoType {
+export interface BIP44ParamsAminoMsg {
   type: "cosmos-sdk/BIP44Params";
   value: BIP44ParamsAmino;
 }
@@ -72,6 +72,9 @@ function createBaseBIP44Params(): BIP44Params {
 }
 
 export const BIP44Params = {
+  typeUrl: "/cosmos.crypto.hd.v1.BIP44Params",
+  aminoType: "cosmos-sdk/BIP44Params",
+
   encode(message: BIP44Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.purpose !== 0) {
       writer.uint32(8).uint32(message.purpose);
@@ -202,6 +205,32 @@ export const BIP44Params = {
     obj.change = message.change;
     obj.address_index = message.addressIndex;
     return obj;
+  },
+
+  fromAminoMsg(object: BIP44ParamsAminoMsg): BIP44Params {
+    return BIP44Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BIP44Params): BIP44ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/BIP44Params",
+      value: BIP44Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BIP44ParamsProtoMsg): BIP44Params {
+    return BIP44Params.decode(message.value);
+  },
+
+  toProto(message: BIP44Params): Uint8Array {
+    return BIP44Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: BIP44Params): BIP44ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.hd.v1.BIP44Params",
+      value: BIP44Params.encode(message).finish()
+    };
   }
 
 };

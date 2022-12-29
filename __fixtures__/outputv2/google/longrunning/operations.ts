@@ -47,7 +47,7 @@ export interface Operation {
    */
   response?: Any;
 }
-export interface OperationProtoType {
+export interface OperationProtoMsg {
   typeUrl: "/google.longrunning.Operation";
   value: Uint8Array;
 }
@@ -94,7 +94,7 @@ export interface OperationAmino {
    */
   response?: AnyAmino;
 }
-export interface OperationAminoType {
+export interface OperationAminoMsg {
   type: "/google.longrunning.Operation";
   value: OperationAmino;
 }
@@ -116,7 +116,7 @@ export interface GetOperationRequest {
   /** The name of the operation resource. */
   name: string;
 }
-export interface GetOperationRequestProtoType {
+export interface GetOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.GetOperationRequest";
   value: Uint8Array;
 }
@@ -126,7 +126,7 @@ export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
   name: string;
 }
-export interface GetOperationRequestAminoType {
+export interface GetOperationRequestAminoMsg {
   type: "/google.longrunning.GetOperationRequest";
   value: GetOperationRequestAmino;
 }
@@ -150,7 +150,7 @@ export interface ListOperationsRequest {
   /** The standard list page token. */
   pageToken: string;
 }
-export interface ListOperationsRequestProtoType {
+export interface ListOperationsRequestProtoMsg {
   typeUrl: "/google.longrunning.ListOperationsRequest";
   value: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface ListOperationsRequestAmino {
   /** The standard list page token. */
   page_token: string;
 }
-export interface ListOperationsRequestAminoType {
+export interface ListOperationsRequestAminoMsg {
   type: "/google.longrunning.ListOperationsRequest";
   value: ListOperationsRequestAmino;
 }
@@ -190,7 +190,7 @@ export interface ListOperationsResponse {
   /** The standard List next-page token. */
   nextPageToken: string;
 }
-export interface ListOperationsResponseProtoType {
+export interface ListOperationsResponseProtoMsg {
   typeUrl: "/google.longrunning.ListOperationsResponse";
   value: Uint8Array;
 }
@@ -203,7 +203,7 @@ export interface ListOperationsResponseAmino {
   /** The standard List next-page token. */
   next_page_token: string;
 }
-export interface ListOperationsResponseAminoType {
+export interface ListOperationsResponseAminoMsg {
   type: "/google.longrunning.ListOperationsResponse";
   value: ListOperationsResponseAmino;
 }
@@ -219,7 +219,7 @@ export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-export interface CancelOperationRequestProtoType {
+export interface CancelOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.CancelOperationRequest";
   value: Uint8Array;
 }
@@ -229,7 +229,7 @@ export interface CancelOperationRequestAmino {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-export interface CancelOperationRequestAminoType {
+export interface CancelOperationRequestAminoMsg {
   type: "/google.longrunning.CancelOperationRequest";
   value: CancelOperationRequestAmino;
 }
@@ -244,7 +244,7 @@ export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
-export interface DeleteOperationRequestProtoType {
+export interface DeleteOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.DeleteOperationRequest";
   value: Uint8Array;
 }
@@ -254,7 +254,7 @@ export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
-export interface DeleteOperationRequestAminoType {
+export interface DeleteOperationRequestAminoMsg {
   type: "/google.longrunning.DeleteOperationRequest";
   value: DeleteOperationRequestAmino;
 }
@@ -276,7 +276,7 @@ export interface WaitOperationRequest {
    */
   timeout?: Duration;
 }
-export interface WaitOperationRequestProtoType {
+export interface WaitOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.WaitOperationRequest";
   value: Uint8Array;
 }
@@ -293,7 +293,7 @@ export interface WaitOperationRequestAmino {
    */
   timeout?: DurationAmino;
 }
-export interface WaitOperationRequestAminoType {
+export interface WaitOperationRequestAminoMsg {
   type: "/google.longrunning.WaitOperationRequest";
   value: WaitOperationRequestAmino;
 }
@@ -341,7 +341,7 @@ export interface OperationInfo {
    */
   metadataType: string;
 }
-export interface OperationInfoProtoType {
+export interface OperationInfoProtoMsg {
   typeUrl: "/google.longrunning.OperationInfo";
   value: Uint8Array;
 }
@@ -383,7 +383,7 @@ export interface OperationInfoAmino {
    */
   metadata_type: string;
 }
-export interface OperationInfoAminoType {
+export interface OperationInfoAminoMsg {
   type: "/google.longrunning.OperationInfo";
   value: OperationInfoAmino;
 }
@@ -417,6 +417,8 @@ function createBaseOperation(): Operation {
 }
 
 export const Operation = {
+  typeUrl: "/google.longrunning.Operation",
+
   encode(message: Operation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -547,6 +549,25 @@ export const Operation = {
     obj.error = message.error ? Status.toAmino(message.error) : undefined;
     obj.response = message.response ? Any.toAmino(message.response) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: OperationAminoMsg): Operation {
+    return Operation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationProtoMsg): Operation {
+    return Operation.decode(message.value);
+  },
+
+  toProto(message: Operation): Uint8Array {
+    return Operation.encode(message).finish();
+  },
+
+  toProtoMsg(message: Operation): OperationProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.Operation",
+      value: Operation.encode(message).finish()
+    };
   }
 
 };
@@ -558,6 +579,8 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 }
 
 export const GetOperationRequest = {
+  typeUrl: "/google.longrunning.GetOperationRequest",
+
   encode(message: GetOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -628,6 +651,25 @@ export const GetOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
+    return GetOperationRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetOperationRequestProtoMsg): GetOperationRequest {
+    return GetOperationRequest.decode(message.value);
+  },
+
+  toProto(message: GetOperationRequest): Uint8Array {
+    return GetOperationRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetOperationRequest): GetOperationRequestProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.GetOperationRequest",
+      value: GetOperationRequest.encode(message).finish()
+    };
   }
 
 };
@@ -642,6 +684,8 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 }
 
 export const ListOperationsRequest = {
+  typeUrl: "/google.longrunning.ListOperationsRequest",
+
   encode(message: ListOperationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
@@ -757,6 +801,25 @@ export const ListOperationsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
+    return ListOperationsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListOperationsRequestProtoMsg): ListOperationsRequest {
+    return ListOperationsRequest.decode(message.value);
+  },
+
+  toProto(message: ListOperationsRequest): Uint8Array {
+    return ListOperationsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListOperationsRequest): ListOperationsRequestProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.ListOperationsRequest",
+      value: ListOperationsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -769,6 +832,8 @@ function createBaseListOperationsResponse(): ListOperationsResponse {
 }
 
 export const ListOperationsResponse = {
+  typeUrl: "/google.longrunning.ListOperationsResponse",
+
   encode(message: ListOperationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -872,6 +937,25 @@ export const ListOperationsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
+    return ListOperationsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListOperationsResponseProtoMsg): ListOperationsResponse {
+    return ListOperationsResponse.decode(message.value);
+  },
+
+  toProto(message: ListOperationsResponse): Uint8Array {
+    return ListOperationsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListOperationsResponse): ListOperationsResponseProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.ListOperationsResponse",
+      value: ListOperationsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -883,6 +967,8 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 }
 
 export const CancelOperationRequest = {
+  typeUrl: "/google.longrunning.CancelOperationRequest",
+
   encode(message: CancelOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -953,6 +1039,25 @@ export const CancelOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
+    return CancelOperationRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CancelOperationRequestProtoMsg): CancelOperationRequest {
+    return CancelOperationRequest.decode(message.value);
+  },
+
+  toProto(message: CancelOperationRequest): Uint8Array {
+    return CancelOperationRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CancelOperationRequest): CancelOperationRequestProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.CancelOperationRequest",
+      value: CancelOperationRequest.encode(message).finish()
+    };
   }
 
 };
@@ -964,6 +1069,8 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 }
 
 export const DeleteOperationRequest = {
+  typeUrl: "/google.longrunning.DeleteOperationRequest",
+
   encode(message: DeleteOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1034,6 +1141,25 @@ export const DeleteOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
+    return DeleteOperationRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteOperationRequestProtoMsg): DeleteOperationRequest {
+    return DeleteOperationRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteOperationRequest): Uint8Array {
+    return DeleteOperationRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteOperationRequest): DeleteOperationRequestProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.DeleteOperationRequest",
+      value: DeleteOperationRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1046,6 +1172,8 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 }
 
 export const WaitOperationRequest = {
+  typeUrl: "/google.longrunning.WaitOperationRequest",
+
   encode(message: WaitOperationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1131,6 +1259,25 @@ export const WaitOperationRequest = {
     obj.name = message.name;
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: WaitOperationRequestAminoMsg): WaitOperationRequest {
+    return WaitOperationRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: WaitOperationRequestProtoMsg): WaitOperationRequest {
+    return WaitOperationRequest.decode(message.value);
+  },
+
+  toProto(message: WaitOperationRequest): Uint8Array {
+    return WaitOperationRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: WaitOperationRequest): WaitOperationRequestProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.WaitOperationRequest",
+      value: WaitOperationRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1143,6 +1290,8 @@ function createBaseOperationInfo(): OperationInfo {
 }
 
 export const OperationInfo = {
+  typeUrl: "/google.longrunning.OperationInfo",
+
   encode(message: OperationInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.responseType !== "") {
       writer.uint32(10).string(message.responseType);
@@ -1228,6 +1377,25 @@ export const OperationInfo = {
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
     return obj;
+  },
+
+  fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {
+    return OperationInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationInfoProtoMsg): OperationInfo {
+    return OperationInfo.decode(message.value);
+  },
+
+  toProto(message: OperationInfo): Uint8Array {
+    return OperationInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: OperationInfo): OperationInfoProtoMsg {
+    return {
+      typeUrl: "/google.longrunning.OperationInfo",
+      value: OperationInfo.encode(message).finish()
+    };
   }
 
 };

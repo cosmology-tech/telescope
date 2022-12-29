@@ -32,7 +32,7 @@ export interface CheckRequest {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
-export interface CheckRequestProtoType {
+export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
   value: Uint8Array;
 }
@@ -65,7 +65,7 @@ export interface CheckRequestAmino {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
-export interface CheckRequestAminoType {
+export interface CheckRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.CheckRequest";
   value: CheckRequestAmino;
 }
@@ -112,7 +112,7 @@ export interface ResourceInfo {
    */
   location: string;
 }
-export interface ResourceInfoProtoType {
+export interface ResourceInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
   value: Uint8Array;
 }
@@ -150,7 +150,7 @@ export interface ResourceInfoAmino {
    */
   location: string;
 }
-export interface ResourceInfoAminoType {
+export interface ResourceInfoAminoMsg {
   type: "/google.api.servicecontrol.v2.ResourceInfo";
   value: ResourceInfoAmino;
 }
@@ -167,16 +167,16 @@ export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
 }
-export interface CheckResponse_HeadersEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v2.undefined";
+export interface CheckResponse_HeadersEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntryAmino {
   key: string;
   value: string;
 }
-export interface CheckResponse_HeadersEntryAminoType {
-  type: "/google.api.servicecontrol.v2.undefined";
+export interface CheckResponse_HeadersEntryAminoMsg {
+  type: string;
   value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
@@ -198,7 +198,7 @@ export interface CheckResponse {
     [key: string]: string;
   };
 }
-export interface CheckResponseProtoType {
+export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
   value: Uint8Array;
 }
@@ -217,7 +217,7 @@ export interface CheckResponseAmino {
     [key: string]: string;
   };
 }
-export interface CheckResponseAminoType {
+export interface CheckResponseAminoMsg {
   type: "/google.api.servicecontrol.v2.CheckResponse";
   value: CheckResponseAmino;
 }
@@ -256,7 +256,7 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
-export interface ReportRequestProtoType {
+export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
   value: Uint8Array;
 }
@@ -287,7 +287,7 @@ export interface ReportRequestAmino {
    */
   operations: AttributeContextAmino[];
 }
-export interface ReportRequestAminoType {
+export interface ReportRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.ReportRequest";
   value: ReportRequestAmino;
 }
@@ -304,7 +304,7 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
-export interface ReportResponseProtoType {
+export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
   value: Uint8Array;
 }
@@ -314,7 +314,7 @@ export interface ReportResponseProtoType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponseAmino {}
-export interface ReportResponseAminoType {
+export interface ReportResponseAminoMsg {
   type: "/google.api.servicecontrol.v2.ReportResponse";
   value: ReportResponseAmino;
 }
@@ -336,6 +336,8 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -484,6 +486,25 @@ export const CheckRequest = {
 
     obj.flags = message.flags;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 
 };
@@ -499,6 +520,8 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
+  typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -629,6 +652,25 @@ export const ResourceInfo = {
     obj.container = message.container;
     obj.location = message.location;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 
 };
@@ -726,6 +768,18 @@ export const CheckResponse_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.decode(message.value);
+  },
+
+  toProto(message: CheckResponse_HeadersEntry): Uint8Array {
+    return CheckResponse_HeadersEntry.encode(message).finish();
   }
 
 };
@@ -738,6 +792,8 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== undefined) {
       Status.encode(message.status, writer.uint32(10).fork()).ldelim();
@@ -874,6 +930,25 @@ export const CheckResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 
 };
@@ -887,6 +962,8 @@ function createBaseReportRequest(): ReportRequest {
 }
 
 export const ReportRequest = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+
   encode(message: ReportRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
@@ -1005,6 +1082,25 @@ export const ReportRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
+    return ReportRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
+    return ReportRequest.decode(message.value);
+  },
+
+  toProto(message: ReportRequest): Uint8Array {
+    return ReportRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReportRequest): ReportRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+      value: ReportRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1014,6 +1110,8 @@ function createBaseReportResponse(): ReportResponse {
 }
 
 export const ReportResponse = {
+  typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+
   encode(_: ReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1066,6 +1164,25 @@ export const ReportResponse = {
   toAmino(_: ReportResponse): ReportResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
+    return ReportResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
+    return ReportResponse.decode(message.value);
+  },
+
+  toProto(message: ReportResponse): Uint8Array {
+    return ReportResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReportResponse): ReportResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+      value: ReportResponse.encode(message).finish()
+    };
   }
 
 };

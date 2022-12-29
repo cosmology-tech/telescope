@@ -118,7 +118,7 @@ export interface ConfigChange {
    */
   advices: Advice[];
 }
-export interface ConfigChangeProtoType {
+export interface ConfigChangeProtoMsg {
   typeUrl: "/google.api.ConfigChange";
   value: Uint8Array;
 }
@@ -166,7 +166,7 @@ export interface ConfigChangeAmino {
    */
   advices: AdviceAmino[];
 }
-export interface ConfigChangeAminoType {
+export interface ConfigChangeAminoMsg {
   type: "/google.api.ConfigChange";
   value: ConfigChangeAmino;
 }
@@ -198,7 +198,7 @@ export interface Advice {
    */
   description: string;
 }
-export interface AdviceProtoType {
+export interface AdviceProtoMsg {
   typeUrl: "/google.api.Advice";
   value: Uint8Array;
 }
@@ -214,7 +214,7 @@ export interface AdviceAmino {
    */
   description: string;
 }
-export interface AdviceAminoType {
+export interface AdviceAminoMsg {
   type: "/google.api.Advice";
   value: AdviceAmino;
 }
@@ -238,6 +238,8 @@ function createBaseConfigChange(): ConfigChange {
 }
 
 export const ConfigChange = {
+  typeUrl: "/google.api.ConfigChange",
+
   encode(message: ConfigChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.element !== "") {
       writer.uint32(10).string(message.element);
@@ -386,6 +388,25 @@ export const ConfigChange = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigChangeAminoMsg): ConfigChange {
+    return ConfigChange.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConfigChangeProtoMsg): ConfigChange {
+    return ConfigChange.decode(message.value);
+  },
+
+  toProto(message: ConfigChange): Uint8Array {
+    return ConfigChange.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConfigChange): ConfigChangeProtoMsg {
+    return {
+      typeUrl: "/google.api.ConfigChange",
+      value: ConfigChange.encode(message).finish()
+    };
   }
 
 };
@@ -397,6 +418,8 @@ function createBaseAdvice(): Advice {
 }
 
 export const Advice = {
+  typeUrl: "/google.api.Advice",
+
   encode(message: Advice, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
@@ -467,6 +490,25 @@ export const Advice = {
     const obj: any = {};
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: AdviceAminoMsg): Advice {
+    return Advice.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AdviceProtoMsg): Advice {
+    return Advice.decode(message.value);
+  },
+
+  toProto(message: Advice): Uint8Array {
+    return Advice.encode(message).finish();
+  },
+
+  toProtoMsg(message: Advice): AdviceProtoMsg {
+    return {
+      typeUrl: "/google.api.Advice",
+      value: Advice.encode(message).finish()
+    };
   }
 
 };

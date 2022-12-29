@@ -39,7 +39,7 @@ export interface MsgSend {
 `;
 
 exports[`MsgSend interface type 1`] = `
-"export interface MsgSendProtoType {
+"export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSend";
   value: Uint8Array;
 }"
@@ -225,7 +225,7 @@ export interface Grant {
 `;
 
 exports[`cosmos/authz/v1beta1/authz.proto Grant Type 1`] = `
-"export interface GrantProtoType {
+"export interface GrantProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.Grant";
   value: Uint8Array;
 }"
@@ -245,7 +245,7 @@ export interface GrantAuthorization {
 `;
 
 exports[`cosmos/authz/v1beta1/authz.proto GrantAuthorization Type 1`] = `
-"export interface GrantAuthorizationProtoType {
+"export interface GrantAuthorizationProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
   value: Uint8Array;
 }"

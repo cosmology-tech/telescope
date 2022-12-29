@@ -64,7 +64,7 @@ export interface MsgCreateDeployment {
   version: Uint8Array;
   deposit?: Coin;
 }
-export interface MsgCreateDeploymentProtoType {
+export interface MsgCreateDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
   value: Uint8Array;
 }
@@ -76,7 +76,7 @@ export interface MsgCreateDeploymentAmino {
   version: Uint8Array;
   deposit?: CoinAmino;
 }
-export interface MsgCreateDeploymentAminoType {
+export interface MsgCreateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCreateDeployment";
   value: MsgCreateDeploymentAmino;
 }
@@ -91,14 +91,14 @@ export interface MsgCreateDeploymentSDKType {
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
-export interface MsgCreateDeploymentResponseProtoType {
+export interface MsgCreateDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
   value: Uint8Array;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseAmino {}
-export interface MsgCreateDeploymentResponseAminoType {
+export interface MsgCreateDeploymentResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
   value: MsgCreateDeploymentResponseAmino;
 }
@@ -111,7 +111,7 @@ export interface MsgDepositDeployment {
   id?: DeploymentID;
   amount?: Coin;
 }
-export interface MsgDepositDeploymentProtoType {
+export interface MsgDepositDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface MsgDepositDeploymentAmino {
   id?: DeploymentIDAmino;
   amount?: CoinAmino;
 }
-export interface MsgDepositDeploymentAminoType {
+export interface MsgDepositDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgDepositDeployment";
   value: MsgDepositDeploymentAmino;
 }
@@ -134,14 +134,14 @@ export interface MsgDepositDeploymentSDKType {
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
-export interface MsgDepositDeploymentResponseProtoType {
+export interface MsgDepositDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
   value: Uint8Array;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseAmino {}
-export interface MsgDepositDeploymentResponseAminoType {
+export interface MsgDepositDeploymentResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
   value: MsgDepositDeploymentResponseAmino;
 }
@@ -155,7 +155,7 @@ export interface MsgUpdateDeployment {
   groups: GroupSpec[];
   version: Uint8Array;
 }
-export interface MsgUpdateDeploymentProtoType {
+export interface MsgUpdateDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment";
   value: Uint8Array;
 }
@@ -166,7 +166,7 @@ export interface MsgUpdateDeploymentAmino {
   groups: GroupSpecAmino[];
   version: Uint8Array;
 }
-export interface MsgUpdateDeploymentAminoType {
+export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
   value: MsgUpdateDeploymentAmino;
 }
@@ -180,14 +180,14 @@ export interface MsgUpdateDeploymentSDKType {
 
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
-export interface MsgUpdateDeploymentResponseProtoType {
+export interface MsgUpdateDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
   value: Uint8Array;
 }
 
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseAmino {}
-export interface MsgUpdateDeploymentResponseAminoType {
+export interface MsgUpdateDeploymentResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
   value: MsgUpdateDeploymentResponseAmino;
 }
@@ -199,7 +199,7 @@ export interface MsgUpdateDeploymentResponseSDKType {}
 export interface MsgCloseDeployment {
   id?: DeploymentID;
 }
-export interface MsgCloseDeploymentProtoType {
+export interface MsgCloseDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
   value: Uint8Array;
 }
@@ -208,7 +208,7 @@ export interface MsgCloseDeploymentProtoType {
 export interface MsgCloseDeploymentAmino {
   id?: DeploymentIDAmino;
 }
-export interface MsgCloseDeploymentAminoType {
+export interface MsgCloseDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseDeployment";
   value: MsgCloseDeploymentAmino;
 }
@@ -220,14 +220,14 @@ export interface MsgCloseDeploymentSDKType {
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
-export interface MsgCloseDeploymentResponseProtoType {
+export interface MsgCloseDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
   value: Uint8Array;
 }
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseAmino {}
-export interface MsgCloseDeploymentResponseAminoType {
+export interface MsgCloseDeploymentResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
   value: MsgCloseDeploymentResponseAmino;
 }
@@ -240,7 +240,7 @@ export interface DeploymentID {
   owner: string;
   dseq: Long;
 }
-export interface DeploymentIDProtoType {
+export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DeploymentID";
   value: Uint8Array;
 }
@@ -250,7 +250,7 @@ export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
 }
-export interface DeploymentIDAminoType {
+export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentID";
   value: DeploymentIDAmino;
 }
@@ -268,7 +268,7 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: Long;
 }
-export interface DeploymentProtoType {
+export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Deployment";
   value: Uint8Array;
 }
@@ -280,7 +280,7 @@ export interface DeploymentAmino {
   version: Uint8Array;
   created_at: string;
 }
-export interface DeploymentAminoType {
+export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.Deployment";
   value: DeploymentAmino;
 }
@@ -299,7 +299,7 @@ export interface DeploymentFilters {
   dseq: Long;
   state: string;
 }
-export interface DeploymentFiltersProtoType {
+export interface DeploymentFiltersProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
   value: Uint8Array;
 }
@@ -310,7 +310,7 @@ export interface DeploymentFiltersAmino {
   dseq: string;
   state: string;
 }
-export interface DeploymentFiltersAminoType {
+export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentFilters";
   value: DeploymentFiltersAmino;
 }
@@ -332,6 +332,8 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
 }
 
 export const MsgCreateDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
+
   encode(message: MsgCreateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -465,6 +467,25 @@ export const MsgCreateDeployment = {
     obj.version = message.version;
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
+    return MsgCreateDeployment.decode(message.value);
+  },
+
+  toProto(message: MsgCreateDeployment): Uint8Array {
+    return MsgCreateDeployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateDeployment): MsgCreateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
+      value: MsgCreateDeployment.encode(message).finish()
+    };
   }
 
 };
@@ -474,6 +495,8 @@ function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
 }
 
 export const MsgCreateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
+
   encode(_: MsgCreateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -526,6 +549,25 @@ export const MsgCreateDeploymentResponse = {
   toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateDeploymentResponseAminoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateDeploymentResponse): Uint8Array {
+    return MsgCreateDeploymentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse",
+      value: MsgCreateDeploymentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -538,6 +580,8 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
 }
 
 export const MsgDepositDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
+
   encode(message: MsgDepositDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -623,6 +667,25 @@ export const MsgDepositDeployment = {
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
+    return MsgDepositDeployment.decode(message.value);
+  },
+
+  toProto(message: MsgDepositDeployment): Uint8Array {
+    return MsgDepositDeployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDepositDeployment): MsgDepositDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
+      value: MsgDepositDeployment.encode(message).finish()
+    };
   }
 
 };
@@ -632,6 +695,8 @@ function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse 
 }
 
 export const MsgDepositDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
+
   encode(_: MsgDepositDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -684,6 +749,25 @@ export const MsgDepositDeploymentResponse = {
   toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositDeploymentResponseAminoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.decode(message.value);
+  },
+
+  toProto(message: MsgDepositDeploymentResponse): Uint8Array {
+    return MsgDepositDeploymentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse",
+      value: MsgDepositDeploymentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -697,6 +781,8 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
 }
 
 export const MsgUpdateDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
+
   encode(message: MsgUpdateDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -815,6 +901,25 @@ export const MsgUpdateDeployment = {
 
     obj.version = message.version;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
+    return MsgUpdateDeployment.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateDeployment): Uint8Array {
+    return MsgUpdateDeployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateDeployment): MsgUpdateDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
+      value: MsgUpdateDeployment.encode(message).finish()
+    };
   }
 
 };
@@ -824,6 +929,8 @@ function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
 }
 
 export const MsgUpdateDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
+
   encode(_: MsgUpdateDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -876,6 +983,25 @@ export const MsgUpdateDeploymentResponse = {
   toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateDeploymentResponseAminoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateDeploymentResponse): Uint8Array {
+    return MsgUpdateDeploymentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse",
+      value: MsgUpdateDeploymentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -887,6 +1013,8 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
 }
 
 export const MsgCloseDeployment = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
+
   encode(message: MsgCloseDeployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -957,6 +1085,25 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
+    return MsgCloseDeployment.decode(message.value);
+  },
+
+  toProto(message: MsgCloseDeployment): Uint8Array {
+    return MsgCloseDeployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseDeployment): MsgCloseDeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
+      value: MsgCloseDeployment.encode(message).finish()
+    };
   }
 
 };
@@ -966,6 +1113,8 @@ function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
 }
 
 export const MsgCloseDeploymentResponse = {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
+
   encode(_: MsgCloseDeploymentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1018,6 +1167,25 @@ export const MsgCloseDeploymentResponse = {
   toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseDeploymentResponseAminoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCloseDeploymentResponse): Uint8Array {
+    return MsgCloseDeploymentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse",
+      value: MsgCloseDeploymentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1030,6 +1198,8 @@ function createBaseDeploymentID(): DeploymentID {
 }
 
 export const DeploymentID = {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID",
+
   encode(message: DeploymentID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -1115,6 +1285,25 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
+    return DeploymentID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
+    return DeploymentID.decode(message.value);
+  },
+
+  toProto(message: DeploymentID): Uint8Array {
+    return DeploymentID.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeploymentID): DeploymentIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentID",
+      value: DeploymentID.encode(message).finish()
+    };
   }
 
 };
@@ -1129,6 +1318,8 @@ function createBaseDeployment(): Deployment {
 }
 
 export const Deployment = {
+  typeUrl: "/akash.deployment.v1beta1.Deployment",
+
   encode(message: Deployment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
@@ -1244,6 +1435,25 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
+    return Deployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentProtoMsg): Deployment {
+    return Deployment.decode(message.value);
+  },
+
+  toProto(message: Deployment): Uint8Array {
+    return Deployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: Deployment): DeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Deployment",
+      value: Deployment.encode(message).finish()
+    };
   }
 
 };
@@ -1257,6 +1467,8 @@ function createBaseDeploymentFilters(): DeploymentFilters {
 }
 
 export const DeploymentFilters = {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
+
   encode(message: DeploymentFilters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -1357,6 +1569,25 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
+    return DeploymentFilters.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
+    return DeploymentFilters.decode(message.value);
+  },
+
+  toProto(message: DeploymentFilters): Uint8Array {
+    return DeploymentFilters.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeploymentFilters): DeploymentFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DeploymentFilters",
+      value: DeploymentFilters.encode(message).finish()
+    };
   }
 
 };

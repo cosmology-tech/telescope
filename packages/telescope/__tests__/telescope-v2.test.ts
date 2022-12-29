@@ -49,6 +49,9 @@ const options: TelescopeOptions = {
     parser: {
       keepCase: false
     },
+    addAminoTypeToObjects: true,
+    addTypeUrlToObjects: true,
+
     methods: {
       encode: true,
       decode: true,
@@ -56,7 +59,12 @@ const options: TelescopeOptions = {
       toJSON: true,
       fromPartial: true,
       toSDK: true,
-      fromSDK: true
+      fromSDK: true,
+      //
+      toAmino: true,
+      fromAmino: true,
+      fromProto: true,
+      toProto: true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,

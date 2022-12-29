@@ -12,7 +12,7 @@ export interface GenesisState {
   sequences: Sequence[];
   genMsgs: GenesisState_GenMsgs[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface GenesisStateAmino {
   sequences: SequenceAmino[];
   gen_msgs: GenesisState_GenMsgsAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "wasm/GenesisState";
   value: GenesisStateAmino;
 }
@@ -48,7 +48,7 @@ export interface GenesisState_GenMsgs {
   instantiateContract?: MsgInstantiateContract;
   executeContract?: MsgExecuteContract;
 }
-export interface GenesisState_GenMsgsProtoType {
+export interface GenesisState_GenMsgsProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.GenMsgs";
   value: Uint8Array;
 }
@@ -62,7 +62,7 @@ export interface GenesisState_GenMsgsAmino {
   instantiate_contract?: MsgInstantiateContractAmino;
   execute_contract?: MsgExecuteContractAmino;
 }
-export interface GenesisState_GenMsgsAminoType {
+export interface GenesisState_GenMsgsAminoMsg {
   type: "wasm/GenMsgs";
   value: GenesisState_GenMsgsAmino;
 }
@@ -86,7 +86,7 @@ export interface Code {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
-export interface CodeProtoType {
+export interface CodeProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Code";
   value: Uint8Array;
 }
@@ -100,7 +100,7 @@ export interface CodeAmino {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
-export interface CodeAminoType {
+export interface CodeAminoMsg {
   type: "wasm/Code";
   value: CodeAmino;
 }
@@ -119,7 +119,7 @@ export interface Contract {
   contractInfo?: ContractInfo;
   contractState: Model[];
 }
-export interface ContractProtoType {
+export interface ContractProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Contract";
   value: Uint8Array;
 }
@@ -130,7 +130,7 @@ export interface ContractAmino {
   contract_info?: ContractInfoAmino;
   contract_state: ModelAmino[];
 }
-export interface ContractAminoType {
+export interface ContractAminoMsg {
   type: "wasm/Contract";
   value: ContractAmino;
 }
@@ -147,7 +147,7 @@ export interface Sequence {
   idKey: Uint8Array;
   value: Long;
 }
-export interface SequenceProtoType {
+export interface SequenceProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Sequence";
   value: Uint8Array;
 }
@@ -157,7 +157,7 @@ export interface SequenceAmino {
   id_key: Uint8Array;
   value: string;
 }
-export interface SequenceAminoType {
+export interface SequenceAminoMsg {
   type: "wasm/Sequence";
   value: SequenceAmino;
 }
@@ -179,6 +179,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmwasm.wasm.v1.GenesisState",
+  aminoType: "wasm/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -372,6 +375,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "wasm/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -385,6 +414,9 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
 }
 
 export const GenesisState_GenMsgs = {
+  typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
+  aminoType: "wasm/GenMsgs",
+
   encode(message: GenesisState_GenMsgs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
@@ -485,6 +517,32 @@ export const GenesisState_GenMsgs = {
     obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract) : undefined;
     obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisState_GenMsgsAminoMsg): GenesisState_GenMsgs {
+    return GenesisState_GenMsgs.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState_GenMsgs): GenesisState_GenMsgsAminoMsg {
+    return {
+      type: "wasm/GenMsgs",
+      value: GenesisState_GenMsgs.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisState_GenMsgsProtoMsg): GenesisState_GenMsgs {
+    return GenesisState_GenMsgs.decode(message.value);
+  },
+
+  toProto(message: GenesisState_GenMsgs): Uint8Array {
+    return GenesisState_GenMsgs.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState_GenMsgs): GenesisState_GenMsgsProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
+      value: GenesisState_GenMsgs.encode(message).finish()
+    };
   }
 
 };
@@ -499,6 +557,9 @@ function createBaseCode(): Code {
 }
 
 export const Code = {
+  typeUrl: "/cosmwasm.wasm.v1.Code",
+  aminoType: "wasm/Code",
+
   encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.codeId.isZero()) {
       writer.uint32(8).uint64(message.codeId);
@@ -614,6 +675,32 @@ export const Code = {
     obj.code_bytes = message.codeBytes;
     obj.pinned = message.pinned;
     return obj;
+  },
+
+  fromAminoMsg(object: CodeAminoMsg): Code {
+    return Code.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Code): CodeAminoMsg {
+    return {
+      type: "wasm/Code",
+      value: Code.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CodeProtoMsg): Code {
+    return Code.decode(message.value);
+  },
+
+  toProto(message: Code): Uint8Array {
+    return Code.encode(message).finish();
+  },
+
+  toProtoMsg(message: Code): CodeProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.Code",
+      value: Code.encode(message).finish()
+    };
   }
 
 };
@@ -627,6 +714,9 @@ function createBaseContract(): Contract {
 }
 
 export const Contract = {
+  typeUrl: "/cosmwasm.wasm.v1.Contract",
+  aminoType: "wasm/Contract",
+
   encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -745,6 +835,32 @@ export const Contract = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ContractAminoMsg): Contract {
+    return Contract.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Contract): ContractAminoMsg {
+    return {
+      type: "wasm/Contract",
+      value: Contract.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ContractProtoMsg): Contract {
+    return Contract.decode(message.value);
+  },
+
+  toProto(message: Contract): Uint8Array {
+    return Contract.encode(message).finish();
+  },
+
+  toProtoMsg(message: Contract): ContractProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.Contract",
+      value: Contract.encode(message).finish()
+    };
   }
 
 };
@@ -757,6 +873,9 @@ function createBaseSequence(): Sequence {
 }
 
 export const Sequence = {
+  typeUrl: "/cosmwasm.wasm.v1.Sequence",
+  aminoType: "wasm/Sequence",
+
   encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
@@ -842,6 +961,32 @@ export const Sequence = {
     obj.id_key = message.idKey;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SequenceAminoMsg): Sequence {
+    return Sequence.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Sequence): SequenceAminoMsg {
+    return {
+      type: "wasm/Sequence",
+      value: Sequence.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SequenceProtoMsg): Sequence {
+    return Sequence.decode(message.value);
+  },
+
+  toProto(message: Sequence): Uint8Array {
+    return Sequence.encode(message).finish();
+  },
+
+  toProtoMsg(message: Sequence): SequenceProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.Sequence",
+      value: Sequence.encode(message).finish()
+    };
   }
 
 };

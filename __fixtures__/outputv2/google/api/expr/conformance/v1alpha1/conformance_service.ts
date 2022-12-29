@@ -84,7 +84,7 @@ export interface ParseRequest {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
 }
-export interface ParseRequestProtoType {
+export interface ParseRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: Uint8Array;
 }
@@ -103,7 +103,7 @@ export interface ParseRequestAmino {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disable_macros: boolean;
 }
-export interface ParseRequestAminoType {
+export interface ParseRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: ParseRequestAmino;
 }
@@ -124,7 +124,7 @@ export interface ParseResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
-export interface ParseResponseProtoType {
+export interface ParseResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
   value: Uint8Array;
 }
@@ -137,7 +137,7 @@ export interface ParseResponseAmino {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
 }
-export interface ParseResponseAminoType {
+export interface ParseResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
   value: ParseResponseAmino;
 }
@@ -173,7 +173,7 @@ export interface CheckRequest {
    */
   noStdEnv: boolean;
 }
-export interface CheckRequestProtoType {
+export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
   value: Uint8Array;
 }
@@ -203,7 +203,7 @@ export interface CheckRequestAmino {
    */
   no_std_env: boolean;
 }
-export interface CheckRequestAminoType {
+export interface CheckRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
   value: CheckRequestAmino;
 }
@@ -224,7 +224,7 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
-export interface CheckResponseProtoType {
+export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: Uint8Array;
 }
@@ -237,7 +237,7 @@ export interface CheckResponseAmino {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: StatusAmino[];
 }
-export interface CheckResponseAminoType {
+export interface CheckResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: CheckResponseAmino;
 }
@@ -251,16 +251,16 @@ export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
 }
-export interface EvalRequest_BindingsEntryProtoType {
-  typeUrl: "/google.api.expr.conformance.v1alpha1.undefined";
+export interface EvalRequest_BindingsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryAmino {
   key: string;
   value?: ExprValueAmino;
 }
-export interface EvalRequest_BindingsEntryAminoType {
-  type: "/google.api.expr.conformance.v1alpha1.undefined";
+export interface EvalRequest_BindingsEntryAminoMsg {
+  type: string;
   value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
@@ -287,7 +287,7 @@ export interface EvalRequest {
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
 }
-export interface EvalRequestProtoType {
+export interface EvalRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
   value: Uint8Array;
 }
@@ -311,7 +311,7 @@ export interface EvalRequestAmino {
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
 }
-export interface EvalRequestAminoType {
+export interface EvalRequestAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
   value: EvalRequestAmino;
 }
@@ -339,7 +339,7 @@ export interface EvalResponse {
    */
   issues: Status[];
 }
-export interface EvalResponseProtoType {
+export interface EvalResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: Uint8Array;
 }
@@ -357,7 +357,7 @@ export interface EvalResponseAmino {
    */
   issues: StatusAmino[];
 }
-export interface EvalResponseAminoType {
+export interface EvalResponseAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: EvalResponseAmino;
 }
@@ -383,7 +383,7 @@ export interface IssueDetails {
   /** Expression ID from [Expr][], 0 if unknown. */
   id: Long;
 }
-export interface IssueDetailsProtoType {
+export interface IssueDetailsProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
   value: Uint8Array;
 }
@@ -403,7 +403,7 @@ export interface IssueDetailsAmino {
   /** Expression ID from [Expr][], 0 if unknown. */
   id: string;
 }
-export interface IssueDetailsAminoType {
+export interface IssueDetailsAminoMsg {
   type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
   value: IssueDetailsAmino;
 }
@@ -429,6 +429,8 @@ function createBaseParseRequest(): ParseRequest {
 }
 
 export const ParseRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
+
   encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.celSource !== "") {
       writer.uint32(10).string(message.celSource);
@@ -544,6 +546,25 @@ export const ParseRequest = {
     obj.source_location = message.sourceLocation;
     obj.disable_macros = message.disableMacros;
     return obj;
+  },
+
+  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
+    return ParseRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
+    return ParseRequest.decode(message.value);
+  },
+
+  toProto(message: ParseRequest): Uint8Array {
+    return ParseRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ParseRequest): ParseRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
+      value: ParseRequest.encode(message).finish()
+    };
   }
 
 };
@@ -556,6 +577,8 @@ function createBaseParseResponse(): ParseResponse {
 }
 
 export const ParseResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse",
+
   encode(message: ParseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -659,6 +682,25 @@ export const ParseResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
+    return ParseResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
+    return ParseResponse.decode(message.value);
+  },
+
+  toProto(message: ParseResponse): Uint8Array {
+    return ParseResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ParseResponse): ParseResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse",
+      value: ParseResponse.encode(message).finish()
+    };
   }
 
 };
@@ -673,6 +715,8 @@ function createBaseCheckRequest(): CheckRequest {
 }
 
 export const CheckRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest",
+
   encode(message: CheckRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -806,6 +850,25 @@ export const CheckRequest = {
     obj.container = message.container;
     obj.no_std_env = message.noStdEnv;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 
 };
@@ -818,6 +881,8 @@ function createBaseCheckResponse(): CheckResponse {
 }
 
 export const CheckResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse",
+
   encode(message: CheckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.checkedExpr !== undefined) {
       CheckedExpr.encode(message.checkedExpr, writer.uint32(10).fork()).ldelim();
@@ -921,6 +986,25 @@ export const CheckResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1018,6 +1102,18 @@ export const EvalRequest_BindingsEntry = {
     obj.key = message.key;
     obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
+    return EvalRequest_BindingsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
+    return EvalRequest_BindingsEntry.decode(message.value);
+  },
+
+  toProto(message: EvalRequest_BindingsEntry): Uint8Array {
+    return EvalRequest_BindingsEntry.encode(message).finish();
   }
 
 };
@@ -1032,6 +1128,8 @@ function createBaseEvalRequest(): EvalRequest {
 }
 
 export const EvalRequest = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest",
+
   encode(message: EvalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.parsedExpr !== undefined) {
       ParsedExpr.encode(message.parsedExpr, writer.uint32(10).fork()).ldelim();
@@ -1199,6 +1297,25 @@ export const EvalRequest = {
 
     obj.container = message.container;
     return obj;
+  },
+
+  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
+    return EvalRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
+    return EvalRequest.decode(message.value);
+  },
+
+  toProto(message: EvalRequest): Uint8Array {
+    return EvalRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvalRequest): EvalRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest",
+      value: EvalRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1211,6 +1328,8 @@ function createBaseEvalResponse(): EvalResponse {
 }
 
 export const EvalResponse = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse",
+
   encode(message: EvalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       ExprValue.encode(message.result, writer.uint32(10).fork()).ldelim();
@@ -1314,6 +1433,25 @@ export const EvalResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
+    return EvalResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
+    return EvalResponse.decode(message.value);
+  },
+
+  toProto(message: EvalResponse): Uint8Array {
+    return EvalResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvalResponse): EvalResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse",
+      value: EvalResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1327,6 +1465,8 @@ function createBaseIssueDetails(): IssueDetails {
 }
 
 export const IssueDetails = {
+  typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
+
   encode(message: IssueDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
@@ -1427,6 +1567,25 @@ export const IssueDetails = {
     obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
     obj.id = message.id ? message.id.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
+    return IssueDetails.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
+    return IssueDetails.decode(message.value);
+  },
+
+  toProto(message: IssueDetails): Uint8Array {
+    return IssueDetails.encode(message).finish();
+  },
+
+  toProtoMsg(message: IssueDetails): IssueDetailsProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails",
+      value: IssueDetails.encode(message).finish()
+    };
   }
 
 };

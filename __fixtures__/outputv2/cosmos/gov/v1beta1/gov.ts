@@ -187,7 +187,7 @@ export interface WeightedVoteOption {
   option: VoteOption;
   weight: string;
 }
-export interface WeightedVoteOptionProtoType {
+export interface WeightedVoteOptionProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption";
   value: Uint8Array;
 }
@@ -201,7 +201,7 @@ export interface WeightedVoteOptionAmino {
   option: VoteOption;
   weight: string;
 }
-export interface WeightedVoteOptionAminoType {
+export interface WeightedVoteOptionAminoMsg {
   type: "cosmos-sdk/WeightedVoteOption";
   value: WeightedVoteOptionAmino;
 }
@@ -224,7 +224,7 @@ export interface TextProposal {
   title: string;
   description: string;
 }
-export interface TextProposalProtoType {
+export interface TextProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TextProposal";
   value: Uint8Array;
 }
@@ -237,7 +237,7 @@ export interface TextProposalAmino {
   title: string;
   description: string;
 }
-export interface TextProposalAminoType {
+export interface TextProposalAminoMsg {
   type: "cosmos-sdk/TextProposal";
   value: TextProposalAmino;
 }
@@ -260,7 +260,7 @@ export interface Deposit {
   depositor: string;
   amount: Coin[];
 }
-export interface DepositProtoType {
+export interface DepositProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Deposit";
   value: Uint8Array;
 }
@@ -274,7 +274,7 @@ export interface DepositAmino {
   depositor: string;
   amount: CoinAmino[];
 }
-export interface DepositAminoType {
+export interface DepositAminoMsg {
   type: "cosmos-sdk/Deposit";
   value: DepositAmino;
 }
@@ -307,7 +307,7 @@ export interface Proposal {
   votingStartTime?: Date;
   votingEndTime?: Date;
 }
-export interface ProposalProtoType {
+export interface ProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Proposal";
   value: Uint8Array;
 }
@@ -330,7 +330,7 @@ export interface ProposalAmino {
   voting_start_time?: Date;
   voting_end_time?: Date;
 }
-export interface ProposalAminoType {
+export interface ProposalAminoMsg {
   type: "cosmos-sdk/Proposal";
   value: ProposalAmino;
 }
@@ -355,7 +355,7 @@ export interface TallyResult {
   no: string;
   noWithVeto: string;
 }
-export interface TallyResultProtoType {
+export interface TallyResultProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TallyResult";
   value: Uint8Array;
 }
@@ -367,7 +367,7 @@ export interface TallyResultAmino {
   no: string;
   no_with_veto: string;
 }
-export interface TallyResultAminoType {
+export interface TallyResultAminoMsg {
   type: "cosmos-sdk/TallyResult";
   value: TallyResultAmino;
 }
@@ -400,7 +400,7 @@ export interface Vote {
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
-export interface VoteProtoType {
+export interface VoteProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Vote";
   value: Uint8Array;
 }
@@ -425,7 +425,7 @@ export interface VoteAmino {
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOptionAmino[];
 }
-export interface VoteAminoType {
+export interface VoteAminoMsg {
   type: "cosmos-sdk/Vote";
   value: VoteAmino;
 }
@@ -454,7 +454,7 @@ export interface DepositParams {
    */
   maxDepositPeriod?: Duration;
 }
-export interface DepositParamsProtoType {
+export interface DepositParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.DepositParams";
   value: Uint8Array;
 }
@@ -470,7 +470,7 @@ export interface DepositParamsAmino {
    */
   max_deposit_period?: DurationAmino;
 }
-export interface DepositParamsAminoType {
+export interface DepositParamsAminoMsg {
   type: "cosmos-sdk/DepositParams";
   value: DepositParamsAmino;
 }
@@ -486,7 +486,7 @@ export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod?: Duration;
 }
-export interface VotingParamsProtoType {
+export interface VotingParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.VotingParams";
   value: Uint8Array;
 }
@@ -496,7 +496,7 @@ export interface VotingParamsAmino {
   /** Length of the voting period. */
   voting_period?: DurationAmino;
 }
-export interface VotingParamsAminoType {
+export interface VotingParamsAminoMsg {
   type: "cosmos-sdk/VotingParams";
   value: VotingParamsAmino;
 }
@@ -523,7 +523,7 @@ export interface TallyParams {
    */
   vetoThreshold: Uint8Array;
 }
-export interface TallyParamsProtoType {
+export interface TallyParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TallyParams";
   value: Uint8Array;
 }
@@ -545,7 +545,7 @@ export interface TallyParamsAmino {
    */
   veto_threshold: Uint8Array;
 }
-export interface TallyParamsAminoType {
+export interface TallyParamsAminoMsg {
   type: "cosmos-sdk/TallyParams";
   value: TallyParamsAmino;
 }
@@ -565,6 +565,9 @@ function createBaseWeightedVoteOption(): WeightedVoteOption {
 }
 
 export const WeightedVoteOption = {
+  typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption",
+  aminoType: "cosmos-sdk/WeightedVoteOption",
+
   encode(message: WeightedVoteOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
@@ -650,6 +653,32 @@ export const WeightedVoteOption = {
     obj.option = message.option;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromAminoMsg(object: WeightedVoteOptionAminoMsg): WeightedVoteOption {
+    return WeightedVoteOption.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: WeightedVoteOption): WeightedVoteOptionAminoMsg {
+    return {
+      type: "cosmos-sdk/WeightedVoteOption",
+      value: WeightedVoteOption.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: WeightedVoteOptionProtoMsg): WeightedVoteOption {
+    return WeightedVoteOption.decode(message.value);
+  },
+
+  toProto(message: WeightedVoteOption): Uint8Array {
+    return WeightedVoteOption.encode(message).finish();
+  },
+
+  toProtoMsg(message: WeightedVoteOption): WeightedVoteOptionProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption",
+      value: WeightedVoteOption.encode(message).finish()
+    };
   }
 
 };
@@ -662,6 +691,9 @@ function createBaseTextProposal(): TextProposal {
 }
 
 export const TextProposal = {
+  typeUrl: "/cosmos.gov.v1beta1.TextProposal",
+  aminoType: "cosmos-sdk/TextProposal",
+
   encode(message: TextProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -747,6 +779,32 @@ export const TextProposal = {
     obj.title = message.title;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: TextProposalAminoMsg): TextProposal {
+    return TextProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TextProposal): TextProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/TextProposal",
+      value: TextProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TextProposalProtoMsg): TextProposal {
+    return TextProposal.decode(message.value);
+  },
+
+  toProto(message: TextProposal): Uint8Array {
+    return TextProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: TextProposal): TextProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.TextProposal",
+      value: TextProposal.encode(message).finish()
+    };
   }
 
 };
@@ -760,6 +818,9 @@ function createBaseDeposit(): Deposit {
 }
 
 export const Deposit = {
+  typeUrl: "/cosmos.gov.v1beta1.Deposit",
+  aminoType: "cosmos-sdk/Deposit",
+
   encode(message: Deposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -878,6 +939,32 @@ export const Deposit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DepositAminoMsg): Deposit {
+    return Deposit.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Deposit): DepositAminoMsg {
+    return {
+      type: "cosmos-sdk/Deposit",
+      value: Deposit.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: DepositProtoMsg): Deposit {
+    return Deposit.decode(message.value);
+  },
+
+  toProto(message: Deposit): Uint8Array {
+    return Deposit.encode(message).finish();
+  },
+
+  toProtoMsg(message: Deposit): DepositProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.Deposit",
+      value: Deposit.encode(message).finish()
+    };
   }
 
 };
@@ -897,6 +984,9 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  typeUrl: "/cosmos.gov.v1beta1.Proposal",
+  aminoType: "cosmos-sdk/Proposal",
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1105,6 +1195,32 @@ export const Proposal = {
     obj.voting_start_time = message.votingStartTime ? Timestamp.toAmino(message.votingStartTime) : undefined;
     obj.voting_end_time = message.votingEndTime ? Timestamp.toAmino(message.votingEndTime) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ProposalAminoMsg): Proposal {
+    return Proposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Proposal): ProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/Proposal",
+      value: Proposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ProposalProtoMsg): Proposal {
+    return Proposal.decode(message.value);
+  },
+
+  toProto(message: Proposal): Uint8Array {
+    return Proposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: Proposal): ProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.Proposal",
+      value: Proposal.encode(message).finish()
+    };
   }
 
 };
@@ -1119,6 +1235,9 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
+  typeUrl: "/cosmos.gov.v1beta1.TallyResult",
+  aminoType: "cosmos-sdk/TallyResult",
+
   encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yes !== "") {
       writer.uint32(10).string(message.yes);
@@ -1234,6 +1353,32 @@ export const TallyResult = {
     obj.no = message.no;
     obj.no_with_veto = message.noWithVeto;
     return obj;
+  },
+
+  fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
+    return TallyResult.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TallyResult): TallyResultAminoMsg {
+    return {
+      type: "cosmos-sdk/TallyResult",
+      value: TallyResult.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TallyResultProtoMsg): TallyResult {
+    return TallyResult.decode(message.value);
+  },
+
+  toProto(message: TallyResult): Uint8Array {
+    return TallyResult.encode(message).finish();
+  },
+
+  toProtoMsg(message: TallyResult): TallyResultProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.TallyResult",
+      value: TallyResult.encode(message).finish()
+    };
   }
 
 };
@@ -1248,6 +1393,9 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  typeUrl: "/cosmos.gov.v1beta1.Vote",
+  aminoType: "cosmos-sdk/Vote",
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1381,6 +1529,32 @@ export const Vote = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: VoteAminoMsg): Vote {
+    return Vote.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Vote): VoteAminoMsg {
+    return {
+      type: "cosmos-sdk/Vote",
+      value: Vote.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: VoteProtoMsg): Vote {
+    return Vote.decode(message.value);
+  },
+
+  toProto(message: Vote): Uint8Array {
+    return Vote.encode(message).finish();
+  },
+
+  toProtoMsg(message: Vote): VoteProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.Vote",
+      value: Vote.encode(message).finish()
+    };
   }
 
 };
@@ -1393,6 +1567,9 @@ function createBaseDepositParams(): DepositParams {
 }
 
 export const DepositParams = {
+  typeUrl: "/cosmos.gov.v1beta1.DepositParams",
+  aminoType: "cosmos-sdk/DepositParams",
+
   encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1496,6 +1673,32 @@ export const DepositParams = {
 
     obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
+    return DepositParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/DepositParams",
+      value: DepositParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
+    return DepositParams.decode(message.value);
+  },
+
+  toProto(message: DepositParams): Uint8Array {
+    return DepositParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: DepositParams): DepositParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.DepositParams",
+      value: DepositParams.encode(message).finish()
+    };
   }
 
 };
@@ -1507,6 +1710,9 @@ function createBaseVotingParams(): VotingParams {
 }
 
 export const VotingParams = {
+  typeUrl: "/cosmos.gov.v1beta1.VotingParams",
+  aminoType: "cosmos-sdk/VotingParams",
+
   encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -1577,6 +1783,32 @@ export const VotingParams = {
     const obj: any = {};
     obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: VotingParamsAminoMsg): VotingParams {
+    return VotingParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: VotingParams): VotingParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/VotingParams",
+      value: VotingParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: VotingParamsProtoMsg): VotingParams {
+    return VotingParams.decode(message.value);
+  },
+
+  toProto(message: VotingParams): Uint8Array {
+    return VotingParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: VotingParams): VotingParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.VotingParams",
+      value: VotingParams.encode(message).finish()
+    };
   }
 
 };
@@ -1590,6 +1822,9 @@ function createBaseTallyParams(): TallyParams {
 }
 
 export const TallyParams = {
+  typeUrl: "/cosmos.gov.v1beta1.TallyParams",
+  aminoType: "cosmos-sdk/TallyParams",
+
   encode(message: TallyParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quorum.length !== 0) {
       writer.uint32(10).bytes(message.quorum);
@@ -1690,6 +1925,32 @@ export const TallyParams = {
     obj.threshold = message.threshold;
     obj.veto_threshold = message.vetoThreshold;
     return obj;
+  },
+
+  fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {
+    return TallyParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TallyParams): TallyParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/TallyParams",
+      value: TallyParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TallyParamsProtoMsg): TallyParams {
+    return TallyParams.decode(message.value);
+  },
+
+  toProto(message: TallyParams): Uint8Array {
+    return TallyParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: TallyParams): TallyParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.TallyParams",
+      value: TallyParams.encode(message).finish()
+    };
   }
 
 };

@@ -8,7 +8,7 @@ export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
 }
-export interface SourceInfoProtoType {
+export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.SourceInfo";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface SourceInfoAmino {
   /** All files used during config generation. */
   source_files: AnyAmino[];
 }
-export interface SourceInfoAminoType {
+export interface SourceInfoAminoMsg {
   type: "/google.api.SourceInfo";
   value: SourceInfoAmino;
 }
@@ -35,6 +35,8 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
+  typeUrl: "/google.api.SourceInfo",
+
   encode(message: SourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sourceFiles) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -123,6 +125,25 @@ export const SourceInfo = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 
 };

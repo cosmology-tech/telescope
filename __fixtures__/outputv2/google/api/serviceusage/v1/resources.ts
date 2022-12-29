@@ -97,7 +97,7 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceProtoType {
+export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.Service";
   value: Uint8Array;
 }
@@ -131,7 +131,7 @@ export interface ServiceAmino {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceAminoType {
+export interface ServiceAminoMsg {
   type: "/google.api.serviceusage.v1.Service";
   value: ServiceAmino;
 }
@@ -196,7 +196,7 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
-export interface ServiceConfigProtoType {
+export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
   value: Uint8Array;
 }
@@ -253,7 +253,7 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
-export interface ServiceConfigAminoType {
+export interface ServiceConfigAminoMsg {
   type: "/google.api.serviceusage.v1.ServiceConfig";
   value: ServiceConfigAmino;
 }
@@ -280,7 +280,7 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
-export interface OperationMetadataProtoType {
+export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
   value: Uint8Array;
 }
@@ -293,7 +293,7 @@ export interface OperationMetadataAmino {
    */
   resource_names: string[];
 }
-export interface OperationMetadataAminoType {
+export interface OperationMetadataAminoMsg {
   type: "/google.api.serviceusage.v1.OperationMetadata";
   value: OperationMetadataAmino;
 }
@@ -313,6 +313,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  typeUrl: "/google.api.serviceusage.v1.Service",
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -428,6 +430,25 @@ export const Service = {
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
+  },
+
+  toProto(message: Service): Uint8Array {
+    return Service.encode(message).finish();
+  },
+
+  toProtoMsg(message: Service): ServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.Service",
+      value: Service.encode(message).finish()
+    };
   }
 
 };
@@ -448,6 +469,8 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
+  typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
+
   encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -704,6 +727,25 @@ export const ServiceConfig = {
 
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
+    return ServiceConfig.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
+    return ServiceConfig.decode(message.value);
+  },
+
+  toProto(message: ServiceConfig): Uint8Array {
+    return ServiceConfig.encode(message).finish();
+  },
+
+  toProtoMsg(message: ServiceConfig): ServiceConfigProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
+      value: ServiceConfig.encode(message).finish()
+    };
   }
 
 };
@@ -715,6 +757,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
+
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -803,6 +847,25 @@ export const OperationMetadata = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
+    return OperationMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
+  },
+
+  toProto(message: OperationMetadata): Uint8Array {
+    return OperationMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
+      value: OperationMetadata.encode(message).finish()
+    };
   }
 
 };

@@ -44,7 +44,7 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
-export interface SystemParametersProtoType {
+export interface SystemParametersProtoMsg {
   typeUrl: "/google.api.SystemParameters";
   value: Uint8Array;
 }
@@ -91,7 +91,7 @@ export interface SystemParametersAmino {
    */
   rules: SystemParameterRuleAmino[];
 }
-export interface SystemParametersAminoType {
+export interface SystemParametersAminoMsg {
   type: "/google.api.SystemParameters";
   value: SystemParametersAmino;
 }
@@ -130,7 +130,7 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
-export interface SystemParameterRuleProtoType {
+export interface SystemParameterRuleProtoMsg {
   typeUrl: "/google.api.SystemParameterRule";
   value: Uint8Array;
 }
@@ -157,7 +157,7 @@ export interface SystemParameterRuleAmino {
    */
   parameters: SystemParameterAmino[];
 }
-export interface SystemParameterRuleAminoType {
+export interface SystemParameterRuleAminoMsg {
   type: "/google.api.SystemParameterRule";
   value: SystemParameterRuleAmino;
 }
@@ -192,7 +192,7 @@ export interface SystemParameter {
    */
   urlQueryParameter: string;
 }
-export interface SystemParameterProtoType {
+export interface SystemParameterProtoMsg {
   typeUrl: "/google.api.SystemParameter";
   value: Uint8Array;
 }
@@ -218,7 +218,7 @@ export interface SystemParameterAmino {
    */
   url_query_parameter: string;
 }
-export interface SystemParameterAminoType {
+export interface SystemParameterAminoMsg {
   type: "/google.api.SystemParameter";
   value: SystemParameterAmino;
 }
@@ -241,6 +241,8 @@ function createBaseSystemParameters(): SystemParameters {
 }
 
 export const SystemParameters = {
+  typeUrl: "/google.api.SystemParameters",
+
   encode(message: SystemParameters, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       SystemParameterRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -329,6 +331,25 @@ export const SystemParameters = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
+    return SystemParameters.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
+    return SystemParameters.decode(message.value);
+  },
+
+  toProto(message: SystemParameters): Uint8Array {
+    return SystemParameters.encode(message).finish();
+  },
+
+  toProtoMsg(message: SystemParameters): SystemParametersProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameters",
+      value: SystemParameters.encode(message).finish()
+    };
   }
 
 };
@@ -341,6 +362,8 @@ function createBaseSystemParameterRule(): SystemParameterRule {
 }
 
 export const SystemParameterRule = {
+  typeUrl: "/google.api.SystemParameterRule",
+
   encode(message: SystemParameterRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -444,6 +467,25 @@ export const SystemParameterRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
+    return SystemParameterRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
+    return SystemParameterRule.decode(message.value);
+  },
+
+  toProto(message: SystemParameterRule): Uint8Array {
+    return SystemParameterRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: SystemParameterRule): SystemParameterRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameterRule",
+      value: SystemParameterRule.encode(message).finish()
+    };
   }
 
 };
@@ -457,6 +499,8 @@ function createBaseSystemParameter(): SystemParameter {
 }
 
 export const SystemParameter = {
+  typeUrl: "/google.api.SystemParameter",
+
   encode(message: SystemParameter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -557,6 +601,25 @@ export const SystemParameter = {
     obj.http_header = message.httpHeader;
     obj.url_query_parameter = message.urlQueryParameter;
     return obj;
+  },
+
+  fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
+    return SystemParameter.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
+    return SystemParameter.decode(message.value);
+  },
+
+  toProto(message: SystemParameter): Uint8Array {
+    return SystemParameter.encode(message).finish();
+  },
+
+  toProtoMsg(message: SystemParameter): SystemParameterProtoMsg {
+    return {
+      typeUrl: "/google.api.SystemParameter",
+      value: SystemParameter.encode(message).finish()
+    };
   }
 
 };

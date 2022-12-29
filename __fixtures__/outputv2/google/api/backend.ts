@@ -113,7 +113,7 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
-export interface BackendProtoType {
+export interface BackendProtoMsg {
   typeUrl: "/google.api.Backend";
   value: Uint8Array;
 }
@@ -127,7 +127,7 @@ export interface BackendAmino {
    */
   rules: BackendRuleAmino[];
 }
-export interface BackendAminoType {
+export interface BackendAminoMsg {
   type: "/google.api.Backend";
   value: BackendAmino;
 }
@@ -229,7 +229,7 @@ export interface BackendRule {
    */
   protocol: string;
 }
-export interface BackendRuleProtoType {
+export interface BackendRuleProtoMsg {
   typeUrl: "/google.api.BackendRule";
   value: Uint8Array;
 }
@@ -326,7 +326,7 @@ export interface BackendRuleAmino {
    */
   protocol: string;
 }
-export interface BackendRuleAminoType {
+export interface BackendRuleAminoMsg {
   type: "/google.api.BackendRule";
   value: BackendRuleAmino;
 }
@@ -351,6 +351,8 @@ function createBaseBackend(): Backend {
 }
 
 export const Backend = {
+  typeUrl: "/google.api.Backend",
+
   encode(message: Backend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       BackendRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -439,6 +441,25 @@ export const Backend = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BackendAminoMsg): Backend {
+    return Backend.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BackendProtoMsg): Backend {
+    return Backend.decode(message.value);
+  },
+
+  toProto(message: Backend): Uint8Array {
+    return Backend.encode(message).finish();
+  },
+
+  toProtoMsg(message: Backend): BackendProtoMsg {
+    return {
+      typeUrl: "/google.api.Backend",
+      value: Backend.encode(message).finish()
+    };
   }
 
 };
@@ -458,6 +479,8 @@ function createBaseBackendRule(): BackendRule {
 }
 
 export const BackendRule = {
+  typeUrl: "/google.api.BackendRule",
+
   encode(message: BackendRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -648,6 +671,25 @@ export const BackendRule = {
     obj.disable_auth = message.disableAuth;
     obj.protocol = message.protocol;
     return obj;
+  },
+
+  fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {
+    return BackendRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BackendRuleProtoMsg): BackendRule {
+    return BackendRule.decode(message.value);
+  },
+
+  toProto(message: BackendRule): Uint8Array {
+    return BackendRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: BackendRule): BackendRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.BackendRule",
+      value: BackendRule.encode(message).finish()
+    };
   }
 
 };

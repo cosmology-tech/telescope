@@ -17,7 +17,7 @@ export interface MsgConvertCoin {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
-export interface MsgConvertCoinProtoType {
+export interface MsgConvertCoinProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
   value: Uint8Array;
 }
@@ -36,7 +36,7 @@ export interface MsgConvertCoinAmino {
   /** cosmos bech32 address from the owner of the given Cosmos coins */
   sender: string;
 }
-export interface MsgConvertCoinAminoType {
+export interface MsgConvertCoinAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";
   value: MsgConvertCoinAmino;
 }
@@ -50,14 +50,14 @@ export interface MsgConvertCoinSDKType {
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponse {}
-export interface MsgConvertCoinResponseProtoType {
+export interface MsgConvertCoinResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
   value: Uint8Array;
 }
 
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseAmino {}
-export interface MsgConvertCoinResponseAminoType {
+export interface MsgConvertCoinResponseAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoinResponse";
   value: MsgConvertCoinResponseAmino;
 }
@@ -82,7 +82,7 @@ export interface MsgConvertERC20 {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
-export interface MsgConvertERC20ProtoType {
+export interface MsgConvertERC20ProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
   value: Uint8Array;
 }
@@ -104,7 +104,7 @@ export interface MsgConvertERC20Amino {
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
 }
-export interface MsgConvertERC20AminoType {
+export interface MsgConvertERC20AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertERC20";
   value: MsgConvertERC20Amino;
 }
@@ -122,14 +122,14 @@ export interface MsgConvertERC20SDKType {
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20Response {}
-export interface MsgConvertERC20ResponseProtoType {
+export interface MsgConvertERC20ResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
   value: Uint8Array;
 }
 
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20ResponseAmino {}
-export interface MsgConvertERC20ResponseAminoType {
+export interface MsgConvertERC20ResponseAminoMsg {
   type: "/evmos.erc20.v1.MsgConvertERC20Response";
   value: MsgConvertERC20ResponseAmino;
 }
@@ -146,6 +146,8 @@ function createBaseMsgConvertCoin(): MsgConvertCoin {
 }
 
 export const MsgConvertCoin = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
+
   encode(message: MsgConvertCoin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.coin !== undefined) {
       Coin.encode(message.coin, writer.uint32(10).fork()).ldelim();
@@ -246,6 +248,25 @@ export const MsgConvertCoin = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
+    return MsgConvertCoin.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgConvertCoinProtoMsg): MsgConvertCoin {
+    return MsgConvertCoin.decode(message.value);
+  },
+
+  toProto(message: MsgConvertCoin): Uint8Array {
+    return MsgConvertCoin.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgConvertCoin): MsgConvertCoinProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
+      value: MsgConvertCoin.encode(message).finish()
+    };
   }
 
 };
@@ -255,6 +276,8 @@ function createBaseMsgConvertCoinResponse(): MsgConvertCoinResponse {
 }
 
 export const MsgConvertCoinResponse = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse",
+
   encode(_: MsgConvertCoinResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -307,6 +330,25 @@ export const MsgConvertCoinResponse = {
   toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgConvertCoinResponseAminoMsg): MsgConvertCoinResponse {
+    return MsgConvertCoinResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgConvertCoinResponseProtoMsg): MsgConvertCoinResponse {
+    return MsgConvertCoinResponse.decode(message.value);
+  },
+
+  toProto(message: MsgConvertCoinResponse): Uint8Array {
+    return MsgConvertCoinResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgConvertCoinResponse): MsgConvertCoinResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse",
+      value: MsgConvertCoinResponse.encode(message).finish()
+    };
   }
 
 };
@@ -321,6 +363,8 @@ function createBaseMsgConvertERC20(): MsgConvertERC20 {
 }
 
 export const MsgConvertERC20 = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
+
   encode(message: MsgConvertERC20, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -436,6 +480,25 @@ export const MsgConvertERC20 = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {
+    return MsgConvertERC20.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgConvertERC20ProtoMsg): MsgConvertERC20 {
+    return MsgConvertERC20.decode(message.value);
+  },
+
+  toProto(message: MsgConvertERC20): Uint8Array {
+    return MsgConvertERC20.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgConvertERC20): MsgConvertERC20ProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
+      value: MsgConvertERC20.encode(message).finish()
+    };
   }
 
 };
@@ -445,6 +508,8 @@ function createBaseMsgConvertERC20Response(): MsgConvertERC20Response {
 }
 
 export const MsgConvertERC20Response = {
+  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response",
+
   encode(_: MsgConvertERC20Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -497,6 +562,25 @@ export const MsgConvertERC20Response = {
   toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgConvertERC20ResponseAminoMsg): MsgConvertERC20Response {
+    return MsgConvertERC20Response.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg): MsgConvertERC20Response {
+    return MsgConvertERC20Response.decode(message.value);
+  },
+
+  toProto(message: MsgConvertERC20Response): Uint8Array {
+    return MsgConvertERC20Response.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgConvertERC20Response): MsgConvertERC20ResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response",
+      value: MsgConvertERC20Response.encode(message).finish()
+    };
   }
 
 };

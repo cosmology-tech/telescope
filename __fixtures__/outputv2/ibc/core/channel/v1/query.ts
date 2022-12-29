@@ -14,7 +14,7 @@ export interface QueryChannelRequest {
   /** channel unique identifier */
   channelId: string;
 }
-export interface QueryChannelRequestProtoType {
+export interface QueryChannelRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelRequest";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface QueryChannelRequestAmino {
   /** channel unique identifier */
   channel_id: string;
 }
-export interface QueryChannelRequestAminoType {
+export interface QueryChannelRequestAminoMsg {
   type: "cosmos-sdk/QueryChannelRequest";
   value: QueryChannelRequestAmino;
 }
@@ -53,7 +53,7 @@ export interface QueryChannelResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryChannelResponseProtoType {
+export interface QueryChannelResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelResponse";
   value: Uint8Array;
 }
@@ -73,7 +73,7 @@ export interface QueryChannelResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryChannelResponseAminoType {
+export interface QueryChannelResponseAminoMsg {
   type: "cosmos-sdk/QueryChannelResponse";
   value: QueryChannelResponseAmino;
 }
@@ -94,7 +94,7 @@ export interface QueryChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
-export interface QueryChannelsRequestProtoType {
+export interface QueryChannelsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest";
   value: Uint8Array;
 }
@@ -104,7 +104,7 @@ export interface QueryChannelsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
-export interface QueryChannelsRequestAminoType {
+export interface QueryChannelsRequestAminoMsg {
   type: "cosmos-sdk/QueryChannelsRequest";
   value: QueryChannelsRequestAmino;
 }
@@ -125,7 +125,7 @@ export interface QueryChannelsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryChannelsResponseProtoType {
+export interface QueryChannelsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse";
   value: Uint8Array;
 }
@@ -141,7 +141,7 @@ export interface QueryChannelsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryChannelsResponseAminoType {
+export interface QueryChannelsResponseAminoMsg {
   type: "cosmos-sdk/QueryChannelsResponse";
   value: QueryChannelsResponseAmino;
 }
@@ -164,7 +164,7 @@ export interface QueryConnectionChannelsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
-export interface QueryConnectionChannelsRequestProtoType {
+export interface QueryConnectionChannelsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest";
   value: Uint8Array;
 }
@@ -180,7 +180,7 @@ export interface QueryConnectionChannelsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
-export interface QueryConnectionChannelsRequestAminoType {
+export interface QueryConnectionChannelsRequestAminoMsg {
   type: "cosmos-sdk/QueryConnectionChannelsRequest";
   value: QueryConnectionChannelsRequestAmino;
 }
@@ -208,7 +208,7 @@ export interface QueryConnectionChannelsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryConnectionChannelsResponseProtoType {
+export interface QueryConnectionChannelsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse";
   value: Uint8Array;
 }
@@ -227,7 +227,7 @@ export interface QueryConnectionChannelsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryConnectionChannelsResponseAminoType {
+export interface QueryConnectionChannelsResponseAminoMsg {
   type: "cosmos-sdk/QueryConnectionChannelsResponse";
   value: QueryConnectionChannelsResponseAmino;
 }
@@ -253,7 +253,7 @@ export interface QueryChannelClientStateRequest {
   /** channel unique identifier */
   channelId: string;
 }
-export interface QueryChannelClientStateRequestProtoType {
+export interface QueryChannelClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest";
   value: Uint8Array;
 }
@@ -269,7 +269,7 @@ export interface QueryChannelClientStateRequestAmino {
   /** channel unique identifier */
   channel_id: string;
 }
-export interface QueryChannelClientStateRequestAminoType {
+export interface QueryChannelClientStateRequestAminoMsg {
   type: "cosmos-sdk/QueryChannelClientStateRequest";
   value: QueryChannelClientStateRequestAmino;
 }
@@ -297,7 +297,7 @@ export interface QueryChannelClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryChannelClientStateResponseProtoType {
+export interface QueryChannelClientStateResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse";
   value: Uint8Array;
 }
@@ -316,7 +316,7 @@ export interface QueryChannelClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryChannelClientStateResponseAminoType {
+export interface QueryChannelClientStateResponseAminoMsg {
   type: "cosmos-sdk/QueryChannelClientStateResponse";
   value: QueryChannelClientStateResponseAmino;
 }
@@ -348,7 +348,7 @@ export interface QueryChannelConsensusStateRequest {
   /** revision height of the consensus state */
   revisionHeight: Long;
 }
-export interface QueryChannelConsensusStateRequestProtoType {
+export interface QueryChannelConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest";
   value: Uint8Array;
 }
@@ -370,7 +370,7 @@ export interface QueryChannelConsensusStateRequestAmino {
   /** revision height of the consensus state */
   revision_height: string;
 }
-export interface QueryChannelConsensusStateRequestAminoType {
+export interface QueryChannelConsensusStateRequestAminoMsg {
   type: "cosmos-sdk/QueryChannelConsensusStateRequest";
   value: QueryChannelConsensusStateRequestAmino;
 }
@@ -403,7 +403,7 @@ export interface QueryChannelConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryChannelConsensusStateResponseProtoType {
+export interface QueryChannelConsensusStateResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse";
   value: Uint8Array;
 }
@@ -425,7 +425,7 @@ export interface QueryChannelConsensusStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryChannelConsensusStateResponseAminoType {
+export interface QueryChannelConsensusStateResponseAminoMsg {
   type: "cosmos-sdk/QueryChannelConsensusStateResponse";
   value: QueryChannelConsensusStateResponseAmino;
 }
@@ -455,7 +455,7 @@ export interface QueryPacketCommitmentRequest {
   /** packet sequence */
   sequence: Long;
 }
-export interface QueryPacketCommitmentRequestProtoType {
+export interface QueryPacketCommitmentRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest";
   value: Uint8Array;
 }
@@ -474,7 +474,7 @@ export interface QueryPacketCommitmentRequestAmino {
   /** packet sequence */
   sequence: string;
 }
-export interface QueryPacketCommitmentRequestAminoType {
+export interface QueryPacketCommitmentRequestAminoMsg {
   type: "cosmos-sdk/QueryPacketCommitmentRequest";
   value: QueryPacketCommitmentRequestAmino;
 }
@@ -504,7 +504,7 @@ export interface QueryPacketCommitmentResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryPacketCommitmentResponseProtoType {
+export interface QueryPacketCommitmentResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse";
   value: Uint8Array;
 }
@@ -524,7 +524,7 @@ export interface QueryPacketCommitmentResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryPacketCommitmentResponseAminoType {
+export interface QueryPacketCommitmentResponseAminoMsg {
   type: "cosmos-sdk/QueryPacketCommitmentResponse";
   value: QueryPacketCommitmentResponseAmino;
 }
@@ -554,7 +554,7 @@ export interface QueryPacketCommitmentsRequest {
   /** pagination request */
   pagination?: PageRequest;
 }
-export interface QueryPacketCommitmentsRequestProtoType {
+export interface QueryPacketCommitmentsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest";
   value: Uint8Array;
 }
@@ -573,7 +573,7 @@ export interface QueryPacketCommitmentsRequestAmino {
   /** pagination request */
   pagination?: PageRequestAmino;
 }
-export interface QueryPacketCommitmentsRequestAminoType {
+export interface QueryPacketCommitmentsRequestAminoMsg {
   type: "cosmos-sdk/QueryPacketCommitmentsRequest";
   value: QueryPacketCommitmentsRequestAmino;
 }
@@ -601,7 +601,7 @@ export interface QueryPacketCommitmentsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryPacketCommitmentsResponseProtoType {
+export interface QueryPacketCommitmentsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse";
   value: Uint8Array;
 }
@@ -619,7 +619,7 @@ export interface QueryPacketCommitmentsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryPacketCommitmentsResponseAminoType {
+export interface QueryPacketCommitmentsResponseAminoMsg {
   type: "cosmos-sdk/QueryPacketCommitmentsResponse";
   value: QueryPacketCommitmentsResponseAmino;
 }
@@ -648,7 +648,7 @@ export interface QueryPacketReceiptRequest {
   /** packet sequence */
   sequence: Long;
 }
-export interface QueryPacketReceiptRequestProtoType {
+export interface QueryPacketReceiptRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest";
   value: Uint8Array;
 }
@@ -667,7 +667,7 @@ export interface QueryPacketReceiptRequestAmino {
   /** packet sequence */
   sequence: string;
 }
-export interface QueryPacketReceiptRequestAminoType {
+export interface QueryPacketReceiptRequestAminoMsg {
   type: "cosmos-sdk/QueryPacketReceiptRequest";
   value: QueryPacketReceiptRequestAmino;
 }
@@ -697,7 +697,7 @@ export interface QueryPacketReceiptResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryPacketReceiptResponseProtoType {
+export interface QueryPacketReceiptResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse";
   value: Uint8Array;
 }
@@ -717,7 +717,7 @@ export interface QueryPacketReceiptResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryPacketReceiptResponseAminoType {
+export interface QueryPacketReceiptResponseAminoMsg {
   type: "cosmos-sdk/QueryPacketReceiptResponse";
   value: QueryPacketReceiptResponseAmino;
 }
@@ -747,7 +747,7 @@ export interface QueryPacketAcknowledgementRequest {
   /** packet sequence */
   sequence: Long;
 }
-export interface QueryPacketAcknowledgementRequestProtoType {
+export interface QueryPacketAcknowledgementRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest";
   value: Uint8Array;
 }
@@ -766,7 +766,7 @@ export interface QueryPacketAcknowledgementRequestAmino {
   /** packet sequence */
   sequence: string;
 }
-export interface QueryPacketAcknowledgementRequestAminoType {
+export interface QueryPacketAcknowledgementRequestAminoMsg {
   type: "cosmos-sdk/QueryPacketAcknowledgementRequest";
   value: QueryPacketAcknowledgementRequestAmino;
 }
@@ -796,7 +796,7 @@ export interface QueryPacketAcknowledgementResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryPacketAcknowledgementResponseProtoType {
+export interface QueryPacketAcknowledgementResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse";
   value: Uint8Array;
 }
@@ -816,7 +816,7 @@ export interface QueryPacketAcknowledgementResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryPacketAcknowledgementResponseAminoType {
+export interface QueryPacketAcknowledgementResponseAminoMsg {
   type: "cosmos-sdk/QueryPacketAcknowledgementResponse";
   value: QueryPacketAcknowledgementResponseAmino;
 }
@@ -849,7 +849,7 @@ export interface QueryPacketAcknowledgementsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
-export interface QueryPacketAcknowledgementsRequestProtoType {
+export interface QueryPacketAcknowledgementsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest";
   value: Uint8Array;
 }
@@ -871,7 +871,7 @@ export interface QueryPacketAcknowledgementsRequestAmino {
   /** list of packet sequences */
   packet_commitment_sequences: string[];
 }
-export interface QueryPacketAcknowledgementsRequestAminoType {
+export interface QueryPacketAcknowledgementsRequestAminoMsg {
   type: "cosmos-sdk/QueryPacketAcknowledgementsRequest";
   value: QueryPacketAcknowledgementsRequestAmino;
 }
@@ -900,7 +900,7 @@ export interface QueryPacketAcknowledgementsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryPacketAcknowledgementsResponseProtoType {
+export interface QueryPacketAcknowledgementsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse";
   value: Uint8Array;
 }
@@ -918,7 +918,7 @@ export interface QueryPacketAcknowledgementsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryPacketAcknowledgementsResponseAminoType {
+export interface QueryPacketAcknowledgementsResponseAminoMsg {
   type: "cosmos-sdk/QueryPacketAcknowledgementsResponse";
   value: QueryPacketAcknowledgementsResponseAmino;
 }
@@ -947,7 +947,7 @@ export interface QueryUnreceivedPacketsRequest {
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
 }
-export interface QueryUnreceivedPacketsRequestProtoType {
+export interface QueryUnreceivedPacketsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest";
   value: Uint8Array;
 }
@@ -966,7 +966,7 @@ export interface QueryUnreceivedPacketsRequestAmino {
   /** list of packet sequences */
   packet_commitment_sequences: string[];
 }
-export interface QueryUnreceivedPacketsRequestAminoType {
+export interface QueryUnreceivedPacketsRequestAminoMsg {
   type: "cosmos-sdk/QueryUnreceivedPacketsRequest";
   value: QueryUnreceivedPacketsRequestAmino;
 }
@@ -992,7 +992,7 @@ export interface QueryUnreceivedPacketsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryUnreceivedPacketsResponseProtoType {
+export interface QueryUnreceivedPacketsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse";
   value: Uint8Array;
 }
@@ -1008,7 +1008,7 @@ export interface QueryUnreceivedPacketsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryUnreceivedPacketsResponseAminoType {
+export interface QueryUnreceivedPacketsResponseAminoMsg {
   type: "cosmos-sdk/QueryUnreceivedPacketsResponse";
   value: QueryUnreceivedPacketsResponseAmino;
 }
@@ -1036,7 +1036,7 @@ export interface QueryUnreceivedAcksRequest {
   /** list of acknowledgement sequences */
   packetAckSequences: Long[];
 }
-export interface QueryUnreceivedAcksRequestProtoType {
+export interface QueryUnreceivedAcksRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest";
   value: Uint8Array;
 }
@@ -1055,7 +1055,7 @@ export interface QueryUnreceivedAcksRequestAmino {
   /** list of acknowledgement sequences */
   packet_ack_sequences: string[];
 }
-export interface QueryUnreceivedAcksRequestAminoType {
+export interface QueryUnreceivedAcksRequestAminoMsg {
   type: "cosmos-sdk/QueryUnreceivedAcksRequest";
   value: QueryUnreceivedAcksRequestAmino;
 }
@@ -1081,7 +1081,7 @@ export interface QueryUnreceivedAcksResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryUnreceivedAcksResponseProtoType {
+export interface QueryUnreceivedAcksResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse";
   value: Uint8Array;
 }
@@ -1097,7 +1097,7 @@ export interface QueryUnreceivedAcksResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryUnreceivedAcksResponseAminoType {
+export interface QueryUnreceivedAcksResponseAminoMsg {
   type: "cosmos-sdk/QueryUnreceivedAcksResponse";
   value: QueryUnreceivedAcksResponseAmino;
 }
@@ -1122,7 +1122,7 @@ export interface QueryNextSequenceReceiveRequest {
   /** channel unique identifier */
   channelId: string;
 }
-export interface QueryNextSequenceReceiveRequestProtoType {
+export interface QueryNextSequenceReceiveRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest";
   value: Uint8Array;
 }
@@ -1138,7 +1138,7 @@ export interface QueryNextSequenceReceiveRequestAmino {
   /** channel unique identifier */
   channel_id: string;
 }
-export interface QueryNextSequenceReceiveRequestAminoType {
+export interface QueryNextSequenceReceiveRequestAminoMsg {
   type: "cosmos-sdk/QueryNextSequenceReceiveRequest";
   value: QueryNextSequenceReceiveRequestAmino;
 }
@@ -1166,7 +1166,7 @@ export interface QueryNextSequenceReceiveResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryNextSequenceReceiveResponseProtoType {
+export interface QueryNextSequenceReceiveResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse";
   value: Uint8Array;
 }
@@ -1185,7 +1185,7 @@ export interface QueryNextSequenceReceiveResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryNextSequenceReceiveResponseAminoType {
+export interface QueryNextSequenceReceiveResponseAminoMsg {
   type: "cosmos-sdk/QueryNextSequenceReceiveResponse";
   value: QueryNextSequenceReceiveResponseAmino;
 }
@@ -1208,6 +1208,9 @@ function createBaseQueryChannelRequest(): QueryChannelRequest {
 }
 
 export const QueryChannelRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelRequest",
+  aminoType: "cosmos-sdk/QueryChannelRequest",
+
   encode(message: QueryChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1293,6 +1296,32 @@ export const QueryChannelRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelRequestAminoMsg): QueryChannelRequest {
+    return QueryChannelRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelRequest): QueryChannelRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelRequest",
+      value: QueryChannelRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelRequestProtoMsg): QueryChannelRequest {
+    return QueryChannelRequest.decode(message.value);
+  },
+
+  toProto(message: QueryChannelRequest): Uint8Array {
+    return QueryChannelRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelRequest): QueryChannelRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelRequest",
+      value: QueryChannelRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1306,6 +1335,9 @@ function createBaseQueryChannelResponse(): QueryChannelResponse {
 }
 
 export const QueryChannelResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelResponse",
+  aminoType: "cosmos-sdk/QueryChannelResponse",
+
   encode(message: QueryChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(10).fork()).ldelim();
@@ -1406,6 +1438,32 @@ export const QueryChannelResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelResponseAminoMsg): QueryChannelResponse {
+    return QueryChannelResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelResponse): QueryChannelResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelResponse",
+      value: QueryChannelResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelResponseProtoMsg): QueryChannelResponse {
+    return QueryChannelResponse.decode(message.value);
+  },
+
+  toProto(message: QueryChannelResponse): Uint8Array {
+    return QueryChannelResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelResponse): QueryChannelResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelResponse",
+      value: QueryChannelResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1417,6 +1475,9 @@ function createBaseQueryChannelsRequest(): QueryChannelsRequest {
 }
 
 export const QueryChannelsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest",
+  aminoType: "cosmos-sdk/QueryChannelsRequest",
+
   encode(message: QueryChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1487,6 +1548,32 @@ export const QueryChannelsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelsRequestAminoMsg): QueryChannelsRequest {
+    return QueryChannelsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelsRequest): QueryChannelsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelsRequest",
+      value: QueryChannelsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelsRequestProtoMsg): QueryChannelsRequest {
+    return QueryChannelsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryChannelsRequest): Uint8Array {
+    return QueryChannelsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelsRequest): QueryChannelsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest",
+      value: QueryChannelsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1500,6 +1587,9 @@ function createBaseQueryChannelsResponse(): QueryChannelsResponse {
 }
 
 export const QueryChannelsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse",
+  aminoType: "cosmos-sdk/QueryChannelsResponse",
+
   encode(message: QueryChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1618,6 +1708,32 @@ export const QueryChannelsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelsResponseAminoMsg): QueryChannelsResponse {
+    return QueryChannelsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelsResponse): QueryChannelsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelsResponse",
+      value: QueryChannelsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelsResponseProtoMsg): QueryChannelsResponse {
+    return QueryChannelsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryChannelsResponse): Uint8Array {
+    return QueryChannelsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelsResponse): QueryChannelsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse",
+      value: QueryChannelsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1630,6 +1746,9 @@ function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequ
 }
 
 export const QueryConnectionChannelsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsRequest",
+
   encode(message: QueryConnectionChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== "") {
       writer.uint32(10).string(message.connection);
@@ -1715,6 +1834,32 @@ export const QueryConnectionChannelsRequest = {
     obj.connection = message.connection;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionChannelsRequestAminoMsg): QueryConnectionChannelsRequest {
+    return QueryConnectionChannelsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionChannelsRequest): QueryConnectionChannelsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionChannelsRequest",
+      value: QueryConnectionChannelsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionChannelsRequestProtoMsg): QueryConnectionChannelsRequest {
+    return QueryConnectionChannelsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionChannelsRequest): Uint8Array {
+    return QueryConnectionChannelsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionChannelsRequest): QueryConnectionChannelsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest",
+      value: QueryConnectionChannelsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1728,6 +1873,9 @@ function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsRes
 }
 
 export const QueryConnectionChannelsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsResponse",
+
   encode(message: QueryConnectionChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1846,6 +1994,32 @@ export const QueryConnectionChannelsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionChannelsResponseAminoMsg): QueryConnectionChannelsResponse {
+    return QueryConnectionChannelsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionChannelsResponse): QueryConnectionChannelsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionChannelsResponse",
+      value: QueryConnectionChannelsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionChannelsResponseProtoMsg): QueryConnectionChannelsResponse {
+    return QueryConnectionChannelsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionChannelsResponse): Uint8Array {
+    return QueryConnectionChannelsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionChannelsResponse): QueryConnectionChannelsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse",
+      value: QueryConnectionChannelsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1858,6 +2032,9 @@ function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequ
 }
 
 export const QueryChannelClientStateRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelClientStateRequest",
+
   encode(message: QueryChannelClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1943,6 +2120,32 @@ export const QueryChannelClientStateRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelClientStateRequestAminoMsg): QueryChannelClientStateRequest {
+    return QueryChannelClientStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelClientStateRequest): QueryChannelClientStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelClientStateRequest",
+      value: QueryChannelClientStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelClientStateRequestProtoMsg): QueryChannelClientStateRequest {
+    return QueryChannelClientStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryChannelClientStateRequest): Uint8Array {
+    return QueryChannelClientStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelClientStateRequest): QueryChannelClientStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest",
+      value: QueryChannelClientStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1956,6 +2159,9 @@ function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateRes
 }
 
 export const QueryChannelClientStateResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelClientStateResponse",
+
   encode(message: QueryChannelClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
@@ -2056,6 +2262,32 @@ export const QueryChannelClientStateResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelClientStateResponseAminoMsg): QueryChannelClientStateResponse {
+    return QueryChannelClientStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelClientStateResponse",
+      value: QueryChannelClientStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelClientStateResponseProtoMsg): QueryChannelClientStateResponse {
+    return QueryChannelClientStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryChannelClientStateResponse): Uint8Array {
+    return QueryChannelClientStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse",
+      value: QueryChannelClientStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2070,6 +2302,9 @@ function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusSta
 }
 
 export const QueryChannelConsensusStateRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateRequest",
+
   encode(message: QueryChannelConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2185,6 +2420,32 @@ export const QueryChannelConsensusStateRequest = {
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelConsensusStateRequestAminoMsg): QueryChannelConsensusStateRequest {
+    return QueryChannelConsensusStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelConsensusStateRequest): QueryChannelConsensusStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelConsensusStateRequest",
+      value: QueryChannelConsensusStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelConsensusStateRequestProtoMsg): QueryChannelConsensusStateRequest {
+    return QueryChannelConsensusStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryChannelConsensusStateRequest): Uint8Array {
+    return QueryChannelConsensusStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelConsensusStateRequest): QueryChannelConsensusStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest",
+      value: QueryChannelConsensusStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2199,6 +2460,9 @@ function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusSt
 }
 
 export const QueryChannelConsensusStateResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateResponse",
+
   encode(message: QueryChannelConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -2314,6 +2578,32 @@ export const QueryChannelConsensusStateResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryChannelConsensusStateResponseAminoMsg): QueryChannelConsensusStateResponse {
+    return QueryChannelConsensusStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryChannelConsensusStateResponse): QueryChannelConsensusStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryChannelConsensusStateResponse",
+      value: QueryChannelConsensusStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryChannelConsensusStateResponseProtoMsg): QueryChannelConsensusStateResponse {
+    return QueryChannelConsensusStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryChannelConsensusStateResponse): Uint8Array {
+    return QueryChannelConsensusStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryChannelConsensusStateResponse): QueryChannelConsensusStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse",
+      value: QueryChannelConsensusStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2327,6 +2617,9 @@ function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest 
 }
 
 export const QueryPacketCommitmentRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentRequest",
+
   encode(message: QueryPacketCommitmentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2427,6 +2720,32 @@ export const QueryPacketCommitmentRequest = {
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketCommitmentRequestAminoMsg): QueryPacketCommitmentRequest {
+    return QueryPacketCommitmentRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketCommitmentRequest): QueryPacketCommitmentRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketCommitmentRequest",
+      value: QueryPacketCommitmentRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketCommitmentRequestProtoMsg): QueryPacketCommitmentRequest {
+    return QueryPacketCommitmentRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPacketCommitmentRequest): Uint8Array {
+    return QueryPacketCommitmentRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketCommitmentRequest): QueryPacketCommitmentRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest",
+      value: QueryPacketCommitmentRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2440,6 +2759,9 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
 }
 
 export const QueryPacketCommitmentResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentResponse",
+
   encode(message: QueryPacketCommitmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commitment.length !== 0) {
       writer.uint32(10).bytes(message.commitment);
@@ -2540,6 +2862,32 @@ export const QueryPacketCommitmentResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketCommitmentResponseAminoMsg): QueryPacketCommitmentResponse {
+    return QueryPacketCommitmentResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketCommitmentResponse",
+      value: QueryPacketCommitmentResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketCommitmentResponseProtoMsg): QueryPacketCommitmentResponse {
+    return QueryPacketCommitmentResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPacketCommitmentResponse): Uint8Array {
+    return QueryPacketCommitmentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse",
+      value: QueryPacketCommitmentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2553,6 +2901,9 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
 }
 
 export const QueryPacketCommitmentsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsRequest",
+
   encode(message: QueryPacketCommitmentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2653,6 +3004,32 @@ export const QueryPacketCommitmentsRequest = {
     obj.channel_id = message.channelId;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketCommitmentsRequestAminoMsg): QueryPacketCommitmentsRequest {
+    return QueryPacketCommitmentsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketCommitmentsRequest): QueryPacketCommitmentsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketCommitmentsRequest",
+      value: QueryPacketCommitmentsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketCommitmentsRequestProtoMsg): QueryPacketCommitmentsRequest {
+    return QueryPacketCommitmentsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPacketCommitmentsRequest): Uint8Array {
+    return QueryPacketCommitmentsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketCommitmentsRequest): QueryPacketCommitmentsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest",
+      value: QueryPacketCommitmentsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2666,6 +3043,9 @@ function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsRespo
 }
 
 export const QueryPacketCommitmentsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsResponse",
+
   encode(message: QueryPacketCommitmentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commitments) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2784,6 +3164,32 @@ export const QueryPacketCommitmentsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketCommitmentsResponseAminoMsg): QueryPacketCommitmentsResponse {
+    return QueryPacketCommitmentsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketCommitmentsResponse): QueryPacketCommitmentsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketCommitmentsResponse",
+      value: QueryPacketCommitmentsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketCommitmentsResponseProtoMsg): QueryPacketCommitmentsResponse {
+    return QueryPacketCommitmentsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPacketCommitmentsResponse): Uint8Array {
+    return QueryPacketCommitmentsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketCommitmentsResponse): QueryPacketCommitmentsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse",
+      value: QueryPacketCommitmentsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2797,6 +3203,9 @@ function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
 }
 
 export const QueryPacketReceiptRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest",
+  aminoType: "cosmos-sdk/QueryPacketReceiptRequest",
+
   encode(message: QueryPacketReceiptRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2897,6 +3306,32 @@ export const QueryPacketReceiptRequest = {
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketReceiptRequestAminoMsg): QueryPacketReceiptRequest {
+    return QueryPacketReceiptRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketReceiptRequest): QueryPacketReceiptRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketReceiptRequest",
+      value: QueryPacketReceiptRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketReceiptRequestProtoMsg): QueryPacketReceiptRequest {
+    return QueryPacketReceiptRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPacketReceiptRequest): Uint8Array {
+    return QueryPacketReceiptRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketReceiptRequest): QueryPacketReceiptRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest",
+      value: QueryPacketReceiptRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2910,6 +3345,9 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
 }
 
 export const QueryPacketReceiptResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse",
+  aminoType: "cosmos-sdk/QueryPacketReceiptResponse",
+
   encode(message: QueryPacketReceiptResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.received === true) {
       writer.uint32(16).bool(message.received);
@@ -3010,6 +3448,32 @@ export const QueryPacketReceiptResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketReceiptResponseAminoMsg): QueryPacketReceiptResponse {
+    return QueryPacketReceiptResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketReceiptResponse",
+      value: QueryPacketReceiptResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketReceiptResponseProtoMsg): QueryPacketReceiptResponse {
+    return QueryPacketReceiptResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPacketReceiptResponse): Uint8Array {
+    return QueryPacketReceiptResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse",
+      value: QueryPacketReceiptResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3023,6 +3487,9 @@ function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgeme
 }
 
 export const QueryPacketAcknowledgementRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementRequest",
+
   encode(message: QueryPacketAcknowledgementRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3123,6 +3590,32 @@ export const QueryPacketAcknowledgementRequest = {
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketAcknowledgementRequestAminoMsg): QueryPacketAcknowledgementRequest {
+    return QueryPacketAcknowledgementRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketAcknowledgementRequest): QueryPacketAcknowledgementRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketAcknowledgementRequest",
+      value: QueryPacketAcknowledgementRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketAcknowledgementRequestProtoMsg): QueryPacketAcknowledgementRequest {
+    return QueryPacketAcknowledgementRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPacketAcknowledgementRequest): Uint8Array {
+    return QueryPacketAcknowledgementRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketAcknowledgementRequest): QueryPacketAcknowledgementRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest",
+      value: QueryPacketAcknowledgementRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3136,6 +3629,9 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementResponse",
+
   encode(message: QueryPacketAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.acknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.acknowledgement);
@@ -3236,6 +3732,32 @@ export const QueryPacketAcknowledgementResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketAcknowledgementResponseAminoMsg): QueryPacketAcknowledgementResponse {
+    return QueryPacketAcknowledgementResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketAcknowledgementResponse",
+      value: QueryPacketAcknowledgementResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketAcknowledgementResponseProtoMsg): QueryPacketAcknowledgementResponse {
+    return QueryPacketAcknowledgementResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPacketAcknowledgementResponse): Uint8Array {
+    return QueryPacketAcknowledgementResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse",
+      value: QueryPacketAcknowledgementResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3250,6 +3772,9 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsRequest",
+
   encode(message: QueryPacketAcknowledgementsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3395,6 +3920,32 @@ export const QueryPacketAcknowledgementsRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketAcknowledgementsRequestAminoMsg): QueryPacketAcknowledgementsRequest {
+    return QueryPacketAcknowledgementsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketAcknowledgementsRequest): QueryPacketAcknowledgementsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketAcknowledgementsRequest",
+      value: QueryPacketAcknowledgementsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketAcknowledgementsRequestProtoMsg): QueryPacketAcknowledgementsRequest {
+    return QueryPacketAcknowledgementsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPacketAcknowledgementsRequest): Uint8Array {
+    return QueryPacketAcknowledgementsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketAcknowledgementsRequest): QueryPacketAcknowledgementsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest",
+      value: QueryPacketAcknowledgementsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3408,6 +3959,9 @@ function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledge
 }
 
 export const QueryPacketAcknowledgementsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsResponse",
+
   encode(message: QueryPacketAcknowledgementsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.acknowledgements) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3526,6 +4080,32 @@ export const QueryPacketAcknowledgementsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPacketAcknowledgementsResponseAminoMsg): QueryPacketAcknowledgementsResponse {
+    return QueryPacketAcknowledgementsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPacketAcknowledgementsResponse): QueryPacketAcknowledgementsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryPacketAcknowledgementsResponse",
+      value: QueryPacketAcknowledgementsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPacketAcknowledgementsResponseProtoMsg): QueryPacketAcknowledgementsResponse {
+    return QueryPacketAcknowledgementsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPacketAcknowledgementsResponse): Uint8Array {
+    return QueryPacketAcknowledgementsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPacketAcknowledgementsResponse): QueryPacketAcknowledgementsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse",
+      value: QueryPacketAcknowledgementsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3539,6 +4119,9 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
 }
 
 export const QueryUnreceivedPacketsRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsRequest",
+
   encode(message: QueryUnreceivedPacketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3669,6 +4252,32 @@ export const QueryUnreceivedPacketsRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryUnreceivedPacketsRequestAminoMsg): QueryUnreceivedPacketsRequest {
+    return QueryUnreceivedPacketsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryUnreceivedPacketsRequest): QueryUnreceivedPacketsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUnreceivedPacketsRequest",
+      value: QueryUnreceivedPacketsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryUnreceivedPacketsRequestProtoMsg): QueryUnreceivedPacketsRequest {
+    return QueryUnreceivedPacketsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryUnreceivedPacketsRequest): Uint8Array {
+    return QueryUnreceivedPacketsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryUnreceivedPacketsRequest): QueryUnreceivedPacketsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest",
+      value: QueryUnreceivedPacketsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3681,6 +4290,9 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 }
 
 export const QueryUnreceivedPacketsResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsResponse",
+
   encode(message: QueryUnreceivedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 
@@ -3797,6 +4409,32 @@ export const QueryUnreceivedPacketsResponse = {
 
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryUnreceivedPacketsResponseAminoMsg): QueryUnreceivedPacketsResponse {
+    return QueryUnreceivedPacketsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryUnreceivedPacketsResponse): QueryUnreceivedPacketsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUnreceivedPacketsResponse",
+      value: QueryUnreceivedPacketsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryUnreceivedPacketsResponseProtoMsg): QueryUnreceivedPacketsResponse {
+    return QueryUnreceivedPacketsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryUnreceivedPacketsResponse): Uint8Array {
+    return QueryUnreceivedPacketsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryUnreceivedPacketsResponse): QueryUnreceivedPacketsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse",
+      value: QueryUnreceivedPacketsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3810,6 +4448,9 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
 }
 
 export const QueryUnreceivedAcksRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksRequest",
+
   encode(message: QueryUnreceivedAcksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -3940,6 +4581,32 @@ export const QueryUnreceivedAcksRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryUnreceivedAcksRequestAminoMsg): QueryUnreceivedAcksRequest {
+    return QueryUnreceivedAcksRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryUnreceivedAcksRequest): QueryUnreceivedAcksRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUnreceivedAcksRequest",
+      value: QueryUnreceivedAcksRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryUnreceivedAcksRequestProtoMsg): QueryUnreceivedAcksRequest {
+    return QueryUnreceivedAcksRequest.decode(message.value);
+  },
+
+  toProto(message: QueryUnreceivedAcksRequest): Uint8Array {
+    return QueryUnreceivedAcksRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryUnreceivedAcksRequest): QueryUnreceivedAcksRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest",
+      value: QueryUnreceivedAcksRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3952,6 +4619,9 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 }
 
 export const QueryUnreceivedAcksResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksResponse",
+
   encode(message: QueryUnreceivedAcksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 
@@ -4068,6 +4738,32 @@ export const QueryUnreceivedAcksResponse = {
 
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryUnreceivedAcksResponseAminoMsg): QueryUnreceivedAcksResponse {
+    return QueryUnreceivedAcksResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryUnreceivedAcksResponse): QueryUnreceivedAcksResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryUnreceivedAcksResponse",
+      value: QueryUnreceivedAcksResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryUnreceivedAcksResponseProtoMsg): QueryUnreceivedAcksResponse {
+    return QueryUnreceivedAcksResponse.decode(message.value);
+  },
+
+  toProto(message: QueryUnreceivedAcksResponse): Uint8Array {
+    return QueryUnreceivedAcksResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryUnreceivedAcksResponse): QueryUnreceivedAcksResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse",
+      value: QueryUnreceivedAcksResponse.encode(message).finish()
+    };
   }
 
 };
@@ -4080,6 +4776,9 @@ function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRe
 }
 
 export const QueryNextSequenceReceiveRequest = {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveRequest",
+
   encode(message: QueryNextSequenceReceiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -4165,6 +4864,32 @@ export const QueryNextSequenceReceiveRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryNextSequenceReceiveRequestAminoMsg): QueryNextSequenceReceiveRequest {
+    return QueryNextSequenceReceiveRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryNextSequenceReceiveRequest): QueryNextSequenceReceiveRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryNextSequenceReceiveRequest",
+      value: QueryNextSequenceReceiveRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryNextSequenceReceiveRequestProtoMsg): QueryNextSequenceReceiveRequest {
+    return QueryNextSequenceReceiveRequest.decode(message.value);
+  },
+
+  toProto(message: QueryNextSequenceReceiveRequest): Uint8Array {
+    return QueryNextSequenceReceiveRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryNextSequenceReceiveRequest): QueryNextSequenceReceiveRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest",
+      value: QueryNextSequenceReceiveRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4178,6 +4903,9 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
 }
 
 export const QueryNextSequenceReceiveResponse = {
+  typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveResponse",
+
   encode(message: QueryNextSequenceReceiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.nextSequenceReceive.isZero()) {
       writer.uint32(8).uint64(message.nextSequenceReceive);
@@ -4278,6 +5006,32 @@ export const QueryNextSequenceReceiveResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryNextSequenceReceiveResponseAminoMsg): QueryNextSequenceReceiveResponse {
+    return QueryNextSequenceReceiveResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryNextSequenceReceiveResponse",
+      value: QueryNextSequenceReceiveResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryNextSequenceReceiveResponseProtoMsg): QueryNextSequenceReceiveResponse {
+    return QueryNextSequenceReceiveResponse.decode(message.value);
+  },
+
+  toProto(message: QueryNextSequenceReceiveResponse): Uint8Array {
+    return QueryNextSequenceReceiveResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse",
+      value: QueryNextSequenceReceiveResponse.encode(message).finish()
+    };
   }
 
 };

@@ -10,7 +10,7 @@ export interface Resource {
   count: number;
   price?: DecCoin;
 }
-export interface ResourceProtoType {
+export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Resource";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface ResourceAmino {
   count: number;
   price?: DecCoinAmino;
 }
-export interface ResourceAminoType {
+export interface ResourceAminoMsg {
   type: "/akash.deployment.v1beta2.Resource";
   value: ResourceAmino;
 }
@@ -42,6 +42,8 @@ function createBaseResource(): Resource {
 }
 
 export const Resource = {
+  typeUrl: "/akash.deployment.v1beta2.Resource",
+
   encode(message: Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
@@ -142,6 +144,25 @@ export const Resource = {
     obj.count = message.count;
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceAminoMsg): Resource {
+    return Resource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceProtoMsg): Resource {
+    return Resource.decode(message.value);
+  },
+
+  toProto(message: Resource): Uint8Array {
+    return Resource.encode(message).finish();
+  },
+
+  toProtoMsg(message: Resource): ResourceProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.Resource",
+      value: Resource.encode(message).finish()
+    };
   }
 
 };

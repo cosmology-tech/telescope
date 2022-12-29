@@ -283,7 +283,7 @@ export interface CheckError {
    */
   status?: Status;
 }
-export interface CheckErrorProtoType {
+export interface CheckErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckError";
   value: Uint8Array;
 }
@@ -316,7 +316,7 @@ export interface CheckErrorAmino {
    */
   status?: StatusAmino;
 }
-export interface CheckErrorAminoType {
+export interface CheckErrorAminoMsg {
   type: "/google.api.servicecontrol.v1.CheckError";
   value: CheckErrorAmino;
 }
@@ -342,6 +342,8 @@ function createBaseCheckError(): CheckError {
 }
 
 export const CheckError = {
+  typeUrl: "/google.api.servicecontrol.v1.CheckError",
+
   encode(message: CheckError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
@@ -457,6 +459,25 @@ export const CheckError = {
     obj.detail = message.detail;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
+    return CheckError.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
+    return CheckError.decode(message.value);
+  },
+
+  toProto(message: CheckError): Uint8Array {
+    return CheckError.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckError): CheckErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckError",
+      value: CheckError.encode(message).finish()
+    };
   }
 
 };

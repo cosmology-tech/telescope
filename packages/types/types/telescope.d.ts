@@ -33,6 +33,10 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -40,6 +44,8 @@ interface TelescopeOpts {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];

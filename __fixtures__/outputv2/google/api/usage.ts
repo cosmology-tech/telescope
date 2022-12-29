@@ -36,7 +36,7 @@ export interface Usage {
    */
   producerNotificationChannel: string;
 }
-export interface UsageProtoType {
+export interface UsageProtoMsg {
   typeUrl: "/google.api.Usage";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface UsageAmino {
    */
   producer_notification_channel: string;
 }
-export interface UsageAminoType {
+export interface UsageAminoMsg {
   type: "/google.api.Usage";
   value: UsageAmino;
 }
@@ -137,7 +137,7 @@ export interface UsageRule {
    */
   skipServiceControl: boolean;
 }
-export interface UsageRuleProtoType {
+export interface UsageRuleProtoMsg {
   typeUrl: "/google.api.UsageRule";
   value: Uint8Array;
 }
@@ -192,7 +192,7 @@ export interface UsageRuleAmino {
    */
   skip_service_control: boolean;
 }
-export interface UsageRuleAminoType {
+export interface UsageRuleAminoMsg {
   type: "/google.api.UsageRule";
   value: UsageRuleAmino;
 }
@@ -239,6 +239,8 @@ function createBaseUsage(): Usage {
 }
 
 export const Usage = {
+  typeUrl: "/google.api.Usage",
+
   encode(message: Usage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.requirements) {
       writer.uint32(10).string(v!);
@@ -372,6 +374,25 @@ export const Usage = {
 
     obj.producer_notification_channel = message.producerNotificationChannel;
     return obj;
+  },
+
+  fromAminoMsg(object: UsageAminoMsg): Usage {
+    return Usage.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UsageProtoMsg): Usage {
+    return Usage.decode(message.value);
+  },
+
+  toProto(message: Usage): Uint8Array {
+    return Usage.encode(message).finish();
+  },
+
+  toProtoMsg(message: Usage): UsageProtoMsg {
+    return {
+      typeUrl: "/google.api.Usage",
+      value: Usage.encode(message).finish()
+    };
   }
 
 };
@@ -385,6 +406,8 @@ function createBaseUsageRule(): UsageRule {
 }
 
 export const UsageRule = {
+  typeUrl: "/google.api.UsageRule",
+
   encode(message: UsageRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -485,6 +508,25 @@ export const UsageRule = {
     obj.allow_unregistered_calls = message.allowUnregisteredCalls;
     obj.skip_service_control = message.skipServiceControl;
     return obj;
+  },
+
+  fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
+    return UsageRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UsageRuleProtoMsg): UsageRule {
+    return UsageRule.decode(message.value);
+  },
+
+  toProto(message: UsageRule): Uint8Array {
+    return UsageRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: UsageRule): UsageRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.UsageRule",
+      value: UsageRule.encode(message).finish()
+    };
   }
 
 };

@@ -337,7 +337,7 @@ export interface Type {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface TypeProtoType {
+export interface TypeProtoMsg {
   typeUrl: "/google.protobuf.Type";
   value: Uint8Array;
 }
@@ -362,7 +362,7 @@ export interface TypeAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface TypeAminoType {
+export interface TypeAminoMsg {
   type: "/google.protobuf.Type";
   value: TypeAmino;
 }
@@ -415,7 +415,7 @@ export interface Field {
   /** The string value of the default value of this field. Proto2 syntax only. */
   defaultValue: string;
 }
-export interface FieldProtoType {
+export interface FieldProtoMsg {
   typeUrl: "/google.protobuf.Field";
   value: Uint8Array;
 }
@@ -458,7 +458,7 @@ export interface FieldAmino {
   /** The string value of the default value of this field. Proto2 syntax only. */
   default_value: string;
 }
-export interface FieldAminoType {
+export interface FieldAminoMsg {
   type: "/google.protobuf.Field";
   value: FieldAmino;
 }
@@ -494,7 +494,7 @@ export interface Enum {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface EnumProtoType {
+export interface EnumProtoMsg {
   typeUrl: "/google.protobuf.Enum";
   value: Uint8Array;
 }
@@ -516,7 +516,7 @@ export interface EnumAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface EnumAminoType {
+export interface EnumAminoMsg {
   type: "/google.protobuf.Enum";
   value: EnumAmino;
 }
@@ -541,7 +541,7 @@ export interface EnumValue {
   /** Protocol buffer options. */
   options: Option[];
 }
-export interface EnumValueProtoType {
+export interface EnumValueProtoMsg {
   typeUrl: "/google.protobuf.EnumValue";
   value: Uint8Array;
 }
@@ -557,7 +557,7 @@ export interface EnumValueAmino {
   /** Protocol buffer options. */
   options: OptionAmino[];
 }
-export interface EnumValueAminoType {
+export interface EnumValueAminoMsg {
   type: "/google.protobuf.EnumValue";
   value: EnumValueAmino;
 }
@@ -590,7 +590,7 @@ export interface Option {
    */
   value?: Any;
 }
-export interface OptionProtoType {
+export interface OptionProtoMsg {
   typeUrl: "/google.protobuf.Option";
   value: Uint8Array;
 }
@@ -616,7 +616,7 @@ export interface OptionAmino {
    */
   value?: AnyAmino;
 }
-export interface OptionAminoType {
+export interface OptionAminoMsg {
   type: "/google.protobuf.Option";
   value: OptionAmino;
 }
@@ -642,6 +642,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  typeUrl: "/google.protobuf.Type",
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -835,6 +837,25 @@ export const Type = {
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
     obj.syntax = message.syntax;
     return obj;
+  },
+
+  fromAminoMsg(object: TypeAminoMsg): Type {
+    return Type.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: TypeProtoMsg): Type {
+    return Type.decode(message.value);
+  },
+
+  toProto(message: Type): Uint8Array {
+    return Type.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type): TypeProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Type",
+      value: Type.encode(message).finish()
+    };
   }
 
 };
@@ -855,6 +876,8 @@ function createBaseField(): Field {
 }
 
 export const Field = {
+  typeUrl: "/google.protobuf.Field",
+
   encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -1078,6 +1101,25 @@ export const Field = {
     obj.json_name = message.jsonName;
     obj.default_value = message.defaultValue;
     return obj;
+  },
+
+  fromAminoMsg(object: FieldAminoMsg): Field {
+    return Field.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: FieldProtoMsg): Field {
+    return Field.decode(message.value);
+  },
+
+  toProto(message: Field): Uint8Array {
+    return Field.encode(message).finish();
+  },
+
+  toProtoMsg(message: Field): FieldProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Field",
+      value: Field.encode(message).finish()
+    };
   }
 
 };
@@ -1093,6 +1135,8 @@ function createBaseEnum(): Enum {
 }
 
 export const Enum = {
+  typeUrl: "/google.protobuf.Enum",
+
   encode(message: Enum, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1256,6 +1300,25 @@ export const Enum = {
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
     obj.syntax = message.syntax;
     return obj;
+  },
+
+  fromAminoMsg(object: EnumAminoMsg): Enum {
+    return Enum.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EnumProtoMsg): Enum {
+    return Enum.decode(message.value);
+  },
+
+  toProto(message: Enum): Uint8Array {
+    return Enum.encode(message).finish();
+  },
+
+  toProtoMsg(message: Enum): EnumProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Enum",
+      value: Enum.encode(message).finish()
+    };
   }
 
 };
@@ -1269,6 +1332,8 @@ function createBaseEnumValue(): EnumValue {
 }
 
 export const EnumValue = {
+  typeUrl: "/google.protobuf.EnumValue",
+
   encode(message: EnumValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1387,6 +1452,25 @@ export const EnumValue = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
+    return EnumValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
+    return EnumValue.decode(message.value);
+  },
+
+  toProto(message: EnumValue): Uint8Array {
+    return EnumValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: EnumValue): EnumValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.EnumValue",
+      value: EnumValue.encode(message).finish()
+    };
   }
 
 };
@@ -1399,6 +1483,8 @@ function createBaseOption(): Option {
 }
 
 export const Option = {
+  typeUrl: "/google.protobuf.Option",
+
   encode(message: Option, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1484,6 +1570,25 @@ export const Option = {
     obj.name = message.name;
     obj.value = message.value ? Any.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: OptionAminoMsg): Option {
+    return Option.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OptionProtoMsg): Option {
+    return Option.decode(message.value);
+  },
+
+  toProto(message: Option): Uint8Array {
+    return Option.encode(message).finish();
+  },
+
+  toProtoMsg(message: Option): OptionProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Option",
+      value: Option.encode(message).finish()
+    };
   }
 
 };

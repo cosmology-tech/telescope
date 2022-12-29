@@ -18,7 +18,7 @@ export interface StoreKVPair {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface StoreKVPairProtoType {
+export interface StoreKVPairProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair";
   value: Uint8Array;
 }
@@ -39,7 +39,7 @@ export interface StoreKVPairAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface StoreKVPairAminoType {
+export interface StoreKVPairAminoMsg {
   type: "cosmos-sdk/StoreKVPair";
   value: StoreKVPairAmino;
 }
@@ -68,6 +68,9 @@ function createBaseStoreKVPair(): StoreKVPair {
 }
 
 export const StoreKVPair = {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair",
+  aminoType: "cosmos-sdk/StoreKVPair",
+
   encode(message: StoreKVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.storeKey !== "") {
       writer.uint32(10).string(message.storeKey);
@@ -183,6 +186,32 @@ export const StoreKVPair = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
+    return StoreKVPair.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StoreKVPair): StoreKVPairAminoMsg {
+    return {
+      type: "cosmos-sdk/StoreKVPair",
+      value: StoreKVPair.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
+    return StoreKVPair.decode(message.value);
+  },
+
+  toProto(message: StoreKVPair): Uint8Array {
+    return StoreKVPair.encode(message).finish();
+  },
+
+  toProtoMsg(message: StoreKVPair): StoreKVPairProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair",
+      value: StoreKVPair.encode(message).finish()
+    };
   }
 
 };

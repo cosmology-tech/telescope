@@ -34,7 +34,7 @@ export interface Visibility {
    */
   rules: VisibilityRule[];
 }
-export interface VisibilityProtoType {
+export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
   value: Uint8Array;
 }
@@ -71,7 +71,7 @@ export interface VisibilityAmino {
    */
   rules: VisibilityRuleAmino[];
 }
-export interface VisibilityAminoType {
+export interface VisibilityAminoMsg {
   type: "/google.api.Visibility";
   value: VisibilityAmino;
 }
@@ -135,7 +135,7 @@ export interface VisibilityRule {
    */
   restriction: string;
 }
-export interface VisibilityRuleProtoType {
+export interface VisibilityRuleProtoMsg {
   typeUrl: "/google.api.VisibilityRule";
   value: Uint8Array;
 }
@@ -171,7 +171,7 @@ export interface VisibilityRuleAmino {
    */
   restriction: string;
 }
-export interface VisibilityRuleAminoType {
+export interface VisibilityRuleAminoMsg {
   type: "/google.api.VisibilityRule";
   value: VisibilityRuleAmino;
 }
@@ -192,6 +192,8 @@ function createBaseVisibility(): Visibility {
 }
 
 export const Visibility = {
+  typeUrl: "/google.api.Visibility",
+
   encode(message: Visibility, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       VisibilityRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -280,6 +282,25 @@ export const Visibility = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
+    return Visibility.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
+    return Visibility.decode(message.value);
+  },
+
+  toProto(message: Visibility): Uint8Array {
+    return Visibility.encode(message).finish();
+  },
+
+  toProtoMsg(message: Visibility): VisibilityProtoMsg {
+    return {
+      typeUrl: "/google.api.Visibility",
+      value: Visibility.encode(message).finish()
+    };
   }
 
 };
@@ -292,6 +313,8 @@ function createBaseVisibilityRule(): VisibilityRule {
 }
 
 export const VisibilityRule = {
+  typeUrl: "/google.api.VisibilityRule",
+
   encode(message: VisibilityRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -377,6 +400,25 @@ export const VisibilityRule = {
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
+  },
+
+  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
+    return VisibilityRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
+    return VisibilityRule.decode(message.value);
+  },
+
+  toProto(message: VisibilityRule): Uint8Array {
+    return VisibilityRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: VisibilityRule): VisibilityRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.VisibilityRule",
+      value: VisibilityRule.encode(message).finish()
+    };
   }
 
 };

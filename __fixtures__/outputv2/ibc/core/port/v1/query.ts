@@ -20,7 +20,7 @@ export interface QueryAppVersionRequest {
   /** proposed version */
   proposedVersion: string;
 }
-export interface QueryAppVersionRequestProtoType {
+export interface QueryAppVersionRequestProtoMsg {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest";
   value: Uint8Array;
 }
@@ -42,7 +42,7 @@ export interface QueryAppVersionRequestAmino {
   /** proposed version */
   proposed_version: string;
 }
-export interface QueryAppVersionRequestAminoType {
+export interface QueryAppVersionRequestAminoMsg {
   type: "cosmos-sdk/QueryAppVersionRequest";
   value: QueryAppVersionRequestAmino;
 }
@@ -64,7 +64,7 @@ export interface QueryAppVersionResponse {
   /** supported app version */
   version: string;
 }
-export interface QueryAppVersionResponseProtoType {
+export interface QueryAppVersionResponseProtoMsg {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
   value: Uint8Array;
 }
@@ -77,7 +77,7 @@ export interface QueryAppVersionResponseAmino {
   /** supported app version */
   version: string;
 }
-export interface QueryAppVersionResponseAminoType {
+export interface QueryAppVersionResponseAminoMsg {
   type: "cosmos-sdk/QueryAppVersionResponse";
   value: QueryAppVersionResponseAmino;
 }
@@ -99,6 +99,9 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
 }
 
 export const QueryAppVersionRequest = {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
+  aminoType: "cosmos-sdk/QueryAppVersionRequest",
+
   encode(message: QueryAppVersionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -229,6 +232,32 @@ export const QueryAppVersionRequest = {
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.proposed_version = message.proposedVersion;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
+    return QueryAppVersionRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAppVersionRequest",
+      value: QueryAppVersionRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryAppVersionRequestProtoMsg): QueryAppVersionRequest {
+    return QueryAppVersionRequest.decode(message.value);
+  },
+
+  toProto(message: QueryAppVersionRequest): Uint8Array {
+    return QueryAppVersionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
+      value: QueryAppVersionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -241,6 +270,9 @@ function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
 }
 
 export const QueryAppVersionResponse = {
+  typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse",
+  aminoType: "cosmos-sdk/QueryAppVersionResponse",
+
   encode(message: QueryAppVersionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -326,6 +358,32 @@ export const QueryAppVersionResponse = {
     obj.port_id = message.portId;
     obj.version = message.version;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {
+    return QueryAppVersionResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryAppVersionResponse): QueryAppVersionResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAppVersionResponse",
+      value: QueryAppVersionResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryAppVersionResponseProtoMsg): QueryAppVersionResponse {
+    return QueryAppVersionResponse.decode(message.value);
+  },
+
+  toProto(message: QueryAppVersionResponse): Uint8Array {
+    return QueryAppVersionResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAppVersionResponse): QueryAppVersionResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse",
+      value: QueryAppVersionResponse.encode(message).finish()
+    };
   }
 
 };

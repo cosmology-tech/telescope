@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 export interface MultiSignature {
   signatures: Uint8Array[];
 }
-export interface MultiSignatureProtoType {
+export interface MultiSignatureProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature";
   value: Uint8Array;
 }
@@ -23,7 +23,7 @@ export interface MultiSignatureProtoType {
 export interface MultiSignatureAmino {
   signatures: Uint8Array[];
 }
-export interface MultiSignatureAminoType {
+export interface MultiSignatureAminoMsg {
   type: "cosmos-sdk/MultiSignature";
   value: MultiSignatureAmino;
 }
@@ -47,7 +47,7 @@ export interface CompactBitArray {
   extraBitsStored: number;
   elems: Uint8Array;
 }
-export interface CompactBitArrayProtoType {
+export interface CompactBitArrayProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray";
   value: Uint8Array;
 }
@@ -62,7 +62,7 @@ export interface CompactBitArrayAmino {
   extra_bits_stored: number;
   elems: Uint8Array;
 }
-export interface CompactBitArrayAminoType {
+export interface CompactBitArrayAminoMsg {
   type: "cosmos-sdk/CompactBitArray";
   value: CompactBitArrayAmino;
 }
@@ -85,6 +85,9 @@ function createBaseMultiSignature(): MultiSignature {
 }
 
 export const MultiSignature = {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature",
+  aminoType: "cosmos-sdk/MultiSignature",
+
   encode(message: MultiSignature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
@@ -173,6 +176,32 @@ export const MultiSignature = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MultiSignatureAminoMsg): MultiSignature {
+    return MultiSignature.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MultiSignature): MultiSignatureAminoMsg {
+    return {
+      type: "cosmos-sdk/MultiSignature",
+      value: MultiSignature.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
+    return MultiSignature.decode(message.value);
+  },
+
+  toProto(message: MultiSignature): Uint8Array {
+    return MultiSignature.encode(message).finish();
+  },
+
+  toProtoMsg(message: MultiSignature): MultiSignatureProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature",
+      value: MultiSignature.encode(message).finish()
+    };
   }
 
 };
@@ -185,6 +214,9 @@ function createBaseCompactBitArray(): CompactBitArray {
 }
 
 export const CompactBitArray = {
+  typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray",
+  aminoType: "cosmos-sdk/CompactBitArray",
+
   encode(message: CompactBitArray, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
@@ -270,6 +302,32 @@ export const CompactBitArray = {
     obj.extra_bits_stored = message.extraBitsStored;
     obj.elems = message.elems;
     return obj;
+  },
+
+  fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {
+    return CompactBitArray.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: CompactBitArray): CompactBitArrayAminoMsg {
+    return {
+      type: "cosmos-sdk/CompactBitArray",
+      value: CompactBitArray.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
+    return CompactBitArray.decode(message.value);
+  },
+
+  toProto(message: CompactBitArray): Uint8Array {
+    return CompactBitArray.encode(message).finish();
+  },
+
+  toProtoMsg(message: CompactBitArray): CompactBitArrayProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray",
+      value: CompactBitArray.encode(message).finish()
+    };
   }
 
 };

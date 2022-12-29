@@ -20,7 +20,7 @@ export interface GenesisState {
    */
   missedBlocks: ValidatorMissedBlocks[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -42,7 +42,7 @@ export interface GenesisStateAmino {
    */
   missed_blocks: ValidatorMissedBlocksAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
@@ -62,7 +62,7 @@ export interface SigningInfo {
   /** validator_signing_info represents the signing info of this validator. */
   validatorSigningInfo?: ValidatorSigningInfo;
 }
-export interface SigningInfoProtoType {
+export interface SigningInfoProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.SigningInfo";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface SigningInfoAmino {
   /** validator_signing_info represents the signing info of this validator. */
   validator_signing_info?: ValidatorSigningInfoAmino;
 }
-export interface SigningInfoAminoType {
+export interface SigningInfoAminoMsg {
   type: "cosmos-sdk/SigningInfo";
   value: SigningInfoAmino;
 }
@@ -97,7 +97,7 @@ export interface ValidatorMissedBlocks {
   /** missed_blocks is an array of missed blocks by the validator. */
   missedBlocks: MissedBlock[];
 }
-export interface ValidatorMissedBlocksProtoType {
+export interface ValidatorMissedBlocksProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks";
   value: Uint8Array;
 }
@@ -113,7 +113,7 @@ export interface ValidatorMissedBlocksAmino {
   /** missed_blocks is an array of missed blocks by the validator. */
   missed_blocks: MissedBlockAmino[];
 }
-export interface ValidatorMissedBlocksAminoType {
+export interface ValidatorMissedBlocksAminoMsg {
   type: "cosmos-sdk/ValidatorMissedBlocks";
   value: ValidatorMissedBlocksAmino;
 }
@@ -135,7 +135,7 @@ export interface MissedBlock {
   /** missed is the missed status. */
   missed: boolean;
 }
-export interface MissedBlockProtoType {
+export interface MissedBlockProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.MissedBlock";
   value: Uint8Array;
 }
@@ -148,7 +148,7 @@ export interface MissedBlockAmino {
   /** missed is the missed status. */
   missed: boolean;
 }
-export interface MissedBlockAminoType {
+export interface MissedBlockAminoMsg {
   type: "cosmos-sdk/MissedBlock";
   value: MissedBlockAmino;
 }
@@ -168,6 +168,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/cosmos.slashing.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -301,6 +304,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -313,6 +342,9 @@ function createBaseSigningInfo(): SigningInfo {
 }
 
 export const SigningInfo = {
+  typeUrl: "/cosmos.slashing.v1beta1.SigningInfo",
+  aminoType: "cosmos-sdk/SigningInfo",
+
   encode(message: SigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -398,6 +430,32 @@ export const SigningInfo = {
     obj.address = message.address;
     obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SigningInfoAminoMsg): SigningInfo {
+    return SigningInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SigningInfo): SigningInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/SigningInfo",
+      value: SigningInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SigningInfoProtoMsg): SigningInfo {
+    return SigningInfo.decode(message.value);
+  },
+
+  toProto(message: SigningInfo): Uint8Array {
+    return SigningInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: SigningInfo): SigningInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.SigningInfo",
+      value: SigningInfo.encode(message).finish()
+    };
   }
 
 };
@@ -410,6 +468,9 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
 }
 
 export const ValidatorMissedBlocks = {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks",
+  aminoType: "cosmos-sdk/ValidatorMissedBlocks",
+
   encode(message: ValidatorMissedBlocks, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -513,6 +574,32 @@ export const ValidatorMissedBlocks = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ValidatorMissedBlocksAminoMsg): ValidatorMissedBlocks {
+    return ValidatorMissedBlocks.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ValidatorMissedBlocks): ValidatorMissedBlocksAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorMissedBlocks",
+      value: ValidatorMissedBlocks.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ValidatorMissedBlocksProtoMsg): ValidatorMissedBlocks {
+    return ValidatorMissedBlocks.decode(message.value);
+  },
+
+  toProto(message: ValidatorMissedBlocks): Uint8Array {
+    return ValidatorMissedBlocks.encode(message).finish();
+  },
+
+  toProtoMsg(message: ValidatorMissedBlocks): ValidatorMissedBlocksProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks",
+      value: ValidatorMissedBlocks.encode(message).finish()
+    };
   }
 
 };
@@ -525,6 +612,9 @@ function createBaseMissedBlock(): MissedBlock {
 }
 
 export const MissedBlock = {
+  typeUrl: "/cosmos.slashing.v1beta1.MissedBlock",
+  aminoType: "cosmos-sdk/MissedBlock",
+
   encode(message: MissedBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).int64(message.index);
@@ -610,6 +700,32 @@ export const MissedBlock = {
     obj.index = message.index ? message.index.toString() : undefined;
     obj.missed = message.missed;
     return obj;
+  },
+
+  fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {
+    return MissedBlock.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MissedBlock): MissedBlockAminoMsg {
+    return {
+      type: "cosmos-sdk/MissedBlock",
+      value: MissedBlock.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MissedBlockProtoMsg): MissedBlock {
+    return MissedBlock.decode(message.value);
+  },
+
+  toProto(message: MissedBlock): Uint8Array {
+    return MissedBlock.encode(message).finish();
+  },
+
+  toProtoMsg(message: MissedBlock): MissedBlockProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.MissedBlock",
+      value: MissedBlock.encode(message).finish()
+    };
   }
 
 };

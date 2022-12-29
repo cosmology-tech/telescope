@@ -12,7 +12,7 @@ export interface FeeToken {
   denom: string;
   poolID: Long;
 }
-export interface FeeTokenProtoType {
+export interface FeeTokenProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface FeeTokenAmino {
   denom: string;
   poolID: string;
 }
-export interface FeeTokenAminoType {
+export interface FeeTokenAminoMsg {
   type: "osmosis/txfees/fee-token";
   value: FeeTokenAmino;
 }
@@ -51,6 +51,9 @@ function createBaseFeeToken(): FeeToken {
 }
 
 export const FeeToken = {
+  typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
+  aminoType: "osmosis/txfees/fee-token",
+
   encode(message: FeeToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -136,6 +139,32 @@ export const FeeToken = {
     obj.denom = message.denom;
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
+    return FeeToken.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
+    return {
+      type: "osmosis/txfees/fee-token",
+      value: FeeToken.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
+    return FeeToken.decode(message.value);
+  },
+
+  toProto(message: FeeToken): Uint8Array {
+    return FeeToken.encode(message).finish();
+  },
+
+  toProtoMsg(message: FeeToken): FeeTokenProtoMsg {
+    return {
+      typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
+      value: FeeToken.encode(message).finish()
+    };
   }
 
 };

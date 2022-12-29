@@ -19,7 +19,7 @@ export interface MsgSubmitProposal {
   initialDeposit: Coin[];
   proposer: string;
 }
-export interface MsgSubmitProposalProtoType {
+export interface MsgSubmitProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal";
   value: Uint8Array;
 }
@@ -33,7 +33,7 @@ export interface MsgSubmitProposalAmino {
   initial_deposit: CoinAmino[];
   proposer: string;
 }
-export interface MsgSubmitProposalAminoType {
+export interface MsgSubmitProposalAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
   value: MsgSubmitProposalAmino;
 }
@@ -52,7 +52,7 @@ export interface MsgSubmitProposalSDKType {
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
-export interface MsgSubmitProposalResponseProtoType {
+export interface MsgSubmitProposalResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse";
   value: Uint8Array;
 }
@@ -61,7 +61,7 @@ export interface MsgSubmitProposalResponseProtoType {
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
 }
-export interface MsgSubmitProposalResponseAminoType {
+export interface MsgSubmitProposalResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposalResponse";
   value: MsgSubmitProposalResponseAmino;
 }
@@ -77,7 +77,7 @@ export interface MsgVote {
   voter: string;
   option: VoteOption;
 }
-export interface MsgVoteProtoType {
+export interface MsgVoteProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVote";
   value: Uint8Array;
 }
@@ -88,7 +88,7 @@ export interface MsgVoteAmino {
   voter: string;
   option: VoteOption;
 }
-export interface MsgVoteAminoType {
+export interface MsgVoteAminoMsg {
   type: "cosmos-sdk/MsgVote";
   value: MsgVoteAmino;
 }
@@ -102,14 +102,14 @@ export interface MsgVoteSDKType {
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
-export interface MsgVoteResponseProtoType {
+export interface MsgVoteResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse";
   value: Uint8Array;
 }
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
-export interface MsgVoteResponseAminoType {
+export interface MsgVoteResponseAminoMsg {
   type: "cosmos-sdk/MsgVoteResponse";
   value: MsgVoteResponseAmino;
 }
@@ -127,7 +127,7 @@ export interface MsgVoteWeighted {
   voter: string;
   options: WeightedVoteOption[];
 }
-export interface MsgVoteWeightedProtoType {
+export interface MsgVoteWeightedProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted";
   value: Uint8Array;
 }
@@ -142,7 +142,7 @@ export interface MsgVoteWeightedAmino {
   voter: string;
   options: WeightedVoteOptionAmino[];
 }
-export interface MsgVoteWeightedAminoType {
+export interface MsgVoteWeightedAminoMsg {
   type: "cosmos-sdk/MsgVoteWeighted";
   value: MsgVoteWeightedAmino;
 }
@@ -164,7 +164,7 @@ export interface MsgVoteWeightedSDKType {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponse {}
-export interface MsgVoteWeightedResponseProtoType {
+export interface MsgVoteWeightedResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse";
   value: Uint8Array;
 }
@@ -175,7 +175,7 @@ export interface MsgVoteWeightedResponseProtoType {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponseAmino {}
-export interface MsgVoteWeightedResponseAminoType {
+export interface MsgVoteWeightedResponseAminoMsg {
   type: "cosmos-sdk/MsgVoteWeightedResponse";
   value: MsgVoteWeightedResponseAmino;
 }
@@ -193,7 +193,7 @@ export interface MsgDeposit {
   depositor: string;
   amount: Coin[];
 }
-export interface MsgDepositProtoType {
+export interface MsgDepositProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgDeposit";
   value: Uint8Array;
 }
@@ -204,7 +204,7 @@ export interface MsgDepositAmino {
   depositor: string;
   amount: CoinAmino[];
 }
-export interface MsgDepositAminoType {
+export interface MsgDepositAminoMsg {
   type: "cosmos-sdk/MsgDeposit";
   value: MsgDepositAmino;
 }
@@ -218,14 +218,14 @@ export interface MsgDepositSDKType {
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
-export interface MsgDepositResponseProtoType {
+export interface MsgDepositResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse";
   value: Uint8Array;
 }
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseAmino {}
-export interface MsgDepositResponseAminoType {
+export interface MsgDepositResponseAminoMsg {
   type: "cosmos-sdk/MsgDepositResponse";
   value: MsgDepositResponseAmino;
 }
@@ -242,6 +242,9 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
+  aminoType: "cosmos-sdk/MsgSubmitProposal",
+
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode((message.content as Any), writer.uint32(10).fork()).ldelim();
@@ -360,6 +363,32 @@ export const MsgSubmitProposal = {
 
     obj.proposer = message.proposer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitProposal",
+      value: MsgSubmitProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposal): Uint8Array {
+    return MsgSubmitProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposal): MsgSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
+      value: MsgSubmitProposal.encode(message).finish()
+    };
   }
 
 };
@@ -371,6 +400,9 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse",
+  aminoType: "cosmos-sdk/MsgSubmitProposalResponse",
+
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -441,6 +473,32 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitProposalResponse",
+      value: MsgSubmitProposalResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposalResponse): Uint8Array {
+    return MsgSubmitProposalResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse",
+      value: MsgSubmitProposalResponse.encode(message).finish()
+    };
   }
 
 };
@@ -454,6 +512,9 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVote",
+  aminoType: "cosmos-sdk/MsgVote",
+
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -554,6 +615,32 @@ export const MsgVote = {
     obj.voter = message.voter;
     obj.option = message.option;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
+    return MsgVote.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVote): MsgVoteAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVote",
+      value: MsgVote.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteProtoMsg): MsgVote {
+    return MsgVote.decode(message.value);
+  },
+
+  toProto(message: MsgVote): Uint8Array {
+    return MsgVote.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVote): MsgVoteProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgVote",
+      value: MsgVote.encode(message).finish()
+    };
   }
 
 };
@@ -563,6 +650,9 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse",
+  aminoType: "cosmos-sdk/MsgVoteResponse",
+
   encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -615,6 +705,32 @@ export const MsgVoteResponse = {
   toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
+    return MsgVoteResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteResponse): MsgVoteResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVoteResponse",
+      value: MsgVoteResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteResponseProtoMsg): MsgVoteResponse {
+    return MsgVoteResponse.decode(message.value);
+  },
+
+  toProto(message: MsgVoteResponse): Uint8Array {
+    return MsgVoteResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteResponse): MsgVoteResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgVoteResponse",
+      value: MsgVoteResponse.encode(message).finish()
+    };
   }
 
 };
@@ -628,6 +744,9 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
 }
 
 export const MsgVoteWeighted = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted",
+  aminoType: "cosmos-sdk/MsgVoteWeighted",
+
   encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -746,6 +865,32 @@ export const MsgVoteWeighted = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
+    return MsgVoteWeighted.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteWeighted): MsgVoteWeightedAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVoteWeighted",
+      value: MsgVoteWeighted.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteWeightedProtoMsg): MsgVoteWeighted {
+    return MsgVoteWeighted.decode(message.value);
+  },
+
+  toProto(message: MsgVoteWeighted): Uint8Array {
+    return MsgVoteWeighted.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteWeighted): MsgVoteWeightedProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted",
+      value: MsgVoteWeighted.encode(message).finish()
+    };
   }
 
 };
@@ -755,6 +900,9 @@ function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
 }
 
 export const MsgVoteWeightedResponse = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse",
+  aminoType: "cosmos-sdk/MsgVoteWeightedResponse",
+
   encode(_: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -807,6 +955,32 @@ export const MsgVoteWeightedResponse = {
   toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteWeightedResponseAminoMsg): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVoteWeightedResponse",
+      value: MsgVoteWeightedResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.decode(message.value);
+  },
+
+  toProto(message: MsgVoteWeightedResponse): Uint8Array {
+    return MsgVoteWeightedResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse",
+      value: MsgVoteWeightedResponse.encode(message).finish()
+    };
   }
 
 };
@@ -820,6 +994,9 @@ function createBaseMsgDeposit(): MsgDeposit {
 }
 
 export const MsgDeposit = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgDeposit",
+  aminoType: "cosmos-sdk/MsgDeposit",
+
   encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -938,6 +1115,32 @@ export const MsgDeposit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositAminoMsg): MsgDeposit {
+    return MsgDeposit.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgDeposit): MsgDepositAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgDeposit",
+      value: MsgDeposit.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgDepositProtoMsg): MsgDeposit {
+    return MsgDeposit.decode(message.value);
+  },
+
+  toProto(message: MsgDeposit): Uint8Array {
+    return MsgDeposit.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDeposit): MsgDepositProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgDeposit",
+      value: MsgDeposit.encode(message).finish()
+    };
   }
 
 };
@@ -947,6 +1150,9 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 }
 
 export const MsgDepositResponse = {
+  typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse",
+  aminoType: "cosmos-sdk/MsgDepositResponse",
+
   encode(_: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -999,6 +1205,32 @@ export const MsgDepositResponse = {
   toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositResponseAminoMsg): MsgDepositResponse {
+    return MsgDepositResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgDepositResponse): MsgDepositResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgDepositResponse",
+      value: MsgDepositResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgDepositResponseProtoMsg): MsgDepositResponse {
+    return MsgDepositResponse.decode(message.value);
+  },
+
+  toProto(message: MsgDepositResponse): Uint8Array {
+    return MsgDepositResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDepositResponse): MsgDepositResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse",
+      value: MsgDepositResponse.encode(message).finish()
+    };
   }
 
 };

@@ -61,7 +61,7 @@ export interface HttpBody {
    */
   extensions: Any[];
 }
-export interface HttpBodyProtoType {
+export interface HttpBodyProtoMsg {
   typeUrl: "/google.api.HttpBody";
   value: Uint8Array;
 }
@@ -124,7 +124,7 @@ export interface HttpBodyAmino {
    */
   extensions: AnyAmino[];
 }
-export interface HttpBodyAminoType {
+export interface HttpBodyAminoMsg {
   type: "/google.api.HttpBody";
   value: HttpBodyAmino;
 }
@@ -189,6 +189,8 @@ function createBaseHttpBody(): HttpBody {
 }
 
 export const HttpBody = {
+  typeUrl: "/google.api.HttpBody",
+
   encode(message: HttpBody, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contentType !== "") {
       writer.uint32(10).string(message.contentType);
@@ -307,6 +309,25 @@ export const HttpBody = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
+    return HttpBody.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
+    return HttpBody.decode(message.value);
+  },
+
+  toProto(message: HttpBody): Uint8Array {
+    return HttpBody.encode(message).finish();
+  },
+
+  toProtoMsg(message: HttpBody): HttpBodyProtoMsg {
+    return {
+      typeUrl: "/google.api.HttpBody",
+      value: HttpBody.encode(message).finish()
+    };
   }
 
 };

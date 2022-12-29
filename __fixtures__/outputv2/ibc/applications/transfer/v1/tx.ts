@@ -37,7 +37,7 @@ export interface MsgTransfer {
    */
   timeoutTimestamp: Long;
 }
-export interface MsgTransferProtoType {
+export interface MsgTransferProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransfer";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface MsgTransferAmino {
    */
   timeout_timestamp: string;
 }
-export interface MsgTransferAminoType {
+export interface MsgTransferAminoMsg {
   type: "cosmos-sdk/MsgTransfer";
   value: MsgTransferAmino;
 }
@@ -97,14 +97,14 @@ export interface MsgTransferSDKType {
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
-export interface MsgTransferResponseProtoType {
+export interface MsgTransferResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse";
   value: Uint8Array;
 }
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseAmino {}
-export interface MsgTransferResponseAminoType {
+export interface MsgTransferResponseAminoMsg {
   type: "cosmos-sdk/MsgTransferResponse";
   value: MsgTransferResponseAmino;
 }
@@ -125,6 +125,9 @@ function createBaseMsgTransfer(): MsgTransfer {
 }
 
 export const MsgTransfer = {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+  aminoType: "cosmos-sdk/MsgTransfer",
+
   encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
@@ -285,6 +288,32 @@ export const MsgTransfer = {
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {
+    return MsgTransfer.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgTransfer): MsgTransferAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTransfer",
+      value: MsgTransfer.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
+    return MsgTransfer.decode(message.value);
+  },
+
+  toProto(message: MsgTransfer): Uint8Array {
+    return MsgTransfer.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTransfer): MsgTransferProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+      value: MsgTransfer.encode(message).finish()
+    };
   }
 
 };
@@ -294,6 +323,9 @@ function createBaseMsgTransferResponse(): MsgTransferResponse {
 }
 
 export const MsgTransferResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse",
+  aminoType: "cosmos-sdk/MsgTransferResponse",
+
   encode(_: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -346,6 +378,32 @@ export const MsgTransferResponse = {
   toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgTransferResponseAminoMsg): MsgTransferResponse {
+    return MsgTransferResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgTransferResponse): MsgTransferResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTransferResponse",
+      value: MsgTransferResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgTransferResponseProtoMsg): MsgTransferResponse {
+    return MsgTransferResponse.decode(message.value);
+  },
+
+  toProto(message: MsgTransferResponse): Uint8Array {
+    return MsgTransferResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTransferResponse): MsgTransferResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse",
+      value: MsgTransferResponse.encode(message).finish()
+    };
   }
 
 };

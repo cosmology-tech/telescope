@@ -13,7 +13,7 @@ export interface PoolParams {
   swapFee: string;
   exitFee: string;
 }
-export interface PoolParamsProtoType {
+export interface PoolParamsProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams";
   value: Uint8Array;
 }
@@ -28,7 +28,7 @@ export interface PoolParamsAmino {
   swap_fee: string;
   exit_fee: string;
 }
-export interface PoolParamsAminoType {
+export interface PoolParamsAminoMsg {
   type: "osmosis/gamm/pool-params";
   value: PoolParamsAmino;
 }
@@ -74,7 +74,7 @@ export interface Pool {
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
 }
-export interface PoolProtoType {
+export interface PoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
   value: Uint8Array;
 }
@@ -109,7 +109,7 @@ export interface PoolAmino {
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scaling_factor_controller: string;
 }
-export interface PoolAminoType {
+export interface PoolAminoMsg {
   type: "osmosis/gamm/pool";
   value: PoolAmino;
 }
@@ -134,6 +134,9 @@ function createBasePoolParams(): PoolParams {
 }
 
 export const PoolParams = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
+  aminoType: "osmosis/gamm/pool-params",
+
   encode(message: PoolParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.swapFee !== "") {
       writer.uint32(10).string(message.swapFee);
@@ -219,6 +222,32 @@ export const PoolParams = {
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
     return obj;
+  },
+
+  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
+    return PoolParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-params",
+      value: PoolParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
+    return PoolParams.decode(message.value);
+  },
+
+  toProto(message: PoolParams): Uint8Array {
+    return PoolParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: PoolParams): PoolParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
+      value: PoolParams.encode(message).finish()
+    };
   }
 
 };
@@ -237,6 +266,9 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
+  aminoType: "osmosis/gamm/pool",
+
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -458,6 +490,32 @@ export const Pool = {
 
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
+  },
+
+  fromAminoMsg(object: PoolAminoMsg): Pool {
+    return Pool.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pool): PoolAminoMsg {
+    return {
+      type: "osmosis/gamm/pool",
+      value: Pool.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PoolProtoMsg): Pool {
+    return Pool.decode(message.value);
+  },
+
+  toProto(message: Pool): Uint8Array {
+    return Pool.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pool): PoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
+      value: Pool.encode(message).finish()
+    };
   }
 
 };

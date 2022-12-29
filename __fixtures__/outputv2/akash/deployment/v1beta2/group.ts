@@ -82,7 +82,7 @@ export interface Group {
   groupSpec?: GroupSpec;
   createdAt: Long;
 }
-export interface GroupProtoType {
+export interface GroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Group";
   value: Uint8Array;
 }
@@ -94,7 +94,7 @@ export interface GroupAmino {
   group_spec?: GroupSpecAmino;
   created_at: string;
 }
-export interface GroupAminoType {
+export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta2.Group";
   value: GroupAmino;
 }
@@ -117,6 +117,8 @@ function createBaseGroup(): Group {
 }
 
 export const Group = {
+  typeUrl: "/akash.deployment.v1beta2.Group",
+
   encode(message: Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
@@ -232,6 +234,25 @@ export const Group = {
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GroupAminoMsg): Group {
+    return Group.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupProtoMsg): Group {
+    return Group.decode(message.value);
+  },
+
+  toProto(message: Group): Uint8Array {
+    return Group.encode(message).finish();
+  },
+
+  toProtoMsg(message: Group): GroupProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.Group",
+      value: Group.encode(message).finish()
+    };
   }
 
 };

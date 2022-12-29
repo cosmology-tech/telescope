@@ -7,16 +7,16 @@ export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
 }
-export interface MetricValue_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+export interface MetricValue_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MetricValue_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface MetricValue_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+export interface MetricValue_LabelsEntryAminoMsg {
+  type: string;
   value: MetricValue_LabelsEntryAmino;
 }
 export interface MetricValue_LabelsEntrySDKType {
@@ -67,7 +67,7 @@ export interface MetricValue {
   /** A distribution value. */
   distributionValue?: Distribution;
 }
-export interface MetricValueProtoType {
+export interface MetricValueProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValue";
   value: Uint8Array;
 }
@@ -115,7 +115,7 @@ export interface MetricValueAmino {
   /** A distribution value. */
   distribution_value?: DistributionAmino;
 }
-export interface MetricValueAminoType {
+export interface MetricValueAminoMsg {
   type: "/google.api.servicecontrol.v1.MetricValue";
   value: MetricValueAmino;
 }
@@ -146,7 +146,7 @@ export interface MetricValueSet {
   /** The values in this metric. */
   metricValues: MetricValue[];
 }
-export interface MetricValueSetProtoType {
+export interface MetricValueSetProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";
   value: Uint8Array;
 }
@@ -163,7 +163,7 @@ export interface MetricValueSetAmino {
   /** The values in this metric. */
   metric_values: MetricValueAmino[];
 }
-export interface MetricValueSetAminoType {
+export interface MetricValueSetAminoMsg {
   type: "/google.api.servicecontrol.v1.MetricValueSet";
   value: MetricValueSetAmino;
 }
@@ -271,6 +271,18 @@ export const MetricValue_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
+    return MetricValue_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
+    return MetricValue_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: MetricValue_LabelsEntry): Uint8Array {
+    return MetricValue_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -289,6 +301,8 @@ function createBaseMetricValue(): MetricValue {
 }
 
 export const MetricValue = {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValue",
+
   encode(message: MetricValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode({
@@ -516,6 +530,25 @@ export const MetricValue = {
     obj.string_value = message.stringValue;
     obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
+    return MetricValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
+    return MetricValue.decode(message.value);
+  },
+
+  toProto(message: MetricValue): Uint8Array {
+    return MetricValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricValue): MetricValueProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.MetricValue",
+      value: MetricValue.encode(message).finish()
+    };
   }
 
 };
@@ -528,6 +561,8 @@ function createBaseMetricValueSet(): MetricValueSet {
 }
 
 export const MetricValueSet = {
+  typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
+
   encode(message: MetricValueSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
@@ -631,6 +666,25 @@ export const MetricValueSet = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
+    return MetricValueSet.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
+    return MetricValueSet.decode(message.value);
+  },
+
+  toProto(message: MetricValueSet): Uint8Array {
+    return MetricValueSet.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricValueSet): MetricValueSetProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
+      value: MetricValueSet.encode(message).finish()
+    };
   }
 
 };

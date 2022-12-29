@@ -251,7 +251,7 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
-export interface ResourceDescriptorProtoType {
+export interface ResourceDescriptorProtoMsg {
   typeUrl: "/google.api.ResourceDescriptor";
   value: Uint8Array;
 }
@@ -394,7 +394,7 @@ export interface ResourceDescriptorAmino {
    */
   style: ResourceDescriptor_Style[];
 }
-export interface ResourceDescriptorAminoType {
+export interface ResourceDescriptorAminoMsg {
   type: "/google.api.ResourceDescriptor";
   value: ResourceDescriptorAmino;
 }
@@ -502,7 +502,7 @@ export interface ResourceReference {
    */
   childType: string;
 }
-export interface ResourceReferenceProtoType {
+export interface ResourceReferenceProtoMsg {
   typeUrl: "/google.api.ResourceReference";
   value: Uint8Array;
 }
@@ -551,7 +551,7 @@ export interface ResourceReferenceAmino {
    */
   child_type: string;
 }
-export interface ResourceReferenceAminoType {
+export interface ResourceReferenceAminoMsg {
   type: "/google.api.ResourceReference";
   value: ResourceReferenceAmino;
 }
@@ -578,6 +578,8 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
 }
 
 export const ResourceDescriptor = {
+  typeUrl: "/google.api.ResourceDescriptor",
+
   encode(message: ResourceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -786,6 +788,25 @@ export const ResourceDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceDescriptorAminoMsg): ResourceDescriptor {
+    return ResourceDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceDescriptorProtoMsg): ResourceDescriptor {
+    return ResourceDescriptor.decode(message.value);
+  },
+
+  toProto(message: ResourceDescriptor): Uint8Array {
+    return ResourceDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceDescriptor): ResourceDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.ResourceDescriptor",
+      value: ResourceDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -798,6 +819,8 @@ function createBaseResourceReference(): ResourceReference {
 }
 
 export const ResourceReference = {
+  typeUrl: "/google.api.ResourceReference",
+
   encode(message: ResourceReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -883,6 +906,25 @@ export const ResourceReference = {
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {
+    return ResourceReference.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceReferenceProtoMsg): ResourceReference {
+    return ResourceReference.decode(message.value);
+  },
+
+  toProto(message: ResourceReference): Uint8Array {
+    return ResourceReference.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceReference): ResourceReferenceProtoMsg {
+    return {
+      typeUrl: "/google.api.ResourceReference",
+      value: ResourceReference.encode(message).finish()
+    };
   }
 
 };

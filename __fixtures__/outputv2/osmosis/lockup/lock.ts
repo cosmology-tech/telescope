@@ -83,7 +83,7 @@ export interface PeriodLock {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: Coin[];
 }
-export interface PeriodLockProtoType {
+export interface PeriodLockProtoMsg {
   typeUrl: "/osmosis.lockup.PeriodLock";
   value: Uint8Array;
 }
@@ -125,7 +125,7 @@ export interface PeriodLockAmino {
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: CoinAmino[];
 }
-export interface PeriodLockAminoType {
+export interface PeriodLockAminoMsg {
   type: "osmosis/lockup/period-lock";
   value: PeriodLockAmino;
 }
@@ -171,7 +171,7 @@ export interface QueryCondition {
    */
   timestamp?: Date;
 }
-export interface QueryConditionProtoType {
+export interface QueryConditionProtoMsg {
   typeUrl: "/osmosis.lockup.QueryCondition";
   value: Uint8Array;
 }
@@ -202,7 +202,7 @@ export interface QueryConditionAmino {
    */
   timestamp?: Date;
 }
-export interface QueryConditionAminoType {
+export interface QueryConditionAminoMsg {
   type: "osmosis/lockup/query-condition";
   value: QueryConditionAmino;
 }
@@ -250,7 +250,7 @@ export interface SyntheticLock {
    */
   duration?: Duration;
 }
-export interface SyntheticLockProtoType {
+export interface SyntheticLockProtoMsg {
   typeUrl: "/osmosis.lockup.SyntheticLock";
   value: Uint8Array;
 }
@@ -286,7 +286,7 @@ export interface SyntheticLockAmino {
    */
   duration?: DurationAmino;
 }
-export interface SyntheticLockAminoType {
+export interface SyntheticLockAminoMsg {
   type: "osmosis/lockup/synthetic-lock";
   value: SyntheticLockAmino;
 }
@@ -315,6 +315,9 @@ function createBasePeriodLock(): PeriodLock {
 }
 
 export const PeriodLock = {
+  typeUrl: "/osmosis.lockup.PeriodLock",
+  aminoType: "osmosis/lockup/period-lock",
+
   encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.ID.isZero()) {
       writer.uint32(8).uint64(message.ID);
@@ -463,6 +466,32 @@ export const PeriodLock = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PeriodLockAminoMsg): PeriodLock {
+    return PeriodLock.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PeriodLock): PeriodLockAminoMsg {
+    return {
+      type: "osmosis/lockup/period-lock",
+      value: PeriodLock.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PeriodLockProtoMsg): PeriodLock {
+    return PeriodLock.decode(message.value);
+  },
+
+  toProto(message: PeriodLock): Uint8Array {
+    return PeriodLock.encode(message).finish();
+  },
+
+  toProtoMsg(message: PeriodLock): PeriodLockProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.PeriodLock",
+      value: PeriodLock.encode(message).finish()
+    };
   }
 
 };
@@ -477,6 +506,9 @@ function createBaseQueryCondition(): QueryCondition {
 }
 
 export const QueryCondition = {
+  typeUrl: "/osmosis.lockup.QueryCondition",
+  aminoType: "osmosis/lockup/query-condition",
+
   encode(message: QueryCondition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
@@ -592,6 +624,32 @@ export const QueryCondition = {
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
+    return QueryCondition.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCondition): QueryConditionAminoMsg {
+    return {
+      type: "osmosis/lockup/query-condition",
+      value: QueryCondition.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConditionProtoMsg): QueryCondition {
+    return QueryCondition.decode(message.value);
+  },
+
+  toProto(message: QueryCondition): Uint8Array {
+    return QueryCondition.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCondition): QueryConditionProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.QueryCondition",
+      value: QueryCondition.encode(message).finish()
+    };
   }
 
 };
@@ -606,6 +664,9 @@ function createBaseSyntheticLock(): SyntheticLock {
 }
 
 export const SyntheticLock = {
+  typeUrl: "/osmosis.lockup.SyntheticLock",
+  aminoType: "osmosis/lockup/synthetic-lock",
+
   encode(message: SyntheticLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.underlyingLockId.isZero()) {
       writer.uint32(8).uint64(message.underlyingLockId);
@@ -721,6 +782,32 @@ export const SyntheticLock = {
     obj.end_time = message.endTime ? Timestamp.toAmino(message.endTime) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SyntheticLockAminoMsg): SyntheticLock {
+    return SyntheticLock.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SyntheticLock): SyntheticLockAminoMsg {
+    return {
+      type: "osmosis/lockup/synthetic-lock",
+      value: SyntheticLock.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SyntheticLockProtoMsg): SyntheticLock {
+    return SyntheticLock.decode(message.value);
+  },
+
+  toProto(message: SyntheticLock): Uint8Array {
+    return SyntheticLock.encode(message).finish();
+  },
+
+  toProtoMsg(message: SyntheticLock): SyntheticLockProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.SyntheticLock",
+      value: SyntheticLock.encode(message).finish()
+    };
   }
 
 };

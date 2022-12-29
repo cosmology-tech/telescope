@@ -10,16 +10,16 @@ export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryProtoType {
-  typeUrl: "/google.api.servicecontrol.v1.undefined";
+export interface LogEntry_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryAminoType {
-  type: "/google.api.servicecontrol.v1.undefined";
+export interface LogEntry_LabelsEntryAminoMsg {
+  type: string;
   value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
@@ -103,7 +103,7 @@ export interface LogEntry {
    */
   sourceLocation?: LogEntrySourceLocation;
 }
-export interface LogEntryProtoType {
+export interface LogEntryProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry";
   value: Uint8Array;
 }
@@ -184,7 +184,7 @@ export interface LogEntryAmino {
    */
   source_location?: LogEntrySourceLocationAmino;
 }
-export interface LogEntryAminoType {
+export interface LogEntryAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntry";
   value: LogEntryAmino;
 }
@@ -231,7 +231,7 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface LogEntryOperationProtoType {
+export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation";
   value: Uint8Array;
 }
@@ -260,7 +260,7 @@ export interface LogEntryOperationAmino {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface LogEntryOperationAminoType {
+export interface LogEntryOperationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntryOperation";
   value: LogEntryOperationAmino;
 }
@@ -303,7 +303,7 @@ export interface LogEntrySourceLocation {
    */
   function: string;
 }
-export interface LogEntrySourceLocationProtoType {
+export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
   value: Uint8Array;
 }
@@ -335,7 +335,7 @@ export interface LogEntrySourceLocationAmino {
    */
   function: string;
 }
-export interface LogEntrySourceLocationAminoType {
+export interface LogEntrySourceLocationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
   value: LogEntrySourceLocationAmino;
 }
@@ -443,6 +443,18 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: LogEntry_LabelsEntry): Uint8Array {
+    return LogEntry_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -465,6 +477,8 @@ function createBaseLogEntry(): LogEntry {
 }
 
 export const LogEntry = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+
   encode(message: LogEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(82).string(message.name);
@@ -752,6 +766,25 @@ export const LogEntry = {
     obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
+    return LogEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
+    return LogEntry.decode(message.value);
+  },
+
+  toProto(message: LogEntry): Uint8Array {
+    return LogEntry.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+      value: LogEntry.encode(message).finish()
+    };
   }
 
 };
@@ -766,6 +799,8 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 
 export const LogEntryOperation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
+
   encode(message: LogEntryOperation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -881,6 +916,25 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
+    return LogEntryOperation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
+    return LogEntryOperation.decode(message.value);
+  },
+
+  toProto(message: LogEntryOperation): Uint8Array {
+    return LogEntryOperation.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntryOperation): LogEntryOperationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
+      value: LogEntryOperation.encode(message).finish()
+    };
   }
 
 };
@@ -894,6 +948,8 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 }
 
 export const LogEntrySourceLocation = {
+  typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
+
   encode(message: LogEntrySourceLocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.file !== "") {
       writer.uint32(10).string(message.file);
@@ -994,6 +1050,25 @@ export const LogEntrySourceLocation = {
     obj.line = message.line ? message.line.toString() : undefined;
     obj.function = message.function;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.decode(message.value);
+  },
+
+  toProto(message: LogEntrySourceLocation): Uint8Array {
+    return LogEntrySourceLocation.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntrySourceLocation): LogEntrySourceLocationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
+      value: LogEntrySourceLocation.encode(message).finish()
+    };
   }
 
 };

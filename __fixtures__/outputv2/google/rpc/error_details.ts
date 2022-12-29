@@ -22,7 +22,7 @@ export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay?: Duration;
 }
-export interface RetryInfoProtoType {
+export interface RetryInfoProtoMsg {
   typeUrl: "/google.rpc.RetryInfo";
   value: Uint8Array;
 }
@@ -46,7 +46,7 @@ export interface RetryInfoAmino {
   /** Clients should wait at least this long between retrying the same request. */
   retry_delay?: DurationAmino;
 }
-export interface RetryInfoAminoType {
+export interface RetryInfoAminoMsg {
   type: "/google.rpc.RetryInfo";
   value: RetryInfoAmino;
 }
@@ -78,7 +78,7 @@ export interface DebugInfo {
   /** Additional debugging information provided by the server. */
   detail: string;
 }
-export interface DebugInfoProtoType {
+export interface DebugInfoProtoMsg {
   typeUrl: "/google.rpc.DebugInfo";
   value: Uint8Array;
 }
@@ -91,7 +91,7 @@ export interface DebugInfoAmino {
   /** Additional debugging information provided by the server. */
   detail: string;
 }
-export interface DebugInfoAminoType {
+export interface DebugInfoAminoMsg {
   type: "/google.rpc.DebugInfo";
   value: DebugInfoAmino;
 }
@@ -119,7 +119,7 @@ export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
 }
-export interface QuotaFailureProtoType {
+export interface QuotaFailureProtoMsg {
   typeUrl: "/google.rpc.QuotaFailure";
   value: Uint8Array;
 }
@@ -141,7 +141,7 @@ export interface QuotaFailureAmino {
   /** Describes all quota violations. */
   violations: QuotaFailure_ViolationAmino[];
 }
-export interface QuotaFailureAminoType {
+export interface QuotaFailureAminoMsg {
   type: "/google.rpc.QuotaFailure";
   value: QuotaFailureAmino;
 }
@@ -186,7 +186,7 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
-export interface QuotaFailure_ViolationProtoType {
+export interface QuotaFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
@@ -214,7 +214,7 @@ export interface QuotaFailure_ViolationAmino {
    */
   description: string;
 }
-export interface QuotaFailure_ViolationAminoType {
+export interface QuotaFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
   value: QuotaFailure_ViolationAmino;
 }
@@ -231,16 +231,16 @@ export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
 }
-export interface ErrorInfo_MetadataEntryProtoType {
-  typeUrl: "/google.rpc.undefined";
+export interface ErrorInfo_MetadataEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryAmino {
   key: string;
   value: string;
 }
-export interface ErrorInfo_MetadataEntryAminoType {
-  type: "/google.rpc.undefined";
+export interface ErrorInfo_MetadataEntryAminoMsg {
+  type: string;
   value: ErrorInfo_MetadataEntryAmino;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
@@ -307,7 +307,7 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
-export interface ErrorInfoProtoType {
+export interface ErrorInfoProtoMsg {
   typeUrl: "/google.rpc.ErrorInfo";
   value: Uint8Array;
 }
@@ -371,7 +371,7 @@ export interface ErrorInfoAmino {
     [key: string]: string;
   };
 }
-export interface ErrorInfoAminoType {
+export interface ErrorInfoAminoMsg {
   type: "/google.rpc.ErrorInfo";
   value: ErrorInfoAmino;
 }
@@ -421,7 +421,7 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
-export interface PreconditionFailureProtoType {
+export interface PreconditionFailureProtoMsg {
   typeUrl: "/google.rpc.PreconditionFailure";
   value: Uint8Array;
 }
@@ -437,7 +437,7 @@ export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_ViolationAmino[];
 }
-export interface PreconditionFailureAminoType {
+export interface PreconditionFailureAminoMsg {
   type: "/google.rpc.PreconditionFailure";
   value: PreconditionFailureAmino;
 }
@@ -477,7 +477,7 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
-export interface PreconditionFailure_ViolationProtoType {
+export interface PreconditionFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
@@ -506,7 +506,7 @@ export interface PreconditionFailure_ViolationAmino {
    */
   description: string;
 }
-export interface PreconditionFailure_ViolationAminoType {
+export interface PreconditionFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
   value: PreconditionFailure_ViolationAmino;
 }
@@ -526,7 +526,7 @@ export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
 }
-export interface BadRequestProtoType {
+export interface BadRequestProtoMsg {
   typeUrl: "/google.rpc.BadRequest";
   value: Uint8Array;
 }
@@ -539,7 +539,7 @@ export interface BadRequestAmino {
   /** Describes all violations in a client request. */
   field_violations: BadRequest_FieldViolationAmino[];
 }
-export interface BadRequestAminoType {
+export interface BadRequestAminoMsg {
   type: "/google.rpc.BadRequest";
   value: BadRequestAmino;
 }
@@ -564,7 +564,7 @@ export interface BadRequest_FieldViolation {
   /** A description of why the request element is bad. */
   description: string;
 }
-export interface BadRequest_FieldViolationProtoType {
+export interface BadRequest_FieldViolationProtoMsg {
   typeUrl: "/google.rpc.FieldViolation";
   value: Uint8Array;
 }
@@ -581,7 +581,7 @@ export interface BadRequest_FieldViolationAmino {
   /** A description of why the request element is bad. */
   description: string;
 }
-export interface BadRequest_FieldViolationAminoType {
+export interface BadRequest_FieldViolationAminoMsg {
   type: "/google.rpc.FieldViolation";
   value: BadRequest_FieldViolationAmino;
 }
@@ -609,7 +609,7 @@ export interface RequestInfo {
    */
   servingData: string;
 }
-export interface RequestInfoProtoType {
+export interface RequestInfoProtoMsg {
   typeUrl: "/google.rpc.RequestInfo";
   value: Uint8Array;
 }
@@ -631,7 +631,7 @@ export interface RequestInfoAmino {
    */
   serving_data: string;
 }
-export interface RequestInfoAminoType {
+export interface RequestInfoAminoMsg {
   type: "/google.rpc.RequestInfo";
   value: RequestInfoAmino;
 }
@@ -675,7 +675,7 @@ export interface ResourceInfo {
    */
   description: string;
 }
-export interface ResourceInfoProtoType {
+export interface ResourceInfoProtoMsg {
   typeUrl: "/google.rpc.ResourceInfo";
   value: Uint8Array;
 }
@@ -710,7 +710,7 @@ export interface ResourceInfoAmino {
    */
   description: string;
 }
-export interface ResourceInfoAminoType {
+export interface ResourceInfoAminoMsg {
   type: "/google.rpc.ResourceInfo";
   value: ResourceInfoAmino;
 }
@@ -734,7 +734,7 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
-export interface HelpProtoType {
+export interface HelpProtoMsg {
   typeUrl: "/google.rpc.Help";
   value: Uint8Array;
 }
@@ -750,7 +750,7 @@ export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_LinkAmino[];
 }
-export interface HelpAminoType {
+export interface HelpAminoMsg {
   type: "/google.rpc.Help";
   value: HelpAmino;
 }
@@ -774,7 +774,7 @@ export interface Help_Link {
   /** The URL of the link. */
   url: string;
 }
-export interface Help_LinkProtoType {
+export interface Help_LinkProtoMsg {
   typeUrl: "/google.rpc.Link";
   value: Uint8Array;
 }
@@ -787,7 +787,7 @@ export interface Help_LinkAmino {
   /** The URL of the link. */
   url: string;
 }
-export interface Help_LinkAminoType {
+export interface Help_LinkAminoMsg {
   type: "/google.rpc.Link";
   value: Help_LinkAmino;
 }
@@ -813,7 +813,7 @@ export interface LocalizedMessage {
   /** The localized error message in the above locale. */
   message: string;
 }
-export interface LocalizedMessageProtoType {
+export interface LocalizedMessageProtoMsg {
   typeUrl: "/google.rpc.LocalizedMessage";
   value: Uint8Array;
 }
@@ -833,7 +833,7 @@ export interface LocalizedMessageAmino {
   /** The localized error message in the above locale. */
   message: string;
 }
-export interface LocalizedMessageAminoType {
+export interface LocalizedMessageAminoMsg {
   type: "/google.rpc.LocalizedMessage";
   value: LocalizedMessageAmino;
 }
@@ -854,6 +854,8 @@ function createBaseRetryInfo(): RetryInfo {
 }
 
 export const RetryInfo = {
+  typeUrl: "/google.rpc.RetryInfo",
+
   encode(message: RetryInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.retryDelay !== undefined) {
       Duration.encode(message.retryDelay, writer.uint32(10).fork()).ldelim();
@@ -924,6 +926,25 @@ export const RetryInfo = {
     const obj: any = {};
     obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
+    return RetryInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
+    return RetryInfo.decode(message.value);
+  },
+
+  toProto(message: RetryInfo): Uint8Array {
+    return RetryInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: RetryInfo): RetryInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RetryInfo",
+      value: RetryInfo.encode(message).finish()
+    };
   }
 
 };
@@ -936,6 +957,8 @@ function createBaseDebugInfo(): DebugInfo {
 }
 
 export const DebugInfo = {
+  typeUrl: "/google.rpc.DebugInfo",
+
   encode(message: DebugInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
@@ -1039,6 +1062,25 @@ export const DebugInfo = {
 
     obj.detail = message.detail;
     return obj;
+  },
+
+  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
+    return DebugInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
+    return DebugInfo.decode(message.value);
+  },
+
+  toProto(message: DebugInfo): Uint8Array {
+    return DebugInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: DebugInfo): DebugInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.DebugInfo",
+      value: DebugInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1050,6 +1092,8 @@ function createBaseQuotaFailure(): QuotaFailure {
 }
 
 export const QuotaFailure = {
+  typeUrl: "/google.rpc.QuotaFailure",
+
   encode(message: QuotaFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       QuotaFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1138,6 +1182,25 @@ export const QuotaFailure = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
+    return QuotaFailure.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
+    return QuotaFailure.decode(message.value);
+  },
+
+  toProto(message: QuotaFailure): Uint8Array {
+    return QuotaFailure.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaFailure): QuotaFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.QuotaFailure",
+      value: QuotaFailure.encode(message).finish()
+    };
   }
 
 };
@@ -1150,6 +1213,8 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 }
 
 export const QuotaFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
+
   encode(message: QuotaFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
@@ -1235,6 +1300,25 @@ export const QuotaFailure_Violation = {
     obj.subject = message.subject;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
+    return QuotaFailure_Violation.decode(message.value);
+  },
+
+  toProto(message: QuotaFailure_Violation): Uint8Array {
+    return QuotaFailure_Violation.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaFailure_Violation): QuotaFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: QuotaFailure_Violation.encode(message).finish()
+    };
   }
 
 };
@@ -1332,6 +1416,18 @@ export const ErrorInfo_MetadataEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.decode(message.value);
+  },
+
+  toProto(message: ErrorInfo_MetadataEntry): Uint8Array {
+    return ErrorInfo_MetadataEntry.encode(message).finish();
   }
 
 };
@@ -1345,6 +1441,8 @@ function createBaseErrorInfo(): ErrorInfo {
 }
 
 export const ErrorInfo = {
+  typeUrl: "/google.rpc.ErrorInfo",
+
   encode(message: ErrorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
@@ -1496,6 +1594,25 @@ export const ErrorInfo = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
+    return ErrorInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
+    return ErrorInfo.decode(message.value);
+  },
+
+  toProto(message: ErrorInfo): Uint8Array {
+    return ErrorInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: ErrorInfo): ErrorInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ErrorInfo",
+      value: ErrorInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1507,6 +1624,8 @@ function createBasePreconditionFailure(): PreconditionFailure {
 }
 
 export const PreconditionFailure = {
+  typeUrl: "/google.rpc.PreconditionFailure",
+
   encode(message: PreconditionFailure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.violations) {
       PreconditionFailure_Violation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1595,6 +1714,25 @@ export const PreconditionFailure = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
+    return PreconditionFailure.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
+    return PreconditionFailure.decode(message.value);
+  },
+
+  toProto(message: PreconditionFailure): Uint8Array {
+    return PreconditionFailure.encode(message).finish();
+  },
+
+  toProtoMsg(message: PreconditionFailure): PreconditionFailureProtoMsg {
+    return {
+      typeUrl: "/google.rpc.PreconditionFailure",
+      value: PreconditionFailure.encode(message).finish()
+    };
   }
 
 };
@@ -1608,6 +1746,8 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 }
 
 export const PreconditionFailure_Violation = {
+  typeUrl: "/google.rpc.Violation",
+
   encode(message: PreconditionFailure_Violation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -1708,6 +1848,25 @@ export const PreconditionFailure_Violation = {
     obj.subject = message.subject;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.decode(message.value);
+  },
+
+  toProto(message: PreconditionFailure_Violation): Uint8Array {
+    return PreconditionFailure_Violation.encode(message).finish();
+  },
+
+  toProtoMsg(message: PreconditionFailure_Violation): PreconditionFailure_ViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Violation",
+      value: PreconditionFailure_Violation.encode(message).finish()
+    };
   }
 
 };
@@ -1719,6 +1878,8 @@ function createBaseBadRequest(): BadRequest {
 }
 
 export const BadRequest = {
+  typeUrl: "/google.rpc.BadRequest",
+
   encode(message: BadRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.fieldViolations) {
       BadRequest_FieldViolation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1807,6 +1968,25 @@ export const BadRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
+    return BadRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
+    return BadRequest.decode(message.value);
+  },
+
+  toProto(message: BadRequest): Uint8Array {
+    return BadRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: BadRequest): BadRequestProtoMsg {
+    return {
+      typeUrl: "/google.rpc.BadRequest",
+      value: BadRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1819,6 +1999,8 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 }
 
 export const BadRequest_FieldViolation = {
+  typeUrl: "/google.rpc.FieldViolation",
+
   encode(message: BadRequest_FieldViolation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.field !== "") {
       writer.uint32(10).string(message.field);
@@ -1904,6 +2086,25 @@ export const BadRequest_FieldViolation = {
     obj.field = message.field;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.decode(message.value);
+  },
+
+  toProto(message: BadRequest_FieldViolation): Uint8Array {
+    return BadRequest_FieldViolation.encode(message).finish();
+  },
+
+  toProtoMsg(message: BadRequest_FieldViolation): BadRequest_FieldViolationProtoMsg {
+    return {
+      typeUrl: "/google.rpc.FieldViolation",
+      value: BadRequest_FieldViolation.encode(message).finish()
+    };
   }
 
 };
@@ -1916,6 +2117,8 @@ function createBaseRequestInfo(): RequestInfo {
 }
 
 export const RequestInfo = {
+  typeUrl: "/google.rpc.RequestInfo",
+
   encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
@@ -2001,6 +2204,25 @@ export const RequestInfo = {
     obj.request_id = message.requestId;
     obj.serving_data = message.servingData;
     return obj;
+  },
+
+  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
+    return RequestInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
+    return RequestInfo.decode(message.value);
+  },
+
+  toProto(message: RequestInfo): Uint8Array {
+    return RequestInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: RequestInfo): RequestInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.RequestInfo",
+      value: RequestInfo.encode(message).finish()
+    };
   }
 
 };
@@ -2015,6 +2237,8 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 
 export const ResourceInfo = {
+  typeUrl: "/google.rpc.ResourceInfo",
+
   encode(message: ResourceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
@@ -2130,6 +2354,25 @@ export const ResourceInfo = {
     obj.owner = message.owner;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
+    return ResourceInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
+    return ResourceInfo.decode(message.value);
+  },
+
+  toProto(message: ResourceInfo): Uint8Array {
+    return ResourceInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceInfo): ResourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.rpc.ResourceInfo",
+      value: ResourceInfo.encode(message).finish()
+    };
   }
 
 };
@@ -2141,6 +2384,8 @@ function createBaseHelp(): Help {
 }
 
 export const Help = {
+  typeUrl: "/google.rpc.Help",
+
   encode(message: Help, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       Help_Link.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2229,6 +2474,25 @@ export const Help = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: HelpAminoMsg): Help {
+    return Help.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HelpProtoMsg): Help {
+    return Help.decode(message.value);
+  },
+
+  toProto(message: Help): Uint8Array {
+    return Help.encode(message).finish();
+  },
+
+  toProtoMsg(message: Help): HelpProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Help",
+      value: Help.encode(message).finish()
+    };
   }
 
 };
@@ -2241,6 +2505,8 @@ function createBaseHelp_Link(): Help_Link {
 }
 
 export const Help_Link = {
+  typeUrl: "/google.rpc.Link",
+
   encode(message: Help_Link, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
@@ -2326,6 +2592,25 @@ export const Help_Link = {
     obj.description = message.description;
     obj.url = message.url;
     return obj;
+  },
+
+  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
+    return Help_Link.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
+    return Help_Link.decode(message.value);
+  },
+
+  toProto(message: Help_Link): Uint8Array {
+    return Help_Link.encode(message).finish();
+  },
+
+  toProtoMsg(message: Help_Link): Help_LinkProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Link",
+      value: Help_Link.encode(message).finish()
+    };
   }
 
 };
@@ -2338,6 +2623,8 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 }
 
 export const LocalizedMessage = {
+  typeUrl: "/google.rpc.LocalizedMessage",
+
   encode(message: LocalizedMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
@@ -2423,6 +2710,25 @@ export const LocalizedMessage = {
     obj.locale = message.locale;
     obj.message = message.message;
     return obj;
+  },
+
+  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
+    return LocalizedMessage.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
+    return LocalizedMessage.decode(message.value);
+  },
+
+  toProto(message: LocalizedMessage): Uint8Array {
+    return LocalizedMessage.encode(message).finish();
+  },
+
+  toProtoMsg(message: LocalizedMessage): LocalizedMessageProtoMsg {
+    return {
+      typeUrl: "/google.rpc.LocalizedMessage",
+      value: LocalizedMessage.encode(message).finish()
+    };
   }
 
 };

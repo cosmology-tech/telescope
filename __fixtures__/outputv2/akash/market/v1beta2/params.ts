@@ -8,7 +8,7 @@ export interface Params {
   bidMinDeposit?: Coin;
   orderMaxBids: number;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/akash.market.v1beta2.Params";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface ParamsAmino {
   bid_min_deposit?: CoinAmino;
   order_max_bids: number;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/akash.market.v1beta2.Params";
   value: ParamsAmino;
 }
@@ -37,6 +37,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  typeUrl: "/akash.market.v1beta2.Params",
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bidMinDeposit !== undefined) {
       Coin.encode(message.bidMinDeposit, writer.uint32(10).fork()).ldelim();
@@ -122,6 +124,25 @@ export const Params = {
     obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
     obj.order_max_bids = message.orderMaxBids;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

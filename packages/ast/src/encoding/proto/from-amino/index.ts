@@ -5,6 +5,7 @@ import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '
 import { BILLION, identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { fromAminoJSON, arrayTypes, fromAminoMessages } from './utils';
+import { SymbolNames } from '../../types';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromAminoJSON (${field.type} rules[${field.rule}] name[${name}])`);
@@ -174,9 +175,7 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         varName = '_';
     }
 
-    const AminoTypeName =
-        [name, 'Amino']
-            .filter(Boolean).join('');
+    const AminoTypeName = SymbolNames.Amino(name);
 
     const body: t.Statement[] = [];
 
@@ -235,6 +234,59 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         t.tsTypeAnnotation(
             t.tsTypeReference(
                 t.identifier(name)
+            )
+        )
+    )
+};
+
+export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const varName = 'object';
+
+    const TypeName = SymbolNames.Msg(name);
+    const AminoMsgName = SymbolNames.AminoMsg(name);
+    const ReturnType = SymbolNames.Msg(name);
+
+    const body: t.Statement[] = [];
+
+    body.push(
+        t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(TypeName),
+                    t.identifier('fromAmino')
+                ),
+                [
+                    t.memberExpression(
+                        t.identifier(varName),
+                        t.identifier('value')
+                    )
+                ]
+            )
+        )
+    );
+
+    return objectMethod('method',
+        t.identifier('fromAminoMsg'),
+        [
+            identifier(varName,
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier(AminoMsgName)
+                    )
+                ),
+                false
+            )
+
+        ],
+        t.blockStatement(
+            body
+        ),
+        false,
+        false,
+        false,
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(ReturnType)
             )
         )
     )

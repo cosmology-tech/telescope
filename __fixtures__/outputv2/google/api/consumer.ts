@@ -95,7 +95,7 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
-export interface ProjectPropertiesProtoType {
+export interface ProjectPropertiesProtoMsg {
   typeUrl: "/google.api.ProjectProperties";
   value: Uint8Array;
 }
@@ -122,7 +122,7 @@ export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
   properties: PropertyAmino[];
 }
-export interface ProjectPropertiesAminoType {
+export interface ProjectPropertiesAminoMsg {
   type: "/google.api.ProjectProperties";
   value: ProjectPropertiesAmino;
 }
@@ -171,7 +171,7 @@ export interface Property {
   /** The description of the property */
   description: string;
 }
-export interface PropertyProtoType {
+export interface PropertyProtoMsg {
   typeUrl: "/google.api.Property";
   value: Uint8Array;
 }
@@ -198,7 +198,7 @@ export interface PropertyAmino {
   /** The description of the property */
   description: string;
 }
-export interface PropertyAminoType {
+export interface PropertyAminoMsg {
   type: "/google.api.Property";
   value: PropertyAmino;
 }
@@ -228,6 +228,8 @@ function createBaseProjectProperties(): ProjectProperties {
 }
 
 export const ProjectProperties = {
+  typeUrl: "/google.api.ProjectProperties",
+
   encode(message: ProjectProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.properties) {
       Property.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -316,6 +318,25 @@ export const ProjectProperties = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
+    return ProjectProperties.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
+    return ProjectProperties.decode(message.value);
+  },
+
+  toProto(message: ProjectProperties): Uint8Array {
+    return ProjectProperties.encode(message).finish();
+  },
+
+  toProtoMsg(message: ProjectProperties): ProjectPropertiesProtoMsg {
+    return {
+      typeUrl: "/google.api.ProjectProperties",
+      value: ProjectProperties.encode(message).finish()
+    };
   }
 
 };
@@ -329,6 +350,8 @@ function createBaseProperty(): Property {
 }
 
 export const Property = {
+  typeUrl: "/google.api.Property",
+
   encode(message: Property, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -429,6 +452,25 @@ export const Property = {
     obj.type = message.type;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: PropertyAminoMsg): Property {
+    return Property.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PropertyProtoMsg): Property {
+    return Property.decode(message.value);
+  },
+
+  toProto(message: Property): Uint8Array {
+    return Property.encode(message).finish();
+  },
+
+  toProtoMsg(message: Property): PropertyProtoMsg {
+    return {
+      typeUrl: "/google.api.Property",
+      value: Property.encode(message).finish()
+    };
   }
 
 };

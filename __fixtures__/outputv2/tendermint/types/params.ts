@@ -13,7 +13,7 @@ export interface ConsensusParams {
   validator?: ValidatorParams;
   version?: VersionParams;
 }
-export interface ConsensusParamsProtoType {
+export interface ConsensusParamsProtoMsg {
   typeUrl: "/tendermint.types.ConsensusParams";
   value: Uint8Array;
 }
@@ -28,7 +28,7 @@ export interface ConsensusParamsAmino {
   validator?: ValidatorParamsAmino;
   version?: VersionParamsAmino;
 }
-export interface ConsensusParamsAminoType {
+export interface ConsensusParamsAminoMsg {
   type: "/tendermint.types.ConsensusParams";
   value: ConsensusParamsAmino;
 }
@@ -66,7 +66,7 @@ export interface BlockParams {
    */
   timeIotaMs: Long;
 }
-export interface BlockParamsProtoType {
+export interface BlockParamsProtoMsg {
   typeUrl: "/tendermint.types.BlockParams";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface BlockParamsAmino {
    */
   time_iota_ms: string;
 }
-export interface BlockParamsAminoType {
+export interface BlockParamsAminoMsg {
   type: "/tendermint.types.BlockParams";
   value: BlockParamsAmino;
 }
@@ -131,7 +131,7 @@ export interface EvidenceParams {
    */
   maxBytes: Long;
 }
-export interface EvidenceParamsProtoType {
+export interface EvidenceParamsProtoMsg {
   typeUrl: "/tendermint.types.EvidenceParams";
   value: Uint8Array;
 }
@@ -162,7 +162,7 @@ export interface EvidenceParamsAmino {
    */
   max_bytes: string;
 }
-export interface EvidenceParamsAminoType {
+export interface EvidenceParamsAminoMsg {
   type: "/tendermint.types.EvidenceParams";
   value: EvidenceParamsAmino;
 }
@@ -181,7 +181,7 @@ export interface EvidenceParamsSDKType {
 export interface ValidatorParams {
   pubKeyTypes: string[];
 }
-export interface ValidatorParamsProtoType {
+export interface ValidatorParamsProtoMsg {
   typeUrl: "/tendermint.types.ValidatorParams";
   value: Uint8Array;
 }
@@ -193,7 +193,7 @@ export interface ValidatorParamsProtoType {
 export interface ValidatorParamsAmino {
   pub_key_types: string[];
 }
-export interface ValidatorParamsAminoType {
+export interface ValidatorParamsAminoMsg {
   type: "/tendermint.types.ValidatorParams";
   value: ValidatorParamsAmino;
 }
@@ -210,7 +210,7 @@ export interface ValidatorParamsSDKType {
 export interface VersionParams {
   appVersion: Long;
 }
-export interface VersionParamsProtoType {
+export interface VersionParamsProtoMsg {
   typeUrl: "/tendermint.types.VersionParams";
   value: Uint8Array;
 }
@@ -219,7 +219,7 @@ export interface VersionParamsProtoType {
 export interface VersionParamsAmino {
   app_version: string;
 }
-export interface VersionParamsAminoType {
+export interface VersionParamsAminoMsg {
   type: "/tendermint.types.VersionParams";
   value: VersionParamsAmino;
 }
@@ -238,7 +238,7 @@ export interface HashedParams {
   blockMaxBytes: Long;
   blockMaxGas: Long;
 }
-export interface HashedParamsProtoType {
+export interface HashedParamsProtoMsg {
   typeUrl: "/tendermint.types.HashedParams";
   value: Uint8Array;
 }
@@ -252,7 +252,7 @@ export interface HashedParamsAmino {
   block_max_bytes: string;
   block_max_gas: string;
 }
-export interface HashedParamsAminoType {
+export interface HashedParamsAminoMsg {
   type: "/tendermint.types.HashedParams";
   value: HashedParamsAmino;
 }
@@ -277,6 +277,8 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
+  typeUrl: "/tendermint.types.ConsensusParams",
+
   encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
@@ -392,6 +394,25 @@ export const ConsensusParams = {
     obj.validator = message.validator ? ValidatorParams.toAmino(message.validator) : undefined;
     obj.version = message.version ? VersionParams.toAmino(message.version) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsensusParamsAminoMsg): ConsensusParams {
+    return ConsensusParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConsensusParamsProtoMsg): ConsensusParams {
+    return ConsensusParams.decode(message.value);
+  },
+
+  toProto(message: ConsensusParams): Uint8Array {
+    return ConsensusParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsensusParams): ConsensusParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.ConsensusParams",
+      value: ConsensusParams.encode(message).finish()
+    };
   }
 
 };
@@ -405,6 +426,8 @@ function createBaseBlockParams(): BlockParams {
 }
 
 export const BlockParams = {
+  typeUrl: "/tendermint.types.BlockParams",
+
   encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.maxBytes.isZero()) {
       writer.uint32(8).int64(message.maxBytes);
@@ -505,6 +528,25 @@ export const BlockParams = {
     obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
     obj.time_iota_ms = message.timeIotaMs ? message.timeIotaMs.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: BlockParamsAminoMsg): BlockParams {
+    return BlockParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BlockParamsProtoMsg): BlockParams {
+    return BlockParams.decode(message.value);
+  },
+
+  toProto(message: BlockParams): Uint8Array {
+    return BlockParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: BlockParams): BlockParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.BlockParams",
+      value: BlockParams.encode(message).finish()
+    };
   }
 
 };
@@ -518,6 +560,8 @@ function createBaseEvidenceParams(): EvidenceParams {
 }
 
 export const EvidenceParams = {
+  typeUrl: "/tendermint.types.EvidenceParams",
+
   encode(message: EvidenceParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.maxAgeNumBlocks.isZero()) {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
@@ -618,6 +662,25 @@ export const EvidenceParams = {
     obj.max_age_duration = message.maxAgeDuration ? Duration.toAmino(message.maxAgeDuration) : undefined;
     obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: EvidenceParamsAminoMsg): EvidenceParams {
+    return EvidenceParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvidenceParamsProtoMsg): EvidenceParams {
+    return EvidenceParams.decode(message.value);
+  },
+
+  toProto(message: EvidenceParams): Uint8Array {
+    return EvidenceParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvidenceParams): EvidenceParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.EvidenceParams",
+      value: EvidenceParams.encode(message).finish()
+    };
   }
 
 };
@@ -629,6 +692,8 @@ function createBaseValidatorParams(): ValidatorParams {
 }
 
 export const ValidatorParams = {
+  typeUrl: "/tendermint.types.ValidatorParams",
+
   encode(message: ValidatorParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
@@ -717,6 +782,25 @@ export const ValidatorParams = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ValidatorParamsAminoMsg): ValidatorParams {
+    return ValidatorParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValidatorParamsProtoMsg): ValidatorParams {
+    return ValidatorParams.decode(message.value);
+  },
+
+  toProto(message: ValidatorParams): Uint8Array {
+    return ValidatorParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: ValidatorParams): ValidatorParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.ValidatorParams",
+      value: ValidatorParams.encode(message).finish()
+    };
   }
 
 };
@@ -728,6 +812,8 @@ function createBaseVersionParams(): VersionParams {
 }
 
 export const VersionParams = {
+  typeUrl: "/tendermint.types.VersionParams",
+
   encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.appVersion.isZero()) {
       writer.uint32(8).uint64(message.appVersion);
@@ -798,6 +884,25 @@ export const VersionParams = {
     const obj: any = {};
     obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: VersionParamsAminoMsg): VersionParams {
+    return VersionParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: VersionParamsProtoMsg): VersionParams {
+    return VersionParams.decode(message.value);
+  },
+
+  toProto(message: VersionParams): Uint8Array {
+    return VersionParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: VersionParams): VersionParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.VersionParams",
+      value: VersionParams.encode(message).finish()
+    };
   }
 
 };
@@ -810,6 +915,8 @@ function createBaseHashedParams(): HashedParams {
 }
 
 export const HashedParams = {
+  typeUrl: "/tendermint.types.HashedParams",
+
   encode(message: HashedParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockMaxBytes.isZero()) {
       writer.uint32(8).int64(message.blockMaxBytes);
@@ -895,6 +1002,25 @@ export const HashedParams = {
     obj.block_max_bytes = message.blockMaxBytes ? message.blockMaxBytes.toString() : undefined;
     obj.block_max_gas = message.blockMaxGas ? message.blockMaxGas.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: HashedParamsAminoMsg): HashedParams {
+    return HashedParams.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HashedParamsProtoMsg): HashedParams {
+    return HashedParams.decode(message.value);
+  },
+
+  toProto(message: HashedParams): Uint8Array {
+    return HashedParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: HashedParams): HashedParamsProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.HashedParams",
+      value: HashedParams.encode(message).finish()
+    };
   }
 
 };

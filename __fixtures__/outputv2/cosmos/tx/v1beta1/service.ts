@@ -140,7 +140,7 @@ export interface GetTxsEventRequest {
   pagination?: PageRequest;
   orderBy: OrderBy;
 }
-export interface GetTxsEventRequestProtoType {
+export interface GetTxsEventRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest";
   value: Uint8Array;
 }
@@ -157,7 +157,7 @@ export interface GetTxsEventRequestAmino {
   pagination?: PageRequestAmino;
   order_by: OrderBy;
 }
-export interface GetTxsEventRequestAminoType {
+export interface GetTxsEventRequestAminoMsg {
   type: "cosmos-sdk/GetTxsEventRequest";
   value: GetTxsEventRequestAmino;
 }
@@ -186,7 +186,7 @@ export interface GetTxsEventResponse {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
 }
-export interface GetTxsEventResponseProtoType {
+export interface GetTxsEventResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
   value: Uint8Array;
 }
@@ -205,7 +205,7 @@ export interface GetTxsEventResponseAmino {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseAmino;
 }
-export interface GetTxsEventResponseAminoType {
+export interface GetTxsEventResponseAminoMsg {
   type: "cosmos-sdk/GetTxsEventResponse";
   value: GetTxsEventResponseAmino;
 }
@@ -229,7 +229,7 @@ export interface BroadcastTxRequest {
   txBytes: Uint8Array;
   mode: BroadcastMode;
 }
-export interface BroadcastTxRequestProtoType {
+export interface BroadcastTxRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest";
   value: Uint8Array;
 }
@@ -243,7 +243,7 @@ export interface BroadcastTxRequestAmino {
   tx_bytes: Uint8Array;
   mode: BroadcastMode;
 }
-export interface BroadcastTxRequestAminoType {
+export interface BroadcastTxRequestAminoMsg {
   type: "cosmos-sdk/BroadcastTxRequest";
   value: BroadcastTxRequestAmino;
 }
@@ -265,7 +265,7 @@ export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
   txResponse?: TxResponse;
 }
-export interface BroadcastTxResponseProtoType {
+export interface BroadcastTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
   value: Uint8Array;
 }
@@ -278,7 +278,7 @@ export interface BroadcastTxResponseAmino {
   /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseAmino;
 }
-export interface BroadcastTxResponseAminoType {
+export interface BroadcastTxResponseAminoMsg {
   type: "cosmos-sdk/BroadcastTxResponse";
   value: BroadcastTxResponseAmino;
 }
@@ -311,7 +311,7 @@ export interface SimulateRequest {
    */
   txBytes: Uint8Array;
 }
-export interface SimulateRequestProtoType {
+export interface SimulateRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.SimulateRequest";
   value: Uint8Array;
 }
@@ -336,7 +336,7 @@ export interface SimulateRequestAmino {
    */
   tx_bytes: Uint8Array;
 }
-export interface SimulateRequestAminoType {
+export interface SimulateRequestAminoMsg {
   type: "cosmos-sdk/SimulateRequest";
   value: SimulateRequestAmino;
 }
@@ -362,7 +362,7 @@ export interface SimulateResponse {
   /** result is the result of the simulation. */
   result?: Result;
 }
-export interface SimulateResponseProtoType {
+export interface SimulateResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
   value: Uint8Array;
 }
@@ -378,7 +378,7 @@ export interface SimulateResponseAmino {
   /** result is the result of the simulation. */
   result?: ResultAmino;
 }
-export interface SimulateResponseAminoType {
+export interface SimulateResponseAminoMsg {
   type: "cosmos-sdk/SimulateResponse";
   value: SimulateResponseAmino;
 }
@@ -400,7 +400,7 @@ export interface GetTxRequest {
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
-export interface GetTxRequestProtoType {
+export interface GetTxRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxRequest";
   value: Uint8Array;
 }
@@ -413,7 +413,7 @@ export interface GetTxRequestAmino {
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
-export interface GetTxRequestAminoType {
+export interface GetTxRequestAminoMsg {
   type: "cosmos-sdk/GetTxRequest";
   value: GetTxRequestAmino;
 }
@@ -434,7 +434,7 @@ export interface GetTxResponse {
   /** tx_response is the queried TxResponses. */
   txResponse?: TxResponse;
 }
-export interface GetTxResponseProtoType {
+export interface GetTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
   value: Uint8Array;
 }
@@ -447,7 +447,7 @@ export interface GetTxResponseAmino {
   /** tx_response is the queried TxResponses. */
   tx_response?: TxResponseAmino;
 }
-export interface GetTxResponseAminoType {
+export interface GetTxResponseAminoMsg {
   type: "cosmos-sdk/GetTxResponse";
   value: GetTxResponseAmino;
 }
@@ -471,7 +471,7 @@ export interface GetBlockWithTxsRequest {
   /** pagination defines a pagination for the request. */
   pagination?: PageRequest;
 }
-export interface GetBlockWithTxsRequestProtoType {
+export interface GetBlockWithTxsRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
   value: Uint8Array;
 }
@@ -489,7 +489,7 @@ export interface GetBlockWithTxsRequestAmino {
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface GetBlockWithTxsRequestAminoType {
+export interface GetBlockWithTxsRequestAminoMsg {
   type: "cosmos-sdk/GetBlockWithTxsRequest";
   value: GetBlockWithTxsRequestAmino;
 }
@@ -519,7 +519,7 @@ export interface GetBlockWithTxsResponse {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
 }
-export interface GetBlockWithTxsResponseProtoType {
+export interface GetBlockWithTxsResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse";
   value: Uint8Array;
 }
@@ -538,7 +538,7 @@ export interface GetBlockWithTxsResponseAmino {
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseAmino;
 }
-export interface GetBlockWithTxsResponseAminoType {
+export interface GetBlockWithTxsResponseAminoMsg {
   type: "cosmos-sdk/GetBlockWithTxsResponse";
   value: GetBlockWithTxsResponseAmino;
 }
@@ -564,6 +564,9 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
 }
 
 export const GetTxsEventRequest = {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest",
+  aminoType: "cosmos-sdk/GetTxsEventRequest",
+
   encode(message: GetTxsEventRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.events) {
       writer.uint32(10).string(v!);
@@ -682,6 +685,32 @@ export const GetTxsEventRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     obj.order_by = message.orderBy;
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxsEventRequestAminoMsg): GetTxsEventRequest {
+    return GetTxsEventRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxsEventRequest): GetTxsEventRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxsEventRequest",
+      value: GetTxsEventRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxsEventRequestProtoMsg): GetTxsEventRequest {
+    return GetTxsEventRequest.decode(message.value);
+  },
+
+  toProto(message: GetTxsEventRequest): Uint8Array {
+    return GetTxsEventRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxsEventRequest): GetTxsEventRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest",
+      value: GetTxsEventRequest.encode(message).finish()
+    };
   }
 
 };
@@ -695,6 +724,9 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
 }
 
 export const GetTxsEventResponse = {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse",
+  aminoType: "cosmos-sdk/GetTxsEventResponse",
+
   encode(message: GetTxsEventResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -828,6 +860,32 @@ export const GetTxsEventResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxsEventResponseAminoMsg): GetTxsEventResponse {
+    return GetTxsEventResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxsEventResponse): GetTxsEventResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxsEventResponse",
+      value: GetTxsEventResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxsEventResponseProtoMsg): GetTxsEventResponse {
+    return GetTxsEventResponse.decode(message.value);
+  },
+
+  toProto(message: GetTxsEventResponse): Uint8Array {
+    return GetTxsEventResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxsEventResponse): GetTxsEventResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse",
+      value: GetTxsEventResponse.encode(message).finish()
+    };
   }
 
 };
@@ -840,6 +898,9 @@ function createBaseBroadcastTxRequest(): BroadcastTxRequest {
 }
 
 export const BroadcastTxRequest = {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest",
+  aminoType: "cosmos-sdk/BroadcastTxRequest",
+
   encode(message: BroadcastTxRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
@@ -925,6 +986,32 @@ export const BroadcastTxRequest = {
     obj.tx_bytes = message.txBytes;
     obj.mode = message.mode;
     return obj;
+  },
+
+  fromAminoMsg(object: BroadcastTxRequestAminoMsg): BroadcastTxRequest {
+    return BroadcastTxRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BroadcastTxRequest): BroadcastTxRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/BroadcastTxRequest",
+      value: BroadcastTxRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BroadcastTxRequestProtoMsg): BroadcastTxRequest {
+    return BroadcastTxRequest.decode(message.value);
+  },
+
+  toProto(message: BroadcastTxRequest): Uint8Array {
+    return BroadcastTxRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: BroadcastTxRequest): BroadcastTxRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest",
+      value: BroadcastTxRequest.encode(message).finish()
+    };
   }
 
 };
@@ -936,6 +1023,9 @@ function createBaseBroadcastTxResponse(): BroadcastTxResponse {
 }
 
 export const BroadcastTxResponse = {
+  typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse",
+  aminoType: "cosmos-sdk/BroadcastTxResponse",
+
   encode(message: BroadcastTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txResponse !== undefined) {
       TxResponse.encode(message.txResponse, writer.uint32(10).fork()).ldelim();
@@ -1006,6 +1096,32 @@ export const BroadcastTxResponse = {
     const obj: any = {};
     obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: BroadcastTxResponseAminoMsg): BroadcastTxResponse {
+    return BroadcastTxResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BroadcastTxResponse): BroadcastTxResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/BroadcastTxResponse",
+      value: BroadcastTxResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BroadcastTxResponseProtoMsg): BroadcastTxResponse {
+    return BroadcastTxResponse.decode(message.value);
+  },
+
+  toProto(message: BroadcastTxResponse): Uint8Array {
+    return BroadcastTxResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: BroadcastTxResponse): BroadcastTxResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse",
+      value: BroadcastTxResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1018,6 +1134,9 @@ function createBaseSimulateRequest(): SimulateRequest {
 }
 
 export const SimulateRequest = {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateRequest",
+  aminoType: "cosmos-sdk/SimulateRequest",
+
   encode(message: SimulateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -1103,6 +1222,32 @@ export const SimulateRequest = {
     obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined;
     obj.tx_bytes = message.txBytes;
     return obj;
+  },
+
+  fromAminoMsg(object: SimulateRequestAminoMsg): SimulateRequest {
+    return SimulateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SimulateRequest): SimulateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/SimulateRequest",
+      value: SimulateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SimulateRequestProtoMsg): SimulateRequest {
+    return SimulateRequest.decode(message.value);
+  },
+
+  toProto(message: SimulateRequest): Uint8Array {
+    return SimulateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: SimulateRequest): SimulateRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.SimulateRequest",
+      value: SimulateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1115,6 +1260,9 @@ function createBaseSimulateResponse(): SimulateResponse {
 }
 
 export const SimulateResponse = {
+  typeUrl: "/cosmos.tx.v1beta1.SimulateResponse",
+  aminoType: "cosmos-sdk/SimulateResponse",
+
   encode(message: SimulateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
@@ -1200,6 +1348,32 @@ export const SimulateResponse = {
     obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo) : undefined;
     obj.result = message.result ? Result.toAmino(message.result) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SimulateResponseAminoMsg): SimulateResponse {
+    return SimulateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SimulateResponse): SimulateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/SimulateResponse",
+      value: SimulateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SimulateResponseProtoMsg): SimulateResponse {
+    return SimulateResponse.decode(message.value);
+  },
+
+  toProto(message: SimulateResponse): Uint8Array {
+    return SimulateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: SimulateResponse): SimulateResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.SimulateResponse",
+      value: SimulateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1211,6 +1385,9 @@ function createBaseGetTxRequest(): GetTxRequest {
 }
 
 export const GetTxRequest = {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxRequest",
+  aminoType: "cosmos-sdk/GetTxRequest",
+
   encode(message: GetTxRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -1281,6 +1458,32 @@ export const GetTxRequest = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxRequestAminoMsg): GetTxRequest {
+    return GetTxRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxRequest): GetTxRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxRequest",
+      value: GetTxRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxRequestProtoMsg): GetTxRequest {
+    return GetTxRequest.decode(message.value);
+  },
+
+  toProto(message: GetTxRequest): Uint8Array {
+    return GetTxRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxRequest): GetTxRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetTxRequest",
+      value: GetTxRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1293,6 +1496,9 @@ function createBaseGetTxResponse(): GetTxResponse {
 }
 
 export const GetTxResponse = {
+  typeUrl: "/cosmos.tx.v1beta1.GetTxResponse",
+  aminoType: "cosmos-sdk/GetTxResponse",
+
   encode(message: GetTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -1378,6 +1584,32 @@ export const GetTxResponse = {
     obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined;
     obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxResponseAminoMsg): GetTxResponse {
+    return GetTxResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxResponse): GetTxResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxResponse",
+      value: GetTxResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxResponseProtoMsg): GetTxResponse {
+    return GetTxResponse.decode(message.value);
+  },
+
+  toProto(message: GetTxResponse): Uint8Array {
+    return GetTxResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxResponse): GetTxResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetTxResponse",
+      value: GetTxResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1390,6 +1622,9 @@ function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
 }
 
 export const GetBlockWithTxsRequest = {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest",
+  aminoType: "cosmos-sdk/GetBlockWithTxsRequest",
+
   encode(message: GetBlockWithTxsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
@@ -1475,6 +1710,32 @@ export const GetBlockWithTxsRequest = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetBlockWithTxsRequestAminoMsg): GetBlockWithTxsRequest {
+    return GetBlockWithTxsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetBlockWithTxsRequest",
+      value: GetBlockWithTxsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetBlockWithTxsRequestProtoMsg): GetBlockWithTxsRequest {
+    return GetBlockWithTxsRequest.decode(message.value);
+  },
+
+  toProto(message: GetBlockWithTxsRequest): Uint8Array {
+    return GetBlockWithTxsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest",
+      value: GetBlockWithTxsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1489,6 +1750,9 @@ function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
 }
 
 export const GetBlockWithTxsResponse = {
+  typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse",
+  aminoType: "cosmos-sdk/GetBlockWithTxsResponse",
+
   encode(message: GetBlockWithTxsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1622,6 +1886,32 @@ export const GetBlockWithTxsResponse = {
     obj.block = message.block ? Block.toAmino(message.block) : undefined;
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetBlockWithTxsResponseAminoMsg): GetBlockWithTxsResponse {
+    return GetBlockWithTxsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetBlockWithTxsResponse): GetBlockWithTxsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetBlockWithTxsResponse",
+      value: GetBlockWithTxsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetBlockWithTxsResponseProtoMsg): GetBlockWithTxsResponse {
+    return GetBlockWithTxsResponse.decode(message.value);
+  },
+
+  toProto(message: GetBlockWithTxsResponse): Uint8Array {
+    return GetBlockWithTxsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetBlockWithTxsResponse): GetBlockWithTxsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse",
+      value: GetBlockWithTxsResponse.encode(message).finish()
+    };
   }
 
 };

@@ -30,7 +30,7 @@ export interface InflationDistribution {
    */
   communityPool: string;
 }
-export interface InflationDistributionProtoType {
+export interface InflationDistributionProtoMsg {
   typeUrl: "/evmos.inflation.v1.InflationDistribution";
   value: Uint8Array;
 }
@@ -63,7 +63,7 @@ export interface InflationDistributionAmino {
    */
   community_pool: string;
 }
-export interface InflationDistributionAminoType {
+export interface InflationDistributionAminoMsg {
   type: "/evmos.inflation.v1.InflationDistribution";
   value: InflationDistributionAmino;
 }
@@ -106,7 +106,7 @@ export interface ExponentialCalculation {
   /** max variance */
   maxVariance: string;
 }
-export interface ExponentialCalculationProtoType {
+export interface ExponentialCalculationProtoMsg {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
   value: Uint8Array;
 }
@@ -134,7 +134,7 @@ export interface ExponentialCalculationAmino {
   /** max variance */
   max_variance: string;
 }
-export interface ExponentialCalculationAminoType {
+export interface ExponentialCalculationAminoMsg {
   type: "/evmos.inflation.v1.ExponentialCalculation";
   value: ExponentialCalculationAmino;
 }
@@ -163,6 +163,8 @@ function createBaseInflationDistribution(): InflationDistribution {
 }
 
 export const InflationDistribution = {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution",
+
   encode(message: InflationDistribution, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.stakingRewards !== "") {
       writer.uint32(10).string(message.stakingRewards);
@@ -263,6 +265,25 @@ export const InflationDistribution = {
     obj.usage_incentives = message.usageIncentives;
     obj.community_pool = message.communityPool;
     return obj;
+  },
+
+  fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
+    return InflationDistribution.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: InflationDistributionProtoMsg): InflationDistribution {
+    return InflationDistribution.decode(message.value);
+  },
+
+  toProto(message: InflationDistribution): Uint8Array {
+    return InflationDistribution.encode(message).finish();
+  },
+
+  toProtoMsg(message: InflationDistribution): InflationDistributionProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.InflationDistribution",
+      value: InflationDistribution.encode(message).finish()
+    };
   }
 
 };
@@ -278,6 +299,8 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 }
 
 export const ExponentialCalculation = {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
+
   encode(message: ExponentialCalculation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.a !== "") {
       writer.uint32(10).string(message.a);
@@ -408,6 +431,25 @@ export const ExponentialCalculation = {
     obj.bonding_target = message.bondingTarget;
     obj.max_variance = message.maxVariance;
     return obj;
+  },
+
+  fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {
+    return ExponentialCalculation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ExponentialCalculationProtoMsg): ExponentialCalculation {
+    return ExponentialCalculation.decode(message.value);
+  },
+
+  toProto(message: ExponentialCalculation): Uint8Array {
+    return ExponentialCalculation.encode(message).finish();
+  },
+
+  toProtoMsg(message: ExponentialCalculation): ExponentialCalculationProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
+      value: ExponentialCalculation.encode(message).finish()
+    };
   }
 
 };

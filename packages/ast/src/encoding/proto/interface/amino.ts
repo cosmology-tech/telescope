@@ -9,26 +9,19 @@ import {
 } from '../types';
 
 import {
-    CreateProtoTypeOptions,
+    SymbolNames,
     getFieldAminoTypeReference,
-    getMessageName,
     getTSAminoType
 } from '../../types';
 import { getAminoTypeName } from '../../amino';
 
-export const createAminoTypeOptionsDefaults: CreateProtoTypeOptions = {
-    useOriginalCase: true,
-    typeNameSuffix: 'Amino'
-};
-
 const getAminoField = (
     context: ProtoParseContext,
-    field: ProtoField,
-    options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
+    field: ProtoField
 ) => {
     let ast: any = null;
 
-    ast = getFieldAminoTypeReference(context, field, options);
+    ast = getFieldAminoTypeReference(context, field);
 
     if (field.rule === 'repeated') {
         ast = t.tsArrayType(ast);
@@ -56,11 +49,11 @@ const getAminoField = (
 export const createAminoType = (
     context: ProtoParseContext,
     name: string,
-    proto: ProtoType,
-    options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
+    proto: ProtoType
 ) => {
     const oneOfs = getOneOfs(proto);
-    const MsgName = getMessageName(name, options);
+
+    const AminoName = SymbolNames.Amino(name);
 
     // scalar amino types!
     let declaration: t.ExportNamedDeclaration | undefined;
@@ -72,7 +65,7 @@ export const createAminoType = (
             case 'google.protobuf.Timestamp':
                 declaration = t.exportNamedDeclaration(
                     t.tsTypeAliasDeclaration(
-                        t.identifier(MsgName),
+                        t.identifier(AminoName),
                         null,
                         t.tsStringKeyword()
                     )
@@ -85,7 +78,7 @@ export const createAminoType = (
     // declaration
     if (!declaration) {
         declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
-            t.identifier(MsgName),
+            t.identifier(AminoName),
             null,
             [],
             t.tsInterfaceBody(
@@ -94,7 +87,10 @@ export const createAminoType = (
                     const field = proto.fields[fieldName];
 
                     const orig = field.options?.['(telescope:orig)'] ?? fieldName;
-                    let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+
+                    // this (useOriginalCase) is always true, right?
+                    // let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+                    let fieldNameWithCase = orig;
 
                     // should we actually just edit/add comments 
                     // to make this more "native" for any google.protobuf.Any?
@@ -102,7 +98,7 @@ export const createAminoType = (
                     if (
                         name === 'Any' &&
                         context.ref.proto.package === 'google.protobuf' &&
-                        options.typeNameSuffix === 'Amino' &&
+                        // options.type === 'Amino' &&
                         orig === 'type_url'
                     ) {
                         // type_url => type
@@ -112,7 +108,7 @@ export const createAminoType = (
                     const propSig = tsPropertySignature(
                         t.identifier(fieldNameWithCase),
                         t.tsTypeAnnotation(
-                            getAminoField(context, field, options)
+                            getAminoField(context, field)
                         ),
                         getFieldOptionality(context, field, isOneOf)
                     );
@@ -160,11 +156,10 @@ export const createAminoType = (
 export const createAminoTypeType = (
     context: ProtoParseContext,
     name: string,
-    proto: ProtoType,
-    options: CreateProtoTypeOptions = createAminoTypeOptionsDefaults
+    proto: ProtoType
 ) => {
-    const MsgName = getMessageName(name, options)
-    const AminoMsgName = MsgName + 'Type';
+    const AminoName = SymbolNames.Amino(name);
+    const AminoTypeName = SymbolNames.AminoMsg(name);
 
     const aminoName = getAminoTypeName(context, context.ref.proto, proto);
     const typ = aminoName ? t.tsLiteralType(
@@ -174,7 +169,7 @@ export const createAminoTypeType = (
     );
     // scalar amino types!
     return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
-        t.identifier(AminoMsgName),
+        t.identifier(AminoTypeName),
         null,
         [],
         t.tsInterfaceBody([
@@ -189,7 +184,7 @@ export const createAminoTypeType = (
                 t.identifier('value'),
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
-                        t.identifier(MsgName)
+                        t.identifier(AminoName)
                     )
                 ),
                 false

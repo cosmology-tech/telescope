@@ -178,16 +178,16 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value?: Reference;
 }
-export interface CheckedExpr_ReferenceMapEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+export interface CheckedExpr_ReferenceMapEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckedExpr_ReferenceMapEntryAmino {
   key: string;
   value?: ReferenceAmino;
 }
-export interface CheckedExpr_ReferenceMapEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+export interface CheckedExpr_ReferenceMapEntryAminoMsg {
+  type: string;
   value: CheckedExpr_ReferenceMapEntryAmino;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
@@ -198,16 +198,16 @@ export interface CheckedExpr_TypeMapEntry {
   key: Long;
   value?: Type;
 }
-export interface CheckedExpr_TypeMapEntryProtoType {
-  typeUrl: "/google.api.expr.v1alpha1.undefined";
+export interface CheckedExpr_TypeMapEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntryAmino {
   key: string;
   value?: TypeAmino;
 }
-export interface CheckedExpr_TypeMapEntryAminoType {
-  type: "/google.api.expr.v1alpha1.undefined";
+export interface CheckedExpr_TypeMapEntryAminoMsg {
+  type: string;
   value: CheckedExpr_TypeMapEntryAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
@@ -272,7 +272,7 @@ export interface CheckedExpr {
    */
   expr?: Expr;
 }
-export interface CheckedExprProtoType {
+export interface CheckedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
   value: Uint8Array;
 }
@@ -334,7 +334,7 @@ export interface CheckedExprAmino {
    */
   expr?: ExprAmino;
 }
-export interface CheckedExprAminoType {
+export interface CheckedExprAminoMsg {
   type: "/google.api.expr.v1alpha1.CheckedExpr";
   value: CheckedExprAmino;
 }
@@ -415,7 +415,7 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
-export interface TypeProtoType {
+export interface TypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Type";
   value: Uint8Array;
 }
@@ -483,7 +483,7 @@ export interface TypeAmino {
   /** Abstract, application defined type. */
   abstract_type?: Type_AbstractTypeAmino;
 }
-export interface TypeAminoType {
+export interface TypeAminoMsg {
   type: "/google.api.expr.v1alpha1.Type";
   value: TypeAmino;
 }
@@ -510,7 +510,7 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
-export interface Type_ListTypeProtoType {
+export interface Type_ListTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ListType";
   value: Uint8Array;
 }
@@ -520,7 +520,7 @@ export interface Type_ListTypeAmino {
   /** The element type. */
   elem_type?: TypeAmino;
 }
-export interface Type_ListTypeAminoType {
+export interface Type_ListTypeAminoMsg {
   type: "/google.api.expr.v1alpha1.ListType";
   value: Type_ListTypeAmino;
 }
@@ -538,7 +538,7 @@ export interface Type_MapType {
   /** The type of the value. */
   valueType?: Type;
 }
-export interface Type_MapTypeProtoType {
+export interface Type_MapTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.MapType";
   value: Uint8Array;
 }
@@ -551,7 +551,7 @@ export interface Type_MapTypeAmino {
   /** The type of the value. */
   value_type?: TypeAmino;
 }
-export interface Type_MapTypeAminoType {
+export interface Type_MapTypeAminoMsg {
   type: "/google.api.expr.v1alpha1.MapType";
   value: Type_MapTypeAmino;
 }
@@ -570,7 +570,7 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
-export interface Type_FunctionTypeProtoType {
+export interface Type_FunctionTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.FunctionType";
   value: Uint8Array;
 }
@@ -583,7 +583,7 @@ export interface Type_FunctionTypeAmino {
   /** Argument types of the function. */
   arg_types: TypeAmino[];
 }
-export interface Type_FunctionTypeAminoType {
+export interface Type_FunctionTypeAminoMsg {
   type: "/google.api.expr.v1alpha1.FunctionType";
   value: Type_FunctionTypeAmino;
 }
@@ -602,7 +602,7 @@ export interface Type_AbstractType {
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
 }
-export interface Type_AbstractTypeProtoType {
+export interface Type_AbstractTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.AbstractType";
   value: Uint8Array;
 }
@@ -615,7 +615,7 @@ export interface Type_AbstractTypeAmino {
   /** Parameter types for this abstract type. */
   parameter_types: TypeAmino[];
 }
-export interface Type_AbstractTypeAminoType {
+export interface Type_AbstractTypeAminoMsg {
   type: "/google.api.expr.v1alpha1.AbstractType";
   value: Type_AbstractTypeAmino;
 }
@@ -651,7 +651,7 @@ export interface Decl {
   /** Function declaration. */
   function?: Decl_FunctionDecl;
 }
-export interface DeclProtoType {
+export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Decl";
   value: Uint8Array;
 }
@@ -681,7 +681,7 @@ export interface DeclAmino {
   /** Function declaration. */
   function?: Decl_FunctionDeclAmino;
 }
-export interface DeclAminoType {
+export interface DeclAminoMsg {
   type: "/google.api.expr.v1alpha1.Decl";
   value: DeclAmino;
 }
@@ -719,7 +719,7 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
-export interface Decl_IdentDeclProtoType {
+export interface Decl_IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
   value: Uint8Array;
 }
@@ -745,7 +745,7 @@ export interface Decl_IdentDeclAmino {
   /** Documentation string for the identifier. */
   doc: string;
 }
-export interface Decl_IdentDeclAminoType {
+export interface Decl_IdentDeclAminoMsg {
   type: "/google.api.expr.v1alpha1.IdentDecl";
   value: Decl_IdentDeclAmino;
 }
@@ -775,7 +775,7 @@ export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
 }
-export interface Decl_FunctionDeclProtoType {
+export interface Decl_FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
   value: Uint8Array;
 }
@@ -791,7 +791,7 @@ export interface Decl_FunctionDeclAmino {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_OverloadAmino[];
 }
-export interface Decl_FunctionDeclAminoType {
+export interface Decl_FunctionDeclAminoMsg {
   type: "/google.api.expr.v1alpha1.FunctionDecl";
   value: Decl_FunctionDeclAmino;
 }
@@ -869,7 +869,7 @@ export interface Decl_FunctionDecl_Overload {
   /** Documentation string for the overload. */
   doc: string;
 }
-export interface Decl_FunctionDecl_OverloadProtoType {
+export interface Decl_FunctionDecl_OverloadProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Overload";
   value: Uint8Array;
 }
@@ -936,7 +936,7 @@ export interface Decl_FunctionDecl_OverloadAmino {
   /** Documentation string for the overload. */
   doc: string;
 }
-export interface Decl_FunctionDecl_OverloadAminoType {
+export interface Decl_FunctionDecl_OverloadAminoMsg {
   type: "/google.api.expr.v1alpha1.Overload";
   value: Decl_FunctionDecl_OverloadAmino;
 }
@@ -985,7 +985,7 @@ export interface Reference {
    */
   value?: Constant;
 }
-export interface ReferenceProtoType {
+export interface ReferenceProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Reference";
   value: Uint8Array;
 }
@@ -1013,7 +1013,7 @@ export interface ReferenceAmino {
    */
   value?: ConstantAmino;
 }
-export interface ReferenceAminoType {
+export interface ReferenceAminoMsg {
   type: "/google.api.expr.v1alpha1.Reference";
   value: ReferenceAmino;
 }
@@ -1118,6 +1118,18 @@ export const CheckedExpr_ReferenceMapEntry = {
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Reference.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckedExpr_ReferenceMapEntryAminoMsg): CheckedExpr_ReferenceMapEntry {
+    return CheckedExpr_ReferenceMapEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckedExpr_ReferenceMapEntryProtoMsg): CheckedExpr_ReferenceMapEntry {
+    return CheckedExpr_ReferenceMapEntry.decode(message.value);
+  },
+
+  toProto(message: CheckedExpr_ReferenceMapEntry): Uint8Array {
+    return CheckedExpr_ReferenceMapEntry.encode(message).finish();
   }
 
 };
@@ -1215,6 +1227,18 @@ export const CheckedExpr_TypeMapEntry = {
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Type.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckedExpr_TypeMapEntryAminoMsg): CheckedExpr_TypeMapEntry {
+    return CheckedExpr_TypeMapEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckedExpr_TypeMapEntryProtoMsg): CheckedExpr_TypeMapEntry {
+    return CheckedExpr_TypeMapEntry.decode(message.value);
+  },
+
+  toProto(message: CheckedExpr_TypeMapEntry): Uint8Array {
+    return CheckedExpr_TypeMapEntry.encode(message).finish();
   }
 
 };
@@ -1230,6 +1254,8 @@ function createBaseCheckedExpr(): CheckedExpr {
 }
 
 export const CheckedExpr = {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr",
+
   encode(message: CheckedExpr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode({
@@ -1463,6 +1489,25 @@ export const CheckedExpr = {
     obj.expr_version = message.exprVersion;
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckedExprAminoMsg): CheckedExpr {
+    return CheckedExpr.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckedExprProtoMsg): CheckedExpr {
+    return CheckedExpr.decode(message.value);
+  },
+
+  toProto(message: CheckedExpr): Uint8Array {
+    return CheckedExpr.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckedExpr): CheckedExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CheckedExpr",
+      value: CheckedExpr.encode(message).finish()
+    };
   }
 
 };
@@ -1486,6 +1531,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  typeUrl: "/google.api.expr.v1alpha1.Type",
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
@@ -1736,6 +1783,25 @@ export const Type = {
     obj.error = message.error ? Empty.toAmino(message.error) : undefined;
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: TypeAminoMsg): Type {
+    return Type.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: TypeProtoMsg): Type {
+    return Type.decode(message.value);
+  },
+
+  toProto(message: Type): Uint8Array {
+    return Type.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type): TypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Type",
+      value: Type.encode(message).finish()
+    };
   }
 
 };
@@ -1747,6 +1813,8 @@ function createBaseType_ListType(): Type_ListType {
 }
 
 export const Type_ListType = {
+  typeUrl: "/google.api.expr.v1alpha1.ListType",
+
   encode(message: Type_ListType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.elemType !== undefined) {
       Type.encode(message.elemType, writer.uint32(10).fork()).ldelim();
@@ -1817,6 +1885,25 @@ export const Type_ListType = {
     const obj: any = {};
     obj.elem_type = message.elemType ? Type.toAmino(message.elemType) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Type_ListTypeAminoMsg): Type_ListType {
+    return Type_ListType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Type_ListTypeProtoMsg): Type_ListType {
+    return Type_ListType.decode(message.value);
+  },
+
+  toProto(message: Type_ListType): Uint8Array {
+    return Type_ListType.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type_ListType): Type_ListTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ListType",
+      value: Type_ListType.encode(message).finish()
+    };
   }
 
 };
@@ -1829,6 +1916,8 @@ function createBaseType_MapType(): Type_MapType {
 }
 
 export const Type_MapType = {
+  typeUrl: "/google.api.expr.v1alpha1.MapType",
+
   encode(message: Type_MapType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyType !== undefined) {
       Type.encode(message.keyType, writer.uint32(10).fork()).ldelim();
@@ -1914,6 +2003,25 @@ export const Type_MapType = {
     obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined;
     obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Type_MapTypeAminoMsg): Type_MapType {
+    return Type_MapType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Type_MapTypeProtoMsg): Type_MapType {
+    return Type_MapType.decode(message.value);
+  },
+
+  toProto(message: Type_MapType): Uint8Array {
+    return Type_MapType.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type_MapType): Type_MapTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.MapType",
+      value: Type_MapType.encode(message).finish()
+    };
   }
 
 };
@@ -1926,6 +2034,8 @@ function createBaseType_FunctionType(): Type_FunctionType {
 }
 
 export const Type_FunctionType = {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType",
+
   encode(message: Type_FunctionType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(10).fork()).ldelim();
@@ -2029,6 +2139,25 @@ export const Type_FunctionType = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Type_FunctionTypeAminoMsg): Type_FunctionType {
+    return Type_FunctionType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Type_FunctionTypeProtoMsg): Type_FunctionType {
+    return Type_FunctionType.decode(message.value);
+  },
+
+  toProto(message: Type_FunctionType): Uint8Array {
+    return Type_FunctionType.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type_FunctionType): Type_FunctionTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.FunctionType",
+      value: Type_FunctionType.encode(message).finish()
+    };
   }
 
 };
@@ -2041,6 +2170,8 @@ function createBaseType_AbstractType(): Type_AbstractType {
 }
 
 export const Type_AbstractType = {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType",
+
   encode(message: Type_AbstractType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2144,6 +2275,25 @@ export const Type_AbstractType = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Type_AbstractTypeAminoMsg): Type_AbstractType {
+    return Type_AbstractType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Type_AbstractTypeProtoMsg): Type_AbstractType {
+    return Type_AbstractType.decode(message.value);
+  },
+
+  toProto(message: Type_AbstractType): Uint8Array {
+    return Type_AbstractType.encode(message).finish();
+  },
+
+  toProtoMsg(message: Type_AbstractType): Type_AbstractTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.AbstractType",
+      value: Type_AbstractType.encode(message).finish()
+    };
   }
 
 };
@@ -2157,6 +2307,8 @@ function createBaseDecl(): Decl {
 }
 
 export const Decl = {
+  typeUrl: "/google.api.expr.v1alpha1.Decl",
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2257,6 +2409,25 @@ export const Decl = {
     obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeclAminoMsg): Decl {
+    return Decl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeclProtoMsg): Decl {
+    return Decl.decode(message.value);
+  },
+
+  toProto(message: Decl): Uint8Array {
+    return Decl.encode(message).finish();
+  },
+
+  toProtoMsg(message: Decl): DeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Decl",
+      value: Decl.encode(message).finish()
+    };
   }
 
 };
@@ -2270,6 +2441,8 @@ function createBaseDecl_IdentDecl(): Decl_IdentDecl {
 }
 
 export const Decl_IdentDecl = {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl",
+
   encode(message: Decl_IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       Type.encode(message.type, writer.uint32(10).fork()).ldelim();
@@ -2370,6 +2543,25 @@ export const Decl_IdentDecl = {
     obj.value = message.value ? Constant.toAmino(message.value) : undefined;
     obj.doc = message.doc;
     return obj;
+  },
+
+  fromAminoMsg(object: Decl_IdentDeclAminoMsg): Decl_IdentDecl {
+    return Decl_IdentDecl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Decl_IdentDeclProtoMsg): Decl_IdentDecl {
+    return Decl_IdentDecl.decode(message.value);
+  },
+
+  toProto(message: Decl_IdentDecl): Uint8Array {
+    return Decl_IdentDecl.encode(message).finish();
+  },
+
+  toProtoMsg(message: Decl_IdentDecl): Decl_IdentDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.IdentDecl",
+      value: Decl_IdentDecl.encode(message).finish()
+    };
   }
 
 };
@@ -2381,6 +2573,8 @@ function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
 }
 
 export const Decl_FunctionDecl = {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl",
+
   encode(message: Decl_FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overloads) {
       Decl_FunctionDecl_Overload.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2469,6 +2663,25 @@ export const Decl_FunctionDecl = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Decl_FunctionDeclAminoMsg): Decl_FunctionDecl {
+    return Decl_FunctionDecl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Decl_FunctionDeclProtoMsg): Decl_FunctionDecl {
+    return Decl_FunctionDecl.decode(message.value);
+  },
+
+  toProto(message: Decl_FunctionDecl): Uint8Array {
+    return Decl_FunctionDecl.encode(message).finish();
+  },
+
+  toProtoMsg(message: Decl_FunctionDecl): Decl_FunctionDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.FunctionDecl",
+      value: Decl_FunctionDecl.encode(message).finish()
+    };
   }
 
 };
@@ -2485,6 +2698,8 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 }
 
 export const Decl_FunctionDecl_Overload = {
+  typeUrl: "/google.api.expr.v1alpha1.Overload",
+
   encode(message: Decl_FunctionDecl_Overload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
@@ -2663,6 +2878,25 @@ export const Decl_FunctionDecl_Overload = {
     obj.is_instance_function = message.isInstanceFunction;
     obj.doc = message.doc;
     return obj;
+  },
+
+  fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
+    return Decl_FunctionDecl_Overload.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg): Decl_FunctionDecl_Overload {
+    return Decl_FunctionDecl_Overload.decode(message.value);
+  },
+
+  toProto(message: Decl_FunctionDecl_Overload): Uint8Array {
+    return Decl_FunctionDecl_Overload.encode(message).finish();
+  },
+
+  toProtoMsg(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Overload",
+      value: Decl_FunctionDecl_Overload.encode(message).finish()
+    };
   }
 
 };
@@ -2676,6 +2910,8 @@ function createBaseReference(): Reference {
 }
 
 export const Reference = {
+  typeUrl: "/google.api.expr.v1alpha1.Reference",
+
   encode(message: Reference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2794,6 +3030,25 @@ export const Reference = {
 
     obj.value = message.value ? Constant.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ReferenceAminoMsg): Reference {
+    return Reference.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReferenceProtoMsg): Reference {
+    return Reference.decode(message.value);
+  },
+
+  toProto(message: Reference): Uint8Array {
+    return Reference.encode(message).finish();
+  },
+
+  toProtoMsg(message: Reference): ReferenceProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Reference",
+      value: Reference.encode(message).finish()
+    };
   }
 
 };

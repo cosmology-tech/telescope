@@ -54,7 +54,7 @@ export interface SuperfluidAsset {
    */
   assetType: SuperfluidAssetType;
 }
-export interface SuperfluidAssetProtoType {
+export interface SuperfluidAssetProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidAsset";
   value: Uint8Array;
 }
@@ -69,7 +69,7 @@ export interface SuperfluidAssetAmino {
    */
   asset_type: SuperfluidAssetType;
 }
-export interface SuperfluidAssetAminoType {
+export interface SuperfluidAssetAminoMsg {
   type: "osmosis/superfluid-asset";
   value: SuperfluidAssetAmino;
 }
@@ -93,7 +93,7 @@ export interface SuperfluidIntermediaryAccount {
   /** perpetual gauge for rewards distribution */
   gaugeId: Long;
 }
-export interface SuperfluidIntermediaryAccountProtoType {
+export interface SuperfluidIntermediaryAccountProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
   value: Uint8Array;
 }
@@ -111,7 +111,7 @@ export interface SuperfluidIntermediaryAccountAmino {
   /** perpetual gauge for rewards distribution */
   gauge_id: string;
 }
-export interface SuperfluidIntermediaryAccountAminoType {
+export interface SuperfluidIntermediaryAccountAminoMsg {
   type: "osmosis/superfluid-intermediary-account";
   value: SuperfluidIntermediaryAccountAmino;
 }
@@ -143,7 +143,7 @@ export interface OsmoEquivalentMultiplierRecord {
   denom: string;
   multiplier: string;
 }
-export interface OsmoEquivalentMultiplierRecordProtoType {
+export interface OsmoEquivalentMultiplierRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
   value: Uint8Array;
 }
@@ -164,7 +164,7 @@ export interface OsmoEquivalentMultiplierRecordAmino {
   denom: string;
   multiplier: string;
 }
-export interface OsmoEquivalentMultiplierRecordAminoType {
+export interface OsmoEquivalentMultiplierRecordAminoMsg {
   type: "osmosis/osmo-equivalent-multiplier-record";
   value: OsmoEquivalentMultiplierRecordAmino;
 }
@@ -194,7 +194,7 @@ export interface SuperfluidDelegationRecord {
   delegationAmount?: Coin;
   equivalentStakedAmount?: Coin;
 }
-export interface SuperfluidDelegationRecordProtoType {
+export interface SuperfluidDelegationRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
   value: Uint8Array;
 }
@@ -209,7 +209,7 @@ export interface SuperfluidDelegationRecordAmino {
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
 }
-export interface SuperfluidDelegationRecordAminoType {
+export interface SuperfluidDelegationRecordAminoMsg {
   type: "osmosis/superfluid-delegation-record";
   value: SuperfluidDelegationRecordAmino;
 }
@@ -234,7 +234,7 @@ export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
 }
-export interface LockIdIntermediaryAccountConnectionProtoType {
+export interface LockIdIntermediaryAccountConnectionProtoMsg {
   typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
   value: Uint8Array;
 }
@@ -248,7 +248,7 @@ export interface LockIdIntermediaryAccountConnectionAmino {
   lock_id: string;
   intermediary_account: string;
 }
-export interface LockIdIntermediaryAccountConnectionAminoType {
+export interface LockIdIntermediaryAccountConnectionAminoMsg {
   type: "osmosis/lock-id-intermediary-account-connection";
   value: LockIdIntermediaryAccountConnectionAmino;
 }
@@ -265,14 +265,14 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
 export interface UnpoolWhitelistedPools {
   ids: Long[];
 }
-export interface UnpoolWhitelistedPoolsProtoType {
+export interface UnpoolWhitelistedPoolsProtoMsg {
   typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
   value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsAmino {
   ids: string[];
 }
-export interface UnpoolWhitelistedPoolsAminoType {
+export interface UnpoolWhitelistedPoolsAminoMsg {
   type: "osmosis/unpool-whitelisted-pools";
   value: UnpoolWhitelistedPoolsAmino;
 }
@@ -288,6 +288,9 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
 }
 
 export const SuperfluidAsset = {
+  typeUrl: "/osmosis.superfluid.SuperfluidAsset",
+  aminoType: "osmosis/superfluid-asset",
+
   encode(message: SuperfluidAsset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -373,6 +376,32 @@ export const SuperfluidAsset = {
     obj.denom = message.denom;
     obj.asset_type = message.assetType;
     return obj;
+  },
+
+  fromAminoMsg(object: SuperfluidAssetAminoMsg): SuperfluidAsset {
+    return SuperfluidAsset.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SuperfluidAsset): SuperfluidAssetAminoMsg {
+    return {
+      type: "osmosis/superfluid-asset",
+      value: SuperfluidAsset.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SuperfluidAssetProtoMsg): SuperfluidAsset {
+    return SuperfluidAsset.decode(message.value);
+  },
+
+  toProto(message: SuperfluidAsset): Uint8Array {
+    return SuperfluidAsset.encode(message).finish();
+  },
+
+  toProtoMsg(message: SuperfluidAsset): SuperfluidAssetProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.SuperfluidAsset",
+      value: SuperfluidAsset.encode(message).finish()
+    };
   }
 
 };
@@ -386,6 +415,9 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
 }
 
 export const SuperfluidIntermediaryAccount = {
+  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
+  aminoType: "osmosis/superfluid-intermediary-account",
+
   encode(message: SuperfluidIntermediaryAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -486,6 +518,32 @@ export const SuperfluidIntermediaryAccount = {
     obj.val_addr = message.valAddr;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SuperfluidIntermediaryAccountAminoMsg): SuperfluidIntermediaryAccount {
+    return SuperfluidIntermediaryAccount.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountAminoMsg {
+    return {
+      type: "osmosis/superfluid-intermediary-account",
+      value: SuperfluidIntermediaryAccount.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SuperfluidIntermediaryAccountProtoMsg): SuperfluidIntermediaryAccount {
+    return SuperfluidIntermediaryAccount.decode(message.value);
+  },
+
+  toProto(message: SuperfluidIntermediaryAccount): Uint8Array {
+    return SuperfluidIntermediaryAccount.encode(message).finish();
+  },
+
+  toProtoMsg(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
+      value: SuperfluidIntermediaryAccount.encode(message).finish()
+    };
   }
 
 };
@@ -499,6 +557,9 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 }
 
 export const OsmoEquivalentMultiplierRecord = {
+  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
+  aminoType: "osmosis/osmo-equivalent-multiplier-record",
+
   encode(message: OsmoEquivalentMultiplierRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.epochNumber.isZero()) {
       writer.uint32(8).int64(message.epochNumber);
@@ -599,6 +660,32 @@ export const OsmoEquivalentMultiplierRecord = {
     obj.denom = message.denom;
     obj.multiplier = message.multiplier;
     return obj;
+  },
+
+  fromAminoMsg(object: OsmoEquivalentMultiplierRecordAminoMsg): OsmoEquivalentMultiplierRecord {
+    return OsmoEquivalentMultiplierRecord.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordAminoMsg {
+    return {
+      type: "osmosis/osmo-equivalent-multiplier-record",
+      value: OsmoEquivalentMultiplierRecord.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: OsmoEquivalentMultiplierRecordProtoMsg): OsmoEquivalentMultiplierRecord {
+    return OsmoEquivalentMultiplierRecord.decode(message.value);
+  },
+
+  toProto(message: OsmoEquivalentMultiplierRecord): Uint8Array {
+    return OsmoEquivalentMultiplierRecord.encode(message).finish();
+  },
+
+  toProtoMsg(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
+      value: OsmoEquivalentMultiplierRecord.encode(message).finish()
+    };
   }
 
 };
@@ -613,6 +700,9 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 }
 
 export const SuperfluidDelegationRecord = {
+  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
+  aminoType: "osmosis/superfluid-delegation-record",
+
   encode(message: SuperfluidDelegationRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -728,6 +818,32 @@ export const SuperfluidDelegationRecord = {
     obj.delegation_amount = message.delegationAmount ? Coin.toAmino(message.delegationAmount) : undefined;
     obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SuperfluidDelegationRecordAminoMsg): SuperfluidDelegationRecord {
+    return SuperfluidDelegationRecord.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordAminoMsg {
+    return {
+      type: "osmosis/superfluid-delegation-record",
+      value: SuperfluidDelegationRecord.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SuperfluidDelegationRecordProtoMsg): SuperfluidDelegationRecord {
+    return SuperfluidDelegationRecord.decode(message.value);
+  },
+
+  toProto(message: SuperfluidDelegationRecord): Uint8Array {
+    return SuperfluidDelegationRecord.encode(message).finish();
+  },
+
+  toProtoMsg(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
+      value: SuperfluidDelegationRecord.encode(message).finish()
+    };
   }
 
 };
@@ -740,6 +856,9 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
 }
 
 export const LockIdIntermediaryAccountConnection = {
+  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
+  aminoType: "osmosis/lock-id-intermediary-account-connection",
+
   encode(message: LockIdIntermediaryAccountConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.lockId.isZero()) {
       writer.uint32(8).uint64(message.lockId);
@@ -825,6 +944,32 @@ export const LockIdIntermediaryAccountConnection = {
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     obj.intermediary_account = message.intermediaryAccount;
     return obj;
+  },
+
+  fromAminoMsg(object: LockIdIntermediaryAccountConnectionAminoMsg): LockIdIntermediaryAccountConnection {
+    return LockIdIntermediaryAccountConnection.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionAminoMsg {
+    return {
+      type: "osmosis/lock-id-intermediary-account-connection",
+      value: LockIdIntermediaryAccountConnection.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: LockIdIntermediaryAccountConnectionProtoMsg): LockIdIntermediaryAccountConnection {
+    return LockIdIntermediaryAccountConnection.decode(message.value);
+  },
+
+  toProto(message: LockIdIntermediaryAccountConnection): Uint8Array {
+    return LockIdIntermediaryAccountConnection.encode(message).finish();
+  },
+
+  toProtoMsg(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
+      value: LockIdIntermediaryAccountConnection.encode(message).finish()
+    };
   }
 
 };
@@ -836,6 +981,9 @@ function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
 }
 
 export const UnpoolWhitelistedPools = {
+  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools",
+  aminoType: "osmosis/unpool-whitelisted-pools",
+
   encode(message: UnpoolWhitelistedPools, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
 
@@ -936,6 +1084,32 @@ export const UnpoolWhitelistedPools = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UnpoolWhitelistedPoolsAminoMsg): UnpoolWhitelistedPools {
+    return UnpoolWhitelistedPools.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsAminoMsg {
+    return {
+      type: "osmosis/unpool-whitelisted-pools",
+      value: UnpoolWhitelistedPools.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UnpoolWhitelistedPoolsProtoMsg): UnpoolWhitelistedPools {
+    return UnpoolWhitelistedPools.decode(message.value);
+  },
+
+  toProto(message: UnpoolWhitelistedPools): Uint8Array {
+    return UnpoolWhitelistedPools.encode(message).finish();
+  },
+
+  toProtoMsg(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools",
+      value: UnpoolWhitelistedPools.encode(message).finish()
+    };
   }
 
 };

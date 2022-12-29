@@ -56,7 +56,7 @@ export interface Endpoint {
    */
   allowCors: boolean;
 }
-export interface EndpointProtoType {
+export interface EndpointProtoMsg {
   typeUrl: "/google.api.Endpoint";
   value: Uint8Array;
 }
@@ -115,7 +115,7 @@ export interface EndpointAmino {
    */
   allow_cors: boolean;
 }
-export interface EndpointAminoType {
+export interface EndpointAminoMsg {
   type: "/google.api.Endpoint";
   value: EndpointAmino;
 }
@@ -157,6 +157,8 @@ function createBaseEndpoint(): Endpoint {
 }
 
 export const Endpoint = {
+  typeUrl: "/google.api.Endpoint",
+
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -290,6 +292,25 @@ export const Endpoint = {
     obj.target = message.target;
     obj.allow_cors = message.allowCors;
     return obj;
+  },
+
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/google.api.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 
 };

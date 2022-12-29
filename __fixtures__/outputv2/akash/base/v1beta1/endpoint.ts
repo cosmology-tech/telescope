@@ -47,7 +47,7 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 export interface Endpoint {
   kind: Endpoint_Kind;
 }
-export interface EndpointProtoType {
+export interface EndpointProtoMsg {
   typeUrl: "/akash.base.v1beta1.Endpoint";
   value: Uint8Array;
 }
@@ -56,7 +56,7 @@ export interface EndpointProtoType {
 export interface EndpointAmino {
   kind: Endpoint_Kind;
 }
-export interface EndpointAminoType {
+export interface EndpointAminoMsg {
   type: "/akash.base.v1beta1.Endpoint";
   value: EndpointAmino;
 }
@@ -73,6 +73,8 @@ function createBaseEndpoint(): Endpoint {
 }
 
 export const Endpoint = {
+  typeUrl: "/akash.base.v1beta1.Endpoint",
+
   encode(message: Endpoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -143,6 +145,25 @@ export const Endpoint = {
     const obj: any = {};
     obj.kind = message.kind;
     return obj;
+  },
+
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
+  },
+
+  toProto(message: Endpoint): Uint8Array {
+    return Endpoint.encode(message).finish();
+  },
+
+  toProtoMsg(message: Endpoint): EndpointProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.Endpoint",
+      value: Endpoint.encode(message).finish()
+    };
   }
 
 };

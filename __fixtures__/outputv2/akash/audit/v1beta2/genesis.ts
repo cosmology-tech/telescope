@@ -7,7 +7,7 @@ export const protobufPackage = "akash.audit.v1beta2";
 export interface GenesisState {
   attributes: AuditedAttributes[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/akash.audit.v1beta2.GenesisState";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface GenesisStateProtoType {
 export interface GenesisStateAmino {
   attributes: AuditedAttributesAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/akash.audit.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
@@ -33,6 +33,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  typeUrl: "/akash.audit.v1beta2.GenesisState",
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.attributes) {
       AuditedAttributes.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -121,6 +123,25 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

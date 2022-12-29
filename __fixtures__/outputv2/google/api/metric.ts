@@ -348,7 +348,7 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
-export interface MetricDescriptorProtoType {
+export interface MetricDescriptorProtoMsg {
   typeUrl: "/google.api.MetricDescriptor";
   value: Uint8Array;
 }
@@ -528,7 +528,7 @@ export interface MetricDescriptorAmino {
    */
   monitored_resource_types: string[];
 }
-export interface MetricDescriptorAminoType {
+export interface MetricDescriptorAminoMsg {
   type: "/google.api.MetricDescriptor";
   value: MetricDescriptorAmino;
 }
@@ -574,7 +574,7 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
-export interface MetricDescriptor_MetricDescriptorMetadataProtoType {
+export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
   typeUrl: "/google.api.MetricDescriptorMetadata";
   value: Uint8Array;
 }
@@ -601,7 +601,7 @@ export interface MetricDescriptor_MetricDescriptorMetadataAmino {
    */
   ingest_delay?: DurationAmino;
 }
-export interface MetricDescriptor_MetricDescriptorMetadataAminoType {
+export interface MetricDescriptor_MetricDescriptorMetadataAminoMsg {
   type: "/google.api.MetricDescriptorMetadata";
   value: MetricDescriptor_MetricDescriptorMetadataAmino;
 }
@@ -617,16 +617,16 @@ export interface Metric_LabelsEntry {
   key: string;
   value: string;
 }
-export interface Metric_LabelsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+export interface Metric_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface Metric_LabelsEntryAminoType {
-  type: "/google.api.undefined";
+export interface Metric_LabelsEntryAminoMsg {
+  type: string;
   value: Metric_LabelsEntryAmino;
 }
 export interface Metric_LabelsEntrySDKType {
@@ -653,7 +653,7 @@ export interface Metric {
     [key: string]: string;
   };
 }
-export interface MetricProtoType {
+export interface MetricProtoMsg {
   typeUrl: "/google.api.Metric";
   value: Uint8Array;
 }
@@ -677,7 +677,7 @@ export interface MetricAmino {
     [key: string]: string;
   };
 }
-export interface MetricAminoType {
+export interface MetricAminoMsg {
   type: "/google.api.Metric";
   value: MetricAmino;
 }
@@ -710,6 +710,8 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 }
 
 export const MetricDescriptor = {
+  typeUrl: "/google.api.MetricDescriptor",
+
   encode(message: MetricDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -966,6 +968,25 @@ export const MetricDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MetricDescriptorAminoMsg): MetricDescriptor {
+    return MetricDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricDescriptorProtoMsg): MetricDescriptor {
+    return MetricDescriptor.decode(message.value);
+  },
+
+  toProto(message: MetricDescriptor): Uint8Array {
+    return MetricDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricDescriptor): MetricDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptor",
+      value: MetricDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -979,6 +1000,8 @@ function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor
 }
 
 export const MetricDescriptor_MetricDescriptorMetadata = {
+  typeUrl: "/google.api.MetricDescriptorMetadata",
+
   encode(message: MetricDescriptor_MetricDescriptorMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.launchStage !== 0) {
       writer.uint32(8).int32(message.launchStage);
@@ -1079,6 +1102,25 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MetricDescriptor_MetricDescriptorMetadataAminoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricDescriptor_MetricDescriptorMetadataProtoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.decode(message.value);
+  },
+
+  toProto(message: MetricDescriptor_MetricDescriptorMetadata): Uint8Array {
+    return MetricDescriptor_MetricDescriptorMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptorMetadata",
+      value: MetricDescriptor_MetricDescriptorMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1176,6 +1218,18 @@ export const Metric_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Metric_LabelsEntryProtoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: Metric_LabelsEntry): Uint8Array {
+    return Metric_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -1188,6 +1242,8 @@ function createBaseMetric(): Metric {
 }
 
 export const Metric = {
+  typeUrl: "/google.api.Metric",
+
   encode(message: Metric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(26).string(message.type);
@@ -1324,6 +1380,25 @@ export const Metric = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MetricAminoMsg): Metric {
+    return Metric.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricProtoMsg): Metric {
+    return Metric.decode(message.value);
+  },
+
+  toProto(message: Metric): Uint8Array {
+    return Metric.encode(message).finish();
+  },
+
+  toProtoMsg(message: Metric): MetricProtoMsg {
+    return {
+      typeUrl: "/google.api.Metric",
+      value: Metric.encode(message).finish()
+    };
   }
 
 };

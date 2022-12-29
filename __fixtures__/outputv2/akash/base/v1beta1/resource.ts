@@ -10,7 +10,7 @@ export interface CPU {
   units?: ResourceValue;
   attributes: Attribute[];
 }
-export interface CPUProtoType {
+export interface CPUProtoMsg {
   typeUrl: "/akash.base.v1beta1.CPU";
   value: Uint8Array;
 }
@@ -20,7 +20,7 @@ export interface CPUAmino {
   units?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
-export interface CPUAminoType {
+export interface CPUAminoMsg {
   type: "/akash.base.v1beta1.CPU";
   value: CPUAmino;
 }
@@ -36,7 +36,7 @@ export interface Memory {
   quantity?: ResourceValue;
   attributes: Attribute[];
 }
-export interface MemoryProtoType {
+export interface MemoryProtoMsg {
   typeUrl: "/akash.base.v1beta1.Memory";
   value: Uint8Array;
 }
@@ -46,7 +46,7 @@ export interface MemoryAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
-export interface MemoryAminoType {
+export interface MemoryAminoMsg {
   type: "/akash.base.v1beta1.Memory";
   value: MemoryAmino;
 }
@@ -62,7 +62,7 @@ export interface Storage {
   quantity?: ResourceValue;
   attributes: Attribute[];
 }
-export interface StorageProtoType {
+export interface StorageProtoMsg {
   typeUrl: "/akash.base.v1beta1.Storage";
   value: Uint8Array;
 }
@@ -72,7 +72,7 @@ export interface StorageAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
-export interface StorageAminoType {
+export interface StorageAminoMsg {
   type: "/akash.base.v1beta1.Storage";
   value: StorageAmino;
 }
@@ -93,7 +93,7 @@ export interface ResourceUnits {
   storage?: Storage;
   endpoints: Endpoint[];
 }
-export interface ResourceUnitsProtoType {
+export interface ResourceUnitsProtoMsg {
   typeUrl: "/akash.base.v1beta1.ResourceUnits";
   value: Uint8Array;
 }
@@ -108,7 +108,7 @@ export interface ResourceUnitsAmino {
   storage?: StorageAmino;
   endpoints: EndpointAmino[];
 }
-export interface ResourceUnitsAminoType {
+export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta1.ResourceUnits";
   value: ResourceUnitsAmino;
 }
@@ -132,6 +132,8 @@ function createBaseCPU(): CPU {
 }
 
 export const CPU = {
+  typeUrl: "/akash.base.v1beta1.CPU",
+
   encode(message: CPU, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
@@ -235,6 +237,25 @@ export const CPU = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CPUAminoMsg): CPU {
+    return CPU.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CPUProtoMsg): CPU {
+    return CPU.decode(message.value);
+  },
+
+  toProto(message: CPU): Uint8Array {
+    return CPU.encode(message).finish();
+  },
+
+  toProtoMsg(message: CPU): CPUProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.CPU",
+      value: CPU.encode(message).finish()
+    };
   }
 
 };
@@ -247,6 +268,8 @@ function createBaseMemory(): Memory {
 }
 
 export const Memory = {
+  typeUrl: "/akash.base.v1beta1.Memory",
+
   encode(message: Memory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -350,6 +373,25 @@ export const Memory = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MemoryAminoMsg): Memory {
+    return Memory.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MemoryProtoMsg): Memory {
+    return Memory.decode(message.value);
+  },
+
+  toProto(message: Memory): Uint8Array {
+    return Memory.encode(message).finish();
+  },
+
+  toProtoMsg(message: Memory): MemoryProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.Memory",
+      value: Memory.encode(message).finish()
+    };
   }
 
 };
@@ -362,6 +404,8 @@ function createBaseStorage(): Storage {
 }
 
 export const Storage = {
+  typeUrl: "/akash.base.v1beta1.Storage",
+
   encode(message: Storage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -465,6 +509,25 @@ export const Storage = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: StorageAminoMsg): Storage {
+    return Storage.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: StorageProtoMsg): Storage {
+    return Storage.decode(message.value);
+  },
+
+  toProto(message: Storage): Uint8Array {
+    return Storage.encode(message).finish();
+  },
+
+  toProtoMsg(message: Storage): StorageProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.Storage",
+      value: Storage.encode(message).finish()
+    };
   }
 
 };
@@ -479,6 +542,8 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 
 export const ResourceUnits = {
+  typeUrl: "/akash.base.v1beta1.ResourceUnits",
+
   encode(message: ResourceUnits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();
@@ -612,6 +677,25 @@ export const ResourceUnits = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
+    return ResourceUnits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
+    return ResourceUnits.decode(message.value);
+  },
+
+  toProto(message: ResourceUnits): Uint8Array {
+    return ResourceUnits.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceUnits): ResourceUnitsProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.ResourceUnits",
+      value: ResourceUnits.encode(message).finish()
+    };
   }
 
 };

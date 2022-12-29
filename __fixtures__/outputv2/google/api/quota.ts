@@ -63,7 +63,7 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
-export interface QuotaProtoType {
+export interface QuotaProtoMsg {
   typeUrl: "/google.api.Quota";
   value: Uint8Array;
 }
@@ -129,7 +129,7 @@ export interface QuotaAmino {
    */
   metric_rules: MetricRuleAmino[];
 }
-export interface QuotaAminoType {
+export interface QuotaAminoMsg {
   type: "/google.api.Quota";
   value: QuotaAmino;
 }
@@ -193,16 +193,16 @@ export interface MetricRule_MetricCostsEntry {
   key: string;
   value: Long;
 }
-export interface MetricRule_MetricCostsEntryProtoType {
-  typeUrl: "/google.api.undefined";
+export interface MetricRule_MetricCostsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface MetricRule_MetricCostsEntryAmino {
   key: string;
   value: string;
 }
-export interface MetricRule_MetricCostsEntryAminoType {
-  type: "/google.api.undefined";
+export interface MetricRule_MetricCostsEntryAminoMsg {
+  type: string;
   value: MetricRule_MetricCostsEntryAmino;
 }
 export interface MetricRule_MetricCostsEntrySDKType {
@@ -234,7 +234,7 @@ export interface MetricRule {
     [key: string]: Long;
   };
 }
-export interface MetricRuleProtoType {
+export interface MetricRuleProtoMsg {
   typeUrl: "/google.api.MetricRule";
   value: Uint8Array;
 }
@@ -263,7 +263,7 @@ export interface MetricRuleAmino {
     [key: string]: string;
   };
 }
-export interface MetricRuleAminoType {
+export interface MetricRuleAminoMsg {
   type: "/google.api.MetricRule";
   value: MetricRuleAmino;
 }
@@ -282,16 +282,16 @@ export interface QuotaLimit_ValuesEntry {
   key: string;
   value: Long;
 }
-export interface QuotaLimit_ValuesEntryProtoType {
-  typeUrl: "/google.api.undefined";
+export interface QuotaLimit_ValuesEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntryAmino {
   key: string;
   value: string;
 }
-export interface QuotaLimit_ValuesEntryAminoType {
-  type: "/google.api.undefined";
+export interface QuotaLimit_ValuesEntryAminoMsg {
+  type: string;
   value: QuotaLimit_ValuesEntryAmino;
 }
 export interface QuotaLimit_ValuesEntrySDKType {
@@ -405,7 +405,7 @@ export interface QuotaLimit {
    */
   displayName: string;
 }
-export interface QuotaLimitProtoType {
+export interface QuotaLimitProtoMsg {
   typeUrl: "/google.api.QuotaLimit";
   value: Uint8Array;
 }
@@ -516,7 +516,7 @@ export interface QuotaLimitAmino {
    */
   display_name: string;
 }
-export interface QuotaLimitAminoType {
+export interface QuotaLimitAminoMsg {
   type: "/google.api.QuotaLimit";
   value: QuotaLimitAmino;
 }
@@ -549,6 +549,8 @@ function createBaseQuota(): Quota {
 }
 
 export const Quota = {
+  typeUrl: "/google.api.Quota",
+
   encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -667,6 +669,25 @@ export const Quota = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaAminoMsg): Quota {
+    return Quota.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaProtoMsg): Quota {
+    return Quota.decode(message.value);
+  },
+
+  toProto(message: Quota): Uint8Array {
+    return Quota.encode(message).finish();
+  },
+
+  toProtoMsg(message: Quota): QuotaProtoMsg {
+    return {
+      typeUrl: "/google.api.Quota",
+      value: Quota.encode(message).finish()
+    };
   }
 
 };
@@ -764,6 +785,18 @@ export const MetricRule_MetricCostsEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
+    return MetricRule_MetricCostsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg): MetricRule_MetricCostsEntry {
+    return MetricRule_MetricCostsEntry.decode(message.value);
+  },
+
+  toProto(message: MetricRule_MetricCostsEntry): Uint8Array {
+    return MetricRule_MetricCostsEntry.encode(message).finish();
   }
 
 };
@@ -776,6 +809,8 @@ function createBaseMetricRule(): MetricRule {
 }
 
 export const MetricRule = {
+  typeUrl: "/google.api.MetricRule",
+
   encode(message: MetricRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -912,6 +947,25 @@ export const MetricRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
+    return MetricRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
+    return MetricRule.decode(message.value);
+  },
+
+  toProto(message: MetricRule): Uint8Array {
+    return MetricRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricRule): MetricRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricRule",
+      value: MetricRule.encode(message).finish()
+    };
   }
 
 };
@@ -1009,6 +1063,18 @@ export const QuotaLimit_ValuesEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
+    return QuotaLimit_ValuesEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg): QuotaLimit_ValuesEntry {
+    return QuotaLimit_ValuesEntry.decode(message.value);
+  },
+
+  toProto(message: QuotaLimit_ValuesEntry): Uint8Array {
+    return QuotaLimit_ValuesEntry.encode(message).finish();
   }
 
 };
@@ -1029,6 +1095,8 @@ function createBaseQuotaLimit(): QuotaLimit {
 }
 
 export const QuotaLimit = {
+  typeUrl: "/google.api.QuotaLimit",
+
   encode(message: QuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(50).string(message.name);
@@ -1286,6 +1354,25 @@ export const QuotaLimit = {
 
     obj.display_name = message.displayName;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {
+    return QuotaLimit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaLimitProtoMsg): QuotaLimit {
+    return QuotaLimit.decode(message.value);
+  },
+
+  toProto(message: QuotaLimit): Uint8Array {
+    return QuotaLimit.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaLimit): QuotaLimitProtoMsg {
+    return {
+      typeUrl: "/google.api.QuotaLimit",
+      value: QuotaLimit.encode(message).finish()
+    };
   }
 
 };

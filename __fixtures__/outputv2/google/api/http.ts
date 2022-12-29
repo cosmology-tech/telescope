@@ -25,7 +25,7 @@ export interface Http {
    */
   fullyDecodeReservedExpansion: boolean;
 }
-export interface HttpProtoType {
+export interface HttpProtoMsg {
   typeUrl: "/google.api.Http";
   value: Uint8Array;
 }
@@ -53,7 +53,7 @@ export interface HttpAmino {
    */
   fully_decode_reserved_expansion: boolean;
 }
-export interface HttpAminoType {
+export interface HttpAminoMsg {
   type: "/google.api.Http";
   value: HttpAmino;
 }
@@ -400,7 +400,7 @@ export interface HttpRule {
    */
   additionalBindings: HttpRule[];
 }
-export interface HttpRuleProtoType {
+export interface HttpRuleProtoMsg {
   typeUrl: "/google.api.HttpRule";
   value: Uint8Array;
 }
@@ -737,7 +737,7 @@ export interface HttpRuleAmino {
    */
   additional_bindings: HttpRuleAmino[];
 }
-export interface HttpRuleAminoType {
+export interface HttpRuleAminoMsg {
   type: "/google.api.HttpRule";
   value: HttpRuleAmino;
 }
@@ -1034,7 +1034,7 @@ export interface CustomHttpPattern {
   /** The path matched by this custom verb. */
   path: string;
 }
-export interface CustomHttpPatternProtoType {
+export interface CustomHttpPatternProtoMsg {
   typeUrl: "/google.api.CustomHttpPattern";
   value: Uint8Array;
 }
@@ -1047,7 +1047,7 @@ export interface CustomHttpPatternAmino {
   /** The path matched by this custom verb. */
   path: string;
 }
-export interface CustomHttpPatternAminoType {
+export interface CustomHttpPatternAminoMsg {
   type: "/google.api.CustomHttpPattern";
   value: CustomHttpPatternAmino;
 }
@@ -1066,6 +1066,8 @@ function createBaseHttp(): Http {
 }
 
 export const Http = {
+  typeUrl: "/google.api.Http",
+
   encode(message: Http, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1169,6 +1171,25 @@ export const Http = {
 
     obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion;
     return obj;
+  },
+
+  fromAminoMsg(object: HttpAminoMsg): Http {
+    return Http.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HttpProtoMsg): Http {
+    return Http.decode(message.value);
+  },
+
+  toProto(message: Http): Uint8Array {
+    return Http.encode(message).finish();
+  },
+
+  toProtoMsg(message: Http): HttpProtoMsg {
+    return {
+      typeUrl: "/google.api.Http",
+      value: Http.encode(message).finish()
+    };
   }
 
 };
@@ -1189,6 +1210,8 @@ function createBaseHttpRule(): HttpRule {
 }
 
 export const HttpRule = {
+  typeUrl: "/google.api.HttpRule",
+
   encode(message: HttpRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -1412,6 +1435,25 @@ export const HttpRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: HttpRuleAminoMsg): HttpRule {
+    return HttpRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HttpRuleProtoMsg): HttpRule {
+    return HttpRule.decode(message.value);
+  },
+
+  toProto(message: HttpRule): Uint8Array {
+    return HttpRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: HttpRule): HttpRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.HttpRule",
+      value: HttpRule.encode(message).finish()
+    };
   }
 
 };
@@ -1424,6 +1466,8 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 }
 
 export const CustomHttpPattern = {
+  typeUrl: "/google.api.CustomHttpPattern",
+
   encode(message: CustomHttpPattern, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
@@ -1509,6 +1553,25 @@ export const CustomHttpPattern = {
     obj.kind = message.kind;
     obj.path = message.path;
     return obj;
+  },
+
+  fromAminoMsg(object: CustomHttpPatternAminoMsg): CustomHttpPattern {
+    return CustomHttpPattern.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CustomHttpPatternProtoMsg): CustomHttpPattern {
+    return CustomHttpPattern.decode(message.value);
+  },
+
+  toProto(message: CustomHttpPattern): Uint8Array {
+    return CustomHttpPattern.encode(message).finish();
+  },
+
+  toProtoMsg(message: CustomHttpPattern): CustomHttpPatternProtoMsg {
+    return {
+      typeUrl: "/google.api.CustomHttpPattern",
+      value: CustomHttpPattern.encode(message).finish()
+    };
   }
 
 };

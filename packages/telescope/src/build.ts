@@ -61,7 +61,9 @@ export const buildBaseTypeScriptInterface = (
     name: string,
     obj: any
 ) => {
+
     context.body.push(createProtoType(context.proto, name, obj));
+
     if (context.options.aminoEncoding.useRecursiveV2encoding) {
         context.body.push(createProtoTypeType(context.proto, name, obj));
         context.body.push(createAminoType(context.proto, name, obj));

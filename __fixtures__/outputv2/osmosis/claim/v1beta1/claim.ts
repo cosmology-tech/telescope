@@ -69,7 +69,7 @@ export interface ClaimRecord {
    */
   actionCompleted: boolean[];
 }
-export interface ClaimRecordProtoType {
+export interface ClaimRecordProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
   value: Uint8Array;
 }
@@ -88,7 +88,7 @@ export interface ClaimRecordAmino {
    */
   action_completed: boolean[];
 }
-export interface ClaimRecordAminoType {
+export interface ClaimRecordAminoMsg {
   type: "osmosis/claim/claim-record";
   value: ClaimRecordAmino;
 }
@@ -109,6 +109,9 @@ function createBaseClaimRecord(): ClaimRecord {
 }
 
 export const ClaimRecord = {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
+  aminoType: "osmosis/claim/claim-record",
+
   encode(message: ClaimRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -254,6 +257,32 @@ export const ClaimRecord = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ClaimRecordAminoMsg): ClaimRecord {
+    return ClaimRecord.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClaimRecord): ClaimRecordAminoMsg {
+    return {
+      type: "osmosis/claim/claim-record",
+      value: ClaimRecord.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClaimRecordProtoMsg): ClaimRecord {
+    return ClaimRecord.decode(message.value);
+  },
+
+  toProto(message: ClaimRecord): Uint8Array {
+    return ClaimRecord.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClaimRecord): ClaimRecordProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
+      value: ClaimRecord.encode(message).finish()
+    };
   }
 
 };

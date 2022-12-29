@@ -10,7 +10,7 @@ export interface MsgCreateBalancerPool {
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
-export interface MsgCreateBalancerPoolProtoType {
+export interface MsgCreateBalancerPoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
   value: Uint8Array;
 }
@@ -22,7 +22,7 @@ export interface MsgCreateBalancerPoolAmino {
   pool_assets: PoolAssetAmino[];
   future_pool_governor: string;
 }
-export interface MsgCreateBalancerPoolAminoType {
+export interface MsgCreateBalancerPoolAminoMsg {
   type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
   value: MsgCreateBalancerPoolAmino;
 }
@@ -39,7 +39,7 @@ export interface MsgCreateBalancerPoolSDKType {
 export interface MsgCreateBalancerPoolResponse {
   poolId: Long;
 }
-export interface MsgCreateBalancerPoolResponseProtoType {
+export interface MsgCreateBalancerPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
   value: Uint8Array;
 }
@@ -48,7 +48,7 @@ export interface MsgCreateBalancerPoolResponseProtoType {
 export interface MsgCreateBalancerPoolResponseAmino {
   pool_id: string;
 }
-export interface MsgCreateBalancerPoolResponseAminoType {
+export interface MsgCreateBalancerPoolResponseAminoMsg {
   type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
   value: MsgCreateBalancerPoolResponseAmino;
 }
@@ -68,6 +68,9 @@ function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
 }
 
 export const MsgCreateBalancerPool = {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
+
   encode(message: MsgCreateBalancerPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -201,6 +204,32 @@ export const MsgCreateBalancerPool = {
 
     obj.future_pool_governor = message.futurePoolGovernor;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateBalancerPoolAminoMsg): MsgCreateBalancerPool {
+    return MsgCreateBalancerPool.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoMsg {
+    return {
+      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
+      value: MsgCreateBalancerPool.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg): MsgCreateBalancerPool {
+    return MsgCreateBalancerPool.decode(message.value);
+  },
+
+  toProto(message: MsgCreateBalancerPool): Uint8Array {
+    return MsgCreateBalancerPool.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateBalancerPool): MsgCreateBalancerPoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
+      value: MsgCreateBalancerPool.encode(message).finish()
+    };
   }
 
 };
@@ -212,6 +241,9 @@ function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolRespons
 }
 
 export const MsgCreateBalancerPoolResponse = {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
+
   encode(message: MsgCreateBalancerPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.poolId.isZero()) {
       writer.uint32(8).uint64(message.poolId);
@@ -282,6 +314,32 @@ export const MsgCreateBalancerPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateBalancerPoolResponseAminoMsg): MsgCreateBalancerPoolResponse {
+    return MsgCreateBalancerPoolResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
+      value: MsgCreateBalancerPoolResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg): MsgCreateBalancerPoolResponse {
+    return MsgCreateBalancerPoolResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateBalancerPoolResponse): Uint8Array {
+    return MsgCreateBalancerPoolResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
+      value: MsgCreateBalancerPoolResponse.encode(message).finish()
+    };
   }
 
 };

@@ -12,7 +12,7 @@ export interface QueryAccountsRequest {
   state: string;
   pagination?: PageRequest;
 }
-export interface QueryAccountsRequestProtoType {
+export interface QueryAccountsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.QueryAccountsRequest";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface QueryAccountsRequestAmino {
   state: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryAccountsRequestAminoType {
+export interface QueryAccountsRequestAminoMsg {
   type: "/akash.escrow.v1beta1.QueryAccountsRequest";
   value: QueryAccountsRequestAmino;
 }
@@ -44,7 +44,7 @@ export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
 }
-export interface QueryAccountsResponseProtoType {
+export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.QueryAccountsResponse";
   value: Uint8Array;
 }
@@ -54,7 +54,7 @@ export interface QueryAccountsResponseAmino {
   accounts: AccountAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryAccountsResponseAminoType {
+export interface QueryAccountsResponseAminoMsg {
   type: "/akash.escrow.v1beta1.QueryAccountsResponse";
   value: QueryAccountsResponseAmino;
 }
@@ -74,7 +74,7 @@ export interface QueryPaymentsRequest {
   state: string;
   pagination?: PageRequest;
 }
-export interface QueryPaymentsRequestProtoType {
+export interface QueryPaymentsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.QueryPaymentsRequest";
   value: Uint8Array;
 }
@@ -88,7 +88,7 @@ export interface QueryPaymentsRequestAmino {
   state: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryPaymentsRequestAminoType {
+export interface QueryPaymentsRequestAminoMsg {
   type: "/akash.escrow.v1beta1.QueryPaymentsRequest";
   value: QueryPaymentsRequestAmino;
 }
@@ -108,7 +108,7 @@ export interface QueryPaymentsResponse {
   payments: Payment[];
   pagination?: PageResponse;
 }
-export interface QueryPaymentsResponseProtoType {
+export interface QueryPaymentsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.QueryPaymentsResponse";
   value: Uint8Array;
 }
@@ -118,7 +118,7 @@ export interface QueryPaymentsResponseAmino {
   payments: PaymentAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryPaymentsResponseAminoType {
+export interface QueryPaymentsResponseAminoMsg {
   type: "/akash.escrow.v1beta1.QueryPaymentsResponse";
   value: QueryPaymentsResponseAmino;
 }
@@ -140,6 +140,8 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 }
 
 export const QueryAccountsRequest = {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsRequest",
+
   encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -270,6 +272,25 @@ export const QueryAccountsRequest = {
     obj.state = message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
+    return QueryAccountsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
+    return QueryAccountsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryAccountsRequest): Uint8Array {
+    return QueryAccountsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAccountsRequest): QueryAccountsRequestProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.QueryAccountsRequest",
+      value: QueryAccountsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -282,6 +303,8 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
 }
 
 export const QueryAccountsResponse = {
+  typeUrl: "/akash.escrow.v1beta1.QueryAccountsResponse",
+
   encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Account.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -385,6 +408,25 @@ export const QueryAccountsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
+    return QueryAccountsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
+    return QueryAccountsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryAccountsResponse): Uint8Array {
+    return QueryAccountsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAccountsResponse): QueryAccountsResponseProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.QueryAccountsResponse",
+      value: QueryAccountsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -401,6 +443,8 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
 }
 
 export const QueryPaymentsRequest = {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsRequest",
+
   encode(message: QueryPaymentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.scope !== "") {
       writer.uint32(10).string(message.scope);
@@ -546,6 +590,25 @@ export const QueryPaymentsRequest = {
     obj.state = message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPaymentsRequestAminoMsg): QueryPaymentsRequest {
+    return QueryPaymentsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryPaymentsRequestProtoMsg): QueryPaymentsRequest {
+    return QueryPaymentsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPaymentsRequest): Uint8Array {
+    return QueryPaymentsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPaymentsRequest): QueryPaymentsRequestProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.QueryPaymentsRequest",
+      value: QueryPaymentsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -558,6 +621,8 @@ function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
 }
 
 export const QueryPaymentsResponse = {
+  typeUrl: "/akash.escrow.v1beta1.QueryPaymentsResponse",
+
   encode(message: QueryPaymentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.payments) {
       Payment.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -661,6 +726,25 @@ export const QueryPaymentsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPaymentsResponseAminoMsg): QueryPaymentsResponse {
+    return QueryPaymentsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryPaymentsResponseProtoMsg): QueryPaymentsResponse {
+    return QueryPaymentsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPaymentsResponse): Uint8Array {
+    return QueryPaymentsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPaymentsResponse): QueryPaymentsResponseProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.QueryPaymentsResponse",
+      value: QueryPaymentsResponse.encode(message).finish()
+    };
   }
 
 };

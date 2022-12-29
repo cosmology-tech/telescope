@@ -218,7 +218,7 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceProtoType {
+export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.Service";
   value: Uint8Array;
 }
@@ -252,7 +252,7 @@ export interface ServiceAmino {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceAminoType {
+export interface ServiceAminoMsg {
   type: "/google.api.serviceusage.v1beta1.Service";
   value: ServiceAmino;
 }
@@ -317,7 +317,7 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
-export interface ServiceConfigProtoType {
+export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig";
   value: Uint8Array;
 }
@@ -374,7 +374,7 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
-export interface ServiceConfigAminoType {
+export interface ServiceConfigAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ServiceConfig";
   value: ServiceConfigAmino;
 }
@@ -401,7 +401,7 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
-export interface OperationMetadataProtoType {
+export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata";
   value: Uint8Array;
 }
@@ -414,7 +414,7 @@ export interface OperationMetadataAmino {
    */
   resource_names: string[];
 }
-export interface OperationMetadataAminoType {
+export interface OperationMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.OperationMetadata";
   value: OperationMetadataAmino;
 }
@@ -472,7 +472,7 @@ export interface ConsumerQuotaMetric {
   /** The units in which the metric value is reported. */
   unit: string;
 }
-export interface ConsumerQuotaMetricProtoType {
+export interface ConsumerQuotaMetricProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
   value: Uint8Array;
 }
@@ -525,7 +525,7 @@ export interface ConsumerQuotaMetricAmino {
   /** The units in which the metric value is reported. */
   unit: string;
 }
-export interface ConsumerQuotaMetricAminoType {
+export interface ConsumerQuotaMetricAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
   value: ConsumerQuotaMetricAmino;
 }
@@ -584,7 +584,7 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
-export interface ConsumerQuotaLimitProtoType {
+export interface ConsumerQuotaLimitProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
   value: Uint8Array;
 }
@@ -633,7 +633,7 @@ export interface ConsumerQuotaLimitAmino {
    */
   quota_buckets: QuotaBucketAmino[];
 }
-export interface ConsumerQuotaLimitAminoType {
+export interface ConsumerQuotaLimitAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
   value: ConsumerQuotaLimitAmino;
 }
@@ -651,16 +651,16 @@ export interface QuotaBucket_DimensionsEntry {
   key: string;
   value: string;
 }
-export interface QuotaBucket_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+export interface QuotaBucket_DimensionsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
 }
-export interface QuotaBucket_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+export interface QuotaBucket_DimensionsEntryAminoMsg {
+  type: string;
   value: QuotaBucket_DimensionsEntryAmino;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
@@ -708,7 +708,7 @@ export interface QuotaBucket {
     [key: string]: string;
   };
 }
-export interface QuotaBucketProtoType {
+export interface QuotaBucketProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket";
   value: Uint8Array;
 }
@@ -753,7 +753,7 @@ export interface QuotaBucketAmino {
     [key: string]: string;
   };
 }
-export interface QuotaBucketAminoType {
+export interface QuotaBucketAminoMsg {
   type: "/google.api.serviceusage.v1beta1.QuotaBucket";
   value: QuotaBucketAmino;
 }
@@ -773,16 +773,16 @@ export interface QuotaOverride_DimensionsEntry {
   key: string;
   value: string;
 }
-export interface QuotaOverride_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+export interface QuotaOverride_DimensionsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntryAmino {
   key: string;
   value: string;
 }
-export interface QuotaOverride_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+export interface QuotaOverride_DimensionsEntryAminoMsg {
+  type: string;
   value: QuotaOverride_DimensionsEntryAmino;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
@@ -864,7 +864,7 @@ export interface QuotaOverride {
    */
   adminOverrideAncestor: string;
 }
-export interface QuotaOverrideProtoType {
+export interface QuotaOverrideProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride";
   value: Uint8Array;
 }
@@ -943,7 +943,7 @@ export interface QuotaOverrideAmino {
    */
   admin_override_ancestor: string;
 }
-export interface QuotaOverrideAminoType {
+export interface QuotaOverrideAminoMsg {
   type: "/google.api.serviceusage.v1beta1.QuotaOverride";
   value: QuotaOverrideAmino;
 }
@@ -970,7 +970,7 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
-export interface OverrideInlineSourceProtoType {
+export interface OverrideInlineSourceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
   value: Uint8Array;
 }
@@ -985,7 +985,7 @@ export interface OverrideInlineSourceAmino {
    */
   overrides: QuotaOverrideAmino[];
 }
-export interface OverrideInlineSourceAminoType {
+export interface OverrideInlineSourceAminoMsg {
   type: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
   value: OverrideInlineSourceAmino;
 }
@@ -998,16 +998,16 @@ export interface AdminQuotaPolicy_DimensionsEntry {
   key: string;
   value: string;
 }
-export interface AdminQuotaPolicy_DimensionsEntryProtoType {
-  typeUrl: "/google.api.serviceusage.v1beta1.undefined";
+export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
   key: string;
   value: string;
 }
-export interface AdminQuotaPolicy_DimensionsEntryAminoType {
-  type: "/google.api.serviceusage.v1beta1.undefined";
+export interface AdminQuotaPolicy_DimensionsEntryAminoMsg {
+  type: string;
   value: AdminQuotaPolicy_DimensionsEntryAmino;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
@@ -1074,7 +1074,7 @@ export interface AdminQuotaPolicy {
    */
   container: string;
 }
-export interface AdminQuotaPolicyProtoType {
+export interface AdminQuotaPolicyProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
   value: Uint8Array;
 }
@@ -1138,7 +1138,7 @@ export interface AdminQuotaPolicyAmino {
    */
   container: string;
 }
-export interface AdminQuotaPolicyAminoType {
+export interface AdminQuotaPolicyAminoMsg {
   type: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
   value: AdminQuotaPolicyAmino;
 }
@@ -1172,7 +1172,7 @@ export interface ServiceIdentity {
    */
   uniqueId: string;
 }
-export interface ServiceIdentityProtoType {
+export interface ServiceIdentityProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity";
   value: Uint8Array;
 }
@@ -1194,7 +1194,7 @@ export interface ServiceIdentityAmino {
    */
   unique_id: string;
 }
-export interface ServiceIdentityAminoType {
+export interface ServiceIdentityAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ServiceIdentity";
   value: ServiceIdentityAmino;
 }
@@ -1218,6 +1218,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  typeUrl: "/google.api.serviceusage.v1beta1.Service",
+
   encode(message: Service, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1333,6 +1335,25 @@ export const Service = {
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
+  },
+
+  toProto(message: Service): Uint8Array {
+    return Service.encode(message).finish();
+  },
+
+  toProtoMsg(message: Service): ServiceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.Service",
+      value: Service.encode(message).finish()
+    };
   }
 
 };
@@ -1353,6 +1374,8 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
+
   encode(message: ServiceConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1609,6 +1632,25 @@ export const ServiceConfig = {
 
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
+    return ServiceConfig.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
+    return ServiceConfig.decode(message.value);
+  },
+
+  toProto(message: ServiceConfig): Uint8Array {
+    return ServiceConfig.encode(message).finish();
+  },
+
+  toProtoMsg(message: ServiceConfig): ServiceConfigProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
+      value: ServiceConfig.encode(message).finish()
+    };
   }
 
 };
@@ -1620,6 +1662,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
+
   encode(message: OperationMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -1708,6 +1752,25 @@ export const OperationMetadata = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
+    return OperationMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
+  },
+
+  toProto(message: OperationMetadata): Uint8Array {
+    return OperationMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: OperationMetadata): OperationMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.OperationMetadata",
+      value: OperationMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1724,6 +1787,8 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
 }
 
 export const ConsumerQuotaMetric = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
+
   encode(message: ConsumerQuotaMetric, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1902,6 +1967,25 @@ export const ConsumerQuotaMetric = {
 
     obj.unit = message.unit;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
+    return ConsumerQuotaMetric.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConsumerQuotaMetricProtoMsg): ConsumerQuotaMetric {
+    return ConsumerQuotaMetric.decode(message.value);
+  },
+
+  toProto(message: ConsumerQuotaMetric): Uint8Array {
+    return ConsumerQuotaMetric.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsumerQuotaMetric): ConsumerQuotaMetricProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
+      value: ConsumerQuotaMetric.encode(message).finish()
+    };
   }
 
 };
@@ -1918,6 +2002,8 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
 }
 
 export const ConsumerQuotaLimit = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
+
   encode(message: ConsumerQuotaLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2081,6 +2167,25 @@ export const ConsumerQuotaLimit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ConsumerQuotaLimitAminoMsg): ConsumerQuotaLimit {
+    return ConsumerQuotaLimit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConsumerQuotaLimitProtoMsg): ConsumerQuotaLimit {
+    return ConsumerQuotaLimit.decode(message.value);
+  },
+
+  toProto(message: ConsumerQuotaLimit): Uint8Array {
+    return ConsumerQuotaLimit.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsumerQuotaLimit): ConsumerQuotaLimitProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
+      value: ConsumerQuotaLimit.encode(message).finish()
+    };
   }
 
 };
@@ -2178,6 +2283,18 @@ export const QuotaBucket_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
+    return QuotaBucket_DimensionsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaBucket_DimensionsEntryProtoMsg): QuotaBucket_DimensionsEntry {
+    return QuotaBucket_DimensionsEntry.decode(message.value);
+  },
+
+  toProto(message: QuotaBucket_DimensionsEntry): Uint8Array {
+    return QuotaBucket_DimensionsEntry.encode(message).finish();
   }
 
 };
@@ -2194,6 +2311,8 @@ function createBaseQuotaBucket(): QuotaBucket {
 }
 
 export const QuotaBucket = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
+
   encode(message: QuotaBucket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.effectiveLimit.isZero()) {
       writer.uint32(8).int64(message.effectiveLimit);
@@ -2390,6 +2509,25 @@ export const QuotaBucket = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaBucketAminoMsg): QuotaBucket {
+    return QuotaBucket.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaBucketProtoMsg): QuotaBucket {
+    return QuotaBucket.decode(message.value);
+  },
+
+  toProto(message: QuotaBucket): Uint8Array {
+    return QuotaBucket.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaBucket): QuotaBucketProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
+      value: QuotaBucket.encode(message).finish()
+    };
   }
 
 };
@@ -2487,6 +2625,18 @@ export const QuotaOverride_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
+    return QuotaOverride_DimensionsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaOverride_DimensionsEntryProtoMsg): QuotaOverride_DimensionsEntry {
+    return QuotaOverride_DimensionsEntry.decode(message.value);
+  },
+
+  toProto(message: QuotaOverride_DimensionsEntry): Uint8Array {
+    return QuotaOverride_DimensionsEntry.encode(message).finish();
   }
 
 };
@@ -2503,6 +2653,8 @@ function createBaseQuotaOverride(): QuotaOverride {
 }
 
 export const QuotaOverride = {
+  typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
+
   encode(message: QuotaOverride, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2700,6 +2852,25 @@ export const QuotaOverride = {
     obj.unit = message.unit;
     obj.admin_override_ancestor = message.adminOverrideAncestor;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
+    return QuotaOverride.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaOverrideProtoMsg): QuotaOverride {
+    return QuotaOverride.decode(message.value);
+  },
+
+  toProto(message: QuotaOverride): Uint8Array {
+    return QuotaOverride.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaOverride): QuotaOverrideProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
+      value: QuotaOverride.encode(message).finish()
+    };
   }
 
 };
@@ -2711,6 +2882,8 @@ function createBaseOverrideInlineSource(): OverrideInlineSource {
 }
 
 export const OverrideInlineSource = {
+  typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
+
   encode(message: OverrideInlineSource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2799,6 +2972,25 @@ export const OverrideInlineSource = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: OverrideInlineSourceAminoMsg): OverrideInlineSource {
+    return OverrideInlineSource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OverrideInlineSourceProtoMsg): OverrideInlineSource {
+    return OverrideInlineSource.decode(message.value);
+  },
+
+  toProto(message: OverrideInlineSource): Uint8Array {
+    return OverrideInlineSource.encode(message).finish();
+  },
+
+  toProtoMsg(message: OverrideInlineSource): OverrideInlineSourceProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.OverrideInlineSource",
+      value: OverrideInlineSource.encode(message).finish()
+    };
   }
 
 };
@@ -2896,6 +3088,18 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
+    return AdminQuotaPolicy_DimensionsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AdminQuotaPolicy_DimensionsEntryProtoMsg): AdminQuotaPolicy_DimensionsEntry {
+    return AdminQuotaPolicy_DimensionsEntry.decode(message.value);
+  },
+
+  toProto(message: AdminQuotaPolicy_DimensionsEntry): Uint8Array {
+    return AdminQuotaPolicy_DimensionsEntry.encode(message).finish();
   }
 
 };
@@ -2912,6 +3116,8 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
 }
 
 export const AdminQuotaPolicy = {
+  typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
+
   encode(message: AdminQuotaPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -3109,6 +3315,25 @@ export const AdminQuotaPolicy = {
     obj.unit = message.unit;
     obj.container = message.container;
     return obj;
+  },
+
+  fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
+    return AdminQuotaPolicy.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AdminQuotaPolicyProtoMsg): AdminQuotaPolicy {
+    return AdminQuotaPolicy.decode(message.value);
+  },
+
+  toProto(message: AdminQuotaPolicy): Uint8Array {
+    return AdminQuotaPolicy.encode(message).finish();
+  },
+
+  toProtoMsg(message: AdminQuotaPolicy): AdminQuotaPolicyProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
+      value: AdminQuotaPolicy.encode(message).finish()
+    };
   }
 
 };
@@ -3121,6 +3346,8 @@ function createBaseServiceIdentity(): ServiceIdentity {
 }
 
 export const ServiceIdentity = {
+  typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
+
   encode(message: ServiceIdentity, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.email !== "") {
       writer.uint32(10).string(message.email);
@@ -3206,6 +3433,25 @@ export const ServiceIdentity = {
     obj.email = message.email;
     obj.unique_id = message.uniqueId;
     return obj;
+  },
+
+  fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {
+    return ServiceIdentity.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ServiceIdentityProtoMsg): ServiceIdentity {
+    return ServiceIdentity.decode(message.value);
+  },
+
+  toProto(message: ServiceIdentity): Uint8Array {
+    return ServiceIdentity.encode(message).finish();
+  },
+
+  toProtoMsg(message: ServiceIdentity): ServiceIdentityProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
+      value: ServiceIdentity.encode(message).finish()
+    };
   }
 
 };

@@ -66,7 +66,7 @@ export interface AttributeContext {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
-export interface AttributeContextProtoType {
+export interface AttributeContextProtoMsg {
   typeUrl: "/google.rpc.context.AttributeContext";
   value: Uint8Array;
 }
@@ -131,7 +131,7 @@ export interface AttributeContextAmino {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: AnyAmino[];
 }
-export interface AttributeContextAminoType {
+export interface AttributeContextAminoMsg {
   type: "/google.rpc.context.AttributeContext";
   value: AttributeContextAmino;
 }
@@ -169,16 +169,16 @@ export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
 }
-export interface AttributeContext_Peer_LabelsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+export interface AttributeContext_Peer_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Peer_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Peer_LabelsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+export interface AttributeContext_Peer_LabelsEntryAminoMsg {
+  type: string;
   value: AttributeContext_Peer_LabelsEntryAmino;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
@@ -218,7 +218,7 @@ export interface AttributeContext_Peer {
    */
   regionCode: string;
 }
-export interface AttributeContext_PeerProtoType {
+export interface AttributeContext_PeerProtoMsg {
   typeUrl: "/google.rpc.context.Peer";
   value: Uint8Array;
 }
@@ -255,7 +255,7 @@ export interface AttributeContext_PeerAmino {
    */
   region_code: string;
 }
-export interface AttributeContext_PeerAminoType {
+export interface AttributeContext_PeerAminoMsg {
   type: "/google.rpc.context.Peer";
   value: AttributeContext_PeerAmino;
 }
@@ -308,7 +308,7 @@ export interface AttributeContext_Api {
    */
   version: string;
 }
-export interface AttributeContext_ApiProtoType {
+export interface AttributeContext_ApiProtoMsg {
   typeUrl: "/google.rpc.context.Api";
   value: Uint8Array;
 }
@@ -345,7 +345,7 @@ export interface AttributeContext_ApiAmino {
    */
   version: string;
 }
-export interface AttributeContext_ApiAminoType {
+export interface AttributeContext_ApiAminoMsg {
   type: "/google.rpc.context.Api";
   value: AttributeContext_ApiAmino;
 }
@@ -433,7 +433,7 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
-export interface AttributeContext_AuthProtoType {
+export interface AttributeContext_AuthProtoMsg {
   typeUrl: "/google.rpc.context.Auth";
   value: Uint8Array;
 }
@@ -509,7 +509,7 @@ export interface AttributeContext_AuthAmino {
    */
   access_levels: string[];
 }
-export interface AttributeContext_AuthAminoType {
+export interface AttributeContext_AuthAminoMsg {
   type: "/google.rpc.context.Auth";
   value: AttributeContext_AuthAmino;
 }
@@ -530,16 +530,16 @@ export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
 }
-export interface AttributeContext_Request_HeadersEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+export interface AttributeContext_Request_HeadersEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Request_HeadersEntryAminoType {
-  type: "/google.rpc.context.undefined";
+export interface AttributeContext_Request_HeadersEntryAminoMsg {
+  type: string;
   value: AttributeContext_Request_HeadersEntryAmino;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
@@ -616,7 +616,7 @@ export interface AttributeContext_Request {
    */
   auth?: AttributeContext_Auth;
 }
-export interface AttributeContext_RequestProtoType {
+export interface AttributeContext_RequestProtoMsg {
   typeUrl: "/google.rpc.context.Request";
   value: Uint8Array;
 }
@@ -690,7 +690,7 @@ export interface AttributeContext_RequestAmino {
    */
   auth?: AttributeContext_AuthAmino;
 }
-export interface AttributeContext_RequestAminoType {
+export interface AttributeContext_RequestAminoMsg {
   type: "/google.rpc.context.Request";
   value: AttributeContext_RequestAmino;
 }
@@ -720,16 +720,16 @@ export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
 }
-export interface AttributeContext_Response_HeadersEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+export interface AttributeContext_Response_HeadersEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Response_HeadersEntryAminoType {
-  type: "/google.rpc.context.undefined";
+export interface AttributeContext_Response_HeadersEntryAminoMsg {
+  type: string;
   value: AttributeContext_Response_HeadersEntryAmino;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
@@ -771,7 +771,7 @@ export interface AttributeContext_Response {
    */
   backendLatency?: Duration;
 }
-export interface AttributeContext_ResponseProtoType {
+export interface AttributeContext_ResponseProtoMsg {
   typeUrl: "/google.rpc.context.Response";
   value: Uint8Array;
 }
@@ -810,7 +810,7 @@ export interface AttributeContext_ResponseAmino {
    */
   backend_latency?: DurationAmino;
 }
-export interface AttributeContext_ResponseAminoType {
+export interface AttributeContext_ResponseAminoMsg {
   type: "/google.rpc.context.Response";
   value: AttributeContext_ResponseAmino;
 }
@@ -832,16 +832,16 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
-export interface AttributeContext_Resource_LabelsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+export interface AttributeContext_Resource_LabelsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Resource_LabelsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+export interface AttributeContext_Resource_LabelsEntryAminoMsg {
+  type: string;
   value: AttributeContext_Resource_LabelsEntryAmino;
 }
 export interface AttributeContext_Resource_LabelsEntrySDKType {
@@ -852,16 +852,16 @@ export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
 }
-export interface AttributeContext_Resource_AnnotationsEntryProtoType {
-  typeUrl: "/google.rpc.context.undefined";
+export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
+  typeUrl: string;
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntryAmino {
   key: string;
   value: string;
 }
-export interface AttributeContext_Resource_AnnotationsEntryAminoType {
-  type: "/google.rpc.context.undefined";
+export interface AttributeContext_Resource_AnnotationsEntryAminoMsg {
+  type: string;
   value: AttributeContext_Resource_AnnotationsEntryAmino;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
@@ -975,7 +975,7 @@ export interface AttributeContext_Resource {
    */
   location: string;
 }
-export interface AttributeContext_ResourceProtoType {
+export interface AttributeContext_ResourceProtoMsg {
   typeUrl: "/google.rpc.context.Resource";
   value: Uint8Array;
 }
@@ -1086,7 +1086,7 @@ export interface AttributeContext_ResourceAmino {
    */
   location: string;
 }
-export interface AttributeContext_ResourceAminoType {
+export interface AttributeContext_ResourceAminoMsg {
   type: "/google.rpc.context.Resource";
   value: AttributeContext_ResourceAmino;
 }
@@ -1129,6 +1129,8 @@ function createBaseAttributeContext(): AttributeContext {
 }
 
 export const AttributeContext = {
+  typeUrl: "/google.rpc.context.AttributeContext",
+
   encode(message: AttributeContext, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.origin !== undefined) {
       AttributeContext_Peer.encode(message.origin, writer.uint32(58).fork()).ldelim();
@@ -1322,6 +1324,25 @@ export const AttributeContext = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContextAminoMsg): AttributeContext {
+    return AttributeContext.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContextProtoMsg): AttributeContext {
+    return AttributeContext.decode(message.value);
+  },
+
+  toProto(message: AttributeContext): Uint8Array {
+    return AttributeContext.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext): AttributeContextProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.AttributeContext",
+      value: AttributeContext.encode(message).finish()
+    };
   }
 
 };
@@ -1419,6 +1440,18 @@ export const AttributeContext_Peer_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
+    return AttributeContext_Peer_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg): AttributeContext_Peer_LabelsEntry {
+    return AttributeContext_Peer_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Peer_LabelsEntry): Uint8Array {
+    return AttributeContext_Peer_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -1434,6 +1467,8 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
 }
 
 export const AttributeContext_Peer = {
+  typeUrl: "/google.rpc.context.Peer",
+
   encode(message: AttributeContext_Peer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ip !== "") {
       writer.uint32(10).string(message.ip);
@@ -1616,6 +1651,25 @@ export const AttributeContext_Peer = {
     obj.principal = message.principal;
     obj.region_code = message.regionCode;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
+    return AttributeContext_Peer.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_PeerProtoMsg): AttributeContext_Peer {
+    return AttributeContext_Peer.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Peer): Uint8Array {
+    return AttributeContext_Peer.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Peer): AttributeContext_PeerProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Peer",
+      value: AttributeContext_Peer.encode(message).finish()
+    };
   }
 
 };
@@ -1630,6 +1684,8 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 }
 
 export const AttributeContext_Api = {
+  typeUrl: "/google.rpc.context.Api",
+
   encode(message: AttributeContext_Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -1745,6 +1801,25 @@ export const AttributeContext_Api = {
     obj.protocol = message.protocol;
     obj.version = message.version;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
+    return AttributeContext_Api.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_ApiProtoMsg): AttributeContext_Api {
+    return AttributeContext_Api.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Api): Uint8Array {
+    return AttributeContext_Api.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Api): AttributeContext_ApiProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Api",
+      value: AttributeContext_Api.encode(message).finish()
+    };
   }
 
 };
@@ -1760,6 +1835,8 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 }
 
 export const AttributeContext_Auth = {
+  typeUrl: "/google.rpc.context.Auth",
+
   encode(message: AttributeContext_Auth, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.principal !== "") {
       writer.uint32(10).string(message.principal);
@@ -1926,6 +2003,25 @@ export const AttributeContext_Auth = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_AuthAminoMsg): AttributeContext_Auth {
+    return AttributeContext_Auth.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_AuthProtoMsg): AttributeContext_Auth {
+    return AttributeContext_Auth.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Auth): Uint8Array {
+    return AttributeContext_Auth.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Auth): AttributeContext_AuthProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Auth",
+      value: AttributeContext_Auth.encode(message).finish()
+    };
   }
 
 };
@@ -2023,6 +2119,18 @@ export const AttributeContext_Request_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
+    return AttributeContext_Request_HeadersEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg): AttributeContext_Request_HeadersEntry {
+    return AttributeContext_Request_HeadersEntry.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Request_HeadersEntry): Uint8Array {
+    return AttributeContext_Request_HeadersEntry.encode(message).finish();
   }
 
 };
@@ -2045,6 +2153,8 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
 }
 
 export const AttributeContext_Request = {
+  typeUrl: "/google.rpc.context.Request",
+
   encode(message: AttributeContext_Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -2332,6 +2442,25 @@ export const AttributeContext_Request = {
     obj.reason = message.reason;
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_RequestAminoMsg): AttributeContext_Request {
+    return AttributeContext_Request.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_RequestProtoMsg): AttributeContext_Request {
+    return AttributeContext_Request.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Request): Uint8Array {
+    return AttributeContext_Request.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Request): AttributeContext_RequestProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Request",
+      value: AttributeContext_Request.encode(message).finish()
+    };
   }
 
 };
@@ -2429,6 +2558,18 @@ export const AttributeContext_Response_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
+    return AttributeContext_Response_HeadersEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg): AttributeContext_Response_HeadersEntry {
+    return AttributeContext_Response_HeadersEntry.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Response_HeadersEntry): Uint8Array {
+    return AttributeContext_Response_HeadersEntry.encode(message).finish();
   }
 
 };
@@ -2444,6 +2585,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 }
 
 export const AttributeContext_Response = {
+  typeUrl: "/google.rpc.context.Response",
+
   encode(message: AttributeContext_Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.code.isZero()) {
       writer.uint32(8).int64(message.code);
@@ -2626,6 +2769,25 @@ export const AttributeContext_Response = {
     obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
     obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_ResponseAminoMsg): AttributeContext_Response {
+    return AttributeContext_Response.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_ResponseProtoMsg): AttributeContext_Response {
+    return AttributeContext_Response.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Response): Uint8Array {
+    return AttributeContext_Response.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Response): AttributeContext_ResponseProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Response",
+      value: AttributeContext_Response.encode(message).finish()
+    };
   }
 
 };
@@ -2723,6 +2885,18 @@ export const AttributeContext_Resource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
+    return AttributeContext_Resource_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg): AttributeContext_Resource_LabelsEntry {
+    return AttributeContext_Resource_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Resource_LabelsEntry): Uint8Array {
+    return AttributeContext_Resource_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -2820,6 +2994,18 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
+    return AttributeContext_Resource_AnnotationsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg): AttributeContext_Resource_AnnotationsEntry {
+    return AttributeContext_Resource_AnnotationsEntry.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Resource_AnnotationsEntry): Uint8Array {
+    return AttributeContext_Resource_AnnotationsEntry.encode(message).finish();
   }
 
 };
@@ -2842,6 +3028,8 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
 }
 
 export const AttributeContext_Resource = {
+  typeUrl: "/google.rpc.context.Resource",
+
   encode(message: AttributeContext_Resource, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -3181,6 +3369,25 @@ export const AttributeContext_Resource = {
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;
+  },
+
+  fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {
+    return AttributeContext_Resource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AttributeContext_ResourceProtoMsg): AttributeContext_Resource {
+    return AttributeContext_Resource.decode(message.value);
+  },
+
+  toProto(message: AttributeContext_Resource): Uint8Array {
+    return AttributeContext_Resource.encode(message).finish();
+  },
+
+  toProtoMsg(message: AttributeContext_Resource): AttributeContext_ResourceProtoMsg {
+    return {
+      typeUrl: "/google.rpc.context.Resource",
+      value: AttributeContext_Resource.encode(message).finish()
+    };
   }
 
 };

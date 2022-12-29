@@ -20,7 +20,7 @@ export interface Decl {
   /** A function declaration. */
   function?: FunctionDecl;
 }
-export interface DeclProtoType {
+export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
   value: Uint8Array;
 }
@@ -42,7 +42,7 @@ export interface DeclAmino {
   /** A function declaration. */
   function?: FunctionDeclAmino;
 }
-export interface DeclAminoType {
+export interface DeclAminoMsg {
   type: "/google.api.expr.v1beta1.Decl";
   value: DeclAmino;
 }
@@ -75,7 +75,7 @@ export interface DeclType {
    */
   typeParams: DeclType[];
 }
-export interface DeclTypeProtoType {
+export interface DeclTypeProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.DeclType";
   value: Uint8Array;
 }
@@ -99,7 +99,7 @@ export interface DeclTypeAmino {
    */
   type_params: DeclTypeAmino[];
 }
-export interface DeclTypeAminoType {
+export interface DeclTypeAminoMsg {
   type: "/google.api.expr.v1beta1.DeclType";
   value: DeclTypeAmino;
 }
@@ -124,7 +124,7 @@ export interface IdentDecl {
   /** Optional value of the identifier. */
   value?: Expr;
 }
-export interface IdentDeclProtoType {
+export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
 }
@@ -137,7 +137,7 @@ export interface IdentDeclAmino {
   /** Optional value of the identifier. */
   value?: ExprAmino;
 }
-export interface IdentDeclAminoType {
+export interface IdentDeclAminoMsg {
   type: "/google.api.expr.v1beta1.IdentDecl";
   value: IdentDeclAmino;
 }
@@ -159,7 +159,7 @@ export interface FunctionDecl {
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
 }
-export interface FunctionDeclProtoType {
+export interface FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
   value: Uint8Array;
 }
@@ -175,7 +175,7 @@ export interface FunctionDeclAmino {
   /** If the first argument of the function is the receiver. */
   receiver_function: boolean;
 }
-export interface FunctionDeclAminoType {
+export interface FunctionDeclAminoMsg {
   type: "/google.api.expr.v1beta1.FunctionDecl";
   value: FunctionDeclAmino;
 }
@@ -198,6 +198,8 @@ function createBaseDecl(): Decl {
 }
 
 export const Decl = {
+  typeUrl: "/google.api.expr.v1beta1.Decl",
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -328,6 +330,25 @@ export const Decl = {
     obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeclAminoMsg): Decl {
+    return Decl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeclProtoMsg): Decl {
+    return Decl.decode(message.value);
+  },
+
+  toProto(message: Decl): Uint8Array {
+    return Decl.encode(message).finish();
+  },
+
+  toProtoMsg(message: Decl): DeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.Decl",
+      value: Decl.encode(message).finish()
+    };
   }
 
 };
@@ -341,6 +362,8 @@ function createBaseDeclType(): DeclType {
 }
 
 export const DeclType = {
+  typeUrl: "/google.api.expr.v1beta1.DeclType",
+
   encode(message: DeclType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -459,6 +482,25 @@ export const DeclType = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
+    return DeclType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
+    return DeclType.decode(message.value);
+  },
+
+  toProto(message: DeclType): Uint8Array {
+    return DeclType.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeclType): DeclTypeProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.DeclType",
+      value: DeclType.encode(message).finish()
+    };
   }
 
 };
@@ -471,6 +513,8 @@ function createBaseIdentDecl(): IdentDecl {
 }
 
 export const IdentDecl = {
+  typeUrl: "/google.api.expr.v1beta1.IdentDecl",
+
   encode(message: IdentDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== undefined) {
       DeclType.encode(message.type, writer.uint32(26).fork()).ldelim();
@@ -556,6 +600,25 @@ export const IdentDecl = {
     obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
+    return IdentDecl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
+    return IdentDecl.decode(message.value);
+  },
+
+  toProto(message: IdentDecl): Uint8Array {
+    return IdentDecl.encode(message).finish();
+  },
+
+  toProtoMsg(message: IdentDecl): IdentDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.IdentDecl",
+      value: IdentDecl.encode(message).finish()
+    };
   }
 
 };
@@ -569,6 +632,8 @@ function createBaseFunctionDecl(): FunctionDecl {
 }
 
 export const FunctionDecl = {
+  typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
+
   encode(message: FunctionDecl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.args) {
       IdentDecl.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -687,6 +752,25 @@ export const FunctionDecl = {
     obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
     obj.receiver_function = message.receiverFunction;
     return obj;
+  },
+
+  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
+    return FunctionDecl.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
+    return FunctionDecl.decode(message.value);
+  },
+
+  toProto(message: FunctionDecl): Uint8Array {
+    return FunctionDecl.encode(message).finish();
+  },
+
+  toProtoMsg(message: FunctionDecl): FunctionDeclProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
+      value: FunctionDecl.encode(message).finish()
+    };
   }
 
 };
