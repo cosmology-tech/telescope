@@ -2,17 +2,34 @@ import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
+import { SymbolNames } from '../../types';
 
 export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    let varName = 'message';
-
-    const AminoTypeName =
-        [name, 'Amino']
-            .filter(Boolean).join('')
+    const varName = 'message';
+    const ReturnType = SymbolNames.Msg(name);
+    const ProtoMsgName = SymbolNames.ProtoMsg(name);
+    const TypeName = SymbolNames.Msg(name);
 
     const body: t.Statement[] = [];
 
     // body
+
+    body.push(
+        t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(TypeName),
+                    t.identifier('decode')
+                ),
+                [
+                    t.memberExpression(
+                        t.identifier(varName),
+                        t.identifier('value')
+                    )
+                ]
+            )
+        )
+    );
 
     return objectMethod('method',
         t.identifier('fromProtoMsg'),
@@ -21,7 +38,7 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                 varName,
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
-                        t.identifier(name)
+                        t.identifier(ProtoMsgName)
                     )
                 )
             )
@@ -32,7 +49,7 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
         false,
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(AminoTypeName)
+                t.identifier(ReturnType)
             )
         )
     );

@@ -159,7 +159,7 @@ export const createAminoTypeType = (
     proto: ProtoType
 ) => {
     const AminoName = SymbolNames.Amino(name);
-    const AminoTypeName = SymbolNames.AminoType(name);
+    const AminoTypeName = SymbolNames.AminoMsg(name);
 
     const aminoName = getAminoTypeName(context, context.ref.proto, proto);
     const typ = aminoName ? t.tsLiteralType(

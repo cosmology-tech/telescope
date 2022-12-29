@@ -214,7 +214,7 @@ export const createProtoTypeType = (
     name: string,
     proto: ProtoType
 ) => {
-    const ProtoMsgName = SymbolNames.ProtoType(name);
+    const ProtoMsgName = SymbolNames.ProtoMsg(name);
 
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const typ = typeUrl ? t.tsLiteralType(

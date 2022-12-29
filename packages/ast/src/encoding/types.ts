@@ -16,8 +16,8 @@ export const getFieldNames = (field: ProtoField) => {
 export type TelescopeBaseTypes = 'Msg' |
     'SDKType' |
     'Amino' |
-    'AminoType' |
-    'ProtoType';
+    'AminoMsg' |
+    'ProtoMsg';
 
 
 const getSymbolName = (
@@ -26,11 +26,11 @@ const getSymbolName = (
 ) => {
     let typeNameSuffix;
     switch (type) {
-        case 'ProtoType':
-            typeNameSuffix = 'ProtoType';
+        case 'ProtoMsg':
+            typeNameSuffix = 'ProtoMsg';
             break;
-        case 'AminoType':
-            typeNameSuffix = 'AminoType';
+        case 'AminoMsg':
+            typeNameSuffix = 'AminoMsg';
             break;
         case 'Amino':
             typeNameSuffix = 'Amino';
@@ -53,13 +53,13 @@ export const SymbolNames = {
         name: string
     ) => getSymbolName(name, 'SDKType'),
 
-    ProtoType: (
+    ProtoMsg: (
         name: string
-    ) => getSymbolName(name, 'ProtoType'),
+    ) => getSymbolName(name, 'ProtoMsg'),
 
-    AminoType: (
+    AminoMsg: (
         name: string
-    ) => getSymbolName(name, 'AminoType'),
+    ) => getSymbolName(name, 'AminoMsg'),
 
     Amino: (
         name: string

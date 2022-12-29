@@ -5,6 +5,7 @@ import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '
 import { BILLION, identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { fromAminoJSON, arrayTypes, fromAminoMessages } from './utils';
+import { SymbolNames } from '../../types';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromAminoJSON (${field.type} rules[${field.rule}] name[${name}])`);
@@ -174,9 +175,7 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         varName = '_';
     }
 
-    const AminoTypeName =
-        [name, 'Amino']
-            .filter(Boolean).join('');
+    const AminoTypeName = SymbolNames.Amino(name);
 
     const body: t.Statement[] = [];
 
@@ -241,17 +240,30 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
 };
 
 export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    const fields = fromAminoJSONMethodFields(context, name, proto);
-    let varName = 'object';
-    if (!fields.length) {
-        varName = '_';
-    }
+    const varName = 'object';
 
-    const AminoTypeName =
-        [name, 'Amino']
-            .filter(Boolean).join('');
+    const TypeName = SymbolNames.Msg(name);
+    const AminoMsgName = SymbolNames.AminoMsg(name);
+    const ReturnType = SymbolNames.Msg(name);
 
     const body: t.Statement[] = [];
+
+    body.push(
+        t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(TypeName),
+                    t.identifier('fromAmino')
+                ),
+                [
+                    t.memberExpression(
+                        t.identifier(varName),
+                        t.identifier('value')
+                    )
+                ]
+            )
+        )
+    );
 
     return objectMethod('method',
         t.identifier('fromAminoMsg'),
@@ -259,7 +271,7 @@ export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, pro
             identifier(varName,
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
-                        t.identifier(AminoTypeName)
+                        t.identifier(AminoMsgName)
                     )
                 ),
                 false
@@ -274,7 +286,7 @@ export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, pro
         false,
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(name)
+                t.identifier(ReturnType)
             )
         )
     )
