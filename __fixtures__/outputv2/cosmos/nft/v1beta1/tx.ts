@@ -16,7 +16,7 @@ export interface MsgSend {
   /** receiver is the receiver address of nft */
   receiver: string;
 }
-export interface MsgSendProtoType {
+export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend";
   value: Uint8Array;
 }
@@ -35,7 +35,7 @@ export interface MsgSendAmino {
   /** receiver is the receiver address of nft */
   receiver: string;
 }
-export interface MsgSendAminoType {
+export interface MsgSendAminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
   value: MsgSendAmino;
 }
@@ -50,14 +50,14 @@ export interface MsgSendSDKType {
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
-export interface MsgSendResponseProtoType {
+export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
   value: Uint8Array;
 }
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoType {
+export interface MsgSendResponseAminoMsg {
   type: "cosmos-sdk/MsgSendResponse";
   value: MsgSendResponseAmino;
 }
@@ -193,6 +193,32 @@ export const MsgSend = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
+    return MsgSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgNFTSend",
+      value: MsgSend.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
+    return MsgSend.decode(message.value);
+  },
+
+  toProto(message: MsgSend): Uint8Array {
+    return MsgSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSend): MsgSendProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.MsgSend",
+      value: MsgSend.encode(message).finish()
+    };
   }
 
 };
@@ -257,6 +283,32 @@ export const MsgSendResponse = {
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
+    return MsgSendResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendResponse",
+      value: MsgSendResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
+    return MsgSendResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSendResponse): Uint8Array {
+    return MsgSendResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSendResponse): MsgSendResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
+      value: MsgSendResponse.encode(message).finish()
+    };
   }
 
 };

@@ -161,7 +161,7 @@ export interface Channel {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
-export interface ChannelProtoType {
+export interface ChannelProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Channel";
   value: Uint8Array;
 }
@@ -190,7 +190,7 @@ export interface ChannelAmino {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
-export interface ChannelAminoType {
+export interface ChannelAminoMsg {
   type: "cosmos-sdk/Channel";
   value: ChannelAmino;
 }
@@ -237,7 +237,7 @@ export interface IdentifiedChannel {
   /** channel identifier */
   channelId: string;
 }
-export interface IdentifiedChannelProtoType {
+export interface IdentifiedChannelProtoMsg {
   typeUrl: "/ibc.core.channel.v1.IdentifiedChannel";
   value: Uint8Array;
 }
@@ -271,7 +271,7 @@ export interface IdentifiedChannelAmino {
   /** channel identifier */
   channel_id: string;
 }
-export interface IdentifiedChannelAminoType {
+export interface IdentifiedChannelAminoMsg {
   type: "cosmos-sdk/IdentifiedChannel";
   value: IdentifiedChannelAmino;
 }
@@ -298,7 +298,7 @@ export interface Counterparty {
   /** channel end on the counterparty chain */
   channelId: string;
 }
-export interface CounterpartyProtoType {
+export interface CounterpartyProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Counterparty";
   value: Uint8Array;
 }
@@ -311,7 +311,7 @@ export interface CounterpartyAmino {
   /** channel end on the counterparty chain */
   channel_id: string;
 }
-export interface CounterpartyAminoType {
+export interface CounterpartyAminoMsg {
   type: "cosmos-sdk/Counterparty";
   value: CounterpartyAmino;
 }
@@ -352,7 +352,7 @@ export interface Packet {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
 }
-export interface PacketProtoType {
+export interface PacketProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Packet";
   value: Uint8Array;
 }
@@ -387,7 +387,7 @@ export interface PacketAmino {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeout_timestamp: string;
 }
-export interface PacketAminoType {
+export interface PacketAminoMsg {
   type: "cosmos-sdk/Packet";
   value: PacketAmino;
 }
@@ -423,7 +423,7 @@ export interface PacketState {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
-export interface PacketStateProtoType {
+export interface PacketStateProtoMsg {
   typeUrl: "/ibc.core.channel.v1.PacketState";
   value: Uint8Array;
 }
@@ -447,7 +447,7 @@ export interface PacketStateAmino {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
-export interface PacketStateAminoType {
+export interface PacketStateAminoMsg {
   type: "cosmos-sdk/PacketState";
   value: PacketStateAmino;
 }
@@ -478,7 +478,7 @@ export interface Acknowledgement {
   result?: Uint8Array;
   error?: string;
 }
-export interface AcknowledgementProtoType {
+export interface AcknowledgementProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Acknowledgement";
   value: Uint8Array;
 }
@@ -496,7 +496,7 @@ export interface AcknowledgementAmino {
   result?: Uint8Array;
   error?: string;
 }
-export interface AcknowledgementAminoType {
+export interface AcknowledgementAminoMsg {
   type: "cosmos-sdk/Acknowledgement";
   value: AcknowledgementAmino;
 }
@@ -677,6 +677,32 @@ export const Channel = {
 
     obj.version = message.version;
     return obj;
+  },
+
+  fromAminoMsg(object: ChannelAminoMsg): Channel {
+    return Channel.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Channel): ChannelAminoMsg {
+    return {
+      type: "cosmos-sdk/Channel",
+      value: Channel.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ChannelProtoMsg): Channel {
+    return Channel.decode(message.value);
+  },
+
+  toProto(message: Channel): Uint8Array {
+    return Channel.encode(message).finish();
+  },
+
+  toProtoMsg(message: Channel): ChannelProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.Channel",
+      value: Channel.encode(message).finish()
+    };
   }
 
 };
@@ -875,6 +901,32 @@ export const IdentifiedChannel = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAminoMsg(object: IdentifiedChannelAminoMsg): IdentifiedChannel {
+    return IdentifiedChannel.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: IdentifiedChannel): IdentifiedChannelAminoMsg {
+    return {
+      type: "cosmos-sdk/IdentifiedChannel",
+      value: IdentifiedChannel.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: IdentifiedChannelProtoMsg): IdentifiedChannel {
+    return IdentifiedChannel.decode(message.value);
+  },
+
+  toProto(message: IdentifiedChannel): Uint8Array {
+    return IdentifiedChannel.encode(message).finish();
+  },
+
+  toProtoMsg(message: IdentifiedChannel): IdentifiedChannelProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.IdentifiedChannel",
+      value: IdentifiedChannel.encode(message).finish()
+    };
   }
 
 };
@@ -975,6 +1027,32 @@ export const Counterparty = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
+    return Counterparty.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Counterparty): CounterpartyAminoMsg {
+    return {
+      type: "cosmos-sdk/Counterparty",
+      value: Counterparty.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CounterpartyProtoMsg): Counterparty {
+    return Counterparty.decode(message.value);
+  },
+
+  toProto(message: Counterparty): Uint8Array {
+    return Counterparty.encode(message).finish();
+  },
+
+  toProtoMsg(message: Counterparty): CounterpartyProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.Counterparty",
+      value: Counterparty.encode(message).finish()
+    };
   }
 
 };
@@ -1171,6 +1249,32 @@ export const Packet = {
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketAminoMsg): Packet {
+    return Packet.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Packet): PacketAminoMsg {
+    return {
+      type: "cosmos-sdk/Packet",
+      value: Packet.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketProtoMsg): Packet {
+    return Packet.decode(message.value);
+  },
+
+  toProto(message: Packet): Uint8Array {
+    return Packet.encode(message).finish();
+  },
+
+  toProtoMsg(message: Packet): PacketProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.Packet",
+      value: Packet.encode(message).finish()
+    };
   }
 
 };
@@ -1303,6 +1407,32 @@ export const PacketState = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketStateAminoMsg): PacketState {
+    return PacketState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PacketState): PacketStateAminoMsg {
+    return {
+      type: "cosmos-sdk/PacketState",
+      value: PacketState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketStateProtoMsg): PacketState {
+    return PacketState.decode(message.value);
+  },
+
+  toProto(message: PacketState): Uint8Array {
+    return PacketState.encode(message).finish();
+  },
+
+  toProtoMsg(message: PacketState): PacketStateProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.PacketState",
+      value: PacketState.encode(message).finish()
+    };
   }
 
 };
@@ -1403,6 +1533,32 @@ export const Acknowledgement = {
     obj.result = message.result;
     obj.error = message.error;
     return obj;
+  },
+
+  fromAminoMsg(object: AcknowledgementAminoMsg): Acknowledgement {
+    return Acknowledgement.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Acknowledgement): AcknowledgementAminoMsg {
+    return {
+      type: "cosmos-sdk/Acknowledgement",
+      value: Acknowledgement.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: AcknowledgementProtoMsg): Acknowledgement {
+    return Acknowledgement.decode(message.value);
+  },
+
+  toProto(message: Acknowledgement): Uint8Array {
+    return Acknowledgement.encode(message).finish();
+  },
+
+  toProtoMsg(message: Acknowledgement): AcknowledgementProtoMsg {
+    return {
+      typeUrl: "/ibc.core.channel.v1.Acknowledgement",
+      value: Acknowledgement.encode(message).finish()
+    };
   }
 
 };

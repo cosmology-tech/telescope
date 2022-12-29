@@ -15,7 +15,7 @@ export interface UpdateFeeTokenProposal {
   description: string;
   feetoken?: FeeToken;
 }
-export interface UpdateFeeTokenProposalProtoType {
+export interface UpdateFeeTokenProposalProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   value: Uint8Array;
 }
@@ -32,7 +32,7 @@ export interface UpdateFeeTokenProposalAmino {
   description: string;
   feetoken?: FeeTokenAmino;
 }
-export interface UpdateFeeTokenProposalAminoType {
+export interface UpdateFeeTokenProposalAminoMsg {
   type: "osmosis/txfees/update-fee-token-proposal";
   value: UpdateFeeTokenProposalAmino;
 }
@@ -162,6 +162,32 @@ export const UpdateFeeTokenProposal = {
     obj.description = message.description;
     obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateFeeTokenProposalAminoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAminoMsg {
+    return {
+      type: "osmosis/txfees/update-fee-token-proposal",
+      value: UpdateFeeTokenProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.decode(message.value);
+  },
+
+  toProto(message: UpdateFeeTokenProposal): Uint8Array {
+    return UpdateFeeTokenProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
+      value: UpdateFeeTokenProposal.encode(message).finish()
+    };
   }
 
 };

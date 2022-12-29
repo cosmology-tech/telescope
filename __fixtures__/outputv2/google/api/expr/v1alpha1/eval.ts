@@ -21,7 +21,7 @@ export interface EvalState {
    */
   results: EvalState_Result[];
 }
-export interface EvalStateProtoType {
+export interface EvalStateProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.EvalState";
   value: Uint8Array;
 }
@@ -43,7 +43,7 @@ export interface EvalStateAmino {
    */
   results: EvalState_ResultAmino[];
 }
-export interface EvalStateAminoType {
+export interface EvalStateAminoMsg {
   type: "/google.api.expr.v1alpha1.EvalState";
   value: EvalStateAmino;
 }
@@ -66,7 +66,7 @@ export interface EvalState_Result {
   /** The index in `values` of the resulting value. */
   value: Long;
 }
-export interface EvalState_ResultProtoType {
+export interface EvalState_ResultProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Result";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface EvalState_ResultAmino {
   /** The index in `values` of the resulting value. */
   value: string;
 }
-export interface EvalState_ResultAminoType {
+export interface EvalState_ResultAminoMsg {
   type: "/google.api.expr.v1alpha1.Result";
   value: EvalState_ResultAmino;
 }
@@ -143,7 +143,7 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
-export interface ExprValueProtoType {
+export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue";
   value: Uint8Array;
 }
@@ -201,7 +201,7 @@ export interface ExprValueAmino {
    */
   unknown?: UnknownSetAmino;
 }
-export interface ExprValueAminoType {
+export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
   value: ExprValueAmino;
 }
@@ -222,7 +222,7 @@ export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
 }
-export interface ErrorSetProtoType {
+export interface ErrorSetProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ErrorSet";
   value: Uint8Array;
 }
@@ -236,7 +236,7 @@ export interface ErrorSetAmino {
   /** The errors in the set. */
   errors: StatusAmino[];
 }
-export interface ErrorSetAminoType {
+export interface ErrorSetAminoMsg {
   type: "/google.api.expr.v1alpha1.ErrorSet";
   value: ErrorSetAmino;
 }
@@ -259,7 +259,7 @@ export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: Long[];
 }
-export interface UnknownSetProtoType {
+export interface UnknownSetProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.UnknownSet";
   value: Uint8Array;
 }
@@ -273,7 +273,7 @@ export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
   exprs: string[];
 }
-export interface UnknownSetAminoType {
+export interface UnknownSetAminoMsg {
   type: "/google.api.expr.v1alpha1.UnknownSet";
   value: UnknownSetAmino;
 }
@@ -415,6 +415,25 @@ export const EvalState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: EvalStateAminoMsg): EvalState {
+    return EvalState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvalStateProtoMsg): EvalState {
+    return EvalState.decode(message.value);
+  },
+
+  toProto(message: EvalState): Uint8Array {
+    return EvalState.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvalState): EvalStateProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.EvalState",
+      value: EvalState.encode(message).finish()
+    };
   }
 
 };
@@ -514,6 +533,25 @@ export const EvalState_Result = {
     obj.expr = message.expr ? message.expr.toString() : undefined;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
+    return EvalState_Result.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvalState_ResultProtoMsg): EvalState_Result {
+    return EvalState_Result.decode(message.value);
+  },
+
+  toProto(message: EvalState_Result): Uint8Array {
+    return EvalState_Result.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvalState_Result): EvalState_ResultProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Result",
+      value: EvalState_Result.encode(message).finish()
+    };
   }
 
 };
@@ -629,6 +667,25 @@ export const ExprValue = {
     obj.error = message.error ? ErrorSet.toAmino(message.error) : undefined;
     obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ExprValueAminoMsg): ExprValue {
+    return ExprValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ExprValueProtoMsg): ExprValue {
+    return ExprValue.decode(message.value);
+  },
+
+  toProto(message: ExprValue): Uint8Array {
+    return ExprValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: ExprValue): ExprValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ExprValue",
+      value: ExprValue.encode(message).finish()
+    };
   }
 
 };
@@ -730,6 +787,25 @@ export const ErrorSet = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ErrorSetAminoMsg): ErrorSet {
+    return ErrorSet.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ErrorSetProtoMsg): ErrorSet {
+    return ErrorSet.decode(message.value);
+  },
+
+  toProto(message: ErrorSet): Uint8Array {
+    return ErrorSet.encode(message).finish();
+  },
+
+  toProtoMsg(message: ErrorSet): ErrorSetProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
+      value: ErrorSet.encode(message).finish()
+    };
   }
 
 };
@@ -843,6 +919,25 @@ export const UnknownSet = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UnknownSetAminoMsg): UnknownSet {
+    return UnknownSet.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UnknownSetProtoMsg): UnknownSet {
+    return UnknownSet.decode(message.value);
+  },
+
+  toProto(message: UnknownSet): Uint8Array {
+    return UnknownSet.encode(message).finish();
+  },
+
+  toProtoMsg(message: UnknownSet): UnknownSetProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
+      value: UnknownSet.encode(message).finish()
+    };
   }
 
 };

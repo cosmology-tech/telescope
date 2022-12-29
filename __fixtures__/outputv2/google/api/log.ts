@@ -41,7 +41,7 @@ export interface LogDescriptor {
    */
   displayName: string;
 }
-export interface LogDescriptorProtoType {
+export interface LogDescriptorProtoMsg {
   typeUrl: "/google.api.LogDescriptor";
   value: Uint8Array;
 }
@@ -84,7 +84,7 @@ export interface LogDescriptorAmino {
    */
   display_name: string;
 }
-export interface LogDescriptorAminoType {
+export interface LogDescriptorAminoMsg {
   type: "/google.api.LogDescriptor";
   value: LogDescriptorAmino;
 }
@@ -251,6 +251,25 @@ export const LogDescriptor = {
     obj.description = message.description;
     obj.display_name = message.displayName;
     return obj;
+  },
+
+  fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {
+    return LogDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogDescriptorProtoMsg): LogDescriptor {
+    return LogDescriptor.decode(message.value);
+  },
+
+  toProto(message: LogDescriptor): Uint8Array {
+    return LogDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogDescriptor): LogDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.LogDescriptor",
+      value: LogDescriptor.encode(message).finish()
+    };
   }
 
 };

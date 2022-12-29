@@ -19,7 +19,7 @@ export interface DevFeeInfo {
    */
   withdrawAddress: string;
 }
-export interface DevFeeInfoProtoType {
+export interface DevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.DevFeeInfo";
   value: Uint8Array;
 }
@@ -41,7 +41,7 @@ export interface DevFeeInfoAmino {
    */
   withdraw_address: string;
 }
-export interface DevFeeInfoAminoType {
+export interface DevFeeInfoAminoMsg {
   type: "/evmos.fees.v1.DevFeeInfo";
   value: DevFeeInfoAmino;
 }
@@ -167,6 +167,25 @@ export const DevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
+  },
+
+  fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
+    return DevFeeInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DevFeeInfoProtoMsg): DevFeeInfo {
+    return DevFeeInfo.decode(message.value);
+  },
+
+  toProto(message: DevFeeInfo): Uint8Array {
+    return DevFeeInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: DevFeeInfo): DevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.DevFeeInfo",
+      value: DevFeeInfo.encode(message).finish()
+    };
   }
 
 };

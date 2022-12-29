@@ -6,14 +6,14 @@ export const protobufPackage = "evmos.inflation.v1";
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequest {}
-export interface QueryPeriodRequestProtoType {
+export interface QueryPeriodRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
   value: Uint8Array;
 }
 
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestAmino {}
-export interface QueryPeriodRequestAminoType {
+export interface QueryPeriodRequestAminoMsg {
   type: "/evmos.inflation.v1.QueryPeriodRequest";
   value: QueryPeriodRequestAmino;
 }
@@ -26,7 +26,7 @@ export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
   period: Long;
 }
-export interface QueryPeriodResponseProtoType {
+export interface QueryPeriodResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
   value: Uint8Array;
 }
@@ -36,7 +36,7 @@ export interface QueryPeriodResponseAmino {
   /** period is the current minting per epoch provision value. */
   period: string;
 }
-export interface QueryPeriodResponseAminoType {
+export interface QueryPeriodResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryPeriodResponse";
   value: QueryPeriodResponseAmino;
 }
@@ -51,7 +51,7 @@ export interface QueryPeriodResponseSDKType {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequest {}
-export interface QueryEpochMintProvisionRequestProtoType {
+export interface QueryEpochMintProvisionRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
   value: Uint8Array;
 }
@@ -61,7 +61,7 @@ export interface QueryEpochMintProvisionRequestProtoType {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequestAmino {}
-export interface QueryEpochMintProvisionRequestAminoType {
+export interface QueryEpochMintProvisionRequestAminoMsg {
   type: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
   value: QueryEpochMintProvisionRequestAmino;
 }
@@ -80,7 +80,7 @@ export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epochMintProvision?: DecCoin;
 }
-export interface QueryEpochMintProvisionResponseProtoType {
+export interface QueryEpochMintProvisionResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface QueryEpochMintProvisionResponseAmino {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epoch_mint_provision?: DecCoinAmino;
 }
-export interface QueryEpochMintProvisionResponseAminoType {
+export interface QueryEpochMintProvisionResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
   value: QueryEpochMintProvisionResponseAmino;
 }
@@ -111,7 +111,7 @@ export interface QueryEpochMintProvisionResponseSDKType {
  * method.
  */
 export interface QuerySkippedEpochsRequest {}
-export interface QuerySkippedEpochsRequestProtoType {
+export interface QuerySkippedEpochsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface QuerySkippedEpochsRequestProtoType {
  * method.
  */
 export interface QuerySkippedEpochsRequestAmino {}
-export interface QuerySkippedEpochsRequestAminoType {
+export interface QuerySkippedEpochsRequestAminoMsg {
   type: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
   value: QuerySkippedEpochsRequestAmino;
 }
@@ -140,7 +140,7 @@ export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
   skippedEpochs: Long;
 }
-export interface QuerySkippedEpochsResponseProtoType {
+export interface QuerySkippedEpochsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
   value: Uint8Array;
 }
@@ -153,7 +153,7 @@ export interface QuerySkippedEpochsResponseAmino {
   /** number of epochs that the inflation module has been disabled. */
   skipped_epochs: string;
 }
-export interface QuerySkippedEpochsResponseAminoType {
+export interface QuerySkippedEpochsResponseAminoMsg {
   type: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
   value: QuerySkippedEpochsResponseAmino;
 }
@@ -171,7 +171,7 @@ export interface QuerySkippedEpochsResponseSDKType {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequest {}
-export interface QueryCirculatingSupplyRequestProtoType {
+export interface QueryCirculatingSupplyRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
   value: Uint8Array;
 }
@@ -181,7 +181,7 @@ export interface QueryCirculatingSupplyRequestProtoType {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequestAmino {}
-export interface QueryCirculatingSupplyRequestAminoType {
+export interface QueryCirculatingSupplyRequestAminoMsg {
   type: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
   value: QueryCirculatingSupplyRequestAmino;
 }
@@ -200,7 +200,7 @@ export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
   circulatingSupply?: DecCoin;
 }
-export interface QueryCirculatingSupplyResponseProtoType {
+export interface QueryCirculatingSupplyResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
   value: Uint8Array;
 }
@@ -213,7 +213,7 @@ export interface QueryCirculatingSupplyResponseAmino {
   /** total amount of coins in circulation */
   circulating_supply?: DecCoinAmino;
 }
-export interface QueryCirculatingSupplyResponseAminoType {
+export interface QueryCirculatingSupplyResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
   value: QueryCirculatingSupplyResponseAmino;
 }
@@ -231,7 +231,7 @@ export interface QueryCirculatingSupplyResponseSDKType {
  * method.
  */
 export interface QueryInflationRateRequest {}
-export interface QueryInflationRateRequestProtoType {
+export interface QueryInflationRateRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
   value: Uint8Array;
 }
@@ -241,7 +241,7 @@ export interface QueryInflationRateRequestProtoType {
  * method.
  */
 export interface QueryInflationRateRequestAmino {}
-export interface QueryInflationRateRequestAminoType {
+export interface QueryInflationRateRequestAminoMsg {
   type: "/evmos.inflation.v1.QueryInflationRateRequest";
   value: QueryInflationRateRequestAmino;
 }
@@ -260,7 +260,7 @@ export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
   inflationRate: string;
 }
-export interface QueryInflationRateResponseProtoType {
+export interface QueryInflationRateResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
   value: Uint8Array;
 }
@@ -273,7 +273,7 @@ export interface QueryInflationRateResponseAmino {
   /** rate by which the total supply increases within one period */
   inflation_rate: string;
 }
-export interface QueryInflationRateResponseAminoType {
+export interface QueryInflationRateResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryInflationRateResponse";
   value: QueryInflationRateResponseAmino;
 }
@@ -288,14 +288,14 @@ export interface QueryInflationRateResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface QueryParamsRequestProtoType {
+export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoType {
+export interface QueryParamsRequestAminoMsg {
   type: "/evmos.inflation.v1.QueryParamsRequest";
   value: QueryParamsRequestAmino;
 }
@@ -308,7 +308,7 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
-export interface QueryParamsResponseProtoType {
+export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsResponse";
   value: Uint8Array;
 }
@@ -318,7 +318,7 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoType {
+export interface QueryParamsResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryParamsResponse";
   value: QueryParamsResponseAmino;
 }
@@ -387,6 +387,25 @@ export const QueryPeriodRequest = {
   toAmino(_: QueryPeriodRequest): QueryPeriodRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPeriodRequestAminoMsg): QueryPeriodRequest {
+    return QueryPeriodRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryPeriodRequestProtoMsg): QueryPeriodRequest {
+    return QueryPeriodRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPeriodRequest): Uint8Array {
+    return QueryPeriodRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPeriodRequest): QueryPeriodRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryPeriodRequest",
+      value: QueryPeriodRequest.encode(message).finish()
+    };
   }
 
 };
@@ -470,6 +489,25 @@ export const QueryPeriodResponse = {
     const obj: any = {};
     obj.period = message.period ? message.period.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPeriodResponseAminoMsg): QueryPeriodResponse {
+    return QueryPeriodResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryPeriodResponseProtoMsg): QueryPeriodResponse {
+    return QueryPeriodResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPeriodResponse): Uint8Array {
+    return QueryPeriodResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPeriodResponse): QueryPeriodResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
+      value: QueryPeriodResponse.encode(message).finish()
+    };
   }
 
 };
@@ -533,6 +571,25 @@ export const QueryEpochMintProvisionRequest = {
   toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryEpochMintProvisionRequestAminoMsg): QueryEpochMintProvisionRequest {
+    return QueryEpochMintProvisionRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryEpochMintProvisionRequestProtoMsg): QueryEpochMintProvisionRequest {
+    return QueryEpochMintProvisionRequest.decode(message.value);
+  },
+
+  toProto(message: QueryEpochMintProvisionRequest): Uint8Array {
+    return QueryEpochMintProvisionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest",
+      value: QueryEpochMintProvisionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -616,6 +673,25 @@ export const QueryEpochMintProvisionResponse = {
     const obj: any = {};
     obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryEpochMintProvisionResponseAminoMsg): QueryEpochMintProvisionResponse {
+    return QueryEpochMintProvisionResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryEpochMintProvisionResponseProtoMsg): QueryEpochMintProvisionResponse {
+    return QueryEpochMintProvisionResponse.decode(message.value);
+  },
+
+  toProto(message: QueryEpochMintProvisionResponse): Uint8Array {
+    return QueryEpochMintProvisionResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse",
+      value: QueryEpochMintProvisionResponse.encode(message).finish()
+    };
   }
 
 };
@@ -679,6 +755,25 @@ export const QuerySkippedEpochsRequest = {
   toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySkippedEpochsRequestAminoMsg): QuerySkippedEpochsRequest {
+    return QuerySkippedEpochsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuerySkippedEpochsRequestProtoMsg): QuerySkippedEpochsRequest {
+    return QuerySkippedEpochsRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySkippedEpochsRequest): Uint8Array {
+    return QuerySkippedEpochsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest",
+      value: QuerySkippedEpochsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -762,6 +857,25 @@ export const QuerySkippedEpochsResponse = {
     const obj: any = {};
     obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySkippedEpochsResponseAminoMsg): QuerySkippedEpochsResponse {
+    return QuerySkippedEpochsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuerySkippedEpochsResponseProtoMsg): QuerySkippedEpochsResponse {
+    return QuerySkippedEpochsResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySkippedEpochsResponse): Uint8Array {
+    return QuerySkippedEpochsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
+      value: QuerySkippedEpochsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -825,6 +939,25 @@ export const QueryCirculatingSupplyRequest = {
   toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCirculatingSupplyRequestAminoMsg): QueryCirculatingSupplyRequest {
+    return QueryCirculatingSupplyRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryCirculatingSupplyRequestProtoMsg): QueryCirculatingSupplyRequest {
+    return QueryCirculatingSupplyRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCirculatingSupplyRequest): Uint8Array {
+    return QueryCirculatingSupplyRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest",
+      value: QueryCirculatingSupplyRequest.encode(message).finish()
+    };
   }
 
 };
@@ -908,6 +1041,25 @@ export const QueryCirculatingSupplyResponse = {
     const obj: any = {};
     obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCirculatingSupplyResponseAminoMsg): QueryCirculatingSupplyResponse {
+    return QueryCirculatingSupplyResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryCirculatingSupplyResponseProtoMsg): QueryCirculatingSupplyResponse {
+    return QueryCirculatingSupplyResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCirculatingSupplyResponse): Uint8Array {
+    return QueryCirculatingSupplyResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse",
+      value: QueryCirculatingSupplyResponse.encode(message).finish()
+    };
   }
 
 };
@@ -971,6 +1123,25 @@ export const QueryInflationRateRequest = {
   toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryInflationRateRequestAminoMsg): QueryInflationRateRequest {
+    return QueryInflationRateRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryInflationRateRequestProtoMsg): QueryInflationRateRequest {
+    return QueryInflationRateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryInflationRateRequest): Uint8Array {
+    return QueryInflationRateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryInflationRateRequest): QueryInflationRateRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest",
+      value: QueryInflationRateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1054,6 +1225,25 @@ export const QueryInflationRateResponse = {
     const obj: any = {};
     obj.inflation_rate = message.inflationRate;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryInflationRateResponseAminoMsg): QueryInflationRateResponse {
+    return QueryInflationRateResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryInflationRateResponseProtoMsg): QueryInflationRateResponse {
+    return QueryInflationRateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryInflationRateResponse): Uint8Array {
+    return QueryInflationRateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryInflationRateResponse): QueryInflationRateResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
+      value: QueryInflationRateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1117,6 +1307,25 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1200,6 +1409,25 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.inflation.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 
 };

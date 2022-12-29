@@ -13,7 +13,7 @@ export interface Params {
   /** denom of claimable asset */
   claimDenom: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.Params";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface ParamsAmino {
   /** denom of claimable asset */
   claim_denom: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/claim/params";
   value: ParamsAmino;
 }
@@ -168,6 +168,32 @@ export const Params = {
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
     obj.claim_denom = message.claimDenom;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/claim/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

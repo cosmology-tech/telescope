@@ -8,7 +8,7 @@ export interface Params {
   sendEnabled: SendEnabled[];
   defaultSendEnabled: boolean;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Params";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface ParamsAmino {
   send_enabled: SendEnabledAmino[];
   default_send_enabled: boolean;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";
   value: ParamsAmino;
 }
@@ -37,7 +37,7 @@ export interface SendEnabled {
   denom: string;
   enabled: boolean;
 }
-export interface SendEnabledProtoType {
+export interface SendEnabledProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.SendEnabled";
   value: Uint8Array;
 }
@@ -50,7 +50,7 @@ export interface SendEnabledAmino {
   denom: string;
   enabled: boolean;
 }
-export interface SendEnabledAminoType {
+export interface SendEnabledAminoMsg {
   type: "cosmos-sdk/SendEnabled";
   value: SendEnabledAmino;
 }
@@ -69,7 +69,7 @@ export interface Input {
   address: string;
   coins: Coin[];
 }
-export interface InputProtoType {
+export interface InputProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Input";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface InputAmino {
   address: string;
   coins: CoinAmino[];
 }
-export interface InputAminoType {
+export interface InputAminoMsg {
   type: "cosmos-sdk/Input";
   value: InputAmino;
 }
@@ -95,7 +95,7 @@ export interface Output {
   address: string;
   coins: Coin[];
 }
-export interface OutputProtoType {
+export interface OutputProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Output";
   value: Uint8Array;
 }
@@ -105,7 +105,7 @@ export interface OutputAmino {
   address: string;
   coins: CoinAmino[];
 }
-export interface OutputAminoType {
+export interface OutputAminoMsg {
   type: "cosmos-sdk/Output";
   value: OutputAmino;
 }
@@ -126,7 +126,7 @@ export interface OutputSDKType {
 export interface Supply {
   total: Coin[];
 }
-export interface SupplyProtoType {
+export interface SupplyProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Supply";
   value: Uint8Array;
 }
@@ -141,7 +141,7 @@ export interface SupplyProtoType {
 export interface SupplyAmino {
   total: CoinAmino[];
 }
-export interface SupplyAminoType {
+export interface SupplyAminoMsg {
   type: "cosmos-sdk/Supply";
   value: SupplyAmino;
 }
@@ -177,7 +177,7 @@ export interface DenomUnit {
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
 }
-export interface DenomUnitProtoType {
+export interface DenomUnitProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.DenomUnit";
   value: Uint8Array;
 }
@@ -202,7 +202,7 @@ export interface DenomUnitAmino {
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
 }
-export interface DenomUnitAminoType {
+export interface DenomUnitAminoMsg {
   type: "cosmos-sdk/DenomUnit";
   value: DenomUnitAmino;
 }
@@ -266,7 +266,7 @@ export interface Metadata {
    */
   uriHash: string;
 }
-export interface MetadataProtoType {
+export interface MetadataProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Metadata";
   value: Uint8Array;
 }
@@ -320,7 +320,7 @@ export interface MetadataAmino {
    */
   uri_hash: string;
 }
-export interface MetadataAminoType {
+export interface MetadataAminoMsg {
   type: "cosmos-sdk/Metadata";
   value: MetadataAmino;
 }
@@ -454,6 +454,32 @@ export const Params = {
 
     obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
@@ -554,6 +580,32 @@ export const SendEnabled = {
     obj.denom = message.denom;
     obj.enabled = message.enabled;
     return obj;
+  },
+
+  fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
+    return SendEnabled.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SendEnabled): SendEnabledAminoMsg {
+    return {
+      type: "cosmos-sdk/SendEnabled",
+      value: SendEnabled.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SendEnabledProtoMsg): SendEnabled {
+    return SendEnabled.decode(message.value);
+  },
+
+  toProto(message: SendEnabled): Uint8Array {
+    return SendEnabled.encode(message).finish();
+  },
+
+  toProtoMsg(message: SendEnabled): SendEnabledProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.SendEnabled",
+      value: SendEnabled.encode(message).finish()
+    };
   }
 
 };
@@ -672,6 +724,32 @@ export const Input = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: InputAminoMsg): Input {
+    return Input.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Input): InputAminoMsg {
+    return {
+      type: "cosmos-sdk/Input",
+      value: Input.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: InputProtoMsg): Input {
+    return Input.decode(message.value);
+  },
+
+  toProto(message: Input): Uint8Array {
+    return Input.encode(message).finish();
+  },
+
+  toProtoMsg(message: Input): InputProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Input",
+      value: Input.encode(message).finish()
+    };
   }
 
 };
@@ -790,6 +868,32 @@ export const Output = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: OutputAminoMsg): Output {
+    return Output.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Output): OutputAminoMsg {
+    return {
+      type: "cosmos-sdk/Output",
+      value: Output.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: OutputProtoMsg): Output {
+    return Output.decode(message.value);
+  },
+
+  toProto(message: Output): Uint8Array {
+    return Output.encode(message).finish();
+  },
+
+  toProtoMsg(message: Output): OutputProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Output",
+      value: Output.encode(message).finish()
+    };
   }
 
 };
@@ -892,6 +996,32 @@ export const Supply = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SupplyAminoMsg): Supply {
+    return Supply.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Supply): SupplyAminoMsg {
+    return {
+      type: "cosmos-sdk/Supply",
+      value: Supply.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SupplyProtoMsg): Supply {
+    return Supply.decode(message.value);
+  },
+
+  toProto(message: Supply): Uint8Array {
+    return Supply.encode(message).finish();
+  },
+
+  toProtoMsg(message: Supply): SupplyProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Supply",
+      value: Supply.encode(message).finish()
+    };
   }
 
 };
@@ -1026,6 +1156,32 @@ export const DenomUnit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DenomUnitAminoMsg): DenomUnit {
+    return DenomUnit.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: DenomUnit): DenomUnitAminoMsg {
+    return {
+      type: "cosmos-sdk/DenomUnit",
+      value: DenomUnit.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: DenomUnitProtoMsg): DenomUnit {
+    return DenomUnit.decode(message.value);
+  },
+
+  toProto(message: DenomUnit): Uint8Array {
+    return DenomUnit.encode(message).finish();
+  },
+
+  toProtoMsg(message: DenomUnit): DenomUnitProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.DenomUnit",
+      value: DenomUnit.encode(message).finish()
+    };
   }
 
 };
@@ -1240,6 +1396,32 @@ export const Metadata = {
     obj.uri = message.uri;
     obj.uri_hash = message.uriHash;
     return obj;
+  },
+
+  fromAminoMsg(object: MetadataAminoMsg): Metadata {
+    return Metadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Metadata): MetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/Metadata",
+      value: Metadata.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MetadataProtoMsg): Metadata {
+    return Metadata.decode(message.value);
+  },
+
+  toProto(message: Metadata): Uint8Array {
+    return Metadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: Metadata): MetadataProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.Metadata",
+      value: Metadata.encode(message).finish()
+    };
   }
 
 };

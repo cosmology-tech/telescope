@@ -8,7 +8,7 @@ export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
   lightClientAttackEvidence?: LightClientAttackEvidence;
 }
-export interface EvidenceProtoType {
+export interface EvidenceProtoMsg {
   typeUrl: "/tendermint.types.Evidence";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface EvidenceAmino {
   duplicate_vote_evidence?: DuplicateVoteEvidenceAmino;
   light_client_attack_evidence?: LightClientAttackEvidenceAmino;
 }
-export interface EvidenceAminoType {
+export interface EvidenceAminoMsg {
   type: "/tendermint.types.Evidence";
   value: EvidenceAmino;
 }
@@ -33,7 +33,7 @@ export interface DuplicateVoteEvidence {
   validatorPower: Long;
   timestamp?: Date;
 }
-export interface DuplicateVoteEvidenceProtoType {
+export interface DuplicateVoteEvidenceProtoMsg {
   typeUrl: "/tendermint.types.DuplicateVoteEvidence";
   value: Uint8Array;
 }
@@ -46,7 +46,7 @@ export interface DuplicateVoteEvidenceAmino {
   validator_power: string;
   timestamp?: Date;
 }
-export interface DuplicateVoteEvidenceAminoType {
+export interface DuplicateVoteEvidenceAminoMsg {
   type: "/tendermint.types.DuplicateVoteEvidence";
   value: DuplicateVoteEvidenceAmino;
 }
@@ -68,7 +68,7 @@ export interface LightClientAttackEvidence {
   totalVotingPower: Long;
   timestamp?: Date;
 }
-export interface LightClientAttackEvidenceProtoType {
+export interface LightClientAttackEvidenceProtoMsg {
   typeUrl: "/tendermint.types.LightClientAttackEvidence";
   value: Uint8Array;
 }
@@ -81,7 +81,7 @@ export interface LightClientAttackEvidenceAmino {
   total_voting_power: string;
   timestamp?: Date;
 }
-export interface LightClientAttackEvidenceAminoType {
+export interface LightClientAttackEvidenceAminoMsg {
   type: "/tendermint.types.LightClientAttackEvidence";
   value: LightClientAttackEvidenceAmino;
 }
@@ -97,14 +97,14 @@ export interface LightClientAttackEvidenceSDKType {
 export interface EvidenceList {
   evidence: Evidence[];
 }
-export interface EvidenceListProtoType {
+export interface EvidenceListProtoMsg {
   typeUrl: "/tendermint.types.EvidenceList";
   value: Uint8Array;
 }
 export interface EvidenceListAmino {
   evidence: EvidenceAmino[];
 }
-export interface EvidenceListAminoType {
+export interface EvidenceListAminoMsg {
   type: "/tendermint.types.EvidenceList";
   value: EvidenceListAmino;
 }
@@ -207,6 +207,25 @@ export const Evidence = {
     obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence) : undefined;
     obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: EvidenceAminoMsg): Evidence {
+    return Evidence.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvidenceProtoMsg): Evidence {
+    return Evidence.decode(message.value);
+  },
+
+  toProto(message: Evidence): Uint8Array {
+    return Evidence.encode(message).finish();
+  },
+
+  toProtoMsg(message: Evidence): EvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.Evidence",
+      value: Evidence.encode(message).finish()
+    };
   }
 
 };
@@ -354,6 +373,25 @@ export const DuplicateVoteEvidence = {
     obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
+    return DuplicateVoteEvidence.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg): DuplicateVoteEvidence {
+    return DuplicateVoteEvidence.decode(message.value);
+  },
+
+  toProto(message: DuplicateVoteEvidence): Uint8Array {
+    return DuplicateVoteEvidence.encode(message).finish();
+  },
+
+  toProtoMsg(message: DuplicateVoteEvidence): DuplicateVoteEvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.DuplicateVoteEvidence",
+      value: DuplicateVoteEvidence.encode(message).finish()
+    };
   }
 
 };
@@ -519,6 +557,25 @@ export const LightClientAttackEvidence = {
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {
+    return LightClientAttackEvidence.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LightClientAttackEvidenceProtoMsg): LightClientAttackEvidence {
+    return LightClientAttackEvidence.decode(message.value);
+  },
+
+  toProto(message: LightClientAttackEvidence): Uint8Array {
+    return LightClientAttackEvidence.encode(message).finish();
+  },
+
+  toProtoMsg(message: LightClientAttackEvidence): LightClientAttackEvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.LightClientAttackEvidence",
+      value: LightClientAttackEvidence.encode(message).finish()
+    };
   }
 
 };
@@ -620,6 +677,25 @@ export const EvidenceList = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: EvidenceListAminoMsg): EvidenceList {
+    return EvidenceList.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EvidenceListProtoMsg): EvidenceList {
+    return EvidenceList.decode(message.value);
+  },
+
+  toProto(message: EvidenceList): Uint8Array {
+    return EvidenceList.encode(message).finish();
+  },
+
+  toProtoMsg(message: EvidenceList): EvidenceListProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.EvidenceList",
+      value: EvidenceList.encode(message).finish()
+    };
   }
 
 };

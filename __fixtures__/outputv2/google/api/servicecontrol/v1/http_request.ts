@@ -94,7 +94,7 @@ export interface HttpRequest {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
-export interface HttpRequestProtoType {
+export interface HttpRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.HttpRequest";
   value: Uint8Array;
 }
@@ -190,7 +190,7 @@ export interface HttpRequestAmino {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
-export interface HttpRequestAminoType {
+export interface HttpRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.HttpRequest";
   value: HttpRequestAmino;
 }
@@ -521,6 +521,25 @@ export const HttpRequest = {
     obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
     obj.protocol = message.protocol;
     return obj;
+  },
+
+  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
+    return HttpRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
+    return HttpRequest.decode(message.value);
+  },
+
+  toProto(message: HttpRequest): Uint8Array {
+    return HttpRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: HttpRequest): HttpRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
+      value: HttpRequest.encode(message).finish()
+    };
   }
 
 };

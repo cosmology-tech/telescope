@@ -16,7 +16,7 @@ export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
-export interface ConfigProtoType {
+export interface ConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.Config";
   value: Uint8Array;
 }
@@ -34,7 +34,7 @@ export interface ConfigAmino {
   /** modules are the module configurations for the app. */
   modules: ModuleConfigAmino[];
 }
-export interface ConfigAminoType {
+export interface ConfigAminoMsg {
   type: "cosmos-sdk/Config";
   value: ConfigAmino;
 }
@@ -74,7 +74,7 @@ export interface ModuleConfig {
    */
   config?: Any;
 }
-export interface ModuleConfigProtoType {
+export interface ModuleConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
   value: Uint8Array;
 }
@@ -101,7 +101,7 @@ export interface ModuleConfigAmino {
    */
   config?: AnyAmino;
 }
-export interface ModuleConfigAminoType {
+export interface ModuleConfigAminoMsg {
   type: "cosmos-sdk/ModuleConfig";
   value: ModuleConfigAmino;
 }
@@ -210,6 +210,32 @@ export const Config = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigAminoMsg): Config {
+    return Config.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Config): ConfigAminoMsg {
+    return {
+      type: "cosmos-sdk/Config",
+      value: Config.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConfigProtoMsg): Config {
+    return Config.decode(message.value);
+  },
+
+  toProto(message: Config): Uint8Array {
+    return Config.encode(message).finish();
+  },
+
+  toProtoMsg(message: Config): ConfigProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.Config",
+      value: Config.encode(message).finish()
+    };
   }
 
 };
@@ -310,6 +336,32 @@ export const ModuleConfig = {
     obj.name = message.name;
     obj.config = message.config ? Any.toAmino(message.config) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
+    return ModuleConfig.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg {
+    return {
+      type: "cosmos-sdk/ModuleConfig",
+      value: ModuleConfig.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig {
+    return ModuleConfig.decode(message.value);
+  },
+
+  toProto(message: ModuleConfig): Uint8Array {
+    return ModuleConfig.encode(message).finish();
+  },
+
+  toProtoMsg(message: ModuleConfig): ModuleConfigProtoMsg {
+    return {
+      typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
+      value: ModuleConfig.encode(message).finish()
+    };
   }
 
 };

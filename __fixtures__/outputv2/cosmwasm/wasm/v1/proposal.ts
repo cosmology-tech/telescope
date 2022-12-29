@@ -22,7 +22,7 @@ export interface StoreCodeProposal {
   /** InstantiatePermission to apply on contract creation, optional */
   instantiatePermission?: AccessConfig;
 }
-export interface StoreCodeProposalProtoType {
+export interface StoreCodeProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
   value: Uint8Array;
 }
@@ -44,7 +44,7 @@ export interface StoreCodeProposalAmino {
   /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigAmino;
 }
-export interface StoreCodeProposalAminoType {
+export interface StoreCodeProposalAminoMsg {
   type: "wasm/StoreCodeProposal";
   value: StoreCodeProposalAmino;
 }
@@ -87,7 +87,7 @@ export interface InstantiateContractProposal {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
-export interface InstantiateContractProposalProtoType {
+export interface InstantiateContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface InstantiateContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
-export interface InstantiateContractProposalAminoType {
+export interface InstantiateContractProposalAminoMsg {
   type: "wasm/InstantiateContractProposal";
   value: InstantiateContractProposalAmino;
 }
@@ -158,7 +158,7 @@ export interface MigrateContractProposal {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
-export interface MigrateContractProposalProtoType {
+export interface MigrateContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal";
   value: Uint8Array;
 }
@@ -180,7 +180,7 @@ export interface MigrateContractProposalAmino {
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
-export interface MigrateContractProposalAminoType {
+export interface MigrateContractProposalAminoMsg {
   type: "wasm/MigrateContractProposal";
   value: MigrateContractProposalAmino;
 }
@@ -208,7 +208,7 @@ export interface SudoContractProposal {
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
 }
-export interface SudoContractProposalProtoType {
+export interface SudoContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal";
   value: Uint8Array;
 }
@@ -227,7 +227,7 @@ export interface SudoContractProposalAmino {
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
 }
-export interface SudoContractProposalAminoType {
+export interface SudoContractProposalAminoMsg {
   type: "wasm/SudoContractProposal";
   value: SudoContractProposalAmino;
 }
@@ -263,7 +263,7 @@ export interface ExecuteContractProposal {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
 }
-export interface ExecuteContractProposalProtoType {
+export interface ExecuteContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal";
   value: Uint8Array;
 }
@@ -291,7 +291,7 @@ export interface ExecuteContractProposalAmino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
-export interface ExecuteContractProposalAminoType {
+export interface ExecuteContractProposalAminoMsg {
   type: "wasm/ExecuteContractProposal";
   value: ExecuteContractProposalAmino;
 }
@@ -323,7 +323,7 @@ export interface UpdateAdminProposal {
   /** Contract is the address of the smart contract */
   contract: string;
 }
-export interface UpdateAdminProposalProtoType {
+export interface UpdateAdminProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal";
   value: Uint8Array;
 }
@@ -342,7 +342,7 @@ export interface UpdateAdminProposalAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
-export interface UpdateAdminProposalAminoType {
+export interface UpdateAdminProposalAminoMsg {
   type: "wasm/UpdateAdminProposal";
   value: UpdateAdminProposalAmino;
 }
@@ -369,7 +369,7 @@ export interface ClearAdminProposal {
   /** Contract is the address of the smart contract */
   contract: string;
 }
-export interface ClearAdminProposalProtoType {
+export interface ClearAdminProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal";
   value: Uint8Array;
 }
@@ -388,7 +388,7 @@ export interface ClearAdminProposalAmino {
   /** Contract is the address of the smart contract */
   contract: string;
 }
-export interface ClearAdminProposalAminoType {
+export interface ClearAdminProposalAminoMsg {
   type: "wasm/ClearAdminProposal";
   value: ClearAdminProposalAmino;
 }
@@ -417,7 +417,7 @@ export interface PinCodesProposal {
   /** CodeIDs references the new WASM codes */
   codeIds: Long[];
 }
-export interface PinCodesProposalProtoType {
+export interface PinCodesProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal";
   value: Uint8Array;
 }
@@ -436,7 +436,7 @@ export interface PinCodesProposalAmino {
   /** CodeIDs references the new WASM codes */
   code_ids: string[];
 }
-export interface PinCodesProposalAminoType {
+export interface PinCodesProposalAminoMsg {
   type: "wasm/PinCodesProposal";
   value: PinCodesProposalAmino;
 }
@@ -465,7 +465,7 @@ export interface UnpinCodesProposal {
   /** CodeIDs references the WASM codes */
   codeIds: Long[];
 }
-export interface UnpinCodesProposalProtoType {
+export interface UnpinCodesProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal";
   value: Uint8Array;
 }
@@ -484,7 +484,7 @@ export interface UnpinCodesProposalAmino {
   /** CodeIDs references the WASM codes */
   code_ids: string[];
 }
-export interface UnpinCodesProposalAminoType {
+export interface UnpinCodesProposalAminoMsg {
   type: "wasm/UnpinCodesProposal";
   value: UnpinCodesProposalAmino;
 }
@@ -643,6 +643,32 @@ export const StoreCodeProposal = {
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: StoreCodeProposalAminoMsg): StoreCodeProposal {
+    return StoreCodeProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StoreCodeProposal): StoreCodeProposalAminoMsg {
+    return {
+      type: "wasm/StoreCodeProposal",
+      value: StoreCodeProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StoreCodeProposalProtoMsg): StoreCodeProposal {
+    return StoreCodeProposal.decode(message.value);
+  },
+
+  toProto(message: StoreCodeProposal): Uint8Array {
+    return StoreCodeProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: StoreCodeProposal): StoreCodeProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal",
+      value: StoreCodeProposal.encode(message).finish()
+    };
   }
 
 };
@@ -857,6 +883,32 @@ export const InstantiateContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: InstantiateContractProposalAminoMsg): InstantiateContractProposal {
+    return InstantiateContractProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: InstantiateContractProposal): InstantiateContractProposalAminoMsg {
+    return {
+      type: "wasm/InstantiateContractProposal",
+      value: InstantiateContractProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: InstantiateContractProposalProtoMsg): InstantiateContractProposal {
+    return InstantiateContractProposal.decode(message.value);
+  },
+
+  toProto(message: InstantiateContractProposal): Uint8Array {
+    return InstantiateContractProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: InstantiateContractProposal): InstantiateContractProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal",
+      value: InstantiateContractProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1005,6 +1057,32 @@ export const MigrateContractProposal = {
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MigrateContractProposalAminoMsg): MigrateContractProposal {
+    return MigrateContractProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MigrateContractProposal): MigrateContractProposalAminoMsg {
+    return {
+      type: "wasm/MigrateContractProposal",
+      value: MigrateContractProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MigrateContractProposalProtoMsg): MigrateContractProposal {
+    return MigrateContractProposal.decode(message.value);
+  },
+
+  toProto(message: MigrateContractProposal): Uint8Array {
+    return MigrateContractProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: MigrateContractProposal): MigrateContractProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal",
+      value: MigrateContractProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1137,6 +1215,32 @@ export const SudoContractProposal = {
     obj.contract = message.contract;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SudoContractProposalAminoMsg): SudoContractProposal {
+    return SudoContractProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SudoContractProposal): SudoContractProposalAminoMsg {
+    return {
+      type: "wasm/SudoContractProposal",
+      value: SudoContractProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SudoContractProposalProtoMsg): SudoContractProposal {
+    return SudoContractProposal.decode(message.value);
+  },
+
+  toProto(message: SudoContractProposal): Uint8Array {
+    return SudoContractProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: SudoContractProposal): SudoContractProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal",
+      value: SudoContractProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1319,6 +1423,32 @@ export const ExecuteContractProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ExecuteContractProposalAminoMsg): ExecuteContractProposal {
+    return ExecuteContractProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ExecuteContractProposal): ExecuteContractProposalAminoMsg {
+    return {
+      type: "wasm/ExecuteContractProposal",
+      value: ExecuteContractProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ExecuteContractProposalProtoMsg): ExecuteContractProposal {
+    return ExecuteContractProposal.decode(message.value);
+  },
+
+  toProto(message: ExecuteContractProposal): Uint8Array {
+    return ExecuteContractProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: ExecuteContractProposal): ExecuteContractProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal",
+      value: ExecuteContractProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1451,6 +1581,32 @@ export const UpdateAdminProposal = {
     obj.new_admin = message.newAdmin;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateAdminProposalAminoMsg): UpdateAdminProposal {
+    return UpdateAdminProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UpdateAdminProposal): UpdateAdminProposalAminoMsg {
+    return {
+      type: "wasm/UpdateAdminProposal",
+      value: UpdateAdminProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UpdateAdminProposalProtoMsg): UpdateAdminProposal {
+    return UpdateAdminProposal.decode(message.value);
+  },
+
+  toProto(message: UpdateAdminProposal): Uint8Array {
+    return UpdateAdminProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateAdminProposal): UpdateAdminProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal",
+      value: UpdateAdminProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1567,6 +1723,32 @@ export const ClearAdminProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromAminoMsg(object: ClearAdminProposalAminoMsg): ClearAdminProposal {
+    return ClearAdminProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClearAdminProposal): ClearAdminProposalAminoMsg {
+    return {
+      type: "wasm/ClearAdminProposal",
+      value: ClearAdminProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClearAdminProposalProtoMsg): ClearAdminProposal {
+    return ClearAdminProposal.decode(message.value);
+  },
+
+  toProto(message: ClearAdminProposal): Uint8Array {
+    return ClearAdminProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClearAdminProposal): ClearAdminProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal",
+      value: ClearAdminProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1713,6 +1895,32 @@ export const PinCodesProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PinCodesProposalAminoMsg): PinCodesProposal {
+    return PinCodesProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PinCodesProposal): PinCodesProposalAminoMsg {
+    return {
+      type: "wasm/PinCodesProposal",
+      value: PinCodesProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PinCodesProposalProtoMsg): PinCodesProposal {
+    return PinCodesProposal.decode(message.value);
+  },
+
+  toProto(message: PinCodesProposal): Uint8Array {
+    return PinCodesProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: PinCodesProposal): PinCodesProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
+      value: PinCodesProposal.encode(message).finish()
+    };
   }
 
 };
@@ -1859,6 +2067,32 @@ export const UnpinCodesProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UnpinCodesProposalAminoMsg): UnpinCodesProposal {
+    return UnpinCodesProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UnpinCodesProposal): UnpinCodesProposalAminoMsg {
+    return {
+      type: "wasm/UnpinCodesProposal",
+      value: UnpinCodesProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UnpinCodesProposalProtoMsg): UnpinCodesProposal {
+    return UnpinCodesProposal.decode(message.value);
+  },
+
+  toProto(message: UnpinCodesProposal): Uint8Array {
+    return UnpinCodesProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: UnpinCodesProposal): UnpinCodesProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
+      value: UnpinCodesProposal.encode(message).finish()
+    };
   }
 
 };

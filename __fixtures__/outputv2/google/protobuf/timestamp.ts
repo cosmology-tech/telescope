@@ -102,7 +102,7 @@ export interface Timestamp {
    */
   nanos: number;
 }
-export interface TimestampProtoType {
+export interface TimestampProtoMsg {
   typeUrl: "/google.protobuf.Timestamp";
   value: Uint8Array;
 }
@@ -192,7 +192,7 @@ export interface TimestampProtoType {
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
 export type TimestampAmino = string;
-export interface TimestampAminoType {
+export interface TimestampAminoMsg {
   type: "/google.protobuf.Timestamp";
   value: TimestampAmino;
 }
@@ -381,6 +381,25 @@ export const Timestamp = {
     obj.seconds = message.seconds ? message.seconds.toString() : undefined;
     obj.nanos = message.nanos;
     return obj;
+  },
+
+  fromAminoMsg(object: TimestampAminoMsg): Timestamp {
+    return Timestamp.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: TimestampProtoMsg): Timestamp {
+    return Timestamp.decode(message.value);
+  },
+
+  toProto(message: Timestamp): Uint8Array {
+    return Timestamp.encode(message).finish();
+  },
+
+  toProtoMsg(message: Timestamp): TimestampProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Timestamp",
+      value: Timestamp.encode(message).finish()
+    };
   }
 
 };

@@ -7,14 +7,14 @@ export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
-export interface QueryModuleAccountBalanceRequestProtoType {
+export interface QueryModuleAccountBalanceRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequestAmino {}
-export interface QueryModuleAccountBalanceRequestAminoType {
+export interface QueryModuleAccountBalanceRequestAminoMsg {
   type: "osmosis/claim/query-module-account-balance-request";
   value: QueryModuleAccountBalanceRequestAmino;
 }
@@ -27,7 +27,7 @@ export interface QueryModuleAccountBalanceResponse {
   /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
 }
-export interface QueryModuleAccountBalanceResponseProtoType {
+export interface QueryModuleAccountBalanceResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse";
   value: Uint8Array;
 }
@@ -37,7 +37,7 @@ export interface QueryModuleAccountBalanceResponseAmino {
   /** params defines the parameters of the module. */
   moduleAccountBalance: CoinAmino[];
 }
-export interface QueryModuleAccountBalanceResponseAminoType {
+export interface QueryModuleAccountBalanceResponseAminoMsg {
   type: "osmosis/claim/query-module-account-balance-response";
   value: QueryModuleAccountBalanceResponseAmino;
 }
@@ -49,14 +49,14 @@ export interface QueryModuleAccountBalanceResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface QueryParamsRequestProtoType {
+export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoType {
+export interface QueryParamsRequestAminoMsg {
   type: "osmosis/claim/query-params-request";
   value: QueryParamsRequestAmino;
 }
@@ -69,7 +69,7 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
-export interface QueryParamsResponseProtoType {
+export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoType {
+export interface QueryParamsResponseAminoMsg {
   type: "osmosis/claim/query-params-response";
   value: QueryParamsResponseAmino;
 }
@@ -91,14 +91,14 @@ export interface QueryParamsResponseSDKType {
 export interface QueryClaimRecordRequest {
   address: string;
 }
-export interface QueryClaimRecordRequestProtoType {
+export interface QueryClaimRecordRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest";
   value: Uint8Array;
 }
 export interface QueryClaimRecordRequestAmino {
   address: string;
 }
-export interface QueryClaimRecordRequestAminoType {
+export interface QueryClaimRecordRequestAminoMsg {
   type: "osmosis/claim/query-claim-record-request";
   value: QueryClaimRecordRequestAmino;
 }
@@ -108,14 +108,14 @@ export interface QueryClaimRecordRequestSDKType {
 export interface QueryClaimRecordResponse {
   claimRecord?: ClaimRecord;
 }
-export interface QueryClaimRecordResponseProtoType {
+export interface QueryClaimRecordResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse";
   value: Uint8Array;
 }
 export interface QueryClaimRecordResponseAmino {
   claim_record?: ClaimRecordAmino;
 }
-export interface QueryClaimRecordResponseAminoType {
+export interface QueryClaimRecordResponseAminoMsg {
   type: "osmosis/claim/query-claim-record-response";
   value: QueryClaimRecordResponseAmino;
 }
@@ -126,7 +126,7 @@ export interface QueryClaimableForActionRequest {
   address: string;
   action: Action;
 }
-export interface QueryClaimableForActionRequestProtoType {
+export interface QueryClaimableForActionRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest";
   value: Uint8Array;
 }
@@ -134,7 +134,7 @@ export interface QueryClaimableForActionRequestAmino {
   address: string;
   action: Action;
 }
-export interface QueryClaimableForActionRequestAminoType {
+export interface QueryClaimableForActionRequestAminoMsg {
   type: "osmosis/claim/query-claimable-for-action-request";
   value: QueryClaimableForActionRequestAmino;
 }
@@ -145,14 +145,14 @@ export interface QueryClaimableForActionRequestSDKType {
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
 }
-export interface QueryClaimableForActionResponseProtoType {
+export interface QueryClaimableForActionResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse";
   value: Uint8Array;
 }
 export interface QueryClaimableForActionResponseAmino {
   coins: CoinAmino[];
 }
-export interface QueryClaimableForActionResponseAminoType {
+export interface QueryClaimableForActionResponseAminoMsg {
   type: "osmosis/claim/query-claimable-for-action-response";
   value: QueryClaimableForActionResponseAmino;
 }
@@ -162,14 +162,14 @@ export interface QueryClaimableForActionResponseSDKType {
 export interface QueryTotalClaimableRequest {
   address: string;
 }
-export interface QueryTotalClaimableRequestProtoType {
+export interface QueryTotalClaimableRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest";
   value: Uint8Array;
 }
 export interface QueryTotalClaimableRequestAmino {
   address: string;
 }
-export interface QueryTotalClaimableRequestAminoType {
+export interface QueryTotalClaimableRequestAminoMsg {
   type: "osmosis/claim/query-total-claimable-request";
   value: QueryTotalClaimableRequestAmino;
 }
@@ -179,14 +179,14 @@ export interface QueryTotalClaimableRequestSDKType {
 export interface QueryTotalClaimableResponse {
   coins: Coin[];
 }
-export interface QueryTotalClaimableResponseProtoType {
+export interface QueryTotalClaimableResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse";
   value: Uint8Array;
 }
 export interface QueryTotalClaimableResponseAmino {
   coins: CoinAmino[];
 }
-export interface QueryTotalClaimableResponseAminoType {
+export interface QueryTotalClaimableResponseAminoMsg {
   type: "osmosis/claim/query-total-claimable-response";
   value: QueryTotalClaimableResponseAmino;
 }
@@ -254,6 +254,32 @@ export const QueryModuleAccountBalanceRequest = {
   toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryModuleAccountBalanceRequestAminoMsg): QueryModuleAccountBalanceRequest {
+    return QueryModuleAccountBalanceRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAminoMsg {
+    return {
+      type: "osmosis/claim/query-module-account-balance-request",
+      value: QueryModuleAccountBalanceRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg): QueryModuleAccountBalanceRequest {
+    return QueryModuleAccountBalanceRequest.decode(message.value);
+  },
+
+  toProto(message: QueryModuleAccountBalanceRequest): Uint8Array {
+    return QueryModuleAccountBalanceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
+      value: QueryModuleAccountBalanceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -356,6 +382,32 @@ export const QueryModuleAccountBalanceResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryModuleAccountBalanceResponseAminoMsg): QueryModuleAccountBalanceResponse {
+    return QueryModuleAccountBalanceResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAminoMsg {
+    return {
+      type: "osmosis/claim/query-module-account-balance-response",
+      value: QueryModuleAccountBalanceResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg): QueryModuleAccountBalanceResponse {
+    return QueryModuleAccountBalanceResponse.decode(message.value);
+  },
+
+  toProto(message: QueryModuleAccountBalanceResponse): Uint8Array {
+    return QueryModuleAccountBalanceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
+      value: QueryModuleAccountBalanceResponse.encode(message).finish()
+    };
   }
 
 };
@@ -420,6 +472,32 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+    return {
+      type: "osmosis/claim/query-params-request",
+      value: QueryParamsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -504,6 +582,32 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+    return {
+      type: "osmosis/claim/query-params-response",
+      value: QueryParamsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -588,6 +692,32 @@ export const QueryClaimRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimRecordRequestAminoMsg): QueryClaimRecordRequest {
+    return QueryClaimRecordRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClaimRecordRequest): QueryClaimRecordRequestAminoMsg {
+    return {
+      type: "osmosis/claim/query-claim-record-request",
+      value: QueryClaimRecordRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg): QueryClaimRecordRequest {
+    return QueryClaimRecordRequest.decode(message.value);
+  },
+
+  toProto(message: QueryClaimRecordRequest): Uint8Array {
+    return QueryClaimRecordRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimRecordRequest): QueryClaimRecordRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
+      value: QueryClaimRecordRequest.encode(message).finish()
+    };
   }
 
 };
@@ -672,6 +802,32 @@ export const QueryClaimRecordResponse = {
     const obj: any = {};
     obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimRecordResponseAminoMsg): QueryClaimRecordResponse {
+    return QueryClaimRecordResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClaimRecordResponse): QueryClaimRecordResponseAminoMsg {
+    return {
+      type: "osmosis/claim/query-claim-record-response",
+      value: QueryClaimRecordResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg): QueryClaimRecordResponse {
+    return QueryClaimRecordResponse.decode(message.value);
+  },
+
+  toProto(message: QueryClaimRecordResponse): Uint8Array {
+    return QueryClaimRecordResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimRecordResponse): QueryClaimRecordResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
+      value: QueryClaimRecordResponse.encode(message).finish()
+    };
   }
 
 };
@@ -772,6 +928,32 @@ export const QueryClaimableForActionRequest = {
     obj.address = message.address;
     obj.action = message.action;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimableForActionRequestAminoMsg): QueryClaimableForActionRequest {
+    return QueryClaimableForActionRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAminoMsg {
+    return {
+      type: "osmosis/claim/query-claimable-for-action-request",
+      value: QueryClaimableForActionRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg): QueryClaimableForActionRequest {
+    return QueryClaimableForActionRequest.decode(message.value);
+  },
+
+  toProto(message: QueryClaimableForActionRequest): Uint8Array {
+    return QueryClaimableForActionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
+      value: QueryClaimableForActionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -874,6 +1056,32 @@ export const QueryClaimableForActionResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimableForActionResponseAminoMsg): QueryClaimableForActionResponse {
+    return QueryClaimableForActionResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAminoMsg {
+    return {
+      type: "osmosis/claim/query-claimable-for-action-response",
+      value: QueryClaimableForActionResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg): QueryClaimableForActionResponse {
+    return QueryClaimableForActionResponse.decode(message.value);
+  },
+
+  toProto(message: QueryClaimableForActionResponse): Uint8Array {
+    return QueryClaimableForActionResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
+      value: QueryClaimableForActionResponse.encode(message).finish()
+    };
   }
 
 };
@@ -958,6 +1166,32 @@ export const QueryTotalClaimableRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalClaimableRequestAminoMsg): QueryTotalClaimableRequest {
+    return QueryTotalClaimableRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAminoMsg {
+    return {
+      type: "osmosis/claim/query-total-claimable-request",
+      value: QueryTotalClaimableRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg): QueryTotalClaimableRequest {
+    return QueryTotalClaimableRequest.decode(message.value);
+  },
+
+  toProto(message: QueryTotalClaimableRequest): Uint8Array {
+    return QueryTotalClaimableRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
+      value: QueryTotalClaimableRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1060,6 +1294,32 @@ export const QueryTotalClaimableResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalClaimableResponseAminoMsg): QueryTotalClaimableResponse {
+    return QueryTotalClaimableResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAminoMsg {
+    return {
+      type: "osmosis/claim/query-total-claimable-response",
+      value: QueryTotalClaimableResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg): QueryTotalClaimableResponse {
+    return QueryTotalClaimableResponse.decode(message.value);
+  },
+
+  toProto(message: QueryTotalClaimableResponse): Uint8Array {
+    return QueryTotalClaimableResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
+      value: QueryTotalClaimableResponse.encode(message).finish()
+    };
   }
 
 };

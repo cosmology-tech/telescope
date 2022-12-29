@@ -11,7 +11,7 @@ export interface App {
   protocol: Long;
   software: string;
 }
-export interface AppProtoType {
+export interface AppProtoMsg {
   typeUrl: "/tendermint.version.App";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface AppAmino {
   protocol: string;
   software: string;
 }
-export interface AppAminoType {
+export interface AppAminoMsg {
   type: "/tendermint.version.App";
   value: AppAmino;
 }
@@ -49,7 +49,7 @@ export interface Consensus {
   block: Long;
   app: Long;
 }
-export interface ConsensusProtoType {
+export interface ConsensusProtoMsg {
   typeUrl: "/tendermint.version.Consensus";
   value: Uint8Array;
 }
@@ -63,7 +63,7 @@ export interface ConsensusAmino {
   block: string;
   app: string;
 }
-export interface ConsensusAminoType {
+export interface ConsensusAminoMsg {
   type: "/tendermint.version.Consensus";
   value: ConsensusAmino;
 }
@@ -173,6 +173,25 @@ export const App = {
     obj.protocol = message.protocol ? message.protocol.toString() : undefined;
     obj.software = message.software;
     return obj;
+  },
+
+  fromAminoMsg(object: AppAminoMsg): App {
+    return App.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AppProtoMsg): App {
+    return App.decode(message.value);
+  },
+
+  toProto(message: App): Uint8Array {
+    return App.encode(message).finish();
+  },
+
+  toProtoMsg(message: App): AppProtoMsg {
+    return {
+      typeUrl: "/tendermint.version.App",
+      value: App.encode(message).finish()
+    };
   }
 
 };
@@ -272,6 +291,25 @@ export const Consensus = {
     obj.block = message.block ? message.block.toString() : undefined;
     obj.app = message.app ? message.app.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsensusAminoMsg): Consensus {
+    return Consensus.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConsensusProtoMsg): Consensus {
+    return Consensus.decode(message.value);
+  },
+
+  toProto(message: Consensus): Uint8Array {
+    return Consensus.encode(message).finish();
+  },
+
+  toProtoMsg(message: Consensus): ConsensusProtoMsg {
+    return {
+      typeUrl: "/tendermint.version.Consensus",
+      value: Consensus.encode(message).finish()
+    };
   }
 
 };

@@ -73,7 +73,7 @@ export interface LeaseID {
   oseq: number;
   provider: string;
 }
-export interface LeaseIDProtoType {
+export interface LeaseIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.LeaseID";
   value: Uint8Array;
 }
@@ -86,7 +86,7 @@ export interface LeaseIDAmino {
   oseq: number;
   provider: string;
 }
-export interface LeaseIDAminoType {
+export interface LeaseIDAminoMsg {
   type: "/akash.market.v1beta2.LeaseID";
   value: LeaseIDAmino;
 }
@@ -108,7 +108,7 @@ export interface Lease {
   createdAt: Long;
   closedOn: Long;
 }
-export interface LeaseProtoType {
+export interface LeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.Lease";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface LeaseAmino {
   created_at: string;
   closed_on: string;
 }
-export interface LeaseAminoType {
+export interface LeaseAminoMsg {
   type: "/akash.market.v1beta2.Lease";
   value: LeaseAmino;
 }
@@ -144,7 +144,7 @@ export interface LeaseFilters {
   provider: string;
   state: string;
 }
-export interface LeaseFiltersProtoType {
+export interface LeaseFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.LeaseFilters";
   value: Uint8Array;
 }
@@ -158,7 +158,7 @@ export interface LeaseFiltersAmino {
   provider: string;
   state: string;
 }
-export interface LeaseFiltersAminoType {
+export interface LeaseFiltersAminoMsg {
   type: "/akash.market.v1beta2.LeaseFilters";
   value: LeaseFiltersAmino;
 }
@@ -177,7 +177,7 @@ export interface LeaseFiltersSDKType {
 export interface MsgCreateLease {
   bidId?: BidID;
 }
-export interface MsgCreateLeaseProtoType {
+export interface MsgCreateLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateLease";
   value: Uint8Array;
 }
@@ -186,7 +186,7 @@ export interface MsgCreateLeaseProtoType {
 export interface MsgCreateLeaseAmino {
   bid_id?: BidIDAmino;
 }
-export interface MsgCreateLeaseAminoType {
+export interface MsgCreateLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateLease";
   value: MsgCreateLeaseAmino;
 }
@@ -198,14 +198,14 @@ export interface MsgCreateLeaseSDKType {
 
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
-export interface MsgCreateLeaseResponseProtoType {
+export interface MsgCreateLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse";
   value: Uint8Array;
 }
 
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponseAmino {}
-export interface MsgCreateLeaseResponseAminoType {
+export interface MsgCreateLeaseResponseAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateLeaseResponse";
   value: MsgCreateLeaseResponseAmino;
 }
@@ -217,7 +217,7 @@ export interface MsgCreateLeaseResponseSDKType {}
 export interface MsgWithdrawLease {
   bidId?: LeaseID;
 }
-export interface MsgWithdrawLeaseProtoType {
+export interface MsgWithdrawLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgWithdrawLease";
   value: Uint8Array;
 }
@@ -226,7 +226,7 @@ export interface MsgWithdrawLeaseProtoType {
 export interface MsgWithdrawLeaseAmino {
   bid_id?: LeaseIDAmino;
 }
-export interface MsgWithdrawLeaseAminoType {
+export interface MsgWithdrawLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgWithdrawLease";
   value: MsgWithdrawLeaseAmino;
 }
@@ -238,14 +238,14 @@ export interface MsgWithdrawLeaseSDKType {
 
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
-export interface MsgWithdrawLeaseResponseProtoType {
+export interface MsgWithdrawLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse";
   value: Uint8Array;
 }
 
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponseAmino {}
-export interface MsgWithdrawLeaseResponseAminoType {
+export interface MsgWithdrawLeaseResponseAminoMsg {
   type: "/akash.market.v1beta2.MsgWithdrawLeaseResponse";
   value: MsgWithdrawLeaseResponseAmino;
 }
@@ -257,7 +257,7 @@ export interface MsgWithdrawLeaseResponseSDKType {}
 export interface MsgCloseLease {
   leaseId?: LeaseID;
 }
-export interface MsgCloseLeaseProtoType {
+export interface MsgCloseLeaseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseLease";
   value: Uint8Array;
 }
@@ -266,7 +266,7 @@ export interface MsgCloseLeaseProtoType {
 export interface MsgCloseLeaseAmino {
   lease_id?: LeaseIDAmino;
 }
-export interface MsgCloseLeaseAminoType {
+export interface MsgCloseLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseLease";
   value: MsgCloseLeaseAmino;
 }
@@ -278,14 +278,14 @@ export interface MsgCloseLeaseSDKType {
 
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}
-export interface MsgCloseLeaseResponseProtoType {
+export interface MsgCloseLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse";
   value: Uint8Array;
 }
 
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponseAmino {}
-export interface MsgCloseLeaseResponseAminoType {
+export interface MsgCloseLeaseResponseAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseLeaseResponse";
   value: MsgCloseLeaseResponseAmino;
 }
@@ -436,6 +436,25 @@ export const LeaseID = {
     obj.oseq = message.oseq;
     obj.provider = message.provider;
     return obj;
+  },
+
+  fromAminoMsg(object: LeaseIDAminoMsg): LeaseID {
+    return LeaseID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LeaseIDProtoMsg): LeaseID {
+    return LeaseID.decode(message.value);
+  },
+
+  toProto(message: LeaseID): Uint8Array {
+    return LeaseID.encode(message).finish();
+  },
+
+  toProtoMsg(message: LeaseID): LeaseIDProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.LeaseID",
+      value: LeaseID.encode(message).finish()
+    };
   }
 
 };
@@ -583,6 +602,25 @@ export const Lease = {
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LeaseAminoMsg): Lease {
+    return Lease.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LeaseProtoMsg): Lease {
+    return Lease.decode(message.value);
+  },
+
+  toProto(message: Lease): Uint8Array {
+    return Lease.encode(message).finish();
+  },
+
+  toProtoMsg(message: Lease): LeaseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Lease",
+      value: Lease.encode(message).finish()
+    };
   }
 
 };
@@ -746,6 +784,25 @@ export const LeaseFilters = {
     obj.provider = message.provider;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: LeaseFiltersAminoMsg): LeaseFilters {
+    return LeaseFilters.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LeaseFiltersProtoMsg): LeaseFilters {
+    return LeaseFilters.decode(message.value);
+  },
+
+  toProto(message: LeaseFilters): Uint8Array {
+    return LeaseFilters.encode(message).finish();
+  },
+
+  toProtoMsg(message: LeaseFilters): LeaseFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.LeaseFilters",
+      value: LeaseFilters.encode(message).finish()
+    };
   }
 
 };
@@ -829,6 +886,25 @@ export const MsgCreateLease = {
     const obj: any = {};
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
+    return MsgCreateLease.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateLeaseProtoMsg): MsgCreateLease {
+    return MsgCreateLease.decode(message.value);
+  },
+
+  toProto(message: MsgCreateLease): Uint8Array {
+    return MsgCreateLease.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateLease): MsgCreateLeaseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCreateLease",
+      value: MsgCreateLease.encode(message).finish()
+    };
   }
 
 };
@@ -892,6 +968,25 @@ export const MsgCreateLeaseResponse = {
   toAmino(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateLeaseResponseAminoMsg): MsgCreateLeaseResponse {
+    return MsgCreateLeaseResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateLeaseResponseProtoMsg): MsgCreateLeaseResponse {
+    return MsgCreateLeaseResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateLeaseResponse): Uint8Array {
+    return MsgCreateLeaseResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateLeaseResponse): MsgCreateLeaseResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCreateLeaseResponse",
+      value: MsgCreateLeaseResponse.encode(message).finish()
+    };
   }
 
 };
@@ -975,6 +1070,25 @@ export const MsgWithdrawLease = {
     const obj: any = {};
     obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
+    return MsgWithdrawLease.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgWithdrawLeaseProtoMsg): MsgWithdrawLease {
+    return MsgWithdrawLease.decode(message.value);
+  },
+
+  toProto(message: MsgWithdrawLease): Uint8Array {
+    return MsgWithdrawLease.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgWithdrawLease): MsgWithdrawLeaseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgWithdrawLease",
+      value: MsgWithdrawLease.encode(message).finish()
+    };
   }
 
 };
@@ -1038,6 +1152,25 @@ export const MsgWithdrawLeaseResponse = {
   toAmino(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgWithdrawLeaseResponseAminoMsg): MsgWithdrawLeaseResponse {
+    return MsgWithdrawLeaseResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgWithdrawLeaseResponseProtoMsg): MsgWithdrawLeaseResponse {
+    return MsgWithdrawLeaseResponse.decode(message.value);
+  },
+
+  toProto(message: MsgWithdrawLeaseResponse): Uint8Array {
+    return MsgWithdrawLeaseResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgWithdrawLeaseResponse",
+      value: MsgWithdrawLeaseResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1121,6 +1254,25 @@ export const MsgCloseLease = {
     const obj: any = {};
     obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {
+    return MsgCloseLease.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseLeaseProtoMsg): MsgCloseLease {
+    return MsgCloseLease.decode(message.value);
+  },
+
+  toProto(message: MsgCloseLease): Uint8Array {
+    return MsgCloseLease.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseLease): MsgCloseLeaseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCloseLease",
+      value: MsgCloseLease.encode(message).finish()
+    };
   }
 
 };
@@ -1184,6 +1336,25 @@ export const MsgCloseLeaseResponse = {
   toAmino(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseLeaseResponseAminoMsg): MsgCloseLeaseResponse {
+    return MsgCloseLeaseResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseLeaseResponseProtoMsg): MsgCloseLeaseResponse {
+    return MsgCloseLeaseResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCloseLeaseResponse): Uint8Array {
+    return MsgCloseLeaseResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseLeaseResponse): MsgCloseLeaseResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.MsgCloseLeaseResponse",
+      value: MsgCloseLeaseResponse.encode(message).finish()
+    };
   }
 
 };

@@ -13,7 +13,7 @@ export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
   address: string;
 }
-export interface QueryContractInfoRequestProtoType {
+export interface QueryContractInfoRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface QueryContractInfoRequestAmino {
   /** address is the address of the contract to query */
   address: string;
 }
-export interface QueryContractInfoRequestAminoType {
+export interface QueryContractInfoRequestAminoMsg {
   type: "wasm/QueryContractInfoRequest";
   value: QueryContractInfoRequestAmino;
 }
@@ -48,7 +48,7 @@ export interface QueryContractInfoResponse {
   address: string;
   contractInfo?: ContractInfo;
 }
-export interface QueryContractInfoResponseProtoType {
+export interface QueryContractInfoResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse";
   value: Uint8Array;
 }
@@ -62,7 +62,7 @@ export interface QueryContractInfoResponseAmino {
   address: string;
   contract_info?: ContractInfoAmino;
 }
-export interface QueryContractInfoResponseAminoType {
+export interface QueryContractInfoResponseAminoMsg {
   type: "wasm/QueryContractInfoResponse";
   value: QueryContractInfoResponseAmino;
 }
@@ -87,7 +87,7 @@ export interface QueryContractHistoryRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryContractHistoryRequestProtoType {
+export interface QueryContractHistoryRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest";
   value: Uint8Array;
 }
@@ -103,7 +103,7 @@ export interface QueryContractHistoryRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryContractHistoryRequestAminoType {
+export interface QueryContractHistoryRequestAminoMsg {
   type: "wasm/QueryContractHistoryRequest";
   value: QueryContractHistoryRequestAmino;
 }
@@ -127,7 +127,7 @@ export interface QueryContractHistoryResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryContractHistoryResponseProtoType {
+export interface QueryContractHistoryResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse";
   value: Uint8Array;
 }
@@ -142,7 +142,7 @@ export interface QueryContractHistoryResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryContractHistoryResponseAminoType {
+export interface QueryContractHistoryResponseAminoMsg {
   type: "wasm/QueryContractHistoryResponse";
   value: QueryContractHistoryResponseAmino;
 }
@@ -168,7 +168,7 @@ export interface QueryContractsByCodeRequest {
   codeId: Long;
   pagination?: PageRequest;
 }
-export interface QueryContractsByCodeRequestProtoType {
+export interface QueryContractsByCodeRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest";
   value: Uint8Array;
 }
@@ -185,7 +185,7 @@ export interface QueryContractsByCodeRequestAmino {
   code_id: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryContractsByCodeRequestAminoType {
+export interface QueryContractsByCodeRequestAminoMsg {
   type: "wasm/QueryContractsByCodeRequest";
   value: QueryContractsByCodeRequestAmino;
 }
@@ -210,7 +210,7 @@ export interface QueryContractsByCodeResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryContractsByCodeResponseProtoType {
+export interface QueryContractsByCodeResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse";
   value: Uint8Array;
 }
@@ -226,7 +226,7 @@ export interface QueryContractsByCodeResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryContractsByCodeResponseAminoType {
+export interface QueryContractsByCodeResponseAminoMsg {
   type: "wasm/QueryContractsByCodeResponse";
   value: QueryContractsByCodeResponseAmino;
 }
@@ -251,7 +251,7 @@ export interface QueryAllContractStateRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryAllContractStateRequestProtoType {
+export interface QueryAllContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest";
   value: Uint8Array;
 }
@@ -267,7 +267,7 @@ export interface QueryAllContractStateRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryAllContractStateRequestAminoType {
+export interface QueryAllContractStateRequestAminoMsg {
   type: "wasm/QueryAllContractStateRequest";
   value: QueryAllContractStateRequestAmino;
 }
@@ -291,7 +291,7 @@ export interface QueryAllContractStateResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryAllContractStateResponseProtoType {
+export interface QueryAllContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse";
   value: Uint8Array;
 }
@@ -306,7 +306,7 @@ export interface QueryAllContractStateResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryAllContractStateResponseAminoType {
+export interface QueryAllContractStateResponseAminoMsg {
   type: "wasm/QueryAllContractStateResponse";
   value: QueryAllContractStateResponseAmino;
 }
@@ -329,7 +329,7 @@ export interface QueryRawContractStateRequest {
   address: string;
   queryData: Uint8Array;
 }
-export interface QueryRawContractStateRequestProtoType {
+export interface QueryRawContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest";
   value: Uint8Array;
 }
@@ -343,7 +343,7 @@ export interface QueryRawContractStateRequestAmino {
   address: string;
   query_data: Uint8Array;
 }
-export interface QueryRawContractStateRequestAminoType {
+export interface QueryRawContractStateRequestAminoMsg {
   type: "wasm/QueryRawContractStateRequest";
   value: QueryRawContractStateRequestAmino;
 }
@@ -365,7 +365,7 @@ export interface QueryRawContractStateResponse {
   /** Data contains the raw store data */
   data: Uint8Array;
 }
-export interface QueryRawContractStateResponseProtoType {
+export interface QueryRawContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse";
   value: Uint8Array;
 }
@@ -378,7 +378,7 @@ export interface QueryRawContractStateResponseAmino {
   /** Data contains the raw store data */
   data: Uint8Array;
 }
-export interface QueryRawContractStateResponseAminoType {
+export interface QueryRawContractStateResponseAminoMsg {
   type: "wasm/QueryRawContractStateResponse";
   value: QueryRawContractStateResponseAmino;
 }
@@ -402,7 +402,7 @@ export interface QuerySmartContractStateRequest {
   /** QueryData contains the query data passed to the contract */
   queryData: Uint8Array;
 }
-export interface QuerySmartContractStateRequestProtoType {
+export interface QuerySmartContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest";
   value: Uint8Array;
 }
@@ -418,7 +418,7 @@ export interface QuerySmartContractStateRequestAmino {
   /** QueryData contains the query data passed to the contract */
   query_data: Uint8Array;
 }
-export interface QuerySmartContractStateRequestAminoType {
+export interface QuerySmartContractStateRequestAminoMsg {
   type: "wasm/QuerySmartContractStateRequest";
   value: QuerySmartContractStateRequestAmino;
 }
@@ -440,7 +440,7 @@ export interface QuerySmartContractStateResponse {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
-export interface QuerySmartContractStateResponseProtoType {
+export interface QuerySmartContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse";
   value: Uint8Array;
 }
@@ -453,7 +453,7 @@ export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
-export interface QuerySmartContractStateResponseAminoType {
+export interface QuerySmartContractStateResponseAminoMsg {
   type: "wasm/QuerySmartContractStateResponse";
   value: QuerySmartContractStateResponseAmino;
 }
@@ -471,7 +471,7 @@ export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
   codeId: Long;
 }
-export interface QueryCodeRequestProtoType {
+export interface QueryCodeRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest";
   value: Uint8Array;
 }
@@ -481,7 +481,7 @@ export interface QueryCodeRequestAmino {
   /** grpc-gateway_out does not support Go style CodID */
   code_id: string;
 }
-export interface QueryCodeRequestAminoType {
+export interface QueryCodeRequestAminoMsg {
   type: "wasm/QueryCodeRequest";
   value: QueryCodeRequestAmino;
 }
@@ -497,7 +497,7 @@ export interface CodeInfoResponse {
   creator: string;
   dataHash: Uint8Array;
 }
-export interface CodeInfoResponseProtoType {
+export interface CodeInfoResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse";
   value: Uint8Array;
 }
@@ -508,7 +508,7 @@ export interface CodeInfoResponseAmino {
   creator: string;
   data_hash: Uint8Array;
 }
-export interface CodeInfoResponseAminoType {
+export interface CodeInfoResponseAminoMsg {
   type: "wasm/CodeInfoResponse";
   value: CodeInfoResponseAmino;
 }
@@ -525,7 +525,7 @@ export interface QueryCodeResponse {
   codeInfo?: CodeInfoResponse;
   data: Uint8Array;
 }
-export interface QueryCodeResponseProtoType {
+export interface QueryCodeResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse";
   value: Uint8Array;
 }
@@ -535,7 +535,7 @@ export interface QueryCodeResponseAmino {
   code_info?: CodeInfoResponseAmino;
   data: Uint8Array;
 }
-export interface QueryCodeResponseAminoType {
+export interface QueryCodeResponseAminoMsg {
   type: "wasm/QueryCodeResponse";
   value: QueryCodeResponseAmino;
 }
@@ -551,7 +551,7 @@ export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryCodesRequestProtoType {
+export interface QueryCodesRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest";
   value: Uint8Array;
 }
@@ -561,7 +561,7 @@ export interface QueryCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryCodesRequestAminoType {
+export interface QueryCodesRequestAminoMsg {
   type: "wasm/QueryCodesRequest";
   value: QueryCodesRequestAmino;
 }
@@ -578,7 +578,7 @@ export interface QueryCodesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryCodesResponseProtoType {
+export interface QueryCodesResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse";
   value: Uint8Array;
 }
@@ -590,7 +590,7 @@ export interface QueryCodesResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryCodesResponseAminoType {
+export interface QueryCodesResponseAminoMsg {
   type: "wasm/QueryCodesResponse";
   value: QueryCodesResponseAmino;
 }
@@ -609,7 +609,7 @@ export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryPinnedCodesRequestProtoType {
+export interface QueryPinnedCodesRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest";
   value: Uint8Array;
 }
@@ -622,7 +622,7 @@ export interface QueryPinnedCodesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryPinnedCodesRequestAminoType {
+export interface QueryPinnedCodesRequestAminoMsg {
   type: "wasm/QueryPinnedCodesRequest";
   value: QueryPinnedCodesRequestAmino;
 }
@@ -645,7 +645,7 @@ export interface QueryPinnedCodesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryPinnedCodesResponseProtoType {
+export interface QueryPinnedCodesResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse";
   value: Uint8Array;
 }
@@ -660,7 +660,7 @@ export interface QueryPinnedCodesResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryPinnedCodesResponseAminoType {
+export interface QueryPinnedCodesResponseAminoMsg {
   type: "wasm/QueryPinnedCodesResponse";
   value: QueryPinnedCodesResponseAmino;
 }
@@ -754,6 +754,32 @@ export const QueryContractInfoRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractInfoRequestAminoMsg): QueryContractInfoRequest {
+    return QueryContractInfoRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractInfoRequest): QueryContractInfoRequestAminoMsg {
+    return {
+      type: "wasm/QueryContractInfoRequest",
+      value: QueryContractInfoRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractInfoRequestProtoMsg): QueryContractInfoRequest {
+    return QueryContractInfoRequest.decode(message.value);
+  },
+
+  toProto(message: QueryContractInfoRequest): Uint8Array {
+    return QueryContractInfoRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractInfoRequest): QueryContractInfoRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest",
+      value: QueryContractInfoRequest.encode(message).finish()
+    };
   }
 
 };
@@ -854,6 +880,32 @@ export const QueryContractInfoResponse = {
     obj.address = message.address;
     obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractInfoResponseAminoMsg): QueryContractInfoResponse {
+    return QueryContractInfoResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractInfoResponse): QueryContractInfoResponseAminoMsg {
+    return {
+      type: "wasm/QueryContractInfoResponse",
+      value: QueryContractInfoResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractInfoResponseProtoMsg): QueryContractInfoResponse {
+    return QueryContractInfoResponse.decode(message.value);
+  },
+
+  toProto(message: QueryContractInfoResponse): Uint8Array {
+    return QueryContractInfoResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractInfoResponse): QueryContractInfoResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse",
+      value: QueryContractInfoResponse.encode(message).finish()
+    };
   }
 
 };
@@ -954,6 +1006,32 @@ export const QueryContractHistoryRequest = {
     obj.address = message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractHistoryRequestAminoMsg): QueryContractHistoryRequest {
+    return QueryContractHistoryRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractHistoryRequest): QueryContractHistoryRequestAminoMsg {
+    return {
+      type: "wasm/QueryContractHistoryRequest",
+      value: QueryContractHistoryRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractHistoryRequestProtoMsg): QueryContractHistoryRequest {
+    return QueryContractHistoryRequest.decode(message.value);
+  },
+
+  toProto(message: QueryContractHistoryRequest): Uint8Array {
+    return QueryContractHistoryRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractHistoryRequest): QueryContractHistoryRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest",
+      value: QueryContractHistoryRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1072,6 +1150,32 @@ export const QueryContractHistoryResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractHistoryResponseAminoMsg): QueryContractHistoryResponse {
+    return QueryContractHistoryResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractHistoryResponse): QueryContractHistoryResponseAminoMsg {
+    return {
+      type: "wasm/QueryContractHistoryResponse",
+      value: QueryContractHistoryResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractHistoryResponseProtoMsg): QueryContractHistoryResponse {
+    return QueryContractHistoryResponse.decode(message.value);
+  },
+
+  toProto(message: QueryContractHistoryResponse): Uint8Array {
+    return QueryContractHistoryResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractHistoryResponse): QueryContractHistoryResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse",
+      value: QueryContractHistoryResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1172,6 +1276,32 @@ export const QueryContractsByCodeRequest = {
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractsByCodeRequestAminoMsg): QueryContractsByCodeRequest {
+    return QueryContractsByCodeRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestAminoMsg {
+    return {
+      type: "wasm/QueryContractsByCodeRequest",
+      value: QueryContractsByCodeRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractsByCodeRequestProtoMsg): QueryContractsByCodeRequest {
+    return QueryContractsByCodeRequest.decode(message.value);
+  },
+
+  toProto(message: QueryContractsByCodeRequest): Uint8Array {
+    return QueryContractsByCodeRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractsByCodeRequest): QueryContractsByCodeRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest",
+      value: QueryContractsByCodeRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1290,6 +1420,32 @@ export const QueryContractsByCodeResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryContractsByCodeResponseAminoMsg): QueryContractsByCodeResponse {
+    return QueryContractsByCodeResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseAminoMsg {
+    return {
+      type: "wasm/QueryContractsByCodeResponse",
+      value: QueryContractsByCodeResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryContractsByCodeResponseProtoMsg): QueryContractsByCodeResponse {
+    return QueryContractsByCodeResponse.decode(message.value);
+  },
+
+  toProto(message: QueryContractsByCodeResponse): Uint8Array {
+    return QueryContractsByCodeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryContractsByCodeResponse): QueryContractsByCodeResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse",
+      value: QueryContractsByCodeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1390,6 +1546,32 @@ export const QueryAllContractStateRequest = {
     obj.address = message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllContractStateRequestAminoMsg): QueryAllContractStateRequest {
+    return QueryAllContractStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryAllContractStateRequest): QueryAllContractStateRequestAminoMsg {
+    return {
+      type: "wasm/QueryAllContractStateRequest",
+      value: QueryAllContractStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryAllContractStateRequestProtoMsg): QueryAllContractStateRequest {
+    return QueryAllContractStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryAllContractStateRequest): Uint8Array {
+    return QueryAllContractStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllContractStateRequest): QueryAllContractStateRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest",
+      value: QueryAllContractStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1508,6 +1690,32 @@ export const QueryAllContractStateResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllContractStateResponseAminoMsg): QueryAllContractStateResponse {
+    return QueryAllContractStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryAllContractStateResponse): QueryAllContractStateResponseAminoMsg {
+    return {
+      type: "wasm/QueryAllContractStateResponse",
+      value: QueryAllContractStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryAllContractStateResponseProtoMsg): QueryAllContractStateResponse {
+    return QueryAllContractStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryAllContractStateResponse): Uint8Array {
+    return QueryAllContractStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllContractStateResponse): QueryAllContractStateResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse",
+      value: QueryAllContractStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1608,6 +1816,32 @@ export const QueryRawContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
+    return QueryRawContractStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestAminoMsg {
+    return {
+      type: "wasm/QueryRawContractStateRequest",
+      value: QueryRawContractStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryRawContractStateRequestProtoMsg): QueryRawContractStateRequest {
+    return QueryRawContractStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryRawContractStateRequest): Uint8Array {
+    return QueryRawContractStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
+      value: QueryRawContractStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1692,6 +1926,32 @@ export const QueryRawContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryRawContractStateResponseAminoMsg): QueryRawContractStateResponse {
+    return QueryRawContractStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryRawContractStateResponse): QueryRawContractStateResponseAminoMsg {
+    return {
+      type: "wasm/QueryRawContractStateResponse",
+      value: QueryRawContractStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryRawContractStateResponseProtoMsg): QueryRawContractStateResponse {
+    return QueryRawContractStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryRawContractStateResponse): Uint8Array {
+    return QueryRawContractStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryRawContractStateResponse): QueryRawContractStateResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse",
+      value: QueryRawContractStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1792,6 +2052,32 @@ export const QuerySmartContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData ? JSON.parse(fromUtf8(message.queryData)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySmartContractStateRequestAminoMsg): QuerySmartContractStateRequest {
+    return QuerySmartContractStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestAminoMsg {
+    return {
+      type: "wasm/QuerySmartContractStateRequest",
+      value: QuerySmartContractStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySmartContractStateRequestProtoMsg): QuerySmartContractStateRequest {
+    return QuerySmartContractStateRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySmartContractStateRequest): Uint8Array {
+    return QuerySmartContractStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySmartContractStateRequest): QuerySmartContractStateRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest",
+      value: QuerySmartContractStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1876,6 +2162,32 @@ export const QuerySmartContractStateResponse = {
     const obj: any = {};
     obj.data = message.data ? JSON.parse(fromUtf8(message.data)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySmartContractStateResponseAminoMsg): QuerySmartContractStateResponse {
+    return QuerySmartContractStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseAminoMsg {
+    return {
+      type: "wasm/QuerySmartContractStateResponse",
+      value: QuerySmartContractStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySmartContractStateResponseProtoMsg): QuerySmartContractStateResponse {
+    return QuerySmartContractStateResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySmartContractStateResponse): Uint8Array {
+    return QuerySmartContractStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySmartContractStateResponse): QuerySmartContractStateResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse",
+      value: QuerySmartContractStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1960,6 +2272,32 @@ export const QueryCodeRequest = {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCodeRequestAminoMsg): QueryCodeRequest {
+    return QueryCodeRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCodeRequest): QueryCodeRequestAminoMsg {
+    return {
+      type: "wasm/QueryCodeRequest",
+      value: QueryCodeRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCodeRequestProtoMsg): QueryCodeRequest {
+    return QueryCodeRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCodeRequest): Uint8Array {
+    return QueryCodeRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCodeRequest): QueryCodeRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest",
+      value: QueryCodeRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2076,6 +2414,32 @@ export const CodeInfoResponse = {
     obj.creator = message.creator;
     obj.data_hash = message.dataHash;
     return obj;
+  },
+
+  fromAminoMsg(object: CodeInfoResponseAminoMsg): CodeInfoResponse {
+    return CodeInfoResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: CodeInfoResponse): CodeInfoResponseAminoMsg {
+    return {
+      type: "wasm/CodeInfoResponse",
+      value: CodeInfoResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CodeInfoResponseProtoMsg): CodeInfoResponse {
+    return CodeInfoResponse.decode(message.value);
+  },
+
+  toProto(message: CodeInfoResponse): Uint8Array {
+    return CodeInfoResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CodeInfoResponse): CodeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse",
+      value: CodeInfoResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2176,6 +2540,32 @@ export const QueryCodeResponse = {
     obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCodeResponseAminoMsg): QueryCodeResponse {
+    return QueryCodeResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCodeResponse): QueryCodeResponseAminoMsg {
+    return {
+      type: "wasm/QueryCodeResponse",
+      value: QueryCodeResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCodeResponseProtoMsg): QueryCodeResponse {
+    return QueryCodeResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCodeResponse): Uint8Array {
+    return QueryCodeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCodeResponse): QueryCodeResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse",
+      value: QueryCodeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2260,6 +2650,32 @@ export const QueryCodesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCodesRequestAminoMsg): QueryCodesRequest {
+    return QueryCodesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCodesRequest): QueryCodesRequestAminoMsg {
+    return {
+      type: "wasm/QueryCodesRequest",
+      value: QueryCodesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCodesRequestProtoMsg): QueryCodesRequest {
+    return QueryCodesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCodesRequest): Uint8Array {
+    return QueryCodesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCodesRequest): QueryCodesRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest",
+      value: QueryCodesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2378,6 +2794,32 @@ export const QueryCodesResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCodesResponseAminoMsg): QueryCodesResponse {
+    return QueryCodesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCodesResponse): QueryCodesResponseAminoMsg {
+    return {
+      type: "wasm/QueryCodesResponse",
+      value: QueryCodesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCodesResponseProtoMsg): QueryCodesResponse {
+    return QueryCodesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCodesResponse): Uint8Array {
+    return QueryCodesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCodesResponse): QueryCodesResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse",
+      value: QueryCodesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2462,6 +2904,32 @@ export const QueryPinnedCodesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPinnedCodesRequestAminoMsg): QueryPinnedCodesRequest {
+    return QueryPinnedCodesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestAminoMsg {
+    return {
+      type: "wasm/QueryPinnedCodesRequest",
+      value: QueryPinnedCodesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPinnedCodesRequestProtoMsg): QueryPinnedCodesRequest {
+    return QueryPinnedCodesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPinnedCodesRequest): Uint8Array {
+    return QueryPinnedCodesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPinnedCodesRequest): QueryPinnedCodesRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest",
+      value: QueryPinnedCodesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2593,6 +3061,32 @@ export const QueryPinnedCodesResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPinnedCodesResponseAminoMsg): QueryPinnedCodesResponse {
+    return QueryPinnedCodesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseAminoMsg {
+    return {
+      type: "wasm/QueryPinnedCodesResponse",
+      value: QueryPinnedCodesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPinnedCodesResponseProtoMsg): QueryPinnedCodesResponse {
+    return QueryPinnedCodesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPinnedCodesResponse): Uint8Array {
+    return QueryPinnedCodesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPinnedCodesResponse): QueryPinnedCodesResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse",
+      value: QueryPinnedCodesResponse.encode(message).finish()
+    };
   }
 
 };

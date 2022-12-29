@@ -92,7 +92,7 @@ export interface StakeAuthorization {
   /** authorization_type defines one of AuthorizationType. */
   authorizationType: AuthorizationType;
 }
-export interface StakeAuthorizationProtoType {
+export interface StakeAuthorizationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface StakeAuthorizationAmino {
   /** authorization_type defines one of AuthorizationType. */
   authorization_type: AuthorizationType;
 }
-export interface StakeAuthorizationAminoType {
+export interface StakeAuthorizationAminoMsg {
   type: "cosmos-sdk/StakeAuthorization";
   value: StakeAuthorizationAmino;
 }
@@ -142,7 +142,7 @@ export interface StakeAuthorizationSDKType {
 export interface StakeAuthorization_Validators {
   address: string[];
 }
-export interface StakeAuthorization_ValidatorsProtoType {
+export interface StakeAuthorization_ValidatorsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Validators";
   value: Uint8Array;
 }
@@ -151,7 +151,7 @@ export interface StakeAuthorization_ValidatorsProtoType {
 export interface StakeAuthorization_ValidatorsAmino {
   address: string[];
 }
-export interface StakeAuthorization_ValidatorsAminoType {
+export interface StakeAuthorization_ValidatorsAminoMsg {
   type: "cosmos-sdk/Validators";
   value: StakeAuthorization_ValidatorsAmino;
 }
@@ -289,6 +289,32 @@ export const StakeAuthorization = {
     obj.deny_list = message.denyList ? StakeAuthorization_Validators.toAmino(message.denyList) : undefined;
     obj.authorization_type = message.authorizationType;
     return obj;
+  },
+
+  fromAminoMsg(object: StakeAuthorizationAminoMsg): StakeAuthorization {
+    return StakeAuthorization.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StakeAuthorization): StakeAuthorizationAminoMsg {
+    return {
+      type: "cosmos-sdk/StakeAuthorization",
+      value: StakeAuthorization.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StakeAuthorizationProtoMsg): StakeAuthorization {
+    return StakeAuthorization.decode(message.value);
+  },
+
+  toProto(message: StakeAuthorization): Uint8Array {
+    return StakeAuthorization.encode(message).finish();
+  },
+
+  toProtoMsg(message: StakeAuthorization): StakeAuthorizationProtoMsg {
+    return {
+      typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
+      value: StakeAuthorization.encode(message).finish()
+    };
   }
 
 };
@@ -391,6 +417,32 @@ export const StakeAuthorization_Validators = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: StakeAuthorization_ValidatorsAminoMsg): StakeAuthorization_Validators {
+    return StakeAuthorization_Validators.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsAminoMsg {
+    return {
+      type: "cosmos-sdk/Validators",
+      value: StakeAuthorization_Validators.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg): StakeAuthorization_Validators {
+    return StakeAuthorization_Validators.decode(message.value);
+  },
+
+  toProto(message: StakeAuthorization_Validators): Uint8Array {
+    return StakeAuthorization_Validators.encode(message).finish();
+  },
+
+  toProtoMsg(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsProtoMsg {
+    return {
+      typeUrl: "/cosmos.staking.v1beta1.Validators",
+      value: StakeAuthorization_Validators.encode(message).finish()
+    };
   }
 
 };

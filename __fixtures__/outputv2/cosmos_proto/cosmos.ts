@@ -65,7 +65,7 @@ export interface InterfaceDescriptor {
    */
   description: string;
 }
-export interface InterfaceDescriptorProtoType {
+export interface InterfaceDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.InterfaceDescriptor";
   value: Uint8Array;
 }
@@ -89,7 +89,7 @@ export interface InterfaceDescriptorAmino {
    */
   description: string;
 }
-export interface InterfaceDescriptorAminoType {
+export interface InterfaceDescriptorAminoMsg {
   type: "/cosmos_proto.InterfaceDescriptor";
   value: InterfaceDescriptorAmino;
 }
@@ -136,7 +136,7 @@ export interface ScalarDescriptor {
    */
   fieldType: ScalarType[];
 }
-export interface ScalarDescriptorProtoType {
+export interface ScalarDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.ScalarDescriptor";
   value: Uint8Array;
 }
@@ -174,7 +174,7 @@ export interface ScalarDescriptorAmino {
    */
   field_type: ScalarType[];
 }
-export interface ScalarDescriptorAminoType {
+export interface ScalarDescriptorAminoMsg {
   type: "/cosmos_proto.ScalarDescriptor";
   value: ScalarDescriptorAmino;
 }
@@ -289,6 +289,25 @@ export const InterfaceDescriptor = {
     obj.name = message.name;
     obj.description = message.description;
     return obj;
+  },
+
+  fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.decode(message.value);
+  },
+
+  toProto(message: InterfaceDescriptor): Uint8Array {
+    return InterfaceDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: InterfaceDescriptor): InterfaceDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos_proto.InterfaceDescriptor",
+      value: InterfaceDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -434,6 +453,25 @@ export const ScalarDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ScalarDescriptorAminoMsg): ScalarDescriptor {
+    return ScalarDescriptor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ScalarDescriptorProtoMsg): ScalarDescriptor {
+    return ScalarDescriptor.decode(message.value);
+  },
+
+  toProto(message: ScalarDescriptor): Uint8Array {
+    return ScalarDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: ScalarDescriptor): ScalarDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos_proto.ScalarDescriptor",
+      value: ScalarDescriptor.encode(message).finish()
+    };
   }
 
 };

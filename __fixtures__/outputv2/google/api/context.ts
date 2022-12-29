@@ -48,7 +48,7 @@ export interface Context {
    */
   rules: ContextRule[];
 }
-export interface ContextProtoType {
+export interface ContextProtoMsg {
   typeUrl: "/google.api.Context";
   value: Uint8Array;
 }
@@ -99,7 +99,7 @@ export interface ContextAmino {
    */
   rules: ContextRuleAmino[];
 }
-export interface ContextAminoType {
+export interface ContextAminoMsg {
   type: "/google.api.Context";
   value: ContextAmino;
 }
@@ -176,7 +176,7 @@ export interface ContextRule {
    */
   allowedResponseExtensions: string[];
 }
-export interface ContextRuleProtoType {
+export interface ContextRuleProtoMsg {
   typeUrl: "/google.api.ContextRule";
   value: Uint8Array;
 }
@@ -211,7 +211,7 @@ export interface ContextRuleAmino {
    */
   allowed_response_extensions: string[];
 }
-export interface ContextRuleAminoType {
+export interface ContextRuleAminoMsg {
   type: "/google.api.ContextRule";
   value: ContextRuleAmino;
 }
@@ -325,6 +325,25 @@ export const Context = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ContextAminoMsg): Context {
+    return Context.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContextProtoMsg): Context {
+    return Context.decode(message.value);
+  },
+
+  toProto(message: Context): Uint8Array {
+    return Context.encode(message).finish();
+  },
+
+  toProtoMsg(message: Context): ContextProtoMsg {
+    return {
+      typeUrl: "/google.api.Context",
+      value: Context.encode(message).finish()
+    };
   }
 
 };
@@ -535,6 +554,25 @@ export const ContextRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ContextRuleAminoMsg): ContextRule {
+    return ContextRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContextRuleProtoMsg): ContextRule {
+    return ContextRule.decode(message.value);
+  },
+
+  toProto(message: ContextRule): Uint8Array {
+    return ContextRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: ContextRule): ContextRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.ContextRule",
+      value: ContextRule.encode(message).finish()
+    };
   }
 
 };

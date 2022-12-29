@@ -64,7 +64,7 @@ export interface Distribution {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
-export interface DistributionProtoType {
+export interface DistributionProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.Distribution";
   value: Uint8Array;
 }
@@ -130,7 +130,7 @@ export interface DistributionAmino {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
-export interface DistributionAminoType {
+export interface DistributionAminoMsg {
   type: "/google.api.servicecontrol.v1.Distribution";
   value: DistributionAmino;
 }
@@ -182,7 +182,7 @@ export interface Distribution_LinearBuckets {
    */
   offset: number;
 }
-export interface Distribution_LinearBucketsProtoType {
+export interface Distribution_LinearBucketsProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LinearBuckets";
   value: Uint8Array;
 }
@@ -211,7 +211,7 @@ export interface Distribution_LinearBucketsAmino {
    */
   offset: number;
 }
-export interface Distribution_LinearBucketsAminoType {
+export interface Distribution_LinearBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.LinearBuckets";
   value: Distribution_LinearBucketsAmino;
 }
@@ -248,7 +248,7 @@ export interface Distribution_ExponentialBuckets {
    */
   scale: number;
 }
-export interface Distribution_ExponentialBucketsProtoType {
+export interface Distribution_ExponentialBucketsProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets";
   value: Uint8Array;
 }
@@ -278,7 +278,7 @@ export interface Distribution_ExponentialBucketsAmino {
    */
   scale: number;
 }
-export interface Distribution_ExponentialBucketsAminoType {
+export interface Distribution_ExponentialBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExponentialBuckets";
   value: Distribution_ExponentialBucketsAmino;
 }
@@ -311,7 +311,7 @@ export interface Distribution_ExplicitBuckets {
    */
   bounds: number[];
 }
-export interface Distribution_ExplicitBucketsProtoType {
+export interface Distribution_ExplicitBucketsProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets";
   value: Uint8Array;
 }
@@ -337,7 +337,7 @@ export interface Distribution_ExplicitBucketsAmino {
    */
   bounds: number[];
 }
-export interface Distribution_ExplicitBucketsAminoType {
+export interface Distribution_ExplicitBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExplicitBuckets";
   value: Distribution_ExplicitBucketsAmino;
 }
@@ -619,6 +619,25 @@ export const Distribution = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DistributionAminoMsg): Distribution {
+    return Distribution.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DistributionProtoMsg): Distribution {
+    return Distribution.decode(message.value);
+  },
+
+  toProto(message: Distribution): Uint8Array {
+    return Distribution.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution): DistributionProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.Distribution",
+      value: Distribution.encode(message).finish()
+    };
   }
 
 };
@@ -734,6 +753,25 @@ export const Distribution_LinearBuckets = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
+    return Distribution_LinearBuckets.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_LinearBucketsProtoMsg): Distribution_LinearBuckets {
+    return Distribution_LinearBuckets.decode(message.value);
+  },
+
+  toProto(message: Distribution_LinearBuckets): Uint8Array {
+    return Distribution_LinearBuckets.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_LinearBuckets): Distribution_LinearBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
+      value: Distribution_LinearBuckets.encode(message).finish()
+    };
   }
 
 };
@@ -849,6 +887,25 @@ export const Distribution_ExponentialBuckets = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
+    return Distribution_ExponentialBuckets.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg): Distribution_ExponentialBuckets {
+    return Distribution_ExponentialBuckets.decode(message.value);
+  },
+
+  toProto(message: Distribution_ExponentialBuckets): Uint8Array {
+    return Distribution_ExponentialBuckets.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
+      value: Distribution_ExponentialBuckets.encode(message).finish()
+    };
   }
 
 };
@@ -962,6 +1019,25 @@ export const Distribution_ExplicitBuckets = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_ExplicitBucketsAminoMsg): Distribution_ExplicitBuckets {
+    return Distribution_ExplicitBuckets.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg): Distribution_ExplicitBuckets {
+    return Distribution_ExplicitBuckets.decode(message.value);
+  },
+
+  toProto(message: Distribution_ExplicitBuckets): Uint8Array {
+    return Distribution_ExplicitBuckets.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
+      value: Distribution_ExplicitBuckets.encode(message).finish()
+    };
   }
 
 };

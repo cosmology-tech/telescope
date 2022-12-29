@@ -14,7 +14,7 @@ export interface QueryConnectionRequest {
   /** connection unique identifier */
   connectionId: string;
 }
-export interface QueryConnectionRequestProtoType {
+export interface QueryConnectionRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface QueryConnectionRequestAmino {
   /** connection unique identifier */
   connection_id: string;
 }
-export interface QueryConnectionRequestAminoType {
+export interface QueryConnectionRequestAminoMsg {
   type: "cosmos-sdk/QueryConnectionRequest";
   value: QueryConnectionRequestAmino;
 }
@@ -55,7 +55,7 @@ export interface QueryConnectionResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryConnectionResponseProtoType {
+export interface QueryConnectionResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface QueryConnectionResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConnectionResponseAminoType {
+export interface QueryConnectionResponseAminoMsg {
   type: "cosmos-sdk/QueryConnectionResponse";
   value: QueryConnectionResponseAmino;
 }
@@ -98,7 +98,7 @@ export interface QueryConnectionResponseSDKType {
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
 }
-export interface QueryConnectionsRequestProtoType {
+export interface QueryConnectionsRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest";
   value: Uint8Array;
 }
@@ -110,7 +110,7 @@ export interface QueryConnectionsRequestProtoType {
 export interface QueryConnectionsRequestAmino {
   pagination?: PageRequestAmino;
 }
-export interface QueryConnectionsRequestAminoType {
+export interface QueryConnectionsRequestAminoMsg {
   type: "cosmos-sdk/QueryConnectionsRequest";
   value: QueryConnectionsRequestAmino;
 }
@@ -137,7 +137,7 @@ export interface QueryConnectionsResponse {
   /** query block height */
   height?: Height;
 }
-export interface QueryConnectionsResponseProtoType {
+export interface QueryConnectionsResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse";
   value: Uint8Array;
 }
@@ -156,7 +156,7 @@ export interface QueryConnectionsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryConnectionsResponseAminoType {
+export interface QueryConnectionsResponseAminoMsg {
   type: "cosmos-sdk/QueryConnectionsResponse";
   value: QueryConnectionsResponseAmino;
 }
@@ -179,7 +179,7 @@ export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
   clientId: string;
 }
-export interface QueryClientConnectionsRequestProtoType {
+export interface QueryClientConnectionsRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest";
   value: Uint8Array;
 }
@@ -192,7 +192,7 @@ export interface QueryClientConnectionsRequestAmino {
   /** client identifier associated with a connection */
   client_id: string;
 }
-export interface QueryClientConnectionsRequestAminoType {
+export interface QueryClientConnectionsRequestAminoMsg {
   type: "cosmos-sdk/QueryClientConnectionsRequest";
   value: QueryClientConnectionsRequestAmino;
 }
@@ -219,7 +219,7 @@ export interface QueryClientConnectionsResponse {
   /** height at which the proof was generated */
   proofHeight?: Height;
 }
-export interface QueryClientConnectionsResponseProtoType {
+export interface QueryClientConnectionsResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse";
   value: Uint8Array;
 }
@@ -238,7 +238,7 @@ export interface QueryClientConnectionsResponseAmino {
   /** height at which the proof was generated */
   proof_height?: HeightAmino;
 }
-export interface QueryClientConnectionsResponseAminoType {
+export interface QueryClientConnectionsResponseAminoMsg {
   type: "cosmos-sdk/QueryClientConnectionsResponse";
   value: QueryClientConnectionsResponseAmino;
 }
@@ -261,7 +261,7 @@ export interface QueryConnectionClientStateRequest {
   /** connection identifier */
   connectionId: string;
 }
-export interface QueryConnectionClientStateRequestProtoType {
+export interface QueryConnectionClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest";
   value: Uint8Array;
 }
@@ -274,7 +274,7 @@ export interface QueryConnectionClientStateRequestAmino {
   /** connection identifier */
   connection_id: string;
 }
-export interface QueryConnectionClientStateRequestAminoType {
+export interface QueryConnectionClientStateRequestAminoMsg {
   type: "cosmos-sdk/QueryConnectionClientStateRequest";
   value: QueryConnectionClientStateRequestAmino;
 }
@@ -301,7 +301,7 @@ export interface QueryConnectionClientStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryConnectionClientStateResponseProtoType {
+export interface QueryConnectionClientStateResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse";
   value: Uint8Array;
 }
@@ -320,7 +320,7 @@ export interface QueryConnectionClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConnectionClientStateResponseAminoType {
+export interface QueryConnectionClientStateResponseAminoMsg {
   type: "cosmos-sdk/QueryConnectionClientStateResponse";
   value: QueryConnectionClientStateResponseAmino;
 }
@@ -345,7 +345,7 @@ export interface QueryConnectionConsensusStateRequest {
   revisionNumber: Long;
   revisionHeight: Long;
 }
-export interface QueryConnectionConsensusStateRequestProtoType {
+export interface QueryConnectionConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest";
   value: Uint8Array;
 }
@@ -360,7 +360,7 @@ export interface QueryConnectionConsensusStateRequestAmino {
   revision_number: string;
   revision_height: string;
 }
-export interface QueryConnectionConsensusStateRequestAminoType {
+export interface QueryConnectionConsensusStateRequestAminoMsg {
   type: "cosmos-sdk/QueryConnectionConsensusStateRequest";
   value: QueryConnectionConsensusStateRequestAmino;
 }
@@ -392,7 +392,7 @@ export interface QueryConnectionConsensusStateResponse {
   /** height at which the proof was retrieved */
   proofHeight?: Height;
 }
-export interface QueryConnectionConsensusStateResponseProtoType {
+export interface QueryConnectionConsensusStateResponseProtoMsg {
   typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse";
   value: Uint8Array;
 }
@@ -414,7 +414,7 @@ export interface QueryConnectionConsensusStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConnectionConsensusStateResponseAminoType {
+export interface QueryConnectionConsensusStateResponseAminoMsg {
   type: "cosmos-sdk/QueryConnectionConsensusStateResponse";
   value: QueryConnectionConsensusStateResponseAmino;
 }
@@ -510,6 +510,32 @@ export const QueryConnectionRequest = {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionRequestAminoMsg): QueryConnectionRequest {
+    return QueryConnectionRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionRequest): QueryConnectionRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionRequest",
+      value: QueryConnectionRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionRequestProtoMsg): QueryConnectionRequest {
+    return QueryConnectionRequest.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionRequest): Uint8Array {
+    return QueryConnectionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionRequest): QueryConnectionRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionRequest",
+      value: QueryConnectionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -626,6 +652,32 @@ export const QueryConnectionResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionResponseAminoMsg): QueryConnectionResponse {
+    return QueryConnectionResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionResponse): QueryConnectionResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionResponse",
+      value: QueryConnectionResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionResponseProtoMsg): QueryConnectionResponse {
+    return QueryConnectionResponse.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionResponse): Uint8Array {
+    return QueryConnectionResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionResponse): QueryConnectionResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionResponse",
+      value: QueryConnectionResponse.encode(message).finish()
+    };
   }
 
 };
@@ -710,6 +762,32 @@ export const QueryConnectionsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionsRequestAminoMsg): QueryConnectionsRequest {
+    return QueryConnectionsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionsRequest): QueryConnectionsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionsRequest",
+      value: QueryConnectionsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionsRequestProtoMsg): QueryConnectionsRequest {
+    return QueryConnectionsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionsRequest): Uint8Array {
+    return QueryConnectionsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionsRequest): QueryConnectionsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionsRequest",
+      value: QueryConnectionsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -844,6 +922,32 @@ export const QueryConnectionsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionsResponseAminoMsg): QueryConnectionsResponse {
+    return QueryConnectionsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionsResponse): QueryConnectionsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionsResponse",
+      value: QueryConnectionsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionsResponseProtoMsg): QueryConnectionsResponse {
+    return QueryConnectionsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionsResponse): Uint8Array {
+    return QueryConnectionsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionsResponse): QueryConnectionsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionsResponse",
+      value: QueryConnectionsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -928,6 +1032,32 @@ export const QueryClientConnectionsRequest = {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClientConnectionsRequestAminoMsg): QueryClientConnectionsRequest {
+    return QueryClientConnectionsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientConnectionsRequest",
+      value: QueryClientConnectionsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg): QueryClientConnectionsRequest {
+    return QueryClientConnectionsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryClientConnectionsRequest): Uint8Array {
+    return QueryClientConnectionsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsRequest",
+      value: QueryClientConnectionsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1062,6 +1192,32 @@ export const QueryClientConnectionsResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClientConnectionsResponseAminoMsg): QueryClientConnectionsResponse {
+    return QueryClientConnectionsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryClientConnectionsResponse",
+      value: QueryClientConnectionsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg): QueryClientConnectionsResponse {
+    return QueryClientConnectionsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryClientConnectionsResponse): Uint8Array {
+    return QueryClientConnectionsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryClientConnectionsResponse",
+      value: QueryClientConnectionsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1146,6 +1302,32 @@ export const QueryConnectionClientStateRequest = {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionClientStateRequestAminoMsg): QueryConnectionClientStateRequest {
+    return QueryConnectionClientStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionClientStateRequest",
+      value: QueryConnectionClientStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg): QueryConnectionClientStateRequest {
+    return QueryConnectionClientStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionClientStateRequest): Uint8Array {
+    return QueryConnectionClientStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateRequest",
+      value: QueryConnectionClientStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1262,6 +1444,32 @@ export const QueryConnectionClientStateResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionClientStateResponseAminoMsg): QueryConnectionClientStateResponse {
+    return QueryConnectionClientStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionClientStateResponse",
+      value: QueryConnectionClientStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg): QueryConnectionClientStateResponse {
+    return QueryConnectionClientStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionClientStateResponse): Uint8Array {
+    return QueryConnectionClientStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionClientStateResponse",
+      value: QueryConnectionClientStateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1378,6 +1586,32 @@ export const QueryConnectionConsensusStateRequest = {
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionConsensusStateRequestAminoMsg): QueryConnectionConsensusStateRequest {
+    return QueryConnectionConsensusStateRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionConsensusStateRequest",
+      value: QueryConnectionConsensusStateRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg): QueryConnectionConsensusStateRequest {
+    return QueryConnectionConsensusStateRequest.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionConsensusStateRequest): Uint8Array {
+    return QueryConnectionConsensusStateRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateRequest",
+      value: QueryConnectionConsensusStateRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1510,6 +1744,32 @@ export const QueryConnectionConsensusStateResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryConnectionConsensusStateResponseAminoMsg): QueryConnectionConsensusStateResponse {
+    return QueryConnectionConsensusStateResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConnectionConsensusStateResponse",
+      value: QueryConnectionConsensusStateResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg): QueryConnectionConsensusStateResponse {
+    return QueryConnectionConsensusStateResponse.decode(message.value);
+  },
+
+  toProto(message: QueryConnectionConsensusStateResponse): Uint8Array {
+    return QueryConnectionConsensusStateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.QueryConnectionConsensusStateResponse",
+      value: QueryConnectionConsensusStateResponse.encode(message).finish()
+    };
   }
 
 };

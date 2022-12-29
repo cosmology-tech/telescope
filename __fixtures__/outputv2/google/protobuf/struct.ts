@@ -41,7 +41,7 @@ export interface Struct_FieldsEntry {
   key: string;
   value?: Value;
 }
-export interface Struct_FieldsEntryProtoType {
+export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -49,7 +49,7 @@ export interface Struct_FieldsEntryAmino {
   key: string;
   value?: ValueAmino;
 }
-export interface Struct_FieldsEntryAminoType {
+export interface Struct_FieldsEntryAminoMsg {
   type: string;
   value: Struct_FieldsEntryAmino;
 }
@@ -74,7 +74,7 @@ export interface Struct {
     [key: string]: Value;
   };
 }
-export interface StructProtoType {
+export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
   value: Uint8Array;
 }
@@ -95,7 +95,7 @@ export interface StructAmino {
     [key: string]: ValueAmino;
   };
 }
-export interface StructAminoType {
+export interface StructAminoMsg {
   type: "/google.protobuf.Struct";
   value: StructAmino;
 }
@@ -143,7 +143,7 @@ export interface Value {
   /** Represents a repeated `Value`. */
   listValue?: ListValue;
 }
-export interface ValueProtoType {
+export interface ValueProtoMsg {
   typeUrl: "/google.protobuf.Value";
   value: Uint8Array;
 }
@@ -175,7 +175,7 @@ export interface ValueAmino {
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
-export interface ValueAminoType {
+export interface ValueAminoMsg {
   type: "/google.protobuf.Value";
   value: ValueAmino;
 }
@@ -206,7 +206,7 @@ export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
 }
-export interface ListValueProtoType {
+export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
 }
@@ -220,7 +220,7 @@ export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
   values: ValueAmino[];
 }
-export interface ListValueAminoType {
+export interface ListValueAminoMsg {
   type: "/google.protobuf.ListValue";
   value: ListValueAmino;
 }
@@ -327,6 +327,18 @@ export const Struct_FieldsEntry = {
     obj.key = message.key;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
+    return Struct_FieldsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
+    return Struct_FieldsEntry.decode(message.value);
+  },
+
+  toProto(message: Struct_FieldsEntry): Uint8Array {
+    return Struct_FieldsEntry.encode(message).finish();
   }
 
 };
@@ -461,6 +473,25 @@ export const Struct = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: StructAminoMsg): Struct {
+    return Struct.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: StructProtoMsg): Struct {
+    return Struct.decode(message.value);
+  },
+
+  toProto(message: Struct): Uint8Array {
+    return Struct.encode(message).finish();
+  },
+
+  toProtoMsg(message: Struct): StructProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Struct",
+      value: Struct.encode(message).finish()
+    };
   }
 
 };
@@ -624,6 +655,25 @@ export const Value = {
     obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ValueAminoMsg): Value {
+    return Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValueProtoMsg): Value {
+    return Value.decode(message.value);
+  },
+
+  toProto(message: Value): Uint8Array {
+    return Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: Value): ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Value",
+      value: Value.encode(message).finish()
+    };
   }
 
 };
@@ -725,6 +775,25 @@ export const ListValue = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ListValueAminoMsg): ListValue {
+    return ListValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListValueProtoMsg): ListValue {
+    return ListValue.decode(message.value);
+  },
+
+  toProto(message: ListValue): Uint8Array {
+    return ListValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListValue): ListValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.ListValue",
+      value: ListValue.encode(message).finish()
+    };
   }
 
 };

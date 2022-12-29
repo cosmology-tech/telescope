@@ -147,7 +147,7 @@ export interface ClientState {
    */
   allowUpdateAfterProposal: boolean;
 }
-export interface ClientStateProtoType {
+export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ClientState";
   value: Uint8Array;
 }
@@ -170,7 +170,7 @@ export interface ClientStateAmino {
    */
   allow_update_after_proposal: boolean;
 }
-export interface ClientStateAminoType {
+export interface ClientStateAminoMsg {
   type: "cosmos-sdk/ClientState";
   value: ClientStateAmino;
 }
@@ -203,7 +203,7 @@ export interface ConsensusState {
   diversifier: string;
   timestamp: Long;
 }
-export interface ConsensusStateProtoType {
+export interface ConsensusStateProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusState";
   value: Uint8Array;
 }
@@ -225,7 +225,7 @@ export interface ConsensusStateAmino {
   diversifier: string;
   timestamp: string;
 }
-export interface ConsensusStateAminoType {
+export interface ConsensusStateAminoMsg {
   type: "cosmos-sdk/ConsensusState";
   value: ConsensusStateAmino;
 }
@@ -250,7 +250,7 @@ export interface Header {
   newPublicKey?: Any;
   newDiversifier: string;
 }
-export interface HeaderProtoType {
+export interface HeaderProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.Header";
   value: Uint8Array;
 }
@@ -264,7 +264,7 @@ export interface HeaderAmino {
   new_public_key?: AnyAmino;
   new_diversifier: string;
 }
-export interface HeaderAminoType {
+export interface HeaderAminoMsg {
   type: "cosmos-sdk/Header";
   value: HeaderAmino;
 }
@@ -288,7 +288,7 @@ export interface Misbehaviour {
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
 }
-export interface MisbehaviourProtoType {
+export interface MisbehaviourProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.Misbehaviour";
   value: Uint8Array;
 }
@@ -303,7 +303,7 @@ export interface MisbehaviourAmino {
   signature_one?: SignatureAndDataAmino;
   signature_two?: SignatureAndDataAmino;
 }
-export interface MisbehaviourAminoType {
+export interface MisbehaviourAminoMsg {
   type: "cosmos-sdk/Misbehaviour";
   value: MisbehaviourAmino;
 }
@@ -329,7 +329,7 @@ export interface SignatureAndData {
   data: Uint8Array;
   timestamp: Long;
 }
-export interface SignatureAndDataProtoType {
+export interface SignatureAndDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.SignatureAndData";
   value: Uint8Array;
 }
@@ -344,7 +344,7 @@ export interface SignatureAndDataAmino {
   data: Uint8Array;
   timestamp: string;
 }
-export interface SignatureAndDataAminoType {
+export interface SignatureAndDataAminoMsg {
   type: "cosmos-sdk/SignatureAndData";
   value: SignatureAndDataAmino;
 }
@@ -368,7 +368,7 @@ export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: Long;
 }
-export interface TimestampedSignatureDataProtoType {
+export interface TimestampedSignatureDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.TimestampedSignatureData";
   value: Uint8Array;
 }
@@ -381,7 +381,7 @@ export interface TimestampedSignatureDataAmino {
   signature_data: Uint8Array;
   timestamp: string;
 }
-export interface TimestampedSignatureDataAminoType {
+export interface TimestampedSignatureDataAminoMsg {
   type: "cosmos-sdk/TimestampedSignatureData";
   value: TimestampedSignatureDataAmino;
 }
@@ -407,7 +407,7 @@ export interface SignBytes {
   /** marshaled data */
   data: Uint8Array;
 }
-export interface SignBytesProtoType {
+export interface SignBytesProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.SignBytes";
   value: Uint8Array;
 }
@@ -424,7 +424,7 @@ export interface SignBytesAmino {
   /** marshaled data */
   data: Uint8Array;
 }
-export interface SignBytesAminoType {
+export interface SignBytesAminoMsg {
   type: "cosmos-sdk/SignBytes";
   value: SignBytesAmino;
 }
@@ -446,7 +446,7 @@ export interface HeaderData {
   /** header diversifier */
   newDiversifier: string;
 }
-export interface HeaderDataProtoType {
+export interface HeaderDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.HeaderData";
   value: Uint8Array;
 }
@@ -459,7 +459,7 @@ export interface HeaderDataAmino {
   /** header diversifier */
   new_diversifier: string;
 }
-export interface HeaderDataAminoType {
+export interface HeaderDataAminoMsg {
   type: "cosmos-sdk/HeaderData";
   value: HeaderDataAmino;
 }
@@ -475,7 +475,7 @@ export interface ClientStateData {
   path: Uint8Array;
   clientState?: Any;
 }
-export interface ClientStateDataProtoType {
+export interface ClientStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ClientStateData";
   value: Uint8Array;
 }
@@ -485,7 +485,7 @@ export interface ClientStateDataAmino {
   path: Uint8Array;
   client_state?: AnyAmino;
 }
-export interface ClientStateDataAminoType {
+export interface ClientStateDataAminoMsg {
   type: "cosmos-sdk/ClientStateData";
   value: ClientStateDataAmino;
 }
@@ -504,7 +504,7 @@ export interface ConsensusStateData {
   path: Uint8Array;
   consensusState?: Any;
 }
-export interface ConsensusStateDataProtoType {
+export interface ConsensusStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusStateData";
   value: Uint8Array;
 }
@@ -517,7 +517,7 @@ export interface ConsensusStateDataAmino {
   path: Uint8Array;
   consensus_state?: AnyAmino;
 }
-export interface ConsensusStateDataAminoType {
+export interface ConsensusStateDataAminoMsg {
   type: "cosmos-sdk/ConsensusStateData";
   value: ConsensusStateDataAmino;
 }
@@ -539,7 +539,7 @@ export interface ConnectionStateData {
   path: Uint8Array;
   connection?: ConnectionEnd;
 }
-export interface ConnectionStateDataProtoType {
+export interface ConnectionStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ConnectionStateData";
   value: Uint8Array;
 }
@@ -552,7 +552,7 @@ export interface ConnectionStateDataAmino {
   path: Uint8Array;
   connection?: ConnectionEndAmino;
 }
-export interface ConnectionStateDataAminoType {
+export interface ConnectionStateDataAminoMsg {
   type: "cosmos-sdk/ConnectionStateData";
   value: ConnectionStateDataAmino;
 }
@@ -574,7 +574,7 @@ export interface ChannelStateData {
   path: Uint8Array;
   channel?: Channel;
 }
-export interface ChannelStateDataProtoType {
+export interface ChannelStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.ChannelStateData";
   value: Uint8Array;
 }
@@ -587,7 +587,7 @@ export interface ChannelStateDataAmino {
   path: Uint8Array;
   channel?: ChannelAmino;
 }
-export interface ChannelStateDataAminoType {
+export interface ChannelStateDataAminoMsg {
   type: "cosmos-sdk/ChannelStateData";
   value: ChannelStateDataAmino;
 }
@@ -609,7 +609,7 @@ export interface PacketCommitmentData {
   path: Uint8Array;
   commitment: Uint8Array;
 }
-export interface PacketCommitmentDataProtoType {
+export interface PacketCommitmentDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.PacketCommitmentData";
   value: Uint8Array;
 }
@@ -622,7 +622,7 @@ export interface PacketCommitmentDataAmino {
   path: Uint8Array;
   commitment: Uint8Array;
 }
-export interface PacketCommitmentDataAminoType {
+export interface PacketCommitmentDataAminoMsg {
   type: "cosmos-sdk/PacketCommitmentData";
   value: PacketCommitmentDataAmino;
 }
@@ -644,7 +644,7 @@ export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
-export interface PacketAcknowledgementDataProtoType {
+export interface PacketAcknowledgementDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.PacketAcknowledgementData";
   value: Uint8Array;
 }
@@ -657,7 +657,7 @@ export interface PacketAcknowledgementDataAmino {
   path: Uint8Array;
   acknowledgement: Uint8Array;
 }
-export interface PacketAcknowledgementDataAminoType {
+export interface PacketAcknowledgementDataAminoMsg {
   type: "cosmos-sdk/PacketAcknowledgementData";
   value: PacketAcknowledgementDataAmino;
 }
@@ -678,7 +678,7 @@ export interface PacketAcknowledgementDataSDKType {
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
 }
-export interface PacketReceiptAbsenceDataProtoType {
+export interface PacketReceiptAbsenceDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.PacketReceiptAbsenceData";
   value: Uint8Array;
 }
@@ -690,7 +690,7 @@ export interface PacketReceiptAbsenceDataProtoType {
 export interface PacketReceiptAbsenceDataAmino {
   path: Uint8Array;
 }
-export interface PacketReceiptAbsenceDataAminoType {
+export interface PacketReceiptAbsenceDataAminoMsg {
   type: "cosmos-sdk/PacketReceiptAbsenceData";
   value: PacketReceiptAbsenceDataAmino;
 }
@@ -711,7 +711,7 @@ export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
 }
-export interface NextSequenceRecvDataProtoType {
+export interface NextSequenceRecvDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v1.NextSequenceRecvData";
   value: Uint8Array;
 }
@@ -724,7 +724,7 @@ export interface NextSequenceRecvDataAmino {
   path: Uint8Array;
   next_seq_recv: string;
 }
-export interface NextSequenceRecvDataAminoType {
+export interface NextSequenceRecvDataAminoMsg {
   type: "cosmos-sdk/NextSequenceRecvData";
   value: NextSequenceRecvDataAmino;
 }
@@ -866,6 +866,32 @@ export const ClientState = {
     obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined;
     obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
     return obj;
+  },
+
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
+  },
+
+  toProto(message: ClientState): Uint8Array {
+    return ClientState.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClientState): ClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ClientState",
+      value: ClientState.encode(message).finish()
+    };
   }
 
 };
@@ -982,6 +1008,32 @@ export const ConsensusState = {
     obj.diversifier = message.diversifier;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
+    return ConsensusState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConsensusState): ConsensusStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ConsensusState",
+      value: ConsensusState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConsensusStateProtoMsg): ConsensusState {
+    return ConsensusState.decode(message.value);
+  },
+
+  toProto(message: ConsensusState): Uint8Array {
+    return ConsensusState.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsensusState): ConsensusStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusState",
+      value: ConsensusState.encode(message).finish()
+    };
   }
 
 };
@@ -1130,6 +1182,32 @@ export const Header = {
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
+  },
+
+  fromAminoMsg(object: HeaderAminoMsg): Header {
+    return Header.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Header): HeaderAminoMsg {
+    return {
+      type: "cosmos-sdk/Header",
+      value: Header.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeaderProtoMsg): Header {
+    return Header.decode(message.value);
+  },
+
+  toProto(message: Header): Uint8Array {
+    return Header.encode(message).finish();
+  },
+
+  toProtoMsg(message: Header): HeaderProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.Header",
+      value: Header.encode(message).finish()
+    };
   }
 
 };
@@ -1262,6 +1340,32 @@ export const Misbehaviour = {
     obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined;
     obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
+    return Misbehaviour.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Misbehaviour): MisbehaviourAminoMsg {
+    return {
+      type: "cosmos-sdk/Misbehaviour",
+      value: Misbehaviour.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MisbehaviourProtoMsg): Misbehaviour {
+    return Misbehaviour.decode(message.value);
+  },
+
+  toProto(message: Misbehaviour): Uint8Array {
+    return Misbehaviour.encode(message).finish();
+  },
+
+  toProtoMsg(message: Misbehaviour): MisbehaviourProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.Misbehaviour",
+      value: Misbehaviour.encode(message).finish()
+    };
   }
 
 };
@@ -1394,6 +1498,32 @@ export const SignatureAndData = {
     obj.data = message.data;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SignatureAndDataAminoMsg): SignatureAndData {
+    return SignatureAndData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SignatureAndData): SignatureAndDataAminoMsg {
+    return {
+      type: "cosmos-sdk/SignatureAndData",
+      value: SignatureAndData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SignatureAndDataProtoMsg): SignatureAndData {
+    return SignatureAndData.decode(message.value);
+  },
+
+  toProto(message: SignatureAndData): Uint8Array {
+    return SignatureAndData.encode(message).finish();
+  },
+
+  toProtoMsg(message: SignatureAndData): SignatureAndDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.SignatureAndData",
+      value: SignatureAndData.encode(message).finish()
+    };
   }
 
 };
@@ -1494,6 +1624,32 @@ export const TimestampedSignatureData = {
     obj.signature_data = message.signatureData;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: TimestampedSignatureDataAminoMsg): TimestampedSignatureData {
+    return TimestampedSignatureData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TimestampedSignatureData): TimestampedSignatureDataAminoMsg {
+    return {
+      type: "cosmos-sdk/TimestampedSignatureData",
+      value: TimestampedSignatureData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TimestampedSignatureDataProtoMsg): TimestampedSignatureData {
+    return TimestampedSignatureData.decode(message.value);
+  },
+
+  toProto(message: TimestampedSignatureData): Uint8Array {
+    return TimestampedSignatureData.encode(message).finish();
+  },
+
+  toProtoMsg(message: TimestampedSignatureData): TimestampedSignatureDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.TimestampedSignatureData",
+      value: TimestampedSignatureData.encode(message).finish()
+    };
   }
 
 };
@@ -1642,6 +1798,32 @@ export const SignBytes = {
     obj.data_type = message.dataType;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: SignBytesAminoMsg): SignBytes {
+    return SignBytes.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SignBytes): SignBytesAminoMsg {
+    return {
+      type: "cosmos-sdk/SignBytes",
+      value: SignBytes.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SignBytesProtoMsg): SignBytes {
+    return SignBytes.decode(message.value);
+  },
+
+  toProto(message: SignBytes): Uint8Array {
+    return SignBytes.encode(message).finish();
+  },
+
+  toProtoMsg(message: SignBytes): SignBytesProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.SignBytes",
+      value: SignBytes.encode(message).finish()
+    };
   }
 
 };
@@ -1742,6 +1924,32 @@ export const HeaderData = {
     obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
+  },
+
+  fromAminoMsg(object: HeaderDataAminoMsg): HeaderData {
+    return HeaderData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: HeaderData): HeaderDataAminoMsg {
+    return {
+      type: "cosmos-sdk/HeaderData",
+      value: HeaderData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeaderDataProtoMsg): HeaderData {
+    return HeaderData.decode(message.value);
+  },
+
+  toProto(message: HeaderData): Uint8Array {
+    return HeaderData.encode(message).finish();
+  },
+
+  toProtoMsg(message: HeaderData): HeaderDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.HeaderData",
+      value: HeaderData.encode(message).finish()
+    };
   }
 
 };
@@ -1842,6 +2050,32 @@ export const ClientStateData = {
     obj.path = message.path;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ClientStateDataAminoMsg): ClientStateData {
+    return ClientStateData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClientStateData): ClientStateDataAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientStateData",
+      value: ClientStateData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClientStateDataProtoMsg): ClientStateData {
+    return ClientStateData.decode(message.value);
+  },
+
+  toProto(message: ClientStateData): Uint8Array {
+    return ClientStateData.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClientStateData): ClientStateDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ClientStateData",
+      value: ClientStateData.encode(message).finish()
+    };
   }
 
 };
@@ -1942,6 +2176,32 @@ export const ConsensusStateData = {
     obj.path = message.path;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsensusStateDataAminoMsg): ConsensusStateData {
+    return ConsensusStateData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConsensusStateData): ConsensusStateDataAminoMsg {
+    return {
+      type: "cosmos-sdk/ConsensusStateData",
+      value: ConsensusStateData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConsensusStateDataProtoMsg): ConsensusStateData {
+    return ConsensusStateData.decode(message.value);
+  },
+
+  toProto(message: ConsensusStateData): Uint8Array {
+    return ConsensusStateData.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsensusStateData): ConsensusStateDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ConsensusStateData",
+      value: ConsensusStateData.encode(message).finish()
+    };
   }
 
 };
@@ -2042,6 +2302,32 @@ export const ConnectionStateData = {
     obj.path = message.path;
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConnectionStateDataAminoMsg): ConnectionStateData {
+    return ConnectionStateData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConnectionStateData): ConnectionStateDataAminoMsg {
+    return {
+      type: "cosmos-sdk/ConnectionStateData",
+      value: ConnectionStateData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConnectionStateDataProtoMsg): ConnectionStateData {
+    return ConnectionStateData.decode(message.value);
+  },
+
+  toProto(message: ConnectionStateData): Uint8Array {
+    return ConnectionStateData.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConnectionStateData): ConnectionStateDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ConnectionStateData",
+      value: ConnectionStateData.encode(message).finish()
+    };
   }
 
 };
@@ -2142,6 +2428,32 @@ export const ChannelStateData = {
     obj.path = message.path;
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ChannelStateDataAminoMsg): ChannelStateData {
+    return ChannelStateData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ChannelStateData): ChannelStateDataAminoMsg {
+    return {
+      type: "cosmos-sdk/ChannelStateData",
+      value: ChannelStateData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ChannelStateDataProtoMsg): ChannelStateData {
+    return ChannelStateData.decode(message.value);
+  },
+
+  toProto(message: ChannelStateData): Uint8Array {
+    return ChannelStateData.encode(message).finish();
+  },
+
+  toProtoMsg(message: ChannelStateData): ChannelStateDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.ChannelStateData",
+      value: ChannelStateData.encode(message).finish()
+    };
   }
 
 };
@@ -2242,6 +2554,32 @@ export const PacketCommitmentData = {
     obj.path = message.path;
     obj.commitment = message.commitment;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketCommitmentDataAminoMsg): PacketCommitmentData {
+    return PacketCommitmentData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PacketCommitmentData): PacketCommitmentDataAminoMsg {
+    return {
+      type: "cosmos-sdk/PacketCommitmentData",
+      value: PacketCommitmentData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketCommitmentDataProtoMsg): PacketCommitmentData {
+    return PacketCommitmentData.decode(message.value);
+  },
+
+  toProto(message: PacketCommitmentData): Uint8Array {
+    return PacketCommitmentData.encode(message).finish();
+  },
+
+  toProtoMsg(message: PacketCommitmentData): PacketCommitmentDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.PacketCommitmentData",
+      value: PacketCommitmentData.encode(message).finish()
+    };
   }
 
 };
@@ -2342,6 +2680,32 @@ export const PacketAcknowledgementData = {
     obj.path = message.path;
     obj.acknowledgement = message.acknowledgement;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketAcknowledgementDataAminoMsg): PacketAcknowledgementData {
+    return PacketAcknowledgementData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PacketAcknowledgementData): PacketAcknowledgementDataAminoMsg {
+    return {
+      type: "cosmos-sdk/PacketAcknowledgementData",
+      value: PacketAcknowledgementData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketAcknowledgementDataProtoMsg): PacketAcknowledgementData {
+    return PacketAcknowledgementData.decode(message.value);
+  },
+
+  toProto(message: PacketAcknowledgementData): Uint8Array {
+    return PacketAcknowledgementData.encode(message).finish();
+  },
+
+  toProtoMsg(message: PacketAcknowledgementData): PacketAcknowledgementDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.PacketAcknowledgementData",
+      value: PacketAcknowledgementData.encode(message).finish()
+    };
   }
 
 };
@@ -2426,6 +2790,32 @@ export const PacketReceiptAbsenceData = {
     const obj: any = {};
     obj.path = message.path;
     return obj;
+  },
+
+  fromAminoMsg(object: PacketReceiptAbsenceDataAminoMsg): PacketReceiptAbsenceData {
+    return PacketReceiptAbsenceData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataAminoMsg {
+    return {
+      type: "cosmos-sdk/PacketReceiptAbsenceData",
+      value: PacketReceiptAbsenceData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PacketReceiptAbsenceDataProtoMsg): PacketReceiptAbsenceData {
+    return PacketReceiptAbsenceData.decode(message.value);
+  },
+
+  toProto(message: PacketReceiptAbsenceData): Uint8Array {
+    return PacketReceiptAbsenceData.encode(message).finish();
+  },
+
+  toProtoMsg(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.PacketReceiptAbsenceData",
+      value: PacketReceiptAbsenceData.encode(message).finish()
+    };
   }
 
 };
@@ -2526,6 +2916,32 @@ export const NextSequenceRecvData = {
     obj.path = message.path;
     obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: NextSequenceRecvDataAminoMsg): NextSequenceRecvData {
+    return NextSequenceRecvData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: NextSequenceRecvData): NextSequenceRecvDataAminoMsg {
+    return {
+      type: "cosmos-sdk/NextSequenceRecvData",
+      value: NextSequenceRecvData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: NextSequenceRecvDataProtoMsg): NextSequenceRecvData {
+    return NextSequenceRecvData.decode(message.value);
+  },
+
+  toProto(message: NextSequenceRecvData): Uint8Array {
+    return NextSequenceRecvData.encode(message).finish();
+  },
+
+  toProtoMsg(message: NextSequenceRecvData): NextSequenceRecvDataProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.solomachine.v1.NextSequenceRecvData",
+      value: NextSequenceRecvData.encode(message).finish()
+    };
   }
 
 };

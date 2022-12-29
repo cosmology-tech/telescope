@@ -11,7 +11,7 @@ export interface QuerySpotPriceRequest {
   baseAssetDenom: string;
   quoteAssetDenom: string;
 }
-export interface QuerySpotPriceRequestProtoType {
+export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface QuerySpotPriceRequestAmino {
   base_asset_denom: string;
   quote_asset_denom: string;
 }
-export interface QuerySpotPriceRequestAminoType {
+export interface QuerySpotPriceRequestAminoMsg {
   type: "osmosis/gamm/v2/query-spot-price-request";
   value: QuerySpotPriceRequestAmino;
 }
@@ -48,7 +48,7 @@ export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
-export interface QuerySpotPriceResponseProtoType {
+export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
   value: Uint8Array;
 }
@@ -61,7 +61,7 @@ export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
 }
-export interface QuerySpotPriceResponseAminoType {
+export interface QuerySpotPriceResponseAminoMsg {
   type: "osmosis/gamm/v2/query-spot-price-response";
   value: QuerySpotPriceResponseAmino;
 }
@@ -186,6 +186,32 @@ export const QuerySpotPriceRequest = {
     obj.base_asset_denom = message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/v2/query-spot-price-request",
+      value: QuerySpotPriceRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySpotPriceRequest): Uint8Array {
+    return QuerySpotPriceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest",
+      value: QuerySpotPriceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -270,6 +296,32 @@ export const QuerySpotPriceResponse = {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/v2/query-spot-price-response",
+      value: QuerySpotPriceResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySpotPriceResponse): Uint8Array {
+    return QuerySpotPriceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse",
+      value: QuerySpotPriceResponse.encode(message).finish()
+    };
   }
 
 };

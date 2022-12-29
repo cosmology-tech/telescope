@@ -10,7 +10,7 @@ export interface MsgSend {
   toAddress: string;
   amount: Coin[];
 }
-export interface MsgSendProtoType {
+export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSend";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface MsgSendAmino {
   to_address: string;
   amount: CoinAmino[];
 }
-export interface MsgSendAminoType {
+export interface MsgSendAminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: MsgSendAmino;
 }
@@ -35,14 +35,14 @@ export interface MsgSendSDKType {
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
-export interface MsgSendResponseProtoType {
+export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSendResponse";
   value: Uint8Array;
 }
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoType {
+export interface MsgSendResponseAminoMsg {
   type: "cosmos-sdk/MsgSendResponse";
   value: MsgSendResponseAmino;
 }
@@ -55,7 +55,7 @@ export interface MsgMultiSend {
   inputs: Input[];
   outputs: Output[];
 }
-export interface MsgMultiSendProtoType {
+export interface MsgMultiSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend";
   value: Uint8Array;
 }
@@ -65,7 +65,7 @@ export interface MsgMultiSendAmino {
   inputs: InputAmino[];
   outputs: OutputAmino[];
 }
-export interface MsgMultiSendAminoType {
+export interface MsgMultiSendAminoMsg {
   type: "cosmos-sdk/MsgMultiSend";
   value: MsgMultiSendAmino;
 }
@@ -78,14 +78,14 @@ export interface MsgMultiSendSDKType {
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
-export interface MsgMultiSendResponseProtoType {
+export interface MsgMultiSendResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgMultiSendResponse";
   value: Uint8Array;
 }
 
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseAmino {}
-export interface MsgMultiSendResponseAminoType {
+export interface MsgMultiSendResponseAminoMsg {
   type: "cosmos-sdk/MsgMultiSendResponse";
   value: MsgMultiSendResponseAmino;
 }
@@ -223,6 +223,32 @@ export const MsgSend = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
+    return MsgSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSend",
+      value: MsgSend.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
+    return MsgSend.decode(message.value);
+  },
+
+  toProto(message: MsgSend): Uint8Array {
+    return MsgSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSend): MsgSendProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.MsgSend",
+      value: MsgSend.encode(message).finish()
+    };
   }
 
 };
@@ -287,6 +313,32 @@ export const MsgSendResponse = {
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
+    return MsgSendResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendResponse",
+      value: MsgSendResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
+    return MsgSendResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSendResponse): Uint8Array {
+    return MsgSendResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSendResponse): MsgSendResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.MsgSendResponse",
+      value: MsgSendResponse.encode(message).finish()
+    };
   }
 
 };
@@ -420,6 +472,32 @@ export const MsgMultiSend = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgMultiSendAminoMsg): MsgMultiSend {
+    return MsgMultiSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgMultiSend): MsgMultiSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgMultiSend",
+      value: MsgMultiSend.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgMultiSendProtoMsg): MsgMultiSend {
+    return MsgMultiSend.decode(message.value);
+  },
+
+  toProto(message: MsgMultiSend): Uint8Array {
+    return MsgMultiSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgMultiSend): MsgMultiSendProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend",
+      value: MsgMultiSend.encode(message).finish()
+    };
   }
 
 };
@@ -484,6 +562,32 @@ export const MsgMultiSendResponse = {
   toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgMultiSendResponseAminoMsg): MsgMultiSendResponse {
+    return MsgMultiSendResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgMultiSendResponse): MsgMultiSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgMultiSendResponse",
+      value: MsgMultiSendResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgMultiSendResponseProtoMsg): MsgMultiSendResponse {
+    return MsgMultiSendResponse.decode(message.value);
+  },
+
+  toProto(message: MsgMultiSendResponse): Uint8Array {
+    return MsgMultiSendResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgMultiSendResponse): MsgMultiSendResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.MsgMultiSendResponse",
+      value: MsgMultiSendResponse.encode(message).finish()
+    };
   }
 
 };

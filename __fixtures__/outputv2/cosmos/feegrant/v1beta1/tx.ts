@@ -18,7 +18,7 @@ export interface MsgGrantAllowance {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
 }
-export interface MsgGrantAllowanceProtoType {
+export interface MsgGrantAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
   value: Uint8Array;
 }
@@ -37,7 +37,7 @@ export interface MsgGrantAllowanceAmino {
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
 }
-export interface MsgGrantAllowanceAminoType {
+export interface MsgGrantAllowanceAminoMsg {
   type: "cosmos-sdk/MsgGrantAllowance";
   value: MsgGrantAllowanceAmino;
 }
@@ -54,14 +54,14 @@ export interface MsgGrantAllowanceSDKType {
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
-export interface MsgGrantAllowanceResponseProtoType {
+export interface MsgGrantAllowanceResponseProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
   value: Uint8Array;
 }
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseAmino {}
-export interface MsgGrantAllowanceResponseAminoType {
+export interface MsgGrantAllowanceResponseAminoMsg {
   type: "cosmos-sdk/MsgGrantAllowanceResponse";
   value: MsgGrantAllowanceResponseAmino;
 }
@@ -77,7 +77,7 @@ export interface MsgRevokeAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
-export interface MsgRevokeAllowanceProtoType {
+export interface MsgRevokeAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
   value: Uint8Array;
 }
@@ -90,7 +90,7 @@ export interface MsgRevokeAllowanceAmino {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
-export interface MsgRevokeAllowanceAminoType {
+export interface MsgRevokeAllowanceAminoMsg {
   type: "cosmos-sdk/MsgRevokeAllowance";
   value: MsgRevokeAllowanceAmino;
 }
@@ -103,14 +103,14 @@ export interface MsgRevokeAllowanceSDKType {
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
-export interface MsgRevokeAllowanceResponseProtoType {
+export interface MsgRevokeAllowanceResponseProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
   value: Uint8Array;
 }
 
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseAmino {}
-export interface MsgRevokeAllowanceResponseAminoType {
+export interface MsgRevokeAllowanceResponseAminoMsg {
   type: "cosmos-sdk/MsgRevokeAllowanceResponse";
   value: MsgRevokeAllowanceResponseAmino;
 }
@@ -230,6 +230,32 @@ export const MsgGrantAllowance = {
     obj.grantee = message.grantee;
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgGrantAllowanceAminoMsg): MsgGrantAllowance {
+    return MsgGrantAllowance.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgGrantAllowance): MsgGrantAllowanceAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgGrantAllowance",
+      value: MsgGrantAllowance.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgGrantAllowanceProtoMsg): MsgGrantAllowance {
+    return MsgGrantAllowance.decode(message.value);
+  },
+
+  toProto(message: MsgGrantAllowance): Uint8Array {
+    return MsgGrantAllowance.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgGrantAllowance): MsgGrantAllowanceProtoMsg {
+    return {
+      typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
+      value: MsgGrantAllowance.encode(message).finish()
+    };
   }
 
 };
@@ -294,6 +320,32 @@ export const MsgGrantAllowanceResponse = {
   toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgGrantAllowanceResponseAminoMsg): MsgGrantAllowanceResponse {
+    return MsgGrantAllowanceResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgGrantAllowanceResponse",
+      value: MsgGrantAllowanceResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgGrantAllowanceResponseProtoMsg): MsgGrantAllowanceResponse {
+    return MsgGrantAllowanceResponse.decode(message.value);
+  },
+
+  toProto(message: MsgGrantAllowanceResponse): Uint8Array {
+    return MsgGrantAllowanceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse",
+      value: MsgGrantAllowanceResponse.encode(message).finish()
+    };
   }
 
 };
@@ -394,6 +446,32 @@ export const MsgRevokeAllowance = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgRevokeAllowanceAminoMsg): MsgRevokeAllowance {
+    return MsgRevokeAllowance.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgRevokeAllowance): MsgRevokeAllowanceAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRevokeAllowance",
+      value: MsgRevokeAllowance.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgRevokeAllowanceProtoMsg): MsgRevokeAllowance {
+    return MsgRevokeAllowance.decode(message.value);
+  },
+
+  toProto(message: MsgRevokeAllowance): Uint8Array {
+    return MsgRevokeAllowance.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRevokeAllowance): MsgRevokeAllowanceProtoMsg {
+    return {
+      typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance",
+      value: MsgRevokeAllowance.encode(message).finish()
+    };
   }
 
 };
@@ -458,6 +536,32 @@ export const MsgRevokeAllowanceResponse = {
   toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgRevokeAllowanceResponseAminoMsg): MsgRevokeAllowanceResponse {
+    return MsgRevokeAllowanceResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgRevokeAllowanceResponse",
+      value: MsgRevokeAllowanceResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgRevokeAllowanceResponseProtoMsg): MsgRevokeAllowanceResponse {
+    return MsgRevokeAllowanceResponse.decode(message.value);
+  },
+
+  toProto(message: MsgRevokeAllowanceResponse): Uint8Array {
+    return MsgRevokeAllowanceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse",
+      value: MsgRevokeAllowanceResponse.encode(message).finish()
+    };
   }
 
 };

@@ -87,7 +87,7 @@ export interface Claim {
   /** claimable token amount for the action. Zero if completed */
   claimableAmount: string;
 }
-export interface ClaimProtoType {
+export interface ClaimProtoMsg {
   typeUrl: "/evmos.claims.v1.Claim";
   value: Uint8Array;
 }
@@ -106,7 +106,7 @@ export interface ClaimAmino {
   /** claimable token amount for the action. Zero if completed */
   claimable_amount: string;
 }
-export interface ClaimAminoType {
+export interface ClaimAminoMsg {
   type: "/evmos.claims.v1.Claim";
   value: ClaimAmino;
 }
@@ -132,7 +132,7 @@ export interface ClaimsRecordAddress {
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
 }
-export interface ClaimsRecordAddressProtoType {
+export interface ClaimsRecordAddressProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
   value: Uint8Array;
 }
@@ -148,7 +148,7 @@ export interface ClaimsRecordAddressAmino {
   /** slice of the available actions completed */
   actions_completed: boolean[];
 }
-export interface ClaimsRecordAddressAminoType {
+export interface ClaimsRecordAddressAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecordAddress";
   value: ClaimsRecordAddressAmino;
 }
@@ -171,7 +171,7 @@ export interface ClaimsRecord {
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
 }
-export interface ClaimsRecordProtoType {
+export interface ClaimsRecordProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecord";
   value: Uint8Array;
 }
@@ -187,7 +187,7 @@ export interface ClaimsRecordAmino {
   /** slice of the available actions completed */
   actions_completed: boolean[];
 }
-export interface ClaimsRecordAminoType {
+export interface ClaimsRecordAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecord";
   value: ClaimsRecordAmino;
 }
@@ -312,6 +312,25 @@ export const Claim = {
     obj.completed = message.completed;
     obj.claimable_amount = message.claimableAmount;
     return obj;
+  },
+
+  fromAminoMsg(object: ClaimAminoMsg): Claim {
+    return Claim.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ClaimProtoMsg): Claim {
+    return Claim.decode(message.value);
+  },
+
+  toProto(message: Claim): Uint8Array {
+    return Claim.encode(message).finish();
+  },
+
+  toProtoMsg(message: Claim): ClaimProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.Claim",
+      value: Claim.encode(message).finish()
+    };
   }
 
 };
@@ -457,6 +476,25 @@ export const ClaimsRecordAddress = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ClaimsRecordAddressAminoMsg): ClaimsRecordAddress {
+    return ClaimsRecordAddress.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ClaimsRecordAddressProtoMsg): ClaimsRecordAddress {
+    return ClaimsRecordAddress.decode(message.value);
+  },
+
+  toProto(message: ClaimsRecordAddress): Uint8Array {
+    return ClaimsRecordAddress.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClaimsRecordAddress): ClaimsRecordAddressProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
+      value: ClaimsRecordAddress.encode(message).finish()
+    };
   }
 
 };
@@ -586,6 +624,25 @@ export const ClaimsRecord = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ClaimsRecordAminoMsg): ClaimsRecord {
+    return ClaimsRecord.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ClaimsRecordProtoMsg): ClaimsRecord {
+    return ClaimsRecord.decode(message.value);
+  },
+
+  toProto(message: ClaimsRecord): Uint8Array {
+    return ClaimsRecord.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClaimsRecord): ClaimsRecordProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.ClaimsRecord",
+      value: ClaimsRecord.encode(message).finish()
+    };
   }
 
 };

@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.base.kv.v1beta1";
 export interface Pairs {
   pairs: Pair[];
 }
-export interface PairsProtoType {
+export interface PairsProtoMsg {
   typeUrl: "/cosmos.base.kv.v1beta1.Pairs";
   value: Uint8Array;
 }
@@ -15,7 +15,7 @@ export interface PairsProtoType {
 export interface PairsAmino {
   pairs: PairAmino[];
 }
-export interface PairsAminoType {
+export interface PairsAminoMsg {
   type: "cosmos-sdk/Pairs";
   value: PairsAmino;
 }
@@ -30,7 +30,7 @@ export interface Pair {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface PairProtoType {
+export interface PairProtoMsg {
   typeUrl: "/cosmos.base.kv.v1beta1.Pair";
   value: Uint8Array;
 }
@@ -40,7 +40,7 @@ export interface PairAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface PairAminoType {
+export interface PairAminoMsg {
   type: "cosmos-sdk/Pair";
   value: PairAmino;
 }
@@ -149,6 +149,32 @@ export const Pairs = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PairsAminoMsg): Pairs {
+    return Pairs.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pairs): PairsAminoMsg {
+    return {
+      type: "cosmos-sdk/Pairs",
+      value: Pairs.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PairsProtoMsg): Pairs {
+    return Pairs.decode(message.value);
+  },
+
+  toProto(message: Pairs): Uint8Array {
+    return Pairs.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pairs): PairsProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.kv.v1beta1.Pairs",
+      value: Pairs.encode(message).finish()
+    };
   }
 
 };
@@ -249,6 +275,32 @@ export const Pair = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: PairAminoMsg): Pair {
+    return Pair.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pair): PairAminoMsg {
+    return {
+      type: "cosmos-sdk/Pair",
+      value: Pair.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PairProtoMsg): Pair {
+    return Pair.decode(message.value);
+  },
+
+  toProto(message: Pair): Uint8Array {
+    return Pair.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pair): PairProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.kv.v1beta1.Pair",
+      value: Pair.encode(message).finish()
+    };
   }
 
 };

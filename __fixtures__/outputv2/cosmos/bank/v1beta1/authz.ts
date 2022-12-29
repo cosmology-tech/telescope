@@ -12,7 +12,7 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 export interface SendAuthorization {
   spendLimit: Coin[];
 }
-export interface SendAuthorizationProtoType {
+export interface SendAuthorizationProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.SendAuthorization";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface SendAuthorizationProtoType {
 export interface SendAuthorizationAmino {
   spend_limit: CoinAmino[];
 }
-export interface SendAuthorizationAminoType {
+export interface SendAuthorizationAminoMsg {
   type: "cosmos-sdk/SendAuthorization";
   value: SendAuthorizationAmino;
 }
@@ -139,6 +139,32 @@ export const SendAuthorization = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
+    return SendAuthorization.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
+    return {
+      type: "cosmos-sdk/SendAuthorization",
+      value: SendAuthorization.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
+    return SendAuthorization.decode(message.value);
+  },
+
+  toProto(message: SendAuthorization): Uint8Array {
+    return SendAuthorization.encode(message).finish();
+  },
+
+  toProtoMsg(message: SendAuthorization): SendAuthorizationProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+      value: SendAuthorization.encode(message).finish()
+    };
   }
 
 };

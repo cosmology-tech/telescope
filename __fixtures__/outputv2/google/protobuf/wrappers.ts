@@ -11,7 +11,7 @@ export interface DoubleValue {
   /** The double value. */
   value: number;
 }
-export interface DoubleValueProtoType {
+export interface DoubleValueProtoMsg {
   typeUrl: "/google.protobuf.DoubleValue";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface DoubleValueAmino {
   /** The double value. */
   value: number;
 }
-export interface DoubleValueAminoType {
+export interface DoubleValueAminoMsg {
   type: "/google.protobuf.DoubleValue";
   value: DoubleValueAmino;
 }
@@ -48,7 +48,7 @@ export interface FloatValue {
   /** The float value. */
   value: number;
 }
-export interface FloatValueProtoType {
+export interface FloatValueProtoMsg {
   typeUrl: "/google.protobuf.FloatValue";
   value: Uint8Array;
 }
@@ -62,7 +62,7 @@ export interface FloatValueAmino {
   /** The float value. */
   value: number;
 }
-export interface FloatValueAminoType {
+export interface FloatValueAminoMsg {
   type: "/google.protobuf.FloatValue";
   value: FloatValueAmino;
 }
@@ -85,7 +85,7 @@ export interface Int64Value {
   /** The int64 value. */
   value: Long;
 }
-export interface Int64ValueProtoType {
+export interface Int64ValueProtoMsg {
   typeUrl: "/google.protobuf.Int64Value";
   value: Uint8Array;
 }
@@ -99,7 +99,7 @@ export interface Int64ValueAmino {
   /** The int64 value. */
   value: string;
 }
-export interface Int64ValueAminoType {
+export interface Int64ValueAminoMsg {
   type: "/google.protobuf.Int64Value";
   value: Int64ValueAmino;
 }
@@ -122,7 +122,7 @@ export interface UInt64Value {
   /** The uint64 value. */
   value: Long;
 }
-export interface UInt64ValueProtoType {
+export interface UInt64ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt64Value";
   value: Uint8Array;
 }
@@ -136,7 +136,7 @@ export interface UInt64ValueAmino {
   /** The uint64 value. */
   value: string;
 }
-export interface UInt64ValueAminoType {
+export interface UInt64ValueAminoMsg {
   type: "/google.protobuf.UInt64Value";
   value: UInt64ValueAmino;
 }
@@ -159,7 +159,7 @@ export interface Int32Value {
   /** The int32 value. */
   value: number;
 }
-export interface Int32ValueProtoType {
+export interface Int32ValueProtoMsg {
   typeUrl: "/google.protobuf.Int32Value";
   value: Uint8Array;
 }
@@ -173,7 +173,7 @@ export interface Int32ValueAmino {
   /** The int32 value. */
   value: number;
 }
-export interface Int32ValueAminoType {
+export interface Int32ValueAminoMsg {
   type: "/google.protobuf.Int32Value";
   value: Int32ValueAmino;
 }
@@ -196,7 +196,7 @@ export interface UInt32Value {
   /** The uint32 value. */
   value: number;
 }
-export interface UInt32ValueProtoType {
+export interface UInt32ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt32Value";
   value: Uint8Array;
 }
@@ -210,7 +210,7 @@ export interface UInt32ValueAmino {
   /** The uint32 value. */
   value: number;
 }
-export interface UInt32ValueAminoType {
+export interface UInt32ValueAminoMsg {
   type: "/google.protobuf.UInt32Value";
   value: UInt32ValueAmino;
 }
@@ -233,7 +233,7 @@ export interface BoolValue {
   /** The bool value. */
   value: boolean;
 }
-export interface BoolValueProtoType {
+export interface BoolValueProtoMsg {
   typeUrl: "/google.protobuf.BoolValue";
   value: Uint8Array;
 }
@@ -247,7 +247,7 @@ export interface BoolValueAmino {
   /** The bool value. */
   value: boolean;
 }
-export interface BoolValueAminoType {
+export interface BoolValueAminoMsg {
   type: "/google.protobuf.BoolValue";
   value: BoolValueAmino;
 }
@@ -270,7 +270,7 @@ export interface StringValue {
   /** The string value. */
   value: string;
 }
-export interface StringValueProtoType {
+export interface StringValueProtoMsg {
   typeUrl: "/google.protobuf.StringValue";
   value: Uint8Array;
 }
@@ -284,7 +284,7 @@ export interface StringValueAmino {
   /** The string value. */
   value: string;
 }
-export interface StringValueAminoType {
+export interface StringValueAminoMsg {
   type: "/google.protobuf.StringValue";
   value: StringValueAmino;
 }
@@ -307,7 +307,7 @@ export interface BytesValue {
   /** The bytes value. */
   value: Uint8Array;
 }
-export interface BytesValueProtoType {
+export interface BytesValueProtoMsg {
   typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
 }
@@ -321,7 +321,7 @@ export interface BytesValueAmino {
   /** The bytes value. */
   value: Uint8Array;
 }
-export interface BytesValueAminoType {
+export interface BytesValueAminoMsg {
   type: "/google.protobuf.BytesValue";
   value: BytesValueAmino;
 }
@@ -414,6 +414,25 @@ export const DoubleValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
+    return DoubleValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
+    return DoubleValue.decode(message.value);
+  },
+
+  toProto(message: DoubleValue): Uint8Array {
+    return DoubleValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: DoubleValue): DoubleValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.DoubleValue",
+      value: DoubleValue.encode(message).finish()
+    };
   }
 
 };
@@ -497,6 +516,25 @@ export const FloatValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
+    return FloatValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
+    return FloatValue.decode(message.value);
+  },
+
+  toProto(message: FloatValue): Uint8Array {
+    return FloatValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: FloatValue): FloatValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.FloatValue",
+      value: FloatValue.encode(message).finish()
+    };
   }
 
 };
@@ -580,6 +618,25 @@ export const Int64Value = {
     const obj: any = {};
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
+    return Int64Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
+    return Int64Value.decode(message.value);
+  },
+
+  toProto(message: Int64Value): Uint8Array {
+    return Int64Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: Int64Value): Int64ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Int64Value",
+      value: Int64Value.encode(message).finish()
+    };
   }
 
 };
@@ -663,6 +720,25 @@ export const UInt64Value = {
     const obj: any = {};
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
+    return UInt64Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
+    return UInt64Value.decode(message.value);
+  },
+
+  toProto(message: UInt64Value): Uint8Array {
+    return UInt64Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: UInt64Value): UInt64ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.UInt64Value",
+      value: UInt64Value.encode(message).finish()
+    };
   }
 
 };
@@ -746,6 +822,25 @@ export const Int32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
+    return Int32Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
+    return Int32Value.decode(message.value);
+  },
+
+  toProto(message: Int32Value): Uint8Array {
+    return Int32Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: Int32Value): Int32ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Int32Value",
+      value: Int32Value.encode(message).finish()
+    };
   }
 
 };
@@ -829,6 +924,25 @@ export const UInt32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
+    return UInt32Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
+    return UInt32Value.decode(message.value);
+  },
+
+  toProto(message: UInt32Value): Uint8Array {
+    return UInt32Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: UInt32Value): UInt32ValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.UInt32Value",
+      value: UInt32Value.encode(message).finish()
+    };
   }
 
 };
@@ -912,6 +1026,25 @@ export const BoolValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
+    return BoolValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
+    return BoolValue.decode(message.value);
+  },
+
+  toProto(message: BoolValue): Uint8Array {
+    return BoolValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: BoolValue): BoolValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.BoolValue",
+      value: BoolValue.encode(message).finish()
+    };
   }
 
 };
@@ -995,6 +1128,25 @@ export const StringValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: StringValueAminoMsg): StringValue {
+    return StringValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: StringValueProtoMsg): StringValue {
+    return StringValue.decode(message.value);
+  },
+
+  toProto(message: StringValue): Uint8Array {
+    return StringValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: StringValue): StringValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.StringValue",
+      value: StringValue.encode(message).finish()
+    };
   }
 
 };
@@ -1078,6 +1230,25 @@ export const BytesValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
+    return BytesValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
+    return BytesValue.decode(message.value);
+  },
+
+  toProto(message: BytesValue): Uint8Array {
+    return BytesValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: BytesValue): BytesValueProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.BytesValue",
+      value: BytesValue.encode(message).finish()
+    };
   }
 
 };

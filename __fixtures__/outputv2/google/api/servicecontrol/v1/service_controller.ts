@@ -107,7 +107,7 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
 }
-export interface CheckRequestProtoType {
+export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckRequest";
   value: Uint8Array;
 }
@@ -136,7 +136,7 @@ export interface CheckRequestAmino {
    */
   service_config_id: string;
 }
-export interface CheckRequestAminoType {
+export interface CheckRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.CheckRequest";
   value: CheckRequestAmino;
 }
@@ -175,7 +175,7 @@ export interface CheckResponse {
   /** Feedback data returned from the server during processing a Check request. */
   checkInfo?: CheckResponse_CheckInfo;
 }
-export interface CheckResponseProtoType {
+export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckResponse";
   value: Uint8Array;
 }
@@ -207,7 +207,7 @@ export interface CheckResponseAmino {
   /** Feedback data returned from the server during processing a Check request. */
   check_info?: CheckResponse_CheckInfoAmino;
 }
-export interface CheckResponseAminoType {
+export interface CheckResponseAminoMsg {
   type: "/google.api.servicecontrol.v1.CheckResponse";
   value: CheckResponseAmino;
 }
@@ -233,7 +233,7 @@ export interface CheckResponse_CheckInfo {
   /** Consumer info of this check. */
   consumerInfo?: CheckResponse_ConsumerInfo;
 }
-export interface CheckResponse_CheckInfoProtoType {
+export interface CheckResponse_CheckInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckInfo";
   value: Uint8Array;
 }
@@ -250,7 +250,7 @@ export interface CheckResponse_CheckInfoAmino {
   /** Consumer info of this check. */
   consumer_info?: CheckResponse_ConsumerInfoAmino;
 }
-export interface CheckResponse_CheckInfoAminoType {
+export interface CheckResponse_CheckInfoAminoMsg {
   type: "/google.api.servicecontrol.v1.CheckInfo";
   value: CheckResponse_CheckInfoAmino;
 }
@@ -285,7 +285,7 @@ export interface CheckResponse_ConsumerInfo {
    */
   consumerNumber: Long;
 }
-export interface CheckResponse_ConsumerInfoProtoType {
+export interface CheckResponse_ConsumerInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo";
   value: Uint8Array;
 }
@@ -314,7 +314,7 @@ export interface CheckResponse_ConsumerInfoAmino {
    */
   consumer_number: string;
 }
-export interface CheckResponse_ConsumerInfoAminoType {
+export interface CheckResponse_ConsumerInfoAminoMsg {
   type: "/google.api.servicecontrol.v1.ConsumerInfo";
   value: CheckResponse_ConsumerInfoAmino;
 }
@@ -362,7 +362,7 @@ export interface ReportRequest {
    */
   serviceConfigId: string;
 }
-export interface ReportRequestProtoType {
+export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportRequest";
   value: Uint8Array;
 }
@@ -403,7 +403,7 @@ export interface ReportRequestAmino {
    */
   service_config_id: string;
 }
-export interface ReportRequestAminoType {
+export interface ReportRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.ReportRequest";
   value: ReportRequestAmino;
 }
@@ -441,7 +441,7 @@ export interface ReportResponse {
   /** The current service rollout id used to process the request. */
   serviceRolloutId: string;
 }
-export interface ReportResponseProtoType {
+export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportResponse";
   value: Uint8Array;
 }
@@ -472,7 +472,7 @@ export interface ReportResponseAmino {
   /** The current service rollout id used to process the request. */
   service_rollout_id: string;
 }
-export interface ReportResponseAminoType {
+export interface ReportResponseAminoMsg {
   type: "/google.api.servicecontrol.v1.ReportResponse";
   value: ReportResponseAmino;
 }
@@ -502,7 +502,7 @@ export interface ReportResponse_ReportError {
    */
   status?: Status;
 }
-export interface ReportResponse_ReportErrorProtoType {
+export interface ReportResponse_ReportErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.ReportError";
   value: Uint8Array;
 }
@@ -525,7 +525,7 @@ export interface ReportResponse_ReportErrorAmino {
    */
   status?: StatusAmino;
 }
-export interface ReportResponse_ReportErrorAminoType {
+export interface ReportResponse_ReportErrorAminoMsg {
   type: "/google.api.servicecontrol.v1.ReportError";
   value: ReportResponse_ReportErrorAmino;
 }
@@ -650,6 +650,25 @@ export const CheckRequest = {
     obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
+    return CheckRequest.decode(message.value);
+  },
+
+  toProto(message: CheckRequest): Uint8Array {
+    return CheckRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckRequest): CheckRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
+      value: CheckRequest.encode(message).finish()
+    };
   }
 
 };
@@ -815,6 +834,25 @@ export const CheckResponse = {
     obj.service_rollout_id = message.serviceRolloutId;
     obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
+    return CheckResponse.decode(message.value);
+  },
+
+  toProto(message: CheckResponse): Uint8Array {
+    return CheckResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckResponse): CheckResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
+      value: CheckResponse.encode(message).finish()
+    };
   }
 
 };
@@ -932,6 +970,25 @@ export const CheckResponse_CheckInfo = {
 
     obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponse_CheckInfoAminoMsg): CheckResponse_CheckInfo {
+    return CheckResponse_CheckInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg): CheckResponse_CheckInfo {
+    return CheckResponse_CheckInfo.decode(message.value);
+  },
+
+  toProto(message: CheckResponse_CheckInfo): Uint8Array {
+    return CheckResponse_CheckInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckInfo",
+      value: CheckResponse_CheckInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1047,6 +1104,25 @@ export const CheckResponse_ConsumerInfo = {
     obj.type = message.type;
     obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {
+    return CheckResponse_ConsumerInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg): CheckResponse_ConsumerInfo {
+    return CheckResponse_ConsumerInfo.decode(message.value);
+  },
+
+  toProto(message: CheckResponse_ConsumerInfo): Uint8Array {
+    return CheckResponse_ConsumerInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
+      value: CheckResponse_ConsumerInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1180,6 +1256,25 @@ export const ReportRequest = {
 
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+
+  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
+    return ReportRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
+    return ReportRequest.decode(message.value);
+  },
+
+  toProto(message: ReportRequest): Uint8Array {
+    return ReportRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReportRequest): ReportRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
+      value: ReportRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1313,6 +1408,25 @@ export const ReportResponse = {
     obj.service_config_id = message.serviceConfigId;
     obj.service_rollout_id = message.serviceRolloutId;
     return obj;
+  },
+
+  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
+    return ReportResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
+    return ReportResponse.decode(message.value);
+  },
+
+  toProto(message: ReportResponse): Uint8Array {
+    return ReportResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReportResponse): ReportResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportResponse",
+      value: ReportResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1412,6 +1526,25 @@ export const ReportResponse_ReportError = {
     obj.operation_id = message.operationId;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ReportResponse_ReportErrorAminoMsg): ReportResponse_ReportError {
+    return ReportResponse_ReportError.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg): ReportResponse_ReportError {
+    return ReportResponse_ReportError.decode(message.value);
+  },
+
+  toProto(message: ReportResponse_ReportError): Uint8Array {
+    return ReportResponse_ReportError.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReportResponse_ReportError): ReportResponse_ReportErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.ReportError",
+      value: ReportResponse_ReportError.encode(message).finish()
+    };
   }
 
 };

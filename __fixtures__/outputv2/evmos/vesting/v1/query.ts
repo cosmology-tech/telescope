@@ -8,7 +8,7 @@ export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
   address: string;
 }
-export interface QueryBalancesRequestProtoType {
+export interface QueryBalancesRequestProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface QueryBalancesRequestAmino {
   /** address of the clawback vesting account */
   address: string;
 }
-export interface QueryBalancesRequestAminoType {
+export interface QueryBalancesRequestAminoMsg {
   type: "/evmos.vesting.v1.QueryBalancesRequest";
   value: QueryBalancesRequestAmino;
 }
@@ -42,7 +42,7 @@ export interface QueryBalancesResponse {
   /** current amount of vested tokens */
   vested: Coin[];
 }
-export interface QueryBalancesResponseProtoType {
+export interface QueryBalancesResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesResponse";
   value: Uint8Array;
 }
@@ -61,7 +61,7 @@ export interface QueryBalancesResponseAmino {
   /** current amount of vested tokens */
   vested: CoinAmino[];
 }
-export interface QueryBalancesResponseAminoType {
+export interface QueryBalancesResponseAminoMsg {
   type: "/evmos.vesting.v1.QueryBalancesResponse";
   value: QueryBalancesResponseAmino;
 }
@@ -155,6 +155,25 @@ export const QueryBalancesRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBalancesRequestAminoMsg): QueryBalancesRequest {
+    return QueryBalancesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBalancesRequestProtoMsg): QueryBalancesRequest {
+    return QueryBalancesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBalancesRequest): Uint8Array {
+    return QueryBalancesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBalancesRequest): QueryBalancesRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
+      value: QueryBalancesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -318,6 +337,25 @@ export const QueryBalancesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBalancesResponseAminoMsg): QueryBalancesResponse {
+    return QueryBalancesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBalancesResponseProtoMsg): QueryBalancesResponse {
+    return QueryBalancesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBalancesResponse): Uint8Array {
+    return QueryBalancesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBalancesResponse): QueryBalancesResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.vesting.v1.QueryBalancesResponse",
+      value: QueryBalancesResponse.encode(message).finish()
+    };
   }
 
 };

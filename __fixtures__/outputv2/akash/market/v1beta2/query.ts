@@ -12,7 +12,7 @@ export interface QueryOrdersRequest {
   filters?: OrderFilters;
   pagination?: PageRequest;
 }
-export interface QueryOrdersRequestProtoType {
+export interface QueryOrdersRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrdersRequest";
   value: Uint8Array;
 }
@@ -22,7 +22,7 @@ export interface QueryOrdersRequestAmino {
   filters?: OrderFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryOrdersRequestAminoType {
+export interface QueryOrdersRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryOrdersRequest";
   value: QueryOrdersRequestAmino;
 }
@@ -38,7 +38,7 @@ export interface QueryOrdersResponse {
   orders: Order[];
   pagination?: PageResponse;
 }
-export interface QueryOrdersResponseProtoType {
+export interface QueryOrdersResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrdersResponse";
   value: Uint8Array;
 }
@@ -48,7 +48,7 @@ export interface QueryOrdersResponseAmino {
   orders: OrderAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryOrdersResponseAminoType {
+export interface QueryOrdersResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryOrdersResponse";
   value: QueryOrdersResponseAmino;
 }
@@ -63,7 +63,7 @@ export interface QueryOrdersResponseSDKType {
 export interface QueryOrderRequest {
   id?: OrderID;
 }
-export interface QueryOrderRequestProtoType {
+export interface QueryOrderRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrderRequest";
   value: Uint8Array;
 }
@@ -72,7 +72,7 @@ export interface QueryOrderRequestProtoType {
 export interface QueryOrderRequestAmino {
   id?: OrderIDAmino;
 }
-export interface QueryOrderRequestAminoType {
+export interface QueryOrderRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryOrderRequest";
   value: QueryOrderRequestAmino;
 }
@@ -86,7 +86,7 @@ export interface QueryOrderRequestSDKType {
 export interface QueryOrderResponse {
   order?: Order;
 }
-export interface QueryOrderResponseProtoType {
+export interface QueryOrderResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrderResponse";
   value: Uint8Array;
 }
@@ -95,7 +95,7 @@ export interface QueryOrderResponseProtoType {
 export interface QueryOrderResponseAmino {
   order?: OrderAmino;
 }
-export interface QueryOrderResponseAminoType {
+export interface QueryOrderResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryOrderResponse";
   value: QueryOrderResponseAmino;
 }
@@ -110,7 +110,7 @@ export interface QueryBidsRequest {
   filters?: BidFilters;
   pagination?: PageRequest;
 }
-export interface QueryBidsRequestProtoType {
+export interface QueryBidsRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidsRequest";
   value: Uint8Array;
 }
@@ -120,7 +120,7 @@ export interface QueryBidsRequestAmino {
   filters?: BidFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryBidsRequestAminoType {
+export interface QueryBidsRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryBidsRequest";
   value: QueryBidsRequestAmino;
 }
@@ -136,7 +136,7 @@ export interface QueryBidsResponse {
   bids: QueryBidResponse[];
   pagination?: PageResponse;
 }
-export interface QueryBidsResponseProtoType {
+export interface QueryBidsResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidsResponse";
   value: Uint8Array;
 }
@@ -146,7 +146,7 @@ export interface QueryBidsResponseAmino {
   bids: QueryBidResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryBidsResponseAminoType {
+export interface QueryBidsResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryBidsResponse";
   value: QueryBidsResponseAmino;
 }
@@ -161,7 +161,7 @@ export interface QueryBidsResponseSDKType {
 export interface QueryBidRequest {
   id?: BidID;
 }
-export interface QueryBidRequestProtoType {
+export interface QueryBidRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidRequest";
   value: Uint8Array;
 }
@@ -170,7 +170,7 @@ export interface QueryBidRequestProtoType {
 export interface QueryBidRequestAmino {
   id?: BidIDAmino;
 }
-export interface QueryBidRequestAminoType {
+export interface QueryBidRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryBidRequest";
   value: QueryBidRequestAmino;
 }
@@ -185,7 +185,7 @@ export interface QueryBidResponse {
   bid?: Bid;
   escrowAccount?: Account;
 }
-export interface QueryBidResponseProtoType {
+export interface QueryBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidResponse";
   value: Uint8Array;
 }
@@ -195,7 +195,7 @@ export interface QueryBidResponseAmino {
   bid?: BidAmino;
   escrow_account?: AccountAmino;
 }
-export interface QueryBidResponseAminoType {
+export interface QueryBidResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryBidResponse";
   value: QueryBidResponseAmino;
 }
@@ -211,7 +211,7 @@ export interface QueryLeasesRequest {
   filters?: LeaseFilters;
   pagination?: PageRequest;
 }
-export interface QueryLeasesRequestProtoType {
+export interface QueryLeasesRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeasesRequest";
   value: Uint8Array;
 }
@@ -221,7 +221,7 @@ export interface QueryLeasesRequestAmino {
   filters?: LeaseFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryLeasesRequestAminoType {
+export interface QueryLeasesRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryLeasesRequest";
   value: QueryLeasesRequestAmino;
 }
@@ -237,7 +237,7 @@ export interface QueryLeasesResponse {
   leases: QueryLeaseResponse[];
   pagination?: PageResponse;
 }
-export interface QueryLeasesResponseProtoType {
+export interface QueryLeasesResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeasesResponse";
   value: Uint8Array;
 }
@@ -247,7 +247,7 @@ export interface QueryLeasesResponseAmino {
   leases: QueryLeaseResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryLeasesResponseAminoType {
+export interface QueryLeasesResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryLeasesResponse";
   value: QueryLeasesResponseAmino;
 }
@@ -262,7 +262,7 @@ export interface QueryLeasesResponseSDKType {
 export interface QueryLeaseRequest {
   id?: LeaseID;
 }
-export interface QueryLeaseRequestProtoType {
+export interface QueryLeaseRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeaseRequest";
   value: Uint8Array;
 }
@@ -271,7 +271,7 @@ export interface QueryLeaseRequestProtoType {
 export interface QueryLeaseRequestAmino {
   id?: LeaseIDAmino;
 }
-export interface QueryLeaseRequestAminoType {
+export interface QueryLeaseRequestAminoMsg {
   type: "/akash.market.v1beta2.QueryLeaseRequest";
   value: QueryLeaseRequestAmino;
 }
@@ -286,7 +286,7 @@ export interface QueryLeaseResponse {
   lease?: Lease;
   escrowPayment?: FractionalPayment;
 }
-export interface QueryLeaseResponseProtoType {
+export interface QueryLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeaseResponse";
   value: Uint8Array;
 }
@@ -296,7 +296,7 @@ export interface QueryLeaseResponseAmino {
   lease?: LeaseAmino;
   escrow_payment?: FractionalPaymentAmino;
 }
-export interface QueryLeaseResponseAminoType {
+export interface QueryLeaseResponseAminoMsg {
   type: "/akash.market.v1beta2.QueryLeaseResponse";
   value: QueryLeaseResponseAmino;
 }
@@ -402,6 +402,25 @@ export const QueryOrdersRequest = {
     obj.filters = message.filters ? OrderFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryOrdersRequestAminoMsg): QueryOrdersRequest {
+    return QueryOrdersRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryOrdersRequestProtoMsg): QueryOrdersRequest {
+    return QueryOrdersRequest.decode(message.value);
+  },
+
+  toProto(message: QueryOrdersRequest): Uint8Array {
+    return QueryOrdersRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryOrdersRequest): QueryOrdersRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
+      value: QueryOrdersRequest.encode(message).finish()
+    };
   }
 
 };
@@ -519,6 +538,25 @@ export const QueryOrdersResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryOrdersResponseAminoMsg): QueryOrdersResponse {
+    return QueryOrdersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryOrdersResponseProtoMsg): QueryOrdersResponse {
+    return QueryOrdersResponse.decode(message.value);
+  },
+
+  toProto(message: QueryOrdersResponse): Uint8Array {
+    return QueryOrdersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryOrdersResponse): QueryOrdersResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
+      value: QueryOrdersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -602,6 +640,25 @@ export const QueryOrderRequest = {
     const obj: any = {};
     obj.id = message.id ? OrderID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryOrderRequestAminoMsg): QueryOrderRequest {
+    return QueryOrderRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryOrderRequestProtoMsg): QueryOrderRequest {
+    return QueryOrderRequest.decode(message.value);
+  },
+
+  toProto(message: QueryOrderRequest): Uint8Array {
+    return QueryOrderRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryOrderRequest): QueryOrderRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
+      value: QueryOrderRequest.encode(message).finish()
+    };
   }
 
 };
@@ -685,6 +742,25 @@ export const QueryOrderResponse = {
     const obj: any = {};
     obj.order = message.order ? Order.toAmino(message.order) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryOrderResponseAminoMsg): QueryOrderResponse {
+    return QueryOrderResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryOrderResponseProtoMsg): QueryOrderResponse {
+    return QueryOrderResponse.decode(message.value);
+  },
+
+  toProto(message: QueryOrderResponse): Uint8Array {
+    return QueryOrderResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryOrderResponse): QueryOrderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
+      value: QueryOrderResponse.encode(message).finish()
+    };
   }
 
 };
@@ -784,6 +860,25 @@ export const QueryBidsRequest = {
     obj.filters = message.filters ? BidFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBidsRequestAminoMsg): QueryBidsRequest {
+    return QueryBidsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBidsRequestProtoMsg): QueryBidsRequest {
+    return QueryBidsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBidsRequest): Uint8Array {
+    return QueryBidsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBidsRequest): QueryBidsRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
+      value: QueryBidsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -901,6 +996,25 @@ export const QueryBidsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBidsResponseAminoMsg): QueryBidsResponse {
+    return QueryBidsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBidsResponseProtoMsg): QueryBidsResponse {
+    return QueryBidsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBidsResponse): Uint8Array {
+    return QueryBidsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBidsResponse): QueryBidsResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
+      value: QueryBidsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -984,6 +1098,25 @@ export const QueryBidRequest = {
     const obj: any = {};
     obj.id = message.id ? BidID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBidRequestAminoMsg): QueryBidRequest {
+    return QueryBidRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBidRequestProtoMsg): QueryBidRequest {
+    return QueryBidRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBidRequest): Uint8Array {
+    return QueryBidRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBidRequest): QueryBidRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryBidRequest",
+      value: QueryBidRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1083,6 +1216,25 @@ export const QueryBidResponse = {
     obj.bid = message.bid ? Bid.toAmino(message.bid) : undefined;
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryBidResponseAminoMsg): QueryBidResponse {
+    return QueryBidResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBidResponseProtoMsg): QueryBidResponse {
+    return QueryBidResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBidResponse): Uint8Array {
+    return QueryBidResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBidResponse): QueryBidResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryBidResponse",
+      value: QueryBidResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1182,6 +1334,25 @@ export const QueryLeasesRequest = {
     obj.filters = message.filters ? LeaseFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryLeasesRequestAminoMsg): QueryLeasesRequest {
+    return QueryLeasesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryLeasesRequestProtoMsg): QueryLeasesRequest {
+    return QueryLeasesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryLeasesRequest): Uint8Array {
+    return QueryLeasesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryLeasesRequest): QueryLeasesRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
+      value: QueryLeasesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1299,6 +1470,25 @@ export const QueryLeasesResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryLeasesResponseAminoMsg): QueryLeasesResponse {
+    return QueryLeasesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryLeasesResponseProtoMsg): QueryLeasesResponse {
+    return QueryLeasesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryLeasesResponse): Uint8Array {
+    return QueryLeasesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryLeasesResponse): QueryLeasesResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
+      value: QueryLeasesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1382,6 +1572,25 @@ export const QueryLeaseRequest = {
     const obj: any = {};
     obj.id = message.id ? LeaseID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryLeaseRequestAminoMsg): QueryLeaseRequest {
+    return QueryLeaseRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryLeaseRequestProtoMsg): QueryLeaseRequest {
+    return QueryLeaseRequest.decode(message.value);
+  },
+
+  toProto(message: QueryLeaseRequest): Uint8Array {
+    return QueryLeaseRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryLeaseRequest): QueryLeaseRequestProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
+      value: QueryLeaseRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1481,6 +1690,25 @@ export const QueryLeaseResponse = {
     obj.lease = message.lease ? Lease.toAmino(message.lease) : undefined;
     obj.escrow_payment = message.escrowPayment ? FractionalPayment.toAmino(message.escrowPayment) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryLeaseResponseAminoMsg): QueryLeaseResponse {
+    return QueryLeaseResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryLeaseResponseProtoMsg): QueryLeaseResponse {
+    return QueryLeaseResponse.decode(message.value);
+  },
+
+  toProto(message: QueryLeaseResponse): Uint8Array {
+    return QueryLeaseResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryLeaseResponse): QueryLeaseResponseProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
+      value: QueryLeaseResponse.encode(message).finish()
+    };
   }
 
 };

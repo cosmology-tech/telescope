@@ -10,7 +10,7 @@ export interface GroupSpec {
   requirements?: PlacementRequirements;
   resources: Resource[];
 }
-export interface GroupSpecProtoType {
+export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupSpec";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface GroupSpecAmino {
   requirements?: PlacementRequirementsAmino;
   resources: ResourceAmino[];
 }
-export interface GroupSpecAminoType {
+export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta2.GroupSpec";
   value: GroupSpecAmino;
 }
@@ -162,6 +162,25 @@ export const GroupSpec = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
+    return GroupSpec.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
+    return GroupSpec.decode(message.value);
+  },
+
+  toProto(message: GroupSpec): Uint8Array {
+    return GroupSpec.encode(message).finish();
+  },
+
+  toProtoMsg(message: GroupSpec): GroupSpecProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupSpec",
+      value: GroupSpec.encode(message).finish()
+    };
   }
 
 };

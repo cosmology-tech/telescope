@@ -6,7 +6,7 @@ export const protobufPackage = "akash.base.v1beta1";
 export interface ResourceValue {
   val: Uint8Array;
 }
-export interface ResourceValueProtoType {
+export interface ResourceValueProtoMsg {
   typeUrl: "/akash.base.v1beta1.ResourceValue";
   value: Uint8Array;
 }
@@ -15,7 +15,7 @@ export interface ResourceValueProtoType {
 export interface ResourceValueAmino {
   val: Uint8Array;
 }
-export interface ResourceValueAminoType {
+export interface ResourceValueAminoMsg {
   type: "/akash.base.v1beta1.ResourceValue";
   value: ResourceValueAmino;
 }
@@ -104,6 +104,25 @@ export const ResourceValue = {
     const obj: any = {};
     obj.val = message.val;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
+    return ResourceValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
+    return ResourceValue.decode(message.value);
+  },
+
+  toProto(message: ResourceValue): Uint8Array {
+    return ResourceValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceValue): ResourceValueProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta1.ResourceValue",
+      value: ResourceValue.encode(message).finish()
+    };
   }
 
 };

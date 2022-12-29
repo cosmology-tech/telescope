@@ -34,7 +34,7 @@ export interface Visibility {
    */
   rules: VisibilityRule[];
 }
-export interface VisibilityProtoType {
+export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
   value: Uint8Array;
 }
@@ -71,7 +71,7 @@ export interface VisibilityAmino {
    */
   rules: VisibilityRuleAmino[];
 }
-export interface VisibilityAminoType {
+export interface VisibilityAminoMsg {
   type: "/google.api.Visibility";
   value: VisibilityAmino;
 }
@@ -135,7 +135,7 @@ export interface VisibilityRule {
    */
   restriction: string;
 }
-export interface VisibilityRuleProtoType {
+export interface VisibilityRuleProtoMsg {
   typeUrl: "/google.api.VisibilityRule";
   value: Uint8Array;
 }
@@ -171,7 +171,7 @@ export interface VisibilityRuleAmino {
    */
   restriction: string;
 }
-export interface VisibilityRuleAminoType {
+export interface VisibilityRuleAminoMsg {
   type: "/google.api.VisibilityRule";
   value: VisibilityRuleAmino;
 }
@@ -282,6 +282,25 @@ export const Visibility = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
+    return Visibility.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
+    return Visibility.decode(message.value);
+  },
+
+  toProto(message: Visibility): Uint8Array {
+    return Visibility.encode(message).finish();
+  },
+
+  toProtoMsg(message: Visibility): VisibilityProtoMsg {
+    return {
+      typeUrl: "/google.api.Visibility",
+      value: Visibility.encode(message).finish()
+    };
   }
 
 };
@@ -381,6 +400,25 @@ export const VisibilityRule = {
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
+  },
+
+  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
+    return VisibilityRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
+    return VisibilityRule.decode(message.value);
+  },
+
+  toProto(message: VisibilityRule): Uint8Array {
+    return VisibilityRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: VisibilityRule): VisibilityRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.VisibilityRule",
+      value: VisibilityRule.encode(message).finish()
+    };
   }
 
 };

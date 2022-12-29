@@ -14,7 +14,7 @@ export interface BaseAccount {
   accountNumber: Long;
   sequence: Long;
 }
-export interface BaseAccountProtoType {
+export interface BaseAccountProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
   value: Uint8Array;
 }
@@ -30,7 +30,7 @@ export interface BaseAccountAmino {
   account_number: string;
   sequence: string;
 }
-export interface BaseAccountAminoType {
+export interface BaseAccountAminoMsg {
   type: "cosmos-sdk/BaseAccount";
   value: BaseAccountAmino;
 }
@@ -53,7 +53,7 @@ export interface ModuleAccount {
   name: string;
   permissions: string[];
 }
-export interface ModuleAccountProtoType {
+export interface ModuleAccountProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.ModuleAccount";
   value: Uint8Array;
 }
@@ -64,7 +64,7 @@ export interface ModuleAccountAmino {
   name: string;
   permissions: string[];
 }
-export interface ModuleAccountAminoType {
+export interface ModuleAccountAminoMsg {
   type: "cosmos-sdk/ModuleAccount";
   value: ModuleAccountAmino;
 }
@@ -84,7 +84,7 @@ export interface Params {
   sigVerifyCostEd25519: Long;
   sigVerifyCostSecp256k1: Long;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.Params";
   value: Uint8Array;
 }
@@ -97,7 +97,7 @@ export interface ParamsAmino {
   sig_verify_cost_ed25519: string;
   sig_verify_cost_secp256k1: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";
   value: ParamsAmino;
 }
@@ -239,6 +239,32 @@ export const BaseAccount = {
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: BaseAccountAminoMsg): BaseAccount {
+    return BaseAccount.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BaseAccount): BaseAccountAminoMsg {
+    return {
+      type: "cosmos-sdk/BaseAccount",
+      value: BaseAccount.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BaseAccountProtoMsg): BaseAccount {
+    return BaseAccount.decode(message.value);
+  },
+
+  toProto(message: BaseAccount): Uint8Array {
+    return BaseAccount.encode(message).finish();
+  },
+
+  toProtoMsg(message: BaseAccount): BaseAccountProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
+      value: BaseAccount.encode(message).finish()
+    };
   }
 
 };
@@ -373,6 +399,32 @@ export const ModuleAccount = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ModuleAccountAminoMsg): ModuleAccount {
+    return ModuleAccount.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ModuleAccount): ModuleAccountAminoMsg {
+    return {
+      type: "cosmos-sdk/ModuleAccount",
+      value: ModuleAccount.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ModuleAccountProtoMsg): ModuleAccount {
+    return ModuleAccount.decode(message.value);
+  },
+
+  toProto(message: ModuleAccount): Uint8Array {
+    return ModuleAccount.encode(message).finish();
+  },
+
+  toProtoMsg(message: ModuleAccount): ModuleAccountProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
+      value: ModuleAccount.encode(message).finish()
+    };
   }
 
 };
@@ -521,6 +573,32 @@ export const Params = {
     obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519 ? message.sigVerifyCostEd25519.toString() : undefined;
     obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1 ? message.sigVerifyCostSecp256k1.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.auth.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

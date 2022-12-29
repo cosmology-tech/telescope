@@ -9,7 +9,7 @@ export interface GenesisState {
   classes: Class[];
   entries: Entry[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -20,7 +20,7 @@ export interface GenesisStateAmino {
   classes: ClassAmino[];
   entries: EntryAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
@@ -39,7 +39,7 @@ export interface Entry {
   /** nfts is a group of nfts of the same owner */
   nfts: NFT[];
 }
-export interface EntryProtoType {
+export interface EntryProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.Entry";
   value: Uint8Array;
 }
@@ -52,7 +52,7 @@ export interface EntryAmino {
   /** nfts is a group of nfts of the same owner */
   nfts: NFTAmino[];
 }
-export interface EntryAminoType {
+export interface EntryAminoMsg {
   type: "cosmos-sdk/Entry";
   value: EntryAmino;
 }
@@ -192,6 +192,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -310,6 +336,32 @@ export const Entry = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: EntryAminoMsg): Entry {
+    return Entry.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Entry): EntryAminoMsg {
+    return {
+      type: "cosmos-sdk/Entry",
+      value: Entry.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EntryProtoMsg): Entry {
+    return Entry.decode(message.value);
+  },
+
+  toProto(message: Entry): Uint8Array {
+    return Entry.encode(message).finish();
+  },
+
+  toProtoMsg(message: Entry): EntryProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.Entry",
+      value: Entry.encode(message).finish()
+    };
   }
 
 };

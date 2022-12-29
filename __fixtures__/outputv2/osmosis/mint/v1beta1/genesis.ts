@@ -17,7 +17,7 @@ export interface GenesisState {
    */
   reductionStartedEpoch: Long;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -36,7 +36,7 @@ export interface GenesisStateAmino {
    */
   reduction_started_epoch: string;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/mint/genesis-state";
   value: GenesisStateAmino;
 }
@@ -160,6 +160,32 @@ export const GenesisState = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     obj.reduction_started_epoch = message.reductionStartedEpoch ? message.reductionStartedEpoch.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/mint/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

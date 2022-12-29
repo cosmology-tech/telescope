@@ -24,7 +24,7 @@ export interface Incentive {
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
 }
-export interface IncentiveProtoType {
+export interface IncentiveProtoMsg {
   typeUrl: "/evmos.incentives.v1.Incentive";
   value: Uint8Array;
 }
@@ -49,7 +49,7 @@ export interface IncentiveAmino {
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   total_gas: string;
 }
-export interface IncentiveAminoType {
+export interface IncentiveAminoMsg {
   type: "/evmos.incentives.v1.Incentive";
   value: IncentiveAmino;
 }
@@ -77,7 +77,7 @@ export interface GasMeter {
   /** cumulative gas spent during the epoch */
   cumulativeGas: Long;
 }
-export interface GasMeterProtoType {
+export interface GasMeterProtoMsg {
   typeUrl: "/evmos.incentives.v1.GasMeter";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface GasMeterAmino {
   /** cumulative gas spent during the epoch */
   cumulative_gas: string;
 }
-export interface GasMeterAminoType {
+export interface GasMeterAminoMsg {
   type: "/evmos.incentives.v1.GasMeter";
   value: GasMeterAmino;
 }
@@ -122,7 +122,7 @@ export interface RegisterIncentiveProposal {
   /** number of remaining epochs */
   epochs: number;
 }
-export interface RegisterIncentiveProposalProtoType {
+export interface RegisterIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal";
   value: Uint8Array;
 }
@@ -144,7 +144,7 @@ export interface RegisterIncentiveProposalAmino {
   /** number of remaining epochs */
   epochs: number;
 }
-export interface RegisterIncentiveProposalAminoType {
+export interface RegisterIncentiveProposalAminoMsg {
   type: "/evmos.incentives.v1.RegisterIncentiveProposal";
   value: RegisterIncentiveProposalAmino;
 }
@@ -169,7 +169,7 @@ export interface CancelIncentiveProposal {
   /** contract address */
   contract: string;
 }
-export interface CancelIncentiveProposalProtoType {
+export interface CancelIncentiveProposalProtoMsg {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal";
   value: Uint8Array;
 }
@@ -185,7 +185,7 @@ export interface CancelIncentiveProposalAmino {
   /** contract address */
   contract: string;
 }
-export interface CancelIncentiveProposalAminoType {
+export interface CancelIncentiveProposalAminoMsg {
   type: "/evmos.incentives.v1.CancelIncentiveProposal";
   value: CancelIncentiveProposalAmino;
 }
@@ -358,6 +358,25 @@ export const Incentive = {
     obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: IncentiveAminoMsg): Incentive {
+    return Incentive.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: IncentiveProtoMsg): Incentive {
+    return Incentive.decode(message.value);
+  },
+
+  toProto(message: Incentive): Uint8Array {
+    return Incentive.encode(message).finish();
+  },
+
+  toProtoMsg(message: Incentive): IncentiveProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.Incentive",
+      value: Incentive.encode(message).finish()
+    };
   }
 
 };
@@ -473,6 +492,25 @@ export const GasMeter = {
     obj.participant = message.participant;
     obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GasMeterAminoMsg): GasMeter {
+    return GasMeter.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GasMeterProtoMsg): GasMeter {
+    return GasMeter.decode(message.value);
+  },
+
+  toProto(message: GasMeter): Uint8Array {
+    return GasMeter.encode(message).finish();
+  },
+
+  toProtoMsg(message: GasMeter): GasMeterProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.GasMeter",
+      value: GasMeter.encode(message).finish()
+    };
   }
 
 };
@@ -638,6 +676,25 @@ export const RegisterIncentiveProposal = {
 
     obj.epochs = message.epochs;
     return obj;
+  },
+
+  fromAminoMsg(object: RegisterIncentiveProposalAminoMsg): RegisterIncentiveProposal {
+    return RegisterIncentiveProposal.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RegisterIncentiveProposalProtoMsg): RegisterIncentiveProposal {
+    return RegisterIncentiveProposal.decode(message.value);
+  },
+
+  toProto(message: RegisterIncentiveProposal): Uint8Array {
+    return RegisterIncentiveProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: RegisterIncentiveProposal): RegisterIncentiveProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
+      value: RegisterIncentiveProposal.encode(message).finish()
+    };
   }
 
 };
@@ -753,6 +810,25 @@ export const CancelIncentiveProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromAminoMsg(object: CancelIncentiveProposalAminoMsg): CancelIncentiveProposal {
+    return CancelIncentiveProposal.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CancelIncentiveProposalProtoMsg): CancelIncentiveProposal {
+    return CancelIncentiveProposal.decode(message.value);
+  },
+
+  toProto(message: CancelIncentiveProposal): Uint8Array {
+    return CancelIncentiveProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: CancelIncentiveProposal): CancelIncentiveProposalProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
+      value: CancelIncentiveProposal.encode(message).finish()
+    };
   }
 
 };

@@ -7,7 +7,7 @@ export const protobufPackage = "akash.deployment.v1beta1";
 export interface Params {
   deploymentMinDeposit?: Coin;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Params";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface ParamsProtoType {
 export interface ParamsAmino {
   deployment_min_deposit?: CoinAmino;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/akash.deployment.v1beta1.Params";
   value: ParamsAmino;
 }
@@ -105,6 +105,25 @@ export const Params = {
     const obj: any = {};
     obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

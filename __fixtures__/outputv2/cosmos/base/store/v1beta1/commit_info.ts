@@ -10,7 +10,7 @@ export interface CommitInfo {
   version: Long;
   storeInfos: StoreInfo[];
 }
-export interface CommitInfoProtoType {
+export interface CommitInfoProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.CommitInfo";
   value: Uint8Array;
 }
@@ -23,7 +23,7 @@ export interface CommitInfoAmino {
   version: string;
   store_infos: StoreInfoAmino[];
 }
-export interface CommitInfoAminoType {
+export interface CommitInfoAminoMsg {
   type: "cosmos-sdk/CommitInfo";
   value: CommitInfoAmino;
 }
@@ -45,7 +45,7 @@ export interface StoreInfo {
   name: string;
   commitId?: CommitID;
 }
-export interface StoreInfoProtoType {
+export interface StoreInfoProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.StoreInfo";
   value: Uint8Array;
 }
@@ -58,7 +58,7 @@ export interface StoreInfoAmino {
   name: string;
   commit_id?: CommitIDAmino;
 }
-export interface StoreInfoAminoType {
+export interface StoreInfoAminoMsg {
   type: "cosmos-sdk/StoreInfo";
   value: StoreInfoAmino;
 }
@@ -80,7 +80,7 @@ export interface CommitID {
   version: Long;
   hash: Uint8Array;
 }
-export interface CommitIDProtoType {
+export interface CommitIDProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.CommitID";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface CommitIDAmino {
   version: string;
   hash: Uint8Array;
 }
-export interface CommitIDAminoType {
+export interface CommitIDAminoMsg {
   type: "cosmos-sdk/CommitID";
   value: CommitIDAmino;
 }
@@ -221,6 +221,32 @@ export const CommitInfo = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CommitInfoAminoMsg): CommitInfo {
+    return CommitInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: CommitInfo): CommitInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/CommitInfo",
+      value: CommitInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CommitInfoProtoMsg): CommitInfo {
+    return CommitInfo.decode(message.value);
+  },
+
+  toProto(message: CommitInfo): Uint8Array {
+    return CommitInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: CommitInfo): CommitInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
+      value: CommitInfo.encode(message).finish()
+    };
   }
 
 };
@@ -321,6 +347,32 @@ export const StoreInfo = {
     obj.name = message.name;
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: StoreInfoAminoMsg): StoreInfo {
+    return StoreInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StoreInfo): StoreInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/StoreInfo",
+      value: StoreInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StoreInfoProtoMsg): StoreInfo {
+    return StoreInfo.decode(message.value);
+  },
+
+  toProto(message: StoreInfo): Uint8Array {
+    return StoreInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: StoreInfo): StoreInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
+      value: StoreInfo.encode(message).finish()
+    };
   }
 
 };
@@ -421,6 +473,32 @@ export const CommitID = {
     obj.version = message.version ? message.version.toString() : undefined;
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromAminoMsg(object: CommitIDAminoMsg): CommitID {
+    return CommitID.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: CommitID): CommitIDAminoMsg {
+    return {
+      type: "cosmos-sdk/CommitID",
+      value: CommitID.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CommitIDProtoMsg): CommitID {
+    return CommitID.decode(message.value);
+  },
+
+  toProto(message: CommitID): Uint8Array {
+    return CommitID.encode(message).finish();
+  },
+
+  toProtoMsg(message: CommitID): CommitIDProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.CommitID",
+      value: CommitID.encode(message).finish()
+    };
   }
 
 };

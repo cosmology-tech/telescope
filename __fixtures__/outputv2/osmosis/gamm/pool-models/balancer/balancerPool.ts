@@ -46,7 +46,7 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
-export interface SmoothWeightChangeParamsProtoType {
+export interface SmoothWeightChangeParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
   value: Uint8Array;
 }
@@ -92,7 +92,7 @@ export interface SmoothWeightChangeParamsAmino {
    */
   target_pool_weights: PoolAssetAmino[];
 }
-export interface SmoothWeightChangeParamsAminoType {
+export interface SmoothWeightChangeParamsAminoMsg {
   type: "osmosis/gamm/smooth-weight-change-params";
   value: SmoothWeightChangeParamsAmino;
 }
@@ -128,7 +128,7 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
-export interface PoolParamsProtoType {
+export interface PoolParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
   value: Uint8Array;
 }
@@ -144,7 +144,7 @@ export interface PoolParamsAmino {
   exit_fee: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
 }
-export interface PoolParamsAminoType {
+export interface PoolParamsAminoMsg {
   type: "osmosis/gamm/pool-params";
   value: PoolParamsAmino;
 }
@@ -177,7 +177,7 @@ export interface PoolAsset {
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
 }
-export interface PoolAssetProtoType {
+export interface PoolAssetProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
   value: Uint8Array;
 }
@@ -198,7 +198,7 @@ export interface PoolAssetAmino {
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
 }
-export interface PoolAssetAminoType {
+export interface PoolAssetAminoMsg {
   type: "osmosis/gamm/pool-asset";
   value: PoolAssetAmino;
 }
@@ -243,7 +243,7 @@ export interface Pool {
   /** sum of all non-normalized pool weights */
   totalWeight: string;
 }
-export interface PoolProtoType {
+export interface PoolProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Pool";
   value: Uint8Array;
 }
@@ -277,7 +277,7 @@ export interface PoolAmino {
   /** sum of all non-normalized pool weights */
   total_weight: string;
 }
-export interface PoolAminoType {
+export interface PoolAminoMsg {
   type: "osmosis/gamm/pool";
   value: PoolAmino;
 }
@@ -452,6 +452,32 @@ export const SmoothWeightChangeParams = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
+    return SmoothWeightChangeParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/smooth-weight-change-params",
+      value: SmoothWeightChangeParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
+    return SmoothWeightChangeParams.decode(message.value);
+  },
+
+  toProto(message: SmoothWeightChangeParams): Uint8Array {
+    return SmoothWeightChangeParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams",
+      value: SmoothWeightChangeParams.encode(message).finish()
+    };
   }
 
 };
@@ -568,6 +594,32 @@ export const PoolParams = {
     obj.exit_fee = message.exitFee;
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
+    return PoolParams.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-params",
+      value: PoolParams.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
+    return PoolParams.decode(message.value);
+  },
+
+  toProto(message: PoolParams): Uint8Array {
+    return PoolParams.encode(message).finish();
+  },
+
+  toProtoMsg(message: PoolParams): PoolParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
+      value: PoolParams.encode(message).finish()
+    };
   }
 
 };
@@ -668,6 +720,32 @@ export const PoolAsset = {
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
+    return PoolAsset.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
+    return {
+      type: "osmosis/gamm/pool-asset",
+      value: PoolAsset.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
+    return PoolAsset.decode(message.value);
+  },
+
+  toProto(message: PoolAsset): Uint8Array {
+    return PoolAsset.encode(message).finish();
+  },
+
+  toProtoMsg(message: PoolAsset): PoolAssetProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.PoolAsset",
+      value: PoolAsset.encode(message).finish()
+    };
   }
 
 };
@@ -866,6 +944,32 @@ export const Pool = {
 
     obj.total_weight = message.totalWeight;
     return obj;
+  },
+
+  fromAminoMsg(object: PoolAminoMsg): Pool {
+    return Pool.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pool): PoolAminoMsg {
+    return {
+      type: "osmosis/gamm/pool",
+      value: Pool.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PoolProtoMsg): Pool {
+    return Pool.decode(message.value);
+  },
+
+  toProto(message: Pool): Uint8Array {
+    return Pool.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pool): PoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.Pool",
+      value: Pool.encode(message).finish()
+    };
   }
 
 };

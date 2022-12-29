@@ -12,7 +12,7 @@ export interface SetSuperfluidAssetsProposal {
   description: string;
   assets: SuperfluidAsset[];
 }
-export interface SetSuperfluidAssetsProposalProtoType {
+export interface SetSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface SetSuperfluidAssetsProposalAmino {
   description: string;
   assets: SuperfluidAssetAmino[];
 }
-export interface SetSuperfluidAssetsProposalAminoType {
+export interface SetSuperfluidAssetsProposalAminoMsg {
   type: "osmosis/v1beta1/set-superfluid-assets-proposal";
   value: SetSuperfluidAssetsProposalAmino;
 }
@@ -50,7 +50,7 @@ export interface RemoveSuperfluidAssetsProposal {
   description: string;
   superfluidAssetDenoms: string[];
 }
-export interface RemoveSuperfluidAssetsProposalProtoType {
+export interface RemoveSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   value: Uint8Array;
 }
@@ -64,7 +64,7 @@ export interface RemoveSuperfluidAssetsProposalAmino {
   description: string;
   superfluid_asset_denoms: string[];
 }
-export interface RemoveSuperfluidAssetsProposalAminoType {
+export interface RemoveSuperfluidAssetsProposalAminoMsg {
   type: "osmosis/v1beta1/remove-superfluid-assets-proposal";
   value: RemoveSuperfluidAssetsProposalAmino;
 }
@@ -89,7 +89,7 @@ export interface UpdateUnpoolWhiteListProposal {
   ids: Long[];
   isOverwrite: boolean;
 }
-export interface UpdateUnpoolWhiteListProposalProtoType {
+export interface UpdateUnpoolWhiteListProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
   value: Uint8Array;
 }
@@ -104,7 +104,7 @@ export interface UpdateUnpoolWhiteListProposalAmino {
   ids: string[];
   is_overwrite: boolean;
 }
-export interface UpdateUnpoolWhiteListProposalAminoType {
+export interface UpdateUnpoolWhiteListProposalAminoMsg {
   type: "osmosis/v1beta1/update-unpool-white-list-proposal";
   value: UpdateUnpoolWhiteListProposalAmino;
 }
@@ -250,6 +250,32 @@ export const SetSuperfluidAssetsProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SetSuperfluidAssetsProposalAminoMsg): SetSuperfluidAssetsProposal {
+    return SetSuperfluidAssetsProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAminoMsg {
+    return {
+      type: "osmosis/v1beta1/set-superfluid-assets-proposal",
+      value: SetSuperfluidAssetsProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg): SetSuperfluidAssetsProposal {
+    return SetSuperfluidAssetsProposal.decode(message.value);
+  },
+
+  toProto(message: SetSuperfluidAssetsProposal): Uint8Array {
+    return SetSuperfluidAssetsProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
+      value: SetSuperfluidAssetsProposal.encode(message).finish()
+    };
   }
 
 };
@@ -384,6 +410,32 @@ export const RemoveSuperfluidAssetsProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: RemoveSuperfluidAssetsProposalAminoMsg): RemoveSuperfluidAssetsProposal {
+    return RemoveSuperfluidAssetsProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAminoMsg {
+    return {
+      type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
+      value: RemoveSuperfluidAssetsProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg): RemoveSuperfluidAssetsProposal {
+    return RemoveSuperfluidAssetsProposal.decode(message.value);
+  },
+
+  toProto(message: RemoveSuperfluidAssetsProposal): Uint8Array {
+    return RemoveSuperfluidAssetsProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
+      value: RemoveSuperfluidAssetsProposal.encode(message).finish()
+    };
   }
 
 };
@@ -547,6 +599,32 @@ export const UpdateUnpoolWhiteListProposal = {
 
     obj.is_overwrite = message.isOverwrite;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateUnpoolWhiteListProposalAminoMsg): UpdateUnpoolWhiteListProposal {
+    return UpdateUnpoolWhiteListProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAminoMsg {
+    return {
+      type: "osmosis/v1beta1/update-unpool-white-list-proposal",
+      value: UpdateUnpoolWhiteListProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg): UpdateUnpoolWhiteListProposal {
+    return UpdateUnpoolWhiteListProposal.decode(message.value);
+  },
+
+  toProto(message: UpdateUnpoolWhiteListProposal): Uint8Array {
+    return UpdateUnpoolWhiteListProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
+      value: UpdateUnpoolWhiteListProposal.encode(message).finish()
+    };
   }
 
 };

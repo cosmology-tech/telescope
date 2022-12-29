@@ -19,7 +19,7 @@ export interface Params {
    */
   variance: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.Params";
   value: Uint8Array;
 }
@@ -41,7 +41,7 @@ export interface ParamsAmino {
    */
   variance: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/akash.inflation.v1beta2.Params";
   value: ParamsAmino;
 }
@@ -164,6 +164,25 @@ export const Params = {
     obj.initial_inflation = message.initialInflation;
     obj.variance = message.variance;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.inflation.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

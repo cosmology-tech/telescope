@@ -130,7 +130,7 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
-export interface AccountIDProtoType {
+export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.AccountID";
   value: Uint8Array;
 }
@@ -140,7 +140,7 @@ export interface AccountIDAmino {
   scope: string;
   xid: string;
 }
-export interface AccountIDAminoType {
+export interface AccountIDAminoMsg {
   type: "/akash.escrow.v1beta2.AccountID";
   value: AccountIDAmino;
 }
@@ -184,7 +184,7 @@ export interface Account {
    */
   funds?: DecCoin;
 }
-export interface AccountProtoType {
+export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.Account";
   value: Uint8Array;
 }
@@ -222,7 +222,7 @@ export interface AccountAmino {
    */
   funds?: DecCoinAmino;
 }
-export interface AccountAminoType {
+export interface AccountAminoMsg {
   type: "/akash.escrow.v1beta2.Account";
   value: AccountAmino;
 }
@@ -249,7 +249,7 @@ export interface FractionalPayment {
   balance?: DecCoin;
   withdrawn?: Coin;
 }
-export interface FractionalPaymentProtoType {
+export interface FractionalPaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
   value: Uint8Array;
 }
@@ -264,7 +264,7 @@ export interface FractionalPaymentAmino {
   balance?: DecCoinAmino;
   withdrawn?: CoinAmino;
 }
-export interface FractionalPaymentAminoType {
+export interface FractionalPaymentAminoMsg {
   type: "/akash.escrow.v1beta2.FractionalPayment";
   value: FractionalPaymentAmino;
 }
@@ -375,6 +375,25 @@ export const AccountID = {
     obj.scope = message.scope;
     obj.xid = message.xid;
     return obj;
+  },
+
+  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
+    return AccountID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AccountIDProtoMsg): AccountID {
+    return AccountID.decode(message.value);
+  },
+
+  toProto(message: AccountID): Uint8Array {
+    return AccountID.encode(message).finish();
+  },
+
+  toProtoMsg(message: AccountID): AccountIDProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.AccountID",
+      value: AccountID.encode(message).finish()
+    };
   }
 
 };
@@ -570,6 +589,25 @@ export const Account = {
     obj.depositor = message.depositor;
     obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: AccountAminoMsg): Account {
+    return Account.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AccountProtoMsg): Account {
+    return Account.decode(message.value);
+  },
+
+  toProto(message: Account): Uint8Array {
+    return Account.encode(message).finish();
+  },
+
+  toProtoMsg(message: Account): AccountProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.Account",
+      value: Account.encode(message).finish()
+    };
   }
 
 };
@@ -749,6 +787,25 @@ export const FractionalPayment = {
     obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {
+    return FractionalPayment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: FractionalPaymentProtoMsg): FractionalPayment {
+    return FractionalPayment.decode(message.value);
+  },
+
+  toProto(message: FractionalPayment): Uint8Array {
+    return FractionalPayment.encode(message).finish();
+  },
+
+  toProtoMsg(message: FractionalPayment): FractionalPaymentProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
+      value: FractionalPayment.encode(message).finish()
+    };
   }
 
 };

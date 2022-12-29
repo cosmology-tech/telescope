@@ -14,7 +14,7 @@ export interface DepositDeploymentAuthorization {
    */
   spendLimit?: Coin;
 }
-export interface DepositDeploymentAuthorizationProtoType {
+export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: Uint8Array;
 }
@@ -30,7 +30,7 @@ export interface DepositDeploymentAuthorizationAmino {
    */
   spend_limit?: CoinAmino;
 }
-export interface DepositDeploymentAuthorizationAminoType {
+export interface DepositDeploymentAuthorizationAminoMsg {
   type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: DepositDeploymentAuthorizationAmino;
 }
@@ -122,6 +122,25 @@ export const DepositDeploymentAuthorization = {
     const obj: any = {};
     obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.decode(message.value);
+  },
+
+  toProto(message: DepositDeploymentAuthorization): Uint8Array {
+    return DepositDeploymentAuthorization.encode(message).finish();
+  },
+
+  toProtoMsg(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
+      value: DepositDeploymentAuthorization.encode(message).finish()
+    };
   }
 
 };

@@ -104,7 +104,7 @@ export interface Documentation {
    */
   overview: string;
 }
-export interface DocumentationProtoType {
+export interface DocumentationProtoMsg {
   typeUrl: "/google.api.Documentation";
   value: Uint8Array;
 }
@@ -211,7 +211,7 @@ export interface DocumentationAmino {
    */
   overview: string;
 }
-export interface DocumentationAminoType {
+export interface DocumentationAminoMsg {
   type: "/google.api.Documentation";
   value: DocumentationAmino;
 }
@@ -303,7 +303,7 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
-export interface DocumentationRuleProtoType {
+export interface DocumentationRuleProtoMsg {
   typeUrl: "/google.api.DocumentationRule";
   value: Uint8Array;
 }
@@ -329,7 +329,7 @@ export interface DocumentationRuleAmino {
    */
   deprecation_description: string;
 }
-export interface DocumentationRuleAminoType {
+export interface DocumentationRuleAminoMsg {
   type: "/google.api.DocumentationRule";
   value: DocumentationRuleAmino;
 }
@@ -376,7 +376,7 @@ export interface Page {
    */
   subpages: Page[];
 }
-export interface PageProtoType {
+export interface PageProtoMsg {
   typeUrl: "/google.api.Page";
   value: Uint8Array;
 }
@@ -416,7 +416,7 @@ export interface PageAmino {
    */
   subpages: PageAmino[];
 }
-export interface PageAminoType {
+export interface PageAminoMsg {
   type: "/google.api.Page";
   value: PageAmino;
 }
@@ -623,6 +623,25 @@ export const Documentation = {
     obj.service_root_url = message.serviceRootUrl;
     obj.overview = message.overview;
     return obj;
+  },
+
+  fromAminoMsg(object: DocumentationAminoMsg): Documentation {
+    return Documentation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DocumentationProtoMsg): Documentation {
+    return Documentation.decode(message.value);
+  },
+
+  toProto(message: Documentation): Uint8Array {
+    return Documentation.encode(message).finish();
+  },
+
+  toProtoMsg(message: Documentation): DocumentationProtoMsg {
+    return {
+      typeUrl: "/google.api.Documentation",
+      value: Documentation.encode(message).finish()
+    };
   }
 
 };
@@ -738,6 +757,25 @@ export const DocumentationRule = {
     obj.description = message.description;
     obj.deprecation_description = message.deprecationDescription;
     return obj;
+  },
+
+  fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
+    return DocumentationRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
+    return DocumentationRule.decode(message.value);
+  },
+
+  toProto(message: DocumentationRule): Uint8Array {
+    return DocumentationRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: DocumentationRule): DocumentationRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.DocumentationRule",
+      value: DocumentationRule.encode(message).finish()
+    };
   }
 
 };
@@ -871,6 +909,25 @@ export const Page = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: PageAminoMsg): Page {
+    return Page.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PageProtoMsg): Page {
+    return Page.decode(message.value);
+  },
+
+  toProto(message: Page): Uint8Array {
+    return Page.encode(message).finish();
+  },
+
+  toProtoMsg(message: Page): PageProtoMsg {
+    return {
+      typeUrl: "/google.api.Page",
+      value: Page.encode(message).finish()
+    };
   }
 
 };

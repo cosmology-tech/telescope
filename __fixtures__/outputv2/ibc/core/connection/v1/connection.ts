@@ -99,7 +99,7 @@ export interface ConnectionEnd {
    */
   delayPeriod: Long;
 }
-export interface ConnectionEndProtoType {
+export interface ConnectionEndProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
   value: Uint8Array;
 }
@@ -133,7 +133,7 @@ export interface ConnectionEndAmino {
    */
   delay_period: string;
 }
-export interface ConnectionEndAminoType {
+export interface ConnectionEndAminoMsg {
   type: "cosmos-sdk/ConnectionEnd";
   value: ConnectionEndAmino;
 }
@@ -178,7 +178,7 @@ export interface IdentifiedConnection {
   /** delay period associated with this connection. */
   delayPeriod: Long;
 }
-export interface IdentifiedConnectionProtoType {
+export interface IdentifiedConnectionProtoMsg {
   typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
   value: Uint8Array;
 }
@@ -209,7 +209,7 @@ export interface IdentifiedConnectionAmino {
   /** delay period associated with this connection. */
   delay_period: string;
 }
-export interface IdentifiedConnectionAminoType {
+export interface IdentifiedConnectionAminoMsg {
   type: "cosmos-sdk/IdentifiedConnection";
   value: IdentifiedConnectionAmino;
 }
@@ -244,7 +244,7 @@ export interface Counterparty {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefix;
 }
-export interface CounterpartyProtoType {
+export interface CounterpartyProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Counterparty";
   value: Uint8Array;
 }
@@ -266,7 +266,7 @@ export interface CounterpartyAmino {
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefixAmino;
 }
-export interface CounterpartyAminoType {
+export interface CounterpartyAminoMsg {
   type: "cosmos-sdk/Counterparty";
   value: CounterpartyAmino;
 }
@@ -283,7 +283,7 @@ export interface ClientPaths {
   /** list of connection paths */
   paths: string[];
 }
-export interface ClientPathsProtoType {
+export interface ClientPathsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ClientPaths";
   value: Uint8Array;
 }
@@ -293,7 +293,7 @@ export interface ClientPathsAmino {
   /** list of connection paths */
   paths: string[];
 }
-export interface ClientPathsAminoType {
+export interface ClientPathsAminoMsg {
   type: "cosmos-sdk/ClientPaths";
   value: ClientPathsAmino;
 }
@@ -311,7 +311,7 @@ export interface ConnectionPaths {
   /** list of connection paths */
   paths: string[];
 }
-export interface ConnectionPathsProtoType {
+export interface ConnectionPathsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
   value: Uint8Array;
 }
@@ -324,7 +324,7 @@ export interface ConnectionPathsAmino {
   /** list of connection paths */
   paths: string[];
 }
-export interface ConnectionPathsAminoType {
+export interface ConnectionPathsAminoMsg {
   type: "cosmos-sdk/ConnectionPaths";
   value: ConnectionPathsAmino;
 }
@@ -346,7 +346,7 @@ export interface Version {
   /** list of features compatible with the specified identifier */
   features: string[];
 }
-export interface VersionProtoType {
+export interface VersionProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Version";
   value: Uint8Array;
 }
@@ -362,7 +362,7 @@ export interface VersionAmino {
   /** list of features compatible with the specified identifier */
   features: string[];
 }
-export interface VersionAminoType {
+export interface VersionAminoMsg {
   type: "cosmos-sdk/Version";
   value: VersionAmino;
 }
@@ -385,7 +385,7 @@ export interface Params {
    */
   maxExpectedTimePerBlock: Long;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Params";
   value: Uint8Array;
 }
@@ -399,7 +399,7 @@ export interface ParamsAmino {
    */
   max_expected_time_per_block: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";
   value: ParamsAmino;
 }
@@ -571,6 +571,32 @@ export const ConnectionEnd = {
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConnectionEndAminoMsg): ConnectionEnd {
+    return ConnectionEnd.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConnectionEnd): ConnectionEndAminoMsg {
+    return {
+      type: "cosmos-sdk/ConnectionEnd",
+      value: ConnectionEnd.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConnectionEndProtoMsg): ConnectionEnd {
+    return ConnectionEnd.decode(message.value);
+  },
+
+  toProto(message: ConnectionEnd): Uint8Array {
+    return ConnectionEnd.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConnectionEnd): ConnectionEndProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.ConnectionEnd",
+      value: ConnectionEnd.encode(message).finish()
+    };
   }
 
 };
@@ -753,6 +779,32 @@ export const IdentifiedConnection = {
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: IdentifiedConnectionAminoMsg): IdentifiedConnection {
+    return IdentifiedConnection.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: IdentifiedConnection): IdentifiedConnectionAminoMsg {
+    return {
+      type: "cosmos-sdk/IdentifiedConnection",
+      value: IdentifiedConnection.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: IdentifiedConnectionProtoMsg): IdentifiedConnection {
+    return IdentifiedConnection.decode(message.value);
+  },
+
+  toProto(message: IdentifiedConnection): Uint8Array {
+    return IdentifiedConnection.encode(message).finish();
+  },
+
+  toProtoMsg(message: IdentifiedConnection): IdentifiedConnectionProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.IdentifiedConnection",
+      value: IdentifiedConnection.encode(message).finish()
+    };
   }
 
 };
@@ -869,6 +921,32 @@ export const Counterparty = {
     obj.connection_id = message.connectionId;
     obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
+    return Counterparty.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Counterparty): CounterpartyAminoMsg {
+    return {
+      type: "cosmos-sdk/Counterparty",
+      value: Counterparty.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CounterpartyProtoMsg): Counterparty {
+    return Counterparty.decode(message.value);
+  },
+
+  toProto(message: Counterparty): Uint8Array {
+    return Counterparty.encode(message).finish();
+  },
+
+  toProtoMsg(message: Counterparty): CounterpartyProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.Counterparty",
+      value: Counterparty.encode(message).finish()
+    };
   }
 
 };
@@ -971,6 +1049,32 @@ export const ClientPaths = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ClientPathsAminoMsg): ClientPaths {
+    return ClientPaths.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClientPaths): ClientPathsAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientPaths",
+      value: ClientPaths.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClientPathsProtoMsg): ClientPaths {
+    return ClientPaths.decode(message.value);
+  },
+
+  toProto(message: ClientPaths): Uint8Array {
+    return ClientPaths.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClientPaths): ClientPathsProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.ClientPaths",
+      value: ClientPaths.encode(message).finish()
+    };
   }
 
 };
@@ -1089,6 +1193,32 @@ export const ConnectionPaths = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ConnectionPathsAminoMsg): ConnectionPaths {
+    return ConnectionPaths.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConnectionPaths): ConnectionPathsAminoMsg {
+    return {
+      type: "cosmos-sdk/ConnectionPaths",
+      value: ConnectionPaths.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConnectionPathsProtoMsg): ConnectionPaths {
+    return ConnectionPaths.decode(message.value);
+  },
+
+  toProto(message: ConnectionPaths): Uint8Array {
+    return ConnectionPaths.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConnectionPaths): ConnectionPathsProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.ConnectionPaths",
+      value: ConnectionPaths.encode(message).finish()
+    };
   }
 
 };
@@ -1207,6 +1337,32 @@ export const Version = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: VersionAminoMsg): Version {
+    return Version.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Version): VersionAminoMsg {
+    return {
+      type: "cosmos-sdk/Version",
+      value: Version.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: VersionProtoMsg): Version {
+    return Version.decode(message.value);
+  },
+
+  toProto(message: Version): Uint8Array {
+    return Version.encode(message).finish();
+  },
+
+  toProtoMsg(message: Version): VersionProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.Version",
+      value: Version.encode(message).finish()
+    };
   }
 
 };
@@ -1291,6 +1447,32 @@ export const Params = {
     const obj: any = {};
     obj.max_expected_time_per_block = message.maxExpectedTimePerBlock ? message.maxExpectedTimePerBlock.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/ibc.core.connection.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

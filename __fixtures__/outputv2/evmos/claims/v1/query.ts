@@ -11,7 +11,7 @@ export const protobufPackage = "evmos.claims.v1";
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequest {}
-export interface QueryTotalUnclaimedRequestProtoType {
+export interface QueryTotalUnclaimedRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface QueryTotalUnclaimedRequestProtoType {
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequestAmino {}
-export interface QueryTotalUnclaimedRequestAminoType {
+export interface QueryTotalUnclaimedRequestAminoMsg {
   type: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
   value: QueryTotalUnclaimedRequestAmino;
 }
@@ -40,7 +40,7 @@ export interface QueryTotalUnclaimedResponse {
   /** coins defines the unclaimed coins */
   coins: Coin[];
 }
-export interface QueryTotalUnclaimedResponseProtoType {
+export interface QueryTotalUnclaimedResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
   value: Uint8Array;
 }
@@ -53,7 +53,7 @@ export interface QueryTotalUnclaimedResponseAmino {
   /** coins defines the unclaimed coins */
   coins: CoinAmino[];
 }
-export interface QueryTotalUnclaimedResponseAminoType {
+export interface QueryTotalUnclaimedResponseAminoMsg {
   type: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
   value: QueryTotalUnclaimedResponseAmino;
 }
@@ -68,14 +68,14 @@ export interface QueryTotalUnclaimedResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface QueryParamsRequestProtoType {
+export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoType {
+export interface QueryParamsRequestAminoMsg {
   type: "/evmos.claims.v1.QueryParamsRequest";
   value: QueryParamsRequestAmino;
 }
@@ -88,7 +88,7 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
 }
-export interface QueryParamsResponseProtoType {
+export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse";
   value: Uint8Array;
 }
@@ -98,7 +98,7 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoType {
+export interface QueryParamsResponseAminoMsg {
   type: "/evmos.claims.v1.QueryParamsResponse";
   value: QueryParamsResponseAmino;
 }
@@ -116,7 +116,7 @@ export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryClaimsRecordsRequestProtoType {
+export interface QueryClaimsRecordsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
   value: Uint8Array;
 }
@@ -129,7 +129,7 @@ export interface QueryClaimsRecordsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryClaimsRecordsRequestAminoType {
+export interface QueryClaimsRecordsRequestAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordsRequest";
   value: QueryClaimsRecordsRequestAmino;
 }
@@ -153,7 +153,7 @@ export interface QueryClaimsRecordsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryClaimsRecordsResponseProtoType {
+export interface QueryClaimsRecordsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
   value: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface QueryClaimsRecordsResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryClaimsRecordsResponseAminoType {
+export interface QueryClaimsRecordsResponseAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordsResponse";
   value: QueryClaimsRecordsResponseAmino;
 }
@@ -191,7 +191,7 @@ export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
   address: string;
 }
-export interface QueryClaimsRecordRequestProtoType {
+export interface QueryClaimsRecordRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest";
   value: Uint8Array;
 }
@@ -204,7 +204,7 @@ export interface QueryClaimsRecordRequestAmino {
   /** address defines the user to query claims record for */
   address: string;
 }
-export interface QueryClaimsRecordRequestAminoType {
+export interface QueryClaimsRecordRequestAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordRequest";
   value: QueryClaimsRecordRequestAmino;
 }
@@ -228,7 +228,7 @@ export interface QueryClaimsRecordResponse {
   /** the claims of the user */
   claims: Claim[];
 }
-export interface QueryClaimsRecordResponseProtoType {
+export interface QueryClaimsRecordResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse";
   value: Uint8Array;
 }
@@ -244,7 +244,7 @@ export interface QueryClaimsRecordResponseAmino {
   /** the claims of the user */
   claims: ClaimAmino[];
 }
-export interface QueryClaimsRecordResponseAminoType {
+export interface QueryClaimsRecordResponseAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordResponse";
   value: QueryClaimsRecordResponseAmino;
 }
@@ -317,6 +317,25 @@ export const QueryTotalUnclaimedRequest = {
   toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalUnclaimedRequestAminoMsg): QueryTotalUnclaimedRequest {
+    return QueryTotalUnclaimedRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryTotalUnclaimedRequestProtoMsg): QueryTotalUnclaimedRequest {
+    return QueryTotalUnclaimedRequest.decode(message.value);
+  },
+
+  toProto(message: QueryTotalUnclaimedRequest): Uint8Array {
+    return QueryTotalUnclaimedRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
+      value: QueryTotalUnclaimedRequest.encode(message).finish()
+    };
   }
 
 };
@@ -418,6 +437,25 @@ export const QueryTotalUnclaimedResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalUnclaimedResponseAminoMsg): QueryTotalUnclaimedResponse {
+    return QueryTotalUnclaimedResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryTotalUnclaimedResponseProtoMsg): QueryTotalUnclaimedResponse {
+    return QueryTotalUnclaimedResponse.decode(message.value);
+  },
+
+  toProto(message: QueryTotalUnclaimedResponse): Uint8Array {
+    return QueryTotalUnclaimedResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
+      value: QueryTotalUnclaimedResponse.encode(message).finish()
+    };
   }
 
 };
@@ -481,6 +519,25 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -564,6 +621,25 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -647,6 +723,25 @@ export const QueryClaimsRecordsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimsRecordsRequestAminoMsg): QueryClaimsRecordsRequest {
+    return QueryClaimsRecordsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryClaimsRecordsRequestProtoMsg): QueryClaimsRecordsRequest {
+    return QueryClaimsRecordsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryClaimsRecordsRequest): Uint8Array {
+    return QueryClaimsRecordsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
+      value: QueryClaimsRecordsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -764,6 +859,25 @@ export const QueryClaimsRecordsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimsRecordsResponseAminoMsg): QueryClaimsRecordsResponse {
+    return QueryClaimsRecordsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryClaimsRecordsResponseProtoMsg): QueryClaimsRecordsResponse {
+    return QueryClaimsRecordsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryClaimsRecordsResponse): Uint8Array {
+    return QueryClaimsRecordsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
+      value: QueryClaimsRecordsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -847,6 +961,25 @@ export const QueryClaimsRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
+    return QueryClaimsRecordRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryClaimsRecordRequestProtoMsg): QueryClaimsRecordRequest {
+    return QueryClaimsRecordRequest.decode(message.value);
+  },
+
+  toProto(message: QueryClaimsRecordRequest): Uint8Array {
+    return QueryClaimsRecordRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
+      value: QueryClaimsRecordRequest.encode(message).finish()
+    };
   }
 
 };
@@ -964,6 +1097,25 @@ export const QueryClaimsRecordResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryClaimsRecordResponseAminoMsg): QueryClaimsRecordResponse {
+    return QueryClaimsRecordResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryClaimsRecordResponseProtoMsg): QueryClaimsRecordResponse {
+    return QueryClaimsRecordResponse.decode(message.value);
+  },
+
+  toProto(message: QueryClaimsRecordResponse): Uint8Array {
+    return QueryClaimsRecordResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
+      value: QueryClaimsRecordResponse.encode(message).finish()
+    };
   }
 
 };

@@ -17,7 +17,7 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
-export interface MsgCreateClientProtoType {
+export interface MsgCreateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClient";
   value: Uint8Array;
 }
@@ -36,7 +36,7 @@ export interface MsgCreateClientAmino {
   /** signer address */
   signer: string;
 }
-export interface MsgCreateClientAminoType {
+export interface MsgCreateClientAminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
   value: MsgCreateClientAmino;
 }
@@ -50,14 +50,14 @@ export interface MsgCreateClientSDKType {
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
-export interface MsgCreateClientResponseProtoType {
+export interface MsgCreateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
   value: Uint8Array;
 }
 
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseAmino {}
-export interface MsgCreateClientResponseAminoType {
+export interface MsgCreateClientResponseAminoMsg {
   type: "cosmos-sdk/MsgCreateClientResponse";
   value: MsgCreateClientResponseAmino;
 }
@@ -79,7 +79,7 @@ export interface MsgUpdateClient {
   /** signer address */
   signer: string;
 }
-export interface MsgUpdateClientProtoType {
+export interface MsgUpdateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
   value: Uint8Array;
 }
@@ -98,7 +98,7 @@ export interface MsgUpdateClientAmino {
   /** signer address */
   signer: string;
 }
-export interface MsgUpdateClientAminoType {
+export interface MsgUpdateClientAminoMsg {
   type: "cosmos-sdk/MsgUpdateClient";
   value: MsgUpdateClientAmino;
 }
@@ -115,14 +115,14 @@ export interface MsgUpdateClientSDKType {
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
-export interface MsgUpdateClientResponseProtoType {
+export interface MsgUpdateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
   value: Uint8Array;
 }
 
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseAmino {}
-export interface MsgUpdateClientResponseAminoType {
+export interface MsgUpdateClientResponseAminoMsg {
   type: "cosmos-sdk/MsgUpdateClientResponse";
   value: MsgUpdateClientResponseAmino;
 }
@@ -156,7 +156,7 @@ export interface MsgUpgradeClient {
   /** signer address */
   signer: string;
 }
-export interface MsgUpgradeClientProtoType {
+export interface MsgUpgradeClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
   value: Uint8Array;
 }
@@ -187,7 +187,7 @@ export interface MsgUpgradeClientAmino {
   /** signer address */
   signer: string;
 }
-export interface MsgUpgradeClientAminoType {
+export interface MsgUpgradeClientAminoMsg {
   type: "cosmos-sdk/MsgUpgradeClient";
   value: MsgUpgradeClientAmino;
 }
@@ -207,14 +207,14 @@ export interface MsgUpgradeClientSDKType {
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
-export interface MsgUpgradeClientResponseProtoType {
+export interface MsgUpgradeClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
   value: Uint8Array;
 }
 
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseAmino {}
-export interface MsgUpgradeClientResponseAminoType {
+export interface MsgUpgradeClientResponseAminoMsg {
   type: "cosmos-sdk/MsgUpgradeClientResponse";
   value: MsgUpgradeClientResponseAmino;
 }
@@ -236,7 +236,7 @@ export interface MsgSubmitMisbehaviour {
   /** signer address */
   signer: string;
 }
-export interface MsgSubmitMisbehaviourProtoType {
+export interface MsgSubmitMisbehaviourProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
   value: Uint8Array;
 }
@@ -255,7 +255,7 @@ export interface MsgSubmitMisbehaviourAmino {
   /** signer address */
   signer: string;
 }
-export interface MsgSubmitMisbehaviourAminoType {
+export interface MsgSubmitMisbehaviourAminoMsg {
   type: "cosmos-sdk/MsgSubmitMisbehaviour";
   value: MsgSubmitMisbehaviourAmino;
 }
@@ -275,7 +275,7 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
-export interface MsgSubmitMisbehaviourResponseProtoType {
+export interface MsgSubmitMisbehaviourResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
   value: Uint8Array;
 }
@@ -285,7 +285,7 @@ export interface MsgSubmitMisbehaviourResponseProtoType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponseAmino {}
-export interface MsgSubmitMisbehaviourResponseAminoType {
+export interface MsgSubmitMisbehaviourResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitMisbehaviourResponse";
   value: MsgSubmitMisbehaviourResponseAmino;
 }
@@ -408,6 +408,32 @@ export const MsgCreateClient = {
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateClientAminoMsg): MsgCreateClient {
+    return MsgCreateClient.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateClient): MsgCreateClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateClient",
+      value: MsgCreateClient.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateClientProtoMsg): MsgCreateClient {
+    return MsgCreateClient.decode(message.value);
+  },
+
+  toProto(message: MsgCreateClient): Uint8Array {
+    return MsgCreateClient.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateClient): MsgCreateClientProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgCreateClient",
+      value: MsgCreateClient.encode(message).finish()
+    };
   }
 
 };
@@ -472,6 +498,32 @@ export const MsgCreateClientResponse = {
   toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateClientResponseAminoMsg): MsgCreateClientResponse {
+    return MsgCreateClientResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateClientResponse): MsgCreateClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateClientResponse",
+      value: MsgCreateClientResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateClientResponseProtoMsg): MsgCreateClientResponse {
+    return MsgCreateClientResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateClientResponse): Uint8Array {
+    return MsgCreateClientResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateClientResponse): MsgCreateClientResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse",
+      value: MsgCreateClientResponse.encode(message).finish()
+    };
   }
 
 };
@@ -588,6 +640,32 @@ export const MsgUpdateClient = {
     obj.header = message.header ? Any.toAmino(message.header) : undefined;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClientAminoMsg): MsgUpdateClient {
+    return MsgUpdateClient.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateClient): MsgUpdateClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpdateClient",
+      value: MsgUpdateClient.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpdateClientProtoMsg): MsgUpdateClient {
+    return MsgUpdateClient.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClient): Uint8Array {
+    return MsgUpdateClient.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClient): MsgUpdateClientProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgUpdateClient",
+      value: MsgUpdateClient.encode(message).finish()
+    };
   }
 
 };
@@ -652,6 +730,32 @@ export const MsgUpdateClientResponse = {
   toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClientResponseAminoMsg): MsgUpdateClientResponse {
+    return MsgUpdateClientResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateClientResponse): MsgUpdateClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpdateClientResponse",
+      value: MsgUpdateClientResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpdateClientResponseProtoMsg): MsgUpdateClientResponse {
+    return MsgUpdateClientResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClientResponse): Uint8Array {
+    return MsgUpdateClientResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClientResponse): MsgUpdateClientResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse",
+      value: MsgUpdateClientResponse.encode(message).finish()
+    };
   }
 
 };
@@ -816,6 +920,32 @@ export const MsgUpgradeClient = {
     obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpgradeClientAminoMsg): MsgUpgradeClient {
+    return MsgUpgradeClient.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpgradeClient): MsgUpgradeClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpgradeClient",
+      value: MsgUpgradeClient.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpgradeClientProtoMsg): MsgUpgradeClient {
+    return MsgUpgradeClient.decode(message.value);
+  },
+
+  toProto(message: MsgUpgradeClient): Uint8Array {
+    return MsgUpgradeClient.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpgradeClient): MsgUpgradeClientProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgUpgradeClient",
+      value: MsgUpgradeClient.encode(message).finish()
+    };
   }
 
 };
@@ -880,6 +1010,32 @@ export const MsgUpgradeClientResponse = {
   toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgUpgradeClientResponseAminoMsg): MsgUpgradeClientResponse {
+    return MsgUpgradeClientResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpgradeClientResponse): MsgUpgradeClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpgradeClientResponse",
+      value: MsgUpgradeClientResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpgradeClientResponseProtoMsg): MsgUpgradeClientResponse {
+    return MsgUpgradeClientResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpgradeClientResponse): Uint8Array {
+    return MsgUpgradeClientResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpgradeClientResponse): MsgUpgradeClientResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse",
+      value: MsgUpgradeClientResponse.encode(message).finish()
+    };
   }
 
 };
@@ -996,6 +1152,32 @@ export const MsgSubmitMisbehaviour = {
     obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitMisbehaviourAminoMsg): MsgSubmitMisbehaviour {
+    return MsgSubmitMisbehaviour.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitMisbehaviour",
+      value: MsgSubmitMisbehaviour.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg): MsgSubmitMisbehaviour {
+    return MsgSubmitMisbehaviour.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitMisbehaviour): Uint8Array {
+    return MsgSubmitMisbehaviour.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
+      value: MsgSubmitMisbehaviour.encode(message).finish()
+    };
   }
 
 };
@@ -1060,6 +1242,32 @@ export const MsgSubmitMisbehaviourResponse = {
   toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitMisbehaviourResponseAminoMsg): MsgSubmitMisbehaviourResponse {
+    return MsgSubmitMisbehaviourResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitMisbehaviourResponse",
+      value: MsgSubmitMisbehaviourResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitMisbehaviourResponseProtoMsg): MsgSubmitMisbehaviourResponse {
+    return MsgSubmitMisbehaviourResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitMisbehaviourResponse): Uint8Array {
+    return MsgSubmitMisbehaviourResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse",
+      value: MsgSubmitMisbehaviourResponse.encode(message).finish()
+    };
   }
 
 };

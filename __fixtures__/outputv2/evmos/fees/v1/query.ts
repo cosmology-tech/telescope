@@ -13,7 +13,7 @@ export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryDevFeeInfosRequestProtoType {
+export interface QueryDevFeeInfosRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface QueryDevFeeInfosRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryDevFeeInfosRequestAminoType {
+export interface QueryDevFeeInfosRequestAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfosRequest";
   value: QueryDevFeeInfosRequestAmino;
 }
@@ -49,7 +49,7 @@ export interface QueryDevFeeInfosResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryDevFeeInfosResponseProtoType {
+export interface QueryDevFeeInfosResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse";
   value: Uint8Array;
 }
@@ -64,7 +64,7 @@ export interface QueryDevFeeInfosResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryDevFeeInfosResponseAminoType {
+export interface QueryDevFeeInfosResponseAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfosResponse";
   value: QueryDevFeeInfosResponseAmino;
 }
@@ -86,7 +86,7 @@ export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
   contractAddress: string;
 }
-export interface QueryDevFeeInfoRequestProtoType {
+export interface QueryDevFeeInfoRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
   value: Uint8Array;
 }
@@ -99,7 +99,7 @@ export interface QueryDevFeeInfoRequestAmino {
   /** contract identifier is the hex contract address of a contract */
   contract_address: string;
 }
-export interface QueryDevFeeInfoRequestAminoType {
+export interface QueryDevFeeInfoRequestAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfoRequest";
   value: QueryDevFeeInfoRequestAmino;
 }
@@ -119,7 +119,7 @@ export interface QueryDevFeeInfoRequestSDKType {
 export interface QueryDevFeeInfoResponse {
   fee?: DevFeeInfo;
 }
-export interface QueryDevFeeInfoResponseProtoType {
+export interface QueryDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse";
   value: Uint8Array;
 }
@@ -131,7 +131,7 @@ export interface QueryDevFeeInfoResponseProtoType {
 export interface QueryDevFeeInfoResponseAmino {
   fee?: DevFeeInfoAmino;
 }
-export interface QueryDevFeeInfoResponseAminoType {
+export interface QueryDevFeeInfoResponseAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfoResponse";
   value: QueryDevFeeInfoResponseAmino;
 }
@@ -146,14 +146,14 @@ export interface QueryDevFeeInfoResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface QueryParamsRequestProtoType {
+export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoType {
+export interface QueryParamsRequestAminoMsg {
   type: "/evmos.fees.v1.QueryParamsRequest";
   value: QueryParamsRequestAmino;
 }
@@ -168,7 +168,7 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params?: Params;
 }
-export interface QueryParamsResponseProtoType {
+export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsResponse";
   value: Uint8Array;
 }
@@ -180,7 +180,7 @@ export interface QueryParamsResponseProtoType {
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoType {
+export interface QueryParamsResponseAminoMsg {
   type: "/evmos.fees.v1.QueryParamsResponse";
   value: QueryParamsResponseAmino;
 }
@@ -204,7 +204,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryDevFeeInfosPerDeployerRequestProtoType {
+export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
   value: Uint8Array;
 }
@@ -220,7 +220,7 @@ export interface QueryDevFeeInfosPerDeployerRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryDevFeeInfosPerDeployerRequestAminoType {
+export interface QueryDevFeeInfosPerDeployerRequestAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
   value: QueryDevFeeInfosPerDeployerRequestAmino;
 }
@@ -244,7 +244,7 @@ export interface QueryDevFeeInfosPerDeployerResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryDevFeeInfosPerDeployerResponseProtoType {
+export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
   value: Uint8Array;
 }
@@ -259,7 +259,7 @@ export interface QueryDevFeeInfosPerDeployerResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryDevFeeInfosPerDeployerResponseAminoType {
+export interface QueryDevFeeInfosPerDeployerResponseAminoMsg {
   type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
   value: QueryDevFeeInfosPerDeployerResponseAmino;
 }
@@ -352,6 +352,25 @@ export const QueryDevFeeInfosRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfosRequestAminoMsg): QueryDevFeeInfosRequest {
+    return QueryDevFeeInfosRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfosRequestProtoMsg): QueryDevFeeInfosRequest {
+    return QueryDevFeeInfosRequest.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfosRequest): Uint8Array {
+    return QueryDevFeeInfosRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest",
+      value: QueryDevFeeInfosRequest.encode(message).finish()
+    };
   }
 
 };
@@ -469,6 +488,25 @@ export const QueryDevFeeInfosResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfosResponseAminoMsg): QueryDevFeeInfosResponse {
+    return QueryDevFeeInfosResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfosResponseProtoMsg): QueryDevFeeInfosResponse {
+    return QueryDevFeeInfosResponse.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfosResponse): Uint8Array {
+    return QueryDevFeeInfosResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse",
+      value: QueryDevFeeInfosResponse.encode(message).finish()
+    };
   }
 
 };
@@ -552,6 +590,25 @@ export const QueryDevFeeInfoRequest = {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfoRequestAminoMsg): QueryDevFeeInfoRequest {
+    return QueryDevFeeInfoRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg): QueryDevFeeInfoRequest {
+    return QueryDevFeeInfoRequest.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfoRequest): Uint8Array {
+    return QueryDevFeeInfoRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
+      value: QueryDevFeeInfoRequest.encode(message).finish()
+    };
   }
 
 };
@@ -635,6 +692,25 @@ export const QueryDevFeeInfoResponse = {
     const obj: any = {};
     obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfoResponseAminoMsg): QueryDevFeeInfoResponse {
+    return QueryDevFeeInfoResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfoResponseProtoMsg): QueryDevFeeInfoResponse {
+    return QueryDevFeeInfoResponse.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfoResponse): Uint8Array {
+    return QueryDevFeeInfoResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse",
+      value: QueryDevFeeInfoResponse.encode(message).finish()
+    };
   }
 
 };
@@ -698,6 +774,25 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -781,6 +876,25 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -880,6 +994,25 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     obj.deployer_address = message.deployerAddress;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfosPerDeployerRequestAminoMsg): QueryDevFeeInfosPerDeployerRequest {
+    return QueryDevFeeInfosPerDeployerRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfosPerDeployerRequestProtoMsg): QueryDevFeeInfosPerDeployerRequest {
+    return QueryDevFeeInfosPerDeployerRequest.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfosPerDeployerRequest): Uint8Array {
+    return QueryDevFeeInfosPerDeployerRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
+      value: QueryDevFeeInfosPerDeployerRequest.encode(message).finish()
+    };
   }
 
 };
@@ -997,6 +1130,25 @@ export const QueryDevFeeInfosPerDeployerResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDevFeeInfosPerDeployerResponseAminoMsg): QueryDevFeeInfosPerDeployerResponse {
+    return QueryDevFeeInfosPerDeployerResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDevFeeInfosPerDeployerResponseProtoMsg): QueryDevFeeInfosPerDeployerResponse {
+    return QueryDevFeeInfosPerDeployerResponse.decode(message.value);
+  },
+
+  toProto(message: QueryDevFeeInfosPerDeployerResponse): Uint8Array {
+    return QueryDevFeeInfosPerDeployerResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse",
+      value: QueryDevFeeInfosPerDeployerResponse.encode(message).finish()
+    };
   }
 
 };

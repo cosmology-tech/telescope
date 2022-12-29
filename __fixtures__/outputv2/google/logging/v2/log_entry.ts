@@ -11,7 +11,7 @@ export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryProtoType {
+export interface LogEntry_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogEntry_LabelsEntryAminoType {
+export interface LogEntry_LabelsEntryAminoMsg {
   type: string;
   value: LogEntry_LabelsEntryAmino;
 }
@@ -192,7 +192,7 @@ export interface LogEntry {
    */
   split?: LogSplit;
 }
-export interface LogEntryProtoType {
+export interface LogEntryProtoMsg {
   typeUrl: "/google.logging.v2.LogEntry";
   value: Uint8Array;
 }
@@ -361,7 +361,7 @@ export interface LogEntryAmino {
    */
   split?: LogSplitAmino;
 }
-export interface LogEntryAminoType {
+export interface LogEntryAminoMsg {
   type: "/google.logging.v2.LogEntry";
   value: LogEntryAmino;
 }
@@ -413,7 +413,7 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface LogEntryOperationProtoType {
+export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntryOperation";
   value: Uint8Array;
 }
@@ -442,7 +442,7 @@ export interface LogEntryOperationAmino {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface LogEntryOperationAminoType {
+export interface LogEntryOperationAminoMsg {
   type: "/google.logging.v2.LogEntryOperation";
   value: LogEntryOperationAmino;
 }
@@ -485,7 +485,7 @@ export interface LogEntrySourceLocation {
    */
   function: string;
 }
-export interface LogEntrySourceLocationProtoType {
+export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation";
   value: Uint8Array;
 }
@@ -517,7 +517,7 @@ export interface LogEntrySourceLocationAmino {
    */
   function: string;
 }
-export interface LogEntrySourceLocationAminoType {
+export interface LogEntrySourceLocationAminoMsg {
   type: "/google.logging.v2.LogEntrySourceLocation";
   value: LogEntrySourceLocationAmino;
 }
@@ -555,7 +555,7 @@ export interface LogSplit {
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
 }
-export interface LogSplitProtoType {
+export interface LogSplitProtoMsg {
   typeUrl: "/google.logging.v2.LogSplit";
   value: Uint8Array;
 }
@@ -583,7 +583,7 @@ export interface LogSplitAmino {
   /** The total number of log entries that the original LogEntry was split into. */
   total_splits: number;
 }
-export interface LogSplitAminoType {
+export interface LogSplitAminoMsg {
   type: "/google.logging.v2.LogSplit";
   value: LogSplitAmino;
 }
@@ -692,6 +692,18 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: LogEntry_LabelsEntry): Uint8Array {
+    return LogEntry_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -1083,6 +1095,25 @@ export const LogEntry = {
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
     obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
+    return LogEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
+    return LogEntry.decode(message.value);
+  },
+
+  toProto(message: LogEntry): Uint8Array {
+    return LogEntry.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntry): LogEntryProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntry",
+      value: LogEntry.encode(message).finish()
+    };
   }
 
 };
@@ -1214,6 +1245,25 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
+    return LogEntryOperation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
+    return LogEntryOperation.decode(message.value);
+  },
+
+  toProto(message: LogEntryOperation): Uint8Array {
+    return LogEntryOperation.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntryOperation): LogEntryOperationProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntryOperation",
+      value: LogEntryOperation.encode(message).finish()
+    };
   }
 
 };
@@ -1329,6 +1379,25 @@ export const LogEntrySourceLocation = {
     obj.line = message.line ? message.line.toString() : undefined;
     obj.function = message.function;
     return obj;
+  },
+
+  fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
+    return LogEntrySourceLocation.decode(message.value);
+  },
+
+  toProto(message: LogEntrySourceLocation): Uint8Array {
+    return LogEntrySourceLocation.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogEntrySourceLocation): LogEntrySourceLocationProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogEntrySourceLocation",
+      value: LogEntrySourceLocation.encode(message).finish()
+    };
   }
 
 };
@@ -1444,6 +1513,25 @@ export const LogSplit = {
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
+  },
+
+  fromAminoMsg(object: LogSplitAminoMsg): LogSplit {
+    return LogSplit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogSplitProtoMsg): LogSplit {
+    return LogSplit.decode(message.value);
+  },
+
+  toProto(message: LogSplit): Uint8Array {
+    return LogSplit.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogSplit): LogSplitProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogSplit",
+      value: LogSplit.encode(message).finish()
+    };
   }
 
 };

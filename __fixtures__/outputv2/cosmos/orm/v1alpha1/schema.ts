@@ -112,7 +112,7 @@ export interface ModuleSchemaDescriptor {
    */
   prefix: Uint8Array;
 }
-export interface ModuleSchemaDescriptorProtoType {
+export interface ModuleSchemaDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor";
   value: Uint8Array;
 }
@@ -127,7 +127,7 @@ export interface ModuleSchemaDescriptorAmino {
    */
   prefix: Uint8Array;
 }
-export interface ModuleSchemaDescriptorAminoType {
+export interface ModuleSchemaDescriptorAminoMsg {
   type: "cosmos-sdk/ModuleSchemaDescriptor";
   value: ModuleSchemaDescriptorAmino;
 }
@@ -160,7 +160,7 @@ export interface ModuleSchemaDescriptor_FileEntry {
    */
   storageType: StorageType;
 }
-export interface ModuleSchemaDescriptor_FileEntryProtoType {
+export interface ModuleSchemaDescriptor_FileEntryProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.FileEntry";
   value: Uint8Array;
 }
@@ -187,7 +187,7 @@ export interface ModuleSchemaDescriptor_FileEntryAmino {
    */
   storage_type: StorageType;
 }
-export interface ModuleSchemaDescriptor_FileEntryAminoType {
+export interface ModuleSchemaDescriptor_FileEntryAminoMsg {
   type: "cosmos-sdk/FileEntry";
   value: ModuleSchemaDescriptor_FileEntryAmino;
 }
@@ -313,6 +313,32 @@ export const ModuleSchemaDescriptor = {
 
     obj.prefix = message.prefix;
     return obj;
+  },
+
+  fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {
+    return ModuleSchemaDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/ModuleSchemaDescriptor",
+      value: ModuleSchemaDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg): ModuleSchemaDescriptor {
+    return ModuleSchemaDescriptor.decode(message.value);
+  },
+
+  toProto(message: ModuleSchemaDescriptor): Uint8Array {
+    return ModuleSchemaDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor",
+      value: ModuleSchemaDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -429,6 +455,32 @@ export const ModuleSchemaDescriptor_FileEntry = {
     obj.proto_file_name = message.protoFileName;
     obj.storage_type = message.storageType;
     return obj;
+  },
+
+  fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {
+    return ModuleSchemaDescriptor_FileEntry.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAminoMsg {
+    return {
+      type: "cosmos-sdk/FileEntry",
+      value: ModuleSchemaDescriptor_FileEntry.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg): ModuleSchemaDescriptor_FileEntry {
+    return ModuleSchemaDescriptor_FileEntry.decode(message.value);
+  },
+
+  toProto(message: ModuleSchemaDescriptor_FileEntry): Uint8Array {
+    return ModuleSchemaDescriptor_FileEntry.encode(message).finish();
+  },
+
+  toProtoMsg(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryProtoMsg {
+    return {
+      typeUrl: "/cosmos.orm.v1alpha1.FileEntry",
+      value: ModuleSchemaDescriptor_FileEntry.encode(message).finish()
+    };
   }
 
 };

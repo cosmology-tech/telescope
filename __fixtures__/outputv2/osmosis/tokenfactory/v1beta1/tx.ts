@@ -21,7 +21,7 @@ export interface MsgCreateDenom {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
-export interface MsgCreateDenomProtoType {
+export interface MsgCreateDenomProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom";
   value: Uint8Array;
 }
@@ -43,7 +43,7 @@ export interface MsgCreateDenomAmino {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
-export interface MsgCreateDenomAminoType {
+export interface MsgCreateDenomAminoMsg {
   type: "osmosis/tokenfactory/create-denom";
   value: MsgCreateDenomAmino;
 }
@@ -71,7 +71,7 @@ export interface MsgCreateDenomSDKType {
 export interface MsgCreateDenomResponse {
   newTokenDenom: string;
 }
-export interface MsgCreateDenomResponseProtoType {
+export interface MsgCreateDenomResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenomResponse";
   value: Uint8Array;
 }
@@ -83,7 +83,7 @@ export interface MsgCreateDenomResponseProtoType {
 export interface MsgCreateDenomResponseAmino {
   new_token_denom: string;
 }
-export interface MsgCreateDenomResponseAminoType {
+export interface MsgCreateDenomResponseAminoMsg {
   type: "osmosis/tokenfactory/create-denom-response";
   value: MsgCreateDenomResponseAmino;
 }
@@ -104,7 +104,7 @@ export interface MsgMint {
   sender: string;
   amount?: Coin;
 }
-export interface MsgMintProtoType {
+export interface MsgMintProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint";
   value: Uint8Array;
 }
@@ -117,7 +117,7 @@ export interface MsgMintAmino {
   sender: string;
   amount?: CoinAmino;
 }
-export interface MsgMintAminoType {
+export interface MsgMintAminoMsg {
   type: "osmosis/tokenfactory/mint";
   value: MsgMintAmino;
 }
@@ -131,12 +131,12 @@ export interface MsgMintSDKType {
   amount?: CoinSDKType;
 }
 export interface MsgMintResponse {}
-export interface MsgMintResponseProtoType {
+export interface MsgMintResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMintResponse";
   value: Uint8Array;
 }
 export interface MsgMintResponseAmino {}
-export interface MsgMintResponseAminoType {
+export interface MsgMintResponseAminoMsg {
   type: "osmosis/tokenfactory/mint-response";
   value: MsgMintResponseAmino;
 }
@@ -150,7 +150,7 @@ export interface MsgBurn {
   sender: string;
   amount?: Coin;
 }
-export interface MsgBurnProtoType {
+export interface MsgBurnProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn";
   value: Uint8Array;
 }
@@ -163,7 +163,7 @@ export interface MsgBurnAmino {
   sender: string;
   amount?: CoinAmino;
 }
-export interface MsgBurnAminoType {
+export interface MsgBurnAminoMsg {
   type: "osmosis/tokenfactory/burn";
   value: MsgBurnAmino;
 }
@@ -177,12 +177,12 @@ export interface MsgBurnSDKType {
   amount?: CoinSDKType;
 }
 export interface MsgBurnResponse {}
-export interface MsgBurnResponseProtoType {
+export interface MsgBurnResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurnResponse";
   value: Uint8Array;
 }
 export interface MsgBurnResponseAmino {}
-export interface MsgBurnResponseAminoType {
+export interface MsgBurnResponseAminoMsg {
   type: "osmosis/tokenfactory/burn-response";
   value: MsgBurnResponseAmino;
 }
@@ -197,7 +197,7 @@ export interface MsgChangeAdmin {
   denom: string;
   newAdmin: string;
 }
-export interface MsgChangeAdminProtoType {
+export interface MsgChangeAdminProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin";
   value: Uint8Array;
 }
@@ -211,7 +211,7 @@ export interface MsgChangeAdminAmino {
   denom: string;
   new_admin: string;
 }
-export interface MsgChangeAdminAminoType {
+export interface MsgChangeAdminAminoMsg {
   type: "osmosis/tokenfactory/change-admin";
   value: MsgChangeAdminAmino;
 }
@@ -231,7 +231,7 @@ export interface MsgChangeAdminSDKType {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponse {}
-export interface MsgChangeAdminResponseProtoType {
+export interface MsgChangeAdminResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdminResponse";
   value: Uint8Array;
 }
@@ -241,7 +241,7 @@ export interface MsgChangeAdminResponseProtoType {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponseAmino {}
-export interface MsgChangeAdminResponseAminoType {
+export interface MsgChangeAdminResponseAminoMsg {
   type: "osmosis/tokenfactory/change-admin-response";
   value: MsgChangeAdminResponseAmino;
 }
@@ -260,7 +260,7 @@ export interface MsgSetDenomMetadata {
   sender: string;
   metadata?: Metadata;
 }
-export interface MsgSetDenomMetadataProtoType {
+export interface MsgSetDenomMetadataProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata";
   value: Uint8Array;
 }
@@ -273,7 +273,7 @@ export interface MsgSetDenomMetadataAmino {
   sender: string;
   metadata?: MetadataAmino;
 }
-export interface MsgSetDenomMetadataAminoType {
+export interface MsgSetDenomMetadataAminoMsg {
   type: "osmosis/tokenfactory/set-denom-metadata";
   value: MsgSetDenomMetadataAmino;
 }
@@ -292,7 +292,7 @@ export interface MsgSetDenomMetadataSDKType {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponse {}
-export interface MsgSetDenomMetadataResponseProtoType {
+export interface MsgSetDenomMetadataResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadataResponse";
   value: Uint8Array;
 }
@@ -302,7 +302,7 @@ export interface MsgSetDenomMetadataResponseProtoType {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponseAmino {}
-export interface MsgSetDenomMetadataResponseAminoType {
+export interface MsgSetDenomMetadataResponseAminoMsg {
   type: "osmosis/tokenfactory/set-denom-metadata-response";
   value: MsgSetDenomMetadataResponseAmino;
 }
@@ -409,6 +409,32 @@ export const MsgCreateDenom = {
     obj.sender = message.sender;
     obj.subdenom = message.subdenom;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateDenomAminoMsg): MsgCreateDenom {
+    return MsgCreateDenom.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateDenom): MsgCreateDenomAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/create-denom",
+      value: MsgCreateDenom.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateDenomProtoMsg): MsgCreateDenom {
+    return MsgCreateDenom.decode(message.value);
+  },
+
+  toProto(message: MsgCreateDenom): Uint8Array {
+    return MsgCreateDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateDenom): MsgCreateDenomProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom",
+      value: MsgCreateDenom.encode(message).finish()
+    };
   }
 
 };
@@ -493,6 +519,32 @@ export const MsgCreateDenomResponse = {
     const obj: any = {};
     obj.new_token_denom = message.newTokenDenom;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateDenomResponseAminoMsg): MsgCreateDenomResponse {
+    return MsgCreateDenomResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateDenomResponse): MsgCreateDenomResponseAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/create-denom-response",
+      value: MsgCreateDenomResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateDenomResponseProtoMsg): MsgCreateDenomResponse {
+    return MsgCreateDenomResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateDenomResponse): Uint8Array {
+    return MsgCreateDenomResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateDenomResponse): MsgCreateDenomResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenomResponse",
+      value: MsgCreateDenomResponse.encode(message).finish()
+    };
   }
 
 };
@@ -593,6 +645,32 @@ export const MsgMint = {
     obj.sender = message.sender;
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgMintAminoMsg): MsgMint {
+    return MsgMint.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgMint): MsgMintAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/mint",
+      value: MsgMint.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgMintProtoMsg): MsgMint {
+    return MsgMint.decode(message.value);
+  },
+
+  toProto(message: MsgMint): Uint8Array {
+    return MsgMint.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgMint): MsgMintProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint",
+      value: MsgMint.encode(message).finish()
+    };
   }
 
 };
@@ -657,6 +735,32 @@ export const MsgMintResponse = {
   toAmino(_: MsgMintResponse): MsgMintResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgMintResponseAminoMsg): MsgMintResponse {
+    return MsgMintResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgMintResponse): MsgMintResponseAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/mint-response",
+      value: MsgMintResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgMintResponseProtoMsg): MsgMintResponse {
+    return MsgMintResponse.decode(message.value);
+  },
+
+  toProto(message: MsgMintResponse): Uint8Array {
+    return MsgMintResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgMintResponse): MsgMintResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMintResponse",
+      value: MsgMintResponse.encode(message).finish()
+    };
   }
 
 };
@@ -757,6 +861,32 @@ export const MsgBurn = {
     obj.sender = message.sender;
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBurnAminoMsg): MsgBurn {
+    return MsgBurn.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBurn): MsgBurnAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/burn",
+      value: MsgBurn.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBurnProtoMsg): MsgBurn {
+    return MsgBurn.decode(message.value);
+  },
+
+  toProto(message: MsgBurn): Uint8Array {
+    return MsgBurn.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBurn): MsgBurnProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn",
+      value: MsgBurn.encode(message).finish()
+    };
   }
 
 };
@@ -821,6 +951,32 @@ export const MsgBurnResponse = {
   toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBurnResponseAminoMsg): MsgBurnResponse {
+    return MsgBurnResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBurnResponse): MsgBurnResponseAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/burn-response",
+      value: MsgBurnResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBurnResponseProtoMsg): MsgBurnResponse {
+    return MsgBurnResponse.decode(message.value);
+  },
+
+  toProto(message: MsgBurnResponse): Uint8Array {
+    return MsgBurnResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBurnResponse): MsgBurnResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurnResponse",
+      value: MsgBurnResponse.encode(message).finish()
+    };
   }
 
 };
@@ -937,6 +1093,32 @@ export const MsgChangeAdmin = {
     obj.denom = message.denom;
     obj.new_admin = message.newAdmin;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgChangeAdminAminoMsg): MsgChangeAdmin {
+    return MsgChangeAdmin.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgChangeAdmin): MsgChangeAdminAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/change-admin",
+      value: MsgChangeAdmin.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgChangeAdminProtoMsg): MsgChangeAdmin {
+    return MsgChangeAdmin.decode(message.value);
+  },
+
+  toProto(message: MsgChangeAdmin): Uint8Array {
+    return MsgChangeAdmin.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgChangeAdmin): MsgChangeAdminProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin",
+      value: MsgChangeAdmin.encode(message).finish()
+    };
   }
 
 };
@@ -1001,6 +1183,32 @@ export const MsgChangeAdminResponse = {
   toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgChangeAdminResponseAminoMsg): MsgChangeAdminResponse {
+    return MsgChangeAdminResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgChangeAdminResponse): MsgChangeAdminResponseAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/change-admin-response",
+      value: MsgChangeAdminResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgChangeAdminResponseProtoMsg): MsgChangeAdminResponse {
+    return MsgChangeAdminResponse.decode(message.value);
+  },
+
+  toProto(message: MsgChangeAdminResponse): Uint8Array {
+    return MsgChangeAdminResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgChangeAdminResponse): MsgChangeAdminResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdminResponse",
+      value: MsgChangeAdminResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1101,6 +1309,32 @@ export const MsgSetDenomMetadata = {
     obj.sender = message.sender;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSetDenomMetadataAminoMsg): MsgSetDenomMetadata {
+    return MsgSetDenomMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSetDenomMetadata): MsgSetDenomMetadataAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/set-denom-metadata",
+      value: MsgSetDenomMetadata.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSetDenomMetadataProtoMsg): MsgSetDenomMetadata {
+    return MsgSetDenomMetadata.decode(message.value);
+  },
+
+  toProto(message: MsgSetDenomMetadata): Uint8Array {
+    return MsgSetDenomMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSetDenomMetadata): MsgSetDenomMetadataProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata",
+      value: MsgSetDenomMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1165,6 +1399,32 @@ export const MsgSetDenomMetadataResponse = {
   toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSetDenomMetadataResponseAminoMsg): MsgSetDenomMetadataResponse {
+    return MsgSetDenomMetadataResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/set-denom-metadata-response",
+      value: MsgSetDenomMetadataResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSetDenomMetadataResponseProtoMsg): MsgSetDenomMetadataResponse {
+    return MsgSetDenomMetadataResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSetDenomMetadataResponse): Uint8Array {
+    return MsgSetDenomMetadataResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadataResponse",
+      value: MsgSetDenomMetadataResponse.encode(message).finish()
+    };
   }
 
 };

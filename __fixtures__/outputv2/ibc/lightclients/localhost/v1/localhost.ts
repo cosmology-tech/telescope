@@ -14,7 +14,7 @@ export interface ClientState {
   /** self latest block height */
   height?: Height;
 }
-export interface ClientStateProtoType {
+export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
   value: Uint8Array;
 }
@@ -30,7 +30,7 @@ export interface ClientStateAmino {
   /** self latest block height */
   height?: HeightAmino;
 }
-export interface ClientStateAminoType {
+export interface ClientStateAminoMsg {
   type: "cosmos-sdk/ClientState";
   value: ClientStateAmino;
 }
@@ -140,6 +140,32 @@ export const ClientState = {
     obj.chain_id = message.chainId;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
+  },
+
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
+  },
+
+  toProto(message: ClientState): Uint8Array {
+    return ClientState.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClientState): ClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
+      value: ClientState.encode(message).finish()
+    };
   }
 
 };

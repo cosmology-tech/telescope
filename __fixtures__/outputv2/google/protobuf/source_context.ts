@@ -13,7 +13,7 @@ export interface SourceContext {
    */
   fileName: string;
 }
-export interface SourceContextProtoType {
+export interface SourceContextProtoMsg {
   typeUrl: "/google.protobuf.SourceContext";
   value: Uint8Array;
 }
@@ -29,7 +29,7 @@ export interface SourceContextAmino {
    */
   file_name: string;
 }
-export interface SourceContextAminoType {
+export interface SourceContextAminoMsg {
   type: "/google.protobuf.SourceContext";
   value: SourceContextAmino;
 }
@@ -121,6 +121,25 @@ export const SourceContext = {
     const obj: any = {};
     obj.file_name = message.fileName;
     return obj;
+  },
+
+  fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
+    return SourceContext.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
+    return SourceContext.decode(message.value);
+  },
+
+  toProto(message: SourceContext): Uint8Array {
+    return SourceContext.encode(message).finish();
+  },
+
+  toProtoMsg(message: SourceContext): SourceContextProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.SourceContext",
+      value: SourceContext.encode(message).finish()
+    };
   }
 
 };

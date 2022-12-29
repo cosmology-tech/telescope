@@ -33,7 +33,7 @@ export interface Authentication {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
 }
-export interface AuthenticationProtoType {
+export interface AuthenticationProtoMsg {
   typeUrl: "/google.api.Authentication";
   value: Uint8Array;
 }
@@ -69,7 +69,7 @@ export interface AuthenticationAmino {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProviderAmino[];
 }
-export interface AuthenticationAminoType {
+export interface AuthenticationAminoMsg {
   type: "/google.api.Authentication";
   value: AuthenticationAmino;
 }
@@ -130,7 +130,7 @@ export interface AuthenticationRule {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
-export interface AuthenticationRuleProtoType {
+export interface AuthenticationRuleProtoMsg {
   typeUrl: "/google.api.AuthenticationRule";
   value: Uint8Array;
 }
@@ -166,7 +166,7 @@ export interface AuthenticationRuleAmino {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirementAmino[];
 }
-export interface AuthenticationRuleAminoType {
+export interface AuthenticationRuleAminoMsg {
   type: "/google.api.AuthenticationRule";
   value: AuthenticationRuleAmino;
 }
@@ -209,7 +209,7 @@ export interface JwtLocation {
    */
   valuePrefix: string;
 }
-export interface JwtLocationProtoType {
+export interface JwtLocationProtoMsg {
   typeUrl: "/google.api.JwtLocation";
   value: Uint8Array;
 }
@@ -234,7 +234,7 @@ export interface JwtLocationAmino {
    */
   value_prefix: string;
 }
-export interface JwtLocationAminoType {
+export interface JwtLocationAminoMsg {
   type: "/google.api.JwtLocation";
   value: JwtLocationAmino;
 }
@@ -334,7 +334,7 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
-export interface AuthProviderProtoType {
+export interface AuthProviderProtoMsg {
   typeUrl: "/google.api.AuthProvider";
   value: Uint8Array;
 }
@@ -427,7 +427,7 @@ export interface AuthProviderAmino {
    */
   jwt_locations: JwtLocationAmino[];
 }
-export interface AuthProviderAminoType {
+export interface AuthProviderAminoMsg {
   type: "/google.api.AuthProvider";
   value: AuthProviderAmino;
 }
@@ -478,7 +478,7 @@ export interface OAuthRequirements {
    */
   canonicalScopes: string;
 }
-export interface OAuthRequirementsProtoType {
+export interface OAuthRequirementsProtoMsg {
   typeUrl: "/google.api.OAuthRequirements";
   value: Uint8Array;
 }
@@ -515,7 +515,7 @@ export interface OAuthRequirementsAmino {
    */
   canonical_scopes: string;
 }
-export interface OAuthRequirementsAminoType {
+export interface OAuthRequirementsAminoMsg {
   type: "/google.api.OAuthRequirements";
   value: OAuthRequirementsAmino;
 }
@@ -579,7 +579,7 @@ export interface AuthRequirement {
    */
   audiences: string;
 }
-export interface AuthRequirementProtoType {
+export interface AuthRequirementProtoMsg {
   typeUrl: "/google.api.AuthRequirement";
   value: Uint8Array;
 }
@@ -619,7 +619,7 @@ export interface AuthRequirementAmino {
    */
   audiences: string;
 }
-export interface AuthRequirementAminoType {
+export interface AuthRequirementAminoMsg {
   type: "/google.api.AuthRequirement";
   value: AuthRequirementAmino;
 }
@@ -762,6 +762,25 @@ export const Authentication = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AuthenticationAminoMsg): Authentication {
+    return Authentication.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AuthenticationProtoMsg): Authentication {
+    return Authentication.decode(message.value);
+  },
+
+  toProto(message: Authentication): Uint8Array {
+    return Authentication.encode(message).finish();
+  },
+
+  toProtoMsg(message: Authentication): AuthenticationProtoMsg {
+    return {
+      typeUrl: "/google.api.Authentication",
+      value: Authentication.encode(message).finish()
+    };
   }
 
 };
@@ -911,6 +930,25 @@ export const AuthenticationRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AuthenticationRuleAminoMsg): AuthenticationRule {
+    return AuthenticationRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AuthenticationRuleProtoMsg): AuthenticationRule {
+    return AuthenticationRule.decode(message.value);
+  },
+
+  toProto(message: AuthenticationRule): Uint8Array {
+    return AuthenticationRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: AuthenticationRule): AuthenticationRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.AuthenticationRule",
+      value: AuthenticationRule.encode(message).finish()
+    };
   }
 
 };
@@ -1026,6 +1064,25 @@ export const JwtLocation = {
     obj.query = message.query;
     obj.value_prefix = message.valuePrefix;
     return obj;
+  },
+
+  fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
+    return JwtLocation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: JwtLocationProtoMsg): JwtLocation {
+    return JwtLocation.decode(message.value);
+  },
+
+  toProto(message: JwtLocation): Uint8Array {
+    return JwtLocation.encode(message).finish();
+  },
+
+  toProtoMsg(message: JwtLocation): JwtLocationProtoMsg {
+    return {
+      typeUrl: "/google.api.JwtLocation",
+      value: JwtLocation.encode(message).finish()
+    };
   }
 
 };
@@ -1207,6 +1264,25 @@ export const AuthProvider = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AuthProviderAminoMsg): AuthProvider {
+    return AuthProvider.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AuthProviderProtoMsg): AuthProvider {
+    return AuthProvider.decode(message.value);
+  },
+
+  toProto(message: AuthProvider): Uint8Array {
+    return AuthProvider.encode(message).finish();
+  },
+
+  toProtoMsg(message: AuthProvider): AuthProviderProtoMsg {
+    return {
+      typeUrl: "/google.api.AuthProvider",
+      value: AuthProvider.encode(message).finish()
+    };
   }
 
 };
@@ -1290,6 +1366,25 @@ export const OAuthRequirements = {
     const obj: any = {};
     obj.canonical_scopes = message.canonicalScopes;
     return obj;
+  },
+
+  fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
+    return OAuthRequirements.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OAuthRequirementsProtoMsg): OAuthRequirements {
+    return OAuthRequirements.decode(message.value);
+  },
+
+  toProto(message: OAuthRequirements): Uint8Array {
+    return OAuthRequirements.encode(message).finish();
+  },
+
+  toProtoMsg(message: OAuthRequirements): OAuthRequirementsProtoMsg {
+    return {
+      typeUrl: "/google.api.OAuthRequirements",
+      value: OAuthRequirements.encode(message).finish()
+    };
   }
 
 };
@@ -1389,6 +1484,25 @@ export const AuthRequirement = {
     obj.provider_id = message.providerId;
     obj.audiences = message.audiences;
     return obj;
+  },
+
+  fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {
+    return AuthRequirement.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AuthRequirementProtoMsg): AuthRequirement {
+    return AuthRequirement.decode(message.value);
+  },
+
+  toProto(message: AuthRequirement): Uint8Array {
+    return AuthRequirement.encode(message).finish();
+  },
+
+  toProtoMsg(message: AuthRequirement): AuthRequirementProtoMsg {
+    return {
+      typeUrl: "/google.api.AuthRequirement",
+      value: AuthRequirement.encode(message).finish()
+    };
   }
 
 };

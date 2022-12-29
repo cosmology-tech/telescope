@@ -49,7 +49,7 @@ export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
 }
-export interface LogMetric_LabelExtractorsEntryProtoType {
+export interface LogMetric_LabelExtractorsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -57,7 +57,7 @@ export interface LogMetric_LabelExtractorsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogMetric_LabelExtractorsEntryAminoType {
+export interface LogMetric_LabelExtractorsEntryAminoMsg {
   type: string;
   value: LogMetric_LabelExtractorsEntryAmino;
 }
@@ -213,7 +213,7 @@ export interface LogMetric {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
-export interface LogMetricProtoType {
+export interface LogMetricProtoMsg {
   typeUrl: "/google.logging.v2.LogMetric";
   value: Uint8Array;
 }
@@ -365,7 +365,7 @@ export interface LogMetricAmino {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
-export interface LogMetricAminoType {
+export interface LogMetricAminoMsg {
   type: "/google.logging.v2.LogMetric";
   value: LogMetricAmino;
 }
@@ -421,7 +421,7 @@ export interface ListLogMetricsRequest {
    */
   pageSize: number;
 }
-export interface ListLogMetricsRequestProtoType {
+export interface ListLogMetricsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest";
   value: Uint8Array;
 }
@@ -450,7 +450,7 @@ export interface ListLogMetricsRequestAmino {
    */
   page_size: number;
 }
-export interface ListLogMetricsRequestAminoType {
+export interface ListLogMetricsRequestAminoMsg {
   type: "/google.logging.v2.ListLogMetricsRequest";
   value: ListLogMetricsRequestAmino;
 }
@@ -474,7 +474,7 @@ export interface ListLogMetricsResponse {
    */
   nextPageToken: string;
 }
-export interface ListLogMetricsResponseProtoType {
+export interface ListLogMetricsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsResponse";
   value: Uint8Array;
 }
@@ -491,7 +491,7 @@ export interface ListLogMetricsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListLogMetricsResponseAminoType {
+export interface ListLogMetricsResponseAminoMsg {
   type: "/google.logging.v2.ListLogMetricsResponse";
   value: ListLogMetricsResponseAmino;
 }
@@ -511,7 +511,7 @@ export interface GetLogMetricRequest {
    */
   metricName: string;
 }
-export interface GetLogMetricRequestProtoType {
+export interface GetLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetLogMetricRequest";
   value: Uint8Array;
 }
@@ -525,7 +525,7 @@ export interface GetLogMetricRequestAmino {
    */
   metric_name: string;
 }
-export interface GetLogMetricRequestAminoType {
+export interface GetLogMetricRequestAminoMsg {
   type: "/google.logging.v2.GetLogMetricRequest";
   value: GetLogMetricRequestAmino;
 }
@@ -552,7 +552,7 @@ export interface CreateLogMetricRequest {
    */
   metric?: LogMetric;
 }
-export interface CreateLogMetricRequestProtoType {
+export interface CreateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest";
   value: Uint8Array;
 }
@@ -574,7 +574,7 @@ export interface CreateLogMetricRequestAmino {
    */
   metric?: LogMetricAmino;
 }
-export interface CreateLogMetricRequestAminoType {
+export interface CreateLogMetricRequestAminoMsg {
   type: "/google.logging.v2.CreateLogMetricRequest";
   value: CreateLogMetricRequestAmino;
 }
@@ -601,7 +601,7 @@ export interface UpdateLogMetricRequest {
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
-export interface UpdateLogMetricRequestProtoType {
+export interface UpdateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
   value: Uint8Array;
 }
@@ -622,7 +622,7 @@ export interface UpdateLogMetricRequestAmino {
   /** Required. The updated metric. */
   metric?: LogMetricAmino;
 }
-export interface UpdateLogMetricRequestAminoType {
+export interface UpdateLogMetricRequestAminoMsg {
   type: "/google.logging.v2.UpdateLogMetricRequest";
   value: UpdateLogMetricRequestAmino;
 }
@@ -642,7 +642,7 @@ export interface DeleteLogMetricRequest {
    */
   metricName: string;
 }
-export interface DeleteLogMetricRequestProtoType {
+export interface DeleteLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
   value: Uint8Array;
 }
@@ -656,7 +656,7 @@ export interface DeleteLogMetricRequestAmino {
    */
   metric_name: string;
 }
-export interface DeleteLogMetricRequestAminoType {
+export interface DeleteLogMetricRequestAminoMsg {
   type: "/google.logging.v2.DeleteLogMetricRequest";
   value: DeleteLogMetricRequestAmino;
 }
@@ -759,6 +759,18 @@ export const LogMetric_LabelExtractorsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.decode(message.value);
+  },
+
+  toProto(message: LogMetric_LabelExtractorsEntry): Uint8Array {
+    return LogMetric_LabelExtractorsEntry.encode(message).finish();
   }
 
 };
@@ -1054,6 +1066,25 @@ export const LogMetric = {
     obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
     obj.version = message.version;
     return obj;
+  },
+
+  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
+    return LogMetric.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
+    return LogMetric.decode(message.value);
+  },
+
+  toProto(message: LogMetric): Uint8Array {
+    return LogMetric.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogMetric): LogMetricProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogMetric",
+      value: LogMetric.encode(message).finish()
+    };
   }
 
 };
@@ -1169,6 +1200,25 @@ export const ListLogMetricsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
+    return ListLogMetricsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
+    return ListLogMetricsRequest.decode(message.value);
+  },
+
+  toProto(message: ListLogMetricsRequest): Uint8Array {
+    return ListLogMetricsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListLogMetricsRequest): ListLogMetricsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogMetricsRequest",
+      value: ListLogMetricsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1286,6 +1336,25 @@ export const ListLogMetricsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
+    return ListLogMetricsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
+    return ListLogMetricsResponse.decode(message.value);
+  },
+
+  toProto(message: ListLogMetricsResponse): Uint8Array {
+    return ListLogMetricsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListLogMetricsResponse): ListLogMetricsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListLogMetricsResponse",
+      value: ListLogMetricsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1369,6 +1438,25 @@ export const GetLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
+  },
+
+  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
+    return GetLogMetricRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
+    return GetLogMetricRequest.decode(message.value);
+  },
+
+  toProto(message: GetLogMetricRequest): Uint8Array {
+    return GetLogMetricRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetLogMetricRequest): GetLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetLogMetricRequest",
+      value: GetLogMetricRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1468,6 +1556,25 @@ export const CreateLogMetricRequest = {
     obj.parent = message.parent;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
+    return CreateLogMetricRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
+    return CreateLogMetricRequest.decode(message.value);
+  },
+
+  toProto(message: CreateLogMetricRequest): Uint8Array {
+    return CreateLogMetricRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateLogMetricRequest): CreateLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateLogMetricRequest",
+      value: CreateLogMetricRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1567,6 +1674,25 @@ export const UpdateLogMetricRequest = {
     obj.metric_name = message.metricName;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateLogMetricRequest): Uint8Array {
+    return UpdateLogMetricRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateLogMetricRequest): UpdateLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
+      value: UpdateLogMetricRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1650,6 +1776,25 @@ export const DeleteLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteLogMetricRequest): Uint8Array {
+    return DeleteLogMetricRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteLogMetricRequest): DeleteLogMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
+      value: DeleteLogMetricRequest.encode(message).finish()
+    };
   }
 
 };

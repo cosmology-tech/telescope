@@ -10,7 +10,7 @@ export interface Params {
    */
   distrEpochIdentifier: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";
   value: Uint8Array;
 }
@@ -23,7 +23,7 @@ export interface ParamsAmino {
    */
   distr_epoch_identifier: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/incentives/params";
   value: ParamsAmino;
 }
@@ -113,6 +113,32 @@ export const Params = {
     const obj: any = {};
     obj.distr_epoch_identifier = message.distrEpochIdentifier;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/incentives/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

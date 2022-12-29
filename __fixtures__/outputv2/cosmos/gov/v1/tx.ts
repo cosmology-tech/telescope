@@ -23,7 +23,7 @@ export interface MsgSubmitProposal {
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
-export interface MsgSubmitProposalProtoType {
+export interface MsgSubmitProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgSubmitProposal";
   value: Uint8Array;
 }
@@ -40,7 +40,7 @@ export interface MsgSubmitProposalAmino {
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
-export interface MsgSubmitProposalAminoType {
+export interface MsgSubmitProposalAminoMsg {
   type: "cosmos-sdk/v1/MsgSubmitProposal";
   value: MsgSubmitProposalAmino;
 }
@@ -60,7 +60,7 @@ export interface MsgSubmitProposalSDKType {
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
 }
-export interface MsgSubmitProposalResponseProtoType {
+export interface MsgSubmitProposalResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse";
   value: Uint8Array;
 }
@@ -69,7 +69,7 @@ export interface MsgSubmitProposalResponseProtoType {
 export interface MsgSubmitProposalResponseAmino {
   proposal_id: string;
 }
-export interface MsgSubmitProposalResponseAminoType {
+export interface MsgSubmitProposalResponseAminoMsg {
   type: "cosmos-sdk/v1/MsgSubmitProposalResponse";
   value: MsgSubmitProposalResponseAmino;
 }
@@ -90,7 +90,7 @@ export interface MsgExecLegacyContent {
   /** authority must be the gov module address. */
   authority: string;
 }
-export interface MsgExecLegacyContentProtoType {
+export interface MsgExecLegacyContentProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent";
   value: Uint8Array;
 }
@@ -106,7 +106,7 @@ export interface MsgExecLegacyContentAmino {
   /** authority must be the gov module address. */
   authority: string;
 }
-export interface MsgExecLegacyContentAminoType {
+export interface MsgExecLegacyContentAminoMsg {
   type: "cosmos-sdk/v1/MsgExecLegacyContent";
   value: MsgExecLegacyContentAmino;
 }
@@ -122,14 +122,14 @@ export interface MsgExecLegacyContentSDKType {
 
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponse {}
-export interface MsgExecLegacyContentResponseProtoType {
+export interface MsgExecLegacyContentResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse";
   value: Uint8Array;
 }
 
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponseAmino {}
-export interface MsgExecLegacyContentResponseAminoType {
+export interface MsgExecLegacyContentResponseAminoMsg {
   type: "cosmos-sdk/v1/MsgExecLegacyContentResponse";
   value: MsgExecLegacyContentResponseAmino;
 }
@@ -144,7 +144,7 @@ export interface MsgVote {
   option: VoteOption;
   metadata: string;
 }
-export interface MsgVoteProtoType {
+export interface MsgVoteProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVote";
   value: Uint8Array;
 }
@@ -156,7 +156,7 @@ export interface MsgVoteAmino {
   option: VoteOption;
   metadata: string;
 }
-export interface MsgVoteAminoType {
+export interface MsgVoteAminoMsg {
   type: "cosmos-sdk/v1/MsgVote";
   value: MsgVoteAmino;
 }
@@ -171,14 +171,14 @@ export interface MsgVoteSDKType {
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
-export interface MsgVoteResponseProtoType {
+export interface MsgVoteResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteResponse";
   value: Uint8Array;
 }
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponseAmino {}
-export interface MsgVoteResponseAminoType {
+export interface MsgVoteResponseAminoMsg {
   type: "cosmos-sdk/v1/MsgVoteResponse";
   value: MsgVoteResponseAmino;
 }
@@ -193,7 +193,7 @@ export interface MsgVoteWeighted {
   options: WeightedVoteOption[];
   metadata: string;
 }
-export interface MsgVoteWeightedProtoType {
+export interface MsgVoteWeightedProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteWeighted";
   value: Uint8Array;
 }
@@ -205,7 +205,7 @@ export interface MsgVoteWeightedAmino {
   options: WeightedVoteOptionAmino[];
   metadata: string;
 }
-export interface MsgVoteWeightedAminoType {
+export interface MsgVoteWeightedAminoMsg {
   type: "cosmos-sdk/v1/MsgVoteWeighted";
   value: MsgVoteWeightedAmino;
 }
@@ -220,14 +220,14 @@ export interface MsgVoteWeightedSDKType {
 
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponse {}
-export interface MsgVoteWeightedResponseProtoType {
+export interface MsgVoteWeightedResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse";
   value: Uint8Array;
 }
 
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponseAmino {}
-export interface MsgVoteWeightedResponseAminoType {
+export interface MsgVoteWeightedResponseAminoMsg {
   type: "cosmos-sdk/v1/MsgVoteWeightedResponse";
   value: MsgVoteWeightedResponseAmino;
 }
@@ -241,7 +241,7 @@ export interface MsgDeposit {
   depositor: string;
   amount: Coin[];
 }
-export interface MsgDepositProtoType {
+export interface MsgDepositProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgDeposit";
   value: Uint8Array;
 }
@@ -252,7 +252,7 @@ export interface MsgDepositAmino {
   depositor: string;
   amount: CoinAmino[];
 }
-export interface MsgDepositAminoType {
+export interface MsgDepositAminoMsg {
   type: "cosmos-sdk/v1/MsgDeposit";
   value: MsgDepositAmino;
 }
@@ -266,14 +266,14 @@ export interface MsgDepositSDKType {
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
-export interface MsgDepositResponseProtoType {
+export interface MsgDepositResponseProtoMsg {
   typeUrl: "/cosmos.gov.v1.MsgDepositResponse";
   value: Uint8Array;
 }
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponseAmino {}
-export interface MsgDepositResponseAminoType {
+export interface MsgDepositResponseAminoMsg {
   type: "cosmos-sdk/v1/MsgDepositResponse";
   value: MsgDepositResponseAmino;
 }
@@ -442,6 +442,32 @@ export const MsgSubmitProposal = {
     obj.proposer = message.proposer;
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgSubmitProposal",
+      value: MsgSubmitProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposal): Uint8Array {
+    return MsgSubmitProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposal): MsgSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgSubmitProposal",
+      value: MsgSubmitProposal.encode(message).finish()
+    };
   }
 
 };
@@ -526,6 +552,32 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgSubmitProposalResponse",
+      value: MsgSubmitProposalResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposalResponse): Uint8Array {
+    return MsgSubmitProposalResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse",
+      value: MsgSubmitProposalResponse.encode(message).finish()
+    };
   }
 
 };
@@ -626,6 +678,32 @@ export const MsgExecLegacyContent = {
     obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any)) : undefined;
     obj.authority = message.authority;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgExecLegacyContentAminoMsg): MsgExecLegacyContent {
+    return MsgExecLegacyContent.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgExecLegacyContent): MsgExecLegacyContentAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgExecLegacyContent",
+      value: MsgExecLegacyContent.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgExecLegacyContentProtoMsg): MsgExecLegacyContent {
+    return MsgExecLegacyContent.decode(message.value);
+  },
+
+  toProto(message: MsgExecLegacyContent): Uint8Array {
+    return MsgExecLegacyContent.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgExecLegacyContent): MsgExecLegacyContentProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent",
+      value: MsgExecLegacyContent.encode(message).finish()
+    };
   }
 
 };
@@ -690,6 +768,32 @@ export const MsgExecLegacyContentResponse = {
   toAmino(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgExecLegacyContentResponseAminoMsg): MsgExecLegacyContentResponse {
+    return MsgExecLegacyContentResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgExecLegacyContentResponse",
+      value: MsgExecLegacyContentResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgExecLegacyContentResponseProtoMsg): MsgExecLegacyContentResponse {
+    return MsgExecLegacyContentResponse.decode(message.value);
+  },
+
+  toProto(message: MsgExecLegacyContentResponse): Uint8Array {
+    return MsgExecLegacyContentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse",
+      value: MsgExecLegacyContentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -822,6 +926,32 @@ export const MsgVote = {
     obj.option = message.option;
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
+    return MsgVote.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVote): MsgVoteAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgVote",
+      value: MsgVote.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteProtoMsg): MsgVote {
+    return MsgVote.decode(message.value);
+  },
+
+  toProto(message: MsgVote): Uint8Array {
+    return MsgVote.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVote): MsgVoteProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgVote",
+      value: MsgVote.encode(message).finish()
+    };
   }
 
 };
@@ -886,6 +1016,32 @@ export const MsgVoteResponse = {
   toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
+    return MsgVoteResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteResponse): MsgVoteResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgVoteResponse",
+      value: MsgVoteResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteResponseProtoMsg): MsgVoteResponse {
+    return MsgVoteResponse.decode(message.value);
+  },
+
+  toProto(message: MsgVoteResponse): Uint8Array {
+    return MsgVoteResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteResponse): MsgVoteResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgVoteResponse",
+      value: MsgVoteResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1036,6 +1192,32 @@ export const MsgVoteWeighted = {
 
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
+    return MsgVoteWeighted.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteWeighted): MsgVoteWeightedAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgVoteWeighted",
+      value: MsgVoteWeighted.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteWeightedProtoMsg): MsgVoteWeighted {
+    return MsgVoteWeighted.decode(message.value);
+  },
+
+  toProto(message: MsgVoteWeighted): Uint8Array {
+    return MsgVoteWeighted.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteWeighted): MsgVoteWeightedProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgVoteWeighted",
+      value: MsgVoteWeighted.encode(message).finish()
+    };
   }
 
 };
@@ -1100,6 +1282,32 @@ export const MsgVoteWeightedResponse = {
   toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVoteWeightedResponseAminoMsg): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgVoteWeightedResponse",
+      value: MsgVoteWeightedResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.decode(message.value);
+  },
+
+  toProto(message: MsgVoteWeightedResponse): Uint8Array {
+    return MsgVoteWeightedResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse",
+      value: MsgVoteWeightedResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1234,6 +1442,32 @@ export const MsgDeposit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositAminoMsg): MsgDeposit {
+    return MsgDeposit.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgDeposit): MsgDepositAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgDeposit",
+      value: MsgDeposit.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgDepositProtoMsg): MsgDeposit {
+    return MsgDeposit.decode(message.value);
+  },
+
+  toProto(message: MsgDeposit): Uint8Array {
+    return MsgDeposit.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDeposit): MsgDepositProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgDeposit",
+      value: MsgDeposit.encode(message).finish()
+    };
   }
 
 };
@@ -1298,6 +1532,32 @@ export const MsgDepositResponse = {
   toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDepositResponseAminoMsg): MsgDepositResponse {
+    return MsgDepositResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgDepositResponse): MsgDepositResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/v1/MsgDepositResponse",
+      value: MsgDepositResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgDepositResponseProtoMsg): MsgDepositResponse {
+    return MsgDepositResponse.decode(message.value);
+  },
+
+  toProto(message: MsgDepositResponse): Uint8Array {
+    return MsgDepositResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDepositResponse): MsgDepositResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1.MsgDepositResponse",
+      value: MsgDepositResponse.encode(message).finish()
+    };
   }
 
 };

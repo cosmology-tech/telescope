@@ -8,7 +8,7 @@ export const protobufPackage = "akash.provider.v1beta2";
 export interface QueryProvidersRequest {
   pagination?: PageRequest;
 }
-export interface QueryProvidersRequestProtoType {
+export interface QueryProvidersRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: Uint8Array;
 }
@@ -17,7 +17,7 @@ export interface QueryProvidersRequestProtoType {
 export interface QueryProvidersRequestAmino {
   pagination?: PageRequestAmino;
 }
-export interface QueryProvidersRequestAminoType {
+export interface QueryProvidersRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: QueryProvidersRequestAmino;
 }
@@ -32,7 +32,7 @@ export interface QueryProvidersResponse {
   providers: Provider[];
   pagination?: PageResponse;
 }
-export interface QueryProvidersResponseProtoType {
+export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse";
   value: Uint8Array;
 }
@@ -42,7 +42,7 @@ export interface QueryProvidersResponseAmino {
   providers: ProviderAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryProvidersResponseAminoType {
+export interface QueryProvidersResponseAminoMsg {
   type: "/akash.provider.v1beta2.QueryProvidersResponse";
   value: QueryProvidersResponseAmino;
 }
@@ -57,7 +57,7 @@ export interface QueryProvidersResponseSDKType {
 export interface QueryProviderRequest {
   owner: string;
 }
-export interface QueryProviderRequestProtoType {
+export interface QueryProviderRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest";
   value: Uint8Array;
 }
@@ -66,7 +66,7 @@ export interface QueryProviderRequestProtoType {
 export interface QueryProviderRequestAmino {
   owner: string;
 }
-export interface QueryProviderRequestAminoType {
+export interface QueryProviderRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderRequest";
   value: QueryProviderRequestAmino;
 }
@@ -80,7 +80,7 @@ export interface QueryProviderRequestSDKType {
 export interface QueryProviderResponse {
   provider?: Provider;
 }
-export interface QueryProviderResponseProtoType {
+export interface QueryProviderResponseProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderResponse";
   value: Uint8Array;
 }
@@ -89,7 +89,7 @@ export interface QueryProviderResponseProtoType {
 export interface QueryProviderResponseAmino {
   provider?: ProviderAmino;
 }
-export interface QueryProviderResponseAminoType {
+export interface QueryProviderResponseAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderResponse";
   value: QueryProviderResponseAmino;
 }
@@ -178,6 +178,25 @@ export const QueryProvidersRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryProvidersRequestAminoMsg): QueryProvidersRequest {
+    return QueryProvidersRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryProvidersRequestProtoMsg): QueryProvidersRequest {
+    return QueryProvidersRequest.decode(message.value);
+  },
+
+  toProto(message: QueryProvidersRequest): Uint8Array {
+    return QueryProvidersRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryProvidersRequest): QueryProvidersRequestProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest",
+      value: QueryProvidersRequest.encode(message).finish()
+    };
   }
 
 };
@@ -295,6 +314,25 @@ export const QueryProvidersResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
+    return QueryProvidersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
+    return QueryProvidersResponse.decode(message.value);
+  },
+
+  toProto(message: QueryProvidersResponse): Uint8Array {
+    return QueryProvidersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryProvidersResponse): QueryProvidersResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse",
+      value: QueryProvidersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -378,6 +416,25 @@ export const QueryProviderRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
+    return QueryProviderRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
+    return QueryProviderRequest.decode(message.value);
+  },
+
+  toProto(message: QueryProviderRequest): Uint8Array {
+    return QueryProviderRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryProviderRequest): QueryProviderRequestProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
+      value: QueryProviderRequest.encode(message).finish()
+    };
   }
 
 };
@@ -461,6 +518,25 @@ export const QueryProviderResponse = {
     const obj: any = {};
     obj.provider = message.provider ? Provider.toAmino(message.provider) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryProviderResponseAminoMsg): QueryProviderResponse {
+    return QueryProviderResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryProviderResponseProtoMsg): QueryProviderResponse {
+    return QueryProviderResponse.decode(message.value);
+  },
+
+  toProto(message: QueryProviderResponse): Uint8Array {
+    return QueryProviderResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryProviderResponse): QueryProviderResponseProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.QueryProviderResponse",
+      value: QueryProviderResponse.encode(message).finish()
+    };
   }
 
 };

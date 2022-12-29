@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.orm.module.v1alpha1";
  * with ORM data.
  */
 export interface Module {}
-export interface ModuleProtoType {
+export interface ModuleProtoMsg {
   typeUrl: "/cosmos.orm.module.v1alpha1.Module";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface ModuleProtoType {
  * with ORM data.
  */
 export interface ModuleAmino {}
-export interface ModuleAminoType {
+export interface ModuleAminoMsg {
   type: "cosmos-sdk/Module";
   value: ModuleAmino;
 }
@@ -91,6 +91,32 @@ export const Module = {
   toAmino(_: Module): ModuleAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: ModuleAminoMsg): Module {
+    return Module.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Module): ModuleAminoMsg {
+    return {
+      type: "cosmos-sdk/Module",
+      value: Module.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ModuleProtoMsg): Module {
+    return Module.decode(message.value);
+  },
+
+  toProto(message: Module): Uint8Array {
+    return Module.encode(message).finish();
+  },
+
+  toProtoMsg(message: Module): ModuleProtoMsg {
+    return {
+      typeUrl: "/cosmos.orm.module.v1alpha1.Module",
+      value: Module.encode(message).finish()
+    };
   }
 
 };

@@ -8,7 +8,7 @@ export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params?: Params;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.recovery.v1.GenesisState";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/evmos.recovery.v1.GenesisState";
   value: GenesisStateAmino;
 }
@@ -36,7 +36,7 @@ export interface Params {
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration?: Duration;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/evmos.recovery.v1.Params";
   value: Uint8Array;
 }
@@ -49,7 +49,7 @@ export interface ParamsAmino {
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationAmino;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/evmos.recovery.v1.Params";
   value: ParamsAmino;
 }
@@ -139,6 +139,25 @@ export const GenesisState = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.recovery.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -238,6 +257,25 @@ export const Params = {
     obj.enable_recovery = message.enableRecovery;
     obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.recovery.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

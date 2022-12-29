@@ -7,7 +7,7 @@ export interface ProtocolVersion {
   block: Long;
   app: Long;
 }
-export interface ProtocolVersionProtoType {
+export interface ProtocolVersionProtoMsg {
   typeUrl: "/tendermint.p2p.ProtocolVersion";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface ProtocolVersionAmino {
   block: string;
   app: string;
 }
-export interface ProtocolVersionAminoType {
+export interface ProtocolVersionAminoMsg {
   type: "/tendermint.p2p.ProtocolVersion";
   value: ProtocolVersionAmino;
 }
@@ -35,7 +35,7 @@ export interface NodeInfo {
   moniker: string;
   other?: NodeInfoOther;
 }
-export interface NodeInfoProtoType {
+export interface NodeInfoProtoMsg {
   typeUrl: "/tendermint.p2p.NodeInfo";
   value: Uint8Array;
 }
@@ -49,7 +49,7 @@ export interface NodeInfoAmino {
   moniker: string;
   other?: NodeInfoOtherAmino;
 }
-export interface NodeInfoAminoType {
+export interface NodeInfoAminoMsg {
   type: "/tendermint.p2p.NodeInfo";
   value: NodeInfoAmino;
 }
@@ -67,7 +67,7 @@ export interface NodeInfoOther {
   txIndex: string;
   rpcAddress: string;
 }
-export interface NodeInfoOtherProtoType {
+export interface NodeInfoOtherProtoMsg {
   typeUrl: "/tendermint.p2p.NodeInfoOther";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface NodeInfoOtherAmino {
   tx_index: string;
   rpc_address: string;
 }
-export interface NodeInfoOtherAminoType {
+export interface NodeInfoOtherAminoMsg {
   type: "/tendermint.p2p.NodeInfoOther";
   value: NodeInfoOtherAmino;
 }
@@ -88,7 +88,7 @@ export interface PeerInfo {
   addressInfo: PeerAddressInfo[];
   lastConnected?: Date;
 }
-export interface PeerInfoProtoType {
+export interface PeerInfoProtoMsg {
   typeUrl: "/tendermint.p2p.PeerInfo";
   value: Uint8Array;
 }
@@ -97,7 +97,7 @@ export interface PeerInfoAmino {
   address_info: PeerAddressInfoAmino[];
   last_connected?: Date;
 }
-export interface PeerInfoAminoType {
+export interface PeerInfoAminoMsg {
   type: "/tendermint.p2p.PeerInfo";
   value: PeerInfoAmino;
 }
@@ -112,7 +112,7 @@ export interface PeerAddressInfo {
   lastDialFailure?: Date;
   dialFailures: number;
 }
-export interface PeerAddressInfoProtoType {
+export interface PeerAddressInfoProtoMsg {
   typeUrl: "/tendermint.p2p.PeerAddressInfo";
   value: Uint8Array;
 }
@@ -122,7 +122,7 @@ export interface PeerAddressInfoAmino {
   last_dial_failure?: Date;
   dial_failures: number;
 }
-export interface PeerAddressInfoAminoType {
+export interface PeerAddressInfoAminoMsg {
   type: "/tendermint.p2p.PeerAddressInfo";
   value: PeerAddressInfoAmino;
 }
@@ -244,6 +244,25 @@ export const ProtocolVersion = {
     obj.block = message.block ? message.block.toString() : undefined;
     obj.app = message.app ? message.app.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
+    return ProtocolVersion.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ProtocolVersionProtoMsg): ProtocolVersion {
+    return ProtocolVersion.decode(message.value);
+  },
+
+  toProto(message: ProtocolVersion): Uint8Array {
+    return ProtocolVersion.encode(message).finish();
+  },
+
+  toProtoMsg(message: ProtocolVersion): ProtocolVersionProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.ProtocolVersion",
+      value: ProtocolVersion.encode(message).finish()
+    };
   }
 
 };
@@ -439,6 +458,25 @@ export const NodeInfo = {
     obj.moniker = message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: NodeInfoAminoMsg): NodeInfo {
+    return NodeInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: NodeInfoProtoMsg): NodeInfo {
+    return NodeInfo.decode(message.value);
+  },
+
+  toProto(message: NodeInfo): Uint8Array {
+    return NodeInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: NodeInfo): NodeInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.NodeInfo",
+      value: NodeInfo.encode(message).finish()
+    };
   }
 
 };
@@ -538,6 +576,25 @@ export const NodeInfoOther = {
     obj.tx_index = message.txIndex;
     obj.rpc_address = message.rpcAddress;
     return obj;
+  },
+
+  fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
+    return NodeInfoOther.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: NodeInfoOtherProtoMsg): NodeInfoOther {
+    return NodeInfoOther.decode(message.value);
+  },
+
+  toProto(message: NodeInfoOther): Uint8Array {
+    return NodeInfoOther.encode(message).finish();
+  },
+
+  toProtoMsg(message: NodeInfoOther): NodeInfoOtherProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.NodeInfoOther",
+      value: NodeInfoOther.encode(message).finish()
+    };
   }
 
 };
@@ -671,6 +728,25 @@ export const PeerInfo = {
 
     obj.last_connected = message.lastConnected ? Timestamp.toAmino(message.lastConnected) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
+    return PeerInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PeerInfoProtoMsg): PeerInfo {
+    return PeerInfo.decode(message.value);
+  },
+
+  toProto(message: PeerInfo): Uint8Array {
+    return PeerInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: PeerInfo): PeerInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.PeerInfo",
+      value: PeerInfo.encode(message).finish()
+    };
   }
 
 };
@@ -802,6 +878,25 @@ export const PeerAddressInfo = {
     obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(message.lastDialFailure) : undefined;
     obj.dial_failures = message.dialFailures;
     return obj;
+  },
+
+  fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {
+    return PeerAddressInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PeerAddressInfoProtoMsg): PeerAddressInfo {
+    return PeerAddressInfo.decode(message.value);
+  },
+
+  toProto(message: PeerAddressInfo): Uint8Array {
+    return PeerAddressInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: PeerAddressInfo): PeerAddressInfoProtoMsg {
+    return {
+      typeUrl: "/tendermint.p2p.PeerAddressInfo",
+      value: PeerAddressInfo.encode(message).finish()
+    };
   }
 
 };

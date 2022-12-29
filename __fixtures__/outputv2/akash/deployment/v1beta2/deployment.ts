@@ -58,7 +58,7 @@ export interface DeploymentID {
   owner: string;
   dseq: Long;
 }
-export interface DeploymentIDProtoType {
+export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentID";
   value: Uint8Array;
 }
@@ -68,7 +68,7 @@ export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
 }
-export interface DeploymentIDAminoType {
+export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentID";
   value: DeploymentIDAmino;
 }
@@ -86,7 +86,7 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: Long;
 }
-export interface DeploymentProtoType {
+export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Deployment";
   value: Uint8Array;
 }
@@ -98,7 +98,7 @@ export interface DeploymentAmino {
   version: Uint8Array;
   created_at: string;
 }
-export interface DeploymentAminoType {
+export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.Deployment";
   value: DeploymentAmino;
 }
@@ -117,7 +117,7 @@ export interface DeploymentFilters {
   dseq: Long;
   state: string;
 }
-export interface DeploymentFiltersProtoType {
+export interface DeploymentFiltersProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
   value: Uint8Array;
 }
@@ -128,7 +128,7 @@ export interface DeploymentFiltersAmino {
   dseq: string;
   state: string;
 }
-export interface DeploymentFiltersAminoType {
+export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentFilters";
   value: DeploymentFiltersAmino;
 }
@@ -235,6 +235,25 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
+    return DeploymentID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
+    return DeploymentID.decode(message.value);
+  },
+
+  toProto(message: DeploymentID): Uint8Array {
+    return DeploymentID.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeploymentID): DeploymentIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.DeploymentID",
+      value: DeploymentID.encode(message).finish()
+    };
   }
 
 };
@@ -366,6 +385,25 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
+    return Deployment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentProtoMsg): Deployment {
+    return Deployment.decode(message.value);
+  },
+
+  toProto(message: Deployment): Uint8Array {
+    return Deployment.encode(message).finish();
+  },
+
+  toProtoMsg(message: Deployment): DeploymentProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.Deployment",
+      value: Deployment.encode(message).finish()
+    };
   }
 
 };
@@ -481,6 +519,25 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
+    return DeploymentFilters.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
+    return DeploymentFilters.decode(message.value);
+  },
+
+  toProto(message: DeploymentFilters): Uint8Array {
+    return DeploymentFilters.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeploymentFilters): DeploymentFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
+      value: DeploymentFilters.encode(message).finish()
+    };
   }
 
 };

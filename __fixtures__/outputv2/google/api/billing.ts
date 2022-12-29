@@ -45,7 +45,7 @@ export interface Billing {
    */
   consumerDestinations: Billing_BillingDestination[];
 }
-export interface BillingProtoType {
+export interface BillingProtoMsg {
   typeUrl: "/google.api.Billing";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface BillingAmino {
    */
   consumer_destinations: Billing_BillingDestinationAmino[];
 }
-export interface BillingAminoType {
+export interface BillingAminoMsg {
   type: "/google.api.Billing";
   value: BillingAmino;
 }
@@ -153,7 +153,7 @@ export interface Billing_BillingDestination {
    */
   metrics: string[];
 }
-export interface Billing_BillingDestinationProtoType {
+export interface Billing_BillingDestinationProtoMsg {
   typeUrl: "/google.api.BillingDestination";
   value: Uint8Array;
 }
@@ -175,7 +175,7 @@ export interface Billing_BillingDestinationAmino {
    */
   metrics: string[];
 }
-export interface Billing_BillingDestinationAminoType {
+export interface Billing_BillingDestinationAminoMsg {
   type: "/google.api.BillingDestination";
   value: Billing_BillingDestinationAmino;
 }
@@ -286,6 +286,25 @@ export const Billing = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BillingAminoMsg): Billing {
+    return Billing.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BillingProtoMsg): Billing {
+    return Billing.decode(message.value);
+  },
+
+  toProto(message: Billing): Uint8Array {
+    return Billing.encode(message).finish();
+  },
+
+  toProtoMsg(message: Billing): BillingProtoMsg {
+    return {
+      typeUrl: "/google.api.Billing",
+      value: Billing.encode(message).finish()
+    };
   }
 
 };
@@ -403,6 +422,25 @@ export const Billing_BillingDestination = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
+    return Billing_BillingDestination.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
+    return Billing_BillingDestination.decode(message.value);
+  },
+
+  toProto(message: Billing_BillingDestination): Uint8Array {
+    return Billing_BillingDestination.encode(message).finish();
+  },
+
+  toProtoMsg(message: Billing_BillingDestination): Billing_BillingDestinationProtoMsg {
+    return {
+      typeUrl: "/google.api.BillingDestination",
+      value: Billing_BillingDestination.encode(message).finish()
+    };
   }
 
 };

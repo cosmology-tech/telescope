@@ -25,7 +25,7 @@ export interface AppDescriptor {
   /** tx provides metadata information regarding how to send transactions to the given application */
   tx?: TxDescriptor;
 }
-export interface AppDescriptorProtoType {
+export interface AppDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.AppDescriptor";
   value: Uint8Array;
 }
@@ -53,7 +53,7 @@ export interface AppDescriptorAmino {
   /** tx provides metadata information regarding how to send transactions to the given application */
   tx?: TxDescriptorAmino;
 }
-export interface AppDescriptorAminoType {
+export interface AppDescriptorAminoMsg {
   type: "cosmos-sdk/AppDescriptor";
   value: AppDescriptorAmino;
 }
@@ -80,7 +80,7 @@ export interface TxDescriptor {
   /** msgs lists the accepted application messages (sdk.Msg) */
   msgs: MsgDescriptor[];
 }
-export interface TxDescriptorProtoType {
+export interface TxDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.TxDescriptor";
   value: Uint8Array;
 }
@@ -97,7 +97,7 @@ export interface TxDescriptorAmino {
   /** msgs lists the accepted application messages (sdk.Msg) */
   msgs: MsgDescriptorAmino[];
 }
-export interface TxDescriptorAminoType {
+export interface TxDescriptorAminoMsg {
   type: "cosmos-sdk/TxDescriptor";
   value: TxDescriptorAmino;
 }
@@ -116,7 +116,7 @@ export interface AuthnDescriptor {
   /** sign_modes defines the supported signature algorithm */
   signModes: SigningModeDescriptor[];
 }
-export interface AuthnDescriptorProtoType {
+export interface AuthnDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.AuthnDescriptor";
   value: Uint8Array;
 }
@@ -129,7 +129,7 @@ export interface AuthnDescriptorAmino {
   /** sign_modes defines the supported signature algorithm */
   sign_modes: SigningModeDescriptorAmino[];
 }
-export interface AuthnDescriptorAminoType {
+export interface AuthnDescriptorAminoMsg {
   type: "cosmos-sdk/AuthnDescriptor";
   value: AuthnDescriptorAmino;
 }
@@ -161,7 +161,7 @@ export interface SigningModeDescriptor {
    */
   authnInfoProviderMethodFullname: string;
 }
-export interface SigningModeDescriptorProtoType {
+export interface SigningModeDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.SigningModeDescriptor";
   value: Uint8Array;
 }
@@ -185,7 +185,7 @@ export interface SigningModeDescriptorAmino {
    */
   authn_info_provider_method_fullname: string;
 }
-export interface SigningModeDescriptorAminoType {
+export interface SigningModeDescriptorAminoMsg {
   type: "cosmos-sdk/SigningModeDescriptor";
   value: SigningModeDescriptorAmino;
 }
@@ -207,7 +207,7 @@ export interface ChainDescriptor {
   /** id is the chain id */
   id: string;
 }
-export interface ChainDescriptorProtoType {
+export interface ChainDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.ChainDescriptor";
   value: Uint8Array;
 }
@@ -217,7 +217,7 @@ export interface ChainDescriptorAmino {
   /** id is the chain id */
   id: string;
 }
-export interface ChainDescriptorAminoType {
+export interface ChainDescriptorAminoMsg {
   type: "cosmos-sdk/ChainDescriptor";
   value: ChainDescriptorAmino;
 }
@@ -232,7 +232,7 @@ export interface CodecDescriptor {
   /** interfaces is a list of the registerted interfaces descriptors */
   interfaces: InterfaceDescriptor[];
 }
-export interface CodecDescriptorProtoType {
+export interface CodecDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.CodecDescriptor";
   value: Uint8Array;
 }
@@ -242,7 +242,7 @@ export interface CodecDescriptorAmino {
   /** interfaces is a list of the registerted interfaces descriptors */
   interfaces: InterfaceDescriptorAmino[];
 }
-export interface CodecDescriptorAminoType {
+export interface CodecDescriptorAminoMsg {
   type: "cosmos-sdk/CodecDescriptor";
   value: CodecDescriptorAmino;
 }
@@ -266,7 +266,7 @@ export interface InterfaceDescriptor {
   /** interface_implementers is a list of the descriptors of the interface implementers */
   interfaceImplementers: InterfaceImplementerDescriptor[];
 }
-export interface InterfaceDescriptorProtoType {
+export interface InterfaceDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceDescriptor";
   value: Uint8Array;
 }
@@ -285,7 +285,7 @@ export interface InterfaceDescriptorAmino {
   /** interface_implementers is a list of the descriptors of the interface implementers */
   interface_implementers: InterfaceImplementerDescriptorAmino[];
 }
-export interface InterfaceDescriptorAminoType {
+export interface InterfaceDescriptorAminoMsg {
   type: "cosmos-sdk/InterfaceDescriptor";
   value: InterfaceDescriptorAmino;
 }
@@ -310,7 +310,7 @@ export interface InterfaceImplementerDescriptor {
    */
   typeUrl: string;
 }
-export interface InterfaceImplementerDescriptorProtoType {
+export interface InterfaceImplementerDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor";
   value: Uint8Array;
 }
@@ -328,7 +328,7 @@ export interface InterfaceImplementerDescriptorAmino {
    */
   type_url: string;
 }
-export interface InterfaceImplementerDescriptorAminoType {
+export interface InterfaceImplementerDescriptorAminoMsg {
   type: "cosmos-sdk/InterfaceImplementerDescriptor";
   value: InterfaceImplementerDescriptorAmino;
 }
@@ -354,7 +354,7 @@ export interface InterfaceAcceptingMessageDescriptor {
    */
   fieldDescriptorNames: string[];
 }
-export interface InterfaceAcceptingMessageDescriptorProtoType {
+export interface InterfaceAcceptingMessageDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor";
   value: Uint8Array;
 }
@@ -374,7 +374,7 @@ export interface InterfaceAcceptingMessageDescriptorAmino {
    */
   field_descriptor_names: string[];
 }
-export interface InterfaceAcceptingMessageDescriptorAminoType {
+export interface InterfaceAcceptingMessageDescriptorAminoMsg {
   type: "cosmos-sdk/InterfaceAcceptingMessageDescriptor";
   value: InterfaceAcceptingMessageDescriptorAmino;
 }
@@ -393,7 +393,7 @@ export interface ConfigurationDescriptor {
   /** bech32_account_address_prefix is the account address prefix */
   bech32AccountAddressPrefix: string;
 }
-export interface ConfigurationDescriptorProtoType {
+export interface ConfigurationDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.ConfigurationDescriptor";
   value: Uint8Array;
 }
@@ -403,7 +403,7 @@ export interface ConfigurationDescriptorAmino {
   /** bech32_account_address_prefix is the account address prefix */
   bech32_account_address_prefix: string;
 }
-export interface ConfigurationDescriptorAminoType {
+export interface ConfigurationDescriptorAminoMsg {
   type: "cosmos-sdk/ConfigurationDescriptor";
   value: ConfigurationDescriptorAmino;
 }
@@ -418,7 +418,7 @@ export interface MsgDescriptor {
   /** msg_type_url contains the TypeURL of a sdk.Msg. */
   msgTypeUrl: string;
 }
-export interface MsgDescriptorProtoType {
+export interface MsgDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.MsgDescriptor";
   value: Uint8Array;
 }
@@ -428,7 +428,7 @@ export interface MsgDescriptorAmino {
   /** msg_type_url contains the TypeURL of a sdk.Msg. */
   msg_type_url: string;
 }
-export interface MsgDescriptorAminoType {
+export interface MsgDescriptorAminoMsg {
   type: "cosmos-sdk/MsgDescriptor";
   value: MsgDescriptorAmino;
 }
@@ -440,14 +440,14 @@ export interface MsgDescriptorSDKType {
 
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequest {}
-export interface GetAuthnDescriptorRequestProtoType {
+export interface GetAuthnDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequestAmino {}
-export interface GetAuthnDescriptorRequestAminoType {
+export interface GetAuthnDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetAuthnDescriptorRequest";
   value: GetAuthnDescriptorRequestAmino;
 }
@@ -460,7 +460,7 @@ export interface GetAuthnDescriptorResponse {
   /** authn describes how to authenticate to the application when sending transactions */
   authn?: AuthnDescriptor;
 }
-export interface GetAuthnDescriptorResponseProtoType {
+export interface GetAuthnDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse";
   value: Uint8Array;
 }
@@ -470,7 +470,7 @@ export interface GetAuthnDescriptorResponseAmino {
   /** authn describes how to authenticate to the application when sending transactions */
   authn?: AuthnDescriptorAmino;
 }
-export interface GetAuthnDescriptorResponseAminoType {
+export interface GetAuthnDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetAuthnDescriptorResponse";
   value: GetAuthnDescriptorResponseAmino;
 }
@@ -482,14 +482,14 @@ export interface GetAuthnDescriptorResponseSDKType {
 
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {}
-export interface GetChainDescriptorRequestProtoType {
+export interface GetChainDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequestAmino {}
-export interface GetChainDescriptorRequestAminoType {
+export interface GetChainDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetChainDescriptorRequest";
   value: GetChainDescriptorRequestAmino;
 }
@@ -502,7 +502,7 @@ export interface GetChainDescriptorResponse {
   /** chain describes application chain information */
   chain?: ChainDescriptor;
 }
-export interface GetChainDescriptorResponseProtoType {
+export interface GetChainDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse";
   value: Uint8Array;
 }
@@ -512,7 +512,7 @@ export interface GetChainDescriptorResponseAmino {
   /** chain describes application chain information */
   chain?: ChainDescriptorAmino;
 }
-export interface GetChainDescriptorResponseAminoType {
+export interface GetChainDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetChainDescriptorResponse";
   value: GetChainDescriptorResponseAmino;
 }
@@ -524,14 +524,14 @@ export interface GetChainDescriptorResponseSDKType {
 
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {}
-export interface GetCodecDescriptorRequestProtoType {
+export interface GetCodecDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequestAmino {}
-export interface GetCodecDescriptorRequestAminoType {
+export interface GetCodecDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetCodecDescriptorRequest";
   value: GetCodecDescriptorRequestAmino;
 }
@@ -544,7 +544,7 @@ export interface GetCodecDescriptorResponse {
   /** codec describes the application codec such as registered interfaces and implementations */
   codec?: CodecDescriptor;
 }
-export interface GetCodecDescriptorResponseProtoType {
+export interface GetCodecDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse";
   value: Uint8Array;
 }
@@ -554,7 +554,7 @@ export interface GetCodecDescriptorResponseAmino {
   /** codec describes the application codec such as registered interfaces and implementations */
   codec?: CodecDescriptorAmino;
 }
-export interface GetCodecDescriptorResponseAminoType {
+export interface GetCodecDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetCodecDescriptorResponse";
   value: GetCodecDescriptorResponseAmino;
 }
@@ -566,14 +566,14 @@ export interface GetCodecDescriptorResponseSDKType {
 
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {}
-export interface GetConfigurationDescriptorRequestProtoType {
+export interface GetConfigurationDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequestAmino {}
-export interface GetConfigurationDescriptorRequestAminoType {
+export interface GetConfigurationDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetConfigurationDescriptorRequest";
   value: GetConfigurationDescriptorRequestAmino;
 }
@@ -586,7 +586,7 @@ export interface GetConfigurationDescriptorResponse {
   /** config describes the application's sdk.Config */
   config?: ConfigurationDescriptor;
 }
-export interface GetConfigurationDescriptorResponseProtoType {
+export interface GetConfigurationDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse";
   value: Uint8Array;
 }
@@ -596,7 +596,7 @@ export interface GetConfigurationDescriptorResponseAmino {
   /** config describes the application's sdk.Config */
   config?: ConfigurationDescriptorAmino;
 }
-export interface GetConfigurationDescriptorResponseAminoType {
+export interface GetConfigurationDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetConfigurationDescriptorResponse";
   value: GetConfigurationDescriptorResponseAmino;
 }
@@ -608,14 +608,14 @@ export interface GetConfigurationDescriptorResponseSDKType {
 
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {}
-export interface GetQueryServicesDescriptorRequestProtoType {
+export interface GetQueryServicesDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequestAmino {}
-export interface GetQueryServicesDescriptorRequestAminoType {
+export interface GetQueryServicesDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetQueryServicesDescriptorRequest";
   value: GetQueryServicesDescriptorRequestAmino;
 }
@@ -628,7 +628,7 @@ export interface GetQueryServicesDescriptorResponse {
   /** queries provides information on the available queryable services */
   queries?: QueryServicesDescriptor;
 }
-export interface GetQueryServicesDescriptorResponseProtoType {
+export interface GetQueryServicesDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse";
   value: Uint8Array;
 }
@@ -638,7 +638,7 @@ export interface GetQueryServicesDescriptorResponseAmino {
   /** queries provides information on the available queryable services */
   queries?: QueryServicesDescriptorAmino;
 }
-export interface GetQueryServicesDescriptorResponseAminoType {
+export interface GetQueryServicesDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetQueryServicesDescriptorResponse";
   value: GetQueryServicesDescriptorResponseAmino;
 }
@@ -650,14 +650,14 @@ export interface GetQueryServicesDescriptorResponseSDKType {
 
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {}
-export interface GetTxDescriptorRequestProtoType {
+export interface GetTxDescriptorRequestProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest";
   value: Uint8Array;
 }
 
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequestAmino {}
-export interface GetTxDescriptorRequestAminoType {
+export interface GetTxDescriptorRequestAminoMsg {
   type: "cosmos-sdk/GetTxDescriptorRequest";
   value: GetTxDescriptorRequestAmino;
 }
@@ -673,7 +673,7 @@ export interface GetTxDescriptorResponse {
    */
   tx?: TxDescriptor;
 }
-export interface GetTxDescriptorResponseProtoType {
+export interface GetTxDescriptorResponseProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse";
   value: Uint8Array;
 }
@@ -686,7 +686,7 @@ export interface GetTxDescriptorResponseAmino {
    */
   tx?: TxDescriptorAmino;
 }
-export interface GetTxDescriptorResponseAminoType {
+export interface GetTxDescriptorResponseAminoMsg {
   type: "cosmos-sdk/GetTxDescriptorResponse";
   value: GetTxDescriptorResponseAmino;
 }
@@ -701,7 +701,7 @@ export interface QueryServicesDescriptor {
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
   queryServices: QueryServiceDescriptor[];
 }
-export interface QueryServicesDescriptorProtoType {
+export interface QueryServicesDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServicesDescriptor";
   value: Uint8Array;
 }
@@ -711,7 +711,7 @@ export interface QueryServicesDescriptorAmino {
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
   query_services: QueryServiceDescriptorAmino[];
 }
-export interface QueryServicesDescriptorAminoType {
+export interface QueryServicesDescriptorAminoMsg {
   type: "cosmos-sdk/QueryServicesDescriptor";
   value: QueryServicesDescriptorAmino;
 }
@@ -732,7 +732,7 @@ export interface QueryServiceDescriptor {
   /** methods provides a list of query service methods */
   methods: QueryMethodDescriptor[];
 }
-export interface QueryServiceDescriptorProtoType {
+export interface QueryServiceDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServiceDescriptor";
   value: Uint8Array;
 }
@@ -748,7 +748,7 @@ export interface QueryServiceDescriptorAmino {
   /** methods provides a list of query service methods */
   methods: QueryMethodDescriptorAmino[];
 }
-export interface QueryServiceDescriptorAminoType {
+export interface QueryServiceDescriptorAminoMsg {
   type: "cosmos-sdk/QueryServiceDescriptor";
   value: QueryServiceDescriptorAmino;
 }
@@ -775,7 +775,7 @@ export interface QueryMethodDescriptor {
    */
   fullQueryPath: string;
 }
-export interface QueryMethodDescriptorProtoType {
+export interface QueryMethodDescriptorProtoMsg {
   typeUrl: "/cosmos.base.reflection.v2alpha1.QueryMethodDescriptor";
   value: Uint8Array;
 }
@@ -795,7 +795,7 @@ export interface QueryMethodDescriptorAmino {
    */
   full_query_path: string;
 }
-export interface QueryMethodDescriptorAminoType {
+export interface QueryMethodDescriptorAminoMsg {
   type: "cosmos-sdk/QueryMethodDescriptor";
   value: QueryMethodDescriptorAmino;
 }
@@ -970,6 +970,32 @@ export const AppDescriptor = {
     obj.query_services = message.queryServices ? QueryServicesDescriptor.toAmino(message.queryServices) : undefined;
     obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: AppDescriptorAminoMsg): AppDescriptor {
+    return AppDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: AppDescriptor): AppDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/AppDescriptor",
+      value: AppDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: AppDescriptorProtoMsg): AppDescriptor {
+    return AppDescriptor.decode(message.value);
+  },
+
+  toProto(message: AppDescriptor): Uint8Array {
+    return AppDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: AppDescriptor): AppDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.AppDescriptor",
+      value: AppDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1088,6 +1114,32 @@ export const TxDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: TxDescriptorAminoMsg): TxDescriptor {
+    return TxDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: TxDescriptor): TxDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/TxDescriptor",
+      value: TxDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: TxDescriptorProtoMsg): TxDescriptor {
+    return TxDescriptor.decode(message.value);
+  },
+
+  toProto(message: TxDescriptor): Uint8Array {
+    return TxDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: TxDescriptor): TxDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.TxDescriptor",
+      value: TxDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1190,6 +1242,32 @@ export const AuthnDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: AuthnDescriptorAminoMsg): AuthnDescriptor {
+    return AuthnDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: AuthnDescriptor): AuthnDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/AuthnDescriptor",
+      value: AuthnDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: AuthnDescriptorProtoMsg): AuthnDescriptor {
+    return AuthnDescriptor.decode(message.value);
+  },
+
+  toProto(message: AuthnDescriptor): Uint8Array {
+    return AuthnDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: AuthnDescriptor): AuthnDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.AuthnDescriptor",
+      value: AuthnDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1306,6 +1384,32 @@ export const SigningModeDescriptor = {
     obj.number = message.number;
     obj.authn_info_provider_method_fullname = message.authnInfoProviderMethodFullname;
     return obj;
+  },
+
+  fromAminoMsg(object: SigningModeDescriptorAminoMsg): SigningModeDescriptor {
+    return SigningModeDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: SigningModeDescriptor): SigningModeDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/SigningModeDescriptor",
+      value: SigningModeDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: SigningModeDescriptorProtoMsg): SigningModeDescriptor {
+    return SigningModeDescriptor.decode(message.value);
+  },
+
+  toProto(message: SigningModeDescriptor): Uint8Array {
+    return SigningModeDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: SigningModeDescriptor): SigningModeDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.SigningModeDescriptor",
+      value: SigningModeDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1390,6 +1494,32 @@ export const ChainDescriptor = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
+  },
+
+  fromAminoMsg(object: ChainDescriptorAminoMsg): ChainDescriptor {
+    return ChainDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ChainDescriptor): ChainDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/ChainDescriptor",
+      value: ChainDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ChainDescriptorProtoMsg): ChainDescriptor {
+    return ChainDescriptor.decode(message.value);
+  },
+
+  toProto(message: ChainDescriptor): Uint8Array {
+    return ChainDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: ChainDescriptor): ChainDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.ChainDescriptor",
+      value: ChainDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1492,6 +1622,32 @@ export const CodecDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CodecDescriptorAminoMsg): CodecDescriptor {
+    return CodecDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: CodecDescriptor): CodecDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/CodecDescriptor",
+      value: CodecDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: CodecDescriptorProtoMsg): CodecDescriptor {
+    return CodecDescriptor.decode(message.value);
+  },
+
+  toProto(message: CodecDescriptor): Uint8Array {
+    return CodecDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: CodecDescriptor): CodecDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.CodecDescriptor",
+      value: CodecDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1641,6 +1797,32 @@ export const InterfaceDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: InterfaceDescriptor): InterfaceDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/InterfaceDescriptor",
+      value: InterfaceDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.decode(message.value);
+  },
+
+  toProto(message: InterfaceDescriptor): Uint8Array {
+    return InterfaceDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: InterfaceDescriptor): InterfaceDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceDescriptor",
+      value: InterfaceDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1741,6 +1923,32 @@ export const InterfaceImplementerDescriptor = {
     obj.fullname = message.fullname;
     obj.type_url = message.typeUrl;
     return obj;
+  },
+
+  fromAminoMsg(object: InterfaceImplementerDescriptorAminoMsg): InterfaceImplementerDescriptor {
+    return InterfaceImplementerDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/InterfaceImplementerDescriptor",
+      value: InterfaceImplementerDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: InterfaceImplementerDescriptorProtoMsg): InterfaceImplementerDescriptor {
+    return InterfaceImplementerDescriptor.decode(message.value);
+  },
+
+  toProto(message: InterfaceImplementerDescriptor): Uint8Array {
+    return InterfaceImplementerDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor",
+      value: InterfaceImplementerDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1859,6 +2067,32 @@ export const InterfaceAcceptingMessageDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: InterfaceAcceptingMessageDescriptorAminoMsg): InterfaceAcceptingMessageDescriptor {
+    return InterfaceAcceptingMessageDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/InterfaceAcceptingMessageDescriptor",
+      value: InterfaceAcceptingMessageDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: InterfaceAcceptingMessageDescriptorProtoMsg): InterfaceAcceptingMessageDescriptor {
+    return InterfaceAcceptingMessageDescriptor.decode(message.value);
+  },
+
+  toProto(message: InterfaceAcceptingMessageDescriptor): Uint8Array {
+    return InterfaceAcceptingMessageDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor",
+      value: InterfaceAcceptingMessageDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -1943,6 +2177,32 @@ export const ConfigurationDescriptor = {
     const obj: any = {};
     obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
     return obj;
+  },
+
+  fromAminoMsg(object: ConfigurationDescriptorAminoMsg): ConfigurationDescriptor {
+    return ConfigurationDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConfigurationDescriptor): ConfigurationDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/ConfigurationDescriptor",
+      value: ConfigurationDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConfigurationDescriptorProtoMsg): ConfigurationDescriptor {
+    return ConfigurationDescriptor.decode(message.value);
+  },
+
+  toProto(message: ConfigurationDescriptor): Uint8Array {
+    return ConfigurationDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConfigurationDescriptor): ConfigurationDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.ConfigurationDescriptor",
+      value: ConfigurationDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -2027,6 +2287,32 @@ export const MsgDescriptor = {
     const obj: any = {};
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgDescriptorAminoMsg): MsgDescriptor {
+    return MsgDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgDescriptor): MsgDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgDescriptor",
+      value: MsgDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgDescriptorProtoMsg): MsgDescriptor {
+    return MsgDescriptor.decode(message.value);
+  },
+
+  toProto(message: MsgDescriptor): Uint8Array {
+    return MsgDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgDescriptor): MsgDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.MsgDescriptor",
+      value: MsgDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -2091,6 +2377,32 @@ export const GetAuthnDescriptorRequest = {
   toAmino(_: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetAuthnDescriptorRequestAminoMsg): GetAuthnDescriptorRequest {
+    return GetAuthnDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetAuthnDescriptorRequest",
+      value: GetAuthnDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetAuthnDescriptorRequestProtoMsg): GetAuthnDescriptorRequest {
+    return GetAuthnDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetAuthnDescriptorRequest): Uint8Array {
+    return GetAuthnDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest",
+      value: GetAuthnDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2175,6 +2487,32 @@ export const GetAuthnDescriptorResponse = {
     const obj: any = {};
     obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetAuthnDescriptorResponseAminoMsg): GetAuthnDescriptorResponse {
+    return GetAuthnDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetAuthnDescriptorResponse",
+      value: GetAuthnDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetAuthnDescriptorResponseProtoMsg): GetAuthnDescriptorResponse {
+    return GetAuthnDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetAuthnDescriptorResponse): Uint8Array {
+    return GetAuthnDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse",
+      value: GetAuthnDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2239,6 +2577,32 @@ export const GetChainDescriptorRequest = {
   toAmino(_: GetChainDescriptorRequest): GetChainDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetChainDescriptorRequestAminoMsg): GetChainDescriptorRequest {
+    return GetChainDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetChainDescriptorRequest): GetChainDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetChainDescriptorRequest",
+      value: GetChainDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetChainDescriptorRequestProtoMsg): GetChainDescriptorRequest {
+    return GetChainDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetChainDescriptorRequest): Uint8Array {
+    return GetChainDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetChainDescriptorRequest): GetChainDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest",
+      value: GetChainDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2323,6 +2687,32 @@ export const GetChainDescriptorResponse = {
     const obj: any = {};
     obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetChainDescriptorResponseAminoMsg): GetChainDescriptorResponse {
+    return GetChainDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetChainDescriptorResponse): GetChainDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetChainDescriptorResponse",
+      value: GetChainDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetChainDescriptorResponseProtoMsg): GetChainDescriptorResponse {
+    return GetChainDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetChainDescriptorResponse): Uint8Array {
+    return GetChainDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetChainDescriptorResponse): GetChainDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse",
+      value: GetChainDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2387,6 +2777,32 @@ export const GetCodecDescriptorRequest = {
   toAmino(_: GetCodecDescriptorRequest): GetCodecDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetCodecDescriptorRequestAminoMsg): GetCodecDescriptorRequest {
+    return GetCodecDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetCodecDescriptorRequest): GetCodecDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetCodecDescriptorRequest",
+      value: GetCodecDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetCodecDescriptorRequestProtoMsg): GetCodecDescriptorRequest {
+    return GetCodecDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetCodecDescriptorRequest): Uint8Array {
+    return GetCodecDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetCodecDescriptorRequest): GetCodecDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest",
+      value: GetCodecDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2471,6 +2887,32 @@ export const GetCodecDescriptorResponse = {
     const obj: any = {};
     obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetCodecDescriptorResponseAminoMsg): GetCodecDescriptorResponse {
+    return GetCodecDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetCodecDescriptorResponse",
+      value: GetCodecDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetCodecDescriptorResponseProtoMsg): GetCodecDescriptorResponse {
+    return GetCodecDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetCodecDescriptorResponse): Uint8Array {
+    return GetCodecDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse",
+      value: GetCodecDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2535,6 +2977,32 @@ export const GetConfigurationDescriptorRequest = {
   toAmino(_: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetConfigurationDescriptorRequestAminoMsg): GetConfigurationDescriptorRequest {
+    return GetConfigurationDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetConfigurationDescriptorRequest",
+      value: GetConfigurationDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetConfigurationDescriptorRequestProtoMsg): GetConfigurationDescriptorRequest {
+    return GetConfigurationDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetConfigurationDescriptorRequest): Uint8Array {
+    return GetConfigurationDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest",
+      value: GetConfigurationDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2619,6 +3087,32 @@ export const GetConfigurationDescriptorResponse = {
     const obj: any = {};
     obj.config = message.config ? ConfigurationDescriptor.toAmino(message.config) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetConfigurationDescriptorResponseAminoMsg): GetConfigurationDescriptorResponse {
+    return GetConfigurationDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetConfigurationDescriptorResponse",
+      value: GetConfigurationDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetConfigurationDescriptorResponseProtoMsg): GetConfigurationDescriptorResponse {
+    return GetConfigurationDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetConfigurationDescriptorResponse): Uint8Array {
+    return GetConfigurationDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse",
+      value: GetConfigurationDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2683,6 +3177,32 @@ export const GetQueryServicesDescriptorRequest = {
   toAmino(_: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetQueryServicesDescriptorRequestAminoMsg): GetQueryServicesDescriptorRequest {
+    return GetQueryServicesDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetQueryServicesDescriptorRequest",
+      value: GetQueryServicesDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetQueryServicesDescriptorRequestProtoMsg): GetQueryServicesDescriptorRequest {
+    return GetQueryServicesDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetQueryServicesDescriptorRequest): Uint8Array {
+    return GetQueryServicesDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest",
+      value: GetQueryServicesDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2767,6 +3287,32 @@ export const GetQueryServicesDescriptorResponse = {
     const obj: any = {};
     obj.queries = message.queries ? QueryServicesDescriptor.toAmino(message.queries) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetQueryServicesDescriptorResponseAminoMsg): GetQueryServicesDescriptorResponse {
+    return GetQueryServicesDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetQueryServicesDescriptorResponse",
+      value: GetQueryServicesDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetQueryServicesDescriptorResponseProtoMsg): GetQueryServicesDescriptorResponse {
+    return GetQueryServicesDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetQueryServicesDescriptorResponse): Uint8Array {
+    return GetQueryServicesDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse",
+      value: GetQueryServicesDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2831,6 +3377,32 @@ export const GetTxDescriptorRequest = {
   toAmino(_: GetTxDescriptorRequest): GetTxDescriptorRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxDescriptorRequestAminoMsg): GetTxDescriptorRequest {
+    return GetTxDescriptorRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxDescriptorRequest): GetTxDescriptorRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxDescriptorRequest",
+      value: GetTxDescriptorRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxDescriptorRequestProtoMsg): GetTxDescriptorRequest {
+    return GetTxDescriptorRequest.decode(message.value);
+  },
+
+  toProto(message: GetTxDescriptorRequest): Uint8Array {
+    return GetTxDescriptorRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxDescriptorRequest): GetTxDescriptorRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest",
+      value: GetTxDescriptorRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2915,6 +3487,32 @@ export const GetTxDescriptorResponse = {
     const obj: any = {};
     obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GetTxDescriptorResponseAminoMsg): GetTxDescriptorResponse {
+    return GetTxDescriptorResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GetTxDescriptorResponse): GetTxDescriptorResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/GetTxDescriptorResponse",
+      value: GetTxDescriptorResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GetTxDescriptorResponseProtoMsg): GetTxDescriptorResponse {
+    return GetTxDescriptorResponse.decode(message.value);
+  },
+
+  toProto(message: GetTxDescriptorResponse): Uint8Array {
+    return GetTxDescriptorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetTxDescriptorResponse): GetTxDescriptorResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse",
+      value: GetTxDescriptorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3017,6 +3615,32 @@ export const QueryServicesDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryServicesDescriptorAminoMsg): QueryServicesDescriptor {
+    return QueryServicesDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryServicesDescriptor): QueryServicesDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryServicesDescriptor",
+      value: QueryServicesDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryServicesDescriptorProtoMsg): QueryServicesDescriptor {
+    return QueryServicesDescriptor.decode(message.value);
+  },
+
+  toProto(message: QueryServicesDescriptor): Uint8Array {
+    return QueryServicesDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryServicesDescriptor): QueryServicesDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServicesDescriptor",
+      value: QueryServicesDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -3151,6 +3775,32 @@ export const QueryServiceDescriptor = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryServiceDescriptorAminoMsg): QueryServiceDescriptor {
+    return QueryServiceDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryServiceDescriptor): QueryServiceDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryServiceDescriptor",
+      value: QueryServiceDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryServiceDescriptorProtoMsg): QueryServiceDescriptor {
+    return QueryServiceDescriptor.decode(message.value);
+  },
+
+  toProto(message: QueryServiceDescriptor): Uint8Array {
+    return QueryServiceDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryServiceDescriptor): QueryServiceDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServiceDescriptor",
+      value: QueryServiceDescriptor.encode(message).finish()
+    };
   }
 
 };
@@ -3251,6 +3901,32 @@ export const QueryMethodDescriptor = {
     obj.name = message.name;
     obj.full_query_path = message.fullQueryPath;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryMethodDescriptorAminoMsg): QueryMethodDescriptor {
+    return QueryMethodDescriptor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryMethodDescriptor): QueryMethodDescriptorAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryMethodDescriptor",
+      value: QueryMethodDescriptor.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryMethodDescriptorProtoMsg): QueryMethodDescriptor {
+    return QueryMethodDescriptor.decode(message.value);
+  },
+
+  toProto(message: QueryMethodDescriptor): Uint8Array {
+    return QueryMethodDescriptor.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryMethodDescriptor): QueryMethodDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.reflection.v2alpha1.QueryMethodDescriptor",
+      value: QueryMethodDescriptor.encode(message).finish()
+    };
   }
 
 };

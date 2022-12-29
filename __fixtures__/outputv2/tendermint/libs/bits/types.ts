@@ -5,7 +5,7 @@ export interface BitArray {
   bits: Long;
   elems: Long[];
 }
-export interface BitArrayProtoType {
+export interface BitArrayProtoMsg {
   typeUrl: "/tendermint.libs.bits.BitArray";
   value: Uint8Array;
 }
@@ -13,7 +13,7 @@ export interface BitArrayAmino {
   bits: string;
   elems: string[];
 }
-export interface BitArrayAminoType {
+export interface BitArrayAminoMsg {
   type: "/tendermint.libs.bits.BitArray";
   value: BitArrayAmino;
 }
@@ -147,6 +147,25 @@ export const BitArray = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BitArrayAminoMsg): BitArray {
+    return BitArray.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BitArrayProtoMsg): BitArray {
+    return BitArray.decode(message.value);
+  },
+
+  toProto(message: BitArray): Uint8Array {
+    return BitArray.encode(message).finish();
+  },
+
+  toProtoMsg(message: BitArray): BitArrayProtoMsg {
+    return {
+      typeUrl: "/tendermint.libs.bits.BitArray",
+      value: BitArray.encode(message).finish()
+    };
   }
 
 };

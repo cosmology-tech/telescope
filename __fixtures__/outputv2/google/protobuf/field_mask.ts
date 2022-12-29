@@ -207,7 +207,7 @@ export interface FieldMask {
   /** The set of field mask paths. */
   paths: string[];
 }
-export interface FieldMaskProtoType {
+export interface FieldMaskProtoMsg {
   typeUrl: "/google.protobuf.FieldMask";
   value: Uint8Array;
 }
@@ -417,7 +417,7 @@ export interface FieldMaskAmino {
   /** The set of field mask paths. */
   paths: string[];
 }
-export interface FieldMaskAminoType {
+export interface FieldMaskAminoMsg {
   type: "/google.protobuf.FieldMask";
   value: FieldMaskAmino;
 }
@@ -724,6 +724,25 @@ export const FieldMask = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
+    return FieldMask.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
+    return FieldMask.decode(message.value);
+  },
+
+  toProto(message: FieldMask): Uint8Array {
+    return FieldMask.encode(message).finish();
+  },
+
+  toProtoMsg(message: FieldMask): FieldMaskProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.FieldMask",
+      value: FieldMask.encode(message).finish()
+    };
   }
 
 };

@@ -9,7 +9,7 @@ export interface Params {
   pruneEpochIdentifier: string;
   recordHistoryKeepPeriod?: Duration;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.Params";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface ParamsAmino {
   prune_epoch_identifier: string;
   record_history_keep_period?: DurationAmino;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/twap/params";
   value: ParamsAmino;
 }
@@ -38,7 +38,7 @@ export interface GenesisState {
   /** params is the container of twap parameters. */
   params?: Params;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -51,7 +51,7 @@ export interface GenesisStateAmino {
   /** params is the container of twap parameters. */
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/twap/genesis-state";
   value: GenesisStateAmino;
 }
@@ -158,6 +158,32 @@ export const Params = {
     obj.prune_epoch_identifier = message.pruneEpochIdentifier;
     obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/twap/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
@@ -276,6 +302,32 @@ export const GenesisState = {
 
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/twap/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.twap.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

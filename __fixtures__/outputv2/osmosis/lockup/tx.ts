@@ -9,7 +9,7 @@ export interface MsgLockTokens {
   duration?: Duration;
   coins: Coin[];
 }
-export interface MsgLockTokensProtoType {
+export interface MsgLockTokensProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokens";
   value: Uint8Array;
 }
@@ -18,7 +18,7 @@ export interface MsgLockTokensAmino {
   duration?: DurationAmino;
   coins: CoinAmino[];
 }
-export interface MsgLockTokensAminoType {
+export interface MsgLockTokensAminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: MsgLockTokensAmino;
 }
@@ -30,14 +30,14 @@ export interface MsgLockTokensSDKType {
 export interface MsgLockTokensResponse {
   ID: Long;
 }
-export interface MsgLockTokensResponseProtoType {
+export interface MsgLockTokensResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokensResponse";
   value: Uint8Array;
 }
 export interface MsgLockTokensResponseAmino {
   ID: string;
 }
-export interface MsgLockTokensResponseAminoType {
+export interface MsgLockTokensResponseAminoMsg {
   type: "osmosis/lockup/lock-tokens-response";
   value: MsgLockTokensResponseAmino;
 }
@@ -47,14 +47,14 @@ export interface MsgLockTokensResponseSDKType {
 export interface MsgBeginUnlockingAll {
   owner: string;
 }
-export interface MsgBeginUnlockingAllProtoType {
+export interface MsgBeginUnlockingAllProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll";
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingAllAmino {
   owner: string;
 }
-export interface MsgBeginUnlockingAllAminoType {
+export interface MsgBeginUnlockingAllAminoMsg {
   type: "osmosis/lockup/begin-unlock-tokens";
   value: MsgBeginUnlockingAllAmino;
 }
@@ -64,14 +64,14 @@ export interface MsgBeginUnlockingAllSDKType {
 export interface MsgBeginUnlockingAllResponse {
   unlocks: PeriodLock[];
 }
-export interface MsgBeginUnlockingAllResponseProtoType {
+export interface MsgBeginUnlockingAllResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse";
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingAllResponseAmino {
   unlocks: PeriodLockAmino[];
 }
-export interface MsgBeginUnlockingAllResponseAminoType {
+export interface MsgBeginUnlockingAllResponseAminoMsg {
   type: "osmosis/lockup/begin-unlocking-all-response";
   value: MsgBeginUnlockingAllResponseAmino;
 }
@@ -85,7 +85,7 @@ export interface MsgBeginUnlocking {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
-export interface MsgBeginUnlockingProtoType {
+export interface MsgBeginUnlockingProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlocking";
   value: Uint8Array;
 }
@@ -96,7 +96,7 @@ export interface MsgBeginUnlockingAmino {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: CoinAmino[];
 }
-export interface MsgBeginUnlockingAminoType {
+export interface MsgBeginUnlockingAminoMsg {
   type: "osmosis/lockup/begin-unlock-period-lock";
   value: MsgBeginUnlockingAmino;
 }
@@ -108,14 +108,14 @@ export interface MsgBeginUnlockingSDKType {
 export interface MsgBeginUnlockingResponse {
   success: boolean;
 }
-export interface MsgBeginUnlockingResponseProtoType {
+export interface MsgBeginUnlockingResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse";
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingResponseAmino {
   success: boolean;
 }
-export interface MsgBeginUnlockingResponseAminoType {
+export interface MsgBeginUnlockingResponseAminoMsg {
   type: "osmosis/lockup/begin-unlocking-response";
   value: MsgBeginUnlockingResponseAmino;
 }
@@ -137,7 +137,7 @@ export interface MsgExtendLockup {
    */
   duration?: Duration;
 }
-export interface MsgExtendLockupProtoType {
+export interface MsgExtendLockupProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockup";
   value: Uint8Array;
 }
@@ -156,7 +156,7 @@ export interface MsgExtendLockupAmino {
    */
   duration?: DurationAmino;
 }
-export interface MsgExtendLockupAminoType {
+export interface MsgExtendLockupAminoMsg {
   type: "osmosis/lockup/extend-lockup";
   value: MsgExtendLockupAmino;
 }
@@ -173,14 +173,14 @@ export interface MsgExtendLockupSDKType {
 export interface MsgExtendLockupResponse {
   success: boolean;
 }
-export interface MsgExtendLockupResponseProtoType {
+export interface MsgExtendLockupResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockupResponse";
   value: Uint8Array;
 }
 export interface MsgExtendLockupResponseAmino {
   success: boolean;
 }
-export interface MsgExtendLockupResponseAminoType {
+export interface MsgExtendLockupResponseAminoMsg {
   type: "osmosis/lockup/extend-lockup-response";
   value: MsgExtendLockupResponseAmino;
 }
@@ -199,7 +199,7 @@ export interface MsgForceUnlock {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: Coin[];
 }
-export interface MsgForceUnlockProtoType {
+export interface MsgForceUnlockProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlock";
   value: Uint8Array;
 }
@@ -215,7 +215,7 @@ export interface MsgForceUnlockAmino {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: CoinAmino[];
 }
-export interface MsgForceUnlockAminoType {
+export interface MsgForceUnlockAminoMsg {
   type: "osmosis/lockup/force-unlock";
   value: MsgForceUnlockAmino;
 }
@@ -232,14 +232,14 @@ export interface MsgForceUnlockSDKType {
 export interface MsgForceUnlockResponse {
   success: boolean;
 }
-export interface MsgForceUnlockResponseProtoType {
+export interface MsgForceUnlockResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlockResponse";
   value: Uint8Array;
 }
 export interface MsgForceUnlockResponseAmino {
   success: boolean;
 }
-export interface MsgForceUnlockResponseAminoType {
+export interface MsgForceUnlockResponseAminoMsg {
   type: "osmosis/lockup/force-unlock-response";
   value: MsgForceUnlockResponseAmino;
 }
@@ -377,6 +377,32 @@ export const MsgLockTokens = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
+    return MsgLockTokens.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgLockTokens): MsgLockTokensAminoMsg {
+    return {
+      type: "osmosis/lockup/lock-tokens",
+      value: MsgLockTokens.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgLockTokensProtoMsg): MsgLockTokens {
+    return MsgLockTokens.decode(message.value);
+  },
+
+  toProto(message: MsgLockTokens): Uint8Array {
+    return MsgLockTokens.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgLockTokens): MsgLockTokensProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgLockTokens",
+      value: MsgLockTokens.encode(message).finish()
+    };
   }
 
 };
@@ -461,6 +487,32 @@ export const MsgLockTokensResponse = {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
+    return MsgLockTokensResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgLockTokensResponse): MsgLockTokensResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/lock-tokens-response",
+      value: MsgLockTokensResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgLockTokensResponseProtoMsg): MsgLockTokensResponse {
+    return MsgLockTokensResponse.decode(message.value);
+  },
+
+  toProto(message: MsgLockTokensResponse): Uint8Array {
+    return MsgLockTokensResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgLockTokensResponse): MsgLockTokensResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgLockTokensResponse",
+      value: MsgLockTokensResponse.encode(message).finish()
+    };
   }
 
 };
@@ -545,6 +597,32 @@ export const MsgBeginUnlockingAll = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBeginUnlockingAllAminoMsg): MsgBeginUnlockingAll {
+    return MsgBeginUnlockingAll.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlock-tokens",
+      value: MsgBeginUnlockingAll.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg): MsgBeginUnlockingAll {
+    return MsgBeginUnlockingAll.decode(message.value);
+  },
+
+  toProto(message: MsgBeginUnlockingAll): Uint8Array {
+    return MsgBeginUnlockingAll.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
+      value: MsgBeginUnlockingAll.encode(message).finish()
+    };
   }
 
 };
@@ -647,6 +725,32 @@ export const MsgBeginUnlockingAllResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBeginUnlockingAllResponseAminoMsg): MsgBeginUnlockingAllResponse {
+    return MsgBeginUnlockingAllResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlocking-all-response",
+      value: MsgBeginUnlockingAllResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBeginUnlockingAllResponseProtoMsg): MsgBeginUnlockingAllResponse {
+    return MsgBeginUnlockingAllResponse.decode(message.value);
+  },
+
+  toProto(message: MsgBeginUnlockingAllResponse): Uint8Array {
+    return MsgBeginUnlockingAllResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse",
+      value: MsgBeginUnlockingAllResponse.encode(message).finish()
+    };
   }
 
 };
@@ -781,6 +885,32 @@ export const MsgBeginUnlocking = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBeginUnlockingAminoMsg): MsgBeginUnlocking {
+    return MsgBeginUnlocking.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBeginUnlocking): MsgBeginUnlockingAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlock-period-lock",
+      value: MsgBeginUnlocking.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBeginUnlockingProtoMsg): MsgBeginUnlocking {
+    return MsgBeginUnlocking.decode(message.value);
+  },
+
+  toProto(message: MsgBeginUnlocking): Uint8Array {
+    return MsgBeginUnlocking.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBeginUnlocking): MsgBeginUnlockingProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
+      value: MsgBeginUnlocking.encode(message).finish()
+    };
   }
 
 };
@@ -865,6 +995,32 @@ export const MsgBeginUnlockingResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgBeginUnlockingResponseAminoMsg): MsgBeginUnlockingResponse {
+    return MsgBeginUnlockingResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlocking-response",
+      value: MsgBeginUnlockingResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg): MsgBeginUnlockingResponse {
+    return MsgBeginUnlockingResponse.decode(message.value);
+  },
+
+  toProto(message: MsgBeginUnlockingResponse): Uint8Array {
+    return MsgBeginUnlockingResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse",
+      value: MsgBeginUnlockingResponse.encode(message).finish()
+    };
   }
 
 };
@@ -981,6 +1137,32 @@ export const MsgExtendLockup = {
     obj.ID = message.ID ? message.ID.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgExtendLockupAminoMsg): MsgExtendLockup {
+    return MsgExtendLockup.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgExtendLockup): MsgExtendLockupAminoMsg {
+    return {
+      type: "osmosis/lockup/extend-lockup",
+      value: MsgExtendLockup.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgExtendLockupProtoMsg): MsgExtendLockup {
+    return MsgExtendLockup.decode(message.value);
+  },
+
+  toProto(message: MsgExtendLockup): Uint8Array {
+    return MsgExtendLockup.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgExtendLockup): MsgExtendLockupProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgExtendLockup",
+      value: MsgExtendLockup.encode(message).finish()
+    };
   }
 
 };
@@ -1065,6 +1247,32 @@ export const MsgExtendLockupResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgExtendLockupResponseAminoMsg): MsgExtendLockupResponse {
+    return MsgExtendLockupResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgExtendLockupResponse): MsgExtendLockupResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/extend-lockup-response",
+      value: MsgExtendLockupResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgExtendLockupResponseProtoMsg): MsgExtendLockupResponse {
+    return MsgExtendLockupResponse.decode(message.value);
+  },
+
+  toProto(message: MsgExtendLockupResponse): Uint8Array {
+    return MsgExtendLockupResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgExtendLockupResponse): MsgExtendLockupResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgExtendLockupResponse",
+      value: MsgExtendLockupResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1199,6 +1407,32 @@ export const MsgForceUnlock = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgForceUnlockAminoMsg): MsgForceUnlock {
+    return MsgForceUnlock.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgForceUnlock): MsgForceUnlockAminoMsg {
+    return {
+      type: "osmosis/lockup/force-unlock",
+      value: MsgForceUnlock.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgForceUnlockProtoMsg): MsgForceUnlock {
+    return MsgForceUnlock.decode(message.value);
+  },
+
+  toProto(message: MsgForceUnlock): Uint8Array {
+    return MsgForceUnlock.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgForceUnlock): MsgForceUnlockProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgForceUnlock",
+      value: MsgForceUnlock.encode(message).finish()
+    };
   }
 
 };
@@ -1283,6 +1517,32 @@ export const MsgForceUnlockResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgForceUnlockResponseAminoMsg): MsgForceUnlockResponse {
+    return MsgForceUnlockResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgForceUnlockResponse): MsgForceUnlockResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/force-unlock-response",
+      value: MsgForceUnlockResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgForceUnlockResponseProtoMsg): MsgForceUnlockResponse {
+    return MsgForceUnlockResponse.decode(message.value);
+  },
+
+  toProto(message: MsgForceUnlockResponse): Uint8Array {
+    return MsgForceUnlockResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgForceUnlockResponse): MsgForceUnlockResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.MsgForceUnlockResponse",
+      value: MsgForceUnlockResponse.encode(message).finish()
+    };
   }
 
 };

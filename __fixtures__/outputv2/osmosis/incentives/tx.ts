@@ -37,7 +37,7 @@ export interface MsgCreateGauge {
    */
   numEpochsPaidOver: Long;
 }
-export interface MsgCreateGaugeProtoType {
+export interface MsgCreateGaugeProtoMsg {
   typeUrl: "/osmosis.incentives.MsgCreateGauge";
   value: Uint8Array;
 }
@@ -74,7 +74,7 @@ export interface MsgCreateGaugeAmino {
    */
   num_epochs_paid_over: string;
 }
-export interface MsgCreateGaugeAminoType {
+export interface MsgCreateGaugeAminoMsg {
   type: "osmosis/incentives/create-gauge";
   value: MsgCreateGaugeAmino;
 }
@@ -89,12 +89,12 @@ export interface MsgCreateGaugeSDKType {
   num_epochs_paid_over: Long;
 }
 export interface MsgCreateGaugeResponse {}
-export interface MsgCreateGaugeResponseProtoType {
+export interface MsgCreateGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
   value: Uint8Array;
 }
 export interface MsgCreateGaugeResponseAmino {}
-export interface MsgCreateGaugeResponseAminoType {
+export interface MsgCreateGaugeResponseAminoMsg {
   type: "osmosis/incentives/create-gauge-response";
   value: MsgCreateGaugeResponseAmino;
 }
@@ -111,7 +111,7 @@ export interface MsgAddToGauge {
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
-export interface MsgAddToGaugeProtoType {
+export interface MsgAddToGaugeProtoMsg {
   typeUrl: "/osmosis.incentives.MsgAddToGauge";
   value: Uint8Array;
 }
@@ -127,7 +127,7 @@ export interface MsgAddToGaugeAmino {
   /** rewards are the coin(s) to add to gauge */
   rewards: CoinAmino[];
 }
-export interface MsgAddToGaugeAminoType {
+export interface MsgAddToGaugeAminoMsg {
   type: "osmosis/incentives/add-to-gauge";
   value: MsgAddToGaugeAmino;
 }
@@ -139,12 +139,12 @@ export interface MsgAddToGaugeSDKType {
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
-export interface MsgAddToGaugeResponseProtoType {
+export interface MsgAddToGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
   value: Uint8Array;
 }
 export interface MsgAddToGaugeResponseAmino {}
-export interface MsgAddToGaugeResponseAminoType {
+export interface MsgAddToGaugeResponseAminoMsg {
   type: "osmosis/incentives/add-to-gauge-response";
   value: MsgAddToGaugeResponseAmino;
 }
@@ -328,6 +328,32 @@ export const MsgCreateGauge = {
     obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateGaugeAminoMsg): MsgCreateGauge {
+    return MsgCreateGauge.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateGauge): MsgCreateGaugeAminoMsg {
+    return {
+      type: "osmosis/incentives/create-gauge",
+      value: MsgCreateGauge.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateGaugeProtoMsg): MsgCreateGauge {
+    return MsgCreateGauge.decode(message.value);
+  },
+
+  toProto(message: MsgCreateGauge): Uint8Array {
+    return MsgCreateGauge.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateGauge): MsgCreateGaugeProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.MsgCreateGauge",
+      value: MsgCreateGauge.encode(message).finish()
+    };
   }
 
 };
@@ -392,6 +418,32 @@ export const MsgCreateGaugeResponse = {
   toAmino(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateGaugeResponseAminoMsg): MsgCreateGaugeResponse {
+    return MsgCreateGaugeResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateGaugeResponse): MsgCreateGaugeResponseAminoMsg {
+    return {
+      type: "osmosis/incentives/create-gauge-response",
+      value: MsgCreateGaugeResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateGaugeResponseProtoMsg): MsgCreateGaugeResponse {
+    return MsgCreateGaugeResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateGaugeResponse): Uint8Array {
+    return MsgCreateGaugeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateGaugeResponse): MsgCreateGaugeResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse",
+      value: MsgCreateGaugeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -526,6 +578,32 @@ export const MsgAddToGauge = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MsgAddToGaugeAminoMsg): MsgAddToGauge {
+    return MsgAddToGauge.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgAddToGauge): MsgAddToGaugeAminoMsg {
+    return {
+      type: "osmosis/incentives/add-to-gauge",
+      value: MsgAddToGauge.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgAddToGaugeProtoMsg): MsgAddToGauge {
+    return MsgAddToGauge.decode(message.value);
+  },
+
+  toProto(message: MsgAddToGauge): Uint8Array {
+    return MsgAddToGauge.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgAddToGauge): MsgAddToGaugeProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.MsgAddToGauge",
+      value: MsgAddToGauge.encode(message).finish()
+    };
   }
 
 };
@@ -590,6 +668,32 @@ export const MsgAddToGaugeResponse = {
   toAmino(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgAddToGaugeResponseAminoMsg): MsgAddToGaugeResponse {
+    return MsgAddToGaugeResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgAddToGaugeResponse): MsgAddToGaugeResponseAminoMsg {
+    return {
+      type: "osmosis/incentives/add-to-gauge-response",
+      value: MsgAddToGaugeResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgAddToGaugeResponseProtoMsg): MsgAddToGaugeResponse {
+    return MsgAddToGaugeResponse.decode(message.value);
+  },
+
+  toProto(message: MsgAddToGaugeResponse): Uint8Array {
+    return MsgAddToGaugeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgAddToGaugeResponse): MsgAddToGaugeResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse",
+      value: MsgAddToGaugeResponse.encode(message).finish()
+    };
   }
 
 };

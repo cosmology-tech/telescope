@@ -77,7 +77,7 @@ export interface Monitoring {
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
-export interface MonitoringProtoType {
+export interface MonitoringProtoMsg {
   typeUrl: "/google.api.Monitoring";
   value: Uint8Array;
 }
@@ -157,7 +157,7 @@ export interface MonitoringAmino {
    */
   consumer_destinations: Monitoring_MonitoringDestinationAmino[];
 }
-export interface MonitoringAminoType {
+export interface MonitoringAminoMsg {
   type: "/google.api.Monitoring";
   value: MonitoringAmino;
 }
@@ -238,7 +238,7 @@ export interface Monitoring_MonitoringDestination {
    */
   metrics: string[];
 }
-export interface Monitoring_MonitoringDestinationProtoType {
+export interface Monitoring_MonitoringDestinationProtoMsg {
   typeUrl: "/google.api.MonitoringDestination";
   value: Uint8Array;
 }
@@ -260,7 +260,7 @@ export interface Monitoring_MonitoringDestinationAmino {
    */
   metrics: string[];
 }
-export interface Monitoring_MonitoringDestinationAminoType {
+export interface Monitoring_MonitoringDestinationAminoMsg {
   type: "/google.api.MonitoringDestination";
   value: Monitoring_MonitoringDestinationAmino;
 }
@@ -402,6 +402,25 @@ export const Monitoring = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MonitoringAminoMsg): Monitoring {
+    return Monitoring.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MonitoringProtoMsg): Monitoring {
+    return Monitoring.decode(message.value);
+  },
+
+  toProto(message: Monitoring): Uint8Array {
+    return Monitoring.encode(message).finish();
+  },
+
+  toProtoMsg(message: Monitoring): MonitoringProtoMsg {
+    return {
+      typeUrl: "/google.api.Monitoring",
+      value: Monitoring.encode(message).finish()
+    };
   }
 
 };
@@ -519,6 +538,25 @@ export const Monitoring_MonitoringDestination = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Monitoring_MonitoringDestinationAminoMsg): Monitoring_MonitoringDestination {
+    return Monitoring_MonitoringDestination.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg): Monitoring_MonitoringDestination {
+    return Monitoring_MonitoringDestination.decode(message.value);
+  },
+
+  toProto(message: Monitoring_MonitoringDestination): Uint8Array {
+    return Monitoring_MonitoringDestination.encode(message).finish();
+  },
+
+  toProtoMsg(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationProtoMsg {
+    return {
+      typeUrl: "/google.api.MonitoringDestination",
+      value: Monitoring_MonitoringDestination.encode(message).finish()
+    };
   }
 
 };

@@ -68,7 +68,7 @@ export interface EpochInfo {
    */
   currentEpochStartHeight: Long;
 }
-export interface EpochInfoProtoType {
+export interface EpochInfoProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.EpochInfo";
   value: Uint8Array;
 }
@@ -137,7 +137,7 @@ export interface EpochInfoAmino {
    */
   current_epoch_start_height: string;
 }
-export interface EpochInfoAminoType {
+export interface EpochInfoAminoMsg {
   type: "osmosis/epochs/epoch-info";
   value: EpochInfoAmino;
 }
@@ -160,7 +160,7 @@ export interface EpochInfoSDKType {
 export interface GenesisState {
   epochs: EpochInfo[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface GenesisStateProtoType {
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/epochs/genesis-state";
   value: GenesisStateAmino;
 }
@@ -355,6 +355,32 @@ export const EpochInfo = {
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {
+    return EpochInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: EpochInfo): EpochInfoAminoMsg {
+    return {
+      type: "osmosis/epochs/epoch-info",
+      value: EpochInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
+    return EpochInfo.decode(message.value);
+  },
+
+  toProto(message: EpochInfo): Uint8Array {
+    return EpochInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: EpochInfo): EpochInfoProtoMsg {
+    return {
+      typeUrl: "/osmosis.epochs.v1beta1.EpochInfo",
+      value: EpochInfo.encode(message).finish()
+    };
   }
 
 };
@@ -457,6 +483,32 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/epochs/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.epochs.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

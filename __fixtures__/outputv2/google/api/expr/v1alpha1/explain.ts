@@ -27,7 +27,7 @@ export interface Explain {
    */
   exprSteps: Explain_ExprStep[];
 }
-export interface ExplainProtoType {
+export interface ExplainProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Explain";
   value: Uint8Array;
 }
@@ -56,7 +56,7 @@ export interface ExplainAmino {
    */
   expr_steps: Explain_ExprStepAmino[];
 }
-export interface ExplainAminoType {
+export interface ExplainAminoMsg {
   type: "/google.api.expr.v1alpha1.Explain";
   value: ExplainAmino;
 }
@@ -80,7 +80,7 @@ export interface Explain_ExprStep {
   /** Index of the value in the values list. */
   valueIndex: number;
 }
-export interface Explain_ExprStepProtoType {
+export interface Explain_ExprStepProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep";
   value: Uint8Array;
 }
@@ -93,7 +93,7 @@ export interface Explain_ExprStepAmino {
   /** Index of the value in the values list. */
   value_index: number;
 }
-export interface Explain_ExprStepAminoType {
+export interface Explain_ExprStepAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprStep";
   value: Explain_ExprStepAmino;
 }
@@ -232,6 +232,25 @@ export const Explain = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ExplainAminoMsg): Explain {
+    return Explain.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ExplainProtoMsg): Explain {
+    return Explain.decode(message.value);
+  },
+
+  toProto(message: Explain): Uint8Array {
+    return Explain.encode(message).finish();
+  },
+
+  toProtoMsg(message: Explain): ExplainProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Explain",
+      value: Explain.encode(message).finish()
+    };
   }
 
 };
@@ -331,6 +350,25 @@ export const Explain_ExprStep = {
     obj.id = message.id ? message.id.toString() : undefined;
     obj.value_index = message.valueIndex;
     return obj;
+  },
+
+  fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {
+    return Explain_ExprStep.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
+    return Explain_ExprStep.decode(message.value);
+  },
+
+  toProto(message: Explain_ExprStep): Uint8Array {
+    return Explain_ExprStep.encode(message).finish();
+  },
+
+  toProtoMsg(message: Explain_ExprStep): Explain_ExprStepProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ExprStep",
+      value: Explain_ExprStep.encode(message).finish()
+    };
   }
 
 };

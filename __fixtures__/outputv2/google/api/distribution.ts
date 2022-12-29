@@ -81,7 +81,7 @@ export interface Distribution {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
-export interface DistributionProtoType {
+export interface DistributionProtoMsg {
   typeUrl: "/google.api.Distribution";
   value: Uint8Array;
 }
@@ -163,7 +163,7 @@ export interface DistributionAmino {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
-export interface DistributionAminoType {
+export interface DistributionAminoMsg {
   type: "/google.api.Distribution";
   value: DistributionAmino;
 }
@@ -202,7 +202,7 @@ export interface Distribution_Range {
   /** The maximum of the population values. */
   max: number;
 }
-export interface Distribution_RangeProtoType {
+export interface Distribution_RangeProtoMsg {
   typeUrl: "/google.api.Range";
   value: Uint8Array;
 }
@@ -215,7 +215,7 @@ export interface Distribution_RangeAmino {
   /** The maximum of the population values. */
   max: number;
 }
-export interface Distribution_RangeAminoType {
+export interface Distribution_RangeAminoMsg {
   type: "/google.api.Range";
   value: Distribution_RangeAmino;
 }
@@ -253,7 +253,7 @@ export interface Distribution_BucketOptions {
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
 }
-export interface Distribution_BucketOptionsProtoType {
+export interface Distribution_BucketOptionsProtoMsg {
   typeUrl: "/google.api.BucketOptions";
   value: Uint8Array;
 }
@@ -285,7 +285,7 @@ export interface Distribution_BucketOptionsAmino {
   /** The explicit buckets. */
   explicit_buckets?: Distribution_BucketOptions_ExplicitAmino;
 }
-export interface Distribution_BucketOptionsAminoType {
+export interface Distribution_BucketOptionsAminoMsg {
   type: "/google.api.BucketOptions";
   value: Distribution_BucketOptionsAmino;
 }
@@ -334,7 +334,7 @@ export interface Distribution_BucketOptions_Linear {
   /** Lower bound of the first bucket. */
   offset: number;
 }
-export interface Distribution_BucketOptions_LinearProtoType {
+export interface Distribution_BucketOptions_LinearProtoMsg {
   typeUrl: "/google.api.Linear";
   value: Uint8Array;
 }
@@ -360,7 +360,7 @@ export interface Distribution_BucketOptions_LinearAmino {
   /** Lower bound of the first bucket. */
   offset: number;
 }
-export interface Distribution_BucketOptions_LinearAminoType {
+export interface Distribution_BucketOptions_LinearAminoMsg {
   type: "/google.api.Linear";
   value: Distribution_BucketOptions_LinearAmino;
 }
@@ -403,7 +403,7 @@ export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   scale: number;
 }
-export interface Distribution_BucketOptions_ExponentialProtoType {
+export interface Distribution_BucketOptions_ExponentialProtoMsg {
   typeUrl: "/google.api.Exponential";
   value: Uint8Array;
 }
@@ -429,7 +429,7 @@ export interface Distribution_BucketOptions_ExponentialAmino {
   /** Must be greater than 0. */
   scale: number;
 }
-export interface Distribution_BucketOptions_ExponentialAminoType {
+export interface Distribution_BucketOptions_ExponentialAminoMsg {
   type: "/google.api.Exponential";
   value: Distribution_BucketOptions_ExponentialAmino;
 }
@@ -468,7 +468,7 @@ export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
 }
-export interface Distribution_BucketOptions_ExplicitProtoType {
+export interface Distribution_BucketOptions_ExplicitProtoMsg {
   typeUrl: "/google.api.Explicit";
   value: Uint8Array;
 }
@@ -490,7 +490,7 @@ export interface Distribution_BucketOptions_ExplicitAmino {
   /** The values must be monotonically increasing. */
   bounds: number[];
 }
-export interface Distribution_BucketOptions_ExplicitAminoType {
+export interface Distribution_BucketOptions_ExplicitAminoMsg {
   type: "/google.api.Explicit";
   value: Distribution_BucketOptions_ExplicitAmino;
 }
@@ -544,7 +544,7 @@ export interface Distribution_Exemplar {
    */
   attachments: Any[];
 }
-export interface Distribution_ExemplarProtoType {
+export interface Distribution_ExemplarProtoMsg {
   typeUrl: "/google.api.Exemplar";
   value: Uint8Array;
 }
@@ -581,7 +581,7 @@ export interface Distribution_ExemplarAmino {
    */
   attachments: AnyAmino[];
 }
-export interface Distribution_ExemplarAminoType {
+export interface Distribution_ExemplarAminoMsg {
   type: "/google.api.Exemplar";
   value: Distribution_ExemplarAmino;
 }
@@ -820,6 +820,25 @@ export const Distribution = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DistributionAminoMsg): Distribution {
+    return Distribution.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DistributionProtoMsg): Distribution {
+    return Distribution.decode(message.value);
+  },
+
+  toProto(message: Distribution): Uint8Array {
+    return Distribution.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution): DistributionProtoMsg {
+    return {
+      typeUrl: "/google.api.Distribution",
+      value: Distribution.encode(message).finish()
+    };
   }
 
 };
@@ -919,6 +938,25 @@ export const Distribution_Range = {
     obj.min = message.min;
     obj.max = message.max;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
+    return Distribution_Range.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_RangeProtoMsg): Distribution_Range {
+    return Distribution_Range.decode(message.value);
+  },
+
+  toProto(message: Distribution_Range): Uint8Array {
+    return Distribution_Range.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_Range): Distribution_RangeProtoMsg {
+    return {
+      typeUrl: "/google.api.Range",
+      value: Distribution_Range.encode(message).finish()
+    };
   }
 
 };
@@ -1034,6 +1072,25 @@ export const Distribution_BucketOptions = {
     obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toAmino(message.exponentialBuckets) : undefined;
     obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toAmino(message.explicitBuckets) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_BucketOptionsAminoMsg): Distribution_BucketOptions {
+    return Distribution_BucketOptions.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_BucketOptionsProtoMsg): Distribution_BucketOptions {
+    return Distribution_BucketOptions.decode(message.value);
+  },
+
+  toProto(message: Distribution_BucketOptions): Uint8Array {
+    return Distribution_BucketOptions.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_BucketOptions): Distribution_BucketOptionsProtoMsg {
+    return {
+      typeUrl: "/google.api.BucketOptions",
+      value: Distribution_BucketOptions.encode(message).finish()
+    };
   }
 
 };
@@ -1149,6 +1206,25 @@ export const Distribution_BucketOptions_Linear = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
+    return Distribution_BucketOptions_Linear.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_BucketOptions_LinearProtoMsg): Distribution_BucketOptions_Linear {
+    return Distribution_BucketOptions_Linear.decode(message.value);
+  },
+
+  toProto(message: Distribution_BucketOptions_Linear): Uint8Array {
+    return Distribution_BucketOptions_Linear.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearProtoMsg {
+    return {
+      typeUrl: "/google.api.Linear",
+      value: Distribution_BucketOptions_Linear.encode(message).finish()
+    };
   }
 
 };
@@ -1264,6 +1340,25 @@ export const Distribution_BucketOptions_Exponential = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
+    return Distribution_BucketOptions_Exponential.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_BucketOptions_ExponentialProtoMsg): Distribution_BucketOptions_Exponential {
+    return Distribution_BucketOptions_Exponential.decode(message.value);
+  },
+
+  toProto(message: Distribution_BucketOptions_Exponential): Uint8Array {
+    return Distribution_BucketOptions_Exponential.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialProtoMsg {
+    return {
+      typeUrl: "/google.api.Exponential",
+      value: Distribution_BucketOptions_Exponential.encode(message).finish()
+    };
   }
 
 };
@@ -1377,6 +1472,25 @@ export const Distribution_BucketOptions_Explicit = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_BucketOptions_ExplicitAminoMsg): Distribution_BucketOptions_Explicit {
+    return Distribution_BucketOptions_Explicit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_BucketOptions_ExplicitProtoMsg): Distribution_BucketOptions_Explicit {
+    return Distribution_BucketOptions_Explicit.decode(message.value);
+  },
+
+  toProto(message: Distribution_BucketOptions_Explicit): Uint8Array {
+    return Distribution_BucketOptions_Explicit.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitProtoMsg {
+    return {
+      typeUrl: "/google.api.Explicit",
+      value: Distribution_BucketOptions_Explicit.encode(message).finish()
+    };
   }
 
 };
@@ -1510,6 +1624,25 @@ export const Distribution_Exemplar = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Distribution_ExemplarAminoMsg): Distribution_Exemplar {
+    return Distribution_Exemplar.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Distribution_ExemplarProtoMsg): Distribution_Exemplar {
+    return Distribution_Exemplar.decode(message.value);
+  },
+
+  toProto(message: Distribution_Exemplar): Uint8Array {
+    return Distribution_Exemplar.encode(message).finish();
+  },
+
+  toProtoMsg(message: Distribution_Exemplar): Distribution_ExemplarProtoMsg {
+    return {
+      typeUrl: "/google.api.Exemplar",
+      value: Distribution_Exemplar.encode(message).finish()
+    };
   }
 
 };

@@ -21,7 +21,7 @@ export interface GenesisState {
   /** the sequence for the next generated client identifier */
   nextClientSequence: Long;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.client.v1.GenesisState";
   value: Uint8Array;
 }
@@ -44,7 +44,7 @@ export interface GenesisStateAmino {
   /** the sequence for the next generated client identifier */
   next_client_sequence: string;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
   value: GenesisStateAmino;
 }
@@ -70,7 +70,7 @@ export interface GenesisMetadata {
   /** metadata value */
   value: Uint8Array;
 }
-export interface GenesisMetadataProtoType {
+export interface GenesisMetadataProtoMsg {
   typeUrl: "/ibc.core.client.v1.GenesisMetadata";
   value: Uint8Array;
 }
@@ -86,7 +86,7 @@ export interface GenesisMetadataAmino {
   /** metadata value */
   value: Uint8Array;
 }
-export interface GenesisMetadataAminoType {
+export interface GenesisMetadataAminoMsg {
   type: "cosmos-sdk/GenesisMetadata";
   value: GenesisMetadataAmino;
 }
@@ -108,7 +108,7 @@ export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];
 }
-export interface IdentifiedGenesisMetadataProtoType {
+export interface IdentifiedGenesisMetadataProtoMsg {
   typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";
   value: Uint8Array;
 }
@@ -121,7 +121,7 @@ export interface IdentifiedGenesisMetadataAmino {
   client_id: string;
   client_metadata: GenesisMetadataAmino[];
 }
-export interface IdentifiedGenesisMetadataAminoType {
+export interface IdentifiedGenesisMetadataAminoMsg {
   type: "cosmos-sdk/IdentifiedGenesisMetadata";
   value: IdentifiedGenesisMetadataAmino;
 }
@@ -343,6 +343,32 @@ export const GenesisState = {
     obj.create_localhost = message.createLocalhost;
     obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -443,6 +469,32 @@ export const GenesisMetadata = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {
+    return GenesisMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisMetadata): GenesisMetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisMetadata",
+      value: GenesisMetadata.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisMetadataProtoMsg): GenesisMetadata {
+    return GenesisMetadata.decode(message.value);
+  },
+
+  toProto(message: GenesisMetadata): Uint8Array {
+    return GenesisMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisMetadata): GenesisMetadataProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.GenesisMetadata",
+      value: GenesisMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -561,6 +613,32 @@ export const IdentifiedGenesisMetadata = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: IdentifiedGenesisMetadataAminoMsg): IdentifiedGenesisMetadata {
+    return IdentifiedGenesisMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/IdentifiedGenesisMetadata",
+      value: IdentifiedGenesisMetadata.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg): IdentifiedGenesisMetadata {
+    return IdentifiedGenesisMetadata.decode(message.value);
+  },
+
+  toProto(message: IdentifiedGenesisMetadata): Uint8Array {
+    return IdentifiedGenesisMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata",
+      value: IdentifiedGenesisMetadata.encode(message).finish()
+    };
   }
 
 };

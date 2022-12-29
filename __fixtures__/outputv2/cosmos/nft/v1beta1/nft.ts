@@ -26,7 +26,7 @@ export interface Class {
   /** data is the app specific metadata of the NFT class. Optional */
   data?: Any;
 }
-export interface ClassProtoType {
+export interface ClassProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.Class";
   value: Uint8Array;
 }
@@ -54,7 +54,7 @@ export interface ClassAmino {
   /** data is the app specific metadata of the NFT class. Optional */
   data?: AnyAmino;
 }
-export interface ClassAminoType {
+export interface ClassAminoMsg {
   type: "cosmos-sdk/Class";
   value: ClassAmino;
 }
@@ -87,7 +87,7 @@ export interface NFT {
   /** data is an app specific data of the NFT. Optional */
   data?: Any;
 }
-export interface NFTProtoType {
+export interface NFTProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.NFT";
   value: Uint8Array;
 }
@@ -109,7 +109,7 @@ export interface NFTAmino {
   /** data is an app specific data of the NFT. Optional */
   data?: AnyAmino;
 }
-export interface NFTAminoType {
+export interface NFTAminoMsg {
   type: "cosmos-sdk/NFT";
   value: NFTAmino;
 }
@@ -299,6 +299,32 @@ export const Class = {
     obj.uri_hash = message.uriHash;
     obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ClassAminoMsg): Class {
+    return Class.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Class): ClassAminoMsg {
+    return {
+      type: "cosmos-sdk/Class",
+      value: Class.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClassProtoMsg): Class {
+    return Class.decode(message.value);
+  },
+
+  toProto(message: Class): Uint8Array {
+    return Class.encode(message).finish();
+  },
+
+  toProtoMsg(message: Class): ClassProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.Class",
+      value: Class.encode(message).finish()
+    };
   }
 
 };
@@ -447,6 +473,32 @@ export const NFT = {
     obj.uri_hash = message.uriHash;
     obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: NFTAminoMsg): NFT {
+    return NFT.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: NFT): NFTAminoMsg {
+    return {
+      type: "cosmos-sdk/NFT",
+      value: NFT.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: NFTProtoMsg): NFT {
+    return NFT.decode(message.value);
+  },
+
+  toProto(message: NFT): Uint8Array {
+    return NFT.encode(message).finish();
+  },
+
+  toProtoMsg(message: NFT): NFTProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.NFT",
+      value: NFT.encode(message).finish()
+    };
   }
 
 };

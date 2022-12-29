@@ -14,7 +14,7 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 export interface Params {
   poolCreationFee: Coin[];
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Params";
   value: Uint8Array;
 }
@@ -23,7 +23,7 @@ export interface ParamsProtoType {
 export interface ParamsAmino {
   pool_creation_fee: CoinAmino[];
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/gamm/params";
   value: ParamsAmino;
 }
@@ -41,7 +41,7 @@ export interface GenesisState {
   nextPoolNumber: Long;
   params?: Params;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -54,7 +54,7 @@ export interface GenesisStateAmino {
   next_pool_number: string;
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/gamm/genesis-state";
   value: GenesisStateAmino;
 }
@@ -164,6 +164,32 @@ export const Params = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/gamm/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
@@ -298,6 +324,32 @@ export const GenesisState = {
     obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/gamm/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

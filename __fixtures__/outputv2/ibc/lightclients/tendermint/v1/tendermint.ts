@@ -61,7 +61,7 @@ export interface ClientState {
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
-export interface ClientStateProtoType {
+export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
   value: Uint8Array;
 }
@@ -118,7 +118,7 @@ export interface ClientStateAmino {
    */
   allow_update_after_misbehaviour: boolean;
 }
-export interface ClientStateAminoType {
+export interface ClientStateAminoMsg {
   type: "cosmos-sdk/ClientState";
   value: ClientStateAmino;
 }
@@ -153,7 +153,7 @@ export interface ConsensusState {
   root?: MerkleRoot;
   nextValidatorsHash: Uint8Array;
 }
-export interface ConsensusStateProtoType {
+export interface ConsensusStateProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
   value: Uint8Array;
 }
@@ -170,7 +170,7 @@ export interface ConsensusStateAmino {
   root?: MerkleRootAmino;
   next_validators_hash: Uint8Array;
 }
-export interface ConsensusStateAminoType {
+export interface ConsensusStateAminoMsg {
   type: "cosmos-sdk/ConsensusState";
   value: ConsensusStateAmino;
 }
@@ -191,7 +191,7 @@ export interface Misbehaviour {
   header1?: Header;
   header2?: Header;
 }
-export interface MisbehaviourProtoType {
+export interface MisbehaviourProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
   value: Uint8Array;
 }
@@ -205,7 +205,7 @@ export interface MisbehaviourAmino {
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
 }
-export interface MisbehaviourAminoType {
+export interface MisbehaviourAminoMsg {
   type: "cosmos-sdk/Misbehaviour";
   value: MisbehaviourAmino;
 }
@@ -240,7 +240,7 @@ export interface Header {
   trustedHeight?: Height;
   trustedValidators?: ValidatorSet;
 }
-export interface HeaderProtoType {
+export interface HeaderProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Header";
   value: Uint8Array;
 }
@@ -265,7 +265,7 @@ export interface HeaderAmino {
   trusted_height?: HeightAmino;
   trusted_validators?: ValidatorSetAmino;
 }
-export interface HeaderAminoType {
+export interface HeaderAminoMsg {
   type: "cosmos-sdk/Header";
   value: HeaderAmino;
 }
@@ -299,7 +299,7 @@ export interface Fraction {
   numerator: Long;
   denominator: Long;
 }
-export interface FractionProtoType {
+export interface FractionProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
   value: Uint8Array;
 }
@@ -312,7 +312,7 @@ export interface FractionAmino {
   numerator: string;
   denominator: string;
 }
-export interface FractionAminoType {
+export interface FractionAminoMsg {
   type: "cosmos-sdk/Fraction";
   value: FractionAmino;
 }
@@ -599,6 +599,32 @@ export const ClientState = {
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
+  },
+
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
+  },
+
+  toProto(message: ClientState): Uint8Array {
+    return ClientState.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClientState): ClientStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.ClientState",
+      value: ClientState.encode(message).finish()
+    };
   }
 
 };
@@ -715,6 +741,32 @@ export const ConsensusState = {
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
+  },
+
+  fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
+    return ConsensusState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ConsensusState): ConsensusStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ConsensusState",
+      value: ConsensusState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ConsensusStateProtoMsg): ConsensusState {
+    return ConsensusState.decode(message.value);
+  },
+
+  toProto(message: ConsensusState): Uint8Array {
+    return ConsensusState.encode(message).finish();
+  },
+
+  toProtoMsg(message: ConsensusState): ConsensusStateProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState",
+      value: ConsensusState.encode(message).finish()
+    };
   }
 
 };
@@ -831,6 +883,32 @@ export const Misbehaviour = {
     obj.header_1 = message.header_1 ? Header.toAmino(message.header_1) : undefined;
     obj.header_2 = message.header_2 ? Header.toAmino(message.header_2) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
+    return Misbehaviour.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Misbehaviour): MisbehaviourAminoMsg {
+    return {
+      type: "cosmos-sdk/Misbehaviour",
+      value: Misbehaviour.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MisbehaviourProtoMsg): Misbehaviour {
+    return Misbehaviour.decode(message.value);
+  },
+
+  toProto(message: Misbehaviour): Uint8Array {
+    return Misbehaviour.encode(message).finish();
+  },
+
+  toProtoMsg(message: Misbehaviour): MisbehaviourProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour",
+      value: Misbehaviour.encode(message).finish()
+    };
   }
 
 };
@@ -963,6 +1041,32 @@ export const Header = {
     obj.trusted_height = message.trustedHeight ? Height.toAmino(message.trustedHeight) : {};
     obj.trusted_validators = message.trustedValidators ? ValidatorSet.toAmino(message.trustedValidators) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: HeaderAminoMsg): Header {
+    return Header.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Header): HeaderAminoMsg {
+    return {
+      type: "cosmos-sdk/Header",
+      value: Header.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeaderProtoMsg): Header {
+    return Header.decode(message.value);
+  },
+
+  toProto(message: Header): Uint8Array {
+    return Header.encode(message).finish();
+  },
+
+  toProtoMsg(message: Header): HeaderProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Header",
+      value: Header.encode(message).finish()
+    };
   }
 
 };
@@ -1063,6 +1167,32 @@ export const Fraction = {
     obj.numerator = message.numerator ? message.numerator.toString() : undefined;
     obj.denominator = message.denominator ? message.denominator.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: FractionAminoMsg): Fraction {
+    return Fraction.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Fraction): FractionAminoMsg {
+    return {
+      type: "cosmos-sdk/Fraction",
+      value: Fraction.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: FractionProtoMsg): Fraction {
+    return Fraction.decode(message.value);
+  },
+
+  toProto(message: Fraction): Uint8Array {
+    return Fraction.encode(message).finish();
+  },
+
+  toProtoMsg(message: Fraction): FractionProtoMsg {
+    return {
+      typeUrl: "/ibc.lightclients.tendermint.v1.Fraction",
+      value: Fraction.encode(message).finish()
+    };
   }
 
 };

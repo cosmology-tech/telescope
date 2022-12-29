@@ -16,7 +16,7 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 export interface QueryPoolRequest {
   poolId: Long;
 }
-export interface QueryPoolRequestProtoType {
+export interface QueryPoolRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface QueryPoolRequestProtoType {
 export interface QueryPoolRequestAmino {
   pool_id: string;
 }
-export interface QueryPoolRequestAminoType {
+export interface QueryPoolRequestAminoMsg {
   type: "osmosis/gamm/query-pool-request";
   value: QueryPoolRequestAmino;
 }
@@ -37,14 +37,14 @@ export interface QueryPoolRequestSDKType {
 export interface QueryPoolResponse {
   pool?: (Pool1 & Pool2 & Any) | undefined;
 }
-export interface QueryPoolResponseProtoType {
+export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
   value: Uint8Array;
 }
 export interface QueryPoolResponseAmino {
   pool?: AnyAmino;
 }
-export interface QueryPoolResponseAminoType {
+export interface QueryPoolResponseAminoMsg {
   type: "osmosis/gamm/query-pool-response";
   value: QueryPoolResponseAmino;
 }
@@ -57,7 +57,7 @@ export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryPoolsRequestProtoType {
+export interface QueryPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
   value: Uint8Array;
 }
@@ -67,7 +67,7 @@ export interface QueryPoolsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryPoolsRequestAminoType {
+export interface QueryPoolsRequestAminoMsg {
   type: "osmosis/gamm/query-pools-request";
   value: QueryPoolsRequestAmino;
 }
@@ -82,7 +82,7 @@ export interface QueryPoolsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryPoolsResponseProtoType {
+export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
   value: Uint8Array;
 }
@@ -92,7 +92,7 @@ export interface QueryPoolsResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryPoolsResponseAminoType {
+export interface QueryPoolsResponseAminoMsg {
   type: "osmosis/gamm/query-pools-response";
   value: QueryPoolsResponseAmino;
 }
@@ -103,14 +103,14 @@ export interface QueryPoolsResponseSDKType {
 
 /** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
-export interface QueryNumPoolsRequestProtoType {
+export interface QueryNumPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest";
   value: Uint8Array;
 }
 
 /** =============================== NumPools */
 export interface QueryNumPoolsRequestAmino {}
-export interface QueryNumPoolsRequestAminoType {
+export interface QueryNumPoolsRequestAminoMsg {
   type: "osmosis/gamm/query-num-pools-request";
   value: QueryNumPoolsRequestAmino;
 }
@@ -120,14 +120,14 @@ export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
   numPools: Long;
 }
-export interface QueryNumPoolsResponseProtoType {
+export interface QueryNumPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
   value: Uint8Array;
 }
 export interface QueryNumPoolsResponseAmino {
   num_pools: string;
 }
-export interface QueryNumPoolsResponseAminoType {
+export interface QueryNumPoolsResponseAminoMsg {
   type: "osmosis/gamm/query-num-pools-response";
   value: QueryNumPoolsResponseAmino;
 }
@@ -139,7 +139,7 @@ export interface QueryNumPoolsResponseSDKType {
 export interface QueryPoolTypeRequest {
   poolId: Long;
 }
-export interface QueryPoolTypeRequestProtoType {
+export interface QueryPoolTypeRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
   value: Uint8Array;
 }
@@ -148,7 +148,7 @@ export interface QueryPoolTypeRequestProtoType {
 export interface QueryPoolTypeRequestAmino {
   pool_id: string;
 }
-export interface QueryPoolTypeRequestAminoType {
+export interface QueryPoolTypeRequestAminoMsg {
   type: "osmosis/gamm/query-pool-type-request";
   value: QueryPoolTypeRequestAmino;
 }
@@ -160,14 +160,14 @@ export interface QueryPoolTypeRequestSDKType {
 export interface QueryPoolTypeResponse {
   poolType: string;
 }
-export interface QueryPoolTypeResponseProtoType {
+export interface QueryPoolTypeResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse";
   value: Uint8Array;
 }
 export interface QueryPoolTypeResponseAmino {
   pool_type: string;
 }
-export interface QueryPoolTypeResponseAminoType {
+export interface QueryPoolTypeResponseAminoMsg {
   type: "osmosis/gamm/query-pool-type-response";
   value: QueryPoolTypeResponseAmino;
 }
@@ -180,7 +180,7 @@ export interface QueryCalcJoinPoolSharesRequest {
   poolId: Long;
   tokensIn: Coin[];
 }
-export interface QueryCalcJoinPoolSharesRequestProtoType {
+export interface QueryCalcJoinPoolSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest";
   value: Uint8Array;
 }
@@ -190,7 +190,7 @@ export interface QueryCalcJoinPoolSharesRequestAmino {
   pool_id: string;
   tokens_in: CoinAmino[];
 }
-export interface QueryCalcJoinPoolSharesRequestAminoType {
+export interface QueryCalcJoinPoolSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-shares-request";
   value: QueryCalcJoinPoolSharesRequestAmino;
 }
@@ -204,7 +204,7 @@ export interface QueryCalcJoinPoolSharesResponse {
   shareOutAmount: string;
   tokensOut: Coin[];
 }
-export interface QueryCalcJoinPoolSharesResponseProtoType {
+export interface QueryCalcJoinPoolSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse";
   value: Uint8Array;
 }
@@ -212,7 +212,7 @@ export interface QueryCalcJoinPoolSharesResponseAmino {
   share_out_amount: string;
   tokens_out: CoinAmino[];
 }
-export interface QueryCalcJoinPoolSharesResponseAminoType {
+export interface QueryCalcJoinPoolSharesResponseAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-shares-response";
   value: QueryCalcJoinPoolSharesResponseAmino;
 }
@@ -226,7 +226,7 @@ export interface QueryCalcExitPoolCoinsFromSharesRequest {
   poolId: Long;
   shareInAmount: string;
 }
-export interface QueryCalcExitPoolCoinsFromSharesRequestProtoType {
+export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest";
   value: Uint8Array;
 }
@@ -236,7 +236,7 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestAmino {
   pool_id: string;
   share_in_amount: string;
 }
-export interface QueryCalcExitPoolCoinsFromSharesRequestAminoType {
+export interface QueryCalcExitPoolCoinsFromSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request";
   value: QueryCalcExitPoolCoinsFromSharesRequestAmino;
 }
@@ -249,14 +249,14 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
 export interface QueryCalcExitPoolCoinsFromSharesResponse {
   tokensOut: Coin[];
 }
-export interface QueryCalcExitPoolCoinsFromSharesResponseProtoType {
+export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse";
   value: Uint8Array;
 }
 export interface QueryCalcExitPoolCoinsFromSharesResponseAmino {
   tokens_out: CoinAmino[];
 }
-export interface QueryCalcExitPoolCoinsFromSharesResponseAminoType {
+export interface QueryCalcExitPoolCoinsFromSharesResponseAminoMsg {
   type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-response";
   value: QueryCalcExitPoolCoinsFromSharesResponseAmino;
 }
@@ -268,7 +268,7 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
 export interface QueryPoolParamsRequest {
   poolId: Long;
 }
-export interface QueryPoolParamsRequestProtoType {
+export interface QueryPoolParamsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
   value: Uint8Array;
 }
@@ -277,7 +277,7 @@ export interface QueryPoolParamsRequestProtoType {
 export interface QueryPoolParamsRequestAmino {
   pool_id: string;
 }
-export interface QueryPoolParamsRequestAminoType {
+export interface QueryPoolParamsRequestAminoMsg {
   type: "osmosis/gamm/query-pool-params-request";
   value: QueryPoolParamsRequestAmino;
 }
@@ -289,14 +289,14 @@ export interface QueryPoolParamsRequestSDKType {
 export interface QueryPoolParamsResponse {
   params?: Any;
 }
-export interface QueryPoolParamsResponseProtoType {
+export interface QueryPoolParamsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
   value: Uint8Array;
 }
 export interface QueryPoolParamsResponseAmino {
   params?: AnyAmino;
 }
-export interface QueryPoolParamsResponseAminoType {
+export interface QueryPoolParamsResponseAminoMsg {
   type: "osmosis/gamm/query-pool-params-response";
   value: QueryPoolParamsResponseAmino;
 }
@@ -308,7 +308,7 @@ export interface QueryPoolParamsResponseSDKType {
 export interface QueryTotalPoolLiquidityRequest {
   poolId: Long;
 }
-export interface QueryTotalPoolLiquidityRequestProtoType {
+export interface QueryTotalPoolLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
   value: Uint8Array;
 }
@@ -317,7 +317,7 @@ export interface QueryTotalPoolLiquidityRequestProtoType {
 export interface QueryTotalPoolLiquidityRequestAmino {
   pool_id: string;
 }
-export interface QueryTotalPoolLiquidityRequestAminoType {
+export interface QueryTotalPoolLiquidityRequestAminoMsg {
   type: "osmosis/gamm/query-total-pool-liquidity-request";
   value: QueryTotalPoolLiquidityRequestAmino;
 }
@@ -329,14 +329,14 @@ export interface QueryTotalPoolLiquidityRequestSDKType {
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
 }
-export interface QueryTotalPoolLiquidityResponseProtoType {
+export interface QueryTotalPoolLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
   value: Uint8Array;
 }
 export interface QueryTotalPoolLiquidityResponseAmino {
   liquidity: CoinAmino[];
 }
-export interface QueryTotalPoolLiquidityResponseAminoType {
+export interface QueryTotalPoolLiquidityResponseAminoMsg {
   type: "osmosis/gamm/query-total-pool-liquidity-response";
   value: QueryTotalPoolLiquidityResponseAmino;
 }
@@ -348,7 +348,7 @@ export interface QueryTotalPoolLiquidityResponseSDKType {
 export interface QueryTotalSharesRequest {
   poolId: Long;
 }
-export interface QueryTotalSharesRequestProtoType {
+export interface QueryTotalSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
   value: Uint8Array;
 }
@@ -357,7 +357,7 @@ export interface QueryTotalSharesRequestProtoType {
 export interface QueryTotalSharesRequestAmino {
   pool_id: string;
 }
-export interface QueryTotalSharesRequestAminoType {
+export interface QueryTotalSharesRequestAminoMsg {
   type: "osmosis/gamm/query-total-shares-request";
   value: QueryTotalSharesRequestAmino;
 }
@@ -369,14 +369,14 @@ export interface QueryTotalSharesRequestSDKType {
 export interface QueryTotalSharesResponse {
   totalShares?: Coin;
 }
-export interface QueryTotalSharesResponseProtoType {
+export interface QueryTotalSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
   value: Uint8Array;
 }
 export interface QueryTotalSharesResponseAmino {
   total_shares?: CoinAmino;
 }
-export interface QueryTotalSharesResponseAminoType {
+export interface QueryTotalSharesResponseAminoMsg {
   type: "osmosis/gamm/query-total-shares-response";
   value: QueryTotalSharesResponseAmino;
 }
@@ -389,7 +389,7 @@ export interface QueryCalcJoinPoolNoSwapSharesRequest {
   poolId: Long;
   tokensIn: Coin[];
 }
-export interface QueryCalcJoinPoolNoSwapSharesRequestProtoType {
+export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest";
   value: Uint8Array;
 }
@@ -399,7 +399,7 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestAmino {
   pool_id: string;
   tokens_in: CoinAmino[];
 }
-export interface QueryCalcJoinPoolNoSwapSharesRequestAminoType {
+export interface QueryCalcJoinPoolNoSwapSharesRequestAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request";
   value: QueryCalcJoinPoolNoSwapSharesRequestAmino;
 }
@@ -413,7 +413,7 @@ export interface QueryCalcJoinPoolNoSwapSharesResponse {
   tokensOut: Coin[];
   sharesOut: string;
 }
-export interface QueryCalcJoinPoolNoSwapSharesResponseProtoType {
+export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse";
   value: Uint8Array;
 }
@@ -421,7 +421,7 @@ export interface QueryCalcJoinPoolNoSwapSharesResponseAmino {
   tokens_out: CoinAmino[];
   shares_out: string;
 }
-export interface QueryCalcJoinPoolNoSwapSharesResponseAminoType {
+export interface QueryCalcJoinPoolNoSwapSharesResponseAminoMsg {
   type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-response";
   value: QueryCalcJoinPoolNoSwapSharesResponseAmino;
 }
@@ -441,7 +441,7 @@ export interface QuerySpotPriceRequest {
   baseAssetDenom: string;
   quoteAssetDenom: string;
 }
-export interface QuerySpotPriceRequestProtoType {
+export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest";
   value: Uint8Array;
 }
@@ -457,7 +457,7 @@ export interface QuerySpotPriceRequestAmino {
   base_asset_denom: string;
   quote_asset_denom: string;
 }
-export interface QuerySpotPriceRequestAminoType {
+export interface QuerySpotPriceRequestAminoMsg {
   type: "osmosis/gamm/query-spot-price-request";
   value: QuerySpotPriceRequestAmino;
 }
@@ -478,7 +478,7 @@ export interface QueryPoolsWithFilterRequest {
   poolType: string;
   pagination?: PageRequest;
 }
-export interface QueryPoolsWithFilterRequestProtoType {
+export interface QueryPoolsWithFilterRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
   value: Uint8Array;
 }
@@ -487,7 +487,7 @@ export interface QueryPoolsWithFilterRequestAmino {
   pool_type: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryPoolsWithFilterRequestAminoType {
+export interface QueryPoolsWithFilterRequestAminoMsg {
   type: "osmosis/gamm/query-pools-with-filter-request";
   value: QueryPoolsWithFilterRequestAmino;
 }
@@ -502,7 +502,7 @@ export interface QueryPoolsWithFilterResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryPoolsWithFilterResponseProtoType {
+export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
   value: Uint8Array;
 }
@@ -512,7 +512,7 @@ export interface QueryPoolsWithFilterResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryPoolsWithFilterResponseAminoType {
+export interface QueryPoolsWithFilterResponseAminoMsg {
   type: "osmosis/gamm/query-pools-with-filter-response";
   value: QueryPoolsWithFilterResponseAmino;
 }
@@ -531,7 +531,7 @@ export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
-export interface QuerySpotPriceResponseProtoType {
+export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
   value: Uint8Array;
 }
@@ -546,7 +546,7 @@ export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
 }
-export interface QuerySpotPriceResponseAminoType {
+export interface QuerySpotPriceResponseAminoMsg {
   type: "osmosis/gamm/query-spot-price-response";
   value: QuerySpotPriceResponseAmino;
 }
@@ -569,7 +569,7 @@ export interface QuerySwapExactAmountInRequest {
   tokenIn: string;
   routes: SwapAmountInRoute[];
 }
-export interface QuerySwapExactAmountInRequestProtoType {
+export interface QuerySwapExactAmountInRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
   value: Uint8Array;
 }
@@ -582,7 +582,7 @@ export interface QuerySwapExactAmountInRequestAmino {
   token_in: string;
   routes: SwapAmountInRouteAmino[];
 }
-export interface QuerySwapExactAmountInRequestAminoType {
+export interface QuerySwapExactAmountInRequestAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-in-request";
   value: QuerySwapExactAmountInRequestAmino;
 }
@@ -597,14 +597,14 @@ export interface QuerySwapExactAmountInRequestSDKType {
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
 }
-export interface QuerySwapExactAmountInResponseProtoType {
+export interface QuerySwapExactAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
   value: Uint8Array;
 }
 export interface QuerySwapExactAmountInResponseAmino {
   token_out_amount: string;
 }
-export interface QuerySwapExactAmountInResponseAminoType {
+export interface QuerySwapExactAmountInResponseAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-in-response";
   value: QuerySwapExactAmountInResponseAmino;
 }
@@ -620,7 +620,7 @@ export interface QuerySwapExactAmountOutRequest {
   routes: SwapAmountOutRoute[];
   tokenOut: string;
 }
-export interface QuerySwapExactAmountOutRequestProtoType {
+export interface QuerySwapExactAmountOutRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
   value: Uint8Array;
 }
@@ -633,7 +633,7 @@ export interface QuerySwapExactAmountOutRequestAmino {
   routes: SwapAmountOutRouteAmino[];
   token_out: string;
 }
-export interface QuerySwapExactAmountOutRequestAminoType {
+export interface QuerySwapExactAmountOutRequestAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-out-request";
   value: QuerySwapExactAmountOutRequestAmino;
 }
@@ -648,14 +648,14 @@ export interface QuerySwapExactAmountOutRequestSDKType {
 export interface QuerySwapExactAmountOutResponse {
   tokenInAmount: string;
 }
-export interface QuerySwapExactAmountOutResponseProtoType {
+export interface QuerySwapExactAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
   value: Uint8Array;
 }
 export interface QuerySwapExactAmountOutResponseAmino {
   token_in_amount: string;
 }
-export interface QuerySwapExactAmountOutResponseAminoType {
+export interface QuerySwapExactAmountOutResponseAminoMsg {
   type: "osmosis/gamm/query-swap-exact-amount-out-response";
   value: QuerySwapExactAmountOutResponseAmino;
 }
@@ -663,12 +663,12 @@ export interface QuerySwapExactAmountOutResponseSDKType {
   token_in_amount: string;
 }
 export interface QueryTotalLiquidityRequest {}
-export interface QueryTotalLiquidityRequestProtoType {
+export interface QueryTotalLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
   value: Uint8Array;
 }
 export interface QueryTotalLiquidityRequestAmino {}
-export interface QueryTotalLiquidityRequestAminoType {
+export interface QueryTotalLiquidityRequestAminoMsg {
   type: "osmosis/gamm/query-total-liquidity-request";
   value: QueryTotalLiquidityRequestAmino;
 }
@@ -676,14 +676,14 @@ export interface QueryTotalLiquidityRequestSDKType {}
 export interface QueryTotalLiquidityResponse {
   liquidity: Coin[];
 }
-export interface QueryTotalLiquidityResponseProtoType {
+export interface QueryTotalLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";
   value: Uint8Array;
 }
 export interface QueryTotalLiquidityResponseAmino {
   liquidity: CoinAmino[];
 }
-export interface QueryTotalLiquidityResponseAminoType {
+export interface QueryTotalLiquidityResponseAminoMsg {
   type: "osmosis/gamm/query-total-liquidity-response";
   value: QueryTotalLiquidityResponseAmino;
 }
@@ -771,6 +771,32 @@ export const QueryPoolRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolRequestAminoMsg): QueryPoolRequest {
+    return QueryPoolRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolRequest): QueryPoolRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-request",
+      value: QueryPoolRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolRequestProtoMsg): QueryPoolRequest {
+    return QueryPoolRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPoolRequest): Uint8Array {
+    return QueryPoolRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolRequest): QueryPoolRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest",
+      value: QueryPoolRequest.encode(message).finish()
+    };
   }
 
 };
@@ -855,6 +881,32 @@ export const QueryPoolResponse = {
     const obj: any = {};
     obj.pool = message.pool ? PoolI_ToAmino((message.pool as Any)) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolResponseAminoMsg): QueryPoolResponse {
+    return QueryPoolResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolResponse): QueryPoolResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-response",
+      value: QueryPoolResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolResponseProtoMsg): QueryPoolResponse {
+    return QueryPoolResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolResponse): Uint8Array {
+    return QueryPoolResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolResponse): QueryPoolResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse",
+      value: QueryPoolResponse.encode(message).finish()
+    };
   }
 
 };
@@ -939,6 +991,32 @@ export const QueryPoolsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolsRequestAminoMsg): QueryPoolsRequest {
+    return QueryPoolsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolsRequest): QueryPoolsRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-request",
+      value: QueryPoolsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolsRequestProtoMsg): QueryPoolsRequest {
+    return QueryPoolsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPoolsRequest): Uint8Array {
+    return QueryPoolsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolsRequest): QueryPoolsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest",
+      value: QueryPoolsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1057,6 +1135,32 @@ export const QueryPoolsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolsResponseAminoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolsResponse): QueryPoolsResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-response",
+      value: QueryPoolsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolsResponseProtoMsg): QueryPoolsResponse {
+    return QueryPoolsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolsResponse): Uint8Array {
+    return QueryPoolsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolsResponse): QueryPoolsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
+      value: QueryPoolsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1121,6 +1225,32 @@ export const QueryNumPoolsRequest = {
   toAmino(_: QueryNumPoolsRequest): QueryNumPoolsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryNumPoolsRequestAminoMsg): QueryNumPoolsRequest {
+    return QueryNumPoolsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryNumPoolsRequest): QueryNumPoolsRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-num-pools-request",
+      value: QueryNumPoolsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryNumPoolsRequestProtoMsg): QueryNumPoolsRequest {
+    return QueryNumPoolsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryNumPoolsRequest): Uint8Array {
+    return QueryNumPoolsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryNumPoolsRequest): QueryNumPoolsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest",
+      value: QueryNumPoolsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1205,6 +1335,32 @@ export const QueryNumPoolsResponse = {
     const obj: any = {};
     obj.num_pools = message.numPools ? message.numPools.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryNumPoolsResponseAminoMsg): QueryNumPoolsResponse {
+    return QueryNumPoolsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryNumPoolsResponse): QueryNumPoolsResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-num-pools-response",
+      value: QueryNumPoolsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryNumPoolsResponseProtoMsg): QueryNumPoolsResponse {
+    return QueryNumPoolsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryNumPoolsResponse): Uint8Array {
+    return QueryNumPoolsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryNumPoolsResponse): QueryNumPoolsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse",
+      value: QueryNumPoolsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1289,6 +1445,32 @@ export const QueryPoolTypeRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolTypeRequestAminoMsg): QueryPoolTypeRequest {
+    return QueryPoolTypeRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolTypeRequest): QueryPoolTypeRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-type-request",
+      value: QueryPoolTypeRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolTypeRequestProtoMsg): QueryPoolTypeRequest {
+    return QueryPoolTypeRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPoolTypeRequest): Uint8Array {
+    return QueryPoolTypeRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolTypeRequest): QueryPoolTypeRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest",
+      value: QueryPoolTypeRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1373,6 +1555,32 @@ export const QueryPoolTypeResponse = {
     const obj: any = {};
     obj.pool_type = message.poolType;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolTypeResponseAminoMsg): QueryPoolTypeResponse {
+    return QueryPoolTypeResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolTypeResponse): QueryPoolTypeResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-type-response",
+      value: QueryPoolTypeResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolTypeResponseProtoMsg): QueryPoolTypeResponse {
+    return QueryPoolTypeResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolTypeResponse): Uint8Array {
+    return QueryPoolTypeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolTypeResponse): QueryPoolTypeResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse",
+      value: QueryPoolTypeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1491,6 +1699,32 @@ export const QueryCalcJoinPoolSharesRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcJoinPoolSharesRequestAminoMsg): QueryCalcJoinPoolSharesRequest {
+    return QueryCalcJoinPoolSharesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcJoinPoolSharesRequest): QueryCalcJoinPoolSharesRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-join-pool-shares-request",
+      value: QueryCalcJoinPoolSharesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcJoinPoolSharesRequestProtoMsg): QueryCalcJoinPoolSharesRequest {
+    return QueryCalcJoinPoolSharesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCalcJoinPoolSharesRequest): Uint8Array {
+    return QueryCalcJoinPoolSharesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcJoinPoolSharesRequest): QueryCalcJoinPoolSharesRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest",
+      value: QueryCalcJoinPoolSharesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1609,6 +1843,32 @@ export const QueryCalcJoinPoolSharesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcJoinPoolSharesResponseAminoMsg): QueryCalcJoinPoolSharesResponse {
+    return QueryCalcJoinPoolSharesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcJoinPoolSharesResponse): QueryCalcJoinPoolSharesResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-join-pool-shares-response",
+      value: QueryCalcJoinPoolSharesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcJoinPoolSharesResponseProtoMsg): QueryCalcJoinPoolSharesResponse {
+    return QueryCalcJoinPoolSharesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCalcJoinPoolSharesResponse): Uint8Array {
+    return QueryCalcJoinPoolSharesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcJoinPoolSharesResponse): QueryCalcJoinPoolSharesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse",
+      value: QueryCalcJoinPoolSharesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1709,6 +1969,32 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.share_in_amount = message.shareInAmount;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcExitPoolCoinsFromSharesRequestAminoMsg): QueryCalcExitPoolCoinsFromSharesRequest {
+    return QueryCalcExitPoolCoinsFromSharesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcExitPoolCoinsFromSharesRequest): QueryCalcExitPoolCoinsFromSharesRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request",
+      value: QueryCalcExitPoolCoinsFromSharesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcExitPoolCoinsFromSharesRequestProtoMsg): QueryCalcExitPoolCoinsFromSharesRequest {
+    return QueryCalcExitPoolCoinsFromSharesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCalcExitPoolCoinsFromSharesRequest): Uint8Array {
+    return QueryCalcExitPoolCoinsFromSharesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcExitPoolCoinsFromSharesRequest): QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest",
+      value: QueryCalcExitPoolCoinsFromSharesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1811,6 +2097,32 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcExitPoolCoinsFromSharesResponseAminoMsg): QueryCalcExitPoolCoinsFromSharesResponse {
+    return QueryCalcExitPoolCoinsFromSharesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcExitPoolCoinsFromSharesResponse): QueryCalcExitPoolCoinsFromSharesResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-response",
+      value: QueryCalcExitPoolCoinsFromSharesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcExitPoolCoinsFromSharesResponseProtoMsg): QueryCalcExitPoolCoinsFromSharesResponse {
+    return QueryCalcExitPoolCoinsFromSharesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCalcExitPoolCoinsFromSharesResponse): Uint8Array {
+    return QueryCalcExitPoolCoinsFromSharesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcExitPoolCoinsFromSharesResponse): QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse",
+      value: QueryCalcExitPoolCoinsFromSharesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1895,6 +2207,32 @@ export const QueryPoolParamsRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolParamsRequestAminoMsg): QueryPoolParamsRequest {
+    return QueryPoolParamsRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolParamsRequest): QueryPoolParamsRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-params-request",
+      value: QueryPoolParamsRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolParamsRequestProtoMsg): QueryPoolParamsRequest {
+    return QueryPoolParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPoolParamsRequest): Uint8Array {
+    return QueryPoolParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolParamsRequest): QueryPoolParamsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest",
+      value: QueryPoolParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1979,6 +2317,32 @@ export const QueryPoolParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Any.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolParamsResponseAminoMsg): QueryPoolParamsResponse {
+    return QueryPoolParamsResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolParamsResponse): QueryPoolParamsResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pool-params-response",
+      value: QueryPoolParamsResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolParamsResponseProtoMsg): QueryPoolParamsResponse {
+    return QueryPoolParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolParamsResponse): Uint8Array {
+    return QueryPoolParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolParamsResponse): QueryPoolParamsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse",
+      value: QueryPoolParamsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2063,6 +2427,32 @@ export const QueryTotalPoolLiquidityRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalPoolLiquidityRequestAminoMsg): QueryTotalPoolLiquidityRequest {
+    return QueryTotalPoolLiquidityRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-pool-liquidity-request",
+      value: QueryTotalPoolLiquidityRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalPoolLiquidityRequestProtoMsg): QueryTotalPoolLiquidityRequest {
+    return QueryTotalPoolLiquidityRequest.decode(message.value);
+  },
+
+  toProto(message: QueryTotalPoolLiquidityRequest): Uint8Array {
+    return QueryTotalPoolLiquidityRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
+      value: QueryTotalPoolLiquidityRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2165,6 +2555,32 @@ export const QueryTotalPoolLiquidityResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalPoolLiquidityResponseAminoMsg): QueryTotalPoolLiquidityResponse {
+    return QueryTotalPoolLiquidityResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalPoolLiquidityResponse): QueryTotalPoolLiquidityResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-pool-liquidity-response",
+      value: QueryTotalPoolLiquidityResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalPoolLiquidityResponseProtoMsg): QueryTotalPoolLiquidityResponse {
+    return QueryTotalPoolLiquidityResponse.decode(message.value);
+  },
+
+  toProto(message: QueryTotalPoolLiquidityResponse): Uint8Array {
+    return QueryTotalPoolLiquidityResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalPoolLiquidityResponse): QueryTotalPoolLiquidityResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse",
+      value: QueryTotalPoolLiquidityResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2249,6 +2665,32 @@ export const QueryTotalSharesRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalSharesRequestAminoMsg): QueryTotalSharesRequest {
+    return QueryTotalSharesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalSharesRequest): QueryTotalSharesRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-shares-request",
+      value: QueryTotalSharesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalSharesRequestProtoMsg): QueryTotalSharesRequest {
+    return QueryTotalSharesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryTotalSharesRequest): Uint8Array {
+    return QueryTotalSharesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalSharesRequest): QueryTotalSharesRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest",
+      value: QueryTotalSharesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2333,6 +2775,32 @@ export const QueryTotalSharesResponse = {
     const obj: any = {};
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalSharesResponseAminoMsg): QueryTotalSharesResponse {
+    return QueryTotalSharesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalSharesResponse): QueryTotalSharesResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-shares-response",
+      value: QueryTotalSharesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalSharesResponseProtoMsg): QueryTotalSharesResponse {
+    return QueryTotalSharesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryTotalSharesResponse): Uint8Array {
+    return QueryTotalSharesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalSharesResponse): QueryTotalSharesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse",
+      value: QueryTotalSharesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2451,6 +2919,32 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcJoinPoolNoSwapSharesRequestAminoMsg): QueryCalcJoinPoolNoSwapSharesRequest {
+    return QueryCalcJoinPoolNoSwapSharesRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcJoinPoolNoSwapSharesRequest): QueryCalcJoinPoolNoSwapSharesRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request",
+      value: QueryCalcJoinPoolNoSwapSharesRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcJoinPoolNoSwapSharesRequestProtoMsg): QueryCalcJoinPoolNoSwapSharesRequest {
+    return QueryCalcJoinPoolNoSwapSharesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCalcJoinPoolNoSwapSharesRequest): Uint8Array {
+    return QueryCalcJoinPoolNoSwapSharesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcJoinPoolNoSwapSharesRequest): QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest",
+      value: QueryCalcJoinPoolNoSwapSharesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2569,6 +3063,32 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
 
     obj.shares_out = message.sharesOut;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCalcJoinPoolNoSwapSharesResponseAminoMsg): QueryCalcJoinPoolNoSwapSharesResponse {
+    return QueryCalcJoinPoolNoSwapSharesResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryCalcJoinPoolNoSwapSharesResponse): QueryCalcJoinPoolNoSwapSharesResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-response",
+      value: QueryCalcJoinPoolNoSwapSharesResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryCalcJoinPoolNoSwapSharesResponseProtoMsg): QueryCalcJoinPoolNoSwapSharesResponse {
+    return QueryCalcJoinPoolNoSwapSharesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCalcJoinPoolNoSwapSharesResponse): Uint8Array {
+    return QueryCalcJoinPoolNoSwapSharesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCalcJoinPoolNoSwapSharesResponse): QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse",
+      value: QueryCalcJoinPoolNoSwapSharesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2685,6 +3205,32 @@ export const QuerySpotPriceRequest = {
     obj.base_asset_denom = message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-spot-price-request",
+      value: QuerySpotPriceRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySpotPriceRequest): Uint8Array {
+    return QuerySpotPriceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest",
+      value: QuerySpotPriceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2819,6 +3365,32 @@ export const QueryPoolsWithFilterRequest = {
     obj.pool_type = message.poolType;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolsWithFilterRequestAminoMsg): QueryPoolsWithFilterRequest {
+    return QueryPoolsWithFilterRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolsWithFilterRequest): QueryPoolsWithFilterRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-with-filter-request",
+      value: QueryPoolsWithFilterRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolsWithFilterRequestProtoMsg): QueryPoolsWithFilterRequest {
+    return QueryPoolsWithFilterRequest.decode(message.value);
+  },
+
+  toProto(message: QueryPoolsWithFilterRequest): Uint8Array {
+    return QueryPoolsWithFilterRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolsWithFilterRequest): QueryPoolsWithFilterRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest",
+      value: QueryPoolsWithFilterRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2937,6 +3509,32 @@ export const QueryPoolsWithFilterResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryPoolsWithFilterResponseAminoMsg): QueryPoolsWithFilterResponse {
+    return QueryPoolsWithFilterResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryPoolsWithFilterResponse): QueryPoolsWithFilterResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-pools-with-filter-response",
+      value: QueryPoolsWithFilterResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryPoolsWithFilterResponseProtoMsg): QueryPoolsWithFilterResponse {
+    return QueryPoolsWithFilterResponse.decode(message.value);
+  },
+
+  toProto(message: QueryPoolsWithFilterResponse): Uint8Array {
+    return QueryPoolsWithFilterResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryPoolsWithFilterResponse): QueryPoolsWithFilterResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse",
+      value: QueryPoolsWithFilterResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3021,6 +3619,32 @@ export const QuerySpotPriceResponse = {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-spot-price-response",
+      value: QuerySpotPriceResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySpotPriceResponse): Uint8Array {
+    return QuerySpotPriceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse",
+      value: QuerySpotPriceResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3171,6 +3795,32 @@ export const QuerySwapExactAmountInRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySwapExactAmountInRequestAminoMsg): QuerySwapExactAmountInRequest {
+    return QuerySwapExactAmountInRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySwapExactAmountInRequest): QuerySwapExactAmountInRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-swap-exact-amount-in-request",
+      value: QuerySwapExactAmountInRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySwapExactAmountInRequestProtoMsg): QuerySwapExactAmountInRequest {
+    return QuerySwapExactAmountInRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySwapExactAmountInRequest): Uint8Array {
+    return QuerySwapExactAmountInRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySwapExactAmountInRequest): QuerySwapExactAmountInRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
+      value: QuerySwapExactAmountInRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3255,6 +3905,32 @@ export const QuerySwapExactAmountInResponse = {
     const obj: any = {};
     obj.token_out_amount = message.tokenOutAmount;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySwapExactAmountInResponseAminoMsg): QuerySwapExactAmountInResponse {
+    return QuerySwapExactAmountInResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySwapExactAmountInResponse): QuerySwapExactAmountInResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-swap-exact-amount-in-response",
+      value: QuerySwapExactAmountInResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySwapExactAmountInResponseProtoMsg): QuerySwapExactAmountInResponse {
+    return QuerySwapExactAmountInResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySwapExactAmountInResponse): Uint8Array {
+    return QuerySwapExactAmountInResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySwapExactAmountInResponse): QuerySwapExactAmountInResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
+      value: QuerySwapExactAmountInResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3405,6 +4081,32 @@ export const QuerySwapExactAmountOutRequest = {
 
     obj.token_out = message.tokenOut;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySwapExactAmountOutRequestAminoMsg): QuerySwapExactAmountOutRequest {
+    return QuerySwapExactAmountOutRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySwapExactAmountOutRequest): QuerySwapExactAmountOutRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-swap-exact-amount-out-request",
+      value: QuerySwapExactAmountOutRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySwapExactAmountOutRequestProtoMsg): QuerySwapExactAmountOutRequest {
+    return QuerySwapExactAmountOutRequest.decode(message.value);
+  },
+
+  toProto(message: QuerySwapExactAmountOutRequest): Uint8Array {
+    return QuerySwapExactAmountOutRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySwapExactAmountOutRequest): QuerySwapExactAmountOutRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
+      value: QuerySwapExactAmountOutRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3489,6 +4191,32 @@ export const QuerySwapExactAmountOutResponse = {
     const obj: any = {};
     obj.token_in_amount = message.tokenInAmount;
     return obj;
+  },
+
+  fromAminoMsg(object: QuerySwapExactAmountOutResponseAminoMsg): QuerySwapExactAmountOutResponse {
+    return QuerySwapExactAmountOutResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QuerySwapExactAmountOutResponse): QuerySwapExactAmountOutResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-swap-exact-amount-out-response",
+      value: QuerySwapExactAmountOutResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QuerySwapExactAmountOutResponseProtoMsg): QuerySwapExactAmountOutResponse {
+    return QuerySwapExactAmountOutResponse.decode(message.value);
+  },
+
+  toProto(message: QuerySwapExactAmountOutResponse): Uint8Array {
+    return QuerySwapExactAmountOutResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuerySwapExactAmountOutResponse): QuerySwapExactAmountOutResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
+      value: QuerySwapExactAmountOutResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3553,6 +4281,32 @@ export const QueryTotalLiquidityRequest = {
   toAmino(_: QueryTotalLiquidityRequest): QueryTotalLiquidityRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalLiquidityRequestAminoMsg): QueryTotalLiquidityRequest {
+    return QueryTotalLiquidityRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalLiquidityRequest): QueryTotalLiquidityRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-liquidity-request",
+      value: QueryTotalLiquidityRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalLiquidityRequestProtoMsg): QueryTotalLiquidityRequest {
+    return QueryTotalLiquidityRequest.decode(message.value);
+  },
+
+  toProto(message: QueryTotalLiquidityRequest): Uint8Array {
+    return QueryTotalLiquidityRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalLiquidityRequest): QueryTotalLiquidityRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest",
+      value: QueryTotalLiquidityRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3655,6 +4409,32 @@ export const QueryTotalLiquidityResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QueryTotalLiquidityResponseAminoMsg): QueryTotalLiquidityResponse {
+    return QueryTotalLiquidityResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: QueryTotalLiquidityResponse): QueryTotalLiquidityResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/query-total-liquidity-response",
+      value: QueryTotalLiquidityResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: QueryTotalLiquidityResponseProtoMsg): QueryTotalLiquidityResponse {
+    return QueryTotalLiquidityResponse.decode(message.value);
+  },
+
+  toProto(message: QueryTotalLiquidityResponse): Uint8Array {
+    return QueryTotalLiquidityResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryTotalLiquidityResponse): QueryTotalLiquidityResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse",
+      value: QueryTotalLiquidityResponse.encode(message).finish()
+    };
   }
 
 };

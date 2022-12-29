@@ -20,7 +20,7 @@ export interface FungibleTokenPacketData {
   /** the recipient address on the destination chain */
   receiver: string;
 }
-export interface FungibleTokenPacketDataProtoType {
+export interface FungibleTokenPacketDataProtoMsg {
   typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
   value: Uint8Array;
 }
@@ -43,7 +43,7 @@ export interface FungibleTokenPacketDataAmino {
   /** the recipient address on the destination chain */
   receiver: string;
 }
-export interface FungibleTokenPacketDataAminoType {
+export interface FungibleTokenPacketDataAminoMsg {
   type: "cosmos-sdk/FungibleTokenPacketData";
   value: FungibleTokenPacketDataAmino;
 }
@@ -188,6 +188,32 @@ export const FungibleTokenPacketData = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
+  },
+
+  fromAminoMsg(object: FungibleTokenPacketDataAminoMsg): FungibleTokenPacketData {
+    return FungibleTokenPacketData.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: FungibleTokenPacketData): FungibleTokenPacketDataAminoMsg {
+    return {
+      type: "cosmos-sdk/FungibleTokenPacketData",
+      value: FungibleTokenPacketData.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: FungibleTokenPacketDataProtoMsg): FungibleTokenPacketData {
+    return FungibleTokenPacketData.decode(message.value);
+  },
+
+  toProto(message: FungibleTokenPacketData): Uint8Array {
+    return FungibleTokenPacketData.encode(message).finish();
+  },
+
+  toProtoMsg(message: FungibleTokenPacketData): FungibleTokenPacketDataProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData",
+      value: FungibleTokenPacketData.encode(message).finish()
+    };
   }
 
 };

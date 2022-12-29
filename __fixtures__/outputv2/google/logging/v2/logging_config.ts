@@ -279,7 +279,7 @@ export interface LogBucket {
    */
   cmekSettings?: CmekSettings;
 }
-export interface LogBucketProtoType {
+export interface LogBucketProtoMsg {
   typeUrl: "/google.logging.v2.LogBucket";
   value: Uint8Array;
 }
@@ -354,7 +354,7 @@ export interface LogBucketAmino {
    */
   cmek_settings?: CmekSettingsAmino;
 }
-export interface LogBucketAminoType {
+export interface LogBucketAminoMsg {
   type: "/google.logging.v2.LogBucket";
   value: LogBucketAmino;
 }
@@ -410,7 +410,7 @@ export interface LogView {
    */
   filter: string;
 }
-export interface LogViewProtoType {
+export interface LogViewProtoMsg {
   typeUrl: "/google.logging.v2.LogView";
   value: Uint8Array;
 }
@@ -453,7 +453,7 @@ export interface LogViewAmino {
    */
   filter: string;
 }
-export interface LogViewAminoType {
+export interface LogViewAminoMsg {
   type: "/google.logging.v2.LogView";
   value: LogViewAmino;
 }
@@ -597,7 +597,7 @@ export interface LogSink {
    */
   updateTime?: Date;
 }
-export interface LogSinkProtoType {
+export interface LogSinkProtoMsg {
   typeUrl: "/google.logging.v2.LogSink";
   value: Uint8Array;
 }
@@ -732,7 +732,7 @@ export interface LogSinkAmino {
    */
   update_time?: Date;
 }
-export interface LogSinkAminoType {
+export interface LogSinkAminoMsg {
   type: "/google.logging.v2.LogSink";
   value: LogSinkAmino;
 }
@@ -786,7 +786,7 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
-export interface BigQueryOptionsProtoType {
+export interface BigQueryOptionsProtoMsg {
   typeUrl: "/google.logging.v2.BigQueryOptions";
   value: Uint8Array;
 }
@@ -816,7 +816,7 @@ export interface BigQueryOptionsAmino {
    */
   uses_timestamp_column_partitioning: boolean;
 }
-export interface BigQueryOptionsAminoType {
+export interface BigQueryOptionsAminoMsg {
   type: "/google.logging.v2.BigQueryOptions";
   value: BigQueryOptionsAmino;
 }
@@ -858,7 +858,7 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
-export interface ListBucketsRequestProtoType {
+export interface ListBucketsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsRequest";
   value: Uint8Array;
 }
@@ -894,7 +894,7 @@ export interface ListBucketsRequestAmino {
    */
   page_size: number;
 }
-export interface ListBucketsRequestAminoType {
+export interface ListBucketsRequestAminoMsg {
   type: "/google.logging.v2.ListBucketsRequest";
   value: ListBucketsRequestAmino;
 }
@@ -918,7 +918,7 @@ export interface ListBucketsResponse {
    */
   nextPageToken: string;
 }
-export interface ListBucketsResponseProtoType {
+export interface ListBucketsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsResponse";
   value: Uint8Array;
 }
@@ -935,7 +935,7 @@ export interface ListBucketsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListBucketsResponseAminoType {
+export interface ListBucketsResponseAminoMsg {
   type: "/google.logging.v2.ListBucketsResponse";
   value: ListBucketsResponseAmino;
 }
@@ -973,7 +973,7 @@ export interface CreateBucketRequest {
    */
   bucket?: LogBucket;
 }
-export interface CreateBucketRequestProtoType {
+export interface CreateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateBucketRequest";
   value: Uint8Array;
 }
@@ -1005,7 +1005,7 @@ export interface CreateBucketRequestAmino {
    */
   bucket?: LogBucketAmino;
 }
-export interface CreateBucketRequestAminoType {
+export interface CreateBucketRequestAminoMsg {
   type: "/google.logging.v2.CreateBucketRequest";
   value: CreateBucketRequestAmino;
 }
@@ -1048,7 +1048,7 @@ export interface UpdateBucketRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateBucketRequestProtoType {
+export interface UpdateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateBucketRequest";
   value: Uint8Array;
 }
@@ -1084,7 +1084,7 @@ export interface UpdateBucketRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateBucketRequestAminoType {
+export interface UpdateBucketRequestAminoMsg {
   type: "/google.logging.v2.UpdateBucketRequest";
   value: UpdateBucketRequestAmino;
 }
@@ -1112,7 +1112,7 @@ export interface GetBucketRequest {
    */
   name: string;
 }
-export interface GetBucketRequestProtoType {
+export interface GetBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetBucketRequest";
   value: Uint8Array;
 }
@@ -1133,7 +1133,7 @@ export interface GetBucketRequestAmino {
    */
   name: string;
 }
-export interface GetBucketRequestAminoType {
+export interface GetBucketRequestAminoMsg {
   type: "/google.logging.v2.GetBucketRequest";
   value: GetBucketRequestAmino;
 }
@@ -1159,7 +1159,7 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
-export interface DeleteBucketRequestProtoType {
+export interface DeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteBucketRequest";
   value: Uint8Array;
 }
@@ -1180,7 +1180,7 @@ export interface DeleteBucketRequestAmino {
    */
   name: string;
 }
-export interface DeleteBucketRequestAminoType {
+export interface DeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.DeleteBucketRequest";
   value: DeleteBucketRequestAmino;
 }
@@ -1206,7 +1206,7 @@ export interface UndeleteBucketRequest {
    */
   name: string;
 }
-export interface UndeleteBucketRequestProtoType {
+export interface UndeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest";
   value: Uint8Array;
 }
@@ -1227,7 +1227,7 @@ export interface UndeleteBucketRequestAmino {
    */
   name: string;
 }
-export interface UndeleteBucketRequestAminoType {
+export interface UndeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.UndeleteBucketRequest";
   value: UndeleteBucketRequestAmino;
 }
@@ -1262,7 +1262,7 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
-export interface ListViewsRequestProtoType {
+export interface ListViewsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsRequest";
   value: Uint8Array;
 }
@@ -1292,7 +1292,7 @@ export interface ListViewsRequestAmino {
    */
   page_size: number;
 }
-export interface ListViewsRequestAminoType {
+export interface ListViewsRequestAminoMsg {
   type: "/google.logging.v2.ListViewsRequest";
   value: ListViewsRequestAmino;
 }
@@ -1316,7 +1316,7 @@ export interface ListViewsResponse {
    */
   nextPageToken: string;
 }
-export interface ListViewsResponseProtoType {
+export interface ListViewsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsResponse";
   value: Uint8Array;
 }
@@ -1333,7 +1333,7 @@ export interface ListViewsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListViewsResponseAminoType {
+export interface ListViewsResponseAminoMsg {
   type: "/google.logging.v2.ListViewsResponse";
   value: ListViewsResponseAmino;
 }
@@ -1363,7 +1363,7 @@ export interface CreateViewRequest {
   /** Required. The new view. */
   view?: LogView;
 }
-export interface CreateViewRequestProtoType {
+export interface CreateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateViewRequest";
   value: Uint8Array;
 }
@@ -1387,7 +1387,7 @@ export interface CreateViewRequestAmino {
   /** Required. The new view. */
   view?: LogViewAmino;
 }
-export interface CreateViewRequestAminoType {
+export interface CreateViewRequestAminoMsg {
   type: "/google.logging.v2.CreateViewRequest";
   value: CreateViewRequestAmino;
 }
@@ -1427,7 +1427,7 @@ export interface UpdateViewRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateViewRequestProtoType {
+export interface UpdateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateViewRequest";
   value: Uint8Array;
 }
@@ -1460,7 +1460,7 @@ export interface UpdateViewRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateViewRequestAminoType {
+export interface UpdateViewRequestAminoMsg {
   type: "/google.logging.v2.UpdateViewRequest";
   value: UpdateViewRequestAmino;
 }
@@ -1485,7 +1485,7 @@ export interface GetViewRequest {
    */
   name: string;
 }
-export interface GetViewRequestProtoType {
+export interface GetViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetViewRequest";
   value: Uint8Array;
 }
@@ -1503,7 +1503,7 @@ export interface GetViewRequestAmino {
    */
   name: string;
 }
-export interface GetViewRequestAminoType {
+export interface GetViewRequestAminoMsg {
   type: "/google.logging.v2.GetViewRequest";
   value: GetViewRequestAmino;
 }
@@ -1526,7 +1526,7 @@ export interface DeleteViewRequest {
    */
   name: string;
 }
-export interface DeleteViewRequestProtoType {
+export interface DeleteViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteViewRequest";
   value: Uint8Array;
 }
@@ -1544,7 +1544,7 @@ export interface DeleteViewRequestAmino {
    */
   name: string;
 }
-export interface DeleteViewRequestAminoType {
+export interface DeleteViewRequestAminoMsg {
   type: "/google.logging.v2.DeleteViewRequest";
   value: DeleteViewRequestAmino;
 }
@@ -1581,7 +1581,7 @@ export interface ListSinksRequest {
    */
   pageSize: number;
 }
-export interface ListSinksRequestProtoType {
+export interface ListSinksRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksRequest";
   value: Uint8Array;
 }
@@ -1613,7 +1613,7 @@ export interface ListSinksRequestAmino {
    */
   page_size: number;
 }
-export interface ListSinksRequestAminoType {
+export interface ListSinksRequestAminoMsg {
   type: "/google.logging.v2.ListSinksRequest";
   value: ListSinksRequestAmino;
 }
@@ -1637,7 +1637,7 @@ export interface ListSinksResponse {
    */
   nextPageToken: string;
 }
-export interface ListSinksResponseProtoType {
+export interface ListSinksResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksResponse";
   value: Uint8Array;
 }
@@ -1654,7 +1654,7 @@ export interface ListSinksResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListSinksResponseAminoType {
+export interface ListSinksResponseAminoMsg {
   type: "/google.logging.v2.ListSinksResponse";
   value: ListSinksResponseAmino;
 }
@@ -1681,7 +1681,7 @@ export interface GetSinkRequest {
    */
   sinkName: string;
 }
-export interface GetSinkRequestProtoType {
+export interface GetSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSinkRequest";
   value: Uint8Array;
 }
@@ -1702,7 +1702,7 @@ export interface GetSinkRequestAmino {
    */
   sink_name: string;
 }
-export interface GetSinkRequestAminoType {
+export interface GetSinkRequestAminoMsg {
   type: "/google.logging.v2.GetSinkRequest";
   value: GetSinkRequestAmino;
 }
@@ -1750,7 +1750,7 @@ export interface CreateSinkRequest {
    */
   uniqueWriterIdentity: boolean;
 }
-export interface CreateSinkRequestProtoType {
+export interface CreateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateSinkRequest";
   value: Uint8Array;
 }
@@ -1793,7 +1793,7 @@ export interface CreateSinkRequestAmino {
    */
   unique_writer_identity: boolean;
 }
-export interface CreateSinkRequestAminoType {
+export interface CreateSinkRequestAminoMsg {
   type: "/google.logging.v2.CreateSinkRequest";
   value: CreateSinkRequestAmino;
 }
@@ -1863,7 +1863,7 @@ export interface UpdateSinkRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateSinkRequestProtoType {
+export interface UpdateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSinkRequest";
   value: Uint8Array;
 }
@@ -1926,7 +1926,7 @@ export interface UpdateSinkRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateSinkRequestAminoType {
+export interface UpdateSinkRequestAminoMsg {
   type: "/google.logging.v2.UpdateSinkRequest";
   value: UpdateSinkRequestAmino;
 }
@@ -1956,7 +1956,7 @@ export interface DeleteSinkRequest {
    */
   sinkName: string;
 }
-export interface DeleteSinkRequestProtoType {
+export interface DeleteSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteSinkRequest";
   value: Uint8Array;
 }
@@ -1978,7 +1978,7 @@ export interface DeleteSinkRequestAmino {
    */
   sink_name: string;
 }
-export interface DeleteSinkRequestAminoType {
+export interface DeleteSinkRequestAminoMsg {
   type: "/google.logging.v2.DeleteSinkRequest";
   value: DeleteSinkRequestAmino;
 }
@@ -2043,7 +2043,7 @@ export interface LogExclusion {
    */
   updateTime?: Date;
 }
-export interface LogExclusionProtoType {
+export interface LogExclusionProtoMsg {
   typeUrl: "/google.logging.v2.LogExclusion";
   value: Uint8Array;
 }
@@ -2103,7 +2103,7 @@ export interface LogExclusionAmino {
    */
   update_time?: Date;
 }
-export interface LogExclusionAminoType {
+export interface LogExclusionAminoMsg {
   type: "/google.logging.v2.LogExclusion";
   value: LogExclusionAmino;
 }
@@ -2151,7 +2151,7 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
-export interface ListExclusionsRequestProtoType {
+export interface ListExclusionsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsRequest";
   value: Uint8Array;
 }
@@ -2183,7 +2183,7 @@ export interface ListExclusionsRequestAmino {
    */
   page_size: number;
 }
-export interface ListExclusionsRequestAminoType {
+export interface ListExclusionsRequestAminoMsg {
   type: "/google.logging.v2.ListExclusionsRequest";
   value: ListExclusionsRequestAmino;
 }
@@ -2207,7 +2207,7 @@ export interface ListExclusionsResponse {
    */
   nextPageToken: string;
 }
-export interface ListExclusionsResponseProtoType {
+export interface ListExclusionsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsResponse";
   value: Uint8Array;
 }
@@ -2224,7 +2224,7 @@ export interface ListExclusionsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListExclusionsResponseAminoType {
+export interface ListExclusionsResponseAminoMsg {
   type: "/google.logging.v2.ListExclusionsResponse";
   value: ListExclusionsResponseAmino;
 }
@@ -2251,7 +2251,7 @@ export interface GetExclusionRequest {
    */
   name: string;
 }
-export interface GetExclusionRequestProtoType {
+export interface GetExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetExclusionRequest";
   value: Uint8Array;
 }
@@ -2272,7 +2272,7 @@ export interface GetExclusionRequestAmino {
    */
   name: string;
 }
-export interface GetExclusionRequestAminoType {
+export interface GetExclusionRequestAminoMsg {
   type: "/google.logging.v2.GetExclusionRequest";
   value: GetExclusionRequestAmino;
 }
@@ -2305,7 +2305,7 @@ export interface CreateExclusionRequest {
    */
   exclusion?: LogExclusion;
 }
-export interface CreateExclusionRequestProtoType {
+export interface CreateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateExclusionRequest";
   value: Uint8Array;
 }
@@ -2333,7 +2333,7 @@ export interface CreateExclusionRequestAmino {
    */
   exclusion?: LogExclusionAmino;
 }
-export interface CreateExclusionRequestAminoType {
+export interface CreateExclusionRequestAminoMsg {
   type: "/google.logging.v2.CreateExclusionRequest";
   value: CreateExclusionRequestAmino;
 }
@@ -2377,7 +2377,7 @@ export interface UpdateExclusionRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateExclusionRequestProtoType {
+export interface UpdateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest";
   value: Uint8Array;
 }
@@ -2415,7 +2415,7 @@ export interface UpdateExclusionRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateExclusionRequestAminoType {
+export interface UpdateExclusionRequestAminoMsg {
   type: "/google.logging.v2.UpdateExclusionRequest";
   value: UpdateExclusionRequestAmino;
 }
@@ -2443,7 +2443,7 @@ export interface DeleteExclusionRequest {
    */
   name: string;
 }
-export interface DeleteExclusionRequestProtoType {
+export interface DeleteExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest";
   value: Uint8Array;
 }
@@ -2464,7 +2464,7 @@ export interface DeleteExclusionRequestAmino {
    */
   name: string;
 }
-export interface DeleteExclusionRequestAminoType {
+export interface DeleteExclusionRequestAminoMsg {
   type: "/google.logging.v2.DeleteExclusionRequest";
   value: DeleteExclusionRequestAmino;
 }
@@ -2502,7 +2502,7 @@ export interface GetCmekSettingsRequest {
    */
   name: string;
 }
-export interface GetCmekSettingsRequestProtoType {
+export interface GetCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
   value: Uint8Array;
 }
@@ -2535,7 +2535,7 @@ export interface GetCmekSettingsRequestAmino {
    */
   name: string;
 }
-export interface GetCmekSettingsRequestAminoType {
+export interface GetCmekSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetCmekSettingsRequest";
   value: GetCmekSettingsRequestAmino;
 }
@@ -2599,7 +2599,7 @@ export interface UpdateCmekSettingsRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateCmekSettingsRequestProtoType {
+export interface UpdateCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
   value: Uint8Array;
 }
@@ -2651,7 +2651,7 @@ export interface UpdateCmekSettingsRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateCmekSettingsRequestAminoType {
+export interface UpdateCmekSettingsRequestAminoMsg {
   type: "/google.logging.v2.UpdateCmekSettingsRequest";
   value: UpdateCmekSettingsRequestAmino;
 }
@@ -2734,7 +2734,7 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
-export interface CmekSettingsProtoType {
+export interface CmekSettingsProtoMsg {
   typeUrl: "/google.logging.v2.CmekSettings";
   value: Uint8Array;
 }
@@ -2803,7 +2803,7 @@ export interface CmekSettingsAmino {
    */
   service_account_id: string;
 }
-export interface CmekSettingsAminoType {
+export interface CmekSettingsAminoMsg {
   type: "/google.logging.v2.CmekSettings";
   value: CmekSettingsAmino;
 }
@@ -2854,7 +2854,7 @@ export interface GetSettingsRequest {
    */
   name: string;
 }
-export interface GetSettingsRequestProtoType {
+export interface GetSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSettingsRequest";
   value: Uint8Array;
 }
@@ -2887,7 +2887,7 @@ export interface GetSettingsRequestAmino {
    */
   name: string;
 }
-export interface GetSettingsRequestAminoType {
+export interface GetSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetSettingsRequest";
   value: GetSettingsRequestAmino;
 }
@@ -2948,7 +2948,7 @@ export interface UpdateSettingsRequest {
    */
   updateMask?: FieldMask;
 }
-export interface UpdateSettingsRequestProtoType {
+export interface UpdateSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest";
   value: Uint8Array;
 }
@@ -2997,7 +2997,7 @@ export interface UpdateSettingsRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateSettingsRequestAminoType {
+export interface UpdateSettingsRequestAminoMsg {
   type: "/google.logging.v2.UpdateSettingsRequest";
   value: UpdateSettingsRequestAmino;
 }
@@ -3086,7 +3086,7 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
-export interface SettingsProtoType {
+export interface SettingsProtoMsg {
   typeUrl: "/google.logging.v2.Settings";
   value: Uint8Array;
 }
@@ -3161,7 +3161,7 @@ export interface SettingsAmino {
    */
   disable_default_sink: boolean;
 }
-export interface SettingsAminoType {
+export interface SettingsAminoMsg {
   type: "/google.logging.v2.Settings";
   value: SettingsAmino;
 }
@@ -3198,7 +3198,7 @@ export interface CopyLogEntriesRequest {
   /** Required. Destination to which to copy log entries. */
   destination: string;
 }
-export interface CopyLogEntriesRequestProtoType {
+export interface CopyLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
   value: Uint8Array;
 }
@@ -3223,7 +3223,7 @@ export interface CopyLogEntriesRequestAmino {
   /** Required. Destination to which to copy log entries. */
   destination: string;
 }
-export interface CopyLogEntriesRequestAminoType {
+export interface CopyLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesRequest";
   value: CopyLogEntriesRequestAmino;
 }
@@ -3266,7 +3266,7 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
-export interface CopyLogEntriesMetadataProtoType {
+export interface CopyLogEntriesMetadataProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
   value: Uint8Array;
 }
@@ -3302,7 +3302,7 @@ export interface CopyLogEntriesMetadataAmino {
    */
   writer_identity: string;
 }
-export interface CopyLogEntriesMetadataAminoType {
+export interface CopyLogEntriesMetadataAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesMetadata";
   value: CopyLogEntriesMetadataAmino;
 }
@@ -3323,7 +3323,7 @@ export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
 }
-export interface CopyLogEntriesResponseProtoType {
+export interface CopyLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
   value: Uint8Array;
 }
@@ -3333,7 +3333,7 @@ export interface CopyLogEntriesResponseAmino {
   /** Number of log entries copied. */
   log_entries_copied_count: string;
 }
-export interface CopyLogEntriesResponseAminoType {
+export interface CopyLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesResponse";
   value: CopyLogEntriesResponseAmino;
 }
@@ -3568,6 +3568,25 @@ export const LogBucket = {
 
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LogBucketAminoMsg): LogBucket {
+    return LogBucket.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogBucketProtoMsg): LogBucket {
+    return LogBucket.decode(message.value);
+  },
+
+  toProto(message: LogBucket): Uint8Array {
+    return LogBucket.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogBucket): LogBucketProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogBucket",
+      value: LogBucket.encode(message).finish()
+    };
   }
 
 };
@@ -3715,6 +3734,25 @@ export const LogView = {
     obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
     obj.filter = message.filter;
     return obj;
+  },
+
+  fromAminoMsg(object: LogViewAminoMsg): LogView {
+    return LogView.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogViewProtoMsg): LogView {
+    return LogView.decode(message.value);
+  },
+
+  toProto(message: LogView): Uint8Array {
+    return LogView.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogView): LogViewProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogView",
+      value: LogView.encode(message).finish()
+    };
   }
 
 };
@@ -3992,6 +4030,25 @@ export const LogSink = {
     obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LogSinkAminoMsg): LogSink {
+    return LogSink.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogSinkProtoMsg): LogSink {
+    return LogSink.decode(message.value);
+  },
+
+  toProto(message: LogSink): Uint8Array {
+    return LogSink.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogSink): LogSinkProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogSink",
+      value: LogSink.encode(message).finish()
+    };
   }
 
 };
@@ -4091,6 +4148,25 @@ export const BigQueryOptions = {
     obj.use_partitioned_tables = message.usePartitionedTables;
     obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
     return obj;
+  },
+
+  fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
+    return BigQueryOptions.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BigQueryOptionsProtoMsg): BigQueryOptions {
+    return BigQueryOptions.decode(message.value);
+  },
+
+  toProto(message: BigQueryOptions): Uint8Array {
+    return BigQueryOptions.encode(message).finish();
+  },
+
+  toProtoMsg(message: BigQueryOptions): BigQueryOptionsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.BigQueryOptions",
+      value: BigQueryOptions.encode(message).finish()
+    };
   }
 
 };
@@ -4206,6 +4282,25 @@ export const ListBucketsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
+    return ListBucketsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListBucketsRequestProtoMsg): ListBucketsRequest {
+    return ListBucketsRequest.decode(message.value);
+  },
+
+  toProto(message: ListBucketsRequest): Uint8Array {
+    return ListBucketsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListBucketsRequest): ListBucketsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListBucketsRequest",
+      value: ListBucketsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4323,6 +4418,25 @@ export const ListBucketsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
+    return ListBucketsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListBucketsResponseProtoMsg): ListBucketsResponse {
+    return ListBucketsResponse.decode(message.value);
+  },
+
+  toProto(message: ListBucketsResponse): Uint8Array {
+    return ListBucketsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListBucketsResponse): ListBucketsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListBucketsResponse",
+      value: ListBucketsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -4438,6 +4552,25 @@ export const CreateBucketRequest = {
     obj.bucket_id = message.bucketId;
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CreateBucketRequestAminoMsg): CreateBucketRequest {
+    return CreateBucketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateBucketRequestProtoMsg): CreateBucketRequest {
+    return CreateBucketRequest.decode(message.value);
+  },
+
+  toProto(message: CreateBucketRequest): Uint8Array {
+    return CreateBucketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateBucketRequest): CreateBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateBucketRequest",
+      value: CreateBucketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4553,6 +4686,25 @@ export const UpdateBucketRequest = {
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateBucketRequestAminoMsg): UpdateBucketRequest {
+    return UpdateBucketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateBucketRequestProtoMsg): UpdateBucketRequest {
+    return UpdateBucketRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateBucketRequest): Uint8Array {
+    return UpdateBucketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateBucketRequest): UpdateBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateBucketRequest",
+      value: UpdateBucketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4636,6 +4788,25 @@ export const GetBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
+    return GetBucketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetBucketRequestProtoMsg): GetBucketRequest {
+    return GetBucketRequest.decode(message.value);
+  },
+
+  toProto(message: GetBucketRequest): Uint8Array {
+    return GetBucketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetBucketRequest): GetBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetBucketRequest",
+      value: GetBucketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4719,6 +4890,25 @@ export const DeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
+    return DeleteBucketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteBucketRequestProtoMsg): DeleteBucketRequest {
+    return DeleteBucketRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteBucketRequest): Uint8Array {
+    return DeleteBucketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteBucketRequest): DeleteBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteBucketRequest",
+      value: DeleteBucketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4802,6 +4992,25 @@ export const UndeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
+    return UndeleteBucketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UndeleteBucketRequestProtoMsg): UndeleteBucketRequest {
+    return UndeleteBucketRequest.decode(message.value);
+  },
+
+  toProto(message: UndeleteBucketRequest): Uint8Array {
+    return UndeleteBucketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UndeleteBucketRequest): UndeleteBucketRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UndeleteBucketRequest",
+      value: UndeleteBucketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4917,6 +5126,25 @@ export const ListViewsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
+    return ListViewsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListViewsRequestProtoMsg): ListViewsRequest {
+    return ListViewsRequest.decode(message.value);
+  },
+
+  toProto(message: ListViewsRequest): Uint8Array {
+    return ListViewsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListViewsRequest): ListViewsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListViewsRequest",
+      value: ListViewsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5034,6 +5262,25 @@ export const ListViewsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
+    return ListViewsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListViewsResponseProtoMsg): ListViewsResponse {
+    return ListViewsResponse.decode(message.value);
+  },
+
+  toProto(message: ListViewsResponse): Uint8Array {
+    return ListViewsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListViewsResponse): ListViewsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListViewsResponse",
+      value: ListViewsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -5149,6 +5396,25 @@ export const CreateViewRequest = {
     obj.view_id = message.viewId;
     obj.view = message.view ? LogView.toAmino(message.view) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CreateViewRequestAminoMsg): CreateViewRequest {
+    return CreateViewRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateViewRequestProtoMsg): CreateViewRequest {
+    return CreateViewRequest.decode(message.value);
+  },
+
+  toProto(message: CreateViewRequest): Uint8Array {
+    return CreateViewRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateViewRequest): CreateViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateViewRequest",
+      value: CreateViewRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5264,6 +5530,25 @@ export const UpdateViewRequest = {
     obj.view = message.view ? LogView.toAmino(message.view) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateViewRequestAminoMsg): UpdateViewRequest {
+    return UpdateViewRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateViewRequestProtoMsg): UpdateViewRequest {
+    return UpdateViewRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateViewRequest): Uint8Array {
+    return UpdateViewRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateViewRequest): UpdateViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateViewRequest",
+      value: UpdateViewRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5347,6 +5632,25 @@ export const GetViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
+    return GetViewRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetViewRequestProtoMsg): GetViewRequest {
+    return GetViewRequest.decode(message.value);
+  },
+
+  toProto(message: GetViewRequest): Uint8Array {
+    return GetViewRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetViewRequest): GetViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetViewRequest",
+      value: GetViewRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5430,6 +5734,25 @@ export const DeleteViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
+    return DeleteViewRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteViewRequestProtoMsg): DeleteViewRequest {
+    return DeleteViewRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteViewRequest): Uint8Array {
+    return DeleteViewRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteViewRequest): DeleteViewRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteViewRequest",
+      value: DeleteViewRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5545,6 +5868,25 @@ export const ListSinksRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
+    return ListSinksRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListSinksRequestProtoMsg): ListSinksRequest {
+    return ListSinksRequest.decode(message.value);
+  },
+
+  toProto(message: ListSinksRequest): Uint8Array {
+    return ListSinksRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListSinksRequest): ListSinksRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListSinksRequest",
+      value: ListSinksRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5662,6 +6004,25 @@ export const ListSinksResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
+    return ListSinksResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListSinksResponseProtoMsg): ListSinksResponse {
+    return ListSinksResponse.decode(message.value);
+  },
+
+  toProto(message: ListSinksResponse): Uint8Array {
+    return ListSinksResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListSinksResponse): ListSinksResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListSinksResponse",
+      value: ListSinksResponse.encode(message).finish()
+    };
   }
 
 };
@@ -5745,6 +6106,25 @@ export const GetSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+
+  fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
+    return GetSinkRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetSinkRequestProtoMsg): GetSinkRequest {
+    return GetSinkRequest.decode(message.value);
+  },
+
+  toProto(message: GetSinkRequest): Uint8Array {
+    return GetSinkRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetSinkRequest): GetSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetSinkRequest",
+      value: GetSinkRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5860,6 +6240,25 @@ export const CreateSinkRequest = {
     obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
+  },
+
+  fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
+    return CreateSinkRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateSinkRequestProtoMsg): CreateSinkRequest {
+    return CreateSinkRequest.decode(message.value);
+  },
+
+  toProto(message: CreateSinkRequest): Uint8Array {
+    return CreateSinkRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateSinkRequest): CreateSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateSinkRequest",
+      value: CreateSinkRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5991,6 +6390,25 @@ export const UpdateSinkRequest = {
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateSinkRequestAminoMsg): UpdateSinkRequest {
+    return UpdateSinkRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateSinkRequestProtoMsg): UpdateSinkRequest {
+    return UpdateSinkRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateSinkRequest): Uint8Array {
+    return UpdateSinkRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateSinkRequest): UpdateSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateSinkRequest",
+      value: UpdateSinkRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6074,6 +6492,25 @@ export const DeleteSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
+    return DeleteSinkRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteSinkRequestProtoMsg): DeleteSinkRequest {
+    return DeleteSinkRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteSinkRequest): Uint8Array {
+    return DeleteSinkRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteSinkRequest): DeleteSinkRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteSinkRequest",
+      value: DeleteSinkRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6237,6 +6674,25 @@ export const LogExclusion = {
     obj.create_time = message.createTime ? Timestamp.toAmino(message.createTime) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(message.updateTime) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
+    return LogExclusion.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
+    return LogExclusion.decode(message.value);
+  },
+
+  toProto(message: LogExclusion): Uint8Array {
+    return LogExclusion.encode(message).finish();
+  },
+
+  toProtoMsg(message: LogExclusion): LogExclusionProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.LogExclusion",
+      value: LogExclusion.encode(message).finish()
+    };
   }
 
 };
@@ -6352,6 +6808,25 @@ export const ListExclusionsRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
+    return ListExclusionsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListExclusionsRequestProtoMsg): ListExclusionsRequest {
+    return ListExclusionsRequest.decode(message.value);
+  },
+
+  toProto(message: ListExclusionsRequest): Uint8Array {
+    return ListExclusionsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListExclusionsRequest): ListExclusionsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListExclusionsRequest",
+      value: ListExclusionsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6469,6 +6944,25 @@ export const ListExclusionsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
+    return ListExclusionsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListExclusionsResponseProtoMsg): ListExclusionsResponse {
+    return ListExclusionsResponse.decode(message.value);
+  },
+
+  toProto(message: ListExclusionsResponse): Uint8Array {
+    return ListExclusionsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListExclusionsResponse): ListExclusionsResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.ListExclusionsResponse",
+      value: ListExclusionsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -6552,6 +7046,25 @@ export const GetExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
+    return GetExclusionRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetExclusionRequestProtoMsg): GetExclusionRequest {
+    return GetExclusionRequest.decode(message.value);
+  },
+
+  toProto(message: GetExclusionRequest): Uint8Array {
+    return GetExclusionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetExclusionRequest): GetExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetExclusionRequest",
+      value: GetExclusionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6651,6 +7164,25 @@ export const CreateExclusionRequest = {
     obj.parent = message.parent;
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CreateExclusionRequestAminoMsg): CreateExclusionRequest {
+    return CreateExclusionRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateExclusionRequestProtoMsg): CreateExclusionRequest {
+    return CreateExclusionRequest.decode(message.value);
+  },
+
+  toProto(message: CreateExclusionRequest): Uint8Array {
+    return CreateExclusionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateExclusionRequest): CreateExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CreateExclusionRequest",
+      value: CreateExclusionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6766,6 +7298,25 @@ export const UpdateExclusionRequest = {
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateExclusionRequestAminoMsg): UpdateExclusionRequest {
+    return UpdateExclusionRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateExclusionRequestProtoMsg): UpdateExclusionRequest {
+    return UpdateExclusionRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateExclusionRequest): Uint8Array {
+    return UpdateExclusionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateExclusionRequest): UpdateExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateExclusionRequest",
+      value: UpdateExclusionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6849,6 +7400,25 @@ export const DeleteExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
+    return DeleteExclusionRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteExclusionRequestProtoMsg): DeleteExclusionRequest {
+    return DeleteExclusionRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteExclusionRequest): Uint8Array {
+    return DeleteExclusionRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteExclusionRequest): DeleteExclusionRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.DeleteExclusionRequest",
+      value: DeleteExclusionRequest.encode(message).finish()
+    };
   }
 
 };
@@ -6932,6 +7502,25 @@ export const GetCmekSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
+    return GetCmekSettingsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetCmekSettingsRequestProtoMsg): GetCmekSettingsRequest {
+    return GetCmekSettingsRequest.decode(message.value);
+  },
+
+  toProto(message: GetCmekSettingsRequest): Uint8Array {
+    return GetCmekSettingsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetCmekSettingsRequest): GetCmekSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
+      value: GetCmekSettingsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -7047,6 +7636,25 @@ export const UpdateCmekSettingsRequest = {
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateCmekSettingsRequestAminoMsg): UpdateCmekSettingsRequest {
+    return UpdateCmekSettingsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg): UpdateCmekSettingsRequest {
+    return UpdateCmekSettingsRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateCmekSettingsRequest): Uint8Array {
+    return UpdateCmekSettingsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
+      value: UpdateCmekSettingsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -7162,6 +7770,25 @@ export const CmekSettings = {
     obj.kms_key_name = message.kmsKeyName;
     obj.service_account_id = message.serviceAccountId;
     return obj;
+  },
+
+  fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
+    return CmekSettings.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CmekSettingsProtoMsg): CmekSettings {
+    return CmekSettings.decode(message.value);
+  },
+
+  toProto(message: CmekSettings): Uint8Array {
+    return CmekSettings.encode(message).finish();
+  },
+
+  toProtoMsg(message: CmekSettings): CmekSettingsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CmekSettings",
+      value: CmekSettings.encode(message).finish()
+    };
   }
 
 };
@@ -7245,6 +7872,25 @@ export const GetSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
+    return GetSettingsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetSettingsRequestProtoMsg): GetSettingsRequest {
+    return GetSettingsRequest.decode(message.value);
+  },
+
+  toProto(message: GetSettingsRequest): Uint8Array {
+    return GetSettingsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetSettingsRequest): GetSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.GetSettingsRequest",
+      value: GetSettingsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -7360,6 +8006,25 @@ export const UpdateSettingsRequest = {
     obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateSettingsRequestAminoMsg): UpdateSettingsRequest {
+    return UpdateSettingsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateSettingsRequestProtoMsg): UpdateSettingsRequest {
+    return UpdateSettingsRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateSettingsRequest): Uint8Array {
+    return UpdateSettingsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateSettingsRequest): UpdateSettingsRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.UpdateSettingsRequest",
+      value: UpdateSettingsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -7507,6 +8172,25 @@ export const Settings = {
     obj.storage_location = message.storageLocation;
     obj.disable_default_sink = message.disableDefaultSink;
     return obj;
+  },
+
+  fromAminoMsg(object: SettingsAminoMsg): Settings {
+    return Settings.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SettingsProtoMsg): Settings {
+    return Settings.decode(message.value);
+  },
+
+  toProto(message: Settings): Uint8Array {
+    return Settings.encode(message).finish();
+  },
+
+  toProtoMsg(message: Settings): SettingsProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.Settings",
+      value: Settings.encode(message).finish()
+    };
   }
 
 };
@@ -7622,6 +8306,25 @@ export const CopyLogEntriesRequest = {
     obj.filter = message.filter;
     obj.destination = message.destination;
     return obj;
+  },
+
+  fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
+    return CopyLogEntriesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CopyLogEntriesRequestProtoMsg): CopyLogEntriesRequest {
+    return CopyLogEntriesRequest.decode(message.value);
+  },
+
+  toProto(message: CopyLogEntriesRequest): Uint8Array {
+    return CopyLogEntriesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CopyLogEntriesRequest): CopyLogEntriesRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
+      value: CopyLogEntriesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -7801,6 +8504,25 @@ export const CopyLogEntriesMetadata = {
     obj.progress = message.progress;
     obj.writer_identity = message.writerIdentity;
     return obj;
+  },
+
+  fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
+    return CopyLogEntriesMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg): CopyLogEntriesMetadata {
+    return CopyLogEntriesMetadata.decode(message.value);
+  },
+
+  toProto(message: CopyLogEntriesMetadata): Uint8Array {
+    return CopyLogEntriesMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesMetadata",
+      value: CopyLogEntriesMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -7884,6 +8606,25 @@ export const CopyLogEntriesResponse = {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {
+    return CopyLogEntriesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CopyLogEntriesResponseProtoMsg): CopyLogEntriesResponse {
+    return CopyLogEntriesResponse.decode(message.value);
+  },
+
+  toProto(message: CopyLogEntriesResponse): Uint8Array {
+    return CopyLogEntriesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CopyLogEntriesResponse): CopyLogEntriesResponseProtoMsg {
+    return {
+      typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
+      value: CopyLogEntriesResponse.encode(message).finish()
+    };
   }
 
 };

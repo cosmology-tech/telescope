@@ -10,7 +10,7 @@ export interface Minter {
   /** current annual expected provisions */
   annualProvisions: string;
 }
-export interface MinterProtoType {
+export interface MinterProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.Minter";
   value: Uint8Array;
 }
@@ -23,7 +23,7 @@ export interface MinterAmino {
   /** current annual expected provisions */
   annual_provisions: string;
 }
-export interface MinterAminoType {
+export interface MinterAminoMsg {
   type: "cosmos-sdk/Minter";
   value: MinterAmino;
 }
@@ -54,7 +54,7 @@ export interface Params {
   /** expected blocks per year */
   blocksPerYear: Long;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.Params";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface ParamsAmino {
   /** expected blocks per year */
   blocks_per_year: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";
   value: ParamsAmino;
 }
@@ -190,6 +190,32 @@ export const Minter = {
     obj.inflation = message.inflation;
     obj.annual_provisions = message.annualProvisions;
     return obj;
+  },
+
+  fromAminoMsg(object: MinterAminoMsg): Minter {
+    return Minter.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Minter): MinterAminoMsg {
+    return {
+      type: "cosmos-sdk/Minter",
+      value: Minter.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MinterProtoMsg): Minter {
+    return Minter.decode(message.value);
+  },
+
+  toProto(message: Minter): Uint8Array {
+    return Minter.encode(message).finish();
+  },
+
+  toProtoMsg(message: Minter): MinterProtoMsg {
+    return {
+      typeUrl: "/cosmos.mint.v1beta1.Minter",
+      value: Minter.encode(message).finish()
+    };
   }
 
 };
@@ -354,6 +380,32 @@ export const Params = {
     obj.goal_bonded = message.goalBonded;
     obj.blocks_per_year = message.blocksPerYear ? message.blocksPerYear.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.mint.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

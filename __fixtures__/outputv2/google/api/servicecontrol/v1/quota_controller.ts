@@ -230,7 +230,7 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
-export interface AllocateQuotaRequestProtoType {
+export interface AllocateQuotaRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
   value: Uint8Array;
 }
@@ -255,7 +255,7 @@ export interface AllocateQuotaRequestAmino {
    */
   service_config_id: string;
 }
-export interface AllocateQuotaRequestAminoType {
+export interface AllocateQuotaRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
   value: AllocateQuotaRequestAmino;
 }
@@ -270,7 +270,7 @@ export interface QuotaOperation_LabelsEntry {
   key: string;
   value: string;
 }
-export interface QuotaOperation_LabelsEntryProtoType {
+export interface QuotaOperation_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -278,7 +278,7 @@ export interface QuotaOperation_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface QuotaOperation_LabelsEntryAminoType {
+export interface QuotaOperation_LabelsEntryAminoMsg {
   type: string;
   value: QuotaOperation_LabelsEntryAmino;
 }
@@ -351,7 +351,7 @@ export interface QuotaOperation {
   /** Quota mode for this operation. */
   quotaMode: QuotaOperation_QuotaMode;
 }
-export interface QuotaOperationProtoType {
+export interface QuotaOperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.QuotaOperation";
   value: Uint8Array;
 }
@@ -420,7 +420,7 @@ export interface QuotaOperationAmino {
   /** Quota mode for this operation. */
   quota_mode: QuotaOperation_QuotaMode;
 }
-export interface QuotaOperationAminoType {
+export interface QuotaOperationAminoMsg {
   type: "/google.api.servicecontrol.v1.QuotaOperation";
   value: QuotaOperationAmino;
 }
@@ -465,7 +465,7 @@ export interface AllocateQuotaResponse {
   /** ID of the actual config used to process the request. */
   serviceConfigId: string;
 }
-export interface AllocateQuotaResponseProtoType {
+export interface AllocateQuotaResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
   value: Uint8Array;
 }
@@ -498,7 +498,7 @@ export interface AllocateQuotaResponseAmino {
   /** ID of the actual config used to process the request. */
   service_config_id: string;
 }
-export interface AllocateQuotaResponseAminoType {
+export interface AllocateQuotaResponseAminoMsg {
   type: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
   value: AllocateQuotaResponseAmino;
 }
@@ -532,7 +532,7 @@ export interface QuotaError {
    */
   status?: Status;
 }
-export interface QuotaErrorProtoType {
+export interface QuotaErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.QuotaError";
   value: Uint8Array;
 }
@@ -558,7 +558,7 @@ export interface QuotaErrorAmino {
    */
   status?: StatusAmino;
 }
-export interface QuotaErrorAminoType {
+export interface QuotaErrorAminoMsg {
   type: "/google.api.servicecontrol.v1.QuotaError";
   value: QuotaErrorAmino;
 }
@@ -682,6 +682,25 @@ export const AllocateQuotaRequest = {
     obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation) : undefined;
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+
+  fromAminoMsg(object: AllocateQuotaRequestAminoMsg): AllocateQuotaRequest {
+    return AllocateQuotaRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AllocateQuotaRequestProtoMsg): AllocateQuotaRequest {
+    return AllocateQuotaRequest.decode(message.value);
+  },
+
+  toProto(message: AllocateQuotaRequest): Uint8Array {
+    return AllocateQuotaRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: AllocateQuotaRequest): AllocateQuotaRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
+      value: AllocateQuotaRequest.encode(message).finish()
+    };
   }
 
 };
@@ -779,6 +798,18 @@ export const QuotaOperation_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaOperation_LabelsEntryAminoMsg): QuotaOperation_LabelsEntry {
+    return QuotaOperation_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaOperation_LabelsEntryProtoMsg): QuotaOperation_LabelsEntry {
+    return QuotaOperation_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: QuotaOperation_LabelsEntry): Uint8Array {
+    return QuotaOperation_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -1009,6 +1040,25 @@ export const QuotaOperation = {
 
     obj.quota_mode = message.quotaMode;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
+    return QuotaOperation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaOperationProtoMsg): QuotaOperation {
+    return QuotaOperation.decode(message.value);
+  },
+
+  toProto(message: QuotaOperation): Uint8Array {
+    return QuotaOperation.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaOperation): QuotaOperationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
+      value: QuotaOperation.encode(message).finish()
+    };
   }
 
 };
@@ -1173,6 +1223,25 @@ export const AllocateQuotaResponse = {
 
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+
+  fromAminoMsg(object: AllocateQuotaResponseAminoMsg): AllocateQuotaResponse {
+    return AllocateQuotaResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AllocateQuotaResponseProtoMsg): AllocateQuotaResponse {
+    return AllocateQuotaResponse.decode(message.value);
+  },
+
+  toProto(message: AllocateQuotaResponse): Uint8Array {
+    return AllocateQuotaResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: AllocateQuotaResponse): AllocateQuotaResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
+      value: AllocateQuotaResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1304,6 +1373,25 @@ export const QuotaError = {
     obj.description = message.description;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaErrorAminoMsg): QuotaError {
+    return QuotaError.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaErrorProtoMsg): QuotaError {
+    return QuotaError.decode(message.value);
+  },
+
+  toProto(message: QuotaError): Uint8Array {
+    return QuotaError.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaError): QuotaErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.QuotaError",
+      value: QuotaError.encode(message).finish()
+    };
   }
 
 };

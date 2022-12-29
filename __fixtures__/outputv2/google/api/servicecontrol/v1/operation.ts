@@ -57,7 +57,7 @@ export interface Operation_LabelsEntry {
   key: string;
   value: string;
 }
-export interface Operation_LabelsEntryProtoType {
+export interface Operation_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -65,7 +65,7 @@ export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface Operation_LabelsEntryAminoType {
+export interface Operation_LabelsEntryAminoMsg {
   type: string;
   value: Operation_LabelsEntryAmino;
 }
@@ -165,7 +165,7 @@ export interface Operation {
   /** Unimplemented. */
   extensions: Any[];
 }
-export interface OperationProtoType {
+export interface OperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.Operation";
   value: Uint8Array;
 }
@@ -261,7 +261,7 @@ export interface OperationAmino {
   /** Unimplemented. */
   extensions: AnyAmino[];
 }
-export interface OperationAminoType {
+export interface OperationAminoMsg {
   type: "/google.api.servicecontrol.v1.Operation";
   value: OperationAmino;
 }
@@ -375,6 +375,18 @@ export const Operation_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
+    return Operation_LabelsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Operation_LabelsEntryProtoMsg): Operation_LabelsEntry {
+    return Operation_LabelsEntry.decode(message.value);
+  },
+
+  toProto(message: Operation_LabelsEntry): Uint8Array {
+    return Operation_LabelsEntry.encode(message).finish();
   }
 
 };
@@ -702,6 +714,25 @@ export const Operation = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: OperationAminoMsg): Operation {
+    return Operation.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OperationProtoMsg): Operation {
+    return Operation.decode(message.value);
+  },
+
+  toProto(message: Operation): Uint8Array {
+    return Operation.encode(message).finish();
+  },
+
+  toProtoMsg(message: Operation): OperationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.Operation",
+      value: Operation.encode(message).finish()
+    };
   }
 
 };

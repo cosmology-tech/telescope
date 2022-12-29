@@ -80,7 +80,7 @@ export function group_StateToJSON(object: Group_State): string {
 export interface MsgCloseGroup {
   id?: GroupID;
 }
-export interface MsgCloseGroupProtoType {
+export interface MsgCloseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
   value: Uint8Array;
 }
@@ -89,7 +89,7 @@ export interface MsgCloseGroupProtoType {
 export interface MsgCloseGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgCloseGroupAminoType {
+export interface MsgCloseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseGroup";
   value: MsgCloseGroupAmino;
 }
@@ -101,14 +101,14 @@ export interface MsgCloseGroupSDKType {
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
-export interface MsgCloseGroupResponseProtoType {
+export interface MsgCloseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
   value: Uint8Array;
 }
 
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseAmino {}
-export interface MsgCloseGroupResponseAminoType {
+export interface MsgCloseGroupResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
   value: MsgCloseGroupResponseAmino;
 }
@@ -120,7 +120,7 @@ export interface MsgCloseGroupResponseSDKType {}
 export interface MsgPauseGroup {
   id?: GroupID;
 }
-export interface MsgPauseGroupProtoType {
+export interface MsgPauseGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
   value: Uint8Array;
 }
@@ -129,7 +129,7 @@ export interface MsgPauseGroupProtoType {
 export interface MsgPauseGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgPauseGroupAminoType {
+export interface MsgPauseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgPauseGroup";
   value: MsgPauseGroupAmino;
 }
@@ -141,14 +141,14 @@ export interface MsgPauseGroupSDKType {
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
-export interface MsgPauseGroupResponseProtoType {
+export interface MsgPauseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
   value: Uint8Array;
 }
 
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseAmino {}
-export interface MsgPauseGroupResponseAminoType {
+export interface MsgPauseGroupResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
   value: MsgPauseGroupResponseAmino;
 }
@@ -160,7 +160,7 @@ export interface MsgPauseGroupResponseSDKType {}
 export interface MsgStartGroup {
   id?: GroupID;
 }
-export interface MsgStartGroupProtoType {
+export interface MsgStartGroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
   value: Uint8Array;
 }
@@ -169,7 +169,7 @@ export interface MsgStartGroupProtoType {
 export interface MsgStartGroupAmino {
   id?: GroupIDAmino;
 }
-export interface MsgStartGroupAminoType {
+export interface MsgStartGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgStartGroup";
   value: MsgStartGroupAmino;
 }
@@ -181,14 +181,14 @@ export interface MsgStartGroupSDKType {
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
-export interface MsgStartGroupResponseProtoType {
+export interface MsgStartGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
   value: Uint8Array;
 }
 
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseAmino {}
-export interface MsgStartGroupResponseAminoType {
+export interface MsgStartGroupResponseAminoMsg {
   type: "/akash.deployment.v1beta1.MsgStartGroupResponse";
   value: MsgStartGroupResponseAmino;
 }
@@ -202,7 +202,7 @@ export interface GroupID {
   dseq: Long;
   gseq: number;
 }
-export interface GroupIDProtoType {
+export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupID";
   value: Uint8Array;
 }
@@ -213,7 +213,7 @@ export interface GroupIDAmino {
   dseq: string;
   gseq: number;
 }
-export interface GroupIDAminoType {
+export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta1.GroupID";
   value: GroupIDAmino;
 }
@@ -231,7 +231,7 @@ export interface GroupSpec {
   requirements?: PlacementRequirements;
   resources: Resource[];
 }
-export interface GroupSpecProtoType {
+export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec";
   value: Uint8Array;
 }
@@ -242,7 +242,7 @@ export interface GroupSpecAmino {
   requirements?: PlacementRequirementsAmino;
   resources: ResourceAmino[];
 }
-export interface GroupSpecAminoType {
+export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta1.GroupSpec";
   value: GroupSpecAmino;
 }
@@ -261,7 +261,7 @@ export interface Group {
   groupSpec?: GroupSpec;
   createdAt: Long;
 }
-export interface GroupProtoType {
+export interface GroupProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Group";
   value: Uint8Array;
 }
@@ -273,7 +273,7 @@ export interface GroupAmino {
   group_spec?: GroupSpecAmino;
   created_at: string;
 }
-export interface GroupAminoType {
+export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta1.Group";
   value: GroupAmino;
 }
@@ -292,7 +292,7 @@ export interface Resource {
   count: number;
   price?: Coin;
 }
-export interface ResourceProtoType {
+export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Resource";
   value: Uint8Array;
 }
@@ -303,7 +303,7 @@ export interface ResourceAmino {
   count: number;
   price?: CoinAmino;
 }
-export interface ResourceAminoType {
+export interface ResourceAminoMsg {
   type: "/akash.deployment.v1beta1.Resource";
   value: ResourceAmino;
 }
@@ -394,6 +394,25 @@ export const MsgCloseGroup = {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
+    return MsgCloseGroup.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseGroupProtoMsg): MsgCloseGroup {
+    return MsgCloseGroup.decode(message.value);
+  },
+
+  toProto(message: MsgCloseGroup): Uint8Array {
+    return MsgCloseGroup.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseGroup): MsgCloseGroupProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup",
+      value: MsgCloseGroup.encode(message).finish()
+    };
   }
 
 };
@@ -457,6 +476,25 @@ export const MsgCloseGroupResponse = {
   toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgCloseGroupResponseAminoMsg): MsgCloseGroupResponse {
+    return MsgCloseGroupResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCloseGroupResponseProtoMsg): MsgCloseGroupResponse {
+    return MsgCloseGroupResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCloseGroupResponse): Uint8Array {
+    return MsgCloseGroupResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCloseGroupResponse): MsgCloseGroupResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse",
+      value: MsgCloseGroupResponse.encode(message).finish()
+    };
   }
 
 };
@@ -540,6 +578,25 @@ export const MsgPauseGroup = {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
+    return MsgPauseGroup.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgPauseGroupProtoMsg): MsgPauseGroup {
+    return MsgPauseGroup.decode(message.value);
+  },
+
+  toProto(message: MsgPauseGroup): Uint8Array {
+    return MsgPauseGroup.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgPauseGroup): MsgPauseGroupProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup",
+      value: MsgPauseGroup.encode(message).finish()
+    };
   }
 
 };
@@ -603,6 +660,25 @@ export const MsgPauseGroupResponse = {
   toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgPauseGroupResponseAminoMsg): MsgPauseGroupResponse {
+    return MsgPauseGroupResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgPauseGroupResponseProtoMsg): MsgPauseGroupResponse {
+    return MsgPauseGroupResponse.decode(message.value);
+  },
+
+  toProto(message: MsgPauseGroupResponse): Uint8Array {
+    return MsgPauseGroupResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgPauseGroupResponse): MsgPauseGroupResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse",
+      value: MsgPauseGroupResponse.encode(message).finish()
+    };
   }
 
 };
@@ -686,6 +762,25 @@ export const MsgStartGroup = {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
+    return MsgStartGroup.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgStartGroupProtoMsg): MsgStartGroup {
+    return MsgStartGroup.decode(message.value);
+  },
+
+  toProto(message: MsgStartGroup): Uint8Array {
+    return MsgStartGroup.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgStartGroup): MsgStartGroupProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgStartGroup",
+      value: MsgStartGroup.encode(message).finish()
+    };
   }
 
 };
@@ -749,6 +844,25 @@ export const MsgStartGroupResponse = {
   toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgStartGroupResponseAminoMsg): MsgStartGroupResponse {
+    return MsgStartGroupResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgStartGroupResponseProtoMsg): MsgStartGroupResponse {
+    return MsgStartGroupResponse.decode(message.value);
+  },
+
+  toProto(message: MsgStartGroupResponse): Uint8Array {
+    return MsgStartGroupResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgStartGroupResponse): MsgStartGroupResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse",
+      value: MsgStartGroupResponse.encode(message).finish()
+    };
   }
 
 };
@@ -864,6 +978,25 @@ export const GroupID = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
+  },
+
+  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
+    return GroupID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
+    return GroupID.decode(message.value);
+  },
+
+  toProto(message: GroupID): Uint8Array {
+    return GroupID.encode(message).finish();
+  },
+
+  toProtoMsg(message: GroupID): GroupIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.GroupID",
+      value: GroupID.encode(message).finish()
+    };
   }
 
 };
@@ -997,6 +1130,25 @@ export const GroupSpec = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
+    return GroupSpec.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
+    return GroupSpec.decode(message.value);
+  },
+
+  toProto(message: GroupSpec): Uint8Array {
+    return GroupSpec.encode(message).finish();
+  },
+
+  toProtoMsg(message: GroupSpec): GroupSpecProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.GroupSpec",
+      value: GroupSpec.encode(message).finish()
+    };
   }
 
 };
@@ -1128,6 +1280,25 @@ export const Group = {
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GroupAminoMsg): Group {
+    return Group.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupProtoMsg): Group {
+    return Group.decode(message.value);
+  },
+
+  toProto(message: Group): Uint8Array {
+    return Group.encode(message).finish();
+  },
+
+  toProtoMsg(message: Group): GroupProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Group",
+      value: Group.encode(message).finish()
+    };
   }
 
 };
@@ -1243,6 +1414,25 @@ export const Resource = {
     obj.count = message.count;
     obj.price = message.price ? Coin.toAmino(message.price) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceAminoMsg): Resource {
+    return Resource.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceProtoMsg): Resource {
+    return Resource.decode(message.value);
+  },
+
+  toProto(message: Resource): Uint8Array {
+    return Resource.encode(message).finish();
+  },
+
+  toProtoMsg(message: Resource): ResourceProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Resource",
+      value: Resource.encode(message).finish()
+    };
   }
 
 };

@@ -14,7 +14,7 @@ export interface GenesisState {
   /** active Gasmeters */
   gasMeters: GasMeter[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.incentives.v1.GenesisState";
   value: Uint8Array;
 }
@@ -30,7 +30,7 @@ export interface GenesisStateAmino {
   /** active Gasmeters */
   gas_meters: GasMeterAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/evmos.incentives.v1.GenesisState";
   value: GenesisStateAmino;
 }
@@ -56,7 +56,7 @@ export interface Params {
   /** scaling factor for capping rewards */
   rewardScaler: string;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/evmos.incentives.v1.Params";
   value: Uint8Array;
 }
@@ -75,7 +75,7 @@ export interface ParamsAmino {
   /** scaling factor for capping rewards */
   reward_scaler: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/evmos.incentives.v1.Params";
   value: ParamsAmino;
 }
@@ -232,6 +232,25 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -363,6 +382,25 @@ export const Params = {
     obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
     obj.reward_scaler = message.rewardScaler;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

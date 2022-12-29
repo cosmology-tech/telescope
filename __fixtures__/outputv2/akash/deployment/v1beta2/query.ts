@@ -12,7 +12,7 @@ export interface QueryDeploymentsRequest {
   filters?: DeploymentFilters;
   pagination?: PageRequest;
 }
-export interface QueryDeploymentsRequestProtoType {
+export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
   value: Uint8Array;
 }
@@ -22,7 +22,7 @@ export interface QueryDeploymentsRequestAmino {
   filters?: DeploymentFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryDeploymentsRequestAminoType {
+export interface QueryDeploymentsRequestAminoMsg {
   type: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
   value: QueryDeploymentsRequestAmino;
 }
@@ -38,7 +38,7 @@ export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
   pagination?: PageResponse;
 }
-export interface QueryDeploymentsResponseProtoType {
+export interface QueryDeploymentsResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
   value: Uint8Array;
 }
@@ -48,7 +48,7 @@ export interface QueryDeploymentsResponseAmino {
   deployments: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryDeploymentsResponseAminoType {
+export interface QueryDeploymentsResponseAminoMsg {
   type: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
   value: QueryDeploymentsResponseAmino;
 }
@@ -63,7 +63,7 @@ export interface QueryDeploymentsResponseSDKType {
 export interface QueryDeploymentRequest {
   id?: DeploymentID;
 }
-export interface QueryDeploymentRequestProtoType {
+export interface QueryDeploymentRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest";
   value: Uint8Array;
 }
@@ -72,7 +72,7 @@ export interface QueryDeploymentRequestProtoType {
 export interface QueryDeploymentRequestAmino {
   id?: DeploymentIDAmino;
 }
-export interface QueryDeploymentRequestAminoType {
+export interface QueryDeploymentRequestAminoMsg {
   type: "/akash.deployment.v1beta2.QueryDeploymentRequest";
   value: QueryDeploymentRequestAmino;
 }
@@ -88,7 +88,7 @@ export interface QueryDeploymentResponse {
   groups: Group[];
   escrowAccount?: Account;
 }
-export interface QueryDeploymentResponseProtoType {
+export interface QueryDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse";
   value: Uint8Array;
 }
@@ -99,7 +99,7 @@ export interface QueryDeploymentResponseAmino {
   groups: GroupAmino[];
   escrow_account?: AccountAmino;
 }
-export interface QueryDeploymentResponseAminoType {
+export interface QueryDeploymentResponseAminoMsg {
   type: "/akash.deployment.v1beta2.QueryDeploymentResponse";
   value: QueryDeploymentResponseAmino;
 }
@@ -115,7 +115,7 @@ export interface QueryDeploymentResponseSDKType {
 export interface QueryGroupRequest {
   id?: GroupID;
 }
-export interface QueryGroupRequestProtoType {
+export interface QueryGroupRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest";
   value: Uint8Array;
 }
@@ -124,7 +124,7 @@ export interface QueryGroupRequestProtoType {
 export interface QueryGroupRequestAmino {
   id?: GroupIDAmino;
 }
-export interface QueryGroupRequestAminoType {
+export interface QueryGroupRequestAminoMsg {
   type: "/akash.deployment.v1beta2.QueryGroupRequest";
   value: QueryGroupRequestAmino;
 }
@@ -138,7 +138,7 @@ export interface QueryGroupRequestSDKType {
 export interface QueryGroupResponse {
   group?: Group;
 }
-export interface QueryGroupResponseProtoType {
+export interface QueryGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse";
   value: Uint8Array;
 }
@@ -147,7 +147,7 @@ export interface QueryGroupResponseProtoType {
 export interface QueryGroupResponseAmino {
   group?: GroupAmino;
 }
-export interface QueryGroupResponseAminoType {
+export interface QueryGroupResponseAminoMsg {
   type: "/akash.deployment.v1beta2.QueryGroupResponse";
   value: QueryGroupResponseAmino;
 }
@@ -252,6 +252,25 @@ export const QueryDeploymentsRequest = {
     obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDeploymentsRequestAminoMsg): QueryDeploymentsRequest {
+    return QueryDeploymentsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg): QueryDeploymentsRequest {
+    return QueryDeploymentsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryDeploymentsRequest): Uint8Array {
+    return QueryDeploymentsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDeploymentsRequest): QueryDeploymentsRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest",
+      value: QueryDeploymentsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -369,6 +388,25 @@ export const QueryDeploymentsResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDeploymentsResponseAminoMsg): QueryDeploymentsResponse {
+    return QueryDeploymentsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
+    return QueryDeploymentsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryDeploymentsResponse): Uint8Array {
+    return QueryDeploymentsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDeploymentsResponse): QueryDeploymentsResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse",
+      value: QueryDeploymentsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -452,6 +490,25 @@ export const QueryDeploymentRequest = {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDeploymentRequestAminoMsg): QueryDeploymentRequest {
+    return QueryDeploymentRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDeploymentRequestProtoMsg): QueryDeploymentRequest {
+    return QueryDeploymentRequest.decode(message.value);
+  },
+
+  toProto(message: QueryDeploymentRequest): Uint8Array {
+    return QueryDeploymentRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDeploymentRequest): QueryDeploymentRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest",
+      value: QueryDeploymentRequest.encode(message).finish()
+    };
   }
 
 };
@@ -585,6 +642,25 @@ export const QueryDeploymentResponse = {
 
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryDeploymentResponseAminoMsg): QueryDeploymentResponse {
+    return QueryDeploymentResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
+    return QueryDeploymentResponse.decode(message.value);
+  },
+
+  toProto(message: QueryDeploymentResponse): Uint8Array {
+    return QueryDeploymentResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryDeploymentResponse): QueryDeploymentResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse",
+      value: QueryDeploymentResponse.encode(message).finish()
+    };
   }
 
 };
@@ -668,6 +744,25 @@ export const QueryGroupRequest = {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGroupRequestAminoMsg): QueryGroupRequest {
+    return QueryGroupRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
+    return QueryGroupRequest.decode(message.value);
+  },
+
+  toProto(message: QueryGroupRequest): Uint8Array {
+    return QueryGroupRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGroupRequest): QueryGroupRequestProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest",
+      value: QueryGroupRequest.encode(message).finish()
+    };
   }
 
 };
@@ -751,6 +846,25 @@ export const QueryGroupResponse = {
     const obj: any = {};
     obj.group = message.group ? Group.toAmino(message.group) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGroupResponseAminoMsg): QueryGroupResponse {
+    return QueryGroupResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGroupResponseProtoMsg): QueryGroupResponse {
+    return QueryGroupResponse.decode(message.value);
+  },
+
+  toProto(message: QueryGroupResponse): Uint8Array {
+    return QueryGroupResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGroupResponse): QueryGroupResponseProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse",
+      value: QueryGroupResponse.encode(message).finish()
+    };
   }
 
 };

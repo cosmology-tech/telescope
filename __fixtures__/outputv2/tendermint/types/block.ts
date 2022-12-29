@@ -9,7 +9,7 @@ export interface Block {
   evidence?: EvidenceList;
   lastCommit?: Commit;
 }
-export interface BlockProtoType {
+export interface BlockProtoMsg {
   typeUrl: "/tendermint.types.Block";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface BlockAmino {
   evidence?: EvidenceListAmino;
   last_commit?: CommitAmino;
 }
-export interface BlockAminoType {
+export interface BlockAminoMsg {
   type: "/tendermint.types.Block";
   value: BlockAmino;
 }
@@ -157,6 +157,25 @@ export const Block = {
     obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined;
     obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: BlockAminoMsg): Block {
+    return Block.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BlockProtoMsg): Block {
+    return Block.decode(message.value);
+  },
+
+  toProto(message: Block): Uint8Array {
+    return Block.encode(message).finish();
+  },
+
+  toProtoMsg(message: Block): BlockProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.Block",
+      value: Block.encode(message).finish()
+    };
   }
 
 };

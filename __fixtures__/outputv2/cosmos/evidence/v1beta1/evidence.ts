@@ -13,7 +13,7 @@ export interface Equivocation {
   power: Long;
   consensusAddress: string;
 }
-export interface EquivocationProtoType {
+export interface EquivocationProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.Equivocation";
   value: Uint8Array;
 }
@@ -28,7 +28,7 @@ export interface EquivocationAmino {
   power: string;
   consensus_address: string;
 }
-export interface EquivocationAminoType {
+export interface EquivocationAminoMsg {
   type: "cosmos-sdk/Equivocation";
   value: EquivocationAmino;
 }
@@ -172,6 +172,32 @@ export const Equivocation = {
     obj.power = message.power ? message.power.toString() : undefined;
     obj.consensus_address = message.consensusAddress;
     return obj;
+  },
+
+  fromAminoMsg(object: EquivocationAminoMsg): Equivocation {
+    return Equivocation.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Equivocation): EquivocationAminoMsg {
+    return {
+      type: "cosmos-sdk/Equivocation",
+      value: Equivocation.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
+    return Equivocation.decode(message.value);
+  },
+
+  toProto(message: Equivocation): Uint8Array {
+    return Equivocation.encode(message).finish();
+  },
+
+  toProtoMsg(message: Equivocation): EquivocationProtoMsg {
+    return {
+      typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
+      value: Equivocation.encode(message).finish()
+    };
   }
 
 };

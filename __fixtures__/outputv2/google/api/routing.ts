@@ -374,7 +374,7 @@ export interface RoutingRule {
    */
   routingParameters: RoutingParameter[];
 }
-export interface RoutingRuleProtoType {
+export interface RoutingRuleProtoMsg {
   typeUrl: "/google.api.RoutingRule";
   value: Uint8Array;
 }
@@ -751,7 +751,7 @@ export interface RoutingRuleAmino {
    */
   routing_parameters: RoutingParameterAmino[];
 }
-export interface RoutingRuleAminoType {
+export interface RoutingRuleAminoMsg {
   type: "/google.api.RoutingRule";
   value: RoutingRuleAmino;
 }
@@ -1184,7 +1184,7 @@ export interface RoutingParameter {
    */
   pathTemplate: string;
 }
-export interface RoutingParameterProtoType {
+export interface RoutingParameterProtoMsg {
   typeUrl: "/google.api.RoutingParameter";
   value: Uint8Array;
 }
@@ -1252,7 +1252,7 @@ export interface RoutingParameterAmino {
    */
   path_template: string;
 }
-export interface RoutingParameterAminoType {
+export interface RoutingParameterAminoMsg {
   type: "/google.api.RoutingParameter";
   value: RoutingParameterAmino;
 }
@@ -1360,6 +1360,25 @@ export const RoutingRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
+    return RoutingRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RoutingRuleProtoMsg): RoutingRule {
+    return RoutingRule.decode(message.value);
+  },
+
+  toProto(message: RoutingRule): Uint8Array {
+    return RoutingRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: RoutingRule): RoutingRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.RoutingRule",
+      value: RoutingRule.encode(message).finish()
+    };
   }
 
 };
@@ -1459,6 +1478,25 @@ export const RoutingParameter = {
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
     return obj;
+  },
+
+  fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
+    return RoutingParameter.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: RoutingParameterProtoMsg): RoutingParameter {
+    return RoutingParameter.decode(message.value);
+  },
+
+  toProto(message: RoutingParameter): Uint8Array {
+    return RoutingParameter.encode(message).finish();
+  },
+
+  toProtoMsg(message: RoutingParameter): RoutingParameterProtoMsg {
+    return {
+      typeUrl: "/google.api.RoutingParameter",
+      value: RoutingParameter.encode(message).finish()
+    };
   }
 
 };

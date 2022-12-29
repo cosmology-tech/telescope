@@ -9,7 +9,7 @@ export interface EventSend {
   sender: string;
   receiver: string;
 }
-export interface EventSendProtoType {
+export interface EventSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventSend";
   value: Uint8Array;
 }
@@ -21,7 +21,7 @@ export interface EventSendAmino {
   sender: string;
   receiver: string;
 }
-export interface EventSendAminoType {
+export interface EventSendAminoMsg {
   type: "cosmos-sdk/EventSend";
   value: EventSendAmino;
 }
@@ -40,7 +40,7 @@ export interface EventMint {
   id: string;
   owner: string;
 }
-export interface EventMintProtoType {
+export interface EventMintProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventMint";
   value: Uint8Array;
 }
@@ -51,7 +51,7 @@ export interface EventMintAmino {
   id: string;
   owner: string;
 }
-export interface EventMintAminoType {
+export interface EventMintAminoMsg {
   type: "cosmos-sdk/EventMint";
   value: EventMintAmino;
 }
@@ -69,7 +69,7 @@ export interface EventBurn {
   id: string;
   owner: string;
 }
-export interface EventBurnProtoType {
+export interface EventBurnProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventBurn";
   value: Uint8Array;
 }
@@ -80,7 +80,7 @@ export interface EventBurnAmino {
   id: string;
   owner: string;
 }
-export interface EventBurnAminoType {
+export interface EventBurnAminoMsg {
   type: "cosmos-sdk/EventBurn";
   value: EventBurnAmino;
 }
@@ -220,6 +220,32 @@ export const EventSend = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
+  },
+
+  fromAminoMsg(object: EventSendAminoMsg): EventSend {
+    return EventSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: EventSend): EventSendAminoMsg {
+    return {
+      type: "cosmos-sdk/EventSend",
+      value: EventSend.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EventSendProtoMsg): EventSend {
+    return EventSend.decode(message.value);
+  },
+
+  toProto(message: EventSend): Uint8Array {
+    return EventSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventSend): EventSendProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.EventSend",
+      value: EventSend.encode(message).finish()
+    };
   }
 
 };
@@ -336,6 +362,32 @@ export const EventMint = {
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAminoMsg(object: EventMintAminoMsg): EventMint {
+    return EventMint.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: EventMint): EventMintAminoMsg {
+    return {
+      type: "cosmos-sdk/EventMint",
+      value: EventMint.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EventMintProtoMsg): EventMint {
+    return EventMint.decode(message.value);
+  },
+
+  toProto(message: EventMint): Uint8Array {
+    return EventMint.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventMint): EventMintProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.EventMint",
+      value: EventMint.encode(message).finish()
+    };
   }
 
 };
@@ -452,6 +504,32 @@ export const EventBurn = {
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromAminoMsg(object: EventBurnAminoMsg): EventBurn {
+    return EventBurn.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: EventBurn): EventBurnAminoMsg {
+    return {
+      type: "cosmos-sdk/EventBurn",
+      value: EventBurn.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: EventBurnProtoMsg): EventBurn {
+    return EventBurn.decode(message.value);
+  },
+
+  toProto(message: EventBurn): Uint8Array {
+    return EventBurn.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventBurn): EventBurnProtoMsg {
+    return {
+      typeUrl: "/cosmos.nft.v1beta1.EventBurn",
+      value: EventBurn.encode(message).finish()
+    };
   }
 
 };

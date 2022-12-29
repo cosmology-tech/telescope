@@ -25,7 +25,7 @@ export interface MsgIBCSend {
    */
   data: Uint8Array;
 }
-export interface MsgIBCSendProtoType {
+export interface MsgIBCSendProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend";
   value: Uint8Array;
 }
@@ -53,7 +53,7 @@ export interface MsgIBCSendAmino {
    */
   data: Uint8Array;
 }
-export interface MsgIBCSendAminoType {
+export interface MsgIBCSendAminoMsg {
   type: "wasm/MsgIBCSend";
   value: MsgIBCSendAmino;
 }
@@ -70,7 +70,7 @@ export interface MsgIBCSendSDKType {
 export interface MsgIBCCloseChannel {
   channel: string;
 }
-export interface MsgIBCCloseChannelProtoType {
+export interface MsgIBCCloseChannelProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface MsgIBCCloseChannelProtoType {
 export interface MsgIBCCloseChannelAmino {
   channel: string;
 }
-export interface MsgIBCCloseChannelAminoType {
+export interface MsgIBCCloseChannelAminoMsg {
   type: "wasm/MsgIBCCloseChannel";
   value: MsgIBCCloseChannelAmino;
 }
@@ -217,6 +217,32 @@ export const MsgIBCSend = {
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {
+    return MsgIBCSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgIBCSend): MsgIBCSendAminoMsg {
+    return {
+      type: "wasm/MsgIBCSend",
+      value: MsgIBCSend.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgIBCSendProtoMsg): MsgIBCSend {
+    return MsgIBCSend.decode(message.value);
+  },
+
+  toProto(message: MsgIBCSend): Uint8Array {
+    return MsgIBCSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgIBCSend): MsgIBCSendProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend",
+      value: MsgIBCSend.encode(message).finish()
+    };
   }
 
 };
@@ -301,6 +327,32 @@ export const MsgIBCCloseChannel = {
     const obj: any = {};
     obj.channel = message.channel;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelAminoMsg {
+    return {
+      type: "wasm/MsgIBCCloseChannel",
+      value: MsgIBCCloseChannel.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.decode(message.value);
+  },
+
+  toProto(message: MsgIBCCloseChannel): Uint8Array {
+    return MsgIBCCloseChannel.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel",
+      value: MsgIBCCloseChannel.encode(message).finish()
+    };
   }
 
 };

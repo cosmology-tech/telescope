@@ -7,7 +7,7 @@ export interface ValidatorSet {
   proposer?: Validator;
   totalVotingPower: Long;
 }
-export interface ValidatorSetProtoType {
+export interface ValidatorSetProtoMsg {
   typeUrl: "/tendermint.types.ValidatorSet";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface ValidatorSetAmino {
   proposer?: ValidatorAmino;
   total_voting_power: string;
 }
-export interface ValidatorSetAminoType {
+export interface ValidatorSetAminoMsg {
   type: "/tendermint.types.ValidatorSet";
   value: ValidatorSetAmino;
 }
@@ -31,7 +31,7 @@ export interface Validator {
   votingPower: Long;
   proposerPriority: Long;
 }
-export interface ValidatorProtoType {
+export interface ValidatorProtoMsg {
   typeUrl: "/tendermint.types.Validator";
   value: Uint8Array;
 }
@@ -41,7 +41,7 @@ export interface ValidatorAmino {
   voting_power: string;
   proposer_priority: string;
 }
-export interface ValidatorAminoType {
+export interface ValidatorAminoMsg {
   type: "/tendermint.types.Validator";
   value: ValidatorAmino;
 }
@@ -55,7 +55,7 @@ export interface SimpleValidator {
   pubKey?: PublicKey;
   votingPower: Long;
 }
-export interface SimpleValidatorProtoType {
+export interface SimpleValidatorProtoMsg {
   typeUrl: "/tendermint.types.SimpleValidator";
   value: Uint8Array;
 }
@@ -63,7 +63,7 @@ export interface SimpleValidatorAmino {
   pub_key?: PublicKeyAmino;
   voting_power: string;
 }
-export interface SimpleValidatorAminoType {
+export interface SimpleValidatorAminoMsg {
   type: "/tendermint.types.SimpleValidator";
   value: SimpleValidatorAmino;
 }
@@ -201,6 +201,25 @@ export const ValidatorSet = {
     obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
+    return ValidatorSet.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValidatorSetProtoMsg): ValidatorSet {
+    return ValidatorSet.decode(message.value);
+  },
+
+  toProto(message: ValidatorSet): Uint8Array {
+    return ValidatorSet.encode(message).finish();
+  },
+
+  toProtoMsg(message: ValidatorSet): ValidatorSetProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.ValidatorSet",
+      value: ValidatorSet.encode(message).finish()
+    };
   }
 
 };
@@ -332,6 +351,25 @@ export const Validator = {
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ValidatorAminoMsg): Validator {
+    return Validator.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValidatorProtoMsg): Validator {
+    return Validator.decode(message.value);
+  },
+
+  toProto(message: Validator): Uint8Array {
+    return Validator.encode(message).finish();
+  },
+
+  toProtoMsg(message: Validator): ValidatorProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.Validator",
+      value: Validator.encode(message).finish()
+    };
   }
 
 };
@@ -431,6 +469,25 @@ export const SimpleValidator = {
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {
+    return SimpleValidator.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SimpleValidatorProtoMsg): SimpleValidator {
+    return SimpleValidator.decode(message.value);
+  },
+
+  toProto(message: SimpleValidator): Uint8Array {
+    return SimpleValidator.encode(message).finish();
+  },
+
+  toProtoMsg(message: SimpleValidator): SimpleValidatorProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.SimpleValidator",
+      value: SimpleValidator.encode(message).finish()
+    };
   }
 
 };

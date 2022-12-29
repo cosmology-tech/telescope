@@ -14,7 +14,7 @@ export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryIncentivesRequestProtoType {
+export interface QueryIncentivesRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest";
   value: Uint8Array;
 }
@@ -27,7 +27,7 @@ export interface QueryIncentivesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryIncentivesRequestAminoType {
+export interface QueryIncentivesRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryIncentivesRequest";
   value: QueryIncentivesRequestAmino;
 }
@@ -50,7 +50,7 @@ export interface QueryIncentivesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryIncentivesResponseProtoType {
+export interface QueryIncentivesResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse";
   value: Uint8Array;
 }
@@ -65,7 +65,7 @@ export interface QueryIncentivesResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryIncentivesResponseAminoType {
+export interface QueryIncentivesResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryIncentivesResponse";
   value: QueryIncentivesResponseAmino;
 }
@@ -84,7 +84,7 @@ export interface QueryIncentiveRequest {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
-export interface QueryIncentiveRequestProtoType {
+export interface QueryIncentiveRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest";
   value: Uint8Array;
 }
@@ -94,7 +94,7 @@ export interface QueryIncentiveRequestAmino {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
-export interface QueryIncentiveRequestAminoType {
+export interface QueryIncentiveRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryIncentiveRequest";
   value: QueryIncentiveRequestAmino;
 }
@@ -111,7 +111,7 @@ export interface QueryIncentiveRequestSDKType {
 export interface QueryIncentiveResponse {
   incentive?: Incentive;
 }
-export interface QueryIncentiveResponseProtoType {
+export interface QueryIncentiveResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse";
   value: Uint8Array;
 }
@@ -123,7 +123,7 @@ export interface QueryIncentiveResponseProtoType {
 export interface QueryIncentiveResponseAmino {
   incentive?: IncentiveAmino;
 }
-export interface QueryIncentiveResponseAminoType {
+export interface QueryIncentiveResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryIncentiveResponse";
   value: QueryIncentiveResponseAmino;
 }
@@ -147,7 +147,7 @@ export interface QueryGasMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryGasMetersRequestProtoType {
+export interface QueryGasMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest";
   value: Uint8Array;
 }
@@ -163,7 +163,7 @@ export interface QueryGasMetersRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryGasMetersRequestAminoType {
+export interface QueryGasMetersRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMetersRequest";
   value: QueryGasMetersRequestAmino;
 }
@@ -187,7 +187,7 @@ export interface QueryGasMetersResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryGasMetersResponseProtoType {
+export interface QueryGasMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse";
   value: Uint8Array;
 }
@@ -202,7 +202,7 @@ export interface QueryGasMetersResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryGasMetersResponseAminoType {
+export interface QueryGasMetersResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMetersResponse";
   value: QueryGasMetersResponseAmino;
 }
@@ -224,7 +224,7 @@ export interface QueryGasMeterRequest {
   /** participant identifier is the hex address of a user */
   participant: string;
 }
-export interface QueryGasMeterRequestProtoType {
+export interface QueryGasMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest";
   value: Uint8Array;
 }
@@ -237,7 +237,7 @@ export interface QueryGasMeterRequestAmino {
   /** participant identifier is the hex address of a user */
   participant: string;
 }
-export interface QueryGasMeterRequestAminoType {
+export interface QueryGasMeterRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMeterRequest";
   value: QueryGasMeterRequestAmino;
 }
@@ -259,7 +259,7 @@ export interface QueryGasMeterResponse {
    */
   gasMeter: Long;
 }
-export interface QueryGasMeterResponseProtoType {
+export interface QueryGasMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse";
   value: Uint8Array;
 }
@@ -275,7 +275,7 @@ export interface QueryGasMeterResponseAmino {
    */
   gas_meter: string;
 }
-export interface QueryGasMeterResponseAminoType {
+export interface QueryGasMeterResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMeterResponse";
   value: QueryGasMeterResponseAmino;
 }
@@ -296,7 +296,7 @@ export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface QueryAllocationMetersRequestProtoType {
+export interface QueryAllocationMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest";
   value: Uint8Array;
 }
@@ -309,7 +309,7 @@ export interface QueryAllocationMetersRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryAllocationMetersRequestAminoType {
+export interface QueryAllocationMetersRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryAllocationMetersRequest";
   value: QueryAllocationMetersRequestAmino;
 }
@@ -332,7 +332,7 @@ export interface QueryAllocationMetersResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface QueryAllocationMetersResponseProtoType {
+export interface QueryAllocationMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse";
   value: Uint8Array;
 }
@@ -347,7 +347,7 @@ export interface QueryAllocationMetersResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryAllocationMetersResponseAminoType {
+export interface QueryAllocationMetersResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryAllocationMetersResponse";
   value: QueryAllocationMetersResponseAmino;
 }
@@ -369,7 +369,7 @@ export interface QueryAllocationMeterRequest {
   /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
-export interface QueryAllocationMeterRequestProtoType {
+export interface QueryAllocationMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest";
   value: Uint8Array;
 }
@@ -382,7 +382,7 @@ export interface QueryAllocationMeterRequestAmino {
   /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
-export interface QueryAllocationMeterRequestAminoType {
+export interface QueryAllocationMeterRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryAllocationMeterRequest";
   value: QueryAllocationMeterRequestAmino;
 }
@@ -402,7 +402,7 @@ export interface QueryAllocationMeterRequestSDKType {
 export interface QueryAllocationMeterResponse {
   allocationMeter?: DecCoin;
 }
-export interface QueryAllocationMeterResponseProtoType {
+export interface QueryAllocationMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse";
   value: Uint8Array;
 }
@@ -414,7 +414,7 @@ export interface QueryAllocationMeterResponseProtoType {
 export interface QueryAllocationMeterResponseAmino {
   allocation_meter?: DecCoinAmino;
 }
-export interface QueryAllocationMeterResponseAminoType {
+export interface QueryAllocationMeterResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryAllocationMeterResponse";
   value: QueryAllocationMeterResponseAmino;
 }
@@ -429,14 +429,14 @@ export interface QueryAllocationMeterResponseSDKType {
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface QueryParamsRequestProtoType {
+export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsRequest";
   value: Uint8Array;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoType {
+export interface QueryParamsRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryParamsRequest";
   value: QueryParamsRequestAmino;
 }
@@ -451,7 +451,7 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params?: Params;
 }
-export interface QueryParamsResponseProtoType {
+export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsResponse";
   value: Uint8Array;
 }
@@ -463,7 +463,7 @@ export interface QueryParamsResponseProtoType {
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoType {
+export interface QueryParamsResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryParamsResponse";
   value: QueryParamsResponseAmino;
 }
@@ -555,6 +555,25 @@ export const QueryIncentivesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryIncentivesRequestAminoMsg): QueryIncentivesRequest {
+    return QueryIncentivesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryIncentivesRequestProtoMsg): QueryIncentivesRequest {
+    return QueryIncentivesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryIncentivesRequest): Uint8Array {
+    return QueryIncentivesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryIncentivesRequest): QueryIncentivesRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest",
+      value: QueryIncentivesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -672,6 +691,25 @@ export const QueryIncentivesResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryIncentivesResponseAminoMsg): QueryIncentivesResponse {
+    return QueryIncentivesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryIncentivesResponseProtoMsg): QueryIncentivesResponse {
+    return QueryIncentivesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryIncentivesResponse): Uint8Array {
+    return QueryIncentivesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryIncentivesResponse): QueryIncentivesResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse",
+      value: QueryIncentivesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -755,6 +793,25 @@ export const QueryIncentiveRequest = {
     const obj: any = {};
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
+    return QueryIncentiveRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryIncentiveRequestProtoMsg): QueryIncentiveRequest {
+    return QueryIncentiveRequest.decode(message.value);
+  },
+
+  toProto(message: QueryIncentiveRequest): Uint8Array {
+    return QueryIncentiveRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryIncentiveRequest): QueryIncentiveRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
+      value: QueryIncentiveRequest.encode(message).finish()
+    };
   }
 
 };
@@ -838,6 +895,25 @@ export const QueryIncentiveResponse = {
     const obj: any = {};
     obj.incentive = message.incentive ? Incentive.toAmino(message.incentive) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryIncentiveResponseAminoMsg): QueryIncentiveResponse {
+    return QueryIncentiveResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryIncentiveResponseProtoMsg): QueryIncentiveResponse {
+    return QueryIncentiveResponse.decode(message.value);
+  },
+
+  toProto(message: QueryIncentiveResponse): Uint8Array {
+    return QueryIncentiveResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryIncentiveResponse): QueryIncentiveResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse",
+      value: QueryIncentiveResponse.encode(message).finish()
+    };
   }
 
 };
@@ -937,6 +1013,25 @@ export const QueryGasMetersRequest = {
     obj.contract = message.contract;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGasMetersRequestAminoMsg): QueryGasMetersRequest {
+    return QueryGasMetersRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGasMetersRequestProtoMsg): QueryGasMetersRequest {
+    return QueryGasMetersRequest.decode(message.value);
+  },
+
+  toProto(message: QueryGasMetersRequest): Uint8Array {
+    return QueryGasMetersRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGasMetersRequest): QueryGasMetersRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
+      value: QueryGasMetersRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1054,6 +1149,25 @@ export const QueryGasMetersResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGasMetersResponseAminoMsg): QueryGasMetersResponse {
+    return QueryGasMetersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGasMetersResponseProtoMsg): QueryGasMetersResponse {
+    return QueryGasMetersResponse.decode(message.value);
+  },
+
+  toProto(message: QueryGasMetersResponse): Uint8Array {
+    return QueryGasMetersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGasMetersResponse): QueryGasMetersResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse",
+      value: QueryGasMetersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1153,6 +1267,25 @@ export const QueryGasMeterRequest = {
     obj.contract = message.contract;
     obj.participant = message.participant;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
+    return QueryGasMeterRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGasMeterRequestProtoMsg): QueryGasMeterRequest {
+    return QueryGasMeterRequest.decode(message.value);
+  },
+
+  toProto(message: QueryGasMeterRequest): Uint8Array {
+    return QueryGasMeterRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGasMeterRequest): QueryGasMeterRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
+      value: QueryGasMeterRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1236,6 +1369,25 @@ export const QueryGasMeterResponse = {
     const obj: any = {};
     obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
+    return QueryGasMeterResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryGasMeterResponseProtoMsg): QueryGasMeterResponse {
+    return QueryGasMeterResponse.decode(message.value);
+  },
+
+  toProto(message: QueryGasMeterResponse): Uint8Array {
+    return QueryGasMeterResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryGasMeterResponse): QueryGasMeterResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
+      value: QueryGasMeterResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1319,6 +1471,25 @@ export const QueryAllocationMetersRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllocationMetersRequestAminoMsg): QueryAllocationMetersRequest {
+    return QueryAllocationMetersRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg): QueryAllocationMetersRequest {
+    return QueryAllocationMetersRequest.decode(message.value);
+  },
+
+  toProto(message: QueryAllocationMetersRequest): Uint8Array {
+    return QueryAllocationMetersRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest",
+      value: QueryAllocationMetersRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1436,6 +1607,25 @@ export const QueryAllocationMetersResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllocationMetersResponseAminoMsg): QueryAllocationMetersResponse {
+    return QueryAllocationMetersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg): QueryAllocationMetersResponse {
+    return QueryAllocationMetersResponse.decode(message.value);
+  },
+
+  toProto(message: QueryAllocationMetersResponse): Uint8Array {
+    return QueryAllocationMetersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse",
+      value: QueryAllocationMetersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1519,6 +1709,25 @@ export const QueryAllocationMeterRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {
+    return QueryAllocationMeterRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg): QueryAllocationMeterRequest {
+    return QueryAllocationMeterRequest.decode(message.value);
+  },
+
+  toProto(message: QueryAllocationMeterRequest): Uint8Array {
+    return QueryAllocationMeterRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
+      value: QueryAllocationMeterRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1602,6 +1811,25 @@ export const QueryAllocationMeterResponse = {
     const obj: any = {};
     obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryAllocationMeterResponseAminoMsg): QueryAllocationMeterResponse {
+    return QueryAllocationMeterResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg): QueryAllocationMeterResponse {
+    return QueryAllocationMeterResponse.decode(message.value);
+  },
+
+  toProto(message: QueryAllocationMeterResponse): Uint8Array {
+    return QueryAllocationMeterResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse",
+      value: QueryAllocationMeterResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1665,6 +1893,25 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1748,6 +1995,25 @@ export const QueryParamsResponse = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.incentives.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 
 };

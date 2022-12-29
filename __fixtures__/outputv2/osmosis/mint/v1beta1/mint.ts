@@ -7,7 +7,7 @@ export interface Minter {
   /** epoch_provisions represent rewards for the current epoch. */
   epochProvisions: string;
 }
-export interface MinterProtoType {
+export interface MinterProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.Minter";
   value: Uint8Array;
 }
@@ -17,7 +17,7 @@ export interface MinterAmino {
   /** epoch_provisions represent rewards for the current epoch. */
   epoch_provisions: string;
 }
-export interface MinterAminoType {
+export interface MinterAminoMsg {
   type: "osmosis/mint/minter";
   value: MinterAmino;
 }
@@ -36,7 +36,7 @@ export interface WeightedAddress {
   address: string;
   weight: string;
 }
-export interface WeightedAddressProtoType {
+export interface WeightedAddressProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress";
   value: Uint8Array;
 }
@@ -50,7 +50,7 @@ export interface WeightedAddressAmino {
   address: string;
   weight: string;
 }
-export interface WeightedAddressAminoType {
+export interface WeightedAddressAminoMsg {
   type: "osmosis/mint/weighted-address";
   value: WeightedAddressAmino;
 }
@@ -95,7 +95,7 @@ export interface DistributionProportions {
    */
   communityPool: string;
 }
-export interface DistributionProportionsProtoType {
+export interface DistributionProportionsProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.DistributionProportions";
   value: Uint8Array;
 }
@@ -130,7 +130,7 @@ export interface DistributionProportionsAmino {
    */
   community_pool: string;
 }
-export interface DistributionProportionsAminoType {
+export interface DistributionProportionsAminoMsg {
   type: "osmosis/mint/distribution-proportions";
   value: DistributionProportionsAmino;
 }
@@ -191,7 +191,7 @@ export interface Params {
    */
   mintingRewardsDistributionStartEpoch: Long;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.Params";
   value: Uint8Array;
 }
@@ -240,7 +240,7 @@ export interface ParamsAmino {
    */
   minting_rewards_distribution_start_epoch: string;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "osmosis/mint/params";
   value: ParamsAmino;
 }
@@ -337,6 +337,32 @@ export const Minter = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
+  },
+
+  fromAminoMsg(object: MinterAminoMsg): Minter {
+    return Minter.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Minter): MinterAminoMsg {
+    return {
+      type: "osmosis/mint/minter",
+      value: Minter.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MinterProtoMsg): Minter {
+    return Minter.decode(message.value);
+  },
+
+  toProto(message: Minter): Uint8Array {
+    return Minter.encode(message).finish();
+  },
+
+  toProtoMsg(message: Minter): MinterProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.Minter",
+      value: Minter.encode(message).finish()
+    };
   }
 
 };
@@ -437,6 +463,32 @@ export const WeightedAddress = {
     obj.address = message.address;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
+    return WeightedAddress.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: WeightedAddress): WeightedAddressAminoMsg {
+    return {
+      type: "osmosis/mint/weighted-address",
+      value: WeightedAddress.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
+    return WeightedAddress.decode(message.value);
+  },
+
+  toProto(message: WeightedAddress): Uint8Array {
+    return WeightedAddress.encode(message).finish();
+  },
+
+  toProtoMsg(message: WeightedAddress): WeightedAddressProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
+      value: WeightedAddress.encode(message).finish()
+    };
   }
 
 };
@@ -569,6 +621,32 @@ export const DistributionProportions = {
     obj.developer_rewards = message.developerRewards;
     obj.community_pool = message.communityPool;
     return obj;
+  },
+
+  fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
+    return DistributionProportions.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: DistributionProportions): DistributionProportionsAminoMsg {
+    return {
+      type: "osmosis/mint/distribution-proportions",
+      value: DistributionProportions.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
+    return DistributionProportions.decode(message.value);
+  },
+
+  toProto(message: DistributionProportions): Uint8Array {
+    return DistributionProportions.encode(message).finish();
+  },
+
+  toProtoMsg(message: DistributionProportions): DistributionProportionsProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
+      value: DistributionProportions.encode(message).finish()
+    };
   }
 
 };
@@ -783,6 +861,32 @@ export const Params = {
 
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/mint/params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.mint.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

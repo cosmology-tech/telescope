@@ -9,7 +9,7 @@ export interface CertificateResponse {
   certificate?: Certificate;
   serial: string;
 }
-export interface CertificateResponseProtoType {
+export interface CertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.CertificateResponse";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface CertificateResponseAmino {
   certificate?: CertificateAmino;
   serial: string;
 }
-export interface CertificateResponseAminoType {
+export interface CertificateResponseAminoMsg {
   type: "/akash.cert.v1beta2.CertificateResponse";
   value: CertificateResponseAmino;
 }
@@ -35,7 +35,7 @@ export interface QueryCertificatesRequest {
   filter?: CertificateFilter;
   pagination?: PageRequest;
 }
-export interface QueryCertificatesRequestProtoType {
+export interface QueryCertificatesRequestProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
   value: Uint8Array;
 }
@@ -45,7 +45,7 @@ export interface QueryCertificatesRequestAmino {
   filter?: CertificateFilterAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryCertificatesRequestAminoType {
+export interface QueryCertificatesRequestAminoMsg {
   type: "/akash.cert.v1beta2.QueryCertificatesRequest";
   value: QueryCertificatesRequestAmino;
 }
@@ -61,7 +61,7 @@ export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
 }
-export interface QueryCertificatesResponseProtoType {
+export interface QueryCertificatesResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
   value: Uint8Array;
 }
@@ -71,7 +71,7 @@ export interface QueryCertificatesResponseAmino {
   certificates: CertificateResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryCertificatesResponseAminoType {
+export interface QueryCertificatesResponseAminoMsg {
   type: "/akash.cert.v1beta2.QueryCertificatesResponse";
   value: QueryCertificatesResponseAmino;
 }
@@ -177,6 +177,25 @@ export const CertificateResponse = {
     obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
     obj.serial = message.serial;
     return obj;
+  },
+
+  fromAminoMsg(object: CertificateResponseAminoMsg): CertificateResponse {
+    return CertificateResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CertificateResponseProtoMsg): CertificateResponse {
+    return CertificateResponse.decode(message.value);
+  },
+
+  toProto(message: CertificateResponse): Uint8Array {
+    return CertificateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: CertificateResponse): CertificateResponseProtoMsg {
+    return {
+      typeUrl: "/akash.cert.v1beta2.CertificateResponse",
+      value: CertificateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -276,6 +295,25 @@ export const QueryCertificatesRequest = {
     obj.filter = message.filter ? CertificateFilter.toAmino(message.filter) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCertificatesRequestAminoMsg): QueryCertificatesRequest {
+    return QueryCertificatesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryCertificatesRequestProtoMsg): QueryCertificatesRequest {
+    return QueryCertificatesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryCertificatesRequest): Uint8Array {
+    return QueryCertificatesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCertificatesRequest): QueryCertificatesRequestProtoMsg {
+    return {
+      typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest",
+      value: QueryCertificatesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -393,6 +431,25 @@ export const QueryCertificatesResponse = {
 
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QueryCertificatesResponseAminoMsg): QueryCertificatesResponse {
+    return QueryCertificatesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryCertificatesResponseProtoMsg): QueryCertificatesResponse {
+    return QueryCertificatesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryCertificatesResponse): Uint8Array {
+    return QueryCertificatesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryCertificatesResponse): QueryCertificatesResponseProtoMsg {
+    return {
+      typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse",
+      value: QueryCertificatesResponse.encode(message).finish()
+    };
   }
 
 };

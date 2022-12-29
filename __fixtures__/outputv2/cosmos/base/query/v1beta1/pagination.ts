@@ -47,7 +47,7 @@ export interface PageRequest {
    */
   reverse: boolean;
 }
-export interface PageRequestProtoType {
+export interface PageRequestProtoMsg {
   typeUrl: "/cosmos.base.query.v1beta1.PageRequest";
   value: Uint8Array;
 }
@@ -97,7 +97,7 @@ export interface PageRequestAmino {
    */
   reverse: boolean;
 }
-export interface PageRequestAminoType {
+export interface PageRequestAminoMsg {
   type: "cosmos-sdk/PageRequest";
   value: PageRequestAmino;
 }
@@ -142,7 +142,7 @@ export interface PageResponse {
    */
   total: Long;
 }
-export interface PageResponseProtoType {
+export interface PageResponseProtoMsg {
   typeUrl: "/cosmos.base.query.v1beta1.PageResponse";
   value: Uint8Array;
 }
@@ -170,7 +170,7 @@ export interface PageResponseAmino {
    */
   total: string;
 }
-export interface PageResponseAminoType {
+export interface PageResponseAminoMsg {
   type: "cosmos-sdk/PageResponse";
   value: PageResponseAmino;
 }
@@ -333,6 +333,32 @@ export const PageRequest = {
     obj.count_total = message.countTotal;
     obj.reverse = message.reverse;
     return obj;
+  },
+
+  fromAminoMsg(object: PageRequestAminoMsg): PageRequest {
+    return PageRequest.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PageRequest): PageRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/PageRequest",
+      value: PageRequest.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PageRequestProtoMsg): PageRequest {
+    return PageRequest.decode(message.value);
+  },
+
+  toProto(message: PageRequest): Uint8Array {
+    return PageRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: PageRequest): PageRequestProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
+      value: PageRequest.encode(message).finish()
+    };
   }
 
 };
@@ -433,6 +459,32 @@ export const PageResponse = {
     obj.next_key = message.nextKey;
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PageResponseAminoMsg): PageResponse {
+    return PageResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: PageResponse): PageResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/PageResponse",
+      value: PageResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PageResponseProtoMsg): PageResponse {
+    return PageResponse.decode(message.value);
+  },
+
+  toProto(message: PageResponse): Uint8Array {
+    return PageResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: PageResponse): PageResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
+      value: PageResponse.encode(message).finish()
+    };
   }
 
 };

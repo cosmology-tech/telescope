@@ -130,7 +130,7 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
-export interface AccountIDProtoType {
+export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.AccountID";
   value: Uint8Array;
 }
@@ -140,7 +140,7 @@ export interface AccountIDAmino {
   scope: string;
   xid: string;
 }
-export interface AccountIDAminoType {
+export interface AccountIDAminoMsg {
   type: "/akash.escrow.v1beta1.AccountID";
   value: AccountIDAmino;
 }
@@ -171,7 +171,7 @@ export interface Account {
   /** block height at which this account was last settled */
   settledAt: Long;
 }
-export interface AccountProtoType {
+export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Account";
   value: Uint8Array;
 }
@@ -196,7 +196,7 @@ export interface AccountAmino {
   /** block height at which this account was last settled */
   settled_at: string;
 }
-export interface AccountAminoType {
+export interface AccountAminoMsg {
   type: "/akash.escrow.v1beta1.Account";
   value: AccountAmino;
 }
@@ -221,7 +221,7 @@ export interface Payment {
   balance?: Coin;
   withdrawn?: Coin;
 }
-export interface PaymentProtoType {
+export interface PaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.Payment";
   value: Uint8Array;
 }
@@ -236,7 +236,7 @@ export interface PaymentAmino {
   balance?: CoinAmino;
   withdrawn?: CoinAmino;
 }
-export interface PaymentAminoType {
+export interface PaymentAminoMsg {
   type: "/akash.escrow.v1beta1.Payment";
   value: PaymentAmino;
 }
@@ -347,6 +347,25 @@ export const AccountID = {
     obj.scope = message.scope;
     obj.xid = message.xid;
     return obj;
+  },
+
+  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
+    return AccountID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AccountIDProtoMsg): AccountID {
+    return AccountID.decode(message.value);
+  },
+
+  toProto(message: AccountID): Uint8Array {
+    return AccountID.encode(message).finish();
+  },
+
+  toProtoMsg(message: AccountID): AccountIDProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.AccountID",
+      value: AccountID.encode(message).finish()
+    };
   }
 
 };
@@ -510,6 +529,25 @@ export const Account = {
     obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
     obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: AccountAminoMsg): Account {
+    return Account.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AccountProtoMsg): Account {
+    return Account.decode(message.value);
+  },
+
+  toProto(message: Account): Uint8Array {
+    return Account.encode(message).finish();
+  },
+
+  toProtoMsg(message: Account): AccountProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.Account",
+      value: Account.encode(message).finish()
+    };
   }
 
 };
@@ -689,6 +727,25 @@ export const Payment = {
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: PaymentAminoMsg): Payment {
+    return Payment.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: PaymentProtoMsg): Payment {
+    return Payment.decode(message.value);
+  },
+
+  toProto(message: Payment): Uint8Array {
+    return Payment.encode(message).finish();
+  },
+
+  toProtoMsg(message: Payment): PaymentProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.Payment",
+      value: Payment.encode(message).finish()
+    };
   }
 
 };

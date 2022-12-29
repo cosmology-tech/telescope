@@ -29,7 +29,7 @@ export interface Status {
    */
   details: Any[];
 }
-export interface StatusProtoType {
+export interface StatusProtoMsg {
   typeUrl: "/google.rpc.Status";
   value: Uint8Array;
 }
@@ -60,7 +60,7 @@ export interface StatusAmino {
    */
   details: AnyAmino[];
 }
-export interface StatusAminoType {
+export interface StatusAminoMsg {
   type: "/google.rpc.Status";
   value: StatusAmino;
 }
@@ -209,6 +209,25 @@ export const Status = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: StatusAminoMsg): Status {
+    return Status.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: StatusProtoMsg): Status {
+    return Status.decode(message.value);
+  },
+
+  toProto(message: Status): Uint8Array {
+    return Status.encode(message).finish();
+  },
+
+  toProtoMsg(message: Status): StatusProtoMsg {
+    return {
+      typeUrl: "/google.rpc.Status",
+      value: Status.encode(message).finish()
+    };
   }
 
 };

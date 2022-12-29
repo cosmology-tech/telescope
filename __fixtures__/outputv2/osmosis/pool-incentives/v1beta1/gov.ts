@@ -17,7 +17,7 @@ export interface ReplacePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
-export interface ReplacePoolIncentivesProposalProtoType {
+export interface ReplacePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   value: Uint8Array;
 }
@@ -36,7 +36,7 @@ export interface ReplacePoolIncentivesProposalAmino {
   description: string;
   records: DistrRecordAmino[];
 }
-export interface ReplacePoolIncentivesProposalAminoType {
+export interface ReplacePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/replace-pool-incentives-proposal";
   value: ReplacePoolIncentivesProposalAmino;
 }
@@ -70,7 +70,7 @@ export interface UpdatePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
-export interface UpdatePoolIncentivesProposalProtoType {
+export interface UpdatePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   value: Uint8Array;
 }
@@ -89,7 +89,7 @@ export interface UpdatePoolIncentivesProposalAmino {
   description: string;
   records: DistrRecordAmino[];
 }
-export interface UpdatePoolIncentivesProposalAminoType {
+export interface UpdatePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/update-pool-incentives-proposal";
   value: UpdatePoolIncentivesProposalAmino;
 }
@@ -239,6 +239,32 @@ export const ReplacePoolIncentivesProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
+    return ReplacePoolIncentivesProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
+    return {
+      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
+      value: ReplacePoolIncentivesProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
+    return ReplacePoolIncentivesProposal.decode(message.value);
+  },
+
+  toProto(message: ReplacePoolIncentivesProposal): Uint8Array {
+    return ReplacePoolIncentivesProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
+      value: ReplacePoolIncentivesProposal.encode(message).finish()
+    };
   }
 
 };
@@ -373,6 +399,32 @@ export const UpdatePoolIncentivesProposal = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
+    return UpdatePoolIncentivesProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
+    return {
+      type: "osmosis/poolincentives/update-pool-incentives-proposal",
+      value: UpdatePoolIncentivesProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
+    return UpdatePoolIncentivesProposal.decode(message.value);
+  },
+
+  toProto(message: UpdatePoolIncentivesProposal): Uint8Array {
+    return UpdatePoolIncentivesProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
+      value: UpdatePoolIncentivesProposal.encode(message).finish()
+    };
   }
 
 };

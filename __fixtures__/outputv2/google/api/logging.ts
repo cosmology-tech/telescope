@@ -50,7 +50,7 @@ export interface Logging {
    */
   consumerDestinations: Logging_LoggingDestination[];
 }
-export interface LoggingProtoType {
+export interface LoggingProtoMsg {
   typeUrl: "/google.api.Logging";
   value: Uint8Array;
 }
@@ -103,7 +103,7 @@ export interface LoggingAmino {
    */
   consumer_destinations: Logging_LoggingDestinationAmino[];
 }
-export interface LoggingAminoType {
+export interface LoggingAminoMsg {
   type: "/google.api.Logging";
   value: LoggingAmino;
 }
@@ -163,7 +163,7 @@ export interface Logging_LoggingDestination {
    */
   logs: string[];
 }
-export interface Logging_LoggingDestinationProtoType {
+export interface Logging_LoggingDestinationProtoMsg {
   typeUrl: "/google.api.LoggingDestination";
   value: Uint8Array;
 }
@@ -187,7 +187,7 @@ export interface Logging_LoggingDestinationAmino {
    */
   logs: string[];
 }
-export interface Logging_LoggingDestinationAminoType {
+export interface Logging_LoggingDestinationAminoMsg {
   type: "/google.api.LoggingDestination";
   value: Logging_LoggingDestinationAmino;
 }
@@ -329,6 +329,25 @@ export const Logging = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: LoggingAminoMsg): Logging {
+    return Logging.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: LoggingProtoMsg): Logging {
+    return Logging.decode(message.value);
+  },
+
+  toProto(message: Logging): Uint8Array {
+    return Logging.encode(message).finish();
+  },
+
+  toProtoMsg(message: Logging): LoggingProtoMsg {
+    return {
+      typeUrl: "/google.api.Logging",
+      value: Logging.encode(message).finish()
+    };
   }
 
 };
@@ -446,6 +465,25 @@ export const Logging_LoggingDestination = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
+    return Logging_LoggingDestination.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
+    return Logging_LoggingDestination.decode(message.value);
+  },
+
+  toProto(message: Logging_LoggingDestination): Uint8Array {
+    return Logging_LoggingDestination.encode(message).finish();
+  },
+
+  toProtoMsg(message: Logging_LoggingDestination): Logging_LoggingDestinationProtoMsg {
+    return {
+      typeUrl: "/google.api.LoggingDestination",
+      value: Logging_LoggingDestination.encode(message).finish()
+    };
   }
 
 };

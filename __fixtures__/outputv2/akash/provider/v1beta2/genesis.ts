@@ -7,7 +7,7 @@ export const protobufPackage = "akash.provider.v1beta2";
 export interface GenesisState {
   providers: Provider[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/akash.provider.v1beta2.GenesisState";
   value: Uint8Array;
 }
@@ -16,7 +16,7 @@ export interface GenesisStateProtoType {
 export interface GenesisStateAmino {
   providers: ProviderAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/akash.provider.v1beta2.GenesisState";
   value: GenesisStateAmino;
 }
@@ -123,6 +123,25 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.provider.v1beta2.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

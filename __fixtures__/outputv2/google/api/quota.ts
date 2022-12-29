@@ -63,7 +63,7 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
-export interface QuotaProtoType {
+export interface QuotaProtoMsg {
   typeUrl: "/google.api.Quota";
   value: Uint8Array;
 }
@@ -129,7 +129,7 @@ export interface QuotaAmino {
    */
   metric_rules: MetricRuleAmino[];
 }
-export interface QuotaAminoType {
+export interface QuotaAminoMsg {
   type: "/google.api.Quota";
   value: QuotaAmino;
 }
@@ -193,7 +193,7 @@ export interface MetricRule_MetricCostsEntry {
   key: string;
   value: Long;
 }
-export interface MetricRule_MetricCostsEntryProtoType {
+export interface MetricRule_MetricCostsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -201,7 +201,7 @@ export interface MetricRule_MetricCostsEntryAmino {
   key: string;
   value: string;
 }
-export interface MetricRule_MetricCostsEntryAminoType {
+export interface MetricRule_MetricCostsEntryAminoMsg {
   type: string;
   value: MetricRule_MetricCostsEntryAmino;
 }
@@ -234,7 +234,7 @@ export interface MetricRule {
     [key: string]: Long;
   };
 }
-export interface MetricRuleProtoType {
+export interface MetricRuleProtoMsg {
   typeUrl: "/google.api.MetricRule";
   value: Uint8Array;
 }
@@ -263,7 +263,7 @@ export interface MetricRuleAmino {
     [key: string]: string;
   };
 }
-export interface MetricRuleAminoType {
+export interface MetricRuleAminoMsg {
   type: "/google.api.MetricRule";
   value: MetricRuleAmino;
 }
@@ -282,7 +282,7 @@ export interface QuotaLimit_ValuesEntry {
   key: string;
   value: Long;
 }
-export interface QuotaLimit_ValuesEntryProtoType {
+export interface QuotaLimit_ValuesEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -290,7 +290,7 @@ export interface QuotaLimit_ValuesEntryAmino {
   key: string;
   value: string;
 }
-export interface QuotaLimit_ValuesEntryAminoType {
+export interface QuotaLimit_ValuesEntryAminoMsg {
   type: string;
   value: QuotaLimit_ValuesEntryAmino;
 }
@@ -405,7 +405,7 @@ export interface QuotaLimit {
    */
   displayName: string;
 }
-export interface QuotaLimitProtoType {
+export interface QuotaLimitProtoMsg {
   typeUrl: "/google.api.QuotaLimit";
   value: Uint8Array;
 }
@@ -516,7 +516,7 @@ export interface QuotaLimitAmino {
    */
   display_name: string;
 }
-export interface QuotaLimitAminoType {
+export interface QuotaLimitAminoMsg {
   type: "/google.api.QuotaLimit";
   value: QuotaLimitAmino;
 }
@@ -669,6 +669,25 @@ export const Quota = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaAminoMsg): Quota {
+    return Quota.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaProtoMsg): Quota {
+    return Quota.decode(message.value);
+  },
+
+  toProto(message: Quota): Uint8Array {
+    return Quota.encode(message).finish();
+  },
+
+  toProtoMsg(message: Quota): QuotaProtoMsg {
+    return {
+      typeUrl: "/google.api.Quota",
+      value: Quota.encode(message).finish()
+    };
   }
 
 };
@@ -766,6 +785,18 @@ export const MetricRule_MetricCostsEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
+    return MetricRule_MetricCostsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg): MetricRule_MetricCostsEntry {
+    return MetricRule_MetricCostsEntry.decode(message.value);
+  },
+
+  toProto(message: MetricRule_MetricCostsEntry): Uint8Array {
+    return MetricRule_MetricCostsEntry.encode(message).finish();
   }
 
 };
@@ -916,6 +947,25 @@ export const MetricRule = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
+    return MetricRule.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
+    return MetricRule.decode(message.value);
+  },
+
+  toProto(message: MetricRule): Uint8Array {
+    return MetricRule.encode(message).finish();
+  },
+
+  toProtoMsg(message: MetricRule): MetricRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricRule",
+      value: MetricRule.encode(message).finish()
+    };
   }
 
 };
@@ -1013,6 +1063,18 @@ export const QuotaLimit_ValuesEntry = {
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
+    return QuotaLimit_ValuesEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg): QuotaLimit_ValuesEntry {
+    return QuotaLimit_ValuesEntry.decode(message.value);
+  },
+
+  toProto(message: QuotaLimit_ValuesEntry): Uint8Array {
+    return QuotaLimit_ValuesEntry.encode(message).finish();
   }
 
 };
@@ -1292,6 +1354,25 @@ export const QuotaLimit = {
 
     obj.display_name = message.displayName;
     return obj;
+  },
+
+  fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {
+    return QuotaLimit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QuotaLimitProtoMsg): QuotaLimit {
+    return QuotaLimit.decode(message.value);
+  },
+
+  toProto(message: QuotaLimit): Uint8Array {
+    return QuotaLimit.encode(message).finish();
+  },
+
+  toProtoMsg(message: QuotaLimit): QuotaLimitProtoMsg {
+    return {
+      typeUrl: "/google.api.QuotaLimit",
+      value: QuotaLimit.encode(message).finish()
+    };
   }
 
 };

@@ -47,7 +47,7 @@ export interface Value {
   /** Type value. */
   typeValue?: string;
 }
-export interface ValueProtoType {
+export interface ValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Value";
   value: Uint8Array;
 }
@@ -95,7 +95,7 @@ export interface ValueAmino {
   /** Type value. */
   type_value?: string;
 }
-export interface ValueAminoType {
+export interface ValueAminoMsg {
   type: "/google.api.expr.v1alpha1.Value";
   value: ValueAmino;
 }
@@ -129,7 +129,7 @@ export interface EnumValue {
   /** The value of the enum. */
   value: number;
 }
-export interface EnumValueProtoType {
+export interface EnumValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.EnumValue";
   value: Uint8Array;
 }
@@ -142,7 +142,7 @@ export interface EnumValueAmino {
   /** The value of the enum. */
   value: number;
 }
-export interface EnumValueAminoType {
+export interface EnumValueAminoMsg {
   type: "/google.api.expr.v1alpha1.EnumValue";
   value: EnumValueAmino;
 }
@@ -163,7 +163,7 @@ export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
 }
-export interface ListValueProtoType {
+export interface ListValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ListValue";
   value: Uint8Array;
 }
@@ -178,7 +178,7 @@ export interface ListValueAmino {
   /** The ordered values in the list. */
   values: ValueAmino[];
 }
-export interface ListValueAminoType {
+export interface ListValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ListValue";
   value: ListValueAmino;
 }
@@ -208,7 +208,7 @@ export interface MapValue {
    */
   entries: MapValue_Entry[];
 }
-export interface MapValueProtoType {
+export interface MapValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.MapValue";
   value: Uint8Array;
 }
@@ -228,7 +228,7 @@ export interface MapValueAmino {
    */
   entries: MapValue_EntryAmino[];
 }
-export interface MapValueAminoType {
+export interface MapValueAminoMsg {
   type: "/google.api.expr.v1alpha1.MapValue";
   value: MapValueAmino;
 }
@@ -256,7 +256,7 @@ export interface MapValue_Entry {
   /** The value. */
   value?: Value;
 }
-export interface MapValue_EntryProtoType {
+export interface MapValue_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
   value: Uint8Array;
 }
@@ -274,7 +274,7 @@ export interface MapValue_EntryAmino {
   /** The value. */
   value?: ValueAmino;
 }
-export interface MapValue_EntryAminoType {
+export interface MapValue_EntryAminoMsg {
   type: "/google.api.expr.v1alpha1.Entry";
   value: MapValue_EntryAmino;
 }
@@ -540,6 +540,25 @@ export const Value = {
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     obj.type_value = message.typeValue;
     return obj;
+  },
+
+  fromAminoMsg(object: ValueAminoMsg): Value {
+    return Value.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValueProtoMsg): Value {
+    return Value.decode(message.value);
+  },
+
+  toProto(message: Value): Uint8Array {
+    return Value.encode(message).finish();
+  },
+
+  toProtoMsg(message: Value): ValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Value",
+      value: Value.encode(message).finish()
+    };
   }
 
 };
@@ -639,6 +658,25 @@ export const EnumValue = {
     obj.type = message.type;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
+    return EnumValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
+    return EnumValue.decode(message.value);
+  },
+
+  toProto(message: EnumValue): Uint8Array {
+    return EnumValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: EnumValue): EnumValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.EnumValue",
+      value: EnumValue.encode(message).finish()
+    };
   }
 
 };
@@ -740,6 +778,25 @@ export const ListValue = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ListValueAminoMsg): ListValue {
+    return ListValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListValueProtoMsg): ListValue {
+    return ListValue.decode(message.value);
+  },
+
+  toProto(message: ListValue): Uint8Array {
+    return ListValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListValue): ListValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ListValue",
+      value: ListValue.encode(message).finish()
+    };
   }
 
 };
@@ -841,6 +898,25 @@ export const MapValue = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: MapValueAminoMsg): MapValue {
+    return MapValue.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MapValueProtoMsg): MapValue {
+    return MapValue.decode(message.value);
+  },
+
+  toProto(message: MapValue): Uint8Array {
+    return MapValue.encode(message).finish();
+  },
+
+  toProtoMsg(message: MapValue): MapValueProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.MapValue",
+      value: MapValue.encode(message).finish()
+    };
   }
 
 };
@@ -940,6 +1016,25 @@ export const MapValue_Entry = {
     obj.key = message.key ? Value.toAmino(message.key) : undefined;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: MapValue_EntryAminoMsg): MapValue_Entry {
+    return MapValue_Entry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MapValue_EntryProtoMsg): MapValue_Entry {
+    return MapValue_Entry.decode(message.value);
+  },
+
+  toProto(message: MapValue_Entry): Uint8Array {
+    return MapValue_Entry.encode(message).finish();
+  },
+
+  toProtoMsg(message: MapValue_Entry): MapValue_EntryProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Entry",
+      value: MapValue_Entry.encode(message).finish()
+    };
   }
 
 };

@@ -13,7 +13,7 @@ export interface ParsedExpr {
   /** The source info derived from input that generated the parsed `expr`. */
   sourceInfo?: SourceInfo;
 }
-export interface ParsedExprProtoType {
+export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface ParsedExprAmino {
   /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoAmino;
 }
-export interface ParsedExprAminoType {
+export interface ParsedExprAminoMsg {
   type: "/google.api.expr.v1alpha1.ParsedExpr";
   value: ParsedExprAmino;
 }
@@ -83,7 +83,7 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
-export interface ExprProtoType {
+export interface ExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Expr";
   value: Uint8Array;
 }
@@ -134,7 +134,7 @@ export interface ExprAmino {
   /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionAmino;
 }
-export interface ExprAminoType {
+export interface ExprAminoMsg {
   type: "/google.api.expr.v1alpha1.Expr";
   value: ExprAmino;
 }
@@ -177,7 +177,7 @@ export interface Expr_Ident {
    */
   name: string;
 }
-export interface Expr_IdentProtoType {
+export interface Expr_IdentProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Ident";
   value: Uint8Array;
 }
@@ -192,7 +192,7 @@ export interface Expr_IdentAmino {
    */
   name: string;
 }
-export interface Expr_IdentAminoType {
+export interface Expr_IdentAminoMsg {
   type: "/google.api.expr.v1alpha1.Ident";
   value: Expr_IdentAmino;
 }
@@ -227,7 +227,7 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
-export interface Expr_SelectProtoType {
+export interface Expr_SelectProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Select";
   value: Uint8Array;
 }
@@ -257,7 +257,7 @@ export interface Expr_SelectAmino {
    */
   test_only: boolean;
 }
-export interface Expr_SelectAminoType {
+export interface Expr_SelectAminoMsg {
   type: "/google.api.expr.v1alpha1.Select";
   value: Expr_SelectAmino;
 }
@@ -287,7 +287,7 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
-export interface Expr_CallProtoType {
+export interface Expr_CallProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Call";
   value: Uint8Array;
 }
@@ -310,7 +310,7 @@ export interface Expr_CallAmino {
   /** The arguments. */
   args: ExprAmino[];
 }
-export interface Expr_CallAminoType {
+export interface Expr_CallAminoMsg {
   type: "/google.api.expr.v1alpha1.Call";
   value: Expr_CallAmino;
 }
@@ -336,7 +336,7 @@ export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
 }
-export interface Expr_CreateListProtoType {
+export interface Expr_CreateListProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CreateList";
   value: Uint8Array;
 }
@@ -351,7 +351,7 @@ export interface Expr_CreateListAmino {
   /** The elements part of the list. */
   elements: ExprAmino[];
 }
-export interface Expr_CreateListAminoType {
+export interface Expr_CreateListAminoMsg {
   type: "/google.api.expr.v1alpha1.CreateList";
   value: Expr_CreateListAmino;
 }
@@ -383,7 +383,7 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
-export interface Expr_CreateStructProtoType {
+export interface Expr_CreateStructProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
   value: Uint8Array;
 }
@@ -405,7 +405,7 @@ export interface Expr_CreateStructAmino {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntryAmino[];
 }
-export interface Expr_CreateStructAminoType {
+export interface Expr_CreateStructAminoMsg {
   type: "/google.api.expr.v1alpha1.CreateStruct";
   value: Expr_CreateStructAmino;
 }
@@ -440,7 +440,7 @@ export interface Expr_CreateStruct_Entry {
   /** Required. The value assigned to the key. */
   value?: Expr;
 }
-export interface Expr_CreateStruct_EntryProtoType {
+export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
   value: Uint8Array;
 }
@@ -463,7 +463,7 @@ export interface Expr_CreateStruct_EntryAmino {
   /** Required. The value assigned to the key. */
   value?: ExprAmino;
 }
-export interface Expr_CreateStruct_EntryAminoType {
+export interface Expr_CreateStruct_EntryAminoMsg {
   type: "/google.api.expr.v1alpha1.Entry";
   value: Expr_CreateStruct_EntryAmino;
 }
@@ -539,7 +539,7 @@ export interface Expr_Comprehension {
    */
   result?: Expr;
 }
-export interface Expr_ComprehensionProtoType {
+export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension";
   value: Uint8Array;
 }
@@ -607,7 +607,7 @@ export interface Expr_ComprehensionAmino {
    */
   result?: ExprAmino;
 }
-export interface Expr_ComprehensionAminoType {
+export interface Expr_ComprehensionAminoMsg {
   type: "/google.api.expr.v1alpha1.Comprehension";
   value: Expr_ComprehensionAmino;
 }
@@ -705,7 +705,7 @@ export interface Constant {
   /** @deprecated */
   timestampValue?: Date;
 }
-export interface ConstantProtoType {
+export interface ConstantProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Constant";
   value: Uint8Array;
 }
@@ -765,7 +765,7 @@ export interface ConstantAmino {
   /** @deprecated */
   timestamp_value?: Date;
 }
-export interface ConstantAminoType {
+export interface ConstantAminoMsg {
   type: "/google.api.expr.v1alpha1.Constant";
   value: ConstantAmino;
 }
@@ -804,7 +804,7 @@ export interface SourceInfo_PositionsEntry {
   key: Long;
   value: number;
 }
-export interface SourceInfo_PositionsEntryProtoType {
+export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -812,7 +812,7 @@ export interface SourceInfo_PositionsEntryAmino {
   key: string;
   value: number;
 }
-export interface SourceInfo_PositionsEntryAminoType {
+export interface SourceInfo_PositionsEntryAminoMsg {
   type: string;
   value: SourceInfo_PositionsEntryAmino;
 }
@@ -824,7 +824,7 @@ export interface SourceInfo_MacroCallsEntry {
   key: Long;
   value?: Expr;
 }
-export interface SourceInfo_MacroCallsEntryProtoType {
+export interface SourceInfo_MacroCallsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
@@ -832,7 +832,7 @@ export interface SourceInfo_MacroCallsEntryAmino {
   key: string;
   value?: ExprAmino;
 }
-export interface SourceInfo_MacroCallsEntryAminoType {
+export interface SourceInfo_MacroCallsEntryAminoMsg {
   type: string;
   value: SourceInfo_MacroCallsEntryAmino;
 }
@@ -887,7 +887,7 @@ export interface SourceInfo {
     [key: Long]: Expr;
   };
 }
-export interface SourceInfoProtoType {
+export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
   value: Uint8Array;
 }
@@ -938,7 +938,7 @@ export interface SourceInfoAmino {
     [key: string]: ExprAmino;
   };
 }
-export interface SourceInfoAminoType {
+export interface SourceInfoAminoMsg {
   type: "/google.api.expr.v1alpha1.SourceInfo";
   value: SourceInfoAmino;
 }
@@ -976,7 +976,7 @@ export interface SourcePosition {
    */
   column: number;
 }
-export interface SourcePositionProtoType {
+export interface SourcePositionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.SourcePosition";
   value: Uint8Array;
 }
@@ -1001,7 +1001,7 @@ export interface SourcePositionAmino {
    */
   column: number;
 }
-export interface SourcePositionAminoType {
+export interface SourcePositionAminoMsg {
   type: "/google.api.expr.v1alpha1.SourcePosition";
   value: SourcePositionAmino;
 }
@@ -1109,6 +1109,25 @@ export const ParsedExpr = {
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
+    return ParsedExpr.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
+    return ParsedExpr.decode(message.value);
+  },
+
+  toProto(message: ParsedExpr): Uint8Array {
+    return ParsedExpr.encode(message).finish();
+  },
+
+  toProtoMsg(message: ParsedExpr): ParsedExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
+      value: ParsedExpr.encode(message).finish()
+    };
   }
 
 };
@@ -1304,6 +1323,25 @@ export const Expr = {
     obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined;
     obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ExprAminoMsg): Expr {
+    return Expr.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ExprProtoMsg): Expr {
+    return Expr.decode(message.value);
+  },
+
+  toProto(message: Expr): Uint8Array {
+    return Expr.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr): ExprProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Expr",
+      value: Expr.encode(message).finish()
+    };
   }
 
 };
@@ -1387,6 +1425,25 @@ export const Expr_Ident = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
+    return Expr_Ident.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
+    return Expr_Ident.decode(message.value);
+  },
+
+  toProto(message: Expr_Ident): Uint8Array {
+    return Expr_Ident.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_Ident): Expr_IdentProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Ident",
+      value: Expr_Ident.encode(message).finish()
+    };
   }
 
 };
@@ -1502,6 +1559,25 @@ export const Expr_Select = {
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
+    return Expr_Select.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
+    return Expr_Select.decode(message.value);
+  },
+
+  toProto(message: Expr_Select): Uint8Array {
+    return Expr_Select.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_Select): Expr_SelectProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Select",
+      value: Expr_Select.encode(message).finish()
+    };
   }
 
 };
@@ -1635,6 +1711,25 @@ export const Expr_Call = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
+    return Expr_Call.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
+    return Expr_Call.decode(message.value);
+  },
+
+  toProto(message: Expr_Call): Uint8Array {
+    return Expr_Call.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_Call): Expr_CallProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Call",
+      value: Expr_Call.encode(message).finish()
+    };
   }
 
 };
@@ -1736,6 +1831,25 @@ export const Expr_CreateList = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
+    return Expr_CreateList.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
+    return Expr_CreateList.decode(message.value);
+  },
+
+  toProto(message: Expr_CreateList): Uint8Array {
+    return Expr_CreateList.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_CreateList): Expr_CreateListProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CreateList",
+      value: Expr_CreateList.encode(message).finish()
+    };
   }
 
 };
@@ -1853,6 +1967,25 @@ export const Expr_CreateStruct = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
+    return Expr_CreateStruct.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
+    return Expr_CreateStruct.decode(message.value);
+  },
+
+  toProto(message: Expr_CreateStruct): Uint8Array {
+    return Expr_CreateStruct.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_CreateStruct): Expr_CreateStructProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
+      value: Expr_CreateStruct.encode(message).finish()
+    };
   }
 
 };
@@ -1984,6 +2117,25 @@ export const Expr_CreateStruct_Entry = {
     obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.decode(message.value);
+  },
+
+  toProto(message: Expr_CreateStruct_Entry): Uint8Array {
+    return Expr_CreateStruct_Entry.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Entry",
+      value: Expr_CreateStruct_Entry.encode(message).finish()
+    };
   }
 
 };
@@ -2163,6 +2315,25 @@ export const Expr_Comprehension = {
     obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
     obj.result = message.result ? Expr.toAmino(message.result) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
+    return Expr_Comprehension.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
+    return Expr_Comprehension.decode(message.value);
+  },
+
+  toProto(message: Expr_Comprehension): Uint8Array {
+    return Expr_Comprehension.encode(message).finish();
+  },
+
+  toProtoMsg(message: Expr_Comprehension): Expr_ComprehensionProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Comprehension",
+      value: Expr_Comprehension.encode(message).finish()
+    };
   }
 
 };
@@ -2374,6 +2545,25 @@ export const Constant = {
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(message.timestampValue) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ConstantAminoMsg): Constant {
+    return Constant.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ConstantProtoMsg): Constant {
+    return Constant.decode(message.value);
+  },
+
+  toProto(message: Constant): Uint8Array {
+    return Constant.encode(message).finish();
+  },
+
+  toProtoMsg(message: Constant): ConstantProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Constant",
+      value: Constant.encode(message).finish()
+    };
   }
 
 };
@@ -2471,6 +2661,18 @@ export const SourceInfo_PositionsEntry = {
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value;
     return obj;
+  },
+
+  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.decode(message.value);
+  },
+
+  toProto(message: SourceInfo_PositionsEntry): Uint8Array {
+    return SourceInfo_PositionsEntry.encode(message).finish();
   }
 
 };
@@ -2568,6 +2770,18 @@ export const SourceInfo_MacroCallsEntry = {
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: SourceInfo_MacroCallsEntryAminoMsg): SourceInfo_MacroCallsEntry {
+    return SourceInfo_MacroCallsEntry.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourceInfo_MacroCallsEntryProtoMsg): SourceInfo_MacroCallsEntry {
+    return SourceInfo_MacroCallsEntry.decode(message.value);
+  },
+
+  toProto(message: SourceInfo_MacroCallsEntry): Uint8Array {
+    return SourceInfo_MacroCallsEntry.encode(message).finish();
   }
 
 };
@@ -2847,6 +3061,25 @@ export const SourceInfo = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 
 };
@@ -2978,6 +3211,25 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
+  },
+
+  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
+    return SourcePosition.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
+    return SourcePosition.decode(message.value);
+  },
+
+  toProto(message: SourcePosition): Uint8Array {
+    return SourcePosition.encode(message).finish();
+  },
+
+  toProtoMsg(message: SourcePosition): SourcePositionProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
+      value: SourcePosition.encode(message).finish()
+    };
   }
 
 };

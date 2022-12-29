@@ -29,7 +29,7 @@ export interface ClawbackVestingAccount {
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
 }
-export interface ClawbackVestingAccountProtoType {
+export interface ClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
   value: Uint8Array;
 }
@@ -59,7 +59,7 @@ export interface ClawbackVestingAccountAmino {
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vesting_periods: PeriodAmino[];
 }
-export interface ClawbackVestingAccountAminoType {
+export interface ClawbackVestingAccountAminoMsg {
   type: "/evmos.vesting.v1.ClawbackVestingAccount";
   value: ClawbackVestingAccountAmino;
 }
@@ -254,6 +254,25 @@ export const ClawbackVestingAccount = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
+    return ClawbackVestingAccount.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
+    return ClawbackVestingAccount.decode(message.value);
+  },
+
+  toProto(message: ClawbackVestingAccount): Uint8Array {
+    return ClawbackVestingAccount.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClawbackVestingAccount): ClawbackVestingAccountProtoMsg {
+    return {
+      typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount",
+      value: ClawbackVestingAccount.encode(message).finish()
+    };
   }
 
 };

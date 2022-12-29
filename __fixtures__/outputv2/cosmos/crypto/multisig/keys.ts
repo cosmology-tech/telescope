@@ -12,7 +12,7 @@ export interface LegacyAminoPubKey {
   threshold: number;
   publicKeys: Any[];
 }
-export interface LegacyAminoPubKeyProtoType {
+export interface LegacyAminoPubKeyProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey";
   value: Uint8Array;
 }
@@ -26,7 +26,7 @@ export interface LegacyAminoPubKeyAmino {
   threshold: number;
   public_keys: AnyAmino[];
 }
-export interface LegacyAminoPubKeyAminoType {
+export interface LegacyAminoPubKeyAminoMsg {
   type: "cosmos-sdk/LegacyAminoPubKey";
   value: LegacyAminoPubKeyAmino;
 }
@@ -155,6 +155,32 @@ export const LegacyAminoPubKey = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: LegacyAminoPubKeyAminoMsg): LegacyAminoPubKey {
+    return LegacyAminoPubKey.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyAminoMsg {
+    return {
+      type: "cosmos-sdk/LegacyAminoPubKey",
+      value: LegacyAminoPubKey.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg): LegacyAminoPubKey {
+    return LegacyAminoPubKey.decode(message.value);
+  },
+
+  toProto(message: LegacyAminoPubKey): Uint8Array {
+    return LegacyAminoPubKey.encode(message).finish();
+  },
+
+  toProtoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyProtoMsg {
+    return {
+      typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey",
+      value: LegacyAminoPubKey.encode(message).finish()
+    };
   }
 
 };

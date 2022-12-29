@@ -12,7 +12,7 @@ export interface GenesisState {
   distrInfo?: DistrInfo;
   poolToGauges?: PoolToGauges;
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
   value: Uint8Array;
 }
@@ -25,7 +25,7 @@ export interface GenesisStateAmino {
   distr_info?: DistrInfoAmino;
   pool_to_gauges?: PoolToGaugesAmino;
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "osmosis/poolincentives/genesis-state";
   value: GenesisStateAmino;
 }
@@ -184,6 +184,32 @@ export const GenesisState = {
     obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined;
     obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/poolincentives/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

@@ -71,7 +71,7 @@ export interface OrderID {
   gseq: number;
   oseq: number;
 }
-export interface OrderIDProtoType {
+export interface OrderIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderID";
   value: Uint8Array;
 }
@@ -83,7 +83,7 @@ export interface OrderIDAmino {
   gseq: number;
   oseq: number;
 }
-export interface OrderIDAminoType {
+export interface OrderIDAminoMsg {
   type: "/akash.market.v1beta2.OrderID";
   value: OrderIDAmino;
 }
@@ -103,7 +103,7 @@ export interface Order {
   spec?: GroupSpec;
   createdAt: Long;
 }
-export interface OrderProtoType {
+export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
   value: Uint8Array;
 }
@@ -115,7 +115,7 @@ export interface OrderAmino {
   spec?: GroupSpecAmino;
   created_at: string;
 }
-export interface OrderAminoType {
+export interface OrderAminoMsg {
   type: "/akash.market.v1beta2.Order";
   value: OrderAmino;
 }
@@ -136,7 +136,7 @@ export interface OrderFilters {
   oseq: number;
   state: string;
 }
-export interface OrderFiltersProtoType {
+export interface OrderFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderFilters";
   value: Uint8Array;
 }
@@ -149,7 +149,7 @@ export interface OrderFiltersAmino {
   oseq: number;
   state: string;
 }
-export interface OrderFiltersAminoType {
+export interface OrderFiltersAminoMsg {
   type: "/akash.market.v1beta2.OrderFilters";
   value: OrderFiltersAmino;
 }
@@ -290,6 +290,25 @@ export const OrderID = {
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
+  },
+
+  fromAminoMsg(object: OrderIDAminoMsg): OrderID {
+    return OrderID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OrderIDProtoMsg): OrderID {
+    return OrderID.decode(message.value);
+  },
+
+  toProto(message: OrderID): Uint8Array {
+    return OrderID.encode(message).finish();
+  },
+
+  toProtoMsg(message: OrderID): OrderIDProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.OrderID",
+      value: OrderID.encode(message).finish()
+    };
   }
 
 };
@@ -421,6 +440,25 @@ export const Order = {
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: OrderAminoMsg): Order {
+    return Order.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OrderProtoMsg): Order {
+    return Order.decode(message.value);
+  },
+
+  toProto(message: Order): Uint8Array {
+    return Order.encode(message).finish();
+  },
+
+  toProtoMsg(message: Order): OrderProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.Order",
+      value: Order.encode(message).finish()
+    };
   }
 
 };
@@ -568,6 +606,25 @@ export const OrderFilters = {
     obj.oseq = message.oseq;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {
+    return OrderFilters.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
+    return OrderFilters.decode(message.value);
+  },
+
+  toProto(message: OrderFilters): Uint8Array {
+    return OrderFilters.encode(message).finish();
+  },
+
+  toProtoMsg(message: OrderFilters): OrderFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.market.v1beta2.OrderFilters",
+      value: OrderFilters.encode(message).finish()
+    };
   }
 
 };

@@ -65,7 +65,7 @@ export interface EnableServiceRequest {
    */
   name: string;
 }
-export interface EnableServiceRequestProtoType {
+export interface EnableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
   value: Uint8Array;
 }
@@ -87,7 +87,7 @@ export interface EnableServiceRequestAmino {
    */
   name: string;
 }
-export interface EnableServiceRequestAminoType {
+export interface EnableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
   value: EnableServiceRequestAmino;
 }
@@ -110,7 +110,7 @@ export interface DisableServiceRequest {
    */
   name: string;
 }
-export interface DisableServiceRequestProtoType {
+export interface DisableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
   value: Uint8Array;
 }
@@ -128,7 +128,7 @@ export interface DisableServiceRequestAmino {
    */
   name: string;
 }
-export interface DisableServiceRequestAminoType {
+export interface DisableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
   value: DisableServiceRequestAmino;
 }
@@ -149,7 +149,7 @@ export interface GetServiceRequest {
    */
   name: string;
 }
-export interface GetServiceRequestProtoType {
+export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest";
   value: Uint8Array;
 }
@@ -165,7 +165,7 @@ export interface GetServiceRequestAmino {
    */
   name: string;
 }
-export interface GetServiceRequestAminoType {
+export interface GetServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetServiceRequest";
   value: GetServiceRequestAmino;
 }
@@ -205,7 +205,7 @@ export interface ListServicesRequest {
    */
   filter: string;
 }
-export interface ListServicesRequestProtoType {
+export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest";
   value: Uint8Array;
 }
@@ -240,7 +240,7 @@ export interface ListServicesRequestAmino {
    */
   filter: string;
 }
-export interface ListServicesRequestAminoType {
+export interface ListServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListServicesRequest";
   value: ListServicesRequestAmino;
 }
@@ -264,7 +264,7 @@ export interface ListServicesResponse {
    */
   nextPageToken: string;
 }
-export interface ListServicesResponseProtoType {
+export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse";
   value: Uint8Array;
 }
@@ -280,7 +280,7 @@ export interface ListServicesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListServicesResponseAminoType {
+export interface ListServicesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListServicesResponse";
   value: ListServicesResponseAmino;
 }
@@ -322,7 +322,7 @@ export interface BatchEnableServicesRequest {
    */
   serviceIds: string[];
 }
-export interface BatchEnableServicesRequestProtoType {
+export interface BatchEnableServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
   value: Uint8Array;
 }
@@ -358,7 +358,7 @@ export interface BatchEnableServicesRequestAmino {
    */
   service_ids: string[];
 }
-export interface BatchEnableServicesRequestAminoType {
+export interface BatchEnableServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
   value: BatchEnableServicesRequestAmino;
 }
@@ -393,7 +393,7 @@ export interface ListConsumerQuotaMetricsRequest {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface ListConsumerQuotaMetricsRequestProtoType {
+export interface ListConsumerQuotaMetricsRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
   value: Uint8Array;
 }
@@ -422,7 +422,7 @@ export interface ListConsumerQuotaMetricsRequestAmino {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface ListConsumerQuotaMetricsRequestAminoType {
+export interface ListConsumerQuotaMetricsRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
   value: ListConsumerQuotaMetricsRequestAmino;
 }
@@ -446,7 +446,7 @@ export interface ListConsumerQuotaMetricsResponse {
    */
   nextPageToken: string;
 }
-export interface ListConsumerQuotaMetricsResponseProtoType {
+export interface ListConsumerQuotaMetricsResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
   value: Uint8Array;
 }
@@ -462,7 +462,7 @@ export interface ListConsumerQuotaMetricsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListConsumerQuotaMetricsResponseAminoType {
+export interface ListConsumerQuotaMetricsResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
   value: ListConsumerQuotaMetricsResponseAmino;
 }
@@ -486,7 +486,7 @@ export interface GetConsumerQuotaMetricRequest {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface GetConsumerQuotaMetricRequestProtoType {
+export interface GetConsumerQuotaMetricRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
   value: Uint8Array;
 }
@@ -504,7 +504,7 @@ export interface GetConsumerQuotaMetricRequestAmino {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface GetConsumerQuotaMetricRequestAminoType {
+export interface GetConsumerQuotaMetricRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
   value: GetConsumerQuotaMetricRequestAmino;
 }
@@ -528,7 +528,7 @@ export interface GetConsumerQuotaLimitRequest {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface GetConsumerQuotaLimitRequestProtoType {
+export interface GetConsumerQuotaLimitRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
   value: Uint8Array;
 }
@@ -546,7 +546,7 @@ export interface GetConsumerQuotaLimitRequestAmino {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface GetConsumerQuotaLimitRequestAminoType {
+export interface GetConsumerQuotaLimitRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
   value: GetConsumerQuotaLimitRequestAmino;
 }
@@ -586,7 +586,7 @@ export interface CreateAdminOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface CreateAdminOverrideRequestProtoType {
+export interface CreateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
   value: Uint8Array;
 }
@@ -620,7 +620,7 @@ export interface CreateAdminOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface CreateAdminOverrideRequestAminoType {
+export interface CreateAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
   value: CreateAdminOverrideRequestAmino;
 }
@@ -670,7 +670,7 @@ export interface UpdateAdminOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface UpdateAdminOverrideRequestProtoType {
+export interface UpdateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
   value: Uint8Array;
 }
@@ -712,7 +712,7 @@ export interface UpdateAdminOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface UpdateAdminOverrideRequestAminoType {
+export interface UpdateAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
   value: UpdateAdminOverrideRequestAmino;
 }
@@ -751,7 +751,7 @@ export interface DeleteAdminOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface DeleteAdminOverrideRequestProtoType {
+export interface DeleteAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
   value: Uint8Array;
 }
@@ -781,7 +781,7 @@ export interface DeleteAdminOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface DeleteAdminOverrideRequestAminoType {
+export interface DeleteAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
   value: DeleteAdminOverrideRequestAmino;
 }
@@ -813,7 +813,7 @@ export interface ListAdminOverridesRequest {
    */
   pageToken: string;
 }
-export interface ListAdminOverridesRequestProtoType {
+export interface ListAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
   value: Uint8Array;
 }
@@ -838,7 +838,7 @@ export interface ListAdminOverridesRequestAmino {
    */
   page_token: string;
 }
-export interface ListAdminOverridesRequestAminoType {
+export interface ListAdminOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
   value: ListAdminOverridesRequestAmino;
 }
@@ -861,7 +861,7 @@ export interface ListAdminOverridesResponse {
    */
   nextPageToken: string;
 }
-export interface ListAdminOverridesResponseProtoType {
+export interface ListAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
   value: Uint8Array;
 }
@@ -877,7 +877,7 @@ export interface ListAdminOverridesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListAdminOverridesResponseAminoType {
+export interface ListAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
   value: ListAdminOverridesResponseAmino;
 }
@@ -893,7 +893,7 @@ export interface BatchCreateAdminOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
 }
-export interface BatchCreateAdminOverridesResponseProtoType {
+export interface BatchCreateAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
   value: Uint8Array;
 }
@@ -903,7 +903,7 @@ export interface BatchCreateAdminOverridesResponseAmino {
   /** The overrides that were created. */
   overrides: QuotaOverrideAmino[];
 }
-export interface BatchCreateAdminOverridesResponseAminoType {
+export interface BatchCreateAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
   value: BatchCreateAdminOverridesResponseAmino;
 }
@@ -941,7 +941,7 @@ export interface ImportAdminOverridesRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface ImportAdminOverridesRequestProtoType {
+export interface ImportAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
   value: Uint8Array;
 }
@@ -974,7 +974,7 @@ export interface ImportAdminOverridesRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface ImportAdminOverridesRequestAminoType {
+export interface ImportAdminOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
   value: ImportAdminOverridesRequestAmino;
 }
@@ -992,7 +992,7 @@ export interface ImportAdminOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
 }
-export interface ImportAdminOverridesResponseProtoType {
+export interface ImportAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
   value: Uint8Array;
 }
@@ -1002,7 +1002,7 @@ export interface ImportAdminOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverrideAmino[];
 }
-export interface ImportAdminOverridesResponseAminoType {
+export interface ImportAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
   value: ImportAdminOverridesResponseAmino;
 }
@@ -1018,7 +1018,7 @@ export interface ImportAdminOverridesResponseSDKType {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadata {}
-export interface ImportAdminOverridesMetadataProtoType {
+export interface ImportAdminOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
   value: Uint8Array;
 }
@@ -1029,7 +1029,7 @@ export interface ImportAdminOverridesMetadataProtoType {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadataAmino {}
-export interface ImportAdminOverridesMetadataAminoType {
+export interface ImportAdminOverridesMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
   value: ImportAdminOverridesMetadataAmino;
 }
@@ -1070,7 +1070,7 @@ export interface CreateConsumerOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface CreateConsumerOverrideRequestProtoType {
+export interface CreateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
   value: Uint8Array;
 }
@@ -1104,7 +1104,7 @@ export interface CreateConsumerOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface CreateConsumerOverrideRequestAminoType {
+export interface CreateConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
   value: CreateConsumerOverrideRequestAmino;
 }
@@ -1154,7 +1154,7 @@ export interface UpdateConsumerOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface UpdateConsumerOverrideRequestProtoType {
+export interface UpdateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
   value: Uint8Array;
 }
@@ -1196,7 +1196,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface UpdateConsumerOverrideRequestAminoType {
+export interface UpdateConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
   value: UpdateConsumerOverrideRequestAmino;
 }
@@ -1235,7 +1235,7 @@ export interface DeleteConsumerOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface DeleteConsumerOverrideRequestProtoType {
+export interface DeleteConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
   value: Uint8Array;
 }
@@ -1265,7 +1265,7 @@ export interface DeleteConsumerOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface DeleteConsumerOverrideRequestAminoType {
+export interface DeleteConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
   value: DeleteConsumerOverrideRequestAmino;
 }
@@ -1297,7 +1297,7 @@ export interface ListConsumerOverridesRequest {
    */
   pageToken: string;
 }
-export interface ListConsumerOverridesRequestProtoType {
+export interface ListConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
   value: Uint8Array;
 }
@@ -1322,7 +1322,7 @@ export interface ListConsumerOverridesRequestAmino {
    */
   page_token: string;
 }
-export interface ListConsumerOverridesRequestAminoType {
+export interface ListConsumerOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
   value: ListConsumerOverridesRequestAmino;
 }
@@ -1345,7 +1345,7 @@ export interface ListConsumerOverridesResponse {
    */
   nextPageToken: string;
 }
-export interface ListConsumerOverridesResponseProtoType {
+export interface ListConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
   value: Uint8Array;
 }
@@ -1361,7 +1361,7 @@ export interface ListConsumerOverridesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListConsumerOverridesResponseAminoType {
+export interface ListConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
   value: ListConsumerOverridesResponseAmino;
 }
@@ -1377,7 +1377,7 @@ export interface BatchCreateConsumerOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
 }
-export interface BatchCreateConsumerOverridesResponseProtoType {
+export interface BatchCreateConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
   value: Uint8Array;
 }
@@ -1387,7 +1387,7 @@ export interface BatchCreateConsumerOverridesResponseAmino {
   /** The overrides that were created. */
   overrides: QuotaOverrideAmino[];
 }
-export interface BatchCreateConsumerOverridesResponseAminoType {
+export interface BatchCreateConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
   value: BatchCreateConsumerOverridesResponseAmino;
 }
@@ -1425,7 +1425,7 @@ export interface ImportConsumerOverridesRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
-export interface ImportConsumerOverridesRequestProtoType {
+export interface ImportConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
   value: Uint8Array;
 }
@@ -1458,7 +1458,7 @@ export interface ImportConsumerOverridesRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface ImportConsumerOverridesRequestAminoType {
+export interface ImportConsumerOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
   value: ImportConsumerOverridesRequestAmino;
 }
@@ -1476,7 +1476,7 @@ export interface ImportConsumerOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
 }
-export interface ImportConsumerOverridesResponseProtoType {
+export interface ImportConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
   value: Uint8Array;
 }
@@ -1486,7 +1486,7 @@ export interface ImportConsumerOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverrideAmino[];
 }
-export interface ImportConsumerOverridesResponseAminoType {
+export interface ImportConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
   value: ImportConsumerOverridesResponseAmino;
 }
@@ -1502,7 +1502,7 @@ export interface ImportConsumerOverridesResponseSDKType {
  * of LRO returned by ImportConsumerOverrides.
  */
 export interface ImportConsumerOverridesMetadata {}
-export interface ImportConsumerOverridesMetadataProtoType {
+export interface ImportConsumerOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
   value: Uint8Array;
 }
@@ -1513,7 +1513,7 @@ export interface ImportConsumerOverridesMetadataProtoType {
  * of LRO returned by ImportConsumerOverrides.
  */
 export interface ImportConsumerOverridesMetadataAmino {}
-export interface ImportConsumerOverridesMetadataAminoType {
+export interface ImportConsumerOverridesMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
   value: ImportConsumerOverridesMetadataAmino;
 }
@@ -1530,7 +1530,7 @@ export interface ImportAdminQuotaPoliciesResponse {
   /** The policies that were created from the imported data. */
   policies: AdminQuotaPolicy[];
 }
-export interface ImportAdminQuotaPoliciesResponseProtoType {
+export interface ImportAdminQuotaPoliciesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
   value: Uint8Array;
 }
@@ -1540,7 +1540,7 @@ export interface ImportAdminQuotaPoliciesResponseAmino {
   /** The policies that were created from the imported data. */
   policies: AdminQuotaPolicyAmino[];
 }
-export interface ImportAdminQuotaPoliciesResponseAminoType {
+export interface ImportAdminQuotaPoliciesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
   value: ImportAdminQuotaPoliciesResponseAmino;
 }
@@ -1556,7 +1556,7 @@ export interface ImportAdminQuotaPoliciesResponseSDKType {
  * of LRO returned by ImportAdminQuotaPolicies.
  */
 export interface ImportAdminQuotaPoliciesMetadata {}
-export interface ImportAdminQuotaPoliciesMetadataProtoType {
+export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
   value: Uint8Array;
 }
@@ -1567,7 +1567,7 @@ export interface ImportAdminQuotaPoliciesMetadataProtoType {
  * of LRO returned by ImportAdminQuotaPolicies.
  */
 export interface ImportAdminQuotaPoliciesMetadataAmino {}
-export interface ImportAdminQuotaPoliciesMetadataAminoType {
+export interface ImportAdminQuotaPoliciesMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
   value: ImportAdminQuotaPoliciesMetadataAmino;
 }
@@ -1585,7 +1585,7 @@ export interface ImportAdminQuotaPoliciesMetadataSDKType {}
  * of LRO returned by CreateAdminQuotaPolicy.
  */
 export interface CreateAdminQuotaPolicyMetadata {}
-export interface CreateAdminQuotaPolicyMetadataProtoType {
+export interface CreateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
   value: Uint8Array;
 }
@@ -1596,7 +1596,7 @@ export interface CreateAdminQuotaPolicyMetadataProtoType {
  * of LRO returned by CreateAdminQuotaPolicy.
  */
 export interface CreateAdminQuotaPolicyMetadataAmino {}
-export interface CreateAdminQuotaPolicyMetadataAminoType {
+export interface CreateAdminQuotaPolicyMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
   value: CreateAdminQuotaPolicyMetadataAmino;
 }
@@ -1614,7 +1614,7 @@ export interface CreateAdminQuotaPolicyMetadataSDKType {}
  * of LRO returned by UpdateAdminQuotaPolicy.
  */
 export interface UpdateAdminQuotaPolicyMetadata {}
-export interface UpdateAdminQuotaPolicyMetadataProtoType {
+export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
   value: Uint8Array;
 }
@@ -1625,7 +1625,7 @@ export interface UpdateAdminQuotaPolicyMetadataProtoType {
  * of LRO returned by UpdateAdminQuotaPolicy.
  */
 export interface UpdateAdminQuotaPolicyMetadataAmino {}
-export interface UpdateAdminQuotaPolicyMetadataAminoType {
+export interface UpdateAdminQuotaPolicyMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
   value: UpdateAdminQuotaPolicyMetadataAmino;
 }
@@ -1643,7 +1643,7 @@ export interface UpdateAdminQuotaPolicyMetadataSDKType {}
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadata {}
-export interface DeleteAdminQuotaPolicyMetadataProtoType {
+export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
   value: Uint8Array;
 }
@@ -1654,7 +1654,7 @@ export interface DeleteAdminQuotaPolicyMetadataProtoType {
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadataAmino {}
-export interface DeleteAdminQuotaPolicyMetadataAminoType {
+export interface DeleteAdminQuotaPolicyMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
   value: DeleteAdminQuotaPolicyMetadataAmino;
 }
@@ -1679,7 +1679,7 @@ export interface GenerateServiceIdentityRequest {
    */
   parent: string;
 }
-export interface GenerateServiceIdentityRequestProtoType {
+export interface GenerateServiceIdentityRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
   value: Uint8Array;
 }
@@ -1697,7 +1697,7 @@ export interface GenerateServiceIdentityRequestAmino {
    */
   parent: string;
 }
-export interface GenerateServiceIdentityRequestAminoType {
+export interface GenerateServiceIdentityRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
   value: GenerateServiceIdentityRequestAmino;
 }
@@ -1719,7 +1719,7 @@ export interface GetServiceIdentityResponse {
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
-export interface GetServiceIdentityResponseProtoType {
+export interface GetServiceIdentityResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
   value: Uint8Array;
 }
@@ -1736,7 +1736,7 @@ export interface GetServiceIdentityResponseAmino {
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
-export interface GetServiceIdentityResponseAminoType {
+export interface GetServiceIdentityResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
   value: GetServiceIdentityResponseAmino;
 }
@@ -1749,14 +1749,14 @@ export interface GetServiceIdentityResponseSDKType {
 
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
-export interface GetServiceIdentityMetadataProtoType {
+export interface GetServiceIdentityMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
   value: Uint8Array;
 }
 
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadataAmino {}
-export interface GetServiceIdentityMetadataAminoType {
+export interface GetServiceIdentityMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
   value: GetServiceIdentityMetadataAmino;
 }
@@ -1843,6 +1843,25 @@ export const EnableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
+    return EnableServiceRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
+    return EnableServiceRequest.decode(message.value);
+  },
+
+  toProto(message: EnableServiceRequest): Uint8Array {
+    return EnableServiceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: EnableServiceRequest): EnableServiceRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
+      value: EnableServiceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1926,6 +1945,25 @@ export const DisableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
+    return DisableServiceRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
+    return DisableServiceRequest.decode(message.value);
+  },
+
+  toProto(message: DisableServiceRequest): Uint8Array {
+    return DisableServiceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DisableServiceRequest): DisableServiceRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
+      value: DisableServiceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2009,6 +2047,25 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
+    return GetServiceRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
+    return GetServiceRequest.decode(message.value);
+  },
+
+  toProto(message: GetServiceRequest): Uint8Array {
+    return GetServiceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetServiceRequest): GetServiceRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
+      value: GetServiceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2140,6 +2197,25 @@ export const ListServicesRequest = {
     obj.page_token = message.pageToken;
     obj.filter = message.filter;
     return obj;
+  },
+
+  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
+    return ListServicesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
+    return ListServicesRequest.decode(message.value);
+  },
+
+  toProto(message: ListServicesRequest): Uint8Array {
+    return ListServicesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListServicesRequest): ListServicesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
+      value: ListServicesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2257,6 +2333,25 @@ export const ListServicesResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
+    return ListServicesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
+    return ListServicesResponse.decode(message.value);
+  },
+
+  toProto(message: ListServicesResponse): Uint8Array {
+    return ListServicesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListServicesResponse): ListServicesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse",
+      value: ListServicesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2374,6 +2469,25 @@ export const BatchEnableServicesRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BatchEnableServicesRequestAminoMsg): BatchEnableServicesRequest {
+    return BatchEnableServicesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
+    return BatchEnableServicesRequest.decode(message.value);
+  },
+
+  toProto(message: BatchEnableServicesRequest): Uint8Array {
+    return BatchEnableServicesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: BatchEnableServicesRequest): BatchEnableServicesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
+      value: BatchEnableServicesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2505,6 +2619,25 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.page_token = message.pageToken;
     obj.view = message.view;
     return obj;
+  },
+
+  fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
+    return ListConsumerQuotaMetricsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg): ListConsumerQuotaMetricsRequest {
+    return ListConsumerQuotaMetricsRequest.decode(message.value);
+  },
+
+  toProto(message: ListConsumerQuotaMetricsRequest): Uint8Array {
+    return ListConsumerQuotaMetricsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
+      value: ListConsumerQuotaMetricsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2622,6 +2755,25 @@ export const ListConsumerQuotaMetricsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListConsumerQuotaMetricsResponseAminoMsg): ListConsumerQuotaMetricsResponse {
+    return ListConsumerQuotaMetricsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg): ListConsumerQuotaMetricsResponse {
+    return ListConsumerQuotaMetricsResponse.decode(message.value);
+  },
+
+  toProto(message: ListConsumerQuotaMetricsResponse): Uint8Array {
+    return ListConsumerQuotaMetricsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse",
+      value: ListConsumerQuotaMetricsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -2721,6 +2873,25 @@ export const GetConsumerQuotaMetricRequest = {
     obj.name = message.name;
     obj.view = message.view;
     return obj;
+  },
+
+  fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
+    return GetConsumerQuotaMetricRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg): GetConsumerQuotaMetricRequest {
+    return GetConsumerQuotaMetricRequest.decode(message.value);
+  },
+
+  toProto(message: GetConsumerQuotaMetricRequest): Uint8Array {
+    return GetConsumerQuotaMetricRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
+      value: GetConsumerQuotaMetricRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2820,6 +2991,25 @@ export const GetConsumerQuotaLimitRequest = {
     obj.name = message.name;
     obj.view = message.view;
     return obj;
+  },
+
+  fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
+    return GetConsumerQuotaLimitRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg): GetConsumerQuotaLimitRequest {
+    return GetConsumerQuotaLimitRequest.decode(message.value);
+  },
+
+  toProto(message: GetConsumerQuotaLimitRequest): Uint8Array {
+    return GetConsumerQuotaLimitRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
+      value: GetConsumerQuotaLimitRequest.encode(message).finish()
+    };
   }
 
 };
@@ -2981,6 +3171,25 @@ export const CreateAdminOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CreateAdminOverrideRequestAminoMsg): CreateAdminOverrideRequest {
+    return CreateAdminOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateAdminOverrideRequestProtoMsg): CreateAdminOverrideRequest {
+    return CreateAdminOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: CreateAdminOverrideRequest): Uint8Array {
+    return CreateAdminOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
+      value: CreateAdminOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3158,6 +3367,25 @@ export const UpdateAdminOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateAdminOverrideRequestAminoMsg): UpdateAdminOverrideRequest {
+    return UpdateAdminOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateAdminOverrideRequestProtoMsg): UpdateAdminOverrideRequest {
+    return UpdateAdminOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateAdminOverrideRequest): Uint8Array {
+    return UpdateAdminOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
+      value: UpdateAdminOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3303,6 +3531,25 @@ export const DeleteAdminOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteAdminOverrideRequestAminoMsg): DeleteAdminOverrideRequest {
+    return DeleteAdminOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteAdminOverrideRequestProtoMsg): DeleteAdminOverrideRequest {
+    return DeleteAdminOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteAdminOverrideRequest): Uint8Array {
+    return DeleteAdminOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
+      value: DeleteAdminOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3418,6 +3665,25 @@ export const ListAdminOverridesRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListAdminOverridesRequestAminoMsg): ListAdminOverridesRequest {
+    return ListAdminOverridesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListAdminOverridesRequestProtoMsg): ListAdminOverridesRequest {
+    return ListAdminOverridesRequest.decode(message.value);
+  },
+
+  toProto(message: ListAdminOverridesRequest): Uint8Array {
+    return ListAdminOverridesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListAdminOverridesRequest): ListAdminOverridesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
+      value: ListAdminOverridesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3535,6 +3801,25 @@ export const ListAdminOverridesResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListAdminOverridesResponseAminoMsg): ListAdminOverridesResponse {
+    return ListAdminOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListAdminOverridesResponseProtoMsg): ListAdminOverridesResponse {
+    return ListAdminOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: ListAdminOverridesResponse): Uint8Array {
+    return ListAdminOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListAdminOverridesResponse): ListAdminOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse",
+      value: ListAdminOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3636,6 +3921,25 @@ export const BatchCreateAdminOverridesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BatchCreateAdminOverridesResponseAminoMsg): BatchCreateAdminOverridesResponse {
+    return BatchCreateAdminOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BatchCreateAdminOverridesResponseProtoMsg): BatchCreateAdminOverridesResponse {
+    return BatchCreateAdminOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: BatchCreateAdminOverridesResponse): Uint8Array {
+    return BatchCreateAdminOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse",
+      value: BatchCreateAdminOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3797,6 +4101,25 @@ export const ImportAdminOverridesRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ImportAdminOverridesRequestAminoMsg): ImportAdminOverridesRequest {
+    return ImportAdminOverridesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportAdminOverridesRequestProtoMsg): ImportAdminOverridesRequest {
+    return ImportAdminOverridesRequest.decode(message.value);
+  },
+
+  toProto(message: ImportAdminOverridesRequest): Uint8Array {
+    return ImportAdminOverridesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
+      value: ImportAdminOverridesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -3898,6 +4221,25 @@ export const ImportAdminOverridesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ImportAdminOverridesResponseAminoMsg): ImportAdminOverridesResponse {
+    return ImportAdminOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportAdminOverridesResponseProtoMsg): ImportAdminOverridesResponse {
+    return ImportAdminOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: ImportAdminOverridesResponse): Uint8Array {
+    return ImportAdminOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse",
+      value: ImportAdminOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -3961,6 +4303,25 @@ export const ImportAdminOverridesMetadata = {
   toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: ImportAdminOverridesMetadataAminoMsg): ImportAdminOverridesMetadata {
+    return ImportAdminOverridesMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportAdminOverridesMetadataProtoMsg): ImportAdminOverridesMetadata {
+    return ImportAdminOverridesMetadata.decode(message.value);
+  },
+
+  toProto(message: ImportAdminOverridesMetadata): Uint8Array {
+    return ImportAdminOverridesMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata",
+      value: ImportAdminOverridesMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -4122,6 +4483,25 @@ export const CreateConsumerOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: CreateConsumerOverrideRequestAminoMsg): CreateConsumerOverrideRequest {
+    return CreateConsumerOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateConsumerOverrideRequestProtoMsg): CreateConsumerOverrideRequest {
+    return CreateConsumerOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: CreateConsumerOverrideRequest): Uint8Array {
+    return CreateConsumerOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
+      value: CreateConsumerOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4299,6 +4679,25 @@ export const UpdateConsumerOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateConsumerOverrideRequestAminoMsg): UpdateConsumerOverrideRequest {
+    return UpdateConsumerOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateConsumerOverrideRequestProtoMsg): UpdateConsumerOverrideRequest {
+    return UpdateConsumerOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: UpdateConsumerOverrideRequest): Uint8Array {
+    return UpdateConsumerOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
+      value: UpdateConsumerOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4444,6 +4843,25 @@ export const DeleteConsumerOverrideRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteConsumerOverrideRequestAminoMsg): DeleteConsumerOverrideRequest {
+    return DeleteConsumerOverrideRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteConsumerOverrideRequestProtoMsg): DeleteConsumerOverrideRequest {
+    return DeleteConsumerOverrideRequest.decode(message.value);
+  },
+
+  toProto(message: DeleteConsumerOverrideRequest): Uint8Array {
+    return DeleteConsumerOverrideRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
+      value: DeleteConsumerOverrideRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4559,6 +4977,25 @@ export const ListConsumerOverridesRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListConsumerOverridesRequestAminoMsg): ListConsumerOverridesRequest {
+    return ListConsumerOverridesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg): ListConsumerOverridesRequest {
+    return ListConsumerOverridesRequest.decode(message.value);
+  },
+
+  toProto(message: ListConsumerOverridesRequest): Uint8Array {
+    return ListConsumerOverridesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
+      value: ListConsumerOverridesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -4676,6 +5113,25 @@ export const ListConsumerOverridesResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromAminoMsg(object: ListConsumerOverridesResponseAminoMsg): ListConsumerOverridesResponse {
+    return ListConsumerOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg): ListConsumerOverridesResponse {
+    return ListConsumerOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: ListConsumerOverridesResponse): Uint8Array {
+    return ListConsumerOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse",
+      value: ListConsumerOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -4777,6 +5233,25 @@ export const BatchCreateConsumerOverridesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: BatchCreateConsumerOverridesResponseAminoMsg): BatchCreateConsumerOverridesResponse {
+    return BatchCreateConsumerOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BatchCreateConsumerOverridesResponseProtoMsg): BatchCreateConsumerOverridesResponse {
+    return BatchCreateConsumerOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: BatchCreateConsumerOverridesResponse): Uint8Array {
+    return BatchCreateConsumerOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse",
+      value: BatchCreateConsumerOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -4938,6 +5413,25 @@ export const ImportConsumerOverridesRequest = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ImportConsumerOverridesRequestAminoMsg): ImportConsumerOverridesRequest {
+    return ImportConsumerOverridesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportConsumerOverridesRequestProtoMsg): ImportConsumerOverridesRequest {
+    return ImportConsumerOverridesRequest.decode(message.value);
+  },
+
+  toProto(message: ImportConsumerOverridesRequest): Uint8Array {
+    return ImportConsumerOverridesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
+      value: ImportConsumerOverridesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5039,6 +5533,25 @@ export const ImportConsumerOverridesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ImportConsumerOverridesResponseAminoMsg): ImportConsumerOverridesResponse {
+    return ImportConsumerOverridesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportConsumerOverridesResponseProtoMsg): ImportConsumerOverridesResponse {
+    return ImportConsumerOverridesResponse.decode(message.value);
+  },
+
+  toProto(message: ImportConsumerOverridesResponse): Uint8Array {
+    return ImportConsumerOverridesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse",
+      value: ImportConsumerOverridesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -5102,6 +5615,25 @@ export const ImportConsumerOverridesMetadata = {
   toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: ImportConsumerOverridesMetadataAminoMsg): ImportConsumerOverridesMetadata {
+    return ImportConsumerOverridesMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportConsumerOverridesMetadataProtoMsg): ImportConsumerOverridesMetadata {
+    return ImportConsumerOverridesMetadata.decode(message.value);
+  },
+
+  toProto(message: ImportConsumerOverridesMetadata): Uint8Array {
+    return ImportConsumerOverridesMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata",
+      value: ImportConsumerOverridesMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -5203,6 +5735,25 @@ export const ImportAdminQuotaPoliciesResponse = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ImportAdminQuotaPoliciesResponseAminoMsg): ImportAdminQuotaPoliciesResponse {
+    return ImportAdminQuotaPoliciesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportAdminQuotaPoliciesResponseProtoMsg): ImportAdminQuotaPoliciesResponse {
+    return ImportAdminQuotaPoliciesResponse.decode(message.value);
+  },
+
+  toProto(message: ImportAdminQuotaPoliciesResponse): Uint8Array {
+    return ImportAdminQuotaPoliciesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse",
+      value: ImportAdminQuotaPoliciesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -5266,6 +5817,25 @@ export const ImportAdminQuotaPoliciesMetadata = {
   toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: ImportAdminQuotaPoliciesMetadataAminoMsg): ImportAdminQuotaPoliciesMetadata {
+    return ImportAdminQuotaPoliciesMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ImportAdminQuotaPoliciesMetadataProtoMsg): ImportAdminQuotaPoliciesMetadata {
+    return ImportAdminQuotaPoliciesMetadata.decode(message.value);
+  },
+
+  toProto(message: ImportAdminQuotaPoliciesMetadata): Uint8Array {
+    return ImportAdminQuotaPoliciesMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata",
+      value: ImportAdminQuotaPoliciesMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -5329,6 +5899,25 @@ export const CreateAdminQuotaPolicyMetadata = {
   toAmino(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: CreateAdminQuotaPolicyMetadataAminoMsg): CreateAdminQuotaPolicyMetadata {
+    return CreateAdminQuotaPolicyMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreateAdminQuotaPolicyMetadataProtoMsg): CreateAdminQuotaPolicyMetadata {
+    return CreateAdminQuotaPolicyMetadata.decode(message.value);
+  },
+
+  toProto(message: CreateAdminQuotaPolicyMetadata): Uint8Array {
+    return CreateAdminQuotaPolicyMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata",
+      value: CreateAdminQuotaPolicyMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -5392,6 +5981,25 @@ export const UpdateAdminQuotaPolicyMetadata = {
   toAmino(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: UpdateAdminQuotaPolicyMetadataAminoMsg): UpdateAdminQuotaPolicyMetadata {
+    return UpdateAdminQuotaPolicyMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: UpdateAdminQuotaPolicyMetadataProtoMsg): UpdateAdminQuotaPolicyMetadata {
+    return UpdateAdminQuotaPolicyMetadata.decode(message.value);
+  },
+
+  toProto(message: UpdateAdminQuotaPolicyMetadata): Uint8Array {
+    return UpdateAdminQuotaPolicyMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata",
+      value: UpdateAdminQuotaPolicyMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -5455,6 +6063,25 @@ export const DeleteAdminQuotaPolicyMetadata = {
   toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: DeleteAdminQuotaPolicyMetadataAminoMsg): DeleteAdminQuotaPolicyMetadata {
+    return DeleteAdminQuotaPolicyMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DeleteAdminQuotaPolicyMetadataProtoMsg): DeleteAdminQuotaPolicyMetadata {
+    return DeleteAdminQuotaPolicyMetadata.decode(message.value);
+  },
+
+  toProto(message: DeleteAdminQuotaPolicyMetadata): Uint8Array {
+    return DeleteAdminQuotaPolicyMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata",
+      value: DeleteAdminQuotaPolicyMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -5538,6 +6165,25 @@ export const GenerateServiceIdentityRequest = {
     const obj: any = {};
     obj.parent = message.parent;
     return obj;
+  },
+
+  fromAminoMsg(object: GenerateServiceIdentityRequestAminoMsg): GenerateServiceIdentityRequest {
+    return GenerateServiceIdentityRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg): GenerateServiceIdentityRequest {
+    return GenerateServiceIdentityRequest.decode(message.value);
+  },
+
+  toProto(message: GenerateServiceIdentityRequest): Uint8Array {
+    return GenerateServiceIdentityRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
+      value: GenerateServiceIdentityRequest.encode(message).finish()
+    };
   }
 
 };
@@ -5637,6 +6283,25 @@ export const GetServiceIdentityResponse = {
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
     obj.state = message.state;
     return obj;
+  },
+
+  fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {
+    return GetServiceIdentityResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetServiceIdentityResponseProtoMsg): GetServiceIdentityResponse {
+    return GetServiceIdentityResponse.decode(message.value);
+  },
+
+  toProto(message: GetServiceIdentityResponse): Uint8Array {
+    return GetServiceIdentityResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetServiceIdentityResponse): GetServiceIdentityResponseProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse",
+      value: GetServiceIdentityResponse.encode(message).finish()
+    };
   }
 
 };
@@ -5700,6 +6365,25 @@ export const GetServiceIdentityMetadata = {
   toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: GetServiceIdentityMetadataAminoMsg): GetServiceIdentityMetadata {
+    return GetServiceIdentityMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GetServiceIdentityMetadataProtoMsg): GetServiceIdentityMetadata {
+    return GetServiceIdentityMetadata.decode(message.value);
+  },
+
+  toProto(message: GetServiceIdentityMetadata): Uint8Array {
+    return GetServiceIdentityMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: GetServiceIdentityMetadata): GetServiceIdentityMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata",
+      value: GetServiceIdentityMetadata.encode(message).finish()
+    };
   }
 
 };

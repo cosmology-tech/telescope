@@ -11,7 +11,7 @@ export interface GenesisState {
   /** registered token pairs */
   tokenPairs: TokenPair[];
 }
-export interface GenesisStateProtoType {
+export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.erc20.v1.GenesisState";
   value: Uint8Array;
 }
@@ -24,7 +24,7 @@ export interface GenesisStateAmino {
   /** registered token pairs */
   token_pairs: TokenPairAmino[];
 }
-export interface GenesisStateAminoType {
+export interface GenesisStateAminoMsg {
   type: "/evmos.erc20.v1.GenesisState";
   value: GenesisStateAmino;
 }
@@ -47,7 +47,7 @@ export interface Params {
    */
   enableEvmHook: boolean;
 }
-export interface ParamsProtoType {
+export interface ParamsProtoMsg {
   typeUrl: "/evmos.erc20.v1.Params";
   value: Uint8Array;
 }
@@ -64,7 +64,7 @@ export interface ParamsAmino {
    */
   enable_evm_hook: boolean;
 }
-export interface ParamsAminoType {
+export interface ParamsAminoMsg {
   type: "/evmos.erc20.v1.Params";
   value: ParamsAmino;
 }
@@ -188,6 +188,25 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -287,6 +306,25 @@ export const Params = {
     obj.enable_erc20 = message.enableErc20;
     obj.enable_evm_hook = message.enableEvmHook;
     return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.erc20.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };

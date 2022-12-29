@@ -20,7 +20,7 @@ export interface GenericAuthorization {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
-export interface GenericAuthorizationProtoType {
+export interface GenericAuthorizationProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization";
   value: Uint8Array;
 }
@@ -33,7 +33,7 @@ export interface GenericAuthorizationAmino {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
-export interface GenericAuthorizationAminoType {
+export interface GenericAuthorizationAminoMsg {
   type: "cosmos-sdk/GenericAuthorization";
   value: GenericAuthorizationAmino;
 }
@@ -60,7 +60,7 @@ export interface Grant {
    */
   expiration?: Date;
 }
-export interface GrantProtoType {
+export interface GrantProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.Grant";
   value: Uint8Array;
 }
@@ -79,7 +79,7 @@ export interface GrantAmino {
    */
   expiration?: Date;
 }
-export interface GrantAminoType {
+export interface GrantAminoMsg {
   type: "cosmos-sdk/Grant";
   value: GrantAmino;
 }
@@ -103,7 +103,7 @@ export interface GrantAuthorization {
   authorization?: (GenericAuthorization & DepositDeploymentAuthorization1 & DepositDeploymentAuthorization2 & SendAuthorization & StakeAuthorization & Any) | undefined;
   expiration?: Date;
 }
-export interface GrantAuthorizationProtoType {
+export interface GrantAuthorizationProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
   value: Uint8Array;
 }
@@ -118,7 +118,7 @@ export interface GrantAuthorizationAmino {
   authorization?: AnyAmino;
   expiration?: Date;
 }
-export interface GrantAuthorizationAminoType {
+export interface GrantAuthorizationAminoMsg {
   type: "cosmos-sdk/GrantAuthorization";
   value: GrantAuthorizationAmino;
 }
@@ -139,7 +139,7 @@ export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msgTypeUrls: string[];
 }
-export interface GrantQueueItemProtoType {
+export interface GrantQueueItemProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem";
   value: Uint8Array;
 }
@@ -149,7 +149,7 @@ export interface GrantQueueItemAmino {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msg_type_urls: string[];
 }
-export interface GrantQueueItemAminoType {
+export interface GrantQueueItemAminoMsg {
   type: "cosmos-sdk/GrantQueueItem";
   value: GrantQueueItemAmino;
 }
@@ -239,6 +239,32 @@ export const GenericAuthorization = {
     const obj: any = {};
     obj.msg = message.msg;
     return obj;
+  },
+
+  fromAminoMsg(object: GenericAuthorizationAminoMsg): GenericAuthorization {
+    return GenericAuthorization.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenericAuthorization): GenericAuthorizationAminoMsg {
+    return {
+      type: "cosmos-sdk/GenericAuthorization",
+      value: GenericAuthorization.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenericAuthorizationProtoMsg): GenericAuthorization {
+    return GenericAuthorization.decode(message.value);
+  },
+
+  toProto(message: GenericAuthorization): Uint8Array {
+    return GenericAuthorization.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenericAuthorization): GenericAuthorizationProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+      value: GenericAuthorization.encode(message).finish()
+    };
   }
 
 };
@@ -339,6 +365,32 @@ export const Grant = {
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GrantAminoMsg): Grant {
+    return Grant.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Grant): GrantAminoMsg {
+    return {
+      type: "cosmos-sdk/Grant",
+      value: Grant.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GrantProtoMsg): Grant {
+    return Grant.decode(message.value);
+  },
+
+  toProto(message: Grant): Uint8Array {
+    return Grant.encode(message).finish();
+  },
+
+  toProtoMsg(message: Grant): GrantProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.Grant",
+      value: Grant.encode(message).finish()
+    };
   }
 
 };
@@ -471,6 +523,32 @@ export const GrantAuthorization = {
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: GrantAuthorizationAminoMsg): GrantAuthorization {
+    return GrantAuthorization.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GrantAuthorization): GrantAuthorizationAminoMsg {
+    return {
+      type: "cosmos-sdk/GrantAuthorization",
+      value: GrantAuthorization.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GrantAuthorizationProtoMsg): GrantAuthorization {
+    return GrantAuthorization.decode(message.value);
+  },
+
+  toProto(message: GrantAuthorization): Uint8Array {
+    return GrantAuthorization.encode(message).finish();
+  },
+
+  toProtoMsg(message: GrantAuthorization): GrantAuthorizationProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization",
+      value: GrantAuthorization.encode(message).finish()
+    };
   }
 
 };
@@ -573,6 +651,32 @@ export const GrantQueueItem = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: GrantQueueItemAminoMsg): GrantQueueItem {
+    return GrantQueueItem.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GrantQueueItem): GrantQueueItemAminoMsg {
+    return {
+      type: "cosmos-sdk/GrantQueueItem",
+      value: GrantQueueItem.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GrantQueueItemProtoMsg): GrantQueueItem {
+    return GrantQueueItem.decode(message.value);
+  },
+
+  toProto(message: GrantQueueItem): Uint8Array {
+    return GrantQueueItem.encode(message).finish();
+  },
+
+  toProtoMsg(message: GrantQueueItem): GrantQueueItemProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem",
+      value: GrantQueueItem.encode(message).finish()
+    };
   }
 
 };

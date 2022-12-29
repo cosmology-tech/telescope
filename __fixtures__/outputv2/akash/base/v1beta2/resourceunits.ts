@@ -14,7 +14,7 @@ export interface ResourceUnits {
   storage: Storage[];
   endpoints: Endpoint[];
 }
-export interface ResourceUnitsProtoType {
+export interface ResourceUnitsProtoMsg {
   typeUrl: "/akash.base.v1beta2.ResourceUnits";
   value: Uint8Array;
 }
@@ -29,7 +29,7 @@ export interface ResourceUnitsAmino {
   storage: StorageAmino[];
   endpoints: EndpointAmino[];
 }
-export interface ResourceUnitsAminoType {
+export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta2.ResourceUnits";
   value: ResourceUnitsAmino;
 }
@@ -205,6 +205,25 @@ export const ResourceUnits = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
+    return ResourceUnits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
+    return ResourceUnits.decode(message.value);
+  },
+
+  toProto(message: ResourceUnits): Uint8Array {
+    return ResourceUnits.encode(message).finish();
+  },
+
+  toProtoMsg(message: ResourceUnits): ResourceUnitsProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.ResourceUnits",
+      value: ResourceUnits.encode(message).finish()
+    };
   }
 
 };

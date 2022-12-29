@@ -8,7 +8,7 @@ export interface GroupID {
   dseq: Long;
   gseq: number;
 }
-export interface GroupIDProtoType {
+export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupID";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface GroupIDAmino {
   dseq: string;
   gseq: number;
 }
-export interface GroupIDAminoType {
+export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta2.GroupID";
   value: GroupIDAmino;
 }
@@ -142,6 +142,25 @@ export const GroupID = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
+  },
+
+  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
+    return GroupID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
+    return GroupID.decode(message.value);
+  },
+
+  toProto(message: GroupID): Uint8Array {
+    return GroupID.encode(message).finish();
+  },
+
+  toProtoMsg(message: GroupID): GroupIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupID",
+      value: GroupID.encode(message).finish()
+    };
   }
 
 };

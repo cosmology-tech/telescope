@@ -8,7 +8,7 @@ export interface MsgVerifyInvariant {
   invariantModuleName: string;
   invariantRoute: string;
 }
-export interface MsgVerifyInvariantProtoType {
+export interface MsgVerifyInvariantProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
   value: Uint8Array;
 }
@@ -19,7 +19,7 @@ export interface MsgVerifyInvariantAmino {
   invariant_module_name: string;
   invariant_route: string;
 }
-export interface MsgVerifyInvariantAminoType {
+export interface MsgVerifyInvariantAminoMsg {
   type: "cosmos-sdk/MsgVerifyInvariant";
   value: MsgVerifyInvariantAmino;
 }
@@ -33,14 +33,14 @@ export interface MsgVerifyInvariantSDKType {
 
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
-export interface MsgVerifyInvariantResponseProtoType {
+export interface MsgVerifyInvariantResponseProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse";
   value: Uint8Array;
 }
 
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseAmino {}
-export interface MsgVerifyInvariantResponseAminoType {
+export interface MsgVerifyInvariantResponseAminoMsg {
   type: "cosmos-sdk/MsgVerifyInvariantResponse";
   value: MsgVerifyInvariantResponseAmino;
 }
@@ -160,6 +160,32 @@ export const MsgVerifyInvariant = {
     obj.invariant_module_name = message.invariantModuleName;
     obj.invariant_route = message.invariantRoute;
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {
+    return MsgVerifyInvariant.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVerifyInvariant",
+      value: MsgVerifyInvariant.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
+    return MsgVerifyInvariant.decode(message.value);
+  },
+
+  toProto(message: MsgVerifyInvariant): Uint8Array {
+    return MsgVerifyInvariant.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantProtoMsg {
+    return {
+      typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
+      value: MsgVerifyInvariant.encode(message).finish()
+    };
   }
 
 };
@@ -224,6 +250,32 @@ export const MsgVerifyInvariantResponse = {
   toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
     const obj: any = {};
     return obj;
+  },
+
+  fromAminoMsg(object: MsgVerifyInvariantResponseAminoMsg): MsgVerifyInvariantResponse {
+    return MsgVerifyInvariantResponse.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVerifyInvariantResponse",
+      value: MsgVerifyInvariantResponse.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
+    return MsgVerifyInvariantResponse.decode(message.value);
+  },
+
+  toProto(message: MsgVerifyInvariantResponse): Uint8Array {
+    return MsgVerifyInvariantResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseProtoMsg {
+    return {
+      typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
+      value: MsgVerifyInvariantResponse.encode(message).finish()
+    };
   }
 
 };

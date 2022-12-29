@@ -7,7 +7,7 @@ export interface Proof {
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
-export interface ProofProtoType {
+export interface ProofProtoMsg {
   typeUrl: "/tendermint.crypto.Proof";
   value: Uint8Array;
 }
@@ -17,7 +17,7 @@ export interface ProofAmino {
   leaf_hash: Uint8Array;
   aunts: Uint8Array[];
 }
-export interface ProofAminoType {
+export interface ProofAminoMsg {
   type: "/tendermint.crypto.Proof";
   value: ProofAmino;
 }
@@ -34,7 +34,7 @@ export interface ValueOp {
   /** To encode in ProofOp.Data */
   proof?: Proof;
 }
-export interface ValueOpProtoType {
+export interface ValueOpProtoMsg {
   typeUrl: "/tendermint.crypto.ValueOp";
   value: Uint8Array;
 }
@@ -45,7 +45,7 @@ export interface ValueOpAmino {
   /** To encode in ProofOp.Data */
   proof?: ProofAmino;
 }
-export interface ValueOpAminoType {
+export interface ValueOpAminoMsg {
   type: "/tendermint.crypto.ValueOp";
   value: ValueOpAmino;
 }
@@ -58,7 +58,7 @@ export interface DominoOp {
   input: string;
   output: string;
 }
-export interface DominoOpProtoType {
+export interface DominoOpProtoMsg {
   typeUrl: "/tendermint.crypto.DominoOp";
   value: Uint8Array;
 }
@@ -67,7 +67,7 @@ export interface DominoOpAmino {
   input: string;
   output: string;
 }
-export interface DominoOpAminoType {
+export interface DominoOpAminoMsg {
   type: "/tendermint.crypto.DominoOp";
   value: DominoOpAmino;
 }
@@ -87,7 +87,7 @@ export interface ProofOp {
   key: Uint8Array;
   data: Uint8Array;
 }
-export interface ProofOpProtoType {
+export interface ProofOpProtoMsg {
   typeUrl: "/tendermint.crypto.ProofOp";
   value: Uint8Array;
 }
@@ -102,7 +102,7 @@ export interface ProofOpAmino {
   key: Uint8Array;
   data: Uint8Array;
 }
-export interface ProofOpAminoType {
+export interface ProofOpAminoMsg {
   type: "/tendermint.crypto.ProofOp";
   value: ProofOpAmino;
 }
@@ -122,7 +122,7 @@ export interface ProofOpSDKType {
 export interface ProofOps {
   ops: ProofOp[];
 }
-export interface ProofOpsProtoType {
+export interface ProofOpsProtoMsg {
   typeUrl: "/tendermint.crypto.ProofOps";
   value: Uint8Array;
 }
@@ -131,7 +131,7 @@ export interface ProofOpsProtoType {
 export interface ProofOpsAmino {
   ops: ProofOpAmino[];
 }
-export interface ProofOpsAminoType {
+export interface ProofOpsAminoMsg {
   type: "/tendermint.crypto.ProofOps";
   value: ProofOpsAmino;
 }
@@ -286,6 +286,25 @@ export const Proof = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ProofAminoMsg): Proof {
+    return Proof.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ProofProtoMsg): Proof {
+    return Proof.decode(message.value);
+  },
+
+  toProto(message: Proof): Uint8Array {
+    return Proof.encode(message).finish();
+  },
+
+  toProtoMsg(message: Proof): ProofProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.Proof",
+      value: Proof.encode(message).finish()
+    };
   }
 
 };
@@ -385,6 +404,25 @@ export const ValueOp = {
     obj.key = message.key;
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
+  },
+
+  fromAminoMsg(object: ValueOpAminoMsg): ValueOp {
+    return ValueOp.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ValueOpProtoMsg): ValueOp {
+    return ValueOp.decode(message.value);
+  },
+
+  toProto(message: ValueOp): Uint8Array {
+    return ValueOp.encode(message).finish();
+  },
+
+  toProtoMsg(message: ValueOp): ValueOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ValueOp",
+      value: ValueOp.encode(message).finish()
+    };
   }
 
 };
@@ -500,6 +538,25 @@ export const DominoOp = {
     obj.input = message.input;
     obj.output = message.output;
     return obj;
+  },
+
+  fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
+    return DominoOp.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DominoOpProtoMsg): DominoOp {
+    return DominoOp.decode(message.value);
+  },
+
+  toProto(message: DominoOp): Uint8Array {
+    return DominoOp.encode(message).finish();
+  },
+
+  toProtoMsg(message: DominoOp): DominoOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.DominoOp",
+      value: DominoOp.encode(message).finish()
+    };
   }
 
 };
@@ -615,6 +672,25 @@ export const ProofOp = {
     obj.key = message.key;
     obj.data = message.data;
     return obj;
+  },
+
+  fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
+    return ProofOp.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ProofOpProtoMsg): ProofOp {
+    return ProofOp.decode(message.value);
+  },
+
+  toProto(message: ProofOp): Uint8Array {
+    return ProofOp.encode(message).finish();
+  },
+
+  toProtoMsg(message: ProofOp): ProofOpProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ProofOp",
+      value: ProofOp.encode(message).finish()
+    };
   }
 
 };
@@ -716,6 +792,25 @@ export const ProofOps = {
     }
 
     return obj;
+  },
+
+  fromAminoMsg(object: ProofOpsAminoMsg): ProofOps {
+    return ProofOps.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ProofOpsProtoMsg): ProofOps {
+    return ProofOps.decode(message.value);
+  },
+
+  toProto(message: ProofOps): Uint8Array {
+    return ProofOps.encode(message).finish();
+  },
+
+  toProtoMsg(message: ProofOps): ProofOpsProtoMsg {
+    return {
+      typeUrl: "/tendermint.crypto.ProofOps",
+      value: ProofOps.encode(message).finish()
+    };
   }
 
 };
