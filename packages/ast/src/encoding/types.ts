@@ -13,51 +13,64 @@ export const getFieldNames = (field: ProtoField) => {
     };
 }
 
-export interface CreateProtoTypeOptions {
-    useOriginalCase: boolean;
-    typeNamePrefix?: string;
-    typeNameSuffix?: string;
-};
+export type TelescopeBaseTypes = 'Msg' |
+    'SDKType' |
+    'Amino' |
+    'AminoType' |
+    'ProtoType';
 
-export const createProtoTypeOptionsDefaults: CreateProtoTypeOptions = {
-    useOriginalCase: false
-};
 
 const getSymbolName = (
     name: string,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
-) => [options.typeNamePrefix, name, options.typeNameSuffix].filter(Boolean).join('');
+    type: TelescopeBaseTypes = 'Msg'
+) => {
+    let typeNameSuffix;
+    switch (type) {
+        case 'ProtoType':
+            typeNameSuffix = 'ProtoType';
+            break;
+        case 'AminoType':
+            typeNameSuffix = 'AminoType';
+            break;
+        case 'Amino':
+            typeNameSuffix = 'Amino';
+            break;
+        case 'SDKType':
+            typeNameSuffix = 'SDKType';
+            break;
+        case 'Msg':
+        default:
+    }
+    return [name, typeNameSuffix].filter(Boolean).join('')
+};
 
 export const SymbolNames = {
     Msg: (
         name: string,
-        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
-    ) => getSymbolName(name, options),
+    ) => getSymbolName(name, 'Msg'),
+
+    SDKType: (
+        name: string
+    ) => getSymbolName(name, 'SDKType'),
 
     ProtoType: (
-        name: string,
-        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
-    ) => {
-        const MsgName = getSymbolName(name, options);
-        const ProtoMsgName = MsgName + 'ProtoType';
-        return ProtoMsgName;
-    },
+        name: string
+    ) => getSymbolName(name, 'ProtoType'),
 
     AminoType: (
-        name: string,
-        options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
-    ) => {
-        const MsgName = SymbolNames.Msg(name, options);
-        const AminoMsgName = MsgName + 'Type';
-        return AminoMsgName;
-    }
+        name: string
+    ) => getSymbolName(name, 'AminoType'),
+
+    Amino: (
+        name: string
+    ) => getSymbolName(name, 'Amino'),
 
 };
 
 export const getFieldTypeReference = (
     context: ProtoParseContext,
     field: ProtoField,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    type: TelescopeBaseTypes = 'Msg'
 ) => {
     let ast: any = null;
     let typ: any = null;
@@ -71,10 +84,10 @@ export const getFieldTypeReference = (
         };
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
-        typ = getTSTypeFromGoogleType(context, field.type, options);
+        typ = getTSTypeFromGoogleType(context, field.type, type);
     } else {
         const propName = getProtoFieldTypeName(context, field);
-        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Msg(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames[type](propName);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -82,7 +95,7 @@ export const getFieldTypeReference = (
     const lookupInterface = field.options?.['(cosmos_proto.accepts_interface)'];
     const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
     const isArray = field.rule === 'repeated';
-    const isBaseType = !options.typeNamePrefix && !options.typeNameSuffix;
+    const isBaseType = type === 'Msg';
     let symbols = null;
     if (implementsAcceptsAny && lookupInterface) {
         symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
@@ -136,8 +149,7 @@ export const getFieldTypeReference = (
 
 export const getFieldAminoTypeReference = (
     context: ProtoParseContext,
-    field: ProtoField,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    field: ProtoField
 ) => {
     let ast: any = null;
     let typ: any = null;
@@ -149,11 +161,11 @@ export const getFieldAminoTypeReference = (
         return typ;
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
-        typ = getTSTypeFromGoogleType(context, field.type, options);
+        typ = getTSTypeFromGoogleType(context, field.type, 'Amino');
     } else {
         const propName = getProtoFieldTypeName(context, field);
         // enums don't need suffixes, etc.
-        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Msg(propName, options);
+        const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Amino(propName);
         typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
@@ -233,11 +245,11 @@ export const getTSAminoType = (context: GenericParseContext, type: string) => {
 export const getTSTypeFromGoogleType = (
     context: GenericParseContext,
     type: string,
-    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+    options: TelescopeBaseTypes = 'Msg'
 ) => {
 
     const identifier = (str) => {
-        return t.identifier(SymbolNames.Msg(str, options));
+        return t.identifier(SymbolNames[options](str));
     };
 
     switch (type) {
