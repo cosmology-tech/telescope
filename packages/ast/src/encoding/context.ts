@@ -1,7 +1,8 @@
-import { TelescopeOptions, ProtoField, ProtoRef } from '@osmonauts/types';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@osmonauts/types';
 import { ProtoStore, getObjectName } from '@osmonauts/proto-parser';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 import { getPluginValue } from '../plugins';
+import { TelescopeBaseTypes } from './types';
 export interface ParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[];
@@ -15,9 +16,15 @@ export interface ImportUsage {
     import: string;
     importedAs?: string;
 }
+
+interface DerivativeImport {
+    type: TelescopeBaseTypes,
+    symbol: TraversalSymbol
+}
 export class GenericParseContext implements ParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[] = [];
+    derivedImports: DerivativeImport[] = [];
     utils: Record<string, boolean> = {};
     store: ProtoStore;
     ref: ProtoRef;
@@ -54,6 +61,17 @@ export class GenericParseContext implements ParseContext {
         // some local lookups don't have an import (local proto-style lookups do)
         if (!imp.import) return;
         this.imports.push(imp)
+    }
+
+    addImportDerivative(imp: DerivativeImport) {
+        const found = this.derivedImports.find(a => {
+            return a.type === imp.type &&
+                a.symbol.symbolName === imp.symbol.symbolName &&
+                a.symbol.source === imp.symbol.source;
+        });
+        if (!found) {
+            this.derivedImports.push(imp);
+        }
     }
 
     getTypeNameFromFieldName(name: string, importSrc: string) {

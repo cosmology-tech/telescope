@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField, TelescopeLogLevel } from '@osmonauts/types';
+import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
 import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -107,7 +107,7 @@ export const getFieldTypeReference = (
     const isEncodedType = type === 'ProtoMsg';
 
     // MARKED AS NOT DRY (symbols)
-    let symbols = null;
+    let symbols: TraversalSymbol[] = null;
     if (implementsAcceptsAny && lookupInterface) {
         symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
         if (!symbols.length && context.options.logLevel >= TelescopeLogLevel.Warn) {
@@ -125,7 +125,7 @@ export const getFieldTypeReference = (
         context.pluginValue('prototypes.allowUndefinedTypes');
 
     if (isTypeCastable) {
-        const tp = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
+        const tp: any[] = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
         tp.push(typ);
 
         if (context.pluginValue('interfaces.useUnionTypes')) {
@@ -147,9 +147,17 @@ export const getFieldTypeReference = (
             }
         }
     } else if (isProtoTypeCastable) {
-        const tp = symbols.map(a => t.tsTypeReference(t.identifier(
+
+        const tp: any[] = symbols.map(a => t.tsTypeReference(t.identifier(
             SymbolNames.ProtoMsg(a.readAs)
         )));
+        symbols.forEach(a => {
+            context.addImportDerivative({
+                type: 'ProtoMsg',
+                symbol: a
+            });
+        });
+
         tp.push(typ);
 
         if (!isArray) {
