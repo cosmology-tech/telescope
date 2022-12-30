@@ -305,10 +305,10 @@ const addDerivativeTypesToImports = (
                 ];
 
                 if (context.options.aminoEncoding.useRecursiveV2encoding) {
-                    arr.push(AminoTypeObject);
 
                     // check and see if this derived import has been required...
-                    const found = context.proto.derivedImports.find(a => {
+                    const foundEnc = context.proto.derivedImports.find(a => {
+                        if (a.type !== 'ProtoMsg') return false;
                         if (EncodedTypeObject.orig === a.symbol.symbolName) {
                             // UNTIL you fix the ImportObjs to have ref...
                             let rel = getRelativePath(a.symbol.ref, a.symbol.source);
@@ -317,14 +317,45 @@ const addDerivativeTypesToImports = (
                             }
                         }
                     });
+                    const foundAmino = context.proto.derivedImports.find(a => {
+                        if (a.type !== 'Amino') return false;
+                        if (AminoTypeObject.orig === a.symbol.symbolName) {
+                            // UNTIL you fix the ImportObjs to have ref...
+                            let rel = getRelativePath(a.symbol.ref, a.symbol.source);
+                            if (rel === AminoTypeObject.path) {
+                                return true;
+                            }
+                        }
+                    });
 
                     // we need Any types as defaults...
-                    if (found || EncodedTypeObject.orig === 'Any') {
+                    if (foundEnc || EncodedTypeObject.orig === 'Any') {
                         arr.push(EncodedTypeObject);
+                    }
+                    if (foundAmino || AminoTypeObject.orig === 'Any') {
+                        arr.push(AminoTypeObject);
                     }
                 }
                 if (context.options.useSDKTypes) {
+                    // issue in output1 (probably legacy v1 amino transpiler)
+                    // ProposalSDKType wasn't being found in QueryProposalResponseSDKType
                     arr.push(SDKTypeObject);
+                    // const foundSDK = context.proto.derivedImports.find(a => {
+                    //     if (a.type !== 'SDKType') return false;
+
+
+                    //     if (SDKTypeObject.orig === a.symbol.symbolName) {
+                    //         // UNTIL you fix the ImportObjs to have ref...
+                    //         let rel = getRelativePath(a.symbol.ref, a.symbol.source);
+                    //         if (rel === SDKTypeObject.path) {
+                    //             return true;
+                    //         }
+                    //     }
+                    // });
+
+                    // if (foundSDK) {
+                    //     arr.push(SDKTypeObject);
+                    // }
                 }
 
                 return arr;
