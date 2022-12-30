@@ -1,10 +1,10 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { PoolAmino as Pool1Amino } from "../pool-models/balancer/balancerPool";
+import { PoolProtoMsg as Pool1ProtoMsg } from "../pool-models/balancer/balancerPool";
 import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
 import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
-import { PoolAmino as Pool2Amino } from "../pool-models/stableswap/stableswap_pool";
+import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "../../../helpers";
@@ -45,6 +45,9 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
 
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateAmino {
@@ -61,7 +64,7 @@ export interface GenesisStateAminoMsg {
 
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   next_pool_number: Long;
   params?: ParamsSDKType;
 }

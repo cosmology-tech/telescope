@@ -1,12 +1,12 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteAmino, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteAmino, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
-import { PoolAmino as Pool1Amino } from "../pool-models/balancer/balancerPool";
+import { PoolProtoMsg as Pool1ProtoMsg } from "../pool-models/balancer/balancerPool";
 import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
 import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
-import { PoolAmino as Pool2Amino } from "../pool-models/stableswap/stableswap_pool";
+import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -41,6 +41,9 @@ export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
   value: Uint8Array;
 }
+export type QueryPoolResponseEncoded = Omit<QueryPoolResponse, "pool"> & {
+  pool?: Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg | undefined;
+};
 export interface QueryPoolResponseAmino {
   pool?: AnyAmino;
 }
@@ -49,7 +52,7 @@ export interface QueryPoolResponseAminoMsg {
   value: QueryPoolResponseAmino;
 }
 export interface QueryPoolResponseSDKType {
-  pool?: AnySDKType;
+  pool?: Pool1SDKType | Pool2SDKType | AnySDKType | undefined;
 }
 
 /** =============================== Pools */
@@ -86,6 +89,9 @@ export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
   value: Uint8Array;
 }
+export type QueryPoolsResponseEncoded = Omit<QueryPoolsResponse, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
 export interface QueryPoolsResponseAmino {
   pools: AnyAmino[];
 
@@ -97,7 +103,7 @@ export interface QueryPoolsResponseAminoMsg {
   value: QueryPoolsResponseAmino;
 }
 export interface QueryPoolsResponseSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
 
@@ -506,6 +512,9 @@ export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
   value: Uint8Array;
 }
+export type QueryPoolsWithFilterResponseEncoded = Omit<QueryPoolsWithFilterResponse, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
 export interface QueryPoolsWithFilterResponseAmino {
   pools: AnyAmino[];
 
@@ -517,7 +526,7 @@ export interface QueryPoolsWithFilterResponseAminoMsg {
   value: QueryPoolsWithFilterResponseAmino;
 }
 export interface QueryPoolsWithFilterResponseSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
 

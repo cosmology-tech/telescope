@@ -1,6 +1,6 @@
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateCertificate, MsgCreateCertificateAmino, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseAmino, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateAmino, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseAmino, MsgRevokeCertificateResponseSDKType } from "./cert";
+import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
 
 /** Msg defines the provider Msg service */
 export interface Msg {

@@ -1,10 +1,10 @@
-import { Action, ActionAmino, ActionSDKType, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
-import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType } from "./claim";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./params";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestAmino, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseAmino, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestAmino, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseAmino, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestAmino, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseAmino, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestAmino, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseAmino, QueryTotalClaimableResponseSDKType } from "./query";
+import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {

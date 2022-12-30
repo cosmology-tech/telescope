@@ -1,4 +1,4 @@
-import { NullValue, NullValueAmino, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";

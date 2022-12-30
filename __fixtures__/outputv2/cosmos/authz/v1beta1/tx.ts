@@ -1,5 +1,5 @@
 import { Grant, GrantAmino, GrantSDKType } from "./authz";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -84,6 +84,14 @@ export interface MsgExecProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.MsgExec";
   value: Uint8Array;
 }
+export type MsgExecEncoded = Omit<MsgExec, "msgs"> & {
+  /**
+   * Authorization Msg requests to execute. Each msg must implement Authorization interface
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
+   */
+  msgs: (AnyProtoMsg)[];
+};
 
 /**
  * MsgExec attempts to execute the provided messages using
@@ -112,7 +120,7 @@ export interface MsgExecAminoMsg {
  */
 export interface MsgExecSDKType {
   grantee: string;
-  msgs: AnySDKType[];
+  msgs: (AnySDKType)[];
 }
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */

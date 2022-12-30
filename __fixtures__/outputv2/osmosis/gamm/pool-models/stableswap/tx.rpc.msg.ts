@@ -1,8 +1,8 @@
-import { PoolParams, PoolParamsAmino, PoolParamsSDKType } from "./stableswap_pool";
-import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateStableswapPool, MsgCreateStableswapPoolAmino, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseAmino, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsAmino, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseAmino, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
+import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
 export interface Msg {
   createStableswapPool(request: MsgCreateStableswapPool): Promise<MsgCreateStableswapPoolResponse>;
   stableSwapAdjustScalingFactors(request: MsgStableSwapAdjustScalingFactors): Promise<MsgStableSwapAdjustScalingFactorsResponse>;

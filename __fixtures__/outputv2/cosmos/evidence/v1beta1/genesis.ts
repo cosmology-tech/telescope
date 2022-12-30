@@ -1,4 +1,4 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";

@@ -1,8 +1,8 @@
-import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryCertificatesRequest, QueryCertificatesRequestAmino, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseAmino, QueryCertificatesResponseSDKType } from "./query";
+import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

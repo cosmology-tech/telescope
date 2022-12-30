@@ -1,11 +1,11 @@
-import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
-import { Group, GroupAmino, GroupSDKType } from "./group";
-import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta2/types";
+import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDSDKType } from "./groupid";
+import { Group, GroupSDKType } from "./group";
+import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDeploymentsRequest, QueryDeploymentsRequestAmino, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseAmino, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestAmino, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseAmino, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestAmino, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseAmino, QueryGroupResponseSDKType } from "./query";
+import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

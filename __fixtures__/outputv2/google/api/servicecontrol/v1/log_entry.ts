@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeverityAmino, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
-import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../../helpers";

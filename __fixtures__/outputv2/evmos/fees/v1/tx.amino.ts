@@ -1,4 +1,4 @@
-import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoAmino, MsgRegisterDevFeeInfoSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoAmino, MsgCancelDevFeeInfoSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoAmino, MsgUpdateDevFeeInfoSDKType } from "./tx";
+import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType } from "./tx";
 export const AminoConverter = {
   "/evmos.fees.v1.MsgRegisterDevFeeInfo": {
     aminoType: "/evmos.fees.v1.MsgRegisterDevFeeInfo",

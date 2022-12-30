@@ -1,6 +1,6 @@
-import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
-import { MsgSend, MsgSendAmino, MsgSendSDKType, MsgMultiSend, MsgMultiSendAmino, MsgMultiSendSDKType } from "./tx";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
+import { MsgSend, MsgSendSDKType, MsgMultiSend, MsgMultiSendSDKType } from "./tx";
 export const AminoConverter = {
   "/cosmos.bank.v1beta1.MsgSend": {
     aminoType: "cosmos-sdk/MsgSend",

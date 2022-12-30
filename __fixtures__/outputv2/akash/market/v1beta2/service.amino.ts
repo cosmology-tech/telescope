@@ -1,8 +1,8 @@
 /* eslint-disable */
-import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BidID, BidIDAmino, BidIDSDKType, MsgCreateBid, MsgCreateBidAmino, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidAmino, MsgCloseBidSDKType } from "./bid";
-import { LeaseID, LeaseIDAmino, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseAmino, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseAmino, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseAmino, MsgCloseLeaseSDKType } from "./lease";
+import { OrderID, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidSDKType } from "./bid";
+import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 export const AminoConverter = {
   "/akash.market.v1beta2.MsgCreateBid": {
     aminoType: "/akash.market.v1beta2.MsgCreateBid",

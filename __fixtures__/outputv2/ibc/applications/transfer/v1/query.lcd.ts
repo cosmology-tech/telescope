@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryDenomTraceRequest, QueryDenomTraceRequestAmino, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseAmino, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestAmino, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseAmino, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType } from "./query";
+import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

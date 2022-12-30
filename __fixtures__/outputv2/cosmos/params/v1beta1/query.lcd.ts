@@ -1,6 +1,6 @@
-import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
+import { ParamChange, ParamChangeSDKType } from "./params";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestAmino, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseAmino, QuerySubspacesResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

@@ -1,8 +1,8 @@
 //@ts-nocheck
-import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { MsgCreateGauge, MsgCreateGaugeAmino, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeAmino, MsgAddToGaugeSDKType } from "./tx";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgAddToGauge, MsgAddToGaugeSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.incentives.MsgCreateGauge": {
     aminoType: "osmosis/incentives/create-gauge",

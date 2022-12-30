@@ -1,6 +1,6 @@
 //@ts-nocheck
 /* eslint-disable */
-import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDAmino, GroupIDSDKType } from "./group";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "../../../helpers";

@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
-import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairSDKType } from "./erc20";
+import { Params, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryTokenPairsRequest, QueryTokenPairsRequestAmino, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseAmino, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestAmino, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseAmino, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType } from "./query";
+import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
