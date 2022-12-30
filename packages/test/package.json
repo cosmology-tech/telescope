@@ -14,10 +14,10 @@
   ],
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
-    "buidl": "npm run build && npm run build:ts",
     "build:proto": "npm run clean && npm run proto",
     "codegen": "cross-env NODE_ENV=development babel-node scripts/codegen.js",
     "build:ts": "tsc --project ./tsconfig.json",
+    "buidl": "npm run build && npm run build:ts",
     "prepare": "npm run build",
     "test:rpc": "cross-env NODE_ENV=development babel-node src/test-rpc --extensions \".tsx,.ts,.js\"",
     "test:lcd": "cross-env NODE_ENV=development babel-node src/test-lcd --extensions \".tsx,.ts,.js\"",
