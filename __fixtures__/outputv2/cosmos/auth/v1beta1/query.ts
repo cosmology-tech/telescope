@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountAmino, BaseAccountSDKType, ModuleAccount, ModuleAccountAmino, ModuleAccountSDKType } from "./auth";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountProtoMsg, BaseAccountSDKType, ModuleAccount, ModuleAccountProtoMsg, ModuleAccountSDKType } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -58,6 +58,10 @@ export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse";
   value: Uint8Array;
 }
+export type QueryAccountsResponseEncoded = Omit<QueryAccountsResponse, "accounts"> & {
+  /** accounts are the existing accounts */
+  accounts: (BaseAccountProtoMsg | AnyProtoMsg)[];
+};
 
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -82,7 +86,7 @@ export interface QueryAccountsResponseAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponseSDKType {
-  accounts: AnySDKType[];
+  accounts: (BaseAccountSDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
 
@@ -162,6 +166,10 @@ export interface QueryAccountResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
   value: Uint8Array;
 }
+export type QueryAccountResponseEncoded = Omit<QueryAccountResponse, "account"> & {
+  /** account defines the account of the corresponding address. */
+  account?: BaseAccountProtoMsg | AnyProtoMsg | undefined;
+};
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseAmino {
@@ -175,7 +183,7 @@ export interface QueryAccountResponseAminoMsg {
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
-  account?: AnySDKType;
+  account?: BaseAccountSDKType | AnySDKType | undefined;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -203,6 +211,9 @@ export interface QueryModuleAccountsResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse";
   value: Uint8Array;
 }
+export type QueryModuleAccountsResponseEncoded = Omit<QueryModuleAccountsResponse, "accounts"> & {
+  accounts: (ModuleAccountProtoMsg | AnyProtoMsg)[];
+};
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseAmino {
@@ -215,7 +226,7 @@ export interface QueryModuleAccountsResponseAminoMsg {
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseSDKType {
-  accounts: AnySDKType[];
+  accounts: (ModuleAccountSDKType | AnySDKType)[];
 }
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */

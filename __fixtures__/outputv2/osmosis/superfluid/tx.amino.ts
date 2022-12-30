@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { MsgSuperfluidDelegate, MsgSuperfluidDelegateAmino, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateAmino, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockAmino, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateAmino, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolAmino, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
 export const AminoConverter = {
   "/osmosis.superfluid.MsgSuperfluidDelegate": {
     aminoType: "osmosis/superfluid-delegate",

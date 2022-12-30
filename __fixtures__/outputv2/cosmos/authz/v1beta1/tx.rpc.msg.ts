@@ -1,8 +1,8 @@
-import { Grant, GrantAmino, GrantSDKType } from "./authz";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Grant, GrantSDKType } from "./authz";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgGrant, MsgGrantAmino, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseAmino, MsgGrantResponseSDKType, MsgExec, MsgExecAmino, MsgExecSDKType, MsgExecResponse, MsgExecResponseAmino, MsgExecResponseSDKType, MsgRevoke, MsgRevokeAmino, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseAmino, MsgRevokeResponseSDKType } from "./tx";
+import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 
 /** Msg defines the authz Msg service. */
 export interface Msg {

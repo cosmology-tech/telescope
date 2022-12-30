@@ -1,4 +1,4 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
@@ -15,6 +15,9 @@ export interface MsgSubmitEvidenceProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
   value: Uint8Array;
 }
+export type MsgSubmitEvidenceEncoded = Omit<MsgSubmitEvidence, "evidence"> & {
+  evidence?: AnyProtoMsg | undefined;
+};
 
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -35,7 +38,7 @@ export interface MsgSubmitEvidenceAminoMsg {
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
-  evidence?: AnySDKType;
+  evidence?: AnySDKType | undefined;
 }
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */

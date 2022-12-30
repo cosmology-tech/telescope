@@ -30,6 +30,7 @@ it('template tags', () => {
             'grantee'
         ]
     };
+    // @ts-ignore
     expectCode(makeTemplateTagLegacy(info));
 })
 

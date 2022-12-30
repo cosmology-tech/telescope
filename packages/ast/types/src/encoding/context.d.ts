@@ -1,5 +1,6 @@
-import { TelescopeOptions, ProtoField, ProtoRef } from '@osmonauts/types';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol } from '@osmonauts/types';
 import { ProtoStore } from '@osmonauts/proto-parser';
+import { TelescopeBaseTypes } from './types';
 export interface ParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[];
@@ -12,9 +13,14 @@ export interface ImportUsage {
     import: string;
     importedAs?: string;
 }
+interface DerivativeImport {
+    type: TelescopeBaseTypes;
+    symbol: TraversalSymbol;
+}
 export declare class GenericParseContext implements ParseContext {
     options: TelescopeOptions;
     imports: ImportUsage[];
+    derivedImports: DerivativeImport[];
     utils: Record<string, boolean>;
     store: ProtoStore;
     ref: ProtoRef;
@@ -23,6 +29,7 @@ export declare class GenericParseContext implements ParseContext {
     isExcluded(): any;
     addUtil(util: any): void;
     addImport(imp: ImportUsage): void;
+    addImportDerivative(imp: DerivativeImport): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
     lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@osmonauts/proto-parser").Lookup;
@@ -41,3 +48,4 @@ export declare class ProtoParseContext extends GenericParseContext implements Pa
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
 }
+export {};

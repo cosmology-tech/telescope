@@ -1,4 +1,4 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
@@ -275,6 +275,13 @@ export interface ContractInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
   value: Uint8Array;
 }
+export type ContractInfoEncoded = Omit<ContractInfo, "extension"> & {
+  /**
+   * Extension is an extension point to store custom metadata within the
+   * persistence model.
+   */
+  extension?: AnyProtoMsg | undefined;
+};
 
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoAmino {
@@ -317,7 +324,7 @@ export interface ContractInfoSDKType {
   label: string;
   created?: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
-  extension?: AnySDKType;
+  extension?: AnySDKType | undefined;
 }
 
 /** ContractCodeHistoryEntry metadata to a contract. */

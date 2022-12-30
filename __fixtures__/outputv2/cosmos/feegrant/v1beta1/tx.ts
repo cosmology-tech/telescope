@@ -1,5 +1,5 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { BasicAllowance, BasicAllowanceAmino, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceAmino, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceAmino, AllowedMsgAllowanceSDKType } from "./feegrant";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { BasicAllowance, BasicAllowanceProtoMsg, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceProtoMsg, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceProtoMsg, AllowedMsgAllowanceSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -22,6 +22,10 @@ export interface MsgGrantAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
   value: Uint8Array;
 }
+export type MsgGrantAllowanceEncoded = Omit<MsgGrantAllowance, "allowance"> & {
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
+};
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -49,7 +53,7 @@ export interface MsgGrantAllowanceAminoMsg {
 export interface MsgGrantAllowanceSDKType {
   granter: string;
   grantee: string;
-  allowance?: AnySDKType;
+  allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
 }
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */

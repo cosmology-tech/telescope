@@ -1,6 +1,6 @@
-import { Params, ParamsAmino, ParamsSDKType } from "./mint";
+import { Params, ParamsSDKType } from "./mint";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryInflationRequest, QueryInflationRequestAmino, QueryInflationRequestSDKType, QueryInflationResponse, QueryInflationResponseAmino, QueryInflationResponseSDKType, QueryAnnualProvisionsRequest, QueryAnnualProvisionsRequestAmino, QueryAnnualProvisionsRequestSDKType, QueryAnnualProvisionsResponse, QueryAnnualProvisionsResponseAmino, QueryAnnualProvisionsResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryInflationRequest, QueryInflationRequestSDKType, QueryInflationResponse, QueryInflationResponseSDKType, QueryAnnualProvisionsRequest, QueryAnnualProvisionsRequestSDKType, QueryAnnualProvisionsResponse, QueryAnnualProvisionsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

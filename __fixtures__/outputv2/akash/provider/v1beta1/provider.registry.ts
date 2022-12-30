@@ -1,6 +1,6 @@
-import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateProvider, MsgCreateProviderAmino, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderAmino, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderAmino, MsgDeleteProviderSDKType } from "./provider";
+import { MsgCreateProvider, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType } from "./provider";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/akash.provider.v1beta1.MsgCreateProvider", MsgCreateProvider], ["/akash.provider.v1beta1.MsgUpdateProvider", MsgUpdateProvider], ["/akash.provider.v1beta1.MsgDeleteProvider", MsgDeleteProvider]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

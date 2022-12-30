@@ -6,7 +6,7 @@ import { SymbolNames } from '../../types';
 import { getTypeUrl } from '../../amino';
 
 export const toProtoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    let varName = 'message';
+    const varName = 'message';
 
     const ReturnType = SymbolNames.ProtoMsg(name);
     const TypeName = SymbolNames.Msg(name);
@@ -72,7 +72,7 @@ export const toProtoMsgMethod = (context: ProtoParseContext, name: string, proto
 };
 
 export const toProtoMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    let varName = 'message';
+    const varName = 'message';
 
     const ReturnType = 'Uint8Array';
     const TypeName = SymbolNames.Msg(name);

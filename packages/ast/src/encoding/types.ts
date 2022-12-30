@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField, TelescopeLogLevel } from '@osmonauts/types';
+import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@osmonauts/types';
 import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -17,7 +17,8 @@ export type TelescopeBaseTypes = 'Msg' |
     'SDKType' |
     'Amino' |
     'AminoMsg' |
-    'ProtoMsg';
+    'ProtoMsg' |
+    'Encoded';
 
 
 const getSymbolName = (
@@ -37,6 +38,9 @@ const getSymbolName = (
             break;
         case 'SDKType':
             typeNameSuffix = 'SDKType';
+            break;
+        case 'Encoded':
+            typeNameSuffix = 'Encoded';
             break;
         case 'Msg':
         default:
@@ -64,6 +68,10 @@ export const SymbolNames = {
     Amino: (
         name: string
     ) => getSymbolName(name, 'Amino'),
+
+    Encoded: (
+        name: string
+    ) => getSymbolName(name, 'Encoded'),
 
 };
 
@@ -96,7 +104,11 @@ export const getFieldTypeReference = (
     const isAnyType = field.parsedType?.type === 'Type' && field.parsedType?.name === 'Any';
     const isArray = field.rule === 'repeated';
     const isBaseType = type === 'Msg';
-    let symbols = null;
+    const isEncodedType = type === 'ProtoMsg';
+    const isSDKType = type === 'SDKType';
+
+    // MARKED AS NOT DRY (symbols)
+    let symbols: TraversalSymbol[] = null;
     if (implementsAcceptsAny && lookupInterface) {
         symbols = context.store._symbols.filter(s => s.implementsType === lookupInterface && s.ref === context.ref.filename);
         if (!symbols.length && context.options.logLevel >= TelescopeLogLevel.Warn) {
@@ -104,14 +116,47 @@ export const getFieldTypeReference = (
         }
     }
 
+    if (!isBaseType) {
+        if (['ProtoMsg', 'SDKType'].includes(type)) {
+            symbols?.forEach(s => {
+                context.addImportDerivative({
+                    type,
+                    symbol: s
+                })
+            });
+        }
+        // main type could be Any
+
+        if (['SDKType'].includes(type) &&
+            // no derivatives for Enums!
+            field.parsedType.type === 'Type') {
+
+            context.addImportDerivative({
+                type,
+                symbol: {
+                    ref: context.ref.filename,
+                    readAs: field.parsedType.name, // maybe not!
+                    source: field.import,
+                    symbolName: field.parsedType.name,
+                    type: 'import'
+                },
+            })
+        }
+    }
+
+
     // cast Any types!
-    const isTypeCastable = isAnyType && lookupInterface && implementsAcceptsAny && symbols && isBaseType;
+    const isAnyInterface = isAnyType && lookupInterface && implementsAcceptsAny && symbols;
+    const isTypeCastable = isAnyInterface && isBaseType;
+    const isProtoTypeCastable = isAnyInterface && isEncodedType;
+    const isSDKTypeCastable = isAnyInterface && isSDKType;
+
     const isNonArrayNullableType = field.parsedType?.type === 'Type' &&
         field.rule !== 'repeated' &&
         context.pluginValue('prototypes.allowUndefinedTypes');
 
     if (isTypeCastable) {
-        const tp = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
+        const tp: any[] = symbols.map(a => t.tsTypeReference(t.identifier(a.readAs)));
         tp.push(typ);
 
         if (context.pluginValue('interfaces.useUnionTypes')) {
@@ -132,6 +177,43 @@ export const getFieldTypeReference = (
                 )
             }
         }
+    } else if (isProtoTypeCastable) {
+
+        const tp: any[] = symbols.map(a => t.tsTypeReference(t.identifier(
+            SymbolNames.ProtoMsg(a.readAs)
+        )));
+        symbols.forEach(a => {
+            context.addImportDerivative({
+                type: 'ProtoMsg',
+                symbol: a
+            });
+        });
+
+        tp.push(typ);
+
+        if (!isArray) {
+            tp.push(t.tsUndefinedKeyword())
+        }
+        ast = t.tsUnionType(tp)
+    } else if (isSDKTypeCastable) {
+
+        const tp: any[] = symbols.map(a => t.tsTypeReference(t.identifier(
+            SymbolNames.SDKType(a.readAs)
+        )));
+        symbols.forEach(a => {
+            context.addImportDerivative({
+                type: 'SDKType',
+                symbol: a
+            });
+        });
+
+        tp.push(typ);
+
+        if (!isArray) {
+            tp.push(t.tsUndefinedKeyword())
+        }
+        ast = t.tsUnionType(tp)
+
     } else if (isNonArrayNullableType) {
         // regular types!
         ast = t.tsUnionType(
@@ -167,6 +249,20 @@ export const getFieldAminoTypeReference = (
         // enums don't need suffixes, etc.
         const MsgName = field.parsedType?.type === 'Enum' ? propName : SymbolNames.Amino(propName);
         typ = t.tsTypeReference(t.identifier(MsgName));
+    }
+
+
+    if (field.parsedType?.type === 'Type') {
+        context.addImportDerivative({
+            type: 'Amino',
+            symbol: {
+                ref: context.ref.filename,
+                readAs: field.parsedType.name, // maybe not!
+                source: field.import,
+                symbolName: field.parsedType.name,
+                type: 'import'
+            },
+        })
     }
 
     if (

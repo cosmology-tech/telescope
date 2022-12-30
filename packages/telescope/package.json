@@ -27,6 +27,8 @@
     "build:ts": "tsc --project ./tsconfig.json",
     "build": "npm run build:module && npm run build:main",
     "buidl": "npm run build && npm run build:ts",
+    "buidl:clean": "npm run clean && npm run buidl",
+    "clean": "rimraf ./types",
     "prepare": "npm run build",
     "dev": "cross-env NODE_ENV=development babel-node src/telescope --extensions \".tsx,.ts,.js\"",
     "watch": "cross-env NODE_ENV=development babel-watch src/telescope --extensions \".tsx,.ts,.js\"",

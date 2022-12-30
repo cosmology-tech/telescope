@@ -155,3 +155,6 @@ export declare type TraversedProtoRoot = ProtoRoot & {
     symbols: TraverseLocalSymbol | null;
 };
 export declare type InterfaceTypeUrlMap = Record<string, TraverseTypeUrlRef[]>;
+export declare type TraversalSymbol = TraverseLocalSymbol & {
+    ref: string;
+};

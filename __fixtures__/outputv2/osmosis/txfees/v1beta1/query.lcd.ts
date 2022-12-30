@@ -1,6 +1,6 @@
-import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
+import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryFeeTokensRequest, QueryFeeTokensRequestAmino, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseAmino, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestAmino, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseAmino, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestAmino, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseAmino, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestAmino, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseAmino, QueryBaseDenomResponseSDKType } from "./query";
+import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

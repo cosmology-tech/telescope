@@ -1,6 +1,6 @@
-import { Channel, ChannelAmino, ChannelSDKType, Packet, PacketAmino, PacketSDKType } from "./channel";
-import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
-import { MsgChannelOpenInit, MsgChannelOpenInitAmino, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTryAmino, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckAmino, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmAmino, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitAmino, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmAmino, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketAmino, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutAmino, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseAmino, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementAmino, MsgAcknowledgementSDKType } from "./tx";
+import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
+import { Height, HeightSDKType } from "../../client/v1/client";
+import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx";
 export const AminoConverter = {
   "/ibc.core.channel.v1.MsgChannelOpenInit": {
     aminoType: "cosmos-sdk/MsgChannelOpenInit",

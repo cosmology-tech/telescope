@@ -12,7 +12,8 @@ import {
     TraverseImplement,
     TraverseExport,
     TraverseLocalSymbol,
-    TraverseImportNames
+    TraverseImportNames,
+    TraversalSymbol
 } from '@osmonauts/types';
 import {
     getPluginValue
@@ -64,13 +65,9 @@ export class TraverseContext implements TraverseContext {
     }
 }
 
-export type TraversalSymbols = TraverseLocalSymbol & {
-    ref: string;
-}
-
 export const symbolsToImportNames = (
     ref: ProtoRef,
-    symbols: TraversalSymbols[]
+    symbols: TraversalSymbol[]
 ): TraverseImportNames => {
     return symbols.reduce((m, v) => {
         // imports to self... nope.
@@ -84,10 +81,10 @@ export const symbolsToImportNames = (
 
 export const parseFullyTraversedProtoImports = (
     store: ProtoStore
-): TraversalSymbols[] => {
+): TraversalSymbol[] => {
     const protos = store.getProtos();
     const records: TraverseRecord[] = [];
-    const symbols: TraversalSymbols[] = [];
+    const symbols: TraversalSymbol[] = [];
 
     // AGGREGATE ALL implements
 
@@ -202,6 +199,7 @@ export const parseFullyTraversedProtoImports = (
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const context = new TraverseContext(store, ref);
+    // @ts-ignore
     const obj: TraversedProtoRoot = {
         imports: ref.proto.imports,
         package: ref.proto.package,
@@ -507,6 +505,7 @@ const traverseServiceMethod = (
 
 
     const fields = traverseFields(store, ref, requestObject.obj, context, traversal);
+    // @ts-ignore
     const info: ProtoServiceMethodInfo = parseService({
         options,
         fields

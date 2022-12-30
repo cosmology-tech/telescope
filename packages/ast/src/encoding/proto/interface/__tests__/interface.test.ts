@@ -1,6 +1,5 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { defaultTelescopeOptions } from '@osmonauts/types';
-import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils/'
+import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createSDKType, createProtoType, createProtoTypeType } from '..';
 import { createAminoType } from '../amino';
@@ -10,7 +9,7 @@ store.traverseAll();
 
 describe('MsgSend', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/tx.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgSend',
             getNestedProto(ref.traversed).MsgSend
@@ -40,7 +39,7 @@ describe('MsgSend', () => {
 
 describe('PageRequest', () => {
     const ref = store.findProto('cosmos/base/query/v1beta1/pagination.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('interface', () => {
         expectCode(createProtoType(context, 'PageRequest',
             getNestedProto(ref.traversed).PageRequest
@@ -55,7 +54,7 @@ describe('PageRequest', () => {
 
 describe('PageResponse', () => {
     const ref = store.findProto('cosmos/base/query/v1beta1/pagination.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('interface', () => {
         expectCode(createProtoType(context, 'PageResponse',
             getNestedProto(ref.traversed).PageResponse
@@ -70,7 +69,7 @@ describe('PageResponse', () => {
 
 describe('cosmos/auth/v1beta1/auth.proto', () => {
     const ref = store.findProto('cosmos/auth/v1beta1/auth.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('BaseAccount', () => {
         expectCode(createProtoType(context, 'BaseAccount',
             getNestedProto(ref.traversed).BaseAccount
@@ -85,7 +84,7 @@ describe('cosmos/auth/v1beta1/auth.proto', () => {
 
 describe('GenesisState', () => {
     const ref = store.findProto('cosmos/auth/v1beta1/genesis.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('interface', () => {
         expectCode(createProtoType(context, 'GenesisState',
             getNestedProto(ref.traversed).GenesisState
@@ -95,7 +94,7 @@ describe('GenesisState', () => {
 
 describe('cosmos/authz/v1beta1/authz.proto', () => {
     const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('Grant Type', () => {
         expectCode(createProtoTypeType(context, 'Grant',
             getNestedProto(ref.traversed).Grant
@@ -120,7 +119,7 @@ describe('cosmos/authz/v1beta1/authz.proto', () => {
 
 describe('cosmos/authz/v1beta1/query.proto', () => {
     const ref = store.findProto('cosmos/authz/v1beta1/query.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('QueryGrantsRequest', () => {
         expectCode(createProtoType(context, 'QueryGrantsRequest',
             getNestedProto(ref.traversed).QueryGrantsRequest
@@ -130,7 +129,7 @@ describe('cosmos/authz/v1beta1/query.proto', () => {
 
 describe('confio/proofs.proto', () => {
     const ref = store.findProto('confio/proofs.proto');
-    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    const context = new ProtoParseContext(ref, store, store.options);
     it('ExistenceProof', () => {
         expectCode(createProtoType(context, 'ExistenceProof',
             getNestedProto(ref.traversed).ExistenceProof

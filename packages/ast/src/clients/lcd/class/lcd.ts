@@ -251,6 +251,7 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
         .join('/');
 
     const parsed = getAstFromString(`\`${route}\``);
+    // @ts-ignore
     const ast: t.TemplateLiteral = parsed.program.body[0].expression;
 
     ast.expressions = ast.expressions.map((identifier: t.Identifier) => {

@@ -1,6 +1,6 @@
-import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { Params, ParamsSDKType } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

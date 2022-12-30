@@ -2,6 +2,7 @@ import { getNestedProto } from '@osmonauts/proto-parser';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createAminoType } from '../amino';
+import { createProtoInterfaceEncodedType } from '../proto';
 
 const store = getTestProtoStore();
 store.traverseAll();

@@ -1,8 +1,8 @@
-import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
-import { DistrInfo, DistrInfoAmino, DistrInfoSDKType, Params, ParamsAmino, ParamsSDKType } from "./incentives";
-import { Gauge, GaugeAmino, GaugeSDKType } from "../../incentives/gauge";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
+import { Gauge, GaugeSDKType } from "../../incentives/gauge";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryGaugeIdsRequest, QueryGaugeIdsRequestAmino, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseAmino, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestAmino, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseAmino, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestAmino, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseAmino, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestAmino, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseAmino, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestAmino, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseAmino, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestAmino, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseAmino, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
+import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 

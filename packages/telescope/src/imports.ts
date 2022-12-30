@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
-import { GenericParseContext, importStmt } from '@osmonauts/ast';
+import { GenericParseContext, SymbolNames, TelescopeBaseTypes, importStmt } from '@osmonauts/ast';
 import { ServiceMutation } from '@osmonauts/types';
 
-import { ImportHash, ImportObj } from './types';
+import { DerivedImportObj, ImportHash, ImportObj } from './types';
 import { UTILS, getRelativePath, UTIL_HELPERS } from './utils';
 import { TelescopeParseContext } from './build';
 
@@ -263,6 +263,7 @@ const addDerivativeTypesToImports = (
     imports: ImportObj[]
 ) => {
     const ref = context.ref;
+
     return imports.reduce((m, obj) => {
         // SDKType
         // probably wont need this until we start generating osmonauts/helpers inline
@@ -272,17 +273,18 @@ const addDerivativeTypesToImports = (
                 lookup = context.store.getImportFromRef(ref, obj.name);
             } catch (e) { }
 
-            const appendSuffix = (obj, suffix) => {
+            const appendSuffix = (obj: ImportObj, baseType: TelescopeBaseTypes): DerivedImportObj => {
                 return {
                     ...obj,
-                    name: obj.name + suffix,
-                    importAs: (obj.importAs ?? obj.name) + suffix,
+                    orig: obj.name,
+                    name: SymbolNames[baseType](obj.name),
+                    importAs: SymbolNames[baseType](obj.importAs ?? obj.name),
                 };
             }
 
             // MARKED AS NOT DRY [google.protobuf names]
             // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
-            const removeProtoPrefix = obj => {
+            const removeProtoPrefix = (obj: DerivedImportObj): DerivedImportObj => {
                 if (/\./.test(obj.name)) {
                     obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
                     obj.importAs = obj.importAs.split('.')[obj.importAs.split('.').length - 1];
@@ -292,6 +294,7 @@ const addDerivativeTypesToImports = (
 
             const SDKTypeObject = removeProtoPrefix(appendSuffix(obj, 'SDKType'));
             const AminoTypeObject = removeProtoPrefix(appendSuffix(obj, 'Amino'));
+            const EncodedTypeObject = removeProtoPrefix(appendSuffix(obj, 'ProtoMsg'));
             // const AminoTypeUrlObject = removeProtoPrefix(appendSuffix(obj, 'AminoType'));
 
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
@@ -302,11 +305,57 @@ const addDerivativeTypesToImports = (
                 ];
 
                 if (context.options.aminoEncoding.useRecursiveV2encoding) {
-                    arr.push(AminoTypeObject);
-                    // arr.push(AminoTypeUrlObject);
+
+                    // check and see if this derived import has been required...
+                    const foundEnc = context.proto.derivedImports.find(a => {
+                        if (a.type !== 'ProtoMsg') return false;
+                        if (EncodedTypeObject.orig === a.symbol.symbolName) {
+                            // UNTIL you fix the ImportObjs to have ref...
+                            let rel = getRelativePath(a.symbol.ref, a.symbol.source);
+                            if (rel === EncodedTypeObject.path) {
+                                return true;
+                            }
+                        }
+                    });
+                    const foundAmino = context.proto.derivedImports.find(a => {
+                        if (a.type !== 'Amino') return false;
+                        if (AminoTypeObject.orig === a.symbol.symbolName) {
+                            // UNTIL you fix the ImportObjs to have ref...
+                            let rel = getRelativePath(a.symbol.ref, a.symbol.source);
+                            if (rel === AminoTypeObject.path) {
+                                return true;
+                            }
+                        }
+                    });
+
+                    // we need Any types as defaults...
+                    if (foundEnc || EncodedTypeObject.orig === 'Any') {
+                        arr.push(EncodedTypeObject);
+                    }
+                    if (foundAmino || AminoTypeObject.orig === 'Any') {
+                        arr.push(AminoTypeObject);
+                    }
                 }
                 if (context.options.useSDKTypes) {
+                    // issue in output1 (probably legacy v1 amino transpiler)
+                    // ProposalSDKType wasn't being found in QueryProposalResponseSDKType
                     arr.push(SDKTypeObject);
+                    // const foundSDK = context.proto.derivedImports.find(a => {
+                    //     if (a.type !== 'SDKType') return false;
+
+
+                    //     if (SDKTypeObject.orig === a.symbol.symbolName) {
+                    //         // UNTIL you fix the ImportObjs to have ref...
+                    //         let rel = getRelativePath(a.symbol.ref, a.symbol.source);
+                    //         if (rel === SDKTypeObject.path) {
+                    //             return true;
+                    //         }
+                    //     }
+                    // });
+
+                    // if (foundSDK) {
+                    //     arr.push(SDKTypeObject);
+                    // }
                 }
 
                 return arr;

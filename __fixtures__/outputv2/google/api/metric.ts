@@ -1,4 +1,4 @@
-import { LaunchStage, LaunchStageAmino, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";

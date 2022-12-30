@@ -202,7 +202,7 @@ export const createEnumAminoType = (
     return t.exportNamedDeclaration(
         t.variableDeclaration('const', [
             t.variableDeclarator(
-                t.identifier(name + 'Amino'),
+                t.identifier(SymbolNames.Amino(name)),
                 t.identifier(name)
             )
         ])

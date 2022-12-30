@@ -4,9 +4,9 @@ import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@osmonauts/types';
 import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr } from './utils';
-import { parseFullyTraversedProtoImports, symbolsToImportNames, TraversalSymbols, traverse } from './traverse';
+import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
-import { defaultTelescopeOptions, TelescopeLogLevel } from '@osmonauts/types';
+import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol } from '@osmonauts/types';
 
 import google_any from './native/any';
 import google_descriptor from './native/descriptor';
@@ -58,7 +58,7 @@ export class ProtoStore {
     responses: Record<string, ProtoServiceMethod> = {};
 
     _traversed: boolean = false;
-    _symbols: TraversalSymbols[] = [];
+    _symbols: TraversalSymbol[] = [];
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));

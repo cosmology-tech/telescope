@@ -9,6 +9,7 @@
     "build": "lerna run prepare --parallel",
     "buidl": "lerna run buidl --parallel",
     "ast:fixture": "lerna run test:ast --parallel --scope \"@osmonauts/ast\"",
+    "buidl:clean": "lerna run buidl:clean",
     "buidl:ast": "lerna run buidl --parallel --scope \"@osmonauts/ast\"",
     "buidl:parser": "lerna run buidl --parallel --scope \"@osmonauts/proto-parser\"",
     "buidl:telescope": "lerna run buidl --parallel --scope \"@osmonauts/telescope\"",

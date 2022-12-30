@@ -1,6 +1,6 @@
 import { Header, HeaderAmino, HeaderSDKType } from "../../../tendermint/types/types";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
@@ -292,6 +292,10 @@ export interface ValidatorProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Validator";
   value: Uint8Array;
 }
+export type ValidatorEncoded = Omit<Validator, "consensusPubkey"> & {
+  /** consensus_pubkey is the consensus public key of the validator, as a Protobuf Any. */
+  consensusPubkey?: AnyProtoMsg | undefined;
+};
 
 /**
  * Validator defines a validator, together with the total amount of the
@@ -354,7 +358,7 @@ export interface ValidatorAminoMsg {
  */
 export interface ValidatorSDKType {
   operator_address: string;
-  consensus_pubkey?: AnySDKType;
+  consensus_pubkey?: AnySDKType | undefined;
   jailed: boolean;
   status: BondStatus;
   tokens: string;

@@ -1,7 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -149,6 +149,10 @@ export interface AllowedMsgAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
   value: Uint8Array;
 }
+export type AllowedMsgAllowanceEncoded = Omit<AllowedMsgAllowance, "allowance"> & {
+  /** allowance can be any of basic and periodic fee allowance. */
+  allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
+};
 
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceAmino {
@@ -165,7 +169,7 @@ export interface AllowedMsgAllowanceAminoMsg {
 
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
-  allowance?: AnySDKType;
+  allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
   allowed_messages: string[];
 }
 
@@ -184,6 +188,10 @@ export interface GrantProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.Grant";
   value: Uint8Array;
 }
+export type GrantEncoded = Omit<Grant, "allowance"> & {
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
+};
 
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantAmino {
@@ -205,7 +213,7 @@ export interface GrantAminoMsg {
 export interface GrantSDKType {
   granter: string;
   grantee: string;
-  allowance?: AnySDKType;
+  allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
 }
 
 function createBaseBasicAllowance(): BasicAllowance {
