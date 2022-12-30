@@ -1,11 +1,9 @@
 import {
     getUrlTemplateString,
-    makeTemplateTag,
-    makeTemplateTagLegacy,
-    parseUrlTemplateString
+    makeTemplateTag
 } from './lcd';
 import generate from '@babel/generator';
-import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';
+import { getTestProtoStore } from '../../../../test-utils';
 const store = getTestProtoStore();
 store.traverseAll();
 

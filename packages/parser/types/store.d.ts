@@ -1,5 +1,5 @@
 import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
-import { TraversalSymbols } from './traverse';
+import { TraversalSymbol } from '@osmonauts/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
@@ -16,7 +16,7 @@ export declare class ProtoStore {
     requests: Record<string, ProtoServiceMethod>;
     responses: Record<string, ProtoServiceMethod>;
     _traversed: boolean;
-    _symbols: TraversalSymbols[];
+    _symbols: TraversalSymbol[];
     constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;

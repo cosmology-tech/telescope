@@ -17,7 +17,7 @@ import {
     getTSType
 } from '../../types';
 import { getTypeUrlWithPkgAndName, getTypeUrl } from '../../amino';
-import { TraversalSymbols } from '@osmonauts/proto-parser';
+import { TraversalSymbol } from '@osmonauts/types';
 
 const getProtoField = (
     context: ProtoParseContext,
@@ -254,7 +254,7 @@ interface FieldInfo {
     name: string,
     lookupInterface: string,
     isAnyType: boolean,
-    symbols: TraversalSymbols[]
+    symbols: TraversalSymbol[]
 }
 
 export const createProtoInterfaceEncodedType = (
