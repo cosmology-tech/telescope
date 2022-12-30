@@ -264,15 +264,3 @@ export interface QueryGrantsRequest {
   pagination?: PageRequest;
 }"
 `;
-
-exports[`cosmos/gov/v1beta1/tx.proto MsgSubmitProposal 1`] = `
-"/**
- * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
- * proposal Content.
- */
-export interface MsgSubmitProposal {
-  content?: Any;
-  initialDeposit: Coin[];
-  proposer: string;
-}"
-`;
