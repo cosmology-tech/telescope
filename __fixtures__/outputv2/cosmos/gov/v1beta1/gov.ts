@@ -2001,61 +2001,61 @@ export const ProposalContentI_FromAmino = (content: AnyAmino) => {
     case "cosmos-sdk/TextProposal":
       return Any.fromPartial({
         typeUrl: "/cosmos.gov.v1beta1.TextProposal",
-        value: TextProposal.encode(TextProposal.fromPartial((content.value as DeepPartial<TextProposal>))).finish()
+        value: TextProposal.encode(TextProposal.fromPartial(TextProposal.fromAmino(content.value))).finish()
       });
 
     case "/evmos.incentives.v1.RegisterIncentiveProposal":
       return Any.fromPartial({
         typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
-        value: RegisterIncentiveProposal.encode(RegisterIncentiveProposal.fromPartial((content.value as DeepPartial<RegisterIncentiveProposal>))).finish()
+        value: RegisterIncentiveProposal.encode(RegisterIncentiveProposal.fromPartial(RegisterIncentiveProposal.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/ClientUpdateProposal":
       return Any.fromPartial({
         typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
-        value: ClientUpdateProposal.encode(ClientUpdateProposal.fromPartial((content.value as DeepPartial<ClientUpdateProposal>))).finish()
+        value: ClientUpdateProposal.encode(ClientUpdateProposal.fromPartial(ClientUpdateProposal.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/UpgradeProposal":
       return Any.fromPartial({
         typeUrl: "/ibc.core.client.v1.UpgradeProposal",
-        value: UpgradeProposal.encode(UpgradeProposal.fromPartial((content.value as DeepPartial<UpgradeProposal>))).finish()
+        value: UpgradeProposal.encode(UpgradeProposal.fromPartial(UpgradeProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/poolincentives/replace-pool-incentives-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
-        value: ReplacePoolIncentivesProposal.encode(ReplacePoolIncentivesProposal.fromPartial((content.value as DeepPartial<ReplacePoolIncentivesProposal>))).finish()
+        value: ReplacePoolIncentivesProposal.encode(ReplacePoolIncentivesProposal.fromPartial(ReplacePoolIncentivesProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/poolincentives/update-pool-incentives-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
-        value: UpdatePoolIncentivesProposal.encode(UpdatePoolIncentivesProposal.fromPartial((content.value as DeepPartial<UpdatePoolIncentivesProposal>))).finish()
+        value: UpdatePoolIncentivesProposal.encode(UpdatePoolIncentivesProposal.fromPartial(UpdatePoolIncentivesProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/v1beta1/set-superfluid-assets-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
-        value: SetSuperfluidAssetsProposal.encode(SetSuperfluidAssetsProposal.fromPartial((content.value as DeepPartial<SetSuperfluidAssetsProposal>))).finish()
+        value: SetSuperfluidAssetsProposal.encode(SetSuperfluidAssetsProposal.fromPartial(SetSuperfluidAssetsProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/v1beta1/remove-superfluid-assets-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
-        value: RemoveSuperfluidAssetsProposal.encode(RemoveSuperfluidAssetsProposal.fromPartial((content.value as DeepPartial<RemoveSuperfluidAssetsProposal>))).finish()
+        value: RemoveSuperfluidAssetsProposal.encode(RemoveSuperfluidAssetsProposal.fromPartial(RemoveSuperfluidAssetsProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/v1beta1/update-unpool-white-list-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
-        value: UpdateUnpoolWhiteListProposal.encode(UpdateUnpoolWhiteListProposal.fromPartial((content.value as DeepPartial<UpdateUnpoolWhiteListProposal>))).finish()
+        value: UpdateUnpoolWhiteListProposal.encode(UpdateUnpoolWhiteListProposal.fromPartial(UpdateUnpoolWhiteListProposal.fromAmino(content.value))).finish()
       });
 
     case "osmosis/txfees/update-fee-token-proposal":
       return Any.fromPartial({
         typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
-        value: UpdateFeeTokenProposal.encode(UpdateFeeTokenProposal.fromPartial((content.value as DeepPartial<UpdateFeeTokenProposal>))).finish()
+        value: UpdateFeeTokenProposal.encode(UpdateFeeTokenProposal.fromPartial(UpdateFeeTokenProposal.fromAmino(content.value))).finish()
       });
 
     default:

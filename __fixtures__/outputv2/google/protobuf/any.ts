@@ -237,10 +237,10 @@ export interface AnyAmino {
   type: string;
 
   /** Must be a valid serialized protocol buffer of the above specified type. */
-  value: Uint8Array;
+  value: any;
 }
 export interface AnyAminoMsg {
-  type: "/google.protobuf.Any";
+  type: string;
   value: AnyAmino;
 }
 

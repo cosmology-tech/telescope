@@ -715,31 +715,31 @@ export const Authorization_FromAmino = (content: AnyAmino) => {
     case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
       return Any.fromPartial({
         typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization1.encode(DepositDeploymentAuthorization1.fromPartial((content.value as DeepPartial<DepositDeploymentAuthorization1>))).finish()
+        value: DepositDeploymentAuthorization1.encode(DepositDeploymentAuthorization1.fromPartial(DepositDeploymentAuthorization1.fromAmino(content.value))).finish()
       });
 
     case "/akash.deployment.v1beta2.DepositDeploymentAuthorization":
       return Any.fromPartial({
         typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization2.encode(DepositDeploymentAuthorization2.fromPartial((content.value as DeepPartial<DepositDeploymentAuthorization2>))).finish()
+        value: DepositDeploymentAuthorization2.encode(DepositDeploymentAuthorization2.fromPartial(DepositDeploymentAuthorization2.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/GenericAuthorization":
       return Any.fromPartial({
         typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
-        value: GenericAuthorization.encode(GenericAuthorization.fromPartial((content.value as DeepPartial<GenericAuthorization>))).finish()
+        value: GenericAuthorization.encode(GenericAuthorization.fromPartial(GenericAuthorization.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/SendAuthorization":
       return Any.fromPartial({
         typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
-        value: SendAuthorization.encode(SendAuthorization.fromPartial((content.value as DeepPartial<SendAuthorization>))).finish()
+        value: SendAuthorization.encode(SendAuthorization.fromPartial(SendAuthorization.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/StakeAuthorization":
       return Any.fromPartial({
         typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
-        value: StakeAuthorization.encode(StakeAuthorization.fromPartial((content.value as DeepPartial<StakeAuthorization>))).finish()
+        value: StakeAuthorization.encode(StakeAuthorization.fromPartial(StakeAuthorization.fromAmino(content.value))).finish()
       });
 
     default:

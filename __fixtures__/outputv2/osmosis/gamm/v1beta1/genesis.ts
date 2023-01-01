@@ -376,13 +376,13 @@ export const PoolI_FromAmino = (content: AnyAmino) => {
     case "osmosis/gamm/pool":
       return Any.fromPartial({
         typeUrl: "/osmosis.gamm.v1beta1.Pool",
-        value: Pool1.encode(Pool1.fromPartial((content.value as DeepPartial<Pool1>))).finish()
+        value: Pool1.encode(Pool1.fromPartial(Pool1.fromAmino(content.value))).finish()
       });
 
     case "osmosis/gamm/pool":
       return Any.fromPartial({
         typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
-        value: Pool2.encode(Pool2.fromPartial((content.value as DeepPartial<Pool2>))).finish()
+        value: Pool2.encode(Pool2.fromPartial(Pool2.fromAmino(content.value))).finish()
       });
 
     default:
