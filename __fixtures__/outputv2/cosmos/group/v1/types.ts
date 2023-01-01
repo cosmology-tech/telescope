@@ -2795,13 +2795,13 @@ export const DecisionPolicy_FromAmino = (content: AnyAmino) => {
     case "cosmos-sdk/ThresholdDecisionPolicy":
       return Any.fromPartial({
         typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy",
-        value: ThresholdDecisionPolicy.encode(ThresholdDecisionPolicy.fromPartial((content.value as DeepPartial<ThresholdDecisionPolicy>))).finish()
+        value: ThresholdDecisionPolicy.encode(ThresholdDecisionPolicy.fromPartial(ThresholdDecisionPolicy.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/PercentageDecisionPolicy":
       return Any.fromPartial({
         typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy",
-        value: PercentageDecisionPolicy.encode(PercentageDecisionPolicy.fromPartial((content.value as DeepPartial<PercentageDecisionPolicy>))).finish()
+        value: PercentageDecisionPolicy.encode(PercentageDecisionPolicy.fromPartial(PercentageDecisionPolicy.fromAmino(content.value))).finish()
       });
 
     default:

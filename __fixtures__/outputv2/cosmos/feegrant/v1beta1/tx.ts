@@ -592,19 +592,19 @@ export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
     case "cosmos-sdk/BasicAllowance":
       return Any.fromPartial({
         typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
-        value: BasicAllowance.encode(BasicAllowance.fromPartial((content.value as DeepPartial<BasicAllowance>))).finish()
+        value: BasicAllowance.encode(BasicAllowance.fromPartial(BasicAllowance.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/PeriodicAllowance":
       return Any.fromPartial({
         typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance",
-        value: PeriodicAllowance.encode(PeriodicAllowance.fromPartial((content.value as DeepPartial<PeriodicAllowance>))).finish()
+        value: PeriodicAllowance.encode(PeriodicAllowance.fromPartial(PeriodicAllowance.fromAmino(content.value))).finish()
       });
 
     case "cosmos-sdk/AllowedMsgAllowance":
       return Any.fromPartial({
         typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
-        value: AllowedMsgAllowance.encode(AllowedMsgAllowance.fromPartial((content.value as DeepPartial<AllowedMsgAllowance>))).finish()
+        value: AllowedMsgAllowance.encode(AllowedMsgAllowance.fromPartial(AllowedMsgAllowance.fromAmino(content.value))).finish()
       });
 
     default:

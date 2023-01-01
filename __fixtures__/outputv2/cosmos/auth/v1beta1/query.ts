@@ -1909,7 +1909,7 @@ export const AccountI_FromAmino = (content: AnyAmino) => {
     case "cosmos-sdk/BaseAccount":
       return Any.fromPartial({
         typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
-        value: BaseAccount.encode(BaseAccount.fromPartial((content.value as DeepPartial<BaseAccount>))).finish()
+        value: BaseAccount.encode(BaseAccount.fromPartial(BaseAccount.fromAmino(content.value))).finish()
       });
 
     default:
@@ -1945,7 +1945,7 @@ export const ModuleAccountI_FromAmino = (content: AnyAmino) => {
     case "cosmos-sdk/ModuleAccount":
       return Any.fromPartial({
         typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
-        value: ModuleAccount.encode(ModuleAccount.fromPartial((content.value as DeepPartial<ModuleAccount>))).finish()
+        value: ModuleAccount.encode(ModuleAccount.fromPartial(ModuleAccount.fromAmino(content.value))).finish()
       });
 
     default:

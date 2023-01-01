@@ -145,19 +145,17 @@ export const createInterfaceFromAminoHelper = (
                                                             t.identifier('fromPartial')
                                                         ),
                                                         [
-                                                            t.tsAsExpression(
+                                                            t.callExpression(
                                                                 t.memberExpression(
-                                                                    t.identifier('content'),
-                                                                    t.identifier('value')
+                                                                    t.identifier(type.importAs),
+                                                                    t.identifier('fromAmino')
                                                                 ),
-                                                                t.tsTypeReference(
-                                                                    t.identifier('DeepPartial'),
-                                                                    t.tsTypeParameterInstantiation([
-                                                                        t.tsTypeReference(
-                                                                            t.identifier(type.importAs)
-                                                                        )
-                                                                    ])
-                                                                )
+                                                                [
+                                                                    t.memberExpression(
+                                                                        t.identifier('content'),
+                                                                        t.identifier('value')
+                                                                    )
+                                                                ]
                                                             )
                                                         ]
                                                     )

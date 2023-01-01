@@ -105,10 +105,20 @@ export const createAminoType = (
                         fieldNameWithCase = 'type';
                     }
 
+                    let aminoField = getAminoField(context, field);
+                    if (
+                        name === 'Any' &&
+                        context.ref.proto.package === 'google.protobuf' &&
+                        // options.type === 'Amino' &&
+                        orig === 'value'
+                    ) {
+                        aminoField = t.tsAnyKeyword();
+                    }
+
                     const propSig = tsPropertySignature(
                         t.identifier(fieldNameWithCase),
                         t.tsTypeAnnotation(
-                            getAminoField(context, field)
+                            aminoField
                         ),
                         getFieldOptionality(context, field, isOneOf)
                     );
@@ -167,6 +177,20 @@ export const createAminoTypeType = (
     ) : t.tsTypeReference(
         t.identifier('string')
     );
+
+    let typeAnnotation = t.tsTypeAnnotation(
+        typ
+    );
+    if (
+        name === 'Any' &&
+        context.ref.proto.package === 'google.protobuf'
+    ) {
+        // replace type with plain string for this one case
+        typeAnnotation = t.tsTypeAnnotation(
+            t.tsStringKeyword()
+        );
+    }
+
     // scalar amino types!
     return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
         t.identifier(AminoTypeName),
@@ -175,9 +199,7 @@ export const createAminoTypeType = (
         t.tsInterfaceBody([
             tsPropertySignature(
                 t.identifier('type'),
-                t.tsTypeAnnotation(
-                    typ
-                ),
+                typeAnnotation,
                 false
             ),
             tsPropertySignature(
