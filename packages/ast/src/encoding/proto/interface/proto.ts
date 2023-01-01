@@ -151,10 +151,12 @@ export const createProtoType = (
         // let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
         let fieldNameWithCase = type === 'SDKType' ? orig : fieldName;
 
+        const protoField = getProtoField(context, field, type);
+
         const propSig = tsPropertySignature(
             t.identifier(fieldNameWithCase),
             t.tsTypeAnnotation(
-                getProtoField(context, field, type)
+                protoField
             ),
             optional || getFieldOptionality(context, field, isOneOf)
         );
