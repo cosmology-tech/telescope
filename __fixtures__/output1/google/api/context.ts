@@ -88,11 +88,6 @@ export interface Context {
  * here.
  */
 export interface ContextSDKType {
-  /**
-   * A list of RPC context rules that apply to individual API methods.
-   * 
-   * **NOTE:** All service configuration rules follow "last one wins" order.
-   */
   rules: ContextRuleSDKType[];
 }
 
@@ -132,29 +127,10 @@ export interface ContextRule {
  * element.
  */
 export interface ContextRuleSDKType {
-  /**
-   * Selects the methods to which this rule applies.
-   * 
-   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-   */
   selector: string;
-
-  /** A list of full type names of requested contexts. */
   requested: string[];
-
-  /** A list of full type names of provided contexts. */
   provided: string[];
-
-  /**
-   * A list of full type names or extension IDs of extensions allowed in grpc
-   * side channel from client to backend.
-   */
   allowed_request_extensions: string[];
-
-  /**
-   * A list of full type names or extension IDs of extensions allowed in grpc
-   * side channel from backend to client.
-   */
   allowed_response_extensions: string[];
 }
 

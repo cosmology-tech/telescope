@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { DecodeMethod } from './index';
-import { getKeyTypeEntryName } from '..';
+import { getInterfaceDecoderName, getKeyTypeEntryName } from '..';
 
 export const decode = {
     string(args: DecodeMethod) {
@@ -139,10 +139,27 @@ export const decode = {
         const num = args.field.id;
         const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
-        return switchTypeArray(num,
+
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+            const interfaceFnName = getInterfaceDecoderName(interfaceName)
+
+            return switchAnyTypeArray(
+                num,
+                prop,
+                interfaceFnName
+            );
+        }
+        return switchProtoTypeArray(num,
             prop,
             name
-        )
+        );
     }
 
 };
@@ -339,7 +356,7 @@ export const baseTypes = {
     },
 
     // SignDocDirectAux.decode(reader, reader.uint32());
-    type(args: DecodeMethod) {
+    protoType(args: DecodeMethod) {
         const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
@@ -357,6 +374,41 @@ export const baseTypes = {
                 )
             ]
         )
+    },
+
+    anyType(args: DecodeMethod) {
+        // const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceDecoderName(interfaceName)
+
+        return t.tsAsExpression(
+            t.callExpression(
+                t.identifier(interfaceFnName),
+                [
+                    t.identifier('reader')
+                ]
+            ),
+            t.tsTypeReference(
+                t.identifier('Any')
+            )
+        )
+
+    },
+
+    type(args: DecodeMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return baseTypes.anyType(args);
+        }
+        return baseTypes.protoType(args);
     },
 
     // (reader.int32() as any);
@@ -565,7 +617,7 @@ export const switchOnTagTakesArray = (num: number, prop: string, expr: t.Stateme
 };
 
 //    message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-export const switchTypeArray = (num: number, prop: string, name: string) => {
+export const switchProtoTypeArray = (num: number, prop: string, name: string) => {
     return t.switchCase(
         t.numericLiteral(num),
         [
@@ -595,6 +647,40 @@ export const switchTypeArray = (num: number, prop: string, name: string) => {
                                 )
                             ]
                         )
+                    ]
+                )
+            ),
+            t.breakStatement()
+        ]
+    )
+};
+
+export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
+    return t.switchCase(
+        t.numericLiteral(num),
+        [
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(prop)
+                        ),
+                        t.identifier('push')
+                    ),
+                    [
+                        t.tsAsExpression(
+                            t.callExpression(
+                                t.identifier(name),
+                                [
+                                    t.identifier('reader')
+                                ]
+                            ),
+                            t.tsTypeReference(
+                                t.identifier('Any')
+                            )
+                        )
+
                     ]
                 )
             ),

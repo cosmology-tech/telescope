@@ -16,10 +16,7 @@ export interface GenesisState {
 
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the parameters of the module. */
   params?: ParamsSDKType;
-
-  /** list of claim records with the corresponding airdrop recipient */
   claims_records: ClaimsRecordAddressSDKType[];
 }
 
@@ -52,28 +49,12 @@ export interface Params {
 
 /** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
-  /** enable claiming process */
   enable_claims: boolean;
-
-  /** timestamp of the airdrop start */
   airdrop_start_time?: Date;
-
-  /** duration until decay of claimable tokens begin */
   duration_until_decay?: DurationSDKType;
-
-  /** duration of the token claim decay period */
   duration_of_decay?: DurationSDKType;
-
-  /** denom of claimable coin */
   claims_denom: string;
-
-  /**
-   * list of authorized channel identifiers that can perform address
-   * attestations via IBC.
-   */
   authorized_channels: string[];
-
-  /** list of channel identifiers from EVM compatible chains */
   evm_channels: string[];
 }
 

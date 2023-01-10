@@ -11,7 +11,6 @@ export interface QueryBalancesRequest {
 
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
-  /** address of the clawback vesting account */
   address: string;
 }
 
@@ -35,13 +34,8 @@ export interface QueryBalancesResponse {
  * method.
  */
 export interface QueryBalancesResponseSDKType {
-  /** current amount of locked tokens */
   locked: CoinSDKType[];
-
-  /** current amount of unvested tokens */
   unvested: CoinSDKType[];
-
-  /** current amount of vested tokens */
   vested: CoinSDKType[];
 }
 

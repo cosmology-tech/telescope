@@ -144,7 +144,6 @@ export interface QueryClassesRequest {
 
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 

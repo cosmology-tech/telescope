@@ -35,21 +35,7 @@ export interface Explain {
 
 /** @deprecated */
 export interface ExplainSDKType {
-  /**
-   * All of the observed values.
-   * 
-   * The field value_index is an index in the values list.
-   * Separating values from steps is needed to remove redundant values.
-   */
   values: ValueSDKType[];
-
-  /**
-   * List of steps.
-   * 
-   * Repeated evaluations of the same expression generate new ExprStep
-   * instances. The order of such ExprStep instances matches the order of
-   * elements returned by Comprehension.iter_range.
-   */
   expr_steps: Explain_ExprStepSDKType[];
 }
 
@@ -64,10 +50,7 @@ export interface Explain_ExprStep {
 
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
-  /** ID of corresponding Expr node. */
   id: Long;
-
-  /** Index of the value in the values list. */
   value_index: number;
 }
 

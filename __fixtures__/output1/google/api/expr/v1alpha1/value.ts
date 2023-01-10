@@ -55,40 +55,17 @@ export interface Value {
  * range of values.
  */
 export interface ValueSDKType {
-  /** Null value. */
   null_value?: NullValue;
-
-  /** Boolean value. */
   bool_value?: boolean;
-
-  /** Signed integer value. */
   int64_value?: Long;
-
-  /** Unsigned integer value. */
   uint64_value?: Long;
-
-  /** Floating point value. */
   double_value?: number;
-
-  /** UTF-8 string value. */
   string_value?: string;
-
-  /** Byte string value. */
   bytes_value?: Uint8Array;
-
-  /** An enum value. */
   enum_value?: EnumValueSDKType;
-
-  /** The proto message backing an object value. */
   object_value?: AnySDKType;
-
-  /** Map value. */
   map_value?: MapValueSDKType;
-
-  /** List value. */
   list_value?: ListValueSDKType;
-
-  /** Type value. */
   type_value?: string;
 }
 
@@ -103,10 +80,7 @@ export interface EnumValue {
 
 /** An enum value. */
 export interface EnumValueSDKType {
-  /** The fully qualified name of the enum type. */
   type: string;
-
-  /** The value of the enum. */
   value: number;
 }
 
@@ -128,7 +102,6 @@ export interface ListValue {
  * required for use in a 'oneof'.
  */
 export interface ListValueSDKType {
-  /** The ordered values in the list. */
   values: ValueSDKType[];
 }
 
@@ -155,12 +128,6 @@ export interface MapValue {
  * required for use in a 'oneof'.
  */
 export interface MapValueSDKType {
-  /**
-   * The set of map entries.
-   * 
-   * CEL has fewer restrictions on keys, so a protobuf map represenation
-   * cannot be used.
-   */
   entries: MapValue_EntrySDKType[];
 }
 
@@ -180,15 +147,7 @@ export interface MapValue_Entry {
 
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
-  /**
-   * The key.
-   * 
-   * Must be unique with in the map.
-   * Currently only boolean, int, uint, and string values can be keys.
-   */
   key?: ValueSDKType;
-
-  /** The value. */
   value?: ValueSDKType;
 }
 

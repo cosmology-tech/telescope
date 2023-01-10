@@ -15,10 +15,7 @@ export interface GenesisState {
 
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
-
-  /** accounts are the accounts present at genesis. */
   accounts: AnySDKType[];
 }
 

@@ -410,7 +410,6 @@ export interface FieldMask {
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
 export interface FieldMaskSDKType {
-  /** The set of field mask paths. */
   paths: string[];
 }
 

@@ -1,6 +1,9 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
-import { ProtoRoot } from '@osmonauts/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@osmonauts/types';
+import { ProtoStore } from './store';
+import { GenericParseContext, getTypeUrl, getAminoTypeName, getPluginValue } from '@osmonauts/ast';
+import minimatch from 'minimatch';
 
 export const getNestedProto = (root: ProtoRoot) => {
     const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';
@@ -19,6 +22,9 @@ export const getNested = (root: ProtoRoot, path: string[]) => {
 };
 
 // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
+// NOTE: sometimes you need to pass in `.Dummy` for the first call,
+// for example, osmosis.gamm.v1beta1.Dummy, so the first pop()
+// that gets called, it will still look relative to the current module scope
 export const lookupSymbolScopes = (name: string, relativeTo: string, list?: string[]) => {
     // fully-qualified name
     if (name.startsWith('.')) return [name.replace(/^\./, '')];
@@ -30,6 +36,83 @@ export const lookupSymbolScopes = (name: string, relativeTo: string, list?: stri
     const newName = [...relativeToParts, ...name.split('.')].join('.');
     if (newName === name) return [...list, name];
     return lookupSymbolScopes(name, relativeToParts.join('.'), [...list, newName]);
+};
+
+export const createTypeUrlTypeMap = (
+    store: ProtoStore,
+    fromRef: ProtoRef // ref to create HashMap for (includes proper import names)
+): InterfaceTypeUrlMap => {
+    const ctx = new GenericParseContext(fromRef, store, store.options);
+    const result = {};
+    const interfaces = [];
+    Object.keys(fromRef.traversed?.acceptsInterface ?? {}).forEach(implementsType => {
+        interfaces.push(implementsType);
+    });
+
+    store.getProtos().forEach(ref => {
+        if (
+            ref.traversed?.implementsInterface
+        ) {
+            Object.keys(ref.traversed.implementsInterface).forEach(implementsType => {
+                if (!interfaces.includes(implementsType)) return;
+                const types = ref.traversed?.implementsInterface[implementsType];
+                result[implementsType] = result[implementsType] || [];
+                result[implementsType].push({
+                    ref: ref.filename,
+                    pkg: ref.proto.package,
+                    types: types?.map(type => {
+                        const protoType: ProtoType = getNestedProto(ref.proto)[type];
+                        const typeUrl = getTypeUrl(ref.proto, protoType);
+                        const aminoType = getAminoTypeName(ctx, ref.proto, protoType);
+                        return {
+                            typeUrl,
+                            aminoType,
+                            type,
+                            importAs: ctx.getTypeNameFromFieldName(
+                                type, ref.filename
+                            )
+                        }
+                    })
+                });
+            });
+        }
+    });
+    return result;
+};
+
+export const isRefIncluded = (
+    ref: ProtoRef,
+    include?: {
+        patterns?: string[];
+        packages?: string[];
+        protos?: string[];
+    }
+) => {
+    // if no include object, no filter
+    if (!include) return true;
+    // if no arrays are populated, no filter
+    if (
+        !include.patterns?.length &&
+        !include.packages?.length &&
+        !include.protos?.length
+    ) {
+        return true;
+    }
+
+    if (include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
+        return true;
+    }
+
+    if (include?.packages?.includes(ref.proto.package)) {
+        return true;
+    }
+
+    if (include?.protos?.includes(ref.filename)) {
+        return true;
+    }
+
+    return false;
+
 };
 
 export const getPackageAndNestedFromStr = (type: string, pkg: string) => {

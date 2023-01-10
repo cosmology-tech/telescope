@@ -737,14 +737,6 @@ export interface RoutingRule {
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
 export interface RoutingRuleSDKType {
-  /**
-   * A collection of Routing Parameter specifications.
-   * **NOTE:** If multiple Routing Parameters describe the same key
-   * (via the `path_template` field or via the `field` field when
-   * `path_template` is not provided), "last one wins" rule
-   * determines which Parameter gets used.
-   * See the examples for more details.
-   */
   routing_parameters: RoutingParameterSDKType[];
 }
 
@@ -814,65 +806,7 @@ export interface RoutingParameter {
 
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterSDKType {
-  /** A request field to extract the header key-value pair from. */
   field: string;
-
-  /**
-   * A pattern matching the key-value field. Optional.
-   * If not specified, the whole field specified in the `field` field will be
-   * taken as value, and its name used as key. If specified, it MUST contain
-   * exactly one named segment (along with any number of unnamed segments) The
-   * pattern will be matched over the field specified in the `field` field, then
-   * if the match is successful:
-   * - the name of the single named segment will be used as a header name,
-   * - the match value of the segment will be used as a header value;
-   * if the match is NOT successful, nothing will be sent.
-   * 
-   * Example:
-   * 
-   *               -- This is a field in the request message
-   *              |   that the header value will be extracted from.
-   *              |
-   *              |                     -- This is the key name in the
-   *              |                    |   routing header.
-   *              V                    |
-   *     field: "table_name"           v
-   *     path_template: "projects/*\/{table_location=instances/*}/tables/*"
-   *                                                ^            ^
-   *                                                |            |
-   *       In the {} brackets is the pattern that --             |
-   *       specifies what to extract from the                    |
-   *       field as a value to be sent.                          |
-   *                                                             |
-   *      The string in the field must match the whole pattern --
-   *      before brackets, inside brackets, after brackets.
-   * 
-   * When looking at this specific example, we can see that:
-   * - A key-value pair with the key `table_location`
-   *   and the value matching `instances/*` should be added
-   *   to the x-goog-request-params routing header.
-   * - The value is extracted from the request message's `table_name` field
-   *   if it matches the full pattern specified:
-   *   `projects/*\/instances/*\/tables/*`.
-   * 
-   * **NB:** If the `path_template` field is not provided, the key name is
-   * equal to the field name, and the whole field should be sent as a value.
-   * This makes the pattern for the field and the value functionally equivalent
-   * to `**`, and the configuration
-   * 
-   *     {
-   *       field: "table_name"
-   *     }
-   * 
-   * is a functionally equivalent shorthand to:
-   * 
-   *     {
-   *       field: "table_name"
-   *       path_template: "{table_name=**}"
-   *     }
-   * 
-   * See Example 1 for more details.
-   */
   path_template: string;
 }
 

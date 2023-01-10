@@ -24,19 +24,9 @@ export interface GenesisState {
 
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
-
-  /** balances is an array containing the balances of all the accounts. */
   balances: BalanceSDKType[];
-
-  /**
-   * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
-   * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
-   */
   supply: CoinSDKType[];
-
-  /** denom_metadata defines the metadata of the differents coins. */
   denom_metadata: MetadataSDKType[];
 }
 
@@ -57,10 +47,7 @@ export interface Balance {
  * genesis state.
  */
 export interface BalanceSDKType {
-  /** address is the address of the balance holder. */
   address: string;
-
-  /** coins defines the different coins this balance holds. */
   coins: CoinSDKType[];
 }
 

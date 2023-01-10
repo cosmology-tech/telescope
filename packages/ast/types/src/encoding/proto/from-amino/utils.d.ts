@@ -20,6 +20,11 @@ export declare const fromAminoJSON: {
     sint64(args: FromAminoJSONMethod): t.ObjectProperty;
     fixed64(args: FromAminoJSONMethod): t.ObjectProperty;
     sfixed64(args: FromAminoJSONMethod): t.ObjectProperty;
+    rawBytes(args: FromAminoJSONMethod): t.ObjectProperty;
+    wasmByteCode(args: FromAminoJSONMethod): t.ObjectProperty;
+    pubkey(args: FromAminoJSONMethod): t.ObjectProperty;
+    protoType(args: FromAminoJSONMethod): t.ObjectProperty;
+    anyType(args: FromAminoJSONMethod): t.ObjectProperty;
     type(args: FromAminoJSONMethod): t.ObjectProperty;
     enum(args: FromAminoJSONMethod): t.ObjectProperty;
     bytes(args: FromAminoJSONMethod): t.ObjectProperty;
@@ -48,8 +53,11 @@ export declare const arrayTypes: {
     double(): t.Identifier;
     float(): t.Identifier;
     enum(args: FromAminoJSONMethod): t.CallExpression;
+    anyType(args: FromAminoJSONMethod): t.CallExpression;
+    protoType(args: FromAminoJSONMethod): t.CallExpression;
     type(args: FromAminoJSONMethod): t.CallExpression;
 };
 export declare const fromAminoMessages: {
+    height(context: ProtoParseContext, name: string, proto: ProtoType): t.ReturnStatement[];
     duration(context: ProtoParseContext, name: string, proto: ProtoType): (t.ReturnStatement | t.VariableDeclaration)[];
 };

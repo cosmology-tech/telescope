@@ -23,19 +23,10 @@ export interface Decl {
 
 /** A declaration. */
 export interface DeclSDKType {
-  /** The id of the declaration. */
   id: number;
-
-  /** The name of the declaration. */
   name: string;
-
-  /** The documentation string for the declaration. */
   doc: string;
-
-  /** An identifier declaration. */
   ident?: IdentDeclSDKType;
-
-  /** A function declaration. */
   function?: FunctionDeclSDKType;
 }
 
@@ -66,16 +57,8 @@ export interface DeclType {
  * and dispatching.
  */
 export interface DeclTypeSDKType {
-  /** The expression id of the declared type, if applicable. */
   id: number;
-
-  /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
   type: string;
-
-  /**
-   * An ordered list of type parameters, e.g. `<string, int>`.
-   * Only applies to a subset of types, e.g. `map`, `list`.
-   */
   type_params: DeclTypeSDKType[];
 }
 
@@ -90,10 +73,7 @@ export interface IdentDecl {
 
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
-  /** Optional type of the identifier. */
   type?: DeclTypeSDKType;
-
-  /** Optional value of the identifier. */
   value?: ExprSDKType;
 }
 
@@ -111,13 +91,8 @@ export interface FunctionDecl {
 
 /** A function declaration. */
 export interface FunctionDeclSDKType {
-  /** The function arguments. */
   args: IdentDeclSDKType[];
-
-  /** Optional declared return type. */
   return_type?: DeclTypeSDKType;
-
-  /** If the first argument of the function is the receiver. */
   receiver_function: boolean;
 }
 

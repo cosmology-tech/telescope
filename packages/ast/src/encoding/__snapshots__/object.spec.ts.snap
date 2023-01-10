@@ -2915,6 +2915,96 @@ exports[`ibc/core/types/v1/genesis name collisions 3`] = `
 ]
 `;
 
+exports[`osmosis/gamm/v1beta1/query 1`] = `
+"export const QueryPoolsResponse = {
+  encode(message: QueryPoolsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.pools) {
+      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryPoolsResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.pools.push(Any.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryPoolsResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
+  },
+
+  toJSON(message: QueryPoolsResponse): unknown {
+    const obj: any = {};
+
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
+    const message = createBaseQueryPoolsResponse();
+    message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+
+  fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolsResponse): QueryPoolsResponseSDKType {
+    const obj: any = {};
+
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  }
+
+};"
+`;
+
 exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 "export const MsgJoinPool = {
   encode(message: MsgJoinPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {

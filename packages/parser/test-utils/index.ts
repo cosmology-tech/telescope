@@ -37,7 +37,7 @@ const defaultTelescopeOptionsForTesting = {
 export const defaultTelescopeOptions = deepmerge(teleDefaults, defaultTelescopeOptionsForTesting);
 
 export const getTestProtoStore = (options?: TelescopeOptions) => {
-    const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1'], options ? deepmerge(defaultTelescopeOptions, options) : defaultTelescopeOptions);
+    const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
     return store;
 }
 

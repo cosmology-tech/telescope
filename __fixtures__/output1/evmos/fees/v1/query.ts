@@ -19,7 +19,6 @@ export interface QueryDevFeeInfosRequest {
  * method.
  */
 export interface QueryDevFeeInfosRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -40,8 +39,6 @@ export interface QueryDevFeeInfosResponse {
  */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -59,7 +56,6 @@ export interface QueryDevFeeInfoRequest {
  * method.
  */
 export interface QueryDevFeeInfoRequestSDKType {
-  /** contract identifier is the hex contract address of a contract */
   contract_address: string;
 }
 
@@ -118,10 +114,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
  * Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
-  /** deployer bech32 address */
   deployer_address: string;
-
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -142,8 +135,6 @@ export interface QueryDevFeeInfosPerDeployerResponse {
  */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 

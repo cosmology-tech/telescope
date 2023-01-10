@@ -3,6 +3,90 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.73.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.72.0...@osmonauts/ast@0.73.0) (2023-01-01)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+# [0.72.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.71.0...@osmonauts/ast@0.72.0) (2022-12-30)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+# [0.71.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.70.0...@osmonauts/ast@0.71.0) (2022-12-29)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+# [0.70.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.5...@osmonauts/ast@0.70.0) (2022-12-24)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+## [0.69.5](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.4...@osmonauts/ast@0.69.5) (2022-12-19)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+## [0.69.4](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.3...@osmonauts/ast@0.69.4) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+## [0.69.3](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.2...@osmonauts/ast@0.69.3) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+## [0.69.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.1...@osmonauts/ast@0.69.2) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+## [0.69.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.69.0...@osmonauts/ast@0.69.1) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
+# [0.69.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.80.0-rc.1...@osmonauts/ast@0.69.0) (2022-12-18)
+
+
+### Reverts
+
+* Revert "RC versions ready" ([04081a9](https://github.com/osmosis-labs/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+* Revert "chore(release): publish" ([086a55f](https://github.com/osmosis-labs/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 # [0.68.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.67.0...@osmonauts/ast@0.68.0) (2022-11-25)
 
 **Note:** Version bump only for package @osmonauts/ast

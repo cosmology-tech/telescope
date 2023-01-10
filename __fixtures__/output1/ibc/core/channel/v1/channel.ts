@@ -166,22 +166,10 @@ export interface Channel {
  * sending packets and one end capable of receiving packets.
  */
 export interface ChannelSDKType {
-  /** current state of the channel end */
   state: State;
-
-  /** whether the channel is ordered or unordered */
   ordering: Order;
-
-  /** counterparty channel end */
   counterparty?: CounterpartySDKType;
-
-  /**
-   * list of connection identifiers, in order, along which packets sent on
-   * this channel will travel
-   */
   connection_hops: string[];
-
-  /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
 
@@ -220,28 +208,12 @@ export interface IdentifiedChannel {
  * identifier fields.
  */
 export interface IdentifiedChannelSDKType {
-  /** current state of the channel end */
   state: State;
-
-  /** whether the channel is ordered or unordered */
   ordering: Order;
-
-  /** counterparty channel end */
   counterparty?: CounterpartySDKType;
-
-  /**
-   * list of connection identifiers, in order, along which packets sent on
-   * this channel will travel
-   */
   connection_hops: string[];
-
-  /** opaque channel version, which is agreed upon during the handshake */
   version: string;
-
-  /** port identifier */
   port_id: string;
-
-  /** channel identifier */
   channel_id: string;
 }
 
@@ -256,10 +228,7 @@ export interface Counterparty {
 
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartySDKType {
-  /** port on the counterparty chain which owns the other end of the channel. */
   port_id: string;
-
-  /** channel end on the counterparty chain */
   channel_id: string;
 }
 
@@ -296,32 +265,13 @@ export interface Packet {
 
 /** Packet defines a type that carries data across different chains through IBC */
 export interface PacketSDKType {
-  /**
-   * number corresponds to the order of sends and receives, where a Packet
-   * with an earlier sequence number must be sent and received before a Packet
-   * with a later sequence number.
-   */
   sequence: Long;
-
-  /** identifies the port on the sending chain. */
   source_port: string;
-
-  /** identifies the channel end on the sending chain. */
   source_channel: string;
-
-  /** identifies the port on the receiving chain. */
   destination_port: string;
-
-  /** identifies the channel end on the receiving chain. */
   destination_channel: string;
-
-  /** actual opaque bytes transferred directly to the application module */
   data: Uint8Array;
-
-  /** block height after which the packet times out */
   timeout_height?: HeightSDKType;
-
-  /** block timestamp (in nanoseconds) after which the packet times out */
   timeout_timestamp: Long;
 }
 
@@ -352,16 +302,9 @@ export interface PacketState {
  * state as a commitment, acknowledgement, or a receipt.
  */
 export interface PacketStateSDKType {
-  /** channel port identifier. */
   port_id: string;
-
-  /** channel unique identifier. */
   channel_id: string;
-
-  /** packet sequence. */
   sequence: Long;
-
-  /** embedded data that represents packet state. */
   data: Uint8Array;
 }
 

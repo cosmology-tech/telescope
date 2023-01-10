@@ -28,25 +28,9 @@ export interface MsgIBCSend {
 
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
-  /** the channel by which the packet will be sent */
   channel: string;
-
-  /**
-   * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
-   */
   timeout_height: Long;
-
-  /**
-   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
-   */
   timeout_timestamp: Long;
-
-  /**
-   * Data is the payload to transfer. We must not make assumption what format or
-   * content is in here.
-   */
   data: Uint8Array;
 }
 

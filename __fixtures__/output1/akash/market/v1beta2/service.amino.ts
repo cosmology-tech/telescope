@@ -5,7 +5,7 @@ import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, Ms
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
-export interface AminoMsgCreateBid extends AminoMsg {
+export interface MsgCreateBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-bid";
   value: {
     order: {
@@ -25,7 +25,7 @@ export interface AminoMsgCreateBid extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCloseBid extends AminoMsg {
+export interface MsgCloseBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-close-bid";
   value: {
     bid_id: {
@@ -37,7 +37,7 @@ export interface AminoMsgCloseBid extends AminoMsg {
     };
   };
 }
-export interface AminoMsgWithdrawLease extends AminoMsg {
+export interface MsgWithdrawLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-withdraw-lease";
   value: {
     bid_id: {
@@ -49,7 +49,7 @@ export interface AminoMsgWithdrawLease extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCreateLease extends AminoMsg {
+export interface MsgCreateLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-lease";
   value: {
     bid_id: {
@@ -61,7 +61,7 @@ export interface AminoMsgCreateLease extends AminoMsg {
     };
   };
 }
-export interface AminoMsgCloseLease extends AminoMsg {
+export interface MsgCloseLeaseAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-close-lease";
   value: {
     lease_id: {
@@ -81,7 +81,7 @@ export const AminoConverter = {
       provider,
       price,
       deposit
-    }: MsgCreateBid): AminoMsgCreateBid["value"] => {
+    }: MsgCreateBid): MsgCreateBidAminoType["value"] => {
       return {
         order: {
           owner: order.owner,
@@ -105,7 +105,7 @@ export const AminoConverter = {
       provider,
       price,
       deposit
-    }: AminoMsgCreateBid["value"]): MsgCreateBid => {
+    }: MsgCreateBidAminoType["value"]): MsgCreateBid => {
       return {
         order: {
           owner: order.owner,
@@ -129,7 +129,7 @@ export const AminoConverter = {
     aminoType: "akash/market/v1beta2/testonly-close-bid",
     toAmino: ({
       bidId
-    }: MsgCloseBid): AminoMsgCloseBid["value"] => {
+    }: MsgCloseBid): MsgCloseBidAminoType["value"] => {
       return {
         bid_id: {
           owner: bidId.owner,
@@ -142,7 +142,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       bid_id
-    }: AminoMsgCloseBid["value"]): MsgCloseBid => {
+    }: MsgCloseBidAminoType["value"]): MsgCloseBid => {
       return {
         bidId: {
           owner: bid_id.owner,
@@ -158,7 +158,7 @@ export const AminoConverter = {
     aminoType: "akash/market/v1beta2/testonly-withdraw-lease",
     toAmino: ({
       bidId
-    }: MsgWithdrawLease): AminoMsgWithdrawLease["value"] => {
+    }: MsgWithdrawLease): MsgWithdrawLeaseAminoType["value"] => {
       return {
         bid_id: {
           owner: bidId.owner,
@@ -171,7 +171,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       bid_id
-    }: AminoMsgWithdrawLease["value"]): MsgWithdrawLease => {
+    }: MsgWithdrawLeaseAminoType["value"]): MsgWithdrawLease => {
       return {
         bidId: {
           owner: bid_id.owner,
@@ -187,7 +187,7 @@ export const AminoConverter = {
     aminoType: "akash/market/v1beta2/testonly-create-lease",
     toAmino: ({
       bidId
-    }: MsgCreateLease): AminoMsgCreateLease["value"] => {
+    }: MsgCreateLease): MsgCreateLeaseAminoType["value"] => {
       return {
         bid_id: {
           owner: bidId.owner,
@@ -200,7 +200,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       bid_id
-    }: AminoMsgCreateLease["value"]): MsgCreateLease => {
+    }: MsgCreateLeaseAminoType["value"]): MsgCreateLease => {
       return {
         bidId: {
           owner: bid_id.owner,
@@ -216,7 +216,7 @@ export const AminoConverter = {
     aminoType: "akash/market/v1beta2/testonly-close-lease",
     toAmino: ({
       leaseId
-    }: MsgCloseLease): AminoMsgCloseLease["value"] => {
+    }: MsgCloseLease): MsgCloseLeaseAminoType["value"] => {
       return {
         lease_id: {
           owner: leaseId.owner,
@@ -229,7 +229,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       lease_id
-    }: AminoMsgCloseLease["value"]): MsgCloseLease => {
+    }: MsgCloseLeaseAminoType["value"]): MsgCloseLease => {
       return {
         leaseId: {
           owner: lease_id.owner,

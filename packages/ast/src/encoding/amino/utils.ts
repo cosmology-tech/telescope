@@ -3,8 +3,12 @@ import { DEFAULT_AMINO_EXCEPTIONS, ProtoAny, ProtoRoot, ProtoType } from '@osmon
 import { kebab } from "case";
 import { GenericParseContext } from '../context';
 
+export const getTypeUrlWithPkgAndName = (pkg: string, name: string) => {
+    return `/${pkg}.${name}`;
+}
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
-    return `/${root.package}.${proto.name}`;
+    if (!proto.name) return;
+    return getTypeUrlWithPkgAndName(root.package, proto.name);
 }
 
 export const arrayTypeNDim = (body, n) => {
@@ -14,10 +18,24 @@ export const arrayTypeNDim = (body, n) => {
     );
 };
 
-export const typeUrlToAmino = (
+export const getAminoTypeName = (
     context: GenericParseContext,
-    typeUrl: string
+    root: ProtoRoot,
+    proto: ProtoType
 ) => {
+
+    if (proto.options?.['(amino.name)']) {
+        return proto.options['(amino.name)'];
+    }
+
+    if (!proto.name) {
+        // seems to only happen for 
+        //  SourceInfo_PositionsEntry  (in hash map inside google.api.expr.v1beta1)
+        return;
+    }
+
+    const typeUrl: string = getTypeUrl(root, proto);
+
     const exceptionsToCheck = {
         ...(context.options.aminoEncoding.exceptions ?? {}),
         ...DEFAULT_AMINO_EXCEPTIONS
@@ -72,6 +90,17 @@ export const typeUrlToAmino = (
                 n[n.length - 1] = kebab(n[n.length - 1]);
                 n[n.length - 1] = n[n.length - 1].replace(/^msg-/, '');
                 return n.join('/');
+            }
+
+            if (/lockup/.test(typeUrl)) {
+                switch (typeUrl) {
+                    case '/osmosis.lockup.MsgLockTokens':
+                        return 'osmosis/lockup/lock-tokens';
+                    case '/osmosis.lockup.MsgBeginUnlockingAll':
+                        return 'osmosis/lockup/begin-unlock-tokens';
+                    case '/osmosis.lockup.MsgBeginUnlocking':
+                        return 'osmosis/lockup/begin-unlock-period-lock';
+                }
             }
 
             const n = elements.filter(a => !a.match(/v1beta1/));

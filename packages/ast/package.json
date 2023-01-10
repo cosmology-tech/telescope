@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/ast",
-  "version": "0.68.0",
+  "version": "0.73.0",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
@@ -24,6 +24,8 @@
     "build:ts": "tsc --project ./tsconfig.json",
     "build": "npm run build:module && npm run build:main",
     "buidl": "npm run build && npm run build:ts",
+    "buidl:clean": "npm run clean && npm run buidl",
+    "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
     "format": "eslint . --fix",
@@ -79,6 +81,7 @@
     "mkdirp": "1.0.4",
     "prettier": "^2.7.0",
     "regenerator-runtime": "^0.13.7",
+    "rimraf": "3.0.2",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
   },
@@ -86,9 +89,9 @@
     "@babel/parser": "^7.19.3",
     "@babel/runtime": "^7.19.0",
     "@babel/types": "7.19.3",
-    "@osmonauts/proto-parser": "^0.34.0",
-    "@osmonauts/types": "^0.26.0",
-    "@osmonauts/utils": "^0.8.0",
+    "@osmonauts/proto-parser": "^0.37.0",
+    "@osmonauts/types": "^0.29.0",
+    "@osmonauts/utils": "^0.10.0",
     "case": "1.6.3",
     "dotty": "0.1.2"
   }

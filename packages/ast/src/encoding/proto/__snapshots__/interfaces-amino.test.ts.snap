@@ -1,0 +1,904 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Duration 1`] = `
+"export const Duration = {
+  encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.seconds.isZero()) {
+      writer.uint32(8).int64(message.seconds);
+    }
+
+    if (message.nanos !== 0) {
+      writer.uint32(16).int32(message.nanos);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Duration {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDuration();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.seconds = (reader.int64() as Long);
+          break;
+
+        case 2:
+          message.nanos = reader.int32();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Duration {
+    return {
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
+  },
+
+  toJSON(message: Duration): unknown {
+    const obj: any = {};
+    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<Duration>): Duration {
+    const message = createBaseDuration();
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? Long.fromValue(object.seconds) : Long.ZERO;
+    message.nanos = object.nanos ?? 0;
+    return message;
+  },
+
+  fromSDK(object: DurationSDKType): Duration {
+    return {
+      seconds: object?.seconds,
+      nanos: object?.nanos
+    };
+  },
+
+  toSDK(message: Duration): DurationSDKType {
+    const obj: any = {};
+    obj.seconds = message.seconds;
+    obj.nanos = message.nanos;
+    return obj;
+  },
+
+  fromAmino(object: DurationAmino): Duration {
+    const value = parseInt(object);
+    return {
+      seconds: Long.fromNumber(Math.floor(value / 1_000_000_000)),
+      nanos: value % 1_000_000_000
+    };
+  },
+
+  toAmino(message: Duration): DurationAmino {
+    return (message.seconds.toInt() * 1_000_000_000 + message.nanos).toString();
+  },
+
+  fromAminoMsg(object: DurationAminoMsg): Duration {
+    return Duration.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DurationProtoMsg): Duration {
+    return Duration.decode(message.value);
+  },
+
+  toProto(message: Duration): Uint8Array {
+    return Duration.encode(message).finish();
+  },
+
+  toProtoMsg(message: Duration): DurationProtoMsg {
+    return {
+      typeUrl: "/google.protobuf.Duration",
+      value: Duration.encode(message).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`Height 1`] = `
+"export const Height = {
+  encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.revisionNumber.isZero()) {
+      writer.uint32(8).uint64(message.revisionNumber);
+    }
+
+    if (!message.revisionHeight.isZero()) {
+      writer.uint32(16).uint64(message.revisionHeight);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Height {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHeight();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.revisionNumber = (reader.uint64() as Long);
+          break;
+
+        case 2:
+          message.revisionHeight = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Height {
+    return {
+      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
+      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO
+    };
+  },
+
+  toJSON(message: Height): unknown {
+    const obj: any = {};
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<Height>): Height {
+    const message = createBaseHeight();
+    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
+    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
+    return message;
+  },
+
+  fromSDK(object: HeightSDKType): Height {
+    return {
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
+    };
+  },
+
+  toSDK(message: Height): HeightSDKType {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
+    return obj;
+  },
+
+  fromAmino(object: HeightAmino): Height {
+    return {
+      revisionNumber: Long.fromString(object.revision_number || "0", true),
+      revisionHeight: Long.fromString(object.revision_height || "0", true)
+    };
+  },
+
+  toAmino(message: Height): HeightAmino {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: HeightAminoMsg): Height {
+    return Height.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Height): HeightAminoMsg {
+    return {
+      type: "cosmos-sdk/Height",
+      value: Height.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeightProtoMsg): Height {
+    return Height.decode(message.value);
+  },
+
+  toProto(message: Height): Uint8Array {
+    return Height.encode(message).finish();
+  },
+
+  toProtoMsg(message: Height): HeightProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.Height",
+      value: Height.encode(message).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`MsgCreateValidator 1`] = `
+"export const MsgCreateValidator = {
+  encode(message: MsgCreateValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.description !== undefined) {
+      Description.encode(message.description, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.commission !== undefined) {
+      CommissionRates.encode(message.commission, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.minSelfDelegation !== "") {
+      writer.uint32(26).string(message.minSelfDelegation);
+    }
+
+    if (message.delegatorAddress !== "") {
+      writer.uint32(34).string(message.delegatorAddress);
+    }
+
+    if (message.validatorAddress !== "") {
+      writer.uint32(42).string(message.validatorAddress);
+    }
+
+    if (message.pubkey !== undefined) {
+      Any.encode((message.pubkey as Any), writer.uint32(50).fork()).ldelim();
+    }
+
+    if (message.value !== undefined) {
+      Coin.encode(message.value, writer.uint32(58).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateValidator();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.description = Description.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.commission = CommissionRates.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.minSelfDelegation = reader.string();
+          break;
+
+        case 4:
+          message.delegatorAddress = reader.string();
+          break;
+
+        case 5:
+          message.validatorAddress = reader.string();
+          break;
+
+        case 6:
+          message.pubkey = (Cosmos_cryptoPubKey_InterfaceDecoder(reader) as Any);
+          break;
+
+        case 7:
+          message.value = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateValidator {
+    return {
+      description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
+      commission: isSet(object.commission) ? CommissionRates.fromJSON(object.commission) : undefined,
+      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : "",
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      pubkey: isSet(object.pubkey) ? Any.fromJSON(object.pubkey) : undefined,
+      value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined
+    };
+  },
+
+  toJSON(message: MsgCreateValidator): unknown {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
+    message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toJSON(message.commission) : undefined);
+    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toJSON(message.pubkey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Coin.toJSON(message.value) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
+    const message = createBaseMsgCreateValidator();
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : undefined;
+    message.minSelfDelegation = object.minSelfDelegation ?? "";
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    message.validatorAddress = object.validatorAddress ?? "";
+    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
+    return message;
+  },
+
+  fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
+    return {
+      description: object.description ? Description.fromSDK(object.description) : undefined,
+      commission: object.commission ? CommissionRates.fromSDK(object.commission) : undefined,
+      minSelfDelegation: object?.min_self_delegation,
+      delegatorAddress: object?.delegator_address,
+      validatorAddress: object?.validator_address,
+      pubkey: object.pubkey ? Any.fromSDK(object.pubkey) : undefined,
+      value: object.value ? Coin.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateValidator): MsgCreateValidatorSDKType {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
+    message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toSDK(message.commission) : undefined);
+    obj.min_self_delegation = message.minSelfDelegation;
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toSDK(message.pubkey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Coin.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MsgCreateValidatorAmino): MsgCreateValidator {
+    return {
+      description: object?.description ? Description.fromAmino(object.description) : undefined,
+      commission: object?.commission ? CommissionRates.fromAmino(object.commission) : undefined,
+      minSelfDelegation: object.min_self_delegation,
+      delegatorAddress: object.delegator_address,
+      validatorAddress: object.validator_address,
+      pubkey: encodeBech32Pubkey({
+        type: "tendermint/PubKeySecp256k1",
+        value: toBase64(object.pubkey.value)
+      }, "cosmos"),
+      value: object?.value ? Coin.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateValidator): MsgCreateValidatorAmino {
+    const obj: any = {};
+    obj.description = message.description ? Description.toAmino(message.description) : undefined;
+    obj.commission = message.commission ? CommissionRates.toAmino(message.commission) : undefined;
+    obj.min_self_delegation = message.minSelfDelegation;
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.pubkey = message.pubkey ? {
+      typeUrl: "/cosmos.crypto.secp256k1.PubKey",
+      value: fromBase64(decodeBech32Pubkey(message.pubkey).value)
+    } : undefined;
+    obj.value = message.value ? Coin.toAmino(message.value) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateValidatorAminoMsg): MsgCreateValidator {
+    return MsgCreateValidator.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateValidator): MsgCreateValidatorAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateValidator",
+      value: MsgCreateValidator.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateValidatorProtoMsg): MsgCreateValidator {
+    return MsgCreateValidator.decode(message.value);
+  },
+
+  toProto(message: MsgCreateValidator): Uint8Array {
+    return MsgCreateValidator.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateValidator): MsgCreateValidatorProtoMsg {
+    return {
+      typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator",
+      value: MsgCreateValidator.encode(message).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`MsgStoreCode 1`] = `
+"export const MsgStoreCode = {
+  encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
+    }
+
+    if (message.wasmByteCode.length !== 0) {
+      writer.uint32(18).bytes(message.wasmByteCode);
+    }
+
+    if (message.instantiatePermission !== undefined) {
+      AccessConfig.encode(message.instantiatePermission, writer.uint32(42).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCode {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreCode();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+
+        case 2:
+          message.wasmByteCode = reader.bytes();
+          break;
+
+        case 5:
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgStoreCode {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(),
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
+    };
+  },
+
+  toJSON(message: MsgStoreCode): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
+    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
+    const message = createBaseMsgStoreCode();
+    message.sender = object.sender ?? "";
+    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    return message;
+  },
+
+  fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
+    return {
+      sender: object?.sender,
+      wasmByteCode: object?.wasm_byte_code,
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
+    };
+  },
+
+  toSDK(message: MsgStoreCode): MsgStoreCodeSDKType {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode;
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
+    return {
+      sender: object.sender,
+      wasmByteCode: fromBase64(object.wasm_byte_code),
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
+    };
+  },
+
+  toAmino(message: MsgStoreCode): MsgStoreCodeAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgStoreCodeAminoMsg): MsgStoreCode {
+    return MsgStoreCode.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgStoreCode): MsgStoreCodeAminoMsg {
+    return {
+      type: "wasm/MsgStoreCode",
+      value: MsgStoreCode.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgStoreCodeProtoMsg): MsgStoreCode {
+    return MsgStoreCode.decode(message.value);
+  },
+
+  toProto(message: MsgStoreCode): Uint8Array {
+    return MsgStoreCode.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgStoreCode): MsgStoreCodeProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode",
+      value: MsgStoreCode.encode(message).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`MsgSubmitProposal 1`] = `
+"export const MsgSubmitProposal = {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.content !== undefined) {
+      Any.encode((message.content as Any), writer.uint32(10).fork()).ldelim();
+    }
+
+    for (const v of message.initialDeposit) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.proposer !== "") {
+      writer.uint32(26).string(message.proposer);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposal {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSubmitProposal();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.content = (ProposalContentI_InterfaceDecoder(reader) as Any);
+          break;
+
+        case 2:
+          message.initialDeposit.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.proposer = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgSubmitProposal {
+    return {
+      content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initialDeposit) ? object.initialDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
+  },
+
+  toJSON(message: MsgSubmitProposal): unknown {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initialDeposit = message.initialDeposit.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.initialDeposit = [];
+    }
+
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
+    const message = createBaseMsgSubmitProposal();
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
+    message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
+    message.proposer = object.proposer ?? "";
+    return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
+    return {
+      content: object.content ? Any.fromSDK(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
+      proposer: object?.proposer
+    };
+  },
+
+  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    obj.proposer = message.proposer;
+    return obj;
+  },
+
+  fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
+    return {
+      content: object?.content ? ProposalContentI_FromAmino(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
+      proposer: object.proposer
+    };
+  },
+
+  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
+    const obj: any = {};
+    obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any)) : undefined;
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    obj.proposer = message.proposer;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitProposal",
+      value: MsgSubmitProposal.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitProposal): Uint8Array {
+    return MsgSubmitProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitProposal): MsgSubmitProposalProtoMsg {
+    return {
+      typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal",
+      value: MsgSubmitProposal.encode(message).finish()
+    };
+  }
+
+};"
+`;
+
+exports[`MsgTransfer 1`] = `
+"export const MsgTransfer = {
+  encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sourcePort !== "") {
+      writer.uint32(10).string(message.sourcePort);
+    }
+
+    if (message.sourceChannel !== "") {
+      writer.uint32(18).string(message.sourceChannel);
+    }
+
+    if (message.token !== undefined) {
+      Coin.encode(message.token, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.sender !== "") {
+      writer.uint32(34).string(message.sender);
+    }
+
+    if (message.receiver !== "") {
+      writer.uint32(42).string(message.receiver);
+    }
+
+    if (message.timeoutHeight !== undefined) {
+      Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (!message.timeoutTimestamp.isZero()) {
+      writer.uint32(56).uint64(message.timeoutTimestamp);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransfer {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgTransfer();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.sourcePort = reader.string();
+          break;
+
+        case 2:
+          message.sourceChannel = reader.string();
+          break;
+
+        case 3:
+          message.token = Coin.decode(reader, reader.uint32());
+          break;
+
+        case 4:
+          message.sender = reader.string();
+          break;
+
+        case 5:
+          message.receiver = reader.string();
+          break;
+
+        case 6:
+          message.timeoutHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.timeoutTimestamp = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgTransfer {
+    return {
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
+    };
+  },
+
+  toJSON(message: MsgTransfer): unknown {
+    const obj: any = {};
+    message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
+    message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
+    const message = createBaseMsgTransfer();
+    message.sourcePort = object.sourcePort ?? "";
+    message.sourceChannel = object.sourceChannel ?? "";
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
+    return message;
+  },
+
+  fromSDK(object: MsgTransferSDKType): MsgTransfer {
+    return {
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
+      token: object.token ? Coin.fromSDK(object.token) : undefined,
+      sender: object?.sender,
+      receiver: object?.receiver,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: object?.timeout_timestamp
+    };
+  },
+
+  toSDK(message: MsgTransfer): MsgTransferSDKType {
+    const obj: any = {};
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
+    obj.timeout_timestamp = message.timeoutTimestamp;
+    return obj;
+  },
+
+  fromAmino(object: MsgTransferAmino): MsgTransfer {
+    return {
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
+      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      sender: object.sender,
+      receiver: object.receiver,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp)
+    };
+  },
+
+  toAmino(message: MsgTransfer): MsgTransferAmino {
+    const obj: any = {};
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {
+    return MsgTransfer.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgTransfer): MsgTransferAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgTransfer",
+      value: MsgTransfer.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
+    return MsgTransfer.decode(message.value);
+  },
+
+  toProto(message: MsgTransfer): Uint8Array {
+    return MsgTransfer.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTransfer): MsgTransferProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+      value: MsgTransfer.encode(message).finish()
+    };
+  }
+
+};"
+`;

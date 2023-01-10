@@ -80,19 +80,6 @@ export interface EnableServiceRequest {
 
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
-  /**
-   * Name of the consumer and service to enable the service on.
-   * 
-   * The `EnableService` and `DisableService` methods currently only support
-   * projects.
-   * 
-   * Enabling a service requires that the service is public or is shared with
-   * the user enabling the service.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
   name: string;
 }
 
@@ -112,7 +99,6 @@ export interface EnableServiceResponse {
  * Operation when that operation is done.
  */
 export interface EnableServiceResponseSDKType {
-  /** The new state of the service after enabling. */
   service?: ServiceSDKType;
 }
 
@@ -144,27 +130,8 @@ export interface DisableServiceRequest {
 
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
-  /**
-   * Name of the consumer and service to disable the service on.
-   * 
-   * The enable and disable methods currently only support projects.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
   name: string;
-
-  /**
-   * Indicates if services that are enabled and which depend on this service
-   * should also be disabled. If not set, an error will be generated if any
-   * enabled services depend on the service to be disabled. When set, the
-   * service, and any enabled services that depend on it, will be disabled
-   * together.
-   */
   disable_dependent_services: boolean;
-
-  /** Defines the behavior for checking service usage when disabling a service. */
   check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 
@@ -184,7 +151,6 @@ export interface DisableServiceResponse {
  * Operation when that operation is done.
  */
 export interface DisableServiceResponseSDKType {
-  /** The new state of the service after disabling. */
   service?: ServiceSDKType;
 }
 
@@ -202,13 +168,6 @@ export interface GetServiceRequest {
 
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
-  /**
-   * Name of the consumer and service to get the `ConsumerState` for.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
   name: string;
 }
 
@@ -244,31 +203,9 @@ export interface ListServicesRequest {
 
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
-  /**
-   * Parent to search for services on.
-   * 
-   * An example name would be:
-   * `projects/123` where `123` is the project number.
-   */
   parent: string;
-
-  /**
-   * Requested size of the next page of data.
-   * Requested page size cannot exceed 200.
-   * If not set, the default page size is 50.
-   */
   page_size: number;
-
-  /**
-   * Token identifying which result to start with, which is returned by a
-   * previous list call.
-   */
   page_token: string;
-
-  /**
-   * Only list services that conform to the given filter.
-   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
-   */
   filter: string;
 }
 
@@ -286,13 +223,7 @@ export interface ListServicesResponse {
 
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
-  /** The available services for the requested project. */
   services: ServiceSDKType[];
-
-  /**
-   * Token that can be passed to `ListServices` to resume a paginated
-   * query.
-   */
   next_page_token: string;
 }
 
@@ -326,29 +257,7 @@ export interface BatchEnableServicesRequest {
 
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
-  /**
-   * Parent to enable services on.
-   * 
-   * An example name would be:
-   * `projects/123` where `123` is the project number.
-   * 
-   * The `BatchEnableServices` method currently only supports projects.
-   */
   parent: string;
-
-  /**
-   * The identifiers of the services to enable on the project.
-   * 
-   * A valid identifier would be:
-   * serviceusage.googleapis.com
-   * 
-   * Enabling services requires that each service is public or is shared with
-   * the user enabling the service.
-   * 
-   * A single request can enable a maximum of 20 services at a time. If more
-   * than 20 services are specified, the request will fail, and no state changes
-   * will occur.
-   */
   service_ids: string[];
 }
 
@@ -374,13 +283,7 @@ export interface BatchEnableServicesResponse {
  * Operation when that operation is done.
  */
 export interface BatchEnableServicesResponseSDKType {
-  /** The new state of the services after enabling. */
   services: ServiceSDKType[];
-
-  /**
-   * If allow_partial_success is true, and one or more services could not be
-   * enabled, this field contains the details about each failure.
-   */
   failures: BatchEnableServicesResponse_EnableFailureSDKType[];
 }
 
@@ -395,10 +298,7 @@ export interface BatchEnableServicesResponse_EnableFailure {
 
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureSDKType {
-  /** The service id of a service that could not be enabled. */
   service_id: string;
-
-  /** An error message describing why the service could not be enabled. */
   error_message: string;
 }
 
@@ -426,23 +326,7 @@ export interface BatchGetServicesRequest {
 
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
-  /**
-   * Parent to retrieve services from.
-   * If this is set, the parent of all of the services specified in `names` must
-   * match this field. An example name would be: `projects/123` where `123` is
-   * the project number. The `BatchGetServices` method currently only supports
-   * projects.
-   */
   parent: string;
-
-  /**
-   * Names of the services to retrieve.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   * A single request can get a maximum of 30 services at a time.
-   */
   names: string[];
 }
 
@@ -454,7 +338,6 @@ export interface BatchGetServicesResponse {
 
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseSDKType {
-  /** The requested Service states. */
   services: ServiceSDKType[];
 }
 

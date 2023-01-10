@@ -19,13 +19,8 @@ export interface GenesisState {
 
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateSDKType {
-  /** balance of the claim module's account */
   module_account_balance?: CoinSDKType;
-
-  /** params defines all the parameters of the module. */
   params?: ParamsSDKType;
-
-  /** list of claim records, one for every airdrop recipient */
   claim_records: ClaimRecordSDKType[];
 }
 

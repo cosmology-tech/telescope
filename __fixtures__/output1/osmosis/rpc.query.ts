@@ -77,7 +77,11 @@ export const createRPCQueryClient = async ({
         v1beta1: (await import("./epochs/query.rpc.Query")).createRpcQueryExtension(client)
       },
       gamm: {
-        v1beta1: (await import("./gamm/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("./gamm/v1beta1/query.rpc.Query")).createRpcQueryExtension(client),
+        v2: (await import("./gamm/v2/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      ibcratelimit: {
+        v1beta1: (await import("./ibc-rate-limit/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       incentives: (await import("./incentives/query.rpc.Query")).createRpcQueryExtension(client),
       lockup: (await import("./lockup/query.rpc.Query")).createRpcQueryExtension(client),
@@ -86,9 +90,6 @@ export const createRPCQueryClient = async ({
       },
       poolincentives: {
         v1beta1: (await import("./pool-incentives/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      streamswap: {
-        v1: (await import("./streamswap/v1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       superfluid: (await import("./superfluid/query.rpc.Query")).createRpcQueryExtension(client),
       tokenfactory: {

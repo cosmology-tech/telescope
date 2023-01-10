@@ -2,7 +2,7 @@ import { createObjectWithMethods } from './object';
 import { traverse, getNestedProto } from '@osmonauts/proto-parser';
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
-import { getTestProtoStore, expectCode, defaultTelescopeOptions } from '../../test-utils';
+import { getTestProtoStore, expectCode, defaultTelescopeOptions, printCode } from '../../test-utils';
 
 const store = getTestProtoStore();
 
@@ -290,5 +290,16 @@ it('evmos/fees/v1/tx', () => {
     expectCode(createObjectWithMethods(
         context,
         'MsgRegisterDevFeeInfo', getNestedProto(res).MsgRegisterDevFeeInfo
+    ))
+});
+
+it('osmosis/gamm/v1beta1/query', () => {
+    const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
+    const res = traverse(store, ref);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+
+    expectCode(createObjectWithMethods(
+        context,
+        'QueryPoolsResponse', getNestedProto(res).QueryPoolsResponse
     ))
 });

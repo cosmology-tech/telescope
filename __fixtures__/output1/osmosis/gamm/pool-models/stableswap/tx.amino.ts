@@ -4,7 +4,7 @@ import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../../helpers";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
-export interface AminoMsgCreateStableswapPool extends AminoMsg {
+export interface MsgCreateStableswapPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
   value: {
     sender: string;
@@ -18,9 +18,10 @@ export interface AminoMsgCreateStableswapPool extends AminoMsg {
     }[];
     scaling_factors: string[];
     future_pool_governor: string;
+    scaling_factor_controller: string;
   };
 }
-export interface AminoMsgStableSwapAdjustScalingFactors extends AminoMsg {
+export interface MsgStableSwapAdjustScalingFactorsAminoType extends AminoMsg {
   type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
   value: {
     sender: string;
@@ -36,8 +37,9 @@ export const AminoConverter = {
       poolParams,
       initialPoolLiquidity,
       scalingFactors,
-      futurePoolGovernor
-    }: MsgCreateStableswapPool): AminoMsgCreateStableswapPool["value"] => {
+      futurePoolGovernor,
+      scalingFactorController
+    }: MsgCreateStableswapPool): MsgCreateStableswapPoolAminoType["value"] => {
       return {
         sender,
         pool_params: {
@@ -49,7 +51,8 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         scaling_factors: scalingFactors.map(el0 => el0.toString()),
-        future_pool_governor: futurePoolGovernor
+        future_pool_governor: futurePoolGovernor,
+        scaling_factor_controller: scalingFactorController
       };
     },
     fromAmino: ({
@@ -57,8 +60,9 @@ export const AminoConverter = {
       pool_params,
       initial_pool_liquidity,
       scaling_factors,
-      future_pool_governor
-    }: AminoMsgCreateStableswapPool["value"]): MsgCreateStableswapPool => {
+      future_pool_governor,
+      scaling_factor_controller
+    }: MsgCreateStableswapPoolAminoType["value"]): MsgCreateStableswapPool => {
       return {
         sender,
         poolParams: {
@@ -70,7 +74,8 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         scalingFactors: scaling_factors.map(el0 => Long.fromString(el0)),
-        futurePoolGovernor: future_pool_governor
+        futurePoolGovernor: future_pool_governor,
+        scalingFactorController: scaling_factor_controller
       };
     }
   },
@@ -80,7 +85,7 @@ export const AminoConverter = {
       sender,
       poolId,
       scalingFactors
-    }: MsgStableSwapAdjustScalingFactors): AminoMsgStableSwapAdjustScalingFactors["value"] => {
+    }: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAminoType["value"] => {
       return {
         sender,
         pool_id: poolId.toString(),
@@ -91,7 +96,7 @@ export const AminoConverter = {
       sender,
       pool_id,
       scaling_factors
-    }: AminoMsgStableSwapAdjustScalingFactors["value"]): MsgStableSwapAdjustScalingFactors => {
+    }: MsgStableSwapAdjustScalingFactorsAminoType["value"]): MsgStableSwapAdjustScalingFactors => {
       return {
         sender,
         poolId: Long.fromString(pool_id),

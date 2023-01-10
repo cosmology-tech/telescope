@@ -11,6 +11,10 @@ export declare const defaultTelescopeOptions: {
     useSDKTypes: boolean;
     includeExternalHelpers: boolean;
     logLevel: import("@osmonauts/types").TelescopeLogLevel;
+    interfaces: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    };
     prototypes: {
         enabled?: boolean;
         parser?: {
@@ -26,6 +30,10 @@ export declare const defaultTelescopeOptions: {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -33,6 +41,9 @@ export declare const defaultTelescopeOptions: {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
+        addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -107,6 +118,11 @@ export declare const defaultTelescopeOptions: {
     };
     reactQuery: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
     };
     packages: Record<string, any>;
 } & {
@@ -128,7 +144,7 @@ export declare const defaultTelescopeOptions: {
 export declare const getTestProtoStore: (options?: TelescopeOptions) => ProtoStore;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     context: AminoParseContext;
-    root: import("@osmonauts/types").ProtoRoot;
+    root: import("@osmonauts/types").TraversedProtoRoot;
     protos: ProtoType[];
 };
 export declare const getGenericParseContext: () => GenericParseContext;

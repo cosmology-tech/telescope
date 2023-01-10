@@ -20,7 +20,6 @@ export interface QueryIncentivesRequest {
  * method.
  */
 export interface QueryIncentivesRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -41,8 +40,6 @@ export interface QueryIncentivesResponse {
  */
 export interface QueryIncentivesResponseSDKType {
   incentives: IncentiveSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -54,7 +51,6 @@ export interface QueryIncentiveRequest {
 
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequestSDKType {
-  /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
 
@@ -91,10 +87,7 @@ export interface QueryGasMetersRequest {
  * method.
  */
 export interface QueryGasMetersRequestSDKType {
-  /** contract is the hex contract address of a incentivized smart contract */
   contract: string;
-
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -115,8 +108,6 @@ export interface QueryGasMetersResponse {
  */
 export interface QueryGasMetersResponseSDKType {
   gas_meters: GasMeterSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -131,10 +122,7 @@ export interface QueryGasMeterRequest {
 
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequestSDKType {
-  /** contract identifier is the hex contract address of a contract */
   contract: string;
-
-  /** participant identifier is the hex address of a user */
   participant: string;
 }
 
@@ -155,10 +143,6 @@ export interface QueryGasMeterResponse {
  * method.
  */
 export interface QueryGasMeterResponseSDKType {
-  /**
-   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
-   */
   gas_meter: Long;
 }
 
@@ -176,7 +160,6 @@ export interface QueryAllocationMetersRequest {
  * Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 
@@ -197,8 +180,6 @@ export interface QueryAllocationMetersResponse {
  */
 export interface QueryAllocationMetersResponseSDKType {
   allocation_meters: DecCoinSDKType[];
-
-  /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
 }
 
@@ -216,7 +197,6 @@ export interface QueryAllocationMeterRequest {
  * RPC method.
  */
 export interface QueryAllocationMeterRequestSDKType {
-  /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
 

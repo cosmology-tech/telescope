@@ -20,6 +20,11 @@ interface TelescopeOpts {
 
     logLevel?: TelescopeLogLevel;
 
+    interfaces?: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    },
+
     prototypes?: {
         enabled?: boolean;
         parser?: {
@@ -35,6 +40,10 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -43,6 +52,10 @@ interface TelescopeOpts {
 
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
+        addTypeUrlToDecoders?: boolean;
 
         excluded?: {
             packages?: string[];
@@ -138,6 +151,11 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        }
     };
 }
 interface TelescopePackageOpts {
@@ -158,6 +176,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     includeExternalHelpers: false,
     logLevel: TelescopeLogLevel.None,
 
+    interfaces: {
+        enabled: false,
+        useUnionTypes: false,
+    },
+
     prototypes: {
         enabled: true,
         parser: {
@@ -172,12 +195,20 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toJSON: false,
             fromPartial: true,
             toSDK: false,
-            fromSDK: false
+            fromSDK: false,
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
+
+        addTypeUrlToObjects: false,
+        addAminoTypeToObjects: false,
+        addTypeUrlToDecoders: false,
 
         optionalQueryParams: false,
         optionalPageRequests: false,
@@ -241,7 +272,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     reactQuery: {
-        enabled: false
+        enabled: false,
+        include: {
+            patterns: [],
+            packages: [],
+            protos: []
+        }
     },
 
     // packages

@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MsgCreateValidator MsgCreateValidator 1`] = `
+"export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
+  return encodeBech32Pubkey({
+    type: "tendermint/PubKeySecp256k1",
+    value: toBase64(content.value)
+  }, "cosmos");
+};"
+`;
+
+exports[`ProposalContent ProposalContent 1`] = `
+"export const ProposalContentI_FromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/v1/TextProposal":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.gov.v1beta1.TextProposal",
+        value: TextProposal.encode(TextProposal.fromPartial(TextProposal.fromAmino(content.value))).finish()
+      });
+
+    case "/evmos.incentives.v1.RegisterIncentiveProposal":
+      return Any.fromPartial({
+        typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
+        value: RegisterIncentiveProposal.encode(RegisterIncentiveProposal.fromPartial(RegisterIncentiveProposal.fromAmino(content.value))).finish()
+      });
+
+    case "cosmos-sdk/ClientUpdateProposal":
+      return Any.fromPartial({
+        typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
+        value: ClientUpdateProposal.encode(ClientUpdateProposal.fromPartial(ClientUpdateProposal.fromAmino(content.value))).finish()
+      });
+
+    case "cosmos-sdk/UpgradeProposal":
+      return Any.fromPartial({
+        typeUrl: "/ibc.core.client.v1.UpgradeProposal",
+        value: UpgradeProposal.encode(UpgradeProposal.fromPartial(UpgradeProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/poolincentives/replace-pool-incentives-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
+        value: ReplacePoolIncentivesProposal.encode(ReplacePoolIncentivesProposal.fromPartial(ReplacePoolIncentivesProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/poolincentives/update-pool-incentives-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
+        value: UpdatePoolIncentivesProposal.encode(UpdatePoolIncentivesProposal.fromPartial(UpdatePoolIncentivesProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/v1beta1/set-superfluid-assets-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
+        value: SetSuperfluidAssetsProposal.encode(SetSuperfluidAssetsProposal.fromPartial(SetSuperfluidAssetsProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/v1beta1/remove-superfluid-assets-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
+        value: RemoveSuperfluidAssetsProposal.encode(RemoveSuperfluidAssetsProposal.fromPartial(RemoveSuperfluidAssetsProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/v1beta1/update-unpool-white-list-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
+        value: UpdateUnpoolWhiteListProposal.encode(UpdateUnpoolWhiteListProposal.fromPartial(UpdateUnpoolWhiteListProposal.fromAmino(content.value))).finish()
+      });
+
+    case "osmosis/txfees/update-fee-token-proposal":
+      return Any.fromPartial({
+        typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
+        value: UpdateFeeTokenProposal.encode(UpdateFeeTokenProposal.fromPartial(UpdateFeeTokenProposal.fromAmino(content.value))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};"
+`;
+
+exports[`ProposalContent ProposalContent helper 1`] = `
+"export const ProposalContentI_fromAmino = (content: AnyAmino) => {
+  switch (content.type) {
+    case "cosmos-sdk/TextProposal":
+      return Any.fromPartial({
+        typeUrl: "/cosmos.gov.v1beta1.TextProposal",
+        value: TextProposal.encode(TextProposal.fromPartial(TextProposal.fromAmino(content.value))).finish()
+      });
+
+    default:
+      return Any.fromAmino(content);
+  }
+};"
+`;

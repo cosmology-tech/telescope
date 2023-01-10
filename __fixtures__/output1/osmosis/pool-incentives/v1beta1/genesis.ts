@@ -15,7 +15,6 @@ export interface GenesisState {
 
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
-  /** params defines all the paramaters of the module. */
   params?: ParamsSDKType;
   lockable_durations: DurationSDKType[];
   distr_info?: DistrInfoSDKType;

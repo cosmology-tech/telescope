@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/utils",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils#readme",
@@ -24,6 +24,8 @@
     "build:ts": "tsc --project ./tsconfig.json",
     "build": "npm run build:module && npm run build:main",
     "buidl": "npm run build && npm run build:ts",
+    "buidl:clean": "npm run clean && npm run buidl",
+    "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
     "format": "eslint . --fix"
@@ -72,6 +74,7 @@
     "jest-in-case": "^1.0.2",
     "prettier": "^2.7.0",
     "regenerator-runtime": "^0.13.7",
+    "rimraf": "3.0.2",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
   },

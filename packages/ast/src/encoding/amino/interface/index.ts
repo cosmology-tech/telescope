@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoField, ProtoType } from '@osmonauts/types';
 import { AminoParseContext } from '../../context';
-import { getTypeUrl, protoFieldsToArray, typeUrlToAmino } from '../utils';
+import { getTypeUrl, protoFieldsToArray, getAminoTypeName } from '../utils';
 import { aminoInterface } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';
 
@@ -115,8 +115,7 @@ export const makeAminoTypeInterface = ({
     context.addUtil('AminoMsg');
 
     const TypeName = proto.name;
-    const typeUrl = getTypeUrl(context.ref.proto, proto);
-    const aminoType = typeUrlToAmino(context, typeUrl);
+    const aminoType = getAminoTypeName(context, context.ref.proto, proto);
 
     const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {
@@ -145,7 +144,7 @@ export const makeAminoTypeInterface = ({
 
     return t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
-            t.identifier('Amino' + TypeName),
+            t.identifier(TypeName + 'AminoType'),
             null,
             [t.tsExpressionWithTypeArguments(t.identifier('AminoMsg'))],
             t.tSInterfaceBody([

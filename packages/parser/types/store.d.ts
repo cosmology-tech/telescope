@@ -1,4 +1,5 @@
 import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
+import { TraversalSymbol } from '@osmonauts/types';
 interface ParseProtoOptions {
     keepCase?: boolean;
     alternateCommentMode?: boolean;
@@ -15,6 +16,7 @@ export declare class ProtoStore {
     requests: Record<string, ProtoServiceMethod>;
     responses: Record<string, ProtoServiceMethod>;
     _traversed: boolean;
+    _symbols: TraversalSymbol[];
     constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
@@ -41,6 +43,7 @@ export declare class ProtoStore {
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
     getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
+    getTypeUrlMap(ref: ProtoRef): import("@osmonauts/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
 }
 export {};

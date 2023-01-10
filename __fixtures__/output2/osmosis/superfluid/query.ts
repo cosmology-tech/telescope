@@ -49,6 +49,17 @@ export interface ConnectedIntermediaryAccountRequest {
 export interface ConnectedIntermediaryAccountResponse {
   account?: SuperfluidIntermediaryAccountInfo;
 }
+export interface QueryTotalDelegationByValidatorForDenomRequest {
+  denom: string;
+}
+export interface QueryTotalDelegationByValidatorForDenomResponse {
+  assets: Delegations[];
+}
+export interface Delegations {
+  valAddr: string;
+  amountSfsd: string;
+  osmoEquivalent: string;
+}
 export interface TotalSuperfluidDelegationsRequest {}
 export interface TotalSuperfluidDelegationsResponse {
   totalDelegations: string;
@@ -100,6 +111,10 @@ export interface QueryTotalDelegationByDelegatorResponse {
   delegationResponse: DelegationResponse[];
   totalDelegatedCoins: Coin[];
   totalEquivalentStakedAmount?: Coin;
+}
+export interface QueryUnpoolWhitelistRequest {}
+export interface QueryUnpoolWhitelistResponse {
+  poolIds: Long[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -870,6 +885,207 @@ export const ConnectedIntermediaryAccountResponse = {
   fromPartial(object: DeepPartial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
     const message = createBaseConnectedIntermediaryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? SuperfluidIntermediaryAccountInfo.fromPartial(object.account) : undefined;
+    return message;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByValidatorForDenomRequest(): QueryTotalDelegationByValidatorForDenomRequest {
+  return {
+    denom: ""
+  };
+}
+
+export const QueryTotalDelegationByValidatorForDenomRequest = {
+  encode(message: QueryTotalDelegationByValidatorForDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomRequest {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByValidatorForDenomRequest): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>): QueryTotalDelegationByValidatorForDenomRequest {
+    const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
+    message.denom = object.denom ?? "";
+    return message;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByValidatorForDenomResponse(): QueryTotalDelegationByValidatorForDenomResponse {
+  return {
+    assets: []
+  };
+}
+
+export const QueryTotalDelegationByValidatorForDenomResponse = {
+  encode(message: QueryTotalDelegationByValidatorForDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.assets) {
+      Delegations.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.assets.push(Delegations.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomResponse {
+    return {
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): unknown {
+    const obj: any = {};
+
+    if (message.assets) {
+      obj.assets = message.assets.map(e => e ? Delegations.toJSON(e) : undefined);
+    } else {
+      obj.assets = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomResponse>): QueryTotalDelegationByValidatorForDenomResponse {
+    const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
+    message.assets = object.assets?.map(e => Delegations.fromPartial(e)) || [];
+    return message;
+  }
+
+};
+
+function createBaseDelegations(): Delegations {
+  return {
+    valAddr: "",
+    amountSfsd: "",
+    osmoEquivalent: ""
+  };
+}
+
+export const Delegations = {
+  encode(message: Delegations, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.valAddr !== "") {
+      writer.uint32(10).string(message.valAddr);
+    }
+
+    if (message.amountSfsd !== "") {
+      writer.uint32(18).string(message.amountSfsd);
+    }
+
+    if (message.osmoEquivalent !== "") {
+      writer.uint32(26).string(message.osmoEquivalent);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Delegations {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDelegations();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.valAddr = reader.string();
+          break;
+
+        case 2:
+          message.amountSfsd = reader.string();
+          break;
+
+        case 3:
+          message.osmoEquivalent = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Delegations {
+    return {
+      valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
+      amountSfsd: isSet(object.amountSfsd) ? String(object.amountSfsd) : "",
+      osmoEquivalent: isSet(object.osmoEquivalent) ? String(object.osmoEquivalent) : ""
+    };
+  },
+
+  toJSON(message: Delegations): unknown {
+    const obj: any = {};
+    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
+    message.amountSfsd !== undefined && (obj.amountSfsd = message.amountSfsd);
+    message.osmoEquivalent !== undefined && (obj.osmoEquivalent = message.osmoEquivalent);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<Delegations>): Delegations {
+    const message = createBaseDelegations();
+    message.valAddr = object.valAddr ?? "";
+    message.amountSfsd = object.amountSfsd ?? "";
+    message.osmoEquivalent = object.osmoEquivalent ?? "";
     return message;
   }
 
@@ -1864,6 +2080,124 @@ export const QueryTotalDelegationByDelegatorResponse = {
 
 };
 
+function createBaseQueryUnpoolWhitelistRequest(): QueryUnpoolWhitelistRequest {
+  return {};
+}
+
+export const QueryUnpoolWhitelistRequest = {
+  encode(_: QueryUnpoolWhitelistRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnpoolWhitelistRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryUnpoolWhitelistRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(_: any): QueryUnpoolWhitelistRequest {
+    return {};
+  },
+
+  toJSON(_: QueryUnpoolWhitelistRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<QueryUnpoolWhitelistRequest>): QueryUnpoolWhitelistRequest {
+    const message = createBaseQueryUnpoolWhitelistRequest();
+    return message;
+  }
+
+};
+
+function createBaseQueryUnpoolWhitelistResponse(): QueryUnpoolWhitelistResponse {
+  return {
+    poolIds: []
+  };
+}
+
+export const QueryUnpoolWhitelistResponse = {
+  encode(message: QueryUnpoolWhitelistResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    writer.uint32(10).fork();
+
+    for (const v of message.poolIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnpoolWhitelistResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryUnpoolWhitelistResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.poolIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.poolIds.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryUnpoolWhitelistResponse {
+    return {
+      poolIds: Array.isArray(object?.poolIds) ? object.poolIds.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
+  toJSON(message: QueryUnpoolWhitelistResponse): unknown {
+    const obj: any = {};
+
+    if (message.poolIds) {
+      obj.poolIds = message.poolIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.poolIds = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
+    const message = createBaseQueryUnpoolWhitelistResponse();
+    message.poolIds = object.poolIds?.map(e => Long.fromValue(e)) || [];
+    return message;
+  }
+
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of superfluid parameters. */
@@ -1886,6 +2220,9 @@ export interface Query {
 
   /** Returns intermediary account connected to a superfluid staked lock by id */
   ConnectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse>;
+
+  /** Returns the amount of delegations of specific denom for all validators */
+  TotalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): Promise<QueryTotalDelegationByValidatorForDenomResponse>;
 
   /**
    * Returns the total amount of osmo superfluidly staked.
@@ -1920,6 +2257,9 @@ export interface Query {
 
   /** Returns the specified delegations for a specific delegator */
   TotalDelegationByDelegator(request: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponse>;
+
+  /** Returns a list of whitelisted pool ids to unpool. */
+  UnpoolWhitelist(request?: QueryUnpoolWhitelistRequest): Promise<QueryUnpoolWhitelistResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -1932,6 +2272,7 @@ export class QueryClientImpl implements Query {
     this.AssetMultiplier = this.AssetMultiplier.bind(this);
     this.AllIntermediaryAccounts = this.AllIntermediaryAccounts.bind(this);
     this.ConnectedIntermediaryAccount = this.ConnectedIntermediaryAccount.bind(this);
+    this.TotalDelegationByValidatorForDenom = this.TotalDelegationByValidatorForDenom.bind(this);
     this.TotalSuperfluidDelegations = this.TotalSuperfluidDelegations.bind(this);
     this.SuperfluidDelegationAmount = this.SuperfluidDelegationAmount.bind(this);
     this.SuperfluidDelegationsByDelegator = this.SuperfluidDelegationsByDelegator.bind(this);
@@ -1939,6 +2280,7 @@ export class QueryClientImpl implements Query {
     this.SuperfluidDelegationsByValidatorDenom = this.SuperfluidDelegationsByValidatorDenom.bind(this);
     this.EstimateSuperfluidDelegatedAmountByValidatorDenom = this.EstimateSuperfluidDelegatedAmountByValidatorDenom.bind(this);
     this.TotalDelegationByDelegator = this.TotalDelegationByDelegator.bind(this);
+    this.UnpoolWhitelist = this.UnpoolWhitelist.bind(this);
   }
 
   Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
@@ -1977,6 +2319,12 @@ export class QueryClientImpl implements Query {
     const data = ConnectedIntermediaryAccountRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Query", "ConnectedIntermediaryAccount", data);
     return promise.then(data => ConnectedIntermediaryAccountResponse.decode(new _m0.Reader(data)));
+  }
+
+  TotalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): Promise<QueryTotalDelegationByValidatorForDenomResponse> {
+    const data = QueryTotalDelegationByValidatorForDenomRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.superfluid.Query", "TotalDelegationByValidatorForDenom", data);
+    return promise.then(data => QueryTotalDelegationByValidatorForDenomResponse.decode(new _m0.Reader(data)));
   }
 
   TotalSuperfluidDelegations(request: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponse> {
@@ -2019,6 +2367,12 @@ export class QueryClientImpl implements Query {
     const data = QueryTotalDelegationByDelegatorRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.superfluid.Query", "TotalDelegationByDelegator", data);
     return promise.then(data => QueryTotalDelegationByDelegatorResponse.decode(new _m0.Reader(data)));
+  }
+
+  UnpoolWhitelist(request: QueryUnpoolWhitelistRequest = {}): Promise<QueryUnpoolWhitelistResponse> {
+    const data = QueryUnpoolWhitelistRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.superfluid.Query", "UnpoolWhitelist", data);
+    return promise.then(data => QueryUnpoolWhitelistResponse.decode(new _m0.Reader(data)));
   }
 
 }

@@ -4,6 +4,40 @@ import { BILLION, callExpression, identifier } from '../../../utils';
 import { getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@osmonauts/types';
+import { getInterfaceFromAminoName } from '../implements';
+import { camel } from '@osmonauts/utils';
+
+const setProp = (
+    args: FromAminoJSONMethod,
+    callExpr: t.Expression
+) => {
+    const {
+        propName,
+        origName
+    } = getFieldNames(args.field);
+
+    const prop = t.objectProperty(
+        t.identifier(propName),
+        callExpr
+    );
+
+    if (args.isOptional) {
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
+                ),
+                callExpr,
+                t.identifier('undefined')
+            )
+        );
+    }
+    return prop;
+};
 
 export const fromAminoJSON = {
 
@@ -57,7 +91,6 @@ export const fromAminoJSON = {
     long(args: FromAminoJSONMethod) {
 
         const {
-            propName,
             origName
         } = getFieldNames(args.field);
 
@@ -76,27 +109,7 @@ export const fromAminoJSON = {
             ]
         );
 
-        const prop = t.objectProperty(
-            t.identifier(propName),
-            callExpr
-        );
-
-        if (args.isOptional) {
-            return t.objectProperty(
-                t.identifier(propName),
-                t.conditionalExpression(
-                    t.optionalMemberExpression(
-                        t.identifier('object'),
-                        t.identifier(origName),
-                        false,
-                        true
-                    ),
-                    callExpr,
-                    t.identifier('undefined')
-                )
-            );
-        }
-        return prop;
+        return setProp(args, callExpr);
     },
     int64(args: FromAminoJSONMethod) {
         return fromAminoJSON.long(args);
@@ -114,7 +127,100 @@ export const fromAminoJSON = {
         return fromAminoJSON.long(args);
     },
 
-    type(args: FromAminoJSONMethod) {
+
+    rawBytes(args: FromAminoJSONMethod) {
+        args.context.addUtil('toUtf8');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const expr = t.callExpression(
+            t.identifier('toUtf8'),
+            [
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('JSON'),
+                        t.identifier('stringify')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                )
+            ]
+        );
+
+        return setProp(args, expr);
+    },
+
+    wasmByteCode(args: FromAminoJSONMethod) {
+        args.context.addUtil('fromBase64');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const expr = t.callExpression(
+            t.identifier('fromBase64'),
+            [
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
+                )
+            ]
+        );
+
+        return setProp(args, expr);
+    },
+
+    pubkey(args: FromAminoJSONMethod) {
+        args.context.addUtil('toBase64');
+        args.context.addUtil('encodeBech32Pubkey');
+
+        const {
+            origName
+        } = getFieldNames(args.field);
+
+        const callExpr = t.callExpression(
+            t.identifier('encodeBech32Pubkey'),
+            [
+                t.objectExpression([
+                    t.objectProperty(
+                        t.identifier('type'),
+                        t.stringLiteral('tendermint/PubKeySecp256k1')
+                    ),
+                    t.objectProperty(
+                        t.identifier('value'),
+                        t.callExpression(
+                            t.identifier('toBase64'),
+                            [
+                                t.memberExpression(
+                                    t.memberExpression(
+                                        t.identifier('object'),
+                                        t.identifier(origName)
+                                    ),
+                                    t.identifier('value')
+                                )
+                            ]
+                        )
+                    )
+                ]),
+                // TODO how to manage this?
+                // 1. options.prefix
+                // 2. look into prefix and how it's used across chains
+                // 3. maybe AminoConverter is a class and has this.prefix!
+                t.stringLiteral('cosmos')
+            ]
+        );
+
+        return setProp(args, callExpr);
+    },
+
+
+    protoType(args: FromAminoJSONMethod) {
         const {
             propName,
             origName
@@ -147,6 +253,50 @@ export const fromAminoJSON = {
         );
     },
 
+    anyType(args: FromAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
+                ),
+                t.callExpression(
+                    t.identifier(interfaceFnName),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                ),
+                t.identifier('undefined')
+            )
+        );
+    },
+
+    type(args: FromAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return fromAminoJSON.anyType(args);
+        }
+        return fromAminoJSON.protoType(args);
+
+    },
     enum(args: FromAminoJSONMethod) {
         const {
             propName,
@@ -518,7 +668,17 @@ export const arrayTypes = {
     },
 
     // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromAminoJSON(e)) : []
-    type(args: FromAminoJSONMethod) {
+    anyType(args: FromAminoJSONMethod) {
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+        return t.callExpression(
+            t.identifier(interfaceFnName),
+            [
+                t.identifier('e')
+            ]
+        );
+    },
+    protoType(args: FromAminoJSONMethod) {
         const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
@@ -529,11 +689,63 @@ export const arrayTypes = {
                 t.identifier('e')
             ]
         );
+    },
+    type(args: FromAminoJSONMethod) {
+
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return arrayTypes.anyType(args);
+        }
+        return arrayTypes.protoType(args);
     }
 };
 
 
 export const fromAminoMessages = {
+    height(context: ProtoParseContext, name: string, proto: ProtoType) {
+        context.addUtil('Long');
+
+        const keepCase = context.options.prototypes.parser.keepCase;
+        const casing = keepCase ? (str) => str : camel;
+
+        const makeField = (fieldName: string) =>
+            t.objectProperty(
+                t.identifier(casing(fieldName)),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Long'),
+                        t.identifier('fromString')
+                    ),
+                    [
+                        t.logicalExpression(
+                            '||',
+                            t.memberExpression(
+                                t.identifier('object'),
+                                t.identifier(fieldName)
+                            ),
+                            t.stringLiteral('0')
+                        ),
+                        t.booleanLiteral(true)
+                    ]
+                )
+            );
+
+        return [
+            // return
+            t.returnStatement(
+                t.objectExpression([
+                    makeField('revision_number'),
+                    makeField('revision_height')
+                ])
+            )
+        ]
+
+    },
     duration(context: ProtoParseContext, name: string, proto: ProtoType) {
         context.addUtil('Long');
         return [

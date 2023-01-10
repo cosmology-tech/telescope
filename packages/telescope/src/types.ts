@@ -17,6 +17,10 @@ export interface ImportObj {
     path: string;
     importAs?: string;
 }
+
+export interface DerivedImportObj extends ImportObj {
+    orig: string;
+}
 export interface ImportHash {
     [key: string]: string[];
 }

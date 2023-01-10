@@ -29,7 +29,6 @@ export interface MsgSubmitEvidenceResponse {
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
-  /** hash defines the hash of the evidence. */
   hash: Uint8Array;
 }
 

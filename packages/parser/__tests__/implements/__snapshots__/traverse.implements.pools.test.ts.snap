@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PoolI createMap 1`] = `
+{
+  "PoolI": [
+    {
+      "pkg": "osmosis.gamm.v1beta1",
+      "ref": "osmosis/gamm/pool-models/balancer/balancerPool.proto",
+      "types": [
+        {
+          "aminoType": "osmosis/gamm/pool",
+          "importAs": "Pool1",
+          "type": "Pool",
+          "typeUrl": "/osmosis.gamm.v1beta1.Pool",
+        },
+      ],
+    },
+    {
+      "pkg": "osmosis.gamm.poolmodels.stableswap.v1beta1",
+      "ref": "osmosis/gamm/pool-models/stableswap/stableswap_pool.proto",
+      "types": [
+        {
+          "aminoType": "osmosis/gamm/pool",
+          "importAs": "Pool2",
+          "type": "Pool",
+          "typeUrl": "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
+        },
+      ],
+    },
+  ],
+}
+`;

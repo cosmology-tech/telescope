@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`double import bug GenesisState 1`] = `
+{
+  "comment": "GenesisState defines the ibc module's genesis state.",
+  "fields": {
+    "channelGenesis": {
+      "comment": "ICS004 - Channel genesis state",
+      "id": 3,
+      "import": "ibc/core/channel/v1/genesis.proto",
+      "importedName": "ibc.core.channel.v1.GenesisState",
+      "options": {
+        "(gogoproto.moretags)": "yaml:channel_genesis",
+        "(gogoproto.nullable)": false,
+        "(telescope:camel)": "channelGenesis",
+        "(telescope:name)": "channelGenesis",
+        "(telescope:orig)": "channel_genesis",
+      },
+      "parsedType": {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": [
+        "ibc.core.channel.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.channel.v1.GenesisState",
+    },
+    "clientGenesis": {
+      "comment": "ICS002 - Clients genesis state",
+      "id": 1,
+      "import": "ibc/core/client/v1/genesis.proto",
+      "importedName": "ibc.core.client.v1.GenesisState",
+      "options": {
+        "(gogoproto.moretags)": "yaml:client_genesis",
+        "(gogoproto.nullable)": false,
+        "(telescope:camel)": "clientGenesis",
+        "(telescope:name)": "clientGenesis",
+        "(telescope:orig)": "client_genesis",
+      },
+      "parsedType": {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": [
+        "ibc.core.client.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.client.v1.GenesisState",
+    },
+    "connectionGenesis": {
+      "comment": "ICS003 - Connections genesis state",
+      "id": 2,
+      "import": "ibc/core/connection/v1/genesis.proto",
+      "importedName": "ibc.core.connection.v1.GenesisState",
+      "options": {
+        "(gogoproto.moretags)": "yaml:connection_genesis",
+        "(gogoproto.nullable)": false,
+        "(telescope:camel)": "connectionGenesis",
+        "(telescope:name)": "connectionGenesis",
+        "(telescope:orig)": "connection_genesis",
+      },
+      "parsedType": {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": [
+        "ibc.core.connection.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.connection.v1.GenesisState",
+    },
+  },
+  "keyTypes": [],
+  "name": "GenesisState",
+  "nested": null,
+  "oneofs": undefined,
+  "options": undefined,
+  "package": "ibc.core.types.v1",
+  "scope": [
+    "ibc.core.types.v1",
+  ],
+  "type": "Type",
+}
+`;
+
+exports[`double import bug GenesisState 2`] = `
+[
+  "ibc.core.types.v1",
+]
+`;
+
+exports[`double import bug imports/exports 1`] = `
+{
+  "GenesisState": true,
+}
+`;
+
+exports[`double import bug imports/exports 2`] = `
+{
+  "ibc/core/channel/v1/genesis.proto": [
+    "GenesisState",
+  ],
+  "ibc/core/client/v1/genesis.proto": [
+    "GenesisState",
+  ],
+  "ibc/core/connection/v1/genesis.proto": [
+    "GenesisState",
+  ],
+}
+`;
+
+exports[`double import bug imports/exports 3`] = `
+{
+  "ibc/core/channel/v1/genesis.proto": {
+    "GenesisState": "GenesisState3",
+  },
+  "ibc/core/client/v1/genesis.proto": {
+    "GenesisState": "GenesisState1",
+  },
+  "ibc/core/connection/v1/genesis.proto": {
+    "GenesisState": "GenesisState2",
+  },
+}
+`;
+
+exports[`proto example imports/exports 1`] = `
+{
+  "CreateLogMetricRequest": true,
+  "DeleteLogMetricRequest": true,
+  "GetLogMetricRequest": true,
+  "ListLogMetricsRequest": true,
+  "ListLogMetricsResponse": true,
+  "LogMetric": true,
+  "UpdateLogMetricRequest": true,
+}
+`;
+
+exports[`proto example imports/exports 2`] = `
+{
+  "google/api/distribution.proto": [
+    "Distribution_BucketOptions",
+  ],
+  "google/api/metric.proto": [
+    "MetricDescriptor",
+  ],
+  "google/protobuf/timestamp.proto": [
+    "Timestamp",
+  ],
+}
+`;
+
+exports[`proto example imports/exports 3`] = `
+{
+  "google/api/distribution.proto": {
+    "Distribution_BucketOptions": "Distribution_BucketOptions",
+  },
+  "google/api/metric.proto": {
+    "MetricDescriptor": "MetricDescriptor",
+  },
+  "google/protobuf/timestamp.proto": {
+    "Timestamp": "Timestamp",
+  },
+}
+`;
+
+exports[`proto import self imports/exports 1`] = `
+{
+  "Pool": true,
+  "PoolAsset": true,
+  "PoolParams": true,
+  "SmoothWeightChangeParams": true,
+}
+`;
+
+exports[`proto import self imports/exports 2`] = `
+{
+  "cosmos/base/v1beta1/coin.proto": [
+    "Coin",
+  ],
+  "google/protobuf/duration.proto": [
+    "Duration",
+  ],
+  "google/protobuf/timestamp.proto": [
+    "Timestamp",
+  ],
+}
+`;
+
+exports[`proto import self imports/exports 3`] = `
+{
+  "cosmos/base/v1beta1/coin.proto": {
+    "Coin": "Coin",
+  },
+  "google/protobuf/duration.proto": {
+    "Duration": "Duration",
+  },
+  "google/protobuf/timestamp.proto": {
+    "Timestamp": "Timestamp",
+  },
+}
+`;

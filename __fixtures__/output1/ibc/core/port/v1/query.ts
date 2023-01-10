@@ -23,19 +23,10 @@ export interface QueryAppVersionRequest {
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
-  /** port unique identifier */
   port_id: string;
-
-  /** connection unique identifier */
   connection_id: string;
-
-  /** whether the channel is ordered or unordered */
   ordering: Order;
-
-  /** counterparty channel end */
   counterparty?: CounterpartySDKType;
-
-  /** proposed version */
   proposed_version: string;
 }
 
@@ -50,10 +41,7 @@ export interface QueryAppVersionResponse {
 
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseSDKType {
-  /** port id associated with the request identifiers */
   port_id: string;
-
-  /** supported app version */
   version: string;
 }
 

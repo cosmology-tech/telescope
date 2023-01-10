@@ -53,13 +53,6 @@ export interface MsgEditValidator {
 export interface MsgEditValidatorSDKType {
   description?: DescriptionSDKType;
   validator_address: string;
-
-  /**
-   * We pass a reference to the new commission rate and min self delegation as
-   * it's not mandatory to update. If not updated, the deserialized rate will be
-   * zero with no way to distinguish if an update was intended.
-   * REF: #2373
-   */
   commission_rate: string;
   min_self_delegation: string;
 }

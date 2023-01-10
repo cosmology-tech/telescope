@@ -5,6 +5,7 @@ import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '
 import { BILLION, identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { fromAminoJSON, arrayTypes, fromAminoMessages } from './utils';
+import { SymbolNames } from '../../types';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement fromAminoJSON (${field.type} rules[${field.rule}] name[${name}])`);
@@ -32,6 +33,7 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
             isOptional
         };
 
+        // arrays
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
@@ -94,6 +96,27 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
             }
         }
 
+        // casting special types
+        if (field.type === 'google.protobuf.Any') {
+            switch (field.options?.['(cosmos_proto.accepts_interface)']) {
+                case 'cosmos.crypto.PubKey':
+                    return fromAminoJSON.pubkey(args);
+            }
+        }
+
+        if (field.type === 'bytes') {
+            // bytes [RawContractMessage]
+            if (field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
+                return fromAminoJSON.rawBytes(args);
+            }
+            // bytes [WASMByteCode]
+            // TODO use a better option for this in proto source
+            if (field.options?.['(gogoproto.customname)'] === 'WASMByteCode') {
+                return fromAminoJSON.wasmByteCode(args);
+            }
+        }
+
+        // default types
         switch (field.type) {
             case 'string':
                 return fromAminoJSON.string(args);
@@ -152,18 +175,23 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         varName = '_';
     }
 
-    const AminoTypeName =
-        [name, 'Amino']
-            .filter(Boolean).join('');
+    const AminoTypeName = SymbolNames.Amino(name);
 
     const body: t.Statement[] = [];
 
     // 1. some messages we parse specially
     if (proto.type === 'Type') {
         switch (proto.name) {
-            case 'Duration':
-            case 'google.protobuf.Duration': {
-                [].push.apply(body, fromAminoMessages.duration(context, name, proto));
+            case 'Duration': {
+                if (proto.package === 'google.protobuf') {
+                    [].push.apply(body, fromAminoMessages.duration(context, name, proto));
+                }
+                break;
+            }
+            case 'Height': {
+                if (proto.package === 'ibc.core.client.v1') {
+                    [].push.apply(body, fromAminoMessages.height(context, name, proto));
+                }
                 break;
             }
             // case 'Timestamp':
@@ -206,6 +234,59 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         t.tsTypeAnnotation(
             t.tsTypeReference(
                 t.identifier(name)
+            )
+        )
+    )
+};
+
+export const fromAminoMsgMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
+    const varName = 'object';
+
+    const TypeName = SymbolNames.Msg(name);
+    const AminoMsgName = SymbolNames.AminoMsg(name);
+    const ReturnType = SymbolNames.Msg(name);
+
+    const body: t.Statement[] = [];
+
+    body.push(
+        t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(TypeName),
+                    t.identifier('fromAmino')
+                ),
+                [
+                    t.memberExpression(
+                        t.identifier(varName),
+                        t.identifier('value')
+                    )
+                ]
+            )
+        )
+    );
+
+    return objectMethod('method',
+        t.identifier('fromAminoMsg'),
+        [
+            identifier(varName,
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier(AminoMsgName)
+                    )
+                ),
+                false
+            )
+
+        ],
+        t.blockStatement(
+            body
+        ),
+        false,
+        false,
+        false,
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(ReturnType)
             )
         )
     )

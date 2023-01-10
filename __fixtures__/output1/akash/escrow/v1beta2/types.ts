@@ -171,35 +171,13 @@ export interface Account {
 
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
-  /** unique identifier for this escrow account */
   id?: AccountIDSDKType;
-
-  /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
-
-  /** current state of this escrow account */
   state: Account_State;
-
-  /** unspent coins received from the owner's wallet */
   balance?: DecCoinSDKType;
-
-  /** total coins spent by this account */
   transferred?: DecCoinSDKType;
-
-  /** block height at which this account was last settled */
   settled_at: Long;
-
-  /**
-   * bech32 encoded account address of the depositor.
-   * If depositor is same as the owner, then any incoming coins are added to the Balance.
-   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
-   */
   depositor: string;
-
-  /**
-   * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
-   * If there are any funds, they should be spent before spending the Balance.
-   */
   funds?: DecCoinSDKType;
 }
 

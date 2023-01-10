@@ -4,14 +4,14 @@ import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../..
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
-export interface AminoMsgCreateDenom extends AminoMsg {
+export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
   value: {
     sender: string;
     subdenom: string;
   };
 }
-export interface AminoMsgMint extends AminoMsg {
+export interface MsgMintAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/mint";
   value: {
     sender: string;
@@ -21,7 +21,7 @@ export interface AminoMsgMint extends AminoMsg {
     };
   };
 }
-export interface AminoMsgBurn extends AminoMsg {
+export interface MsgBurnAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/burn";
   value: {
     sender: string;
@@ -31,7 +31,7 @@ export interface AminoMsgBurn extends AminoMsg {
     };
   };
 }
-export interface AminoMsgChangeAdmin extends AminoMsg {
+export interface MsgChangeAdminAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/change-admin";
   value: {
     sender: string;
@@ -39,7 +39,7 @@ export interface AminoMsgChangeAdmin extends AminoMsg {
     new_admin: string;
   };
 }
-export interface AminoMsgSetDenomMetadata extends AminoMsg {
+export interface MsgSetDenomMetadataAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/set-denom-metadata";
   value: {
     sender: string;
@@ -65,7 +65,7 @@ export const AminoConverter = {
     toAmino: ({
       sender,
       subdenom
-    }: MsgCreateDenom): AminoMsgCreateDenom["value"] => {
+    }: MsgCreateDenom): MsgCreateDenomAminoType["value"] => {
       return {
         sender,
         subdenom
@@ -74,7 +74,7 @@ export const AminoConverter = {
     fromAmino: ({
       sender,
       subdenom
-    }: AminoMsgCreateDenom["value"]): MsgCreateDenom => {
+    }: MsgCreateDenomAminoType["value"]): MsgCreateDenom => {
       return {
         sender,
         subdenom
@@ -86,7 +86,7 @@ export const AminoConverter = {
     toAmino: ({
       sender,
       amount
-    }: MsgMint): AminoMsgMint["value"] => {
+    }: MsgMint): MsgMintAminoType["value"] => {
       return {
         sender,
         amount: {
@@ -98,7 +98,7 @@ export const AminoConverter = {
     fromAmino: ({
       sender,
       amount
-    }: AminoMsgMint["value"]): MsgMint => {
+    }: MsgMintAminoType["value"]): MsgMint => {
       return {
         sender,
         amount: {
@@ -113,7 +113,7 @@ export const AminoConverter = {
     toAmino: ({
       sender,
       amount
-    }: MsgBurn): AminoMsgBurn["value"] => {
+    }: MsgBurn): MsgBurnAminoType["value"] => {
       return {
         sender,
         amount: {
@@ -125,7 +125,7 @@ export const AminoConverter = {
     fromAmino: ({
       sender,
       amount
-    }: AminoMsgBurn["value"]): MsgBurn => {
+    }: MsgBurnAminoType["value"]): MsgBurn => {
       return {
         sender,
         amount: {
@@ -141,7 +141,7 @@ export const AminoConverter = {
       sender,
       denom,
       newAdmin
-    }: MsgChangeAdmin): AminoMsgChangeAdmin["value"] => {
+    }: MsgChangeAdmin): MsgChangeAdminAminoType["value"] => {
       return {
         sender,
         denom,
@@ -152,7 +152,7 @@ export const AminoConverter = {
       sender,
       denom,
       new_admin
-    }: AminoMsgChangeAdmin["value"]): MsgChangeAdmin => {
+    }: MsgChangeAdminAminoType["value"]): MsgChangeAdmin => {
       return {
         sender,
         denom,
@@ -165,7 +165,7 @@ export const AminoConverter = {
     toAmino: ({
       sender,
       metadata
-    }: MsgSetDenomMetadata): AminoMsgSetDenomMetadata["value"] => {
+    }: MsgSetDenomMetadata): MsgSetDenomMetadataAminoType["value"] => {
       return {
         sender,
         metadata: {
@@ -187,7 +187,7 @@ export const AminoConverter = {
     fromAmino: ({
       sender,
       metadata
-    }: AminoMsgSetDenomMetadata["value"]): MsgSetDenomMetadata => {
+    }: MsgSetDenomMetadataAminoType["value"]): MsgSetDenomMetadata => {
       return {
         sender,
         metadata: {

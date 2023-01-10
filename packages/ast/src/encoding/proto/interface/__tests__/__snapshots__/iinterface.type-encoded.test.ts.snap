@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cosmos/gov/v1beta1/tx.proto createProtoInterfaceEncodedType 1`] = `
+"export type MsgSubmitProposalEncoded = Omit<MsgSubmitProposal, "content"> & {
+  content?: TextProposalProtoMsg | RegisterIncentiveProposalProtoMsg | ClientUpdateProposalProtoMsg | UpgradeProposalProtoMsg | ReplacePoolIncentivesProposalProtoMsg | UpdatePoolIncentivesProposalProtoMsg | SetSuperfluidAssetsProposalProtoMsg | RemoveSuperfluidAssetsProposalProtoMsg | UpdateUnpoolWhiteListProposalProtoMsg | UpdateFeeTokenProposalProtoMsg | AnyProtoMsg | undefined;
+};"
+`;
+
+exports[`cosmos/gov/v1beta1/tx.proto createProtoType 1`] = `
+"/**
+ * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
+ * proposal Content.
+ */
+export interface MsgSubmitProposal {
+  content?: (TextProposal & RegisterIncentiveProposal & ClientUpdateProposal & UpgradeProposal & ReplacePoolIncentivesProposal & UpdatePoolIncentivesProposal & SetSuperfluidAssetsProposal & RemoveSuperfluidAssetsProposal & UpdateUnpoolWhiteListProposal & UpdateFeeTokenProposal & Any) | undefined;
+  initialDeposit: Coin[];
+  proposer: string;
+}"
+`;

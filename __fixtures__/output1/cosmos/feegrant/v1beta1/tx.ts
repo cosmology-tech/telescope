@@ -23,13 +23,8 @@ export interface MsgGrantAllowance {
  * of fees from the account of Granter.
  */
 export interface MsgGrantAllowanceSDKType {
-  /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
-
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
-
-  /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnySDKType;
 }
 
@@ -50,10 +45,7 @@ export interface MsgRevokeAllowance {
 
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowanceSDKType {
-  /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
-
-  /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
 

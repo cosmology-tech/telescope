@@ -99,64 +99,12 @@ export interface Distribution {
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
 export interface DistributionSDKType {
-  /**
-   * The number of values in the population. Must be non-negative. This value
-   * must equal the sum of the values in `bucket_counts` if a histogram is
-   * provided.
-   */
   count: Long;
-
-  /**
-   * The arithmetic mean of the values in the population. If `count` is zero
-   * then this field must be zero.
-   */
   mean: number;
-
-  /**
-   * The sum of squared deviations from the mean of the values in the
-   * population. For values x_i this is:
-   * 
-   *     Sum[i=1..n]((x_i - mean)^2)
-   * 
-   * Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
-   * describes Welford's method for accumulating this sum in one pass.
-   * 
-   * If `count` is zero then this field must be zero.
-   */
   sum_of_squared_deviation: number;
-
-  /**
-   * If specified, contains the range of the population values. The field
-   * must not be present if the `count` is zero.
-   */
   range?: Distribution_RangeSDKType;
-
-  /**
-   * Defines the histogram bucket boundaries. If the distribution does not
-   * contain a histogram, then omit this field.
-   */
   bucket_options?: Distribution_BucketOptionsSDKType;
-
-  /**
-   * The number of values in each bucket of the histogram, as described in
-   * `bucket_options`. If the distribution does not have a histogram, then omit
-   * this field. If there is a histogram, then the sum of the values in
-   * `bucket_counts` must equal the value in the `count` field of the
-   * distribution.
-   * 
-   * If present, `bucket_counts` should contain N values, where N is the number
-   * of buckets specified in `bucket_options`. If you supply fewer than N
-   * values, the remaining values are assumed to be 0.
-   * 
-   * The order of the values in `bucket_counts` follows the bucket numbering
-   * schemes described for the three bucket types. The first value must be the
-   * count for the underflow bucket (number 0). The next N-2 values are the
-   * counts for the finite buckets (number 1 through N-2). The N'th value in
-   * `bucket_counts` is the count for the overflow bucket (number N-1).
-   */
   bucket_counts: Long[];
-
-  /** Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarSDKType[];
 }
 
@@ -171,10 +119,7 @@ export interface Distribution_Range {
 
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
-  /** The minimum of the population values. */
   min: number;
-
-  /** The maximum of the population values. */
   max: number;
 }
 
@@ -224,13 +169,8 @@ export interface Distribution_BucketOptions {
  * so-called because both bounds are finite.
  */
 export interface Distribution_BucketOptionsSDKType {
-  /** The linear bucket. */
   linear_buckets?: Distribution_BucketOptions_LinearSDKType;
-
-  /** The exponential buckets. */
   exponential_buckets?: Distribution_BucketOptions_ExponentialSDKType;
-
-  /** The explicit buckets. */
   explicit_buckets?: Distribution_BucketOptions_ExplicitSDKType;
 }
 
@@ -268,13 +208,8 @@ export interface Distribution_BucketOptions_Linear {
  *    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
  */
 export interface Distribution_BucketOptions_LinearSDKType {
-  /** Must be greater than 0. */
   num_finite_buckets: number;
-
-  /** Must be greater than 0. */
   width: number;
-
-  /** Lower bound of the first bucket. */
   offset: number;
 }
 
@@ -312,13 +247,8 @@ export interface Distribution_BucketOptions_Exponential {
  *    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
  */
 export interface Distribution_BucketOptions_ExponentialSDKType {
-  /** Must be greater than 0. */
   num_finite_buckets: number;
-
-  /** Must be greater than 1. */
   growth_factor: number;
-
-  /** Must be greater than 0. */
   scale: number;
 }
 
@@ -354,7 +284,6 @@ export interface Distribution_BucketOptions_Explicit {
  * element is the common boundary of the overflow and underflow buckets.
  */
 export interface Distribution_BucketOptions_ExplicitSDKType {
-  /** The values must be monotonically increasing. */
   bounds: number[];
 }
 
@@ -399,28 +328,8 @@ export interface Distribution_Exemplar {
  * such as a example values and timestamps, origin, etc.
  */
 export interface Distribution_ExemplarSDKType {
-  /**
-   * Value of the exemplar point. This value determines to which bucket the
-   * exemplar belongs.
-   */
   value: number;
-
-  /** The observation (sampling) time of the above value. */
   timestamp?: Date;
-
-  /**
-   * Contextual information about the example value. Examples are:
-   * 
-   *   Trace: type.googleapis.com/google.monitoring.v3.SpanContext
-   * 
-   *   Literal string: type.googleapis.com/google.protobuf.StringValue
-   * 
-   *   Labels dropped during aggregation:
-   *     type.googleapis.com/google.monitoring.v3.DroppedLabels
-   * 
-   * There may be only a single attachment of any given message type in a
-   * single exemplar, and this is enforced by the system.
-   */
   attachments: AnySDKType[];
 }
 

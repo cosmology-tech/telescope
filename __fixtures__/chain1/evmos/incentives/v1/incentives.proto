@@ -39,6 +39,8 @@ message GasMeter {
 // RegisterIncentiveProposal is a gov Content type to register an incentive
 message RegisterIncentiveProposal {
   option (gogoproto.equal) = false;
+  option (cosmos_proto.implements_interface) = "ProposalContentI";
+
   // title of the proposal
   string title = 1;
   // proposal description

@@ -152,17 +152,9 @@ export interface ClientState {
  * state and if the client is frozen.
  */
 export interface ClientStateSDKType {
-  /** latest sequence of the client state */
   sequence: Long;
-
-  /** frozen sequence of the solo machine */
   is_frozen: boolean;
   consensus_state?: ConsensusStateSDKType;
-
-  /**
-   * when set to true, will allow governance to update a solo machine client.
-   * The client will be unfrozen if it is frozen.
-   */
   allow_update_after_proposal: boolean;
 }
 
@@ -190,14 +182,7 @@ export interface ConsensusState {
  * consensus state.
  */
 export interface ConsensusStateSDKType {
-  /** public key of the solo machine */
   public_key?: AnySDKType;
-
-  /**
-   * diversifier allows the same public key to be re-used across different solo
-   * machine clients (potentially on different chains) without being considered
-   * misbehaviour.
-   */
   diversifier: string;
   timestamp: Long;
 }
@@ -214,7 +199,6 @@ export interface Header {
 
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
-  /** sequence to update solo machine public key at */
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
@@ -302,11 +286,7 @@ export interface SignBytesSDKType {
   sequence: Long;
   timestamp: Long;
   diversifier: string;
-
-  /** type of the data used */
   data_type: DataType;
-
-  /** marshaled data */
   data: Uint8Array;
 }
 
@@ -321,10 +301,7 @@ export interface HeaderData {
 
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
-  /** header public key */
   new_pub_key?: AnySDKType;
-
-  /** header diversifier */
   new_diversifier: string;
 }
 

@@ -98,22 +98,9 @@ export interface StakeAuthorization {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorizationSDKType {
-  /**
-   * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
-   * empty, there is no spend limit and any amount of coins can be delegated.
-   */
   max_tokens?: CoinSDKType;
-
-  /**
-   * allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
-   * account.
-   */
   allow_list?: StakeAuthorization_ValidatorsSDKType;
-
-  /** deny_list specifies list of validator addresses to whom grantee can not delegate tokens. */
   deny_list?: StakeAuthorization_ValidatorsSDKType;
-
-  /** authorization_type defines one of AuthorizationType. */
   authorization_type: AuthorizationType;
 }
 

@@ -9,8 +9,11 @@ import {
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
     createProtoType,
+    createProtoInterfaceEncodedType,
+    createProtoTypeType,
     createSDKType,
     createAminoType,
+    createAminoTypeType,
     createEnumSDKType,
     createEnumAminoType,
     makeAminoTypeInterface,
@@ -20,6 +23,9 @@ import {
     createRegistryLoader,
     // helper
     createHelperObject,
+    createInterfaceDecoder,
+    createInterfaceFromAmino,
+    createInterfaceToAmino,
 } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
 
@@ -56,9 +62,22 @@ export const buildBaseTypeScriptInterface = (
     name: string,
     obj: any
 ) => {
+
     context.body.push(createProtoType(context.proto, name, obj));
+
     if (context.options.aminoEncoding.useRecursiveV2encoding) {
+        context.body.push(createProtoTypeType(context.proto, name, obj));
+        // conditional type
+        const interfaceType = createProtoInterfaceEncodedType(context.proto, name, obj);
+        if (interfaceType) {
+            context.body.push(interfaceType);
+        }
         context.body.push(createAminoType(context.proto, name, obj));
+
+        // TODO optimization:
+        // maybe in future, we can only print AminoTypeType if it's needed, 
+        // for example, if it's used in msgs, or inside of a implements/accepts
+        context.body.push(createAminoTypeType(context.proto, name, obj));
     }
     if (context.options.useSDKTypes) {
         context.body.push(createSDKType(context.proto, name, obj));
@@ -143,19 +162,37 @@ export class TelescopeParseContext implements TelescopeParseContext {
             if (obj.type === 'Enum') {
                 buildEnums(this, name, obj);
             }
-        })
+        });
         this.types.forEach(typeReg => {
             const { name, obj } = typeReg;
             if (obj.type === 'Type') {
                 buildBaseTypeScriptInterface(this, name, obj);
             }
-        })
+        });
         this.types.forEach(typeReg => {
             const { name, obj } = typeReg;
             if (obj.type === 'Type') {
                 buildBaseTypeScriptClass(this, name, obj);
             }
-        })
+        });
+
+        // interfaces
+        if (this.options.interfaces.enabled) {
+            const interfaces = Object.keys(this.ref.traversed.acceptsInterface ?? {});
+            if (interfaces.length) {
+                interfaces.forEach(interfaceName => {
+                    this.body.push(createInterfaceDecoder(this.proto, this.ref, interfaceName));
+                    if (
+                        this.options.aminoEncoding.enabled &&
+                        this.options.aminoEncoding.useRecursiveV2encoding
+                    ) {
+                        this.body.push(createInterfaceFromAmino(this.proto, this.ref, interfaceName));
+                        this.body.push(createInterfaceToAmino(this.proto, this.ref, interfaceName));
+                    }
+                })
+            }
+        }
+
     }
 
     buildRegistry() {

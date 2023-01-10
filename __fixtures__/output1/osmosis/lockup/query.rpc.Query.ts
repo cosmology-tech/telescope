@@ -2,12 +2,13 @@ import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
+import { Params, ParamsSDKType } from "./params";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType } from "./query";
+import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -64,6 +65,9 @@ export interface Query {
 
   /** Returns account's locked records for a denom with longer duration */
   accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse>;
+
+  /** Params returns lockup params. */
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -86,6 +90,7 @@ export class QueryClientImpl implements Query {
     this.accountLockedDuration = this.accountLockedDuration.bind(this);
     this.accountLockedLongerDurationNotUnlockingOnly = this.accountLockedLongerDurationNotUnlockingOnly.bind(this);
     this.accountLockedLongerDurationDenom = this.accountLockedLongerDurationDenom.bind(this);
+    this.params = this.params.bind(this);
   }
 
   moduleBalance(request: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponse> {
@@ -184,6 +189,12 @@ export class QueryClientImpl implements Query {
     return promise.then(data => AccountLockedLongerDurationDenomResponse.decode(new _m0.Reader(data)));
   }
 
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+    const data = QueryParamsRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.lockup.Query", "Params", data);
+    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  }
+
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -251,6 +262,10 @@ export const createRpcQueryExtension = (base: QueryClient) => {
 
     accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse> {
       return queryService.accountLockedLongerDurationDenom(request);
+    },
+
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
+      return queryService.params(request);
     }
 
   };
@@ -302,6 +317,9 @@ export interface UseAccountLockedLongerDurationNotUnlockingOnlyQuery<TData> exte
 }
 export interface UseAccountLockedLongerDurationDenomQuery<TData> extends ReactQueryParams<AccountLockedLongerDurationDenomResponse, TData> {
   request: AccountLockedLongerDurationDenomRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
 }
 
 const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
@@ -483,6 +501,16 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
+  const useParams = <TData = QueryParamsResponse,>({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
   return {
     /** Return full balance of the module */
     useModuleBalance,
@@ -536,6 +564,9 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useAccountLockedLongerDurationNotUnlockingOnly,
 
     /** Returns account's locked records for a denom with longer duration */
-    useAccountLockedLongerDurationDenom
+    useAccountLockedLongerDurationDenom,
+
+    /** Params returns lockup params. */
+    useParams
   };
 };

@@ -3,6 +3,89 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.80.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.79.0...@osmonauts/test-example@0.80.0) (2023-01-01)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+# [0.79.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.78.0...@osmonauts/test-example@0.79.0) (2022-12-30)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+# [0.78.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.77.0...@osmonauts/test-example@0.78.0) (2022-12-29)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+# [0.77.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.5...@osmonauts/test-example@0.77.0) (2022-12-24)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+## [0.76.5](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.4...@osmonauts/test-example@0.76.5) (2022-12-19)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+## [0.76.4](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.3...@osmonauts/test-example@0.76.4) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+## [0.76.3](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.2...@osmonauts/test-example@0.76.3) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+## [0.76.2](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.1...@osmonauts/test-example@0.76.2) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+## [0.76.1](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.76.0...@osmonauts/test-example@0.76.1) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
+# [0.76.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.75.1...@osmonauts/test-example@0.76.0) (2022-12-18)
+
+
+### Reverts
+
+* Revert "chore(release): publish" ([086a55f](https://github.com/osmosis-labs/osmojs/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 # [0.75.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.74.0...@osmonauts/test-example@0.75.0) (2022-11-25)
 
 **Note:** Version bump only for package @osmonauts/test-example

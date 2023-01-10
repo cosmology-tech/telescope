@@ -14,10 +14,7 @@ export interface GenesisState {
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  /** module parameters */
   params?: ParamsSDKType;
-
-  /** registered token pairs */
   token_pairs: TokenPairSDKType[];
 }
 
@@ -36,14 +33,7 @@ export interface Params {
 
 /** Params defines the erc20 module params */
 export interface ParamsSDKType {
-  /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
   enable_erc20: boolean;
-
-  /**
-   * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
-   * Coin by transferring the Tokens through a MsgEthereumTx to the
-   * ModuleAddress Ethereum address.
-   */
   enable_evm_hook: boolean;
 }
 

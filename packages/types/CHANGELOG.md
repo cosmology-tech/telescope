@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.28.0...@osmonauts/types@0.29.0) (2022-12-30)
+
+**Note:** Version bump only for package @osmonauts/types
+
+
+
+
+
+# [0.28.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.27.2...@osmonauts/types@0.28.0) (2022-12-29)
+
+**Note:** Version bump only for package @osmonauts/types
+
+
+
+
+
+## [0.27.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.27.1...@osmonauts/types@0.27.2) (2022-12-19)
+
+**Note:** Version bump only for package @osmonauts/types
+
+
+
+
+
+## [0.27.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.27.0...@osmonauts/types@0.27.1) (2022-12-18)
+
+**Note:** Version bump only for package @osmonauts/types
+
+
+
+
+
+# [0.27.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.80.0-rc.1...@osmonauts/types@0.27.0) (2022-12-18)
+
+
+### Reverts
+
+* Revert "RC versions ready" ([04081a9](https://github.com/osmosis-labs/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+* Revert "chore(release): publish" ([086a55f](https://github.com/osmosis-labs/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+
+
+
+
+
 # [0.26.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.25.0...@osmonauts/types@0.26.0) (2022-11-25)
 
 **Note:** Version bump only for package @osmonauts/types

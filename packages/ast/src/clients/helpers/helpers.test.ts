@@ -46,6 +46,7 @@ it('addJsonMethod', async () => {
 
 it('createHelperObject', async () => {
     const context = getGenericParseContext()
+    // @ts-ignore
     context.ref = {
         proto: {
             package: 'a.b.c',

@@ -54,6 +54,7 @@ export const createProtoEnum = (
             t.numericLiteral(e.value),
             e.comment ? [{
                 type: 'CommentBlock',
+                // @ts-ignore
                 value: processEnumComment(e)
             }] : []
         );

@@ -17,7 +17,6 @@ export interface QueryConfigResponse {
 
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
-  /** config is the current app config. */
   config?: ConfigSDKType;
 }
 

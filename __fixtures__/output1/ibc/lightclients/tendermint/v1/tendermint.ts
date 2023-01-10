@@ -69,49 +69,14 @@ export interface ClientState {
 export interface ClientStateSDKType {
   chain_id: string;
   trust_level?: FractionSDKType;
-
-  /**
-   * duration of the period since the LastestTimestamp during which the
-   * submitted headers are valid for upgrade
-   */
   trusting_period?: DurationSDKType;
-
-  /** duration of the staking unbonding period */
   unbonding_period?: DurationSDKType;
-
-  /** defines how much new (untrusted) header's Time can drift into the future. */
   max_clock_drift?: DurationSDKType;
-
-  /** Block height when the client was frozen due to a misbehaviour */
   frozen_height?: HeightSDKType;
-
-  /** Latest height the client was updated to */
   latest_height?: HeightSDKType;
-
-  /** Proof specifications used in verifying counterparty state */
   proof_specs: ProofSpecSDKType[];
-
-  /**
-   * Path at which next upgraded client will be committed.
-   * Each element corresponds to the key for a single CommitmentProof in the
-   * chained proof. NOTE: ClientState must stored under
-   * `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
-   * under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
-   * the default upgrade module, upgrade_path should be []string{"upgrade",
-   * "upgradedIBCState"}`
-   */
   upgrade_path: string[];
-
-  /**
-   * This flag, when set to true, will allow governance to recover a client
-   * which has expired
-   */
   allow_update_after_expiry: boolean;
-
-  /**
-   * This flag, when set to true, will allow governance to unfreeze a client
-   * whose chain has experienced a misbehaviour event
-   */
   allow_update_after_misbehaviour: boolean;
 }
 
@@ -130,13 +95,7 @@ export interface ConsensusState {
 
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
-  /**
-   * timestamp that corresponds to the block height in which the ConsensusState
-   * was stored.
-   */
   timestamp?: Date;
-
-  /** commitment root (i.e app hash) */
   root?: MerkleRootSDKType;
   next_validators_hash: Uint8Array;
 }

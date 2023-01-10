@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`google/rpc/error_details 1`] = `
+{
+  "comment": "Describes what preconditions have failed.
+
+ For example, if an RPC failed because it required the Terms of Service to be
+ acknowledged, it could list the terms of service violation in the
+ PreconditionFailure message.",
+  "fields": {
+    "violations": {
+      "comment": "Describes all precondition violations.",
+      "id": 1,
+      "options": {
+        "(telescope:camel)": "violations",
+        "(telescope:name)": "violations",
+        "(telescope:orig)": "violations",
+      },
+      "parsedType": {
+        "name": "Violation",
+        "type": "Type",
+      },
+      "rule": "repeated",
+      "scope": [
+        "google.rpc",
+        "PreconditionFailure",
+      ],
+      "type": "Violation",
+    },
+  },
+  "keyTypes": [],
+  "name": "PreconditionFailure",
+  "nested": {
+    "Violation": {
+      "comment": "A message type used to describe a single precondition failure.",
+      "fields": {
+        "description": {
+          "comment": "A description of how the precondition failed. Developers can use this
+ description to understand how to fix the failure.
+
+ For example: "Terms of service not accepted".",
+          "id": 3,
+          "isScalar": true,
+          "options": {
+            "(telescope:camel)": "description",
+            "(telescope:name)": "description",
+            "(telescope:orig)": "description",
+          },
+          "parsedType": {
+            "name": "string",
+            "type": "native",
+          },
+          "type": "string",
+          "typeNum": 13,
+        },
+        "subject": {
+          "comment": "The subject, relative to the type, that failed.
+ For example, "google.com/cloud" relative to the "TOS" type would indicate
+ which terms of service is being referenced.",
+          "id": 2,
+          "isScalar": true,
+          "options": {
+            "(telescope:camel)": "subject",
+            "(telescope:name)": "subject",
+            "(telescope:orig)": "subject",
+          },
+          "parsedType": {
+            "name": "string",
+            "type": "native",
+          },
+          "type": "string",
+          "typeNum": 13,
+        },
+        "type": {
+          "comment": "The type of PreconditionFailure. We recommend using a service-specific
+ enum type to define the supported precondition violation subjects. For
+ example, "TOS" for "Terms of Service violation".",
+          "id": 1,
+          "isScalar": true,
+          "options": {
+            "(telescope:camel)": "type",
+            "(telescope:name)": "type",
+            "(telescope:orig)": "type",
+          },
+          "parsedType": {
+            "name": "string",
+            "type": "native",
+          },
+          "type": "string",
+          "typeNum": 13,
+        },
+      },
+      "keyTypes": [],
+      "name": "Violation",
+      "nested": null,
+      "oneofs": undefined,
+      "options": undefined,
+      "package": "google.rpc",
+      "type": "Type",
+    },
+  },
+  "oneofs": undefined,
+  "options": undefined,
+  "package": "google.rpc",
+  "type": "Type",
+}
+`;

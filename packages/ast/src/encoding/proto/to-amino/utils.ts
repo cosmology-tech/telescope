@@ -3,6 +3,7 @@ import { ProtoType } from '@osmonauts/types';
 import { BILLION } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getFieldNames } from '../../types';
+import { getInterfaceToAminoName } from '../implements';
 import { ToAminoJSONMethod } from './index';
 
 const notUndefinedSetValue = (sdkName: string, msgName: string, expr: t.Expression) => {
@@ -131,9 +132,14 @@ export const toAminoJSON = {
         return toAminoJSON.long(args);
     },
 
-    type(args: ToAminoJSONMethod) {
+    protoType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
+
+        let defaultValue: t.ObjectExpression | t.Identifier = t.identifier('undefined');
+        if (args.field.type === 'ibc.core.client.v1.Height') {
+            defaultValue = t.objectExpression([])
+        }
 
         return t.expressionStatement(
             t.assignmentExpression(
@@ -159,25 +165,68 @@ export const toAminoJSON = {
                             )
                         ]
                     ),
+                    defaultValue
+                )
+            )
+        );
+    },
+
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.identifier(interfaceFnName),
+                        [
+                            t.tsAsExpression(
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(propName)
+                                ),
+                                t.tsTypeReference(
+                                    t.identifier('Any')
+                                )
+                            )
+                        ]
+                    ),
                     t.identifier('undefined')
                 )
             )
         );
     },
 
-    enum(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
+    type(args: ToAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
 
-        const enumFuncName = args.context.getToEnum(args.field);
-        return notUndefinedSetValue(origName, propName, t.callExpression(
-            t.identifier(enumFuncName),
-            [
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(propName)
-                )
-            ]
-        ));
+        ) {
+            return toAminoJSON.anyType(args);
+        }
+
+        return toAminoJSON.protoType(args);
+    },
+
+    enum(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
     },
 
     bytes(args: ToAminoJSONMethod) {
@@ -191,6 +240,138 @@ export const toAminoJSON = {
     timestamp(args: ToAminoJSONMethod) {
         return toAminoJSON.type(args);
     },
+
+    pubkey(args: ToAminoJSONMethod) {
+        args.context.addUtil('fromBase64');
+        args.context.addUtil('decodeBech32Pubkey');
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.objectExpression([
+                        t.objectProperty(
+                            t.identifier('typeUrl'),
+                            t.stringLiteral('/cosmos.crypto.secp256k1.PubKey')
+                        ),
+                        t.objectProperty(
+                            t.identifier('value'),
+                            t.callExpression(
+                                t.identifier('fromBase64'),
+                                [
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.identifier('decodeBech32Pubkey'),
+                                            [
+                                                t.memberExpression(
+                                                    t.identifier('message'),
+                                                    t.identifier(propName)
+                                                ),
+                                            ]
+                                        ),
+                                        t.identifier('value')
+                                    )
+
+                                ]
+                            )
+                        )
+                    ]),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    rawBytes(args: ToAminoJSONMethod) {
+        args.context.addUtil('fromUtf8');
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('JSON'),
+                            t.identifier('parse')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('fromUtf8'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    ),
+                                ]
+                            )
+                        ]
+                    ),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+    wasmByteCode(args: ToAminoJSONMethod) {
+        args.context.addUtil('toBase64');
+
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.identifier('toBase64'),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                        ]
+                    ),
+                    //
+                    t.identifier('undefined')
+                )
+            )
+        );
+    },
+
+
 
     keyHash(args: ToAminoJSONMethod) {
 
@@ -425,7 +606,30 @@ export const arrayTypes = {
             ]
         );
     },
-    type(args: ToAminoJSONMethod) {
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
+        // console.log(JSON.stringify(typeMap, null, 2));
+        // console.log(JSON.stringify(args.field, null, 2));
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
+        return t.conditionalExpression(
+            t.identifier('e'),
+            t.callExpression(
+                t.identifier(interfaceFnName),
+                [
+                    t.tsAsExpression(
+                        t.identifier('e'),
+                        t.tsTypeReference(
+                            t.identifier('Any')
+                        )
+                    )
+                ]
+            ),
+            t.identifier('undefined')
+        );
+    },
+    protoType(args: ToAminoJSONMethod) {
         const name = args.context.getTypeName(args.field);
         return t.conditionalExpression(
             t.identifier('e'),
@@ -440,6 +644,18 @@ export const arrayTypes = {
             ),
             t.identifier('undefined')
         );
+    },
+    type(args: ToAminoJSONMethod) {
+        if (
+            args.context.options.aminoEncoding.useRecursiveV2encoding == true &&
+            args.context.options.interfaces.enabled == true &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
+
+        ) {
+            return arrayTypes.anyType(args);
+        }
+        return arrayTypes.protoType(args);
     }
 }
 

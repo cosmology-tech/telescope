@@ -44,31 +44,12 @@ export interface MsgTransfer {
  * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface MsgTransferSDKType {
-  /** the port on which the packet will be sent */
   source_port: string;
-
-  /** the channel by which the packet will be sent */
   source_channel: string;
-
-  /** the tokens to be transferred */
   token?: CoinSDKType;
-
-  /** the sender address */
   sender: string;
-
-  /** the recipient address on the destination chain */
   receiver: string;
-
-  /**
-   * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
-   */
   timeout_height?: HeightSDKType;
-
-  /**
-   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
-   */
   timeout_timestamp: Long;
 }
 

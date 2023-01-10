@@ -14,6 +14,10 @@ interface TelescopeOpts {
     useSDKTypes?: boolean;
     includeExternalHelpers?: boolean;
     logLevel?: TelescopeLogLevel;
+    interfaces?: {
+        enabled?: boolean;
+        useUnionTypes?: boolean;
+    };
     prototypes?: {
         enabled?: boolean;
         parser?: {
@@ -29,6 +33,10 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            toAmino?: boolean;
+            fromAmino?: boolean;
+            toProto?: boolean;
+            fromProto?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -36,6 +44,9 @@ interface TelescopeOpts {
         allowUndefinedTypes?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
+        addTypeUrlToObjects?: boolean;
+        addAminoTypeToObjects?: boolean;
+        addTypeUrlToDecoders?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -111,6 +122,11 @@ interface TelescopeOpts {
     };
     reactQuery?: {
         enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
     };
 }
 interface TelescopePackageOpts {

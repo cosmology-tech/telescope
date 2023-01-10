@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { AminoMsg } from "@cosmjs/amino";
 import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
-export interface AminoMsgCreateCertificate extends AminoMsg {
+export interface MsgCreateCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-create-certificate";
   value: {
     owner: string;
@@ -9,7 +9,7 @@ export interface AminoMsgCreateCertificate extends AminoMsg {
     pubkey: Uint8Array;
   };
 }
-export interface AminoMsgRevokeCertificate extends AminoMsg {
+export interface MsgRevokeCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-revoke-certificate";
   value: {
     id: {
@@ -25,7 +25,7 @@ export const AminoConverter = {
       owner,
       cert,
       pubkey
-    }: MsgCreateCertificate): AminoMsgCreateCertificate["value"] => {
+    }: MsgCreateCertificate): MsgCreateCertificateAminoType["value"] => {
       return {
         owner,
         cert,
@@ -36,7 +36,7 @@ export const AminoConverter = {
       owner,
       cert,
       pubkey
-    }: AminoMsgCreateCertificate["value"]): MsgCreateCertificate => {
+    }: MsgCreateCertificateAminoType["value"]): MsgCreateCertificate => {
       return {
         owner,
         cert,
@@ -48,7 +48,7 @@ export const AminoConverter = {
     aminoType: "akash/cert/v1beta2/testonly-revoke-certificate",
     toAmino: ({
       id
-    }: MsgRevokeCertificate): AminoMsgRevokeCertificate["value"] => {
+    }: MsgRevokeCertificate): MsgRevokeCertificateAminoType["value"] => {
       return {
         id: {
           owner: id.owner,
@@ -58,7 +58,7 @@ export const AminoConverter = {
     },
     fromAmino: ({
       id
-    }: AminoMsgRevokeCertificate["value"]): MsgRevokeCertificate => {
+    }: MsgRevokeCertificateAminoType["value"]): MsgRevokeCertificate => {
       return {
         id: {
           owner: id.owner,

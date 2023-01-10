@@ -22,8 +22,6 @@ export interface MsgCreateDeploymentSDKType {
   groups: GroupSpecSDKType[];
   version: Uint8Array;
   deposit?: CoinSDKType;
-
-  /** Depositor pays for the deposit */
   depositor: string;
 }
 
@@ -46,8 +44,6 @@ export interface MsgDepositDeployment {
 export interface MsgDepositDeploymentSDKType {
   id?: DeploymentIDSDKType;
   amount?: CoinSDKType;
-
-  /** Depositor pays for the deposit */
   depositor: string;
 }
 

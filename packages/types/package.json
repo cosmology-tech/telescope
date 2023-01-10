@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/types",
-  "version": "0.26.0",
+  "version": "0.29.0",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/types#readme",
@@ -19,6 +19,8 @@
     "build": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
     "buidl": "npm run build && npm run build:ts",
     "build:ts": "tsc --project ./tsconfig.json",
+    "buidl:clean": "npm run clean && npm run buidl",
+    "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
     "format": "eslint . --fix"
@@ -67,12 +69,13 @@
     "jest-in-case": "^1.0.2",
     "prettier": "^2.7.0",
     "regenerator-runtime": "^0.13.7",
+    "rimraf": "3.0.2",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
-    "@osmonauts/utils": "^0.8.0",
+    "@osmonauts/utils": "^0.10.0",
     "case": "1.6.3"
   }
 }

@@ -76,16 +76,9 @@ export interface TokenPair {
  *  Cosmos Coin and an ERC20 token address.
  */
 export interface TokenPairSDKType {
-  /** address of ERC20 contract token */
   erc20_address: string;
-
-  /** cosmos base denomination to be mapped to */
   denom: string;
-
-  /** shows token mapping enable status */
   enabled: boolean;
-
-  /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contract_owner: Owner;
 }
 
@@ -109,13 +102,8 @@ export interface RegisterCoinProposal {
  * native Cosmos coin.
  */
 export interface RegisterCoinProposalSDKType {
-  /** title of the proposal */
   title: string;
-
-  /** proposal description */
   description: string;
-
-  /** metadata of the native Cosmos coin */
   metadata?: MetadataSDKType;
 }
 
@@ -139,13 +127,8 @@ export interface RegisterERC20Proposal {
  * ERC20 token
  */
 export interface RegisterERC20ProposalSDKType {
-  /** title of the proposal */
   title: string;
-
-  /** proposal description */
   description: string;
-
-  /** contract address of ERC20 token */
   erc20address: string;
 }
 
@@ -172,16 +155,8 @@ export interface ToggleTokenConversionProposal {
  * of a token pair.
  */
 export interface ToggleTokenConversionProposalSDKType {
-  /** title of the proposal */
   title: string;
-
-  /** proposal description */
   description: string;
-
-  /**
-   * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
-   */
   token: string;
 }
 

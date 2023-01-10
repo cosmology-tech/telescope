@@ -114,7 +114,6 @@ export interface ProjectProperties {
  *        type: INT64
  */
 export interface ProjectPropertiesSDKType {
-  /** List of per consumer project-specific properties. */
   properties: PropertySDKType[];
 }
 
@@ -154,13 +153,8 @@ export interface Property {
  * define and set these properties.
  */
 export interface PropertySDKType {
-  /** The name of the property (a.k.a key). */
   name: string;
-
-  /** The type of this property. */
   type: Property_PropertyType;
-
-  /** The description of the property */
   description: string;
 }
 

@@ -12,12 +12,6 @@ export interface Params {
   mintedDenom: string;
 }
 export interface ParamsSDKType {
-  /**
-   * minted_denom is the denomination of the coin expected to be minted by the
-   * minting module. Pool-incentives module doesn’t actually mint the coin
-   * itself, but rather manages the distribution of coins that matches the
-   * defined minted_denom.
-   */
   minted_denom: string;
 }
 export interface LockableDurationsInfo {

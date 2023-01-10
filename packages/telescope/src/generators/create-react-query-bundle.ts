@@ -38,7 +38,12 @@ export const plugin = (
             package: pkg,
             imports: null,
             root: {},
-            importNames: null
+            importNames: null,
+            acceptsInterface: {},
+            implementsInterface: {},
+            parsedExports: {},
+            parsedImports: {},
+            symbols: null
         }
     }
 

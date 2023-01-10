@@ -12,17 +12,6 @@ export interface ModuleToDistributeCoinsResponse {
   coins: Coin[];
 }
 export interface ModuleToDistributeCoinsResponseSDKType {
-  /** Coins that have yet to be distributed */
-  coins: CoinSDKType[];
-}
-export interface ModuleDistributedCoinsRequest {}
-export interface ModuleDistributedCoinsRequestSDKType {}
-export interface ModuleDistributedCoinsResponse {
-  /** Coins that have been distributed already */
-  coins: Coin[];
-}
-export interface ModuleDistributedCoinsResponseSDKType {
-  /** Coins that have been distributed already */
   coins: CoinSDKType[];
 }
 export interface GaugeByIDRequest {
@@ -30,7 +19,6 @@ export interface GaugeByIDRequest {
   id: Long;
 }
 export interface GaugeByIDRequestSDKType {
-  /** Gague ID being queried */
   id: Long;
 }
 export interface GaugeByIDResponse {
@@ -38,7 +26,6 @@ export interface GaugeByIDResponse {
   gauge?: Gauge;
 }
 export interface GaugeByIDResponseSDKType {
-  /** Gauge that corresponds to provided gague ID */
   gauge?: GaugeSDKType;
 }
 export interface GaugesRequest {
@@ -46,7 +33,6 @@ export interface GaugesRequest {
   pagination?: PageRequest;
 }
 export interface GaugesRequestSDKType {
-  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface GaugesResponse {
@@ -57,10 +43,7 @@ export interface GaugesResponse {
   pagination?: PageResponse;
 }
 export interface GaugesResponseSDKType {
-  /** Upcoming and active gauges */
   data: GaugeSDKType[];
-
-  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesRequest {
@@ -68,7 +51,6 @@ export interface ActiveGaugesRequest {
   pagination?: PageRequest;
 }
 export interface ActiveGaugesRequestSDKType {
-  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesResponse {
@@ -79,10 +61,7 @@ export interface ActiveGaugesResponse {
   pagination?: PageResponse;
 }
 export interface ActiveGaugesResponseSDKType {
-  /** Active gagues only */
   data: GaugeSDKType[];
-
-  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesPerDenomRequest {
@@ -93,10 +72,7 @@ export interface ActiveGaugesPerDenomRequest {
   pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
-  /** Desired denom when querying active gagues */
   denom: string;
-
-  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
@@ -107,10 +83,7 @@ export interface ActiveGaugesPerDenomResponse {
   pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomResponseSDKType {
-  /** Active gagues that match denom in query */
   data: GaugeSDKType[];
-
-  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesRequest {
@@ -118,7 +91,6 @@ export interface UpcomingGaugesRequest {
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesRequestSDKType {
-  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesResponse {
@@ -129,10 +101,7 @@ export interface UpcomingGaugesResponse {
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesResponseSDKType {
-  /** Gauges whose distribution is upcoming */
   data: GaugeSDKType[];
-
-  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesPerDenomRequest {
@@ -143,10 +112,7 @@ export interface UpcomingGaugesPerDenomRequest {
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
-  /** Filter for upcoming gagues that match specific denom */
   denom: string;
-
-  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesPerDenomResponse {
@@ -157,10 +123,7 @@ export interface UpcomingGaugesPerDenomResponse {
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomResponseSDKType {
-  /** Upcoming gagues that match denom in query */
   upcoming_gauges: GaugeSDKType[];
-
-  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface RewardsEstRequest {
@@ -177,16 +140,8 @@ export interface RewardsEstRequest {
   endEpoch: Long;
 }
 export interface RewardsEstRequestSDKType {
-  /** Address that is being queried for future estimated rewards */
   owner: string;
-
-  /** Lock IDs included in future reward estimation */
   lock_ids: Long[];
-
-  /**
-   * Upper time limit of reward estimation
-   * Lower limit is current epoch
-   */
   end_epoch: Long;
 }
 export interface RewardsEstResponse {
@@ -197,10 +152,6 @@ export interface RewardsEstResponse {
   coins: Coin[];
 }
 export interface RewardsEstResponseSDKType {
-  /**
-   * Estimated coin rewards that will be recieved at provided address
-   * from specified locks between current time and end epoch
-   */
   coins: CoinSDKType[];
 }
 export interface QueryLockableDurationsRequest {}
@@ -210,7 +161,6 @@ export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
 }
 export interface QueryLockableDurationsResponseSDKType {
-  /** Time durations that users can lock coins for in order to recieve rewards */
   lockable_durations: DurationSDKType[];
 }
 
@@ -334,139 +284,6 @@ export const ModuleToDistributeCoinsResponse = {
   },
 
   toSDK(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseSDKType {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  }
-
-};
-
-function createBaseModuleDistributedCoinsRequest(): ModuleDistributedCoinsRequest {
-  return {};
-}
-
-export const ModuleDistributedCoinsRequest = {
-  encode(_: ModuleDistributedCoinsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDistributedCoinsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseModuleDistributedCoinsRequest();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(_: any): ModuleDistributedCoinsRequest {
-    return {};
-  },
-
-  toJSON(_: ModuleDistributedCoinsRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromPartial(_: DeepPartial<ModuleDistributedCoinsRequest>): ModuleDistributedCoinsRequest {
-    const message = createBaseModuleDistributedCoinsRequest();
-    return message;
-  },
-
-  fromSDK(_: ModuleDistributedCoinsRequestSDKType): ModuleDistributedCoinsRequest {
-    return {};
-  },
-
-  toSDK(_: ModuleDistributedCoinsRequest): ModuleDistributedCoinsRequestSDKType {
-    const obj: any = {};
-    return obj;
-  }
-
-};
-
-function createBaseModuleDistributedCoinsResponse(): ModuleDistributedCoinsResponse {
-  return {
-    coins: []
-  };
-}
-
-export const ModuleDistributedCoinsResponse = {
-  encode(message: ModuleDistributedCoinsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.coins) {
-      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleDistributedCoinsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseModuleDistributedCoinsResponse();
-
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-
-  fromJSON(object: any): ModuleDistributedCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
-    };
-  },
-
-  toJSON(message: ModuleDistributedCoinsResponse): unknown {
-    const obj: any = {};
-
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-
-    return obj;
-  },
-
-  fromPartial(object: DeepPartial<ModuleDistributedCoinsResponse>): ModuleDistributedCoinsResponse {
-    const message = createBaseModuleDistributedCoinsResponse();
-    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
-    return message;
-  },
-
-  fromSDK(object: ModuleDistributedCoinsResponseSDKType): ModuleDistributedCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
-    };
-  },
-
-  toSDK(message: ModuleDistributedCoinsResponse): ModuleDistributedCoinsResponseSDKType {
     const obj: any = {};
 
     if (message.coins) {

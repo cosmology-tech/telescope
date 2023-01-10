@@ -50,10 +50,10 @@ export interface Pool {
   poolLiquidity: Coin[];
 
   /** for calculation amognst assets with different precisions */
-  scalingFactor: Long[];
+  scalingFactors: Long[];
 
-  /** scaling_factor_governor is the address can adjust pool scaling factors */
-  scalingFactorGovernor: string;
+  /** scaling_factor_controller is the address can adjust pool scaling factors */
+  scalingFactorController: string;
 }
 
 /** Pool is the stableswap Pool struct */
@@ -61,30 +61,11 @@ export interface PoolSDKType {
   address: string;
   id: Long;
   pool_params?: PoolParamsSDKType;
-
-  /**
-   * This string specifies who will govern the pool in the future.
-   * Valid forms of this are:
-   * {token name},{duration}
-   * {duration}
-   * where {token name} if specified is the token which determines the
-   * governor, and if not specified is the LP token for this pool.duration is
-   * a time specified as 0w,1w,2w, etc. which specifies how long the token
-   * would need to be locked up to count in governance. 0w means no lockup.
-   */
   future_pool_governor: string;
-
-  /** sum of all LP shares */
   total_shares?: CoinSDKType;
-
-  /** assets in the pool */
   pool_liquidity: CoinSDKType[];
-
-  /** for calculation amognst assets with different precisions */
-  scaling_factor: Long[];
-
-  /** scaling_factor_governor is the address can adjust pool scaling factors */
-  scaling_factor_governor: string;
+  scaling_factors: Long[];
+  scaling_factor_controller: string;
 }
 
 function createBasePoolParams(): PoolParams {
@@ -178,8 +159,8 @@ function createBasePool(): Pool {
     futurePoolGovernor: "",
     totalShares: undefined,
     poolLiquidity: [],
-    scalingFactor: [],
-    scalingFactorGovernor: ""
+    scalingFactors: [],
+    scalingFactorController: ""
   };
 }
 
@@ -211,14 +192,14 @@ export const Pool = {
 
     writer.uint32(58).fork();
 
-    for (const v of message.scalingFactor) {
+    for (const v of message.scalingFactors) {
       writer.uint64(v);
     }
 
     writer.ldelim();
 
-    if (message.scalingFactorGovernor !== "") {
-      writer.uint32(66).string(message.scalingFactorGovernor);
+    if (message.scalingFactorController !== "") {
+      writer.uint32(66).string(message.scalingFactorController);
     }
 
     return writer;
@@ -262,16 +243,16 @@ export const Pool = {
             const end2 = reader.uint32() + reader.pos;
 
             while (reader.pos < end2) {
-              message.scalingFactor.push((reader.uint64() as Long));
+              message.scalingFactors.push((reader.uint64() as Long));
             }
           } else {
-            message.scalingFactor.push((reader.uint64() as Long));
+            message.scalingFactors.push((reader.uint64() as Long));
           }
 
           break;
 
         case 8:
-          message.scalingFactorGovernor = reader.string();
+          message.scalingFactorController = reader.string();
           break;
 
         default:
@@ -291,8 +272,8 @@ export const Pool = {
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
       poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactor: Array.isArray(object?.scalingFactor) ? object.scalingFactor.map((e: any) => Long.fromValue(e)) : [],
-      scalingFactorGovernor: isSet(object.scalingFactorGovernor) ? String(object.scalingFactorGovernor) : ""
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : [],
+      scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
   },
 
@@ -310,13 +291,13 @@ export const Pool = {
       obj.poolLiquidity = [];
     }
 
-    if (message.scalingFactor) {
-      obj.scalingFactor = message.scalingFactor.map(e => (e || Long.UZERO).toString());
+    if (message.scalingFactors) {
+      obj.scalingFactors = message.scalingFactors.map(e => (e || Long.UZERO).toString());
     } else {
-      obj.scalingFactor = [];
+      obj.scalingFactors = [];
     }
 
-    message.scalingFactorGovernor !== undefined && (obj.scalingFactorGovernor = message.scalingFactorGovernor);
+    message.scalingFactorController !== undefined && (obj.scalingFactorController = message.scalingFactorController);
     return obj;
   },
 
@@ -328,8 +309,8 @@ export const Pool = {
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
-    message.scalingFactor = object.scalingFactor?.map(e => Long.fromValue(e)) || [];
-    message.scalingFactorGovernor = object.scalingFactorGovernor ?? "";
+    message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
+    message.scalingFactorController = object.scalingFactorController ?? "";
     return message;
   },
 
@@ -341,8 +322,8 @@ export const Pool = {
       futurePoolGovernor: object?.future_pool_governor,
       totalShares: object.total_shares ? Coin.fromSDK(object.total_shares) : undefined,
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
-      scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
-      scalingFactorGovernor: object?.scaling_factor_governor
+      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
+      scalingFactorController: object?.scaling_factor_controller
     };
   },
 
@@ -360,13 +341,13 @@ export const Pool = {
       obj.pool_liquidity = [];
     }
 
-    if (message.scalingFactor) {
-      obj.scaling_factor = message.scalingFactor.map(e => e);
+    if (message.scalingFactors) {
+      obj.scaling_factors = message.scalingFactors.map(e => e);
     } else {
-      obj.scaling_factor = [];
+      obj.scaling_factors = [];
     }
 
-    obj.scaling_factor_governor = message.scalingFactorGovernor;
+    obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
   }
 

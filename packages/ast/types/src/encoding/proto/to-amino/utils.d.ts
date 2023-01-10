@@ -20,11 +20,16 @@ export declare const toAminoJSON: {
     sint64(args: ToAminoJSONMethod): t.ExpressionStatement;
     fixed64(args: ToAminoJSONMethod): t.ExpressionStatement;
     sfixed64(args: ToAminoJSONMethod): t.ExpressionStatement;
+    protoType(args: ToAminoJSONMethod): t.ExpressionStatement;
+    anyType(args: ToAminoJSONMethod): t.ExpressionStatement;
     type(args: ToAminoJSONMethod): t.ExpressionStatement;
     enum(args: ToAminoJSONMethod): t.ExpressionStatement;
     bytes(args: ToAminoJSONMethod): t.ExpressionStatement;
     duration(args: ToAminoJSONMethod): t.ExpressionStatement;
     timestamp(args: ToAminoJSONMethod): t.ExpressionStatement;
+    pubkey(args: ToAminoJSONMethod): t.ExpressionStatement;
+    rawBytes(args: ToAminoJSONMethod): t.ExpressionStatement;
+    wasmByteCode(args: ToAminoJSONMethod): t.ExpressionStatement;
     keyHash(args: ToAminoJSONMethod): (t.ExpressionStatement | t.IfStatement)[];
     array(args: ToAminoJSONMethod, expr: t.Expression): t.IfStatement;
 };
@@ -48,6 +53,8 @@ export declare const arrayTypes: {
     sfixed64(args: ToAminoJSONMethod): t.Identifier;
     bytes(args: ToAminoJSONMethod): t.Identifier;
     enum(args: ToAminoJSONMethod): t.CallExpression;
+    anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
+    protoType(args: ToAminoJSONMethod): t.ConditionalExpression;
     type(args: ToAminoJSONMethod): t.ConditionalExpression;
 };
 export declare const toAminoMessages: {

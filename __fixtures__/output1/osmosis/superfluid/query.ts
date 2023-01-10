@@ -14,7 +14,6 @@ export interface QueryParamsResponse {
   params?: Params;
 }
 export interface QueryParamsResponseSDKType {
-  /** params defines the parameters of the module. */
   params?: ParamsSDKType;
 }
 export interface AssetTypeRequest {
@@ -86,6 +85,28 @@ export interface ConnectedIntermediaryAccountResponse {
 }
 export interface ConnectedIntermediaryAccountResponseSDKType {
   account?: SuperfluidIntermediaryAccountInfoSDKType;
+}
+export interface QueryTotalDelegationByValidatorForDenomRequest {
+  denom: string;
+}
+export interface QueryTotalDelegationByValidatorForDenomRequestSDKType {
+  denom: string;
+}
+export interface QueryTotalDelegationByValidatorForDenomResponse {
+  assets: Delegations[];
+}
+export interface QueryTotalDelegationByValidatorForDenomResponseSDKType {
+  assets: DelegationsSDKType[];
+}
+export interface Delegations {
+  valAddr: string;
+  amountSfsd: string;
+  osmoEquivalent: string;
+}
+export interface DelegationsSDKType {
+  val_addr: string;
+  amount_sfsd: string;
+  osmo_equivalent: string;
 }
 export interface TotalSuperfluidDelegationsRequest {}
 export interface TotalSuperfluidDelegationsRequestSDKType {}
@@ -190,6 +211,14 @@ export interface QueryTotalDelegationByDelegatorResponseSDKType {
   delegation_response: DelegationResponseSDKType[];
   total_delegated_coins: CoinSDKType[];
   total_equivalent_staked_amount?: CoinSDKType;
+}
+export interface QueryUnpoolWhitelistRequest {}
+export interface QueryUnpoolWhitelistRequestSDKType {}
+export interface QueryUnpoolWhitelistResponse {
+  poolIds: Long[];
+}
+export interface QueryUnpoolWhitelistResponseSDKType {
+  pool_ids: Long[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -1130,6 +1159,253 @@ export const ConnectedIntermediaryAccountResponse = {
   toSDK(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseSDKType {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toSDK(message.account) : undefined);
+    return obj;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByValidatorForDenomRequest(): QueryTotalDelegationByValidatorForDenomRequest {
+  return {
+    denom: ""
+  };
+}
+
+export const QueryTotalDelegationByValidatorForDenomRequest = {
+  encode(message: QueryTotalDelegationByValidatorForDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomRequest {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByValidatorForDenomRequest): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>): QueryTotalDelegationByValidatorForDenomRequest {
+    const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
+    message.denom = object.denom ?? "";
+    return message;
+  },
+
+  fromSDK(object: QueryTotalDelegationByValidatorForDenomRequestSDKType): QueryTotalDelegationByValidatorForDenomRequest {
+    return {
+      denom: object?.denom
+    };
+  },
+
+  toSDK(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByValidatorForDenomResponse(): QueryTotalDelegationByValidatorForDenomResponse {
+  return {
+    assets: []
+  };
+}
+
+export const QueryTotalDelegationByValidatorForDenomResponse = {
+  encode(message: QueryTotalDelegationByValidatorForDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.assets) {
+      Delegations.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.assets.push(Delegations.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByValidatorForDenomResponse {
+    return {
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): unknown {
+    const obj: any = {};
+
+    if (message.assets) {
+      obj.assets = message.assets.map(e => e ? Delegations.toJSON(e) : undefined);
+    } else {
+      obj.assets = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByValidatorForDenomResponse>): QueryTotalDelegationByValidatorForDenomResponse {
+    const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
+    message.assets = object.assets?.map(e => Delegations.fromPartial(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryTotalDelegationByValidatorForDenomResponseSDKType): QueryTotalDelegationByValidatorForDenomResponse {
+    return {
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseSDKType {
+    const obj: any = {};
+
+    if (message.assets) {
+      obj.assets = message.assets.map(e => e ? Delegations.toSDK(e) : undefined);
+    } else {
+      obj.assets = [];
+    }
+
+    return obj;
+  }
+
+};
+
+function createBaseDelegations(): Delegations {
+  return {
+    valAddr: "",
+    amountSfsd: "",
+    osmoEquivalent: ""
+  };
+}
+
+export const Delegations = {
+  encode(message: Delegations, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.valAddr !== "") {
+      writer.uint32(10).string(message.valAddr);
+    }
+
+    if (message.amountSfsd !== "") {
+      writer.uint32(18).string(message.amountSfsd);
+    }
+
+    if (message.osmoEquivalent !== "") {
+      writer.uint32(26).string(message.osmoEquivalent);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Delegations {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDelegations();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.valAddr = reader.string();
+          break;
+
+        case 2:
+          message.amountSfsd = reader.string();
+          break;
+
+        case 3:
+          message.osmoEquivalent = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): Delegations {
+    return {
+      valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
+      amountSfsd: isSet(object.amountSfsd) ? String(object.amountSfsd) : "",
+      osmoEquivalent: isSet(object.osmoEquivalent) ? String(object.osmoEquivalent) : ""
+    };
+  },
+
+  toJSON(message: Delegations): unknown {
+    const obj: any = {};
+    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
+    message.amountSfsd !== undefined && (obj.amountSfsd = message.amountSfsd);
+    message.osmoEquivalent !== undefined && (obj.osmoEquivalent = message.osmoEquivalent);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<Delegations>): Delegations {
+    const message = createBaseDelegations();
+    message.valAddr = object.valAddr ?? "";
+    message.amountSfsd = object.amountSfsd ?? "";
+    message.osmoEquivalent = object.osmoEquivalent ?? "";
+    return message;
+  },
+
+  fromSDK(object: DelegationsSDKType): Delegations {
+    return {
+      valAddr: object?.val_addr,
+      amountSfsd: object?.amount_sfsd,
+      osmoEquivalent: object?.osmo_equivalent
+    };
+  },
+
+  toSDK(message: Delegations): DelegationsSDKType {
+    const obj: any = {};
+    obj.val_addr = message.valAddr;
+    obj.amount_sfsd = message.amountSfsd;
+    obj.osmo_equivalent = message.osmoEquivalent;
     return obj;
   }
 
@@ -2369,6 +2645,151 @@ export const QueryTotalDelegationByDelegatorResponse = {
     }
 
     message.totalEquivalentStakedAmount !== undefined && (obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toSDK(message.totalEquivalentStakedAmount) : undefined);
+    return obj;
+  }
+
+};
+
+function createBaseQueryUnpoolWhitelistRequest(): QueryUnpoolWhitelistRequest {
+  return {};
+}
+
+export const QueryUnpoolWhitelistRequest = {
+  encode(_: QueryUnpoolWhitelistRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnpoolWhitelistRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryUnpoolWhitelistRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(_: any): QueryUnpoolWhitelistRequest {
+    return {};
+  },
+
+  toJSON(_: QueryUnpoolWhitelistRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<QueryUnpoolWhitelistRequest>): QueryUnpoolWhitelistRequest {
+    const message = createBaseQueryUnpoolWhitelistRequest();
+    return message;
+  },
+
+  fromSDK(_: QueryUnpoolWhitelistRequestSDKType): QueryUnpoolWhitelistRequest {
+    return {};
+  },
+
+  toSDK(_: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestSDKType {
+    const obj: any = {};
+    return obj;
+  }
+
+};
+
+function createBaseQueryUnpoolWhitelistResponse(): QueryUnpoolWhitelistResponse {
+  return {
+    poolIds: []
+  };
+}
+
+export const QueryUnpoolWhitelistResponse = {
+  encode(message: QueryUnpoolWhitelistResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    writer.uint32(10).fork();
+
+    for (const v of message.poolIds) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnpoolWhitelistResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryUnpoolWhitelistResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.poolIds.push((reader.uint64() as Long));
+            }
+          } else {
+            message.poolIds.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryUnpoolWhitelistResponse {
+    return {
+      poolIds: Array.isArray(object?.poolIds) ? object.poolIds.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
+  toJSON(message: QueryUnpoolWhitelistResponse): unknown {
+    const obj: any = {};
+
+    if (message.poolIds) {
+      obj.poolIds = message.poolIds.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.poolIds = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryUnpoolWhitelistResponse>): QueryUnpoolWhitelistResponse {
+    const message = createBaseQueryUnpoolWhitelistResponse();
+    message.poolIds = object.poolIds?.map(e => Long.fromValue(e)) || [];
+    return message;
+  },
+
+  fromSDK(object: QueryUnpoolWhitelistResponseSDKType): QueryUnpoolWhitelistResponse {
+    return {
+      poolIds: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseSDKType {
+    const obj: any = {};
+
+    if (message.poolIds) {
+      obj.pool_ids = message.poolIds.map(e => e);
+    } else {
+      obj.pool_ids = [];
+    }
+
     return obj;
   }
 

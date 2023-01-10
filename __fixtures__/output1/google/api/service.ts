@@ -195,124 +195,30 @@ export interface Service {
  *           provider_id: google_calendar_auth
  */
 export interface ServiceSDKType {
-  /**
-   * The service name, which is a DNS-like logical identifier for the
-   * service, such as `calendar.googleapis.com`. The service name
-   * typically goes through DNS verification to make sure the owner
-   * of the service also owns the DNS name.
-   */
   name: string;
-
-  /** The product title for this service. */
   title: string;
-
-  /** The Google project that owns this service. */
   producer_project_id: string;
-
-  /**
-   * A unique ID for a specific instance of this message, typically assigned
-   * by the client for tracking purpose. Must be no longer than 63 characters
-   * and only lower case letters, digits, '.', '_' and '-' are allowed. If
-   * empty, the server may choose to generate one instead.
-   */
   id: string;
-
-  /**
-   * A list of API interfaces exported by this service. Only the `name` field
-   * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
-   * author, as the remaining fields will be derived from the IDL during the
-   * normalization process. It is an error to specify an API interface here
-   * which cannot be resolved against the associated IDL files.
-   */
   apis: ApiSDKType[];
-
-  /**
-   * A list of all proto message types included in this API service.
-   * Types referenced directly or indirectly by the `apis` are
-   * automatically included.  Messages which are not referenced but
-   * shall be included, such as types used by the `google.protobuf.Any` type,
-   * should be listed here by name. Example:
-   * 
-   *     types:
-   *     - name: google.protobuf.Int32
-   */
   types: TypeSDKType[];
-
-  /**
-   * A list of all enum types included in this API service.  Enums
-   * referenced directly or indirectly by the `apis` are automatically
-   * included.  Enums which are not referenced but shall be included
-   * should be listed here by name. Example:
-   * 
-   *     enums:
-   *     - name: google.someapi.v1.SomeEnum
-   */
   enums: EnumSDKType[];
-
-  /** Additional API documentation. */
   documentation?: DocumentationSDKType;
-
-  /** API backend configuration. */
   backend?: BackendSDKType;
-
-  /** HTTP configuration. */
   http?: HttpSDKType;
-
-  /** Quota configuration. */
   quota?: QuotaSDKType;
-
-  /** Auth configuration. */
   authentication?: AuthenticationSDKType;
-
-  /** Context configuration. */
   context?: ContextSDKType;
-
-  /** Configuration controlling usage of this service. */
   usage?: UsageSDKType;
-
-  /**
-   * Configuration for network endpoints.  If this is empty, then an endpoint
-   * with the same name as the service is automatically generated to service all
-   * defined APIs.
-   */
   endpoints: EndpointSDKType[];
-
-  /** Configuration for the service control plane. */
   control?: ControlSDKType;
-
-  /** Defines the logs used by this service. */
   logs: LogDescriptorSDKType[];
-
-  /** Defines the metrics used by this service. */
   metrics: MetricDescriptorSDKType[];
-
-  /**
-   * Defines the monitored resources used by this service. This is required
-   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
-   */
   monitored_resources: MonitoredResourceDescriptorSDKType[];
-
-  /** Billing configuration. */
   billing?: BillingSDKType;
-
-  /** Logging configuration. */
   logging?: LoggingSDKType;
-
-  /** Monitoring configuration. */
   monitoring?: MonitoringSDKType;
-
-  /** System parameter configuration. */
   system_parameters?: SystemParametersSDKType;
-
-  /** Output only. The source information for this configuration if available. */
   source_info?: SourceInfoSDKType;
-
-  /**
-   * Obsolete. Do not use.
-   * 
-   * This field has no semantic meaning. The service config compiler always
-   * sets this field to `3`.
-   */
 
   /** @deprecated */
   config_version?: UInt32ValueSDKType;

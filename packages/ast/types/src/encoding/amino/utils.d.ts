@@ -1,8 +1,9 @@
 import { ProtoAny, ProtoRoot, ProtoType } from '@osmonauts/types';
 import { GenericParseContext } from '../context';
+export declare const getTypeUrlWithPkgAndName: (pkg: string, name: string) => string;
 export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) => string;
 export declare const arrayTypeNDim: (body: any, n: any) => any;
-export declare const typeUrlToAmino: (context: GenericParseContext, typeUrl: string) => any;
+export declare const getAminoTypeName: (context: GenericParseContext, root: ProtoRoot, proto: ProtoType) => any;
 export declare const protoFieldsToArray: (proto: ProtoType) => {
     type?: string;
     name: string;
@@ -11,6 +12,8 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
         name: string;
         type: string;
     };
+    message?: string;
+    package?: string;
     keyType?: string;
     rule?: string;
     id: number;
