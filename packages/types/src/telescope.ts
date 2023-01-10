@@ -125,6 +125,7 @@ interface TelescopeOpts {
         }[];
     };
     rpcClients?: {
+        type?: 'tendermint' | 'grpc-web' | 'grpc-gateway'; 
         enabled: boolean;
         inline?: boolean;
         extensions?: boolean;
@@ -256,6 +257,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         scopedIsExclusive: true
     },
     rpcClients: {
+        type: 'tendermint',
         enabled: true,
         extensions: true,
         inline: false,
