@@ -114,7 +114,7 @@ You will see a `File` and `Program`... only concern yourself with the `body[]`:
 
 ### 4 code with `@babel/types` using the JSON as a reference
 
-NOTE: 4 continued ideally you should be writing a test with your generator!
+NOTE: ideally you should be writing a test with your generator!
 
 ```js
 import * as t from '@babel/types';
@@ -132,3 +132,5 @@ export const createNewGenerator = () => {
     );
 };
 ```
+
+NOTE, see our docs on [creating new generators](https://github.com/osmosis-labs/telescope/blob/main/docs/creating-new-generators.md) which shows how to create and run a test.
