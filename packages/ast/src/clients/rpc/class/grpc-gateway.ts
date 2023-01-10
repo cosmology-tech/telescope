@@ -7,15 +7,15 @@ export const createGRPCGatewayClient = (
     service: ProtoService
 ) => {
     return t.exportNamedDeclaration(
-        t.tSInterfaceDeclaration(
+        t.classDeclaration(
             t.identifier(service.name),
             null,
-            [],
-            t.tsInterfaceBody(
+            t.classBody(
                 [
                     // todo: add methods
                 ]
-            )
+            ),
+            []
         ),
 
 
