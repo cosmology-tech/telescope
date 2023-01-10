@@ -740,6 +740,9 @@ yarn test:watch
 
 See our [plugin generators](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/src/generators).
 
+### Working with ASTs
+
+See our docs on [working with ASTs](https://github.com/osmosis-labs/telescope/blob/main/docs/working-with-asts.md).
 ## Sponsors
 
 Kudos to our sponsors:
