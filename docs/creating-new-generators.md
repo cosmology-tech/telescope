@@ -1,3 +1,5 @@
+[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
+
 # creating new generators
 
 ## 0 find a home for the code
@@ -32,7 +34,6 @@ for example, in `packages/ast/src/clients/rpc/class/some-new-rpc-client.ts`. Mak
 
 If you are not sure how to write ASTs with `@babel/types`, please see our docs on [working with ASTs](https://github.com/osmosis-labs/telescope/blob/main/docs/working-with-asts.md). You can also checkout [astexplorer.net](https://astexplorer.net) to visually browse and learn ASTs, but they are quite verbose compared to our script when you run `yarn test:ast`.
 
-
 ```js
 import { ProtoService } from "@osmonauts/types";
 import { GenericParseContext } from "../../../encoding";
@@ -42,12 +43,16 @@ export const createSomeNewRpcClient = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    // this is just an example of some random AST code, use real ASTs here
-    return t.importDeclaration(
-        [t.importSpecifier(
-            t.identifier('parse'), t.identifier('parse')
-        )], t.stringLiteral('path/posixx')
-    )
+    return t.exportNamedDeclaration(
+        t.tsInterfaceDeclaration(
+            t.identifier('MyAwesomeInterface'),
+            null,
+            [],
+            t.tsInterfaceBody([
+                // ... more code ...
+            ])
+        )
+    );
 };
 ```
 
@@ -89,3 +94,5 @@ it('GRPC web Msg Client', () => {
     expectCode(createSomeNewRpcClient(context, service))
 });
 ```
+
+[< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)
