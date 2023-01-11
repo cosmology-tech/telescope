@@ -21,10 +21,10 @@ We use lerna/yarn workspaces. You'll see we have in our `./packages` folder nume
 | babel     | (not currently used)                                                           |
 | lcd       | for giving LCD clients to generated code that uses the LCD client              |
 | parser    | protobuf parser, and protobuf traversal                                        |
-| telescope | the CLI,                                    |
-| test      | for generating the CosmJS message registry                                     |
-| types     | for generating state management plugins, such as react-query or mobx           |
-| utils     | other AST utilities, usually babel helpers                                     |
+| telescope | the CLI, as well as the main `telescope` builder                               |
+| test      | for testing things locally                                                     |
+| types     | types and `TelescopeOptions` objects                                           |
+| utils     | other utilities                                                                |
 
 ### Editing interdependent packages
 
