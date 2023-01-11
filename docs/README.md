@@ -1,4 +1,4 @@
-# Developing
+# Developing Telescope
 
 We're excited you made it here! Please read about how to build and contribute to Telescope!
 
