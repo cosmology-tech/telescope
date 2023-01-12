@@ -1,7 +1,7 @@
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
-import { expectCode, getTestProtoStore, printCode } from '../../../../test-utils';
-import { GenericParseContext } from '../../../encoding';
+import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
+import { GenericParseContext } from '../../../../encoding';
 import { createGRPCGatewayClient } from './grpc-gateway';
 const store = getTestProtoStore();
 store.traverseAll();

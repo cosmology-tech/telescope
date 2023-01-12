@@ -1,4 +1,4 @@
-import { GenericParseContext } from '../../../encoding';
+import { GenericParseContext } from '../../../../encoding';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import * as t from '@babel/types'
 

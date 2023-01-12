@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
-import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, cleanComment, commentBlock, identifier, tsMethodSignature } from '../../../utils';
+import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, cleanComment, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
-import { GenericParseContext } from '../../../encoding';
+import { GenericParseContext } from '../../../../encoding';
 import { camel } from '@osmonauts/utils';
 const cleanType = (ResponseType: string) => {
     // MARKED AS NOT DRY [google.protobuf names]
