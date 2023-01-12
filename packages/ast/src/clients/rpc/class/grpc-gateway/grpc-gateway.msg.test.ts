@@ -2,7 +2,8 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
-import { createGRPCGatewayClient } from './grpc-gateway';
+import { createGRPCGatewayClass } from './grpc-gateway';
+
 const store = getTestProtoStore();
 store.traverseAll();
 
@@ -11,5 +12,9 @@ it('GRPC-Gateway Msg Client', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Msg;
     const context = new GenericParseContext(ref, store, store.options);
-    printCode(createGRPCGatewayClient(context, service))
+    printCode(createGRPCGatewayClass(context, service))
 });
+
+
+// use static in interface declaration: 
+// https://stackoverflow.com/questions/13955157/how-to-define-static-property-in-typescript-interface
