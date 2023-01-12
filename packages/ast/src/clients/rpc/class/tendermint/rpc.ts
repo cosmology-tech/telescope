@@ -3,6 +3,8 @@ import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, 
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../../encoding';
 import { camel } from '@osmonauts/utils';
+import { processRpcComment } from '../utils/rpc';
+
 const cleanType = (ResponseType: string) => {
     // MARKED AS NOT DRY [google.protobuf names]
     // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
@@ -329,30 +331,6 @@ const rpcClassConstructor = (
     );
 };
 
-const ensureOneSpace = (str) => {
-    if (/^[\s\n\t]+/.test(str)) return str;
-    return ` ${str}`;
-}
-const ensureOneSpaceEnd = (str) => {
-    if (/[\s\n\t]$/.test(str)) return str;
-    return `${str} `;
-}
-
-const processRpcComment = (e: ProtoServiceMethod) => {
-    const comment = e.comment;
-    if (!comment) return '';
-    if (!/[\n]+/.test(comment)) {
-        return `*${ensureOneSpaceEnd(ensureOneSpace(cleanComment(comment)))}`
-    }
-    let lines = comment.split('\n');
-    lines = ['*', ...lines, ' '];
-    const comments = lines.map((line, i) => {
-        if (i == 0) return line;
-        if (i == (lines.length - 1)) return cleanComment(line);
-        return ` *${ensureOneSpace(cleanComment(line))}`
-    });
-    return comments.join('\n');
-};
 
 export const createRpcClientInterface = (
     context: GenericParseContext,
