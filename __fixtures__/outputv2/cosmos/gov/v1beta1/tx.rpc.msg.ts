@@ -10,28 +10,28 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
 export class Msg {
   static SubmitProposal(request: MsgSubmitProposal, initRequest?: fm.initReq): Promise<MsgSubmitProposalResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/cosmos.gov.v1beta1.Msg/SubmitProposal`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static Vote(request: MsgVote, initRequest?: fm.initReq): Promise<MsgVoteResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/cosmos.gov.v1beta1.Msg/Vote`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static VoteWeighted(request: MsgVoteWeighted, initRequest?: fm.initReq): Promise<MsgVoteWeightedResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/cosmos.gov.v1beta1.Msg/VoteWeighted`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static Deposit(request: MsgDeposit, initRequest?: fm.initReq): Promise<MsgDepositResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/cosmos.gov.v1beta1.Msg/Deposit`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });

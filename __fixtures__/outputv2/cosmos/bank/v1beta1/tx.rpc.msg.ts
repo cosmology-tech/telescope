@@ -11,7 +11,7 @@ export class Msg {
   }
 
   static MultiSend(request: MsgMultiSend, initRequest?: fm.initReq): Promise<MsgMultiSendResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/MultiSend`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });

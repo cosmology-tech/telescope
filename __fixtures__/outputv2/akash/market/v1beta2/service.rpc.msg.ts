@@ -5,35 +5,35 @@ import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, Msg
 import { fetchReq } from "../../../grpc-gateway";
 export class Msg {
   static CreateBid(request: MsgCreateBid, initRequest?: fm.initReq): Promise<MsgCreateBidResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/akash.market.v1beta2.Msg/CreateBid`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseBid(request: MsgCloseBid, initRequest?: fm.initReq): Promise<MsgCloseBidResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/akash.market.v1beta2.Msg/CloseBid`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static WithdrawLease(request: MsgWithdrawLease, initRequest?: fm.initReq): Promise<MsgWithdrawLeaseResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/akash.market.v1beta2.Msg/WithdrawLease`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CreateLease(request: MsgCreateLease, initRequest?: fm.initReq): Promise<MsgCreateLeaseResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/akash.market.v1beta2.Msg/CreateLease`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseLease(request: MsgCloseLease, initRequest?: fm.initReq): Promise<MsgCloseLeaseResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+    return fm.fetchReq(`/akash.market.v1beta2.Msg/CloseLease`, { ...initReq,
       method: "POST",
       body: JSON.stringify(req, fm.replacer)
     });
