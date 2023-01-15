@@ -93,9 +93,11 @@ const options: TelescopeOptions = {
   },
 
   rpcClients: {
+    type: 'grpc-gateway',
     enabled: true,
     camelCase: true
   },
+
 
   reactQuery: {
     enabled: true,

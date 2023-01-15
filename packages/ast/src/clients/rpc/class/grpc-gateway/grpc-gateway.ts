@@ -15,13 +15,40 @@ const grpcGatewayMethodDefinition = (
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
+
+    const paramRequst = identifier(
+        'request',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType),
+            )
+        ),
+        false // todo work around optional
+    ); 
+
+    const initRequest = identifier(
+        'initRequest',
+        t.tSTypeAnnotation(
+            t.tsTypeReference(
+                t.tsQualifiedName(
+                    t.identifier('fm'),
+                    t.identifier('initReq')
+                ),
+            )
+        ),
+        true,
+    )
     const body = t.blockStatement([
-        // todo
+        t.blockStatement(
+            // body and directives are empty in grpc-gateway class initialization
+            [],
+            [],
+        )
     ]);
     return classMethod(
-        "method",
+        'method',
         t.identifier(name),
-        [], // params
+        [paramRequst, initRequest], // params
         body, 
         returnReponseType(responseType),
         [],
@@ -34,6 +61,10 @@ export const createGRPCGatewayClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
+    
+    // adds import 
+    context.addUtil('fetchReq');
+
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys

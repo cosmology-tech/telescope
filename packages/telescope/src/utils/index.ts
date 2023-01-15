@@ -59,12 +59,15 @@ export const UTILS = {
     useTendermintClient: '__react-query__',
     ReactQueryParams: '__react-query__',
     UseQueryOptions: '@tanstack/react-query',
+    fetchReq: '__grpc-gateway__', // grpc gateway fetch helper
+   
 };
 
 export const UTIL_HELPERS = [
     '__helpers__',
     '__extern__',
     '__react-query__',
+    '__grpc-gateway__',
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
