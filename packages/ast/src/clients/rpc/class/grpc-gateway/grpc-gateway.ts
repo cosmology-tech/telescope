@@ -6,6 +6,101 @@ import { processRpcComment, returnReponseType } from '../utils/rpc';
 
 import * as t from '@babel/types'
 
+// initRequest is used in constructing GRPC-Gateway methods
+// It is a second parameter in method signature.
+// ex: static Send(req: MsgSend, initReq?: fm.InitReq)
+// always the same, hence, declared outside of grpcGatewayMethodDefinition
+const initRequest = identifier(
+    'initRequest',
+    t.tSTypeAnnotation(
+        t.tsTypeReference(
+            t.tsQualifiedName(
+                t.identifier('fm'),
+                t.identifier('initReq')
+            ),
+        )
+    ),
+    true,
+)
+
+// initReqProperties contains information for initReq parameter in fetchReq arguments
+const getInitReqProperties = () => {
+    const initReqProperties = [];
+
+    // <...initReq>
+    const argSpreadInit: t.SpreadElement = t.spreadElement(
+        t.identifier('initReq')
+    )
+
+    // <method: 'POST'>
+    const argPOST: t.ObjectProperty = t.objectProperty(
+        t.identifier('method'),
+        t.stringLiteral('POST'),
+        false,
+        false,
+    )
+
+    // <JSON.stringify(req, fm.replacer)>
+    const argBody: t.ObjectProperty = t.objectProperty(
+        t.identifier('body'),
+        t.callExpression(
+            t.memberExpression(
+                t.identifier('JSON'),
+                t.identifier('stringify'),
+                false,
+            ),
+            [
+                t.identifier('req'),
+                t.memberExpression(
+                    t.identifier('fm'),
+                    t.identifier('replacer'),
+                    false
+                )
+            ]
+        )
+    )
+
+    initReqProperties.push(argSpreadInit, argPOST, argBody)
+    return initReqProperties
+}
+
+// fetchArgs will be used in method body's return statement expression.
+// Contains arguments to fm.fetchReq
+const getFetchReqArgs = (
+
+) => {
+    const fetchArgs = [];
+
+    // first argument of fetchReq
+    const argTemplateLiteral = t.templateLiteral(
+        [
+            t.templateElement(
+                {
+                    // todo: make dynamic
+                    raw: '/cosmos.bank.v1beta1.Msg/Send',
+                    cooked: '/cosmos.bank.v1beta1.Msg/Send'
+                },
+                true,
+            )
+        ], // quasis
+        [], // empty expressions
+    )
+
+    // adds proto path to fetchReq
+    fetchArgs.push(argTemplateLiteral);
+
+    // initReqProperties (contains information for initReq parameter in fetchReq) arguments: 
+    const initReqProperties = getInitReqProperties()
+    
+    const fetchArgsInitReqObj = t.objectExpression(
+        initReqProperties
+    )
+    // adds initReq parameter to fetchReq
+    fetchArgs.push(fetchArgsInitReqObj)
+
+    return fetchArgs
+}
+
 const grpcGatewayMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -16,6 +111,9 @@ const grpcGatewayMethodDefinition = (
     const requestType = svc.requestType;
     const responseType = svc.responseType;
 
+    // first parameter in method
+    // ex: static Send(request: MsgSend)
+    // paramRequst is an object representing everything in brackets here
     const paramRequst = identifier(
         'request',
         t.tsTypeAnnotation(
@@ -23,28 +121,27 @@ const grpcGatewayMethodDefinition = (
                 t.identifier(requestType),
             )
         ),
-        false // todo work around optional
+        false // todo: work around optional
     ); 
 
-    const initRequest = identifier(
-        'initRequest',
-        t.tSTypeAnnotation(
-            t.tsTypeReference(
-                t.tsQualifiedName(
-                    t.identifier('fm'),
-                    t.identifier('initReq')
-                ),
+    // fetchArgs will be used in method body's return statement expression.
+    // Contains arguments to fm.fetchReq
+    const fetchArgs = getFetchReqArgs()
+    
+    // method's body
+    const body = t.blockStatement(
+        [
+            t.returnStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('fm'),
+                        t.identifier('fetchReq'),
+                    ),
+                    fetchArgs,
+                )
             )
-        ),
-        true,
+        ]
     )
-    const body = t.blockStatement([
-        t.blockStatement(
-            // body and directives are empty in grpc-gateway class initialization
-            [],
-            [],
-        )
-    ]);
     return classMethod(
         'method',
         t.identifier(name),
@@ -53,7 +150,7 @@ const grpcGatewayMethodDefinition = (
         returnReponseType(responseType),
         [],
         false,
-        true,   // static = true
+        true,   // static 
     )
 }
 
