@@ -1,1 +1,1 @@
-export * from './grpc-gateway'
+export * from './grpc-gateway-msg'

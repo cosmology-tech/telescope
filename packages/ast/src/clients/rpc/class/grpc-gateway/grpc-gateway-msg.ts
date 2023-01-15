@@ -154,7 +154,7 @@ const grpcGatewayMethodDefinition = (
     )
 }
 
-export const createGRPCGatewayClass = (
+export const createGRPCGatewayMsgClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
