@@ -10,14 +10,39 @@ import { UpdateFeeTokenProposal, UpdateFeeTokenProposalSDKType } from "../../../
 import { fetchReq } from "../../../grpc-gateway";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgExecLegacyContent, MsgExecLegacyContentSDKType, MsgExecLegacyContentResponse, MsgExecLegacyContentResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
 export class Msg {
-  static SubmitProposal(): Promise<MsgSubmitProposalResponse> {}
+  static SubmitProposal(request: MsgSubmitProposal, initRequest?: fm.initReq): Promise<MsgSubmitProposalResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static ExecLegacyContent(): Promise<MsgExecLegacyContentResponse> {}
+  static ExecLegacyContent(request: MsgExecLegacyContent, initRequest?: fm.initReq): Promise<MsgExecLegacyContentResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static Vote(): Promise<MsgVoteResponse> {}
+  static Vote(request: MsgVote, initRequest?: fm.initReq): Promise<MsgVoteResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static VoteWeighted(): Promise<MsgVoteWeightedResponse> {}
+  static VoteWeighted(request: MsgVoteWeighted, initRequest?: fm.initReq): Promise<MsgVoteWeightedResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static Deposit(): Promise<MsgDepositResponse> {}
+  static Deposit(request: MsgDeposit, initRequest?: fm.initReq): Promise<MsgDepositResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
 }

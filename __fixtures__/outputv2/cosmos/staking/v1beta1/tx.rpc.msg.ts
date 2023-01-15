@@ -5,14 +5,39 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { fetchReq } from "../../../grpc-gateway";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
 export class Msg {
-  static CreateValidator(): Promise<MsgCreateValidatorResponse> {}
+  static CreateValidator(request: MsgCreateValidator, initRequest?: fm.initReq): Promise<MsgCreateValidatorResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static EditValidator(): Promise<MsgEditValidatorResponse> {}
+  static EditValidator(request: MsgEditValidator, initRequest?: fm.initReq): Promise<MsgEditValidatorResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static Delegate(): Promise<MsgDelegateResponse> {}
+  static Delegate(request: MsgDelegate, initRequest?: fm.initReq): Promise<MsgDelegateResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static BeginRedelegate(): Promise<MsgBeginRedelegateResponse> {}
+  static BeginRedelegate(request: MsgBeginRedelegate, initRequest?: fm.initReq): Promise<MsgBeginRedelegateResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static Undelegate(): Promise<MsgUndelegateResponse> {}
+  static Undelegate(request: MsgUndelegate, initRequest?: fm.initReq): Promise<MsgUndelegateResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
 }

@@ -3,8 +3,18 @@ import { BasicAllowance, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllow
 import { fetchReq } from "../../../grpc-gateway";
 import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgGrantAllowanceResponse, MsgGrantAllowanceResponseSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType, MsgRevokeAllowanceResponse, MsgRevokeAllowanceResponseSDKType } from "./tx";
 export class Msg {
-  static GrantAllowance(): Promise<MsgGrantAllowanceResponse> {}
+  static GrantAllowance(request: MsgGrantAllowance, initRequest?: fm.initReq): Promise<MsgGrantAllowanceResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
-  static RevokeAllowance(): Promise<MsgRevokeAllowanceResponse> {}
+  static RevokeAllowance(request: MsgRevokeAllowance, initRequest?: fm.initReq): Promise<MsgRevokeAllowanceResponse> {
+    return fm.fetchReq(`/cosmos.bank.v1beta1.Msg/Send`, { ...initReq,
+      method: "POST",
+      body: JSON.stringify(req, fm.replacer)
+    });
+  }
 
 }
