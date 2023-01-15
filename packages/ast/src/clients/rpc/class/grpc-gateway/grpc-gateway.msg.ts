@@ -3,25 +3,9 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { returnReponseType } from '../utils/rpc';
-
+import { initRequest } from './utils'
 import * as t from '@babel/types'
 
-// initRequest is used in constructing GRPC-Gateway methods
-// It is a second parameter in method signature.
-// ex: static Send(req: MsgSend, initReq?: fm.InitReq)
-// always the same, hence, declared outside of grpcGatewayMethodDefinition
-const initRequest = identifier(
-    'initRequest',
-    t.tSTypeAnnotation(
-        t.tsTypeReference(
-            t.tsQualifiedName(
-                t.identifier('fm'),
-                t.identifier('initReq')
-            ),
-        )
-    ),
-    true,
-)
 
 // initReqProperties contains information for initReq parameter in fetchReq arguments
 const getInitReqProperties = () => {
@@ -109,7 +93,6 @@ const grpcGatewayMethodDefinition = (
     svc: ProtoServiceMethod,
     packageImport: string
 ) => {
-    console.log(packageImport);
     const requestType = svc.requestType;
     const responseType = svc.responseType;
 
@@ -189,7 +172,5 @@ export const createGRPCGatewayMsgClass = (
             ),
             []
         ),
-
-
     )
 }
