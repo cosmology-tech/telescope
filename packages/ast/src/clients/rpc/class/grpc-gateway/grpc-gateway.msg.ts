@@ -2,7 +2,7 @@ import { GenericParseContext } from '../../../../encoding';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
-import { processRpcComment, returnReponseType } from '../utils/rpc';
+import { returnReponseType } from '../utils/rpc';
 
 import * as t from '@babel/types'
 
@@ -67,7 +67,8 @@ const getInitReqProperties = () => {
 // fetchArgs will be used in method body's return statement expression.
 // Contains arguments to fm.fetchReq
 const getFetchReqArgs = (
-
+    name: string,
+    packageImport: string
 ) => {
     const fetchArgs = [];
 
@@ -77,8 +78,8 @@ const getFetchReqArgs = (
             t.templateElement(
                 {
                     // todo: make dynamic
-                    raw: '/cosmos.bank.v1beta1.Msg/Send',
-                    cooked: '/cosmos.bank.v1beta1.Msg/Send'
+                    raw: '/' + packageImport + '/' + name,
+                    cooked: '/' + packageImport + '/' + name
                 },
                 true,
             )
@@ -108,6 +109,7 @@ const grpcGatewayMethodDefinition = (
     svc: ProtoServiceMethod,
     packageImport: string
 ) => {
+    console.log(packageImport);
     const requestType = svc.requestType;
     const responseType = svc.responseType;
 
@@ -126,7 +128,7 @@ const grpcGatewayMethodDefinition = (
 
     // fetchArgs will be used in method body's return statement expression.
     // Contains arguments to fm.fetchReq
-    const fetchArgs = getFetchReqArgs()
+    const fetchArgs = getFetchReqArgs(name, packageImport)
     
     // method's body
     const body = t.blockStatement(

@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayClass } from '@osmonauts/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -44,7 +44,7 @@ export const plugin = (
         const asts = [];
         switch (c.proto.pluginValue("rpcClients.type")) {
             case 'grpc-gateway':
-                asts.push(createGRPCGatewayClass(ctx.generic, proto.Msg))
+                asts.push(createGRPCGatewayMsgClass(ctx.generic, proto.Msg))
             break;
             case 'tendermint':
                 default:
