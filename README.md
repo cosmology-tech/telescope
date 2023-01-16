@@ -715,31 +715,7 @@ This should not be an issue, but if you experience problems with syntax or are n
 
 ## Developing
 
-### Initial setup
-
-```
-yarn 
-yarn bootstrap
-```
-
-### Building
-
-```
-yarn build
-```
-### Tests
-
-Then `cd` into a package and run the tests
-
-```
-cd ./packages/ast
-yarn test:watch
-```
-
-### Generators
-
-See our [plugin generators](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/src/generators).
-
+See our [documentation](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
 ## Sponsors
 
 Kudos to our sponsors:
