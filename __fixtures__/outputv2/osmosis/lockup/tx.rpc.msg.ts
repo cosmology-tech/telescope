@@ -5,37 +5,37 @@ import { fetchReq } from "../../grpc-gateway";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
 export class Msg {
   static LockTokens(request: MsgLockTokens, initRequest?: fm.initReq): Promise<MsgLockTokensResponse> {
-    return fm.fetchReq(`/osmosis.lockup.Msg/LockTokens`, { ...initReq,
+    return fm.fetchReq(`/LockTokens/LockTokens`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static BeginUnlockingAll(request: MsgBeginUnlockingAll, initRequest?: fm.initReq): Promise<MsgBeginUnlockingAllResponse> {
-    return fm.fetchReq(`/osmosis.lockup.Msg/BeginUnlockingAll`, { ...initReq,
+    return fm.fetchReq(`/BeginUnlockingAll/BeginUnlockingAll`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static BeginUnlocking(request: MsgBeginUnlocking, initRequest?: fm.initReq): Promise<MsgBeginUnlockingResponse> {
-    return fm.fetchReq(`/osmosis.lockup.Msg/BeginUnlocking`, { ...initReq,
+    return fm.fetchReq(`/BeginUnlocking/BeginUnlocking`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ExtendLockup(request: MsgExtendLockup, initRequest?: fm.initReq): Promise<MsgExtendLockupResponse> {
-    return fm.fetchReq(`/osmosis.lockup.Msg/ExtendLockup`, { ...initReq,
+    return fm.fetchReq(`/ExtendLockup/ExtendLockup`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ForceUnlock(request: MsgForceUnlock, initRequest?: fm.initReq): Promise<MsgForceUnlockResponse> {
-    return fm.fetchReq(`/osmosis.lockup.Msg/ForceUnlock`, { ...initReq,
+    return fm.fetchReq(`/ForceUnlock/ForceUnlock`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

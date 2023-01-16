@@ -4,37 +4,37 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
 export class Msg {
   static CreateDenom(request: MsgCreateDenom, initRequest?: fm.initReq): Promise<MsgCreateDenomResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1.Msg/CreateDenom`, { ...initReq,
+    return fm.fetchReq(`/CreateDenom/CreateDenom`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static Mint(request: MsgMint, initRequest?: fm.initReq): Promise<MsgMintResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1.Msg/Mint`, { ...initReq,
+    return fm.fetchReq(`/Mint/Mint`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static Burn(request: MsgBurn, initRequest?: fm.initReq): Promise<MsgBurnResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1.Msg/Burn`, { ...initReq,
+    return fm.fetchReq(`/Burn/Burn`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ChangeAdmin(request: MsgChangeAdmin, initRequest?: fm.initReq): Promise<MsgChangeAdminResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1.Msg/ChangeAdmin`, { ...initReq,
+    return fm.fetchReq(`/ChangeAdmin/ChangeAdmin`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static SetDenomMetadata(request: MsgSetDenomMetadata, initRequest?: fm.initReq): Promise<MsgSetDenomMetadataResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1.Msg/SetDenomMetadata`, { ...initReq,
+    return fm.fetchReq(`/SetDenomMetadata/SetDenomMetadata`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

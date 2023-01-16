@@ -3,23 +3,23 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 export class Msg {
   static CreateProvider(request: MsgCreateProvider, initRequest?: fm.initReq): Promise<MsgCreateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1.Msg/CreateProvider`, { ...initReq,
+    return fm.fetchReq(`/CreateProvider/CreateProvider`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static UpdateProvider(request: MsgUpdateProvider, initRequest?: fm.initReq): Promise<MsgUpdateProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1.Msg/UpdateProvider`, { ...initReq,
+    return fm.fetchReq(`/UpdateProvider/UpdateProvider`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static DeleteProvider(request: MsgDeleteProvider, initRequest?: fm.initReq): Promise<MsgDeleteProviderResponse> {
-    return fm.fetchReq(`/akash.provider.v1beta1.Msg/DeleteProvider`, { ...initReq,
+    return fm.fetchReq(`/DeleteProvider/DeleteProvider`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

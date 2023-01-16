@@ -3,16 +3,16 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseSDKType } from "./tx";
 export class Msg {
   static ConvertCoin(request: MsgConvertCoin, initRequest?: fm.initReq): Promise<MsgConvertCoinResponse> {
-    return fm.fetchReq(`/evmos.erc20.v1.Msg/ConvertCoin`, { ...initReq,
+    return fm.fetchReq(`/ConvertCoin/ConvertCoin`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ConvertERC20(request: MsgConvertERC20, initRequest?: fm.initReq): Promise<MsgConvertERC20Response> {
-    return fm.fetchReq(`/evmos.erc20.v1.Msg/ConvertERC20`, { ...initReq,
+    return fm.fetchReq(`/ConvertERC20/ConvertERC20`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

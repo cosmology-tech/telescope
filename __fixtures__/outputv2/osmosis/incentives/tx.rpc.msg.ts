@@ -5,16 +5,16 @@ import { fetchReq } from "../../grpc-gateway";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export class Msg {
   static CreateGauge(request: MsgCreateGauge, initRequest?: fm.initReq): Promise<MsgCreateGaugeResponse> {
-    return fm.fetchReq(`/osmosis.incentives.Msg/CreateGauge`, { ...initReq,
+    return fm.fetchReq(`/CreateGauge/CreateGauge`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static AddToGauge(request: MsgAddToGauge, initRequest?: fm.initReq): Promise<MsgAddToGaugeResponse> {
-    return fm.fetchReq(`/osmosis.incentives.Msg/AddToGauge`, { ...initReq,
+    return fm.fetchReq(`/AddToGauge/AddToGauge`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

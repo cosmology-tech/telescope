@@ -5,37 +5,37 @@ import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, Msg
 import { fetchReq } from "../../../grpc-gateway";
 export class Msg {
   static CreateBid(request: MsgCreateBid, initRequest?: fm.initReq): Promise<MsgCreateBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2.Msg/CreateBid`, { ...initReq,
+    return fm.fetchReq(`/CreateBid/CreateBid`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static CloseBid(request: MsgCloseBid, initRequest?: fm.initReq): Promise<MsgCloseBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2.Msg/CloseBid`, { ...initReq,
+    return fm.fetchReq(`/CloseBid/CloseBid`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static WithdrawLease(request: MsgWithdrawLease, initRequest?: fm.initReq): Promise<MsgWithdrawLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2.Msg/WithdrawLease`, { ...initReq,
+    return fm.fetchReq(`/WithdrawLease/WithdrawLease`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static CreateLease(request: MsgCreateLease, initRequest?: fm.initReq): Promise<MsgCreateLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2.Msg/CreateLease`, { ...initReq,
+    return fm.fetchReq(`/CreateLease/CreateLease`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static CloseLease(request: MsgCloseLease, initRequest?: fm.initReq): Promise<MsgCloseLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2.Msg/CloseLease`, { ...initReq,
+    return fm.fetchReq(`/CloseLease/CloseLease`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

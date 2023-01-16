@@ -4,9 +4,9 @@ import { fetchReq } from "../../../../grpc-gateway";
 import { MsgTransfer, MsgTransferSDKType, MsgTransferResponse, MsgTransferResponseSDKType } from "./tx";
 export class Msg {
   static Transfer(request: MsgTransfer, initRequest?: fm.initReq): Promise<MsgTransferResponse> {
-    return fm.fetchReq(`/ibc.applications.transfer.v1.Msg/Transfer`, { ...initReq,
+    return fm.fetchReq(`/Transfer/Transfer`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

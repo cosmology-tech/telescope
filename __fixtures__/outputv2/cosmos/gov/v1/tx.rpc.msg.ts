@@ -11,37 +11,37 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgExecLegacyContent, MsgExecLegacyContentSDKType, MsgExecLegacyContentResponse, MsgExecLegacyContentResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
 export class Msg {
   static SubmitProposal(request: MsgSubmitProposal, initRequest?: fm.initReq): Promise<MsgSubmitProposalResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1.Msg/SubmitProposal`, { ...initReq,
+    return fm.fetchReq(`/SubmitProposal/SubmitProposal`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ExecLegacyContent(request: MsgExecLegacyContent, initRequest?: fm.initReq): Promise<MsgExecLegacyContentResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1.Msg/ExecLegacyContent`, { ...initReq,
+    return fm.fetchReq(`/ExecLegacyContent/ExecLegacyContent`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static Vote(request: MsgVote, initRequest?: fm.initReq): Promise<MsgVoteResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1.Msg/Vote`, { ...initReq,
+    return fm.fetchReq(`/Vote/Vote`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static VoteWeighted(request: MsgVoteWeighted, initRequest?: fm.initReq): Promise<MsgVoteWeightedResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1.Msg/VoteWeighted`, { ...initReq,
+    return fm.fetchReq(`/VoteWeighted/VoteWeighted`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static Deposit(request: MsgDeposit, initRequest?: fm.initReq): Promise<MsgDepositResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1.Msg/Deposit`, { ...initReq,
+    return fm.fetchReq(`/Deposit/Deposit`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 

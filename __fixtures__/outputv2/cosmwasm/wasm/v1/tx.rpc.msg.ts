@@ -4,44 +4,44 @@ import { fetchReq } from "../../../grpc-gateway";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgStoreCodeResponse, MsgStoreCodeResponseSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgInstantiateContractResponse, MsgInstantiateContractResponseSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgExecuteContractResponse, MsgExecuteContractResponseSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgMigrateContractResponse, MsgMigrateContractResponseSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgUpdateAdminResponse, MsgUpdateAdminResponseSDKType, MsgClearAdmin, MsgClearAdminSDKType, MsgClearAdminResponse, MsgClearAdminResponseSDKType } from "./tx";
 export class Msg {
   static StoreCode(request: MsgStoreCode, initRequest?: fm.initReq): Promise<MsgStoreCodeResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/StoreCode`, { ...initReq,
+    return fm.fetchReq(`/StoreCode/StoreCode`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static InstantiateContract(request: MsgInstantiateContract, initRequest?: fm.initReq): Promise<MsgInstantiateContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/InstantiateContract`, { ...initReq,
+    return fm.fetchReq(`/InstantiateContract/InstantiateContract`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ExecuteContract(request: MsgExecuteContract, initRequest?: fm.initReq): Promise<MsgExecuteContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/ExecuteContract`, { ...initReq,
+    return fm.fetchReq(`/ExecuteContract/ExecuteContract`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static MigrateContract(request: MsgMigrateContract, initRequest?: fm.initReq): Promise<MsgMigrateContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/MigrateContract`, { ...initReq,
+    return fm.fetchReq(`/MigrateContract/MigrateContract`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static UpdateAdmin(request: MsgUpdateAdmin, initRequest?: fm.initReq): Promise<MsgUpdateAdminResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/UpdateAdmin`, { ...initReq,
+    return fm.fetchReq(`/UpdateAdmin/UpdateAdmin`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
   static ClearAdmin(request: MsgClearAdmin, initRequest?: fm.initReq): Promise<MsgClearAdminResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1.Msg/ClearAdmin`, { ...initReq,
+    return fm.fetchReq(`/ClearAdmin/ClearAdmin`, { ...initRequest,
       method: "POST",
-      body: JSON.stringify(req, fm.replacer)
+      body: JSON.stringify(request, fm.replacer)
     });
   }
 
