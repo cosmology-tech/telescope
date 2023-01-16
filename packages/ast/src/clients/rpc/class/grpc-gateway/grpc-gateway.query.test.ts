@@ -8,9 +8,9 @@ const store = getTestProtoStore();
 store.traverseAll();
 
 it('GRPC-Gateway Msg Client', () => {
-    const ref = store.findProto('cosmos/bank/v1beta1/tx.proto');
+    const ref = store.findProto('cosmos/bank/v1beta1/query.proto');
     const res = traverse(store, ref);
-    const service: ProtoService = getNestedProto(res).Msg;
+    const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, store.options);
     printCode(createGRPCGatewayQueryClass(context, service))
 });
