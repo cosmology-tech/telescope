@@ -13,7 +13,7 @@ const getInitReqProperties = () => {
 
     // <...initReq>
     const argSpreadInit: t.SpreadElement = t.spreadElement(
-        t.identifier('initReq')
+        t.identifier('initRequest')
     )
 
     // <method: 'POST'>
@@ -34,7 +34,7 @@ const getInitReqProperties = () => {
                 false,
             ),
             [
-                t.identifier('req'),
+                t.identifier('request'),
                 t.memberExpression(
                     t.identifier('fm'),
                     t.identifier('replacer'),
