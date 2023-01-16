@@ -87,9 +87,7 @@ const getFetchReqArgs = (
 }
 
 const grpcGatewayMethodDefinition = (
-    context: GenericParseContext,
     name: string,
-    msg: string,
     svc: ProtoServiceMethod,
     packageImport: string
 ) => {
@@ -154,11 +152,9 @@ export const createGRPCGatewayMsgClass = (
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             return grpcGatewayMethodDefinition(
-                context,
                 name,
-                key,
                 method,
-                context.ref.proto.package + '.' + service.name
+                key,
             )
         })
     return t.exportNamedDeclaration(
