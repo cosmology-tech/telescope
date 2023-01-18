@@ -54,3 +54,17 @@ export const returnReponseType = (ResponseType: string) => {
         )
     );
 };
+
+export const optionalBool = (
+    hasParams: boolean,
+    fieldNames: string[],
+) => {
+    if (!hasParams) { 
+        return true; 
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) { 
+        // if only argument "required" is pagination 
+        // also default to empty 
+        return true; 
+    } 
+    return false
+}

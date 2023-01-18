@@ -2,7 +2,7 @@ import { GenericParseContext } from '../../../../encoding';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
-import { returnReponseType } from '../utils/rpc';
+import { optionalBool, returnReponseType } from '../utils/rpc';
 import { initRequest } from './utils'
 import * as t from '@babel/types'
 
@@ -93,20 +93,11 @@ const grpcGatewayMethodDefinition = (
     const responseType = svc.responseType;
 
 
-    let optional = false;
-
     const fieldNames = Object.keys(svc.fields ?? {})
     const hasParams = fieldNames.length > 0;
 
-    // // if no params, then let's default to empty object for cleaner API 
-    if (!hasParams) { 
-        optional = true; 
-    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) { 
-        // if only argument "required" is pagination 
-        // also default to empty 
-        optional = true; 
-    } 
-    
+    const optional = optionalBool(hasParams, fieldNames);
+
     // first parameter in method
     // ex: static Send(request: MsgSend)
     // paramRequst is an object representing everything in brackets here

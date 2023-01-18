@@ -2,7 +2,7 @@ import { GenericParseContext } from '../../../../encoding';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
-import { returnReponseType } from '../utils/rpc';
+import { returnReponseType, optionalBool } from '../utils/rpc';
 import { initRequest } from './utils';
 
 import * as t from '@babel/types'
@@ -64,6 +64,11 @@ const grpcGatewayMethodDefinition = (
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
+
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    const optional = optionalBool(hasParams, fieldNames);
 
     // first parameter in method
     // ex: static Send(request: MsgSend)
