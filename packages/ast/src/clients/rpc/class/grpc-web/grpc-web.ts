@@ -17,6 +17,7 @@ const gRPCWebMethodDefinition = (
     const body = t.blockStatement([
         //TO-DO
     ])
+    context.addUtil('grpc')
     return classMethod(
         "method",
         t.identifier(name),

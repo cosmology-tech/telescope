@@ -46,6 +46,7 @@ export const UTILS = {
     QueryClient: '@cosmjs/stargate',
     Registry: '@cosmjs/proto-signing',
     Rpc: '__helpers__',
+    grpc: '@improbable-eng/grpc-web',
     setPaginationParams: '__helpers__',
     SigningStargateClient: '@cosmjs/stargate',
     Tendermint34Client: '@cosmjs/tendermint-rpc',
