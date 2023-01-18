@@ -100,8 +100,8 @@ const grpcGatewayMethodDefinition = (
 
     // first parameter in method
     // ex: static Send(request: MsgSend)
-    // paramRequst is an object representing everything in brackets here
-    const paramRequst = identifier(
+    // paramRequest is an object representing everything in brackets here
+    const paramRequest = identifier(
         'request',
         t.tsTypeAnnotation(
             t.tsTypeReference(
@@ -132,7 +132,7 @@ const grpcGatewayMethodDefinition = (
     return classMethod(
         'method',
         t.identifier(name),
-        [paramRequst, initRequest], // params
+        [paramRequest, initRequest], // params
         body, 
         returnReponseType(responseType),
         [],
