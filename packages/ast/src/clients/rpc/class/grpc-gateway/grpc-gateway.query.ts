@@ -7,6 +7,54 @@ import { initRequest } from './utils';
 
 import * as t from '@babel/types'
 
+
+const buildAndGetPathToProto = (
+
+) => {
+
+}
+// fetchArgs will be used in method body's return statement expression.
+// Contains arguments to fm.fetchReq
+const getFetchReqArgs = (
+    name: string,
+    packageImport: string,
+    svc: ProtoServiceMethod,
+) => {
+
+    // getPath ex: 
+    // rpc Grants(QueryGrantsRequest) returns (QueryGrantsResponse) {
+    //     option (google.api.http).get = "/cosmos/authz/v1beta1/grants";
+    // }
+    // TODO: check if this option exists, add trigger if it does not
+    const getPath = svc.options['(google.api.http).get'];
+
+    // unwrapped is a member expression containing unwrapped string literal obj, if any
+    var unwrapped: t.MemberExpression = null;
+    var getPathLeft: string = ''
+    var getPathRight: string = ''
+
+    // check if getPath contains "unwrappable" elements in path
+    // ex: "/cosmos/bank/v1beta1/balances/{address}" 
+    // {address} here is what I mean by "unwrappable"
+    if (getPath.indexOf('{') > -1) {
+        const leftInd = getPath.indexOf('{');
+        const rightInd = getPath.indexOf('}');
+        const unwrappable = getPath.slice(leftInd, rightInd);
+
+        // path before "unwrappable"
+        getPathLeft = getPath.slice(0, leftInd - 1);
+
+        // path after "unwrappable" (if any)
+        getPathRight = getPath.slice(rightInd + 1, getPath.length)
+
+        unwrapped = t.memberExpression(
+            t.identifier('request'),
+            t.stringLiteral(unwrappable),
+            true
+        )
+    }
+}
+
 const grpcGatewayMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -30,8 +78,22 @@ const grpcGatewayMethodDefinition = (
         false // todo: work around optional
     ); 
     
+    // fm.fetchReq(fetchArgs are here)
+    const fetchArgs = getFetchReqArgs(name, packageImport, svc);
+
     const body = t.blockStatement(
-        [] // todo
+        [
+            t.returnStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('fm'),
+                        t.identifier('fetchReq'),
+                        false
+                    ),
+                    [] // args
+                )
+            )
+        ]
     )
 
     return classMethod(
@@ -50,7 +112,7 @@ export const createGRPCGatewayQueryClass = (
     service: ProtoService
 ) => {
     // adds import 
-    context.addUtil('fetchReq');
+    context.addUtil('fm');
 
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
     const keys = Object.keys(service.methods ?? {});
