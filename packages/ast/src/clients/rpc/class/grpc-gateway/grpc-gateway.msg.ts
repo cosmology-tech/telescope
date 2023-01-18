@@ -55,13 +55,11 @@ const getFetchReqArgs = (
     packageImport: string
 ) => {
     const fetchArgs = [];
-
     // first argument of fetchReq
     const argTemplateLiteral = t.templateLiteral(
         [
             t.templateElement(
                 {
-                    // todo: make dynamic
                     raw: '/' + packageImport + '/' + name,
                     cooked: '/' + packageImport + '/' + name
                 },
@@ -143,7 +141,7 @@ export const createGRPCGatewayMsgClass = (
 ) => {
     
     // adds import 
-    context.addUtil('fetchReq');
+    context.addUtil('fm');
 
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
     const keys = Object.keys(service.methods ?? {});
@@ -154,7 +152,7 @@ export const createGRPCGatewayMsgClass = (
             return grpcGatewayMethodDefinition(
                 name,
                 method,
-                key,
+                context.ref.proto.package,
             )
         })
     return t.exportNamedDeclaration(
