@@ -92,6 +92,21 @@ const grpcGatewayMethodDefinition = (
     const requestType = svc.requestType;
     const responseType = svc.responseType;
 
+
+    let optional = false;
+
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    // // if no params, then let's default to empty object for cleaner API 
+    if (!hasParams) { 
+        optional = true; 
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) { 
+        // if only argument "required" is pagination 
+        // also default to empty 
+        optional = true; 
+    } 
+    
     // first parameter in method
     // ex: static Send(request: MsgSend)
     // paramRequst is an object representing everything in brackets here
@@ -102,7 +117,7 @@ const grpcGatewayMethodDefinition = (
                 t.identifier(requestType),
             )
         ),
-        false // todo: work around optional
+        optional
     ); 
 
     // fetchArgs will be used in method body's return statement expression.
