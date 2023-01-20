@@ -229,8 +229,7 @@ const getFetchReqArgs = (
     }
 
     let args: any[];
-    console.log("getpath: ", getPath);
-    
+
     // check if getPath contains "unwrappable" elements in path
     // ex: "/cosmos/bank/v1beta1/balances/{address}" 
     // {address} here is what I mean by "unwrappable"
@@ -278,8 +277,6 @@ const grpcGatewayMethodDefinition = (
     const fieldNames = Object.keys(svc.fields ?? {})
     const hasParams = fieldNames.length > 0;
 
-    const optional = optionalBool(hasParams, fieldNames);
-
     // first parameter in method
     // ex: static Send(request: MsgSend)
     // paramRequest is an object representing everything in brackets here
@@ -290,7 +287,7 @@ const grpcGatewayMethodDefinition = (
                 t.identifier(requestType),
             )
         ),
-        optional
+        false
     ); 
     
     // fm.fetchReq(fetchArgs are here)
