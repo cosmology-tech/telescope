@@ -2,14 +2,14 @@ import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, 
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import * as t from '@babel/types'
 
-//moving utils functions outside so that we can reuse it in grpc-gateway, grpc-web and tendermint
-const ensureOneSpace = (str) => {
-    if (/^[\s\n\t]+/.test(str)) return str;
-    return ` ${str}`;
-}
 const ensureOneSpaceEnd = (str) => {
     if (/[\s\n\t]$/.test(str)) return str;
     return `${str} `;
+}
+
+const ensureOneSpace = (str) => {
+    if (/^[\s\n\t]+/.test(str)) return str;
+    return ` ${str}`;
 }
 
 export const processRpcComment = (e: ProtoServiceMethod) => {
@@ -54,3 +54,17 @@ export const returnReponseType = (ResponseType: string) => {
         )
     );
 };
+
+export const optionalBool = (
+    hasParams: boolean,
+    fieldNames: string[],
+) => {
+    if (!hasParams) { 
+        return true; 
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) { 
+        // if only argument "required" is pagination 
+        // also default to empty 
+        return true; 
+    } 
+    return false
+}

@@ -1,45 +1,26 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import * as fm from "../../../grpc-gateway";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
-
-/** Msg defines the provider Msg service */
-export interface Msg {
-  /** CreateProvider defines a method that creates a provider given the proper inputs */
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse>;
-
-  /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse>;
-
-  /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.createProvider = this.createProvider.bind(this);
-    this.updateProvider = this.updateProvider.bind(this);
-    this.deleteProvider = this.deleteProvider.bind(this);
+export class Msg {
+  static CreateProvider(request: MsgCreateProvider, initRequest?: fm.InitReq): Promise<MsgCreateProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/CreateProvider`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse> {
-    const data = MsgCreateProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta1.Msg", "CreateProvider", data);
-    return promise.then(data => MsgCreateProviderResponse.decode(new _m0.Reader(data)));
+  static UpdateProvider(request: MsgUpdateProvider, initRequest?: fm.InitReq): Promise<MsgUpdateProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/UpdateProvider`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse> {
-    const data = MsgUpdateProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta1.Msg", "UpdateProvider", data);
-    return promise.then(data => MsgUpdateProviderResponse.decode(new _m0.Reader(data)));
-  }
-
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse> {
-    const data = MsgDeleteProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta1.Msg", "DeleteProvider", data);
-    return promise.then(data => MsgDeleteProviderResponse.decode(new _m0.Reader(data)));
+  static DeleteProvider(request: MsgDeleteProvider, initRequest?: fm.InitReq): Promise<MsgDeleteProviderResponse> {
+    return fm.fetchReq(`/akash.provider.v1beta1/DeleteProvider`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
 }

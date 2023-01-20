@@ -1,1 +1,2 @@
-export * from './rpc';
+export * from './grpc-gateway';
+export * from './tendermint';
