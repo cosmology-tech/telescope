@@ -16,7 +16,7 @@ export const initRequest = identifier(
         t.tsTypeReference(
             t.tsQualifiedName(
                 t.identifier('fm'),
-                t.identifier('initReq')
+                t.identifier('InitReq')
             ),
         )
     ),
