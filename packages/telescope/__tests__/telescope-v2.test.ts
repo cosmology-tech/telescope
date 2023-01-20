@@ -93,6 +93,7 @@ const options: TelescopeOptions = {
   },
 
   rpcClients: {
+    type: 'grpc-web',
     enabled: true,
     camelCase: true
   },
