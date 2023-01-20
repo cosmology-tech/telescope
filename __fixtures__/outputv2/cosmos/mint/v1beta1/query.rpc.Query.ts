@@ -1,64 +1,23 @@
 import { Params, ParamsSDKType } from "./mint";
-import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import * as fm from "../../../grpc-gateway";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryInflationRequest, QueryInflationRequestSDKType, QueryInflationResponse, QueryInflationResponseSDKType, QueryAnnualProvisionsRequest, QueryAnnualProvisionsRequestSDKType, QueryAnnualProvisionsResponse, QueryAnnualProvisionsResponseSDKType } from "./query";
-
-/** Query provides defines the gRPC querier service. */
-export interface Query {
-  /** Params returns the total set of minting parameters. */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-
-  /** Inflation returns the current minting inflation value. */
-  inflation(request?: QueryInflationRequest): Promise<QueryInflationResponse>;
-
-  /** AnnualProvisions current minting annual provisions value. */
-  annualProvisions(request?: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.params = this.params.bind(this);
-    this.inflation = this.inflation.bind(this);
-    this.annualProvisions = this.annualProvisions.bind(this);
+export class Query {
+  static Params(request?: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+    return fm.fetchReq(`/cosmos/mint/v1beta1/params?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  static Inflation(request?: QueryInflationRequest, initRequest?: fm.InitReq): Promise<QueryInflationResponse> {
+    return fm.fetchReq(`/cosmos/mint/v1beta1/inflation?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  inflation(request: QueryInflationRequest = {}): Promise<QueryInflationResponse> {
-    const data = QueryInflationRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "Inflation", data);
-    return promise.then(data => QueryInflationResponse.decode(new _m0.Reader(data)));
-  }
-
-  annualProvisions(request: QueryAnnualProvisionsRequest = {}): Promise<QueryAnnualProvisionsResponse> {
-    const data = QueryAnnualProvisionsRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "AnnualProvisions", data);
-    return promise.then(data => QueryAnnualProvisionsResponse.decode(new _m0.Reader(data)));
+  static AnnualProvisions(request?: QueryAnnualProvisionsRequest, initRequest?: fm.InitReq): Promise<QueryAnnualProvisionsResponse> {
+    return fm.fetchReq(`/cosmos/mint/v1beta1/annual_provisions?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    inflation(request?: QueryInflationRequest): Promise<QueryInflationResponse> {
-      return queryService.inflation(request);
-    },
-
-    annualProvisions(request?: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponse> {
-      return queryService.annualProvisions(request);
-    }
-
-  };
-};

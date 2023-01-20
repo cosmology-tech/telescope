@@ -67,11 +67,18 @@ export const plugin = (
 
         const asts = [];
         const type = c.proto.pluginValue('rpcClients.type');
+        const allowedGRPCQueryServices = builder.options.rpcClients.enabledServices.filter(a => a === 'Query');
+        console.log("allowed: ", allowedRpcServices, c.ref.filename, allowedGRPCQueryServices.length)
+        let counter = 0;
         switch (type) {
             case 'grpc-gateway':
                 allowedRpcServices.forEach(svcKey => {
-                    const svc: ProtoService = proto[svcKey];
-                    asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                    if (proto[svcKey]){
+                        const svc: ProtoService = proto[svcKey];
+                        counter++;
+                        console.log(counter)
+                        asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                    }
                 })
             break;
             case 'tendermint':

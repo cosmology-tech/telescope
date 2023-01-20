@@ -5,37 +5,37 @@ import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, Msg
 import * as fm from "../../../grpc-gateway";
 export class Msg {
   static CreateBid(request: MsgCreateBid, initRequest?: fm.InitReq): Promise<MsgCreateBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CreateBid`, { ...initRequest,
+    return fm.fetchReq(`/akash.market.v1beta2/CreateBid`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseBid(request: MsgCloseBid, initRequest?: fm.InitReq): Promise<MsgCloseBidResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CloseBid`, { ...initRequest,
+    return fm.fetchReq(`/akash.market.v1beta2/CloseBid`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static WithdrawLease(request: MsgWithdrawLease, initRequest?: fm.InitReq): Promise<MsgWithdrawLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/WithdrawLease`, { ...initRequest,
+    return fm.fetchReq(`/akash.market.v1beta2/WithdrawLease`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CreateLease(request: MsgCreateLease, initRequest?: fm.InitReq): Promise<MsgCreateLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CreateLease`, { ...initRequest,
+    return fm.fetchReq(`/akash.market.v1beta2/CreateLease`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseLease(request: MsgCloseLease, initRequest?: fm.InitReq): Promise<MsgCloseLeaseResponse> {
-    return fm.fetchReq(`/akash.market.v1beta2/CloseLease`, { ...initRequest,
+    return fm.fetchReq(`/akash.market.v1beta2/CloseLease`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 

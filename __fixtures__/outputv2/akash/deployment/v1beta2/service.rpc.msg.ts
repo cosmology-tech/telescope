@@ -7,51 +7,51 @@ import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentRes
 import { MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./groupmsg";
 export class Msg {
   static CreateDeployment(request: MsgCreateDeployment, initRequest?: fm.InitReq): Promise<MsgCreateDeploymentResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/CreateDeployment`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/CreateDeployment`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static DepositDeployment(request: MsgDepositDeployment, initRequest?: fm.InitReq): Promise<MsgDepositDeploymentResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/DepositDeployment`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/DepositDeployment`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static UpdateDeployment(request: MsgUpdateDeployment, initRequest?: fm.InitReq): Promise<MsgUpdateDeploymentResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/UpdateDeployment`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/UpdateDeployment`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseDeployment(request: MsgCloseDeployment, initRequest?: fm.InitReq): Promise<MsgCloseDeploymentResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/CloseDeployment`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/CloseDeployment`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static CloseGroup(request: MsgCloseGroup, initRequest?: fm.InitReq): Promise<MsgCloseGroupResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/CloseGroup`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/CloseGroup`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static PauseGroup(request: MsgPauseGroup, initRequest?: fm.InitReq): Promise<MsgPauseGroupResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/PauseGroup`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/PauseGroup`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
   static StartGroup(request: MsgStartGroup, initRequest?: fm.InitReq): Promise<MsgStartGroupResponse> {
-    return fm.fetchReq(`/akash.deployment.v1beta2/StartGroup`, { ...initRequest,
+    return fm.fetchReq(`/akash.deployment.v1beta2/StartGroup`, { ...initReq,
       method: "POST",
-      body: JSON.stringify(request, fm.replacer)
+      body: JSON.stringify(req, fm.replacer)
     });
   }
 
