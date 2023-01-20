@@ -66,18 +66,16 @@ export const plugin = (
         const filename = bundler.getFilename(localname);
 
         const asts = [];
-        const type = c.proto.pluginValue('rpcClients.type');
-        const allowedGRPCQueryServices = builder.options.rpcClients.enabledServices.filter(a => a === 'Query');
-        console.log("allowed: ", allowedRpcServices, c.ref.filename, allowedGRPCQueryServices.length)
-        let counter = 0;
-        switch (type) {
+        switch (c.proto.pluginValue('rpcClients.type')) {
             case 'grpc-gateway':
                 allowedRpcServices.forEach(svcKey => {
                     if (proto[svcKey]){
                         const svc: ProtoService = proto[svcKey];
-                        counter++;
-                        console.log(counter)
-                        asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                        try {
+                            asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                        } catch (error) {
+                            console.log("Failed to generate GRPC-Gateway Query class for")
+                        }
                     }
                 })
             break;
