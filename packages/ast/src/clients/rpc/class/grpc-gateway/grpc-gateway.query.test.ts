@@ -7,7 +7,7 @@ import { createGRPCGatewayQueryClass } from './grpc-gateway.query';
 const store = getTestProtoStore();
 store.traverseAll();
 
-it('GRPC-Gateway Msg Client', () => {
+it('GRPC-Gateway Query Client', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
