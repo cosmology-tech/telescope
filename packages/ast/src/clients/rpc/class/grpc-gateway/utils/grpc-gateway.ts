@@ -16,7 +16,7 @@ export const initRequest = identifier(
         t.tsTypeReference(
             t.tsQualifiedName(
                 t.identifier('fm'),
-                t.identifier('initReq')
+                t.identifier('InitReq')
             ),
         )
     ),
@@ -24,7 +24,7 @@ export const initRequest = identifier(
 )
 
 // initReqProperties contains information for initReq parameter in fetchReq arguments
-const getInitReqProperties = () => {
+export const getInitReqProperties = () => {
     const initReqProperties = [];
 
     // <...initReq>
@@ -62,97 +62,4 @@ const getInitReqProperties = () => {
 
     initReqProperties.push(argSpreadInit, argPOST, argBody)
     return initReqProperties
-}
-
-// fetchArgs will be used in method body's return statement expression.
-// Contains arguments to fm.fetchReq
-const getFetchReqArgs = (
-    name: string,
-    packageImport: string
-) => {
-    const fetchArgs = [];
-
-    // first argument of fetchReq
-    const argTemplateLiteral = t.templateLiteral(
-        [
-            t.templateElement(
-                {
-                    // todo: make dynamic
-                    raw: '/' + packageImport + '/' + name,
-                    cooked: '/' + packageImport + '/' + name
-                },
-                true,
-            )
-        ], // quasis
-        [], // empty expressions
-    )
-
-    // adds proto path to fetchReq
-    fetchArgs.push(argTemplateLiteral);
-
-    // initReqProperties (contains information for initReq parameter in fetchReq) arguments: 
-    const initReqProperties = getInitReqProperties()
-    
-    const fetchArgsInitReqObj = t.objectExpression(
-        initReqProperties
-    )
-    // adds initReq parameter to fetchReq
-    fetchArgs.push(fetchArgsInitReqObj)
-
-    return fetchArgs
-}
-
-export const grpcGatewayMethodDefinitionNoBody = (
-    context: GenericParseContext,
-    name: string,
-    msg: string,
-    svc: ProtoServiceMethod,
-    packageImport: string
-) => {
-    console.log(packageImport);
-    const requestType = svc.requestType;
-    const responseType = svc.responseType;
-
-    // first parameter in method
-    // ex: static Send(request: MsgSend)
-    // paramRequst is an object representing everything in brackets here
-    const paramRequst = identifier(
-        'request',
-        t.tsTypeAnnotation(
-            t.tsTypeReference(
-                t.identifier(requestType),
-            )
-        ),
-        false // todo: work around optional
-    ); 
-
-    // fetchArgs will be used in method body's return statement expression.
-    // Contains arguments to fm.fetchReq
-    const fetchArgs = getFetchReqArgs(name, packageImport)
-    
-    // method's body
-    // const body = t.blockStatement(
-    //     [
-    //         t.returnStatement(
-    //             t.callExpression(
-    //                 t.memberExpression(
-    //                     t.identifier('fm'),
-    //                     t.identifier('fetchReq'),
-    //                 ),
-    //                 fetchArgs,
-    //             )
-    //         )
-    //     ]
-    // )
-
-    return {classMethod: classMethod(
-        'method',
-        t.identifier(name),
-        [paramRequst, initRequest], // params
-        null, 
-        returnReponseType(responseType),
-        [],
-        false,
-        true,   // static 
-    ), fetchArgs: fetchArgs}
 }

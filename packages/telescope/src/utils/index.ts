@@ -25,6 +25,7 @@ export const UTILS = {
     defaultRegistryTypes: '@cosmjs/stargate',
     encodeBech32Pubkey: '@cosmjs/amino',
     Exact: '__helpers__',
+    fm: {type: 'namespace', path: '__grpc-gateway__', name: 'fm'},
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromDuration: '__helpers__',
@@ -60,7 +61,6 @@ export const UTILS = {
     useTendermintClient: '__react-query__',
     ReactQueryParams: '__react-query__',
     UseQueryOptions: '@tanstack/react-query',
-    fm: {type: 'namespace', path: '__grpc-gateway__', name: 'fm'}
 };
 
 export const UTIL_HELPERS = [

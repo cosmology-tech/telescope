@@ -3,50 +3,8 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { optionalBool, returnReponseType } from '../utils/rpc';
-import { initRequest } from './utils'
+import { initRequest, getInitReqProperties } from './utils'
 import * as t from '@babel/types'
-
-
-// initReqProperties contains information for initReq parameter in fetchReq arguments
-const getInitReqProperties = () => {
-    const initReqProperties = [];
-
-    // <...initReq>
-    const argSpreadInit: t.SpreadElement = t.spreadElement(
-        t.identifier('initRequest')
-    )
-
-    // <method: 'POST'>
-    const argPOST: t.ObjectProperty = t.objectProperty(
-        t.identifier('method'),
-        t.stringLiteral('POST'),
-        false,
-        false,
-    )
-
-    // <JSON.stringify(req, fm.replacer)>
-    const argBody: t.ObjectProperty = t.objectProperty(
-        t.identifier('body'),
-        t.callExpression(
-            t.memberExpression(
-                t.identifier('JSON'),
-                t.identifier('stringify'),
-                false,
-            ),
-            [
-                t.identifier('request'),
-                t.memberExpression(
-                    t.identifier('fm'),
-                    t.identifier('replacer'),
-                    false
-                )
-            ]
-        )
-    )
-
-    initReqProperties.push(argSpreadInit, argPOST, argBody)
-    return initReqProperties
-}
 
 // fetchArgs will be used in method body's return statement expression.
 // Contains arguments to fm.fetchReq
