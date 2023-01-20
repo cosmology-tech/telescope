@@ -231,8 +231,9 @@ export const createGRPCGatewayQueryClass = (
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
-        .map((key) => {
+        .map(key => {
             const method = service.methods[key];
+            console.log("method: ", method)
             const name = camelRpcMethods ? camel(key) : key;
             return grpcGatewayMethodDefinition(
                 name,
