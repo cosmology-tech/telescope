@@ -230,11 +230,32 @@ const getFetchReqArgs = (
     const indexLeft = getPath.indexOf('{');
     if (getPath.indexOf('{') > -1) {
         const indexRight = getPath.indexOf('}');
-        args = getFetchReqArgsUnwrappable(getPath, indexLeft, indexRight);
+        args = buildFetchReqArgs(getPath, true, indexLeft, indexRight);
     } else {
-        args = getFetchReqArgsNoUnwrappable(getPath)
+        args = buildFetchReqArgs(getPath, false)
     }
 
+    return args
+}
+
+const buildFetchReqArgs = (
+    path: string,
+    unwrappable: boolean,
+    indexLeft = -1,
+    indexRight = -1,
+) => {
+    let args = [];
+
+    if (unwrappable) {
+        if (indexLeft === -1 || indexRight === -1) {
+            throw new Error("indexLeft and indexRight must be provided when path has {unwrappable} element")
+        }
+
+        args = getFetchReqArgsUnwrappable(path, indexLeft, indexRight);
+    } else {
+        args = getFetchReqArgsNoUnwrappable(path);
+    }
+    
     return args
 }
 
