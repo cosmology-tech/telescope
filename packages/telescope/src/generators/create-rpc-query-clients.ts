@@ -67,7 +67,6 @@ export const plugin = (
 
         const asts = [];
         const type = c.proto.pluginValue('rpcClients.type');
-        console.log(type)
         switch (type) {
             case 'grpc-gateway':
                 allowedRpcServices.forEach(svcKey => {

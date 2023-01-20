@@ -7,11 +7,24 @@ import { initRequest } from './utils';
 
 import * as t from '@babel/types'
 
+const staticExpressionsNoUnwrappable = t.callExpression(
+    t.memberExpression(
+        t.identifier('fm'),
+        t.identifier('renderURLSearchParams'),
+        false
+    ),
+    [
+        t.identifier('request'),
+        t.arrayExpression(
+            []
+        )
+    ]
+)
 // {...initReq, method: "GET"}
 const staticSecondFetchReqArg = t.objectExpression(
     [
         t.spreadElement(
-            t.identifier('initReq')
+            t.identifier('initRequest')
         ),
         t.objectProperty(
             t.identifier('method'),
@@ -21,6 +34,39 @@ const staticSecondFetchReqArg = t.objectExpression(
         )
     ]
 )
+
+const getQuasisNoUnwrappable = (
+    path: string
+) => {
+    let quasis = [];
+
+    // path?
+    // ex: /cosmos/bank/v1beta1/supply?
+    quasis.push(
+        t.templateElement(
+            {
+                raw: path + '?',
+                cooked: path + '?'
+            },
+            false
+        )
+    )
+    
+    // add empty tail element
+    quasis.push(
+        t.templateElement(
+            {
+                raw: '',
+                cooked: ''
+            },
+            true
+        )
+    )
+
+    return quasis
+}
+
+// get quasis (string expressions) when there is an unwrappable element (quasis.length must === 3)
 const getQuasisUnwrappable = (
     leftPath: string,
     rightPath: string,
@@ -63,10 +109,14 @@ const getQuasisUnwrappable = (
     return quasis
 }
 
+const getExpressionsNoUnwrappable = () => {
+    return [staticExpressionsNoUnwrappable]
+}
+
 // Get expressions for a path with unwrappable.
 // Returning array must be of length 2.
 // example expressions: ${req["denom"]} AND ${fm.renderURLSearchParams(req, ["denom"])}
-const getExpressionUnwrappable = (
+const getExpressionsUnwrappable = (
     path: string,
     indexLeft: number,
     indexRight: number
@@ -106,6 +156,29 @@ const getExpressionUnwrappable = (
     return expressions
 }
 
+// Get fm.fetchReq arguments if there is no unwrappable element
+// In this case, len of quasis must be 2 and len of expressions must be 1.
+const getFetchReqArgsNoUnwrappable = (
+    path: string
+) => {
+    let args = [];
+
+    const quasis = getQuasisNoUnwrappable(path);
+    const expressions = getExpressionsNoUnwrappable();
+
+    args.push(
+        t.templateLiteral(
+            quasis,
+            expressions,
+        )
+    )
+
+    // {...initReq, method: "GET"}
+    args.push(staticSecondFetchReqArg);
+
+    return args;
+}
+
 // Get fm.fetchReq arguments if there is an unwrappable element
 // In this case, len of quasis must be 3 and len of expressions must be 2.
 const getFetchReqArgsUnwrappable = (
@@ -113,7 +186,7 @@ const getFetchReqArgsUnwrappable = (
     indexLeft: number,
     indexRight: number,
 ) => {
-    let args = []; //new Array<any>(2);
+    let args = [];
 
     const leftPath = path.slice(0, indexLeft);
     const rightPath = path.slice(indexRight + 1);
@@ -121,7 +194,7 @@ const getFetchReqArgsUnwrappable = (
     // first argument
     // ex: `/cosmos/bank/v1beta1/denoms_metadata/${req["denom"]}?${fm.renderURLSearchParams(req, ["denom"])}`
     const quasis = getQuasisUnwrappable(leftPath, rightPath);
-    const expressions = getExpressionUnwrappable(path, indexLeft, indexRight);
+    const expressions = getExpressionsUnwrappable(path, indexLeft, indexRight);
 
     args.push(
         t.templateLiteral(
@@ -159,7 +232,7 @@ const getFetchReqArgs = (
         const indexRight = getPath.indexOf('}');
         args = getFetchReqArgsUnwrappable(getPath, indexLeft, indexRight);
     } else {
-        args = [];
+        args = getFetchReqArgsNoUnwrappable(getPath)
     }
 
     return args
