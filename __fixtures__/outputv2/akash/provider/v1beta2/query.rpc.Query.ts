@@ -3,7 +3,7 @@ import { Provider, ProviderSDKType } from "./provider";
 import * as fm from "../../../grpc-gateway";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
 export class Query {
-  static Providers(request?: QueryProvidersRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static Providers(request: QueryProvidersRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/provider/v1beta2/providers?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

@@ -23,7 +23,6 @@ import * as _CosmosNftV1beta1Queryrpc from "./cosmos/nft/v1beta1/query.rpc.Query
 import * as _CosmosParamsV1beta1Queryrpc from "./cosmos/params/v1beta1/query.rpc.Query";
 import * as _CosmosSlashingV1beta1Queryrpc from "./cosmos/slashing/v1beta1/query.rpc.Query";
 import * as _CosmosStakingV1beta1Queryrpc from "./cosmos/staking/v1beta1/query.rpc.Query";
-import * as _CosmosTxV1beta1Servicerpc from "./cosmos/tx/v1beta1/service.rpc.Service";
 import * as _CosmosUpgradeV1beta1Queryrpc from "./cosmos/upgrade/v1beta1/query.rpc.Query";
 import * as _CosmwasmWasmV1Queryrpc from "./cosmwasm/wasm/v1/query.rpc.Query";
 import * as _EvmosClaimsV1Queryrpc from "./evmos/claims/v1/query.rpc.Query";
@@ -128,9 +127,6 @@ export const createRpcQueryHooks = ({
       },
       staking: {
         v1beta1: _CosmosStakingV1beta1Queryrpc.createRpcQueryHooks(rpc)
-      },
-      tx: {
-        v1beta1: _CosmosTxV1beta1Servicerpc.createRpcQueryHooks(rpc)
       },
       upgrade: {
         v1beta1: _CosmosUpgradeV1beta1Queryrpc.createRpcQueryHooks(rpc)

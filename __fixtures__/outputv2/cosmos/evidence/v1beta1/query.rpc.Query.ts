@@ -9,7 +9,7 @@ export class Query {
     });
   }
 
-  static AllEvidence(request?: QueryAllEvidenceRequest, initRequest?: fm.InitReq): Promise<QueryAllEvidenceResponse> {
+  static AllEvidence(request: QueryAllEvidenceRequest, initRequest?: fm.InitReq): Promise<QueryAllEvidenceResponse> {
     return fm.fetchReq(`/cosmos/evidence/v1beta1/evidence?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

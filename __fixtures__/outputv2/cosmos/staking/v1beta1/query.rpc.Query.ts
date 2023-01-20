@@ -75,13 +75,13 @@ export class Query {
     });
   }
 
-  static Pool(request?: QueryPoolRequest, initRequest?: fm.InitReq): Promise<QueryPoolResponse> {
+  static Pool(request: QueryPoolRequest, initRequest?: fm.InitReq): Promise<QueryPoolResponse> {
     return fm.fetchReq(`/cosmos/staking/v1beta1/pool?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });
   }
 
-  static Params(request?: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/staking/v1beta1/params?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

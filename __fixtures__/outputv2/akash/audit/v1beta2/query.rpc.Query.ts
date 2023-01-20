@@ -3,7 +3,7 @@ import { Provider, ProviderSDKType } from "./audit";
 import * as fm from "../../../grpc-gateway";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 export class Query {
-  static AllProvidersAttributes(request?: QueryAllProvidersAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
+  static AllProvidersAttributes(request: QueryAllProvidersAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
     return fm.fetchReq(`/akash/audit/v1beta2/audit/attributes/list?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

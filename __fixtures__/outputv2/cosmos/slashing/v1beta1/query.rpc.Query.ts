@@ -3,7 +3,7 @@ import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKTyp
 import * as fm from "../../../grpc-gateway";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
 export class Query {
-  static Params(request?: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
     return fm.fetchReq(`/cosmos/slashing/v1beta1/params?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });
@@ -15,7 +15,7 @@ export class Query {
     });
   }
 
-  static SigningInfos(request?: QuerySigningInfosRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfosResponse> {
+  static SigningInfos(request: QuerySigningInfosRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfosResponse> {
     return fm.fetchReq(`/cosmos/slashing/v1beta1/signing_infos?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

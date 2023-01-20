@@ -8,7 +8,7 @@ export class Query {
     });
   }
 
-  static Subspaces(request?: QuerySubspacesRequest, initRequest?: fm.InitReq): Promise<QuerySubspacesResponse> {
+  static Subspaces(request: QuerySubspacesRequest, initRequest?: fm.InitReq): Promise<QuerySubspacesResponse> {
     return fm.fetchReq(`/cosmos/params/v1beta1/subspaces?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });

@@ -39,7 +39,7 @@ export class Query {
     });
   }
 
-  static Classes(request?: QueryClassesRequest, initRequest?: fm.InitReq): Promise<QueryClassesResponse> {
+  static Classes(request: QueryClassesRequest, initRequest?: fm.InitReq): Promise<QueryClassesResponse> {
     return fm.fetchReq(`/cosmos/nft/v1beta1/classes?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
       method: "GET"
     });
