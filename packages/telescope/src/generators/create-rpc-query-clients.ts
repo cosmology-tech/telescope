@@ -66,12 +66,17 @@ export const plugin = (
         const filename = bundler.getFilename(localname);
 
         const asts = [];
-        const type = c.proto.pluginValue('rpcClients.type');
-        switch (type) {
+        switch (c.proto.pluginValue('rpcClients.type')) {
             case 'grpc-gateway':
                 allowedRpcServices.forEach(svcKey => {
-                    const svc: ProtoService = proto[svcKey];
-                    asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                    if (proto[svcKey]){
+                        const svc: ProtoService = proto[svcKey];
+                        try {
+                            asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                        } catch (error) {
+                            console.log("Failed to generate GRPC-Gateway Query class for")
+                        }
+                    }
                 })
             break;
             case 'tendermint':

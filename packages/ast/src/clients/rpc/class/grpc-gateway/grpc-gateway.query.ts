@@ -212,6 +212,7 @@ const getFetchReqArgsUnwrappable = (
 // fetchArgs will be used in method body's return statement expression.
 // Contains arguments to fm.fetchReq
 const getFetchReqArgs = (
+    context: GenericParseContext,
     svc: ProtoServiceMethod,
 ) => {
 
@@ -219,8 +220,13 @@ const getFetchReqArgs = (
     // rpc Grants(QueryGrantsRequest) returns (QueryGrantsResponse) {
     //     option (google.api.http).get = "/cosmos/authz/v1beta1/grants";
     // }
-    // TODO: check if this option exists, add trigger logic if it does not
-    const getPath = svc.options['(google.api.http).get'];
+    let getPath: string;
+
+    if (svc?.options) {
+        getPath = svc.options['(google.api.http).get']
+    } else {
+        getPath = context.ref.proto.package + '.' + svc.name
+    }
 
     let args: any[];
 
@@ -255,12 +261,13 @@ const buildFetchReqArgs = (
     } else {
         args = getFetchReqArgsNoUnwrappable(path);
     }
-    
+
     return args
 }
 
 // function to define a method of grpc-gateway style
 const grpcGatewayMethodDefinition = (
+    context: GenericParseContext,
     name: string,
     svc: ProtoServiceMethod,
 ) => {
@@ -269,8 +276,6 @@ const grpcGatewayMethodDefinition = (
 
     const fieldNames = Object.keys(svc.fields ?? {})
     const hasParams = fieldNames.length > 0;
-
-    const optional = optionalBool(hasParams, fieldNames);
 
     // first parameter in method
     // ex: static Send(request: MsgSend)
@@ -282,11 +287,11 @@ const grpcGatewayMethodDefinition = (
                 t.identifier(requestType),
             )
         ),
-        optional
+        false
     ); 
     
     // fm.fetchReq(fetchArgs are here)
-    const fetchArgs = getFetchReqArgs(svc);
+    const fetchArgs = getFetchReqArgs(context, svc);
 
     // class method body (only return statement)
     const body = t.blockStatement(
@@ -323,13 +328,14 @@ export const createGRPCGatewayQueryClass = (
     context.addUtil('fm');
 
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    console.log("Current service: ", service.name, context.ref.proto.package);
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map(key => {
             const method = service.methods[key];
-            console.log("method: ", method)
             const name = camelRpcMethods ? camel(key) : key;
             return grpcGatewayMethodDefinition(
+                context,
                 name,
                 method,
             )

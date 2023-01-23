@@ -1,110 +1,42 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
-import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import * as fm from "../../../grpc-gateway";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-
-/** Query provides defines the gRPC querier service. */
-export interface Query {
-  /** Period retrieves current period. */
-  period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse>;
-
-  /** EpochMintProvision retrieves current minting epoch provision value. */
-  epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse>;
-
-  /** SkippedEpochs retrieves the total number of skipped epochs. */
-  skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse>;
-
-  /**
-   * CirculatingSupply retrieves the total number of tokens that are in
-   * circulation (i.e. excluding unvested tokens).
-   */
-  circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse>;
-
-  /** InflationRate retrieves the inflation rate of the current period. */
-  inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse>;
-
-  /** Params retrieves the total set of minting parameters. */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.period = this.period.bind(this);
-    this.epochMintProvision = this.epochMintProvision.bind(this);
-    this.skippedEpochs = this.skippedEpochs.bind(this);
-    this.circulatingSupply = this.circulatingSupply.bind(this);
-    this.inflationRate = this.inflationRate.bind(this);
-    this.params = this.params.bind(this);
+export class Query {
+  static Period(request: QueryPeriodRequest, initRequest?: fm.InitReq): Promise<QueryPeriodResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/period?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  period(request: QueryPeriodRequest = {}): Promise<QueryPeriodResponse> {
-    const data = QueryPeriodRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "Period", data);
-    return promise.then(data => QueryPeriodResponse.decode(new _m0.Reader(data)));
+  static EpochMintProvision(request: QueryEpochMintProvisionRequest, initRequest?: fm.InitReq): Promise<QueryEpochMintProvisionResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/epoch_mint_provision?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  epochMintProvision(request: QueryEpochMintProvisionRequest = {}): Promise<QueryEpochMintProvisionResponse> {
-    const data = QueryEpochMintProvisionRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "EpochMintProvision", data);
-    return promise.then(data => QueryEpochMintProvisionResponse.decode(new _m0.Reader(data)));
+  static SkippedEpochs(request: QuerySkippedEpochsRequest, initRequest?: fm.InitReq): Promise<QuerySkippedEpochsResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/skipped_epochs?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  skippedEpochs(request: QuerySkippedEpochsRequest = {}): Promise<QuerySkippedEpochsResponse> {
-    const data = QuerySkippedEpochsRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "SkippedEpochs", data);
-    return promise.then(data => QuerySkippedEpochsResponse.decode(new _m0.Reader(data)));
+  static CirculatingSupply(request: QueryCirculatingSupplyRequest, initRequest?: fm.InitReq): Promise<QueryCirculatingSupplyResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/circulating_supply?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  circulatingSupply(request: QueryCirculatingSupplyRequest = {}): Promise<QueryCirculatingSupplyResponse> {
-    const data = QueryCirculatingSupplyRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "CirculatingSupply", data);
-    return promise.then(data => QueryCirculatingSupplyResponse.decode(new _m0.Reader(data)));
+  static InflationRate(request: QueryInflationRateRequest, initRequest?: fm.InitReq): Promise<QueryInflationRateResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/inflation_rate?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
-  inflationRate(request: QueryInflationRateRequest = {}): Promise<QueryInflationRateResponse> {
-    const data = QueryInflationRateRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "InflationRate", data);
-    return promise.then(data => QueryInflationRateResponse.decode(new _m0.Reader(data)));
-  }
-
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.inflation.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
+    return fm.fetchReq(`/evmos/inflation/v1/params?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+      method: "GET"
+    });
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse> {
-      return queryService.period(request);
-    },
-
-    epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse> {
-      return queryService.epochMintProvision(request);
-    },
-
-    skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse> {
-      return queryService.skippedEpochs(request);
-    },
-
-    circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse> {
-      return queryService.circulatingSupply(request);
-    },
-
-    inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse> {
-      return queryService.inflationRate(request);
-    },
-
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    }
-
-  };
-};
