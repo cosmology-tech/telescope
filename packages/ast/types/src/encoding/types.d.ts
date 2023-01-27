@@ -5,7 +5,7 @@ export declare const getFieldNames: (field: ProtoField) => {
     propName: string;
     origName: string;
 };
-export type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoMsg' | 'ProtoMsg' | 'Encoded';
+export declare type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoMsg' | 'ProtoMsg' | 'Encoded';
 export declare const SymbolNames: {
     Msg: (name: string) => string;
     SDKType: (name: string) => string;

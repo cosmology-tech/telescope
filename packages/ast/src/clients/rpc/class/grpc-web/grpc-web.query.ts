@@ -3,6 +3,7 @@ import { ProtoService, ProtoServiceMethod } from "@osmonauts/types";
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { processRpcComment, returnReponseType } from '../utils/rpc';
+import { metadata } from './utils'
 import * as t from '@babel/types'
 
 const gRPCWebMethodDefinition = (
@@ -14,6 +15,14 @@ const gRPCWebMethodDefinition = (
     trailingComments?: t.CommentBlock[],
     leadingComments?: t.CommentBlock[]
 ) => {
+
+    //adding import for the interface
+    // use grpc.Metadata later on
+    context.addUtil('grpc')
+    //use type DeepPartial
+    context.addUtil('DeepPartitial')
+    let partialName = 'DeepPartial';
+
     const requestType = svc.requestType;
     const responseType = svc.responseType;
     const body = t.blockStatement([
@@ -37,17 +46,27 @@ const gRPCWebMethodDefinition = (
         'request',
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(requestType)
+                t.identifier(partialName),
+                t.tsTypeParameterInstantiation(
+                    [
+                        t.tsTypeReference(
+                            t.identifier(requestType)
+                        )
+                    ]
+                )
             )
         ),
         optional
     );
 
+    const metadataArgs: t.Identifier = metadata
+
     return tsMethodSignature(
         t.identifier(name),
         null,
         [
-            methodArgs
+            methodArgs,
+            metadataArgs
         ],
         returnReponseType(responseType),
         trailingComments,
@@ -60,9 +79,6 @@ export const createGrpcQueryInterface = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-
-    //adding import for the interface
-    context.addUtil('grpc')
 
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
     const keys = Object.keys(service.methods ?? {});
