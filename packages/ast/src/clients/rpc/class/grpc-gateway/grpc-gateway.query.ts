@@ -14,7 +14,13 @@ const staticExpressionsNoUnwrappable = t.callExpression(
         false
     ),
     [
-        t.identifier('request'),
+        t.objectExpression(
+            [
+                t.spreadElement(
+                    t.identifier('request')
+                )
+            ]
+        ),
         t.arrayExpression(
             []
         )
@@ -143,7 +149,13 @@ const getExpressionsUnwrappable = (
                 false
             ),
             [
-                t.identifier('request'),
+                t.objectExpression(
+                    [
+                        t.spreadElement(
+                            t.identifier('request')
+                        )
+                    ]
+                ),
                 t.arrayExpression(
                     [
                         t.stringLiteral(unwrappable)

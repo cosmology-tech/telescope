@@ -4,7 +4,8 @@ import * as fm from "../../../grpc-gateway";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 export class Query {
   static Certificates(request: QueryCertificatesRequest, initRequest?: fm.InitReq): Promise<QueryCertificatesResponse> {
-    return fm.fetchReq(`/akash/cert/v1beta2/certificates/list?${fm.renderURLSearchParams(request, [])}`, { ...initRequest,
+    return fm.fetchReq(`/akash/cert/v1beta2/certificates/list?${fm.renderURLSearchParams({ ...request
+    }, [])}`, { ...initRequest,
       method: "GET"
     });
   }
