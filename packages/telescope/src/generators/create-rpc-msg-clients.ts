@@ -50,8 +50,6 @@ export const plugin = (
                 default:
                     asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
                     asts.push(createRpcClientClass(ctx.generic, proto.Msg))
-
-            
         }
         
         ////////
