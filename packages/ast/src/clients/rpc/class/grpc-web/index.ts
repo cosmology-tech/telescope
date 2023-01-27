@@ -1,1 +1,1 @@
-export * from './grpc-web'
+export * from './grpc-web.query'
