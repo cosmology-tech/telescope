@@ -259,17 +259,38 @@ const GrpcWebClassMethod = (
         )
     }
 
+    /* 
+    return this.rpc.unary(
+      QueryParamsDesc,
+      QueryParamsRequest.fromPartial(request),
+      metadata,
+    );
+    */
     const body = t.blockStatement([
-        //TO-DO
-        // // const data = QueryAccountsRequest.encode(request).finish();
-        // encodeData(requestType),
-
-        // // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
-        // promiseRequest(msg, packageImport),
-
-        // // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
-        // returnPromise(responseType)
-
+        t.returnStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.memberExpression(
+                        t.thisExpression(),
+                        t.identifier('rpc')
+                    ),
+                    t.identifier('unary')
+                ),
+                [
+                    t.identifier('QueryParamsDesc'),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('QueryAccountsRequest'),
+                            t.identifier('fromPartial')
+                        ),
+                        [
+                            t.identifier('request')
+                        ]
+                    ),
+                    t.identifier('metadata')
+                ]
+            )
+        )
     ]);
 
     if (context.pluginValue('classesUseArrowFunctions')) {
