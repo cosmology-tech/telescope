@@ -17,18 +17,11 @@ const gRPCWebMethodDefinition = (
     leadingComments?: t.CommentBlock[]
 ) => {
 
-    //adding import for the interface
-    // use grpc.Metadata later on
-    context.addUtil('grpc')
-    //use type DeepPartial
-    context.addUtil('DeepPartitial')
-    let partialName = 'DeepPartial';
-
     const requestType = svc.requestType;
     const responseType = svc.responseType;
-    const body = t.blockStatement([
-        //TO-DO
-    ])
+
+    //interface body is empty so nothing here
+    const body = t.blockStatement([])
 
     let optional = false;
 
@@ -47,7 +40,7 @@ const gRPCWebMethodDefinition = (
         'request',
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(partialName),
+                t.identifier('DeepPartial'),
                 t.tsTypeParameterInstantiation(
                     [
                         t.tsTypeReference(
@@ -76,7 +69,7 @@ const gRPCWebMethodDefinition = (
 }
 
 
-export const createGrpcQueryInterface = (
+export const createGrpcWebQueryInterface = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
@@ -202,10 +195,6 @@ const GrpcWebClassMethod = (
     packageImport: string
 ) => {
 
-    // use grpc.Metadata later on
-    context.addUtil('grpc')
-    //use type DeepPartial
-    context.addUtil('DeepPartitial')
     let partialName = 'DeepPartial';
 
     let optional = false;
@@ -277,10 +266,11 @@ const GrpcWebClassMethod = (
                     t.identifier('unary')
                 ),
                 [
-                    t.identifier('QueryParamsDesc'),
+                    //No Desc field so we need to modify it
+                    t.identifier(requestType.replace('Request', 'Desc')), 
                     t.callExpression(
                         t.memberExpression(
-                            t.identifier('QueryAccountsRequest'),
+                            t.identifier(requestType),
                             t.identifier('fromPartial')
                         ),
                         [
@@ -324,13 +314,17 @@ const GrpcWebClassMethod = (
     );
 };
 
-export const createGrpcWebClientClass = (
+export const createGrpcWebQueryClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-
-    context.addUtil('Rpc');
+    // TO-DO: NEED TO ADD interface Rpc, not using import Rpc
+    //adding import 
     context.addUtil('_m0');
+    context.addUtil('grpc')
+    //use type DeepPartial
+    context.addUtil('DeepPartitial')
+    let partialName = 'DeepPartial';
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const name = getRpcClassName(service);
