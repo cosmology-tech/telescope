@@ -2,10 +2,7 @@ import { identifier } from '../../../../../utils';
 import * as t from '@babel/types'
 import { ProtoService } from '@osmonauts/types';
 
-// initRequest is used in constructing GRPC-Gateway methods
-// It is a second parameter in method signature.
-// ex: static Send(req: MsgSend, initReq?: fm.InitReq)
-// always the same, hence, declared outside of grpcGatewayMethodDefinition
+// second params for grpc-web method
 export const metadata = identifier(
     'metadata',
     t.tSTypeAnnotation(
