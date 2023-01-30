@@ -3,7 +3,7 @@ import { ProtoService, ProtoServiceMethod } from "@osmonauts/types";
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { processRpcComment, returnReponseType } from '../utils/rpc';
-import { metadata } from './utils'
+import { metadata, bindThis, makeComment, getRpcClassName } from './utils'
 import * as t from '@babel/types'
 
 //grpc-web query interface
@@ -113,32 +113,6 @@ export const createGrpcWebQueryInterface = (
 
 //grpc-web query class 
 
-// this.Accounts = this.Accounts.bind(this);
-// MARKED AS NOT DRY (used in rpc/lcd)
-const bindThis = (name: string) => {
-    return t.expressionStatement(
-        t.assignmentExpression(
-            '=',
-            t.memberExpression(
-                t.thisExpression(),
-                t.identifier(name)
-            ),
-            t.callExpression(
-                t.memberExpression(
-                    t.memberExpression(
-                        t.thisExpression(),
-                        t.identifier(name)
-                    ),
-                    t.identifier('bind')
-                ),
-                [
-                    t.thisExpression()
-                ]
-            )
-        )
-    );
-};
-
 const rpcClassConstructor = (
     context: GenericParseContext,
     methods: string[]
@@ -178,14 +152,6 @@ const rpcClassConstructor = (
         ])
     );
 };
-
-export const getRpcClassName = (service: ProtoService) => {
-    return `${service.name}ClientImpl`;
-}
-
-const makeComment = (comment: string) => {
-    return [{ type: 'CommentBlock', value: ` ${comment} ` }]
-}
 
 const GrpcWebClassMethod = (
     context: GenericParseContext,
