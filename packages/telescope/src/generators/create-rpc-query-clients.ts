@@ -71,11 +71,7 @@ export const plugin = (
                 allowedRpcServices.forEach(svcKey => {
                     if (proto[svcKey]){
                         const svc: ProtoService = proto[svcKey];
-                        try {
-                            asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
-                        } catch (error) {
-                            console.log("Failed to generate GRPC-Gateway Query class for")
-                        }
+                        asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
                     }
                 })
             break;
