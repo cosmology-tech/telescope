@@ -34,5 +34,5 @@ it('test gRPC-web Msg Client', () => {
     // console.log(context.ref.proto.package);
     // printCode(createGrpcClientInterface(context, service));
     // printCode(createGrpcClientClass(context, service))
-    printCode(getProtoRequest('Grant', context, service));
+    printCode(getProtoRequest('Exec', context, service));
 })

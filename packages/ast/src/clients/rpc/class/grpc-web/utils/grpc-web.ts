@@ -67,13 +67,26 @@ export const getProtoRequest = (methodName: string, context: GenericParseContext
         const methods = methodFields
         .map(key => {
             console.log(key);
+            console.log(service.methods[methodName].fields[key]);
             let typeOfProperties = service.methods[methodName].fields[key].type;
-            if(typeOfProperties.includes(context.ref.proto.package)){
+            if(typeOfProperties.includes(context.ref.proto.package) || typeOfProperties.length > 7){            
                 //TO-DO: clean up and add import for required type 
                 //TO-DO: add dynamic for not only msg type but also query type
                 // context.addUtil 
                 const cleanType = typeOfProperties.split('.');
                 typeOfProperties =  cleanType[cleanType.length - 1]
+            }
+
+            if(service.methods[methodName].fields[key].rule == 'repeated') {
+                return t.tsPropertySignature(
+                    t.identifier(key),
+                    t.tsTypeAnnotation(
+                        t.tsArrayType(
+                        t.tsTypeReference(
+                                t.identifier(typeOfProperties)
+                            )
+                    ))
+                )
             }
             
             return  t.tsPropertySignature(
