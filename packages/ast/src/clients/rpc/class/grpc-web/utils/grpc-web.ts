@@ -51,3 +51,25 @@ export const getRpcClassName = (service: ProtoService) => {
     return `${service.name}ClientImpl`;
 }
 
+export const GetQueryDesc = (context: GenericParseContext) => {
+    // return `${context.ref.proto.package}.Query`; 
+    return t.exportNamedDeclaration(
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                t.identifier('QueryDesc'),
+                t.objectExpression(
+                    [ 
+                        t.objectProperty(
+                            t.identifier('serviceName'),
+                            t.stringLiteral(`${context.ref.proto.package}.Query`)
+                        )
+                    ]                 
+                    )
+                )
+            ]
+        )
+    )
+}
+
