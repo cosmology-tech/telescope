@@ -2,7 +2,7 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
-import { createGrpcQueryInterface } from './grpc-web.query';
+import { createGrpcWebQueryInterface, createGrpcWebQueryClass } from './grpc-web.query';
 const store = getTestProtoStore();
 store.traverseAll();
 
@@ -11,5 +11,7 @@ it('test gRPC-web Msg Client', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, store.options);
-    printCode(createGrpcQueryInterface(context, service));
+    
+    printCode(createGrpcWebQueryInterface(context, service));
+    printCode(createGrpcWebQueryClass(context, service));
 })
