@@ -44,7 +44,7 @@ const staticSecondFetchReqArg = t.objectExpression(
 const getQuasisNoUnwrappable = (
     path: string
 ) => {
-    let quasis = [];
+    let quasis: any[] = [];
 
     // path?
     // ex: /cosmos/bank/v1beta1/supply?
@@ -77,7 +77,7 @@ const getQuasisUnwrappable = (
     leftPath: string,
     rightPath: string,
 ) => {
-    let quasis = []; 
+    let quasis: any[] = []; 
     
     // add left path element to quasis (path before unwrappable element)
     quasis.push(
@@ -127,7 +127,7 @@ const getExpressionsUnwrappable = (
     indexLeft: number,
     indexRight: number
 ) => {
-    let expressions = [];
+    let expressions: any[] = [];
 
     const unwrappable = path.slice(indexLeft + 1, indexRight)
 
@@ -173,7 +173,7 @@ const getExpressionsUnwrappable = (
 const getFetchReqArgsNoUnwrappable = (
     path: string
 ) => {
-    let args = [];
+    let args: any[] = [];
 
     const quasis = getQuasisNoUnwrappable(path);
     const expressions = getExpressionsNoUnwrappable();
@@ -198,7 +198,7 @@ const getFetchReqArgsUnwrappable = (
     indexLeft: number,
     indexRight: number,
 ) => {
-    let args = [];
+    let args: any[] = [];
 
     const leftPath = path.slice(0, indexLeft);
     const rightPath = path.slice(indexRight + 1);
@@ -232,25 +232,27 @@ const getFetchReqArgs = (
     // rpc Grants(QueryGrantsRequest) returns (QueryGrantsResponse) {
     //     option (google.api.http).get = "/cosmos/authz/v1beta1/grants";
     // }
-    let getPath: string;
+    let getPath: string | undefined;
 
-    if (svc?.options) {
+    try {
         getPath = svc.options['(google.api.http).get']
-    } else {
+    } catch {} 
+
+    if ((typeof getPath!) === 'undefined') {
         getPath = context.ref.proto.package + '.' + svc.name
     }
-
+    
     let args: any[];
 
     // check if getPath contains "unwrappable" elements in path
     // ex: "/cosmos/bank/v1beta1/balances/{address}" 
     // {address} here is what I mean by "unwrappable"
-    const indexLeft = getPath.indexOf('{');
-    if (getPath.indexOf('{') > -1) {
-        const indexRight = getPath.indexOf('}');
-        args = buildFetchReqArgs(getPath, true, indexLeft, indexRight);
+    if (getPath!.indexOf('{') > -1) {
+        const indexLeft = getPath!.indexOf('{');
+        const indexRight = getPath!.indexOf('}');
+        args = buildFetchReqArgs(getPath!, true, indexLeft, indexRight);
     } else {
-        args = buildFetchReqArgs(getPath, false)
+        args = buildFetchReqArgs(getPath!, false)
     }
 
     return args
@@ -262,7 +264,7 @@ const buildFetchReqArgs = (
     indexLeft = -1,
     indexRight = -1,
 ) => {
-    let args = [];
+    let args: any[] = [];
 
     if (unwrappable) {
         if (indexLeft === -1 || indexRight === -1) {
@@ -285,9 +287,6 @@ const grpcGatewayMethodDefinition = (
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
-
-    const fieldNames = Object.keys(svc.fields ?? {})
-    const hasParams = fieldNames.length > 0;
 
     // first parameter in method
     // ex: static Send(request: MsgSend)
@@ -340,7 +339,6 @@ export const createGRPCGatewayQueryClass = (
     context.addUtil('fm');
 
     const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
-    console.log("Current service: ", service.name, context.ref.proto.package);
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map(key => {
