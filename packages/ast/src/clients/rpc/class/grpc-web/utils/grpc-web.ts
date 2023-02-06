@@ -166,6 +166,18 @@ export const getMethodDesc = (
                                                                     ),
                                                                     [t.identifier('data')]
                                                                 )
+                                                            ),
+                                                            t.objectMethod(
+                                                                'method',
+                                                                t.identifier('toObject'),
+                                                                [],
+                                                                t.blockStatement(
+                                                                    [
+                                                                        t.returnStatement(
+                                                                            t.thisExpression()
+                                                                        )
+                                                                    ]
+                                                                )
                                                             )
                                                             ]
                                                         )
