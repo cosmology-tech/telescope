@@ -53,7 +53,7 @@ const gRPCWebMethodDefinition = (
     );
 }
 
-export const createGrpcClientInterface = (
+export const createGrpcWebMsgInterface = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
@@ -249,7 +249,7 @@ const rpcClassMethod = (
     );
 };
 
-export const createGrpcClientClass = (
+export const createGrpcWebMsgClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
