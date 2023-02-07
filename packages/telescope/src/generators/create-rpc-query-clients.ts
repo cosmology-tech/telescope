@@ -8,7 +8,9 @@ import {
     createRpcQueryHookClientMap,
     createRpcQueryHooks,
     // grpc-gateway:
-    createGRPCGatewayQueryClass
+    createGRPCGatewayQueryClass,
+    createGrpcWebQueryClass,
+    createGrpcWebQueryInterface
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -72,6 +74,15 @@ export const plugin = (
                     if (proto[svcKey]){
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                    }
+                })
+            break;
+            case 'grpc-web':
+                allowedRpcServices.forEach(svcKey => {
+                    if (proto[svcKey]){
+                        const svc: ProtoService = proto[svcKey];
+                        asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
+                        asts.push(createGrpcWebQueryClass(ctx.generic, svc));
                     }
                 })
             break;
