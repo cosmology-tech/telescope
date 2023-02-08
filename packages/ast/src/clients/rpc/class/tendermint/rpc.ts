@@ -297,7 +297,6 @@ const rpcClassConstructor = (
     );
 };
 
-
 export const createRpcClientInterface = (
     context: GenericParseContext,
     service: ProtoService

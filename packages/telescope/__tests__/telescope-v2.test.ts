@@ -98,7 +98,6 @@ const options: TelescopeOptions = {
     camelCase: true
   },
 
-
   reactQuery: {
     enabled: true,
     include: {
