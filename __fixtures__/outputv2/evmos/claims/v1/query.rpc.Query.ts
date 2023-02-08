@@ -2,24 +2,24 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** TotalUnclaimed queries the total unclaimed tokens from the airdrop */
-  totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse>;
+  TotalUnclaimed(request?: DeepPartial<QueryTotalUnclaimedRequest>, metadata?: grpc.Metadata): Promise<QueryTotalUnclaimedResponse>;
 
   /** Params returns the claims module parameters */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** ClaimsRecords returns all claims records */
-  claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponse>;
+  ClaimsRecords(request?: DeepPartial<QueryClaimsRecordsRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordsResponse>;
 
   /** ClaimsRecord returns the claims record for a given address */
-  claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse>;
+  ClaimsRecord(request: DeepPartial<QueryClaimsRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -32,52 +32,22 @@ export class QueryClientImpl implements Query {
     this.claimsRecord = this.claimsRecord.bind(this);
   }
 
-  totalUnclaimed(request: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
-    const data = QueryTotalUnclaimedRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.claims.v1.Query", "TotalUnclaimed", data);
-    return promise.then(data => QueryTotalUnclaimedResponse.decode(new _m0.Reader(data)));
+  totalUnclaimed(request: DeepPartial<QueryTotalUnclaimedRequest> = {}, metadata?: grpc.Metadata): Promise<QueryTotalUnclaimedResponse> {
+    return this.rpc.unary(QueryTotalUnclaimedDesc, QueryTotalUnclaimedRequest.fromPartial(request), metadata);
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.claims.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  claimsRecords(request: QueryClaimsRecordsRequest = {
+  claimsRecords(request: DeepPartial<QueryClaimsRecordsRequest> = {
     pagination: undefined
-  }): Promise<QueryClaimsRecordsResponse> {
-    const data = QueryClaimsRecordsRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecords", data);
-    return promise.then(data => QueryClaimsRecordsResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<QueryClaimsRecordsResponse> {
+    return this.rpc.unary(QueryClaimsRecordsDesc, QueryClaimsRecordsRequest.fromPartial(request), metadata);
   }
 
-  claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
-    const data = QueryClaimsRecordRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecord", data);
-    return promise.then(data => QueryClaimsRecordResponse.decode(new _m0.Reader(data)));
+  claimsRecord(request: DeepPartial<QueryClaimsRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordResponse> {
+    return this.rpc.unary(QueryClaimsRecordDesc, QueryClaimsRecordRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse> {
-      return queryService.totalUnclaimed(request);
-    },
-
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponse> {
-      return queryService.claimsRecords(request);
-    },
-
-    claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
-      return queryService.claimsRecord(request);
-    }
-
-  };
-};

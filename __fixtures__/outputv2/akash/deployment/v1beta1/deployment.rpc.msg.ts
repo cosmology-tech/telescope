@@ -1,31 +1,32 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deployment";
 
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
+  CreateDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse>;
 
   /** DepositDeployment deposits more funds into the deployment account */
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
+  DepositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse>;
 
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
+  UpdateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse>;
 
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
+  CloseDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse>;
 
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
+  CloseGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse>;
 
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
+  PauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse>;
 
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
+  StartGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -41,46 +42,32 @@ export class MsgClientImpl implements Msg {
     this.startGroup = this.startGroup.bind(this);
   }
 
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse> {
-    const data = MsgCreateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CreateDeployment", data);
-    return promise.then(data => MsgCreateDeploymentResponse.decode(new _m0.Reader(data)));
+  createDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse> {
+    return this.rpc.unary(MsgCreateDeployment, MsgCreateDeployment.fromPartial(request), metadata);
   }
 
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse> {
-    const data = MsgDepositDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "DepositDeployment", data);
-    return promise.then(data => MsgDepositDeploymentResponse.decode(new _m0.Reader(data)));
+  depositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse> {
+    return this.rpc.unary(MsgDepositDeployment, MsgDepositDeployment.fromPartial(request), metadata);
   }
 
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse> {
-    const data = MsgUpdateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "UpdateDeployment", data);
-    return promise.then(data => MsgUpdateDeploymentResponse.decode(new _m0.Reader(data)));
+  updateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse> {
+    return this.rpc.unary(MsgUpdateDeployment, MsgUpdateDeployment.fromPartial(request), metadata);
   }
 
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse> {
-    const data = MsgCloseDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseDeployment", data);
-    return promise.then(data => MsgCloseDeploymentResponse.decode(new _m0.Reader(data)));
+  closeDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse> {
+    return this.rpc.unary(MsgCloseDeployment, MsgCloseDeployment.fromPartial(request), metadata);
   }
 
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse> {
-    const data = MsgCloseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseGroup", data);
-    return promise.then(data => MsgCloseGroupResponse.decode(new _m0.Reader(data)));
+  closeGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse> {
+    return this.rpc.unary(MsgCloseGroup, MsgCloseGroup.fromPartial(request), metadata);
   }
 
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse> {
-    const data = MsgPauseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "PauseGroup", data);
-    return promise.then(data => MsgPauseGroupResponse.decode(new _m0.Reader(data)));
+  pauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse> {
+    return this.rpc.unary(MsgPauseGroup, MsgPauseGroup.fromPartial(request), metadata);
   }
 
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse> {
-    const data = MsgStartGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "StartGroup", data);
-    return promise.then(data => MsgStartGroupResponse.decode(new _m0.Reader(data)));
+  startGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse> {
+    return this.rpc.unary(MsgStartGroup, MsgStartGroup.fromPartial(request), metadata);
   }
 
 }

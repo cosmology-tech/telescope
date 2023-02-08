@@ -1,7 +1,8 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
 
 /** Msg defines the vesting Msg service. */
@@ -10,10 +11,10 @@ export interface Msg {
    * CreateClawbackVestingAccount creats a vesting account that is subject to
    * clawback and the configuration of vesting and lockup schedules.
    */
-  createClawbackVestingAccount(request: MsgCreateClawbackVestingAccount): Promise<MsgCreateClawbackVestingAccountResponse>;
+  CreateClawbackVestingAccount(request: DeepPartial<MsgCreateClawbackVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreateClawbackVestingAccountResponse>;
 
   /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback(request: MsgClawback): Promise<MsgClawbackResponse>;
+  Clawback(request: DeepPartial<MsgClawback>, metadata?: grpc.Metadata): Promise<MsgClawbackResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -24,16 +25,12 @@ export class MsgClientImpl implements Msg {
     this.clawback = this.clawback.bind(this);
   }
 
-  createClawbackVestingAccount(request: MsgCreateClawbackVestingAccount): Promise<MsgCreateClawbackVestingAccountResponse> {
-    const data = MsgCreateClawbackVestingAccount.encode(request).finish();
-    const promise = this.rpc.request("evmos.vesting.v1.Msg", "CreateClawbackVestingAccount", data);
-    return promise.then(data => MsgCreateClawbackVestingAccountResponse.decode(new _m0.Reader(data)));
+  createClawbackVestingAccount(request: DeepPartial<MsgCreateClawbackVestingAccount>, metadata?: grpc.Metadata): Promise<MsgCreateClawbackVestingAccountResponse> {
+    return this.rpc.unary(MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccount.fromPartial(request), metadata);
   }
 
-  clawback(request: MsgClawback): Promise<MsgClawbackResponse> {
-    const data = MsgClawback.encode(request).finish();
-    const promise = this.rpc.request("evmos.vesting.v1.Msg", "Clawback", data);
-    return promise.then(data => MsgClawbackResponse.decode(new _m0.Reader(data)));
+  clawback(request: DeepPartial<MsgClawback>, metadata?: grpc.Metadata): Promise<MsgClawbackResponse> {
+    return this.rpc.unary(MsgClawback, MsgClawback.fromPartial(request), metadata);
   }
 
 }

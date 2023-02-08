@@ -1,42 +1,42 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
-import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../../helpers";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** ClientState queries an IBC light client. */
-  clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse>;
+  ClientState(request: DeepPartial<QueryClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryClientStateResponse>;
 
   /** ClientStates queries all the IBC light clients of a chain. */
-  clientStates(request?: QueryClientStatesRequest): Promise<QueryClientStatesResponse>;
+  ClientStates(request?: DeepPartial<QueryClientStatesRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatesResponse>;
 
   /**
    * ConsensusState queries a consensus state associated with a client state at
    * a given height.
    */
-  consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse>;
+  ConsensusState(request: DeepPartial<QueryConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStateResponse>;
 
   /**
    * ConsensusStates queries all the consensus state associated with a given
    * client.
    */
-  consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse>;
+  ConsensusStates(request: DeepPartial<QueryConsensusStatesRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStatesResponse>;
 
   /** Status queries the status of an IBC client. */
-  clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse>;
+  ClientStatus(request: DeepPartial<QueryClientStatusRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatusResponse>;
 
   /** ClientParams queries all parameters of the ibc client. */
-  clientParams(request?: QueryClientParamsRequest): Promise<QueryClientParamsResponse>;
+  ClientParams(request?: DeepPartial<QueryClientParamsRequest>, metadata?: grpc.Metadata): Promise<QueryClientParamsResponse>;
 
   /** UpgradedClientState queries an Upgraded IBC light client. */
-  upgradedClientState(request?: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponse>;
+  UpgradedClientState(request?: DeepPartial<QueryUpgradedClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedClientStateResponse>;
 
   /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
-  upgradedConsensusState(request?: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse>;
+  UpgradedConsensusState(request?: DeepPartial<QueryUpgradedConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -53,92 +53,38 @@ export class QueryClientImpl implements Query {
     this.upgradedConsensusState = this.upgradedConsensusState.bind(this);
   }
 
-  clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse> {
-    const data = QueryClientStateRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientState", data);
-    return promise.then(data => QueryClientStateResponse.decode(new _m0.Reader(data)));
+  clientState(request: DeepPartial<QueryClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryClientStateResponse> {
+    return this.rpc.unary(QueryClientStateDesc, QueryClientStateRequest.fromPartial(request), metadata);
   }
 
-  clientStates(request: QueryClientStatesRequest = {
+  clientStates(request: DeepPartial<QueryClientStatesRequest> = {
     pagination: undefined
-  }): Promise<QueryClientStatesResponse> {
-    const data = QueryClientStatesRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientStates", data);
-    return promise.then(data => QueryClientStatesResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<QueryClientStatesResponse> {
+    return this.rpc.unary(QueryClientStatesDesc, QueryClientStatesRequest.fromPartial(request), metadata);
   }
 
-  consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse> {
-    const data = QueryConsensusStateRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ConsensusState", data);
-    return promise.then(data => QueryConsensusStateResponse.decode(new _m0.Reader(data)));
+  consensusState(request: DeepPartial<QueryConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStateResponse> {
+    return this.rpc.unary(QueryConsensusStateDesc, QueryConsensusStateRequest.fromPartial(request), metadata);
   }
 
-  consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse> {
-    const data = QueryConsensusStatesRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ConsensusStates", data);
-    return promise.then(data => QueryConsensusStatesResponse.decode(new _m0.Reader(data)));
+  consensusStates(request: DeepPartial<QueryConsensusStatesRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStatesResponse> {
+    return this.rpc.unary(QueryConsensusStatesDesc, QueryConsensusStatesRequest.fromPartial(request), metadata);
   }
 
-  clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse> {
-    const data = QueryClientStatusRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientStatus", data);
-    return promise.then(data => QueryClientStatusResponse.decode(new _m0.Reader(data)));
+  clientStatus(request: DeepPartial<QueryClientStatusRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatusResponse> {
+    return this.rpc.unary(QueryClientStatusDesc, QueryClientStatusRequest.fromPartial(request), metadata);
   }
 
-  clientParams(request: QueryClientParamsRequest = {}): Promise<QueryClientParamsResponse> {
-    const data = QueryClientParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "ClientParams", data);
-    return promise.then(data => QueryClientParamsResponse.decode(new _m0.Reader(data)));
+  clientParams(request: DeepPartial<QueryClientParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryClientParamsResponse> {
+    return this.rpc.unary(QueryClientParamsDesc, QueryClientParamsRequest.fromPartial(request), metadata);
   }
 
-  upgradedClientState(request: QueryUpgradedClientStateRequest = {}): Promise<QueryUpgradedClientStateResponse> {
-    const data = QueryUpgradedClientStateRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "UpgradedClientState", data);
-    return promise.then(data => QueryUpgradedClientStateResponse.decode(new _m0.Reader(data)));
+  upgradedClientState(request: DeepPartial<QueryUpgradedClientStateRequest> = {}, metadata?: grpc.Metadata): Promise<QueryUpgradedClientStateResponse> {
+    return this.rpc.unary(QueryUpgradedClientStateDesc, QueryUpgradedClientStateRequest.fromPartial(request), metadata);
   }
 
-  upgradedConsensusState(request: QueryUpgradedConsensusStateRequest = {}): Promise<QueryUpgradedConsensusStateResponse> {
-    const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Query", "UpgradedConsensusState", data);
-    return promise.then(data => QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data)));
+  upgradedConsensusState(request: DeepPartial<QueryUpgradedConsensusStateRequest> = {}, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse> {
+    return this.rpc.unary(QueryUpgradedConsensusStateDesc, QueryUpgradedConsensusStateRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse> {
-      return queryService.clientState(request);
-    },
-
-    clientStates(request?: QueryClientStatesRequest): Promise<QueryClientStatesResponse> {
-      return queryService.clientStates(request);
-    },
-
-    consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse> {
-      return queryService.consensusState(request);
-    },
-
-    consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse> {
-      return queryService.consensusStates(request);
-    },
-
-    clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse> {
-      return queryService.clientStatus(request);
-    },
-
-    clientParams(request?: QueryClientParamsRequest): Promise<QueryClientParamsResponse> {
-      return queryService.clientParams(request);
-    },
-
-    upgradedClientState(request?: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponse> {
-      return queryService.upgradedClientState(request);
-    },
-
-    upgradedConsensusState(request?: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse> {
-      return queryService.upgradedConsensusState(request);
-    }
-
-  };
-};

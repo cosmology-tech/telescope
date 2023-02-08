@@ -3,21 +3,21 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Deployments queries deployments */
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
+  Deployments(request: DeepPartial<QueryDeploymentsRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentsResponse>;
 
   /** Deployment queries deployment details */
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
+  Deployment(request: DeepPartial<QueryDeploymentRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentResponse>;
 
   /** Group queries group details */
-  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
+  Group(request: DeepPartial<QueryGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -29,40 +29,16 @@ export class QueryClientImpl implements Query {
     this.group = this.group.bind(this);
   }
 
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
-    const data = QueryDeploymentsRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployments", data);
-    return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
+  deployments(request: DeepPartial<QueryDeploymentsRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentsResponse> {
+    return this.rpc.unary(QueryDeploymentsDesc, QueryDeploymentsRequest.fromPartial(request), metadata);
   }
 
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
-    const data = QueryDeploymentRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployment", data);
-    return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
+  deployment(request: DeepPartial<QueryDeploymentRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentResponse> {
+    return this.rpc.unary(QueryDeploymentDesc, QueryDeploymentRequest.fromPartial(request), metadata);
   }
 
-  group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
-    const data = QueryGroupRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Group", data);
-    return promise.then(data => QueryGroupResponse.decode(new _m0.Reader(data)));
+  group(request: DeepPartial<QueryGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupResponse> {
+    return this.rpc.unary(QueryGroupDesc, QueryGroupRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
-      return queryService.deployments(request);
-    },
-
-    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
-      return queryService.deployment(request);
-    },
-
-    group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
-      return queryService.group(request);
-    }
-
-  };
-};

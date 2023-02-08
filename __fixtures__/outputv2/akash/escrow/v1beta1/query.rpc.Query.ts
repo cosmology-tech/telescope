@@ -1,8 +1,8 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -12,14 +12,14 @@ export interface Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Accounts queries all accounts
    */
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
+  Accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse>;
 
   /**
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Payments queries all payments
    */
-  payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse>;
+  Payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -30,30 +30,12 @@ export class QueryClientImpl implements Query {
     this.payments = this.payments.bind(this);
   }
 
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
-    const data = QueryAccountsRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Accounts", data);
-    return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
+  accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse> {
+    return this.rpc.unary(QueryAccountsDesc, QueryAccountsRequest.fromPartial(request), metadata);
   }
 
-  payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
-    const data = QueryPaymentsRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Payments", data);
-    return promise.then(data => QueryPaymentsResponse.decode(new _m0.Reader(data)));
+  payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse> {
+    return this.rpc.unary(QueryPaymentsDesc, QueryPaymentsRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
-      return queryService.accounts(request);
-    },
-
-    payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
-      return queryService.payments(request);
-    }
-
-  };
-};

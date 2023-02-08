@@ -1,15 +1,16 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
 
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse>;
+  SignProviderAttributes(request: DeepPartial<MsgSignProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgSignProviderAttributesResponse>;
 
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse>;
+  DeleteProviderAttributes(request: DeepPartial<MsgDeleteProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderAttributesResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -20,16 +21,12 @@ export class MsgClientImpl implements Msg {
     this.deleteProviderAttributes = this.deleteProviderAttributes.bind(this);
   }
 
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse> {
-    const data = MsgSignProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta1.Msg", "SignProviderAttributes", data);
-    return promise.then(data => MsgSignProviderAttributesResponse.decode(new _m0.Reader(data)));
+  signProviderAttributes(request: DeepPartial<MsgSignProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgSignProviderAttributesResponse> {
+    return this.rpc.unary(MsgSignProviderAttributes, MsgSignProviderAttributes.fromPartial(request), metadata);
   }
 
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse> {
-    const data = MsgDeleteProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta1.Msg", "DeleteProviderAttributes", data);
-    return promise.then(data => MsgDeleteProviderAttributesResponse.decode(new _m0.Reader(data)));
+  deleteProviderAttributes(request: DeepPartial<MsgDeleteProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderAttributesResponse> {
+    return this.rpc.unary(MsgDeleteProviderAttributes, MsgDeleteProviderAttributes.fromPartial(request), metadata);
   }
 
 }

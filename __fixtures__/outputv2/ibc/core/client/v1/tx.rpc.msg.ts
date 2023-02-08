@@ -1,21 +1,22 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../../helpers";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
 
 /** Msg defines the ibc/client Msg service. */
 export interface Msg {
   /** CreateClient defines a rpc handler method for MsgCreateClient. */
-  createClient(request: MsgCreateClient): Promise<MsgCreateClientResponse>;
+  CreateClient(request: DeepPartial<MsgCreateClient>, metadata?: grpc.Metadata): Promise<MsgCreateClientResponse>;
 
   /** UpdateClient defines a rpc handler method for MsgUpdateClient. */
-  updateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse>;
+  UpdateClient(request: DeepPartial<MsgUpdateClient>, metadata?: grpc.Metadata): Promise<MsgUpdateClientResponse>;
 
   /** UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
-  upgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse>;
+  UpgradeClient(request: DeepPartial<MsgUpgradeClient>, metadata?: grpc.Metadata): Promise<MsgUpgradeClientResponse>;
 
   /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
-  submitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse>;
+  SubmitMisbehaviour(request: DeepPartial<MsgSubmitMisbehaviour>, metadata?: grpc.Metadata): Promise<MsgSubmitMisbehaviourResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -28,28 +29,20 @@ export class MsgClientImpl implements Msg {
     this.submitMisbehaviour = this.submitMisbehaviour.bind(this);
   }
 
-  createClient(request: MsgCreateClient): Promise<MsgCreateClientResponse> {
-    const data = MsgCreateClient.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Msg", "CreateClient", data);
-    return promise.then(data => MsgCreateClientResponse.decode(new _m0.Reader(data)));
+  createClient(request: DeepPartial<MsgCreateClient>, metadata?: grpc.Metadata): Promise<MsgCreateClientResponse> {
+    return this.rpc.unary(MsgCreateClient, MsgCreateClient.fromPartial(request), metadata);
   }
 
-  updateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse> {
-    const data = MsgUpdateClient.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Msg", "UpdateClient", data);
-    return promise.then(data => MsgUpdateClientResponse.decode(new _m0.Reader(data)));
+  updateClient(request: DeepPartial<MsgUpdateClient>, metadata?: grpc.Metadata): Promise<MsgUpdateClientResponse> {
+    return this.rpc.unary(MsgUpdateClient, MsgUpdateClient.fromPartial(request), metadata);
   }
 
-  upgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse> {
-    const data = MsgUpgradeClient.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Msg", "UpgradeClient", data);
-    return promise.then(data => MsgUpgradeClientResponse.decode(new _m0.Reader(data)));
+  upgradeClient(request: DeepPartial<MsgUpgradeClient>, metadata?: grpc.Metadata): Promise<MsgUpgradeClientResponse> {
+    return this.rpc.unary(MsgUpgradeClient, MsgUpgradeClient.fromPartial(request), metadata);
   }
 
-  submitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse> {
-    const data = MsgSubmitMisbehaviour.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.client.v1.Msg", "SubmitMisbehaviour", data);
-    return promise.then(data => MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data)));
+  submitMisbehaviour(request: DeepPartial<MsgSubmitMisbehaviour>, metadata?: grpc.Metadata): Promise<MsgSubmitMisbehaviourResponse> {
+    return this.rpc.unary(MsgSubmitMisbehaviour, MsgSubmitMisbehaviour.fromPartial(request), metadata);
   }
 
 }

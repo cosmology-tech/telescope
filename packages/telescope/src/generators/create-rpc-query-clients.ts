@@ -6,7 +6,11 @@ import {
     createRpcClientInterface,
     createRpcQueryHookInterfaces,
     createRpcQueryHookClientMap,
-    createRpcQueryHooks
+    createRpcQueryHooks,
+    // grpc-gateway:
+    createGRPCGatewayQueryClass,
+    createGrpcWebQueryClass,
+    createGrpcWebQueryInterface
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -65,38 +69,59 @@ export const plugin = (
 
         const asts = [];
 
-        allowedRpcServices.forEach(svcKey => {
-            if (proto[svcKey]) {
-
-                const svc: ProtoService = proto[svcKey];
-
-                asts.push(createRpcClientInterface(ctx.generic, svc));
-                asts.push(createRpcClientClass(ctx.generic, svc));
-                if (c.proto.pluginValue('rpcClients.extensions')) {
-                    asts.push(createRpcQueryExtension(ctx.generic, svc));
-                }
-
-                // see if current file has been reactQuery enabled and included
-                const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
-                    c.ref,
-                    c.proto.pluginValue('reactQuery.include')
-                )
-
-                // react query
-                // generate react query parts if included.
-                // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
-                // export interface UseAuditorAttributesQuery<TData> ...
-                // const _queryClients: WeakMap ...
-                // const getQueryService = ...
-                // export const createRpcQueryHooks = ...
-                // TODO use the imports and make separate files
-                if (includeReactQueryHooks) {
-                    [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
-                    [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
-                    asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
-                }
-            }
-        });
+        switch (c.proto.pluginValue('rpcClients.type')) {
+            case 'grpc-gateway':
+                allowedRpcServices.forEach(svcKey => {
+                    if (proto[svcKey]){
+                        const svc: ProtoService = proto[svcKey];
+                        asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
+                    }
+                })
+            break;
+            case 'grpc-web':
+                allowedRpcServices.forEach(svcKey => {
+                    if (proto[svcKey]){
+                        const svc: ProtoService = proto[svcKey];
+                        asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
+                        asts.push(createGrpcWebQueryClass(ctx.generic, svc));
+                    }
+                })
+            break;
+            case 'tendermint':
+                default:
+                    allowedRpcServices.forEach(svcKey => {
+                        if (proto[svcKey]) {
+            
+                            const svc: ProtoService = proto[svcKey];
+            
+                            asts.push(createRpcClientInterface(ctx.generic, svc));
+                            asts.push(createRpcClientClass(ctx.generic, svc));
+                            if (c.proto.pluginValue('rpcClients.extensions')) {
+                                asts.push(createRpcQueryExtension(ctx.generic, svc));
+                            }
+                            
+                            // see if current file has been reactQuery enabled and included
+                            const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
+                                c.ref,
+                                c.proto.pluginValue('reactQuery.include')
+                            )
+            
+                            // react query
+                            // generate react query parts if included.
+                            // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+                            // export interface UseAuditorAttributesQuery<TData> ...
+                            // const _queryClients: WeakMap ...
+                            // const getQueryService = ...
+                            // export const createRpcQueryHooks = ...
+                            // TODO use the imports and make separate files
+                            if (includeReactQueryHooks) {
+                                [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+                                [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                                asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+                            }
+                        }
+                    });
+        }
 
         if (!asts.length) {
             return;

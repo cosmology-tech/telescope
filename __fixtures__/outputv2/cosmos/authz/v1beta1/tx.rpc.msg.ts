@@ -1,7 +1,8 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 
 /** Msg defines the authz Msg service. */
@@ -12,20 +13,20 @@ export interface Msg {
    * for the given (granter, grantee, Authorization) triple, then the grant
    * will be overwritten.
    */
-  grant(request: MsgGrant): Promise<MsgGrantResponse>;
+  Grant(request: DeepPartial<MsgGrant>, metadata?: grpc.Metadata): Promise<MsgGrantResponse>;
 
   /**
    * Exec attempts to execute the provided messages using
    * authorizations granted to the grantee. Each message should have only
    * one signer corresponding to the granter of the authorization.
    */
-  exec(request: MsgExec): Promise<MsgExecResponse>;
+  Exec(request: DeepPartial<MsgExec>, metadata?: grpc.Metadata): Promise<MsgExecResponse>;
 
   /**
    * Revoke revokes any authorization corresponding to the provided method name on the
    * granter's account that has been granted to the grantee.
    */
-  revoke(request: MsgRevoke): Promise<MsgRevokeResponse>;
+  Revoke(request: DeepPartial<MsgRevoke>, metadata?: grpc.Metadata): Promise<MsgRevokeResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -37,22 +38,16 @@ export class MsgClientImpl implements Msg {
     this.revoke = this.revoke.bind(this);
   }
 
-  grant(request: MsgGrant): Promise<MsgGrantResponse> {
-    const data = MsgGrant.encode(request).finish();
-    const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Grant", data);
-    return promise.then(data => MsgGrantResponse.decode(new _m0.Reader(data)));
+  grant(request: DeepPartial<MsgGrant>, metadata?: grpc.Metadata): Promise<MsgGrantResponse> {
+    return this.rpc.unary(MsgGrant, MsgGrant.fromPartial(request), metadata);
   }
 
-  exec(request: MsgExec): Promise<MsgExecResponse> {
-    const data = MsgExec.encode(request).finish();
-    const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Exec", data);
-    return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
+  exec(request: DeepPartial<MsgExec>, metadata?: grpc.Metadata): Promise<MsgExecResponse> {
+    return this.rpc.unary(MsgExec, MsgExec.fromPartial(request), metadata);
   }
 
-  revoke(request: MsgRevoke): Promise<MsgRevokeResponse> {
-    const data = MsgRevoke.encode(request).finish();
-    const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Revoke", data);
-    return promise.then(data => MsgRevokeResponse.decode(new _m0.Reader(data)));
+  revoke(request: DeepPartial<MsgRevoke>, metadata?: grpc.Metadata): Promise<MsgRevokeResponse> {
+    return this.rpc.unary(MsgRevoke, MsgRevoke.fromPartial(request), metadata);
   }
 
 }

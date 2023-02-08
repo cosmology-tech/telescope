@@ -1,24 +1,25 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
-import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
 
 /** Msg defines the Msg service. */
 export interface Msg {
   /** LockTokens lock tokens */
-  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse>;
+  LockTokens(request: DeepPartial<MsgLockTokens>, metadata?: grpc.Metadata): Promise<MsgLockTokensResponse>;
 
   /** BeginUnlockingAll begin unlocking all tokens */
-  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse>;
+  BeginUnlockingAll(request: DeepPartial<MsgBeginUnlockingAll>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingAllResponse>;
 
   /** MsgBeginUnlocking begins unlocking tokens by lock ID */
-  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse>;
+  BeginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse>;
 
   /** MsgEditLockup edits the existing lockups by lock ID */
-  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse>;
-  forceUnlock(request: MsgForceUnlock): Promise<MsgForceUnlockResponse>;
+  ExtendLockup(request: DeepPartial<MsgExtendLockup>, metadata?: grpc.Metadata): Promise<MsgExtendLockupResponse>;
+  ForceUnlock(request: DeepPartial<MsgForceUnlock>, metadata?: grpc.Metadata): Promise<MsgForceUnlockResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -32,34 +33,24 @@ export class MsgClientImpl implements Msg {
     this.forceUnlock = this.forceUnlock.bind(this);
   }
 
-  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse> {
-    const data = MsgLockTokens.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Msg", "LockTokens", data);
-    return promise.then(data => MsgLockTokensResponse.decode(new _m0.Reader(data)));
+  lockTokens(request: DeepPartial<MsgLockTokens>, metadata?: grpc.Metadata): Promise<MsgLockTokensResponse> {
+    return this.rpc.unary(MsgLockTokens, MsgLockTokens.fromPartial(request), metadata);
   }
 
-  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse> {
-    const data = MsgBeginUnlockingAll.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Msg", "BeginUnlockingAll", data);
-    return promise.then(data => MsgBeginUnlockingAllResponse.decode(new _m0.Reader(data)));
+  beginUnlockingAll(request: DeepPartial<MsgBeginUnlockingAll>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingAllResponse> {
+    return this.rpc.unary(MsgBeginUnlockingAll, MsgBeginUnlockingAll.fromPartial(request), metadata);
   }
 
-  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse> {
-    const data = MsgBeginUnlocking.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Msg", "BeginUnlocking", data);
-    return promise.then(data => MsgBeginUnlockingResponse.decode(new _m0.Reader(data)));
+  beginUnlocking(request: DeepPartial<MsgBeginUnlocking>, metadata?: grpc.Metadata): Promise<MsgBeginUnlockingResponse> {
+    return this.rpc.unary(MsgBeginUnlocking, MsgBeginUnlocking.fromPartial(request), metadata);
   }
 
-  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse> {
-    const data = MsgExtendLockup.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Msg", "ExtendLockup", data);
-    return promise.then(data => MsgExtendLockupResponse.decode(new _m0.Reader(data)));
+  extendLockup(request: DeepPartial<MsgExtendLockup>, metadata?: grpc.Metadata): Promise<MsgExtendLockupResponse> {
+    return this.rpc.unary(MsgExtendLockup, MsgExtendLockup.fromPartial(request), metadata);
   }
 
-  forceUnlock(request: MsgForceUnlock): Promise<MsgForceUnlockResponse> {
-    const data = MsgForceUnlock.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Msg", "ForceUnlock", data);
-    return promise.then(data => MsgForceUnlockResponse.decode(new _m0.Reader(data)));
+  forceUnlock(request: DeepPartial<MsgForceUnlock>, metadata?: grpc.Metadata): Promise<MsgForceUnlockResponse> {
+    return this.rpc.unary(MsgForceUnlock, MsgForceUnlock.fromPartial(request), metadata);
   }
 
 }

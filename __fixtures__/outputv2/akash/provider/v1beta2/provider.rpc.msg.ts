@@ -1,18 +1,19 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse>;
+  CreateProvider(request: DeepPartial<MsgCreateProvider>, metadata?: grpc.Metadata): Promise<MsgCreateProviderResponse>;
 
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse>;
+  UpdateProvider(request: DeepPartial<MsgUpdateProvider>, metadata?: grpc.Metadata): Promise<MsgUpdateProviderResponse>;
 
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse>;
+  DeleteProvider(request: DeepPartial<MsgDeleteProvider>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -24,22 +25,16 @@ export class MsgClientImpl implements Msg {
     this.deleteProvider = this.deleteProvider.bind(this);
   }
 
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse> {
-    const data = MsgCreateProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta2.Msg", "CreateProvider", data);
-    return promise.then(data => MsgCreateProviderResponse.decode(new _m0.Reader(data)));
+  createProvider(request: DeepPartial<MsgCreateProvider>, metadata?: grpc.Metadata): Promise<MsgCreateProviderResponse> {
+    return this.rpc.unary(MsgCreateProvider, MsgCreateProvider.fromPartial(request), metadata);
   }
 
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse> {
-    const data = MsgUpdateProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta2.Msg", "UpdateProvider", data);
-    return promise.then(data => MsgUpdateProviderResponse.decode(new _m0.Reader(data)));
+  updateProvider(request: DeepPartial<MsgUpdateProvider>, metadata?: grpc.Metadata): Promise<MsgUpdateProviderResponse> {
+    return this.rpc.unary(MsgUpdateProvider, MsgUpdateProvider.fromPartial(request), metadata);
   }
 
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse> {
-    const data = MsgDeleteProvider.encode(request).finish();
-    const promise = this.rpc.request("akash.provider.v1beta2.Msg", "DeleteProvider", data);
-    return promise.then(data => MsgDeleteProviderResponse.decode(new _m0.Reader(data)));
+  deleteProvider(request: DeepPartial<MsgDeleteProvider>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderResponse> {
+    return this.rpc.unary(MsgDeleteProvider, MsgDeleteProvider.fromPartial(request), metadata);
   }
 
 }

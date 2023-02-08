@@ -2,25 +2,26 @@ import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 
 /** Msg defines the market Msg service */
 export interface Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */
-  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse>;
+  CreateBid(request: DeepPartial<MsgCreateBid>, metadata?: grpc.Metadata): Promise<MsgCreateBidResponse>;
 
   /** CloseBid defines a method to close a bid given proper inputs. */
-  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse>;
+  CloseBid(request: DeepPartial<MsgCloseBid>, metadata?: grpc.Metadata): Promise<MsgCloseBidResponse>;
 
   /** WithdrawLease withdraws accrued funds from the lease payment */
-  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse>;
+  WithdrawLease(request: DeepPartial<MsgWithdrawLease>, metadata?: grpc.Metadata): Promise<MsgWithdrawLeaseResponse>;
 
   /** CreateLease creates a new lease */
-  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse>;
+  CreateLease(request: DeepPartial<MsgCreateLease>, metadata?: grpc.Metadata): Promise<MsgCreateLeaseResponse>;
 
   /** CloseLease defines a method to close an order given proper inputs. */
-  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse>;
+  CloseLease(request: DeepPartial<MsgCloseLease>, metadata?: grpc.Metadata): Promise<MsgCloseLeaseResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -34,34 +35,24 @@ export class MsgClientImpl implements Msg {
     this.closeLease = this.closeLease.bind(this);
   }
 
-  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse> {
-    const data = MsgCreateBid.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateBid", data);
-    return promise.then(data => MsgCreateBidResponse.decode(new _m0.Reader(data)));
+  createBid(request: DeepPartial<MsgCreateBid>, metadata?: grpc.Metadata): Promise<MsgCreateBidResponse> {
+    return this.rpc.unary(MsgCreateBid, MsgCreateBid.fromPartial(request), metadata);
   }
 
-  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse> {
-    const data = MsgCloseBid.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseBid", data);
-    return promise.then(data => MsgCloseBidResponse.decode(new _m0.Reader(data)));
+  closeBid(request: DeepPartial<MsgCloseBid>, metadata?: grpc.Metadata): Promise<MsgCloseBidResponse> {
+    return this.rpc.unary(MsgCloseBid, MsgCloseBid.fromPartial(request), metadata);
   }
 
-  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse> {
-    const data = MsgWithdrawLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "WithdrawLease", data);
-    return promise.then(data => MsgWithdrawLeaseResponse.decode(new _m0.Reader(data)));
+  withdrawLease(request: DeepPartial<MsgWithdrawLease>, metadata?: grpc.Metadata): Promise<MsgWithdrawLeaseResponse> {
+    return this.rpc.unary(MsgWithdrawLease, MsgWithdrawLease.fromPartial(request), metadata);
   }
 
-  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse> {
-    const data = MsgCreateLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateLease", data);
-    return promise.then(data => MsgCreateLeaseResponse.decode(new _m0.Reader(data)));
+  createLease(request: DeepPartial<MsgCreateLease>, metadata?: grpc.Metadata): Promise<MsgCreateLeaseResponse> {
+    return this.rpc.unary(MsgCreateLease, MsgCreateLease.fromPartial(request), metadata);
   }
 
-  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse> {
-    const data = MsgCloseLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseLease", data);
-    return promise.then(data => MsgCloseLeaseResponse.decode(new _m0.Reader(data)));
+  closeLease(request: DeepPartial<MsgCloseLease>, metadata?: grpc.Metadata): Promise<MsgCloseLeaseResponse> {
+    return this.rpc.unary(MsgCloseLease, MsgCloseLease.fromPartial(request), metadata);
   }
 
 }

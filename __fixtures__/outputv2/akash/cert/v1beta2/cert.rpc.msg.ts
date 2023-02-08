@@ -1,14 +1,15 @@
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
 
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateCertificate defines a method to create new certificate given proper inputs. */
-  createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponse>;
+  CreateCertificate(request: DeepPartial<MsgCreateCertificate>, metadata?: grpc.Metadata): Promise<MsgCreateCertificateResponse>;
 
   /** RevokeCertificate defines a method to revoke the certificate */
-  revokeCertificate(request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponse>;
+  RevokeCertificate(request: DeepPartial<MsgRevokeCertificate>, metadata?: grpc.Metadata): Promise<MsgRevokeCertificateResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -19,16 +20,12 @@ export class MsgClientImpl implements Msg {
     this.revokeCertificate = this.revokeCertificate.bind(this);
   }
 
-  createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponse> {
-    const data = MsgCreateCertificate.encode(request).finish();
-    const promise = this.rpc.request("akash.cert.v1beta2.Msg", "CreateCertificate", data);
-    return promise.then(data => MsgCreateCertificateResponse.decode(new _m0.Reader(data)));
+  createCertificate(request: DeepPartial<MsgCreateCertificate>, metadata?: grpc.Metadata): Promise<MsgCreateCertificateResponse> {
+    return this.rpc.unary(MsgCreateCertificate, MsgCreateCertificate.fromPartial(request), metadata);
   }
 
-  revokeCertificate(request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponse> {
-    const data = MsgRevokeCertificate.encode(request).finish();
-    const promise = this.rpc.request("akash.cert.v1beta2.Msg", "RevokeCertificate", data);
-    return promise.then(data => MsgRevokeCertificateResponse.decode(new _m0.Reader(data)));
+  revokeCertificate(request: DeepPartial<MsgRevokeCertificate>, metadata?: grpc.Metadata): Promise<MsgRevokeCertificateResponse> {
+    return this.rpc.unary(MsgRevokeCertificate, MsgRevokeCertificate.fromPartial(request), metadata);
   }
 
 }

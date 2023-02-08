@@ -1,11 +1,12 @@
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** VerifyInvariant defines a method to verify a particular invariance. */
-  verifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse>;
+  VerifyInvariant(request: DeepPartial<MsgVerifyInvariant>, metadata?: grpc.Metadata): Promise<MsgVerifyInvariantResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -15,10 +16,8 @@ export class MsgClientImpl implements Msg {
     this.verifyInvariant = this.verifyInvariant.bind(this);
   }
 
-  verifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse> {
-    const data = MsgVerifyInvariant.encode(request).finish();
-    const promise = this.rpc.request("cosmos.crisis.v1beta1.Msg", "VerifyInvariant", data);
-    return promise.then(data => MsgVerifyInvariantResponse.decode(new _m0.Reader(data)));
+  verifyInvariant(request: DeepPartial<MsgVerifyInvariant>, metadata?: grpc.Metadata): Promise<MsgVerifyInvariantResponse> {
+    return this.rpc.unary(MsgVerifyInvariant, MsgVerifyInvariant.fromPartial(request), metadata);
   }
 
 }

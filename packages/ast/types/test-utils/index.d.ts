@@ -100,6 +100,7 @@ export declare const defaultTelescopeOptions: {
         }[];
     };
     rpcClients: {
+        type?: "tendermint" | "grpc-web" | "grpc-gateway";
         enabled: boolean;
         inline?: boolean;
         extensions?: boolean;

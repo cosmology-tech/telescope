@@ -1,52 +1,53 @@
 import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, ThresholdDecisionPolicy, ThresholdDecisionPolicySDKType, PercentageDecisionPolicy, PercentageDecisionPolicySDKType } from "./types";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateGroup, MsgCreateGroupSDKType, MsgCreateGroupResponse, MsgCreateGroupResponseSDKType, MsgUpdateGroupMembers, MsgUpdateGroupMembersSDKType, MsgUpdateGroupMembersResponse, MsgUpdateGroupMembersResponseSDKType, MsgUpdateGroupAdmin, MsgUpdateGroupAdminSDKType, MsgUpdateGroupAdminResponse, MsgUpdateGroupAdminResponseSDKType, MsgUpdateGroupMetadata, MsgUpdateGroupMetadataSDKType, MsgUpdateGroupMetadataResponse, MsgUpdateGroupMetadataResponseSDKType, MsgCreateGroupPolicy, MsgCreateGroupPolicySDKType, MsgCreateGroupPolicyResponse, MsgCreateGroupPolicyResponseSDKType, MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicySDKType, MsgCreateGroupWithPolicyResponse, MsgCreateGroupWithPolicyResponseSDKType, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdminSDKType, MsgUpdateGroupPolicyAdminResponse, MsgUpdateGroupPolicyAdminResponseSDKType, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicySDKType, MsgUpdateGroupPolicyDecisionPolicyResponse, MsgUpdateGroupPolicyDecisionPolicyResponseSDKType, MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadataSDKType, MsgUpdateGroupPolicyMetadataResponse, MsgUpdateGroupPolicyMetadataResponseSDKType, MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgWithdrawProposal, MsgWithdrawProposalSDKType, MsgWithdrawProposalResponse, MsgWithdrawProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgLeaveGroup, MsgLeaveGroupSDKType, MsgLeaveGroupResponse, MsgLeaveGroupResponseSDKType } from "./tx";
 
 /** Msg is the cosmos.group.v1 Msg service. */
 export interface Msg {
   /** CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
-  createGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse>;
+  CreateGroup(request: DeepPartial<MsgCreateGroup>, metadata?: grpc.Metadata): Promise<MsgCreateGroupResponse>;
 
   /** UpdateGroupMembers updates the group members with given group id and admin address. */
-  updateGroupMembers(request: MsgUpdateGroupMembers): Promise<MsgUpdateGroupMembersResponse>;
+  UpdateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupMembersResponse>;
 
   /** UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
-  updateGroupAdmin(request: MsgUpdateGroupAdmin): Promise<MsgUpdateGroupAdminResponse>;
+  UpdateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupAdminResponse>;
 
   /** UpdateGroupMetadata updates the group metadata with given group id and admin address. */
-  updateGroupMetadata(request: MsgUpdateGroupMetadata): Promise<MsgUpdateGroupMetadataResponse>;
+  UpdateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupMetadataResponse>;
 
   /** CreateGroupPolicy creates a new group policy using given DecisionPolicy. */
-  createGroupPolicy(request: MsgCreateGroupPolicy): Promise<MsgCreateGroupPolicyResponse>;
+  CreateGroupPolicy(request: DeepPartial<MsgCreateGroupPolicy>, metadata?: grpc.Metadata): Promise<MsgCreateGroupPolicyResponse>;
 
   /** CreateGroupWithPolicy creates a new group with policy. */
-  createGroupWithPolicy(request: MsgCreateGroupWithPolicy): Promise<MsgCreateGroupWithPolicyResponse>;
+  CreateGroupWithPolicy(request: DeepPartial<MsgCreateGroupWithPolicy>, metadata?: grpc.Metadata): Promise<MsgCreateGroupWithPolicyResponse>;
 
   /** UpdateGroupPolicyAdmin updates a group policy admin. */
-  updateGroupPolicyAdmin(request: MsgUpdateGroupPolicyAdmin): Promise<MsgUpdateGroupPolicyAdminResponse>;
+  UpdateGroupPolicyAdmin(request: DeepPartial<MsgUpdateGroupPolicyAdmin>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyAdminResponse>;
 
   /** UpdateGroupPolicyDecisionPolicy allows a group policy's decision policy to be updated. */
-  updateGroupPolicyDecisionPolicy(request: MsgUpdateGroupPolicyDecisionPolicy): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse>;
+  UpdateGroupPolicyDecisionPolicy(request: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse>;
 
   /** UpdateGroupPolicyMetadata updates a group policy metadata. */
-  updateGroupPolicyMetadata(request: MsgUpdateGroupPolicyMetadata): Promise<MsgUpdateGroupPolicyMetadataResponse>;
+  UpdateGroupPolicyMetadata(request: DeepPartial<MsgUpdateGroupPolicyMetadata>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyMetadataResponse>;
 
   /** SubmitProposal submits a new proposal. */
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>, metadata?: grpc.Metadata): Promise<MsgSubmitProposalResponse>;
 
   /** WithdrawProposal aborts a proposal. */
-  withdrawProposal(request: MsgWithdrawProposal): Promise<MsgWithdrawProposalResponse>;
+  WithdrawProposal(request: DeepPartial<MsgWithdrawProposal>, metadata?: grpc.Metadata): Promise<MsgWithdrawProposalResponse>;
 
   /** Vote allows a voter to vote on a proposal. */
-  vote(request: MsgVote): Promise<MsgVoteResponse>;
+  Vote(request: DeepPartial<MsgVote>, metadata?: grpc.Metadata): Promise<MsgVoteResponse>;
 
   /** Exec executes a proposal. */
-  exec(request: MsgExec): Promise<MsgExecResponse>;
+  Exec(request: DeepPartial<MsgExec>, metadata?: grpc.Metadata): Promise<MsgExecResponse>;
 
   /** LeaveGroup allows a group member to leave the group. */
-  leaveGroup(request: MsgLeaveGroup): Promise<MsgLeaveGroupResponse>;
+  LeaveGroup(request: DeepPartial<MsgLeaveGroup>, metadata?: grpc.Metadata): Promise<MsgLeaveGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -69,88 +70,60 @@ export class MsgClientImpl implements Msg {
     this.leaveGroup = this.leaveGroup.bind(this);
   }
 
-  createGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse> {
-    const data = MsgCreateGroup.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "CreateGroup", data);
-    return promise.then(data => MsgCreateGroupResponse.decode(new _m0.Reader(data)));
+  createGroup(request: DeepPartial<MsgCreateGroup>, metadata?: grpc.Metadata): Promise<MsgCreateGroupResponse> {
+    return this.rpc.unary(MsgCreateGroup, MsgCreateGroup.fromPartial(request), metadata);
   }
 
-  updateGroupMembers(request: MsgUpdateGroupMembers): Promise<MsgUpdateGroupMembersResponse> {
-    const data = MsgUpdateGroupMembers.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupMembers", data);
-    return promise.then(data => MsgUpdateGroupMembersResponse.decode(new _m0.Reader(data)));
+  updateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupMembersResponse> {
+    return this.rpc.unary(MsgUpdateGroupMembers, MsgUpdateGroupMembers.fromPartial(request), metadata);
   }
 
-  updateGroupAdmin(request: MsgUpdateGroupAdmin): Promise<MsgUpdateGroupAdminResponse> {
-    const data = MsgUpdateGroupAdmin.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupAdmin", data);
-    return promise.then(data => MsgUpdateGroupAdminResponse.decode(new _m0.Reader(data)));
+  updateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupAdminResponse> {
+    return this.rpc.unary(MsgUpdateGroupAdmin, MsgUpdateGroupAdmin.fromPartial(request), metadata);
   }
 
-  updateGroupMetadata(request: MsgUpdateGroupMetadata): Promise<MsgUpdateGroupMetadataResponse> {
-    const data = MsgUpdateGroupMetadata.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupMetadata", data);
-    return promise.then(data => MsgUpdateGroupMetadataResponse.decode(new _m0.Reader(data)));
+  updateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupMetadataResponse> {
+    return this.rpc.unary(MsgUpdateGroupMetadata, MsgUpdateGroupMetadata.fromPartial(request), metadata);
   }
 
-  createGroupPolicy(request: MsgCreateGroupPolicy): Promise<MsgCreateGroupPolicyResponse> {
-    const data = MsgCreateGroupPolicy.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "CreateGroupPolicy", data);
-    return promise.then(data => MsgCreateGroupPolicyResponse.decode(new _m0.Reader(data)));
+  createGroupPolicy(request: DeepPartial<MsgCreateGroupPolicy>, metadata?: grpc.Metadata): Promise<MsgCreateGroupPolicyResponse> {
+    return this.rpc.unary(MsgCreateGroupPolicy, MsgCreateGroupPolicy.fromPartial(request), metadata);
   }
 
-  createGroupWithPolicy(request: MsgCreateGroupWithPolicy): Promise<MsgCreateGroupWithPolicyResponse> {
-    const data = MsgCreateGroupWithPolicy.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "CreateGroupWithPolicy", data);
-    return promise.then(data => MsgCreateGroupWithPolicyResponse.decode(new _m0.Reader(data)));
+  createGroupWithPolicy(request: DeepPartial<MsgCreateGroupWithPolicy>, metadata?: grpc.Metadata): Promise<MsgCreateGroupWithPolicyResponse> {
+    return this.rpc.unary(MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicy.fromPartial(request), metadata);
   }
 
-  updateGroupPolicyAdmin(request: MsgUpdateGroupPolicyAdmin): Promise<MsgUpdateGroupPolicyAdminResponse> {
-    const data = MsgUpdateGroupPolicyAdmin.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupPolicyAdmin", data);
-    return promise.then(data => MsgUpdateGroupPolicyAdminResponse.decode(new _m0.Reader(data)));
+  updateGroupPolicyAdmin(request: DeepPartial<MsgUpdateGroupPolicyAdmin>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyAdminResponse> {
+    return this.rpc.unary(MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdmin.fromPartial(request), metadata);
   }
 
-  updateGroupPolicyDecisionPolicy(request: MsgUpdateGroupPolicyDecisionPolicy): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse> {
-    const data = MsgUpdateGroupPolicyDecisionPolicy.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupPolicyDecisionPolicy", data);
-    return promise.then(data => MsgUpdateGroupPolicyDecisionPolicyResponse.decode(new _m0.Reader(data)));
+  updateGroupPolicyDecisionPolicy(request: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse> {
+    return this.rpc.unary(MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicy.fromPartial(request), metadata);
   }
 
-  updateGroupPolicyMetadata(request: MsgUpdateGroupPolicyMetadata): Promise<MsgUpdateGroupPolicyMetadataResponse> {
-    const data = MsgUpdateGroupPolicyMetadata.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "UpdateGroupPolicyMetadata", data);
-    return promise.then(data => MsgUpdateGroupPolicyMetadataResponse.decode(new _m0.Reader(data)));
+  updateGroupPolicyMetadata(request: DeepPartial<MsgUpdateGroupPolicyMetadata>, metadata?: grpc.Metadata): Promise<MsgUpdateGroupPolicyMetadataResponse> {
+    return this.rpc.unary(MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadata.fromPartial(request), metadata);
   }
 
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse> {
-    const data = MsgSubmitProposal.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "SubmitProposal", data);
-    return promise.then(data => MsgSubmitProposalResponse.decode(new _m0.Reader(data)));
+  submitProposal(request: DeepPartial<MsgSubmitProposal>, metadata?: grpc.Metadata): Promise<MsgSubmitProposalResponse> {
+    return this.rpc.unary(MsgSubmitProposal, MsgSubmitProposal.fromPartial(request), metadata);
   }
 
-  withdrawProposal(request: MsgWithdrawProposal): Promise<MsgWithdrawProposalResponse> {
-    const data = MsgWithdrawProposal.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "WithdrawProposal", data);
-    return promise.then(data => MsgWithdrawProposalResponse.decode(new _m0.Reader(data)));
+  withdrawProposal(request: DeepPartial<MsgWithdrawProposal>, metadata?: grpc.Metadata): Promise<MsgWithdrawProposalResponse> {
+    return this.rpc.unary(MsgWithdrawProposal, MsgWithdrawProposal.fromPartial(request), metadata);
   }
 
-  vote(request: MsgVote): Promise<MsgVoteResponse> {
-    const data = MsgVote.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "Vote", data);
-    return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
+  vote(request: DeepPartial<MsgVote>, metadata?: grpc.Metadata): Promise<MsgVoteResponse> {
+    return this.rpc.unary(MsgVote, MsgVote.fromPartial(request), metadata);
   }
 
-  exec(request: MsgExec): Promise<MsgExecResponse> {
-    const data = MsgExec.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "Exec", data);
-    return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
+  exec(request: DeepPartial<MsgExec>, metadata?: grpc.Metadata): Promise<MsgExecResponse> {
+    return this.rpc.unary(MsgExec, MsgExec.fromPartial(request), metadata);
   }
 
-  leaveGroup(request: MsgLeaveGroup): Promise<MsgLeaveGroupResponse> {
-    const data = MsgLeaveGroup.encode(request).finish();
-    const promise = this.rpc.request("cosmos.group.v1.Msg", "LeaveGroup", data);
-    return promise.then(data => MsgLeaveGroupResponse.decode(new _m0.Reader(data)));
+  leaveGroup(request: DeepPartial<MsgLeaveGroup>, metadata?: grpc.Metadata): Promise<MsgLeaveGroupResponse> {
+    return this.rpc.unary(MsgLeaveGroup, MsgLeaveGroup.fromPartial(request), metadata);
   }
 
 }

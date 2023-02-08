@@ -25,6 +25,7 @@ export const UTILS = {
     defaultRegistryTypes: '@cosmjs/stargate',
     encodeBech32Pubkey: '@cosmjs/amino',
     Exact: '__helpers__',
+    fm: {type: 'namespace', path: '__grpc-gateway__', name: 'fm'},
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromDuration: '__helpers__',
@@ -46,6 +47,7 @@ export const UTILS = {
     QueryClient: '@cosmjs/stargate',
     Registry: '@cosmjs/proto-signing',
     Rpc: '__helpers__',
+    grpc: '@improbable-eng/grpc-web',
     setPaginationParams: '__helpers__',
     SigningStargateClient: '@cosmjs/stargate',
     Tendermint34Client: '@cosmjs/tendermint-rpc',
@@ -65,6 +67,7 @@ export const UTIL_HELPERS = [
     '__helpers__',
     '__extern__',
     '__react-query__',
+    '__grpc-gateway__',
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {

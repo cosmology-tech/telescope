@@ -1,16 +1,16 @@
 import { Params, ParamsSDKType } from "./mint";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of minting parameters. */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** EpochProvisions returns the current minting epoch provisions value. */
-  epochProvisions(request?: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponse>;
+  EpochProvisions(request?: DeepPartial<QueryEpochProvisionsRequest>, metadata?: grpc.Metadata): Promise<QueryEpochProvisionsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -21,30 +21,12 @@ export class QueryClientImpl implements Query {
     this.epochProvisions = this.epochProvisions.bind(this);
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.mint.v1beta1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  epochProvisions(request: QueryEpochProvisionsRequest = {}): Promise<QueryEpochProvisionsResponse> {
-    const data = QueryEpochProvisionsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.mint.v1beta1.Query", "EpochProvisions", data);
-    return promise.then(data => QueryEpochProvisionsResponse.decode(new _m0.Reader(data)));
+  epochProvisions(request: DeepPartial<QueryEpochProvisionsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryEpochProvisionsResponse> {
+    return this.rpc.unary(QueryEpochProvisionsDesc, QueryEpochProvisionsRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    epochProvisions(request?: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponse> {
-      return queryService.epochProvisions(request);
-    }
-
-  };
-};

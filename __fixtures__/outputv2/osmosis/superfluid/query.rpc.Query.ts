@@ -4,73 +4,73 @@ import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, Super
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
-import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomRequestSDKType, QueryTotalDelegationByValidatorForDenomResponse, QueryTotalDelegationByValidatorForDenomResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType, QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistRequestSDKType, QueryUnpoolWhitelistResponse, QueryUnpoolWhitelistResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of superfluid parameters. */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /**
    * Returns superfluid asset type, whether if it's a native asset or an lp
    * share.
    */
-  assetType(request: AssetTypeRequest): Promise<AssetTypeResponse>;
+  AssetType(request: DeepPartial<AssetTypeRequest>, metadata?: grpc.Metadata): Promise<AssetTypeResponse>;
 
   /** Returns all registered superfluid assets. */
-  allAssets(request?: AllAssetsRequest): Promise<AllAssetsResponse>;
+  AllAssets(request?: DeepPartial<AllAssetsRequest>, metadata?: grpc.Metadata): Promise<AllAssetsResponse>;
 
   /** Returns the osmo equivalent multiplier used in the most recent epoch. */
-  assetMultiplier(request: AssetMultiplierRequest): Promise<AssetMultiplierResponse>;
+  AssetMultiplier(request: DeepPartial<AssetMultiplierRequest>, metadata?: grpc.Metadata): Promise<AssetMultiplierResponse>;
 
   /** Returns all superfluid intermediary accounts. */
-  allIntermediaryAccounts(request?: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponse>;
+  AllIntermediaryAccounts(request?: DeepPartial<AllIntermediaryAccountsRequest>, metadata?: grpc.Metadata): Promise<AllIntermediaryAccountsResponse>;
 
   /** Returns intermediary account connected to a superfluid staked lock by id */
-  connectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse>;
+  ConnectedIntermediaryAccount(request: DeepPartial<ConnectedIntermediaryAccountRequest>, metadata?: grpc.Metadata): Promise<ConnectedIntermediaryAccountResponse>;
 
   /** Returns the amount of delegations of specific denom for all validators */
-  totalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): Promise<QueryTotalDelegationByValidatorForDenomResponse>;
+  TotalDelegationByValidatorForDenom(request: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByValidatorForDenomResponse>;
 
   /**
    * Returns the total amount of osmo superfluidly staked.
    * Response is denominated in uosmo.
    */
-  totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponse>;
+  TotalSuperfluidDelegations(request?: DeepPartial<TotalSuperfluidDelegationsRequest>, metadata?: grpc.Metadata): Promise<TotalSuperfluidDelegationsResponse>;
 
   /**
    * Returns the coins superfluid delegated for the delegator, validator, denom
    * triplet
    */
-  superfluidDelegationAmount(request: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponse>;
+  SuperfluidDelegationAmount(request: DeepPartial<SuperfluidDelegationAmountRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationAmountResponse>;
 
   /** Returns all the delegated superfluid poistions for a specific delegator. */
-  superfluidDelegationsByDelegator(request: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse>;
+  SuperfluidDelegationsByDelegator(request: DeepPartial<SuperfluidDelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByDelegatorResponse>;
 
   /** Returns all the undelegating superfluid poistions for a specific delegator. */
-  superfluidUndelegationsByDelegator(request: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponse>;
+  SuperfluidUndelegationsByDelegator(request: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidUndelegationsByDelegatorResponse>;
 
   /**
    * Returns all the superfluid positions of a specific denom delegated to one
    * validator
    */
-  superfluidDelegationsByValidatorDenom(request: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponse>;
+  SuperfluidDelegationsByValidatorDenom(request: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByValidatorDenomResponse>;
 
   /**
    * Returns the amount of a specific denom delegated to a specific validator
    * This is labeled an estimate, because the way it calculates the amount can
    * lead rounding errors from the true delegated amount
    */
-  estimateSuperfluidDelegatedAmountByValidatorDenom(request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>;
+  EstimateSuperfluidDelegatedAmountByValidatorDenom(request: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>;
 
   /** Returns the specified delegations for a specific delegator */
-  totalDelegationByDelegator(request: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponse>;
+  TotalDelegationByDelegator(request: DeepPartial<QueryTotalDelegationByDelegatorRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByDelegatorResponse>;
 
   /** Returns a list of whitelisted pool ids to unpool. */
-  unpoolWhitelist(request?: QueryUnpoolWhitelistRequest): Promise<QueryUnpoolWhitelistResponse>;
+  UnpoolWhitelist(request?: DeepPartial<QueryUnpoolWhitelistRequest>, metadata?: grpc.Metadata): Promise<QueryUnpoolWhitelistResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -94,162 +94,66 @@ export class QueryClientImpl implements Query {
     this.unpoolWhitelist = this.unpoolWhitelist.bind(this);
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  assetType(request: AssetTypeRequest): Promise<AssetTypeResponse> {
-    const data = AssetTypeRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "AssetType", data);
-    return promise.then(data => AssetTypeResponse.decode(new _m0.Reader(data)));
+  assetType(request: DeepPartial<AssetTypeRequest>, metadata?: grpc.Metadata): Promise<AssetTypeResponse> {
+    return this.rpc.unary(AssetTypeDesc, AssetTypeRequest.fromPartial(request), metadata);
   }
 
-  allAssets(request: AllAssetsRequest = {}): Promise<AllAssetsResponse> {
-    const data = AllAssetsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "AllAssets", data);
-    return promise.then(data => AllAssetsResponse.decode(new _m0.Reader(data)));
+  allAssets(request: DeepPartial<AllAssetsRequest> = {}, metadata?: grpc.Metadata): Promise<AllAssetsResponse> {
+    return this.rpc.unary(AllAssetsDesc, AllAssetsRequest.fromPartial(request), metadata);
   }
 
-  assetMultiplier(request: AssetMultiplierRequest): Promise<AssetMultiplierResponse> {
-    const data = AssetMultiplierRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "AssetMultiplier", data);
-    return promise.then(data => AssetMultiplierResponse.decode(new _m0.Reader(data)));
+  assetMultiplier(request: DeepPartial<AssetMultiplierRequest>, metadata?: grpc.Metadata): Promise<AssetMultiplierResponse> {
+    return this.rpc.unary(AssetMultiplierDesc, AssetMultiplierRequest.fromPartial(request), metadata);
   }
 
-  allIntermediaryAccounts(request: AllIntermediaryAccountsRequest = {
+  allIntermediaryAccounts(request: DeepPartial<AllIntermediaryAccountsRequest> = {
     pagination: undefined
-  }): Promise<AllIntermediaryAccountsResponse> {
-    const data = AllIntermediaryAccountsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "AllIntermediaryAccounts", data);
-    return promise.then(data => AllIntermediaryAccountsResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<AllIntermediaryAccountsResponse> {
+    return this.rpc.unary(AllIntermediaryAccountsDesc, AllIntermediaryAccountsRequest.fromPartial(request), metadata);
   }
 
-  connectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse> {
-    const data = ConnectedIntermediaryAccountRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "ConnectedIntermediaryAccount", data);
-    return promise.then(data => ConnectedIntermediaryAccountResponse.decode(new _m0.Reader(data)));
+  connectedIntermediaryAccount(request: DeepPartial<ConnectedIntermediaryAccountRequest>, metadata?: grpc.Metadata): Promise<ConnectedIntermediaryAccountResponse> {
+    return this.rpc.unary(ConnectedIntermediaryAccountDesc, ConnectedIntermediaryAccountRequest.fromPartial(request), metadata);
   }
 
-  totalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): Promise<QueryTotalDelegationByValidatorForDenomResponse> {
-    const data = QueryTotalDelegationByValidatorForDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "TotalDelegationByValidatorForDenom", data);
-    return promise.then(data => QueryTotalDelegationByValidatorForDenomResponse.decode(new _m0.Reader(data)));
+  totalDelegationByValidatorForDenom(request: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByValidatorForDenomResponse> {
+    return this.rpc.unary(QueryTotalDelegationByValidatorForDenomDesc, QueryTotalDelegationByValidatorForDenomRequest.fromPartial(request), metadata);
   }
 
-  totalSuperfluidDelegations(request: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponse> {
-    const data = TotalSuperfluidDelegationsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "TotalSuperfluidDelegations", data);
-    return promise.then(data => TotalSuperfluidDelegationsResponse.decode(new _m0.Reader(data)));
+  totalSuperfluidDelegations(request: DeepPartial<TotalSuperfluidDelegationsRequest> = {}, metadata?: grpc.Metadata): Promise<TotalSuperfluidDelegationsResponse> {
+    return this.rpc.unary(TotalSuperfluidDelegationsDesc, TotalSuperfluidDelegationsRequest.fromPartial(request), metadata);
   }
 
-  superfluidDelegationAmount(request: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponse> {
-    const data = SuperfluidDelegationAmountRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "SuperfluidDelegationAmount", data);
-    return promise.then(data => SuperfluidDelegationAmountResponse.decode(new _m0.Reader(data)));
+  superfluidDelegationAmount(request: DeepPartial<SuperfluidDelegationAmountRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationAmountResponse> {
+    return this.rpc.unary(SuperfluidDelegationAmountDesc, SuperfluidDelegationAmountRequest.fromPartial(request), metadata);
   }
 
-  superfluidDelegationsByDelegator(request: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse> {
-    const data = SuperfluidDelegationsByDelegatorRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "SuperfluidDelegationsByDelegator", data);
-    return promise.then(data => SuperfluidDelegationsByDelegatorResponse.decode(new _m0.Reader(data)));
+  superfluidDelegationsByDelegator(request: DeepPartial<SuperfluidDelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByDelegatorResponse> {
+    return this.rpc.unary(SuperfluidDelegationsByDelegatorDesc, SuperfluidDelegationsByDelegatorRequest.fromPartial(request), metadata);
   }
 
-  superfluidUndelegationsByDelegator(request: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponse> {
-    const data = SuperfluidUndelegationsByDelegatorRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "SuperfluidUndelegationsByDelegator", data);
-    return promise.then(data => SuperfluidUndelegationsByDelegatorResponse.decode(new _m0.Reader(data)));
+  superfluidUndelegationsByDelegator(request: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidUndelegationsByDelegatorResponse> {
+    return this.rpc.unary(SuperfluidUndelegationsByDelegatorDesc, SuperfluidUndelegationsByDelegatorRequest.fromPartial(request), metadata);
   }
 
-  superfluidDelegationsByValidatorDenom(request: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponse> {
-    const data = SuperfluidDelegationsByValidatorDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "SuperfluidDelegationsByValidatorDenom", data);
-    return promise.then(data => SuperfluidDelegationsByValidatorDenomResponse.decode(new _m0.Reader(data)));
+  superfluidDelegationsByValidatorDenom(request: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByValidatorDenomResponse> {
+    return this.rpc.unary(SuperfluidDelegationsByValidatorDenomDesc, SuperfluidDelegationsByValidatorDenomRequest.fromPartial(request), metadata);
   }
 
-  estimateSuperfluidDelegatedAmountByValidatorDenom(request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
-    const data = EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "EstimateSuperfluidDelegatedAmountByValidatorDenom", data);
-    return promise.then(data => EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode(new _m0.Reader(data)));
+  estimateSuperfluidDelegatedAmountByValidatorDenom(request: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
+    return this.rpc.unary(EstimateSuperfluidDelegatedAmountByValidatorDenomDesc, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.fromPartial(request), metadata);
   }
 
-  totalDelegationByDelegator(request: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponse> {
-    const data = QueryTotalDelegationByDelegatorRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "TotalDelegationByDelegator", data);
-    return promise.then(data => QueryTotalDelegationByDelegatorResponse.decode(new _m0.Reader(data)));
+  totalDelegationByDelegator(request: DeepPartial<QueryTotalDelegationByDelegatorRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByDelegatorResponse> {
+    return this.rpc.unary(QueryTotalDelegationByDelegatorDesc, QueryTotalDelegationByDelegatorRequest.fromPartial(request), metadata);
   }
 
-  unpoolWhitelist(request: QueryUnpoolWhitelistRequest = {}): Promise<QueryUnpoolWhitelistResponse> {
-    const data = QueryUnpoolWhitelistRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Query", "UnpoolWhitelist", data);
-    return promise.then(data => QueryUnpoolWhitelistResponse.decode(new _m0.Reader(data)));
+  unpoolWhitelist(request: DeepPartial<QueryUnpoolWhitelistRequest> = {}, metadata?: grpc.Metadata): Promise<QueryUnpoolWhitelistResponse> {
+    return this.rpc.unary(QueryUnpoolWhitelistDesc, QueryUnpoolWhitelistRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    assetType(request: AssetTypeRequest): Promise<AssetTypeResponse> {
-      return queryService.assetType(request);
-    },
-
-    allAssets(request?: AllAssetsRequest): Promise<AllAssetsResponse> {
-      return queryService.allAssets(request);
-    },
-
-    assetMultiplier(request: AssetMultiplierRequest): Promise<AssetMultiplierResponse> {
-      return queryService.assetMultiplier(request);
-    },
-
-    allIntermediaryAccounts(request?: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponse> {
-      return queryService.allIntermediaryAccounts(request);
-    },
-
-    connectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse> {
-      return queryService.connectedIntermediaryAccount(request);
-    },
-
-    totalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): Promise<QueryTotalDelegationByValidatorForDenomResponse> {
-      return queryService.totalDelegationByValidatorForDenom(request);
-    },
-
-    totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponse> {
-      return queryService.totalSuperfluidDelegations(request);
-    },
-
-    superfluidDelegationAmount(request: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponse> {
-      return queryService.superfluidDelegationAmount(request);
-    },
-
-    superfluidDelegationsByDelegator(request: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse> {
-      return queryService.superfluidDelegationsByDelegator(request);
-    },
-
-    superfluidUndelegationsByDelegator(request: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponse> {
-      return queryService.superfluidUndelegationsByDelegator(request);
-    },
-
-    superfluidDelegationsByValidatorDenom(request: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponse> {
-      return queryService.superfluidDelegationsByValidatorDenom(request);
-    },
-
-    estimateSuperfluidDelegatedAmountByValidatorDenom(request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
-      return queryService.estimateSuperfluidDelegatedAmountByValidatorDenom(request);
-    },
-
-    totalDelegationByDelegator(request: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponse> {
-      return queryService.totalDelegationByDelegator(request);
-    },
-
-    unpoolWhitelist(request?: QueryUnpoolWhitelistRequest): Promise<QueryUnpoolWhitelistResponse> {
-      return queryService.unpoolWhitelist(request);
-    }
-
-  };
-};

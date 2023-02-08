@@ -3,30 +3,30 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
 import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Orders queries orders with filters */
-  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse>;
+  Orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse>;
 
   /** Order queries order details */
-  order(request: QueryOrderRequest): Promise<QueryOrderResponse>;
+  Order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse>;
 
   /** Bids queries bids with filters */
-  bids(request: QueryBidsRequest): Promise<QueryBidsResponse>;
+  Bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse>;
 
   /** Bid queries bid details */
-  bid(request: QueryBidRequest): Promise<QueryBidResponse>;
+  Bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse>;
 
   /** Leases queries leases with filters */
-  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse>;
+  Leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse>;
 
   /** Lease queries lease details */
-  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse>;
+  Lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -41,70 +41,28 @@ export class QueryClientImpl implements Query {
     this.lease = this.lease.bind(this);
   }
 
-  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse> {
-    const data = QueryOrdersRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Orders", data);
-    return promise.then(data => QueryOrdersResponse.decode(new _m0.Reader(data)));
+  orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse> {
+    return this.rpc.unary(QueryOrdersDesc, QueryOrdersRequest.fromPartial(request), metadata);
   }
 
-  order(request: QueryOrderRequest): Promise<QueryOrderResponse> {
-    const data = QueryOrderRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Order", data);
-    return promise.then(data => QueryOrderResponse.decode(new _m0.Reader(data)));
+  order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse> {
+    return this.rpc.unary(QueryOrderDesc, QueryOrderRequest.fromPartial(request), metadata);
   }
 
-  bids(request: QueryBidsRequest): Promise<QueryBidsResponse> {
-    const data = QueryBidsRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Bids", data);
-    return promise.then(data => QueryBidsResponse.decode(new _m0.Reader(data)));
+  bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse> {
+    return this.rpc.unary(QueryBidsDesc, QueryBidsRequest.fromPartial(request), metadata);
   }
 
-  bid(request: QueryBidRequest): Promise<QueryBidResponse> {
-    const data = QueryBidRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Bid", data);
-    return promise.then(data => QueryBidResponse.decode(new _m0.Reader(data)));
+  bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse> {
+    return this.rpc.unary(QueryBidDesc, QueryBidRequest.fromPartial(request), metadata);
   }
 
-  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse> {
-    const data = QueryLeasesRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Leases", data);
-    return promise.then(data => QueryLeasesResponse.decode(new _m0.Reader(data)));
+  leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse> {
+    return this.rpc.unary(QueryLeasesDesc, QueryLeasesRequest.fromPartial(request), metadata);
   }
 
-  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse> {
-    const data = QueryLeaseRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Query", "Lease", data);
-    return promise.then(data => QueryLeaseResponse.decode(new _m0.Reader(data)));
+  lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse> {
+    return this.rpc.unary(QueryLeaseDesc, QueryLeaseRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse> {
-      return queryService.orders(request);
-    },
-
-    order(request: QueryOrderRequest): Promise<QueryOrderResponse> {
-      return queryService.order(request);
-    },
-
-    bids(request: QueryBidsRequest): Promise<QueryBidsResponse> {
-      return queryService.bids(request);
-    },
-
-    bid(request: QueryBidRequest): Promise<QueryBidResponse> {
-      return queryService.bid(request);
-    },
-
-    leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse> {
-      return queryService.leases(request);
-    },
-
-    lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse> {
-      return queryService.lease(request);
-    }
-
-  };
-};

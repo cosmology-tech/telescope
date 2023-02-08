@@ -1,16 +1,17 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgJoinPool, MsgJoinPoolSDKType, MsgJoinPoolResponse, MsgJoinPoolResponseSDKType, MsgExitPool, MsgExitPoolSDKType, MsgExitPoolResponse, MsgExitPoolResponseSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountInResponse, MsgSwapExactAmountInResponseSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgSwapExactAmountOutResponse, MsgSwapExactAmountOutResponseSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapExternAmountInResponse, MsgJoinSwapExternAmountInResponseSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgJoinSwapShareAmountOutResponse, MsgJoinSwapShareAmountOutResponseSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapExternAmountOutResponse, MsgExitSwapExternAmountOutResponseSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType, MsgExitSwapShareAmountInResponse, MsgExitSwapShareAmountInResponseSDKType } from "./tx";
 export interface Msg {
-  joinPool(request: MsgJoinPool): Promise<MsgJoinPoolResponse>;
-  exitPool(request: MsgExitPool): Promise<MsgExitPoolResponse>;
-  swapExactAmountIn(request: MsgSwapExactAmountIn): Promise<MsgSwapExactAmountInResponse>;
-  swapExactAmountOut(request: MsgSwapExactAmountOut): Promise<MsgSwapExactAmountOutResponse>;
-  joinSwapExternAmountIn(request: MsgJoinSwapExternAmountIn): Promise<MsgJoinSwapExternAmountInResponse>;
-  joinSwapShareAmountOut(request: MsgJoinSwapShareAmountOut): Promise<MsgJoinSwapShareAmountOutResponse>;
-  exitSwapExternAmountOut(request: MsgExitSwapExternAmountOut): Promise<MsgExitSwapExternAmountOutResponse>;
-  exitSwapShareAmountIn(request: MsgExitSwapShareAmountIn): Promise<MsgExitSwapShareAmountInResponse>;
+  JoinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse>;
+  ExitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse>;
+  SwapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse>;
+  SwapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse>;
+  JoinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse>;
+  JoinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse>;
+  ExitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse>;
+  ExitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -27,52 +28,36 @@ export class MsgClientImpl implements Msg {
     this.exitSwapShareAmountIn = this.exitSwapShareAmountIn.bind(this);
   }
 
-  joinPool(request: MsgJoinPool): Promise<MsgJoinPoolResponse> {
-    const data = MsgJoinPool.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "JoinPool", data);
-    return promise.then(data => MsgJoinPoolResponse.decode(new _m0.Reader(data)));
+  joinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse> {
+    return this.rpc.unary(MsgJoinPool, MsgJoinPool.fromPartial(request), metadata);
   }
 
-  exitPool(request: MsgExitPool): Promise<MsgExitPoolResponse> {
-    const data = MsgExitPool.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "ExitPool", data);
-    return promise.then(data => MsgExitPoolResponse.decode(new _m0.Reader(data)));
+  exitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse> {
+    return this.rpc.unary(MsgExitPool, MsgExitPool.fromPartial(request), metadata);
   }
 
-  swapExactAmountIn(request: MsgSwapExactAmountIn): Promise<MsgSwapExactAmountInResponse> {
-    const data = MsgSwapExactAmountIn.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "SwapExactAmountIn", data);
-    return promise.then(data => MsgSwapExactAmountInResponse.decode(new _m0.Reader(data)));
+  swapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse> {
+    return this.rpc.unary(MsgSwapExactAmountIn, MsgSwapExactAmountIn.fromPartial(request), metadata);
   }
 
-  swapExactAmountOut(request: MsgSwapExactAmountOut): Promise<MsgSwapExactAmountOutResponse> {
-    const data = MsgSwapExactAmountOut.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "SwapExactAmountOut", data);
-    return promise.then(data => MsgSwapExactAmountOutResponse.decode(new _m0.Reader(data)));
+  swapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse> {
+    return this.rpc.unary(MsgSwapExactAmountOut, MsgSwapExactAmountOut.fromPartial(request), metadata);
   }
 
-  joinSwapExternAmountIn(request: MsgJoinSwapExternAmountIn): Promise<MsgJoinSwapExternAmountInResponse> {
-    const data = MsgJoinSwapExternAmountIn.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "JoinSwapExternAmountIn", data);
-    return promise.then(data => MsgJoinSwapExternAmountInResponse.decode(new _m0.Reader(data)));
+  joinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse> {
+    return this.rpc.unary(MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountIn.fromPartial(request), metadata);
   }
 
-  joinSwapShareAmountOut(request: MsgJoinSwapShareAmountOut): Promise<MsgJoinSwapShareAmountOutResponse> {
-    const data = MsgJoinSwapShareAmountOut.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "JoinSwapShareAmountOut", data);
-    return promise.then(data => MsgJoinSwapShareAmountOutResponse.decode(new _m0.Reader(data)));
+  joinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse> {
+    return this.rpc.unary(MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOut.fromPartial(request), metadata);
   }
 
-  exitSwapExternAmountOut(request: MsgExitSwapExternAmountOut): Promise<MsgExitSwapExternAmountOutResponse> {
-    const data = MsgExitSwapExternAmountOut.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "ExitSwapExternAmountOut", data);
-    return promise.then(data => MsgExitSwapExternAmountOutResponse.decode(new _m0.Reader(data)));
+  exitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse> {
+    return this.rpc.unary(MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOut.fromPartial(request), metadata);
   }
 
-  exitSwapShareAmountIn(request: MsgExitSwapShareAmountIn): Promise<MsgExitSwapShareAmountInResponse> {
-    const data = MsgExitSwapShareAmountIn.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.v1beta1.Msg", "ExitSwapShareAmountIn", data);
-    return promise.then(data => MsgExitSwapShareAmountInResponse.decode(new _m0.Reader(data)));
+  exitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse> {
+    return this.rpc.unary(MsgExitSwapShareAmountIn, MsgExitSwapShareAmountIn.fromPartial(request), metadata);
   }
 
 }

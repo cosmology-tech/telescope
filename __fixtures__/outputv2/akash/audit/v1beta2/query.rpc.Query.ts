@@ -1,8 +1,8 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./audit";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -12,28 +12,28 @@ export interface Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse>;
+  AllProvidersAttributes(request?: DeepPartial<QueryAllProvidersAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAttributes queries all provider signed attributes
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse>;
+  ProviderAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAuditorAttributes queries provider signed attributes by specific auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse>;
+  ProviderAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * AuditorAttributes queries all providers signed by this auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponse>;
+  AuditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -46,52 +46,22 @@ export class QueryClientImpl implements Query {
     this.auditorAttributes = this.auditorAttributes.bind(this);
   }
 
-  allProvidersAttributes(request: QueryAllProvidersAttributesRequest = {
+  allProvidersAttributes(request: DeepPartial<QueryAllProvidersAttributesRequest> = {
     pagination: undefined
-  }): Promise<QueryProvidersResponse> {
-    const data = QueryAllProvidersAttributesRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Query", "AllProvidersAttributes", data);
-    return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
+    return this.rpc.unary(QueryAllProvidersAttributesDesc, QueryAllProvidersAttributesRequest.fromPartial(request), metadata);
   }
 
-  providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse> {
-    const data = QueryProviderAttributesRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAttributes", data);
-    return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
+  providerAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
+    return this.rpc.unary(QueryProviderAttributesDesc, QueryProviderAttributesRequest.fromPartial(request), metadata);
   }
 
-  providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse> {
-    const data = QueryProviderAuditorRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAuditorAttributes", data);
-    return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
+  providerAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
+    return this.rpc.unary(QueryProviderAuditorDesc, QueryProviderAuditorRequest.fromPartial(request), metadata);
   }
 
-  auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponse> {
-    const data = QueryAuditorAttributesRequest.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Query", "AuditorAttributes", data);
-    return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
+  auditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
+    return this.rpc.unary(QueryAuditorAttributesDesc, QueryAuditorAttributesRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse> {
-      return queryService.allProvidersAttributes(request);
-    },
-
-    providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse> {
-      return queryService.providerAttributes(request);
-    },
-
-    providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse> {
-      return queryService.providerAuditorAttributes(request);
-    },
-
-    auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponse> {
-      return queryService.auditorAttributes(request);
-    }
-
-  };
-};

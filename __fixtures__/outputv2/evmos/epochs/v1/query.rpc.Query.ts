@@ -1,17 +1,17 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** EpochInfos provide running epochInfos */
-  epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse>;
+  EpochInfos(request?: DeepPartial<QueryEpochsInfoRequest>, metadata?: grpc.Metadata): Promise<QueryEpochsInfoResponse>;
 
   /** CurrentEpoch provide current epoch of specified identifier */
-  currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse>;
+  CurrentEpoch(request: DeepPartial<QueryCurrentEpochRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentEpochResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -22,32 +22,14 @@ export class QueryClientImpl implements Query {
     this.currentEpoch = this.currentEpoch.bind(this);
   }
 
-  epochInfos(request: QueryEpochsInfoRequest = {
+  epochInfos(request: DeepPartial<QueryEpochsInfoRequest> = {
     pagination: undefined
-  }): Promise<QueryEpochsInfoResponse> {
-    const data = QueryEpochsInfoRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.epochs.v1.Query", "EpochInfos", data);
-    return promise.then(data => QueryEpochsInfoResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<QueryEpochsInfoResponse> {
+    return this.rpc.unary(QueryEpochsInfoDesc, QueryEpochsInfoRequest.fromPartial(request), metadata);
   }
 
-  currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
-    const data = QueryCurrentEpochRequest.encode(request).finish();
-    const promise = this.rpc.request("evmos.epochs.v1.Query", "CurrentEpoch", data);
-    return promise.then(data => QueryCurrentEpochResponse.decode(new _m0.Reader(data)));
+  currentEpoch(request: DeepPartial<QueryCurrentEpochRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentEpochResponse> {
+    return this.rpc.unary(QueryCurrentEpochDesc, QueryCurrentEpochRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse> {
-      return queryService.epochInfos(request);
-    },
-
-    currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
-      return queryService.currentEpoch(request);
-    }
-
-  };
-};

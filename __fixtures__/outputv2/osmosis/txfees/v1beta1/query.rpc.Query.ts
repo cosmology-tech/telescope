@@ -1,7 +1,7 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 export interface Query {
   /**
@@ -9,16 +9,16 @@ export interface Query {
    * corresponding pools. It does not include the BaseDenom, which has its own
    * query endpoint
    */
-  feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
+  FeeTokens(request?: DeepPartial<QueryFeeTokensRequest>, metadata?: grpc.Metadata): Promise<QueryFeeTokensResponse>;
 
   /** DenomSpotPrice returns all spot prices by each registered token denom. */
-  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse>;
+  DenomSpotPrice(request: DeepPartial<QueryDenomSpotPriceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomSpotPriceResponse>;
 
   /** Returns the poolID for a specified denom input. */
-  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse>;
+  DenomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse>;
 
   /** Returns a list of all base denom tokens and their corresponding pools. */
-  baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse>;
+  BaseDenom(request?: DeepPartial<QueryBaseDenomRequest>, metadata?: grpc.Metadata): Promise<QueryBaseDenomResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -31,50 +31,20 @@ export class QueryClientImpl implements Query {
     this.baseDenom = this.baseDenom.bind(this);
   }
 
-  feeTokens(request: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponse> {
-    const data = QueryFeeTokensRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "FeeTokens", data);
-    return promise.then(data => QueryFeeTokensResponse.decode(new _m0.Reader(data)));
+  feeTokens(request: DeepPartial<QueryFeeTokensRequest> = {}, metadata?: grpc.Metadata): Promise<QueryFeeTokensResponse> {
+    return this.rpc.unary(QueryFeeTokensDesc, QueryFeeTokensRequest.fromPartial(request), metadata);
   }
 
-  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
-    const data = QueryDenomSpotPriceRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomSpotPrice", data);
-    return promise.then(data => QueryDenomSpotPriceResponse.decode(new _m0.Reader(data)));
+  denomSpotPrice(request: DeepPartial<QueryDenomSpotPriceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomSpotPriceResponse> {
+    return this.rpc.unary(QueryDenomSpotPriceDesc, QueryDenomSpotPriceRequest.fromPartial(request), metadata);
   }
 
-  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
-    const data = QueryDenomPoolIdRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomPoolId", data);
-    return promise.then(data => QueryDenomPoolIdResponse.decode(new _m0.Reader(data)));
+  denomPoolId(request: DeepPartial<QueryDenomPoolIdRequest>, metadata?: grpc.Metadata): Promise<QueryDenomPoolIdResponse> {
+    return this.rpc.unary(QueryDenomPoolIdDesc, QueryDenomPoolIdRequest.fromPartial(request), metadata);
   }
 
-  baseDenom(request: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponse> {
-    const data = QueryBaseDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "BaseDenom", data);
-    return promise.then(data => QueryBaseDenomResponse.decode(new _m0.Reader(data)));
+  baseDenom(request: DeepPartial<QueryBaseDenomRequest> = {}, metadata?: grpc.Metadata): Promise<QueryBaseDenomResponse> {
+    return this.rpc.unary(QueryBaseDenomDesc, QueryBaseDenomRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
-      return queryService.feeTokens(request);
-    },
-
-    denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
-      return queryService.denomSpotPrice(request);
-    },
-
-    denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
-      return queryService.denomPoolId(request);
-    },
-
-    baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse> {
-      return queryService.baseDenom(request);
-    }
-
-  };
-};

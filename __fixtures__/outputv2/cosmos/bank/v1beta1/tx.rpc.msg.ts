@@ -1,16 +1,17 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
-  send(request: MsgSend): Promise<MsgSendResponse>;
+  Send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse>;
 
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse>;
+  MultiSend(request: DeepPartial<MsgMultiSend>, metadata?: grpc.Metadata): Promise<MsgMultiSendResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -21,16 +22,12 @@ export class MsgClientImpl implements Msg {
     this.multiSend = this.multiSend.bind(this);
   }
 
-  send(request: MsgSend): Promise<MsgSendResponse> {
-    const data = MsgSend.encode(request).finish();
-    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
-    return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
+  send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse> {
+    return this.rpc.unary(MsgSend, MsgSend.fromPartial(request), metadata);
   }
 
-  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse> {
-    const data = MsgMultiSend.encode(request).finish();
-    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "MultiSend", data);
-    return promise.then(data => MsgMultiSendResponse.decode(new _m0.Reader(data)));
+  multiSend(request: DeepPartial<MsgMultiSend>, metadata?: grpc.Metadata): Promise<MsgMultiSendResponse> {
+    return this.rpc.unary(MsgMultiSend, MsgMultiSend.fromPartial(request), metadata);
   }
 
 }
