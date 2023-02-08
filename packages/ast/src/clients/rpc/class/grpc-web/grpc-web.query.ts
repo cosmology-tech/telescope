@@ -118,7 +118,7 @@ const rpcClassConstructor = (
     methods: string[]
 ) => {
 
-    let bound = []; 
+    let bound = [];
     if (!context.pluginValue('classesUseArrowFunctions')) {
         bound = methods.map(method => bindThis(method));
     }
@@ -233,7 +233,7 @@ const GrpcWebClassMethod = (
                 ),
                 [
                     //No Desc field so we need to modify it
-                    t.identifier(requestType.replace('Request', 'Desc')), 
+                    t.identifier(requestType.replace('Request', 'Desc')),
                     t.callExpression(
                         t.memberExpression(
                             t.identifier(requestType),
@@ -289,7 +289,7 @@ export const createGrpcWebQueryClass = (
     context.addUtil('_m0');
     context.addUtil('grpc')
     //use type DeepPartial
-    context.addUtil('DeepPartitial')
+    context.addUtil('DeepPartial')
     let partialName = 'DeepPartial';
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');

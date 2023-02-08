@@ -1,48 +1,68 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export class Query {
-  static Period(request: QueryPeriodRequest, initRequest?: fm.InitReq): Promise<QueryPeriodResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/period?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query provides defines the gRPC querier service. */
+export interface Query {
+  /** Period retrieves current period. */
+  Period(request?: DeepPartial<QueryPeriodRequest>, metadata?: grpc.Metadata): Promise<QueryPeriodResponse>;
+
+  /** EpochMintProvision retrieves current minting epoch provision value. */
+  EpochMintProvision(request?: DeepPartial<QueryEpochMintProvisionRequest>, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse>;
+
+  /** SkippedEpochs retrieves the total number of skipped epochs. */
+  SkippedEpochs(request?: DeepPartial<QuerySkippedEpochsRequest>, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse>;
+
+  /**
+   * CirculatingSupply retrieves the total number of tokens that are in
+   * circulation (i.e. excluding unvested tokens).
+   */
+  CirculatingSupply(request?: DeepPartial<QueryCirculatingSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse>;
+
+  /** InflationRate retrieves the inflation rate of the current period. */
+  InflationRate(request?: DeepPartial<QueryInflationRateRequest>, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse>;
+
+  /** Params retrieves the total set of minting parameters. */
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.period = this.period.bind(this);
+    this.epochMintProvision = this.epochMintProvision.bind(this);
+    this.skippedEpochs = this.skippedEpochs.bind(this);
+    this.circulatingSupply = this.circulatingSupply.bind(this);
+    this.inflationRate = this.inflationRate.bind(this);
+    this.params = this.params.bind(this);
   }
 
-  static EpochMintProvision(request: QueryEpochMintProvisionRequest, initRequest?: fm.InitReq): Promise<QueryEpochMintProvisionResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/epoch_mint_provision?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  period(request: DeepPartial<QueryPeriodRequest> = {}, metadata?: grpc.Metadata): Promise<QueryPeriodResponse> {
+    return this.rpc.unary(QueryPeriodDesc, QueryPeriodRequest.fromPartial(request), metadata);
   }
 
-  static SkippedEpochs(request: QuerySkippedEpochsRequest, initRequest?: fm.InitReq): Promise<QuerySkippedEpochsResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/skipped_epochs?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  epochMintProvision(request: DeepPartial<QueryEpochMintProvisionRequest> = {}, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse> {
+    return this.rpc.unary(QueryEpochMintProvisionDesc, QueryEpochMintProvisionRequest.fromPartial(request), metadata);
   }
 
-  static CirculatingSupply(request: QueryCirculatingSupplyRequest, initRequest?: fm.InitReq): Promise<QueryCirculatingSupplyResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/circulating_supply?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  skippedEpochs(request: DeepPartial<QuerySkippedEpochsRequest> = {}, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse> {
+    return this.rpc.unary(QuerySkippedEpochsDesc, QuerySkippedEpochsRequest.fromPartial(request), metadata);
   }
 
-  static InflationRate(request: QueryInflationRateRequest, initRequest?: fm.InitReq): Promise<QueryInflationRateResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/inflation_rate?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  circulatingSupply(request: DeepPartial<QueryCirculatingSupplyRequest> = {}, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse> {
+    return this.rpc.unary(QueryCirculatingSupplyDesc, QueryCirculatingSupplyRequest.fromPartial(request), metadata);
   }
 
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/evmos/inflation/v1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  inflationRate(request: DeepPartial<QueryInflationRateRequest> = {}, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse> {
+    return this.rpc.unary(QueryInflationRateDesc, QueryInflationRateRequest.fromPartial(request), metadata);
+  }
+
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
 }

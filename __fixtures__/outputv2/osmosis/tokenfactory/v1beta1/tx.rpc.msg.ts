@@ -1,41 +1,57 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import * as fm from "../../../grpc-gateway";
+import { Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
-export class Msg {
-  static CreateDenom(request: MsgCreateDenom, initRequest?: fm.InitReq): Promise<MsgCreateDenomResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/CreateDenom`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the tokefactory module's gRPC message service. */
+export interface Msg {
+  createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse>;
+  mint(request: MsgMint): Promise<MsgMintResponse>;
+  burn(request: MsgBurn): Promise<MsgBurnResponse>;
+  changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse>;
+  setDenomMetadata(request: MsgSetDenomMetadata): Promise<MsgSetDenomMetadataResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.createDenom = this.createDenom.bind(this);
+    this.mint = this.mint.bind(this);
+    this.burn = this.burn.bind(this);
+    this.changeAdmin = this.changeAdmin.bind(this);
+    this.setDenomMetadata = this.setDenomMetadata.bind(this);
   }
 
-  static Mint(request: MsgMint, initRequest?: fm.InitReq): Promise<MsgMintResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Mint`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse> {
+    const data = MsgCreateDenom.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "CreateDenom", data);
+    return promise.then(data => MsgCreateDenomResponse.decode(new _m0.Reader(data)));
   }
 
-  static Burn(request: MsgBurn, initRequest?: fm.InitReq): Promise<MsgBurnResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Burn`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  mint(request: MsgMint): Promise<MsgMintResponse> {
+    const data = MsgMint.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "Mint", data);
+    return promise.then(data => MsgMintResponse.decode(new _m0.Reader(data)));
   }
 
-  static ChangeAdmin(request: MsgChangeAdmin, initRequest?: fm.InitReq): Promise<MsgChangeAdminResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/ChangeAdmin`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  burn(request: MsgBurn): Promise<MsgBurnResponse> {
+    const data = MsgBurn.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "Burn", data);
+    return promise.then(data => MsgBurnResponse.decode(new _m0.Reader(data)));
   }
 
-  static SetDenomMetadata(request: MsgSetDenomMetadata, initRequest?: fm.InitReq): Promise<MsgSetDenomMetadataResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/SetDenomMetadata`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse> {
+    const data = MsgChangeAdmin.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "ChangeAdmin", data);
+    return promise.then(data => MsgChangeAdminResponse.decode(new _m0.Reader(data)));
+  }
+
+  setDenomMetadata(request: MsgSetDenomMetadata): Promise<MsgSetDenomMetadataResponse> {
+    const data = MsgSetDenomMetadata.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "SetDenomMetadata", data);
+    return promise.then(data => MsgSetDenomMetadataResponse.decode(new _m0.Reader(data)));
   }
 
 }

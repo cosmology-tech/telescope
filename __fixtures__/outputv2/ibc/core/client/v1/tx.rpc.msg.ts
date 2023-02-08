@@ -1,33 +1,55 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import * as fm from "../../../../grpc-gateway";
+import { Rpc } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
-export class Msg {
-  static CreateClient(request: MsgCreateClient, initRequest?: fm.InitReq): Promise<MsgCreateClientResponse> {
-    return fm.fetchReq(`/ibc.core.client.v1/CreateClient`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the ibc/client Msg service. */
+export interface Msg {
+  /** CreateClient defines a rpc handler method for MsgCreateClient. */
+  createClient(request: MsgCreateClient): Promise<MsgCreateClientResponse>;
+
+  /** UpdateClient defines a rpc handler method for MsgUpdateClient. */
+  updateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse>;
+
+  /** UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
+  upgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse>;
+
+  /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
+  submitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.createClient = this.createClient.bind(this);
+    this.updateClient = this.updateClient.bind(this);
+    this.upgradeClient = this.upgradeClient.bind(this);
+    this.submitMisbehaviour = this.submitMisbehaviour.bind(this);
   }
 
-  static UpdateClient(request: MsgUpdateClient, initRequest?: fm.InitReq): Promise<MsgUpdateClientResponse> {
-    return fm.fetchReq(`/ibc.core.client.v1/UpdateClient`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  createClient(request: MsgCreateClient): Promise<MsgCreateClientResponse> {
+    const data = MsgCreateClient.encode(request).finish();
+    const promise = this.rpc.request("ibc.core.client.v1.Msg", "CreateClient", data);
+    return promise.then(data => MsgCreateClientResponse.decode(new _m0.Reader(data)));
   }
 
-  static UpgradeClient(request: MsgUpgradeClient, initRequest?: fm.InitReq): Promise<MsgUpgradeClientResponse> {
-    return fm.fetchReq(`/ibc.core.client.v1/UpgradeClient`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  updateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse> {
+    const data = MsgUpdateClient.encode(request).finish();
+    const promise = this.rpc.request("ibc.core.client.v1.Msg", "UpdateClient", data);
+    return promise.then(data => MsgUpdateClientResponse.decode(new _m0.Reader(data)));
   }
 
-  static SubmitMisbehaviour(request: MsgSubmitMisbehaviour, initRequest?: fm.InitReq): Promise<MsgSubmitMisbehaviourResponse> {
-    return fm.fetchReq(`/ibc.core.client.v1/SubmitMisbehaviour`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  upgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse> {
+    const data = MsgUpgradeClient.encode(request).finish();
+    const promise = this.rpc.request("ibc.core.client.v1.Msg", "UpgradeClient", data);
+    return promise.then(data => MsgUpgradeClientResponse.decode(new _m0.Reader(data)));
+  }
+
+  submitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse> {
+    const data = MsgSubmitMisbehaviour.encode(request).finish();
+    const promise = this.rpc.request("ibc.core.client.v1.Msg", "SubmitMisbehaviour", data);
+    return promise.then(data => MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data)));
   }
 
 }

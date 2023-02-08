@@ -1,12 +1,22 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
-import * as fm from "../../../../../grpc-gateway";
+import { Rpc } from "../../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
-export class Msg {
-  static CreateBalancerPool(request: MsgCreateBalancerPool, initRequest?: fm.InitReq): Promise<MsgCreateBalancerPoolResponse> {
-    return fm.fetchReq(`/osmosis.gamm.poolmodels.balancer.v1beta1/CreateBalancerPool`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+export interface Msg {
+  createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.createBalancerPool = this.createBalancerPool.bind(this);
+  }
+
+  createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse> {
+    const data = MsgCreateBalancerPool.encode(request).finish();
+    const promise = this.rpc.request("osmosis.gamm.poolmodels.balancer.v1beta1.Msg", "CreateBalancerPool", data);
+    return promise.then(data => MsgCreateBalancerPoolResponse.decode(new _m0.Reader(data)));
   }
 
 }

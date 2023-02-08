@@ -1,20 +1,36 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
-import * as fm from "../../../grpc-gateway";
+import { Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
-export class Msg {
-  static Send(request: MsgSend, initRequest?: fm.InitReq): Promise<MsgSendResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1/Send`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the bank Msg service. */
+export interface Msg {
+  /** Send defines a method for sending coins from one account to another account. */
+  send(request: MsgSend): Promise<MsgSendResponse>;
+
+  /** MultiSend defines a method for sending coins from some accounts to other accounts. */
+  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.send = this.send.bind(this);
+    this.multiSend = this.multiSend.bind(this);
   }
 
-  static MultiSend(request: MsgMultiSend, initRequest?: fm.InitReq): Promise<MsgMultiSendResponse> {
-    return fm.fetchReq(`/cosmos.bank.v1beta1/MultiSend`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  send(request: MsgSend): Promise<MsgSendResponse> {
+    const data = MsgSend.encode(request).finish();
+    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
+    return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
+  }
+
+  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse> {
+    const data = MsgMultiSend.encode(request).finish();
+    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "MultiSend", data);
+    return promise.then(data => MsgMultiSendResponse.decode(new _m0.Reader(data)));
   }
 
 }

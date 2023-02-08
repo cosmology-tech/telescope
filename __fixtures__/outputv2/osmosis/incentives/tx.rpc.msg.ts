@@ -1,21 +1,32 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import * as fm from "../../grpc-gateway";
+import { Rpc } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
-export class Msg {
-  static CreateGauge(request: MsgCreateGauge, initRequest?: fm.InitReq): Promise<MsgCreateGaugeResponse> {
-    return fm.fetchReq(`/osmosis.incentives/CreateGauge`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+export interface Msg {
+  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
+  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.createGauge = this.createGauge.bind(this);
+    this.addToGauge = this.addToGauge.bind(this);
   }
 
-  static AddToGauge(request: MsgAddToGauge, initRequest?: fm.InitReq): Promise<MsgAddToGaugeResponse> {
-    return fm.fetchReq(`/osmosis.incentives/AddToGauge`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse> {
+    const data = MsgCreateGauge.encode(request).finish();
+    const promise = this.rpc.request("osmosis.incentives.Msg", "CreateGauge", data);
+    return promise.then(data => MsgCreateGaugeResponse.decode(new _m0.Reader(data)));
+  }
+
+  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse> {
+    const data = MsgAddToGauge.encode(request).finish();
+    const promise = this.rpc.request("osmosis.incentives.Msg", "AddToGauge", data);
+    return promise.then(data => MsgAddToGaugeResponse.decode(new _m0.Reader(data)));
   }
 
 }

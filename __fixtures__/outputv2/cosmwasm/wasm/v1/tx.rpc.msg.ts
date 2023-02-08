@@ -1,48 +1,76 @@
 import { AccessConfig, AccessConfigSDKType } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as fm from "../../../grpc-gateway";
+import { Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgStoreCodeResponse, MsgStoreCodeResponseSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgInstantiateContractResponse, MsgInstantiateContractResponseSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgExecuteContractResponse, MsgExecuteContractResponseSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgMigrateContractResponse, MsgMigrateContractResponseSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgUpdateAdminResponse, MsgUpdateAdminResponseSDKType, MsgClearAdmin, MsgClearAdminSDKType, MsgClearAdminResponse, MsgClearAdminResponseSDKType } from "./tx";
-export class Msg {
-  static StoreCode(request: MsgStoreCode, initRequest?: fm.InitReq): Promise<MsgStoreCodeResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/StoreCode`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the wasm Msg service. */
+export interface Msg {
+  /** StoreCode to submit Wasm code to the system */
+  storeCode(request: MsgStoreCode): Promise<MsgStoreCodeResponse>;
+
+  /** Instantiate creates a new smart contract instance for the given code id. */
+  instantiateContract(request: MsgInstantiateContract): Promise<MsgInstantiateContractResponse>;
+
+  /** Execute submits the given message data to a smart contract */
+  executeContract(request: MsgExecuteContract): Promise<MsgExecuteContractResponse>;
+
+  /** Migrate runs a code upgrade/ downgrade for a smart contract */
+  migrateContract(request: MsgMigrateContract): Promise<MsgMigrateContractResponse>;
+
+  /** UpdateAdmin sets a new   admin for a smart contract */
+  updateAdmin(request: MsgUpdateAdmin): Promise<MsgUpdateAdminResponse>;
+
+  /** ClearAdmin removes any admin stored for a smart contract */
+  clearAdmin(request: MsgClearAdmin): Promise<MsgClearAdminResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.storeCode = this.storeCode.bind(this);
+    this.instantiateContract = this.instantiateContract.bind(this);
+    this.executeContract = this.executeContract.bind(this);
+    this.migrateContract = this.migrateContract.bind(this);
+    this.updateAdmin = this.updateAdmin.bind(this);
+    this.clearAdmin = this.clearAdmin.bind(this);
   }
 
-  static InstantiateContract(request: MsgInstantiateContract, initRequest?: fm.InitReq): Promise<MsgInstantiateContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/InstantiateContract`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  storeCode(request: MsgStoreCode): Promise<MsgStoreCodeResponse> {
+    const data = MsgStoreCode.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "StoreCode", data);
+    return promise.then(data => MsgStoreCodeResponse.decode(new _m0.Reader(data)));
   }
 
-  static ExecuteContract(request: MsgExecuteContract, initRequest?: fm.InitReq): Promise<MsgExecuteContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/ExecuteContract`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  instantiateContract(request: MsgInstantiateContract): Promise<MsgInstantiateContractResponse> {
+    const data = MsgInstantiateContract.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "InstantiateContract", data);
+    return promise.then(data => MsgInstantiateContractResponse.decode(new _m0.Reader(data)));
   }
 
-  static MigrateContract(request: MsgMigrateContract, initRequest?: fm.InitReq): Promise<MsgMigrateContractResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/MigrateContract`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  executeContract(request: MsgExecuteContract): Promise<MsgExecuteContractResponse> {
+    const data = MsgExecuteContract.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "ExecuteContract", data);
+    return promise.then(data => MsgExecuteContractResponse.decode(new _m0.Reader(data)));
   }
 
-  static UpdateAdmin(request: MsgUpdateAdmin, initRequest?: fm.InitReq): Promise<MsgUpdateAdminResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/UpdateAdmin`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  migrateContract(request: MsgMigrateContract): Promise<MsgMigrateContractResponse> {
+    const data = MsgMigrateContract.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "MigrateContract", data);
+    return promise.then(data => MsgMigrateContractResponse.decode(new _m0.Reader(data)));
   }
 
-  static ClearAdmin(request: MsgClearAdmin, initRequest?: fm.InitReq): Promise<MsgClearAdminResponse> {
-    return fm.fetchReq(`/cosmwasm.wasm.v1/ClearAdmin`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  updateAdmin(request: MsgUpdateAdmin): Promise<MsgUpdateAdminResponse> {
+    const data = MsgUpdateAdmin.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "UpdateAdmin", data);
+    return promise.then(data => MsgUpdateAdminResponse.decode(new _m0.Reader(data)));
+  }
+
+  clearAdmin(request: MsgClearAdmin): Promise<MsgClearAdminResponse> {
+    const data = MsgClearAdmin.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Msg", "ClearAdmin", data);
+    return promise.then(data => MsgClearAdminResponse.decode(new _m0.Reader(data)));
   }
 
 }

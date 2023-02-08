@@ -1,27 +1,58 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsSDKType } from "./genesis";
-import * as fm from "../../../grpc-gateway";
+import { Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
-export class Query {
-  static Params(request: ParamsRequest, initRequest?: fm.InitReq): Promise<ParamsResponse> {
-    return fm.fetchReq(`/osmosis/twap/v1beta1/Params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+export interface Query {
+  params(request?: ParamsRequest): Promise<ParamsResponse>;
+  arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse>;
+  arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.params = this.params.bind(this);
+    this.arithmeticTwap = this.arithmeticTwap.bind(this);
+    this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
 
-  static ArithmeticTwap(request: ArithmeticTwapRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapResponse> {
-    return fm.fetchReq(`/osmosis/twap/v1beta1/ArithmeticTwap?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  params(request: ParamsRequest = {}): Promise<ParamsResponse> {
+    const data = ParamsRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "Params", data);
+    return promise.then(data => ParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  static ArithmeticTwapToNow(request: ArithmeticTwapToNowRequest, initRequest?: fm.InitReq): Promise<ArithmeticTwapToNowResponse> {
-    return fm.fetchReq(`/osmosis/twap/v1beta1/ArithmeticTwapToNow?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse> {
+    const data = ArithmeticTwapRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "ArithmeticTwap", data);
+    return promise.then(data => ArithmeticTwapResponse.decode(new _m0.Reader(data)));
+  }
+
+  arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponse> {
+    const data = ArithmeticTwapToNowRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.twap.v1beta1.Query", "ArithmeticTwapToNow", data);
+    return promise.then(data => ArithmeticTwapToNowResponse.decode(new _m0.Reader(data)));
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    params(request?: ParamsRequest): Promise<ParamsResponse> {
+      return queryService.params(request);
+    },
+
+    arithmeticTwap(request: ArithmeticTwapRequest): Promise<ArithmeticTwapResponse> {
+      return queryService.arithmeticTwap(request);
+    },
+
+    arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponse> {
+      return queryService.arithmeticTwapToNow(request);
+    }
+
+  };
+};
