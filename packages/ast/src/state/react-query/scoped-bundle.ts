@@ -4,27 +4,47 @@ import { objectPattern } from '../../utils';
 import { variableSlug } from '@osmonauts/utils';
 
 export const rpcHookFuncArguments = (): t.ObjectPattern[] => {
-  return [
-    objectPattern(
-      [t.objectProperty(t.identifier('rpc'), t.identifier('rpc'), false, true)],
-      t.tsTypeAnnotation(
-        t.tsTypeLiteral([
-          t.tsPropertySignature(
-            t.identifier('rpc'),
-            t.tsTypeAnnotation(t.tsTypeReference(t.identifier('Rpc')))
-          )
-        ])
-      )
-    )
-  ];
+    return [
+        objectPattern(
+            [
+                t.objectProperty(
+                    t.identifier('rpc'),
+                    t.identifier('rpc'),
+                    false,
+                    true
+                )
+            ],
+            t.tsTypeAnnotation(
+                t.tsTypeLiteral(
+                    [
+                        t.tsPropertySignature(
+                            t.identifier('rpc'),
+                            t.tsTypeAnnotation(
+                                t.tsTypeReference(
+                                    t.identifier('Rpc')
+                                )
+                            )
+                        )
+                    ]
+                )
+            )
+        )
+    ];
 };
 
 export const rpcHookClassArguments = (): t.ObjectExpression[] => {
-  return [
-    t.objectExpression([
-      t.objectProperty(t.identifier('rpc'), t.identifier('rpc'), false, true)
-    ])
-  ];
+    return [
+        t.objectExpression(
+            [
+                t.objectProperty(
+                    t.identifier('rpc'),
+                    t.identifier('rpc'),
+                    false,
+                    true
+                )
+            ]
+        )
+    ];
 };
 
 /**
@@ -37,38 +57,47 @@ export const rpcHookClassArguments = (): t.ObjectExpression[] => {
  * @returns {ParseResult} created AST
  */
 export const rpcHookNewTmRequire = (
-  imports: HookImport[],
-  path: string,
-  methodName: string
+    imports: HookImport[],
+    path: string,
+    methodName: string
 ) => {
-  // push path for imports of packages.
-  imports.push({
-    as: variableSlug(path),
-    path
-  });
 
-  return t.callExpression(
-    t.memberExpression(
-      t.identifier(variableSlug(path)),
-      t.identifier(methodName)
-    ),
-    [t.identifier('rpc')]
-  );
-};
+    imports.push({
+        as: variableSlug(path),
+        path
+    });
 
-export const rpcHookRecursiveObjectProps = (names: string[], leaf?: any) => {
-  const [name, ...rest] = names;
+    return t.callExpression(
+        t.memberExpression(
+            t.identifier(variableSlug(path)),
+            t.identifier(methodName)
+        ),
+        [
+            t.identifier('rpc')
+        ]
+    )
 
-  let baseComponent;
-  if (names.length === 1) {
-    baseComponent = leaf ? leaf : t.identifier(name);
-  } else {
-    baseComponent = rpcHookRecursiveObjectProps(rest, leaf);
-  }
+}
 
-  return t.objectExpression([
-    t.objectProperty(t.identifier(name), baseComponent)
-  ]);
+export const rpcHookRecursiveObjectProps = (
+    names: string[],
+    leaf?: any
+) => {
+    const [name, ...rest] = names;
+
+    let baseComponent;
+    if (names.length === 1) {
+        baseComponent = leaf ? leaf : t.identifier(name)
+    } else {
+        baseComponent = rpcHookRecursiveObjectProps(rest, leaf)
+    }
+
+    return t.objectExpression([
+        t.objectProperty(
+            t.identifier(name),
+            baseComponent
+        )
+    ])
 };
 
 /**
@@ -81,31 +110,30 @@ export const rpcHookRecursiveObjectProps = (names: string[], leaf?: any) => {
  * @returns {ParseResult} created AST
  */
 export const rpcHookTmNestedImportObject = (
-  imports: HookImport[],
-  obj: object,
-  methodName: string
+    imports: HookImport[],
+    obj: object,
+    methodName: string
 ) => {
-  //if obj is a path, end recursion and get the mapping.
-  if (typeof obj === 'string') {
-    return rpcHookNewTmRequire(imports, obj, methodName);
-  }
 
-  const keys = Object.keys(obj);
+    //if obj is a path, end recursion and get the mapping.
+    if (typeof obj === 'string') {
+        return rpcHookNewTmRequire(imports, obj, methodName);
+    }
 
-  // get hooks for keys of the obj.
-  return t.objectExpression(
-    keys.map((name) => {
-      return t.objectProperty(
-        t.identifier(name),
-        rpcHookTmNestedImportObject(imports, obj[name], methodName)
-      );
-    })
-  );
+    const keys = Object.keys(obj);
+
+    // get hooks for keys of the obj.
+    return t.objectExpression(keys.map(name => {
+        return t.objectProperty(
+            t.identifier(name),
+            rpcHookTmNestedImportObject(imports, obj[name], methodName)
+        )
+    }))
 };
 
 interface HookImport {
-  as: string;
-  path: string;
+    as: string;
+    path: string;
 }
 
 /**
@@ -119,81 +147,86 @@ interface HookImport {
  * @returns {ParseResult} created AST
  */
 export const createScopedRpcHookFactory = (
-  context: GenericParseContext,
-  obj: object,
-  identifier: string
+    context: GenericParseContext,
+    obj: object,
+    identifier: string
 ) => {
-  // add imports
-  context.addUtil('ProtobufRpcClient');
 
-  const hookImports: HookImport[] = [];
+    // add imports
+    context.addUtil('ProtobufRpcClient');
 
-  const ast = t.exportNamedDeclaration(
-    t.variableDeclaration('const', [
-      t.variableDeclarator(
-        // createRPCQueryHooks
-        t.identifier(identifier),
-        t.arrowFunctionExpression(
-          [
-            objectPattern(
-              [
-                t.objectProperty(
-                  t.identifier('rpc'),
-                  t.identifier('rpc'),
-                  false,
-                  true
-                )
-              ],
-              t.tsTypeAnnotation(
-                t.tsTypeLiteral([
-                  t.tsPropertySignature(
-                    t.identifier('rpc'),
-                    t.tsTypeAnnotation(
-                      t.tsUnionType([
-                        t.tsTypeReference(t.identifier('ProtobufRpcClient')),
-                        t.tsUndefinedKeyword()
-                      ])
+    const hookImports: HookImport[] = [];
+
+    const ast = t.exportNamedDeclaration(
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator(
+                    // createRPCQueryHooks
+                    t.identifier(identifier),
+                    t.arrowFunctionExpression(
+                        [
+                            objectPattern([
+                                t.objectProperty(
+                                    t.identifier('rpc'),
+                                    t.identifier('rpc'),
+                                    false,
+                                    true
+                                )
+                            ], t.tsTypeAnnotation(
+                                t.tsTypeLiteral([
+                                    t.tsPropertySignature(
+                                        t.identifier('rpc'),
+                                        t.tsTypeAnnotation(
+                                            t.tsUnionType([
+                                                t.tsTypeReference(
+                                                    t.identifier('ProtobufRpcClient')
+                                                ),
+                                                t.tsUndefinedKeyword()
+                                            ])
+                                        )
+                                    )
+                                ])
+                            ))
+                        ],
+                        t.blockStatement([
+
+                            t.returnStatement(
+                                rpcHookTmNestedImportObject(
+                                    hookImports,
+                                    obj,
+                                    'createRpcQueryHooks'
+                                )
+                            )
+
+                        ]),
+                        false
                     )
-                  )
-                ])
-              )
-            )
-          ],
-          t.blockStatement([
-            t.returnStatement(
-              rpcHookTmNestedImportObject(
-                hookImports,
-                obj,
-                'createRpcQueryHooks'
-              )
-            )
-          ]),
-          false
+                )
+            ]
         )
-      )
-    ])
-  );
+    );
 
-  // generate imports for packages.
-  const imports = hookImports.map((hookport) => {
-    return {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportNamespaceSpecifier',
-          local: {
-            type: 'Identifier',
-            name: hookport.as
-          }
-        }
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: hookport.path
-      }
-    };
-  });
+    // generate imports for packages.
+    const imports = hookImports.map(hookport => {
+        return {
+            "type": "ImportDeclaration",
+            "importKind": "value",
+            "specifiers": [
+                {
+                    "type": "ImportNamespaceSpecifier",
+                    "local": {
+                        "type": "Identifier",
+                        "name": hookport.as
+                    }
+                }
+            ],
+            "source": {
+                "type": "StringLiteral",
+                "value": hookport.path
+            }
+        };
+    });
 
-  return [...imports, ast];
+    return [...imports, ast];
 };
