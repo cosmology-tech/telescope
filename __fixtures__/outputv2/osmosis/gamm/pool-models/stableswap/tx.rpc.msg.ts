@@ -1,31 +1,20 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import * as fm from "../../../../grpc-gateway";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
-export interface Msg {
-  createStableswapPool(request: MsgCreateStableswapPool): Promise<MsgCreateStableswapPoolResponse>;
-  stableSwapAdjustScalingFactors(request: MsgStableSwapAdjustScalingFactors): Promise<MsgStableSwapAdjustScalingFactorsResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.createStableswapPool = this.createStableswapPool.bind(this);
-    this.stableSwapAdjustScalingFactors = this.stableSwapAdjustScalingFactors.bind(this);
+export class Msg {
+  static CreateStableswapPool(request: MsgCreateStableswapPool, initRequest?: fm.InitReq): Promise<MsgCreateStableswapPoolResponse> {
+    return fm.fetchReq(`/osmosis.gamm.poolmodels.stableswap.v1beta1/CreateStableswapPool`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  createStableswapPool(request: MsgCreateStableswapPool): Promise<MsgCreateStableswapPoolResponse> {
-    const data = MsgCreateStableswapPool.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.poolmodels.stableswap.v1beta1.Msg", "CreateStableswapPool", data);
-    return promise.then(data => MsgCreateStableswapPoolResponse.decode(new _m0.Reader(data)));
-  }
-
-  stableSwapAdjustScalingFactors(request: MsgStableSwapAdjustScalingFactors): Promise<MsgStableSwapAdjustScalingFactorsResponse> {
-    const data = MsgStableSwapAdjustScalingFactors.encode(request).finish();
-    const promise = this.rpc.request("osmosis.gamm.poolmodels.stableswap.v1beta1.Msg", "StableSwapAdjustScalingFactors", data);
-    return promise.then(data => MsgStableSwapAdjustScalingFactorsResponse.decode(new _m0.Reader(data)));
+  static StableSwapAdjustScalingFactors(request: MsgStableSwapAdjustScalingFactors, initRequest?: fm.InitReq): Promise<MsgStableSwapAdjustScalingFactorsResponse> {
+    return fm.fetchReq(`/osmosis.gamm.poolmodels.stableswap.v1beta1/StableSwapAdjustScalingFactors`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
 }

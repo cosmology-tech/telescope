@@ -1,35 +1,19 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import * as fm from "../../../grpc-gateway";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
-
-/** Msg defines the provider Msg service */
-export interface Msg {
-  /** SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse>;
-
-  /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.signProviderAttributes = this.signProviderAttributes.bind(this);
-    this.deleteProviderAttributes = this.deleteProviderAttributes.bind(this);
+export class Msg {
+  static SignProviderAttributes(request: MsgSignProviderAttributes, initRequest?: fm.InitReq): Promise<MsgSignProviderAttributesResponse> {
+    return fm.fetchReq(`/akash.audit.v1beta2/SignProviderAttributes`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse> {
-    const data = MsgSignProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Msg", "SignProviderAttributes", data);
-    return promise.then(data => MsgSignProviderAttributesResponse.decode(new _m0.Reader(data)));
-  }
-
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse> {
-    const data = MsgDeleteProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta2.Msg", "DeleteProviderAttributes", data);
-    return promise.then(data => MsgDeleteProviderAttributesResponse.decode(new _m0.Reader(data)));
+  static DeleteProviderAttributes(request: MsgDeleteProviderAttributes, initRequest?: fm.InitReq): Promise<MsgDeleteProviderAttributesResponse> {
+    return fm.fetchReq(`/akash.audit.v1beta2/DeleteProviderAttributes`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
 }

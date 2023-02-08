@@ -4,7 +4,7 @@ import { identifier, objectMethod } from '../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
-import { getRpcClassName } from '../class';
+import { getRpcClassName } from '../class/tendermint';
 
 const rpcExtensionMethod = (
     name: string,

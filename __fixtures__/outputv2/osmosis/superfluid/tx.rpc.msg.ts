@@ -1,66 +1,40 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Rpc } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import * as fm from "../../grpc-gateway";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDelegateResponse, MsgSuperfluidDelegateResponseSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUndelegateResponse, MsgSuperfluidUndelegateResponseSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgSuperfluidUnbondLockResponse, MsgSuperfluidUnbondLockResponseSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgLockAndSuperfluidDelegateResponse, MsgLockAndSuperfluidDelegateResponseSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType, MsgUnPoolWhitelistedPoolResponse, MsgUnPoolWhitelistedPoolResponseSDKType } from "./tx";
-
-/** Msg defines the Msg service. */
-export interface Msg {
-  /** Execute superfluid delegation for a lockup */
-  superfluidDelegate(request: MsgSuperfluidDelegate): Promise<MsgSuperfluidDelegateResponse>;
-
-  /** Execute superfluid undelegation for a lockup */
-  superfluidUndelegate(request: MsgSuperfluidUndelegate): Promise<MsgSuperfluidUndelegateResponse>;
-
-  /**
-   * For a given lock that is being superfluidly undelegated,
-   * also unbond the underlying lock.
-   */
-  superfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse>;
-
-  /** Execute lockup lock and superfluid delegation in a single msg */
-  lockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse>;
-  unPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool): Promise<MsgUnPoolWhitelistedPoolResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.superfluidDelegate = this.superfluidDelegate.bind(this);
-    this.superfluidUndelegate = this.superfluidUndelegate.bind(this);
-    this.superfluidUnbondLock = this.superfluidUnbondLock.bind(this);
-    this.lockAndSuperfluidDelegate = this.lockAndSuperfluidDelegate.bind(this);
-    this.unPoolWhitelistedPool = this.unPoolWhitelistedPool.bind(this);
+export class Msg {
+  static SuperfluidDelegate(request: MsgSuperfluidDelegate, initRequest?: fm.InitReq): Promise<MsgSuperfluidDelegateResponse> {
+    return fm.fetchReq(`/osmosis.superfluid/SuperfluidDelegate`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  superfluidDelegate(request: MsgSuperfluidDelegate): Promise<MsgSuperfluidDelegateResponse> {
-    const data = MsgSuperfluidDelegate.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidDelegate", data);
-    return promise.then(data => MsgSuperfluidDelegateResponse.decode(new _m0.Reader(data)));
+  static SuperfluidUndelegate(request: MsgSuperfluidUndelegate, initRequest?: fm.InitReq): Promise<MsgSuperfluidUndelegateResponse> {
+    return fm.fetchReq(`/osmosis.superfluid/SuperfluidUndelegate`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  superfluidUndelegate(request: MsgSuperfluidUndelegate): Promise<MsgSuperfluidUndelegateResponse> {
-    const data = MsgSuperfluidUndelegate.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidUndelegate", data);
-    return promise.then(data => MsgSuperfluidUndelegateResponse.decode(new _m0.Reader(data)));
+  static SuperfluidUnbondLock(request: MsgSuperfluidUnbondLock, initRequest?: fm.InitReq): Promise<MsgSuperfluidUnbondLockResponse> {
+    return fm.fetchReq(`/osmosis.superfluid/SuperfluidUnbondLock`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  superfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse> {
-    const data = MsgSuperfluidUnbondLock.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Msg", "SuperfluidUnbondLock", data);
-    return promise.then(data => MsgSuperfluidUnbondLockResponse.decode(new _m0.Reader(data)));
+  static LockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate, initRequest?: fm.InitReq): Promise<MsgLockAndSuperfluidDelegateResponse> {
+    return fm.fetchReq(`/osmosis.superfluid/LockAndSuperfluidDelegate`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
-  lockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse> {
-    const data = MsgLockAndSuperfluidDelegate.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Msg", "LockAndSuperfluidDelegate", data);
-    return promise.then(data => MsgLockAndSuperfluidDelegateResponse.decode(new _m0.Reader(data)));
-  }
-
-  unPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool): Promise<MsgUnPoolWhitelistedPoolResponse> {
-    const data = MsgUnPoolWhitelistedPool.encode(request).finish();
-    const promise = this.rpc.request("osmosis.superfluid.Msg", "UnPoolWhitelistedPool", data);
-    return promise.then(data => MsgUnPoolWhitelistedPoolResponse.decode(new _m0.Reader(data)));
+  static UnPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool, initRequest?: fm.InitReq): Promise<MsgUnPoolWhitelistedPoolResponse> {
+    return fm.fetchReq(`/osmosis.superfluid/UnPoolWhitelistedPool`, { ...initRequest,
+      method: "POST",
+      body: JSON.stringify(request, fm.replacer)
+    });
   }
 
 }
