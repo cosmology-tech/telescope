@@ -12,7 +12,7 @@ it('GRPC-Gateway Msg Client', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Msg;
     const context = new GenericParseContext(ref, store, store.options);
-    printCode(createGRPCGatewayMsgClass(context, service))
+    expectCode(createGRPCGatewayMsgClass(context, service))
 });
 
 
