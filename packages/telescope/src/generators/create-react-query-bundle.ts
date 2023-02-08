@@ -8,70 +8,67 @@ import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
 
-export const plugin = (
-    builder: TelescopeBuilder
-) => {
+export const plugin = (builder: TelescopeBuilder) => {
+  // if react query is enabled
+  // generate hooks.ts based on query hooks generated in each package.
+  // eg: __fixtures__/output1/hooks.ts
+  if (!builder.options.reactQuery.enabled) {
+    return;
+  }
 
-    if (!builder.options.reactQuery.enabled) {
-        return;
+  const localname = 'hooks.ts';
+
+  // get mapping of packages and rpc query filenames.
+  const obj = {};
+  builder.rpcQueryClients.map((queryClient) => {
+    const path = `./${queryClient.localname.replace(/\.ts$/, '')}`;
+    dotty.put(obj, queryClient.package, path);
+  });
+
+  // create proto ref for context
+  const pkg = '@root';
+  const ref: ProtoRef = {
+    absolute: '',
+    filename: localname,
+    proto: {
+      package: pkg,
+      imports: null,
+      root: {},
+      importNames: null
+    },
+    traversed: {
+      package: pkg,
+      imports: null,
+      root: {},
+      importNames: null,
+      acceptsInterface: {},
+      implementsInterface: {},
+      parsedExports: {},
+      parsedImports: {},
+      symbols: null
     }
+  };
 
-    const localname = 'hooks.ts';
+  // create context
+  const pCtx = new TelescopeParseContext(ref, builder.store, builder.options);
 
-    const obj = {};
-    builder.rpcQueryClients.map(queryClient => {
-        const path = `./${queryClient.localname.replace(/\.ts$/, '')}`;
-        dotty.put(obj, queryClient.package, path);
-    });
+  // generate code for createRpcQueryHooks and imports of related packages.
+  const ast = createScopedRpcHookFactory(
+    pCtx.proto,
+    obj,
+    'createRpcQueryHooks'
+  );
 
-    const pkg = '@root';
-    const ref: ProtoRef = {
-        absolute: '',
-        filename: localname,
-        proto: {
-            package: pkg,
-            imports: null,
-            root: {},
-            importNames: null
-        },
-        traversed: {
-            package: pkg,
-            imports: null,
-            root: {},
-            importNames: null,
-            acceptsInterface: {},
-            implementsInterface: {},
-            parsedExports: {},
-            parsedImports: {},
-            symbols: null
-        }
-    }
+  // generate imports added by context.addUtils
+  const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
+  const importStmts = getImportStatements(localname, imports);
 
-    const pCtx = new TelescopeParseContext(
-        ref,
-        builder.store,
-        builder.options
-    );
+  // construct the AST
+  const prog = [].concat(importStmts).concat(ast);
 
-    const ast = createScopedRpcHookFactory(
-        pCtx.proto,
-        obj,
-        'createRpcQueryHooks'
-    )
+  // write the file.
+  const filename = join(builder.outPath, localname);
+  builder.files.push(localname);
 
-    const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
-    const importStmts = getImportStatements(
-        localname,
-        imports
-    );
-
-    const prog = []
-        .concat(importStmts)
-        .concat(ast);
-
-    const filename = join(builder.outPath, localname);
-    builder.files.push(localname);
-
-    writeAstToFile(builder.outPath, builder.options, prog, filename);
-
+  writeAstToFile(builder.outPath, builder.options, prog, filename);
 };

@@ -1,122 +1,116 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
 import {
-    createRpcQueryExtension,
-    createRpcClientClass,
-    createRpcClientInterface,
-    createRpcQueryHookInterfaces,
-    createRpcQueryHookClientMap,
-    createRpcQueryHooks
+  createRpcQueryExtension,
+  createRpcClientClass,
+  createRpcClientInterface,
+  createRpcQueryHookInterfaces,
+  createRpcQueryHookClientMap,
+  createRpcQueryHooks
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoService } from '@osmonauts/types';
 
-export const plugin = (
-    builder: TelescopeBuilder,
-    bundler: Bundler
-) => {
+export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
+  const clients = bundler.contexts
+    .map((c) => {
+      const enabled = c.proto.pluginValue('rpcClients.enabled');
+      if (!enabled) return;
 
-    const clients = bundler.contexts.map(c => {
+      const inline = c.proto.pluginValue('rpcClients.inline');
+      if (inline) return;
 
-        const enabled = c.proto.pluginValue('rpcClients.enabled');
-        if (!enabled) return;
+      if (c.proto.isExcluded()) return;
 
-        const inline = c.proto.pluginValue('rpcClients.inline');
-        if (inline) return;
+      const ctx = bundler.getFreshContext(c);
 
-        if (c.proto.isExcluded()) return;
+      // get mutations, services
+      parse(ctx);
 
-        const ctx = bundler.getFreshContext(c);
+      const proto = getNestedProto(c.ref.traversed);
 
-        // get mutations, services
-        parse(ctx);
+      //// Anything except Msg Service OK...
+      const allowedRpcServices =
+        builder.options.rpcClients.enabledServices.filter((a) => a !== 'Msg');
+      const found = allowedRpcServices.some((svc) => {
+        return proto?.[svc] && proto[svc]?.type === 'Service';
+      });
 
-        const proto = getNestedProto(c.ref.traversed);
+      if (!found) {
+        return;
+      }
+      ///
 
-        //// Anything except Msg Service OK...
-        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
-        const found = allowedRpcServices.some(svc => {
-            return proto?.[svc] &&
-                proto[svc]?.type === 'Service'
-        });
+      let name, getImportsFrom;
 
-        if (!found) {
-            return;
+      allowedRpcServices.forEach((svcKey) => {
+        if (proto[svcKey]) {
+          if (svcKey === 'Query') {
+            getImportsFrom = ctx.queries;
+          } else {
+            getImportsFrom = ctx.services;
+          }
+          name = svcKey;
         }
-        ///
+      });
 
-        let name, getImportsFrom;
+      const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
+      const filename = bundler.getFilename(localname);
 
-        allowedRpcServices.forEach(svcKey => {
-            if (proto[svcKey]) {
-                if (svcKey === 'Query') {
-                    getImportsFrom = ctx.queries;
-                } else {
-                    getImportsFrom = ctx.services;
-                }
-                name = svcKey;
-            }
-        });
+      const asts = [];
 
-        const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
-        const filename = bundler.getFilename(localname);
+      allowedRpcServices.forEach((svcKey) => {
+        if (proto[svcKey]) {
+          const svc: ProtoService = proto[svcKey];
 
-        const asts = [];
+          asts.push(createRpcClientInterface(ctx.generic, svc));
+          asts.push(createRpcClientClass(ctx.generic, svc));
+          if (c.proto.pluginValue('rpcClients.extensions')) {
+            asts.push(createRpcQueryExtension(ctx.generic, svc));
+          }
 
-        allowedRpcServices.forEach(svcKey => {
-            if (proto[svcKey]) {
+          // see if current file has been reactQuery enabled and included
+          const includeReactQueryHooks =
+            c.proto.pluginValue('reactQuery.enabled') &&
+            isRefIncluded(c.ref, c.proto.pluginValue('reactQuery.include'));
 
-                const svc: ProtoService = proto[svcKey];
-
-                asts.push(createRpcClientInterface(ctx.generic, svc));
-                asts.push(createRpcClientClass(ctx.generic, svc));
-                if (c.proto.pluginValue('rpcClients.extensions')) {
-                    asts.push(createRpcQueryExtension(ctx.generic, svc));
-                }
-
-                const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
-                    c.ref,
-                    c.proto.pluginValue('reactQuery.include')
-                )
-
-                // react query
-                // TODO use the imports and make separate files
-                if (includeReactQueryHooks) {
-                    [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
-                    [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
-                    asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
-                }
-            }
-        });
-
-        if (!asts.length) {
-            return;
+          // generate react query parts if included.
+          // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+          // export interface UseAuditorAttributesQuery<TData> ...
+          // const _queryClients: WeakMap ...
+          // const getQueryService = ...
+          // export const createRpcQueryHooks = ...
+          // TODO use the imports and make separate files
+          if (includeReactQueryHooks) {
+            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+            asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+          }
         }
+      });
 
-        const serviceImports = getDepsFromQueries(
-            getImportsFrom,
-            localname
-        );
+      if (!asts.length) {
+        return;
+      }
 
-        // TODO we do NOT need all imports...
-        const imports = buildAllImports(ctx, serviceImports, localname);
-        const prog = []
-            .concat(imports)
-            .concat(ctx.body)
-            .concat(asts);
+      const serviceImports = getDepsFromQueries(getImportsFrom, localname);
 
-        bundler.writeAst(prog, filename);
-        bundler.addToBundle(c, localname);
+      // TODO we do NOT need all imports...
+      const imports = buildAllImports(ctx, serviceImports, localname);
+      const prog = [].concat(imports).concat(ctx.body).concat(asts);
 
-        return {
-            package: c.ref.proto.package,
-            localname,
-            filename
-        };
+      bundler.writeAst(prog, filename);
+      bundler.addToBundle(c, localname);
 
-    }).filter(Boolean);
+      return {
+        package: c.ref.proto.package,
+        localname,
+        filename
+      };
+    })
+    .filter(Boolean);
 
-    bundler.addRPCQueryClients(clients);
+  bundler.addRPCQueryClients(clients);
 };
