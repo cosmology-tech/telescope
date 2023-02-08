@@ -1,17 +1,17 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */
-  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse>;
+  Evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse>;
 
   /** AllEvidence queries all evidence. */
-  allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse>;
+  AllEvidence(request?: DeepPartial<QueryAllEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -22,32 +22,14 @@ export class QueryClientImpl implements Query {
     this.allEvidence = this.allEvidence.bind(this);
   }
 
-  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
-    const data = QueryEvidenceRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.evidence.v1beta1.Query", "Evidence", data);
-    return promise.then(data => QueryEvidenceResponse.decode(new _m0.Reader(data)));
+  evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse> {
+    return this.rpc.unary(QueryEvidenceDesc, QueryEvidenceRequest.fromPartial(request), metadata);
   }
 
-  allEvidence(request: QueryAllEvidenceRequest = {
+  allEvidence(request: DeepPartial<QueryAllEvidenceRequest> = {
     pagination: undefined
-  }): Promise<QueryAllEvidenceResponse> {
-    const data = QueryAllEvidenceRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.evidence.v1beta1.Query", "AllEvidence", data);
-    return promise.then(data => QueryAllEvidenceResponse.decode(new _m0.Reader(data)));
+  }, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse> {
+    return this.rpc.unary(QueryAllEvidenceDesc, QueryAllEvidenceRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
-      return queryService.evidence(request);
-    },
-
-    allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse> {
-      return queryService.allEvidence(request);
-    }
-
-  };
-};

@@ -1,18 +1,18 @@
 import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType } from "./claim";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  moduleAccountBalance(request?: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponse>;
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-  claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse>;
-  claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse>;
-  totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse>;
+  ModuleAccountBalance(request?: DeepPartial<QueryModuleAccountBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryModuleAccountBalanceResponse>;
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  ClaimRecord(request: DeepPartial<QueryClaimRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimRecordResponse>;
+  ClaimableForAction(request: DeepPartial<QueryClaimableForActionRequest>, metadata?: grpc.Metadata): Promise<QueryClaimableForActionResponse>;
+  TotalClaimable(request: DeepPartial<QueryTotalClaimableRequest>, metadata?: grpc.Metadata): Promise<QueryTotalClaimableResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -26,60 +26,24 @@ export class QueryClientImpl implements Query {
     this.totalClaimable = this.totalClaimable.bind(this);
   }
 
-  moduleAccountBalance(request: QueryModuleAccountBalanceRequest = {}): Promise<QueryModuleAccountBalanceResponse> {
-    const data = QueryModuleAccountBalanceRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.claim.v1beta1.Query", "ModuleAccountBalance", data);
-    return promise.then(data => QueryModuleAccountBalanceResponse.decode(new _m0.Reader(data)));
+  moduleAccountBalance(request: DeepPartial<QueryModuleAccountBalanceRequest> = {}, metadata?: grpc.Metadata): Promise<QueryModuleAccountBalanceResponse> {
+    return this.rpc.unary(QueryModuleAccountBalanceDesc, QueryModuleAccountBalanceRequest.fromPartial(request), metadata);
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.claim.v1beta1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse> {
-    const data = QueryClaimRecordRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.claim.v1beta1.Query", "ClaimRecord", data);
-    return promise.then(data => QueryClaimRecordResponse.decode(new _m0.Reader(data)));
+  claimRecord(request: DeepPartial<QueryClaimRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimRecordResponse> {
+    return this.rpc.unary(QueryClaimRecordDesc, QueryClaimRecordRequest.fromPartial(request), metadata);
   }
 
-  claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse> {
-    const data = QueryClaimableForActionRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.claim.v1beta1.Query", "ClaimableForAction", data);
-    return promise.then(data => QueryClaimableForActionResponse.decode(new _m0.Reader(data)));
+  claimableForAction(request: DeepPartial<QueryClaimableForActionRequest>, metadata?: grpc.Metadata): Promise<QueryClaimableForActionResponse> {
+    return this.rpc.unary(QueryClaimableForActionDesc, QueryClaimableForActionRequest.fromPartial(request), metadata);
   }
 
-  totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse> {
-    const data = QueryTotalClaimableRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.claim.v1beta1.Query", "TotalClaimable", data);
-    return promise.then(data => QueryTotalClaimableResponse.decode(new _m0.Reader(data)));
+  totalClaimable(request: DeepPartial<QueryTotalClaimableRequest>, metadata?: grpc.Metadata): Promise<QueryTotalClaimableResponse> {
+    return this.rpc.unary(QueryTotalClaimableDesc, QueryTotalClaimableRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    moduleAccountBalance(request?: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponse> {
-      return queryService.moduleAccountBalance(request);
-    },
-
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse> {
-      return queryService.claimRecord(request);
-    },
-
-    claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse> {
-      return queryService.claimableForAction(request);
-    },
-
-    totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse> {
-      return queryService.totalClaimable(request);
-    }
-
-  };
-};

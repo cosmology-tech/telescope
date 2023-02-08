@@ -3,69 +3,69 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsSDKType } from "./params";
-import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Return full balance of the module */
-  moduleBalance(request?: ModuleBalanceRequest): Promise<ModuleBalanceResponse>;
+  ModuleBalance(request?: DeepPartial<ModuleBalanceRequest>, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse>;
 
   /** Return locked balance of the module */
-  moduleLockedAmount(request?: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse>;
+  ModuleLockedAmount(request?: DeepPartial<ModuleLockedAmountRequest>, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse>;
 
   /** Returns unlockable coins which are not withdrawn yet */
-  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse>;
+  AccountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse>;
 
   /** Returns unlocking coins */
-  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse>;
+  AccountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse>;
 
   /** Return a locked coins that can't be withdrawn */
-  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse>;
+  AccountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse>;
 
   /** Returns locked records of an account with unlock time beyond timestamp */
-  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse>;
+  AccountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse>;
 
   /**
    * Returns locked records of an account with unlock time beyond timestamp
    * excluding tokens started unlocking
    */
-  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
+  AccountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
 
   /** Returns unlocked records with unlock time before timestamp */
-  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse>;
+  AccountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse>;
 
   /** Returns lock records by address, timestamp, denom */
-  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse>;
+  AccountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse>;
 
   /** Returns total locked per denom with longer past given time */
-  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse>;
+  LockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse>;
 
   /** Returns lock record by id */
-  lockedByID(request: LockedRequest): Promise<LockedResponse>;
+  LockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse>;
 
   /** Returns synthetic lockups by native lockup id */
-  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse>;
+  SyntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse>;
 
   /** Returns account locked records with longer duration */
-  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse>;
+  AccountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse>;
 
   /** Returns account locked records with a specific duration */
-  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse>;
+  AccountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse>;
 
   /**
    * Returns account locked records with longer duration excluding tokens
    * started unlocking
    */
-  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
+  AccountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
 
   /** Returns account's locked records for a denom with longer duration */
-  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse>;
+  AccountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse>;
 
   /** Params returns lockup params. */
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -91,180 +91,72 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  moduleBalance(request: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponse> {
-    const data = ModuleBalanceRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "ModuleBalance", data);
-    return promise.then(data => ModuleBalanceResponse.decode(new _m0.Reader(data)));
+  moduleBalance(request: DeepPartial<ModuleBalanceRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse> {
+    return this.rpc.unary(ModuleBalanceDesc, ModuleBalanceRequest.fromPartial(request), metadata);
   }
 
-  moduleLockedAmount(request: ModuleLockedAmountRequest = {}): Promise<ModuleLockedAmountResponse> {
-    const data = ModuleLockedAmountRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "ModuleLockedAmount", data);
-    return promise.then(data => ModuleLockedAmountResponse.decode(new _m0.Reader(data)));
+  moduleLockedAmount(request: DeepPartial<ModuleLockedAmountRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse> {
+    return this.rpc.unary(ModuleLockedAmountDesc, ModuleLockedAmountRequest.fromPartial(request), metadata);
   }
 
-  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse> {
-    const data = AccountUnlockableCoinsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockableCoins", data);
-    return promise.then(data => AccountUnlockableCoinsResponse.decode(new _m0.Reader(data)));
+  accountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse> {
+    return this.rpc.unary(AccountUnlockableCoinsDesc, AccountUnlockableCoinsRequest.fromPartial(request), metadata);
   }
 
-  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse> {
-    const data = AccountUnlockingCoinsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockingCoins", data);
-    return promise.then(data => AccountUnlockingCoinsResponse.decode(new _m0.Reader(data)));
+  accountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse> {
+    return this.rpc.unary(AccountUnlockingCoinsDesc, AccountUnlockingCoinsRequest.fromPartial(request), metadata);
   }
 
-  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse> {
-    const data = AccountLockedCoinsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedCoins", data);
-    return promise.then(data => AccountLockedCoinsResponse.decode(new _m0.Reader(data)));
+  accountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse> {
+    return this.rpc.unary(AccountLockedCoinsDesc, AccountLockedCoinsRequest.fromPartial(request), metadata);
   }
 
-  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse> {
-    const data = AccountLockedPastTimeRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTime", data);
-    return promise.then(data => AccountLockedPastTimeResponse.decode(new _m0.Reader(data)));
+  accountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse> {
+    return this.rpc.unary(AccountLockedPastTimeDesc, AccountLockedPastTimeRequest.fromPartial(request), metadata);
   }
 
-  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
-    const data = AccountLockedPastTimeNotUnlockingOnlyRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTimeNotUnlockingOnly", data);
-    return promise.then(data => AccountLockedPastTimeNotUnlockingOnlyResponse.decode(new _m0.Reader(data)));
+  accountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+    return this.rpc.unary(AccountLockedPastTimeNotUnlockingOnlyDesc, AccountLockedPastTimeNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
 
-  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse> {
-    const data = AccountUnlockedBeforeTimeRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockedBeforeTime", data);
-    return promise.then(data => AccountUnlockedBeforeTimeResponse.decode(new _m0.Reader(data)));
+  accountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse> {
+    return this.rpc.unary(AccountUnlockedBeforeTimeDesc, AccountUnlockedBeforeTimeRequest.fromPartial(request), metadata);
   }
 
-  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse> {
-    const data = AccountLockedPastTimeDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTimeDenom", data);
-    return promise.then(data => AccountLockedPastTimeDenomResponse.decode(new _m0.Reader(data)));
+  accountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse> {
+    return this.rpc.unary(AccountLockedPastTimeDenomDesc, AccountLockedPastTimeDenomRequest.fromPartial(request), metadata);
   }
 
-  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse> {
-    const data = LockedDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "LockedDenom", data);
-    return promise.then(data => LockedDenomResponse.decode(new _m0.Reader(data)));
+  lockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse> {
+    return this.rpc.unary(LockedDenomDesc, LockedDenomRequest.fromPartial(request), metadata);
   }
 
-  lockedByID(request: LockedRequest): Promise<LockedResponse> {
-    const data = LockedRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "LockedByID", data);
-    return promise.then(data => LockedResponse.decode(new _m0.Reader(data)));
+  lockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse> {
+    return this.rpc.unary(LockedDesc, LockedRequest.fromPartial(request), metadata);
   }
 
-  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse> {
-    const data = SyntheticLockupsByLockupIDRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "SyntheticLockupsByLockupID", data);
-    return promise.then(data => SyntheticLockupsByLockupIDResponse.decode(new _m0.Reader(data)));
+  syntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse> {
+    return this.rpc.unary(SyntheticLockupsByLockupIDDesc, SyntheticLockupsByLockupIDRequest.fromPartial(request), metadata);
   }
 
-  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse> {
-    const data = AccountLockedLongerDurationRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDuration", data);
-    return promise.then(data => AccountLockedLongerDurationResponse.decode(new _m0.Reader(data)));
+  accountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse> {
+    return this.rpc.unary(AccountLockedLongerDurationDesc, AccountLockedLongerDurationRequest.fromPartial(request), metadata);
   }
 
-  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse> {
-    const data = AccountLockedDurationRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedDuration", data);
-    return promise.then(data => AccountLockedDurationResponse.decode(new _m0.Reader(data)));
+  accountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse> {
+    return this.rpc.unary(AccountLockedDurationDesc, AccountLockedDurationRequest.fromPartial(request), metadata);
   }
 
-  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
-    const data = AccountLockedLongerDurationNotUnlockingOnlyRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDurationNotUnlockingOnly", data);
-    return promise.then(data => AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(new _m0.Reader(data)));
+  accountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+    return this.rpc.unary(AccountLockedLongerDurationNotUnlockingOnlyDesc, AccountLockedLongerDurationNotUnlockingOnlyRequest.fromPartial(request), metadata);
   }
 
-  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse> {
-    const data = AccountLockedLongerDurationDenomRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDurationDenom", data);
-    return promise.then(data => AccountLockedLongerDurationDenomResponse.decode(new _m0.Reader(data)));
+  accountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse> {
+    return this.rpc.unary(AccountLockedLongerDurationDenomDesc, AccountLockedLongerDurationDenomRequest.fromPartial(request), metadata);
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("osmosis.lockup.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    moduleBalance(request?: ModuleBalanceRequest): Promise<ModuleBalanceResponse> {
-      return queryService.moduleBalance(request);
-    },
-
-    moduleLockedAmount(request?: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse> {
-      return queryService.moduleLockedAmount(request);
-    },
-
-    accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse> {
-      return queryService.accountUnlockableCoins(request);
-    },
-
-    accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse> {
-      return queryService.accountUnlockingCoins(request);
-    },
-
-    accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse> {
-      return queryService.accountLockedCoins(request);
-    },
-
-    accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse> {
-      return queryService.accountLockedPastTime(request);
-    },
-
-    accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
-      return queryService.accountLockedPastTimeNotUnlockingOnly(request);
-    },
-
-    accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse> {
-      return queryService.accountUnlockedBeforeTime(request);
-    },
-
-    accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse> {
-      return queryService.accountLockedPastTimeDenom(request);
-    },
-
-    lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse> {
-      return queryService.lockedDenom(request);
-    },
-
-    lockedByID(request: LockedRequest): Promise<LockedResponse> {
-      return queryService.lockedByID(request);
-    },
-
-    syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse> {
-      return queryService.syntheticLockupsByLockupID(request);
-    },
-
-    accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse> {
-      return queryService.accountLockedLongerDuration(request);
-    },
-
-    accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse> {
-      return queryService.accountLockedDuration(request);
-    },
-
-    accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
-      return queryService.accountLockedLongerDurationNotUnlockingOnly(request);
-    },
-
-    accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse> {
-      return queryService.accountLockedLongerDurationDenom(request);
-    },
-
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    }
-
-  };
-};

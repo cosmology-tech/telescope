@@ -1,43 +1,44 @@
 import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../../helpers";
 import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenInitResponse, MsgChannelOpenInitResponseSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenTryResponse, MsgChannelOpenTryResponseSDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenAckResponse, MsgChannelOpenAckResponseSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelOpenConfirmResponse, MsgChannelOpenConfirmResponseSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseInitResponse, MsgChannelCloseInitResponseSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgChannelCloseConfirmResponse, MsgChannelCloseConfirmResponseSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgRecvPacketResponse, MsgRecvPacketResponseSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutResponse, MsgTimeoutResponseSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgTimeoutOnCloseResponse, MsgTimeoutOnCloseResponseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType, MsgAcknowledgementResponse, MsgAcknowledgementResponseSDKType } from "./tx";
 
 /** Msg defines the ibc/channel Msg service. */
 export interface Msg {
   /** ChannelOpenInit defines a rpc handler method for MsgChannelOpenInit. */
-  channelOpenInit(request: MsgChannelOpenInit): Promise<MsgChannelOpenInitResponse>;
+  ChannelOpenInit(request: DeepPartial<MsgChannelOpenInit>, metadata?: grpc.Metadata): Promise<MsgChannelOpenInitResponse>;
 
   /** ChannelOpenTry defines a rpc handler method for MsgChannelOpenTry. */
-  channelOpenTry(request: MsgChannelOpenTry): Promise<MsgChannelOpenTryResponse>;
+  ChannelOpenTry(request: DeepPartial<MsgChannelOpenTry>, metadata?: grpc.Metadata): Promise<MsgChannelOpenTryResponse>;
 
   /** ChannelOpenAck defines a rpc handler method for MsgChannelOpenAck. */
-  channelOpenAck(request: MsgChannelOpenAck): Promise<MsgChannelOpenAckResponse>;
+  ChannelOpenAck(request: DeepPartial<MsgChannelOpenAck>, metadata?: grpc.Metadata): Promise<MsgChannelOpenAckResponse>;
 
   /** ChannelOpenConfirm defines a rpc handler method for MsgChannelOpenConfirm. */
-  channelOpenConfirm(request: MsgChannelOpenConfirm): Promise<MsgChannelOpenConfirmResponse>;
+  ChannelOpenConfirm(request: DeepPartial<MsgChannelOpenConfirm>, metadata?: grpc.Metadata): Promise<MsgChannelOpenConfirmResponse>;
 
   /** ChannelCloseInit defines a rpc handler method for MsgChannelCloseInit. */
-  channelCloseInit(request: MsgChannelCloseInit): Promise<MsgChannelCloseInitResponse>;
+  ChannelCloseInit(request: DeepPartial<MsgChannelCloseInit>, metadata?: grpc.Metadata): Promise<MsgChannelCloseInitResponse>;
 
   /**
    * ChannelCloseConfirm defines a rpc handler method for
    * MsgChannelCloseConfirm.
    */
-  channelCloseConfirm(request: MsgChannelCloseConfirm): Promise<MsgChannelCloseConfirmResponse>;
+  ChannelCloseConfirm(request: DeepPartial<MsgChannelCloseConfirm>, metadata?: grpc.Metadata): Promise<MsgChannelCloseConfirmResponse>;
 
   /** RecvPacket defines a rpc handler method for MsgRecvPacket. */
-  recvPacket(request: MsgRecvPacket): Promise<MsgRecvPacketResponse>;
+  RecvPacket(request: DeepPartial<MsgRecvPacket>, metadata?: grpc.Metadata): Promise<MsgRecvPacketResponse>;
 
   /** Timeout defines a rpc handler method for MsgTimeout. */
-  timeout(request: MsgTimeout): Promise<MsgTimeoutResponse>;
+  Timeout(request: DeepPartial<MsgTimeout>, metadata?: grpc.Metadata): Promise<MsgTimeoutResponse>;
 
   /** TimeoutOnClose defines a rpc handler method for MsgTimeoutOnClose. */
-  timeoutOnClose(request: MsgTimeoutOnClose): Promise<MsgTimeoutOnCloseResponse>;
+  TimeoutOnClose(request: DeepPartial<MsgTimeoutOnClose>, metadata?: grpc.Metadata): Promise<MsgTimeoutOnCloseResponse>;
 
   /** Acknowledgement defines a rpc handler method for MsgAcknowledgement. */
-  acknowledgement(request: MsgAcknowledgement): Promise<MsgAcknowledgementResponse>;
+  Acknowledgement(request: DeepPartial<MsgAcknowledgement>, metadata?: grpc.Metadata): Promise<MsgAcknowledgementResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -56,64 +57,44 @@ export class MsgClientImpl implements Msg {
     this.acknowledgement = this.acknowledgement.bind(this);
   }
 
-  channelOpenInit(request: MsgChannelOpenInit): Promise<MsgChannelOpenInitResponse> {
-    const data = MsgChannelOpenInit.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelOpenInit", data);
-    return promise.then(data => MsgChannelOpenInitResponse.decode(new _m0.Reader(data)));
+  channelOpenInit(request: DeepPartial<MsgChannelOpenInit>, metadata?: grpc.Metadata): Promise<MsgChannelOpenInitResponse> {
+    return this.rpc.unary(MsgChannelOpenInit, MsgChannelOpenInit.fromPartial(request), metadata);
   }
 
-  channelOpenTry(request: MsgChannelOpenTry): Promise<MsgChannelOpenTryResponse> {
-    const data = MsgChannelOpenTry.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelOpenTry", data);
-    return promise.then(data => MsgChannelOpenTryResponse.decode(new _m0.Reader(data)));
+  channelOpenTry(request: DeepPartial<MsgChannelOpenTry>, metadata?: grpc.Metadata): Promise<MsgChannelOpenTryResponse> {
+    return this.rpc.unary(MsgChannelOpenTry, MsgChannelOpenTry.fromPartial(request), metadata);
   }
 
-  channelOpenAck(request: MsgChannelOpenAck): Promise<MsgChannelOpenAckResponse> {
-    const data = MsgChannelOpenAck.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelOpenAck", data);
-    return promise.then(data => MsgChannelOpenAckResponse.decode(new _m0.Reader(data)));
+  channelOpenAck(request: DeepPartial<MsgChannelOpenAck>, metadata?: grpc.Metadata): Promise<MsgChannelOpenAckResponse> {
+    return this.rpc.unary(MsgChannelOpenAck, MsgChannelOpenAck.fromPartial(request), metadata);
   }
 
-  channelOpenConfirm(request: MsgChannelOpenConfirm): Promise<MsgChannelOpenConfirmResponse> {
-    const data = MsgChannelOpenConfirm.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelOpenConfirm", data);
-    return promise.then(data => MsgChannelOpenConfirmResponse.decode(new _m0.Reader(data)));
+  channelOpenConfirm(request: DeepPartial<MsgChannelOpenConfirm>, metadata?: grpc.Metadata): Promise<MsgChannelOpenConfirmResponse> {
+    return this.rpc.unary(MsgChannelOpenConfirm, MsgChannelOpenConfirm.fromPartial(request), metadata);
   }
 
-  channelCloseInit(request: MsgChannelCloseInit): Promise<MsgChannelCloseInitResponse> {
-    const data = MsgChannelCloseInit.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelCloseInit", data);
-    return promise.then(data => MsgChannelCloseInitResponse.decode(new _m0.Reader(data)));
+  channelCloseInit(request: DeepPartial<MsgChannelCloseInit>, metadata?: grpc.Metadata): Promise<MsgChannelCloseInitResponse> {
+    return this.rpc.unary(MsgChannelCloseInit, MsgChannelCloseInit.fromPartial(request), metadata);
   }
 
-  channelCloseConfirm(request: MsgChannelCloseConfirm): Promise<MsgChannelCloseConfirmResponse> {
-    const data = MsgChannelCloseConfirm.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "ChannelCloseConfirm", data);
-    return promise.then(data => MsgChannelCloseConfirmResponse.decode(new _m0.Reader(data)));
+  channelCloseConfirm(request: DeepPartial<MsgChannelCloseConfirm>, metadata?: grpc.Metadata): Promise<MsgChannelCloseConfirmResponse> {
+    return this.rpc.unary(MsgChannelCloseConfirm, MsgChannelCloseConfirm.fromPartial(request), metadata);
   }
 
-  recvPacket(request: MsgRecvPacket): Promise<MsgRecvPacketResponse> {
-    const data = MsgRecvPacket.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "RecvPacket", data);
-    return promise.then(data => MsgRecvPacketResponse.decode(new _m0.Reader(data)));
+  recvPacket(request: DeepPartial<MsgRecvPacket>, metadata?: grpc.Metadata): Promise<MsgRecvPacketResponse> {
+    return this.rpc.unary(MsgRecvPacket, MsgRecvPacket.fromPartial(request), metadata);
   }
 
-  timeout(request: MsgTimeout): Promise<MsgTimeoutResponse> {
-    const data = MsgTimeout.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "Timeout", data);
-    return promise.then(data => MsgTimeoutResponse.decode(new _m0.Reader(data)));
+  timeout(request: DeepPartial<MsgTimeout>, metadata?: grpc.Metadata): Promise<MsgTimeoutResponse> {
+    return this.rpc.unary(MsgTimeout, MsgTimeout.fromPartial(request), metadata);
   }
 
-  timeoutOnClose(request: MsgTimeoutOnClose): Promise<MsgTimeoutOnCloseResponse> {
-    const data = MsgTimeoutOnClose.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "TimeoutOnClose", data);
-    return promise.then(data => MsgTimeoutOnCloseResponse.decode(new _m0.Reader(data)));
+  timeoutOnClose(request: DeepPartial<MsgTimeoutOnClose>, metadata?: grpc.Metadata): Promise<MsgTimeoutOnCloseResponse> {
+    return this.rpc.unary(MsgTimeoutOnClose, MsgTimeoutOnClose.fromPartial(request), metadata);
   }
 
-  acknowledgement(request: MsgAcknowledgement): Promise<MsgAcknowledgementResponse> {
-    const data = MsgAcknowledgement.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.channel.v1.Msg", "Acknowledgement", data);
-    return promise.then(data => MsgAcknowledgementResponse.decode(new _m0.Reader(data)));
+  acknowledgement(request: DeepPartial<MsgAcknowledgement>, metadata?: grpc.Metadata): Promise<MsgAcknowledgementResponse> {
+    return this.rpc.unary(MsgAcknowledgement, MsgAcknowledgement.fromPartial(request), metadata);
   }
 
 }

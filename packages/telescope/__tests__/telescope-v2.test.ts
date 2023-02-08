@@ -93,7 +93,7 @@ const options: TelescopeOptions = {
   },
 
   rpcClients: {
-    type: 'tendermint',
+    type: 'grpc-web',
     enabled: true,
     camelCase: true
   },
@@ -112,24 +112,6 @@ const options: TelescopeOptions = {
         'cosmos.gov.v1beta1',
         'evmos.erc20.v1'
       ]
-    }
-  },
-  // BUG: the grpc helpers won't be added
-  // this is for testing only, so this is ok
-  packages: {
-    akash: {
-      rpcClients: {
-        type: 'grpc-gateway',
-        enabled: true,
-        camelCase: true
-      }
-    },
-    evmos: {
-      rpcClients: {
-        type: 'grpc-web',
-        enabled: true,
-        camelCase: true
-      }
     }
   }
 };

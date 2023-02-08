@@ -1,7 +1,7 @@
 import { ParamChange, ParamChangeSDKType } from "./params";
-import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -10,10 +10,10 @@ export interface Query {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** Subspaces queries for all registered subspaces and all keys for a subspace. */
-  subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
+  Subspaces(request?: DeepPartial<QuerySubspacesRequest>, metadata?: grpc.Metadata): Promise<QuerySubspacesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -24,30 +24,12 @@ export class QueryClientImpl implements Query {
     this.subspaces = this.subspaces.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  subspaces(request: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponse> {
-    const data = QuerySubspacesRequest.encode(request).finish();
-    const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Subspaces", data);
-    return promise.then(data => QuerySubspacesResponse.decode(new _m0.Reader(data)));
+  subspaces(request: DeepPartial<QuerySubspacesRequest> = {}, metadata?: grpc.Metadata): Promise<QuerySubspacesResponse> {
+    return this.rpc.unary(QuerySubspacesDesc, QuerySubspacesRequest.fromPartial(request), metadata);
   }
 
 }
-export const createRpcQueryExtension = (base: QueryClient) => {
-  const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
-  return {
-    params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-      return queryService.params(request);
-    },
-
-    subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
-      return queryService.subspaces(request);
-    }
-
-  };
-};

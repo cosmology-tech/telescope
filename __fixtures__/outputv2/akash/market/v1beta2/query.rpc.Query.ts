@@ -3,49 +3,66 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
 import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
-export class Query {
-  static Orders(request: QueryOrdersRequest, initRequest?: fm.InitReq): Promise<QueryOrdersResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/orders/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** Orders queries orders with filters */
+  Orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse>;
+
+  /** Order queries order details */
+  Order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse>;
+
+  /** Bids queries bids with filters */
+  Bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse>;
+
+  /** Bid queries bid details */
+  Bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse>;
+
+  /** Leases queries leases with filters */
+  Leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse>;
+
+  /** Lease queries lease details */
+  Lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.orders = this.orders.bind(this);
+    this.order = this.order.bind(this);
+    this.bids = this.bids.bind(this);
+    this.bid = this.bid.bind(this);
+    this.leases = this.leases.bind(this);
+    this.lease = this.lease.bind(this);
   }
 
-  static Order(request: QueryOrderRequest, initRequest?: fm.InitReq): Promise<QueryOrderResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/orders/info?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse> {
+    return this.rpc.unary(QueryOrdersDesc, QueryOrdersRequest.fromPartial(request), metadata);
   }
 
-  static Bids(request: QueryBidsRequest, initRequest?: fm.InitReq): Promise<QueryBidsResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/bids/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse> {
+    return this.rpc.unary(QueryOrderDesc, QueryOrderRequest.fromPartial(request), metadata);
   }
 
-  static Bid(request: QueryBidRequest, initRequest?: fm.InitReq): Promise<QueryBidResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/bids/info?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse> {
+    return this.rpc.unary(QueryBidsDesc, QueryBidsRequest.fromPartial(request), metadata);
   }
 
-  static Leases(request: QueryLeasesRequest, initRequest?: fm.InitReq): Promise<QueryLeasesResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/leases/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse> {
+    return this.rpc.unary(QueryBidDesc, QueryBidRequest.fromPartial(request), metadata);
   }
 
-  static Lease(request: QueryLeaseRequest, initRequest?: fm.InitReq): Promise<QueryLeaseResponse> {
-    return fm.fetchReq(`/akash/market/v1beta2/leases/info?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse> {
+    return this.rpc.unary(QueryLeasesDesc, QueryLeasesRequest.fromPartial(request), metadata);
+  }
+
+  lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse> {
+    return this.rpc.unary(QueryLeaseDesc, QueryLeaseRequest.fromPartial(request), metadata);
   }
 
 }
