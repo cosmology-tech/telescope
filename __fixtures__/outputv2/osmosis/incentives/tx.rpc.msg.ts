@@ -27,3 +27,54 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "osmosis.incentives.Msg"
+};
+export const MsgCreateGaugeDesc: UnaryMethodDefinitionish = {
+  methodName: "CreateGauge",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgCreateGauge.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgCreateGaugeResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgAddToGaugeDesc: UnaryMethodDefinitionish = {
+  methodName: "AddToGauge",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgAddToGauge.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgAddToGaugeResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};

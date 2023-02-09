@@ -55,3 +55,126 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "osmosis.superfluid.Msg"
+};
+export const MsgSuperfluidDelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidDelegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgSuperfluidDelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgSuperfluidDelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgSuperfluidUndelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidUndelegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgSuperfluidUndelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgSuperfluidUndelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgSuperfluidUnbondLockDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidUnbondLock",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgSuperfluidUnbondLock.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgSuperfluidUnbondLockResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgLockAndSuperfluidDelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "LockAndSuperfluidDelegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgLockAndSuperfluidDelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgLockAndSuperfluidDelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgUnPoolWhitelistedPoolDesc: UnaryMethodDefinitionish = {
+  methodName: "UnPoolWhitelistedPool",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgUnPoolWhitelistedPool.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgUnPoolWhitelistedPoolResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};

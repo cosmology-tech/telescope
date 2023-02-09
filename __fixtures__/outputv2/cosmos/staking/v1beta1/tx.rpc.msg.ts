@@ -66,3 +66,126 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "cosmos.staking.v1beta1.Msg"
+};
+export const MsgCreateValidatorDesc: UnaryMethodDefinitionish = {
+  methodName: "CreateValidator",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgCreateValidator.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgCreateValidatorResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgEditValidatorDesc: UnaryMethodDefinitionish = {
+  methodName: "EditValidator",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgEditValidator.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgEditValidatorResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgDelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "Delegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgDelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgDelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgBeginRedelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "BeginRedelegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgBeginRedelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgBeginRedelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgUndelegateDesc: UnaryMethodDefinitionish = {
+  methodName: "Undelegate",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgUndelegate.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgUndelegateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};

@@ -57,3 +57,102 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "cosmos.gov.v1beta1.Msg"
+};
+export const MsgSubmitProposalDesc: UnaryMethodDefinitionish = {
+  methodName: "SubmitProposal",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgSubmitProposal.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgSubmitProposalResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgVoteDesc: UnaryMethodDefinitionish = {
+  methodName: "Vote",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgVote.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgVoteResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgVoteWeightedDesc: UnaryMethodDefinitionish = {
+  methodName: "VoteWeighted",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgVoteWeighted.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgVoteWeightedResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgDepositDesc: UnaryMethodDefinitionish = {
+  methodName: "Deposit",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgDeposit.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgDepositResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};

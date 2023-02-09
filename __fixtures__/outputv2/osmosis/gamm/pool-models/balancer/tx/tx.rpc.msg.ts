@@ -19,3 +19,30 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "osmosis.gamm.poolmodels.balancer.v1beta1.Msg"
+};
+export const MsgCreateBalancerPoolDesc: UnaryMethodDefinitionish = {
+  methodName: "CreateBalancerPool",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgCreateBalancerPool.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgCreateBalancerPoolResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};

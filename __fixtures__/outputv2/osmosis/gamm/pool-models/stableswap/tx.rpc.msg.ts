@@ -26,3 +26,54 @@ export class MsgClientImpl implements Msg {
   }
 
 }
+export const MsgDesc = {
+  serviceName: "osmosis.gamm.poolmodels.stableswap.v1beta1.Msg"
+};
+export const MsgCreateStableswapPoolDesc: UnaryMethodDefinitionish = {
+  methodName: "CreateStableswapPool",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgCreateStableswapPool.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgCreateStableswapPoolResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const MsgStableSwapAdjustScalingFactorsDesc: UnaryMethodDefinitionish = {
+  methodName: "StableSwapAdjustScalingFactors",
+  service: MsgDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return MsgStableSwapAdjustScalingFactors.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...MsgStableSwapAdjustScalingFactorsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
