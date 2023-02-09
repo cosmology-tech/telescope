@@ -1,6 +1,6 @@
 import { GenericParseContext } from '../../../../encoding';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
-import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
+import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
 import { camel } from '@osmonauts/utils';
 import { returnReponseType, optionalBool } from '../utils/rpc';
 import { initRequest } from './utils';
@@ -284,6 +284,7 @@ const grpcGatewayMethodDefinition = (
     context: GenericParseContext,
     name: string,
     svc: ProtoServiceMethod,
+    leadingComments?: t.CommentLine[]
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
@@ -326,7 +327,7 @@ const grpcGatewayMethodDefinition = (
         [paramRequest, initRequest], // params
         body, 
         returnReponseType(responseType),
-        [],
+        leadingComments,
         false,
         true,   // static 
     )
@@ -344,10 +345,12 @@ export const createGRPCGatewayQueryClass = (
         .map(key => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = method.comment ? [commentLine(method.comment)] : [];
             return grpcGatewayMethodDefinition(
                 context,
                 name,
                 method,
+                leadingComments
             )
         })
 
