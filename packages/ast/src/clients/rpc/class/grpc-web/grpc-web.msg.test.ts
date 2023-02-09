@@ -3,8 +3,8 @@ import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import { expectCode, getTestProtoStore, printCode } from '../../../../../test-utils';
 import { GenericParseContext } from '../../../../encoding';
 import { createGrpcWebMsgInterface, createGrpcWebMsgClass, GetDesc, getMethodDesc } from './grpc-web.msg';
-import { TxBody } from '../../../../../../../__fixtures__/outputv3/cosmos/tx/v1beta1/tx';
 const store = getTestProtoStore();
+
 store.traverseAll();
 
 it('test gRPC-web Msg Client', () => {

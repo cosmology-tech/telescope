@@ -1,8 +1,6 @@
 import { identifier } from '../../../../../utils';
 import * as t from '@babel/types'
 import { ProtoService } from '@osmonauts/types';
-import { GenericParseContext } from '../../../../../encoding';
-import { ProtoServiceMethod } from '@osmonauts/types';
 
 // second params for grpc-web method
 export const metadata = identifier(
