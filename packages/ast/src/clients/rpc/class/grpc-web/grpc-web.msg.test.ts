@@ -4,6 +4,7 @@ import { expectCode, getTestProtoStore, printCode } from '../../../../../test-ut
 import { GenericParseContext } from '../../../../encoding';
 import { createGrpcWebMsgInterface, createGrpcWebMsgClass } from './grpc-web.msg';
 import { GetDesc, getMethodDesc } from './utils';
+import { TxBody } from '../../../../../../../__fixtures__/outputv3/cosmos/tx/v1beta1/tx';
 const store = getTestProtoStore();
 store.traverseAll();
 
@@ -15,6 +16,14 @@ it('test gRPC-web Msg Client', () => {
 
     printCode(createGrpcWebMsgInterface(context, service));
     printCode(createGrpcWebMsgClass(context, service));
+    // const data = createGrpcWebMsgClass(context, service)
+    // console.log(data);
+    
     printCode(GetDesc(context, service)); 
-    // printCode(getMethodDesc(service, 'Grants'));
+    const Desces = getMethodDesc(context, service);
+
+    for (let i = 0; i < Desces.length; i++) {
+        const element = Desces[i];
+        printCode(element); 
+    }
 })

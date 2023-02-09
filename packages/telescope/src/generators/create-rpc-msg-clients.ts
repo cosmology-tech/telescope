@@ -4,6 +4,7 @@ import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgCla
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
+import { GetDesc, getMethodDesc } from '../../../ast/src/clients/rpc/class/grpc-web/utils/grpc-web';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -49,6 +50,12 @@ export const plugin = (
             case 'grpc-web':
                 asts.push(createGrpcWebQueryInterface(ctx.generic, proto.Msg))
                 asts.push(createGrpcWebQueryClass(ctx.generic, proto.Msg))
+                asts.push(GetDesc(ctx.generic, proto.Msg))
+                const Desces = getMethodDesc(ctx.generic, proto.Msg);
+                for (let i = 0; i < Desces.length; i++) {
+                    const element = Desces[i];
+                    asts.push(element);
+                }
             break;
             case 'tendermint':
                 default:
