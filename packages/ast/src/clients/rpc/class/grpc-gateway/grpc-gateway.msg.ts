@@ -115,7 +115,7 @@ export const createGRPCGatewayMsgClass = (
         .map((key) => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
-            const leadingComments = method.comment ? [commentLine(method.comment)] : [];
+            const leadingComments = method.comment ? [commentLine(' ' + method.comment)] : [];
             return grpcGatewayMethodDefinition(
                 name,
                 method,
