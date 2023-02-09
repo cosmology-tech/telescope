@@ -1,4 +1,5 @@
 export const grpcWeb = `
+import { grpc } from "@improbable-eng/grpc-web";
 
 interface UnaryMethodDefinitionishR
   extends grpc.UnaryMethodDefinition<any, any> {
