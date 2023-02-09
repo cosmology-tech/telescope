@@ -2,6 +2,7 @@ import { identifier } from '../../../../../utils';
 import * as t from '@babel/types'
 import { ProtoService } from '@osmonauts/types';
 import { GenericParseContext } from '../../../../../encoding';
+import { ProtoServiceMethod } from '@osmonauts/types';
 
 // second params for grpc-web method
 export const metadata = identifier(
@@ -76,8 +77,16 @@ export const GetDesc = (context: GenericParseContext, service: ProtoService) => 
 }
 
 export const getMethodDesc = (
-    context: GenericParseContext, service: ProtoService, methodName: string
+    service: ProtoService
+    // , svc: ProtoServiceMethod
 ) => {
+    // const methodName = svc.name
+    // const requestType = svc.requestType
+    // const responseType = svc.responseType
+    const methodName = 'Grant'
+    const requestType = 'MsgGrant'
+    const responseType = 'MsgGrantResponse'
+
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
@@ -118,7 +127,7 @@ export const getMethodDesc = (
                                                             t.memberExpression(
                                                                 t.callExpression(
                                                                     t.memberExpression(
-                                                                        t.identifier('QueryGrantsRequest'),
+                                                                        t.identifier(requestType),
                                                                         t.identifier('encode')
                                                                     ),
                                                                     [
@@ -161,7 +170,7 @@ export const getMethodDesc = (
                                                             t.spreadElement(
                                                                 t.callExpression(
                                                                     t.memberExpression(
-                                                                        t.identifier('QueryGrantsResponse'),
+                                                                        t.identifier(responseType),
                                                                         t.identifier('decode')
                                                                     ),
                                                                     [t.identifier('data')]
