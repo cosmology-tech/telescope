@@ -6,7 +6,7 @@ import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import * as fm from "../../../grpc-gateway";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 export class Query {
-  //Deployments queries deployments
+  // Deployments queries deployments
   static Deployments(request: QueryDeploymentsRequest, initRequest?: fm.InitReq): Promise<QueryDeploymentsResponse> {
     return fm.fetchReq(`/akash/deployment/v1beta2/deployments/list?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -14,7 +14,7 @@ export class Query {
     });
   }
 
-  //Deployment queries deployment details
+  // Deployment queries deployment details
   static Deployment(request: QueryDeploymentRequest, initRequest?: fm.InitReq): Promise<QueryDeploymentResponse> {
     return fm.fetchReq(`/akash/deployment/v1beta2/deployments/info?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -22,7 +22,7 @@ export class Query {
     });
   }
 
-  //Group queries group details
+  // Group queries group details
   static Group(request: QueryGroupRequest, initRequest?: fm.InitReq): Promise<QueryGroupResponse> {
     return fm.fetchReq(`/akash/deployment/v1beta2/groups/info?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,

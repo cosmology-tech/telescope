@@ -30,7 +30,7 @@ export class Query {
     });
   }
 
-  //PoolsWithFilter allows you to query specific pools with requested
+  // PoolsWithFilter allows you to query specific pools with requested
  parameters
   static PoolsWithFilter(request: QueryPoolsWithFilterRequest, initRequest?: fm.InitReq): Promise<QueryPoolsWithFilterResponse> {
     return fm.fetchReq(`/osmosis/gamm/v1beta1/filtered_pools?${fm.renderURLSearchParams({ ...request
@@ -39,7 +39,7 @@ export class Query {
     });
   }
 
-  //Per Pool gRPC Endpoints
+  // Per Pool gRPC Endpoints
   static Pool(request: QueryPoolRequest, initRequest?: fm.InitReq): Promise<QueryPoolResponse> {
     return fm.fetchReq(`/osmosis/gamm/v1beta1/pools/${request["pool_id"]}?${fm.renderURLSearchParams({ ...request
     }, ["pool_id"])}`, { ...initRequest,
@@ -47,7 +47,7 @@ export class Query {
     });
   }
 
-  //PoolType returns the type of the pool.
+  // PoolType returns the type of the pool.
  Returns "Balancer" as a string literal when the pool is a balancer pool.
  Errors if the pool is failed to be type caseted.
   static PoolType(request: QueryPoolTypeRequest, initRequest?: fm.InitReq): Promise<QueryPoolTypeResponse> {
@@ -57,7 +57,7 @@ export class Query {
     });
   }
 
-  //Simulates joining pool without a swap. Returns the amount of shares you'd
+  // Simulates joining pool without a swap. Returns the amount of shares you'd
  get and tokens needed to provide
   static CalcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest, initRequest?: fm.InitReq): Promise<QueryCalcJoinPoolNoSwapSharesResponse> {
     return fm.fetchReq(`osmosis.gamm.v1beta1.CalcJoinPoolNoSwapShares?${fm.renderURLSearchParams({ ...request
@@ -101,7 +101,7 @@ export class Query {
     });
   }
 
-  //SpotPrice defines a gRPC query handler that returns the spot price given
+  // SpotPrice defines a gRPC query handler that returns the spot price given
  a base denomination and a quote denomination.
   static SpotPrice(request: QuerySpotPriceRequest, initRequest?: fm.InitReq): Promise<QuerySpotPriceResponse> {
     return fm.fetchReq(`/osmosis/gamm/v1beta1/pools/${request["pool_id"]}/prices?${fm.renderURLSearchParams({ ...request
@@ -110,7 +110,7 @@ export class Query {
     });
   }
 
-  //Estimate the swap.
+  // Estimate the swap.
   static EstimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest, initRequest?: fm.InitReq): Promise<QuerySwapExactAmountInResponse> {
     return fm.fetchReq(`/osmosis/gamm/v1beta1/${request["pool_id"]}/estimate/swap_exact_amount_in?${fm.renderURLSearchParams({ ...request
     }, ["pool_id"])}`, { ...initRequest,

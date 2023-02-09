@@ -3,7 +3,7 @@ import { Provider, ProviderSDKType } from "./audit";
 import * as fm from "../../../grpc-gateway";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 export class Query {
-  //AllProvidersAttributes queries all providers
+  // AllProvidersAttributes queries all providers
  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   static AllProvidersAttributes(request: QueryAllProvidersAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
@@ -13,7 +13,7 @@ export class Query {
     });
   }
 
-  //ProviderAttributes queries all provider signed attributes
+  // ProviderAttributes queries all provider signed attributes
  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   static ProviderAttributes(request: QueryProviderAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
@@ -23,7 +23,7 @@ export class Query {
     });
   }
 
-  //ProviderAuditorAttributes queries provider signed attributes by specific auditor
+  // ProviderAuditorAttributes queries provider signed attributes by specific auditor
  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   static ProviderAuditorAttributes(request: QueryProviderAuditorRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
@@ -33,7 +33,7 @@ export class Query {
     });
   }
 
-  //AuditorAttributes queries all providers signed by this auditor
+  // AuditorAttributes queries all providers signed by this auditor
  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   static AuditorAttributes(request: QueryAuditorAttributesRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {

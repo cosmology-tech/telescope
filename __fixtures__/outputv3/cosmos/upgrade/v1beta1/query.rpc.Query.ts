@@ -2,7 +2,7 @@ import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrad
 import * as fm from "../../../grpc-gateway";
 import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPlanResponse, QueryCurrentPlanResponseSDKType, QueryAppliedPlanRequest, QueryAppliedPlanRequestSDKType, QueryAppliedPlanResponse, QueryAppliedPlanResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType, QueryModuleVersionsRequest, QueryModuleVersionsRequestSDKType, QueryModuleVersionsResponse, QueryModuleVersionsResponseSDKType, QueryAuthorityRequest, QueryAuthorityRequestSDKType, QueryAuthorityResponse, QueryAuthorityResponseSDKType } from "./query";
 export class Query {
-  //CurrentPlan queries the current upgrade plan.
+  // CurrentPlan queries the current upgrade plan.
   static CurrentPlan(request: QueryCurrentPlanRequest, initRequest?: fm.InitReq): Promise<QueryCurrentPlanResponse> {
     return fm.fetchReq(`/cosmos/upgrade/v1beta1/current_plan?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -10,7 +10,7 @@ export class Query {
     });
   }
 
-  //AppliedPlan queries a previously applied upgrade plan by its name.
+  // AppliedPlan queries a previously applied upgrade plan by its name.
   static AppliedPlan(request: QueryAppliedPlanRequest, initRequest?: fm.InitReq): Promise<QueryAppliedPlanResponse> {
     return fm.fetchReq(`/cosmos/upgrade/v1beta1/applied_plan/${request["name"]}?${fm.renderURLSearchParams({ ...request
     }, ["name"])}`, { ...initRequest,
@@ -18,7 +18,7 @@ export class Query {
     });
   }
 
-  //UpgradedConsensusState queries the consensus state that will serve
+  // UpgradedConsensusState queries the consensus state that will serve
  as a trusted kernel for the next version of this chain. It will only be
  stored at the last height of this chain.
  UpgradedConsensusState RPC not supported with legacy querier
@@ -31,7 +31,7 @@ export class Query {
     });
   }
 
-  //ModuleVersions queries the list of module versions from state.
+  // ModuleVersions queries the list of module versions from state.
 
  Since: cosmos-sdk 0.43
   static ModuleVersions(request: QueryModuleVersionsRequest, initRequest?: fm.InitReq): Promise<QueryModuleVersionsResponse> {
@@ -41,7 +41,7 @@ export class Query {
     });
   }
 
-  //Returns the account with authority to conduct upgrades
+  // Returns the account with authority to conduct upgrades
   static Authority(request: QueryAuthorityRequest, initRequest?: fm.InitReq): Promise<QueryAuthorityResponse> {
     return fm.fetchReq(`/cosmos/upgrade/v1beta1/authority?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
