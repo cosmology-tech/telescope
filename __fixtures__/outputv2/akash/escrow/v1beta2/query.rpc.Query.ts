@@ -1,20 +1,41 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
-export class Query {
-  static Accounts(request: QueryAccountsRequest, initRequest?: fm.InitReq): Promise<QueryAccountsResponse> {
-    return fm.fetchReq(`/akash/escrow/v1beta2/types/accounts/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service */
+export interface Query {
+  /**
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   * Accounts queries all accounts
+   */
+  Accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse>;
+
+  /**
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   * Payments queries all payments
+   */
+  Payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.accounts = this.accounts.bind(this);
+    this.payments = this.payments.bind(this);
   }
 
-  static Payments(request: QueryPaymentsRequest, initRequest?: fm.InitReq): Promise<QueryPaymentsResponse> {
-    return fm.fetchReq(`/akash/escrow/v1beta2/types/payments/list?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse> {
+    return this.rpc.unary(QueryAccountsDesc, QueryAccountsRequest.fromPartial(request), metadata);
+  }
+
+  payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse> {
+    return this.rpc.unary(QueryPaymentsDesc, QueryPaymentsRequest.fromPartial(request), metadata);
   }
 
 }

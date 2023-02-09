@@ -1,27 +1,43 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
-export class Query {
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/cosmos/slashing/v1beta1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query provides defines the gRPC querier service */
+export interface Query {
+  /** Params queries the parameters of slashing module */
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+
+  /** SigningInfo queries the signing info of given cons address */
+  SigningInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse>;
+
+  /** SigningInfos queries signing info of all validators */
+  SigningInfos(request?: DeepPartial<QuerySigningInfosRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.params = this.params.bind(this);
+    this.signingInfo = this.signingInfo.bind(this);
+    this.signingInfos = this.signingInfos.bind(this);
   }
 
-  static SigningInfo(request: QuerySigningInfoRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfoResponse> {
-    return fm.fetchReq(`/cosmos/slashing/v1beta1/signing_infos/${request["cons_address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["cons_address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  static SigningInfos(request: QuerySigningInfosRequest, initRequest?: fm.InitReq): Promise<QuerySigningInfosResponse> {
-    return fm.fetchReq(`/cosmos/slashing/v1beta1/signing_infos?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  signingInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse> {
+    return this.rpc.unary(QuerySigningInfoDesc, QuerySigningInfoRequest.fromPartial(request), metadata);
+  }
+
+  signingInfos(request: DeepPartial<QuerySigningInfosRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse> {
+    return this.rpc.unary(QuerySigningInfosDesc, QuerySigningInfosRequest.fromPartial(request), metadata);
   }
 
 }

@@ -1,27 +1,44 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType } from "./feegrant";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
-export class Query {
-  static Allowance(request: QueryAllowanceRequest, initRequest?: fm.InitReq): Promise<QueryAllowanceResponse> {
-    return fm.fetchReq(`/cosmos/feegrant/v1beta1/allowance/${request["granter"]}/{grantee}?${fm.renderURLSearchParams({ ...request
-    }, ["granter"])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** Allowance returns fee granted to the grantee by the granter. */
+  Allowance(request: DeepPartial<QueryAllowanceRequest>, metadata?: grpc.Metadata): Promise<QueryAllowanceResponse>;
+
+  /** Allowances returns all the grants for address. */
+  Allowances(request: DeepPartial<QueryAllowancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesResponse>;
+
+  /**
+   * AllowancesByGranter returns all the grants given by an address
+   * Since v0.46
+   */
+  AllowancesByGranter(request: DeepPartial<QueryAllowancesByGranterRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesByGranterResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.allowance = this.allowance.bind(this);
+    this.allowances = this.allowances.bind(this);
+    this.allowancesByGranter = this.allowancesByGranter.bind(this);
   }
 
-  static Allowances(request: QueryAllowancesRequest, initRequest?: fm.InitReq): Promise<QueryAllowancesResponse> {
-    return fm.fetchReq(`/cosmos/feegrant/v1beta1/allowances/${request["grantee"]}?${fm.renderURLSearchParams({ ...request
-    }, ["grantee"])}`, { ...initRequest,
-      method: "GET"
-    });
+  allowance(request: DeepPartial<QueryAllowanceRequest>, metadata?: grpc.Metadata): Promise<QueryAllowanceResponse> {
+    return this.rpc.unary(QueryAllowanceDesc, QueryAllowanceRequest.fromPartial(request), metadata);
   }
 
-  static AllowancesByGranter(request: QueryAllowancesByGranterRequest, initRequest?: fm.InitReq): Promise<QueryAllowancesByGranterResponse> {
-    return fm.fetchReq(`/cosmos/feegrant/v1beta1/issued/${request["granter"]}?${fm.renderURLSearchParams({ ...request
-    }, ["granter"])}`, { ...initRequest,
-      method: "GET"
-    });
+  allowances(request: DeepPartial<QueryAllowancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesResponse> {
+    return this.rpc.unary(QueryAllowancesDesc, QueryAllowancesRequest.fromPartial(request), metadata);
+  }
+
+  allowancesByGranter(request: DeepPartial<QueryAllowancesByGranterRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesByGranterResponse> {
+    return this.rpc.unary(QueryAllowancesByGranterDesc, QueryAllowancesByGranterRequest.fromPartial(request), metadata);
   }
 
 }

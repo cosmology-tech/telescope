@@ -1,35 +1,55 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsSDKType } from "./genesis";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
-export class Query {
-  static DevFeeInfos(request: QueryDevFeeInfosRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosResponse> {
-    return fm.fetchReq(`/evmos/fees/v1/fees?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** DevFeeInfos retrieves all registered contracts for fee distribution */
+  DevFeeInfos(request?: DeepPartial<QueryDevFeeInfosRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse>;
+
+  /** DevFeeInfo retrieves a registered contract for fee distribution */
+  DevFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse>;
+
+  /** Params retrieves the fees module params */
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+
+  /**
+   * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   * registered for fee distribution
+   */
+  DevFeeInfosPerDeployer(request: DeepPartial<QueryDevFeeInfosPerDeployerRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosPerDeployerResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.devFeeInfos = this.devFeeInfos.bind(this);
+    this.devFeeInfo = this.devFeeInfo.bind(this);
+    this.params = this.params.bind(this);
+    this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
 
-  static DevFeeInfo(request: QueryDevFeeInfoRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfoResponse> {
-    return fm.fetchReq(`/evmos/fees/v1/fees/${request["contract_address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["contract_address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  devFeeInfos(request: DeepPartial<QueryDevFeeInfosRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse> {
+    return this.rpc.unary(QueryDevFeeInfosDesc, QueryDevFeeInfosRequest.fromPartial(request), metadata);
   }
 
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/evmos/fees/v1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  devFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse> {
+    return this.rpc.unary(QueryDevFeeInfoDesc, QueryDevFeeInfoRequest.fromPartial(request), metadata);
   }
 
-  static DevFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest, initRequest?: fm.InitReq): Promise<QueryDevFeeInfosPerDeployerResponse> {
-    return fm.fetchReq(`/evmos/fees/v1/fees/${request["deployer_address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["deployer_address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
+  }
+
+  devFeeInfosPerDeployer(request: DeepPartial<QueryDevFeeInfosPerDeployerRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosPerDeployerResponse> {
+    return this.rpc.unary(QueryDevFeeInfosPerDeployerDesc, QueryDevFeeInfosPerDeployerRequest.fromPartial(request), metadata);
   }
 
 }

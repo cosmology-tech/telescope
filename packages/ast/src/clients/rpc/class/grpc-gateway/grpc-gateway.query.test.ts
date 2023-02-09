@@ -12,5 +12,5 @@ it('GRPC-Gateway Query Client', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, store.options);
-    printCode(createGRPCGatewayQueryClass(context, service))
+    expectCode(createGRPCGatewayQueryClass(context, service))
 });

@@ -2,98 +2,148 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Channel, ChannelSDKType, IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import * as fm from "../../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../../helpers";
 import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, QueryChannelResponseSDKType, QueryChannelsRequest, QueryChannelsRequestSDKType, QueryChannelsResponse, QueryChannelsResponseSDKType, QueryConnectionChannelsRequest, QueryConnectionChannelsRequestSDKType, QueryConnectionChannelsResponse, QueryConnectionChannelsResponseSDKType, QueryChannelClientStateRequest, QueryChannelClientStateRequestSDKType, QueryChannelClientStateResponse, QueryChannelClientStateResponseSDKType, QueryChannelConsensusStateRequest, QueryChannelConsensusStateRequestSDKType, QueryChannelConsensusStateResponse, QueryChannelConsensusStateResponseSDKType, QueryPacketCommitmentRequest, QueryPacketCommitmentRequestSDKType, QueryPacketCommitmentResponse, QueryPacketCommitmentResponseSDKType, QueryPacketCommitmentsRequest, QueryPacketCommitmentsRequestSDKType, QueryPacketCommitmentsResponse, QueryPacketCommitmentsResponseSDKType, QueryPacketReceiptRequest, QueryPacketReceiptRequestSDKType, QueryPacketReceiptResponse, QueryPacketReceiptResponseSDKType, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementRequestSDKType, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementResponseSDKType, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsRequestSDKType, QueryPacketAcknowledgementsResponse, QueryPacketAcknowledgementsResponseSDKType, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsRequestSDKType, QueryUnreceivedPacketsResponse, QueryUnreceivedPacketsResponseSDKType, QueryUnreceivedAcksRequest, QueryUnreceivedAcksRequestSDKType, QueryUnreceivedAcksResponse, QueryUnreceivedAcksResponseSDKType, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveRequestSDKType, QueryNextSequenceReceiveResponse, QueryNextSequenceReceiveResponseSDKType } from "./query";
-export class Query {
-  static Channel(request: QueryChannelRequest, initRequest?: fm.InitReq): Promise<QueryChannelResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query provides defines the gRPC querier service */
+export interface Query {
+  /** Channel queries an IBC Channel. */
+  Channel(request: DeepPartial<QueryChannelRequest>, metadata?: grpc.Metadata): Promise<QueryChannelResponse>;
+
+  /** Channels queries all the IBC channels of a chain. */
+  Channels(request?: DeepPartial<QueryChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryChannelsResponse>;
+
+  /**
+   * ConnectionChannels queries all the channels associated with a connection
+   * end.
+   */
+  ConnectionChannels(request: DeepPartial<QueryConnectionChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionChannelsResponse>;
+
+  /**
+   * ChannelClientState queries for the client state for the channel associated
+   * with the provided channel identifiers.
+   */
+  ChannelClientState(request: DeepPartial<QueryChannelClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelClientStateResponse>;
+
+  /**
+   * ChannelConsensusState queries for the consensus state for the channel
+   * associated with the provided channel identifiers.
+   */
+  ChannelConsensusState(request: DeepPartial<QueryChannelConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelConsensusStateResponse>;
+
+  /** PacketCommitment queries a stored packet commitment hash. */
+  PacketCommitment(request: DeepPartial<QueryPacketCommitmentRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentResponse>;
+
+  /**
+   * PacketCommitments returns all the packet commitments hashes associated
+   * with a channel.
+   */
+  PacketCommitments(request: DeepPartial<QueryPacketCommitmentsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentsResponse>;
+
+  /**
+   * PacketReceipt queries if a given packet sequence has been received on the
+   * queried chain
+   */
+  PacketReceipt(request: DeepPartial<QueryPacketReceiptRequest>, metadata?: grpc.Metadata): Promise<QueryPacketReceiptResponse>;
+
+  /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
+  PacketAcknowledgement(request: DeepPartial<QueryPacketAcknowledgementRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementResponse>;
+
+  /**
+   * PacketAcknowledgements returns all the packet acknowledgements associated
+   * with a channel.
+   */
+  PacketAcknowledgements(request: DeepPartial<QueryPacketAcknowledgementsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementsResponse>;
+
+  /**
+   * UnreceivedPackets returns all the unreceived IBC packets associated with a
+   * channel and sequences.
+   */
+  UnreceivedPackets(request: DeepPartial<QueryUnreceivedPacketsRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedPacketsResponse>;
+
+  /**
+   * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+   * with a channel and sequences.
+   */
+  UnreceivedAcks(request: DeepPartial<QueryUnreceivedAcksRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedAcksResponse>;
+
+  /** NextSequenceReceive returns the next receive sequence for a given channel. */
+  NextSequenceReceive(request: DeepPartial<QueryNextSequenceReceiveRequest>, metadata?: grpc.Metadata): Promise<QueryNextSequenceReceiveResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.channel = this.channel.bind(this);
+    this.channels = this.channels.bind(this);
+    this.connectionChannels = this.connectionChannels.bind(this);
+    this.channelClientState = this.channelClientState.bind(this);
+    this.channelConsensusState = this.channelConsensusState.bind(this);
+    this.packetCommitment = this.packetCommitment.bind(this);
+    this.packetCommitments = this.packetCommitments.bind(this);
+    this.packetReceipt = this.packetReceipt.bind(this);
+    this.packetAcknowledgement = this.packetAcknowledgement.bind(this);
+    this.packetAcknowledgements = this.packetAcknowledgements.bind(this);
+    this.unreceivedPackets = this.unreceivedPackets.bind(this);
+    this.unreceivedAcks = this.unreceivedAcks.bind(this);
+    this.nextSequenceReceive = this.nextSequenceReceive.bind(this);
   }
 
-  static Channels(request: QueryChannelsRequest, initRequest?: fm.InitReq): Promise<QueryChannelsResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  channel(request: DeepPartial<QueryChannelRequest>, metadata?: grpc.Metadata): Promise<QueryChannelResponse> {
+    return this.rpc.unary(QueryChannelDesc, QueryChannelRequest.fromPartial(request), metadata);
   }
 
-  static ConnectionChannels(request: QueryConnectionChannelsRequest, initRequest?: fm.InitReq): Promise<QueryConnectionChannelsResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/connections/${request["connection"]}/channels?${fm.renderURLSearchParams({ ...request
-    }, ["connection"])}`, { ...initRequest,
-      method: "GET"
-    });
+  channels(request: DeepPartial<QueryChannelsRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QueryChannelsResponse> {
+    return this.rpc.unary(QueryChannelsDesc, QueryChannelsRequest.fromPartial(request), metadata);
   }
 
-  static ChannelClientState(request: QueryChannelClientStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelClientStateResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/client_state?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  connectionChannels(request: DeepPartial<QueryConnectionChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionChannelsResponse> {
+    return this.rpc.unary(QueryConnectionChannelsDesc, QueryConnectionChannelsRequest.fromPartial(request), metadata);
   }
 
-  static ChannelConsensusState(request: QueryChannelConsensusStateRequest, initRequest?: fm.InitReq): Promise<QueryChannelConsensusStateResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/consensus_state/revision/{revision_number}/height/{revision_height}?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  channelClientState(request: DeepPartial<QueryChannelClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelClientStateResponse> {
+    return this.rpc.unary(QueryChannelClientStateDesc, QueryChannelClientStateRequest.fromPartial(request), metadata);
   }
 
-  static PacketCommitment(request: QueryPacketCommitmentRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{sequence}?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  channelConsensusState(request: DeepPartial<QueryChannelConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelConsensusStateResponse> {
+    return this.rpc.unary(QueryChannelConsensusStateDesc, QueryChannelConsensusStateRequest.fromPartial(request), metadata);
   }
 
-  static PacketCommitments(request: QueryPacketCommitmentsRequest, initRequest?: fm.InitReq): Promise<QueryPacketCommitmentsResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  packetCommitment(request: DeepPartial<QueryPacketCommitmentRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentResponse> {
+    return this.rpc.unary(QueryPacketCommitmentDesc, QueryPacketCommitmentRequest.fromPartial(request), metadata);
   }
 
-  static PacketReceipt(request: QueryPacketReceiptRequest, initRequest?: fm.InitReq): Promise<QueryPacketReceiptResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_receipts/{sequence}?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  packetCommitments(request: DeepPartial<QueryPacketCommitmentsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentsResponse> {
+    return this.rpc.unary(QueryPacketCommitmentsDesc, QueryPacketCommitmentsRequest.fromPartial(request), metadata);
   }
 
-  static PacketAcknowledgement(request: QueryPacketAcknowledgementRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_acks/{sequence}?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  packetReceipt(request: DeepPartial<QueryPacketReceiptRequest>, metadata?: grpc.Metadata): Promise<QueryPacketReceiptResponse> {
+    return this.rpc.unary(QueryPacketReceiptDesc, QueryPacketReceiptRequest.fromPartial(request), metadata);
   }
 
-  static PacketAcknowledgements(request: QueryPacketAcknowledgementsRequest, initRequest?: fm.InitReq): Promise<QueryPacketAcknowledgementsResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_acknowledgements?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  packetAcknowledgement(request: DeepPartial<QueryPacketAcknowledgementRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementResponse> {
+    return this.rpc.unary(QueryPacketAcknowledgementDesc, QueryPacketAcknowledgementRequest.fromPartial(request), metadata);
   }
 
-  static UnreceivedPackets(request: QueryUnreceivedPacketsRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedPacketsResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{packet_commitment_sequences}/unreceived_packets?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  packetAcknowledgements(request: DeepPartial<QueryPacketAcknowledgementsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementsResponse> {
+    return this.rpc.unary(QueryPacketAcknowledgementsDesc, QueryPacketAcknowledgementsRequest.fromPartial(request), metadata);
   }
 
-  static UnreceivedAcks(request: QueryUnreceivedAcksRequest, initRequest?: fm.InitReq): Promise<QueryUnreceivedAcksResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_acks?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  unreceivedPackets(request: DeepPartial<QueryUnreceivedPacketsRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedPacketsResponse> {
+    return this.rpc.unary(QueryUnreceivedPacketsDesc, QueryUnreceivedPacketsRequest.fromPartial(request), metadata);
   }
 
-  static NextSequenceReceive(request: QueryNextSequenceReceiveRequest, initRequest?: fm.InitReq): Promise<QueryNextSequenceReceiveResponse> {
-    return fm.fetchReq(`/ibc/core/channel/v1/channels/${request["channel_id"]}/ports/{port_id}/next_sequence?${fm.renderURLSearchParams({ ...request
-    }, ["channel_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  unreceivedAcks(request: DeepPartial<QueryUnreceivedAcksRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedAcksResponse> {
+    return this.rpc.unary(QueryUnreceivedAcksDesc, QueryUnreceivedAcksRequest.fromPartial(request), metadata);
+  }
+
+  nextSequenceReceive(request: DeepPartial<QueryNextSequenceReceiveRequest>, metadata?: grpc.Metadata): Promise<QueryNextSequenceReceiveResponse> {
+    return this.rpc.unary(QueryNextSequenceReceiveDesc, QueryNextSequenceReceiveRequest.fromPartial(request), metadata);
   }
 
 }

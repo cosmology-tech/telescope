@@ -1,20 +1,35 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./provider";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
-export class Query {
-  static Providers(request: QueryProvidersRequest, initRequest?: fm.InitReq): Promise<QueryProvidersResponse> {
-    return fm.fetchReq(`/akash/provider/v1beta2/providers?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** Providers queries providers */
+  Providers(request?: DeepPartial<QueryProvidersRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+
+  /** Provider queries provider details */
+  Provider(request: DeepPartial<QueryProviderRequest>, metadata?: grpc.Metadata): Promise<QueryProviderResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.providers = this.providers.bind(this);
+    this.provider = this.provider.bind(this);
   }
 
-  static Provider(request: QueryProviderRequest, initRequest?: fm.InitReq): Promise<QueryProviderResponse> {
-    return fm.fetchReq(`/akash/provider/v1beta2/providers/${request["owner"]}?${fm.renderURLSearchParams({ ...request
-    }, ["owner"])}`, { ...initRequest,
-      method: "GET"
-    });
+  providers(request: DeepPartial<QueryProvidersRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
+    return this.rpc.unary(QueryProvidersDesc, QueryProvidersRequest.fromPartial(request), metadata);
+  }
+
+  provider(request: DeepPartial<QueryProviderRequest>, metadata?: grpc.Metadata): Promise<QueryProviderResponse> {
+    return this.rpc.unary(QueryProviderDesc, QueryProviderRequest.fromPartial(request), metadata);
   }
 
 }

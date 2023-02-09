@@ -1,41 +1,48 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
-export class Msg {
-  static CreateDenom(request: MsgCreateDenom, initRequest?: fm.InitReq): Promise<MsgCreateDenomResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/CreateDenom`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the tokefactory module's gRPC message service. */
+export interface Msg {
+  CreateDenom(request: DeepPartial<MsgCreateDenom>, metadata?: grpc.Metadata): Promise<MsgCreateDenomResponse>;
+  Mint(request: DeepPartial<MsgMint>, metadata?: grpc.Metadata): Promise<MsgMintResponse>;
+  Burn(request: DeepPartial<MsgBurn>, metadata?: grpc.Metadata): Promise<MsgBurnResponse>;
+  ChangeAdmin(request: DeepPartial<MsgChangeAdmin>, metadata?: grpc.Metadata): Promise<MsgChangeAdminResponse>;
+  SetDenomMetadata(request: DeepPartial<MsgSetDenomMetadata>, metadata?: grpc.Metadata): Promise<MsgSetDenomMetadataResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.createDenom = this.createDenom.bind(this);
+    this.mint = this.mint.bind(this);
+    this.burn = this.burn.bind(this);
+    this.changeAdmin = this.changeAdmin.bind(this);
+    this.setDenomMetadata = this.setDenomMetadata.bind(this);
   }
 
-  static Mint(request: MsgMint, initRequest?: fm.InitReq): Promise<MsgMintResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Mint`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  createDenom(request: DeepPartial<MsgCreateDenom>, metadata?: grpc.Metadata): Promise<MsgCreateDenomResponse> {
+    return this.rpc.unary(MsgCreateDenom, MsgCreateDenom.fromPartial(request), metadata);
   }
 
-  static Burn(request: MsgBurn, initRequest?: fm.InitReq): Promise<MsgBurnResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/Burn`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  mint(request: DeepPartial<MsgMint>, metadata?: grpc.Metadata): Promise<MsgMintResponse> {
+    return this.rpc.unary(MsgMint, MsgMint.fromPartial(request), metadata);
   }
 
-  static ChangeAdmin(request: MsgChangeAdmin, initRequest?: fm.InitReq): Promise<MsgChangeAdminResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/ChangeAdmin`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  burn(request: DeepPartial<MsgBurn>, metadata?: grpc.Metadata): Promise<MsgBurnResponse> {
+    return this.rpc.unary(MsgBurn, MsgBurn.fromPartial(request), metadata);
   }
 
-  static SetDenomMetadata(request: MsgSetDenomMetadata, initRequest?: fm.InitReq): Promise<MsgSetDenomMetadataResponse> {
-    return fm.fetchReq(`/osmosis.tokenfactory.v1beta1/SetDenomMetadata`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  changeAdmin(request: DeepPartial<MsgChangeAdmin>, metadata?: grpc.Metadata): Promise<MsgChangeAdminResponse> {
+    return this.rpc.unary(MsgChangeAdmin, MsgChangeAdmin.fromPartial(request), metadata);
+  }
+
+  setDenomMetadata(request: DeepPartial<MsgSetDenomMetadata>, metadata?: grpc.Metadata): Promise<MsgSetDenomMetadataResponse> {
+    return this.rpc.unary(MsgSetDenomMetadata, MsgSetDenomMetadata.fromPartial(request), metadata);
   }
 
 }

@@ -1,104 +1,141 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryValidatorsRequest, QueryValidatorsRequestSDKType, QueryValidatorsResponse, QueryValidatorsResponseSDKType, QueryValidatorRequest, QueryValidatorRequestSDKType, QueryValidatorResponse, QueryValidatorResponseSDKType, QueryValidatorDelegationsRequest, QueryValidatorDelegationsRequestSDKType, QueryValidatorDelegationsResponse, QueryValidatorDelegationsResponseSDKType, QueryValidatorUnbondingDelegationsRequest, QueryValidatorUnbondingDelegationsRequestSDKType, QueryValidatorUnbondingDelegationsResponse, QueryValidatorUnbondingDelegationsResponseSDKType, QueryDelegationRequest, QueryDelegationRequestSDKType, QueryDelegationResponse, QueryDelegationResponseSDKType, QueryUnbondingDelegationRequest, QueryUnbondingDelegationRequestSDKType, QueryUnbondingDelegationResponse, QueryUnbondingDelegationResponseSDKType, QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsRequestSDKType, QueryDelegatorDelegationsResponse, QueryDelegatorDelegationsResponseSDKType, QueryDelegatorUnbondingDelegationsRequest, QueryDelegatorUnbondingDelegationsRequestSDKType, QueryDelegatorUnbondingDelegationsResponse, QueryDelegatorUnbondingDelegationsResponseSDKType, QueryRedelegationsRequest, QueryRedelegationsRequestSDKType, QueryRedelegationsResponse, QueryRedelegationsResponseSDKType, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsRequestSDKType, QueryDelegatorValidatorsResponse, QueryDelegatorValidatorsResponseSDKType, QueryDelegatorValidatorRequest, QueryDelegatorValidatorRequestSDKType, QueryDelegatorValidatorResponse, QueryDelegatorValidatorResponseSDKType, QueryHistoricalInfoRequest, QueryHistoricalInfoRequestSDKType, QueryHistoricalInfoResponse, QueryHistoricalInfoResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export class Query {
-  static Validators(request: QueryValidatorsRequest, initRequest?: fm.InitReq): Promise<QueryValidatorsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** Validators queries all validators that match the given status. */
+  Validators(request: DeepPartial<QueryValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorsResponse>;
+
+  /** Validator queries validator info for given validator address. */
+  Validator(request: DeepPartial<QueryValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorResponse>;
+
+  /** ValidatorDelegations queries delegate info for given validator. */
+  ValidatorDelegations(request: DeepPartial<QueryValidatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorDelegationsResponse>;
+
+  /** ValidatorUnbondingDelegations queries unbonding delegations of a validator. */
+  ValidatorUnbondingDelegations(request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorUnbondingDelegationsResponse>;
+
+  /** Delegation queries delegate info for given validator delegator pair. */
+  Delegation(request: DeepPartial<QueryDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationResponse>;
+
+  /**
+   * UnbondingDelegation queries unbonding info for given validator delegator
+   * pair.
+   */
+  UnbondingDelegation(request: DeepPartial<QueryUnbondingDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryUnbondingDelegationResponse>;
+
+  /** DelegatorDelegations queries all delegations of a given delegator address. */
+  DelegatorDelegations(request: DeepPartial<QueryDelegatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorDelegationsResponse>;
+
+  /**
+   * DelegatorUnbondingDelegations queries all unbonding delegations of a given
+   * delegator address.
+   */
+  DelegatorUnbondingDelegations(request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorUnbondingDelegationsResponse>;
+
+  /** Redelegations queries redelegations of given address. */
+  Redelegations(request: DeepPartial<QueryRedelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryRedelegationsResponse>;
+
+  /**
+   * DelegatorValidators queries all validators info for given delegator
+   * address.
+   */
+  DelegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse>;
+
+  /**
+   * DelegatorValidator queries validator info for given delegator validator
+   * pair.
+   */
+  DelegatorValidator(request: DeepPartial<QueryDelegatorValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorResponse>;
+
+  /** HistoricalInfo queries the historical info for given height. */
+  HistoricalInfo(request: DeepPartial<QueryHistoricalInfoRequest>, metadata?: grpc.Metadata): Promise<QueryHistoricalInfoResponse>;
+
+  /** Pool queries the pool info. */
+  Pool(request?: DeepPartial<QueryPoolRequest>, metadata?: grpc.Metadata): Promise<QueryPoolResponse>;
+
+  /** Parameters queries the staking parameters. */
+  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.validators = this.validators.bind(this);
+    this.validator = this.validator.bind(this);
+    this.validatorDelegations = this.validatorDelegations.bind(this);
+    this.validatorUnbondingDelegations = this.validatorUnbondingDelegations.bind(this);
+    this.delegation = this.delegation.bind(this);
+    this.unbondingDelegation = this.unbondingDelegation.bind(this);
+    this.delegatorDelegations = this.delegatorDelegations.bind(this);
+    this.delegatorUnbondingDelegations = this.delegatorUnbondingDelegations.bind(this);
+    this.redelegations = this.redelegations.bind(this);
+    this.delegatorValidators = this.delegatorValidators.bind(this);
+    this.delegatorValidator = this.delegatorValidator.bind(this);
+    this.historicalInfo = this.historicalInfo.bind(this);
+    this.pool = this.pool.bind(this);
+    this.params = this.params.bind(this);
   }
 
-  static Validator(request: QueryValidatorRequest, initRequest?: fm.InitReq): Promise<QueryValidatorResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators/${request["validator_addr"]}?${fm.renderURLSearchParams({ ...request
-    }, ["validator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  validators(request: DeepPartial<QueryValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorsResponse> {
+    return this.rpc.unary(QueryValidatorsDesc, QueryValidatorsRequest.fromPartial(request), metadata);
   }
 
-  static ValidatorDelegations(request: QueryValidatorDelegationsRequest, initRequest?: fm.InitReq): Promise<QueryValidatorDelegationsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators/${request["validator_addr"]}/delegations?${fm.renderURLSearchParams({ ...request
-    }, ["validator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  validator(request: DeepPartial<QueryValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorResponse> {
+    return this.rpc.unary(QueryValidatorDesc, QueryValidatorRequest.fromPartial(request), metadata);
   }
 
-  static ValidatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest, initRequest?: fm.InitReq): Promise<QueryValidatorUnbondingDelegationsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators/${request["validator_addr"]}/unbonding_delegations?${fm.renderURLSearchParams({ ...request
-    }, ["validator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  validatorDelegations(request: DeepPartial<QueryValidatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorDelegationsResponse> {
+    return this.rpc.unary(QueryValidatorDelegationsDesc, QueryValidatorDelegationsRequest.fromPartial(request), metadata);
   }
 
-  static Delegation(request: QueryDelegationRequest, initRequest?: fm.InitReq): Promise<QueryDelegationResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators/${request["validator_addr"]}/delegations/{delegator_addr}?${fm.renderURLSearchParams({ ...request
-    }, ["validator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  validatorUnbondingDelegations(request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorUnbondingDelegationsResponse> {
+    return this.rpc.unary(QueryValidatorUnbondingDelegationsDesc, QueryValidatorUnbondingDelegationsRequest.fromPartial(request), metadata);
   }
 
-  static UnbondingDelegation(request: QueryUnbondingDelegationRequest, initRequest?: fm.InitReq): Promise<QueryUnbondingDelegationResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/validators/${request["validator_addr"]}/delegations/{delegator_addr}/unbonding_delegation?${fm.renderURLSearchParams({ ...request
-    }, ["validator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  delegation(request: DeepPartial<QueryDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationResponse> {
+    return this.rpc.unary(QueryDelegationDesc, QueryDelegationRequest.fromPartial(request), metadata);
   }
 
-  static DelegatorDelegations(request: QueryDelegatorDelegationsRequest, initRequest?: fm.InitReq): Promise<QueryDelegatorDelegationsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/delegations/${request["delegator_addr"]}?${fm.renderURLSearchParams({ ...request
-    }, ["delegator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  unbondingDelegation(request: DeepPartial<QueryUnbondingDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryUnbondingDelegationResponse> {
+    return this.rpc.unary(QueryUnbondingDelegationDesc, QueryUnbondingDelegationRequest.fromPartial(request), metadata);
   }
 
-  static DelegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest, initRequest?: fm.InitReq): Promise<QueryDelegatorUnbondingDelegationsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/delegators/${request["delegator_addr"]}/unbonding_delegations?${fm.renderURLSearchParams({ ...request
-    }, ["delegator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  delegatorDelegations(request: DeepPartial<QueryDelegatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorDelegationsResponse> {
+    return this.rpc.unary(QueryDelegatorDelegationsDesc, QueryDelegatorDelegationsRequest.fromPartial(request), metadata);
   }
 
-  static Redelegations(request: QueryRedelegationsRequest, initRequest?: fm.InitReq): Promise<QueryRedelegationsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/delegators/${request["delegator_addr"]}/redelegations?${fm.renderURLSearchParams({ ...request
-    }, ["delegator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  delegatorUnbondingDelegations(request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorUnbondingDelegationsResponse> {
+    return this.rpc.unary(QueryDelegatorUnbondingDelegationsDesc, QueryDelegatorUnbondingDelegationsRequest.fromPartial(request), metadata);
   }
 
-  static DelegatorValidators(request: QueryDelegatorValidatorsRequest, initRequest?: fm.InitReq): Promise<QueryDelegatorValidatorsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/delegators/${request["delegator_addr"]}/validators?${fm.renderURLSearchParams({ ...request
-    }, ["delegator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  redelegations(request: DeepPartial<QueryRedelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryRedelegationsResponse> {
+    return this.rpc.unary(QueryRedelegationsDesc, QueryRedelegationsRequest.fromPartial(request), metadata);
   }
 
-  static DelegatorValidator(request: QueryDelegatorValidatorRequest, initRequest?: fm.InitReq): Promise<QueryDelegatorValidatorResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/delegators/${request["delegator_addr"]}/validators/{validator_addr}?${fm.renderURLSearchParams({ ...request
-    }, ["delegator_addr"])}`, { ...initRequest,
-      method: "GET"
-    });
+  delegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse> {
+    return this.rpc.unary(QueryDelegatorValidatorsDesc, QueryDelegatorValidatorsRequest.fromPartial(request), metadata);
   }
 
-  static HistoricalInfo(request: QueryHistoricalInfoRequest, initRequest?: fm.InitReq): Promise<QueryHistoricalInfoResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/historical_info/${request["height"]}?${fm.renderURLSearchParams({ ...request
-    }, ["height"])}`, { ...initRequest,
-      method: "GET"
-    });
+  delegatorValidator(request: DeepPartial<QueryDelegatorValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorResponse> {
+    return this.rpc.unary(QueryDelegatorValidatorDesc, QueryDelegatorValidatorRequest.fromPartial(request), metadata);
   }
 
-  static Pool(request: QueryPoolRequest, initRequest?: fm.InitReq): Promise<QueryPoolResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/pool?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  historicalInfo(request: DeepPartial<QueryHistoricalInfoRequest>, metadata?: grpc.Metadata): Promise<QueryHistoricalInfoResponse> {
+    return this.rpc.unary(QueryHistoricalInfoDesc, QueryHistoricalInfoRequest.fromPartial(request), metadata);
   }
 
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/cosmos/staking/v1beta1/params?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  pool(request: DeepPartial<QueryPoolRequest> = {}, metadata?: grpc.Metadata): Promise<QueryPoolResponse> {
+    return this.rpc.unary(QueryPoolDesc, QueryPoolRequest.fromPartial(request), metadata);
+  }
+
+  params(request: DeepPartial<QueryParamsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
 }

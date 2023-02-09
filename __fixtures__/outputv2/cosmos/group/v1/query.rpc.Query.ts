@@ -1,97 +1,121 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-export class Query {
-  static GroupInfo(request: QueryGroupInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupInfoResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/group_info/${request["group_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["group_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query is the cosmos.group.v1 Query service. */
+export interface Query {
+  /** GroupInfo queries group info based on group id. */
+  GroupInfo(request: DeepPartial<QueryGroupInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupInfoResponse>;
+
+  /** GroupPolicyInfo queries group policy info based on account address of group policy. */
+  GroupPolicyInfo(request: DeepPartial<QueryGroupPolicyInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPolicyInfoResponse>;
+
+  /** GroupMembers queries members of a group */
+  GroupMembers(request: DeepPartial<QueryGroupMembersRequest>, metadata?: grpc.Metadata): Promise<QueryGroupMembersResponse>;
+
+  /** GroupsByAdmin queries groups by admin address. */
+  GroupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByAdminResponse>;
+
+  /** GroupPoliciesByGroup queries group policies by group id. */
+  GroupPoliciesByGroup(request: DeepPartial<QueryGroupPoliciesByGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByGroupResponse>;
+
+  /** GroupsByAdmin queries group policies by admin address. */
+  GroupPoliciesByAdmin(request: DeepPartial<QueryGroupPoliciesByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByAdminResponse>;
+
+  /** Proposal queries a proposal based on proposal id. */
+  Proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
+
+  /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
+  ProposalsByGroupPolicy(request: DeepPartial<QueryProposalsByGroupPolicyRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsByGroupPolicyResponse>;
+
+  /** VoteByProposalVoter queries a vote by proposal id and voter. */
+  VoteByProposalVoter(request: DeepPartial<QueryVoteByProposalVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVoteByProposalVoterResponse>;
+
+  /** VotesByProposal queries a vote by proposal. */
+  VotesByProposal(request: DeepPartial<QueryVotesByProposalRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByProposalResponse>;
+
+  /** VotesByVoter queries a vote by voter. */
+  VotesByVoter(request: DeepPartial<QueryVotesByVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByVoterResponse>;
+
+  /** GroupsByMember queries groups by member address. */
+  GroupsByMember(request: DeepPartial<QueryGroupsByMemberRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByMemberResponse>;
+
+  /** TallyResult queries the tally of a proposal votes. */
+  TallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.groupInfo = this.groupInfo.bind(this);
+    this.groupPolicyInfo = this.groupPolicyInfo.bind(this);
+    this.groupMembers = this.groupMembers.bind(this);
+    this.groupsByAdmin = this.groupsByAdmin.bind(this);
+    this.groupPoliciesByGroup = this.groupPoliciesByGroup.bind(this);
+    this.groupPoliciesByAdmin = this.groupPoliciesByAdmin.bind(this);
+    this.proposal = this.proposal.bind(this);
+    this.proposalsByGroupPolicy = this.proposalsByGroupPolicy.bind(this);
+    this.voteByProposalVoter = this.voteByProposalVoter.bind(this);
+    this.votesByProposal = this.votesByProposal.bind(this);
+    this.votesByVoter = this.votesByVoter.bind(this);
+    this.groupsByMember = this.groupsByMember.bind(this);
+    this.tallyResult = this.tallyResult.bind(this);
   }
 
-  static GroupPolicyInfo(request: QueryGroupPolicyInfoRequest, initRequest?: fm.InitReq): Promise<QueryGroupPolicyInfoResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/group_policy_info/${request["address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupInfo(request: DeepPartial<QueryGroupInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupInfoResponse> {
+    return this.rpc.unary(QueryGroupInfoDesc, QueryGroupInfoRequest.fromPartial(request), metadata);
   }
 
-  static GroupMembers(request: QueryGroupMembersRequest, initRequest?: fm.InitReq): Promise<QueryGroupMembersResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/group_members/${request["group_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["group_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupPolicyInfo(request: DeepPartial<QueryGroupPolicyInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPolicyInfoResponse> {
+    return this.rpc.unary(QueryGroupPolicyInfoDesc, QueryGroupPolicyInfoRequest.fromPartial(request), metadata);
   }
 
-  static GroupsByAdmin(request: QueryGroupsByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByAdminResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/groups_by_admin/${request["admin"]}?${fm.renderURLSearchParams({ ...request
-    }, ["admin"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupMembers(request: DeepPartial<QueryGroupMembersRequest>, metadata?: grpc.Metadata): Promise<QueryGroupMembersResponse> {
+    return this.rpc.unary(QueryGroupMembersDesc, QueryGroupMembersRequest.fromPartial(request), metadata);
   }
 
-  static GroupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByGroupResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/group_policies_by_group/${request["group_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["group_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByAdminResponse> {
+    return this.rpc.unary(QueryGroupsByAdminDesc, QueryGroupsByAdminRequest.fromPartial(request), metadata);
   }
 
-  static GroupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest, initRequest?: fm.InitReq): Promise<QueryGroupPoliciesByAdminResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/group_policies_by_admin/${request["admin"]}?${fm.renderURLSearchParams({ ...request
-    }, ["admin"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupPoliciesByGroup(request: DeepPartial<QueryGroupPoliciesByGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByGroupResponse> {
+    return this.rpc.unary(QueryGroupPoliciesByGroupDesc, QueryGroupPoliciesByGroupRequest.fromPartial(request), metadata);
   }
 
-  static Proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/proposal/${request["proposal_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupPoliciesByAdmin(request: DeepPartial<QueryGroupPoliciesByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByAdminResponse> {
+    return this.rpc.unary(QueryGroupPoliciesByAdminDesc, QueryGroupPoliciesByAdminRequest.fromPartial(request), metadata);
   }
 
-  static ProposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest, initRequest?: fm.InitReq): Promise<QueryProposalsByGroupPolicyResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/proposals_by_group_policy/${request["address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse> {
+    return this.rpc.unary(QueryProposalDesc, QueryProposalRequest.fromPartial(request), metadata);
   }
 
-  static VoteByProposalVoter(request: QueryVoteByProposalVoterRequest, initRequest?: fm.InitReq): Promise<QueryVoteByProposalVoterResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/vote_by_proposal_voter/${request["proposal_id"]}/{voter}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  proposalsByGroupPolicy(request: DeepPartial<QueryProposalsByGroupPolicyRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsByGroupPolicyResponse> {
+    return this.rpc.unary(QueryProposalsByGroupPolicyDesc, QueryProposalsByGroupPolicyRequest.fromPartial(request), metadata);
   }
 
-  static VotesByProposal(request: QueryVotesByProposalRequest, initRequest?: fm.InitReq): Promise<QueryVotesByProposalResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/votes_by_proposal/${request["proposal_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  voteByProposalVoter(request: DeepPartial<QueryVoteByProposalVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVoteByProposalVoterResponse> {
+    return this.rpc.unary(QueryVoteByProposalVoterDesc, QueryVoteByProposalVoterRequest.fromPartial(request), metadata);
   }
 
-  static VotesByVoter(request: QueryVotesByVoterRequest, initRequest?: fm.InitReq): Promise<QueryVotesByVoterResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/votes_by_voter/${request["voter"]}?${fm.renderURLSearchParams({ ...request
-    }, ["voter"])}`, { ...initRequest,
-      method: "GET"
-    });
+  votesByProposal(request: DeepPartial<QueryVotesByProposalRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByProposalResponse> {
+    return this.rpc.unary(QueryVotesByProposalDesc, QueryVotesByProposalRequest.fromPartial(request), metadata);
   }
 
-  static GroupsByMember(request: QueryGroupsByMemberRequest, initRequest?: fm.InitReq): Promise<QueryGroupsByMemberResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/groups_by_member/${request["address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  votesByVoter(request: DeepPartial<QueryVotesByVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByVoterResponse> {
+    return this.rpc.unary(QueryVotesByVoterDesc, QueryVotesByVoterRequest.fromPartial(request), metadata);
   }
 
-  static TallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
-    return fm.fetchReq(`/cosmos/group/v1/proposals/${request["proposal_id"]}/tally?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  groupsByMember(request: DeepPartial<QueryGroupsByMemberRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByMemberResponse> {
+    return this.rpc.unary(QueryGroupsByMemberDesc, QueryGroupsByMemberRequest.fromPartial(request), metadata);
+  }
+
+  tallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse> {
+    return this.rpc.unary(QueryTallyResultDesc, QueryTallyResultRequest.fromPartial(request), metadata);
   }
 
 }

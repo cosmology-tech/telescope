@@ -1,12 +1,24 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
-import * as fm from "../../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../../helpers";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
-export class Query {
-  static AppVersion(request: QueryAppVersionRequest, initRequest?: fm.InitReq): Promise<QueryAppVersionResponse> {
-    return fm.fetchReq(`ibc.core.port.v1.AppVersion?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
+  AppVersion(request: DeepPartial<QueryAppVersionRequest>, metadata?: grpc.Metadata): Promise<QueryAppVersionResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.appVersion = this.appVersion.bind(this);
+  }
+
+  appVersion(request: DeepPartial<QueryAppVersionRequest>, metadata?: grpc.Metadata): Promise<QueryAppVersionResponse> {
+    return this.rpc.unary(QueryAppVersionDesc, QueryAppVersionRequest.fromPartial(request), metadata);
   }
 
 }

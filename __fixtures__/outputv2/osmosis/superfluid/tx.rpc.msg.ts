@@ -1,40 +1,57 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import * as fm from "../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDelegateResponse, MsgSuperfluidDelegateResponseSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUndelegateResponse, MsgSuperfluidUndelegateResponseSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgSuperfluidUnbondLockResponse, MsgSuperfluidUnbondLockResponseSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgLockAndSuperfluidDelegateResponse, MsgLockAndSuperfluidDelegateResponseSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType, MsgUnPoolWhitelistedPoolResponse, MsgUnPoolWhitelistedPoolResponseSDKType } from "./tx";
-export class Msg {
-  static SuperfluidDelegate(request: MsgSuperfluidDelegate, initRequest?: fm.InitReq): Promise<MsgSuperfluidDelegateResponse> {
-    return fm.fetchReq(`/osmosis.superfluid/SuperfluidDelegate`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the Msg service. */
+export interface Msg {
+  /** Execute superfluid delegation for a lockup */
+  SuperfluidDelegate(request: DeepPartial<MsgSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidDelegateResponse>;
+
+  /** Execute superfluid undelegation for a lockup */
+  SuperfluidUndelegate(request: DeepPartial<MsgSuperfluidUndelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUndelegateResponse>;
+
+  /**
+   * For a given lock that is being superfluidly undelegated,
+   * also unbond the underlying lock.
+   */
+  SuperfluidUnbondLock(request: DeepPartial<MsgSuperfluidUnbondLock>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUnbondLockResponse>;
+
+  /** Execute lockup lock and superfluid delegation in a single msg */
+  LockAndSuperfluidDelegate(request: DeepPartial<MsgLockAndSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgLockAndSuperfluidDelegateResponse>;
+  UnPoolWhitelistedPool(request: DeepPartial<MsgUnPoolWhitelistedPool>, metadata?: grpc.Metadata): Promise<MsgUnPoolWhitelistedPoolResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.superfluidDelegate = this.superfluidDelegate.bind(this);
+    this.superfluidUndelegate = this.superfluidUndelegate.bind(this);
+    this.superfluidUnbondLock = this.superfluidUnbondLock.bind(this);
+    this.lockAndSuperfluidDelegate = this.lockAndSuperfluidDelegate.bind(this);
+    this.unPoolWhitelistedPool = this.unPoolWhitelistedPool.bind(this);
   }
 
-  static SuperfluidUndelegate(request: MsgSuperfluidUndelegate, initRequest?: fm.InitReq): Promise<MsgSuperfluidUndelegateResponse> {
-    return fm.fetchReq(`/osmosis.superfluid/SuperfluidUndelegate`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  superfluidDelegate(request: DeepPartial<MsgSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidDelegateResponse> {
+    return this.rpc.unary(MsgSuperfluidDelegate, MsgSuperfluidDelegate.fromPartial(request), metadata);
   }
 
-  static SuperfluidUnbondLock(request: MsgSuperfluidUnbondLock, initRequest?: fm.InitReq): Promise<MsgSuperfluidUnbondLockResponse> {
-    return fm.fetchReq(`/osmosis.superfluid/SuperfluidUnbondLock`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  superfluidUndelegate(request: DeepPartial<MsgSuperfluidUndelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUndelegateResponse> {
+    return this.rpc.unary(MsgSuperfluidUndelegate, MsgSuperfluidUndelegate.fromPartial(request), metadata);
   }
 
-  static LockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate, initRequest?: fm.InitReq): Promise<MsgLockAndSuperfluidDelegateResponse> {
-    return fm.fetchReq(`/osmosis.superfluid/LockAndSuperfluidDelegate`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  superfluidUnbondLock(request: DeepPartial<MsgSuperfluidUnbondLock>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUnbondLockResponse> {
+    return this.rpc.unary(MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLock.fromPartial(request), metadata);
   }
 
-  static UnPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool, initRequest?: fm.InitReq): Promise<MsgUnPoolWhitelistedPoolResponse> {
-    return fm.fetchReq(`/osmosis.superfluid/UnPoolWhitelistedPool`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  lockAndSuperfluidDelegate(request: DeepPartial<MsgLockAndSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgLockAndSuperfluidDelegateResponse> {
+    return this.rpc.unary(MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegate.fromPartial(request), metadata);
+  }
+
+  unPoolWhitelistedPool(request: DeepPartial<MsgUnPoolWhitelistedPool>, metadata?: grpc.Metadata): Promise<MsgUnPoolWhitelistedPoolResponse> {
+    return this.rpc.unary(MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPool.fromPartial(request), metadata);
   }
 
 }

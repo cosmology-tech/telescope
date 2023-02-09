@@ -1,27 +1,49 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
-export class Query {
-  static Grants(request: QueryGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGrantsResponse> {
-    return fm.fetchReq(`/cosmos/authz/v1beta1/grants?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** Returns list of `Authorization`, granted to the grantee by the granter. */
+  Grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse>;
+
+  /**
+   * GranterGrants returns list of `GrantAuthorization`, granted by granter.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  GranterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse>;
+
+  /**
+   * GranteeGrants returns a list of `GrantAuthorization` by grantee.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  GranteeGrants(request: DeepPartial<QueryGranteeGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranteeGrantsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.grants = this.grants.bind(this);
+    this.granterGrants = this.granterGrants.bind(this);
+    this.granteeGrants = this.granteeGrants.bind(this);
   }
 
-  static GranterGrants(request: QueryGranterGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranterGrantsResponse> {
-    return fm.fetchReq(`/cosmos/authz/v1beta1/grants/granter/${request["granter"]}?${fm.renderURLSearchParams({ ...request
-    }, ["granter"])}`, { ...initRequest,
-      method: "GET"
-    });
+  grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse> {
+    return this.rpc.unary(QueryGrantsDesc, QueryGrantsRequest.fromPartial(request), metadata);
   }
 
-  static GranteeGrants(request: QueryGranteeGrantsRequest, initRequest?: fm.InitReq): Promise<QueryGranteeGrantsResponse> {
-    return fm.fetchReq(`/cosmos/authz/v1beta1/grants/grantee/${request["grantee"]}?${fm.renderURLSearchParams({ ...request
-    }, ["grantee"])}`, { ...initRequest,
-      method: "GET"
-    });
+  granterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse> {
+    return this.rpc.unary(QueryGranterGrantsDesc, QueryGranterGrantsRequest.fromPartial(request), metadata);
+  }
+
+  granteeGrants(request: DeepPartial<QueryGranteeGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranteeGrantsResponse> {
+    return this.rpc.unary(QueryGranteeGrantsDesc, QueryGranteeGrantsRequest.fromPartial(request), metadata);
   }
 
 }

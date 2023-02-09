@@ -1,19 +1,32 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
-import * as fm from "../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
-export class Query {
-  static EpochInfos(request: QueryEpochsInfoRequest, initRequest?: fm.InitReq): Promise<QueryEpochsInfoResponse> {
-    return fm.fetchReq(`/osmosis/epochs/v1beta1/epochs?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** EpochInfos provide running epochInfos */
+  EpochInfos(request?: DeepPartial<QueryEpochsInfoRequest>, metadata?: grpc.Metadata): Promise<QueryEpochsInfoResponse>;
+
+  /** CurrentEpoch provide current epoch of specified identifier */
+  CurrentEpoch(request: DeepPartial<QueryCurrentEpochRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentEpochResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.epochInfos = this.epochInfos.bind(this);
+    this.currentEpoch = this.currentEpoch.bind(this);
   }
 
-  static CurrentEpoch(request: QueryCurrentEpochRequest, initRequest?: fm.InitReq): Promise<QueryCurrentEpochResponse> {
-    return fm.fetchReq(`/osmosis/epochs/v1beta1/current_epoch?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  epochInfos(request: DeepPartial<QueryEpochsInfoRequest> = {}, metadata?: grpc.Metadata): Promise<QueryEpochsInfoResponse> {
+    return this.rpc.unary(QueryEpochsInfoDesc, QueryEpochsInfoRequest.fromPartial(request), metadata);
+  }
+
+  currentEpoch(request: DeepPartial<QueryCurrentEpochRequest>, metadata?: grpc.Metadata): Promise<QueryCurrentEpochResponse> {
+    return this.rpc.unary(QueryCurrentEpochDesc, QueryCurrentEpochRequest.fromPartial(request), metadata);
   }
 
 }

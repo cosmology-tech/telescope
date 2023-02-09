@@ -2,70 +2,106 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import * as fm from "../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../helpers";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
-export class Query {
-  static ModuleToDistributeCoins(request: ModuleToDistributeCoinsRequest, initRequest?: fm.InitReq): Promise<ModuleToDistributeCoinsResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/module_to_distribute_coins?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** ModuleToDistributeCoins returns coins that are going to be distributed */
+  ModuleToDistributeCoins(request?: DeepPartial<ModuleToDistributeCoinsRequest>, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse>;
+
+  /** GaugeByID returns gauges by their respective ID */
+  GaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse>;
+
+  /** Gauges returns both upcoming and active gauges */
+  Gauges(request?: DeepPartial<GaugesRequest>, metadata?: grpc.Metadata): Promise<GaugesResponse>;
+
+  /** ActiveGauges returns active gauges */
+  ActiveGauges(request?: DeepPartial<ActiveGaugesRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse>;
+
+  /** ActiveGaugesPerDenom returns active gauges by denom */
+  ActiveGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse>;
+
+  /** Returns scheduled gauges that have not yet occured */
+  UpcomingGauges(request?: DeepPartial<UpcomingGaugesRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse>;
+
+  /**
+   * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
+   * by denom
+   */
+  UpcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse>;
+
+  /**
+   * RewardsEst returns an estimate of the rewards from now until a specified
+   * time in the future The querier either provides an address or a set of locks
+   * for which they want to find the associated rewards
+   */
+  RewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse>;
+
+  /**
+   * LockableDurations returns lockable durations that are valid to distribute
+   * incentives for
+   */
+  LockableDurations(request?: DeepPartial<QueryLockableDurationsRequest>, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.moduleToDistributeCoins = this.moduleToDistributeCoins.bind(this);
+    this.gaugeByID = this.gaugeByID.bind(this);
+    this.gauges = this.gauges.bind(this);
+    this.activeGauges = this.activeGauges.bind(this);
+    this.activeGaugesPerDenom = this.activeGaugesPerDenom.bind(this);
+    this.upcomingGauges = this.upcomingGauges.bind(this);
+    this.upcomingGaugesPerDenom = this.upcomingGaugesPerDenom.bind(this);
+    this.rewardsEst = this.rewardsEst.bind(this);
+    this.lockableDurations = this.lockableDurations.bind(this);
   }
 
-  static GaugeByID(request: GaugeByIDRequest, initRequest?: fm.InitReq): Promise<GaugeByIDResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/gauge_by_id/${request["id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  moduleToDistributeCoins(request: DeepPartial<ModuleToDistributeCoinsRequest> = {}, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse> {
+    return this.rpc.unary(ModuleToDistributeCoinsDesc, ModuleToDistributeCoinsRequest.fromPartial(request), metadata);
   }
 
-  static Gauges(request: GaugesRequest, initRequest?: fm.InitReq): Promise<GaugesResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/gauges?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse> {
+    return this.rpc.unary(GaugeByIDDesc, GaugeByIDRequest.fromPartial(request), metadata);
   }
 
-  static ActiveGauges(request: ActiveGaugesRequest, initRequest?: fm.InitReq): Promise<ActiveGaugesResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/active_gauges?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  gauges(request: DeepPartial<GaugesRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<GaugesResponse> {
+    return this.rpc.unary(GaugesDesc, GaugesRequest.fromPartial(request), metadata);
   }
 
-  static ActiveGaugesPerDenom(request: ActiveGaugesPerDenomRequest, initRequest?: fm.InitReq): Promise<ActiveGaugesPerDenomResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/active_gauges_per_denom?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  activeGauges(request: DeepPartial<ActiveGaugesRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse> {
+    return this.rpc.unary(ActiveGaugesDesc, ActiveGaugesRequest.fromPartial(request), metadata);
   }
 
-  static UpcomingGauges(request: UpcomingGaugesRequest, initRequest?: fm.InitReq): Promise<UpcomingGaugesResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/upcoming_gauges?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse> {
+    return this.rpc.unary(ActiveGaugesPerDenomDesc, ActiveGaugesPerDenomRequest.fromPartial(request), metadata);
   }
 
-  static UpcomingGaugesPerDenom(request: UpcomingGaugesPerDenomRequest, initRequest?: fm.InitReq): Promise<UpcomingGaugesPerDenomResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/upcoming_gauges_per_denom?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  upcomingGauges(request: DeepPartial<UpcomingGaugesRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse> {
+    return this.rpc.unary(UpcomingGaugesDesc, UpcomingGaugesRequest.fromPartial(request), metadata);
   }
 
-  static RewardsEst(request: RewardsEstRequest, initRequest?: fm.InitReq): Promise<RewardsEstResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/rewards_est/${request["owner"]}?${fm.renderURLSearchParams({ ...request
-    }, ["owner"])}`, { ...initRequest,
-      method: "GET"
-    });
+  upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse> {
+    return this.rpc.unary(UpcomingGaugesPerDenomDesc, UpcomingGaugesPerDenomRequest.fromPartial(request), metadata);
   }
 
-  static LockableDurations(request: QueryLockableDurationsRequest, initRequest?: fm.InitReq): Promise<QueryLockableDurationsResponse> {
-    return fm.fetchReq(`/osmosis/incentives/v1beta1/lockable_durations?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse> {
+    return this.rpc.unary(RewardsEstDesc, RewardsEstRequest.fromPartial(request), metadata);
+  }
+
+  lockableDurations(request: DeepPartial<QueryLockableDurationsRequest> = {}, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse> {
+    return this.rpc.unary(QueryLockableDurationsDesc, QueryLockableDurationsRequest.fromPartial(request), metadata);
   }
 
 }

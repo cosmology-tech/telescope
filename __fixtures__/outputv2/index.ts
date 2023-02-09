@@ -24,4 +24,4 @@ export * from "./tendermint/bundle";
 export * from "./hooks";
 export * from "./extern";
 export * from "./react-query";
-export * from "./grpc-gateway";
+export * from "./grpc-web";

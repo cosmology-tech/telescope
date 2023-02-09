@@ -1,69 +1,93 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryContractInfoRequest, QueryContractInfoRequestSDKType, QueryContractInfoResponse, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryRequestSDKType, QueryContractHistoryResponse, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeRequestSDKType, QueryContractsByCodeResponse, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateRequestSDKType, QueryAllContractStateResponse, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateRequestSDKType, QueryRawContractStateResponse, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateRequestSDKType, QuerySmartContractStateResponse, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeRequestSDKType, QueryCodeResponse, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesRequestSDKType, QueryCodesResponse, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesRequestSDKType, QueryPinnedCodesResponse, QueryPinnedCodesResponseSDKType } from "./query";
-export class Query {
-  static ContractInfo(request: QueryContractInfoRequest, initRequest?: fm.InitReq): Promise<QueryContractInfoResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/contract/${request["address"]}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query provides defines the gRPC querier service */
+export interface Query {
+  /** ContractInfo gets the contract meta data */
+  ContractInfo(request: DeepPartial<QueryContractInfoRequest>, metadata?: grpc.Metadata): Promise<QueryContractInfoResponse>;
+
+  /** ContractHistory gets the contract code history */
+  ContractHistory(request: DeepPartial<QueryContractHistoryRequest>, metadata?: grpc.Metadata): Promise<QueryContractHistoryResponse>;
+
+  /** ContractsByCode lists all smart contracts for a code id */
+  ContractsByCode(request: DeepPartial<QueryContractsByCodeRequest>, metadata?: grpc.Metadata): Promise<QueryContractsByCodeResponse>;
+
+  /** AllContractState gets all raw store data for a single contract */
+  AllContractState(request: DeepPartial<QueryAllContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryAllContractStateResponse>;
+
+  /** RawContractState gets single key from the raw store data of a contract */
+  RawContractState(request: DeepPartial<QueryRawContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryRawContractStateResponse>;
+
+  /** SmartContractState get smart query result from the contract */
+  SmartContractState(request: DeepPartial<QuerySmartContractStateRequest>, metadata?: grpc.Metadata): Promise<QuerySmartContractStateResponse>;
+
+  /** Code gets the binary code and metadata for a singe wasm code */
+  Code(request: DeepPartial<QueryCodeRequest>, metadata?: grpc.Metadata): Promise<QueryCodeResponse>;
+
+  /** Codes gets the metadata for all stored wasm codes */
+  Codes(request?: DeepPartial<QueryCodesRequest>, metadata?: grpc.Metadata): Promise<QueryCodesResponse>;
+
+  /** PinnedCodes gets the pinned code ids */
+  PinnedCodes(request?: DeepPartial<QueryPinnedCodesRequest>, metadata?: grpc.Metadata): Promise<QueryPinnedCodesResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.contractInfo = this.contractInfo.bind(this);
+    this.contractHistory = this.contractHistory.bind(this);
+    this.contractsByCode = this.contractsByCode.bind(this);
+    this.allContractState = this.allContractState.bind(this);
+    this.rawContractState = this.rawContractState.bind(this);
+    this.smartContractState = this.smartContractState.bind(this);
+    this.code = this.code.bind(this);
+    this.codes = this.codes.bind(this);
+    this.pinnedCodes = this.pinnedCodes.bind(this);
   }
 
-  static ContractHistory(request: QueryContractHistoryRequest, initRequest?: fm.InitReq): Promise<QueryContractHistoryResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/contract/${request["address"]}/history?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  contractInfo(request: DeepPartial<QueryContractInfoRequest>, metadata?: grpc.Metadata): Promise<QueryContractInfoResponse> {
+    return this.rpc.unary(QueryContractInfoDesc, QueryContractInfoRequest.fromPartial(request), metadata);
   }
 
-  static ContractsByCode(request: QueryContractsByCodeRequest, initRequest?: fm.InitReq): Promise<QueryContractsByCodeResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/code/${request["code_id"]}/contracts?${fm.renderURLSearchParams({ ...request
-    }, ["code_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  contractHistory(request: DeepPartial<QueryContractHistoryRequest>, metadata?: grpc.Metadata): Promise<QueryContractHistoryResponse> {
+    return this.rpc.unary(QueryContractHistoryDesc, QueryContractHistoryRequest.fromPartial(request), metadata);
   }
 
-  static AllContractState(request: QueryAllContractStateRequest, initRequest?: fm.InitReq): Promise<QueryAllContractStateResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/contract/${request["address"]}/state?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  contractsByCode(request: DeepPartial<QueryContractsByCodeRequest>, metadata?: grpc.Metadata): Promise<QueryContractsByCodeResponse> {
+    return this.rpc.unary(QueryContractsByCodeDesc, QueryContractsByCodeRequest.fromPartial(request), metadata);
   }
 
-  static RawContractState(request: QueryRawContractStateRequest, initRequest?: fm.InitReq): Promise<QueryRawContractStateResponse> {
-    return fm.fetchReq(`/wasm/v1/contract/${request["address"]}/raw/{query_data}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  allContractState(request: DeepPartial<QueryAllContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryAllContractStateResponse> {
+    return this.rpc.unary(QueryAllContractStateDesc, QueryAllContractStateRequest.fromPartial(request), metadata);
   }
 
-  static SmartContractState(request: QuerySmartContractStateRequest, initRequest?: fm.InitReq): Promise<QuerySmartContractStateResponse> {
-    return fm.fetchReq(`/wasm/v1/contract/${request["address"]}/smart/{query_data}?${fm.renderURLSearchParams({ ...request
-    }, ["address"])}`, { ...initRequest,
-      method: "GET"
-    });
+  rawContractState(request: DeepPartial<QueryRawContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryRawContractStateResponse> {
+    return this.rpc.unary(QueryRawContractStateDesc, QueryRawContractStateRequest.fromPartial(request), metadata);
   }
 
-  static Code(request: QueryCodeRequest, initRequest?: fm.InitReq): Promise<QueryCodeResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/code/${request["code_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["code_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  smartContractState(request: DeepPartial<QuerySmartContractStateRequest>, metadata?: grpc.Metadata): Promise<QuerySmartContractStateResponse> {
+    return this.rpc.unary(QuerySmartContractStateDesc, QuerySmartContractStateRequest.fromPartial(request), metadata);
   }
 
-  static Codes(request: QueryCodesRequest, initRequest?: fm.InitReq): Promise<QueryCodesResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/code?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  code(request: DeepPartial<QueryCodeRequest>, metadata?: grpc.Metadata): Promise<QueryCodeResponse> {
+    return this.rpc.unary(QueryCodeDesc, QueryCodeRequest.fromPartial(request), metadata);
   }
 
-  static PinnedCodes(request: QueryPinnedCodesRequest, initRequest?: fm.InitReq): Promise<QueryPinnedCodesResponse> {
-    return fm.fetchReq(`/cosmwasm/wasm/v1/codes/pinned?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  codes(request: DeepPartial<QueryCodesRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QueryCodesResponse> {
+    return this.rpc.unary(QueryCodesDesc, QueryCodesRequest.fromPartial(request), metadata);
+  }
+
+  pinnedCodes(request: DeepPartial<QueryPinnedCodesRequest> = {
+    pagination: undefined
+  }, metadata?: grpc.Metadata): Promise<QueryPinnedCodesResponse> {
+    return this.rpc.unary(QueryPinnedCodesDesc, QueryPinnedCodesRequest.fromPartial(request), metadata);
   }
 
 }

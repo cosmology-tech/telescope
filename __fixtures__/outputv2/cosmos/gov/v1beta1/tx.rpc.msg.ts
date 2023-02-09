@@ -6,35 +6,54 @@ import { ClientUpdateProposal, ClientUpdateProposalSDKType, UpgradeProposal, Upg
 import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalSDKType, UpdatePoolIncentivesProposal, UpdatePoolIncentivesProposalSDKType } from "../../../osmosis/pool-incentives/v1beta1/gov";
 import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalSDKType, RemoveSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposalSDKType, UpdateUnpoolWhiteListProposal, UpdateUnpoolWhiteListProposalSDKType } from "../../../osmosis/superfluid/v1beta1/gov";
 import { UpdateFeeTokenProposal, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
-export class Msg {
-  static SubmitProposal(request: MsgSubmitProposal, initRequest?: fm.InitReq): Promise<MsgSubmitProposalResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1beta1/SubmitProposal`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+
+/** Msg defines the bank Msg service. */
+export interface Msg {
+  /** SubmitProposal defines a method to create new proposal given a content. */
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>, metadata?: grpc.Metadata): Promise<MsgSubmitProposalResponse>;
+
+  /** Vote defines a method to add a vote on a specific proposal. */
+  Vote(request: DeepPartial<MsgVote>, metadata?: grpc.Metadata): Promise<MsgVoteResponse>;
+
+  /**
+   * VoteWeighted defines a method to add a weighted vote on a specific proposal.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  VoteWeighted(request: DeepPartial<MsgVoteWeighted>, metadata?: grpc.Metadata): Promise<MsgVoteWeightedResponse>;
+
+  /** Deposit defines a method to add deposit on a specific proposal. */
+  Deposit(request: DeepPartial<MsgDeposit>, metadata?: grpc.Metadata): Promise<MsgDepositResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.submitProposal = this.submitProposal.bind(this);
+    this.vote = this.vote.bind(this);
+    this.voteWeighted = this.voteWeighted.bind(this);
+    this.deposit = this.deposit.bind(this);
   }
 
-  static Vote(request: MsgVote, initRequest?: fm.InitReq): Promise<MsgVoteResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1beta1/Vote`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  submitProposal(request: DeepPartial<MsgSubmitProposal>, metadata?: grpc.Metadata): Promise<MsgSubmitProposalResponse> {
+    return this.rpc.unary(MsgSubmitProposal, MsgSubmitProposal.fromPartial(request), metadata);
   }
 
-  static VoteWeighted(request: MsgVoteWeighted, initRequest?: fm.InitReq): Promise<MsgVoteWeightedResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1beta1/VoteWeighted`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  vote(request: DeepPartial<MsgVote>, metadata?: grpc.Metadata): Promise<MsgVoteResponse> {
+    return this.rpc.unary(MsgVote, MsgVote.fromPartial(request), metadata);
   }
 
-  static Deposit(request: MsgDeposit, initRequest?: fm.InitReq): Promise<MsgDepositResponse> {
-    return fm.fetchReq(`/cosmos.gov.v1beta1/Deposit`, { ...initRequest,
-      method: "POST",
-      body: JSON.stringify(request, fm.replacer)
-    });
+  voteWeighted(request: DeepPartial<MsgVoteWeighted>, metadata?: grpc.Metadata): Promise<MsgVoteWeightedResponse> {
+    return this.rpc.unary(MsgVoteWeighted, MsgVoteWeighted.fromPartial(request), metadata);
+  }
+
+  deposit(request: DeepPartial<MsgDeposit>, metadata?: grpc.Metadata): Promise<MsgDepositResponse> {
+    return this.rpc.unary(MsgDeposit, MsgDeposit.fromPartial(request), metadata);
   }
 
 }

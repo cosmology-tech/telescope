@@ -1,62 +1,81 @@
 import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, VotingParams, VotingParamsSDKType, DepositParams, DepositParamsSDKType, TallyParams, TallyParamsSDKType, Deposit, DepositSDKType, TallyResult, TallyResultSDKType } from "./gov";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import * as fm from "../../../grpc-gateway";
+import * as _m0 from "protobufjs/minimal";
+import { grpc } from "@improbable-eng/grpc-web";
+import { DeepPartial } from "../../../helpers";
 import { QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsRequest, QueryProposalsRequestSDKType, QueryProposalsResponse, QueryProposalsResponseSDKType, QueryVoteRequest, QueryVoteRequestSDKType, QueryVoteResponse, QueryVoteResponseSDKType, QueryVotesRequest, QueryVotesRequestSDKType, QueryVotesResponse, QueryVotesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDepositRequest, QueryDepositRequestSDKType, QueryDepositResponse, QueryDepositResponseSDKType, QueryDepositsRequest, QueryDepositsRequestSDKType, QueryDepositsResponse, QueryDepositsResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-export class Query {
-  static Proposal(request: QueryProposalRequest, initRequest?: fm.InitReq): Promise<QueryProposalResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+
+/** Query defines the gRPC querier service for gov module */
+export interface Query {
+  /** Proposal queries proposal details based on ProposalID. */
+  Proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
+
+  /** Proposals queries all proposals based on given status. */
+  Proposals(request: DeepPartial<QueryProposalsRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsResponse>;
+
+  /** Vote queries voted information based on proposalID, voterAddr. */
+  Vote(request: DeepPartial<QueryVoteRequest>, metadata?: grpc.Metadata): Promise<QueryVoteResponse>;
+
+  /** Votes queries votes of a given proposal. */
+  Votes(request: DeepPartial<QueryVotesRequest>, metadata?: grpc.Metadata): Promise<QueryVotesResponse>;
+
+  /** Params queries all parameters of the gov module. */
+  Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+
+  /** Deposit queries single deposit information based proposalID, depositAddr. */
+  Deposit(request: DeepPartial<QueryDepositRequest>, metadata?: grpc.Metadata): Promise<QueryDepositResponse>;
+
+  /** Deposits queries all deposits of a single proposal. */
+  Deposits(request: DeepPartial<QueryDepositsRequest>, metadata?: grpc.Metadata): Promise<QueryDepositsResponse>;
+
+  /** TallyResult queries the tally of a proposal vote. */
+  TallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.proposal = this.proposal.bind(this);
+    this.proposals = this.proposals.bind(this);
+    this.vote = this.vote.bind(this);
+    this.votes = this.votes.bind(this);
+    this.params = this.params.bind(this);
+    this.deposit = this.deposit.bind(this);
+    this.deposits = this.deposits.bind(this);
+    this.tallyResult = this.tallyResult.bind(this);
   }
 
-  static Proposals(request: QueryProposalsRequest, initRequest?: fm.InitReq): Promise<QueryProposalsResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals?${fm.renderURLSearchParams({ ...request
-    }, [])}`, { ...initRequest,
-      method: "GET"
-    });
+  proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse> {
+    return this.rpc.unary(QueryProposalDesc, QueryProposalRequest.fromPartial(request), metadata);
   }
 
-  static Vote(request: QueryVoteRequest, initRequest?: fm.InitReq): Promise<QueryVoteResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/votes/{voter}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  proposals(request: DeepPartial<QueryProposalsRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsResponse> {
+    return this.rpc.unary(QueryProposalsDesc, QueryProposalsRequest.fromPartial(request), metadata);
   }
 
-  static Votes(request: QueryVotesRequest, initRequest?: fm.InitReq): Promise<QueryVotesResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/votes?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  vote(request: DeepPartial<QueryVoteRequest>, metadata?: grpc.Metadata): Promise<QueryVoteResponse> {
+    return this.rpc.unary(QueryVoteDesc, QueryVoteRequest.fromPartial(request), metadata);
   }
 
-  static Params(request: QueryParamsRequest, initRequest?: fm.InitReq): Promise<QueryParamsResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/params/${request["params_type"]}?${fm.renderURLSearchParams({ ...request
-    }, ["params_type"])}`, { ...initRequest,
-      method: "GET"
-    });
+  votes(request: DeepPartial<QueryVotesRequest>, metadata?: grpc.Metadata): Promise<QueryVotesResponse> {
+    return this.rpc.unary(QueryVotesDesc, QueryVotesRequest.fromPartial(request), metadata);
   }
 
-  static Deposit(request: QueryDepositRequest, initRequest?: fm.InitReq): Promise<QueryDepositResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/deposits/{depositor}?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
+    return this.rpc.unary(QueryParamsDesc, QueryParamsRequest.fromPartial(request), metadata);
   }
 
-  static Deposits(request: QueryDepositsRequest, initRequest?: fm.InitReq): Promise<QueryDepositsResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/deposits?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  deposit(request: DeepPartial<QueryDepositRequest>, metadata?: grpc.Metadata): Promise<QueryDepositResponse> {
+    return this.rpc.unary(QueryDepositDesc, QueryDepositRequest.fromPartial(request), metadata);
   }
 
-  static TallyResult(request: QueryTallyResultRequest, initRequest?: fm.InitReq): Promise<QueryTallyResultResponse> {
-    return fm.fetchReq(`/cosmos/gov/v1/proposals/${request["proposal_id"]}/tally?${fm.renderURLSearchParams({ ...request
-    }, ["proposal_id"])}`, { ...initRequest,
-      method: "GET"
-    });
+  deposits(request: DeepPartial<QueryDepositsRequest>, metadata?: grpc.Metadata): Promise<QueryDepositsResponse> {
+    return this.rpc.unary(QueryDepositsDesc, QueryDepositsRequest.fromPartial(request), metadata);
+  }
+
+  tallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse> {
+    return this.rpc.unary(QueryTallyResultDesc, QueryTallyResultRequest.fromPartial(request), metadata);
   }
 
 }
