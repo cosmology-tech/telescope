@@ -1,10 +1,9 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, createGrpcWebQueryClass, createGrpcWebQueryInterface } from '@osmonauts/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, createGrpcWebQueryClass, createGrpcWebQueryInterface, GetDesc, getMethodDesc } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { GetDesc, getMethodDesc } from '../../../ast/src/clients/rpc/class/grpc-web/utils/grpc-web';
 
 export const plugin = (
     builder: TelescopeBuilder,
