@@ -204,13 +204,7 @@ export const createRpcQueryHooks = (
   context.addUtil('ProtobufRpcClient');
 
   const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
-  // TODO remove commented code.
-  // const name = service.name + 'ClientImpl';
-  // const implementsName = service.name;
-  // const methodNames = Object.keys(service.methods ?? {})
-  //     .map(key => {
-  //         return camelRpcMethods ? camel(key) : key
-  //     });
+
   const methods = Object.keys(service.methods ?? {})
     .map(key => {
       const method = service.methods[key];
