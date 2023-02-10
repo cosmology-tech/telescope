@@ -43,10 +43,63 @@ export const bindThis = (name: string) => {
 };
 
 export const makeComment = (comment: string) => {
-    return [{ type: 'CommentBlock', value: ` ${comment} ` }]
+    return [{ type: 'CommentBlock', value: ` ${comment} ` }];
 }
 
 export const getRpcClassName = (service: ProtoService) => {
     return `${service.name}ClientImpl`;
+}
+
+export const grpcWebRpcInterface = () => {
+    return t.exportNamedDeclaration(
+        t.tsInterfaceDeclaration(
+            t.identifier('Rpc'),
+            null,
+            [],
+            t.tsInterfaceBody(
+                [
+                    t.tsMethodSignature(
+                        t.identifier('unary'),
+                        t.tsTypeParameterDeclaration(
+                            [
+                                t.tsTypeParameter(
+                                    t.tsTypeReference(
+                                        t.identifier('UnaryMethodDefinitionish')
+                                    ),
+                                    null,
+                                    'T'
+                                )
+                            ]
+                        ),
+                        [
+                            identifier('methodDesc',
+                                t.tsTypeAnnotation(
+                                    t.tsTypeReference(
+                                        t.identifier('T')
+                                    )
+                            )),
+                            identifier('request',
+                                t.tsTypeAnnotation(
+                                    t.tsAnyKeyword()
+                            )),
+                            identifier('metadata',
+                                t.tsTypeAnnotation(
+                                    t.tSUnionType(
+                                        [
+                                            t.tsTypeReference(
+                                                t.tsQualifiedName(
+                                                    t.identifier('grpc'),
+                                                    t.identifier('Metadata')
+                                                )
+                                            ),
+                                            t.tsUndefinedKeyword()
+                                        ]
+                                    )
+                                ))
+                        ]
+                    )
+                ]
+        )
+    ))
 }
 

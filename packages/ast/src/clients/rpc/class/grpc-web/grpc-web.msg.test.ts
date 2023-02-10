@@ -15,12 +15,8 @@ it('test gRPC-web Msg Client', () => {
 
     printCode(createGrpcWebMsgInterface(context, service));
     printCode(createGrpcWebMsgClass(context, service));
-    // const data = createGrpcWebMsgClass(context, service)
-    // console.log(data);
-    
     printCode(GetDesc(context, service)); 
     const Desces = getMethodDesc(context, service);
-
     for (let i = 0; i < Desces.length; i++) {
         const element = Desces[i];
         printCode(element); 

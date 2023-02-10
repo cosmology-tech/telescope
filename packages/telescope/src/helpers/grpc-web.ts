@@ -1,21 +1,12 @@
-export const grpcWeb = `
-import { grpc } from "@improbable-eng/grpc-web";
+export const grpcWeb = `import { grpc } from "@improbable-eng/grpc-web";
 
-interface UnaryMethodDefinitionishR
+export interface UnaryMethodDefinitionishR
   extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
 }
 
-type UnaryMethodDefinitionish = UnaryMethodDefinitionishR;
-
-interface Rpc {
-    unary<T extends UnaryMethodDefinitionish>(
-      methodDesc: T,
-      request: any,
-      metadata: grpc.Metadata | undefined,
-    ): Promise<any>;
-  }
+export type UnaryMethodDefinitionish = UnaryMethodDefinitionishR;
 
 //same for every file so put it here for now
 export class GrpcWebImpl {

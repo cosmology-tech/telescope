@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, createGrpcWebQueryClass, createGrpcWebQueryInterface, GetDesc, getMethodDesc } from '@osmonauts/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, createGrpcWebQueryClass, createGrpcWebQueryInterface, GetDesc, getMethodDesc, grpcWebRpcInterface } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -55,6 +55,7 @@ export const plugin = (
                     const element = Desces[i];
                     asts.push(element);
                 }
+                asts.push(grpcWebRpcInterface())
             break;
             case 'tendermint':
                 default:

@@ -61,6 +61,8 @@ export const UTILS = {
     useTendermintClient: '__react-query__',
     ReactQueryParams: '__react-query__',
     UseQueryOptions: '@tanstack/react-query',
+    UnaryMethodDefinitionishR: '__grpc-web__',
+    UnaryMethodDefinitionish: '__grpc-web__',
 };
 
 export const UTIL_HELPERS = [
@@ -68,6 +70,7 @@ export const UTIL_HELPERS = [
     '__extern__',
     '__react-query__',
     '__grpc-gateway__',
+    '__grpc-web__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
