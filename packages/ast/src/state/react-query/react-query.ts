@@ -19,6 +19,15 @@ const makeHookKeyName = (name: string) => {
   return camel(name + 'Query');
 };
 
+/**
+ * Create an AST of a specific hook method
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts:
+ * const useAllProvidersAttributes = ...
+ * @param {Object=} context - context of generating the file
+ * @param {string} name - name of the hook
+ * @param {Object=} svc - method details
+ * @returns {ParseResult} created AST
+ */
 const rpcHookMethod = (
   context: GenericParseContext,
   name: string,
@@ -39,6 +48,7 @@ const rpcHookMethod = (
     optional = true;
   }
 
+  // add import
   context.addUtil('useQuery');
 
   return t.variableDeclaration('const', [
@@ -115,6 +125,15 @@ const rpcHookMethod = (
 
 }
 
+/**
+ * Create an AST of a specific query interface of react-query
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts:
+ * export interface UseAllProvidersAttributesQuery<TData> extends ReactQueryParams...
+ * @param {Object=} context - context of generating the file
+ * @param {string} name - name of the hook
+ * @param {Object=} svc - method details
+ * @returns {ParseResult} created AST
+ */
 const rpcHookMethodInterface = (
   context: GenericParseContext,
   name: string,
@@ -135,6 +154,7 @@ const rpcHookMethodInterface = (
     optional = true;
   }
 
+  // import ReactQueryParams in the generated file.
   context.addUtil('ReactQueryParams');
 
   return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
@@ -165,16 +185,26 @@ const rpcHookMethodInterface = (
   ));
 }
 
+/**
+ * Create an ASTs for a function creating hooks
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+ * export const createRpcQueryHooks = ...
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export const createRpcQueryHooks = (
   context: GenericParseContext,
   service: ProtoService
 ) => {
 
+  // add imports
   context.addUtil('QueryClient');
   context.addUtil('createProtobufRpcClient');
   context.addUtil('ProtobufRpcClient');
 
   const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
+  // TODO remove commented code.
   // const name = service.name + 'ClientImpl';
   // const implementsName = service.name;
   // const methodNames = Object.keys(service.methods ?? {})
@@ -258,6 +288,12 @@ export const createRpcQueryHooks = (
 
 
 
+/**
+ * Create ASTs for all the methods of a proto service.
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export const createRpcQueryHookInterfaces = (
   context: GenericParseContext,
   service: ProtoService
@@ -279,11 +315,23 @@ export const createRpcQueryHookInterfaces = (
   return methods.map(method => rpcHookMethodInterface(context, method.name, method.method));
 };
 
+/**
+ * Create an ASTs for a map of query clients and a function of getting query service.
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+ * const _queryClients: WeakMap...
+ *
+ * const getQueryService = (...
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export const createRpcQueryHookClientMap = (
   context: GenericParseContext,
   service: ProtoService
 ) => {
   const name = service.name + 'ClientImpl';
+
+  // get ast based on a template.
   return createClientMap(name);
 }
 
