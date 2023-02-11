@@ -1,8 +1,32 @@
 import * as t from '@babel/types';
 import { ProtoService } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
+/**
+ * Create an ASTs for a function creating hooks
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+ * export const createRpcQueryHooks = ...
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export declare const createRpcQueryHooks: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration;
+/**
+ * Create ASTs for all the methods of a proto service.
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export declare const createRpcQueryHookInterfaces: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration[];
+/**
+ * Create an ASTs for a map of query clients and a function of getting query service.
+ * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+ * const _queryClients: WeakMap...
+ *
+ * const getQueryService = (...
+ * @param {Object=} context - context of generating the file
+ * @param {Object=} service - service details
+ * @returns {ParseResult} created AST
+ */
 export declare const createRpcQueryHookClientMap: (context: GenericParseContext, service: ProtoService) => ({
     type: string;
     declarations: {
