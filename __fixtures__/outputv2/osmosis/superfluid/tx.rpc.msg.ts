@@ -1,26 +1,27 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDelegateResponse, MsgSuperfluidDelegateResponseSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUndelegateResponse, MsgSuperfluidUndelegateResponseSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgSuperfluidUnbondLockResponse, MsgSuperfluidUnbondLockResponseSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgLockAndSuperfluidDelegateResponse, MsgLockAndSuperfluidDelegateResponseSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType, MsgUnPoolWhitelistedPoolResponse, MsgUnPoolWhitelistedPoolResponseSDKType } from "./tx";
 
 /** Msg defines the Msg service. */
 export interface Msg {
   /** Execute superfluid delegation for a lockup */
-  SuperfluidDelegate(request: DeepPartial<MsgSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidDelegateResponse>;
+  superfluidDelegate(request: DeepPartial<MsgSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidDelegateResponse>;
 
   /** Execute superfluid undelegation for a lockup */
-  SuperfluidUndelegate(request: DeepPartial<MsgSuperfluidUndelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUndelegateResponse>;
+  superfluidUndelegate(request: DeepPartial<MsgSuperfluidUndelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUndelegateResponse>;
 
   /**
    * For a given lock that is being superfluidly undelegated,
    * also unbond the underlying lock.
    */
-  SuperfluidUnbondLock(request: DeepPartial<MsgSuperfluidUnbondLock>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUnbondLockResponse>;
+  superfluidUnbondLock(request: DeepPartial<MsgSuperfluidUnbondLock>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUnbondLockResponse>;
 
   /** Execute lockup lock and superfluid delegation in a single msg */
-  LockAndSuperfluidDelegate(request: DeepPartial<MsgLockAndSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgLockAndSuperfluidDelegateResponse>;
-  UnPoolWhitelistedPool(request: DeepPartial<MsgUnPoolWhitelistedPool>, metadata?: grpc.Metadata): Promise<MsgUnPoolWhitelistedPoolResponse>;
+  lockAndSuperfluidDelegate(request: DeepPartial<MsgLockAndSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgLockAndSuperfluidDelegateResponse>;
+  unPoolWhitelistedPool(request: DeepPartial<MsgUnPoolWhitelistedPool>, metadata?: grpc.Metadata): Promise<MsgUnPoolWhitelistedPoolResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -35,23 +36,23 @@ export class MsgClientImpl implements Msg {
   }
 
   superfluidDelegate(request: DeepPartial<MsgSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidDelegateResponse> {
-    return this.rpc.unary(MsgSuperfluidDelegate, MsgSuperfluidDelegate.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSuperfluidDelegateDesc, MsgSuperfluidDelegate.fromPartial(request), metadata);
   }
 
   superfluidUndelegate(request: DeepPartial<MsgSuperfluidUndelegate>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUndelegateResponse> {
-    return this.rpc.unary(MsgSuperfluidUndelegate, MsgSuperfluidUndelegate.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSuperfluidUndelegateDesc, MsgSuperfluidUndelegate.fromPartial(request), metadata);
   }
 
   superfluidUnbondLock(request: DeepPartial<MsgSuperfluidUnbondLock>, metadata?: grpc.Metadata): Promise<MsgSuperfluidUnbondLockResponse> {
-    return this.rpc.unary(MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLock.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSuperfluidUnbondLockDesc, MsgSuperfluidUnbondLock.fromPartial(request), metadata);
   }
 
   lockAndSuperfluidDelegate(request: DeepPartial<MsgLockAndSuperfluidDelegate>, metadata?: grpc.Metadata): Promise<MsgLockAndSuperfluidDelegateResponse> {
-    return this.rpc.unary(MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegate.fromPartial(request), metadata);
+    return this.rpc.unary(MsgLockAndSuperfluidDelegateDesc, MsgLockAndSuperfluidDelegate.fromPartial(request), metadata);
   }
 
   unPoolWhitelistedPool(request: DeepPartial<MsgUnPoolWhitelistedPool>, metadata?: grpc.Metadata): Promise<MsgUnPoolWhitelistedPoolResponse> {
-    return this.rpc.unary(MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPool.fromPartial(request), metadata);
+    return this.rpc.unary(MsgUnPoolWhitelistedPoolDesc, MsgUnPoolWhitelistedPool.fromPartial(request), metadata);
   }
 
 }
@@ -178,3 +179,6 @@ export const MsgUnPoolWhitelistedPoolDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

@@ -1,7 +1,8 @@
 import { Plan, PlanSDKType } from "./upgrade";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeResponse, MsgSoftwareUpgradeResponseSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType, MsgCancelUpgradeResponse, MsgCancelUpgradeResponseSDKType } from "./tx";
 
 /** Msg defines the upgrade Msg service. */
@@ -11,7 +12,7 @@ export interface Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  SoftwareUpgrade(request: DeepPartial<MsgSoftwareUpgrade>, metadata?: grpc.Metadata): Promise<MsgSoftwareUpgradeResponse>;
+  softwareUpgrade(request: DeepPartial<MsgSoftwareUpgrade>, metadata?: grpc.Metadata): Promise<MsgSoftwareUpgradeResponse>;
 
   /**
    * CancelUpgrade is a governance operation for cancelling a previously
@@ -19,7 +20,7 @@ export interface Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  CancelUpgrade(request: DeepPartial<MsgCancelUpgrade>, metadata?: grpc.Metadata): Promise<MsgCancelUpgradeResponse>;
+  cancelUpgrade(request: DeepPartial<MsgCancelUpgrade>, metadata?: grpc.Metadata): Promise<MsgCancelUpgradeResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -31,11 +32,11 @@ export class MsgClientImpl implements Msg {
   }
 
   softwareUpgrade(request: DeepPartial<MsgSoftwareUpgrade>, metadata?: grpc.Metadata): Promise<MsgSoftwareUpgradeResponse> {
-    return this.rpc.unary(MsgSoftwareUpgrade, MsgSoftwareUpgrade.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSoftwareUpgradeDesc, MsgSoftwareUpgrade.fromPartial(request), metadata);
   }
 
   cancelUpgrade(request: DeepPartial<MsgCancelUpgrade>, metadata?: grpc.Metadata): Promise<MsgCancelUpgradeResponse> {
-    return this.rpc.unary(MsgCancelUpgrade, MsgCancelUpgrade.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCancelUpgradeDesc, MsgCancelUpgrade.fromPartial(request), metadata);
   }
 
 }
@@ -90,3 +91,6 @@ export const MsgCancelUpgradeDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

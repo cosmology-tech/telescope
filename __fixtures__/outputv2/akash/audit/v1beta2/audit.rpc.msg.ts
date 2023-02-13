@@ -1,16 +1,17 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
 
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
-  SignProviderAttributes(request: DeepPartial<MsgSignProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgSignProviderAttributesResponse>;
+  signProviderAttributes(request: DeepPartial<MsgSignProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgSignProviderAttributesResponse>;
 
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  DeleteProviderAttributes(request: DeepPartial<MsgDeleteProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderAttributesResponse>;
+  deleteProviderAttributes(request: DeepPartial<MsgDeleteProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderAttributesResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -22,11 +23,11 @@ export class MsgClientImpl implements Msg {
   }
 
   signProviderAttributes(request: DeepPartial<MsgSignProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgSignProviderAttributesResponse> {
-    return this.rpc.unary(MsgSignProviderAttributes, MsgSignProviderAttributes.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSignProviderAttributesDesc, MsgSignProviderAttributes.fromPartial(request), metadata);
   }
 
   deleteProviderAttributes(request: DeepPartial<MsgDeleteProviderAttributes>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderAttributesResponse> {
-    return this.rpc.unary(MsgDeleteProviderAttributes, MsgDeleteProviderAttributes.fromPartial(request), metadata);
+    return this.rpc.unary(MsgDeleteProviderAttributesDesc, MsgDeleteProviderAttributes.fromPartial(request), metadata);
   }
 
 }
@@ -81,3 +82,6 @@ export const MsgDeleteProviderAttributesDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

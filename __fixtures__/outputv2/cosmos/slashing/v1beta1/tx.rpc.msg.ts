@@ -1,6 +1,7 @@
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx";
 
 /** Msg defines the slashing Msg service. */
@@ -10,7 +11,7 @@ export interface Msg {
    * them into the bonded validator set, so they can begin receiving provisions
    * and rewards again.
    */
-  Unjail(request: DeepPartial<MsgUnjail>, metadata?: grpc.Metadata): Promise<MsgUnjailResponse>;
+  unjail(request: DeepPartial<MsgUnjail>, metadata?: grpc.Metadata): Promise<MsgUnjailResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -21,7 +22,7 @@ export class MsgClientImpl implements Msg {
   }
 
   unjail(request: DeepPartial<MsgUnjail>, metadata?: grpc.Metadata): Promise<MsgUnjailResponse> {
-    return this.rpc.unary(MsgUnjail, MsgUnjail.fromPartial(request), metadata);
+    return this.rpc.unary(MsgUnjailDesc, MsgUnjail.fromPartial(request), metadata);
   }
 
 }
@@ -52,3 +53,6 @@ export const MsgUnjailDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

@@ -1,19 +1,20 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
-  CreateProvider(request: DeepPartial<MsgCreateProvider>, metadata?: grpc.Metadata): Promise<MsgCreateProviderResponse>;
+  createProvider(request: DeepPartial<MsgCreateProvider>, metadata?: grpc.Metadata): Promise<MsgCreateProviderResponse>;
 
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  UpdateProvider(request: DeepPartial<MsgUpdateProvider>, metadata?: grpc.Metadata): Promise<MsgUpdateProviderResponse>;
+  updateProvider(request: DeepPartial<MsgUpdateProvider>, metadata?: grpc.Metadata): Promise<MsgUpdateProviderResponse>;
 
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  DeleteProvider(request: DeepPartial<MsgDeleteProvider>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderResponse>;
+  deleteProvider(request: DeepPartial<MsgDeleteProvider>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -26,15 +27,15 @@ export class MsgClientImpl implements Msg {
   }
 
   createProvider(request: DeepPartial<MsgCreateProvider>, metadata?: grpc.Metadata): Promise<MsgCreateProviderResponse> {
-    return this.rpc.unary(MsgCreateProvider, MsgCreateProvider.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCreateProviderDesc, MsgCreateProvider.fromPartial(request), metadata);
   }
 
   updateProvider(request: DeepPartial<MsgUpdateProvider>, metadata?: grpc.Metadata): Promise<MsgUpdateProviderResponse> {
-    return this.rpc.unary(MsgUpdateProvider, MsgUpdateProvider.fromPartial(request), metadata);
+    return this.rpc.unary(MsgUpdateProviderDesc, MsgUpdateProvider.fromPartial(request), metadata);
   }
 
   deleteProvider(request: DeepPartial<MsgDeleteProvider>, metadata?: grpc.Metadata): Promise<MsgDeleteProviderResponse> {
-    return this.rpc.unary(MsgDeleteProvider, MsgDeleteProvider.fromPartial(request), metadata);
+    return this.rpc.unary(MsgDeleteProviderDesc, MsgDeleteProvider.fromPartial(request), metadata);
   }
 
 }
@@ -113,3 +114,6 @@ export const MsgDeleteProviderDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

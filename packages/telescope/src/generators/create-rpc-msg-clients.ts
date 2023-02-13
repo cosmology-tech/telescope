@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, createGrpcWebQueryClass, createGrpcWebQueryInterface, GetDesc, getMethodDesc, grpcWebRpcInterface } from '@osmonauts/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -47,8 +47,8 @@ export const plugin = (
                 asts.push(createGRPCGatewayMsgClass(ctx.generic, proto.Msg))
             break;
             case 'grpc-web':
-                asts.push(createGrpcWebQueryInterface(ctx.generic, proto.Msg))
-                asts.push(createGrpcWebQueryClass(ctx.generic, proto.Msg))
+                asts.push(createGrpcWebMsgInterface(ctx.generic, proto.Msg))
+                asts.push(createGrpcWebMsgClass(ctx.generic, proto.Msg))
                 asts.push(GetDesc(ctx.generic, proto.Msg))
                 const Desces = getMethodDesc(ctx.generic, proto.Msg);
                 for (let i = 0; i < Desces.length; i++) {

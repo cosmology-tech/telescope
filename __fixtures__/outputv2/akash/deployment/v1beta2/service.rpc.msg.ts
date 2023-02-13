@@ -2,34 +2,35 @@ import { DeploymentID, DeploymentIDSDKType } from "./deployment";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deploymentmsg";
 import { MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./groupmsg";
 
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  CreateDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse>;
+  createDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse>;
 
   /** DepositDeployment deposits more funds into the deployment account */
-  DepositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse>;
+  depositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse>;
 
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  UpdateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse>;
+  updateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse>;
 
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  CloseDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse>;
+  closeDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse>;
 
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  CloseGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse>;
+  closeGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse>;
 
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  PauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse>;
+  pauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse>;
 
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  StartGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse>;
+  startGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -46,31 +47,31 @@ export class MsgClientImpl implements Msg {
   }
 
   createDeployment(request: DeepPartial<MsgCreateDeployment>, metadata?: grpc.Metadata): Promise<MsgCreateDeploymentResponse> {
-    return this.rpc.unary(MsgCreateDeployment, MsgCreateDeployment.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCreateDeploymentDesc, MsgCreateDeployment.fromPartial(request), metadata);
   }
 
   depositDeployment(request: DeepPartial<MsgDepositDeployment>, metadata?: grpc.Metadata): Promise<MsgDepositDeploymentResponse> {
-    return this.rpc.unary(MsgDepositDeployment, MsgDepositDeployment.fromPartial(request), metadata);
+    return this.rpc.unary(MsgDepositDeploymentDesc, MsgDepositDeployment.fromPartial(request), metadata);
   }
 
   updateDeployment(request: DeepPartial<MsgUpdateDeployment>, metadata?: grpc.Metadata): Promise<MsgUpdateDeploymentResponse> {
-    return this.rpc.unary(MsgUpdateDeployment, MsgUpdateDeployment.fromPartial(request), metadata);
+    return this.rpc.unary(MsgUpdateDeploymentDesc, MsgUpdateDeployment.fromPartial(request), metadata);
   }
 
   closeDeployment(request: DeepPartial<MsgCloseDeployment>, metadata?: grpc.Metadata): Promise<MsgCloseDeploymentResponse> {
-    return this.rpc.unary(MsgCloseDeployment, MsgCloseDeployment.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCloseDeploymentDesc, MsgCloseDeployment.fromPartial(request), metadata);
   }
 
   closeGroup(request: DeepPartial<MsgCloseGroup>, metadata?: grpc.Metadata): Promise<MsgCloseGroupResponse> {
-    return this.rpc.unary(MsgCloseGroup, MsgCloseGroup.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCloseGroupDesc, MsgCloseGroup.fromPartial(request), metadata);
   }
 
   pauseGroup(request: DeepPartial<MsgPauseGroup>, metadata?: grpc.Metadata): Promise<MsgPauseGroupResponse> {
-    return this.rpc.unary(MsgPauseGroup, MsgPauseGroup.fromPartial(request), metadata);
+    return this.rpc.unary(MsgPauseGroupDesc, MsgPauseGroup.fromPartial(request), metadata);
   }
 
   startGroup(request: DeepPartial<MsgStartGroup>, metadata?: grpc.Metadata): Promise<MsgStartGroupResponse> {
-    return this.rpc.unary(MsgStartGroup, MsgStartGroup.fromPartial(request), metadata);
+    return this.rpc.unary(MsgStartGroupDesc, MsgStartGroup.fromPartial(request), metadata);
   }
 
 }
@@ -245,3 +246,6 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

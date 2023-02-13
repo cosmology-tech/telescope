@@ -1,17 +1,18 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgJoinPool, MsgJoinPoolSDKType, MsgJoinPoolResponse, MsgJoinPoolResponseSDKType, MsgExitPool, MsgExitPoolSDKType, MsgExitPoolResponse, MsgExitPoolResponseSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountInResponse, MsgSwapExactAmountInResponseSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgSwapExactAmountOutResponse, MsgSwapExactAmountOutResponseSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapExternAmountInResponse, MsgJoinSwapExternAmountInResponseSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgJoinSwapShareAmountOutResponse, MsgJoinSwapShareAmountOutResponseSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapExternAmountOutResponse, MsgExitSwapExternAmountOutResponseSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType, MsgExitSwapShareAmountInResponse, MsgExitSwapShareAmountInResponseSDKType } from "./tx";
 export interface Msg {
-  JoinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse>;
-  ExitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse>;
-  SwapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse>;
-  SwapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse>;
-  JoinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse>;
-  JoinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse>;
-  ExitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse>;
-  ExitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse>;
+  joinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse>;
+  exitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse>;
+  swapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse>;
+  swapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse>;
+  joinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse>;
+  joinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse>;
+  exitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse>;
+  exitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -29,35 +30,35 @@ export class MsgClientImpl implements Msg {
   }
 
   joinPool(request: DeepPartial<MsgJoinPool>, metadata?: grpc.Metadata): Promise<MsgJoinPoolResponse> {
-    return this.rpc.unary(MsgJoinPool, MsgJoinPool.fromPartial(request), metadata);
+    return this.rpc.unary(MsgJoinPoolDesc, MsgJoinPool.fromPartial(request), metadata);
   }
 
   exitPool(request: DeepPartial<MsgExitPool>, metadata?: grpc.Metadata): Promise<MsgExitPoolResponse> {
-    return this.rpc.unary(MsgExitPool, MsgExitPool.fromPartial(request), metadata);
+    return this.rpc.unary(MsgExitPoolDesc, MsgExitPool.fromPartial(request), metadata);
   }
 
   swapExactAmountIn(request: DeepPartial<MsgSwapExactAmountIn>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountInResponse> {
-    return this.rpc.unary(MsgSwapExactAmountIn, MsgSwapExactAmountIn.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSwapExactAmountInDesc, MsgSwapExactAmountIn.fromPartial(request), metadata);
   }
 
   swapExactAmountOut(request: DeepPartial<MsgSwapExactAmountOut>, metadata?: grpc.Metadata): Promise<MsgSwapExactAmountOutResponse> {
-    return this.rpc.unary(MsgSwapExactAmountOut, MsgSwapExactAmountOut.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSwapExactAmountOutDesc, MsgSwapExactAmountOut.fromPartial(request), metadata);
   }
 
   joinSwapExternAmountIn(request: DeepPartial<MsgJoinSwapExternAmountIn>, metadata?: grpc.Metadata): Promise<MsgJoinSwapExternAmountInResponse> {
-    return this.rpc.unary(MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountIn.fromPartial(request), metadata);
+    return this.rpc.unary(MsgJoinSwapExternAmountInDesc, MsgJoinSwapExternAmountIn.fromPartial(request), metadata);
   }
 
   joinSwapShareAmountOut(request: DeepPartial<MsgJoinSwapShareAmountOut>, metadata?: grpc.Metadata): Promise<MsgJoinSwapShareAmountOutResponse> {
-    return this.rpc.unary(MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOut.fromPartial(request), metadata);
+    return this.rpc.unary(MsgJoinSwapShareAmountOutDesc, MsgJoinSwapShareAmountOut.fromPartial(request), metadata);
   }
 
   exitSwapExternAmountOut(request: DeepPartial<MsgExitSwapExternAmountOut>, metadata?: grpc.Metadata): Promise<MsgExitSwapExternAmountOutResponse> {
-    return this.rpc.unary(MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOut.fromPartial(request), metadata);
+    return this.rpc.unary(MsgExitSwapExternAmountOutDesc, MsgExitSwapExternAmountOut.fromPartial(request), metadata);
   }
 
   exitSwapShareAmountIn(request: DeepPartial<MsgExitSwapShareAmountIn>, metadata?: grpc.Metadata): Promise<MsgExitSwapShareAmountInResponse> {
-    return this.rpc.unary(MsgExitSwapShareAmountIn, MsgExitSwapShareAmountIn.fromPartial(request), metadata);
+    return this.rpc.unary(MsgExitSwapShareAmountInDesc, MsgExitSwapShareAmountIn.fromPartial(request), metadata);
   }
 
 }
@@ -256,3 +257,6 @@ export const MsgExitSwapShareAmountInDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

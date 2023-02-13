@@ -1,12 +1,13 @@
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx";
 
 /** Msg defines the nft Msg service. */
 export interface Msg {
   /** Send defines a method to send a nft from one account to another account. */
-  Send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse>;
+  send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -17,7 +18,7 @@ export class MsgClientImpl implements Msg {
   }
 
   send(request: DeepPartial<MsgSend>, metadata?: grpc.Metadata): Promise<MsgSendResponse> {
-    return this.rpc.unary(MsgSend, MsgSend.fromPartial(request), metadata);
+    return this.rpc.unary(MsgSendDesc, MsgSend.fromPartial(request), metadata);
   }
 
 }
@@ -48,3 +49,6 @@ export const MsgSendDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

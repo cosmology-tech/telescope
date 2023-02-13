@@ -1,12 +1,13 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
-import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../../helpers";
+import { grpc } from "@improbable-eng/grpc-web";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
 export interface Msg {
-  CreateStableswapPool(request: DeepPartial<MsgCreateStableswapPool>, metadata?: grpc.Metadata): Promise<MsgCreateStableswapPoolResponse>;
-  StableSwapAdjustScalingFactors(request: DeepPartial<MsgStableSwapAdjustScalingFactors>, metadata?: grpc.Metadata): Promise<MsgStableSwapAdjustScalingFactorsResponse>;
+  createStableswapPool(request: DeepPartial<MsgCreateStableswapPool>, metadata?: grpc.Metadata): Promise<MsgCreateStableswapPoolResponse>;
+  stableSwapAdjustScalingFactors(request: DeepPartial<MsgStableSwapAdjustScalingFactors>, metadata?: grpc.Metadata): Promise<MsgStableSwapAdjustScalingFactorsResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -18,11 +19,11 @@ export class MsgClientImpl implements Msg {
   }
 
   createStableswapPool(request: DeepPartial<MsgCreateStableswapPool>, metadata?: grpc.Metadata): Promise<MsgCreateStableswapPoolResponse> {
-    return this.rpc.unary(MsgCreateStableswapPool, MsgCreateStableswapPool.fromPartial(request), metadata);
+    return this.rpc.unary(MsgCreateStableswapPoolDesc, MsgCreateStableswapPool.fromPartial(request), metadata);
   }
 
   stableSwapAdjustScalingFactors(request: DeepPartial<MsgStableSwapAdjustScalingFactors>, metadata?: grpc.Metadata): Promise<MsgStableSwapAdjustScalingFactorsResponse> {
-    return this.rpc.unary(MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactors.fromPartial(request), metadata);
+    return this.rpc.unary(MsgStableSwapAdjustScalingFactorsDesc, MsgStableSwapAdjustScalingFactors.fromPartial(request), metadata);
   }
 
 }
@@ -77,3 +78,6 @@ export const MsgStableSwapAdjustScalingFactorsDesc: UnaryMethodDefinitionish = {
 
   } as any)
 };
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}

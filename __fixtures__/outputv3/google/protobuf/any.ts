@@ -415,7 +415,7 @@ export const Any = {
 
   fromAmino(object: AnyAmino): Any {
     return {
-      typeUrl: object.type,
+      typeUrl: object.type_url,
       value: object.value
     };
   },
