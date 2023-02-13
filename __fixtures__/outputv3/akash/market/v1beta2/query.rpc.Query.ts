@@ -6,7 +6,7 @@ import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } 
 import * as fm from "../../../grpc-gateway";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 export class Query {
-  // Orders queries orders with filters
+  /** Orders queries orders with filters */
   static Orders(request: QueryOrdersRequest, initRequest?: fm.InitReq): Promise<QueryOrdersResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/orders/list?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -14,7 +14,7 @@ export class Query {
     });
   }
 
-  // Order queries order details
+  /** Order queries order details */
   static Order(request: QueryOrderRequest, initRequest?: fm.InitReq): Promise<QueryOrderResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/orders/info?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -22,7 +22,7 @@ export class Query {
     });
   }
 
-  // Bids queries bids with filters
+  /** Bids queries bids with filters */
   static Bids(request: QueryBidsRequest, initRequest?: fm.InitReq): Promise<QueryBidsResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/bids/list?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -30,7 +30,7 @@ export class Query {
     });
   }
 
-  // Bid queries bid details
+  /** Bid queries bid details */
   static Bid(request: QueryBidRequest, initRequest?: fm.InitReq): Promise<QueryBidResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/bids/info?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -38,7 +38,7 @@ export class Query {
     });
   }
 
-  // Leases queries leases with filters
+  /** Leases queries leases with filters */
   static Leases(request: QueryLeasesRequest, initRequest?: fm.InitReq): Promise<QueryLeasesResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/leases/list?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,
@@ -46,7 +46,7 @@ export class Query {
     });
   }
 
-  // Lease queries lease details
+  /** Lease queries lease details */
   static Lease(request: QueryLeaseRequest, initRequest?: fm.InitReq): Promise<QueryLeaseResponse> {
     return fm.fetchReq(`/akash/market/v1beta2/leases/info?${fm.renderURLSearchParams({ ...request
     }, [])}`, { ...initRequest,

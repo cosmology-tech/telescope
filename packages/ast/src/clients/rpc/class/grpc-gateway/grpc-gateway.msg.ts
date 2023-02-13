@@ -47,7 +47,7 @@ const grpcGatewayMethodDefinition = (
     name: string,
     svc: ProtoServiceMethod,
     packageImport: string,
-    leadingComments?: t.CommentLine[]
+    leadingComments?: t.CommentBlock[]
 ) => {
     const requestType = svc.requestType;
     const responseType = svc.responseType;
@@ -115,7 +115,7 @@ export const createGRPCGatewayMsgClass = (
         .map((key) => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
-            const leadingComments = method.comment ? [commentLine(' ' + method.comment)] : [];
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             return grpcGatewayMethodDefinition(
                 name,
                 method,
