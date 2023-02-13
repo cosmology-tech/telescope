@@ -254,7 +254,6 @@ export const createGrpcWebMsgClass = (
     service: ProtoService
 ) => {
 
-    context.addUtil('Rpc');
     context.addUtil('_m0');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
