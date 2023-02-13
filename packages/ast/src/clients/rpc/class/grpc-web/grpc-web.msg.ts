@@ -328,7 +328,7 @@ const rpcMethodDef = (
     }
 }
 
-//change to return array of method Desc instead of one
+//return array of method Desc
 export const getMethodDesc = (context: GenericParseContext, service: ProtoService) => {
 
     //get all method that need Desc
@@ -491,4 +491,57 @@ export const GetDesc = (context: GenericParseContext, service: ProtoService) => 
             ]
         )
     )
+}
+
+export const grpcWebRpcInterface = () => {
+    return t.exportNamedDeclaration(
+        t.tsInterfaceDeclaration(
+            t.identifier('Rpc'),
+            null,
+            [],
+            t.tsInterfaceBody(
+                [
+                    t.tsMethodSignature(
+                        t.identifier('unary'),
+                        t.tsTypeParameterDeclaration(
+                            [
+                                t.tsTypeParameter(
+                                    t.tsTypeReference(
+                                        t.identifier('UnaryMethodDefinitionish')
+                                    ),
+                                    null,
+                                    'T'
+                                )
+                            ]
+                        ),
+                        [
+                            identifier('methodDesc',
+                                t.tsTypeAnnotation(
+                                    t.tsTypeReference(
+                                        t.identifier('T')
+                                    )
+                            )),
+                            identifier('request',
+                                t.tsTypeAnnotation(
+                                    t.tsAnyKeyword()
+                            )),
+                            identifier('metadata',
+                                t.tsTypeAnnotation(
+                                    t.tSUnionType(
+                                        [
+                                            t.tsTypeReference(
+                                                t.tsQualifiedName(
+                                                    t.identifier('grpc'),
+                                                    t.identifier('Metadata')
+                                                )
+                                            ),
+                                            t.tsUndefinedKeyword()
+                                        ]
+                                    )
+                                ))
+                        ]
+                    )
+                ]
+        )
+    ))
 }
