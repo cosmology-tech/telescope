@@ -254,7 +254,11 @@ export const createGrpcWebMsgClass = (
     service: ProtoService
 ) => {
 
+    context.addUtil('UnaryMethodDefinitionishR');
+    context.addUtil('UnaryMethodDefinitionish');
     context.addUtil('_m0');
+    context.addUtil('DeepPartial');
+    context.addUtil('grpc');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const name = getRpcClassName(service);
