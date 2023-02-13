@@ -50,7 +50,7 @@ export const classMethod = (
     params: Array<t.Identifier | t.Pattern | t.RestElement | t.TSParameterProperty>,
     body: t.BlockStatement,
     returnType?: t.TSTypeAnnotation,
-    leadingComments: t.CommentLine[] = [],
+    leadingComments: t.CommentLine[] | t.CommentBlock[] = [],
     computed: boolean = false,
     _static: boolean = false,
     generator: boolean = false,
