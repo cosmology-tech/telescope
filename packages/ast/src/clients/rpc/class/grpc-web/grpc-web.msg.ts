@@ -254,7 +254,6 @@ export const createGrpcWebMsgClass = (
     service: ProtoService
 ) => {
 
-    context.addUtil('UnaryMethodDefinitionishR');
     context.addUtil('UnaryMethodDefinitionish');
     context.addUtil('_m0');
     context.addUtil('DeepPartial');
@@ -548,3 +547,5 @@ export const grpcWebRpcInterface = () => {
         )
     ))
 }
+
+// export const 
