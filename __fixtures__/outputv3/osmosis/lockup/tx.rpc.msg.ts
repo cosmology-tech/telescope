@@ -4,6 +4,7 @@ import { PeriodLock, PeriodLockSDKType } from "./lock";
 import * as fm from "../../grpc-gateway";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
 export class Msg {
+  /** LockTokens lock tokens */
   static LockTokens(request: MsgLockTokens, initRequest?: fm.InitReq): Promise<MsgLockTokensResponse> {
     return fm.fetchReq(`/osmosis.lockup/LockTokens`, { ...initRequest,
       method: "POST",
@@ -11,6 +12,7 @@ export class Msg {
     });
   }
 
+  /** BeginUnlockingAll begin unlocking all tokens */
   static BeginUnlockingAll(request: MsgBeginUnlockingAll, initRequest?: fm.InitReq): Promise<MsgBeginUnlockingAllResponse> {
     return fm.fetchReq(`/osmosis.lockup/BeginUnlockingAll`, { ...initRequest,
       method: "POST",
@@ -18,6 +20,7 @@ export class Msg {
     });
   }
 
+  /** MsgBeginUnlocking begins unlocking tokens by lock ID */
   static BeginUnlocking(request: MsgBeginUnlocking, initRequest?: fm.InitReq): Promise<MsgBeginUnlockingResponse> {
     return fm.fetchReq(`/osmosis.lockup/BeginUnlocking`, { ...initRequest,
       method: "POST",
@@ -25,6 +28,7 @@ export class Msg {
     });
   }
 
+  /** MsgEditLockup edits the existing lockups by lock ID */
   static ExtendLockup(request: MsgExtendLockup, initRequest?: fm.InitReq): Promise<MsgExtendLockupResponse> {
     return fm.fetchReq(`/osmosis.lockup/ExtendLockup`, { ...initRequest,
       method: "POST",
