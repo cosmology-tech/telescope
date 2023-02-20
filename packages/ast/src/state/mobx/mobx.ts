@@ -2,12 +2,15 @@ import * as t from '@babel/types';
 import {
   identifier,
   makeCommentLineWithBlocks,
-  objectProperty
+  objectProperty,
+  classMethod,
+  classDeclaration
 } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { isRefIncluded } from '@osmonauts/proto-parser';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
+import { pascal } from 'case';
 
 /**
  * Entry for building stores.
@@ -71,9 +74,7 @@ export const buildRpcStores = (
   // add imports
   context.addUtil('ProtobufRpcClient');
 
-  //add util for getQueryService
-
-  //add util for QueryStore
+  //TODO: add util for getQueryService
 
   const isCamelRpcMethods = context.pluginValue('rpcClients.camelCase');
   const storeNames = [];
@@ -168,7 +169,7 @@ export const buildRpcStores = (
  *     }
  *   }
  * @param {Object=} context - context of generating the file
- * @param {string} name - name of the hook
+ * @param {string} name - name of the store
  * @param {Object=} serviceMethod - method details
  * @returns {ParseResult} created AST
  */
@@ -177,7 +178,128 @@ const buildStore = (
   name: string,
   serviceMethod: ProtoServiceMethod
 ) => {
-  return t.variableDeclaration('const', [
-    t.variableDeclarator(t.identifier(name), t.stringLiteral('abc'))
-  ]);
+  //add util for QueryStore
+  context.addUtil('QueryStore');
+
+  //add util for MobxResponse
+  context.addUtil('MobxResponse');
+
+  const requestType = serviceMethod.requestType;
+  const responseType = serviceMethod.responseType;
+  const fieldNames = Object.keys(serviceMethod.fields ?? {});
+  const hasParams = fieldNames.length > 0;
+
+  let isOptional = false;
+  // // if no params, then let's default to empty object for cleaner API
+  if (!hasParams) {
+    isOptional = true;
+  } else if (
+    hasParams &&
+    fieldNames.length === 1 &&
+    fieldNames.includes('pagination')
+  ) {
+    // if only argument "required" is pagination
+    // also default to empty
+    isOptional = true;
+  }
+
+  const storeClassName = `Query${pascal(name)}Store`;
+
+  const storeQueryClass = classDeclaration(
+    t.identifier(storeClassName),
+    null,
+    t.classBody([
+      t.classMethod(
+        'constructor',
+        t.identifier('constructor'),
+        [],
+        t.blockStatement([
+          t.expressionStatement(
+            t.callExpression(t.super(), [
+              t.optionalMemberExpression(
+                t.identifier('queryService'),
+                t.identifier(name),
+                false,
+                true
+              )
+            ])
+          ),
+          t.expressionStatement(
+            t.callExpression(t.identifier('makeObservable'), [
+              t.thisExpression(),
+              t.objectExpression([
+                t.objectProperty(
+                  t.identifier('state'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('request'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('response'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('isLoading'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('isSuccess'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('refetch'),
+                  t.identifier('override')
+                ),
+                t.objectProperty(
+                  t.identifier('getData'),
+                  t.identifier('override')
+                )
+              ])
+            ])
+          )
+        ])
+      ),
+      classMethod(
+        'method',
+        t.identifier(name),
+        [
+          identifier(
+            'request',
+            t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType))),
+            isOptional
+          )
+        ],
+        t.blockStatement([
+          t.returnStatement(
+            t.callExpression(
+              t.memberExpression(t.thisExpression(), t.identifier('getData')),
+              [t.identifier('request')]
+            )
+          )
+        ]),
+        t.tsTypeAnnotation(
+          t.tsTypeReference(
+            t.identifier('MobxResponse'),
+            t.tsTypeParameterInstantiation([
+              t.tsTypeReference(t.identifier(responseType))
+            ])
+          )
+        )
+      )
+    ]),
+    [],
+    [
+      t.tsExpressionWithTypeArguments(
+        t.identifier('QueryStore'),
+        t.tsTypeParameterInstantiation([
+          t.tsTypeReference(t.identifier(requestType)),
+          t.tsTypeReference(t.identifier(responseType))
+        ])
+      )
+    ]
+  );
+
+  return storeQueryClass;
 };
