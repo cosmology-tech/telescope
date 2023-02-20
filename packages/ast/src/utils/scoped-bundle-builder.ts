@@ -78,6 +78,7 @@ interface HookImport {
  * @param {Object=} obj - mapping of packages and rpc query filenames
  * @param {string} identifier - name of function creating hooks. eg: createRpcQueryHooks
  * @param {string[]} utils - name of imported utils.
+ * @param {string} methodName - name of a certain method that creates a store or hook. eg: createRpcQueryHooks
  * @returns {ParseResult} created AST
  */
 export const buildExportCreators = (
