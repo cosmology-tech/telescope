@@ -93,7 +93,7 @@ export const buildRpcStores = (
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
       t.variableDeclarator(
-        t.identifier('createRpcQueryHooks'),
+        t.identifier('createRpcQueryStores'),
         t.arrowFunctionExpression(
           [
             identifier(
