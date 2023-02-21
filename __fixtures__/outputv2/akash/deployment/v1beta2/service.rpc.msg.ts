@@ -2,7 +2,7 @@ import { DeploymentID, DeploymentIDSDKType } from "./deployment";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
-import { UnaryMethodDefinitionishR, UnaryMethodDefinitionish } from "../../../grpc-web";
+import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 import { grpc } from "@improbable-eng/grpc-web";
@@ -248,4 +248,51 @@ export const MsgStartGroupDesc: UnaryMethodDefinitionish = {
 };
 export interface Rpc {
   unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.options?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (reponse.status === Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
+  }
+
 }
