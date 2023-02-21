@@ -19,6 +19,7 @@ export const UTILS = {
     AminoTypes: '@cosmjs/stargate',
     base64FromBytes: '__helpers__',
     bytesFromBase64: '__helpers__',
+    BrowserHeaders: 'browser-headers',
     createProtobufRpcClient: '@cosmjs/stargate',
     decodeBech32Pubkey: '@cosmjs/amino',
     DeepPartial: '__helpers__',

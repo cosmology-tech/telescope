@@ -22,5 +22,5 @@ it('test gRPC-web Msg Client', () => {
         printCode(element); 
     }
 
-    printCode(getGrpcWebImpl());
+    printCode(getGrpcWebImpl(context));
 })

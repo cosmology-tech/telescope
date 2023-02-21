@@ -548,7 +548,8 @@ export const grpcWebRpcInterface = () => {
     ))
 }
 
-export const getGrpcWebImpl = () => {
+export const getGrpcWebImpl = (context: GenericParseContext) => {
+    context.addUtil('BrowserHeaders');
     return t.exportNamedDeclaration(
         t.classDeclaration(
             t.identifier('GrpcWebImpl'),
@@ -718,7 +719,7 @@ export const getGrpcWebImpl = () => {
                                                                         t.optionalMemberExpression(
                                                                             t.memberExpression(
                                                                                 t.thisExpression(),
-                                                                                t.identifier('options'),
+                                                                                t.identifier('metadata'),
                                                                                 false
                                                                             ),
                                                                             t.identifier('options'),

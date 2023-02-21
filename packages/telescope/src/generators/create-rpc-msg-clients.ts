@@ -56,7 +56,7 @@ export const plugin = (
                     asts.push(element);
                 }
                 asts.push(grpcWebRpcInterface())
-                asts.push(getGrpcWebImpl())
+                asts.push(getGrpcWebImpl(ctx.generic))
             break;
             case 'tendermint':
                 default:
