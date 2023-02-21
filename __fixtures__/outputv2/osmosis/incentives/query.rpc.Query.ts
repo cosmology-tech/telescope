@@ -10,41 +10,41 @@ import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, 
 /** Query defines the gRPC querier service */
 export interface Query {
   /** ModuleToDistributeCoins returns coins that are going to be distributed */
-  ModuleToDistributeCoins(request?: DeepPartial<ModuleToDistributeCoinsRequest>, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse>;
+  moduleToDistributeCoins(request?: DeepPartial<ModuleToDistributeCoinsRequest>, metadata?: grpc.Metadata): Promise<ModuleToDistributeCoinsResponse>;
 
   /** GaugeByID returns gauges by their respective ID */
-  GaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse>;
+  gaugeByID(request: DeepPartial<GaugeByIDRequest>, metadata?: grpc.Metadata): Promise<GaugeByIDResponse>;
 
   /** Gauges returns both upcoming and active gauges */
-  Gauges(request?: DeepPartial<GaugesRequest>, metadata?: grpc.Metadata): Promise<GaugesResponse>;
+  gauges(request?: DeepPartial<GaugesRequest>, metadata?: grpc.Metadata): Promise<GaugesResponse>;
 
   /** ActiveGauges returns active gauges */
-  ActiveGauges(request?: DeepPartial<ActiveGaugesRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse>;
+  activeGauges(request?: DeepPartial<ActiveGaugesRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesResponse>;
 
   /** ActiveGaugesPerDenom returns active gauges by denom */
-  ActiveGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse>;
+  activeGaugesPerDenom(request: DeepPartial<ActiveGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<ActiveGaugesPerDenomResponse>;
 
   /** Returns scheduled gauges that have not yet occured */
-  UpcomingGauges(request?: DeepPartial<UpcomingGaugesRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse>;
+  upcomingGauges(request?: DeepPartial<UpcomingGaugesRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesResponse>;
 
   /**
    * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
    * by denom
    */
-  UpcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse>;
+  upcomingGaugesPerDenom(request: DeepPartial<UpcomingGaugesPerDenomRequest>, metadata?: grpc.Metadata): Promise<UpcomingGaugesPerDenomResponse>;
 
   /**
    * RewardsEst returns an estimate of the rewards from now until a specified
    * time in the future The querier either provides an address or a set of locks
    * for which they want to find the associated rewards
    */
-  RewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse>;
+  rewardsEst(request: DeepPartial<RewardsEstRequest>, metadata?: grpc.Metadata): Promise<RewardsEstResponse>;
 
   /**
    * LockableDurations returns lockable durations that are valid to distribute
    * incentives for
    */
-  LockableDurations(request?: DeepPartial<QueryLockableDurationsRequest>, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse>;
+  lockableDurations(request?: DeepPartial<QueryLockableDurationsRequest>, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

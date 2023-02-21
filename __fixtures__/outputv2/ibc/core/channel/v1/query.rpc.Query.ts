@@ -10,67 +10,67 @@ import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, 
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Channel queries an IBC Channel. */
-  Channel(request: DeepPartial<QueryChannelRequest>, metadata?: grpc.Metadata): Promise<QueryChannelResponse>;
+  channel(request: DeepPartial<QueryChannelRequest>, metadata?: grpc.Metadata): Promise<QueryChannelResponse>;
 
   /** Channels queries all the IBC channels of a chain. */
-  Channels(request?: DeepPartial<QueryChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryChannelsResponse>;
+  channels(request?: DeepPartial<QueryChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryChannelsResponse>;
 
   /**
    * ConnectionChannels queries all the channels associated with a connection
    * end.
    */
-  ConnectionChannels(request: DeepPartial<QueryConnectionChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionChannelsResponse>;
+  connectionChannels(request: DeepPartial<QueryConnectionChannelsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionChannelsResponse>;
 
   /**
    * ChannelClientState queries for the client state for the channel associated
    * with the provided channel identifiers.
    */
-  ChannelClientState(request: DeepPartial<QueryChannelClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelClientStateResponse>;
+  channelClientState(request: DeepPartial<QueryChannelClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelClientStateResponse>;
 
   /**
    * ChannelConsensusState queries for the consensus state for the channel
    * associated with the provided channel identifiers.
    */
-  ChannelConsensusState(request: DeepPartial<QueryChannelConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelConsensusStateResponse>;
+  channelConsensusState(request: DeepPartial<QueryChannelConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryChannelConsensusStateResponse>;
 
   /** PacketCommitment queries a stored packet commitment hash. */
-  PacketCommitment(request: DeepPartial<QueryPacketCommitmentRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentResponse>;
+  packetCommitment(request: DeepPartial<QueryPacketCommitmentRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentResponse>;
 
   /**
    * PacketCommitments returns all the packet commitments hashes associated
    * with a channel.
    */
-  PacketCommitments(request: DeepPartial<QueryPacketCommitmentsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentsResponse>;
+  packetCommitments(request: DeepPartial<QueryPacketCommitmentsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketCommitmentsResponse>;
 
   /**
    * PacketReceipt queries if a given packet sequence has been received on the
    * queried chain
    */
-  PacketReceipt(request: DeepPartial<QueryPacketReceiptRequest>, metadata?: grpc.Metadata): Promise<QueryPacketReceiptResponse>;
+  packetReceipt(request: DeepPartial<QueryPacketReceiptRequest>, metadata?: grpc.Metadata): Promise<QueryPacketReceiptResponse>;
 
   /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
-  PacketAcknowledgement(request: DeepPartial<QueryPacketAcknowledgementRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementResponse>;
+  packetAcknowledgement(request: DeepPartial<QueryPacketAcknowledgementRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementResponse>;
 
   /**
    * PacketAcknowledgements returns all the packet acknowledgements associated
    * with a channel.
    */
-  PacketAcknowledgements(request: DeepPartial<QueryPacketAcknowledgementsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementsResponse>;
+  packetAcknowledgements(request: DeepPartial<QueryPacketAcknowledgementsRequest>, metadata?: grpc.Metadata): Promise<QueryPacketAcknowledgementsResponse>;
 
   /**
    * UnreceivedPackets returns all the unreceived IBC packets associated with a
    * channel and sequences.
    */
-  UnreceivedPackets(request: DeepPartial<QueryUnreceivedPacketsRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedPacketsResponse>;
+  unreceivedPackets(request: DeepPartial<QueryUnreceivedPacketsRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedPacketsResponse>;
 
   /**
    * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
    * with a channel and sequences.
    */
-  UnreceivedAcks(request: DeepPartial<QueryUnreceivedAcksRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedAcksResponse>;
+  unreceivedAcks(request: DeepPartial<QueryUnreceivedAcksRequest>, metadata?: grpc.Metadata): Promise<QueryUnreceivedAcksResponse>;
 
   /** NextSequenceReceive returns the next receive sequence for a given channel. */
-  NextSequenceReceive(request: DeepPartial<QueryNextSequenceReceiveRequest>, metadata?: grpc.Metadata): Promise<QueryNextSequenceReceiveResponse>;
+  nextSequenceReceive(request: DeepPartial<QueryNextSequenceReceiveRequest>, metadata?: grpc.Metadata): Promise<QueryNextSequenceReceiveResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

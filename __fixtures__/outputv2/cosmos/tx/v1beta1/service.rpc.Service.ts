@@ -11,23 +11,23 @@ import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResp
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {
   /** Simulate simulates executing a transaction for estimating gas usage. */
-  Simulate(request: DeepPartial<SimulateRequest>, metadata?: grpc.Metadata): Promise<SimulateResponse>;
+  simulate(request: DeepPartial<SimulateRequest>, metadata?: grpc.Metadata): Promise<SimulateResponse>;
 
   /** GetTx fetches a tx by hash. */
-  GetTx(request: DeepPartial<GetTxRequest>, metadata?: grpc.Metadata): Promise<GetTxResponse>;
+  getTx(request: DeepPartial<GetTxRequest>, metadata?: grpc.Metadata): Promise<GetTxResponse>;
 
   /** BroadcastTx broadcast transaction. */
-  BroadcastTx(request: DeepPartial<BroadcastTxRequest>, metadata?: grpc.Metadata): Promise<BroadcastTxResponse>;
+  broadcastTx(request: DeepPartial<BroadcastTxRequest>, metadata?: grpc.Metadata): Promise<BroadcastTxResponse>;
 
   /** GetTxsEvent fetches txs by event. */
-  GetTxsEvent(request: DeepPartial<GetTxsEventRequest>, metadata?: grpc.Metadata): Promise<GetTxsEventResponse>;
+  getTxsEvent(request: DeepPartial<GetTxsEventRequest>, metadata?: grpc.Metadata): Promise<GetTxsEventResponse>;
 
   /**
    * GetBlockWithTxs fetches a block with decoded txs.
    * 
    * Since: cosmos-sdk 0.45.2
    */
-  GetBlockWithTxs(request: DeepPartial<GetBlockWithTxsRequest>, metadata?: grpc.Metadata): Promise<GetBlockWithTxsResponse>;
+  getBlockWithTxs(request: DeepPartial<GetBlockWithTxsRequest>, metadata?: grpc.Metadata): Promise<GetBlockWithTxsResponse>;
 }
 export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;

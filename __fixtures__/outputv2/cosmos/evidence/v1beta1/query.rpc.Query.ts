@@ -8,10 +8,10 @@ import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceRespons
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */
-  Evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse>;
+  evidence(request: DeepPartial<QueryEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryEvidenceResponse>;
 
   /** AllEvidence queries all evidence. */
-  AllEvidence(request?: DeepPartial<QueryAllEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse>;
+  allEvidence(request?: DeepPartial<QueryAllEvidenceRequest>, metadata?: grpc.Metadata): Promise<QueryAllEvidenceResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

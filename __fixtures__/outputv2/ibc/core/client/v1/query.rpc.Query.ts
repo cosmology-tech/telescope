@@ -9,34 +9,34 @@ import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientSta
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** ClientState queries an IBC light client. */
-  ClientState(request: DeepPartial<QueryClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryClientStateResponse>;
+  clientState(request: DeepPartial<QueryClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryClientStateResponse>;
 
   /** ClientStates queries all the IBC light clients of a chain. */
-  ClientStates(request?: DeepPartial<QueryClientStatesRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatesResponse>;
+  clientStates(request?: DeepPartial<QueryClientStatesRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatesResponse>;
 
   /**
    * ConsensusState queries a consensus state associated with a client state at
    * a given height.
    */
-  ConsensusState(request: DeepPartial<QueryConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStateResponse>;
+  consensusState(request: DeepPartial<QueryConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStateResponse>;
 
   /**
    * ConsensusStates queries all the consensus state associated with a given
    * client.
    */
-  ConsensusStates(request: DeepPartial<QueryConsensusStatesRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStatesResponse>;
+  consensusStates(request: DeepPartial<QueryConsensusStatesRequest>, metadata?: grpc.Metadata): Promise<QueryConsensusStatesResponse>;
 
   /** Status queries the status of an IBC client. */
-  ClientStatus(request: DeepPartial<QueryClientStatusRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatusResponse>;
+  clientStatus(request: DeepPartial<QueryClientStatusRequest>, metadata?: grpc.Metadata): Promise<QueryClientStatusResponse>;
 
   /** ClientParams queries all parameters of the ibc client. */
-  ClientParams(request?: DeepPartial<QueryClientParamsRequest>, metadata?: grpc.Metadata): Promise<QueryClientParamsResponse>;
+  clientParams(request?: DeepPartial<QueryClientParamsRequest>, metadata?: grpc.Metadata): Promise<QueryClientParamsResponse>;
 
   /** UpgradedClientState queries an Upgraded IBC light client. */
-  UpgradedClientState(request?: DeepPartial<QueryUpgradedClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedClientStateResponse>;
+  upgradedClientState(request?: DeepPartial<QueryUpgradedClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedClientStateResponse>;
 
   /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
-  UpgradedConsensusState(request?: DeepPartial<QueryUpgradedConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse>;
+  upgradedConsensusState(request?: DeepPartial<QueryUpgradedConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryUpgradedConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

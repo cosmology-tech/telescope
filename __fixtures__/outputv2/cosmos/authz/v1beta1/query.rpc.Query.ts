@@ -8,21 +8,21 @@ import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, Que
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Returns list of `Authorization`, granted to the grantee by the granter. */
-  Grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse>;
+  grants(request: DeepPartial<QueryGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGrantsResponse>;
 
   /**
    * GranterGrants returns list of `GrantAuthorization`, granted by granter.
    * 
    * Since: cosmos-sdk 0.46
    */
-  GranterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse>;
+  granterGrants(request: DeepPartial<QueryGranterGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranterGrantsResponse>;
 
   /**
    * GranteeGrants returns a list of `GrantAuthorization` by grantee.
    * 
    * Since: cosmos-sdk 0.46
    */
-  GranteeGrants(request: DeepPartial<QueryGranteeGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranteeGrantsResponse>;
+  granteeGrants(request: DeepPartial<QueryGranteeGrantsRequest>, metadata?: grpc.Metadata): Promise<QueryGranteeGrantsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

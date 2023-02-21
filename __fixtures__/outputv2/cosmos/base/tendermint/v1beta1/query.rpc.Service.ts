@@ -11,22 +11,22 @@ import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, Get
 /** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {
   /** GetNodeInfo queries the current node info. */
-  GetNodeInfo(request?: DeepPartial<GetNodeInfoRequest>, metadata?: grpc.Metadata): Promise<GetNodeInfoResponse>;
+  getNodeInfo(request?: DeepPartial<GetNodeInfoRequest>, metadata?: grpc.Metadata): Promise<GetNodeInfoResponse>;
 
   /** GetSyncing queries node syncing. */
-  GetSyncing(request?: DeepPartial<GetSyncingRequest>, metadata?: grpc.Metadata): Promise<GetSyncingResponse>;
+  getSyncing(request?: DeepPartial<GetSyncingRequest>, metadata?: grpc.Metadata): Promise<GetSyncingResponse>;
 
   /** GetLatestBlock returns the latest block. */
-  GetLatestBlock(request?: DeepPartial<GetLatestBlockRequest>, metadata?: grpc.Metadata): Promise<GetLatestBlockResponse>;
+  getLatestBlock(request?: DeepPartial<GetLatestBlockRequest>, metadata?: grpc.Metadata): Promise<GetLatestBlockResponse>;
 
   /** GetBlockByHeight queries block for given height. */
-  GetBlockByHeight(request: DeepPartial<GetBlockByHeightRequest>, metadata?: grpc.Metadata): Promise<GetBlockByHeightResponse>;
+  getBlockByHeight(request: DeepPartial<GetBlockByHeightRequest>, metadata?: grpc.Metadata): Promise<GetBlockByHeightResponse>;
 
   /** GetLatestValidatorSet queries latest validator-set. */
-  GetLatestValidatorSet(request?: DeepPartial<GetLatestValidatorSetRequest>, metadata?: grpc.Metadata): Promise<GetLatestValidatorSetResponse>;
+  getLatestValidatorSet(request?: DeepPartial<GetLatestValidatorSetRequest>, metadata?: grpc.Metadata): Promise<GetLatestValidatorSetResponse>;
 
   /** GetValidatorSetByHeight queries validator-set at a given height. */
-  GetValidatorSetByHeight(request: DeepPartial<GetValidatorSetByHeightRequest>, metadata?: grpc.Metadata): Promise<GetValidatorSetByHeightResponse>;
+  getValidatorSetByHeight(request: DeepPartial<GetValidatorSetByHeightRequest>, metadata?: grpc.Metadata): Promise<GetValidatorSetByHeightResponse>;
 }
 export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;

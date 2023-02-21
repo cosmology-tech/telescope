@@ -8,58 +8,58 @@ import { QueryValidatorsRequest, QueryValidatorsRequestSDKType, QueryValidatorsR
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Validators queries all validators that match the given status. */
-  Validators(request: DeepPartial<QueryValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorsResponse>;
+  validators(request: DeepPartial<QueryValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorsResponse>;
 
   /** Validator queries validator info for given validator address. */
-  Validator(request: DeepPartial<QueryValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorResponse>;
+  validator(request: DeepPartial<QueryValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorResponse>;
 
   /** ValidatorDelegations queries delegate info for given validator. */
-  ValidatorDelegations(request: DeepPartial<QueryValidatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorDelegationsResponse>;
+  validatorDelegations(request: DeepPartial<QueryValidatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorDelegationsResponse>;
 
   /** ValidatorUnbondingDelegations queries unbonding delegations of a validator. */
-  ValidatorUnbondingDelegations(request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorUnbondingDelegationsResponse>;
+  validatorUnbondingDelegations(request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorUnbondingDelegationsResponse>;
 
   /** Delegation queries delegate info for given validator delegator pair. */
-  Delegation(request: DeepPartial<QueryDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationResponse>;
+  delegation(request: DeepPartial<QueryDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationResponse>;
 
   /**
    * UnbondingDelegation queries unbonding info for given validator delegator
    * pair.
    */
-  UnbondingDelegation(request: DeepPartial<QueryUnbondingDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryUnbondingDelegationResponse>;
+  unbondingDelegation(request: DeepPartial<QueryUnbondingDelegationRequest>, metadata?: grpc.Metadata): Promise<QueryUnbondingDelegationResponse>;
 
   /** DelegatorDelegations queries all delegations of a given delegator address. */
-  DelegatorDelegations(request: DeepPartial<QueryDelegatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorDelegationsResponse>;
+  delegatorDelegations(request: DeepPartial<QueryDelegatorDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorDelegationsResponse>;
 
   /**
    * DelegatorUnbondingDelegations queries all unbonding delegations of a given
    * delegator address.
    */
-  DelegatorUnbondingDelegations(request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorUnbondingDelegationsResponse>;
+  delegatorUnbondingDelegations(request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorUnbondingDelegationsResponse>;
 
   /** Redelegations queries redelegations of given address. */
-  Redelegations(request: DeepPartial<QueryRedelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryRedelegationsResponse>;
+  redelegations(request: DeepPartial<QueryRedelegationsRequest>, metadata?: grpc.Metadata): Promise<QueryRedelegationsResponse>;
 
   /**
    * DelegatorValidators queries all validators info for given delegator
    * address.
    */
-  DelegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse>;
+  delegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse>;
 
   /**
    * DelegatorValidator queries validator info for given delegator validator
    * pair.
    */
-  DelegatorValidator(request: DeepPartial<QueryDelegatorValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorResponse>;
+  delegatorValidator(request: DeepPartial<QueryDelegatorValidatorRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorResponse>;
 
   /** HistoricalInfo queries the historical info for given height. */
-  HistoricalInfo(request: DeepPartial<QueryHistoricalInfoRequest>, metadata?: grpc.Metadata): Promise<QueryHistoricalInfoResponse>;
+  historicalInfo(request: DeepPartial<QueryHistoricalInfoRequest>, metadata?: grpc.Metadata): Promise<QueryHistoricalInfoResponse>;
 
   /** Pool queries the pool info. */
-  Pool(request?: DeepPartial<QueryPoolRequest>, metadata?: grpc.Metadata): Promise<QueryPoolResponse>;
+  pool(request?: DeepPartial<QueryPoolRequest>, metadata?: grpc.Metadata): Promise<QueryPoolResponse>;
 
   /** Parameters queries the staking parameters. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

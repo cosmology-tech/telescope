@@ -6,7 +6,7 @@ import { createGrpcWebQueryInterface, createGrpcWebQueryClass } from './grpc-web
 const store = getTestProtoStore();
 store.traverseAll();
 
-it('test gRPC-web Msg Client', () => {
+it('test gRPC-web Query Client', () => {
     const ref = store.findProto('cosmos/auth/v1beta1/query.proto')
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;

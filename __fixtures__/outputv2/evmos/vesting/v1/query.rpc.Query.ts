@@ -7,7 +7,7 @@ import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesRespons
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Retrieves the unvested, vested and locked tokens for a vesting account */
-  Balances(request: DeepPartial<QueryBalancesRequest>, metadata?: grpc.Metadata): Promise<QueryBalancesResponse>;
+  balances(request: DeepPartial<QueryBalancesRequest>, metadata?: grpc.Metadata): Promise<QueryBalancesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

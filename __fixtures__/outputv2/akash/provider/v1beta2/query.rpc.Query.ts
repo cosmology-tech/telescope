@@ -8,10 +8,10 @@ import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResp
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Providers queries providers */
-  Providers(request?: DeepPartial<QueryProvidersRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  providers(request?: DeepPartial<QueryProvidersRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /** Provider queries provider details */
-  Provider(request: DeepPartial<QueryProviderRequest>, metadata?: grpc.Metadata): Promise<QueryProviderResponse>;
+  provider(request: DeepPartial<QueryProviderRequest>, metadata?: grpc.Metadata): Promise<QueryProviderResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

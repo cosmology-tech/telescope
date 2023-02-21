@@ -11,22 +11,22 @@ import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, Que
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Orders queries orders with filters */
-  Orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse>;
+  orders(request: DeepPartial<QueryOrdersRequest>, metadata?: grpc.Metadata): Promise<QueryOrdersResponse>;
 
   /** Order queries order details */
-  Order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse>;
+  order(request: DeepPartial<QueryOrderRequest>, metadata?: grpc.Metadata): Promise<QueryOrderResponse>;
 
   /** Bids queries bids with filters */
-  Bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse>;
+  bids(request: DeepPartial<QueryBidsRequest>, metadata?: grpc.Metadata): Promise<QueryBidsResponse>;
 
   /** Bid queries bid details */
-  Bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse>;
+  bid(request: DeepPartial<QueryBidRequest>, metadata?: grpc.Metadata): Promise<QueryBidResponse>;
 
   /** Leases queries leases with filters */
-  Leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse>;
+  leases(request: DeepPartial<QueryLeasesRequest>, metadata?: grpc.Metadata): Promise<QueryLeasesResponse>;
 
   /** Lease queries lease details */
-  Lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse>;
+  lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -7,22 +7,22 @@ import { DeepPartial } from "../../../helpers";
 import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
 export interface Query {
   /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
-  GaugeIds(request: DeepPartial<QueryGaugeIdsRequest>, metadata?: grpc.Metadata): Promise<QueryGaugeIdsResponse>;
+  gaugeIds(request: DeepPartial<QueryGaugeIdsRequest>, metadata?: grpc.Metadata): Promise<QueryGaugeIdsResponse>;
 
   /** DistrInfo returns the pool's matching gauge ids and weights. */
-  DistrInfo(request?: DeepPartial<QueryDistrInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDistrInfoResponse>;
+  distrInfo(request?: DeepPartial<QueryDistrInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDistrInfoResponse>;
 
   /** Params returns pool incentives params. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** LockableDurations returns lock durations for pools. */
-  LockableDurations(request?: DeepPartial<QueryLockableDurationsRequest>, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse>;
+  lockableDurations(request?: DeepPartial<QueryLockableDurationsRequest>, metadata?: grpc.Metadata): Promise<QueryLockableDurationsResponse>;
 
   /** IncentivizedPools returns currently incentivized pools */
-  IncentivizedPools(request?: DeepPartial<QueryIncentivizedPoolsRequest>, metadata?: grpc.Metadata): Promise<QueryIncentivizedPoolsResponse>;
+  incentivizedPools(request?: DeepPartial<QueryIncentivizedPoolsRequest>, metadata?: grpc.Metadata): Promise<QueryIncentivizedPoolsResponse>;
 
   /** ExternalIncentiveGauges returns external incentive gauges. */
-  ExternalIncentiveGauges(request?: DeepPartial<QueryExternalIncentiveGaugesRequest>, metadata?: grpc.Metadata): Promise<QueryExternalIncentiveGaugesResponse>;
+  externalIncentiveGauges(request?: DeepPartial<QueryExternalIncentiveGaugesRequest>, metadata?: grpc.Metadata): Promise<QueryExternalIncentiveGaugesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

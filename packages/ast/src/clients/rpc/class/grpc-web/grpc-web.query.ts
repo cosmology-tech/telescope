@@ -6,7 +6,6 @@ import { processRpcComment, returnReponseType } from '../utils/rpc';
 import { metadata, bindThis, makeComment, getRpcClassName } from './utils'
 import * as t from '@babel/types'
 
-//grpc-web query interface
 const gRPCWebMethodDefinition = (
     context: GenericParseContext,
     name: string,
@@ -74,12 +73,12 @@ export const createGrpcWebQueryInterface = (
     service: ProtoService
 ) => {
 
-    const camelRpcMethods = context.pluginValue('rpcClient.camelCase');
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
             const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key;
+            const name = camelRpcMethods ? camel(key) : key; 
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
             return gRPCWebMethodDefinition(
@@ -284,7 +283,6 @@ export const createGrpcWebQueryClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    // TO-DO: NEED TO ADD interface Rpc, not using import Rpc
     //adding import 
     context.addUtil('_m0');
     context.addUtil('grpc')

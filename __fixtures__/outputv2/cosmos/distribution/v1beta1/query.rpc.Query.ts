@@ -9,34 +9,34 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 /** Query defines the gRPC querier service for distribution module. */
 export interface Query {
   /** Params queries params of the distribution module. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** ValidatorOutstandingRewards queries rewards of a validator address. */
-  ValidatorOutstandingRewards(request: DeepPartial<QueryValidatorOutstandingRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorOutstandingRewardsResponse>;
+  validatorOutstandingRewards(request: DeepPartial<QueryValidatorOutstandingRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorOutstandingRewardsResponse>;
 
   /** ValidatorCommission queries accumulated commission for a validator. */
-  ValidatorCommission(request: DeepPartial<QueryValidatorCommissionRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorCommissionResponse>;
+  validatorCommission(request: DeepPartial<QueryValidatorCommissionRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorCommissionResponse>;
 
   /** ValidatorSlashes queries slash events of a validator. */
-  ValidatorSlashes(request: DeepPartial<QueryValidatorSlashesRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorSlashesResponse>;
+  validatorSlashes(request: DeepPartial<QueryValidatorSlashesRequest>, metadata?: grpc.Metadata): Promise<QueryValidatorSlashesResponse>;
 
   /** DelegationRewards queries the total rewards accrued by a delegation. */
-  DelegationRewards(request: DeepPartial<QueryDelegationRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationRewardsResponse>;
+  delegationRewards(request: DeepPartial<QueryDelegationRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationRewardsResponse>;
 
   /**
    * DelegationTotalRewards queries the total rewards accrued by a each
    * validator.
    */
-  DelegationTotalRewards(request: DeepPartial<QueryDelegationTotalRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationTotalRewardsResponse>;
+  delegationTotalRewards(request: DeepPartial<QueryDelegationTotalRewardsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegationTotalRewardsResponse>;
 
   /** DelegatorValidators queries the validators of a delegator. */
-  DelegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse>;
+  delegatorValidators(request: DeepPartial<QueryDelegatorValidatorsRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorValidatorsResponse>;
 
   /** DelegatorWithdrawAddress queries withdraw address of a delegator. */
-  DelegatorWithdrawAddress(request: DeepPartial<QueryDelegatorWithdrawAddressRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorWithdrawAddressResponse>;
+  delegatorWithdrawAddress(request: DeepPartial<QueryDelegatorWithdrawAddressRequest>, metadata?: grpc.Metadata): Promise<QueryDelegatorWithdrawAddressResponse>;
 
   /** CommunityPool queries the community pool coins. */
-  CommunityPool(request?: DeepPartial<QueryCommunityPoolRequest>, metadata?: grpc.Metadata): Promise<QueryCommunityPoolResponse>;
+  communityPool(request?: DeepPartial<QueryCommunityPoolRequest>, metadata?: grpc.Metadata): Promise<QueryCommunityPoolResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

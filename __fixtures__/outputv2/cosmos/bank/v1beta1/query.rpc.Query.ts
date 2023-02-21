@@ -9,40 +9,40 @@ import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the balance of a single coin for a single account. */
-  Balance(request: DeepPartial<QueryBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryBalanceResponse>;
+  balance(request: DeepPartial<QueryBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryBalanceResponse>;
 
   /** AllBalances queries the balance of all coins for a single account. */
-  AllBalances(request: DeepPartial<QueryAllBalancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllBalancesResponse>;
+  allBalances(request: DeepPartial<QueryAllBalancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllBalancesResponse>;
 
   /**
    * SpendableBalances queries the spenable balance of all coins for a single
    * account.
    */
-  SpendableBalances(request: DeepPartial<QuerySpendableBalancesRequest>, metadata?: grpc.Metadata): Promise<QuerySpendableBalancesResponse>;
+  spendableBalances(request: DeepPartial<QuerySpendableBalancesRequest>, metadata?: grpc.Metadata): Promise<QuerySpendableBalancesResponse>;
 
   /** TotalSupply queries the total supply of all coins. */
-  TotalSupply(request?: DeepPartial<QueryTotalSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryTotalSupplyResponse>;
+  totalSupply(request?: DeepPartial<QueryTotalSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryTotalSupplyResponse>;
 
   /** SupplyOf queries the supply of a single coin. */
-  SupplyOf(request: DeepPartial<QuerySupplyOfRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyOfResponse>;
+  supplyOf(request: DeepPartial<QuerySupplyOfRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyOfResponse>;
 
   /** Params queries the parameters of x/bank module. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** DenomsMetadata queries the client metadata of a given coin denomination. */
-  DenomMetadata(request: DeepPartial<QueryDenomMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomMetadataResponse>;
+  denomMetadata(request: DeepPartial<QueryDenomMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomMetadataResponse>;
 
   /**
    * DenomsMetadata queries the client metadata for all registered coin
    * denominations.
    */
-  DenomsMetadata(request?: DeepPartial<QueryDenomsMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomsMetadataResponse>;
+  denomsMetadata(request?: DeepPartial<QueryDenomsMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomsMetadataResponse>;
 
   /**
    * DenomOwners queries for all account addresses that own a particular token
    * denomination.
    */
-  DenomOwners(request: DeepPartial<QueryDenomOwnersRequest>, metadata?: grpc.Metadata): Promise<QueryDenomOwnersResponse>;
+  denomOwners(request: DeepPartial<QueryDenomOwnersRequest>, metadata?: grpc.Metadata): Promise<QueryDenomOwnersResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

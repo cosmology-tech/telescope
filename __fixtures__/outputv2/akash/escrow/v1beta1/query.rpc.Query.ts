@@ -12,14 +12,14 @@ export interface Query {
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Accounts queries all accounts
    */
-  Accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse>;
+  accounts(request: DeepPartial<QueryAccountsRequest>, metadata?: grpc.Metadata): Promise<QueryAccountsResponse>;
 
   /**
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    * Payments queries all payments
    */
-  Payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse>;
+  payments(request: DeepPartial<QueryPaymentsRequest>, metadata?: grpc.Metadata): Promise<QueryPaymentsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -5,9 +5,9 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { DeepPartial } from "../../../helpers";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
 export interface Query {
-  Params(request?: DeepPartial<ParamsRequest>, metadata?: grpc.Metadata): Promise<ParamsResponse>;
-  ArithmeticTwap(request: DeepPartial<ArithmeticTwapRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapResponse>;
-  ArithmeticTwapToNow(request: DeepPartial<ArithmeticTwapToNowRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapToNowResponse>;
+  params(request?: DeepPartial<ParamsRequest>, metadata?: grpc.Metadata): Promise<ParamsResponse>;
+  arithmeticTwap(request: DeepPartial<ArithmeticTwapRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapResponse>;
+  arithmeticTwapToNow(request: DeepPartial<ArithmeticTwapToNowRequest>, metadata?: grpc.Metadata): Promise<ArithmeticTwapToNowResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

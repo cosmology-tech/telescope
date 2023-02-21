@@ -10,13 +10,13 @@ import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymen
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Deployments queries deployments */
-  Deployments(request: DeepPartial<QueryDeploymentsRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentsResponse>;
+  deployments(request: DeepPartial<QueryDeploymentsRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentsResponse>;
 
   /** Deployment queries deployment details */
-  Deployment(request: DeepPartial<QueryDeploymentRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentResponse>;
+  deployment(request: DeepPartial<QueryDeploymentRequest>, metadata?: grpc.Metadata): Promise<QueryDeploymentResponse>;
 
   /** Group queries group details */
-  Group(request: DeepPartial<QueryGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupResponse>;
+  group(request: DeepPartial<QueryGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -7,7 +7,7 @@ import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, Que
 /** Query is the app module query service. */
 export interface Query {
   /** Config returns the current app config. */
-  Config(request?: DeepPartial<QueryConfigRequest>, metadata?: grpc.Metadata): Promise<QueryConfigResponse>;
+  config(request?: DeepPartial<QueryConfigRequest>, metadata?: grpc.Metadata): Promise<QueryConfigResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -8,43 +8,43 @@ import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResp
 /** Query is the cosmos.group.v1 Query service. */
 export interface Query {
   /** GroupInfo queries group info based on group id. */
-  GroupInfo(request: DeepPartial<QueryGroupInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupInfoResponse>;
+  groupInfo(request: DeepPartial<QueryGroupInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupInfoResponse>;
 
   /** GroupPolicyInfo queries group policy info based on account address of group policy. */
-  GroupPolicyInfo(request: DeepPartial<QueryGroupPolicyInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPolicyInfoResponse>;
+  groupPolicyInfo(request: DeepPartial<QueryGroupPolicyInfoRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPolicyInfoResponse>;
 
   /** GroupMembers queries members of a group */
-  GroupMembers(request: DeepPartial<QueryGroupMembersRequest>, metadata?: grpc.Metadata): Promise<QueryGroupMembersResponse>;
+  groupMembers(request: DeepPartial<QueryGroupMembersRequest>, metadata?: grpc.Metadata): Promise<QueryGroupMembersResponse>;
 
   /** GroupsByAdmin queries groups by admin address. */
-  GroupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByAdminResponse>;
+  groupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByAdminResponse>;
 
   /** GroupPoliciesByGroup queries group policies by group id. */
-  GroupPoliciesByGroup(request: DeepPartial<QueryGroupPoliciesByGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByGroupResponse>;
+  groupPoliciesByGroup(request: DeepPartial<QueryGroupPoliciesByGroupRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByGroupResponse>;
 
   /** GroupsByAdmin queries group policies by admin address. */
-  GroupPoliciesByAdmin(request: DeepPartial<QueryGroupPoliciesByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByAdminResponse>;
+  groupPoliciesByAdmin(request: DeepPartial<QueryGroupPoliciesByAdminRequest>, metadata?: grpc.Metadata): Promise<QueryGroupPoliciesByAdminResponse>;
 
   /** Proposal queries a proposal based on proposal id. */
-  Proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
+  proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
 
   /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
-  ProposalsByGroupPolicy(request: DeepPartial<QueryProposalsByGroupPolicyRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsByGroupPolicyResponse>;
+  proposalsByGroupPolicy(request: DeepPartial<QueryProposalsByGroupPolicyRequest>, metadata?: grpc.Metadata): Promise<QueryProposalsByGroupPolicyResponse>;
 
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
-  VoteByProposalVoter(request: DeepPartial<QueryVoteByProposalVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVoteByProposalVoterResponse>;
+  voteByProposalVoter(request: DeepPartial<QueryVoteByProposalVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVoteByProposalVoterResponse>;
 
   /** VotesByProposal queries a vote by proposal. */
-  VotesByProposal(request: DeepPartial<QueryVotesByProposalRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByProposalResponse>;
+  votesByProposal(request: DeepPartial<QueryVotesByProposalRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByProposalResponse>;
 
   /** VotesByVoter queries a vote by voter. */
-  VotesByVoter(request: DeepPartial<QueryVotesByVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByVoterResponse>;
+  votesByVoter(request: DeepPartial<QueryVotesByVoterRequest>, metadata?: grpc.Metadata): Promise<QueryVotesByVoterResponse>;
 
   /** GroupsByMember queries groups by member address. */
-  GroupsByMember(request: DeepPartial<QueryGroupsByMemberRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByMemberResponse>;
+  groupsByMember(request: DeepPartial<QueryGroupsByMemberRequest>, metadata?: grpc.Metadata): Promise<QueryGroupsByMemberResponse>;
 
   /** TallyResult queries the tally of a proposal votes. */
-  TallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse>;
+  tallyResult(request: DeepPartial<QueryTallyResultRequest>, metadata?: grpc.Metadata): Promise<QueryTallyResultResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

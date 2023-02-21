@@ -11,19 +11,19 @@ export interface Query {
    * Params defines a gRPC query method that returns the tokenfactory module's
    * parameters.
    */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /**
    * DenomAuthorityMetadata defines a gRPC query method for fetching
    * DenomAuthorityMetadata for a particular denom.
    */
-  DenomAuthorityMetadata(request: DeepPartial<QueryDenomAuthorityMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomAuthorityMetadataResponse>;
+  denomAuthorityMetadata(request: DeepPartial<QueryDenomAuthorityMetadataRequest>, metadata?: grpc.Metadata): Promise<QueryDenomAuthorityMetadataResponse>;
 
   /**
    * DenomsFromCreator defines a gRPC query method for fetching all
    * denominations created by a specific admin/creator.
    */
-  DenomsFromCreator(request: DeepPartial<QueryDenomsFromCreatorRequest>, metadata?: grpc.Metadata): Promise<QueryDenomsFromCreatorResponse>;
+  denomsFromCreator(request: DeepPartial<QueryDenomsFromCreatorRequest>, metadata?: grpc.Metadata): Promise<QueryDenomsFromCreatorResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

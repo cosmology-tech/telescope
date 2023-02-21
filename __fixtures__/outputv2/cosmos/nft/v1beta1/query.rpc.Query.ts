@@ -8,28 +8,28 @@ import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721 */
-  Balance(request: DeepPartial<QueryBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryBalanceResponse>;
+  balance(request: DeepPartial<QueryBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryBalanceResponse>;
 
   /** Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721 */
-  Owner(request: DeepPartial<QueryOwnerRequest>, metadata?: grpc.Metadata): Promise<QueryOwnerResponse>;
+  owner(request: DeepPartial<QueryOwnerRequest>, metadata?: grpc.Metadata): Promise<QueryOwnerResponse>;
 
   /** Supply queries the number of NFTs from the given class, same as totalSupply of ERC721. */
-  Supply(request: DeepPartial<QuerySupplyRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyResponse>;
+  supply(request: DeepPartial<QuerySupplyRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyResponse>;
 
   /**
    * NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
    * ERC721Enumerable
    */
-  NFTs(request: DeepPartial<QueryNFTsRequest>, metadata?: grpc.Metadata): Promise<QueryNFTsResponse>;
+  nFTs(request: DeepPartial<QueryNFTsRequest>, metadata?: grpc.Metadata): Promise<QueryNFTsResponse>;
 
   /** NFT queries an NFT based on its class and id. */
-  NFT(request: DeepPartial<QueryNFTRequest>, metadata?: grpc.Metadata): Promise<QueryNFTResponse>;
+  nFT(request: DeepPartial<QueryNFTRequest>, metadata?: grpc.Metadata): Promise<QueryNFTResponse>;
 
   /** Class queries an NFT class based on its id */
-  Class(request: DeepPartial<QueryClassRequest>, metadata?: grpc.Metadata): Promise<QueryClassResponse>;
+  class(request: DeepPartial<QueryClassRequest>, metadata?: grpc.Metadata): Promise<QueryClassResponse>;
 
   /** Classes queries all NFT classes */
-  Classes(request?: DeepPartial<QueryClassesRequest>, metadata?: grpc.Metadata): Promise<QueryClassesResponse>;
+  classes(request?: DeepPartial<QueryClassesRequest>, metadata?: grpc.Metadata): Promise<QueryClassesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

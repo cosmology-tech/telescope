@@ -9,19 +9,19 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInf
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** DevFeeInfos retrieves all registered contracts for fee distribution */
-  DevFeeInfos(request?: DeepPartial<QueryDevFeeInfosRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse>;
+  devFeeInfos(request?: DeepPartial<QueryDevFeeInfosRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosResponse>;
 
   /** DevFeeInfo retrieves a registered contract for fee distribution */
-  DevFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse>;
+  devFeeInfo(request: DeepPartial<QueryDevFeeInfoRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfoResponse>;
 
   /** Params retrieves the fees module params */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /**
    * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
    * registered for fee distribution
    */
-  DevFeeInfosPerDeployer(request: DeepPartial<QueryDevFeeInfosPerDeployerRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosPerDeployerResponse>;
+  devFeeInfosPerDeployer(request: DeepPartial<QueryDevFeeInfosPerDeployerRequest>, metadata?: grpc.Metadata): Promise<QueryDevFeeInfosPerDeployerResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

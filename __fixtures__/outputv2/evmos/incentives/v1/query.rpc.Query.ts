@@ -10,28 +10,28 @@ import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesR
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Incentives retrieves registered incentives */
-  Incentives(request?: DeepPartial<QueryIncentivesRequest>, metadata?: grpc.Metadata): Promise<QueryIncentivesResponse>;
+  incentives(request?: DeepPartial<QueryIncentivesRequest>, metadata?: grpc.Metadata): Promise<QueryIncentivesResponse>;
 
   /** Incentive retrieves a registered incentive */
-  Incentive(request: DeepPartial<QueryIncentiveRequest>, metadata?: grpc.Metadata): Promise<QueryIncentiveResponse>;
+  incentive(request: DeepPartial<QueryIncentiveRequest>, metadata?: grpc.Metadata): Promise<QueryIncentiveResponse>;
 
   /** GasMeters retrieves active gas meters for a given contract */
-  GasMeters(request: DeepPartial<QueryGasMetersRequest>, metadata?: grpc.Metadata): Promise<QueryGasMetersResponse>;
+  gasMeters(request: DeepPartial<QueryGasMetersRequest>, metadata?: grpc.Metadata): Promise<QueryGasMetersResponse>;
 
   /** GasMeter Retrieves a active gas meter */
-  GasMeter(request: DeepPartial<QueryGasMeterRequest>, metadata?: grpc.Metadata): Promise<QueryGasMeterResponse>;
+  gasMeter(request: DeepPartial<QueryGasMeterRequest>, metadata?: grpc.Metadata): Promise<QueryGasMeterResponse>;
 
   /**
    * AllocationMeters retrieves active allocation meters for a given
    * denomination
    */
-  AllocationMeters(request?: DeepPartial<QueryAllocationMetersRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMetersResponse>;
+  allocationMeters(request?: DeepPartial<QueryAllocationMetersRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMetersResponse>;
 
   /** AllocationMeter Retrieves a active gas meter */
-  AllocationMeter(request: DeepPartial<QueryAllocationMeterRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMeterResponse>;
+  allocationMeter(request: DeepPartial<QueryAllocationMeterRequest>, metadata?: grpc.Metadata): Promise<QueryAllocationMeterResponse>;
 
   /** Params retrieves the incentives module params */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

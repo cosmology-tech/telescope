@@ -8,11 +8,11 @@ import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKTy
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  ModuleAccountBalance(request?: DeepPartial<QueryModuleAccountBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryModuleAccountBalanceResponse>;
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-  ClaimRecord(request: DeepPartial<QueryClaimRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimRecordResponse>;
-  ClaimableForAction(request: DeepPartial<QueryClaimableForActionRequest>, metadata?: grpc.Metadata): Promise<QueryClaimableForActionResponse>;
-  TotalClaimable(request: DeepPartial<QueryTotalClaimableRequest>, metadata?: grpc.Metadata): Promise<QueryTotalClaimableResponse>;
+  moduleAccountBalance(request?: DeepPartial<QueryModuleAccountBalanceRequest>, metadata?: grpc.Metadata): Promise<QueryModuleAccountBalanceResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  claimRecord(request: DeepPartial<QueryClaimRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimRecordResponse>;
+  claimableForAction(request: DeepPartial<QueryClaimableForActionRequest>, metadata?: grpc.Metadata): Promise<QueryClaimableForActionResponse>;
+  totalClaimable(request: DeepPartial<QueryTotalClaimableRequest>, metadata?: grpc.Metadata): Promise<QueryTotalClaimableResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

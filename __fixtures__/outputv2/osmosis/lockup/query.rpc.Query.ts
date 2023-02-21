@@ -11,61 +11,61 @@ import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceRespons
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Return full balance of the module */
-  ModuleBalance(request?: DeepPartial<ModuleBalanceRequest>, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse>;
+  moduleBalance(request?: DeepPartial<ModuleBalanceRequest>, metadata?: grpc.Metadata): Promise<ModuleBalanceResponse>;
 
   /** Return locked balance of the module */
-  ModuleLockedAmount(request?: DeepPartial<ModuleLockedAmountRequest>, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse>;
+  moduleLockedAmount(request?: DeepPartial<ModuleLockedAmountRequest>, metadata?: grpc.Metadata): Promise<ModuleLockedAmountResponse>;
 
   /** Returns unlockable coins which are not withdrawn yet */
-  AccountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse>;
+  accountUnlockableCoins(request: DeepPartial<AccountUnlockableCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockableCoinsResponse>;
 
   /** Returns unlocking coins */
-  AccountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse>;
+  accountUnlockingCoins(request: DeepPartial<AccountUnlockingCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockingCoinsResponse>;
 
   /** Return a locked coins that can't be withdrawn */
-  AccountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse>;
+  accountLockedCoins(request: DeepPartial<AccountLockedCoinsRequest>, metadata?: grpc.Metadata): Promise<AccountLockedCoinsResponse>;
 
   /** Returns locked records of an account with unlock time beyond timestamp */
-  AccountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse>;
+  accountLockedPastTime(request: DeepPartial<AccountLockedPastTimeRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeResponse>;
 
   /**
    * Returns locked records of an account with unlock time beyond timestamp
    * excluding tokens started unlocking
    */
-  AccountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
+  accountLockedPastTimeNotUnlockingOnly(request: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
 
   /** Returns unlocked records with unlock time before timestamp */
-  AccountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse>;
+  accountUnlockedBeforeTime(request: DeepPartial<AccountUnlockedBeforeTimeRequest>, metadata?: grpc.Metadata): Promise<AccountUnlockedBeforeTimeResponse>;
 
   /** Returns lock records by address, timestamp, denom */
-  AccountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse>;
+  accountLockedPastTimeDenom(request: DeepPartial<AccountLockedPastTimeDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedPastTimeDenomResponse>;
 
   /** Returns total locked per denom with longer past given time */
-  LockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse>;
+  lockedDenom(request: DeepPartial<LockedDenomRequest>, metadata?: grpc.Metadata): Promise<LockedDenomResponse>;
 
   /** Returns lock record by id */
-  LockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse>;
+  lockedByID(request: DeepPartial<LockedRequest>, metadata?: grpc.Metadata): Promise<LockedResponse>;
 
   /** Returns synthetic lockups by native lockup id */
-  SyntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse>;
+  syntheticLockupsByLockupID(request: DeepPartial<SyntheticLockupsByLockupIDRequest>, metadata?: grpc.Metadata): Promise<SyntheticLockupsByLockupIDResponse>;
 
   /** Returns account locked records with longer duration */
-  AccountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse>;
+  accountLockedLongerDuration(request: DeepPartial<AccountLockedLongerDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationResponse>;
 
   /** Returns account locked records with a specific duration */
-  AccountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse>;
+  accountLockedDuration(request: DeepPartial<AccountLockedDurationRequest>, metadata?: grpc.Metadata): Promise<AccountLockedDurationResponse>;
 
   /**
    * Returns account locked records with longer duration excluding tokens
    * started unlocking
    */
-  AccountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
+  accountLockedLongerDurationNotUnlockingOnly(request: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
 
   /** Returns account's locked records for a denom with longer duration */
-  AccountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse>;
+  accountLockedLongerDurationDenom(request: DeepPartial<AccountLockedLongerDurationDenomRequest>, metadata?: grpc.Metadata): Promise<AccountLockedLongerDurationDenomResponse>;
 
   /** Params returns lockup params. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

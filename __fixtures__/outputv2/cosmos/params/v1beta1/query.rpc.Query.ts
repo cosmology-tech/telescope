@@ -10,10 +10,10 @@ export interface Query {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** Subspaces queries for all registered subspaces and all keys for a subspace. */
-  Subspaces(request?: DeepPartial<QuerySubspacesRequest>, metadata?: grpc.Metadata): Promise<QuerySubspacesResponse>;
+  subspaces(request?: DeepPartial<QuerySubspacesRequest>, metadata?: grpc.Metadata): Promise<QuerySubspacesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

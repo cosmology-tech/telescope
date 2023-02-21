@@ -8,13 +8,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Params queries the parameters of slashing module */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** SigningInfo queries the signing info of given cons address */
-  SigningInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse>;
+  signingInfo(request: DeepPartial<QuerySigningInfoRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfoResponse>;
 
   /** SigningInfos queries signing info of all validators */
-  SigningInfos(request?: DeepPartial<QuerySigningInfosRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse>;
+  signingInfos(request?: DeepPartial<QuerySigningInfosRequest>, metadata?: grpc.Metadata): Promise<QuerySigningInfosResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

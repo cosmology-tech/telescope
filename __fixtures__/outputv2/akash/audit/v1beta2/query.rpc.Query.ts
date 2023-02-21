@@ -12,28 +12,28 @@ export interface Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  AllProvidersAttributes(request?: DeepPartial<QueryAllProvidersAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  allProvidersAttributes(request?: DeepPartial<QueryAllProvidersAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAttributes queries all provider signed attributes
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  ProviderAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  providerAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAuditorAttributes queries provider signed attributes by specific auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  ProviderAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  providerAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * AuditorAttributes queries all providers signed by this auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  AuditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  auditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

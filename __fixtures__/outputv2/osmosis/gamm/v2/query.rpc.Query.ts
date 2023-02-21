@@ -7,7 +7,7 @@ export interface Query {
    * SpotPrice defines a gRPC query handler that returns the spot price given
    * a base denomination and a quote denomination.
    */
-  SpotPrice(request: DeepPartial<QuerySpotPriceRequest>, metadata?: grpc.Metadata): Promise<QuerySpotPriceResponse>;
+  spotPrice(request: DeepPartial<QuerySpotPriceRequest>, metadata?: grpc.Metadata): Promise<QuerySpotPriceResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

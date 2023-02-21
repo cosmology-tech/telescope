@@ -10,28 +10,28 @@ import { QueryConnectionRequest, QueryConnectionRequestSDKType, QueryConnectionR
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Connection queries an IBC connection end. */
-  Connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse>;
+  connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse>;
 
   /** Connections queries all the IBC connections of a chain. */
-  Connections(request?: DeepPartial<QueryConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse>;
+  connections(request?: DeepPartial<QueryConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse>;
 
   /**
    * ClientConnections queries the connection paths associated with a client
    * state.
    */
-  ClientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse>;
+  clientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse>;
 
   /**
    * ConnectionClientState queries the client state associated with the
    * connection.
    */
-  ConnectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse>;
+  connectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse>;
 
   /**
    * ConnectionConsensusState queries the consensus state associated with the
    * connection.
    */
-  ConnectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse>;
+  connectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -8,25 +8,25 @@ import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, Que
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** Period retrieves current period. */
-  Period(request?: DeepPartial<QueryPeriodRequest>, metadata?: grpc.Metadata): Promise<QueryPeriodResponse>;
+  period(request?: DeepPartial<QueryPeriodRequest>, metadata?: grpc.Metadata): Promise<QueryPeriodResponse>;
 
   /** EpochMintProvision retrieves current minting epoch provision value. */
-  EpochMintProvision(request?: DeepPartial<QueryEpochMintProvisionRequest>, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse>;
+  epochMintProvision(request?: DeepPartial<QueryEpochMintProvisionRequest>, metadata?: grpc.Metadata): Promise<QueryEpochMintProvisionResponse>;
 
   /** SkippedEpochs retrieves the total number of skipped epochs. */
-  SkippedEpochs(request?: DeepPartial<QuerySkippedEpochsRequest>, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse>;
+  skippedEpochs(request?: DeepPartial<QuerySkippedEpochsRequest>, metadata?: grpc.Metadata): Promise<QuerySkippedEpochsResponse>;
 
   /**
    * CirculatingSupply retrieves the total number of tokens that are in
    * circulation (i.e. excluding unvested tokens).
    */
-  CirculatingSupply(request?: DeepPartial<QueryCirculatingSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse>;
+  circulatingSupply(request?: DeepPartial<QueryCirculatingSupplyRequest>, metadata?: grpc.Metadata): Promise<QueryCirculatingSupplyResponse>;
 
   /** InflationRate retrieves the inflation rate of the current period. */
-  InflationRate(request?: DeepPartial<QueryInflationRateRequest>, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse>;
+  inflationRate(request?: DeepPartial<QueryInflationRateRequest>, metadata?: grpc.Metadata): Promise<QueryInflationRateResponse>;
 
   /** Params retrieves the total set of minting parameters. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

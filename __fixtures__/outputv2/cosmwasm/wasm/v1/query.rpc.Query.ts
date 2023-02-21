@@ -8,31 +8,31 @@ import { QueryContractInfoRequest, QueryContractInfoRequestSDKType, QueryContrac
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** ContractInfo gets the contract meta data */
-  ContractInfo(request: DeepPartial<QueryContractInfoRequest>, metadata?: grpc.Metadata): Promise<QueryContractInfoResponse>;
+  contractInfo(request: DeepPartial<QueryContractInfoRequest>, metadata?: grpc.Metadata): Promise<QueryContractInfoResponse>;
 
   /** ContractHistory gets the contract code history */
-  ContractHistory(request: DeepPartial<QueryContractHistoryRequest>, metadata?: grpc.Metadata): Promise<QueryContractHistoryResponse>;
+  contractHistory(request: DeepPartial<QueryContractHistoryRequest>, metadata?: grpc.Metadata): Promise<QueryContractHistoryResponse>;
 
   /** ContractsByCode lists all smart contracts for a code id */
-  ContractsByCode(request: DeepPartial<QueryContractsByCodeRequest>, metadata?: grpc.Metadata): Promise<QueryContractsByCodeResponse>;
+  contractsByCode(request: DeepPartial<QueryContractsByCodeRequest>, metadata?: grpc.Metadata): Promise<QueryContractsByCodeResponse>;
 
   /** AllContractState gets all raw store data for a single contract */
-  AllContractState(request: DeepPartial<QueryAllContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryAllContractStateResponse>;
+  allContractState(request: DeepPartial<QueryAllContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryAllContractStateResponse>;
 
   /** RawContractState gets single key from the raw store data of a contract */
-  RawContractState(request: DeepPartial<QueryRawContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryRawContractStateResponse>;
+  rawContractState(request: DeepPartial<QueryRawContractStateRequest>, metadata?: grpc.Metadata): Promise<QueryRawContractStateResponse>;
 
   /** SmartContractState get smart query result from the contract */
-  SmartContractState(request: DeepPartial<QuerySmartContractStateRequest>, metadata?: grpc.Metadata): Promise<QuerySmartContractStateResponse>;
+  smartContractState(request: DeepPartial<QuerySmartContractStateRequest>, metadata?: grpc.Metadata): Promise<QuerySmartContractStateResponse>;
 
   /** Code gets the binary code and metadata for a singe wasm code */
-  Code(request: DeepPartial<QueryCodeRequest>, metadata?: grpc.Metadata): Promise<QueryCodeResponse>;
+  code(request: DeepPartial<QueryCodeRequest>, metadata?: grpc.Metadata): Promise<QueryCodeResponse>;
 
   /** Codes gets the metadata for all stored wasm codes */
-  Codes(request?: DeepPartial<QueryCodesRequest>, metadata?: grpc.Metadata): Promise<QueryCodesResponse>;
+  codes(request?: DeepPartial<QueryCodesRequest>, metadata?: grpc.Metadata): Promise<QueryCodesResponse>;
 
   /** PinnedCodes gets the pinned code ids */
-  PinnedCodes(request?: DeepPartial<QueryPinnedCodesRequest>, metadata?: grpc.Metadata): Promise<QueryPinnedCodesResponse>;
+  pinnedCodes(request?: DeepPartial<QueryPinnedCodesRequest>, metadata?: grpc.Metadata): Promise<QueryPinnedCodesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -8,16 +8,16 @@ import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResp
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Allowance returns fee granted to the grantee by the granter. */
-  Allowance(request: DeepPartial<QueryAllowanceRequest>, metadata?: grpc.Metadata): Promise<QueryAllowanceResponse>;
+  allowance(request: DeepPartial<QueryAllowanceRequest>, metadata?: grpc.Metadata): Promise<QueryAllowanceResponse>;
 
   /** Allowances returns all the grants for address. */
-  Allowances(request: DeepPartial<QueryAllowancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesResponse>;
+  allowances(request: DeepPartial<QueryAllowancesRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesResponse>;
 
   /**
    * AllowancesByGranter returns all the grants given by an address
    * Since v0.46
    */
-  AllowancesByGranter(request: DeepPartial<QueryAllowancesByGranterRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesByGranterResponse>;
+  allowancesByGranter(request: DeepPartial<QueryAllowancesByGranterRequest>, metadata?: grpc.Metadata): Promise<QueryAllowancesByGranterResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -8,7 +8,7 @@ import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertifi
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Certificates queries certificates */
-  Certificates(request: DeepPartial<QueryCertificatesRequest>, metadata?: grpc.Metadata): Promise<QueryCertificatesResponse>;
+  certificates(request: DeepPartial<QueryCertificatesRequest>, metadata?: grpc.Metadata): Promise<QueryCertificatesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

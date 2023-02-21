@@ -10,16 +10,16 @@ import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTot
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** TotalUnclaimed queries the total unclaimed tokens from the airdrop */
-  TotalUnclaimed(request?: DeepPartial<QueryTotalUnclaimedRequest>, metadata?: grpc.Metadata): Promise<QueryTotalUnclaimedResponse>;
+  totalUnclaimed(request?: DeepPartial<QueryTotalUnclaimedRequest>, metadata?: grpc.Metadata): Promise<QueryTotalUnclaimedResponse>;
 
   /** Params returns the claims module parameters */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /** ClaimsRecords returns all claims records */
-  ClaimsRecords(request?: DeepPartial<QueryClaimsRecordsRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordsResponse>;
+  claimsRecords(request?: DeepPartial<QueryClaimsRecordsRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordsResponse>;
 
   /** ClaimsRecord returns the claims record for a given address */
-  ClaimsRecord(request: DeepPartial<QueryClaimsRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordResponse>;
+  claimsRecord(request: DeepPartial<QueryClaimsRecordRequest>, metadata?: grpc.Metadata): Promise<QueryClaimsRecordResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
