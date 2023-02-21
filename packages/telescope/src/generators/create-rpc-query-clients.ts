@@ -9,8 +9,13 @@ import {
     createRpcQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
+    //grpc-web:
     createGrpcWebQueryClass,
-    createGrpcWebQueryInterface
+    createGrpcWebQueryInterface,
+    GetDesc, 
+    getMethodDesc,
+    grpcWebRpcInterface,
+    getGrpcWebImpl
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -84,6 +89,14 @@ export const plugin = (
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
                         asts.push(createGrpcWebQueryClass(ctx.generic, svc));
+                        asts.push(GetDesc(ctx.generic, proto[svcKey]))
+                            const Desces = getMethodDesc(ctx.generic, proto[svcKey]);
+                        for (let i = 0; i < Desces.length; i++) {
+                            const element = Desces[i];
+                            asts.push(element);
+                        }
+                        asts.push(grpcWebRpcInterface())
+                        asts.push(getGrpcWebImpl(ctx.generic))
                     }
                 })
             break;
