@@ -150,25 +150,25 @@ exports[`builds stores. 1`] = `
      * 
      * Since: cosmos-sdk 0.43
      */
-    accounts,
+    QueryAccountsStore,
 
     /** Account returns account details based on address. */
-    account,
+    QueryAccountStore,
 
     /** Params queries all parameters. */
-    params,
+    QueryParamsStore,
 
     /** ModuleAccounts returns all the existing module accounts. */
-    moduleAccounts,
+    QueryModuleAccountsStore,
 
     /** Bech32 queries bech32Prefix */
-    bech32Prefix,
+    QueryBech32PrefixStore,
 
     /** AddressBytesToString converts Account Address bytes to string */
-    addressBytesToString,
+    QueryAddressBytesToStringStore,
 
     /** AddressStringToBytes converts Address string to bytes */
-    addressStringToBytes
+    QueryAddressStringToBytesStore
   };
 };"
 `;

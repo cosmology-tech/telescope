@@ -4,7 +4,7 @@ import {
   getTestProtoStore
 } from '../../../test-utils';
 import * as t from '@babel/types';
-import { build } from './scoped-bundle';
+import { createMobxQueryFactory } from './scoped-bundle';
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -13,7 +13,7 @@ it('builds stores.', async () => {
   const context = getGenericParseContext();
   expectCode(
     t.program(
-      build(context, {
+      createMobxQueryFactory(context, {
         cosmos: {
           bank: {
             v1beta1: './proto/cosmos/bank/v1beta1/a.lcd'
