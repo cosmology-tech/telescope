@@ -4,7 +4,7 @@ exports[`builds stores. 1`] = `
 "export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  class QueryAccountsStore extends QueryStore<QueryAccountsRequest, QueryAccountsResponse> implements {
+  class QueryAccountsStore extends QueryStore<QueryAccountsRequest, QueryAccountsResponse> {
     constructor() {
       super(queryService?.accounts);
       makeObservable(this, {
@@ -24,7 +24,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryAccountStore extends QueryStore<QueryAccountRequest, QueryAccountResponse> implements {
+  class QueryAccountStore extends QueryStore<QueryAccountRequest, QueryAccountResponse> {
     constructor() {
       super(queryService?.account);
       makeObservable(this, {
@@ -44,7 +44,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> implements {
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
     constructor() {
       super(queryService?.params);
       makeObservable(this, {
@@ -64,7 +64,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryModuleAccountsStore extends QueryStore<QueryModuleAccountsRequest, QueryModuleAccountsResponse> implements {
+  class QueryModuleAccountsStore extends QueryStore<QueryModuleAccountsRequest, QueryModuleAccountsResponse> {
     constructor() {
       super(queryService?.moduleAccounts);
       makeObservable(this, {
@@ -84,7 +84,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryBech32PrefixStore extends QueryStore<Bech32PrefixRequest, Bech32PrefixResponse> implements {
+  class QueryBech32PrefixStore extends QueryStore<Bech32PrefixRequest, Bech32PrefixResponse> {
     constructor() {
       super(queryService?.bech32Prefix);
       makeObservable(this, {
@@ -104,7 +104,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryAddressBytesToStringStore extends QueryStore<AddressBytesToStringRequest, AddressBytesToStringResponse> implements {
+  class QueryAddressBytesToStringStore extends QueryStore<AddressBytesToStringRequest, AddressBytesToStringResponse> {
     constructor() {
       super(queryService?.addressBytesToString);
       makeObservable(this, {
@@ -124,7 +124,7 @@ exports[`builds stores. 1`] = `
 
   }
 
-  class QueryAddressStringToBytesStore extends QueryStore<AddressStringToBytesRequest, AddressStringToBytesResponse> implements {
+  class QueryAddressStringToBytesStore extends QueryStore<AddressStringToBytesRequest, AddressStringToBytesResponse> {
     constructor() {
       super(queryService?.addressStringToBytes);
       makeObservable(this, {
