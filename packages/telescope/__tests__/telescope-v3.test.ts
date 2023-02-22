@@ -6,7 +6,7 @@ import { kebab } from "case";
 import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
 
-const outPath = __dirname + '/../../../__fixtures__/outputv3';
+const outPath = __dirname + '/../../../__fixtures__/v-next/outputv3';
 const store = getTestProtoStore();
 const contractsDir = __dirname + '/../../../__fixtures__/wasm/';
 store.traverseAll();
