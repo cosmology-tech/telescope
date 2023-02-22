@@ -5,8 +5,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -141,82 +139,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * Since v0.46
      */
     useAllowancesByGranter
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryAllowanceStore extends QueryStore<QueryAllowanceRequest, QueryAllowanceResponse> {
-    constructor() {
-      super(queryService?.allowance);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    allowance(request: QueryAllowanceRequest): MobxResponse<QueryAllowanceResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryAllowancesStore extends QueryStore<QueryAllowancesRequest, QueryAllowancesResponse> {
-    constructor() {
-      super(queryService?.allowances);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    allowances(request: QueryAllowancesRequest): MobxResponse<QueryAllowancesResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryAllowancesByGranterStore extends QueryStore<QueryAllowancesByGranterRequest, QueryAllowancesByGranterResponse> {
-    constructor() {
-      super(queryService?.allowancesByGranter);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    allowancesByGranter(request: QueryAllowancesByGranterRequest): MobxResponse<QueryAllowancesByGranterResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** Allowance returns fee granted to the grantee by the granter. */
-    QueryAllowanceStore,
-
-    /** Allowances returns all the grants for address. */
-    QueryAllowancesStore,
-
-    /**
-     * AllowancesByGranter returns all the grants given by an address
-     * Since v0.46
-     */
-    QueryAllowancesByGranterStore
   };
 };

@@ -4,8 +4,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -80,36 +78,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * parameters.
      */
     useParams
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /**
-     * Params defines a gRPC query method that returns the ibc-rate-limit module's
-     * parameters.
-     */
-    QueryParamsStore
   };
 };

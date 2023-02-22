@@ -4,8 +4,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 
 /** Query is the app module query service. */
@@ -74,33 +72,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   return {
     /** Config returns the current app config. */
     useConfig
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryConfigStore extends QueryStore<QueryConfigRequest, QueryConfigResponse> {
-    constructor() {
-      super(queryService?.config);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    config(request?: QueryConfigRequest): MobxResponse<QueryConfigResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** Config returns the current app config. */
-    QueryConfigStore
   };
 };

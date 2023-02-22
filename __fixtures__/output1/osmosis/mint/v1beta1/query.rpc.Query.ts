@@ -4,8 +4,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
@@ -104,56 +102,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** EpochProvisions returns the current minting epoch provisions value. */
     useEpochProvisions
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryEpochProvisionsStore extends QueryStore<QueryEpochProvisionsRequest, QueryEpochProvisionsResponse> {
-    constructor() {
-      super(queryService?.epochProvisions);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    epochProvisions(request?: QueryEpochProvisionsRequest): MobxResponse<QueryEpochProvisionsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** Params returns the total set of minting parameters. */
-    QueryParamsStore,
-
-    /** EpochProvisions returns the current minting epoch provisions value. */
-    QueryEpochProvisionsStore
   };
 };

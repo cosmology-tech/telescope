@@ -6,8 +6,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -178,116 +176,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useClaimRecord,
     useClaimableForAction,
     useTotalClaimable
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryModuleAccountBalanceStore extends QueryStore<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse> {
-    constructor() {
-      super(queryService?.moduleAccountBalance);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    moduleAccountBalance(request?: QueryModuleAccountBalanceRequest): MobxResponse<QueryModuleAccountBalanceResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryClaimRecordStore extends QueryStore<QueryClaimRecordRequest, QueryClaimRecordResponse> {
-    constructor() {
-      super(queryService?.claimRecord);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    claimRecord(request: QueryClaimRecordRequest): MobxResponse<QueryClaimRecordResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryClaimableForActionStore extends QueryStore<QueryClaimableForActionRequest, QueryClaimableForActionResponse> {
-    constructor() {
-      super(queryService?.claimableForAction);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    claimableForAction(request: QueryClaimableForActionRequest): MobxResponse<QueryClaimableForActionResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryTotalClaimableStore extends QueryStore<QueryTotalClaimableRequest, QueryTotalClaimableResponse> {
-    constructor() {
-      super(queryService?.totalClaimable);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    totalClaimable(request: QueryTotalClaimableRequest): MobxResponse<QueryTotalClaimableResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    QueryModuleAccountBalanceStore,
-    QueryParamsStore,
-    QueryClaimRecordStore,
-    QueryClaimableForActionStore,
-    QueryTotalClaimableStore
   };
 };

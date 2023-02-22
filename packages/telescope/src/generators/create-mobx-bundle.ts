@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../builder';
-import { createMobxQueryFactory } from '@osmonauts/ast';
+// import { createMobxQueryFactory } from '@osmonauts/ast';
 import * as dotty from 'dotty';
 import { commonBundlePlugin } from '../utils';
 
@@ -18,8 +18,8 @@ export const plugin = (builder: TelescopeBuilder) => {
     dotty.put(obj, queryClient.package, path);
   });
 
-  commonBundlePlugin(builder, 'stores.ts', obj, (context, obj) => {
-    // generate code for createRpcQueryHooks and imports of related packages.
-    return createMobxQueryFactory(context, obj);
-  });
+  // commonBundlePlugin(builder, 'stores.ts', obj, (context, obj) => {
+  //   // generate code for createRpcQueryHooks and imports of related packages.
+  //   return createMobxQueryFactory(context, obj);
+  // });
 };

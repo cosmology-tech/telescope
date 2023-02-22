@@ -6,8 +6,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -174,105 +172,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * registered for fee distribution
      */
     useDevFeeInfosPerDeployer
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryDevFeeInfosStore extends QueryStore<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse> {
-    constructor() {
-      super(queryService?.devFeeInfos);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    devFeeInfos(request?: QueryDevFeeInfosRequest): MobxResponse<QueryDevFeeInfosResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryDevFeeInfoStore extends QueryStore<QueryDevFeeInfoRequest, QueryDevFeeInfoResponse> {
-    constructor() {
-      super(queryService?.devFeeInfo);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    devFeeInfo(request: QueryDevFeeInfoRequest): MobxResponse<QueryDevFeeInfoResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryDevFeeInfosPerDeployerStore extends QueryStore<QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse> {
-    constructor() {
-      super(queryService?.devFeeInfosPerDeployer);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): MobxResponse<QueryDevFeeInfosPerDeployerResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** DevFeeInfos retrieves all registered contracts for fee distribution */
-    QueryDevFeeInfosStore,
-
-    /** DevFeeInfo retrieves a registered contract for fee distribution */
-    QueryDevFeeInfoStore,
-
-    /** Params retrieves the fees module params */
-    QueryParamsStore,
-
-    /**
-     * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
-     * registered for fee distribution
-     */
-    QueryDevFeeInfosPerDeployerStore
   };
 };

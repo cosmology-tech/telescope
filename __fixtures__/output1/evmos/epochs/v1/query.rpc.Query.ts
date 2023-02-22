@@ -5,8 +5,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -107,56 +105,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** CurrentEpoch provide current epoch of specified identifier */
     useCurrentEpoch
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryEpochInfosStore extends QueryStore<QueryEpochsInfoRequest, QueryEpochsInfoResponse> {
-    constructor() {
-      super(queryService?.epochInfos);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    epochInfos(request?: QueryEpochsInfoRequest): MobxResponse<QueryEpochsInfoResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryCurrentEpochStore extends QueryStore<QueryCurrentEpochRequest, QueryCurrentEpochResponse> {
-    constructor() {
-      super(queryService?.currentEpoch);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    currentEpoch(request: QueryCurrentEpochRequest): MobxResponse<QueryCurrentEpochResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** EpochInfos provide running epochInfos */
-    QueryEpochInfosStore,
-
-    /** CurrentEpoch provide current epoch of specified identifier */
-    QueryCurrentEpochStore
   };
 };

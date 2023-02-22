@@ -5,8 +5,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
 export interface Query {
   params(request?: ParamsRequest): Promise<ParamsResponse>;
@@ -123,74 +121,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useParams,
     useArithmeticTwap,
     useArithmeticTwapToNow
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryParamsStore extends QueryStore<ParamsRequest, ParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: ParamsRequest): MobxResponse<ParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryArithmeticTwapStore extends QueryStore<ArithmeticTwapRequest, ArithmeticTwapResponse> {
-    constructor() {
-      super(queryService?.arithmeticTwap);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    arithmeticTwap(request: ArithmeticTwapRequest): MobxResponse<ArithmeticTwapResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryArithmeticTwapToNowStore extends QueryStore<ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse> {
-    constructor() {
-      super(queryService?.arithmeticTwapToNow);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    arithmeticTwapToNow(request: ArithmeticTwapToNowRequest): MobxResponse<ArithmeticTwapToNowResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    QueryParamsStore,
-    QueryArithmeticTwapStore,
-    QueryArithmeticTwapToNowStore
   };
 };

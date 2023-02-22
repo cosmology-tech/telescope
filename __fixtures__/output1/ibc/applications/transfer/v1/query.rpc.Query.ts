@@ -5,8 +5,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
@@ -137,79 +135,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Params queries all parameters of the ibc-transfer module. */
     useParams
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryDenomTraceStore extends QueryStore<QueryDenomTraceRequest, QueryDenomTraceResponse> {
-    constructor() {
-      super(queryService?.denomTrace);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    denomTrace(request: QueryDenomTraceRequest): MobxResponse<QueryDenomTraceResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryDenomTracesStore extends QueryStore<QueryDenomTracesRequest, QueryDenomTracesResponse> {
-    constructor() {
-      super(queryService?.denomTraces);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    denomTraces(request?: QueryDenomTracesRequest): MobxResponse<QueryDenomTracesResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** DenomTrace queries a denomination trace information. */
-    QueryDenomTraceStore,
-
-    /** DenomTraces queries all denomination traces. */
-    QueryDenomTracesStore,
-
-    /** Params queries all parameters of the ibc-transfer module. */
-    QueryParamsStore
   };
 };

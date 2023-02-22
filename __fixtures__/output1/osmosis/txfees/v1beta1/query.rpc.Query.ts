@@ -4,8 +4,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 export interface Query {
   /**
@@ -170,106 +168,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Returns a list of all base denom tokens and their corresponding pools. */
     useBaseDenom
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryFeeTokensStore extends QueryStore<QueryFeeTokensRequest, QueryFeeTokensResponse> {
-    constructor() {
-      super(queryService?.feeTokens);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    feeTokens(request?: QueryFeeTokensRequest): MobxResponse<QueryFeeTokensResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryDenomSpotPriceStore extends QueryStore<QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse> {
-    constructor() {
-      super(queryService?.denomSpotPrice);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    denomSpotPrice(request: QueryDenomSpotPriceRequest): MobxResponse<QueryDenomSpotPriceResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryDenomPoolIdStore extends QueryStore<QueryDenomPoolIdRequest, QueryDenomPoolIdResponse> {
-    constructor() {
-      super(queryService?.denomPoolId);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    denomPoolId(request: QueryDenomPoolIdRequest): MobxResponse<QueryDenomPoolIdResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QueryBaseDenomStore extends QueryStore<QueryBaseDenomRequest, QueryBaseDenomResponse> {
-    constructor() {
-      super(queryService?.baseDenom);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    baseDenom(request?: QueryBaseDenomRequest): MobxResponse<QueryBaseDenomResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /**
-     * FeeTokens returns a list of all the whitelisted fee tokens and their
-     * corresponding pools. It does not include the BaseDenom, which has its own
-     * query endpoint
-     */
-    QueryFeeTokensStore,
-
-    /** DenomSpotPrice returns all spot prices by each registered token denom. */
-    QueryDenomSpotPriceStore,
-
-    /** Returns the poolID for a specified denom input. */
-    QueryDenomPoolIdStore,
-
-    /** Returns a list of all base denom tokens and their corresponding pools. */
-    QueryBaseDenomStore
   };
 };

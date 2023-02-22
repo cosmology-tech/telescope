@@ -5,8 +5,6 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
-import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service */
@@ -137,79 +135,5 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** SigningInfos queries signing info of all validators */
     useSigningInfos
-  };
-};
-export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
-
-  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
-    constructor() {
-      super(queryService?.params);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QuerySigningInfoStore extends QueryStore<QuerySigningInfoRequest, QuerySigningInfoResponse> {
-    constructor() {
-      super(queryService?.signingInfo);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    signingInfo(request: QuerySigningInfoRequest): MobxResponse<QuerySigningInfoResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  class QuerySigningInfosStore extends QueryStore<QuerySigningInfosRequest, QuerySigningInfosResponse> {
-    constructor() {
-      super(queryService?.signingInfos);
-      makeObservable(this, {
-        state: override,
-        request: override,
-        response: override,
-        isLoading: override,
-        isSuccess: override,
-        refetch: override,
-        getData: override
-      });
-    }
-
-    signingInfos(request?: QuerySigningInfosRequest): MobxResponse<QuerySigningInfosResponse> {
-      return this.getData(request);
-    }
-
-  }
-
-  return {
-    /** Params queries the parameters of slashing module */
-    QueryParamsStore,
-
-    /** SigningInfo queries the signing info of given cons address */
-    QuerySigningInfoStore,
-
-    /** SigningInfos queries signing info of all validators */
-    QuerySigningInfosStore
   };
 };

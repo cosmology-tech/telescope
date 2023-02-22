@@ -10,8 +10,8 @@ import {
     // grpc-gateway:
     createGRPCGatewayQueryClass,
     createGrpcWebQueryClass,
-    createGrpcWebQueryInterface,
-    createMobxQueryStores
+    createGrpcWebQueryInterface
+    // createMobxQueryStores
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -121,14 +121,14 @@ export const plugin = (
                                 asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
                             }
 
-                            const mobxQueryStoreAst = createMobxQueryStores(
-                              ctx.generic,
-                              proto[svcKey]
-                            );
+                            // const mobxQueryStoreAst = createMobxQueryStores(
+                            //   ctx.generic,
+                            //   proto[svcKey]
+                            // );
 
-                            if (mobxQueryStoreAst) {
-                              asts.push(mobxQueryStoreAst);
-                            }
+                            // if (mobxQueryStoreAst) {
+                            //   asts.push(mobxQueryStoreAst);
+                            // }
                         }
                     });
         }
