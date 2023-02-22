@@ -12,6 +12,6 @@ it('test gRPC-web Query Client', () => {
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, store.options);
     
-    printCode(createGrpcWebQueryInterface(context, service));
-    printCode(createGrpcWebQueryClass(context, service));
+    expectCode(createGrpcWebQueryInterface(context, service));
+    expectCode(createGrpcWebQueryClass(context, service));
 })
