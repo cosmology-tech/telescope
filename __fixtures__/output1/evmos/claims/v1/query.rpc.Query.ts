@@ -7,6 +7,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -167,5 +169,102 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** ClaimsRecord returns the claims record for a given address */
     useClaimsRecord
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryTotalUnclaimedStore extends QueryStore<QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse> {
+    constructor() {
+      super(queryService?.totalUnclaimed);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalUnclaimed(request?: QueryTotalUnclaimedRequest): MobxResponse<QueryTotalUnclaimedResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryClaimsRecordsStore extends QueryStore<QueryClaimsRecordsRequest, QueryClaimsRecordsResponse> {
+    constructor() {
+      super(queryService?.claimsRecords);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    claimsRecords(request?: QueryClaimsRecordsRequest): MobxResponse<QueryClaimsRecordsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryClaimsRecordStore extends QueryStore<QueryClaimsRecordRequest, QueryClaimsRecordResponse> {
+    constructor() {
+      super(queryService?.claimsRecord);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    claimsRecord(request: QueryClaimsRecordRequest): MobxResponse<QueryClaimsRecordResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** TotalUnclaimed queries the total unclaimed tokens from the airdrop */
+    QueryTotalUnclaimedStore,
+
+    /** Params returns the claims module parameters */
+    QueryParamsStore,
+
+    /** ClaimsRecords returns all claims records */
+    QueryClaimsRecordsStore,
+
+    /** ClaimsRecord returns the claims record for a given address */
+    QueryClaimsRecordStore
   };
 };

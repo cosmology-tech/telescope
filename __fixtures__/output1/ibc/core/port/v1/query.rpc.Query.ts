@@ -4,6 +4,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -72,5 +74,33 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   return {
     /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
     useAppVersion
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryAppVersionStore extends QueryStore<QueryAppVersionRequest, QueryAppVersionResponse> {
+    constructor() {
+      super(queryService?.appVersion);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    appVersion(request: QueryAppVersionRequest): MobxResponse<QueryAppVersionResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** AppVersion queries an IBC Port and determines the appropriate application version to be used */
+    QueryAppVersionStore
   };
 };

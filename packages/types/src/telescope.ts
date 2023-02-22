@@ -288,6 +288,15 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         }
     },
 
+    mobx: {
+      enabled: false,
+      include: {
+          patterns: [],
+          packages: [],
+          protos: []
+      }
+    },
+
     // packages
     packages: {
         cosmos: {

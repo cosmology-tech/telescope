@@ -7,6 +7,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, QueryChannelResponseSDKType, QueryChannelsRequest, QueryChannelsRequestSDKType, QueryChannelsResponse, QueryChannelsResponseSDKType, QueryConnectionChannelsRequest, QueryConnectionChannelsRequestSDKType, QueryConnectionChannelsResponse, QueryConnectionChannelsResponseSDKType, QueryChannelClientStateRequest, QueryChannelClientStateRequestSDKType, QueryChannelClientStateResponse, QueryChannelClientStateResponseSDKType, QueryChannelConsensusStateRequest, QueryChannelConsensusStateRequestSDKType, QueryChannelConsensusStateResponse, QueryChannelConsensusStateResponseSDKType, QueryPacketCommitmentRequest, QueryPacketCommitmentRequestSDKType, QueryPacketCommitmentResponse, QueryPacketCommitmentResponseSDKType, QueryPacketCommitmentsRequest, QueryPacketCommitmentsRequestSDKType, QueryPacketCommitmentsResponse, QueryPacketCommitmentsResponseSDKType, QueryPacketReceiptRequest, QueryPacketReceiptRequestSDKType, QueryPacketReceiptResponse, QueryPacketReceiptResponseSDKType, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementRequestSDKType, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementResponseSDKType, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsRequestSDKType, QueryPacketAcknowledgementsResponse, QueryPacketAcknowledgementsResponseSDKType, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsRequestSDKType, QueryUnreceivedPacketsResponse, QueryUnreceivedPacketsResponseSDKType, QueryUnreceivedAcksRequest, QueryUnreceivedAcksRequestSDKType, QueryUnreceivedAcksResponse, QueryUnreceivedAcksResponseSDKType, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveRequestSDKType, QueryNextSequenceReceiveResponse, QueryNextSequenceReceiveResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service */
@@ -485,5 +487,333 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** NextSequenceReceive returns the next receive sequence for a given channel. */
     useNextSequenceReceive
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryChannelStore extends QueryStore<QueryChannelRequest, QueryChannelResponse> {
+    constructor() {
+      super(queryService?.channel);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    channel(request: QueryChannelRequest): MobxResponse<QueryChannelResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryChannelsStore extends QueryStore<QueryChannelsRequest, QueryChannelsResponse> {
+    constructor() {
+      super(queryService?.channels);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    channels(request?: QueryChannelsRequest): MobxResponse<QueryChannelsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryConnectionChannelsStore extends QueryStore<QueryConnectionChannelsRequest, QueryConnectionChannelsResponse> {
+    constructor() {
+      super(queryService?.connectionChannels);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    connectionChannels(request: QueryConnectionChannelsRequest): MobxResponse<QueryConnectionChannelsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryChannelClientStateStore extends QueryStore<QueryChannelClientStateRequest, QueryChannelClientStateResponse> {
+    constructor() {
+      super(queryService?.channelClientState);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    channelClientState(request: QueryChannelClientStateRequest): MobxResponse<QueryChannelClientStateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryChannelConsensusStateStore extends QueryStore<QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse> {
+    constructor() {
+      super(queryService?.channelConsensusState);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    channelConsensusState(request: QueryChannelConsensusStateRequest): MobxResponse<QueryChannelConsensusStateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPacketCommitmentStore extends QueryStore<QueryPacketCommitmentRequest, QueryPacketCommitmentResponse> {
+    constructor() {
+      super(queryService?.packetCommitment);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    packetCommitment(request: QueryPacketCommitmentRequest): MobxResponse<QueryPacketCommitmentResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPacketCommitmentsStore extends QueryStore<QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse> {
+    constructor() {
+      super(queryService?.packetCommitments);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    packetCommitments(request: QueryPacketCommitmentsRequest): MobxResponse<QueryPacketCommitmentsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPacketReceiptStore extends QueryStore<QueryPacketReceiptRequest, QueryPacketReceiptResponse> {
+    constructor() {
+      super(queryService?.packetReceipt);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    packetReceipt(request: QueryPacketReceiptRequest): MobxResponse<QueryPacketReceiptResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPacketAcknowledgementStore extends QueryStore<QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse> {
+    constructor() {
+      super(queryService?.packetAcknowledgement);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    packetAcknowledgement(request: QueryPacketAcknowledgementRequest): MobxResponse<QueryPacketAcknowledgementResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPacketAcknowledgementsStore extends QueryStore<QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse> {
+    constructor() {
+      super(queryService?.packetAcknowledgements);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    packetAcknowledgements(request: QueryPacketAcknowledgementsRequest): MobxResponse<QueryPacketAcknowledgementsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryUnreceivedPacketsStore extends QueryStore<QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse> {
+    constructor() {
+      super(queryService?.unreceivedPackets);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    unreceivedPackets(request: QueryUnreceivedPacketsRequest): MobxResponse<QueryUnreceivedPacketsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryUnreceivedAcksStore extends QueryStore<QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse> {
+    constructor() {
+      super(queryService?.unreceivedAcks);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    unreceivedAcks(request: QueryUnreceivedAcksRequest): MobxResponse<QueryUnreceivedAcksResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryNextSequenceReceiveStore extends QueryStore<QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse> {
+    constructor() {
+      super(queryService?.nextSequenceReceive);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    nextSequenceReceive(request: QueryNextSequenceReceiveRequest): MobxResponse<QueryNextSequenceReceiveResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Channel queries an IBC Channel. */
+    QueryChannelStore,
+
+    /** Channels queries all the IBC channels of a chain. */
+    QueryChannelsStore,
+
+    /**
+     * ConnectionChannels queries all the channels associated with a connection
+     * end.
+     */
+    QueryConnectionChannelsStore,
+
+    /**
+     * ChannelClientState queries for the client state for the channel associated
+     * with the provided channel identifiers.
+     */
+    QueryChannelClientStateStore,
+
+    /**
+     * ChannelConsensusState queries for the consensus state for the channel
+     * associated with the provided channel identifiers.
+     */
+    QueryChannelConsensusStateStore,
+
+    /** PacketCommitment queries a stored packet commitment hash. */
+    QueryPacketCommitmentStore,
+
+    /**
+     * PacketCommitments returns all the packet commitments hashes associated
+     * with a channel.
+     */
+    QueryPacketCommitmentsStore,
+
+    /**
+     * PacketReceipt queries if a given packet sequence has been received on the
+     * queried chain
+     */
+    QueryPacketReceiptStore,
+
+    /** PacketAcknowledgement queries a stored packet acknowledgement hash. */
+    QueryPacketAcknowledgementStore,
+
+    /**
+     * PacketAcknowledgements returns all the packet acknowledgements associated
+     * with a channel.
+     */
+    QueryPacketAcknowledgementsStore,
+
+    /**
+     * UnreceivedPackets returns all the unreceived IBC packets associated with a
+     * channel and sequences.
+     */
+    QueryUnreceivedPacketsStore,
+
+    /**
+     * UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+     * with a channel and sequences.
+     */
+    QueryUnreceivedAcksStore,
+
+    /** NextSequenceReceive returns the next receive sequence for a given channel. */
+    QueryNextSequenceReceiveStore
   };
 };

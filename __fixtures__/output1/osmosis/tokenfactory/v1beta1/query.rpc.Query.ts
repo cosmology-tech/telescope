@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataRequestSDKType, QueryDenomAuthorityMetadataResponse, QueryDenomAuthorityMetadataResponseSDKType, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorRequestSDKType, QueryDenomsFromCreatorResponse, QueryDenomsFromCreatorResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -151,5 +153,88 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * denominations created by a specific admin/creator.
      */
     useDenomsFromCreator
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDenomAuthorityMetadataStore extends QueryStore<QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse> {
+    constructor() {
+      super(queryService?.denomAuthorityMetadata);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    denomAuthorityMetadata(request: QueryDenomAuthorityMetadataRequest): MobxResponse<QueryDenomAuthorityMetadataResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDenomsFromCreatorStore extends QueryStore<QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse> {
+    constructor() {
+      super(queryService?.denomsFromCreator);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    denomsFromCreator(request: QueryDenomsFromCreatorRequest): MobxResponse<QueryDenomsFromCreatorResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * Params defines a gRPC query method that returns the tokenfactory module's
+     * parameters.
+     */
+    QueryParamsStore,
+
+    /**
+     * DenomAuthorityMetadata defines a gRPC query method for fetching
+     * DenomAuthorityMetadata for a particular denom.
+     */
+    QueryDenomAuthorityMetadataStore,
+
+    /**
+     * DenomsFromCreator defines a gRPC query method for fetching all
+     * denominations created by a specific admin/creator.
+     */
+    QueryDenomsFromCreatorStore
   };
 };

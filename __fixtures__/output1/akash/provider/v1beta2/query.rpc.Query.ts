@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -104,5 +106,56 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Provider queries provider details */
     useProvider
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryProvidersStore extends QueryStore<QueryProvidersRequest, QueryProvidersResponse> {
+    constructor() {
+      super(queryService?.providers);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    providers(request?: QueryProvidersRequest): MobxResponse<QueryProvidersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryProviderStore extends QueryStore<QueryProviderRequest, QueryProviderResponse> {
+    constructor() {
+      super(queryService?.provider);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    provider(request: QueryProviderRequest): MobxResponse<QueryProviderResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Providers queries providers */
+    QueryProvidersStore,
+
+    /** Provider queries provider details */
+    QueryProviderStore
   };
 };

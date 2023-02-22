@@ -64,6 +64,7 @@ export const UTILS = {
     QueryStore: '__mobx__',
     MobxResponse: '__mobx__',
     override: 'mobx',
+    makeObservable: 'mobx',
 };
 
 export const UTIL_HELPERS = [

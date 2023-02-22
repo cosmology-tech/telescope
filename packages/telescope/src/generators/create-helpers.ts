@@ -3,7 +3,7 @@ import { sync as mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, reactQuery, grpcGateway, grpcWeb } from '../helpers';
+import { external, internal, reactQuery, mobx, grpcGateway, grpcWeb } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -38,6 +38,11 @@ export const plugin = (
     if (builder.options.reactQuery.enabled) {
         builder.files.push('react-query.ts');
         write(builder, 'react-query.ts', reactQuery);
+    }
+
+    if (builder.options.mobx.enabled) {
+      builder.files.push('mobx.ts');
+      write(builder, 'mobx.ts', mobx);
     }
 
     if (builder.options.rpcClients.type === 'grpc-gateway') {

@@ -3,6 +3,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
 export interface Query {
   /**
@@ -75,5 +77,36 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * a base denomination and a quote denomination.
      */
     useSpotPrice
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QuerySpotPriceStore extends QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse> {
+    constructor() {
+      super(queryService?.spotPrice);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    spotPrice(request: QuerySpotPriceRequest): MobxResponse<QuerySpotPriceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * SpotPrice defines a gRPC query handler that returns the spot price given
+     * a base denomination and a quote denomination.
+     */
+    QuerySpotPriceStore
   };
 };

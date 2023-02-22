@@ -4,6 +4,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -72,5 +74,33 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   return {
     /** Retrieves the unvested, vested and locked tokens for a vesting account */
     useBalances
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryBalancesStore extends QueryStore<QueryBalancesRequest, QueryBalancesResponse> {
+    constructor() {
+      super(queryService?.balances);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    balances(request: QueryBalancesRequest): MobxResponse<QueryBalancesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Retrieves the unvested, vested and locked tokens for a vesting account */
+    QueryBalancesStore
   };
 };

@@ -6,7 +6,7 @@ import { GenericParseContext } from '../../encoding';
  * @param {Object=} context - context of generating the file
  * @param {Object=} service - method details
  */
-export declare const createMobxQueryStores: (context: GenericParseContext, service: ProtoService) => void;
+export declare const createMobxQueryStores: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration;
 /**
  * Create an AST to generate creating store functions.
  * eg:

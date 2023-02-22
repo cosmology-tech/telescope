@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -122,5 +124,64 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * Payments queries all payments
      */
     usePayments
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryAccountsStore extends QueryStore<QueryAccountsRequest, QueryAccountsResponse> {
+    constructor() {
+      super(queryService?.accounts);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accounts(request: QueryAccountsRequest): MobxResponse<QueryAccountsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPaymentsStore extends QueryStore<QueryPaymentsRequest, QueryPaymentsResponse> {
+    constructor() {
+      super(queryService?.payments);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    payments(request: QueryPaymentsRequest): MobxResponse<QueryPaymentsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     * Accounts queries all accounts
+     */
+    QueryAccountsStore,
+
+    /**
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     * Payments queries all payments
+     */
+    QueryPaymentsStore
   };
 };

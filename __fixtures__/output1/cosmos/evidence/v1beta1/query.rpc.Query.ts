@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -105,5 +107,56 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** AllEvidence queries all evidence. */
     useAllEvidence
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryEvidenceStore extends QueryStore<QueryEvidenceRequest, QueryEvidenceResponse> {
+    constructor() {
+      super(queryService?.evidence);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    evidence(request: QueryEvidenceRequest): MobxResponse<QueryEvidenceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAllEvidenceStore extends QueryStore<QueryAllEvidenceRequest, QueryAllEvidenceResponse> {
+    constructor() {
+      super(queryService?.allEvidence);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allEvidence(request?: QueryAllEvidenceRequest): MobxResponse<QueryAllEvidenceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Evidence queries evidence based on evidence hash. */
+    QueryEvidenceStore,
+
+    /** AllEvidence queries all evidence. */
+    QueryAllEvidenceStore
   };
 };

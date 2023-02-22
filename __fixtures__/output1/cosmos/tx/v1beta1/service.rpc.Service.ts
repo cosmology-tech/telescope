@@ -8,6 +8,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
 
 /** Service defines a gRPC service for interacting with transactions. */
@@ -204,5 +206,129 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * Since: cosmos-sdk 0.45.2
      */
     useGetBlockWithTxs
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QuerySimulateStore extends QueryStore<SimulateRequest, SimulateResponse> {
+    constructor() {
+      super(queryService?.simulate);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    simulate(request: SimulateRequest): MobxResponse<SimulateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGetTxStore extends QueryStore<GetTxRequest, GetTxResponse> {
+    constructor() {
+      super(queryService?.getTx);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    getTx(request: GetTxRequest): MobxResponse<GetTxResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryBroadcastTxStore extends QueryStore<BroadcastTxRequest, BroadcastTxResponse> {
+    constructor() {
+      super(queryService?.broadcastTx);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    broadcastTx(request: BroadcastTxRequest): MobxResponse<BroadcastTxResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGetTxsEventStore extends QueryStore<GetTxsEventRequest, GetTxsEventResponse> {
+    constructor() {
+      super(queryService?.getTxsEvent);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    getTxsEvent(request: GetTxsEventRequest): MobxResponse<GetTxsEventResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGetBlockWithTxsStore extends QueryStore<GetBlockWithTxsRequest, GetBlockWithTxsResponse> {
+    constructor() {
+      super(queryService?.getBlockWithTxs);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    getBlockWithTxs(request: GetBlockWithTxsRequest): MobxResponse<GetBlockWithTxsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Simulate simulates executing a transaction for estimating gas usage. */
+    QuerySimulateStore,
+
+    /** GetTx fetches a tx by hash. */
+    QueryGetTxStore,
+
+    /** BroadcastTx broadcast transaction. */
+    QueryBroadcastTxStore,
+
+    /** GetTxsEvent fetches txs by event. */
+    QueryGetTxsEventStore,
+
+    /**
+     * GetBlockWithTxs fetches a block with decoded txs.
+     * 
+     * Since: cosmos-sdk 0.45.2
+     */
+    QueryGetBlockWithTxsStore
   };
 };

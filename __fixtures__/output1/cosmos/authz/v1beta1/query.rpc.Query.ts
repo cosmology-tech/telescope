@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -149,5 +151,87 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * Since: cosmos-sdk 0.46
      */
     useGranteeGrants
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryGrantsStore extends QueryStore<QueryGrantsRequest, QueryGrantsResponse> {
+    constructor() {
+      super(queryService?.grants);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    grants(request: QueryGrantsRequest): MobxResponse<QueryGrantsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGranterGrantsStore extends QueryStore<QueryGranterGrantsRequest, QueryGranterGrantsResponse> {
+    constructor() {
+      super(queryService?.granterGrants);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    granterGrants(request: QueryGranterGrantsRequest): MobxResponse<QueryGranterGrantsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGranteeGrantsStore extends QueryStore<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse> {
+    constructor() {
+      super(queryService?.granteeGrants);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    granteeGrants(request: QueryGranteeGrantsRequest): MobxResponse<QueryGranteeGrantsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Returns list of `Authorization`, granted to the grantee by the granter. */
+    QueryGrantsStore,
+
+    /**
+     * GranterGrants returns list of `GrantAuthorization`, granted by granter.
+     * 
+     * Since: cosmos-sdk 0.46
+     */
+    QueryGranterGrantsStore,
+
+    /**
+     * GranteeGrants returns a list of `GrantAuthorization` by grantee.
+     * 
+     * Since: cosmos-sdk 0.46
+     */
+    QueryGranteeGrantsStore
   };
 };

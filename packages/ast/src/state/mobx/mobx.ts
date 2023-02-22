@@ -24,7 +24,7 @@ const makeQueryStoreName = (name: string) => {
 export const createMobxQueryStores = (
   context: GenericParseContext,
   service: ProtoService
-) => {
+): t.ExportNamedDeclaration => {
   const isIncluded =
     context.pluginValue('mobx.enabled') &&
     isRefIncluded(context.ref, context.pluginValue('mobx.include'));
@@ -34,8 +34,10 @@ export const createMobxQueryStores = (
     // 1. refactor adding getQueryService part into helpers.
     // 2. add new query store class to helpers.
     // build whole ast, don't forget to add utils.
-    buildRpcStores(context, service);
+    return buildRpcStores(context, service);
   }
+
+  return null;
 };
 
 /**
@@ -193,6 +195,9 @@ const buildStore = (
   //add util for MobxResponse
   context.addUtil('MobxResponse');
 
+  //add util for makeObservable
+  context.addUtil('makeObservable');
+
   //add util for override
   context.addUtil('override');
 
@@ -219,7 +224,7 @@ const buildStore = (
 
   const storeQueryClass = classDeclaration(
     t.identifier(storeClassName),
-    null,
+    t.identifier('QueryStore'),
     t.classBody([
       t.classMethod(
         'constructor',
@@ -302,15 +307,11 @@ const buildStore = (
       )
     ]),
     [],
-    [
-      t.tsExpressionWithTypeArguments(
-        t.identifier('QueryStore'),
-        t.tsTypeParameterInstantiation([
-          t.tsTypeReference(t.identifier(requestType)),
-          t.tsTypeReference(t.identifier(responseType))
-        ])
-      )
-    ]
+    null,
+    t.tsTypeParameterInstantiation([
+      t.tsTypeReference(t.identifier(requestType)),
+      t.tsTypeReference(t.identifier(responseType))
+    ])
   );
 
   return storeQueryClass;

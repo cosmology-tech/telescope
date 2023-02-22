@@ -7,6 +7,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolsWithFilterRequest, QueryPoolsWithFilterRequestSDKType, QueryPoolsWithFilterResponse, QueryPoolsWithFilterResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesRequestSDKType, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolNoSwapSharesResponseSDKType, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesRequestSDKType, QueryCalcJoinPoolSharesResponse, QueryCalcJoinPoolSharesResponseSDKType, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesRequestSDKType, QueryCalcExitPoolCoinsFromSharesResponse, QueryCalcExitPoolCoinsFromSharesResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 export interface Query {
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
@@ -487,5 +489,351 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     /** Estimate the swap. */
     useEstimateSwapExactAmountIn,
     useEstimateSwapExactAmountOut
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryPoolsStore extends QueryStore<QueryPoolsRequest, QueryPoolsResponse> {
+    constructor() {
+      super(queryService?.pools);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    pools(request?: QueryPoolsRequest): MobxResponse<QueryPoolsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryNumPoolsStore extends QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse> {
+    constructor() {
+      super(queryService?.numPools);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    numPools(request?: QueryNumPoolsRequest): MobxResponse<QueryNumPoolsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalLiquidityStore extends QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse> {
+    constructor() {
+      super(queryService?.totalLiquidity);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalLiquidity(request?: QueryTotalLiquidityRequest): MobxResponse<QueryTotalLiquidityResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPoolsWithFilterStore extends QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse> {
+    constructor() {
+      super(queryService?.poolsWithFilter);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    poolsWithFilter(request: QueryPoolsWithFilterRequest): MobxResponse<QueryPoolsWithFilterResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPoolStore extends QueryStore<QueryPoolRequest, QueryPoolResponse> {
+    constructor() {
+      super(queryService?.pool);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    pool(request: QueryPoolRequest): MobxResponse<QueryPoolResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPoolTypeStore extends QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse> {
+    constructor() {
+      super(queryService?.poolType);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    poolType(request: QueryPoolTypeRequest): MobxResponse<QueryPoolTypeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCalcJoinPoolNoSwapSharesStore extends QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse> {
+    constructor() {
+      super(queryService?.calcJoinPoolNoSwapShares);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest): MobxResponse<QueryCalcJoinPoolNoSwapSharesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCalcJoinPoolSharesStore extends QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse> {
+    constructor() {
+      super(queryService?.calcJoinPoolShares);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest): MobxResponse<QueryCalcJoinPoolSharesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCalcExitPoolCoinsFromSharesStore extends QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse> {
+    constructor() {
+      super(queryService?.calcExitPoolCoinsFromShares);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest): MobxResponse<QueryCalcExitPoolCoinsFromSharesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPoolParamsStore extends QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse> {
+    constructor() {
+      super(queryService?.poolParams);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    poolParams(request: QueryPoolParamsRequest): MobxResponse<QueryPoolParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalPoolLiquidityStore extends QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse> {
+    constructor() {
+      super(queryService?.totalPoolLiquidity);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): MobxResponse<QueryTotalPoolLiquidityResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalSharesStore extends QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse> {
+    constructor() {
+      super(queryService?.totalShares);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalShares(request: QueryTotalSharesRequest): MobxResponse<QueryTotalSharesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySpotPriceStore extends QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse> {
+    constructor() {
+      super(queryService?.spotPrice);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    spotPrice(request: QuerySpotPriceRequest): MobxResponse<QuerySpotPriceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryEstimateSwapExactAmountInStore extends QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse> {
+    constructor() {
+      super(queryService?.estimateSwapExactAmountIn);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): MobxResponse<QuerySwapExactAmountInResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryEstimateSwapExactAmountOutStore extends QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse> {
+    constructor() {
+      super(queryService?.estimateSwapExactAmountOut);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): MobxResponse<QuerySwapExactAmountOutResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    QueryPoolsStore,
+    QueryNumPoolsStore,
+    QueryTotalLiquidityStore,
+
+    /**
+     * PoolsWithFilter allows you to query specific pools with requested
+     * parameters
+     */
+    QueryPoolsWithFilterStore,
+
+    /** Per Pool gRPC Endpoints */
+    QueryPoolStore,
+
+    /**
+     * PoolType returns the type of the pool.
+     * Returns "Balancer" as a string literal when the pool is a balancer pool.
+     * Errors if the pool is failed to be type caseted.
+     */
+    QueryPoolTypeStore,
+
+    /**
+     * Simulates joining pool without a swap. Returns the amount of shares you'd
+     * get and tokens needed to provide
+     */
+    QueryCalcJoinPoolNoSwapSharesStore,
+    QueryCalcJoinPoolSharesStore,
+    QueryCalcExitPoolCoinsFromSharesStore,
+    QueryPoolParamsStore,
+    QueryTotalPoolLiquidityStore,
+    QueryTotalSharesStore,
+
+    /**
+     * SpotPrice defines a gRPC query handler that returns the spot price given
+     * a base denomination and a quote denomination.
+     */
+    QuerySpotPriceStore,
+
+    /** Estimate the swap. */
+    QueryEstimateSwapExactAmountInStore,
+    QueryEstimateSwapExactAmountOutStore
   };
 };

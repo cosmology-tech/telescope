@@ -4,6 +4,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryInflationRequest, QueryInflationRequestSDKType, QueryInflationResponse, QueryInflationResponseSDKType, QueryAnnualProvisionsRequest, QueryAnnualProvisionsRequestSDKType, QueryAnnualProvisionsResponse, QueryAnnualProvisionsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
@@ -132,5 +134,79 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** AnnualProvisions current minting annual provisions value. */
     useAnnualProvisions
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryInflationStore extends QueryStore<QueryInflationRequest, QueryInflationResponse> {
+    constructor() {
+      super(queryService?.inflation);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    inflation(request?: QueryInflationRequest): MobxResponse<QueryInflationResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAnnualProvisionsStore extends QueryStore<QueryAnnualProvisionsRequest, QueryAnnualProvisionsResponse> {
+    constructor() {
+      super(queryService?.annualProvisions);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    annualProvisions(request?: QueryAnnualProvisionsRequest): MobxResponse<QueryAnnualProvisionsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Params returns the total set of minting parameters. */
+    QueryParamsStore,
+
+    /** Inflation returns the current minting inflation value. */
+    QueryInflationStore,
+
+    /** AnnualProvisions current minting annual provisions value. */
+    QueryAnnualProvisionsStore
   };
 };

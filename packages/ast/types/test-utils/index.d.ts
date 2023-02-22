@@ -125,6 +125,14 @@ export declare const defaultTelescopeOptions: {
             protos?: string[];
         };
     };
+    mobx: {
+        enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
+    };
     packages: Record<string, any>;
 } & {
     prototypes: {

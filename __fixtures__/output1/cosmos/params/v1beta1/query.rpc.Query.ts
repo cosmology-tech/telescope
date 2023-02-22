@@ -4,6 +4,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -108,5 +110,59 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Subspaces queries for all registered subspaces and all keys for a subspace. */
     useSubspaces
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySubspacesStore extends QueryStore<QuerySubspacesRequest, QuerySubspacesResponse> {
+    constructor() {
+      super(queryService?.subspaces);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    subspaces(request?: QuerySubspacesRequest): MobxResponse<QuerySubspacesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * Params queries a specific parameter of a module, given its subspace and
+     * key.
+     */
+    QueryParamsStore,
+
+    /** Subspaces queries for all registered subspaces and all keys for a subspace. */
+    QuerySubspacesStore
   };
 };

@@ -9,6 +9,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomRequestSDKType, QueryTotalDelegationByValidatorForDenomResponse, QueryTotalDelegationByValidatorForDenomResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType, QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistRequestSDKType, QueryUnpoolWhitelistResponse, QueryUnpoolWhitelistResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -531,5 +533,371 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Returns a list of whitelisted pool ids to unpool. */
     useUnpoolWhitelist
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAssetTypeStore extends QueryStore<AssetTypeRequest, AssetTypeResponse> {
+    constructor() {
+      super(queryService?.assetType);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    assetType(request: AssetTypeRequest): MobxResponse<AssetTypeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAllAssetsStore extends QueryStore<AllAssetsRequest, AllAssetsResponse> {
+    constructor() {
+      super(queryService?.allAssets);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allAssets(request?: AllAssetsRequest): MobxResponse<AllAssetsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAssetMultiplierStore extends QueryStore<AssetMultiplierRequest, AssetMultiplierResponse> {
+    constructor() {
+      super(queryService?.assetMultiplier);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    assetMultiplier(request: AssetMultiplierRequest): MobxResponse<AssetMultiplierResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAllIntermediaryAccountsStore extends QueryStore<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse> {
+    constructor() {
+      super(queryService?.allIntermediaryAccounts);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allIntermediaryAccounts(request?: AllIntermediaryAccountsRequest): MobxResponse<AllIntermediaryAccountsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryConnectedIntermediaryAccountStore extends QueryStore<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse> {
+    constructor() {
+      super(queryService?.connectedIntermediaryAccount);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    connectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): MobxResponse<ConnectedIntermediaryAccountResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalDelegationByValidatorForDenomStore extends QueryStore<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse> {
+    constructor() {
+      super(queryService?.totalDelegationByValidatorForDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalDelegationByValidatorForDenom(request: QueryTotalDelegationByValidatorForDenomRequest): MobxResponse<QueryTotalDelegationByValidatorForDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalSuperfluidDelegationsStore extends QueryStore<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse> {
+    constructor() {
+      super(queryService?.totalSuperfluidDelegations);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): MobxResponse<TotalSuperfluidDelegationsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySuperfluidDelegationAmountStore extends QueryStore<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse> {
+    constructor() {
+      super(queryService?.superfluidDelegationAmount);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    superfluidDelegationAmount(request: SuperfluidDelegationAmountRequest): MobxResponse<SuperfluidDelegationAmountResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySuperfluidDelegationsByDelegatorStore extends QueryStore<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse> {
+    constructor() {
+      super(queryService?.superfluidDelegationsByDelegator);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    superfluidDelegationsByDelegator(request: SuperfluidDelegationsByDelegatorRequest): MobxResponse<SuperfluidDelegationsByDelegatorResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySuperfluidUndelegationsByDelegatorStore extends QueryStore<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse> {
+    constructor() {
+      super(queryService?.superfluidUndelegationsByDelegator);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    superfluidUndelegationsByDelegator(request: SuperfluidUndelegationsByDelegatorRequest): MobxResponse<SuperfluidUndelegationsByDelegatorResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySuperfluidDelegationsByValidatorDenomStore extends QueryStore<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse> {
+    constructor() {
+      super(queryService?.superfluidDelegationsByValidatorDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    superfluidDelegationsByValidatorDenom(request: SuperfluidDelegationsByValidatorDenomRequest): MobxResponse<SuperfluidDelegationsByValidatorDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryEstimateSuperfluidDelegatedAmountByValidatorDenomStore extends QueryStore<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
+    constructor() {
+      super(queryService?.estimateSuperfluidDelegatedAmountByValidatorDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    estimateSuperfluidDelegatedAmountByValidatorDenom(request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): MobxResponse<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalDelegationByDelegatorStore extends QueryStore<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse> {
+    constructor() {
+      super(queryService?.totalDelegationByDelegator);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalDelegationByDelegator(request: QueryTotalDelegationByDelegatorRequest): MobxResponse<QueryTotalDelegationByDelegatorResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryUnpoolWhitelistStore extends QueryStore<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse> {
+    constructor() {
+      super(queryService?.unpoolWhitelist);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    unpoolWhitelist(request?: QueryUnpoolWhitelistRequest): MobxResponse<QueryUnpoolWhitelistResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Params returns the total set of superfluid parameters. */
+    QueryParamsStore,
+
+    /**
+     * Returns superfluid asset type, whether if it's a native asset or an lp
+     * share.
+     */
+    QueryAssetTypeStore,
+
+    /** Returns all registered superfluid assets. */
+    QueryAllAssetsStore,
+
+    /** Returns the osmo equivalent multiplier used in the most recent epoch. */
+    QueryAssetMultiplierStore,
+
+    /** Returns all superfluid intermediary accounts. */
+    QueryAllIntermediaryAccountsStore,
+
+    /** Returns intermediary account connected to a superfluid staked lock by id */
+    QueryConnectedIntermediaryAccountStore,
+
+    /** Returns the amount of delegations of specific denom for all validators */
+    QueryTotalDelegationByValidatorForDenomStore,
+
+    /**
+     * Returns the total amount of osmo superfluidly staked.
+     * Response is denominated in uosmo.
+     */
+    QueryTotalSuperfluidDelegationsStore,
+
+    /**
+     * Returns the coins superfluid delegated for the delegator, validator, denom
+     * triplet
+     */
+    QuerySuperfluidDelegationAmountStore,
+
+    /** Returns all the delegated superfluid poistions for a specific delegator. */
+    QuerySuperfluidDelegationsByDelegatorStore,
+
+    /** Returns all the undelegating superfluid poistions for a specific delegator. */
+    QuerySuperfluidUndelegationsByDelegatorStore,
+
+    /**
+     * Returns all the superfluid positions of a specific denom delegated to one
+     * validator
+     */
+    QuerySuperfluidDelegationsByValidatorDenomStore,
+
+    /**
+     * Returns the amount of a specific denom delegated to a specific validator
+     * This is labeled an estimate, because the way it calculates the amount can
+     * lead rounding errors from the true delegated amount
+     */
+    QueryEstimateSuperfluidDelegatedAmountByValidatorDenomStore,
+
+    /** Returns the specified delegations for a specific delegator */
+    QueryTotalDelegationByDelegatorStore,
+
+    /** Returns a list of whitelisted pool ids to unpool. */
+    QueryUnpoolWhitelistStore
   };
 };

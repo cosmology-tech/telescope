@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
 
 /** Query is the cosmos.group.v1 Query service. */
@@ -433,5 +435,309 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** TallyResult queries the tally of a proposal votes. */
     useTallyResult
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryGroupInfoStore extends QueryStore<QueryGroupInfoRequest, QueryGroupInfoResponse> {
+    constructor() {
+      super(queryService?.groupInfo);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupInfo(request: QueryGroupInfoRequest): MobxResponse<QueryGroupInfoResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupPolicyInfoStore extends QueryStore<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse> {
+    constructor() {
+      super(queryService?.groupPolicyInfo);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupPolicyInfo(request: QueryGroupPolicyInfoRequest): MobxResponse<QueryGroupPolicyInfoResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupMembersStore extends QueryStore<QueryGroupMembersRequest, QueryGroupMembersResponse> {
+    constructor() {
+      super(queryService?.groupMembers);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupMembers(request: QueryGroupMembersRequest): MobxResponse<QueryGroupMembersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupsByAdminStore extends QueryStore<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse> {
+    constructor() {
+      super(queryService?.groupsByAdmin);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupsByAdmin(request: QueryGroupsByAdminRequest): MobxResponse<QueryGroupsByAdminResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupPoliciesByGroupStore extends QueryStore<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse> {
+    constructor() {
+      super(queryService?.groupPoliciesByGroup);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): MobxResponse<QueryGroupPoliciesByGroupResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupPoliciesByAdminStore extends QueryStore<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse> {
+    constructor() {
+      super(queryService?.groupPoliciesByAdmin);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): MobxResponse<QueryGroupPoliciesByAdminResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryProposalStore extends QueryStore<QueryProposalRequest, QueryProposalResponse> {
+    constructor() {
+      super(queryService?.proposal);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    proposal(request: QueryProposalRequest): MobxResponse<QueryProposalResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryProposalsByGroupPolicyStore extends QueryStore<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse> {
+    constructor() {
+      super(queryService?.proposalsByGroupPolicy);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): MobxResponse<QueryProposalsByGroupPolicyResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryVoteByProposalVoterStore extends QueryStore<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse> {
+    constructor() {
+      super(queryService?.voteByProposalVoter);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    voteByProposalVoter(request: QueryVoteByProposalVoterRequest): MobxResponse<QueryVoteByProposalVoterResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryVotesByProposalStore extends QueryStore<QueryVotesByProposalRequest, QueryVotesByProposalResponse> {
+    constructor() {
+      super(queryService?.votesByProposal);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    votesByProposal(request: QueryVotesByProposalRequest): MobxResponse<QueryVotesByProposalResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryVotesByVoterStore extends QueryStore<QueryVotesByVoterRequest, QueryVotesByVoterResponse> {
+    constructor() {
+      super(queryService?.votesByVoter);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    votesByVoter(request: QueryVotesByVoterRequest): MobxResponse<QueryVotesByVoterResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupsByMemberStore extends QueryStore<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse> {
+    constructor() {
+      super(queryService?.groupsByMember);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    groupsByMember(request: QueryGroupsByMemberRequest): MobxResponse<QueryGroupsByMemberResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTallyResultStore extends QueryStore<QueryTallyResultRequest, QueryTallyResultResponse> {
+    constructor() {
+      super(queryService?.tallyResult);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    tallyResult(request: QueryTallyResultRequest): MobxResponse<QueryTallyResultResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** GroupInfo queries group info based on group id. */
+    QueryGroupInfoStore,
+
+    /** GroupPolicyInfo queries group policy info based on account address of group policy. */
+    QueryGroupPolicyInfoStore,
+
+    /** GroupMembers queries members of a group */
+    QueryGroupMembersStore,
+
+    /** GroupsByAdmin queries groups by admin address. */
+    QueryGroupsByAdminStore,
+
+    /** GroupPoliciesByGroup queries group policies by group id. */
+    QueryGroupPoliciesByGroupStore,
+
+    /** GroupsByAdmin queries group policies by admin address. */
+    QueryGroupPoliciesByAdminStore,
+
+    /** Proposal queries a proposal based on proposal id. */
+    QueryProposalStore,
+
+    /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
+    QueryProposalsByGroupPolicyStore,
+
+    /** VoteByProposalVoter queries a vote by proposal id and voter. */
+    QueryVoteByProposalVoterStore,
+
+    /** VotesByProposal queries a vote by proposal. */
+    QueryVotesByProposalStore,
+
+    /** VotesByVoter queries a vote by voter. */
+    QueryVotesByVoterStore,
+
+    /** GroupsByMember queries groups by member address. */
+    QueryGroupsByMemberStore,
+
+    /** TallyResult queries the tally of a proposal votes. */
+    QueryTallyResultStore
   };
 };

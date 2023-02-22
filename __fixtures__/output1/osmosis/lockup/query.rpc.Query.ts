@@ -8,6 +8,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../mobx";
+import { makeObservable, override } from "mobx";
 import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -568,5 +570,407 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Params returns lockup params. */
     useParams
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryModuleBalanceStore extends QueryStore<ModuleBalanceRequest, ModuleBalanceResponse> {
+    constructor() {
+      super(queryService?.moduleBalance);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    moduleBalance(request?: ModuleBalanceRequest): MobxResponse<ModuleBalanceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryModuleLockedAmountStore extends QueryStore<ModuleLockedAmountRequest, ModuleLockedAmountResponse> {
+    constructor() {
+      super(queryService?.moduleLockedAmount);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    moduleLockedAmount(request?: ModuleLockedAmountRequest): MobxResponse<ModuleLockedAmountResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountUnlockableCoinsStore extends QueryStore<AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse> {
+    constructor() {
+      super(queryService?.accountUnlockableCoins);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountUnlockableCoins(request: AccountUnlockableCoinsRequest): MobxResponse<AccountUnlockableCoinsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountUnlockingCoinsStore extends QueryStore<AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse> {
+    constructor() {
+      super(queryService?.accountUnlockingCoins);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountUnlockingCoins(request: AccountUnlockingCoinsRequest): MobxResponse<AccountUnlockingCoinsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedCoinsStore extends QueryStore<AccountLockedCoinsRequest, AccountLockedCoinsResponse> {
+    constructor() {
+      super(queryService?.accountLockedCoins);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedCoins(request: AccountLockedCoinsRequest): MobxResponse<AccountLockedCoinsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedPastTimeStore extends QueryStore<AccountLockedPastTimeRequest, AccountLockedPastTimeResponse> {
+    constructor() {
+      super(queryService?.accountLockedPastTime);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedPastTime(request: AccountLockedPastTimeRequest): MobxResponse<AccountLockedPastTimeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedPastTimeNotUnlockingOnlyStore extends QueryStore<AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse> {
+    constructor() {
+      super(queryService?.accountLockedPastTimeNotUnlockingOnly);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): MobxResponse<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountUnlockedBeforeTimeStore extends QueryStore<AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse> {
+    constructor() {
+      super(queryService?.accountUnlockedBeforeTime);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): MobxResponse<AccountUnlockedBeforeTimeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedPastTimeDenomStore extends QueryStore<AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse> {
+    constructor() {
+      super(queryService?.accountLockedPastTimeDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): MobxResponse<AccountLockedPastTimeDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLockedDenomStore extends QueryStore<LockedDenomRequest, LockedDenomResponse> {
+    constructor() {
+      super(queryService?.lockedDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    lockedDenom(request: LockedDenomRequest): MobxResponse<LockedDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLockedByIDStore extends QueryStore<LockedRequest, LockedResponse> {
+    constructor() {
+      super(queryService?.lockedByID);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    lockedByID(request: LockedRequest): MobxResponse<LockedResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySyntheticLockupsByLockupIDStore extends QueryStore<SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse> {
+    constructor() {
+      super(queryService?.syntheticLockupsByLockupID);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): MobxResponse<SyntheticLockupsByLockupIDResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedLongerDurationStore extends QueryStore<AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse> {
+    constructor() {
+      super(queryService?.accountLockedLongerDuration);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): MobxResponse<AccountLockedLongerDurationResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedDurationStore extends QueryStore<AccountLockedDurationRequest, AccountLockedDurationResponse> {
+    constructor() {
+      super(queryService?.accountLockedDuration);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedDuration(request: AccountLockedDurationRequest): MobxResponse<AccountLockedDurationResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedLongerDurationNotUnlockingOnlyStore extends QueryStore<AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+    constructor() {
+      super(queryService?.accountLockedLongerDurationNotUnlockingOnly);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): MobxResponse<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAccountLockedLongerDurationDenomStore extends QueryStore<AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse> {
+    constructor() {
+      super(queryService?.accountLockedLongerDurationDenom);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): MobxResponse<AccountLockedLongerDurationDenomResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Return full balance of the module */
+    QueryModuleBalanceStore,
+
+    /** Return locked balance of the module */
+    QueryModuleLockedAmountStore,
+
+    /** Returns unlockable coins which are not withdrawn yet */
+    QueryAccountUnlockableCoinsStore,
+
+    /** Returns unlocking coins */
+    QueryAccountUnlockingCoinsStore,
+
+    /** Return a locked coins that can't be withdrawn */
+    QueryAccountLockedCoinsStore,
+
+    /** Returns locked records of an account with unlock time beyond timestamp */
+    QueryAccountLockedPastTimeStore,
+
+    /**
+     * Returns locked records of an account with unlock time beyond timestamp
+     * excluding tokens started unlocking
+     */
+    QueryAccountLockedPastTimeNotUnlockingOnlyStore,
+
+    /** Returns unlocked records with unlock time before timestamp */
+    QueryAccountUnlockedBeforeTimeStore,
+
+    /** Returns lock records by address, timestamp, denom */
+    QueryAccountLockedPastTimeDenomStore,
+
+    /** Returns total locked per denom with longer past given time */
+    QueryLockedDenomStore,
+
+    /** Returns lock record by id */
+    QueryLockedByIDStore,
+
+    /** Returns synthetic lockups by native lockup id */
+    QuerySyntheticLockupsByLockupIDStore,
+
+    /** Returns account locked records with longer duration */
+    QueryAccountLockedLongerDurationStore,
+
+    /** Returns account locked records with a specific duration */
+    QueryAccountLockedDurationStore,
+
+    /**
+     * Returns account locked records with longer duration excluding tokens
+     * started unlocking
+     */
+    QueryAccountLockedLongerDurationNotUnlockingOnlyStore,
+
+    /** Returns account's locked records for a denom with longer duration */
+    QueryAccountLockedLongerDurationDenomStore,
+
+    /** Params returns lockup params. */
+    QueryParamsStore
   };
 };

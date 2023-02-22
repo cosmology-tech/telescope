@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -204,5 +206,118 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
      */
     useAuditorAttributes
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryAllProvidersAttributesStore extends QueryStore<QueryAllProvidersAttributesRequest, QueryProvidersResponse> {
+    constructor() {
+      super(queryService?.allProvidersAttributes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): MobxResponse<QueryProvidersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryProviderAttributesStore extends QueryStore<QueryProviderAttributesRequest, QueryProvidersResponse> {
+    constructor() {
+      super(queryService?.providerAttributes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    providerAttributes(request: QueryProviderAttributesRequest): MobxResponse<QueryProvidersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryProviderAuditorAttributesStore extends QueryStore<QueryProviderAuditorRequest, QueryProvidersResponse> {
+    constructor() {
+      super(queryService?.providerAuditorAttributes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    providerAuditorAttributes(request: QueryProviderAuditorRequest): MobxResponse<QueryProvidersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAuditorAttributesStore extends QueryStore<QueryAuditorAttributesRequest, QueryProvidersResponse> {
+    constructor() {
+      super(queryService?.auditorAttributes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    auditorAttributes(request: QueryAuditorAttributesRequest): MobxResponse<QueryProvidersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * AllProvidersAttributes queries all providers
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     */
+    QueryAllProvidersAttributesStore,
+
+    /**
+     * ProviderAttributes queries all provider signed attributes
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     */
+    QueryProviderAttributesStore,
+
+    /**
+     * ProviderAuditorAttributes queries provider signed attributes by specific auditor
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     */
+    QueryProviderAuditorAttributesStore,
+
+    /**
+     * AuditorAttributes queries all providers signed by this auditor
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     */
+    QueryAuditorAttributesStore
   };
 };

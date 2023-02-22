@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryContractInfoRequest, QueryContractInfoRequestSDKType, QueryContractInfoResponse, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryRequestSDKType, QueryContractHistoryResponse, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeRequestSDKType, QueryContractsByCodeResponse, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateRequestSDKType, QueryAllContractStateResponse, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateRequestSDKType, QueryRawContractStateResponse, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateRequestSDKType, QuerySmartContractStateResponse, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeRequestSDKType, QueryCodeResponse, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesRequestSDKType, QueryCodesResponse, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesRequestSDKType, QueryPinnedCodesResponse, QueryPinnedCodesResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service */
@@ -317,5 +319,217 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** PinnedCodes gets the pinned code ids */
     usePinnedCodes
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryContractInfoStore extends QueryStore<QueryContractInfoRequest, QueryContractInfoResponse> {
+    constructor() {
+      super(queryService?.contractInfo);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    contractInfo(request: QueryContractInfoRequest): MobxResponse<QueryContractInfoResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryContractHistoryStore extends QueryStore<QueryContractHistoryRequest, QueryContractHistoryResponse> {
+    constructor() {
+      super(queryService?.contractHistory);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    contractHistory(request: QueryContractHistoryRequest): MobxResponse<QueryContractHistoryResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryContractsByCodeStore extends QueryStore<QueryContractsByCodeRequest, QueryContractsByCodeResponse> {
+    constructor() {
+      super(queryService?.contractsByCode);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    contractsByCode(request: QueryContractsByCodeRequest): MobxResponse<QueryContractsByCodeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAllContractStateStore extends QueryStore<QueryAllContractStateRequest, QueryAllContractStateResponse> {
+    constructor() {
+      super(queryService?.allContractState);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allContractState(request: QueryAllContractStateRequest): MobxResponse<QueryAllContractStateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryRawContractStateStore extends QueryStore<QueryRawContractStateRequest, QueryRawContractStateResponse> {
+    constructor() {
+      super(queryService?.rawContractState);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    rawContractState(request: QueryRawContractStateRequest): MobxResponse<QueryRawContractStateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySmartContractStateStore extends QueryStore<QuerySmartContractStateRequest, QuerySmartContractStateResponse> {
+    constructor() {
+      super(queryService?.smartContractState);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    smartContractState(request: QuerySmartContractStateRequest): MobxResponse<QuerySmartContractStateResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCodeStore extends QueryStore<QueryCodeRequest, QueryCodeResponse> {
+    constructor() {
+      super(queryService?.code);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    code(request: QueryCodeRequest): MobxResponse<QueryCodeResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCodesStore extends QueryStore<QueryCodesRequest, QueryCodesResponse> {
+    constructor() {
+      super(queryService?.codes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    codes(request?: QueryCodesRequest): MobxResponse<QueryCodesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryPinnedCodesStore extends QueryStore<QueryPinnedCodesRequest, QueryPinnedCodesResponse> {
+    constructor() {
+      super(queryService?.pinnedCodes);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    pinnedCodes(request?: QueryPinnedCodesRequest): MobxResponse<QueryPinnedCodesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** ContractInfo gets the contract meta data */
+    QueryContractInfoStore,
+
+    /** ContractHistory gets the contract code history */
+    QueryContractHistoryStore,
+
+    /** ContractsByCode lists all smart contracts for a code id */
+    QueryContractsByCodeStore,
+
+    /** AllContractState gets all raw store data for a single contract */
+    QueryAllContractStateStore,
+
+    /** RawContractState gets single key from the raw store data of a contract */
+    QueryRawContractStateStore,
+
+    /** SmartContractState get smart query result from the contract */
+    QuerySmartContractStateStore,
+
+    /** Code gets the binary code and metadata for a singe wasm code */
+    QueryCodeStore,
+
+    /** Codes gets the metadata for all stored wasm codes */
+    QueryCodesStore,
+
+    /** PinnedCodes gets the pinned code ids */
+    QueryPinnedCodesStore
   };
 };

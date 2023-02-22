@@ -6,6 +6,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesRequestSDKType, QueryAllBalancesResponse, QueryAllBalancesResponseSDKType, QuerySpendableBalancesRequest, QuerySpendableBalancesRequestSDKType, QuerySpendableBalancesResponse, QuerySpendableBalancesResponseSDKType, QueryTotalSupplyRequest, QueryTotalSupplyRequestSDKType, QueryTotalSupplyResponse, QueryTotalSupplyResponseSDKType, QuerySupplyOfRequest, QuerySupplyOfRequestSDKType, QuerySupplyOfResponse, QuerySupplyOfResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomMetadataRequest, QueryDenomMetadataRequestSDKType, QueryDenomMetadataResponse, QueryDenomMetadataResponseSDKType, QueryDenomsMetadataRequest, QueryDenomsMetadataRequestSDKType, QueryDenomsMetadataResponse, QueryDenomsMetadataResponseSDKType, QueryDenomOwnersRequest, QueryDenomOwnersRequestSDKType, QueryDenomOwnersResponse, QueryDenomOwnersResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -336,5 +338,226 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * denomination.
      */
     useDenomOwners
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryBalanceStore extends QueryStore<QueryBalanceRequest, QueryBalanceResponse> {
+    constructor() {
+      super(queryService?.balance);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    balance(request: QueryBalanceRequest): MobxResponse<QueryBalanceResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryAllBalancesStore extends QueryStore<QueryAllBalancesRequest, QueryAllBalancesResponse> {
+    constructor() {
+      super(queryService?.allBalances);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    allBalances(request: QueryAllBalancesRequest): MobxResponse<QueryAllBalancesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySpendableBalancesStore extends QueryStore<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse> {
+    constructor() {
+      super(queryService?.spendableBalances);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    spendableBalances(request: QuerySpendableBalancesRequest): MobxResponse<QuerySpendableBalancesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryTotalSupplyStore extends QueryStore<QueryTotalSupplyRequest, QueryTotalSupplyResponse> {
+    constructor() {
+      super(queryService?.totalSupply);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    totalSupply(request?: QueryTotalSupplyRequest): MobxResponse<QueryTotalSupplyResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySupplyOfStore extends QueryStore<QuerySupplyOfRequest, QuerySupplyOfResponse> {
+    constructor() {
+      super(queryService?.supplyOf);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    supplyOf(request: QuerySupplyOfRequest): MobxResponse<QuerySupplyOfResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDenomMetadataStore extends QueryStore<QueryDenomMetadataRequest, QueryDenomMetadataResponse> {
+    constructor() {
+      super(queryService?.denomMetadata);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    denomMetadata(request: QueryDenomMetadataRequest): MobxResponse<QueryDenomMetadataResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDenomsMetadataStore extends QueryStore<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse> {
+    constructor() {
+      super(queryService?.denomsMetadata);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    denomsMetadata(request?: QueryDenomsMetadataRequest): MobxResponse<QueryDenomsMetadataResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDenomOwnersStore extends QueryStore<QueryDenomOwnersRequest, QueryDenomOwnersResponse> {
+    constructor() {
+      super(queryService?.denomOwners);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    denomOwners(request: QueryDenomOwnersRequest): MobxResponse<QueryDenomOwnersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Balance queries the balance of a single coin for a single account. */
+    QueryBalanceStore,
+
+    /** AllBalances queries the balance of all coins for a single account. */
+    QueryAllBalancesStore,
+
+    /**
+     * SpendableBalances queries the spenable balance of all coins for a single
+     * account.
+     */
+    QuerySpendableBalancesStore,
+
+    /** TotalSupply queries the total supply of all coins. */
+    QueryTotalSupplyStore,
+
+    /** SupplyOf queries the supply of a single coin. */
+    QuerySupplyOfStore,
+
+    /** Params queries the parameters of x/bank module. */
+    QueryParamsStore,
+
+    /** DenomsMetadata queries the client metadata of a given coin denomination. */
+    QueryDenomMetadataStore,
+
+    /**
+     * DenomsMetadata queries the client metadata for all registered coin
+     * denominations.
+     */
+    QueryDenomsMetadataStore,
+
+    /**
+     * DenomOwners queries for all account addresses that own a particular token
+     * denomination.
+     */
+    QueryDenomOwnersStore
   };
 };

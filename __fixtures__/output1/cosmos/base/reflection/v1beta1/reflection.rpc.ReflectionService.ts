@@ -3,6 +3,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../../mobx";
+import { makeObservable, override } from "mobx";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
 
 /** ReflectionService defines a service for interface reflection. */
@@ -113,5 +115,62 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
      * interface.
      */
     useListImplementations
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryListAllInterfacesStore extends QueryStore<ListAllInterfacesRequest, ListAllInterfacesResponse> {
+    constructor() {
+      super(queryService?.listAllInterfaces);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    listAllInterfaces(request?: ListAllInterfacesRequest): MobxResponse<ListAllInterfacesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryListImplementationsStore extends QueryStore<ListImplementationsRequest, ListImplementationsResponse> {
+    constructor() {
+      super(queryService?.listImplementations);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    listImplementations(request: ListImplementationsRequest): MobxResponse<ListImplementationsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /**
+     * ListAllInterfaces lists all the interfaces registered in the interface
+     * registry.
+     */
+    QueryListAllInterfacesStore,
+
+    /**
+     * ListImplementations list all the concrete types that implement a given
+     * interface.
+     */
+    QueryListImplementationsStore
   };
 };

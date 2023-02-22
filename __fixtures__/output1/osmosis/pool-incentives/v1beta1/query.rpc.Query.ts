@@ -6,6 +6,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
 export interface Query {
   /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
@@ -222,5 +224,148 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** ExternalIncentiveGauges returns external incentive gauges. */
     useExternalIncentiveGauges
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryGaugeIdsStore extends QueryStore<QueryGaugeIdsRequest, QueryGaugeIdsResponse> {
+    constructor() {
+      super(queryService?.gaugeIds);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    gaugeIds(request: QueryGaugeIdsRequest): MobxResponse<QueryGaugeIdsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDistrInfoStore extends QueryStore<QueryDistrInfoRequest, QueryDistrInfoResponse> {
+    constructor() {
+      super(queryService?.distrInfo);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    distrInfo(request?: QueryDistrInfoRequest): MobxResponse<QueryDistrInfoResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryParamsStore extends QueryStore<QueryParamsRequest, QueryParamsResponse> {
+    constructor() {
+      super(queryService?.params);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    params(request?: QueryParamsRequest): MobxResponse<QueryParamsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLockableDurationsStore extends QueryStore<QueryLockableDurationsRequest, QueryLockableDurationsResponse> {
+    constructor() {
+      super(queryService?.lockableDurations);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    lockableDurations(request?: QueryLockableDurationsRequest): MobxResponse<QueryLockableDurationsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryIncentivizedPoolsStore extends QueryStore<QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse> {
+    constructor() {
+      super(queryService?.incentivizedPools);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    incentivizedPools(request?: QueryIncentivizedPoolsRequest): MobxResponse<QueryIncentivizedPoolsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryExternalIncentiveGaugesStore extends QueryStore<QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse> {
+    constructor() {
+      super(queryService?.externalIncentiveGauges);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    externalIncentiveGauges(request?: QueryExternalIncentiveGaugesRequest): MobxResponse<QueryExternalIncentiveGaugesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
+    QueryGaugeIdsStore,
+
+    /** DistrInfo returns the pool's matching gauge ids and weights. */
+    QueryDistrInfoStore,
+
+    /** Params returns pool incentives params. */
+    QueryParamsStore,
+
+    /** LockableDurations returns lock durations for pools. */
+    QueryLockableDurationsStore,
+
+    /** IncentivizedPools returns currently incentivized pools */
+    QueryIncentivizedPoolsStore,
+
+    /** ExternalIncentiveGauges returns external incentive gauges. */
+    QueryExternalIncentiveGaugesStore
   };
 };

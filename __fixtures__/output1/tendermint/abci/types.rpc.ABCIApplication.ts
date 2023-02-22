@@ -8,6 +8,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../mobx";
+import { makeObservable, override } from "mobx";
 import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, RequestFlush, RequestFlushSDKType, ResponseFlush, ResponseFlushSDKType, RequestInfo, RequestInfoSDKType, ResponseInfo, ResponseInfoSDKType, RequestSetOption, RequestSetOptionSDKType, ResponseSetOption, ResponseSetOptionSDKType, RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestCheckTx, RequestCheckTxSDKType, ResponseCheckTx, ResponseCheckTxSDKType, RequestQuery, RequestQuerySDKType, ResponseQuery, ResponseQuerySDKType, RequestCommit, RequestCommitSDKType, ResponseCommit, ResponseCommitSDKType, RequestInitChain, RequestInitChainSDKType, ResponseInitChain, ResponseInitChainSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, RequestListSnapshots, RequestListSnapshotsSDKType, ResponseListSnapshots, ResponseListSnapshotsSDKType, RequestOfferSnapshot, RequestOfferSnapshotSDKType, ResponseOfferSnapshot, ResponseOfferSnapshotSDKType, RequestLoadSnapshotChunk, RequestLoadSnapshotChunkSDKType, ResponseLoadSnapshotChunk, ResponseLoadSnapshotChunkSDKType, RequestApplySnapshotChunk, RequestApplySnapshotChunkSDKType, ResponseApplySnapshotChunk, ResponseApplySnapshotChunkSDKType } from "./types";
 export interface ABCIApplication {
   echo(request: RequestEcho): Promise<ResponseEcho>;
@@ -436,5 +438,326 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     useOfferSnapshot,
     useLoadSnapshotChunk,
     useApplySnapshotChunk
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryEchoStore extends QueryStore<RequestEcho, ResponseEcho> {
+    constructor() {
+      super(queryService?.echo);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    echo(request: RequestEcho): MobxResponse<ResponseEcho> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryFlushStore extends QueryStore<RequestFlush, ResponseFlush> {
+    constructor() {
+      super(queryService?.flush);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    flush(request?: RequestFlush): MobxResponse<ResponseFlush> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryInfoStore extends QueryStore<RequestInfo, ResponseInfo> {
+    constructor() {
+      super(queryService?.info);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    info(request: RequestInfo): MobxResponse<ResponseInfo> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QuerySetOptionStore extends QueryStore<RequestSetOption, ResponseSetOption> {
+    constructor() {
+      super(queryService?.setOption);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    setOption(request: RequestSetOption): MobxResponse<ResponseSetOption> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDeliverTxStore extends QueryStore<RequestDeliverTx, ResponseDeliverTx> {
+    constructor() {
+      super(queryService?.deliverTx);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    deliverTx(request: RequestDeliverTx): MobxResponse<ResponseDeliverTx> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCheckTxStore extends QueryStore<RequestCheckTx, ResponseCheckTx> {
+    constructor() {
+      super(queryService?.checkTx);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    checkTx(request: RequestCheckTx): MobxResponse<ResponseCheckTx> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryQueryStore extends QueryStore<RequestQuery, ResponseQuery> {
+    constructor() {
+      super(queryService?.query);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    query(request: RequestQuery): MobxResponse<ResponseQuery> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryCommitStore extends QueryStore<RequestCommit, ResponseCommit> {
+    constructor() {
+      super(queryService?.commit);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    commit(request?: RequestCommit): MobxResponse<ResponseCommit> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryInitChainStore extends QueryStore<RequestInitChain, ResponseInitChain> {
+    constructor() {
+      super(queryService?.initChain);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    initChain(request: RequestInitChain): MobxResponse<ResponseInitChain> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryBeginBlockStore extends QueryStore<RequestBeginBlock, ResponseBeginBlock> {
+    constructor() {
+      super(queryService?.beginBlock);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    beginBlock(request: RequestBeginBlock): MobxResponse<ResponseBeginBlock> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryEndBlockStore extends QueryStore<RequestEndBlock, ResponseEndBlock> {
+    constructor() {
+      super(queryService?.endBlock);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    endBlock(request: RequestEndBlock): MobxResponse<ResponseEndBlock> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryListSnapshotsStore extends QueryStore<RequestListSnapshots, ResponseListSnapshots> {
+    constructor() {
+      super(queryService?.listSnapshots);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    listSnapshots(request?: RequestListSnapshots): MobxResponse<ResponseListSnapshots> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryOfferSnapshotStore extends QueryStore<RequestOfferSnapshot, ResponseOfferSnapshot> {
+    constructor() {
+      super(queryService?.offerSnapshot);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    offerSnapshot(request: RequestOfferSnapshot): MobxResponse<ResponseOfferSnapshot> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLoadSnapshotChunkStore extends QueryStore<RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk> {
+    constructor() {
+      super(queryService?.loadSnapshotChunk);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    loadSnapshotChunk(request: RequestLoadSnapshotChunk): MobxResponse<ResponseLoadSnapshotChunk> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryApplySnapshotChunkStore extends QueryStore<RequestApplySnapshotChunk, ResponseApplySnapshotChunk> {
+    constructor() {
+      super(queryService?.applySnapshotChunk);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    applySnapshotChunk(request: RequestApplySnapshotChunk): MobxResponse<ResponseApplySnapshotChunk> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    QueryEchoStore,
+    QueryFlushStore,
+    QueryInfoStore,
+    QuerySetOptionStore,
+    QueryDeliverTxStore,
+    QueryCheckTxStore,
+    QueryQueryStore,
+    QueryCommitStore,
+    QueryInitChainStore,
+    QueryBeginBlockStore,
+    QueryEndBlockStore,
+    QueryListSnapshotsStore,
+    QueryOfferSnapshotStore,
+    QueryLoadSnapshotChunkStore,
+    QueryApplySnapshotChunkStore
   };
 };

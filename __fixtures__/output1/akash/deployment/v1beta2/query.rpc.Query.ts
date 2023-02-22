@@ -8,6 +8,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -135,5 +137,79 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Group queries group details */
     useGroup
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryDeploymentsStore extends QueryStore<QueryDeploymentsRequest, QueryDeploymentsResponse> {
+    constructor() {
+      super(queryService?.deployments);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    deployments(request: QueryDeploymentsRequest): MobxResponse<QueryDeploymentsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryDeploymentStore extends QueryStore<QueryDeploymentRequest, QueryDeploymentResponse> {
+    constructor() {
+      super(queryService?.deployment);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    deployment(request: QueryDeploymentRequest): MobxResponse<QueryDeploymentResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryGroupStore extends QueryStore<QueryGroupRequest, QueryGroupResponse> {
+    constructor() {
+      super(queryService?.group);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    group(request: QueryGroupRequest): MobxResponse<QueryGroupResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Deployments queries deployments */
+    QueryDeploymentsStore,
+
+    /** Deployment queries deployment details */
+    QueryDeploymentStore,
+
+    /** Group queries group details */
+    QueryGroupStore
   };
 };

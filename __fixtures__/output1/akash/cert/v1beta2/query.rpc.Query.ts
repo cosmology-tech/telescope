@@ -5,6 +5,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -72,5 +74,33 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   return {
     /** Certificates queries certificates */
     useCertificates
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryCertificatesStore extends QueryStore<QueryCertificatesRequest, QueryCertificatesResponse> {
+    constructor() {
+      super(queryService?.certificates);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    certificates(request: QueryCertificatesRequest): MobxResponse<QueryCertificatesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Certificates queries certificates */
+    QueryCertificatesStore
   };
 };

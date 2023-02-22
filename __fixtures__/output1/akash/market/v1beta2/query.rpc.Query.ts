@@ -8,6 +8,8 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
 import { ReactQueryParams } from "../../../react-query";
 import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx";
+import { makeObservable, override } from "mobx";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -225,5 +227,148 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
 
     /** Lease queries lease details */
     useLease
+  };
+};
+export const createRpcQueryStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  class QueryOrdersStore extends QueryStore<QueryOrdersRequest, QueryOrdersResponse> {
+    constructor() {
+      super(queryService?.orders);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    orders(request: QueryOrdersRequest): MobxResponse<QueryOrdersResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryOrderStore extends QueryStore<QueryOrderRequest, QueryOrderResponse> {
+    constructor() {
+      super(queryService?.order);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    order(request: QueryOrderRequest): MobxResponse<QueryOrderResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryBidsStore extends QueryStore<QueryBidsRequest, QueryBidsResponse> {
+    constructor() {
+      super(queryService?.bids);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    bids(request: QueryBidsRequest): MobxResponse<QueryBidsResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryBidStore extends QueryStore<QueryBidRequest, QueryBidResponse> {
+    constructor() {
+      super(queryService?.bid);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    bid(request: QueryBidRequest): MobxResponse<QueryBidResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLeasesStore extends QueryStore<QueryLeasesRequest, QueryLeasesResponse> {
+    constructor() {
+      super(queryService?.leases);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    leases(request: QueryLeasesRequest): MobxResponse<QueryLeasesResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  class QueryLeaseStore extends QueryStore<QueryLeaseRequest, QueryLeaseResponse> {
+    constructor() {
+      super(queryService?.lease);
+      makeObservable(this, {
+        state: override,
+        request: override,
+        response: override,
+        isLoading: override,
+        isSuccess: override,
+        refetch: override,
+        getData: override
+      });
+    }
+
+    lease(request: QueryLeaseRequest): MobxResponse<QueryLeaseResponse> {
+      return this.getData(request);
+    }
+
+  }
+
+  return {
+    /** Orders queries orders with filters */
+    QueryOrdersStore,
+
+    /** Order queries order details */
+    QueryOrderStore,
+
+    /** Bids queries bids with filters */
+    QueryBidsStore,
+
+    /** Bid queries bid details */
+    QueryBidStore,
+
+    /** Leases queries leases with filters */
+    QueryLeasesStore,
+
+    /** Lease queries lease details */
+    QueryLeaseStore
   };
 };
