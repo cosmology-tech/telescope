@@ -117,7 +117,7 @@ export class GrpcWebImpl {
         transport: this.options.transport,
         debug: this.options.debug,
         onEnd: function (response) {
-          if (reponse.status === Code.OK) {
+          if (response.status === grpc.Code.OK) {
             resolve(response.message);
           } else {
             const err = (new Error(response.statusMessage) as any);

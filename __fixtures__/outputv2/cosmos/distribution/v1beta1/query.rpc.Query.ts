@@ -3,7 +3,9 @@ import { Params, ParamsSDKType, ValidatorOutstandingRewards, ValidatorOutstandin
 import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
+import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { BrowserHeaders } from "browser-headers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryValidatorOutstandingRewardsRequest, QueryValidatorOutstandingRewardsRequestSDKType, QueryValidatorOutstandingRewardsResponse, QueryValidatorOutstandingRewardsResponseSDKType, QueryValidatorCommissionRequest, QueryValidatorCommissionRequestSDKType, QueryValidatorCommissionResponse, QueryValidatorCommissionResponseSDKType, QueryValidatorSlashesRequest, QueryValidatorSlashesRequestSDKType, QueryValidatorSlashesResponse, QueryValidatorSlashesResponseSDKType, QueryDelegationRewardsRequest, QueryDelegationRewardsRequestSDKType, QueryDelegationRewardsResponse, QueryDelegationRewardsResponseSDKType, QueryDelegationTotalRewardsRequest, QueryDelegationTotalRewardsRequestSDKType, QueryDelegationTotalRewardsResponse, QueryDelegationTotalRewardsResponseSDKType, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsRequestSDKType, QueryDelegatorValidatorsResponse, QueryDelegatorValidatorsResponseSDKType, QueryDelegatorWithdrawAddressRequest, QueryDelegatorWithdrawAddressRequestSDKType, QueryDelegatorWithdrawAddressResponse, QueryDelegatorWithdrawAddressResponseSDKType, QueryCommunityPoolRequest, QueryCommunityPoolRequestSDKType, QueryCommunityPoolResponse, QueryCommunityPoolResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service for distribution module. */
@@ -88,6 +90,275 @@ export class QueryClientImpl implements Query {
 
   communityPool(request: DeepPartial<QueryCommunityPoolRequest> = {}, metadata?: grpc.Metadata): Promise<QueryCommunityPoolResponse> {
     return this.rpc.unary(QueryCommunityPoolDesc, QueryCommunityPoolRequest.fromPartial(request), metadata);
+  }
+
+}
+export const QueryDesc = {
+  serviceName: "cosmos.distribution.v1beta1.Query"
+};
+export const QueryParamsDesc: UnaryMethodDefinitionish = {
+  methodName: "Params",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryParamsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryParamsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryValidatorOutstandingRewardsDesc: UnaryMethodDefinitionish = {
+  methodName: "ValidatorOutstandingRewards",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryValidatorOutstandingRewardsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryValidatorOutstandingRewardsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryValidatorCommissionDesc: UnaryMethodDefinitionish = {
+  methodName: "ValidatorCommission",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryValidatorCommissionRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryValidatorCommissionResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryValidatorSlashesDesc: UnaryMethodDefinitionish = {
+  methodName: "ValidatorSlashes",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryValidatorSlashesRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryValidatorSlashesResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryDelegationRewardsDesc: UnaryMethodDefinitionish = {
+  methodName: "DelegationRewards",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryDelegationRewardsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryDelegationRewardsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryDelegationTotalRewardsDesc: UnaryMethodDefinitionish = {
+  methodName: "DelegationTotalRewards",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryDelegationTotalRewardsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryDelegationTotalRewardsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryDelegatorValidatorsDesc: UnaryMethodDefinitionish = {
+  methodName: "DelegatorValidators",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryDelegatorValidatorsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryDelegatorValidatorsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryDelegatorWithdrawAddressDesc: UnaryMethodDefinitionish = {
+  methodName: "DelegatorWithdrawAddress",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryDelegatorWithdrawAddressRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryDelegatorWithdrawAddressResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryCommunityPoolDesc: UnaryMethodDefinitionish = {
+  methodName: "CommunityPool",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryCommunityPoolRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryCommunityPoolResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (response.status === grpc.Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
   }
 
 }

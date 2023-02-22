@@ -5,7 +5,9 @@ import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, Leas
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
+import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { BrowserHeaders } from "browser-headers";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -63,6 +65,203 @@ export class QueryClientImpl implements Query {
 
   lease(request: DeepPartial<QueryLeaseRequest>, metadata?: grpc.Metadata): Promise<QueryLeaseResponse> {
     return this.rpc.unary(QueryLeaseDesc, QueryLeaseRequest.fromPartial(request), metadata);
+  }
+
+}
+export const QueryDesc = {
+  serviceName: "akash.market.v1beta2.Query"
+};
+export const QueryOrdersDesc: UnaryMethodDefinitionish = {
+  methodName: "Orders",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryOrdersRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryOrdersResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryOrderDesc: UnaryMethodDefinitionish = {
+  methodName: "Order",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryOrderRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryOrderResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryBidsDesc: UnaryMethodDefinitionish = {
+  methodName: "Bids",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryBidsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryBidsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryBidDesc: UnaryMethodDefinitionish = {
+  methodName: "Bid",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryBidRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryBidResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryLeasesDesc: UnaryMethodDefinitionish = {
+  methodName: "Leases",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryLeasesRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryLeasesResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryLeaseDesc: UnaryMethodDefinitionish = {
+  methodName: "Lease",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryLeaseRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryLeaseResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (response.status === grpc.Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
   }
 
 }

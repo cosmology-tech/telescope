@@ -67,7 +67,6 @@ const gRPCWebMethodDefinition = (
     )
 }
 
-
 export const createGrpcWebQueryInterface = (
     context: GenericParseContext,
     service: ProtoService
@@ -110,7 +109,6 @@ export const createGrpcWebQueryInterface = (
     return obj;
 }
 
-//grpc-web query class 
 
 const rpcClassConstructor = (
     context: GenericParseContext,
@@ -285,7 +283,8 @@ export const createGrpcWebQueryClass = (
 ) => {
     //adding import 
     context.addUtil('_m0');
-    context.addUtil('grpc')
+    context.addUtil('grpc');
+    context.addUtil('UnaryMethodDefinitionish'); // for other descriptor
     //use type DeepPartial
     context.addUtil('DeepPartial')
     let partialName = 'DeepPartial';

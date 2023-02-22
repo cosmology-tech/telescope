@@ -547,7 +547,7 @@ export const grpcWebRpcInterface = () => {
         )
     ))
 }
-
+//you might not want to look at this
 export const getGrpcWebImpl = (context: GenericParseContext) => {
     context.addUtil('BrowserHeaders');
     return t.exportNamedDeclaration(
@@ -829,12 +829,16 @@ export const getGrpcWebImpl = (context: GenericParseContext) => {
                                                                                                 t.binaryExpression(
                                                                                                     "===",
                                                                                                     t.memberExpression(
-                                                                                                        t.identifier('reponse'),
+                                                                                                        t.identifier('response'),
                                                                                                         t.identifier('status')
                                                                                                     ),
                                                                                                     t.memberExpression(
-                                                                                                        t.identifier('Code'),
-                                                                                                        t.identifier('OK')                           
+                                                                                                        t.memberExpression(
+                                                                                                            t.identifier('grpc'),
+                                                                                                            t.identifier('Code')                           
+                                                                                                        ),
+                                                                                                        t.identifier('OK'),
+                                                                                                        
                                                                                                     )
                                                                                                 ),
                                                                                                 t.blockStatement(
