@@ -1,0 +1,88 @@
+export const mobx = `
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  runInAction
+} from 'mobx';
+
+import { QueryStatus } from '@tanstack/react-query';
+
+export interface MobxResponse<T> {
+  data: T | undefined;
+  isSuccess: boolean;
+  isLoading: boolean;
+  refetch: () => Promise<void>;
+}
+
+export class QueryStore<Request, Response> {
+  state?: QueryStatus;
+  request?: Request;
+  response?: Response;
+  fetchFunc?: (request: Request) => Promise<Response>;
+
+  constructor(fetchFunc?: (request: Request) => Promise<Response>) {
+    this.fetchFunc = fetchFunc;
+    makeObservable(this, {
+      state: observable,
+      request: observable.ref,
+      response: observable.ref,
+      isLoading: computed,
+      isSuccess: computed,
+      refetch: action.bound,
+      getData: action.bound,
+    });
+  }
+
+  get isLoading() {
+    return this.state === 'loading';
+  }
+
+  get isSuccess() {
+    return this.state === 'success';
+  }
+
+  async refetch(): Promise<void> {
+    runInAction(() => {
+      this.response = void 0;
+      this.state = 'loading';
+    });
+    try {
+      if (!this.fetchFunc)
+        throw new Error(
+          'Query Service not initialized or request function not implemented'
+        );
+      if (!this.request) throw new Error('Request not provided');
+      const response = await this.fetchFunc(this.request);
+      runInAction(() => {
+        this.response = response;
+        this.state = 'success';
+      });
+      console.log(
+        '%cquery.rpc.Query.ts line:572 this.state',
+        'color: #007acc;',
+        this.state,
+        this.response
+      );
+    } catch (e) {
+      console.error(e);
+      runInAction(() => {
+        this.state = 'error';
+      });
+    }
+  }
+
+  getData(request?: Request): MobxResponse<Response> {
+    runInAction(() => {
+      this.request = request;
+    });
+    return {
+      data: this.response,
+      isSuccess: this.isSuccess,
+      isLoading: this.isLoading,
+      refetch: this.refetch,
+    };
+  }
+}
+`;

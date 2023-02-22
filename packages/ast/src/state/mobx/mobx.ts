@@ -12,23 +12,32 @@ import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
 import { pascal } from 'case';
 
+const makeQueryStoreName = (name: string) => {
+  return `Query${pascal(name)}Store`;
+};
+
 /**
  * Entry for building stores.
  * @param {Object=} context - context of generating the file
  * @param {Object=} service - method details
  */
-export const build = (context: GenericParseContext, service: ProtoService) => {
-  const isIncluding =
+export const createMobxQueryStores = (
+  context: GenericParseContext,
+  service: ProtoService
+): t.ExportNamedDeclaration => {
+  const isIncluded =
     context.pluginValue('mobx.enabled') &&
     isRefIncluded(context.ref, context.pluginValue('mobx.include'));
 
-  if (isIncluding) {
+  if (isIncluded) {
     // before this, make sure:
     // 1. refactor adding getQueryService part into helpers.
     // 2. add new query store class to helpers.
     // build whole ast, don't forget to add utils.
-    buildRpcStores(context, service);
+    return buildRpcStores(context, service);
   }
+
+  return null;
 };
 
 /**
@@ -124,16 +133,18 @@ export const buildRpcStores = (
             // return the methods...
             t.returnStatement(
               t.objectExpression(
-                storeNames.map(({ name, comment }) =>
-                  objectProperty(
-                    t.identifier(name),
-                    t.identifier(name),
+                storeNames.map(({ name, comment }) => {
+                  const id = t.identifier(makeQueryStoreName(name));
+
+                  return objectProperty(
+                    id,
+                    id,
                     false,
                     true,
                     null,
                     makeCommentLineWithBlocks(comment)
-                  )
-                )
+                  );
+                })
               )
             )
           ])
@@ -184,6 +195,12 @@ const buildStore = (
   //add util for MobxResponse
   context.addUtil('MobxResponse');
 
+  //add util for makeObservable
+  context.addUtil('makeObservable');
+
+  //add util for override
+  context.addUtil('override');
+
   const requestType = serviceMethod.requestType;
   const responseType = serviceMethod.responseType;
   const fieldNames = Object.keys(serviceMethod.fields ?? {});
@@ -203,11 +220,11 @@ const buildStore = (
     isOptional = true;
   }
 
-  const storeClassName = `Query${pascal(name)}Store`;
+  const storeClassName = makeQueryStoreName(name);
 
   const storeQueryClass = classDeclaration(
     t.identifier(storeClassName),
-    null,
+    t.identifier('QueryStore'),
     t.classBody([
       t.classMethod(
         'constructor',
@@ -290,15 +307,11 @@ const buildStore = (
       )
     ]),
     [],
-    [
-      t.tsExpressionWithTypeArguments(
-        t.identifier('QueryStore'),
-        t.tsTypeParameterInstantiation([
-          t.tsTypeReference(t.identifier(requestType)),
-          t.tsTypeReference(t.identifier(responseType))
-        ])
-      )
-    ]
+    null,
+    t.tsTypeParameterInstantiation([
+      t.tsTypeReference(t.identifier(requestType)),
+      t.tsTypeReference(t.identifier(responseType))
+    ])
   );
 
   return storeQueryClass;

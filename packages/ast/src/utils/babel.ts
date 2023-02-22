@@ -121,9 +121,13 @@ export const classDeclaration = (
     superClass: t.Expression | null | undefined = null,
     body: t.ClassBody,
     decorators: Array<t.Decorator> | null = null,
-    vImplements?: t.TSExpressionWithTypeArguments[]
+    vImplements?: t.TSExpressionWithTypeArguments[],
+    superTypeParameters?: t.TypeParameterInstantiation | t.TSTypeParameterInstantiation
 ): t.ClassDeclaration => {
     const obj = t.classDeclaration(id, superClass, body, decorators);
+    if (superTypeParameters) {
+      obj.superTypeParameters = superTypeParameters;
+  }
     if (vImplements) {
         obj.implements = vImplements;
     }

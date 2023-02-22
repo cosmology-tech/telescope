@@ -128,11 +128,19 @@ interface TelescopeOpts {
             protos?: string[];
         };
     };
+    mobx?: {
+        enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
 }
-export type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
-export type TelescopeOption = keyof TelescopeOpts;
+export declare type TelescopeOptions = TelescopeOpts & TelescopePackageOpts;
+export declare type TelescopeOption = keyof TelescopeOpts;
 export declare const defaultTelescopeOptions: TelescopeOptions;
 export {};

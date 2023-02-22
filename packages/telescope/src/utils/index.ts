@@ -61,12 +61,17 @@ export const UTILS = {
     useTendermintClient: '__react-query__',
     ReactQueryParams: '__react-query__',
     UseQueryOptions: '@tanstack/react-query',
+    QueryStore: '__mobx__',
+    MobxResponse: '__mobx__',
+    override: 'mobx',
+    makeObservable: 'mobx',
 };
 
 export const UTIL_HELPERS = [
     '__helpers__',
     '__extern__',
     '__react-query__',
+    '__mobx__',
     '__grpc-gateway__',
 ];
 
@@ -87,3 +92,5 @@ export const getRelativePath = (f1: string, f2: string) => {
     if (!/^\./.test(importPath)) importPath = `./${importPath}`;
     return importPath;
 }
+
+export * from "./common-create-bundle"

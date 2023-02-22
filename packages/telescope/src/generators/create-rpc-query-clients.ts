@@ -11,6 +11,7 @@ import {
     createGRPCGatewayQueryClass,
     createGrpcWebQueryClass,
     createGrpcWebQueryInterface
+    // createMobxQueryStores
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -91,21 +92,21 @@ export const plugin = (
                 default:
                     allowedRpcServices.forEach(svcKey => {
                         if (proto[svcKey]) {
-            
+
                             const svc: ProtoService = proto[svcKey];
-            
+
                             asts.push(createRpcClientInterface(ctx.generic, svc));
                             asts.push(createRpcClientClass(ctx.generic, svc));
                             if (c.proto.pluginValue('rpcClients.extensions')) {
                                 asts.push(createRpcQueryExtension(ctx.generic, svc));
                             }
-                            
+
                             // see if current file has been reactQuery enabled and included
                             const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
                                 c.ref,
                                 c.proto.pluginValue('reactQuery.include')
                             )
-            
+
                             // react query
                             // generate react query parts if included.
                             // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
@@ -119,6 +120,7 @@ export const plugin = (
                                 [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                                 asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
                             }
+
                         }
                     });
         }

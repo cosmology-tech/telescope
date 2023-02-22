@@ -18,6 +18,11 @@ export declare const UTILS: {
     defaultRegistryTypes: string;
     encodeBech32Pubkey: string;
     Exact: string;
+    fm: {
+        type: string;
+        path: string;
+        name: string;
+    };
     fromBase64: string;
     fromBech32: string;
     fromDuration: string;
@@ -39,6 +44,7 @@ export declare const UTILS: {
     QueryClient: string;
     Registry: string;
     Rpc: string;
+    grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;
     Tendermint34Client: string;
@@ -52,6 +58,9 @@ export declare const UTILS: {
     useTendermintClient: string;
     ReactQueryParams: string;
     UseQueryOptions: string;
+    QueryStore: string;
+    MobxResponse: string;
+    override: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {
