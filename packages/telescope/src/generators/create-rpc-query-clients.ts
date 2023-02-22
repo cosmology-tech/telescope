@@ -125,11 +125,6 @@ export const plugin = (
                     });
         }
 
-        allowedRpcServices.forEach(svcKey => {
-            if (proto[svcKey]){
-            }
-        })
-
         if (!asts.length) {
             return;
         }
