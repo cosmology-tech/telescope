@@ -121,14 +121,6 @@ export const plugin = (
                                 asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
                             }
 
-                            // const mobxQueryStoreAst = createMobxQueryStores(
-                            //   ctx.generic,
-                            //   proto[svcKey]
-                            // );
-
-                            // if (mobxQueryStoreAst) {
-                            //   asts.push(mobxQueryStoreAst);
-                            // }
                         }
                     });
         }
