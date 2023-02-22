@@ -61,12 +61,16 @@ export const UTILS = {
     useTendermintClient: '__react-query__',
     ReactQueryParams: '__react-query__',
     UseQueryOptions: '@tanstack/react-query',
+    QueryStore: '__mobx__',
+    MobxResponse: '__mobx__',
+    override: 'mobx',
 };
 
 export const UTIL_HELPERS = [
     '__helpers__',
     '__extern__',
     '__react-query__',
+    '__mobx__',
     '__grpc-gateway__',
 ];
 

@@ -193,6 +193,9 @@ const buildStore = (
   //add util for MobxResponse
   context.addUtil('MobxResponse');
 
+  //add util for override
+  context.addUtil('override');
+
   const requestType = serviceMethod.requestType;
   const responseType = serviceMethod.responseType;
   const fieldNames = Object.keys(serviceMethod.fields ?? {});

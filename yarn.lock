@@ -3344,6 +3344,18 @@
   dependencies:
     "@octokit/openapi-types" "^12.7.0"
 
+"@osmonauts/ast@./packages/ast":
+  version "0.74.0"
+  dependencies:
+    "@babel/parser" "^7.19.3"
+    "@babel/runtime" "^7.19.0"
+    "@babel/types" "7.19.3"
+    "@osmonauts/proto-parser" "^0.37.1"
+    "@osmonauts/types" "^0.29.1"
+    "@osmonauts/utils" "^0.10.0"
+    case "1.6.3"
+    dotty "0.1.2"
+
 "@osmonauts/lcd@^0.8.0":
   version "0.8.0"
   resolved "https://registry.npmjs.org/@osmonauts/lcd/-/lcd-0.8.0.tgz#fcabba93edadd23f73b2046a5cad897b420a9c84"
