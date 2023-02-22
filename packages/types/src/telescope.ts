@@ -106,7 +106,7 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
-        // temporary field for backwards compat 
+        // temporary field for backwards compat
 
         useRecursiveV2encoding?: boolean;
 
@@ -125,7 +125,7 @@ interface TelescopeOpts {
         }[];
     };
     rpcClients?: {
-        type?: 'tendermint' | 'grpc-web' | 'grpc-gateway'; 
+        type?: 'tendermint' | 'grpc-web' | 'grpc-gateway';
         enabled: boolean;
         inline?: boolean;
         extensions?: boolean;
@@ -150,6 +150,14 @@ interface TelescopeOpts {
         }[];
     };
     reactQuery?: {
+        enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        }
+    };
+    mobx?: {
         enabled: boolean;
         include?: {
             patterns?: string[];
