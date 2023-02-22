@@ -204,10 +204,6 @@ const options: TelescopeOptions = {
     // }
   },
 
-  mobx: {
-    enabled: true
-  },
-
   aminoEncoding: {
     enabled: true,
     exceptions: {
