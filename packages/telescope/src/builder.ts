@@ -18,6 +18,7 @@ import { plugin as createRPCMsgClientsScoped } from './generators/create-rpc-msg
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
+import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
@@ -25,111 +26,119 @@ import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
-    // If an element at the same key is present for both x and y, the value from y will appear in the result.
-    options = deepmerge(defaultTelescopeOptions, options ?? {});
-    // strip off leading slashes
-    options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
-    options.eslintDisable.files = options.eslintDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
-    // uniq bc of deepmerge
-    options.rpcClients.enabledServices = [...new Set([...options.rpcClients.enabledServices])];
-    return options;
+  // If an element at the same key is present for both x and y, the value from y will appear in the result.
+  options = deepmerge(defaultTelescopeOptions, options ?? {});
+  // strip off leading slashes
+  options.tsDisable.files = options.tsDisable.files.map((file) =>
+    file.startsWith('/') ? file : file.replace(/^\//, '')
+  );
+  options.eslintDisable.files = options.eslintDisable.files.map((file) =>
+    file.startsWith('/') ? file : file.replace(/^\//, '')
+  );
+  // uniq bc of deepmerge
+  options.rpcClients.enabledServices = [
+    ...new Set([...options.rpcClients.enabledServices])
+  ];
+  return options;
 };
 
 export class TelescopeBuilder {
-    store: ProtoStore;
-    protoDirs: string[];
-    outPath: string;
-    options: TelescopeOptions;
-    contexts: TelescopeParseContext[] = [];
-    files: string[] = [];
+  store: ProtoStore;
+  protoDirs: string[];
+  outPath: string;
+  options: TelescopeOptions;
+  contexts: TelescopeParseContext[] = [];
+  files: string[] = [];
 
-    readonly converters: BundlerFile[] = [];
-    readonly lcdClients: BundlerFile[] = [];
-    readonly rpcQueryClients: BundlerFile[] = [];
-    readonly rpcMsgClients: BundlerFile[] = [];
-    readonly registries: BundlerFile[] = [];
+  readonly converters: BundlerFile[] = [];
+  readonly lcdClients: BundlerFile[] = [];
+  readonly rpcQueryClients: BundlerFile[] = [];
+  readonly rpcMsgClients: BundlerFile[] = [];
+  readonly registries: BundlerFile[] = [];
 
-    constructor({ protoDirs, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
-        this.protoDirs = protoDirs;
-        this.outPath = resolve(outPath);
-        this.options = sanitizeOptions(options);
-        this.store = store ?? new ProtoStore(protoDirs, this.options);
-        this.store.traverseAll();
-    }
+  constructor({
+    protoDirs,
+    outPath,
+    store,
+    options
+  }: TelescopeInput & { store?: ProtoStore }) {
+    this.protoDirs = protoDirs;
+    this.outPath = resolve(outPath);
+    this.options = sanitizeOptions(options);
+    this.store = store ?? new ProtoStore(protoDirs, this.options);
+    this.store.traverseAll();
+  }
 
-    context(ref) {
-        const ctx = new TelescopeParseContext(
-            ref, this.store, this.options
-        );
-        this.contexts.push(ctx);
-        return ctx;
-    }
+  context(ref) {
+    const ctx = new TelescopeParseContext(ref, this.store, this.options);
+    this.contexts.push(ctx);
+    return ctx;
+  }
 
-    addRPCQueryClients(files: BundlerFile[]) {
-        [].push.apply(this.rpcQueryClients, files);
-    }
+  addRPCQueryClients(files: BundlerFile[]) {
+    [].push.apply(this.rpcQueryClients, files);
+  }
 
-    addRPCMsgClients(files: BundlerFile[]) {
-        [].push.apply(this.rpcMsgClients, files);
-    }
+  addRPCMsgClients(files: BundlerFile[]) {
+    [].push.apply(this.rpcMsgClients, files);
+  }
 
-    addLCDClients(files: BundlerFile[]) {
-        [].push.apply(this.lcdClients, files);
-    }
+  addLCDClients(files: BundlerFile[]) {
+    [].push.apply(this.lcdClients, files);
+  }
 
-    addRegistries(files: BundlerFile[]) {
-        [].push.apply(this.registries, files);
-    }
+  addRegistries(files: BundlerFile[]) {
+    [].push.apply(this.registries, files);
+  }
 
-    addConverters(files: BundlerFile[]) {
-        [].push.apply(this.converters, files);
-    }
+  addConverters(files: BundlerFile[]) {
+    [].push.apply(this.converters, files);
+  }
 
-    async build() {
-        // [x] get bundle of all packages
-        const bundles = bundlePackages(this.store)
-            .map(bundle => {
-                // store bundleFile in filesToInclude
-                const bundler = new Bundler(this, bundle);
+  async build() {
+    // [x] get bundle of all packages
+    const bundles = bundlePackages(this.store).map((bundle) => {
+      // store bundleFile in filesToInclude
+      const bundler = new Bundler(this, bundle);
 
-                // [x] write out all TS files for package
-                createTypes(this, bundler);
+      // [x] write out all TS files for package
+      createTypes(this, bundler);
 
-                // [x] write out one amino helper for all contexts w/mutations
-                createAminoConverters(this, bundler);
+      // [x] write out one amino helper for all contexts w/mutations
+      createAminoConverters(this, bundler);
 
-                // [x] write out one registry helper for all contexts w/mutations
-                createRegistries(this, bundler);
+      // [x] write out one registry helper for all contexts w/mutations
+      createRegistries(this, bundler);
 
-                // [x] write out one registry helper for all contexts w/mutations
-                createLCDClients(this, bundler);
+      // [x] write out one registry helper for all contexts w/mutations
+      createLCDClients(this, bundler);
 
-                createRPCQueryClients(this, bundler);
-                createRPCMsgClients(this, bundler);
+      createRPCQueryClients(this, bundler);
+      createRPCMsgClients(this, bundler);
 
-                // [x] write out one client for each base package, referencing the last two steps
-                createStargateClients(this, bundler);
+      // [x] write out one client for each base package, referencing the last two steps
+      createStargateClients(this, bundler);
 
-                return bundler;
-            });
+      return bundler;
+    });
 
-        // post run plugins
-        bundles
-            .forEach(bundler => {
-                createLCDClientsScoped(this, bundler);
-                createRPCQueryClientsScoped(this, bundler);
-                createRPCMsgClientsScoped(this, bundler);
+    // post run plugins
+    bundles.forEach((bundler) => {
+      createLCDClientsScoped(this, bundler);
+      createRPCQueryClientsScoped(this, bundler);
+      createRPCMsgClientsScoped(this, bundler);
 
-                createBundle(this, bundler);
-            });
+      createBundle(this, bundler);
+    });
 
-        createReactQueryBundle(this);
-        createAggregatedLCDClient(this);
-        await createCosmWasmBundle(this);
+    createReactQueryBundle(this);
+    createMobxBundle(this);
+    createAggregatedLCDClient(this);
+    await createCosmWasmBundle(this);
 
-        createHelpers(this);
+    createHelpers(this);
 
-        // finally, write one index file with all files, exported
-        createIndex(this);
-    }
+    // finally, write one index file with all files, exported
+    createIndex(this);
+  }
 }

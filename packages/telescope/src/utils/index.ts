@@ -92,3 +92,5 @@ export const getRelativePath = (f1: string, f2: string) => {
     if (!/^\./.test(importPath)) importPath = `./${importPath}`;
     return importPath;
 }
+
+export * from "./common-create-bundle"
