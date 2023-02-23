@@ -40,7 +40,7 @@ export const plugin = (
         write(builder, 'react-query.ts', reactQuery);
     }
 
-    if (builder.options.mobx.enabled) {
+    if (builder.options.mobx?.enabled) {
       builder.files.push('mobx.ts');
       write(builder, 'mobx.ts', mobx);
     }

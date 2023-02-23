@@ -61,6 +61,7 @@ export declare const UTILS: {
     QueryStore: string;
     MobxResponse: string;
     override: string;
+    makeObservable: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {
@@ -70,3 +71,4 @@ export declare const fixlocalpaths: (imports: ImportObj[]) => {
     importAs?: string;
 }[];
 export declare const getRelativePath: (f1: string, f2: string) => string;
+export * from "./common-create-bundle";

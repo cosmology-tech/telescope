@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../builder';
-// import { createMobxQueryFactory } from '@osmonauts/ast';
+import { createMobxQueryFactory } from '@osmonauts/ast';
 import * as dotty from 'dotty';
 import { commonBundlePlugin } from '../utils';
 
@@ -7,7 +7,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   // if mobx is enabled
   // generate stores.ts based on query hooks generated in each package.
   // eg: __fixtures__/output1/stores.ts
-  if (!builder.options.mobx.enabled) {
+  if (!builder.options.mobx?.enabled) {
     return;
   }
 
@@ -20,6 +20,6 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   commonBundlePlugin(builder, 'stores.ts', obj, (context, obj) => {
     // generate code for createRpcQueryHooks and imports of related packages.
-    return []
+    return createMobxQueryFactory(context, obj);
   });
 };
