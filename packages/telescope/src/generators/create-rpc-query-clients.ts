@@ -16,7 +16,7 @@ import {
     GetDesc,
     getMethodDesc,
     grpcWebRpcInterface,
-    getGrpcWebImpl
+    getGrpcWebImpl,
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';

@@ -112,7 +112,11 @@ const options: TelescopeOptions = {
                 'evmos.erc20.v1'
             ]
         }
-    }
+    },
+    mobx: {
+        enabled: true
+    },
+
 };
 
 const input: TelescopeInput = {

@@ -63,6 +63,7 @@ export const UTILS = {
     UseQueryOptions: '@tanstack/react-query',
     QueryStore: '__mobx__',
     MobxResponse: '__mobx__',
+    useEndpoint: '__pinia__',
     override: 'mobx',
     makeObservable: 'mobx',
     UnaryMethodDefinitionishR: '__grpc-web__',
@@ -74,6 +75,7 @@ export const UTIL_HELPERS = [
     '__extern__',
     '__react-query__',
     '__mobx__',
+    '__pinia__',
     '__grpc-gateway__',
     '__grpc-web__'
 ];
@@ -96,4 +98,4 @@ export const getRelativePath = (f1: string, f2: string) => {
     return importPath;
 }
 
-export * from "./common-create-bundle"
+export * from './common-create-bundle';

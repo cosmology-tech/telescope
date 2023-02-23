@@ -24,6 +24,8 @@ import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
 import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
+import { plugin as createPiniaStore } from './generators/create-pinia-store'
+import { plugin as createPiniaStoreBundle } from './generators/create-pinia-store-bundle'
 
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
@@ -97,6 +99,7 @@ export class TelescopeBuilder {
 
   async build() {
     // [x] get bundle of all packages
+
     const bundles = bundlePackages(this.store).map((bundle) => {
       // store bundleFile in filesToInclude
       const bundler = new Bundler(this, bundle);
@@ -115,6 +118,7 @@ export class TelescopeBuilder {
 
       createRPCQueryClients(this, bundler);
       createRPCMsgClients(this, bundler);
+      createPiniaStore(this, bundler)
 
       // [x] write out one client for each base package, referencing the last two steps
       createStargateClients(this, bundler);
@@ -137,6 +141,7 @@ export class TelescopeBuilder {
     await createCosmWasmBundle(this);
 
     createHelpers(this);
+    createPiniaStoreBundle(this)
 
     // finally, write one index file with all files, exported
     createIndex(this);

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builds stores. 1`] = `
+"import * as _ProtoCosmosBankV1beta1A from "./proto/cosmos/bank/v1beta1/a.lcd";
+import * as _ProtoCosmosBankV1beta1B from "./proto/cosmos/bank/v1beta1/b.lcd";
+import * as _ProtoCosmosBankV1beta1C from "./proto/cosmos/bank/v1beta1/c.lcd";
+export const createPiniaStores = ({
+  rpc
+}: {
+  rpc: ProtobufRpcClient | undefined;
+}) => {
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: _ProtoCosmosBankV1beta1A.usePiniaStore(rpc)
+      },
+      gov: {
+        v1beta1: _ProtoCosmosBankV1beta1B.usePiniaStore(rpc)
+      }
+    },
+    osmosis: {
+      gamm: {
+        v1beta1: _ProtoCosmosBankV1beta1C.usePiniaStore(rpc)
+      }
+    }
+  };
+};"
+`;
