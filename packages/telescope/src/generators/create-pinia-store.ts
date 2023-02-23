@@ -96,8 +96,8 @@ export const plugin = (
           path: 'pinia'
         }, {
           type: "import",
-          name: 'ref, computed',
-          path: 'vue'
+          name: 'LCDQueryClient',
+          path: './query.lcd'
         }])
 
         const prog = []
