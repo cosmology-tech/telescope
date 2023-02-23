@@ -25,5 +25,3 @@ export * from "./hooks";
 export * from "./contracts";
 export * from "./extern";
 export * from "./react-query";
-export * from "./pinia.store";
-export * from "./pinia.store";
