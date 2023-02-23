@@ -1,25 +1,28 @@
 import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcHookFactory } from '@osmonauts/ast';
+
 import { ProtoRef } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
-import { fixlocalpaths } from '../utils';
+import { commonBundlePlugin, fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
+import { createPiniaStoreFactory } from '@osmonauts/ast';
 
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
 
-  console.log('In pinia store bundle plugin')
+  // get mapping of packages and rpc query filenames.
+  const obj = {};
+  builder.rpcQueryClients.map((queryClient) => {
+    const path = `./${queryClient.localname.replace(/rpc.(Query|Service).ts$/, 'pinia.store')}`;
+    dotty.put(obj, queryClient.package, path);
+  });
 
-  // if react query is enabled
-  // generate hooks.ts based on query hooks generated in each package.
-  // eg: __fixtures__/output1/hooks.ts
-  if (!builder.options.reactQuery.enabled) {
-    return;
-  }
-
+  commonBundlePlugin(builder, 'pinia.store.ts', obj, (context, obj) => {
+    // generate code for createRpcQueryHooks and imports of related packages.
+    return createPiniaStoreFactory(context, obj);
+  });
 
 }

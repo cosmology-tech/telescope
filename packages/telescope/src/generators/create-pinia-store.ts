@@ -1,3 +1,4 @@
+import { Statement } from '@babel/types'
 import { Bundler } from '../bundler';
 import { TelescopeBuilder } from '../builder';
 import { buildAllImports, getDepsFromQueries, getImportStatements } from '../imports';
@@ -68,8 +69,6 @@ export const plugin = (
         //console.log('store', getImportsFrom)
         const localname = bundler.getLocalFilename(c.ref, 'pinia.store');
         const filename = bundler.getFilename(localname);
-
-        console.log(localname)
 
         let ast = null;
 
