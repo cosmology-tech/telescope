@@ -61,6 +61,7 @@ export declare const UTILS: {
     UseQueryOptions: string;
     QueryStore: string;
     MobxResponse: string;
+    useEndpoint: string;
     override: string;
     makeObservable: string;
     UnaryMethodDefinitionishR: string;
