@@ -63,7 +63,7 @@ function buildGetter(method: Method[]) {
           t.variableDeclarator(
             t.identifier('requestClient'),
             t.memberExpression(
-              t.callExpression(t.identifier('useBlockchain'), []),
+              t.callExpression(t.identifier('useEndpoint'), []),
               t.identifier('restClient')
             )
           ),
@@ -88,10 +88,11 @@ export const createPiniaStore = (
 ) => {
 
   context.addUtil('LCDClient');
+  context.addUtil('useEndpoint');
 
   const key = context.ref.filename
-  //const storeName = 'usePiniaStore'
-  const storeName = getStoreName(key)
+  const storeName = 'usePiniaStore'
+  // const storeName = getStoreName(key)
 
   const methods: Method[] = Object.keys(service.methods ?? {})
     .map(key => {
@@ -100,7 +101,6 @@ export const createPiniaStore = (
       const name = camel(key)
       return { name, method }
     });
-  // console.log('methods: ', methods)
 
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
