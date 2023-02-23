@@ -1,13 +1,7 @@
-import { Grant, GrantSDKType } from "./authz";
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { UnaryMethodDefinitionish } from "../../../grpc-web";
-import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "../../../helpers";
-import { grpc } from "@improbable-eng/grpc-web";
-import { BrowserHeaders } from "browser-headers";
-import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-/** Msg defines the authz Msg service. */
+exports[`test gRPC-web Msg Client 1`] = `
+"/** Msg defines the authz Msg service. */
 export interface Msg {
   /**
    * Grant grants the provided authorization to the grantee on the granter's
@@ -29,8 +23,11 @@ export interface Msg {
    * granter's account that has been granted to the grantee.
    */
   revoke(request: DeepPartial<MsgRevoke>, metadata?: grpc.Metadata): Promise<MsgRevokeResponse>;
-}
-export class MsgClientImpl implements Msg {
+}"
+`;
+
+exports[`test gRPC-web Msg Client 2`] = `
+"export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
@@ -52,11 +49,17 @@ export class MsgClientImpl implements Msg {
     return this.rpc.unary(MsgRevokeDesc, MsgRevoke.fromPartial(request), metadata);
   }
 
-}
-export const MsgDesc = {
+}"
+`;
+
+exports[`test gRPC-web Msg Client 3`] = `
+"export const MsgDesc = {
   serviceName: "cosmos.authz.v1beta1.Msg"
-};
-export const MsgGrantDesc: UnaryMethodDefinitionish = {
+};"
+`;
+
+exports[`test gRPC-web Msg Client 4`] = `
+"export const MsgGrantDesc: UnaryMethodDefinitionish = {
   methodName: "Grant",
   service: MsgDesc,
   requestStream: false,
@@ -79,8 +82,11 @@ export const MsgGrantDesc: UnaryMethodDefinitionish = {
     }
 
   } as any)
-};
-export const MsgExecDesc: UnaryMethodDefinitionish = {
+};"
+`;
+
+exports[`test gRPC-web Msg Client 5`] = `
+"export const MsgExecDesc: UnaryMethodDefinitionish = {
   methodName: "Exec",
   service: MsgDesc,
   requestStream: false,
@@ -103,8 +109,11 @@ export const MsgExecDesc: UnaryMethodDefinitionish = {
     }
 
   } as any)
-};
-export const MsgRevokeDesc: UnaryMethodDefinitionish = {
+};"
+`;
+
+exports[`test gRPC-web Msg Client 6`] = `
+"export const MsgRevokeDesc: UnaryMethodDefinitionish = {
   methodName: "Revoke",
   service: MsgDesc,
   requestStream: false,
@@ -127,11 +136,11 @@ export const MsgRevokeDesc: UnaryMethodDefinitionish = {
     }
 
   } as any)
-};
-export interface Rpc {
-  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
-}
-export class GrpcWebImpl {
+};"
+`;
+
+exports[`test gRPC-web Msg Client 7`] = `
+"export class GrpcWebImpl {
   host: string;
   options: {
     transport: grpc.TransportFactory;
@@ -177,4 +186,5 @@ export class GrpcWebImpl {
     });
   }
 
-}
+}"
+`;

@@ -1,5 +1,5 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
+import { expectCode, getTestProtoStore } from '../../../../../test-utils'
 import { ProtoParseContext } from '../../../context';
 import { createSDKType, createProtoType, createProtoInterfaceEncodedType } from '..';
 import { createAminoType } from '../amino';

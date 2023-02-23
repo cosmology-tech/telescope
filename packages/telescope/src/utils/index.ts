@@ -1,5 +1,4 @@
 import { ProtoRoot, ProtoRef } from '@osmonauts/types';
-import { camel } from '@osmonauts/utils';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
 
@@ -19,13 +18,14 @@ export const UTILS = {
     AminoTypes: '@cosmjs/stargate',
     base64FromBytes: '__helpers__',
     bytesFromBase64: '__helpers__',
+    BrowserHeaders: 'browser-headers',
     createProtobufRpcClient: '@cosmjs/stargate',
     decodeBech32Pubkey: '@cosmjs/amino',
     DeepPartial: '__helpers__',
     defaultRegistryTypes: '@cosmjs/stargate',
     encodeBech32Pubkey: '@cosmjs/amino',
     Exact: '__helpers__',
-    fm: {type: 'namespace', path: '__grpc-gateway__', name: 'fm'},
+    fm: { type: 'namespace', path: '__grpc-gateway__', name: 'fm' },
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromDuration: '__helpers__',
@@ -65,6 +65,8 @@ export const UTILS = {
     MobxResponse: '__mobx__',
     override: 'mobx',
     makeObservable: 'mobx',
+    UnaryMethodDefinitionishR: '__grpc-web__',
+    UnaryMethodDefinitionish: '__grpc-web__',
 };
 
 export const UTIL_HELPERS = [
@@ -73,6 +75,7 @@ export const UTIL_HELPERS = [
     '__react-query__',
     '__mobx__',
     '__grpc-gateway__',
+    '__grpc-web__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {

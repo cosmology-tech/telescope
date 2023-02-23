@@ -2,9 +2,8 @@ import { TelescopeBuilder } from '../src/builder';
 import { TelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
-import { kebab } from "case";
-import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
+import { TelescopeParseContext } from '../types/src/build';
 
 const outPath = __dirname + '/../../../__fixtures__/v-next/outputv3';
 const store = getTestProtoStore();
@@ -130,7 +129,7 @@ describe('bundle package registries and root file names', () => {
         const registries = bundleRegistries(telescope);
         const result = registries.map(reg => ({
             ['package']: reg.package,
-            contexts: parseContextsForRegistry(reg.contexts)
+            contexts: parseContextsForRegistry(reg.contexts as TelescopeParseContext[])
         }))
         // console.log(JSON.stringify(result, null, 2));
     });
@@ -143,7 +142,7 @@ describe('bundle package registries and root file names', () => {
                 obj => {
                     return {
                         ['package']: obj.package,
-                        contexts: parseContextsForRegistry(obj.contexts)
+                        contexts: parseContextsForRegistry(obj.contexts as TelescopeParseContext[])
                     }
                 }
             )

@@ -4,34 +4,36 @@ import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKT
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
+import { UnaryMethodDefinitionish } from "../../../../grpc-web";
 import { DeepPartial } from "../../../../helpers";
+import { BrowserHeaders } from "browser-headers";
 import { QueryConnectionRequest, QueryConnectionRequestSDKType, QueryConnectionResponse, QueryConnectionResponseSDKType, QueryConnectionsRequest, QueryConnectionsRequestSDKType, QueryConnectionsResponse, QueryConnectionsResponseSDKType, QueryClientConnectionsRequest, QueryClientConnectionsRequestSDKType, QueryClientConnectionsResponse, QueryClientConnectionsResponseSDKType, QueryConnectionClientStateRequest, QueryConnectionClientStateRequestSDKType, QueryConnectionClientStateResponse, QueryConnectionClientStateResponseSDKType, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateRequestSDKType, QueryConnectionConsensusStateResponse, QueryConnectionConsensusStateResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Connection queries an IBC connection end. */
-  Connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse>;
+  connection(request: DeepPartial<QueryConnectionRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionResponse>;
 
   /** Connections queries all the IBC connections of a chain. */
-  Connections(request?: DeepPartial<QueryConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse>;
+  connections(request?: DeepPartial<QueryConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionsResponse>;
 
   /**
    * ClientConnections queries the connection paths associated with a client
    * state.
    */
-  ClientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse>;
+  clientConnections(request: DeepPartial<QueryClientConnectionsRequest>, metadata?: grpc.Metadata): Promise<QueryClientConnectionsResponse>;
 
   /**
    * ConnectionClientState queries the client state associated with the
    * connection.
    */
-  ConnectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse>;
+  connectionClientState(request: DeepPartial<QueryConnectionClientStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionClientStateResponse>;
 
   /**
    * ConnectionConsensusState queries the consensus state associated with the
    * connection.
    */
-  ConnectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse>;
+  connectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -65,6 +67,179 @@ export class QueryClientImpl implements Query {
 
   connectionConsensusState(request: DeepPartial<QueryConnectionConsensusStateRequest>, metadata?: grpc.Metadata): Promise<QueryConnectionConsensusStateResponse> {
     return this.rpc.unary(QueryConnectionConsensusStateDesc, QueryConnectionConsensusStateRequest.fromPartial(request), metadata);
+  }
+
+}
+export const QueryDesc = {
+  serviceName: "ibc.core.connection.v1.Query"
+};
+export const QueryConnectionDesc: UnaryMethodDefinitionish = {
+  methodName: "Connection",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryConnectionRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryConnectionResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryConnectionsDesc: UnaryMethodDefinitionish = {
+  methodName: "Connections",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryConnectionsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryConnectionsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryClientConnectionsDesc: UnaryMethodDefinitionish = {
+  methodName: "ClientConnections",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryClientConnectionsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryClientConnectionsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryConnectionClientStateDesc: UnaryMethodDefinitionish = {
+  methodName: "ConnectionClientState",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryConnectionClientStateRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryConnectionClientStateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryConnectionConsensusStateDesc: UnaryMethodDefinitionish = {
+  methodName: "ConnectionConsensusState",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryConnectionConsensusStateRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryConnectionConsensusStateResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (response.status === grpc.Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
   }
 
 }

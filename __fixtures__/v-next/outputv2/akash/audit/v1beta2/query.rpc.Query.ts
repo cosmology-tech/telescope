@@ -2,7 +2,9 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Provider, ProviderSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
+import { UnaryMethodDefinitionish } from "../../../grpc-web";
 import { DeepPartial } from "../../../helpers";
+import { BrowserHeaders } from "browser-headers";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -12,28 +14,28 @@ export interface Query {
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  AllProvidersAttributes(request?: DeepPartial<QueryAllProvidersAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  allProvidersAttributes(request?: DeepPartial<QueryAllProvidersAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAttributes queries all provider signed attributes
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  ProviderAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  providerAttributes(request: DeepPartial<QueryProviderAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * ProviderAuditorAttributes queries provider signed attributes by specific auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  ProviderAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  providerAuditorAttributes(request: DeepPartial<QueryProviderAuditorRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 
   /**
    * AuditorAttributes queries all providers signed by this auditor
    * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
    * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
    */
-  AuditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
+  auditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -62,6 +64,155 @@ export class QueryClientImpl implements Query {
 
   auditorAttributes(request: DeepPartial<QueryAuditorAttributesRequest>, metadata?: grpc.Metadata): Promise<QueryProvidersResponse> {
     return this.rpc.unary(QueryAuditorAttributesDesc, QueryAuditorAttributesRequest.fromPartial(request), metadata);
+  }
+
+}
+export const QueryDesc = {
+  serviceName: "akash.audit.v1beta2.Query"
+};
+export const QueryAllProvidersAttributesDesc: UnaryMethodDefinitionish = {
+  methodName: "AllProvidersAttributes",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryAllProvidersAttributesRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryProvidersResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryProviderAttributesDesc: UnaryMethodDefinitionish = {
+  methodName: "ProviderAttributes",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryProviderAttributesRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryProvidersResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryProviderAuditorAttributesDesc: UnaryMethodDefinitionish = {
+  methodName: "ProviderAuditorAttributes",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryProviderAuditorRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryProvidersResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryAuditorAttributesDesc: UnaryMethodDefinitionish = {
+  methodName: "AuditorAttributes",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryAuditorAttributesRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryProvidersResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (response.status === grpc.Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
   }
 
 }
