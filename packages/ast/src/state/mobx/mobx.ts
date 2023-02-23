@@ -307,6 +307,7 @@ const buildStore = (
       )
     ]),
     [],
+    // TODO the lines below have no impact (see classDeclaration)
     null,
     t.tsTypeParameterInstantiation([
       t.tsTypeReference(t.identifier(requestType)),

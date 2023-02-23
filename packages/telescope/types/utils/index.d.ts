@@ -12,6 +12,7 @@ export declare const UTILS: {
     AminoTypes: string;
     base64FromBytes: string;
     bytesFromBase64: string;
+    BrowserHeaders: string;
     createProtobufRpcClient: string;
     decodeBech32Pubkey: string;
     DeepPartial: string;
@@ -60,7 +61,11 @@ export declare const UTILS: {
     UseQueryOptions: string;
     QueryStore: string;
     MobxResponse: string;
+    useEndpoint: string;
     override: string;
+    makeObservable: string;
+    UnaryMethodDefinitionishR: string;
+    UnaryMethodDefinitionish: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {
@@ -70,3 +75,4 @@ export declare const fixlocalpaths: (imports: ImportObj[]) => {
     importAs?: string;
 }[];
 export declare const getRelativePath: (f1: string, f2: string) => string;
+export * from './common-create-bundle';

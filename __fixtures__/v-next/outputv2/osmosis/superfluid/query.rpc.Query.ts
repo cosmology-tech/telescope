@@ -6,71 +6,73 @@ import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import * as _m0 from "protobufjs/minimal";
 import { grpc } from "@improbable-eng/grpc-web";
+import { UnaryMethodDefinitionish } from "../../grpc-web";
 import { DeepPartial } from "../../helpers";
+import { BrowserHeaders } from "browser-headers";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomRequestSDKType, QueryTotalDelegationByValidatorForDenomResponse, QueryTotalDelegationByValidatorForDenomResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType, QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistRequestSDKType, QueryUnpoolWhitelistResponse, QueryUnpoolWhitelistResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of superfluid parameters. */
-  Params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
+  params(request?: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
 
   /**
    * Returns superfluid asset type, whether if it's a native asset or an lp
    * share.
    */
-  AssetType(request: DeepPartial<AssetTypeRequest>, metadata?: grpc.Metadata): Promise<AssetTypeResponse>;
+  assetType(request: DeepPartial<AssetTypeRequest>, metadata?: grpc.Metadata): Promise<AssetTypeResponse>;
 
   /** Returns all registered superfluid assets. */
-  AllAssets(request?: DeepPartial<AllAssetsRequest>, metadata?: grpc.Metadata): Promise<AllAssetsResponse>;
+  allAssets(request?: DeepPartial<AllAssetsRequest>, metadata?: grpc.Metadata): Promise<AllAssetsResponse>;
 
   /** Returns the osmo equivalent multiplier used in the most recent epoch. */
-  AssetMultiplier(request: DeepPartial<AssetMultiplierRequest>, metadata?: grpc.Metadata): Promise<AssetMultiplierResponse>;
+  assetMultiplier(request: DeepPartial<AssetMultiplierRequest>, metadata?: grpc.Metadata): Promise<AssetMultiplierResponse>;
 
   /** Returns all superfluid intermediary accounts. */
-  AllIntermediaryAccounts(request?: DeepPartial<AllIntermediaryAccountsRequest>, metadata?: grpc.Metadata): Promise<AllIntermediaryAccountsResponse>;
+  allIntermediaryAccounts(request?: DeepPartial<AllIntermediaryAccountsRequest>, metadata?: grpc.Metadata): Promise<AllIntermediaryAccountsResponse>;
 
   /** Returns intermediary account connected to a superfluid staked lock by id */
-  ConnectedIntermediaryAccount(request: DeepPartial<ConnectedIntermediaryAccountRequest>, metadata?: grpc.Metadata): Promise<ConnectedIntermediaryAccountResponse>;
+  connectedIntermediaryAccount(request: DeepPartial<ConnectedIntermediaryAccountRequest>, metadata?: grpc.Metadata): Promise<ConnectedIntermediaryAccountResponse>;
 
   /** Returns the amount of delegations of specific denom for all validators */
-  TotalDelegationByValidatorForDenom(request: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByValidatorForDenomResponse>;
+  totalDelegationByValidatorForDenom(request: DeepPartial<QueryTotalDelegationByValidatorForDenomRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByValidatorForDenomResponse>;
 
   /**
    * Returns the total amount of osmo superfluidly staked.
    * Response is denominated in uosmo.
    */
-  TotalSuperfluidDelegations(request?: DeepPartial<TotalSuperfluidDelegationsRequest>, metadata?: grpc.Metadata): Promise<TotalSuperfluidDelegationsResponse>;
+  totalSuperfluidDelegations(request?: DeepPartial<TotalSuperfluidDelegationsRequest>, metadata?: grpc.Metadata): Promise<TotalSuperfluidDelegationsResponse>;
 
   /**
    * Returns the coins superfluid delegated for the delegator, validator, denom
    * triplet
    */
-  SuperfluidDelegationAmount(request: DeepPartial<SuperfluidDelegationAmountRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationAmountResponse>;
+  superfluidDelegationAmount(request: DeepPartial<SuperfluidDelegationAmountRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationAmountResponse>;
 
   /** Returns all the delegated superfluid poistions for a specific delegator. */
-  SuperfluidDelegationsByDelegator(request: DeepPartial<SuperfluidDelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByDelegatorResponse>;
+  superfluidDelegationsByDelegator(request: DeepPartial<SuperfluidDelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByDelegatorResponse>;
 
   /** Returns all the undelegating superfluid poistions for a specific delegator. */
-  SuperfluidUndelegationsByDelegator(request: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidUndelegationsByDelegatorResponse>;
+  superfluidUndelegationsByDelegator(request: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>, metadata?: grpc.Metadata): Promise<SuperfluidUndelegationsByDelegatorResponse>;
 
   /**
    * Returns all the superfluid positions of a specific denom delegated to one
    * validator
    */
-  SuperfluidDelegationsByValidatorDenom(request: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByValidatorDenomResponse>;
+  superfluidDelegationsByValidatorDenom(request: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<SuperfluidDelegationsByValidatorDenomResponse>;
 
   /**
    * Returns the amount of a specific denom delegated to a specific validator
    * This is labeled an estimate, because the way it calculates the amount can
    * lead rounding errors from the true delegated amount
    */
-  EstimateSuperfluidDelegatedAmountByValidatorDenom(request: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>;
+  estimateSuperfluidDelegatedAmountByValidatorDenom(request: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, metadata?: grpc.Metadata): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>;
 
   /** Returns the specified delegations for a specific delegator */
-  TotalDelegationByDelegator(request: DeepPartial<QueryTotalDelegationByDelegatorRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByDelegatorResponse>;
+  totalDelegationByDelegator(request: DeepPartial<QueryTotalDelegationByDelegatorRequest>, metadata?: grpc.Metadata): Promise<QueryTotalDelegationByDelegatorResponse>;
 
   /** Returns a list of whitelisted pool ids to unpool. */
-  UnpoolWhitelist(request?: DeepPartial<QueryUnpoolWhitelistRequest>, metadata?: grpc.Metadata): Promise<QueryUnpoolWhitelistResponse>;
+  unpoolWhitelist(request?: DeepPartial<QueryUnpoolWhitelistRequest>, metadata?: grpc.Metadata): Promise<QueryUnpoolWhitelistResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -154,6 +156,419 @@ export class QueryClientImpl implements Query {
 
   unpoolWhitelist(request: DeepPartial<QueryUnpoolWhitelistRequest> = {}, metadata?: grpc.Metadata): Promise<QueryUnpoolWhitelistResponse> {
     return this.rpc.unary(QueryUnpoolWhitelistDesc, QueryUnpoolWhitelistRequest.fromPartial(request), metadata);
+  }
+
+}
+export const QueryDesc = {
+  serviceName: "osmosis.superfluid.Query"
+};
+export const QueryParamsDesc: UnaryMethodDefinitionish = {
+  methodName: "Params",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryParamsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryParamsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryAssetTypeDesc: UnaryMethodDefinitionish = {
+  methodName: "AssetType",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return AssetTypeRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...AssetTypeResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryAllAssetsDesc: UnaryMethodDefinitionish = {
+  methodName: "AllAssets",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return AllAssetsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...AllAssetsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryAssetMultiplierDesc: UnaryMethodDefinitionish = {
+  methodName: "AssetMultiplier",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return AssetMultiplierRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...AssetMultiplierResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryAllIntermediaryAccountsDesc: UnaryMethodDefinitionish = {
+  methodName: "AllIntermediaryAccounts",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return AllIntermediaryAccountsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...AllIntermediaryAccountsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryConnectedIntermediaryAccountDesc: UnaryMethodDefinitionish = {
+  methodName: "ConnectedIntermediaryAccount",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return ConnectedIntermediaryAccountRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...ConnectedIntermediaryAccountResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryTotalDelegationByValidatorForDenomDesc: UnaryMethodDefinitionish = {
+  methodName: "TotalDelegationByValidatorForDenom",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryTotalDelegationByValidatorForDenomRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryTotalDelegationByValidatorForDenomResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryTotalSuperfluidDelegationsDesc: UnaryMethodDefinitionish = {
+  methodName: "TotalSuperfluidDelegations",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return TotalSuperfluidDelegationsRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...TotalSuperfluidDelegationsResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QuerySuperfluidDelegationAmountDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidDelegationAmount",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return SuperfluidDelegationAmountRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...SuperfluidDelegationAmountResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QuerySuperfluidDelegationsByDelegatorDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidDelegationsByDelegator",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return SuperfluidDelegationsByDelegatorRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...SuperfluidDelegationsByDelegatorResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QuerySuperfluidUndelegationsByDelegatorDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidUndelegationsByDelegator",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return SuperfluidUndelegationsByDelegatorRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...SuperfluidUndelegationsByDelegatorResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QuerySuperfluidDelegationsByValidatorDenomDesc: UnaryMethodDefinitionish = {
+  methodName: "SuperfluidDelegationsByValidatorDenom",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return SuperfluidDelegationsByValidatorDenomRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...SuperfluidDelegationsByValidatorDenomResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryEstimateSuperfluidDelegatedAmountByValidatorDenomDesc: UnaryMethodDefinitionish = {
+  methodName: "EstimateSuperfluidDelegatedAmountByValidatorDenom",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryTotalDelegationByDelegatorDesc: UnaryMethodDefinitionish = {
+  methodName: "TotalDelegationByDelegator",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryTotalDelegationByDelegatorRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryTotalDelegationByDelegatorResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export const QueryUnpoolWhitelistDesc: UnaryMethodDefinitionish = {
+  methodName: "UnpoolWhitelist",
+  service: QueryDesc,
+  requestStream: false,
+  reponseStream: false,
+  requestType: ({
+    serializeBinary() {
+      return QueryUnpoolWhitelistRequest.encode(this).finish();
+    }
+
+  } as any),
+  responseType: ({
+    deserializeBinary(data: Uint8Array) {
+      return { ...QueryUnpoolWhitelistResponse.decode(data),
+
+        toObject() {
+          return this;
+        }
+
+      };
+    }
+
+  } as any)
+};
+export interface Rpc {
+  unary<T extends UnaryMethodDefinitionish>(methodDesc: T, request: any, metadata: grpc.Metadata | undefined);
+}
+export class GrpcWebImpl {
+  host: string;
+  options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  };
+
+  constructor(host: string, options: {
+    transport: grpc.TransportFactory;
+    debug: boolean;
+    metadata: grpc.Metadata;
+  }) {
+    this.host = host;
+    this.options = options;
+  }
+
+  unary(methodDesc: T, _request: any, metadata: grpc.metadata | undefined) {
+    const request = { ..._request,
+      ...methodDesc.requestType
+    };
+    const maybeCombinedMetadata = metadata && this.options.metadata ? new BrowserHeaders({ ...this.metadata?.options.headersMap,
+      ...metadata?.headersMap
+    }) : metadata || this.options.metadata;
+    return new Promise((resolve, reject) => {
+      grpc.unary(methodDesc, {
+        request,
+        host: this.host,
+        metadata: maybeCombinedMetadata,
+        transport: this.options.transport,
+        debug: this.options.debug,
+        onEnd: function (response) {
+          if (response.status === grpc.Code.OK) {
+            resolve(response.message);
+          } else {
+            const err = (new Error(response.statusMessage) as any);
+            err.code = response.status;
+            err.code = response.metadata;
+            err.response = response.trailers;
+            reject(err);
+          }
+        }
+      });
+    });
   }
 
 }

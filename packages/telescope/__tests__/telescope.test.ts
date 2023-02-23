@@ -1,14 +1,11 @@
 import { TelescopeBuilder } from '../src/builder';
 import { TelescopeOptions } from '@osmonauts/types';
-import {
-  bundleBaseRegistries,
-  bundleRegistries,
-  parseContextsForRegistry
-} from '../src/bundle';
+import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
-import { kebab } from 'case';
+import { kebab } from "case";
 import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
+import { TelescopeParseContext } from '../src/build';
 
 const outPath = __dirname + '/../../../__fixtures__/output1';
 const store = getTestProtoStore();
@@ -16,19 +13,28 @@ const contractsDir = __dirname + '/../../../__fixtures__/wasm/';
 store.traverseAll();
 
 const options: TelescopeOptions = {
+
   removeUnusedImports: false,
   classesUseArrowFunctions: false,
 
   tsDisable: {
     disableAll: false,
-    patterns: ['osmosis/**/*amino.ts'],
-    files: ['akash/deployment/v1beta1/deployment.ts']
+    patterns: [
+      'osmosis/**/*amino.ts',
+    ],
+    files: [
+      'akash/deployment/v1beta1/deployment.ts'
+    ]
   },
 
   eslintDisable: {
     disableAll: false,
-    patterns: ['akash/**/*amino.ts'],
-    files: ['akash/deployment/v1beta1/deployment.ts']
+    patterns: [
+      'akash/**/*amino.ts',
+    ],
+    files: [
+      'akash/deployment/v1beta1/deployment.ts'
+    ]
   },
 
   interfaces: {
@@ -59,7 +65,9 @@ const options: TelescopeOptions = {
         // 'cosmos.gov.v1',
         // 'cosmos.group.v1'
       ],
-      protos: ['cosmos/authz/v1beta1/event.proto']
+      protos: [
+        'cosmos/authz/v1beta1/event.proto'
+      ]
     },
     typingsFormat: {
       useDeepPartial: true,
@@ -119,7 +127,10 @@ const options: TelescopeOptions = {
   aggregatedLCD: {
     dir: 'osmosis',
     filename: 'agg-lcd.ts',
-    packages: ['cosmos.bank.v1beta1', 'osmosis.gamm.v1beta1'],
+    packages: [
+      'cosmos.bank.v1beta1',
+      'osmosis.gamm.v1beta1'
+    ],
     addToBundle: true
   },
 
@@ -160,7 +171,10 @@ const options: TelescopeOptions = {
       {
         dir: 'cosmos',
         filename: 'cosmos-rpc-client.ts',
-        packages: ['cosmos.bank.v1beta1', 'cosmos.gov.v1beta1'],
+        packages: [
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1'
+        ],
         addToBundle: true,
         methodNameQuery: 'createCosmicRPCQueryClient',
         methodNameTx: 'createCosmicRPCTxClient'
@@ -188,7 +202,7 @@ const options: TelescopeOptions = {
   },
 
   reactQuery: {
-    enabled: true
+    enabled: true,
     // include: {
     //   patterns: [
     //     'osmosis/**/gamm/**/query.proto'
@@ -218,7 +232,8 @@ const options: TelescopeOptions = {
 
       switch (pkg) {
         case 'akash': {
-          const n = elements.filter((a) => !a.match(/v1beta1/));
+          const n = elements
+            .filter(a => !a.match(/v1beta1/));
           n[n.length - 1] = kebab(n[n.length - 1]);
           n[n.length - 1] = n[n.length - 1].replace(/^msg-/, 'testonly-');
           return n.join('/');
@@ -267,24 +282,31 @@ describe('bundle package registries and root file names', () => {
   it('bundleRegistries', async () => {
     await telescope.build();
     const registries = bundleRegistries(telescope);
-    const result = registries.map((reg) => ({
+    const result = registries.map(reg => ({
       ['package']: reg.package,
-      contexts: parseContextsForRegistry(reg.contexts)
-    }));
+      contexts: parseContextsForRegistry(reg.contexts as TelescopeParseContext[])
+    }))
     // console.log(JSON.stringify(result, null, 2));
   });
 
   it('bundleBaseRegistries', () => {
     const registries = bundleBaseRegistries(telescope);
-    const result = registries.map((reg) => ({
+    const result = registries.map(reg => ({
       base: reg.base,
-      pkgs: reg.pkgs.map((obj) => {
-        return {
-          ['package']: obj.package,
-          contexts: parseContextsForRegistry(obj.contexts)
-        };
-      })
+      pkgs: reg.pkgs.map(
+        obj => {
+          return {
+            ['package']: obj.package,
+            contexts: parseContextsForRegistry(obj.contexts as TelescopeParseContext[])
+          }
+        }
+      )
     }));
     // console.log(JSON.stringify(result, null, 2));
   });
-});
+})
+
+
+
+
+

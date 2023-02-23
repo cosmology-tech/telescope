@@ -9,9 +9,14 @@ import {
     createRpcQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
+    //grpc-web:
     createGrpcWebQueryClass,
     createGrpcWebQueryInterface,
-    createMobxQueryStores
+    createMobxQueryStores,
+    GetDesc,
+    getMethodDesc,
+    grpcWebRpcInterface,
+    getGrpcWebImpl,
 } from '@osmonauts/ast';
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
@@ -73,64 +78,80 @@ export const plugin = (
         switch (c.proto.pluginValue('rpcClients.type')) {
             case 'grpc-gateway':
                 allowedRpcServices.forEach(svcKey => {
-                    if (proto[svcKey]){
+                    if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGRPCGatewayQueryClass(ctx.generic, svc));
                     }
                 })
-            break;
+                break;
             case 'grpc-web':
                 allowedRpcServices.forEach(svcKey => {
-                    if (proto[svcKey]){
+                    if (proto[svcKey]) {
                         const svc: ProtoService = proto[svcKey];
                         asts.push(createGrpcWebQueryInterface(ctx.generic, svc));
                         asts.push(createGrpcWebQueryClass(ctx.generic, svc));
+                        asts.push(GetDesc(ctx.generic, proto[svcKey]))
+                        const Desces = getMethodDesc(ctx.generic, proto[svcKey]);
+                        for (let i = 0; i < Desces.length; i++) {
+                            const element = Desces[i];
+                            asts.push(element);
+                        }
+                        asts.push(grpcWebRpcInterface())
+                        asts.push(getGrpcWebImpl(ctx.generic))
                     }
                 })
-            break;
+                break;
             case 'tendermint':
-                default:
-                    allowedRpcServices.forEach(svcKey => {
-                        if (proto[svcKey]) {
+            default:
+                allowedRpcServices.forEach(svcKey => {
+                    if (proto[svcKey]) {
 
-                            const svc: ProtoService = proto[svcKey];
+                        const svc: ProtoService = proto[svcKey];
 
-                            asts.push(createRpcClientInterface(ctx.generic, svc));
-                            asts.push(createRpcClientClass(ctx.generic, svc));
-                            if (c.proto.pluginValue('rpcClients.extensions')) {
-                                asts.push(createRpcQueryExtension(ctx.generic, svc));
-                            }
+                        asts.push(createRpcClientInterface(ctx.generic, svc));
+                        asts.push(createRpcClientClass(ctx.generic, svc));
+                        if (c.proto.pluginValue('rpcClients.extensions')) {
+                            asts.push(createRpcQueryExtension(ctx.generic, svc));
+                        }
 
-                            // see if current file has been reactQuery enabled and included
-                            const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
-                                c.ref,
-                                c.proto.pluginValue('reactQuery.include')
-                            )
+                        // see if current file has been reactQuery enabled and included
+                        const includeReactQueryHooks = c.proto.pluginValue('reactQuery.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('reactQuery.include')
+                        )
 
-                            // react query
-                            // generate react query parts if included.
-                            // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
-                            // export interface UseAuditorAttributesQuery<TData> ...
-                            // const _queryClients: WeakMap ...
-                            // const getQueryService = ...
-                            // export const createRpcQueryHooks = ...
-                            // TODO use the imports and make separate files
-                            if (includeReactQueryHooks) {
-                                [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
-                                [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
-                                asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
-                            }
+                        // react query
+                        // generate react query parts if included.
+                        // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
+                        // export interface UseAuditorAttributesQuery<TData> ...
+                        // const _queryClients: WeakMap ...
+                        // const getQueryService = ...
+                        // export const createRpcQueryHooks = ...
+                        // TODO use the imports and make separate files
+                        if (includeReactQueryHooks) {
+                            [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+                            [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                            asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+                        }
 
+                        // see if current file has been pinia enabled and included
+                        const includePinia = c.proto.pluginValue('pinia.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('pinia.include')
+                        )
+
+                        if (includePinia) {
                             const mobxQueryStoreAst = createMobxQueryStores(
-                              ctx.generic,
-                              proto[svcKey]
+                                ctx.generic,
+                                proto[svcKey]
                             );
 
                             if (mobxQueryStoreAst) {
-                              asts.push(mobxQueryStoreAst);
+                                asts.push(mobxQueryStoreAst);
                             }
                         }
-                    });
+                    }
+                });
         }
 
         if (!asts.length) {
