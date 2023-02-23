@@ -29,13 +29,13 @@ export const plugin = (
   write(builder, 'helpers.ts', internal);
 
   // should be exported
-  if (builder.options.includeExternalHelpers || builder.options.reactQuery.enabled) {
+  if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
     // also react-query needs these...
     builder.files.push('extern.ts');
     write(builder, 'extern.ts', external);
   }
 
-  if (builder.options.reactQuery.enabled) {
+  if (builder.options.reactQuery?.enabled) {
     builder.files.push('react-query.ts');
     write(builder, 'react-query.ts', reactQuery);
   }
@@ -50,12 +50,12 @@ export const plugin = (
     write(builder, 'pinia.store.ts', pinia);
   }
 
-  if (builder.options.rpcClients.type === 'grpc-gateway') {
+  if (builder.options.rpcClients?.type === 'grpc-gateway') {
     builder.files.push('grpc-gateway.ts');
     write(builder, 'grpc-gateway.ts', grpcGateway);
   }
 
-  if (builder.options.rpcClients.type === 'grpc-web') {
+  if (builder.options.rpcClients?.type === 'grpc-web') {
     builder.files.push('grpc-web.ts');
     write(builder, 'grpc-web.ts', grpcWeb);
   }
