@@ -21,7 +21,7 @@ import {
 import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { ProtoService } from '@osmonauts/types';
+import { ProtoRoot, ProtoService } from '@osmonauts/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -43,10 +43,10 @@ export const plugin = (
         // get mutations, services
         parse(ctx);
 
-        const proto = getNestedProto(c.ref.traversed);
+        const proto = getNestedProto(c.ref.traversed as ProtoRoot);
 
         //// Anything except Msg Service OK...
-        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const allowedRpcServices = builder.options.rpcClients?.enabledServices?.filter(a => a !== 'Msg') ?? [];
         const found = allowedRpcServices.some(svc => {
             return proto?.[svc] &&
                 proto[svc]?.type === 'Service'
