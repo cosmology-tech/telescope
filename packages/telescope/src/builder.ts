@@ -18,6 +18,7 @@ import { plugin as createRPCMsgClientsScoped } from './generators/create-rpc-msg
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
+import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
@@ -30,10 +31,16 @@ const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
   options = deepmerge(defaultTelescopeOptions, options ?? {});
   // strip off leading slashes
-  options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
-  options.eslintDisable.files = options.eslintDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
+  options.tsDisable.files = options.tsDisable.files.map((file) =>
+    file.startsWith('/') ? file : file.replace(/^\//, '')
+  );
+  options.eslintDisable.files = options.eslintDisable.files.map((file) =>
+    file.startsWith('/') ? file : file.replace(/^\//, '')
+  );
   // uniq bc of deepmerge
-  options.rpcClients.enabledServices = [...new Set([...options.rpcClients.enabledServices])];
+  options.rpcClients.enabledServices = [
+    ...new Set([...options.rpcClients.enabledServices])
+  ];
   return options;
 };
 
@@ -51,7 +58,12 @@ export class TelescopeBuilder {
   readonly rpcMsgClients: BundlerFile[] = [];
   readonly registries: BundlerFile[] = [];
 
-  constructor({ protoDirs, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
+  constructor({
+    protoDirs,
+    outPath,
+    store,
+    options
+  }: TelescopeInput & { store?: ProtoStore }) {
     this.protoDirs = protoDirs;
     this.outPath = resolve(outPath);
     this.options = sanitizeOptions(options);
@@ -60,9 +72,7 @@ export class TelescopeBuilder {
   }
 
   context(ref) {
-    const ctx = new TelescopeParseContext(
-      ref, this.store, this.options
-    );
+    const ctx = new TelescopeParseContext(ref, this.store, this.options);
     this.contexts.push(ctx);
     return ctx;
   }
@@ -89,52 +99,49 @@ export class TelescopeBuilder {
 
   async build() {
     // [x] get bundle of all packages
-    const bundles = bundlePackages(this.store)
-      .map(bundle => {
-        // store bundleFile in filesToInclude
-        const bundler = new Bundler(this, bundle);
 
-        // [x] write out all TS files for package
-        createTypes(this, bundler);
+    const bundles = bundlePackages(this.store).map((bundle) => {
+      // store bundleFile in filesToInclude
+      const bundler = new Bundler(this, bundle);
 
-        // [x] write out one amino helper for all contexts w/mutations
-        createAminoConverters(this, bundler);
+      // [x] write out all TS files for package
+      createTypes(this, bundler);
 
-        // [x] write out one registry helper for all contexts w/mutations
-        createRegistries(this, bundler);
+      // [x] write out one amino helper for all contexts w/mutations
+      createAminoConverters(this, bundler);
 
-        // [x] write out one registry helper for all contexts w/mutations
-        createLCDClients(this, bundler);
+      // [x] write out one registry helper for all contexts w/mutations
+      createRegistries(this, bundler);
 
-        createRPCQueryClients(this, bundler);
-        createRPCMsgClients(this, bundler);
+      // [x] write out one registry helper for all contexts w/mutations
+      createLCDClients(this, bundler);
 
-        // [x] write out one client for each base package, referencing the last two steps
-        createStargateClients(this, bundler);
+      createRPCQueryClients(this, bundler);
+      createRPCMsgClients(this, bundler);
+      createPiniaStore(this, bundler)
 
-        createPiniaStore(this, bundler);
+      // [x] write out one client for each base package, referencing the last two steps
+      createStargateClients(this, bundler);
 
-        return bundler;
-      });
+      return bundler;
+    });
 
     // post run plugins
-    bundles
-      .forEach(bundler => {
-        createLCDClientsScoped(this, bundler);
-        createRPCQueryClientsScoped(this, bundler);
-        createRPCMsgClientsScoped(this, bundler);
+    bundles.forEach((bundler) => {
+      createLCDClientsScoped(this, bundler);
+      createRPCQueryClientsScoped(this, bundler);
+      createRPCMsgClientsScoped(this, bundler);
 
-        createBundle(this, bundler);
-      });
-
-    createPiniaStoreBundle(this)
+      createBundle(this, bundler);
+    });
 
     createReactQueryBundle(this);
+    createMobxBundle(this);
     createAggregatedLCDClient(this);
     await createCosmWasmBundle(this);
 
     createHelpers(this);
-
+    createPiniaStoreBundle(this)
 
     // finally, write one index file with all files, exported
     createIndex(this);
