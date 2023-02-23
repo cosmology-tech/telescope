@@ -134,13 +134,21 @@ export const plugin = (
                             asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
                         }
 
-                        const mobxQueryStoreAst = createMobxQueryStores(
-                            ctx.generic,
-                            proto[svcKey]
-                        );
+                        // see if current file has been pinia enabled and included
+                        const includePinia = c.proto.pluginValue('pinia.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('pinia.include')
+                        )
 
-                        if (mobxQueryStoreAst) {
-                            asts.push(mobxQueryStoreAst);
+                        if (includePinia) {
+                            const mobxQueryStoreAst = createMobxQueryStores(
+                                ctx.generic,
+                                proto[svcKey]
+                            );
+
+                            if (mobxQueryStoreAst) {
+                                asts.push(mobxQueryStoreAst);
+                            }
                         }
                     }
                 });

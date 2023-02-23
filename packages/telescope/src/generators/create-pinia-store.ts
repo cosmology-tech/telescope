@@ -34,10 +34,17 @@ export const plugin = (
     if (queryContexts.length > 0) {
 
       // [x] write out one registry helper for all contexts w/mutations
-      const lcdClients = queryContexts.map(c => {
+      queryContexts.forEach(c => {
 
         const enabled = c.proto.pluginValue('lcdClients.enabled');
         if (!enabled) return;
+
+        const includePinia = c.proto.pluginValue('pinia.enabled') && isRefIncluded(
+          c.ref,
+          c.proto.pluginValue('pinia.include')
+        );
+        if (!includePinia) return;
+
 
         if (c.proto.isExcluded()) return;
 

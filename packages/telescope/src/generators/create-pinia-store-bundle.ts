@@ -13,6 +13,11 @@ export const plugin = (
   builder: TelescopeBuilder
 ) => {
 
+  // if not enabled, exit
+  if (!builder.options?.pinia?.enabled) {
+    return;
+  }
+
   // get mapping of packages and rpc query filenames.
   const obj = {};
   builder.rpcQueryClients.map((queryClient) => {

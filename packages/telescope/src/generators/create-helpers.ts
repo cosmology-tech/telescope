@@ -45,7 +45,7 @@ export const plugin = (
     write(builder, 'mobx.ts', mobx);
   }
 
-  if (true) {
+  if (builder.options.pinia?.enabled) {
     builder.files.push('pinia.store.ts');
     write(builder, 'pinia.store.ts', pinia);
   }

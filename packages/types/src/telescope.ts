@@ -165,6 +165,14 @@ interface TelescopeOpts {
             protos?: string[];
         }
     };
+    pinia?: {
+        enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        }
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
@@ -289,12 +297,21 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     mobx: {
-      enabled: false,
-      include: {
-          patterns: [],
-          packages: [],
-          protos: []
-      }
+        enabled: false,
+        include: {
+            patterns: [],
+            packages: [],
+            protos: []
+        }
+    },
+
+    pinia: {
+        enabled: false,
+        include: {
+            patterns: [],
+            packages: [],
+            protos: []
+        }
     },
 
     // packages
