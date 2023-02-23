@@ -133,6 +133,14 @@ export declare const defaultTelescopeOptions: {
             protos?: string[];
         };
     };
+    pinia: {
+        enabled: boolean;
+        include?: {
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
+    };
     packages: Record<string, any>;
 } & {
     prototypes: {
