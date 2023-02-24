@@ -3,7 +3,7 @@ import { Bundler } from '../bundler';
 import { TelescopeBuilder } from '../builder';
 import { buildAllImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { parse } from '../parse';
-import { getNestedProto } from '@osmonauts/proto-parser';
+import { getNestedProto, isRefIncluded } from '@osmonauts/proto-parser';
 
 import { createPiniaStore } from '@osmonauts/ast';
 
