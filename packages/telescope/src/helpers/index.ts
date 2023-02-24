@@ -4,4 +4,4 @@ export * from './react-query';
 export * from './mobx';
 export * from './grpc-gateway';
 export * from './grpc-web';
-export * from './pinia'
+export * from './pinia-endpoint'

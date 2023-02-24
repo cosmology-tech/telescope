@@ -18,7 +18,7 @@ function buildState(methods: Method[]) {
     t.tsAsExpression(
       t.identifier("{}"),
       t.tsUnionType([
-        t.tsTypeReference(t.identifier(x.method.responseType)),
+        t.tsTypeReference(t.identifier(`${x.method.responseType}SDKType`)),
       ]),
     )))
   return t.arrowFunctionExpression([], t.blockStatement([
@@ -30,7 +30,7 @@ function buildAction(methods: Method[]) {
   const fields = methods.map(x => t.objectMethod(
     'method',
     t.identifier(`fetch${firstUpper(x.name)}`),
-    [t.identifier(`param : ${x.method.requestType}`)],
+    [t.identifier(`param : ${x.method.requestType}SDKType`)],
     t.blockStatement([
       t.expressionStatement(
         t.assignmentExpression(

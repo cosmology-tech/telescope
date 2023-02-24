@@ -12,7 +12,7 @@ export const plugin = (
   bundler: Bundler
 ) => {
 
-  if (!builder.options.lcdClients?.enabled) {
+  if (!builder.options.pinia?.enabled) {
     return;
   }
 
