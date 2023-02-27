@@ -17,7 +17,7 @@ Find a folder that makes sense for the new generator. Only if you really need to
 ├── utils
 ```
 
-| folder    | purpose                                                                        | 
+| folder    | purpose                                                                        |
 | --------- | -----------------------------------------------------------------------------  |
 | bundle    | for creating bundled object that map to go exports, e.g. `cosmos.bank.v1beta1` |
 | clients   | for building LCD, RPC, gRPC or Stargate clients                                |
@@ -43,11 +43,13 @@ export const createSomeNewRpcClient = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
+    context.addUtil("SuperInterface");
+
     return t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
             t.identifier('MyAwesomeInterface'),
             null,
-            [],
+            [t.tsExpressionWithTypeArguments(t.identifier('SuperInterface'))],
             t.tsInterfaceBody([
                 // ... more code ...
             ])
@@ -55,6 +57,8 @@ export const createSomeNewRpcClient = (
     );
 };
 ```
+
+If we need to import from other packages, context.addUtil is recommended. For detail about this, please see: [Common helpers or utils](https://github.com/osmosis-labs/telescope/blob/main/docs/helpers.md)
 
 ## 2 add it to the index
 
@@ -93,6 +97,166 @@ it('GRPC web Msg Client', () => {
     // once you finish, use `expectCode` to generate a snapshot
     expectCode(createSomeNewRpcClient(context, service))
 });
+```
+
+Note: Run "yarn buidl" in ast package folder to keep it updated to other packages, by doing this, code in telescope package can invoke newly built ast functions. More detail on this, please see our docs on [Packages and workspace](https://github.com/osmosis-labs/telescope/blob/main/docs/packages.md).
+```
+cd packages/ast
+yarn buidl
+```
+## 4 options
+
+add option for the new plugin in packages/types/src/telescope.ts. In this example, we add an option for the new rpc client plugin.
+```js
+interface TelescopeOpts {
+    // ... more options ...
+    newRpcClient?: {
+        enabled: boolean;
+        // the scope of packages to control the logic of the plugin.
+        include?: {
+            // patterns including wildcards. eg: 'osmosis/**/gamm/**/query.proto'
+            patterns?: string[];
+            // certian package paths. eg: 'cosmos.bank.v1beta1'
+            packages?: string[];
+            // certain proto file. eg: 'akash/cert/v1beta2/query.proto'
+            protos?: string[];
+        }
+    };
+```
+
+Note: After editing the option in types package, don't forget to run "yarn buidl" inside the types package keeping other packages up-to-date with the newest changes of the option. More detail on this, please see our docs on [Packages and workspace](https://github.com/osmosis-labs/telescope/blob/main/docs/packages.md).
+```
+cd packages/types
+yarn buidl
+```
+
+## 5 generators
+
+create a generator for the new plugin in packages/telescope/src/generators
+
+```
+├── create-aggregated-lcd-client.ts
+├── ...other generators
+├── create-helpers.ts
+├── create-index.ts
+```
+
+
+| file    | purpose                                                                        |
+| --------- | -----------------------------------------------------------------------------  |
+| create-helpers.ts    | Create common helper files as needed. Edit this if a new common helper's added. |
+| create-index.ts   | automatically include all generated files into index.ts.                                |
+
+
+A generator is a function with at least one parameter called builder, which carries the context and files to generate. And bundler as the second parameter if needed, which carries the context to generate bundle files.
+
+In this example, we create a simple generator
+
+```js
+export const plugin = (
+    builder: TelescopeBuilder,
+    bundler: Bundler
+) => {
+    // see if the plugin's enabled.
+    if (!builder.options.reactQuery.enabled) {
+        return;
+    }
+
+    // define a name of the file.
+    const localname = 'hooks.ts';
+
+    ...code for creating proto ref.
+
+    // create context or get context from bundler.
+    const pCtx = new TelescopeParseContext(
+        ref,
+        builder.store,
+        builder.options
+    );
+
+    // generate code using ast functions.
+    const ast = createScopedRpcHookFactory(
+        pCtx.proto,
+        obj,
+        'createRpcQueryHooks'
+    )
+
+    // generate imports added by context.addUtil
+    const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
+    const importStmts = getImportStatements(
+        localname,
+        imports
+    );
+
+    // construct the AST
+    const prog = []
+        .concat(importStmts)
+        .concat(ast);
+
+    // write the file.
+    const filename = join(builder.outPath, localname);
+    builder.files.push(localname);
+
+    writeAstToFile(builder.outPath, builder.options, prog, filename);
+
+};
+```
+
+## 6 add generator to builder
+
+add newly created generator to packages/telescope/src/builder.ts
+
+```js
+export class TelescopeBuilder {
+  async build() {
+
+    ... invoking generators
+
+    // find a proper place for new generators.
+
+    // create all common helper files.
+    createHelpers(this);
+
+    // finally, write one index file with all files, exported
+    createIndex(this);
+  }
+}
+```
+
+## 7 add a test and generate fixtures
+
+in this example, we generate fixtures to verify the code has been generated as expected.
+
+Please make sure don't output to __fixtures__/output1 or output2, those're production code that shouldn't be broken. Any test code should be generated under folders under v-next folder.
+
+```js
+const outPath = __dirname + '/../../../__fixtures__/v-next/outputv3';
+
+// setup options with your new plugin enabled
+const options: TelescopeOptions = {
+    ...options
+};
+
+const input: TelescopeInput = {
+    outPath,
+    // input path with proto files
+    protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
+    options
+};
+
+const telescope = new TelescopeBuilder(input);
+
+describe('bundle package registries and root file names', () => {
+    it('bundleRegistries', async () => {
+        await telescope.build();
+        const registries = bundleRegistries(telescope);
+        const result = registries.map(reg => ({
+            ['package']: reg.package,
+            contexts: parseContextsForRegistry(reg.contexts as TelescopeParseContext[])
+        }))
+    });
+
+})
 ```
 
 [< back](https://github.com/osmosis-labs/telescope/blob/main/docs/README.md)

@@ -66,7 +66,7 @@ export const commonBundlePlugin = (
   // generate code for createRpcQueryHooks and imports of related packages.
   const ast = astFn(pCtx.proto, packageMappings);
 
-  // generate imports added by context.addUtils
+  // generate imports added by context.addUtil
   const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
   const importStmts = getImportStatements(localname, imports);
 
