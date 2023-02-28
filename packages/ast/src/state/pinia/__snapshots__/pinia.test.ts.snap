@@ -4,13 +4,13 @@ exports[`builds stores. 1`] = `
 "export const usePiniaStore = defineStore('cosmos/auth/v1beta1/query.proto', {
   state: () => {
     return {
-      accounts: ({} as QueryAccountsResponse),
-      account: ({} as QueryAccountResponse),
-      params: ({} as QueryParamsResponse),
-      moduleAccounts: ({} as QueryModuleAccountsResponse),
-      bech32Prefix: ({} as Bech32PrefixResponse),
-      addressBytesToString: ({} as AddressBytesToStringResponse),
-      addressStringToBytes: ({} as AddressStringToBytesResponse)
+      accounts: ({} as QueryAccountsResponseSDKType),
+      account: ({} as QueryAccountResponseSDKType),
+      params: ({} as QueryParamsResponseSDKType),
+      moduleAccounts: ({} as QueryModuleAccountsResponseSDKType),
+      bech32Prefix: ({} as Bech32PrefixResponseSDKType),
+      addressBytesToString: ({} as AddressBytesToStringResponseSDKType),
+      addressStringToBytes: ({} as AddressStringToBytesResponseSDKType)
     };
   },
   getters: {
@@ -21,37 +21,37 @@ exports[`builds stores. 1`] = `
 
   },
   actions: {
-    async fetchAccounts(param : QueryAccountsRequest) {
+    async fetchAccounts(param : QueryAccountsRequestSDKType) {
       this.accounts = await this.lcdClient.accounts(param);
       return this.accounts;
     },
 
-    async fetchAccount(param : QueryAccountRequest) {
+    async fetchAccount(param : QueryAccountRequestSDKType) {
       this.account = await this.lcdClient.account(param);
       return this.account;
     },
 
-    async fetchParams(param : QueryParamsRequest) {
+    async fetchParams(param : QueryParamsRequestSDKType) {
       this.params = await this.lcdClient.params(param);
       return this.params;
     },
 
-    async fetchModuleAccounts(param : QueryModuleAccountsRequest) {
+    async fetchModuleAccounts(param : QueryModuleAccountsRequestSDKType) {
       this.moduleAccounts = await this.lcdClient.moduleAccounts(param);
       return this.moduleAccounts;
     },
 
-    async fetchBech32Prefix(param : Bech32PrefixRequest) {
+    async fetchBech32Prefix(param : Bech32PrefixRequestSDKType) {
       this.bech32Prefix = await this.lcdClient.bech32Prefix(param);
       return this.bech32Prefix;
     },
 
-    async fetchAddressBytesToString(param : AddressBytesToStringRequest) {
+    async fetchAddressBytesToString(param : AddressBytesToStringRequestSDKType) {
       this.addressBytesToString = await this.lcdClient.addressBytesToString(param);
       return this.addressBytesToString;
     },
 
-    async fetchAddressStringToBytes(param : AddressStringToBytesRequest) {
+    async fetchAddressStringToBytes(param : AddressStringToBytesRequestSDKType) {
       this.addressStringToBytes = await this.lcdClient.addressStringToBytes(param);
       return this.addressStringToBytes;
     }
