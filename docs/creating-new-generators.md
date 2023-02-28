@@ -17,7 +17,7 @@ Find a folder that makes sense for the new generator. Only if you really need to
 ├── utils
 ```
 
-| folder    | purpose                                                                        | 
+| folder    | purpose                                                                        |
 | --------- | -----------------------------------------------------------------------------  |
 | bundle    | for creating bundled object that map to go exports, e.g. `cosmos.bank.v1beta1` |
 | clients   | for building LCD, RPC, gRPC or Stargate clients                                |
