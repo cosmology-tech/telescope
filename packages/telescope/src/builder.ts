@@ -57,6 +57,7 @@ export class TelescopeBuilder {
   readonly rpcQueryClients: BundlerFile[] = [];
   readonly rpcMsgClients: BundlerFile[] = [];
   readonly registries: BundlerFile[] = [];
+  readonly stateManagers: Record<string, BundlerFile[]> = {};
 
   constructor({
     protoDirs,
@@ -75,6 +76,16 @@ export class TelescopeBuilder {
     const ctx = new TelescopeParseContext(ref, this.store, this.options);
     this.contexts.push(ctx);
     return ctx;
+  }
+
+  addStateManagers(type: string, files: BundlerFile[]) {
+    const state = this.stateManagers[type];
+
+    if(!state){
+      this.stateManagers[type] = [];
+    }
+
+    [].push.apply(this.stateManagers[type], files);
   }
 
   addRPCQueryClients(files: BundlerFile[]) {

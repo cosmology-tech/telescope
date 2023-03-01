@@ -19,6 +19,7 @@ export class Bundler {
     readonly rpcQueryClients: BundlerFile[] = [];
     readonly rpcMsgClients: BundlerFile[] = [];
     readonly registries: BundlerFile[] = [];
+    readonly stateManagers: Record<string, BundlerFile[]> = {};
 
     constructor(
         builder: TelescopeBuilder,
@@ -29,6 +30,18 @@ export class Bundler {
         this.files = [
             bundle.bundleFile
         ]
+    }
+
+    addStateManagers(type: string, files: BundlerFile[]) {
+      const state = this.stateManagers[type];
+
+      if(!state){
+        this.stateManagers[type] = [];
+      }
+
+      [].push.apply(this.stateManagers[type], files);
+
+      this.builder.addStateManagers(type, files);
     }
 
     addLCDClients(files: BundlerFile[]) {

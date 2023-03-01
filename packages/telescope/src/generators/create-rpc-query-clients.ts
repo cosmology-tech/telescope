@@ -27,6 +27,8 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
+    const reactQueryBundlerFiles = [];
+    const mobxBundlerFiles = [];
 
     const clients = bundler.contexts.map(c => {
 
@@ -72,6 +74,12 @@ export const plugin = (
 
         const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
         const filename = bundler.getFilename(localname);
+
+        const bundlerFile = {
+          package: c.ref.proto.package,
+          localname,
+          filename
+        };
 
         const asts = [];
 
@@ -132,23 +140,19 @@ export const plugin = (
                             [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
                             [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                             asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
+
+                            reactQueryBundlerFiles.push(bundlerFile);
                         }
 
-                        // see if current file has been pinia enabled and included
-                        const includePinia = c.proto.pluginValue('pinia.enabled') && isRefIncluded(
-                            c.ref,
-                            c.proto.pluginValue('pinia.include')
-                        )
+                        // whether mobx plugin is enabled has been dealt with inside createMobxQueryStores
+                        const mobxQueryStoreAst = createMobxQueryStores(
+                            ctx.generic,
+                            proto[svcKey]
+                        );
 
-                        if (includePinia) {
-                            const mobxQueryStoreAst = createMobxQueryStores(
-                                ctx.generic,
-                                proto[svcKey]
-                            );
-
-                            if (mobxQueryStoreAst) {
-                                asts.push(mobxQueryStoreAst);
-                            }
+                        if (mobxQueryStoreAst) {
+                            asts.push(mobxQueryStoreAst);
+                            mobxBundlerFiles.push(bundlerFile);
                         }
                     }
                 });
@@ -173,13 +177,11 @@ export const plugin = (
         bundler.writeAst(prog, filename);
         bundler.addToBundle(c, localname);
 
-        return {
-            package: c.ref.proto.package,
-            localname,
-            filename
-        };
+        return bundlerFile;
 
     }).filter(Boolean);
 
     bundler.addRPCQueryClients(clients);
+    bundler.addStateManagers("reactQuery", reactQueryBundlerFiles);
+    bundler.addStateManagers("mobx", mobxBundlerFiles);
 };
