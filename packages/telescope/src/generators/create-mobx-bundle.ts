@@ -13,7 +13,13 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   // get mapping of packages and rpc query filenames.
   const obj = {};
-  builder.rpcQueryClients.map((queryClient) => {
+  const bundlerFiles = builder.stateManagers["mobx"];
+
+  if(!bundlerFiles || !bundlerFiles.length){
+    return;
+  }
+
+  bundlerFiles.map((queryClient) => {
     const path = `./${queryClient.localname.replace(/\.ts$/, '')}`;
     dotty.put(obj, queryClient.package, path);
   });
