@@ -65,7 +65,7 @@ export const plugin = (
         'createRpcQueryHooks'
     )
 
-    // generate imports added by context.addUtils
+    // generate imports added by context.addUtil
     const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
     const importStmts = getImportStatements(
         localname,
