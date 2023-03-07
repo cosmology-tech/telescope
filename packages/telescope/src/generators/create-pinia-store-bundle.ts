@@ -9,10 +9,7 @@ import { commonBundlePlugin, fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
 import { createPiniaStoreFactory } from '@osmonauts/ast';
 
-export const plugin = (
-  builder: TelescopeBuilder
-) => {
-
+export const plugin = (builder: TelescopeBuilder) => {
   // if not enabled, exit
   if (!builder.options?.pinia?.enabled) {
     return;
@@ -20,8 +17,14 @@ export const plugin = (
 
   // get mapping of packages and rpc query filenames.
   const obj = {};
-  builder.rpcQueryClients.map((queryClient) => {
-    const path = `./${queryClient.localname.replace(/rpc.(Query|Service).ts$/, 'pinia.store')}`;
+  const bundlerFiles = builder.stateManagers['pinia'];
+
+  if (!bundlerFiles || !bundlerFiles.length) {
+    return;
+  }
+
+  bundlerFiles.map((queryClient) => {
+    const path = `./${queryClient.localname.replace(/\.ts$/, '')}`;
     dotty.put(obj, queryClient.package, path);
   });
 
@@ -29,5 +32,4 @@ export const plugin = (
     // generate code for createRpcQueryHooks and imports of related packages.
     return createPiniaStoreFactory(context, obj);
   });
-
-}
+};
