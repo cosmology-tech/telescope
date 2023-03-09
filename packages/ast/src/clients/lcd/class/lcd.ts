@@ -256,11 +256,16 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
 
     ast.expressions = ast.expressions.map((identifier: t.Identifier) => {
         const name = info.casing?.[identifier.name] ? info.casing[identifier.name] : identifier.name;
+        if (!name) {
+            console.warn(route);
+            console.warn('route type not yet supported');
+            return;
+        }
         return t.memberExpression(
             t.identifier('params'),
             t.identifier(name)
         )
-    });
+    }).filter(Boolean)
     return ast;
 };
 
