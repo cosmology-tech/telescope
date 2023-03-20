@@ -159,7 +159,7 @@ export const MsgCreateGauge = {
       owner: isSet(object.owner) ? String(object.owner) : "",
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
       numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO
     };
   },
@@ -198,7 +198,7 @@ export const MsgCreateGauge = {
       owner: object?.owner,
       distributeTo: object.distribute_to ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       numEpochsPaidOver: object?.num_epochs_paid_over
     };
   },
@@ -215,7 +215,7 @@ export const MsgCreateGauge = {
       obj.coins = [];
     }
 
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     obj.num_epochs_paid_over = message.numEpochsPaidOver;
     return obj;
   }

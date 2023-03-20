@@ -3,7 +3,7 @@
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Long } from "../../../helpers";
+import { isSet, fromTimestamp, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */
@@ -1566,8 +1566,8 @@ export const LogBucket = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
       retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
       lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : 0,
@@ -1689,8 +1689,8 @@ export const LogView = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
@@ -1865,8 +1865,8 @@ export const LogSink = {
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
       includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
       bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
     };
   },
 
@@ -3434,8 +3434,8 @@ export const LogExclusion = {
       description: isSet(object.description) ? String(object.description) : "",
       filter: isSet(object.filter) ? String(object.filter) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
     };
   },
 
@@ -4519,8 +4519,8 @@ export const CopyLogEntriesMetadata = {
 
   fromJSON(object: any): CopyLogEntriesMetadata {
     return {
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,

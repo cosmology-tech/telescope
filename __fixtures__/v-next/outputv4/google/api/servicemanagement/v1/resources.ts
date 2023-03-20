@@ -802,7 +802,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
       progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined
     };
   },
 
@@ -840,7 +840,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDK(e)) : [],
       progressPercentage: object?.progress_percentage,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined
+      startTime: object.start_time ?? undefined
     };
   },
 
@@ -860,7 +860,7 @@ export const OperationMetadata = {
     }
 
     obj.progress_percentage = message.progressPercentage;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     return obj;
   }
 
@@ -1482,7 +1482,7 @@ export const Rollout = {
   fromJSON(object: any): Rollout {
     return {
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
       createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
@@ -1518,7 +1518,7 @@ export const Rollout = {
   fromSDK(object: RolloutSDKType): Rollout {
     return {
       rolloutId: object?.rollout_id,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
+      createTime: object.create_time ?? undefined,
       createdBy: object?.created_by,
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       trafficPercentStrategy: object.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
@@ -1530,7 +1530,7 @@ export const Rollout = {
   toSDK(message: Rollout): RolloutSDKType {
     const obj: any = {};
     obj.rollout_id = message.rolloutId;
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
     obj.created_by = message.createdBy;
     message.status !== undefined && (obj.status = rollout_RolloutStatusToJSON(message.status));
     message.trafficPercentStrategy !== undefined && (obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toSDK(message.trafficPercentStrategy) : undefined);

@@ -1630,7 +1630,7 @@ export const Constant = {
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
       durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
-      timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
+      timestampValue: isSet(object.timestampValue) ? fromTimestamp(fromJsonTimestamp(object.timestampValue)) : undefined
     };
   },
 
@@ -1672,7 +1672,7 @@ export const Constant = {
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object.duration_value ? Duration.fromSDK(object.duration_value) : undefined,
-      timestampValue: object.timestamp_value ? Timestamp.fromSDK(object.timestamp_value) : undefined
+      timestampValue: object.timestamp_value ?? undefined
     };
   },
 
@@ -1686,7 +1686,7 @@ export const Constant = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
-    message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
+    message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ?? undefined);
     return obj;
   }
 

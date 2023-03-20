@@ -196,7 +196,7 @@ export const Grant = {
   fromJSON(object: any): Grant {
     return {
       authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
     };
   },
 
@@ -217,14 +217,14 @@ export const Grant = {
   fromSDK(object: GrantSDKType): Grant {
     return {
       authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
-      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
+      expiration: object.expiration ?? undefined
     };
   },
 
   toSDK(message: Grant): GrantSDKType {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
   }
 
@@ -299,7 +299,7 @@ export const GrantAuthorization = {
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
       authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
     };
   },
 
@@ -326,7 +326,7 @@ export const GrantAuthorization = {
       granter: object?.granter,
       grantee: object?.grantee,
       authorization: object.authorization ? Any.fromSDK(object.authorization) : undefined,
-      expiration: object.expiration ? Timestamp.fromSDK(object.expiration) : undefined
+      expiration: object.expiration ?? undefined
     };
   },
 
@@ -335,7 +335,7 @@ export const GrantAuthorization = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
   }
 

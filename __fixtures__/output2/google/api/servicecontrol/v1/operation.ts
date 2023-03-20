@@ -5,7 +5,7 @@ import { MetricValueSet } from "./metric_value";
 import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, fromJsonTimestamp, isObject, fromTimestamp } from "../../../../helpers";
+import { isSet, DeepPartial, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Defines the importance of the data contained in the operation. */
@@ -350,8 +350,8 @@ export const Operation = {
       operationId: isSet(object.operationId) ? String(object.operationId) : "",
       operationName: isSet(object.operationName) ? String(object.operationName) : "",
       consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

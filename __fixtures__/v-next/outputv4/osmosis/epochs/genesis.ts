@@ -187,10 +187,10 @@ export const EpochInfo = {
   fromJSON(object: any): EpochInfo {
     return {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO,
-      currentEpochStartTime: isSet(object.currentEpochStartTime) ? fromJsonTimestamp(object.currentEpochStartTime) : undefined,
+      currentEpochStartTime: isSet(object.currentEpochStartTime) ? fromTimestamp(fromJsonTimestamp(object.currentEpochStartTime)) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
       currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
     };
@@ -223,10 +223,10 @@ export const EpochInfo = {
   fromSDK(object: EpochInfoSDKType): EpochInfo {
     return {
       identifier: object?.identifier,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       currentEpoch: object?.current_epoch,
-      currentEpochStartTime: object.current_epoch_start_time ? Timestamp.fromSDK(object.current_epoch_start_time) : undefined,
+      currentEpochStartTime: object.current_epoch_start_time ?? undefined,
       epochCountingStarted: object?.epoch_counting_started,
       currentEpochStartHeight: object?.current_epoch_start_height
     };
@@ -235,10 +235,10 @@ export const EpochInfo = {
   toSDK(message: EpochInfo): EpochInfoSDKType {
     const obj: any = {};
     obj.identifier = message.identifier;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     obj.current_epoch = message.currentEpoch;
-    message.currentEpochStartTime !== undefined && (obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toSDK(message.currentEpochStartTime) : undefined);
+    message.currentEpochStartTime !== undefined && (obj.current_epoch_start_time = message.currentEpochStartTime ?? undefined);
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight;
     return obj;

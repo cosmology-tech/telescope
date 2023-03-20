@@ -155,7 +155,7 @@ export const ValidatorSigningInfo = {
       address: isSet(object.address) ? String(object.address) : "",
       startHeight: isSet(object.startHeight) ? Long.fromValue(object.startHeight) : Long.ZERO,
       indexOffset: isSet(object.indexOffset) ? Long.fromValue(object.indexOffset) : Long.ZERO,
-      jailedUntil: isSet(object.jailedUntil) ? fromJsonTimestamp(object.jailedUntil) : undefined,
+      jailedUntil: isSet(object.jailedUntil) ? fromTimestamp(fromJsonTimestamp(object.jailedUntil)) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
       missedBlocksCounter: isSet(object.missedBlocksCounter) ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO
     };
@@ -188,7 +188,7 @@ export const ValidatorSigningInfo = {
       address: object?.address,
       startHeight: object?.start_height,
       indexOffset: object?.index_offset,
-      jailedUntil: object.jailed_until ? Timestamp.fromSDK(object.jailed_until) : undefined,
+      jailedUntil: object.jailed_until ?? undefined,
       tombstoned: object?.tombstoned,
       missedBlocksCounter: object?.missed_blocks_counter
     };
@@ -199,7 +199,7 @@ export const ValidatorSigningInfo = {
     obj.address = message.address;
     obj.start_height = message.startHeight;
     obj.index_offset = message.indexOffset;
-    message.jailedUntil !== undefined && (obj.jailed_until = message.jailedUntil ? Timestamp.toSDK(message.jailedUntil) : undefined);
+    message.jailedUntil !== undefined && (obj.jailed_until = message.jailedUntil ?? undefined);
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter;
     return obj;

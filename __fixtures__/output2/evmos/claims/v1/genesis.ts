@@ -4,7 +4,7 @@ import { ClaimsRecordAddress } from "./claims";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 
 /** GenesisState define the claims module's genesis state. */
@@ -212,7 +212,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
-      airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
+      airdropStartTime: isSet(object.airdropStartTime) ? fromTimestamp(fromJsonTimestamp(object.airdropStartTime)) : undefined,
       durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
       durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",

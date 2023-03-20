@@ -383,8 +383,8 @@ export const Operation = {
       operationId: isSet(object.operationId) ? String(object.operationId) : "",
       operationName: isSet(object.operationName) ? String(object.operationName) : "",
       consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -464,8 +464,8 @@ export const Operation = {
       operationId: object?.operation_id,
       operationName: object?.operation_name,
       consumerId: object?.consumer_id,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -484,8 +484,8 @@ export const Operation = {
     obj.operation_id = message.operationId;
     obj.operation_name = message.operationName;
     obj.consumer_id = message.consumerId;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     obj.labels = {};
 
     if (message.labels) {

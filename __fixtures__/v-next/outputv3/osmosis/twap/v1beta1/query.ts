@@ -202,8 +202,8 @@ export const ArithmeticTwapRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined
     };
   },
 
@@ -232,8 +232,8 @@ export const ArithmeticTwapRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined
     };
   },
 
@@ -242,8 +242,8 @@ export const ArithmeticTwapRequest = {
     obj.pool_id = message.poolId;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     return obj;
   },
 
@@ -477,7 +477,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined
     };
   },
 
@@ -504,7 +504,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: object?.pool_id,
       baseAsset: object?.base_asset,
       quoteAsset: object?.quote_asset,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined
+      startTime: object.start_time ?? undefined
     };
   },
 
@@ -513,7 +513,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.pool_id = message.poolId;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     return obj;
   },
 

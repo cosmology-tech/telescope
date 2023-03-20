@@ -927,8 +927,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
@@ -995,8 +995,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: object.bucket_options ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
@@ -1018,8 +1018,8 @@ export const LogMetric = {
     }
 
     message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toSDK(message.bucketOptions) : undefined);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
     return obj;
   },

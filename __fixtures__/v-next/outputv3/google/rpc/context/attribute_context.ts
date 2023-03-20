@@ -2295,7 +2295,7 @@ export const AttributeContext_Request = {
       host: isSet(object.host) ? String(object.host) : "",
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
       size: isSet(object.size) ? Long.fromValue(object.size) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
@@ -2366,7 +2366,7 @@ export const AttributeContext_Request = {
       host: object?.host,
       scheme: object?.scheme,
       query: object?.query,
-      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ?? undefined,
       size: object?.size,
       protocol: object?.protocol,
       reason: object?.reason,
@@ -2390,7 +2390,7 @@ export const AttributeContext_Request = {
     obj.host = message.host;
     obj.scheme = message.scheme;
     obj.query = message.query;
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.time !== undefined && (obj.time = message.time ?? undefined);
     obj.size = message.size;
     obj.protocol = message.protocol;
     obj.reason = message.reason;
@@ -2667,7 +2667,7 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
       backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
@@ -2717,7 +2717,7 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: object.time ? Timestamp.fromSDK(object.time) : undefined,
+      time: object.time ?? undefined,
       backendLatency: object.backend_latency ? Duration.fromSDK(object.backend_latency) : undefined
     };
   },
@@ -2734,7 +2734,7 @@ export const AttributeContext_Response = {
       });
     }
 
-    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.time !== undefined && (obj.time = message.time ?? undefined);
     message.backendLatency !== undefined && (obj.backend_latency = message.backendLatency ? Duration.toSDK(message.backendLatency) : undefined);
     return obj;
   },
@@ -3183,9 +3183,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
-      deleteTime: isSet(object.deleteTime) ? fromJsonTimestamp(object.deleteTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
+      deleteTime: isSet(object.deleteTime) ? fromTimestamp(fromJsonTimestamp(object.deleteTime)) : undefined,
       etag: isSet(object.etag) ? String(object.etag) : "",
       location: isSet(object.location) ? String(object.location) : ""
     };
@@ -3274,9 +3274,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: object?.display_name,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
-      deleteTime: object.delete_time ? Timestamp.fromSDK(object.delete_time) : undefined,
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined,
+      deleteTime: object.delete_time ?? undefined,
       etag: object?.etag,
       location: object?.location
     };
@@ -3305,9 +3305,9 @@ export const AttributeContext_Resource = {
     }
 
     obj.display_name = message.displayName;
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
-    message.deleteTime !== undefined && (obj.delete_time = message.deleteTime ? Timestamp.toSDK(message.deleteTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
+    message.deleteTime !== undefined && (obj.delete_time = message.deleteTime ?? undefined);
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;

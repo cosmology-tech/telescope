@@ -660,7 +660,7 @@ export const PeerInfo = {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       addressInfo: Array.isArray(object?.addressInfo) ? object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e)) : [],
-      lastConnected: isSet(object.lastConnected) ? fromJsonTimestamp(object.lastConnected) : undefined
+      lastConnected: isSet(object.lastConnected) ? fromTimestamp(fromJsonTimestamp(object.lastConnected)) : undefined
     };
   },
 
@@ -690,7 +690,7 @@ export const PeerInfo = {
     return {
       id: object?.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDK(e)) : [],
-      lastConnected: object.last_connected ? Timestamp.fromSDK(object.last_connected) : undefined
+      lastConnected: object.last_connected ?? undefined
     };
   },
 
@@ -704,7 +704,7 @@ export const PeerInfo = {
       obj.address_info = [];
     }
 
-    message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ? Timestamp.toSDK(message.lastConnected) : undefined);
+    message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ?? undefined);
     return obj;
   },
 
@@ -820,8 +820,8 @@ export const PeerAddressInfo = {
   fromJSON(object: any): PeerAddressInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      lastDialSuccess: isSet(object.lastDialSuccess) ? fromJsonTimestamp(object.lastDialSuccess) : undefined,
-      lastDialFailure: isSet(object.lastDialFailure) ? fromJsonTimestamp(object.lastDialFailure) : undefined,
+      lastDialSuccess: isSet(object.lastDialSuccess) ? fromTimestamp(fromJsonTimestamp(object.lastDialSuccess)) : undefined,
+      lastDialFailure: isSet(object.lastDialFailure) ? fromTimestamp(fromJsonTimestamp(object.lastDialFailure)) : undefined,
       dialFailures: isSet(object.dialFailures) ? Number(object.dialFailures) : 0
     };
   },
@@ -847,8 +847,8 @@ export const PeerAddressInfo = {
   fromSDK(object: PeerAddressInfoSDKType): PeerAddressInfo {
     return {
       address: object?.address,
-      lastDialSuccess: object.last_dial_success ? Timestamp.fromSDK(object.last_dial_success) : undefined,
-      lastDialFailure: object.last_dial_failure ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
+      lastDialSuccess: object.last_dial_success ?? undefined,
+      lastDialFailure: object.last_dial_failure ?? undefined,
       dialFailures: object?.dial_failures
     };
   },
@@ -856,8 +856,8 @@ export const PeerAddressInfo = {
   toSDK(message: PeerAddressInfo): PeerAddressInfoSDKType {
     const obj: any = {};
     obj.address = message.address;
-    message.lastDialSuccess !== undefined && (obj.last_dial_success = message.lastDialSuccess ? Timestamp.toSDK(message.lastDialSuccess) : undefined);
-    message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ? Timestamp.toSDK(message.lastDialFailure) : undefined);
+    message.lastDialSuccess !== undefined && (obj.last_dial_success = message.lastDialSuccess ?? undefined);
+    message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ?? undefined);
     obj.dial_failures = message.dialFailures;
     return obj;
   },

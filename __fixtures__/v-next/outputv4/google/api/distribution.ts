@@ -1046,7 +1046,7 @@ export const Distribution_Exemplar = {
   fromJSON(object: any): Distribution_Exemplar {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : []
     };
   },
@@ -1076,7 +1076,7 @@ export const Distribution_Exemplar = {
   fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
     return {
       value: object?.value,
-      timestamp: object.timestamp ? Timestamp.fromSDK(object.timestamp) : undefined,
+      timestamp: object.timestamp ?? undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -1084,7 +1084,7 @@ export const Distribution_Exemplar = {
   toSDK(message: Distribution_Exemplar): Distribution_ExemplarSDKType {
     const obj: any = {};
     obj.value = message.value;
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
 
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toSDK(e) : undefined);

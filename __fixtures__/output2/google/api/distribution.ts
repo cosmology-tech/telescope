@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
-import { Long, isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { Long, isSet, DeepPartial, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "google.api";
 
@@ -814,7 +814,7 @@ export const Distribution_Exemplar = {
   fromJSON(object: any): Distribution_Exemplar {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : []
     };
   },

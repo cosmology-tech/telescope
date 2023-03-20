@@ -1311,7 +1311,7 @@ export const Commission = {
   fromJSON(object: any): Commission {
     return {
       commissionRates: isSet(object.commissionRates) ? CommissionRates.fromJSON(object.commissionRates) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
     };
   },
 
@@ -1332,14 +1332,14 @@ export const Commission = {
   fromSDK(object: CommissionSDKType): Commission {
     return {
       commissionRates: object.commission_rates ? CommissionRates.fromSDK(object.commission_rates) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
+      updateTime: object.update_time ?? undefined
     };
   },
 
   toSDK(message: Commission): CommissionSDKType {
     const obj: any = {};
     message.commissionRates !== undefined && (obj.commission_rates = message.commissionRates ? CommissionRates.toSDK(message.commissionRates) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
   },
 
@@ -1699,7 +1699,7 @@ export const Validator = {
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
       unbondingHeight: isSet(object.unbondingHeight) ? Long.fromValue(object.unbondingHeight) : Long.ZERO,
-      unbondingTime: isSet(object.unbondingTime) ? fromJsonTimestamp(object.unbondingTime) : undefined,
+      unbondingTime: isSet(object.unbondingTime) ? fromTimestamp(fromJsonTimestamp(object.unbondingTime)) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
     };
@@ -1747,7 +1747,7 @@ export const Validator = {
       delegatorShares: object?.delegator_shares,
       description: object.description ? Description.fromSDK(object.description) : undefined,
       unbondingHeight: object?.unbonding_height,
-      unbondingTime: object.unbonding_time ? Timestamp.fromSDK(object.unbonding_time) : undefined,
+      unbondingTime: object.unbonding_time ?? undefined,
       commission: object.commission ? Commission.fromSDK(object.commission) : undefined,
       minSelfDelegation: object?.min_self_delegation
     };
@@ -1763,7 +1763,7 @@ export const Validator = {
     obj.delegator_shares = message.delegatorShares;
     message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
     obj.unbonding_height = message.unbondingHeight;
-    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ? Timestamp.toSDK(message.unbondingTime) : undefined);
+    message.unbondingTime !== undefined && (obj.unbonding_time = message.unbondingTime ?? undefined);
     message.commission !== undefined && (obj.commission = message.commission ? Commission.toSDK(message.commission) : undefined);
     obj.min_self_delegation = message.minSelfDelegation;
     return obj;
@@ -2859,7 +2859,7 @@ export const UnbondingDelegationEntry = {
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
       creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
+      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
     };
@@ -2886,7 +2886,7 @@ export const UnbondingDelegationEntry = {
   fromSDK(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
     return {
       creationHeight: object?.creation_height,
-      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined,
+      completionTime: object.completion_time ?? undefined,
       initialBalance: object?.initial_balance,
       balance: object?.balance
     };
@@ -2895,7 +2895,7 @@ export const UnbondingDelegationEntry = {
   toSDK(message: UnbondingDelegationEntry): UnbondingDelegationEntrySDKType {
     const obj: any = {};
     obj.creation_height = message.creationHeight;
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     obj.initial_balance = message.initialBalance;
     obj.balance = message.balance;
     return obj;
@@ -3017,7 +3017,7 @@ export const RedelegationEntry = {
   fromJSON(object: any): RedelegationEntry {
     return {
       creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
+      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
     };
@@ -3044,7 +3044,7 @@ export const RedelegationEntry = {
   fromSDK(object: RedelegationEntrySDKType): RedelegationEntry {
     return {
       creationHeight: object?.creation_height,
-      completionTime: object.completion_time ? Timestamp.fromSDK(object.completion_time) : undefined,
+      completionTime: object.completion_time ?? undefined,
       initialBalance: object?.initial_balance,
       sharesDst: object?.shares_dst
     };
@@ -3053,7 +3053,7 @@ export const RedelegationEntry = {
   toSDK(message: RedelegationEntry): RedelegationEntrySDKType {
     const obj: any = {};
     obj.creation_height = message.creationHeight;
-    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     obj.initial_balance = message.initialBalance;
     obj.shares_dst = message.sharesDst;
     return obj;

@@ -277,7 +277,7 @@ export const Incentive = {
       contract: isSet(object.contract) ? String(object.contract) : "",
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
       totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
     };
   },
@@ -313,7 +313,7 @@ export const Incentive = {
       contract: object?.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
       epochs: object?.epochs,
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
+      startTime: object.start_time ?? undefined,
       totalGas: object?.total_gas
     };
   },
@@ -329,7 +329,7 @@ export const Incentive = {
     }
 
     obj.epochs = message.epochs;
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     obj.total_gas = message.totalGas;
     return obj;
   },

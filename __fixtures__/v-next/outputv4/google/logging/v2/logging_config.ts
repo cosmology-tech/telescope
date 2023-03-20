@@ -1893,8 +1893,8 @@ export const LogBucket = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
       retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
       lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : 0,
@@ -1941,8 +1941,8 @@ export const LogBucket = {
     return {
       name: object?.name,
       description: object?.description,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined,
       retentionDays: object?.retention_days,
       locked: object?.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
@@ -1955,8 +1955,8 @@ export const LogBucket = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
     message.lifecycleState !== undefined && (obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState));
@@ -2050,8 +2050,8 @@ export const LogView = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
@@ -2080,8 +2080,8 @@ export const LogView = {
     return {
       name: object?.name,
       description: object?.description,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined,
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined,
       filter: object?.filter
     };
   },
@@ -2090,8 +2090,8 @@ export const LogView = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     obj.filter = message.filter;
     return obj;
   }
@@ -2246,8 +2246,8 @@ export const LogSink = {
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
       includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
       bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
     };
   },
 
@@ -2303,8 +2303,8 @@ export const LogSink = {
       writerIdentity: object?.writer_identity,
       includeChildren: object?.include_children,
       bigqueryOptions: object.bigquery_options ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined
     };
   },
 
@@ -2326,8 +2326,8 @@ export const LogSink = {
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
     message.bigqueryOptions !== undefined && (obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toSDK(message.bigqueryOptions) : undefined);
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
   }
 
@@ -4159,8 +4159,8 @@ export const LogExclusion = {
       description: isSet(object.description) ? String(object.description) : "",
       filter: isSet(object.filter) ? String(object.filter) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
+      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
     };
   },
 
@@ -4192,8 +4192,8 @@ export const LogExclusion = {
       description: object?.description,
       filter: object?.filter,
       disabled: object?.disabled,
-      createTime: object.create_time ? Timestamp.fromSDK(object.create_time) : undefined,
-      updateTime: object.update_time ? Timestamp.fromSDK(object.update_time) : undefined
+      createTime: object.create_time ?? undefined,
+      updateTime: object.update_time ?? undefined
     };
   },
 
@@ -4203,8 +4203,8 @@ export const LogExclusion = {
     obj.description = message.description;
     obj.filter = message.filter;
     obj.disabled = message.disabled;
-    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
-    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ?? undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     return obj;
   }
 
@@ -5464,8 +5464,8 @@ export const CopyLogEntriesMetadata = {
 
   fromJSON(object: any): CopyLogEntriesMetadata {
     return {
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
+      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
@@ -5500,8 +5500,8 @@ export const CopyLogEntriesMetadata = {
 
   fromSDK(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
     return {
-      startTime: object.start_time ? Timestamp.fromSDK(object.start_time) : undefined,
-      endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellationRequested: object?.cancellation_requested,
       request: object.request ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
@@ -5512,8 +5512,8 @@ export const CopyLogEntriesMetadata = {
 
   toSDK(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataSDKType {
     const obj: any = {};
-    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
-    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     message.state !== undefined && (obj.state = operationStateToJSON(message.state));
     obj.cancellation_requested = message.cancellationRequested;
     message.request !== undefined && (obj.request = message.request ? CopyLogEntriesRequest.toSDK(message.request) : undefined);
