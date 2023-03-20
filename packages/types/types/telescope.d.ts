@@ -33,6 +33,7 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            fromSDKJSON?: boolean;
             toAmino?: boolean;
             fromAmino?: boolean;
             toProto?: boolean;

@@ -1059,6 +1059,14 @@ export const MsgCreateGroup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateGroupSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
+  },
+
   fromAmino(object: MsgCreateGroupAmino): MsgCreateGroup {
     return {
       admin: object.admin,
@@ -1177,6 +1185,12 @@ export const MsgCreateGroupResponse = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupResponseSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgCreateGroupResponseAmino): MsgCreateGroupResponse {
@@ -1329,6 +1343,14 @@ export const MsgUpdateGroupMembers = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateGroupMembersSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      member_updates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgUpdateGroupMembersAmino): MsgUpdateGroupMembers {
     return {
       admin: object.admin,
@@ -1430,6 +1452,10 @@ export const MsgUpdateGroupMembersResponse = {
   toSDK(_: MsgUpdateGroupMembersResponse): MsgUpdateGroupMembersResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupMembersResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupMembersResponseAmino): MsgUpdateGroupMembersResponse {
@@ -1567,6 +1593,14 @@ export const MsgUpdateGroupAdmin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateGroupAdminSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
+    };
+  },
+
   fromAmino(object: MsgUpdateGroupAdminAmino): MsgUpdateGroupAdmin {
     return {
       admin: object.admin,
@@ -1662,6 +1696,10 @@ export const MsgUpdateGroupAdminResponse = {
   toSDK(_: MsgUpdateGroupAdminResponse): MsgUpdateGroupAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupAdminResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupAdminResponseAmino): MsgUpdateGroupAdminResponse {
@@ -1799,6 +1837,14 @@ export const MsgUpdateGroupMetadata = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateGroupMetadataSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
+  },
+
   fromAmino(object: MsgUpdateGroupMetadataAmino): MsgUpdateGroupMetadata {
     return {
       admin: object.admin,
@@ -1894,6 +1940,10 @@ export const MsgUpdateGroupMetadataResponse = {
   toSDK(_: MsgUpdateGroupMetadataResponse): MsgUpdateGroupMetadataResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupMetadataResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupMetadataResponseAmino): MsgUpdateGroupMetadataResponse {
@@ -2045,6 +2095,15 @@ export const MsgCreateGroupPolicy = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateGroupPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateGroupPolicyAmino): MsgCreateGroupPolicy {
     return {
       admin: object.admin,
@@ -2159,6 +2218,12 @@ export const MsgCreateGroupPolicyResponse = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupPolicyResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
 
   fromAmino(object: MsgCreateGroupPolicyResponseAmino): MsgCreateGroupPolicyResponse {
@@ -2297,6 +2362,14 @@ export const MsgUpdateGroupPolicyAdmin = {
     obj.address = message.address;
     obj.new_admin = message.newAdmin;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyAdminSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
+    };
   },
 
   fromAmino(object: MsgUpdateGroupPolicyAdminAmino): MsgUpdateGroupPolicyAdmin {
@@ -2495,6 +2568,17 @@ export const MsgCreateGroupWithPolicy = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateGroupWithPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : [],
+      group_metadata: isSet(object.group_metadata) ? String(object.group_metadata) : "",
+      group_policy_metadata: isSet(object.group_policy_metadata) ? String(object.group_policy_metadata) : "",
+      group_policy_as_admin: isSet(object.group_policy_as_admin) ? Boolean(object.group_policy_as_admin) : false,
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateGroupWithPolicyAmino): MsgCreateGroupWithPolicy {
     return {
       admin: object.admin,
@@ -2635,6 +2719,13 @@ export const MsgCreateGroupWithPolicyResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateGroupWithPolicyResponseSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : ""
+    };
+  },
+
   fromAmino(object: MsgCreateGroupWithPolicyResponseAmino): MsgCreateGroupWithPolicyResponse {
     return {
       groupId: Long.fromString(object.group_id),
@@ -2728,6 +2819,10 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   toSDK(_: MsgUpdateGroupPolicyAdminResponse): MsgUpdateGroupPolicyAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyAdminResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupPolicyAdminResponseAmino): MsgUpdateGroupPolicyAdminResponse {
@@ -2865,6 +2960,14 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyDecisionPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
+  },
+
   fromAmino(object: MsgUpdateGroupPolicyDecisionPolicyAmino): MsgUpdateGroupPolicyDecisionPolicy {
     return {
       admin: object.admin,
@@ -2960,6 +3063,10 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   toSDK(_: MsgUpdateGroupPolicyDecisionPolicyResponse): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupPolicyDecisionPolicyResponseAmino): MsgUpdateGroupPolicyDecisionPolicyResponse {
@@ -3097,6 +3204,14 @@ export const MsgUpdateGroupPolicyMetadata = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyMetadataSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
+  },
+
   fromAmino(object: MsgUpdateGroupPolicyMetadataAmino): MsgUpdateGroupPolicyMetadata {
     return {
       admin: object.admin,
@@ -3192,6 +3307,10 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   toSDK(_: MsgUpdateGroupPolicyMetadataResponse): MsgUpdateGroupPolicyMetadataResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyMetadataResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateGroupPolicyMetadataResponseAmino): MsgUpdateGroupPolicyMetadataResponse {
@@ -3381,6 +3500,16 @@ export const MsgSubmitProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
+  },
+
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
     return {
       address: object.address,
@@ -3511,6 +3640,12 @@ export const MsgSubmitProposalResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgSubmitProposalResponseAmino): MsgSubmitProposalResponse {
     return {
       proposalId: Long.fromString(object.proposal_id)
@@ -3635,6 +3770,13 @@ export const MsgWithdrawProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgWithdrawProposalSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   fromAmino(object: MsgWithdrawProposalAmino): MsgWithdrawProposal {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -3728,6 +3870,10 @@ export const MsgWithdrawProposalResponse = {
   toSDK(_: MsgWithdrawProposalResponse): MsgWithdrawProposalResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawProposalResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgWithdrawProposalResponseAmino): MsgWithdrawProposalResponse {
@@ -3893,6 +4039,16 @@ export const MsgVote = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgVoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
+  },
+
   fromAmino(object: MsgVoteAmino): MsgVote {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -3992,6 +4148,10 @@ export const MsgVoteResponse = {
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
@@ -4115,6 +4275,13 @@ export const MsgExec = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
+  },
+
   fromAmino(object: MsgExecAmino): MsgExec {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -4208,6 +4375,10 @@ export const MsgExecResponse = {
   toSDK(_: MsgExecResponse): MsgExecResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgExecResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgExecResponseAmino): MsgExecResponse {
@@ -4331,6 +4502,13 @@ export const MsgLeaveGroup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgLeaveGroupSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgLeaveGroupAmino): MsgLeaveGroup {
     return {
       address: object.address,
@@ -4424,6 +4602,10 @@ export const MsgLeaveGroupResponse = {
   toSDK(_: MsgLeaveGroupResponse): MsgLeaveGroupResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgLeaveGroupResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgLeaveGroupResponseAmino): MsgLeaveGroupResponse {

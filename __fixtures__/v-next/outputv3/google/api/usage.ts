@@ -349,6 +349,14 @@ export const Usage = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UsageSDKType {
+    return {
+      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDKJSON(e)) : [],
+      producer_notification_channel: isSet(object.producer_notification_channel) ? String(object.producer_notification_channel) : ""
+    };
+  },
+
   fromAmino(object: UsageAmino): Usage {
     return {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
@@ -492,6 +500,14 @@ export const UsageRule = {
     obj.allow_unregistered_calls = message.allowUnregisteredCalls;
     obj.skip_service_control = message.skipServiceControl;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UsageRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      allow_unregistered_calls: isSet(object.allow_unregistered_calls) ? Boolean(object.allow_unregistered_calls) : false,
+      skip_service_control: isSet(object.skip_service_control) ? Boolean(object.skip_service_control) : false
+    };
   },
 
   fromAmino(object: UsageRuleAmino): UsageRule {

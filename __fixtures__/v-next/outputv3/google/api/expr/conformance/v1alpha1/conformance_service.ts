@@ -530,6 +530,15 @@ export const ParseRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParseRequestSDKType {
+    return {
+      cel_source: isSet(object.cel_source) ? String(object.cel_source) : "",
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      source_location: isSet(object.source_location) ? String(object.source_location) : "",
+      disable_macros: isSet(object.disable_macros) ? Boolean(object.disable_macros) : false
+    };
+  },
+
   fromAmino(object: ParseRequestAmino): ParseRequest {
     return {
       celSource: object.cel_source,
@@ -662,6 +671,13 @@ export const ParseResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParseResponseSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ParseResponseAmino): ParseResponse {
@@ -828,6 +844,15 @@ export const CheckRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckRequestSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      type_env: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDKJSON(e)) : [],
+      container: isSet(object.container) ? String(object.container) : "",
+      no_std_env: isSet(object.no_std_env) ? Boolean(object.no_std_env) : false
+    };
+  },
+
   fromAmino(object: CheckRequestAmino): CheckRequest {
     return {
       parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
@@ -968,6 +993,13 @@ export const CheckResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckResponseSDKType {
+    return {
+      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: CheckResponseAmino): CheckResponse {
     return {
       checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
@@ -1088,6 +1120,13 @@ export const EvalRequest_BindingsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): EvalRequest_BindingsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromSDKJSON(object.value) : undefined
+    };
   },
 
   fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
@@ -1269,6 +1308,20 @@ export const EvalRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvalRequestSDKType {
+    return {
+      parsed_expr: isSet(object.parsed_expr) ? ParsedExpr.fromSDKJSON(object.parsed_expr) : undefined,
+      checked_expr: isSet(object.checked_expr) ? CheckedExpr.fromSDKJSON(object.checked_expr) : undefined,
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromSDKJSON(value);
+        return acc;
+      }, {}) : {},
+      container: isSet(object.container) ? String(object.container) : ""
+    };
+  },
+
   fromAmino(object: EvalRequestAmino): EvalRequest {
     return {
       parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
@@ -1415,6 +1468,13 @@ export const EvalResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvalResponseSDKType {
+    return {
+      result: isSet(object.result) ? ExprValue.fromSDKJSON(object.result) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: EvalResponseAmino): EvalResponse {
     return {
       result: object?.result ? ExprValue.fromAmino(object.result) : undefined,
@@ -1551,6 +1611,14 @@ export const IssueDetails = {
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toSDK(message.position) : undefined);
     obj.id = message.id;
     return obj;
+  },
+
+  fromSDKJSON(object: any): IssueDetailsSDKType {
+    return {
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      position: isSet(object.position) ? SourcePosition.fromSDKJSON(object.position) : undefined,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
+    };
   },
 
   fromAmino(object: IssueDetailsAmino): IssueDetails {

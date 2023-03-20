@@ -127,6 +127,13 @@ export const Minter = {
     obj.inflation = message.inflation;
     obj.annual_provisions = message.annualProvisions;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MinterSDKType {
+    return {
+      inflation: isSet(object.inflation) ? String(object.inflation) : "",
+      annual_provisions: isSet(object.annual_provisions) ? String(object.annual_provisions) : ""
+    };
   }
 
 };
@@ -266,6 +273,17 @@ export const Params = {
     obj.goal_bonded = message.goalBonded;
     obj.blocks_per_year = message.blocksPerYear;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      inflation_rate_change: isSet(object.inflation_rate_change) ? String(object.inflation_rate_change) : "",
+      inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
+      inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
+      goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
+      blocks_per_year: isSet(object.blocks_per_year) ? Long.fromValue(object.blocks_per_year) : Long.UZERO
+    };
   }
 
 };

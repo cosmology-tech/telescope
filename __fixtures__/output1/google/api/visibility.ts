@@ -181,6 +181,12 @@ export const Visibility = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): VisibilitySDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -264,6 +270,13 @@ export const VisibilityRule = {
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
+  },
+
+  fromSDKJSON(object: any): VisibilityRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      restriction: isSet(object.restriction) ? String(object.restriction) : ""
+    };
   }
 
 };

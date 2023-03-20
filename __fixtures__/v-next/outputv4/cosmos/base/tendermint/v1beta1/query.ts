@@ -278,6 +278,13 @@ export const GetValidatorSetByHeightRequest = {
     obj.height = message.height;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetValidatorSetByHeightRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -387,6 +394,14 @@ export const GetValidatorSetByHeightResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetValidatorSetByHeightResponseSDKType {
+    return {
+      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.ZERO,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -456,6 +471,12 @@ export const GetLatestValidatorSetRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetLatestValidatorSetRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -565,6 +586,14 @@ export const GetLatestValidatorSetResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetLatestValidatorSetResponseSDKType {
+    return {
+      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.ZERO,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -676,6 +705,15 @@ export const Validator = {
     obj.voting_power = message.votingPower;
     obj.proposer_priority = message.proposerPriority;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
+      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO,
+      proposer_priority: isSet(object.proposer_priority) ? Long.fromValue(object.proposer_priority) : Long.ZERO
+    };
   }
 
 };
@@ -745,6 +783,12 @@ export const GetBlockByHeightRequest = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetBlockByHeightRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   }
 
 };
@@ -828,6 +872,13 @@ export const GetBlockByHeightResponse = {
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetBlockByHeightResponseSDKType {
+    return {
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined
+    };
   }
 
 };
@@ -880,6 +931,10 @@ export const GetLatestBlockRequest = {
   toSDK(_: GetLatestBlockRequest): GetLatestBlockRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetLatestBlockRequestSDKType {
+    return {};
   }
 
 };
@@ -963,6 +1018,13 @@ export const GetLatestBlockResponse = {
     message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toSDK(message.blockId) : undefined);
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetLatestBlockResponseSDKType {
+    return {
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined
+    };
   }
 
 };
@@ -1015,6 +1077,10 @@ export const GetSyncingRequest = {
   toSDK(_: GetSyncingRequest): GetSyncingRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetSyncingRequestSDKType {
+    return {};
   }
 
 };
@@ -1084,6 +1150,12 @@ export const GetSyncingResponse = {
     const obj: any = {};
     obj.syncing = message.syncing;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetSyncingResponseSDKType {
+    return {
+      syncing: isSet(object.syncing) ? Boolean(object.syncing) : false
+    };
   }
 
 };
@@ -1136,6 +1208,10 @@ export const GetNodeInfoRequest = {
   toSDK(_: GetNodeInfoRequest): GetNodeInfoRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetNodeInfoRequestSDKType {
+    return {};
   }
 
 };
@@ -1219,6 +1295,13 @@ export const GetNodeInfoResponse = {
     message.nodeInfo !== undefined && (obj.node_info = message.nodeInfo ? NodeInfo.toSDK(message.nodeInfo) : undefined);
     message.applicationVersion !== undefined && (obj.application_version = message.applicationVersion ? VersionInfo.toSDK(message.applicationVersion) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetNodeInfoResponseSDKType {
+    return {
+      node_info: isSet(object.node_info) ? NodeInfo.fromSDKJSON(object.node_info) : undefined,
+      application_version: isSet(object.application_version) ? VersionInfo.fromSDKJSON(object.application_version) : undefined
+    };
   }
 
 };
@@ -1398,6 +1481,19 @@ export const VersionInfo = {
 
     obj.cosmos_sdk_version = message.cosmosSdkVersion;
     return obj;
+  },
+
+  fromSDKJSON(object: any): VersionInfoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      app_name: isSet(object.app_name) ? String(object.app_name) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      git_commit: isSet(object.git_commit) ? String(object.git_commit) : "",
+      build_tags: isSet(object.build_tags) ? String(object.build_tags) : "",
+      go_version: isSet(object.go_version) ? String(object.go_version) : "",
+      build_deps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromSDKJSON(e)) : [],
+      cosmos_sdk_version: isSet(object.cosmos_sdk_version) ? String(object.cosmos_sdk_version) : ""
+    };
   }
 
 };
@@ -1495,6 +1591,14 @@ export const Module = {
     obj.version = message.version;
     obj.sum = message.sum;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleSDKType {
+    return {
+      path: isSet(object.path) ? String(object.path) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      sum: isSet(object.sum) ? String(object.sum) : ""
+    };
   }
 
 };

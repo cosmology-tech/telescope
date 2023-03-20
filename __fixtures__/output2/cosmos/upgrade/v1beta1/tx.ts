@@ -107,6 +107,13 @@ export const MsgSoftwareUpgrade = {
     message.authority = object.authority ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSoftwareUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -150,6 +157,10 @@ export const MsgSoftwareUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSoftwareUpgradeResponseSDKType {
+    return {};
   }
 
 };
@@ -207,6 +218,12 @@ export const MsgCancelUpgrade = {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCancelUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
   }
 
 };
@@ -250,6 +267,10 @@ export const MsgCancelUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgCancelUpgradeResponseSDKType {
+    return {};
   }
 
 };

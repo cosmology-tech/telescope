@@ -84,6 +84,10 @@ export const Module = {
     return obj;
   },
 
+  fromSDKJSON(_: any): ModuleSDKType {
+    return {};
+  },
+
   fromAmino(_: ModuleAmino): Module {
     return {};
   },

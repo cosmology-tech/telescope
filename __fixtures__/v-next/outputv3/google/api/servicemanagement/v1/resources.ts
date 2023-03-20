@@ -1044,6 +1044,13 @@ export const ManagedService = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ManagedServiceSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : ""
+    };
+  },
+
   fromAmino(object: ManagedServiceAmino): ManagedService {
     return {
       serviceName: object.service_name,
@@ -1212,6 +1219,15 @@ export const OperationMetadata = {
     return obj;
   },
 
+  fromSDKJSON(object: any): OperationMetadataSDKType {
+    return {
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
+      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDKJSON(e)) : [],
+      progress_percentage: isSet(object.progress_percentage) ? Number(object.progress_percentage) : 0,
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined
+    };
+  },
+
   fromAmino(object: OperationMetadataAmino): OperationMetadata {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
@@ -1343,6 +1359,13 @@ export const OperationMetadata_Step = {
     obj.description = message.description;
     message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
     return obj;
+  },
+
+  fromSDKJSON(object: any): OperationMetadata_StepSDKType {
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+    };
   },
 
   fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
@@ -1477,6 +1500,14 @@ export const Diagnostic = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DiagnosticSDKType {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+
   fromAmino(object: DiagnosticAmino): Diagnostic {
     return {
       location: object.location,
@@ -1607,6 +1638,13 @@ export const ConfigSource = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConfigSourceSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ConfigSourceAmino): ConfigSource {
@@ -1747,6 +1785,14 @@ export const ConfigFile = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConfigFileSDKType {
+    return {
+      file_path: isSet(object.file_path) ? String(object.file_path) : "",
+      file_contents: isSet(object.file_contents) ? bytesFromBase64(object.file_contents) : new Uint8Array(),
+      file_type: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+    };
+  },
+
   fromAmino(object: ConfigFileAmino): ConfigFile {
     return {
       filePath: object.file_path,
@@ -1851,6 +1897,12 @@ export const ConfigRef = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConfigRefSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: ConfigRefAmino): ConfigRef {
@@ -1965,6 +2017,12 @@ export const ChangeReport = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ChangeReportSDKType {
+    return {
+      config_changes: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ChangeReportAmino): ChangeReport {
@@ -2159,6 +2217,18 @@ export const Rollout = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RolloutSDKType {
+    return {
+      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : "",
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      created_by: isSet(object.created_by) ? String(object.created_by) : "",
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      traffic_percent_strategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDKJSON(object.traffic_percent_strategy) : undefined,
+      delete_service_strategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromSDKJSON(object.delete_service_strategy) : undefined,
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
+  },
+
   fromAmino(object: RolloutAmino): Rollout {
     return {
       rolloutId: object.rollout_id,
@@ -2283,6 +2353,13 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   },
 
   fromAmino(object: Rollout_TrafficPercentStrategy_PercentagesEntryAmino): Rollout_TrafficPercentStrategy_PercentagesEntry {
@@ -2421,6 +2498,17 @@ export const Rollout_TrafficPercentStrategy = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Rollout_TrafficPercentStrategySDKType {
+    return {
+      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
+        [key: string]: double;
+      }>((acc, [key, value]) => {
+        acc[key] = double.fromSDKJSON(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   fromAmino(object: Rollout_TrafficPercentStrategyAmino): Rollout_TrafficPercentStrategy {
     return {
       percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
@@ -2516,6 +2604,10 @@ export const Rollout_DeleteServiceStrategy = {
   toSDK(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategySDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): Rollout_DeleteServiceStrategySDKType {
+    return {};
   },
 
   fromAmino(_: Rollout_DeleteServiceStrategyAmino): Rollout_DeleteServiceStrategy {

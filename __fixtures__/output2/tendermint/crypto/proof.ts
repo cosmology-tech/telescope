@@ -133,6 +133,15 @@ export const Proof = {
     message.leafHash = object.leafHash ?? new Uint8Array();
     message.aunts = object.aunts?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ProofSDKType {
+    return {
+      total: isSet(object.total) ? Long.fromValue(object.total) : Long.ZERO,
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -202,6 +211,13 @@ export const ValueOp = {
     message.key = object.key ?? new Uint8Array();
     message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ValueOpSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
+    };
   }
 
 };
@@ -283,6 +299,14 @@ export const DominoOp = {
     message.input = object.input ?? "";
     message.output = object.output ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DominoOpSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      input: isSet(object.input) ? String(object.input) : "",
+      output: isSet(object.output) ? String(object.output) : ""
+    };
   }
 
 };
@@ -364,6 +388,14 @@ export const ProofOp = {
     message.key = object.key ?? new Uint8Array();
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): ProofOpSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -427,6 +459,12 @@ export const ProofOps = {
     const message = createBaseProofOps();
     message.ops = object.ops?.map(e => ProofOp.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ProofOpsSDKType {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDKJSON(e)) : []
+    };
   }
 
 };

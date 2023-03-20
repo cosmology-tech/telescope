@@ -315,6 +315,16 @@ export const PageRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PageRequestSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
+      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
+      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
+      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
+    };
+  },
+
   fromAmino(object: PageRequestAmino): PageRequest {
     return {
       key: object.key,
@@ -445,6 +455,13 @@ export const PageResponse = {
     obj.next_key = message.nextKey;
     obj.total = message.total;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PageResponseSDKType {
+    return {
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
+      total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
+    };
   },
 
   fromAmino(object: PageResponseAmino): PageResponse {

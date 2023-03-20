@@ -117,6 +117,12 @@ export const Capability = {
     const obj: any = {};
     obj.index = message.index;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CapabilitySDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
+    };
   }
 
 };
@@ -200,6 +206,13 @@ export const Owner = {
     obj.module = message.module;
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OwnerSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : "",
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -281,6 +294,12 @@ export const CapabilityOwners = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CapabilityOwnersSDKType {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDKJSON(e)) : []
+    };
   }
 
 };

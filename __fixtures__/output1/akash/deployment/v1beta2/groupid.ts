@@ -109,6 +109,14 @@ export const GroupID = {
     obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GroupIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
+    };
   }
 
 };

@@ -235,6 +235,12 @@ export const GenericAuthorization = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenericAuthorizationSDKType {
+    return {
+      msg: isSet(object.msg) ? String(object.msg) : ""
+    };
+  },
+
   fromAmino(object: GenericAuthorizationAmino): GenericAuthorization {
     return {
       msg: object.msg
@@ -357,6 +363,13 @@ export const Grant = {
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+    };
   },
 
   fromAmino(object: GrantAmino): Grant {
@@ -513,6 +526,15 @@ export const GrantAuthorization = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GrantAuthorizationSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+    };
+  },
+
   fromAmino(object: GrantAuthorizationAmino): GrantAuthorization {
     return {
       granter: object.granter,
@@ -639,6 +661,12 @@ export const GrantQueueItem = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GrantQueueItemSDKType {
+    return {
+      msg_type_urls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: GrantQueueItemAmino): GrantQueueItem {

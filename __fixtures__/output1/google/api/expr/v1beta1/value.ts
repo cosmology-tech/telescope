@@ -370,6 +370,23 @@ export const Value = {
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     obj.type_value = message.typeValue;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValueSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      uint64_value: isSet(object.uint64_value) ? Long.fromValue(object.uint64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
+      enum_value: isSet(object.enum_value) ? EnumValue.fromSDKJSON(object.enum_value) : undefined,
+      object_value: isSet(object.object_value) ? Any.fromSDKJSON(object.object_value) : undefined,
+      map_value: isSet(object.map_value) ? MapValue.fromSDKJSON(object.map_value) : undefined,
+      list_value: isSet(object.list_value) ? ListValue.fromSDKJSON(object.list_value) : undefined,
+      type_value: isSet(object.type_value) ? String(object.type_value) : undefined
+    };
   }
 
 };
@@ -453,6 +470,13 @@ export const EnumValue = {
     obj.type = message.type;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EnumValueSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -534,6 +558,12 @@ export const ListValue = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListValueSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -615,6 +645,12 @@ export const MapValue = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MapValueSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -698,6 +734,13 @@ export const MapValue_Entry = {
     message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MapValue_EntrySDKType {
+    return {
+      key: isSet(object.key) ? Value.fromSDKJSON(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined
+    };
   }
 
 };

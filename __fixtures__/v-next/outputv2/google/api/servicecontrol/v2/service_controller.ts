@@ -462,6 +462,16 @@ export const CheckRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      attributes: isSet(object.attributes) ? AttributeContext.fromSDKJSON(object.attributes) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDKJSON(e)) : [],
+      flags: isSet(object.flags) ? String(object.flags) : ""
+    };
+  },
+
   fromAmino(object: CheckRequestAmino): CheckRequest {
     return {
       serviceName: object.service_name,
@@ -634,6 +644,16 @@ export const ResourceInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResourceInfoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      permission: isSet(object.permission) ? String(object.permission) : "",
+      container: isSet(object.container) ? String(object.container) : "",
+      location: isSet(object.location) ? String(object.location) : ""
+    };
+  },
+
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
     return {
       name: object.name,
@@ -754,6 +774,13 @@ export const CheckResponse_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CheckResponse_HeadersEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
@@ -904,6 +931,18 @@ export const CheckResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CheckResponseSDKType {
+    return {
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined,
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
 
   fromAmino(object: CheckResponseAmino): CheckResponse {
@@ -1062,6 +1101,14 @@ export const ReportRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ReportRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ReportRequestAmino): ReportRequest {
     return {
       serviceName: object.service_name,
@@ -1155,6 +1202,10 @@ export const ReportResponse = {
   toSDK(_: ReportResponse): ReportResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ReportResponseSDKType {
+    return {};
   },
 
   fromAmino(_: ReportResponseAmino): ReportResponse {

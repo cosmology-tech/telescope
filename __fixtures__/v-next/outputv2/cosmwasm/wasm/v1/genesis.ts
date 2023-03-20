@@ -336,6 +336,16 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDKJSON(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDKJSON(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDKJSON(e)) : [],
+      gen_msgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined,
@@ -503,6 +513,14 @@ export const GenesisState_GenMsgs = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisState_GenMsgsSDKType {
+    return {
+      store_code: isSet(object.store_code) ? MsgStoreCode.fromSDKJSON(object.store_code) : undefined,
+      instantiate_contract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromSDKJSON(object.instantiate_contract) : undefined,
+      execute_contract: isSet(object.execute_contract) ? MsgExecuteContract.fromSDKJSON(object.execute_contract) : undefined
+    };
+  },
+
   fromAmino(object: GenesisState_GenMsgsAmino): GenesisState_GenMsgs {
     return {
       storeCode: object?.store_code ? MsgStoreCode.fromAmino(object.store_code) : undefined,
@@ -657,6 +675,15 @@ export const Code = {
     obj.code_bytes = message.codeBytes;
     obj.pinned = message.pinned;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CodeSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
+      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
+      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
+    };
   },
 
   fromAmino(object: CodeAmino): Code {
@@ -815,6 +842,14 @@ export const Contract = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ContractSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined,
+      contract_state: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ContractAmino): Contract {
     return {
       contractAddress: object.contract_address,
@@ -947,6 +982,13 @@ export const Sequence = {
     obj.id_key = message.idKey;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SequenceSDKType {
+    return {
+      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+    };
   },
 
   fromAmino(object: SequenceAmino): Sequence {

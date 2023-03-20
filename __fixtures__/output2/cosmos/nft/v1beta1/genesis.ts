@@ -97,6 +97,13 @@ export const GenesisState = {
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDKJSON(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -172,6 +179,13 @@ export const Entry = {
     message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): EntrySDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : []
+    };
   }
 
 };

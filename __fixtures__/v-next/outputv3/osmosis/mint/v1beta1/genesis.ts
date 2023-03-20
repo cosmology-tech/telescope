@@ -146,6 +146,14 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      minter: isSet(object.minter) ? Minter.fromSDKJSON(object.minter) : undefined,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      reduction_started_epoch: isSet(object.reduction_started_epoch) ? Long.fromValue(object.reduction_started_epoch) : Long.ZERO
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,

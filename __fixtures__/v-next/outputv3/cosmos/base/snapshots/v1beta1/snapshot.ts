@@ -387,6 +387,16 @@ export const Snapshot = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SnapshotSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
+  },
+
   fromAmino(object: SnapshotAmino): Snapshot {
     return {
       height: Long.fromString(object.height),
@@ -515,6 +525,12 @@ export const Metadata = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetadataSDKType {
+    return {
+      chunk_hashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
 
   fromAmino(object: MetadataAmino): Metadata {
@@ -703,6 +719,17 @@ export const SnapshotItem = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SnapshotItemSDKType {
+    return {
+      store: isSet(object.store) ? SnapshotStoreItem.fromSDKJSON(object.store) : undefined,
+      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromSDKJSON(object.iavl) : undefined,
+      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromSDKJSON(object.extension) : undefined,
+      extension_payload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromSDKJSON(object.extension_payload) : undefined,
+      kv: isSet(object.kv) ? SnapshotKVItem.fromSDKJSON(object.kv) : undefined,
+      schema: isSet(object.schema) ? SnapshotSchema.fromSDKJSON(object.schema) : undefined
+    };
+  },
+
   fromAmino(object: SnapshotItemAmino): SnapshotItem {
     return {
       store: object?.store ? SnapshotStoreItem.fromAmino(object.store) : undefined,
@@ -821,6 +848,12 @@ export const SnapshotStoreItem = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotStoreItemSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: SnapshotStoreItemAmino): SnapshotStoreItem {
@@ -975,6 +1008,15 @@ export const SnapshotIAVLItem = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SnapshotIAVLItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      height: isSet(object.height) ? Number(object.height) : 0
+    };
+  },
+
   fromAmino(object: SnapshotIAVLItemAmino): SnapshotIAVLItem {
     return {
       key: object.key,
@@ -1105,6 +1147,13 @@ export const SnapshotExtensionMeta = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SnapshotExtensionMetaSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      format: isSet(object.format) ? Number(object.format) : 0
+    };
+  },
+
   fromAmino(object: SnapshotExtensionMetaAmino): SnapshotExtensionMeta {
     return {
       name: object.name,
@@ -1215,6 +1264,12 @@ export const SnapshotExtensionPayload = {
     const obj: any = {};
     obj.payload = message.payload;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotExtensionPayloadSDKType {
+    return {
+      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
+    };
   },
 
   fromAmino(object: SnapshotExtensionPayloadAmino): SnapshotExtensionPayload {
@@ -1341,6 +1396,13 @@ export const SnapshotKVItem = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SnapshotKVItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: SnapshotKVItemAmino): SnapshotKVItem {
     return {
       key: object.key,
@@ -1463,6 +1525,12 @@ export const SnapshotSchema = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotSchemaSDKType {
+    return {
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
 
   fromAmino(object: SnapshotSchemaAmino): SnapshotSchema {

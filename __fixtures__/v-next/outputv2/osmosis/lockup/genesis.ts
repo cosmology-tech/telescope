@@ -152,6 +152,14 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      last_lock_id: isSet(object.last_lock_id) ? Long.fromValue(object.last_lock_id) : Long.UZERO,
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : [],
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       lastLockId: Long.fromString(object.last_lock_id),

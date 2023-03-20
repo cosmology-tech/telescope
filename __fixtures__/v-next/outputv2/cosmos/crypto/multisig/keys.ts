@@ -137,6 +137,13 @@ export const LegacyAminoPubKey = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LegacyAminoPubKeySDKType {
+    return {
+      threshold: isSet(object.threshold) ? Number(object.threshold) : 0,
+      public_keys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: LegacyAminoPubKeyAmino): LegacyAminoPubKey {
     return {
       threshold: object.threshold,

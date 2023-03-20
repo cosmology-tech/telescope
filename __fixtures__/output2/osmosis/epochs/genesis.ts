@@ -201,6 +201,18 @@ export const EpochInfo = {
     message.epochCountingStarted = object.epochCountingStarted ?? false;
     message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): EpochInfoSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO,
+      current_epoch_start_time: isSet(object.current_epoch_start_time) ? fromTimestamp(fromJsonTimestamp(object.current_epoch_start_time)) : undefined,
+      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? Long.fromValue(object.current_epoch_start_height) : Long.ZERO
+    };
   }
 
 };
@@ -264,6 +276,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };

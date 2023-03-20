@@ -150,6 +150,13 @@ export const MsgSubmitEvidence = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSubmitEvidenceSDKType {
+    return {
+      submitter: isSet(object.submitter) ? String(object.submitter) : "",
+      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
+    };
+  },
+
   fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
     return {
       submitter: object.submitter,
@@ -260,6 +267,12 @@ export const MsgSubmitEvidenceResponse = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitEvidenceResponseSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
 
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {

@@ -45,6 +45,13 @@ exports[`Duraation: duration DepositParams 1`] = `
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.maxDepositPeriod = object.maxDepositPeriod ?? undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DepositParamsSDKType {
+    return {
+      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      max_deposit_period: isSet(object.max_deposit_period) ? String(object.max_deposit_period) : undefined
+    };
   }
 
 };"
@@ -95,6 +102,13 @@ exports[`Duration: string DepositParams 1`] = `
     message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.maxDepositPeriod = object.maxDepositPeriod ?? undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DepositParamsSDKType {
+    return {
+      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      max_deposit_period: isSet(object.max_deposit_period) ? String(object.max_deposit_period) : undefined
+    };
   }
 
 };"

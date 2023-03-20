@@ -1783,6 +1783,26 @@ export const Request = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestSDKType {
+    return {
+      echo: isSet(object.echo) ? RequestEcho.fromSDKJSON(object.echo) : undefined,
+      flush: isSet(object.flush) ? RequestFlush.fromSDKJSON(object.flush) : undefined,
+      info: isSet(object.info) ? RequestInfo.fromSDKJSON(object.info) : undefined,
+      set_option: isSet(object.set_option) ? RequestSetOption.fromSDKJSON(object.set_option) : undefined,
+      init_chain: isSet(object.init_chain) ? RequestInitChain.fromSDKJSON(object.init_chain) : undefined,
+      query: isSet(object.query) ? RequestQuery.fromSDKJSON(object.query) : undefined,
+      begin_block: isSet(object.begin_block) ? RequestBeginBlock.fromSDKJSON(object.begin_block) : undefined,
+      check_tx: isSet(object.check_tx) ? RequestCheckTx.fromSDKJSON(object.check_tx) : undefined,
+      deliver_tx: isSet(object.deliver_tx) ? RequestDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
+      end_block: isSet(object.end_block) ? RequestEndBlock.fromSDKJSON(object.end_block) : undefined,
+      commit: isSet(object.commit) ? RequestCommit.fromSDKJSON(object.commit) : undefined,
+      list_snapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
+      offer_snapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
+      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
+      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
+    };
+  },
+
   fromAmino(object: RequestAmino): Request {
     return {
       echo: object?.echo ? RequestEcho.fromAmino(object.echo) : undefined,
@@ -1913,6 +1933,12 @@ export const RequestEcho = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestEchoSDKType {
+    return {
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+
   fromAmino(object: RequestEchoAmino): RequestEcho {
     return {
       message: object.message
@@ -1996,6 +2022,10 @@ export const RequestFlush = {
   toSDK(_: RequestFlush): RequestFlushSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): RequestFlushSDKType {
+    return {};
   },
 
   fromAmino(_: RequestFlushAmino): RequestFlush {
@@ -2125,6 +2155,14 @@ export const RequestInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestInfoSDKType {
+    return {
+      version: isSet(object.version) ? String(object.version) : "",
+      block_version: isSet(object.block_version) ? Long.fromValue(object.block_version) : Long.UZERO,
+      p2p_version: isSet(object.p2p_version) ? Long.fromValue(object.p2p_version) : Long.UZERO
+    };
+  },
+
   fromAmino(object: RequestInfoAmino): RequestInfo {
     return {
       version: object.version,
@@ -2243,6 +2281,13 @@ export const RequestSetOption = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RequestSetOptionSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: RequestSetOptionAmino): RequestSetOption {
@@ -2431,6 +2476,17 @@ export const RequestInitChain = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestInitChainSDKType {
+    return {
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
+      initial_height: isSet(object.initial_height) ? Long.fromValue(object.initial_height) : Long.ZERO
+    };
+  },
+
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
       time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
@@ -2589,6 +2645,15 @@ export const RequestQuery = {
     obj.height = message.height;
     obj.prove = message.prove;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RequestQuerySDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      path: isSet(object.path) ? String(object.path) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      prove: isSet(object.prove) ? Boolean(object.prove) : false
+    };
   },
 
   fromAmino(object: RequestQueryAmino): RequestQuery {
@@ -2753,6 +2818,15 @@ export const RequestBeginBlock = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestBeginBlockSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      last_commit_info: isSet(object.last_commit_info) ? LastCommitInfo.fromSDKJSON(object.last_commit_info) : undefined,
+      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: RequestBeginBlockAmino): RequestBeginBlock {
     return {
       hash: object.hash,
@@ -2881,6 +2955,13 @@ export const RequestCheckTx = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestCheckTxSDKType {
+    return {
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0
+    };
+  },
+
   fromAmino(object: RequestCheckTxAmino): RequestCheckTx {
     return {
       tx: object.tx,
@@ -2985,6 +3066,12 @@ export const RequestDeliverTx = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestDeliverTxSDKType {
+    return {
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: RequestDeliverTxAmino): RequestDeliverTx {
     return {
       tx: object.tx
@@ -3087,6 +3174,12 @@ export const RequestEndBlock = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestEndBlockSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
+  },
+
   fromAmino(object: RequestEndBlockAmino): RequestEndBlock {
     return {
       height: Long.fromString(object.height)
@@ -3172,6 +3265,10 @@ export const RequestCommit = {
     return obj;
   },
 
+  fromSDKJSON(_: any): RequestCommitSDKType {
+    return {};
+  },
+
   fromAmino(_: RequestCommitAmino): RequestCommit {
     return {};
   },
@@ -3252,6 +3349,10 @@ export const RequestListSnapshots = {
   toSDK(_: RequestListSnapshots): RequestListSnapshotsSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): RequestListSnapshotsSDKType {
+    return {};
   },
 
   fromAmino(_: RequestListSnapshotsAmino): RequestListSnapshots {
@@ -3365,6 +3466,13 @@ export const RequestOfferSnapshot = {
     message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toSDK(message.snapshot) : undefined);
     obj.app_hash = message.appHash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RequestOfferSnapshotSDKType {
+    return {
+      snapshot: isSet(object.snapshot) ? Snapshot.fromSDKJSON(object.snapshot) : undefined,
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+    };
   },
 
   fromAmino(object: RequestOfferSnapshotAmino): RequestOfferSnapshot {
@@ -3499,6 +3607,14 @@ export const RequestLoadSnapshotChunk = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunk: isSet(object.chunk) ? Number(object.chunk) : 0
+    };
+  },
+
   fromAmino(object: RequestLoadSnapshotChunkAmino): RequestLoadSnapshotChunk {
     return {
       height: Long.fromString(object.height),
@@ -3631,6 +3747,14 @@ export const RequestApplySnapshotChunk = {
     obj.chunk = message.chunk;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RequestApplySnapshotChunkSDKType {
+    return {
+      index: isSet(object.index) ? Number(object.index) : 0,
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array(),
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   },
 
   fromAmino(object: RequestApplySnapshotChunkAmino): RequestApplySnapshotChunk {
@@ -3949,6 +4073,27 @@ export const Response = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseSDKType {
+    return {
+      exception: isSet(object.exception) ? ResponseException.fromSDKJSON(object.exception) : undefined,
+      echo: isSet(object.echo) ? ResponseEcho.fromSDKJSON(object.echo) : undefined,
+      flush: isSet(object.flush) ? ResponseFlush.fromSDKJSON(object.flush) : undefined,
+      info: isSet(object.info) ? ResponseInfo.fromSDKJSON(object.info) : undefined,
+      set_option: isSet(object.set_option) ? ResponseSetOption.fromSDKJSON(object.set_option) : undefined,
+      init_chain: isSet(object.init_chain) ? ResponseInitChain.fromSDKJSON(object.init_chain) : undefined,
+      query: isSet(object.query) ? ResponseQuery.fromSDKJSON(object.query) : undefined,
+      begin_block: isSet(object.begin_block) ? ResponseBeginBlock.fromSDKJSON(object.begin_block) : undefined,
+      check_tx: isSet(object.check_tx) ? ResponseCheckTx.fromSDKJSON(object.check_tx) : undefined,
+      deliver_tx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
+      end_block: isSet(object.end_block) ? ResponseEndBlock.fromSDKJSON(object.end_block) : undefined,
+      commit: isSet(object.commit) ? ResponseCommit.fromSDKJSON(object.commit) : undefined,
+      list_snapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
+      offer_snapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
+      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
+      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
+    };
+  },
+
   fromAmino(object: ResponseAmino): Response {
     return {
       exception: object?.exception ? ResponseException.fromAmino(object.exception) : undefined,
@@ -4081,6 +4226,12 @@ export const ResponseException = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseExceptionSDKType {
+    return {
+      error: isSet(object.error) ? String(object.error) : ""
+    };
+  },
+
   fromAmino(object: ResponseExceptionAmino): ResponseException {
     return {
       error: object.error
@@ -4183,6 +4334,12 @@ export const ResponseEcho = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseEchoSDKType {
+    return {
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+
   fromAmino(object: ResponseEchoAmino): ResponseEcho {
     return {
       message: object.message
@@ -4266,6 +4423,10 @@ export const ResponseFlush = {
   toSDK(_: ResponseFlush): ResponseFlushSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ResponseFlushSDKType {
+    return {};
   },
 
   fromAmino(_: ResponseFlushAmino): ResponseFlush {
@@ -4423,6 +4584,16 @@ export const ResponseInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseInfoSDKType {
+    return {
+      data: isSet(object.data) ? String(object.data) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO,
+      last_block_height: isSet(object.last_block_height) ? Long.fromValue(object.last_block_height) : Long.ZERO,
+      last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: ResponseInfoAmino): ResponseInfo {
     return {
       data: object.data,
@@ -4559,6 +4730,14 @@ export const ResponseSetOption = {
     obj.log = message.log;
     obj.info = message.info;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResponseSetOptionSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : ""
+    };
   },
 
   fromAmino(object: ResponseSetOptionAmino): ResponseSetOption {
@@ -4705,6 +4884,14 @@ export const ResponseInitChain = {
 
     obj.app_hash = message.appHash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResponseInitChainSDKType {
+    return {
+      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+    };
   },
 
   fromAmino(object: ResponseInitChainAmino): ResponseInitChain {
@@ -4931,6 +5118,20 @@ export const ResponseQuery = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseQuerySDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
+  },
+
   fromAmino(object: ResponseQueryAmino): ResponseQuery {
     return {
       code: object.code,
@@ -5059,6 +5260,12 @@ export const ResponseBeginBlock = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResponseBeginBlockSDKType {
+    return {
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ResponseBeginBlockAmino): ResponseBeginBlock {
@@ -5277,6 +5484,19 @@ export const ResponseCheckTx = {
 
     obj.codespace = message.codespace;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResponseCheckTxSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
+      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
   },
 
   fromAmino(object: ResponseCheckTxAmino): ResponseCheckTx {
@@ -5511,6 +5731,19 @@ export const ResponseDeliverTx = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseDeliverTxSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? Long.fromValue(object.gas_wanted) : Long.ZERO,
+      gas_used: isSet(object.gas_used) ? Long.fromValue(object.gas_used) : Long.ZERO,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
+  },
+
   fromAmino(object: ResponseDeliverTxAmino): ResponseDeliverTx {
     return {
       code: object.code,
@@ -5685,6 +5918,14 @@ export const ResponseEndBlock = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseEndBlockSDKType {
+    return {
+      validator_updates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      consensus_param_updates: isSet(object.consensus_param_updates) ? ConsensusParams.fromSDKJSON(object.consensus_param_updates) : undefined,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ResponseEndBlockAmino): ResponseEndBlock {
     return {
       validatorUpdates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -5817,6 +6058,13 @@ export const ResponseCommit = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseCommitSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      retain_height: isSet(object.retain_height) ? Long.fromValue(object.retain_height) : Long.ZERO
+    };
+  },
+
   fromAmino(object: ResponseCommitAmino): ResponseCommit {
     return {
       data: object.data,
@@ -5933,6 +6181,12 @@ export const ResponseListSnapshots = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseListSnapshotsSDKType {
+    return {
+      snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ResponseListSnapshotsAmino): ResponseListSnapshots {
     return {
       snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromAmino(e)) : []
@@ -6041,6 +6295,12 @@ export const ResponseOfferSnapshot = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseOfferSnapshotSDKType {
+    return {
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
+    };
+  },
+
   fromAmino(object: ResponseOfferSnapshotAmino): ResponseOfferSnapshot {
     return {
       result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : 0
@@ -6141,6 +6401,12 @@ export const ResponseLoadSnapshotChunk = {
     const obj: any = {};
     obj.chunk = message.chunk;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResponseLoadSnapshotChunkSDKType {
+    return {
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array()
+    };
   },
 
   fromAmino(object: ResponseLoadSnapshotChunkAmino): ResponseLoadSnapshotChunk {
@@ -6308,6 +6574,14 @@ export const ResponseApplySnapshotChunk = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResponseApplySnapshotChunkSDKType {
+    return {
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
+      refetch_chunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => Number(e)) : [],
+      reject_senders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: ResponseApplySnapshotChunkAmino): ResponseApplySnapshotChunk {
     return {
       result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : 0,
@@ -6467,6 +6741,15 @@ export const ConsensusParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConsensusParamsSDKType {
+    return {
+      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
+    };
+  },
+
   fromAmino(object: ConsensusParamsAmino): ConsensusParams {
     return {
       block: object?.block ? BlockParams.fromAmino(object.block) : undefined,
@@ -6587,6 +6870,13 @@ export const BlockParams = {
     obj.max_bytes = message.maxBytes;
     obj.max_gas = message.maxGas;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BlockParamsSDKType {
+    return {
+      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
+      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO
+    };
   },
 
   fromAmino(object: BlockParamsAmino): BlockParams {
@@ -6717,6 +7007,13 @@ export const LastCommitInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): LastCommitInfoSDKType {
+    return {
+      round: isSet(object.round) ? Number(object.round) : 0,
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: LastCommitInfoAmino): LastCommitInfo {
@@ -6855,6 +7152,13 @@ export const Event = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EventSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: EventAmino): Event {
     return {
       type: object.type,
@@ -6991,6 +7295,14 @@ export const EventAttribute = {
     obj.value = message.value;
     obj.index = message.index;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EventAttributeSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      index: isSet(object.index) ? Boolean(object.index) : false
+    };
   },
 
   fromAmino(object: EventAttributeAmino): EventAttribute {
@@ -7141,6 +7453,15 @@ export const TxResult = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TxResultSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      index: isSet(object.index) ? Number(object.index) : 0,
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
+      result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
+    };
+  },
+
   fromAmino(object: TxResultAmino): TxResult {
     return {
       height: Long.fromString(object.height),
@@ -7263,6 +7584,13 @@ export const Validator = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+    };
+  },
+
   fromAmino(object: ValidatorAmino): Validator {
     return {
       address: object.address,
@@ -7381,6 +7709,13 @@ export const ValidatorUpdate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorUpdateSDKType {
+    return {
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+    };
+  },
+
   fromAmino(object: ValidatorUpdateAmino): ValidatorUpdate {
     return {
       pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
@@ -7497,6 +7832,13 @@ export const VoteInfo = {
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
     obj.signed_last_block = message.signedLastBlock;
     return obj;
+  },
+
+  fromSDKJSON(object: any): VoteInfoSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
+      signed_last_block: isSet(object.signed_last_block) ? Boolean(object.signed_last_block) : false
+    };
   },
 
   fromAmino(object: VoteInfoAmino): VoteInfo {
@@ -7657,6 +7999,16 @@ export const Evidence = {
     message.time !== undefined && (obj.time = message.time ?? undefined);
     obj.total_voting_power = message.totalVotingPower;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EvidenceSDKType {
+    return {
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
+    };
   },
 
   fromAmino(object: EvidenceAmino): Evidence {
@@ -7823,6 +8175,16 @@ export const Snapshot = {
     obj.hash = message.hash;
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array()
+    };
   },
 
   fromAmino(object: SnapshotAmino): Snapshot {

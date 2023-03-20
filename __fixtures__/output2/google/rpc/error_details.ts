@@ -338,6 +338,12 @@ export const RetryInfo = {
     const message = createBaseRetryInfo();
     message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): RetryInfoSDKType {
+    return {
+      retry_delay: isSet(object.retry_delay) ? Duration.fromSDKJSON(object.retry_delay) : undefined
+    };
   }
 
 };
@@ -413,6 +419,13 @@ export const DebugInfo = {
     message.stackEntries = object.stackEntries?.map(e => e) || [];
     message.detail = object.detail ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DebugInfoSDKType {
+    return {
+      stack_entries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => String(e)) : [],
+      detail: isSet(object.detail) ? String(object.detail) : ""
+    };
   }
 
 };
@@ -476,6 +489,12 @@ export const QuotaFailure = {
     const message = createBaseQuotaFailure();
     message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QuotaFailureSDKType {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -545,6 +564,13 @@ export const QuotaFailure_Violation = {
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QuotaFailure_ViolationSDKType {
+    return {
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -614,6 +640,13 @@ export const ErrorInfo_MetadataEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ErrorInfo_MetadataEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -722,6 +755,19 @@ export const ErrorInfo = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDKJSON(object: any): ErrorInfoSDKType {
+    return {
+      reason: isSet(object.reason) ? String(object.reason) : "",
+      domain: isSet(object.domain) ? String(object.domain) : "",
+      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   }
 
 };
@@ -785,6 +831,12 @@ export const PreconditionFailure = {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): PreconditionFailureSDKType {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -866,6 +918,14 @@ export const PreconditionFailure_Violation = {
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): PreconditionFailure_ViolationSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -929,6 +989,12 @@ export const BadRequest = {
     const message = createBaseBadRequest();
     message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): BadRequestSDKType {
+    return {
+      field_violations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -998,6 +1064,13 @@ export const BadRequest_FieldViolation = {
     message.field = object.field ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): BadRequest_FieldViolationSDKType {
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -1067,6 +1140,13 @@ export const RequestInfo = {
     message.requestId = object.requestId ?? "";
     message.servingData = object.servingData ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): RequestInfoSDKType {
+    return {
+      request_id: isSet(object.request_id) ? String(object.request_id) : "",
+      serving_data: isSet(object.serving_data) ? String(object.serving_data) : ""
+    };
   }
 
 };
@@ -1160,6 +1240,15 @@ export const ResourceInfo = {
     message.owner = object.owner ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ResourceInfoSDKType {
+    return {
+      resource_type: isSet(object.resource_type) ? String(object.resource_type) : "",
+      resource_name: isSet(object.resource_name) ? String(object.resource_name) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -1223,6 +1312,12 @@ export const Help = {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): HelpSDKType {
+    return {
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1292,6 +1387,13 @@ export const Help_Link = {
     message.description = object.description ?? "";
     message.url = object.url ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): Help_LinkSDKType {
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      url: isSet(object.url) ? String(object.url) : ""
+    };
   }
 
 };
@@ -1361,6 +1463,13 @@ export const LocalizedMessage = {
     message.locale = object.locale ?? "";
     message.message = object.message ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): LocalizedMessageSDKType {
+    return {
+      locale: isSet(object.locale) ? String(object.locale) : "",
+      message: isSet(object.message) ? String(object.message) : ""
+    };
   }
 
 };

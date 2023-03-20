@@ -310,6 +310,10 @@ export const QueryTotalUnclaimedRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryTotalUnclaimedRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryTotalUnclaimedRequestAmino): QueryTotalUnclaimedRequest {
     return {};
   },
@@ -421,6 +425,12 @@ export const QueryTotalUnclaimedResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTotalUnclaimedResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryTotalUnclaimedResponseAmino): QueryTotalUnclaimedResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -510,6 +520,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -609,6 +623,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -711,6 +731,12 @@ export const QueryClaimsRecordsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryClaimsRecordsRequestAmino): QueryClaimsRecordsRequest {
@@ -841,6 +867,13 @@ export const QueryClaimsRecordsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClaimsRecordsResponseSDKType {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryClaimsRecordsResponseAmino): QueryClaimsRecordsResponse {
     return {
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : [],
@@ -949,6 +982,12 @@ export const QueryClaimsRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
 
   fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
@@ -1077,6 +1116,13 @@ export const QueryClaimsRecordResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordResponseSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryClaimsRecordResponseAmino): QueryClaimsRecordResponse {

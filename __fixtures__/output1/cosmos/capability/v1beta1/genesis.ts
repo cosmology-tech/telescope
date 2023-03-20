@@ -115,6 +115,13 @@ export const GenesisOwners = {
     obj.index = message.index;
     message.indexOwners !== undefined && (obj.index_owners = message.indexOwners ? CapabilityOwners.toSDK(message.indexOwners) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisOwnersSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
+      index_owners: isSet(object.index_owners) ? CapabilityOwners.fromSDKJSON(object.index_owners) : undefined
+    };
   }
 
 };
@@ -210,6 +217,13 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromSDKJSON(e)) : []
+    };
   }
 
 };

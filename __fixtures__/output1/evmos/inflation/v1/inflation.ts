@@ -178,6 +178,14 @@ export const InflationDistribution = {
     obj.usage_incentives = message.usageIncentives;
     obj.community_pool = message.communityPool;
     return obj;
+  },
+
+  fromSDKJSON(object: any): InflationDistributionSDKType {
+    return {
+      staking_rewards: isSet(object.staking_rewards) ? String(object.staking_rewards) : "",
+      usage_incentives: isSet(object.usage_incentives) ? String(object.usage_incentives) : "",
+      community_pool: isSet(object.community_pool) ? String(object.community_pool) : ""
+    };
   }
 
 };
@@ -303,6 +311,16 @@ export const ExponentialCalculation = {
     obj.bonding_target = message.bondingTarget;
     obj.max_variance = message.maxVariance;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ExponentialCalculationSDKType {
+    return {
+      a: isSet(object.a) ? String(object.a) : "",
+      r: isSet(object.r) ? String(object.r) : "",
+      c: isSet(object.c) ? String(object.c) : "",
+      bonding_target: isSet(object.bonding_target) ? String(object.bonding_target) : "",
+      max_variance: isSet(object.max_variance) ? String(object.max_variance) : ""
+    };
   }
 
 };

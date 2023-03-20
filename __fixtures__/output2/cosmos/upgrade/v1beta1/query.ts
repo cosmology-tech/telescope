@@ -128,6 +128,10 @@ export const QueryCurrentPlanRequest = {
   fromPartial(_: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryCurrentPlanRequestSDKType {
+    return {};
   }
 
 };
@@ -185,6 +189,12 @@ export const QueryCurrentPlanResponse = {
     const message = createBaseQueryCurrentPlanResponse();
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentPlanResponseSDKType {
+    return {
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -242,6 +252,12 @@ export const QueryAppliedPlanRequest = {
     const message = createBaseQueryAppliedPlanRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -299,6 +315,12 @@ export const QueryAppliedPlanResponse = {
     const message = createBaseQueryAppliedPlanResponse();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   }
 
 };
@@ -356,6 +378,12 @@ export const QueryUpgradedConsensusStateRequest = {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {
+      last_height: isSet(object.last_height) ? Long.fromValue(object.last_height) : Long.ZERO
+    };
   }
 
 };
@@ -413,6 +441,12 @@ export const QueryUpgradedConsensusStateResponse = {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? bytesFromBase64(object.upgraded_consensus_state) : new Uint8Array()
+    };
   }
 
 };
@@ -470,6 +504,12 @@ export const QueryModuleVersionsRequest = {
     const message = createBaseQueryModuleVersionsRequest();
     message.moduleName = object.moduleName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsRequestSDKType {
+    return {
+      module_name: isSet(object.module_name) ? String(object.module_name) : ""
+    };
   }
 
 };
@@ -533,6 +573,12 @@ export const QueryModuleVersionsResponse = {
     const message = createBaseQueryModuleVersionsResponse();
     message.moduleVersions = object.moduleVersions?.map(e => ModuleVersion.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsResponseSDKType {
+    return {
+      module_versions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromSDKJSON(e)) : []
+    };
   }
 
 };

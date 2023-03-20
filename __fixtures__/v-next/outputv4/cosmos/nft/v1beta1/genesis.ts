@@ -132,6 +132,13 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDKJSON(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -227,6 +234,13 @@ export const Entry = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): EntrySDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : []
+    };
   }
 
 };

@@ -361,6 +361,14 @@ export const TableDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TableDescriptorSDKType {
+    return {
+      primary_key: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromSDKJSON(object.primary_key) : undefined,
+      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromSDKJSON(e)) : [],
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
+  },
+
   fromAmino(object: TableDescriptorAmino): TableDescriptor {
     return {
       primaryKey: object?.primary_key ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
@@ -493,6 +501,13 @@ export const PrimaryKeyDescriptor = {
     obj.fields = message.fields;
     obj.auto_increment = message.autoIncrement;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PrimaryKeyDescriptorSDKType {
+    return {
+      fields: isSet(object.fields) ? String(object.fields) : "",
+      auto_increment: isSet(object.auto_increment) ? Boolean(object.auto_increment) : false
+    };
   },
 
   fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor {
@@ -635,6 +650,14 @@ export const SecondaryIndexDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SecondaryIndexDescriptorSDKType {
+    return {
+      fields: isSet(object.fields) ? String(object.fields) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
+      unique: isSet(object.unique) ? Boolean(object.unique) : false
+    };
+  },
+
   fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor {
     return {
       fields: object.fields,
@@ -747,6 +770,12 @@ export const SingletonDescriptor = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SingletonDescriptorSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
   },
 
   fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor {

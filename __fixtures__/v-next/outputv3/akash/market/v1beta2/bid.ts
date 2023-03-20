@@ -389,6 +389,15 @@ export const MsgCreateBid = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateBidSDKType {
+    return {
+      order: isSet(object.order) ? OrderID.fromSDKJSON(object.order) : undefined,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
+      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateBidAmino): MsgCreateBid {
     return {
       order: object?.order ? OrderID.fromAmino(object.order) : undefined,
@@ -478,6 +487,10 @@ export const MsgCreateBidResponse = {
   toSDK(_: MsgCreateBidResponse): MsgCreateBidResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateBidResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateBidResponseAmino): MsgCreateBidResponse {
@@ -579,6 +592,12 @@ export const MsgCloseBid = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCloseBidSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
+    };
+  },
+
   fromAmino(object: MsgCloseBidAmino): MsgCloseBid {
     return {
       bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
@@ -662,6 +681,10 @@ export const MsgCloseBidResponse = {
   toSDK(_: MsgCloseBidResponse): MsgCloseBidResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseBidResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCloseBidResponseAmino): MsgCloseBidResponse {
@@ -819,6 +842,16 @@ export const BidID = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BidIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : ""
+    };
+  },
+
   fromAmino(object: BidIDAmino): BidID {
     return {
       owner: object.owner,
@@ -969,6 +1002,15 @@ export const Bid = {
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BidSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+    };
   },
 
   fromAmino(object: BidAmino): Bid {
@@ -1147,6 +1189,17 @@ export const BidFilters = {
     obj.provider = message.provider;
     obj.state = message.state;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BidFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   },
 
   fromAmino(object: BidFiltersAmino): BidFilters {

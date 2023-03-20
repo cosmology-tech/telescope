@@ -299,6 +299,14 @@ export const MsgStoreCode = {
     obj.wasm_byte_code = message.wasmByteCode;
     message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgStoreCodeSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
   }
 
 };
@@ -368,6 +376,12 @@ export const MsgStoreCodeResponse = {
     const obj: any = {};
     obj.code_id = message.codeId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgStoreCodeResponseSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO
+    };
   }
 
 };
@@ -519,6 +533,17 @@ export const MsgInstantiateContract = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgInstantiateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      label: isSet(object.label) ? String(object.label) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -602,6 +627,13 @@ export const MsgInstantiateContractResponse = {
     obj.address = message.address;
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgInstantiateContractResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -725,6 +757,15 @@ export const MsgExecuteContract = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecuteContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -794,6 +835,12 @@ export const MsgExecuteContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecuteContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -905,6 +952,15 @@ export const MsgMigrateContract = {
     obj.code_id = message.codeId;
     obj.msg = message.msg;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgMigrateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   }
 
 };
@@ -974,6 +1030,12 @@ export const MsgMigrateContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgMigrateContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -1071,6 +1133,14 @@ export const MsgUpdateAdmin = {
     obj.new_admin = message.newAdmin;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -1123,6 +1193,10 @@ export const MsgUpdateAdminResponse = {
   toSDK(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateAdminResponseSDKType {
+    return {};
   }
 
 };
@@ -1206,6 +1280,13 @@ export const MsgClearAdmin = {
     obj.sender = message.sender;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgClearAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -1258,6 +1339,10 @@ export const MsgClearAdminResponse = {
   toSDK(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgClearAdminResponseSDKType {
+    return {};
   }
 
 };

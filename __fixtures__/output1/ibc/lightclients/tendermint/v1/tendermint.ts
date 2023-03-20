@@ -407,6 +407,22 @@ export const ClientState = {
     obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      trust_level: isSet(object.trust_level) ? Fraction.fromSDKJSON(object.trust_level) : undefined,
+      trusting_period: isSet(object.trusting_period) ? Duration.fromSDKJSON(object.trusting_period) : undefined,
+      unbonding_period: isSet(object.unbonding_period) ? Duration.fromSDKJSON(object.unbonding_period) : undefined,
+      max_clock_drift: isSet(object.max_clock_drift) ? Duration.fromSDKJSON(object.max_clock_drift) : undefined,
+      frozen_height: isSet(object.frozen_height) ? Height.fromSDKJSON(object.frozen_height) : undefined,
+      latest_height: isSet(object.latest_height) ? Height.fromSDKJSON(object.latest_height) : undefined,
+      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDKJSON(e)) : [],
+      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry) ? Boolean(object.allow_update_after_expiry) : false,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour) ? Boolean(object.allow_update_after_misbehaviour) : false
+    };
   }
 
 };
@@ -504,6 +520,14 @@ export const ConsensusState = {
     message.root !== undefined && (obj.root = message.root ? MerkleRoot.toSDK(message.root) : undefined);
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConsensusStateSDKType {
+    return {
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      root: isSet(object.root) ? MerkleRoot.fromSDKJSON(object.root) : undefined,
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array()
+    };
   }
 
 };
@@ -601,6 +625,14 @@ export const Misbehaviour = {
     message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
     message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MisbehaviourSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      header_1: isSet(object.header_1) ? Header.fromSDKJSON(object.header_1) : undefined,
+      header_2: isSet(object.header_2) ? Header.fromSDKJSON(object.header_2) : undefined
+    };
   }
 
 };
@@ -712,6 +744,15 @@ export const Header = {
     message.trustedHeight !== undefined && (obj.trusted_height = message.trustedHeight ? Height.toSDK(message.trustedHeight) : undefined);
     message.trustedValidators !== undefined && (obj.trusted_validators = message.trustedValidators ? ValidatorSet.toSDK(message.trustedValidators) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): HeaderSDKType {
+    return {
+      signed_header: isSet(object.signed_header) ? SignedHeader.fromSDKJSON(object.signed_header) : undefined,
+      validator_set: isSet(object.validator_set) ? ValidatorSet.fromSDKJSON(object.validator_set) : undefined,
+      trusted_height: isSet(object.trusted_height) ? Height.fromSDKJSON(object.trusted_height) : undefined,
+      trusted_validators: isSet(object.trusted_validators) ? ValidatorSet.fromSDKJSON(object.trusted_validators) : undefined
+    };
   }
 
 };
@@ -795,6 +836,13 @@ export const Fraction = {
     obj.numerator = message.numerator;
     obj.denominator = message.denominator;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FractionSDKType {
+    return {
+      numerator: isSet(object.numerator) ? Long.fromValue(object.numerator) : Long.UZERO,
+      denominator: isSet(object.denominator) ? Long.fromValue(object.denominator) : Long.UZERO
+    };
   }
 
 };

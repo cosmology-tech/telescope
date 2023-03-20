@@ -215,6 +215,14 @@ export const MsgLockTokens = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockTokensSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -284,6 +292,12 @@ export const MsgLockTokensResponse = {
     const obj: any = {};
     obj.ID = message.ID;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockTokensResponseSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+    };
   }
 
 };
@@ -353,6 +367,12 @@ export const MsgBeginUnlockingAll = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingAllSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -434,6 +454,12 @@ export const MsgBeginUnlockingAllResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingAllResponseSDKType {
+    return {
+      unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -543,6 +569,14 @@ export const MsgBeginUnlocking = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -612,6 +646,12 @@ export const MsgBeginUnlockingResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   }
 
 };
@@ -709,6 +749,14 @@ export const MsgExtendLockup = {
     obj.ID = message.ID;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExtendLockupSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -778,6 +826,12 @@ export const MsgExtendLockupResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExtendLockupResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   }
 
 };
@@ -887,6 +941,14 @@ export const MsgForceUnlock = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgForceUnlockSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -956,6 +1018,12 @@ export const MsgForceUnlockResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgForceUnlockResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   }
 
 };

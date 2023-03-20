@@ -40,6 +40,7 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
+            fromSDKJSON?: boolean;
             toAmino?: boolean;
             fromAmino?: boolean;
             toProto?: boolean;
@@ -212,6 +213,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             fromPartial: true,
             toSDK: false,
             fromSDK: false,
+            fromSDKJSON: true,
             toAmino: false,
             fromAmino: false,
             toProto: false,

@@ -89,6 +89,12 @@ export const Control = {
     const obj: any = {};
     obj.environment = message.environment;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ControlSDKType {
+    return {
+      environment: isSet(object.environment) ? String(object.environment) : ""
+    };
   }
 
 };

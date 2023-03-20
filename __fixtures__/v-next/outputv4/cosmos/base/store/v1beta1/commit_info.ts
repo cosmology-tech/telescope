@@ -147,6 +147,13 @@ export const CommitInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CommitInfoSDKType {
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      store_infos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -230,6 +237,13 @@ export const StoreInfo = {
     obj.name = message.name;
     message.commitId !== undefined && (obj.commit_id = message.commitId ? CommitID.toSDK(message.commitId) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): StoreInfoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      commit_id: isSet(object.commit_id) ? CommitID.fromSDKJSON(object.commit_id) : undefined
+    };
   }
 
 };
@@ -313,6 +327,13 @@ export const CommitID = {
     obj.version = message.version;
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CommitIDSDKType {
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   }
 
 };

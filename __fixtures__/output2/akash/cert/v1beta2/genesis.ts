@@ -81,6 +81,13 @@ export const GenesisCertificate = {
     message.owner = object.owner ?? "";
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisCertificateSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined
+    };
   }
 
 };
@@ -144,6 +151,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.certificates = object.certificates?.map(e => GenesisCertificate.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromSDKJSON(e)) : []
+    };
   }
 
 };

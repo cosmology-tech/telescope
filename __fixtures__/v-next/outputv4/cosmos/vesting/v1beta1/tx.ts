@@ -227,6 +227,16 @@ export const MsgCreateVestingAccount = {
     obj.end_time = message.endTime;
     obj.delayed = message.delayed;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateVestingAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO,
+      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
+    };
   }
 
 };
@@ -279,6 +289,10 @@ export const MsgCreateVestingAccountResponse = {
   toSDK(_: MsgCreateVestingAccountResponse): MsgCreateVestingAccountResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateVestingAccountResponseSDKType {
+    return {};
   }
 
 };
@@ -388,6 +402,14 @@ export const MsgCreatePermanentLockedAccount = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreatePermanentLockedAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -440,6 +462,10 @@ export const MsgCreatePermanentLockedAccountResponse = {
   toSDK(_: MsgCreatePermanentLockedAccountResponse): MsgCreatePermanentLockedAccountResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreatePermanentLockedAccountResponseSDKType {
+    return {};
   }
 
 };
@@ -563,6 +589,15 @@ export const MsgCreatePeriodicVestingAccount = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreatePeriodicVestingAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -615,6 +650,10 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   toSDK(_: MsgCreatePeriodicVestingAccountResponse): MsgCreatePeriodicVestingAccountResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreatePeriodicVestingAccountResponseSDKType {
+    return {};
   }
 
 };

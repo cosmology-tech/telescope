@@ -141,6 +141,14 @@ export const ParameterChangeProposal = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParameterChangeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -238,6 +246,14 @@ export const ParamChange = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamChangeSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };

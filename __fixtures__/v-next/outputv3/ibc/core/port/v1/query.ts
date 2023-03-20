@@ -214,6 +214,16 @@ export const QueryAppVersionRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAppVersionRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      proposed_version: isSet(object.proposed_version) ? String(object.proposed_version) : ""
+    };
+  },
+
   fromAmino(object: QueryAppVersionRequestAmino): QueryAppVersionRequest {
     return {
       portId: object.port_id,
@@ -344,6 +354,13 @@ export const QueryAppVersionResponse = {
     obj.port_id = message.portId;
     obj.version = message.version;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAppVersionResponseSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      version: isSet(object.version) ? String(object.version) : ""
+    };
   },
 
   fromAmino(object: QueryAppVersionResponseAmino): QueryAppVersionResponse {

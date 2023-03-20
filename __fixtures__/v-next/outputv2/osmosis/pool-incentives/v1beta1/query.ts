@@ -295,6 +295,12 @@ export const QueryGaugeIdsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGaugeIdsRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryGaugeIdsRequestAmino): QueryGaugeIdsRequest {
     return {
       poolId: Long.fromString(object.pool_id)
@@ -415,6 +421,12 @@ export const QueryGaugeIdsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGaugeIdsResponseSDKType {
+    return {
+      gauge_ids_with_duration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryGaugeIdsResponseAmino): QueryGaugeIdsResponse {
@@ -561,6 +573,14 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
+    return {
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      gauge_incentive_percentage: isSet(object.gauge_incentive_percentage) ? String(object.gauge_incentive_percentage) : ""
+    };
+  },
+
   fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationAmino): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: Long.fromString(object.gauge_id),
@@ -656,6 +676,10 @@ export const QueryDistrInfoRequest = {
   toSDK(_: QueryDistrInfoRequest): QueryDistrInfoRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryDistrInfoRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryDistrInfoRequestAmino): QueryDistrInfoRequest {
@@ -765,6 +789,12 @@ export const QueryDistrInfoResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDistrInfoResponseSDKType {
+    return {
+      distr_info: isSet(object.distr_info) ? DistrInfo.fromSDKJSON(object.distr_info) : undefined
+    };
+  },
+
   fromAmino(object: QueryDistrInfoResponseAmino): QueryDistrInfoResponse {
     return {
       distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined
@@ -856,6 +886,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -965,6 +999,12 @@ export const QueryParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined
@@ -1056,6 +1096,10 @@ export const QueryLockableDurationsRequest = {
   toSDK(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
@@ -1177,6 +1221,12 @@ export const QueryLockableDurationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryLockableDurationsResponseAmino): QueryLockableDurationsResponse {
     return {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
@@ -1274,6 +1324,10 @@ export const QueryIncentivizedPoolsRequest = {
   toSDK(_: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryIncentivizedPoolsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryIncentivizedPoolsRequestAmino): QueryIncentivizedPoolsRequest {
@@ -1411,6 +1465,14 @@ export const IncentivizedPool = {
     return obj;
   },
 
+  fromSDKJSON(object: any): IncentivizedPoolSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      lockable_duration: isSet(object.lockable_duration) ? Duration.fromSDKJSON(object.lockable_duration) : undefined,
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: IncentivizedPoolAmino): IncentivizedPool {
     return {
       poolId: Long.fromString(object.pool_id),
@@ -1537,6 +1599,12 @@ export const QueryIncentivizedPoolsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryIncentivizedPoolsResponseSDKType {
+    return {
+      incentivized_pools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryIncentivizedPoolsResponseAmino): QueryIncentivizedPoolsResponse {
     return {
       incentivizedPools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromAmino(e)) : []
@@ -1634,6 +1702,10 @@ export const QueryExternalIncentiveGaugesRequest = {
   toSDK(_: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryExternalIncentiveGaugesRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryExternalIncentiveGaugesRequestAmino): QueryExternalIncentiveGaugesRequest {
@@ -1753,6 +1825,12 @@ export const QueryExternalIncentiveGaugesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryExternalIncentiveGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryExternalIncentiveGaugesResponseAmino): QueryExternalIncentiveGaugesResponse {

@@ -298,6 +298,14 @@ export const Claim = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ClaimSDKType {
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0,
+      completed: isSet(object.completed) ? Boolean(object.completed) : false,
+      claimable_amount: isSet(object.claimable_amount) ? String(object.claimable_amount) : ""
+    };
+  },
+
   fromAmino(object: ClaimAmino): Claim {
     return {
       action: isSet(object.action) ? actionFromJSON(object.action) : 0,
@@ -456,6 +464,14 @@ export const ClaimsRecordAddress = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ClaimsRecordAddressSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
+    };
+  },
+
   fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
     return {
       address: object.address,
@@ -604,6 +620,13 @@ export const ClaimsRecord = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ClaimsRecordSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
+    };
   },
 
   fromAmino(object: ClaimsRecordAmino): ClaimsRecord {

@@ -346,6 +346,14 @@ export const MsgSubmitProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
+      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
+  },
+
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
     return {
       content: object?.content ? ProposalContentI_FromAmino(object.content) : undefined,
@@ -464,6 +472,12 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgSubmitProposalResponseAmino): MsgSubmitProposalResponse {
@@ -604,6 +618,14 @@ export const MsgVote = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgVoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+    };
+  },
+
   fromAmino(object: MsgVoteAmino): MsgVote {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -699,6 +721,10 @@ export const MsgVoteResponse = {
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
@@ -848,6 +874,14 @@ export const MsgVoteWeighted = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgVoteWeightedSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgVoteWeightedAmino): MsgVoteWeighted {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -949,6 +983,10 @@ export const MsgVoteWeightedResponse = {
   toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteWeightedResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
@@ -1098,6 +1136,14 @@ export const MsgDeposit = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgDepositSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgDepositAmino): MsgDeposit {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -1199,6 +1245,10 @@ export const MsgDepositResponse = {
   toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDepositResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {

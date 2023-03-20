@@ -171,6 +171,12 @@ export const Capability = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CapabilitySDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
+    };
+  },
+
   fromAmino(object: CapabilityAmino): Capability {
     return {
       index: Long.fromString(object.index)
@@ -295,6 +301,13 @@ export const Owner = {
     return obj;
   },
 
+  fromSDKJSON(object: any): OwnerSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : "",
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: OwnerAmino): Owner {
     return {
       module: object.module,
@@ -417,6 +430,12 @@ export const CapabilityOwners = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CapabilityOwnersSDKType {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {

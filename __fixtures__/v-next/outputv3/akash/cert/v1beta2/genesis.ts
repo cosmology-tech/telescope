@@ -135,6 +135,13 @@ export const GenesisCertificate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisCertificateSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined
+    };
+  },
+
   fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
     return {
       owner: object.owner,
@@ -249,6 +256,12 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: GenesisStateAmino): GenesisState {

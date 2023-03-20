@@ -104,6 +104,13 @@ export const DenomTrace = {
     message.path = object.path ?? "";
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DenomTraceSDKType {
+    return {
+      path: isSet(object.path) ? String(object.path) : "",
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
   }
 
 };
@@ -173,6 +180,13 @@ export const Params = {
     message.sendEnabled = object.sendEnabled ?? false;
     message.receiveEnabled = object.receiveEnabled ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
+      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false
+    };
   }
 
 };

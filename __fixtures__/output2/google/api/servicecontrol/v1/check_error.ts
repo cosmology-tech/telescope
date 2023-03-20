@@ -373,6 +373,15 @@ export const CheckError = {
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CheckErrorSDKType {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      detail: isSet(object.detail) ? String(object.detail) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
+    };
   }
 
 };

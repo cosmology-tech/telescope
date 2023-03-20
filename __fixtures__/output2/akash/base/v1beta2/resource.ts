@@ -96,6 +96,13 @@ export const CPU = {
     message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): CPUSDKType {
+    return {
+      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -171,6 +178,13 @@ export const Memory = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MemorySDKType {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -258,6 +272,14 @@ export const Storage = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): StorageSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };

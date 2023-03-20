@@ -146,6 +146,13 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      prune_epoch_identifier: isSet(object.prune_epoch_identifier) ? String(object.prune_epoch_identifier) : "",
+      record_history_keep_period: isSet(object.record_history_keep_period) ? Duration.fromSDKJSON(object.record_history_keep_period) : undefined
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       pruneEpochIdentifier: object.prune_epoch_identifier,
@@ -282,6 +289,13 @@ export const GenesisState = {
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromSDKJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: GenesisStateAmino): GenesisState {

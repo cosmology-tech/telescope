@@ -418,6 +418,16 @@ export const LeaseID = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LeaseIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : ""
+    };
+  },
+
   fromAmino(object: LeaseIDAmino): LeaseID {
     return {
       owner: object.owner,
@@ -582,6 +592,16 @@ export const Lease = {
     obj.created_at = message.createdAt;
     obj.closed_on = message.closedOn;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LeaseSDKType {
+    return {
+      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO,
+      closed_on: isSet(object.closed_on) ? Long.fromValue(object.closed_on) : Long.ZERO
+    };
   },
 
   fromAmino(object: LeaseAmino): Lease {
@@ -764,6 +784,17 @@ export const LeaseFilters = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LeaseFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      state: isSet(object.state) ? String(object.state) : ""
+    };
+  },
+
   fromAmino(object: LeaseFiltersAmino): LeaseFilters {
     return {
       owner: object.owner,
@@ -876,6 +907,12 @@ export const MsgCreateLease = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateLeaseSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateLeaseAmino): MsgCreateLease {
     return {
       bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
@@ -959,6 +996,10 @@ export const MsgCreateLeaseResponse = {
   toSDK(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateLeaseResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateLeaseResponseAmino): MsgCreateLeaseResponse {
@@ -1060,6 +1101,12 @@ export const MsgWithdrawLease = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgWithdrawLeaseSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? LeaseID.fromSDKJSON(object.bid_id) : undefined
+    };
+  },
+
   fromAmino(object: MsgWithdrawLeaseAmino): MsgWithdrawLease {
     return {
       bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : undefined
@@ -1143,6 +1190,10 @@ export const MsgWithdrawLeaseResponse = {
   toSDK(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawLeaseResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgWithdrawLeaseResponseAmino): MsgWithdrawLeaseResponse {
@@ -1244,6 +1295,12 @@ export const MsgCloseLease = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCloseLeaseSDKType {
+    return {
+      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined
+    };
+  },
+
   fromAmino(object: MsgCloseLeaseAmino): MsgCloseLease {
     return {
       leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined
@@ -1327,6 +1384,10 @@ export const MsgCloseLeaseResponse = {
   toSDK(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseLeaseResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCloseLeaseResponseAmino): MsgCloseLeaseResponse {

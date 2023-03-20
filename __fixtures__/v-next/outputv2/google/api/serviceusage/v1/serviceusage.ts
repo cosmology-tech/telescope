@@ -706,6 +706,12 @@ export const EnableServiceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
     return {
       name: object.name
@@ -806,6 +812,12 @@ export const EnableServiceResponse = {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): EnableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
+    };
   },
 
   fromAmino(object: EnableServiceResponseAmino): EnableServiceResponse {
@@ -938,6 +950,14 @@ export const DisableServiceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
+    };
+  },
+
   fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
     return {
       name: object.name,
@@ -1044,6 +1064,12 @@ export const DisableServiceResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DisableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
+    };
+  },
+
   fromAmino(object: DisableServiceResponseAmino): DisableServiceResponse {
     return {
       service: object?.service ? Service.fromAmino(object.service) : undefined
@@ -1144,6 +1170,12 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
@@ -1290,6 +1322,15 @@ export const ListServicesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
     return {
       parent: object.parent,
@@ -1422,6 +1463,13 @@ export const ListServicesResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   },
 
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
@@ -1558,6 +1606,13 @@ export const BatchEnableServicesRequest = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
@@ -1706,6 +1761,13 @@ export const BatchEnableServicesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BatchEnableServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: BatchEnableServicesResponseAmino): BatchEnableServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
@@ -1833,6 +1895,13 @@ export const BatchEnableServicesResponse_EnableFailure = {
     obj.service_id = message.serviceId;
     obj.error_message = message.errorMessage;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BatchEnableServicesResponse_EnableFailureSDKType {
+    return {
+      service_id: isSet(object.service_id) ? String(object.service_id) : "",
+      error_message: isSet(object.error_message) ? String(object.error_message) : ""
+    };
   },
 
   fromAmino(object: BatchEnableServicesResponse_EnableFailureAmino): BatchEnableServicesResponse_EnableFailure {
@@ -1965,6 +2034,13 @@ export const BatchGetServicesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BatchGetServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: BatchGetServicesRequestAmino): BatchGetServicesRequest {
     return {
       parent: object.parent,
@@ -2085,6 +2161,12 @@ export const BatchGetServicesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): BatchGetServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: BatchGetServicesResponseAmino): BatchGetServicesResponse {

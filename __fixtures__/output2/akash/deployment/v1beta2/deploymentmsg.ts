@@ -157,6 +157,16 @@ export const MsgCreateDeployment = {
     message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     message.depositor = object.depositor ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -200,6 +210,10 @@ export const MsgCreateDeploymentResponse = {
   fromPartial(_: DeepPartial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgCreateDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -281,6 +295,14 @@ export const MsgDepositDeployment = {
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     message.depositor = object.depositor ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgDepositDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -324,6 +346,10 @@ export const MsgDepositDeploymentResponse = {
   fromPartial(_: DeepPartial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgDepositDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -393,6 +419,13 @@ export const MsgUpdateDeployment = {
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.version = object.version ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+    };
   }
 
 };
@@ -436,6 +469,10 @@ export const MsgUpdateDeploymentResponse = {
   fromPartial(_: DeepPartial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -493,6 +530,12 @@ export const MsgCloseDeployment = {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCloseDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -536,6 +579,10 @@ export const MsgCloseDeploymentResponse = {
   fromPartial(_: DeepPartial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgCloseDeploymentResponseSDKType {
+    return {};
   }
 
 };

@@ -1319,6 +1319,15 @@ export const Service = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ServiceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      config: isSet(object.config) ? ServiceConfig.fromSDKJSON(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+    };
+  },
+
   fromAmino(object: ServiceAmino): Service {
     return {
       name: object.name,
@@ -1587,6 +1596,21 @@ export const ServiceConfig = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ServiceConfigSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
+      quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromSDKJSON(object.authentication) : undefined,
+      usage: isSet(object.usage) ? Usage.fromSDKJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : [],
+      monitored_resources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
+      monitoring: isSet(object.monitoring) ? Monitoring.fromSDKJSON(object.monitoring) : undefined
+    };
+  },
+
   fromAmino(object: ServiceConfigAmino): ServiceConfig {
     return {
       name: object.name,
@@ -1734,6 +1758,12 @@ export const OperationMetadata = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): OperationMetadataSDKType {
+    return {
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: OperationMetadataAmino): OperationMetadata {
@@ -1934,6 +1964,17 @@ export const ConsumerQuotaMetric = {
 
     obj.unit = message.unit;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConsumerQuotaMetricSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      consumer_quota_limits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
+      descendant_consumer_quota_limits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDKJSON(e)) : [],
+      unit: isSet(object.unit) ? String(object.unit) : ""
+    };
   },
 
   fromAmino(object: ConsumerQuotaMetricAmino): ConsumerQuotaMetric {
@@ -2141,6 +2182,17 @@ export const ConsumerQuotaLimit = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConsumerQuotaLimitSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      is_precise: isSet(object.is_precise) ? Boolean(object.is_precise) : false,
+      allows_admin_overrides: isSet(object.allows_admin_overrides) ? Boolean(object.allows_admin_overrides) : false,
+      quota_buckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ConsumerQuotaLimitAmino): ConsumerQuotaLimit {
     return {
       name: object.name,
@@ -2269,6 +2321,13 @@ export const QuotaBucket_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuotaBucket_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: QuotaBucket_DimensionsEntryAmino): QuotaBucket_DimensionsEntry {
@@ -2477,6 +2536,22 @@ export const QuotaBucket = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuotaBucketSDKType {
+    return {
+      effective_limit: isSet(object.effective_limit) ? Long.fromValue(object.effective_limit) : Long.ZERO,
+      default_limit: isSet(object.default_limit) ? Long.fromValue(object.default_limit) : Long.ZERO,
+      producer_override: isSet(object.producer_override) ? QuotaOverride.fromSDKJSON(object.producer_override) : undefined,
+      consumer_override: isSet(object.consumer_override) ? QuotaOverride.fromSDKJSON(object.consumer_override) : undefined,
+      admin_override: isSet(object.admin_override) ? QuotaOverride.fromSDKJSON(object.admin_override) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   fromAmino(object: QuotaBucketAmino): QuotaBucket {
     return {
       effectiveLimit: Long.fromString(object.effective_limit),
@@ -2611,6 +2686,13 @@ export const QuotaOverride_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuotaOverride_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: QuotaOverride_DimensionsEntryAmino): QuotaOverride_DimensionsEntry {
@@ -2820,6 +2902,22 @@ export const QuotaOverride = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuotaOverrideSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override_value: isSet(object.override_value) ? Long.fromValue(object.override_value) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      admin_override_ancestor: isSet(object.admin_override_ancestor) ? String(object.admin_override_ancestor) : ""
+    };
+  },
+
   fromAmino(object: QuotaOverrideAmino): QuotaOverride {
     return {
       name: object.name,
@@ -2956,6 +3054,12 @@ export const OverrideInlineSource = {
     return obj;
   },
 
+  fromSDKJSON(object: any): OverrideInlineSourceSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: OverrideInlineSourceAmino): OverrideInlineSource {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
@@ -3074,6 +3178,13 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AdminQuotaPolicy_DimensionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: AdminQuotaPolicy_DimensionsEntryAmino): AdminQuotaPolicy_DimensionsEntry {
@@ -3283,6 +3394,22 @@ export const AdminQuotaPolicy = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AdminQuotaPolicySDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      policy_value: isSet(object.policy_value) ? Long.fromValue(object.policy_value) : Long.ZERO,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      container: isSet(object.container) ? String(object.container) : ""
+    };
+  },
+
   fromAmino(object: AdminQuotaPolicyAmino): AdminQuotaPolicy {
     return {
       name: object.name,
@@ -3419,6 +3546,13 @@ export const ServiceIdentity = {
     obj.email = message.email;
     obj.unique_id = message.uniqueId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ServiceIdentitySDKType {
+    return {
+      email: isSet(object.email) ? String(object.email) : "",
+      unique_id: isSet(object.unique_id) ? String(object.unique_id) : ""
+    };
   },
 
   fromAmino(object: ServiceIdentityAmino): ServiceIdentity {

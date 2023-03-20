@@ -209,6 +209,14 @@ export const MsgStoreCode = {
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgStoreCodeSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
   }
 
 };
@@ -266,6 +274,12 @@ export const MsgStoreCodeResponse = {
     const message = createBaseMsgStoreCodeResponse();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgStoreCodeResponseSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO
+    };
   }
 
 };
@@ -389,6 +403,17 @@ export const MsgInstantiateContract = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgInstantiateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      label: isSet(object.label) ? String(object.label) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -458,6 +483,13 @@ export const MsgInstantiateContractResponse = {
     message.address = object.address ?? "";
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgInstantiateContractResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -557,6 +589,15 @@ export const MsgExecuteContract = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgExecuteContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -614,6 +655,12 @@ export const MsgExecuteContractResponse = {
     const message = createBaseMsgExecuteContractResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgExecuteContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -707,6 +754,15 @@ export const MsgMigrateContract = {
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.msg = object.msg ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgMigrateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
   }
 
 };
@@ -764,6 +820,12 @@ export const MsgMigrateContractResponse = {
     const message = createBaseMsgMigrateContractResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgMigrateContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -845,6 +907,14 @@ export const MsgUpdateAdmin = {
     message.newAdmin = object.newAdmin ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -888,6 +958,10 @@ export const MsgUpdateAdminResponse = {
   fromPartial(_: DeepPartial<MsgUpdateAdminResponse>): MsgUpdateAdminResponse {
     const message = createBaseMsgUpdateAdminResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateAdminResponseSDKType {
+    return {};
   }
 
 };
@@ -957,6 +1031,13 @@ export const MsgClearAdmin = {
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgClearAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -1000,6 +1081,10 @@ export const MsgClearAdminResponse = {
   fromPartial(_: DeepPartial<MsgClearAdminResponse>): MsgClearAdminResponse {
     const message = createBaseMsgClearAdminResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgClearAdminResponseSDKType {
+    return {};
   }
 
 };

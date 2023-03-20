@@ -113,6 +113,10 @@ export const QueryFeeTokensRequest = {
   toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryFeeTokensRequestSDKType {
+    return {};
   }
 
 };
@@ -194,6 +198,12 @@ export const QueryFeeTokensResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryFeeTokensResponseSDKType {
+    return {
+      fee_tokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -263,6 +273,12 @@ export const QueryDenomSpotPriceRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomSpotPriceRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -346,6 +362,13 @@ export const QueryDenomSpotPriceResponse = {
     obj.poolID = message.poolID;
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomSpotPriceResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO,
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
   }
 
 };
@@ -415,6 +438,12 @@ export const QueryDenomPoolIdRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomPoolIdRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -484,6 +513,12 @@ export const QueryDenomPoolIdResponse = {
     const obj: any = {};
     obj.poolID = message.poolID;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomPoolIdResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
   }
 
 };
@@ -536,6 +571,10 @@ export const QueryBaseDenomRequest = {
   toSDK(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryBaseDenomRequestSDKType {
+    return {};
   }
 
 };
@@ -605,6 +644,12 @@ export const QueryBaseDenomResponse = {
     const obj: any = {};
     obj.base_denom = message.baseDenom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryBaseDenomResponseSDKType {
+    return {
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
   }
 
 };

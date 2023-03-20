@@ -143,6 +143,13 @@ export const Endpoint = {
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     obj.sequence_number = message.sequenceNumber;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EndpointSDKType {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
+    };
   }
 
 };

@@ -238,6 +238,12 @@ export const DoubleValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DoubleValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -307,6 +313,12 @@ export const FloatValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FloatValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -376,6 +388,12 @@ export const Int64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Int64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   }
 
 };
@@ -445,6 +463,12 @@ export const UInt64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UInt64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+    };
   }
 
 };
@@ -514,6 +538,12 @@ export const Int32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Int32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -583,6 +613,12 @@ export const UInt32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UInt32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -652,6 +688,12 @@ export const BoolValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BoolValueSDKType {
+    return {
+      value: isSet(object.value) ? Boolean(object.value) : false
+    };
   }
 
 };
@@ -721,6 +763,12 @@ export const StringValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): StringValueSDKType {
+    return {
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -790,6 +838,12 @@ export const BytesValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BytesValueSDKType {
+    return {
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   }
 
 };

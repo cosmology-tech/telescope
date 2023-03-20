@@ -1344,6 +1344,12 @@ export const RoutingRule = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RoutingRuleSDKType {
+    return {
+      routing_parameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: RoutingRuleAmino): RoutingRule {
     return {
       routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
@@ -1464,6 +1470,13 @@ export const RoutingParameter = {
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RoutingParameterSDKType {
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      path_template: isSet(object.path_template) ? String(object.path_template) : ""
+    };
   },
 
   fromAmino(object: RoutingParameterAmino): RoutingParameter {

@@ -129,6 +129,12 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined
@@ -243,6 +249,13 @@ export const Params = {
     obj.enable_recovery = message.enableRecovery;
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_recovery: isSet(object.enable_recovery) ? Boolean(object.enable_recovery) : false,
+      packet_timeout_duration: isSet(object.packet_timeout_duration) ? Duration.fromSDKJSON(object.packet_timeout_duration) : undefined
+    };
   },
 
   fromAmino(object: ParamsAmino): Params {

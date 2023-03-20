@@ -754,6 +754,18 @@ export const ResourceDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResourceDescriptorSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
+      name_field: isSet(object.name_field) ? String(object.name_field) : "",
+      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
+      plural: isSet(object.plural) ? String(object.plural) : "",
+      singular: isSet(object.singular) ? String(object.singular) : "",
+      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
     return {
       type: object.type,
@@ -892,6 +904,13 @@ export const ResourceReference = {
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResourceReferenceSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      child_type: isSet(object.child_type) ? String(object.child_type) : ""
+    };
   },
 
   fromAmino(object: ResourceReferenceAmino): ResourceReference {

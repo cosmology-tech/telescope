@@ -403,6 +403,12 @@ export const QueryContractInfoRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractInfoRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -486,6 +492,13 @@ export const QueryContractInfoResponse = {
     obj.address = message.address;
     message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toSDK(message.contractInfo) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractInfoResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined
+    };
   }
 
 };
@@ -569,6 +582,13 @@ export const QueryContractHistoryRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractHistoryRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -664,6 +684,13 @@ export const QueryContractHistoryResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractHistoryResponseSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -747,6 +774,13 @@ export const QueryContractsByCodeRequest = {
     obj.code_id = message.codeId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractsByCodeRequestSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -842,6 +876,13 @@ export const QueryContractsByCodeResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryContractsByCodeResponseSDKType {
+    return {
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => String(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -925,6 +966,13 @@ export const QueryAllContractStateRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1020,6 +1068,13 @@ export const QueryAllContractStateResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllContractStateResponseSDKType {
+    return {
+      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1103,6 +1158,13 @@ export const QueryRawContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryRawContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
+    };
   }
 
 };
@@ -1172,6 +1234,12 @@ export const QueryRawContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryRawContractStateResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -1255,6 +1323,13 @@ export const QuerySmartContractStateRequest = {
     obj.address = message.address;
     obj.query_data = message.queryData;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySmartContractStateRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
+    };
   }
 
 };
@@ -1324,6 +1399,12 @@ export const QuerySmartContractStateResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySmartContractStateResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -1393,6 +1474,12 @@ export const QueryCodeRequest = {
     const obj: any = {};
     obj.code_id = message.codeId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCodeRequestSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO
+    };
   }
 
 };
@@ -1490,6 +1577,14 @@ export const CodeInfoResponse = {
     obj.creator = message.creator;
     obj.data_hash = message.dataHash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CodeInfoResponseSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array()
+    };
   }
 
 };
@@ -1573,6 +1668,13 @@ export const QueryCodeResponse = {
     message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfoResponse.toSDK(message.codeInfo) : undefined);
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCodeResponseSDKType {
+    return {
+      code_info: isSet(object.code_info) ? CodeInfoResponse.fromSDKJSON(object.code_info) : undefined,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -1642,6 +1744,12 @@ export const QueryCodesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCodesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1737,6 +1845,13 @@ export const QueryCodesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCodesResponseSDKType {
+    return {
+      code_infos: Array.isArray(object?.code_infos) ? object.code_infos.map((e: any) => CodeInfoResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1806,6 +1921,12 @@ export const QueryPinnedCodesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPinnedCodesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1914,6 +2035,13 @@ export const QueryPinnedCodesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPinnedCodesResponseSDKType {
+    return {
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => Long.fromValue(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };

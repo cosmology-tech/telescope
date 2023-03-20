@@ -392,6 +392,13 @@ export const LogEntry_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogEntry_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -725,6 +732,33 @@ export const LogEntry = {
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     message.split !== undefined && (obj.split = message.split ? LogSplit.toSDK(message.split) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogEntrySDKType {
+    return {
+      log_name: isSet(object.log_name) ? String(object.log_name) : "",
+      resource: isSet(object.resource) ? MonitoredResource.fromSDKJSON(object.resource) : undefined,
+      proto_payload: isSet(object.proto_payload) ? Any.fromSDKJSON(object.proto_payload) : undefined,
+      text_payload: isSet(object.text_payload) ? String(object.text_payload) : undefined,
+      json_payload: isSet(object.json_payload) ? Struct.fromSDKJSON(object.json_payload) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      receive_timestamp: isSet(object.receive_timestamp) ? fromTimestamp(fromJsonTimestamp(object.receive_timestamp)) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
+      http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      operation: isSet(object.operation) ? LogEntryOperation.fromSDKJSON(object.operation) : undefined,
+      trace: isSet(object.trace) ? String(object.trace) : "",
+      span_id: isSet(object.span_id) ? String(object.span_id) : "",
+      trace_sampled: isSet(object.trace_sampled) ? Boolean(object.trace_sampled) : false,
+      source_location: isSet(object.source_location) ? LogEntrySourceLocation.fromSDKJSON(object.source_location) : undefined,
+      split: isSet(object.split) ? LogSplit.fromSDKJSON(object.split) : undefined
+    };
   }
 
 };
@@ -836,6 +870,15 @@ export const LogEntryOperation = {
     obj.first = message.first;
     obj.last = message.last;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogEntryOperationSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      producer: isSet(object.producer) ? String(object.producer) : "",
+      first: isSet(object.first) ? Boolean(object.first) : false,
+      last: isSet(object.last) ? Boolean(object.last) : false
+    };
   }
 
 };
@@ -933,6 +976,14 @@ export const LogEntrySourceLocation = {
     obj.line = message.line;
     obj.function = message.function;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogEntrySourceLocationSDKType {
+    return {
+      file: isSet(object.file) ? String(object.file) : "",
+      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
+      function: isSet(object.function) ? String(object.function) : ""
+    };
   }
 
 };
@@ -1030,6 +1081,14 @@ export const LogSplit = {
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogSplitSDKType {
+    return {
+      uid: isSet(object.uid) ? String(object.uid) : "",
+      index: isSet(object.index) ? Number(object.index) : 0,
+      total_splits: isSet(object.total_splits) ? Number(object.total_splits) : 0
+    };
   }
 
 };

@@ -138,6 +138,12 @@ export const Node = {
     return obj;
   },
 
+  fromSDKJSON(object: any): NodeSDKType {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: NodeAmino): Node {
     return {
       children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
@@ -268,6 +274,13 @@ export const Child = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ChildSDKType {
+    return {
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
+      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
+    };
+  },
+
   fromAmino(object: ChildAmino): Child {
     return {
       index: object.index,
@@ -378,6 +391,12 @@ export const Leaf = {
     const obj: any = {};
     message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toSDK(message.leaf) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): LeafSDKType {
+    return {
+      leaf: isSet(object.leaf) ? Child.fromSDKJSON(object.leaf) : undefined
+    };
   },
 
   fromAmino(object: LeafAmino): Leaf {

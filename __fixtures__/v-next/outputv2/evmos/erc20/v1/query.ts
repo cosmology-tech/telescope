@@ -259,6 +259,12 @@ export const QueryTokenPairsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTokenPairsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryTokenPairsRequestAmino): QueryTokenPairsRequest {
     return {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
@@ -387,6 +393,13 @@ export const QueryTokenPairsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTokenPairsResponseSDKType {
+    return {
+      token_pairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryTokenPairsResponseAmino): QueryTokenPairsResponse {
     return {
       tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
@@ -497,6 +510,12 @@ export const QueryTokenPairRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTokenPairRequestSDKType {
+    return {
+      token: isSet(object.token) ? String(object.token) : ""
+    };
+  },
+
   fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
     return {
       token: object.token
@@ -599,6 +618,12 @@ export const QueryTokenPairResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTokenPairResponseSDKType {
+    return {
+      token_pair: isSet(object.token_pair) ? TokenPair.fromSDKJSON(object.token_pair) : undefined
+    };
+  },
+
   fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
     return {
       tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : undefined
@@ -682,6 +707,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -781,6 +810,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

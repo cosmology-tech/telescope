@@ -141,6 +141,15 @@ export const Block = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BlockSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromSDKJSON(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromSDKJSON(object.evidence) : undefined,
+      last_commit: isSet(object.last_commit) ? Commit.fromSDKJSON(object.last_commit) : undefined
+    };
+  },
+
   fromAmino(object: BlockAmino): Block {
     return {
       header: object?.header ? Header.fromAmino(object.header) : undefined,

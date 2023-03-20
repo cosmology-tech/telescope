@@ -156,6 +156,13 @@ export const SourceInfo_PositionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Number(object.key) : 0,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -316,6 +323,19 @@ export const SourceInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
   }
 
 };
@@ -427,6 +447,15 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourcePositionSDKType {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      offset: isSet(object.offset) ? Number(object.offset) : 0,
+      line: isSet(object.line) ? Number(object.line) : 0,
+      column: isSet(object.column) ? Number(object.column) : 0
+    };
   }
 
 };

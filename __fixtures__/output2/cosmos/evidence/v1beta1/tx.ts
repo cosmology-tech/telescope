@@ -85,6 +85,13 @@ export const MsgSubmitEvidence = {
     message.submitter = object.submitter ?? "";
     message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitEvidenceSDKType {
+    return {
+      submitter: isSet(object.submitter) ? String(object.submitter) : "",
+      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
+    };
   }
 
 };
@@ -142,6 +149,12 @@ export const MsgSubmitEvidenceResponse = {
     const message = createBaseMsgSubmitEvidenceResponse();
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitEvidenceResponseSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   }
 
 };

@@ -271,6 +271,16 @@ export const BaseVestingAccount = {
 
     obj.end_time = message.endTime;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BaseVestingAccountSDKType {
+    return {
+      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
+      original_vesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_free: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_vesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO
+    };
   }
 
 };
@@ -354,6 +364,13 @@ export const ContinuousVestingAccount = {
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     obj.start_time = message.startTime;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ContinuousVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO
+    };
   }
 
 };
@@ -423,6 +440,12 @@ export const DelayedVestingAccount = {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): DelayedVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   }
 
 };
@@ -518,6 +541,13 @@ export const Period = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeriodSDKType {
+    return {
+      length: isSet(object.length) ? Long.fromValue(object.length) : Long.ZERO,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -627,6 +657,14 @@ export const PeriodicVestingAccount = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeriodicVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -696,6 +734,12 @@ export const PermanentLockedAccount = {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PermanentLockedAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   }
 
 };

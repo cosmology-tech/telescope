@@ -373,6 +373,16 @@ export const ConnectionEnd = {
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     obj.delay_period = message.delayPeriod;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConnectionEndSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
   }
 
 };
@@ -524,6 +534,17 @@ export const IdentifiedConnection = {
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     obj.delay_period = message.delayPeriod;
     return obj;
+  },
+
+  fromSDKJSON(object: any): IdentifiedConnectionSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
   }
 
 };
@@ -621,6 +642,14 @@ export const Counterparty = {
     obj.connection_id = message.connectionId;
     message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toSDK(message.prefix) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      prefix: isSet(object.prefix) ? MerklePrefix.fromSDKJSON(object.prefix) : undefined
+    };
   }
 
 };
@@ -702,6 +731,12 @@ export const ClientPaths = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ClientPathsSDKType {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -797,6 +832,13 @@ export const ConnectionPaths = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConnectionPathsSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -892,6 +934,13 @@ export const Version = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): VersionSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -961,6 +1010,12 @@ export const Params = {
     const obj: any = {};
     obj.max_expected_time_per_block = message.maxExpectedTimePerBlock;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? Long.fromValue(object.max_expected_time_per_block) : Long.UZERO
+    };
   }
 
 };

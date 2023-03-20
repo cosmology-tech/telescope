@@ -101,6 +101,10 @@ export const Empty = {
     return obj;
   },
 
+  fromSDKJSON(_: any): EmptySDKType {
+    return {};
+  },
+
   fromAmino(_: EmptyAmino): Empty {
     return {};
   },

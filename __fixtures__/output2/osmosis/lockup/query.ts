@@ -155,6 +155,10 @@ export const ModuleBalanceRequest = {
   fromPartial(_: DeepPartial<ModuleBalanceRequest>): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): ModuleBalanceRequestSDKType {
+    return {};
   }
 
 };
@@ -218,6 +222,12 @@ export const ModuleBalanceResponse = {
     const message = createBaseModuleBalanceResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ModuleBalanceResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -261,6 +271,10 @@ export const ModuleLockedAmountRequest = {
   fromPartial(_: DeepPartial<ModuleLockedAmountRequest>): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): ModuleLockedAmountRequestSDKType {
+    return {};
   }
 
 };
@@ -324,6 +338,12 @@ export const ModuleLockedAmountResponse = {
     const message = createBaseModuleLockedAmountResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ModuleLockedAmountResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -381,6 +401,12 @@ export const AccountUnlockableCoinsRequest = {
     const message = createBaseAccountUnlockableCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockableCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -444,6 +470,12 @@ export const AccountUnlockableCoinsResponse = {
     const message = createBaseAccountUnlockableCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockableCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -501,6 +533,12 @@ export const AccountUnlockingCoinsRequest = {
     const message = createBaseAccountUnlockingCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockingCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -564,6 +602,12 @@ export const AccountUnlockingCoinsResponse = {
     const message = createBaseAccountUnlockingCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockingCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -621,6 +665,12 @@ export const AccountLockedCoinsRequest = {
     const message = createBaseAccountLockedCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -684,6 +734,12 @@ export const AccountLockedCoinsResponse = {
     const message = createBaseAccountLockedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -753,6 +809,13 @@ export const AccountLockedPastTimeRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -816,6 +879,12 @@ export const AccountLockedPastTimeResponse = {
     const message = createBaseAccountLockedPastTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -885,6 +954,13 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -948,6 +1024,12 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1017,6 +1099,13 @@ export const AccountUnlockedBeforeTimeRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -1080,6 +1169,12 @@ export const AccountUnlockedBeforeTimeResponse = {
     const message = createBaseAccountUnlockedBeforeTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1161,6 +1256,14 @@ export const AccountLockedPastTimeDenomRequest = {
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -1224,6 +1327,12 @@ export const AccountLockedPastTimeDenomResponse = {
     const message = createBaseAccountLockedPastTimeDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1293,6 +1402,13 @@ export const LockedDenomRequest = {
     message.denom = object.denom ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LockedDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -1350,6 +1466,12 @@ export const LockedDenomResponse = {
     const message = createBaseLockedDenomResponse();
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): LockedDenomResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
   }
 
 };
@@ -1407,6 +1529,12 @@ export const LockedRequest = {
     const message = createBaseLockedRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): LockedRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -1464,6 +1592,12 @@ export const LockedResponse = {
     const message = createBaseLockedResponse();
     message.lock = object.lock !== undefined && object.lock !== null ? PeriodLock.fromPartial(object.lock) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LockedResponseSDKType {
+    return {
+      lock: isSet(object.lock) ? PeriodLock.fromSDKJSON(object.lock) : undefined
+    };
   }
 
 };
@@ -1521,6 +1655,12 @@ export const SyntheticLockupsByLockupIDRequest = {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -1584,6 +1724,12 @@ export const SyntheticLockupsByLockupIDResponse = {
     const message = createBaseSyntheticLockupsByLockupIDResponse();
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDResponseSDKType {
+    return {
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1653,6 +1799,13 @@ export const AccountLockedLongerDurationRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -1716,6 +1869,12 @@ export const AccountLockedLongerDurationResponse = {
     const message = createBaseAccountLockedLongerDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1785,6 +1944,13 @@ export const AccountLockedDurationRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -1848,6 +2014,12 @@ export const AccountLockedDurationResponse = {
     const message = createBaseAccountLockedDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1917,6 +2089,13 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -1980,6 +2159,12 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2061,6 +2246,14 @@ export const AccountLockedLongerDurationDenomRequest = {
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -2124,6 +2317,12 @@ export const AccountLockedLongerDurationDenomResponse = {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2167,6 +2366,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -2224,6 +2427,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

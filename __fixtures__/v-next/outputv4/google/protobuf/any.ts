@@ -284,6 +284,13 @@ export const Any = {
     obj.type_url = message.typeUrl;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AnySDKType {
+    return {
+      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   }
 
 };

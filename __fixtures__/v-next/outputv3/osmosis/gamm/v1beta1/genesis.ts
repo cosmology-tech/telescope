@@ -151,6 +151,12 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      pool_creation_fee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       poolCreationFee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
@@ -305,6 +311,14 @@ export const GenesisState = {
     obj.next_pool_number = message.nextPoolNumber;
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      next_pool_number: isSet(object.next_pool_number) ? Long.fromValue(object.next_pool_number) : Long.UZERO,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: GenesisStateAmino): GenesisState {

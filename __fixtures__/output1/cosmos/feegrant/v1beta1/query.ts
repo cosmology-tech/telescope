@@ -167,6 +167,13 @@ export const QueryAllowanceRequest = {
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowanceRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
+    };
   }
 
 };
@@ -236,6 +243,12 @@ export const QueryAllowanceResponse = {
     const obj: any = {};
     message.allowance !== undefined && (obj.allowance = message.allowance ? Grant.toSDK(message.allowance) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowanceResponseSDKType {
+    return {
+      allowance: isSet(object.allowance) ? Grant.fromSDKJSON(object.allowance) : undefined
+    };
   }
 
 };
@@ -319,6 +332,13 @@ export const QueryAllowancesRequest = {
     obj.grantee = message.grantee;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesRequestSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -414,6 +434,13 @@ export const QueryAllowancesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesResponseSDKType {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -497,6 +524,13 @@ export const QueryAllowancesByGranterRequest = {
     obj.granter = message.granter;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesByGranterRequestSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -592,6 +626,13 @@ export const QueryAllowancesByGranterResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllowancesByGranterResponseSDKType {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };

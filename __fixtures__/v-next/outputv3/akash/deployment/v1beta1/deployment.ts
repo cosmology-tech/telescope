@@ -445,6 +445,15 @@ export const MsgCreateDeployment = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
@@ -540,6 +549,10 @@ export const MsgCreateDeploymentResponse = {
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateDeploymentResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
@@ -655,6 +668,13 @@ export const MsgDepositDeployment = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgDepositDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
+  },
+
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
@@ -740,6 +760,10 @@ export const MsgDepositDeploymentResponse = {
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDepositDeploymentResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
@@ -881,6 +905,14 @@ export const MsgUpdateDeployment = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
@@ -974,6 +1006,10 @@ export const MsgUpdateDeploymentResponse = {
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDeploymentResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
@@ -1075,6 +1111,12 @@ export const MsgCloseDeployment = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCloseDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
@@ -1158,6 +1200,10 @@ export const MsgCloseDeploymentResponse = {
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseDeploymentResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
@@ -1271,6 +1317,13 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeploymentIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
+    };
   },
 
   fromAmino(object: DeploymentIDAmino): DeploymentID {
@@ -1419,6 +1472,15 @@ export const Deployment = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeploymentSDKType {
+    return {
+      deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+    };
+  },
+
   fromAmino(object: DeploymentAmino): Deployment {
     return {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
@@ -1553,6 +1615,14 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq;
     obj.state = message.state;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeploymentFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   },
 
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {

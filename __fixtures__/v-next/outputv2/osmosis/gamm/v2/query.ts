@@ -172,6 +172,14 @@ export const QuerySpotPriceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
+      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
+    };
+  },
+
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
     return {
       poolId: Long.fromString(object.pool_id),
@@ -284,6 +292,12 @@ export const QuerySpotPriceResponse = {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySpotPriceResponseSDKType {
+    return {
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
   },
 
   fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {

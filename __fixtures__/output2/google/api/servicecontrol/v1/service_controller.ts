@@ -334,6 +334,14 @@ export const CheckRequest = {
     message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CheckRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      operation: isSet(object.operation) ? Operation.fromSDKJSON(object.operation) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
   }
 
 };
@@ -445,6 +453,16 @@ export const CheckResponse = {
     message.serviceRolloutId = object.serviceRolloutId ?? "";
     message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CheckResponseSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      check_errors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : "",
+      check_info: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDKJSON(object.check_info) : undefined
+    };
   }
 
 };
@@ -520,6 +538,13 @@ export const CheckResponse_CheckInfo = {
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
     message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CheckResponse_CheckInfoSDKType {
+    return {
+      unused_arguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => String(e)) : [],
+      consumer_info: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDKJSON(object.consumer_info) : undefined
+    };
   }
 
 };
@@ -601,6 +626,14 @@ export const CheckResponse_ConsumerInfo = {
     message.type = object.type ?? 0;
     message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
+    return {
+      project_number: isSet(object.project_number) ? Long.fromValue(object.project_number) : Long.ZERO,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      consumer_number: isSet(object.consumer_number) ? Long.fromValue(object.consumer_number) : Long.ZERO
+    };
   }
 
 };
@@ -688,6 +721,14 @@ export const ReportRequest = {
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ReportRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
   }
 
 };
@@ -775,6 +816,14 @@ export const ReportResponse = {
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ReportResponseSDKType {
+    return {
+      report_errors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : ""
+    };
   }
 
 };
@@ -844,6 +893,13 @@ export const ReportResponse_ReportError = {
     message.operationId = object.operationId ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ReportResponse_ReportErrorSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
+    };
   }
 
 };

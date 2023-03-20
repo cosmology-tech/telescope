@@ -64,6 +64,10 @@ export const Module = {
   toSDK(_: Module): ModuleSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ModuleSDKType {
+    return {};
   }
 
 };

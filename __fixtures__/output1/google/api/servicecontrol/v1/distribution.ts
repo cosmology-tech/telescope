@@ -408,6 +408,21 @@ export const Distribution = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): DistributionSDKType {
+    return {
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      mean: isSet(object.mean) ? Number(object.mean) : 0,
+      minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
+      maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
+      sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
+      linear_buckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDKJSON(object.linear_buckets) : undefined,
+      exponential_buckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDKJSON(object.exponential_buckets) : undefined,
+      explicit_buckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDKJSON(object.explicit_buckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -505,6 +520,14 @@ export const Distribution_LinearBuckets = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_LinearBucketsSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      width: isSet(object.width) ? Number(object.width) : 0,
+      offset: isSet(object.offset) ? Number(object.offset) : 0
+    };
   }
 
 };
@@ -602,6 +625,14 @@ export const Distribution_ExponentialBuckets = {
     obj.growth_factor = message.growthFactor;
     obj.scale = message.scale;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_ExponentialBucketsSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      growth_factor: isSet(object.growth_factor) ? Number(object.growth_factor) : 0,
+      scale: isSet(object.scale) ? Number(object.scale) : 0
+    };
   }
 
 };
@@ -695,6 +726,12 @@ export const Distribution_ExplicitBuckets = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_ExplicitBucketsSDKType {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
+    };
   }
 
 };

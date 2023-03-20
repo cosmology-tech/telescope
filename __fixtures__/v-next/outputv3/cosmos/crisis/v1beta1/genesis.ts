@@ -104,6 +104,12 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      constant_fee: isSet(object.constant_fee) ? Coin.fromSDKJSON(object.constant_fee) : undefined
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : undefined

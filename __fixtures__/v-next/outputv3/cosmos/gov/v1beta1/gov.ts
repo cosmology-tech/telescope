@@ -644,6 +644,13 @@ export const WeightedVoteOption = {
     return obj;
   },
 
+  fromSDKJSON(object: any): WeightedVoteOptionSDKType {
+    return {
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
+  },
+
   fromAmino(object: WeightedVoteOptionAmino): WeightedVoteOption {
     return {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
@@ -768,6 +775,13 @@ export const TextProposal = {
     obj.title = message.title;
     obj.description = message.description;
     return obj;
+  },
+
+  fromSDKJSON(object: any): TextProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
 
   fromAmino(object: TextProposalAmino): TextProposal {
@@ -920,6 +934,14 @@ export const Deposit = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): DepositSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: DepositAmino): Deposit {
@@ -1166,6 +1188,20 @@ export const Proposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ProposalSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
+      final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
+      submit_time: isSet(object.submit_time) ? fromTimestamp(fromJsonTimestamp(object.submit_time)) : undefined,
+      deposit_end_time: isSet(object.deposit_end_time) ? fromTimestamp(fromJsonTimestamp(object.deposit_end_time)) : undefined,
+      total_deposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      voting_start_time: isSet(object.voting_start_time) ? fromTimestamp(fromJsonTimestamp(object.voting_start_time)) : undefined,
+      voting_end_time: isSet(object.voting_end_time) ? fromTimestamp(fromJsonTimestamp(object.voting_end_time)) : undefined
+    };
+  },
+
   fromAmino(object: ProposalAmino): Proposal {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -1340,6 +1376,15 @@ export const TallyResult = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TallyResultSDKType {
+    return {
+      yes: isSet(object.yes) ? String(object.yes) : "",
+      abstain: isSet(object.abstain) ? String(object.abstain) : "",
+      no: isSet(object.no) ? String(object.no) : "",
+      no_with_veto: isSet(object.no_with_veto) ? String(object.no_with_veto) : ""
+    };
+  },
+
   fromAmino(object: TallyResultAmino): TallyResult {
     return {
       yes: object.yes,
@@ -1510,6 +1555,15 @@ export const Vote = {
     return obj;
   },
 
+  fromSDKJSON(object: any): VoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: VoteAmino): Vote {
     return {
       proposalId: Long.fromString(object.proposal_id),
@@ -1658,6 +1712,13 @@ export const DepositParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DepositParamsSDKType {
+    return {
+      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      max_deposit_period: isSet(object.max_deposit_period) ? Duration.fromSDKJSON(object.max_deposit_period) : undefined
+    };
+  },
+
   fromAmino(object: DepositParamsAmino): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
@@ -1774,6 +1835,12 @@ export const VotingParams = {
     const obj: any = {};
     message.votingPeriod !== undefined && (obj.voting_period = message.votingPeriod ? Duration.toSDK(message.votingPeriod) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): VotingParamsSDKType {
+    return {
+      voting_period: isSet(object.voting_period) ? Duration.fromSDKJSON(object.voting_period) : undefined
+    };
   },
 
   fromAmino(object: VotingParamsAmino): VotingParams {
@@ -1912,6 +1979,14 @@ export const TallyParams = {
     obj.threshold = message.threshold;
     obj.veto_threshold = message.vetoThreshold;
     return obj;
+  },
+
+  fromSDKJSON(object: any): TallyParamsSDKType {
+    return {
+      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
+      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
+      veto_threshold: isSet(object.veto_threshold) ? bytesFromBase64(object.veto_threshold) : new Uint8Array()
+    };
   },
 
   fromAmino(object: TallyParamsAmino): TallyParams {

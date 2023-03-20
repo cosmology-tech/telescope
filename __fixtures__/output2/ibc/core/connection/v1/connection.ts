@@ -289,6 +289,16 @@ export const ConnectionEnd = {
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConnectionEndSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
   }
 
 };
@@ -412,6 +422,17 @@ export const IdentifiedConnection = {
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): IdentifiedConnectionSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDKJSON(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      delay_period: isSet(object.delay_period) ? Long.fromValue(object.delay_period) : Long.UZERO
+    };
   }
 
 };
@@ -493,6 +514,14 @@ export const Counterparty = {
     message.connectionId = object.connectionId ?? "";
     message.prefix = object.prefix !== undefined && object.prefix !== null ? MerklePrefix.fromPartial(object.prefix) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      prefix: isSet(object.prefix) ? MerklePrefix.fromSDKJSON(object.prefix) : undefined
+    };
   }
 
 };
@@ -556,6 +585,12 @@ export const ClientPaths = {
     const message = createBaseClientPaths();
     message.paths = object.paths?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ClientPathsSDKType {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -631,6 +666,13 @@ export const ConnectionPaths = {
     message.clientId = object.clientId ?? "";
     message.paths = object.paths?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ConnectionPathsSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -706,6 +748,13 @@ export const Version = {
     message.identifier = object.identifier ?? "";
     message.features = object.features?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): VersionSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -763,6 +812,12 @@ export const Params = {
     const message = createBaseParams();
     message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      max_expected_time_per_block: isSet(object.max_expected_time_per_block) ? Long.fromValue(object.max_expected_time_per_block) : Long.UZERO
+    };
   }
 
 };

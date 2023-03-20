@@ -94,6 +94,12 @@ export const ResourceValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ResourceValueSDKType {
+    return {
+      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: ResourceValueAmino): ResourceValue {
     return {
       val: object.val

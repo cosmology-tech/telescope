@@ -87,6 +87,12 @@ export const SourceContext = {
     const obj: any = {};
     obj.file_name = message.fileName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourceContextSDKType {
+    return {
+      file_name: isSet(object.file_name) ? String(object.file_name) : ""
+    };
   }
 
 };

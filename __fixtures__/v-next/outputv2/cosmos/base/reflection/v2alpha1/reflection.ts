@@ -950,6 +950,17 @@ export const AppDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AppDescriptorSDKType {
+    return {
+      authn: isSet(object.authn) ? AuthnDescriptor.fromSDKJSON(object.authn) : undefined,
+      chain: isSet(object.chain) ? ChainDescriptor.fromSDKJSON(object.chain) : undefined,
+      codec: isSet(object.codec) ? CodecDescriptor.fromSDKJSON(object.codec) : undefined,
+      configuration: isSet(object.configuration) ? ConfigurationDescriptor.fromSDKJSON(object.configuration) : undefined,
+      query_services: isSet(object.query_services) ? QueryServicesDescriptor.fromSDKJSON(object.query_services) : undefined,
+      tx: isSet(object.tx) ? TxDescriptor.fromSDKJSON(object.tx) : undefined
+    };
+  },
+
   fromAmino(object: AppDescriptorAmino): AppDescriptor {
     return {
       authn: object?.authn ? AuthnDescriptor.fromAmino(object.authn) : undefined,
@@ -1096,6 +1107,13 @@ export const TxDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TxDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: TxDescriptorAmino): TxDescriptor {
     return {
       fullname: object.fullname,
@@ -1224,6 +1242,12 @@ export const AuthnDescriptor = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthnDescriptorSDKType {
+    return {
+      sign_modes: Array.isArray(object?.sign_modes) ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AuthnDescriptorAmino): AuthnDescriptor {
@@ -1370,6 +1394,14 @@ export const SigningModeDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SigningModeDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      authn_info_provider_method_fullname: isSet(object.authn_info_provider_method_fullname) ? String(object.authn_info_provider_method_fullname) : ""
+    };
+  },
+
   fromAmino(object: SigningModeDescriptorAmino): SigningModeDescriptor {
     return {
       name: object.name,
@@ -1482,6 +1514,12 @@ export const ChainDescriptor = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ChainDescriptorSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : ""
+    };
   },
 
   fromAmino(object: ChainDescriptorAmino): ChainDescriptor {
@@ -1604,6 +1642,12 @@ export const CodecDescriptor = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CodecDescriptorSDKType {
+    return {
+      interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: CodecDescriptorAmino): CodecDescriptor {
@@ -1772,6 +1816,14 @@ export const InterfaceDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): InterfaceDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      interface_accepting_messages: Array.isArray(object?.interface_accepting_messages) ? object.interface_accepting_messages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromSDKJSON(e)) : [],
+      interface_implementers: Array.isArray(object?.interface_implementers) ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
     return {
       fullname: object.fullname,
@@ -1909,6 +1961,13 @@ export const InterfaceImplementerDescriptor = {
     obj.fullname = message.fullname;
     obj.type_url = message.typeUrl;
     return obj;
+  },
+
+  fromSDKJSON(object: any): InterfaceImplementerDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      type_url: isSet(object.type_url) ? String(object.type_url) : ""
+    };
   },
 
   fromAmino(object: InterfaceImplementerDescriptorAmino): InterfaceImplementerDescriptor {
@@ -2049,6 +2108,13 @@ export const InterfaceAcceptingMessageDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): InterfaceAcceptingMessageDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      field_descriptor_names: Array.isArray(object?.field_descriptor_names) ? object.field_descriptor_names.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: InterfaceAcceptingMessageDescriptorAmino): InterfaceAcceptingMessageDescriptor {
     return {
       fullname: object.fullname,
@@ -2167,6 +2233,12 @@ export const ConfigurationDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConfigurationDescriptorSDKType {
+    return {
+      bech32_account_address_prefix: isSet(object.bech32_account_address_prefix) ? String(object.bech32_account_address_prefix) : ""
+    };
+  },
+
   fromAmino(object: ConfigurationDescriptorAmino): ConfigurationDescriptor {
     return {
       bech32AccountAddressPrefix: object.bech32_account_address_prefix
@@ -2277,6 +2349,12 @@ export const MsgDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgDescriptorSDKType {
+    return {
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
+  },
+
   fromAmino(object: MsgDescriptorAmino): MsgDescriptor {
     return {
       msgTypeUrl: object.msg_type_url
@@ -2368,6 +2446,10 @@ export const GetAuthnDescriptorRequest = {
   toSDK(_: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetAuthnDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetAuthnDescriptorRequestAmino): GetAuthnDescriptorRequest {
@@ -2477,6 +2559,12 @@ export const GetAuthnDescriptorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetAuthnDescriptorResponseSDKType {
+    return {
+      authn: isSet(object.authn) ? AuthnDescriptor.fromSDKJSON(object.authn) : undefined
+    };
+  },
+
   fromAmino(object: GetAuthnDescriptorResponseAmino): GetAuthnDescriptorResponse {
     return {
       authn: object?.authn ? AuthnDescriptor.fromAmino(object.authn) : undefined
@@ -2568,6 +2656,10 @@ export const GetChainDescriptorRequest = {
   toSDK(_: GetChainDescriptorRequest): GetChainDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetChainDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetChainDescriptorRequestAmino): GetChainDescriptorRequest {
@@ -2677,6 +2769,12 @@ export const GetChainDescriptorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetChainDescriptorResponseSDKType {
+    return {
+      chain: isSet(object.chain) ? ChainDescriptor.fromSDKJSON(object.chain) : undefined
+    };
+  },
+
   fromAmino(object: GetChainDescriptorResponseAmino): GetChainDescriptorResponse {
     return {
       chain: object?.chain ? ChainDescriptor.fromAmino(object.chain) : undefined
@@ -2768,6 +2866,10 @@ export const GetCodecDescriptorRequest = {
   toSDK(_: GetCodecDescriptorRequest): GetCodecDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetCodecDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetCodecDescriptorRequestAmino): GetCodecDescriptorRequest {
@@ -2877,6 +2979,12 @@ export const GetCodecDescriptorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetCodecDescriptorResponseSDKType {
+    return {
+      codec: isSet(object.codec) ? CodecDescriptor.fromSDKJSON(object.codec) : undefined
+    };
+  },
+
   fromAmino(object: GetCodecDescriptorResponseAmino): GetCodecDescriptorResponse {
     return {
       codec: object?.codec ? CodecDescriptor.fromAmino(object.codec) : undefined
@@ -2968,6 +3076,10 @@ export const GetConfigurationDescriptorRequest = {
   toSDK(_: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetConfigurationDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetConfigurationDescriptorRequestAmino): GetConfigurationDescriptorRequest {
@@ -3077,6 +3189,12 @@ export const GetConfigurationDescriptorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetConfigurationDescriptorResponseSDKType {
+    return {
+      config: isSet(object.config) ? ConfigurationDescriptor.fromSDKJSON(object.config) : undefined
+    };
+  },
+
   fromAmino(object: GetConfigurationDescriptorResponseAmino): GetConfigurationDescriptorResponse {
     return {
       config: object?.config ? ConfigurationDescriptor.fromAmino(object.config) : undefined
@@ -3168,6 +3286,10 @@ export const GetQueryServicesDescriptorRequest = {
   toSDK(_: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetQueryServicesDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetQueryServicesDescriptorRequestAmino): GetQueryServicesDescriptorRequest {
@@ -3277,6 +3399,12 @@ export const GetQueryServicesDescriptorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetQueryServicesDescriptorResponseSDKType {
+    return {
+      queries: isSet(object.queries) ? QueryServicesDescriptor.fromSDKJSON(object.queries) : undefined
+    };
+  },
+
   fromAmino(object: GetQueryServicesDescriptorResponseAmino): GetQueryServicesDescriptorResponse {
     return {
       queries: object?.queries ? QueryServicesDescriptor.fromAmino(object.queries) : undefined
@@ -3368,6 +3496,10 @@ export const GetTxDescriptorRequest = {
   toSDK(_: GetTxDescriptorRequest): GetTxDescriptorRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): GetTxDescriptorRequestSDKType {
+    return {};
   },
 
   fromAmino(_: GetTxDescriptorRequestAmino): GetTxDescriptorRequest {
@@ -3475,6 +3607,12 @@ export const GetTxDescriptorResponse = {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toSDK(message.tx) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetTxDescriptorResponseSDKType {
+    return {
+      tx: isSet(object.tx) ? TxDescriptor.fromSDKJSON(object.tx) : undefined
+    };
   },
 
   fromAmino(object: GetTxDescriptorResponseAmino): GetTxDescriptorResponse {
@@ -3597,6 +3735,12 @@ export const QueryServicesDescriptor = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryServicesDescriptorSDKType {
+    return {
+      query_services: Array.isArray(object?.query_services) ? object.query_services.map((e: any) => QueryServiceDescriptor.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryServicesDescriptorAmino): QueryServicesDescriptor {
@@ -3755,6 +3899,14 @@ export const QueryServiceDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryServiceDescriptorSDKType {
+    return {
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      is_module: isSet(object.is_module) ? Boolean(object.is_module) : false,
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryServiceDescriptorAmino): QueryServiceDescriptor {
     return {
       fullname: object.fullname,
@@ -3887,6 +4039,13 @@ export const QueryMethodDescriptor = {
     obj.name = message.name;
     obj.full_query_path = message.fullQueryPath;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryMethodDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      full_query_path: isSet(object.full_query_path) ? String(object.full_query_path) : ""
+    };
   },
 
   fromAmino(object: QueryMethodDescriptorAmino): QueryMethodDescriptor {

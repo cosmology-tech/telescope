@@ -119,6 +119,14 @@ export const SetSuperfluidAssetsProposal = {
     message.description = object.description ?? "";
     message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): SetSuperfluidAssetsProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -206,6 +214,14 @@ export const RemoveSuperfluidAssetsProposal = {
     message.description = object.description ?? "";
     message.superfluidAssetDenoms = object.superfluidAssetDenoms?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): RemoveSuperfluidAssetsProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      superfluid_asset_denoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -318,6 +334,15 @@ export const UpdateUnpoolWhiteListProposal = {
     message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
     message.isOverwrite = object.isOverwrite ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateUnpoolWhiteListProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : [],
+      is_overwrite: isSet(object.is_overwrite) ? Boolean(object.is_overwrite) : false
+    };
   }
 
 };

@@ -148,6 +148,14 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      client_genesis: isSet(object.client_genesis) ? GenesisState1.fromSDKJSON(object.client_genesis) : undefined,
+      connection_genesis: isSet(object.connection_genesis) ? GenesisState2.fromSDKJSON(object.connection_genesis) : undefined,
+      channel_genesis: isSet(object.channel_genesis) ? GenesisState3.fromSDKJSON(object.channel_genesis) : undefined
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,

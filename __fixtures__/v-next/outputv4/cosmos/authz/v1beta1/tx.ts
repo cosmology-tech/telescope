@@ -185,6 +185,14 @@ export const MsgGrant = {
     obj.grantee = message.grantee;
     message.grant !== undefined && (obj.grant = message.grant ? Grant.toSDK(message.grant) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgGrantSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromSDKJSON(object.grant) : undefined
+    };
   }
 
 };
@@ -266,6 +274,12 @@ export const MsgExecResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecResponseSDKType {
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -361,6 +375,13 @@ export const MsgExec = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -413,6 +434,10 @@ export const MsgGrantResponse = {
   toSDK(_: MsgGrantResponse): MsgGrantResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgGrantResponseSDKType {
+    return {};
   }
 
 };
@@ -510,6 +535,14 @@ export const MsgRevoke = {
     obj.grantee = message.grantee;
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgRevokeSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
   }
 
 };
@@ -562,6 +595,10 @@ export const MsgRevokeResponse = {
   toSDK(_: MsgRevokeResponse): MsgRevokeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeResponseSDKType {
+    return {};
   }
 
 };

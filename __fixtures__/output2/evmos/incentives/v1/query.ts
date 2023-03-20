@@ -187,6 +187,12 @@ export const QueryIncentivesRequest = {
     const message = createBaseQueryIncentivesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryIncentivesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -262,6 +268,13 @@ export const QueryIncentivesResponse = {
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryIncentivesResponseSDKType {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -319,6 +332,12 @@ export const QueryIncentiveRequest = {
     const message = createBaseQueryIncentiveRequest();
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryIncentiveRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -376,6 +395,12 @@ export const QueryIncentiveResponse = {
     const message = createBaseQueryIncentiveResponse();
     message.incentive = object.incentive !== undefined && object.incentive !== null ? Incentive.fromPartial(object.incentive) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryIncentiveResponseSDKType {
+    return {
+      incentive: isSet(object.incentive) ? Incentive.fromSDKJSON(object.incentive) : undefined
+    };
   }
 
 };
@@ -445,6 +470,13 @@ export const QueryGasMetersRequest = {
     message.contract = object.contract ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGasMetersRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -520,6 +552,13 @@ export const QueryGasMetersResponse = {
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGasMetersResponseSDKType {
+    return {
+      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -589,6 +628,13 @@ export const QueryGasMeterRequest = {
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGasMeterRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : ""
+    };
   }
 
 };
@@ -646,6 +692,12 @@ export const QueryGasMeterResponse = {
     const message = createBaseQueryGasMeterResponse();
     message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? Long.fromValue(object.gasMeter) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
+    return {
+      gas_meter: isSet(object.gas_meter) ? Long.fromValue(object.gas_meter) : Long.UZERO
+    };
   }
 
 };
@@ -703,6 +755,12 @@ export const QueryAllocationMetersRequest = {
     const message = createBaseQueryAllocationMetersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMetersRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -778,6 +836,13 @@ export const QueryAllocationMetersResponse = {
     message.allocationMeters = object.allocationMeters?.map(e => DecCoin.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMetersResponseSDKType {
+    return {
+      allocation_meters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -835,6 +900,12 @@ export const QueryAllocationMeterRequest = {
     const message = createBaseQueryAllocationMeterRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMeterRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -892,6 +963,12 @@ export const QueryAllocationMeterResponse = {
     const message = createBaseQueryAllocationMeterResponse();
     message.allocationMeter = object.allocationMeter !== undefined && object.allocationMeter !== null ? DecCoin.fromPartial(object.allocationMeter) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMeterResponseSDKType {
+    return {
+      allocation_meter: isSet(object.allocation_meter) ? DecCoin.fromSDKJSON(object.allocation_meter) : undefined
+    };
   }
 
 };
@@ -935,6 +1012,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -992,6 +1073,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

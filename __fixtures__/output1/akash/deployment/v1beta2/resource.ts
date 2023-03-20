@@ -111,6 +111,14 @@ export const Resource = {
     obj.count = message.count;
     message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResourceSDKType {
+    return {
+      resources: isSet(object.resources) ? ResourceUnits.fromSDKJSON(object.resources) : undefined,
+      count: isSet(object.count) ? Number(object.count) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined
+    };
   }
 
 };

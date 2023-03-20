@@ -192,6 +192,13 @@ export const DenomTrace = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DenomTraceSDKType {
+    return {
+      path: isSet(object.path) ? String(object.path) : "",
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
+  },
+
   fromAmino(object: DenomTraceAmino): DenomTrace {
     return {
       path: object.path,
@@ -316,6 +323,13 @@ export const Params = {
     obj.send_enabled = message.sendEnabled;
     obj.receive_enabled = message.receiveEnabled;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
+      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false
+    };
   },
 
   fromAmino(object: ParamsAmino): Params {

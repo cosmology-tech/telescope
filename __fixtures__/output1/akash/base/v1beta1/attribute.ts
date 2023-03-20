@@ -133,6 +133,13 @@ export const Attribute = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AttributeSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -238,6 +245,13 @@ export const SignedBy = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SignedBySDKType {
+    return {
+      all_of: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => String(e)) : [],
+      any_of: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -333,6 +347,13 @@ export const PlacementRequirements = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PlacementRequirementsSDKType {
+    return {
+      signed_by: isSet(object.signed_by) ? SignedBy.fromSDKJSON(object.signed_by) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };

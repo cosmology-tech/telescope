@@ -160,6 +160,14 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
+      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -271,6 +279,15 @@ export const Params = {
     obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
     obj.reward_scaler = message.rewardScaler;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_incentives: isSet(object.enable_incentives) ? Boolean(object.enable_incentives) : false,
+      allocation_limit: isSet(object.allocation_limit) ? String(object.allocation_limit) : "",
+      incentives_epoch_identifier: isSet(object.incentives_epoch_identifier) ? String(object.incentives_epoch_identifier) : "",
+      reward_scaler: isSet(object.reward_scaler) ? String(object.reward_scaler) : ""
+    };
   }
 
 };

@@ -276,6 +276,19 @@ export const GenesisState = {
 
     obj.exported = message.exported;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      last_total_power: isSet(object.last_total_power) ? bytesFromBase64(object.last_total_power) : new Uint8Array(),
+      last_validator_powers: Array.isArray(object?.last_validator_powers) ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromSDKJSON(e)) : [],
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromSDKJSON(e)) : [],
+      unbonding_delegations: Array.isArray(object?.unbonding_delegations) ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
+      redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromSDKJSON(e)) : [],
+      exported: isSet(object.exported) ? Boolean(object.exported) : false
+    };
   }
 
 };
@@ -359,6 +372,13 @@ export const LastValidatorPower = {
     obj.address = message.address;
     obj.power = message.power;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LastValidatorPowerSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
+    };
   }
 
 };

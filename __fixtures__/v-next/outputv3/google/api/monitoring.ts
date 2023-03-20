@@ -379,6 +379,13 @@ export const Monitoring = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MonitoringSDKType {
+    return {
+      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : [],
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MonitoringAmino): Monitoring {
     return {
       producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
@@ -518,6 +525,13 @@ export const Monitoring_MonitoringDestination = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Monitoring_MonitoringDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {

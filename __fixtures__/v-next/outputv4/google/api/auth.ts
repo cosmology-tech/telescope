@@ -444,6 +444,13 @@ export const Authentication = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthenticationSDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromSDKJSON(e)) : [],
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -567,6 +574,15 @@ export const AuthenticationRule = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthenticationRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDKJSON(object.oauth) : undefined,
+      allow_without_credential: isSet(object.allow_without_credential) ? Boolean(object.allow_without_credential) : false,
+      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -664,6 +680,14 @@ export const JwtLocation = {
     obj.query = message.query;
     obj.value_prefix = message.valuePrefix;
     return obj;
+  },
+
+  fromSDKJSON(object: any): JwtLocationSDKType {
+    return {
+      header: isSet(object.header) ? String(object.header) : undefined,
+      query: isSet(object.query) ? String(object.query) : undefined,
+      value_prefix: isSet(object.value_prefix) ? String(object.value_prefix) : ""
+    };
   }
 
 };
@@ -815,6 +839,17 @@ export const AuthProvider = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthProviderSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      issuer: isSet(object.issuer) ? String(object.issuer) : "",
+      jwks_uri: isSet(object.jwks_uri) ? String(object.jwks_uri) : "",
+      audiences: isSet(object.audiences) ? String(object.audiences) : "",
+      authorization_url: isSet(object.authorization_url) ? String(object.authorization_url) : "",
+      jwt_locations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -884,6 +919,12 @@ export const OAuthRequirements = {
     const obj: any = {};
     obj.canonical_scopes = message.canonicalScopes;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OAuthRequirementsSDKType {
+    return {
+      canonical_scopes: isSet(object.canonical_scopes) ? String(object.canonical_scopes) : ""
+    };
   }
 
 };
@@ -967,6 +1008,13 @@ export const AuthRequirement = {
     obj.provider_id = message.providerId;
     obj.audiences = message.audiences;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthRequirementSDKType {
+    return {
+      provider_id: isSet(object.provider_id) ? String(object.provider_id) : "",
+      audiences: isSet(object.audiences) ? String(object.audiences) : ""
+    };
   }
 
 };

@@ -370,6 +370,15 @@ export const TokenPair = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TokenPairSDKType {
+    return {
+      erc20_address: isSet(object.erc20_address) ? String(object.erc20_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      contract_owner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+    };
+  },
+
   fromAmino(object: TokenPairAmino): TokenPair {
     return {
       erc20Address: object.erc20_address,
@@ -506,6 +515,14 @@ export const RegisterCoinProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RegisterCoinProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
+  },
+
   fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
     return {
       title: object.title,
@@ -640,6 +657,14 @@ export const RegisterERC20Proposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RegisterERC20ProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
+    };
+  },
+
   fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
     return {
       title: object.title,
@@ -772,6 +797,14 @@ export const ToggleTokenConversionProposal = {
     obj.description = message.description;
     obj.token = message.token;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ToggleTokenConversionProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      token: isSet(object.token) ? String(object.token) : ""
+    };
   },
 
   fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {

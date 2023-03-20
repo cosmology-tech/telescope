@@ -172,6 +172,15 @@ export const MsgRegisterDevFeeInfo = {
     message.withdrawAddress = object.withdrawAddress ?? "";
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -215,6 +224,10 @@ export const MsgRegisterDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgRegisterDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };
@@ -284,6 +297,13 @@ export const MsgCancelDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
+    };
   }
 
 };
@@ -327,6 +347,10 @@ export const MsgCancelDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgCancelDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };
@@ -408,6 +432,14 @@ export const MsgUpdateDevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
   }
 
 };
@@ -451,6 +483,10 @@ export const MsgUpdateDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };

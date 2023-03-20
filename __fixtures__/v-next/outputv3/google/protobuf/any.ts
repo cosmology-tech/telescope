@@ -413,6 +413,13 @@ export const Any = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AnySDKType {
+    return {
+      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: AnyAmino): Any {
     return {
       typeUrl: object.type_url,

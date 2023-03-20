@@ -279,6 +279,14 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      signing_infos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDKJSON(e)) : [],
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined,
@@ -416,6 +424,13 @@ export const SigningInfo = {
     obj.address = message.address;
     message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toSDK(message.validatorSigningInfo) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SigningInfoSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      validator_signing_info: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.validator_signing_info) : undefined
+    };
   },
 
   fromAmino(object: SigningInfoAmino): SigningInfo {
@@ -556,6 +571,13 @@ export const ValidatorMissedBlocks = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorMissedBlocksSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ValidatorMissedBlocksAmino): ValidatorMissedBlocks {
     return {
       address: object.address,
@@ -686,6 +708,13 @@ export const MissedBlock = {
     obj.index = message.index;
     obj.missed = message.missed;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MissedBlockSDKType {
+    return {
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      missed: isSet(object.missed) ? Boolean(object.missed) : false
+    };
   },
 
   fromAmino(object: MissedBlockAmino): MissedBlock {

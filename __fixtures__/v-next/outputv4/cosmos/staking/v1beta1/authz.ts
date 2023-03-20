@@ -221,6 +221,15 @@ export const StakeAuthorization = {
     message.denyList !== undefined && (obj.deny_list = message.denyList ? StakeAuthorization_Validators.toSDK(message.denyList) : undefined);
     message.authorizationType !== undefined && (obj.authorization_type = authorizationTypeToJSON(message.authorizationType));
     return obj;
+  },
+
+  fromSDKJSON(object: any): StakeAuthorizationSDKType {
+    return {
+      max_tokens: isSet(object.max_tokens) ? Coin.fromSDKJSON(object.max_tokens) : undefined,
+      allow_list: isSet(object.allow_list) ? StakeAuthorization_Validators.fromSDKJSON(object.allow_list) : undefined,
+      deny_list: isSet(object.deny_list) ? StakeAuthorization_Validators.fromSDKJSON(object.deny_list) : undefined,
+      authorization_type: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : 0
+    };
   }
 
 };
@@ -302,6 +311,12 @@ export const StakeAuthorization_Validators = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): StakeAuthorization_ValidatorsSDKType {
+    return {
+      address: Array.isArray(object?.address) ? object.address.map((e: any) => String(e)) : []
+    };
   }
 
 };

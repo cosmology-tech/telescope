@@ -315,6 +315,13 @@ export const Struct_FieldsEntry = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Struct_FieldsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined
+    };
+  },
+
   fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
     return {
       key: object.key,
@@ -449,6 +456,17 @@ export const Struct = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): StructSDKType {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromSDKJSON(value);
+        return acc;
+      }, {}) : {}
+    };
   },
 
   fromAmino(object: StructAmino): Struct {
@@ -635,6 +653,17 @@ export const Value = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValueSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      number_value: isSet(object.number_value) ? Number(object.number_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      struct_value: isSet(object.struct_value) ? Struct.fromSDKJSON(object.struct_value) : undefined,
+      list_value: isSet(object.list_value) ? ListValue.fromSDKJSON(object.list_value) : undefined
+    };
+  },
+
   fromAmino(object: ValueAmino): Value {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -757,6 +786,12 @@ export const ListValue = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListValueSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ListValueAmino): ListValue {

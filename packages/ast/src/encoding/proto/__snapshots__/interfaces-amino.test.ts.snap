@@ -75,6 +75,13 @@ exports[`Duration 1`] = `
     return obj;
   },
 
+  fromSDKJSON(object: any): DurationSDKType {
+    return {
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
+  },
+
   fromAmino(object: DurationAmino): Duration {
     const value = parseInt(object);
     return {
@@ -182,6 +189,13 @@ exports[`Height 1`] = `
     obj.revision_number = message.revisionNumber;
     obj.revision_height = message.revisionHeight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): HeightSDKType {
+    return {
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
+    };
   },
 
   fromAmino(object: HeightAmino): Height {
@@ -367,6 +381,18 @@ exports[`MsgCreateValidator 1`] = `
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateValidatorSDKType {
+    return {
+      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
+      commission: isSet(object.commission) ? CommissionRates.fromSDKJSON(object.commission) : undefined,
+      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      pubkey: isSet(object.pubkey) ? Any.fromSDKJSON(object.pubkey) : undefined,
+      value: isSet(object.value) ? Coin.fromSDKJSON(object.value) : undefined
+    };
+  },
+
   fromAmino(object: MsgCreateValidatorAmino): MsgCreateValidator {
     return {
       description: object?.description ? Description.fromAmino(object.description) : undefined,
@@ -514,6 +540,14 @@ exports[`MsgStoreCode 1`] = `
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgStoreCodeSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
+  },
+
   fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
     return {
       sender: object.sender,
@@ -657,6 +691,14 @@ exports[`MsgSubmitProposal 1`] = `
 
     obj.proposer = message.proposer;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
+      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
   },
 
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
@@ -848,6 +890,18 @@ exports[`MsgTransfer 1`] = `
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
     obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgTransferSDKType {
+    return {
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgTransferAmino): MsgTransfer {

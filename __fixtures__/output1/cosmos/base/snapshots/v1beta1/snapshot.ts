@@ -246,6 +246,16 @@ export const Snapshot = {
     obj.hash = message.hash;
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
   }
 
 };
@@ -327,6 +337,12 @@ export const Metadata = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetadataSDKType {
+    return {
+      chunk_hashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -466,6 +482,17 @@ export const SnapshotItem = {
     message.kv !== undefined && (obj.kv = message.kv ? SnapshotKVItem.toSDK(message.kv) : undefined);
     message.schema !== undefined && (obj.schema = message.schema ? SnapshotSchema.toSDK(message.schema) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotItemSDKType {
+    return {
+      store: isSet(object.store) ? SnapshotStoreItem.fromSDKJSON(object.store) : undefined,
+      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromSDKJSON(object.iavl) : undefined,
+      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromSDKJSON(object.extension) : undefined,
+      extension_payload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromSDKJSON(object.extension_payload) : undefined,
+      kv: isSet(object.kv) ? SnapshotKVItem.fromSDKJSON(object.kv) : undefined,
+      schema: isSet(object.schema) ? SnapshotSchema.fromSDKJSON(object.schema) : undefined
+    };
   }
 
 };
@@ -535,6 +562,12 @@ export const SnapshotStoreItem = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotStoreItemSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -646,6 +679,15 @@ export const SnapshotIAVLItem = {
     obj.version = message.version;
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotIAVLItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      height: isSet(object.height) ? Number(object.height) : 0
+    };
   }
 
 };
@@ -729,6 +771,13 @@ export const SnapshotExtensionMeta = {
     obj.name = message.name;
     obj.format = message.format;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotExtensionMetaSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      format: isSet(object.format) ? Number(object.format) : 0
+    };
   }
 
 };
@@ -798,6 +847,12 @@ export const SnapshotExtensionPayload = {
     const obj: any = {};
     obj.payload = message.payload;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotExtensionPayloadSDKType {
+    return {
+      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
+    };
   }
 
 };
@@ -881,6 +936,13 @@ export const SnapshotKVItem = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotKVItemSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   }
 
 };
@@ -962,6 +1024,12 @@ export const SnapshotSchema = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SnapshotSchemaSDKType {
+    return {
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };

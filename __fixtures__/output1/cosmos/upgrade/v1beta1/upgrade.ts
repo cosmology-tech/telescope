@@ -259,6 +259,16 @@ export const Plan = {
     obj.info = message.info;
     message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PlanSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      info: isSet(object.info) ? String(object.info) : "",
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
   }
 
 };
@@ -356,6 +366,14 @@ export const SoftwareUpgradeProposal = {
     obj.description = message.description;
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -439,6 +457,13 @@ export const CancelSoftwareUpgradeProposal = {
     obj.title = message.title;
     obj.description = message.description;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -522,6 +547,13 @@ export const ModuleVersion = {
     obj.name = message.name;
     obj.version = message.version;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleVersionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
+    };
   }
 
 };

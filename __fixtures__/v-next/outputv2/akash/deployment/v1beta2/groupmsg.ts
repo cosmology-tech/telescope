@@ -192,6 +192,12 @@ export const MsgCloseGroup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCloseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
     return {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
@@ -275,6 +281,10 @@ export const MsgCloseGroupResponse = {
   toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
@@ -376,6 +386,12 @@ export const MsgPauseGroup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgPauseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
     return {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
@@ -459,6 +475,10 @@ export const MsgPauseGroupResponse = {
   toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
@@ -560,6 +580,12 @@ export const MsgStartGroup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgStartGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
     return {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
@@ -643,6 +669,10 @@ export const MsgStartGroupResponse = {
   toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {

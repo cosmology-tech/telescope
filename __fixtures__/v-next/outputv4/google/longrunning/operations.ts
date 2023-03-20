@@ -327,6 +327,16 @@ export const Operation = {
     message.error !== undefined && (obj.error = message.error ? Status.toSDK(message.error) : undefined);
     message.response !== undefined && (obj.response = message.response ? Any.toSDK(message.response) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): OperationSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metadata: isSet(object.metadata) ? Any.fromSDKJSON(object.metadata) : undefined,
+      done: isSet(object.done) ? Boolean(object.done) : false,
+      error: isSet(object.error) ? Status.fromSDKJSON(object.error) : undefined,
+      response: isSet(object.response) ? Any.fromSDKJSON(object.response) : undefined
+    };
   }
 
 };
@@ -396,6 +406,12 @@ export const GetOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -507,6 +523,15 @@ export const ListOperationsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListOperationsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
   }
 
 };
@@ -602,6 +627,13 @@ export const ListOperationsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListOperationsResponseSDKType {
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -671,6 +703,12 @@ export const CancelOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CancelOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -740,6 +778,12 @@ export const DeleteOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeleteOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -823,6 +867,13 @@ export const WaitOperationRequest = {
     obj.name = message.name;
     message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toSDK(message.timeout) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): WaitOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      timeout: isSet(object.timeout) ? Duration.fromSDKJSON(object.timeout) : undefined
+    };
   }
 
 };
@@ -906,6 +957,13 @@ export const OperationInfo = {
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OperationInfoSDKType {
+    return {
+      response_type: isSet(object.response_type) ? String(object.response_type) : "",
+      metadata_type: isSet(object.metadata_type) ? String(object.metadata_type) : ""
+    };
   }
 
 };

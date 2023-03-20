@@ -295,6 +295,13 @@ export const ModuleSchemaDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ModuleSchemaDescriptorSDKType {
+    return {
+      schema_file: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromSDKJSON(e)) : [],
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
     return {
       schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
@@ -439,6 +446,14 @@ export const ModuleSchemaDescriptor_FileEntry = {
     obj.proto_file_name = message.protoFileName;
     message.storageType !== undefined && (obj.storage_type = storageTypeToJSON(message.storageType));
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleSchemaDescriptor_FileEntrySDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      proto_file_name: isSet(object.proto_file_name) ? String(object.proto_file_name) : "",
+      storage_type: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
+    };
   },
 
   fromAmino(object: ModuleSchemaDescriptor_FileEntryAmino): ModuleSchemaDescriptor_FileEntry {

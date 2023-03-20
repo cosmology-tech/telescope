@@ -392,6 +392,13 @@ export const EvalState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvalStateSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: EvalStateAmino): EvalState {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
@@ -519,6 +526,13 @@ export const EvalState_Result = {
     obj.expr = message.expr;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EvalState_ResultSDKType {
+    return {
+      expr: isSet(object.expr) ? Long.fromValue(object.expr) : Long.ZERO,
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   },
 
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
@@ -653,6 +667,14 @@ export const ExprValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ExprValueSDKType {
+    return {
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
+    };
+  },
+
   fromAmino(object: ExprValueAmino): ExprValue {
     return {
       value: object?.value ? Value.fromAmino(object.value) : undefined,
@@ -769,6 +791,12 @@ export const ErrorSet = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ErrorSetSDKType {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ErrorSetAmino): ErrorSet {
@@ -901,6 +929,12 @@ export const UnknownSet = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): UnknownSetSDKType {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromValue(e)) : []
+    };
   },
 
   fromAmino(object: UnknownSetAmino): UnknownSet {

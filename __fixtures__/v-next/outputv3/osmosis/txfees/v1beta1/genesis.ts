@@ -125,6 +125,13 @@ export const GenesisState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       basedenom: object.basedenom,

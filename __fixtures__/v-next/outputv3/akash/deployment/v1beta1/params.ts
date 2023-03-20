@@ -95,6 +95,12 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      deployment_min_deposit: isSet(object.deployment_min_deposit) ? Coin.fromSDKJSON(object.deployment_min_deposit) : undefined
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : undefined

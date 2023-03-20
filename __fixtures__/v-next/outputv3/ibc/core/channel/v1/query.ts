@@ -1284,6 +1284,13 @@ export const QueryChannelRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryChannelRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
+  },
+
   fromAmino(object: QueryChannelRequestAmino): QueryChannelRequest {
     return {
       portId: object.port_id,
@@ -1424,6 +1431,14 @@ export const QueryChannelResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryChannelResponseSDKType {
+    return {
+      channel: isSet(object.channel) ? Channel.fromSDKJSON(object.channel) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   fromAmino(object: QueryChannelResponseAmino): QueryChannelResponse {
     return {
       channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
@@ -1536,6 +1551,12 @@ export const QueryChannelsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryChannelsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryChannelsRequestAmino): QueryChannelsRequest {
@@ -1688,6 +1709,14 @@ export const QueryChannelsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryChannelsResponseSDKType {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   fromAmino(object: QueryChannelsResponseAmino): QueryChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
@@ -1820,6 +1849,13 @@ export const QueryConnectionChannelsRequest = {
     obj.connection = message.connection;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryConnectionChannelsRequestSDKType {
+    return {
+      connection: isSet(object.connection) ? String(object.connection) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryConnectionChannelsRequestAmino): QueryConnectionChannelsRequest {
@@ -1974,6 +2010,14 @@ export const QueryConnectionChannelsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryConnectionChannelsResponseSDKType {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   fromAmino(object: QueryConnectionChannelsResponseAmino): QueryConnectionChannelsResponse {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
@@ -2106,6 +2150,13 @@ export const QueryChannelClientStateRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryChannelClientStateRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
   },
 
   fromAmino(object: QueryChannelClientStateRequestAmino): QueryChannelClientStateRequest {
@@ -2246,6 +2297,14 @@ export const QueryChannelClientStateResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryChannelClientStateResponseSDKType {
+    return {
+      identified_client_state: isSet(object.identified_client_state) ? IdentifiedClientState.fromSDKJSON(object.identified_client_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
   },
 
   fromAmino(object: QueryChannelClientStateResponseAmino): QueryChannelClientStateResponse {
@@ -2402,6 +2461,15 @@ export const QueryChannelConsensusStateRequest = {
     obj.revision_number = message.revisionNumber;
     obj.revision_height = message.revisionHeight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryChannelConsensusStateRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
+    };
   },
 
   fromAmino(object: QueryChannelConsensusStateRequestAmino): QueryChannelConsensusStateRequest {
@@ -2562,6 +2630,15 @@ export const QueryChannelConsensusStateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryChannelConsensusStateResponseSDKType {
+    return {
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   fromAmino(object: QueryChannelConsensusStateResponseAmino): QueryChannelConsensusStateResponse {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
@@ -2706,6 +2783,14 @@ export const QueryPacketCommitmentRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketCommitmentRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPacketCommitmentRequestAmino): QueryPacketCommitmentRequest {
     return {
       portId: object.port_id,
@@ -2848,6 +2933,14 @@ export const QueryPacketCommitmentResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketCommitmentResponseSDKType {
+    return {
+      commitment: isSet(object.commitment) ? bytesFromBase64(object.commitment) : new Uint8Array(),
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   fromAmino(object: QueryPacketCommitmentResponseAmino): QueryPacketCommitmentResponse {
     return {
       commitment: object.commitment,
@@ -2988,6 +3081,14 @@ export const QueryPacketCommitmentsRequest = {
     obj.channel_id = message.channelId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPacketCommitmentsRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryPacketCommitmentsRequestAmino): QueryPacketCommitmentsRequest {
@@ -3144,6 +3245,14 @@ export const QueryPacketCommitmentsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketCommitmentsResponseSDKType {
+    return {
+      commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   fromAmino(object: QueryPacketCommitmentsResponseAmino): QueryPacketCommitmentsResponse {
     return {
       commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromAmino(e)) : [],
@@ -3292,6 +3401,14 @@ export const QueryPacketReceiptRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketReceiptRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPacketReceiptRequestAmino): QueryPacketReceiptRequest {
     return {
       portId: object.port_id,
@@ -3432,6 +3549,14 @@ export const QueryPacketReceiptResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPacketReceiptResponseSDKType {
+    return {
+      received: isSet(object.received) ? Boolean(object.received) : false,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
   },
 
   fromAmino(object: QueryPacketReceiptResponseAmino): QueryPacketReceiptResponse {
@@ -3576,6 +3701,14 @@ export const QueryPacketAcknowledgementRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketAcknowledgementRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPacketAcknowledgementRequestAmino): QueryPacketAcknowledgementRequest {
     return {
       portId: object.port_id,
@@ -3716,6 +3849,14 @@ export const QueryPacketAcknowledgementResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPacketAcknowledgementResponseSDKType {
+    return {
+      acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array(),
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
   },
 
   fromAmino(object: QueryPacketAcknowledgementResponseAmino): QueryPacketAcknowledgementResponse {
@@ -3898,6 +4039,15 @@ export const QueryPacketAcknowledgementsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPacketAcknowledgementsRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
+      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   fromAmino(object: QueryPacketAcknowledgementsRequestAmino): QueryPacketAcknowledgementsRequest {
     return {
       portId: object.port_id,
@@ -4058,6 +4208,14 @@ export const QueryPacketAcknowledgementsResponse = {
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPacketAcknowledgementsResponseSDKType {
+    return {
+      acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
   },
 
   fromAmino(object: QueryPacketAcknowledgementsResponseAmino): QueryPacketAcknowledgementsResponse {
@@ -4232,6 +4390,14 @@ export const QueryUnreceivedPacketsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUnreceivedPacketsRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      packet_commitment_sequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   fromAmino(object: QueryUnreceivedPacketsRequestAmino): QueryUnreceivedPacketsRequest {
     return {
       portId: object.port_id,
@@ -4389,6 +4555,13 @@ export const QueryUnreceivedPacketsResponse = {
 
     message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUnreceivedPacketsResponseSDKType {
+    return {
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Long.fromValue(e)) : [],
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
   },
 
   fromAmino(object: QueryUnreceivedPacketsResponseAmino): QueryUnreceivedPacketsResponse {
@@ -4561,6 +4734,14 @@ export const QueryUnreceivedAcksRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUnreceivedAcksRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      packet_ack_sequences: Array.isArray(object?.packet_ack_sequences) ? object.packet_ack_sequences.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   fromAmino(object: QueryUnreceivedAcksRequestAmino): QueryUnreceivedAcksRequest {
     return {
       portId: object.port_id,
@@ -4720,6 +4901,13 @@ export const QueryUnreceivedAcksResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUnreceivedAcksResponseSDKType {
+    return {
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Long.fromValue(e)) : [],
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   fromAmino(object: QueryUnreceivedAcksResponseAmino): QueryUnreceivedAcksResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
@@ -4850,6 +5038,13 @@ export const QueryNextSequenceReceiveRequest = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryNextSequenceReceiveRequestSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
   },
 
   fromAmino(object: QueryNextSequenceReceiveRequestAmino): QueryNextSequenceReceiveRequest {
@@ -4990,6 +5185,14 @@ export const QueryNextSequenceReceiveResponse = {
     obj.proof = message.proof;
     message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryNextSequenceReceiveResponseSDKType {
+    return {
+      next_sequence_receive: isSet(object.next_sequence_receive) ? Long.fromValue(object.next_sequence_receive) : Long.UZERO,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
   },
 
   fromAmino(object: QueryNextSequenceReceiveResponseAmino): QueryNextSequenceReceiveResponse {

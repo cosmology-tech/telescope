@@ -787,6 +787,18 @@ export const Distribution = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DistributionSDKType {
+    return {
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
+      mean: isSet(object.mean) ? Number(object.mean) : 0,
+      sum_of_squared_deviation: isSet(object.sum_of_squared_deviation) ? Number(object.sum_of_squared_deviation) : 0,
+      range: isSet(object.range) ? Distribution_Range.fromSDKJSON(object.range) : undefined,
+      bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
+      bucket_counts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => Long.fromValue(e)) : [],
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: DistributionAmino): Distribution {
     return {
       count: Long.fromString(object.count),
@@ -926,6 +938,13 @@ export const Distribution_Range = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Distribution_RangeSDKType {
+    return {
+      min: isSet(object.min) ? Number(object.min) : 0,
+      max: isSet(object.max) ? Number(object.max) : 0
+    };
+  },
+
   fromAmino(object: Distribution_RangeAmino): Distribution_Range {
     return {
       min: object.min,
@@ -1056,6 +1075,14 @@ export const Distribution_BucketOptions = {
     message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toSDK(message.exponentialBuckets) : undefined);
     message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toSDK(message.explicitBuckets) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_BucketOptionsSDKType {
+    return {
+      linear_buckets: isSet(object.linear_buckets) ? Distribution_BucketOptions_Linear.fromSDKJSON(object.linear_buckets) : undefined,
+      exponential_buckets: isSet(object.exponential_buckets) ? Distribution_BucketOptions_Exponential.fromSDKJSON(object.exponential_buckets) : undefined,
+      explicit_buckets: isSet(object.explicit_buckets) ? Distribution_BucketOptions_Explicit.fromSDKJSON(object.explicit_buckets) : undefined
+    };
   },
 
   fromAmino(object: Distribution_BucketOptionsAmino): Distribution_BucketOptions {
@@ -1192,6 +1219,14 @@ export const Distribution_BucketOptions_Linear = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Distribution_BucketOptions_LinearSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      width: isSet(object.width) ? Number(object.width) : 0,
+      offset: isSet(object.offset) ? Number(object.offset) : 0
+    };
+  },
+
   fromAmino(object: Distribution_BucketOptions_LinearAmino): Distribution_BucketOptions_Linear {
     return {
       numFiniteBuckets: object.num_finite_buckets,
@@ -1326,6 +1361,14 @@ export const Distribution_BucketOptions_Exponential = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Distribution_BucketOptions_ExponentialSDKType {
+    return {
+      num_finite_buckets: isSet(object.num_finite_buckets) ? Number(object.num_finite_buckets) : 0,
+      growth_factor: isSet(object.growth_factor) ? Number(object.growth_factor) : 0,
+      scale: isSet(object.scale) ? Number(object.scale) : 0
+    };
+  },
+
   fromAmino(object: Distribution_BucketOptions_ExponentialAmino): Distribution_BucketOptions_Exponential {
     return {
       numFiniteBuckets: object.num_finite_buckets,
@@ -1454,6 +1497,12 @@ export const Distribution_BucketOptions_Explicit = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_BucketOptions_ExplicitSDKType {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
+    };
   },
 
   fromAmino(object: Distribution_BucketOptions_ExplicitAmino): Distribution_BucketOptions_Explicit {
@@ -1602,6 +1651,14 @@ export const Distribution_Exemplar = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Distribution_ExemplarSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {

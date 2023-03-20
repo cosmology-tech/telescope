@@ -118,6 +118,10 @@ export const QueryEpochsInfoRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryEpochsInfoRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
     return {};
   },
@@ -237,6 +241,12 @@ export const QueryEpochsInfoResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryEpochsInfoResponseSDKType {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
     return {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
@@ -353,6 +363,12 @@ export const QueryCurrentEpochRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCurrentEpochRequestSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
+    };
+  },
+
   fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
     return {
       identifier: object.identifier
@@ -461,6 +477,12 @@ export const QueryCurrentEpochResponse = {
     const obj: any = {};
     obj.current_epoch = message.currentEpoch;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentEpochResponseSDKType {
+    return {
+      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO
+    };
   },
 
   fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {

@@ -103,6 +103,14 @@ export const ValidatorSet = {
     message.proposer = object.proposer !== undefined && object.proposer !== null ? Validator.fromPartial(object.proposer) : undefined;
     message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? Long.fromValue(object.totalVotingPower) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorSetSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? Validator.fromSDKJSON(object.proposer) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
+    };
   }
 
 };
@@ -196,6 +204,15 @@ export const Validator = {
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
     message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? Long.fromValue(object.proposerPriority) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO,
+      proposer_priority: isSet(object.proposer_priority) ? Long.fromValue(object.proposer_priority) : Long.ZERO
+    };
   }
 
 };
@@ -265,6 +282,13 @@ export const SimpleValidator = {
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
     message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): SimpleValidatorSDKType {
+    return {
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO
+    };
   }
 
 };

@@ -423,6 +423,12 @@ export const QueryGroupInfoRequest = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupInfoRequestSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+    };
   }
 
 };
@@ -492,6 +498,12 @@ export const QueryGroupInfoResponse = {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupInfoResponseSDKType {
+    return {
+      info: isSet(object.info) ? GroupInfo.fromSDKJSON(object.info) : undefined
+    };
   }
 
 };
@@ -561,6 +573,12 @@ export const QueryGroupPolicyInfoRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPolicyInfoRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -630,6 +648,12 @@ export const QueryGroupPolicyInfoResponse = {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toSDK(message.info) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPolicyInfoResponseSDKType {
+    return {
+      info: isSet(object.info) ? GroupPolicyInfo.fromSDKJSON(object.info) : undefined
+    };
   }
 
 };
@@ -713,6 +737,13 @@ export const QueryGroupMembersRequest = {
     obj.group_id = message.groupId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupMembersRequestSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -808,6 +839,13 @@ export const QueryGroupMembersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupMembersResponseSDKType {
+    return {
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -891,6 +929,13 @@ export const QueryGroupsByAdminRequest = {
     obj.admin = message.admin;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupsByAdminRequestSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -986,6 +1031,13 @@ export const QueryGroupsByAdminResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupsByAdminResponseSDKType {
+    return {
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1069,6 +1121,13 @@ export const QueryGroupPoliciesByGroupRequest = {
     obj.group_id = message.groupId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPoliciesByGroupRequestSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1164,6 +1223,13 @@ export const QueryGroupPoliciesByGroupResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPoliciesByGroupResponseSDKType {
+    return {
+      group_policies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1247,6 +1313,13 @@ export const QueryGroupPoliciesByAdminRequest = {
     obj.admin = message.admin;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPoliciesByAdminRequestSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1342,6 +1415,13 @@ export const QueryGroupPoliciesByAdminResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupPoliciesByAdminResponseSDKType {
+    return {
+      group_policies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1411,6 +1491,12 @@ export const QueryProposalRequest = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProposalRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   }
 
 };
@@ -1480,6 +1566,12 @@ export const QueryProposalResponse = {
     const obj: any = {};
     message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toSDK(message.proposal) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProposalResponseSDKType {
+    return {
+      proposal: isSet(object.proposal) ? Proposal.fromSDKJSON(object.proposal) : undefined
+    };
   }
 
 };
@@ -1563,6 +1655,13 @@ export const QueryProposalsByGroupPolicyRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProposalsByGroupPolicyRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1658,6 +1757,13 @@ export const QueryProposalsByGroupPolicyResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProposalsByGroupPolicyResponseSDKType {
+    return {
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1741,6 +1847,13 @@ export const QueryVoteByProposalVoterRequest = {
     obj.proposal_id = message.proposalId;
     obj.voter = message.voter;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVoteByProposalVoterRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : ""
+    };
   }
 
 };
@@ -1810,6 +1923,12 @@ export const QueryVoteByProposalVoterResponse = {
     const obj: any = {};
     message.vote !== undefined && (obj.vote = message.vote ? Vote.toSDK(message.vote) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVoteByProposalVoterResponseSDKType {
+    return {
+      vote: isSet(object.vote) ? Vote.fromSDKJSON(object.vote) : undefined
+    };
   }
 
 };
@@ -1893,6 +2012,13 @@ export const QueryVotesByProposalRequest = {
     obj.proposal_id = message.proposalId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVotesByProposalRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1988,6 +2114,13 @@ export const QueryVotesByProposalResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVotesByProposalResponseSDKType {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2071,6 +2204,13 @@ export const QueryVotesByVoterRequest = {
     obj.voter = message.voter;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVotesByVoterRequestSDKType {
+    return {
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2166,6 +2306,13 @@ export const QueryVotesByVoterResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryVotesByVoterResponseSDKType {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2249,6 +2396,13 @@ export const QueryGroupsByMemberRequest = {
     obj.address = message.address;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupsByMemberRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2344,6 +2498,13 @@ export const QueryGroupsByMemberResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupsByMemberResponseSDKType {
+    return {
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2413,6 +2574,12 @@ export const QueryTallyResultRequest = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTallyResultRequestSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   }
 
 };
@@ -2482,6 +2649,12 @@ export const QueryTallyResultResponse = {
     const obj: any = {};
     message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toSDK(message.tally) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTallyResultResponseSDKType {
+    return {
+      tally: isSet(object.tally) ? TallyResult.fromSDKJSON(object.tally) : undefined
+    };
   }
 
 };

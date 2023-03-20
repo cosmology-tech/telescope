@@ -1109,6 +1109,12 @@ export const DeleteLogRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeleteLogRequestSDKType {
+    return {
+      log_name: isSet(object.log_name) ? String(object.log_name) : ""
+    };
+  },
+
   fromAmino(object: DeleteLogRequestAmino): DeleteLogRequest {
     return {
       logName: object.log_name
@@ -1221,6 +1227,13 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): WriteLogEntriesRequest_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: WriteLogEntriesRequest_LabelsEntryAmino): WriteLogEntriesRequest_LabelsEntry {
@@ -1440,6 +1453,22 @@ export const WriteLogEntriesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): WriteLogEntriesRequestSDKType {
+    return {
+      log_name: isSet(object.log_name) ? String(object.log_name) : "",
+      resource: isSet(object.resource) ? MonitoredResource.fromSDKJSON(object.resource) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
+      partial_success: isSet(object.partial_success) ? Boolean(object.partial_success) : false,
+      dry_run: isSet(object.dry_run) ? Boolean(object.dry_run) : false
+    };
+  },
+
   fromAmino(object: WriteLogEntriesRequestAmino): WriteLogEntriesRequest {
     return {
       logName: object.log_name,
@@ -1552,6 +1581,10 @@ export const WriteLogEntriesResponse = {
     return obj;
   },
 
+  fromSDKJSON(_: any): WriteLogEntriesResponseSDKType {
+    return {};
+  },
+
   fromAmino(_: WriteLogEntriesResponseAmino): WriteLogEntriesResponse {
     return {};
   },
@@ -1661,6 +1694,13 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? google.rpc.Status.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Number(object.key) : 0,
+      value: isSet(object.value) ? google.rpc.Status.fromSDKJSON(object.value) : undefined
+    };
   },
 
   fromAmino(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -1797,6 +1837,17 @@ export const WriteLogEntriesPartialErrors = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): WriteLogEntriesPartialErrorsSDKType {
+    return {
+      log_entry_errors: isObject(object.log_entry_errors) ? Object.entries(object.log_entry_errors).reduce<{
+        [key: number]: Status;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Status.fromSDKJSON(value);
+        return acc;
+      }, {}) : {}
+    };
   },
 
   fromAmino(object: WriteLogEntriesPartialErrorsAmino): WriteLogEntriesPartialErrors {
@@ -1981,6 +2032,16 @@ export const ListLogEntriesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListLogEntriesRequestSDKType {
+    return {
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      order_by: isSet(object.order_by) ? String(object.order_by) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+
   fromAmino(object: ListLogEntriesRequestAmino): ListLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
@@ -2123,6 +2184,13 @@ export const ListLogEntriesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListLogEntriesResponseSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListLogEntriesResponseAmino): ListLogEntriesResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
@@ -2245,6 +2313,13 @@ export const ListMonitoredResourceDescriptorsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListMonitoredResourceDescriptorsRequestSDKType {
+    return {
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
   },
 
   fromAmino(object: ListMonitoredResourceDescriptorsRequestAmino): ListMonitoredResourceDescriptorsRequest {
@@ -2375,6 +2450,13 @@ export const ListMonitoredResourceDescriptorsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListMonitoredResourceDescriptorsResponseSDKType {
+    return {
+      resource_descriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   },
 
   fromAmino(object: ListMonitoredResourceDescriptorsResponseAmino): ListMonitoredResourceDescriptorsResponse {
@@ -2541,6 +2623,15 @@ export const ListLogsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListLogsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: ListLogsRequestAmino): ListLogsRequest {
     return {
       parent: object.parent,
@@ -2679,6 +2770,13 @@ export const ListLogsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListLogsResponseSDKType {
+    return {
+      log_names: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => String(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   },
 
   fromAmino(object: ListLogsResponseAmino): ListLogsResponse {
@@ -2831,6 +2929,14 @@ export const TailLogEntriesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TailLogEntriesRequestSDKType {
+    return {
+      resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      buffer_window: isSet(object.buffer_window) ? Duration.fromSDKJSON(object.buffer_window) : undefined
+    };
+  },
+
   fromAmino(object: TailLogEntriesRequestAmino): TailLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
@@ -2979,6 +3085,13 @@ export const TailLogEntriesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): TailLogEntriesResponseSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
+      suppression_info: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: TailLogEntriesResponseAmino): TailLogEntriesResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
@@ -3106,6 +3219,13 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
     obj.suppressed_count = message.suppressedCount;
     return obj;
+  },
+
+  fromSDKJSON(object: any): TailLogEntriesResponse_SuppressionInfoSDKType {
+    return {
+      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
+      suppressed_count: isSet(object.suppressed_count) ? Number(object.suppressed_count) : 0
+    };
   },
 
   fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {

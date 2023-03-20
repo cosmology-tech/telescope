@@ -237,6 +237,10 @@ export const QueryCurrentPlanRequest = {
   toSDK(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryCurrentPlanRequestSDKType {
+    return {};
   }
 
 };
@@ -306,6 +310,12 @@ export const QueryCurrentPlanResponse = {
     const obj: any = {};
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentPlanResponseSDKType {
+    return {
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -375,6 +385,12 @@ export const QueryAppliedPlanRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -444,6 +460,12 @@ export const QueryAppliedPlanResponse = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   }
 
 };
@@ -513,6 +535,12 @@ export const QueryUpgradedConsensusStateRequest = {
     const obj: any = {};
     obj.last_height = message.lastHeight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {
+      last_height: isSet(object.last_height) ? Long.fromValue(object.last_height) : Long.ZERO
+    };
   }
 
 };
@@ -582,6 +610,12 @@ export const QueryUpgradedConsensusStateResponse = {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? bytesFromBase64(object.upgraded_consensus_state) : new Uint8Array()
+    };
   }
 
 };
@@ -651,6 +685,12 @@ export const QueryModuleVersionsRequest = {
     const obj: any = {};
     obj.module_name = message.moduleName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsRequestSDKType {
+    return {
+      module_name: isSet(object.module_name) ? String(object.module_name) : ""
+    };
   }
 
 };
@@ -732,6 +772,12 @@ export const QueryModuleVersionsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsResponseSDKType {
+    return {
+      module_versions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -784,6 +830,10 @@ export const QueryAuthorityRequest = {
   toSDK(_: QueryAuthorityRequest): QueryAuthorityRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryAuthorityRequestSDKType {
+    return {};
   }
 
 };
@@ -853,6 +903,12 @@ export const QueryAuthorityResponse = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAuthorityResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };

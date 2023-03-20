@@ -114,6 +114,12 @@ export const Control = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ControlSDKType {
+    return {
+      environment: isSet(object.environment) ? String(object.environment) : ""
+    };
+  },
+
   fromAmino(object: ControlAmino): Control {
     return {
       environment: object.environment

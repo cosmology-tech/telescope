@@ -147,6 +147,14 @@ export const MsgSend = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSendSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -199,6 +207,10 @@ export const MsgSendResponse = {
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSendResponseSDKType {
+    return {};
   }
 
 };
@@ -304,6 +316,13 @@ export const MsgMultiSend = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgMultiSendSDKType {
+    return {
+      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromSDKJSON(e)) : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -356,6 +375,10 @@ export const MsgMultiSendResponse = {
   toSDK(_: MsgMultiSendResponse): MsgMultiSendResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgMultiSendResponseSDKType {
+    return {};
   }
 
 };

@@ -327,6 +327,12 @@ export const Minter = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MinterSDKType {
+    return {
+      epoch_provisions: isSet(object.epoch_provisions) ? String(object.epoch_provisions) : ""
+    };
+  },
+
   fromAmino(object: MinterAmino): Minter {
     return {
       epochProvisions: object.epoch_provisions
@@ -449,6 +455,13 @@ export const WeightedAddress = {
     obj.address = message.address;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): WeightedAddressSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   },
 
   fromAmino(object: WeightedAddressAmino): WeightedAddress {
@@ -603,6 +616,15 @@ export const DistributionProportions = {
     obj.developer_rewards = message.developerRewards;
     obj.community_pool = message.communityPool;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DistributionProportionsSDKType {
+    return {
+      staking: isSet(object.staking) ? String(object.staking) : "",
+      pool_incentives: isSet(object.pool_incentives) ? String(object.pool_incentives) : "",
+      developer_rewards: isSet(object.developer_rewards) ? String(object.developer_rewards) : "",
+      community_pool: isSet(object.community_pool) ? String(object.community_pool) : ""
+    };
   },
 
   fromAmino(object: DistributionProportionsAmino): DistributionProportions {
@@ -829,6 +851,19 @@ export const Params = {
 
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      genesis_epoch_provisions: isSet(object.genesis_epoch_provisions) ? String(object.genesis_epoch_provisions) : "",
+      epoch_identifier: isSet(object.epoch_identifier) ? String(object.epoch_identifier) : "",
+      reduction_period_in_epochs: isSet(object.reduction_period_in_epochs) ? Long.fromValue(object.reduction_period_in_epochs) : Long.ZERO,
+      reduction_factor: isSet(object.reduction_factor) ? String(object.reduction_factor) : "",
+      distribution_proportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDKJSON(object.distribution_proportions) : undefined,
+      weighted_developer_rewards_receivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDKJSON(e)) : [],
+      minting_rewards_distribution_start_epoch: isSet(object.minting_rewards_distribution_start_epoch) ? Long.fromValue(object.minting_rewards_distribution_start_epoch) : Long.ZERO
+    };
   },
 
   fromAmino(object: ParamsAmino): Params {

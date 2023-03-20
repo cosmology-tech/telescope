@@ -133,6 +133,13 @@ export const CPU = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): CPUSDKType {
+    return {
+      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -228,6 +235,13 @@ export const Memory = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MemorySDKType {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -337,6 +351,14 @@ export const Storage = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): StorageSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };

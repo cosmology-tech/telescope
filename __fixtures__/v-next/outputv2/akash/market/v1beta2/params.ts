@@ -112,6 +112,13 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      bid_min_deposit: isSet(object.bid_min_deposit) ? Coin.fromSDKJSON(object.bid_min_deposit) : undefined,
+      order_max_bids: isSet(object.order_max_bids) ? Number(object.order_max_bids) : 0
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,

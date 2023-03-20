@@ -653,6 +653,10 @@ export const ModuleBalanceRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): ModuleBalanceRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: ModuleBalanceRequestAmino): ModuleBalanceRequest {
     return {};
   },
@@ -772,6 +776,12 @@ export const ModuleBalanceResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ModuleBalanceResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ModuleBalanceResponseAmino): ModuleBalanceResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -869,6 +879,10 @@ export const ModuleLockedAmountRequest = {
   toSDK(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ModuleLockedAmountRequestSDKType {
+    return {};
   },
 
   fromAmino(_: ModuleLockedAmountRequestAmino): ModuleLockedAmountRequest {
@@ -990,6 +1004,12 @@ export const ModuleLockedAmountResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ModuleLockedAmountResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ModuleLockedAmountResponseAmino): ModuleLockedAmountResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -1104,6 +1124,12 @@ export const AccountUnlockableCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockableCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
 
   fromAmino(object: AccountUnlockableCoinsRequestAmino): AccountUnlockableCoinsRequest {
@@ -1228,6 +1254,12 @@ export const AccountUnlockableCoinsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountUnlockableCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: AccountUnlockableCoinsResponseAmino): AccountUnlockableCoinsResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -1342,6 +1374,12 @@ export const AccountUnlockingCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockingCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
 
   fromAmino(object: AccountUnlockingCoinsRequestAmino): AccountUnlockingCoinsRequest {
@@ -1466,6 +1504,12 @@ export const AccountUnlockingCoinsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountUnlockingCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: AccountUnlockingCoinsResponseAmino): AccountUnlockingCoinsResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -1580,6 +1624,12 @@ export const AccountLockedCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
 
   fromAmino(object: AccountLockedCoinsRequestAmino): AccountLockedCoinsRequest {
@@ -1702,6 +1752,12 @@ export const AccountLockedCoinsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedCoinsResponseAmino): AccountLockedCoinsResponse {
@@ -1834,6 +1890,13 @@ export const AccountLockedPastTimeRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedPastTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
+  },
+
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     return {
       owner: object.owner,
@@ -1956,6 +2019,12 @@ export const AccountLockedPastTimeResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedPastTimeResponseAmino): AccountLockedPastTimeResponse {
@@ -2088,6 +2157,13 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
+  },
+
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
@@ -2210,6 +2286,12 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyResponseAmino): AccountLockedPastTimeNotUnlockingOnlyResponse {
@@ -2342,6 +2424,13 @@ export const AccountUnlockedBeforeTimeRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
+  },
+
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object.owner,
@@ -2464,6 +2553,12 @@ export const AccountUnlockedBeforeTimeResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountUnlockedBeforeTimeResponseAmino): AccountUnlockedBeforeTimeResponse {
@@ -2610,6 +2705,14 @@ export const AccountLockedPastTimeDenomRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     return {
       owner: object.owner,
@@ -2734,6 +2837,12 @@ export const AccountLockedPastTimeDenomResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedPastTimeDenomResponseAmino): AccountLockedPastTimeDenomResponse {
@@ -2866,6 +2975,13 @@ export const LockedDenomRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LockedDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: LockedDenomRequestAmino): LockedDenomRequest {
     return {
       denom: object.denom,
@@ -2978,6 +3094,12 @@ export const LockedDenomResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LockedDenomResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+
   fromAmino(object: LockedDenomResponseAmino): LockedDenomResponse {
     return {
       amount: object.amount
@@ -3086,6 +3208,12 @@ export const LockedRequest = {
     const obj: any = {};
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockedRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: LockedRequestAmino): LockedRequest {
@@ -3198,6 +3326,12 @@ export const LockedResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LockedResponseSDKType {
+    return {
+      lock: isSet(object.lock) ? PeriodLock.fromSDKJSON(object.lock) : undefined
+    };
+  },
+
   fromAmino(object: LockedResponseAmino): LockedResponse {
     return {
       lock: object?.lock ? PeriodLock.fromAmino(object.lock) : undefined
@@ -3306,6 +3440,12 @@ export const SyntheticLockupsByLockupIDRequest = {
     const obj: any = {};
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: SyntheticLockupsByLockupIDRequestAmino): SyntheticLockupsByLockupIDRequest {
@@ -3428,6 +3568,12 @@ export const SyntheticLockupsByLockupIDResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDResponseSDKType {
+    return {
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: SyntheticLockupsByLockupIDResponseAmino): SyntheticLockupsByLockupIDResponse {
@@ -3560,6 +3706,13 @@ export const AccountLockedLongerDurationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedLongerDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: AccountLockedLongerDurationRequestAmino): AccountLockedLongerDurationRequest {
     return {
       owner: object.owner,
@@ -3682,6 +3835,12 @@ export const AccountLockedLongerDurationResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedLongerDurationResponseAmino): AccountLockedLongerDurationResponse {
@@ -3814,6 +3973,13 @@ export const AccountLockedDurationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: AccountLockedDurationRequestAmino): AccountLockedDurationRequest {
     return {
       owner: object.owner,
@@ -3936,6 +4102,12 @@ export const AccountLockedDurationResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedDurationResponseAmino): AccountLockedDurationResponse {
@@ -4068,6 +4240,13 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyRequestAmino): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
@@ -4190,6 +4369,12 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyResponseAmino): AccountLockedLongerDurationNotUnlockingOnlyResponse {
@@ -4336,6 +4521,14 @@ export const AccountLockedLongerDurationDenomRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: AccountLockedLongerDurationDenomRequestAmino): AccountLockedLongerDurationDenomRequest {
     return {
       owner: object.owner,
@@ -4462,6 +4655,12 @@ export const AccountLockedLongerDurationDenomResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: AccountLockedLongerDurationDenomResponseAmino): AccountLockedLongerDurationDenomResponse {
     return {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
@@ -4559,6 +4758,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -4666,6 +4869,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

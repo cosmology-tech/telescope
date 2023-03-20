@@ -507,6 +507,17 @@ export const MonitoredResourceDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MonitoredResourceDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
+      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
+    };
+  },
+
   fromAmino(object: MonitoredResourceDescriptorAmino): MonitoredResourceDescriptor {
     return {
       name: object.name,
@@ -635,6 +646,13 @@ export const MonitoredResource_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MonitoredResource_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: MonitoredResource_LabelsEntryAmino): MonitoredResource_LabelsEntry {
@@ -787,6 +805,18 @@ export const MonitoredResource = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MonitoredResourceSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   fromAmino(object: MonitoredResourceAmino): MonitoredResource {
     return {
       type: object.type,
@@ -913,6 +943,13 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MonitoredResourceMetadata_UserLabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
 
   fromAmino(object: MonitoredResourceMetadata_UserLabelsEntryAmino): MonitoredResourceMetadata_UserLabelsEntry {
@@ -1063,6 +1100,18 @@ export const MonitoredResourceMetadata = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MonitoredResourceMetadataSDKType {
+    return {
+      system_labels: isSet(object.system_labels) ? Struct.fromSDKJSON(object.system_labels) : undefined,
+      user_labels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
 
   fromAmino(object: MonitoredResourceMetadataAmino): MonitoredResourceMetadata {

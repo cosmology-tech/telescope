@@ -178,6 +178,15 @@ export const LogDescriptor = {
     obj.description = message.description;
     obj.display_name = message.displayName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
+      description: isSet(object.description) ? String(object.description) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : ""
+    };
   }
 
 };

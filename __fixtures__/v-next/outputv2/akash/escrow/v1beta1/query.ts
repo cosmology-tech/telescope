@@ -254,6 +254,16 @@ export const QueryAccountsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAccountsRequestSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? String(object.state) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
     return {
       scope: object.scope,
@@ -388,6 +398,13 @@ export const QueryAccountsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
@@ -570,6 +587,17 @@ export const QueryPaymentsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPaymentsRequestSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? String(object.state) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
     return {
       scope: object.scope,
@@ -706,6 +734,13 @@ export const QueryPaymentsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPaymentsResponseSDKType {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryPaymentsResponseAmino): QueryPaymentsResponse {

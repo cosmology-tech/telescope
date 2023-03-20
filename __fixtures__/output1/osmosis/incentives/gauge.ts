@@ -265,6 +265,19 @@ export const Gauge = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugeSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
+      distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? Long.fromValue(object.num_epochs_paid_over) : Long.UZERO,
+      filled_epochs: isSet(object.filled_epochs) ? Long.fromValue(object.filled_epochs) : Long.UZERO,
+      distributed_coins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -346,6 +359,12 @@ export const LockableDurationsInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   }
 
 };

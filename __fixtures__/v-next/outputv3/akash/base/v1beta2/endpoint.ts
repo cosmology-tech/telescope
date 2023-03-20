@@ -162,6 +162,13 @@ export const Endpoint = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EndpointSDKType {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,
+      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
+    };
+  },
+
   fromAmino(object: EndpointAmino): Endpoint {
     return {
       kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0,

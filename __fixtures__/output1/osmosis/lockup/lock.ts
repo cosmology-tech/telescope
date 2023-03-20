@@ -315,6 +315,16 @@ export const PeriodLock = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeriodLockSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -426,6 +436,15 @@ export const QueryCondition = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryConditionSDKType {
+    return {
+      lock_query_type: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -537,6 +556,15 @@ export const SyntheticLock = {
     message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockSDKType {
+    return {
+      underlying_lock_id: isSet(object.underlying_lock_id) ? Long.fromValue(object.underlying_lock_id) : Long.UZERO,
+      synth_denom: isSet(object.synth_denom) ? String(object.synth_denom) : "",
+      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };

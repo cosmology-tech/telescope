@@ -85,6 +85,13 @@ export const QueryParamsRequest = {
     message.subspace = object.subspace ?? "";
     message.key = object.key ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsRequestSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : ""
+    };
   }
 
 };
@@ -142,6 +149,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      param: isSet(object.param) ? ParamChange.fromSDKJSON(object.param) : undefined
+    };
   }
 
 };

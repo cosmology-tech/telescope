@@ -195,6 +195,13 @@ export const Evidence = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvidenceSDKType {
+    return {
+      duplicate_vote_evidence: isSet(object.duplicate_vote_evidence) ? DuplicateVoteEvidence.fromSDKJSON(object.duplicate_vote_evidence) : undefined,
+      light_client_attack_evidence: isSet(object.light_client_attack_evidence) ? LightClientAttackEvidence.fromSDKJSON(object.light_client_attack_evidence) : undefined
+    };
+  },
+
   fromAmino(object: EvidenceAmino): Evidence {
     return {
       duplicateVoteEvidence: object?.duplicate_vote_evidence ? DuplicateVoteEvidence.fromAmino(object.duplicate_vote_evidence) : undefined,
@@ -353,6 +360,16 @@ export const DuplicateVoteEvidence = {
     obj.validator_power = message.validatorPower;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): DuplicateVoteEvidenceSDKType {
+    return {
+      vote_a: isSet(object.vote_a) ? Vote.fromSDKJSON(object.vote_a) : undefined,
+      vote_b: isSet(object.vote_b) ? Vote.fromSDKJSON(object.vote_b) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      validator_power: isSet(object.validator_power) ? Long.fromValue(object.validator_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   },
 
   fromAmino(object: DuplicateVoteEvidenceAmino): DuplicateVoteEvidence {
@@ -533,6 +550,16 @@ export const LightClientAttackEvidence = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LightClientAttackEvidenceSDKType {
+    return {
+      conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromSDKJSON(object.conflicting_block) : undefined,
+      common_height: isSet(object.common_height) ? Long.fromValue(object.common_height) : Long.ZERO,
+      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
+  },
+
   fromAmino(object: LightClientAttackEvidenceAmino): LightClientAttackEvidence {
     return {
       conflictingBlock: object?.conflicting_block ? LightBlock.fromAmino(object.conflicting_block) : undefined,
@@ -659,6 +686,12 @@ export const EvidenceList = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): EvidenceListSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: EvidenceListAmino): EvidenceList {

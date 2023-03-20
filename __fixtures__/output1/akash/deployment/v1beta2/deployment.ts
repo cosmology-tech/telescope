@@ -173,6 +173,13 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeploymentIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
+    };
   }
 
 };
@@ -284,6 +291,15 @@ export const Deployment = {
     obj.version = message.version;
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeploymentSDKType {
+    return {
+      deployment_id: isSet(object.deployment_id) ? DeploymentID.fromSDKJSON(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+    };
   }
 
 };
@@ -381,6 +397,14 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq;
     obj.state = message.state;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeploymentFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   }
 
 };

@@ -154,6 +154,13 @@ export const QueryParamsRequest = {
     obj.subspace = message.subspace;
     obj.key = message.key;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsRequestSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : ""
+    };
   }
 
 };
@@ -223,6 +230,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.param !== undefined && (obj.param = message.param ? ParamChange.toSDK(message.param) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      param: isSet(object.param) ? ParamChange.fromSDKJSON(object.param) : undefined
+    };
   }
 
 };
@@ -275,6 +288,10 @@ export const QuerySubspacesRequest = {
   toSDK(_: QuerySubspacesRequest): QuerySubspacesRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QuerySubspacesRequestSDKType {
+    return {};
   }
 
 };
@@ -356,6 +373,12 @@ export const QuerySubspacesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySubspacesResponseSDKType {
+    return {
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -451,6 +474,13 @@ export const Subspace = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SubspaceSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
   }
 
 };

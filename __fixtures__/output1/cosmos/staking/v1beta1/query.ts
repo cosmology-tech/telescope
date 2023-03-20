@@ -561,6 +561,13 @@ export const QueryValidatorsRequest = {
     obj.status = message.status;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorsRequestSDKType {
+    return {
+      status: isSet(object.status) ? String(object.status) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -656,6 +663,13 @@ export const QueryValidatorsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorsResponseSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -725,6 +739,12 @@ export const QueryValidatorRequest = {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
   }
 
 };
@@ -794,6 +814,12 @@ export const QueryValidatorResponse = {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorResponseSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
+    };
   }
 
 };
@@ -877,6 +903,13 @@ export const QueryValidatorDelegationsRequest = {
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorDelegationsRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -972,6 +1005,13 @@ export const QueryValidatorDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorDelegationsResponseSDKType {
+    return {
+      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1055,6 +1095,13 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1150,6 +1197,13 @@ export const QueryValidatorUnbondingDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsResponseSDKType {
+    return {
+      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1233,6 +1287,13 @@ export const QueryDelegationRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegationRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
   }
 
 };
@@ -1302,6 +1363,12 @@ export const QueryDelegationResponse = {
     const obj: any = {};
     message.delegationResponse !== undefined && (obj.delegation_response = message.delegationResponse ? DelegationResponse.toSDK(message.delegationResponse) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegationResponseSDKType {
+    return {
+      delegation_response: isSet(object.delegation_response) ? DelegationResponse.fromSDKJSON(object.delegation_response) : undefined
+    };
   }
 
 };
@@ -1385,6 +1452,13 @@ export const QueryUnbondingDelegationRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUnbondingDelegationRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
   }
 
 };
@@ -1454,6 +1528,12 @@ export const QueryUnbondingDelegationResponse = {
     const obj: any = {};
     message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toSDK(message.unbond) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUnbondingDelegationResponseSDKType {
+    return {
+      unbond: isSet(object.unbond) ? UnbondingDelegation.fromSDKJSON(object.unbond) : undefined
+    };
   }
 
 };
@@ -1537,6 +1617,13 @@ export const QueryDelegatorDelegationsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorDelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1632,6 +1719,13 @@ export const QueryDelegatorDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorDelegationsResponseSDKType {
+    return {
+      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1715,6 +1809,13 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1810,6 +1911,13 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsResponseSDKType {
+    return {
+      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1921,6 +2029,15 @@ export const QueryRedelegationsRequest = {
     obj.dst_validator_addr = message.dstValidatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryRedelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      src_validator_addr: isSet(object.src_validator_addr) ? String(object.src_validator_addr) : "",
+      dst_validator_addr: isSet(object.dst_validator_addr) ? String(object.dst_validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2016,6 +2133,13 @@ export const QueryRedelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryRedelegationsResponseSDKType {
+    return {
+      redelegation_responses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2099,6 +2223,13 @@ export const QueryDelegatorValidatorsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorValidatorsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2194,6 +2325,13 @@ export const QueryDelegatorValidatorsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorValidatorsResponseSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -2277,6 +2415,13 @@ export const QueryDelegatorValidatorRequest = {
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorValidatorRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
   }
 
 };
@@ -2346,6 +2491,12 @@ export const QueryDelegatorValidatorResponse = {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorValidatorResponseSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
+    };
   }
 
 };
@@ -2415,6 +2566,12 @@ export const QueryHistoricalInfoRequest = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   }
 
 };
@@ -2484,6 +2641,12 @@ export const QueryHistoricalInfoResponse = {
     const obj: any = {};
     message.hist !== undefined && (obj.hist = message.hist ? HistoricalInfo.toSDK(message.hist) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryHistoricalInfoResponseSDKType {
+    return {
+      hist: isSet(object.hist) ? HistoricalInfo.fromSDKJSON(object.hist) : undefined
+    };
   }
 
 };
@@ -2536,6 +2699,10 @@ export const QueryPoolRequest = {
   toSDK(_: QueryPoolRequest): QueryPoolRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryPoolRequestSDKType {
+    return {};
   }
 
 };
@@ -2605,6 +2772,12 @@ export const QueryPoolResponse = {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = message.pool ? Pool.toSDK(message.pool) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPoolResponseSDKType {
+    return {
+      pool: isSet(object.pool) ? Pool.fromSDKJSON(object.pool) : undefined
+    };
   }
 
 };
@@ -2657,6 +2830,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -2726,6 +2903,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

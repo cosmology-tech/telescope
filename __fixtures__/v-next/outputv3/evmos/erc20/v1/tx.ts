@@ -234,6 +234,14 @@ export const MsgConvertCoin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgConvertCoinSDKType {
+    return {
+      coin: isSet(object.coin) ? Coin.fromSDKJSON(object.coin) : undefined,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
+  },
+
   fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
     return {
       coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
@@ -321,6 +329,10 @@ export const MsgConvertCoinResponse = {
   toSDK(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgConvertCoinResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
@@ -464,6 +476,15 @@ export const MsgConvertERC20 = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgConvertERC20SDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
+  },
+
   fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
     return {
       contractAddress: object.contract_address,
@@ -553,6 +574,10 @@ export const MsgConvertERC20Response = {
   toSDK(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgConvertERC20ResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {

@@ -194,6 +194,12 @@ export const Config = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConfigSDKType {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ConfigAmino): Config {
     return {
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
@@ -322,6 +328,13 @@ export const ModuleConfig = {
     obj.name = message.name;
     message.config !== undefined && (obj.config = message.config ? Any.toSDK(message.config) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleConfigSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      config: isSet(object.config) ? Any.fromSDKJSON(object.config) : undefined
+    };
   },
 
   fromAmino(object: ModuleConfigAmino): ModuleConfig {

@@ -105,6 +105,15 @@ export const Params = {
     message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      airdrop_start_time: isSet(object.airdrop_start_time) ? fromTimestamp(fromJsonTimestamp(object.airdrop_start_time)) : undefined,
+      duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
+      duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
+      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : ""
+    };
   }
 
 };

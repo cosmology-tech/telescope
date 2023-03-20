@@ -203,6 +203,15 @@ export const Endpoint = {
     obj.target = message.target;
     obj.allow_cors = message.allowCors;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EndpointSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
+      target: isSet(object.target) ? String(object.target) : "",
+      allow_cors: isSet(object.allow_cors) ? Boolean(object.allow_cors) : false
+    };
   }
 
 };

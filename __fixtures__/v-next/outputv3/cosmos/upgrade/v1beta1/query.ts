@@ -422,6 +422,10 @@ export const QueryCurrentPlanRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryCurrentPlanRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryCurrentPlanRequestAmino): QueryCurrentPlanRequest {
     return {};
   },
@@ -527,6 +531,12 @@ export const QueryCurrentPlanResponse = {
     const obj: any = {};
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCurrentPlanResponseSDKType {
+    return {
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   },
 
   fromAmino(object: QueryCurrentPlanResponseAmino): QueryCurrentPlanResponse {
@@ -639,6 +649,12 @@ export const QueryAppliedPlanRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAppliedPlanRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: QueryAppliedPlanRequestAmino): QueryAppliedPlanRequest {
     return {
       name: object.name
@@ -747,6 +763,12 @@ export const QueryAppliedPlanResponse = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAppliedPlanResponseSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   },
 
   fromAmino(object: QueryAppliedPlanResponseAmino): QueryAppliedPlanResponse {
@@ -859,6 +881,12 @@ export const QueryUpgradedConsensusStateRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {
+      last_height: isSet(object.last_height) ? Long.fromValue(object.last_height) : Long.ZERO
+    };
+  },
+
   fromAmino(object: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
     return {
       lastHeight: Long.fromString(object.last_height)
@@ -969,6 +997,12 @@ export const QueryUpgradedConsensusStateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? bytesFromBase64(object.upgraded_consensus_state) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
     return {
       upgradedConsensusState: object.upgraded_consensus_state
@@ -1077,6 +1111,12 @@ export const QueryModuleVersionsRequest = {
     const obj: any = {};
     obj.module_name = message.moduleName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryModuleVersionsRequestSDKType {
+    return {
+      module_name: isSet(object.module_name) ? String(object.module_name) : ""
+    };
   },
 
   fromAmino(object: QueryModuleVersionsRequestAmino): QueryModuleVersionsRequest {
@@ -1201,6 +1241,12 @@ export const QueryModuleVersionsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryModuleVersionsResponseSDKType {
+    return {
+      module_versions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryModuleVersionsResponseAmino): QueryModuleVersionsResponse {
     return {
       moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromAmino(e)) : []
@@ -1298,6 +1344,10 @@ export const QueryAuthorityRequest = {
   toSDK(_: QueryAuthorityRequest): QueryAuthorityRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryAuthorityRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryAuthorityRequestAmino): QueryAuthorityRequest {
@@ -1405,6 +1455,12 @@ export const QueryAuthorityResponse = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAuthorityResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
 
   fromAmino(object: QueryAuthorityResponseAmino): QueryAuthorityResponse {

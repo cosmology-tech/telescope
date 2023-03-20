@@ -158,6 +158,12 @@ export const QueryDenomTraceRequest = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomTraceRequestSDKType {
+    return {
+      hash: isSet(object.hash) ? String(object.hash) : ""
+    };
   }
 
 };
@@ -227,6 +233,12 @@ export const QueryDenomTraceResponse = {
     const obj: any = {};
     message.denomTrace !== undefined && (obj.denom_trace = message.denomTrace ? DenomTrace.toSDK(message.denomTrace) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomTraceResponseSDKType {
+    return {
+      denom_trace: isSet(object.denom_trace) ? DenomTrace.fromSDKJSON(object.denom_trace) : undefined
+    };
   }
 
 };
@@ -296,6 +308,12 @@ export const QueryDenomTracesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomTracesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -391,6 +409,13 @@ export const QueryDenomTracesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomTracesResponseSDKType {
+    return {
+      denom_traces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -443,6 +468,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -512,6 +541,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

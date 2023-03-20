@@ -122,6 +122,14 @@ export const UpdateFeeTokenProposal = {
     obj.description = message.description;
     message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpdateFeeTokenProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      feetoken: isSet(object.feetoken) ? FeeToken.fromSDKJSON(object.feetoken) : undefined
+    };
   }
 
 };

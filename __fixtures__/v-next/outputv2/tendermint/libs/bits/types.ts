@@ -129,6 +129,13 @@ export const BitArray = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BitArraySDKType {
+    return {
+      bits: isSet(object.bits) ? Long.fromValue(object.bits) : Long.ZERO,
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   fromAmino(object: BitArrayAmino): BitArray {
     return {
       bits: Long.fromString(object.bits),

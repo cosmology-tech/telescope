@@ -342,6 +342,17 @@ export const MsgCreateClawbackVestingAccount = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateClawbackVestingAccountSDKType {
+    return {
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      lockup_periods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : [],
+      merge: isSet(object.merge) ? Boolean(object.merge) : false
+    };
+  },
+
   fromAmino(object: MsgCreateClawbackVestingAccountAmino): MsgCreateClawbackVestingAccount {
     return {
       fromAddress: object.from_address,
@@ -446,6 +457,10 @@ export const MsgCreateClawbackVestingAccountResponse = {
   toSDK(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateClawbackVestingAccountResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
@@ -575,6 +590,14 @@ export const MsgClawback = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgClawbackSDKType {
+    return {
+      funder_address: isSet(object.funder_address) ? String(object.funder_address) : "",
+      account_address: isSet(object.account_address) ? String(object.account_address) : "",
+      dest_address: isSet(object.dest_address) ? String(object.dest_address) : ""
+    };
+  },
+
   fromAmino(object: MsgClawbackAmino): MsgClawback {
     return {
       funderAddress: object.funder_address,
@@ -662,6 +685,10 @@ export const MsgClawbackResponse = {
   toSDK(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgClawbackResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {

@@ -653,6 +653,16 @@ export const Channel = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : ""
+    };
+  },
+
   fromAmino(object: ChannelAmino): Channel {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
@@ -873,6 +883,18 @@ export const IdentifiedChannel = {
     return obj;
   },
 
+  fromSDKJSON(object: any): IdentifiedChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
+  },
+
   fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
@@ -1013,6 +1035,13 @@ export const Counterparty = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
   },
 
   fromAmino(object: CounterpartyAmino): Counterparty {
@@ -1225,6 +1254,19 @@ export const Packet = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PacketSDKType {
+    return {
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
+      destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
+    };
+  },
+
   fromAmino(object: PacketAmino): Packet {
     return {
       sequence: Long.fromString(object.sequence),
@@ -1391,6 +1433,15 @@ export const PacketState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PacketStateSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: PacketStateAmino): PacketState {
     return {
       portId: object.port_id,
@@ -1519,6 +1570,13 @@ export const Acknowledgement = {
     obj.result = message.result;
     obj.error = message.error;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AcknowledgementSDKType {
+    return {
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
+      error: isSet(object.error) ? String(object.error) : undefined
+    };
   },
 
   fromAmino(object: AcknowledgementAmino): Acknowledgement {

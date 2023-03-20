@@ -95,6 +95,12 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       contractAddress: object.contract_address

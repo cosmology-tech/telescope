@@ -180,6 +180,16 @@ export const BaseVestingAccount = {
     message.delegatedVesting = object.delegatedVesting?.map(e => Coin.fromPartial(e)) || [];
     message.endTime = object.endTime !== undefined && object.endTime !== null ? Long.fromValue(object.endTime) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): BaseVestingAccountSDKType {
+    return {
+      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
+      original_vesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_free: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_vesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO
+    };
   }
 
 };
@@ -249,6 +259,13 @@ export const ContinuousVestingAccount = {
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ContinuousVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO
+    };
   }
 
 };
@@ -306,6 +323,12 @@ export const DelayedVestingAccount = {
     const message = createBaseDelayedVestingAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DelayedVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   }
 
 };
@@ -381,6 +404,13 @@ export const Period = {
     message.length = object.length !== undefined && object.length !== null ? Long.fromValue(object.length) : Long.ZERO;
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): PeriodSDKType {
+    return {
+      length: isSet(object.length) ? Long.fromValue(object.length) : Long.ZERO,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -468,6 +498,14 @@ export const PeriodicVestingAccount = {
     message.startTime = object.startTime !== undefined && object.startTime !== null ? Long.fromValue(object.startTime) : Long.ZERO;
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): PeriodicVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -525,6 +563,12 @@ export const PermanentLockedAccount = {
     const message = createBasePermanentLockedAccount();
     message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): PermanentLockedAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   }
 
 };

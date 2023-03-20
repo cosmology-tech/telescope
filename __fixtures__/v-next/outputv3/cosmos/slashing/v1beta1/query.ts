@@ -234,6 +234,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -339,6 +343,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -451,6 +461,12 @@ export const QuerySigningInfoRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
+    return {
+      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
+    };
+  },
+
   fromAmino(object: QuerySigningInfoRequestAmino): QuerySigningInfoRequest {
     return {
       consAddress: object.cons_address
@@ -561,6 +577,12 @@ export const QuerySigningInfoResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySigningInfoResponseSDKType {
+    return {
+      val_signing_info: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.val_signing_info) : undefined
+    };
+  },
+
   fromAmino(object: QuerySigningInfoResponseAmino): QuerySigningInfoResponse {
     return {
       valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
@@ -669,6 +691,12 @@ export const QuerySigningInfosRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfosRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QuerySigningInfosRequestAmino): QuerySigningInfosRequest {
@@ -805,6 +833,13 @@ export const QuerySigningInfosResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfosResponseSDKType {
+    return {
+      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QuerySigningInfosResponseAmino): QuerySigningInfosResponse {

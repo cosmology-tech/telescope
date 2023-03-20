@@ -93,6 +93,13 @@ export const PublicKey = {
     obj.ed25519 = message.ed25519;
     obj.secp256k1 = message.secp256k1;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PublicKeySDKType {
+    return {
+      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : undefined,
+      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
+    };
   }
 
 };

@@ -170,6 +170,15 @@ export const StoreKVPair = {
     return obj;
   },
 
+  fromSDKJSON(object: any): StoreKVPairSDKType {
+    return {
+      store_key: isSet(object.store_key) ? String(object.store_key) : "",
+      delete: isSet(object.delete) ? Boolean(object.delete) : false,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: StoreKVPairAmino): StoreKVPair {
     return {
       storeKey: object.store_key,

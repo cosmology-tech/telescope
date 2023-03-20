@@ -149,6 +149,13 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      claims_records: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -324,6 +331,18 @@ export const Params = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_claims: isSet(object.enable_claims) ? Boolean(object.enable_claims) : false,
+      airdrop_start_time: isSet(object.airdrop_start_time) ? fromTimestamp(fromJsonTimestamp(object.airdrop_start_time)) : undefined,
+      duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
+      duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
+      claims_denom: isSet(object.claims_denom) ? String(object.claims_denom) : "",
+      authorized_channels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => String(e)) : [],
+      evm_channels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => String(e)) : []
+    };
   }
 
 };

@@ -208,6 +208,18 @@ export const MsgTransfer = {
     message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
     obj.timeout_timestamp = message.timeoutTimestamp;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgTransferSDKType {
+    return {
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? Long.fromValue(object.timeout_timestamp) : Long.UZERO
+    };
   }
 
 };
@@ -260,6 +272,10 @@ export const MsgTransferResponse = {
   toSDK(_: MsgTransferResponse): MsgTransferResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgTransferResponseSDKType {
+    return {};
   }
 
 };

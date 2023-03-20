@@ -212,6 +212,10 @@ export const ModuleToDistributeCoinsRequest = {
   toSDK(_: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ModuleToDistributeCoinsRequestSDKType {
+    return {};
   }
 
 };
@@ -293,6 +297,12 @@ export const ModuleToDistributeCoinsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleToDistributeCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -362,6 +372,12 @@ export const GaugeByIDRequest = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugeByIDRequestSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+    };
   }
 
 };
@@ -431,6 +447,12 @@ export const GaugeByIDResponse = {
     const obj: any = {};
     message.gauge !== undefined && (obj.gauge = message.gauge ? Gauge.toSDK(message.gauge) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugeByIDResponseSDKType {
+    return {
+      gauge: isSet(object.gauge) ? Gauge.fromSDKJSON(object.gauge) : undefined
+    };
   }
 
 };
@@ -500,6 +522,12 @@ export const GaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -595,6 +623,13 @@ export const GaugesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -664,6 +699,12 @@ export const ActiveGaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -759,6 +800,13 @@ export const ActiveGaugesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -842,6 +890,13 @@ export const ActiveGaugesPerDenomRequest = {
     obj.denom = message.denom;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -937,6 +992,13 @@ export const ActiveGaugesPerDenomResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesPerDenomResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1006,6 +1068,12 @@ export const UpcomingGaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1101,6 +1169,13 @@ export const UpcomingGaugesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1184,6 +1259,13 @@ export const UpcomingGaugesPerDenomRequest = {
     obj.denom = message.denom;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1279,6 +1361,13 @@ export const UpcomingGaugesPerDenomResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomResponseSDKType {
+    return {
+      upcoming_gauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1401,6 +1490,14 @@ export const RewardsEstRequest = {
 
     obj.end_epoch = message.endEpoch;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RewardsEstRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => Long.fromValue(e)) : [],
+      end_epoch: isSet(object.end_epoch) ? Long.fromValue(object.end_epoch) : Long.ZERO
+    };
   }
 
 };
@@ -1482,6 +1579,12 @@ export const RewardsEstResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): RewardsEstResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1534,6 +1637,10 @@ export const QueryLockableDurationsRequest = {
   toSDK(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
+    return {};
   }
 
 };
@@ -1615,6 +1722,12 @@ export const QueryLockableDurationsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   }
 
 };

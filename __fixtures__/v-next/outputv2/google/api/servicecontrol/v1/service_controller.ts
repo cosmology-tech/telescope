@@ -636,6 +636,14 @@ export const CheckRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      operation: isSet(object.operation) ? Operation.fromSDKJSON(object.operation) : undefined,
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
+  },
+
   fromAmino(object: CheckRequestAmino): CheckRequest {
     return {
       serviceName: object.service_name,
@@ -810,6 +818,16 @@ export const CheckResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckResponseSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      check_errors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : "",
+      check_info: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDKJSON(object.check_info) : undefined
+    };
+  },
+
   fromAmino(object: CheckResponseAmino): CheckResponse {
     return {
       operationId: object.operation_id,
@@ -952,6 +970,13 @@ export const CheckResponse_CheckInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CheckResponse_CheckInfoSDKType {
+    return {
+      unused_arguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => String(e)) : [],
+      consumer_info: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDKJSON(object.consumer_info) : undefined
+    };
+  },
+
   fromAmino(object: CheckResponse_CheckInfoAmino): CheckResponse_CheckInfo {
     return {
       unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
@@ -1088,6 +1113,14 @@ export const CheckResponse_ConsumerInfo = {
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
     obj.consumer_number = message.consumerNumber;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CheckResponse_ConsumerInfoSDKType {
+    return {
+      project_number: isSet(object.project_number) ? Long.fromValue(object.project_number) : Long.ZERO,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      consumer_number: isSet(object.consumer_number) ? Long.fromValue(object.consumer_number) : Long.ZERO
+    };
   },
 
   fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
@@ -1234,6 +1267,14 @@ export const ReportRequest = {
 
     obj.service_config_id = message.serviceConfigId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ReportRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : ""
+    };
   },
 
   fromAmino(object: ReportRequestAmino): ReportRequest {
@@ -1388,6 +1429,14 @@ export const ReportResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ReportResponseSDKType {
+    return {
+      report_errors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDKJSON(e)) : [],
+      service_config_id: isSet(object.service_config_id) ? String(object.service_config_id) : "",
+      service_rollout_id: isSet(object.service_rollout_id) ? String(object.service_rollout_id) : ""
+    };
+  },
+
   fromAmino(object: ReportResponseAmino): ReportResponse {
     return {
       reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
@@ -1512,6 +1561,13 @@ export const ReportResponse_ReportError = {
     obj.operation_id = message.operationId;
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ReportResponse_ReportErrorSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
+    };
   },
 
   fromAmino(object: ReportResponse_ReportErrorAmino): ReportResponse_ReportError {

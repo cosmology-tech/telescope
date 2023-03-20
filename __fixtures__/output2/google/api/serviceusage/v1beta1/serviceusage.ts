@@ -699,6 +699,12 @@ export const EnableServiceRequest = {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -756,6 +762,12 @@ export const DisableServiceRequest = {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -813,6 +825,12 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -906,6 +924,15 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   }
 
 };
@@ -981,6 +1008,13 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -1056,6 +1090,13 @@ export const BatchEnableServicesRequest = {
     message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -1149,6 +1190,15 @@ export const ListConsumerQuotaMetricsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
   }
 
 };
@@ -1224,6 +1274,13 @@ export const ListConsumerQuotaMetricsResponse = {
     message.metrics = object.metrics?.map(e => ConsumerQuotaMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsResponseSDKType {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -1293,6 +1350,13 @@ export const GetConsumerQuotaMetricRequest = {
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): GetConsumerQuotaMetricRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
   }
 
 };
@@ -1362,6 +1426,13 @@ export const GetConsumerQuotaLimitRequest = {
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): GetConsumerQuotaLimitRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
   }
 
 };
@@ -1473,6 +1544,15 @@ export const CreateAdminOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateAdminOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -1596,6 +1676,16 @@ export const UpdateAdminOverrideRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -1695,6 +1785,14 @@ export const DeleteAdminOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -1776,6 +1874,14 @@ export const ListAdminOverridesRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
   }
 
 };
@@ -1851,6 +1957,13 @@ export const ListAdminOverridesResponse = {
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -1914,6 +2027,12 @@ export const BatchCreateAdminOverridesResponse = {
     const message = createBaseBatchCreateAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): BatchCreateAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2025,6 +2144,15 @@ export const ImportAdminOverridesRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ImportAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -2088,6 +2216,12 @@ export const ImportAdminOverridesResponse = {
     const message = createBaseImportAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ImportAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2131,6 +2265,10 @@ export const ImportAdminOverridesMetadata = {
   fromPartial(_: DeepPartial<ImportAdminOverridesMetadata>): ImportAdminOverridesMetadata {
     const message = createBaseImportAdminOverridesMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): ImportAdminOverridesMetadataSDKType {
+    return {};
   }
 
 };
@@ -2242,6 +2380,15 @@ export const CreateConsumerOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateConsumerOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -2365,6 +2512,16 @@ export const UpdateConsumerOverrideRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -2464,6 +2621,14 @@ export const DeleteConsumerOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -2545,6 +2710,14 @@ export const ListConsumerOverridesRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
   }
 
 };
@@ -2620,6 +2793,13 @@ export const ListConsumerOverridesResponse = {
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -2683,6 +2863,12 @@ export const BatchCreateConsumerOverridesResponse = {
     const message = createBaseBatchCreateConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): BatchCreateConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2794,6 +2980,15 @@ export const ImportConsumerOverridesRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ImportConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   }
 
 };
@@ -2857,6 +3052,12 @@ export const ImportConsumerOverridesResponse = {
     const message = createBaseImportConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ImportConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2900,6 +3101,10 @@ export const ImportConsumerOverridesMetadata = {
   fromPartial(_: DeepPartial<ImportConsumerOverridesMetadata>): ImportConsumerOverridesMetadata {
     const message = createBaseImportConsumerOverridesMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): ImportConsumerOverridesMetadataSDKType {
+    return {};
   }
 
 };
@@ -2963,6 +3168,12 @@ export const ImportAdminQuotaPoliciesResponse = {
     const message = createBaseImportAdminQuotaPoliciesResponse();
     message.policies = object.policies?.map(e => AdminQuotaPolicy.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ImportAdminQuotaPoliciesResponseSDKType {
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -3006,6 +3217,10 @@ export const ImportAdminQuotaPoliciesMetadata = {
   fromPartial(_: DeepPartial<ImportAdminQuotaPoliciesMetadata>): ImportAdminQuotaPoliciesMetadata {
     const message = createBaseImportAdminQuotaPoliciesMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): ImportAdminQuotaPoliciesMetadataSDKType {
+    return {};
   }
 
 };
@@ -3049,6 +3264,10 @@ export const CreateAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<CreateAdminQuotaPolicyMetadata>): CreateAdminQuotaPolicyMetadata {
     const message = createBaseCreateAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): CreateAdminQuotaPolicyMetadataSDKType {
+    return {};
   }
 
 };
@@ -3092,6 +3311,10 @@ export const UpdateAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<UpdateAdminQuotaPolicyMetadata>): UpdateAdminQuotaPolicyMetadata {
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): UpdateAdminQuotaPolicyMetadataSDKType {
+    return {};
   }
 
 };
@@ -3135,6 +3358,10 @@ export const DeleteAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<DeleteAdminQuotaPolicyMetadata>): DeleteAdminQuotaPolicyMetadata {
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): DeleteAdminQuotaPolicyMetadataSDKType {
+    return {};
   }
 
 };
@@ -3192,6 +3419,12 @@ export const GenerateServiceIdentityRequest = {
     const message = createBaseGenerateServiceIdentityRequest();
     message.parent = object.parent ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GenerateServiceIdentityRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : ""
+    };
   }
 
 };
@@ -3261,6 +3494,13 @@ export const GetServiceIdentityResponse = {
     message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
     message.state = object.state ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): GetServiceIdentityResponseSDKType {
+    return {
+      identity: isSet(object.identity) ? ServiceIdentity.fromSDKJSON(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+    };
   }
 
 };
@@ -3304,6 +3544,10 @@ export const GetServiceIdentityMetadata = {
   fromPartial(_: DeepPartial<GetServiceIdentityMetadata>): GetServiceIdentityMetadata {
     const message = createBaseGetServiceIdentityMetadata();
     return message;
+  },
+
+  fromSDKJSON(_: any): GetServiceIdentityMetadataSDKType {
+    return {};
   }
 
 };

@@ -125,6 +125,12 @@ export const Billing = {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): BillingSDKType {
+    return {
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -200,6 +206,13 @@ export const Billing_BillingDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): Billing_BillingDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   }
 
 };

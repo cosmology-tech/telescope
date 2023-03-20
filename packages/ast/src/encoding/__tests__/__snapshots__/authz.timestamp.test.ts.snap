@@ -90,6 +90,13 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+    };
   }
 
 };"
@@ -233,6 +240,13 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+    };
   }
 
 };"

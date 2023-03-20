@@ -189,6 +189,14 @@ export const LabelDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LabelDescriptorSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value_type: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
+  },
+
   fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
     return {
       key: object.key,

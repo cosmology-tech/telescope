@@ -220,6 +220,15 @@ export const OrderID = {
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OrderIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0
+    };
   }
 
 };
@@ -331,6 +340,15 @@ export const Order = {
     message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OrderSDKType {
+    return {
+      order_id: isSet(object.order_id) ? OrderID.fromSDKJSON(object.order_id) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      spec: isSet(object.spec) ? GroupSpec.fromSDKJSON(object.spec) : undefined,
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+    };
   }
 
 };
@@ -456,6 +474,16 @@ export const OrderFilters = {
     obj.oseq = message.oseq;
     obj.state = message.state;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OrderFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   }
 
 };

@@ -145,6 +145,12 @@ export const QueryBalancesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryBalancesRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
     return {
       address: object.address
@@ -305,6 +311,14 @@ export const QueryBalancesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryBalancesResponseSDKType {
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {

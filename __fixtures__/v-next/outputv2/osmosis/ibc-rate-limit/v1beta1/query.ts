@@ -98,6 +98,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -203,6 +207,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

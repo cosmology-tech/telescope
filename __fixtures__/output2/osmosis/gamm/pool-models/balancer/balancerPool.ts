@@ -208,6 +208,15 @@ export const SmoothWeightChangeParams = {
     message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): SmoothWeightChangeParamsSDKType {
+    return {
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      initial_pool_weights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      target_pool_weights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -289,6 +298,14 @@ export const PoolParams = {
     message.exitFee = object.exitFee ?? "";
     message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): PoolParamsSDKType {
+    return {
+      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
+      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : "",
+      smooth_weight_change_params: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDKJSON(object.smooth_weight_change_params) : undefined
+    };
   }
 
 };
@@ -358,6 +375,13 @@ export const PoolAsset = {
     message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): PoolAssetSDKType {
+    return {
+      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   }
 
 };
@@ -493,6 +517,18 @@ export const Pool = {
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.totalWeight = object.totalWeight ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): PoolSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
+      pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : ""
+    };
   }
 
 };

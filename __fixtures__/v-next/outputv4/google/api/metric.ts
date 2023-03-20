@@ -665,6 +665,22 @@ export const MetricDescriptor = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
+      metric_kind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : 0,
+      value_type: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : "",
+      metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromSDKJSON(object.metadata) : undefined,
+      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
+      monitored_resource_types: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -762,6 +778,14 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.samplePeriod !== undefined && (obj.sample_period = message.samplePeriod ? Duration.toSDK(message.samplePeriod) : undefined);
     message.ingestDelay !== undefined && (obj.ingest_delay = message.ingestDelay ? Duration.toSDK(message.ingestDelay) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricDescriptor_MetricDescriptorMetadataSDKType {
+    return {
+      launch_stage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
+      sample_period: isSet(object.sample_period) ? Duration.fromSDKJSON(object.sample_period) : undefined,
+      ingest_delay: isSet(object.ingest_delay) ? Duration.fromSDKJSON(object.ingest_delay) : undefined
+    };
   }
 
 };
@@ -845,6 +869,13 @@ export const Metric_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Metric_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   }
 
 };
@@ -967,6 +998,18 @@ export const Metric = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   }
 
 };

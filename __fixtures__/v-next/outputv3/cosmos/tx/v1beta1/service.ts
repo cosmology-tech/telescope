@@ -665,6 +665,14 @@ export const GetTxsEventRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetTxsEventRequestSDKType {
+    return {
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => String(e)) : [],
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined,
+      order_by: isSet(object.order_by) ? orderByFromJSON(object.order_by) : 0
+    };
+  },
+
   fromAmino(object: GetTxsEventRequestAmino): GetTxsEventRequest {
     return {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => e) : [],
@@ -835,6 +843,14 @@ export const GetTxsEventResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetTxsEventResponseSDKType {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDKJSON(e)) : [],
+      tx_responses: Array.isArray(object?.tx_responses) ? object.tx_responses.map((e: any) => TxResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: GetTxsEventResponseAmino): GetTxsEventResponse {
     return {
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromAmino(e)) : [],
@@ -974,6 +990,13 @@ export const BroadcastTxRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BroadcastTxRequestSDKType {
+    return {
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array(),
+      mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
+    };
+  },
+
   fromAmino(object: BroadcastTxRequestAmino): BroadcastTxRequest {
     return {
       txBytes: object.tx_bytes,
@@ -1084,6 +1107,12 @@ export const BroadcastTxResponse = {
     const obj: any = {};
     message.txResponse !== undefined && (obj.tx_response = message.txResponse ? TxResponse.toSDK(message.txResponse) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): BroadcastTxResponseSDKType {
+    return {
+      tx_response: isSet(object.tx_response) ? TxResponse.fromSDKJSON(object.tx_response) : undefined
+    };
   },
 
   fromAmino(object: BroadcastTxResponseAmino): BroadcastTxResponse {
@@ -1208,6 +1237,13 @@ export const SimulateRequest = {
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toSDK(message.tx) : undefined);
     obj.tx_bytes = message.txBytes;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SimulateRequestSDKType {
+    return {
+      tx: isSet(object.tx) ? Tx.fromSDKJSON(object.tx) : undefined,
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array()
+    };
   },
 
   fromAmino(object: SimulateRequestAmino): SimulateRequest {
@@ -1336,6 +1372,13 @@ export const SimulateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SimulateResponseSDKType {
+    return {
+      gas_info: isSet(object.gas_info) ? GasInfo.fromSDKJSON(object.gas_info) : undefined,
+      result: isSet(object.result) ? Result.fromSDKJSON(object.result) : undefined
+    };
+  },
+
   fromAmino(object: SimulateResponseAmino): SimulateResponse {
     return {
       gasInfo: object?.gas_info ? GasInfo.fromAmino(object.gas_info) : undefined,
@@ -1446,6 +1489,12 @@ export const GetTxRequest = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetTxRequestSDKType {
+    return {
+      hash: isSet(object.hash) ? String(object.hash) : ""
+    };
   },
 
   fromAmino(object: GetTxRequestAmino): GetTxRequest {
@@ -1572,6 +1621,13 @@ export const GetTxResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetTxResponseSDKType {
+    return {
+      tx: isSet(object.tx) ? Tx.fromSDKJSON(object.tx) : undefined,
+      tx_response: isSet(object.tx_response) ? TxResponse.fromSDKJSON(object.tx_response) : undefined
+    };
+  },
+
   fromAmino(object: GetTxResponseAmino): GetTxResponse {
     return {
       tx: object?.tx ? Tx.fromAmino(object.tx) : undefined,
@@ -1696,6 +1752,13 @@ export const GetBlockWithTxsRequest = {
     obj.height = message.height;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetBlockWithTxsRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: GetBlockWithTxsRequestAmino): GetBlockWithTxsRequest {
@@ -1862,6 +1925,15 @@ export const GetBlockWithTxsResponse = {
     message.block !== undefined && (obj.block = message.block ? Block.toSDK(message.block) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetBlockWithTxsResponseSDKType {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => Tx.fromSDKJSON(e)) : [],
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      block: isSet(object.block) ? Block.fromSDKJSON(object.block) : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: GetBlockWithTxsResponseAmino): GetBlockWithTxsResponse {

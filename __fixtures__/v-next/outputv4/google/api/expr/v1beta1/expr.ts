@@ -509,6 +509,14 @@ export const ParsedExpr = {
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     obj.syntax_version = message.syntaxVersion;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParsedExprSDKType {
+    return {
+      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined,
+      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : ""
+    };
   }
 
 };
@@ -676,6 +684,19 @@ export const Expr = {
     message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toSDK(message.structExpr) : undefined);
     message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ExprSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      literal_expr: isSet(object.literal_expr) ? Literal.fromSDKJSON(object.literal_expr) : undefined,
+      ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
+      select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
+      call_expr: isSet(object.call_expr) ? Expr_Call.fromSDKJSON(object.call_expr) : undefined,
+      list_expr: isSet(object.list_expr) ? Expr_CreateList.fromSDKJSON(object.list_expr) : undefined,
+      struct_expr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDKJSON(object.struct_expr) : undefined,
+      comprehension_expr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDKJSON(object.comprehension_expr) : undefined
+    };
   }
 
 };
@@ -745,6 +766,12 @@ export const Expr_Ident = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_IdentSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -842,6 +869,14 @@ export const Expr_Select = {
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_SelectSDKType {
+    return {
+      operand: isSet(object.operand) ? Expr.fromSDKJSON(object.operand) : undefined,
+      field: isSet(object.field) ? String(object.field) : "",
+      test_only: isSet(object.test_only) ? Boolean(object.test_only) : false
+    };
   }
 
 };
@@ -951,6 +986,14 @@ export const Expr_Call = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CallSDKType {
+    return {
+      target: isSet(object.target) ? Expr.fromSDKJSON(object.target) : undefined,
+      function: isSet(object.function) ? String(object.function) : "",
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1032,6 +1075,12 @@ export const Expr_CreateList = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateListSDKType {
+    return {
+      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1127,6 +1176,13 @@ export const Expr_CreateStruct = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStructSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1238,6 +1294,15 @@ export const Expr_CreateStruct_Entry = {
     message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
+      map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   }
 
 };
@@ -1391,6 +1456,18 @@ export const Expr_Comprehension = {
     message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
     message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_ComprehensionSDKType {
+    return {
+      iter_var: isSet(object.iter_var) ? String(object.iter_var) : "",
+      iter_range: isSet(object.iter_range) ? Expr.fromSDKJSON(object.iter_range) : undefined,
+      accu_var: isSet(object.accu_var) ? String(object.accu_var) : "",
+      accu_init: isSet(object.accu_init) ? Expr.fromSDKJSON(object.accu_init) : undefined,
+      loop_condition: isSet(object.loop_condition) ? Expr.fromSDKJSON(object.loop_condition) : undefined,
+      loop_step: isSet(object.loop_step) ? Expr.fromSDKJSON(object.loop_step) : undefined,
+      result: isSet(object.result) ? Expr.fromSDKJSON(object.result) : undefined
+    };
   }
 
 };
@@ -1544,6 +1621,18 @@ export const Literal = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LiteralSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      uint64_value: isSet(object.uint64_value) ? Long.fromValue(object.uint64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined
+    };
   }
 
 };

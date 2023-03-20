@@ -232,6 +232,14 @@ export const ClaimRecord = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ClaimRecordSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      initial_claimable_amount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      action_completed: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => Boolean(e)) : []
+    };
+  },
+
   fromAmino(object: ClaimRecordAmino): ClaimRecord {
     return {
       address: object.address,

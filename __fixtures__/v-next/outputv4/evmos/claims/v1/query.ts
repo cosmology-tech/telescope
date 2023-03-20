@@ -176,6 +176,10 @@ export const QueryTotalUnclaimedRequest = {
   toSDK(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryTotalUnclaimedRequestSDKType {
+    return {};
   }
 
 };
@@ -257,6 +261,12 @@ export const QueryTotalUnclaimedResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalUnclaimedResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -309,6 +319,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -378,6 +392,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -447,6 +467,12 @@ export const QueryClaimsRecordsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -542,6 +568,13 @@ export const QueryClaimsRecordsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordsResponseSDKType {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -611,6 +644,12 @@ export const QueryClaimsRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -706,6 +745,13 @@ export const QueryClaimsRecordResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordResponseSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDKJSON(e)) : []
+    };
   }
 
 };

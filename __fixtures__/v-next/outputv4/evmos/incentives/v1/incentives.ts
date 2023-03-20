@@ -235,6 +235,16 @@ export const Incentive = {
     message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
     obj.total_gas = message.totalGas;
     return obj;
+  },
+
+  fromSDKJSON(object: any): IncentiveSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      total_gas: isSet(object.total_gas) ? Long.fromValue(object.total_gas) : Long.UZERO
+    };
   }
 
 };
@@ -332,6 +342,14 @@ export const GasMeter = {
     obj.participant = message.participant;
     obj.cumulative_gas = message.cumulativeGas;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GasMeterSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : "",
+      cumulative_gas: isSet(object.cumulative_gas) ? Long.fromValue(object.cumulative_gas) : Long.UZERO
+    };
   }
 
 };
@@ -469,6 +487,16 @@ export const RegisterIncentiveProposal = {
 
     obj.epochs = message.epochs;
     return obj;
+  },
+
+  fromSDKJSON(object: any): RegisterIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0
+    };
   }
 
 };
@@ -566,6 +594,14 @@ export const CancelIncentiveProposal = {
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CancelIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };

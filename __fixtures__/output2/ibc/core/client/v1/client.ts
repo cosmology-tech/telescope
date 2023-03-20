@@ -176,6 +176,13 @@ export const IdentifiedClientState = {
     message.clientId = object.clientId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): IdentifiedClientStateSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
+    };
   }
 
 };
@@ -245,6 +252,13 @@ export const ConsensusStateWithHeight = {
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConsensusStateWithHeightSDKType {
+    return {
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined
+    };
   }
 
 };
@@ -320,6 +334,13 @@ export const ClientConsensusStates = {
     message.clientId = object.clientId ?? "";
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ClientConsensusStatesSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -413,6 +434,15 @@ export const ClientUpdateProposal = {
     message.subjectClientId = object.subjectClientId ?? "";
     message.substituteClientId = object.substituteClientId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ClientUpdateProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
+      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : ""
+    };
   }
 
 };
@@ -506,6 +536,15 @@ export const UpgradeProposal = {
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
   }
 
 };
@@ -575,6 +614,13 @@ export const Height = {
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): HeightSDKType {
+    return {
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO
+    };
   }
 
 };
@@ -638,6 +684,12 @@ export const Params = {
     const message = createBaseParams();
     message.allowedClients = object.allowedClients?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      allowed_clients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => String(e)) : []
+    };
   }
 
 };

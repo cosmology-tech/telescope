@@ -971,6 +971,15 @@ export const ListServicesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : ""
+    };
+  },
+
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
     return {
       producerProjectId: object.producer_project_id,
@@ -1105,6 +1114,13 @@ export const ListServicesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromAmino(e)) : [],
@@ -1215,6 +1231,12 @@ export const GetServiceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
+  },
+
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
     return {
       serviceName: object.service_name
@@ -1315,6 +1337,12 @@ export const CreateServiceRequest = {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CreateServiceRequestSDKType {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
+    };
   },
 
   fromAmino(object: CreateServiceRequestAmino): CreateServiceRequest {
@@ -1419,6 +1447,12 @@ export const DeleteServiceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeleteServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
+  },
+
   fromAmino(object: DeleteServiceRequestAmino): DeleteServiceRequest {
     return {
       serviceName: object.service_name
@@ -1521,6 +1555,12 @@ export const UndeleteServiceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UndeleteServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
+  },
+
   fromAmino(object: UndeleteServiceRequestAmino): UndeleteServiceRequest {
     return {
       serviceName: object.service_name
@@ -1621,6 +1661,12 @@ export const UndeleteServiceResponse = {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UndeleteServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
+    };
   },
 
   fromAmino(object: UndeleteServiceResponseAmino): UndeleteServiceResponse {
@@ -1751,6 +1797,14 @@ export const GetServiceConfigRequest = {
     obj.config_id = message.configId;
     message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetServiceConfigRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      config_id: isSet(object.config_id) ? String(object.config_id) : "",
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+    };
   },
 
   fromAmino(object: GetServiceConfigRequestAmino): GetServiceConfigRequest {
@@ -1887,6 +1941,14 @@ export const ListServiceConfigsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServiceConfigsRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
+  },
+
   fromAmino(object: ListServiceConfigsRequestAmino): ListServiceConfigsRequest {
     return {
       serviceName: object.service_name,
@@ -2019,6 +2081,13 @@ export const ListServiceConfigsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServiceConfigsResponseSDKType {
+    return {
+      service_configs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListServiceConfigsResponseAmino): ListServiceConfigsResponse {
     return {
       serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromAmino(e)) : [],
@@ -2141,6 +2210,13 @@ export const CreateServiceConfigRequest = {
     obj.service_name = message.serviceName;
     message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CreateServiceConfigRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
+    };
   },
 
   fromAmino(object: CreateServiceConfigRequestAmino): CreateServiceConfigRequest {
@@ -2275,6 +2351,14 @@ export const SubmitConfigSourceRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SubmitConfigSourceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      config_source: isSet(object.config_source) ? ConfigSource.fromSDKJSON(object.config_source) : undefined,
+      validate_only: isSet(object.validate_only) ? Boolean(object.validate_only) : false
+    };
+  },
+
   fromAmino(object: SubmitConfigSourceRequestAmino): SubmitConfigSourceRequest {
     return {
       serviceName: object.service_name,
@@ -2379,6 +2463,12 @@ export const SubmitConfigSourceResponse = {
     const obj: any = {};
     message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SubmitConfigSourceResponseSDKType {
+    return {
+      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
+    };
   },
 
   fromAmino(object: SubmitConfigSourceResponseAmino): SubmitConfigSourceResponse {
@@ -2495,6 +2585,13 @@ export const CreateServiceRolloutRequest = {
     obj.service_name = message.serviceName;
     message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toSDK(message.rollout) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CreateServiceRolloutRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      rollout: isSet(object.rollout) ? Rollout.fromSDKJSON(object.rollout) : undefined
+    };
   },
 
   fromAmino(object: CreateServiceRolloutRequestAmino): CreateServiceRolloutRequest {
@@ -2643,6 +2740,15 @@ export const ListServiceRolloutsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServiceRolloutsRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+
   fromAmino(object: ListServiceRolloutsRequestAmino): ListServiceRolloutsRequest {
     return {
       serviceName: object.service_name,
@@ -2777,6 +2883,13 @@ export const ListServiceRolloutsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListServiceRolloutsResponseSDKType {
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListServiceRolloutsResponseAmino): ListServiceRolloutsResponse {
     return {
       rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromAmino(e)) : [],
@@ -2901,6 +3014,13 @@ export const GetServiceRolloutRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetServiceRolloutRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : ""
+    };
+  },
+
   fromAmino(object: GetServiceRolloutRequestAmino): GetServiceRolloutRequest {
     return {
       serviceName: object.service_name,
@@ -3017,6 +3137,13 @@ export const GenerateConfigReportRequest = {
     message.newConfig !== undefined && (obj.new_config = message.newConfig ? Any.toSDK(message.newConfig) : undefined);
     message.oldConfig !== undefined && (obj.old_config = message.oldConfig ? Any.toSDK(message.oldConfig) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenerateConfigReportRequestSDKType {
+    return {
+      new_config: isSet(object.new_config) ? Any.fromSDKJSON(object.new_config) : undefined,
+      old_config: isSet(object.old_config) ? Any.fromSDKJSON(object.old_config) : undefined
+    };
   },
 
   fromAmino(object: GenerateConfigReportRequestAmino): GenerateConfigReportRequest {
@@ -3185,6 +3312,15 @@ export const GenerateConfigReportResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenerateConfigReportResponseSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      change_reports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDKJSON(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: GenerateConfigReportResponseAmino): GenerateConfigReportResponse {

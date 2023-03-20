@@ -400,6 +400,13 @@ export const Quota = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuotaSDKType {
+    return {
+      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromSDKJSON(e)) : [],
+      metric_rules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -483,6 +490,13 @@ export const MetricRule_MetricCostsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricRule_MetricCostsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   }
 
 };
@@ -605,6 +619,18 @@ export const MetricRule = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      metric_costs: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
   }
 
 };
@@ -688,6 +714,13 @@ export const QuotaLimit_ValuesEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuotaLimit_ValuesEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   }
 
 };
@@ -923,6 +956,26 @@ export const QuotaLimit = {
 
     obj.display_name = message.displayName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuotaLimitSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      default_limit: isSet(object.default_limit) ? Long.fromValue(object.default_limit) : Long.ZERO,
+      max_limit: isSet(object.max_limit) ? Long.fromValue(object.max_limit) : Long.ZERO,
+      free_tier: isSet(object.free_tier) ? Long.fromValue(object.free_tier) : Long.ZERO,
+      duration: isSet(object.duration) ? String(object.duration) : "",
+      metric: isSet(object.metric) ? String(object.metric) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      values: isObject(object.values) ? Object.entries(object.values).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {},
+      display_name: isSet(object.display_name) ? String(object.display_name) : ""
+    };
   }
 
 };

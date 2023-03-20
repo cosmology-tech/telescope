@@ -145,6 +145,13 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      dev_fee_infos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -270,6 +277,16 @@ export const Params = {
     obj.addr_derivation_cost_create = message.addrDerivationCostCreate;
     obj.min_gas_price = message.minGasPrice;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_fees: isSet(object.enable_fees) ? Boolean(object.enable_fees) : false,
+      developer_shares: isSet(object.developer_shares) ? String(object.developer_shares) : "",
+      validator_shares: isSet(object.validator_shares) ? String(object.validator_shares) : "",
+      addr_derivation_cost_create: isSet(object.addr_derivation_cost_create) ? Long.fromValue(object.addr_derivation_cost_create) : Long.UZERO,
+      min_gas_price: isSet(object.min_gas_price) ? String(object.min_gas_price) : ""
+    };
   }
 
 };

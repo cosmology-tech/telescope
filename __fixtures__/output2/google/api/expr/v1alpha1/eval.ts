@@ -183,6 +183,13 @@ export const EvalState = {
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
     message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): EvalStateSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -252,6 +259,13 @@ export const EvalState_Result = {
     message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): EvalState_ResultSDKType {
+    return {
+      expr: isSet(object.expr) ? Long.fromValue(object.expr) : Long.ZERO,
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
   }
 
 };
@@ -333,6 +347,14 @@ export const ExprValue = {
     message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
     message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ExprValueSDKType {
+    return {
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
+    };
   }
 
 };
@@ -396,6 +418,12 @@ export const ErrorSet = {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ErrorSetSDKType {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -471,6 +499,12 @@ export const UnknownSet = {
     const message = createBaseUnknownSet();
     message.exprs = object.exprs?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): UnknownSetSDKType {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };

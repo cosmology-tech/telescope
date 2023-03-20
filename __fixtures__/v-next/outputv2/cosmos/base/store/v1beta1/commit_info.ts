@@ -203,6 +203,13 @@ export const CommitInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CommitInfoSDKType {
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      store_infos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: CommitInfoAmino): CommitInfo {
     return {
       version: Long.fromString(object.version),
@@ -335,6 +342,13 @@ export const StoreInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): StoreInfoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      commit_id: isSet(object.commit_id) ? CommitID.fromSDKJSON(object.commit_id) : undefined
+    };
+  },
+
   fromAmino(object: StoreInfoAmino): StoreInfo {
     return {
       name: object.name,
@@ -459,6 +473,13 @@ export const CommitID = {
     obj.version = message.version;
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CommitIDSDKType {
+    return {
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
 
   fromAmino(object: CommitIDAmino): CommitID {

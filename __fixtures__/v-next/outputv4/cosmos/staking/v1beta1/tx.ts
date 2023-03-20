@@ -300,6 +300,18 @@ export const MsgCreateValidator = {
     message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toSDK(message.pubkey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Coin.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateValidatorSDKType {
+    return {
+      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
+      commission: isSet(object.commission) ? CommissionRates.fromSDKJSON(object.commission) : undefined,
+      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      pubkey: isSet(object.pubkey) ? Any.fromSDKJSON(object.pubkey) : undefined,
+      value: isSet(object.value) ? Coin.fromSDKJSON(object.value) : undefined
+    };
   }
 
 };
@@ -352,6 +364,10 @@ export const MsgCreateValidatorResponse = {
   toSDK(_: MsgCreateValidatorResponse): MsgCreateValidatorResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateValidatorResponseSDKType {
+    return {};
   }
 
 };
@@ -463,6 +479,15 @@ export const MsgEditValidator = {
     obj.commission_rate = message.commissionRate;
     obj.min_self_delegation = message.minSelfDelegation;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgEditValidatorSDKType {
+    return {
+      description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      commission_rate: isSet(object.commission_rate) ? String(object.commission_rate) : "",
+      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
+    };
   }
 
 };
@@ -515,6 +540,10 @@ export const MsgEditValidatorResponse = {
   toSDK(_: MsgEditValidatorResponse): MsgEditValidatorResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgEditValidatorResponseSDKType {
+    return {};
   }
 
 };
@@ -612,6 +641,14 @@ export const MsgDelegate = {
     obj.validator_address = message.validatorAddress;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgDelegateSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
   }
 
 };
@@ -664,6 +701,10 @@ export const MsgDelegateResponse = {
   toSDK(_: MsgDelegateResponse): MsgDelegateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDelegateResponseSDKType {
+    return {};
   }
 
 };
@@ -775,6 +816,15 @@ export const MsgBeginRedelegate = {
     obj.validator_dst_address = message.validatorDstAddress;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginRedelegateSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
   }
 
 };
@@ -844,6 +894,12 @@ export const MsgBeginRedelegateResponse = {
     const obj: any = {};
     message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginRedelegateResponseSDKType {
+    return {
+      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined
+    };
   }
 
 };
@@ -941,6 +997,14 @@ export const MsgUndelegate = {
     obj.validator_address = message.validatorAddress;
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUndelegateSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
   }
 
 };
@@ -1010,6 +1074,12 @@ export const MsgUndelegateResponse = {
     const obj: any = {};
     message.completionTime !== undefined && (obj.completion_time = message.completionTime ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUndelegateResponseSDKType {
+    return {
+      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined
+    };
   }
 
 };

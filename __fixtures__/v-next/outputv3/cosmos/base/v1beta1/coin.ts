@@ -214,6 +214,13 @@ export const Coin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CoinSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+
   fromAmino(object: CoinAmino): Coin {
     return {
       denom: object.denom,
@@ -340,6 +347,13 @@ export const DecCoin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DecCoinSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+
   fromAmino(object: DecCoinAmino): DecCoin {
     return {
       denom: object.denom,
@@ -452,6 +466,12 @@ export const IntProto = {
     return obj;
   },
 
+  fromSDKJSON(object: any): IntProtoSDKType {
+    return {
+      int: isSet(object.int) ? String(object.int) : ""
+    };
+  },
+
   fromAmino(object: IntProtoAmino): IntProto {
     return {
       int: object.int
@@ -560,6 +580,12 @@ export const DecProto = {
     const obj: any = {};
     obj.dec = message.dec;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DecProtoSDKType {
+    return {
+      dec: isSet(object.dec) ? String(object.dec) : ""
+    };
   },
 
   fromAmino(object: DecProtoAmino): DecProto {

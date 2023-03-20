@@ -551,6 +551,36 @@ export const Service = {
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ServiceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDKJSON(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDKJSON(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDKJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromSDKJSON(object.documentation) : undefined,
+      backend: isSet(object.backend) ? Backend.fromSDKJSON(object.backend) : undefined,
+      http: isSet(object.http) ? Http.fromSDKJSON(object.http) : undefined,
+      quota: isSet(object.quota) ? Quota.fromSDKJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromSDKJSON(object.authentication) : undefined,
+      context: isSet(object.context) ? Context.fromSDKJSON(object.context) : undefined,
+      usage: isSet(object.usage) ? Usage.fromSDKJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : [],
+      control: isSet(object.control) ? Control.fromSDKJSON(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromSDKJSON(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromSDKJSON(e)) : [],
+      monitored_resources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDKJSON(e)) : [],
+      billing: isSet(object.billing) ? Billing.fromSDKJSON(object.billing) : undefined,
+      logging: isSet(object.logging) ? Logging.fromSDKJSON(object.logging) : undefined,
+      monitoring: isSet(object.monitoring) ? Monitoring.fromSDKJSON(object.monitoring) : undefined,
+      system_parameters: isSet(object.system_parameters) ? SystemParameters.fromSDKJSON(object.system_parameters) : undefined,
+      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined,
+      config_version: isSet(object.config_version) ? UInt32Value.fromSDKJSON(object.config_version) : undefined
+    };
   }
 
 };

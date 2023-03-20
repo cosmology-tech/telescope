@@ -219,6 +219,13 @@ export const CPU = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CPUSDKType {
+    return {
+      units: isSet(object.units) ? ResourceValue.fromSDKJSON(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: CPUAmino): CPU {
     return {
       units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
@@ -355,6 +362,13 @@ export const Memory = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MemorySDKType {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MemoryAmino): Memory {
     return {
       quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
@@ -489,6 +503,13 @@ export const Storage = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): StorageSDKType {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDKJSON(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: StorageAmino): Storage {
@@ -653,6 +674,15 @@ export const ResourceUnits = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ResourceUnitsSDKType {
+    return {
+      cpu: isSet(object.cpu) ? CPU.fromSDKJSON(object.cpu) : undefined,
+      memory: isSet(object.memory) ? Memory.fromSDKJSON(object.memory) : undefined,
+      storage: isSet(object.storage) ? Storage.fromSDKJSON(object.storage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {

@@ -219,6 +219,14 @@ export const ReplacePoolIncentivesProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ReplacePoolIncentivesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
     return {
       title: object.title,
@@ -377,6 +385,14 @@ export const UpdatePoolIncentivesProposal = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpdatePoolIncentivesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {

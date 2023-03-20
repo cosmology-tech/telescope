@@ -230,6 +230,14 @@ export const ProtocolVersion = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ProtocolVersionSDKType {
+    return {
+      p2p: isSet(object.p2p) ? Long.fromValue(object.p2p) : Long.UZERO,
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
+    };
+  },
+
   fromAmino(object: ProtocolVersionAmino): ProtocolVersion {
     return {
       p2p: Long.fromString(object.p2p),
@@ -434,6 +442,19 @@ export const NodeInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): NodeInfoSDKType {
+    return {
+      protocol_version: isSet(object.protocol_version) ? ProtocolVersion.fromSDKJSON(object.protocol_version) : undefined,
+      node_id: isSet(object.node_id) ? String(object.node_id) : "",
+      listen_addr: isSet(object.listen_addr) ? String(object.listen_addr) : "",
+      network: isSet(object.network) ? String(object.network) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(),
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      other: isSet(object.other) ? NodeInfoOther.fromSDKJSON(object.other) : undefined
+    };
+  },
+
   fromAmino(object: NodeInfoAmino): NodeInfo {
     return {
       protocolVersion: object?.protocol_version ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
@@ -562,6 +583,13 @@ export const NodeInfoOther = {
     obj.tx_index = message.txIndex;
     obj.rpc_address = message.rpcAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): NodeInfoOtherSDKType {
+    return {
+      tx_index: isSet(object.tx_index) ? String(object.tx_index) : "",
+      rpc_address: isSet(object.rpc_address) ? String(object.rpc_address) : ""
+    };
   },
 
   fromAmino(object: NodeInfoOtherAmino): NodeInfoOther {
@@ -706,6 +734,14 @@ export const PeerInfo = {
 
     message.lastConnected !== undefined && (obj.last_connected = message.lastConnected ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeerInfoSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      address_info: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDKJSON(e)) : [],
+      last_connected: isSet(object.last_connected) ? fromTimestamp(fromJsonTimestamp(object.last_connected)) : undefined
+    };
   },
 
   fromAmino(object: PeerInfoAmino): PeerInfo {
@@ -860,6 +896,15 @@ export const PeerAddressInfo = {
     message.lastDialFailure !== undefined && (obj.last_dial_failure = message.lastDialFailure ?? undefined);
     obj.dial_failures = message.dialFailures;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeerAddressInfoSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      last_dial_success: isSet(object.last_dial_success) ? fromTimestamp(fromJsonTimestamp(object.last_dial_success)) : undefined,
+      last_dial_failure: isSet(object.last_dial_failure) ? fromTimestamp(fromJsonTimestamp(object.last_dial_failure)) : undefined,
+      dial_failures: isSet(object.dial_failures) ? Number(object.dial_failures) : 0
+    };
   },
 
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {

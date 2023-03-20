@@ -106,6 +106,14 @@ exports[`osmosis/lockup/tx duration 2`] = `
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockTokensSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };"
@@ -273,6 +281,14 @@ exports[`osmosis/lockup/tx string 2`] = `
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockTokensSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };"

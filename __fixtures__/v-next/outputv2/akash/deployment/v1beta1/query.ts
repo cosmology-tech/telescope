@@ -239,6 +239,13 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDeploymentsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
     return {
       filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : undefined,
@@ -369,6 +376,13 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDeploymentsResponseSDKType {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
     return {
       deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
@@ -477,6 +491,12 @@ export const QueryDeploymentRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentRequestSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
   },
 
   fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
@@ -621,6 +641,14 @@ export const QueryDeploymentResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDeploymentResponseSDKType {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : [],
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
+  },
+
   fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
     return {
       deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
@@ -733,6 +761,12 @@ export const QueryGroupRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGroupRequestSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
     return {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
@@ -833,6 +867,12 @@ export const QueryGroupResponse = {
     const obj: any = {};
     message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupResponseSDKType {
+    return {
+      group: isSet(object.group) ? Group.fromSDKJSON(object.group) : undefined
+    };
   },
 
   fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {

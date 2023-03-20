@@ -381,6 +381,16 @@ export const BaseVestingAccount = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BaseVestingAccountSDKType {
+    return {
+      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
+      original_vesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_free: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      delegated_vesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      end_time: isSet(object.end_time) ? Long.fromValue(object.end_time) : Long.ZERO
+    };
+  },
+
   fromAmino(object: BaseVestingAccountAmino): BaseVestingAccount {
     return {
       baseAccount: object?.base_account ? BaseAccount.fromAmino(object.base_account) : undefined,
@@ -529,6 +539,13 @@ export const ContinuousVestingAccount = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ContinuousVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO
+    };
+  },
+
   fromAmino(object: ContinuousVestingAccountAmino): ContinuousVestingAccount {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
@@ -639,6 +656,12 @@ export const DelayedVestingAccount = {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): DelayedVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   },
 
   fromAmino(object: DelayedVestingAccountAmino): DelayedVestingAccount {
@@ -775,6 +798,13 @@ export const Period = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PeriodSDKType {
+    return {
+      length: isSet(object.length) ? Long.fromValue(object.length) : Long.ZERO,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: PeriodAmino): Period {
@@ -935,6 +965,14 @@ export const PeriodicVestingAccount = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PeriodicVestingAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined,
+      start_time: isSet(object.start_time) ? Long.fromValue(object.start_time) : Long.ZERO,
+      vesting_periods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: PeriodicVestingAccountAmino): PeriodicVestingAccount {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
@@ -1053,6 +1091,12 @@ export const PermanentLockedAccount = {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PermanentLockedAccountSDKType {
+    return {
+      base_vesting_account: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDKJSON(object.base_vesting_account) : undefined
+    };
   },
 
   fromAmino(object: PermanentLockedAccountAmino): PermanentLockedAccount {

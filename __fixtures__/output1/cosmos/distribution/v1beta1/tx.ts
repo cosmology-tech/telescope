@@ -184,6 +184,13 @@ export const MsgSetWithdrawAddress = {
     obj.delegator_address = message.delegatorAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSetWithdrawAddressSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
   }
 
 };
@@ -236,6 +243,10 @@ export const MsgSetWithdrawAddressResponse = {
   toSDK(_: MsgSetWithdrawAddressResponse): MsgSetWithdrawAddressResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSetWithdrawAddressResponseSDKType {
+    return {};
   }
 
 };
@@ -319,6 +330,13 @@ export const MsgWithdrawDelegatorReward = {
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawDelegatorRewardSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
   }
 
 };
@@ -400,6 +418,12 @@ export const MsgWithdrawDelegatorRewardResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawDelegatorRewardResponseSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -469,6 +493,12 @@ export const MsgWithdrawValidatorCommission = {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawValidatorCommissionSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : ""
+    };
   }
 
 };
@@ -550,6 +580,12 @@ export const MsgWithdrawValidatorCommissionResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawValidatorCommissionResponseSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -645,6 +681,13 @@ export const MsgFundCommunityPool = {
 
     obj.depositor = message.depositor;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgFundCommunityPoolSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -697,6 +740,10 @@ export const MsgFundCommunityPoolResponse = {
   toSDK(_: MsgFundCommunityPoolResponse): MsgFundCommunityPoolResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgFundCommunityPoolResponseSDKType {
+    return {};
   }
 
 };

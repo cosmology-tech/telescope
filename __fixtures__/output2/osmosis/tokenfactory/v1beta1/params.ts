@@ -69,6 +69,12 @@ export const Params = {
     const message = createBaseParams();
     message.denomCreationFee = object.denomCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      denom_creation_fee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };

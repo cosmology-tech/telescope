@@ -98,6 +98,10 @@ export const QueryConfigRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryConfigRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
     return {};
   },
@@ -203,6 +207,12 @@ export const QueryConfigResponse = {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? Config.toSDK(message.config) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryConfigResponseSDKType {
+    return {
+      config: isSet(object.config) ? Config.fromSDKJSON(object.config) : undefined
+    };
   },
 
   fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {

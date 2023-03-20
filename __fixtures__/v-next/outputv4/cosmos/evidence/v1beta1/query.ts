@@ -129,6 +129,12 @@ export const QueryEvidenceRequest = {
     const obj: any = {};
     obj.evidence_hash = message.evidenceHash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryEvidenceRequestSDKType {
+    return {
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
+    };
   }
 
 };
@@ -198,6 +204,12 @@ export const QueryEvidenceResponse = {
     const obj: any = {};
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryEvidenceResponseSDKType {
+    return {
+      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
+    };
   }
 
 };
@@ -267,6 +279,12 @@ export const QueryAllEvidenceRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllEvidenceRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -362,6 +380,13 @@ export const QueryAllEvidenceResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllEvidenceResponseSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };

@@ -226,6 +226,13 @@ export const MsgSoftwareUpgrade = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSoftwareUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
+  },
+
   fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
     return {
       authority: object.authority,
@@ -319,6 +326,10 @@ export const MsgSoftwareUpgradeResponse = {
   toSDK(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSoftwareUpgradeResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
@@ -428,6 +439,12 @@ export const MsgCancelUpgrade = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCancelUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
+  },
+
   fromAmino(object: MsgCancelUpgradeAmino): MsgCancelUpgrade {
     return {
       authority: object.authority
@@ -519,6 +536,10 @@ export const MsgCancelUpgradeResponse = {
   toSDK(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCancelUpgradeResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {

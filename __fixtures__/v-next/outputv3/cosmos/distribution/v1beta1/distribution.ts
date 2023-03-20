@@ -574,6 +574,15 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      community_tax: isSet(object.community_tax) ? String(object.community_tax) : "",
+      base_proposer_reward: isSet(object.base_proposer_reward) ? String(object.base_proposer_reward) : "",
+      bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? String(object.bonus_proposer_reward) : "",
+      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : false
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       communityTax: object.community_tax,
@@ -714,6 +723,13 @@ export const ValidatorHistoricalRewards = {
 
     obj.reference_count = message.referenceCount;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorHistoricalRewardsSDKType {
+    return {
+      cumulative_reward_ratio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : 0
+    };
   },
 
   fromAmino(object: ValidatorHistoricalRewardsAmino): ValidatorHistoricalRewards {
@@ -860,6 +876,13 @@ export const ValidatorCurrentRewards = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorCurrentRewardsSDKType {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+    };
+  },
+
   fromAmino(object: ValidatorCurrentRewardsAmino): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
@@ -990,6 +1013,12 @@ export const ValidatorAccumulatedCommission = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorAccumulatedCommissionSDKType {
+    return {
+      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ValidatorAccumulatedCommissionAmino): ValidatorAccumulatedCommission {
     return {
       commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromAmino(e)) : []
@@ -1116,6 +1145,12 @@ export const ValidatorOutstandingRewards = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorOutstandingRewardsSDKType {
+    return {
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ValidatorOutstandingRewardsAmino): ValidatorOutstandingRewards {
@@ -1248,6 +1283,13 @@ export const ValidatorSlashEvent = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorSlashEventSDKType {
+    return {
+      validator_period: isSet(object.validator_period) ? Long.fromValue(object.validator_period) : Long.UZERO,
+      fraction: isSet(object.fraction) ? String(object.fraction) : ""
+    };
+  },
+
   fromAmino(object: ValidatorSlashEventAmino): ValidatorSlashEvent {
     return {
       validatorPeriod: Long.fromString(object.validator_period),
@@ -1370,6 +1412,12 @@ export const ValidatorSlashEvents = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorSlashEventsSDKType {
+    return {
+      validator_slash_events: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ValidatorSlashEventsAmino): ValidatorSlashEvents {
@@ -1498,6 +1546,12 @@ export const FeePool = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): FeePoolSDKType {
+    return {
+      community_pool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: FeePoolAmino): FeePool {
@@ -1670,6 +1724,15 @@ export const CommunityPoolSpendProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CommunityPoolSpendProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: CommunityPoolSpendProposalAmino): CommunityPoolSpendProposal {
     return {
       title: object.title,
@@ -1820,6 +1883,14 @@ export const DelegatorStartingInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DelegatorStartingInfoSDKType {
+    return {
+      previous_period: isSet(object.previous_period) ? Long.fromValue(object.previous_period) : Long.UZERO,
+      stake: isSet(object.stake) ? String(object.stake) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO
+    };
+  },
+
   fromAmino(object: DelegatorStartingInfoAmino): DelegatorStartingInfo {
     return {
       previousPeriod: Long.fromString(object.previous_period),
@@ -1958,6 +2029,13 @@ export const DelegationDelegatorReward = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): DelegationDelegatorRewardSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: DelegationDelegatorRewardAmino): DelegationDelegatorReward {
@@ -2132,6 +2210,16 @@ export const CommunityPoolSpendProposalWithDeposit = {
     obj.amount = message.amount;
     obj.deposit = message.deposit;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CommunityPoolSpendProposalWithDepositSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      deposit: isSet(object.deposit) ? String(object.deposit) : ""
+    };
   },
 
   fromAmino(object: CommunityPoolSpendProposalWithDepositAmino): CommunityPoolSpendProposalWithDeposit {

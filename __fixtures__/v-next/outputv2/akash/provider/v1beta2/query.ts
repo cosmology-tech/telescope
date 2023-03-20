@@ -168,6 +168,12 @@ export const QueryProvidersRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProvidersRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryProvidersRequestAmino): QueryProvidersRequest {
     return {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
@@ -296,6 +302,13 @@ export const QueryProvidersResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
     return {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
@@ -406,6 +419,12 @@ export const QueryProviderRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProviderRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
     return {
       owner: object.owner
@@ -506,6 +525,12 @@ export const QueryProviderResponse = {
     const obj: any = {};
     message.provider !== undefined && (obj.provider = message.provider ? Provider.toSDK(message.provider) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProviderResponseSDKType {
+    return {
+      provider: isSet(object.provider) ? Provider.fromSDKJSON(object.provider) : undefined
+    };
   },
 
   fromAmino(object: QueryProviderResponseAmino): QueryProviderResponse {

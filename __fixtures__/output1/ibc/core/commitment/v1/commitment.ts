@@ -142,6 +142,12 @@ export const MerkleRoot = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MerkleRootSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   }
 
 };
@@ -211,6 +217,12 @@ export const MerklePrefix = {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MerklePrefixSDKType {
+    return {
+      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
+    };
   }
 
 };
@@ -292,6 +304,12 @@ export const MerklePath = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MerklePathSDKType {
+    return {
+      key_path: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -373,6 +391,12 @@ export const MerkleProof = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MerkleProofSDKType {
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromSDKJSON(e)) : []
+    };
   }
 
 };

@@ -107,6 +107,12 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      minimum_risk_factor: isSet(object.minimum_risk_factor) ? String(object.minimum_risk_factor) : ""
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       minimumRiskFactor: object.minimum_risk_factor

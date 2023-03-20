@@ -141,6 +141,12 @@ export const Context = {
     const message = createBaseContext();
     message.rules = object.rules?.map(e => ContextRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ContextSDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -267,6 +273,16 @@ export const ContextRule = {
     message.allowedRequestExtensions = object.allowedRequestExtensions?.map(e => e) || [];
     message.allowedResponseExtensions = object.allowedResponseExtensions?.map(e => e) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): ContextRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
+      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
+      allowed_request_extensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => String(e)) : [],
+      allowed_response_extensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => String(e)) : []
+    };
   }
 
 };

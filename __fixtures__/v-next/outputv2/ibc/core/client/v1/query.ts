@@ -675,6 +675,12 @@ export const QueryClientStateRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClientStateRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
+    };
+  },
+
   fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
     return {
       clientId: object.client_id
@@ -813,6 +819,14 @@ export const QueryClientStateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClientStateResponseSDKType {
+    return {
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
     return {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
@@ -925,6 +939,12 @@ export const QueryClientStatesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClientStatesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryClientStatesRequestAmino): QueryClientStatesRequest {
@@ -1061,6 +1081,13 @@ export const QueryClientStatesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClientStatesResponseSDKType {
+    return {
+      client_states: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryClientStatesResponseAmino): QueryClientStatesResponse {
@@ -1223,6 +1250,15 @@ export const QueryConsensusStateRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      revision_number: isSet(object.revision_number) ? Long.fromValue(object.revision_number) : Long.UZERO,
+      revision_height: isSet(object.revision_height) ? Long.fromValue(object.revision_height) : Long.UZERO,
+      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
+    };
+  },
+
   fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
     return {
       clientId: object.client_id,
@@ -1367,6 +1403,14 @@ export const QueryConsensusStateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryConsensusStateResponseSDKType {
+    return {
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+
   fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
@@ -1493,6 +1537,13 @@ export const QueryConsensusStatesRequest = {
     obj.client_id = message.clientId;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryConsensusStatesRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
@@ -1633,6 +1684,13 @@ export const QueryConsensusStatesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryConsensusStatesResponseSDKType {
+    return {
+      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryConsensusStatesResponseAmino): QueryConsensusStatesResponse {
     return {
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : [],
@@ -1751,6 +1809,12 @@ export const QueryClientStatusRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClientStatusRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
+    };
+  },
+
   fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
     return {
       clientId: object.client_id
@@ -1861,6 +1925,12 @@ export const QueryClientStatusResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClientStatusResponseSDKType {
+    return {
+      status: isSet(object.status) ? String(object.status) : ""
+    };
+  },
+
   fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
     return {
       status: object.status
@@ -1952,6 +2022,10 @@ export const QueryClientParamsRequest = {
   toSDK(_: QueryClientParamsRequest): QueryClientParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryClientParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryClientParamsRequestAmino): QueryClientParamsRequest {
@@ -2061,6 +2135,12 @@ export const QueryClientParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryClientParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: QueryClientParamsResponseAmino): QueryClientParamsResponse {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined
@@ -2152,6 +2232,10 @@ export const QueryUpgradedClientStateRequest = {
   toSDK(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryUpgradedClientStateRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryUpgradedClientStateRequestAmino): QueryUpgradedClientStateRequest {
@@ -2261,6 +2345,12 @@ export const QueryUpgradedClientStateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUpgradedClientStateResponseSDKType {
+    return {
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+
   fromAmino(object: QueryUpgradedClientStateResponseAmino): QueryUpgradedClientStateResponse {
     return {
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
@@ -2352,6 +2442,10 @@ export const QueryUpgradedConsensusStateRequest = {
   toSDK(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
@@ -2459,6 +2553,12 @@ export const QueryUpgradedConsensusStateResponse = {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toSDK(message.upgradedConsensusState) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? Any.fromSDKJSON(object.upgraded_consensus_state) : undefined
+    };
   },
 
   fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {

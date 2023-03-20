@@ -210,6 +210,21 @@ export const TwapRecord = {
     message.p1ArithmeticTwapAccumulator = object.p1ArithmeticTwapAccumulator ?? "";
     message.lastErrorTime = object.lastErrorTime !== undefined && object.lastErrorTime !== null ? Timestamp.fromPartial(object.lastErrorTime) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): TwapRecordSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      asset0_denom: isSet(object.asset0_denom) ? String(object.asset0_denom) : "",
+      asset1_denom: isSet(object.asset1_denom) ? String(object.asset1_denom) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      p0_last_spot_price: isSet(object.p0_last_spot_price) ? String(object.p0_last_spot_price) : "",
+      p1_last_spot_price: isSet(object.p1_last_spot_price) ? String(object.p1_last_spot_price) : "",
+      p0_arithmetic_twap_accumulator: isSet(object.p0_arithmetic_twap_accumulator) ? String(object.p0_arithmetic_twap_accumulator) : "",
+      p1_arithmetic_twap_accumulator: isSet(object.p1_arithmetic_twap_accumulator) ? String(object.p1_arithmetic_twap_accumulator) : "",
+      last_error_time: isSet(object.last_error_time) ? fromTimestamp(fromJsonTimestamp(object.last_error_time)) : undefined
+    };
   }
 
 };

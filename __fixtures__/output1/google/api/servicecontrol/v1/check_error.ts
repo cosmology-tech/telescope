@@ -401,6 +401,15 @@ export const CheckError = {
     obj.detail = message.detail;
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CheckErrorSDKType {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      detail: isSet(object.detail) ? String(object.detail) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
+    };
   }
 
 };

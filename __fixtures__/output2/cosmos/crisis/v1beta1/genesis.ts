@@ -67,6 +67,12 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.constantFee = object.constantFee !== undefined && object.constantFee !== null ? Coin.fromPartial(object.constantFee) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      constant_fee: isSet(object.constant_fee) ? Coin.fromSDKJSON(object.constant_fee) : undefined
+    };
   }
 
 };

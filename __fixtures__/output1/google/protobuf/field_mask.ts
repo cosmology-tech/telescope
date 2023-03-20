@@ -490,6 +490,12 @@ export const FieldMask = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): FieldMaskSDKType {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   }
 
 };

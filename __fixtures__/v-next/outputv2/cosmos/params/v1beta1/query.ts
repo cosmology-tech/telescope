@@ -237,6 +237,13 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryParamsRequestSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : ""
+    };
+  },
+
   fromAmino(object: QueryParamsRequestAmino): QueryParamsRequest {
     return {
       subspace: object.subspace,
@@ -349,6 +356,12 @@ export const QueryParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      param: isSet(object.param) ? ParamChange.fromSDKJSON(object.param) : undefined
+    };
+  },
+
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
       param: object?.param ? ParamChange.fromAmino(object.param) : undefined
@@ -440,6 +453,10 @@ export const QuerySubspacesRequest = {
   toSDK(_: QuerySubspacesRequest): QuerySubspacesRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QuerySubspacesRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QuerySubspacesRequestAmino): QuerySubspacesRequest {
@@ -559,6 +576,12 @@ export const QuerySubspacesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySubspacesResponseSDKType {
+    return {
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QuerySubspacesResponseAmino): QuerySubspacesResponse {
@@ -701,6 +724,13 @@ export const Subspace = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SubspaceSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: SubspaceAmino): Subspace {

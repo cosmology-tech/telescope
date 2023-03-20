@@ -182,6 +182,15 @@ export const MsgCreateBalancerPool = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateBalancerPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : ""
+    };
+  },
+
   fromAmino(object: MsgCreateBalancerPoolAmino): MsgCreateBalancerPool {
     return {
       sender: object.sender,
@@ -302,6 +311,12 @@ export const MsgCreateBalancerPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateBalancerPoolResponseSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {

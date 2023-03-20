@@ -121,6 +121,13 @@ export const App = {
     obj.protocol = message.protocol;
     obj.software = message.software;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AppSDKType {
+    return {
+      protocol: isSet(object.protocol) ? Long.fromValue(object.protocol) : Long.UZERO,
+      software: isSet(object.software) ? String(object.software) : ""
+    };
   }
 
 };
@@ -204,6 +211,13 @@ export const Consensus = {
     obj.block = message.block;
     obj.app = message.app;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ConsensusSDKType {
+    return {
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
+    };
   }
 
 };

@@ -306,6 +306,13 @@ export const CertificateID = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CertificateIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      serial: isSet(object.serial) ? String(object.serial) : ""
+    };
+  },
+
   fromAmino(object: CertificateIDAmino): CertificateID {
     return {
       owner: object.owner,
@@ -436,6 +443,14 @@ export const Certificate = {
     obj.cert = message.cert;
     obj.pubkey = message.pubkey;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CertificateSDKType {
+    return {
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
+    };
   },
 
   fromAmino(object: CertificateAmino): Certificate {
@@ -572,6 +587,14 @@ export const CertificateFilter = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CertificateFilterSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      serial: isSet(object.serial) ? String(object.serial) : "",
+      state: isSet(object.state) ? String(object.state) : ""
+    };
+  },
+
   fromAmino(object: CertificateFilterAmino): CertificateFilter {
     return {
       owner: object.owner,
@@ -706,6 +729,14 @@ export const MsgCreateCertificate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateCertificateSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
     return {
       owner: object.owner,
@@ -793,6 +824,10 @@ export const MsgCreateCertificateResponse = {
   toSDK(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateCertificateResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateCertificateResponseAmino): MsgCreateCertificateResponse {
@@ -894,6 +929,12 @@ export const MsgRevokeCertificate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgRevokeCertificateSDKType {
+    return {
+      id: isSet(object.id) ? CertificateID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: MsgRevokeCertificateAmino): MsgRevokeCertificate {
     return {
       id: object?.id ? CertificateID.fromAmino(object.id) : undefined
@@ -977,6 +1018,10 @@ export const MsgRevokeCertificateResponse = {
   toSDK(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeCertificateResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgRevokeCertificateResponseAmino): MsgRevokeCertificateResponse {

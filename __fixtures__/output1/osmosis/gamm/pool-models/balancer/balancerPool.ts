@@ -287,6 +287,15 @@ export const SmoothWeightChangeParams = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SmoothWeightChangeParamsSDKType {
+    return {
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      initial_pool_weights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      target_pool_weights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -384,6 +393,14 @@ export const PoolParams = {
     obj.exit_fee = message.exitFee;
     message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolParamsSDKType {
+    return {
+      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
+      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : "",
+      smooth_weight_change_params: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDKJSON(object.smooth_weight_change_params) : undefined
+    };
   }
 
 };
@@ -467,6 +484,13 @@ export const PoolAsset = {
     message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolAssetSDKType {
+    return {
+      token: isSet(object.token) ? Coin.fromSDKJSON(object.token) : undefined,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   }
 
 };
@@ -632,6 +656,18 @@ export const Pool = {
 
     obj.total_weight = message.totalWeight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
+      pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : ""
+    };
   }
 
 };

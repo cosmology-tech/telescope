@@ -408,6 +408,15 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.consumerId = object.consumerId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      producer_project_id: isSet(object.producer_project_id) ? String(object.producer_project_id) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : ""
+    };
   }
 
 };
@@ -483,6 +492,13 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -540,6 +556,12 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
   }
 
 };
@@ -597,6 +619,12 @@ export const CreateServiceRequest = {
     const message = createBaseCreateServiceRequest();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateServiceRequestSDKType {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
+    };
   }
 
 };
@@ -654,6 +682,12 @@ export const DeleteServiceRequest = {
     const message = createBaseDeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
   }
 
 };
@@ -711,6 +745,12 @@ export const UndeleteServiceRequest = {
     const message = createBaseUndeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): UndeleteServiceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : ""
+    };
   }
 
 };
@@ -768,6 +808,12 @@ export const UndeleteServiceResponse = {
     const message = createBaseUndeleteServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UndeleteServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDKJSON(object.service) : undefined
+    };
   }
 
 };
@@ -849,6 +895,14 @@ export const GetServiceConfigRequest = {
     message.configId = object.configId ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): GetServiceConfigRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      config_id: isSet(object.config_id) ? String(object.config_id) : "",
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+    };
   }
 
 };
@@ -930,6 +984,14 @@ export const ListServiceConfigsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServiceConfigsRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   }
 
 };
@@ -1005,6 +1067,13 @@ export const ListServiceConfigsResponse = {
     message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServiceConfigsResponseSDKType {
+    return {
+      service_configs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -1074,6 +1143,13 @@ export const CreateServiceConfigRequest = {
     message.serviceName = object.serviceName ?? "";
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateServiceConfigRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
+    };
   }
 
 };
@@ -1155,6 +1231,14 @@ export const SubmitConfigSourceRequest = {
     message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): SubmitConfigSourceRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      config_source: isSet(object.config_source) ? ConfigSource.fromSDKJSON(object.config_source) : undefined,
+      validate_only: isSet(object.validate_only) ? Boolean(object.validate_only) : false
+    };
   }
 
 };
@@ -1212,6 +1296,12 @@ export const SubmitConfigSourceResponse = {
     const message = createBaseSubmitConfigSourceResponse();
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): SubmitConfigSourceResponseSDKType {
+    return {
+      service_config: isSet(object.service_config) ? Service.fromSDKJSON(object.service_config) : undefined
+    };
   }
 
 };
@@ -1281,6 +1371,13 @@ export const CreateServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateServiceRolloutRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      rollout: isSet(object.rollout) ? Rollout.fromSDKJSON(object.rollout) : undefined
+    };
   }
 
 };
@@ -1374,6 +1471,15 @@ export const ListServiceRolloutsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServiceRolloutsRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   }
 
 };
@@ -1449,6 +1555,13 @@ export const ListServiceRolloutsResponse = {
     message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListServiceRolloutsResponseSDKType {
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -1518,6 +1631,13 @@ export const GetServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rolloutId = object.rolloutId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetServiceRolloutRequestSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : ""
+    };
   }
 
 };
@@ -1587,6 +1707,13 @@ export const GenerateConfigReportRequest = {
     message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
     message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): GenerateConfigReportRequestSDKType {
+    return {
+      new_config: isSet(object.new_config) ? Any.fromSDKJSON(object.new_config) : undefined,
+      old_config: isSet(object.old_config) ? Any.fromSDKJSON(object.old_config) : undefined
+    };
   }
 
 };
@@ -1691,6 +1818,15 @@ export const GenerateConfigReportResponse = {
     message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
     message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): GenerateConfigReportResponseSDKType {
+    return {
+      service_name: isSet(object.service_name) ? String(object.service_name) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      change_reports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDKJSON(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDKJSON(e)) : []
+    };
   }
 
 };

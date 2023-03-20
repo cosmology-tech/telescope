@@ -177,6 +177,15 @@ export const MsgSend = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSendSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
+  },
+
   fromAmino(object: MsgSendAmino): MsgSend {
     return {
       classId: object.class_id,
@@ -274,6 +283,10 @@ export const MsgSendResponse = {
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSendResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {

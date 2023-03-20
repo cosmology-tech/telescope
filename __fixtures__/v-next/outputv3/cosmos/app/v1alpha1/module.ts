@@ -343,6 +343,14 @@ export const ModuleDescriptor = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ModuleDescriptorSDKType {
+    return {
+      go_import: isSet(object.go_import) ? String(object.go_import) : "",
+      use_package: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDKJSON(e)) : [],
+      can_migrate_from: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ModuleDescriptorAmino): ModuleDescriptor {
     return {
       goImport: object.go_import,
@@ -482,6 +490,13 @@ export const PackageReference = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PackageReferenceSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      revision: isSet(object.revision) ? Number(object.revision) : 0
+    };
+  },
+
   fromAmino(object: PackageReferenceAmino): PackageReference {
     return {
       name: object.name,
@@ -592,6 +607,12 @@ export const MigrateFromInfo = {
     const obj: any = {};
     obj.module = message.module;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MigrateFromInfoSDKType {
+    return {
+      module: isSet(object.module) ? String(object.module) : ""
+    };
   },
 
   fromAmino(object: MigrateFromInfoAmino): MigrateFromInfo {

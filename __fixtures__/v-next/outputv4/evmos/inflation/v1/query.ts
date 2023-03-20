@@ -202,6 +202,10 @@ export const QueryPeriodRequest = {
   toSDK(_: QueryPeriodRequest): QueryPeriodRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryPeriodRequestSDKType {
+    return {};
   }
 
 };
@@ -271,6 +275,12 @@ export const QueryPeriodResponse = {
     const obj: any = {};
     obj.period = message.period;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPeriodResponseSDKType {
+    return {
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+    };
   }
 
 };
@@ -323,6 +333,10 @@ export const QueryEpochMintProvisionRequest = {
   toSDK(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryEpochMintProvisionRequestSDKType {
+    return {};
   }
 
 };
@@ -392,6 +406,12 @@ export const QueryEpochMintProvisionResponse = {
     const obj: any = {};
     message.epochMintProvision !== undefined && (obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toSDK(message.epochMintProvision) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryEpochMintProvisionResponseSDKType {
+    return {
+      epoch_mint_provision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDKJSON(object.epoch_mint_provision) : undefined
+    };
   }
 
 };
@@ -444,6 +464,10 @@ export const QuerySkippedEpochsRequest = {
   toSDK(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QuerySkippedEpochsRequestSDKType {
+    return {};
   }
 
 };
@@ -513,6 +537,12 @@ export const QuerySkippedEpochsResponse = {
     const obj: any = {};
     obj.skipped_epochs = message.skippedEpochs;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
+    return {
+      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
+    };
   }
 
 };
@@ -565,6 +595,10 @@ export const QueryCirculatingSupplyRequest = {
   toSDK(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryCirculatingSupplyRequestSDKType {
+    return {};
   }
 
 };
@@ -634,6 +668,12 @@ export const QueryCirculatingSupplyResponse = {
     const obj: any = {};
     message.circulatingSupply !== undefined && (obj.circulating_supply = message.circulatingSupply ? DecCoin.toSDK(message.circulatingSupply) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCirculatingSupplyResponseSDKType {
+    return {
+      circulating_supply: isSet(object.circulating_supply) ? DecCoin.fromSDKJSON(object.circulating_supply) : undefined
+    };
   }
 
 };
@@ -686,6 +726,10 @@ export const QueryInflationRateRequest = {
   toSDK(_: QueryInflationRateRequest): QueryInflationRateRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryInflationRateRequestSDKType {
+    return {};
   }
 
 };
@@ -755,6 +799,12 @@ export const QueryInflationRateResponse = {
     const obj: any = {};
     obj.inflation_rate = message.inflationRate;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryInflationRateResponseSDKType {
+    return {
+      inflation_rate: isSet(object.inflation_rate) ? String(object.inflation_rate) : ""
+    };
   }
 
 };
@@ -807,6 +857,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -876,6 +930,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

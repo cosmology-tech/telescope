@@ -204,6 +204,15 @@ export const EventSend = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EventSendSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
+  },
+
   fromAmino(object: EventSendAmino): EventSend {
     return {
       classId: object.class_id,
@@ -348,6 +357,14 @@ export const EventMint = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EventMintSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   fromAmino(object: EventMintAmino): EventMint {
     return {
       classId: object.class_id,
@@ -488,6 +505,14 @@ export const EventBurn = {
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EventBurnSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
 
   fromAmino(object: EventBurnAmino): EventBurn {

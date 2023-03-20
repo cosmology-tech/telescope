@@ -325,6 +325,14 @@ export const MsgSuperfluidDelegate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
+  },
+
   fromAmino(object: MsgSuperfluidDelegateAmino): MsgSuperfluidDelegate {
     return {
       sender: object.sender,
@@ -420,6 +428,10 @@ export const MsgSuperfluidDelegateResponse = {
   toSDK(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidDelegateResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSuperfluidDelegateResponseAmino): MsgSuperfluidDelegateResponse {
@@ -543,6 +555,13 @@ export const MsgSuperfluidUndelegate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSuperfluidUndelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgSuperfluidUndelegateAmino): MsgSuperfluidUndelegate {
     return {
       sender: object.sender,
@@ -636,6 +655,10 @@ export const MsgSuperfluidUndelegateResponse = {
   toSDK(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUndelegateResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSuperfluidUndelegateResponseAmino): MsgSuperfluidUndelegateResponse {
@@ -759,6 +782,13 @@ export const MsgSuperfluidUnbondLock = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSuperfluidUnbondLockSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgSuperfluidUnbondLockAmino): MsgSuperfluidUnbondLock {
     return {
       sender: object.sender,
@@ -852,6 +882,10 @@ export const MsgSuperfluidUnbondLockResponse = {
   toSDK(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUnbondLockResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSuperfluidUnbondLockResponseAmino): MsgSuperfluidUnbondLockResponse {
@@ -1001,6 +1035,14 @@ export const MsgLockAndSuperfluidDelegate = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
+  },
+
   fromAmino(object: MsgLockAndSuperfluidDelegateAmino): MsgLockAndSuperfluidDelegate {
     return {
       sender: object.sender,
@@ -1119,6 +1161,12 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     const obj: any = {};
     obj.ID = message.ID;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateResponseSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgLockAndSuperfluidDelegateResponseAmino): MsgLockAndSuperfluidDelegateResponse {
@@ -1243,6 +1291,13 @@ export const MsgUnPoolWhitelistedPool = {
     obj.sender = message.sender;
     obj.pool_id = message.poolId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgUnPoolWhitelistedPoolAmino): MsgUnPoolWhitelistedPool {
@@ -1379,6 +1434,12 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolResponseSDKType {
+    return {
+      exited_lock_ids: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   },
 
   fromAmino(object: MsgUnPoolWhitelistedPoolResponseAmino): MsgUnPoolWhitelistedPoolResponse {

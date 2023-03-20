@@ -1059,6 +1059,13 @@ export const QueryValidatorsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryValidatorsRequestSDKType {
+    return {
+      status: isSet(object.status) ? String(object.status) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryValidatorsRequestAmino): QueryValidatorsRequest {
     return {
       status: object.status,
@@ -1197,6 +1204,13 @@ export const QueryValidatorsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryValidatorsResponseSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryValidatorsResponseAmino): QueryValidatorsResponse {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
@@ -1315,6 +1329,12 @@ export const QueryValidatorRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryValidatorRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+
   fromAmino(object: QueryValidatorRequestAmino): QueryValidatorRequest {
     return {
       validatorAddr: object.validator_addr
@@ -1423,6 +1443,12 @@ export const QueryValidatorResponse = {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorResponseSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
+    };
   },
 
   fromAmino(object: QueryValidatorResponseAmino): QueryValidatorResponse {
@@ -1547,6 +1573,13 @@ export const QueryValidatorDelegationsRequest = {
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorDelegationsRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryValidatorDelegationsRequestAmino): QueryValidatorDelegationsRequest {
@@ -1687,6 +1720,13 @@ export const QueryValidatorDelegationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryValidatorDelegationsResponseSDKType {
+    return {
+      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryValidatorDelegationsResponseAmino): QueryValidatorDelegationsResponse {
     return {
       delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
@@ -1817,6 +1857,13 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     obj.validator_addr = message.validatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsRequestSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryValidatorUnbondingDelegationsRequestAmino): QueryValidatorUnbondingDelegationsRequest {
@@ -1957,6 +2004,13 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryValidatorUnbondingDelegationsResponseSDKType {
+    return {
+      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryValidatorUnbondingDelegationsResponseAmino): QueryValidatorUnbondingDelegationsResponse {
     return {
       unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromAmino(e)) : [],
@@ -2089,6 +2143,13 @@ export const QueryDelegationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDelegationRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+
   fromAmino(object: QueryDelegationRequestAmino): QueryDelegationRequest {
     return {
       delegatorAddr: object.delegator_addr,
@@ -2199,6 +2260,12 @@ export const QueryDelegationResponse = {
     const obj: any = {};
     message.delegationResponse !== undefined && (obj.delegation_response = message.delegationResponse ? DelegationResponse.toSDK(message.delegationResponse) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegationResponseSDKType {
+    return {
+      delegation_response: isSet(object.delegation_response) ? DelegationResponse.fromSDKJSON(object.delegation_response) : undefined
+    };
   },
 
   fromAmino(object: QueryDelegationResponseAmino): QueryDelegationResponse {
@@ -2325,6 +2392,13 @@ export const QueryUnbondingDelegationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryUnbondingDelegationRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+
   fromAmino(object: QueryUnbondingDelegationRequestAmino): QueryUnbondingDelegationRequest {
     return {
       delegatorAddr: object.delegator_addr,
@@ -2435,6 +2509,12 @@ export const QueryUnbondingDelegationResponse = {
     const obj: any = {};
     message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toSDK(message.unbond) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUnbondingDelegationResponseSDKType {
+    return {
+      unbond: isSet(object.unbond) ? UnbondingDelegation.fromSDKJSON(object.unbond) : undefined
+    };
   },
 
   fromAmino(object: QueryUnbondingDelegationResponseAmino): QueryUnbondingDelegationResponse {
@@ -2559,6 +2639,13 @@ export const QueryDelegatorDelegationsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorDelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDelegatorDelegationsRequestAmino): QueryDelegatorDelegationsRequest {
@@ -2699,6 +2786,13 @@ export const QueryDelegatorDelegationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDelegatorDelegationsResponseSDKType {
+    return {
+      delegation_responses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDelegatorDelegationsResponseAmino): QueryDelegatorDelegationsResponse {
     return {
       delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromAmino(e)) : [],
@@ -2829,6 +2923,13 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDelegatorUnbondingDelegationsRequestAmino): QueryDelegatorUnbondingDelegationsRequest {
@@ -2967,6 +3068,13 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorUnbondingDelegationsResponseSDKType {
+    return {
+      unbonding_responses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDelegatorUnbondingDelegationsResponseAmino): QueryDelegatorUnbondingDelegationsResponse {
@@ -3129,6 +3237,15 @@ export const QueryRedelegationsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryRedelegationsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      src_validator_addr: isSet(object.src_validator_addr) ? String(object.src_validator_addr) : "",
+      dst_validator_addr: isSet(object.dst_validator_addr) ? String(object.dst_validator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryRedelegationsRequestAmino): QueryRedelegationsRequest {
     return {
       delegatorAddr: object.delegator_addr,
@@ -3271,6 +3388,13 @@ export const QueryRedelegationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryRedelegationsResponseSDKType {
+    return {
+      redelegation_responses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryRedelegationsResponseAmino): QueryRedelegationsResponse {
     return {
       redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromAmino(e)) : [],
@@ -3401,6 +3525,13 @@ export const QueryDelegatorValidatorsRequest = {
     obj.delegator_addr = message.delegatorAddr;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDelegatorValidatorsRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDelegatorValidatorsRequestAmino): QueryDelegatorValidatorsRequest {
@@ -3541,6 +3672,13 @@ export const QueryDelegatorValidatorsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDelegatorValidatorsResponseSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDelegatorValidatorsResponseAmino): QueryDelegatorValidatorsResponse {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
@@ -3673,6 +3811,13 @@ export const QueryDelegatorValidatorRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDelegatorValidatorRequestSDKType {
+    return {
+      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+
   fromAmino(object: QueryDelegatorValidatorRequestAmino): QueryDelegatorValidatorRequest {
     return {
       delegatorAddr: object.delegator_addr,
@@ -3785,6 +3930,12 @@ export const QueryDelegatorValidatorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDelegatorValidatorResponseSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined
+    };
+  },
+
   fromAmino(object: QueryDelegatorValidatorResponseAmino): QueryDelegatorValidatorResponse {
     return {
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
@@ -3893,6 +4044,12 @@ export const QueryHistoricalInfoRequest = {
     const obj: any = {};
     obj.height = message.height;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryHistoricalInfoRequestSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+    };
   },
 
   fromAmino(object: QueryHistoricalInfoRequestAmino): QueryHistoricalInfoRequest {
@@ -4005,6 +4162,12 @@ export const QueryHistoricalInfoResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryHistoricalInfoResponseSDKType {
+    return {
+      hist: isSet(object.hist) ? HistoricalInfo.fromSDKJSON(object.hist) : undefined
+    };
+  },
+
   fromAmino(object: QueryHistoricalInfoResponseAmino): QueryHistoricalInfoResponse {
     return {
       hist: object?.hist ? HistoricalInfo.fromAmino(object.hist) : undefined
@@ -4096,6 +4259,10 @@ export const QueryPoolRequest = {
   toSDK(_: QueryPoolRequest): QueryPoolRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryPoolRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryPoolRequestAmino): QueryPoolRequest {
@@ -4205,6 +4372,12 @@ export const QueryPoolResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolResponseSDKType {
+    return {
+      pool: isSet(object.pool) ? Pool.fromSDKJSON(object.pool) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
     return {
       pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
@@ -4296,6 +4469,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -4403,6 +4580,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

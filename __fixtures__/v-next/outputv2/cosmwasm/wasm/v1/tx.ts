@@ -527,6 +527,14 @@ export const MsgStoreCode = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgStoreCodeSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(),
+      instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined
+    };
+  },
+
   fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
     return {
       sender: object.sender,
@@ -639,6 +647,12 @@ export const MsgStoreCodeResponse = {
     const obj: any = {};
     obj.code_id = message.codeId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgStoreCodeResponseSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: MsgStoreCodeResponseAmino): MsgStoreCodeResponse {
@@ -833,6 +847,17 @@ export const MsgInstantiateContract = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgInstantiateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      label: isSet(object.label) ? String(object.label) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgInstantiateContractAmino): MsgInstantiateContract {
     return {
       sender: object.sender,
@@ -971,6 +996,13 @@ export const MsgInstantiateContractResponse = {
     obj.address = message.address;
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgInstantiateContractResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
 
   fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
@@ -1139,6 +1171,15 @@ export const MsgExecuteContract = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgExecuteContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgExecuteContractAmino): MsgExecuteContract {
     return {
       sender: object.sender,
@@ -1259,6 +1300,12 @@ export const MsgExecuteContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecuteContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
 
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
@@ -1413,6 +1460,15 @@ export const MsgMigrateContract = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgMigrateContractSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: MsgMigrateContractAmino): MsgMigrateContract {
     return {
       sender: object.sender,
@@ -1527,6 +1583,12 @@ export const MsgMigrateContractResponse = {
     const obj: any = {};
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgMigrateContractResponseSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
 
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
@@ -1667,6 +1729,14 @@ export const MsgUpdateAdmin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
+  },
+
   fromAmino(object: MsgUpdateAdminAmino): MsgUpdateAdmin {
     return {
       sender: object.sender,
@@ -1762,6 +1832,10 @@ export const MsgUpdateAdminResponse = {
   toSDK(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateAdminResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateAdminResponseAmino): MsgUpdateAdminResponse {
@@ -1885,6 +1959,13 @@ export const MsgClearAdmin = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgClearAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
+  },
+
   fromAmino(object: MsgClearAdminAmino): MsgClearAdmin {
     return {
       sender: object.sender,
@@ -1978,6 +2059,10 @@ export const MsgClearAdminResponse = {
   toSDK(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgClearAdminResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgClearAdminResponseAmino): MsgClearAdminResponse {

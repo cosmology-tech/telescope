@@ -531,6 +531,16 @@ export const Operation = {
     return obj;
   },
 
+  fromSDKJSON(object: any): OperationSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      metadata: isSet(object.metadata) ? Any.fromSDKJSON(object.metadata) : undefined,
+      done: isSet(object.done) ? Boolean(object.done) : false,
+      error: isSet(object.error) ? Status.fromSDKJSON(object.error) : undefined,
+      response: isSet(object.response) ? Any.fromSDKJSON(object.response) : undefined
+    };
+  },
+
   fromAmino(object: OperationAmino): Operation {
     return {
       name: object.name,
@@ -639,6 +649,12 @@ export const GetOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: GetOperationRequestAmino): GetOperationRequest {
@@ -785,6 +801,15 @@ export const ListOperationsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListOperationsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+
   fromAmino(object: ListOperationsRequestAmino): ListOperationsRequest {
     return {
       name: object.name,
@@ -919,6 +944,13 @@ export const ListOperationsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListOperationsResponseSDKType {
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListOperationsResponseAmino): ListOperationsResponse {
     return {
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
@@ -1029,6 +1061,12 @@ export const CancelOperationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CancelOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: CancelOperationRequestAmino): CancelOperationRequest {
     return {
       name: object.name
@@ -1129,6 +1167,12 @@ export const DeleteOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeleteOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: DeleteOperationRequestAmino): DeleteOperationRequest {
@@ -1247,6 +1291,13 @@ export const WaitOperationRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): WaitOperationRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      timeout: isSet(object.timeout) ? Duration.fromSDKJSON(object.timeout) : undefined
+    };
+  },
+
   fromAmino(object: WaitOperationRequestAmino): WaitOperationRequest {
     return {
       name: object.name,
@@ -1363,6 +1414,13 @@ export const OperationInfo = {
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
     return obj;
+  },
+
+  fromSDKJSON(object: any): OperationInfoSDKType {
+    return {
+      response_type: isSet(object.response_type) ? String(object.response_type) : "",
+      metadata_type: isSet(object.metadata_type) ? String(object.metadata_type) : ""
+    };
   },
 
   fromAmino(object: OperationInfoAmino): OperationInfo {

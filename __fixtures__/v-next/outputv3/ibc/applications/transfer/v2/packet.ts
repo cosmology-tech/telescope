@@ -172,6 +172,15 @@ export const FungibleTokenPacketData = {
     return obj;
   },
 
+  fromSDKJSON(object: any): FungibleTokenPacketDataSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
+  },
+
   fromAmino(object: FungibleTokenPacketDataAmino): FungibleTokenPacketData {
     return {
       denom: object.denom,

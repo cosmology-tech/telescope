@@ -152,6 +152,15 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      airdrop_start_time: isSet(object.airdrop_start_time) ? fromTimestamp(fromJsonTimestamp(object.airdrop_start_time)) : undefined,
+      duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
+      duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
+      claim_denom: isSet(object.claim_denom) ? String(object.claim_denom) : ""
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       airdropStartTime: object?.airdrop_start_time ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,

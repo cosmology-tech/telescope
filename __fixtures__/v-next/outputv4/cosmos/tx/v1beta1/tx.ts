@@ -549,6 +549,14 @@ export const Tx = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): TxSDKType {
+    return {
+      body: isSet(object.body) ? TxBody.fromSDKJSON(object.body) : undefined,
+      auth_info: isSet(object.auth_info) ? AuthInfo.fromSDKJSON(object.auth_info) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -658,6 +666,14 @@ export const TxRaw = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): TxRawSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -769,6 +785,15 @@ export const SignDoc = {
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SignDocSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO
+    };
   }
 
 };
@@ -908,6 +933,17 @@ export const SignDocDirectAux = {
     obj.sequence = message.sequence;
     message.tip !== undefined && (obj.tip = message.tip ? Tip.toSDK(message.tip) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SignDocDirectAuxSDKType {
+    return {
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      tip: isSet(object.tip) ? Tip.fromSDKJSON(object.tip) : undefined
+    };
   }
 
 };
@@ -1067,6 +1103,16 @@ export const TxBody = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): TxBodySDKType {
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
+      memo: isSet(object.memo) ? String(object.memo) : "",
+      timeout_height: isSet(object.timeout_height) ? Long.fromValue(object.timeout_height) : Long.UZERO,
+      extension_options: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromSDKJSON(e)) : [],
+      non_critical_extension_options: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1176,6 +1222,14 @@ export const AuthInfo = {
     message.fee !== undefined && (obj.fee = message.fee ? Fee.toSDK(message.fee) : undefined);
     message.tip !== undefined && (obj.tip = message.tip ? Tip.toSDK(message.tip) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuthInfoSDKType {
+    return {
+      signer_infos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromSDKJSON(e)) : [],
+      fee: isSet(object.fee) ? Fee.fromSDKJSON(object.fee) : undefined,
+      tip: isSet(object.tip) ? Tip.fromSDKJSON(object.tip) : undefined
+    };
   }
 
 };
@@ -1273,6 +1327,14 @@ export const SignerInfo = {
     message.modeInfo !== undefined && (obj.mode_info = message.modeInfo ? ModeInfo.toSDK(message.modeInfo) : undefined);
     obj.sequence = message.sequence;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SignerInfoSDKType {
+    return {
+      public_key: isSet(object.public_key) ? Any.fromSDKJSON(object.public_key) : undefined,
+      mode_info: isSet(object.mode_info) ? ModeInfo.fromSDKJSON(object.mode_info) : undefined,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
   }
 
 };
@@ -1356,6 +1418,13 @@ export const ModeInfo = {
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toSDK(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toSDK(message.multi) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModeInfoSDKType {
+    return {
+      single: isSet(object.single) ? ModeInfo_Single.fromSDKJSON(object.single) : undefined,
+      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDKJSON(object.multi) : undefined
+    };
   }
 
 };
@@ -1425,6 +1494,12 @@ export const ModeInfo_Single = {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModeInfo_SingleSDKType {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0
+    };
   }
 
 };
@@ -1520,6 +1595,13 @@ export const ModeInfo_Multi = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModeInfo_MultiSDKType {
+    return {
+      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDKJSON(object.bitarray) : undefined,
+      mode_infos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1643,6 +1725,15 @@ export const Fee = {
     obj.payer = message.payer;
     obj.granter = message.granter;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FeeSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      gas_limit: isSet(object.gas_limit) ? Long.fromValue(object.gas_limit) : Long.UZERO,
+      payer: isSet(object.payer) ? String(object.payer) : "",
+      granter: isSet(object.granter) ? String(object.granter) : ""
+    };
   }
 
 };
@@ -1738,6 +1829,13 @@ export const Tip = {
 
     obj.tipper = message.tipper;
     return obj;
+  },
+
+  fromSDKJSON(object: any): TipSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      tipper: isSet(object.tipper) ? String(object.tipper) : ""
+    };
   }
 
 };
@@ -1849,6 +1947,15 @@ export const AuxSignerData = {
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     obj.sig = message.sig;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuxSignerDataSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      sign_doc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDKJSON(object.sign_doc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
+    };
   }
 
 };

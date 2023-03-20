@@ -125,6 +125,10 @@ export const QueryModuleAccountBalanceRequest = {
   toSDK(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryModuleAccountBalanceRequestSDKType {
+    return {};
   }
 
 };
@@ -206,6 +210,12 @@ export const QueryModuleAccountBalanceResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryModuleAccountBalanceResponseSDKType {
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -258,6 +268,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -327,6 +341,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -396,6 +416,12 @@ export const QueryClaimRecordRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimRecordRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -465,6 +491,12 @@ export const QueryClaimRecordResponse = {
     const obj: any = {};
     message.claimRecord !== undefined && (obj.claim_record = message.claimRecord ? ClaimRecord.toSDK(message.claimRecord) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimRecordResponseSDKType {
+    return {
+      claim_record: isSet(object.claim_record) ? ClaimRecord.fromSDKJSON(object.claim_record) : undefined
+    };
   }
 
 };
@@ -548,6 +580,13 @@ export const QueryClaimableForActionRequest = {
     obj.address = message.address;
     message.action !== undefined && (obj.action = actionToJSON(message.action));
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimableForActionRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+    };
   }
 
 };
@@ -629,6 +668,12 @@ export const QueryClaimableForActionResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryClaimableForActionResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -698,6 +743,12 @@ export const QueryTotalClaimableRequest = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalClaimableRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -779,6 +830,12 @@ export const QueryTotalClaimableResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalClaimableResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };

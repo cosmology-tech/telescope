@@ -166,6 +166,15 @@ export const BaseAccount = {
     obj.account_number = message.accountNumber;
     obj.sequence = message.sequence;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BaseAccountSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
+      account_number: isSet(object.account_number) ? Long.fromValue(object.account_number) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+    };
   }
 
 };
@@ -275,6 +284,14 @@ export const ModuleAccount = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleAccountSDKType {
+    return {
+      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -400,6 +417,16 @@ export const Params = {
     obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519;
     obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      max_memo_characters: isSet(object.max_memo_characters) ? Long.fromValue(object.max_memo_characters) : Long.UZERO,
+      tx_sig_limit: isSet(object.tx_sig_limit) ? Long.fromValue(object.tx_sig_limit) : Long.UZERO,
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? Long.fromValue(object.tx_size_cost_per_byte) : Long.UZERO,
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? Long.fromValue(object.sig_verify_cost_ed25519) : Long.UZERO,
+      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? Long.fromValue(object.sig_verify_cost_secp256k1) : Long.UZERO
+    };
   }
 
 };

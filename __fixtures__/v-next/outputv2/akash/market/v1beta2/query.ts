@@ -390,6 +390,13 @@ export const QueryOrdersRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryOrdersRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? OrderFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
     return {
       filters: object?.filters ? OrderFilters.fromAmino(object.filters) : undefined,
@@ -520,6 +527,13 @@ export const QueryOrdersResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryOrdersResponseSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryOrdersResponseAmino): QueryOrdersResponse {
     return {
       orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
@@ -630,6 +644,12 @@ export const QueryOrderRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryOrderRequestSDKType {
+    return {
+      id: isSet(object.id) ? OrderID.fromSDKJSON(object.id) : undefined
+    };
+  },
+
   fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
     return {
       id: object?.id ? OrderID.fromAmino(object.id) : undefined
@@ -730,6 +750,12 @@ export const QueryOrderResponse = {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? Order.toSDK(message.order) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryOrderResponseSDKType {
+    return {
+      order: isSet(object.order) ? Order.fromSDKJSON(object.order) : undefined
+    };
   },
 
   fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
@@ -846,6 +872,13 @@ export const QueryBidsRequest = {
     message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryBidsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? BidFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
@@ -978,6 +1011,13 @@ export const QueryBidsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryBidsResponseSDKType {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryBidsResponseAmino): QueryBidsResponse {
     return {
       bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromAmino(e)) : [],
@@ -1086,6 +1126,12 @@ export const QueryBidRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? BidID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryBidRequestSDKType {
+    return {
+      id: isSet(object.id) ? BidID.fromSDKJSON(object.id) : undefined
+    };
   },
 
   fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
@@ -1204,6 +1250,13 @@ export const QueryBidResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryBidResponseSDKType {
+    return {
+      bid: isSet(object.bid) ? Bid.fromSDKJSON(object.bid) : undefined,
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
+  },
+
   fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
     return {
       bid: object?.bid ? Bid.fromAmino(object.bid) : undefined,
@@ -1320,6 +1373,13 @@ export const QueryLeasesRequest = {
     message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryLeasesRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? LeaseFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
@@ -1452,6 +1512,13 @@ export const QueryLeasesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryLeasesResponseSDKType {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryLeasesResponseAmino): QueryLeasesResponse {
     return {
       leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromAmino(e)) : [],
@@ -1560,6 +1627,12 @@ export const QueryLeaseRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? LeaseID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryLeaseRequestSDKType {
+    return {
+      id: isSet(object.id) ? LeaseID.fromSDKJSON(object.id) : undefined
+    };
   },
 
   fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
@@ -1676,6 +1749,13 @@ export const QueryLeaseResponse = {
     message.lease !== undefined && (obj.lease = message.lease ? Lease.toSDK(message.lease) : undefined);
     message.escrowPayment !== undefined && (obj.escrow_payment = message.escrowPayment ? FractionalPayment.toSDK(message.escrowPayment) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryLeaseResponseSDKType {
+    return {
+      lease: isSet(object.lease) ? Lease.fromSDKJSON(object.lease) : undefined,
+      escrow_payment: isSet(object.escrow_payment) ? FractionalPayment.fromSDKJSON(object.escrow_payment) : undefined
+    };
   },
 
   fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {

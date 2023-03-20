@@ -123,6 +123,15 @@ export const Block = {
     message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toSDK(message.evidence) : undefined);
     message.lastCommit !== undefined && (obj.last_commit = message.lastCommit ? Commit.toSDK(message.lastCommit) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): BlockSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromSDKJSON(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromSDKJSON(object.evidence) : undefined,
+      last_commit: isSet(object.last_commit) ? Commit.fromSDKJSON(object.last_commit) : undefined
+    };
   }
 
 };

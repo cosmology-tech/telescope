@@ -220,6 +220,14 @@ export const MsgGrantAllowance = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgGrantAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined
+    };
+  },
+
   fromAmino(object: MsgGrantAllowanceAmino): MsgGrantAllowance {
     return {
       granter: object.granter,
@@ -315,6 +323,10 @@ export const MsgGrantAllowanceResponse = {
   toSDK(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgGrantAllowanceResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgGrantAllowanceResponseAmino): MsgGrantAllowanceResponse {
@@ -438,6 +450,13 @@ export const MsgRevokeAllowance = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgRevokeAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
+    };
+  },
+
   fromAmino(object: MsgRevokeAllowanceAmino): MsgRevokeAllowance {
     return {
       granter: object.granter,
@@ -531,6 +550,10 @@ export const MsgRevokeAllowanceResponse = {
   toSDK(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeAllowanceResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgRevokeAllowanceResponseAmino): MsgRevokeAllowanceResponse {

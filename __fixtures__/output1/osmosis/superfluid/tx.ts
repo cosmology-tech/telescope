@@ -192,6 +192,14 @@ export const MsgSuperfluidDelegate = {
     obj.lock_id = message.lockId;
     obj.val_addr = message.valAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO,
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
   }
 
 };
@@ -244,6 +252,10 @@ export const MsgSuperfluidDelegateResponse = {
   toSDK(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidDelegateResponseSDKType {
+    return {};
   }
 
 };
@@ -327,6 +339,13 @@ export const MsgSuperfluidUndelegate = {
     obj.sender = message.sender;
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidUndelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -379,6 +398,10 @@ export const MsgSuperfluidUndelegateResponse = {
   toSDK(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUndelegateResponseSDKType {
+    return {};
   }
 
 };
@@ -462,6 +485,13 @@ export const MsgSuperfluidUnbondLock = {
     obj.sender = message.sender;
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSuperfluidUnbondLockSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -514,6 +544,10 @@ export const MsgSuperfluidUnbondLockResponse = {
   toSDK(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSuperfluidUnbondLockResponseSDKType {
+    return {};
   }
 
 };
@@ -623,6 +657,14 @@ export const MsgLockAndSuperfluidDelegate = {
 
     obj.val_addr = message.valAddr;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : ""
+    };
   }
 
 };
@@ -692,6 +734,12 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     const obj: any = {};
     obj.ID = message.ID;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLockAndSuperfluidDelegateResponseSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+    };
   }
 
 };
@@ -775,6 +823,13 @@ export const MsgUnPoolWhitelistedPool = {
     obj.sender = message.sender;
     obj.pool_id = message.poolId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   }
 
 };
@@ -868,6 +923,12 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUnPoolWhitelistedPoolResponseSDKType {
+    return {
+      exited_lock_ids: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };

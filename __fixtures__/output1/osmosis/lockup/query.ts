@@ -269,6 +269,10 @@ export const ModuleBalanceRequest = {
   toSDK(_: ModuleBalanceRequest): ModuleBalanceRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ModuleBalanceRequestSDKType {
+    return {};
   }
 
 };
@@ -350,6 +354,12 @@ export const ModuleBalanceResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleBalanceResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -402,6 +412,10 @@ export const ModuleLockedAmountRequest = {
   toSDK(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): ModuleLockedAmountRequestSDKType {
+    return {};
   }
 
 };
@@ -483,6 +497,12 @@ export const ModuleLockedAmountResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleLockedAmountResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -552,6 +572,12 @@ export const AccountUnlockableCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockableCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -633,6 +659,12 @@ export const AccountUnlockableCoinsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockableCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -702,6 +734,12 @@ export const AccountUnlockingCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockingCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -783,6 +821,12 @@ export const AccountUnlockingCoinsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockingCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -852,6 +896,12 @@ export const AccountLockedCoinsRequest = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   }
 
 };
@@ -933,6 +983,12 @@ export const AccountLockedCoinsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1016,6 +1072,13 @@ export const AccountLockedPastTimeRequest = {
     obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -1097,6 +1160,12 @@ export const AccountLockedPastTimeResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1180,6 +1249,13 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -1261,6 +1337,12 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1344,6 +1426,13 @@ export const AccountUnlockedBeforeTimeRequest = {
     obj.owner = message.owner;
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+    };
   }
 
 };
@@ -1425,6 +1514,12 @@ export const AccountUnlockedBeforeTimeResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1522,6 +1617,14 @@ export const AccountLockedPastTimeDenomRequest = {
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -1603,6 +1706,12 @@ export const AccountLockedPastTimeDenomResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1686,6 +1795,13 @@ export const LockedDenomRequest = {
     obj.denom = message.denom;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockedDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -1755,6 +1871,12 @@ export const LockedDenomResponse = {
     const obj: any = {};
     obj.amount = message.amount;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockedDenomResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
   }
 
 };
@@ -1824,6 +1946,12 @@ export const LockedRequest = {
     const obj: any = {};
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockedRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -1893,6 +2021,12 @@ export const LockedResponse = {
     const obj: any = {};
     message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toSDK(message.lock) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockedResponseSDKType {
+    return {
+      lock: isSet(object.lock) ? PeriodLock.fromSDKJSON(object.lock) : undefined
+    };
   }
 
 };
@@ -1962,6 +2096,12 @@ export const SyntheticLockupsByLockupIDRequest = {
     const obj: any = {};
     obj.lock_id = message.lockId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
   }
 
 };
@@ -2043,6 +2183,12 @@ export const SyntheticLockupsByLockupIDResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDResponseSDKType {
+    return {
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2126,6 +2272,13 @@ export const AccountLockedLongerDurationRequest = {
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -2207,6 +2360,12 @@ export const AccountLockedLongerDurationResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2290,6 +2449,13 @@ export const AccountLockedDurationRequest = {
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -2371,6 +2537,12 @@ export const AccountLockedDurationResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2454,6 +2626,13 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -2535,6 +2714,12 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2632,6 +2817,14 @@ export const AccountLockedLongerDurationDenomRequest = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -2713,6 +2906,12 @@ export const AccountLockedLongerDurationDenomResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -2765,6 +2964,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -2834,6 +3037,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

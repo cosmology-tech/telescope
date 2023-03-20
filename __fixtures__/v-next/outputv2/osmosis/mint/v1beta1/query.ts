@@ -158,6 +158,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -265,6 +269,12 @@ export const QueryParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined
@@ -356,6 +366,10 @@ export const QueryEpochProvisionsRequest = {
   toSDK(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryEpochProvisionsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryEpochProvisionsRequestAmino): QueryEpochProvisionsRequest {
@@ -463,6 +477,12 @@ export const QueryEpochProvisionsResponse = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryEpochProvisionsResponseSDKType {
+    return {
+      epoch_provisions: isSet(object.epoch_provisions) ? bytesFromBase64(object.epoch_provisions) : new Uint8Array()
+    };
   },
 
   fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {

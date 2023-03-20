@@ -202,6 +202,13 @@ export const InterfaceDescriptor = {
     obj.name = message.name;
     obj.description = message.description;
     return obj;
+  },
+
+  fromSDKJSON(object: any): InterfaceDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   }
 
 };
@@ -323,6 +330,14 @@ export const ScalarDescriptor = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ScalarDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      field_type: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
+    };
   }
 
 };

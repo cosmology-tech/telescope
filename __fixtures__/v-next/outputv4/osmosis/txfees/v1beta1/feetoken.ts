@@ -103,6 +103,13 @@ export const FeeToken = {
     obj.denom = message.denom;
     obj.poolID = message.poolID;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FeeTokenSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
+    };
   }
 
 };

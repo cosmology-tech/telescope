@@ -259,6 +259,13 @@ export const MetricValue_LabelsEntry = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MetricValue_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
     return {
       key: object.key,
@@ -494,6 +501,24 @@ export const MetricValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MetricValueSDKType {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined
+    };
+  },
+
   fromAmino(object: MetricValueAmino): MetricValue {
     return {
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
@@ -646,6 +671,13 @@ export const MetricValueSet = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MetricValueSetSDKType {
+    return {
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
+      metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: MetricValueSetAmino): MetricValueSet {

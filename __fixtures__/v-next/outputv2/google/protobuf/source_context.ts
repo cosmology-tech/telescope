@@ -111,6 +111,12 @@ export const SourceContext = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SourceContextSDKType {
+    return {
+      file_name: isSet(object.file_name) ? String(object.file_name) : ""
+    };
+  },
+
   fromAmino(object: SourceContextAmino): SourceContext {
     return {
       fileName: object.file_name

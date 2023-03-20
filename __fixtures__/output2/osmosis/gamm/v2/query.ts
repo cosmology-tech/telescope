@@ -100,6 +100,14 @@ export const QuerySpotPriceRequest = {
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
+      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
+    };
   }
 
 };
@@ -157,6 +165,12 @@ export const QuerySpotPriceResponse = {
     const message = createBaseQuerySpotPriceResponse();
     message.spotPrice = object.spotPrice ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QuerySpotPriceResponseSDKType {
+    return {
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
   }
 
 };

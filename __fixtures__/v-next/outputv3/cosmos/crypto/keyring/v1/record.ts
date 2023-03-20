@@ -296,6 +296,17 @@ export const Record = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RecordSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
+      local: isSet(object.local) ? Record_Local.fromSDKJSON(object.local) : undefined,
+      ledger: isSet(object.ledger) ? Record_Ledger.fromSDKJSON(object.ledger) : undefined,
+      multi: isSet(object.multi) ? Record_Multi.fromSDKJSON(object.multi) : undefined,
+      offline: isSet(object.offline) ? Record_Offline.fromSDKJSON(object.offline) : undefined
+    };
+  },
+
   fromAmino(object: RecordAmino): Record {
     return {
       name: object.name,
@@ -430,6 +441,13 @@ export const Record_Local = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Record_LocalSDKType {
+    return {
+      priv_key: isSet(object.priv_key) ? Any.fromSDKJSON(object.priv_key) : undefined,
+      priv_key_type: isSet(object.priv_key_type) ? String(object.priv_key_type) : ""
+    };
+  },
+
   fromAmino(object: Record_LocalAmino): Record_Local {
     return {
       privKey: object?.priv_key ? Any.fromAmino(object.priv_key) : undefined,
@@ -542,6 +560,12 @@ export const Record_Ledger = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Record_LedgerSDKType {
+    return {
+      path: isSet(object.path) ? BIP44Params.fromSDKJSON(object.path) : undefined
+    };
+  },
+
   fromAmino(object: Record_LedgerAmino): Record_Ledger {
     return {
       path: object?.path ? BIP44Params.fromAmino(object.path) : undefined
@@ -635,6 +659,10 @@ export const Record_Multi = {
     return obj;
   },
 
+  fromSDKJSON(_: any): Record_MultiSDKType {
+    return {};
+  },
+
   fromAmino(_: Record_MultiAmino): Record_Multi {
     return {};
   },
@@ -723,6 +751,10 @@ export const Record_Offline = {
   toSDK(_: Record_Offline): Record_OfflineSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): Record_OfflineSDKType {
+    return {};
   },
 
   fromAmino(_: Record_OfflineAmino): Record_Offline {

@@ -460,6 +460,10 @@ export const ModuleToDistributeCoinsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): ModuleToDistributeCoinsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: ModuleToDistributeCoinsRequestAmino): ModuleToDistributeCoinsRequest {
     return {};
   },
@@ -579,6 +583,12 @@ export const ModuleToDistributeCoinsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ModuleToDistributeCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ModuleToDistributeCoinsResponseAmino): ModuleToDistributeCoinsResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -695,6 +705,12 @@ export const GaugeByIDRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GaugeByIDRequestSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: GaugeByIDRequestAmino): GaugeByIDRequest {
     return {
       id: Long.fromString(object.id)
@@ -805,6 +821,12 @@ export const GaugeByIDResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GaugeByIDResponseSDKType {
+    return {
+      gauge: isSet(object.gauge) ? Gauge.fromSDKJSON(object.gauge) : undefined
+    };
+  },
+
   fromAmino(object: GaugeByIDResponseAmino): GaugeByIDResponse {
     return {
       gauge: object?.gauge ? Gauge.fromAmino(object.gauge) : undefined
@@ -913,6 +935,12 @@ export const GaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): GaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: GaugesRequestAmino): GaugesRequest {
@@ -1051,6 +1079,13 @@ export const GaugesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: GaugesResponseAmino): GaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
@@ -1167,6 +1202,12 @@ export const ActiveGaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: ActiveGaugesRequestAmino): ActiveGaugesRequest {
@@ -1305,6 +1346,13 @@ export const ActiveGaugesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ActiveGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: ActiveGaugesResponseAmino): ActiveGaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
@@ -1435,6 +1483,13 @@ export const ActiveGaugesPerDenomRequest = {
     obj.denom = message.denom;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ActiveGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: ActiveGaugesPerDenomRequestAmino): ActiveGaugesPerDenomRequest {
@@ -1575,6 +1630,13 @@ export const ActiveGaugesPerDenomResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ActiveGaugesPerDenomResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: ActiveGaugesPerDenomResponseAmino): ActiveGaugesPerDenomResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
@@ -1691,6 +1753,12 @@ export const UpcomingGaugesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: UpcomingGaugesRequestAmino): UpcomingGaugesRequest {
@@ -1829,6 +1897,13 @@ export const UpcomingGaugesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UpcomingGaugesResponseSDKType {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: UpcomingGaugesResponseAmino): UpcomingGaugesResponse {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
@@ -1959,6 +2034,13 @@ export const UpcomingGaugesPerDenomRequest = {
     obj.denom = message.denom;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: UpcomingGaugesPerDenomRequestAmino): UpcomingGaugesPerDenomRequest {
@@ -2097,6 +2179,13 @@ export const UpcomingGaugesPerDenomResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpcomingGaugesPerDenomResponseSDKType {
+    return {
+      upcoming_gauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: UpcomingGaugesPerDenomResponseAmino): UpcomingGaugesPerDenomResponse {
@@ -2270,6 +2359,14 @@ export const RewardsEstRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RewardsEstRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      lock_ids: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => Long.fromValue(e)) : [],
+      end_epoch: isSet(object.end_epoch) ? Long.fromValue(object.end_epoch) : Long.ZERO
+    };
+  },
+
   fromAmino(object: RewardsEstRequestAmino): RewardsEstRequest {
     return {
       owner: object.owner,
@@ -2402,6 +2499,12 @@ export const RewardsEstResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): RewardsEstResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: RewardsEstResponseAmino): RewardsEstResponse {
     return {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -2499,6 +2602,10 @@ export const QueryLockableDurationsRequest = {
   toSDK(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryLockableDurationsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
@@ -2618,6 +2725,12 @@ export const QueryLockableDurationsResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryLockableDurationsResponseSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryLockableDurationsResponseAmino): QueryLockableDurationsResponse {

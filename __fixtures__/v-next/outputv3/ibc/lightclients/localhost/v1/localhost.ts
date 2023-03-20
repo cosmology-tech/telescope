@@ -128,6 +128,13 @@ export const ClientState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+
   fromAmino(object: ClientStateAmino): ClientState {
     return {
       chainId: object.chain_id,

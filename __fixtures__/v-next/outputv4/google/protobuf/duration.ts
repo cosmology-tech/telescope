@@ -225,6 +225,13 @@ export const Duration = {
     obj.seconds = message.seconds;
     obj.nanos = message.nanos;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DurationSDKType {
+    return {
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   }
 
 };

@@ -303,6 +303,12 @@ export const QueryIncentivesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryIncentivesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -398,6 +404,13 @@ export const QueryIncentivesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryIncentivesResponseSDKType {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -467,6 +480,12 @@ export const QueryIncentiveRequest = {
     const obj: any = {};
     obj.contract = message.contract;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryIncentiveRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   }
 
 };
@@ -536,6 +555,12 @@ export const QueryIncentiveResponse = {
     const obj: any = {};
     message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toSDK(message.incentive) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryIncentiveResponseSDKType {
+    return {
+      incentive: isSet(object.incentive) ? Incentive.fromSDKJSON(object.incentive) : undefined
+    };
   }
 
 };
@@ -619,6 +644,13 @@ export const QueryGasMetersRequest = {
     obj.contract = message.contract;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGasMetersRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -714,6 +746,13 @@ export const QueryGasMetersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGasMetersResponseSDKType {
+    return {
+      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -797,6 +836,13 @@ export const QueryGasMeterRequest = {
     obj.contract = message.contract;
     obj.participant = message.participant;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGasMeterRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : ""
+    };
   }
 
 };
@@ -866,6 +912,12 @@ export const QueryGasMeterResponse = {
     const obj: any = {};
     obj.gas_meter = message.gasMeter;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
+    return {
+      gas_meter: isSet(object.gas_meter) ? Long.fromValue(object.gas_meter) : Long.UZERO
+    };
   }
 
 };
@@ -935,6 +987,12 @@ export const QueryAllocationMetersRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMetersRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1030,6 +1088,13 @@ export const QueryAllocationMetersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMetersResponseSDKType {
+    return {
+      allocation_meters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -1099,6 +1164,12 @@ export const QueryAllocationMeterRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMeterRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -1168,6 +1239,12 @@ export const QueryAllocationMeterResponse = {
     const obj: any = {};
     message.allocationMeter !== undefined && (obj.allocation_meter = message.allocationMeter ? DecCoin.toSDK(message.allocationMeter) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMeterResponseSDKType {
+    return {
+      allocation_meter: isSet(object.allocation_meter) ? DecCoin.fromSDKJSON(object.allocation_meter) : undefined
+    };
   }
 
 };
@@ -1220,6 +1297,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -1289,6 +1370,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };

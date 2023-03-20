@@ -199,6 +199,12 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       mintedDenom: object.minted_denom
@@ -319,6 +325,12 @@ export const LockableDurationsInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
@@ -463,6 +475,13 @@ export const DistrInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DistrInfoSDKType {
+    return {
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: DistrInfoAmino): DistrInfo {
     return {
       totalWeight: object.total_weight,
@@ -593,6 +612,13 @@ export const DistrRecord = {
     obj.gauge_id = message.gaugeId;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DistrRecordSDKType {
+    return {
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   },
 
   fromAmino(object: DistrRecordAmino): DistrRecord {
@@ -735,6 +761,14 @@ export const PoolToGauge = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PoolToGaugeSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
     return {
       poolId: Long.fromString(object.pool_id),
@@ -859,6 +893,12 @@ export const PoolToGauges = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolToGaugesSDKType {
+    return {
+      pool_to_gauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {

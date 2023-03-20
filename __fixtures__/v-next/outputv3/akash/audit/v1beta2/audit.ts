@@ -311,6 +311,14 @@ export const Provider = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ProviderSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: ProviderAmino): Provider {
     return {
       owner: object.owner,
@@ -463,6 +471,14 @@ export const AuditedAttributes = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AuditedAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
     return {
       owner: object.owner,
@@ -585,6 +601,12 @@ export const AttributesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AttributesResponseSDKType {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: AttributesResponseAmino): AttributesResponse {
@@ -729,6 +751,13 @@ export const AttributesFilters = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AttributesFiltersSDKType {
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => String(e)) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: AttributesFiltersAmino): AttributesFilters {
@@ -886,6 +915,14 @@ export const MsgSignProviderAttributes = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgSignProviderAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
     return {
       owner: object.owner,
@@ -979,6 +1016,10 @@ export const MsgSignProviderAttributesResponse = {
   toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSignProviderAttributesResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
@@ -1120,6 +1161,14 @@ export const MsgDeleteProviderAttributes = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgDeleteProviderAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
     return {
       owner: object.owner,
@@ -1213,6 +1262,10 @@ export const MsgDeleteProviderAttributesResponse = {
   toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDeleteProviderAttributesResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {

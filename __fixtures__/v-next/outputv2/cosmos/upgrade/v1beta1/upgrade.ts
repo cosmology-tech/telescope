@@ -380,6 +380,16 @@ export const Plan = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PlanSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      info: isSet(object.info) ? String(object.info) : "",
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+
   fromAmino(object: PlanAmino): Plan {
     return {
       name: object.name,
@@ -526,6 +536,14 @@ export const SoftwareUpgradeProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
+  },
+
   fromAmino(object: SoftwareUpgradeProposalAmino): SoftwareUpgradeProposal {
     return {
       title: object.title,
@@ -654,6 +672,13 @@ export const CancelSoftwareUpgradeProposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CancelSoftwareUpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
+  },
+
   fromAmino(object: CancelSoftwareUpgradeProposalAmino): CancelSoftwareUpgradeProposal {
     return {
       title: object.title,
@@ -778,6 +803,13 @@ export const ModuleVersion = {
     obj.name = message.name;
     obj.version = message.version;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModuleVersionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
+    };
   },
 
   fromAmino(object: ModuleVersionAmino): ModuleVersion {

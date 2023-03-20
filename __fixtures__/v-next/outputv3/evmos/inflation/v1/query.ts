@@ -380,6 +380,10 @@ export const QueryPeriodRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryPeriodRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryPeriodRequestAmino): QueryPeriodRequest {
     return {};
   },
@@ -479,6 +483,12 @@ export const QueryPeriodResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPeriodResponseSDKType {
+    return {
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
     return {
       period: Long.fromString(object.period)
@@ -562,6 +572,10 @@ export const QueryEpochMintProvisionRequest = {
   toSDK(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryEpochMintProvisionRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryEpochMintProvisionRequestAmino): QueryEpochMintProvisionRequest {
@@ -663,6 +677,12 @@ export const QueryEpochMintProvisionResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryEpochMintProvisionResponseSDKType {
+    return {
+      epoch_mint_provision: isSet(object.epoch_mint_provision) ? DecCoin.fromSDKJSON(object.epoch_mint_provision) : undefined
+    };
+  },
+
   fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
     return {
       epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
@@ -746,6 +766,10 @@ export const QuerySkippedEpochsRequest = {
   toSDK(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QuerySkippedEpochsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QuerySkippedEpochsRequestAmino): QuerySkippedEpochsRequest {
@@ -847,6 +871,12 @@ export const QuerySkippedEpochsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySkippedEpochsResponseSDKType {
+    return {
+      skipped_epochs: isSet(object.skipped_epochs) ? Long.fromValue(object.skipped_epochs) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
     return {
       skippedEpochs: Long.fromString(object.skipped_epochs)
@@ -930,6 +960,10 @@ export const QueryCirculatingSupplyRequest = {
   toSDK(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryCirculatingSupplyRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryCirculatingSupplyRequestAmino): QueryCirculatingSupplyRequest {
@@ -1031,6 +1065,12 @@ export const QueryCirculatingSupplyResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCirculatingSupplyResponseSDKType {
+    return {
+      circulating_supply: isSet(object.circulating_supply) ? DecCoin.fromSDKJSON(object.circulating_supply) : undefined
+    };
+  },
+
   fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
     return {
       circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : undefined
@@ -1114,6 +1154,10 @@ export const QueryInflationRateRequest = {
   toSDK(_: QueryInflationRateRequest): QueryInflationRateRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryInflationRateRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryInflationRateRequestAmino): QueryInflationRateRequest {
@@ -1215,6 +1259,12 @@ export const QueryInflationRateResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryInflationRateResponseSDKType {
+    return {
+      inflation_rate: isSet(object.inflation_rate) ? String(object.inflation_rate) : ""
+    };
+  },
+
   fromAmino(object: QueryInflationRateResponseAmino): QueryInflationRateResponse {
     return {
       inflationRate: object.inflation_rate
@@ -1298,6 +1348,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -1397,6 +1451,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

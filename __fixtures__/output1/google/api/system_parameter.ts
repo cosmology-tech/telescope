@@ -199,6 +199,12 @@ export const SystemParameters = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SystemParametersSDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -294,6 +300,13 @@ export const SystemParameterRule = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SystemParameterRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -391,6 +404,14 @@ export const SystemParameter = {
     obj.http_header = message.httpHeader;
     obj.url_query_parameter = message.urlQueryParameter;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SystemParameterSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      http_header: isSet(object.http_header) ? String(object.http_header) : "",
+      url_query_parameter: isSet(object.url_query_parameter) ? String(object.url_query_parameter) : ""
+    };
   }
 
 };

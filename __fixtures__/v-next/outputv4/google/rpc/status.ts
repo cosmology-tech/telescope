@@ -150,6 +150,14 @@ export const Status = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): StatusSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      message: isSet(object.message) ? String(object.message) : "",
+      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };

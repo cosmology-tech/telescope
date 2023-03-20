@@ -299,6 +299,13 @@ export const Duration = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DurationSDKType {
+    return {
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
+  },
+
   fromAmino(object: DurationAmino): Duration {
     const value = parseInt(object);
     return {

@@ -417,6 +417,13 @@ export const EvalState = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvalStateSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDKJSON(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: EvalStateAmino): EvalState {
     return {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
@@ -544,6 +551,13 @@ export const EvalState_Result = {
     message.expr !== undefined && (obj.expr = message.expr ? IdRef.toSDK(message.expr) : undefined);
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): EvalState_ResultSDKType {
+    return {
+      expr: isSet(object.expr) ? IdRef.fromSDKJSON(object.expr) : undefined,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   },
 
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
@@ -678,6 +692,14 @@ export const ExprValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ExprValueSDKType {
+    return {
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromSDKJSON(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromSDKJSON(object.unknown) : undefined
+    };
+  },
+
   fromAmino(object: ExprValueAmino): ExprValue {
     return {
       value: object?.value ? Value.fromAmino(object.value) : undefined,
@@ -794,6 +816,12 @@ export const ErrorSet = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ErrorSetSDKType {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: ErrorSetAmino): ErrorSet {
@@ -916,6 +944,12 @@ export const UnknownSet = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UnknownSetSDKType {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: UnknownSetAmino): UnknownSet {
     return {
       exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
@@ -1022,6 +1056,12 @@ export const IdRef = {
     const obj: any = {};
     obj.id = message.id;
     return obj;
+  },
+
+  fromSDKJSON(object: any): IdRefSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
   },
 
   fromAmino(object: IdRefAmino): IdRef {

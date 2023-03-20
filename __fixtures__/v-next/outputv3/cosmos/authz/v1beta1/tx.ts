@@ -293,6 +293,14 @@ export const MsgGrant = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgGrantSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromSDKJSON(object.grant) : undefined
+    };
+  },
+
   fromAmino(object: MsgGrantAmino): MsgGrant {
     return {
       granter: object.granter,
@@ -417,6 +425,12 @@ export const MsgExecResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecResponseSDKType {
+    return {
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
 
   fromAmino(object: MsgExecResponseAmino): MsgExecResponse {
@@ -561,6 +575,13 @@ export const MsgExec = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgExecAmino): MsgExec {
     return {
       grantee: object.grantee,
@@ -660,6 +681,10 @@ export const MsgGrantResponse = {
   toSDK(_: MsgGrantResponse): MsgGrantResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgGrantResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgGrantResponseAmino): MsgGrantResponse {
@@ -797,6 +822,14 @@ export const MsgRevoke = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgRevokeSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : ""
+    };
+  },
+
   fromAmino(object: MsgRevokeAmino): MsgRevoke {
     return {
       granter: object.granter,
@@ -892,6 +925,10 @@ export const MsgRevokeResponse = {
   toSDK(_: MsgRevokeResponse): MsgRevokeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgRevokeResponseAmino): MsgRevokeResponse {

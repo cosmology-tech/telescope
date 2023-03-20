@@ -210,6 +210,13 @@ export const PoolParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PoolParamsSDKType {
+    return {
+      swap_fee: isSet(object.swap_fee) ? String(object.swap_fee) : "",
+      exit_fee: isSet(object.exit_fee) ? String(object.exit_fee) : ""
+    };
+  },
+
   fromAmino(object: PoolParamsAmino): PoolParams {
     return {
       swapFee: object.swap_fee,
@@ -453,6 +460,19 @@ export const Pool = {
 
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined,
+      pool_liquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
+      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
+    };
   },
 
   fromAmino(object: PoolAmino): Pool {

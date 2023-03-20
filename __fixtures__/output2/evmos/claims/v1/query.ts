@@ -113,6 +113,10 @@ export const QueryTotalUnclaimedRequest = {
   fromPartial(_: DeepPartial<QueryTotalUnclaimedRequest>): QueryTotalUnclaimedRequest {
     const message = createBaseQueryTotalUnclaimedRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryTotalUnclaimedRequestSDKType {
+    return {};
   }
 
 };
@@ -176,6 +180,12 @@ export const QueryTotalUnclaimedResponse = {
     const message = createBaseQueryTotalUnclaimedResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryTotalUnclaimedResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -219,6 +229,10 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -276,6 +290,12 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -333,6 +353,12 @@ export const QueryClaimsRecordsRequest = {
     const message = createBaseQueryClaimsRecordsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -408,6 +434,13 @@ export const QueryClaimsRecordsResponse = {
     message.claims = object.claims?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordsResponseSDKType {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -465,6 +498,12 @@ export const QueryClaimsRecordRequest = {
     const message = createBaseQueryClaimsRecordRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -540,6 +579,13 @@ export const QueryClaimsRecordResponse = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.claims = object.claims?.map(e => Claim.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryClaimsRecordResponseSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDKJSON(e)) : []
+    };
   }
 
 };

@@ -564,6 +564,14 @@ export const MsgCreateGroup = {
 
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   }
 
 };
@@ -633,6 +641,12 @@ export const MsgCreateGroupResponse = {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupResponseSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+    };
   }
 
 };
@@ -742,6 +756,14 @@ export const MsgUpdateGroupMembers = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupMembersSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      member_updates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -794,6 +816,10 @@ export const MsgUpdateGroupMembersResponse = {
   toSDK(_: MsgUpdateGroupMembersResponse): MsgUpdateGroupMembersResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupMembersResponseSDKType {
+    return {};
   }
 
 };
@@ -891,6 +917,14 @@ export const MsgUpdateGroupAdmin = {
     obj.group_id = message.groupId;
     obj.new_admin = message.newAdmin;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupAdminSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
+    };
   }
 
 };
@@ -943,6 +977,10 @@ export const MsgUpdateGroupAdminResponse = {
   toSDK(_: MsgUpdateGroupAdminResponse): MsgUpdateGroupAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupAdminResponseSDKType {
+    return {};
   }
 
 };
@@ -1040,6 +1078,14 @@ export const MsgUpdateGroupMetadata = {
     obj.group_id = message.groupId;
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupMetadataSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   }
 
 };
@@ -1092,6 +1138,10 @@ export const MsgUpdateGroupMetadataResponse = {
   toSDK(_: MsgUpdateGroupMetadataResponse): MsgUpdateGroupMetadataResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupMetadataResponseSDKType {
+    return {};
   }
 
 };
@@ -1203,6 +1253,15 @@ export const MsgCreateGroupPolicy = {
     obj.metadata = message.metadata;
     message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
   }
 
 };
@@ -1272,6 +1331,12 @@ export const MsgCreateGroupPolicyResponse = {
     const obj: any = {};
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupPolicyResponseSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -1369,6 +1434,14 @@ export const MsgUpdateGroupPolicyAdmin = {
     obj.address = message.address;
     obj.new_admin = message.newAdmin;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyAdminSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
+    };
   }
 
 };
@@ -1520,6 +1593,17 @@ export const MsgCreateGroupWithPolicy = {
     obj.group_policy_as_admin = message.groupPolicyAsAdmin;
     message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupWithPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDKJSON(e)) : [],
+      group_metadata: isSet(object.group_metadata) ? String(object.group_metadata) : "",
+      group_policy_metadata: isSet(object.group_policy_metadata) ? String(object.group_policy_metadata) : "",
+      group_policy_as_admin: isSet(object.group_policy_as_admin) ? Boolean(object.group_policy_as_admin) : false,
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
   }
 
 };
@@ -1603,6 +1687,13 @@ export const MsgCreateGroupWithPolicyResponse = {
     obj.group_id = message.groupId;
     obj.group_policy_address = message.groupPolicyAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateGroupWithPolicyResponseSDKType {
+    return {
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO,
+      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : ""
+    };
   }
 
 };
@@ -1655,6 +1746,10 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   toSDK(_: MsgUpdateGroupPolicyAdminResponse): MsgUpdateGroupPolicyAdminResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyAdminResponseSDKType {
+    return {};
   }
 
 };
@@ -1752,6 +1847,14 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     obj.address = message.address;
     message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyDecisionPolicySDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined
+    };
   }
 
 };
@@ -1804,6 +1907,10 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   toSDK(_: MsgUpdateGroupPolicyDecisionPolicyResponse): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
+    return {};
   }
 
 };
@@ -1901,6 +2008,14 @@ export const MsgUpdateGroupPolicyMetadata = {
     obj.address = message.address;
     obj.metadata = message.metadata;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateGroupPolicyMetadataSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   }
 
 };
@@ -1953,6 +2068,10 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   toSDK(_: MsgUpdateGroupPolicyMetadataResponse): MsgUpdateGroupPolicyMetadataResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateGroupPolicyMetadataResponseSDKType {
+    return {};
   }
 
 };
@@ -2102,6 +2221,16 @@ export const MsgSubmitProposal = {
 
     message.exec !== undefined && (obj.exec = execToJSON(message.exec));
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
   }
 
 };
@@ -2171,6 +2300,12 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   }
 
 };
@@ -2254,6 +2389,13 @@ export const MsgWithdrawProposal = {
     obj.proposal_id = message.proposalId;
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawProposalSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   }
 
 };
@@ -2306,6 +2448,10 @@ export const MsgWithdrawProposalResponse = {
   toSDK(_: MsgWithdrawProposalResponse): MsgWithdrawProposalResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawProposalResponseSDKType {
+    return {};
   }
 
 };
@@ -2431,6 +2577,16 @@ export const MsgVote = {
     obj.metadata = message.metadata;
     message.exec !== undefined && (obj.exec = execToJSON(message.exec));
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgVoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
   }
 
 };
@@ -2483,6 +2639,10 @@ export const MsgVoteResponse = {
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteResponseSDKType {
+    return {};
   }
 
 };
@@ -2566,6 +2726,13 @@ export const MsgExec = {
     obj.proposal_id = message.proposalId;
     obj.signer = message.signer;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExecSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
   }
 
 };
@@ -2618,6 +2785,10 @@ export const MsgExecResponse = {
   toSDK(_: MsgExecResponse): MsgExecResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgExecResponseSDKType {
+    return {};
   }
 
 };
@@ -2701,6 +2872,13 @@ export const MsgLeaveGroup = {
     obj.address = message.address;
     obj.group_id = message.groupId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgLeaveGroupSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      group_id: isSet(object.group_id) ? Long.fromValue(object.group_id) : Long.UZERO
+    };
   }
 
 };
@@ -2753,6 +2931,10 @@ export const MsgLeaveGroupResponse = {
   toSDK(_: MsgLeaveGroupResponse): MsgLeaveGroupResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgLeaveGroupResponseSDKType {
+    return {};
   }
 
 };

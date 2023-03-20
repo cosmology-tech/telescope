@@ -109,6 +109,12 @@ export const SourceInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      source_files: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: SourceInfoAmino): SourceInfo {
     return {
       sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []

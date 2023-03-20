@@ -138,6 +138,14 @@ export const ValidatorSet = {
     message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toSDK(message.proposer) : undefined);
     obj.total_voting_power = message.totalVotingPower;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorSetSDKType {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? Validator.fromSDKJSON(object.proposer) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? Long.fromValue(object.total_voting_power) : Long.ZERO
+    };
   }
 
 };
@@ -249,6 +257,15 @@ export const Validator = {
     obj.voting_power = message.votingPower;
     obj.proposer_priority = message.proposerPriority;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO,
+      proposer_priority: isSet(object.proposer_priority) ? Long.fromValue(object.proposer_priority) : Long.ZERO
+    };
   }
 
 };
@@ -332,6 +349,13 @@ export const SimpleValidator = {
     message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
     obj.voting_power = message.votingPower;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SimpleValidatorSDKType {
+    return {
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      voting_power: isSet(object.voting_power) ? Long.fromValue(object.voting_power) : Long.ZERO
+    };
   }
 
 };

@@ -1608,6 +1608,20 @@ export const LogBucket = {
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LogBucketSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      retention_days: isSet(object.retention_days) ? Number(object.retention_days) : 0,
+      locked: isSet(object.locked) ? Boolean(object.locked) : false,
+      lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      restricted_fields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => String(e)) : [],
+      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined
+    };
   }
 
 };
@@ -1713,6 +1727,16 @@ export const LogView = {
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): LogViewSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   }
 
 };
@@ -1908,6 +1932,23 @@ export const LogSink = {
     message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : undefined;
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LogSinkSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      destination: isSet(object.destination) ? String(object.destination) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
+      output_version_format: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : "",
+      include_children: isSet(object.include_children) ? Boolean(object.include_children) : false,
+      bigquery_options: isSet(object.bigquery_options) ? BigQueryOptions.fromSDKJSON(object.bigquery_options) : undefined,
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+    };
   }
 
 };
@@ -1977,6 +2018,13 @@ export const BigQueryOptions = {
     message.usePartitionedTables = object.usePartitionedTables ?? false;
     message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): BigQueryOptionsSDKType {
+    return {
+      use_partitioned_tables: isSet(object.use_partitioned_tables) ? Boolean(object.use_partitioned_tables) : false,
+      uses_timestamp_column_partitioning: isSet(object.uses_timestamp_column_partitioning) ? Boolean(object.uses_timestamp_column_partitioning) : false
+    };
   }
 
 };
@@ -2058,6 +2106,14 @@ export const ListBucketsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListBucketsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   }
 
 };
@@ -2133,6 +2189,13 @@ export const ListBucketsResponse = {
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListBucketsResponseSDKType {
+    return {
+      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -2214,6 +2277,14 @@ export const CreateBucketRequest = {
     message.bucketId = object.bucketId ?? "";
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateBucketRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      bucket_id: isSet(object.bucket_id) ? String(object.bucket_id) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined
+    };
   }
 
 };
@@ -2295,6 +2366,14 @@ export const UpdateBucketRequest = {
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -2352,6 +2431,12 @@ export const GetBucketRequest = {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -2409,6 +2494,12 @@ export const DeleteBucketRequest = {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -2466,6 +2557,12 @@ export const UndeleteBucketRequest = {
     const message = createBaseUndeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): UndeleteBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -2547,6 +2644,14 @@ export const ListViewsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListViewsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   }
 
 };
@@ -2622,6 +2727,13 @@ export const ListViewsResponse = {
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListViewsResponseSDKType {
+    return {
+      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -2703,6 +2815,14 @@ export const CreateViewRequest = {
     message.viewId = object.viewId ?? "";
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateViewRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      view_id: isSet(object.view_id) ? String(object.view_id) : "",
+      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined
+    };
   }
 
 };
@@ -2784,6 +2904,14 @@ export const UpdateViewRequest = {
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -2841,6 +2969,12 @@ export const GetViewRequest = {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -2898,6 +3032,12 @@ export const DeleteViewRequest = {
     const message = createBaseDeleteViewRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -2979,6 +3119,14 @@ export const ListSinksRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListSinksRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   }
 
 };
@@ -3054,6 +3202,13 @@ export const ListSinksResponse = {
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListSinksResponseSDKType {
+    return {
+      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -3111,6 +3266,12 @@ export const GetSinkRequest = {
     const message = createBaseGetSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
+    };
   }
 
 };
@@ -3192,6 +3353,14 @@ export const CreateSinkRequest = {
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateSinkRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false
+    };
   }
 
 };
@@ -3285,6 +3454,15 @@ export const UpdateSinkRequest = {
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : "",
+      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -3342,6 +3520,12 @@ export const DeleteSinkRequest = {
     const message = createBaseDeleteSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
+    };
   }
 
 };
@@ -3459,6 +3643,17 @@ export const LogExclusion = {
     message.createTime = object.createTime !== undefined && object.createTime !== null ? Timestamp.fromPartial(object.createTime) : undefined;
     message.updateTime = object.updateTime !== undefined && object.updateTime !== null ? Timestamp.fromPartial(object.updateTime) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): LogExclusionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+    };
   }
 
 };
@@ -3540,6 +3735,14 @@ export const ListExclusionsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): ListExclusionsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   }
 
 };
@@ -3615,6 +3818,13 @@ export const ListExclusionsResponse = {
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): ListExclusionsResponseSDKType {
+    return {
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   }
 
 };
@@ -3672,6 +3882,12 @@ export const GetExclusionRequest = {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -3741,6 +3957,13 @@ export const CreateExclusionRequest = {
     message.parent = object.parent ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): CreateExclusionRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined
+    };
   }
 
 };
@@ -3822,6 +4045,14 @@ export const UpdateExclusionRequest = {
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -3879,6 +4110,12 @@ export const DeleteExclusionRequest = {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DeleteExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -3936,6 +4173,12 @@ export const GetCmekSettingsRequest = {
     const message = createBaseGetCmekSettingsRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetCmekSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -4017,6 +4260,14 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateCmekSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -4098,6 +4349,14 @@ export const CmekSettings = {
     message.kmsKeyName = object.kmsKeyName ?? "";
     message.serviceAccountId = object.serviceAccountId ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CmekSettingsSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      service_account_id: isSet(object.service_account_id) ? String(object.service_account_id) : ""
+    };
   }
 
 };
@@ -4155,6 +4414,12 @@ export const GetSettingsRequest = {
     const message = createBaseGetSettingsRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): GetSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -4236,6 +4501,14 @@ export const UpdateSettingsRequest = {
     message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): UpdateSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      settings: isSet(object.settings) ? Settings.fromSDKJSON(object.settings) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   }
 
 };
@@ -4341,6 +4614,16 @@ export const Settings = {
     message.storageLocation = object.storageLocation ?? "";
     message.disableDefaultSink = object.disableDefaultSink ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): SettingsSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      kms_service_account_id: isSet(object.kms_service_account_id) ? String(object.kms_service_account_id) : "",
+      storage_location: isSet(object.storage_location) ? String(object.storage_location) : "",
+      disable_default_sink: isSet(object.disable_default_sink) ? Boolean(object.disable_default_sink) : false
+    };
   }
 
 };
@@ -4422,6 +4705,14 @@ export const CopyLogEntriesRequest = {
     message.filter = object.filter ?? "";
     message.destination = object.destination ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CopyLogEntriesRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      destination: isSet(object.destination) ? String(object.destination) : ""
+    };
   }
 
 };
@@ -4551,6 +4842,18 @@ export const CopyLogEntriesMetadata = {
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): CopyLogEntriesMetadataSDKType {
+    return {
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : false,
+      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDKJSON(object.request) : undefined,
+      progress: isSet(object.progress) ? Number(object.progress) : 0,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : ""
+    };
   }
 
 };
@@ -4608,6 +4911,12 @@ export const CopyLogEntriesResponse = {
     const message = createBaseCopyLogEntriesResponse();
     message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
+    return {
+      log_entries_copied_count: isSet(object.log_entries_copied_count) ? Long.fromValue(object.log_entries_copied_count) : Long.ZERO
+    };
   }
 
 };

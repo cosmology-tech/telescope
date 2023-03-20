@@ -105,6 +105,14 @@ export const NetAddress = {
     message.ip = object.ip ?? "";
     message.port = object.port ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): NetAddressSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      ip: isSet(object.ip) ? String(object.ip) : "",
+      port: isSet(object.port) ? Number(object.port) : 0
+    };
   }
 
 };
@@ -186,6 +194,14 @@ export const ProtocolVersion = {
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
     message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): ProtocolVersionSDKType {
+    return {
+      p2p: isSet(object.p2p) ? Long.fromValue(object.p2p) : Long.UZERO,
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
+    };
   }
 
 };
@@ -327,6 +343,19 @@ export const DefaultNodeInfo = {
     message.moniker = object.moniker ?? "";
     message.other = object.other !== undefined && object.other !== null ? DefaultNodeInfoOther.fromPartial(object.other) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): DefaultNodeInfoSDKType {
+    return {
+      protocol_version: isSet(object.protocol_version) ? ProtocolVersion.fromSDKJSON(object.protocol_version) : undefined,
+      default_node_id: isSet(object.default_node_id) ? String(object.default_node_id) : "",
+      listen_addr: isSet(object.listen_addr) ? String(object.listen_addr) : "",
+      network: isSet(object.network) ? String(object.network) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(),
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      other: isSet(object.other) ? DefaultNodeInfoOther.fromSDKJSON(object.other) : undefined
+    };
   }
 
 };
@@ -396,6 +425,13 @@ export const DefaultNodeInfoOther = {
     message.txIndex = object.txIndex ?? "";
     message.rpcAddress = object.rpcAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): DefaultNodeInfoOtherSDKType {
+    return {
+      tx_index: isSet(object.tx_index) ? String(object.tx_index) : "",
+      rpc_address: isSet(object.rpc_address) ? String(object.rpc_address) : ""
+    };
   }
 
 };

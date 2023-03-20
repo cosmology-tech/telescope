@@ -143,6 +143,14 @@ export const MsgSubmitProposal = {
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
+      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
   }
 
 };
@@ -200,6 +208,12 @@ export const MsgSubmitProposalResponse = {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   }
 
 };
@@ -281,6 +295,14 @@ export const MsgVote = {
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgVoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+    };
   }
 
 };
@@ -324,6 +346,10 @@ export const MsgVoteResponse = {
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgVoteResponseSDKType {
+    return {};
   }
 
 };
@@ -411,6 +437,14 @@ export const MsgVoteWeighted = {
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgVoteWeightedSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -454,6 +488,10 @@ export const MsgVoteWeightedResponse = {
   fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgVoteWeightedResponseSDKType {
+    return {};
   }
 
 };
@@ -541,6 +579,14 @@ export const MsgDeposit = {
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgDepositSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -584,6 +630,10 @@ export const MsgDepositResponse = {
   fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgDepositResponseSDKType {
+    return {};
   }
 
 };

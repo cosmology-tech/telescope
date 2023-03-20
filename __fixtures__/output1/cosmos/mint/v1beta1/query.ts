@@ -120,6 +120,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -189,6 +193,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -241,6 +251,10 @@ export const QueryInflationRequest = {
   toSDK(_: QueryInflationRequest): QueryInflationRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryInflationRequestSDKType {
+    return {};
   }
 
 };
@@ -310,6 +324,12 @@ export const QueryInflationResponse = {
     const obj: any = {};
     obj.inflation = message.inflation;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryInflationResponseSDKType {
+    return {
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
+    };
   }
 
 };
@@ -362,6 +382,10 @@ export const QueryAnnualProvisionsRequest = {
   toSDK(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryAnnualProvisionsRequestSDKType {
+    return {};
   }
 
 };
@@ -431,6 +455,12 @@ export const QueryAnnualProvisionsResponse = {
     const obj: any = {};
     obj.annual_provisions = message.annualProvisions;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAnnualProvisionsResponseSDKType {
+    return {
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
+    };
   }
 
 };

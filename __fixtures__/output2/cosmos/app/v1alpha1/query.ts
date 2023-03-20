@@ -53,6 +53,10 @@ export const QueryConfigRequest = {
   fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
+  },
+
+  fromSDKJSON(_: any): QueryConfigRequestSDKType {
+    return {};
   }
 
 };
@@ -110,6 +114,12 @@ export const QueryConfigResponse = {
     const message = createBaseQueryConfigResponse();
     message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): QueryConfigResponseSDKType {
+    return {
+      config: isSet(object.config) ? Config.fromSDKJSON(object.config) : undefined
+    };
   }
 
 };

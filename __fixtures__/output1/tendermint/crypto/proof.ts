@@ -186,6 +186,15 @@ export const Proof = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ProofSDKType {
+    return {
+      total: isSet(object.total) ? Long.fromValue(object.total) : Long.ZERO,
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
+    };
   }
 
 };
@@ -269,6 +278,13 @@ export const ValueOp = {
     obj.key = message.key;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): ValueOpSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
+    };
   }
 
 };
@@ -366,6 +382,14 @@ export const DominoOp = {
     obj.input = message.input;
     obj.output = message.output;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DominoOpSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      input: isSet(object.input) ? String(object.input) : "",
+      output: isSet(object.output) ? String(object.output) : ""
+    };
   }
 
 };
@@ -463,6 +487,14 @@ export const ProofOp = {
     obj.key = message.key;
     obj.data = message.data;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ProofOpSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   }
 
 };
@@ -544,6 +576,12 @@ export const ProofOps = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ProofOpsSDKType {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromSDKJSON(e)) : []
+    };
   }
 
 };

@@ -226,6 +226,17 @@ export const MsgCreateStableswapPool = {
     obj.future_pool_governor = message.futurePoolGovernor;
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateStableswapPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      initial_pool_liquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : [],
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : "",
+      scaling_factor_controller: isSet(object.scaling_factor_controller) ? String(object.scaling_factor_controller) : ""
+    };
   }
 
 };
@@ -295,6 +306,12 @@ export const MsgCreateStableswapPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateStableswapPoolResponseSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   }
 
 };
@@ -416,6 +433,14 @@ export const MsgStableSwapAdjustScalingFactors = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgStableSwapAdjustScalingFactorsSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      scaling_factors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -468,6 +493,10 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   toSDK(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgStableSwapAdjustScalingFactorsResponseSDKType {
+    return {};
   }
 
 };

@@ -270,6 +270,12 @@ export const Billing = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BillingSDKType {
+    return {
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: BillingAmino): Billing {
     return {
       consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
@@ -402,6 +408,13 @@ export const Billing_BillingDestination = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Billing_BillingDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {

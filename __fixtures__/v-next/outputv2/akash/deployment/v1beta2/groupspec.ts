@@ -142,6 +142,14 @@ export const GroupSpec = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GroupSpecSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDKJSON(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: GroupSpecAmino): GroupSpec {
     return {
       name: object.name,

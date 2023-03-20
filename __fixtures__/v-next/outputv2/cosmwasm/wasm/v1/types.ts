@@ -516,6 +516,12 @@ export const AccessTypeParam = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AccessTypeParamSDKType {
+    return {
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+    };
+  },
+
   fromAmino(object: AccessTypeParamAmino): AccessTypeParam {
     return {
       value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
@@ -638,6 +644,13 @@ export const AccessConfig = {
     message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
     obj.address = message.address;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AccessConfigSDKType {
+    return {
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
 
   fromAmino(object: AccessConfigAmino): AccessConfig {
@@ -780,6 +793,14 @@ export const Params = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      code_upload_access: isSet(object.code_upload_access) ? AccessConfig.fromSDKJSON(object.code_upload_access) : undefined,
+      instantiate_default_permission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      max_wasm_code_size: isSet(object.max_wasm_code_size) ? Long.fromValue(object.max_wasm_code_size) : Long.UZERO
+    };
+  },
+
   fromAmino(object: ParamsAmino): Params {
     return {
       codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
@@ -920,6 +941,14 @@ export const CodeInfo = {
     obj.creator = message.creator;
     message.instantiateConfig !== undefined && (obj.instantiate_config = message.instantiateConfig ? AccessConfig.toSDK(message.instantiateConfig) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CodeInfoSDKType {
+    return {
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(),
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      instantiate_config: isSet(object.instantiate_config) ? AccessConfig.fromSDKJSON(object.instantiate_config) : undefined
+    };
   },
 
   fromAmino(object: CodeInfoAmino): CodeInfo {
@@ -1120,6 +1149,18 @@ export const ContractInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ContractInfoSDKType {
+    return {
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      label: isSet(object.label) ? String(object.label) : "",
+      created: isSet(object.created) ? AbsoluteTxPosition.fromSDKJSON(object.created) : undefined,
+      ibc_port_id: isSet(object.ibc_port_id) ? String(object.ibc_port_id) : "",
+      extension: isSet(object.extension) ? Any.fromSDKJSON(object.extension) : undefined
+    };
+  },
+
   fromAmino(object: ContractInfoAmino): ContractInfo {
     return {
       codeId: Long.fromString(object.code_id),
@@ -1284,6 +1325,15 @@ export const ContractCodeHistoryEntry = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ContractCodeHistoryEntrySDKType {
+    return {
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      code_id: isSet(object.code_id) ? Long.fromValue(object.code_id) : Long.UZERO,
+      updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDKJSON(object.updated) : undefined,
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
@@ -1414,6 +1464,13 @@ export const AbsoluteTxPosition = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AbsoluteTxPositionSDKType {
+    return {
+      block_height: isSet(object.block_height) ? Long.fromValue(object.block_height) : Long.UZERO,
+      tx_index: isSet(object.tx_index) ? Long.fromValue(object.tx_index) : Long.UZERO
+    };
+  },
+
   fromAmino(object: AbsoluteTxPositionAmino): AbsoluteTxPosition {
     return {
       blockHeight: Long.fromString(object.block_height),
@@ -1538,6 +1595,13 @@ export const Model = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ModelSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
 
   fromAmino(object: ModelAmino): Model {

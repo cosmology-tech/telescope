@@ -154,6 +154,13 @@ export const QueryDeploymentsRequest = {
     message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -249,6 +256,13 @@ export const QueryDeploymentsResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentsResponseSDKType {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -318,6 +332,12 @@ export const QueryDeploymentRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentRequestSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -427,6 +447,14 @@ export const QueryDeploymentResponse = {
 
     message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDeploymentResponseSDKType {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : [],
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
   }
 
 };
@@ -496,6 +524,12 @@ export const QueryGroupRequest = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupRequestSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -565,6 +599,12 @@ export const QueryGroupResponse = {
     const obj: any = {};
     message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGroupResponseSDKType {
+    return {
+      group: isSet(object.group) ? Group.fromSDKJSON(object.group) : undefined
+    };
   }
 
 };

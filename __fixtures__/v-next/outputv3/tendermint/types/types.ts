@@ -656,6 +656,13 @@ export const PartSetHeader = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PartSetHeaderSDKType {
+    return {
+      total: isSet(object.total) ? Number(object.total) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: PartSetHeaderAmino): PartSetHeader {
     return {
       total: object.total,
@@ -788,6 +795,14 @@ export const Part = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PartSDKType {
+    return {
+      index: isSet(object.index) ? Number(object.index) : 0,
+      bytes: isSet(object.bytes) ? bytesFromBase64(object.bytes) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
+    };
+  },
+
   fromAmino(object: PartAmino): Part {
     return {
       index: object.index,
@@ -906,6 +921,13 @@ export const BlockID = {
     obj.hash = message.hash;
     message.partSetHeader !== undefined && (obj.part_set_header = message.partSetHeader ? PartSetHeader.toSDK(message.partSetHeader) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): BlockIDSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      part_set_header: isSet(object.part_set_header) ? PartSetHeader.fromSDKJSON(object.part_set_header) : undefined
+    };
   },
 
   fromAmino(object: BlockIDAmino): BlockID {
@@ -1194,6 +1216,25 @@ export const Header = {
     return obj;
   },
 
+  fromSDKJSON(object: any): HeaderSDKType {
+    return {
+      version: isSet(object.version) ? Consensus.fromSDKJSON(object.version) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      last_block_id: isSet(object.last_block_id) ? BlockID.fromSDKJSON(object.last_block_id) : undefined,
+      last_commit_hash: isSet(object.last_commit_hash) ? bytesFromBase64(object.last_commit_hash) : new Uint8Array(),
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array(),
+      validators_hash: isSet(object.validators_hash) ? bytesFromBase64(object.validators_hash) : new Uint8Array(),
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array(),
+      consensus_hash: isSet(object.consensus_hash) ? bytesFromBase64(object.consensus_hash) : new Uint8Array(),
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array(),
+      last_results_hash: isSet(object.last_results_hash) ? bytesFromBase64(object.last_results_hash) : new Uint8Array(),
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array(),
+      proposer_address: isSet(object.proposer_address) ? bytesFromBase64(object.proposer_address) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: HeaderAmino): Header {
     return {
       version: object?.version ? Consensus.fromAmino(object.version) : undefined,
@@ -1332,6 +1373,12 @@ export const Data = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): DataSDKType {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => bytesFromBase64(e)) : []
+    };
   },
 
   fromAmino(object: DataAmino): Data {
@@ -1540,6 +1587,19 @@ export const Vote = {
     return obj;
   },
 
+  fromSDKJSON(object: any): VoteSDKType {
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
+      validator_index: isSet(object.validator_index) ? Number(object.validator_index) : 0,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: VoteAmino): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
@@ -1710,6 +1770,15 @@ export const Commit = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CommitSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: CommitAmino): Commit {
     return {
       height: Long.fromString(object.height),
@@ -1864,6 +1933,15 @@ export const CommitSig = {
     message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
     obj.signature = message.signature;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CommitSigSDKType {
+    return {
+      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
   },
 
   fromAmino(object: CommitSigAmino): CommitSig {
@@ -2058,6 +2136,18 @@ export const Proposal = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ProposalSDKType {
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      round: isSet(object.round) ? Number(object.round) : 0,
+      pol_round: isSet(object.pol_round) ? Number(object.pol_round) : 0,
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: ProposalAmino): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
@@ -2186,6 +2276,13 @@ export const SignedHeader = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SignedHeaderSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      commit: isSet(object.commit) ? Commit.fromSDKJSON(object.commit) : undefined
+    };
+  },
+
   fromAmino(object: SignedHeaderAmino): SignedHeader {
     return {
       header: object?.header ? Header.fromAmino(object.header) : undefined,
@@ -2302,6 +2399,13 @@ export const LightBlock = {
     message.signedHeader !== undefined && (obj.signed_header = message.signedHeader ? SignedHeader.toSDK(message.signedHeader) : undefined);
     message.validatorSet !== undefined && (obj.validator_set = message.validatorSet ? ValidatorSet.toSDK(message.validatorSet) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): LightBlockSDKType {
+    return {
+      signed_header: isSet(object.signed_header) ? SignedHeader.fromSDKJSON(object.signed_header) : undefined,
+      validator_set: isSet(object.validator_set) ? ValidatorSet.fromSDKJSON(object.validator_set) : undefined
+    };
   },
 
   fromAmino(object: LightBlockAmino): LightBlock {
@@ -2450,6 +2554,15 @@ export const BlockMeta = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BlockMetaSDKType {
+    return {
+      block_id: isSet(object.block_id) ? BlockID.fromSDKJSON(object.block_id) : undefined,
+      block_size: isSet(object.block_size) ? Long.fromValue(object.block_size) : Long.ZERO,
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      num_txs: isSet(object.num_txs) ? Long.fromValue(object.num_txs) : Long.ZERO
+    };
+  },
+
   fromAmino(object: BlockMetaAmino): BlockMeta {
     return {
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
@@ -2584,6 +2697,14 @@ export const TxProof = {
     obj.data = message.data;
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): TxProofSDKType {
+    return {
+      root_hash: isSet(object.root_hash) ? bytesFromBase64(object.root_hash) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      proof: isSet(object.proof) ? Proof.fromSDKJSON(object.proof) : undefined
+    };
   },
 
   fromAmino(object: TxProofAmino): TxProof {

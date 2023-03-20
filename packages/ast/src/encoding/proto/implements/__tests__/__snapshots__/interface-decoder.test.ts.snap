@@ -123,6 +123,13 @@ exports[`PoolI objects 1`] = `
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolsResponseSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],

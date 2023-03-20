@@ -238,6 +238,17 @@ export const GenesisState = {
     obj.create_localhost = message.createLocalhost;
     obj.next_client_sequence = message.nextClientSequence;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromSDKJSON(e)) : [],
+      clients_consensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromSDKJSON(e)) : [],
+      clients_metadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDKJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
+      next_client_sequence: isSet(object.next_client_sequence) ? Long.fromValue(object.next_client_sequence) : Long.UZERO
+    };
   }
 
 };
@@ -321,6 +332,13 @@ export const GenesisMetadata = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisMetadataSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   }
 
 };
@@ -416,6 +434,13 @@ export const IdentifiedGenesisMetadata = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): IdentifiedGenesisMetadataSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_metadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromSDKJSON(e)) : []
+    };
   }
 
 };

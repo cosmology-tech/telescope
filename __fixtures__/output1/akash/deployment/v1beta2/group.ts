@@ -197,6 +197,15 @@ export const Group = {
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
     obj.created_at = message.createdAt;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GroupSDKType {
+    return {
+      group_id: isSet(object.group_id) ? GroupID.fromSDKJSON(object.group_id) : undefined,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      group_spec: isSet(object.group_spec) ? GroupSpec.fromSDKJSON(object.group_spec) : undefined,
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO
+    };
   }
 
 };

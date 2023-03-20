@@ -378,6 +378,15 @@ export const ConsensusParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConsensusParamsSDKType {
+    return {
+      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
+    };
+  },
+
   fromAmino(object: ConsensusParamsAmino): ConsensusParams {
     return {
       block: object?.block ? BlockParams.fromAmino(object.block) : undefined,
@@ -514,6 +523,14 @@ export const BlockParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BlockParamsSDKType {
+    return {
+      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO,
+      max_gas: isSet(object.max_gas) ? Long.fromValue(object.max_gas) : Long.ZERO,
+      time_iota_ms: isSet(object.time_iota_ms) ? Long.fromValue(object.time_iota_ms) : Long.ZERO
+    };
+  },
+
   fromAmino(object: BlockParamsAmino): BlockParams {
     return {
       maxBytes: Long.fromString(object.max_bytes),
@@ -648,6 +665,14 @@ export const EvidenceParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EvidenceParamsSDKType {
+    return {
+      max_age_num_blocks: isSet(object.max_age_num_blocks) ? Long.fromValue(object.max_age_num_blocks) : Long.ZERO,
+      max_age_duration: isSet(object.max_age_duration) ? Duration.fromSDKJSON(object.max_age_duration) : undefined,
+      max_bytes: isSet(object.max_bytes) ? Long.fromValue(object.max_bytes) : Long.ZERO
+    };
+  },
+
   fromAmino(object: EvidenceParamsAmino): EvidenceParams {
     return {
       maxAgeNumBlocks: Long.fromString(object.max_age_num_blocks),
@@ -766,6 +791,12 @@ export const ValidatorParams = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ValidatorParamsSDKType {
+    return {
+      pub_key_types: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => String(e)) : []
+    };
+  },
+
   fromAmino(object: ValidatorParamsAmino): ValidatorParams {
     return {
       pubKeyTypes: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => e) : []
@@ -872,6 +903,12 @@ export const VersionParams = {
     const obj: any = {};
     obj.app_version = message.appVersion;
     return obj;
+  },
+
+  fromSDKJSON(object: any): VersionParamsSDKType {
+    return {
+      app_version: isSet(object.app_version) ? Long.fromValue(object.app_version) : Long.UZERO
+    };
   },
 
   fromAmino(object: VersionParamsAmino): VersionParams {
@@ -988,6 +1025,13 @@ export const HashedParams = {
     obj.block_max_bytes = message.blockMaxBytes;
     obj.block_max_gas = message.blockMaxGas;
     return obj;
+  },
+
+  fromSDKJSON(object: any): HashedParamsSDKType {
+    return {
+      block_max_bytes: isSet(object.block_max_bytes) ? Long.fromValue(object.block_max_bytes) : Long.ZERO,
+      block_max_gas: isSet(object.block_max_gas) ? Long.fromValue(object.block_max_gas) : Long.ZERO
+    };
   },
 
   fromAmino(object: HashedParamsAmino): HashedParams {

@@ -342,6 +342,12 @@ export const QueryDevFeeInfosRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDevFeeInfosRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDevFeeInfosRequestAmino): QueryDevFeeInfosRequest {
     return {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
@@ -470,6 +476,13 @@ export const QueryDevFeeInfosResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDevFeeInfosResponseSDKType {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryDevFeeInfosResponseAmino): QueryDevFeeInfosResponse {
     return {
       fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
@@ -580,6 +593,12 @@ export const QueryDevFeeInfoRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDevFeeInfoRequestSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : ""
+    };
+  },
+
   fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
     return {
       contractAddress: object.contract_address
@@ -682,6 +701,12 @@ export const QueryDevFeeInfoResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDevFeeInfoResponseSDKType {
+    return {
+      fee: isSet(object.fee) ? DevFeeInfo.fromSDKJSON(object.fee) : undefined
+    };
+  },
+
   fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
     return {
       fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
@@ -765,6 +790,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -864,6 +893,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -980,6 +1015,13 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     obj.deployer_address = message.deployerAddress;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerRequestSDKType {
+    return {
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
@@ -1110,6 +1152,13 @@ export const QueryDevFeeInfosPerDeployerResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDevFeeInfosPerDeployerResponseSDKType {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryDevFeeInfosPerDeployerResponseAmino): QueryDevFeeInfosPerDeployerResponse {

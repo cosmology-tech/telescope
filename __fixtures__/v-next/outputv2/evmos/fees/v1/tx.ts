@@ -346,6 +346,15 @@ export const MsgRegisterDevFeeInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+    };
+  },
+
   fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
     return {
       contractAddress: object.contract_address,
@@ -441,6 +450,10 @@ export const MsgRegisterDevFeeInfoResponse = {
   toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRegisterDevFeeInfoResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
@@ -556,6 +569,13 @@ export const MsgCancelDevFeeInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
+    };
+  },
+
   fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
     return {
       contractAddress: object.contract_address,
@@ -641,6 +661,10 @@ export const MsgCancelDevFeeInfoResponse = {
   toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCancelDevFeeInfoResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
@@ -770,6 +794,14 @@ export const MsgUpdateDevFeeInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
+  },
+
   fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
     return {
       contractAddress: object.contract_address,
@@ -857,6 +889,10 @@ export const MsgUpdateDevFeeInfoResponse = {
   toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDevFeeInfoResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {

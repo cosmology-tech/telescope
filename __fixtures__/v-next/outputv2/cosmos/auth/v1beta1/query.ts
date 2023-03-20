@@ -431,6 +431,12 @@ export const QueryAccountsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAccountsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
     return {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
@@ -567,6 +573,13 @@ export const QueryAccountsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => AccountI_FromAmino(e)) : [],
@@ -685,6 +698,12 @@ export const QueryAccountRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAccountRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   fromAmino(object: QueryAccountRequestAmino): QueryAccountRequest {
     return {
       address: object.address
@@ -776,6 +795,10 @@ export const QueryModuleAccountsRequest = {
   toSDK(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryModuleAccountsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
@@ -883,6 +906,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -995,6 +1024,12 @@ export const QueryAccountResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAccountResponseSDKType {
+    return {
+      account: isSet(object.account) ? Any.fromSDKJSON(object.account) : undefined
+    };
+  },
+
   fromAmino(object: QueryAccountResponseAmino): QueryAccountResponse {
     return {
       account: object?.account ? AccountI_FromAmino(object.account) : undefined
@@ -1086,6 +1121,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -1207,6 +1246,12 @@ export const QueryModuleAccountsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryModuleAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => ModuleAccountI_FromAmino(e)) : []
@@ -1304,6 +1349,10 @@ export const Bech32PrefixRequest = {
   toSDK(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): Bech32PrefixRequestSDKType {
+    return {};
   },
 
   fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
@@ -1411,6 +1460,12 @@ export const Bech32PrefixResponse = {
     const obj: any = {};
     obj.bech32_prefix = message.bech32Prefix;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Bech32PrefixResponseSDKType {
+    return {
+      bech32_prefix: isSet(object.bech32_prefix) ? String(object.bech32_prefix) : ""
+    };
   },
 
   fromAmino(object: Bech32PrefixResponseAmino): Bech32PrefixResponse {
@@ -1523,6 +1578,12 @@ export const AddressBytesToStringRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AddressBytesToStringRequestSDKType {
+    return {
+      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
     return {
       addressBytes: object.address_bytes
@@ -1631,6 +1692,12 @@ export const AddressBytesToStringResponse = {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AddressBytesToStringResponseSDKType {
+    return {
+      address_string: isSet(object.address_string) ? String(object.address_string) : ""
+    };
   },
 
   fromAmino(object: AddressBytesToStringResponseAmino): AddressBytesToStringResponse {
@@ -1743,6 +1810,12 @@ export const AddressStringToBytesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AddressStringToBytesRequestSDKType {
+    return {
+      address_string: isSet(object.address_string) ? String(object.address_string) : ""
+    };
+  },
+
   fromAmino(object: AddressStringToBytesRequestAmino): AddressStringToBytesRequest {
     return {
       addressString: object.address_string
@@ -1851,6 +1924,12 @@ export const AddressStringToBytesResponse = {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
+  },
+
+  fromSDKJSON(object: any): AddressStringToBytesResponseSDKType {
+    return {
+      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
+    };
   },
 
   fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {

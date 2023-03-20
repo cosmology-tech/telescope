@@ -381,6 +381,26 @@ export const HttpRequest = {
     obj.cache_fill_bytes = message.cacheFillBytes;
     obj.protocol = message.protocol;
     return obj;
+  },
+
+  fromSDKJSON(object: any): HttpRequestSDKType {
+    return {
+      request_method: isSet(object.request_method) ? String(object.request_method) : "",
+      request_url: isSet(object.request_url) ? String(object.request_url) : "",
+      request_size: isSet(object.request_size) ? Long.fromValue(object.request_size) : Long.ZERO,
+      status: isSet(object.status) ? Number(object.status) : 0,
+      response_size: isSet(object.response_size) ? Long.fromValue(object.response_size) : Long.ZERO,
+      user_agent: isSet(object.user_agent) ? String(object.user_agent) : "",
+      remote_ip: isSet(object.remote_ip) ? String(object.remote_ip) : "",
+      server_ip: isSet(object.server_ip) ? String(object.server_ip) : "",
+      referer: isSet(object.referer) ? String(object.referer) : "",
+      latency: isSet(object.latency) ? Duration.fromSDKJSON(object.latency) : undefined,
+      cache_lookup: isSet(object.cache_lookup) ? Boolean(object.cache_lookup) : false,
+      cache_hit: isSet(object.cache_hit) ? Boolean(object.cache_hit) : false,
+      cache_validated_with_origin_server: isSet(object.cache_validated_with_origin_server) ? Boolean(object.cache_validated_with_origin_server) : false,
+      cache_fill_bytes: isSet(object.cache_fill_bytes) ? Long.fromValue(object.cache_fill_bytes) : Long.ZERO,
+      protocol: isSet(object.protocol) ? String(object.protocol) : ""
+    };
   }
 
 };

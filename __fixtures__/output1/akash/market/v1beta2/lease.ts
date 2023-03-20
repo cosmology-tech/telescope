@@ -289,6 +289,16 @@ export const LeaseID = {
     obj.oseq = message.oseq;
     obj.provider = message.provider;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LeaseIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : ""
+    };
   }
 
 };
@@ -414,6 +424,16 @@ export const Lease = {
     obj.created_at = message.createdAt;
     obj.closed_on = message.closedOn;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LeaseSDKType {
+    return {
+      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDKJSON(object.price) : undefined,
+      created_at: isSet(object.created_at) ? Long.fromValue(object.created_at) : Long.ZERO,
+      closed_on: isSet(object.closed_on) ? Long.fromValue(object.closed_on) : Long.ZERO
+    };
   }
 
 };
@@ -553,6 +573,17 @@ export const LeaseFilters = {
     obj.provider = message.provider;
     obj.state = message.state;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LeaseFiltersSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
+      oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
+      provider: isSet(object.provider) ? String(object.provider) : "",
+      state: isSet(object.state) ? String(object.state) : ""
+    };
   }
 
 };
@@ -622,6 +653,12 @@ export const MsgCreateLease = {
     const obj: any = {};
     message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateLeaseSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? BidID.fromSDKJSON(object.bid_id) : undefined
+    };
   }
 
 };
@@ -674,6 +711,10 @@ export const MsgCreateLeaseResponse = {
   toSDK(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateLeaseResponseSDKType {
+    return {};
   }
 
 };
@@ -743,6 +784,12 @@ export const MsgWithdrawLease = {
     const obj: any = {};
     message.bidId !== undefined && (obj.bid_id = message.bidId ? LeaseID.toSDK(message.bidId) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgWithdrawLeaseSDKType {
+    return {
+      bid_id: isSet(object.bid_id) ? LeaseID.fromSDKJSON(object.bid_id) : undefined
+    };
   }
 
 };
@@ -795,6 +842,10 @@ export const MsgWithdrawLeaseResponse = {
   toSDK(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgWithdrawLeaseResponseSDKType {
+    return {};
   }
 
 };
@@ -864,6 +915,12 @@ export const MsgCloseLease = {
     const obj: any = {};
     message.leaseId !== undefined && (obj.lease_id = message.leaseId ? LeaseID.toSDK(message.leaseId) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCloseLeaseSDKType {
+    return {
+      lease_id: isSet(object.lease_id) ? LeaseID.fromSDKJSON(object.lease_id) : undefined
+    };
   }
 
 };
@@ -916,6 +973,10 @@ export const MsgCloseLeaseResponse = {
   toSDK(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseLeaseResponseSDKType {
+    return {};
   }
 
 };

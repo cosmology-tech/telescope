@@ -100,6 +100,12 @@ export const SendAuthorization = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SendAuthorizationSDKType {
+    return {
+      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };

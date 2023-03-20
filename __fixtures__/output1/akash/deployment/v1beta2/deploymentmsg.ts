@@ -220,6 +220,16 @@ export const MsgCreateDeployment = {
     message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
     obj.depositor = message.depositor;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCreateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
+      deposit: isSet(object.deposit) ? Coin.fromSDKJSON(object.deposit) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -272,6 +282,10 @@ export const MsgCreateDeploymentResponse = {
   toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -369,6 +383,14 @@ export const MsgDepositDeployment = {
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
     obj.depositor = message.depositor;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgDepositDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined,
+      depositor: isSet(object.depositor) ? String(object.depositor) : ""
+    };
   }
 
 };
@@ -421,6 +443,10 @@ export const MsgDepositDeploymentResponse = {
   toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDepositDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -504,6 +530,13 @@ export const MsgUpdateDeployment = {
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     obj.version = message.version;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
+    };
   }
 
 };
@@ -556,6 +589,10 @@ export const MsgUpdateDeploymentResponse = {
   toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDeploymentResponseSDKType {
+    return {};
   }
 
 };
@@ -625,6 +662,12 @@ export const MsgCloseDeployment = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCloseDeploymentSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
   }
 
 };
@@ -677,6 +720,10 @@ export const MsgCloseDeploymentResponse = {
   toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCloseDeploymentResponseSDKType {
+    return {};
   }
 
 };

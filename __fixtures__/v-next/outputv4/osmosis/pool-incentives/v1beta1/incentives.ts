@@ -118,6 +118,12 @@ export const Params = {
     const obj: any = {};
     obj.minted_denom = message.mintedDenom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
+    };
   }
 
 };
@@ -199,6 +205,12 @@ export const LockableDurationsInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -294,6 +306,13 @@ export const DistrInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): DistrInfoSDKType {
+    return {
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -377,6 +396,13 @@ export const DistrRecord = {
     obj.gauge_id = message.gaugeId;
     obj.weight = message.weight;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DistrRecordSDKType {
+    return {
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   }
 
 };
@@ -474,6 +500,14 @@ export const PoolToGauge = {
     obj.gauge_id = message.gaugeId;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolToGaugeSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
   }
 
 };
@@ -555,6 +589,12 @@ export const PoolToGauges = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PoolToGaugesSDKType {
+    return {
+      pool_to_gauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDKJSON(e)) : []
+    };
   }
 
 };

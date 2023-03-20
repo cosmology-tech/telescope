@@ -302,6 +302,17 @@ export const MsgCreateGauge = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgCreateGaugeSDKType {
+    return {
+      is_perpetual: isSet(object.is_perpetual) ? Boolean(object.is_perpetual) : false,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      distribute_to: isSet(object.distribute_to) ? QueryCondition.fromSDKJSON(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      num_epochs_paid_over: isSet(object.num_epochs_paid_over) ? Long.fromValue(object.num_epochs_paid_over) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgCreateGaugeAmino): MsgCreateGauge {
     return {
       isPerpetual: object.is_perpetual,
@@ -409,6 +420,10 @@ export const MsgCreateGaugeResponse = {
   toSDK(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCreateGaugeResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgCreateGaugeResponseAmino): MsgCreateGaugeResponse {
@@ -558,6 +573,14 @@ export const MsgAddToGauge = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgAddToGaugeSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgAddToGaugeAmino): MsgAddToGauge {
     return {
       owner: object.owner,
@@ -659,6 +682,10 @@ export const MsgAddToGaugeResponse = {
   toSDK(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgAddToGaugeResponseSDKType {
+    return {};
   },
 
   fromAmino(_: MsgAddToGaugeResponseAmino): MsgAddToGaugeResponse {

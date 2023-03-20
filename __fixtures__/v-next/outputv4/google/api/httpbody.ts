@@ -218,6 +218,14 @@ export const HttpBody = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): HttpBodySDKType {
+    return {
+      content_type: isSet(object.content_type) ? String(object.content_type) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
   }
 
 };

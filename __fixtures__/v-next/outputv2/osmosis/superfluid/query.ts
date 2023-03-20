@@ -637,6 +637,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -742,6 +746,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -854,6 +864,12 @@ export const AssetTypeRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AssetTypeRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: AssetTypeRequestAmino): AssetTypeRequest {
     return {
       denom: object.denom
@@ -964,6 +980,12 @@ export const AssetTypeResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AssetTypeResponseSDKType {
+    return {
+      asset_type: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+    };
+  },
+
   fromAmino(object: AssetTypeResponseAmino): AssetTypeResponse {
     return {
       assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
@@ -1055,6 +1077,10 @@ export const AllAssetsRequest = {
   toSDK(_: AllAssetsRequest): AllAssetsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): AllAssetsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: AllAssetsRequestAmino): AllAssetsRequest {
@@ -1176,6 +1202,12 @@ export const AllAssetsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AllAssetsResponseSDKType {
+    return {
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: AllAssetsResponseAmino): AllAssetsResponse {
     return {
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
@@ -1292,6 +1324,12 @@ export const AssetMultiplierRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AssetMultiplierRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: AssetMultiplierRequestAmino): AssetMultiplierRequest {
     return {
       denom: object.denom
@@ -1400,6 +1438,12 @@ export const AssetMultiplierResponse = {
     const obj: any = {};
     message.osmoEquivalentMultiplier !== undefined && (obj.osmo_equivalent_multiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toSDK(message.osmoEquivalentMultiplier) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AssetMultiplierResponseSDKType {
+    return {
+      osmo_equivalent_multiplier: isSet(object.osmo_equivalent_multiplier) ? OsmoEquivalentMultiplierRecord.fromSDKJSON(object.osmo_equivalent_multiplier) : undefined
+    };
   },
 
   fromAmino(object: AssetMultiplierResponseAmino): AssetMultiplierResponse {
@@ -1554,6 +1598,15 @@ export const SuperfluidIntermediaryAccountInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidIntermediaryAccountInfoSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
+      gauge_id: isSet(object.gauge_id) ? Long.fromValue(object.gauge_id) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+
   fromAmino(object: SuperfluidIntermediaryAccountInfoAmino): SuperfluidIntermediaryAccountInfo {
     return {
       denom: object.denom,
@@ -1668,6 +1721,12 @@ export const AllIntermediaryAccountsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): AllIntermediaryAccountsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: AllIntermediaryAccountsRequestAmino): AllIntermediaryAccountsRequest {
@@ -1806,6 +1865,13 @@ export const AllIntermediaryAccountsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): AllIntermediaryAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: AllIntermediaryAccountsResponseAmino): AllIntermediaryAccountsResponse {
     return {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => SuperfluidIntermediaryAccountInfo.fromAmino(e)) : [],
@@ -1924,6 +1990,12 @@ export const ConnectedIntermediaryAccountRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConnectedIntermediaryAccountRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? Long.fromValue(object.lock_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: ConnectedIntermediaryAccountRequestAmino): ConnectedIntermediaryAccountRequest {
     return {
       lockId: Long.fromString(object.lock_id)
@@ -2034,6 +2106,12 @@ export const ConnectedIntermediaryAccountResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConnectedIntermediaryAccountResponseSDKType {
+    return {
+      account: isSet(object.account) ? SuperfluidIntermediaryAccountInfo.fromSDKJSON(object.account) : undefined
+    };
+  },
+
   fromAmino(object: ConnectedIntermediaryAccountResponseAmino): ConnectedIntermediaryAccountResponse {
     return {
       account: object?.account ? SuperfluidIntermediaryAccountInfo.fromAmino(object.account) : undefined
@@ -2142,6 +2220,12 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalDelegationByValidatorForDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
 
   fromAmino(object: QueryTotalDelegationByValidatorForDenomRequestAmino): QueryTotalDelegationByValidatorForDenomRequest {
@@ -2264,6 +2348,12 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalDelegationByValidatorForDenomResponseSDKType {
+    return {
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryTotalDelegationByValidatorForDenomResponseAmino): QueryTotalDelegationByValidatorForDenomResponse {
@@ -2410,6 +2500,14 @@ export const Delegations = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DelegationsSDKType {
+    return {
+      val_addr: isSet(object.val_addr) ? String(object.val_addr) : "",
+      amount_sfsd: isSet(object.amount_sfsd) ? String(object.amount_sfsd) : "",
+      osmo_equivalent: isSet(object.osmo_equivalent) ? String(object.osmo_equivalent) : ""
+    };
+  },
+
   fromAmino(object: DelegationsAmino): Delegations {
     return {
       valAddr: object.val_addr,
@@ -2505,6 +2603,10 @@ export const TotalSuperfluidDelegationsRequest = {
   toSDK(_: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): TotalSuperfluidDelegationsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: TotalSuperfluidDelegationsRequestAmino): TotalSuperfluidDelegationsRequest {
@@ -2612,6 +2714,12 @@ export const TotalSuperfluidDelegationsResponse = {
     const obj: any = {};
     obj.total_delegations = message.totalDelegations;
     return obj;
+  },
+
+  fromSDKJSON(object: any): TotalSuperfluidDelegationsResponseSDKType {
+    return {
+      total_delegations: isSet(object.total_delegations) ? String(object.total_delegations) : ""
+    };
   },
 
   fromAmino(object: TotalSuperfluidDelegationsResponseAmino): TotalSuperfluidDelegationsResponse {
@@ -2752,6 +2860,14 @@ export const SuperfluidDelegationAmountRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidDelegationAmountRequestSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: SuperfluidDelegationAmountRequestAmino): SuperfluidDelegationAmountRequest {
     return {
       delegatorAddress: object.delegator_address,
@@ -2878,6 +2994,12 @@ export const SuperfluidDelegationAmountResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidDelegationAmountResponseSDKType {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: SuperfluidDelegationAmountResponseAmino): SuperfluidDelegationAmountResponse {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
@@ -2992,6 +3114,12 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SuperfluidDelegationsByDelegatorRequestSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
+    };
   },
 
   fromAmino(object: SuperfluidDelegationsByDelegatorRequestAmino): SuperfluidDelegationsByDelegatorRequest {
@@ -3154,6 +3282,14 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidDelegationsByDelegatorResponseSDKType {
+    return {
+      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
+      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      total_equivalent_staked_amount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDKJSON(object.total_equivalent_staked_amount) : undefined
+    };
+  },
+
   fromAmino(object: SuperfluidDelegationsByDelegatorResponseAmino): SuperfluidDelegationsByDelegatorResponse {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
@@ -3291,6 +3427,13 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     obj.delegator_address = message.delegatorAddress;
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SuperfluidUndelegationsByDelegatorRequestSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
 
   fromAmino(object: SuperfluidUndelegationsByDelegatorRequestAmino): SuperfluidUndelegationsByDelegatorRequest {
@@ -3465,6 +3608,14 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidUndelegationsByDelegatorResponseSDKType {
+    return {
+      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
+      total_undelegated_coins: Array.isArray(object?.total_undelegated_coins) ? object.total_undelegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: SuperfluidUndelegationsByDelegatorResponseAmino): SuperfluidUndelegationsByDelegatorResponse {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
@@ -3609,6 +3760,13 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SuperfluidDelegationsByValidatorDenomRequestSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: SuperfluidDelegationsByValidatorDenomRequestAmino): SuperfluidDelegationsByValidatorDenomRequest {
     return {
       validatorAddress: object.validator_address,
@@ -3731,6 +3889,12 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): SuperfluidDelegationsByValidatorDenomResponseSDKType {
+    return {
+      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: SuperfluidDelegationsByValidatorDenomResponseAmino): SuperfluidDelegationsByValidatorDenomResponse {
@@ -3863,6 +4027,13 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType {
+    return {
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return {
       validatorAddress: object.validator_address,
@@ -3987,6 +4158,12 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType {
+    return {
+      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     return {
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -4101,6 +4278,12 @@ export const QueryTotalDelegationByDelegatorRequest = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalDelegationByDelegatorRequestSDKType {
+    return {
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : ""
+    };
   },
 
   fromAmino(object: QueryTotalDelegationByDelegatorRequestAmino): QueryTotalDelegationByDelegatorRequest {
@@ -4287,6 +4470,15 @@ export const QueryTotalDelegationByDelegatorResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTotalDelegationByDelegatorResponseSDKType {
+    return {
+      superfluid_delegation_records: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDKJSON(e)) : [],
+      delegation_response: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDKJSON(e)) : [],
+      total_delegated_coins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      total_equivalent_staked_amount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDKJSON(object.total_equivalent_staked_amount) : undefined
+    };
+  },
+
   fromAmino(object: QueryTotalDelegationByDelegatorResponseAmino): QueryTotalDelegationByDelegatorResponse {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : [],
@@ -4400,6 +4592,10 @@ export const QueryUnpoolWhitelistRequest = {
   toSDK(_: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryUnpoolWhitelistRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryUnpoolWhitelistRequestAmino): QueryUnpoolWhitelistRequest {
@@ -4531,6 +4727,12 @@ export const QueryUnpoolWhitelistResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryUnpoolWhitelistResponseSDKType {
+    return {
+      pool_ids: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => Long.fromValue(e)) : []
+    };
   },
 
   fromAmino(object: QueryUnpoolWhitelistResponseAmino): QueryUnpoolWhitelistResponse {

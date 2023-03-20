@@ -233,6 +233,15 @@ export const MsgRegisterDevFeeInfo = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgRegisterDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
+    };
   }
 
 };
@@ -285,6 +294,10 @@ export const MsgRegisterDevFeeInfoResponse = {
   toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgRegisterDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };
@@ -368,6 +381,13 @@ export const MsgCancelDevFeeInfo = {
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCancelDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : ""
+    };
   }
 
 };
@@ -420,6 +440,10 @@ export const MsgCancelDevFeeInfoResponse = {
   toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCancelDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };
@@ -517,6 +541,14 @@ export const MsgUpdateDevFeeInfo = {
     obj.deployer_address = message.deployerAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgUpdateDevFeeInfoSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      deployer_address: isSet(object.deployer_address) ? String(object.deployer_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : ""
+    };
   }
 
 };
@@ -569,6 +601,10 @@ export const MsgUpdateDevFeeInfoResponse = {
   toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgUpdateDevFeeInfoResponseSDKType {
+    return {};
   }
 
 };

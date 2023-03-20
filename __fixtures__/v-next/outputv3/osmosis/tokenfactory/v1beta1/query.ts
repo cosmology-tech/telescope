@@ -227,6 +227,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -332,6 +336,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
@@ -444,6 +454,12 @@ export const QueryDenomAuthorityMetadataRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: QueryDenomAuthorityMetadataRequestAmino): QueryDenomAuthorityMetadataRequest {
     return {
       denom: object.denom
@@ -554,6 +570,12 @@ export const QueryDenomAuthorityMetadataResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataResponseSDKType {
+    return {
+      authority_metadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDKJSON(object.authority_metadata) : undefined
+    };
+  },
+
   fromAmino(object: QueryDenomAuthorityMetadataResponseAmino): QueryDenomAuthorityMetadataResponse {
     return {
       authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
@@ -662,6 +684,12 @@ export const QueryDenomsFromCreatorRequest = {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorRequestSDKType {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : ""
+    };
   },
 
   fromAmino(object: QueryDenomsFromCreatorRequestAmino): QueryDenomsFromCreatorRequest {
@@ -784,6 +812,12 @@ export const QueryDenomsFromCreatorResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorResponseSDKType {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
+    };
   },
 
   fromAmino(object: QueryDenomsFromCreatorResponseAmino): QueryDenomsFromCreatorResponse {

@@ -209,6 +209,10 @@ export const QueryParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
@@ -316,6 +320,12 @@ export const QueryParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
       params: object?.params ? Params.fromAmino(object.params) : undefined
@@ -407,6 +417,10 @@ export const QueryInflationRequest = {
   toSDK(_: QueryInflationRequest): QueryInflationRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryInflationRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryInflationRequestAmino): QueryInflationRequest {
@@ -516,6 +530,12 @@ export const QueryInflationResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryInflationResponseSDKType {
+    return {
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
+    };
+  },
+
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
     return {
       inflation: object.inflation
@@ -607,6 +627,10 @@ export const QueryAnnualProvisionsRequest = {
   toSDK(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryAnnualProvisionsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryAnnualProvisionsRequestAmino): QueryAnnualProvisionsRequest {
@@ -714,6 +738,12 @@ export const QueryAnnualProvisionsResponse = {
     const obj: any = {};
     obj.annual_provisions = message.annualProvisions;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAnnualProvisionsResponseSDKType {
+    return {
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
+    };
   },
 
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {

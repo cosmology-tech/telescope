@@ -312,6 +312,16 @@ export const Decl = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeclSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      doc: isSet(object.doc) ? String(object.doc) : "",
+      ident: isSet(object.ident) ? IdentDecl.fromSDKJSON(object.ident) : undefined,
+      function: isSet(object.function) ? FunctionDecl.fromSDKJSON(object.function) : undefined
+    };
+  },
+
   fromAmino(object: DeclAmino): Decl {
     return {
       id: object.id,
@@ -462,6 +472,14 @@ export const DeclType = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeclTypeSDKType {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      type: isSet(object.type) ? String(object.type) : "",
+      type_params: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: DeclTypeAmino): DeclType {
     return {
       id: object.id,
@@ -586,6 +604,13 @@ export const IdentDecl = {
     message.type !== undefined && (obj.type = message.type ? DeclType.toSDK(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): IdentDeclSDKType {
+    return {
+      type: isSet(object.type) ? DeclType.fromSDKJSON(object.type) : undefined,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   },
 
   fromAmino(object: IdentDeclAmino): IdentDecl {
@@ -730,6 +755,14 @@ export const FunctionDecl = {
     message.returnType !== undefined && (obj.return_type = message.returnType ? DeclType.toSDK(message.returnType) : undefined);
     obj.receiver_function = message.receiverFunction;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FunctionDeclSDKType {
+    return {
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromSDKJSON(e)) : [],
+      return_type: isSet(object.return_type) ? DeclType.fromSDKJSON(object.return_type) : undefined,
+      receiver_function: isSet(object.receiver_function) ? Boolean(object.receiver_function) : false
+    };
   },
 
   fromAmino(object: FunctionDeclAmino): FunctionDecl {

@@ -770,6 +770,12 @@ export const QueryPoolRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPoolRequestAmino): QueryPoolRequest {
     return {
       poolId: Long.fromString(object.pool_id)
@@ -880,6 +886,12 @@ export const QueryPoolResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolResponseSDKType {
+    return {
+      pool: isSet(object.pool) ? Any.fromSDKJSON(object.pool) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
     return {
       pool: object?.pool ? PoolI_FromAmino(object.pool) : undefined
@@ -988,6 +1000,12 @@ export const QueryPoolsRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPoolsRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryPoolsRequestAmino): QueryPoolsRequest {
@@ -1126,6 +1144,13 @@ export const QueryPoolsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolsResponseSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],
@@ -1225,6 +1250,10 @@ export const QueryNumPoolsRequest = {
   toSDK(_: QueryNumPoolsRequest): QueryNumPoolsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryNumPoolsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryNumPoolsRequestAmino): QueryNumPoolsRequest {
@@ -1332,6 +1361,12 @@ export const QueryNumPoolsResponse = {
     const obj: any = {};
     obj.num_pools = message.numPools;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryNumPoolsResponseSDKType {
+    return {
+      num_pools: isSet(object.num_pools) ? Long.fromValue(object.num_pools) : Long.UZERO
+    };
   },
 
   fromAmino(object: QueryNumPoolsResponseAmino): QueryNumPoolsResponse {
@@ -1444,6 +1479,12 @@ export const QueryPoolTypeRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolTypeRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPoolTypeRequestAmino): QueryPoolTypeRequest {
     return {
       poolId: Long.fromString(object.pool_id)
@@ -1552,6 +1593,12 @@ export const QueryPoolTypeResponse = {
     const obj: any = {};
     obj.pool_type = message.poolType;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryPoolTypeResponseSDKType {
+    return {
+      pool_type: isSet(object.pool_type) ? String(object.pool_type) : ""
+    };
   },
 
   fromAmino(object: QueryPoolTypeResponseAmino): QueryPoolTypeResponse {
@@ -1688,6 +1735,13 @@ export const QueryCalcJoinPoolSharesRequest = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCalcJoinPoolSharesRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryCalcJoinPoolSharesRequestAmino): QueryCalcJoinPoolSharesRequest {
@@ -1834,6 +1888,13 @@ export const QueryCalcJoinPoolSharesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCalcJoinPoolSharesResponseSDKType {
+    return {
+      share_out_amount: isSet(object.share_out_amount) ? String(object.share_out_amount) : "",
+      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryCalcJoinPoolSharesResponseAmino): QueryCalcJoinPoolSharesResponse {
     return {
       shareOutAmount: object.share_out_amount,
@@ -1966,6 +2027,13 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      share_in_amount: isSet(object.share_in_amount) ? String(object.share_in_amount) : ""
+    };
+  },
+
   fromAmino(object: QueryCalcExitPoolCoinsFromSharesRequestAmino): QueryCalcExitPoolCoinsFromSharesRequest {
     return {
       poolId: Long.fromString(object.pool_id),
@@ -2090,6 +2158,12 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCalcExitPoolCoinsFromSharesResponseSDKType {
+    return {
+      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryCalcExitPoolCoinsFromSharesResponseAmino): QueryCalcExitPoolCoinsFromSharesResponse {
     return {
       tokensOut: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromAmino(e)) : []
@@ -2206,6 +2280,12 @@ export const QueryPoolParamsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolParamsRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryPoolParamsRequestAmino): QueryPoolParamsRequest {
     return {
       poolId: Long.fromString(object.pool_id)
@@ -2316,6 +2396,12 @@ export const QueryPoolParamsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Any.fromSDKJSON(object.params) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolParamsResponseAmino): QueryPoolParamsResponse {
     return {
       params: object?.params ? Any.fromAmino(object.params) : undefined
@@ -2424,6 +2510,12 @@ export const QueryTotalPoolLiquidityRequest = {
     const obj: any = {};
     obj.pool_id = message.poolId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalPoolLiquidityRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
   },
 
   fromAmino(object: QueryTotalPoolLiquidityRequestAmino): QueryTotalPoolLiquidityRequest {
@@ -2548,6 +2640,12 @@ export const QueryTotalPoolLiquidityResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTotalPoolLiquidityResponseSDKType {
+    return {
+      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QueryTotalPoolLiquidityResponseAmino): QueryTotalPoolLiquidityResponse {
     return {
       liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromAmino(e)) : []
@@ -2664,6 +2762,12 @@ export const QueryTotalSharesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryTotalSharesRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryTotalSharesRequestAmino): QueryTotalSharesRequest {
     return {
       poolId: Long.fromString(object.pool_id)
@@ -2772,6 +2876,12 @@ export const QueryTotalSharesResponse = {
     const obj: any = {};
     message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalSharesResponseSDKType {
+    return {
+      total_shares: isSet(object.total_shares) ? Coin.fromSDKJSON(object.total_shares) : undefined
+    };
   },
 
   fromAmino(object: QueryTotalSharesResponseAmino): QueryTotalSharesResponse {
@@ -2908,6 +3018,13 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      tokens_in: Array.isArray(object?.tokens_in) ? object.tokens_in.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryCalcJoinPoolNoSwapSharesRequestAmino): QueryCalcJoinPoolNoSwapSharesRequest {
@@ -3054,6 +3171,13 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryCalcJoinPoolNoSwapSharesResponseSDKType {
+    return {
+      tokens_out: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      shares_out: isSet(object.shares_out) ? String(object.shares_out) : ""
+    };
+  },
+
   fromAmino(object: QueryCalcJoinPoolNoSwapSharesResponseAmino): QueryCalcJoinPoolNoSwapSharesResponse {
     return {
       tokensOut: Array.isArray(object?.tokens_out) ? object.tokens_out.map((e: any) => Coin.fromAmino(e)) : [],
@@ -3198,6 +3322,14 @@ export const QuerySpotPriceRequest = {
     obj.base_asset_denom = message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySpotPriceRequestSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      base_asset_denom: isSet(object.base_asset_denom) ? String(object.base_asset_denom) : "",
+      quote_asset_denom: isSet(object.quote_asset_denom) ? String(object.quote_asset_denom) : ""
+    };
   },
 
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
@@ -3354,6 +3486,14 @@ export const QueryPoolsWithFilterRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolsWithFilterRequestSDKType {
+    return {
+      min_liquidity: Array.isArray(object?.min_liquidity) ? object.min_liquidity.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      pool_type: isSet(object.pool_type) ? String(object.pool_type) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolsWithFilterRequestAmino): QueryPoolsWithFilterRequest {
     return {
       minLiquidity: Array.isArray(object?.min_liquidity) ? object.min_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
@@ -3500,6 +3640,13 @@ export const QueryPoolsWithFilterResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryPoolsWithFilterResponseSDKType {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryPoolsWithFilterResponseAmino): QueryPoolsWithFilterResponse {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],
@@ -3616,6 +3763,12 @@ export const QuerySpotPriceResponse = {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySpotPriceResponseSDKType {
+    return {
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
   },
 
   fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {
@@ -3782,6 +3935,15 @@ export const QuerySwapExactAmountInRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySwapExactAmountInRequestSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      token_in: isSet(object.token_in) ? String(object.token_in) : "",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: QuerySwapExactAmountInRequestAmino): QuerySwapExactAmountInRequest {
     return {
       sender: object.sender,
@@ -3902,6 +4064,12 @@ export const QuerySwapExactAmountInResponse = {
     const obj: any = {};
     obj.token_out_amount = message.tokenOutAmount;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySwapExactAmountInResponseSDKType {
+    return {
+      token_out_amount: isSet(object.token_out_amount) ? String(object.token_out_amount) : ""
+    };
   },
 
   fromAmino(object: QuerySwapExactAmountInResponseAmino): QuerySwapExactAmountInResponse {
@@ -4068,6 +4236,15 @@ export const QuerySwapExactAmountOutRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySwapExactAmountOutRequestSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDKJSON(e)) : [],
+      token_out: isSet(object.token_out) ? String(object.token_out) : ""
+    };
+  },
+
   fromAmino(object: QuerySwapExactAmountOutRequestAmino): QuerySwapExactAmountOutRequest {
     return {
       sender: object.sender,
@@ -4190,6 +4367,12 @@ export const QuerySwapExactAmountOutResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QuerySwapExactAmountOutResponseSDKType {
+    return {
+      token_in_amount: isSet(object.token_in_amount) ? String(object.token_in_amount) : ""
+    };
+  },
+
   fromAmino(object: QuerySwapExactAmountOutResponseAmino): QuerySwapExactAmountOutResponse {
     return {
       tokenInAmount: object.token_in_amount
@@ -4281,6 +4464,10 @@ export const QueryTotalLiquidityRequest = {
   toSDK(_: QueryTotalLiquidityRequest): QueryTotalLiquidityRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryTotalLiquidityRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryTotalLiquidityRequestAmino): QueryTotalLiquidityRequest {
@@ -4400,6 +4587,12 @@ export const QueryTotalLiquidityResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryTotalLiquidityResponseSDKType {
+    return {
+      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: QueryTotalLiquidityResponseAmino): QueryTotalLiquidityResponse {

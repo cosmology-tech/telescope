@@ -404,6 +404,12 @@ export const DoubleValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DoubleValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   fromAmino(object: DoubleValueAmino): DoubleValue {
     return {
       value: object.value
@@ -504,6 +510,12 @@ export const FloatValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): FloatValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   },
 
   fromAmino(object: FloatValueAmino): FloatValue {
@@ -608,6 +620,12 @@ export const Int64Value = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Int64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
+    };
+  },
+
   fromAmino(object: Int64ValueAmino): Int64Value {
     return {
       value: Long.fromString(object.value)
@@ -708,6 +726,12 @@ export const UInt64Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UInt64ValueSDKType {
+    return {
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
+    };
   },
 
   fromAmino(object: UInt64ValueAmino): UInt64Value {
@@ -812,6 +836,12 @@ export const Int32Value = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Int32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   fromAmino(object: Int32ValueAmino): Int32Value {
     return {
       value: object.value
@@ -912,6 +942,12 @@ export const UInt32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UInt32ValueSDKType {
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   },
 
   fromAmino(object: UInt32ValueAmino): UInt32Value {
@@ -1016,6 +1052,12 @@ export const BoolValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BoolValueSDKType {
+    return {
+      value: isSet(object.value) ? Boolean(object.value) : false
+    };
+  },
+
   fromAmino(object: BoolValueAmino): BoolValue {
     return {
       value: object.value
@@ -1118,6 +1160,12 @@ export const StringValue = {
     return obj;
   },
 
+  fromSDKJSON(object: any): StringValueSDKType {
+    return {
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+
   fromAmino(object: StringValueAmino): StringValue {
     return {
       value: object.value
@@ -1218,6 +1266,12 @@ export const BytesValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BytesValueSDKType {
+    return {
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
 
   fromAmino(object: BytesValueAmino): BytesValue {

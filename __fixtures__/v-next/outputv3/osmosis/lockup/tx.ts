@@ -357,6 +357,14 @@ export const MsgLockTokens = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgLockTokensSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
     return {
       owner: object.owner,
@@ -477,6 +485,12 @@ export const MsgLockTokensResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgLockTokensResponseSDKType {
+    return {
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+    };
+  },
+
   fromAmino(object: MsgLockTokensResponseAmino): MsgLockTokensResponse {
     return {
       ID: Long.fromString(object.ID)
@@ -585,6 +599,12 @@ export const MsgBeginUnlockingAll = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingAllSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
   },
 
   fromAmino(object: MsgBeginUnlockingAllAmino): MsgBeginUnlockingAll {
@@ -707,6 +727,12 @@ export const MsgBeginUnlockingAllResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingAllResponseSDKType {
+    return {
+      unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: MsgBeginUnlockingAllResponseAmino): MsgBeginUnlockingAllResponse {
@@ -865,6 +891,14 @@ export const MsgBeginUnlocking = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgBeginUnlockingSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgBeginUnlockingAmino): MsgBeginUnlocking {
     return {
       owner: object.owner,
@@ -983,6 +1017,12 @@ export const MsgBeginUnlockingResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgBeginUnlockingResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   },
 
   fromAmino(object: MsgBeginUnlockingResponseAmino): MsgBeginUnlockingResponse {
@@ -1123,6 +1163,14 @@ export const MsgExtendLockup = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgExtendLockupSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+
   fromAmino(object: MsgExtendLockupAmino): MsgExtendLockup {
     return {
       owner: object.owner,
@@ -1235,6 +1283,12 @@ export const MsgExtendLockupResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgExtendLockupResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   },
 
   fromAmino(object: MsgExtendLockupResponseAmino): MsgExtendLockupResponse {
@@ -1387,6 +1441,14 @@ export const MsgForceUnlock = {
     return obj;
   },
 
+  fromSDKJSON(object: any): MsgForceUnlockSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: MsgForceUnlockAmino): MsgForceUnlock {
     return {
       owner: object.owner,
@@ -1505,6 +1567,12 @@ export const MsgForceUnlockResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgForceUnlockResponseSDKType {
+    return {
+      success: isSet(object.success) ? Boolean(object.success) : false
+    };
   },
 
   fromAmino(object: MsgForceUnlockResponseAmino): MsgForceUnlockResponse {

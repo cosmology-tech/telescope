@@ -105,6 +105,15 @@ export const Equivocation = {
     message.power = object.power !== undefined && object.power !== null ? Long.fromValue(object.power) : Long.ZERO;
     message.consensusAddress = object.consensusAddress ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): EquivocationSDKType {
+    return {
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
+    };
   }
 
 };

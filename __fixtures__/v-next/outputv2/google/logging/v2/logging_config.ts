@@ -3536,6 +3536,20 @@ export const LogBucket = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LogBucketSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      retention_days: isSet(object.retention_days) ? Number(object.retention_days) : 0,
+      locked: isSet(object.locked) ? Boolean(object.locked) : false,
+      lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      restricted_fields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => String(e)) : [],
+      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined
+    };
+  },
+
   fromAmino(object: LogBucketAmino): LogBucket {
     return {
       name: object.name,
@@ -3714,6 +3728,16 @@ export const LogView = {
     message.updateTime !== undefined && (obj.update_time = message.updateTime ?? undefined);
     obj.filter = message.filter;
     return obj;
+  },
+
+  fromSDKJSON(object: any): LogViewSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
 
   fromAmino(object: LogViewAmino): LogView {
@@ -3992,6 +4016,23 @@ export const LogSink = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LogSinkSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      destination: isSet(object.destination) ? String(object.destination) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
+      output_version_format: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : "",
+      include_children: isSet(object.include_children) ? Boolean(object.include_children) : false,
+      bigquery_options: isSet(object.bigquery_options) ? BigQueryOptions.fromSDKJSON(object.bigquery_options) : undefined,
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+    };
+  },
+
   fromAmino(object: LogSinkAmino): LogSink {
     return {
       name: object.name,
@@ -4136,6 +4177,13 @@ export const BigQueryOptions = {
     return obj;
   },
 
+  fromSDKJSON(object: any): BigQueryOptionsSDKType {
+    return {
+      use_partitioned_tables: isSet(object.use_partitioned_tables) ? Boolean(object.use_partitioned_tables) : false,
+      uses_timestamp_column_partitioning: isSet(object.uses_timestamp_column_partitioning) ? Boolean(object.uses_timestamp_column_partitioning) : false
+    };
+  },
+
   fromAmino(object: BigQueryOptionsAmino): BigQueryOptions {
     return {
       usePartitionedTables: object.use_partitioned_tables,
@@ -4268,6 +4316,14 @@ export const ListBucketsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListBucketsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
+  },
+
   fromAmino(object: ListBucketsRequestAmino): ListBucketsRequest {
     return {
       parent: object.parent,
@@ -4398,6 +4454,13 @@ export const ListBucketsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListBucketsResponseSDKType {
+    return {
+      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   },
 
   fromAmino(object: ListBucketsResponseAmino): ListBucketsResponse {
@@ -4538,6 +4601,14 @@ export const CreateBucketRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CreateBucketRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      bucket_id: isSet(object.bucket_id) ? String(object.bucket_id) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined
+    };
+  },
+
   fromAmino(object: CreateBucketRequestAmino): CreateBucketRequest {
     return {
       parent: object.parent,
@@ -4672,6 +4743,14 @@ export const UpdateBucketRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UpdateBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      bucket: isSet(object.bucket) ? LogBucket.fromSDKJSON(object.bucket) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
+  },
+
   fromAmino(object: UpdateBucketRequestAmino): UpdateBucketRequest {
     return {
       name: object.name,
@@ -4778,6 +4857,12 @@ export const GetBucketRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: GetBucketRequestAmino): GetBucketRequest {
     return {
       name: object.name
@@ -4880,6 +4965,12 @@ export const DeleteBucketRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeleteBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: DeleteBucketRequestAmino): DeleteBucketRequest {
     return {
       name: object.name
@@ -4980,6 +5071,12 @@ export const UndeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): UndeleteBucketRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: UndeleteBucketRequestAmino): UndeleteBucketRequest {
@@ -5112,6 +5209,14 @@ export const ListViewsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListViewsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
+  },
+
   fromAmino(object: ListViewsRequestAmino): ListViewsRequest {
     return {
       parent: object.parent,
@@ -5242,6 +5347,13 @@ export const ListViewsResponse = {
 
     obj.next_page_token = message.nextPageToken;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListViewsResponseSDKType {
+    return {
+      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
   },
 
   fromAmino(object: ListViewsResponseAmino): ListViewsResponse {
@@ -5382,6 +5494,14 @@ export const CreateViewRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CreateViewRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      view_id: isSet(object.view_id) ? String(object.view_id) : "",
+      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined
+    };
+  },
+
   fromAmino(object: CreateViewRequestAmino): CreateViewRequest {
     return {
       parent: object.parent,
@@ -5516,6 +5636,14 @@ export const UpdateViewRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UpdateViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? LogView.fromSDKJSON(object.view) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
+  },
+
   fromAmino(object: UpdateViewRequestAmino): UpdateViewRequest {
     return {
       name: object.name,
@@ -5622,6 +5750,12 @@ export const GetViewRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): GetViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: GetViewRequestAmino): GetViewRequest {
     return {
       name: object.name
@@ -5722,6 +5856,12 @@ export const DeleteViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeleteViewRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: DeleteViewRequestAmino): DeleteViewRequest {
@@ -5852,6 +5992,14 @@ export const ListSinksRequest = {
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
+  },
+
+  fromSDKJSON(object: any): ListSinksRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
   },
 
   fromAmino(object: ListSinksRequestAmino): ListSinksRequest {
@@ -5986,6 +6134,13 @@ export const ListSinksResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListSinksResponseSDKType {
+    return {
+      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListSinksResponseAmino): ListSinksResponse {
     return {
       sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
@@ -6094,6 +6249,12 @@ export const GetSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
+    };
   },
 
   fromAmino(object: GetSinkRequestAmino): GetSinkRequest {
@@ -6224,6 +6385,14 @@ export const CreateSinkRequest = {
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CreateSinkRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false
+    };
   },
 
   fromAmino(object: CreateSinkRequestAmino): CreateSinkRequest {
@@ -6374,6 +6543,15 @@ export const UpdateSinkRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UpdateSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : "",
+      sink: isSet(object.sink) ? LogSink.fromSDKJSON(object.sink) : undefined,
+      unique_writer_identity: isSet(object.unique_writer_identity) ? Boolean(object.unique_writer_identity) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
+  },
+
   fromAmino(object: UpdateSinkRequestAmino): UpdateSinkRequest {
     return {
       sinkName: object.sink_name,
@@ -6480,6 +6658,12 @@ export const DeleteSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DeleteSinkRequestSDKType {
+    return {
+      sink_name: isSet(object.sink_name) ? String(object.sink_name) : ""
+    };
   },
 
   fromAmino(object: DeleteSinkRequestAmino): DeleteSinkRequest {
@@ -6654,6 +6838,17 @@ export const LogExclusion = {
     return obj;
   },
 
+  fromSDKJSON(object: any): LogExclusionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+    };
+  },
+
   fromAmino(object: LogExclusionAmino): LogExclusion {
     return {
       name: object.name,
@@ -6794,6 +6989,14 @@ export const ListExclusionsRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListExclusionsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0
+    };
+  },
+
   fromAmino(object: ListExclusionsRequestAmino): ListExclusionsRequest {
     return {
       parent: object.parent,
@@ -6926,6 +7129,13 @@ export const ListExclusionsResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ListExclusionsResponseSDKType {
+    return {
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+
   fromAmino(object: ListExclusionsResponseAmino): ListExclusionsResponse {
     return {
       exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
@@ -7034,6 +7244,12 @@ export const GetExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: GetExclusionRequestAmino): GetExclusionRequest {
@@ -7150,6 +7366,13 @@ export const CreateExclusionRequest = {
     obj.parent = message.parent;
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): CreateExclusionRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined
+    };
   },
 
   fromAmino(object: CreateExclusionRequestAmino): CreateExclusionRequest {
@@ -7284,6 +7507,14 @@ export const UpdateExclusionRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): UpdateExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDKJSON(object.exclusion) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
+  },
+
   fromAmino(object: UpdateExclusionRequestAmino): UpdateExclusionRequest {
     return {
       name: object.name,
@@ -7390,6 +7621,12 @@ export const DeleteExclusionRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): DeleteExclusionRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+
   fromAmino(object: DeleteExclusionRequestAmino): DeleteExclusionRequest {
     return {
       name: object.name
@@ -7490,6 +7727,12 @@ export const GetCmekSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetCmekSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: GetCmekSettingsRequestAmino): GetCmekSettingsRequest {
@@ -7620,6 +7863,14 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpdateCmekSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      cmek_settings: isSet(object.cmek_settings) ? CmekSettings.fromSDKJSON(object.cmek_settings) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   },
 
   fromAmino(object: UpdateCmekSettingsRequestAmino): UpdateCmekSettingsRequest {
@@ -7756,6 +8007,14 @@ export const CmekSettings = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CmekSettingsSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      service_account_id: isSet(object.service_account_id) ? String(object.service_account_id) : ""
+    };
+  },
+
   fromAmino(object: CmekSettingsAmino): CmekSettings {
     return {
       name: object.name,
@@ -7860,6 +8119,12 @@ export const GetSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): GetSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: GetSettingsRequestAmino): GetSettingsRequest {
@@ -7990,6 +8255,14 @@ export const UpdateSettingsRequest = {
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
     message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): UpdateSettingsRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      settings: isSet(object.settings) ? Settings.fromSDKJSON(object.settings) : undefined,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined
+    };
   },
 
   fromAmino(object: UpdateSettingsRequestAmino): UpdateSettingsRequest {
@@ -8154,6 +8427,16 @@ export const Settings = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SettingsSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      kms_key_name: isSet(object.kms_key_name) ? String(object.kms_key_name) : "",
+      kms_service_account_id: isSet(object.kms_service_account_id) ? String(object.kms_service_account_id) : "",
+      storage_location: isSet(object.storage_location) ? String(object.storage_location) : "",
+      disable_default_sink: isSet(object.disable_default_sink) ? Boolean(object.disable_default_sink) : false
+    };
+  },
+
   fromAmino(object: SettingsAmino): Settings {
     return {
       name: object.name,
@@ -8290,6 +8573,14 @@ export const CopyLogEntriesRequest = {
     obj.filter = message.filter;
     obj.destination = message.destination;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CopyLogEntriesRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      destination: isSet(object.destination) ? String(object.destination) : ""
+    };
   },
 
   fromAmino(object: CopyLogEntriesRequestAmino): CopyLogEntriesRequest {
@@ -8482,6 +8773,18 @@ export const CopyLogEntriesMetadata = {
     return obj;
   },
 
+  fromSDKJSON(object: any): CopyLogEntriesMetadataSDKType {
+    return {
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : false,
+      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDKJSON(object.request) : undefined,
+      progress: isSet(object.progress) ? Number(object.progress) : 0,
+      writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : ""
+    };
+  },
+
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
     return {
       startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
@@ -8594,6 +8897,12 @@ export const CopyLogEntriesResponse = {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount;
     return obj;
+  },
+
+  fromSDKJSON(object: any): CopyLogEntriesResponseSDKType {
+    return {
+      log_entries_copied_count: isSet(object.log_entries_copied_count) ? Long.fromValue(object.log_entries_copied_count) : Long.ZERO
+    };
   },
 
   fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {

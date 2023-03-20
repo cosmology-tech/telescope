@@ -148,6 +148,13 @@ export const MsgCreateDenom = {
     message.sender = object.sender ?? "";
     message.subdenom = object.subdenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateDenomSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      subdenom: isSet(object.subdenom) ? String(object.subdenom) : ""
+    };
   }
 
 };
@@ -205,6 +212,12 @@ export const MsgCreateDenomResponse = {
     const message = createBaseMsgCreateDenomResponse();
     message.newTokenDenom = object.newTokenDenom ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgCreateDenomResponseSDKType {
+    return {
+      new_token_denom: isSet(object.new_token_denom) ? String(object.new_token_denom) : ""
+    };
   }
 
 };
@@ -274,6 +287,13 @@ export const MsgMint = {
     message.sender = object.sender ?? "";
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgMintSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
   }
 
 };
@@ -317,6 +337,10 @@ export const MsgMintResponse = {
   fromPartial(_: DeepPartial<MsgMintResponse>): MsgMintResponse {
     const message = createBaseMsgMintResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgMintResponseSDKType {
+    return {};
   }
 
 };
@@ -386,6 +410,13 @@ export const MsgBurn = {
     message.sender = object.sender ?? "";
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgBurnSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      amount: isSet(object.amount) ? Coin.fromSDKJSON(object.amount) : undefined
+    };
   }
 
 };
@@ -429,6 +460,10 @@ export const MsgBurnResponse = {
   fromPartial(_: DeepPartial<MsgBurnResponse>): MsgBurnResponse {
     const message = createBaseMsgBurnResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgBurnResponseSDKType {
+    return {};
   }
 
 };
@@ -510,6 +545,14 @@ export const MsgChangeAdmin = {
     message.denom = object.denom ?? "";
     message.newAdmin = object.newAdmin ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgChangeAdminSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : ""
+    };
   }
 
 };
@@ -553,6 +596,10 @@ export const MsgChangeAdminResponse = {
   fromPartial(_: DeepPartial<MsgChangeAdminResponse>): MsgChangeAdminResponse {
     const message = createBaseMsgChangeAdminResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgChangeAdminResponseSDKType {
+    return {};
   }
 
 };
@@ -622,6 +669,13 @@ export const MsgSetDenomMetadata = {
     message.sender = object.sender ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgSetDenomMetadataSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromSDKJSON(object.metadata) : undefined
+    };
   }
 
 };
@@ -665,6 +719,10 @@ export const MsgSetDenomMetadataResponse = {
   fromPartial(_: DeepPartial<MsgSetDenomMetadataResponse>): MsgSetDenomMetadataResponse {
     const message = createBaseMsgSetDenomMetadataResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgSetDenomMetadataResponseSDKType {
+    return {};
   }
 
 };

@@ -133,6 +133,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -202,6 +206,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -271,6 +281,12 @@ export const QueryDenomAuthorityMetadataRequest = {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   }
 
 };
@@ -340,6 +356,12 @@ export const QueryDenomAuthorityMetadataResponse = {
     const obj: any = {};
     message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toSDK(message.authorityMetadata) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomAuthorityMetadataResponseSDKType {
+    return {
+      authority_metadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDKJSON(object.authority_metadata) : undefined
+    };
   }
 
 };
@@ -409,6 +431,12 @@ export const QueryDenomsFromCreatorRequest = {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorRequestSDKType {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : ""
+    };
   }
 
 };
@@ -490,6 +518,12 @@ export const QueryDenomsFromCreatorResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryDenomsFromCreatorResponseSDKType {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
+    };
   }
 
 };

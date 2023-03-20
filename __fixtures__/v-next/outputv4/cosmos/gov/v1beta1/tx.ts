@@ -216,6 +216,14 @@ export const MsgSubmitProposal = {
 
     obj.proposer = message.proposer;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalSDKType {
+    return {
+      content: isSet(object.content) ? Any.fromSDKJSON(object.content) : undefined,
+      initial_deposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      proposer: isSet(object.proposer) ? String(object.proposer) : ""
+    };
   }
 
 };
@@ -285,6 +293,12 @@ export const MsgSubmitProposalResponse = {
     const obj: any = {};
     obj.proposal_id = message.proposalId;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSubmitProposalResponseSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO
+    };
   }
 
 };
@@ -382,6 +396,14 @@ export const MsgVote = {
     obj.voter = message.voter;
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgVoteSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+    };
   }
 
 };
@@ -434,6 +456,10 @@ export const MsgVoteResponse = {
   toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteResponseSDKType {
+    return {};
   }
 
 };
@@ -543,6 +569,14 @@ export const MsgVoteWeighted = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgVoteWeightedSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -595,6 +629,10 @@ export const MsgVoteWeightedResponse = {
   toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgVoteWeightedResponseSDKType {
+    return {};
   }
 
 };
@@ -704,6 +742,14 @@ export const MsgDeposit = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgDepositSDKType {
+    return {
+      proposal_id: isSet(object.proposal_id) ? Long.fromValue(object.proposal_id) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -756,6 +802,10 @@ export const MsgDepositResponse = {
   toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDepositResponseSDKType {
+    return {};
   }
 
 };

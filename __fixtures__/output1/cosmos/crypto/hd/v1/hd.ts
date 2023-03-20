@@ -153,6 +153,16 @@ export const BIP44Params = {
     obj.change = message.change;
     obj.address_index = message.addressIndex;
     return obj;
+  },
+
+  fromSDKJSON(object: any): BIP44ParamsSDKType {
+    return {
+      purpose: isSet(object.purpose) ? Number(object.purpose) : 0,
+      coin_type: isSet(object.coin_type) ? Number(object.coin_type) : 0,
+      account: isSet(object.account) ? Number(object.account) : 0,
+      change: isSet(object.change) ? Boolean(object.change) : false,
+      address_index: isSet(object.address_index) ? Number(object.address_index) : 0
+    };
   }
 
 };

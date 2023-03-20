@@ -1097,6 +1097,13 @@ export const ParsedExpr = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ParsedExprSDKType {
+    return {
+      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined,
+      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined
+    };
+  },
+
   fromAmino(object: ParsedExprAmino): ParsedExpr {
     return {
       expr: object?.expr ? Expr.fromAmino(object.expr) : undefined,
@@ -1299,6 +1306,19 @@ export const Expr = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ExprSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      const_expr: isSet(object.const_expr) ? Constant.fromSDKJSON(object.const_expr) : undefined,
+      ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
+      select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
+      call_expr: isSet(object.call_expr) ? Expr_Call.fromSDKJSON(object.call_expr) : undefined,
+      list_expr: isSet(object.list_expr) ? Expr_CreateList.fromSDKJSON(object.list_expr) : undefined,
+      struct_expr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDKJSON(object.struct_expr) : undefined,
+      comprehension_expr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDKJSON(object.comprehension_expr) : undefined
+    };
+  },
+
   fromAmino(object: ExprAmino): Expr {
     return {
       id: Long.fromString(object.id),
@@ -1413,6 +1433,12 @@ export const Expr_Ident = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_IdentSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
 
   fromAmino(object: Expr_IdentAmino): Expr_Ident {
@@ -1543,6 +1569,14 @@ export const Expr_Select = {
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_SelectSDKType {
+    return {
+      operand: isSet(object.operand) ? Expr.fromSDKJSON(object.operand) : undefined,
+      field: isSet(object.field) ? String(object.field) : "",
+      test_only: isSet(object.test_only) ? Boolean(object.test_only) : false
+    };
   },
 
   fromAmino(object: Expr_SelectAmino): Expr_Select {
@@ -1691,6 +1725,14 @@ export const Expr_Call = {
     return obj;
   },
 
+  fromSDKJSON(object: any): Expr_CallSDKType {
+    return {
+      target: isSet(object.target) ? Expr.fromSDKJSON(object.target) : undefined,
+      function: isSet(object.function) ? String(object.function) : "",
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: Expr_CallAmino): Expr_Call {
     return {
       target: object?.target ? Expr.fromAmino(object.target) : undefined,
@@ -1813,6 +1855,12 @@ export const Expr_CreateList = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateListSDKType {
+    return {
+      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: Expr_CreateListAmino): Expr_CreateList {
@@ -1947,6 +1995,13 @@ export const Expr_CreateStruct = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStructSDKType {
+    return {
+      message_name: isSet(object.message_name) ? String(object.message_name) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: Expr_CreateStructAmino): Expr_CreateStruct {
@@ -2099,6 +2154,15 @@ export const Expr_CreateStruct_Entry = {
     message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
+      map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   },
 
   fromAmino(object: Expr_CreateStruct_EntryAmino): Expr_CreateStruct_Entry {
@@ -2291,6 +2355,18 @@ export const Expr_Comprehension = {
     message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
     message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Expr_ComprehensionSDKType {
+    return {
+      iter_var: isSet(object.iter_var) ? String(object.iter_var) : "",
+      iter_range: isSet(object.iter_range) ? Expr.fromSDKJSON(object.iter_range) : undefined,
+      accu_var: isSet(object.accu_var) ? String(object.accu_var) : "",
+      accu_init: isSet(object.accu_init) ? Expr.fromSDKJSON(object.accu_init) : undefined,
+      loop_condition: isSet(object.loop_condition) ? Expr.fromSDKJSON(object.loop_condition) : undefined,
+      loop_step: isSet(object.loop_step) ? Expr.fromSDKJSON(object.loop_step) : undefined,
+      result: isSet(object.result) ? Expr.fromSDKJSON(object.result) : undefined
+    };
   },
 
   fromAmino(object: Expr_ComprehensionAmino): Expr_Comprehension {
@@ -2519,6 +2595,20 @@ export const Constant = {
     return obj;
   },
 
+  fromSDKJSON(object: any): ConstantSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      uint64_value: isSet(object.uint64_value) ? Long.fromValue(object.uint64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
+      duration_value: isSet(object.duration_value) ? Duration.fromSDKJSON(object.duration_value) : undefined,
+      timestamp_value: isSet(object.timestamp_value) ? fromTimestamp(fromJsonTimestamp(object.timestamp_value)) : undefined
+    };
+  },
+
   fromAmino(object: ConstantAmino): Constant {
     return {
       nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
@@ -2649,6 +2739,13 @@ export const SourceInfo_PositionsEntry = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+
   fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
     return {
       key: Long.fromString(object.key),
@@ -2756,6 +2853,13 @@ export const SourceInfo_MacroCallsEntry = {
     obj.key = message.key;
     message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourceInfo_MacroCallsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   },
 
   fromAmino(object: SourceInfo_MacroCallsEntryAmino): SourceInfo_MacroCallsEntry {
@@ -3013,6 +3117,26 @@ export const SourceInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      location: isSet(object.location) ? String(object.location) : "",
+      line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: Long]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {},
+      macro_calls: isObject(object.macro_calls) ? Object.entries(object.macro_calls).reduce<{
+        [key: Long]: Expr;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Expr.fromSDKJSON(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
   fromAmino(object: SourceInfoAmino): SourceInfo {
     return {
       syntaxVersion: object.syntax_version,
@@ -3193,6 +3317,15 @@ export const SourcePosition = {
     obj.line = message.line;
     obj.column = message.column;
     return obj;
+  },
+
+  fromSDKJSON(object: any): SourcePositionSDKType {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      offset: isSet(object.offset) ? Number(object.offset) : 0,
+      line: isSet(object.line) ? Number(object.line) : 0,
+      column: isSet(object.column) ? Number(object.column) : 0
+    };
   },
 
   fromAmino(object: SourcePositionAmino): SourcePosition {

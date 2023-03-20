@@ -428,6 +428,13 @@ export const ParsedExpr = {
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ParsedExprSDKType {
+    return {
+      expr: isSet(object.expr) ? Expr.fromSDKJSON(object.expr) : undefined,
+      source_info: isSet(object.source_info) ? SourceInfo.fromSDKJSON(object.source_info) : undefined
+    };
   }
 
 };
@@ -569,6 +576,19 @@ export const Expr = {
     message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
     message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ExprSDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      const_expr: isSet(object.const_expr) ? Constant.fromSDKJSON(object.const_expr) : undefined,
+      ident_expr: isSet(object.ident_expr) ? Expr_Ident.fromSDKJSON(object.ident_expr) : undefined,
+      select_expr: isSet(object.select_expr) ? Expr_Select.fromSDKJSON(object.select_expr) : undefined,
+      call_expr: isSet(object.call_expr) ? Expr_Call.fromSDKJSON(object.call_expr) : undefined,
+      list_expr: isSet(object.list_expr) ? Expr_CreateList.fromSDKJSON(object.list_expr) : undefined,
+      struct_expr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDKJSON(object.struct_expr) : undefined,
+      comprehension_expr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDKJSON(object.comprehension_expr) : undefined
+    };
   }
 
 };
@@ -626,6 +646,12 @@ export const Expr_Ident = {
     const message = createBaseExpr_Ident();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_IdentSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   }
 
 };
@@ -707,6 +733,14 @@ export const Expr_Select = {
     message.field = object.field ?? "";
     message.testOnly = object.testOnly ?? false;
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_SelectSDKType {
+    return {
+      operand: isSet(object.operand) ? Expr.fromSDKJSON(object.operand) : undefined,
+      field: isSet(object.field) ? String(object.field) : "",
+      test_only: isSet(object.test_only) ? Boolean(object.test_only) : false
+    };
   }
 
 };
@@ -794,6 +828,14 @@ export const Expr_Call = {
     message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_CallSDKType {
+    return {
+      target: isSet(object.target) ? Expr.fromSDKJSON(object.target) : undefined,
+      function: isSet(object.function) ? String(object.function) : "",
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -857,6 +899,12 @@ export const Expr_CreateList = {
     const message = createBaseExpr_CreateList();
     message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateListSDKType {
+    return {
+      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -932,6 +980,13 @@ export const Expr_CreateStruct = {
     message.messageName = object.messageName ?? "";
     message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStructSDKType {
+    return {
+      message_name: isSet(object.message_name) ? String(object.message_name) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -1025,6 +1080,15 @@ export const Expr_CreateStruct_Entry = {
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_CreateStruct_EntrySDKType {
+    return {
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
+      field_key: isSet(object.field_key) ? String(object.field_key) : undefined,
+      map_key: isSet(object.map_key) ? Expr.fromSDKJSON(object.map_key) : undefined,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   }
 
 };
@@ -1154,6 +1218,18 @@ export const Expr_Comprehension = {
     message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): Expr_ComprehensionSDKType {
+    return {
+      iter_var: isSet(object.iter_var) ? String(object.iter_var) : "",
+      iter_range: isSet(object.iter_range) ? Expr.fromSDKJSON(object.iter_range) : undefined,
+      accu_var: isSet(object.accu_var) ? String(object.accu_var) : "",
+      accu_init: isSet(object.accu_init) ? Expr.fromSDKJSON(object.accu_init) : undefined,
+      loop_condition: isSet(object.loop_condition) ? Expr.fromSDKJSON(object.loop_condition) : undefined,
+      loop_step: isSet(object.loop_step) ? Expr.fromSDKJSON(object.loop_step) : undefined,
+      result: isSet(object.result) ? Expr.fromSDKJSON(object.result) : undefined
+    };
   }
 
 };
@@ -1307,6 +1383,20 @@ export const Constant = {
     message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : undefined;
     message.timestampValue = object.timestampValue !== undefined && object.timestampValue !== null ? Timestamp.fromPartial(object.timestampValue) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): ConstantSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
+      uint64_value: isSet(object.uint64_value) ? Long.fromValue(object.uint64_value) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
+      duration_value: isSet(object.duration_value) ? Duration.fromSDKJSON(object.duration_value) : undefined,
+      timestamp_value: isSet(object.timestamp_value) ? fromTimestamp(fromJsonTimestamp(object.timestamp_value)) : undefined
+    };
   }
 
 };
@@ -1376,6 +1466,13 @@ export const SourceInfo_PositionsEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): SourceInfo_PositionsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
   }
 
 };
@@ -1445,6 +1542,13 @@ export const SourceInfo_MacroCallsEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): SourceInfo_MacroCallsEntrySDKType {
+    return {
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
+      value: isSet(object.value) ? Expr.fromSDKJSON(object.value) : undefined
+    };
   }
 
 };
@@ -1622,6 +1726,26 @@ export const SourceInfo = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      syntax_version: isSet(object.syntax_version) ? String(object.syntax_version) : "",
+      location: isSet(object.location) ? String(object.location) : "",
+      line_offsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => Number(e)) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: Long]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {},
+      macro_calls: isObject(object.macro_calls) ? Object.entries(object.macro_calls).reduce<{
+        [key: Long]: Expr;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Expr.fromSDKJSON(value);
+        return acc;
+      }, {}) : {}
+    };
   }
 
 };
@@ -1715,6 +1839,15 @@ export const SourcePosition = {
     message.line = object.line ?? 0;
     message.column = object.column ?? 0;
     return message;
+  },
+
+  fromSDKJSON(object: any): SourcePositionSDKType {
+    return {
+      location: isSet(object.location) ? String(object.location) : "",
+      offset: isSet(object.offset) ? Number(object.offset) : 0,
+      line: isSet(object.line) ? Number(object.line) : 0,
+      column: isSet(object.column) ? Number(object.column) : 0
+    };
   }
 
 };

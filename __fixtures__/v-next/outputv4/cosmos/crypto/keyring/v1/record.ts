@@ -210,6 +210,17 @@ export const Record = {
     message.multi !== undefined && (obj.multi = message.multi ? Record_Multi.toSDK(message.multi) : undefined);
     message.offline !== undefined && (obj.offline = message.offline ? Record_Offline.toSDK(message.offline) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): RecordSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
+      local: isSet(object.local) ? Record_Local.fromSDKJSON(object.local) : undefined,
+      ledger: isSet(object.ledger) ? Record_Ledger.fromSDKJSON(object.ledger) : undefined,
+      multi: isSet(object.multi) ? Record_Multi.fromSDKJSON(object.multi) : undefined,
+      offline: isSet(object.offline) ? Record_Offline.fromSDKJSON(object.offline) : undefined
+    };
   }
 
 };
@@ -293,6 +304,13 @@ export const Record_Local = {
     message.privKey !== undefined && (obj.priv_key = message.privKey ? Any.toSDK(message.privKey) : undefined);
     obj.priv_key_type = message.privKeyType;
     return obj;
+  },
+
+  fromSDKJSON(object: any): Record_LocalSDKType {
+    return {
+      priv_key: isSet(object.priv_key) ? Any.fromSDKJSON(object.priv_key) : undefined,
+      priv_key_type: isSet(object.priv_key_type) ? String(object.priv_key_type) : ""
+    };
   }
 
 };
@@ -362,6 +380,12 @@ export const Record_Ledger = {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path ? BIP44Params.toSDK(message.path) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): Record_LedgerSDKType {
+    return {
+      path: isSet(object.path) ? BIP44Params.fromSDKJSON(object.path) : undefined
+    };
   }
 
 };
@@ -414,6 +438,10 @@ export const Record_Multi = {
   toSDK(_: Record_Multi): Record_MultiSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): Record_MultiSDKType {
+    return {};
   }
 
 };
@@ -466,6 +494,10 @@ export const Record_Offline = {
   toSDK(_: Record_Offline): Record_OfflineSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): Record_OfflineSDKType {
+    return {};
   }
 
 };

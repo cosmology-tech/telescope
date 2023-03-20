@@ -101,6 +101,15 @@ export const Block = {
     message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
     message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): BlockSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromSDKJSON(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromSDKJSON(object.evidence) : undefined,
+      last_commit: isSet(object.last_commit) ? Commit.fromSDKJSON(object.last_commit) : undefined
+    };
   }
 
 };

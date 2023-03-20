@@ -270,6 +270,15 @@ export const Endpoint = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EndpointSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
+      target: isSet(object.target) ? String(object.target) : "",
+      allow_cors: isSet(object.allow_cors) ? Boolean(object.allow_cors) : false
+    };
+  },
+
   fromAmino(object: EndpointAmino): Endpoint {
     return {
       name: object.name,

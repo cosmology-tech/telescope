@@ -112,6 +112,14 @@ export const MsgGrantAllowance = {
     message.grantee = object.grantee ?? "";
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgGrantAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      allowance: isSet(object.allowance) ? Any.fromSDKJSON(object.allowance) : undefined
+    };
   }
 
 };
@@ -155,6 +163,10 @@ export const MsgGrantAllowanceResponse = {
   fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgGrantAllowanceResponseSDKType {
+    return {};
   }
 
 };
@@ -224,6 +236,13 @@ export const MsgRevokeAllowance = {
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     return message;
+  },
+
+  fromSDKJSON(object: any): MsgRevokeAllowanceSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : ""
+    };
   }
 
 };
@@ -267,6 +286,10 @@ export const MsgRevokeAllowanceResponse = {
   fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;
+  },
+
+  fromSDKJSON(_: any): MsgRevokeAllowanceResponseSDKType {
+    return {};
   }
 
 };

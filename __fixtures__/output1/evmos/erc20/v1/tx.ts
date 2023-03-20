@@ -159,6 +159,14 @@ export const MsgConvertCoin = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgConvertCoinSDKType {
+    return {
+      coin: isSet(object.coin) ? Coin.fromSDKJSON(object.coin) : undefined,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   }
 
 };
@@ -211,6 +219,10 @@ export const MsgConvertCoinResponse = {
   toSDK(_: MsgConvertCoinResponse): MsgConvertCoinResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgConvertCoinResponseSDKType {
+    return {};
   }
 
 };
@@ -322,6 +334,15 @@ export const MsgConvertERC20 = {
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgConvertERC20SDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
   }
 
 };
@@ -374,6 +395,10 @@ export const MsgConvertERC20Response = {
   toSDK(_: MsgConvertERC20Response): MsgConvertERC20ResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgConvertERC20ResponseSDKType {
+    return {};
   }
 
 };

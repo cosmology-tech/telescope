@@ -545,6 +545,12 @@ export const QueryIncentivesRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryIncentivesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryIncentivesRequestAmino): QueryIncentivesRequest {
     return {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
@@ -673,6 +679,13 @@ export const QueryIncentivesResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryIncentivesResponseSDKType {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryIncentivesResponseAmino): QueryIncentivesResponse {
     return {
       incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
@@ -783,6 +796,12 @@ export const QueryIncentiveRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryIncentiveRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
+  },
+
   fromAmino(object: QueryIncentiveRequestAmino): QueryIncentiveRequest {
     return {
       contract: object.contract
@@ -883,6 +902,12 @@ export const QueryIncentiveResponse = {
     const obj: any = {};
     message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toSDK(message.incentive) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryIncentiveResponseSDKType {
+    return {
+      incentive: isSet(object.incentive) ? Incentive.fromSDKJSON(object.incentive) : undefined
+    };
   },
 
   fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
@@ -999,6 +1024,13 @@ export const QueryGasMetersRequest = {
     obj.contract = message.contract;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryGasMetersRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryGasMetersRequestAmino): QueryGasMetersRequest {
@@ -1131,6 +1163,13 @@ export const QueryGasMetersResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGasMetersResponseSDKType {
+    return {
+      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryGasMetersResponseAmino): QueryGasMetersResponse {
     return {
       gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : [],
@@ -1255,6 +1294,13 @@ export const QueryGasMeterRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGasMeterRequestSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : ""
+    };
+  },
+
   fromAmino(object: QueryGasMeterRequestAmino): QueryGasMeterRequest {
     return {
       contract: object.contract,
@@ -1359,6 +1405,12 @@ export const QueryGasMeterResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryGasMeterResponseSDKType {
+    return {
+      gas_meter: isSet(object.gas_meter) ? Long.fromValue(object.gas_meter) : Long.UZERO
+    };
+  },
+
   fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
     return {
       gasMeter: Long.fromString(object.gas_meter)
@@ -1459,6 +1511,12 @@ export const QueryAllocationMetersRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllocationMetersRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryAllocationMetersRequestAmino): QueryAllocationMetersRequest {
@@ -1589,6 +1647,13 @@ export const QueryAllocationMetersResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAllocationMetersResponseSDKType {
+    return {
+      allocation_meters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryAllocationMetersResponseAmino): QueryAllocationMetersResponse {
     return {
       allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromAmino(e)) : [],
@@ -1699,6 +1764,12 @@ export const QueryAllocationMeterRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAllocationMeterRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+
   fromAmino(object: QueryAllocationMeterRequestAmino): QueryAllocationMeterRequest {
     return {
       denom: object.denom
@@ -1801,6 +1872,12 @@ export const QueryAllocationMeterResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryAllocationMeterResponseSDKType {
+    return {
+      allocation_meter: isSet(object.allocation_meter) ? DecCoin.fromSDKJSON(object.allocation_meter) : undefined
+    };
+  },
+
   fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
     return {
       allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
@@ -1884,6 +1961,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   },
 
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
@@ -1983,6 +2064,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   },
 
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {

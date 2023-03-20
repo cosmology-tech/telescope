@@ -252,6 +252,13 @@ export const QueryProvidersResponse = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
     return {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
@@ -376,6 +383,13 @@ export const QueryProviderRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProviderRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
     return {
       auditor: object.auditor,
@@ -478,6 +492,12 @@ export const QueryAllProvidersAttributesRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAllProvidersAttributesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
@@ -594,6 +614,13 @@ export const QueryProviderAttributesRequest = {
     obj.owner = message.owner;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryProviderAttributesRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
@@ -714,6 +741,13 @@ export const QueryProviderAuditorRequest = {
     return obj;
   },
 
+  fromSDKJSON(object: any): QueryProviderAuditorRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+
   fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
     return {
       auditor: object.auditor,
@@ -830,6 +864,13 @@ export const QueryAuditorAttributesRequest = {
     obj.auditor = message.auditor;
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryAuditorAttributesRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   },
 
   fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {

@@ -152,6 +152,13 @@ export const MsgSoftwareUpgrade = {
     obj.authority = message.authority;
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSoftwareUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
   }
 
 };
@@ -204,6 +211,10 @@ export const MsgSoftwareUpgradeResponse = {
   toSDK(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSoftwareUpgradeResponseSDKType {
+    return {};
   }
 
 };
@@ -273,6 +284,12 @@ export const MsgCancelUpgrade = {
     const obj: any = {};
     obj.authority = message.authority;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgCancelUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
   }
 
 };
@@ -325,6 +342,10 @@ export const MsgCancelUpgradeResponse = {
   toSDK(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgCancelUpgradeResponseSDKType {
+    return {};
   }
 
 };

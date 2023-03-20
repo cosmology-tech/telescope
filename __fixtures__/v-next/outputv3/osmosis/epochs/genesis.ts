@@ -333,6 +333,18 @@ export const EpochInfo = {
     return obj;
   },
 
+  fromSDKJSON(object: any): EpochInfoSDKType {
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      current_epoch: isSet(object.current_epoch) ? Long.fromValue(object.current_epoch) : Long.ZERO,
+      current_epoch_start_time: isSet(object.current_epoch_start_time) ? fromTimestamp(fromJsonTimestamp(object.current_epoch_start_time)) : undefined,
+      epoch_counting_started: isSet(object.epoch_counting_started) ? Boolean(object.epoch_counting_started) : false,
+      current_epoch_start_height: isSet(object.current_epoch_start_height) ? Long.fromValue(object.current_epoch_start_height) : Long.ZERO
+    };
+  },
+
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
@@ -465,6 +477,12 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDKJSON(e)) : []
+    };
   },
 
   fromAmino(object: GenesisStateAmino): GenesisState {

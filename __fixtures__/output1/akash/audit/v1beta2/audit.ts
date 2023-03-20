@@ -198,6 +198,14 @@ export const Provider = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): ProviderSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -307,6 +315,14 @@ export const AuditedAttributes = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AuditedAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -388,6 +404,12 @@ export const AttributesResponse = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AttributesResponseSDKType {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -493,6 +515,13 @@ export const AttributesFilters = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): AttributesFiltersSDKType {
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => String(e)) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -602,6 +631,14 @@ export const MsgSignProviderAttributes = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSignProviderAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDKJSON(e)) : []
+    };
   }
 
 };
@@ -654,6 +691,10 @@ export const MsgSignProviderAttributesResponse = {
   toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSignProviderAttributesResponseSDKType {
+    return {};
   }
 
 };
@@ -763,6 +804,14 @@ export const MsgDeleteProviderAttributes = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgDeleteProviderAttributesSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
   }
 
 };
@@ -815,6 +864,10 @@ export const MsgDeleteProviderAttributesResponse = {
   toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgDeleteProviderAttributesResponseSDKType {
+    return {};
   }
 
 };

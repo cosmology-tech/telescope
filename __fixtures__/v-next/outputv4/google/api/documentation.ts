@@ -403,6 +403,17 @@ export const Documentation = {
     obj.service_root_url = message.serviceRootUrl;
     obj.overview = message.overview;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DocumentationSDKType {
+    return {
+      summary: isSet(object.summary) ? String(object.summary) : "",
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDKJSON(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDKJSON(e)) : [],
+      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : "",
+      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : "",
+      overview: isSet(object.overview) ? String(object.overview) : ""
+    };
   }
 
 };
@@ -500,6 +511,14 @@ export const DocumentationRule = {
     obj.description = message.description;
     obj.deprecation_description = message.deprecationDescription;
     return obj;
+  },
+
+  fromSDKJSON(object: any): DocumentationRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : ""
+    };
   }
 
 };
@@ -609,6 +628,14 @@ export const Page = {
     }
 
     return obj;
+  },
+
+  fromSDKJSON(object: any): PageSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      content: isSet(object.content) ? String(object.content) : "",
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDKJSON(e)) : []
+    };
   }
 
 };

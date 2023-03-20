@@ -138,6 +138,15 @@ export const MsgSend = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
+  },
+
+  fromSDKJSON(object: any): MsgSendSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
   }
 
 };
@@ -190,6 +199,10 @@ export const MsgSendResponse = {
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): MsgSendResponseSDKType {
+    return {};
   }
 
 };

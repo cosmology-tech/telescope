@@ -137,6 +137,10 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
   }
 
 };
@@ -206,6 +210,12 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
   }
 
 };
@@ -275,6 +285,12 @@ export const QuerySigningInfoRequest = {
     const obj: any = {};
     obj.cons_address = message.consAddress;
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfoRequestSDKType {
+    return {
+      cons_address: isSet(object.cons_address) ? String(object.cons_address) : ""
+    };
   }
 
 };
@@ -344,6 +360,12 @@ export const QuerySigningInfoResponse = {
     const obj: any = {};
     message.valSigningInfo !== undefined && (obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toSDK(message.valSigningInfo) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfoResponseSDKType {
+    return {
+      val_signing_info: isSet(object.val_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.val_signing_info) : undefined
+    };
   }
 
 };
@@ -413,6 +435,12 @@ export const QuerySigningInfosRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfosRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };
@@ -508,6 +536,13 @@ export const QuerySigningInfosResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromSDKJSON(object: any): QuerySigningInfosResponseSDKType {
+    return {
+      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
   }
 
 };

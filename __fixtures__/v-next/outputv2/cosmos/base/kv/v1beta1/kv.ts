@@ -133,6 +133,12 @@ export const Pairs = {
     return obj;
   },
 
+  fromSDKJSON(object: any): PairsSDKType {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDKJSON(e)) : []
+    };
+  },
+
   fromAmino(object: PairsAmino): Pairs {
     return {
       pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
@@ -261,6 +267,13 @@ export const Pair = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
+  },
+
+  fromSDKJSON(object: any): PairSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
 
   fromAmino(object: PairAmino): Pair {
