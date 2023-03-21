@@ -1770,7 +1770,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
       durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
-      timestampValue: isSet(object.timestampValue) ? fromTimestamp(fromJsonTimestamp(object.timestampValue)) : undefined
+      timestampValue: isSet(object.timestampValue) ? new Date(object.timestampValue) : undefined
     };
   },
 
@@ -1840,7 +1840,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
       bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       duration_value: isSet(object.duration_value) ? Duration.fromSDKJSON(object.duration_value) : undefined,
-      timestamp_value: isSet(object.timestamp_value) ? fromTimestamp(fromJsonTimestamp(object.timestamp_value)) : undefined
+      timestamp_value: isSet(object.timestamp_value) ? new Date(object.timestamp_value) : undefined
     };
   }
 
@@ -2448,7 +2448,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromJSON(object: any): LogEntry {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
@@ -2565,7 +2565,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromSDKJSON(object: any): LogEntrySDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",

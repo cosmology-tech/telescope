@@ -230,9 +230,22 @@ export const fromJSON = {
   // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
   timestamp(args: FromJSONMethod) {
+    const timestampFormat = args.context.pluginValue(
+      'prototypes.typingsFormat.timestamp'
+    );
+    switch (timestampFormat) {
+      case 'timestamp':
+        return fromJSON.timestampTimestamp(args);
+      case 'date':
+      default:
+        args.context.addUtil('toTimestamp');
+        return fromJSON.timestampDate(args);
+    }
+  },
+
+  timestampTimestamp(args: FromJSONMethod) {
     const { messageProp, objProp } = getPropNames(args.field);
     args.context.addUtil('isSet');
-    args.context.addUtil('fromTimestamp');
     args.context.addUtil('fromJsonTimestamp');
 
     return t.objectProperty(
@@ -241,10 +254,26 @@ export const fromJSON = {
         t.callExpression(t.identifier('isSet'), [
           t.memberExpression(t.identifier('object'), t.identifier(objProp))
         ]),
-        t.callExpression(t.identifier('fromTimestamp'), [
-          t.callExpression(t.identifier('fromJsonTimestamp'), [
-            t.memberExpression(t.identifier('object'), t.identifier(objProp))
-          ])
+        t.callExpression(t.identifier('fromJsonTimestamp'), [
+          t.memberExpression(t.identifier('object'), t.identifier(objProp))
+        ]),
+        t.identifier('undefined')
+      )
+    );
+  },
+
+  timestampDate(args: FromJSONMethod) {
+    const { messageProp, objProp } = getPropNames(args.field);
+    args.context.addUtil('isSet');
+
+    return t.objectProperty(
+      t.identifier(messageProp),
+      t.conditionalExpression(
+        t.callExpression(t.identifier('isSet'), [
+          t.memberExpression(t.identifier('object'), t.identifier(objProp))
+        ]),
+        t.newExpression(t.identifier('Date'), [
+          t.memberExpression(t.identifier('object'), t.identifier(objProp))
         ]),
         t.identifier('undefined')
       )

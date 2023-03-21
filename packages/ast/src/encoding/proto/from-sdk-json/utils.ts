@@ -222,9 +222,22 @@ export const fromSDKJSON = {
   // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
   timestamp(args: FromSDKJSONMethod) {
+    const timestampFormat = args.context.pluginValue(
+      'prototypes.typingsFormat.timestamp'
+    );
+    switch (timestampFormat) {
+      case 'timestamp':
+        return fromSDKJSON.timestampTimestamp(args);
+      case 'date':
+      default:
+        args.context.addUtil('toTimestamp');
+        return fromSDKJSON.timestampDate(args);
+    }
+  },
+
+  timestampTimestamp(args: FromSDKJSONMethod) {
     const { origName } = getFieldNames(args.field);
     args.context.addUtil('isSet');
-    args.context.addUtil('fromTimestamp');
     args.context.addUtil('fromJsonTimestamp');
 
     return t.objectProperty(
@@ -233,15 +246,72 @@ export const fromSDKJSON = {
         t.callExpression(t.identifier('isSet'), [
           t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
-        t.callExpression(t.identifier('fromTimestamp'), [
-          t.callExpression(t.identifier('fromJsonTimestamp'), [
-            t.memberExpression(t.identifier('object'), t.identifier(origName))
-          ])
+        t.callExpression(t.identifier('fromJsonTimestamp'), [
+          t.memberExpression(t.identifier('object'), t.identifier(origName))
         ]),
         t.identifier('undefined')
       )
     );
   },
+
+  timestampDate(args: FromSDKJSONMethod) {
+    const { origName } = getFieldNames(args.field);
+    args.context.addUtil('isSet');
+
+    return t.objectProperty(
+      t.identifier(origName),
+      t.conditionalExpression(
+        t.callExpression(t.identifier('isSet'), [
+          t.memberExpression(t.identifier('object'), t.identifier(origName))
+        ]),
+        t.newExpression(t.identifier('Date'), [
+          t.memberExpression(t.identifier('object'), t.identifier(origName))
+        ]),
+        t.identifier('undefined')
+      )
+    );
+  },
+
+  // timestampTimestamp(args: FromSDKJSONMethod) {
+  //   const { messageProp, objProp } = getPropNames(args.field);
+  //   args.context.addUtil('isSet');
+  //   args.context.addUtil('fromJsonTimestamp');
+
+  //   return t.objectProperty(
+  //     t.identifier(messageProp),
+  //     t.conditionalExpression(
+  //       t.callExpression(t.identifier('isSet'), [
+  //         t.memberExpression(t.identifier('object'), t.identifier(objProp))
+  //       ]),
+  //       t.callExpression(t.identifier('fromJsonTimestamp'), [
+  //         t.memberExpression(t.identifier('object'), t.identifier(objProp))
+  //       ]),
+  //       t.identifier('undefined')
+  //     )
+  //   );
+  // },
+
+  // timestampDate(args: FromSDKJSONMethod) {
+  //   const { origName } = getFieldNames(args.field);
+  //   args.context.addUtil('isSet');
+  //   args.context.addUtil('fromTimestamp');
+  //   args.context.addUtil('fromJsonTimestamp');
+
+  //   return t.objectProperty(
+  //     t.identifier(origName),
+  //     t.conditionalExpression(
+  //       t.callExpression(t.identifier('isSet'), [
+  //         t.memberExpression(t.identifier('object'), t.identifier(origName))
+  //       ]),
+  //       t.callExpression(t.identifier('fromTimestamp'), [
+  //         t.callExpression(t.identifier('fromJsonTimestamp'), [
+  //           t.memberExpression(t.identifier('object'), t.identifier(origName))
+  //         ])
+  //       ]),
+  //       t.identifier('undefined')
+  //     )
+  //   );
+  // },
 
   //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
   //     [key: string]: string;

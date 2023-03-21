@@ -113,6 +113,20 @@ export const fromSDK = {
   },
 
   timestamp(args: FromSDKMethod) {
+    const timestampFormat = args.context.pluginValue(
+      'prototypes.typingsFormat.timestamp'
+    );
+    switch (timestampFormat) {
+      case 'timestamp':
+        return fromSDK.type(args);
+      case 'date':
+      default:
+        args.context.addUtil('toTimestamp');
+        return fromSDK.timestampDate(args);
+    }
+  },
+
+  timestampDate(args: FromSDKMethod) {
     const { propName, origName } = getFieldNames(args.field);
 
     return t.objectProperty(

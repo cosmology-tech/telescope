@@ -131,7 +131,35 @@ export const toSDK = {
     return toSDK.type(args);
   },
 
+  // timestamp(args: ToSDKMethod) {
+  //   const { propName, origName } = getFieldNames(args.field);
+
+  //   return notUndefinedSetValue(
+  //     origName,
+  //     propName,
+  //     t.logicalExpression(
+  //       '??',
+  //       t.memberExpression(t.identifier('message'), t.identifier(propName)),
+  //       t.identifier('undefined')
+  //     )
+  //   );
+  // },
+
   timestamp(args: ToSDKMethod) {
+    const timestampFormat = args.context.pluginValue(
+      'prototypes.typingsFormat.timestamp'
+    );
+    switch (timestampFormat) {
+      case 'timestamp':
+        return toSDK.type(args);
+      case 'date':
+      default:
+        args.context.addUtil('toTimestamp');
+        return toSDK.timestampDate(args);
+    }
+  },
+
+  timestampDate(args: ToSDKMethod) {
     const { propName, origName } = getFieldNames(args.field);
 
     return notUndefinedSetValue(
