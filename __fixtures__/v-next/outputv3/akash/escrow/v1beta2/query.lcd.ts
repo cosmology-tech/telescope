@@ -45,7 +45,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/escrow/v1beta2/types/accounts/list`;
-    return await this.req.get<QueryAccountsResponseSDKType>(endpoint, options);
+    return QueryAccountsResponse.fromSDKJSON(await this.req.get<QueryAccountsResponseSDKType>(endpoint, options));
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -81,7 +81,7 @@ export class LCDQueryClient {
     }
 
     const endpoint = `akash/escrow/v1beta2/types/payments/list`;
-    return await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options);
+    return QueryPaymentsResponse.fromSDKJSON(await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options));
   }
 
 }
