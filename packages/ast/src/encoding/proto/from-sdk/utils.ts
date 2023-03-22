@@ -146,7 +146,30 @@ export const fromSDK = {
     },
 
     timestamp(args: FromSDKMethod) {
-        return fromSDK.type(args);
+      const timestampFormat = args.context.pluginValue(
+        'prototypes.typingsFormat.timestamp'
+      );
+      switch (timestampFormat) {
+        case 'timestamp':
+          return fromSDK.type(args);
+        case 'date':
+        default:
+          args.context.addUtil('toTimestamp');
+          return fromSDK.timestampDate(args);
+      }
+    },
+
+    timestampDate(args: FromSDKMethod) {
+      const { propName, origName } = getFieldNames(args.field);
+
+      return t.objectProperty(
+        t.identifier(propName),
+        t.logicalExpression(
+          '??',
+          t.memberExpression(t.identifier('object'), t.identifier(origName)),
+          t.identifier('undefined')
+        )
+      );
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
