@@ -2,7 +2,7 @@ import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 
 /** GenesisState define the claims module's genesis state. */
@@ -254,7 +254,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
-      airdropStartTime: isSet(object.airdropStartTime) ? fromTimestamp(fromJsonTimestamp(object.airdropStartTime)) : undefined,
+      airdropStartTime: isSet(object.airdropStartTime) ? new Date(object.airdropStartTime) : undefined,
       durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
       durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",
@@ -336,7 +336,7 @@ export const Params = {
   fromSDKJSON(object: any): ParamsSDKType {
     return {
       enable_claims: isSet(object.enable_claims) ? Boolean(object.enable_claims) : false,
-      airdrop_start_time: isSet(object.airdrop_start_time) ? fromTimestamp(fromJsonTimestamp(object.airdrop_start_time)) : undefined,
+      airdrop_start_time: isSet(object.airdrop_start_time) ? new Date(object.airdrop_start_time) : undefined,
       duration_until_decay: isSet(object.duration_until_decay) ? Duration.fromSDKJSON(object.duration_until_decay) : undefined,
       duration_of_decay: isSet(object.duration_of_decay) ? Duration.fromSDKJSON(object.duration_of_decay) : undefined,
       claims_denom: isSet(object.claims_denom) ? String(object.claims_denom) : "",

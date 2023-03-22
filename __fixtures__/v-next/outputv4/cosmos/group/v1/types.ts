@@ -2,7 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 
 /** VoteOption enumerates the valid vote options for a given proposal. */
@@ -665,7 +665,7 @@ export const Member = {
       address: isSet(object.address) ? String(object.address) : "",
       weight: isSet(object.weight) ? String(object.weight) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      addedAt: isSet(object.addedAt) ? fromTimestamp(fromJsonTimestamp(object.addedAt)) : undefined
+      addedAt: isSet(object.addedAt) ? new Date(object.addedAt) : undefined
     };
   },
 
@@ -710,7 +710,7 @@ export const Member = {
       address: isSet(object.address) ? String(object.address) : "",
       weight: isSet(object.weight) ? String(object.weight) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      added_at: isSet(object.added_at) ? fromTimestamp(fromJsonTimestamp(object.added_at)) : undefined
+      added_at: isSet(object.added_at) ? new Date(object.added_at) : undefined
     };
   }
 
@@ -1162,7 +1162,7 @@ export const GroupInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
-      createdAt: isSet(object.createdAt) ? fromTimestamp(fromJsonTimestamp(object.createdAt)) : undefined
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
   },
 
@@ -1217,7 +1217,7 @@ export const GroupInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
-      created_at: isSet(object.created_at) ? fromTimestamp(fromJsonTimestamp(object.created_at)) : undefined
+      created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
   }
 
@@ -1412,7 +1412,7 @@ export const GroupPolicyInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
-      createdAt: isSet(object.createdAt) ? fromTimestamp(fromJsonTimestamp(object.createdAt)) : undefined
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
     };
   },
 
@@ -1472,7 +1472,7 @@ export const GroupPolicyInfo = {
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       decision_policy: isSet(object.decision_policy) ? Any.fromSDKJSON(object.decision_policy) : undefined,
-      created_at: isSet(object.created_at) ? fromTimestamp(fromJsonTimestamp(object.created_at)) : undefined
+      created_at: isSet(object.created_at) ? new Date(object.created_at) : undefined
     };
   }
 
@@ -1629,13 +1629,13 @@ export const Proposal = {
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      submitTime: isSet(object.submitTime) ? fromTimestamp(fromJsonTimestamp(object.submitTime)) : undefined,
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
       groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
       groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      votingPeriodEnd: isSet(object.votingPeriodEnd) ? fromTimestamp(fromJsonTimestamp(object.votingPeriodEnd)) : undefined,
+      votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
       executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : 0,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
     };
@@ -1743,13 +1743,13 @@ export const Proposal = {
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      submit_time: isSet(object.submit_time) ? fromTimestamp(fromJsonTimestamp(object.submit_time)) : undefined,
+      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined,
       group_version: isSet(object.group_version) ? Long.fromValue(object.group_version) : Long.UZERO,
       group_policy_version: isSet(object.group_policy_version) ? Long.fromValue(object.group_policy_version) : Long.UZERO,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
-      voting_period_end: isSet(object.voting_period_end) ? fromTimestamp(fromJsonTimestamp(object.voting_period_end)) : undefined,
+      voting_period_end: isSet(object.voting_period_end) ? new Date(object.voting_period_end) : undefined,
       executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
     };
@@ -1956,7 +1956,7 @@ export const Vote = {
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      submitTime: isSet(object.submitTime) ? fromTimestamp(fromJsonTimestamp(object.submitTime)) : undefined
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
     };
   },
 
@@ -2006,7 +2006,7 @@ export const Vote = {
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      submit_time: isSet(object.submit_time) ? fromTimestamp(fromJsonTimestamp(object.submit_time)) : undefined
+      submit_time: isSet(object.submit_time) ? new Date(object.submit_time) : undefined
     };
   }
 

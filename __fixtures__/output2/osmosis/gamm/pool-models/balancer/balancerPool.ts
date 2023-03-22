@@ -4,7 +4,7 @@ import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromTimestamp, fromJsonTimestamp, DeepPartial, Long } from "../../../../helpers";
+import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /**
@@ -174,7 +174,7 @@ export const SmoothWeightChangeParams = {
 
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
       targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
@@ -212,7 +212,7 @@ export const SmoothWeightChangeParams = {
 
   fromSDKJSON(object: any): SmoothWeightChangeParamsSDKType {
     return {
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
       initial_pool_weights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
       target_pool_weights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDKJSON(e)) : []

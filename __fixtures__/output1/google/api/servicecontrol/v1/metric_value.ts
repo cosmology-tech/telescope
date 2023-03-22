@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -299,8 +299,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
-      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
       int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
@@ -396,8 +396,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
-      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
       int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
       double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,

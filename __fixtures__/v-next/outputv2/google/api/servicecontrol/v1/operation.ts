@@ -3,7 +3,7 @@ import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./me
 import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Defines the importance of the data contained in the operation. */
@@ -531,8 +531,8 @@ export const Operation = {
       operationId: isSet(object.operationId) ? String(object.operationId) : "",
       operationName: isSet(object.operationName) ? String(object.operationName) : "",
       consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
-      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -670,8 +670,8 @@ export const Operation = {
       operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
       operation_name: isSet(object.operation_name) ? String(object.operation_name) : "",
       consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
-      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

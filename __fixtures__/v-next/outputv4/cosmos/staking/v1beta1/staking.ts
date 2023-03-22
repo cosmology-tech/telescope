@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 
 /** BondStatus is the status of a validator. */
@@ -789,7 +789,7 @@ export const Commission = {
   fromJSON(object: any): Commission {
     return {
       commissionRates: isSet(object.commissionRates) ? CommissionRates.fromJSON(object.commissionRates) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
     };
   },
 
@@ -824,7 +824,7 @@ export const Commission = {
   fromSDKJSON(object: any): CommissionSDKType {
     return {
       commission_rates: isSet(object.commission_rates) ? CommissionRates.fromSDKJSON(object.commission_rates) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
     };
   }
 
@@ -1102,7 +1102,7 @@ export const Validator = {
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
       unbondingHeight: isSet(object.unbondingHeight) ? Long.fromValue(object.unbondingHeight) : Long.ZERO,
-      unbondingTime: isSet(object.unbondingTime) ? fromTimestamp(fromJsonTimestamp(object.unbondingTime)) : undefined,
+      unbondingTime: isSet(object.unbondingTime) ? new Date(object.unbondingTime) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
     };
@@ -1182,7 +1182,7 @@ export const Validator = {
       delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
       description: isSet(object.description) ? Description.fromSDKJSON(object.description) : undefined,
       unbonding_height: isSet(object.unbonding_height) ? Long.fromValue(object.unbonding_height) : Long.ZERO,
-      unbonding_time: isSet(object.unbonding_time) ? fromTimestamp(fromJsonTimestamp(object.unbonding_time)) : undefined,
+      unbonding_time: isSet(object.unbonding_time) ? new Date(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromSDKJSON(object.commission) : undefined,
       min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : ""
     };
@@ -1935,7 +1935,7 @@ export const UnbondingDelegationEntry = {
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
       creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
-      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined,
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
     };
@@ -1980,7 +1980,7 @@ export const UnbondingDelegationEntry = {
   fromSDKJSON(object: any): UnbondingDelegationEntrySDKType {
     return {
       creation_height: isSet(object.creation_height) ? Long.fromValue(object.creation_height) : Long.ZERO,
-      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined,
+      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
     };
@@ -2055,7 +2055,7 @@ export const RedelegationEntry = {
   fromJSON(object: any): RedelegationEntry {
     return {
       creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
-      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined,
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
     };
@@ -2100,7 +2100,7 @@ export const RedelegationEntry = {
   fromSDKJSON(object: any): RedelegationEntrySDKType {
     return {
       creation_height: isSet(object.creation_height) ? Long.fromValue(object.creation_height) : Long.ZERO,
-      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined,
+      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined,
       initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : ""
     };

@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Params } from "./genesis";
-import { Long, isSet, fromTimestamp, fromJsonTimestamp, DeepPartial, Rpc } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -107,8 +107,8 @@ export const ArithmeticTwapRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
-      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined
     };
   },
 
@@ -137,8 +137,8 @@ export const ArithmeticTwapRequest = {
       pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
       base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
       quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
-      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? fromJsonTimestamp(object.end_time) : undefined
     };
   }
 
@@ -276,7 +276,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAsset: isSet(object.baseAsset) ? String(object.baseAsset) : "",
       quoteAsset: isSet(object.quoteAsset) ? String(object.quoteAsset) : "",
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
     };
   },
 
@@ -303,7 +303,7 @@ export const ArithmeticTwapToNowRequest = {
       pool_id: isSet(object.pool_id) ? Long.fromValue(object.pool_id) : Long.UZERO,
       base_asset: isSet(object.base_asset) ? String(object.base_asset) : "",
       quote_asset: isSet(object.quote_asset) ? String(object.quote_asset) : "",
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined
     };
   }
 

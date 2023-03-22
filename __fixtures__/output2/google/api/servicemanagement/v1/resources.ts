@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 
 /** Code describes the status of the operation (or one of its steps). */
@@ -669,7 +669,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
       progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
     };
   },
 
@@ -707,7 +707,7 @@ export const OperationMetadata = {
       resource_names: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => String(e)) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDKJSON(e)) : [],
       progress_percentage: isSet(object.progress_percentage) ? Number(object.progress_percentage) : 0,
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined
     };
   }
 
@@ -1275,7 +1275,7 @@ export const Rollout = {
   fromJSON(object: any): Rollout {
     return {
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
+      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
       createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
@@ -1311,7 +1311,7 @@ export const Rollout = {
   fromSDKJSON(object: any): RolloutSDKType {
     return {
       rollout_id: isSet(object.rollout_id) ? String(object.rollout_id) : "",
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
+      create_time: isSet(object.create_time) ? fromJsonTimestamp(object.create_time) : undefined,
       created_by: isSet(object.created_by) ? String(object.created_by) : "",
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       traffic_percent_strategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDKJSON(object.traffic_percent_strategy) : undefined,

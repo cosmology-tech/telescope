@@ -3,7 +3,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/time
 import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 
 /**
@@ -2356,7 +2356,7 @@ export const AttributeContext_Request = {
       host: isSet(object.host) ? String(object.host) : "",
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       size: isSet(object.size) ? Long.fromValue(object.size) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
@@ -2473,7 +2473,7 @@ export const AttributeContext_Request = {
       host: isSet(object.host) ? String(object.host) : "",
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       size: isSet(object.size) ? Long.fromValue(object.size) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
@@ -2757,7 +2757,7 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
@@ -2839,7 +2839,7 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? new Date(object.time) : undefined,
       backend_latency: isSet(object.backend_latency) ? Duration.fromSDKJSON(object.backend_latency) : undefined
     };
   },
@@ -3302,9 +3302,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
-      deleteTime: isSet(object.deleteTime) ? fromTimestamp(fromJsonTimestamp(object.deleteTime)) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      deleteTime: isSet(object.deleteTime) ? new Date(object.deleteTime) : undefined,
       etag: isSet(object.etag) ? String(object.etag) : "",
       location: isSet(object.location) ? String(object.location) : ""
     };
@@ -3451,9 +3451,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       display_name: isSet(object.display_name) ? String(object.display_name) : "",
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
-      delete_time: isSet(object.delete_time) ? fromTimestamp(fromJsonTimestamp(object.delete_time)) : undefined,
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
+      delete_time: isSet(object.delete_time) ? new Date(object.delete_time) : undefined,
       etag: isSet(object.etag) ? String(object.etag) : "",
       location: isSet(object.location) ? String(object.location) : ""
     };

@@ -23,6 +23,8 @@ export declare const fromSDKJSON: {
     duration(args: FromSDKJSONMethod): t.ObjectProperty;
     durationString(args: FromSDKJSONMethod): t.ObjectProperty;
     timestamp(args: FromSDKJSONMethod): t.ObjectProperty;
+    timestampTimestamp(args: FromSDKJSONMethod): t.ObjectProperty;
+    timestampDate(args: FromSDKJSONMethod): t.ObjectProperty;
     keyHash(args: FromSDKJSONMethod): t.ObjectProperty;
     array(args: FromSDKJSONMethod, expr: t.Expression): t.ObjectProperty;
 };

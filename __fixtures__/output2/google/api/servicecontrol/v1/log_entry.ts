@@ -6,7 +6,7 @@ import { HttpRequest } from "./http_request";
 import { Any } from "../../../protobuf/any";
 import { Struct } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../../helpers";
+import { isSet, DeepPartial, fromJsonTimestamp, isObject, fromTimestamp, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -366,7 +366,7 @@ export const LogEntry = {
   fromJSON(object: any): LogEntry {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",
@@ -437,7 +437,7 @@ export const LogEntry = {
   fromSDKJSON(object: any): LogEntrySDKType {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,
       trace: isSet(object.trace) ? String(object.trace) : "",

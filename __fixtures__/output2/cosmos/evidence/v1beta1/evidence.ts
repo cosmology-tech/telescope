@@ -1,7 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromTimestamp, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 
@@ -83,7 +83,7 @@ export const Equivocation = {
   fromJSON(object: any): Equivocation {
     return {
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
@@ -110,7 +110,7 @@ export const Equivocation = {
   fromSDKJSON(object: any): EquivocationSDKType {
     return {
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
-      time: isSet(object.time) ? fromTimestamp(fromJsonTimestamp(object.time)) : undefined,
+      time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
       consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : ""
     };

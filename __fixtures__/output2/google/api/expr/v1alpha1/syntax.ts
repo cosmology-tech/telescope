@@ -4,7 +4,7 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Duration } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, bytesFromBase64, fromTimestamp, fromJsonTimestamp, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, Long, bytesFromBase64, fromJsonTimestamp, base64FromBytes, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
@@ -1353,7 +1353,7 @@ export const Constant = {
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
       durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
-      timestampValue: isSet(object.timestampValue) ? fromTimestamp(fromJsonTimestamp(object.timestampValue)) : undefined
+      timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },
 
@@ -1395,7 +1395,7 @@ export const Constant = {
       string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
       bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       duration_value: isSet(object.duration_value) ? Duration.fromSDKJSON(object.duration_value) : undefined,
-      timestamp_value: isSet(object.timestamp_value) ? fromTimestamp(fromJsonTimestamp(object.timestamp_value)) : undefined
+      timestamp_value: isSet(object.timestamp_value) ? fromJsonTimestamp(object.timestamp_value) : undefined
     };
   }
 

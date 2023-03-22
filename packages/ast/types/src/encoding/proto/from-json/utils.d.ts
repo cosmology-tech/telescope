@@ -23,6 +23,8 @@ export declare const fromJSON: {
     duration(args: FromJSONMethod): t.ObjectProperty;
     durationString(args: FromJSONMethod): t.ObjectProperty;
     timestamp(args: FromJSONMethod): t.ObjectProperty;
+    timestampTimestamp(args: FromJSONMethod): t.ObjectProperty;
+    timestampDate(args: FromJSONMethod): t.ObjectProperty;
     keyHash(args: FromJSONMethod): t.ObjectProperty;
     array(args: FromJSONMethod, expr: t.Expression): t.ObjectProperty;
 };

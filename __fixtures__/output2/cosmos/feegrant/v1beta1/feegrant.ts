@@ -5,7 +5,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, fromTimestamp, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /**
@@ -125,7 +125,7 @@ export const BasicAllowance = {
   fromJSON(object: any): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : [],
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   },
 
@@ -152,7 +152,7 @@ export const BasicAllowance = {
   fromSDKJSON(object: any): BasicAllowanceSDKType {
     return {
       spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   }
 
@@ -237,7 +237,7 @@ export const PeriodicAllowance = {
       period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.periodSpendLimit) ? object.periodSpendLimit.map((e: any) => Coin.fromJSON(e)) : [],
       periodCanSpend: Array.isArray(object?.periodCanSpend) ? object.periodCanSpend.map((e: any) => Coin.fromJSON(e)) : [],
-      periodReset: isSet(object.periodReset) ? fromTimestamp(fromJsonTimestamp(object.periodReset)) : undefined
+      periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
     };
   },
 
@@ -278,7 +278,7 @@ export const PeriodicAllowance = {
       period: isSet(object.period) ? Duration.fromSDKJSON(object.period) : undefined,
       period_spend_limit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromSDKJSON(e)) : [],
       period_can_spend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      period_reset: isSet(object.period_reset) ? fromTimestamp(fromJsonTimestamp(object.period_reset)) : undefined
+      period_reset: isSet(object.period_reset) ? fromJsonTimestamp(object.period_reset) : undefined
     };
   }
 

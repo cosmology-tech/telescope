@@ -1,5 +1,5 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
@@ -497,7 +497,7 @@ export const PeerInfo = {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       addressInfo: Array.isArray(object?.addressInfo) ? object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e)) : [],
-      lastConnected: isSet(object.lastConnected) ? fromTimestamp(fromJsonTimestamp(object.lastConnected)) : undefined
+      lastConnected: isSet(object.lastConnected) ? new Date(object.lastConnected) : undefined
     };
   },
 
@@ -549,7 +549,7 @@ export const PeerInfo = {
     return {
       id: isSet(object.id) ? String(object.id) : "",
       address_info: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDKJSON(e)) : [],
-      last_connected: isSet(object.last_connected) ? fromTimestamp(fromJsonTimestamp(object.last_connected)) : undefined
+      last_connected: isSet(object.last_connected) ? new Date(object.last_connected) : undefined
     };
   }
 
@@ -622,8 +622,8 @@ export const PeerAddressInfo = {
   fromJSON(object: any): PeerAddressInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      lastDialSuccess: isSet(object.lastDialSuccess) ? fromTimestamp(fromJsonTimestamp(object.lastDialSuccess)) : undefined,
-      lastDialFailure: isSet(object.lastDialFailure) ? fromTimestamp(fromJsonTimestamp(object.lastDialFailure)) : undefined,
+      lastDialSuccess: isSet(object.lastDialSuccess) ? new Date(object.lastDialSuccess) : undefined,
+      lastDialFailure: isSet(object.lastDialFailure) ? new Date(object.lastDialFailure) : undefined,
       dialFailures: isSet(object.dialFailures) ? Number(object.dialFailures) : 0
     };
   },
@@ -667,8 +667,8 @@ export const PeerAddressInfo = {
   fromSDKJSON(object: any): PeerAddressInfoSDKType {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      last_dial_success: isSet(object.last_dial_success) ? fromTimestamp(fromJsonTimestamp(object.last_dial_success)) : undefined,
-      last_dial_failure: isSet(object.last_dial_failure) ? fromTimestamp(fromJsonTimestamp(object.last_dial_failure)) : undefined,
+      last_dial_success: isSet(object.last_dial_success) ? new Date(object.last_dial_success) : undefined,
+      last_dial_failure: isSet(object.last_dial_failure) ? new Date(object.last_dial_failure) : undefined,
       dial_failures: isSet(object.dial_failures) ? Number(object.dial_failures) : 0
     };
   }

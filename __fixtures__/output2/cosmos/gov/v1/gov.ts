@@ -5,7 +5,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, Long, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1";
 
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
@@ -561,11 +561,11 @@ export const Proposal = {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
-      submitTime: isSet(object.submitTime) ? fromTimestamp(fromJsonTimestamp(object.submitTime)) : undefined,
-      depositEndTime: isSet(object.depositEndTime) ? fromTimestamp(fromJsonTimestamp(object.depositEndTime)) : undefined,
+      submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined,
+      depositEndTime: isSet(object.depositEndTime) ? fromJsonTimestamp(object.depositEndTime) : undefined,
       totalDeposit: Array.isArray(object?.totalDeposit) ? object.totalDeposit.map((e: any) => Coin.fromJSON(e)) : [],
-      votingStartTime: isSet(object.votingStartTime) ? fromTimestamp(fromJsonTimestamp(object.votingStartTime)) : undefined,
-      votingEndTime: isSet(object.votingEndTime) ? fromTimestamp(fromJsonTimestamp(object.votingEndTime)) : undefined,
+      votingStartTime: isSet(object.votingStartTime) ? fromJsonTimestamp(object.votingStartTime) : undefined,
+      votingEndTime: isSet(object.votingEndTime) ? fromJsonTimestamp(object.votingEndTime) : undefined,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -618,11 +618,11 @@ export const Proposal = {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       final_tally_result: isSet(object.final_tally_result) ? TallyResult.fromSDKJSON(object.final_tally_result) : undefined,
-      submit_time: isSet(object.submit_time) ? fromTimestamp(fromJsonTimestamp(object.submit_time)) : undefined,
-      deposit_end_time: isSet(object.deposit_end_time) ? fromTimestamp(fromJsonTimestamp(object.deposit_end_time)) : undefined,
+      submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined,
+      deposit_end_time: isSet(object.deposit_end_time) ? fromJsonTimestamp(object.deposit_end_time) : undefined,
       total_deposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDKJSON(e)) : [],
-      voting_start_time: isSet(object.voting_start_time) ? fromTimestamp(fromJsonTimestamp(object.voting_start_time)) : undefined,
-      voting_end_time: isSet(object.voting_end_time) ? fromTimestamp(fromJsonTimestamp(object.voting_end_time)) : undefined,
+      voting_start_time: isSet(object.voting_start_time) ? fromJsonTimestamp(object.voting_start_time) : undefined,
+      voting_end_time: isSet(object.voting_end_time) ? fromJsonTimestamp(object.voting_end_time) : undefined,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   }

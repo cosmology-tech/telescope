@@ -4,7 +4,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "../../helpers";
+import { DeepPartial, isSet, toTimestamp, fromTimestamp, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceRequestSDKType {}
@@ -1042,7 +1042,7 @@ export const AccountLockedPastTimeRequest = {
   fromJSON(object: any): AccountLockedPastTimeRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -1077,7 +1077,7 @@ export const AccountLockedPastTimeRequest = {
   fromSDKJSON(object: any): AccountLockedPastTimeRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   }
 
@@ -1219,7 +1219,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -1254,7 +1254,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   }
 
@@ -1396,7 +1396,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromJSON(object: any): AccountUnlockedBeforeTimeRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
 
@@ -1431,7 +1431,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromSDKJSON(object: any): AccountUnlockedBeforeTimeRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   }
 
@@ -1582,7 +1582,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromJSON(object: any): AccountLockedPastTimeDenomRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
@@ -1622,7 +1622,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromSDKJSON(object: any): AccountLockedPastTimeDenomRequestSDKType {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   }

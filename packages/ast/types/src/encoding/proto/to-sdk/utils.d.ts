@@ -23,6 +23,7 @@ export declare const toSDK: {
     bytes(args: ToSDKMethod): t.ExpressionStatement;
     duration(args: ToSDKMethod): t.ExpressionStatement;
     timestamp(args: ToSDKMethod): t.ExpressionStatement;
+    timestampDate(args: ToSDKMethod): t.ExpressionStatement;
     keyHash(args: ToSDKMethod): (t.ExpressionStatement | t.IfStatement)[];
     array(args: ToSDKMethod, expr: t.Expression): t.IfStatement;
 };

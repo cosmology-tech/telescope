@@ -3,7 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 
 /** MsgCreateValidator defines a SDK message for creating a new validator. */
@@ -868,7 +868,7 @@ export const MsgBeginRedelegateResponse = {
 
   fromJSON(object: any): MsgBeginRedelegateResponse {
     return {
-      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
     };
   },
 
@@ -898,7 +898,7 @@ export const MsgBeginRedelegateResponse = {
 
   fromSDKJSON(object: any): MsgBeginRedelegateResponseSDKType {
     return {
-      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined
+      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined
     };
   }
 
@@ -1048,7 +1048,7 @@ export const MsgUndelegateResponse = {
 
   fromJSON(object: any): MsgUndelegateResponse {
     return {
-      completionTime: isSet(object.completionTime) ? fromTimestamp(fromJsonTimestamp(object.completionTime)) : undefined
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined
     };
   },
 
@@ -1078,7 +1078,7 @@ export const MsgUndelegateResponse = {
 
   fromSDKJSON(object: any): MsgUndelegateResponseSDKType {
     return {
-      completion_time: isSet(object.completion_time) ? fromTimestamp(fromJsonTimestamp(object.completion_time)) : undefined
+      completion_time: isSet(object.completion_time) ? new Date(object.completion_time) : undefined
     };
   }
 

@@ -3,7 +3,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject, fromTimestamp, fromJsonTimestamp } from "../../../../helpers";
+import { isSet, DeepPartial, Long, isObject, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -259,8 +259,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
-      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
+      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
       int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
@@ -318,8 +318,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
-      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      start_time: isSet(object.start_time) ? fromJsonTimestamp(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? fromJsonTimestamp(object.end_time) : undefined,
       bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
       int64_value: isSet(object.int64_value) ? Long.fromValue(object.int64_value) : undefined,
       double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,

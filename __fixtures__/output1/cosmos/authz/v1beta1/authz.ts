@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 
 /**
@@ -202,7 +202,7 @@ export const Grant = {
   fromJSON(object: any): Grant {
     return {
       authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -237,7 +237,7 @@ export const Grant = {
   fromSDKJSON(object: any): GrantSDKType {
     return {
       authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   }
 
@@ -312,7 +312,7 @@ export const GrantAuthorization = {
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
       authorization: isSet(object.authorization) ? Any.fromJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   },
 
@@ -357,7 +357,7 @@ export const GrantAuthorization = {
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
       authorization: isSet(object.authorization) ? Any.fromSDKJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? fromTimestamp(fromJsonTimestamp(object.expiration)) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
     };
   }
 

@@ -1,6 +1,6 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { Long, toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "evmos.incentives.v1";
 
@@ -180,7 +180,7 @@ export const Incentive = {
       contract: isSet(object.contract) ? String(object.contract) : "",
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
       totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
     };
   },
@@ -242,7 +242,7 @@ export const Incentive = {
       contract: isSet(object.contract) ? String(object.contract) : "",
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
       total_gas: isSet(object.total_gas) ? Long.fromValue(object.total_gas) : Long.UZERO
     };
   }

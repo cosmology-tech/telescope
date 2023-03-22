@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
-import { Long, isSet, fromTimestamp, fromJsonTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 
@@ -135,7 +135,7 @@ export const ValidatorSigningInfo = {
       address: isSet(object.address) ? String(object.address) : "",
       startHeight: isSet(object.startHeight) ? Long.fromValue(object.startHeight) : Long.ZERO,
       indexOffset: isSet(object.indexOffset) ? Long.fromValue(object.indexOffset) : Long.ZERO,
-      jailedUntil: isSet(object.jailedUntil) ? fromTimestamp(fromJsonTimestamp(object.jailedUntil)) : undefined,
+      jailedUntil: isSet(object.jailedUntil) ? fromJsonTimestamp(object.jailedUntil) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
       missedBlocksCounter: isSet(object.missedBlocksCounter) ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO
     };
@@ -168,7 +168,7 @@ export const ValidatorSigningInfo = {
       address: isSet(object.address) ? String(object.address) : "",
       start_height: isSet(object.start_height) ? Long.fromValue(object.start_height) : Long.ZERO,
       index_offset: isSet(object.index_offset) ? Long.fromValue(object.index_offset) : Long.ZERO,
-      jailed_until: isSet(object.jailed_until) ? fromTimestamp(fromJsonTimestamp(object.jailed_until)) : undefined,
+      jailed_until: isSet(object.jailed_until) ? fromJsonTimestamp(object.jailed_until) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
       missed_blocks_counter: isSet(object.missed_blocks_counter) ? Long.fromValue(object.missed_blocks_counter) : Long.ZERO
     };

@@ -5,7 +5,7 @@ import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -599,8 +599,8 @@ export const LogEntry = {
       protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
       textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
       jsonPayload: isSet(object.jsonPayload) ? Struct.fromJSON(object.jsonPayload) : undefined,
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
-      receiveTimestamp: isSet(object.receiveTimestamp) ? fromTimestamp(fromJsonTimestamp(object.receiveTimestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      receiveTimestamp: isSet(object.receiveTimestamp) ? new Date(object.receiveTimestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       insertId: isSet(object.insertId) ? String(object.insertId) : "",
       httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
@@ -741,8 +741,8 @@ export const LogEntry = {
       proto_payload: isSet(object.proto_payload) ? Any.fromSDKJSON(object.proto_payload) : undefined,
       text_payload: isSet(object.text_payload) ? String(object.text_payload) : undefined,
       json_payload: isSet(object.json_payload) ? Struct.fromSDKJSON(object.json_payload) : undefined,
-      timestamp: isSet(object.timestamp) ? fromTimestamp(fromJsonTimestamp(object.timestamp)) : undefined,
-      receive_timestamp: isSet(object.receive_timestamp) ? fromTimestamp(fromJsonTimestamp(object.receive_timestamp)) : undefined,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      receive_timestamp: isSet(object.receive_timestamp) ? new Date(object.receive_timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       insert_id: isSet(object.insert_id) ? String(object.insert_id) : "",
       http_request: isSet(object.http_request) ? HttpRequest.fromSDKJSON(object.http_request) : undefined,

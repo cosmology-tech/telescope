@@ -1,7 +1,7 @@
 import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */
@@ -1893,8 +1893,8 @@ export const LogBucket = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
       retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
       lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : 0,
@@ -1975,8 +1975,8 @@ export const LogBucket = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
       retention_days: isSet(object.retention_days) ? Number(object.retention_days) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
       lifecycle_state: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
@@ -2064,8 +2064,8 @@ export const LogView = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
@@ -2114,8 +2114,8 @@ export const LogView = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   }
@@ -2270,8 +2270,8 @@ export const LogSink = {
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
       includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
       bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
     };
   },
 
@@ -2367,8 +2367,8 @@ export const LogSink = {
       writer_identity: isSet(object.writer_identity) ? String(object.writer_identity) : "",
       include_children: isSet(object.include_children) ? Boolean(object.include_children) : false,
       bigquery_options: isSet(object.bigquery_options) ? BigQueryOptions.fromSDKJSON(object.bigquery_options) : undefined,
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
     };
   }
 
@@ -4343,8 +4343,8 @@ export const LogExclusion = {
       description: isSet(object.description) ? String(object.description) : "",
       filter: isSet(object.filter) ? String(object.filter) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
     };
   },
 
@@ -4398,8 +4398,8 @@ export const LogExclusion = {
       description: isSet(object.description) ? String(object.description) : "",
       filter: isSet(object.filter) ? String(object.filter) : "",
       disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined
     };
   }
 
@@ -5755,8 +5755,8 @@ export const CopyLogEntriesMetadata = {
 
   fromJSON(object: any): CopyLogEntriesMetadata {
     return {
-      startTime: isSet(object.startTime) ? fromTimestamp(fromJsonTimestamp(object.startTime)) : undefined,
-      endTime: isSet(object.endTime) ? fromTimestamp(fromJsonTimestamp(object.endTime)) : undefined,
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
@@ -5815,8 +5815,8 @@ export const CopyLogEntriesMetadata = {
 
   fromSDKJSON(object: any): CopyLogEntriesMetadataSDKType {
     return {
-      start_time: isSet(object.start_time) ? fromTimestamp(fromJsonTimestamp(object.start_time)) : undefined,
-      end_time: isSet(object.end_time) ? fromTimestamp(fromJsonTimestamp(object.end_time)) : undefined,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
       cancellation_requested: isSet(object.cancellation_requested) ? Boolean(object.cancellation_requested) : false,
       request: isSet(object.request) ? CopyLogEntriesRequest.fromSDKJSON(object.request) : undefined,

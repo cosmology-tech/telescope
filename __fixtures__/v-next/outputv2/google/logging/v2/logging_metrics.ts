@@ -2,7 +2,7 @@ import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Logging API version. */
@@ -934,8 +934,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
-      createTime: isSet(object.createTime) ? fromTimestamp(fromJsonTimestamp(object.createTime)) : undefined,
-      updateTime: isSet(object.updateTime) ? fromTimestamp(fromJsonTimestamp(object.updateTime)) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
@@ -1046,8 +1046,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucket_options: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDKJSON(object.bucket_options) : undefined,
-      create_time: isSet(object.create_time) ? fromTimestamp(fromJsonTimestamp(object.create_time)) : undefined,
-      update_time: isSet(object.update_time) ? fromTimestamp(fromJsonTimestamp(object.update_time)) : undefined,
+      create_time: isSet(object.create_time) ? new Date(object.create_time) : undefined,
+      update_time: isSet(object.update_time) ? new Date(object.update_time) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
     };
   },
